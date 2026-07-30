@@ -20,15 +20,12 @@ effects:
         base: a2
       expirations:
         - _id: d1f6b6eaa581aa10
-          method: automatic
           triggers:
             - executeArmament
             - movement
           type: trigger
-      form: normal
       identifier: accuracy
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You aim your weapon with deadly precision, causing @Wiki[Category:Weapon delivery abilities]{weapon
@@ -51,7 +48,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: qcCV3Elt45fLO4Ia
     _key: "!items.effects!tVpLZNn7OmhAfAyw.qcCV3Elt45fLO4Ia"
@@ -67,7 +63,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: energy-blast-arrow
       interaction: manifest
       maneuver: passive
@@ -84,7 +79,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: uGHCRMfaNm5FtmD1
     _key: "!items.effects!tVpLZNn7OmhAfAyw.uGHCRMfaNm5FtmD1"
@@ -95,7 +89,6 @@ effects:
     system:
       affinities:
         - _id: cuHIm8ZczaKt4Pgk
-          category: abilities
           type: resistance
           value: disarm
       competence:
@@ -107,7 +100,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: reflexes
       interaction: manifest
       maneuver: passive
@@ -128,7 +120,6 @@ effects:
         competence:
           attribute: mov
           value: 1
-    transfer: true
     type: ability
   - _id: Y39F3B5aLqOXS8XN
     _key: "!items.effects!tVpLZNn7OmhAfAyw.Y39F3B5aLqOXS8XN"
@@ -139,49 +130,28 @@ effects:
     system:
       automations:
         - _id: a3bc5757d39c3f86
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:cat-sense
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 2PS2DRtwngfDCQqd
-          competence:
-            raw: 0
           makeEffect: true
-          preventFeat: false
-          preventThreshold: false
           targetsActor: true
           type: override
         - _id: eQGZVefdayKVvF2l
-          all: false
-          angle: "60"
           attachToToken: false
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: "30"
-          regionType: circle
           restriction:
             enabled: true
-            priority: 0
             type: move
           targeting: false
           type: region
-          visibility: 2
         - _id: OeBYl3fSeOJG9woY
           amount: 1
           display:
             label: Spend 1 MP
           impact: drain
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -193,7 +163,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: watchman
       interaction: manifest
       maneuver: slow
@@ -213,7 +182,6 @@ effects:
       standard: true
       targets:
         - area
-    transfer: true
     type: ability
   - _id: JP46u8lJrAQM2xaZ
     _key: "!items.effects!tVpLZNn7OmhAfAyw.JP46u8lJrAQM2xaZ"
@@ -226,13 +194,10 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - resistance
       executionTime:
         base: r1
-      form: normal
       identifier: missile-reflexes
       interaction: block
       maneuver: reactive
@@ -243,8 +208,6 @@ effects:
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: >-
         <p>The triggering @Identifier[core:attack-interaction]{attack} is not @Identifier[keyword:warded]{warded} and
         could not cut otherwise through a @Identifier[keyword:resistance]{resistance}.</p>
@@ -259,7 +222,6 @@ effects:
       trigger: >-
         <p>You would be hit by a @Identifier[property:ranged]{ranged weapon} or @Wiki[Category:Missile delivery
         abilities]{missile delivery} @Identifier[core:attack-interaction]{attack}.</p>
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-2-archer.webp
@@ -268,8 +230,6 @@ system:
   _sup: d8d9e036f44adc09
   archetype: semi
   class: archer
-  competence:
-    raw: 1
   description: >-
     <p>As precise and accurate as a well-crafted @Identifier[equipment:arrow]{arrow}, @Identifier[class:archer]{Archers}
     don't mess around. They prefer to keep their distance, as that is where they are the most effective, never letting
@@ -278,14 +238,5 @@ system:
     are easily killed. If you are playing an @Identifier[class:archer]{Archer} be direct, and on target, sturdy and
     perhaps high strung, watchful of the future and of your back.</p>
   identifier: rank-2-archer
-  innate: false
-  maxAv: 2
   number: 2
-  statDice:
-    hp:
-      disabled: false
-      formula: 1d10
-    mp:
-      disabled: false
-      formula: 1d10
 type: rank

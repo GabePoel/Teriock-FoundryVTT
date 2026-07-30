@@ -18,7 +18,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-wind-shuriken
       interaction: manifest
       maneuver: passive
@@ -37,7 +36,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2HXgggRBROZxbgyf
     _key: "!items.effects!95b087e841d3c8b4.2HXgggRBROZxbgyf"
@@ -56,7 +54,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: captain-morale-awaken
       interaction: manifest
       maneuver: passive
@@ -73,7 +70,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6EtpcjahNQlYqsT6
     _key: "!items.effects!95b087e841d3c8b4.6EtpcjahNQlYqsT6"
@@ -107,12 +103,8 @@ effects:
         unit: minute
       effectTypes:
         - resistance
-      executionTime:
-        base: a1
-      form: normal
       identifier: combat-shimmering
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You become @Identifier[keyword:resistance]{resistant} to effects that would make you
@@ -128,7 +120,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: wMNBhNZW1iHjkmdk
     _key: "!items.effects!95b087e841d3c8b4.wMNBhNZW1iHjkmdk"
@@ -148,7 +139,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: diving
       interaction: manifest
       maneuver: passive
@@ -169,7 +159,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nwd3lnopHlclWt88
     _key: "!items.effects!95b087e841d3c8b4.nwd3lnopHlclWt88"
@@ -185,12 +174,10 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
         - _id: d873eb939c3b5951
           hacks:
             - body
-          reverse: false
           type: hacks
       competence:
         raw: 1
@@ -199,21 +186,9 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: penetrate
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>If you want, @Identifier[core:targets]{target} takes
@@ -223,7 +198,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
   - _id: mEl07exy2fy1kWo7
     _key: "!items.effects!95b087e841d3c8b4.mEl07exy2fy1kWo7"
@@ -242,7 +216,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: shipwright
       interaction: manifest
       maneuver: passive
@@ -258,7 +231,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 0Hb0DuNdheJWdPDt
     _key: "!items.effects!95b087e841d3c8b4.0Hb0DuNdheJWdPDt"
@@ -272,35 +244,20 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - awaken
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - awakening
-      executionTime:
-        base: a1
-      form: normal
       identifier: instant-awaken
-      interaction: attack
       limitation: <p>Target must be an ally aboard the ship you are captaining.</p>
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[keyword:awaken]{awakened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: o4u35myRlptm2lsl
     _key: "!items.effects!95b087e841d3c8b4.o4u35myRlptm2lsl"
@@ -312,10 +269,7 @@ effects:
       _sup: mEl07exy2fy1kWo7
       automations:
         - _id: d697b4d20d784a33
-          all: false
-          automatic: true
           bonus: "0"
-          multi: false
           tradecrafts:
             - mariner
           type: tradecraft
@@ -327,17 +281,11 @@ effects:
             formula: "1"
             type: formula
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
-      executionTime:
-        base: a1
-      form: normal
       identifier: ship-lore
       interaction: manifest
       lore: true
-      maneuver: active
       overview:
         base: >-
           <p>You recognize details about ships by sight. For a given ship, you know the following.</p><ul><li>Where it
@@ -356,7 +304,6 @@ effects:
       standard: true
       targets:
         - ship
-    transfer: true
     type: ability
   - _id: BOod5ulJ38p8cHAe
     _key: "!items.effects!95b087e841d3c8b4.BOod5ulJ38p8cHAe"
@@ -368,14 +315,10 @@ effects:
       _sup: mEl07exy2fy1kWo7
       automations:
         - _id: l49aunwLfln2MAiu
-          all: false
-          attachDocuments: true
-          automatic: true
           children:
             enabled: true
             identifiers:
               - property:improvised
-            overrideData: false
           data: "{\"name\":\"Improvised @base\"}"
           identifiers:
             - equipment:anchor
@@ -399,7 +342,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: improvised-ship-repairs
       interaction: manifest
       maneuver: slow
@@ -421,7 +363,6 @@ effects:
       standard: true
       targets:
         - ship
-    transfer: true
     type: ability
 folder: 29f9ddf664c54e20
 img: systems/teriock/src/icons/ranks/rank-4-corsair.webp
@@ -429,8 +370,6 @@ name: Rank 4 Corsair
 system:
   archetype: semi
   class: corsair
-  competence:
-    raw: 1
   description: >-
     <p>People of the sea, they are never very comfortable far from a large body of water.
     @Identifier[class:corsair]{Corsairs} are wanderers and like to be on the move. @Identifier[class:corsair]{Corsairs}
@@ -438,7 +377,6 @@ system:
     an @Identifier[class:corsair]{Corsair}, crave water and sailing, go with the flow, keep on the move, and keep things
     ship shape.</p>
   identifier: rank-4-corsair
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
@@ -446,15 +384,11 @@ system:
   number: 4
   statDice:
     hp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
 type: rank

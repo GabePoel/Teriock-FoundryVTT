@@ -7,45 +7,28 @@ system:
     - _id: 7400b41f20d9f100
       angle: "@angle.dragon"
       attachToToken: false
-      automatic: true
-      deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       radius: "@ability.range + 5 * @h"
       regionType: cone
       restriction:
         enabled: true
-        priority: 0
         type: move
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
-      visibility: 2
     - _id: 800c70e6560525a8
       formula: (4 + 2 * @h)d10[magic fire]
-      impact: damage
-      merge: true
       type: roll
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
         formula: "1"
         type: formula
   delivery: cone
-  duration:
-    unit: instant
   effectTypes:
     - damaging
   elements:
     - flame
-  executionTime:
-    base: a1
-  featSaveAttribute: mov
   form: special
   heightened: >-
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
@@ -53,7 +36,6 @@ system:
     increases by 5 feet.</p>
   identifier: red-dragonfly-breath
   interaction: feat
-  maneuver: active
   powerSources:
     - magical
   range:
@@ -64,7 +46,4 @@ system:
     save: >-
       <p>Target takes half as much @Identifier[core:damage]{damage} from this as they would otherwise. This is
       calculated after any @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

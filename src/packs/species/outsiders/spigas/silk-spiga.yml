@@ -17,7 +17,6 @@ effects:
         - automatic
       executionTime:
         base: passive
-      form: normal
       identifier: acidic-blood
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       targets:
         - self
       trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
-    transfer: true
     type: ability
   - _id: kSnw1Y36tzehJRvb
     _key: "!items.effects!726e664ff6fcd882.kSnw1Y36tzehJRvb"
@@ -51,7 +49,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: acrobatics
       interaction: manifest
       maneuver: passive
@@ -78,7 +75,6 @@ effects:
         competence:
           attribute: mov
           value: 1
-    transfer: true
     type: ability
   - _id: B7WH0C3WGXwQw5li
     _key: "!items.effects!726e664ff6fcd882.B7WH0C3WGXwQw5li"
@@ -106,7 +102,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: dark-vision
       interaction: manifest
       maneuver: passive
@@ -118,7 +113,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: KuVaaXrtObyDpD0f
     _key: "!items.effects!726e664ff6fcd882.KuVaaXrtObyDpD0f"
@@ -130,29 +124,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: hJmDCVbpTi3fBwoo
     _key: "!items.effects!726e664ff6fcd882.hJmDCVbpTi3fBwoo"
@@ -163,10 +145,8 @@ effects:
     system:
       automations:
         - _id: 1OeNcMGe1W2DVvLE
-          changeType: add
           key: system.costs.tweaks.adept
           qualifier: "@element.life"
-          target: ability
           type: childChange
           value: "1"
       competence:
@@ -192,7 +172,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: CUCDd96sEXq3bmqp
     _key: "!items.effects!726e664ff6fcd882.CUCDd96sEXq3bmqp"
@@ -229,7 +208,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: dVFKYSwhnFev5QAx
     _key: "!items.effects!726e664ff6fcd882.dVFKYSwhnFev5QAx"
@@ -240,7 +218,6 @@ effects:
     system:
       automations:
         - _id: dZdzGQfm90BHxkCn
-          changeType: add
           key: system.boosts.damage
           qualifier: and(@dmg, @range.melee)
           target: armament
@@ -281,7 +258,6 @@ effects:
         score:
           attribute: str
           value: 5
-    transfer: true
     type: ability
   - _id: XfCSAU0fnTz85nvs
     _key: "!items.effects!726e664ff6fcd882.XfCSAU0fnTz85nvs"
@@ -305,7 +281,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: natural-unbreachability
       interaction: manifest
       maneuver: passive
@@ -321,7 +296,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: zMEDX1ndvqSSd8rJ
     _key: "!items.effects!726e664ff6fcd882.zMEDX1ndvqSSd8rJ"
@@ -337,7 +311,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -350,8 +323,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: ez73KeOZTI7xaBNQ
     _key: "!items.effects!726e664ff6fcd882.ez73KeOZTI7xaBNQ"
@@ -367,7 +338,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -380,8 +350,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: puXF7cRRcXxeC7m6
     _key: "!items.effects!726e664ff6fcd882.puXF7cRRcXxeC7m6"
@@ -397,7 +365,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -410,8 +377,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: SdYjUjsoOS3yPmjg
     _key: "!items.effects!726e664ff6fcd882.SdYjUjsoOS3yPmjg"
@@ -425,43 +390,30 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -469,20 +421,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: kctcKjkVIcp2iqQR
     _key: "!items.effects!726e664ff6fcd882.kctcKjkVIcp2iqQR"
@@ -498,7 +443,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: spiga-webbing
       interaction: manifest
       maneuver: passive
@@ -512,7 +456,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: hkRgq2s6ZxaeJhM2
     _key: "!items.effects!726e664ff6fcd882.hkRgq2s6ZxaeJhM2"
@@ -535,7 +478,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
@@ -549,7 +491,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: D3CdHSXy219talfL
     _key: "!items.effects!726e664ff6fcd882.D3CdHSXy219talfL"
@@ -579,7 +520,6 @@ effects:
         score:
           attribute: int
           value: 4
-    transfer: true
     type: ability
   - _id: 2EtnU89HKhxb6cJ1
     _key: "!items.effects!726e664ff6fcd882.2EtnU89HKhxb6cJ1"
@@ -635,7 +575,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: leaping
       interaction: manifest
       maneuver: passive
@@ -654,7 +593,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Inq74OYLSaX3yQvj
     _key: "!items.effects!726e664ff6fcd882.Inq74OYLSaX3yQvj"
@@ -698,7 +636,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: climbing
       interaction: manifest
       maneuver: passive
@@ -711,7 +648,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: VQ2v3dH6CdHNpBQ1
     _key: "!items.effects!726e664ff6fcd882.VQ2v3dH6CdHNpBQ1"
@@ -749,7 +685,6 @@ effects:
         score:
           attribute: str
           value: 4
-    transfer: true
     type: ability
   - _id: 2JKIQJCnp5YuOmNf
     _key: "!items.effects!726e664ff6fcd882.2JKIQJCnp5YuOmNf"
@@ -770,7 +705,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
@@ -791,7 +725,6 @@ effects:
         score:
           attribute: str
           value: 3
-    transfer: true
     type: ability
   - _id: l9XNB7avaarMZ0p6
     _key: "!items.effects!726e664ff6fcd882.l9XNB7avaarMZ0p6"
@@ -808,7 +741,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -828,7 +760,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: 3Fmgk1hOmpH4XGn5
     _key: "!items.effects!726e664ff6fcd882.3Fmgk1hOmpH4XGn5"
@@ -845,7 +776,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -866,7 +796,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: M145NTwOjUPpDn7A
     _key: "!items.effects!726e664ff6fcd882.M145NTwOjUPpDn7A"
@@ -883,7 +812,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -897,7 +825,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: RQE72xDdBnGGbO9N
     _key: "!items.effects!726e664ff6fcd882.RQE72xDdBnGGbO9N"
@@ -909,14 +836,10 @@ effects:
       _sup: 2JKIQJCnp5YuOmNf
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r0
-      form: normal
       identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -929,16 +852,11 @@ effects:
           @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
         delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-    transfer: true
     type: ability
   - _id: oasAHVsLRhy0O8Jt
     _key: "!items.effects!726e664ff6fcd882.oasAHVsLRhy0O8Jt"
@@ -952,7 +870,6 @@ effects:
         - _id: MZ0HXunkUDN7yJiQ
           common:
             - shatter
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -962,26 +879,19 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - destruction
       executionTime:
         base: a2
-      form: normal
       identifier: shattering-grip
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[property:shattered]{shattered}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>You are holding the target.</p>
       targets:
         - item
-    transfer: true
     type: ability
   - _id: pJJVCzjWtSjL8e0G
     _key: "!items.effects!726e664ff6fcd882.pJJVCzjWtSjL8e0G"
@@ -993,11 +903,7 @@ effects:
       _sup: kctcKjkVIcp2iqQR
       automations:
         - _id: 5d57231066693cee
-          executor: false
-          multi: false
-          relation: include
           status: snared
-          target: false
           type: status
       competence:
         raw: 1
@@ -1011,14 +917,7 @@ effects:
         creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The
         @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
         @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: spiga-web-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - martial
       range:
@@ -1026,9 +925,6 @@ effects:
         unit: ft
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 6sQrXngYhGWefmNp
     _key: "!items.effects!726e664ff6fcd882.6sQrXngYhGWefmNp"
@@ -1040,11 +936,7 @@ effects:
       _sup: kctcKjkVIcp2iqQR
       automations:
         - _id: 5d57231066693cee
-          executor: false
-          multi: false
-          relation: include
           status: snared
-          target: false
           type: status
       competence:
         raw: 1
@@ -1058,14 +950,7 @@ effects:
         creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The
         @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
         @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: spiga-web-packet
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - martial
       range:
@@ -1073,9 +958,6 @@ effects:
         unit: ft
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: TfrokVaarGoHmw7X
     _key: "!items.effects!726e664ff6fcd882.TfrokVaarGoHmw7X"
@@ -1087,15 +969,10 @@ effects:
       _sup: kctcKjkVIcp2iqQR
       automations:
         - _id: 5d57231066693cee
-          executor: false
-          multi: false
-          relation: include
           status: snared
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         unit: unlimited
       endCondition: >-
@@ -1105,23 +982,11 @@ effects:
         creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The
         @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
         @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: spiga-snare
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 479155f14ad8612d
 img: systems/teriock/src/icons/creatures/silk-spiga.webp
@@ -1131,24 +996,19 @@ system:
     <p>Monstrous metallic gunmetal-grey @Wiki[Category:Spiders]{spider}-like creature with a
     @Identifier[creature:human]{human}-like face.</p>
   br: 26
-  competence:
-    raw: 1
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
   identifier: silk-spiga
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 3 @Identifier[class:life-mage]{Life Mage}.</p>
   size:
-    enabled: true
     max: 20
     min: 10
     value: 10
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "@species.size - 2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "2"

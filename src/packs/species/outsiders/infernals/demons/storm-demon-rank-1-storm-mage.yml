@@ -15,14 +15,9 @@ effects:
           formula: (@h)d4[magic ice]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 09ed285450c5de7b
-          executor: false
-          multi: false
-          relation: include
           status: frozen
-          target: false
           type: status
       competence:
         raw: 1
@@ -37,44 +32,24 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} actions, they roll [[/roll 2d4]]. If either
         of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
           event: action
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
           event: action
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
-          timing: start
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic ice]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: ice-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -85,9 +60,6 @@ effects:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: mF8W0tXnFIwY7ClK
     _key: "!items.effects!8oA7Imz5r8cL10Q0.mF8W0tXnFIwY7ClK"
@@ -100,13 +72,10 @@ effects:
         - _id: BiyyFVSBKNzcwl30
           common:
             - identify
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
       elements:
@@ -116,7 +85,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may choose an additional
         @Identifier[core:targets]{target}.</p>
@@ -141,7 +109,6 @@ effects:
       targets:
         - creature
         - item
-    transfer: true
     type: ability
   - _id: XGWcDOE95PgdyWli
     _key: "!items.effects!8oA7Imz5r8cL10Q0.XGWcDOE95PgdyWli"
@@ -157,7 +124,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: illusionary-arts
       interaction: manifest
       maneuver: passive
@@ -173,7 +139,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tJclZapWI7l0kdLc
     _key: "!items.effects!8oA7Imz5r8cL10Q0.tJclZapWI7l0kdLc"
@@ -185,29 +150,19 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -218,9 +173,6 @@ effects:
         hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: h7KyHRanT7jOovAs
     _key: "!items.effects!8oA7Imz5r8cL10Q0.h7KyHRanT7jOovAs"
@@ -233,29 +185,18 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - mental
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       identifier: detect-illusion
-      interaction: attack
-      maneuver: active
       overview:
         proficient: >-
           <p>You also know what <i>type</i> of @Identifier[keyword:illusionary]{illusion} it is (Minor, Full, or
           Greater) as well as the @Identifier[core:difficulty-class]{DC} needed to
           @Identifier[ability:disbelieve]{Disbelieve} it. This does not count as "disbelieving" the illusion.</p>
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: <p>You know if the @Identifier[core:targets]{target} is @Identifier[keyword:illusionary]{illusionary}.</p>
       spell: true
@@ -264,7 +205,6 @@ effects:
         - area
         - creature
         - item
-    transfer: true
     type: ability
   - _id: 7tzc9xyek23kZCEt
     _key: "!items.effects!8oA7Imz5r8cL10Q0.7tzc9xyek23kZCEt"
@@ -292,15 +232,11 @@ effects:
         - illusion
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
       identifier: simple-illusion-creation
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You create a @Identifier[keyword:illusionary]{minor illusion} of a simple object or effect that fits within
@@ -313,7 +249,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: c602ce7a824494c1
 img: systems/teriock/src/icons/ranks/rank-1-storm-mage.webp
@@ -322,8 +257,6 @@ system:
   _sup: bdaec58811b0dbb1
   archetype: mage
   class: storm-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true wonder seeker, these mages are the philosophers of the world, always seeking out more knowledge and more
     wisdom. The @Identifier[class:storm-mage]{Storm Mage} is a logician, a tactical intellectual who prefers to
@@ -331,14 +264,11 @@ system:
     tumultuous and crafty. If you are playing a @Identifier[class:storm-mage]{Storm Mage}, be curious, hungry for
     information, always in the clouds, tricky and clever, eluding rather than confronting.</p>
   identifier: rank-1-storm-mage
-  innate: false
   maxAv: 0
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

@@ -25,15 +25,12 @@ system:
     - _id: V3BeaugxborsCzG4
       common:
         - revive
-      showConfirmationDialog: true
       type: common
     - _id: nEPdOysFI2MGN60O
       competencies:
         - 0
         - 1
       makeEffect: true
-      preventFeat: false
-      preventThreshold: false
       type: override
     - _id: 2GFYDHkfWF5hxCXb
       amount: 999999
@@ -43,8 +40,6 @@ system:
       display:
         label: Restore MP
       impact: revitalizing
-      morganti: false
-      showDialog: false
       type: take
     - _id: 7GkNyHgXSRas2Kyu
       amount: 999999
@@ -54,34 +49,23 @@ system:
       display:
         label: Restore HP
       impact: healing
-      morganti: false
-      showDialog: false
       type: take
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
         formula: "1"
         type: formula
   delivery: hand
-  duration:
-    unit: instant
   effectTypes:
     - reanimation
   elements:
     - necromancy
-  executionTime:
-    base: a1
   expirations:
     - _id: 0595764c16490724
       triggers:
         - shortRest
       type: trigger
-  form: normal
   identifier: jumpstart-animate-dead
-  interaction: attack
-  maneuver: active
   overview:
     base: >-
       <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive} (but still
@@ -102,16 +86,9 @@ system:
       @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are still
       halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a @Wiki[Category:Revival
       effects]{revival effect}.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   requirements: >-
     <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead} and
     @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

@@ -24,7 +24,6 @@ items:
             - automatic
           executionTime:
             base: passive
-          form: normal
           identifier: acidic-blood
           interaction: manifest
           maneuver: passive
@@ -40,7 +39,6 @@ items:
           targets:
             - self
           trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
-        transfer: true
         type: ability
       - _id: POwMYeWERqYCFxLG
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.POwMYeWERqYCFxLG"
@@ -58,7 +56,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: advanced-smell
           interaction: manifest
           maneuver: passive
@@ -81,7 +78,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: eT6pMrcpNCVoTn2D
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.eT6pMrcpNCVoTn2D"
@@ -109,7 +105,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: blind-fighting
           interaction: manifest
           maneuver: passive
@@ -130,7 +125,6 @@ items:
             score:
               attribute: per
               value: 1
-        transfer: true
         type: ability
       - _id: pLbxFwmGQLOBPstP
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.pLbxFwmGQLOBPstP"
@@ -158,7 +152,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: dark-vision
           interaction: manifest
           maneuver: passive
@@ -170,7 +163,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 7gxyR2DLbn5F6uCM
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.7gxyR2DLbn5F6uCM"
@@ -182,29 +174,17 @@ items:
           competence:
             raw: 1
           delivery: bite
-          duration:
-            unit: instant
           executionTime:
             base: a2
-          form: normal
           identifier: devour
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
               @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 5GfsWsjGlyrOHoxY
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.5GfsWsjGlyrOHoxY"
@@ -215,33 +195,21 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d8[fire magic]
               heighten:
                 - 1
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           elements:
             - flame
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d8[fire magic]]] @Identifier[core:damage]{damage}.</p>
           identifier: flame-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -254,9 +222,6 @@ items:
               @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: BKnVoDx0ztw6FsuH
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.BKnVoDx0ztw6FsuH"
@@ -267,9 +232,7 @@ items:
         system:
           affinities:
             - _id: Dc03b4Mkm0JKkeo9
-              amount: 1
               category: effectTypes
-              img: null
               type: takeDeboost
               value: damaging
           competence:
@@ -291,7 +254,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 1f2tB3EkPvYuyrIN
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.1f2tB3EkPvYuyrIN"
@@ -307,7 +269,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -320,8 +281,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: hP0THXQjqzossx9I
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.hP0THXQjqzossx9I"
@@ -333,22 +292,18 @@ items:
           affinities:
             - _id: 6cV7jWQ7Cw2JO44h
               category: statuses
-              img: null
               type: immunity
               value: frenzied
             - _id: F1AoyKmaYImGd34B
               category: statuses
-              img: null
               type: immunity
               value: frightened
             - _id: QvNjVsVhJtMrRosF
               category: statuses
-              img: null
               type: immunity
               value: goaded
             - _id: p5tXQvLJSzv7w8cO
               category: statuses
-              img: null
               type: immunity
               value: allured
           competence:
@@ -375,7 +330,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: iHF958XXOd0JN1P7
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.iHF958XXOd0JN1P7"
@@ -386,7 +340,6 @@ items:
         system:
           automations:
             - _id: 63c7106d02025d43
-              display: {}
               macro: Compendium.teriock.execution.Macro.989bee0dce350480
               trigger: preExecute
               type: abilityMacro
@@ -405,12 +358,9 @@ items:
             - resistance
           elements:
             - storm
-          executionTime:
-            base: a1
           form: special
           identifier: resist-effects
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>Pick one of the following @Wiki[Category:Effects]{effect types}. You
@@ -440,7 +390,6 @@ items:
           sustained: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: LWWFycN9RYbrRs7b
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.LWWFycN9RYbrRs7b"
@@ -470,7 +419,6 @@ items:
             score:
               attribute: mov
               value: -1
-        transfer: true
         type: ability
       - _id: CdsRmUEW8K4QDMQv
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.CdsRmUEW8K4QDMQv"
@@ -500,7 +448,6 @@ items:
             score:
               attribute: str
               value: -2
-        transfer: true
         type: ability
       - _id: F9DCV4sPoSHko4TU
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.F9DCV4sPoSHko4TU"
@@ -512,7 +459,6 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
-              img: null
               type: immunity
               value: unconscious
           competence:
@@ -524,7 +470,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          form: normal
           identifier: unconsciousness-immunity
           interaction: manifest
           maneuver: passive
@@ -538,7 +483,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: rDYXeLTCVRgzkLcO
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.rDYXeLTCVRgzkLcO"
@@ -550,12 +494,10 @@ items:
           affinities:
             - _id: FNFs7lvzhiFH7Uvn
               category: equipment
-              img: null
               type: immunity
               value: arrow
             - _id: tPwKcAdyCg31MgdV
               category: other
-              img: null
               type: immunity
               value: Vitals Targeting Abilities
           competence:
@@ -567,7 +509,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          form: normal
           identifier: vitals-durability
           interaction: manifest
           maneuver: passive
@@ -581,7 +522,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: YDomhk2QkiVxqDNX
         _key: "!actors.items.effects!c7afc397ee559e38.c7afc397ee559e38.YDomhk2QkiVxqDNX"
@@ -605,13 +545,10 @@ items:
           competence:
             raw: 1
           delivery: aura
-          duration:
-            unit: instant
           effectTypes:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: scent-seeing
           interaction: manifest
           maneuver: passive
@@ -630,9 +567,6 @@ items:
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 9eb51b53c8495b9d
     img: systems/teriock/src/icons/creatures/tiny-red-slime.webp
@@ -640,19 +574,14 @@ items:
     system:
       appearance: <p>A pool of thick opaque red liquid.</p>
       br: 5
-      competence:
-        raw: 1
       description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
       identifier: tiny-red-slime
       size:
-        enabled: true
         value: 0.5
       statDice:
         hp:
-          disabled: false
           formula: 1d6
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - ooze
@@ -674,15 +603,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: UwQcncdwmwzEFuxl
         _key: "!actors.items.effects!c7afc397ee559e38.nxXsPkf2d2bMZnsO.UwQcncdwmwzEFuxl"
@@ -693,9 +618,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -703,7 +625,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: dKdNBKWT1hmgJcIc
         _key: "!actors.items.effects!c7afc397ee559e38.nxXsPkf2d2bMZnsO.dKdNBKWT1hmgJcIc"
@@ -714,41 +635,26 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9eb51b53c8495b9d
     img: icons/creatures/slimes/slime-movement-pseudopods-blue.webp
     name: Pseudopod
     system:
       _sup: c7afc397ee559e38
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: pseudopod
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Tiny Red Slime
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -759,9 +665,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/tiny-red-slime.webp
   texture:
     src: systems/teriock/src/icons/creatures/tiny-red-slime.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -769,10 +672,6 @@ system:
   identifier: tiny-red-slime
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

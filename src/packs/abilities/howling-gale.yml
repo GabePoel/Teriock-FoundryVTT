@@ -5,41 +5,24 @@ name: Howling Gale
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
-      regionType: circle
       trigger: executeInput
       type: region
       updateTargets: true
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
         formula: "1"
         type: formula
   delivery: aura
-  duration:
-    unit: instant
   endCondition: <p>You move or are moved.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: d1f6b6eaa581aa10
       triggers:
         - movement
       type: trigger
   featSaveAttribute: str
-  form: normal
   identifier: howling-gale
   interaction: feat
-  maneuver: active
   overview:
     base: >-
       <p>Targets make their @Identifier[core:feat-interaction]{feat save} for [[lookup name]] when it is first executed,
@@ -56,7 +39,4 @@ system:
       <p>@Identifier[core:targets]{Target} is moved away from you until they are out of @Identifier[core:range]{range}
       of [[lookup name]].</p>
   sustained: true
-  targets:
-    - creature
-transfer: true
 type: ability

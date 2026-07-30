@@ -37,25 +37,12 @@ items:
             - _id: ZdtyUjiggvt0bxgX
               common:
                 - revive
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: ZlgI0KUafWT3wE27
-              competence:
-                raw: 0
               competencies:
                 - 0
                 - 1
-              data: "{}"
-              display: {}
               makeEffect: true
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 6v7WhWcAO2fARRYl
               amount: 999999
@@ -65,9 +52,6 @@ items:
               display:
                 label: Restore MP
               impact: revitalizing
-              morganti: false
-              showDialog: false
-              trigger: null
               type: take
             - _id: YHHJxY54wT2k778U
               amount: 999999
@@ -77,9 +61,6 @@ items:
               display:
                 label: Restore HP
               impact: healing
-              morganti: false
-              showDialog: false
-              trigger: null
               type: take
           competence:
             raw: 1
@@ -94,26 +75,18 @@ items:
                 formula: "1"
                 type: formula
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - reanimation
           elements:
             - necromancy
-          executionTime:
-            base: a1
           expirations:
             - _id: c32fbccf9d83e581
-              method: automatic
               triggers:
                 - shortRest
               type: trigger
-          form: normal
           identifier: animate-dead
-          interaction: attack
           invoked: true
           limitation: <p>Self only.</p>
-          maneuver: active
           overview:
             base: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive} (but still
@@ -133,20 +106,13 @@ items:
               @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
               still halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a
               @Wiki[Category:Revival effects]{revival effect}.</p>
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: >-
             <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead} and
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: kkl1nBcJWxwxxpp6
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.kkl1nBcJWxwxxpp6"
@@ -157,10 +123,7 @@ items:
         system:
           automations:
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d10
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -169,7 +132,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: constructed-body
           interaction: manifest
           maneuver: passive
@@ -202,7 +164,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: O1Cb3gEJKe3rmSO5
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.O1Cb3gEJKe3rmSO5"
@@ -213,18 +174,10 @@ items:
         system:
           automations:
             - _id: PKZXkwmO94niPsUb
-              all: false
-              automatic: true
-              data: "{}"
-              expandTables: false
-              identifiers: []
               local:
-                identifiers: []
                 qualifier: and(@ability, @time.a1)
-              multi: false
               trigger: execute
               type: useDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -234,8 +187,6 @@ items:
               verbal:
                 type: tag
           delivery: self
-          duration:
-            unit: instant
           elements:
             - necromancy
           executionTime:
@@ -258,7 +209,6 @@ items:
           targets:
             - self
           trigger: <p>You @Identifier[condition:dead]{die}.</p>
-        transfer: true
         type: ability
       - _id: Lsy4GBwffna4MiZB
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.Lsy4GBwffna4MiZB"
@@ -296,7 +246,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 3eExHPlVjnSuEFbO
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.3eExHPlVjnSuEFbO"
@@ -312,7 +261,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-intelligence
           interaction: manifest
           maneuver: passive
@@ -325,8 +273,6 @@ items:
           upgrades:
             score:
               attribute: int
-              value: 0
-        transfer: true
         type: ability
       - _id: IPAF0EiHBDskF81c
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.IPAF0EiHBDskF81c"
@@ -342,7 +288,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -355,8 +300,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: Tp5tJbsdcQB13DDx
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.Tp5tJbsdcQB13DDx"
@@ -372,7 +315,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -385,8 +327,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 1s4TEcO2u99Ewlcs
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.1s4TEcO2u99Ewlcs"
@@ -402,7 +342,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -415,8 +354,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: yYgwf5gULvjk2pJy
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.yYgwf5gULvjk2pJy"
@@ -432,7 +369,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -445,8 +381,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: slLQuBQj1gXxY6O5
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.slLQuBQj1gXxY6O5"
@@ -483,7 +417,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 5D3x5Kmx3Zqibcfn
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.5D3x5Kmx3Zqibcfn"
@@ -496,7 +429,6 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
-              img: null
               type: immunity
               value: mundane
           competence:
@@ -522,7 +454,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: UX2WRc4FCBjB87Uh
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.UX2WRc4FCBjB87Uh"
@@ -553,7 +484,6 @@ items:
             - necromancy
           executionTime:
             base: passive
-          form: normal
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -569,7 +499,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 6d4wQQGN4bXQ5fsj
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.6d4wQQGN4bXQ5fsj"
@@ -582,17 +511,14 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
-              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
-              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
-              img: null
               type: immunity
               value: unconscious
           competence:
@@ -624,7 +550,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: AvLlkzebI6XDLIpJ
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.AvLlkzebI6XDLIpJ"
@@ -637,12 +562,10 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
-              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
-              img: null
               type: immunity
               value: frightened
           competence:
@@ -671,7 +594,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 1Yl7nV2cOcYkp7ti
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.1Yl7nV2cOcYkp7ti"
@@ -683,37 +605,21 @@ items:
           _sup: Lsy4GBwffna4MiZB
           automations:
             - _id: xreyNK2IzDp9qCUE
-              consumeStatDice: true
-              forHarm: false
-              substitution: ""
-              trigger: null
               type: revitalize
             - _id: 157afc517847f562
-              display: {}
               formula: 1d8[mana]
               impact: drain
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - draining
             - revitalization
-          executionTime:
-            base: a1
           form: special
           identifier: mana-drain-touch
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -725,9 +631,6 @@ items:
               target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
               @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
               only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/creatures/greater-cemerai.webp
@@ -735,24 +638,15 @@ items:
     system:
       appearance: <p>Complete suits of armor with full helm, walking around, with empty black voids where a face should be.</p>
       br: 21
-      competence:
-        raw: 1
       description: >-
         <p>Usually used as military commanders or guardians, these dangerous creatures are believed to be a form of
         haunt or haunted armor that is created when a @Identifier[class:duelist]{Duelist} is killed in a particular
         way.</p>
       identifier: greater-cemerai
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 3 @Identifier[class:duelist]{Duelist}.</p>
-      size:
-        enabled: true
-        value: 3
       statDice:
         hp:
-          disabled: false
           formula: 3d10
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - construct
         - undead
@@ -779,7 +673,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: bow-out
           interaction: manifest
           maneuver: passive
@@ -795,7 +688,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Ckzn261n62CcGUwr
         _key: "!actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.Ckzn261n62CcGUwr"
@@ -806,29 +698,16 @@ items:
         system:
           automations:
             - _id: 705550b2f36e9334
-              all: false
-              attachDocuments: true
-              automatic: true
               data: >-
                 {"system":{"limitation":"<p>May only be delivered with the
                 @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} you made
                 @Identifier[property:armor-voiding]{AV0} and only against creatures you are
                 @Identifier[condition:dueling]{dueling}.</p>","applyIfDeattuned":true}}
-              display: {}
               identifiers:
                 - ability:chi-strike
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               overrideData: true
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: RgVUCzE3H5uHhYpY
-              all: false
-              attachDocuments: true
-              automatic: true
               data: |-
                 {
                   "system": {
@@ -836,17 +715,10 @@ items:
                     "applyIfDeattuned": true
                   }
                 }
-              display: {}
               identifiers:
                 - property:armor-voiding
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               overrideData: true
-              separate: false
               type: addDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -857,19 +729,14 @@ items:
           duration:
             unit: unlimited
           endCondition: <p>You are no longer @Identifier[condition:dueling]{dueling}.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 05f6d4dd9db56877
               statuses:
                 absent:
                   - dueling
-                present: []
               type: status
-          form: normal
           identifier: dueling-techniques
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>A @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} you are
@@ -888,7 +755,6 @@ items:
           standard: true
           targets:
             - weapon
-        transfer: true
         type: ability
       - _id: aMpBM1gwJl2mau2J
         _key: "!actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.aMpBM1gwJl2mau2J"
@@ -899,46 +765,19 @@ items:
         system:
           automations:
             - _id: 6taozqKUQOZB9Pdx
-              all: false
               attachDocuments: false
-              automatic: true
-              display: {}
-              identifiers: []
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               separate: true
               type: addDocuments
               uuids:
                 - Compendium.teriock.templateEffects.ActiveEffect.JcORKsFyOrlW39RK
             - _id: EIeegrJoWQ7miIBl
-              all: false
               attachDocuments: false
-              automatic: true
-              display: {}
-              identifiers: []
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               separate: true
               type: addDocuments
               uuids:
                 - Compendium.teriock.templateEffects.ActiveEffect.RRSK2DKqVr6fWeHn
             - _id: PXJnQ6AbGlV3OaXb
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
               makeEffect: false
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -960,7 +799,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          form: normal
           identifier: tea-ceremony
           interaction: manifest
           maneuver: slow
@@ -998,9 +836,6 @@ items:
           ritual: true
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: OqND6O8mrdTvUSpX
         _key: "!actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.OqND6O8mrdTvUSpX"
@@ -1012,25 +847,16 @@ items:
           _sup: vU4DiB0u1DAfzrs5
           automations:
             - _id: 824b5b01e1a4efec
-              executor: false
-              multi: false
               relation: remove
               status: dueling
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
           effectTypes:
             - duelModifying
-          executionTime:
-            base: a1
-          form: normal
           identifier: active-bow-out
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>You end a @Identifier[condition:dueling]{duel} you are currently in. You do not count as "forfeiting"
@@ -1047,7 +873,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 6sEvMJ9RcfgF6ARv
         _key: "!actors.items.effects!631ee800e7393cd3.5ynwnr447S30LpeO.6sEvMJ9RcfgF6ARv"
@@ -1060,11 +885,8 @@ items:
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
           executionTime:
             base: r1
-          form: normal
           identifier: reactive-bow-out
           interaction: manifest
           maneuver: reactive
@@ -1085,7 +907,6 @@ items:
           trigger: >-
             <p>Some effect would cause you to start @Identifier[condition:dueling]{dueling} or @Wiki[Category:Duel
             modifying effects]{modify} a @Identifier[condition:dueling]{duel} you are in.</p>
-        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
@@ -1094,8 +915,6 @@ items:
       _sup: 631ee800e7393cd3
       archetype: warrior
       class: duelist
-      competence:
-        raw: 1
       description: >-
         <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for
         duels as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above
@@ -1107,13 +926,10 @@ items:
       identifier: rank-2-duelist
       maxAv: 4
       number: 2
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: KLENiLsr670sxg55
@@ -1130,11 +946,7 @@ items:
         system:
           automations:
             - _id: 96a33dac897ee269
-              executor: false
-              multi: false
-              relation: include
               status: defyingDeath
-              target: false
               type: status
           competence:
             raw: 1
@@ -1144,7 +956,6 @@ items:
             unit: minute
           executionTime:
             base: r1
-          form: normal
           identifier: defy-death
           interaction: manifest
           maneuver: reactive
@@ -1160,7 +971,6 @@ items:
           targets:
             - self
           trigger: <p>You would @Identifier[condition:down]{drop}.</p>
-        transfer: true
         type: ability
       - _id: A4WZCzLVp8Jq9ykR
         _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.A4WZCzLVp8Jq9ykR"
@@ -1171,32 +981,16 @@ items:
         system:
           automations:
             - _id: sGyei1adB2IsKjZP
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
               makeEffect: false
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 52f4d0b87363b1c1
-              executor: false
-              multi: false
               relation: apply
               status: dueling
-              target: false
               type: status
             - _id: 747b3e9c9b617af6
               executor: true
-              multi: false
               relation: apply
               status: lighted
-              target: false
               type: status
           competence:
             raw: 1
@@ -1205,12 +999,8 @@ items:
             unit: unlimited
           effectTypes:
             - duelModifying
-          executionTime:
-            base: a1
-          form: normal
           identifier: duel
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>You challenge the @Identifier[core:targets]{target} to advance and fight you. They may immediately
@@ -1233,9 +1023,6 @@ items:
           requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: ez42WB6ZV9yzul09
         _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.ez42WB6ZV9yzul09"
@@ -1261,7 +1048,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: resolve-conflict
           interaction: manifest
           maneuver: passive
@@ -1277,7 +1063,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 7f1XQVbvaHBzHZnL
         _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.7f1XQVbvaHBzHZnL"
@@ -1295,14 +1080,11 @@ items:
                 formula: "1"
                 type: formula
           delivery: sight
-          duration:
-            unit: instant
           effectTypes:
             - truthDetecting
           executionTime:
             base: r0
           featSaveAttribute: snk
-          form: normal
           identifier: detect-lie
           interaction: feat
           maneuver: reactive
@@ -1319,10 +1101,7 @@ items:
               @Identifier[core:fizzles]{fizzles} for some other reason.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: <p>Someone makes a statement which could, in principle, be true or false.</p>
-        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
@@ -1331,8 +1110,6 @@ items:
       _sup: 631ee800e7393cd3
       archetype: warrior
       class: duelist
-      competence:
-        raw: 1
       description: >-
         <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for
         duels as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above
@@ -1344,13 +1121,10 @@ items:
       identifier: rank-1-duelist
       maxAv: 4
       number: 1
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: NnFHNoc9A3Dp1ix6
@@ -1376,7 +1150,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: clan-fealty
           interaction: manifest
           maneuver: passive
@@ -1403,7 +1176,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: yCLjgtUua4ROR3qi
         _key: "!actors.items.effects!631ee800e7393cd3.NnFHNoc9A3Dp1ix6.yCLjgtUua4ROR3qi"
@@ -1418,18 +1190,12 @@ items:
         system:
           automations:
             - _id: 52f4d0b87363b1c1
-              executor: false
-              multi: false
               relation: apply
               status: dueling
-              target: false
               type: status
             - _id: 824b5b01e1a4efec
-              executor: false
-              multi: false
               relation: remove
               status: dueling
-              target: false
               type: status
           competence:
             raw: 1
@@ -1439,14 +1205,8 @@ items:
                 formula: "1"
                 type: formula
           delivery: sight
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: duel-swap
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>The @Identifier[core:targets]{target} leaves their @Identifier[condition:dueling]{duel} and you enter
@@ -1465,9 +1225,6 @@ items:
             within @Identifier[core:range]{range}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
@@ -1476,8 +1233,6 @@ items:
       _sup: 631ee800e7393cd3
       archetype: warrior
       class: duelist
-      competence:
-        raw: 1
       description: >-
         <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for
         duels as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above
@@ -1489,13 +1244,10 @@ items:
       identifier: rank-3-duelist
       maxAv: 4
       number: 3
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: PsiPloj0mj7VLXv5
@@ -1512,15 +1264,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.IDLUUjkSFtpaiKuJ"
@@ -1531,32 +1279,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 631ee800e7393cd3
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: SzQmEtRvnFBIWoQa
     _key: "!actors.items!631ee800e7393cd3.SzQmEtRvnFBIWoQa"
@@ -1572,15 +1311,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.lKaLyYYTTIEFOLb5"
@@ -1591,9 +1326,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -1601,7 +1333,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.m7Va2Fuah1K2t2Ab"
@@ -1612,9 +1343,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -1622,7 +1350,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.IJM1yhiyKnnwlbXh"
@@ -1633,32 +1360,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 631ee800e7393cd3
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: TSoqI1hEZavnDgna
     _key: "!actors.items!631ee800e7393cd3.TSoqI1hEZavnDgna"
@@ -1669,28 +1387,17 @@ items:
     name: Full Plate
     system:
       _sup: 631ee800e7393cd3
-      ammunition:
-        consumptionAmount: 1
-        enabled: false
-      attackPenalty: "-3"
       av:
         raw: 4
-      competence:
-        raw: 0
-      consumable: false
       equipmentClasses:
         - armor
       equipmentType: full-plate
       equipped: true
       identifier: full-plate
       minStr: -1
-      needsAttunement: true
-      powerLevel: mundane
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
       weight: 65
     type: equipment
   - _id: 380dac2710b593e9
@@ -1712,7 +1419,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: warrior-techniques
           interaction: manifest
           maneuver: passive
@@ -1730,7 +1436,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: "!actors.items.effects!631ee800e7393cd3.380dac2710b593e9.aOvOlScH5bn7jX7m"
@@ -1775,7 +1480,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: defensive-martial-arts
           interaction: manifest
           limitation: <p>While wearing @Wiki[Category:Armor]{armor} only.</p>
@@ -1798,14 +1502,11 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 380dac2710b593e9
     img: systems/teriock/src/icons/archetypes/warrior.webp
     name: Warrior
     system:
-      competence:
-        raw: 1
       description: >-
         <p>Warriors are primarily fighters and can handle themselves well in heavy melee
         @Identifier[core:combat]{combat}. Though they all have similar combat strength, they achieve different goals in
@@ -1817,15 +1518,8 @@ items:
     type: archetype
 name: Greater Cemerai
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Greater Cemerai
   ring:
     enabled: true
@@ -1833,24 +1527,14 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/greater-cemerai.webp
   texture:
     src: systems/teriock/src/icons/creatures/greater-cemerai.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 18
   identifier: greater-cemerai
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
-  size:
-    value: 3
   wielding:
     attacker: TSoqI1hEZavnDgna
     blocker: TSoqI1hEZavnDgna

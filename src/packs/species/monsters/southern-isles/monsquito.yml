@@ -29,7 +29,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: WaImUklYAzSkTFC4
     _key: "!items.effects!095faa97ef857256.WaImUklYAzSkTFC4"
@@ -72,7 +71,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -87,7 +85,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: HyzMmHyis2htwclm
     _key: "!items.effects!095faa97ef857256.HyzMmHyis2htwclm"
@@ -117,7 +114,6 @@ effects:
         score:
           attribute: str
           value: -1
-    transfer: true
     type: ability
   - _id: sBq6ib6CVx5LLrL7
     _key: "!items.effects!095faa97ef857256.sBq6ib6CVx5LLrL7"
@@ -128,8 +124,6 @@ effects:
     system:
       automations:
         - _id: grBibq1mL7ug5J3v
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -138,8 +132,6 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
@@ -147,14 +139,8 @@ effects:
         base: a2
       form: special
       identifier: mana-drain-suck
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -166,9 +152,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: DEeHlzk4KOVkHItd
     _key: "!items.effects!095faa97ef857256.DEeHlzk4KOVkHItd"
@@ -184,7 +167,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -197,8 +179,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: 8nRGVA4sck3qrTkj
     _key: "!items.effects!095faa97ef857256.8nRGVA4sck3qrTkj"
@@ -214,7 +194,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -227,8 +206,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 5PCMy4CWePcjq5XU
     _key: "!items.effects!095faa97ef857256.5PCMy4CWePcjq5XU"
@@ -244,7 +221,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: sneaky
       interaction: manifest
       maneuver: passive
@@ -258,7 +234,6 @@ effects:
         score:
           attribute: snk
           value: 1
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/creatures/monsquito.webp
@@ -266,8 +241,6 @@ name: Monsquito
 system:
   appearance: <p>Large black mosquitos the size of pelicans.</p>
   br: 9
-  competence:
-    raw: 1
   description: >-
     <p>These insects are usually found on the Oni Islands, but they have slowly been spreading throughout the Southern
     Isles. They spawn in dark swamps in the cover of jungles or damp caves. They like to drink the blood of their prey
@@ -275,16 +248,13 @@ system:
     @Identifier[core:hit-points-and-mana-points]{MP} as well.</p>
   identifier: monsquito
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 8
       number:
         raw: "1"

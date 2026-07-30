@@ -5,16 +5,9 @@ name: Protective Mental Link
 system:
   automations:
     - _id: 0d1de42e061e5e91
-      all: false
-      attachDocuments: true
-      automatic: true
       identifiers:
         - ability:mental-effect-immunity
-      multi: false
-      separate: false
       type: addDocuments
-  competence:
-    raw: 0
   delivery: hand
   duration:
     raw: "1"
@@ -24,36 +17,18 @@ system:
   endCondition: >-
     <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
       timing: end
       type: combat
   form: special
   identifier: protective-mental-link
-  interaction: attack
-  maneuver: active
-  piercing:
-    raw: 2
   powerSources:
     - unknown
-  range:
-    unit: contact
   requirements: <p>You are @Identifier[keyword:immunity]{immune} to @Wiki[Category:Mental effects]{mental effects}.</p>
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} gains @Identifier[ability:mental-effect-immunity]{Mental Effect
       Immunity}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

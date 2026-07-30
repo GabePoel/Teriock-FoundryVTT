@@ -10,7 +10,6 @@ effects:
     system:
       automations:
         - _id: 0KocEo3PeZJ7lNkM
-          changeType: add
           key: system.boosts.damage
           qualifier: "@dmg"
           target: armament
@@ -29,19 +28,14 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>You move or are moved.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: lTiZALQhWDYH7uP2
-          method: automatic
           triggers:
             - executeArmament
             - movement
           type: trigger
-      form: normal
       identifier: crit-elite
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @Identifier[core:attack-interaction]{attack} you make with
@@ -60,7 +54,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6w5je6TzlAU4pT1S
     _key: "!items.effects!22cda12fb70a082e.6w5je6TzlAU4pT1S"
@@ -72,27 +65,20 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
             - 2
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
@@ -101,12 +87,8 @@ effects:
         raw: "24"
         unit: hour
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-item
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>@Identifier[core:targets]{Target} makes a creature become @Identifier[condition:poisoned]{poisoned}. The
@@ -122,34 +104,26 @@ effects:
           @Identifier[core:damage]{damage}.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is not a weapon.</p>
       skill: true
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: viperTamer000000
     _key: "!items.effects!22cda12fb70a082e.viperTamer000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Viper Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:viper]{viper}.</p>
       field: survivalist
       identifier: viper-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Viper Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:viper inline]</p>
   identifier: viper-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

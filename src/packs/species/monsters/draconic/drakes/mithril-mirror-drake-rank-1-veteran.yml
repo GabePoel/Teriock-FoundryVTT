@@ -13,7 +13,6 @@ effects:
       affinities:
         - _id: hPfBt6zwzwH60lYt
           activeQualifier: "@flags.improvedBrace"
-          amount: 1
           category: effectTypes
           type: takeDeboost
           value: damaging
@@ -39,8 +38,6 @@ effects:
         - _id: Rid5p1TlO90isbp4
           amount: 0
           impact: setTempHp
-          morganti: false
-          showDialog: false
           trigger: movement
           type: take
       competence:
@@ -49,17 +46,13 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>You move or are moved.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:
             - movement
           type: trigger
-      form: normal
       identifier: brace
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
@@ -75,7 +68,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Nel4kQU109RUj1k2
     _key: "!items.effects!Oq5Rm3E4naGgT7hd.Nel4kQU109RUj1k2"
@@ -86,14 +78,10 @@ effects:
     system:
       automations:
         - _id: DH9D04yber5kvwnW
-          all: false
-          attachDocuments: true
-          automatic: true
           children:
             enabled: true
             identifiers:
               - property:improvised
-            overrideData: false
           data: "{\"name\":\"Improvised @base\"}"
           multi: true
           overrideData: true
@@ -103,11 +91,7 @@ effects:
             - Compendium.teriock.equipment.Folder.ed3267c1d2c3a7f4
             - Compendium.teriock.equipment.Folder.f596232e51f64ef9
         - _id: FKc997ohmjSZ7IvR
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
       competence:
         raw: 1
@@ -119,7 +103,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: improvised-armor-and-shields
       interaction: manifest
       maneuver: slow
@@ -144,7 +127,6 @@ effects:
       standard: true
       targets:
         - other
-    transfer: true
     type: ability
   - _id: shn8qx3LbBe4ktYg
     _key: "!items.effects!Oq5Rm3E4naGgT7hd.shn8qx3LbBe4ktYg"
@@ -155,26 +137,16 @@ effects:
     system:
       automations:
         - _id: 1687edd16f473940
-          all: false
-          attachDocuments: true
-          automatic: true
           data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
           identifiers:
             - ability:instant-awaken
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: 691afda974d67b4a
-          all: false
-          attachDocuments: true
-          automatic: true
           data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
           identifiers:
             - ability:reactive-awaken
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -183,12 +155,8 @@ effects:
         raw: "1"
         unit: hour
       endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: partner-awaken
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You and the @Identifier[core:targets]{target} gain @Identifier[keyword:limited]{Limited}
@@ -202,9 +170,6 @@ effects:
         unit: ft
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/ranks/rank-1-veteran.webp
@@ -213,8 +178,6 @@ system:
   _sup: 02f65e048d2bb000
   archetype: warrior
   class: veteran
-  competence:
-    raw: 1
   description: >-
     <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned warriors,
     but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so even a first
@@ -224,14 +187,11 @@ system:
     which is why they survive to be veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded, unimpressed,
     hard, and pessimistic.</p>
   identifier: rank-1-veteran
-  innate: false
   maxAv: 4
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

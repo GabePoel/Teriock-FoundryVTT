@@ -36,7 +36,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: WaImUklYAzSkTFC4
         _key: "!actors.items.effects!095faa97ef857256.095faa97ef857256.WaImUklYAzSkTFC4"
@@ -79,7 +78,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -94,7 +92,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: HyzMmHyis2htwclm
         _key: "!actors.items.effects!095faa97ef857256.095faa97ef857256.HyzMmHyis2htwclm"
@@ -124,7 +121,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: sBq6ib6CVx5LLrL7
         _key: "!actors.items.effects!095faa97ef857256.095faa97ef857256.sBq6ib6CVx5LLrL7"
@@ -135,22 +131,14 @@ items:
         system:
           automations:
             - _id: grBibq1mL7ug5J3v
-              consumeStatDice: true
-              forHarm: false
-              substitution: ""
-              trigger: null
               type: revitalize
             - _id: 157afc517847f562
-              display: {}
               formula: 1d8[mana]
               impact: drain
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: bite
-          duration:
-            unit: instant
           effectTypes:
             - draining
             - revitalization
@@ -158,14 +146,8 @@ items:
             base: a2
           form: special
           identifier: mana-drain-suck
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -177,9 +159,6 @@ items:
               target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
               @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
               only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: DEeHlzk4KOVkHItd
         _key: "!actors.items.effects!095faa97ef857256.095faa97ef857256.DEeHlzk4KOVkHItd"
@@ -195,7 +174,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -208,8 +186,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 8nRGVA4sck3qrTkj
         _key: "!actors.items.effects!095faa97ef857256.095faa97ef857256.8nRGVA4sck3qrTkj"
@@ -225,7 +201,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -238,8 +213,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 5PCMy4CWePcjq5XU
         _key: "!actors.items.effects!095faa97ef857256.095faa97ef857256.5PCMy4CWePcjq5XU"
@@ -255,7 +228,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: sneaky
           interaction: manifest
           maneuver: passive
@@ -269,7 +241,6 @@ items:
             score:
               attribute: snk
               value: 1
-        transfer: true
         type: ability
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/creatures/monsquito.webp
@@ -277,8 +248,6 @@ items:
     system:
       appearance: <p>Large black mosquitos the size of pelicans.</p>
       br: 9
-      competence:
-        raw: 1
       description: >-
         <p>These insects are usually found on the Oni Islands, but they have slowly been spreading throughout the
         Southern Isles. They spawn in dark swamps in the cover of jungles or damp caves. They like to drink the blood of
@@ -286,14 +255,9 @@ items:
         @Identifier[core:hit-points-and-mana-points]{MP} as well.</p>
       identifier: monsquito
       size:
-        enabled: true
         value: 1
       statDice:
-        hp:
-          disabled: false
-          formula: 1d10
         mp:
-          disabled: false
           formula: 1d8
       traits:
         - animal
@@ -310,17 +274,12 @@ items:
     name: Light Carapace
     system:
       _sup: 095faa97ef857256
-      attackPenalty: "-3"
       av:
         raw: 1
-      competence:
-        raw: 0
       identifier: light-carapace
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: Ub6VlhKkbPy5aGjx
     _key: "!actors.items!095faa97ef857256.Ub6VlhKkbPy5aGjx"
@@ -336,15 +295,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!095faa97ef857256.Ub6VlhKkbPy5aGjx.IDLUUjkSFtpaiKuJ"
@@ -355,32 +310,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 095faa97ef857256
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: ylcP030Q7Za7eYaT
     _key: "!actors.items!095faa97ef857256.ylcP030Q7Za7eYaT"
@@ -396,9 +342,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -406,7 +349,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: StZ8lJiQ1zrTkWMW
         _key: "!actors.items.effects!095faa97ef857256.ylcP030Q7Za7eYaT.StZ8lJiQ1zrTkWMW"
@@ -417,24 +359,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/jaw.webp
     name: Jaw
     system:
       _sup: 095faa97ef857256
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: savage
@@ -442,20 +377,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Monsquito
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Monsquito
   ring:
     enabled: true
@@ -463,20 +389,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/monsquito.webp
   texture:
     src: systems/teriock/src/icons/creatures/monsquito.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 6
   identifier: monsquito
   mp:
     value: 5
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

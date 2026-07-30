@@ -21,8 +21,6 @@ effects:
           verbal:
             type: tag
       delivery: item
-      duration:
-        unit: instant
       executionTime:
         base: r0
       form: intrinsic
@@ -37,8 +35,6 @@ effects:
           @Pack[teriock.abilities]{ability}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: >-
         <p>The @Identifier[keyword:invoke]{invoked} item must be @Identifier[property:mana-storing]{mana storing} and
         have more than 0 stored @Identifier[core:hit-points-and-mana-points]{MP}.</p>
@@ -47,7 +43,6 @@ effects:
       trigger: >-
         <p>You are spending @Identifier[core:hit-points-and-mana-points]{MP} on some
         @Pack[teriock.abilities]{ability}.</p>
-    transfer: true
     type: ability
   - _id: E6mD3m3aqKEARma4
     _key: "!items.effects!fb31c853fddd91bb.E6mD3m3aqKEARma4"
@@ -63,8 +58,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
       form: intrinsic
@@ -83,12 +76,9 @@ effects:
       requirements: >-
         <p>You have already use @Identifier[ability:prepare-aid]{Prepare Aid} to prepare to assist the creature or the
         @Identifier[core:game-master]{GM} rules that this is unnecessary.</p>
-      targets:
-        - creature
       trigger: >-
         <p>Another creature is about to use an action that requires a @Identifier[core:tradecrafts]{tradecraft check},
         @Identifier[core:attack-interaction]{attack roll}, or some other check.</p>
-    transfer: true
     type: ability
   - _id: 82eKeAWGMwGgyT3H
     _key: "!items.effects!fb31c853fddd91bb.82eKeAWGMwGgyT3H"
@@ -102,10 +92,7 @@ effects:
     system:
       automations:
         - _id: DgEu6eAF1fzkOfLI
-          all: false
-          automatic: true
           bonus: "0"
-          multi: false
           tradecrafts:
             - artist
             - blacksmith
@@ -143,14 +130,9 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: attempt-check
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You attempt a @Identifier[core:tradecrafts]{tradecraft check}. The @Identifier[core:game-master]{GM}
@@ -167,7 +149,6 @@ effects:
         save: <p>Results are determined by the @Identifier[core:game-master]{GM}.</p>
       targets:
         - other
-    transfer: true
     type: ability
   - _id: wDdvW5ZZMj5RvOSx
     _key: "!items.effects!fb31c853fddd91bb.wDdvW5ZZMj5RvOSx"
@@ -181,31 +162,20 @@ effects:
     system:
       automations:
         - _id: djJtvPmsCICnQ8CS
-          competence:
-            raw: 0
-          preventFeat: false
           preventThreshold: true
           type: override
         - _id: 0b0d1426453abb55
-          executor: false
-          multi: false
           relation: apply
           status: hidden
-          target: false
           type: status
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       featSaveAttribute: snk
       form: intrinsic
       identifier: attempt-hide
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>You attempt to become @Identifier[condition:hidden]{hidden}. If the result of your
@@ -224,7 +194,6 @@ effects:
         @Identifier[condition:hidden]{hidden}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: V6pU2uL3s0ffZvvD
     _key: "!items.effects!fb31c853fddd91bb.V6pU2uL3s0ffZvvD"
@@ -240,14 +209,9 @@ effects:
         - _id: FG5c3IOUhi5rpFz7
           common:
             - attune
-          showConfirmationDialog: true
           type: common
         - _id: 2pSv4HFYvuxbxDSa
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
       basic: true
       competence:
@@ -256,8 +220,6 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>This effect ends if you @Identifier[condition:dead]{die}.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 05f6d4dd9db56877
           statuses:
@@ -267,7 +229,6 @@ effects:
       form: intrinsic
       identifier: attune
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You take control over something that requires @Wiki[Core:Presence Tier]{presence}, becoming
@@ -283,7 +244,6 @@ effects:
       targets:
         - creature
         - item
-    transfer: true
     type: ability
   - _id: LfyEGosBLJgI1GD2
     _key: "!items.effects!fb31c853fddd91bb.LfyEGosBLJgI1GD2"
@@ -299,40 +259,25 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
       basic: true
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: basic-attack
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p class="note"><b>Note:</b> There are many @Pack[teriock.abilities]{abilities},
           @Pack[teriock.properties]{properties}, and other effects that alter the amount or type of
           @Identifier[core:damage]{damage} your @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} may
           deal. These typically apply to this and other @Identifier[core:attack-interaction]{attack abilities}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: HVgGx8RWDcG7ijoq
     _key: "!items.effects!fb31c853fddd91bb.HVgGx8RWDcG7ijoq"
@@ -348,8 +293,6 @@ effects:
       competence:
         raw: 1
       delivery: item
-      duration:
-        unit: instant
       executionTime:
         base: r0
       form: intrinsic
@@ -358,15 +301,12 @@ effects:
       maneuver: reactive
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: <p>The @Identifier[core:interactions]{attack's} effect @Identifier[core:fizzles]{fizzles}.</p>
       targets:
         - attack
       trigger: <p>You are being @Identifier[core:interactions]{attacked}.</p>
-    transfer: true
     type: ability
   - _id: Ab465VXNrigaCB5c
     _key: "!items.effects!fb31c853fddd91bb.Ab465VXNrigaCB5c"
@@ -382,14 +322,9 @@ effects:
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: basic-command
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You issue a command to a @Identifier[core:minions]{minion} that acts at your discretion. It gains 2 actions
@@ -402,9 +337,6 @@ effects:
         raw: "60"
         unit: ft
       requirements: <p>You have a minion under your control.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: iS5ChHLj1EGXTZmD
     _key: "!items.effects!fb31c853fddd91bb.iS5ChHLj1EGXTZmD"
@@ -420,8 +352,6 @@ effects:
       competence:
         raw: 1
       delivery: shield
-      duration:
-        unit: instant
       executionTime:
         base: r1
       form: intrinsic
@@ -430,8 +360,6 @@ effects:
       maneuver: reactive
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: >-
         <p>The item you're using to @Identifier[core:block-interaction]{block} has the
         @Identifier[property:blocking]{blocking property}.</p>
@@ -441,7 +369,6 @@ effects:
       targets:
         - attack
       trigger: <p>Another creature within range is being @Identifier[core:attack-interaction]{attacked}.</p>
-    transfer: true
     type: ability
   - _id: EAqmfpgAUGCoYLHN
     _key: "!items.effects!fb31c853fddd91bb.EAqmfpgAUGCoYLHN"
@@ -457,7 +384,6 @@ effects:
         - _id: Vp5FDV41hGwhiq9v
           common:
             - shatter
-          showConfirmationDialog: true
           type: common
       basic: true
       competence:
@@ -470,8 +396,6 @@ effects:
               @Identifier[property:shattered]{shattered}.</p>
             type: description
       delivery: shield
-      duration:
-        unit: instant
       executionTime:
         base: r1
       form: intrinsic
@@ -480,8 +404,6 @@ effects:
       maneuver: reactive
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: >-
         <p>The item you're using [[lookup name]] with has the @Identifier[property:blocking]{blocking property}. The
         @Pack[teriock.abilities]{ability} @Identifier[core:targets]{targeting} you is a @Wiki[Category:Cone delivery
@@ -492,7 +414,6 @@ effects:
       targets:
         - ability
       trigger: <p>A @Wiki[Category:Cone delivery abilities]{cone} would @Identifier[core:targets]{target} you.</p>
-    transfer: true
     type: ability
   - _id: cz8cKzPPUTA1DCeC
     _key: "!items.effects!fb31c853fddd91bb.cz8cKzPPUTA1DCeC"
@@ -506,38 +427,24 @@ effects:
     system:
       automations:
         - _id: 3a62dd96319ca135
-          executor: false
-          multi: false
           relation: apply
           status: burned
-          target: false
           type: status
       basic: true
       competence:
         raw: 1
       delivery: item
-      duration:
-        unit: instant
       elements:
         - flame
       executionTime:
         base: a3
       form: intrinsic
       identifier: burn
-      interaction: attack
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[condition:burned]{burned}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>Delivery item must be @Identifier[property:burning]{burning}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: bvBJvXq6JaID24XD
     _key: "!items.effects!fb31c853fddd91bb.bvBJvXq6JaID24XD"
@@ -578,8 +485,6 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       executionTime:
         base: r1
       form: intrinsic
@@ -595,12 +500,9 @@ effects:
         proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       targets:
         - item
       trigger: <p>An item within @Identifier[core:range]{range} is falling or flying by.</p>
-    transfer: true
     type: ability
   - _id: FGLipV3PVHtAIM3u
     _key: "!items.effects!fb31c853fddd91bb.FGLipV3PVHtAIM3u"
@@ -616,8 +518,6 @@ effects:
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
       executionTime:
@@ -626,7 +526,6 @@ effects:
       form: intrinsic
       identifier: check-disguise
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -640,9 +539,6 @@ effects:
           <p>You detect that the @Identifier[core:targets]{target} is not @Identifier[condition:disguised]{disguised},
           regardless of whether or not they actually are. This also applies if [[lookup name]] is
           @Identifier[keyword:resistance]{resisted} or @Identifier[core:fizzles]{fizzles} for some other reason.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: VDRAiOkwFeJb70dz
     _key: "!items.effects!fb31c853fddd91bb.VDRAiOkwFeJb70dz"
@@ -658,14 +554,11 @@ effects:
         - _id: vFDdxXzWZ3XyIexF
           common:
             - deattune
-          showConfirmationDialog: true
           type: common
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: Short Rest
         slow:
@@ -684,7 +577,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: FBvq2pdPaGjoVd06
     _key: "!items.effects!fb31c853fddd91bb.FBvq2pdPaGjoVd06"
@@ -703,12 +595,9 @@ effects:
       duration:
         raw: "5"
         unit: second
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: delay
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Rather than acting now, you [[lookup name style=lc]] until a later time. The rest of your
@@ -730,7 +619,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ykSyX5aXQvNgK5hO
     _key: "!items.effects!fb31c853fddd91bb.ykSyX5aXQvNgK5hO"
@@ -756,8 +644,6 @@ effects:
         unit: hour
       effectTypes:
         - sensory
-      executionTime:
-        base: a1
       featSaveAttribute: int
       form: intrinsic
       heightened: >-
@@ -765,7 +651,6 @@ effects:
         @Identifier[core:difficulty-class]{DC} of the [[lookup name]] decreases by 2.</p>
       identifier: disbelieve
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>The @Identifier[core:targets]{target} of [[lookup name]] can be anything that you suspect might be an
@@ -788,7 +673,6 @@ effects:
           strength.</p>
       targets:
         - other
-    transfer: true
     type: ability
   - _id: POHUeg3dSg1X1lyc
     _key: "!items.effects!fb31c853fddd91bb.POHUeg3dSg1X1lyc"
@@ -808,19 +692,14 @@ effects:
         raw: "5"
         unit: second
       endCondition: <p>The turn ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: f953eeab832f574e
-          event: turn
           relation: everyone
-          skip: 0
           timing: end
           type: combat
       form: intrinsic
       identifier: disengage
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Your @Identifier[ability:move]{movement} does not trigger
@@ -831,7 +710,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: lwgGDdBlrKl5Z1yA
     _key: "!items.effects!fb31c853fddd91bb.lwgGDdBlrKl5Z1yA"
@@ -848,26 +726,18 @@ effects:
           movementAction: crawl
           type: changeMovement
         - _id: 8941220db1fa8721
-          executor: false
-          multi: false
           relation: apply
           status: prone
-          target: false
           type: status
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - movement
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: drop-prone
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You fall @Identifier[condition:prone]{prone}.</p>
       powerSources:
@@ -877,7 +747,6 @@ effects:
       requirements: <p>You are not @Identifier[condition:prone]{prone}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: CmE0DL2HHoOjJtkT
     _key: "!items.effects!fb31c853fddd91bb.CmE0DL2HHoOjJtkT"
@@ -893,14 +762,10 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - awaken
-          showConfirmationDialog: true
           trigger: ""
           type: common
         - _id: 06acda516847cfdb
-          all: false
-          automatic: true
           bonus: "0"
-          multi: false
           threshold: "10"
           tradecrafts:
             - herbalist
@@ -910,29 +775,19 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - awakening
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: first-aid
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>Make a @Identifier[core:difficulty-class]{DC} 10 [[/tc herbalist]]{herbalist check}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:unconscious]{unconscious}.</p>
       results:
         fail: <p>@Identifier[core:targets]{Target} remains @Identifier[condition:unconscious]{unconscious}.</p>
         save: <p>@Identifier[core:targets]{Target} is @Identifier[keyword:awaken]{awakened}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: jssjsGUiEshizG7j
     _key: "!items.effects!fb31c853fddd91bb.jssjsGUiEshizG7j"
@@ -946,11 +801,8 @@ effects:
     system:
       automations:
         - _id: 0de8ced768f08913
-          executor: false
-          multi: false
           relation: remove
           status: transformed
-          target: false
           type: status
       basic: true
       competence:
@@ -961,20 +813,10 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: force-revert
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
-      range:
-        unit: contact
       results:
         hit: >-
           <p>If the target was @Identifier[condition:transformed]{minorly transformed}, they revert to their original
@@ -982,7 +824,6 @@ effects:
       targets:
         - creature
         - item
-    transfer: true
     type: ability
   - _id: DbayMYsnFvfiLKnL
     _key: "!items.effects!fb31c853fddd91bb.DbayMYsnFvfiLKnL"
@@ -996,16 +837,13 @@ effects:
     system:
       automations:
         - _id: cWvOZuWD3eXz92cb
-          all: false
           automatic: false
           data: |-
             {
               "dealImpacts": false
             }
-          expandTables: false
           local:
             qualifier: "@equipment"
-          multi: false
           overrideData: true
           trigger: execute
           type: useDocuments
@@ -1013,14 +851,9 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: interact
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You use your hand or hands to manipulate an object or the terrain. You can grab an unattended or stored
@@ -1029,11 +862,8 @@ effects:
           [[lookup name]]ion was successful.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       targets:
         - item
-    transfer: true
     type: ability
   - _id: D9ZSdArSez9A94R9
     _key: "!items.effects!fb31c853fddd91bb.D9ZSdArSez9A94R9"
@@ -1049,40 +879,25 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
       basic: true
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - knockout
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: knockout-attack
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>This cannot reduce the @Identifier[core:targets]{target's} @Identifier[core:hit-points-and-mana-points]{HP}
           to below 0.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>This @Identifier[core:attack-interaction]{attack} must be melee.</p>
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: ihmQZ7DtNTInHjET
     _key: "!items.effects!fb31c853fddd91bb.ihmQZ7DtNTInHjET"
@@ -1096,11 +911,7 @@ effects:
     system:
       automations:
         - _id: 96383c76a745415d
-          executor: false
-          multi: false
-          relation: include
           status: meleeDodging
-          target: false
           type: status
       basic: true
       competence:
@@ -1112,20 +923,13 @@ effects:
       effectTypes:
         - movement
       endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
-          timing: start
           type: combat
       form: intrinsic
       identifier: melee-dodge
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You are @Identifier[condition:melee-dodging]{melee dodging} until the start of your next
@@ -1140,7 +944,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: abmIBDAp1NZH9KOt
     _key: "!items.effects!fb31c853fddd91bb.abmIBDAp1NZH9KOt"
@@ -1154,11 +957,7 @@ effects:
     system:
       automations:
         - _id: 858320f85f928105
-          executor: false
-          multi: false
-          relation: include
           status: missileDodging
-          target: false
           type: status
       basic: true
       competence:
@@ -1170,20 +969,13 @@ effects:
       effectTypes:
         - movement
       endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
-          timing: start
           type: combat
       form: intrinsic
       identifier: missile-dodge
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You are @Identifier[condition:missile-dodging]{missile dodging} until the start of your next
@@ -1198,7 +990,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: U89GoivK4h73SKPe
     _key: "!items.effects!fb31c853fddd91bb.U89GoivK4h73SKPe"
@@ -1214,16 +1005,11 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - movement
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: move
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You [[lookup name style=lc]] on a distance up to your @Identifier[core:movement-speed]{movement speed} on
@@ -1236,7 +1022,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 1M0r5PLFMGHWJEz1
     _key: "!items.effects!fb31c853fddd91bb.1M0r5PLFMGHWJEz1"
@@ -1257,8 +1042,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
       form: intrinsic
@@ -1285,7 +1068,6 @@ effects:
       trigger: >-
         <p>You have just made an @Identifier[core:attack-interaction]{attack} against a creature other than
         yourself.</p>
-    transfer: true
     type: ability
   - _id: jeCA9hap4ZyKB7HX
     _key: "!items.effects!fb31c853fddd91bb.jeCA9hap4ZyKB7HX"
@@ -1299,20 +1081,14 @@ effects:
     system:
       automations:
         - _id: ptx3hlPsPF9jHgFO
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@ability, @interaction.attack, @time.a1, or(@delivery.weapon, @delivery.hand))
-          multi: false
           trigger: execute
           type: useDocuments
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
       form: intrinsic
@@ -1334,7 +1110,6 @@ effects:
         <p>A creature moves outside of your reach. This is also triggered when a creature
         @Identifier[ability:reload]{reloads}, @Identifier[core:attack-interaction]{attacks} with, or
         @Identifier[ability:interact]{interacts} to activate an @Identifier[property:involved]{involved} item.</p>
-    transfer: true
     type: ability
   - _id: CeQm0KAZm1TxPRKP
     _key: "!items.effects!fb31c853fddd91bb.CeQm0KAZm1TxPRKP"
@@ -1358,14 +1133,9 @@ effects:
             description: <p>An amount of @Identifier[equipment:coin]{gold} of your choosing.</p>
             type: description
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: pay-gold
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>If the @Identifier[core:targets]{target} is "@Identifier[damage:financial]{indebted}", this pays off an
@@ -1375,9 +1145,6 @@ effects:
         - financial
       range:
         unit: self
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: S98GABRDaGBT6Md1
     _key: "!items.effects!fb31c853fddd91bb.S98GABRDaGBT6Md1"
@@ -1398,27 +1165,19 @@ effects:
             description: <p>An amount of @Identifier[core:hit-points-and-mana-points]{MP} of your choosing.</p>
             type: description
       delivery: hand
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: pay-mana
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>The @Identifier[core:hit-points-and-mana-points]{MP} is spent into the target. Any effects are determined
           by the @Identifier[core:game-master]{GM}.</p>
       powerSources:
         - spiritual
-      range:
-        unit: contact
       targets:
         - area
         - creature
         - item
-    transfer: true
     type: ability
   - _id: QC2SlrNo7gXmKkEx
     _key: "!items.effects!fb31c853fddd91bb.QC2SlrNo7gXmKkEx"
@@ -1434,17 +1193,12 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - sensory
-      executionTime:
-        base: a1
       featSaveAttribute: per
       form: intrinsic
       identifier: perceive
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -1458,7 +1212,6 @@ effects:
           @Identifier[core:difficulty-class]{DC} less than or equal to your roll.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: T1E2mFn4Y44btbo6
     _key: "!items.effects!fb31c853fddd91bb.T1E2mFn4Y44btbo6"
@@ -1478,7 +1231,6 @@ effects:
           hp:
             formula: "5"
             type: formula
-      delivery: weapon
       duration:
         raw: "5"
         unit: second
@@ -1487,26 +1239,18 @@ effects:
         base: a0
       expirations:
         - _id: 7c3b427d7098bbe9
-          event: turn
           relation: everyone
-          skip: 0
           timing: end
           type: combat
       form: intrinsic
       identifier: power-through
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You can treat a type of @Identifier[damage:hack]{hack damage} you've taken as though it is one step
           lower.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: XsjuZ4s5lsUrpECL
     _key: "!items.effects!fb31c853fddd91bb.XsjuZ4s5lsUrpECL"
@@ -1525,12 +1269,9 @@ effects:
       duration:
         raw: "1"
         unit: minute
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: prepare-aid
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You prepare to help a creature you can see with something that requires a
@@ -1543,7 +1284,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2Bi90gjVzz73VGei
     _key: "!items.effects!fb31c853fddd91bb.2Bi90gjVzz73VGei"
@@ -1559,28 +1299,17 @@ effects:
         - _id: 5MJ9my8NzZstwPbl
           common:
             - readMagic
-          showConfirmationDialog: true
           type: common
       basic: true
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: read-magic
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>If the @Identifier[core:targets]{target} is an item, you know if it is @Identifier[property:magic]{magical}
@@ -1590,7 +1319,6 @@ effects:
       targets:
         - creature
         - item
-    transfer: true
     type: ability
   - _id: 5fCeEbbdHSiknGCj
     _key: "!items.effects!fb31c853fddd91bb.5fCeEbbdHSiknGCj"
@@ -1609,12 +1337,9 @@ effects:
       duration:
         raw: "5"
         unit: second
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: ready
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You prepare to use an action that will occur outside your turn. Choose a @Wiki[Category:Single action
@@ -1635,7 +1360,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: BuQN3O8E5XFxzMoq
     _key: "!items.effects!fb31c853fddd91bb.BuQN3O8E5XFxzMoq"
@@ -1649,17 +1373,12 @@ effects:
     system:
       automations:
         - _id: t4npARbkhkr306IB
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           substitution: "@base + @p"
           type: heal
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: Short Rest
         slow:
@@ -1684,7 +1403,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ZlOD5sD8FCpIviRh
     _key: "!items.effects!fb31c853fddd91bb.ZlOD5sD8FCpIviRh"
@@ -1700,14 +1418,9 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: reload
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[property:loading]{reloaded}.</p>
       powerSources:
@@ -1717,7 +1430,6 @@ effects:
       requirements: <p>@Identifier[core:targets]{Target} has the @Identifier[property:loading]{loading property}.</p>
       targets:
         - item
-    transfer: true
     type: ability
   - _id: XxVW2tUzwqiPLhS3
     _key: "!items.effects!fb31c853fddd91bb.XxVW2tUzwqiPLhS3"
@@ -1738,8 +1450,6 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
       form: intrinsic
@@ -1755,7 +1465,6 @@ effects:
       targets:
         - self
       trigger: <p>You fail a @Identifier[keyword:resistance]{resistance save}.</p>
-    transfer: true
     type: ability
   - _id: gKZsddyKsoCxVd4j
     _key: "!items.effects!fb31c853fddd91bb.gKZsddyKsoCxVd4j"
@@ -1771,8 +1480,6 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - stealing
       executionTime:
@@ -1780,17 +1487,11 @@ effects:
       form: intrinsic
       identifier: search
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You take all of one type of @Identifier[property:searchable]{searchable} item from target.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: YqalD8uRs68lSiI0
     _key: "!items.effects!fb31c853fddd91bb.YqalD8uRs68lSiI0"
@@ -1808,20 +1509,13 @@ effects:
           trigger: preExecute
           type: abilityMacro
         - _id: 0de8ced768f08913
-          executor: false
-          multi: false
           relation: remove
           status: transformed
-          target: false
           type: status
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       featSaveAttribute: int
       form: intrinsic
       heightened: >-
@@ -1829,7 +1523,6 @@ effects:
         @Identifier[core:difficulty-class]{DC} of the [[lookup name]] decreases by 2.</p>
       identifier: self-revert
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>Instead of your normal [[:Core:Feat Interaction|feat save @Identifier[core:difficulty-class]{DC}]], the
@@ -1845,7 +1538,6 @@ effects:
         save: <p>You cease being @Identifier[condition:transformed]{transformed}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 7NiptxWezYPTJLuG
     _key: "!items.effects!fb31c853fddd91bb.7NiptxWezYPTJLuG"
@@ -1859,29 +1551,20 @@ effects:
     system:
       automations:
         - _id: 64cofMiPIXRM9RKW
-          movementAction: walk
           type: changeMovement
         - _id: 582d8b8b97c3fb78
-          executor: false
-          multi: false
           relation: remove
           status: prone
-          target: false
           type: status
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - movement
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: stand-up
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You are no longer @Identifier[condition:prone]{prone}.</p>
       powerSources:
@@ -1891,7 +1574,6 @@ effects:
       requirements: <p>You are @Identifier[condition:prone]{prone}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: pBKSQg9wUTMBNVXl
     _key: "!items.effects!fb31c853fddd91bb.pBKSQg9wUTMBNVXl"
@@ -1902,24 +1584,18 @@ effects:
     system:
       automations:
         - _id: c2109f984c16d47e
-          executor: false
-          multi: false
           relation: apply
           status: wisping
-          target: false
           type: status
       basic: true
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: a3
       form: intrinsic
       identifier: start-wisping
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>Roll [[/roll 2d4kh1]]. If either die rolls a 4, you start @Identifier[condition:wisping]{wisping}.</p>
       powerSources:
@@ -1929,7 +1605,6 @@ effects:
       requirements: <p>You are @Identifier[condition:dead]{dead}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: yLdEhoj9xd6Gicos
     _key: "!items.effects!fb31c853fddd91bb.yLdEhoj9xd6Gicos"
@@ -1945,14 +1620,9 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       form: intrinsic
       identifier: sustain
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Either start or continue some @Wiki[Category:Slow abilities]{slow ability} that has an execution time
@@ -1967,7 +1637,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: PoWmWx6brcGlJ8KL
     _key: "!items.effects!fb31c853fddd91bb.PoWmWx6brcGlJ8KL"
@@ -1994,20 +1663,13 @@ effects:
         raw: "10"
         unit: second
       endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 2a949cb4ad557294
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
-          timing: start
           type: combat
       form: intrinsic
       identifier: aim
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You gain @Identifier[core:style-bonus]{SB} with all your
@@ -2019,13 +1681,10 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
 img: systems/teriock/src/icons/powers/basic-abilities.webp
 name: Basic Abilities
 system:
-  competence:
-    raw: 1
   description: >-
     <p>Everyone is considered to have all @Wiki[Category:Basic abilities]{basic abilities} by default. However, some
     basic abilities may have additional requirements that must be met in order to actually be used.</p>

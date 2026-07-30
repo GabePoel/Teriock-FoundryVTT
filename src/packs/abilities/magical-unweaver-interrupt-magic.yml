@@ -8,27 +8,10 @@ system:
   _sup: 9233d0a15e975c98
   automations:
     - _id: 7400b41f20d9f100
-      all: false
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      excludeToken: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
-      regionType: circle
       restriction:
-        enabled: false
-        priority: 0
         type: move
-      targeting: true
       trigger: executeInput
       type: region
-      visibility: 2
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
@@ -41,25 +24,15 @@ system:
   endCondition: >-
     <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
       timing: end
       type: combat
   featSaveAttribute: unp
   form: special
   identifier: interrupt-magic
   interaction: feat
-  maneuver: active
   powerSources:
     - martial
   range:
@@ -72,7 +45,4 @@ system:
       @Wiki[Category:Magically powered abilities]{magical} @Wiki[Category:Sustained abilities]{sustained abilities} on
       them @Identifier[core:fizzles]{fizzle}.</p>
   rotator: true
-  targets:
-    - creature
-transfer: true
 type: ability

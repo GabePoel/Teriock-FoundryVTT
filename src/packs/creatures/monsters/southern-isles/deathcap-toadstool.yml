@@ -19,35 +19,22 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - bag
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 71e51b18552837f1
-              display: {}
               formula: (2 + @h)d6
               impact: kill
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - killing
           elements:
             - necromancy
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill
             1d6]].</p>
           identifier: death-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -64,9 +51,6 @@ items:
               @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 7LwgnIJg9eANQnme
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.7LwgnIJg9eANQnme"
@@ -96,7 +80,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: nW4mdvroOfT1dADX
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.nW4mdvroOfT1dADX"
@@ -108,7 +91,6 @@ items:
           affinities:
             - _id: IX1B1awspdkdHmV9
               category: damageTypes
-              img: null
               type: immunity
               value: fire
           competence:
@@ -120,7 +102,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          form: normal
           identifier: fire-damage-immunity
           interaction: manifest
           maneuver: passive
@@ -132,7 +113,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ucZtrrXDeb8ZPij2
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.ucZtrrXDeb8ZPij2"
@@ -144,7 +124,6 @@ items:
           affinities:
             - _id: t7spquliBLz5obV9
               category: effectTypes
-              img: null
               type: immunity
               value: lightning
           competence:
@@ -154,7 +133,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: lightning-immunity
           interaction: manifest
           maneuver: passive
@@ -168,7 +146,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ebFML6xYWUH7NGRy
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.ebFML6xYWUH7NGRy"
@@ -198,7 +175,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: SUaGutcKvFmyKU60
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.SUaGutcKvFmyKU60"
@@ -214,7 +190,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -227,8 +202,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: 21r2Kj5TFecnxNgt
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.21r2Kj5TFecnxNgt"
@@ -258,7 +231,6 @@ items:
             score:
               attribute: per
               value: -1
-        transfer: true
         type: ability
       - _id: UvbXUhk3TWSHtnN1
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.UvbXUhk3TWSHtnN1"
@@ -288,7 +260,6 @@ items:
             score:
               attribute: mov
               value: -1
-        transfer: true
         type: ability
       - _id: MZy6Duyddl35WeRc
         _key: "!actors.items.effects!37b8e44455d0d974.37b8e44455d0d974.MZy6Duyddl35WeRc"
@@ -299,59 +270,32 @@ items:
         system:
           automations:
             - _id: 5d57231066693cee
-              executor: false
-              multi: false
-              relation: include
               status: snared
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             unit: unlimited
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               crit:
                 - 0
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
               crit:
                 - 1
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
               skip: 1
               timing: end
               type: combat
-          form: normal
           identifier: snare
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
@@ -359,7 +303,6 @@ items:
           standard: true
           targets:
             - leg
-        transfer: true
         type: ability
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/creatures/deathcap-toadstool.webp
@@ -367,8 +310,6 @@ items:
     system:
       appearance: <p>Large hybrid mushroom-@Identifier[creature:toad]{toads}. Deathcap toadstools are red with black spots.</p>
       br: 6
-      competence:
-        raw: 1
       description: >-
         <p>Found on the Oni Islands, [[lookup name style=lc]]s are very dangerous and have many uses when properly
         harvested by herbalists. They shoot spores of death when potential predators approach them. Toadstools hop on
@@ -377,14 +318,11 @@ items:
         @Identifier[ability:snare]{Snare} with its long tongue.</p>
       identifier: deathcap-toadstool
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d4
       traits:
         - animal
@@ -407,9 +345,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -417,7 +352,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 7zV2wGze9lzJ1jdD
         _key: "!actors.items.effects!37b8e44455d0d974.C6JqyAYIL0FLAQZ9.7zV2wGze9lzJ1jdD"
@@ -428,24 +362,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/wriggling-tentacle.webp
     name: Wriggling Tentacle
     system:
       _sup: 37b8e44455d0d974
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -453,20 +380,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Deathcap Toadstool
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Deathcap Toadstool
   ring:
     enabled: true
@@ -474,20 +392,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/deathcap-toadstool.webp
   texture:
     src: systems/teriock/src/icons/creatures/deathcap-toadstool.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: deathcap-toadstool
   mp:
     value: 3
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

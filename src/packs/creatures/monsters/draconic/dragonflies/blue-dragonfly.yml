@@ -17,50 +17,23 @@ items:
         system:
           automations:
             - _id: 7400b41f20d9f100
-              all: false
               angle: "@angle.dragon"
               attachToToken: false
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
               expandWithToken: false
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
               radius: "@ability.range + 5 * @h"
-              radiusX: ""
-              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
-                priority: 0
                 type: move
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: 800c70e6560525a8
-              display: {}
               formula: (2 * @h)d10[magic ice]
               heighten:
                 - 1
-              impact: damage
-              trigger: null
               type: roll
             - _id: KstRW26T6r9WGqrI
-              executor: false
-              multi: false
-              relation: include
               status: frozen
-              target: false
               type: status
           competence:
             raw: 1
@@ -80,21 +53,12 @@ items:
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               event: action
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
-          featSaveAttribute: mov
           form: special
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
@@ -102,7 +66,6 @@ items:
             increases by 5 feet.</p>
           identifier: blue-dragonfly-breath
           interaction: feat
-          maneuver: active
           powerSources:
             - magical
           range:
@@ -116,9 +79,6 @@ items:
               this effect ends. Target takes half as much @Identifier[core:damage]{damage} from this as they would
               otherwise. This is calculated after any @Identifier[keyword:boosted]{boosts} or
               @Identifier[keyword:deboosted]{deboosts}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: buJYcoN7p1AAQaRt
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.buJYcoN7p1AAQaRt"
@@ -129,11 +89,7 @@ items:
         system:
           automations:
             - _id: f004b5e5538cefe9
-              executor: false
-              multi: false
-              relation: include
               status: charmed
-              target: false
               type: status
           competence:
             raw: 1
@@ -149,27 +105,15 @@ items:
           effectTypes:
             - control
             - mental
-          executionTime:
-            base: a1
-          form: normal
           identifier: charm
-          interaction: attack
           limitation: <p>Below 0 @Identifier[core:intelligence]{INT} only and only in lair.</p>
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: >-
             <p>A creature may only have up to @Identifier[core:presence]{PRES} creatures
             @Identifier[condition:charmed]{charmed} at a time.</p>
           results:
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:charmed]{charmed}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: Y4HFVzquXnKSoXE1
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.Y4HFVzquXnKSoXE1"
@@ -185,7 +129,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: fast
           interaction: manifest
           maneuver: passive
@@ -199,7 +142,6 @@ items:
             score:
               attribute: mov
               value: 1
-        transfer: true
         type: ability
       - _id: mi6NSQWyjAA5d0B0
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.mi6NSQWyjAA5d0B0"
@@ -242,7 +184,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -257,7 +198,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: u4jEffTAlq5k5NNO
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.u4jEffTAlq5k5NNO"
@@ -268,39 +208,19 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
           limitation: <p>In or above water.</p>
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -328,7 +248,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: qIj2LNgVjIawwdAa
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.qIj2LNgVjIawwdAa"
@@ -344,7 +263,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: high-intelligence
           interaction: manifest
           maneuver: passive
@@ -358,7 +276,6 @@ items:
             score:
               attribute: int
               value: 3
-        transfer: true
         type: ability
       - _id: bApWLJxFnJWdVJO8
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.bApWLJxFnJWdVJO8"
@@ -374,7 +291,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: keen-eye
           interaction: manifest
           maneuver: passive
@@ -388,7 +304,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: wj7eXV4Atpq0yfEQ
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.wj7eXV4Atpq0yfEQ"
@@ -404,7 +319,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: martial-arts
           interaction: manifest
           maneuver: passive
@@ -420,7 +334,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: dkkfNSvDV2LgrhQU
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.dkkfNSvDV2LgrhQU"
@@ -436,7 +349,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -449,8 +361,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: w96EdOEHIfO5gB2C
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.w96EdOEHIfO5gB2C"
@@ -466,7 +376,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -479,8 +388,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: COCGTjVWGKjkm0J7
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.COCGTjVWGKjkm0J7"
@@ -491,36 +398,11 @@ items:
         system:
           automations:
             - _id: 9f08fabc1d2bcac2
-              executor: false
-              multi: false
-              relation: include
               status: transformed
-              target: false
               type: status
             - _id: D55WBiqM2QcyO7Vv
-              all: false
-              automatic: true
-              competence:
-                raw: 0
-              identifiers: []
-              img: null
               level: full
-              multi: false
-              override:
-                - art
-                - size
-              reset:
-                - gp
-                - hp
-              ring: null
-              ringImg: null
               setCompetence: override
-              suppress:
-                - body
-                - equipment
-                - fluency
-                - rank
-                - species
               type: transformation
               uuids:
                 - Compendium.teriock.species.Folder.30f4d11e5e53d332
@@ -575,9 +457,6 @@ items:
           rotator: true
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: wUgFizNALux5jCn2
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.wUgFizNALux5jCn2"
@@ -591,15 +470,10 @@ items:
               common:
                 - bag
                 - revive
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: iCn9pFDIGFJWxm6H
               activeQualifier: and(not(@status.burned), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              noStatDice: false
-              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -634,7 +508,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: yhDWHTGLgmWX25qz
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.yhDWHTGLgmWX25qz"
@@ -650,7 +523,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: sneaky
           interaction: manifest
           maneuver: passive
@@ -664,7 +536,6 @@ items:
             score:
               attribute: snk
               value: 1
-        transfer: true
         type: ability
       - _id: b27CtiqDD25QmOMp
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.b27CtiqDD25QmOMp"
@@ -706,27 +577,18 @@ items:
               type: childChange
               value: 1d8
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d4
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
                 - 2
-              display: {}
               formula: 1d6
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d8
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -735,7 +597,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: offensive-martial-arts
           interaction: manifest
           maneuver: passive
@@ -757,7 +618,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: c0PecCAZvS5TGCdL
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.c0PecCAZvS5TGCdL"
@@ -802,7 +662,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: defensive-martial-arts
           interaction: manifest
           maneuver: passive
@@ -824,7 +683,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: ff7afe06984df507
     img: systems/teriock/src/icons/creatures/blue-dragonfly.webp
@@ -835,22 +693,17 @@ items:
         dragonflies. They appear as small @UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{dragons} with
         dragonfly wings.</p>
       br: 21
-      competence:
-        raw: 1
       description: >-
         <p>Dragonflies are usually found in the Oni Isles, although some have left their native grounds. These creatures
         are highly intelligent and are often @Identifier[archetype:mage]{mages} of one or more types. Every dragonfly
         has their own pond, swamp, or small body of water that it treats as its lair.</p>
       identifier: blue-dragonfly
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 4d10
         mp:
-          disabled: false
           formula: 2d12
       traits:
         - animal
@@ -868,17 +721,12 @@ items:
     name: Reinforced Carapace
     system:
       _sup: 30f73615ee60f6a9
-      attackPenalty: "-3"
       av:
         raw: 4
-      competence:
-        raw: 0
       identifier: reinforced-carapace
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: fuhZsm809JpAthf1
     _key: "!actors.items!30f73615ee60f6a9.fuhZsm809JpAthf1"
@@ -894,9 +742,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -904,7 +749,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: bB3IwXhphhtbAHcY
         _key: "!actors.items.effects!30f73615ee60f6a9.fuhZsm809JpAthf1.bB3IwXhphhtbAHcY"
@@ -915,15 +759,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
       - _id: N3v2gCnZl7LzFaYE
         _key: "!actors.items.effects!30f73615ee60f6a9.fuhZsm809JpAthf1.N3v2gCnZl7LzFaYE"
@@ -934,7 +774,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -945,23 +784,17 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
-        transfer: true
         type: property
     folder: ff7afe06984df507
     img: systems/teriock/src/icons/body-parts/rending-claw.webp
     name: Rending Claw
     system:
       _sup: 30f73615ee60f6a9
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d8
       fightingStyle: savage
@@ -969,20 +802,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Blue Dragonfly
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Blue Dragonfly
   ring:
     enabled: true
@@ -990,20 +814,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/blue-dragonfly.webp
   texture:
     src: systems/teriock/src/icons/creatures/blue-dragonfly.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 24
   identifier: blue-dragonfly
   mp:
     value: 14
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

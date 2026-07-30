@@ -18,42 +18,31 @@ items:
           affinities:
             - _id: hPfBt6zwzwH60lYt
               activeQualifier: "@flags.improvedBrace"
-              amount: 1
               category: effectTypes
-              img: null
               type: takeDeboost
               value: damaging
           automations:
             - _id: 0BLOMYrODY3bzx8I
               competencies:
                 - 0
-              display: {}
               formula: 1d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               competencies:
                 - 1
-              display: {}
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               competencies:
                 - 2
-              display: {}
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: Rid5p1TlO90isbp4
               amount: 0
-              display: {}
               impact: setTempHp
-              morganti: false
-              showDialog: false
               trigger: movement
               type: take
           competence:
@@ -62,18 +51,13 @@ items:
           duration:
             unit: unlimited
           endCondition: <p>You move or are moved.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: d1f6b6eaa581aa10
-              method: automatic
               triggers:
                 - movement
               type: trigger
-          form: normal
           identifier: brace
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
@@ -89,7 +73,6 @@ items:
           sustained: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: zEQDVVR2OyOLnYrC
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.zEQDVVR2OyOLnYrC"
@@ -119,7 +102,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: 2jgsi8HisebUQDXc
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.2jgsi8HisebUQDXc"
@@ -135,7 +117,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: diving
           interaction: manifest
           maneuver: passive
@@ -156,7 +137,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: gEU7LPgkcGPtA2vY
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.gEU7LPgkcGPtA2vY"
@@ -186,7 +166,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: 0De3BOOLO9cAoFXn
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.0De3BOOLO9cAoFXn"
@@ -214,7 +193,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 97lVPcv8mzccF8pJ
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.97lVPcv8mzccF8pJ"
@@ -230,7 +208,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -243,8 +220,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 6yDVMSMt0u2RhHSS
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.6yDVMSMt0u2RhHSS"
@@ -260,7 +235,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -273,8 +247,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: ccjelh0uRTqZgEWR
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.ccjelh0uRTqZgEWR"
@@ -303,7 +275,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: swimming
           interaction: manifest
           maneuver: passive
@@ -317,7 +288,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: bDmtNJ7m4I930AdO
         _key: "!actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.bDmtNJ7m4I930AdO"
@@ -341,7 +311,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: unbreachability
           interaction: manifest
           maneuver: passive
@@ -355,25 +324,18 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/turtle.webp
     name: Turtle
     system:
-      br: 1
-      competence:
-        raw: 1
       identifier: turtle
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -390,17 +352,12 @@ items:
     name: Reinforced Shell
     system:
       _sup: 47f36cc34b81e6df
-      attackPenalty: "-3"
       av:
         raw: 4
-      competence:
-        raw: 0
       identifier: reinforced-shell
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: AuKMYu3Yf5r41hC8
     _key: "!actors.items!47f36cc34b81e6df.AuKMYu3Yf5r41hC8"
@@ -416,9 +373,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -426,7 +380,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: StZ8lJiQ1zrTkWMW
         _key: "!actors.items.effects!47f36cc34b81e6df.AuKMYu3Yf5r41hC8.StZ8lJiQ1zrTkWMW"
@@ -437,24 +390,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/jaw.webp
     name: Jaw
     system:
       _sup: 47f36cc34b81e6df
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: savage
@@ -462,20 +408,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Turtle
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Turtle
   ring:
     enabled: true
@@ -483,20 +420,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/turtle.webp
   texture:
     src: systems/teriock/src/icons/creatures/turtle.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: turtle
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

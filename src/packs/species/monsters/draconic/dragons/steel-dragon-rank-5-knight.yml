@@ -29,25 +29,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: taunt
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -59,9 +47,6 @@ effects:
           other.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 3g1a1LvEjlpO8mii
     _key: "!items.effects!GdVIsC6M3H3OhQLi.3g1a1LvEjlpO8mii"
@@ -81,7 +66,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: weapon-master
       interaction: manifest
       maneuver: passive
@@ -97,7 +81,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: zWvNyliUR5izM9WU
     _key: "!items.effects!GdVIsC6M3H3OhQLi.zWvNyliUR5izM9WU"
@@ -109,13 +92,8 @@ effects:
       _sup: 3g1a1LvEjlpO8mii
       automations:
         - _id: cA34hJRKJud2tWev
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:runic
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -133,7 +111,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: runic-weapons
       interaction: manifest
       maneuver: slow
@@ -151,7 +128,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
   - _id: OpizkzgBUNhVfLNp
     _key: "!items.effects!GdVIsC6M3H3OhQLi.OpizkzgBUNhVfLNp"
@@ -178,7 +154,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: master-weapon-smith
       interaction: manifest
       maneuver: passive
@@ -194,7 +169,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-5-knight.webp
@@ -203,8 +177,6 @@ system:
   _sup: b1ca5e2d15299df7
   archetype: warrior
   class: knight
-  competence:
-    raw: 1
   description: >-
     <p>The true glory seekers, @Identifier[class:knight]{Knights} are chivalrous to a point but have none of the
     @Identifier[class:duelist]{Duelist's} respect for battles. @Identifier[class:knight]{Knights} are the weapon
@@ -214,14 +186,11 @@ system:
     looking for glory, looking for the next powerful
     @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
   identifier: rank-5-knight
-  innate: false
   maxAv: 4
   number: 5
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

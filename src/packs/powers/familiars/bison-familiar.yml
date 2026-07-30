@@ -6,13 +6,10 @@ effects:
     img: icons/environment/settlement/stables-logo.webp
     name: Bison Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:bison]{bison}.</p>
       field: survivalist
       identifier: bison-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: RS5sEbPPJxe2Ql0Z
     _key: "!items.effects!f6f8b91281216f53.RS5sEbPPJxe2Ql0Z"
@@ -23,71 +20,34 @@ effects:
     system:
       affinities:
         - _id: M5H0FZSqdzBuueLq
-          category: abilities
           img: ""
           type: incapability
           value: skillShare
       automations:
         - _id: pZTzCOb2arggrQQw
-          all: false
-          attachDocuments: true
           automatic: false
           competencies:
             - 0
-          display: {}
-          identifiers: []
           local:
-            identifiers: []
             qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1))
-          multi: false
-          separate: false
           type: addDocuments
-          uuids: []
         - _id: DKrkwLcllE5f9bjQ
-          all: false
-          attachDocuments: true
           automatic: false
           competencies:
             - 1
-          display: {}
-          identifiers: []
           local:
-            identifiers: []
             qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @p))
-          multi: false
-          separate: false
           type: addDocuments
-          uuids: []
         - _id: LTtFZkqLk2QnwOfK
-          all: false
-          attachDocuments: true
           automatic: false
           competencies:
             - 2
-          display: {}
-          identifiers: []
           local:
-            identifiers: []
             qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @f))
-          multi: false
-          separate: false
           type: addDocuments
-          uuids: []
         - _id: XdlHsYQu4RHDULLu
-          competence:
-            raw: 0
-          data: "{}"
-          display:
-            label: ""
-          makeEffect: null
-          preventAttack: false
-          preventBlockCone: false
-          preventFeat: false
-          preventThreshold: false
           rollBonus: ""
           setCompetence: override
-          targetsActor: null
-          targetsArmament: null
           type: override
       competence:
         raw: 1
@@ -98,12 +58,8 @@ effects:
       effectTypes:
         - contract
       endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: skill-share
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>@Identifier[core:targets]{Target} gains one @Pack[teriock.abilities]{ability} of your choice that you have
@@ -127,9 +83,6 @@ effects:
       skill: true
       standard: true
       sustained: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: tb1YjD0GvfwutJOh
     _key: "!items.effects!f6f8b91281216f53.tb1YjD0GvfwutJOh"
@@ -140,26 +93,16 @@ effects:
     system:
       automations:
         - _id: 1687edd16f473940
-          all: false
-          attachDocuments: true
-          automatic: true
           data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
           identifiers:
             - ability:instant-awaken
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: 691afda974d67b4a
-          all: false
-          attachDocuments: true
-          automatic: true
           data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
           identifiers:
             - ability:reactive-awaken
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -168,12 +111,8 @@ effects:
         raw: "1"
         unit: hour
       endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: partner-awaken
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You and the @Identifier[core:targets]{target} gain @Identifier[keyword:limited]{Limited}
@@ -187,16 +126,11 @@ effects:
         unit: ft
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Bison Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:bison inline]</p>
   identifier: bison-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

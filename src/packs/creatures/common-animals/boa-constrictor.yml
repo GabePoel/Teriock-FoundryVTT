@@ -24,7 +24,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: advanced-smell
           interaction: manifest
           maneuver: passive
@@ -47,7 +46,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: bIBgCaeuzVGwAV3l
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.bIBgCaeuzVGwAV3l"
@@ -90,7 +88,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: climbing
           interaction: manifest
           maneuver: passive
@@ -103,7 +100,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: abgDXJpmkQGNab1I
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.abgDXJpmkQGNab1I"
@@ -119,30 +115,19 @@ items:
             raw: "10"
             unit: second
           endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
-              method: automatic
               relation: executor
-              skip: 0
-              timing: start
               type: combat
             - _id: d1f6b6eaa581aa10
-              method: automatic
               triggers:
                 - movement
               type: trigger
           featSaveAttribute: str
-          form: normal
           identifier: constrict
           interaction: feat
-          maneuver: active
           powerSources:
             - martial
-          range:
-            unit: contact
           requirements: >-
             <p>@Identifier[core:targets]{Target} is your @Identifier[core:size]{size} or smaller. You cannot move while
             using [[lookup name]].</p>
@@ -151,9 +136,6 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:suffocating]{suffocating} and
               @Identifier[condition:snared]{snared}.</p>
           sustained: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: hSiTGS2tCMQTjuSz
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.hSiTGS2tCMQTjuSz"
@@ -183,7 +165,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: Z3VDx69vGqDCJBYE
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.Z3VDx69vGqDCJBYE"
@@ -197,30 +178,17 @@ items:
               hacks:
                 - arm
                 - leg
-              reverse: false
               type: hacks
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: hack
-          interaction: attack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-          maneuver: active
           overview:
             base: >-
               <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
               accordingly.</p>
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or
@@ -233,7 +201,6 @@ items:
           targets:
             - arm
             - leg
-        transfer: true
         type: ability
       - _id: owagPOyQ6x50THBa
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.owagPOyQ6x50THBa"
@@ -244,38 +211,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -303,7 +250,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: Ylxf1rE7JVijnlzA
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.Ylxf1rE7JVijnlzA"
@@ -316,32 +262,17 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - standardDamage
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
                 - body
-              reverse: false
               type: hacks
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: impale
-          interaction: attack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>If you want, @Identifier[core:targets]{target} takes
@@ -351,7 +282,6 @@ items:
           standard: true
           targets:
             - vitals
-        transfer: true
         type: ability
       - _id: T055p9GXfQS5ZDFB
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.T055p9GXfQS5ZDFB"
@@ -379,7 +309,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: zcMaFkormoRmkkbC
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.zcMaFkormoRmkkbC"
@@ -395,7 +324,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -408,8 +336,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: tCDXIIWZlk3JazCE
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.tCDXIIWZlk3JazCE"
@@ -425,7 +351,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -438,8 +363,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: y2u1TjZ2mTFqo9qe
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.y2u1TjZ2mTFqo9qe"
@@ -455,7 +378,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -468,8 +390,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: 0QwRcszxy93QZyWB
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.0QwRcszxy93QZyWB"
@@ -485,7 +405,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -498,8 +417,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: rr5qyiLRZA27tu5k
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.rr5qyiLRZA27tu5k"
@@ -512,36 +429,21 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - standardDamage
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
                 - ear
                 - mouth
                 - nose
-              reverse: false
               type: hacks
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           effectTypes:
             - damaging
-          executionTime:
-            base: a1
-          form: normal
           identifier: vitals-hack
-          interaction: attack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
             hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
@@ -549,7 +451,6 @@ items:
           standard: true
           targets:
             - vitals
-        transfer: true
         type: ability
       - _id: mHZiMOkfJwNpYzzL
         _key: "!actors.items.effects!86b73303ad261b89.86b73303ad261b89.mHZiMOkfJwNpYzzL"
@@ -573,13 +474,10 @@ items:
           competence:
             raw: 1
           delivery: aura
-          duration:
-            unit: instant
           effectTypes:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: scent-seeing
           interaction: manifest
           maneuver: passive
@@ -598,9 +496,6 @@ items:
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/boa-constrictor.webp
@@ -652,21 +547,16 @@ items:
           trigger: updateDocument
           type: toggleChildren
       br: 4
-      competence:
-        raw: 1
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       identifier: boa-constrictor
       size:
-        enabled: true
         max: 5
         min: 2
         value: 2
       statDice:
         hp:
-          disabled: false
           formula: (@species.size - 1)d8
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -683,17 +573,12 @@ items:
     name: Hardened Scales
     system:
       _sup: 86b73303ad261b89
-      attackPenalty: "-3"
       av:
         raw: 3
-      competence:
-        raw: 0
       identifier: hardened-scales
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: Yemkr5770uUHmCwb
     _key: "!actors.items!86b73303ad261b89.Yemkr5770uUHmCwb"
@@ -709,9 +594,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -719,7 +601,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: zrtJTRjkmdrLUpVb
         _key: "!actors.items.effects!86b73303ad261b89.Yemkr5770uUHmCwb.zrtJTRjkmdrLUpVb"
@@ -730,26 +611,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
     name: Fanged Jaw
     system:
       _sup: 86b73303ad261b89
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d6
       fightingStyle: savage
@@ -757,20 +631,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Boa Constrictor
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Boa Constrictor
   ring:
     enabled: true
@@ -778,20 +643,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/boa-constrictor.webp
   texture:
     src: systems/teriock/src/icons/creatures/boa-constrictor.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: boa-constrictor
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

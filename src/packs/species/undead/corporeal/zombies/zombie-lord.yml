@@ -29,7 +29,6 @@ effects:
         score:
           attribute: snk
           value: -1
-    transfer: true
     type: ability
   - _id: v1sT4S5yau67rD5g
     _key: "!items.effects!5284d973f4af48c2.v1sT4S5yau67rD5g"
@@ -59,7 +58,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: DPn29cTaKsGrgKWr
     _key: "!items.effects!5284d973f4af48c2.DPn29cTaKsGrgKWr"
@@ -77,7 +75,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: minor-undead
       interaction: manifest
       maneuver: passive
@@ -95,7 +92,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: HqwWY7abZryD95GD
     _key: "!items.effects!5284d973f4af48c2.HqwWY7abZryD95GD"
@@ -111,7 +107,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -124,8 +119,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: vqbnZtOBwQ1ZYUXG
     _key: "!items.effects!5284d973f4af48c2.vqbnZtOBwQ1ZYUXG"
@@ -141,7 +134,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -154,8 +146,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: F7pptlplnWiqDHMm
     _key: "!items.effects!5284d973f4af48c2.F7pptlplnWiqDHMm"
@@ -185,7 +175,6 @@ effects:
         score:
           attribute: mov
           value: -1
-    transfer: true
     type: ability
   - _id: OaQMopJPNaByZWFy
     _key: "!items.effects!5284d973f4af48c2.OaQMopJPNaByZWFy"
@@ -197,20 +186,9 @@ effects:
       automations:
         - _id: 7400b41f20d9f100
           activeQualifier: not(@status.down)
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
           targeting: false
           trigger: execute
@@ -241,9 +219,6 @@ effects:
       requirements: >-
         <p>You are @Identifier[rule:up]{up}. Only @Identifier[core:targets]{targets}
         @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{zombies}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: GuYBp0kA88fQNgQ1
     _key: "!items.effects!5284d973f4af48c2.GuYBp0kA88fQNgQ1"
@@ -274,7 +249,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -288,7 +262,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 3LT2mc2rTYnbwJra
     _key: "!items.effects!5284d973f4af48c2.3LT2mc2rTYnbwJra"
@@ -325,7 +298,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2rAPIdLOcPB8iA3k
     _key: "!items.effects!5284d973f4af48c2.2rAPIdLOcPB8iA3k"
@@ -337,20 +309,14 @@ effects:
       _sup: DPn29cTaKsGrgKWr
       automations:
         - _id: 8XZ7f1wVBuhfreru
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: VwMG074x6235laJJ
           amount: 999999
           impact: drain
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
@@ -359,7 +325,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: slow-mana-drain
       interaction: manifest
       maneuver: slow
@@ -370,11 +335,6 @@ effects:
           @Identifier[core:revitalizing]{revitalize}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: FKye2IP9hJ5KVPIB
     _key: "!items.effects!5284d973f4af48c2.FKye2IP9hJ5KVPIB"
@@ -426,7 +386,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Oy5UYuOjtNqRqgBn
     _key: "!items.effects!5284d973f4af48c2.Oy5UYuOjtNqRqgBn"
@@ -471,7 +430,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 249fb1db4a91e504
 img: systems/teriock/src/icons/creatures/zombie-lord.webp
@@ -479,23 +437,16 @@ name: Zombie Lord
 system:
   appearance: <p>Humanoid corpses, often rotting or otherwise falling apart.</p>
   br: 6
-  competence:
-    raw: 1
   description: >-
     <p>Zombie lords augment @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{zombie} hordes and make even the
     most basic undead become a threat.</p>
   identifier: zombie-lord
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 8
       number:
         raw: "1"

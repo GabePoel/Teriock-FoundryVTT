@@ -39,7 +39,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2zWFQsq08CfIfiY2
     _key: "!items.effects!872da86f8305f7e3.2zWFQsq08CfIfiY2"
@@ -69,7 +68,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: 7yxPS7o9VPOTznnN
     _key: "!items.effects!872da86f8305f7e3.7yxPS7o9VPOTznnN"
@@ -99,7 +97,6 @@ effects:
         score:
           attribute: snk
           value: 4
-    transfer: true
     type: ability
   - _id: RvWoUBJ11gz9Zq8W
     _key: "!items.effects!872da86f8305f7e3.RvWoUBJ11gz9Zq8W"
@@ -142,7 +139,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -157,7 +153,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 1OcpbIYHppPPMVaZ
     _key: "!items.effects!872da86f8305f7e3.1OcpbIYHppPPMVaZ"
@@ -169,29 +164,19 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -202,9 +187,6 @@ effects:
         hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: e4sHxoTHzZMkDVXv
     _key: "!items.effects!872da86f8305f7e3.e4sHxoTHzZMkDVXv"
@@ -234,7 +216,6 @@ effects:
         score:
           attribute: str
           value: -3
-    transfer: true
     type: ability
   - _id: 9tpIoLOaH5ZVrazX
     _key: "!items.effects!872da86f8305f7e3.9tpIoLOaH5ZVrazX"
@@ -250,7 +231,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -263,8 +243,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: DYhReeIyuF9BcbEZ
     _key: "!items.effects!872da86f8305f7e3.DYhReeIyuF9BcbEZ"
@@ -280,7 +258,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -293,8 +270,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: I8Hh3TGfp0PGdBvj
     _key: "!items.effects!872da86f8305f7e3.I8Hh3TGfp0PGdBvj"
@@ -333,7 +308,6 @@ effects:
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
       targets:
         - self
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/creatures/lightning-bug.webp
@@ -341,8 +315,6 @@ name: Lightning Bug
 system:
   appearance: <p>Bright blue and glowing bugs.</p>
   br: 6
-  competence:
-    raw: 1
   description: >-
     <p>These creatures are found in the jungles and swamps of the Oni Islands. They seem to be attracted to conductive
     metal of any kind, gathering charge from the air. Often times these bugs create a grater charge than they can hold
@@ -353,16 +325,13 @@ system:
     @Identifier[creature:deathcap-toadstool]{deathcap toadstools} that prey on them.</p>
   identifier: lightning-bug
   size:
-    enabled: true
     value: 0.25
   statDice:
     hp:
-      disabled: false
       faces: 2
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 4
       number:
         raw: "1"

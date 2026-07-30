@@ -10,11 +10,7 @@ effects:
     system:
       automations:
         - _id: 067cb526e2f9e98f
-          executor: false
-          multi: false
-          relation: include
           status: ethereal
-          target: false
           type: status
       competence:
         raw: 1
@@ -34,7 +30,6 @@ effects:
       form: special
       identifier: ethereal-shift
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
       powerSources:
@@ -46,7 +41,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: JzxU0RgvQzNxSIT6
     _key: "!items.effects!7e8536c74ff39e35.JzxU0RgvQzNxSIT6"
@@ -83,7 +77,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2L3MIUQQcR4U0Nk8
     _key: "!items.effects!7e8536c74ff39e35.2L3MIUQQcR4U0Nk8"
@@ -96,8 +89,6 @@ effects:
         - _id: KwiYWSHcXERan3Q4
           activeQualifier: and(not(@status.down), not(@status.burned), not(@status.down), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -110,7 +101,6 @@ effects:
         - regeneration
       executionTime:
         base: passive
-      form: normal
       identifier: healing-factor
       interaction: manifest
       maneuver: passive
@@ -127,7 +117,6 @@ effects:
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Igg2MNlvfwjvXJeY
     _key: "!items.effects!7e8536c74ff39e35.Igg2MNlvfwjvXJeY"
@@ -143,7 +132,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: high-intelligence
       interaction: manifest
       maneuver: passive
@@ -157,7 +145,6 @@ effects:
         score:
           attribute: int
           value: 3
-    transfer: true
     type: ability
   - _id: Ki3YDAIqYHvsry4V
     _key: "!items.effects!7e8536c74ff39e35.Ki3YDAIqYHvsry4V"
@@ -173,7 +160,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -186,8 +172,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: YZjBNPfBCToCcnw2
     _key: "!items.effects!7e8536c74ff39e35.YZjBNPfBCToCcnw2"
@@ -203,7 +187,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -216,8 +199,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: pAxwK2wi9E2qanVv
     _key: "!items.effects!7e8536c74ff39e35.pAxwK2wi9E2qanVv"
@@ -233,7 +214,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -246,8 +226,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: okqp2s2orAuSQWpy
     _key: "!items.effects!7e8536c74ff39e35.okqp2s2orAuSQWpy"
@@ -263,7 +241,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: sneaky
       interaction: manifest
       maneuver: passive
@@ -277,7 +254,6 @@ effects:
         score:
           attribute: snk
           value: 1
-    transfer: true
     type: ability
   - _id: Woun6FvcBPcWYfcO
     _key: "!items.effects!7e8536c74ff39e35.Woun6FvcBPcWYfcO"
@@ -301,7 +277,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: unbreachability
       interaction: manifest
       maneuver: passive
@@ -315,7 +290,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nRK5u7hC7rcefSJk
     _key: "!items.effects!7e8536c74ff39e35.nRK5u7hC7rcefSJk"
@@ -367,7 +341,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: GSQKblJqGFbnSuPJ
     _key: "!items.effects!7e8536c74ff39e35.GSQKblJqGFbnSuPJ"
@@ -412,7 +385,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: RTaAhJriJTz7FP52
     _key: "!items.effects!7e8536c74ff39e35.RTaAhJriJTz7FP52"
@@ -424,8 +396,6 @@ effects:
       _sup: JzxU0RgvQzNxSIT6
       automations:
         - _id: iAyFzPzJgTNeDbbH
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -434,8 +404,6 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
@@ -443,14 +411,8 @@ effects:
         base: a2
       form: special
       identifier: mana-drain-grasp
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -462,9 +424,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: uBgiYqB5TLenhyoz
     _key: "!items.effects!7e8536c74ff39e35.uBgiYqB5TLenhyoz"
@@ -501,7 +460,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: JooszuTkbbYl3zCf
     _key: "!items.effects!7e8536c74ff39e35.JooszuTkbbYl3zCf"
@@ -539,7 +497,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EaeO2TdZF1JxmPFu
     _key: "!items.effects!7e8536c74ff39e35.EaeO2TdZF1JxmPFu"
@@ -570,7 +527,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -584,7 +540,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 73a4af85b706784e
 img: systems/teriock/src/icons/creatures/crypt-sentinel.webp
@@ -592,23 +547,16 @@ name: Crypt Sentinel
 system:
   appearance: <p>Transparent skeletons.</p>
   br: 12
-  competence:
-    raw: 1
   description: >-
     <p>Dangerous guardians of tombs and relics, these creatures are sometimes recruited as deadly warriors for
     @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} armies.</p>
   identifier: crypt-sentinel
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

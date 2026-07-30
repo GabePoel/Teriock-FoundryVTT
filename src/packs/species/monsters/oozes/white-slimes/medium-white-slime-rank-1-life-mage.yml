@@ -12,13 +12,8 @@ effects:
     system:
       automations:
         - _id: deef79aff6bd9b44
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:hibernation
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -43,7 +38,6 @@ effects:
           triggers:
             - dawn
           type: trigger
-      form: normal
       identifier: hibernation-shield
       interaction: manifest
       maneuver: reactive
@@ -61,10 +55,7 @@ effects:
       requirements: <p>@Identifier[core:targets]{Target} must be @Identifier[condition:down]{down}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
       trigger: <p>You go @Identifier[condition:down]{down}.</p>
-    transfer: true
     type: ability
   - _id: JhNbjfOBP4vq6fDO
     _key: "!items.effects!QZdREBkNATu1KYz9.JhNbjfOBP4vq6fDO"
@@ -81,12 +72,8 @@ effects:
           formula: (@h)d4[magic holy]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
           status: lighted
           target: true
           type: status
@@ -98,36 +85,22 @@ effects:
         unit: minute
       elements:
         - life
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
-          method: automatic
-          relation: target
-          skip: 0
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
           timing: end
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: light-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -142,9 +115,6 @@ effects:
           until the end of their next @Identifier[core:turns]{turn}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: oGy0WqGTsolvIjRT
     _key: "!items.effects!QZdREBkNATu1KYz9.oGy0WqGTsolvIjRT"
@@ -155,40 +125,26 @@ effects:
     system:
       automations:
         - _id: T6TT7QmjNrgdtZT7
-          consumeStatDice: true
-          forHarm: false
           heighten:
             - 0
-          noStatDice: false
           type: heal
         - _id: SzYkTqcVV5k6LOGg
           consumeStatDice: false
-          forHarm: false
           heighten:
             - 1
-          noStatDice: false
           type: heal
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - healing
       elements:
         - life
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, @Identifier[core:healing]{heal}
         the @Identifier[core:targets]{target} again. This does not consume their @Wiki[Core:Hit Dice]{hit dice}
         (including the @Wiki[Core:Hit Dice]{hit dice} for the initial @Identifier[core:healing]{healing}).</p>
       identifier: medicine-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -199,9 +155,6 @@ effects:
         hit: <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: DuPrz66O8MibMz5a
     _key: "!items.effects!QZdREBkNATu1KYz9.DuPrz66O8MibMz5a"
@@ -215,18 +168,14 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: okAIhhAxPRM1XaZt
           consumeStatDice: false
           forHarm: true
-          noStatDice: false
           type: heal
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - healing
         - revival
@@ -237,7 +186,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, target can have been
         @Identifier[condition:dead]{dead} for an additional 24 hours. If @Identifier[core:targets]{target} is
@@ -275,9 +223,6 @@ effects:
       ritual: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: ab73d338653acde3
 img: systems/teriock/src/icons/ranks/rank-1-life-mage.webp
@@ -286,8 +231,6 @@ system:
   _sup: f2af1b10dce17eb3
   archetype: mage
   class: life-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true healers of the world, they are committed to sustaining all life. The truly altruistic characters,
     @Identifier[class:life-mage]{Life Mages} are known to enter battles on neither side, healing anyone and everyone who
@@ -296,14 +239,11 @@ system:
     troops, healing when needed. If you are playing a @Identifier[class:life-mage]{Life Mage} be helpful, kind and
     loving, protective but committed to saving lives and fighting death.</p>
   identifier: rank-1-life-mage
-  innate: false
   maxAv: 0
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

@@ -41,20 +41,17 @@ effects:
           value: 1d8
         - _id: 29b275994cf9f5b1
           formula: 1d4
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
             - 2
           formula: 1d6
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d8
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -63,7 +60,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: bite
       interaction: manifest
       maneuver: passive
@@ -82,7 +78,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: RlTPk8xo4BdEspOn
     _key: "!items.effects!efae73b9e1536f04.RlTPk8xo4BdEspOn"
@@ -93,11 +88,7 @@ effects:
     system:
       automations:
         - _id: 18537e76761a45dc
-          executor: false
-          multi: false
-          relation: include
           status: blind
-          target: false
           type: status
       competence:
         raw: 1
@@ -107,28 +98,14 @@ effects:
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: blinding-spit
-      interaction: attack
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[condition:blind]{blind}.</p>
-      piercing:
-        raw: 1
       powerSources:
         - martial
       range:
@@ -136,7 +113,6 @@ effects:
         unit: ft
       targets:
         - vitals
-    transfer: true
     type: ability
   - _id: G7V0UyRuG87IpBx9
     _key: "!items.effects!efae73b9e1536f04.G7V0UyRuG87IpBx9"
@@ -166,7 +142,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: pxLDtkdwmIe5nuzz
     _key: "!items.effects!efae73b9e1536f04.pxLDtkdwmIe5nuzz"
@@ -189,7 +164,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: endurance
       interaction: manifest
       maneuver: passive
@@ -204,7 +178,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Gslzp6T9uWQhFs1E
     _key: "!items.effects!efae73b9e1536f04.Gslzp6T9uWQhFs1E"
@@ -220,7 +193,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-carrying-capacity
       interaction: manifest
       maneuver: passive
@@ -234,7 +206,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: 2KPdTeDaU8IPp0it
     _key: "!items.effects!efae73b9e1536f04.2KPdTeDaU8IPp0it"
@@ -250,7 +221,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -263,8 +233,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: 3IpDQdY9y1dqDbKt
     _key: "!items.effects!efae73b9e1536f04.3IpDQdY9y1dqDbKt"
@@ -280,7 +248,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -293,8 +260,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 2QzNXvDUmGx4C8UV
     _key: "!items.effects!efae73b9e1536f04.2QzNXvDUmGx4C8UV"
@@ -310,7 +275,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -323,8 +287,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: oymh7nnnTCntIscu
     _key: "!items.effects!efae73b9e1536f04.oymh7nnnTCntIscu"
@@ -340,7 +302,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: snow-native
       interaction: manifest
       maneuver: passive
@@ -354,7 +315,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: eQBeX9Gn9ubugbQb
     _key: "!items.effects!efae73b9e1536f04.eQBeX9Gn9ubugbQb"
@@ -366,7 +326,6 @@ effects:
       _sup: oymh7nnnTCntIscu
       affinities:
         - _id: 2bRuEBCnQpoZNOfa
-          amount: 1
           category: other
           type: takeDeboost
           value: Arctic Weather
@@ -377,7 +336,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: arctic-resilience
       interaction: manifest
       maneuver: passive
@@ -389,7 +347,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: M1oMJcfFx4sZDGTk
     _key: "!items.effects!efae73b9e1536f04.M1oMJcfFx4sZDGTk"
@@ -418,7 +375,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: agile
       interaction: manifest
       limitation: <p>Arctic terrain only.</p>
@@ -431,7 +387,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: a37e0f96dceceb97
 img: systems/teriock/src/icons/creatures/snow-camel.webp
@@ -439,23 +394,18 @@ name: Snow Camel
 system:
   appearance: <p>White fuzzy @Identifier[creature:camel]{camels}.</p>
   br: 4
-  competence:
-    raw: 1
   description: >-
     <p>These large beasts are used by the @Identifier[creature:halfling]{halfling} and
     @Identifier[creature:human]{human} nomads of the far north as steads and sources of cloth.</p>
   identifier: snow-camel
   size:
-    enabled: true
     value: 4
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

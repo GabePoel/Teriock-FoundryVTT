@@ -30,7 +30,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: digging
       interaction: manifest
       maneuver: passive
@@ -42,7 +41,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: PALUH4VHW0Bkjj0f
     _key: "!items.effects!fe6cfc379b2f057b.PALUH4VHW0Bkjj0f"
@@ -59,25 +57,11 @@ effects:
           value: Disruped Ability
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       costs:
@@ -89,13 +73,8 @@ effects:
       duration:
         raw: "1"
         unit: hour
-      executionTime:
-        base: a1
-      featSaveAttribute: mov
-      form: normal
       identifier: disruption-aura
       interaction: feat
-      maneuver: active
       overview:
         proficient: <p>This may be triggered by @Identifier[power:basic-abilities]{basic abilities} as well.</p>
       powerSources:
@@ -109,14 +88,11 @@ effects:
           @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>Another creature within @Identifier[core:range]{range} uses a non-@Identifier[power:basic-abilities]{basic}
         @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive abilities]{reactive ability} that isn't a
         @Wiki[Category:Spells]{spell} against a different creature or some @Pack[teriock.equipment]{equipment} that
         different creature @Identifier[keyword:bearing]{bares}.</p>
-    transfer: true
     type: ability
   - _id: hClIcslXMdVAbboT
     _key: "!items.effects!fe6cfc379b2f057b.hClIcslXMdVAbboT"
@@ -146,7 +122,6 @@ effects:
         score:
           attribute: str
           value: -1
-    transfer: true
     type: ability
   - _id: fRu7up27opGP4IHc
     _key: "!items.effects!fe6cfc379b2f057b.fRu7up27opGP4IHc"
@@ -162,7 +137,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -175,8 +149,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: c3lKwvRkYjQgQR3X
     _key: "!items.effects!fe6cfc379b2f057b.c3lKwvRkYjQgQR3X"
@@ -192,7 +164,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -205,8 +176,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 45Yl9h6tdIFT5kae
     _key: "!items.effects!fe6cfc379b2f057b.45Yl9h6tdIFT5kae"
@@ -222,7 +191,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -235,8 +203,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: aaBQ3rOpTx0FjWY3
     _key: "!items.effects!fe6cfc379b2f057b.aaBQ3rOpTx0FjWY3"
@@ -266,7 +232,6 @@ effects:
         score:
           attribute: int
           value: -3
-    transfer: true
     type: ability
   - _id: 5FmSAeY6Y8gWOWG5
     _key: "!items.effects!fe6cfc379b2f057b.5FmSAeY6Y8gWOWG5"
@@ -282,7 +247,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: water-native
       interaction: manifest
       maneuver: passive
@@ -296,7 +260,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: XnCDmEb5ihwL7Awe
     _key: "!items.effects!fe6cfc379b2f057b.XnCDmEb5ihwL7Awe"
@@ -326,7 +289,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: swimming
       interaction: manifest
       maneuver: passive
@@ -340,7 +302,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2jc8BMPeJEScHRiz
     _key: "!items.effects!fe6cfc379b2f057b.2jc8BMPeJEScHRiz"
@@ -357,7 +318,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: diving
       interaction: manifest
       maneuver: passive
@@ -378,7 +338,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 9742924ba797ce77
 img: systems/teriock/src/icons/creatures/sea-goblin.webp
@@ -386,23 +345,18 @@ name: Sea Goblin
 system:
   appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
   br: 2
-  competence:
-    raw: 1
   description: >-
     <p>@UUID[Compendium.teriock.tables.RollTable.9742924ba797ce77]{Goblins} have only a loose grasp on reality and are
     easily fooled. In combat, they prefer to attack in large numbers.</p>
   identifier: sea-goblin
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

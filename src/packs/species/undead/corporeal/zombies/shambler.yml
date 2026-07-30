@@ -29,7 +29,6 @@ effects:
         score:
           attribute: snk
           value: -1
-    transfer: true
     type: ability
   - _id: yGrrQqNGs4fwdHcq
     _key: "!items.effects!1d9d0c02914b9f49.yGrrQqNGs4fwdHcq"
@@ -59,7 +58,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: NcvhqFQGRPBeZShe
     _key: "!items.effects!1d9d0c02914b9f49.NcvhqFQGRPBeZShe"
@@ -96,7 +94,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tg2Cfkn6fAetrHew
     _key: "!items.effects!1d9d0c02914b9f49.tg2Cfkn6fAetrHew"
@@ -112,7 +109,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       limitation: <p>In combat only.</p>
@@ -126,8 +122,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: BQC0TyrY54NOpQZG
     _key: "!items.effects!1d9d0c02914b9f49.BQC0TyrY54NOpQZG"
@@ -143,7 +137,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -156,8 +149,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: H9YhXVTTj0rKPiPR
     _key: "!items.effects!1d9d0c02914b9f49.H9YhXVTTj0rKPiPR"
@@ -173,7 +164,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -186,8 +176,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: 5VX9FaaK1o3nCwGm
     _key: "!items.effects!1d9d0c02914b9f49.5VX9FaaK1o3nCwGm"
@@ -217,7 +205,6 @@ effects:
         score:
           attribute: mov
           value: -1
-    transfer: true
     type: ability
   - _id: j9Wi8jzP79wewvpS
     _key: "!items.effects!1d9d0c02914b9f49.j9Wi8jzP79wewvpS"
@@ -229,20 +216,9 @@ effects:
       automations:
         - _id: 7400b41f20d9f100
           activeQualifier: not(@status.down)
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
           targeting: false
           trigger: execute
@@ -273,9 +249,6 @@ effects:
       requirements: >-
         <p>You are @Identifier[rule:up]{up}. Only @Identifier[core:targets]{targets}
         @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{zombies}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: hEHOEH7LYMdBQf8Q
     _key: "!items.effects!1d9d0c02914b9f49.hEHOEH7LYMdBQf8Q"
@@ -312,7 +285,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: UfACHXKuRBRGmIXA
     _key: "!items.effects!1d9d0c02914b9f49.UfACHXKuRBRGmIXA"
@@ -357,7 +329,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: t7Z7OnmCVLAGHjYr
     _key: "!items.effects!1d9d0c02914b9f49.t7Z7OnmCVLAGHjYr"
@@ -395,7 +366,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: N8QSrtP5JvdVtDYD
     _key: "!items.effects!1d9d0c02914b9f49.N8QSrtP5JvdVtDYD"
@@ -426,7 +396,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -440,7 +409,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nYUjHhaFy9dnMLC4
     _key: "!items.effects!1d9d0c02914b9f49.nYUjHhaFy9dnMLC4"
@@ -452,8 +420,6 @@ effects:
       _sup: NcvhqFQGRPBeZShe
       automations:
         - _id: xreyNK2IzDp9qCUE
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -462,23 +428,13 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
-      executionTime:
-        base: a1
       form: special
       identifier: mana-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -490,9 +446,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 7uW7sozVyJdI21N4
     _key: "!items.effects!1d9d0c02914b9f49.7uW7sozVyJdI21N4"
@@ -544,7 +497,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 249fb1db4a91e504
 img: systems/teriock/src/icons/creatures/shambler.webp
@@ -552,23 +504,16 @@ name: Shambler
 system:
   appearance: <p>Like @Identifier[creature:zombie]{zombies}, but with occasional bursts of speed in combat.</p>
   br: 10
-  competence:
-    raw: 1
   description: >-
     <p>These strange creatures move with the shuffling gate of a @Identifier[creature:zombie]{zombie} and are sometimes
     fatally mistaken for one.</p>
   identifier: shambler
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

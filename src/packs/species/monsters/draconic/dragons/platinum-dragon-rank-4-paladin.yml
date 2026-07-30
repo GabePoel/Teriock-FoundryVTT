@@ -18,7 +18,6 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - null
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -33,35 +32,21 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - healing
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, @Identifier[core:healing]{heal}
         the @Identifier[core:targets]{target} again. This does not consume their @Wiki[Core:Hit Dice]{hit dice}
         (including the @Wiki[Core:Hit Dice]{hit dice} for the initial @Identifier[core:healing]{healing}).</p>
       identifier: miraculous-recovery
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - divine
-      range:
-        unit: contact
       results:
         critHit: <p>Double the amount of times target @Identifier[core:healing]{heals}.</p>
         hit: <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 1cG0jJ1CR42WRMxp
     _key: "!items.effects!PT4MX18MtzzxOPRU.1cG0jJ1CR42WRMxp"
@@ -81,7 +66,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: motive-discovery
       interaction: manifest
       maneuver: passive
@@ -97,7 +81,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: a1ojWt4MYcXMJGJQ
     _key: "!items.effects!PT4MX18MtzzxOPRU.a1ojWt4MYcXMJGJQ"
@@ -123,8 +106,6 @@ effects:
             formula: "1"
             type: formula
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
       executionTime:
@@ -132,7 +113,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: detect-alignment
       interaction: manifest
       maneuver: slow
@@ -151,7 +131,6 @@ effects:
       targets:
         - creature
         - item
-    transfer: true
     type: ability
   - _id: RBdkA0zKjqawQvKe
     _key: "!items.effects!PT4MX18MtzzxOPRU.RBdkA0zKjqawQvKe"
@@ -163,39 +142,18 @@ effects:
       _sup: 1cG0jJ1CR42WRMxp
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
-          regionType: circle
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       delivery: aura
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
-      executionTime:
-        base: a1
       featSaveAttribute: unp
-      form: normal
       identifier: sense-motive
       interaction: feat
-      maneuver: active
       powerSources:
         - divine
       range:
@@ -208,9 +166,6 @@ effects:
         save: <p>You do not learn the @Identifier[core:targets]{target's} disposition towards you and your party.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-paladin.webp
@@ -219,8 +174,6 @@ system:
   _sup: 94e2340ae112dfa8
   archetype: warrior
   class: paladin
-  competence:
-    raw: 1
   description: >-
     <p>The least martial of the @Identifier[archetype:warrior]{warriors}, their outlook on life is that of the combat
     medic, focusing on keeping others alive on the front lines. @Identifier[class:paladin]{Paladins} are often leaders,
@@ -230,14 +183,11 @@ system:
     help those in need and do what is right. If you are a @Identifier[class:paladin]{Paladin} be righteous, concerned
     for others, and take charge.</p>
   identifier: rank-4-paladin
-  innate: false
   maxAv: 3
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

@@ -10,11 +10,7 @@ effects:
     system:
       automations:
         - _id: 96a33dac897ee269
-          executor: false
-          multi: false
-          relation: include
           status: defyingDeath
-          target: false
           type: status
       competence:
         raw: 1
@@ -24,7 +20,6 @@ effects:
         unit: minute
       executionTime:
         base: r1
-      form: normal
       identifier: defy-death
       interaction: manifest
       maneuver: reactive
@@ -40,7 +35,6 @@ effects:
       targets:
         - self
       trigger: <p>You would @Identifier[condition:down]{drop}.</p>
-    transfer: true
     type: ability
   - _id: xN485xe1kx4Jdl8f
     _key: "!items.effects!72802936189f947f.xN485xe1kx4Jdl8f"
@@ -71,7 +65,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: digging
       interaction: manifest
       maneuver: passive
@@ -83,7 +76,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Cf85ljLMSz9GlJpc
     _key: "!items.effects!72802936189f947f.Cf85ljLMSz9GlJpc"
@@ -113,7 +105,6 @@ effects:
         score:
           attribute: str
           value: -1
-    transfer: true
     type: ability
   - _id: LqrfoVvElUkPyiB9
     _key: "!items.effects!72802936189f947f.LqrfoVvElUkPyiB9"
@@ -129,7 +120,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -142,8 +132,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: kWR4wbnUih9aWtoi
     _key: "!items.effects!72802936189f947f.kWR4wbnUih9aWtoi"
@@ -159,7 +147,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -172,8 +159,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: q4c5A9Nq4s7IymWJ
     _key: "!items.effects!72802936189f947f.q4c5A9Nq4s7IymWJ"
@@ -189,7 +174,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -202,8 +186,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: dDKGTgj75gV99yxF
     _key: "!items.effects!72802936189f947f.dDKGTgj75gV99yxF"
@@ -233,7 +215,6 @@ effects:
         score:
           attribute: int
           value: -3
-    transfer: true
     type: ability
   - _id: StZ0VqZDSYmx4rPq
     _key: "!items.effects!72802936189f947f.StZ0VqZDSYmx4rPq"
@@ -245,59 +226,31 @@ effects:
       automations:
         - _id: b4960732f0b9ed9f
           executor: true
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "1"
         unit: minute
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
-          timing: start
           type: combat
-      form: normal
       identifier: threat
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} becomes @Identifier[condition:frightened]{frightened}.</p>
@@ -305,7 +258,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
 folder: 9742924ba797ce77
 img: systems/teriock/src/icons/creatures/wood-goblin.webp
@@ -313,23 +265,18 @@ name: Wood Goblin
 system:
   appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
   br: 2
-  competence:
-    raw: 1
   description: >-
     <p>@UUID[Compendium.teriock.tables.RollTable.9742924ba797ce77]{Goblins} have only a loose grasp on reality and are
     easily fooled. In combat, they prefer to attack in large numbers.</p>
   identifier: wood-goblin
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

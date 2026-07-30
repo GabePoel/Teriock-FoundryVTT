@@ -9,37 +9,26 @@ system:
         - 0
       formula: 1d6[mana]
       impact: drain
-      merge: true
       type: roll
     - _id: 42c1a8a5aeb16ded
       competencies:
         - 1
       formula: 1d8[mana]
       impact: drain
-      merge: true
       type: roll
     - _id: b2b2c506da712b40
       competencies:
         - 2
       formula: 1d10[mana]
       impact: drain
-      merge: true
       type: roll
-  competence:
-    raw: 0
-  delivery: weapon
   duration:
     raw: "24"
     unit: hour
   effectTypes:
     - draining
     - poison
-  executionTime:
-    base: a1
-  form: normal
   identifier: mana-drain-poison-strike
-  interaction: attack
-  maneuver: active
   overview:
     fluent: >-
       <p>The @Identifier[condition:poisoned]{poison} instead deals [[/drain 1d10[mana]]]
@@ -47,18 +36,11 @@ system:
     proficient: >-
       <p>The @Identifier[condition:poisoned]{poison} instead deals [[/drain 1d8[mana]]]
       @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
       @Identifier[condition:poisoned]{poison} deals [[/drain 1d6[mana]]]
       @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

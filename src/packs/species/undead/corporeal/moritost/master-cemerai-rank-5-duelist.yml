@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: iaido
       interaction: manifest
       maneuver: passive
@@ -39,7 +38,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: BTg0NGa5swlixgtF
     _key: "!items.effects!4xIadyNIsAKhRHYr.BTg0NGa5swlixgtF"
@@ -55,12 +53,8 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           formula: 1d6[spiritual]
-          impact: damage
           type: roll
         - _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
           status: lighted
           target: true
           type: status
@@ -75,13 +69,9 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: rebuke
       interaction: manifest
       maneuver: reactive
@@ -96,10 +86,7 @@ effects:
         unit: ft
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: <p>A creature forfeits a @Identifier[condition:dueling]{duel} with you.</p>
-    transfer: true
     type: ability
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/ranks/rank-5-duelist.webp
@@ -108,8 +95,6 @@ system:
   _sup: fe39a707e5e065ad
   archetype: warrior
   class: duelist
-  competence:
-    raw: 1
   description: >-
     <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for duels
     as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above any sort of
@@ -118,14 +103,11 @@ system:
     way. If you are a @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and confident in yourself.</p>
   flaws: <p>Duelists cannot use @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-5-duelist
-  innate: false
   maxAv: 4
   number: 5
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

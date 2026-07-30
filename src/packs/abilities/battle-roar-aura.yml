@@ -5,31 +5,17 @@ name: Battle Roar Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
       restriction:
         enabled: true
-        priority: 0
         type: sound
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: b4960732f0b9ed9f
       executor: true
-      relation: include
       status: frightened
-      target: false
       type: status
-  competence:
-    raw: 0
   costs:
     components:
       verbal:
@@ -47,25 +33,13 @@ system:
   endCondition: >-
     <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
   featSaveAttribute: int
-  form: normal
   identifier: battle-roar-aura
   interaction: feat
-  maneuver: active
   powerSources:
     - martial
   range:
@@ -74,7 +48,4 @@ system:
   requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
   results:
     fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

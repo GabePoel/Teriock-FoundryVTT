@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-nature-spells
       interaction: manifest
       maneuver: passive
@@ -41,7 +40,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: o51YzM1EY4vQpr4C
     _key: "!items.effects!51RvKm4nA0MiBm5i.o51YzM1EY4vQpr4C"
@@ -61,7 +59,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: nature-disciplines
       interaction: manifest
       maneuver: passive
@@ -91,7 +88,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: xgYGyZO5NTgfRnXr
     _key: "!items.effects!51RvKm4nA0MiBm5i.xgYGyZO5NTgfRnXr"
@@ -109,11 +105,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: branching-casting
       interaction: manifest
       maneuver: reactive
@@ -135,7 +128,6 @@ effects:
       trigger: >-
         <p>A @Wiki[Category:Spells]{spell} you cast affects at least one target other than @Wiki[Category:Self target
         spells]{yourself}.</p>
-    transfer: true
     type: ability
   - _id: y8ycv9QtXXzJdq1K
     _key: "!items.effects!51RvKm4nA0MiBm5i.y8ycv9QtXXzJdq1K"
@@ -147,12 +139,9 @@ effects:
       _sup: o51YzM1EY4vQpr4C
       automations:
         - _id: 4ReYeDgqGQpnJFk3
-          all: false
           automatic: false
-          expandTables: false
           local:
             qualifier: and(@ability, @spell, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -163,11 +152,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
-      form: normal
       identifier: territorial-casting
       interaction: manifest
       maneuver: reactive
@@ -182,7 +168,6 @@ effects:
       targets:
         - spell
       trigger: <p>Another creature moves within 5 feet of you.</p>
-    transfer: true
     type: ability
   - _id: BG2SCusJMxvoHH4G
     _key: "!items.effects!51RvKm4nA0MiBm5i.BG2SCusJMxvoHH4G"
@@ -193,30 +178,18 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Nature element spells]{nature spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-nature-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: a9tS8HgevgfnqVEm
     _key: "!items.effects!51RvKm4nA0MiBm5i.a9tS8HgevgfnqVEm"
@@ -227,23 +200,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Nature element spells]{nature spell} as though you were
         @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-nature-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: c602ce7a824494c1
 img: systems/teriock/src/icons/ranks/rank-4-nature-mage.webp
@@ -252,8 +216,6 @@ system:
   _sup: 91f0e3b123cfa7b8
   archetype: mage
   class: nature-mage
-  competence:
-    raw: 1
   description: >-
     <p>The enchanter of the woods, these wandering spell casters resemble Rangers in their wanderlust. More comfortable
     with @Wiki[Category:Animal creatures]{animals} than @Wiki[Category:Humanoid creatures]{people},
@@ -263,14 +225,11 @@ system:
     @Identifier[class:nature-mage]{Nature Mage} be reclusive, avoiding people if you can, happy in nature and eager to
     leave any civilization.</p>
   identifier: rank-4-nature-mage
-  innate: false
   maxAv: 0
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

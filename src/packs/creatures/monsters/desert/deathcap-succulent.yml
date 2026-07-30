@@ -19,35 +19,22 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - bag
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 71e51b18552837f1
-              display: {}
               formula: (2 + @h)d6
               impact: kill
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - killing
           elements:
             - necromancy
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill
             1d6]].</p>
           identifier: death-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -64,9 +51,6 @@ items:
               @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: e1x2QhXlu8UzzprX
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.e1x2QhXlu8UzzprX"
@@ -96,7 +80,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: ihvwxnwxzPKCz2n4
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.ihvwxnwxzPKCz2n4"
@@ -112,7 +95,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: desert-native
           interaction: manifest
           maneuver: passive
@@ -126,7 +108,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 9UNbTEz6uqv7D4oJ
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.9UNbTEz6uqv7D4oJ"
@@ -138,7 +119,6 @@ items:
           affinities:
             - _id: IX1B1awspdkdHmV9
               category: damageTypes
-              img: null
               type: immunity
               value: fire
           competence:
@@ -150,7 +130,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          form: normal
           identifier: fire-damage-immunity
           interaction: manifest
           maneuver: passive
@@ -162,7 +141,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: vo0z1oke3dZ8X5d4
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.vo0z1oke3dZ8X5d4"
@@ -174,7 +152,6 @@ items:
           affinities:
             - _id: t7spquliBLz5obV9
               category: effectTypes
-              img: null
               type: immunity
               value: lightning
           competence:
@@ -184,7 +161,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: lightning-immunity
           interaction: manifest
           maneuver: passive
@@ -198,7 +174,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: DsUnlp9878vRzWzs
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.DsUnlp9878vRzWzs"
@@ -228,7 +203,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: 7x02r29vvMl3qxm5
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.7x02r29vvMl3qxm5"
@@ -244,7 +218,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -257,8 +230,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: xLVduSurLr3ohlSR
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.xLVduSurLr3ohlSR"
@@ -288,7 +259,6 @@ items:
             score:
               attribute: per
               value: -1
-        transfer: true
         type: ability
       - _id: QRg853NX5TBaYSAY
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.QRg853NX5TBaYSAY"
@@ -318,7 +288,6 @@ items:
             score:
               attribute: mov
               value: -1
-        transfer: true
         type: ability
       - _id: u2YPGQwRXGOzViZj
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.u2YPGQwRXGOzViZj"
@@ -329,59 +298,32 @@ items:
         system:
           automations:
             - _id: 5d57231066693cee
-              executor: false
-              multi: false
-              relation: include
               status: snared
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             unit: unlimited
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               crit:
                 - 0
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
               crit:
                 - 1
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
               skip: 1
               timing: end
               type: combat
-          form: normal
           identifier: snare
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
@@ -389,7 +331,6 @@ items:
           standard: true
           targets:
             - leg
-        transfer: true
         type: ability
       - _id: C6nZ8kz7V0naYfYa
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.C6nZ8kz7V0naYfYa"
@@ -418,7 +359,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: agile
           interaction: manifest
           limitation: <p>Desert terrain only.</p>
@@ -431,7 +371,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: xpInwsn6gpvH4e7p
         _key: "!actors.items.effects!2f5f902b0f91aca3.2f5f902b0f91aca3.xpInwsn6gpvH4e7p"
@@ -448,7 +387,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: desert-resilience
           interaction: manifest
           maneuver: passive
@@ -462,7 +400,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/creatures/deathcap-succulent.webp
@@ -470,21 +407,16 @@ items:
     system:
       appearance: <p>Large hybrid cactus-@Identifier[creature:toad]{toads}. Deathcap succulents are red with black spots.</p>
       br: 6
-      competence:
-        raw: 1
       description: >-
         <p>Found originally in the Teriock Mists, [[lookup name style=lc]]s are very dangerous and have many uses when
         properly harvested by herbalists. They shoot spores of death when potential predators approach them.</p>
       identifier: deathcap-succulent
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d4
       traits:
         - animal
@@ -507,9 +439,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -517,7 +446,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 7zV2wGze9lzJ1jdD
         _key: "!actors.items.effects!2f5f902b0f91aca3.bQyR2bDNZ5TgIjvx.7zV2wGze9lzJ1jdD"
@@ -528,24 +456,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/wriggling-tentacle.webp
     name: Wriggling Tentacle
     system:
       _sup: 2f5f902b0f91aca3
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -553,20 +474,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Deathcap Succulent
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Deathcap Succulent
   ring:
     enabled: true
@@ -574,20 +486,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/deathcap-succulent.webp
   texture:
     src: systems/teriock/src/icons/creatures/deathcap-succulent.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: deathcap-succulent
   mp:
     value: 3
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

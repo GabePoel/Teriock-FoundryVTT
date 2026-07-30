@@ -9,29 +9,20 @@ system:
         - 1
       formula: 1d8[memory]
       impact: drain
-      merge: true
       type: roll
     - _id: 157afc517847f562
       formula: 1d6[memory]
       impact: drain
-      merge: true
       type: roll
     - _id: b2b2c506da712b40
       competencies:
         - 2
       formula: 1d10[memory]
       impact: drain
-      merge: true
       type: roll
     - _id: 743730f25f256b10
-      executor: false
-      relation: include
       status: poisoned
-      target: false
       type: status
-  competence:
-    raw: 0
-  delivery: weapon
   duration:
     raw: "24"
     unit: hour
@@ -40,12 +31,7 @@ system:
     - draining
     - mental
     - poison
-  executionTime:
-    base: a1
-  form: normal
   identifier: memory-drain-poison-strike
-  interaction: attack
-  maneuver: active
   overview:
     fluent: >-
       <p>The @Identifier[condition:poisoned]{poison} instead deals [[/drain 1d10[memory]]]
@@ -53,18 +39,11 @@ system:
     proficient: >-
       <p>The @Identifier[condition:poisoned]{poison} instead deals [[/drain 1d8[memory]]]
       @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
       @Identifier[condition:poisoned]{poison} deals [[/drain 1d6[memory]]]
       @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

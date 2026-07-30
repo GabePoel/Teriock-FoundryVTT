@@ -5,33 +5,15 @@ name: Empathic Aura
 system:
   automations:
     - _id: 7G7B61KmX055plbU
-      consumeStatDice: true
-      forHarm: false
-      noStatDice: false
       type: heal
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: 29b275994cf9f5b1
       formula: 1d6[magic]
-      impact: damage
-      merge: true
       type: roll
-  competence:
-    raw: 0
   costs:
     primary:
       hp:
@@ -41,21 +23,15 @@ system:
         formula: "1"
         type: formula
   delivery: aura
-  duration:
-    unit: instant
   effectTypes:
     - damaging
     - healing
     - regeneration
   elements:
     - nature
-  executionTime:
-    base: a1
   featSaveAttribute: unp
-  form: normal
   identifier: empathic-aura
   interaction: feat
-  maneuver: active
   overview:
     base: >-
       <p>As you execute [[lookup name]], choose either "damage" or "healing". The effect varies depending on what you
@@ -77,7 +53,4 @@ system:
       @Identifier[core:healing]{heal} them (depending on what you chose).</p>
   skill: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

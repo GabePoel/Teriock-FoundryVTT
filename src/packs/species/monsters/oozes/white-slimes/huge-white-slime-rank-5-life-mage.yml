@@ -30,7 +30,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: life-rotator-fluency
       interaction: manifest
       maneuver: passive
@@ -50,7 +49,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ARunLguXJBf7xHwi
     _key: "!items.effects!4JJQSHG7pQdYEG4Q.ARunLguXJBf7xHwi"
@@ -65,14 +63,10 @@ effects:
     system:
       automations:
         - _id: X1yoOCJGcyr8gR2X
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:light-ray
               - ability:medicine-ball
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -82,7 +76,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: life-spell-strikes
       interaction: manifest
       maneuver: passive
@@ -96,7 +89,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tPUxR6xxwbgm2oGB
     _key: "!items.effects!4JJQSHG7pQdYEG4Q.tPUxR6xxwbgm2oGB"
@@ -108,12 +100,8 @@ effects:
       _sup: ARunLguXJBf7xHwi
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -123,12 +111,8 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: spell-strike
       interaction: manifest
       limitation: >-
@@ -142,17 +126,12 @@ effects:
           was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
-    transfer: true
     type: ability
 folder: ab73d338653acde3
 img: systems/teriock/src/icons/ranks/rank-5-life-mage.webp
@@ -161,8 +140,6 @@ system:
   _sup: 7d2f7287eb26ac9f
   archetype: mage
   class: life-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true healers of the world, they are committed to sustaining all life. The truly altruistic characters,
     @Identifier[class:life-mage]{Life Mages} are known to enter battles on neither side, healing anyone and everyone who
@@ -171,14 +148,11 @@ system:
     troops, healing when needed. If you are playing a @Identifier[class:life-mage]{Life Mage} be helpful, kind and
     loving, protective but committed to saving lives and fighting death.</p>
   identifier: rank-5-life-mage
-  innate: false
   maxAv: 0
   number: 5
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

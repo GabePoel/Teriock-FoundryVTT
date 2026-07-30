@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-life-spells
       interaction: manifest
       maneuver: passive
@@ -41,7 +40,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: rOcOIi3HSAQOJwRg
     _key: "!items.effects!lD8RtJ6n7Js8olMU.rOcOIi3HSAQOJwRg"
@@ -61,7 +59,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: life-disciplines
       interaction: manifest
       maneuver: passive
@@ -91,7 +88,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: U6dYipqIWA0hMNvb
     _key: "!items.effects!lD8RtJ6n7Js8olMU.U6dYipqIWA0hMNvb"
@@ -103,12 +99,9 @@ effects:
       _sup: rOcOIi3HSAQOJwRg
       automations:
         - _id: HeyBF3KxuHVI6712
-          all: false
           automatic: false
-          expandTables: false
           local:
             qualifier: and(@ability, @spell, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -119,11 +112,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
-      form: normal
       identifier: emergency-casting
       interaction: manifest
       maneuver: reactive
@@ -138,7 +128,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are being @Identifier[core:attack-interaction]{attacked} by another creature.</p>
-    transfer: true
     type: ability
   - _id: DyvUEa9hhaYEFnCW
     _key: "!items.effects!lD8RtJ6n7Js8olMU.DyvUEa9hhaYEFnCW"
@@ -156,11 +145,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: sheltered-casting
       interaction: manifest
       maneuver: reactive
@@ -178,7 +164,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    transfer: true
     type: ability
   - _id: aLgkINGonafTLeo0
     _key: "!items.effects!lD8RtJ6n7Js8olMU.aLgkINGonafTLeo0"
@@ -189,30 +174,18 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Life element spells]{life spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-life-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: 6tpxURwwaJRriSlE
     _key: "!items.effects!lD8RtJ6n7Js8olMU.6tpxURwwaJRriSlE"
@@ -223,23 +196,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Life element spells]{life spell} as though you were
         @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-life-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: ab73d338653acde3
 img: systems/teriock/src/icons/ranks/rank-4-life-mage.webp
@@ -248,8 +212,6 @@ system:
   _sup: 7d2f7287eb26ac9f
   archetype: mage
   class: life-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true healers of the world, they are committed to sustaining all life. The truly altruistic characters,
     @Identifier[class:life-mage]{Life Mages} are known to enter battles on neither side, healing anyone and everyone who
@@ -258,14 +220,11 @@ system:
     troops, healing when needed. If you are playing a @Identifier[class:life-mage]{Life Mage} be helpful, kind and
     loving, protective but committed to saving lives and fighting death.</p>
   identifier: rank-4-life-mage
-  innate: false
   maxAv: 0
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

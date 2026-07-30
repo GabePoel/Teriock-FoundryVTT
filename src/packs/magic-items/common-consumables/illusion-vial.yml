@@ -8,8 +8,6 @@ effects:
     img: systems/teriock/src/icons/abilities/apply-illusion-vial.webp
     name: Apply Illusion Vial
     system:
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
@@ -22,7 +20,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       grantUse: true
       identifier: apply-illusion-vial
       interaction: manifest
@@ -34,13 +31,10 @@ effects:
           of a chosen @Pack[teriock.equipment]{mundane item} of same approximate size and shape.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it.</p>
       targets:
         - area
         - item
-    transfer: true
     type: ability
   - _id: Z8Q21X7QboeySzUT
     _key: "!items.effects!846dd7ab3a07c3da.Z8Q21X7QboeySzUT"
@@ -51,8 +45,6 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
         @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it
@@ -61,7 +53,6 @@ effects:
         instead @Identifier[property:destroyed]{destroyed}.</p>
       form: flaw
       identifier: fragile
-    transfer: true
     type: property
   - _id: x6sjcsIVaOkVZOFD
     _key: "!items.effects!846dd7ab3a07c3da.x6sjcsIVaOkVZOFD"
@@ -72,14 +63,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to steal through
         @Pack[teriock.abilities]{abilities} like @Identifier[ability:search]{Search}.</p>
       form: flaw
       identifier: searchable
-    transfer: true
     type: property
   - _id: VQDFXr0oJQZ7Waxe
     _key: "!items.effects!846dd7ab3a07c3da.VQDFXr0oJQZ7Waxe"
@@ -90,14 +78,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used in the same hand as a
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
       form: intrinsic
       identifier: small
-    transfer: true
     type: property
   - _id: S9AQYDOSzaIVGnM2
     _key: "!items.effects!846dd7ab3a07c3da.S9AQYDOSzaIVGnM2"
@@ -108,47 +93,25 @@ effects:
     system:
       automations:
         - _id: 7Au7nJxCWbxbYTsa
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
         - _id: fzwBRS0Kz9lHEqiZ
-          all: false
-          angle: "60"
           attachToToken: false
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: "@ability.expansion.range"
-          regionType: circle
           restriction:
             enabled: true
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: 0b0d1426453abb55
-          executor: false
-          multi: false
           relation: apply
           status: hidden
-          target: false
           type: status
         - _id: eIAodIUrptI2Dgrb
           impact: hide
-          morganti: false
           showDialog: true
           type: take
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
@@ -156,18 +119,14 @@ effects:
         unit: minute
       effectTypes:
         - illusion
-      executionTime:
-        base: a1
       expansion:
         range:
           raw: "10"
           unit: ft
         type: detonate
-      form: normal
       grantUse: true
       identifier: smash-illusion-vial
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>All @Pack[teriock.creatures]{creatures} and @Pack[teriock.equipment]{objects} within the area of effect are
@@ -185,8 +144,6 @@ effects:
           @Identifier[core:game-master]{GM}.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
@@ -195,35 +152,25 @@ effects:
         - area
         - creature
         - item
-    transfer: true
     type: ability
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/illusion-vial.webp
 name: Illusion Vial
 system:
-  attackPenalty: "-3"
-  competence:
-    raw: 0
   consumable: true
-  consumptionAmount: 1
   equipmentClasses:
     - containers
     - knickknacks
   equipmentType: bottle
   equipped: true
   identifier: illusion-vial
-  minStr: -3
   needsAttunement: false
   onUse:
     - 0kpdEF3S10TNNHSa
     - S9AQYDOSzaIVGnM2
   powerLevel: enchanted
-  quantity:
-    value: 1
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   weight: 1
 type: equipment

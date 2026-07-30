@@ -17,7 +17,6 @@ effects:
         - automatic
       executionTime:
         base: passive
-      form: normal
       identifier: acidic-blood
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       targets:
         - self
       trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
-    transfer: true
     type: ability
   - _id: EW9Gf6YIc7WSh8fU
     _key: "!items.effects!1bbd1a82d7a436b7.EW9Gf6YIc7WSh8fU"
@@ -60,7 +58,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: adrenaline
       interaction: manifest
       maneuver: passive
@@ -76,7 +73,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: sn0JuSlxENfI7yqI
     _key: "!items.effects!1bbd1a82d7a436b7.sn0JuSlxENfI7yqI"
@@ -92,7 +88,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -112,7 +107,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: Itvo3meZFUFYEirU
     _key: "!items.effects!1bbd1a82d7a436b7.Itvo3meZFUFYEirU"
@@ -142,7 +136,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: urQXFqNzOM5jNOSm
     _key: "!items.effects!1bbd1a82d7a436b7.urQXFqNzOM5jNOSm"
@@ -157,16 +150,12 @@ effects:
           display:
             label: Regain All HP
           impact: healing
-          morganti: false
-          showDialog: false
           type: take
         - _id: nHOGCKUblyJkPB7q
           amount: 999999
           display:
             label: Regain All MP
           impact: revitalizing
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -191,7 +180,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: dOrtMxOn58WNjWEs
     _key: "!items.effects!1bbd1a82d7a436b7.dOrtMxOn58WNjWEs"
@@ -207,7 +195,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -220,8 +207,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: i4pwEZk9lJKXiJNf
     _key: "!items.effects!1bbd1a82d7a436b7.i4pwEZk9lJKXiJNf"
@@ -237,7 +222,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -250,8 +234,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: QAi1DwNlJIAVjvve
     _key: "!items.effects!1bbd1a82d7a436b7.QAi1DwNlJIAVjvve"
@@ -265,42 +247,29 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -308,20 +277,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: tfQ5gYA3qDz0M3Fs
     _key: "!items.effects!1bbd1a82d7a436b7.tfQ5gYA3qDz0M3Fs"
@@ -337,7 +299,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: sneaky
       interaction: manifest
       maneuver: passive
@@ -351,7 +312,6 @@ effects:
         score:
           attribute: snk
           value: 1
-    transfer: true
     type: ability
   - _id: 7UEl85GANKmre2tW
     _key: "!items.effects!1bbd1a82d7a436b7.7UEl85GANKmre2tW"
@@ -375,7 +335,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: spell-immunity
       interaction: manifest
       maneuver: passive
@@ -388,7 +347,6 @@ effects:
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 75ud2t8cOPRD4yW3
     _key: "!items.effects!1bbd1a82d7a436b7.75ud2t8cOPRD4yW3"
@@ -406,7 +364,6 @@ effects:
       endCondition: <p>You make another @Identifier[core:attack-interaction]{attack}.</p>
       executionTime:
         base: r0
-      form: normal
       identifier: triumphant-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -421,7 +378,6 @@ effects:
       targets:
         - self
       trigger: <p>@Identifier[condition:down]{Dropping} an opponent.</p>
-    transfer: true
     type: ability
   - _id: KuIdvCyHl5uq1i54
     _key: "!items.effects!1bbd1a82d7a436b7.KuIdvCyHl5uq1i54"
@@ -432,20 +388,14 @@ effects:
     system:
       automations:
         - _id: 3KyeBPhhzYfwX8ch
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           type: heal
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - healing
       executionTime:
         base: r0
-      form: normal
       identifier: triumphant-healing-surge
       interaction: manifest
       maneuver: reactive
@@ -460,7 +410,6 @@ effects:
       targets:
         - self
       trigger: <p>@Identifier[condition:down]{Dropping} an opponent.</p>
-    transfer: true
     type: ability
   - _id: kc9fMJXyLzrvdwau
     _key: "!items.effects!1bbd1a82d7a436b7.kc9fMJXyLzrvdwau"
@@ -473,40 +422,21 @@ effects:
         - _id: ZR5M1EqyW9yIqfCp
           distance: "10"
           movementAction: walk
-          origin: executor
-          originBarrier: true
           type: move
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       delivery: aura
-      duration:
-        unit: instant
       effectTypes:
         - movement
       executionTime:
         base: r0
       featSaveAttribute: str
-      form: normal
       identifier: triumphant-knockback-aura
       interaction: feat
       maneuver: reactive
@@ -517,10 +447,7 @@ effects:
         unit: ft
       results:
         fail: <p>@Identifier[core:targets]{Target} is moved 10 feet away from you.</p>
-      targets:
-        - creature
       trigger: <p>@Identifier[condition:down]{Dropping} an opponent.</p>
-    transfer: true
     type: ability
   - _id: ASb5cMrLigQJlJdN
     _key: "!items.effects!1bbd1a82d7a436b7.ASb5cMrLigQJlJdN"
@@ -555,7 +482,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ocWZyS4DdLOSkLil
     _key: "!items.effects!1bbd1a82d7a436b7.ocWZyS4DdLOSkLil"
@@ -572,7 +498,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -586,7 +511,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: GfFNKuKkGqLk4q15
     _key: "!items.effects!1bbd1a82d7a436b7.GfFNKuKkGqLk4q15"
@@ -603,7 +527,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -624,7 +547,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
 folder: 79ea7764e9d236f0
 img: systems/teriock/src/icons/creatures/ogreboros.webp
@@ -679,8 +601,6 @@ system:
       trigger: updateDocument
       type: toggleChildren
   br: 14
-  competence:
-    raw: 1
   description: >-
     <p>These creatures haven't been seen in Teriock in hundreds of years and are sometimes thought to just be little
     more than a legend. [[lookup name]] may have other @Pack[teriock.abilities]{abilities} in addition to the ones
@@ -688,18 +608,15 @@ system:
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
   identifier: ogreboros
   size:
-    enabled: true
     max: 10
     min: 5
     value: 5
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "@species.size - 2"
     mp:
-      disabled: false
       faces: 2
       number:
         raw: "1"

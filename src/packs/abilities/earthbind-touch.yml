@@ -8,23 +8,13 @@ system:
       formula: (@h)d4[magic vine]
       heighten:
         - 1
-      impact: damage
-      merge: true
       type: roll
     - _id: 0b65894b82470568
-      executor: false
-      relation: include
       status: immobilized
-      target: false
       type: status
     - _id: 5812b63d828a0227
-      executor: false
-      relation: include
       status: grounded
-      target: false
       type: status
-  competence:
-    raw: 0
   delivery: hand
   duration:
     raw: "1"
@@ -34,33 +24,16 @@ system:
   endCondition: >-
     <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
-  form: normal
   heightened: >-
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
     1d4[magic vine]]] @Identifier[core:damage]{damage} as well.</p>
   identifier: earthbind-touch
-  interaction: attack
-  maneuver: active
-  piercing:
-    raw: 2
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
     hit: >-
@@ -68,7 +41,4 @@ system:
       @Identifier[condition:immobilized]{immobilized}.</p>
   spell: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

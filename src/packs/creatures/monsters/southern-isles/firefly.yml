@@ -18,10 +18,6 @@ items:
           affinities:
             - _id: VYVCQh90IYJBSK1s
               category: other
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: Non-Critical Attacks
           competence:
@@ -51,7 +47,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: bDHlekgGL08ejyRs
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.bDHlekgGL08ejyRs"
@@ -81,7 +76,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: q0eNC6Vvf4NP0eHn
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.q0eNC6Vvf4NP0eHn"
@@ -111,7 +105,6 @@ items:
             score:
               attribute: snk
               value: 4
-        transfer: true
         type: ability
       - _id: 7uQokUMWh4oZrIrl
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.7uQokUMWh4oZrIrl"
@@ -122,31 +115,19 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d4[magic fire]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           elements:
             - flame
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic fire]]] @Identifier[core:damage]{damage}.</p>
           identifier: fire-ball
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
           range:
@@ -159,9 +140,6 @@ items:
               @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: fLuDGgFgT5iRhKBw
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.fLuDGgFgT5iRhKBw"
@@ -174,7 +152,6 @@ items:
             - _id: xZIxOJyyEtQRrD73
               activeQualifier: not(@status.down)
               category: elements
-              img: null
               type: immunity
               value: flame
           competence:
@@ -201,7 +178,6 @@ items:
           requirements: <p>You are @Identifier[rule:up]{up}.</p>
           targets:
             - self
-        transfer: true
         type: ability
       - _id: lpTSgAfY5e4WjJ75
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.lpTSgAfY5e4WjJ75"
@@ -244,7 +220,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -259,7 +234,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Mtwf5TIHLvQtKgSe
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.Mtwf5TIHLvQtKgSe"
@@ -289,7 +263,6 @@ items:
             score:
               attribute: str
               value: -3
-        transfer: true
         type: ability
       - _id: AUlVSuUyHdHs9QWY
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.AUlVSuUyHdHs9QWY"
@@ -305,7 +278,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -318,8 +290,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: PVm3zTXQSi4EwJee
         _key: "!actors.items.effects!34e3b3aead96a91e.34e3b3aead96a91e.PVm3zTXQSi4EwJee"
@@ -335,7 +305,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -348,8 +317,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/creatures/firefly.webp
@@ -357,8 +324,6 @@ items:
     system:
       appearance: <p>Bright red and glowing bugs.</p>
       br: 7
-      competence:
-        raw: 1
       description: >-
         <p>These creatures are found in the jungles and swamps of the Oni Islands. They seem to be attracted to dry wood
         in which they eat, feed, and breed. They tend to attack and burn any dry wood they can see (including weapons).
@@ -366,14 +331,11 @@ items:
         toadstools} that prey on them.</p>
       identifier: firefly
       size:
-        enabled: true
         value: 0.25
       statDice:
         hp:
-          disabled: false
           formula: 1d2
         mp:
-          disabled: false
           formula: 1d4
       traits:
         - animal
@@ -383,12 +345,6 @@ items:
     type: species
 name: Firefly
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -399,9 +355,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/firefly.webp
   texture:
     src: systems/teriock/src/icons/creatures/firefly.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -409,10 +362,6 @@ system:
   identifier: firefly
   mp:
     value: 3
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

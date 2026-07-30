@@ -17,7 +17,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: necromancy-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: GF9CzLYvEuHeIKIm
     _key: "!items.effects!xYQ4daoPeD7pf9ha.GF9CzLYvEuHeIKIm"
@@ -83,7 +81,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: necromancy-rotators
       interaction: manifest
       maneuver: passive
@@ -113,7 +110,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 5JhwXMaYkj51eIb6
     _key: "!items.effects!xYQ4daoPeD7pf9ha.5JhwXMaYkj51eIb6"
@@ -196,7 +192,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: cIgsz0uC1TamLu9j
     _key: "!items.effects!xYQ4daoPeD7pf9ha.cIgsz0uC1TamLu9j"
@@ -252,7 +247,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: pAyD6SPpMb9R2Zss
     _key: "!items.effects!xYQ4daoPeD7pf9ha.pAyD6SPpMb9R2Zss"
@@ -280,8 +274,6 @@ effects:
               @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
             type: description
       delivery: sight
-      duration:
-        unit: instant
       elderSorcery: true
       executionTime:
         base: Long Rest
@@ -310,13 +302,10 @@ effects:
           @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       ritual: true
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6tAKo9OpEP5DbSoj
     _key: "!items.effects!xYQ4daoPeD7pf9ha.6tAKo9OpEP5DbSoj"
@@ -328,11 +317,7 @@ effects:
       _sup: GF9CzLYvEuHeIKIm
       automations:
         - _id: 067cb526e2f9e98f
-          executor: false
-          multi: false
-          relation: include
           status: ethereal
-          target: false
           type: status
       competence:
         raw: 1
@@ -352,7 +337,6 @@ effects:
       form: special
       identifier: ethereal-shift
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
       powerSources:
@@ -364,7 +348,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: sCkUzxguqpdXrs0e
     _key: "!items.effects!xYQ4daoPeD7pf9ha.sCkUzxguqpdXrs0e"
@@ -376,22 +359,12 @@ effects:
       _sup: GF9CzLYvEuHeIKIm
       automations:
         - _id: 3aed26608863c262
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:animate-dead
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 66d7ecce476652ad
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:zombify
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -407,13 +380,10 @@ effects:
         unit: hour
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       identifier: undead-reanimation
       interaction: manifest
       invoked: true
-      maneuver: active
       overview:
         base: <p>You gain @Identifier[ability:zombify]{Zombify} and @Identifier[ability:animate-dead]{Animate Dead}.</p>
       powerSources:
@@ -425,7 +395,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: g7SpayF8igKmmj2R
     _key: "!items.effects!xYQ4daoPeD7pf9ha.g7SpayF8igKmmj2R"
@@ -465,33 +434,22 @@ effects:
         unit: minute
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
       identifier: spirit-bury
-      interaction: attack
       invoked: true
-      maneuver: active
       overview:
         proficient: <p>This effect lasts 10 minutes instead of 1.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
       results:
         hit: <p>@Identifier[core:targets]{Target} cannot become @Identifier[condition:wisping]{wisping}.</p>
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: rnsDmeBUWZ3FWDeD
     _key: "!items.effects!xYQ4daoPeD7pf9ha.rnsDmeBUWZ3FWDeD"
@@ -503,12 +461,8 @@ effects:
       _sup: GF9CzLYvEuHeIKIm
       automations:
         - _id: PKZXkwmO94niPsUb
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@ability, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -520,8 +474,6 @@ effects:
           verbal:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       elements:
         - necromancy
       executionTime:
@@ -543,7 +495,6 @@ effects:
       targets:
         - self
       trigger: <p>You @Identifier[condition:dead]{die}.</p>
-    transfer: true
     type: ability
   - _id: VEM2txDCkxM7Uzeb
     _key: "!items.effects!xYQ4daoPeD7pf9ha.VEM2txDCkxM7Uzeb"
@@ -555,46 +506,19 @@ effects:
       _sup: GF9CzLYvEuHeIKIm
       automations:
         - _id: 34c83d4c84860906
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:fear-aura
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 3b2978862c7f9d50
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:fear-touch
-          multi: false
-          separate: false
           type: addDocuments
         - _id: JB09RCj8EnrKPqjG
           light:
-            alpha: 0.5
-            angle: 360
             animation:
-              intensity: 5
-              reverse: false
-              speed: 5
               type: sunburst
-            attenuation: 0.5
-            bright: 0
             color: "#9141ac"
-            coloration: 1
-            contrast: 0
-            darkness:
-              max: 1
-              min: 0
             dim: 0.01
-            luminosity: 0.5
-            negative: false
-            priority: 0
-            saturation: 0
-            shadows: 0
           type: light
       competence:
         raw: 1
@@ -609,12 +533,9 @@ effects:
         unit: hour
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       identifier: crown-of-fear
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>A small circle of glowing purple mist circles above your head. You gain
@@ -629,7 +550,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: c602ce7a824494c1
 img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
@@ -638,8 +558,6 @@ system:
   _sup: 6bdf88e06086c102
   archetype: mage
   class: necromancer
-  competence:
-    raw: 1
   description: >-
     <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery digging
     up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply see death as
@@ -648,14 +566,11 @@ system:
     unafraid, kill without remorse and be interested in @Identifier[condition:dead]{dead} bodies, close to death
     yourself, almost in another world.</p>
   identifier: rank-2-necromancer
-  innate: false
   maxAv: 0
   number: 2
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

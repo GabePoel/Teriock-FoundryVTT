@@ -19,7 +19,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: additional-life-rotators
       interaction: manifest
       maneuver: passive
@@ -35,7 +34,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: i5ClxMJqr4B84tsr
     _key: "!items.effects!8c729f062c7bed72.i5ClxMJqr4B84tsr"
@@ -54,7 +52,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-life-spells
       interaction: manifest
       maneuver: passive
@@ -74,7 +71,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: H7xLb8uTY3Fv0E7P
     _key: "!items.effects!8c729f062c7bed72.H7xLb8uTY3Fv0E7P"
@@ -115,8 +111,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       elderSorcery: true
       elements:
         - life
@@ -158,7 +152,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: si4IIiwmrSVb3KFR
     _key: "!items.effects!8c729f062c7bed72.si4IIiwmrSVb3KFR"
@@ -177,7 +170,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: life-disciplines
       interaction: manifest
       maneuver: passive
@@ -207,7 +199,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: fh4suOlumlxkn3jC
     _key: "!items.effects!8c729f062c7bed72.fh4suOlumlxkn3jC"
@@ -235,7 +226,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: life-rotator-fluency
       interaction: manifest
       maneuver: passive
@@ -255,7 +245,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: cyTxNCLIpZkWNZpB
     _key: "!items.effects!8c729f062c7bed72.cyTxNCLIpZkWNZpB"
@@ -269,14 +258,10 @@ effects:
     system:
       automations:
         - _id: X1yoOCJGcyr8gR2X
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:light-ray
               - ability:medicine-ball
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -286,7 +271,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: life-spell-strikes
       interaction: manifest
       maneuver: passive
@@ -300,7 +284,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: kg0QKTAVX1vMcucx
     _key: "!items.effects!8c729f062c7bed72.kg0QKTAVX1vMcucx"
@@ -319,25 +302,11 @@ effects:
           value: awakening
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: e1c7d7174b360e93
           competencies:
             - 0
@@ -357,11 +326,7 @@ effects:
           impact: sleep
           type: roll
         - _id: PXielxmkr3bcWsV4
-          executor: false
-          multi: false
-          relation: include
           status: asleep
-          target: false
           type: status
       competence:
         raw: 1
@@ -382,8 +347,6 @@ effects:
       elements:
         - life
       endCondition: <p>The break of dawn.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:
@@ -398,7 +361,6 @@ effects:
       identifier: swift-sleep-aura
       interaction: feat
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>A hypnotizing shimmer spreads through the air around you. Roll [[/sleep 1d8]] to determine the strength of
@@ -417,9 +379,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: lWx2e5ABlrh2Gem0
     _key: "!items.effects!8c729f062c7bed72.lWx2e5ABlrh2Gem0"
@@ -431,8 +390,6 @@ effects:
       _sup: byYbma8NDzi77Mh0
       automations:
         - _id: cCWrBymDkUeOHKmQ
-          all: false
-          attachDocuments: true
           automatic: false
           data: |-
             {
@@ -447,18 +404,11 @@ effects:
             }
           local:
             qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: g7vdRcjuuf35GPZ1
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:magelore
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 8v0Wg06rCbu8V2LX
           changes:
@@ -534,7 +484,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: kfrrXkFTu75MPRAa
     _key: "!items.effects!8c729f062c7bed72.kfrrXkFTu75MPRAa"
@@ -552,11 +501,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: sheltered-casting
       interaction: manifest
       maneuver: reactive
@@ -574,7 +520,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    transfer: true
     type: ability
   - _id: ZS1L4s2j7BCN04IT
     _key: "!items.effects!8c729f062c7bed72.ZS1L4s2j7BCN04IT"
@@ -586,12 +531,9 @@ effects:
       _sup: si4IIiwmrSVb3KFR
       automations:
         - _id: HeyBF3KxuHVI6712
-          all: false
           automatic: false
-          expandTables: false
           local:
             qualifier: and(@ability, @spell, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -602,11 +544,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
-      form: normal
       identifier: emergency-casting
       interaction: manifest
       maneuver: reactive
@@ -621,7 +560,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are being @Identifier[core:attack-interaction]{attacked} by another creature.</p>
-    transfer: true
     type: ability
   - _id: rYb61sC8vuse1j6h
     _key: "!items.effects!8c729f062c7bed72.rYb61sC8vuse1j6h"
@@ -633,12 +571,8 @@ effects:
       _sup: cyTxNCLIpZkWNZpB
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -648,12 +582,8 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: spell-strike
       interaction: manifest
       limitation: >-
@@ -667,17 +597,12 @@ effects:
           was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
-    transfer: true
     type: ability
   - _id: O5BK3Gz0jf9xyq50
     _key: "!items.effects!8c729f062c7bed72.O5BK3Gz0jf9xyq50"
@@ -688,30 +613,18 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Life element spells]{life spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-life-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: 4tApNQDJ4l2qvDnl
     _key: "!items.effects!8c729f062c7bed72.4tApNQDJ4l2qvDnl"
@@ -722,23 +635,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Life element spells]{life spell} as though you were
         @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-life-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: 2b70a453a734079b
 img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp
@@ -746,8 +650,6 @@ name: Rank 3 Life Mage
 system:
   archetype: mage
   class: life-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true healers of the world, they are committed to sustaining all life. The truly altruistic characters,
     @Identifier[class:life-mage]{Life Mages} are known to enter battles on neither side, healing anyone and everyone who
@@ -756,7 +658,6 @@ system:
     troops, healing when needed. If you are playing a @Identifier[class:life-mage]{Life Mage} be helpful, kind and
     loving, protective but committed to saving lives and fighting death.</p>
   identifier: rank-3-life-mage
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
@@ -764,13 +665,11 @@ system:
   number: 3
   statDice:
     hp:
-      disabled: false
       faces: 8
       formula: 1d8
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 12
       formula: 1d12
       number:

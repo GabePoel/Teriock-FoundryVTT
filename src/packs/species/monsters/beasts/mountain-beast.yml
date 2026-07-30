@@ -10,14 +10,9 @@ effects:
     system:
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: battle-charge
-      interaction: attack
       maneuver: reactive
       overview:
         base: >-
@@ -26,23 +21,16 @@ effects:
           class="note"><b>Note:</b> This ability can trigger in the middle of @Identifier[ability:move]{moving}. You
           could approach an enemy, trigger this ability, take an @Identifier[ability:opportunity-attack]{Opportunity
           Attack} against them, keep moving towards them, and trigger this ability again.</p>
-      piercing:
-        raw: 2
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
         hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
-    transfer: true
     type: ability
   - _id: e4SaDTxHPY9wICPr
     _key: "!items.effects!ebf5e0ba9af62699.e4SaDTxHPY9wICPr"
@@ -54,29 +42,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: ryKBTKBxM3uqOTJc
     _key: "!items.effects!ebf5e0ba9af62699.ryKBTKBxM3uqOTJc"
@@ -104,7 +80,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -118,7 +93,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: sngnqnZ1CNNFeCp5
     _key: "!items.effects!ebf5e0ba9af62699.sngnqnZ1CNNFeCp5"
@@ -134,7 +108,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -147,8 +120,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: eg0dsBhXXJtrE0il
     _key: "!items.effects!ebf5e0ba9af62699.eg0dsBhXXJtrE0il"
@@ -164,7 +135,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -177,8 +147,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 81mPfsNnDpfQYkMe
     _key: "!items.effects!ebf5e0ba9af62699.81mPfsNnDpfQYkMe"
@@ -194,7 +162,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -207,8 +174,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: XVnihSo8tWNBckSE
     _key: "!items.effects!ebf5e0ba9af62699.XVnihSo8tWNBckSE"
@@ -224,7 +189,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -237,8 +201,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: eHhdiHLb7HPBSjAG
     _key: "!items.effects!ebf5e0ba9af62699.eHhdiHLb7HPBSjAG"
@@ -251,43 +213,29 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           formula: 1d6
-          impact: damage
           type: roll
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: trample
-      interaction: attack
       maneuver: reactive
       overview:
         base: >-
           <p>If you use [[lookup name]] on a @Pack[teriock.creatures]{creature} at least one @Identifier[core:size]{size
           category} smaller than you, add [[/damage 1d6]] @Identifier[core:damage]{damage} to its
           @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
-      piercing:
-        raw: 2
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
-      targets:
-        - creature
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
-    transfer: true
     type: ability
 folder: f58e0946f732c09d
 img: systems/teriock/src/icons/creatures/mountain-beast.webp
@@ -295,20 +243,15 @@ name: Mountain Beast
 system:
   appearance: <p>Usually muscular and covered in shaggy fur. Ram-like horns.</p>
   br: 8
-  competence:
-    raw: 1
   identifier: mountain-beast
   size:
-    enabled: true
     value: 4
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

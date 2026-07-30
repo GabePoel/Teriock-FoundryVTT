@@ -5,14 +5,9 @@ name: Missile Dodge
 system:
   automations:
     - _id: 858320f85f928105
-      executor: false
-      relation: include
       status: missileDodging
-      target: false
       type: status
   basic: true
-  competence:
-    raw: 0
   delivery: self
   duration:
     raw: "10"
@@ -20,19 +15,13 @@ system:
   effectTypes:
     - movement
   endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       relation: executor
-      skip: 0
-      timing: start
       type: combat
   form: intrinsic
   identifier: missile-dodge
   interaction: manifest
-  maneuver: active
   overview:
     base: >-
       <p>You are @Identifier[condition:missile-dodging]{missile dodging} until the start of your next
@@ -47,5 +36,4 @@ system:
   sustained: true
   targets:
     - self
-transfer: true
 type: ability

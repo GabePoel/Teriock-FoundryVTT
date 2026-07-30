@@ -5,44 +5,24 @@ name: Avoid Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      excludeToken: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: u9QnKhzwEZ3zTwBn
-      automatic: true
-      expandTables: false
       local:
         identifiers:
           - ability:drop-prone
           - ability:stand-up
-      multi: false
       type: useDocuments
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
         formula: "1"
         type: formula
   delivery: aura
-  duration:
-    unit: instant
   executionTime:
     base: r1
-  form: normal
   identifier: avoid-aura
   interaction: manifest
   maneuver: reactive
@@ -59,11 +39,8 @@ system:
       @Pack[teriock.equipment]{equipment} they bear.</p>
   skill: true
   standard: true
-  targets:
-    - creature
   trigger: >-
     <p>One or more creature within range or some @Pack[teriock.equipment]{equipment} they
     @Identifier[keyword:bearing]{bear} would be hit by an @Wiki[Category:Active abilities]{active} or
     @Wiki[Category:Reactive abilities]{reactive} @Identifier[core:attack-interaction]{attack} you can see.</p>
-transfer: true
 type: ability

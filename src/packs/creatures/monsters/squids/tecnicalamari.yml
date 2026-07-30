@@ -49,7 +49,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           limitation: <p>Cannot go more than 5 feet above the ground.</p>
@@ -65,7 +64,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: kyBDZZHZ0ymc9izK
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.kyBDZZHZ0ymc9izK"
@@ -76,17 +74,11 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (@h)d4[magic holy]
               heighten:
                 - 1
-              impact: damage
-              trigger: null
               type: roll
             - _id: 747b3e9c9b617af6
-              executor: false
-              multi: false
-              relation: include
               status: lighted
               target: true
               type: status
@@ -98,36 +90,22 @@ items:
             unit: minute
           elements:
             - life
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               crit:
                 - 0
-              event: turn
-              method: automatic
-              relation: target
-              skip: 0
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
               crit:
                 - 1
-              event: turn
-              method: automatic
               relation: executor
-              skip: 0
               timing: end
               type: combat
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
           identifier: light-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -142,9 +120,6 @@ items:
               choice until the end of their next @Identifier[core:turns]{turn}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: MoiuedD0OPmqCKb2
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.MoiuedD0OPmqCKb2"
@@ -155,32 +130,20 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d6[magic]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
             - lightning
           elements:
             - storm
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d6[magic]]] @Identifier[core:damage]{damage}.</p>
           identifier: lightning-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -191,9 +154,6 @@ items:
             hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: THzYW2STi0PYdo1C
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.THzYW2STi0PYdo1C"
@@ -223,7 +183,6 @@ items:
             score:
               attribute: int
               value: -1
-        transfer: true
         type: ability
       - _id: MSYNUfuO2YlWtGBx
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.MSYNUfuO2YlWtGBx"
@@ -253,7 +212,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: mFDdkqmxdQgr33JX
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.mFDdkqmxdQgr33JX"
@@ -269,7 +227,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -282,8 +239,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: RMOdB168p9bPMKwm
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.RMOdB168p9bPMKwm"
@@ -299,7 +254,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -312,8 +266,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: tRYYWwCMcwbbdxsF
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.tRYYWwCMcwbbdxsF"
@@ -325,40 +277,13 @@ items:
           automations:
             - _id: mXGdgQY5cJXHpv31
               attribute: mov
-              bonus: ""
               threshold: 10 + @c
               type: feat
             - _id: WbvSgSpGns0SR1JS
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
-                enabled: false
-                priority: 0
                 type: move
-              targeting: true
-              trigger: null
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
           competence:
             raw: 1
           delivery: self
@@ -368,7 +293,6 @@ items:
             - flame
           executionTime:
             base: passive
-          form: normal
           identifier: passive-self-detonate
           interaction: manifest
           maneuver: passive
@@ -393,7 +317,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: xGYPQO0HSIsETXQo
         _key: "!actors.items.effects!9a6563e0bfd9ef26.9a6563e0bfd9ef26.xGYPQO0HSIsETXQo"
@@ -409,7 +332,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: sneaky
           interaction: manifest
           maneuver: passive
@@ -423,7 +345,6 @@ items:
             score:
               attribute: snk
               value: 1
-        transfer: true
         type: ability
     folder: aa772458d708a91e
     img: systems/teriock/src/icons/creatures/tecnicalamari.webp
@@ -431,22 +352,17 @@ items:
     system:
       appearance: <p>Flying rainbow squid that swim through the air.</p>
       br: 3
-      competence:
-        raw: 1
       description: >-
         <p>These creatures tend to travel alone but often skirmish in small groups of four or five. These cephalopods
         are strategic and competitive, throwing spells at each other to activate their detonation, thus taking out
         competition and prey simultaneously.</p>
       identifier: tecnicalamari
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d6
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -468,9 +384,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -478,7 +391,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 7zV2wGze9lzJ1jdD
         _key: "!actors.items.effects!9a6563e0bfd9ef26.sIbBYQ6ZDxvYohLO.7zV2wGze9lzJ1jdD"
@@ -489,24 +401,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: aa772458d708a91e
     img: systems/teriock/src/icons/body-parts/wriggling-tentacle.webp
     name: Wriggling Tentacle
     system:
       _sup: 9a6563e0bfd9ef26
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -514,20 +419,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Tecnicalamari
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Tecnicalamari
   ring:
     enabled: true
@@ -535,20 +431,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/tecnicalamari.webp
   texture:
     src: systems/teriock/src/icons/creatures/tecnicalamari.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 4
   identifier: tecnicalamari
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

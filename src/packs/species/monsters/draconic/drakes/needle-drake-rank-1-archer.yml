@@ -17,7 +17,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: archery-training
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: kicVfFFQVM83uIGK
     _key: "!items.effects!wsB7l4IQNp9IUruU.kicVfFFQVM83uIGK"
@@ -44,7 +42,6 @@ effects:
     system:
       automations:
         - _id: 0KocEo3PeZJ7lNkM
-          changeType: add
           key: system.boosts.damage
           qualifier: "@dmg"
           target: armament
@@ -63,19 +60,14 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>You move or are moved.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: lTiZALQhWDYH7uP2
-          method: automatic
           triggers:
             - executeArmament
             - movement
           type: trigger
-      form: normal
       identifier: crit-elite
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @Identifier[core:attack-interaction]{attack} you make with
@@ -94,7 +86,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: gGESbPOeFPXUymWp
     _key: "!items.effects!wsB7l4IQNp9IUruU.gGESbPOeFPXUymWp"
@@ -105,14 +96,10 @@ effects:
     system:
       automations:
         - _id: IJrd2OTBV3QJGp3t
-          all: false
-          attachDocuments: true
-          automatic: true
           children:
             enabled: true
             identifiers:
               - property:improvised
-            overrideData: false
           data: "{\"name\":\"Improvised @base\",\"system\":{\"quantity\":5}}"
           multi: true
           overrideData: true
@@ -125,11 +112,7 @@ effects:
             - Compendium.teriock.equipment.Item.1ca5e729801861e9
             - Compendium.teriock.equipment.Item.3b482dcc903d571b
         - _id: asYjty8CpTW6Z74t
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
       competence:
         raw: 1
@@ -141,7 +124,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: improvised-items
       interaction: manifest
       maneuver: slow
@@ -163,7 +145,6 @@ effects:
       standard: true
       targets:
         - other
-    transfer: true
     type: ability
   - _id: XbFCbez2nXLc0aqO
     _key: "!items.effects!wsB7l4IQNp9IUruU.XbFCbez2nXLc0aqO"
@@ -179,7 +160,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: multi-shot
       interaction: manifest
       maneuver: passive
@@ -201,7 +181,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: yI9RwPFCyxSUEaEc
     _key: "!items.effects!wsB7l4IQNp9IUruU.yI9RwPFCyxSUEaEc"
@@ -214,14 +193,10 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: a0
-      form: normal
       identifier: free-reload
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is reloaded.</p>
       powerSources:
@@ -233,7 +208,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: p08iv86SjXJynmdQ
     _key: "!items.effects!wsB7l4IQNp9IUruU.p08iv86SjXJynmdQ"
@@ -260,7 +234,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: bow-blocking
       interaction: manifest
       maneuver: passive
@@ -274,7 +247,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/ranks/rank-1-archer.webp
@@ -283,8 +255,6 @@ system:
   _sup: 9b9f2fff89d1e953
   archetype: semi
   class: archer
-  competence:
-    raw: 1
   description: >-
     <p>As precise and accurate as a well-crafted @Identifier[equipment:arrow]{arrow}, @Identifier[class:archer]{Archers}
     don't mess around. They prefer to keep their distance, as that is where they are the most effective, never letting
@@ -293,14 +263,5 @@ system:
     are easily killed. If you are playing an @Identifier[class:archer]{Archer} be direct, and on target, sturdy and
     perhaps high strung, watchful of the future and of your back.</p>
   identifier: rank-1-archer
-  innate: false
-  maxAv: 2
   number: 1
-  statDice:
-    hp:
-      disabled: false
-      formula: 1d10
-    mp:
-      disabled: false
-      formula: 1d10
 type: rank

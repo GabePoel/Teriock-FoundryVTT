@@ -12,12 +12,9 @@ effects:
     system:
       automations:
         - _id: mfunsvIP3nrRWlPg
-          all: false
           attachDocuments: false
-          automatic: true
           identifiers:
             - power:divine-gift
-          multi: false
           separate: true
           type: addDocuments
       competence:
@@ -49,7 +46,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: divine-gift
       interaction: manifest
       maneuver: slow
@@ -84,7 +80,6 @@ effects:
       sustained: true
       targets:
         - other
-    transfer: true
     type: ability
   - _id: J2R06ccW6xHWjrck
     _key: "!items.effects!TAgkpCgv9IOAGXUr.J2R06ccW6xHWjrck"
@@ -95,9 +90,6 @@ effects:
     system:
       automations:
         - _id: do0moPMb5BgARhLv
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -109,40 +101,22 @@ effects:
       effectTypes:
         - healing
       endCondition: <p>The start of the @Identifier[core:targets]{target's} next @Identifier[core:turns]{turn}.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: cdd190efe70ff5c5
-          event: turn
-          method: automatic
-          relation: target
-          skip: 0
-          timing: start
           type: combat
         - _id: bbf9eafe29e97d6c
-          method: automatic
           triggers:
             - damage
           type: trigger
-      form: normal
       identifier: jumpstart-heal
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - divine
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals} at the start of their next turn if they
           do not take any @Identifier[core:damage]{damage} before then.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: cFYEs5rH6gdmqV1x
     _key: "!items.effects!TAgkpCgv9IOAGXUr.cFYEs5rH6gdmqV1x"
@@ -158,7 +132,6 @@ effects:
           type: abilityMacro
         - _id: 29b275994cf9f5b1
           formula: 1d4
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -190,7 +163,6 @@ effects:
           triggers:
             - dawn
           type: trigger
-      form: normal
       identifier: might-strike
       interaction: manifest
       maneuver: slow
@@ -234,7 +206,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: B5I6y61wTKim4h9J
     _key: "!items.effects!TAgkpCgv9IOAGXUr.B5I6y61wTKim4h9J"
@@ -257,7 +228,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: resist-mental-effects
       interaction: manifest
       maneuver: passive
@@ -271,7 +241,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-1-paladin.webp
@@ -280,8 +249,6 @@ system:
   _sup: 94e2340ae112dfa8
   archetype: warrior
   class: paladin
-  competence:
-    raw: 1
   description: >-
     <p>The least martial of the @Identifier[archetype:warrior]{warriors}, their outlook on life is that of the combat
     medic, focusing on keeping others alive on the front lines. @Identifier[class:paladin]{Paladins} are often leaders,
@@ -291,14 +258,11 @@ system:
     help those in need and do what is right. If you are a @Identifier[class:paladin]{Paladin} be righteous, concerned
     for others, and take charge.</p>
   identifier: rank-1-paladin
-  innate: false
   maxAv: 3
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

@@ -17,7 +17,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: acrobatics
       interaction: manifest
       maneuver: passive
@@ -44,7 +43,6 @@ effects:
         competence:
           attribute: mov
           value: 1
-    transfer: true
     type: ability
   - _id: 88LJan2ZyplAIxTg
     _key: "!items.effects!0bec2719aa9daf87.88LJan2ZyplAIxTg"
@@ -72,7 +70,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: cat-sense
       interaction: manifest
       maneuver: passive
@@ -90,7 +87,6 @@ effects:
         score:
           attribute: per
           value: 2
-    transfer: true
     type: ability
   - _id: icgfOV6dS1nCuuMn
     _key: "!items.effects!0bec2719aa9daf87.icgfOV6dS1nCuuMn"
@@ -120,7 +116,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: qP85nvrn4aFngwYi
     _key: "!items.effects!0bec2719aa9daf87.qP85nvrn4aFngwYi"
@@ -148,7 +143,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: uzPAzqfFAOCjCTRC
     _key: "!items.effects!0bec2719aa9daf87.uzPAzqfFAOCjCTRC"
@@ -164,7 +158,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -177,8 +170,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: RBceQsWSszKKMUsV
     _key: "!items.effects!0bec2719aa9daf87.RBceQsWSszKKMUsV"
@@ -194,7 +185,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -207,8 +197,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: fxbpHFuQ6qKQZYMp
     _key: "!items.effects!0bec2719aa9daf87.fxbpHFuQ6qKQZYMp"
@@ -219,62 +207,35 @@ effects:
     system:
       automations:
         - _id: 5d57231066693cee
-          executor: false
-          multi: false
-          relation: include
           status: snared
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         unit: unlimited
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
           timing: end
           type: combat
-      form: normal
       identifier: snare
-      interaction: attack
       limitation: >-
         <p>Can only target @Wiki[Category:Size 0.5 creatures]{creatures size 0.5} or @Wiki[Category:Size 0.25
         creatures]{smaller}.</p>
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
@@ -282,7 +243,6 @@ effects:
       standard: true
       targets:
         - leg
-    transfer: true
     type: ability
   - _id: pUmXpFBZXegJJtjC
     _key: "!items.effects!0bec2719aa9daf87.pUmXpFBZXegJJtjC"
@@ -298,7 +258,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: sneaky
       interaction: manifest
       maneuver: passive
@@ -312,7 +271,6 @@ effects:
         score:
           attribute: snk
           value: 1
-    transfer: true
     type: ability
   - _id: bpFbLyI0g5jMQoVt
     _key: "!items.effects!0bec2719aa9daf87.bpFbLyI0g5jMQoVt"
@@ -368,7 +326,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: leaping
       interaction: manifest
       maneuver: passive
@@ -387,7 +344,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: JNNQE70jgCIsUe2t
     _key: "!items.effects!0bec2719aa9daf87.JNNQE70jgCIsUe2t"
@@ -431,7 +387,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: climbing
       interaction: manifest
       maneuver: passive
@@ -444,27 +399,20 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/cat.webp
 name: Cat
 system:
-  br: 1
-  competence:
-    raw: 1
   identifier: cat
   size:
-    enabled: true
     value: 0.5
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

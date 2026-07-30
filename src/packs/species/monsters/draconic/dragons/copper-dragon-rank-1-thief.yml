@@ -38,24 +38,13 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: disable-ray
-      interaction: attack
       maneuver: reactive
       overview:
         proficient: <p>This also makes the effect of that @Pack[teriock.abilities]{ability} @Identifier[core:fizzles]{fizzle}.</p>
-      piercing:
-        raw: 1
       powerSources:
         - spiritual
       range:
@@ -68,14 +57,11 @@ effects:
           @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic} @Wiki[Category:Active
         abilities]{active} or @Wiki[Category:Reactive abilities]{reactive ability} that isn't a
         @Wiki[Category:Spells]{spell} against a different creature or some @Pack[teriock.equipment]{equipment} that
         different creature @Identifier[keyword:bearing]{bares}.</p>
-    transfer: true
     type: ability
   - _id: B57L4hOAEP7S1PZt
     _key: "!items.effects!jp3evWHNlehr6oFe.B57L4hOAEP7S1PZt"
@@ -88,7 +74,6 @@ effects:
         - _id: NhF7DmbiQ667ivp2
           common:
             - glue
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -103,7 +88,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: glue
       interaction: manifest
       maneuver: slow
@@ -122,7 +106,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: YDyX9dmo6gtY702e
     _key: "!items.effects!jp3evWHNlehr6oFe.YDyX9dmo6gtY702e"
@@ -133,30 +116,18 @@ effects:
     system:
       automations:
         - _id: Hd5o6s1SdA8C7IfT
-          competence:
-            raw: 0
-          preventFeat: false
           preventThreshold: true
           type: override
         - _id: 0b0d1426453abb55
-          executor: false
-          multi: false
           relation: apply
           status: hidden
-          target: false
           type: status
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       featSaveAttribute: snk
-      form: normal
       identifier: hide
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -184,7 +155,6 @@ effects:
         score:
           attribute: snk
           value: 2
-    transfer: true
     type: ability
   - _id: VgHo3DycU5e8Ragl
     _key: "!items.effects!jp3evWHNlehr6oFe.VgHo3DycU5e8Ragl"
@@ -210,7 +180,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: talented-locksmith
       interaction: manifest
       maneuver: passive
@@ -224,7 +193,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: kXI7EUy5B5Hqz4C7
     _key: "!items.effects!jp3evWHNlehr6oFe.kXI7EUy5B5Hqz4C7"
@@ -237,7 +205,6 @@ effects:
         - _id: Kd7EJ2F01l6h5bzk
           common:
             - unglue
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -247,22 +214,14 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - stealing
-      executionTime:
-        base: a1
-      form: normal
       identifier: unglue
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is no longer @Identifier[property:glued]{glued} and you take it.</p>
       powerSources:
         - spiritual
-      range:
-        unit: contact
       requirements: >-
         <p>Target's bearer is @Identifier[condition:down]{down} or target it
         @Identifier[property:searchable]{searchable}.</p>
@@ -270,7 +229,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-1-thief.webp
@@ -279,8 +237,6 @@ system:
   _sup: f019c5204f9f9ec7
   archetype: semi
   class: thief
-  competence:
-    raw: 1
   description: >-
     <p>Almost as shady as the @Identifier[class:assassin]{Assassin}, a @Identifier[class:thief]{Thief} is a bit more
     socially oriented and has a much greater care for her own life. Thieves are the flip side of the
@@ -289,14 +245,5 @@ system:
     eyelash, that is their job. If you are playing a thief, lie and make up stories, be ever watchful for a chance to
     search or loot and look for the profit angle, never doing anything for free.</p>
   identifier: rank-1-thief
-  innate: false
-  maxAv: 2
   number: 1
-  statDice:
-    hp:
-      disabled: false
-      formula: 1d10
-    mp:
-      disabled: false
-      formula: 1d10
 type: rank

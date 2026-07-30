@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: additional-life-rotators
       interaction: manifest
       maneuver: passive
@@ -37,7 +36,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: H7xLb8uTY3Fv0E7P
     _key: "!items.effects!Ui51jFSg1kLTsxf3.H7xLb8uTY3Fv0E7P"
@@ -78,8 +76,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       elderSorcery: true
       elements:
         - life
@@ -121,7 +117,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: SPQtQw6IFba5ebh2
     _key: "!items.effects!Ui51jFSg1kLTsxf3.SPQtQw6IFba5ebh2"
@@ -140,25 +135,11 @@ effects:
           value: awakening
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: e1c7d7174b360e93
           competencies:
             - 0
@@ -178,11 +159,7 @@ effects:
           impact: sleep
           type: roll
         - _id: PXielxmkr3bcWsV4
-          executor: false
-          multi: false
-          relation: include
           status: asleep
-          target: false
           type: status
       competence:
         raw: 1
@@ -203,8 +180,6 @@ effects:
       elements:
         - life
       endCondition: <p>The break of dawn.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:
@@ -219,7 +194,6 @@ effects:
       identifier: swift-sleep-aura
       interaction: feat
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>A hypnotizing shimmer spreads through the air around you. Roll [[/sleep 1d8]] to determine the strength of
@@ -238,9 +212,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: LI7DN7p7t3OVAaix
     _key: "!items.effects!Ui51jFSg1kLTsxf3.LI7DN7p7t3OVAaix"
@@ -252,8 +223,6 @@ effects:
       _sup: byYbma8NDzi77Mh0
       automations:
         - _id: cCWrBymDkUeOHKmQ
-          all: false
-          attachDocuments: true
           automatic: false
           data: |-
             {
@@ -268,18 +237,11 @@ effects:
             }
           local:
             qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: g7vdRcjuuf35GPZ1
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:magelore
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 8v0Wg06rCbu8V2LX
           changes:
@@ -355,7 +317,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
 folder: c0c0ec104c5cd2eb
 img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp
@@ -364,8 +325,6 @@ system:
   _sup: bc5fa913f6756c0d
   archetype: mage
   class: life-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true healers of the world, they are committed to sustaining all life. The truly altruistic characters,
     @Identifier[class:life-mage]{Life Mages} are known to enter battles on neither side, healing anyone and everyone who
@@ -374,14 +333,11 @@ system:
     troops, healing when needed. If you are playing a @Identifier[class:life-mage]{Life Mage} be helpful, kind and
     loving, protective but committed to saving lives and fighting death.</p>
   identifier: rank-3-life-mage
-  innate: false
   maxAv: 0
   number: 3
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

@@ -16,14 +16,9 @@ effects:
     system:
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: battle-charge
-      interaction: attack
       maneuver: reactive
       overview:
         base: >-
@@ -32,23 +27,16 @@ effects:
           class="note"><b>Note:</b> This ability can trigger in the middle of @Identifier[ability:move]{moving}. You
           could approach an enemy, trigger this ability, take an @Identifier[ability:opportunity-attack]{Opportunity
           Attack} against them, keep moving towards them, and trigger this ability again.</p>
-      piercing:
-        raw: 2
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
         hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
-    transfer: true
     type: ability
   - _id: yhs17sF1okrnhirI
     _key: "!items.effects!9HZjQYuJQ9uAObxC.yhs17sF1okrnhirI"
@@ -63,19 +51,13 @@ effects:
     system:
       automations:
         - _id: 2DH3QDwvAS8wYiIj
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:runic
-          multi: false
-          separate: false
           type: addDocuments
         - _id: GT2hZSyAU5MxBZ06
           common:
             - reforge
             - repair
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -96,7 +78,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: mystic-weapon-repair
       interaction: manifest
       maneuver: slow
@@ -116,7 +97,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-3-knight.webp
@@ -125,8 +105,6 @@ system:
   _sup: b1ca5e2d15299df7
   archetype: warrior
   class: knight
-  competence:
-    raw: 1
   description: >-
     <p>The true glory seekers, @Identifier[class:knight]{Knights} are chivalrous to a point but have none of the
     @Identifier[class:duelist]{Duelist's} respect for battles. @Identifier[class:knight]{Knights} are the weapon
@@ -136,14 +114,11 @@ system:
     looking for glory, looking for the next powerful
     @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
   identifier: rank-3-knight
-  innate: false
   maxAv: 4
   number: 3
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

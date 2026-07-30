@@ -18,7 +18,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
@@ -34,7 +33,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: T9boNaMCYQ6rnTzO
     _key: "!items.effects!b30faafcad7128b2.T9boNaMCYQ6rnTzO"
@@ -49,39 +47,23 @@ effects:
     system:
       automations:
         - _id: eUm1UOhkyF3KmU1q
-          all: false
-          attachDocuments: true
-          automatic: true
           competencies:
             - 1
           identifiers:
             - ability:fast
-          multi: false
-          separate: false
           type: addDocuments
         - _id: qy0rKWHv0DFoFgqJ
-          all: false
-          attachDocuments: true
-          automatic: true
           competencies:
             - 2
           identifiers:
             - ability:swift
-          multi: false
-          separate: false
           type: addDocuments
         - _id: mmCTbgaQIg38Y0II
-          executor: false
-          multi: false
-          relation: include
           status: frenzied
-          target: false
           type: status
         - _id: mY9vQJGkj2Kf1RTw
           amount: 15
           impact: gainTempHp
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -90,18 +72,14 @@ effects:
         raw: "5"
         unit: minute
       endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: b50b3ee67eddc9f9
           statuses:
             present:
               - dead
           type: status
-      form: normal
       identifier: berserk
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You gain 15 @Identifier[core:temporary-hit-points]{temporary HP} and become
@@ -120,7 +98,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ss8nMvpGEnj5nnXU
     _key: "!items.effects!b30faafcad7128b2.ss8nMvpGEnj5nnXU"
@@ -135,8 +112,6 @@ effects:
       automations:
         - _id: 8QOdQYnnSxyi3PA8
           activeQualifier: and(not(@status.dead), @status.hacked, not(@status.burned), not(@status.dead), not(@status.frozen))
-          consumeStatDice: true
-          forHarm: false
           noStatDice: true
           trigger: turnStart
           type: heal
@@ -150,7 +125,6 @@ effects:
         - regeneration
       executionTime:
         base: passive
-      form: normal
       identifier: berserker-healing-factor
       interaction: manifest
       maneuver: passive
@@ -167,7 +141,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 5KZgbY0Lkn3zj6Jz
     _key: "!items.effects!b30faafcad7128b2.5KZgbY0Lkn3zj6Jz"
@@ -194,7 +167,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: called-magic-resistance
       interaction: manifest
       maneuver: passive
@@ -211,7 +183,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: dbJPDVq2wmgowY99
     _key: "!items.effects!b30faafcad7128b2.dbJPDVq2wmgowY99"
@@ -231,7 +202,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: intimidate
       interaction: manifest
       maneuver: passive
@@ -247,7 +217,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: JbmNXuSEKivN1kMo
     _key: "!items.effects!b30faafcad7128b2.JbmNXuSEKivN1kMo"
@@ -273,7 +242,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: throw-the-bones
       interaction: manifest
       maneuver: slow
@@ -289,9 +257,6 @@ effects:
       ritual: true
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: GW0neZ9YNoKjwBDS
     _key: "!items.effects!b30faafcad7128b2.GW0neZ9YNoKjwBDS"
@@ -317,10 +282,8 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      form: normal
       identifier: battle-cry-resistance
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
@@ -331,7 +294,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: bzxBeP9GUjjb9F4X
     _key: "!items.effects!b30faafcad7128b2.bzxBeP9GUjjb9F4X"
@@ -343,31 +305,14 @@ effects:
       _sup: Twt8FZWmnIjSW58R
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -388,25 +333,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-cry-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -417,9 +350,6 @@ effects:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: fapsFy1VByYOajv0
     _key: "!items.effects!b30faafcad7128b2.fapsFy1VByYOajv0"
@@ -432,14 +362,9 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           formula: 1d4[psychic]
-          impact: damage
           type: roll
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -449,13 +374,9 @@ effects:
         unit: minute
       effectTypes:
         - mental
-      executionTime:
-        base: a1
       featSaveAttribute: int
-      form: normal
       identifier: terrify
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -469,9 +390,6 @@ effects:
           @Identifier[core:damage]{damage} as well.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: xxGnIKGxb6tqNSMZ
     _key: "!items.effects!b30faafcad7128b2.xxGnIKGxb6tqNSMZ"
@@ -498,7 +416,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: intimidating-presence
       interaction: manifest
       maneuver: passive
@@ -512,7 +429,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 97760b47881c8b1e
 img: systems/teriock/src/icons/ranks/rank-4-berserker.webp
@@ -520,8 +436,6 @@ name: Rank 4 Berserker
 system:
   archetype: warrior
   class: berserker
-  competence:
-    raw: 1
   description: >-
     <p>Wild and savage. They distrust @Wiki[Category:Magical effects]{magic} of all kinds and put their faith in
     themselves before others. Always at the front of a battle, @Identifier[class:berserker]{Berserkers} love the sport
@@ -529,21 +443,17 @@ system:
     guards as they are too distracted and are rarely very intelligent. If you are a
     @Identifier[class:berserker]{Berserker} be larger than life, brash, not too bright and stupidly brave.</p>
   identifier: rank-4-berserker
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
-  maxAv: 2
   number: 4
   statDice:
     hp:
-      disabled: false
       faces: 12
       formula: 1d12
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 8
       formula: 1d8
       number:

@@ -10,8 +10,6 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
         @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it
@@ -20,7 +18,6 @@ effects:
         instead @Identifier[property:destroyed]{destroyed}.</p>
       form: flaw
       identifier: fragile
-    transfer: true
     type: property
   - _id: x6sjcsIVaOkVZOFD
     _key: "!items.effects!ef1649acf44303fb.x6sjcsIVaOkVZOFD"
@@ -31,14 +28,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to steal through
         @Pack[teriock.abilities]{abilities} like @Identifier[ability:search]{Search}.</p>
       form: flaw
       identifier: searchable
-    transfer: true
     type: property
   - _id: ggtGhVK8MhJkniZo
     _key: "!items.effects!ef1649acf44303fb.ggtGhVK8MhJkniZo"
@@ -52,17 +46,12 @@ effects:
     system:
       automations:
         - _id: fFdNapZVw1YXeQ43
-          all: false
           attachDocuments: false
-          automatic: true
           identifiers:
             - equipment:glowing-glow-bulb
-          multi: false
           separate: true
           type: addDocuments
         - _id: gegKf7YF6X0aeaob
-          competence:
-            raw: 0
           data: |-
             {
               "system": {
@@ -72,38 +61,27 @@ effects:
             }
           makeEffect: false
           overrideData: true
-          preventFeat: false
-          preventThreshold: false
           type: override
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
         raw: "10"
         unit: minute
-      executionTime:
-        base: a1
-      form: normal
       grantUse: true
       identifier: shake-glow-bulb
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>The source of this ability starts @Identifier[property:glowing]{glowing} (30 feet). This doesn't
           @Identifier[property:destroyed]{destroy} the item, but renders it inert.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
       targets:
         - item
-    transfer: true
     type: ability
   - _id: VQDFXr0oJQZ7Waxe
     _key: "!items.effects!ef1649acf44303fb.VQDFXr0oJQZ7Waxe"
@@ -114,14 +92,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used in the same hand as a
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
       form: intrinsic
       identifier: small
-    transfer: true
     type: property
   - _id: 3tRBJEOyF2iqoSWP
     _key: "!items.effects!ef1649acf44303fb.3tRBJEOyF2iqoSWP"
@@ -132,10 +107,7 @@ effects:
     system:
       automations:
         - _id: b7dNhAhOaKZhPAx6
-          all: false
-          angle: "60"
           attachToToken: false
-          automatic: true
           data: |-
             {
               "behaviors": [
@@ -150,56 +122,41 @@ effects:
               ]
             }
           deleteOnTurnChange: false
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           overrideData: true
           radius: "@ability.expansion.range"
-          regionType: circle
           restriction:
             enabled: true
-            priority: 0
             type: move
           targeting: false
           trigger: executeInput
           type: region
           visibility: 0
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
         raw: "1"
         unit: minute
-      executionTime:
-        base: a1
       expansion:
         range:
           raw: "100"
           unit: ft
         type: detonate
-      form: normal
       grantUse: true
       identifier: smash-glow-bulb
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>The spot on the ground where the source of this ability was smashed starts
           @Identifier[property:glowing]{glowing} (100 feet).</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
       targets:
         - area
-    transfer: true
     type: ability
 flags:
   teriock:
@@ -208,29 +165,20 @@ folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/glow-bulb.webp
 name: Glow Bulb
 system:
-  attackPenalty: "-3"
-  competence:
-    raw: 0
   consumable: true
-  consumptionAmount: 1
   equipmentClasses:
     - containers
     - knickknacks
   equipmentType: bottle
   equipped: true
   identifier: glow-bulb
-  minStr: -3
   needsAttunement: false
   onUse:
     - 3tRBJEOyF2iqoSWP
     - ggtGhVK8MhJkniZo
   powerLevel: enchanted
-  quantity:
-    value: 1
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   weight: 1
 type: equipment

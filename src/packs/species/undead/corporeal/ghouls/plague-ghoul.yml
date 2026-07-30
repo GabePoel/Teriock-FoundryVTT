@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -36,7 +35,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: t4alQxEIY2xC9HBs
     _key: "!items.effects!fc547c9afdc4a9b6.t4alQxEIY2xC9HBs"
@@ -77,7 +75,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2XWiJphRKfrNQlIU
     _key: "!items.effects!fc547c9afdc4a9b6.2XWiJphRKfrNQlIU"
@@ -114,7 +111,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 0biqYwlKtkipTE4I
     _key: "!items.effects!fc547c9afdc4a9b6.0biqYwlKtkipTE4I"
@@ -126,29 +122,15 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: improved-devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 2. If their
           @Identifier[core:size]{size} was already 2 or less, their body is completely consumed.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 73ds0KBfDGufjMKi
     _key: "!items.effects!fc547c9afdc4a9b6.73ds0KBfDGufjMKi"
@@ -166,7 +148,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: insatiable
       interaction: manifest
       maneuver: passive
@@ -181,7 +162,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: xPauN3sQHDhX7Ig8
     _key: "!items.effects!fc547c9afdc4a9b6.xPauN3sQHDhX7Ig8"
@@ -211,7 +191,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: FbuJC3Yj2439NYdr
     _key: "!items.effects!fc547c9afdc4a9b6.FbuJC3Yj2439NYdr"
@@ -227,7 +206,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -240,8 +218,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: Cijt1RlZIWXMqVF7
     _key: "!items.effects!fc547c9afdc4a9b6.Cijt1RlZIWXMqVF7"
@@ -257,7 +233,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -270,8 +245,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: aVuXs32FXn9YUHM5
     _key: "!items.effects!fc547c9afdc4a9b6.aVuXs32FXn9YUHM5"
@@ -287,7 +260,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -300,8 +272,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: 8rDLJE1OSDsC2udr
     _key: "!items.effects!fc547c9afdc4a9b6.8rDLJE1OSDsC2udr"
@@ -315,42 +285,29 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -358,20 +315,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: t65M9Pn02xPSx4rr
     _key: "!items.effects!fc547c9afdc4a9b6.t65M9Pn02xPSx4rr"
@@ -423,7 +373,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: kKRfhNBJAIbMCYa9
     _key: "!items.effects!fc547c9afdc4a9b6.kKRfhNBJAIbMCYa9"
@@ -461,7 +410,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: A46WMov5BX4ARbqI
     _key: "!items.effects!fc547c9afdc4a9b6.A46WMov5BX4ARbqI"
@@ -498,7 +446,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: WKy5iVovlLSyjShG
     _key: "!items.effects!fc547c9afdc4a9b6.WKy5iVovlLSyjShG"
@@ -543,7 +490,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: a15aavhMrPVUaYx6
     _key: "!items.effects!fc547c9afdc4a9b6.a15aavhMrPVUaYx6"
@@ -574,7 +520,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -588,7 +533,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 2Wm6eUik1clCIhpD
     _key: "!items.effects!fc547c9afdc4a9b6.2Wm6eUik1clCIhpD"
@@ -600,8 +544,6 @@ effects:
       _sup: 2XWiJphRKfrNQlIU
       automations:
         - _id: iAyFzPzJgTNeDbbH
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -610,8 +552,6 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
@@ -619,14 +559,8 @@ effects:
         base: a2
       form: special
       identifier: mana-drain-grasp
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -638,9 +572,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 79fd5713820acc9f
 img: systems/teriock/src/icons/creatures/plague-ghoul.webp
@@ -648,24 +579,17 @@ name: Plague Ghoul
 system:
   appearance: <p>Hunched over pale raggedy people with sharp claws and lots of very sharp teeth.</p>
   br: 15
-  competence:
-    raw: 1
   description: >-
     <p>Believed to be a terrifying form of @Identifier[creature:zombie]{zombie}, ghouls are a mystery. Extremely
     loathsome. How they devour everything around and never get full is unknown some believe them cursed by deities to
     forever walk the earth trying to get full.</p>
   identifier: plague-ghoul
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

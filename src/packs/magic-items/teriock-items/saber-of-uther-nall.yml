@@ -13,54 +13,31 @@ effects:
           activeQualifier: "@flags.disarmKnockback"
           distance: "10"
           movementAction: walk
-          origin: executor
-          originBarrier: true
           type: move
         - _id: ow9J5qYNcoLGDsL3
           activeQualifier: "@flags.disarmKnockback"
           distance: "20"
           movementAction: walk
-          origin: executor
-          originBarrier: true
           type: move
         - _id: zGqyHWcKnNUWmna8
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:catch-item
-          multi: false
           type: useDocuments
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       gifted:
         amount: 1
         enabled: true
       identifier: disarm
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>Anything held by the @Identifier[core:targets]{targeted} arm is knocked out of its grasp. This triggers
           @Identifier[ability:catch-item]{Catch Item}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
       targets:
         - arm
-    transfer: true
     type: ability
   - _id: d1dRqZrY8Gc6jYl1
     _key: "!items.effects!391d0f8b89e39fc7.d1dRqZrY8Gc6jYl1"
@@ -74,29 +51,14 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: hack
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
           accordingly.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
@@ -109,18 +71,14 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: hABJFOt5F7OJim6b
     _key: "!items.effects!391d0f8b89e39fc7.hABJFOt5F7OJim6b"
     img: icons/magic/control/debuff-chains-shackle-movement-red.webp
     name: Not Usable by Neutral Creatures
     system:
-      competence:
-        raw: 0
       description: <p>Not usable by neutral creatures.</p>
       form: flaw
-    transfer: true
     type: property
   - _id: ZBmupzN5yrmjo8qp
     _key: "!items.effects!391d0f8b89e39fc7.ZBmupzN5yrmjo8qp"
@@ -131,32 +89,21 @@ effects:
     system:
       automations:
         - _id: 98a4b88702a87417
-          all: false
-          automatic: true
           bonus: "0"
-          multi: false
           tradecrafts:
             - hunter
           type: tradecraft
-      competence:
-        raw: 0
       costs:
         primary:
           mp:
             formula: "1"
             type: formula
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
-      executionTime:
-        base: a1
-      form: normal
       identifier: species-lore
       interaction: manifest
       lore: true
-      maneuver: active
       overview:
         base: >-
           <p>You recognize details about living creatures by sight. For a given creature, you know the
@@ -175,9 +122,6 @@ effects:
         unit: ft
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: YXkj0Qmqht2RsBux
     _key: "!items.effects!391d0f8b89e39fc7.YXkj0Qmqht2RsBux"
@@ -199,14 +143,11 @@ effects:
               type: upgrade
               value: "3"
           type: changes
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       gifted:
         amount: 1
         enabled: true
@@ -223,7 +164,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: FmZgTQM1RxS29QW4
     _key: "!items.effects!391d0f8b89e39fc7.FmZgTQM1RxS29QW4"
@@ -234,25 +174,18 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    transfer: true
     type: property
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/saber-of-uther-nall.webp
 name: Saber of Uther-nall
 system:
-  attackPenalty: "-3"
   bv:
     raw: 2
-  competence:
-    raw: 0
-  consumable: false
   damage:
     base: 1d8
   equipmentClasses:
@@ -269,8 +202,6 @@ system:
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   tier:
     raw: "1"
   weight: 3

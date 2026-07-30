@@ -5,16 +5,11 @@ name: Spell Trigger
 system:
   automations:
     - _id: R7rIJDoFAEvz00wl
-      all: false
       automatic: false
-      expandTables: false
       local:
         qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
-      multi: false
       trigger: execute
       type: useDocuments
-  competence:
-    raw: 0
   costs:
     components:
       somatic:
@@ -22,8 +17,6 @@ system:
       verbal:
         type: tag
   delivery: self
-  duration:
-    unit: instant
   elements:
     - storm
   executionTime:
@@ -47,5 +40,4 @@ system:
   targets:
     - self
   trigger: <p>You @Identifier[condition:down]{drop}.</p>
-transfer: true
 type: ability

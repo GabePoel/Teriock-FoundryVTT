@@ -5,41 +5,27 @@ name: Empathic Ray
 system:
   automations:
     - _id: XKPVFe82k4n1L8AI
-      consumeStatDice: true
-      forHarm: false
-      noStatDice: false
       type: heal
     - _id: 800c70e6560525a8
       formula: (1 + @h)d6[magic]
-      impact: damage
-      merge: true
       type: roll
-  competence:
-    raw: 0
   costs:
     primary:
       hp:
         formula: 1d4
         type: formula
   delivery: missile
-  duration:
-    unit: instant
   effectTypes:
     - damaging
     - healing
     - regeneration
   elements:
     - nature
-  executionTime:
-    base: a1
-  form: normal
   heightened: >-
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
     1d6[magic]]] or @Identifier[core:healing]{heal} the @Identifier[core:targets]{target} again (depending on what you
     chose).</p>
   identifier: empathic-ray
-  interaction: attack
-  maneuver: active
   overview:
     base: >-
       <p>As you cast [[lookup name]], choose either "damage" or "healing". The effect varies depending on what you
@@ -50,8 +36,6 @@ system:
       @Wiki[Category:Regeneration effects]{regeneration effect} and a @Wiki[Category:Healing effects]{healing effect}.
       This is the only part of [[lookup name]] that counts as a @Wiki[Category:Regeneration effects]{regeneration
       effect}.</p>
-  piercing:
-    raw: 1
   powerSources:
     - magical
   range:
@@ -67,7 +51,4 @@ system:
       @Identifier[core:healing]{heal} them (depending on what you chose).</p>
   spell: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

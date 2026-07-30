@@ -10,10 +10,8 @@ effects:
     system:
       automations:
         - _id: wqZMUEsXfq6gFsif
-          changeType: add
           key: system.costs.tweaks.adept
           qualifier: "@class.berserker"
-          target: ability
           type: childChange
           value: "1"
       competence:
@@ -37,7 +35,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: cS1D3IiJKUezrKeH
     _key: "!items.effects!637b93dd540194ba.cS1D3IiJKUezrKeH"
@@ -97,7 +94,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: OP1CqTMeDDM604qY
     _key: "!items.effects!637b93dd540194ba.OP1CqTMeDDM604qY"
@@ -133,7 +129,6 @@ effects:
         score:
           attribute: per
           value: 5
-    transfer: true
     type: ability
   - _id: LSs6S6WNamrgAHWy
     _key: "!items.effects!637b93dd540194ba.LSs6S6WNamrgAHWy"
@@ -163,7 +158,6 @@ effects:
         score:
           attribute: int
           value: 5
-    transfer: true
     type: ability
   - _id: dT6KpSbetvdrg8U7
     _key: "!items.effects!637b93dd540194ba.dT6KpSbetvdrg8U7"
@@ -206,7 +200,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -221,7 +214,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 5DMZOlObyhKXnVzi
     _key: "!items.effects!637b93dd540194ba.5DMZOlObyhKXnVzi"
@@ -234,8 +226,6 @@ effects:
         - _id: Suc9ayhHqRkmjAwZ
           activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -266,7 +256,6 @@ effects:
       requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: c5QOAumBKzCXv00C
     _key: "!items.effects!637b93dd540194ba.c5QOAumBKzCXv00C"
@@ -279,7 +268,6 @@ effects:
         - _id: T0uGlilXyRymTD1v
           activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
           trigger: turnStart
           type: revitalize
       competence:
@@ -309,7 +297,6 @@ effects:
       requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nsdqQGMlRiGV86b8
     _key: "!items.effects!637b93dd540194ba.nsdqQGMlRiGV86b8"
@@ -323,34 +310,22 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
         - _id: 7400b41f20d9f100
-          all: false
           angle: "@angle.dragon"
           attachToToken: false
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: "@ability.range + 5 * @h"
           regionType: cone
           restriction:
             enabled: true
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: 800c70e6560525a8
           formula: (2 * @h)d10[magic]
           heighten:
             - 1
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -360,13 +335,8 @@ effects:
             formula: "1"
             type: formula
       delivery: cone
-      duration:
-        unit: instant
       effectTypes:
         - damaging
-      executionTime:
-        base: a1
-      featSaveAttribute: mov
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
@@ -374,7 +344,6 @@ effects:
         increases by 5 feet.</p>
       identifier: iron-dragon-breath
       interaction: feat
-      maneuver: active
       powerSources:
         - magical
       range:
@@ -389,9 +358,6 @@ effects:
           @Identifier[damage:hack]{leg hack}, and takes half as much @Identifier[core:damage]{damage} from this as they
           would otherwise. This is calculated after any @Identifier[keyword:boosted]{boosts} or
           @Identifier[keyword:deboosted]{deboosts}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: JLQwGWMRPLMqLcvh
     _key: "!items.effects!637b93dd540194ba.JLQwGWMRPLMqLcvh"
@@ -421,7 +387,6 @@ effects:
         score:
           attribute: snk
           value: -3
-    transfer: true
     type: ability
   - _id: ISeDernQj9CerxJB
     _key: "!items.effects!637b93dd540194ba.ISeDernQj9CerxJB"
@@ -432,7 +397,6 @@ effects:
     system:
       automations:
         - _id: dZdzGQfm90BHxkCn
-          changeType: add
           key: system.boosts.damage
           qualifier: and(@dmg, @range.melee)
           target: armament
@@ -473,7 +437,6 @@ effects:
         score:
           attribute: str
           value: 5
-    transfer: true
     type: ability
   - _id: LrjTCKgbVtwA69XF
     _key: "!items.effects!637b93dd540194ba.LrjTCKgbVtwA69XF"
@@ -501,7 +464,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -515,7 +477,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 1Nm3SfeIvi7R4HQT
     _key: "!items.effects!637b93dd540194ba.1Nm3SfeIvi7R4HQT"
@@ -528,25 +489,17 @@ effects:
         - _id: mhGxVy8CcJTEyM2q
           common:
             - shatter
-          showConfirmationDialog: true
           type: common
         - _id: OwcEEEPMXNoWUKl0
-          competence:
-            raw: 0
-          preventFeat: false
-          preventThreshold: false
           rollBonus: "@av"
           type: override
       competence:
         raw: 1
       delivery: armor
-      duration:
-        unit: instant
       effectTypes:
         - destruction
       executionTime:
         base: r1
-      form: normal
       identifier: shattering-armor
       interaction: block
       maneuver: reactive
@@ -556,8 +509,6 @@ effects:
           your @Identifier[core:armor-class]{AV} for the purpose of [[lookup name]].</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: >-
@@ -565,7 +516,6 @@ effects:
           @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
       targets:
         - item
-    transfer: true
     type: ability
   - _id: BGZIWKjptre8CM8U
     _key: "!items.effects!637b93dd540194ba.BGZIWKjptre8CM8U"
@@ -581,7 +531,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: speed
       interaction: manifest
       maneuver: passive
@@ -595,7 +544,6 @@ effects:
         score:
           attribute: mov
           value: 3
-    transfer: true
     type: ability
   - _id: 9FxsdBA7I5B8CEuQ
     _key: "!items.effects!637b93dd540194ba.9FxsdBA7I5B8CEuQ"
@@ -606,10 +554,8 @@ effects:
     system:
       automations:
         - _id: insnA3UruLUet7RD
-          changeType: add
           key: system.costs.tweaks.adept
           qualifier: "@identifier.battle-cry-aura"
-          target: ability
           type: childChange
           value: "1"
       competence:
@@ -619,7 +565,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-roar
       interaction: manifest
       maneuver: passive
@@ -633,7 +578,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: C7TAcB0bFAW3C8lW
     _key: "!items.effects!637b93dd540194ba.C7TAcB0bFAW3C8lW"
@@ -645,10 +589,8 @@ effects:
       _sup: cS1D3IiJKUezrKeH
       automations:
         - _id: 9sdpZGNc8gLdN1vm
-          changeType: add
           key: system.costs.tweaks.adept
           qualifier: "@es"
-          target: ability
           type: childChange
           value: "1"
       competence:
@@ -672,7 +614,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: NGHbeINFuwe2izTD
     _key: "!items.effects!637b93dd540194ba.NGHbeINFuwe2izTD"
@@ -747,7 +688,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: FMnvDjNK4renPBHY
     _key: "!items.effects!637b93dd540194ba.FMnvDjNK4renPBHY"
@@ -894,7 +834,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6UCcKR6bZyb32r5M
     _key: "!items.effects!637b93dd540194ba.6UCcKR6bZyb32r5M"
@@ -922,8 +861,6 @@ effects:
               @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
             type: description
       delivery: sight
-      duration:
-        unit: instant
       elderSorcery: true
       executionTime:
         base: Long Rest
@@ -952,13 +889,10 @@ effects:
           @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       ritual: true
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ICp5jqsEH5bupT5h
     _key: "!items.effects!637b93dd540194ba.ICp5jqsEH5bupT5h"
@@ -972,24 +906,18 @@ effects:
         - _id: JT1XORoecAWXaZZi
           common:
             - identify
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - sensory
         - truthDetecting
       elements:
         - storm
-      executionTime:
-        base: a1
       form: special
       identifier: instant-identify-sight
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>If the @Identifier[core:targets]{target} is an item, you know if it is @Identifier[property:magic]{magical}
@@ -1005,7 +933,6 @@ effects:
       targets:
         - creature
         - item
-    transfer: true
     type: ability
   - _id: ItjfhF79f5xFJNSP
     _key: "!items.effects!637b93dd540194ba.ItjfhF79f5xFJNSP"
@@ -1054,7 +981,6 @@ effects:
         score:
           attribute: per
           value: 4
-    transfer: true
     type: ability
   - _id: 5OpczkYwEfTIrnhb
     _key: "!items.effects!637b93dd540194ba.5OpczkYwEfTIrnhb"
@@ -1085,7 +1011,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -1099,7 +1024,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: MQkjR7tGZTa8PRdS
     _key: "!items.effects!637b93dd540194ba.MQkjR7tGZTa8PRdS"
@@ -1118,7 +1042,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: scouting
       interaction: manifest
       maneuver: passive
@@ -1141,7 +1064,6 @@ effects:
         score:
           attribute: per
           value: 2
-    transfer: true
     type: ability
   - _id: kUs4sR0p8k5tWVaN
     _key: "!items.effects!637b93dd540194ba.kUs4sR0p8k5tWVaN"
@@ -1179,7 +1101,6 @@ effects:
         score:
           attribute: str
           value: 4
-    transfer: true
     type: ability
   - _id: bz4wnT47HZKyF9p0
     _key: "!items.effects!637b93dd540194ba.bz4wnT47HZKyF9p0"
@@ -1200,7 +1121,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
@@ -1221,7 +1141,6 @@ effects:
         score:
           attribute: str
           value: 3
-    transfer: true
     type: ability
   - _id: u2u3tL38wgsHVocB
     _key: "!items.effects!637b93dd540194ba.u2u3tL38wgsHVocB"
@@ -1238,7 +1157,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -1258,7 +1176,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: NzrsCJbVa8l4wEat
     _key: "!items.effects!637b93dd540194ba.NzrsCJbVa8l4wEat"
@@ -1275,7 +1192,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -1296,7 +1212,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: S5dLhHceukDtdkon
     _key: "!items.effects!637b93dd540194ba.S5dLhHceukDtdkon"
@@ -1313,7 +1228,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -1327,7 +1241,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 066IzEf6fNTJc5dy
     _key: "!items.effects!637b93dd540194ba.066IzEf6fNTJc5dy"
@@ -1339,14 +1252,10 @@ effects:
       _sup: bz4wnT47HZKyF9p0
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r0
-      form: normal
       identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -1359,16 +1268,11 @@ effects:
           @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
         delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-    transfer: true
     type: ability
   - _id: UM495KVQjQwuq9F8
     _key: "!items.effects!637b93dd540194ba.UM495KVQjQwuq9F8"
@@ -1382,7 +1286,6 @@ effects:
         - _id: MZ0HXunkUDN7yJiQ
           common:
             - shatter
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -1392,26 +1295,19 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - destruction
       executionTime:
         base: a2
-      form: normal
       identifier: shattering-grip
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[property:shattered]{shattered}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>You are holding the target.</p>
       targets:
         - item
-    transfer: true
     type: ability
   - _id: QzygTXUrMEnFpsX7
     _key: "!items.effects!637b93dd540194ba.QzygTXUrMEnFpsX7"
@@ -1428,7 +1324,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-cry
       improvement: <p>You are @Identifier[keyword:adept]{adept} at @Identifier[ability:battle-cry-aura]{Battle Cry Aura}.</p>
       interaction: manifest
@@ -1445,7 +1340,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: rAFvoZpKMDxltsNH
     _key: "!items.effects!637b93dd540194ba.rAFvoZpKMDxltsNH"
@@ -1471,10 +1365,8 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      form: normal
       identifier: battle-cry-resistance
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
@@ -1485,7 +1377,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: LnARY82RynFux1g7
     _key: "!items.effects!637b93dd540194ba.LnARY82RynFux1g7"
@@ -1497,31 +1388,14 @@ effects:
       _sup: QzygTXUrMEnFpsX7
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -1542,25 +1416,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-cry-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -1571,9 +1433,6 @@ effects:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: LzDV9X5SWi9hk7cX
     _key: "!items.effects!637b93dd540194ba.LzDV9X5SWi9hk7cX"
@@ -1585,31 +1444,15 @@ effects:
       _sup: 9FxsdBA7I5B8CEuQ
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
           executor: true
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -1630,25 +1473,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-roar-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -1657,9 +1488,6 @@ effects:
       requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
       results:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/creatures/iron-dragon.webp
@@ -1667,8 +1495,6 @@ name: Iron Dragon
 system:
   appearance: <p>Massive reptilians with wings.</p>
   br: 60
-  competence:
-    raw: 1
   description: >-
     <p>@UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{Dragons} are extremely intelligent and natively speak
     the @Identifier[core:elder-sorcery]{language of creation}. They may have other abilities not listed.</p>
@@ -1677,18 +1503,15 @@ system:
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 5 @Identifier[class:berserker]{Berserker}.</p>
   mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
   size:
-    enabled: true
     max: 30
     min: 10
     value: 10
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "@species.size"
     mp:
-      disabled: false
       faces: 12
       number:
         raw: "@species.size - 6"

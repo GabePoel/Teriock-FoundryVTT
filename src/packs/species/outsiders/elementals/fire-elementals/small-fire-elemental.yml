@@ -27,7 +27,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: dark-vision
       interaction: manifest
       maneuver: passive
@@ -39,7 +38,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: pZNhgpP0yDhnTLdO
     _key: "!items.effects!419c9a1bb485118d.pZNhgpP0yDhnTLdO"
@@ -78,7 +76,6 @@ effects:
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: YbAwrPu01TS28saA
     _key: "!items.effects!419c9a1bb485118d.YbAwrPu01TS28saA"
@@ -115,7 +112,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EYsSwXy2iA9ucDlT
     _key: "!items.effects!419c9a1bb485118d.EYsSwXy2iA9ucDlT"
@@ -129,12 +125,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: 7OuG6efyOs2VWpp3
           activeQualifier: not(@status.frozen)
           consumeStatDice: false
-          forHarm: false
           trigger: turnStart
           type: revitalize
       competence:
@@ -170,7 +164,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: a5IydkyKOSuJLNw9
     _key: "!items.effects!419c9a1bb485118d.a5IydkyKOSuJLNw9"
@@ -186,7 +179,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -199,8 +191,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: kyRRBC6NYmugUjz6
     _key: "!items.effects!419c9a1bb485118d.kyRRBC6NYmugUjz6"
@@ -216,7 +206,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -229,8 +218,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 8G6JkiH60YRL3nKW
     _key: "!items.effects!419c9a1bb485118d.8G6JkiH60YRL3nKW"
@@ -246,7 +233,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -259,8 +245,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: FxxOFRZfNOl9kqiq
     _key: "!items.effects!419c9a1bb485118d.FxxOFRZfNOl9kqiq"
@@ -276,7 +260,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -289,8 +272,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: W0M4tcsnNzpExjr2
     _key: "!items.effects!419c9a1bb485118d.W0M4tcsnNzpExjr2"
@@ -302,16 +283,11 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - transformation
-      executionTime:
-        base: a1
       form: special
       identifier: take-amorphous-elemental-form
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You take on an amorphous form of pure elemental magic. While in this state you have all the innate
@@ -328,7 +304,6 @@ effects:
       requirements: <p>You are in a @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental form}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 3xScbo7DEZnEv15d
     _key: "!items.effects!419c9a1bb485118d.3xScbo7DEZnEv15d"
@@ -340,16 +315,11 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - transformation
-      executionTime:
-        base: a1
       form: special
       identifier: take-humanoid-elemental-form
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You take on a @Wiki[Category:Humanoid creatures]{humanoid} form. While in this state you have
@@ -364,7 +334,6 @@ effects:
       requirements: <p>You are in an @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental form}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: WForCDyluJiqBRRP
     _key: "!items.effects!419c9a1bb485118d.WForCDyluJiqBRRP"
@@ -387,7 +356,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
@@ -401,7 +369,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/creatures/small-fire-elemental.webp
@@ -411,24 +378,19 @@ system:
     <p>Appear as a mass of fire. This amorphous state is their default form, but elementals can also take a humanoid
     form which resembles a human with an odd skin color.</p>
   br: 10
-  competence:
-    raw: 1
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
   identifier: small-fire-elemental
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:flame-mage]{Flame Mage}.</p>
   size:
-    enabled: true
     max: 2
     min: 1
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "@species.size"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "2"

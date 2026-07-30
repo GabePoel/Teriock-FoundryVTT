@@ -19,35 +19,22 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - bag
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 71e51b18552837f1
-              display: {}
               formula: (2 + @h)d6
               impact: kill
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - killing
           elements:
             - necromancy
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill
             1d6]].</p>
           identifier: death-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -64,9 +51,6 @@ items:
               @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: S7EhnA31Kvd6oCzp
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.S7EhnA31Kvd6oCzp"
@@ -103,26 +87,15 @@ items:
             base: r1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
-          form: normal
           identifier: disable-ray
-          interaction: attack
           maneuver: reactive
           overview:
             proficient: >-
               <p>This also makes the effect of that @Pack[teriock.abilities]{ability}
               @Identifier[core:fizzles]{fizzle}.</p>
-          piercing:
-            raw: 1
           powerSources:
             - spiritual
           range:
@@ -135,14 +108,11 @@ items:
               @Pack[teriock.abilities]{ability} they were using.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic} @Wiki[Category:Active
             abilities]{active} or @Wiki[Category:Reactive abilities]{reactive ability} that isn't a
             @Wiki[Category:Spells]{spell} against a different creature or some @Pack[teriock.equipment]{equipment} that
             different creature @Identifier[keyword:bearing]{bares}.</p>
-        transfer: true
         type: ability
       - _id: WiEqVGizGf5EU5Kq
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.WiEqVGizGf5EU5Kq"
@@ -185,7 +155,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           limitation: <p>Cannot go more than 5 feet above the ground.</p>
@@ -201,7 +170,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: rsYsbX319ehRaDUf
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.rsYsbX319ehRaDUf"
@@ -231,7 +199,6 @@ items:
             score:
               attribute: int
               value: -1
-        transfer: true
         type: ability
       - _id: 5dYwX8LzVTKPXJPd
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.5dYwX8LzVTKPXJPd"
@@ -261,7 +228,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: awEXFUhB9xUxMtL8
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.awEXFUhB9xUxMtL8"
@@ -277,7 +243,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -290,8 +255,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 76Ax2ZIn44rjbX9r
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.76Ax2ZIn44rjbX9r"
@@ -307,7 +270,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -320,8 +282,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: kcblUG4PmZ9ozchl
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.kcblUG4PmZ9ozchl"
@@ -333,40 +293,13 @@ items:
           automations:
             - _id: mXGdgQY5cJXHpv31
               attribute: mov
-              bonus: ""
               threshold: 10 + @c
               type: feat
             - _id: WbvSgSpGns0SR1JS
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
-                enabled: false
-                priority: 0
                 type: move
-              targeting: true
-              trigger: null
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
           competence:
             raw: 1
           delivery: self
@@ -376,7 +309,6 @@ items:
             - flame
           executionTime:
             base: passive
-          form: normal
           identifier: passive-self-detonate
           interaction: manifest
           maneuver: passive
@@ -401,7 +333,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: bWFt3JjtMrJ3hiA9
         _key: "!actors.items.effects!dcac008bde07c301.dcac008bde07c301.bWFt3JjtMrJ3hiA9"
@@ -417,7 +348,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: sneaky
           interaction: manifest
           maneuver: passive
@@ -431,7 +361,6 @@ items:
             score:
               attribute: snk
               value: 1
-        transfer: true
         type: ability
     folder: aa772458d708a91e
     img: systems/teriock/src/icons/creatures/charcalamari.webp
@@ -439,22 +368,17 @@ items:
     system:
       appearance: <p>Flying greyscale squid that swim through the air.</p>
       br: 3
-      competence:
-        raw: 1
       description: >-
         <p>These creatures tend to travel alone but often skirmish in small groups of four or five. These cephalopods
         are strategic and competitive, throwing spells at each other to activate their detonation, thus taking out
         competition and prey simultaneously.</p>
       identifier: charcalamari
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d6
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -476,9 +400,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -486,7 +407,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 7zV2wGze9lzJ1jdD
         _key: "!actors.items.effects!dcac008bde07c301.b0rReY6u478l00iA.7zV2wGze9lzJ1jdD"
@@ -497,24 +417,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: aa772458d708a91e
     img: systems/teriock/src/icons/body-parts/wriggling-tentacle.webp
     name: Wriggling Tentacle
     system:
       _sup: dcac008bde07c301
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -522,20 +435,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Charcalamari
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Charcalamari
   ring:
     enabled: true
@@ -543,20 +447,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/charcalamari.webp
   texture:
     src: systems/teriock/src/icons/creatures/charcalamari.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 4
   identifier: charcalamari
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

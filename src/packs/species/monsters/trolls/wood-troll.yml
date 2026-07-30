@@ -29,7 +29,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: BjOBdAt6DO73YILE
     _key: "!items.effects!ee962ef4616cfd97.BjOBdAt6DO73YILE"
@@ -40,30 +39,18 @@ effects:
     system:
       automations:
         - _id: Hd5o6s1SdA8C7IfT
-          competence:
-            raw: 0
-          preventFeat: false
           preventThreshold: true
           type: override
         - _id: 0b0d1426453abb55
-          executor: false
-          multi: false
           relation: apply
           status: hidden
-          target: false
           type: status
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       featSaveAttribute: snk
-      form: normal
       identifier: hide
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -91,7 +78,6 @@ effects:
         score:
           attribute: snk
           value: 2
-    transfer: true
     type: ability
   - _id: KKH5Db6hVpYbf0EB
     _key: "!items.effects!ee962ef4616cfd97.KKH5Db6hVpYbf0EB"
@@ -119,7 +105,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -133,7 +118,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 0ygg0JX89a4sbez9
     _key: "!items.effects!ee962ef4616cfd97.0ygg0JX89a4sbez9"
@@ -149,7 +133,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -162,8 +145,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: 4BpLc3G1S2X7oolV
     _key: "!items.effects!ee962ef4616cfd97.4BpLc3G1S2X7oolV"
@@ -179,7 +160,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -192,8 +172,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 9vXxj1pZjh9wgNmg
     _key: "!items.effects!ee962ef4616cfd97.9vXxj1pZjh9wgNmg"
@@ -209,7 +187,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -222,8 +199,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: 1vgzEGcXFKq8WFfK
     _key: "!items.effects!ee962ef4616cfd97.1vgzEGcXFKq8WFfK"
@@ -239,7 +214,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -252,8 +226,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: pIIRkEQUY2K32txD
     _key: "!items.effects!ee962ef4616cfd97.pIIRkEQUY2K32txD"
@@ -267,13 +239,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: iCn9pFDIGFJWxm6H
           activeQualifier: and(not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -307,7 +276,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: vPrApxhqcRzasOCQ
     _key: "!items.effects!ee962ef4616cfd97.vPrApxhqcRzasOCQ"
@@ -339,7 +307,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: stealth
       interaction: manifest
       maneuver: passive
@@ -368,7 +335,6 @@ effects:
         score:
           attribute: snk
           value: 3
-    transfer: true
     type: ability
 folder: c8142ec7ec7ecbbd
 img: systems/teriock/src/icons/creatures/wood-troll.webp
@@ -376,21 +342,16 @@ name: Wood Troll
 system:
   appearance: <p>@Identifier[creature:dwarf]{Dwarf}-sized, ugly, and hunched with a lanky build and chameleon-like skin.</p>
   br: 5
-  competence:
-    raw: 1
   description: <p>Wood trolls are very wild and not much smarter than @Identifier[creature:cave-troll]{cave trolls}.</p>
   identifier: wood-troll
   size:
-    enabled: true
     value: 2
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

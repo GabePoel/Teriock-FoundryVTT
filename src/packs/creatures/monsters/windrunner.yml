@@ -49,7 +49,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -64,7 +63,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: OIAlujrhohDk1eKg
         _key: "!actors.items.effects!2302c860c102a17d.2302c860c102a17d.OIAlujrhohDk1eKg"
@@ -94,7 +92,6 @@ items:
             score:
               attribute: int
               value: -1
-        transfer: true
         type: ability
       - _id: opAvhRfdUofJTW7u
         _key: "!actors.items.effects!2302c860c102a17d.2302c860c102a17d.opAvhRfdUofJTW7u"
@@ -110,7 +107,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -123,8 +119,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: OgMfcaiqW0vyHkxd
         _key: "!actors.items.effects!2302c860c102a17d.2302c860c102a17d.OgMfcaiqW0vyHkxd"
@@ -140,7 +134,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -153,8 +146,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: B8YnU81uSkL4Pskz
         _key: "!actors.items.effects!2302c860c102a17d.2302c860c102a17d.B8YnU81uSkL4Pskz"
@@ -170,7 +161,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -183,8 +173,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: WuSgDkO6zZhjsOTB
         _key: "!actors.items.effects!2302c860c102a17d.2302c860c102a17d.WuSgDkO6zZhjsOTB"
@@ -200,7 +188,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: speed
           interaction: manifest
           maneuver: passive
@@ -214,7 +201,6 @@ items:
             score:
               attribute: mov
               value: 3
-        transfer: true
         type: ability
       - _id: r9025GlwRU10YOuq
         _key: "!actors.items.effects!2302c860c102a17d.2302c860c102a17d.r9025GlwRU10YOuq"
@@ -227,25 +213,17 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - awaken
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
           effectTypes:
             - awakening
           executionTime:
             base: r0
-          form: normal
           identifier: triumphant-awaken
-          interaction: attack
           limitation: <p>In groups of 3 or more.</p>
           maneuver: reactive
-          piercing:
-            raw: 0
           powerSources:
             - martial
           range:
@@ -254,10 +232,7 @@ items:
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[keyword:awaken]{awakened}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: <p>@Identifier[condition:down]{Dropping} an opponent.</p>
-        transfer: true
         type: ability
     folder: 13ef6e80a087d7cf
     img: systems/teriock/src/icons/creatures/windrunner.webp
@@ -265,22 +240,13 @@ items:
     system:
       appearance: <p>[[lookup name]]s look like skinny, very light cats that stand upright to fight.</p>
       br: 5
-      competence:
-        raw: 1
       description: >-
         <p>[[lookup name]]s usually attack in large numbers. These creatures are ferocious protectors of their
         territory, and often use weapons to excellent effect. Their lack of a bipedal stance means that they cannot run
         while holding weapons so they tend to wear baldrics and sheaths for this.</p>
       identifier: windrunner
-      size:
-        enabled: true
-        value: 3
       statDice:
-        hp:
-          disabled: false
-          formula: 1d10
         mp:
-          disabled: false
           formula: 1d8
       traits:
         - partialHumanoid
@@ -302,15 +268,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!2302c860c102a17d.AftaoLZA347vM5kh.IDLUUjkSFtpaiKuJ"
@@ -321,32 +283,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 13ef6e80a087d7cf
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 2302c860c102a17d
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: N4aCKGEiRqdPAtKo
     _key: "!actors.items!2302c860c102a17d.N4aCKGEiRqdPAtKo"
@@ -362,15 +315,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!2302c860c102a17d.N4aCKGEiRqdPAtKo.fq8owR84sFsgLiuj"
@@ -381,9 +330,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -391,7 +337,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!2302c860c102a17d.N4aCKGEiRqdPAtKo.4WFL62wofj7AHBxN"
@@ -402,24 +347,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 13ef6e80a087d7cf
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 2302c860c102a17d
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -427,8 +365,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: WQWc4uUh246bT7tg
     _key: "!actors.items!2302c860c102a17d.WQWc4uUh246bT7tg"
@@ -444,9 +380,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -454,7 +387,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: rxHvNMZbvlGHFxTl
         _key: "!actors.items.effects!2302c860c102a17d.WQWc4uUh246bT7tg.rxHvNMZbvlGHFxTl"
@@ -465,26 +397,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 13ef6e80a087d7cf
     img: systems/teriock/src/icons/body-parts/sharp-claw.webp
     name: Sharp Claw
     system:
       _sup: 2302c860c102a17d
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d6
       fightingStyle: savage
@@ -492,8 +417,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: ca8BhaRrqB1ckGpr
     _key: "!actors.items!2302c860c102a17d.ca8BhaRrqB1ckGpr"
@@ -504,29 +427,17 @@ items:
     name: Hide
     system:
       _sup: 2302c860c102a17d
-      attackPenalty: "-3"
       av:
         raw: 1
-      competence:
-        raw: 0
       identifier: hide
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
 name: Windrunner
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Windrunner
   ring:
     enabled: true
@@ -534,24 +445,14 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/windrunner.webp
   texture:
     src: systems/teriock/src/icons/creatures/windrunner.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 6
   identifier: windrunner
   mp:
     value: 5
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
-  size:
-    value: 3
   wielding:
     attacker: ca8BhaRrqB1ckGpr
     blocker: WQWc4uUh246bT7tg

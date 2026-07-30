@@ -16,39 +16,23 @@ effects:
     system:
       automations:
         - _id: eUm1UOhkyF3KmU1q
-          all: false
-          attachDocuments: true
-          automatic: true
           competencies:
             - 1
           identifiers:
             - ability:fast
-          multi: false
-          separate: false
           type: addDocuments
         - _id: qy0rKWHv0DFoFgqJ
-          all: false
-          attachDocuments: true
-          automatic: true
           competencies:
             - 2
           identifiers:
             - ability:swift
-          multi: false
-          separate: false
           type: addDocuments
         - _id: mmCTbgaQIg38Y0II
-          executor: false
-          multi: false
-          relation: include
           status: frenzied
-          target: false
           type: status
         - _id: mY9vQJGkj2Kf1RTw
           amount: 15
           impact: gainTempHp
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -57,18 +41,14 @@ effects:
         raw: "5"
         unit: minute
       endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: b50b3ee67eddc9f9
           statuses:
             present:
               - dead
           type: status
-      form: normal
       identifier: berserk
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You gain 15 @Identifier[core:temporary-hit-points]{temporary HP} and become
@@ -87,7 +67,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: dbJPDVq2wmgowY99
     _key: "!items.effects!Ti3b351EdT2O66Rj.dbJPDVq2wmgowY99"
@@ -107,7 +86,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: intimidate
       interaction: manifest
       maneuver: passive
@@ -123,7 +101,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: SdhooKPnRmeo0BA0
     _key: "!items.effects!Ti3b351EdT2O66Rj.SdhooKPnRmeo0BA0"
@@ -136,14 +113,9 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           formula: 1d4[psychic]
-          impact: damage
           type: roll
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -153,13 +125,9 @@ effects:
         unit: minute
       effectTypes:
         - mental
-      executionTime:
-        base: a1
       featSaveAttribute: int
-      form: normal
       identifier: terrify
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -173,9 +141,6 @@ effects:
           @Identifier[core:damage]{damage} as well.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 2HhZ4pMtftCaNv4N
     _key: "!items.effects!Ti3b351EdT2O66Rj.2HhZ4pMtftCaNv4N"
@@ -202,7 +167,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: intimidating-presence
       interaction: manifest
       maneuver: passive
@@ -216,7 +180,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-berserker.webp
@@ -225,8 +188,6 @@ system:
   _sup: 637b93dd540194ba
   archetype: warrior
   class: berserker
-  competence:
-    raw: 1
   description: >-
     <p>Wild and savage. They distrust @Wiki[Category:Magical effects]{magic} of all kinds and put their faith in
     themselves before others. Always at the front of a battle, @Identifier[class:berserker]{Berserkers} love the sport
@@ -234,14 +195,10 @@ system:
     guards as they are too distracted and are rarely very intelligent. If you are a
     @Identifier[class:berserker]{Berserker} be larger than life, brash, not too bright and stupidly brave.</p>
   identifier: rank-4-berserker
-  innate: false
-  maxAv: 2
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

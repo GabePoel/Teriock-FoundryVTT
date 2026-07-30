@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-necromancy-spells
       interaction: manifest
       maneuver: passive
@@ -41,7 +40,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: c03uQvPFAXLocKls
     _key: "!items.effects!AJECVazBeP1Gyjxl.c03uQvPFAXLocKls"
@@ -61,7 +59,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: necromancy-disciplines
       interaction: manifest
       maneuver: passive
@@ -91,7 +88,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: fSeFQwpoBFhs6UBZ
     _key: "!items.effects!AJECVazBeP1Gyjxl.fSeFQwpoBFhs6UBZ"
@@ -109,11 +105,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: intrusive-casting
       interaction: manifest
       maneuver: reactive
@@ -130,7 +123,6 @@ effects:
       trigger: >-
         <p>You are casting a @Wiki[Category:Spells]{spell} with a @Identifier[core:range]{range} other than
         @Wiki[Category:Self target spells]{self}.</p>
-    transfer: true
     type: ability
   - _id: MpVCVxEo9FCbPX4j
     _key: "!items.effects!AJECVazBeP1Gyjxl.MpVCVxEo9FCbPX4j"
@@ -148,11 +140,8 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: oppressive-casting
       interaction: manifest
       maneuver: reactive
@@ -171,7 +160,6 @@ effects:
       targets:
         - spell
       trigger: <p>You cast an @Wiki[Category:Attack spells]{attack} or @Wiki[Category:Feat spells]{feat interaction spell}.</p>
-    transfer: true
     type: ability
   - _id: 3D49dlT5EnsVNymi
     _key: "!items.effects!AJECVazBeP1Gyjxl.3D49dlT5EnsVNymi"
@@ -182,23 +170,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Necromancy element spells]{necromancy spell} as though you
         were @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-necromancy-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: VXekriULRwKtgxjT
     _key: "!items.effects!AJECVazBeP1Gyjxl.VXekriULRwKtgxjT"
@@ -209,31 +188,19 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Necromancy element spells]{necromancy spell} in half the time it would normally
         take.</p>
       identifier: half-time-ritual-necromancy-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: a4e3527bf26a4ba9
 img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
@@ -242,8 +209,6 @@ system:
   _sup: 8587730bab2f72c7
   archetype: mage
   class: necromancer
-  competence:
-    raw: 1
   description: >-
     <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery digging
     up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply see death as
@@ -252,14 +217,11 @@ system:
     unafraid, kill without remorse and be interested in @Identifier[condition:dead]{dead} bodies, close to death
     yourself, almost in another world.</p>
   identifier: rank-4-necromancer
-  innate: false
   maxAv: 0
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

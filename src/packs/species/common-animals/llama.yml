@@ -10,11 +10,7 @@ effects:
     system:
       automations:
         - _id: 18537e76761a45dc
-          executor: false
-          multi: false
-          relation: include
           status: blind
-          target: false
           type: status
       competence:
         raw: 1
@@ -24,28 +20,14 @@ effects:
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: blinding-spit
-      interaction: attack
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[condition:blind]{blind}.</p>
-      piercing:
-        raw: 1
       powerSources:
         - martial
       range:
@@ -53,7 +35,6 @@ effects:
         unit: ft
       targets:
         - vitals
-    transfer: true
     type: ability
   - _id: l3AWZCK4wiOppYKH
     _key: "!items.effects!7c7c15dee4e37db6.l3AWZCK4wiOppYKH"
@@ -83,7 +64,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: IXJPBIO9yi5caHqQ
     _key: "!items.effects!7c7c15dee4e37db6.IXJPBIO9yi5caHqQ"
@@ -106,7 +86,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: endurance
       interaction: manifest
       maneuver: passive
@@ -121,7 +100,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: s2Rotn9QSCCLEGZw
     _key: "!items.effects!7c7c15dee4e37db6.s2Rotn9QSCCLEGZw"
@@ -137,7 +115,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -157,7 +134,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: ARCFpHfaK5e1O1jm
     _key: "!items.effects!7c7c15dee4e37db6.ARCFpHfaK5e1O1jm"
@@ -173,7 +149,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: mountain-native
       interaction: manifest
       maneuver: passive
@@ -187,7 +162,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ysrd8m8JDn4iKpNU
     _key: "!items.effects!7c7c15dee4e37db6.ysrd8m8JDn4iKpNU"
@@ -215,7 +189,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: crT37I0jtXXET9WT
     _key: "!items.effects!7c7c15dee4e37db6.crT37I0jtXXET9WT"
@@ -231,7 +204,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -244,8 +216,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: wHjU0WTQ5AUM1RUr
     _key: "!items.effects!7c7c15dee4e37db6.wHjU0WTQ5AUM1RUr"
@@ -261,7 +231,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -274,8 +243,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: egPqHkQluUg5XcrJ
     _key: "!items.effects!7c7c15dee4e37db6.egPqHkQluUg5XcrJ"
@@ -291,7 +258,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -304,8 +270,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: 9z9XDKRnSEJFLQYS
     _key: "!items.effects!7c7c15dee4e37db6.9z9XDKRnSEJFLQYS"
@@ -322,7 +286,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -343,7 +306,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: 9aesZKh1h8Ev6jTs
     _key: "!items.effects!7c7c15dee4e37db6.9aesZKh1h8Ev6jTs"
@@ -360,7 +322,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -374,7 +335,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: yMexR9HfORUpuIdV
     _key: "!items.effects!7c7c15dee4e37db6.yMexR9HfORUpuIdV"
@@ -386,7 +346,6 @@ effects:
       _sup: ARCFpHfaK5e1O1jm
       affinities:
         - _id: GD5sRrEYZoAbn97J
-          amount: 1
           category: other
           type: takeDeboost
           value: Mountainous Weather
@@ -397,7 +356,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: mountain-resilience
       interaction: manifest
       maneuver: passive
@@ -411,7 +369,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: bwtZ8hklw1lI8N3j
     _key: "!items.effects!7c7c15dee4e37db6.bwtZ8hklw1lI8N3j"
@@ -440,7 +397,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: agile
       interaction: manifest
       limitation: <p>Mountainous terrain only.</p>
@@ -453,27 +409,21 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/llama.webp
 name: Llama
 system:
   br: 4
-  competence:
-    raw: 1
   identifier: llama
   size:
-    enabled: true
     value: 4
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

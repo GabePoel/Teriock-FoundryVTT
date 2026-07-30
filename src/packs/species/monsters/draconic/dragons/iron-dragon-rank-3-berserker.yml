@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
@@ -37,7 +36,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ss8nMvpGEnj5nnXU
     _key: "!items.effects!NzYaOFCxcJBkdUUd.ss8nMvpGEnj5nnXU"
@@ -53,8 +51,6 @@ effects:
       automations:
         - _id: 8QOdQYnnSxyi3PA8
           activeQualifier: and(not(@status.dead), @status.hacked, not(@status.burned), not(@status.dead), not(@status.frozen))
-          consumeStatDice: true
-          forHarm: false
           noStatDice: true
           trigger: turnStart
           type: heal
@@ -68,7 +64,6 @@ effects:
         - regeneration
       executionTime:
         base: passive
-      form: normal
       identifier: berserker-healing-factor
       interaction: manifest
       maneuver: passive
@@ -85,7 +80,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ZyD7GQ9gCRAfbjrk
     _key: "!items.effects!NzYaOFCxcJBkdUUd.ZyD7GQ9gCRAfbjrk"
@@ -111,10 +105,8 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      form: normal
       identifier: battle-cry-resistance
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
@@ -125,7 +117,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EXnNcilGIUL5XOwK
     _key: "!items.effects!NzYaOFCxcJBkdUUd.EXnNcilGIUL5XOwK"
@@ -137,31 +128,14 @@ effects:
       _sup: AtUPPT2VKpl3SDUg
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -182,25 +156,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-cry-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -211,9 +173,6 @@ effects:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-3-berserker.webp
@@ -222,8 +181,6 @@ system:
   _sup: 637b93dd540194ba
   archetype: warrior
   class: berserker
-  competence:
-    raw: 1
   description: >-
     <p>Wild and savage. They distrust @Wiki[Category:Magical effects]{magic} of all kinds and put their faith in
     themselves before others. Always at the front of a battle, @Identifier[class:berserker]{Berserkers} love the sport
@@ -231,14 +188,10 @@ system:
     guards as they are too distracted and are rarely very intelligent. If you are a
     @Identifier[class:berserker]{Berserker} be larger than life, brash, not too bright and stupidly brave.</p>
   identifier: rank-3-berserker
-  innate: false
-  maxAv: 2
   number: 3
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

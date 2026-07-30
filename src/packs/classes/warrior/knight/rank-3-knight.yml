@@ -14,14 +14,9 @@ effects:
     system:
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: battle-charge
-      interaction: attack
       maneuver: reactive
       overview:
         base: >-
@@ -30,23 +25,16 @@ effects:
           class="note"><b>Note:</b> This ability can trigger in the middle of @Identifier[ability:move]{moving}. You
           could approach an enemy, trigger this ability, take an @Identifier[ability:opportunity-attack]{Opportunity
           Attack} against them, keep moving towards them, and trigger this ability again.</p>
-      piercing:
-        raw: 2
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
         hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
-    transfer: true
     type: ability
   - _id: yhs17sF1okrnhirI
     _key: "!items.effects!dcb02352d66dc55f.yhs17sF1okrnhirI"
@@ -61,19 +49,13 @@ effects:
     system:
       automations:
         - _id: 2DH3QDwvAS8wYiIj
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:runic
-          multi: false
-          separate: false
           type: addDocuments
         - _id: GT2hZSyAU5MxBZ06
           common:
             - reforge
             - repair
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -94,7 +76,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: mystic-weapon-repair
       interaction: manifest
       maneuver: slow
@@ -114,7 +95,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
   - _id: pg50QWBmgeGGvg7O
     _key: "!items.effects!dcb02352d66dc55f.pg50QWBmgeGGvg7O"
@@ -128,36 +108,14 @@ effects:
     system:
       automations:
         - _id: Mny7BIO5WvYIRRfr
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           type: heal
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
-          regionType: circle
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -180,13 +138,9 @@ effects:
         - loud
         - mental
       endCondition: <p>At the start of each of the enemy target's turns, they roll [[/roll 2d4]]. On a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       featSaveAttribute: int
-      form: normal
       identifier: rallying-cry
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>[[lookup name]] only counts as a @Wiki[Category:Mental effects]{mental effect} on your enemies and a
@@ -206,9 +160,6 @@ effects:
           enemy, they become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: p6uxscnoyCy8JtwB
     _key: "!items.effects!dcb02352d66dc55f.p6uxscnoyCy8JtwB"
@@ -235,25 +186,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: taunt
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -265,9 +204,6 @@ effects:
           other.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 97PKOuuxeoutqFas
     _key: "!items.effects!dcb02352d66dc55f.97PKOuuxeoutqFas"
@@ -286,7 +222,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: warrior-stance
       interaction: manifest
       maneuver: passive
@@ -306,7 +241,6 @@ effects:
         competence:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: aohUofsTp0MVBP9L
     _key: "!items.effects!dcb02352d66dc55f.aohUofsTp0MVBP9L"
@@ -325,7 +259,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: weapon-master
       interaction: manifest
       maneuver: passive
@@ -341,7 +274,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: lVtkiO1bPhKVTaHx
     _key: "!items.effects!dcb02352d66dc55f.lVtkiO1bPhKVTaHx"
@@ -353,20 +285,14 @@ effects:
       _sup: 97PKOuuxeoutqFas
       automations:
         - _id: 3KyeBPhhzYfwX8ch
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           type: heal
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - healing
       executionTime:
         base: r0
-      form: normal
       identifier: triumphant-healing-surge
       interaction: manifest
       maneuver: reactive
@@ -381,7 +307,6 @@ effects:
       targets:
         - self
       trigger: <p>@Identifier[condition:down]{Dropping} an opponent.</p>
-    transfer: true
     type: ability
   - _id: Kzl5aumpMLU9c2se
     _key: "!items.effects!dcb02352d66dc55f.Kzl5aumpMLU9c2se"
@@ -395,7 +320,6 @@ effects:
         - _id: d873eb939c3b5951
           hacks:
             - body
-          reverse: false
           type: hacks
       competence:
         raw: 1
@@ -404,13 +328,10 @@ effects:
           hack:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r1
-      form: normal
       identifier: withstand
       interaction: manifest
       maneuver: reactive
@@ -428,7 +349,6 @@ effects:
       targets:
         - self
       trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
-    transfer: true
     type: ability
   - _id: QhtMNwxvCHGtO5ae
     _key: "!items.effects!dcb02352d66dc55f.QhtMNwxvCHGtO5ae"
@@ -440,13 +360,8 @@ effects:
       _sup: aohUofsTp0MVBP9L
       automations:
         - _id: cA34hJRKJud2tWev
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:runic
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -464,7 +379,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: runic-weapons
       interaction: manifest
       maneuver: slow
@@ -482,7 +396,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
   - _id: ClCnF1BfLrqwx4CO
     _key: "!items.effects!dcb02352d66dc55f.ClCnF1BfLrqwx4CO"
@@ -509,7 +422,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: master-weapon-smith
       interaction: manifest
       maneuver: passive
@@ -525,7 +437,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 00689e4c34a8455c
 img: systems/teriock/src/icons/ranks/rank-3-knight.webp
@@ -533,8 +444,6 @@ name: Rank 3 Knight
 system:
   archetype: warrior
   class: knight
-  competence:
-    raw: 1
   description: >-
     <p>The true glory seekers, @Identifier[class:knight]{Knights} are chivalrous to a point but have none of the
     @Identifier[class:duelist]{Duelist's} respect for battles. @Identifier[class:knight]{Knights} are the weapon
@@ -544,7 +453,6 @@ system:
     looking for glory, looking for the next powerful
     @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
   identifier: rank-3-knight
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
@@ -552,13 +460,11 @@ system:
   number: 3
   statDice:
     hp:
-      disabled: false
       faces: 12
       formula: 1d12
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 8
       formula: 1d8
       number:

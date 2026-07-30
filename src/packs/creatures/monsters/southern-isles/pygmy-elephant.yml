@@ -18,61 +18,33 @@ items:
           automations:
             - _id: dWnCYT88hEWY1U3u
               activeQualifier: "@flags.disarmKnockback"
-              display: {}
               distance: "10"
               movementAction: walk
-              origin: executor
-              originBarrier: true
               type: move
             - _id: ow9J5qYNcoLGDsL3
               activeQualifier: "@flags.disarmKnockback"
-              display: {}
               distance: "20"
               movementAction: walk
-              origin: executor
-              originBarrier: true
               type: move
             - _id: zGqyHWcKnNUWmna8
-              all: false
-              automatic: true
-              data: "{}"
-              expandTables: false
-              identifiers: []
               local:
                 identifiers:
                   - ability:catch-item
-                qualifier: ""
-              multi: false
-              trigger: null
               type: useDocuments
-              uuids: []
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: disarm
-          interaction: attack
           limitation: <p>@Wiki[Category:Trunks]{Trunks} only.</p>
-          maneuver: active
           overview:
             base: >-
               <p>Anything held by the @Identifier[core:targets]{targeted} arm is knocked out of its grasp. This triggers
               @Identifier[ability:catch-item]{Catch Item}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           skill: true
           standard: true
           targets:
             - arm
-        transfer: true
         type: ability
       - _id: yLk3pyelQnMX4Z3r
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.yLk3pyelQnMX4Z3r"
@@ -88,7 +60,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -108,7 +79,6 @@ items:
             score:
               attribute: str
               value: 2
-        transfer: true
         type: ability
       - _id: kfPlcWGAtxcyR9m3
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.kfPlcWGAtxcyR9m3"
@@ -138,7 +108,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: 1lLCNxH0TGcYE72K
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.1lLCNxH0TGcYE72K"
@@ -154,7 +123,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -167,8 +135,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: Q9hl4RD7LjRBZGUg
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.Q9hl4RD7LjRBZGUg"
@@ -184,7 +150,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -197,8 +162,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: XdMLAD2ws7RNKpXL
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.XdMLAD2ws7RNKpXL"
@@ -214,7 +177,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -227,8 +189,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: GIQoGvMicA66HPRB
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.GIQoGvMicA66HPRB"
@@ -239,60 +199,33 @@ items:
         system:
           automations:
             - _id: 5d57231066693cee
-              executor: false
-              multi: false
-              relation: include
               status: snared
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             unit: unlimited
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               crit:
                 - 0
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
               crit:
                 - 1
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
               skip: 1
               timing: end
               type: combat
-          form: normal
           identifier: snare
-          interaction: attack
           limitation: <p>@Wiki[Category:Trunks]{Trunks} only.</p>
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
@@ -300,7 +233,6 @@ items:
           standard: true
           targets:
             - leg
-        transfer: true
         type: ability
       - _id: LUm4C1QmWN9ucyyv
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.LUm4C1QmWN9ucyyv"
@@ -313,25 +245,15 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - standardDamage
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d6
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           executionTime:
             base: r0
-          form: normal
           identifier: trample
-          interaction: attack
           maneuver: reactive
           overview:
             base: >-
@@ -339,21 +261,14 @@ items:
               @Identifier[core:size]{size category} smaller than you, add [[/damage 1d6]]
               @Identifier[core:damage]{damage} to its @Identifier[core:standard-and-critical-damage]{standard
               damage}.</p>
-          piercing:
-            raw: 2
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
             hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
-          targets:
-            - creature
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
             adjacent to them.</p>
-        transfer: true
         type: ability
       - _id: wj7XERyi9yj8jtNF
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.wj7XERyi9yj8jtNF"
@@ -364,7 +279,6 @@ items:
         system:
           automations:
             - _id: 14cf30d977e3b585
-              display: {}
               macro: Compendium.teriock.execution.Macro.090fd08ae26477da
               trigger: preExecute
               type: abilityMacro
@@ -375,7 +289,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: weapons-mastery
           interaction: manifest
           limitation: <p>@Wiki[Category:Trunks]{Trunks} only.</p>
@@ -402,7 +315,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: rVUC9gVwbTG0Ibkc
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.rVUC9gVwbTG0Ibkc"
@@ -419,7 +331,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -433,7 +344,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: eaQjpAoEV6pUHcwl
         _key: "!actors.items.effects!3aab8683cacdb88a.3aab8683cacdb88a.eaQjpAoEV6pUHcwl"
@@ -450,7 +360,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -471,7 +380,6 @@ items:
             score:
               attribute: str
               value: 1
-        transfer: true
         type: ability
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/creatures/pygmy-elephant.webp
@@ -479,22 +387,15 @@ items:
     system:
       appearance: <p>Miniature @Identifier[creature:elephant]{elephants}.</p>
       br: 9
-      competence:
-        raw: 1
       description: >-
         <p>Pygmy elephants are common mounts in the Oni Isles. They are half the size of traditional
         @Identifier[creature:elephant]{elephants}, but are just as dangerous!</p>
       identifier: pygmy-elephant
       size:
-        enabled: true
         value: 4
       statDice:
         hp:
-          disabled: false
           formula: 2d8
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - animal
       transformation:
@@ -515,15 +416,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!3aab8683cacdb88a.9OtEEufdEyjGHVyO.IDLUUjkSFtpaiKuJ"
@@ -534,32 +431,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 3aab8683cacdb88a
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: RwkKG1DB2GowNhJd
     _key: "!actors.items!3aab8683cacdb88a.RwkKG1DB2GowNhJd"
@@ -575,9 +463,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -585,7 +470,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: rxHvNMZbvlGHFxTl
         _key: "!actors.items.effects!3aab8683cacdb88a.RwkKG1DB2GowNhJd.rxHvNMZbvlGHFxTl"
@@ -596,26 +480,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/sharp-claw.webp
     name: Sharp Claw
     system:
       _sup: 3aab8683cacdb88a
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d6
       fightingStyle: savage
@@ -623,8 +500,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: UM598ezxDmQQgY5Z
     _key: "!actors.items!3aab8683cacdb88a.UM598ezxDmQQgY5Z"
@@ -635,17 +510,12 @@ items:
     name: Thick Hide
     system:
       _sup: 3aab8683cacdb88a
-      attackPenalty: "-3"
       av:
         raw: 2
-      competence:
-        raw: 0
       identifier: thick-hide
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: V63aVgs8B2kmQgGG
     _key: "!actors.items!3aab8683cacdb88a.V63aVgs8B2kmQgGG"
@@ -661,9 +531,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -671,7 +538,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: YqYRAUveoy3y3bT1
         _key: "!actors.items.effects!3aab8683cacdb88a.V63aVgs8B2kmQgGG.YqYRAUveoy3y3bT1"
@@ -682,9 +548,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -692,7 +555,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: iphURL7NY6bV05Ot
         _key: "!actors.items.effects!3aab8683cacdb88a.V63aVgs8B2kmQgGG.iphURL7NY6bV05Ot"
@@ -703,24 +565,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/swinging-trunk.webp
     name: Swinging Trunk
     system:
       _sup: 3aab8683cacdb88a
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -728,8 +583,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: kbIqvLwcozJWdfLc
     _key: "!actors.items!3aab8683cacdb88a.kbIqvLwcozJWdfLc"
@@ -745,15 +598,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!3aab8683cacdb88a.kbIqvLwcozJWdfLc.fq8owR84sFsgLiuj"
@@ -764,9 +613,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -774,7 +620,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!3aab8683cacdb88a.kbIqvLwcozJWdfLc.4WFL62wofj7AHBxN"
@@ -785,24 +630,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 3aab8683cacdb88a
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -810,20 +648,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Pygmy Elephant
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Pygmy Elephant
   ring:
     enabled: true
@@ -831,20 +660,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/pygmy-elephant.webp
   texture:
     src: systems/teriock/src/icons/creatures/pygmy-elephant.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 10
   identifier: pygmy-elephant
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

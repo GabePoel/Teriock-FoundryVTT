@@ -6,43 +6,28 @@ system:
   automations:
     - _id: 29b275994cf9f5b1
       formula: 1d6[toxic]
-      impact: damage
-      merge: true
       type: roll
     - _id: 5e4d195ed81a10cc
       competencies:
         - 1
         - 2
       formula: 1d8[toxic]
-      impact: damage
-      merge: true
       type: roll
     - _id: 3f7fa7707643426f
       competencies:
         - 2
       formula: 1d10[toxic]
-      impact: damage
-      merge: true
       type: roll
     - _id: 743730f25f256b10
-      executor: false
-      relation: include
       status: poisoned
-      target: false
       type: status
-  competence:
-    raw: 0
   delivery: hand
   duration:
     raw: "24"
     unit: hour
   endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-  executionTime:
-    base: a1
-  form: normal
   identifier: poison-item
   interaction: manifest
-  maneuver: active
   overview:
     base: >-
       <p>@Identifier[core:targets]{Target} makes a creature become @Identifier[condition:poisoned]{poisoned}. The
@@ -58,12 +43,9 @@ system:
       @Identifier[core:damage]{damage}.</p>
   powerSources:
     - alchemical
-  range:
-    unit: contact
   requirements: <p>@Identifier[core:targets]{Target} is not a weapon.</p>
   skill: true
   standard: true
   targets:
     - item
-transfer: true
 type: ability

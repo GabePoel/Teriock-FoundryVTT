@@ -25,7 +25,6 @@ items:
             base: Short Rest
             slow:
               unit: shortRest
-          form: normal
           identifier: disguise
           interaction: manifest
           limitation: <p>@Wiki[Category:Aquatic creatures]{Aquatic creatures} only.</p>
@@ -44,7 +43,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: jEoLL0Zh8ltZqegM
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.jEoLL0Zh8ltZqegM"
@@ -56,11 +54,8 @@ items:
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
           executionTime:
             base: r1
-          form: normal
           identifier: escape
           interaction: manifest
           limitation: <p>In water only.</p>
@@ -84,7 +79,6 @@ items:
             competence:
               attribute: mov
               value: 2
-        transfer: true
         type: ability
       - _id: C97PRxCS0MvSmfWG
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.C97PRxCS0MvSmfWG"
@@ -95,38 +89,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -154,7 +128,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: AKGTW8tQYQmWngH9
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.AKGTW8tQYQmWngH9"
@@ -184,7 +157,6 @@ items:
             score:
               attribute: int
               value: -1
-        transfer: true
         type: ability
       - _id: LvoZaZW5HlWDOeoN
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.LvoZaZW5HlWDOeoN"
@@ -214,7 +186,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: w4A2FcxOVik578HL
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.w4A2FcxOVik578HL"
@@ -242,7 +213,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: IvIPY12SZbCeNLTl
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.IvIPY12SZbCeNLTl"
@@ -258,7 +228,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -271,8 +240,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: HSVkZkzNU5OnB3PQ
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.HSVkZkzNU5OnB3PQ"
@@ -288,7 +255,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -301,8 +267,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: AWjGZ7usx5TmnYyK
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.AWjGZ7usx5TmnYyK"
@@ -318,7 +282,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -331,8 +294,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: Aj9tWwv7aYsx04a6
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.Aj9tWwv7aYsx04a6"
@@ -343,59 +304,32 @@ items:
         system:
           automations:
             - _id: 5d57231066693cee
-              executor: false
-              multi: false
-              relation: include
               status: snared
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             unit: unlimited
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               crit:
                 - 0
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
               crit:
                 - 1
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
               skip: 1
               timing: end
               type: combat
-          form: normal
           identifier: snare
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
@@ -403,7 +337,6 @@ items:
           standard: true
           targets:
             - leg
-        transfer: true
         type: ability
       - _id: vAzM9zLivCzocyjy
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.vAzM9zLivCzocyjy"
@@ -435,7 +368,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: stealth
           interaction: manifest
           maneuver: passive
@@ -465,7 +397,6 @@ items:
             score:
               attribute: snk
               value: 3
-        transfer: true
         type: ability
       - _id: HHLqEgRCg9uhTxvP
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.HHLqEgRCg9uhTxvP"
@@ -491,7 +422,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: water-home
           interaction: manifest
           maneuver: passive
@@ -505,7 +435,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: oWKFC74BfcVvCcco
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.oWKFC74BfcVvCcco"
@@ -535,7 +464,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: swimming
           interaction: manifest
           maneuver: passive
@@ -549,7 +477,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: KiDpBfIvFJw8lpj7
         _key: "!actors.items.effects!3056152fb3a9e62e.3056152fb3a9e62e.KiDpBfIvFJw8lpj7"
@@ -566,7 +493,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: diving
           interaction: manifest
           maneuver: passive
@@ -587,7 +513,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/octopus.webp
@@ -639,21 +564,16 @@ items:
           trigger: updateDocument
           type: toggleChildren
       br: 6
-      competence:
-        raw: 1
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       identifier: octopus
       size:
-        enabled: true
         max: 5
         min: 1
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: (@species.size)d6
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -675,9 +595,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -685,7 +602,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 7zV2wGze9lzJ1jdD
         _key: "!actors.items.effects!3056152fb3a9e62e.7kyXQUFj7EyxTwZS.7zV2wGze9lzJ1jdD"
@@ -696,24 +612,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/wriggling-tentacle.webp
     name: Wriggling Tentacle
     system:
       _sup: 3056152fb3a9e62e
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -721,8 +630,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: j9Z1i8jwCc59Obs4
     _key: "!actors.items!3056152fb3a9e62e.j9Z1i8jwCc59Obs4"
@@ -738,9 +645,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -748,7 +652,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 3Ecp5HfmBmb6NOX0
         _key: "!actors.items.effects!3056152fb3a9e62e.j9Z1i8jwCc59Obs4.3Ecp5HfmBmb6NOX0"
@@ -759,24 +662,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/commodities/bones/beak-hooked-red.webp
     name: Beak
     system:
       _sup: 3056152fb3a9e62e
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: savage
@@ -784,20 +680,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Octopus
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Octopus
   ring:
     enabled: true
@@ -805,20 +692,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/octopus.webp
   texture:
     src: systems/teriock/src/icons/creatures/octopus.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 4
   identifier: octopus
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

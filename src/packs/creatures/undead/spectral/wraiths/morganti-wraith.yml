@@ -37,25 +37,12 @@ items:
             - _id: ZdtyUjiggvt0bxgX
               common:
                 - revive
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: ZlgI0KUafWT3wE27
-              competence:
-                raw: 0
               competencies:
                 - 0
                 - 1
-              data: "{}"
-              display: {}
               makeEffect: true
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 6v7WhWcAO2fARRYl
               amount: 999999
@@ -65,9 +52,6 @@ items:
               display:
                 label: Restore MP
               impact: revitalizing
-              morganti: false
-              showDialog: false
-              trigger: null
               type: take
             - _id: YHHJxY54wT2k778U
               amount: 999999
@@ -77,9 +61,6 @@ items:
               display:
                 label: Restore HP
               impact: healing
-              morganti: false
-              showDialog: false
-              trigger: null
               type: take
           competence:
             raw: 1
@@ -94,25 +75,17 @@ items:
                 formula: "1"
                 type: formula
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - reanimation
           elements:
             - necromancy
-          executionTime:
-            base: a1
           expirations:
             - _id: c32fbccf9d83e581
-              method: automatic
               triggers:
                 - shortRest
               type: trigger
-          form: normal
           identifier: animate-dead
-          interaction: attack
           invoked: true
-          maneuver: active
           overview:
             base: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive} (but still
@@ -132,20 +105,13 @@ items:
               @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
               still halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a
               @Wiki[Category:Revival effects]{revival effect}.</p>
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: >-
             <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead} and
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 1yM7FO9SjR57oaLz
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.1yM7FO9SjR57oaLz"
@@ -156,11 +122,7 @@ items:
         system:
           automations:
             - _id: f004b5e5538cefe9
-              executor: false
-              multi: false
-              relation: include
               status: charmed
-              target: false
               type: status
           competence:
             raw: 1
@@ -176,26 +138,14 @@ items:
           effectTypes:
             - control
             - mental
-          executionTime:
-            base: a1
-          form: normal
           identifier: charm
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: >-
             <p>A creature may only have up to @Identifier[core:presence]{PRES} creatures
             @Identifier[condition:charmed]{charmed} at a time.</p>
           results:
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:charmed]{charmed}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: kkBTseGLKuKbSPC5
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.kkBTseGLKuKbSPC5"
@@ -238,7 +188,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -253,7 +202,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: x9rJYC082moOz00M
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.x9rJYC082moOz00M"
@@ -283,7 +231,6 @@ items:
             score:
               attribute: snk
               value: 5
-        transfer: true
         type: ability
       - _id: iH0AMeukeefyzHOO
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.iH0AMeukeefyzHOO"
@@ -321,7 +268,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: JExM98v3kaa6endx
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.JExM98v3kaa6endx"
@@ -349,7 +295,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          form: normal
           identifier: incorporeal
           interaction: manifest
           maneuver: passive
@@ -365,7 +310,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: JFXi3UTQuk81IjVW
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.JFXi3UTQuk81IjVW"
@@ -376,11 +320,7 @@ items:
         system:
           automations:
             - _id: 067cb526e2f9e98f
-              executor: false
-              multi: false
-              relation: include
               status: ethereal
-              target: false
               type: status
           competence:
             raw: 1
@@ -390,12 +330,9 @@ items:
             unit: hour
           elements:
             - necromancy
-          executionTime:
-            base: a1
           form: special
           identifier: instant-ethereal
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
           powerSources:
@@ -404,7 +341,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: M2vEPg9tDwW84VcC
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.M2vEPg9tDwW84VcC"
@@ -440,7 +376,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: g3xyeuW8BqmuKJze
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.g3xyeuW8BqmuKJze"
@@ -451,10 +386,7 @@ items:
         system:
           automations:
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d20[lethal morganti]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -483,7 +415,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Pu0XKqJuPFTaB95t
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.Pu0XKqJuPFTaB95t"
@@ -494,37 +425,21 @@ items:
         system:
           automations:
             - _id: kfZjJDSpK2NnY7Qk
-              consumeStatDice: true
-              forHarm: false
-              substitution: ""
-              trigger: null
               type: revitalize
             - _id: 157afc517847f562
-              display: {}
               formula: 1d8[morganti mana]
               impact: drain
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - draining
             - revitalization
-          executionTime:
-            base: a1
           form: special
           identifier: morganti-mana-drain-touch
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>Deal [[/drain 2d8[morganti morganti]]]
@@ -537,9 +452,6 @@ items:
               to the target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
               @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
               only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: lI3zhc6DOVnLe22A
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.lI3zhc6DOVnLe22A"
@@ -555,7 +467,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-intelligence
           interaction: manifest
           maneuver: passive
@@ -568,8 +479,6 @@ items:
           upgrades:
             score:
               attribute: int
-              value: 0
-        transfer: true
         type: ability
       - _id: Lj9KysPR0teTUU3f
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.Lj9KysPR0teTUU3f"
@@ -585,7 +494,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -598,8 +506,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: l08cOsw2cHqQgkNK
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.l08cOsw2cHqQgkNK"
@@ -615,7 +521,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -628,8 +533,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: kCjAvWeOjiJyYOQI
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.kCjAvWeOjiJyYOQI"
@@ -645,7 +548,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -658,8 +560,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: J6siKHeZmPQF0UtX
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.J6siKHeZmPQF0UtX"
@@ -672,22 +572,16 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - bag
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
               display:
                 label: Roll 5 Damage
               formula: 5[lethal]
-              impact: damage
-              trigger: null
               type: roll
             - _id: tnG4HOJcOpBMkG4W
               display:
                 label: Roll 10 Damage
               formula: 10[lethal]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -696,15 +590,11 @@ items:
               mp:
                 formula: "1"
                 type: formula
-          delivery: weapon
-          duration:
-            unit: instant
           effectTypes:
             - damaging
             - killing
           executionTime:
             base: r0
-          form: normal
           identifier: slay
           interaction: manifest
           maneuver: reactive
@@ -718,16 +608,11 @@ items:
               @Identifier[core:damage]{damage} instead.</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
             @Identifier[core:damage]{damage} from it.</p>
-        transfer: true
         type: ability
       - _id: ZkLL4mdeLSAAmOrO
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.ZkLL4mdeLSAAmOrO"
@@ -764,7 +649,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 6UfQSLfp6zgGSW63
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.6UfQSLfp6zgGSW63"
@@ -777,12 +661,10 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
-              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
-              img: null
               type: immunity
               value: frightened
           competence:
@@ -811,7 +693,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: HrRt7Bth05nAYx54
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.HrRt7Bth05nAYx54"
@@ -842,7 +723,6 @@ items:
             - necromancy
           executionTime:
             base: passive
-          form: normal
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -858,7 +738,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: HUvYPK6wrgpM8TB8
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.HUvYPK6wrgpM8TB8"
@@ -871,17 +750,14 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
-              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
-              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
-              img: null
               type: immunity
               value: unconscious
           competence:
@@ -913,7 +789,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: et5Q6Bm1rpxlUYP1
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.et5Q6Bm1rpxlUYP1"
@@ -926,7 +801,6 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
-              img: null
               type: immunity
               value: mundane
           competence:
@@ -952,7 +826,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: FqzMFsi9qQvOLcU6
         _key: "!actors.items.effects!b1c33155f61cf279.b1c33155f61cf279.FqzMFsi9qQvOLcU6"
@@ -964,37 +837,21 @@ items:
           _sup: iH0AMeukeefyzHOO
           automations:
             - _id: xreyNK2IzDp9qCUE
-              consumeStatDice: true
-              forHarm: false
-              substitution: ""
-              trigger: null
               type: revitalize
             - _id: 157afc517847f562
-              display: {}
               formula: 1d8[mana]
               impact: drain
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - draining
             - revitalization
-          executionTime:
-            base: a1
           form: special
           identifier: mana-drain-touch
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -1006,9 +863,6 @@ items:
               target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
               @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
               only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: bd7120d756dc6f4f
     img: systems/teriock/src/icons/creatures/morganti-wraith.webp
@@ -1018,19 +872,10 @@ items:
         <p>Transparent @Wiki[Category:Humanoid creatures]{humanoids} with red glowing eyes, long
         @Identifier[property:morganti]{morganti} claws, and black strands of darkness blowing around them.</p>
       br: 20
-      competence:
-        raw: 1
       identifier: morganti-wraith
-      size:
-        enabled: true
-        value: 3
       statDice:
         hp:
-          disabled: false
           formula: 4d10
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - undead
       transformation:
@@ -1051,9 +896,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -1061,7 +903,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: BSADIipS65gkiSsK
         _key: "!actors.items.effects!b1c33155f61cf279.cj23vL3BKRhEmvME.BSADIipS65gkiSsK"
@@ -1072,9 +913,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -1082,7 +920,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: n6MmBcTDYrDSMa6C
         _key: "!actors.items.effects!b1c33155f61cf279.cj23vL3BKRhEmvME.n6MmBcTDYrDSMa6C"
@@ -1093,15 +930,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
       - _id: up27i6uO2YFqMy5x
         _key: "!actors.items.effects!b1c33155f61cf279.cj23vL3BKRhEmvME.up27i6uO2YFqMy5x"
@@ -1112,7 +945,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -1123,23 +955,17 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
-        transfer: true
         type: property
     folder: bd7120d756dc6f4f
     img: systems/teriock/src/icons/body-parts/prehensile-rending-claw.webp
     name: Prehensile Rending Claw
     system:
       _sup: b1c33155f61cf279
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d8
       fightingStyle: savage
@@ -1147,20 +973,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Morganti Wraith
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Morganti Wraith
   ring:
     enabled: true
@@ -1168,24 +985,14 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/morganti-wraith.webp
   texture:
     src: systems/teriock/src/icons/creatures/morganti-wraith.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 24
   identifier: morganti-wraith
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
-  size:
-    value: 3
   wielding:
     attacker: cj23vL3BKRhEmvME
     blocker: cj23vL3BKRhEmvME

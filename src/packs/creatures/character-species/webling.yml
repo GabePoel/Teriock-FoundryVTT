@@ -35,7 +35,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: h70eYxpfES75kGbu
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.h70eYxpfES75kGbu"
@@ -51,7 +50,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-intelligence
           interaction: manifest
           maneuver: passive
@@ -64,8 +62,6 @@ items:
           upgrades:
             score:
               attribute: int
-              value: 0
-        transfer: true
         type: ability
       - _id: y546kOHJzDjDio3H
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.y546kOHJzDjDio3H"
@@ -81,7 +77,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -94,8 +89,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 19MhB1D4bUK4wv7n
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.19MhB1D4bUK4wv7n"
@@ -111,7 +104,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -124,8 +116,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: wxnTGresPFrfZrLa
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.wxnTGresPFrfZrLa"
@@ -141,7 +131,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -154,8 +143,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: vhoGtA7UONNDF5Kh
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.vhoGtA7UONNDF5Kh"
@@ -171,7 +158,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -184,8 +170,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: vTJexgeBlw1XSBav
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.vTJexgeBlw1XSBav"
@@ -196,11 +180,7 @@ items:
         system:
           automations:
             - _id: 5d57231066693cee
-              executor: false
-              multi: false
-              relation: include
               status: snared
-              target: false
               type: status
           competence:
             raw: 1
@@ -210,51 +190,28 @@ items:
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
               crit:
                 - 0
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
               crit:
                 - 1
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
               skip: 1
               timing: end
               type: combat
-          form: normal
           identifier: snare-tag
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
             hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
           targets:
             - leg
-        transfer: true
         type: ability
       - _id: EXeXIFy4rmhxtRLN
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.EXeXIFy4rmhxtRLN"
@@ -293,7 +250,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: lK8LD7pVknTudTdt
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.lK8LD7pVknTudTdt"
@@ -326,7 +282,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: drj9aq0NCFawBbU0
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.drj9aq0NCFawBbU0"
@@ -338,18 +293,10 @@ items:
           affinities:
             - _id: t1foICmm60l05ReJ
               category: statuses
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: snared
             - _id: xW5rbXZtR12edMIW
               category: statuses
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: immobilized
           competence:
@@ -361,7 +308,6 @@ items:
             - resistance
           executionTime:
             base: passive
-          form: normal
           identifier: webling-mobility
           interaction: manifest
           maneuver: passive
@@ -378,7 +324,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: fegRUUP0zB6OgF3R
         _key: "!actors.items.effects!7cc45a1244304d31.7cc45a1244304d31.fegRUUP0zB6OgF3R"
@@ -395,22 +340,15 @@ items:
               value: Tradecrafts
             - _id: iCk8Hktn3o72LWvk
               category: effectTypes
-              img: null
               type: vulnerability
               value: mental
           automations:
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d6[magic psychic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: R8D5GHLzCFP4YGVV
-              executor: false
-              multi: false
               relation: apply
               status: asleep
-              target: false
               type: status
           competence:
             raw: 1
@@ -441,7 +379,6 @@ items:
           trigger: >-
             <p>A creature @Identifier[ability:pay-mana]{pays mana} into you. This triggers automatically. You cannot
             choose to not use it if you are able to.</p>
-        transfer: true
         type: ability
     folder: 2703b16cbd907cde
     img: systems/teriock/src/icons/creatures/webling.webp
@@ -452,20 +389,9 @@ items:
         humanoid species}, but are completely pale. They are not albino. Rather, everything is completely white. This
         includes their skin, their eyes, their hair, their blood, etc. [[lookup name]]s' hair grows fast. It's long and
         silky.</p>
-      br: 1
-      competence:
-        raw: 1
       identifier: webling
       size:
         enabled: false
-        value: 3
-      statDice:
-        hp:
-          disabled: false
-          formula: 1d10
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - humanoid
       transformation:
@@ -486,15 +412,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!7cc45a1244304d31.1ktpnPDE7Md3jSJr.lKaLyYYTTIEFOLb5"
@@ -505,9 +427,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -515,7 +434,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!7cc45a1244304d31.1ktpnPDE7Md3jSJr.m7Va2Fuah1K2t2Ab"
@@ -526,9 +444,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -536,7 +451,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!7cc45a1244304d31.1ktpnPDE7Md3jSJr.IJM1yhiyKnnwlbXh"
@@ -547,32 +461,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 2703b16cbd907cde
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 7cc45a1244304d31
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: RiyByFBHlZvYnz6h
     _key: "!actors.items!7cc45a1244304d31.RiyByFBHlZvYnz6h"
@@ -588,15 +493,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!7cc45a1244304d31.RiyByFBHlZvYnz6h.IDLUUjkSFtpaiKuJ"
@@ -607,32 +508,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 2703b16cbd907cde
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 7cc45a1244304d31
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: oTf48PxMLPaKd0mW
     _key: "!actors.items!7cc45a1244304d31.oTf48PxMLPaKd0mW"
@@ -648,15 +540,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!7cc45a1244304d31.oTf48PxMLPaKd0mW.fq8owR84sFsgLiuj"
@@ -667,9 +555,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -677,7 +562,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!7cc45a1244304d31.oTf48PxMLPaKd0mW.4WFL62wofj7AHBxN"
@@ -688,24 +572,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 2703b16cbd907cde
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 7cc45a1244304d31
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -713,20 +590,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Webling
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Webling
   ring:
     enabled: true
@@ -734,24 +602,14 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/webling.webp
   texture:
     src: systems/teriock/src/icons/creatures/webling.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 6
   identifier: webling
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
-  size:
-    value: 3
   wielding:
     attacker: oTf48PxMLPaKd0mW
     blocker: oTf48PxMLPaKd0mW

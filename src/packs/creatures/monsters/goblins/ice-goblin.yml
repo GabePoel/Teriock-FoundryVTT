@@ -17,56 +17,19 @@ items:
         system:
           automations:
             - _id: 65b2fb4b1f8cdae3
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:blizzard-aura
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: 75dff24942d5b933
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:shock-touch
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: I1BIPKXYQZ1rA5JU
               light:
-                alpha: 0.5
-                angle: 360
                 animation:
-                  intensity: 5
-                  reverse: false
-                  speed: 5
                   type: sunburst
-                attenuation: 0.5
-                bright: 0
                 color: "#3584e4"
-                coloration: 1
-                contrast: 0
-                darkness:
-                  max: 1
-                  min: 0
                 dim: 0.01
-                luminosity: 0.5
-                negative: false
-                priority: 0
-                saturation: 0
-                shadows: 0
               type: light
           competence:
             raw: 1
@@ -86,13 +49,10 @@ items:
             unit: hour
           elements:
             - storm
-          executionTime:
-            base: a1
           form: special
           identifier: crown-of-ice
           interaction: manifest
           invoked: true
-          maneuver: active
           overview:
             base: >-
               <p>A small circle of glowing frost circles above your head. You gain
@@ -107,7 +67,6 @@ items:
           sustained: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 1wWHSioyZabw3aBb
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.1wWHSioyZabw3aBb"
@@ -138,7 +97,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: digging
           interaction: manifest
           maneuver: passive
@@ -150,7 +108,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: lfW1aJTHaPAqQflO
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.lfW1aJTHaPAqQflO"
@@ -180,7 +137,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: xOVNjfGa4FAEkjnL
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.xOVNjfGa4FAEkjnL"
@@ -196,7 +152,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -209,8 +164,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: UMLtkTIXEAAXy57a
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.UMLtkTIXEAAXy57a"
@@ -226,7 +179,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -239,8 +191,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 5cgYUXaljpBRb3pT
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.5cgYUXaljpBRb3pT"
@@ -256,7 +206,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -269,8 +218,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: z6yDmeL4GoESwwIo
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.z6yDmeL4GoESwwIo"
@@ -281,18 +228,11 @@ items:
         system:
           automations:
             - _id: R7rIJDoFAEvz00wl
-              all: false
               automatic: false
-              data: "{}"
-              expandTables: false
-              identifiers: []
               local:
-                identifiers: []
                 qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
-              multi: false
               trigger: execute
               type: useDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -302,8 +242,6 @@ items:
               verbal:
                 type: tag
           delivery: self
-          duration:
-            unit: instant
           elements:
             - storm
           executionTime:
@@ -327,7 +265,6 @@ items:
           targets:
             - self
           trigger: <p>You @Identifier[condition:down]{drop}.</p>
-        transfer: true
         type: ability
       - _id: u72Uff6pifNW5AUc
         _key: "!actors.items.effects!6abb7620586ecec7.6abb7620586ecec7.u72Uff6pifNW5AUc"
@@ -357,7 +294,6 @@ items:
             score:
               attribute: int
               value: -3
-        transfer: true
         type: ability
     folder: 9742924ba797ce77
     img: systems/teriock/src/icons/creatures/ice-goblin.webp
@@ -365,21 +301,16 @@ items:
     system:
       appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
       br: 2
-      competence:
-        raw: 1
       description: >-
         <p>@UUID[Compendium.teriock.tables.RollTable.9742924ba797ce77]{Goblins} have only a loose grasp on reality and
         are easily fooled. In combat, they prefer to attack in large numbers.</p>
       identifier: ice-goblin
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - humanoid
@@ -401,15 +332,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!6abb7620586ecec7.4gLCaH37llAp7hH3.IDLUUjkSFtpaiKuJ"
@@ -420,32 +347,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9742924ba797ce77
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 6abb7620586ecec7
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: HaoVAvkj8GuuZdDI
     _key: "!actors.items!6abb7620586ecec7.HaoVAvkj8GuuZdDI"
@@ -461,15 +379,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!6abb7620586ecec7.HaoVAvkj8GuuZdDI.lKaLyYYTTIEFOLb5"
@@ -480,9 +394,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -490,7 +401,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!6abb7620586ecec7.HaoVAvkj8GuuZdDI.m7Va2Fuah1K2t2Ab"
@@ -501,9 +411,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -511,7 +418,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!6abb7620586ecec7.HaoVAvkj8GuuZdDI.IJM1yhiyKnnwlbXh"
@@ -522,32 +428,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9742924ba797ce77
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 6abb7620586ecec7
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: jk0zd2UsYVgGtLQP
     _key: "!actors.items!6abb7620586ecec7.jk0zd2UsYVgGtLQP"
@@ -563,15 +460,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!6abb7620586ecec7.jk0zd2UsYVgGtLQP.fq8owR84sFsgLiuj"
@@ -582,9 +475,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -592,7 +482,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!6abb7620586ecec7.jk0zd2UsYVgGtLQP.4WFL62wofj7AHBxN"
@@ -603,24 +492,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9742924ba797ce77
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 6abb7620586ecec7
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -628,20 +510,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Ice Goblin
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Ice Goblin
   ring:
     enabled: true
@@ -649,20 +522,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/ice-goblin.webp
   texture:
     src: systems/teriock/src/icons/creatures/ice-goblin.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: ice-goblin
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

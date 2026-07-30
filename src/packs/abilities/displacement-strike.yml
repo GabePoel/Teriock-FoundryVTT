@@ -10,7 +10,6 @@ system:
       distance: 1d10
       movementAction: blink
       origin: random
-      originBarrier: true
       type: move
     - _id: 7sjwIPb8joKrTdKu
       competencies:
@@ -18,7 +17,6 @@ system:
       distance: 1d(10 * (1 + @p))
       movementAction: blink
       origin: random
-      originBarrier: true
       type: move
     - _id: 6v5hoTcxJEX0QREG
       competencies:
@@ -26,35 +24,17 @@ system:
       distance: 1d(10 * (1 + @f))
       movementAction: blink
       origin: random
-      originBarrier: true
       type: move
-  competence:
-    raw: 0
-  delivery: weapon
-  duration:
-    unit: instant
   effectTypes:
     - displacement
-  executionTime:
-    base: a1
-  form: normal
   identifier: displacement-strike
-  interaction: attack
-  maneuver: active
   overview:
     fluent: <p>The location can be within 10 × (1 + @Identifier[core:fluency-bonus]{F}) feet.</p>
     proficient: <p>The location can be within 10 × (1 + @Identifier[core:proficiency-bonus]{P}) feet.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} is instantly transported to a random location within 10 feet. Roll to
       determine the direction and distance.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

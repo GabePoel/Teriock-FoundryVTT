@@ -9,8 +9,6 @@ system:
       img: systems/teriock/src/icons/abilities/taunt.webp
       type: vulnerability
       value: Taunt Partner
-  competence:
-    raw: 0
   delivery: sight
   duration:
     raw: "1"
@@ -18,25 +16,13 @@ system:
   endCondition: >-
     <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
   featSaveAttribute: int
-  form: normal
   identifier: taunt
   interaction: feat
-  maneuver: active
   powerSources:
     - martial
   range:
@@ -48,7 +34,4 @@ system:
       other.</p>
   skill: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

@@ -5,37 +5,20 @@ name: Attack Prevention Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      excludeToken: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
         formula: "1"
         type: formula
   delivery: aura
-  duration:
-    unit: instant
   elements:
     - life
   executionTime:
     base: r1
-  form: normal
   identifier: attack-prevention-aura
   interaction: manifest
   maneuver: reactive
@@ -48,10 +31,7 @@ system:
     fail: <p>The @Identifier[core:damage]{damage} is @Identifier[keyword:deboosted]{deboosted}.</p>
   skill: true
   standard: true
-  targets:
-    - creature
   trigger: >-
     <p>One or more creature within @Identifier[core:range]{range} would take or deal
     @Identifier[core:damage]{damage}.</p>
-transfer: true
 type: ability

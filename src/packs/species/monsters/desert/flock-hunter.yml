@@ -10,32 +10,11 @@ effects:
     system:
       automations:
         - _id: 9f08fabc1d2bcac2
-          executor: false
-          multi: false
-          relation: include
           status: transformed
-          target: false
           type: status
         - _id: mix9AG1C4iNRI3x5
-          all: false
-          automatic: true
-          competence:
-            raw: 0
           level: full
-          multi: false
-          override:
-            - art
-            - size
-          reset:
-            - gp
-            - hp
           setCompetence: override
-          suppress:
-            - body
-            - equipment
-            - fluency
-            - rank
-            - species
           type: transformation
           uuids:
             - Compendium.teriock.species.Folder.30f4d11e5e53d332
@@ -49,8 +28,6 @@ effects:
         - transformation
       elements:
         - nature
-      executionTime:
-        base: a1
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the maximum
@@ -60,7 +37,6 @@ effects:
         <p>Keep all @Identifier[creature:harpy]{harpy} @Pack[teriock.abilities]{abilities} while
         @Identifier[condition:transformed]{transformed}.</p>
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You are @Identifier[condition:transformed]{fully transformed} into a
@@ -82,7 +58,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: p8uJiwbMYYaxaiOi
     _key: "!items.effects!00d59d7b13bee958.p8uJiwbMYYaxaiOi"
@@ -98,7 +73,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: fast
       interaction: manifest
       maneuver: passive
@@ -112,7 +86,6 @@ effects:
         score:
           attribute: mov
           value: 1
-    transfer: true
     type: ability
   - _id: P5tQ8oWsmZEn2zRm
     _key: "!items.effects!00d59d7b13bee958.P5tQ8oWsmZEn2zRm"
@@ -155,7 +128,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -170,7 +142,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tEBL7dw2G9O0jDut
     _key: "!items.effects!00d59d7b13bee958.tEBL7dw2G9O0jDut"
@@ -183,8 +154,6 @@ effects:
         - _id: Suc9ayhHqRkmjAwZ
           activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -214,7 +183,6 @@ effects:
       requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Y9ZjFCnRmG89Od20
     _key: "!items.effects!00d59d7b13bee958.Y9ZjFCnRmG89Od20"
@@ -244,7 +212,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: g33tY7f4L3z1DiKm
     _key: "!items.effects!00d59d7b13bee958.g33tY7f4L3z1DiKm"
@@ -260,7 +227,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -273,8 +239,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: gVLhl8a2LHAnAd53
     _key: "!items.effects!00d59d7b13bee958.gVLhl8a2LHAnAd53"
@@ -290,7 +254,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -303,8 +266,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: 4XzhHEP4AuSfjoTX
     _key: "!items.effects!00d59d7b13bee958.4XzhHEP4AuSfjoTX"
@@ -320,7 +281,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -333,8 +293,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: dH3nwkNXkqNgKjwI
     _key: "!items.effects!00d59d7b13bee958.dH3nwkNXkqNgKjwI"
@@ -364,7 +322,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: hSNARKRGvl9VlyIy
     _key: "!items.effects!00d59d7b13bee958.hSNARKRGvl9VlyIy"
@@ -393,7 +350,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: swimming
       interaction: manifest
       maneuver: passive
@@ -407,7 +363,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 8185a98b7551093c
 img: systems/teriock/src/icons/creatures/flock-hunter.webp
@@ -415,23 +370,18 @@ name: Flock Hunter
 system:
   appearance: <p>Strange shape-changing @Identifier[creature:harpy]{harpies}.</p>
   br: 9
-  competence:
-    raw: 1
   description: >-
     <p>Flock hunters are generally cruel and prefer to attack in bands from the air. They tend to be amoral evil and are
     often in @Pack[teriock.classes]{classes} or have other @Pack[teriock.abilities]{abilities} as well.</p>
   identifier: flock-hunter
   size:
-    enabled: true
     value: 2
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

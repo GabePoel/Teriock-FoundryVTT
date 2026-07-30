@@ -18,7 +18,6 @@ effects:
         unit: minute
       executionTime:
         base: passive
-      form: normal
       identifier: bodyguard-training
       interaction: manifest
       maneuver: passive
@@ -34,7 +33,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 0PHdhRQSojTzyJig
     _key: "!items.effects!cVklx2xNXIa3tZmU.0PHdhRQSojTzyJig"
@@ -45,25 +43,15 @@ effects:
     system:
       automations:
         - _id: iuw4WAwzmlNQvs7e
-          all: false
-          angle: "60"
           attachToToken: false
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: "30"
-          regionType: circle
           restriction:
             enabled: true
-            priority: 0
             type: move
           targeting: false
           type: region
-          visibility: 2
         - _id: eb15e1b671a010f5
           formula: 1d10
           impact: gainTempHp
@@ -91,7 +79,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: fortify-area
       interaction: manifest
       maneuver: slow
@@ -117,7 +104,6 @@ effects:
       standard: true
       targets:
         - area
-    transfer: true
     type: ability
   - _id: A4im5MWvCxmM8xzm
     _key: "!items.effects!cVklx2xNXIa3tZmU.A4im5MWvCxmM8xzm"
@@ -133,7 +119,6 @@ effects:
           distance: "5"
           movementAction: walk
           origin: random
-          originBarrier: true
           type: move
         - _id: LGh4yKXRJOFrgnM2
           display:
@@ -141,14 +126,9 @@ effects:
           distance: "5"
           movementAction: walk
           origin: target
-          originBarrier: true
           type: move
         - _id: AW2QK35iCBSYIP88
-          executor: false
-          multi: false
-          relation: include
           status: snared
-          target: false
           type: status
       competence:
         raw: 1
@@ -165,17 +145,9 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
           relation: executor
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
-      form: normal
       identifier: tumble
       interaction: manifest
       maneuver: reactive
@@ -196,7 +168,6 @@ effects:
       targets:
         - self
       trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
-    transfer: true
     type: ability
   - _id: QTwygiNnoFgmLtLQ
     _key: "!items.effects!cVklx2xNXIa3tZmU.QTwygiNnoFgmLtLQ"
@@ -220,7 +191,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: unbreachability
       interaction: manifest
       maneuver: passive
@@ -234,7 +204,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: gOKlbsFLKHt6VAW2
     _key: "!items.effects!cVklx2xNXIa3tZmU.gOKlbsFLKHt6VAW2"
@@ -251,13 +220,11 @@ effects:
           type: abilityMacro
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "1"
         unit: minute
       executionTime:
         base: r0
-      form: normal
       identifier: bodyguard-backup
       interaction: manifest
       maneuver: reactive
@@ -274,10 +241,7 @@ effects:
       requirements: <p>You are not also using @Identifier[ability:bodyguard-taunt]{Bodyguard Taunt}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: <p>You attempt an @Identifier[core:attack-interaction]{attack} against another creature.</p>
-    transfer: true
     type: ability
   - _id: M7IE5OYwqcCI7LyH
     _key: "!items.effects!cVklx2xNXIa3tZmU.M7IE5OYwqcCI7LyH"
@@ -289,15 +253,11 @@ effects:
       _sup: WPnSLdXPauH6iDwJ
       automations:
         - _id: 6cebaedf0c5c1507
-          executor: false
-          multi: false
-          relation: include
           status: goaded
           target: true
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "10"
         unit: second
@@ -305,13 +265,8 @@ effects:
         base: r0
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
-          timing: start
           type: combat
-      form: normal
       identifier: bodyguard-taunt
       interaction: manifest
       maneuver: reactive
@@ -327,10 +282,7 @@ effects:
       requirements: <p>You are not also using @Identifier[ability:bodyguard-backup]{Bodyguard Backup}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: <p>You attempt an @Identifier[core:attack-interaction]{attack} against another creature.</p>
-    transfer: true
     type: ability
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/ranks/rank-2-veteran.webp
@@ -339,8 +291,6 @@ system:
   _sup: 70da5ebf6d7de518
   archetype: warrior
   class: veteran
-  competence:
-    raw: 1
   description: >-
     <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned warriors,
     but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so even a first
@@ -350,14 +300,11 @@ system:
     which is why they survive to be veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded, unimpressed,
     hard, and pessimistic.</p>
   identifier: rank-2-veteran
-  innate: false
   maxAv: 4
   number: 2
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

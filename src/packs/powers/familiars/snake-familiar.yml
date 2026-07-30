@@ -10,7 +10,6 @@ effects:
     system:
       automations:
         - _id: 0KocEo3PeZJ7lNkM
-          changeType: add
           key: system.boosts.damage
           qualifier: "@dmg"
           target: armament
@@ -29,19 +28,14 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>You move or are moved.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: lTiZALQhWDYH7uP2
-          method: automatic
           triggers:
             - executeArmament
             - movement
           type: trigger
-      form: normal
       identifier: crit-elite
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @Identifier[core:attack-interaction]{attack} you make with
@@ -60,7 +54,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 208X9rXRFVKMIllx
     _key: "!items.effects!177f14009521cab2.208X9rXRFVKMIllx"
@@ -73,19 +66,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -96,15 +86,11 @@ effects:
             type: formula
         tweaks:
           gifted: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
@@ -117,36 +103,26 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: snakeTamer000000
     _key: "!items.effects!177f14009521cab2.snakeTamer000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Snake Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:snake]{snake}.</p>
       field: survivalist
       identifier: snake-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Snake Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:snake inline]</p>
   identifier: snake-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

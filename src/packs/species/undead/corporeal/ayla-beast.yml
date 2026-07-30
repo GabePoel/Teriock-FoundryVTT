@@ -10,28 +10,17 @@ effects:
     system:
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - control
         - disease
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       identifier: ayla-binding-strike
-      interaction: attack
       limitation: <p>@Pack[teriock.bodyParts]{Body parts} only.</p>
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - primal
         - spiritual
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is dead.</p>
       results:
         hit: >-
@@ -42,9 +31,6 @@ effects:
           manifested, the @Identifier[core:targets]{target's} spirit must follow directions you provide to it. You do
           not need to share any language with the @Identifier[core:targets]{target} or their spirit. This is more akin
           to a "hive mind", where they implicitly understand you needs and directives.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 2OqlWKigRCg1g5SY
     _key: "!items.effects!3cb6131a0fbfc2b7.2OqlWKigRCg1g5SY"
@@ -74,7 +60,6 @@ effects:
         score:
           attribute: snk
           value: -2
-    transfer: true
     type: ability
   - _id: 0rXdwPkc5TnKVTj0
     _key: "!items.effects!3cb6131a0fbfc2b7.0rXdwPkc5TnKVTj0"
@@ -101,7 +86,6 @@ effects:
           value: 1d12
         - _id: 29b275994cf9f5b1
           formula: 1d12
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -110,7 +94,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: fierce-natural-weapons
       interaction: manifest
       maneuver: passive
@@ -126,7 +109,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Cqu836FKmUdp8e6I
     _key: "!items.effects!3cb6131a0fbfc2b7.Cqu836FKmUdp8e6I"
@@ -163,7 +145,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: RgOxuzVcKMtL73zh
     _key: "!items.effects!3cb6131a0fbfc2b7.RgOxuzVcKMtL73zh"
@@ -177,30 +158,17 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: hack
-      interaction: attack
       limitation: <p>@Pack[teriock.bodyParts]{Body parts} only.</p>
-      maneuver: active
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
           accordingly.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
@@ -213,7 +181,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: fRD70TEqo63jyNiL
     _key: "!items.effects!3cb6131a0fbfc2b7.fRD70TEqo63jyNiL"
@@ -229,7 +196,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: high-intelligence
       interaction: manifest
       maneuver: passive
@@ -243,7 +209,6 @@ effects:
         score:
           attribute: int
           value: 3
-    transfer: true
     type: ability
   - _id: nytZZHA3gT3Ep9dH
     _key: "!items.effects!3cb6131a0fbfc2b7.nytZZHA3gT3Ep9dH"
@@ -268,13 +233,8 @@ effects:
             unit: hour
           type: duration
         - _id: NPWpKFGYaHcADPNW
-          all: false
-          automatic: true
-          competence:
-            raw: 0
           identifiers:
             - ability:zombify
-          multi: false
           override:
             - art
           reset:
@@ -304,25 +264,16 @@ effects:
         - reanimation
       elements:
         - necromancy
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
       identifier: jumpstart-zombify
-      interaction: attack
       invoked: true
-      maneuver: active
       overview:
         fluent: <p>The base @Identifier[core:duration]{duration} of this effect is 1 hour.</p>
         proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
       results:
         hit: >-
@@ -335,9 +286,6 @@ effects:
           that type.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: ZxZnAtiVsO8gkaX9
     _key: "!items.effects!3cb6131a0fbfc2b7.ZxZnAtiVsO8gkaX9"
@@ -348,7 +296,6 @@ effects:
     system:
       automations:
         - _id: dZdzGQfm90BHxkCn
-          changeType: add
           key: system.boosts.damage
           qualifier: and(@dmg, @range.melee)
           target: armament
@@ -389,7 +336,6 @@ effects:
         score:
           attribute: str
           value: 5
-    transfer: true
     type: ability
   - _id: NqB9WCKI6I72eUg1
     _key: "!items.effects!3cb6131a0fbfc2b7.NqB9WCKI6I72eUg1"
@@ -405,7 +351,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -418,8 +363,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: UZZEgnppeufgwgqn
     _key: "!items.effects!3cb6131a0fbfc2b7.UZZEgnppeufgwgqn"
@@ -435,7 +378,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -448,8 +390,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: YYqR9pvRY24Dvhsf
     _key: "!items.effects!3cb6131a0fbfc2b7.YYqR9pvRY24Dvhsf"
@@ -463,13 +403,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: iCn9pFDIGFJWxm6H
           activeQualifier: and(not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -503,7 +440,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: LSB65nqFMOJ2qHR7
     _key: "!items.effects!3cb6131a0fbfc2b7.LSB65nqFMOJ2qHR7"
@@ -516,25 +452,17 @@ effects:
         - _id: mhGxVy8CcJTEyM2q
           common:
             - shatter
-          showConfirmationDialog: true
           type: common
         - _id: OwcEEEPMXNoWUKl0
-          competence:
-            raw: 0
-          preventFeat: false
-          preventThreshold: false
           rollBonus: "@av"
           type: override
       competence:
         raw: 1
       delivery: armor
-      duration:
-        unit: instant
       effectTypes:
         - destruction
       executionTime:
         base: r1
-      form: normal
       identifier: shattering-armor
       interaction: block
       maneuver: reactive
@@ -544,8 +472,6 @@ effects:
           your @Identifier[core:armor-class]{AV} for the purpose of [[lookup name]].</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: >-
@@ -553,7 +479,6 @@ effects:
           @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
       targets:
         - item
-    transfer: true
     type: ability
   - _id: NX6g9ipBux238F1o
     _key: "!items.effects!3cb6131a0fbfc2b7.NX6g9ipBux238F1o"
@@ -566,19 +491,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -587,15 +509,11 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
@@ -608,16 +526,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: FxoxEV2eHSgHThuQ
     _key: "!items.effects!3cb6131a0fbfc2b7.FxoxEV2eHSgHThuQ"
@@ -656,33 +569,22 @@ effects:
         unit: minute
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
       identifier: spirit-bury
-      interaction: attack
       invoked: true
-      maneuver: active
       overview:
         proficient: <p>This effect lasts 10 minutes instead of 1.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
       results:
         hit: <p>@Identifier[core:targets]{Target} cannot become @Identifier[condition:wisping]{wisping}.</p>
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: Cad2bu1KO2YfXRhy
     _key: "!items.effects!3cb6131a0fbfc2b7.Cad2bu1KO2YfXRhy"
@@ -719,7 +621,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: FdurgMqUau68kfq9
     _key: "!items.effects!3cb6131a0fbfc2b7.FdurgMqUau68kfq9"
@@ -757,7 +658,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: cjCPgtVf7bSkz3wJ
     _key: "!items.effects!3cb6131a0fbfc2b7.cjCPgtVf7bSkz3wJ"
@@ -788,7 +688,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -802,7 +701,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6Qo0atI5IJ1OlhFr
     _key: "!items.effects!3cb6131a0fbfc2b7.6Qo0atI5IJ1OlhFr"
@@ -847,7 +745,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nZd6UVTZWiJ8Yy3b
     _key: "!items.effects!3cb6131a0fbfc2b7.nZd6UVTZWiJ8Yy3b"
@@ -899,7 +796,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6MRZgglDBg9gKMq7
     _key: "!items.effects!3cb6131a0fbfc2b7.6MRZgglDBg9gKMq7"
@@ -911,8 +807,6 @@ effects:
       _sup: Cqu836FKmUdp8e6I
       automations:
         - _id: xreyNK2IzDp9qCUE
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -921,23 +815,13 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
-      executionTime:
-        base: a1
       form: special
       identifier: mana-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -949,9 +833,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: SH6ocGF1BZSzBJOl
     _key: "!items.effects!3cb6131a0fbfc2b7.SH6ocGF1BZSzBJOl"
@@ -989,7 +870,6 @@ effects:
         score:
           attribute: str
           value: 4
-    transfer: true
     type: ability
   - _id: K3GUbwisoRqE8nnI
     _key: "!items.effects!3cb6131a0fbfc2b7.K3GUbwisoRqE8nnI"
@@ -1010,7 +890,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
@@ -1031,7 +910,6 @@ effects:
         score:
           attribute: str
           value: 3
-    transfer: true
     type: ability
   - _id: 5N3faqs3cKBsgwdL
     _key: "!items.effects!3cb6131a0fbfc2b7.5N3faqs3cKBsgwdL"
@@ -1048,7 +926,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -1068,7 +945,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: dA6ZuhgUv6eh1uii
     _key: "!items.effects!3cb6131a0fbfc2b7.dA6ZuhgUv6eh1uii"
@@ -1085,7 +961,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -1106,7 +981,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: J2cNUQBor2yL9aYB
     _key: "!items.effects!3cb6131a0fbfc2b7.J2cNUQBor2yL9aYB"
@@ -1123,7 +997,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -1137,7 +1010,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ysB2mNYcaeZD2vtn
     _key: "!items.effects!3cb6131a0fbfc2b7.ysB2mNYcaeZD2vtn"
@@ -1149,14 +1021,10 @@ effects:
       _sup: K3GUbwisoRqE8nnI
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r0
-      form: normal
       identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -1169,16 +1037,11 @@ effects:
           @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
         delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-    transfer: true
     type: ability
   - _id: grQDHIjVBZ4q8evo
     _key: "!items.effects!3cb6131a0fbfc2b7.grQDHIjVBZ4q8evo"
@@ -1192,7 +1055,6 @@ effects:
         - _id: MZ0HXunkUDN7yJiQ
           common:
             - shatter
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -1202,26 +1064,19 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - destruction
       executionTime:
         base: a2
-      form: normal
       identifier: shattering-grip
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[property:shattered]{shattered}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>You are holding the target.</p>
       targets:
         - item
-    transfer: true
     type: ability
 folder: 1444272ba695c166
 img: systems/teriock/src/icons/creatures/ayla-beast.webp
@@ -1234,8 +1089,6 @@ system:
     often appear hollow and oozing. They are hulking mutants of what they were but are often two to five
     @Identifier[core:size]{sizes} larger.</p>
   br: 18
-  competence:
-    raw: 1
   description: >-
     <p>Ayla creatures are thought to be infected by some ancient Dagdeoth magic adrift in the high mountains of Northern
     Teriock. They maintain all @Pack[teriock.abilities]{abilities} of the @Wiki[Category:Animal creatures]{animal} they
@@ -1245,18 +1098,15 @@ system:
     <p>This does not describe all of a creature's @Pack[teriock.abilities]{abilities}. It should always be paired with
     another @Wiki[Category:Animal creatures]{animal creature type} which it modifies.</p>
   size:
-    enabled: true
     max: 10
     min: 5
     value: 5
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "8"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "2"

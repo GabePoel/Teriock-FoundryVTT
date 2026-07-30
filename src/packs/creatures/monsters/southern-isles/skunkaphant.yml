@@ -22,7 +22,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -43,7 +42,6 @@ items:
             score:
               attribute: str
               value: 1
-        transfer: true
         type: ability
       - _id: EUCHTeVqM1zCfhSC
         _key: "!actors.items.effects!aec7270858e37035.aec7270858e37035.EUCHTeVqM1zCfhSC"
@@ -73,7 +71,6 @@ items:
             score:
               attribute: snk
               value: -1
-        transfer: true
         type: ability
       - _id: SqxuKoJ1AaWKZc0M
         _key: "!actors.items.effects!aec7270858e37035.aec7270858e37035.SqxuKoJ1AaWKZc0M"
@@ -103,7 +100,6 @@ items:
             score:
               attribute: int
               value: -1
-        transfer: true
         type: ability
       - _id: NDKKdgQoz9DAYMiI
         _key: "!actors.items.effects!aec7270858e37035.aec7270858e37035.NDKKdgQoz9DAYMiI"
@@ -119,7 +115,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -132,8 +127,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 44fcvlkKBRVcdOIh
         _key: "!actors.items.effects!aec7270858e37035.aec7270858e37035.44fcvlkKBRVcdOIh"
@@ -149,7 +142,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -162,8 +154,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: EClEPoZ9gthqcWv7
         _key: "!actors.items.effects!aec7270858e37035.aec7270858e37035.EClEPoZ9gthqcWv7"
@@ -174,11 +164,7 @@ items:
         system:
           automations:
             - _id: 18537e76761a45dc
-              executor: false
-              multi: false
-              relation: include
               status: blind
-              target: false
               type: status
           competence:
             raw: 1
@@ -190,26 +176,12 @@ items:
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
-          form: normal
           identifier: stink-packet
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - alchemical
           range:
@@ -223,9 +195,6 @@ items:
               @Identifier[core:hit-points-and-mana-points]{mana die}. It is though those dice are spent, but without
               providing any @Identifier[core:healing]{healing} or @Wiki[Category:Revitalization
               effects]{revitalization}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 02WiCOFKwQ3fpl0M
         _key: "!actors.items.effects!aec7270858e37035.aec7270858e37035.02WiCOFKwQ3fpl0M"
@@ -266,36 +235,15 @@ items:
                   value: "-3"
               type: changes
             - _id: 7400b41f20d9f100
-              all: false
               angle: "@angle.normal"
               attachToToken: false
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
               expandWithToken: false
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
-                priority: 0
                 type: move
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
           competence:
             raw: 1
           costs:
@@ -307,13 +255,8 @@ items:
           duration:
             raw: "1"
             unit: week
-          executionTime:
-            base: a1
-          featSaveAttribute: mov
-          form: normal
           identifier: stink-spray
           interaction: feat
-          maneuver: active
           powerSources:
             - alchemical
           range:
@@ -326,9 +269,6 @@ items:
               @Identifier[keyword:incapable]{incapable} of and @Identifier[keyword:immunity]{immune} to becoming
               @Identifier[condition:odorless]{odorless} or @Identifier[condition:hidden]{hidden} to creatures that are
               not @Identifier[condition:anosmatic]{anosmatic}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/creatures/skunkaphant.webp
@@ -336,21 +276,16 @@ items:
     system:
       appearance: <p>Black and white short-haired @Identifier[creature:elephant]{mammoth}-@Identifier[creature:skunk]{skunks}.</p>
       br: 14
-      competence:
-        raw: 1
       description: >-
         <p>[[lookup name]]s trample through the jungles scavenging for food and trample-stink anything that threatens
         them. Their trample can be healed, but their stench remains.</p>
       identifier: skunkaphant
       size:
-        enabled: true
         value: 6
       statDice:
         hp:
-          disabled: false
           formula: 2d8
         mp:
-          disabled: false
           formula: 1d8
       traits:
         - animal
@@ -367,17 +302,12 @@ items:
     name: Thick Hide
     system:
       _sup: aec7270858e37035
-      attackPenalty: "-3"
       av:
         raw: 2
-      competence:
-        raw: 0
       identifier: thick-hide
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: OcnToT8BeT7vyngA
     _key: "!actors.items!aec7270858e37035.OcnToT8BeT7vyngA"
@@ -393,15 +323,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lIGn4kCsVEDmwwQW
         _key: "!actors.items.effects!aec7270858e37035.OcnToT8BeT7vyngA.lIGn4kCsVEDmwwQW"
@@ -412,9 +338,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -422,7 +345,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: cIse0FVpzQ3gQ368
         _key: "!actors.items.effects!aec7270858e37035.OcnToT8BeT7vyngA.cIse0FVpzQ3gQ368"
@@ -433,9 +355,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -443,16 +362,12 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/trunk.webp
     name: Trunk
     system:
       _sup: aec7270858e37035
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: wraparound
@@ -460,8 +375,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: YllllfRmal2HxRcj
     _key: "!actors.items!aec7270858e37035.YllllfRmal2HxRcj"
@@ -477,15 +390,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!aec7270858e37035.YllllfRmal2HxRcj.lKaLyYYTTIEFOLb5"
@@ -496,9 +405,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -506,7 +412,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!aec7270858e37035.YllllfRmal2HxRcj.m7Va2Fuah1K2t2Ab"
@@ -517,9 +422,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -527,7 +429,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!aec7270858e37035.YllllfRmal2HxRcj.IJM1yhiyKnnwlbXh"
@@ -538,32 +439,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: aec7270858e37035
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: epLowC3wj8jDMZS9
     _key: "!actors.items!aec7270858e37035.epLowC3wj8jDMZS9"
@@ -579,15 +471,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
       - _id: 1G7rcqbTObsjbCFZ
         _key: "!actors.items.effects!aec7270858e37035.epLowC3wj8jDMZS9.1G7rcqbTObsjbCFZ"
@@ -598,7 +486,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -609,23 +496,17 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/piercing-horn.webp
     name: Piercing Horn
     system:
       _sup: aec7270858e37035
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d8
       fightingStyle: charging
@@ -633,8 +514,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: uaKDCHUYkvmFu88O
     _key: "!actors.items!aec7270858e37035.uaKDCHUYkvmFu88O"
@@ -650,15 +529,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!aec7270858e37035.uaKDCHUYkvmFu88O.IDLUUjkSFtpaiKuJ"
@@ -669,41 +544,26 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: aec7270858e37035
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Skunkaphant
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 2
@@ -714,9 +574,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/skunkaphant.webp
   texture:
     src: systems/teriock/src/icons/creatures/skunkaphant.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 2
 system:
   hp:
@@ -724,10 +581,6 @@ system:
   identifier: skunkaphant
   mp:
     value: 5
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

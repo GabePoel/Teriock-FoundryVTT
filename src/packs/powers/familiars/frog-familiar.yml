@@ -13,21 +13,12 @@ effects:
           formula: (@h)d4[magic vine]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 0b65894b82470568
-          executor: false
-          multi: false
-          relation: include
           status: immobilized
-          target: false
           type: status
         - _id: 5812b63d828a0227
-          executor: false
-          multi: false
-          relation: include
           status: grounded
-          target: false
           type: status
       competence:
         raw: 1
@@ -40,33 +31,16 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic vine]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: earthbind-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
@@ -74,22 +48,16 @@ effects:
           @Identifier[condition:immobilized]{immobilized}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: frogTamer0000000
     _key: "!items.effects!f94156e03c14504e.frogTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Frog Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:frog]{frog}.</p>
       field: survivalist
       identifier: frog-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: UlUW3Zx0q3tNUMt5
     _key: "!items.effects!f94156e03c14504e.UlUW3Zx0q3tNUMt5"
@@ -144,7 +112,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: leaping
       interaction: manifest
       maneuver: passive
@@ -163,14 +130,11 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Frog Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:frog inline]</p>
   identifier: frog-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

@@ -36,7 +36,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: nuyEvXrOCO6oIoMM
         _key: "!actors.items.effects!6e525718897107d1.6e525718897107d1.nuyEvXrOCO6oIoMM"
@@ -64,7 +63,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: lSw92xzL2r2amxqN
         _key: "!actors.items.effects!6e525718897107d1.6e525718897107d1.lSw92xzL2r2amxqN"
@@ -80,7 +78,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -93,8 +90,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: PKXPOgdhf6bT5rYe
         _key: "!actors.items.effects!6e525718897107d1.6e525718897107d1.PKXPOgdhf6bT5rYe"
@@ -110,7 +105,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -123,8 +117,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: fABMvdEuKMvHrMsl
         _key: "!actors.items.effects!6e525718897107d1.6e525718897107d1.fABMvdEuKMvHrMsl"
@@ -140,7 +132,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -153,8 +144,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: dukl4KBGEG29gRLP
         _key: "!actors.items.effects!6e525718897107d1.6e525718897107d1.dukl4KBGEG29gRLP"
@@ -184,7 +173,6 @@ items:
             score:
               attribute: str
               value: -2
-        transfer: true
         type: ability
       - _id: R3NfW4NGIHc6HWSa
         _key: "!actors.items.effects!6e525718897107d1.6e525718897107d1.R3NfW4NGIHc6HWSa"
@@ -195,17 +183,10 @@ items:
         system:
           automations:
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
@@ -215,30 +196,16 @@ items:
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
-          form: normal
           identifier: venomous-spit
-          interaction: attack
-          maneuver: active
           overview:
             base: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 1
           powerSources:
             - martial
           range:
@@ -246,25 +213,19 @@ items:
             unit: ft
           targets:
             - vitals
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/venomous-toad.webp
     name: Venomous Toad
     system:
       br: 3
-      competence:
-        raw: 1
       identifier: venomous-toad
       size:
-        enabled: true
         value: 0.25
       statDice:
         hp:
-          disabled: false
           formula: 1d4
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -286,15 +247,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!6e525718897107d1.nj9PvCWMIuOQx6jQ.fq8owR84sFsgLiuj"
@@ -305,9 +262,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -315,7 +269,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!6e525718897107d1.nj9PvCWMIuOQx6jQ.4WFL62wofj7AHBxN"
@@ -326,24 +279,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 6e525718897107d1
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -351,17 +297,9 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Venomous Toad
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -372,9 +310,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/venomous-toad.webp
   texture:
     src: systems/teriock/src/icons/creatures/venomous-toad.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -382,10 +317,6 @@ system:
   identifier: venomous-toad
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

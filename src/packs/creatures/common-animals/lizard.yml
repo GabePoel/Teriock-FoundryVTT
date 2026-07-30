@@ -49,7 +49,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: climbing
           interaction: manifest
           maneuver: passive
@@ -62,7 +61,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: VQPIxFxDLYhzAMQp
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.VQPIxFxDLYhzAMQp"
@@ -92,7 +90,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: c0ECtLMI5PM7LXHW
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.c0ECtLMI5PM7LXHW"
@@ -123,7 +120,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: digging
           interaction: manifest
           maneuver: passive
@@ -135,7 +131,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: E3i94Bdtkj5EYtFP
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.E3i94Bdtkj5EYtFP"
@@ -146,38 +141,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -205,7 +180,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: DkWzIp8W1KPd3suv
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.DkWzIp8W1KPd3suv"
@@ -233,7 +207,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 1CqFpltnt85hoWYK
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.1CqFpltnt85hoWYK"
@@ -249,7 +222,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -262,8 +234,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: cmndxGzOnllyRrAM
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.cmndxGzOnllyRrAM"
@@ -279,7 +249,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -292,8 +261,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: eqWz3moho4R2F4mK
         _key: "!actors.items.effects!45a13eace86ea959.45a13eace86ea959.eqWz3moho4R2F4mK"
@@ -323,25 +290,18 @@ items:
             score:
               attribute: str
               value: -2
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/lizard.webp
     name: Lizard
     system:
-      br: 1
-      competence:
-        raw: 1
       identifier: lizard
       size:
-        enabled: true
         value: 0.5
       statDice:
         hp:
-          disabled: false
           formula: 1d6
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -358,17 +318,12 @@ items:
     name: Sparse Scales
     system:
       _sup: 45a13eace86ea959
-      attackPenalty: "-3"
       av:
         raw: 1
-      competence:
-        raw: 0
       identifier: sparse-scales
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: fqQbaaL3GSZVa4Zr
     _key: "!actors.items!45a13eace86ea959.fqQbaaL3GSZVa4Zr"
@@ -384,15 +339,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!45a13eace86ea959.fqQbaaL3GSZVa4Zr.fq8owR84sFsgLiuj"
@@ -403,9 +354,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -413,7 +361,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!45a13eace86ea959.fqQbaaL3GSZVa4Zr.4WFL62wofj7AHBxN"
@@ -424,24 +371,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 45a13eace86ea959
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -449,17 +389,9 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Lizard
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -470,9 +402,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/lizard.webp
   texture:
     src: systems/teriock/src/icons/creatures/lizard.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -480,10 +409,6 @@ system:
   identifier: lizard
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

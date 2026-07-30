@@ -6,13 +6,10 @@ effects:
     img: icons/environment/settlement/stables-logo.webp
     name: Raccoon Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:raccoon]{raccoon}.</p>
       field: survivalist
       identifier: raccoon-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: 3JchQOsjdwQORrgE
     _key: "!items.effects!ec7a0d6be7940839.3JchQOsjdwQORrgE"
@@ -25,7 +22,6 @@ effects:
         - _id: Kd7EJ2F01l6h5bzk
           common:
             - unglue
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -35,22 +31,14 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - stealing
-      executionTime:
-        base: a1
-      form: normal
       identifier: unglue
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is no longer @Identifier[property:glued]{glued} and you take it.</p>
       powerSources:
         - spiritual
-      range:
-        unit: contact
       requirements: >-
         <p>Target's bearer is @Identifier[condition:down]{down} or target it
         @Identifier[property:searchable]{searchable}.</p>
@@ -58,7 +46,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: Zu7xsDzZwcskOpso
     _key: "!items.effects!ec7a0d6be7940839.Zu7xsDzZwcskOpso"
@@ -69,7 +56,6 @@ effects:
     system:
       affinities:
         - _id: cuHIm8ZczaKt4Pgk
-          category: abilities
           type: resistance
           value: disarm
       competence:
@@ -81,7 +67,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: reflexes
       interaction: manifest
       limitation: >-
@@ -105,7 +90,6 @@ effects:
         competence:
           attribute: mov
           value: 1
-    transfer: true
     type: ability
   - _id: cPTN1MX3mWjfU5gH
     _key: "!items.effects!ec7a0d6be7940839.cPTN1MX3mWjfU5gH"
@@ -118,13 +102,10 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - resistance
       executionTime:
         base: r1
-      form: normal
       identifier: missile-reflexes
       interaction: block
       maneuver: reactive
@@ -135,8 +116,6 @@ effects:
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: >-
         <p>The triggering @Identifier[core:attack-interaction]{attack} is not @Identifier[keyword:warded]{warded} and
         could not cut otherwise through a @Identifier[keyword:resistance]{resistance}.</p>
@@ -151,14 +130,11 @@ effects:
       trigger: >-
         <p>You would be hit by a @Identifier[property:ranged]{ranged weapon} or @Wiki[Category:Missile delivery
         abilities]{missile delivery} @Identifier[core:attack-interaction]{attack}.</p>
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Raccoon Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:raccoon inline]</p>
   identifier: raccoon-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

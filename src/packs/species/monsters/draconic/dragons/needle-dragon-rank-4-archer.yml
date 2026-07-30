@@ -31,7 +31,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: gamesman
       interaction: manifest
       maneuver: passive
@@ -48,7 +47,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: W9ekYaonCEkM8hNy
     _key: "!items.effects!9goBty5ZLeja5Noc.W9ekYaonCEkM8hNy"
@@ -64,8 +62,6 @@ effects:
       competence:
         raw: 1
       delivery: item
-      duration:
-        unit: instant
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
@@ -73,24 +69,14 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: misdirect
       interaction: block
       maneuver: reactive
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>You block with a @Wiki[Category:Bows]{bow} or your hand.</p>
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
@@ -102,7 +88,6 @@ effects:
       targets:
         - attack
       trigger: <p>You are being @Identifier[core:interactions]{attacked}.</p>
-    transfer: true
     type: ability
   - _id: QTxAnSLkbmB40cOm
     _key: "!items.effects!9goBty5ZLeja5Noc.QTxAnSLkbmB40cOm"
@@ -116,19 +101,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -139,15 +121,11 @@ effects:
             type: formula
         tweaks:
           adept: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       limitation: <p>Only usable against one species, as specified when you use <a class="mw-selflink selflink">Gamesman</a>.</p>
@@ -161,16 +139,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-archer.webp
@@ -179,8 +152,6 @@ system:
   _sup: d8d9e036f44adc09
   archetype: semi
   class: archer
-  competence:
-    raw: 1
   description: >-
     <p>As precise and accurate as a well-crafted @Identifier[equipment:arrow]{arrow}, @Identifier[class:archer]{Archers}
     don't mess around. They prefer to keep their distance, as that is where they are the most effective, never letting
@@ -189,14 +160,5 @@ system:
     are easily killed. If you are playing an @Identifier[class:archer]{Archer} be direct, and on target, sturdy and
     perhaps high strung, watchful of the future and of your back.</p>
   identifier: rank-4-archer
-  innate: false
-  maxAv: 2
   number: 4
-  statDice:
-    hp:
-      disabled: false
-      formula: 1d10
-    mp:
-      disabled: false
-      formula: 1d10
 type: rank

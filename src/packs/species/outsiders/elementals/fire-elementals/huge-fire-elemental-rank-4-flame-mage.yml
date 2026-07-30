@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-flame-spells
       interaction: manifest
       maneuver: passive
@@ -41,7 +40,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ZmjFFlMRQIBtml1N
     _key: "!items.effects!oapV5LHq5baGriG8.ZmjFFlMRQIBtml1N"
@@ -61,7 +59,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: flame-disciplines
       interaction: manifest
       maneuver: passive
@@ -91,7 +88,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: piRrv2bIXklnmiX7
     _key: "!items.effects!oapV5LHq5baGriG8.piRrv2bIXklnmiX7"
@@ -109,13 +105,10 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - loud
       executionTime:
         base: r0
-      form: normal
       identifier: bombastic-casting
       interaction: manifest
       maneuver: reactive
@@ -133,7 +126,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    transfer: true
     type: ability
   - _id: reptUkAaagX49lkJ
     _key: "!items.effects!oapV5LHq5baGriG8.reptUkAaagX49lkJ"
@@ -145,12 +137,9 @@ effects:
       _sup: ZmjFFlMRQIBtml1N
       automations:
         - _id: VX8HRH0mBRK2ACXr
-          all: false
           automatic: false
-          expandTables: false
           local:
             qualifier: and(@ability, @spell, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -161,13 +150,10 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - sensory
       executionTime:
         base: r1
-      form: normal
       identifier: sudden-casting
       interaction: manifest
       maneuver: reactive
@@ -188,7 +174,6 @@ effects:
       trigger: >-
         <p>Another creatures would move out of sight or out of @Identifier[core:range]{range} of a @Wiki[Category:Single
         action spells]{single action spell} you could cast.</p>
-    transfer: true
     type: ability
   - _id: akueLD5R9IU71fcj
     _key: "!items.effects!oapV5LHq5baGriG8.akueLD5R9IU71fcj"
@@ -199,23 +184,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Flame element spells]{flame spell} as though you were
         @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-flame-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: BdbVEU2yOFmyZAD0
     _key: "!items.effects!oapV5LHq5baGriG8.BdbVEU2yOFmyZAD0"
@@ -226,30 +202,18 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Flame element spells]{flame spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-flame-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp
@@ -258,22 +222,17 @@ system:
   _sup: f91791de1bda9b8b
   archetype: mage
   class: flame-mage
-  competence:
-    raw: 1
   description: >-
     <p>Fierce and brazen, these mages are always at war. The arms dealers of the world, their magic is completely
     focused on destruction and thus they seek to create bigger and better ways to blow things up. Passionate, wild and a
     bit chaotic, these mages like the mountains and underground spaces. If you are playing a
     @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like, ready for battle, and consuming everything.</p>
   identifier: rank-4-flame-mage
-  innate: false
   maxAv: 0
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

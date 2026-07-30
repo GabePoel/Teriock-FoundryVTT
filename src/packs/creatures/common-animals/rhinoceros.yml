@@ -35,7 +35,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: advanced-hearing
           interaction: manifest
           maneuver: passive
@@ -54,7 +53,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: plQWgQJodxJW3Tms
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.plQWgQJodxJW3Tms"
@@ -72,7 +70,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: advanced-smell
           interaction: manifest
           maneuver: passive
@@ -95,7 +92,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: FeEINb2QosimbuCg
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.FeEINb2QosimbuCg"
@@ -106,14 +102,9 @@ items:
         system:
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           executionTime:
             base: r0
-          form: normal
           identifier: battle-charge
-          interaction: attack
           maneuver: reactive
           overview:
             base: >-
@@ -122,23 +113,16 @@ items:
               class="note"><b>Note:</b> This ability can trigger in the middle of @Identifier[ability:move]{moving}. You
               could approach an enemy, trigger this ability, take an @Identifier[ability:opportunity-attack]{Opportunity
               Attack} against them, keep moving towards them, and trigger this ability again.</p>
-          piercing:
-            raw: 2
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
             hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
             adjacent to them.</p>
-        transfer: true
         type: ability
       - _id: hyA9Q47fI57AkDJ8
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.hyA9Q47fI57AkDJ8"
@@ -149,51 +133,23 @@ items:
         system:
           automations:
             - _id: eUm1UOhkyF3KmU1q
-              all: false
-              attachDocuments: true
-              automatic: true
               competencies:
                 - 1
-              display: {}
               identifiers:
                 - ability:fast
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: qy0rKWHv0DFoFgqJ
-              all: false
-              attachDocuments: true
-              automatic: true
               competencies:
                 - 2
-              display: {}
               identifiers:
                 - ability:swift
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: mmCTbgaQIg38Y0II
-              executor: false
-              multi: false
-              relation: include
               status: frenzied
-              target: false
               type: status
             - _id: mY9vQJGkj2Kf1RTw
               amount: 15
-              display: {}
               impact: gainTempHp
-              morganti: false
-              showDialog: false
-              trigger: null
               type: take
           competence:
             raw: 1
@@ -202,19 +158,14 @@ items:
             raw: "5"
             unit: minute
           endCondition: <p>You die or 1 minute passes without combat.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: b50b3ee67eddc9f9
               statuses:
-                absent: []
                 present:
                   - dead
               type: status
-          form: normal
           identifier: berserk
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>You gain 15 @Identifier[core:temporary-hit-points]{temporary HP} and become
@@ -233,7 +184,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: yzuCj0S1ANFG1Dmf
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.yzuCj0S1ANFG1Dmf"
@@ -263,7 +213,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: ZpmDpRTc0goeu9zU
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.ZpmDpRTc0goeu9zU"
@@ -283,7 +232,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: giant-strength
           interaction: manifest
           maneuver: passive
@@ -304,7 +252,6 @@ items:
             score:
               attribute: str
               value: 3
-        transfer: true
         type: ability
       - _id: 9isixcuyUoxGWdIc
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.9isixcuyUoxGWdIc"
@@ -317,31 +264,16 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - standardDamage
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
                 - body
-              reverse: false
               type: hacks
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: impale
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>If you want, @Identifier[core:targets]{target} takes
@@ -351,7 +283,6 @@ items:
           standard: true
           targets:
             - vitals
-        transfer: true
         type: ability
       - _id: QS8qO6bTN3kPECot
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.QS8qO6bTN3kPECot"
@@ -362,48 +293,27 @@ items:
         system:
           automations:
             - _id: 6CT5NSb2WmH7cNNn
-              display: {}
               distance: "10"
               movementAction: walk
-              origin: executor
-              originBarrier: true
               type: move
             - _id: XHbIO38NtGB9Mcad
-              display: {}
               distance: "20"
               movementAction: walk
-              origin: executor
-              originBarrier: true
               type: move
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: knockback
-          interaction: attack
-          maneuver: active
           overview:
             base: >-
               <p class="note"><b>Note:</b> A target moving due to [[lookup name]] can still provoke reactions like
               @Identifier[ability:opportunity-attack]{Opportunity Attack}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
             hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: uIOIuSStlJSEpE1y
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.uIOIuSStlJSEpE1y"
@@ -431,7 +341,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 2IlnhxkwBjF4dPA6
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.2IlnhxkwBjF4dPA6"
@@ -447,7 +356,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -460,8 +368,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: lhhWYgaUMY3LNTKi
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.lhhWYgaUMY3LNTKi"
@@ -477,7 +383,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -490,8 +395,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: itApRkR6OlFMcMFd
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.itApRkR6OlFMcMFd"
@@ -504,25 +407,15 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - standardDamage
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d6
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           executionTime:
             base: r0
-          form: normal
           identifier: trample
-          interaction: attack
           maneuver: reactive
           overview:
             base: >-
@@ -530,21 +423,14 @@ items:
               @Identifier[core:size]{size category} smaller than you, add [[/damage 1d6]]
               @Identifier[core:damage]{damage} to its @Identifier[core:standard-and-critical-damage]{standard
               damage}.</p>
-          piercing:
-            raw: 2
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
             hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
-          targets:
-            - creature
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
             adjacent to them.</p>
-        transfer: true
         type: ability
       - _id: UVIkNRnXnBr0TyuB
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.UVIkNRnXnBr0TyuB"
@@ -568,13 +454,10 @@ items:
           competence:
             raw: 1
           delivery: aura
-          duration:
-            unit: instant
           effectTypes:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: scent-seeing
           interaction: manifest
           maneuver: passive
@@ -593,9 +476,6 @@ items:
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: HYOL5MnjdNszPhaF
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.HYOL5MnjdNszPhaF"
@@ -607,14 +487,10 @@ items:
           _sup: ZpmDpRTc0goeu9zU
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           executionTime:
             base: r0
-          form: normal
           identifier: melee-damage-boost
           interaction: manifest
           maneuver: reactive
@@ -627,16 +503,11 @@ items:
               @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
             delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-        transfer: true
         type: ability
       - _id: aNTGoi8FvRIh1Tdu
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.aNTGoi8FvRIh1Tdu"
@@ -653,7 +524,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -673,7 +543,6 @@ items:
             score:
               attribute: str
               value: 2
-        transfer: true
         type: ability
       - _id: liz1Jn0pyWlBGCiW
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.liz1Jn0pyWlBGCiW"
@@ -690,7 +559,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -711,7 +579,6 @@ items:
             score:
               attribute: str
               value: 1
-        transfer: true
         type: ability
       - _id: hzfa3XtlTGpPFmRb
         _key: "!actors.items.effects!8e30941541fc2583.8e30941541fc2583.hzfa3XtlTGpPFmRb"
@@ -728,7 +595,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -742,25 +608,19 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/rhinoceros.webp
     name: Rhinoceros
     system:
       br: 8
-      competence:
-        raw: 1
       identifier: rhinoceros
       size:
-        enabled: true
         value: 5
       statDice:
         hp:
-          disabled: false
           formula: 2d10
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -782,15 +642,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!8e30941541fc2583.V6Uz7OUp3xgNS8WR.fq8owR84sFsgLiuj"
@@ -801,9 +657,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -811,7 +664,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!8e30941541fc2583.V6Uz7OUp3xgNS8WR.4WFL62wofj7AHBxN"
@@ -822,24 +674,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 8e30941541fc2583
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -847,8 +692,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: difLGj5gjQsS3pqF
     _key: "!actors.items!8e30941541fc2583.difLGj5gjQsS3pqF"
@@ -864,15 +707,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!8e30941541fc2583.difLGj5gjQsS3pqF.IDLUUjkSFtpaiKuJ"
@@ -883,32 +722,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 8e30941541fc2583
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: xZqK4Fio4rE0WOmc
     _key: "!actors.items!8e30941541fc2583.xZqK4Fio4rE0WOmc"
@@ -924,15 +754,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
       - _id: 1G7rcqbTObsjbCFZ
         _key: "!actors.items.effects!8e30941541fc2583.xZqK4Fio4rE0WOmc.1G7rcqbTObsjbCFZ"
@@ -943,7 +769,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -954,23 +779,17 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/piercing-horn.webp
     name: Piercing Horn
     system:
       _sup: 8e30941541fc2583
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d8
       fightingStyle: charging
@@ -978,17 +797,9 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Rhinoceros
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 2
@@ -999,9 +810,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/rhinoceros.webp
   texture:
     src: systems/teriock/src/icons/creatures/rhinoceros.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 2
 system:
   hp:
@@ -1009,10 +817,6 @@ system:
   identifier: rhinoceros
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

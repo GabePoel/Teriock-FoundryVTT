@@ -10,59 +10,32 @@ effects:
     system:
       automations:
         - _id: 5d57231066693cee
-          executor: false
-          multi: false
-          relation: include
           status: snared
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         unit: unlimited
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
           timing: end
           type: combat
-      form: normal
       identifier: snare
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
@@ -70,20 +43,16 @@ effects:
       standard: true
       targets:
         - leg
-    transfer: true
     type: ability
   - _id: spiderTamer00000
     _key: "!items.effects!798ca37efed38d6b.spiderTamer00000"
     img: icons/environment/settlement/stables-logo.webp
     name: Spider Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:spider]{spider}.</p>
       field: survivalist
       identifier: spider-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: X4hmAT6ClZkEaRDK
     _key: "!items.effects!798ca37efed38d6b.X4hmAT6ClZkEaRDK"
@@ -109,7 +78,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: talented-tailor
       interaction: manifest
       maneuver: passive
@@ -121,14 +89,11 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Spider Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:spider inline]</p>
   identifier: spider-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

@@ -1,7 +1,33 @@
-import { toKebabCase } from "../../src/module/helpers/string.mjs";
+import { promises as fs } from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const DEFAULTS_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), "defaults.json");
 
 /**
- * Clean excess terms from a document.
+ * Produced automatically by Export Default Values macro. That must be run before data can be exported.
+ * @type {{ documents: Record<string, object>, pseudos: Record<string, Record<string, object>> }}
+ */
+let DEFAULTS = { documents: {}, pseudos: {} };
+
+/**
+ * Load the generated default `_source` data.
+ * @returns {Promise<void>}
+ */
+export async function loadDefaults() {
+  const rerun = "Run the Export Default Values macro before running.";
+  try {
+    DEFAULTS = JSON.parse(await fs.readFile(DEFAULTS_PATH, "utf8"));
+  } catch (err) {
+    throw new Error(`Messed up ${DEFAULTS_PATH}. ${rerun}`, { cause: err });
+  }
+}
+
+/** Keys to not delete during cleaning. */
+const PROTECTED = new Set(["_id", "_key", "_stats", "name", "type"]);
+
+/**
+ * Clean a Document.
  * @param {AnyCommonDocument} doc
  */
 export function cleanDocument(doc) {
@@ -9,8 +35,6 @@ export function cleanDocument(doc) {
   delete doc.ownership;
   if (doc.type) { delete doc.sort; }
   if (["damage", "drain", "tradecraft"].includes(doc.type)) { delete doc.flags; }
-  if (doc.sort === 0) { delete doc.sort; }
-  if (!doc.folder) { delete doc.folder; }
   if (doc._stats) {
     delete doc._stats.createdTime;
     delete doc._stats.duplicateSource;
@@ -21,48 +45,60 @@ export function cleanDocument(doc) {
   if (doc.flags) { delete doc.flags.teriockDocumentSettings; }
   if (doc.system) {
     if (doc.name !== "Basic Abilities") { delete doc.system.settings; }
+    delete doc.system._ref;
+    delete doc.system.disabled;
     delete doc.system.forceSuppressed;
     cleanCommon(doc);
     cleanActiveEffect(doc);
-    if (doc.type === "character" || doc.type === "creature") { cleanActor(doc); }
-    if (doc.system.affinities) { cleanAffinities(doc.system.affinities); }
-    if (doc.system.automations) { cleanAutomations(doc.system.automations); }
-    if (doc.system.expirations) { cleanExpirations(doc.system.expirations); }
-    if (doc.system.statDice) { cleanStatDice(doc.system.statDice); }
+    stripPseudoDefaults(doc);
     if (doc.type === "ability") { cleanAbility(doc); }
-    if (doc.type === "body") { cleanBody(doc); }
-    if (doc.type === "creature") { cleanCreature(doc); }
-    if (doc.type === "equipment") { cleanEquipment(doc); }
-    if (doc.type === "power") { cleanPower(doc); }
-    if (doc.type === "property") { cleanProperty(doc); }
-    if (doc.type === "rank") { cleanRank(doc); }
-    if (doc.type === "species") { cleanSpecies(doc); }
-    if (doc.type === "stone") { cleanStone(doc); }
+    if (["body", "equipment"].includes(doc.type)) { cleanArmament(doc); }
+    if (["character", "creature"].includes(doc.type)) { cleanActor(doc); }
   }
   if (doc.text?.content && doc.type === "class") { doc.text.content = doc.text.content.replaceAll("\n", ""); }
+  stripDefaults(doc, documentDefaults(doc));
+  pruneEmpty(doc);
+}
+
+const COLLECTION_RECORD = {
+  actors: "Actor",
+  effects: "ActiveEffect",
+  items: "Item",
+  pages: "JournalEntryPage",
+  tables: "RollTable",
+};
+
+/**
+ * Default document `_source` data.
+ * @param {AnyCommonDocument} doc
+ * @returns {object|undefined}
+ */
+function documentDefaults(doc) {
+  const collection = doc._key?.split("!").at(-2)?.split(".").at(-1) ?? "";
+  const byType = DEFAULTS.documents[COLLECTION_RECORD[collection]];
+  return byType && (byType[doc.type] ?? byType.base);
+}
+
+/**
+ * Strip default data from PseudoDocuments.
+ * @param {AnyCommonDocument} doc
+ */
+function stripPseudoDefaults(doc) {
+  for (const [collection, types] of Object.entries(DEFAULTS.pseudos)) {
+    const stored = doc.system[collection];
+    if (!stored || typeof stored !== "object") { continue; }
+    for (const mechanic of Object.values(stored)) { stripDefaults(mechanic, types[mechanic?.type]); }
+  }
 }
 
 /**
  * @param {AnyCommonDocument} doc
  */
 function cleanCommon(doc) {
-  delete doc.system._ref;
-  delete doc.system.deleteOnExpire;
-  delete doc.system.disabled;
-  delete doc.system.gmNotes;
-  if (typeof doc.system.attackPenalty === "object") { doc.system.attackPenalty = doc.system.attackPenalty.raw; }
-  delete doc.system.qualifiers;
   if (!doc.system.consumable) {
     delete doc.system.quantity;
     delete doc.system.consumptionAmount;
   }
-
-  // Clean Combat Tags
-  if (!doc.system.vitals) { delete doc.system.vitals; }
-
-  // Clean Retired Tags
-  delete doc.system.imports;
-
   if (Array.isArray(doc.system.effectTypes) && Array.isArray(doc.system.powerSources)) {
     doc.system.effectTypes = doc.system.effectTypes.filter(t => !doc.system.powerSources.includes(t));
   }
@@ -72,28 +108,16 @@ function cleanCommon(doc) {
  * @param {TeriockActiveEffect} doc
  */
 function cleanActiveEffect(doc) {
-  if (doc.tint === "#ffffff") { delete doc.tint; }
   if (["ability", "attunement", "fluency", "property", "resource"].includes(doc.type)) {
-    if (["ability", "property"].includes(doc.type)) {
-      doc.transfer = true;
-    }
     delete doc.duration;
     delete doc.start;
   }
-  if (!doc.disabled) { delete doc.disabled; }
-  if (doc.showIcon) { delete doc.showIcon; }
-  if (doc.system.revealed) { delete doc.system.revealed; }
-  if (typeof doc.system.mundane === "boolean") {
-    doc.system.applyIfDeattuned = doc.system.mundane;
-    delete doc.system.mundane;
-  }
-  if (!doc.system.applyIfDeattuned) { delete doc.system.applyIfDeattuned; }
-  if (doc.system?.transformation?.enabled === false) {
-    delete doc.system.transformation;
-  }
+  if (["ability", "property"].includes(doc.type) || doc.transfer === true) { delete doc.transfer; }
+  if (doc.system.transformation?.enabled === false) { delete doc.system.transformation; }
 }
 
 /**
+ * Strip stuff that we don't want in the compendiums.
  * @param {TeriockActor} doc
  */
 function cleanActor(doc) {
@@ -111,9 +135,7 @@ function cleanActor(doc) {
     if (doc.prototypeToken.ring) {
       delete doc.prototypeToken.ring.colors;
       delete doc.prototypeToken.ring.effects;
-      if (doc.prototypeToken.ring.subject) {
-        delete doc.prototypeToken.ring.subject.scale;
-      }
+      if (doc.prototypeToken.ring.subject) { delete doc.prototypeToken.ring.subject.scale; }
     }
     if (doc.prototypeToken.texture) {
       delete doc.prototypeToken.texture.alphaThreshold;
@@ -125,177 +147,44 @@ function cleanActor(doc) {
       delete doc.prototypeToken.texture.tint;
     }
   }
-  if (doc.system?.combat) {
+  if (doc.system.combat) {
     delete doc.system.combat.attackPenalty;
     delete doc.system.combat.hasReaction;
   }
-  if (doc.system.hp) {
-    delete doc.system.hp.max;
-    delete doc.system.hp.min;
-    delete doc.system.hp.morganti;
-    delete doc.system.hp.temp;
+  for (const stat of ["hp", "mp", "presence"]) {
+    if (!doc.system[stat]) { continue; }
+    delete doc.system[stat].max;
+    delete doc.system[stat].min;
+    delete doc.system[stat].morganti;
+    delete doc.system[stat].temp;
   }
-  if (doc.system.mp) {
-    delete doc.system.mp.max;
-    delete doc.system.mp.min;
-    delete doc.system.mp.morganti;
-    delete doc.system.mp.temp;
-  }
+  delete doc.system.detection;
+  delete doc.system.initiative;
   delete doc.system.lp;
   delete doc.system.weight;
-  delete doc.system.detection;
-  if (doc.system.scaling) { delete doc.system.scaling.lvl; }
-  delete doc.system.initiative;
-}
-
-/**
- * @param {TeriockCreature} doc
- */
-function cleanCreature(doc) {
   delete doc.system.attributes;
-  delete doc.system.attunements;
-  delete doc.system.carryingCapacity;
   delete doc.system.deathBag;
   delete doc.system.interestRate;
   delete doc.system.money;
   delete doc.system.offense;
-  delete doc.system.protections;
   delete doc.system.senses;
-  delete doc.system.sheet;
   delete doc.system.speedAdjustments;
   delete doc.system.tradecrafts;
-  delete doc.system.wither;
-}
-
-/**
- * @param {PiercingModel} piercing
- */
-function cleanPiercing(piercing) {
-  // Clean Legacy Keys
-  if (piercing.av0 === false) { delete piercing.av0; }
-  if (piercing.ub === false) { delete piercing.ub; }
-
-  // Clean Current Keys
-  if (isZero(piercing.raw)) { delete piercing.raw; }
-}
-
-/**
- * @param {Record<string, object>} statDice
- */
-function cleanStatDice(statDice) {
-  for (const pool of Object.values(statDice)) {
-    if (pool && typeof pool === "object") { delete pool.stat; }
-  }
-}
-
-/**
- * @param {TeriockPower} doc
- */
-function cleanPower(doc) {
-  delete doc.system.flaws;
+  if (doc.system.scaling) { delete doc.system.scaling.lvl; }
 }
 
 /**
  * @param {TeriockArmament} doc
  */
 function cleanArmament(doc) {
-  if (doc.system.piercing) { cleanPiercing(doc.system.piercing); }
-  if (typeof doc.system.damage?.base === "object") { doc.system.damage.base = doc.system.damage.base.raw; }
-  if (typeof doc.system.damage?.twoHanded === "object") { doc.system.damage.twoHanded =
-      doc.system.damage.twoHanded.raw; }
-  if (isZero(doc.system.av?.raw)) { delete doc.system.av; }
-  if (isZero(doc.system.bv?.raw)) { delete doc.system.bv; }
-  if (isZero(doc.system.damage?.base)) { delete doc.system.damage.base; }
-  if (isZero(doc.system.damage?.twoHanded)) { delete doc.system.damage.twoHanded; }
-  if (!doc.system.spellTurning) { delete doc.system.spellTurning; }
-  if (!doc.system.warded) { delete doc.system.warded; }
-  if (doc.system.range?.long?.unit && doc.system.range?.short?.unit) {
-    delete doc.system.range.short.unit;
-  }
-}
-
-/**
- * @param {TeriockBody} doc
- */
-function cleanBody(doc) {
-  cleanArmament(doc);
-  delete doc.system.impacts;
-}
-
-/**
- * @param {TeriockEquipment} doc
- */
-function cleanEquipment(doc) {
-  cleanArmament(doc);
-  delete doc.system.dampened;
-  delete doc.system.glued;
-  delete doc.system.identification;
-  delete doc.system.reference;
-  delete doc.system.shattered;
-  delete doc.system.stashed;
-  delete doc.system.destroyed;
-  delete doc.system.impacts;
-  if (doc.system.storage && !doc.system.storage.enabled) { delete doc.system.storage; }
-  if (!doc.system.price) { delete doc.system.price; }
-  if (!doc.system.equipped) { delete doc.system.equipped; }
-}
-
-/**
- * @param {TeriockRank} doc
- */
-function cleanRank(doc) {
-  // Migrate legacy field names.
-  if (doc.system.className) {
-    doc.system.class = toKebabCase(doc.system.className);
-    delete doc.system.className;
-  }
-  if (doc.system.classRank) {
-    doc.system.number = doc.system.classRank;
-    delete doc.system.classRank;
-  }
-}
-
-/**
- * @param {TeriockSpecies} doc
- */
-function cleanSpecies(doc) {
-  if (!doc.system.adult) { delete doc.system.adult; }
-  if (!doc.system.lifespan) { delete doc.system.lifespan; }
-  if (typeof doc.system.transformation?.ring === "boolean") { delete doc.system.transformation.ring; }
-}
-
-/**
- * @param {TeriockCard} doc
- */
-function cleanStone(doc) {
-  delete doc.origin;
-  delete doc.rotation;
-  doc.drawn = false;
-  for (const face of doc.faces || []) {
-    delete face.text;
-    face.name = doc.name;
-  }
-}
-
-/**
- * @param {TeriockProperty} doc
- */
-function cleanProperty(doc) {
-  delete doc.system.impacts;
-  if (!doc.system.consumable) { delete doc.system.consumable; }
-  if (!doc.system.applyIfDampened) { delete doc.system.applyIfDampened; }
-  if (!doc.system.applyIfShattered) { delete doc.system.applyIfShattered; }
-  if (doc.system.applyIfUnequipped) { delete doc.system.applyIfUnequipped; }
+  if (doc.system.range?.long?.unit && doc.system.range?.short?.unit) { delete doc.system.range.short.unit; }
 }
 
 /**
  * @param {TeriockAbility} doc
  */
 function cleanAbility(doc) {
-  // Clean Impacts
-  if (doc.system.impacts) { delete doc.system.impacts; }
-
-  // Clean Execution
+  // Clean Usage
   if (doc.system.interaction !== "feat") { delete doc.system.featSaveAttribute; }
   if (doc.system.interaction !== "attack") { delete doc.system.piercing; }
   if (!doc.system.expansion?.type) { delete doc.system.expansion; }
@@ -306,205 +195,61 @@ function cleanAbility(doc) {
     if (doc.system.maneuver !== "slow") { delete doc.system.executionTime.slow; }
     if (doc.system.maneuver === "passive") { doc.system.executionTime.base = "passive"; }
   }
-  if (["instant", "unlimited"].includes(doc.system.duration.unit)) {
-    delete doc.system.duration.raw;
-  }
-  if (["contact", "melee", "self"].includes(doc.system.range.unit)) {
-    delete doc.system.range.raw;
-  }
-
-  // Clean Costs
-  if (doc.system.costs) { trimObject(doc.system.costs); }
-
-  // Clean Equipment Connections
-  if (!doc.system.consumeSource) { delete doc.system.consumeSource; }
-  if (!doc.system.grantOnly) { delete doc.system.grantOnly; }
 
   // Clean Upgrades
   if (doc.system.upgrades) {
     if (!doc.system.upgrades.competence?.attribute) { delete doc.system.upgrades.competence; }
     if (!doc.system.upgrades.score?.attribute) { delete doc.system.upgrades.score; }
   }
-
-  // Clean Cost Modifications
-  if (!doc.system.adept?.enabled) { delete doc.system.adept; }
-  if (!doc.system.gifted?.enabled) { delete doc.system.gifted; }
-
-  // Clean Tags
-  if (!doc.system.basic) { delete doc.system.basic; }
-  // if (!doc.system.class) { delete doc.system.class; }
-  delete doc.system.class;
-  if (!doc.system.consumable) { delete doc.system.consumable; }
-  if (!doc.system.elderSorcery) { delete doc.system.elderSorcery; }
-  if (!doc.system.guildmaster) { delete doc.system.guildmaster; }
-  if (!doc.system.invoked) { delete doc.system.invoked; }
-  if (!doc.system.lore) { delete doc.system.lore; }
-  if (!doc.system.ritual) { delete doc.system.ritual; }
-  if (!doc.system.rotator) { delete doc.system.rotator; }
-  if (!doc.system.skill) { delete doc.system.skill; }
-  if (!doc.system.spell) { delete doc.system.spell; }
-  if (!doc.system.standard) { delete doc.system.standard; }
-  if (!doc.system.sustained) { delete doc.system.sustained; }
-  if (!doc.system.warded) { delete doc.system.warded; }
-
-  // Clean Common Defaults
-  if (doc.system.attackPenalty === "-3") { delete doc.system.attackPenalty; }
-
-  // Clean Delivery
-  if (typeof doc.system.delivery?.base === "string") { doc.system.delivery = doc.system.delivery.base; }
-
-  // Clean Retired Tags
-  delete doc.system.secret;
-  delete doc.system.prepared;
-  delete doc.system.duration.dawn;
-  delete doc.system.duration.stationary;
-  if (doc.system.effectTypes) { delete doc.system.effects; }
-
-  // Clean Grant Tags
-  if (!doc.system.grantUse) { delete doc.system.grantUse; }
-  if (!doc.system.grantOnly) { delete doc.system.grantOnly; }
 }
 
 /**
- * @param {Record<string, AnyAutomation>} automations
+ * Check whether two values are equal.
+ * @param {*} a
+ * @param {*} b
+ * @returns {boolean}
  */
-function cleanAutomations(automations) {
-  const DEPRECATED_TYPES = ["start", "end", "apply", "useAbilities"];
-  const TYPE_MIGRATIONS = { addExternal: "addDocuments", useExternal: "useDocuments", useLocal: "useDocuments" };
-  for (const [k, v] of Object.entries(automations)) {
-    if (Object.keys(TYPE_MIGRATIONS).includes(v.type)) { v.type = TYPE_MIGRATIONS[v.type]; }
-    if (DEPRECATED_TYPES.includes(v.type)) { delete automations[k]; }
-    if (v.type === "addDocuments") {
-      if (!v?.children?.enabled) { delete v.children; }
-    }
-    if (["addDocuments", "modifyEffect", "region"].includes(v.type)) {
-      if (!v?.overrideData) { delete v.data; }
-    }
-    if (["addDocuments", "modifyEffect", "tradecraft", "transformation", "useDocuments"].includes(v.type)) {
-      if (v?.setCompetence !== "override") { delete v.competence; }
-    }
-  }
-  for (const a of Object.values(automations)) { cleanAutomation(a); }
+function checkEquality(a, b) {
+  if (a === b) { return true; }
+  if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) { return false; }
+  const sorted = (arr) => arr.map(v => JSON.stringify(v)).sort();
+  const [sa, sb] = [sorted(a), sorted(b)];
+  return sa.every((v, i) => v === sb[i]);
 }
 
 /**
- * @param {Record<string, AnyExpiration>} cleanAffinities
+ * Recursively delete every value that already equals its default value.
+ * @param {object} obj
+ * @param {object} [defaults]
  */
-function cleanAffinities(cleanAffinities) {
-  for (const e of Object.values(cleanAffinities)) { cleanMechanic(e); }
-}
-
-/**
- * @param {Record<string, AnyExpiration>} expirations
- */
-function cleanExpirations(expirations) {
-  for (const e of Object.values(expirations)) { cleanExpiration(e); }
-}
-
-/**
- * Clean fields shared by all mechanics (both automations and expirations).
- * @param {Teriock.PseudoDocuments.MechanicPseudoDocumentData} mechanic
- */
-function cleanMechanic(mechanic) {
-  if (mechanic.activeQualifier === "1") { delete mechanic.activeQualifier; }
-  if (!mechanic.setCompetence || mechanic.setCompetence === "none") { delete mechanic.setCompetence; }
-}
-
-/**
- * @param {AnyExpiration} expiration
- */
-function cleanExpiration(expiration) {
-  cleanMechanic(expiration);
-  if (expiration.type === "status") { delete expiration.method; }
-  if (expiration.method !== "roll") { delete expiration.roll; }
-}
-
-/**
- * @param {AnyAutomation} automation
- */
-function cleanAutomation(automation) {
-  cleanMechanic(automation);
-  delete automation.transformation;
-  if (!automation.overrideData) { delete automation.overrideData; }
-
-  if (automation.type === "combatExpiration") {
-    automation.type = "expiration";
-    automation.combat = { what: automation.what, when: automation.when, who: automation.who };
-    automation.override = Object.assign(automation.override ?? {}, { combat: true });
-  }
-  if (automation.type === "expiration") {
-    delete automation.what;
-    delete automation.when;
-    delete automation.who;
-  }
-  if (automation.type === "changes") {
-    for (const c of automation.changes ?? []) {
-      delete c.qualifier;
-      delete c.time;
+function stripDefaults(obj, defaults) {
+  if (!obj || !defaults || typeof obj !== "object" || typeof defaults !== "object") { return; }
+  for (const [key, value] of Object.entries(obj)) {
+    if (PROTECTED.has(key) || !(key in defaults)) { continue; }
+    const def = defaults[key];
+    const bothPlain = value && typeof value === "object" && !Array.isArray(value)
+      && def && typeof def === "object" && !Array.isArray(def);
+    if (bothPlain) {
+      stripDefaults(value, def);
+      if (Object.keys(value).length === 0) { delete obj[key]; }
+    } else if (checkEquality(value, def)) {
+      delete obj[key];
     }
-  }
-  if (automation.type === "duration") {
-    delete automation.changeType;
-    if (automation.substitution === "@base + @new") {
-      delete automation.substitution;
-    }
-  }
-  if (automation.type === "expiration") {
-    if (!automation.override.combat) {
-      delete automation.combat;
-      delete automation.override.combat;
-    }
-    if (!automation.override.conditions) {
-      delete automation.conditions;
-      delete automation.override.conditions;
-    }
-    if (!automation.override.triggers) {
-      delete automation.triggers;
-      delete automation.override.triggers;
-    }
-  }
-  if (["addDocuments", "region", "summon", "transformation", "useDocuments"].includes(automation.type)) {
-    if (automation.qualifier) { automation.localQualifier = automation.qualifier; }
-    delete automation.qualifier;
-    if (automation.localQualifier === "0") { delete automation.localQualifier; }
-    delete automation.documents;
-    if (automation.localIdentifiers || automation.localQualifier && !automation.local) { automation.local = {}; }
-    if (automation.localIdentifiers) {
-      automation.local.identifiers = automation.localIdentifiers;
-      delete automation.localIdentifiers;
-    }
-    if (automation.localQualifier) {
-      automation.local.qualifier = automation.localQualifier;
-      delete automation.localQualifier;
-    }
-    if (automation.local?.qualifier === "0") { delete automation.local.qualifier; }
-  } else {
-    if (automation.localQualifier) {
-      automation.qualifier = automation.localQualifier;
-      delete automation.localQualifier;
-    }
-  }
-  if (automation.type === "useDocuments") {
-    delete automation.noHeighten;
   }
 }
 
 /**
- * @param {string|number} formula
+ * Recursively delete empty objects.
+ * @param {object|Array} node
  */
-function isZero(formula) {
-  return (typeof formula === "string" || typeof formula === "number") && (!formula || formula === "0");
-}
-
-/** @param {object} obj */
-function trimObject(obj) {
-  if (!obj) { return; }
-  if (typeof obj !== "object") { return; }
-  for (const [k, v] of Object.entries(obj)) {
-    if (!v) { delete obj[k]; }
-    if (typeof v === "object") {
-      trimObject(v);
-      if (v && Object.keys(v).length === 0) { delete obj[k]; }
-    }
+function pruneEmpty(node) {
+  if (Array.isArray(node)) {
+    for (const v of node) { if (v && typeof v === "object") { pruneEmpty(v); } }
+    return;
+  }
+  for (const [k, v] of Object.entries(node)) {
+    if (!v || typeof v !== "object") { continue; }
+    pruneEmpty(v);
+    if (!Array.isArray(v) && Object.keys(v).length === 0) { delete node[k]; }
   }
 }

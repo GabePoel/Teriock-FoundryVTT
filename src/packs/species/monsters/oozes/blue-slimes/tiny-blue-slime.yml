@@ -17,7 +17,6 @@ effects:
         - automatic
       executionTime:
         base: passive
-      form: normal
       identifier: acidic-blood
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       targets:
         - self
       trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
-    transfer: true
     type: ability
   - _id: D4IVj9U9gS33R0Wv
     _key: "!items.effects!a9bfb38173455611.D4IVj9U9gS33R0Wv"
@@ -51,7 +49,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: advanced-smell
       interaction: manifest
       maneuver: passive
@@ -74,7 +71,6 @@ effects:
         score:
           attribute: per
           value: 2
-    transfer: true
     type: ability
   - _id: o4Z6Hn8HebP6SMTC
     _key: "!items.effects!a9bfb38173455611.o4Z6Hn8HebP6SMTC"
@@ -102,7 +98,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: blind-fighting
       interaction: manifest
       maneuver: passive
@@ -123,7 +118,6 @@ effects:
         score:
           attribute: per
           value: 1
-    transfer: true
     type: ability
   - _id: 2OS2zNzvxxlDUn91
     _key: "!items.effects!a9bfb38173455611.2OS2zNzvxxlDUn91"
@@ -151,7 +145,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: dark-vision
       interaction: manifest
       maneuver: passive
@@ -163,7 +156,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tlGAfqmQv5fo6ZUu
     _key: "!items.effects!a9bfb38173455611.tlGAfqmQv5fo6ZUu"
@@ -175,29 +167,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 9LeN0JX5m1rotyQz
     _key: "!items.effects!a9bfb38173455611.9LeN0JX5m1rotyQz"
@@ -208,7 +188,6 @@ effects:
     system:
       affinities:
         - _id: Dc03b4Mkm0JKkeo9
-          amount: 1
           category: effectTypes
           type: takeDeboost
           value: damaging
@@ -231,7 +210,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: IdQkhfLhhgHzPQz5
     _key: "!items.effects!a9bfb38173455611.IdQkhfLhhgHzPQz5"
@@ -243,29 +221,19 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -276,9 +244,6 @@ effects:
         hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: xf74EquZQMYBgLYc
     _key: "!items.effects!a9bfb38173455611.xf74EquZQMYBgLYc"
@@ -294,7 +259,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -307,8 +271,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: MwSQ2x6hSwS7mBSD
     _key: "!items.effects!a9bfb38173455611.MwSQ2x6hSwS7mBSD"
@@ -358,7 +320,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 16LlLlCZb3730FA2
     _key: "!items.effects!a9bfb38173455611.16LlLlCZb3730FA2"
@@ -387,12 +348,9 @@ effects:
         - resistance
       elements:
         - storm
-      executionTime:
-        base: a1
       form: special
       identifier: resist-effects
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Pick one of the following @Wiki[Category:Effects]{effect types}. You
@@ -421,7 +379,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: CLlTZYgLlc5Togrc
     _key: "!items.effects!a9bfb38173455611.CLlTZYgLlc5Togrc"
@@ -451,7 +408,6 @@ effects:
         score:
           attribute: mov
           value: -1
-    transfer: true
     type: ability
   - _id: Qbq2qpyxs4ErOcil
     _key: "!items.effects!a9bfb38173455611.Qbq2qpyxs4ErOcil"
@@ -481,7 +437,6 @@ effects:
         score:
           attribute: str
           value: -2
-    transfer: true
     type: ability
   - _id: OInQCHNl3h8PsvbV
     _key: "!items.effects!a9bfb38173455611.OInQCHNl3h8PsvbV"
@@ -504,7 +459,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
@@ -518,7 +472,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: M1jaGO3hBwy2L0WY
     _key: "!items.effects!a9bfb38173455611.M1jaGO3hBwy2L0WY"
@@ -545,7 +498,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: vitals-durability
       interaction: manifest
       maneuver: passive
@@ -559,7 +511,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: AFKy5lHmzhoC4aSW
     _key: "!items.effects!a9bfb38173455611.AFKy5lHmzhoC4aSW"
@@ -583,13 +534,10 @@ effects:
       competence:
         raw: 1
       delivery: aura
-      duration:
-        unit: instant
       effectTypes:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: scent-seeing
       interaction: manifest
       maneuver: passive
@@ -608,9 +556,6 @@ effects:
         @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 973c51c989f887b2
 img: systems/teriock/src/icons/creatures/tiny-blue-slime.webp
@@ -618,21 +563,16 @@ name: Tiny Blue Slime
 system:
   appearance: <p>A pool of thick opaque blue liquid.</p>
   br: 5
-  competence:
-    raw: 1
   description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
   identifier: tiny-blue-slime
   size:
-    enabled: true
     value: 0.5
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

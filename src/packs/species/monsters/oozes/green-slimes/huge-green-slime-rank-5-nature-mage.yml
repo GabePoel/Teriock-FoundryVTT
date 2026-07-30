@@ -30,7 +30,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: nature-rotator-fluency
       interaction: manifest
       maneuver: passive
@@ -50,7 +49,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ojIO6Jux9N05JT8V
     _key: "!items.effects!2PFoU3NYkZycYP26.ojIO6Jux9N05JT8V"
@@ -65,14 +63,10 @@ effects:
     system:
       automations:
         - _id: 4kZRSij54vIELR6U
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:empathic-ray
               - ability:treeform-ball
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -82,7 +76,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: nature-spell-strikes
       interaction: manifest
       maneuver: passive
@@ -96,7 +89,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ksI80ohfeCG8pdJM
     _key: "!items.effects!2PFoU3NYkZycYP26.ksI80ohfeCG8pdJM"
@@ -108,12 +100,8 @@ effects:
       _sup: ojIO6Jux9N05JT8V
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -123,12 +111,8 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: spell-strike
       interaction: manifest
       limitation: >-
@@ -142,17 +126,12 @@ effects:
           was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
-    transfer: true
     type: ability
 folder: 1c2657666be68efd
 img: systems/teriock/src/icons/ranks/rank-5-nature-mage.webp
@@ -161,8 +140,6 @@ system:
   _sup: 1e1d512c131e91e1
   archetype: mage
   class: nature-mage
-  competence:
-    raw: 1
   description: >-
     <p>The enchanter of the woods, these wandering spell casters resemble Rangers in their wanderlust. More comfortable
     with @Wiki[Category:Animal creatures]{animals} than @Wiki[Category:Humanoid creatures]{people},
@@ -172,14 +149,11 @@ system:
     @Identifier[class:nature-mage]{Nature Mage} be reclusive, avoiding people if you can, happy in nature and eager to
     leave any civilization.</p>
   identifier: rank-5-nature-mage
-  innate: false
   maxAv: 0
   number: 5
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

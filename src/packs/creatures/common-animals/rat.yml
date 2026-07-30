@@ -49,7 +49,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: climbing
           interaction: manifest
           maneuver: passive
@@ -62,7 +61,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: WeBl2AEgUw8UNkZ2
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.WeBl2AEgUw8UNkZ2"
@@ -92,7 +90,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: p6GtlGGf1Pc7Gaer
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.p6GtlGGf1Pc7Gaer"
@@ -103,38 +100,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -162,7 +139,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: IT6oshb8zuHxrOOd
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.IT6oshb8zuHxrOOd"
@@ -190,7 +166,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: oTwEjs3st5h00ir5
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.oTwEjs3st5h00ir5"
@@ -206,7 +181,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -219,8 +193,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: kYgjqLb5UEIB178b
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.kYgjqLb5UEIB178b"
@@ -236,7 +208,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -249,8 +220,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: S2qOzxo5ghS2TjI4
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.S2qOzxo5ghS2TjI4"
@@ -266,7 +235,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -279,8 +247,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: aJsReGodfaOkRIE3
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.aJsReGodfaOkRIE3"
@@ -310,7 +276,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: hA5oVJiy88W5o83o
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.hA5oVJiy88W5o83o"
@@ -323,50 +288,31 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
-              display: {}
               formula: 1d8[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d10[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "24"
             unit: hour
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: poison-strike
-          interaction: attack
           limitation: <p>@Identifier[equipment:mouth]{Mouth} only.</p>
-          maneuver: active
           overview:
             fluent: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -374,20 +320,13 @@ items:
             proficient: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
               @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - alchemical
-          range:
-            unit: contact
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 5aX9UAVqJ4OP23kD
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.5aX9UAVqJ4OP23kD"
@@ -419,7 +358,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: stealth
           interaction: manifest
           maneuver: passive
@@ -449,7 +387,6 @@ items:
             score:
               attribute: snk
               value: 3
-        transfer: true
         type: ability
       - _id: oD10XW64Q7HlxSgX
         _key: "!actors.items.effects!9fffde19feb858d8.9fffde19feb858d8.oD10XW64Q7HlxSgX"
@@ -479,25 +416,19 @@ items:
             score:
               attribute: str
               value: -2
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/rat.webp
     name: Rat
     system:
       br: 2
-      competence:
-        raw: 1
       identifier: rat
       size:
-        enabled: true
         value: 0.25
       statDice:
         hp:
-          disabled: false
           formula: 1d4
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -519,15 +450,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!9fffde19feb858d8.nX9yhdkIgHToUwdC.fq8owR84sFsgLiuj"
@@ -538,9 +465,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -548,7 +472,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!9fffde19feb858d8.nX9yhdkIgHToUwdC.4WFL62wofj7AHBxN"
@@ -559,24 +482,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 9fffde19feb858d8
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -584,17 +500,9 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Rat
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -605,9 +513,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/rat.webp
   texture:
     src: systems/teriock/src/icons/creatures/rat.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -615,10 +520,6 @@ system:
   identifier: rat
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

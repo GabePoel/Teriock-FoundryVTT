@@ -29,7 +29,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: 87GLG3ekWIi3Q5lv
     _key: "!items.effects!97e569396ff8e891.87GLG3ekWIi3Q5lv"
@@ -40,30 +39,18 @@ effects:
     system:
       automations:
         - _id: Hd5o6s1SdA8C7IfT
-          competence:
-            raw: 0
-          preventFeat: false
           preventThreshold: true
           type: override
         - _id: 0b0d1426453abb55
-          executor: false
-          multi: false
           relation: apply
           status: hidden
-          target: false
           type: status
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
       featSaveAttribute: snk
-      form: normal
       identifier: hide
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -91,7 +78,6 @@ effects:
         score:
           attribute: snk
           value: 2
-    transfer: true
     type: ability
   - _id: 7rIfnTppSxUdqcNV
     _key: "!items.effects!97e569396ff8e891.7rIfnTppSxUdqcNV"
@@ -104,8 +90,6 @@ effects:
         - _id: Suc9ayhHqRkmjAwZ
           activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -136,7 +120,6 @@ effects:
       requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: M96JivVdA127HI1Y
     _key: "!items.effects!97e569396ff8e891.M96JivVdA127HI1Y"
@@ -164,7 +147,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ju3jknHUZZeZ7z52
     _key: "!items.effects!97e569396ff8e891.ju3jknHUZZeZ7z52"
@@ -180,7 +162,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -193,8 +174,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: g5uOk4tdHcR80ym5
     _key: "!items.effects!97e569396ff8e891.g5uOk4tdHcR80ym5"
@@ -210,7 +189,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -223,8 +201,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: kvkzi2qwqInKDqSt
     _key: "!items.effects!97e569396ff8e891.kvkzi2qwqInKDqSt"
@@ -240,7 +216,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -253,8 +228,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: ef8kzCn8m1TGerf5
     _key: "!items.effects!97e569396ff8e891.ef8kzCn8m1TGerf5"
@@ -268,43 +241,30 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -312,20 +272,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 5nZ5JogvnMnbfRWY
     _key: "!items.effects!97e569396ff8e891.5nZ5JogvnMnbfRWY"
@@ -355,7 +308,6 @@ effects:
         score:
           attribute: str
           value: -2
-    transfer: true
     type: ability
   - _id: B1wsK6hnBMTCh9Ff
     _key: "!items.effects!97e569396ff8e891.B1wsK6hnBMTCh9Ff"
@@ -371,7 +323,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: water-native
       interaction: manifest
       maneuver: passive
@@ -385,7 +336,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: BDh1oVF14WynRG2d
     _key: "!items.effects!97e569396ff8e891.BDh1oVF14WynRG2d"
@@ -402,7 +352,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: diving
       interaction: manifest
       maneuver: passive
@@ -423,7 +372,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tevSn6TIeYbqbM6E
     _key: "!items.effects!97e569396ff8e891.tevSn6TIeYbqbM6E"
@@ -453,7 +401,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: swimming
       interaction: manifest
       maneuver: passive
@@ -467,27 +414,20 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/salamander.webp
 name: Salamander
 system:
-  br: 1
-  competence:
-    raw: 1
   identifier: salamander
   size:
-    enabled: true
     value: 0.25
   statDice:
     hp:
-      disabled: false
       faces: 4
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

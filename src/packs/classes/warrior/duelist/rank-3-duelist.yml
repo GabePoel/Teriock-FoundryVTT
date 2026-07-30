@@ -19,7 +19,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: clan-fealty
       interaction: manifest
       maneuver: passive
@@ -45,7 +44,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: yCLjgtUua4ROR3qi
     _key: "!items.effects!4d084b2bd2d58aec.yCLjgtUua4ROR3qi"
@@ -60,18 +58,12 @@ effects:
     system:
       automations:
         - _id: 52f4d0b87363b1c1
-          executor: false
-          multi: false
           relation: apply
           status: dueling
-          target: false
           type: status
         - _id: 824b5b01e1a4efec
-          executor: false
-          multi: false
           relation: remove
           status: dueling
-          target: false
           type: status
       competence:
         raw: 1
@@ -81,14 +73,8 @@ effects:
             formula: "1"
             type: formula
       delivery: sight
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: duel-swap
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>The @Identifier[core:targets]{target} leaves their @Identifier[condition:dueling]{duel} and you enter in
@@ -107,9 +93,6 @@ effects:
         @Identifier[core:range]{range}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: InKLgMMWFVEQTpGk
     _key: "!items.effects!4d084b2bd2d58aec.InKLgMMWFVEQTpGk"
@@ -123,7 +106,6 @@ effects:
     system:
       automations:
         - _id: Axozk1FdcJFFmu6r
-          changeType: add
           key: system.boosts.damage
           qualifier: "@prop.weapon"
           target: armament
@@ -137,11 +119,8 @@ effects:
           type: childChange
           value: "2"
         - _id: 5e9e1d2033fe152a
-          executor: false
-          multi: false
           relation: apply
           status: ruined
-          target: false
           type: status
       competence:
         raw: 1
@@ -157,7 +136,6 @@ effects:
             absent:
               - null
           type: status
-      form: normal
       identifier: final-fury
       interaction: manifest
       maneuver: reactive
@@ -176,7 +154,6 @@ effects:
       targets:
         - self
       trigger: <p>You start @Identifier[condition:defying-death]{defying death}.</p>
-    transfer: true
     type: ability
   - _id: BpqCFcyosxmNw45i
     _key: "!items.effects!4d084b2bd2d58aec.BpqCFcyosxmNw45i"
@@ -198,7 +175,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: hara-kiri
       interaction: manifest
       maneuver: slow
@@ -223,9 +199,6 @@ effects:
       skill: true
       standard: true
       sustained: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 5SCwWu1v6UtAFQau
     _key: "!items.effects!4d084b2bd2d58aec.5SCwWu1v6UtAFQau"
@@ -244,7 +217,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: iaido
       interaction: manifest
       maneuver: passive
@@ -262,7 +234,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: sNb0MpCuNQOiPQM4
     _key: "!items.effects!4d084b2bd2d58aec.sNb0MpCuNQOiPQM4"
@@ -277,12 +248,8 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           formula: 1d6[spiritual]
-          impact: damage
           type: roll
         - _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
           status: lighted
           target: true
           type: status
@@ -297,13 +264,9 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: rebuke
       interaction: manifest
       maneuver: reactive
@@ -318,10 +281,7 @@ effects:
         unit: ft
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: <p>A creature forfeits a @Identifier[condition:dueling]{duel} with you.</p>
-    transfer: true
     type: ability
 folder: 3743957c10da8991
 img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
@@ -329,8 +289,6 @@ name: Rank 3 Duelist
 system:
   archetype: warrior
   class: duelist
-  competence:
-    raw: 1
   description: >-
     <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for duels
     as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above any sort of
@@ -339,7 +297,6 @@ system:
     way. If you are a @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and confident in yourself.</p>
   flaws: <p>Duelists cannot use @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-3-duelist
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
@@ -347,13 +304,11 @@ system:
   number: 3
   statDice:
     hp:
-      disabled: false
       faces: 12
       formula: 1d12
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 8
       formula: 1d8
       number:

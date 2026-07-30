@@ -6,25 +6,17 @@ system:
   automations:
     - _id: 3lQebubTXmBzorqW
       category: armament
-      changeType: add
       key: system.damage
       qualifier: "@dmg"
       type: childChange
       value: 1d4[fire]
     - _id: 29b275994cf9f5b1
       formula: 1d4[fire]
-      impact: damage
-      merge: true
       trigger: turnStart
       type: roll
     - _id: b48fe6066c4cf8f1
-      executor: false
-      relation: include
       status: burned
-      target: false
       type: status
-  competence:
-    raw: 0
   delivery: self
   duration:
     raw: "10"
@@ -33,7 +25,6 @@ system:
     - automatic
   executionTime:
     base: r0
-  form: normal
   identifier: ignite-self
   interaction: manifest
   maneuver: reactive
@@ -53,5 +44,4 @@ system:
   trigger: >-
     <p>You take @Identifier[damage:fire]{fire damage}. This triggers automatically. You cannot choose to not use it if
     you are able to.</p>
-transfer: true
 type: ability

@@ -5,19 +5,12 @@ name: Mana Drain Suck
 system:
   automations:
     - _id: grBibq1mL7ug5J3v
-      consumeStatDice: true
-      forHarm: false
       type: revitalize
     - _id: 157afc517847f562
       formula: 1d8[mana]
       impact: drain
-      merge: true
       type: roll
-  competence:
-    raw: 0
   delivery: bite
-  duration:
-    unit: instant
   effectTypes:
     - draining
     - revitalization
@@ -25,14 +18,8 @@ system:
     base: a2
   form: special
   identifier: mana-drain-suck
-  interaction: attack
-  maneuver: active
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     critHit: >-
       <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the target.
@@ -44,7 +31,4 @@ system:
       If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
       @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only part
       of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

@@ -30,17 +30,12 @@ effects:
         - _id: ZdtyUjiggvt0bxgX
           common:
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: ZlgI0KUafWT3wE27
-          competence:
-            raw: 0
           competencies:
             - 0
             - 1
           makeEffect: true
-          preventFeat: false
-          preventThreshold: false
           type: override
         - _id: 6v7WhWcAO2fARRYl
           amount: 999999
@@ -50,8 +45,6 @@ effects:
           display:
             label: Restore MP
           impact: revitalizing
-          morganti: false
-          showDialog: false
           type: take
         - _id: YHHJxY54wT2k778U
           amount: 999999
@@ -61,8 +54,6 @@ effects:
           display:
             label: Restore HP
           impact: healing
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -77,26 +68,18 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - reanimation
       elements:
         - necromancy
-      executionTime:
-        base: a1
       expirations:
         - _id: c32fbccf9d83e581
-          method: automatic
           triggers:
             - shortRest
           type: trigger
-      form: normal
       identifier: animate-dead
-      interaction: attack
       invoked: true
       limitation: <p>Self only.</p>
-      maneuver: active
       overview:
         base: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive} (but still
@@ -116,20 +99,13 @@ effects:
           @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
           still halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a
           @Wiki[Category:Revival effects]{revival effect}.</p>
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: >-
         <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead} and
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: iO2KhjwWAFjCnh3T
     _key: "!items.effects!d3672cafa9fd70c4.iO2KhjwWAFjCnh3T"
@@ -141,7 +117,6 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           formula: 1d10
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -150,7 +125,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: constructed-body
       interaction: manifest
       maneuver: passive
@@ -181,7 +155,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 4H8bM5WxoaOvyt4I
     _key: "!items.effects!d3672cafa9fd70c4.4H8bM5WxoaOvyt4I"
@@ -192,12 +165,8 @@ effects:
     system:
       automations:
         - _id: PKZXkwmO94niPsUb
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@ability, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -209,8 +178,6 @@ effects:
           verbal:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       elements:
         - necromancy
       executionTime:
@@ -233,7 +200,6 @@ effects:
       targets:
         - self
       trigger: <p>You @Identifier[condition:dead]{die}.</p>
-    transfer: true
     type: ability
   - _id: 8KV44cjub6kkbxKd
     _key: "!items.effects!d3672cafa9fd70c4.8KV44cjub6kkbxKd"
@@ -270,7 +236,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: YCtuDXqivJ7WBFSA
     _key: "!items.effects!d3672cafa9fd70c4.YCtuDXqivJ7WBFSA"
@@ -286,7 +251,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-intelligence
       interaction: manifest
       maneuver: passive
@@ -299,8 +263,6 @@ effects:
       upgrades:
         score:
           attribute: int
-          value: 0
-    transfer: true
     type: ability
   - _id: uaA9MzmPpbIkWhcZ
     _key: "!items.effects!d3672cafa9fd70c4.uaA9MzmPpbIkWhcZ"
@@ -316,7 +278,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -329,8 +290,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: LscpoPG3aYGQraLM
     _key: "!items.effects!d3672cafa9fd70c4.LscpoPG3aYGQraLM"
@@ -346,7 +305,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -359,8 +317,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: QI8lfgN6lHlWGVkm
     _key: "!items.effects!d3672cafa9fd70c4.QI8lfgN6lHlWGVkm"
@@ -376,7 +332,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -389,8 +344,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: twjJCCntt0msw0ue
     _key: "!items.effects!d3672cafa9fd70c4.twjJCCntt0msw0ue"
@@ -406,7 +359,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -419,8 +371,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: shrgIrK8XmZUFSIn
     _key: "!items.effects!d3672cafa9fd70c4.shrgIrK8XmZUFSIn"
@@ -457,7 +407,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: vgXDFdoL7PppPd1m
     _key: "!items.effects!d3672cafa9fd70c4.vgXDFdoL7PppPd1m"
@@ -488,7 +437,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -502,7 +450,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tV68UXmlwRZqolyB
     _key: "!items.effects!d3672cafa9fd70c4.tV68UXmlwRZqolyB"
@@ -540,7 +487,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: jMKMfgPaQ8NOQ3qC
     _key: "!items.effects!d3672cafa9fd70c4.jMKMfgPaQ8NOQ3qC"
@@ -585,7 +531,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nq9RVJzB1W9BptzB
     _key: "!items.effects!d3672cafa9fd70c4.nq9RVJzB1W9BptzB"
@@ -597,8 +542,6 @@ effects:
       _sup: 8KV44cjub6kkbxKd
       automations:
         - _id: xreyNK2IzDp9qCUE
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -607,23 +550,13 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
-      executionTime:
-        base: a1
       form: special
       identifier: mana-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -635,9 +568,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: WLygn5Ak1beSd0jz
     _key: "!items.effects!d3672cafa9fd70c4.WLygn5Ak1beSd0jz"
@@ -689,7 +619,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/creatures/superior-cemerai.webp
@@ -697,24 +626,17 @@ name: Superior Cemerai
 system:
   appearance: <p>Complete suits of armor with full helm, walking around, with empty black voids where a face should be.</p>
   br: 24
-  competence:
-    raw: 1
   description: >-
     <p>Usually used as military commanders or guardians, these dangerous creatures are believed to be a form of haunt or
     haunted armor that is created when a @Identifier[class:duelist]{Duelist} is killed in a particular way.</p>
   identifier: superior-cemerai
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 4 @Identifier[class:duelist]{Duelist}.</p>
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "4"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

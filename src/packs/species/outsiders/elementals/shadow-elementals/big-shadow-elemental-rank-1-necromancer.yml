@@ -14,7 +14,6 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 71e51b18552837f1
           formula: (2 + @h)d6
@@ -23,23 +22,14 @@ effects:
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - killing
       elements:
         - necromancy
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill
         1d6]].</p>
       identifier: death-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -56,9 +46,6 @@ effects:
           @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 15t1ifTnUgXbHDY7
     _key: "!items.effects!4wy1Edcx1fVvNcY3.15t1ifTnUgXbHDY7"
@@ -98,7 +85,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may target an additional
         creature.</p>
@@ -127,9 +113,6 @@ effects:
       spell: true
       standard: true
       sustained: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 6ouKT638ARM4Cphm
     _key: "!items.effects!4wy1Edcx1fVvNcY3.6ouKT638ARM4Cphm"
@@ -155,8 +138,6 @@ effects:
               @Identifier[core:size]{size} of the body.</p>
             type: description
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - summoning
       elements:
@@ -166,7 +147,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: summon-the-dead
       interaction: manifest
       maneuver: slow
@@ -191,9 +171,6 @@ effects:
       ritual: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: epbHgxy8x6bO3jkQ
     _key: "!items.effects!4wy1Edcx1fVvNcY3.epbHgxy8x6bO3jkQ"
@@ -205,28 +182,18 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d4[magic terror]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       elements:
         - necromancy
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic terror]]] @Identifier[core:damage]{damage}.</p>
       identifier: terror-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -237,9 +204,6 @@ effects:
         hit: <p>Deal [[/damage 1d4[terror magic]]] @Identifier[core:damage]{damage} to target.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: a4e3527bf26a4ba9
 img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
@@ -248,8 +212,6 @@ system:
   _sup: 86c3130bad11018e
   archetype: mage
   class: necromancer
-  competence:
-    raw: 1
   description: >-
     <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery digging
     up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply see death as
@@ -258,14 +220,11 @@ system:
     unafraid, kill without remorse and be interested in @Identifier[condition:dead]{dead} bodies, close to death
     yourself, almost in another world.</p>
   identifier: rank-1-necromancer
-  innate: false
   maxAv: 0
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

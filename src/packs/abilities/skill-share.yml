@@ -5,58 +5,37 @@ name: Skill Share
 system:
   affinities:
     - _id: M5H0FZSqdzBuueLq
-      category: abilities
       img: ""
       type: incapability
       value: skillShare
   automations:
     - _id: pZTzCOb2arggrQQw
-      attachDocuments: true
       automatic: false
       competencies:
         - 0
       local:
         qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1))
-      multi: false
-      separate: false
       type: addDocuments
     - _id: DKrkwLcllE5f9bjQ
-      attachDocuments: true
       automatic: false
       competencies:
         - 1
       local:
         qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @p))
-      multi: false
-      separate: false
       type: addDocuments
     - _id: LTtFZkqLk2QnwOfK
-      attachDocuments: true
       automatic: false
       competencies:
         - 2
       local:
         qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @f))
-      multi: false
-      separate: false
       type: addDocuments
     - _id: XdlHsYQu4RHDULLu
-      competence:
-        raw: 0
-      display:
-        label: ""
-      makeEffect: null
       prevent: false
       preventEffect: false
-      preventFeat: false
-      preventThreshold: false
       rollBonus: ""
       setCompetence: override
-      targetsActor: null
-      targetsArmament: null
       type: override
-  competence:
-    raw: 0
   delivery: sight
   duration:
     raw: "1"
@@ -64,12 +43,8 @@ system:
   effectTypes:
     - contract
   endCondition: <p>You use [[lookup name]] again.</p>
-  executionTime:
-    base: a1
-  form: normal
   identifier: skill-share
   interaction: manifest
-  maneuver: active
   overview:
     base: >-
       <p>@Identifier[core:targets]{Target} gains one @Pack[teriock.abilities]{ability} of your choice that you have from
@@ -93,7 +68,4 @@ system:
   skill: true
   standard: true
   sustained: true
-  targets:
-    - creature
-transfer: true
 type: ability

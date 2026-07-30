@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
@@ -31,7 +30,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: I4exHiNkLlucYz7a
     _key: "!items.effects!f476a374dea0fb71.I4exHiNkLlucYz7a"
@@ -43,29 +41,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 5pkX1Nabze7z0ap6
     _key: "!items.effects!f476a374dea0fb71.5pkX1Nabze7z0ap6"
@@ -108,7 +94,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -123,7 +108,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: x6PVpWkbs0WEjkzZ
     _key: "!items.effects!f476a374dea0fb71.x6PVpWkbs0WEjkzZ"
@@ -139,7 +123,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: high-intelligence
       interaction: manifest
       maneuver: passive
@@ -153,7 +136,6 @@ effects:
         score:
           attribute: int
           value: 3
-    transfer: true
     type: ability
   - _id: JqpXBgCYZ6Mm8sIo
     _key: "!items.effects!f476a374dea0fb71.JqpXBgCYZ6Mm8sIo"
@@ -169,7 +151,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -189,7 +170,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: 6WSJ6bZz3ZH0P4FH
     _key: "!items.effects!f476a374dea0fb71.6WSJ6bZz3ZH0P4FH"
@@ -217,7 +197,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -231,7 +210,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: G2XEbUeMv8w8fjE3
     _key: "!items.effects!f476a374dea0fb71.G2XEbUeMv8w8fjE3"
@@ -247,7 +225,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -260,8 +237,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 3t2kvkEme7gnWjWm
     _key: "!items.effects!f476a374dea0fb71.3t2kvkEme7gnWjWm"
@@ -277,7 +252,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -290,8 +264,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: C8HdTfJGdPDJbTko
     _key: "!items.effects!f476a374dea0fb71.C8HdTfJGdPDJbTko"
@@ -307,7 +279,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: swift
       interaction: manifest
       maneuver: passive
@@ -321,7 +292,6 @@ effects:
         score:
           attribute: mov
           value: 2
-    transfer: true
     type: ability
   - _id: 0Ib8mExZZZLaxhq3
     _key: "!items.effects!f476a374dea0fb71.0Ib8mExZZZLaxhq3"
@@ -332,25 +302,15 @@ effects:
     system:
       automations:
         - _id: 7400b41f20d9f100
-          all: false
           angle: "@angle.normal"
           attachToToken: false
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: cone
           restriction:
             enabled: true
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       costs:
@@ -364,13 +324,9 @@ effects:
         unit: minute
       elements:
         - life
-      executionTime:
-        base: a1
-      featSaveAttribute: mov
       form: special
       identifier: white-drake-breath
       interaction: feat
-      maneuver: active
       powerSources:
         - magical
       range:
@@ -378,9 +334,6 @@ effects:
         unit: ft
       results:
         fail: <p>@Identifier[core:targets]{Target} cannot deal @Identifier[core:damage]{damage}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: x9tT5L2qvanys4hV
     _key: "!items.effects!f476a374dea0fb71.x9tT5L2qvanys4hV"
@@ -406,10 +359,8 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      form: normal
       identifier: battle-cry-resistance
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
@@ -420,7 +371,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Gm3haFPeUl4uAFtg
     _key: "!items.effects!f476a374dea0fb71.Gm3haFPeUl4uAFtg"
@@ -432,31 +382,14 @@ effects:
       _sup: vtWVYBrjy5bO9Coi
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -477,25 +410,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-cry-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -506,9 +427,6 @@ effects:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: YjUuG6EzOJHLW1x9
     _key: "!items.effects!f476a374dea0fb71.YjUuG6EzOJHLW1x9"
@@ -525,7 +443,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -546,7 +463,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: msrImHz3XkmAmf2L
     _key: "!items.effects!f476a374dea0fb71.msrImHz3XkmAmf2L"
@@ -563,7 +479,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -577,7 +492,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/creatures/white-coatling.webp
@@ -587,8 +501,6 @@ system:
     <p>As @UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{drakes} but slightly longer, more slender, and
     with enormous multi-colored feathered wings.</p>
   br: 15
-  competence:
-    raw: 1
   description: >-
     <p>These rare beings sometimes seem to be enchanted with passive effects that generate or mutate swarms of
     @Wiki[Category:Insects]{elemental and other insects} around them. These creatures are very aggressive and seem to
@@ -598,16 +510,13 @@ system:
     <p>Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:life-mage]{Life Mage}. Innately
     @Pack[teriock.classes]{rank} 1 @Identifier[class:nature-mage]{Nature Mage}.</p>
   size:
-    enabled: true
     value: 5
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "6"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "2"

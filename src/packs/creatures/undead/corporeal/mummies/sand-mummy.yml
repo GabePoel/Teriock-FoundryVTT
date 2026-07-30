@@ -22,7 +22,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: battle-cry
           interaction: manifest
           maneuver: passive
@@ -38,7 +37,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: RHTiM6aSp0rAyKai
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.RHTiM6aSp0rAyKai"
@@ -54,7 +52,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -75,7 +72,6 @@ items:
             score:
               attribute: str
               value: 1
-        transfer: true
         type: ability
       - _id: X1a2OLRg0YpyDPH5
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.X1a2OLRg0YpyDPH5"
@@ -111,9 +107,6 @@ items:
             - magical
           range:
             unit: self
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: zfZwNPPEbqUXuefS
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.zfZwNPPEbqUXuefS"
@@ -151,7 +144,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: d2gsOh5lOLj4n3A9
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.d2gsOh5lOLj4n3A9"
@@ -167,7 +159,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: high-intelligence
           interaction: manifest
           maneuver: passive
@@ -181,7 +172,6 @@ items:
             score:
               attribute: int
               value: 3
-        transfer: true
         type: ability
       - _id: k3dilvmTNn8I1iR6
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.k3dilvmTNn8I1iR6"
@@ -192,24 +182,17 @@ items:
         system:
           automations:
             - _id: 3lQebubTXmBzorqW
-              changeType: add
               key: system.damage
               qualifier: "@dmg"
               target: armament
               type: childChange
               value: 1d4[fire]
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d4[fire]
-              impact: damage
               trigger: turnStart
               type: roll
             - _id: b48fe6066c4cf8f1
-              executor: false
-              multi: false
-              relation: include
               status: burned
-              target: false
               type: status
           competence:
             raw: 1
@@ -221,7 +204,6 @@ items:
             - automatic
           executionTime:
             base: r0
-          form: normal
           identifier: ignite-self
           interaction: manifest
           maneuver: reactive
@@ -242,7 +224,6 @@ items:
           trigger: >-
             <p>You take @Identifier[damage:fire]{fire damage}. This triggers automatically. You cannot choose to not use
             it if you are able to.</p>
-        transfer: true
         type: ability
       - _id: SYUpAq9Zso4bh5zl
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.SYUpAq9Zso4bh5zl"
@@ -258,7 +239,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: martial-arts
           interaction: manifest
           maneuver: passive
@@ -274,7 +254,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ZB8ntBMO2Ut4yr3h
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.ZB8ntBMO2Ut4yr3h"
@@ -290,7 +269,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -303,8 +281,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 1abou0eaxfXbeWkc
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.1abou0eaxfXbeWkc"
@@ -320,7 +296,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -333,8 +308,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 3J1oJrXI2eaUaYkm
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.3J1oJrXI2eaUaYkm"
@@ -350,7 +323,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -363,8 +335,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: NzWiOY5OU6oupHHw
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.NzWiOY5OU6oupHHw"
@@ -377,8 +347,6 @@ items:
             - _id: z19OrBHuoZ8ihlgP
               common:
                 - shatter
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
@@ -387,30 +355,17 @@ items:
               mp:
                 formula: "1"
                 type: formula
-          delivery: weapon
-          duration:
-            unit: instant
           effectTypes:
             - destruction
-          executionTime:
-            base: a1
-          form: normal
           identifier: shatter
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             hit: <p>Item is @Identifier[property:shattered]{shattered}.</p>
           skill: true
           standard: true
           targets:
             - item
-        transfer: true
         type: ability
       - _id: MxavnSrALcSPuqDQ
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.MxavnSrALcSPuqDQ"
@@ -442,7 +397,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: jloY68lCxnYmoqSU
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.jloY68lCxnYmoqSU"
@@ -455,10 +409,6 @@ items:
           affinities:
             - _id: oJH3v7kvIbVGDlBS
               category: statuses
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: frightened
           competence:
@@ -472,10 +422,8 @@ items:
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime:
             base: a0
-          form: normal
           identifier: battle-cry-resistance
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
           powerSources:
@@ -486,7 +434,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: mGtvwpebkCU88OHY
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.mGtvwpebkCU88OHY"
@@ -498,42 +445,14 @@ items:
           _sup: 49KZNlOv5NZD7czH
           automations:
             - _id: 7400b41f20d9f100
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
-                priority: 0
                 type: sound
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: b4960732f0b9ed9f
-              executor: false
-              multi: false
-              relation: include
               status: frightened
-              target: false
               type: status
           competence:
             raw: 1
@@ -554,25 +473,13 @@ items:
           endCondition: >-
             <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
-              timing: start
               type: combat
           featSaveAttribute: int
-          form: normal
           identifier: battle-cry-aura
           interaction: feat
-          maneuver: active
           powerSources:
             - martial
           range:
@@ -583,9 +490,6 @@ items:
             fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: lCNcJNjCg2Nb2qZO
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.lCNcJNjCg2Nb2qZO"
@@ -622,7 +526,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: z4oQOixSmjjFSv4C
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.z4oQOixSmjjFSv4C"
@@ -635,7 +538,6 @@ items:
           affinities:
             - _id: uevhIJEJYaY0sz5X
               category: other
-              img: null
               type: immunity
               value: Non-Magical Non-Silver Damage
           competence:
@@ -661,7 +563,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: q3pMm2AVJFvh3q6P
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.q3pMm2AVJFvh3q6P"
@@ -674,17 +575,14 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
-              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
-              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
-              img: null
               type: immunity
               value: unconscious
           competence:
@@ -716,7 +614,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: qmelSCp5AyQyiPXM
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.qmelSCp5AyQyiPXM"
@@ -729,12 +626,10 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
-              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
-              img: null
               type: immunity
               value: frightened
           competence:
@@ -763,7 +658,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: v0YMpaiw1GaQOh3T
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.v0YMpaiw1GaQOh3T"
@@ -794,7 +688,6 @@ items:
             - necromancy
           executionTime:
             base: passive
-          form: normal
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -810,7 +703,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 9ujMdZkOlbJS9YKU
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.9ujMdZkOlbJS9YKU"
@@ -822,22 +714,14 @@ items:
           _sup: zfZwNPPEbqUXuefS
           automations:
             - _id: iAyFzPzJgTNeDbbH
-              consumeStatDice: true
-              forHarm: false
-              substitution: ""
-              trigger: null
               type: revitalize
             - _id: 157afc517847f562
-              display: {}
               formula: 1d8[mana]
               impact: drain
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - draining
             - revitalization
@@ -845,14 +729,8 @@ items:
             base: a2
           form: special
           identifier: mana-drain-grasp
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -864,9 +742,6 @@ items:
               target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
               @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
               only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: xIMA2UPNHDMv5JcG
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.xIMA2UPNHDMv5JcG"
@@ -911,7 +786,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: defensive-martial-arts
           interaction: manifest
           maneuver: passive
@@ -933,7 +807,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ZYJeAjQ3psK1rHXK
         _key: "!actors.items.effects!266273a260f3effc.266273a260f3effc.ZYJeAjQ3psK1rHXK"
@@ -975,27 +848,18 @@ items:
               type: childChange
               value: 1d8
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d4
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
                 - 2
-              display: {}
               formula: 1d6
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d8
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1004,7 +868,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: offensive-martial-arts
           interaction: manifest
           maneuver: passive
@@ -1026,7 +889,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: a8e8026a8376d9d4
     img: systems/teriock/src/icons/creatures/sand-mummy.webp
@@ -1034,23 +896,14 @@ items:
     system:
       appearance: <p>Bodies wrapped in cloth ceremonially for burial.</p>
       br: 14
-      competence:
-        raw: 1
       description: >-
         <p>Mummies are often guardians of sanctified areas and may have additional
         @Identifier[keyword:blessing]{blessings} on them.</p>
       identifier: sand-mummy
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:flame-mage]{Flame Mage}.</p>
-      size:
-        enabled: true
-        value: 3
       statDice:
         hp:
-          disabled: false
           formula: 2d10
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - partialHumanoid
         - undead
@@ -1072,15 +925,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!266273a260f3effc.5fyh8rFIfxkpWsyc.fq8owR84sFsgLiuj"
@@ -1091,9 +940,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -1101,7 +947,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!266273a260f3effc.5fyh8rFIfxkpWsyc.4WFL62wofj7AHBxN"
@@ -1112,24 +957,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: a8e8026a8376d9d4
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 266273a260f3effc
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -1137,8 +975,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: U3GgUhTWZhFEYYoY
     _key: "!actors.items!266273a260f3effc.U3GgUhTWZhFEYYoY"
@@ -1154,15 +990,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!266273a260f3effc.U3GgUhTWZhFEYYoY.lKaLyYYTTIEFOLb5"
@@ -1173,9 +1005,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -1183,7 +1012,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!266273a260f3effc.U3GgUhTWZhFEYYoY.m7Va2Fuah1K2t2Ab"
@@ -1194,9 +1022,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -1204,7 +1029,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!266273a260f3effc.U3GgUhTWZhFEYYoY.IJM1yhiyKnnwlbXh"
@@ -1215,32 +1039,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: a8e8026a8376d9d4
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 266273a260f3effc
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: gIRaXVkCg7Q8iBuW
     _key: "!actors.items!266273a260f3effc.gIRaXVkCg7Q8iBuW"
@@ -1256,15 +1071,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!266273a260f3effc.gIRaXVkCg7Q8iBuW.IDLUUjkSFtpaiKuJ"
@@ -1275,32 +1086,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: a8e8026a8376d9d4
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 266273a260f3effc
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: ldIICUjMXYf04n6t
     _key: "!actors.items!266273a260f3effc.ldIICUjMXYf04n6t"
@@ -1316,31 +1118,19 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d4[magic fire]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           elements:
             - flame
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic fire]]] @Identifier[core:damage]{damage}.</p>
           identifier: fire-ball
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
           range:
@@ -1353,9 +1143,6 @@ items:
               @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: jNVwWGftQrYicpwi
         _key: "!actors.items.effects!266273a260f3effc.ldIICUjMXYf04n6t.jNVwWGftQrYicpwi"
@@ -1366,33 +1153,21 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d8[fire magic]
               heighten:
                 - 1
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           elements:
             - flame
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d8[fire magic]]] @Identifier[core:damage]{damage}.</p>
           identifier: flame-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -1405,9 +1180,6 @@ items:
               @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: LbLjjWiopqGfltmW
         _key: "!actors.items.effects!266273a260f3effc.ldIICUjMXYf04n6t.LbLjjWiopqGfltmW"
@@ -1423,7 +1195,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: mage-light
           interaction: manifest
           maneuver: passive
@@ -1437,7 +1208,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: yHA67BqutokLx7uo
         _key: "!actors.items.effects!266273a260f3effc.ldIICUjMXYf04n6t.yHA67BqutokLx7uo"
@@ -1449,40 +1219,13 @@ items:
           automations:
             - _id: 32BRYYbao0OafqCz
               attribute: mov
-              bonus: ""
               threshold: 10 + @c
               type: feat
             - _id: YxFIjavyUBnxf6OV
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
-                enabled: false
-                priority: 0
                 type: move
-              targeting: true
-              trigger: null
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
           competence:
             raw: 1
           costs:
@@ -1506,7 +1249,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may choose an additional
             @Identifier[core:targets]{target}.</p>
@@ -1541,9 +1283,6 @@ items:
           spell: true
           standard: true
           sustained: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: pbRlGMoUhjbPf1Cg
         _key: "!actors.items.effects!266273a260f3effc.ldIICUjMXYf04n6t.pbRlGMoUhjbPf1Cg"
@@ -1555,19 +1294,9 @@ items:
           _sup: LbLjjWiopqGfltmW
           automations:
             - _id: HzyxPJ30wjiQSRG4
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - property:flaming
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: 72ce567009179bea
               duration:
                 raw: "@h"
@@ -1585,13 +1314,11 @@ items:
             - flame
           executionTime:
             base: a0
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
             @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
           identifier: ignite
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>@Identifier[core:targets]{Target} is set on fire or is put out. If the
@@ -1601,8 +1328,6 @@ items:
               name]] does not harm you while it is burning.</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: >-
             <p>@Identifier[core:targets]{Target} must be a @Identifier[equipment:torch]{torch},
             @Identifier[equipment:candle]{candle}, or some other item that designed to be lit on fire.</p>
@@ -1611,7 +1336,6 @@ items:
           sustained: true
           targets:
             - item
-        transfer: true
         type: ability
       - _id: PZWa8bRLyMhgVRuA
         _key: "!actors.items.effects!266273a260f3effc.ldIICUjMXYf04n6t.PZWa8bRLyMhgVRuA"
@@ -1624,41 +1348,15 @@ items:
           automations:
             - _id: LdZVSs1LskViKI2J
               light:
-                alpha: 0.5
                 angle: 60
                 animation:
-                  intensity: 5
-                  reverse: false
-                  speed: 5
                   type: flame
-                attenuation: 0.5
                 bright: 100
                 color: "#c64600"
-                coloration: 1
-                contrast: 0
-                darkness:
-                  max: 1
-                  min: 0
                 dim: 50
-                luminosity: 0.5
-                negative: false
-                priority: 0
-                saturation: 0
-                shadows: 0
               type: light
             - _id: FoFDvat2UIccUJn4
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
               preventBlockCone: true
-              preventFeat: false
-              preventThreshold: false
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -1668,12 +1366,8 @@ items:
             unit: minute
           elements:
             - flame
-          executionTime:
-            base: a1
-          form: normal
           identifier: light
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>The area is illuminated. This [[lookup name style=lc]] emanates from your hand and moves with you. You
@@ -1689,7 +1383,6 @@ items:
           targets:
             - area
             - self
-        transfer: true
         type: ability
     folder: a8e8026a8376d9d4
     img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
@@ -1698,8 +1391,6 @@ items:
       _sup: 266273a260f3effc
       archetype: mage
       class: flame-mage
-      competence:
-        raw: 1
       description: >-
         <p>Fierce and brazen, these mages are always at war. The arms dealers of the world, their magic is completely
         focused on destruction and thus they seek to create bigger and better ways to blow things up. Passionate, wild
@@ -1709,13 +1400,10 @@ items:
       identifier: rank-1-flame-mage
       maxAv: 0
       number: 1
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d12
     type: rank
   - _id: 4a095aaed0254ec3
@@ -1732,29 +1420,17 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d4[magic]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic]]] @Identifier[core:damage]{damage}.</p>
           identifier: arcane-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -1765,9 +1441,6 @@ items:
             hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: "!actors.items.effects!266273a260f3effc.4a095aaed0254ec3.aCWLNsvSFjEuLTyl"
@@ -1783,7 +1456,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: staff-touch
           interaction: manifest
           maneuver: passive
@@ -1810,14 +1482,11 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 4a095aaed0254ec3
     img: systems/teriock/src/icons/archetypes/mage.webp
     name: Mage
     system:
-      competence:
-        raw: 1
       description: >-
         <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical spells} and each class has a different
         approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
@@ -1827,15 +1496,8 @@ items:
     type: archetype
 name: Sand Mummy
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Sand Mummy
   ring:
     enabled: true
@@ -1843,24 +1505,14 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/sand-mummy.webp
   texture:
     src: systems/teriock/src/icons/creatures/sand-mummy.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 12
   identifier: sand-mummy
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
-  size:
-    value: 3
   wielding:
     attacker: gIRaXVkCg7Q8iBuW
     blocker: gIRaXVkCg7Q8iBuW

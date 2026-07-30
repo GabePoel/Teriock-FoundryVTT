@@ -67,7 +67,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: KEDoL1suux0vZZNL
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.KEDoL1suux0vZZNL"
@@ -103,7 +102,6 @@ items:
             score:
               attribute: per
               value: 5
-        transfer: true
         type: ability
       - _id: nybq77qgw87PQRN8
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.nybq77qgw87PQRN8"
@@ -133,7 +131,6 @@ items:
             score:
               attribute: int
               value: 5
-        transfer: true
         type: ability
       - _id: iNjmnj105limA5th
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.iNjmnj105limA5th"
@@ -176,7 +173,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -191,7 +187,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: hZaJ983HO62rPKjT
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.hZaJ983HO62rPKjT"
@@ -204,9 +199,6 @@ items:
             - _id: Suc9ayhHqRkmjAwZ
               activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              noStatDice: false
-              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -237,7 +229,6 @@ items:
           requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
           targets:
             - self
-        transfer: true
         type: ability
       - _id: AbOenjjPIRvgQnVG
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.AbOenjjPIRvgQnVG"
@@ -250,8 +241,6 @@ items:
             - _id: T0uGlilXyRymTD1v
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -282,7 +271,6 @@ items:
           requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
           targets:
             - self
-        transfer: true
         type: ability
       - _id: TeZ58rHBkZAZxf64
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.TeZ58rHBkZAZxf64"
@@ -312,7 +300,6 @@ items:
             score:
               attribute: snk
               value: -3
-        transfer: true
         type: ability
       - _id: MG2OmYGxCOcai5yg
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.MG2OmYGxCOcai5yg"
@@ -323,50 +310,23 @@ items:
         system:
           automations:
             - _id: 7400b41f20d9f100
-              all: false
               angle: "@angle.dragon"
               attachToToken: false
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
               expandWithToken: false
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
               radius: "@ability.range + 5 * @h"
-              radiusX: ""
-              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
-                priority: 0
                 type: move
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: 800c70e6560525a8
-              display: {}
               formula: (2 * @h)d10[magic]
               heighten:
                 - 1
-              impact: damage
-              trigger: null
               type: roll
             - _id: H1gYV0NUjBum8t3Q
-              executor: false
-              multi: false
-              relation: include
               status: immobilized
-              target: false
               type: status
           competence:
             raw: 1
@@ -379,9 +339,6 @@ items:
           duration:
             raw: "10"
             unit: minute
-          executionTime:
-            base: a1
-          featSaveAttribute: mov
           form: special
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
@@ -389,7 +346,6 @@ items:
             increases by 5 feet.</p>
           identifier: mithril-dragon-breath
           interaction: feat
-          maneuver: active
           powerSources:
             - magical
           range:
@@ -401,9 +357,6 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:slowed]{slowed} and takes half as much
               @Identifier[core:damage]{damage} from this as they would otherwise. This is calculated after any
               @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: dulv7VomXOWEPvuK
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.dulv7VomXOWEPvuK"
@@ -414,7 +367,6 @@ items:
         system:
           automations:
             - _id: dZdzGQfm90BHxkCn
-              changeType: add
               key: system.boosts.damage
               qualifier: and(@dmg, @range.melee)
               target: armament
@@ -455,7 +407,6 @@ items:
             score:
               attribute: str
               value: 5
-        transfer: true
         type: ability
       - _id: 7zjhpNH4uhXlWhRr
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.7zjhpNH4uhXlWhRr"
@@ -483,7 +434,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: night-vision
           interaction: manifest
           maneuver: passive
@@ -497,7 +447,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 754viQRYcxVewWqu
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.754viQRYcxVewWqu"
@@ -510,34 +459,17 @@ items:
             - _id: mhGxVy8CcJTEyM2q
               common:
                 - shatter
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
               rollBonus: "@av"
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
           competence:
             raw: 1
           delivery: armor
-          duration:
-            unit: instant
           effectTypes:
             - destruction
           executionTime:
             base: r1
-          form: normal
           identifier: shattering-armor
           interaction: block
           maneuver: reactive
@@ -547,8 +479,6 @@ items:
               to your @Identifier[core:armor-class]{AV} for the purpose of [[lookup name]].</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
             save: >-
@@ -556,7 +486,6 @@ items:
               @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
           targets:
             - item
-        transfer: true
         type: ability
       - _id: ohxkEp5v0DRgmgEO
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.ohxkEp5v0DRgmgEO"
@@ -572,7 +501,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: speed
           interaction: manifest
           maneuver: passive
@@ -586,7 +514,6 @@ items:
             score:
               attribute: mov
               value: 3
-        transfer: true
         type: ability
       - _id: xnbfYLoFHZbHVsMq
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.xnbfYLoFHZbHVsMq"
@@ -597,10 +524,8 @@ items:
         system:
           automations:
             - _id: Fw2QaGk8rUtXFgyZ
-              changeType: add
               key: system.costs.tweaks.adept
               qualifier: "@class.veteran"
-              target: ability
               type: childChange
               value: "1"
           competence:
@@ -624,7 +549,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: kPEbZK3mN1TZAIHw
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.kPEbZK3mN1TZAIHw"
@@ -635,10 +559,8 @@ items:
         system:
           automations:
             - _id: insnA3UruLUet7RD
-              changeType: add
               key: system.costs.tweaks.adept
               qualifier: "@identifier.battle-cry-aura"
-              target: ability
               type: childChange
               value: "1"
           competence:
@@ -648,7 +570,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: battle-roar
           interaction: manifest
           maneuver: passive
@@ -662,7 +583,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: C7TAcB0bFAW3C8lW
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.C7TAcB0bFAW3C8lW"
@@ -674,10 +594,8 @@ items:
           _sup: qa1NCmgdqeYVmFhd
           automations:
             - _id: 9sdpZGNc8gLdN1vm
-              changeType: add
               key: system.costs.tweaks.adept
               qualifier: "@es"
-              target: ability
               type: childChange
               value: "1"
           competence:
@@ -701,7 +619,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 7uNaaZPQYu7nQ1nZ
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.7uNaaZPQYu7nQ1nZ"
@@ -777,7 +694,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: rugeXYGA3Z6aIA8r
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.rugeXYGA3Z6aIA8r"
@@ -925,7 +841,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: XkhwyH2EaorNIVaj
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.XkhwyH2EaorNIVaj"
@@ -955,8 +870,6 @@ items:
                   @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
                 type: description
           delivery: sight
-          duration:
-            unit: instant
           elderSorcery: true
           executionTime:
             base: Long Rest
@@ -985,13 +898,10 @@ items:
               @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           ritual: true
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ICp5jqsEH5bupT5h
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.ICp5jqsEH5bupT5h"
@@ -1005,25 +915,18 @@ items:
             - _id: JT1XORoecAWXaZZi
               common:
                 - identify
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
           delivery: sight
-          duration:
-            unit: instant
           effectTypes:
             - sensory
             - truthDetecting
           elements:
             - storm
-          executionTime:
-            base: a1
           form: special
           identifier: instant-identify-sight
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>If the @Identifier[core:targets]{target} is an item, you know if it is
@@ -1040,7 +943,6 @@ items:
           targets:
             - creature
             - item
-        transfer: true
         type: ability
       - _id: 4iPAB0yTuvNabadu
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.4iPAB0yTuvNabadu"
@@ -1090,7 +992,6 @@ items:
             score:
               attribute: per
               value: 4
-        transfer: true
         type: ability
       - _id: fDpApNo5DIiU2t4w
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.fDpApNo5DIiU2t4w"
@@ -1121,7 +1022,6 @@ items:
             - necromancy
           executionTime:
             base: passive
-          form: normal
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -1137,7 +1037,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ohPg5SBZqfeIKzKE
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.ohPg5SBZqfeIKzKE"
@@ -1156,7 +1055,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: scouting
           interaction: manifest
           maneuver: passive
@@ -1179,7 +1077,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: tD23Yr2cS7FjKQRJ
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.tD23Yr2cS7FjKQRJ"
@@ -1217,7 +1114,6 @@ items:
             score:
               attribute: str
               value: 4
-        transfer: true
         type: ability
       - _id: cdrv3L3kaWmNj9IC
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.cdrv3L3kaWmNj9IC"
@@ -1238,7 +1134,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: giant-strength
           interaction: manifest
           maneuver: passive
@@ -1259,7 +1154,6 @@ items:
             score:
               attribute: str
               value: 3
-        transfer: true
         type: ability
       - _id: 35KK4kgVEN7ImK60
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.35KK4kgVEN7ImK60"
@@ -1276,7 +1170,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -1296,7 +1189,6 @@ items:
             score:
               attribute: str
               value: 2
-        transfer: true
         type: ability
       - _id: qXz0TW5XenzVvqMO
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.qXz0TW5XenzVvqMO"
@@ -1313,7 +1205,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -1334,7 +1225,6 @@ items:
             score:
               attribute: str
               value: 1
-        transfer: true
         type: ability
       - _id: uWTxhupZcND9HcZu
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.uWTxhupZcND9HcZu"
@@ -1351,7 +1241,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -1365,7 +1254,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: FiOzd0d8wQs6WUYv
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.FiOzd0d8wQs6WUYv"
@@ -1377,14 +1265,10 @@ items:
           _sup: cdrv3L3kaWmNj9IC
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           executionTime:
             base: r0
-          form: normal
           identifier: melee-damage-boost
           interaction: manifest
           maneuver: reactive
@@ -1397,16 +1281,11 @@ items:
               @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
             delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-        transfer: true
         type: ability
       - _id: lLzfELtemTyD9e5X
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.lLzfELtemTyD9e5X"
@@ -1420,8 +1299,6 @@ items:
             - _id: MZ0HXunkUDN7yJiQ
               common:
                 - shatter
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
@@ -1431,26 +1308,19 @@ items:
                 formula: "1"
                 type: formula
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - destruction
           executionTime:
             base: a2
-          form: normal
           identifier: shattering-grip
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>@Identifier[core:targets]{Target} is @Identifier[property:shattered]{shattered}.</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           requirements: <p>You are holding the target.</p>
           targets:
             - item
-        transfer: true
         type: ability
       - _id: PHz4GxBWYc24APMd
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.PHz4GxBWYc24APMd"
@@ -1467,7 +1337,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: battle-cry
           improvement: <p>You are @Identifier[keyword:adept]{adept} at @Identifier[ability:battle-cry-aura]{Battle Cry Aura}.</p>
           interaction: manifest
@@ -1484,7 +1353,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: NKkoZqdqqJO4wTei
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.NKkoZqdqqJO4wTei"
@@ -1497,10 +1365,6 @@ items:
           affinities:
             - _id: oJH3v7kvIbVGDlBS
               category: statuses
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: frightened
           competence:
@@ -1514,10 +1378,8 @@ items:
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime:
             base: a0
-          form: normal
           identifier: battle-cry-resistance
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
           powerSources:
@@ -1528,7 +1390,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ddCGW7XOiWz3XvNv
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.ddCGW7XOiWz3XvNv"
@@ -1540,42 +1401,14 @@ items:
           _sup: PHz4GxBWYc24APMd
           automations:
             - _id: 7400b41f20d9f100
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
-                priority: 0
                 type: sound
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: b4960732f0b9ed9f
-              executor: false
-              multi: false
-              relation: include
               status: frightened
-              target: false
               type: status
           competence:
             raw: 1
@@ -1596,25 +1429,13 @@ items:
           endCondition: >-
             <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
-              timing: start
               type: combat
           featSaveAttribute: int
-          form: normal
           identifier: battle-cry-aura
           interaction: feat
-          maneuver: active
           powerSources:
             - martial
           range:
@@ -1625,9 +1446,6 @@ items:
             fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: LzDV9X5SWi9hk7cX
         _key: "!actors.items.effects!0d8ec10b181b8f31.0d8ec10b181b8f31.LzDV9X5SWi9hk7cX"
@@ -1639,42 +1457,15 @@ items:
           _sup: kPEbZK3mN1TZAIHw
           automations:
             - _id: 7400b41f20d9f100
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
-                priority: 0
                 type: sound
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
-              multi: false
-              relation: include
               status: frightened
-              target: false
               type: status
           competence:
             raw: 1
@@ -1695,25 +1486,13 @@ items:
           endCondition: >-
             <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
-              timing: start
               type: combat
           featSaveAttribute: int
-          form: normal
           identifier: battle-roar-aura
           interaction: feat
-          maneuver: active
           powerSources:
             - martial
           range:
@@ -1722,9 +1501,6 @@ items:
           requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/creatures/mithril-dragon.webp
@@ -1732,8 +1508,6 @@ items:
     system:
       appearance: <p>Massive reptilians with wings.</p>
       br: 60
-      competence:
-        raw: 1
       description: >-
         <p>@UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{Dragons} are extremely intelligent and natively
         speak the @Identifier[core:elder-sorcery]{language of creation}. They may have other abilities not listed.</p>
@@ -1742,16 +1516,13 @@ items:
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 5 @Identifier[class:veteran]{Veteran}.</p>
       mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
       size:
-        enabled: true
         max: 30
         min: 10
         value: 10
       statDice:
         hp:
-          disabled: false
           formula: (@species.size)d10
         mp:
-          disabled: false
           formula: (@species.size - 6)d12
       traits:
         - draconic
@@ -1774,7 +1545,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -1785,31 +1555,23 @@ items:
                   type: upgrade
                   value: "2"
               type: changes
-          competence:
-            raw: 0
           description: >-
             <p>@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{Armor} that's <b>[[lookup name style=lc]]</b>
             has its @Identifier[core:armor-class]{AV} increased by 2.</p>
           form: intrinsic
           identifier: dragon-scale
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/reinforced-dragon-scales.webp
     name: Reinforced Dragon Scales
     system:
       _sup: 0d8ec10b181b8f31
-      attackPenalty: "-3"
       av:
         raw: 4
-      competence:
-        raw: 0
       identifier: reinforced-dragon-scales
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: EXdWuzYT7de8SHKn
     _key: "!actors.items!0d8ec10b181b8f31.EXdWuzYT7de8SHKn"
@@ -1825,9 +1587,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -1835,7 +1594,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: o67ZRFEWF4mU4Mxj
         _key: "!actors.items.effects!0d8ec10b181b8f31.EXdWuzYT7de8SHKn.o67ZRFEWF4mU4Mxj"
@@ -1846,7 +1604,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -1857,12 +1614,9 @@ items:
                   type: upgrade
                   value: "2"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:unblockable]{UB}.</p>
           form: intrinsic
           identifier: unblockable
-        transfer: true
         type: property
       - _id: 7njhfLJ9LONqUJnU
         _key: "!actors.items.effects!0d8ec10b181b8f31.EXdWuzYT7de8SHKn.7njhfLJ9LONqUJnU"
@@ -1873,26 +1627,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/devouring-maw.webp
     name: Devouring Maw
     system:
       _sup: 0d8ec10b181b8f31
-      attackPenalty: "-3"
       bv:
         raw: 2
-      competence:
-        raw: 0
       damage:
         base: 1d12
       fightingStyle: savage
@@ -1900,8 +1647,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: FicB9YmrWwfLlh79
     _key: "!actors.items!0d8ec10b181b8f31.FicB9YmrWwfLlh79"
@@ -1943,7 +1688,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-brace
           interaction: manifest
           maneuver: passive
@@ -1966,7 +1710,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: VBoKPDCDrZYSanpd
         _key: "!actors.items.effects!0d8ec10b181b8f31.FicB9YmrWwfLlh79.VBoKPDCDrZYSanpd"
@@ -1981,25 +1724,13 @@ items:
         system:
           automations:
             - _id: TEeNG4KzVU1CWpKg
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - property:runic
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: q5g5DHz1N2MlQrXH
               common:
                 - reforge
                 - repair
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
@@ -2020,7 +1751,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          form: normal
           identifier: mystic-item-repair
           interaction: manifest
           maneuver: slow
@@ -2042,7 +1772,6 @@ items:
           standard: true
           targets:
             - item
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-4-veteran.webp
@@ -2051,8 +1780,6 @@ items:
       _sup: 0d8ec10b181b8f31
       archetype: warrior
       class: veteran
-      competence:
-        raw: 1
       description: >-
         <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned
         warriors, but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so
@@ -2064,13 +1791,10 @@ items:
       identifier: rank-4-veteran
       maxAv: 4
       number: 4
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: H0aWNJSzEviStZ49
@@ -2087,15 +1811,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!0d8ec10b181b8f31.H0aWNJSzEviStZ49.IDLUUjkSFtpaiKuJ"
@@ -2106,32 +1826,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 0d8ec10b181b8f31
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: XdwS1RRfnen2zL8D
     _key: "!actors.items!0d8ec10b181b8f31.XdwS1RRfnen2zL8D"
@@ -2148,42 +1859,31 @@ items:
           affinities:
             - _id: hPfBt6zwzwH60lYt
               activeQualifier: "@flags.improvedBrace"
-              amount: 1
               category: effectTypes
-              img: null
               type: takeDeboost
               value: damaging
           automations:
             - _id: 0BLOMYrODY3bzx8I
               competencies:
                 - 0
-              display: {}
               formula: 1d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               competencies:
                 - 1
-              display: {}
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               competencies:
                 - 2
-              display: {}
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: Rid5p1TlO90isbp4
               amount: 0
-              display: {}
               impact: setTempHp
-              morganti: false
-              showDialog: false
               trigger: movement
               type: take
           competence:
@@ -2192,18 +1892,13 @@ items:
           duration:
             unit: unlimited
           endCondition: <p>You move or are moved.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: d1f6b6eaa581aa10
-              method: automatic
               triggers:
                 - movement
               type: trigger
-          form: normal
           identifier: brace
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
@@ -2219,7 +1914,6 @@ items:
           sustained: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Nel4kQU109RUj1k2
         _key: "!actors.items.effects!0d8ec10b181b8f31.XdwS1RRfnen2zL8D.Nel4kQU109RUj1k2"
@@ -2230,22 +1924,11 @@ items:
         system:
           automations:
             - _id: DH9D04yber5kvwnW
-              all: false
-              attachDocuments: true
-              automatic: true
               children:
-                data: "{}"
                 enabled: true
                 identifiers:
                   - property:improvised
-                overrideData: false
-                uuids: []
               data: "{\"name\":\"Improvised @base\"}"
-              display: {}
-              identifiers: []
-              local:
-                identifiers: []
-                qualifier: ""
               multi: true
               overrideData: true
               separate: true
@@ -2254,18 +1937,7 @@ items:
                 - Compendium.teriock.equipment.Folder.ed3267c1d2c3a7f4
                 - Compendium.teriock.equipment.Folder.f596232e51f64ef9
             - _id: FKc997ohmjSZ7IvR
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
               makeEffect: false
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -2277,7 +1949,6 @@ items:
             base: Short Rest
             slow:
               unit: shortRest
-          form: normal
           identifier: improvised-armor-and-shields
           interaction: manifest
           maneuver: slow
@@ -2302,7 +1973,6 @@ items:
           standard: true
           targets:
             - other
-        transfer: true
         type: ability
       - _id: shn8qx3LbBe4ktYg
         _key: "!actors.items.effects!0d8ec10b181b8f31.XdwS1RRfnen2zL8D.shn8qx3LbBe4ktYg"
@@ -2313,37 +1983,17 @@ items:
         system:
           automations:
             - _id: 1687edd16f473940
-              all: false
-              attachDocuments: true
-              automatic: true
               data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
-              display: {}
               identifiers:
                 - ability:instant-awaken
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               overrideData: true
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: 691afda974d67b4a
-              all: false
-              attachDocuments: true
-              automatic: true
               data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
-              display: {}
               identifiers:
                 - ability:reactive-awaken
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               overrideData: true
-              separate: false
               type: addDocuments
-              uuids: []
           competence:
             raw: 1
           delivery: sight
@@ -2351,12 +2001,8 @@ items:
             raw: "1"
             unit: hour
           endCondition: <p>You use [[lookup name]] again.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: partner-awaken
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>You and the @Identifier[core:targets]{target} gain @Identifier[keyword:limited]{Limited}
@@ -2370,9 +2016,6 @@ items:
             unit: ft
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-1-veteran.webp
@@ -2381,8 +2024,6 @@ items:
       _sup: 0d8ec10b181b8f31
       archetype: warrior
       class: veteran
-      competence:
-        raw: 1
       description: >-
         <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned
         warriors, but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so
@@ -2394,13 +2035,10 @@ items:
       identifier: rank-1-veteran
       maxAv: 4
       number: 1
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: bpqXlfvTvMLil9IL
@@ -2427,13 +2065,9 @@ items:
                 formula: 1d8
                 type: formula
           delivery: hand
-          duration:
-            unit: instant
           executionTime:
             base: r1
-          form: normal
           identifier: intercept
-          interaction: attack
           maneuver: reactive
           overview:
             base: >-
@@ -2441,22 +2075,15 @@ items:
               @Identifier[condition:dead]{death} was a cost, then [[lookup name]] @Identifier[core:fizzles]{fizzles}.
               [[lookup name]]'s cost can be paid with @Identifier[core:temporary-hit-points]{temporary HP}.</p><p
               class="note"><b>Note:</b> Creatures can choose to be hit by attacks while up.</p>
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             hit: >-
               <p>The effect causing the @Identifier[core:targets]{target} to become @Identifier[condition:down]{down}
               @Identifier[core:fizzles]{fizzles}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: <p>A creature within @Identifier[core:range]{range} would be @Identifier[condition:down]{dropped}.</p>
-        transfer: true
         type: ability
       - _id: DDCszBLFPaksOMMq
         _key: "!actors.items.effects!0d8ec10b181b8f31.bpqXlfvTvMLil9IL.DDCszBLFPaksOMMq"
@@ -2473,28 +2100,16 @@ items:
             - _id: D1qR6LVgmLWXDmwK
               activeQualifier: not(@status.down)
               category: other
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: Mediator Tradecrafts (Braced, Fortified, Guard Duty)
             - _id: HdxWlxaznzSUik7G
               activeQualifier: not(@status.down)
               category: other
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: Frightened (Braced, Fortified, Guard Duty)
             - _id: ZVrfQy0JAj806yDg
               activeQualifier: not(@status.down)
               category: other
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: Being Surprised (Braced, Fortified, Guard Duty)
           competence:
@@ -2506,7 +2121,6 @@ items:
             - resistance
           executionTime:
             base: passive
-          form: normal
           identifier: sentry
           interaction: manifest
           maneuver: passive
@@ -2531,7 +2145,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-5-veteran.webp
@@ -2540,8 +2153,6 @@ items:
       _sup: 0d8ec10b181b8f31
       archetype: warrior
       class: veteran
-      competence:
-        raw: 1
       description: >-
         <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned
         warriors, but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so
@@ -2553,13 +2164,10 @@ items:
       identifier: rank-5-veteran
       maxAv: 4
       number: 5
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: fHQeiFUX2CFoyq9h
@@ -2582,7 +2190,6 @@ items:
             unit: minute
           executionTime:
             base: passive
-          form: normal
           identifier: bodyguard-training
           interaction: manifest
           maneuver: passive
@@ -2598,7 +2205,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 0PHdhRQSojTzyJig
         _key: "!actors.items.effects!0d8ec10b181b8f31.fHQeiFUX2CFoyq9h.0PHdhRQSojTzyJig"
@@ -2609,58 +2215,31 @@ items:
         system:
           automations:
             - _id: iuw4WAwzmlNQvs7e
-              all: false
-              angle: "60"
               attachToToken: false
-              automatic: true
               deleteOnTurnChange: false
-              display: {}
-              excludeToken: true
               expandWithToken: false
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
               radius: "30"
-              radiusX: ""
-              radiusY: ""
-              regionType: circle
               restriction:
                 enabled: true
-                priority: 0
                 type: move
               targeting: false
-              trigger: null
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: eb15e1b671a010f5
-              display: {}
               formula: 1d10
               impact: gainTempHp
-              trigger: null
               type: roll
             - _id: fc2613f22401a088
               competencies:
                 - 1
                 - 2
-              display: {}
               formula: 1d10 + (@p)d10
               impact: gainTempHp
-              trigger: null
               type: roll
             - _id: a678f22a0f730677
               competencies:
                 - 2
-              display: {}
               formula: 1d10 + (@f)d10
               impact: gainTempHp
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2672,7 +2251,6 @@ items:
             base: Short Rest
             slow:
               unit: shortRest
-          form: normal
           identifier: fortify-area
           interaction: manifest
           maneuver: slow
@@ -2698,7 +2276,6 @@ items:
           standard: true
           targets:
             - area
-        transfer: true
         type: ability
       - _id: A4im5MWvCxmM8xzm
         _key: "!actors.items.effects!0d8ec10b181b8f31.fHQeiFUX2CFoyq9h.A4im5MWvCxmM8xzm"
@@ -2714,7 +2291,6 @@ items:
               distance: "5"
               movementAction: walk
               origin: random
-              originBarrier: true
               type: move
             - _id: LGh4yKXRJOFrgnM2
               display:
@@ -2722,14 +2298,9 @@ items:
               distance: "5"
               movementAction: walk
               origin: target
-              originBarrier: true
               type: move
             - _id: AW2QK35iCBSYIP88
-              executor: false
-              multi: false
-              relation: include
               status: snared
-              target: false
               type: status
           competence:
             raw: 1
@@ -2746,17 +2317,9 @@ items:
             base: r1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
               relation: executor
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
-              timing: start
               type: combat
-          form: normal
           identifier: tumble
           interaction: manifest
           maneuver: reactive
@@ -2777,7 +2340,6 @@ items:
           targets:
             - self
           trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
-        transfer: true
         type: ability
       - _id: QTwygiNnoFgmLtLQ
         _key: "!actors.items.effects!0d8ec10b181b8f31.fHQeiFUX2CFoyq9h.QTwygiNnoFgmLtLQ"
@@ -2801,7 +2363,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: unbreachability
           interaction: manifest
           maneuver: passive
@@ -2815,7 +2376,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 3YAMB0hEeGMohn4g
         _key: "!actors.items.effects!0d8ec10b181b8f31.fHQeiFUX2CFoyq9h.3YAMB0hEeGMohn4g"
@@ -2827,19 +2387,16 @@ items:
           _sup: WPnSLdXPauH6iDwJ
           automations:
             - _id: 28f5387f29e5aae1
-              display: {}
               macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
               trigger: executeFeat
               type: abilityMacro
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "1"
             unit: minute
           executionTime:
             base: r0
-          form: normal
           identifier: bodyguard-backup
           interaction: manifest
           maneuver: reactive
@@ -2856,10 +2413,7 @@ items:
           requirements: <p>You are not also using @Identifier[ability:bodyguard-taunt]{Bodyguard Taunt}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: <p>You attempt an @Identifier[core:attack-interaction]{attack} against another creature.</p>
-        transfer: true
         type: ability
       - _id: JCAVqAB1t9UMhSjh
         _key: "!actors.items.effects!0d8ec10b181b8f31.fHQeiFUX2CFoyq9h.JCAVqAB1t9UMhSjh"
@@ -2871,15 +2425,11 @@ items:
           _sup: WPnSLdXPauH6iDwJ
           automations:
             - _id: 6cebaedf0c5c1507
-              executor: false
-              multi: false
-              relation: include
               status: goaded
               target: true
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "10"
             unit: second
@@ -2887,13 +2437,8 @@ items:
             base: r0
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
-              method: automatic
               relation: executor
-              skip: 0
-              timing: start
               type: combat
-          form: normal
           identifier: bodyguard-taunt
           interaction: manifest
           maneuver: reactive
@@ -2909,10 +2454,7 @@ items:
           requirements: <p>You are not also using @Identifier[ability:bodyguard-backup]{Bodyguard Backup}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: <p>You attempt an @Identifier[core:attack-interaction]{attack} against another creature.</p>
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-2-veteran.webp
@@ -2921,8 +2463,6 @@ items:
       _sup: 0d8ec10b181b8f31
       archetype: warrior
       class: veteran
-      competence:
-        raw: 1
       description: >-
         <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned
         warriors, but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so
@@ -2934,13 +2474,10 @@ items:
       identifier: rank-2-veteran
       maxAv: 4
       number: 2
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: hKf8GDcXF4Ft5Z28
@@ -2966,7 +2503,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: armor-master
           interaction: manifest
           maneuver: passive
@@ -2982,7 +2518,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: vLlgfZ2tZq02juSg
         _key: "!actors.items.effects!0d8ec10b181b8f31.hKf8GDcXF4Ft5Z28.vLlgfZ2tZq02juSg"
@@ -2999,8 +2534,6 @@ items:
             - _id: 1I4BfpzqPQUuLx5h
               common:
                 - shatter
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
@@ -3012,11 +2545,8 @@ items:
                   @Identifier[property:shattered]{shattered}.</p>
                 type: description
           delivery: armor
-          duration:
-            unit: instant
           executionTime:
             base: r1
-          form: normal
           identifier: armor-wound
           interaction: manifest
           maneuver: reactive
@@ -3027,14 +2557,11 @@ items:
               @Identifier[core:armor-class]{AV} from some other source, it cannot be used for [[lookup name]].</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           skill: true
           standard: true
           targets:
             - self
           trigger: <p>You would take damage.</p>
-        transfer: true
         type: ability
       - _id: 7qwAiZLxVh8oW8mL
         _key: "!actors.items.effects!0d8ec10b181b8f31.hKf8GDcXF4Ft5Z28.7qwAiZLxVh8oW8mL"
@@ -3061,7 +2588,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: master-armor-smith
           interaction: manifest
           maneuver: passive
@@ -3077,7 +2603,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: DreKYWZOOFiAvgjR
         _key: "!actors.items.effects!0d8ec10b181b8f31.hKf8GDcXF4Ft5Z28.DreKYWZOOFiAvgjR"
@@ -3089,19 +2614,9 @@ items:
           _sup: PioQvKwJDZKIYNi3
           automations:
             - _id: wOu1pTEuGkdY4mjh
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - property:runic
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -3120,7 +2635,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          form: normal
           identifier: runic-armor
           interaction: manifest
           maneuver: slow
@@ -3139,7 +2653,6 @@ items:
           standard: true
           targets:
             - armor
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-3-veteran.webp
@@ -3148,8 +2661,6 @@ items:
       _sup: 0d8ec10b181b8f31
       archetype: warrior
       class: veteran
-      competence:
-        raw: 1
       description: >-
         <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned
         warriors, but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so
@@ -3161,13 +2672,10 @@ items:
       identifier: rank-3-veteran
       maxAv: 4
       number: 3
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d12
         mp:
-          disabled: false
           formula: 1d8
     type: rank
   - _id: iuC0evdWNJyq74P2
@@ -3184,9 +2692,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -3194,7 +2699,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: pWgEIdeNqNhTGUXO
         _key: "!actors.items.effects!0d8ec10b181b8f31.iuC0evdWNJyq74P2.pWgEIdeNqNhTGUXO"
@@ -3205,9 +2709,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -3215,7 +2716,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: Xt6CyDWsLCr4f8dq
         _key: "!actors.items.effects!0d8ec10b181b8f31.iuC0evdWNJyq74P2.Xt6CyDWsLCr4f8dq"
@@ -3226,7 +2726,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -3237,12 +2736,9 @@ items:
                   type: upgrade
                   value: "2"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:unblockable]{UB}.</p>
           form: intrinsic
           identifier: unblockable
-        transfer: true
         type: property
       - _id: 2p0eqmMUjzbEYJ2E
         _key: "!actors.items.effects!0d8ec10b181b8f31.iuC0evdWNJyq74P2.2p0eqmMUjzbEYJ2E"
@@ -3253,26 +2749,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/prehensile-savage-claw.webp
     name: Prehensile Savage Claw
     system:
       _sup: 0d8ec10b181b8f31
-      attackPenalty: "-3"
       bv:
         raw: 2
-      competence:
-        raw: 0
       damage:
         base: 1d12
       fightingStyle: savage
@@ -3280,8 +2769,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: 380dac2710b593e9
     _key: "!actors.items!0d8ec10b181b8f31.380dac2710b593e9"
@@ -3302,7 +2789,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: warrior-techniques
           interaction: manifest
           maneuver: passive
@@ -3320,7 +2806,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: "!actors.items.effects!0d8ec10b181b8f31.380dac2710b593e9.aOvOlScH5bn7jX7m"
@@ -3365,7 +2850,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: defensive-martial-arts
           interaction: manifest
           limitation: <p>While wearing @Wiki[Category:Armor]{armor} only.</p>
@@ -3388,14 +2872,11 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 380dac2710b593e9
     img: systems/teriock/src/icons/archetypes/warrior.webp
     name: Warrior
     system:
-      competence:
-        raw: 1
       description: >-
         <p>Warriors are primarily fighters and can handle themselves well in heavy melee
         @Identifier[core:combat]{combat}. Though they all have similar combat strength, they achieve different goals in
@@ -3407,12 +2888,6 @@ items:
     type: archetype
 name: Mithril Dragon
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 3
@@ -3423,9 +2898,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/mithril-dragon.webp
   texture:
     src: systems/teriock/src/icons/creatures/mithril-dragon.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 3
 system:
   hp:
@@ -3433,10 +2905,6 @@ system:
   identifier: mithril-dragon
   mp:
     value: 28
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

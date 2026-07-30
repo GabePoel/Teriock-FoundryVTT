@@ -36,7 +36,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: 4WCBJOnkuuhjPyYX
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.4WCBJOnkuuhjPyYX"
@@ -67,7 +66,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: digging
           interaction: manifest
           maneuver: passive
@@ -79,7 +77,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: BzimOIbHi9NLjFhK
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.BzimOIbHi9NLjFhK"
@@ -91,7 +88,6 @@ items:
           affinities:
             - _id: YRETouEoXSc7L2KY
               category: statuses
-              img: null
               type: immunity
               value: frightened
           competence:
@@ -101,7 +97,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: fearless
           interaction: manifest
           maneuver: passive
@@ -115,7 +110,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 5hlck6k8POWZmtmk
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.5hlck6k8POWZmtmk"
@@ -145,7 +139,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: NpUILLoZABm93Uck
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.NpUILLoZABm93Uck"
@@ -173,7 +166,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: night-vision
           interaction: manifest
           maneuver: passive
@@ -187,7 +179,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: gUrRlBvognZHjivk
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.gUrRlBvognZHjivk"
@@ -215,7 +206,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: QW6j6xkeMdJH98uP
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.QW6j6xkeMdJH98uP"
@@ -231,7 +221,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -244,8 +233,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: ym4E5rjkPoAs8Lbm
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.ym4E5rjkPoAs8Lbm"
@@ -261,7 +248,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -274,8 +260,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 9N9DXOaZDMqkJQw5
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.9N9DXOaZDMqkJQw5"
@@ -291,7 +275,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -304,8 +287,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: 26aVmpj6cp6kblHO
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.26aVmpj6cp6kblHO"
@@ -318,50 +299,31 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
-              display: {}
               formula: 1d8[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d10[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "24"
             unit: hour
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: poison-strike
-          interaction: attack
           limitation: <p>@Identifier[property:biting]{Biting equipment} only.</p>
-          maneuver: active
           overview:
             fluent: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -369,20 +331,13 @@ items:
             proficient: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
               @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - alchemical
-          range:
-            unit: contact
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: yei5e79eq3CK48ue
         _key: "!actors.items.effects!a9985fa3fffca995.a9985fa3fffca995.yei5e79eq3CK48ue"
@@ -393,11 +348,7 @@ items:
         system:
           automations:
             - _id: 18537e76761a45dc
-              executor: false
-              multi: false
-              relation: include
               status: blind
-              target: false
               type: status
           competence:
             raw: 1
@@ -409,26 +360,12 @@ items:
           endCondition: >-
             <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
               timing: end
               type: combat
-          form: normal
           identifier: stink-packet
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - alchemical
           range:
@@ -442,27 +379,19 @@ items:
               @Identifier[core:hit-points-and-mana-points]{mana die}. It is though those dice are spent, but without
               providing any @Identifier[core:healing]{healing} or @Wiki[Category:Revitalization
               effects]{revitalization}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/skunk.webp
     name: Skunk
     system:
       br: 3
-      competence:
-        raw: 1
       identifier: skunk
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d6
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -484,9 +413,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -494,7 +420,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: StZ8lJiQ1zrTkWMW
         _key: "!actors.items.effects!a9985fa3fffca995.ii9kt5BFrhAdAjsl.StZ8lJiQ1zrTkWMW"
@@ -505,24 +430,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/jaw.webp
     name: Jaw
     system:
       _sup: a9985fa3fffca995
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: savage
@@ -530,20 +448,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Skunk
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Skunk
   ring:
     enabled: true
@@ -551,20 +460,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/skunk.webp
   texture:
     src: systems/teriock/src/icons/creatures/skunk.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 4
   identifier: skunk
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

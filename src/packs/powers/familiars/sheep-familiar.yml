@@ -10,26 +10,12 @@ effects:
     system:
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: 30 + 10 * @h
-          regionType: circle
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       costs:
@@ -39,8 +25,6 @@ effects:
           verbal:
             type: tag
       delivery: aura
-      duration:
-        unit: instant
       elements:
         - storm
       endCondition: <p>The start of your next turn.</p>
@@ -79,20 +63,16 @@ effects:
       targets:
         - spell
       trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
-    transfer: true
     type: ability
   - _id: sheepTamer000000
     _key: "!items.effects!a93bdbae091d56c7.sheepTamer000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Sheep Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:sheep]{sheep}.</p>
       field: survivalist
       identifier: sheep-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: iMbwBZtXcmkWq4hq
     _key: "!items.effects!a93bdbae091d56c7.iMbwBZtXcmkWq4hq"
@@ -103,7 +83,6 @@ effects:
     system:
       affinities:
         - _id: uKqjeQmdCi2RHfKY
-          amount: 1
           category: other
           type: takeDeboost
           value: Weather
@@ -114,7 +93,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: weather-resilience
       interaction: manifest
       maneuver: passive
@@ -126,14 +104,11 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Sheep Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:sheep inline]</p>
   identifier: sheep-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

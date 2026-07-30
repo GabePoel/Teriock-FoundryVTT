@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
@@ -31,20 +30,16 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: bearTamer0000000
     _key: "!items.effects!385a4b1db6fcf5da.bearTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Bear Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:bear]{bear}.</p>
       field: survivalist
       identifier: bear-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: tD6ff3hrdA9n9BVf
     _key: "!items.effects!385a4b1db6fcf5da.tD6ff3hrdA9n9BVf"
@@ -58,7 +53,6 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
@@ -67,13 +61,10 @@ effects:
           hack:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r1
-      form: normal
       identifier: endure
       interaction: manifest
       maneuver: reactive
@@ -99,7 +90,6 @@ effects:
       trigger: >-
         <p>You are hit by an @Identifier[core:attack-interaction]{attack} that would @Identifier[core:damage]{damage}
         you.</p>
-    transfer: true
     type: ability
   - _id: 2VyV17pZry0Ofbrs
     _key: "!items.effects!385a4b1db6fcf5da.2VyV17pZry0Ofbrs"
@@ -125,10 +115,8 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      form: normal
       identifier: battle-cry-resistance
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
@@ -139,7 +127,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Cb7kQBBWvBMtZdVs
     _key: "!items.effects!385a4b1db6fcf5da.Cb7kQBBWvBMtZdVs"
@@ -151,31 +138,14 @@ effects:
       _sup: uV5wvALPRvXonQRj
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -196,25 +166,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-cry-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -225,16 +183,11 @@ effects:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Bear Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:bear inline]</p>
   identifier: bear-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

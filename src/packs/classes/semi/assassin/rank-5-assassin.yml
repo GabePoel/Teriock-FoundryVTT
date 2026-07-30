@@ -21,7 +21,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: disguise
       interaction: manifest
       maneuver: slow
@@ -39,7 +38,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: veKMhVNsQRJlXWtP
     _key: "!items.effects!920e7b4df1e4ae19.veKMhVNsQRJlXWtP"
@@ -54,11 +52,8 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
-      form: normal
       identifier: escape
       interaction: manifest
       maneuver: reactive
@@ -81,7 +76,6 @@ effects:
         competence:
           attribute: mov
           value: 2
-    transfer: true
     type: ability
   - _id: GuY5Z5Ne7TFP7tx6
     _key: "!items.effects!920e7b4df1e4ae19.GuY5Z5Ne7TFP7tx6"
@@ -110,7 +104,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: informant
       interaction: manifest
       maneuver: passive
@@ -131,7 +124,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: vAy10U2YOundvVC7
     _key: "!items.effects!920e7b4df1e4ae19.vAy10U2YOundvVC7"
@@ -145,27 +137,16 @@ effects:
     system:
       automations:
         - _id: 11ce8f2e4c143095
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:active-bow-out
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - duelModifying
-      executionTime:
-        base: a1
-      form: normal
       identifier: ninja-duel
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You and the @Identifier[core:targets]{target} begin @Identifier[condition:dueling]{dueling} each other. You
@@ -179,9 +160,6 @@ effects:
       requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: aY2uxfG131SHjtk7
     _key: "!items.effects!920e7b4df1e4ae19.aY2uxfG131SHjtk7"
@@ -196,22 +174,12 @@ effects:
     system:
       automations:
         - _id: 904001f2f2f27913
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:poison-item
-          multi: false
-          separate: false
           type: addDocuments
         - _id: bfc1d19721518c86
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:poison-strike
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -228,7 +196,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: prepare-poison
       interaction: manifest
       maneuver: slow
@@ -248,7 +215,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: V33jSSpXn12Zy2HS
     _key: "!items.effects!920e7b4df1e4ae19.V33jSSpXn12Zy2HS"
@@ -263,51 +229,27 @@ effects:
     system:
       automations:
         - _id: 1d6d351357604b50
-          executor: false
-          multi: false
-          relation: include
           status: silenced
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: vitals-silence
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:silenced]{silenced}.</p>
       skill: true
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
 folder: c00337a27e3585c4
 img: systems/teriock/src/icons/ranks/rank-5-assassin.webp
@@ -315,8 +257,6 @@ name: Rank 5 Assassin
 system:
   archetype: semi
   class: assassin
-  competence:
-    raw: 1
   description: >-
     <p>The shadiest of all the classes, @Identifier[class:assassin]{Assassins} see life as expendable and unimportant.
     Even their own life is trivial, someone will kill them sooner or later. That's life. Life is short and thus
@@ -327,23 +267,17 @@ system:
     opportunities for themselves. If you're an @Identifier[class:assassin]{Assassin}, don't think twice about killing
     someone, care little for your own life and cut to the chase!</p>
   identifier: rank-5-assassin
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
-  maxAv: 2
   number: 5
   statDice:
     hp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
 type: rank

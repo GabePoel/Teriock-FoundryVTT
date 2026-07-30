@@ -12,30 +12,23 @@ effects:
     system:
       automations:
         - _id: PsgKnkbTgHLVZsPe
-          all: false
           attachDocuments: false
-          automatic: true
           display:
             label: Apply Ally Effect
           identifiers:
             - consequence:gladiator-skills-ally-effect
-          multi: false
           separate: true
           type: addDocuments
         - _id: WedUG7hLjDbJNzZY
-          all: false
           attachDocuments: false
-          automatic: true
           children:
             enabled: true
             identifiers:
               - power:gladiator-skills-hit-die-power
-            overrideData: false
           display:
             label: Apply Executor Effect
           identifiers:
             - consequence:gladiator-skills-executor-effect
-          multi: false
           separate: true
           type: addDocuments
         - _id: FyGy4uoglXanPjex
@@ -48,16 +41,12 @@ effects:
           value: "1"
         - _id: WQHRFCO9n8XvY2CI
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           type: heal
         - _id: 5B0LdRTMIqOiMDEu
           amount: 1
           display:
             label: Spend 1 MP
           impact: drain
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -66,7 +55,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: gladiator-skills
       interaction: manifest
       maneuver: passive
@@ -89,7 +77,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: svSDVD3jJiukQGTO
     _key: "!items.effects!REdvOkzuoEsDEkXw.svSDVD3jJiukQGTO"
@@ -103,29 +90,16 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: hack
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
           accordingly.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
@@ -138,7 +112,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: OOiK94kwZWhClKjl
     _key: "!items.effects!REdvOkzuoEsDEkXw.OOiK94kwZWhClKjl"
@@ -150,59 +123,31 @@ effects:
       automations:
         - _id: b4960732f0b9ed9f
           executor: true
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "1"
         unit: minute
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
-          timing: start
           type: combat
-      form: normal
       identifier: threat
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} becomes @Identifier[condition:frightened]{frightened}.</p>
@@ -210,7 +155,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/ranks/rank-1-berserker.webp
@@ -219,8 +163,6 @@ system:
   _sup: 50c587cb2e6cad6f
   archetype: warrior
   class: berserker
-  competence:
-    raw: 1
   description: >-
     <p>Wild and savage. They distrust @Wiki[Category:Magical effects]{magic} of all kinds and put their faith in
     themselves before others. Always at the front of a battle, @Identifier[class:berserker]{Berserkers} love the sport
@@ -228,14 +170,10 @@ system:
     guards as they are too distracted and are rarely very intelligent. If you are a
     @Identifier[class:berserker]{Berserker} be larger than life, brash, not too bright and stupidly brave.</p>
   identifier: rank-1-berserker
-  innate: false
-  maxAv: 2
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

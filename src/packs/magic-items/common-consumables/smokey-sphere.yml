@@ -8,20 +8,14 @@ effects:
     img: systems/teriock/src/icons/abilities/drink-smokey-sphere.webp
     name: Drink Smokey Sphere
     system:
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
         raw: "1"
         unit: minute
-      executionTime:
-        base: a1
-      form: normal
       grantUse: true
       identifier: drink-smokey-sphere
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You look like a cloud of smoke. This @Identifier[core:fizzles]{fizzles} all non-@Wiki[Category:Ritual
@@ -31,15 +25,12 @@ effects:
           abilities]{ability}.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: GjYpkMpTTUXMrFoA
     _key: "!items.effects!e37a1868b684fcf2.GjYpkMpTTUXMrFoA"
@@ -50,8 +41,6 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
         @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it
@@ -60,7 +49,6 @@ effects:
         instead @Identifier[property:destroyed]{destroyed}.</p>
       form: flaw
       identifier: fragile
-    transfer: true
     type: property
   - _id: x6sjcsIVaOkVZOFD
     _key: "!items.effects!e37a1868b684fcf2.x6sjcsIVaOkVZOFD"
@@ -71,14 +59,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to steal through
         @Pack[teriock.abilities]{abilities} like @Identifier[ability:search]{Search}.</p>
       form: flaw
       identifier: searchable
-    transfer: true
     type: property
   - _id: VQDFXr0oJQZ7Waxe
     _key: "!items.effects!e37a1868b684fcf2.VQDFXr0oJQZ7Waxe"
@@ -89,14 +74,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used in the same hand as a
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
       form: intrinsic
       identifier: small
-    transfer: true
     type: property
   - _id: 7tpVMWozj0P6eJ8g
     _key: "!items.effects!e37a1868b684fcf2.7tpVMWozj0P6eJ8g"
@@ -107,64 +89,36 @@ effects:
     system:
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
           attachToToken: false
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: "@ability.expansion.range"
-          regionType: circle
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: 18537e76761a45dc
-          executor: false
-          multi: false
-          relation: include
           status: blind
-          target: false
           type: status
         - _id: 270d4c101b6df930
-          executor: false
-          multi: false
           relation: apply
           status: blind
-          target: false
           type: status
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
         raw: "1"
         unit: minute
-      executionTime:
-        base: a1
       expansion:
         featSaveAttribute: per
         range:
           raw: "20"
           unit: ft
         type: detonate
-      form: normal
       grantUse: true
       identifier: smash-smokey-sphere
       interaction: manifest
-      maneuver: active
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
@@ -174,35 +128,25 @@ effects:
       targets:
         - area
         - creature
-    transfer: true
     type: ability
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/smokey-sphere.webp
 name: Smokey Sphere
 system:
-  attackPenalty: "-3"
-  competence:
-    raw: 0
   consumable: true
-  consumptionAmount: 1
   equipmentClasses:
     - containers
     - knickknacks
   equipmentType: bottle
   equipped: true
   identifier: smokey-sphere
-  minStr: -3
   needsAttunement: false
   onUse:
     - 7tpVMWozj0P6eJ8g
     - WNYOmXHE7eMHq3FX
   powerLevel: enchanted
-  quantity:
-    value: 1
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   weight: 1
 type: equipment

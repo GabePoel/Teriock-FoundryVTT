@@ -16,35 +16,21 @@ effects:
           value: Stopping Eating
       automations:
         - _id: 002257ee748742d3
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:devour
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 4c81ef1b5374cbfb
-          executor: false
-          multi: false
           relation: apply
           status: dead
-          target: false
           type: status
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
         raw: "1"
         unit: hour
-      executionTime:
-        base: a1
-      form: normal
       grantUse: true
       identifier: drink-potion-of-hunger
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You gain @Identifier[ability:devour]{Devour} and can eat to 2 × @Identifier[core:size]{size}
@@ -54,15 +40,12 @@ effects:
           eating.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Z8Q21X7QboeySzUT
     _key: "!items.effects!b2c726bce59265e6.Z8Q21X7QboeySzUT"
@@ -73,8 +56,6 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
         @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it
@@ -83,7 +64,6 @@ effects:
         instead @Identifier[property:destroyed]{destroyed}.</p>
       form: flaw
       identifier: fragile
-    transfer: true
     type: property
   - _id: TE2TnizUXhPvbvxY
     _key: "!items.effects!b2c726bce59265e6.TE2TnizUXhPvbvxY"
@@ -94,43 +74,24 @@ effects:
     system:
       automations:
         - _id: cf254dc36215ebd1
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:devour
-          multi: false
-          separate: false
           type: addDocuments
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
       duration:
         raw: "1"
         unit: minute
-      executionTime:
-        base: a1
-      form: normal
       grantUse: true
       identifier: pour-potion-of-hunger
-      interaction: attack
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} gains @Identifier[ability:devour]{Devour}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: x6sjcsIVaOkVZOFD
     _key: "!items.effects!b2c726bce59265e6.x6sjcsIVaOkVZOFD"
@@ -141,14 +102,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to steal through
         @Pack[teriock.abilities]{abilities} like @Identifier[ability:search]{Search}.</p>
       form: flaw
       identifier: searchable
-    transfer: true
     type: property
   - _id: VQDFXr0oJQZ7Waxe
     _key: "!items.effects!b2c726bce59265e6.VQDFXr0oJQZ7Waxe"
@@ -159,42 +117,30 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used in the same hand as a
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
       form: intrinsic
       identifier: small
-    transfer: true
     type: property
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/potion-of-hunger.webp
 name: Potion of Hunger
 system:
-  attackPenalty: "-3"
-  competence:
-    raw: 0
   consumable: true
-  consumptionAmount: 1
   equipmentClasses:
     - containers
     - knickknacks
   equipmentType: bottle
   equipped: true
   identifier: potion-of-hunger
-  minStr: -3
   needsAttunement: false
   onUse:
     - TE2TnizUXhPvbvxY
     - z3AUKaBD5mx7eihk
   powerLevel: enchanted
-  quantity:
-    value: 1
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   weight: 1
 type: equipment

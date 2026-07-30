@@ -11,7 +11,6 @@ effects:
       affinities:
         - _id: hPfBt6zwzwH60lYt
           activeQualifier: "@flags.improvedBrace"
-          amount: 1
           category: effectTypes
           type: takeDeboost
           value: damaging
@@ -37,8 +36,6 @@ effects:
         - _id: Rid5p1TlO90isbp4
           amount: 0
           impact: setTempHp
-          morganti: false
-          showDialog: false
           trigger: movement
           type: take
       competence:
@@ -47,17 +44,13 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>You move or are moved.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:
             - movement
           type: trigger
-      form: normal
       identifier: brace
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
@@ -73,7 +66,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: OdtFUzpnHtJ8IIvG
     _key: "!items.effects!65abf191497d73fc.OdtFUzpnHtJ8IIvG"
@@ -87,21 +79,12 @@ effects:
           formula: (@h)d4[magic vine]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 0b65894b82470568
-          executor: false
-          multi: false
-          relation: include
           status: immobilized
-          target: false
           type: status
         - _id: 5812b63d828a0227
-          executor: false
-          multi: false
-          relation: include
           status: grounded
-          target: false
           type: status
       competence:
         raw: 1
@@ -114,33 +97,16 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic vine]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: earthbind-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
@@ -148,29 +114,21 @@ effects:
           @Identifier[condition:immobilized]{immobilized}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: toadTamer0000000
     _key: "!items.effects!65abf191497d73fc.toadTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Toad Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:toad]{toad}.</p>
       field: survivalist
       identifier: toad-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Toad Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:toad inline]</p>
   identifier: toad-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

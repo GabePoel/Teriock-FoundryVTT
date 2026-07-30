@@ -13,28 +13,18 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d4[magic fire]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic fire]]] @Identifier[core:damage]{damage}.</p>
       identifier: fire-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -45,9 +35,6 @@ effects:
         hit: <p>Deal [[/damage 1d4[magic fire]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: jNVwWGftQrYicpwi
     _key: "!items.effects!S5mmo90vxk11xh9B.jNVwWGftQrYicpwi"
@@ -61,28 +48,18 @@ effects:
           formula: (1 + @h)d8[fire magic]
           heighten:
             - 1
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d8[fire magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: flame-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -93,9 +70,6 @@ effects:
         hit: <p>Deal [[/damage 1d8[magic fire]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: LbLjjWiopqGfltmW
     _key: "!items.effects!S5mmo90vxk11xh9B.LbLjjWiopqGfltmW"
@@ -111,7 +85,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: mage-light
       interaction: manifest
       maneuver: passive
@@ -125,7 +98,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: yHA67BqutokLx7uo
     _key: "!items.effects!S5mmo90vxk11xh9B.yHA67BqutokLx7uo"
@@ -140,24 +112,10 @@ effects:
           threshold: 10 + @c
           type: feat
         - _id: YxFIjavyUBnxf6OV
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           type: region
-          visibility: 2
       competence:
         raw: 1
       costs:
@@ -181,7 +139,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may choose an additional
         @Identifier[core:targets]{target}.</p>
@@ -216,9 +173,6 @@ effects:
       spell: true
       standard: true
       sustained: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: XQaT4FwCSzNx1pNs
     _key: "!items.effects!S5mmo90vxk11xh9B.XQaT4FwCSzNx1pNs"
@@ -230,13 +184,8 @@ effects:
       _sup: LbLjjWiopqGfltmW
       automations:
         - _id: HzyxPJ30wjiQSRG4
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:flaming
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 72ce567009179bea
           duration:
@@ -255,13 +204,11 @@ effects:
         - flame
       executionTime:
         base: a0
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
       identifier: ignite
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>@Identifier[core:targets]{Target} is set on fire or is put out. If the @Identifier[core:targets]{target} is
@@ -270,8 +217,6 @@ effects:
           [[lookup name]]. The fire produced by [[lookup name]] does not harm you while it is burning.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: >-
         <p>@Identifier[core:targets]{Target} must be a @Identifier[equipment:torch]{torch},
         @Identifier[equipment:candle]{candle}, or some other item that designed to be lit on fire.</p>
@@ -280,7 +225,6 @@ effects:
       sustained: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: rRNahRUgvwqGlRZx
     _key: "!items.effects!S5mmo90vxk11xh9B.rRNahRUgvwqGlRZx"
@@ -293,36 +237,15 @@ effects:
       automations:
         - _id: LdZVSs1LskViKI2J
           light:
-            alpha: 0.5
             angle: 60
             animation:
-              intensity: 5
-              reverse: false
-              speed: 5
               type: flame
-            attenuation: 0.5
             bright: 100
             color: "#c64600"
-            coloration: 1
-            contrast: 0
-            darkness:
-              max: 1
-              min: 0
             dim: 50
-            luminosity: 0.5
-            negative: false
-            priority: 0
-            saturation: 0
-            shadows: 0
           type: light
         - _id: FoFDvat2UIccUJn4
-          competence:
-            raw: 0
-          preventAttack: false
           preventBlockCone: true
-          preventFeat: false
-          preventThreshold: false
-          setCompetence: inherit
           type: override
       competence:
         raw: 1
@@ -332,12 +255,8 @@ effects:
         unit: minute
       elements:
         - flame
-      executionTime:
-        base: a1
-      form: normal
       identifier: light
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>The area is illuminated. This [[lookup name style=lc]] emanates from your hand and moves with you. You may
@@ -353,7 +272,6 @@ effects:
       targets:
         - area
         - self
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
@@ -362,22 +280,17 @@ system:
   _sup: f5d366c9fb78831f
   archetype: mage
   class: flame-mage
-  competence:
-    raw: 1
   description: >-
     <p>Fierce and brazen, these mages are always at war. The arms dealers of the world, their magic is completely
     focused on destruction and thus they seek to create bigger and better ways to blow things up. Passionate, wild and a
     bit chaotic, these mages like the mountains and underground spaces. If you are playing a
     @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like, ready for battle, and consuming everything.</p>
   identifier: rank-1-flame-mage
-  innate: false
   maxAv: 0
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

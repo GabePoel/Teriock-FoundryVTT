@@ -16,36 +16,14 @@ effects:
     system:
       automations:
         - _id: Mny7BIO5WvYIRRfr
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           type: heal
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
-          regionType: circle
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -68,13 +46,9 @@ effects:
         - loud
         - mental
       endCondition: <p>At the start of each of the enemy target's turns, they roll [[/roll 2d4]]. On a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       featSaveAttribute: int
-      form: normal
       identifier: rallying-cry
       interaction: feat
-      maneuver: active
       overview:
         base: >-
           <p>[[lookup name]] only counts as a @Wiki[Category:Mental effects]{mental effect} on your enemies and a
@@ -94,9 +68,6 @@ effects:
           enemy, they become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 2XbGKAhqGfH3U5Pb
     _key: "!items.effects!HWjqw8yIhMjiYt7G.2XbGKAhqGfH3U5Pb"
@@ -116,7 +87,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: warrior-stance
       interaction: manifest
       maneuver: passive
@@ -136,7 +106,6 @@ effects:
         competence:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: 9xLyGNlkaqxPD4wc
     _key: "!items.effects!HWjqw8yIhMjiYt7G.9xLyGNlkaqxPD4wc"
@@ -150,7 +119,6 @@ effects:
         - _id: d873eb939c3b5951
           hacks:
             - body
-          reverse: false
           type: hacks
       competence:
         raw: 1
@@ -159,13 +127,10 @@ effects:
           hack:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r1
-      form: normal
       identifier: withstand
       interaction: manifest
       maneuver: reactive
@@ -183,7 +148,6 @@ effects:
       targets:
         - self
       trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
-    transfer: true
     type: ability
   - _id: 2TyqjyWhzGnOsFOl
     _key: "!items.effects!HWjqw8yIhMjiYt7G.2TyqjyWhzGnOsFOl"
@@ -195,20 +159,14 @@ effects:
       _sup: 2XbGKAhqGfH3U5Pb
       automations:
         - _id: 3KyeBPhhzYfwX8ch
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           type: heal
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - healing
       executionTime:
         base: r0
-      form: normal
       identifier: triumphant-healing-surge
       interaction: manifest
       maneuver: reactive
@@ -223,7 +181,6 @@ effects:
       targets:
         - self
       trigger: <p>@Identifier[condition:down]{Dropping} an opponent.</p>
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-knight.webp
@@ -232,8 +189,6 @@ system:
   _sup: b1ca5e2d15299df7
   archetype: warrior
   class: knight
-  competence:
-    raw: 1
   description: >-
     <p>The true glory seekers, @Identifier[class:knight]{Knights} are chivalrous to a point but have none of the
     @Identifier[class:duelist]{Duelist's} respect for battles. @Identifier[class:knight]{Knights} are the weapon
@@ -243,14 +198,11 @@ system:
     looking for glory, looking for the next powerful
     @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
   identifier: rank-4-knight
-  innate: false
   maxAv: 4
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

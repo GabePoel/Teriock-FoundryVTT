@@ -42,7 +42,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       limitation: <p>Cannot go more than 5 feet above the ground.</p>
@@ -58,7 +57,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: kyBDZZHZ0ymc9izK
     _key: "!items.effects!9a6563e0bfd9ef26.kyBDZZHZ0ymc9izK"
@@ -72,12 +70,8 @@ effects:
           formula: (@h)d4[magic holy]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
           status: lighted
           target: true
           type: status
@@ -89,36 +83,22 @@ effects:
         unit: minute
       elements:
         - life
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
-          method: automatic
-          relation: target
-          skip: 0
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
-          method: automatic
           relation: executor
-          skip: 0
           timing: end
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: light-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -133,9 +113,6 @@ effects:
           until the end of their next @Identifier[core:turns]{turn}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: MoiuedD0OPmqCKb2
     _key: "!items.effects!9a6563e0bfd9ef26.MoiuedD0OPmqCKb2"
@@ -147,29 +124,19 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -180,9 +147,6 @@ effects:
         hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: THzYW2STi0PYdo1C
     _key: "!items.effects!9a6563e0bfd9ef26.THzYW2STi0PYdo1C"
@@ -212,7 +176,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: MSYNUfuO2YlWtGBx
     _key: "!items.effects!9a6563e0bfd9ef26.MSYNUfuO2YlWtGBx"
@@ -242,7 +205,6 @@ effects:
         score:
           attribute: str
           value: -1
-    transfer: true
     type: ability
   - _id: mFDdkqmxdQgr33JX
     _key: "!items.effects!9a6563e0bfd9ef26.mFDdkqmxdQgr33JX"
@@ -258,7 +220,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -271,8 +232,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: RMOdB168p9bPMKwm
     _key: "!items.effects!9a6563e0bfd9ef26.RMOdB168p9bPMKwm"
@@ -288,7 +247,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -301,8 +259,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: tRYYWwCMcwbbdxsF
     _key: "!items.effects!9a6563e0bfd9ef26.tRYYWwCMcwbbdxsF"
@@ -317,24 +273,10 @@ effects:
           threshold: 10 + @c
           type: feat
         - _id: WbvSgSpGns0SR1JS
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           type: region
-          visibility: 2
       competence:
         raw: 1
       delivery: self
@@ -344,7 +286,6 @@ effects:
         - flame
       executionTime:
         base: passive
-      form: normal
       identifier: passive-self-detonate
       interaction: manifest
       maneuver: passive
@@ -368,7 +309,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: xGYPQO0HSIsETXQo
     _key: "!items.effects!9a6563e0bfd9ef26.xGYPQO0HSIsETXQo"
@@ -384,7 +324,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: sneaky
       interaction: manifest
       maneuver: passive
@@ -398,7 +337,6 @@ effects:
         score:
           attribute: snk
           value: 1
-    transfer: true
     type: ability
 folder: aa772458d708a91e
 img: systems/teriock/src/icons/creatures/tecnicalamari.webp
@@ -406,24 +344,19 @@ name: Tecnicalamari
 system:
   appearance: <p>Flying rainbow squid that swim through the air.</p>
   br: 3
-  competence:
-    raw: 1
   description: >-
     <p>These creatures tend to travel alone but often skirmish in small groups of four or five. These cephalopods are
     strategic and competitive, throwing spells at each other to activate their detonation, thus taking out competition
     and prey simultaneously.</p>
   identifier: tecnicalamari
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

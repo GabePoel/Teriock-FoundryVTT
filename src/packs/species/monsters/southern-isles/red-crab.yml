@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: carrying
       interaction: manifest
       maneuver: passive
@@ -29,7 +28,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: rNYT4h5aKnmsenql
     _key: "!items.effects!31b73d1625d9fd4a.rNYT4h5aKnmsenql"
@@ -59,7 +57,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: mjP5gHl9pujUEkDj
     _key: "!items.effects!31b73d1625d9fd4a.mjP5gHl9pujUEkDj"
@@ -71,29 +68,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: jRBLvoiIMXbuQDTi
     _key: "!items.effects!31b73d1625d9fd4a.jRBLvoiIMXbuQDTi"
@@ -109,7 +94,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -122,8 +106,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: dZ4xwOf5SqeNkcBB
     _key: "!items.effects!31b73d1625d9fd4a.dZ4xwOf5SqeNkcBB"
@@ -139,7 +121,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -152,8 +133,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: NlzonMlIBQNIhhxn
     _key: "!items.effects!31b73d1625d9fd4a.NlzonMlIBQNIhhxn"
@@ -169,7 +148,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -182,8 +160,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: 41kJ6PS1m33RI8C8
     _key: "!items.effects!31b73d1625d9fd4a.41kJ6PS1m33RI8C8"
@@ -199,7 +175,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -212,8 +187,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: fNYG1UyxBFUlLYEO
     _key: "!items.effects!31b73d1625d9fd4a.fNYG1UyxBFUlLYEO"
@@ -227,27 +200,14 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: pince
-      interaction: attack
-      maneuver: active
       overview:
         base: <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage gets dealt accordingly.</p>
-      piercing:
-        raw: 1
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs, depending on what you
@@ -258,7 +218,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: naqWrZGKSm7SAleG
     _key: "!items.effects!31b73d1625d9fd4a.naqWrZGKSm7SAleG"
@@ -287,7 +246,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: swimming
       interaction: manifest
       maneuver: passive
@@ -301,7 +259,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/creatures/red-crab.webp
@@ -309,23 +266,18 @@ name: Red Crab
 system:
   appearance: <p>Huge [[lookup name style=lc]]s with razor sharp claws.</p>
   br: 5
-  competence:
-    raw: 1
   description: >-
     <p>These scavenge on the beaches and rock shores of Teriock making the creepy sounds like "didachum datachum". They
     will only eat their food once claim over it is not challenged.</p>
   identifier: red-crab
   size:
-    enabled: true
     value: 2
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

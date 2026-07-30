@@ -29,7 +29,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: OUxSvKCFWy7ToSek
     _key: "!items.effects!b9a89312847ea5a2.OUxSvKCFWy7ToSek"
@@ -71,20 +70,17 @@ effects:
           value: 1d8
         - _id: 29b275994cf9f5b1
           formula: 1d4
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
             - 2
           formula: 1d6
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d8
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -93,7 +89,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: bite
       interaction: manifest
       maneuver: passive
@@ -112,7 +107,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: zWkaZiGXB6OOuN7t
     _key: "!items.effects!b9a89312847ea5a2.zWkaZiGXB6OOuN7t"
@@ -140,7 +134,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Xw1DMRxpXXCmZD6L
     _key: "!items.effects!b9a89312847ea5a2.Xw1DMRxpXXCmZD6L"
@@ -154,13 +147,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: iCn9pFDIGFJWxm6H
           activeQualifier: and(not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -195,7 +185,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: kwtmYLfXtwwXQla7
     _key: "!items.effects!b9a89312847ea5a2.kwtmYLfXtwwXQla7"
@@ -220,8 +209,6 @@ effects:
       maneuver: reactive
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         fail: >-
           <p>Over the coming month, the @Identifier[core:targets]{target} will become a
@@ -230,12 +217,9 @@ effects:
           day that passes, the @Identifier[core:difficulty-class]{DC} increases by 1. After 30 days, they become a
           @Identifier[creature:were-creature]{were-creature} and
           @Identifier[ability:were-creature-transformation]{transform} for the first time.</p>
-      targets:
-        - creature
       trigger: >-
         <p>You have just @Identifier[core:damage]{damaged} a @Wiki[Category:Humanoid creatures]{humanoid creature} with
         your @Identifier[property:biting]{bite}.</p>
-    transfer: true
     type: ability
   - _id: qnlkGPNVyfUROxTp
     _key: "!items.effects!b9a89312847ea5a2.qnlkGPNVyfUROxTp"
@@ -246,22 +230,12 @@ effects:
     system:
       automations:
         - _id: 7ed2043e8d6ddd92
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:impure-durability
-          multi: false
-          separate: false
           type: addDocuments
         - _id: add5b03e2d5fc333
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:aggressive
-          multi: false
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -303,7 +277,6 @@ effects:
         <p>The moon is in a particular phase. This is typically the phase in which you were first bitten by a
         @Identifier[creature:were-creature]{were-creature}. This triggers automatically. You cannot choose to not use it
         if you are able to.</p>
-    transfer: true
     type: ability
 folder: 13ef6e80a087d7cf
 img: systems/teriock/src/icons/creatures/were-creature.webp
@@ -313,8 +286,6 @@ system:
     <p>A monstrous cross between an @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animal} and a
     @Wiki[Category:Humanoid creatures]{humanoid species}.</p>
   br: 15
-  competence:
-    raw: 1
   description: >-
     <p>Were-creatures change during their particular moon phase into a chaotic half-beast of themselves and begin
     attacking everything nearby. The rest of the time they appear as a normal @Wiki[Category:Humanoid
@@ -325,10 +296,8 @@ system:
     another @Pack[teriock.creatures]{creature type} which it modifies.</p>
   size:
     enabled: false
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

@@ -5,40 +5,20 @@ name: Earthquake Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: 29b275994cf9f5b1
       formula: 1d6
-      impact: damage
-      merge: true
       type: roll
     - _id: 5d57231066693cee
-      executor: false
-      relation: include
       status: snared
-      target: false
       type: status
     - _id: 8941220db1fa8721
-      executor: false
       relation: apply
       status: prone
-      target: false
       type: status
-  competence:
-    raw: 0
   delivery: aura
   duration:
     raw: "1"
@@ -49,25 +29,12 @@ system:
   endCondition: >-
     <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
-  featSaveAttribute: mov
-  form: normal
   identifier: earthquake-aura
   interaction: feat
-  maneuver: active
   powerSources:
     - magical
     - primal
@@ -79,7 +46,4 @@ system:
     fail: >-
       <p>Deal [[/damage 1d6]] @Identifier[core:damage]{damage} to target. They are @Identifier[condition:snared]{snared}
       and knocked @Identifier[condition:prone]{prone}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

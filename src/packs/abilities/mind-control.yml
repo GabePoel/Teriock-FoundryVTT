@@ -5,13 +5,8 @@ name: Mind Control
 system:
   automations:
     - _id: f004b5e5538cefe9
-      executor: false
-      relation: include
       status: charmed
-      target: false
       type: status
-  competence:
-    raw: 0
   costs:
     components:
       verbal:
@@ -32,19 +27,9 @@ system:
   endCondition: >-
     <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
   featSaveAttribute: int
   form: special
@@ -53,7 +38,6 @@ system:
     be increased by 1 word.</p>
   identifier: mind-control
   interaction: feat
-  maneuver: active
   powerSources:
     - magical
   range:
@@ -68,7 +52,4 @@ system:
   rotator: true
   spell: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

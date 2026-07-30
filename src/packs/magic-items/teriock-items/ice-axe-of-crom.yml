@@ -10,12 +10,9 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: <p>An item with this property is @Identifier[keyword:armor-voiding]{AV0} when wielded in two hands.</p>
       form: intrinsic
       identifier: armor-piercing
-    transfer: true
     type: property
   - _id: PWtoetMZ9Mi0gNta
     _key: "!items.effects!100fb18d0812833e.PWtoetMZ9Mi0gNta"
@@ -29,18 +26,10 @@ effects:
           formula: (@h)d4[magic ice]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 09ed285450c5de7b
-          executor: false
-          multi: false
-          relation: include
           status: frozen
-          target: false
           type: status
-      competence:
-        raw: 0
-      delivery: weapon
       duration:
         raw: "1"
         unit: minute
@@ -51,36 +40,20 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} actions, they roll [[/roll 2d4]]. If either
         of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
           event: action
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
           event: action
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
-          timing: start
           type: combat
-      form: normal
       gifted:
         amount: 1
         enabled: true
@@ -88,20 +61,11 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic ice]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: freezing-strike
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 1EO2Yxp6wl6EfVCr
     _key: "!items.effects!100fb18d0812833e.1EO2Yxp6wl6EfVCr"
@@ -115,30 +79,15 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       grantOnly: true
       identifier: hack
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
           accordingly.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
@@ -151,7 +100,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: kw5J0AvEGmFFVw84
     _key: "!items.effects!100fb18d0812833e.kw5J0AvEGmFFVw84"
@@ -164,36 +112,27 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       costs:
         primary:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
@@ -206,16 +145,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: 2NUbdpSCrYIIuTFD
     _key: "!items.effects!100fb18d0812833e.2NUbdpSCrYIIuTFD"
@@ -226,14 +160,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be used in one or two hands. The two-handed
         damage value appears in parentheses next to the one-handed value.</p>
       form: intrinsic
       identifier: versatile
-    transfer: true
     type: property
   - _id: lU4awaXin8c9SC60
     _key: "!items.effects!100fb18d0812833e.lU4awaXin8c9SC60"
@@ -244,14 +175,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    transfer: true
     type: property
 flags:
   teriock:
@@ -263,9 +191,6 @@ system:
   attackPenalty: "-4"
   bv:
     raw: 2
-  competence:
-    raw: 0
-  consumable: false
   damage:
     base: 1d8
     twoHanded: 1d10
@@ -283,8 +208,6 @@ system:
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   tier:
     raw: 1 + min(@rank.mage, 1)
   weight: 15

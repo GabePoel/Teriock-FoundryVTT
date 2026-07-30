@@ -27,7 +27,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: cartography
       interaction: manifest
       maneuver: passive
@@ -41,7 +40,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EbvD3UhmxmejubJv
     _key: "!items.effects!5Ujt5sHyLTUK3XEA.EbvD3UhmxmejubJv"
@@ -84,7 +82,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -99,7 +96,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: CrvQKrIPkJIuKlAl
     _key: "!items.effects!5Ujt5sHyLTUK3XEA.CrvQKrIPkJIuKlAl"
@@ -116,17 +112,11 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - sensory
         - truthDetecting
-      executionTime:
-        base: a1
-      form: normal
       identifier: sense-weather
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You know what the natural weather will be like in the next 24 hours in your location (clear, rainy, snowy,
@@ -142,7 +132,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: UVA1BnXHk3UrOv2W
     _key: "!items.effects!5Ujt5sHyLTUK3XEA.UVA1BnXHk3UrOv2W"
@@ -155,43 +144,23 @@ effects:
         - _id: vO4k6xY48VOtR5hq
           common:
             - awaken
-          showConfirmationDialog: true
           type: common
         - _id: A9CRT8qXUznJPqK1
           distance: "10"
           movementAction: walk
-          origin: executor
-          originBarrier: true
           type: move
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       delivery: aura
-      duration:
-        unit: instant
       executionTime:
         base: r0
       featSaveAttribute: str
-      form: normal
       identifier: whirlwind-aura
       interaction: feat
       maneuver: reactive
@@ -210,10 +179,7 @@ effects:
           @Identifier[keyword:awaken]{awakened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: <p>You descend at least 15 feet to the ground.</p>
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-2-corsair.webp
@@ -222,8 +188,6 @@ system:
   _sup: a999d31d0bd961cf
   archetype: semi
   class: corsair
-  competence:
-    raw: 1
   description: >-
     <p>People of the sea, they are never very comfortable far from a large body of water.
     @Identifier[class:corsair]{Corsairs} are wanderers and like to be on the move. @Identifier[class:corsair]{Corsairs}
@@ -231,14 +195,6 @@ system:
     an @Identifier[class:corsair]{Corsair}, crave water and sailing, go with the flow, keep on the move, and keep things
     ship shape.</p>
   identifier: rank-2-corsair
-  innate: false
   maxAv: 3
   number: 2
-  statDice:
-    hp:
-      disabled: false
-      formula: 1d10
-    mp:
-      disabled: false
-      formula: 1d10
 type: rank

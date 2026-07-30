@@ -30,17 +30,12 @@ effects:
         - _id: ZdtyUjiggvt0bxgX
           common:
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: ZlgI0KUafWT3wE27
-          competence:
-            raw: 0
           competencies:
             - 0
             - 1
           makeEffect: true
-          preventFeat: false
-          preventThreshold: false
           type: override
         - _id: 6v7WhWcAO2fARRYl
           amount: 999999
@@ -50,8 +45,6 @@ effects:
           display:
             label: Restore MP
           impact: revitalizing
-          morganti: false
-          showDialog: false
           type: take
         - _id: YHHJxY54wT2k778U
           amount: 999999
@@ -61,8 +54,6 @@ effects:
           display:
             label: Restore HP
           impact: healing
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
@@ -77,25 +68,17 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - reanimation
       elements:
         - necromancy
-      executionTime:
-        base: a1
       expirations:
         - _id: c32fbccf9d83e581
-          method: automatic
           triggers:
             - shortRest
           type: trigger
-      form: normal
       identifier: animate-dead
-      interaction: attack
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive} (but still
@@ -115,20 +98,13 @@ effects:
           @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
           still halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a
           @Wiki[Category:Revival effects]{revival effect}.</p>
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: >-
         <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead} and
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: c9xRVzKGWJmo2E3c
     _key: "!items.effects!fdec3f206b747460.c9xRVzKGWJmo2E3c"
@@ -139,11 +115,7 @@ effects:
     system:
       automations:
         - _id: f004b5e5538cefe9
-          executor: false
-          multi: false
-          relation: include
           status: charmed
-          target: false
           type: status
       competence:
         raw: 1
@@ -159,26 +131,14 @@ effects:
       effectTypes:
         - control
         - mental
-      executionTime:
-        base: a1
-      form: normal
       identifier: charm
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: >-
         <p>A creature may only have up to @Identifier[core:presence]{PRES} creatures
         @Identifier[condition:charmed]{charmed} at a time.</p>
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:charmed]{charmed}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: zSqaWJREHuGvpZCa
     _key: "!items.effects!fdec3f206b747460.zSqaWJREHuGvpZCa"
@@ -191,7 +151,6 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 157afc517847f562
           formula: 3d8[memory lethal]
@@ -200,25 +159,14 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - displacement
         - draining
         - killing
         - mental
-      executionTime:
-        base: a1
-      form: normal
       identifier: deadly-memory-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 6d8[memory lethal]]]
@@ -226,9 +174,6 @@ effects:
         hit: >-
           <p>Deal [[/drain 3d8[memory lethal]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: Ez1xo5nc66vEsIdq
     _key: "!items.effects!fdec3f206b747460.Ez1xo5nc66vEsIdq"
@@ -244,7 +189,6 @@ effects:
           distance: 1d10
           movementAction: blink
           origin: random
-          originBarrier: true
           type: move
         - _id: 7sjwIPb8joKrTdKu
           competencies:
@@ -252,7 +196,6 @@ effects:
           distance: 1d(10 * (1 + @p))
           movementAction: blink
           origin: random
-          originBarrier: true
           type: move
         - _id: 6v5hoTcxJEX0QREG
           competencies:
@@ -260,37 +203,21 @@ effects:
           distance: 1d(10 * (1 + @f))
           movementAction: blink
           origin: random
-          originBarrier: true
           type: move
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - displacement
-      executionTime:
-        base: a1
-      form: normal
       identifier: displacement-strike
-      interaction: attack
-      maneuver: active
       overview:
         fluent: <p>The location can be within 10 × (1 + @Identifier[core:fluency-bonus]{F}) feet.</p>
         proficient: <p>The location can be within 10 × (1 + @Identifier[core:proficiency-bonus]{P}) feet.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is instantly transported to a random location within 10 feet. Roll to
           determine the direction and distance.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: Xn5YDAflPWFftEcu
     _key: "!items.effects!fdec3f206b747460.Xn5YDAflPWFftEcu"
@@ -329,7 +256,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EcPbUVYhkkgabESN
     _key: "!items.effects!fdec3f206b747460.EcPbUVYhkkgabESN"
@@ -356,7 +282,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-full-plate
       interaction: manifest
       maneuver: passive
@@ -372,7 +297,6 @@ effects:
       requirements: <p>You are @Identifier[condition:ethereal]{Ethereal}.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: zkDL6WdJCFD5yngt
     _key: "!items.effects!fdec3f206b747460.zkDL6WdJCFD5yngt"
@@ -413,7 +337,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: itzTPCfWGnwSI594
     _key: "!items.effects!fdec3f206b747460.itzTPCfWGnwSI594"
@@ -456,7 +379,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -471,7 +393,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: sVX37mAgW5HjudaY
     _key: "!items.effects!fdec3f206b747460.sVX37mAgW5HjudaY"
@@ -501,7 +422,6 @@ effects:
         score:
           attribute: snk
           value: 5
-    transfer: true
     type: ability
   - _id: Ie7STenDc7Ro4bLE
     _key: "!items.effects!fdec3f206b747460.Ie7STenDc7Ro4bLE"
@@ -538,7 +458,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: BxUMVzyVUs4bJZCa
     _key: "!items.effects!fdec3f206b747460.BxUMVzyVUs4bJZCa"
@@ -552,30 +471,17 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: hack
-      interaction: attack
       limitation: <p>Melee @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} only.</p>
-      maneuver: active
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
           accordingly.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
@@ -588,7 +494,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: 84UkmO3gSDbtKLfH
     _key: "!items.effects!fdec3f206b747460.84UkmO3gSDbtKLfH"
@@ -616,7 +521,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: incorporeal
       interaction: manifest
       maneuver: passive
@@ -631,7 +535,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: WpetPQ78hnGvZSMr
     _key: "!items.effects!fdec3f206b747460.WpetPQ78hnGvZSMr"
@@ -642,11 +545,7 @@ effects:
     system:
       automations:
         - _id: 067cb526e2f9e98f
-          executor: false
-          multi: false
-          relation: include
           status: ethereal
-          target: false
           type: status
       competence:
         raw: 1
@@ -656,12 +555,9 @@ effects:
         unit: hour
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       identifier: instant-ethereal
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
       powerSources:
@@ -670,7 +566,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: gGbYHNUixEmuMWYD
     _key: "!items.effects!fdec3f206b747460.gGbYHNUixEmuMWYD"
@@ -687,30 +582,16 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - displacement
         - draining
         - mental
-      executionTime:
-        base: a1
-      form: normal
       identifier: memory-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>Deal [[/drain 2d8[memory]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
         hit: <p>Deal [[/drain 1d8[memory]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: QBXsivTUo1ojwOjo
     _key: "!items.effects!fdec3f206b747460.QBXsivTUo1ojwOjo"
@@ -742,7 +623,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: alOU8WrxG8nIZhkJ
     _key: "!items.effects!fdec3f206b747460.alOU8WrxG8nIZhkJ"
@@ -758,7 +638,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -771,8 +650,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: X46BPLGMldVhATEd
     _key: "!items.effects!fdec3f206b747460.X46BPLGMldVhATEd"
@@ -788,7 +665,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -801,8 +677,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: 7LBaKw0GozSeBNjL
     _key: "!items.effects!fdec3f206b747460.7LBaKw0GozSeBNjL"
@@ -815,19 +689,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -836,15 +707,11 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
@@ -857,16 +724,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: cpmx6f5Fgi5I1k4f
     _key: "!items.effects!fdec3f206b747460.cpmx6f5Fgi5I1k4f"
@@ -896,7 +758,6 @@ effects:
         score:
           attribute: int
           value: 4
-    transfer: true
     type: ability
   - _id: XQ3vAISNiIN8kBIT
     _key: "!items.effects!fdec3f206b747460.XQ3vAISNiIN8kBIT"
@@ -933,7 +794,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 9TrWqmECIRi7yR8M
     _key: "!items.effects!fdec3f206b747460.9TrWqmECIRi7yR8M"
@@ -971,7 +831,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 9SEBhSJhXfsOGN27
     _key: "!items.effects!fdec3f206b747460.9SEBhSJhXfsOGN27"
@@ -1016,7 +875,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: TVxLNTRFblKoMnjG
     _key: "!items.effects!fdec3f206b747460.TVxLNTRFblKoMnjG"
@@ -1047,7 +905,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -1061,7 +918,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: a5BIFSxbB50saF5C
     _key: "!items.effects!fdec3f206b747460.a5BIFSxbB50saF5C"
@@ -1073,8 +929,6 @@ effects:
       _sup: Ie7STenDc7Ro4bLE
       automations:
         - _id: xreyNK2IzDp9qCUE
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d8[mana]
@@ -1083,23 +937,13 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
-      executionTime:
-        base: a1
       form: special
       identifier: mana-drain-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
@@ -1111,9 +955,6 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: Hd0ASm1VKGUfHjSN
     _key: "!items.effects!fdec3f206b747460.Hd0ASm1VKGUfHjSN"
@@ -1165,7 +1006,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: bd7120d756dc6f4f
 img: systems/teriock/src/icons/creatures/demon-mist-wraith.webp
@@ -1175,8 +1015,6 @@ system:
     <p>Transparent glassy @Wiki[Category:Humanoid creatures]{humanoids} with cracks in space instead of eyes. They have
     long claws and strands of light and darkness blowing around them.</p>
   br: 50
-  competence:
-    raw: 1
   description: >-
     <p>Demon mist wraiths are the most common type of mist wraith found in heavy mists. Most types of mist wraith have a
     [[lookup name style=lc]] variant as well.</p>
@@ -1186,17 +1024,12 @@ system:
     2 @Identifier[class:necromancer]{Necromancer}. Innately @Pack[teriock.classes]{rank} 2
     @Identifier[class:storm-mage]{Storm Mage}. Innately @Pack[teriock.classes]{rank} 2
     @Identifier[class:corsair]{Corsair}. Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:thief]{Thief}.</p>
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "4"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "2"

@@ -22,7 +22,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: carrying
           interaction: manifest
           maneuver: passive
@@ -36,7 +35,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Vny3iVB7RL5QFtvH
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.Vny3iVB7RL5QFtvH"
@@ -66,7 +64,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: pDCBBQ0baIFmHW5p
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.pDCBBQ0baIFmHW5p"
@@ -78,29 +75,17 @@ items:
           competence:
             raw: 1
           delivery: bite
-          duration:
-            unit: instant
           executionTime:
             base: a2
-          form: normal
           identifier: devour
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
           powerSources:
             - martial
-          range:
-            unit: contact
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
               @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: HDY8w78BigZWf4k4
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.HDY8w78BigZWf4k4"
@@ -116,7 +101,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -129,8 +113,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: kF5Bfi2kZkCZeZQR
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.kF5Bfi2kZkCZeZQR"
@@ -146,7 +128,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -159,8 +140,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: Z3KZLdK6BSDW8rew
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.Z3KZLdK6BSDW8rew"
@@ -176,7 +155,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -189,8 +167,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: UDNePbozf4EkIxTD
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.UDNePbozf4EkIxTD"
@@ -206,7 +182,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -219,8 +194,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: xr5sMm3sg1XvBm7i
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.xr5sMm3sg1XvBm7i"
@@ -234,27 +207,14 @@ items:
               hacks:
                 - arm
                 - leg
-              reverse: false
               type: hacks
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
-          form: normal
           identifier: pince
-          interaction: attack
-          maneuver: active
           overview:
             base: <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage gets dealt accordingly.</p>
-          piercing:
-            raw: 1
           powerSources:
             - martial
-          range:
-            unit: contact
           results:
             critHit: >-
               <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs, depending on what you
@@ -265,7 +225,6 @@ items:
           targets:
             - arm
             - leg
-        transfer: true
         type: ability
       - _id: eep4WqgmVifMKECV
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.eep4WqgmVifMKECV"
@@ -278,53 +237,34 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
-              display: {}
               formula: 1d8[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d10[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
           costs:
             tweaks:
               gifted: 1
-          delivery: weapon
           duration:
             raw: "24"
             unit: hour
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: poison-strike
-          interaction: attack
           limitation: <p>@Wiki[Category:Stingers]{Stingers} only.</p>
-          maneuver: active
           overview:
             fluent: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -332,20 +272,13 @@ items:
             proficient: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
               @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - alchemical
-          range:
-            unit: contact
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: t0GMdD2li6EqDtKR
         _key: "!actors.items.effects!239f7e99d9a0717e.239f7e99d9a0717e.t0GMdD2li6EqDtKR"
@@ -374,7 +307,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: swimming
           interaction: manifest
           maneuver: passive
@@ -388,7 +320,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/creatures/yellow-scorpion.webp
@@ -396,22 +327,12 @@ items:
     system:
       appearance: <p>Huge [[lookup name style=lc]]s with razor sharp claws.</p>
       br: 4
-      competence:
-        raw: 1
       description: >-
         <p>These scavenge on the deserts and rocks of Teriock making the creepy sounds like "skidachum skatachum". They
         will only eat their food once claim over it is not challenged.</p>
       identifier: yellow-scorpion
       size:
-        enabled: true
         value: 1
-      statDice:
-        hp:
-          disabled: false
-          formula: 1d10
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - animal
         - aquatic
@@ -433,9 +354,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -443,7 +361,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: mXYAf5UnwQAjRIUt
         _key: "!actors.items.effects!239f7e99d9a0717e.EXzPUXmyAkN6RF8h.mXYAf5UnwQAjRIUt"
@@ -452,14 +369,10 @@ items:
         img: systems/teriock/src/icons/properties/stinging.webp
         name: Stinging
         system:
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           damageType: toxic
           description: <p>An item that is <b>[[lookup name style=lc]]</b>, deals @Identifier[damage:toxic]{toxic damage}.</p>
           form: intrinsic
           identifier: stinging
-        transfer: true
         type: property
       - _id: f8NrPKi0u6XFhydo
         _key: "!actors.items.effects!239f7e99d9a0717e.EXzPUXmyAkN6RF8h.f8NrPKi0u6XFhydo"
@@ -470,24 +383,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/stinger.webp
     name: Stinger
     system:
       _sup: 239f7e99d9a0717e
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: wraparound
@@ -495,8 +401,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: YkQwb2WRtrgKe2tW
     _key: "!actors.items!239f7e99d9a0717e.YkQwb2WRtrgKe2tW"
@@ -512,15 +416,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!239f7e99d9a0717e.YkQwb2WRtrgKe2tW.fq8owR84sFsgLiuj"
@@ -531,9 +431,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -541,7 +438,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!239f7e99d9a0717e.YkQwb2WRtrgKe2tW.4WFL62wofj7AHBxN"
@@ -552,24 +448,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 8185a98b7551093c
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 239f7e99d9a0717e
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -577,8 +466,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: aRZcXd3YQOAGCF2v
     _key: "!actors.items!239f7e99d9a0717e.aRZcXd3YQOAGCF2v"
@@ -589,17 +476,12 @@ items:
     name: Carapace
     system:
       _sup: 239f7e99d9a0717e
-      attackPenalty: "-3"
       av:
         raw: 2
-      competence:
-        raw: 0
       identifier: carapace
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: bo2mxbGJ7MfOlpLE
     _key: "!actors.items!239f7e99d9a0717e.bo2mxbGJ7MfOlpLE"
@@ -615,15 +497,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!239f7e99d9a0717e.bo2mxbGJ7MfOlpLE.IDLUUjkSFtpaiKuJ"
@@ -634,32 +512,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 239f7e99d9a0717e
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: qqRnJN5FtbAqLGzN
     _key: "!actors.items!239f7e99d9a0717e.qqRnJN5FtbAqLGzN"
@@ -675,9 +544,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -685,7 +551,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: a57Ow2KNA0OCCLp1
         _key: "!actors.items.effects!239f7e99d9a0717e.qqRnJN5FtbAqLGzN.a57Ow2KNA0OCCLp1"
@@ -696,26 +561,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 8185a98b7551093c
     img: systems/teriock/src/icons/body-parts/sharp-pincer.webp
     name: Sharp Pincer
     system:
       _sup: 239f7e99d9a0717e
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d6
       fightingStyle: savage
@@ -723,20 +581,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Yellow Scorpion
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Yellow Scorpion
   ring:
     enabled: true
@@ -744,20 +593,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/yellow-scorpion.webp
   texture:
     src: systems/teriock/src/icons/creatures/yellow-scorpion.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 6
   identifier: yellow-scorpion
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

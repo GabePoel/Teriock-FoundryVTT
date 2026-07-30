@@ -23,7 +23,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: alert
       interaction: manifest
       maneuver: passive
@@ -39,20 +38,16 @@ effects:
         competence:
           attribute: per
           value: 1
-    transfer: true
     type: ability
   - _id: deerTamer0000000
     _key: "!items.effects!3c9b956461443a90.deerTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Deer Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:deer]{deer}.</p>
       field: survivalist
       identifier: deer-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: rgxGlI8Ahf5gIYBx
     _key: "!items.effects!3c9b956461443a90.rgxGlI8Ahf5gIYBx"
@@ -66,12 +61,8 @@ effects:
           formula: (@h)d4[magic holy]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
           status: lighted
           target: true
           type: status
@@ -86,48 +77,26 @@ effects:
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
           timing: end
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: light-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
@@ -135,16 +104,11 @@ effects:
           choice.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Deer Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:deer inline]</p>
   identifier: deer-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

@@ -19,7 +19,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: additional-flame-rotators
       interaction: manifest
       maneuver: passive
@@ -34,7 +33,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: QEczhwfNaJmkOSOw
     _key: "!items.effects!0615c1e02cf44dbd.QEczhwfNaJmkOSOw"
@@ -53,7 +51,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-flame-spells
       interaction: manifest
       maneuver: passive
@@ -73,7 +70,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EjA48yTYBOoAhMOD
     _key: "!items.effects!0615c1e02cf44dbd.EjA48yTYBOoAhMOD"
@@ -115,8 +111,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       elderSorcery: true
       elements:
         - flame
@@ -158,7 +152,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 12XEx0cPJzWyXTJE
     _key: "!items.effects!0615c1e02cf44dbd.12XEx0cPJzWyXTJE"
@@ -177,7 +170,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: flame-disciplines
       interaction: manifest
       maneuver: passive
@@ -207,7 +199,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: SIKeU2QEaZhXtXeq
     _key: "!items.effects!0615c1e02cf44dbd.SIKeU2QEaZhXtXeq"
@@ -235,7 +226,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: flame-rotator-fluency
       interaction: manifest
       maneuver: passive
@@ -255,7 +245,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 8MbKNAuiNlYyDOmq
     _key: "!items.effects!0615c1e02cf44dbd.8MbKNAuiNlYyDOmq"
@@ -269,14 +258,10 @@ effects:
     system:
       automations:
         - _id: pMFd0Bm7jcnG7BdF
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:fire-ball
               - ability:flame-ray
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -286,7 +271,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: flame-spell-strikes
       interaction: manifest
       maneuver: passive
@@ -300,7 +284,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: IGwlc5qWJqhIjQvn
     _key: "!items.effects!0615c1e02cf44dbd.IGwlc5qWJqhIjQvn"
@@ -314,21 +297,14 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 3a62dd96319ca135
-          executor: false
-          multi: false
           relation: apply
           status: burned
-          target: false
           type: status
         - _id: 5e9e1d2033fe152a
-          executor: false
-          multi: false
           relation: apply
           status: ruined
-          target: false
           type: status
       competence:
         raw: 1
@@ -342,27 +318,16 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       identifier: cremate
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
@@ -373,7 +338,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
   - _id: NMHRERuGVzVJdnox
     _key: "!items.effects!0615c1e02cf44dbd.NMHRERuGVzVJdnox"
@@ -385,26 +349,14 @@ effects:
       _sup: CaTTWTstOULxfkrp
       automations:
         - _id: FZiTANhHbYeUrxD6
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:magelore
-          multi: false
-          separate: false
           type: addDocuments
         - _id: TUjBJXUmGzXEFt79
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:magic
-          multi: false
-          separate: false
           type: addDocuments
         - _id: WDPfYxMp2lWJxkW4
-          all: false
-          attachDocuments: true
           automatic: false
           data: |-
             {
@@ -424,9 +376,7 @@ effects:
             }
           local:
             qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: Tu4qrPot571fIQao
           changes:
@@ -500,7 +450,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
   - _id: f1KySEQceM867q8m
     _key: "!items.effects!0615c1e02cf44dbd.f1KySEQceM867q8m"
@@ -518,13 +467,10 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - loud
       executionTime:
         base: r0
-      form: normal
       identifier: bombastic-casting
       interaction: manifest
       maneuver: reactive
@@ -542,7 +488,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    transfer: true
     type: ability
   - _id: CtmkreidBA2YB3UH
     _key: "!items.effects!0615c1e02cf44dbd.CtmkreidBA2YB3UH"
@@ -554,12 +499,9 @@ effects:
       _sup: 12XEx0cPJzWyXTJE
       automations:
         - _id: VX8HRH0mBRK2ACXr
-          all: false
           automatic: false
-          expandTables: false
           local:
             qualifier: and(@ability, @spell, @time.a1)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -570,13 +512,10 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - sensory
       executionTime:
         base: r1
-      form: normal
       identifier: sudden-casting
       interaction: manifest
       maneuver: reactive
@@ -597,7 +536,6 @@ effects:
       trigger: >-
         <p>Another creatures would move out of sight or out of @Identifier[core:range]{range} of a @Wiki[Category:Single
         action spells]{single action spell} you could cast.</p>
-    transfer: true
     type: ability
   - _id: 6uIqbbQhN2EqXkDZ
     _key: "!items.effects!0615c1e02cf44dbd.6uIqbbQhN2EqXkDZ"
@@ -609,12 +547,8 @@ effects:
       _sup: 8MbKNAuiNlYyDOmq
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -624,12 +558,8 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: spell-strike
       interaction: manifest
       limitation: <p>Only usable with @Identifier[ability:flame-ray]{Flame Ray} and @Identifier[ability:fire-ball]{Fire Ball}.</p>
@@ -641,17 +571,12 @@ effects:
           was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
-    transfer: true
     type: ability
   - _id: urBmFyvLtZjhUTeJ
     _key: "!items.effects!0615c1e02cf44dbd.urBmFyvLtZjhUTeJ"
@@ -662,23 +587,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Flame element spells]{flame spell} as though you were
         @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-flame-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: B50L2RueB8vIWxvI
     _key: "!items.effects!0615c1e02cf44dbd.B50L2RueB8vIWxvI"
@@ -689,30 +605,18 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Flame element spells]{flame spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-flame-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: abd25a387353ae4e
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
@@ -720,15 +624,12 @@ name: Rank 3 Flame Mage
 system:
   archetype: mage
   class: flame-mage
-  competence:
-    raw: 1
   description: >-
     <p>Fierce and brazen, these mages are always at war. The arms dealers of the world, their magic is completely
     focused on destruction and thus they seek to create bigger and better ways to blow things up. Passionate, wild and a
     bit chaotic, these mages like the mountains and underground spaces. If you are playing a
     @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like, ready for battle, and consuming everything.</p>
   identifier: rank-3-flame-mage
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
@@ -736,13 +637,11 @@ system:
   number: 3
   statDice:
     hp:
-      disabled: false
       faces: 8
       formula: 1d8
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 12
       formula: 1d12
       number:

@@ -17,7 +17,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: storm-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 1klgEP0n84zFa2hg
     _key: "!items.effects!adq0zlhzzMRwuiq0.1klgEP0n84zFa2hg"
@@ -83,7 +81,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: storm-rotators
       interaction: manifest
       maneuver: passive
@@ -113,7 +110,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: jGO6ILbgP8GqyqRK
     _key: "!items.effects!adq0zlhzzMRwuiq0.jGO6ILbgP8GqyqRK"
@@ -141,8 +137,6 @@ effects:
               @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
             type: description
       delivery: sight
-      duration:
-        unit: instant
       elderSorcery: true
       executionTime:
         base: Long Rest
@@ -171,13 +165,10 @@ effects:
           @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       ritual: true
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: LbH6iz5ZOOIh6eiZ
     _key: "!items.effects!adq0zlhzzMRwuiq0.LbH6iz5ZOOIh6eiZ"
@@ -260,7 +251,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EmKJf6i4MYns03uK
     _key: "!items.effects!adq0zlhzzMRwuiq0.EmKJf6i4MYns03uK"
@@ -314,7 +304,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 06vxk8u74h60VCqd
     _key: "!items.effects!adq0zlhzzMRwuiq0.06vxk8u74h60VCqd"
@@ -326,26 +315,12 @@ effects:
       _sup: 1klgEP0n84zFa2hg
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: 30 + 10 * @h
-          regionType: circle
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       costs:
@@ -355,8 +330,6 @@ effects:
           verbal:
             type: tag
       delivery: aura
-      duration:
-        unit: instant
       elements:
         - storm
       endCondition: <p>The start of your next turn.</p>
@@ -394,7 +367,6 @@ effects:
       targets:
         - spell
       trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
-    transfer: true
     type: ability
   - _id: F1UKCtpMwBhNI7pG
     _key: "!items.effects!adq0zlhzzMRwuiq0.F1UKCtpMwBhNI7pG"
@@ -424,12 +396,9 @@ effects:
         - resistance
       elements:
         - storm
-      executionTime:
-        base: a1
       form: special
       identifier: resist-effects
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>Pick one of the following @Wiki[Category:Effects]{effect types}. You
@@ -458,7 +427,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: WDtIKS8dYb2ZWtCs
     _key: "!items.effects!adq0zlhzzMRwuiq0.WDtIKS8dYb2ZWtCs"
@@ -475,8 +443,6 @@ effects:
       competence:
         raw: 1
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - displacement
       elements:
@@ -507,7 +473,6 @@ effects:
       trigger: >-
         <p>You cast a @Wiki[Category:Missile delivery spells]{missile} or @Wiki[Category:Weapon delivery spells]{weapon
         delivery spell}.</p>
-    transfer: true
     type: ability
   - _id: wAXXWH1CXQh6RbbI
     _key: "!items.effects!adq0zlhzzMRwuiq0.wAXXWH1CXQh6RbbI"
@@ -519,12 +484,9 @@ effects:
       _sup: 1klgEP0n84zFa2hg
       automations:
         - _id: R7rIJDoFAEvz00wl
-          all: false
           automatic: false
-          expandTables: false
           local:
             qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -536,8 +498,6 @@ effects:
           verbal:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       elements:
         - storm
       executionTime:
@@ -561,7 +521,6 @@ effects:
       targets:
         - self
       trigger: <p>You @Identifier[condition:down]{drop}.</p>
-    transfer: true
     type: ability
   - _id: dz72P1PfTUWE7o1o
     _key: "!items.effects!adq0zlhzzMRwuiq0.dz72P1PfTUWE7o1o"
@@ -573,46 +532,19 @@ effects:
       _sup: 1klgEP0n84zFa2hg
       automations:
         - _id: 65b2fb4b1f8cdae3
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:blizzard-aura
-          multi: false
-          separate: false
           type: addDocuments
         - _id: 75dff24942d5b933
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:shock-touch
-          multi: false
-          separate: false
           type: addDocuments
         - _id: I1BIPKXYQZ1rA5JU
           light:
-            alpha: 0.5
-            angle: 360
             animation:
-              intensity: 5
-              reverse: false
-              speed: 5
               type: sunburst
-            attenuation: 0.5
-            bright: 0
             color: "#3584e4"
-            coloration: 1
-            contrast: 0
-            darkness:
-              max: 1
-              min: 0
             dim: 0.01
-            luminosity: 0.5
-            negative: false
-            priority: 0
-            saturation: 0
-            shadows: 0
           type: light
       competence:
         raw: 1
@@ -632,13 +564,10 @@ effects:
         unit: hour
       elements:
         - storm
-      executionTime:
-        base: a1
       form: special
       identifier: crown-of-ice
       interaction: manifest
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>A small circle of glowing frost circles above your head. You gain @Identifier[ability:shock-touch]{Shock
@@ -653,7 +582,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 973c51c989f887b2
 img: systems/teriock/src/icons/ranks/rank-2-storm-mage.webp
@@ -662,8 +590,6 @@ system:
   _sup: 122380d86962ce4a
   archetype: mage
   class: storm-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true wonder seeker, these mages are the philosophers of the world, always seeking out more knowledge and more
     wisdom. The @Identifier[class:storm-mage]{Storm Mage} is a logician, a tactical intellectual who prefers to
@@ -671,14 +597,11 @@ system:
     tumultuous and crafty. If you are playing a @Identifier[class:storm-mage]{Storm Mage}, be curious, hungry for
     information, always in the clouds, tricky and clever, eluding rather than confronting.</p>
   identifier: rank-2-storm-mage
-  innate: false
   maxAv: 0
   number: 2
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

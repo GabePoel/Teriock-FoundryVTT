@@ -12,11 +12,7 @@ effects:
     system:
       automations:
         - _id: 96a33dac897ee269
-          executor: false
-          multi: false
-          relation: include
           status: defyingDeath
-          target: false
           type: status
       competence:
         raw: 1
@@ -26,7 +22,6 @@ effects:
         unit: minute
       executionTime:
         base: r1
-      form: normal
       identifier: defy-death
       interaction: manifest
       maneuver: reactive
@@ -42,7 +37,6 @@ effects:
       targets:
         - self
       trigger: <p>You would @Identifier[condition:down]{drop}.</p>
-    transfer: true
     type: ability
   - _id: A4WZCzLVp8Jq9ykR
     _key: "!items.effects!KLENiLsr670sxg55.A4WZCzLVp8Jq9ykR"
@@ -53,25 +47,16 @@ effects:
     system:
       automations:
         - _id: sGyei1adB2IsKjZP
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
         - _id: 52f4d0b87363b1c1
-          executor: false
-          multi: false
           relation: apply
           status: dueling
-          target: false
           type: status
         - _id: 747b3e9c9b617af6
           executor: true
-          multi: false
           relation: apply
           status: lighted
-          target: false
           type: status
       competence:
         raw: 1
@@ -80,12 +65,8 @@ effects:
         unit: unlimited
       effectTypes:
         - duelModifying
-      executionTime:
-        base: a1
-      form: normal
       identifier: duel
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You challenge the @Identifier[core:targets]{target} to advance and fight you. They may immediately
@@ -108,9 +89,6 @@ effects:
       requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: ez42WB6ZV9yzul09
     _key: "!items.effects!KLENiLsr670sxg55.ez42WB6ZV9yzul09"
@@ -136,7 +114,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: resolve-conflict
       interaction: manifest
       maneuver: passive
@@ -152,7 +129,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 7f1XQVbvaHBzHZnL
     _key: "!items.effects!KLENiLsr670sxg55.7f1XQVbvaHBzHZnL"
@@ -170,14 +146,11 @@ effects:
             formula: "1"
             type: formula
       delivery: sight
-      duration:
-        unit: instant
       effectTypes:
         - truthDetecting
       executionTime:
         base: r0
       featSaveAttribute: snk
-      form: normal
       identifier: detect-lie
       interaction: feat
       maneuver: reactive
@@ -194,10 +167,7 @@ effects:
           @Identifier[core:fizzles]{fizzles} for some other reason.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: <p>Someone makes a statement which could, in principle, be true or false.</p>
-    transfer: true
     type: ability
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
@@ -206,8 +176,6 @@ system:
   _sup: 631ee800e7393cd3
   archetype: warrior
   class: duelist
-  competence:
-    raw: 1
   description: >-
     <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for duels
     as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above any sort of
@@ -216,14 +184,11 @@ system:
     way. If you are a @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and confident in yourself.</p>
   flaws: <p>Duelists cannot use @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-1-duelist
-  innate: false
   maxAv: 4
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

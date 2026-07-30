@@ -17,7 +17,6 @@ effects:
         - automatic
       executionTime:
         base: passive
-      form: normal
       identifier: acidic-blood
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       targets:
         - self
       trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
-    transfer: true
     type: ability
   - _id: FMmpr9ahSyRCpBeC
     _key: "!items.effects!095f3fa213df7d32.FMmpr9ahSyRCpBeC"
@@ -60,7 +58,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: adrenaline
       interaction: manifest
       maneuver: passive
@@ -76,7 +73,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: hYTbFZ3nKvetvdpA
     _key: "!items.effects!095f3fa213df7d32.hYTbFZ3nKvetvdpA"
@@ -92,7 +88,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -113,7 +108,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: DmbIHBkJzZoTuYcg
     _key: "!items.effects!095f3fa213df7d32.DmbIHBkJzZoTuYcg"
@@ -141,7 +135,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: dark-vision
       interaction: manifest
       maneuver: passive
@@ -153,7 +146,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: sEMLUJQCL7fUKdqp
     _key: "!items.effects!095f3fa213df7d32.sEMLUJQCL7fUKdqp"
@@ -169,7 +161,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: high-intelligence
       interaction: manifest
       maneuver: passive
@@ -183,7 +174,6 @@ effects:
         score:
           attribute: int
           value: 3
-    transfer: true
     type: ability
   - _id: gyFirz0lGSI4uzPB
     _key: "!items.effects!095f3fa213df7d32.gyFirz0lGSI4uzPB"
@@ -199,7 +189,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -212,8 +201,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: bPI5bEf8laHlvaCt
     _key: "!items.effects!095f3fa213df7d32.bPI5bEf8laHlvaCt"
@@ -229,7 +216,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -242,8 +228,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: xybguK92PT8fxIJV
     _key: "!items.effects!095f3fa213df7d32.xybguK92PT8fxIJV"
@@ -259,7 +243,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -272,8 +255,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: xjEHRgvMYHepx3bn
     _key: "!items.effects!095f3fa213df7d32.xjEHRgvMYHepx3bn"
@@ -287,13 +268,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: iCn9pFDIGFJWxm6H
           activeQualifier: and(not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -327,7 +305,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
 folder: c8142ec7ec7ecbbd
 img: systems/teriock/src/icons/creatures/dark-troll.webp
@@ -337,23 +314,18 @@ system:
     <p>Ugly and hunched with a lanky build and dark leathery skin, long razor sharp claws, and huge yellow
     @Identifier[creature:cat]{cat}-like eyes.</p>
   br: 20
-  competence:
-    raw: 1
   description: >-
     <p>Dark trolls are nocturnal and wilder than @Identifier[creature:war-troll]{war trolls}. They are often deadly
     @Identifier[archetype:mage]{mages}.</p>
   identifier: dark-troll
   size:
-    enabled: true
     value: 5
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "4"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

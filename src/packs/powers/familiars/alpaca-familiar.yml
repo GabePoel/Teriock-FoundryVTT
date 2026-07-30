@@ -6,13 +6,10 @@ effects:
     img: icons/environment/settlement/stables-logo.webp
     name: Alpaca Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:alpaca]{alpaca}.</p>
       field: survivalist
       identifier: alpaca-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: JqzN8XYQ9cxV7vWB
     _key: "!items.effects!8430bebad15ec25a.JqzN8XYQ9cxV7vWB"
@@ -49,24 +46,13 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: disable-ray
-      interaction: attack
       maneuver: reactive
       overview:
         proficient: <p>This also makes the effect of that @Pack[teriock.abilities]{ability} @Identifier[core:fizzles]{fizzle}.</p>
-      piercing:
-        raw: 1
       powerSources:
         - spiritual
       range:
@@ -79,14 +65,11 @@ effects:
           @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic} @Wiki[Category:Active
         abilities]{active} or @Wiki[Category:Reactive abilities]{reactive ability} that isn't a
         @Wiki[Category:Spells]{spell} against a different creature or some @Pack[teriock.equipment]{equipment} that
         different creature @Identifier[keyword:bearing]{bares}.</p>
-    transfer: true
     type: ability
   - _id: e8k4c1n3etWPCBWy
     _key: "!items.effects!8430bebad15ec25a.e8k4c1n3etWPCBWy"
@@ -100,7 +83,6 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
@@ -109,13 +91,10 @@ effects:
           hack:
             type: tag
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r1
-      form: normal
       identifier: endure
       interaction: manifest
       maneuver: reactive
@@ -141,14 +120,11 @@ effects:
       trigger: >-
         <p>You are hit by an @Identifier[core:attack-interaction]{attack} that would @Identifier[core:damage]{damage}
         you.</p>
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Alpaca Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:alpaca inline]</p>
   identifier: alpaca-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

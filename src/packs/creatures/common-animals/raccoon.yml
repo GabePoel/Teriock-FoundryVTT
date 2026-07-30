@@ -36,7 +36,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: Q7xOoRTHG2hFVo1Z
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.Q7xOoRTHG2hFVo1Z"
@@ -47,38 +46,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -106,7 +85,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: QaPh6mNhfmVcFB5o
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.QaPh6mNhfmVcFB5o"
@@ -136,7 +114,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: QG7NhCVnDe186JLn
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.QG7NhCVnDe186JLn"
@@ -164,7 +141,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: night-vision
           interaction: manifest
           maneuver: passive
@@ -178,7 +154,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: MeWQZN1ZMNBsZBVh
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.MeWQZN1ZMNBsZBVh"
@@ -206,7 +181,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: dwp3Gid2sZn8okgN
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.dwp3Gid2sZn8okgN"
@@ -222,7 +196,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -235,8 +208,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 6bEodES5PAWwv9kL
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.6bEodES5PAWwv9kL"
@@ -252,7 +223,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -265,8 +235,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 6qNHPlbiiC0oBvro
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.6qNHPlbiiC0oBvro"
@@ -282,7 +250,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -295,8 +262,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: x0SQUA8cnTguY1JM
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.x0SQUA8cnTguY1JM"
@@ -326,7 +291,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: h4ASLnNOFu93nbJu
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.h4ASLnNOFu93nbJu"
@@ -339,50 +303,31 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
-              display: {}
               formula: 1d8[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d10[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "24"
             unit: hour
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: poison-strike
-          interaction: attack
           limitation: <p>@Identifier[equipment:mouth]{Mouth} only.</p>
-          maneuver: active
           overview:
             fluent: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -390,20 +335,13 @@ items:
             proficient: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
               @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - alchemical
-          range:
-            unit: contact
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: upCpm33VbbCyzfiG
         _key: "!actors.items.effects!7ef1f3442a83bf1a.7ef1f3442a83bf1a.upCpm33VbbCyzfiG"
@@ -416,8 +354,6 @@ items:
             - _id: Kd7EJ2F01l6h5bzk
               common:
                 - unglue
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
@@ -427,22 +363,14 @@ items:
                 formula: "1"
                 type: formula
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - stealing
-          executionTime:
-            base: a1
-          form: normal
           identifier: unglue
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>@Identifier[core:targets]{Target} is no longer @Identifier[property:glued]{glued} and you take it.</p>
           powerSources:
             - spiritual
-          range:
-            unit: contact
           requirements: >-
             <p>Target's bearer is @Identifier[condition:down]{down} or target it
             @Identifier[property:searchable]{searchable}.</p>
@@ -450,25 +378,19 @@ items:
           standard: true
           targets:
             - item
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/raccoon.webp
     name: Raccoon
     system:
       br: 4
-      competence:
-        raw: 1
       identifier: raccoon
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d4
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -490,15 +412,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!7ef1f3442a83bf1a.B8pndCjVFBO0oxJm.fq8owR84sFsgLiuj"
@@ -509,9 +427,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -519,7 +434,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!7ef1f3442a83bf1a.B8pndCjVFBO0oxJm.4WFL62wofj7AHBxN"
@@ -530,24 +444,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 7ef1f3442a83bf1a
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -555,8 +462,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: KCI4KEKnq4a1N0ww
     _key: "!actors.items!7ef1f3442a83bf1a.KCI4KEKnq4a1N0ww"
@@ -572,15 +477,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!7ef1f3442a83bf1a.KCI4KEKnq4a1N0ww.lKaLyYYTTIEFOLb5"
@@ -591,9 +492,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -601,7 +499,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!7ef1f3442a83bf1a.KCI4KEKnq4a1N0ww.m7Va2Fuah1K2t2Ab"
@@ -612,9 +509,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -622,7 +516,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!7ef1f3442a83bf1a.KCI4KEKnq4a1N0ww.IJM1yhiyKnnwlbXh"
@@ -633,32 +526,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 7ef1f3442a83bf1a
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: ZQUPynuvggMkeCA6
     _key: "!actors.items!7ef1f3442a83bf1a.ZQUPynuvggMkeCA6"
@@ -674,15 +558,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!7ef1f3442a83bf1a.ZQUPynuvggMkeCA6.IDLUUjkSFtpaiKuJ"
@@ -693,44 +573,28 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 7ef1f3442a83bf1a
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Raccoon
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Raccoon
   ring:
     enabled: true
@@ -738,20 +602,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/raccoon.webp
   texture:
     src: systems/teriock/src/icons/creatures/raccoon.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 3
   identifier: raccoon
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

@@ -5,13 +5,8 @@ name: Zombie Infection Bite
 system:
   automations:
     - _id: jtjswsSL2kJ0MmuB
-      all: false
-      automatic: true
-      competence:
-        raw: 0
       identifiers:
         - species:zombie
-      multi: false
       override:
         - art
       reset:
@@ -25,8 +20,6 @@ system:
         - rank
         - species
       type: transformation
-  competence:
-    raw: 0
   delivery: bite
   duration:
     unit: unlimited
@@ -35,18 +28,9 @@ system:
     - reanimation
   elements:
     - necromancy
-  executionTime:
-    base: a1
-  form: normal
   identifier: zombie-infection-bite
-  interaction: attack
-  maneuver: active
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   requirements: <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive}.</p>
   results:
     hit: >-
@@ -54,7 +38,4 @@ system:
       @Identifier[condition:dead]{die}. This is an illness that can be cured with a
       @Identifier[core:difficulty-class]{DC} 8 @Identifier[tradecraft:herbalist]{herbalist} check during
       @Identifier[ability:cure-illness]{Cure Illness}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

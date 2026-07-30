@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 import path from "path";
 
 import { toKebabCase, toKebabCaseFull } from "../../src/module/helpers/string.mjs";
-import { cleanDocument } from "./clean-fields.mjs";
+import { cleanDocument, loadDefaults } from "./clean-fields.mjs";
 import {
   DOCUMENT_COLLECTION_KEYS,
   EXPAND_ADVENTURES,
@@ -79,6 +79,7 @@ async function unpackPack(pack, buildRegistry) {
   await extractPack(`./packs/${pack}`, prefix, extractOptions);
 }
 
+await loadDefaults();
 const packs = await fs.readdir("./packs");
 for (const pack of packs) { await unpackPack(pack, true); }
 for (const pack of packs) { await unpackPack(pack, false); }

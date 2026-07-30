@@ -27,7 +27,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -41,20 +40,16 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: scorpionTamer000
     _key: "!items.effects!7fb7fbccafdec14b.scorpionTamer000"
     img: icons/environment/settlement/stables-logo.webp
     name: Scorpion Tamer
     system:
-      competence:
-        raw: 2
       description: <p>You know the way of the @Identifier[creature:scorpion]{scorpion}.</p>
       field: survivalist
       identifier: scorpion-tamer
       tradecraft: tamer
-    transfer: true
     type: fluency
   - _id: rw0UPlGQu9w3saCd
     _key: "!items.effects!7fb7fbccafdec14b.rw0UPlGQu9w3saCd"
@@ -67,19 +62,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -90,15 +82,11 @@ effects:
             type: formula
         tweaks:
           gifted: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
@@ -111,23 +99,16 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
 folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Scorpion Familiar
 system:
-  competence:
-    raw: 1
   description: <p>@Embed[creature:scorpion inline]</p>
   identifier: scorpion-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>

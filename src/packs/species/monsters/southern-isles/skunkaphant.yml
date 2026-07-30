@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -36,7 +35,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: EUCHTeVqM1zCfhSC
     _key: "!items.effects!aec7270858e37035.EUCHTeVqM1zCfhSC"
@@ -66,7 +64,6 @@ effects:
         score:
           attribute: snk
           value: -1
-    transfer: true
     type: ability
   - _id: SqxuKoJ1AaWKZc0M
     _key: "!items.effects!aec7270858e37035.SqxuKoJ1AaWKZc0M"
@@ -96,7 +93,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: NDKKdgQoz9DAYMiI
     _key: "!items.effects!aec7270858e37035.NDKKdgQoz9DAYMiI"
@@ -112,7 +108,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -125,8 +120,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: 44fcvlkKBRVcdOIh
     _key: "!items.effects!aec7270858e37035.44fcvlkKBRVcdOIh"
@@ -142,7 +135,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -155,8 +147,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: EClEPoZ9gthqcWv7
     _key: "!items.effects!aec7270858e37035.EClEPoZ9gthqcWv7"
@@ -167,11 +157,7 @@ effects:
     system:
       automations:
         - _id: 18537e76761a45dc
-          executor: false
-          multi: false
-          relation: include
           status: blind
-          target: false
           type: status
       competence:
         raw: 1
@@ -183,26 +169,12 @@ effects:
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: stink-packet
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - alchemical
       range:
@@ -216,9 +188,6 @@ effects:
           @Identifier[core:hit-points-and-mana-points]{mana die}. It is though those dice are spent, but without
           providing any @Identifier[core:healing]{healing} or @Wiki[Category:Revitalization
           effects]{revitalization}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 02WiCOFKwQ3fpl0M
     _key: "!items.effects!aec7270858e37035.02WiCOFKwQ3fpl0M"
@@ -259,25 +228,15 @@ effects:
               value: "-3"
           type: changes
         - _id: 7400b41f20d9f100
-          all: false
           angle: "@angle.normal"
           attachToToken: false
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: cone
           restriction:
             enabled: true
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
       competence:
         raw: 1
       costs:
@@ -289,13 +248,8 @@ effects:
       duration:
         raw: "1"
         unit: week
-      executionTime:
-        base: a1
-      featSaveAttribute: mov
-      form: normal
       identifier: stink-spray
       interaction: feat
-      maneuver: active
       powerSources:
         - alchemical
       range:
@@ -308,9 +262,6 @@ effects:
           and @Identifier[keyword:immunity]{immune} to becoming @Identifier[condition:odorless]{odorless} or
           @Identifier[condition:hidden]{hidden} to creatures that are not
           @Identifier[condition:anosmatic]{anosmatic}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/creatures/skunkaphant.webp
@@ -318,23 +269,18 @@ name: Skunkaphant
 system:
   appearance: <p>Black and white short-haired @Identifier[creature:elephant]{mammoth}-@Identifier[creature:skunk]{skunks}.</p>
   br: 14
-  competence:
-    raw: 1
   description: >-
     <p>[[lookup name]]s trample through the jungles scavenging for food and trample-stink anything that threatens them.
     Their trample can be healed, but their stench remains.</p>
   identifier: skunkaphant
   size:
-    enabled: true
     value: 6
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 8
       number:
         raw: "1"

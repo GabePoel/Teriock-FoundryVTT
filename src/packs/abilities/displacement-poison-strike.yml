@@ -10,7 +10,6 @@ system:
       distance: 1d10
       movementAction: blink
       origin: random
-      originBarrier: true
       type: move
     - _id: 6Kx4FtAxDRRHpOLP
       competencies:
@@ -18,7 +17,6 @@ system:
       distance: 1d(10 * (1 + @p))
       movementAction: blink
       origin: random
-      originBarrier: true
       type: move
     - _id: eBn2lXSRNA3aOBjn
       competencies:
@@ -26,23 +24,14 @@ system:
       distance: 1d(10 * (1 + @f))
       movementAction: blink
       origin: random
-      originBarrier: true
       type: move
-  competence:
-    raw: 0
-  delivery: weapon
   duration:
     raw: "24"
     unit: hour
   effectTypes:
     - displacement
     - poison
-  executionTime:
-    base: a1
-  form: normal
   identifier: displacement-poison-strike
-  interaction: attack
-  maneuver: active
   overview:
     fluent: >-
       <p>The @Identifier[condition:poisoned]{poison} instead transports the target 10 ×
@@ -50,18 +39,11 @@ system:
     proficient: >-
       <p>The @Identifier[condition:poisoned]{poison} instead transports the target 10 ×
       @Identifier[core:proficiency-bonus]{P} feet.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
       @Identifier[condition:poisoned]{poison} causes the target to be instantly transported 10 feet in a random
       direction.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

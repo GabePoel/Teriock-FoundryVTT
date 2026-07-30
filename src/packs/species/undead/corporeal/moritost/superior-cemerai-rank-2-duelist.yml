@@ -17,7 +17,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: bow-out
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Ckzn261n62CcGUwr
     _key: "!items.effects!P8NQsneOiqYNipFS.Ckzn261n62CcGUwr"
@@ -44,9 +42,6 @@ effects:
     system:
       automations:
         - _id: 705550b2f36e9334
-          all: false
-          attachDocuments: true
-          automatic: true
           data: >-
             {"system":{"limitation":"<p>May only be delivered with the
             @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} you made
@@ -54,14 +49,9 @@ effects:
             @Identifier[condition:dueling]{dueling}.</p>","applyIfDeattuned":true}}
           identifiers:
             - ability:chi-strike
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: RgVUCzE3H5uHhYpY
-          all: false
-          attachDocuments: true
-          automatic: true
           data: |-
             {
               "system": {
@@ -71,9 +61,7 @@ effects:
             }
           identifiers:
             - property:armor-voiding
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -85,18 +73,14 @@ effects:
       duration:
         unit: unlimited
       endCondition: <p>You are no longer @Identifier[condition:dueling]{dueling}.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 05f6d4dd9db56877
           statuses:
             absent:
               - dueling
           type: status
-      form: normal
       identifier: dueling-techniques
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>A @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} you are
@@ -114,7 +98,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
   - _id: aMpBM1gwJl2mau2J
     _key: "!items.effects!P8NQsneOiqYNipFS.aMpBM1gwJl2mau2J"
@@ -125,29 +108,19 @@ effects:
     system:
       automations:
         - _id: 6taozqKUQOZB9Pdx
-          all: false
           attachDocuments: false
-          automatic: true
-          multi: false
           separate: true
           type: addDocuments
           uuids:
             - Compendium.teriock.templateEffects.ActiveEffect.JcORKsFyOrlW39RK
         - _id: EIeegrJoWQ7miIBl
-          all: false
           attachDocuments: false
-          automatic: true
-          multi: false
           separate: true
           type: addDocuments
           uuids:
             - Compendium.teriock.templateEffects.ActiveEffect.RRSK2DKqVr6fWeHn
         - _id: PXJnQ6AbGlV3OaXb
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
       competence:
         raw: 1
@@ -169,7 +142,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: tea-ceremony
       interaction: manifest
       maneuver: slow
@@ -205,9 +177,6 @@ effects:
       ritual: true
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: eoiAjtYM5t20hyOM
     _key: "!items.effects!P8NQsneOiqYNipFS.eoiAjtYM5t20hyOM"
@@ -220,11 +189,8 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r1
-      form: normal
       identifier: reactive-bow-out
       interaction: manifest
       maneuver: reactive
@@ -245,7 +211,6 @@ effects:
       trigger: >-
         <p>Some effect would cause you to start @Identifier[condition:dueling]{dueling} or @Wiki[Category:Duel modifying
         effects]{modify} a @Identifier[condition:dueling]{duel} you are in.</p>
-    transfer: true
     type: ability
   - _id: ue3To7AyB61EVyHO
     _key: "!items.effects!P8NQsneOiqYNipFS.ue3To7AyB61EVyHO"
@@ -257,25 +222,16 @@ effects:
       _sup: vU4DiB0u1DAfzrs5
       automations:
         - _id: 824b5b01e1a4efec
-          executor: false
-          multi: false
           relation: remove
           status: dueling
-          target: false
           type: status
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - duelModifying
-      executionTime:
-        base: a1
-      form: normal
       identifier: active-bow-out
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You end a @Identifier[condition:dueling]{duel} you are currently in. You do not count as "forfeiting" or
@@ -292,7 +248,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
@@ -301,8 +256,6 @@ system:
   _sup: d3672cafa9fd70c4
   archetype: warrior
   class: duelist
-  competence:
-    raw: 1
   description: >-
     <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for duels
     as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above any sort of
@@ -311,14 +264,11 @@ system:
     way. If you are a @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and confident in yourself.</p>
   flaws: <p>Duelists cannot use @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-2-duelist
-  innate: false
   maxAv: 4
   number: 2
   statDice:
     hp:
-      disabled: false
       formula: 1d12
     mp:
-      disabled: false
       formula: 1d8
 type: rank

@@ -33,7 +33,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: bBXY7R0KBFn6q7h4
     _key: "!items.effects!7bd9a75a1618ca30.bBXY7R0KBFn6q7h4"
@@ -47,14 +46,10 @@ effects:
           formula: (@h)d4[magic terror]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: b4960732f0b9ed9f
           executor: true
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -69,56 +64,31 @@ effects:
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
           timing: end
           type: combat
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic terror]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: fear-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frightened]{frightened}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: P4Cg6HilycPdkgAP
     _key: "!items.effects!7bd9a75a1618ca30.P4Cg6HilycPdkgAP"
@@ -161,7 +131,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -176,7 +145,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: mQAEDVnFktF7aOkd
     _key: "!items.effects!7bd9a75a1618ca30.mQAEDVnFktF7aOkd"
@@ -206,7 +174,6 @@ effects:
         score:
           attribute: snk
           value: 5
-    transfer: true
     type: ability
   - _id: 0AFumEez1lVCwhcC
     _key: "!items.effects!7bd9a75a1618ca30.0AFumEez1lVCwhcC"
@@ -234,7 +201,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: incorporeal
       interaction: manifest
       maneuver: passive
@@ -249,7 +215,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 5ZavcX8eHzrssLqV
     _key: "!items.effects!7bd9a75a1618ca30.5ZavcX8eHzrssLqV"
@@ -260,11 +225,7 @@ effects:
     system:
       automations:
         - _id: 067cb526e2f9e98f
-          executor: false
-          multi: false
-          relation: include
           status: ethereal
-          target: false
           type: status
       competence:
         raw: 1
@@ -274,12 +235,9 @@ effects:
         unit: hour
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       identifier: instant-ethereal
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
       powerSources:
@@ -288,7 +246,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: y5Mm4T5UXOb2CfJk
     _key: "!items.effects!7bd9a75a1618ca30.y5Mm4T5UXOb2CfJk"
@@ -318,7 +275,6 @@ effects:
         score:
           attribute: int
           value: -1
-    transfer: true
     type: ability
   - _id: UvbNcN3QJy19oMns
     _key: "!items.effects!7bd9a75a1618ca30.UvbNcN3QJy19oMns"
@@ -336,7 +292,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: minor-undead
       interaction: manifest
       maneuver: passive
@@ -354,7 +309,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ONXBHy8JVPn5Uohr
     _key: "!items.effects!7bd9a75a1618ca30.ONXBHy8JVPn5Uohr"
@@ -370,7 +324,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -383,8 +336,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: KDPy6sRFoM5R8Yx3
     _key: "!items.effects!7bd9a75a1618ca30.KDPy6sRFoM5R8Yx3"
@@ -400,7 +351,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -413,8 +363,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: zjocmDu2qHTmLTE2
     _key: "!items.effects!7bd9a75a1618ca30.zjocmDu2qHTmLTE2"
@@ -430,7 +378,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -443,8 +390,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: ObNne2zErDLBLolK
     _key: "!items.effects!7bd9a75a1618ca30.ObNne2zErDLBLolK"
@@ -475,7 +420,6 @@ effects:
         - necromancy
       executionTime:
         base: passive
-      form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
@@ -489,7 +433,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 3rGaSkrSqxRVX9tm
     _key: "!items.effects!7bd9a75a1618ca30.3rGaSkrSqxRVX9tm"
@@ -534,7 +477,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: KO4JfhAF208adFay
     _key: "!items.effects!7bd9a75a1618ca30.KO4JfhAF208adFay"
@@ -586,7 +528,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 5Wb1Zx75cObAnqLp
     _key: "!items.effects!7bd9a75a1618ca30.5Wb1Zx75cObAnqLp"
@@ -623,7 +564,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: F6etH4jl9d4pxh5h
     _key: "!items.effects!7bd9a75a1618ca30.F6etH4jl9d4pxh5h"
@@ -635,20 +575,14 @@ effects:
       _sup: UvbNcN3QJy19oMns
       automations:
         - _id: 8XZ7f1wVBuhfreru
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: VwMG074x6235laJJ
           amount: 999999
           impact: drain
-          morganti: false
-          showDialog: false
           type: take
       competence:
         raw: 1
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
@@ -657,7 +591,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: slow-mana-drain
       interaction: manifest
       maneuver: slow
@@ -668,11 +601,6 @@ effects:
           @Identifier[core:revitalizing]{revitalize}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: b8dcf1ebf1b3e669
 img: systems/teriock/src/icons/creatures/ghost.webp
@@ -680,24 +608,17 @@ name: Ghost
 system:
   appearance: <p>Transparent people.</p>
   br: 5
-  competence:
-    raw: 1
   description: >-
     <p>[[lookup name]]s tend to rely on scaring away their opponent or getting them to environments that
     @Identifier[core:damage]{damage} them and then @Identifier[drain:mana]{mana draining} them later. If this doesn't
     work, [[lookup name style=lc]]s tend to retreat.</p>
   identifier: ghost
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

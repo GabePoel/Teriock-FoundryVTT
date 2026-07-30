@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-storm-spells
       interaction: manifest
       maneuver: passive
@@ -41,7 +40,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: lSbfgwMpnXDshoGX
     _key: "!items.effects!5hV9tNhnJfnmb9Yc.lSbfgwMpnXDshoGX"
@@ -61,7 +59,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: storm-disciplines
       interaction: manifest
       maneuver: passive
@@ -91,7 +88,6 @@ effects:
         competence:
           attribute: int
           value: 1
-    transfer: true
     type: ability
   - _id: zpCj2oXHhVXjbWAE
     _key: "!items.effects!5hV9tNhnJfnmb9Yc.zpCj2oXHhVXjbWAE"
@@ -118,7 +114,6 @@ effects:
       endCondition: <p>You are no longer casting the triggering @Wiki[Category:Spells]{spell}.</p>
       executionTime:
         base: r0
-      form: normal
       identifier: illusive-casting
       interaction: manifest
       maneuver: reactive
@@ -136,7 +131,6 @@ effects:
       targets:
         - spell
       trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    transfer: true
     type: ability
   - _id: 34GqfOTtE2UDpX0U
     _key: "!items.effects!5hV9tNhnJfnmb9Yc.34GqfOTtE2UDpX0U"
@@ -154,13 +148,10 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - displacement
       executionTime:
         base: r0
-      form: normal
       identifier: bouncy-casting
       interaction: manifest
       maneuver: reactive
@@ -185,7 +176,6 @@ effects:
       trigger: >-
         <p>The @Identifier[core:targets]{target} of a @Wiki[Category:Spells]{spell} does not get affected by your
         @Wiki[Category:Spells]{spell}.</p>
-    transfer: true
     type: ability
   - _id: iccoLvxMhEAjNkSA
     _key: "!items.effects!5hV9tNhnJfnmb9Yc.iccoLvxMhEAjNkSA"
@@ -196,30 +186,18 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
         spells]{ritual} @Wiki[Category:Storm element spells]{storm spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-storm-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
   - _id: JgAk2JKMKpC2at4X
     _key: "!items.effects!5hV9tNhnJfnmb9Yc.JgAk2JKMKpC2at4X"
@@ -230,23 +208,14 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: longRest
           type: changeQuantity
       competence:
         raw: 1
-      consumable: true
-      consumptionAmount: 1
       description: >-
         <p>Once per long rest, you may cast a @Wiki[Category:Storm element spells]{storm spell} as though you were
         @Identifier[keyword:adept]{adept} at it.</p>
       identifier: adept-storm-spell-cast
-      quantity:
-        maxFormula: "1"
-        value: 1
-    transfer: true
     type: resource
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-storm-mage.webp
@@ -255,8 +224,6 @@ system:
   _sup: fdd81e815b614df0
   archetype: mage
   class: storm-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true wonder seeker, these mages are the philosophers of the world, always seeking out more knowledge and more
     wisdom. The @Identifier[class:storm-mage]{Storm Mage} is a logician, a tactical intellectual who prefers to
@@ -264,14 +231,11 @@ system:
     tumultuous and crafty. If you are playing a @Identifier[class:storm-mage]{Storm Mage}, be curious, hungry for
     information, always in the clouds, tricky and clever, eluding rather than confronting.</p>
   identifier: rank-4-storm-mage
-  innate: false
   maxAv: 0
   number: 4
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

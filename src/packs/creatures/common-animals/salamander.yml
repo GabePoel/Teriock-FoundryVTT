@@ -36,7 +36,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: 87GLG3ekWIi3Q5lv
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.87GLG3ekWIi3Q5lv"
@@ -47,38 +46,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -106,7 +85,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: 7rIfnTppSxUdqcNV
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.7rIfnTppSxUdqcNV"
@@ -119,9 +97,6 @@ items:
             - _id: Suc9ayhHqRkmjAwZ
               activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              noStatDice: false
-              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -152,7 +127,6 @@ items:
           requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
           targets:
             - self
-        transfer: true
         type: ability
       - _id: M96JivVdA127HI1Y
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.M96JivVdA127HI1Y"
@@ -180,7 +154,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ju3jknHUZZeZ7z52
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.ju3jknHUZZeZ7z52"
@@ -196,7 +169,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -209,8 +181,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: g5uOk4tdHcR80ym5
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.g5uOk4tdHcR80ym5"
@@ -226,7 +196,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -239,8 +208,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: kvkzi2qwqInKDqSt
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.kvkzi2qwqInKDqSt"
@@ -256,7 +223,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -269,8 +235,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: ef8kzCn8m1TGerf5
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.ef8kzCn8m1TGerf5"
@@ -283,50 +247,31 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
-              display: {}
               formula: 1d8[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d10[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "24"
             unit: hour
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: poison-strike
-          interaction: attack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-          maneuver: active
           overview:
             fluent: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -334,20 +279,13 @@ items:
             proficient: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
               @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - alchemical
-          range:
-            unit: contact
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 5nZ5JogvnMnbfRWY
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.5nZ5JogvnMnbfRWY"
@@ -377,7 +315,6 @@ items:
             score:
               attribute: str
               value: -2
-        transfer: true
         type: ability
       - _id: B1wsK6hnBMTCh9Ff
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.B1wsK6hnBMTCh9Ff"
@@ -393,7 +330,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: water-native
           interaction: manifest
           maneuver: passive
@@ -407,7 +343,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: BDh1oVF14WynRG2d
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.BDh1oVF14WynRG2d"
@@ -424,7 +359,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: diving
           interaction: manifest
           maneuver: passive
@@ -445,7 +379,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: tevSn6TIeYbqbM6E
         _key: "!actors.items.effects!97e569396ff8e891.97e569396ff8e891.tevSn6TIeYbqbM6E"
@@ -475,7 +408,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: swimming
           interaction: manifest
           maneuver: passive
@@ -489,25 +421,18 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/salamander.webp
     name: Salamander
     system:
-      br: 1
-      competence:
-        raw: 1
       identifier: salamander
       size:
-        enabled: true
         value: 0.25
       statDice:
         hp:
-          disabled: false
           formula: 1d4
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -529,15 +454,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!97e569396ff8e891.idD97udmCb6GH2RQ.fq8owR84sFsgLiuj"
@@ -548,9 +469,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -558,7 +476,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!97e569396ff8e891.idD97udmCb6GH2RQ.4WFL62wofj7AHBxN"
@@ -569,24 +486,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 97e569396ff8e891
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -594,17 +504,9 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Salamander
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -615,9 +517,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/salamander.webp
   texture:
     src: systems/teriock/src/icons/creatures/salamander.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -625,10 +524,6 @@ system:
   identifier: salamander
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

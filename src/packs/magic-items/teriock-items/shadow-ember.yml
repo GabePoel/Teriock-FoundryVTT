@@ -13,51 +13,28 @@ effects:
           activeQualifier: "@flags.disarmKnockback"
           distance: "10"
           movementAction: walk
-          origin: executor
-          originBarrier: true
           type: move
         - _id: ow9J5qYNcoLGDsL3
           activeQualifier: "@flags.disarmKnockback"
           distance: "20"
           movementAction: walk
-          origin: executor
-          originBarrier: true
           type: move
         - _id: zGqyHWcKnNUWmna8
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:catch-item
-          multi: false
           type: useDocuments
-      competence:
-        raw: 0
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: disarm
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>Anything held by the @Identifier[core:targets]{targeted} arm is knocked out of its grasp. This triggers
           @Identifier[ability:catch-item]{Catch Item}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
       targets:
         - arm
-    transfer: true
     type: ability
   - _id: DI3hrm9tJWEGUHcj
     _key: "!items.effects!13c047601064b99e.DI3hrm9tJWEGUHcj"
@@ -68,39 +45,24 @@ effects:
     system:
       automations:
         - _id: sGyei1adB2IsKjZP
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
         - _id: 52f4d0b87363b1c1
-          executor: false
-          multi: false
           relation: apply
           status: dueling
-          target: false
           type: status
         - _id: 747b3e9c9b617af6
           executor: true
-          multi: false
           relation: apply
           status: lighted
-          target: false
           type: status
-      competence:
-        raw: 0
       delivery: sight
       duration:
         unit: unlimited
       effectTypes:
         - duelModifying
-      executionTime:
-        base: a1
-      form: normal
       identifier: duel
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You challenge the @Identifier[core:targets]{target} to advance and fight you. They may immediately
@@ -123,17 +85,12 @@ effects:
       requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: bFl9WiVPizkOyDa6
     _key: "!items.effects!13c047601064b99e.bFl9WiVPizkOyDa6"
     img: icons/magic/control/voodoo-doll-pain-damage-tan.webp
     name: Incapable of Life Spells
     system:
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
@@ -150,26 +107,20 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Ezkt7dnAzlxAckTG
     _key: "!items.effects!13c047601064b99e.Ezkt7dnAzlxAckTG"
     img: systems/teriock/src/icons/classes/corsair.webp
     name: Only Usable by Corsairs
     system:
-      competence:
-        raw: 0
       description: <p>Only usable by @Identifier[class:corsair]{Corsairs}.</p>
       form: flaw
-    transfer: true
     type: property
   - _id: 1ENXjeayGVq9JiJ0
     _key: "!items.effects!13c047601064b99e.1ENXjeayGVq9JiJ0"
     img: icons/magic/fire/explosion-fireball-small-red.webp
     name: Shadow Ember Implosion
     system:
-      competence:
-        raw: 0
       description: >-
         <p>If this becomes @Identifier[property:shattered]{shattered}, it is @Identifier[property:destroyed]{destroyed},
         casts @Identifier[ability:inferno-aura] on everyone within 10 feet (including the user), and also casts
@@ -177,7 +128,6 @@ effects:
         up to the user's @Identifier[core:proficiency-bonus]{proficiency bonus}. Neither of these cost any
         @Identifier[core:hit-points-and-mana-points]{MP}.</p>
       form: flaw
-    transfer: true
     type: property
   - _id: ZpS051RhVoapWJDU
     _key: "!items.effects!13c047601064b99e.ZpS051RhVoapWJDU"
@@ -190,36 +140,27 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       costs:
         primary:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       limitation: <p>With @Identifier[equipment:dagger]{daggers} only.</p>
@@ -233,16 +174,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: A7JvIXUEmGC4U67D
     _key: "!items.effects!13c047601064b99e.A7JvIXUEmGC4U67D"
@@ -253,14 +189,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    transfer: true
     type: property
   - _id: O0mxfYVztMnFVFOX
     _key: "!items.effects!13c047601064b99e.O0mxfYVztMnFVFOX"
@@ -274,14 +207,11 @@ effects:
           macro: Compendium.teriock.execution.Macro.090fd08ae26477da
           trigger: preExecute
           type: abilityMacro
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: weapons-mastery
       interaction: manifest
       limitation: <p>With @Identifier[equipment:saber]{sabers} only.</p>
@@ -307,18 +237,13 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/shadow-ember.webp
 name: Shadow Ember
 system:
-  attackPenalty: "-3"
   bv:
     raw: 2
-  competence:
-    raw: 0
-  consumable: false
   damage:
     base: 1d8
   equipmentClasses:
@@ -336,8 +261,6 @@ system:
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   tier:
     raw: "2"
   weight: 3

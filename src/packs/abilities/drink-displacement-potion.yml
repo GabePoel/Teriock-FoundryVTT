@@ -5,26 +5,14 @@ name: Drink Displacement Potion
 system:
   automations:
     - _id: fe169f8630a44b66
-      all: false
-      attachDocuments: true
-      automatic: true
       identifiers:
         - ability:quivering-vitals
-      multi: false
-      separate: false
       type: addDocuments
     - _id: CipwMKFdaLYfvSYB
-      automatic: true
-      competence:
-        raw: 0
-      expandTables: false
       identifiers:
         - ability:displace
-      multi: false
       setCompetence: override
       type: useDocuments
-  competence:
-    raw: 0
   consumeSource: true
   delivery: item
   duration:
@@ -32,12 +20,8 @@ system:
     unit: minute
   effectTypes:
     - displacement
-  executionTime:
-    base: a1
-  form: normal
   identifier: drink-displacement-potion
   interaction: manifest
-  maneuver: active
   overview:
     base: >-
       <p>You immediately use @Identifier[ability:displace]{Displace} as a free action. It is not
@@ -45,12 +29,9 @@ system:
       @Identifier[ability:quivering-vitals]{Quivering Vitals}.</p>
   powerSources:
     - alchemical
-  range:
-    unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts as
     the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - self
-transfer: true
 type: ability

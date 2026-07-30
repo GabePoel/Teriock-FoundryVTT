@@ -5,23 +5,10 @@ name: Silence Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
@@ -34,25 +21,13 @@ system:
   endCondition: >-
     <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
   featSaveAttribute: unp
-  form: normal
   identifier: silence-aura
   interaction: feat
-  maneuver: active
   powerSources:
     - divine
     - spiritual
@@ -63,7 +38,4 @@ system:
     fail: <p>@Identifier[core:targets]{Target} is @Identifier[condition:silenced]{silenced}.</p>
   skill: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

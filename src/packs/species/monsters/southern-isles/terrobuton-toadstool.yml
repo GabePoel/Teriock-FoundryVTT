@@ -29,7 +29,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: C8L4HJDteiFsttH3
     _key: "!items.effects!23dd19585361c834.C8L4HJDteiFsttH3"
@@ -52,7 +51,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      form: normal
       identifier: fire-damage-immunity
       interaction: manifest
       maneuver: passive
@@ -64,7 +62,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: tZhZZhAbkJ8VYMvL
     _key: "!items.effects!23dd19585361c834.tZhZZhAbkJ8VYMvL"
@@ -85,7 +82,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: lightning-immunity
       interaction: manifest
       maneuver: passive
@@ -97,7 +93,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: zKjuZFd9IaK8UYkx
     _key: "!items.effects!23dd19585361c834.zKjuZFd9IaK8UYkx"
@@ -113,7 +108,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -126,8 +120,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: RwFNEtBRDjmTdB6X
     _key: "!items.effects!23dd19585361c834.RwFNEtBRDjmTdB6X"
@@ -157,7 +149,6 @@ effects:
         score:
           attribute: per
           value: -1
-    transfer: true
     type: ability
   - _id: pLXokx1FYMVq8IyX
     _key: "!items.effects!23dd19585361c834.pLXokx1FYMVq8IyX"
@@ -187,7 +178,6 @@ effects:
         score:
           attribute: mov
           value: -3
-    transfer: true
     type: ability
   - _id: cVBcPpKNrBKU8V82
     _key: "!items.effects!23dd19585361c834.cVBcPpKNrBKU8V82"
@@ -199,28 +189,18 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d4[magic terror]
-          impact: damage
           type: roll
       competence:
         raw: 1
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       elements:
         - necromancy
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic terror]]] @Identifier[core:damage]{damage}.</p>
       identifier: terror-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -231,9 +211,6 @@ effects:
         hit: <p>Deal [[/damage 1d4[terror magic]]] @Identifier[core:damage]{damage} to target.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: tFnsgmRf92Lu7WhJ
     _key: "!items.effects!23dd19585361c834.tFnsgmRf92Lu7WhJ"
@@ -263,7 +240,6 @@ effects:
         score:
           attribute: str
           value: -2
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/creatures/terrobuton-toadstool.webp
@@ -271,24 +247,19 @@ name: Terrobuton Toadstool
 system:
   appearance: <p>Large hybrid mushroom-@Identifier[creature:toad]{toads}. Terrobuton toadstools are red with black spots.</p>
   br: 4
-  competence:
-    raw: 1
   description: >-
     <p>Immature @Identifier[creature:deathcap-toadstool]{deathcap toadstools}. They are very dangerous but have many
     uses when properly harvested by herbalists. Terrobuton toadstools cannot yet hop and are rooted to old logs and
     decaying matter.</p>
   identifier: terrobuton-toadstool
   size:
-    enabled: true
     value: 0.5
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 4
       number:
         raw: "1"

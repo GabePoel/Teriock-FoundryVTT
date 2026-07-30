@@ -36,7 +36,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: BjOBdAt6DO73YILE
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.BjOBdAt6DO73YILE"
@@ -47,38 +46,18 @@ items:
         system:
           automations:
             - _id: Hd5o6s1SdA8C7IfT
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
               preventThreshold: true
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
-              executor: false
-              multi: false
               relation: apply
               status: hidden
-              target: false
               type: status
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
-          executionTime:
-            base: a1
           featSaveAttribute: snk
-          form: normal
           identifier: hide
           interaction: feat
-          maneuver: active
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
@@ -106,7 +85,6 @@ items:
             score:
               attribute: snk
               value: 2
-        transfer: true
         type: ability
       - _id: KKH5Db6hVpYbf0EB
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.KKH5Db6hVpYbf0EB"
@@ -134,7 +112,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: night-vision
           interaction: manifest
           maneuver: passive
@@ -148,7 +125,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 0ygg0JX89a4sbez9
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.0ygg0JX89a4sbez9"
@@ -164,7 +140,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -177,8 +152,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 4BpLc3G1S2X7oolV
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.4BpLc3G1S2X7oolV"
@@ -194,7 +167,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -207,8 +179,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 9vXxj1pZjh9wgNmg
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.9vXxj1pZjh9wgNmg"
@@ -224,7 +194,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -237,8 +206,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: 1vgzEGcXFKq8WFfK
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.1vgzEGcXFKq8WFfK"
@@ -254,7 +221,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -267,8 +233,6 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
       - _id: pIIRkEQUY2K32txD
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.pIIRkEQUY2K32txD"
@@ -282,15 +246,10 @@ items:
               common:
                 - bag
                 - revive
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: iCn9pFDIGFJWxm6H
               activeQualifier: and(not(@status.burned), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              noStatDice: false
-              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -324,7 +283,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: vPrApxhqcRzasOCQ
         _key: "!actors.items.effects!ee962ef4616cfd97.ee962ef4616cfd97.vPrApxhqcRzasOCQ"
@@ -356,7 +314,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: stealth
           interaction: manifest
           maneuver: passive
@@ -386,7 +343,6 @@ items:
             score:
               attribute: snk
               value: 3
-        transfer: true
         type: ability
     folder: c8142ec7ec7ecbbd
     img: systems/teriock/src/icons/creatures/wood-troll.webp
@@ -394,20 +350,13 @@ items:
     system:
       appearance: <p>@Identifier[creature:dwarf]{Dwarf}-sized, ugly, and hunched with a lanky build and chameleon-like skin.</p>
       br: 5
-      competence:
-        raw: 1
       description: <p>Wood trolls are very wild and not much smarter than @Identifier[creature:cave-troll]{cave trolls}.</p>
       identifier: wood-troll
       size:
-        enabled: true
         value: 2
       statDice:
         hp:
-          disabled: false
           formula: 2d10
-        mp:
-          disabled: false
-          formula: 1d10
       traits:
         - monstrous
         - partialHumanoid
@@ -429,15 +378,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!ee962ef4616cfd97.Dg32iII1f2uazlfS.IDLUUjkSFtpaiKuJ"
@@ -448,32 +393,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: c8142ec7ec7ecbbd
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: ee962ef4616cfd97
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: F8RhnidKqlnVBMOv
     _key: "!actors.items!ee962ef4616cfd97.F8RhnidKqlnVBMOv"
@@ -484,17 +420,12 @@ items:
     name: Hide
     system:
       _sup: ee962ef4616cfd97
-      attackPenalty: "-3"
       av:
         raw: 1
-      competence:
-        raw: 0
       identifier: hide
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: ffR5W7lAi5ZHlQYa
     _key: "!actors.items!ee962ef4616cfd97.ffR5W7lAi5ZHlQYa"
@@ -510,15 +441,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!ee962ef4616cfd97.ffR5W7lAi5ZHlQYa.fq8owR84sFsgLiuj"
@@ -529,9 +456,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -539,7 +463,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!ee962ef4616cfd97.ffR5W7lAi5ZHlQYa.4WFL62wofj7AHBxN"
@@ -550,24 +473,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: c8142ec7ec7ecbbd
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: ee962ef4616cfd97
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -575,8 +491,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: sOzd8oe5BNcSVbdP
     _key: "!actors.items!ee962ef4616cfd97.sOzd8oe5BNcSVbdP"
@@ -592,9 +506,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -602,7 +513,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 96HRwZgaql07DEOS
         _key: "!actors.items.effects!ee962ef4616cfd97.sOzd8oe5BNcSVbdP.96HRwZgaql07DEOS"
@@ -613,9 +523,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -623,7 +530,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: GqAowcB22wZWeVeZ
         _key: "!actors.items.effects!ee962ef4616cfd97.sOzd8oe5BNcSVbdP.GqAowcB22wZWeVeZ"
@@ -634,26 +540,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: c8142ec7ec7ecbbd
     img: systems/teriock/src/icons/body-parts/prehensile-sharp-claw.webp
     name: Prehensile Sharp Claw
     system:
       _sup: ee962ef4616cfd97
-      attackPenalty: "-3"
       bv:
         raw: 1
-      competence:
-        raw: 0
       damage:
         base: 1d6
       fightingStyle: savage
@@ -661,20 +560,11 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Wood Troll
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Wood Troll
   ring:
     enabled: true
@@ -682,20 +572,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/wood-troll.webp
   texture:
     src: systems/teriock/src/icons/creatures/wood-troll.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 12
   identifier: wood-troll
   mp:
     value: 6
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

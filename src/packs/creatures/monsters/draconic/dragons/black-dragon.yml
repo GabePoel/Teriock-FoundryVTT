@@ -17,41 +17,18 @@ items:
         system:
           automations:
             - _id: 7400b41f20d9f100
-              all: false
               angle: "@angle.dragon"
               attachToToken: false
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
               expandWithToken: false
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
               radius: "@ability.range + 5 * @h"
-              radiusX: ""
-              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
-                priority: 0
                 type: move
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: 800c70e6560525a8
-              display: {}
               formula: (4 + 2 * @h)d10[magic terror]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -61,15 +38,10 @@ items:
                 formula: "1"
                 type: formula
           delivery: cone
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           elements:
             - necromancy
-          executionTime:
-            base: a1
-          featSaveAttribute: mov
           form: special
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
@@ -77,7 +49,6 @@ items:
             this increases by 5 feet.</p>
           identifier: black-dragon-breath
           interaction: feat
-          maneuver: active
           powerSources:
             - magical
           range:
@@ -90,9 +61,6 @@ items:
             save: >-
               <p>Target takes half as much @Identifier[core:damage]{damage} from this as they would otherwise. This is
               calculated after any @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: nFYKNuvAvqt0I2gN
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.nFYKNuvAvqt0I2gN"
@@ -153,7 +121,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Fafa6ju1RCNYVdI5
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.Fafa6ju1RCNYVdI5"
@@ -189,7 +156,6 @@ items:
             score:
               attribute: per
               value: 5
-        transfer: true
         type: ability
       - _id: VtE6XltpqvWUW07T
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.VtE6XltpqvWUW07T"
@@ -219,7 +185,6 @@ items:
             score:
               attribute: int
               value: 5
-        transfer: true
         type: ability
       - _id: d5apJobt8SLosIpy
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.d5apJobt8SLosIpy"
@@ -262,7 +227,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -277,7 +241,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: GOPk0yAaq8JOFwSl
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.GOPk0yAaq8JOFwSl"
@@ -290,9 +253,6 @@ items:
             - _id: Suc9ayhHqRkmjAwZ
               activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              noStatDice: false
-              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -323,7 +283,6 @@ items:
           requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
           targets:
             - self
-        transfer: true
         type: ability
       - _id: E5EgTwxmNSb0cpC5
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.E5EgTwxmNSb0cpC5"
@@ -336,8 +295,6 @@ items:
             - _id: T0uGlilXyRymTD1v
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -368,7 +325,6 @@ items:
           requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
           targets:
             - self
-        transfer: true
         type: ability
       - _id: UYV0MtuUgQ9hnXtV
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.UYV0MtuUgQ9hnXtV"
@@ -398,7 +354,6 @@ items:
             score:
               attribute: snk
               value: -3
-        transfer: true
         type: ability
       - _id: 5LHf0mo8RptYmKv1
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.5LHf0mo8RptYmKv1"
@@ -409,7 +364,6 @@ items:
         system:
           automations:
             - _id: dZdzGQfm90BHxkCn
-              changeType: add
               key: system.boosts.damage
               qualifier: and(@dmg, @range.melee)
               target: armament
@@ -450,7 +404,6 @@ items:
             score:
               attribute: str
               value: 5
-        transfer: true
         type: ability
       - _id: NqnCYlkW74RvZynE
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.NqnCYlkW74RvZynE"
@@ -461,10 +414,8 @@ items:
         system:
           automations:
             - _id: 3TTxShe4nCcpyMfS
-              changeType: add
               key: system.costs.tweaks.adept
               qualifier: "@class.necromancer"
-              target: ability
               type: childChange
               value: "1"
           competence:
@@ -488,7 +439,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 0YgvLk0ga5P4fLjk
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.0YgvLk0ga5P4fLjk"
@@ -516,7 +466,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: night-vision
           interaction: manifest
           maneuver: passive
@@ -530,7 +479,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: fZ2Bgp4yECbb7pXJ
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.fZ2Bgp4yECbb7pXJ"
@@ -543,34 +491,17 @@ items:
             - _id: mhGxVy8CcJTEyM2q
               common:
                 - shatter
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
-              competence:
-                raw: 0
-              data: "{}"
-              display: {}
-              makeEffect: null
-              preventAttack: false
-              preventBlockCone: false
-              preventFeat: false
-              preventThreshold: false
               rollBonus: "@av"
-              setCompetence: inherit
-              targetsActor: null
-              targetsArmament: null
               type: override
           competence:
             raw: 1
           delivery: armor
-          duration:
-            unit: instant
           effectTypes:
             - destruction
           executionTime:
             base: r1
-          form: normal
           identifier: shattering-armor
           interaction: block
           maneuver: reactive
@@ -580,8 +511,6 @@ items:
               to your @Identifier[core:armor-class]{AV} for the purpose of [[lookup name]].</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
             save: >-
@@ -589,7 +518,6 @@ items:
               @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
           targets:
             - item
-        transfer: true
         type: ability
       - _id: 5p9igKDDQDgj5gNp
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.5p9igKDDQDgj5gNp"
@@ -605,7 +533,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: speed
           interaction: manifest
           maneuver: passive
@@ -619,7 +546,6 @@ items:
             score:
               attribute: mov
               value: 3
-        transfer: true
         type: ability
       - _id: KUnWMTyG6kv1ocM3
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.KUnWMTyG6kv1ocM3"
@@ -630,10 +556,8 @@ items:
         system:
           automations:
             - _id: insnA3UruLUet7RD
-              changeType: add
               key: system.costs.tweaks.adept
               qualifier: "@identifier.battle-cry-aura"
-              target: ability
               type: childChange
               value: "1"
           competence:
@@ -643,7 +567,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: battle-roar
           interaction: manifest
           maneuver: passive
@@ -657,7 +580,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: C7TAcB0bFAW3C8lW
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.C7TAcB0bFAW3C8lW"
@@ -669,10 +591,8 @@ items:
           _sup: nFYKNuvAvqt0I2gN
           automations:
             - _id: 9sdpZGNc8gLdN1vm
-              changeType: add
               key: system.costs.tweaks.adept
               qualifier: "@es"
-              target: ability
               type: childChange
               value: "1"
           competence:
@@ -696,7 +616,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: jgYsmj5LXWdSwigg
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.jgYsmj5LXWdSwigg"
@@ -772,7 +691,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: mJW80nZNTHzBHIbj
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.mJW80nZNTHzBHIbj"
@@ -920,7 +838,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: a5BtDthJkBlus6yS
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.a5BtDthJkBlus6yS"
@@ -950,8 +867,6 @@ items:
                   @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
                 type: description
           delivery: sight
-          duration:
-            unit: instant
           elderSorcery: true
           executionTime:
             base: Long Rest
@@ -980,13 +895,10 @@ items:
               @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           ritual: true
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ICp5jqsEH5bupT5h
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.ICp5jqsEH5bupT5h"
@@ -1000,25 +912,18 @@ items:
             - _id: JT1XORoecAWXaZZi
               common:
                 - identify
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
           delivery: sight
-          duration:
-            unit: instant
           effectTypes:
             - sensory
             - truthDetecting
           elements:
             - storm
-          executionTime:
-            base: a1
           form: special
           identifier: instant-identify-sight
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>If the @Identifier[core:targets]{target} is an item, you know if it is
@@ -1035,7 +940,6 @@ items:
           targets:
             - creature
             - item
-        transfer: true
         type: ability
       - _id: F2MwXGykwK8z5DTd
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.F2MwXGykwK8z5DTd"
@@ -1085,7 +989,6 @@ items:
             score:
               attribute: per
               value: 4
-        transfer: true
         type: ability
       - _id: HIVKMVJvVIURlBit
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.HIVKMVJvVIURlBit"
@@ -1116,7 +1019,6 @@ items:
             - necromancy
           executionTime:
             base: passive
-          form: normal
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
@@ -1132,7 +1034,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: ud6gWpDzojGRqrZX
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.ud6gWpDzojGRqrZX"
@@ -1151,7 +1052,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: scouting
           interaction: manifest
           maneuver: passive
@@ -1174,7 +1074,6 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
       - _id: OBqLkc6RBpnV5gt1
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.OBqLkc6RBpnV5gt1"
@@ -1212,7 +1111,6 @@ items:
             score:
               attribute: str
               value: 4
-        transfer: true
         type: ability
       - _id: pRR1NEHJDvA6dAGE
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.pRR1NEHJDvA6dAGE"
@@ -1233,7 +1131,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: giant-strength
           interaction: manifest
           maneuver: passive
@@ -1254,7 +1151,6 @@ items:
             score:
               attribute: str
               value: 3
-        transfer: true
         type: ability
       - _id: cDtZ6WyW62MNm4Qw
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.cDtZ6WyW62MNm4Qw"
@@ -1271,7 +1167,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-strength
           interaction: manifest
           maneuver: passive
@@ -1291,7 +1186,6 @@ items:
             score:
               attribute: str
               value: 2
-        transfer: true
         type: ability
       - _id: FkII26gQrcvfmiT4
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.FkII26gQrcvfmiT4"
@@ -1308,7 +1202,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
@@ -1329,7 +1222,6 @@ items:
             score:
               attribute: str
               value: 1
-        transfer: true
         type: ability
       - _id: YVZd3DxKpBmaBWlf
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.YVZd3DxKpBmaBWlf"
@@ -1346,7 +1238,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
@@ -1360,7 +1251,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: TsCZxayVPIlmvmKo
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.TsCZxayVPIlmvmKo"
@@ -1372,14 +1262,10 @@ items:
           _sup: pRR1NEHJDvA6dAGE
           competence:
             raw: 1
-          delivery: weapon
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           executionTime:
             base: r0
-          form: normal
           identifier: melee-damage-boost
           interaction: manifest
           maneuver: reactive
@@ -1392,16 +1278,11 @@ items:
               @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
             delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-        transfer: true
         type: ability
       - _id: 2t9ixkQOvvyvdREb
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.2t9ixkQOvvyvdREb"
@@ -1415,8 +1296,6 @@ items:
             - _id: MZ0HXunkUDN7yJiQ
               common:
                 - shatter
-              showConfirmationDialog: true
-              trigger: null
               type: common
           competence:
             raw: 1
@@ -1426,26 +1305,19 @@ items:
                 formula: "1"
                 type: formula
           delivery: hand
-          duration:
-            unit: instant
           effectTypes:
             - destruction
           executionTime:
             base: a2
-          form: normal
           identifier: shattering-grip
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>@Identifier[core:targets]{Target} is @Identifier[property:shattered]{shattered}.</p>
           powerSources:
             - martial
-          range:
-            unit: contact
           requirements: <p>You are holding the target.</p>
           targets:
             - item
-        transfer: true
         type: ability
       - _id: zBb3P1IKfD0ICwdS
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.zBb3P1IKfD0ICwdS"
@@ -1462,7 +1334,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: battle-cry
           improvement: <p>You are @Identifier[keyword:adept]{adept} at @Identifier[ability:battle-cry-aura]{Battle Cry Aura}.</p>
           interaction: manifest
@@ -1479,7 +1350,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: KYH84dkPQNcsdhaV
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.KYH84dkPQNcsdhaV"
@@ -1492,10 +1362,6 @@ items:
           affinities:
             - _id: oJH3v7kvIbVGDlBS
               category: statuses
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: frightened
           competence:
@@ -1509,10 +1375,8 @@ items:
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime:
             base: a0
-          form: normal
           identifier: battle-cry-resistance
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
           powerSources:
@@ -1523,7 +1387,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: FpDVNB7XsmaZMSFQ
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.FpDVNB7XsmaZMSFQ"
@@ -1535,42 +1398,14 @@ items:
           _sup: zBb3P1IKfD0ICwdS
           automations:
             - _id: 7400b41f20d9f100
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
-                priority: 0
                 type: sound
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: b4960732f0b9ed9f
-              executor: false
-              multi: false
-              relation: include
               status: frightened
-              target: false
               type: status
           competence:
             raw: 1
@@ -1591,25 +1426,13 @@ items:
           endCondition: >-
             <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
-              timing: start
               type: combat
           featSaveAttribute: int
-          form: normal
           identifier: battle-cry-aura
           interaction: feat
-          maneuver: active
           powerSources:
             - martial
           range:
@@ -1620,9 +1443,6 @@ items:
             fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
           skill: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: LzDV9X5SWi9hk7cX
         _key: "!actors.items.effects!5e9017ca021bc2d7.5e9017ca021bc2d7.LzDV9X5SWi9hk7cX"
@@ -1634,42 +1454,15 @@ items:
           _sup: KUnWMTyG6kv1ocM3
           automations:
             - _id: 7400b41f20d9f100
-              all: false
-              angle: "60"
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              display: {}
-              excludeToken: true
-              expandWithToken: true
-              height: ""
-              identifiers: []
-              innerWidth: "0"
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              outerWidth: "0"
-              radius: ""
-              radiusX: ""
-              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
-                priority: 0
                 type: sound
-              targeting: true
               trigger: executeInput
               type: region
-              uuids: []
-              visibility: 2
-              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
-              multi: false
-              relation: include
               status: frightened
-              target: false
               type: status
           competence:
             raw: 1
@@ -1690,25 +1483,13 @@ items:
           endCondition: >-
             <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: 66672059c7a29a30
-              event: turn
               method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: "4"
-              skip: 0
-              timing: start
               type: combat
           featSaveAttribute: int
-          form: normal
           identifier: battle-roar-aura
           interaction: feat
-          maneuver: active
           powerSources:
             - martial
           range:
@@ -1717,9 +1498,6 @@ items:
           requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/creatures/black-dragon.webp
@@ -1727,8 +1505,6 @@ items:
     system:
       appearance: <p>Massive reptilians with wings.</p>
       br: 60
-      competence:
-        raw: 1
       description: >-
         <p>@UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{Dragons} are extremely intelligent and natively
         speak the @Identifier[core:elder-sorcery]{language of creation}. They may have other abilities not listed.</p>
@@ -1737,16 +1513,13 @@ items:
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 5 @Identifier[class:necromancer]{Necromancer}.</p>
       mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
       size:
-        enabled: true
         max: 30
         min: 10
         value: 10
       statDice:
         hp:
-          disabled: false
           formula: (@species.size)d10
         mp:
-          disabled: false
           formula: (@species.size - 6)d12
       traits:
         - draconic
@@ -1769,9 +1542,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -1779,7 +1549,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: o67ZRFEWF4mU4Mxj
         _key: "!actors.items.effects!5e9017ca021bc2d7.BxoklG205zQLyghP.o67ZRFEWF4mU4Mxj"
@@ -1790,7 +1559,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -1801,12 +1569,9 @@ items:
                   type: upgrade
                   value: "2"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:unblockable]{UB}.</p>
           form: intrinsic
           identifier: unblockable
-        transfer: true
         type: property
       - _id: 7njhfLJ9LONqUJnU
         _key: "!actors.items.effects!5e9017ca021bc2d7.BxoklG205zQLyghP.7njhfLJ9LONqUJnU"
@@ -1817,26 +1582,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/devouring-maw.webp
     name: Devouring Maw
     system:
       _sup: 5e9017ca021bc2d7
-      attackPenalty: "-3"
       bv:
         raw: 2
-      competence:
-        raw: 0
       damage:
         base: 1d12
       fightingStyle: savage
@@ -1844,8 +1602,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: DHNLIQ8UTg2C8wze
     _key: "!actors.items!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze"
@@ -1866,7 +1622,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: necromancy-elder-sorcery
           interaction: manifest
           maneuver: passive
@@ -1882,7 +1637,6 @@ items:
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: GF9CzLYvEuHeIKIm
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.GF9CzLYvEuHeIKIm"
@@ -1932,7 +1686,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: necromancy-rotators
           interaction: manifest
           maneuver: passive
@@ -1963,7 +1716,6 @@ items:
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: uyKnainyUuNP3pWy
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.uyKnainyUuNP3pWy"
@@ -2021,7 +1773,6 @@ items:
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: fxKzvMKN5ZEbwcBS
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.fxKzvMKN5ZEbwcBS"
@@ -2051,8 +1802,6 @@ items:
                   @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
                 type: description
           delivery: sight
-          duration:
-            unit: instant
           elderSorcery: true
           executionTime:
             base: Long Rest
@@ -2081,13 +1830,10 @@ items:
               @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           ritual: true
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: GrRzm4RWSMc64HqF
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.GrRzm4RWSMc64HqF"
@@ -2171,7 +1917,6 @@ items:
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 6tAKo9OpEP5DbSoj
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.6tAKo9OpEP5DbSoj"
@@ -2183,11 +1928,7 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 067cb526e2f9e98f
-              executor: false
-              multi: false
-              relation: include
               status: ethereal
-              target: false
               type: status
           competence:
             raw: 1
@@ -2207,7 +1948,6 @@ items:
           form: special
           identifier: ethereal-shift
           interaction: manifest
-          maneuver: active
           overview:
             base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
           powerSources:
@@ -2219,7 +1959,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: nSUGAJ4YorzEEQH5
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.nSUGAJ4YorzEEQH5"
@@ -2231,33 +1970,13 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 3aed26608863c262
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:animate-dead
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: 66d7ecce476652ad
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:zombify
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -2272,13 +1991,10 @@ items:
             unit: hour
           elements:
             - necromancy
-          executionTime:
-            base: a1
           form: special
           identifier: undead-reanimation
           interaction: manifest
           invoked: true
-          maneuver: active
           overview:
             base: <p>You gain @Identifier[ability:zombify]{Zombify} and @Identifier[ability:animate-dead]{Animate Dead}.</p>
           powerSources:
@@ -2290,7 +2006,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: g7SpayF8igKmmj2R
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.g7SpayF8igKmmj2R"
@@ -2330,33 +2045,22 @@ items:
             unit: minute
           elements:
             - necromancy
-          executionTime:
-            base: a1
           form: special
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
             @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
           identifier: spirit-bury
-          interaction: attack
           invoked: true
-          maneuver: active
           overview:
             proficient: <p>This effect lasts 10 minutes instead of 1.</p>
-          piercing:
-            raw: 0
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
           results:
             hit: <p>@Identifier[core:targets]{Target} cannot become @Identifier[condition:wisping]{wisping}.</p>
           rotator: true
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: rnsDmeBUWZ3FWDeD
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.rnsDmeBUWZ3FWDeD"
@@ -2368,18 +2072,10 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: PKZXkwmO94niPsUb
-              all: false
-              automatic: true
-              data: "{}"
-              expandTables: false
-              identifiers: []
               local:
-                identifiers: []
                 qualifier: and(@ability, @time.a1)
-              multi: false
               trigger: execute
               type: useDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -2389,8 +2085,6 @@ items:
               verbal:
                 type: tag
           delivery: self
-          duration:
-            unit: instant
           elements:
             - necromancy
           executionTime:
@@ -2412,7 +2106,6 @@ items:
           targets:
             - self
           trigger: <p>You @Identifier[condition:dead]{die}.</p>
-        transfer: true
         type: ability
       - _id: m4SaYcFsRx3geEY7
         _key: "!actors.items.effects!5e9017ca021bc2d7.DHNLIQ8UTg2C8wze.m4SaYcFsRx3geEY7"
@@ -2424,56 +2117,19 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 34c83d4c84860906
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:fear-aura
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: 3b2978862c7f9d50
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:fear-touch
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: JB09RCj8EnrKPqjG
               light:
-                alpha: 0.5
-                angle: 360
                 animation:
-                  intensity: 5
-                  reverse: false
-                  speed: 5
                   type: sunburst
-                attenuation: 0.5
-                bright: 0
                 color: "#9141ac"
-                coloration: 1
-                contrast: 0
-                darkness:
-                  max: 1
-                  min: 0
                 dim: 0.01
-                luminosity: 0.5
-                negative: false
-                priority: 0
-                saturation: 0
-                shadows: 0
               type: light
           competence:
             raw: 1
@@ -2488,12 +2144,9 @@ items:
             unit: hour
           elements:
             - necromancy
-          executionTime:
-            base: a1
           form: special
           identifier: crown-of-fear
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>A small circle of glowing purple mist circles above your head. You gain
@@ -2508,7 +2161,6 @@ items:
           sustained: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
@@ -2517,8 +2169,6 @@ items:
       _sup: 5e9017ca021bc2d7
       archetype: mage
       class: necromancer
-      competence:
-        raw: 1
       description: >-
         <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery
         digging up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply
@@ -2529,13 +2179,10 @@ items:
       identifier: rank-2-necromancer
       maxAv: 0
       number: 2
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d12
     type: rank
   - _id: J5c3OuSlNzMe94ca
@@ -2570,7 +2217,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: necromancy-rotator-fluency
           interaction: manifest
           maneuver: passive
@@ -2591,7 +2237,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: NV2xRIOWuOeqby2I
         _key: "!actors.items.effects!5e9017ca021bc2d7.J5c3OuSlNzMe94ca.NV2xRIOWuOeqby2I"
@@ -2606,20 +2251,12 @@ items:
         system:
           automations:
             - _id: qApOHCicX4ZC0TSa
-              all: false
-              automatic: true
-              data: "{}"
-              expandTables: false
-              identifiers: []
               local:
                 identifiers:
                   - ability:death-ray
                   - ability:terror-ball
-                qualifier: ""
-              multi: false
               trigger: execute
               type: useDocuments
-              uuids: []
           competence:
             raw: 1
           delivery: self
@@ -2627,7 +2264,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: necromancy-spell-strikes
           interaction: manifest
           maneuver: passive
@@ -2641,7 +2277,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: eujj2ykeLT4rDo7c
         _key: "!actors.items.effects!5e9017ca021bc2d7.J5c3OuSlNzMe94ca.eujj2ykeLT4rDo7c"
@@ -2653,18 +2288,10 @@ items:
           _sup: NV2xRIOWuOeqby2I
           automations:
             - _id: bJn9LIvdgJ11S1tr
-              all: false
-              automatic: true
-              data: "{}"
-              expandTables: false
-              identifiers: []
               local:
-                identifiers: []
                 qualifier: and(@spell, @delivery.missile, @pro)
-              multi: false
               trigger: execute
               type: useDocuments
-              uuids: []
           competence:
             raw: 1
           costs:
@@ -2672,12 +2299,8 @@ items:
               mp:
                 formula: "1"
                 type: formula
-          delivery: weapon
-          duration:
-            unit: instant
           executionTime:
             base: r0
-          form: normal
           identifier: spell-strike
           interaction: manifest
           limitation: >-
@@ -2692,17 +2315,12 @@ items:
               instead.</p>
           powerSources:
             - magical
-          range:
-            unit: contact
           skill: true
           standard: true
-          targets:
-            - creature
           trigger: >-
             <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or
             @Wiki[Category:Bite delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another
             creature and the effect has successfully applied.</p>
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-5-necromancer.webp
@@ -2711,8 +2329,6 @@ items:
       _sup: 5e9017ca021bc2d7
       archetype: mage
       class: necromancer
-      competence:
-        raw: 1
       description: >-
         <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery
         digging up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply
@@ -2723,13 +2339,10 @@ items:
       identifier: rank-5-necromancer
       maxAv: 0
       number: 5
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d12
     type: rank
   - _id: Q460cC70lmfGwkCH
@@ -2755,7 +2368,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: additional-necromancy-rotators
           interaction: manifest
           maneuver: passive
@@ -2770,7 +2382,6 @@ items:
           skill: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 1r9NkHHxpXmJ6sLN
         _key: "!actors.items.effects!5e9017ca021bc2d7.Q460cC70lmfGwkCH.1r9NkHHxpXmJ6sLN"
@@ -2811,8 +2422,6 @@ items:
           competence:
             raw: 1
           delivery: self
-          duration:
-            unit: instant
           elderSorcery: true
           elements:
             - necromancy
@@ -2854,7 +2463,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: fY3P20oXXwjOUgaM
         _key: "!actors.items.effects!5e9017ca021bc2d7.Q460cC70lmfGwkCH.fY3P20oXXwjOUgaM"
@@ -2866,16 +2474,6 @@ items:
           _sup: Tn5EQuAwOZUq3KZv
           automations:
             - _id: R3YSJHv94rQAJx84
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
-              identifiers: []
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
               uuids:
                 - Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
@@ -2927,9 +2525,6 @@ items:
           rotator: true
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: sKMPZ4HNZbWHksdC
         _key: "!actors.items.effects!5e9017ca021bc2d7.Q460cC70lmfGwkCH.sKMPZ4HNZbWHksdC"
@@ -2941,15 +2536,7 @@ items:
           _sup: Tn5EQuAwOZUq3KZv
           automations:
             - _id: iNtBahVjA3ZpbPXV
-              all: false
               attachDocuments: false
-              automatic: true
-              display: {}
-              identifiers: []
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
               separate: true
               type: addDocuments
               uuids:
@@ -2970,8 +2557,6 @@ items:
                 formula: "3"
                 type: formula
           delivery: sight
-          duration:
-            unit: instant
           effectTypes:
             - contract
             - longRange
@@ -3019,7 +2604,6 @@ items:
           sustained: true
           targets:
             - other
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-3-necromancer.webp
@@ -3028,8 +2612,6 @@ items:
       _sup: 5e9017ca021bc2d7
       archetype: mage
       class: necromancer
-      competence:
-        raw: 1
       description: >-
         <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery
         digging up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply
@@ -3040,13 +2622,10 @@ items:
       identifier: rank-3-necromancer
       maxAv: 0
       number: 3
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d12
     type: rank
   - _id: SfgwJEqA6yYfpMYN
@@ -3065,35 +2644,22 @@ items:
             - _id: 1728b3a84ea27844
               common:
                 - bag
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: 71e51b18552837f1
-              display: {}
               formula: (2 + @h)d6
               impact: kill
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - killing
           elements:
             - necromancy
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill
             1d6]].</p>
           identifier: death-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -3110,9 +2676,6 @@ items:
               @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 15t1ifTnUgXbHDY7
         _key: "!actors.items.effects!5e9017ca021bc2d7.SfgwJEqA6yYfpMYN.15t1ifTnUgXbHDY7"
@@ -3152,7 +2715,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may target an additional
             creature.</p>
@@ -3181,9 +2743,6 @@ items:
           spell: true
           standard: true
           sustained: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: 6ouKT638ARM4Cphm
         _key: "!actors.items.effects!5e9017ca021bc2d7.SfgwJEqA6yYfpMYN.6ouKT638ARM4Cphm"
@@ -3209,8 +2768,6 @@ items:
                   @Identifier[core:size]{size} of the body.</p>
                 type: description
           delivery: sight
-          duration:
-            unit: instant
           effectTypes:
             - summoning
           elements:
@@ -3220,7 +2777,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          form: normal
           identifier: summon-the-dead
           interaction: manifest
           maneuver: slow
@@ -3245,9 +2801,6 @@ items:
           ritual: true
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: epbHgxy8x6bO3jkQ
         _key: "!actors.items.effects!5e9017ca021bc2d7.SfgwJEqA6yYfpMYN.epbHgxy8x6bO3jkQ"
@@ -3258,31 +2811,19 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d4[magic terror]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
           elements:
             - necromancy
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic terror]]] @Identifier[core:damage]{damage}.</p>
           identifier: terror-ball
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
           powerSources:
             - magical
           range:
@@ -3293,9 +2834,6 @@ items:
             hit: <p>Deal [[/damage 1d4[terror magic]]] @Identifier[core:damage]{damage} to target.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
@@ -3304,8 +2842,6 @@ items:
       _sup: 5e9017ca021bc2d7
       archetype: mage
       class: necromancer
-      competence:
-        raw: 1
       description: >-
         <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery
         digging up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply
@@ -3316,13 +2852,10 @@ items:
       identifier: rank-1-necromancer
       maxAv: 0
       number: 1
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d12
     type: rank
   - _id: flmWF8y4UgFX8xVb
@@ -3339,9 +2872,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -3349,7 +2879,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: pWgEIdeNqNhTGUXO
         _key: "!actors.items.effects!5e9017ca021bc2d7.flmWF8y4UgFX8xVb.pWgEIdeNqNhTGUXO"
@@ -3360,9 +2889,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -3370,7 +2896,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: Xt6CyDWsLCr4f8dq
         _key: "!actors.items.effects!5e9017ca021bc2d7.flmWF8y4UgFX8xVb.Xt6CyDWsLCr4f8dq"
@@ -3381,7 +2906,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -3392,12 +2916,9 @@ items:
                   type: upgrade
                   value: "2"
               type: changes
-          competence:
-            raw: 0
           description: <p>An item with this property is always @Identifier[keyword:unblockable]{UB}.</p>
           form: intrinsic
           identifier: unblockable
-        transfer: true
         type: property
       - _id: 2p0eqmMUjzbEYJ2E
         _key: "!actors.items.effects!5e9017ca021bc2d7.flmWF8y4UgFX8xVb.2p0eqmMUjzbEYJ2E"
@@ -3408,26 +2929,19 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/prehensile-savage-claw.webp
     name: Prehensile Savage Claw
     system:
       _sup: 5e9017ca021bc2d7
-      attackPenalty: "-3"
       bv:
         raw: 2
-      competence:
-        raw: 0
       damage:
         base: 1d12
       fightingStyle: savage
@@ -3435,8 +2949,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: i73bvUTGp7K8CDLh
     _key: "!actors.items!5e9017ca021bc2d7.i73bvUTGp7K8CDLh"
@@ -3461,7 +2973,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: amplify-necromancy-spells
           interaction: manifest
           maneuver: passive
@@ -3481,7 +2992,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: c03uQvPFAXLocKls
         _key: "!actors.items.effects!5e9017ca021bc2d7.i73bvUTGp7K8CDLh.c03uQvPFAXLocKls"
@@ -3501,7 +3011,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: necromancy-disciplines
           interaction: manifest
           maneuver: passive
@@ -3531,7 +3040,6 @@ items:
             competence:
               attribute: int
               value: 1
-        transfer: true
         type: ability
       - _id: PAd6NlUZvihIP2sT
         _key: "!actors.items.effects!5e9017ca021bc2d7.i73bvUTGp7K8CDLh.PAd6NlUZvihIP2sT"
@@ -3549,11 +3057,8 @@ items:
                 formula: "1"
                 type: formula
           delivery: self
-          duration:
-            unit: instant
           executionTime:
             base: r0
-          form: normal
           identifier: intrusive-casting
           interaction: manifest
           maneuver: reactive
@@ -3570,7 +3075,6 @@ items:
           trigger: >-
             <p>You are casting a @Wiki[Category:Spells]{spell} with a @Identifier[core:range]{range} other than
             @Wiki[Category:Self target spells]{self}.</p>
-        transfer: true
         type: ability
       - _id: hn2WxabhyGPZCEwa
         _key: "!actors.items.effects!5e9017ca021bc2d7.i73bvUTGp7K8CDLh.hn2WxabhyGPZCEwa"
@@ -3588,11 +3092,8 @@ items:
                 formula: "1"
                 type: formula
           delivery: self
-          duration:
-            unit: instant
           executionTime:
             base: r0
-          form: normal
           identifier: oppressive-casting
           interaction: manifest
           maneuver: reactive
@@ -3613,7 +3114,6 @@ items:
           trigger: >-
             <p>You cast an @Wiki[Category:Attack spells]{attack} or @Wiki[Category:Feat spells]{feat interaction
             spell}.</p>
-        transfer: true
         type: ability
       - _id: aFh72dR0C3AK6UPi
         _key: "!actors.items.effects!5e9017ca021bc2d7.i73bvUTGp7K8CDLh.aFh72dR0C3AK6UPi"
@@ -3624,23 +3124,14 @@ items:
           automations:
             - _id: XQJLVWyVRpuO5on4
               formula: "1"
-              showConfirmationDialog: true
-              showDialog: true
-              targetParent: true
               trigger: longRest
               type: changeQuantity
           competence:
             raw: 1
-          consumable: true
-          consumptionAmount: 1
           description: >-
             <p>Once per long rest, you may cast a @Wiki[Category:Necromancy element spells]{necromancy spell} as though
             you were @Identifier[keyword:adept]{adept} at it.</p>
           identifier: adept-necromancy-spell-cast
-          quantity:
-            maxFormula: "1"
-            value: 1
-        transfer: true
         type: resource
       - _id: OvP3auPoMdZTETz7
         _key: "!actors.items.effects!5e9017ca021bc2d7.i73bvUTGp7K8CDLh.OvP3auPoMdZTETz7"
@@ -3651,31 +3142,19 @@ items:
           automations:
             - _id: XqnlTxp6N0lZCFaB
               formula: "1"
-              showConfirmationDialog: true
-              showDialog: true
-              targetParent: true
               trigger: shortRest
               type: changeQuantity
             - _id: lnI5XgS0RD02tQbn
               formula: "1"
-              showConfirmationDialog: true
-              showDialog: true
-              targetParent: true
               trigger: longRest
               type: changeQuantity
           competence:
             raw: 1
-          consumable: true
-          consumptionAmount: 1
           description: >-
             <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
             spells]{ritual} @Wiki[Category:Necromancy element spells]{necromancy spell} in half the time it would
             normally take.</p>
           identifier: half-time-ritual-necromancy-spell-cast
-          quantity:
-            maxFormula: "1"
-            value: 1
-        transfer: true
         type: resource
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
@@ -3684,8 +3163,6 @@ items:
       _sup: 5e9017ca021bc2d7
       archetype: mage
       class: necromancer
-      competence:
-        raw: 1
       description: >-
         <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers} are most at home in the cemetery
         digging up future minions. Shunned by most of society, these dark mages are not necessarily evil, they simply
@@ -3696,13 +3173,10 @@ items:
       identifier: rank-4-necromancer
       maxAv: 0
       number: 4
-      origin: learned
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d12
     type: rank
   - _id: lZH67JPLwfFWdIia
@@ -3719,15 +3193,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!5e9017ca021bc2d7.lZH67JPLwfFWdIia.IDLUUjkSFtpaiKuJ"
@@ -3738,32 +3208,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 5e9017ca021bc2d7
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: zwe5TAhVFHbBM1S2
     _key: "!actors.items!5e9017ca021bc2d7.zwe5TAhVFHbBM1S2"
@@ -3779,7 +3240,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
           automations:
             - _id: parameterChanges
               changes:
@@ -3790,31 +3250,23 @@ items:
                   type: upgrade
                   value: "2"
               type: changes
-          competence:
-            raw: 0
           description: >-
             <p>@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{Armor} that's <b>[[lookup name style=lc]]</b>
             has its @Identifier[core:armor-class]{AV} increased by 2.</p>
           form: intrinsic
           identifier: dragon-scale
-        transfer: true
         type: property
     folder: 997cd433ccad17d7
     img: systems/teriock/src/icons/body-parts/reinforced-dragon-scales.webp
     name: Reinforced Dragon Scales
     system:
       _sup: 5e9017ca021bc2d7
-      attackPenalty: "-3"
       av:
         raw: 4
-      competence:
-        raw: 0
       identifier: reinforced-dragon-scales
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
   - _id: 4a095aaed0254ec3
     _key: "!actors.items!5e9017ca021bc2d7.4a095aaed0254ec3"
@@ -3830,29 +3282,17 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
-              display: {}
               formula: (1 + @h)d4[magic]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
           delivery: missile
-          duration:
-            unit: instant
           effectTypes:
             - damaging
-          executionTime:
-            base: a1
-          form: normal
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic]]] @Identifier[core:damage]{damage}.</p>
           identifier: arcane-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
           powerSources:
             - magical
           range:
@@ -3863,9 +3303,6 @@ items:
             hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: "!actors.items.effects!5e9017ca021bc2d7.4a095aaed0254ec3.aCWLNsvSFjEuLTyl"
@@ -3881,7 +3318,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: staff-touch
           interaction: manifest
           maneuver: passive
@@ -3908,14 +3344,11 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 4a095aaed0254ec3
     img: systems/teriock/src/icons/archetypes/mage.webp
     name: Mage
     system:
-      competence:
-        raw: 1
       description: >-
         <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical spells} and each class has a different
         approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
@@ -3925,12 +3358,6 @@ items:
     type: archetype
 name: Black Dragon
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 3
@@ -3941,9 +3368,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/black-dragon.webp
   texture:
     src: systems/teriock/src/icons/creatures/black-dragon.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 3
 system:
   hp:
@@ -3951,10 +3375,6 @@ system:
   identifier: black-dragon
   mp:
     value: 28
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

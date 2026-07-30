@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -36,7 +35,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: gA15uFgiYIjJwYNJ
     _key: "!items.effects!31ae69b6c87992f5.gA15uFgiYIjJwYNJ"
@@ -66,7 +64,6 @@ effects:
         score:
           attribute: snk
           value: -1
-    transfer: true
     type: ability
   - _id: hrRSnTIuKFUE8RLz
     _key: "!items.effects!31ae69b6c87992f5.hrRSnTIuKFUE8RLz"
@@ -96,7 +93,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: KsEv4zB5lfNUqi6Y
     _key: "!items.effects!31ae69b6c87992f5.KsEv4zB5lfNUqi6Y"
@@ -107,25 +103,16 @@ effects:
     system:
       automations:
         - _id: sGyei1adB2IsKjZP
-          competence:
-            raw: 0
           makeEffect: false
-          preventFeat: false
-          preventThreshold: false
           type: override
         - _id: 52f4d0b87363b1c1
-          executor: false
-          multi: false
           relation: apply
           status: dueling
-          target: false
           type: status
         - _id: 747b3e9c9b617af6
           executor: true
-          multi: false
           relation: apply
           status: lighted
-          target: false
           type: status
       competence:
         raw: 1
@@ -134,12 +121,8 @@ effects:
         unit: unlimited
       effectTypes:
         - duelModifying
-      executionTime:
-        base: a1
-      form: normal
       identifier: duel
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You challenge the @Identifier[core:targets]{target} to advance and fight you. They may immediately
@@ -162,9 +145,6 @@ effects:
       requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: Pw893HLnBwgHk24r
     _key: "!items.effects!31ae69b6c87992f5.Pw893HLnBwgHk24r"
@@ -215,7 +195,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: S8oE4WH2cxRalbwO
     _key: "!items.effects!31ae69b6c87992f5.S8oE4WH2cxRalbwO"
@@ -231,7 +210,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -244,8 +222,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: T2kRLUwEJX5IrmDL
     _key: "!items.effects!31ae69b6c87992f5.T2kRLUwEJX5IrmDL"
@@ -261,7 +237,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -274,8 +249,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: g2uunYt4iNv3M7di
     _key: "!items.effects!31ae69b6c87992f5.g2uunYt4iNv3M7di"
@@ -289,13 +262,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: HMVJizUXvyQ9mtt9
           activeQualifier: not(@status.frozen)
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -330,7 +300,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: a56CFToD962rb5OB
     _key: "!items.effects!31ae69b6c87992f5.a56CFToD962rb5OB"
@@ -344,42 +313,29 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -387,20 +343,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 481b13774ffecbdd
 img: systems/teriock/src/icons/creatures/cockatrice.webp
@@ -408,24 +357,19 @@ name: Cockatrice
 system:
   appearance: <p>Brightly raptors with a resemblance to chickens.</p>
   br: 12
-  competence:
-    raw: 1
   description: >-
     <p>These creatures are believed to been created by
     @UUID[Compendium.teriock.tables.RollTable.c602ce7a824494c1]{demon}-@UUID[Compendium.teriock.tables.RollTable.f2c29b199c990ab7]{fae}
     crossbreeds.</p>
   identifier: cockatrice
   size:
-    enabled: true
     value: 5
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

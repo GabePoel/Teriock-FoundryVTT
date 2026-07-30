@@ -21,7 +21,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: additional-flame-rotators
       interaction: manifest
       maneuver: passive
@@ -36,7 +35,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: EjA48yTYBOoAhMOD
     _key: "!items.effects!XVzPMlAUvtd00Dze.EjA48yTYBOoAhMOD"
@@ -78,8 +76,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       elderSorcery: true
       elements:
         - flame
@@ -121,7 +117,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 6ttBS5RdbkzNtqGC
     _key: "!items.effects!XVzPMlAUvtd00Dze.6ttBS5RdbkzNtqGC"
@@ -133,26 +128,14 @@ effects:
       _sup: CaTTWTstOULxfkrp
       automations:
         - _id: FZiTANhHbYeUrxD6
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:magelore
-          multi: false
-          separate: false
           type: addDocuments
         - _id: TUjBJXUmGzXEFt79
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - property:magic
-          multi: false
-          separate: false
           type: addDocuments
         - _id: WDPfYxMp2lWJxkW4
-          all: false
-          attachDocuments: true
           automatic: false
           data: |-
             {
@@ -172,9 +155,7 @@ effects:
             }
           local:
             qualifier: and(@ability, @spell, not(@es), @delivery.ray)
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
         - _id: Tu4qrPot571fIQao
           changes:
@@ -248,7 +229,6 @@ effects:
       standard: true
       targets:
         - weapon
-    transfer: true
     type: ability
   - _id: onNt80twtyW5uzPb
     _key: "!items.effects!XVzPMlAUvtd00Dze.onNt80twtyW5uzPb"
@@ -262,21 +242,14 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 3a62dd96319ca135
-          executor: false
-          multi: false
           relation: apply
           status: burned
-          target: false
           type: status
         - _id: 5e9e1d2033fe152a
-          executor: false
-          multi: false
           relation: apply
           status: ruined
-          target: false
           type: status
       competence:
         raw: 1
@@ -290,27 +263,16 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       identifier: cremate
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
@@ -321,7 +283,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
 folder: da5b8437ae291af1
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
@@ -330,22 +291,17 @@ system:
   _sup: e13a86db55d60315
   archetype: mage
   class: flame-mage
-  competence:
-    raw: 1
   description: >-
     <p>Fierce and brazen, these mages are always at war. The arms dealers of the world, their magic is completely
     focused on destruction and thus they seek to create bigger and better ways to blow things up. Passionate, wild and a
     bit chaotic, these mages like the mountains and underground spaces. If you are playing a
     @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like, ready for battle, and consuming everything.</p>
   identifier: rank-3-flame-mage
-  innate: false
   maxAv: 0
   number: 3
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

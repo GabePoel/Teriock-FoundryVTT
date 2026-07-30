@@ -22,7 +22,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       identifier: careful-planning
       interaction: manifest
       maneuver: passive
@@ -45,7 +44,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Qp4EozMa6bGC47pj
     _key: "!items.effects!f11823bdfbc329f2.Qp4EozMa6bGC47pj"
@@ -58,19 +56,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -79,15 +74,11 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
@@ -100,16 +91,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: 2pTkWDwm4qO9nGUR
     _key: "!items.effects!f11823bdfbc329f2.2pTkWDwm4qO9nGUR"
@@ -130,7 +116,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: weapons-mastery
       interaction: manifest
       maneuver: passive
@@ -155,7 +140,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: nGatNM8pZdmWF4gG
     _key: "!items.effects!f11823bdfbc329f2.nGatNM8pZdmWF4gG"
@@ -167,20 +151,14 @@ effects:
       _sup: 3jZPi7VXyvPT6qYL
       automations:
         - _id: 0b0d1426453abb55
-          executor: false
-          multi: false
           relation: apply
           status: hidden
-          target: false
           type: status
       competence:
         raw: 1
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: reactive-hide
       interaction: manifest
       maneuver: reactive
@@ -195,7 +173,6 @@ effects:
       targets:
         - self
       trigger: <p>You @Identifier[condition:down]{drop} another creature.</p>
-    transfer: true
     type: ability
 folder: c00337a27e3585c4
 img: systems/teriock/src/icons/ranks/rank-2-assassin.webp
@@ -203,8 +180,6 @@ name: Rank 2 Assassin
 system:
   archetype: semi
   class: assassin
-  competence:
-    raw: 1
   description: >-
     <p>The shadiest of all the classes, @Identifier[class:assassin]{Assassins} see life as expendable and unimportant.
     Even their own life is trivial, someone will kill them sooner or later. That's life. Life is short and thus
@@ -215,20 +190,14 @@ system:
     opportunities for themselves. If you're an @Identifier[class:assassin]{Assassin}, don't think twice about killing
     someone, care little for your own life and cut to the chase!</p>
   identifier: rank-2-assassin
-  innate: false
-  maxAv: 2
   number: 2
   statDice:
     hp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
 type: rank

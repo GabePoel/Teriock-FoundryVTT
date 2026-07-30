@@ -39,7 +39,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ycBK6OkwjDdYbX95
     _key: "!items.effects!ded016d78d39e75e.ycBK6OkwjDdYbX95"
@@ -69,7 +68,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: ja05P7ZaYBK7UHa2
     _key: "!items.effects!ded016d78d39e75e.ja05P7ZaYBK7UHa2"
@@ -99,7 +97,6 @@ effects:
         score:
           attribute: snk
           value: 4
-    transfer: true
     type: ability
   - _id: V7fgyd8xfahV7qVY
     _key: "!items.effects!ded016d78d39e75e.V7fgyd8xfahV7qVY"
@@ -154,7 +151,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: leaping
       interaction: manifest
       maneuver: passive
@@ -173,7 +169,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 9oaFYxIyhikaWPv6
     _key: "!items.effects!ded016d78d39e75e.9oaFYxIyhikaWPv6"
@@ -184,11 +179,8 @@ effects:
     system:
       automations:
         - _id: 32463e5ed7bb6967
-          executor: false
-          multi: false
           relation: apply
           status: paralyzed
-          target: false
           type: status
       competence:
         raw: 1
@@ -197,14 +189,7 @@ effects:
         unit: unlimited
       effectTypes:
         - draining
-      executionTime:
-        base: a1
-      form: normal
       identifier: mana-flea-infest
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -221,9 +206,6 @@ effects:
           @Identifier[condition:unconscious]{unconscious}. While infested in someone, you cannot be
           @Identifier[core:targets]{target} by @Identifier[core:attack-interaction]{attacks}, but you are
           @Identifier[condition:paralyzed]{paralyzed}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: btYZ3dWtxXk1cPq1
     _key: "!items.effects!ded016d78d39e75e.btYZ3dWtxXk1cPq1"
@@ -253,7 +235,6 @@ effects:
         score:
           attribute: str
           value: -3
-    transfer: true
     type: ability
   - _id: 69NJjsfHU90JOoDP
     _key: "!items.effects!ded016d78d39e75e.69NJjsfHU90JOoDP"
@@ -269,7 +250,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -282,8 +262,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: 9NEJtP9G50HNWDdm
     _key: "!items.effects!ded016d78d39e75e.9NEJtP9G50HNWDdm"
@@ -299,7 +277,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -312,8 +289,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: S2gMNpksd2SQgGCz
     _key: "!items.effects!ded016d78d39e75e.S2gMNpksd2SQgGCz"
@@ -324,8 +299,6 @@ effects:
     system:
       automations:
         - _id: tK9siXKNP7FNROJO
-          consumeStatDice: true
-          forHarm: false
           type: revitalize
         - _id: 157afc517847f562
           formula: 1d4[mana]
@@ -334,8 +307,6 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       effectTypes:
         - draining
         - revitalization
@@ -343,7 +314,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: very-slow-mana-drain
       interaction: manifest
       maneuver: slow
@@ -355,11 +325,6 @@ effects:
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: dbf885a327caa735
 img: systems/teriock/src/icons/creatures/mana-flea.webp
@@ -367,8 +332,6 @@ name: Mana Flea
 system:
   appearance: <p>Tiny colorful ticks.</p>
   br: 2
-  competence:
-    raw: 1
   description: >-
     <p>These are tiny relatives to the infamous @Identifier[creature:monsquito]{monsquito}. After feeding, they look
     like tiny ticks. They feed off @Identifier[core:hit-points-and-mana-points]{MP} and are relatively harmless at
@@ -377,16 +340,13 @@ system:
     soon be an epidemic of @Identifier[core:hit-points-and-mana-points]{MP} loss.</p>
   identifier: mana-flea
   size:
-    enabled: true
     value: 0.25
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

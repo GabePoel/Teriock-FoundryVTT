@@ -17,7 +17,6 @@ effects:
         - automatic
       executionTime:
         base: passive
-      form: normal
       identifier: acidic-blood
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       targets:
         - self
       trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
-    transfer: true
     type: ability
   - _id: ISsAk4Nv54MADOR8
     _key: "!items.effects!899e9f4b24c50e9f.ISsAk4Nv54MADOR8"
@@ -49,7 +47,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: carrying
       interaction: manifest
       maneuver: passive
@@ -63,7 +60,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: u6rbrLt4XCtXlFJq
     _key: "!items.effects!899e9f4b24c50e9f.u6rbrLt4XCtXlFJq"
@@ -93,7 +89,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: 9KlopIwfYthpMY1Q
     _key: "!items.effects!899e9f4b24c50e9f.9KlopIwfYthpMY1Q"
@@ -105,29 +100,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: cxo2paC3Eoaf9Gyc
     _key: "!items.effects!899e9f4b24c50e9f.cxo2paC3Eoaf9Gyc"
@@ -147,7 +130,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: giant-strength
       interaction: manifest
       maneuver: passive
@@ -168,7 +150,6 @@ effects:
         score:
           attribute: str
           value: 3
-    transfer: true
     type: ability
   - _id: 4onRVDDw1jkBcbWe
     _key: "!items.effects!899e9f4b24c50e9f.4onRVDDw1jkBcbWe"
@@ -199,7 +180,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: gliding
       interaction: manifest
       maneuver: passive
@@ -214,7 +194,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: A8E61IkRUAWiqcVw
     _key: "!items.effects!899e9f4b24c50e9f.A8E61IkRUAWiqcVw"
@@ -230,7 +209,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -243,8 +221,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: 0KyZSHQ4l1Ymc7Wb
     _key: "!items.effects!899e9f4b24c50e9f.0KyZSHQ4l1Ymc7Wb"
@@ -260,7 +236,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -273,8 +248,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: w2fFnrHAn188bXvp
     _key: "!items.effects!899e9f4b24c50e9f.w2fFnrHAn188bXvp"
@@ -290,7 +263,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: reach
       interaction: manifest
       maneuver: passive
@@ -305,7 +277,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: zOsZVeDTfXYHFmok
     _key: "!items.effects!899e9f4b24c50e9f.zOsZVeDTfXYHFmok"
@@ -319,13 +290,10 @@ effects:
           common:
             - bag
             - revive
-          showConfirmationDialog: true
           type: common
         - _id: iCn9pFDIGFJWxm6H
           activeQualifier: and(not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           trigger: turnStart
           type: heal
       competence:
@@ -359,7 +327,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: HYOL5MnjdNszPhaF
     _key: "!items.effects!899e9f4b24c50e9f.HYOL5MnjdNszPhaF"
@@ -371,14 +338,10 @@ effects:
       _sup: cxo2paC3Eoaf9Gyc
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r0
-      form: normal
       identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
@@ -391,16 +354,11 @@ effects:
           @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
         delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-    transfer: true
     type: ability
   - _id: pq4E0tM9yXnJavEA
     _key: "!items.effects!899e9f4b24c50e9f.pq4E0tM9yXnJavEA"
@@ -417,7 +375,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-strength
       interaction: manifest
       maneuver: passive
@@ -437,7 +394,6 @@ effects:
         score:
           attribute: str
           value: 2
-    transfer: true
     type: ability
   - _id: joAWYgW6DybYMhO4
     _key: "!items.effects!899e9f4b24c50e9f.joAWYgW6DybYMhO4"
@@ -454,7 +410,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -475,7 +430,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: ANFqSuKfewl5J8Ye
     _key: "!items.effects!899e9f4b24c50e9f.ANFqSuKfewl5J8Ye"
@@ -492,7 +446,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
@@ -506,7 +459,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: bd20345e7214a088
 img: systems/teriock/src/icons/creatures/hydra-head.webp
@@ -514,8 +466,6 @@ name: Hydra Head
 system:
   appearance: <p>A massive lizard with multiple @Wiki[Category:Snakes]{snake}-like heads.</p>
   br: 8
-  competence:
-    raw: 1
   description: >-
     <p>A single hydra is represented by multiple different creatures at once. There is one
     @Identifier[creature:hydra-body]{hydra body} and at least one hydra head. If the
@@ -527,16 +477,13 @@ system:
     @Identifier[creature:hydra-body]{hydra body}.</p>
   identifier: hydra-head
   size:
-    enabled: true
     value: 2
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

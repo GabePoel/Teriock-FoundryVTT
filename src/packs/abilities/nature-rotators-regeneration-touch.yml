@@ -8,9 +8,6 @@ system:
   _sup: 063b0cceb9b65c6c
   automations:
     - _id: f2ebb4a9ad0d1848
-      all: false
-      attachDocuments: true
-      automatic: true
       data: >-
         {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
         @Identifier[core:healing]{healing} in this way consumes a @Identifier[core:hit-points-and-mana-points]{hit die}
@@ -18,12 +15,8 @@ system:
         effects]{revive} creatures that have been @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
       identifiers:
         - ability:regenerating
-      multi: false
       overrideData: true
-      separate: false
       type: addDocuments
-  competence:
-    raw: 0
   costs:
     components:
       somatic:
@@ -41,31 +34,16 @@ system:
   endCondition: >-
     <p>At the start of each of your @Identifier[core:turns]{turns}, you roll [[/roll 2d4]]. If either of these dice roll
     a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
       relation: executor
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
-      timing: start
       type: combat
   form: special
   identifier: regeneration-touch
-  interaction: attack
   invoked: true
-  maneuver: active
-  piercing:
-    raw: 2
   powerSources:
     - magical
-  range:
-    unit: contact
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} gains @Identifier[keyword:limited]{Limited}
@@ -76,7 +54,4 @@ system:
   rotator: true
   spell: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

@@ -18,42 +18,31 @@ items:
           affinities:
             - _id: hPfBt6zwzwH60lYt
               activeQualifier: "@flags.improvedBrace"
-              amount: 1
               category: effectTypes
-              img: null
               type: takeDeboost
               value: damaging
           automations:
             - _id: 0BLOMYrODY3bzx8I
               competencies:
                 - 0
-              display: {}
               formula: 1d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               competencies:
                 - 1
-              display: {}
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               competencies:
                 - 2
-              display: {}
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               impact: setTempHp
-              trigger: null
               type: roll
             - _id: Rid5p1TlO90isbp4
               amount: 0
-              display: {}
               impact: setTempHp
-              morganti: false
-              showDialog: false
               trigger: movement
               type: take
           competence:
@@ -62,18 +51,13 @@ items:
           duration:
             unit: unlimited
           endCondition: <p>You move or are moved.</p>
-          executionTime:
-            base: a1
           expirations:
             - _id: d1f6b6eaa581aa10
-              method: automatic
               triggers:
                 - movement
               type: trigger
-          form: normal
           identifier: brace
           interaction: manifest
-          maneuver: active
           overview:
             base: >-
               <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
@@ -89,7 +73,6 @@ items:
           sustained: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: 7woN8phvf4rzIu57
         _key: "!actors.items.effects!f4124a087ca5c5ea.f4124a087ca5c5ea.7woN8phvf4rzIu57"
@@ -119,7 +102,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: bvJdUdK5sJ8oerPA
         _key: "!actors.items.effects!f4124a087ca5c5ea.f4124a087ca5c5ea.bvJdUdK5sJ8oerPA"
@@ -149,7 +131,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: aVXOcFf4jBlyAArV
         _key: "!actors.items.effects!f4124a087ca5c5ea.f4124a087ca5c5ea.aVXOcFf4jBlyAArV"
@@ -177,7 +158,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: eM6EL6Q9QgnBspaU
         _key: "!actors.items.effects!f4124a087ca5c5ea.f4124a087ca5c5ea.eM6EL6Q9QgnBspaU"
@@ -193,7 +173,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -206,8 +185,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: rSoL1s5W1TffRtt4
         _key: "!actors.items.effects!f4124a087ca5c5ea.f4124a087ca5c5ea.rSoL1s5W1TffRtt4"
@@ -223,7 +200,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -236,8 +212,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: 3gnSYtgpa4jH4Gfa
         _key: "!actors.items.effects!f4124a087ca5c5ea.f4124a087ca5c5ea.3gnSYtgpa4jH4Gfa"
@@ -261,7 +235,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: unbreachability
           interaction: manifest
           maneuver: passive
@@ -275,25 +248,18 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/tortoise.webp
     name: Tortoise
     system:
-      br: 1
-      competence:
-        raw: 1
       identifier: tortoise
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -315,9 +281,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -325,7 +288,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: StZ8lJiQ1zrTkWMW
         _key: "!actors.items.effects!f4124a087ca5c5ea.IRDCEQF54idkByFn.StZ8lJiQ1zrTkWMW"
@@ -336,24 +298,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/jaw.webp
     name: Jaw
     system:
       _sup: f4124a087ca5c5ea
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: savage
@@ -361,8 +316,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: sw1J8plxcRY9h7qa
     _key: "!actors.items!f4124a087ca5c5ea.sw1J8plxcRY9h7qa"
@@ -373,29 +326,17 @@ items:
     name: Reinforced Shell
     system:
       _sup: f4124a087ca5c5ea
-      attackPenalty: "-3"
       av:
         raw: 4
-      competence:
-        raw: 0
       identifier: reinforced-shell
       range:
         long:
           unit: self
-        melee: true
-        ranged: false
     type: body
 name: Tortoise
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Tortoise
   ring:
     enabled: true
@@ -403,20 +344,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/tortoise.webp
   texture:
     src: systems/teriock/src/icons/creatures/tortoise.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: tortoise
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

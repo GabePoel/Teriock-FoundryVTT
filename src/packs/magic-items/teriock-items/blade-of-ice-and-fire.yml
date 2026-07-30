@@ -10,23 +10,18 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       damageType: fire
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b>, deals @Identifier[damage:fire]{fire damage} and can be used
         to deliver @Identifier[ability:burn]{Burn}.</p>
       form: intrinsic
       identifier: burning
-    transfer: true
     type: property
   - _id: qiHq9J5Sr1DhQRfv
     _key: "!items.effects!4870dad6b10f41a8.qiHq9J5Sr1DhQRfv"
     img: icons/skills/wounds/blood-spurt-spray-red.webp
     name: Damaged by Nature and Life Spells
     system:
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
@@ -46,7 +41,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: IoTrrCnoDENu0KbJ
     _key: "!items.effects!4870dad6b10f41a8.IoTrrCnoDENu0KbJ"
@@ -58,20 +52,12 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d4[magic fire]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime:
-        base: a1
-      form: normal
       gifted:
         amount: 1
         enabled: true
@@ -79,10 +65,6 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic fire]]] @Identifier[core:damage]{damage}.</p>
       identifier: fire-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -93,9 +75,6 @@ effects:
         hit: <p>Deal [[/damage 1d4[magic fire]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: affM4Lt512RmbNEC
     _key: "!items.effects!4870dad6b10f41a8.affM4Lt512RmbNEC"
@@ -109,17 +88,10 @@ effects:
           formula: (@h)d4[magic ice]
           heighten:
             - 1
-          impact: damage
           type: roll
         - _id: 09ed285450c5de7b
-          executor: false
-          multi: false
-          relation: include
           status: frozen
-          target: false
           type: status
-      competence:
-        raw: 0
       delivery: missile
       duration:
         raw: "1"
@@ -131,36 +103,20 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{target's} actions, they roll [[/roll 2d4]]. If either
         of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
           crit:
             - 0
           event: action
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
         - _id: 28294dbc80493c2c
           crit:
             - 1
           event: action
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
           skip: 1
-          timing: start
           type: combat
-      form: normal
       gifted:
         amount: 1
         enabled: true
@@ -168,10 +124,6 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic ice]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: ice-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -182,9 +134,6 @@ effects:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: B9VhH9YdxK5DYCMx
     _key: "!items.effects!4870dad6b10f41a8.B9VhH9YdxK5DYCMx"
@@ -201,8 +150,6 @@ effects:
           target: armament
           type: childChange
           value: "true"
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
@@ -210,7 +157,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      form: normal
       grantOnly: true
       identifier: spell-turning-weapons
       interaction: manifest
@@ -230,7 +176,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: r0F6Mrn2OAvrpOGd
     _key: "!items.effects!4870dad6b10f41a8.r0F6Mrn2OAvrpOGd"
@@ -241,14 +186,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    transfer: true
     type: property
 flags:
   teriock:
@@ -257,12 +199,8 @@ folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/blade-of-ice-and-fire.webp
 name: Blade of Ice and Fire
 system:
-  attackPenalty: "-3"
   bv:
     raw: 2
-  competence:
-    raw: 0
-  consumable: false
   damage:
     base: 1d8
   equipmentClasses:
@@ -279,8 +217,6 @@ system:
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   tier:
     raw: "2"
   weight: 3

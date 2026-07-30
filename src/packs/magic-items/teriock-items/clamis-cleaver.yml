@@ -11,10 +11,7 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic fire]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       costs:
         components:
           somatic:
@@ -22,47 +19,29 @@ effects:
           verbal:
             type: tag
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
       identifier: burning-touch
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
         hit: <p>Deal [[/damage 1d6[magic fire]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: ZrlQ6ULP1UcagvH8
     _key: "!items.effects!5c8b41c1e2f7cff6.ZrlQ6ULP1UcagvH8"
     img: icons/magic/light/explosion-star-large-orange.webp
     name: Conditional Glowing
     system:
-      competence:
-        raw: 0
       description: <p>This item glows red in the presence of good.</p>
-      form: normal
-    transfer: true
     type: property
   - _id: 2YscVV39H19iMP5j
     _key: "!items.effects!5c8b41c1e2f7cff6.2YscVV39H19iMP5j"
@@ -77,19 +56,15 @@ effects:
           macro: Compendium.teriock.execution.Macro.9Nxi7Z2H6ghBp6Vd
           trigger: turnEnd
           type: propertyMacro
-      competence:
-        raw: 0
       description: >-
         <p><b>[[lookup name]]</b> items [[/repair]]{repair} themselves. If a [[lookup name style=lc]] item is also
         @Identifier[property:shattered]{shattered}, it retains the [[lookup name style=lc]] property. When a creature is
         @Wiki[Core:Attunement]{attuned} to a @Identifier[property:shattered]{shattered} [[lookup name style=lc]] item,
         they roll [[/roll 2d4]] at the end of each of their turns. If at least 1 die rolls a 4, the item is no longer
         @Identifier[property:shattered]{shattered}.</p>
-      form: normal
       identifier: runic
       powerSources:
         - magical
-    transfer: true
     type: property
   - _id: 81xRyexcNCpSw4IY
     _key: "!items.effects!5c8b41c1e2f7cff6.81xRyexcNCpSw4IY"
@@ -102,36 +77,27 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       costs:
         primary:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       limitation: <p>Trolls only.</p>
@@ -145,16 +111,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
   - _id: jzzvRKzEvcANdWVW
     _key: "!items.effects!5c8b41c1e2f7cff6.jzzvRKzEvcANdWVW"
@@ -165,14 +126,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    transfer: true
     type: property
   - _id: 6ZVulFfTJa1j7Ek2
     _key: "!items.effects!5c8b41c1e2f7cff6.6ZVulFfTJa1j7Ek2"
@@ -186,14 +144,11 @@ effects:
           macro: Compendium.teriock.execution.Macro.090fd08ae26477da
           trigger: preExecute
           type: abilityMacro
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       gifted:
         amount: 1
         enabled: true
@@ -222,18 +177,13 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/clamis-cleaver.webp
 name: Clamis Cleaver
 system:
-  attackPenalty: "-3"
   bv:
     raw: 2
-  competence:
-    raw: 0
-  consumable: false
   damage:
     base: 1d8
   equipmentClasses:
@@ -250,8 +200,6 @@ system:
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   tier:
     raw: "0"
   weight: 3

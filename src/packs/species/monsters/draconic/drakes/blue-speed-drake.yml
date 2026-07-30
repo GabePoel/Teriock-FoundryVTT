@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: battle-cry
       interaction: manifest
       maneuver: passive
@@ -31,7 +30,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 8EcIoiD12CCemc1i
     _key: "!items.effects!aa3ada62f9c9dc33.8EcIoiD12CCemc1i"
@@ -47,7 +45,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: beastly-strength
       interaction: manifest
       maneuver: passive
@@ -68,7 +65,6 @@ effects:
         score:
           attribute: str
           value: 1
-    transfer: true
     type: ability
   - _id: xsdLshRNEKcqDDEh
     _key: "!items.effects!aa3ada62f9c9dc33.xsdLshRNEKcqDDEh"
@@ -79,31 +75,17 @@ effects:
     system:
       automations:
         - _id: 7400b41f20d9f100
-          all: false
           angle: "@angle.normal"
           attachToToken: false
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: cone
           restriction:
             enabled: true
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: IjlqdW3Tzqkk4X8s
-          executor: false
-          multi: false
-          relation: include
           status: frozen
-          target: false
           type: status
       competence:
         raw: 1
@@ -123,25 +105,14 @@ effects:
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      featSaveAttribute: mov
       form: special
       identifier: blue-drake-breath
       interaction: feat
-      maneuver: active
       powerSources:
         - magical
       range:
@@ -149,9 +120,6 @@ effects:
         unit: ft
       results:
         fail: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: fqhkv8VYDDKIM3Pc
     _key: "!items.effects!aa3ada62f9c9dc33.fqhkv8VYDDKIM3Pc"
@@ -194,7 +162,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
@@ -209,7 +176,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: i2J0D729oWWWlea2
     _key: "!items.effects!aa3ada62f9c9dc33.i2J0D729oWWWlea2"
@@ -237,7 +203,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -251,7 +216,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ggt80fnI4GwYwIYF
     _key: "!items.effects!aa3ada62f9c9dc33.ggt80fnI4GwYwIYF"
@@ -279,7 +243,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Tueq8NQLJxaTu4vA
     _key: "!items.effects!aa3ada62f9c9dc33.Tueq8NQLJxaTu4vA"
@@ -295,7 +258,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -308,8 +270,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: FMrxls4jWFNQpbAJ
     _key: "!items.effects!aa3ada62f9c9dc33.FMrxls4jWFNQpbAJ"
@@ -325,7 +285,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -338,8 +297,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: iqUHBWbU1u9wsAIp
     _key: "!items.effects!aa3ada62f9c9dc33.iqUHBWbU1u9wsAIp"
@@ -369,7 +326,6 @@ effects:
         score:
           attribute: int
           value: -3
-    transfer: true
     type: ability
   - _id: kg39h7Av5Kx3HdzZ
     _key: "!items.effects!aa3ada62f9c9dc33.kg39h7Av5Kx3HdzZ"
@@ -399,7 +355,6 @@ effects:
         score:
           attribute: mov
           value: 4
-    transfer: true
     type: ability
   - _id: UBlMCvgqAByOVt7k
     _key: "!items.effects!aa3ada62f9c9dc33.UBlMCvgqAByOVt7k"
@@ -425,10 +380,8 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      form: normal
       identifier: battle-cry-resistance
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
@@ -439,7 +392,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: jycq7kiWW3450rQ9
     _key: "!items.effects!aa3ada62f9c9dc33.jycq7kiWW3450rQ9"
@@ -451,31 +403,14 @@ effects:
       _sup: csVmQO5JwdBYRhvM
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
             enabled: true
-            priority: 0
             type: sound
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: b4960732f0b9ed9f
-          executor: false
-          multi: false
-          relation: include
           status: frightened
-          target: false
           type: status
       competence:
         raw: 1
@@ -496,25 +431,13 @@ effects:
       endCondition: >-
         <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       featSaveAttribute: int
-      form: normal
       identifier: battle-cry-aura
       interaction: feat
-      maneuver: active
       powerSources:
         - martial
       range:
@@ -525,9 +448,6 @@ effects:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: c2095fb63315614f
 img: systems/teriock/src/icons/creatures/blue-speed-drake.webp
@@ -535,24 +455,17 @@ name: Blue Speed Drake
 system:
   appearance: <p>Like a smaller and more aerodynamic @Identifier[creature:blue-drake]{blue drake}.</p>
   br: 13
-  competence:
-    raw: 1
   description: >-
     <p>This breed of @UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{drake} was bred for speed and the
     ability to fly faster than @UUID[Compendium.teriock.tables.RollTable.997cd433ccad17d7]{dragons}.</p>
   identifier: blue-speed-drake
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:storm-mage]{Storm Mage}.</p>
-  size:
-    enabled: true
-    value: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "2"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

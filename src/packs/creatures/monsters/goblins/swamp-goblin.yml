@@ -37,7 +37,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: digging
           interaction: manifest
           maneuver: passive
@@ -49,7 +48,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: bPAHSUcPhhImBtHX
         _key: "!actors.items.effects!384ea457df25f9b6.384ea457df25f9b6.bPAHSUcPhhImBtHX"
@@ -79,7 +77,6 @@ items:
             score:
               attribute: str
               value: -1
-        transfer: true
         type: ability
       - _id: UCyxaQbnFZObig0a
         _key: "!actors.items.effects!384ea457df25f9b6.384ea457df25f9b6.UCyxaQbnFZObig0a"
@@ -95,7 +92,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -108,8 +104,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: 3JutrDaP2HLcaKWw
         _key: "!actors.items.effects!384ea457df25f9b6.384ea457df25f9b6.3JutrDaP2HLcaKWw"
@@ -125,7 +119,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -138,8 +131,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 7igEaE1dg9uNnU1K
         _key: "!actors.items.effects!384ea457df25f9b6.384ea457df25f9b6.7igEaE1dg9uNnU1K"
@@ -155,7 +146,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-sneak
           interaction: manifest
           maneuver: passive
@@ -168,8 +158,6 @@ items:
           upgrades:
             score:
               attribute: snk
-              value: 0
-        transfer: true
         type: ability
       - _id: J3Xuf6MTKfLpznZJ
         _key: "!actors.items.effects!384ea457df25f9b6.384ea457df25f9b6.J3Xuf6MTKfLpznZJ"
@@ -208,33 +196,22 @@ items:
             unit: minute
           elements:
             - necromancy
-          executionTime:
-            base: a1
           form: special
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
             @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
           identifier: spirit-bury
-          interaction: attack
           invoked: true
-          maneuver: active
           overview:
             proficient: <p>This effect lasts 10 minutes instead of 1.</p>
-          piercing:
-            raw: 0
           powerSources:
             - magical
-          range:
-            unit: contact
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
           results:
             hit: <p>@Identifier[core:targets]{Target} cannot become @Identifier[condition:wisping]{wisping}.</p>
           rotator: true
           spell: true
           standard: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: YHtMeChd3vnFKn89
         _key: "!actors.items.effects!384ea457df25f9b6.384ea457df25f9b6.YHtMeChd3vnFKn89"
@@ -264,7 +241,6 @@ items:
             score:
               attribute: int
               value: -3
-        transfer: true
         type: ability
     folder: 9742924ba797ce77
     img: systems/teriock/src/icons/creatures/swamp-goblin.webp
@@ -272,21 +248,16 @@ items:
     system:
       appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
       br: 2
-      competence:
-        raw: 1
       description: >-
         <p>@UUID[Compendium.teriock.tables.RollTable.9742924ba797ce77]{Goblins} have only a loose grasp on reality and
         are easily fooled. In combat, they prefer to attack in large numbers.</p>
       identifier: swamp-goblin
       size:
-        enabled: true
         value: 1
       statDice:
         hp:
-          disabled: false
           formula: 1d8
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - humanoid
@@ -308,15 +279,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!384ea457df25f9b6.TQZAyKCtmdwF9aBc.fq8owR84sFsgLiuj"
@@ -327,9 +294,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -337,7 +301,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!384ea457df25f9b6.TQZAyKCtmdwF9aBc.4WFL62wofj7AHBxN"
@@ -348,24 +311,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9742924ba797ce77
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 384ea457df25f9b6
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -373,8 +329,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: c70LdhCDZIb4Kx6R
     _key: "!actors.items!384ea457df25f9b6.c70LdhCDZIb4Kx6R"
@@ -390,15 +344,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: lKaLyYYTTIEFOLb5
         _key: "!actors.items.effects!384ea457df25f9b6.c70LdhCDZIb4Kx6R.lKaLyYYTTIEFOLb5"
@@ -409,9 +359,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
@@ -419,7 +366,6 @@ items:
           identifier: handy
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: m7Va2Fuah1K2t2Ab
         _key: "!actors.items.effects!384ea457df25f9b6.c70LdhCDZIb4Kx6R.m7Va2Fuah1K2t2Ab"
@@ -430,9 +376,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such as while using
             @Identifier[ability:interact]{Interact}.</p>
@@ -440,7 +383,6 @@ items:
           identifier: prehensile
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: IJM1yhiyKnnwlbXh
         _key: "!actors.items.effects!384ea457df25f9b6.c70LdhCDZIb4Kx6R.IJM1yhiyKnnwlbXh"
@@ -451,32 +393,23 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9742924ba797ce77
     img: systems/teriock/src/icons/body-parts/hand.webp
     name: Hand
     system:
       _sup: 384ea457df25f9b6
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: hand
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: pzAbz3uLpkgXMWzq
     _key: "!actors.items!384ea457df25f9b6.pzAbz3uLpkgXMWzq"
@@ -492,15 +425,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!384ea457df25f9b6.pzAbz3uLpkgXMWzq.IDLUUjkSFtpaiKuJ"
@@ -511,44 +440,28 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 9742924ba797ce77
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 384ea457df25f9b6
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Swamp Goblin
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Swamp Goblin
   ring:
     enabled: true
@@ -556,20 +469,12 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/swamp-goblin.webp
   texture:
     src: systems/teriock/src/icons/creatures/swamp-goblin.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 5
   identifier: swamp-goblin
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

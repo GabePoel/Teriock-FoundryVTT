@@ -12,13 +12,9 @@ effects:
     system:
       automations:
         - _id: XKPVFe82k4n1L8AI
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
           type: heal
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -28,24 +24,17 @@ effects:
             formula: 1d4
             type: formula
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - healing
         - regeneration
       elements:
         - nature
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] or @Identifier[core:healing]{heal} the @Identifier[core:targets]{target} again (depending on what
         you chose).</p>
       identifier: empathic-ray
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>As you cast [[lookup name]], choose either "damage" or "healing". The effect varies depending on what you
@@ -56,8 +45,6 @@ effects:
           @Wiki[Category:Regeneration effects]{regeneration effect} and a @Wiki[Category:Healing effects]{healing
           effect}. This is the only part of [[lookup name]] that counts as a @Wiki[Category:Regeneration
           effects]{regeneration effect}.</p>
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -73,9 +60,6 @@ effects:
           @Identifier[core:healing]{heal} them (depending on what you chose).</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 3B8CCaqeJdPsJBDU
     _key: "!items.effects!6bVKBq9lwQoXBJS0.3B8CCaqeJdPsJBDU"
@@ -86,11 +70,6 @@ effects:
     system:
       automations:
         - _id: s830o7SWhITduNHX
-          all: false
-          attachDocuments: true
-          automatic: true
-          multi: false
-          separate: false
           type: addDocuments
           uuids:
             - Compendium.teriock.powers.Folder.31fe961f0b485187
@@ -119,7 +98,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      form: normal
       identifier: familiar-bond
       interaction: manifest
       maneuver: slow
@@ -150,9 +128,6 @@ effects:
       spell: true
       standard: true
       sustained: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: xK4OnVF5jnqLxb3g
     _key: "!items.effects!6bVKBq9lwQoXBJS0.xK4OnVF5jnqLxb3g"
@@ -169,8 +144,6 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       effectTypes:
         - vision
       elements:
@@ -180,7 +153,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      form: normal
       identifier: oracle
       interaction: manifest
       maneuver: slow
@@ -210,9 +182,6 @@ effects:
       ritual: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: synfq4mv5z7bw03a
     _key: "!items.effects!6bVKBq9lwQoXBJS0.synfq4mv5z7bw03a"
@@ -223,33 +192,15 @@ effects:
     system:
       automations:
         - _id: 9f08fabc1d2bcac2
-          executor: false
-          multi: false
-          relation: include
           status: transformed
-          target: false
           type: status
         - _id: iB9yugE9ZXYHDeCK
-          all: false
-          automatic: true
-          competence:
-            raw: 0
           identifiers:
             - species:tree
           level: minor
-          multi: false
           override:
             - art
-          reset:
-            - gp
-            - hp
           setCompetence: override
-          suppress:
-            - body
-            - equipment
-            - fluency
-            - rank
-            - species
           type: transformation
       competence:
         raw: 1
@@ -262,22 +213,15 @@ effects:
       elements:
         - nature
       endCondition: <p>The break of dawn.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:
             - dawn
           type: trigger
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, this effect lasts an addition
         turn without the target being able to @Identifier[ability:self-revert]{Self Revert}.</p>
       identifier: treeform-ball
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
       range:
@@ -296,9 +240,6 @@ effects:
           @Identifier[core:damage]{damage} carries over to their reverted state.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 26a3b429ac70d5ab
 img: systems/teriock/src/icons/ranks/rank-1-nature-mage.webp
@@ -307,8 +248,6 @@ system:
   _sup: eaec74360ee70abd
   archetype: mage
   class: nature-mage
-  competence:
-    raw: 1
   description: >-
     <p>The enchanter of the woods, these wandering spell casters resemble Rangers in their wanderlust. More comfortable
     with @Wiki[Category:Animal creatures]{animals} than @Wiki[Category:Humanoid creatures]{people},
@@ -318,14 +257,11 @@ system:
     @Identifier[class:nature-mage]{Nature Mage} be reclusive, avoiding people if you can, happy in nature and eager to
     leave any civilization.</p>
   identifier: rank-1-nature-mage
-  innate: false
   maxAv: 0
   number: 1
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

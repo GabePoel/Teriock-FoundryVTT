@@ -30,7 +30,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      form: normal
       identifier: digging
       interaction: manifest
       maneuver: passive
@@ -42,7 +41,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: L7afSsWOpelWRHC6
     _key: "!items.effects!502baa2fc007f5f5.L7afSsWOpelWRHC6"
@@ -72,7 +70,6 @@ effects:
         score:
           attribute: str
           value: -1
-    transfer: true
     type: ability
   - _id: qOLIsUXgbIL95ZVj
     _key: "!items.effects!502baa2fc007f5f5.qOLIsUXgbIL95ZVj"
@@ -88,7 +85,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -101,8 +97,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: Yl8uVTgA9Rs1Zrf2
     _key: "!items.effects!502baa2fc007f5f5.Yl8uVTgA9Rs1Zrf2"
@@ -118,7 +112,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -131,8 +124,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: AMIn6SLyENd8WIn4
     _key: "!items.effects!502baa2fc007f5f5.AMIn6SLyENd8WIn4"
@@ -148,7 +139,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -161,8 +151,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: A7ho6dr4WT2ftiqT
     _key: "!items.effects!502baa2fc007f5f5.A7ho6dr4WT2ftiqT"
@@ -192,7 +180,6 @@ effects:
         score:
           attribute: int
           value: -3
-    transfer: true
     type: ability
   - _id: 2HvYZ4VFlgpIWYa1
     _key: "!items.effects!502baa2fc007f5f5.2HvYZ4VFlgpIWYa1"
@@ -210,25 +197,11 @@ effects:
           value: awakening
       automations:
         - _id: 7400b41f20d9f100
-          all: false
-          angle: "60"
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           regionType: emanation
           restriction:
-            enabled: false
-            priority: 0
             type: move
-          targeting: true
           trigger: executeInput
           type: region
-          visibility: 2
         - _id: e1c7d7174b360e93
           competencies:
             - 0
@@ -248,11 +221,7 @@ effects:
           impact: sleep
           type: roll
         - _id: PXielxmkr3bcWsV4
-          executor: false
-          multi: false
-          relation: include
           status: asleep
-          target: false
           type: status
       competence:
         raw: 1
@@ -273,8 +242,6 @@ effects:
       elements:
         - life
       endCondition: <p>The break of dawn.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:
@@ -289,7 +256,6 @@ effects:
       identifier: swift-sleep-aura
       interaction: feat
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>A hypnotizing shimmer spreads through the air around you. Roll [[/sleep 1d8]] to determine the strength of
@@ -308,9 +274,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: SJ27l64cqqszowq2
     _key: "!items.effects!502baa2fc007f5f5.SJ27l64cqqszowq2"
@@ -323,7 +286,6 @@ effects:
         - _id: Kd7EJ2F01l6h5bzk
           common:
             - unglue
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -333,22 +295,14 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - stealing
-      executionTime:
-        base: a1
-      form: normal
       identifier: unglue
       interaction: manifest
-      maneuver: active
       overview:
         base: <p>@Identifier[core:targets]{Target} is no longer @Identifier[property:glued]{glued} and you take it.</p>
       powerSources:
         - spiritual
-      range:
-        unit: contact
       requirements: >-
         <p>Target's bearer is @Identifier[condition:down]{down} or target it
         @Identifier[property:searchable]{searchable}.</p>
@@ -356,7 +310,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
 folder: 9742924ba797ce77
 img: systems/teriock/src/icons/creatures/city-goblin.webp
@@ -364,23 +317,18 @@ name: City Goblin
 system:
   appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
   br: 2
-  competence:
-    raw: 1
   description: >-
     <p>@UUID[Compendium.teriock.tables.RollTable.9742924ba797ce77]{Goblins} have only a loose grasp on reality and are
     easily fooled. In combat, they prefer to attack in large numbers.</p>
   identifier: city-goblin
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 8
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

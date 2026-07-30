@@ -30,7 +30,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: storm-rotator-fluency
       interaction: manifest
       maneuver: passive
@@ -50,7 +49,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 0I3QIXHQZOPnIqJv
     _key: "!items.effects!ZGpoJWCD4UfWiHR9.0I3QIXHQZOPnIqJv"
@@ -65,14 +63,10 @@ effects:
     system:
       automations:
         - _id: Eny3zxX22Ce5EhbM
-          all: false
-          automatic: true
-          expandTables: false
           local:
             identifiers:
               - ability:ice-ball
               - ability:lightning-ray
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -82,7 +76,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: storm-spell-strikes
       interaction: manifest
       maneuver: passive
@@ -96,7 +89,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Z0e4Q1fYx946mpXf
     _key: "!items.effects!ZGpoJWCD4UfWiHR9.Z0e4Q1fYx946mpXf"
@@ -108,12 +100,8 @@ effects:
       _sup: 0I3QIXHQZOPnIqJv
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
           trigger: execute
           type: useDocuments
       competence:
@@ -123,12 +111,8 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       identifier: spell-strike
       interaction: manifest
       limitation: >-
@@ -142,17 +126,12 @@ effects:
           was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
-    transfer: true
     type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-5-storm-mage.webp
@@ -161,8 +140,6 @@ system:
   _sup: fdd81e815b614df0
   archetype: mage
   class: storm-mage
-  competence:
-    raw: 1
   description: >-
     <p>The true wonder seeker, these mages are the philosophers of the world, always seeking out more knowledge and more
     wisdom. The @Identifier[class:storm-mage]{Storm Mage} is a logician, a tactical intellectual who prefers to
@@ -170,14 +147,11 @@ system:
     tumultuous and crafty. If you are playing a @Identifier[class:storm-mage]{Storm Mage}, be curious, hungry for
     information, always in the clouds, tricky and clever, eluding rather than confronting.</p>
   identifier: rank-5-storm-mage
-  innate: false
   maxAv: 0
   number: 5
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

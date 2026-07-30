@@ -5,13 +5,8 @@ name: Jumpstart Heal
 system:
   automations:
     - _id: do0moPMb5BgARhLv
-      consumeStatDice: true
-      forHarm: false
-      noStatDice: false
       trigger: turnStart
       type: heal
-  competence:
-    raw: 0
   delivery: hand
   duration:
     raw: "10"
@@ -19,36 +14,20 @@ system:
   effectTypes:
     - healing
   endCondition: <p>The start of the @Identifier[core:targets]{target's} next @Identifier[core:turns]{turn}.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: cdd190efe70ff5c5
-      event: turn
-      relation: target
-      skip: 0
-      timing: start
       type: combat
     - _id: bbf9eafe29e97d6c
       triggers:
         - damage
       type: trigger
-  form: normal
   identifier: jumpstart-heal
-  interaction: attack
-  maneuver: active
-  piercing:
-    raw: 0
   powerSources:
     - divine
-  range:
-    unit: contact
   results:
     hit: >-
       <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals} at the start of their next turn if they do
       not take any @Identifier[core:damage]{damage} before then.</p>
   skill: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

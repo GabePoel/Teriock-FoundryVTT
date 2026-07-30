@@ -8,14 +8,11 @@ effects:
     img: systems/teriock/src/icons/abilities/amplify-storm-spells.webp
     name: Amplify Storm Spells
     system:
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: amplify-storm-spells
       improvement: <p>This applies to @Identifier[ability:thunderbolt] as well.</p>
       interaction: manifest
@@ -37,15 +34,12 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: XpjYFtONtH4Iibfz
     _key: "!items.effects!7ac2e3e0c5fc8493.XpjYFtONtH4Iibfz"
     img: icons/magic/lightning/bolt-forked-red.webp
     name: Lethal Storms
     system:
-      competence:
-        raw: 0
       delivery: self
       duration:
         unit: unlimited
@@ -68,7 +62,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: qfR4yt0Gi3yY6RNr
     _key: "!items.effects!7ac2e3e0c5fc8493.qfR4yt0Gi3yY6RNr"
@@ -80,29 +73,17 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d6[magic]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -113,9 +94,6 @@ effects:
         hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 3ZP0r8x7Ibw7Q5MN
     _key: "!items.effects!7ac2e3e0c5fc8493.3ZP0r8x7Ibw7Q5MN"
@@ -126,27 +104,17 @@ effects:
     system:
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
           local:
             qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
           trigger: execute
           type: useDocuments
-      competence:
-        raw: 0
       costs:
         primary:
           mp:
             formula: "1"
             type: formula
-      delivery: weapon
-      duration:
-        unit: instant
       executionTime:
         base: r0
-      form: normal
       grantOnly: true
       identifier: spell-strike
       interaction: manifest
@@ -159,17 +127,12 @@ effects:
           was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
-    transfer: true
     type: ability
   - _id: 2dXH2jxURSr7hRYp
     _key: "!items.effects!7ac2e3e0c5fc8493.2dXH2jxURSr7hRYp"
@@ -190,12 +153,9 @@ effects:
               type: override
               value: "true"
           type: changes
-      competence:
-        raw: 0
       description: <p>A weapon with this property can be tossed to make a @Identifier[property:ranged]{ranged} attack.</p>
       form: intrinsic
       identifier: thrown
-    transfer: true
     type: property
   - _id: usdaWXZ6v1ZwnioY
     _key: "!items.effects!7ac2e3e0c5fc8493.usdaWXZ6v1ZwnioY"
@@ -207,13 +167,8 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           formula: (1 + @h)d10[magic]
-          impact: damage
           type: roll
-      competence:
-        raw: 0
       delivery: missile
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - knockout
@@ -221,21 +176,14 @@ effects:
         - loud
       elements:
         - storm
-      executionTime:
-        base: a1
-      form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d10[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: thunderbolt
-      interaction: attack
-      maneuver: active
       overview:
         base: >-
           <p>This cannot reduce the @Identifier[core:targets]{target's} @Identifier[core:hit-points-and-mana-points]{HP}
           to below 0.</p>
-      piercing:
-        raw: 1
       powerSources:
         - magical
       range:
@@ -246,9 +194,6 @@ effects:
         hit: <p>Deal [[/damage 1d10[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: vhVR5ybsuJjACo8Z
     _key: "!items.effects!7ac2e3e0c5fc8493.vhVR5ybsuJjACo8Z"
@@ -259,14 +204,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    transfer: true
     type: property
   - _id: ZSVoMIgNN6l32Rey
     _key: "!items.effects!7ac2e3e0c5fc8493.ZSVoMIgNN6l32Rey"
@@ -288,8 +230,6 @@ effects:
               type: override
               value: "true"
           type: changes
-      competence:
-        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon that can be used to make a [[lookup name
         style=lc]] attack has a range in parentheses after specifying if it requires
@@ -299,7 +239,6 @@ effects:
         @Identifier[core:attack-interaction]{attack roll}. You can't attack a target beyond the weapon's long range.</p>
       form: intrinsic
       identifier: ranged
-    transfer: true
     type: property
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/javelin-of-devastation.webp
@@ -308,9 +247,6 @@ system:
   attackPenalty: "-2"
   bv:
     raw: 1
-  competence:
-    raw: 0
-  consumable: false
   damage:
     base: 1d6
   equipmentClasses:
@@ -331,8 +267,6 @@ system:
     long:
       raw: "60"
       unit: ft
-    melee: true
-    ranged: false
     short:
       raw: "20"
   tier:

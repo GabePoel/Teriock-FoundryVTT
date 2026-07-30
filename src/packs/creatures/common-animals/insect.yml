@@ -49,7 +49,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: climbing
           interaction: manifest
           maneuver: passive
@@ -62,7 +61,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: fv6LXssAnnpkEhmF
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.fv6LXssAnnpkEhmF"
@@ -92,7 +90,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: n7NeCwECs20GluNM
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.n7NeCwECs20GluNM"
@@ -123,7 +120,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: digging
           interaction: manifest
           maneuver: passive
@@ -135,7 +131,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: LO0OQnWNX4OVuv9X
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.LO0OQnWNX4OVuv9X"
@@ -165,7 +160,6 @@ items:
             score:
               attribute: snk
               value: 4
-        transfer: true
         type: ability
       - _id: zMK2yxPZePH8CXhg
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.zMK2yxPZePH8CXhg"
@@ -208,7 +202,6 @@ items:
             - movement
           executionTime:
             base: passive
-          form: normal
           identifier: flying
           interaction: manifest
           maneuver: passive
@@ -223,7 +216,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
         type: ability
       - _id: RnFqfZOwNoU5kM1V
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.RnFqfZOwNoU5kM1V"
@@ -251,7 +243,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: night-vision
           interaction: manifest
           maneuver: passive
@@ -265,7 +256,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: eSC6pAl2S5sytZ4t
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.eSC6pAl2S5sytZ4t"
@@ -293,7 +283,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: nA8pTeUaQUymfLSX
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.nA8pTeUaQUymfLSX"
@@ -323,7 +312,6 @@ items:
             score:
               attribute: str
               value: -3
-        transfer: true
         type: ability
       - _id: 1acTrguhE4GsQZ6W
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.1acTrguhE4GsQZ6W"
@@ -339,7 +327,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -352,8 +339,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: J7Z5ZTL78bdVpZyc
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.J7Z5ZTL78bdVpZyc"
@@ -366,49 +351,30 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
-              display: {}
               formula: 1d6[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
-              display: {}
               formula: 1d8[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d10[toxic]
-              impact: damage
-              trigger: null
               type: roll
             - _id: 743730f25f256b10
-              executor: false
-              multi: false
-              relation: include
               status: poisoned
-              target: false
               type: status
           competence:
             raw: 1
-          delivery: weapon
           duration:
             raw: "24"
             unit: hour
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          executionTime:
-            base: a1
-          form: normal
           identifier: poison-strike
-          interaction: attack
-          maneuver: active
           overview:
             fluent: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -416,20 +382,13 @@ items:
             proficient: >-
               <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
               @Identifier[core:damage]{damage}.</p>
-          piercing:
-            raw: 0
           powerSources:
             - alchemical
-          range:
-            unit: contact
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
-          targets:
-            - creature
-        transfer: true
         type: ability
       - _id: ospPHH3qOeug7D02
         _key: "!actors.items.effects!5b149f9b33fe4a81.5b149f9b33fe4a81.ospPHH3qOeug7D02"
@@ -447,7 +406,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          form: normal
           identifier: scouting
           interaction: manifest
           maneuver: passive
@@ -470,25 +428,18 @@ items:
             score:
               attribute: per
               value: 2
-        transfer: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/insect.webp
     name: Insect
     system:
-      br: 1
-      competence:
-        raw: 1
       identifier: insect
       size:
-        enabled: true
         value: 0.25
       statDice:
         hp:
-          disabled: false
           formula: 1d2
         mp:
-          disabled: false
           formula: 1d6
       traits:
         - animal
@@ -510,15 +461,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!5b149f9b33fe4a81.BMP9vpF321eK5UyR.fq8owR84sFsgLiuj"
@@ -529,9 +476,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -539,7 +483,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!5b149f9b33fe4a81.BMP9vpF321eK5UyR.4WFL62wofj7AHBxN"
@@ -550,24 +493,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
     name: Mouth
     system:
       _sup: 5b149f9b33fe4a81
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       fightingStyle: savage
@@ -575,17 +511,9 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Insect
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -596,9 +524,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/insect.webp
   texture:
     src: systems/teriock/src/icons/creatures/insect.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -606,10 +531,6 @@ system:
   identifier: insect
   mp:
     value: 4
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

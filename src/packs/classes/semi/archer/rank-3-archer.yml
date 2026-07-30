@@ -14,14 +14,11 @@ effects:
     system:
       automations:
         - _id: vU1UGaCECO021oqj
-          all: false
-          automatic: true
           data: |-
             {
               "noHeighten": true
             }
           expandTables: true
-          multi: false
           overrideData: true
           setCompetence: inherit
           trigger: execute
@@ -41,14 +38,10 @@ effects:
             formula: "1"
             type: formula
       delivery: self
-      duration:
-        unit: instant
       executionTime:
         base: a0
-      form: normal
       identifier: arcane-archery
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You turn an arrow into a @Wiki[Category:Conjured spells]{conjured} @Wiki[Category:Ray delivery spells]{ray
@@ -72,7 +65,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: IaI9g2Rz0OYG1Kpy
     _key: "!items.effects!d6687ab8592c4fc9.IaI9g2Rz0OYG1Kpy"
@@ -92,7 +84,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: archery-brigade
       interaction: manifest
       maneuver: passive
@@ -108,7 +99,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: gAy8nWStTqTaMRsI
     _key: "!items.effects!d6687ab8592c4fc9.gAy8nWStTqTaMRsI"
@@ -137,7 +127,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: gamesman
       interaction: manifest
       maneuver: passive
@@ -154,7 +143,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: W9ekYaonCEkM8hNy
     _key: "!items.effects!d6687ab8592c4fc9.W9ekYaonCEkM8hNy"
@@ -169,8 +157,6 @@ effects:
       competence:
         raw: 1
       delivery: item
-      duration:
-        unit: instant
       endCondition: >-
         <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
@@ -178,24 +164,14 @@ effects:
         base: r1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
           timing: end
           type: combat
-      form: normal
       identifier: misdirect
       interaction: block
       maneuver: reactive
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>You block with a @Wiki[Category:Bows]{bow} or your hand.</p>
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
@@ -207,7 +183,6 @@ effects:
       targets:
         - attack
       trigger: <p>You are being @Identifier[core:interactions]{attacked}.</p>
-    transfer: true
     type: ability
   - _id: 1C0jsWbWQHRAU0PO
     _key: "!items.effects!d6687ab8592c4fc9.1C0jsWbWQHRAU0PO"
@@ -226,7 +201,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: precision-shooting
       interaction: manifest
       maneuver: passive
@@ -242,7 +216,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ZKcH3xktroS6otxI
     _key: "!items.effects!d6687ab8592c4fc9.ZKcH3xktroS6otxI"
@@ -258,34 +231,20 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
         - _id: d873eb939c3b5951
           hacks:
             - ear
             - mouth
             - nose
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
-      executionTime:
-        base: a1
-      form: normal
       identifier: vitals-hack
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
         hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
@@ -293,7 +252,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
   - _id: y3l1gK49vcFkz9Yn
     _key: "!items.effects!d6687ab8592c4fc9.y3l1gK49vcFkz9Yn"
@@ -307,19 +265,16 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - bag
-          showConfirmationDialog: true
           type: common
         - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
-          impact: damage
           type: roll
         - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -330,15 +285,11 @@ effects:
             type: formula
         tweaks:
           adept: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-      form: normal
       identifier: slay
       interaction: manifest
       limitation: <p>Only usable against one species, as specified when you use <a class="mw-selflink selflink">Gamesman</a>.</p>
@@ -352,16 +303,11 @@ effects:
           was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
-      range:
-        unit: contact
       skill: true
       standard: true
-      targets:
-        - creature
       trigger: >-
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
-    transfer: true
     type: ability
 folder: 2066ab65e0fb1342
 img: systems/teriock/src/icons/ranks/rank-3-archer.webp
@@ -369,8 +315,6 @@ name: Rank 3 Archer
 system:
   archetype: semi
   class: archer
-  competence:
-    raw: 1
   description: >-
     <p>As precise and accurate as a well-crafted @Identifier[equipment:arrow]{arrow}, @Identifier[class:archer]{Archers}
     don't mess around. They prefer to keep their distance, as that is where they are the most effective, never letting
@@ -379,23 +323,17 @@ system:
     are easily killed. If you are playing an @Identifier[class:archer]{Archer} be direct, and on target, sturdy and
     perhaps high strung, watchful of the future and of your back.</p>
   identifier: rank-3-archer
-  innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support @Pack[teriock.abilities]{ability} to gain
     from [[lookup name]]. Delete the other @Pack[teriock.abilities]{abilities}.</p>
-  maxAv: 2
   number: 3
   statDice:
     hp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
-      formula: 1d10
       number:
         raw: "1"
 type: rank

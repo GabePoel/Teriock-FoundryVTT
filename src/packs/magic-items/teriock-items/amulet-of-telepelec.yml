@@ -17,27 +17,15 @@ effects:
             - 1
           type: duration
         - _id: I9LeXqaXAPet0yHz
-          all: false
-          angle: "60"
           attachToToken: false
-          automatic: true
           deleteOnTurnChange: false
-          excludeToken: true
           expandWithToken: false
-          innerWidth: "0"
-          multi: false
-          outerWidth: "0"
           radius: "30"
-          regionType: circle
           restriction:
             enabled: true
-            priority: 0
             type: move
           targeting: false
           type: region
-          visibility: 2
-      competence:
-        raw: 0
       costs:
         primary:
           mp:
@@ -83,34 +71,25 @@ effects:
           cannot pass through this barrier at all.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - area
-    transfer: true
     type: ability
   - _id: 1KbJcAiYgOJ4d6gn
     _key: "!items.effects!2aec4f7a72d3cff1.1KbJcAiYgOJ4d6gn"
     img: icons/magic/light/explosion-star-large-teal-purple.webp
     name: Conditional Glowing
     system:
-      competence:
-        raw: 0
       description: <p>This item glows blue in the presence of evil.</p>
-      form: normal
-    transfer: true
     type: property
   - _id: 823nqH198nACfJpj
     _key: "!items.effects!2aec4f7a72d3cff1.823nqH198nACfJpj"
     img: icons/magic/life/heart-hand-gold-green-light.webp
     name: Gain Adept Rebirth
     system:
-      competence:
-        raw: 0
       delivery: self
       duration:
         raw: "1"
@@ -121,14 +100,12 @@ effects:
         base: a0
       form: special
       interaction: manifest
-      maneuver: active
       powerSources:
         - magical
       range:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: rBXjfjPMo5CdyY32
     _key: "!items.effects!2aec4f7a72d3cff1.rBXjfjPMo5CdyY32"
@@ -140,9 +117,6 @@ effects:
       automations:
         - _id: l4rM5VwfWLCUKVDc
           formula: (@property.max / 4)d4
-          showConfirmationDialog: true
-          showDialog: true
-          targetParent: true
           trigger: dawn
           type: changeQuantity
         - _id: q7NnSZ2OIzRup4jF
@@ -150,12 +124,8 @@ effects:
           display:
             label: Restore 1 MP
           impact: revitalizing
-          morganti: false
-          showDialog: false
           type: take
       badge: "1"
-      competence:
-        raw: 0
       consumable: true
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held within it that creatures can use to power
@@ -167,7 +137,6 @@ effects:
         @Identifier[core:hit-points-and-mana-points]{MP}. If dawn comes and nobody is
         @Identifier[ability:attune]{attuned} to a [[lookup name]] item, it releases all
         @Identifier[core:hit-points-and-mana-points]{MP} it had stored.</p>
-      form: normal
       identifier: mana-storing
       powerSources:
         - magical
@@ -175,7 +144,6 @@ effects:
         maxFormula: "4"
         value: 0
       tag: "1"
-    transfer: true
     type: property
   - _id: RE7zCZxS63ZOlyXr
     _key: "!items.effects!2aec4f7a72d3cff1.RE7zCZxS63ZOlyXr"
@@ -183,25 +151,17 @@ effects:
     name: Rebirth
     system:
       _sup: 823nqH198nACfJpj
-      competence:
-        raw: 0
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - healing
         - revival
       elements:
         - life
-      executionTime:
-        base: a1
       form: special
       heightened: >-
         For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, target can have been
         @Identifier[condition:dead]{dead} for an additional 10 minutes. If target is @Wiki[Category:Undead
         creatures]{undead}, they are @Identifier[core:healing]{healed} an additional time.
-      interaction: attack
-      maneuver: active
       overview:
         fluent: >-
           If target is @Wiki[Category:Undead creatures]{undead}, they are @Identifier[core:healing]{healed} for
@@ -209,8 +169,6 @@ effects:
         proficient: >-
           If target is @Wiki[Category:Undead creatures]{undead}, they are @Identifier[core:healing]{healed} for
           @Identifier[core:damage]{damage} @Identifier[core:proficiency-bonus]{P} times.
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -232,9 +190,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: OSUfWN5SzN62RVpC
     _key: "!items.effects!2aec4f7a72d3cff1.OSUfWN5SzN62RVpC"
@@ -245,14 +200,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to steal through
         @Pack[teriock.abilities]{abilities} like @Identifier[ability:search]{Search}.</p>
       form: flaw
       identifier: searchable
-    transfer: true
     type: property
   - _id: BLwO7Qmml5jRDg7y
     _key: "!items.effects!2aec4f7a72d3cff1.BLwO7Qmml5jRDg7y"
@@ -263,14 +215,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used in the same hand as a
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
       form: intrinsic
       identifier: small
-    transfer: true
     type: property
   - _id: lzGFuje40zyadBDE
     _key: "!items.effects!2aec4f7a72d3cff1.lzGFuje40zyadBDE"
@@ -295,8 +244,6 @@ effects:
             raw: "10"
             unit: minute
           type: duration
-      competence:
-        raw: 0
       costs:
         components:
           somatic:
@@ -309,48 +256,32 @@ effects:
         unit: minute
       elements:
         - necromancy
-      executionTime:
-        base: a1
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
       identifier: spirit-bury
-      interaction: attack
       invoked: true
-      maneuver: active
       overview:
         proficient: <p>This effect lasts 10 minutes instead of 1.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
       results:
         hit: <p>@Identifier[core:targets]{Target} cannot become @Identifier[condition:wisping]{wisping}.</p>
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/amulet-of-telepelec.webp
 name: Amulet of Telepelec
 system:
-  attackPenalty: "-3"
-  competence:
-    raw: 0
-  consumable: false
   equipmentClasses:
     - knickknacks
   equipmentType: amulet
   equipped: true
   identifier: amulet-of-telepelec
-  minStr: -3
   notes: >-
     <p>Made only in the Far East by a band of nomadic halflings, these [[lookup system.equipmentType style=lc]]s are
     quite popular throughout Teriock due to their lack of flaws! How the halflings made these is a lost art and thus
@@ -359,8 +290,6 @@ system:
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   tier:
     raw: "1"
   weight: 1

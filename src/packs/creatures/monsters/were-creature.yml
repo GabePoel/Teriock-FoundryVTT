@@ -36,7 +36,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: OUxSvKCFWy7ToSek
         _key: "!actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.OUxSvKCFWy7ToSek"
@@ -77,27 +76,18 @@ items:
               type: childChange
               value: 1d8
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d4
-              impact: damage
-              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
                 - 2
-              display: {}
               formula: 1d6
-              impact: damage
-              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
-              display: {}
               formula: 1d8
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -106,7 +96,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: bite
           interaction: manifest
           maneuver: passive
@@ -125,7 +114,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: zWkaZiGXB6OOuN7t
         _key: "!actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.zWkaZiGXB6OOuN7t"
@@ -153,7 +141,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: Xw1DMRxpXXCmZD6L
         _key: "!actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.Xw1DMRxpXXCmZD6L"
@@ -167,15 +154,10 @@ items:
               common:
                 - bag
                 - revive
-              showConfirmationDialog: true
-              trigger: null
               type: common
             - _id: iCn9pFDIGFJWxm6H
               activeQualifier: and(not(@status.burned), not(@status.frozen))
               consumeStatDice: false
-              forHarm: false
-              noStatDice: false
-              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -212,7 +194,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: kwtmYLfXtwwXQla7
         _key: "!actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.kwtmYLfXtwwXQla7"
@@ -237,8 +218,6 @@ items:
           maneuver: reactive
           powerSources:
             - magical
-          range:
-            unit: contact
           results:
             fail: >-
               <p>Over the coming month, the @Identifier[core:targets]{target} will become a
@@ -247,12 +226,9 @@ items:
               every day that passes, the @Identifier[core:difficulty-class]{DC} increases by 1. After 30 days, they
               become a @Identifier[creature:were-creature]{were-creature} and
               @Identifier[ability:were-creature-transformation]{transform} for the first time.</p>
-          targets:
-            - creature
           trigger: >-
             <p>You have just @Identifier[core:damage]{damaged} a @Wiki[Category:Humanoid creatures]{humanoid creature}
             with your @Identifier[property:biting]{bite}.</p>
-        transfer: true
         type: ability
       - _id: qnlkGPNVyfUROxTp
         _key: "!actors.items.effects!b9a89312847ea5a2.b9a89312847ea5a2.qnlkGPNVyfUROxTp"
@@ -263,33 +239,13 @@ items:
         system:
           automations:
             - _id: 7ed2043e8d6ddd92
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:impure-durability
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
             - _id: add5b03e2d5fc333
-              all: false
-              attachDocuments: true
-              automatic: true
-              display: {}
               identifiers:
                 - ability:aggressive
-              local:
-                identifiers: []
-                qualifier: ""
-              multi: false
-              separate: false
               type: addDocuments
-              uuids: []
           competence:
             raw: 1
           delivery: self
@@ -332,7 +288,6 @@ items:
             <p>The moon is in a particular phase. This is typically the phase in which you were first bitten by a
             @Identifier[creature:were-creature]{were-creature}. This triggers automatically. You cannot choose to not
             use it if you are able to.</p>
-        transfer: true
         type: ability
     folder: 13ef6e80a087d7cf
     img: systems/teriock/src/icons/creatures/were-creature.webp
@@ -342,8 +297,6 @@ items:
         <p>A monstrous cross between an @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animal} and a
         @Wiki[Category:Humanoid creatures]{humanoid species}.</p>
       br: 15
-      competence:
-        raw: 1
       description: >-
         <p>Were-creatures change during their particular moon phase into a chaotic half-beast of themselves and begin
         attacking everything nearby. The rest of the time they appear as a normal @Wiki[Category:Humanoid
@@ -354,11 +307,7 @@ items:
         with another @Pack[teriock.creatures]{creature type} which it modifies.</p>
       size:
         enabled: false
-        value: 3
       statDice:
-        hp:
-          disabled: false
-          formula: 1d10
         mp:
           disabled: true
       traits:
@@ -370,15 +319,8 @@ items:
     type: species
 name: Were-Creature
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
-  height: 1
   name: Were-Creature
   ring:
     enabled: true
@@ -386,22 +328,10 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/were-creature.webp
   texture:
     src: systems/teriock/src/icons/creatures/were-creature.webp
-  turnMarker:
-    disposition: false
-    mode: 1
-  width: 1
 system:
   hp:
     value: 6
   identifier: were-creature
-  mp:
-    value: 1
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
-  size:
-    value: 3
 type: creature

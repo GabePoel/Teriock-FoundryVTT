@@ -5,28 +5,13 @@ name: Inferno Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: 800c70e6560525a8
       formula: (1 + @h)d6[magic fire]
-      impact: damage
-      merge: true
       type: roll
-  competence:
-    raw: 0
   costs:
     components:
       somatic:
@@ -38,23 +23,16 @@ system:
         formula: "1"
         type: formula
   delivery: aura
-  duration:
-    unit: instant
   effectTypes:
     - damaging
   elements:
     - flame
-  executionTime:
-    base: a1
-  featSaveAttribute: mov
-  form: normal
   heightened: >-
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
     1d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
   identifier: inferno-aura
   interaction: feat
   invoked: true
-  maneuver: active
   powerSources:
     - magical
   range:
@@ -64,7 +42,4 @@ system:
     fail: <p>Deal [[/damage 1d6[magic fire]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
   spell: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

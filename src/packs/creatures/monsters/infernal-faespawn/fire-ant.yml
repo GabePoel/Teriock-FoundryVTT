@@ -18,10 +18,6 @@ items:
           affinities:
             - _id: VYVCQh90IYJBSK1s
               category: other
-              competence:
-                raw: 0
-              img: null
-              setCompetence: inherit
               type: resistance
               value: Non-Critical Attacks
           competence:
@@ -51,7 +47,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: uHBp4nGr2k7DEbqN
         _key: "!actors.items.effects!0036c488fc809bdc.0036c488fc809bdc.uHBp4nGr2k7DEbqN"
@@ -81,7 +76,6 @@ items:
             score:
               attribute: int
               value: -2
-        transfer: true
         type: ability
       - _id: LMoiyKrBG98BevnD
         _key: "!actors.items.effects!0036c488fc809bdc.0036c488fc809bdc.LMoiyKrBG98BevnD"
@@ -111,7 +105,6 @@ items:
             score:
               attribute: snk
               value: 4
-        transfer: true
         type: ability
       - _id: UrHurJDk5zAXtTrA
         _key: "!actors.items.effects!0036c488fc809bdc.0036c488fc809bdc.UrHurJDk5zAXtTrA"
@@ -122,17 +115,13 @@ items:
         system:
           automations:
             - _id: Efc94klXBtg41ATE
-              changeType: add
               key: system.damage
               qualifier: and(@body, @dmg)
               target: armament
               type: childChange
               value: 1d4[fire magic]
             - _id: 29b275994cf9f5b1
-              display: {}
               formula: 1d4[fire magic]
-              impact: damage
-              trigger: null
               type: roll
           competence:
             raw: 1
@@ -141,7 +130,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: fire-body
           interaction: manifest
           maneuver: passive
@@ -155,7 +143,6 @@ items:
             unit: self
           targets:
             - self
-        transfer: true
         type: ability
       - _id: gLR7ou1LgcC3pg5U
         _key: "!actors.items.effects!0036c488fc809bdc.0036c488fc809bdc.gLR7ou1LgcC3pg5U"
@@ -171,7 +158,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
@@ -184,8 +170,6 @@ items:
           upgrades:
             score:
               attribute: mov
-              value: 0
-        transfer: true
         type: ability
       - _id: nBHgkLK1F8dU0z9e
         _key: "!actors.items.effects!0036c488fc809bdc.0036c488fc809bdc.nBHgkLK1F8dU0z9e"
@@ -201,7 +185,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
@@ -214,8 +197,6 @@ items:
           upgrades:
             score:
               attribute: per
-              value: 0
-        transfer: true
         type: ability
       - _id: 6xDjdruvmnKsKJja
         _key: "!actors.items.effects!0036c488fc809bdc.0036c488fc809bdc.6xDjdruvmnKsKJja"
@@ -231,7 +212,6 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: normal
           identifier: normal-strength
           interaction: manifest
           maneuver: passive
@@ -244,30 +224,22 @@ items:
           upgrades:
             score:
               attribute: str
-              value: 0
-        transfer: true
         type: ability
     folder: 481b13774ffecbdd
     img: systems/teriock/src/icons/creatures/fire-ant.webp
     name: Fire Ant
     system:
-      br: 1
-      competence:
-        raw: 1
       description: >-
         <p>These creatures are believed to been created by
         @UUID[Compendium.teriock.tables.RollTable.c602ce7a824494c1]{demon}-@UUID[Compendium.teriock.tables.RollTable.f2c29b199c990ab7]{fae}
         crossbreeds.</p>
       identifier: fire-ant
       size:
-        enabled: true
         value: 0.25
       statDice:
         hp:
-          disabled: false
           formula: 1d2
         mp:
-          disabled: false
           formula: 1d2
       traits:
         - animal
@@ -289,9 +261,6 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
@@ -299,7 +268,6 @@ items:
           identifier: biting
           powerSources:
             - martial
-        transfer: true
         type: property
       - _id: StZ8lJiQ1zrTkWMW
         _key: "!actors.items.effects!0036c488fc809bdc.HEiL00ggZldxsiWA.StZ8lJiQ1zrTkWMW"
@@ -310,24 +278,17 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        transfer: true
         type: property
     folder: 481b13774ffecbdd
     img: systems/teriock/src/icons/body-parts/jaw.webp
     name: Jaw
     system:
       _sup: 0036c488fc809bdc
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: 1d4
       fightingStyle: savage
@@ -335,8 +296,6 @@ items:
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
   - _id: ynZ8PYR5UMFDNzxf
     _key: "!actors.items!0036c488fc809bdc.ynZ8PYR5UMFDNzxf"
@@ -352,15 +311,11 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
             a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
-        transfer: true
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!0036c488fc809bdc.ynZ8PYR5UMFDNzxf.IDLUUjkSFtpaiKuJ"
@@ -371,41 +326,26 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          applyIfDestroyed: false
-          competence:
-            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be used in the same hand as a
             @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
-        transfer: true
         type: property
     folder: 481b13774ffecbdd
     img: systems/teriock/src/icons/body-parts/foot.webp
     name: Foot
     system:
       _sup: 0036c488fc809bdc
-      attackPenalty: "-3"
-      competence:
-        raw: 0
       damage:
         base: "1"
       identifier: foot
       range:
         long:
           unit: melee
-        melee: true
-        ranged: false
     type: body
 name: Fire Ant
 prototypeToken:
-  actorLink: false
-  appendNumber: false
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
   displayBars: 20
   displayName: 30
   height: 0.5
@@ -416,9 +356,6 @@ prototypeToken:
       texture: systems/teriock/src/icons/tokens/fire-ant.webp
   texture:
     src: systems/teriock/src/icons/creatures/fire-ant.webp
-  turnMarker:
-    disposition: false
-    mode: 1
   width: 0.5
 system:
   hp:
@@ -426,10 +363,6 @@ system:
   identifier: fire-ant
   mp:
     value: 2
-  presence:
-    max: 1
-    min: 0
-    value: 0
   scaling:
     brScale: true
   size:

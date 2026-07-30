@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: carrying
       interaction: manifest
       maneuver: passive
@@ -29,7 +28,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Vny3iVB7RL5QFtvH
     _key: "!items.effects!239f7e99d9a0717e.Vny3iVB7RL5QFtvH"
@@ -59,7 +57,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: pDCBBQ0baIFmHW5p
     _key: "!items.effects!239f7e99d9a0717e.pDCBBQ0baIFmHW5p"
@@ -71,29 +68,17 @@ effects:
       competence:
         raw: 1
       delivery: bite
-      duration:
-        unit: instant
       executionTime:
         base: a2
-      form: normal
       identifier: devour
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: HDY8w78BigZWf4k4
     _key: "!items.effects!239f7e99d9a0717e.HDY8w78BigZWf4k4"
@@ -109,7 +94,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -122,8 +106,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: kF5Bfi2kZkCZeZQR
     _key: "!items.effects!239f7e99d9a0717e.kF5Bfi2kZkCZeZQR"
@@ -139,7 +121,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -152,8 +133,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: Z3KZLdK6BSDW8rew
     _key: "!items.effects!239f7e99d9a0717e.Z3KZLdK6BSDW8rew"
@@ -169,7 +148,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-sneak
       interaction: manifest
       maneuver: passive
@@ -182,8 +160,6 @@ effects:
       upgrades:
         score:
           attribute: snk
-          value: 0
-    transfer: true
     type: ability
   - _id: UDNePbozf4EkIxTD
     _key: "!items.effects!239f7e99d9a0717e.UDNePbozf4EkIxTD"
@@ -199,7 +175,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-strength
       interaction: manifest
       maneuver: passive
@@ -212,8 +187,6 @@ effects:
       upgrades:
         score:
           attribute: str
-          value: 0
-    transfer: true
     type: ability
   - _id: xr5sMm3sg1XvBm7i
     _key: "!items.effects!239f7e99d9a0717e.xr5sMm3sg1XvBm7i"
@@ -227,27 +200,14 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: pince
-      interaction: attack
-      maneuver: active
       overview:
         base: <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage gets dealt accordingly.</p>
-      piercing:
-        raw: 1
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs, depending on what you
@@ -258,7 +218,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: eep4WqgmVifMKECV
     _key: "!items.effects!239f7e99d9a0717e.eep4WqgmVifMKECV"
@@ -272,46 +231,33 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
       costs:
         tweaks:
           gifted: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
       limitation: <p>@Wiki[Category:Stingers]{Stingers} only.</p>
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -319,20 +265,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: t0GMdD2li6EqDtKR
     _key: "!items.effects!239f7e99d9a0717e.t0GMdD2li6EqDtKR"
@@ -361,7 +300,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: swimming
       interaction: manifest
       maneuver: passive
@@ -375,7 +313,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: 8185a98b7551093c
 img: systems/teriock/src/icons/creatures/yellow-scorpion.webp
@@ -383,23 +320,18 @@ name: Yellow Scorpion
 system:
   appearance: <p>Huge [[lookup name style=lc]]s with razor sharp claws.</p>
   br: 4
-  competence:
-    raw: 1
   description: >-
     <p>These scavenge on the deserts and rocks of Teriock making the creepy sounds like "skidachum skatachum". They will
     only eat their food once claim over it is not challenged.</p>
   identifier: yellow-scorpion
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 10
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 10
       number:
         raw: "1"

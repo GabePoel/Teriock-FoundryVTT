@@ -5,47 +5,26 @@ name: Elder Inferno Aura
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
-      attachToToken: true
-      automatic: true
-      deleteOnTurnChange: true
-      expandWithToken: true
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: emanation
-      restriction:
-        enabled: false
-      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: 800c70e6560525a8
       formula: (2 + 2 * @h)d6[magic fire]
-      impact: damage
-      merge: true
       type: roll
-  competence:
-    raw: 0
   delivery: aura
-  duration:
-    unit: instant
   effectTypes:
     - damaging
   elderSorcery: true
   elderSorceryIncant: <p>Inferno.</p>
   elements:
     - flame
-  executionTime:
-    base: a1
-  featSaveAttribute: mov
   form: special
   heightened: >-
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
     2d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
   identifier: elder-inferno-aura
   interaction: feat
-  maneuver: active
   powerSources:
     - magical
   range:
@@ -54,8 +33,5 @@ system:
   results:
     fail: <p>Deal [[/damage 2d6[magic fire]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
   spell: true
-  targets:
-    - creature
   warded: true
-transfer: true
 type: ability

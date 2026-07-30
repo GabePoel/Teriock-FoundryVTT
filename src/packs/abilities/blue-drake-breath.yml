@@ -7,12 +7,7 @@ system:
     - _id: 7400b41f20d9f100
       angle: "@angle.normal"
       attachToToken: false
-      automatic: true
-      deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       regionType: cone
       restriction:
         enabled: true
@@ -20,13 +15,8 @@ system:
       type: region
       updateTargets: true
     - _id: IjlqdW3Tzqkk4X8s
-      executor: false
-      relation: include
       status: frozen
-      target: false
       type: status
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
@@ -43,25 +33,14 @@ system:
   endCondition: >-
     <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
-  executionTime:
-    base: a1
   expirations:
     - _id: 66672059c7a29a30
-      event: turn
       method: roll
-      relation: target
-      roll:
-        comparison: gte
-        formula: 2d4kh1
-        threshold: "4"
-      skip: 0
       timing: end
       type: combat
-  featSaveAttribute: mov
   form: special
   identifier: blue-drake-breath
   interaction: feat
-  maneuver: active
   powerSources:
     - magical
   range:
@@ -69,7 +48,4 @@ system:
     unit: ft
   results:
     fail: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
-  targets:
-    - creature
-transfer: true
 type: ability

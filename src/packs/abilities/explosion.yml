@@ -5,43 +5,27 @@ name: Explosion
 system:
   automations:
     - _id: 7400b41f20d9f100
-      angle: "60"
       attachToToken: false
-      automatic: true
-      deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: "0"
-      multi: false
-      outerWidth: "0"
       radius: "30"
-      regionType: circle
       trigger: executeInput
       type: region
       updateTargets: true
     - _id: 800c70e6560525a8
       formula: (1 + @h)d6[magic fire]
-      impact: damage
-      merge: true
       type: roll
-  competence:
-    raw: 0
   costs:
     primary:
       mp:
         formula: "2"
         type: formula
   delivery: missile
-  duration:
-    unit: instant
   effectTypes:
     - damaging
     - loud
   elements:
     - flame
-  executionTime:
-    base: a1
   expansion:
-    featSaveAttribute: mov
     range:
       raw: "30"
       unit: ft
@@ -51,10 +35,6 @@ system:
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
     1d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
   identifier: explosion
-  interaction: attack
-  maneuver: active
-  piercing:
-    raw: 2
   powerSources:
     - magical
   range:
@@ -66,7 +46,4 @@ system:
   rotator: true
   spell: true
   standard: true
-  targets:
-    - creature
-transfer: true
 type: ability

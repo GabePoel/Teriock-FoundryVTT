@@ -17,7 +17,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: nature-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -33,7 +32,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Z2r70pjjG6JKLhqd
     _key: "!items.effects!sAgL4SVK02cPPElG.Z2r70pjjG6JKLhqd"
@@ -83,7 +81,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: nature-rotators
       interaction: manifest
       maneuver: passive
@@ -113,7 +110,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: HvH2uNs1X5RhtK5U
     _key: "!items.effects!sAgL4SVK02cPPElG.HvH2uNs1X5RhtK5U"
@@ -141,8 +137,6 @@ effects:
               @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
             type: description
       delivery: sight
-      duration:
-        unit: instant
       elderSorcery: true
       executionTime:
         base: Long Rest
@@ -171,13 +165,10 @@ effects:
           @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       ritual: true
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: XsFmpR5G0Y2Tlk6F
     _key: "!items.effects!sAgL4SVK02cPPElG.XsFmpR5G0Y2Tlk6F"
@@ -233,7 +224,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 3IrHwjmHgxXyXUtR
     _key: "!items.effects!sAgL4SVK02cPPElG.3IrHwjmHgxXyXUtR"
@@ -316,7 +306,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: ImkOXAw79U4AZ1Tn
     _key: "!items.effects!sAgL4SVK02cPPElG.ImkOXAw79U4AZ1Tn"
@@ -328,32 +317,11 @@ effects:
       _sup: Z2r70pjjG6JKLhqd
       automations:
         - _id: 9f08fabc1d2bcac2
-          executor: false
-          multi: false
-          relation: include
           status: transformed
-          target: false
           type: status
         - _id: D55WBiqM2QcyO7Vv
-          all: false
-          automatic: true
-          competence:
-            raw: 0
           level: full
-          multi: false
-          override:
-            - art
-            - size
-          reset:
-            - gp
-            - hp
           setCompetence: override
-          suppress:
-            - body
-            - equipment
-            - fluency
-            - rank
-            - species
           type: transformation
           uuids:
             - Compendium.teriock.species.Folder.30f4d11e5e53d332
@@ -407,9 +375,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: yIkNlO7T9onbqlSe
     _key: "!items.effects!sAgL4SVK02cPPElG.yIkNlO7T9onbqlSe"
@@ -421,46 +386,19 @@ effects:
       _sup: Z2r70pjjG6JKLhqd
       automations:
         - _id: 8434365ea22454e2
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:earthbind-aura
-          multi: false
-          separate: false
           type: addDocuments
         - _id: f8698f0406646514
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:earthbind-touch
-          multi: false
-          separate: false
           type: addDocuments
         - _id: ZnqPryFKHegsj30g
           light:
-            alpha: 0.5
-            angle: 360
             animation:
-              intensity: 5
-              reverse: false
-              speed: 5
               type: sunburst
-            attenuation: 0.5
-            bright: 0
             color: "#33d17a"
-            coloration: 1
-            contrast: 0
-            darkness:
-              max: 1
-              min: 0
             dim: 0.01
-            luminosity: 0.5
-            negative: false
-            priority: 0
-            saturation: 0
-            shadows: 0
           type: light
       competence:
         raw: 1
@@ -475,12 +413,9 @@ effects:
         unit: hour
       elements:
         - nature
-      executionTime:
-        base: a1
       form: special
       identifier: crown-of-vines
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>A small circle of glowing vines circles above your head. You gain
@@ -496,7 +431,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: GWth8YBAOTFxmCKb
     _key: "!items.effects!sAgL4SVK02cPPElG.GWth8YBAOTFxmCKb"
@@ -508,9 +442,6 @@ effects:
       _sup: Z2r70pjjG6JKLhqd
       automations:
         - _id: f2ebb4a9ad0d1848
-          all: false
-          attachDocuments: true
-          automatic: true
           data: >-
             {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
             @Identifier[core:healing]{healing} in this way consumes a @Identifier[core:hit-points-and-mana-points]{hit
@@ -519,9 +450,7 @@ effects:
             minute or less.</p>"}}
           identifiers:
             - ability:regenerating
-          multi: false
           overrideData: true
-          separate: false
           type: addDocuments
       competence:
         raw: 1
@@ -542,31 +471,16 @@ effects:
       endCondition: >-
         <p>At the start of each of your @Identifier[core:turns]{turns}, you roll [[/roll 2d4]]. If either of these dice
         roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
       expirations:
         - _id: 66672059c7a29a30
-          event: turn
           method: roll
           relation: executor
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: "4"
-          skip: 0
-          timing: start
           type: combat
       form: special
       identifier: regeneration-touch
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} gains @Identifier[keyword:limited]{Limited}
@@ -578,9 +492,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: SZjVQNe5HKzkoU2l
     _key: "!items.effects!sAgL4SVK02cPPElG.SZjVQNe5HKzkoU2l"
@@ -592,11 +503,6 @@ effects:
       _sup: Z2r70pjjG6JKLhqd
       automations:
         - _id: dx3ALeHkOrZZ9hCe
-          all: false
-          attachDocuments: true
-          automatic: true
-          multi: false
-          separate: false
           type: addDocuments
           uuids:
             - Compendium.teriock.tables.RollTable.a63074fd2ac63eda
@@ -620,13 +526,10 @@ effects:
         - transformation
       elements:
         - nature
-      executionTime:
-        base: a1
       form: special
       identifier: wildborn
       interaction: manifest
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>Gain one @UUID[Compendium.teriock.tables.RollTable.a63074fd2ac63eda]{common animal ability} of your
@@ -642,7 +545,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: TPfJKSdaSdDxeFIl
     _key: "!items.effects!sAgL4SVK02cPPElG.TPfJKSdaSdDxeFIl"
@@ -656,7 +558,6 @@ effects:
         - _id: Ta9OZqqZL2lOaEax
           common:
             - destroy
-          showConfirmationDialog: true
           type: common
       competence:
         raw: 1
@@ -671,25 +572,15 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       effectTypes:
         - destruction
       elements:
         - nature
-      executionTime:
-        base: a1
       form: special
       identifier: unforge
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[property:destroyed]{destroyed}.</p>
       rotator: true
@@ -697,7 +588,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
 folder: 1c2657666be68efd
 img: systems/teriock/src/icons/ranks/rank-2-nature-mage.webp
@@ -706,8 +596,6 @@ system:
   _sup: 731b81f660b743fa
   archetype: mage
   class: nature-mage
-  competence:
-    raw: 1
   description: >-
     <p>The enchanter of the woods, these wandering spell casters resemble Rangers in their wanderlust. More comfortable
     with @Wiki[Category:Animal creatures]{animals} than @Wiki[Category:Humanoid creatures]{people},
@@ -717,14 +605,11 @@ system:
     @Identifier[class:nature-mage]{Nature Mage} be reclusive, avoiding people if you can, happy in nature and eager to
     leave any civilization.</p>
   identifier: rank-2-nature-mage
-  innate: false
   maxAv: 0
   number: 2
   statDice:
     hp:
-      disabled: false
       formula: 1d8
     mp:
-      disabled: false
       formula: 1d12
 type: rank

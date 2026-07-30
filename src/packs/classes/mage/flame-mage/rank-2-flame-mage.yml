@@ -15,7 +15,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: flame-elder-sorcery
       interaction: manifest
       maneuver: passive
@@ -31,7 +30,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: cirogt3aILQXokIv
     _key: "!items.effects!978c2cd690fc8370.cirogt3aILQXokIv"
@@ -81,7 +79,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: flame-rotators
       interaction: manifest
       maneuver: passive
@@ -111,7 +108,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: j79yJG7qE9DoswnZ
     _key: "!items.effects!978c2cd690fc8370.j79yJG7qE9DoswnZ"
@@ -194,7 +190,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: Ow3zMVV4ctELfxqz
     _key: "!items.effects!978c2cd690fc8370.Ow3zMVV4ctELfxqz"
@@ -222,8 +217,6 @@ effects:
               @Identifier[core:hit-points-and-mana-points]{MP} of the spell itself.</p>
             type: description
       delivery: sight
-      duration:
-        unit: instant
       elderSorcery: true
       executionTime:
         base: Long Rest
@@ -252,13 +245,10 @@ effects:
           @Identifier[core:leveling-up]{ranks} you have in @Identifier[archetype:mage]{mage classes}.</p>
       powerSources:
         - magical
-      range:
-        unit: contact
       ritual: true
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 0zF92Q3uBml9sXoe
     _key: "!items.effects!978c2cd690fc8370.0zF92Q3uBml9sXoe"
@@ -312,7 +302,6 @@ effects:
       skill: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 1ngUVMbqsQRVPTvZ
     _key: "!items.effects!978c2cd690fc8370.1ngUVMbqsQRVPTvZ"
@@ -340,19 +329,11 @@ effects:
         unit: minute
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       identifier: rupture-mark
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target's} next @Wiki[Category:Conjured spells]{conjured spell} does not trigger
@@ -360,9 +341,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: 2WkstCMZkBBJDAJA
     _key: "!items.effects!978c2cd690fc8370.2WkstCMZkBBJDAJA"
@@ -379,7 +357,6 @@ effects:
           value: fire
       automations:
         - _id: xcIT6RMeLEKOON09
-          changeType: add
           key: system.damage
           qualifier: "@dmg"
           target: armament
@@ -387,7 +364,6 @@ effects:
           value: 1d4[fire magic]
         - _id: dYuGyhEwQceIhEHF
           formula: 1d4[fire magic]
-          impact: damage
           type: roll
       competence:
         raw: 1
@@ -409,13 +385,10 @@ effects:
         - resistance
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       identifier: control-and-resist-fire
       interaction: manifest
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>Your @Identifier[core:standard-and-critical-damage]{standard damage} increases by [[/damage 1d4[fire
@@ -431,7 +404,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: 3KYBHa7iIM4XBDIM
     _key: "!items.effects!978c2cd690fc8370.3KYBHa7iIM4XBDIM"
@@ -447,10 +419,8 @@ effects:
           trigger: executeSpell
           type: abilityMacro
         - _id: Y4tkQwce00WMBG20
-          changeType: add
           key: system.boosts.damage
           qualifier: "@spell"
-          target: ability
           type: childChange
           value: 1 + @h
       competence:
@@ -471,8 +441,6 @@ effects:
         unit: minute
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the next
@@ -480,7 +448,6 @@ effects:
       identifier: bellows
       interaction: manifest
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>The next @Wiki[Category:Spells]{spell} you cast that would deal @Identifier[core:damage]{damage} is
@@ -495,7 +462,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
   - _id: vcwFoiTAvTJYDaAy
     _key: "!items.effects!978c2cd690fc8370.vcwFoiTAvTJYDaAy"
@@ -518,23 +484,13 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      duration:
-        unit: instant
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       identifier: melting-grasp
-      interaction: attack
       invoked: true
-      maneuver: active
-      piercing:
-        raw: 1
       powerSources:
         - magical
-      range:
-        unit: contact
       results:
         hit: <p>Item is @Identifier[property:shattered]{shattered}.</p>
       rotator: true
@@ -542,7 +498,6 @@ effects:
       standard: true
       targets:
         - item
-    transfer: true
     type: ability
   - _id: l0DSjUYCLciEcvk2
     _key: "!items.effects!978c2cd690fc8370.l0DSjUYCLciEcvk2"
@@ -554,46 +509,19 @@ effects:
       _sup: cirogt3aILQXokIv
       automations:
         - _id: aa4fa44804f6e58a
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:burning-touch
-          multi: false
-          separate: false
           type: addDocuments
         - _id: d032756e5fee7434
-          all: false
-          attachDocuments: true
-          automatic: true
           identifiers:
             - ability:inferno-aura
-          multi: false
-          separate: false
           type: addDocuments
         - _id: E2w7M2N45twcSWyA
           light:
-            alpha: 0.5
-            angle: 360
             animation:
-              intensity: 5
-              reverse: false
-              speed: 5
               type: sunburst
-            attenuation: 0.5
-            bright: 0
             color: "#e01b24"
-            coloration: 1
-            contrast: 0
-            darkness:
-              max: 1
-              min: 0
             dim: 0.01
-            luminosity: 0.5
-            negative: false
-            priority: 0
-            saturation: 0
-            shadows: 0
           type: light
       competence:
         raw: 1
@@ -613,13 +541,10 @@ effects:
         unit: hour
       elements:
         - flame
-      executionTime:
-        base: a1
       form: special
       identifier: crown-of-flame
       interaction: manifest
       invoked: true
-      maneuver: active
       overview:
         base: >-
           <p>A small circle of smokeless fire circles above your head. You gain
@@ -634,7 +559,6 @@ effects:
       sustained: true
       targets:
         - self
-    transfer: true
     type: ability
 folder: abd25a387353ae4e
 img: systems/teriock/src/icons/ranks/rank-2-flame-mage.webp
@@ -642,26 +566,21 @@ name: Rank 2 Flame Mage
 system:
   archetype: mage
   class: flame-mage
-  competence:
-    raw: 1
   description: >-
     <p>Fierce and brazen, these mages are always at war. The arms dealers of the world, their magic is completely
     focused on destruction and thus they seek to create bigger and better ways to blow things up. Passionate, wild and a
     bit chaotic, these mages like the mountains and underground spaces. If you are playing a
     @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like, ready for battle, and consuming everything.</p>
   identifier: rank-2-flame-mage
-  innate: false
   maxAv: 0
   number: 2
   statDice:
     hp:
-      disabled: false
       faces: 8
       formula: 1d8
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 12
       formula: 1d12
       number:

@@ -29,7 +29,6 @@ effects:
         score:
           attribute: int
           value: -2
-    transfer: true
     type: ability
   - _id: 1HCt8FdkZjLu6qHo
     _key: "!items.effects!edff73621c862c67.1HCt8FdkZjLu6qHo"
@@ -43,30 +42,17 @@ effects:
           hacks:
             - arm
             - leg
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: hack
-      interaction: attack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-      maneuver: active
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
           accordingly.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
@@ -79,7 +65,6 @@ effects:
       targets:
         - arm
         - leg
-    transfer: true
     type: ability
   - _id: au24HNeACQuxhSpR
     _key: "!items.effects!edff73621c862c67.au24HNeACQuxhSpR"
@@ -92,31 +77,17 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
         - _id: d873eb939c3b5951
           hacks:
             - body
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      form: normal
       identifier: impale
-      interaction: attack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: >-
           <p>If you want, @Identifier[core:targets]{target} takes
@@ -126,7 +97,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
   - _id: aolvH3PyaYajIs9a
     _key: "!items.effects!edff73621c862c67.aolvH3PyaYajIs9a"
@@ -156,7 +126,6 @@ effects:
         score:
           attribute: str
           value: -1
-    transfer: true
     type: ability
   - _id: KTegiK37QUWlMyRg
     _key: "!items.effects!edff73621c862c67.KTegiK37QUWlMyRg"
@@ -184,7 +153,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      form: normal
       identifier: night-vision
       interaction: manifest
       maneuver: passive
@@ -198,7 +166,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: TQ63vEDYhPd0sJm7
     _key: "!items.effects!edff73621c862c67.TQ63vEDYhPd0sJm7"
@@ -226,7 +193,6 @@ effects:
         unit: self
       targets:
         - self
-    transfer: true
     type: ability
   - _id: pXA8IXAVlEmz4fhy
     _key: "!items.effects!edff73621c862c67.pXA8IXAVlEmz4fhy"
@@ -242,7 +208,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
@@ -255,8 +220,6 @@ effects:
       upgrades:
         score:
           attribute: mov
-          value: 0
-    transfer: true
     type: ability
   - _id: Id9T47L6q3Q75mpp
     _key: "!items.effects!edff73621c862c67.Id9T47L6q3Q75mpp"
@@ -272,7 +235,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
@@ -285,8 +247,6 @@ effects:
       upgrades:
         score:
           attribute: per
-          value: 0
-    transfer: true
     type: ability
   - _id: ATRHWrjDRdLo8T98
     _key: "!items.effects!edff73621c862c67.ATRHWrjDRdLo8T98"
@@ -300,43 +260,30 @@ effects:
           competencies:
             - 0
           formula: 1d6[toxic]
-          impact: damage
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
             - 1
           formula: 1d8[toxic]
-          impact: damage
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d10[toxic]
-          impact: damage
           type: roll
         - _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
           status: poisoned
-          target: false
           type: status
       competence:
         raw: 1
-      delivery: weapon
       duration:
         raw: "24"
         unit: hour
       effectTypes:
         - poison
       endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
       identifier: poison-strike
-      interaction: attack
       limitation: <p>@Identifier[property:biting]{Biting equipment} only.</p>
-      maneuver: active
       overview:
         fluent: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
@@ -344,20 +291,13 @@ effects:
         proficient: >-
           <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
-      range:
-        unit: contact
       results:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
       skill: true
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: DHmtXjRraE5vVcnp
     _key: "!items.effects!edff73621c862c67.DHmtXjRraE5vVcnp"
@@ -373,7 +313,6 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: normal
       identifier: sneaky
       interaction: manifest
       maneuver: passive
@@ -387,7 +326,6 @@ effects:
         score:
           attribute: snk
           value: 1
-    transfer: true
     type: ability
   - _id: uqUktfI4hWulIGCP
     _key: "!items.effects!edff73621c862c67.uqUktfI4hWulIGCP"
@@ -400,35 +338,21 @@ effects:
         - _id: 1728b3a84ea27844
           common:
             - standardDamage
-          showConfirmationDialog: true
           type: common
         - _id: d873eb939c3b5951
           hacks:
             - ear
             - mouth
             - nose
-          reverse: false
           type: hacks
       competence:
         raw: 1
-      delivery: weapon
-      duration:
-        unit: instant
       effectTypes:
         - damaging
-      executionTime:
-        base: a1
-      form: normal
       identifier: vitals-hack
-      interaction: attack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
-      maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
-      range:
-        unit: contact
       results:
         critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
         hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
@@ -436,27 +360,21 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
     type: ability
 folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/viper.webp
 name: Viper
 system:
   br: 3
-  competence:
-    raw: 1
   identifier: viper
   size:
-    enabled: true
     value: 1
   statDice:
     hp:
-      disabled: false
       faces: 6
       number:
         raw: "1"
     mp:
-      disabled: false
       faces: 6
       number:
         raw: "1"

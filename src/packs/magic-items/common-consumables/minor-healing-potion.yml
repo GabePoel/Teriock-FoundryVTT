@@ -11,39 +11,24 @@ effects:
       automations:
         - _id: akIb7OeNml4gnUXz
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           type: heal
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
-      duration:
-        unit: instant
       effectTypes:
         - healing
-      executionTime:
-        base: a1
-      form: normal
       grantUse: true
       identifier: drink-minor-healing-potion
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>You @Identifier[core:healing]{heal} without consuming @Identifier[core:hit-points-and-mana-points]{hit
           dice}.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
-      targets:
-        - creature
-    transfer: true
     type: ability
   - _id: Z8Q21X7QboeySzUT
     _key: "!items.effects!92f3d9b1b2b16823.Z8Q21X7QboeySzUT"
@@ -54,8 +39,6 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
         @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it
@@ -64,7 +47,6 @@ effects:
         instead @Identifier[property:destroyed]{destroyed}.</p>
       form: flaw
       identifier: fragile
-    transfer: true
     type: property
   - _id: u1UiAL4hm661v4Wa
     _key: "!items.effects!92f3d9b1b2b16823.u1UiAL4hm661v4Wa"
@@ -76,39 +58,26 @@ effects:
       automations:
         - _id: OsM3AW76R67PriLM
           consumeStatDice: false
-          forHarm: false
-          noStatDice: false
           type: heal
-      competence:
-        raw: 0
       consumeSource: true
       delivery: item
-      duration:
-        unit: instant
       effectTypes:
         - healing
-      executionTime:
-        base: a1
-      form: normal
       grantUse: true
       identifier: pour-minor-healing-potion
       interaction: manifest
-      maneuver: active
       overview:
         base: >-
           <p>The target @Identifier[core:healing]{heals} without consuming
           @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
       powerSources:
         - alchemical
-      range:
-        unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts
         as the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the
         ability.</p>
       targets:
         - self
-    transfer: true
     type: ability
   - _id: x6sjcsIVaOkVZOFD
     _key: "!items.effects!92f3d9b1b2b16823.x6sjcsIVaOkVZOFD"
@@ -119,14 +88,11 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to steal through
         @Pack[teriock.abilities]{abilities} like @Identifier[ability:search]{Search}.</p>
       form: flaw
       identifier: searchable
-    transfer: true
     type: property
   - _id: VQDFXr0oJQZ7Waxe
     _key: "!items.effects!92f3d9b1b2b16823.VQDFXr0oJQZ7Waxe"
@@ -137,42 +103,30 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      competence:
-        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used in the same hand as a
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
       form: intrinsic
       identifier: small
-    transfer: true
     type: property
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/minor-healing-potion.webp
 name: Minor Healing Potion
 system:
-  attackPenalty: "-3"
-  competence:
-    raw: 0
   consumable: true
-  consumptionAmount: 1
   equipmentClasses:
     - containers
     - knickknacks
   equipmentType: bottle
   equipped: true
   identifier: minor-healing-potion
-  minStr: -3
   needsAttunement: false
   onUse:
     - 6s8QNiuufhR76BT3
     - u1UiAL4hm661v4Wa
   powerLevel: enchanted
-  quantity:
-    value: 1
   range:
     long:
       unit: melee
-    melee: true
-    ranged: false
   weight: 1
 type: equipment
