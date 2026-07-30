@@ -40,7 +40,7 @@ export default class BasePreviewModel extends BaseDataModel {
    * @returns {string}
    */
   static get defaultSortOption() {
-    return "default";
+    return "name";
   }
 
   /**
@@ -207,7 +207,7 @@ export default class BasePreviewModel extends BaseDataModel {
    * @returns {Record<string, (document: *) => string|number>}
    */
   get _sortMap() {
-    return { name: d => d?.name ?? "" };
+    return { default: d => d?.sort ?? 0, name: d => d?.name ?? "" };
   }
 
   /**

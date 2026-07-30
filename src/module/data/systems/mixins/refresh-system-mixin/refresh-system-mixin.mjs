@@ -152,9 +152,8 @@ export default function RefreshSystemMixin(Base) {
           const updateObject = this.toRefreshObject(document, options);
           updateObject._id = this.parent.id;
           delete updateObject.flags;
-          // Replace automations wholesale so that ones missing from the source don't linger.
-          if (foundry.utils.hasProperty(updateObject, "system.automations")) {
-            updateObject.system.automations = _replace(updateObject.system.automations);
+          for (const path of Object.values(this.metadata.pseudos)) {
+            foundry.utils.setProperty(updateObject, path, _replace(foundry.utils.getProperty(updateObject, path)));
           }
           if (fullOverride) {
             updateObject.effects = _replace(updateObject.effects);
