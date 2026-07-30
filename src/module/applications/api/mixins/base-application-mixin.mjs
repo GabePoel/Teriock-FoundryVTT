@@ -69,7 +69,7 @@ export default function BaseApplicationMixin(Base) {
 
     /**
      * Internal map of context menus so they can safely be called in `_onRender`.
-     * @type {Map<string, TeriockContextMenu>}
+     * @type {Map<string, {container: HTMLElement, menu: TeriockContextMenu}>}
      */
     #contextMenus = new Map();
 
@@ -179,10 +179,13 @@ export default function BaseApplicationMixin(Base) {
      * @returns {TeriockContextMenu|null}
      */
     _createContextMenu(handler, selector, options = {}) {
+      const container = options.container ?? this.element;
       const key = `${options.eventName ?? "contextmenu"}:${selector}`;
-      if (this.#contextMenus.has(key)) { return this.#contextMenus.get(key); }
+      const existing = this.#contextMenus.get(key);
+      if (existing?.container === container) { return existing.menu; }
       const menu = super._createContextMenu(handler, selector, options);
-      if (menu) { this.#contextMenus.set(key, menu); }
+      if (menu) { this.#contextMenus.set(key, { container, menu }); }
+      else { this.#contextMenus.delete(key); }
       return menu;
     }
 
@@ -277,6 +280,12 @@ export default function BaseApplicationMixin(Base) {
       for (const animation of root.getAnimations({ subtree: true })) {
         if (animation.animationName === "spin-offset" && animation.startTime !== 0) { animation.startTime = 0; }
       }
+    }
+
+    /** @inheritDoc */
+    _tearDown(options) {
+      super._tearDown(options);
+      this.#contextMenus.clear();
     }
 
     /**
