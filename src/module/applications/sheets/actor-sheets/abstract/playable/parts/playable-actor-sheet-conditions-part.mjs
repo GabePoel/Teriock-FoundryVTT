@@ -68,6 +68,7 @@ export default function PlayableActorSheetConditionsPart(Base) {
             conditionKey: condition,
             locked: info.locked,
             providers: Array.from(info.reasons),
+            sources: Array.from(info.sources),
             // Only a forced condition renders from this; the rest use their own effect's tooltip.
             tooltip: info.locked ? await this.#conditionTooltip(condition) : "",
           }, { parent: this.document.system });

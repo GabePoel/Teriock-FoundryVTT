@@ -36,6 +36,8 @@ declare global {
       img: string;
       /** Names of the things that grant this affinity, unioned across every source. */
       providers: string[];
+      /** UUIDs of the documents that grant this affinity. */
+      sources: UUID<TeriockDocument>[];
       type: Type;
       value: string;
     };

@@ -24,6 +24,7 @@ export default function ActorConditionsPart(Base) {
               return new fields.SchemaField({
                 locked: new fields.BooleanField(),
                 reasons: new fields.SetField(new fields.StringField()),
+                sources: new fields.SetField(new fields.DocumentUUIDField()),
                 trackers: new fields.SetField(new fields.DocumentUUIDField()),
               });
             }),
@@ -38,7 +39,9 @@ export default function ActorConditionsPart(Base) {
       #applyEffectConditionReasons() {
         for (const e of this.parent.validEffects) {
           for (const s of e.statuses) {
-            if (!e.id.startsWith(s)) { this.conditionInformation[s]?.reasons.add(e.name); }
+            if (e.id.startsWith(s)) { continue; }
+            this.conditionInformation[s]?.reasons.add(e.name);
+            this.conditionInformation[s]?.sources.add(e.uuid);
           }
         }
       }

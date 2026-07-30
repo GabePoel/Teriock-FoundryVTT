@@ -171,7 +171,7 @@ export default {
       weakness: true,
     },
     incapability: {
-      colors: colors.palette.red,
+      color: colors.palette.red,
       identifier: "keyword:incapable",
       img: iconManifest.keywords.incapable,
       label: "TERIOCK.TERMS.Affinities.incapability.single",

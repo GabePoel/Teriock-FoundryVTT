@@ -5,6 +5,7 @@ declare global {
     type ConditionInformation = {
       locked: boolean;
       reasons: Set<string>;
+      sources: Set<SafeUUID<TeriockDocument>>;
       trackers: Set<SafeUUID<TeriockTokenDocument>>;
     };
 

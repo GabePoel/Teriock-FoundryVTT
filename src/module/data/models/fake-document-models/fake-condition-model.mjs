@@ -88,6 +88,12 @@ export default class FakeConditionModel extends BaseFakeDocumentModel {
   }
 
   /** @inheritDoc */
+  onEmbed(element) {
+    if (!this.locked && this.effect) { this.effect.onEmbed(element); }
+    else { super.onEmbed(element); }
+  }
+
+  /** @inheritDoc */
   prepareData() {
     super.prepareData();
     this.img ??= TERIOCK.statuses.conditions[this.conditionKey]?.img;

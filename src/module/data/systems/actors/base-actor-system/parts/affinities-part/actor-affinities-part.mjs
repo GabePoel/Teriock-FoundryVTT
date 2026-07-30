@@ -56,6 +56,7 @@ export default function ActorAffinitiesPart(Base) {
         }
         existing.amount += entry.amount;
         for (const provider of entry.providers ?? []) { existing.providers.add(provider); }
+        for (const source of entry.sources ?? []) { existing.sources.add(source); }
         if (entry.competence > existing.competence) {
           existing.competence = entry.competence;
           existing.img = entry.img;
@@ -71,7 +72,9 @@ export default function ActorAffinitiesPart(Base) {
        */
       #addConditionAffinity(condition, type, category, value) {
         if (!this.parent.statuses.has(condition)) { return; }
-        this.addVirtualAffinity(type, category, value, TERIOCK.reference.conditions[condition]);
+        this.addVirtualAffinity(type, category, value, TERIOCK.reference.conditions[condition], {
+          sources: this.conditionInformation[condition]?.sources,
+        });
       }
 
       /**
@@ -91,9 +94,12 @@ export default function ActorAffinitiesPart(Base) {
        * @param {Teriock.Keys.AffinityCategory} category
        * @param {string} value
        * @param {string} provider - What gives this affinity to the actor.
-       * @param {number} [amount]
+       * @param {object} [options]
+       * @param {number} [options.amount]
+       * @param {Iterable<UUID<TeriockDocument>>} [options.sources] - Documents behind the provider, if there are any.
        */
-      addVirtualAffinity(type, category, value, provider, amount = 0) {
+      addVirtualAffinity(type, category, value, provider, options = {}) {
+        const { amount = 0, sources = [] } = options;
         const config = affinityConfig.types[type] || {};
         const fallback = config.img;
         this.#addAffinity({
@@ -102,6 +108,7 @@ export default function ActorAffinitiesPart(Base) {
           competence: 2,
           img: getImage(affinityConfig.categories[category]?.imgCategory, value, fallback),
           providers: [provider].filter(Boolean),
+          sources: Array.from(sources ?? []),
           type,
           value,
         });

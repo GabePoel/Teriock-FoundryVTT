@@ -110,6 +110,7 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
       competence: this.getCompetence(),
       img: this.img,
       providers: [this.document?.name].filter(Boolean),
+      sources: [this.document?.uuid].filter(Boolean),
       type: this.type,
       value: this.value,
     };
