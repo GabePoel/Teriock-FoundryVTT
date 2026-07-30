@@ -98,10 +98,8 @@ export default class ConditionSystem
     await actor?.toggleStatusEffect(key, { active: false });
   }
 
-  /**
-   * @inheritDoc
-   */
-  getCardContextMenuEntries(_doc) {
+  /** @inheritDoc */
+  getEmbedContextMenuEntries(_doc) {
     return [{
       group: "usage",
       icon: makeIcon(this.useIcon, "contextMenu"),

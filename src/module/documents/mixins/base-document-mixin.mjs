@@ -1,5 +1,3 @@
-import { makeIcon } from "../../helpers/icon.mjs";
-import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
@@ -272,8 +270,9 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * Check whether it's valid for this document to be edited from another one. This is mainly intended for use
-       * in {@link getCardContextMenuEntries}. If this document appears as an embedded card (via `@EMBED`) or
-       * otherwise has its context menu entries shown in a sheet for some document, only some of them should be visible.
+       * in {@link EmbedCardDocument.getEmbedContextMenuEntries}. If this document appears as an embedded card (via
+       * `@EMBED`) or otherwise has its context menu entries shown in a sheet for some document, only some of them
+       * should be visible.
        * @param {TeriockDocument} doc
        * @param {object} [options]
        * @param {boolean} [options.editable] - Require the document's sheet to be editable.
@@ -322,36 +321,6 @@ export default function BaseDocumentMixin(Base) {
        */
       checkEditor(user) {
         return game.user.id === (user.id || user._id || user) && this.isOwner;
-      }
-
-      /**
-       * Context menu entries to display for cards that represent this document.
-       * @param {TeriockDocument} doc
-       * @returns {ContextMenuEntry[]}
-       */
-      getCardContextMenuEntries(doc) {
-        /** @type {ContextMenuEntry[]} */
-        const entries = [];
-        if (this.system?.getCardContextMenuEntries) { entries.push(...this.system.getCardContextMenuEntries(doc)); }
-        entries.push(...[{
-          group: "open",
-          icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
-          onClick: async () => {
-            const resolved = await resolveDocument(this.master);
-            if (resolved) { await resolved.sheet?.render(true); }
-          },
-          visible: () => this.master?.isViewer && doc?.uuid !== this.master?.uuid,
-        }, {
-          group: "document",
-          icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
-          label: _loc("COMMON.Delete"),
-          onClick: async () => await this.deleteDialog({ modal: true }, { interactive: true }),
-          visible: () =>
-            this._checkValidEditorDocument(doc)
-            || (this.inCompendium && !this.compendium.locked && !this.parent && this.sup?.uuid === doc?.uuid),
-        }]);
-        return entries;
       }
 
       /** @inheritdoc */

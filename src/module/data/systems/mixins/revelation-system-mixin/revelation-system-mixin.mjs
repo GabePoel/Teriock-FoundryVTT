@@ -37,8 +37,8 @@ export default function RevelationSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        return [...super.getCardContextMenuEntries(doc), {
+      getEmbedContextMenuEntries(doc) {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "reveal",
           icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),

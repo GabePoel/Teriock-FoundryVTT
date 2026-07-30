@@ -75,7 +75,7 @@ export default function PreviewSheetMixin(Base) {
 
       /**
        * Rendered virtual models.
-       * @returns {Map<string, BaseVirtualModel>}
+       * @returns {Map<string, Teriock.Embeds.Embeddable>}
        */
       #renderedVirtuals() {
         const virtuals = new Map();

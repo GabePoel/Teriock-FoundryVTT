@@ -201,8 +201,8 @@ export default function EquipmentStoragePart(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        const entries = super.getCardContextMenuEntries(doc);
+      getEmbedContextMenuEntries(doc) {
+        const entries = super.getEmbedContextMenuEntries(doc);
         entries.push(...[{
           group: "document",
           icon: makeIcon(TERIOCK.display.icons.equipment.stack, "contextMenu"),

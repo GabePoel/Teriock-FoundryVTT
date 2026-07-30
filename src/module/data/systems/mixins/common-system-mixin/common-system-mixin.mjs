@@ -61,7 +61,7 @@ export default function CommonSystemMixin(Base) {
 
       /**
        * Check if an embed icon is visible.
-       * @param {Teriock.EmbedData.EmbedIcon} icon
+       * @param {Teriock.Embeds.EmbedIcon} icon
        */
       #checkEmbedIcon(icon) {
         if (typeof icon.visible === "function") return icon.visible();
@@ -69,12 +69,12 @@ export default function CommonSystemMixin(Base) {
         return true;
       }
 
-      /** @returns {Record<string, Teriock.EmbedData.EmbedAction>} */
+      /** @returns {Record<string, Teriock.Embeds.EmbedAction>} */
       get _embedActions() {
         return {};
       }
 
-      /** @returns {Teriock.EmbedData.EmbedIcon[]} */
+      /** @returns {Teriock.Embeds.EmbedIcon[]} */
       get _embedIcons() {
         return [];
       }
@@ -89,7 +89,7 @@ export default function CommonSystemMixin(Base) {
         return this.parent;
       }
 
-      /** @returns {Partial<Teriock.EmbedData.EmbedParts>} */
+      /** @returns {Partial<Teriock.Embeds.EmbedParts>} */
       get embedParts() {
         return {
           color: this.color,
@@ -111,7 +111,7 @@ export default function CommonSystemMixin(Base) {
 
       /**
        * A single icon which denotes something about this document.
-       * @returns {Teriock.EmbedData.EmbedIcon|null}
+       * @returns {Teriock.Embeds.EmbedIcon|null}
        */
       get tagIcon() {
         return null;
@@ -157,7 +157,7 @@ export default function CommonSystemMixin(Base) {
        * @param {TeriockDocument} _doc
        * @returns {ContextMenuEntry[]}
        */
-      getCardContextMenuEntries(_doc) {
+      getEmbedContextMenuEntries(_doc) {
         return [];
       }
 

@@ -88,13 +88,13 @@ export default class TeriockTableResult
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
+  getEmbedContextMenuEntries(doc) {
     return [{
       icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
       onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
       visible: () => this.documentUuid,
-    }, ...super.getCardContextMenuEntries(doc)];
+    }, ...super.getEmbedContextMenuEntries(doc)];
   }
 
   /** @inheritDoc */

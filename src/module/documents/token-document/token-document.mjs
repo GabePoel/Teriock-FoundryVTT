@@ -81,13 +81,13 @@ export default class TeriockTokenDocument
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
+  getEmbedContextMenuEntries(doc) {
     return [{
       icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
       onClick: async () => this.actor.sheet.render(true),
       visible: () => this.actor && this.actor.isViewer,
-    }, ...super.getCardContextMenuEntries(doc)];
+    }, ...super.getEmbedContextMenuEntries(doc)];
   }
 
   /**

@@ -9,6 +9,7 @@ const { fields } = foundry.data;
 /**
  * Something an actor derives during preparation that is displayed as though it were a document, but is not one.
  * @extends {BaseDataModel}
+ * @implements {Teriock.Embeds.Embeddable}
  * @property {Teriock.System.ImageString} img
  * @property {Set<string>} providers
  * @property {Set<UUID<TeriockDocument>>} sources
@@ -55,18 +56,17 @@ export default class BaseVirtualModel extends BaseDataModel {
     await source?.sheet?.render(true);
   }
 
-  /**
-   * Icons denoting something about this.
-   * @returns {Teriock.EmbedData.EmbedIcon[]}
-   */
+  /** @inheritDoc */
+  get _embedActions() {
+    return {};
+  }
+
+  /** @inheritDoc */
   get _embedIcons() {
     return [];
   }
 
-  /**
-   * The block this renders as.
-   * @returns {Teriock.EmbedData.EmbedParts}
-   */
+  /** @inheritDoc */
   get embedParts() {
     return {
       draggable: false,
@@ -90,17 +90,14 @@ export default class BaseVirtualModel extends BaseDataModel {
   }
 
   /**
-   * The document this stands for. Clicking the block opens whatever this refers to.
+   * A document this stands for. Clicking the embed card opens this.
    * @returns {TypedIdentifier | string}
    */
   get identifier() {
     return "";
   }
 
-  /**
-   * Used for searching and sorting.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get name() {
     return "";
   }
@@ -120,19 +117,13 @@ export default class BaseVirtualModel extends BaseDataModel {
     return dotJoin(Array.from(this.providers));
   }
 
-  /**
-   * A stable "uuid" that is deliberately not resolvable.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get uuid() {
     return `${this.constructor.VIRTUAL_NAME}.${this.id}`;
   }
 
-  /**
-   * Kinda an embed card `getCardContextMenuEntries` call.
-   * @returns {ContextMenuEntry[]}
-   */
-  getCardContextMenuEntries() {
+  /** @inheritDoc */
+  getEmbedContextMenuEntries(_relative) {
     return [{
       group: "open",
       icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
@@ -142,12 +133,9 @@ export default class BaseVirtualModel extends BaseDataModel {
     }];
   }
 
-  /**
-   * Kinda an embed card `onEmbed` call.
-   * @param {HTMLElement} element
-   */
+  /** @inheritDoc */
   onEmbed(element) {
-    const menuEntries = this.getCardContextMenuEntries();
+    const menuEntries = this.getEmbedContextMenuEntries();
     if (!menuEntries.length) { return; }
     element.addEventListener("contextmenu", event => {
       const action = /** @type {HTMLElement} */ (event.target).closest("[data-action]")?.dataset.action;

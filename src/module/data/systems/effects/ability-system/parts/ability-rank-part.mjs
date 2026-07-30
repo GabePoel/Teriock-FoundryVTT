@@ -34,8 +34,8 @@ export default function AbilityRankPart(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        const entries = super.getCardContextMenuEntries(doc);
+      getEmbedContextMenuEntries(doc) {
+        const entries = super.getEmbedContextMenuEntries(doc);
         if (doc?.type === "rank" && doc?.uuid === this.parent.parent?.uuid && doc?.isOwner && doc?.sheet?.isEditable) {
           entries.push({
             group: "edit",

@@ -37,7 +37,7 @@ export default function AbilityEquipmentPart(Base) {
 
       /**
        * On use icon (when ability is granted by equipment and can be toggled to activate only on use).
-       * @returns {Teriock.EmbedData.EmbedIcon}
+       * @returns {Teriock.Embeds.EmbedIcon}
        */
       get grantUseIcon() {
         return {
@@ -73,8 +73,8 @@ export default function AbilityEquipmentPart(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        const entries = super.getCardContextMenuEntries(doc);
+      getEmbedContextMenuEntries(doc) {
+        const entries = super.getEmbedContextMenuEntries(doc);
         entries.push({
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),

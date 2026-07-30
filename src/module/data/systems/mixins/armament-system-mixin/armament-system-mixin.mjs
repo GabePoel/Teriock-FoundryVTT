@@ -343,7 +343,7 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
+      getEmbedContextMenuEntries(doc) {
         const entries = [{
           group: "usage",
           icon: makeIcon(TERIOCK.display.icons.equipment.twoHanded, "contextMenu"),
@@ -351,7 +351,7 @@ export default function ArmamentSystemMixin(Base) {
           onClick: this.use.bind(this, { twoHanded: true }),
           visible: this.parent.isOwner && this.hasTwoHandedAttack,
         }];
-        return [...entries, ...super.getCardContextMenuEntries(doc)];
+        return [...entries, ...super.getEmbedContextMenuEntries(doc)];
       }
 
       /** @inheritDoc */

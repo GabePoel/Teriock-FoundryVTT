@@ -105,8 +105,8 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [...super.getCardContextMenuEntries(doc), {
+  getEmbedContextMenuEntries(doc) {
+    return [...super.getEmbedContextMenuEntries(doc), {
       group: "control",
       icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),

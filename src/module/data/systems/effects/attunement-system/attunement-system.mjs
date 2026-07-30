@@ -109,8 +109,8 @@ export default class AttunementSystem extends CleanedEffectSystem {
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    const entries = super.getCardContextMenuEntries(doc).filter(e =>
+  getEmbedContextMenuEntries(doc) {
+    const entries = super.getEmbedContextMenuEntries(doc).filter(e =>
       ![_loc("COMMON.Delete"), _loc("SIDEBAR.Duplicate")].includes(e.label)
     );
     return [...entries, {

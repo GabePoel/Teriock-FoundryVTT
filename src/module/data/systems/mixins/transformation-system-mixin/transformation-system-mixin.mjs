@@ -407,8 +407,8 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        return [...super.getCardContextMenuEntries(doc), {
+      getEmbedContextMenuEntries(doc) {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "usage",
           icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),

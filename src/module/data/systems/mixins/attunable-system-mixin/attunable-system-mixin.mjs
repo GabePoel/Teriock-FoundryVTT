@@ -171,8 +171,8 @@ export default function AttunableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        return [...super.getCardContextMenuEntries(doc), {
+      getEmbedContextMenuEntries(doc) {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),

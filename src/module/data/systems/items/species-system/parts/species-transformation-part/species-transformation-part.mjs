@@ -148,9 +148,9 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
+      getEmbedContextMenuEntries(doc) {
         const isPrimarySpecies = this.transformationEffect?.system.primarySpecies === this.parent;
-        return [...super.getCardContextMenuEntries(doc), {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),

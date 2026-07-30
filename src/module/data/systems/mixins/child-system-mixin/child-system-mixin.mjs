@@ -241,8 +241,8 @@ export default function ChildSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        const entries = super.getCardContextMenuEntries(doc);
+      getEmbedContextMenuEntries(doc) {
+        const entries = super.getEmbedContextMenuEntries(doc);
         entries.push(...[
           {
             group: "usage",

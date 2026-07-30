@@ -3,16 +3,16 @@ import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 
 /**
- * Add the entries from {@link BaseDocument.getCardContextMenuEntries} to sheet header.
+ * Add the entries from {@link EmbedCardDocument.getEmbedContextMenuEntries} to sheet header.
  * @param {DocumentSheetV2 & { document: TeriockDocument }} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
  */
-function addCardContextMenuEntriesToHeader(application, controls) {
+function addEmbedContextMenuEntriesToHeader(application, controls) {
   if (!application.window.header) { return; }
   const document = application.document;
-  if (typeof document.getCardContextMenuEntries !== "function") { return; }
-  const entries = document.getCardContextMenuEntries(document);
+  if (typeof document.getEmbedContextMenuEntries !== "function") { return; }
+  const entries = document.getEmbedContextMenuEntries(document);
   controls.push(
     ...entries.filter(e =>
       e.label !== _loc("SIDEBAR.DUPLICATE")
@@ -156,7 +156,7 @@ function sortControls(_application, controls) {
 
 const applicationHookEntries = [
   ["getHeaderControlsBaseApplication", sortControls],
-  ["getHeaderControlsDocumentSheetV2", addCardContextMenuEntriesToHeader],
+  ["getHeaderControlsDocumentSheetV2", addEmbedContextMenuEntriesToHeader],
   ["getHeaderControlsDocumentSheetV2", addWikiOpenToHeader],
   ["getHeaderControlsDocumentSheetV2", recolorCompendiumDocumentHeader],
   ["getHeaderControlsImagePopout", addShareImageToHeader],

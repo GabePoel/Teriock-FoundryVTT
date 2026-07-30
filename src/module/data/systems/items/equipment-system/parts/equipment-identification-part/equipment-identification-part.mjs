@@ -67,8 +67,8 @@ export default function EquipmentIdentificationPart(Base) {
       }
 
       /** @inheritdoc */
-      getCardContextMenuEntries(doc) {
-        return [...super.getCardContextMenuEntries(doc), {
+      getEmbedContextMenuEntries(doc) {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "usage",
           icon: makeIcon(TERIOCK.display.icons.equipment.identify, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),

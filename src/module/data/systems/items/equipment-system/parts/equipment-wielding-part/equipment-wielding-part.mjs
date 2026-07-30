@@ -114,8 +114,8 @@ export default function EquipmentWieldingPart(Base) {
       }
 
       /** @inheritdoc */
-      getCardContextMenuEntries(doc) {
-        return [...super.getCardContextMenuEntries(doc), {
+      getEmbedContextMenuEntries(doc) {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),

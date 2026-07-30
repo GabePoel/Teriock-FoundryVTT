@@ -1,4 +1,6 @@
 import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_module.mjs";
+import { makeIcon } from "../../helpers/icon.mjs";
+import { resolveDocument } from "../../helpers/resolve.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.
@@ -9,13 +11,11 @@ export default function EmbedCardDocumentMixin(Base) {
   return (
     /**
      * @extends {BaseDocument}
+     * @implements {Teriock.Embeds.Embeddable}
      * @mixin
      */
     class EmbedCardDocument extends Base {
-      /**
-       * Actions that can fire from an embedded element representing this.
-       * @returns {Record<string, Partial<Teriock.EmbedData.EmbedAction>>}
-       */
+      /** @inheritDoc */
       get _embedActions() {
         const actions = { openDoc: { primary: async () => this.sheet.render(true) } };
         for (
@@ -24,18 +24,12 @@ export default function EmbedCardDocumentMixin(Base) {
         return actions;
       }
 
-      /**
-       * Interactive icons to display in embedded elements.
-       * @returns {Partial<Teriock.EmbedData.EmbedIcon>[]}
-       */
+      /** @inheritDoc */
       get _embedIcons() {
         return [];
       }
 
-      /**
-       * Parts that will be passed into a handlebar helper to asynchronously make an embedded element.
-       * @returns {Partial<Teriock.EmbedData.EmbedParts>}
-       */
+      /** @inheritDoc */
       get embedParts() {
         return {
           img: this.img,
@@ -57,6 +51,34 @@ export default function EmbedCardDocumentMixin(Base) {
         if (options.relativeTo) { embedContext.relative = options.relativeTo.uuid; }
         const html = await TeriockTextEditor.renderTemplate("teriock/ui/block", embedContext);
         return foundry.utils.parseHTML(html);
+      }
+
+      /** @inheritDoc */
+      getEmbedContextMenuEntries(relative) {
+        /** @type {ContextMenuEntry[]} */
+        const entries = [];
+        if (typeof this.system?.getEmbedContextMenuEntries === "function") {
+          entries.push(...this.system.getEmbedContextMenuEntries(relative));
+        }
+        entries.push(...[{
+          group: "open",
+          icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
+          onClick: async () => {
+            const resolved = await resolveDocument(this.master);
+            if (resolved) { await resolved.sheet?.render(true); }
+          },
+          visible: () => this.master?.isViewer && relative?.uuid !== this.master?.uuid,
+        }, {
+          group: "document",
+          icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
+          label: _loc("COMMON.Delete"),
+          onClick: async () => await this.deleteDialog({ modal: true }, { interactive: true }),
+          visible: () =>
+            this._checkValidEditorDocument(relative)
+            || (this.inCompendium && !this.compendium.locked && !this.parent && this.sup?.uuid === relative?.uuid),
+        }]);
+        return entries;
       }
 
       /** @inheritDoc */
@@ -95,7 +117,7 @@ export default function EmbedCardDocumentMixin(Base) {
             }
             // Only add context menu entries if this is actually in a document and not just an embedded HTML element
             if (isEmbedded) { return; }
-            const menuEntries = this.getCardContextMenuEntries(relative);
+            const menuEntries = this.getEmbedContextMenuEntries(relative);
             if (!menuEntries) { return; }
             new TeriockContextMenu(element, ".teriock-block", menuEntries, {
               eventName: "contextmenu",

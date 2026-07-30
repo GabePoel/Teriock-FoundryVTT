@@ -95,13 +95,9 @@ export default function StatGiverSystemMixin(Base) {
         return true;
       }
 
-      /**
-       * Context menu entries to enable/disable stat dice.
-       * @param {TeriockDocument} doc
-       * @returns {ContextMenuEntry[]}
-       */
-      getCardContextMenuEntries(doc) {
-        const entries = super.getCardContextMenuEntries(doc);
+      /** @inheritDoc */
+      getEmbedContextMenuEntries(doc) {
+        const entries = super.getEmbedContextMenuEntries(doc);
         if (!doc?.isOwner) { return entries; }
         for (const stat of POOL_STATS) {
           const canToggle = this._canToggleStatDice(stat) && this.statDice[stat].hasDice;

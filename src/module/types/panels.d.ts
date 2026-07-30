@@ -25,7 +25,7 @@ declare global {
       badge?: string;
       color?: string;
       draggable?: boolean;
-      icon?: Teriock.EmbedData.EmbedIcon;
+      icon?: Teriock.Embeds.EmbedIcon;
       id?: ID<TeriockDocument>;
       img: string;
       makeTooltip?: boolean;

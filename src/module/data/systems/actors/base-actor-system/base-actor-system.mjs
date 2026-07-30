@@ -118,7 +118,7 @@ export default class BaseActorSystem
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
+  getEmbedContextMenuEntries(doc) {
     return [
       {
         icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
@@ -126,7 +126,7 @@ export default class BaseActorSystem
         onClick: async () => this.parent.token.sheet.render(true),
         visible: () => this.parent.token && this.parent.token.isViewer,
       },
-      ...super.getCardContextMenuEntries(doc),
+      ...super.getEmbedContextMenuEntries(doc),
       this._getPanelCardContextMenuEntry(),
     ];
   }

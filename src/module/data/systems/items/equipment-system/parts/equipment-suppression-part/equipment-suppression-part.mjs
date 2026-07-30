@@ -126,8 +126,8 @@ export default function EquipmentSuppressionPart(Base) {
       }
 
       /** @inheritdoc */
-      getCardContextMenuEntries(doc) {
-        return [...super.getCardContextMenuEntries(doc), {
+      getEmbedContextMenuEntries(doc) {
+        return [...super.getEmbedContextMenuEntries(doc), {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
