@@ -74,11 +74,11 @@ export default class TeriockManager {
 
   /**
    * Check if a sheet or document is editable and give a warning if not.
-   * @param {ApplicationV2|TeriockDocument} obj
+   * @param {ApplicationV2|TeriockDocument} appOrDoc
    * @returns {boolean}
    */
-  checkEditable(obj) {
-    const sheet = obj instanceof foundry.abstract.Document ? obj.sheet : obj;
+  checkEditable(appOrDoc) {
+    const sheet = appOrDoc instanceof foundry.abstract.Document ? appOrDoc.sheet : appOrDoc;
     const valid = Boolean(sheet.isEditable);
     if (!valid) { ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.notEditable", "error", { localize: true }); }
     return valid;

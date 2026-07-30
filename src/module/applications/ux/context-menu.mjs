@@ -20,6 +20,7 @@ export default class TeriockContextMenu extends ContextMenu {
         onClick: async () => {
           await document.update({ [c.path || options.path]: c.value });
         },
+        visible: () => document.sheet?.isEditable,
       };
     });
   }

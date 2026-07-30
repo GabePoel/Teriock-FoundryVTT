@@ -7,7 +7,7 @@ const { fields } = foundry.data;
 export default class RevitalizeManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { rollStatDie: this._onRollStatDie },
+    actions: { rollStatDie: { buttons: [0, 2], handler: this._onRollStatDie } },
     window: { icon: makeIconClass(impactConfig.revitalizing.icon, "title"), title: "TERIOCK.DIALOGS.Revitalize.title" },
   };
 
@@ -19,6 +19,8 @@ export default class RevitalizeManager extends BaseStatManager {
 
   /** @inheritDoc */
   static async _onRollStatDie(event, target) {
+    if (!game.teriock.checkEditable(this)) { return; }
+    if (event.button === 2) { return this._unrollStatDie(event, target); }
     const statDie = this._getStatDie(target);
     if (this.state.forHarm) {
       const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({

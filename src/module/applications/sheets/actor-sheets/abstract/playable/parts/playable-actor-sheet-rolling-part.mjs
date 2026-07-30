@@ -42,7 +42,6 @@ export default function PlayableActorSheetRollingPart(Base) {
         actions: {
           rollAffinity: { buttons: [0, 2], handler: this.#onRollAffinity },
           rollFeatSave: { buttons: [0, 2], handler: this.#onRollFeatSave },
-          rollStatDie: { buttons: [0], handler: this._onRollStatDie },
         },
       };
 

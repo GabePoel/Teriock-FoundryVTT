@@ -1,5 +1,3 @@
-import { createElement } from "../../../helpers/html.mjs";
-
 /**
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base
@@ -34,16 +32,25 @@ export default function LockingSheetMixin(Base) {
       /** @type {boolean} */
       #locked = false;
 
+      /** @returns {string} */
+      get #lockIcon() {
+        return this.isEditable ? "fa-lock-open" : "fa-lock";
+      }
+
+      /** @returns {string} */
+      get #lockLabel() {
+        return this.isEditable ? "SIDEBAR.PLACEABLES.ACTIONS.Unlocked" : "SIDEBAR.PLACEABLES.ACTIONS.Locked";
+      }
+
       /**
        * @param {HTMLButtonElement} toggleButton
        */
       #setToggleLockButtonAttributes(toggleButton) {
         toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
-        toggleButton.classList.add(...[this.isEditable ? "fa-lock-open" : "fa-lock"]);
-        toggleButton.setAttribute(
-          "data-tooltip",
-          this.isEditable ? _loc("SIDEBAR.PLACEABLES.ACTIONS.Unlocked") : _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked"),
-        );
+        toggleButton.classList.add(this.#lockIcon);
+        toggleButton.ariaLabel = _loc(this.#lockLabel);
+        toggleButton.disabled = !this.document.isOwner
+          || (this.document.inCompendium && this.document.compendium.locked);
       }
 
       /** @inheritDoc */
@@ -52,29 +59,19 @@ export default function LockingSheetMixin(Base) {
       }
 
       /** @inheritDoc */
+      _getFrameButtons(options) {
+        return [
+          { action: "toggleLockThis", icon: `fa-solid ${this.#lockIcon}`, label: this.#lockLabel },
+          ...super._getFrameButtons(options),
+        ];
+      }
+
+      /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
         const toggleButton = this.window.header?.querySelector("[data-action='toggleLockThis']");
         if (toggleButton) { this.#setToggleLockButtonAttributes(toggleButton); }
         this.element.querySelectorAll("button[data-action='rollTable']").forEach((btn) => btn.disabled = false);
-      }
-
-      /** @inheritDoc */
-      async _renderFrame(options = {}) {
-        const frame = await super._renderFrame(options);
-        if (["ActiveEffect", "Item", "JournalEntryPage"].includes(this.document.documentName)) {
-          const toggleButton = createElement("button", {
-            className: "header-control icon fa-solid",
-            dataset: { action: "toggleLockThis" },
-            type: "button",
-          });
-          this.#setToggleLockButtonAttributes(toggleButton);
-          if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked)) {
-            toggleButton.setAttribute("disabled", "disabled");
-          }
-          this.window.controls?.before(toggleButton);
-        }
-        return frame;
       }
     }
   );

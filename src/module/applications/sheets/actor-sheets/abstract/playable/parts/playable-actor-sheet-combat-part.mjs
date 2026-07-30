@@ -29,9 +29,12 @@ export default function PlayableActorSheetCombatPart(Base) {
 
       /**
        * Select a primary attacker.
+       * @param {PointerEvent} event
        * @returns {Promise<void>}
        */
-      static async #onSelectAttacker() {
+      static async #onSelectAttacker(event) {
+        if (event.button === 2) { await this.document.system.wielding.attacker?.sheet.render(true); }
+        if (!game.teriock.checkEditable(this)) { return; }
         const attacker = await DocumentSelector.selectSingle(
           [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
           {
@@ -46,9 +49,12 @@ export default function PlayableActorSheetCombatPart(Base) {
 
       /**
        * Select a primary blocker.
+       * @param {PointerEvent} event
        * @returns {Promise<void>}
        */
-      static async #onSelectBlocker() {
+      static async #onSelectBlocker(event) {
+        if (event.button === 2 || !this.isEditable) { await this.document.system.wielding.blocker?.sheet.render(true); }
+        if (!game.teriock.checkEditable(this)) { return; }
         const attacker = await DocumentSelector.selectSingle(
           [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
           {
@@ -66,6 +72,7 @@ export default function PlayableActorSheetCombatPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onToggleReaction() {
+        if (!game.teriock.checkEditable(this)) { return; }
         await this.document.update({ "system.combat.hasReaction": !this.document.system.combat.hasReaction });
       }
 
@@ -74,6 +81,7 @@ export default function PlayableActorSheetCombatPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onToggleSb() {
+        if (!game.teriock.checkEditable(this)) { return; }
         await this.document.update({ "system.offense.sb": !this.document.system.offense.sb });
       }
 
@@ -92,8 +100,8 @@ export default function PlayableActorSheetCombatPart(Base) {
         actions: {
           openPrimaryAttacker: this.#onOpenPrimaryAttacker,
           openPrimaryBlocker: this.#onOpenPrimaryBlocker,
-          selectAttacker: this.#onSelectAttacker,
-          selectBlocker: this.#onSelectBlocker,
+          selectAttacker: { buttons: [0, 2], handler: this.#onSelectAttacker },
+          selectBlocker: { buttons: [0, 2], handler: this.#onSelectBlocker },
           toggleReaction: this.#onToggleReaction,
           toggleSb: this.#onToggleSb,
           useAbility: { buttons: [0, 2], handler: this.#onUseAbility },

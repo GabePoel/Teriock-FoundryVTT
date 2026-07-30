@@ -21,6 +21,9 @@ export default function SystemSettingsButtonSheetMixin(Base) {
           icon: makeIconClass(icons.ui.configure, "contextMenu"),
           label: "TERIOCK.SYSTEMS.Common.MENU.configureDocument",
           ownership: "OWNER",
+          visible() {
+            return this.isEditable;
+          },
         }],
       },
     };

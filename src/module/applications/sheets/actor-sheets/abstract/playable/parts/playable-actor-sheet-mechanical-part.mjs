@@ -21,6 +21,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onDeathBagPull() {
+        if (!this.isEditable) { return; }
         await this.actor.system.deathBagPull();
       }
 
@@ -30,6 +31,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onIncreaseCover(event) {
+        if (!game.teriock.checkEditable(this)) { return; }
         if (event.button === 0) {
           if (this.document.system.cover < 3) { await this.document.system.increaseCover(); }
           else { await this.document.system.decreaseCover(3); }
@@ -56,6 +58,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onTakeDawn() {
+        if (!this.isEditable) { return; }
         await this.actor.system.takeDawn();
       }
 
@@ -64,6 +67,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onTakeDusk() {
+        if (!this.isEditable) { return; }
         await this.actor.system.takeDusk();
       }
 
@@ -72,6 +76,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onTakeLongRest() {
+        if (!this.isEditable) { return; }
         await this.actor.system.takeLongRest();
       }
 
@@ -80,6 +85,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onTakeShortRest() {
+        if (!this.isEditable) { return; }
         await this.actor.system.takeShortRest();
       }
 
@@ -90,10 +96,13 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onToggleCondition(event, target) {
-        if (event.button === 0) { await this.document.toggleStatusEffect(target.dataset.condition); }
         if (event.button === 2) {
           const document = await teriock.fromIdentifier(`condition:${toKebabCase(target.dataset.condition)}`);
           await document?.sheet.render(true);
+        }
+        if (event.button === 0) {
+          if (!game.teriock.checkEditable(this)) { return; }
+          await this.document.toggleStatusEffect(target.dataset.condition);
         }
       }
 
@@ -104,6 +113,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onToggleDocs(_event, target) {
+        if (!game.teriock.checkEditable(this)) { return; }
         const docs = foundry.utils.getProperty(this.document, target.dataset.path) ?? [];
         const enabled = await DocumentSelector.selectMulti(docs, {
           checked: docs.filter(d => !d.disabled).map(r => r.uuid),
@@ -142,16 +152,25 @@ export default function PlayableActorSheetMechanicalPart(Base) {
             icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
             label: "TERIOCK.EFFECTS.Common.bag",
             ownership: "OWNER",
+            visible() {
+              return this.isEditable;
+            },
           }, {
             action: "takeLongRest",
             icon: makeIconClass(icons.ui.longRest, "contextMenu"),
             label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
             ownership: "OWNER",
+            visible() {
+              return this.isEditable;
+            },
           }, {
             action: "takeShortRest",
             icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
             label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
             ownership: "OWNER",
+            visible() {
+              return this.isEditable;
+            },
           }],
         },
       };

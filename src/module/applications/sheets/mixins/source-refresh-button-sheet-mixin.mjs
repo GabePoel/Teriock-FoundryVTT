@@ -21,6 +21,9 @@ export default function SourceRefreshButtonSheetMixin(Base) {
           icon: makeIconClass(icons.ui.compendium, "contextMenu"),
           label: "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh",
           ownership: "OWNER",
+          visible() {
+            return this.isEditable;
+          },
         }],
       },
     };

@@ -16,6 +16,7 @@ export default function PlayableActorSheetSidebarPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onResetAttackPenalty() {
+        if (!game.teriock.checkEditable(this)) { return; }
         await this.document.update({ "system.combat.attackPenalty": 0 });
       }
 
@@ -58,7 +59,6 @@ export default function PlayableActorSheetSidebarPart(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-
         this._createContextMenu(this.#piercingContextMenu, ".actor-piercing-box", { eventName: "click" });
         this._createContextMenu(this.#scalingContextMenu, ".actor-basics", {
           eventName: "contextmenu",

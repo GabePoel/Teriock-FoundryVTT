@@ -20,17 +20,23 @@ export default function HackStatApplicationMixin(Base) {
     class HackStatApplication extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: { takeHack: this._onTakeHack, takeImpact: { buttons: [0, 2], handler: this._onTakeImpact } },
+        actions: {
+          rollStatDie: { buttons: [0, 2], handler: this._onRollStatDie },
+          takeHack: { buttons: [0, 2], handler: this._onTakeHack },
+          takeImpact: { buttons: [0, 2], handler: this._onTakeImpact },
+        },
       };
 
       /**
-       * Rolls a stat die.
-       * @param {PointerEvent} _event - The event object.
+       * Rolls a stat die. Right-click unrolls it.
+       * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        * @this {HackStatApplication}
        */
-      static async _onRollStatDie(_event, target) {
+      static async _onRollStatDie(event, target) {
+        if (!game.teriock.checkEditable(this)) { return; }
+        if (event.button === 2) { return this._unrollStatDie(event, target); }
         const statDie = this._getStatDie(target);
         const criticallyWounded = this.document.statuses.has("criticallyWounded");
         await statDie.use(this.state?.consumeStatDice ?? true);
@@ -38,13 +44,15 @@ export default function HackStatApplicationMixin(Base) {
       }
 
       /**
-       * Hacks a specific body part.
+       * Hacks a specific body part. Right-click hacks in the reverse direction.
        * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        * @this {HackStatApplication}
        */
       static async _onTakeHack(event, target) {
+        if (!game.teriock.checkEditable(this)) { return; }
+        if (event.button === 2) { return onReverseHack(this, event, target); }
         await onTakeHack(this.document, event, target);
       }
 
@@ -57,6 +65,7 @@ export default function HackStatApplicationMixin(Base) {
        * @this {HackStatApplication}
        */
       static async _onTakeImpact(event, target) {
+        if (!game.teriock.checkEditable(this)) { return; }
         const impact = target.dataset.impact;
         if (event.button === 2) {
           if (!TERIOCK.config.impact[impact]?.morganti) { return; }
@@ -73,13 +82,15 @@ export default function HackStatApplicationMixin(Base) {
       }
 
       /**
-       * Unhacks a specific body part.
+       * Unhacks a specific body part. Right-click hacks in the reverse direction.
        * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        * @this {HackStatApplication}
        */
       static async _onTakeUnhack(event, target) {
+        if (!game.teriock.checkEditable(this)) { return; }
+        if (event.button === 2) { return onReverseHack(this, event, target); }
         await onTakeUnhack(this.document, event, target);
       }
 
@@ -100,25 +111,6 @@ export default function HackStatApplicationMixin(Base) {
         const id = target.dataset.id;
         const stat = target.dataset.stat;
         return this.document.system[stat].dice.get(id);
-      }
-
-      /** @inheritDoc */
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        this.element.querySelectorAll("[data-action=rollStatDie]").forEach(el => {
-          el.addEventListener("contextmenu", async ev => {
-            ev.preventDefault();
-            await this._unrollStatDie(ev, el);
-            ev.stopPropagation();
-          });
-        });
-        this.element.querySelectorAll("[data-action=takeHack]").forEach(el => {
-          el.addEventListener("contextmenu", async ev => {
-            ev.preventDefault();
-            if (this._hackForward) { await onTakeUnhack(this.document, ev, el); }
-            else { await onTakeHack(this.document, ev, el); }
-          });
-        });
       }
 
       /**
@@ -210,6 +202,18 @@ export default function HackStatApplicationMixin(Base) {
       }
     }
   );
+}
+
+/**
+ * Hack or unhack a specific body part, in the reverse of an application's hacking direction.
+ * @param {HackStatApplication} application
+ * @param {PointerEvent} event
+ * @param {HTMLElement} target
+ * @returns {Promise<void>}
+ */
+async function onReverseHack(application, event, target) {
+  if (application._hackForward) { await onTakeUnhack(application.document, event, target); }
+  else { await onTakeHack(application.document, event, target); }
 }
 
 /**

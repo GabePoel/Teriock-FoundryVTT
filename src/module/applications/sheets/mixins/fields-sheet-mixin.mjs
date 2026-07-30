@@ -19,11 +19,12 @@ export default function FieldsSheetMixin(Base) {
        * @param {HTMLElement} target
        * @param {number} change
        * @returns {Promise<void>}
+       * @this {FieldsSheet}
        */
       static async #onIncrement(event, target, change = 1) {
+        if (!game.teriock.checkEditable(this)) { return; }
         if (event.button === 2) { change = change * -1; }
         const { path } = target.dataset;
-        // Cycle relative to the source value, since that's what the update writes to.
         const value = foundry.utils.getProperty(this.document._source, path)
           ?? foundry.utils.getProperty(this.document, path);
         const schema = this.document.getFieldForProperty(path);
@@ -39,15 +40,15 @@ export default function FieldsSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
        * @returns {Promise<void>}
+       * @this {FieldsSheet}
        */
       static async #onUpdatePaths(_event, target) {
-        if (this.isEditable) {
-          await BaseUpdater.create({
-            document: this.document,
-            paths: target.dataset.paths.split(" ").map(p => p.trim()),
-            window: { icon: makeIconClass(target.dataset.icon, "title") },
-          });
-        }
+        if (!game.teriock.checkEditable(this)) { return; }
+        await BaseUpdater.create({
+          document: this.document,
+          paths: target.dataset.paths.split(" ").map(p => p.trim()),
+          window: { icon: makeIconClass(target.dataset.icon, "title") },
+        });
       }
 
       /**
@@ -55,9 +56,10 @@ export default function FieldsSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
        * @returns {Promise<void>}
+       * @this {FieldsSheet}
        */
       static async #onUpdateUnit(_event, target) {
-        if (!this.isEditable) { return; }
+        if (!game.teriock.checkEditable(this)) { return; }
         await foundry.utils.getProperty(this.document, target.dataset.path).updateDialog();
       }
 
