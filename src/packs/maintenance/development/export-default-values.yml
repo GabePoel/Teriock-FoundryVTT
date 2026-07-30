@@ -1,7 +1,8 @@
 _id: b7f3a91c2d6e480a
 _key: "!macros!b7f3a91c2d6e480a"
-command: |-
+command: >-
   const defaults = { documents: {}, pseudos: {} };
+
   const traverseSchema = (schema) => {
     for (const [name, field] of Object.entries(schema?.fields ?? {})) {
       const types = field.element?.types ?? field.types;
@@ -15,7 +16,9 @@ command: |-
       }
     }
   };
-  for (const documentName of ["Actor", "Item", "ActiveEffect", "JournalEntryPage", "RollTable"]) {
+
+  for (const documentName of ["Actor", "Item", "ActiveEffect", "JournalEntryPage", "RollTable", "JournalEntry",
+  "Scene"]) {
     const Cls = foundry.utils.getDocumentClass(documentName);
     const types = Cls.TYPES.filter(t => t !== "base");
     defaults.documents[documentName] = {};
@@ -28,12 +31,17 @@ command: |-
       traverseSchema(CONFIG[documentName]?.dataModels?.[type]?.schema);
     }
   }
+
   const pseudoCount = Object.values(defaults.pseudos).reduce((sum, t) => sum + Object.keys(t).length, 0);
+
   const typeCount = Object.values(defaults.documents).reduce((sum, t) => sum + Object.keys(t).length, 0);
+
   if (!pseudoCount || !typeCount) {
     throw new Error("Schema walk found nothing; dump-schema-defaults needs updating.");
   }
+
   foundry.utils.saveDataToFile(JSON.stringify(defaults, null, 2), "application/json", "defaults.json");
+
   ui.notifications.info("Move download to Teriock-FoundryVTT/scripts/compendium/defaults.json.");
 folder: 35429c9dc2319aea
 img: icons/svg/downgrade.svg
