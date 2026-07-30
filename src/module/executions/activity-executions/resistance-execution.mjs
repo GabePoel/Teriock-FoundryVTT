@@ -1,5 +1,5 @@
-import * as executionMixins from "../../mixins/_module.mjs";
-import AffinityExecution from "../affinity-execution/affinity-execution.mjs";
+import * as executionMixins from "../mixins/_module.mjs";
+import AffinityExecution from "./affinity-execution.mjs";
 
 /**
  * Works for any affinity that is rolled against a threshold.

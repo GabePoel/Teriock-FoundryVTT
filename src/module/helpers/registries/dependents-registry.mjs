@@ -1,4 +1,4 @@
-import BaseRegistryLifecycle from "./abstract/base-registry-lifecycle.mjs";
+import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
 
 const { Document } = foundry.abstract;
 

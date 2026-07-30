@@ -4,9 +4,9 @@ import type {
   DatabaseUpdateOperation,
 } from "@common/abstract/_types.mjs";
 
-import type queries from "./_module.mjs";
+import type queries from "../helpers/queries/_module.mjs";
 
-import { TeriockActor, TeriockUser } from "../../documents/_module.mjs";
+import { TeriockActor, TeriockUser } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Queries {

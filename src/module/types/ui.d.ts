@@ -1,3 +1,4 @@
+import { iconManifest } from "../constants/display/_module.mjs";
 import { iconStyles } from "../constants/display/icon-styles.mjs";
 
 declare global {
@@ -9,6 +10,6 @@ declare global {
     export type IconStyle = keyof typeof iconStyles;
 
     /** Icon category */
-    export type IconCategory = keyof typeof TERIOCK.display.iconManifest;
+    export type IconCategory = keyof typeof iconManifest;
   }
 }

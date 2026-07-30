@@ -1,7 +1,7 @@
-import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
-import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { formulaExists } from "../../../helpers/formula.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
+import { HarmRoll } from "../../dice/rolls/_module.mjs";
+import { formulaExists } from "../../helpers/formula.mjs";
+import { objectMap } from "../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 

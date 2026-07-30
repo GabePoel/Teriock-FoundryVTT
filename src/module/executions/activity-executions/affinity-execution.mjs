@@ -1,5 +1,5 @@
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { BaseExecution } from "../../abstract/_module.mjs";
+import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
+import { BaseExecution } from "../abstract/_module.mjs";
 
 /**
  * Rolling one of an actor's affinities. Everything it displays comes from the affinity's own configuration, so it

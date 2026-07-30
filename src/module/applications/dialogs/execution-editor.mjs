@@ -45,7 +45,7 @@ export default class ExecutionEditor extends ResolvableDialog {
     event?.preventDefault();
     const control = /** @type {HTMLElement} */ target?.closest("[data-document-index]");
     const index = Number(control?.dataset.documentIndex);
-    /** @type {Teriock.Execution.ExecutionDialogDocument} */
+    /** @type {Teriock.Execution.ExecutionDialogDocumentEntry} */
     const entry = this.execution._dialogDocuments[index];
     if (!entry?.editable || typeof entry.getChoices !== "function") { return; }
     const choices = await entry.getChoices();

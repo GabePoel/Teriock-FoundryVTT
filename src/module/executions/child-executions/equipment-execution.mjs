@@ -1,7 +1,7 @@
 import { addTypesToFormula, formulaExists } from "../../helpers/formula.mjs";
 import { getImage, systemPath } from "../../helpers/path.mjs";
 import { getName } from "../../helpers/utils.mjs";
-import ArmamentExecution from "./armament-execution/armament-execution.mjs";
+import ArmamentExecution from "./armament-execution.mjs";
 
 const { fields } = foundry.data;
 

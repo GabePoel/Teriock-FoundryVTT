@@ -1,8 +1,8 @@
-import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
-import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
-import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import DocumentExecution from "../../abstract/document-execution.mjs";
-import * as executionMixins from "../../mixins/_module.mjs";
+import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
+import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import DocumentExecution from "../abstract/document-execution.mjs";
+import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * @extends {DocumentExecution}

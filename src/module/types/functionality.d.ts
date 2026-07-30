@@ -10,6 +10,11 @@ declare global {
       /** A numerical value. */
       get value(): number;
     }
+
+    export interface StatProvider {
+      /** Prepare all the stat dice this has access to. */
+      prepareStatDice(): void;
+    }
   }
 }
 

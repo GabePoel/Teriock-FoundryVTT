@@ -110,7 +110,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /**
    * Buttons displayed in this execution's input dialog.
-   * @returns {Teriock.Execution.ExecutionDialogButton[]}
+   * @returns {Teriock.Execution.ExecutionDialogButtonEntry[]}
    */
   get _dialogButtons() {
     return [{
@@ -124,7 +124,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /**
    * Documents displayed alongside this execution's input dialog.
-   * @returns {Teriock.Execution.ExecutionDialogDocument[]}
+   * @returns {Teriock.Execution.ExecutionDialogDocumentEntry[]}
    */
   get _dialogDocuments() {
     const docs = [];
@@ -507,7 +507,11 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * @returns {object}
    */
   getRollData() {
-    return Object.assign(this.actor?.getRollData() || {}, foundry.utils.deepClone(this._rollData));
+    return Object.assign(this.actor?.getRollData() || {}, foundry.utils.deepClone(this._rollData), {
+      c: this.competence.fluent
+        ? (this.actor?.system.scaling.f ?? 0)
+        : (this.competence.proficient ? (this.actor?.system.scaling.p ?? 0) : 0),
+    });
   }
 
   /**

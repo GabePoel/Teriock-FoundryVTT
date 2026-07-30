@@ -1,8 +1,8 @@
-import mathConfig from "../../../constants/config/math-config.mjs";
-import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
-import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import mathConfig from "../../constants/config/math-config.mjs";
+import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
+import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
+import { addFormula, formulaExists } from "../../helpers/formula.mjs";
+import { objectMap } from "../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 

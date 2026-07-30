@@ -1,5 +1,5 @@
 import { parseIdentifier } from "../utils.mjs";
-import BaseRegistryLifecycle from "./abstract/base-registry-lifecycle.mjs";
+import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
 
 /**
  * @typedef {TeriockActiveEffect|TeriockActor|TeriockItem|TeriockJournalEntryPage} IdentifiableDocument
