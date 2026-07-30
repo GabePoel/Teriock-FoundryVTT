@@ -16,6 +16,8 @@ declare global {
     export type CoreStat = Foundry.BarField & {
       /** <base> Base */
       base: number;
+      /** <base> Statuses this stat can cause */
+      causes: { criticallyWounded: boolean, dead: boolean, down: boolean, unconscious: boolean };
       /** <special> Stat dice of this type */
       dice: Collection<ID<StatDie>, StatDie>;
       /** <schema> Morganti */

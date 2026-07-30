@@ -26,7 +26,7 @@ export default function ActorStatsPart(Base) {
       static defineSchema() {
         const schema = Object.assign(super.defineSchema(), { presence: statField({ initial: 0, max: 1 }) });
         for (const [k, v] of Object.entries(statConfig)) {
-          if (v.bar) { schema[k] = statField({ ...v.bar, morganti: v.morganti }); }
+          if (v?.bar) { schema[k] = statField({ ...v.bar, morganti: v.morganti }); }
         }
         return schema;
       }
@@ -36,12 +36,14 @@ export default function ActorStatsPart(Base) {
        */
       #prepareVirtualWounds() {
         if (!this.settings.getSetting("autoWound")) { return; }
-        const hpUncn = this.hp.value < 1;
-        const hpCrit = this.hp.value === (this.hp.min < 0 ? this.hp.min + 1 : 0);
-        const hpDead = this.hp.value === this.hp.min;
-        const mpUncn = this.mp.value < 1;
-        const mpCrit = this.mp.value === (this.mp.min < 0 ? this.mp.min + 1 : 0);
-        const mpDead = this.mp.value === this.mp.min;
+        const hpUncn = this.hp.value < 1 && this.hp.causes.unconscious && this.hp.causes.down;
+        const hpCrit = this.hp.value === (this.hp.min < 0 ? this.hp.min + 1 : 0) && this.hp.causes.criticallyWounded
+          && this.hp.causes.down;
+        const hpDead = this.hp.value === this.hp.min && this.hp.causes.dead && this.hp.causes.down;
+        const mpUncn = this.mp.value < 1 && this.mp.causes.unconscious && this.mp.causes.down;
+        const mpCrit = this.mp.value === (this.mp.min < 0 ? this.mp.min + 1 : 0) && this.mp.causes.criticallyWounded
+          && this.mp.causes.down;
+        const mpDead = this.mp.value === this.mp.min && this.mp.causes.dead && this.mp.causes.down;
 
         const statDead = hpDead || mpDead;
         const statCrit = hpCrit || mpCrit;
@@ -339,8 +341,14 @@ function statField(options = {}) {
     value: new fields.NumberField({ initial: options.initial ?? 1, integer: true }),
   };
   if (options.temp) {
-    schema.temp = new fields.NumberField({ initial: 0, integer: true, min: 0 });
+    schema.causes = new fields.SchemaField({
+      criticallyWounded: new fields.BooleanField({ initial: true, persisted: false }),
+      dead: new fields.BooleanField({ initial: true, persisted: false }),
+      down: new fields.BooleanField({ initial: true, persisted: false }),
+      unconscious: new fields.BooleanField({ initial: true, persisted: false }),
+    }, { persisted: false });
     schema.poolLimit = initialNumber();
+    schema.temp = new fields.NumberField({ initial: 0, integer: true, min: 0 });
   }
   if (options.morganti) {
     schema.morganti = new fields.NumberField({ initial: 0, integer: true, min: 0, placeholder: "0" });
