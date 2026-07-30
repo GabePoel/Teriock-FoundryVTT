@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
@@ -5,7 +6,7 @@ import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
-import { TeriockTextEditor } from "../../ux/_module.mjs";
+import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 
 /**
@@ -16,6 +17,7 @@ export default function MechanicsSheetMixin(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
+     * @extends {DragDropSheet}
      * @mixes ChangesSheet
      * @mixin
      * @property {AnyCommonDocument} document
@@ -28,6 +30,19 @@ export default function MechanicsSheetMixin(Base) {
           deleteMechanic: this._onDeleteMechanic,
           editActiveQualifier: this._onEditActiveQualifier,
           setToggle: this._onSetToggle,
+        },
+      };
+
+      /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
+      static TABS = {
+        ...super.TABS,
+        mechanics: {
+          initial: "automations",
+          labelPrefix: "EFFECT.TABS",
+          tabs: [{ icon: makeIconClass(icons.pseudoDocument.automation, "solid"), id: "automations" }, {
+            icon: makeIconClass(icons.pseudoDocument.affinity, "solid"),
+            id: "affinities",
+          }, { icon: makeIconClass(icons.pseudoDocument.expiration, "solid"), id: "expirations" }],
         },
       };
 
@@ -97,6 +112,20 @@ export default function MechanicsSheetMixin(Base) {
         await this.document.update({ [path]: Array.from(set) });
       }
 
+      /** @type {string|null} */
+      #mechanicsTabBeforeDrag = null;
+
+      /**
+       * Safely show a mechanics tab if it exists.
+       * @param {string} id
+       */
+      #showMechanicsTab(id) {
+        if (this.tabGroups.mechanics === id) { return; }
+        if (this.element?.querySelector(`.tabs [data-group="mechanics"][data-tab="${id}"]`)) {
+          this.changeTab(id, "mechanics");
+        } else { this.tabGroups.mechanics = id; }
+      }
+
       /** @inheritDoc */
       get _droppableDocumentNames() {
         return [...super._droppableDocumentNames, ...Object.keys(this.document.pseudoCollections)];
@@ -118,7 +147,7 @@ export default function MechanicsSheetMixin(Base) {
             collection: pseudos.Automation,
             hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.automation,
-            label: "EFFECT.TABS.automations",
+            id: "automations",
             title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
             types: system.constructor.automationTypes,
           };
@@ -130,7 +159,7 @@ export default function MechanicsSheetMixin(Base) {
             collection: pseudos.Affinity,
             hint: _loc("TERIOCK.DIALOGS.Select.AddAffinity.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.affinity,
-            label: "EFFECT.TABS.affinities",
+            id: "affinities",
             title: _loc("TERIOCK.DIALOGS.Select.AddAffinity.title"),
             types: system.constructor.affinityTypes,
           };
@@ -142,12 +171,22 @@ export default function MechanicsSheetMixin(Base) {
             collection: pseudos.Expiration,
             hint: _loc("TERIOCK.DIALOGS.Select.AddExpiration.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.expiration,
-            label: "EFFECT.TABS.expirations",
+            id: "expirations",
             title: _loc("TERIOCK.DIALOGS.Select.AddExpiration.title"),
             types: system.constructor.expirationTypes,
           };
         }
         return collections;
+      }
+
+      /** @inheritDoc */
+      _getTabsConfig(group) {
+        const config = super._getTabsConfig(group);
+        if (group !== "mechanics" || !config) { return config; }
+        const collections = this._mechanicCollections;
+        const tabs = config.tabs.filter(t => collections[t.id]);
+        if (!tabs.some(t => t.id === this.tabGroups.mechanics)) { this.tabGroups.mechanics = null; }
+        return { ...config, initial: tabs[0]?.id ?? null, tabs };
       }
 
       /**
@@ -161,7 +200,25 @@ export default function MechanicsSheetMixin(Base) {
       }
 
       /** @inheritDoc */
+      async _onDragLeaveApplication() {
+        await super._onDragLeaveApplication();
+        if (this.#mechanicsTabBeforeDrag) { this.#showMechanicsTab(this.#mechanicsTabBeforeDrag); }
+        this.#mechanicsTabBeforeDrag = null;
+      }
+
+      /** @inheritDoc */
+      async _onDragOver(event) {
+        await super._onDragOver(event);
+        if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
+        const tabId = this._mechanicCollectionFor(TeriockDragDrop.payload?.type)?.id;
+        if (!tabId || tabId === this.tabGroups.mechanics) { return; }
+        this.#mechanicsTabBeforeDrag ??= this.tabGroups.mechanics;
+        this.#showMechanicsTab(tabId);
+      }
+
+      /** @inheritDoc */
       async _onDrop(event) {
+        this.#mechanicsTabBeforeDrag = null;
         await super._onDrop(event);
         const dropData = TeriockTextEditor.getDragEventData(event);
         await this._onDropMechanic(event, dropData);
@@ -215,14 +272,16 @@ export default function MechanicsSheetMixin(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
-        const tabs = this._prepareMechanicsTabs();
+        const groups = Object.keys(this.constructor.TABS).filter(g => g !== "mechanics");
+        if (groups.length === 1) { context.tabs ??= this._prepareTabs(groups[0]); }
+        const tabs = this._prepareTabs("mechanics");
         context.mechanicSections = await Promise.all(
-          Object.entries(this._mechanicCollections).map(async ([id, config]) => {
+          Object.values(this._mechanicCollections).map(async config => {
             return {
-              active: tabs[id]?.active ?? false,
+              active: tabs[config.id]?.active ?? false,
               addLabel: config.addLabel,
               entries: await this._prepareMechanicEntries(config.collection),
-              id,
+              id: config.id,
             };
           }),
         );
@@ -242,27 +301,6 @@ export default function MechanicsSheetMixin(Base) {
         return Promise.all(collection.contents.map(async mechanic => {
           return { formEditor: (await mechanic.getEditor(config)).outerHTML, mechanic, tips: mechanic.formTips };
         }));
-      }
-
-      /**
-       * Build a sub-tab for each mechanic collection this document has.
-       * @returns {Record<string, Teriock.Sheet.MechanicTab>}
-       */
-      _prepareMechanicsTabs() {
-        const collections = this._mechanicCollections;
-        const active = this.tabGroups?.mechanics ?? Object.keys(collections)[0];
-        return Object.entries(collections).reduce((tabs, [id, { icon, label }]) => {
-          const isActive = active === id;
-          tabs[id] = {
-            active: isActive,
-            cssClass: isActive ? "active" : "",
-            group: "mechanics",
-            icon: makeIconClass(icon, "solid"),
-            id,
-            label,
-          };
-          return tabs;
-        }, {});
       }
 
       /** @inheritDoc */

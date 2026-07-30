@@ -4,21 +4,14 @@ import { TypeCollection } from "../documents/collections/_module.mjs";
 declare global {
   namespace Teriock.Sheet {
     export type MechanicCollectionConfig = {
+      addLabel: string;
       baseClass: typeof MechanicPseudoDocument;
       collection: TypeCollection<ID<MechanicPseudoDocument>, MechanicPseudoDocument>;
       hint: string;
       icon: string;
+      id: string;
       title: string;
       types: Record<string, typeof MechanicPseudoDocument>;
-    };
-
-    export type MechanicTab = {
-      active: boolean;
-      cssClass: string;
-      group: "mechanics";
-      icon: string;
-      id: "automations" | "expirations";
-      label: string;
     };
 
     export type MechanicEntry = {

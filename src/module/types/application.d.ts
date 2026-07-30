@@ -22,6 +22,7 @@ declare global {
       teriock?: {
         /** Time to wait before firing a single click action if a double click is not detected. */
         doubleClickDelay?: number;
+        /** Drag and drop configuration */
         dragDrop?: {
           /** Whether to bind callbacks */
           bind?: { dragEnter?: boolean, dragLeave?: boolean, dragOver?: boolean, dragStart?: boolean, drop?: boolean };
@@ -48,6 +49,8 @@ declare global {
             styleDropTarget?: boolean;
           };
         };
+        /** Whether this should start locked */
+        startLocked?: boolean;
       };
     };
 

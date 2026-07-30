@@ -29,12 +29,11 @@ export default class BaseActorSheet
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { classes: ["unpadded", "actor"], form: { submitOnChange: true } };
-
-  constructor(...args) {
-    super(...args);
-    this._locked = false;
-  }
+  static DEFAULT_OPTIONS = {
+    classes: ["unpadded", "actor"],
+    form: { submitOnChange: true },
+    teriock: { startLocked: false },
+  };
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {

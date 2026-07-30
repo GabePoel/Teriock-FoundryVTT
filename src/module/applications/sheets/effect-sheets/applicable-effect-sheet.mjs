@@ -34,7 +34,7 @@ export default class ApplicableEffectSheet
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { form: { closeOnSubmit: false, submitOnChange: true } };
+  static DEFAULT_OPTIONS = { form: { closeOnSubmit: false, submitOnChange: true }, teriock: { startLocked: false } };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
@@ -50,6 +50,7 @@ export default class ApplicableEffectSheet
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
   static TABS = {
+    ...super.TABS,
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
@@ -59,11 +60,6 @@ export default class ApplicableEffectSheet
       }],
     },
   };
-
-  constructor(...args) {
-    super(...args);
-    this._locked = false;
-  }
 
   #editorForms;
 

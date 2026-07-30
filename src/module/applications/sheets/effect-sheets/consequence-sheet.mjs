@@ -41,6 +41,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
   static TABS = {
+    ...super.TABS,
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,

@@ -13,22 +13,26 @@ export default function LockingSheetMixin(Base) {
      */
     class LockingSheet extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-      static DEFAULT_OPTIONS = { actions: { toggleLockThis: this._onToggleLockThis } };
+      static DEFAULT_OPTIONS = { actions: { toggleLockThis: this._onToggleLockThis }, teriock: { startLocked: true } };
 
       /**
        * Toggles the lock state of the current sheet.
        * @returns {Promise<void>}
+       * @this {LockingSheet}
        */
       static async _onToggleLockThis() {
-        this._locked = !this._locked;
+        this.#locked = !this.#locked;
         await this.render();
         game.tooltip.reactivate();
       }
 
       constructor(...args) {
         super(...args);
-        this._locked = true;
+        this.#locked = this.options?.teriock?.startLocked ?? false;
       }
+
+      /** @type {boolean} */
+      #locked = false;
 
       /**
        * @param {HTMLButtonElement} toggleButton
@@ -44,7 +48,7 @@ export default function LockingSheetMixin(Base) {
 
       /** @inheritDoc */
       get isEditable() {
-        return super.isEditable && !this._locked;
+        return super.isEditable && !this.#locked;
       }
 
       /** @inheritDoc */
