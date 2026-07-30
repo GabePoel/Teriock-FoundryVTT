@@ -3,6 +3,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
+import { TeriockDragDrop } from "../../ux/_module.mjs";
 import * as sheetMixins from "../mixins/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -62,6 +63,31 @@ export default class ApplicableEffectSheet
   };
 
   #editorForms;
+
+  /** @type {string|null} */
+  #tabBeforeDrag = null;
+
+  /** @inheritDoc */
+  async _onDragLeaveApplication() {
+    await super._onDragLeaveApplication();
+    if (this.#tabBeforeDrag) { this._safeChangeTab(this.#tabBeforeDrag, "sheet"); }
+    this.#tabBeforeDrag = null;
+  }
+
+  /** @inheritDoc */
+  async _onDragOver(event) {
+    await super._onDragOver(event);
+    if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
+    if (this.tabGroups.sheet === "mechanics" || !this._mechanicCollectionFor(TeriockDragDrop.payload?.type)) { return; }
+    this.#tabBeforeDrag ??= this.tabGroups.sheet;
+    this._safeChangeTab("mechanics", "sheet");
+  }
+
+  /** @inheritDoc */
+  async _onDrop(event) {
+    this.#tabBeforeDrag = null;
+    await super._onDrop(event);
+  }
 
   /** @inheritDoc */
   async _prepareContext(context = {}) {

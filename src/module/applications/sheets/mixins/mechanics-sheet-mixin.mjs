@@ -115,17 +115,6 @@ export default function MechanicsSheetMixin(Base) {
       /** @type {string|null} */
       #mechanicsTabBeforeDrag = null;
 
-      /**
-       * Safely show a mechanics tab if it exists.
-       * @param {string} id
-       */
-      #showMechanicsTab(id) {
-        if (this.tabGroups.mechanics === id) { return; }
-        if (this.element?.querySelector(`.tabs [data-group="mechanics"][data-tab="${id}"]`)) {
-          this.changeTab(id, "mechanics");
-        } else { this.tabGroups.mechanics = id; }
-      }
-
       /** @inheritDoc */
       get _droppableDocumentNames() {
         return [...super._droppableDocumentNames, ...Object.keys(this.document.pseudoCollections)];
@@ -202,7 +191,7 @@ export default function MechanicsSheetMixin(Base) {
       /** @inheritDoc */
       async _onDragLeaveApplication() {
         await super._onDragLeaveApplication();
-        if (this.#mechanicsTabBeforeDrag) { this.#showMechanicsTab(this.#mechanicsTabBeforeDrag); }
+        if (this.#mechanicsTabBeforeDrag) { this._safeChangeTab(this.#mechanicsTabBeforeDrag, "mechanics"); }
         this.#mechanicsTabBeforeDrag = null;
       }
 
@@ -213,7 +202,7 @@ export default function MechanicsSheetMixin(Base) {
         const tabId = this._mechanicCollectionFor(TeriockDragDrop.payload?.type)?.id;
         if (!tabId || tabId === this.tabGroups.mechanics) { return; }
         this.#mechanicsTabBeforeDrag ??= this.tabGroups.mechanics;
-        this.#showMechanicsTab(tabId);
+        this._safeChangeTab(tabId, "mechanics");
       }
 
       /** @inheritDoc */

@@ -268,6 +268,18 @@ export default function DragDropApplicationMixin(Base) {
         this._dragDrop.bind(this.element);
       }
 
+      /**
+       * Change tabs, deferring to the next render if the navigation to change isn't in the DOM yet.
+       * @param {string} tab
+       * @param {string} group
+       */
+      _safeChangeTab(tab, group) {
+        if (this.tabGroups[group] === tab) { return; }
+        if (this.element?.querySelector(`.tabs [data-group="${group}"][data-tab="${tab}"]`)) {
+          this.changeTab(tab, group);
+        } else { this.tabGroups[group] = tab; }
+      }
+
       /** @inheritDoc */
       async maximize() {
         // Minimize/maximize in close succession from dragging/dropping can leave leftover classes.

@@ -29,7 +29,7 @@ export default function PlayableActorSheetTabsPart(Base) {
       /** @inheritDoc */
       async _onDragLeaveApplication() {
         await super._onDragLeaveApplication();
-        if (this.#tabBeforeDrag) { this.changeTab(this.#tabBeforeDrag, "primary"); }
+        if (this.#tabBeforeDrag) { this._safeChangeTab(this.#tabBeforeDrag, "primary"); }
         this.#tabBeforeDrag = null;
       }
 
@@ -41,7 +41,7 @@ export default function PlayableActorSheetTabsPart(Base) {
         const tabId = this.constructor.SECTIONS.find(section => (section.dragTypes ?? []).includes(droppedType))?.id;
         if (!tabId || tabId === this.tabGroups.primary) { return; }
         this.#tabBeforeDrag ??= this.tabGroups.primary;
-        this.changeTab(tabId, "primary");
+        this._safeChangeTab(tabId, "primary");
       }
 
       /** @inheritDoc */
