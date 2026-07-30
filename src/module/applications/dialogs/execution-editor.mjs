@@ -15,7 +15,7 @@ export default class ExecutionEditor extends ResolvableDialog {
    * @this {ExecutionEditor}
    */
   static async #onMessageMode(_event, target) {
-    this.execution._messageMode = target.dataset.mode;
+    this.#execution._messageMode = target.dataset.mode;
     await this.render();
   }
 
@@ -40,13 +40,13 @@ export default class ExecutionEditor extends ResolvableDialog {
    * @param {PointerEvent} event
    * @param {HTMLElement} target
    * @returns {Promise<void>}
+   * @this {ExecutionEditor}
    */
   static async _onChangeDocument(event, target) {
     event?.preventDefault();
     const control = /** @type {HTMLElement} */ target?.closest("[data-document-index]");
     const index = Number(control?.dataset.documentIndex);
-    /** @type {Teriock.Execution.ExecutionDialogDocumentEntry} */
-    const entry = this.execution._dialogDocuments[index];
+    const entry = this.#execution._dialogDocuments[index];
     if (!entry?.editable || typeof entry.getChoices !== "function") { return; }
     const choices = await entry.getChoices();
     const selected = await DocumentSelector.selectSingle(choices, {
@@ -54,9 +54,9 @@ export default class ExecutionEditor extends ResolvableDialog {
       checked: entry.document?.uuid,
       hint: _loc(entry.selectHint ?? "TERIOCK.DIALOGS.Select.Armament.hint"),
       openable: true,
-      textKey: this.execution?.source?.system?.interaction === "attack"
+      textKey: this.#execution?.source?.system?.interaction === "attack"
         ? "system.summarizedAttack"
-        : this.execution?.source?.system?.interaction === "block"
+        : this.#execution?.source?.system?.interaction === "block"
         ? "system.summarizedBlock"
         : null,
       title: _loc(entry.selectTitle ?? "TERIOCK.DIALOGS.Select.Armament.title"),
@@ -75,19 +75,19 @@ export default class ExecutionEditor extends ResolvableDialog {
   static async _onConfirm(event, target) {
     event?.preventDefault();
     const name = target?.name;
-    const button = this.execution._dialogButtons.find(b => b.name === name);
+    const button = this.#execution._dialogButtons.find(b => b.name === name);
     if (button?.callback) { button.callback(); }
     this._finish(true);
     await this.close();
   }
 
   /**
-   * @param {AbilityExecution|ThresholdExecution} execution
+   * @param {BaseExecution} execution
    * @param {Partial<ApplicationConfiguration>} [config]
    */
   constructor(execution, config = {}) {
     super(config);
-    this.execution = execution;
+    this.#execution = execution;
     foundry.utils.setProperty(
       this.options,
       "window.title",
@@ -99,15 +99,18 @@ export default class ExecutionEditor extends ResolvableDialog {
     foundry.utils.setProperty(this.options, "window.icon", makeIconClass(execution.icon, "title"));
   }
 
+  /** @type {BaseExecution} */
+  #execution;
+
   /**
    * Build the render context for a single execution schema field.
    * @param {string} path
    * @returns {object}
    */
   #prepareFieldContext(path) {
-    const field = this.execution.schema.getField(path);
+    const field = this.#execution.schema.getField(path);
     const small = field instanceof fields.BooleanField;
-    const numeric = field instanceof FormulaField || (field instanceof fields.NumberField && !field.choices);
+    const numeric = field instanceof FormulaField || (field instanceof fields.NumberField && !field?.choices);
     return {
       classes: small ? ["slim", "tgrid-item"] : undefined,
       field,
@@ -115,8 +118,16 @@ export default class ExecutionEditor extends ResolvableDialog {
       name: path,
       placeholder: numeric ? "0" : undefined,
       small,
-      value: foundry.utils.getProperty(this.execution._source, path),
+      value: foundry.utils.getProperty(this.#execution._source, path),
     };
+  }
+
+  /**
+   * The execution being edited.
+   * @returns {BaseExecution}
+   */
+  get execution() {
+    return this.#execution;
   }
 
   /** @inheritDoc */
@@ -125,17 +136,17 @@ export default class ExecutionEditor extends ResolvableDialog {
     const form = /** @type {HTMLFormElement} */ (event.currentTarget);
     const submitted = new FormDataExtended(form).object;
     const changes = {};
-    for (const path of this.execution._formPaths) {
+    for (const path of this.#execution._formPaths) {
       if (path in submitted) { changes[path] = submitted[path]; }
     }
-    this.execution.updateSource(changes);
+    this.#execution.updateSource(changes);
     this.render();
   }
 
   /** @inheritDoc */
   async _onFirstRender(context, options = {}) {
     await super._onFirstRender(context, options);
-    const btn = this.execution._dialogButtons.find(d => d.default);
+    const btn = this.#execution._dialogButtons.find(d => d.default);
     if (btn && btn.name) { this.element.querySelector(`.form-footer button[name=${btn.name}]`)?.focus(); }
   }
 
@@ -152,14 +163,14 @@ export default class ExecutionEditor extends ResolvableDialog {
   async _prepareContext(options = {}) {
     const mainFields = [];
     const smallFields = [];
-    for (const path of this.execution._formPaths) {
+    for (const path of this.#execution._formPaths) {
       if (path === "hr") { continue; }
       const fieldContext = this.#prepareFieldContext(path);
       if (fieldContext.small) { smallFields.push(fieldContext); }
       else { mainFields.push(fieldContext); }
     }
-    const multipleDocuments = this.execution._dialogDocuments.length > 1;
-    const documents = this.execution._dialogDocuments.map((entry, index) => {
+    const multipleDocuments = this.#execution._dialogDocuments.length > 1;
+    const documents = this.#execution._dialogDocuments.map((entry, index) => {
       return {
         document: entry.document,
         editable: entry.editable,
@@ -171,16 +182,16 @@ export default class ExecutionEditor extends ResolvableDialog {
       };
     });
     return Object.assign(await super._prepareContext(options), {
-      buttons: this.execution._dialogButtons.map(button => ({
+      buttons: this.#execution._dialogButtons.map(button => ({
         type: "submit",
         ...button,
-        icon: makeIconClass(button.icon || this.execution.icon, "button"),
+        icon: makeIconClass(button.icon || this.#execution.icon, "button"),
         label: _loc(button.label),
       })),
       documents,
       mainFields,
       messageModes: Object.entries(CONFIG.ChatMessage.modes).map(([action, { icon, label }]) => {
-        return { action, active: action === this.execution._messageMode, icon, label };
+        return { action, active: action === this.#execution._messageMode, icon, label };
       }),
       smallFields,
     });
