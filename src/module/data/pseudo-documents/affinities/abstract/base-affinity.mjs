@@ -1,7 +1,7 @@
 import affinityConfig from "../../../../constants/config/affinity-config.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
-import { objectMap, parseIdentifier } from "../../../../helpers/utils.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 

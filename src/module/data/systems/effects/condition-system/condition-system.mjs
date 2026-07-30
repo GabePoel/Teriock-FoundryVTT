@@ -1,10 +1,10 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 
 /**
  * Condition-specific effect data model.

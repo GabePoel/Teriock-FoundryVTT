@@ -1,6 +1,4 @@
 import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
-import { getImage } from "../../../../../../helpers/path.mjs";
-import { parseIdentifier } from "../../../../../../helpers/utils.mjs";
 
 /**
  * @template {Constructor<BaseActorSheet>} T

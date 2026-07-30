@@ -1,6 +1,4 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { getImage } from "../../../helpers/path.mjs";
-import { parseIdentifier } from "../../../helpers/utils.mjs";
 import { BaseExecution } from "../../abstract/_module.mjs";
 
 /**

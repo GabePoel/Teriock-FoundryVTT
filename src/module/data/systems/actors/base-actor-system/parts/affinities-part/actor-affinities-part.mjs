@@ -2,7 +2,6 @@ import affinityConfig from "../../../../../../constants/config/affinity-config.m
 import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import { AffinityExecution, ResistanceExecution } from "../../../../../../executions/activity-executions/_module.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
-import { parseIdentifier } from "../../../../../../helpers/utils.mjs";
 import { FakeAffinityModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
