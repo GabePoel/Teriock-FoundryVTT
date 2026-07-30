@@ -1,5 +1,5 @@
-import { BaseFakeDocumentModel } from "../../../data/models/fake-document-models/_module.mjs";
 import { BasePreviewModel } from "../../../data/models/preview-models/_module.mjs";
+import { BaseVirtualModel } from "../../../data/models/virtual-models/_module.mjs";
 import { fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
@@ -46,7 +46,7 @@ export default function PreviewSheetMixin(Base) {
       };
 
       /**
-       * Open whatever document an identifier refers to. Fake documents stand in for things that are not documents, so
+       * Open whatever document an identifier refers to. Virtual models stand in for things that are not documents, so
        * they cannot use `openDoc`; this opens the thing they represent instead.
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
@@ -74,19 +74,19 @@ export default function PreviewSheetMixin(Base) {
       #previews = {};
 
       /**
-       * Rendered fake documents.
-       * @returns {Map<string, BaseFakeDocumentModel>}
+       * Rendered virtual models.
+       * @returns {Map<string, BaseVirtualModel>}
        */
-      #renderedFakes() {
-        const fakes = new Map();
+      #renderedVirtuals() {
+        const virtuals = new Map();
         for (const preview of Object.values(this.#previews)) {
           for (const group of preview.groups ?? []) {
             for (const doc of group.docs ?? []) {
-              if (doc instanceof BaseFakeDocumentModel) { fakes.set(doc.uuid, doc); }
+              if (doc instanceof BaseVirtualModel) { virtuals.set(doc.uuid, doc); }
             }
           }
         }
-        return fakes;
+        return virtuals;
       }
 
       /**
@@ -103,11 +103,11 @@ export default function PreviewSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        const fakes = this.#renderedFakes();
+        const virtuals = this.#renderedVirtuals();
         this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
           const uuid = el.dataset.uuid;
-          const fake = fakes.get(uuid);
-          if (fake) { fake.onEmbed(el); }
+          const virtual = virtuals.get(uuid);
+          if (virtual) { virtual.onEmbed(el); }
           else { fromUuid(uuid).then(doc => doc?.onEmbed(el)); }
         });
         for (const preview of Object.values(this.#previews)) { preview.bind(this.element); }

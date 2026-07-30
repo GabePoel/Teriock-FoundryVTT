@@ -73,7 +73,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
             empty: TERIOCK.config.document.effect.plural.toLowerCase(),
             optional: true,
           },
-          { docs: await this._fakeConditions(), empty: TERIOCK.config.document.condition.plural.toLowerCase() },
+          { docs: await this._virtualConditions(), empty: TERIOCK.config.document.condition.plural.toLowerCase() },
         ];
       }
 

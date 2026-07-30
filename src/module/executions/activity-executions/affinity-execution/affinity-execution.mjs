@@ -5,7 +5,7 @@ import { BaseExecution } from "../../abstract/_module.mjs";
  * Rolling one of an actor's affinities. Everything it displays comes from the affinity's own configuration, so it
  * works for any type. When the roll came from a specific affinity, that affinity supplies the image and wrappers.
  * @extends {BaseExecution}
- * @property {FakeAffinityModel | null} affinity
+ * @property {VirtualAffinityModel | null} affinity
  * @property {Teriock.Affinities.Type} type
  * @property {string[]} wrappers
  */

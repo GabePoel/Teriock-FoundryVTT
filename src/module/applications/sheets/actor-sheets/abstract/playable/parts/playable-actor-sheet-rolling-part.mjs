@@ -1,4 +1,4 @@
-import { FakeAffinityModel } from "../../../../../../data/models/_module.mjs";
+import { VirtualAffinityModel } from "../../../../../../data/models/_module.mjs";
 
 /**
  * @template {Constructor<BaseActorSheet>} T
@@ -18,8 +18,10 @@ export default function PlayableActorSheetRollingPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onRollAffinity(event, target) {
-        const [fakeName, id] = (target.closest(".teriock-block")?.dataset.uuid ?? "").split(".");
-        const affinity = fakeName === FakeAffinityModel.FAKE_NAME ? this.actor.system.derivedAffinities[id] : null;
+        const [virtualName, id] = (target.closest(".teriock-block")?.dataset.uuid ?? "").split(".");
+        const affinity = virtualName === VirtualAffinityModel.VIRTUAL_NAME
+          ? this.actor.system.derivedAffinities[id]
+          : null;
         const type = affinity?.type ?? target.closest("[data-affinity-type]")?.dataset.affinityType;
         if (!type) { return; }
         await this.actor.system.rollAffinity(type, { affinity, event });

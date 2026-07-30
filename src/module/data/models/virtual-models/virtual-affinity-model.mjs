@@ -1,22 +1,22 @@
 import { dotJoin, toId } from "../../../helpers/string.mjs";
 import { competenceField } from "../../fields/tools/builders.mjs";
-import BaseFakeDocumentModel from "./base-fake-document-model.mjs";
+import BaseVirtualModel from "./base-virtual-model.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * A single affinity an actor has, consolidated from every source that grants it. These are derived during preparation
  * and never stored to the database.
- * @extends {BaseFakeDocumentModel}
+ * @extends {BaseVirtualModel}
  * @property {number} amount
  * @property {Teriock.Keys.AffinityCategory} category
  * @property {Teriock.System.CompetenceLevel} competence
  * @property {Teriock.Affinities.Type} type
  * @property {string} value
  */
-export default class FakeAffinityModel extends BaseFakeDocumentModel {
+export default class VirtualAffinityModel extends BaseVirtualModel {
   /** @inheritDoc */
-  static get FAKE_NAME() {
+  static get VIRTUAL_NAME() {
     return "Affinity";
   }
 
@@ -26,7 +26,7 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
    * @param {Teriock.Affinities.Type} type
    * @param {Teriock.Keys.AffinityCategory} category
    * @param {string} value
-   * @returns {ID<FakeAffinityModel>}
+   * @returns {ID<VirtualAffinityModel>}
    */
   static affinityId(type, category, value) {
     return toId([type, category, value].join("."), { hash: true });

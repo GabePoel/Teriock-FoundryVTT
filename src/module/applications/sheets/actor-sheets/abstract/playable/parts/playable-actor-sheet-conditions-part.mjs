@@ -1,4 +1,4 @@
-import { FakeConditionModel } from "../../../../../../data/models/_module.mjs";
+import { VirtualConditionModel } from "../../../../../../data/models/_module.mjs";
 import { conditionSort } from "../../../../../../helpers/sort.mjs";
 import { TeriockTextEditor } from "../../../../../ux/_module.mjs";
 
@@ -52,32 +52,6 @@ export default function PlayableActorSheetConditionsPart(Base) {
       }
 
       /**
-       * The conditions this actor currently has, as fake documents a preview can render.
-       * @returns {Promise<FakeConditionModel[]>}
-       */
-      async _fakeConditions() {
-        /** @type {Record<Teriock.Keys.Condition, TeriockCondition>} */
-        const effects = {};
-        for (const c of this.actor.conditions) { effects[c.system.conditionKey] = c; }
-        const live = conditionSort(
-          Array.from(this.actor.statuses || []).filter(c => Object.keys(TERIOCK.index.conditions).includes(c)),
-        );
-        return Promise.all(live.map(async condition => {
-          const info = this.document.system.conditionInformation[condition];
-          const model = new FakeConditionModel({
-            conditionKey: condition,
-            locked: info.locked,
-            providers: Array.from(info.reasons),
-            sources: Array.from(info.sources),
-            // Only a forced condition renders from this; the rest use their own effect's tooltip.
-            tooltip: info.locked ? await this.#conditionTooltip(condition) : "",
-          }, { parent: this.document.system });
-          model.effect = effects[condition];
-          return model;
-        }));
-      }
-
-      /**
        * Add conditions to rendering context.
        * @param {object} context
        */
@@ -90,6 +64,32 @@ export default function PlayableActorSheetConditionsPart(Base) {
         const context = await super._prepareContext(options);
         this._prepareConditionContext(context);
         return context;
+      }
+
+      /**
+       * The conditions this actor currently has, as virtual models a preview can render.
+       * @returns {Promise<VirtualConditionModel[]>}
+       */
+      async _virtualConditions() {
+        /** @type {Record<Teriock.Keys.Condition, TeriockCondition>} */
+        const effects = {};
+        for (const c of this.actor.conditions) { effects[c.system.conditionKey] = c; }
+        const live = conditionSort(
+          Array.from(this.actor.statuses || []).filter(c => Object.keys(TERIOCK.index.conditions).includes(c)),
+        );
+        return Promise.all(live.map(async condition => {
+          const info = this.document.system.conditionInformation[condition];
+          const model = new VirtualConditionModel({
+            conditionKey: condition,
+            locked: info.locked,
+            providers: Array.from(info.reasons),
+            sources: Array.from(info.sources),
+            // Only a forced condition renders from this; the rest use their own effect's tooltip.
+            tooltip: info.locked ? await this.#conditionTooltip(condition) : "",
+          }, { parent: this.document.system });
+          model.effect = effects[condition];
+          return model;
+        }));
       }
     }
   );

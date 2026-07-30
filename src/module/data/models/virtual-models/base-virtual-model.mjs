@@ -13,13 +13,13 @@ const { fields } = foundry.data;
  * @property {Set<string>} providers
  * @property {Set<UUID<TeriockDocument>>} sources
  */
-export default class BaseFakeDocumentModel extends BaseDataModel {
+export default class BaseVirtualModel extends BaseDataModel {
   /**
    * The name this stands in for, used to build {@link uuid}.
    * @returns {string}
    */
-  static get FAKE_NAME() {
-    return "Fake";
+  static get VIRTUAL_NAME() {
+    return "Virtual";
   }
 
   /** @inheritDoc */
@@ -82,7 +82,7 @@ export default class BaseFakeDocumentModel extends BaseDataModel {
   }
 
   /**
-   * A key unique among the fakes of this kind on a single actor.
+   * A key unique among the virtual models of this kind on a single actor.
    * @returns {string}
    */
   get id() {
@@ -125,7 +125,7 @@ export default class BaseFakeDocumentModel extends BaseDataModel {
    * @returns {string}
    */
   get uuid() {
-    return `${this.constructor.FAKE_NAME}.${this.id}`;
+    return `${this.constructor.VIRTUAL_NAME}.${this.id}`;
   }
 
   /**

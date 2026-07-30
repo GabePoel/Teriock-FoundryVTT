@@ -2,7 +2,7 @@ import affinityConfig from "../../../../../../constants/config/affinity-config.m
 import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import { AffinityExecution, ResistanceExecution } from "../../../../../../executions/activity-executions/_module.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
-import { FakeAffinityModel } from "../../../../../models/_module.mjs";
+import { VirtualAffinityModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,7 +35,7 @@ export default function ActorAffinitiesPart(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          derivedAffinities: new fields.TypedObjectField(new fields.EmbeddedDataField(FakeAffinityModel), {
+          derivedAffinities: new fields.TypedObjectField(new fields.EmbeddedDataField(VirtualAffinityModel), {
             persisted: false,
           }),
         });
@@ -48,10 +48,10 @@ export default function ActorAffinitiesPart(Base) {
        * @param {Teriock.Affinities.EntryData} entry
        */
       #addAffinity(entry) {
-        const id = FakeAffinityModel.affinityId(entry.type, entry.category, entry.value);
+        const id = VirtualAffinityModel.affinityId(entry.type, entry.category, entry.value);
         const existing = this.derivedAffinities[id];
         if (!existing) {
-          this.derivedAffinities[id] = new FakeAffinityModel(entry, { parent: this });
+          this.derivedAffinities[id] = new VirtualAffinityModel(entry, { parent: this });
           return;
         }
         existing.amount += entry.amount;
@@ -79,7 +79,7 @@ export default function ActorAffinitiesPart(Base) {
 
       /**
        * Every affinity this actor has, in a stable order.
-       * @returns {FakeAffinityModel[]}
+       * @returns {VirtualAffinityModel[]}
        */
       get affinityEntries() {
         return Object.values(this.derivedAffinities).sort((a, b) =>
@@ -130,10 +130,10 @@ export default function ActorAffinitiesPart(Base) {
        * @param {Teriock.Affinities.Type} type
        * @param {Teriock.Keys.AffinityCategory} category
        * @param {string} value
-       * @returns {FakeAffinityModel | undefined}
+       * @returns {VirtualAffinityModel | undefined}
        */
       getAffinity(type, category, value) {
-        return this.derivedAffinities[FakeAffinityModel.affinityId(type, category, value)];
+        return this.derivedAffinities[VirtualAffinityModel.affinityId(type, category, value)];
       }
 
       /**

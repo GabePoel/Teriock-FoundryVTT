@@ -5,8 +5,8 @@ import { nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
- * Previews for {@link FakeAffinityModel}s. Affinities are consolidated derived data rather than documents, so none of
- * the document-oriented filters apply and this defines its own set.
+ * Previews for {@link VirtualAffinityModel}s. Affinities are consolidated derived data rather than documents, so
+ * none of the document-oriented filters apply and this defines its own set.
  * @inheritDoc
  * @property {Teriock.Models.AffinityFilters} filters
  */
@@ -57,8 +57,8 @@ export default class AffinityPreviewModel extends BasePreviewModel {
 
   /**
    * @inheritDoc
-   * @param {FakeAffinityModel[]} affinities
-   * @returns {Generator<FakeAffinityModel, void, void>}
+   * @param {VirtualAffinityModel[]} affinities
+   * @returns {Generator<VirtualAffinityModel, void, void>}
    */
   *filterDocuments(affinities) {
     for (const affinity of affinities) {

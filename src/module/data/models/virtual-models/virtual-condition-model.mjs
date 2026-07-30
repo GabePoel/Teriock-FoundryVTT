@@ -1,20 +1,20 @@
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { getName } from "../../../helpers/utils.mjs";
-import BaseFakeDocumentModel from "./base-fake-document-model.mjs";
+import BaseVirtualModel from "./base-virtual-model.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * A condition an actor currently has. Conditions the actor is forced into have no effect of their own to render, so
- * they are shown as fakes; ones the actor merely carries render from their real effect.
- * @extends {BaseFakeDocumentModel}
+ * they are shown as virtual models; ones the actor merely carries render from their real effect.
+ * @extends {BaseVirtualModel}
  * @property {Teriock.Keys.Condition} conditionKey
  * @property {boolean} locked
  * @property {string} tooltip
  */
-export default class FakeConditionModel extends BaseFakeDocumentModel {
+export default class VirtualConditionModel extends BaseVirtualModel {
   /** @inheritDoc */
-  static get FAKE_NAME() {
+  static get VIRTUAL_NAME() {
     return "Condition";
   }
 
