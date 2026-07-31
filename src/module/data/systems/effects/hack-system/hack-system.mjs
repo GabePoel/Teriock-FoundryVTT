@@ -27,6 +27,11 @@ export default class HackSystem extends ApplicableEffectSystem {
   }
 
   /** @inheritDoc */
+  get _color() {
+    return TERIOCK.display.colors.palette.red;
+  }
+
+  /** @inheritDoc */
   get _durationBar() {
     const bar = super._durationBar;
     if (this.permanent) { bar.wrappers.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label")); }
@@ -43,11 +48,6 @@ export default class HackSystem extends ApplicableEffectSystem {
     const bar = super._statusBar;
     bar.wrappers.push(hackConfig[this.part]?.part || "");
     return bar;
-  }
-
-  /** @inheritDoc */
-  get color() {
-    return TERIOCK.display.colors.palette.red;
   }
 
   /** @inheritDoc */

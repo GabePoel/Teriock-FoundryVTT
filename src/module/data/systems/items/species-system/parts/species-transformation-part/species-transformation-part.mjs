@@ -29,6 +29,22 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /** @inheritDoc */
+      get _color() {
+        if (this.isTransformation) {
+          if (this.transformationEffect.system.transformation.level === "minor") {
+            return TERIOCK.display.colors.palette.blue;
+          }
+          if (this.transformationEffect.system.transformation.level === "full") {
+            return TERIOCK.display.colors.palette.green;
+          }
+          if (this.transformationEffect.system.transformation.level === "greater") {
+            return TERIOCK.display.colors.palette.purple;
+          }
+        }
+        return super._color;
+      }
+
+      /** @inheritDoc */
       get _displayInputs() {
         return [...super._displayInputs, "system.transformation.img", "system.transformation.ringImg"];
       }
@@ -51,22 +67,6 @@ export default function SpeciesTransformationPart(Base) {
           });
         }
         return tags;
-      }
-
-      /** @inheritDoc */
-      get color() {
-        if (this.isTransformation) {
-          if (this.transformationEffect.system.transformation.level === "minor") {
-            return TERIOCK.display.colors.palette.blue;
-          }
-          if (this.transformationEffect.system.transformation.level === "full") {
-            return TERIOCK.display.colors.palette.green;
-          }
-          if (this.transformationEffect.system.transformation.level === "greater") {
-            return TERIOCK.display.colors.palette.purple;
-          }
-        }
-        return super.color;
       }
 
       /**

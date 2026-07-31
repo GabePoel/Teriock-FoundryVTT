@@ -55,6 +55,11 @@ export default class PowerSystem
   }
 
   /** @inheritDoc */
+  get _color() {
+    return powerConfig.type[this.type].color;
+  }
+
+  /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, {
       icon: powerConfig.type[this.type].icon,
@@ -66,11 +71,6 @@ export default class PowerSystem
           : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: asInf(this.maxAv) }),
       ],
     }];
-  }
-
-  /** @inheritDoc */
-  get color() {
-    return powerConfig.type[this.type].color;
   }
 
   /** @inheritDoc */

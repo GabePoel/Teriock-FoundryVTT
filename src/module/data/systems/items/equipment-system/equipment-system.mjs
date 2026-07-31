@@ -117,6 +117,13 @@ export default class EquipmentSystem
   }
 
   /** @inheritDoc */
+  get _color() {
+    if (this.isOverCapacity) { return TERIOCK.display.colors.palette.red; }
+    if (!this.identification.read) { return TERIOCK.display.colors.palette.grey; }
+    return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
+  }
+
+  /** @inheritDoc */
   get _displayInputs() {
     return ["system.equipmentClasses", ...super._displayInputs];
   }
@@ -143,13 +150,6 @@ export default class EquipmentSystem
       );
     }
     return promises;
-  }
-
-  /** @inheritDoc */
-  get color() {
-    if (this.isOverCapacity) { return TERIOCK.display.colors.palette.red; }
-    if (!this.identification.read) { return TERIOCK.display.colors.palette.grey; }
-    return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
   }
 
   /** @inheritDoc */

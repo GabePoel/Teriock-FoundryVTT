@@ -201,9 +201,7 @@ export default tseslint.config(
   },
   {
     files: ["{foundry,macros,scripts,src}/**/*.{mjs,ts}", "eslint.config.mjs"],
-    languageOptions: {
-      globals: { ...globals.browser, ...globalDocuments, ...globalHelpers, ...globalClient },
-    },
+    languageOptions: { globals: { ...globals.browser, ...globalDocuments, ...globalHelpers, ...globalClient } },
   },
   { files: ["{macros,src}/**/*.{mjs,ts}"], languageOptions: { globals: { ...globalTeriock } } },
   { files: ["macros/**/*.mjs"], languageOptions: { globals: { ...globalMacro } } },

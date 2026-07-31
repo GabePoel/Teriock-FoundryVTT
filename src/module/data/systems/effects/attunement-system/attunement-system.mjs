@@ -54,6 +54,11 @@ export default class AttunementSystem extends CleanedEffectSystem {
   }
 
   /** @inheritDoc */
+  get _color() {
+    return this.target ? TERIOCK.display.colors.palette.green : TERIOCK.display.colors.palette.orange;
+  }
+
+  /** @inheritDoc */
   get _embedIcons() {
     return [{
       action: "deattuneDoc",
@@ -67,11 +72,6 @@ export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   get _panelBlocks() {
     return [];
-  }
-
-  /** @inheritDoc */
-  get color() {
-    return this.target ? TERIOCK.display.colors.palette.green : TERIOCK.display.colors.palette.orange;
   }
 
   /** @inheritDoc */

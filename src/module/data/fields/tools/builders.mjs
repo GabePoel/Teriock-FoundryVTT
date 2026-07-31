@@ -12,6 +12,7 @@ import { DefenseModel } from "../../models/_module.mjs";
 const {
   ArrayField,
   BooleanField,
+  ColorField,
   DocumentIdField,
   DocumentUUIDField,
   EmbeddedDataField,
@@ -119,7 +120,7 @@ export function associationsField() {
     new SchemaField({
       cards: new ArrayField(
         new SchemaField({
-          color: new StringField({ nullable: true, required: false }),
+          color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
           draggable: new BooleanField(),
           id: new DocumentIdField(),
           img: new FilePathField({ categories: ["IMAGE"] }),
@@ -195,7 +196,7 @@ export function panelsField() {
       bars: barsField(),
       blocks: blocksField(),
       classes: new ArrayField(new StringField(), { initial: [] }),
-      color: nullString(),
+      color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
       icon: nullString(),
       img: nullString(),
       label: nullString(),

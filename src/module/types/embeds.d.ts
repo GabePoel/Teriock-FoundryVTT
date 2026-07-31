@@ -1,4 +1,5 @@
 import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+import { Color } from "@client/utils/_module.mjs";
 
 declare global {
   namespace Teriock.Embeds {
@@ -15,7 +16,7 @@ declare global {
 
     export type EmbedParts = {
       action?: string;
-      color?: string;
+      color?: Color;
       draggable?: boolean;
       hidden?: boolean;
       icons?: Teriock.Embeds.EmbedIcon[];

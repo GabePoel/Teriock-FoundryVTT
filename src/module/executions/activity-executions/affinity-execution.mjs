@@ -70,6 +70,7 @@ export default class AffinityExecution extends BaseExecution {
     this.panels.push({
       bars: [{ icon: this.icon, label: this.name, wrappers: this.wrappers }],
       blocks: [{ text: this.journalEntryPage?.text?.content, title: this.name }],
+      color: foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
       icon: this.icon,
       img: this.img,
       label: _loc("TERIOCK.AFFINITIES.Base.LABEL"),

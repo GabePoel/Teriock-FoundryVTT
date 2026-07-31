@@ -46,7 +46,7 @@ export default class VirtualConditionModel extends BaseVirtualModel {
 
   /** @inheritDoc */
   get embedParts() {
-    const color = TERIOCK.display.colors.palette.red;
+    const color = foundry.utils.Color.from(TERIOCK.display.colors.palette.red);
     // A condition the actor merely carries renders from its own effect.
     if (!this.locked && this.effect) {
       const parts = this.effect.system.embedParts;

@@ -1,3 +1,5 @@
+import type Color from "@common/utils/color.mjs";
+
 declare global {
   namespace Teriock.Panels {
     /** Pieces of a bar within a panel. */
@@ -23,7 +25,7 @@ declare global {
     /** Definition for an association card. */
     export type PanelAssociationCard = {
       badge?: string;
-      color?: string;
+      color?: Color;
       draggable?: boolean;
       icon?: Teriock.Embeds.EmbedIcon;
       id?: ID<TeriockDocument>;
@@ -59,7 +61,7 @@ declare global {
       /** Additional CSS classes to add */
       classes?: string[];
       /** Color to assign to the image border */
-      color?: Teriock.Keys.Color;
+      color?: Color;
       /** Font Awesome icons */
       icon?: string;
       /** The URL or path to the image associated with the panel */

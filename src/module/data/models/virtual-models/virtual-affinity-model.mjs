@@ -65,7 +65,7 @@ export default class VirtualAffinityModel extends BaseVirtualModel {
   get embedParts() {
     return Object.assign(super.embedParts, {
       action: "rollAffinity",
-      color: TERIOCK.config.affinity.types[this.type]?.color,
+      color: foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
       makeTooltip: true,
       tooltipIdentifier: TERIOCK.config.affinity.types[this.type]?.identifier,
       usable: true,

@@ -188,7 +188,7 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Promise<Partial<Teriock.Panels.PanelParts>>} */
       async getPanelParts() {
         const parts = Object.assign(await super.getPanelParts(), {
-          color: this.color || undefined,
+          color: this.color,
           icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
           img: this.parent.img,
           label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,

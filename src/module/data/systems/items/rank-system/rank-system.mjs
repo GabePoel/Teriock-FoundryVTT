@@ -142,6 +142,11 @@ export default class RankSystem
   }
 
   /** @inheritDoc */
+  get _color() {
+    return classConfig.origins[this.origin].color;
+  }
+
+  /** @inheritDoc */
   get _panelBars() {
     return [
       {
@@ -178,11 +183,6 @@ export default class RankSystem
    */
   get classIcon() {
     return TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.icon;
-  }
-
-  /** @inheritDoc */
-  get color() {
-    return classConfig.origins[this.origin].color;
   }
 
   /** @inheritDoc */

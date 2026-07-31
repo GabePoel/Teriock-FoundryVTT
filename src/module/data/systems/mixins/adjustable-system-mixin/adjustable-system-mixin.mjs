@@ -38,6 +38,11 @@ export default function AdjustableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      get _color() {
+        return TERIOCK.config.effect.form[this.form].color;
+      }
+
+      /** @inheritDoc */
       get _displayButtons() {
         const buttons = super._displayButtons;
         if (!this.badge) {
@@ -65,11 +70,6 @@ export default function AdjustableSystemMixin(Base) {
           tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.improved"));
         }
         return [...tags, ...super._nameTags];
-      }
-
-      /** @inheritDoc */
-      get color() {
-        return TERIOCK.config.effect.form[this.form].color;
       }
 
       /** @inheritDoc */
