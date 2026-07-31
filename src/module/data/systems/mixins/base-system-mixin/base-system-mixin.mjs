@@ -4,6 +4,7 @@ const { fields } = foundry.data;
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ * @import { ColorSource } from "@common/_types.mjs";
  */
 
 /**
@@ -38,8 +39,8 @@ export default function BaseSystemMixin(Base) {
       #pseudoCollections;
 
       /**
-       * Raw color string or null.
-       * @returns {string|null}
+       * Raw color source or null.
+       * @returns {ColorSource|null}
        */
       get _color() {
         return null;
