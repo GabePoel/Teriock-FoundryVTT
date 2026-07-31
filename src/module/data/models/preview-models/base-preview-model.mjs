@@ -6,6 +6,11 @@ const { fields } = foundry.data;
 const { SearchFilter } = foundry.applications.ux;
 
 /**
+ * @import { AbstractFormInputElement } from "@client/applications/elements/_module.mjs";
+ * @import { DataField } from "@common/data/fields.mjs";
+ */
+
+/**
  * Previews are used for sorting and filtering documents in sheets and are never stored to the database.
  * @property {Teriock.Models.PreviewDisplay} display
  * @property {Teriock.Models.BaseFilters} filters

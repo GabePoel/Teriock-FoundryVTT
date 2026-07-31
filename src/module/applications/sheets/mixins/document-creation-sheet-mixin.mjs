@@ -4,6 +4,10 @@ import { TeriockDialog } from "../../api/_module.mjs";
 import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../../dialogs/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base
  */

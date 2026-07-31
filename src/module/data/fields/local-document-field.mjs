@@ -1,6 +1,11 @@
 const { DocumentIdField } = foundry.data.fields;
 
 /**
+ * @import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+ * @import { StringFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * Blatantly stolen from D&D 5E with some extra bells and whistles added.
  * A mirror of ForeignDocumentField that references a Document embedded within this Document.
  * @property {StringFieldOptions & Teriock.Fields._LocalDocumentFieldOptions} options

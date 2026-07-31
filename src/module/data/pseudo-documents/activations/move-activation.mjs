@@ -5,6 +5,10 @@ const { fields } = foundry.data;
 const { Ray } = foundry.canvas.geometry;
 
 /**
+ * @import { Point } from "@common/_types.mjs";
+ */
+
+/**
  * @property {UUID<TeriockTokenDocument>} token
  * @property {boolean} originBarrier
  * @property {boolean} randomDirection

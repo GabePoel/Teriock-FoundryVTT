@@ -1,6 +1,10 @@
 const { fields } = foundry.data;
 
 /**
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ */
+
+/**
  * Add instructions to the system.
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base

@@ -3,6 +3,10 @@ import { HTMLTernaryElement } from "../../applications/elements/_module.mjs";
 const { BooleanField } = foundry.data.fields;
 
 /**
+ * @import { FormInputConfig } from "@common/data/_types.mjs";
+ */
+
+/**
  * A nullable boolean field rendered as a three-state toggle represented as `true`, `false`, or `null`.
  * Uses {@link HTMLTernaryElement} for form input.
  */

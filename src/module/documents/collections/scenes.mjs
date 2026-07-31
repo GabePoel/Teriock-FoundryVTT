@@ -3,6 +3,10 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 const { Scenes } = foundry.documents.collections;
 
 /**
+ * @import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+ */
+
+/**
  * @extends {Scenes}
  * @mixes BaseWorldCollection
  * @implements {TypeCollection<TeriockScene, TeriockScene>}

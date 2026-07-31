@@ -3,6 +3,10 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base
  */

@@ -3,8 +3,14 @@ import { makeIconClass } from "../../helpers/icon.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
-const { fields } = foundry.data;
+const { StringField } = foundry.data.fields;
 const { FormDataExtended } = foundry.applications.ux;
+
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import { StringFieldOptions } from "@common/data/_types.mjs";
+ */
 
 /**
  * Select one of several choices.
@@ -74,11 +80,11 @@ export default class ChoiceSelector extends ResolvableDialog {
     this.hintHtml = hintHtml;
     this.hintTitle = hintTitle;
     this.other = other;
-    this.#field = new fields.StringField(options);
+    this.#field = new StringField(options);
     foundry.utils.mergeObject(this.options.window, { icon: makeIconClass(icon, "title"), title }, { inplace: true });
   }
 
-  /** @type {fields.StringField} */
+  /** @type {StringField} */
   #field;
 
   /** @inheritDoc */

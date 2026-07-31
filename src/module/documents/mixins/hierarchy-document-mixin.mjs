@@ -4,6 +4,10 @@ import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 const { Collection } = foundry.utils;
 
 /**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Document mixin to support hierarchies of the same document type as well as dependencies. This requires infastructure
  * in lots of other parts of the codebase. Dependencies are typically active effects that have some sort of ownership
  * over items or documents on other creatures. These are handled by the {@link DependentsRegistry}.

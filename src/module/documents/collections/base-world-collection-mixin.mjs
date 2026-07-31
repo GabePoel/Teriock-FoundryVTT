@@ -1,4 +1,8 @@
 /**
+ * @import { WorldCollection } from "@client/documents/abstract/_module.mjs";
+ */
+
+/**
  * @template {Constructor<WorldCollection>} T
  * @param {T} Base
  */

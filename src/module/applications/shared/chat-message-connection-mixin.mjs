@@ -6,6 +6,11 @@ import { TeriockContextMenu } from "../ux/_module.mjs";
 const { ImagePopout } = foundry.applications.apps;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
+ */
+
+/**
  * Mixin for applications that render chat messages.
  * @template {Constructor<ApplicationV2>} T
  * @param {T} Base

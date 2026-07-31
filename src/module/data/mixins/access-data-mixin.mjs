@@ -1,6 +1,11 @@
 import { createElement } from "../../helpers/html.mjs";
 
 /**
+ * @import { DataModel, TypeDataModel } from "@common/abstract/_module.mjs";
+ * @import { FormGroupConfig, FormInputConfig } from "@common/data/_types.mjs";
+ */
+
+/**
  * Mixin to ensure data models have access to the data they need.
  * @template {Constructor<DataModel | TypeDataModel>} T
  * @param {T} Base

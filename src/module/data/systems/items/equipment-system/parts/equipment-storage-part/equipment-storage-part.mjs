@@ -7,6 +7,10 @@ import { StorageModel } from "../../../../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * @template {Constructor<BaseItemSystem>} T
  * @param {T} Base
  */

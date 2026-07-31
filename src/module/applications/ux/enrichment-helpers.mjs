@@ -1,4 +1,8 @@
 /**
+ * @import { TextEditorEnricherConfig } from "@client/config.mjs";
+ */
+
+/**
  * Build regex patterns consistently in ways that mostly match Foundry conventions.
  * @param {Teriock.Enrichment.Format} format
  * @returns {RegExp}

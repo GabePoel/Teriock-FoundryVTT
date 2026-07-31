@@ -1,3 +1,7 @@
+/**
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ */
+
 const SCOPE_MAP = { ActiveEffect: "effect", Actor: "actor", Automation: "automation", Item: "item" };
 
 /**

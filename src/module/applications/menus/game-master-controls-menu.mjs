@@ -3,6 +3,11 @@ import { makeIconClass } from "../../helpers/icon.mjs";
 import { settings } from "../../setup/system-settings.mjs";
 import BaseMenu from "./base-menu.mjs";
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 export default class GameMasterControlsMenu extends BaseMenu {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {

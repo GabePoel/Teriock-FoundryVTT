@@ -1,6 +1,11 @@
 import { fromIdentifier } from "../../../../helpers/utils.mjs";
 
 /**
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * @typedef RefreshSourceNode
  * @property {AnyCommonDocument|null} document
  * @property {string} label

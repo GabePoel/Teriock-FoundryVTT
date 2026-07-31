@@ -1,3 +1,7 @@
+/**
+ * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
+ */
+
 // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
 /**

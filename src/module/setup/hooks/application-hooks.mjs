@@ -3,6 +3,13 @@ import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 
 /**
+ * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";
+ * @import { ApplicationV2, DocumentSheetV2 } from "@client/applications/api/_module.mjs";
+ * @import { ImagePopout } from "@client/applications/apps/_module.mjs";
+ * @import { ImagePopoutConfiguration } from "@client/applications/apps/image-popout.mjs";
+ */
+
+/**
  * Add the entries from {@link EmbedCardDocument.getEmbedContextMenuEntries} to sheet header.
  * @param {DocumentSheetV2 & { document: TeriockDocument }} application
  * @param {ApplicationHeaderControlsEntry[]} controls

@@ -4,6 +4,12 @@ import * as formula from "../../helpers/formula.mjs";
 const { StringField } = foundry.data.fields;
 
 /**
+ * @import { ActiveEffectChangeData } from "@client/documents/_types.mjs";
+ * @import { DataModel } from "@common/abstract/_module.mjs";
+ * @import { DataFieldContext, StringFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * Special case {@link StringField} which represents a formula.
  * @extends {Teriock.Fields._FormulaFieldOptions}
  */

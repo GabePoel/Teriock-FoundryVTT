@@ -1,6 +1,10 @@
 import HTMLCycleButtonElement from "./cycle-button.mjs";
 
 /**
+ * @import { FormInputConfig } from "@common/data/_types.mjs";
+ */
+
+/**
  * A three-state toggle control representing `true`, `false`, or `null`.
  * Left-click cycles forward (`null` -> `true` -> `false` -> `null`).
  * Right-click cycles backward (`null` -> `false` -> `true` -> `null`).

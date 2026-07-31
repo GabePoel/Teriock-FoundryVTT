@@ -1,4 +1,9 @@
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
+ */
+
+/**
  * Mixin to ensure that `TERIOCK` values are always available.
  * @template {Constructor<ApplicationV2>} T
  * @param {T} Base

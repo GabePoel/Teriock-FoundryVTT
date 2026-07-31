@@ -4,6 +4,10 @@ import { migrateValue } from "../../../migrations/source-migrations.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
+ */
+
+/**
  * @typedef {object} TriggerMetadata
  * @property {"pre"|"on"|null} activationTime - Default time for to call activations for a simple trigger effect.
  * @property {Teriock.Fields.DynamicChoices} choices - Available trigger choices to select from.

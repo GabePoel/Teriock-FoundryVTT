@@ -6,6 +6,10 @@ import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
 const { ChatLog } = foundry.applications.sidebar.tabs;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @extends {ChatLog}
  * @mixes ChatMessageConnection
  */

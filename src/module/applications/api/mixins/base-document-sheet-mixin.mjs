@@ -2,6 +2,11 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseApplicationMixin from "./base-application-mixin.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { DocumentSheetV2 } from "@client/applications/api/_module.mjs";
+ */
+
+/**
  * @template {Constructor<DocumentSheetV2>} T
  * @param {T} Base
  */
@@ -21,7 +26,7 @@ export default function BaseDocumentSheetMixin(Base) {
 
     /** @inheritDoc */
     get isEditable() {
-      if (this.document.isStatus) { return false; }
+      if (this.document?.isStatus) { return false; }
       return super.isEditable;
     }
 

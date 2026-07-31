@@ -3,6 +3,10 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 const { RollTables } = foundry.documents.collections;
 
 /**
+ * @import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+ */
+
+/**
  * @extends {RollTables}
  * @mixes BaseWorldCollection
  * @implements {TypeCollection<TeriockRollTable, TeriockRollTable>}

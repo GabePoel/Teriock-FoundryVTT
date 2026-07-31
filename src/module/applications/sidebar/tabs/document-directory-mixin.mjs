@@ -1,6 +1,10 @@
 import { makeIcon } from "../../../helpers/icon.mjs";
 
 /**
+ * @import { DocumentDirectory } from "@client/applications/sidebar/_module.mjs";
+ */
+
+/**
  * @template {Constructor<DocumentDirectory>} T
  * @param {T} Base
  */

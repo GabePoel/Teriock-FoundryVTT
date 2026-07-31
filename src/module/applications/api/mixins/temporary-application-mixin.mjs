@@ -1,6 +1,12 @@
 const { FormDataExtended } = foundry.applications.ux;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
+ * @import { DataField } from "@common/data/fields.mjs";
+ */
+
+/**
  * Mixin for short-lived applications.
  * @template {Constructor<ApplicationV2 & BaseApplication>} T
  * @param {T} Base

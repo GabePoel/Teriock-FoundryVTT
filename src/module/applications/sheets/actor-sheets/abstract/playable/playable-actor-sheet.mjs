@@ -3,6 +3,11 @@ import BaseActorSheet from "../base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * Playable actor sheet.
  * @extends {BaseActorSheet}
  * @mixes PlayableActorSheetAvatarImagePart

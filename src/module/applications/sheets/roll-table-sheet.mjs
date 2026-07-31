@@ -4,6 +4,10 @@ import { BaseApplicationMixin, DragDropApplicationMixin } from "../api/mixins/_m
 const { RollTableSheet } = foundry.applications.sheets;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @mixes BaseApplication
  * @mixes DragDropSheet
  * @extends {RollTableSheet}

@@ -7,6 +7,10 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
+ */
+
 export default class ChildChangeAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChildChange"];

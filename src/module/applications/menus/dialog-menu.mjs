@@ -3,6 +3,10 @@ import { makeIconClass } from "../../helpers/icon.mjs";
 import { settings } from "../../setup/system-settings.mjs";
 import BaseMenu from "./base-menu.mjs";
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
 export default class DialogMenu extends BaseMenu {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {

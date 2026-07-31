@@ -4,6 +4,10 @@ import * as documentMixins from "../mixins/_module.mjs";
 const { Folder } = foundry.documents;
 
 /**
+ * @import { FolderChildNode } from "@client/documents/_types.mjs";
+ */
+
+/**
  * The Teriock Folder implementation.
  * @extends {Folder}
  * @extends {ClientDocument}

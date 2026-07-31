@@ -1,6 +1,11 @@
 const { DragDrop } = foundry.applications.ux;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
+ */
+
+/**
  * Mixin adding drag-and-drop handling to applications.
  * @template {Constructor<BaseApplication>} T
  * @param {T} Base

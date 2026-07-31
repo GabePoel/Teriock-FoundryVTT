@@ -4,6 +4,11 @@ import ResolvableDialog from "../api/resolvable-dialog.mjs";
 
 const { SearchFilter } = foundry.applications.ux;
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 /** @type {Teriock.Select.SelectDocumentsDialogOptions} */
 const DEFAULT_SELECT_OPTIONS = {
   checked: [],

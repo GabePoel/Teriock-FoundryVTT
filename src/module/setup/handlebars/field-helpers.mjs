@@ -2,6 +2,11 @@ import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass, makeIconElement } from "../../helpers/icon.mjs";
 import { toKebabCase } from "../../helpers/string.mjs";
 
+/**
+ * @import { FormInputConfig } from "@common/data/_types.mjs";
+ * @import { DataField } from "@common/data/fields.mjs";
+ */
+
 /** Displayed value length past which overflowing content gets a full-text tooltip. */
 const OVERFLOW_TOOLTIP_THRESHOLD = 16;
 

@@ -1,6 +1,11 @@
 import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ */
+
+/**
  * @template {Constructor<BaseActorSheet>} T
  * @param {T} Base
  */

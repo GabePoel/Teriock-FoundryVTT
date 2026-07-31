@@ -8,6 +8,10 @@ import BaseMessageSystem from "../base-message-system/base-message-system.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { DataField } from "@common/data/fields.mjs";
+ */
+
+/**
  * Interactive chat message data model.
  * @extends {BaseMessageSystem}
  * @extends {Teriock.Models.InteractiveMessageSystemData}

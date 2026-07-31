@@ -1,3 +1,5 @@
+import type { ApplicationConfiguration } from "@client/applications/_types.mjs";
+
 declare global {
   namespace Teriock.Application {
     /**

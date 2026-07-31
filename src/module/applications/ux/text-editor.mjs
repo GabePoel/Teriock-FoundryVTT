@@ -3,6 +3,10 @@ import { parseIdentifier } from "../../helpers/utils.mjs";
 
 const { TextEditor } = foundry.applications.ux;
 
+/**
+ * @import { DocumentHTMLEmbedConfig } from "@client/applications/ux/text-editor.mjs";
+ */
+
 /** @inheritDoc */
 export default class TeriockTextEditor extends TextEditor {
   /**

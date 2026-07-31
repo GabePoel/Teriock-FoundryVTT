@@ -1,3 +1,7 @@
+/**
+ * @import { ActiveEffectChangeTypeConfig } from "@client/config.mjs";
+ */
+
 /** @enum {ActiveEffectChangeTypeConfig} */
 const changeConfigs = {
   boost: { defaultPriority: 60, label: "TERIOCK.EFFECTS.Changes.boost" },

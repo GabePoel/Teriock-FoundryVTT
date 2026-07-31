@@ -1,6 +1,10 @@
 import { TeriockDragDrop } from "../../ux/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @template {Constructor<DragDropSheet>} T
  * @param {T} Base
  */

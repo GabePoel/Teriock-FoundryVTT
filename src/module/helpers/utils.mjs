@@ -1,6 +1,11 @@
 import { choicesWithNone, localizeChoices } from "./localization.mjs";
 
 /**
+ * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Make fields fancy.
  * @param {Teriock.Display.DisplayField[]} displayFields
  * @returns {Teriock.Display.FancyDisplayField[]}
@@ -140,7 +145,7 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
 
 /**
  * Helper function to ensure a value with a min and max is allowed.
- * @param {Foundry.BarField} bar
+ * @param {Teriock.Fields.BarField} bar
  * @param {number} change
  * @returns {number}
  */

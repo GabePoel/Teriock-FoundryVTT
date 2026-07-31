@@ -2,6 +2,11 @@ const { SchemaField } = foundry.data.fields;
 const { getProperty, setProperty } = foundry.utils;
 
 /**
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
+ * @import { DataFieldContext, DataFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * A special class of {@link SchemaField} which applies its changes to multiple paths in its data schema.
  * @property {DataFieldOptions & Teriock.Fields._MultiChangeFieldOptions} options
  */

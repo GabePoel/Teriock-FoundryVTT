@@ -3,6 +3,10 @@ import BaseDetectionMode from "./detection-modes/base-detection-mode.mjs";
 import * as vision from "./vision-modes/_module.mjs";
 
 /**
+ * @import { VisionMode } from "@client/canvas/perception/_module.mjs";
+ */
+
+/**
  * Detection modes
  *
  * @type {Record<string, BaseDetectionMode>}

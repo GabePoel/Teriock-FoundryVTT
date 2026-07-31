@@ -3,6 +3,10 @@ import { TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
 
 const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
+/**
+ * @import { DataFieldContext, DataFieldOptions } from "@common/data/_types.mjs";
+ */
+
 class PseudoTypedSchemaField extends TypedSchemaField {
   /** @inheritdoc */
   _validateSpecial(value) {

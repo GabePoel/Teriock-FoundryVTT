@@ -4,6 +4,11 @@ import { userSettingsModels } from "../../data/models/settings-models/_module.mj
 import { makeIconClass } from "../../helpers/icon.mjs";
 import BaseMenu from "./base-menu.mjs";
 
+/**
+ * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 /** @type {Record<Teriock.Config.SettingsCategory, string>} */
 const categoryIcons = {
   ability: icons.document.ability,

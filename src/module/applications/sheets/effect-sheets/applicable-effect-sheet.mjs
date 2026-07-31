@@ -9,6 +9,11 @@ import * as sheetMixins from "../mixins/_module.mjs";
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
+ * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * {@link TeriockImbuement} and {@link TeriockConsequence} sheet.
  * @extends {ActiveEffectConfig}
  * @mixes BaseDocumentSheet
@@ -35,7 +40,11 @@ export default class ApplicableEffectSheet
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { form: { closeOnSubmit: false, submitOnChange: true }, teriock: { startLocked: false } };
+  static DEFAULT_OPTIONS = {
+    form: { closeOnSubmit: false, submitOnChange: true },
+    teriock: { startLocked: false },
+    window: { resizable: true },
+  };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {

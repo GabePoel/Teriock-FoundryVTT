@@ -3,13 +3,13 @@ import { migrateKey, migrateValue } from "../../../migrations/source-migrations.
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
 /**
- * @template {Constructor<BaseSystem>} T
+ * @template {Constructor<TeriockSystem>} T
  * @param {T} Base
  */
 export default function AutomatableSystemMixin(Base) {
   return (
     /**
-     * @extends {BaseSystem}
+     * @extends {TeriockSystem}
      * @extends {Teriock.Models.AutomatableSystemData}
      * @mixin
      */

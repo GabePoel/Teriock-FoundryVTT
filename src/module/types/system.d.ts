@@ -153,7 +153,6 @@ declare global {
       deleteChildren: boolean;
       fullOverride: boolean;
       recursive: boolean;
-
       updateChildren: boolean;
       updateDocument: boolean;
     };

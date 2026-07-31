@@ -1,6 +1,10 @@
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Base mixin.
  * @template {Constructor<ClientDocument>} T
  * @param {T} Base

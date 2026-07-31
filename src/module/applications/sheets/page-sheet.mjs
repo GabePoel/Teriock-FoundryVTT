@@ -12,6 +12,11 @@ import {
 const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * @extends {JournalEntryPageProseMirrorSheet}
  * @mixes BaseDocumentSheet
  * @mixes DisplaySheet

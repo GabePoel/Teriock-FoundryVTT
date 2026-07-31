@@ -1,6 +1,10 @@
 import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/utils.mjs";
 
 /**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Document mixin for documents that other documents can be dependent on. Dependents are documents that have some sort
  * of ownership relationship with this one without being subs or embedded children of it. The relationship is stored on
  * the dependent as `system._dep` and tracked by the {@link DependentsRegistry}.

@@ -6,6 +6,11 @@ import { DocumentDialog } from "../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../shared/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * @extends {DocumentDialog}
  * @mixes HackStatApplication
  */

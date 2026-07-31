@@ -1,6 +1,10 @@
 import { DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
 const CHILD_DOCUMENT_TYPES = ["ActiveEffect", "Actor", "Item"];
 
 /**

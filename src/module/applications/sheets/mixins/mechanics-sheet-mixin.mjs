@@ -10,6 +10,11 @@ import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 
 /**
+ * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
+ * @import { Collection } from "@common/utils/_module.mjs";
+ */
+
+/**
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base
  */

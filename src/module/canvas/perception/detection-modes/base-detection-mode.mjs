@@ -1,6 +1,10 @@
 const { DetectionMode } = foundry.canvas.perception;
-const { Token } = foundry.canvas.placeables;
+const { TokenDocument } = foundry.documents;
 const { fields } = foundry.data;
+
+/**
+ * @import { PointVisionSource } from "@client/canvas/sources/_module.mjs";
+ */
 
 /**
  * @property {boolean} ethereal - Can this detect Ethereal creatures from Material?
@@ -71,41 +75,42 @@ export default class BaseDetectionMode extends DetectionMode {
    * @override
    */
   _canDetect(visionSource, target) {
-    const src = visionSource.object.document;
-    let tgt;
-    if (target instanceof Token) { tgt = target.document; }
-    if (this.isMove && !this._testStatuses("move", src, tgt)) { return false; }
-    if (this.isScent && !this._testStatuses("scent", src, tgt)) { return false; }
-    if (this.isSight && !this._testStatuses("sight", src, tgt)) { return false; }
-    if (this.isSound && !this._testStatuses("sound", src, tgt)) { return false; }
-    if (!this._testEthereal(src, tgt)) { return false; }
-    return this._testHidden(src, tgt);
+    const sDoc = visionSource.object.document;
+    const tDoc = target?.document;
+    if (tDoc instanceof TokenDocument) {
+      if (this.isMove && !this._testStatuses("move", sDoc, tDoc)) { return false; }
+      if (this.isScent && !this._testStatuses("scent", sDoc, tDoc)) { return false; }
+      if (this.isSight && !this._testStatuses("sight", sDoc, tDoc)) { return false; }
+      if (this.isSound && !this._testStatuses("sound", sDoc, tDoc)) { return false; }
+    }
+    if (!this._testEthereal(visionSource.object, target)) { return false; }
+    return this._testHidden(sDoc, tDoc);
   }
 
   /**
    * Verify that a target is visible based on whether it and the source are Ethereal.
-   * @param {TeriockTokenDocument} src
-   * @param {TeriockTokenDocument} [tgt]
+   * @param {TeriockToken} sourceToken
+   * @param {TeriockToken} [targetToken]
    * @returns {boolean}
    */
-  _testEthereal(src, tgt) {
-    if (tgt) {
-      if (src.hasStatusEffect("ethereal") === tgt.hasStatusEffect("ethereal")) { return true; }
-      else if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal")) { return this.ethereal; }
-      else if (src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal")) { return this.material; }
+  _testEthereal(sourceToken, targetToken) {
+    if (targetToken && typeof targetToken?.isEthereal === "boolean") {
+      if (sourceToken?.isEthereal === targetToken?.isEthereal) { return true; }
+      else if (!sourceToken?.isEthereal && targetToken?.isEthereal) { return this.ethereal; }
+      else if (sourceToken?.isEthereal && !targetToken?.isEthereal) { return this.material; }
     }
     return true;
   }
 
   /**
    * Verify that a target is visible based on whether it is hidden.
-   * @param {TeriockTokenDocument} src
-   * @param {TeriockTokenDocument} [tgt]
+   * @param {TeriockTokenDocument} sourceDocument
+   * @param {TeriockTokenDocument} [targetDocument]
    */
-  _testHidden(src, tgt) {
-    if (this.hidden && tgt && tgt.hasStatusEffect("hidden")) {
-      const srcActor = src.actor;
-      const tgtActor = tgt.actor;
+  _testHidden(sourceDocument, targetDocument) {
+    if (this.hidden && targetDocument && targetDocument.hasStatusEffect("hidden")) {
+      const srcActor = sourceDocument.actor;
+      const tgtActor = targetDocument.actor;
       if (srcActor && tgtActor) {
         return srcActor.system.detection.perceiving >= tgtActor.system.detection.hiding;
       }
@@ -116,16 +121,16 @@ export default class BaseDetectionMode extends DetectionMode {
   /**
    * Check if the source and target have any statuses that interfere with the vision type.
    * @param {string} type
-   * @param {TeriockTokenDocument} src
-   * @param {TeriockTokenDocument} [tgt]
+   * @param {TeriockTokenDocument} sourceDocument
+   * @param {TeriockTokenDocument} [targetDocument]
    * @returns {boolean}
    */
-  _testStatuses(type, src, tgt) {
+  _testStatuses(type, sourceDocument, targetDocument) {
     const blockers = this.constructor.BLOCKING_STATUSES;
     if (Object.keys(blockers).includes(type)) {
-      for (const status of blockers[type].src) { if (src.hasStatusEffect(status)) { return false; } }
-      if (tgt) {
-        for (const status of blockers[type].tgt) { if (tgt.hasStatusEffect(status)) { return false; } }
+      for (const status of blockers[type].src) { if (sourceDocument.hasStatusEffect(status)) { return false; } }
+      if (targetDocument) {
+        for (const status of blockers[type].tgt) { if (targetDocument.hasStatusEffect(status)) { return false; } }
       }
     }
     return true;

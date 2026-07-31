@@ -1,4 +1,8 @@
 /**
+ * @import { PlaceableObject } from "@client/canvas/placeables/_module.mjs";
+ */
+
+/**
  * @template {Constructor<PlaceableObject>} T
  * @param {T} Base
  */

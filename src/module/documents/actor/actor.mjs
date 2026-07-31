@@ -9,6 +9,10 @@ import * as documentMixins from "../mixins/_module.mjs";
 const { Actor } = foundry.documents;
 
 /**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * The Teriock Actor implementation.
  * @extends {Actor}
  * @extends {ClientDocument}

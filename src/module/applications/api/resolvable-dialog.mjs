@@ -2,6 +2,10 @@ import TeriockApplication from "./application.mjs";
 import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * A custom application representing something that needs to be resolved before some routing can continue.
  * @extends {TeriockApplication}
  * @mixes TemporaryApplication

@@ -17,6 +17,10 @@ import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @import { ActorData } from "@common/documents/_types.mjs";
+ */
+
 const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**

@@ -1,4 +1,8 @@
 /**
+ * @import { RollTerm } from "@client/dice/terms/_module.mjs";
+ */
+
+/**
  * Add something to a formula.
  * @param {Teriock.System.FormulaString} value - Original formula.
  * @param {Teriock.System.FormulaString} delta - Modification to formula.

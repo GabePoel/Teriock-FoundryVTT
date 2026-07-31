@@ -7,6 +7,11 @@ import { selectWeightedMaxFaceDie } from "../helpers.mjs";
 const { Roll } = foundry.dice;
 
 /**
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ * @import { RollTerm } from "@client/dice/terms/_module.mjs";
+ */
+
+/**
  * @inheritDoc
  * @property {Teriock.Dice.BaseRollOptions} options
  */

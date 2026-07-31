@@ -4,6 +4,11 @@ import BaseStatManager from "./base-stat-manager.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 export default class RevitalizeManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {

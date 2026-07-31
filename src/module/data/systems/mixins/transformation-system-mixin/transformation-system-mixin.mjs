@@ -5,6 +5,11 @@ import { effectTransformationFields } from "../../../fields/tools/transformation
 
 const { fields } = foundry.data;
 
+/**
+ * @import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
 const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**

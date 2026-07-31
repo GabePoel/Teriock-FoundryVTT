@@ -1,4 +1,8 @@
 /**
+ * @import { DiceTerm } from "@client/dice/terms/_module.mjs";
+ */
+
+/**
  * Select one of the dice terms with the highest number of faces, weighted based on number.
  * @param {BaseRoll} roll
  * @returns {DiceTerm}

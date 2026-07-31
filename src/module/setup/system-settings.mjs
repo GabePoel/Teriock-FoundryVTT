@@ -12,6 +12,10 @@ import { objectMap } from "../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @import { SettingConfig } from "@client/_types.mjs";
+ */
+
 /** @type {Record<Teriock.Config.SettingsCategory, SettingConfig>} */
 export const inheritedSettings = Object.fromEntries(
   Object.keys(settingsConfig.categories).map(

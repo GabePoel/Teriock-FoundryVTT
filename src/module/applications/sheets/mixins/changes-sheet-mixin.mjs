@@ -1,12 +1,16 @@
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Mixin to support manipulating changes arrays in automations.
- * @template {Constructor<BaseSheet>} T
+ * @template {Constructor<BaseDocumentSheet>} T
  * @param {T} Base
  */
 export default function ChangesSheetMixin(Base) {
   return (
     /**
-     * @extends {BaseSheet}
+     * @extends {BaseDocumentSheet}
      * @mixin
      */
     class ChangesSheet extends Base {

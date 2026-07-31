@@ -3,6 +3,11 @@ import { getPackIcon } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import BaseMenu from "./base-menu.mjs";
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 export default class CompendiumPriorityMenu extends BaseMenu {
   /**
    * Move an identifier source row up or down.

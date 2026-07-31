@@ -3,6 +3,10 @@ import { makeIcon } from "../../helpers/icon.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 
 /**
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ */
+
+/**
  * Mixin that provides support for embedding as a card.
  * @template {Constructor<BaseDocument>} T
  * @param {T} Base

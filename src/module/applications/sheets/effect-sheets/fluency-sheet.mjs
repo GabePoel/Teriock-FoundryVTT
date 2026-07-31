@@ -2,6 +2,10 @@ import { FluencyTradecraftUpdater } from "../../dialogs/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * {@link TeriockFluency} sheet.
  * @extends {ChildSheet}
  * @property {TeriockFluency} document

@@ -4,6 +4,10 @@ import { objectMap } from "../../../../../../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { NumberFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * Actor data model that handles money.
  * @template {Constructor<BaseActorSystem>} T
  * @param {T} Base

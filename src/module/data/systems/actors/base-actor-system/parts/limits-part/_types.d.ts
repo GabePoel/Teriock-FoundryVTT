@@ -2,9 +2,9 @@ declare global {
   namespace Teriock.Models {
     export type ActorLimitsPartData = {
       /** <schema> <base> How many curses the {@link TeriockActor} has */
-      curses: Foundry.BarField;
+      curses: Teriock.Fields.BarField;
       /** <schema> <base> How many curses the {@link TeriockActor} has prepared */
-      rotators: Foundry.BarField;
+      rotators: Teriock.Fields.BarField;
     };
   }
 }

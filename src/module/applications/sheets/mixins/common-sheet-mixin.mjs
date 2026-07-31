@@ -10,6 +10,10 @@ import SourceRefreshButtonSheetMixin from "./source-refresh-button-sheet-mixin.m
 import SystemSettingsButtonSheetMixin from "./system-settings-button-sheet-mixin.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * {@link AnyCommonDocument} sheet mixin.
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base - The base application class to mix in with.

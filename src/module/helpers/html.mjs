@@ -1,4 +1,8 @@
 /**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ */
+
+/**
  * Make a CSS class for a given array of elements.
  * @param {Set<Teriock.Keys.Element>} elements
  * @returns {string}

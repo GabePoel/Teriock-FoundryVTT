@@ -2,6 +2,10 @@ import { RankClassUpdater, RankOriginUpdater } from "../../dialogs/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Sheet for a {@link TeriockRank}.
  * @extends {ChildSheet}
  * @property {TeriockRank} document

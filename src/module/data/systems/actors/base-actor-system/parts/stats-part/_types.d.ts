@@ -8,12 +8,12 @@ declare global {
       /** <schema> Hit points (damage) */
       hp: CoreStat;
       /** <schema> Lifespan points (wither) */
-      lp: Foundry.BarField;
+      lp: Teriock.Fields.BarField;
       /** <schema> Mana points (drain) */
       mp: CoreStat;
     };
 
-    export type CoreStat = Foundry.BarField & {
+    export type CoreStat = Teriock.Fields.BarField & {
       /** <base> Base */
       base: number;
       /** <base> Statuses this stat can cause */

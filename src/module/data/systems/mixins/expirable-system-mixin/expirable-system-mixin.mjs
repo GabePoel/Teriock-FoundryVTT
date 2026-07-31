@@ -2,13 +2,13 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 
 /**
- * @template {Constructor<BaseSystem>} T
+ * @template {Constructor<TeriockSystem>} T
  * @param {T} Base
  */
 export default function ExpirableSystemMixin(Base) {
   return (
     /**
-     * @extends {BaseSystem}
+     * @extends {TeriockSystem}
      * @extends {Teriock.Models.ExpirableSystemData}
      * @mixin
      */

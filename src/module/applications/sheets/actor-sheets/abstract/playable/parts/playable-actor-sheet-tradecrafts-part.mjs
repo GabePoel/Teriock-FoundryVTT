@@ -1,4 +1,8 @@
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @template {Constructor<BaseActorSheet>} T
  * @param {T} Base
  */

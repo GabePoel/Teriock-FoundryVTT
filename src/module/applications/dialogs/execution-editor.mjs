@@ -6,6 +6,11 @@ import DocumentSelector from "./document-selector.mjs";
 const { FormDataExtended } = foundry.applications.ux;
 const { fields } = foundry.data;
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 export default class ExecutionEditor extends ResolvableDialog {
   /**
    * Change the message mode.

@@ -3,6 +3,10 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseUpdater from "./base-updater.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating a fluency's field and tradecraft.
  * @property {TeriockFluency} document
  */

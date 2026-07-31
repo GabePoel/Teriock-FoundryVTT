@@ -4,6 +4,13 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
 const { ImagePopout } = foundry.applications.apps;
 
 /**
+ * @import { ApplicationConfiguration, ApplicationRenderOptions } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import { BaseSheet } from "@client/applications/sheets/_module.mjs";
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Mixin that displays the parts of sheets configured in document systems.
  * @template {Constructor<BaseSheet>} T
  * @param {T} Base

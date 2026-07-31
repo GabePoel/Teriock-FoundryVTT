@@ -1,4 +1,4 @@
-import type { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
 
 declare global {
   namespace Teriock.Embeds {

@@ -2,6 +2,10 @@ import TeriockDocumentSheet from "./document-sheet.mjs";
 import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * A minimal document sheet with some edits to make it better resemble a dialog.
  * @extends {TeriockDocumentSheet}
  * @mixes TemporaryApplication

@@ -16,7 +16,7 @@ declare global {
       /** <schema> Maximum lifespan */
       lifespan: number | null;
       /** <schema> Size constraints */
-      size: Foundry.BarField & {
+      size: Teriock.Fields.BarField & {
         /** <schema> Enabled */
         enabled: boolean;
       };

@@ -3,6 +3,11 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DragDropApplicationMixin, TeriockDocumentSheet } from "../../api/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * A simple sheet for displaying a document as a simple panel.
  * @extends {TeriockDocumentSheet}
  * @mixes DragDropApplication

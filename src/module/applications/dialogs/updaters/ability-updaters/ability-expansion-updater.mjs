@@ -4,6 +4,10 @@ import { objectMap } from "../../../../helpers/utils.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating an ability's expansion type and feat save attribute.
  * @property {TeriockAbility} document
  */

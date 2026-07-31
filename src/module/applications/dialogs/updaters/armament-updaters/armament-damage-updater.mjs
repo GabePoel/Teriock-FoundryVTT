@@ -3,6 +3,10 @@ import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating armament damage formulas.
  * @property {TeriockEquipment} document
  */

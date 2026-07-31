@@ -43,6 +43,8 @@ declare global {
       /** A per-window-unique id used to namespace generated form group ids. */
       rootId?: string;
     };
+
+    export type BarField = { max: number, min: number, value: number };
   }
 }
 

@@ -1,4 +1,9 @@
 /**
+ * @import { TokenMovementOperation } from "@client/documents/_types.mjs";
+ * @import { DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * @param {TeriockToken} token
  * @param {Teriock.Keys.Status} statusId
  * @param {boolean} active

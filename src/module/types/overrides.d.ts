@@ -1,6 +1,7 @@
 import { Game } from "@client/_module.mjs";
 import { Canvas } from "@client/canvas/_module.mjs";
 import { TokenLayer } from "@client/canvas/layers/_module.mjs";
+import { ClientDocumentMixin } from "@client/documents/abstract/_module.mjs";
 import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
@@ -34,6 +35,9 @@ declare global {
   let actor: TeriockActor;
   let scope: Teriock.System.TriggerScope;
 
+  type ClientDocument = InstanceType<ReturnType<typeof ClientDocumentMixin>>;
+
+  // @ts-expect-error Can't redeclare block scope
   const game: Game & {
     actors: TeriockActors;
     canvas: Canvas & { tokens: TokenLayer };

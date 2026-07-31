@@ -11,6 +11,10 @@ import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Executions are ephemeral classes that resolve some sort of roll, activity, document usage, etc. They show an
  * {@link ExecutionEditor} dialog for the user to interact with and configure.
  * @extends {BaseDataModel}

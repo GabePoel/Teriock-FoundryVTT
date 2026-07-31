@@ -3,6 +3,11 @@ import { TeriockDocumentSheet } from "../../api/_module.mjs";
 import * as sheetMixins from "../mixins/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * A simple sheet for {@link AnyChildDocument}.
  * @extends {TeriockDocumentSheet}
  * @mixes DisplaySheet

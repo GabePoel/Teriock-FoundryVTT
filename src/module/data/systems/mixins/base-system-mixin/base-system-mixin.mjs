@@ -3,6 +3,10 @@ import { fancifyFields } from "../../../../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ */
+
+/**
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base
  */
@@ -13,7 +17,7 @@ export default function BaseSystemMixin(Base) {
      * @extends {Teriock.Models.BaseSystemData}
      * @mixin
      */
-    class BaseSystem extends Base {
+    class TeriockSystem extends Base {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [];
 

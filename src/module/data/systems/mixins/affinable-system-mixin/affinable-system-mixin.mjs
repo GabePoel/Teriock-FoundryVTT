@@ -13,13 +13,13 @@ const MIGRATED_RELATIONS = {
 };
 
 /**
- * @template {Constructor<BaseSystem>} T
+ * @template {Constructor<TeriockSystem>} T
  * @param {T} Base
  */
 export default function AffinableSystemMixin(Base) {
   return (
     /**
-     * @extends {BaseSystem}
+     * @extends {ReturnType<TeriockSystem}
      * @extends {Teriock.Models.AffinableSystemData}
      * @mixin
      */

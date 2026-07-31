@@ -8,6 +8,10 @@ import { TypeCollection } from "../collections/_module.mjs";
 import * as documentMixins from "./_module.mjs";
 
 /**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * Mixin for common functions used across document classes.
  * @template {Constructor<BaseDocument>} T
  * @param {T} Base

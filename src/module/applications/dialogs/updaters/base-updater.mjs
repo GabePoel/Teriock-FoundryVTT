@@ -4,6 +4,11 @@ import { DocumentDialog } from "../../api/_module.mjs";
 const { FormDataExtended } = foundry.applications.ux;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * Dialog for updating fields of a document.
  * @property {TeriockDocument} document
  */

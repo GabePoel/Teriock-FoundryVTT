@@ -5,6 +5,10 @@ import * as documentMixins from "../mixins/_module.mjs";
 const { Item } = foundry.documents;
 
 /**
+ * @import { ActiveEffectChangeData } from "@client/documents/_types.mjs";
+ */
+
+/**
  * The Teriock Item implementation.
  * @extends {Item}
  * @extends {ClientDocument}

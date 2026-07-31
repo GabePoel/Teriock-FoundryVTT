@@ -4,6 +4,12 @@ import { DocumentSelector } from "../../dialogs/_module.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 
 /**
+ * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import { ActiveEffectConfig } from "@client/applications/sheets/_module.mjs";
+ */
+
+/**
  * {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}

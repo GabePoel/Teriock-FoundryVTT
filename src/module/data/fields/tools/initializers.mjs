@@ -1,6 +1,11 @@
 const { fields } = foundry.data;
 
 /**
+ * @import { StringFieldOptions } from "@common/data/_types.mjs";
+ * @import { BooleanField, HTMLField, NumberField, SchemaField, StringField } from "@common/data/fields.mjs";
+ */
+
+/**
  * Initialize a non-persisted number.
  * @param {number} initial
  * @returns {NumberField}

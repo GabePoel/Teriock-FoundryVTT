@@ -2,6 +2,10 @@ import { makeIconElement } from "../../helpers/icon.mjs";
 import HTMLCycleButtonElement from "./cycle-button.mjs";
 
 /**
+ * @import { FormInputConfig } from "@common/data/_types.mjs";
+ */
+
+/**
  * A two-state toggle control that behaves like a checkbox, displaying an icon.
  * Clicking the button toggles between `true` and `false`. The button lights up when `true` and is otherwise `false`.
  * @extends {HTMLCycleButtonElement}

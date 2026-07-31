@@ -6,6 +6,11 @@ import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
 /**
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ */
+
+/**
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base
  */

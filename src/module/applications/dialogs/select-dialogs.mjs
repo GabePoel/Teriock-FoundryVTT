@@ -3,6 +3,10 @@ import ChoiceSelector from "./choice-selector.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
 /**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ */
+
+/**
  * Dialog to select an equipment class.
  * @returns {Promise<Teriock.Keys.EquipmentClass>}
  */

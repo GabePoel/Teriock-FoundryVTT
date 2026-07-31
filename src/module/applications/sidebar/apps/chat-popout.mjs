@@ -4,6 +4,10 @@ import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
 const { ChatPopout } = foundry.applications.sidebar.apps;
 
 /**
+ * @import { ApplicationClickAction, ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @extends {ChatPopout}
  * @mixes ChatMessageConnection
  */

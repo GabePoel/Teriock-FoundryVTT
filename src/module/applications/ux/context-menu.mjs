@@ -2,6 +2,10 @@ import { makeIcon } from "../../helpers/icon.mjs";
 
 const { ContextMenu } = foundry.applications.ux;
 
+/**
+ * @import { ContextMenuEntry, ContextMenuOptions } from "@client/applications/ux/context-menu.mjs";
+ */
+
 /** @inheritDoc */
 export default class TeriockContextMenu extends ContextMenu {
   /**
@@ -30,7 +34,7 @@ export default class TeriockContextMenu extends ContextMenu {
    * @param {HTMLElement} container
    * @param {string} selector
    * @param {ContextMenuEntry[]} menuItems
-   * @param {Foundry.ContextMenuOptions} [options]
+   * @param {ContextMenuOptions & { forceDirection?: "up"|"down"|null }} [options]
    */
   constructor(container, selector, menuItems, options = {}) {
     for (const item of menuItems) {

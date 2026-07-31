@@ -5,6 +5,10 @@ import { BaseApplicationMixin } from "./mixins/_module.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @extends {DialogV2}
  * @mixes BaseApplication
  */

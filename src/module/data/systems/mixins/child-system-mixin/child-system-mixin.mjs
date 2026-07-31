@@ -13,6 +13,10 @@ const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
 
 /**
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ */
+
+/**
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base
  */
@@ -190,7 +194,7 @@ export default function ChildSystemMixin(Base) {
       /**
        * Suppressions determine if this is suppressed or not. Each one has a notification message registered in the tip
        * config and a method to call to check if this is suppressed.
-       * @returns {Record<Teriock.Config.SuppressionMessageKey, () => boolean}
+       * @returns {Record<Teriock.Config.SuppressionMessageKey, () => boolean>}
        */
       _getTipSuppressions() {
         return {
@@ -308,13 +312,6 @@ export default function ChildSystemMixin(Base) {
           },
         ]);
         return entries;
-      }
-
-      /** @inheritDoc */
-      async use(options = {}) {
-        await this.parent.hookCall("use");
-        Hooks.callAll(`teriock.use${this.parent.type.capitalize()}`, [this.parent]);
-        await super.use(options);
       }
     }
   );

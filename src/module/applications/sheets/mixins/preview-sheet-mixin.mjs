@@ -3,6 +3,10 @@ import { BaseVirtualModel } from "../../../data/models/virtual-models/_module.mj
 import { fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base
  */

@@ -4,6 +4,10 @@ import { BaseDataModel } from "../../abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * @property {AccessData} parent
  * @property {ID<BasePseudoDocument>} _id
  */

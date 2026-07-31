@@ -2,6 +2,12 @@ import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import { DataField } from "@common/data/fields.mjs";
+ */
+
 export default class DocumentSettingsSheet extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {

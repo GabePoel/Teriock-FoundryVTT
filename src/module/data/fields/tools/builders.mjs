@@ -25,6 +25,11 @@ const {
 } = foundry.data.fields;
 
 /**
+ * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
+ * @import { ArrayFieldOptions, DataFieldOptions, StringFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * Tradecraft choices.
  * @returns {Record<string, FormSelectOption>}
  */

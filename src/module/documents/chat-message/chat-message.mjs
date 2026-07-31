@@ -4,6 +4,10 @@ import * as documentMixins from "../mixins/_module.mjs";
 const { ChatMessage } = foundry.documents;
 
 /**
+ * @import { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
  * The Teriock ChatMessage implementation.
  * @extends {ChatMessage}
  * @extends {ClientDocument}
@@ -96,7 +100,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
    * @param {TeriockToken|TeriockTokenDocument} [options.token]
    * @param {TeriockScene} [options.scene]
    * @param {string} [options.img]
-   * @returns {scene?: ID<TeriockScene>, actor?: ID<TeriockActor>, token?: ID<TeriockTokenDocument>, alias?: string, img?: Teriock.System.ImageString}
+   * @returns {{scene?: ID<TeriockScene>, actor?: ID<TeriockActor>, token?: ID<TeriockTokenDocument>, alias?: string, img?: Teriock.System.ImageString}}
    */
   static getSpeaker(options = {}) {
     return Object.assign(super.getSpeaker(options), { img: this.getImg(options) });

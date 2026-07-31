@@ -2,6 +2,10 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseUpdater from "./base-updater.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating a unit model's unit and raw value.
  * @property {AnyCommonDocument} document
  */

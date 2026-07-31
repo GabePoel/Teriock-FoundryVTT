@@ -3,6 +3,10 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseUpdater from "./base-updater.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating a stat pool's formula and disabled state.
  * @property {AnyCommonDocument} document
  */

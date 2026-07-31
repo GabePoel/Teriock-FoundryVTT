@@ -3,6 +3,10 @@ import statConfig from "../../constants/config/stat-config.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { BaseUpdater } from "../dialogs/updaters/_module.mjs";
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
 const BAR_STATS = Object.keys(statConfig).filter(k => statConfig[k].bar);
 
 /**
@@ -158,7 +162,7 @@ export default function HackStatApplicationMixin(Base) {
 
       /**
        * CSS fill class for a hacked body-part bar.
-       * @param {Foundry.BarField} [bar]
+       * @param {Teriock.Fields.BarField} [bar]
        * @returns {string}
        */
       _prepareHackFill(bar) {

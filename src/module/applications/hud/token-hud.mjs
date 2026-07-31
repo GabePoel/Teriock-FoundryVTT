@@ -1,5 +1,9 @@
 const { TokenHUD } = foundry.applications.hud;
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
 /** @inheritDoc */
 export default class TeriockTokenHUD extends TokenHUD {
   /** @type {Partial<ApplicationConfiguration>} */

@@ -9,6 +9,10 @@ import {
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Sheet for a {@link TeriockAbility}.
  * @property {TeriockAbility} document
  */

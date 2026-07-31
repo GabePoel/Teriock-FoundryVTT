@@ -4,6 +4,10 @@ import * as dataMixins from "../mixins/_module.mjs";
 const { DataModel } = foundry.abstract;
 
 /**
+ * @import { DataField } from "@common/data/fields.mjs";
+ */
+
+/**
  * Model for data that gets embedded within some parent document.
  * @extends {DataModel}
  * @mixes AccessData

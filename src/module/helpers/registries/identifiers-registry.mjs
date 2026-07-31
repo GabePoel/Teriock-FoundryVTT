@@ -2,6 +2,10 @@ import { parseIdentifier } from "../utils.mjs";
 import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
 
 /**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ */
+
+/**
  * @typedef {TeriockActiveEffect|TeriockActor|TeriockItem|TeriockJournalEntryPage} IdentifiableDocument
  */
 

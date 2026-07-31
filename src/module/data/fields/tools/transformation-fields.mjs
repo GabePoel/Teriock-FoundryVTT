@@ -8,6 +8,10 @@ import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @import { BooleanField, EmbeddedDataField, FilePathField, SetField, StringField } from "@common/data/fields.mjs";
+ */
+
 const RESET_STATS = Object.fromEntries(Object.entries(statConfig).filter(([_k, v]) => v.transformationReset));
 
 /**

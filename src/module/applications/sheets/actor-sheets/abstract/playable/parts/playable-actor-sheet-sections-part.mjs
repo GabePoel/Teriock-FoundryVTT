@@ -3,6 +3,10 @@ import documentConfig from "../../../../../../constants/config/document-config.m
 import { icons } from "../../../../../../constants/display/icons.mjs";
 import * as previews from "../../../../../../data/models/preview-models/_module.mjs";
 
+/**
+ * @import { ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
+ */
+
 /** @type {{ label: string, types: Teriock.Affinities.Type[] }[]} */
 const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
 

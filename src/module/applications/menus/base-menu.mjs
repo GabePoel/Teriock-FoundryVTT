@@ -6,6 +6,12 @@ const { fields } = foundry.data;
 const { SettingsConfig } = foundry.applications.settings;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ * @import { FormDataExtended } from "@client/applications/ux/_module.mjs";
+ */
+
+/**
  * Base application for configuring system settings.
  * Adapted from D&D 5E.
  */

@@ -8,6 +8,10 @@ const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Base actor sheet.
  * @extends {ActorSheetV2}
  * @mixes HackStatApplication

@@ -9,6 +9,10 @@ import { BaseActivation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { SchemaField } from "@common/data/fields.mjs";
+ */
+
+/**
  * @typedef DocumentConstruction
  * @property {UUID<AnyChildDocument>} uuid
  * @property {object} data

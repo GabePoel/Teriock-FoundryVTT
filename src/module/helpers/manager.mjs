@@ -1,6 +1,10 @@
 import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mjs";
 
 /**
+ * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
+ */
+
+/**
  * Singleton class that manages Teriock-specific states and functionality.
  */
 export default class TeriockManager {

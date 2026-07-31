@@ -8,6 +8,10 @@ import { getName } from "../../../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { ChoiceInputConfig } from "@common/data/_types.mjs";
+ */
+
+/**
  * Get one value from a choice input config.
  * @param {Partial<ChoiceInputConfig>} config
  * @param {string|number} value

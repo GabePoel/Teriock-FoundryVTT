@@ -5,6 +5,10 @@ const { StringField } = foundry.data.fields;
 const { createTextInput } = foundry.applications.fields;
 
 /**
+ * @import { DataFieldContext, FormInputConfig, StringFieldInputConfig, StringFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * {@link StringField} for untyped identifiers.
  * @property {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} options
  */

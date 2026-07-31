@@ -3,6 +3,10 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating an ability's delivery and piercing.
  * @property {TeriockAbility} document
  */

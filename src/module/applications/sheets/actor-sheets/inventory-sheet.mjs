@@ -2,6 +2,11 @@ import { EquipmentPreviewModel } from "../../../data/models/preview-models/_modu
 import { BaseActorSheet } from "./abstract/_module.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
+/**
  * Sheet for a {@link TeriockInventory}.
  * @property {TeriockInventory} actor
  * @property {TeriockInventory} document

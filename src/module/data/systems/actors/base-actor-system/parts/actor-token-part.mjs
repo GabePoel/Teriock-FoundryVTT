@@ -1,6 +1,10 @@
 import { TeriockActor } from "../../../../../documents/_module.mjs";
 
 /**
+ * @import { ActiveEffectData } from "@common/documents/_types.mjs";
+ */
+
+/**
  * Actor data model that handles automatically derived token changes.
  * @template {Constructor<BaseActorSystem>} T
  * @param {T} Base

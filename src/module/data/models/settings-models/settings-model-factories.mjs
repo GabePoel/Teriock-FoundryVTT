@@ -3,6 +3,11 @@ import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 
 /**
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
+ * @import { DataFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
  * @param {Teriock.Config.SettingsCategory} category
  * @param {Teriock.Config.SettingsKey<Teriock.Config.SettingsCategory>} key
  * @param {"hint"|"name"} field

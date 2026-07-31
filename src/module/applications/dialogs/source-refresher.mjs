@@ -5,6 +5,11 @@ import { DocumentDialog } from "../api/_module.mjs";
 
 const { BooleanField } = foundry.data.fields;
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 class RefreshOptions extends BaseDataModel {
   static LOCALIZATION_PREFIXES = ["TERIOCK.DIALOGS.SourceRefresh"];
 

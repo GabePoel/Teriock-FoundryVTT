@@ -10,6 +10,11 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
+ */
+
 class CostPayerOptions extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {

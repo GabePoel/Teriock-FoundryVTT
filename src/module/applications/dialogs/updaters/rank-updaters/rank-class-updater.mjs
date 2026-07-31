@@ -4,6 +4,10 @@ import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
 /**
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
  * Dialog for updating a rank's archetype and class.
  * @property {TeriockRank} document
  */
