@@ -84,7 +84,7 @@ export default class EquipmentExecution extends ArmamentExecution {
       return {
         blocks: [],
         icon: TERIOCK.config.document.equipment.icon,
-        image: getImage(
+        img: getImage(
           "equipment",
           this.source.system._source.equipmentType,
           systemPath("icons/documents/equipment.svg"),

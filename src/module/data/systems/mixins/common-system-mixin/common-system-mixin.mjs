@@ -190,7 +190,7 @@ export default function CommonSystemMixin(Base) {
         const parts = Object.assign(await super.getPanelParts(), {
           color: this.color || undefined,
           icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
-          image: this.parent.img,
+          img: this.parent.img,
           label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,
           name: this.parent.fullName,
           uuid: this.parent.uuid,

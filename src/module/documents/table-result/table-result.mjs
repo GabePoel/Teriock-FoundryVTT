@@ -103,7 +103,7 @@ export default class TeriockTableResult
     const parts = await super.getPanelParts();
     parts.icon = icons.document.tableResult;
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
-    parts.image = this.icon;
+    parts.img = this.icon;
     parts.blocks.push({ text: this.description, title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label") });
     parts.bars.push({
       icon: TERIOCK.display.icons.ui.info,

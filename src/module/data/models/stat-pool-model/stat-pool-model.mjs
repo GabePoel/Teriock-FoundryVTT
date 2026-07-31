@@ -122,7 +122,7 @@ export default class StatPoolModel extends BaseDataModel {
       bars: [],
       blocks: [{ text: _loc(this.#config.pool.panel.text), title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title") }],
       icon: this.#config.icon,
-      image: this.#config.pool.img,
+      img: this.#config.pool.img,
       name: this.dieName,
     }];
     if (this.stat === "hp" && this.actor?.statuses.has("criticallyWounded")) {
@@ -133,7 +133,7 @@ export default class StatPoolModel extends BaseDataModel {
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
         icon: TERIOCK.config.document.condition.icon,
-        image: TERIOCK.statuses.conditions.criticallyWounded.img,
+        img: TERIOCK.statuses.conditions.criticallyWounded.img,
         name: TERIOCK.statuses.conditions.criticallyWounded.name,
       });
     } else if (this.stat === "hp" && this.actor?.statuses.has("unconscious")) {
@@ -141,7 +141,7 @@ export default class StatPoolModel extends BaseDataModel {
         bars: [],
         blocks: [{ text: TERIOCK.content.keywords.awaken, title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title") }],
         icon: TERIOCK.display.icons.effect.awaken,
-        image: TERIOCK.display.iconManifest.effectTypes.awakening,
+        img: TERIOCK.display.iconManifest.effectTypes.awakening,
         name: _loc("TERIOCK.EFFECTS.Common.awaken"),
       });
     }

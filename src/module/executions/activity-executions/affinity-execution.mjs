@@ -71,7 +71,7 @@ export default class AffinityExecution extends BaseExecution {
       bars: [{ icon: this.icon, label: this.name, wrappers: this.wrappers }],
       blocks: [{ text: this.journalEntryPage?.text?.content, title: this.name }],
       icon: this.icon,
-      image: this.img,
+      img: this.img,
       label: _loc("TERIOCK.AFFINITIES.Base.LABEL"),
       name: this.name,
     });

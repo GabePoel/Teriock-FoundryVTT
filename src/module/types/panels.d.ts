@@ -63,7 +63,7 @@ declare global {
       /** Font Awesome icons */
       icon?: string;
       /** The URL or path to the image associated with the panel */
-      image?: string;
+      img?: string;
       /** Label that gets displayed upon hovering over icon */
       label?: string;
       /** The name or title to display in the panel */

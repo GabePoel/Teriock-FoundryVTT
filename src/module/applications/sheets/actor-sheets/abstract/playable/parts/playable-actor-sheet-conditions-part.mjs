@@ -27,7 +27,7 @@ export default function PlayableActorSheetConditionsPart(Base) {
             title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
           }],
           icon: TERIOCK.config.document.condition.icon,
-          image: TERIOCK.statuses.conditions[condition].img,
+          img: TERIOCK.statuses.conditions[condition].img,
           name: TERIOCK.statuses.conditions[condition].name,
         };
         /** @type {TeriockTokenDocument[]} */

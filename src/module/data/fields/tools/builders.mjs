@@ -197,7 +197,7 @@ export function panelsField() {
       classes: new ArrayField(new StringField(), { initial: [] }),
       color: nullString(),
       icon: nullString(),
-      image: nullString(),
+      img: nullString(),
       label: nullString(),
       name: nullString(),
       uuid: new DocumentUUIDField({ blank: true, initial: null, nullable: true }),

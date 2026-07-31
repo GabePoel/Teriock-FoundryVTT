@@ -96,7 +96,7 @@ export default class ChangeQuantityAutomation
         title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
       icon: TERIOCK.display.icons.pseudoDocument.automation,
-      image: consumable.img,
+      img: consumable.img,
       label: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
       name: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
     };

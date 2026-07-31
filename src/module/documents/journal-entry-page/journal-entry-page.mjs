@@ -62,7 +62,7 @@ export default class TeriockJournalEntryPage
         title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
       icon: this.getFlag("teriock", "journalIcon") ?? documentConfig[this.type]?.icon ?? documentConfig.rule.icon,
-      image: this.img,
+      img: this.img,
     };
   }
 

@@ -86,7 +86,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
       return {
         blocks: [],
         icon: TERIOCK.config.document[this.source.type]?.icon ?? this.icon,
-        image: this.source.img,
+        img: this.source.img,
         name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown", { type: _loc(`TYPES.Item.${this.source.type}`) }),
       };
     }
