@@ -9,7 +9,6 @@ export default {
       autoColoration: true,
       autoDetectionModes: true,
       autoLighting: true,
-      autoMagic: true,
       autoScale: true,
       autoTransformation: true,
       autoVisionAngle: true,

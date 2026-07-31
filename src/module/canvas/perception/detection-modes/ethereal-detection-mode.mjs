@@ -12,9 +12,6 @@ import LightDetectionMode from "./light-detection-mode.mjs";
 export default class EtherealDetectionMode extends LightDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
-    if (!game.modules.get("tokenmagic")?.active || !game.settings.get("teriock", "actor")?.autoMagic) {
-      return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 }));
-    }
-    return super.getDetectionFilter();
+    return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 }));
   }
 }

@@ -73,8 +73,6 @@ const globalMacro = { actor: "readonly", event: "readonly", scope: "readonly" };
 
 const globalTeriock = { TERIOCK: "readonly", teriock: "readonly", tm: "readonly" };
 
-const globalModule = { TokenMagic: "readonly" };
-
 const files = ["{src,scripts,macros}/**/*.{mjs,ts}", "eslint.config.mjs"];
 
 export default tseslint.config(
@@ -204,7 +202,7 @@ export default tseslint.config(
   {
     files: ["{foundry,macros,scripts,src}/**/*.{mjs,ts}", "eslint.config.mjs"],
     languageOptions: {
-      globals: { ...globals.browser, ...globalDocuments, ...globalHelpers, ...globalClient, ...globalModule },
+      globals: { ...globals.browser, ...globalDocuments, ...globalHelpers, ...globalClient },
     },
   },
   { files: ["{macros,src}/**/*.{mjs,ts}"], languageOptions: { globals: { ...globalTeriock } } },

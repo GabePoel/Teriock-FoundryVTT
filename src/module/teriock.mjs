@@ -93,16 +93,6 @@ foundry.helpers.Hooks.once("init", function() {
     ETHEREAL: "ethereal",
     HIDDEN: "hidden",
   });
-  if (game.modules.get("tokenmagic")?.active) {
-    Object.assign(
-      CONFIG.specialStatusEffects,
-      Object.fromEntries(
-        Object.keys(constants.display.tokenMagic).map(
-          v => [helpers.string.toKebabCase(v).toUpperCase().replaceAll("-", "_"), v]
-        ),
-      ),
-    );
-  }
   for (const k of Object.keys(CONFIG.statusEffects)) { delete CONFIG.statusEffects[k]; }
   Object.assign(CONFIG.statusEffects, {
     ...TERIOCK.statuses.conditions,
