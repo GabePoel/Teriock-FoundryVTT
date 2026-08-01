@@ -13,7 +13,7 @@ declare global {
       boosts?: Record<Teriock.Keys.Impact, Teriock.System.FormulaString>;
       competence?: Teriock.System.CompetenceLevel;
       event?: PointerEvent;
-      messageMode?: Teriock.Messages.Mode;
+      messageMode?: keyof typeof CONFIG.ChatMessage.modes;
       rollData?: object;
       rollOptions?: object;
       showDialog?: boolean;

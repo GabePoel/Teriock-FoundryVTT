@@ -236,6 +236,7 @@ export default class BaseRoll extends Roll {
       id: this.id,
       styles: foundry.utils.deepClone(this.options.styles),
       targets: this.options.targets,
+      TERIOCK,
     });
     return context;
   }

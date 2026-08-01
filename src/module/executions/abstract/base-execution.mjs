@@ -79,7 +79,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @type {Record<Teriock.Keys.Impact, number>} */
   _boostsResolved;
 
-  /** @type {Teriock.Messages.Mode} */
+  /** @type {keyof typeof CONFIG.ChatMessage.modes} */
   _messageMode;
 
   /** @type {object} */
@@ -314,7 +314,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /**
    * Create a chat message from this execution.
    * @param {object} [options]
-   * @param {Teriock.Messages.Mode} [options.mode]
+   * @param {keyof typeof CONFIG.ChatMessage.modes} [options.mode]
    * @returns {Promise<false|void>}
    */
   async _createChatMessage(options = {}) {

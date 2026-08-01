@@ -1,4 +1,4 @@
-import { FormulaField, IdentifierField } from "../_module.mjs";
+import { FormulaField, IdentifierField, RollField } from "../_module.mjs";
 import attributeConfig from "../../../constants/config/attribute-config.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
@@ -415,5 +415,29 @@ export function archetypeField(options = {}) {
     nullable: false,
     type: "archetype",
     ...options,
+  });
+}
+
+/**
+ * Field for a target.
+ * @returns {SchemaField}
+ */
+export function targetField() {
+  return new SchemaField({
+    actorUuid: new DocumentUUIDField({ type: "Actor" }),
+    img: new FilePathField({ categories: ["IMAGE"] }),
+    name: new StringField(),
+    tokenUuid: new DocumentUUIDField({ type: "TokenDocument" }),
+  });
+}
+
+/**
+ * Field for a target group.
+ * @returns {SchemaField}
+ */
+export function targetGroupField() {
+  return new SchemaField({
+    roll: new RollField({ initial: null, nullable: true, required: true }),
+    targets: new ArrayField(targetField()),
   });
 }

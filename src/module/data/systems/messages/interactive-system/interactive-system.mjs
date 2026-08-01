@@ -1,5 +1,5 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { panelsField } from "../../../fields/tools/builders.mjs";
+import { panelsField, targetGroupField } from "../../../fields/tools/builders.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
@@ -40,6 +40,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
       panels: panelsField(),
       source: new fields.DocumentUUIDField(),
       tags: new fields.ArrayField(new fields.StringField()),
+      targetGroups: new fields.ArrayField(targetGroupField()),
     });
   }
 
