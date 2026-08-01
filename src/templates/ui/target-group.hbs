@@ -1,0 +1,16 @@
+{{!-- A roll and the targets it was made against. Either part may be absent. --}}
+<div class="teriock dice-roll teriock-target-group" data-action="expandRoll">
+  {{#if flavor}}
+    <div class="teriock-flavor-text">
+      {{ flavor }}
+    </div>
+  {{/if}}
+  <div class="dice-result">
+    {{#each targets as |target|}}
+      {{> "teriock/ui/target"}}
+    {{/each}}
+    {{#if hasRoll}}
+      {{> "teriock/ui/roll-parts"}}
+    {{/if}}
+  </div>
+</div>

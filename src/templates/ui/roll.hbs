@@ -5,59 +5,6 @@
     </div>
   {{/if}}
   <div class="dice-result">
-    {{#if (exists targets)}}
-      {{#each targets as |target|}}
-        <div
-          class="teriock-target-container selectable dice-formula"
-          data-suppress-context-menu="true"
-          data-tooltip-direction="LEFT"
-          data-tooltip='{{localize "TERIOCK.MESSAGE.Roll.selectTarget"}}'
-          {{#if (exists actorUuid)}}
-            data-actor-uuid="{{ actorUuid }}"
-            data-double="openTarget"
-          {{/if}}
-          {{#if (exists tokenUuid)}}
-            data-token-uuid="{{ tokenUuid }}"
-            data-action="selectTarget"
-          {{/if}}
-        >
-          <div class="teriock-target-img">
-            <img src="{{ img }}" alt="" />
-          </div>
-          <h6 class="teriock-target-name">{{ name }}</h6>
-          <i class='{{makeIconClass @root/TERIOCK.display.icons.roll.target "light"}} teriock-target-icon'></i>
-        </div>
-      {{/each}}
-    {{/if}}
-    {{#unless hideRoll}}
-      <div
-        class="dice-formula teriock-dice-formula {{toClass styles.dice.classes}}"
-        style="word-break: auto-phrase"
-        {{#if (exists styles.dice.tooltip)}}
-          data-tooltip="{{ styles.dice.tooltip }}"
-        {{/if}}
-        data-tooltip-direction="LEFT"
-        data-id="{{ id }}"
-      >
-        {{#if (exists styles.dice.icon)}}
-          <i class='{{makeIconClass styles.dice.icon "light"}} teriock-dice-formula-icon left'></i>
-        {{/if}}
-        {{ formula }}
-      </div>
-      {{{ tooltip }}}
-      <h4
-        class="dice-total teriock-dice-total {{toClass styles.total.classes}}"
-        {{#if (exists styles.total.tooltip)}}
-          data-tooltip="{{ styles.total.tooltip }}"
-        {{/if}}
-        data-tooltip-direction="LEFT"
-        data-id="{{ id }}"
-      >
-        {{#if (exists styles.total.icon)}}
-          <i class='{{makeIconClass styles.total.icon "light"}} teriock-dice-total-icon left'></i>
-        {{/if}}
-        {{ total }}
-      </h4>
-    {{/unless}}
+    {{> "teriock/ui/roll-parts"}}
   </div>
 </div>

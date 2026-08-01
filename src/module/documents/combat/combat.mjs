@@ -137,8 +137,8 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
   async rollInitiative(ids, options = {}) {
     if (ids.length === 1 && !options.noExecution) {
       const execution = await InitiativeExecution.create({}, { source: this.combatants.get(ids[0]) });
-      if (execution?.message?.rolls?.length) {
-        const total = execution.message.rolls[0]?.total;
+      if (execution?.message && execution.rolls.length) {
+        const total = execution.rolls[0]?.total;
         if (typeof total === "number") {
           options.formula = total.toString();
           options.messageOptions = execution.message.toObject();

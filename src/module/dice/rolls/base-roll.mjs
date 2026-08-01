@@ -1,6 +1,5 @@
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
-import { systemPath } from "../../helpers/path.mjs";
 import Booster from "../booster.mjs";
 import { selectWeightedMaxFaceDie } from "../helpers.mjs";
 
@@ -16,48 +15,6 @@ const { Roll } = foundry.dice;
  * @property {Teriock.Dice.BaseRollOptions} options
  */
 export default class BaseRoll extends Roll {
-  /**
-   * Normalize a target into a plain, JSON serializable object. Already parsed targets pass through unchanged.
-   * @param {Teriock.Dice.RawDieTarget} target
-   * @returns {Teriock.Dice.DieTarget}
-   */
-  static #parseTarget(target) {
-    let img = "";
-    let name = "";
-    /** @type {TeriockActor} */
-    let actor;
-    /** @type {TeriockTokenDocument} */
-    let token;
-    // Handling for token placeables
-    if (target.document) {
-      token = target.document;
-      actor = target.actor;
-    }
-    // Handling for documents
-    if (target.documentName === "TokenDocument") {
-      token = target;
-      actor ||= token.actor;
-    } else if (target.documentName === "Actor") {
-      token = target.token;
-      actor ||= target;
-    }
-    // Prioritize name and image from the token over the actor
-    if (actor) {
-      img = actor.img;
-      name = actor.name;
-    }
-    if (token) {
-      img = token.img;
-      name = token.name;
-    }
-    return {
-      actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || systemPath("icons/documents/character.svg"),
-      name: name || target?.name,
-      tokenUuid: token?.uuid || target.tokenUuid,
-    };
-  }
-
   /** @inheritDoc */
   static CHAT_TEMPLATE = "teriock/ui/roll";
 
@@ -69,7 +26,6 @@ export default class BaseRoll extends Roll {
     return {
       hideRoll: false,
       styles: { dice: { classes: [], icon: "", tooltip: "" }, total: { classes: [], icon: "", tooltip: "" } },
-      targets: [],
     };
   }
 
@@ -171,7 +127,6 @@ export default class BaseRoll extends Roll {
   constructor(formula, data, options = {}) {
     if (!formula) { formula = "0"; }
     options = foundry.utils.mergeObject(new.target.defaultOptions, options);
-    options.targets = options.targets.map(t => BaseRoll.#parseTarget(t));
     super(formula, data, options);
     this.id = foundry.utils.randomID();
   }
@@ -235,7 +190,6 @@ export default class BaseRoll extends Roll {
       hideRoll: this.options.hideRoll,
       id: this.id,
       styles: foundry.utils.deepClone(this.options.styles),
-      targets: this.options.targets,
       TERIOCK,
     });
     return context;

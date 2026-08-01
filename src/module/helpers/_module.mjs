@@ -10,4 +10,5 @@ export * as registries from "./registries/_module.mjs";
 export * as resolve from "./resolve.mjs";
 export * as sort from "./sort.mjs";
 export * as string from "./string.mjs";
+export * as target from "./target.mjs";
 export * as utils from "./utils.mjs";

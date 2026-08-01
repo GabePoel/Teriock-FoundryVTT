@@ -1,0 +1,29 @@
+{{#unless hideRoll}}
+  <div
+    class="dice-formula teriock-dice-formula {{toClass styles.dice.classes}}"
+    {{#if (exists styles.dice.tooltip)}}
+      data-tooltip="{{ styles.dice.tooltip }}"
+    {{/if}}
+    data-tooltip-direction="LEFT"
+    data-id="{{ id }}"
+  >
+    {{#if (exists styles.dice.icon)}}
+      <i class='{{makeIconClass styles.dice.icon "light"}} teriock-dice-formula-icon left'></i>
+    {{/if}}
+    {{ formula }}
+  </div>
+  {{{ tooltip }}}
+  <h4
+    class="dice-total teriock-dice-total {{toClass styles.total.classes}}"
+    {{#if (exists styles.total.tooltip)}}
+      data-tooltip="{{ styles.total.tooltip }}"
+    {{/if}}
+    data-tooltip-direction="LEFT"
+    data-id="{{ id }}"
+  >
+    {{#if (exists styles.total.icon)}}
+      <i class='{{makeIconClass styles.total.icon "light"}} teriock-dice-total-icon left'></i>
+    {{/if}}
+    {{ total }}
+  </h4>
+{{/unless}}

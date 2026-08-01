@@ -427,7 +427,7 @@ export function targetField() {
     actorUuid: new DocumentUUIDField({ type: "Actor" }),
     img: new FilePathField({ categories: ["IMAGE"] }),
     name: new StringField(),
-    tokenUuid: new DocumentUUIDField({ type: "TokenDocument" }),
+    tokenUuid: new DocumentUUIDField({ type: "Token" }),
   });
 }
 
@@ -437,6 +437,7 @@ export function targetField() {
  */
 export function targetGroupField() {
   return new SchemaField({
+    flavor: new StringField(),
     roll: new RollField({ initial: null, nullable: true, required: true }),
     targets: new ArrayField(targetField()),
   });

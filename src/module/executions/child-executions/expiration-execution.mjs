@@ -85,7 +85,7 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   async _postExecute() {
-    if (!this.autoExpire && this.message.rolls[0].success) { this.source.system.expire(); }
+    if (!this.autoExpire && this.rolls[0]?.success) { this.source.system.expire(); }
     return await super._postExecute();
   }
 

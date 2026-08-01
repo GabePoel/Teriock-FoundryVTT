@@ -52,8 +52,8 @@ export default class InitiativeExecution extends executionMixins.ThresholdExecut
   }
 
   /** @inheritDoc */
-  async _buildRolls() {
-    this.rolls.push(this.source.getInitiativeRoll(this.formula));
+  async _buildTargetGroups() {
+    this._addTargetGroup({ roll: this.source.getInitiativeRoll(this.formula) });
   }
 
   /** @inheritDoc */

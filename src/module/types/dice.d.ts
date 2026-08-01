@@ -1,7 +1,6 @@
 import { RollOptions } from "@client/dice/_types.mjs";
 
-import { TeriockToken } from "../canvas/placeables/_module.mjs";
-import { TeriockActor, TeriockChatMessage, TeriockTokenDocument } from "../documents/_module.mjs";
+import { TeriockChatMessage } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Dice {
@@ -9,16 +8,7 @@ declare global {
 
     export type DieStyles = { dice: DiePartStyle, total: DiePartStyle };
 
-    export type DieTarget = {
-      actorUuid?: UUID<TeriockActor>;
-      img?: Teriock.System.ImageString;
-      name?: string;
-      tokenUuid?: UUID<TeriockTokenDocument>;
-    };
-
-    export type RawDieTarget = DieTarget | TeriockActor | TeriockToken | TeriockTokenDocument;
-
-    export type BaseRollOptions = RollOptions & { hideRoll: boolean, styles: DieStyles, targets: DieTarget[] };
+    export type BaseRollOptions = RollOptions & { hideRoll: boolean, styles: DieStyles };
 
     export type ImpactRollOptions = BaseRollOptions & { impact: Teriock.Keys.Impact };
 

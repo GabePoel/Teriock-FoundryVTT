@@ -135,7 +135,12 @@ export default class DeathBagExecution extends DocumentExecution {
   }
 
   /** @inheritDoc */
-  async _buildRolls() {
+  async _buildTags() {
+    this.tags.push(_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: this.toPullCount }));
+  }
+
+  /** @inheritDoc */
+  async _buildTargetGroups() {
     const rollData = this.getRollData();
     this.toPullCount = Math.floor(Math.max(await BaseRoll.getValue(this.pull, rollData), 0));
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
@@ -183,10 +188,5 @@ export default class DeathBagExecution extends DocumentExecution {
       pulledCount: this.pulledCount,
       pulledStones: this.pulledStones,
     });
-  }
-
-  /** @inheritDoc */
-  async _buildTags() {
-    this.tags.push(_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: this.toPullCount }));
   }
 }

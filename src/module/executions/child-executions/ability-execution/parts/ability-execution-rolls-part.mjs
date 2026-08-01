@@ -20,45 +20,33 @@ export default function AbilityExecutionRollsPart(Base) {
       }
 
       /** @inheritDoc */
-      async _buildRolls() {
+      async _buildTargetGroups() {
         const overrideAutomation = this.activeAutomations.find(a => a.type === "override");
         if (this.isAttack) {
           if (overrideAutomation?.preventAttack) { return; }
-          return super._buildRolls();
+          return super._buildTargetGroups();
         }
         const preventThreshold = Boolean(overrideAutomation?.preventThreshold);
         const styles = {
           dice: { classes: [this.source.system.interaction] },
           total: { classes: [this.source.system.interaction] },
         };
+        const targets = Array.from(this.targets);
         if (this.isFeat && !preventThreshold) {
           styles.total.icon = TERIOCK.display.icons.interaction.feat;
-          this.rolls.push(
-            new BaseRoll(this.formula, this.getRollData(), {
-              flavor: this.flavor,
-              hideRoll: preventThreshold,
-              styles,
-              targets: Array.from(this.targets),
-            }),
-          );
+          this._addTargetGroup({
+            roll: new BaseRoll(this.formula, this.getRollData(), { flavor: this.flavor, styles }),
+            targets,
+          });
         } else if (this.isBlock) {
           styles.total.icon = TERIOCK.display.icons.interaction.block;
-          this.rolls.push(
-            new BaseRoll(this.formula, this.getRollData(), {
-              flavor: this.flavor,
-              styles,
-              targets: Array.from(this.targets),
-            }),
-          );
+          this._addTargetGroup({
+            roll: new BaseRoll(this.formula, this.getRollData(), { flavor: this.flavor, styles }),
+            targets,
+          });
         } else if (this.isManifest && this.targets.size > 0) {
-          this.rolls.push(
-            new BaseRoll("0", this.getRollData(), {
-              flavor: this.flavor,
-              hideRoll: true,
-              styles,
-              targets: Array.from(this.targets),
-            }),
-          );
+          // Nothing is rolled for a manifest, so the group carries its targets alone.
+          this._addTargetGroup({ flavor: this.flavor, targets });
         }
       }
     }

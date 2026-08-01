@@ -7,6 +7,7 @@ import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { TypeCollection } from "../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../helpers/formula.mjs";
+import { parseTargets } from "../../helpers/target.mjs";
 
 const { fields } = foundry.data;
 
@@ -106,11 +107,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @type {Teriock.Panels.PanelParts[]} */
   panels = [];
 
-  /** @type {BaseRoll[]} */
-  rolls = [];
-
   /** @type {string[]} */
   tags = [];
+
+  /** @type {Teriock.Models.TargetGroup[]} */
+  targetGroups = [];
+
+  /** @type {Iterable<Teriock.Models.RawTarget>} */
+  targets = [];
 
   /**
    * Buttons displayed in this execution's input dialog.
@@ -192,13 +196,13 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    */
   get chatData() {
     return {
-      rolls: this.rolls,
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
         activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(this.activations),
         buttons: this.buttons,
         panels: this.panels,
         tags: this.tags,
+        targetGroups: this.targetGroups,
       },
       type: "interactive",
     };
@@ -266,6 +270,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   }
 
   /**
+   * Every roll across this execution's target groups.
+   * @returns {BaseRoll[]}
+   */
+  get rolls() {
+    return this.targetGroups.map(g => g.roll).filter(r => Boolean(r));
+  }
+
+  /**
    * Whether to show an input dialog before this execution resolves.
    * @returns {boolean}
    */
@@ -282,6 +294,21 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   }
 
   /**
+   * Add a target group to this execution's chat message.
+   * @param {object} [group]
+   * @param {string} [group.flavor]
+   * @param {BaseRoll|null} [group.roll]
+   * @param {Iterable<Teriock.Models.RawTarget>} [group.targets]
+   * @returns {Teriock.Models.TargetGroup}
+   */
+  _addTargetGroup({ flavor = "", roll = null, targets = [] } = {}) {
+    /** @type {Teriock.Models.TargetGroup} */
+    const group = { flavor: flavor || roll?.options?.flavor || "", roll, targets: parseTargets(targets) };
+    this.targetGroups.push(group);
+    return group;
+  }
+
+  /**
    * Build activations to attach to this execution's chat message.
    * @returns {Promise<false|void>}
    */
@@ -294,21 +321,24 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   async _buildPanels() {}
 
   /**
-   * Build rolls used in this execution.
-   * @returns {Promise<false|void>}
-   */
-  async _buildRolls() {
-    if (formulaExists(this.formula)) {
-      this.rolls.push(new this._RollClass(this.formula, this.getRollData(), this.rollOptions));
-    }
-  }
-
-  /**
    * Build tags displayed in this execution's chat message.
    * @returns {Promise<false|void>}
    */
   async _buildTags() {
     if (this.competence.proficient) { this.tags.push(this.competence.label); }
+  }
+
+  /**
+   * Build the rolls used in this execution and the targets they are made against.
+   * @returns {Promise<false|void>}
+   */
+  async _buildTargetGroups() {
+    if (formulaExists(this.formula)) {
+      this._addTargetGroup({
+        roll: new this._RollClass(this.formula, this.getRollData(), this.rollOptions),
+        targets: this.targets,
+      });
+    }
   }
 
   /**
@@ -390,6 +420,12 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   }
 
   /**
+   * Determine the targets this execution's rolls are made against.
+   * @returns {Promise<void>}
+   */
+  async _getTargets() {}
+
+  /**
    * Improve the formula used in this execution.
    * @returns {Promise<false|void>}
    */
@@ -425,6 +461,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     const results = await Promise.all(
       this.executionNames.map(n => this.fireTrigger(`executeInput${n}`, { awaitFire: true })),
     );
+    await this._getTargets();
     if (results.includes(false)) { return false; }
   }
 
@@ -482,7 +519,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     if ((await this._getInput()) === false) { return false; }
     if ((await this._postInput()) === false) { return false; }
     if ((await this._prepareFormula()) === false) { return false; }
-    if ((await this._buildRolls()) === false) { return false; }
+    if ((await this._buildTargetGroups()) === false) { return false; }
     if ((await this._evaluateRolls()) === false) { return false; }
     if ((await this._buildPanels()) === false) { return false; }
     if ((await this._buildActivations()) === false) { return false; }

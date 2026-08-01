@@ -138,7 +138,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       const li of /** @type {NodeListOf<HTMLLIElement>} */ document.querySelectorAll(".chat-message[data-message-id]")
     ) {
       const message = game.messages.get(li.dataset.messageId);
-      if (message.system?.collapsedByDefault) {
+      if (message?.system?.collapsedByDefault) {
         li.querySelectorAll("[data-collapsible-id]").forEach(el => {
           if (!this.noAutoCollapse.has(el.dataset.collapsibleId)) {
             this._toggleCollapsed(el.dataset.collapsibleId, true);

@@ -79,18 +79,27 @@ export default function ImpactsExecutionMixin(Base) {
        * @returns {HarmRoll[]}
        */
       get _typedRolls() {
-        if (this.rolls.length === 0) { return []; }
-        const roll = this.rolls[0];
+        return this._typedTargetGroups.map(g => g.roll);
+      }
+
+      /**
+       * A target group for each impact this deals, each keeping the targets of the group it was derived from.
+       * @returns {Teriock.Models.TargetGroup[]}
+       */
+      get _typedTargetGroups() {
+        const group = this.targetGroups[0];
+        if (!group?.roll) { return []; }
         return Array.from(this.impacts).map(impact => {
-          const impactRoll = roll.clone({ evaluated: true });
+          const impactRoll = group.roll.clone({ evaluated: true });
           impactRoll.impact = impact;
-          return impactRoll;
+          return { flavor: group.flavor, roll: impactRoll, targets: group.targets };
         });
       }
 
       /** @inheritDoc */
       get chatData() {
-        return { ...super.chatData, rolls: this._typedRolls };
+        const chatData = super.chatData;
+        return { ...chatData, system: { ...chatData.system, targetGroups: this._typedTargetGroups } };
       }
 
       /** @inheritDoc */

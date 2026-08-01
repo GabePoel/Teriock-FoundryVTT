@@ -107,6 +107,19 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
   }
 
   /**
+   * Every roll this message displays.
+   * @returns {BaseRoll[]}
+   */
+  get allRolls() {
+    return [...this.rolls, ...(this.system?.rolls ?? [])];
+  }
+
+  /** @inheritDoc */
+  get isRoll() {
+    return super.isRoll || Boolean(this.system.rolls?.length);
+  }
+
+  /**
    * An image representing the speaker of this message.
    * @returns {string}
    */
@@ -127,6 +140,11 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
   }
 
   /** @inheritDoc */
+  get visible() {
+    return super.visible && (this.system?.visible ?? true);
+  }
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
@@ -141,7 +159,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
   /** @inheritDoc */
   async renderHTML(options = {}) {
     // Rolls being hidden when content is not otherwise visible reveals more information than it hides
-    if (!this.isContentVisible) { for (const r of this.rolls) { r.options.hideRoll = false; } }
+    if (!this.isContentVisible) { for (const r of this.allRolls) { r.options.hideRoll = false; } }
     const context = await this.system._prepareContext(options);
     const element = await super.renderHTML(context);
     await this.system._onRender(context, { element, ...options });

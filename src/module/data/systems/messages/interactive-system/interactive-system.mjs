@@ -51,6 +51,23 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
   }
 
   /**
+   * Prepare the render context for a single target group.
+   * @param {Teriock.Models.TargetGroup} group
+   * @returns {Promise<Teriock.Models.TargetGroupContext>}
+   */
+  async #prepareTargetGroupContext(group) {
+    const isPrivate = !this.document.isContentVisible;
+    /** @type {Teriock.Models.TargetGroupContext} */
+    const context = { hasRoll: Boolean(group.roll), targets: group.targets };
+    if (group.roll) {
+      Object.assign(context, await group.roll._prepareChatRenderContext({ isPrivate, message: this.document }));
+      if (isPrivate) { context.hideRoll = false; }
+    }
+    context.flavor = group.flavor || context.flavor || "";
+    return context;
+  }
+
+  /**
    * The default collapse state for this message's panels.
    * @returns {boolean}
    */
@@ -59,6 +76,30 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     if (defaultCollapse === "closed") { return true; }
     else if (defaultCollapse === "open") { return false; }
     return this.document.timestamp < Date.now() - game.settings.get("teriock", "autoPanelCollapseTime") * 60 * 1000;
+  }
+
+  /**
+   * Every roll stored in this message's target groups.
+   * @returns {BaseRoll[]}
+   */
+  get rolls() {
+    return this.targetGroups.map(g => g.roll).filter(r => Boolean(r));
+  }
+
+  /**
+   * Every target across all of this message's target groups.
+   * @returns {Teriock.Models.Target[]}
+   */
+  get targets() {
+    return this.targetGroups.flatMap(t => t.targets);
+  }
+
+  /** @inheritDoc */
+  get visible() {
+    if (this.parent.whisper.length) {
+      return this.parent.isAuthor || this.parent.whisper.includes(game.user.id);
+    }
+    return true;
   }
 
   /** @inheritDoc */
@@ -71,20 +112,27 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
         el.classList.toggle("collapsed", true);
       });
     }
+  }
 
-    // Remove custom content if it shouldn't be visible
-    if (!this.document.isContentVisible) {
-      element.querySelectorAll(".teriock-target-container, .teriock-dice-total-icon").forEach(el => el.remove());
-      element.querySelectorAll(".dice-total.teriock-dice-total").forEach(el => {
-        el.className = "dice-total teriock-dice-total";
-      });
-      element.querySelectorAll(".dice-formula.teriock-dice-formula").forEach(el => {
-        el.className = "dice-formula teriock-dice-formula";
-      });
-      element.querySelectorAll(".dice-total, .dice-formula").forEach(/** @param {HTMLElement} el */ el => {
-        delete el.dataset.tooltip;
-        delete el.dataset.tooltipHtml;
-      });
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    if (game?.dice3d && this.rolls.length) {
+      await Promise.all(
+        this.rolls.map(r =>
+          game.dice3d.showForRoll(
+            r,
+            user,
+            true,
+            this.parent.whisper,
+            this.parent.blind,
+            this.parent.speaker,
+            this.parent.id,
+          )
+        ),
+      );
     }
   }
 
@@ -93,6 +141,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     await game.teriock.identifiers.initializing;
     return Object.assign(await super._prepareContext(options), {
       activations: this.activations.contents.filter(a => a?.visible),
+      targetGroups: await Promise.all(this.targetGroups.map(g => this.#prepareTargetGroupContext(g))),
     });
   }
 }

@@ -71,7 +71,7 @@ export default function AttackExecutionMixin(Base) {
       rootBonus = "";
 
       /** @type {Set<TeriockToken>} */
-      targets;
+      targets = new Set();
 
       /**
        * Whether an armament's warded state carries over to this.
@@ -213,10 +213,24 @@ export default function AttackExecutionMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _buildRolls() {
-        if (!this.isAttack) { return super._buildRolls(); }
+      async _buildTags() {
+        await super._buildTags();
+        if (this.isAttack) {
+          if (this.piercing.av0) { this.tags.push(this.piercing.label); }
+          if (this.sb) { this.tags.push(_loc("TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.label")); }
+        }
+        if (this.warded) { this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label")); }
+        if (this.vitals) { this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals")); }
+      }
+
+      /**
+       * @inheritDoc
+       * @remarks Each target gets its own group, since the threshold is derived from that target's defenses.
+       */
+      async _buildTargetGroups() {
+        if (!this.isAttack) { return super._buildTargetGroups(); }
         const styles = { dice: { classes: ["attack"] }, total: { classes: ["attack"] } };
-        const generalRollOptions = { flavor: this.flavor, styles, targets: [] };
+        const generalRollOptions = { flavor: this.flavor, styles };
         if (this.piercing.ub) {
           generalRollOptions.styles.dice.icon = TERIOCK.display.icons.piercing.ub;
           generalRollOptions.styles.dice.classes.push("ub");
@@ -224,7 +238,6 @@ export default function AttackExecutionMixin(Base) {
         }
         for (const target of this.targets) {
           const rollOptions = foundry.utils.deepClone(generalRollOptions);
-          rollOptions.targets = [target];
           if (target.actor) {
             rollOptions.threshold = target.actor.system.defense.cc;
             rollOptions.comparison = "gte";
@@ -235,22 +248,14 @@ export default function AttackExecutionMixin(Base) {
             if (this.limb) { rollOptions.threshold += TERIOCK.config.system.target.limb; }
             else if (this.vitals) { rollOptions.threshold += TERIOCK.config.system.target.vitals; }
           }
-          this.rolls.push(new ThresholdRoll(this.formula, this.getRollData(), rollOptions));
+          this._addTargetGroup({
+            roll: new ThresholdRoll(this.formula, this.getRollData(), rollOptions),
+            targets: [target],
+          });
         }
-        if (this.rolls.length === 0) {
-          this.rolls.push(new ThresholdRoll(this.formula, this.getRollData(), generalRollOptions));
+        if (this.targetGroups.length === 0) {
+          this._addTargetGroup({ roll: new ThresholdRoll(this.formula, this.getRollData(), generalRollOptions) });
         }
-      }
-
-      /** @inheritDoc */
-      async _buildTags() {
-        await super._buildTags();
-        if (this.isAttack) {
-          if (this.piercing.av0) { this.tags.push(this.piercing.label); }
-          if (this.sb) { this.tags.push(_loc("TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.label")); }
-        }
-        if (this.warded) { this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label")); }
-        if (this.vitals) { this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals")); }
       }
 
       /**
@@ -290,10 +295,7 @@ export default function AttackExecutionMixin(Base) {
         return raw;
       }
 
-      /**
-       * Determine targets.
-       * @returns {Promise<void>}
-       */
+      /** @inheritDoc */
       async _getTargets() {
         for (const target of game.user.targets) { this.targets.add(target); }
       }
@@ -305,13 +307,6 @@ export default function AttackExecutionMixin(Base) {
           if (this.sb) { this.formula = addFormula(this.formula, "@sb"); }
         }
         await super._improveFormula();
-      }
-
-      /** @inheritDoc */
-      async _postInput() {
-        const out = await super._postInput();
-        await this._getTargets();
-        return out;
       }
 
       /**

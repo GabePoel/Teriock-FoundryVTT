@@ -28,11 +28,6 @@ export default class TradecraftCheckExecution extends executionMixins.Tradecraft
   }
 
   /** @inheritDoc */
-  get rollOptions() {
-    return Object.assign(super.rollOptions, { targets: Array.from(game.user.targets) });
-  }
-
-  /** @inheritDoc */
   get tradecraft() {
     return this.source.key;
   }
@@ -40,5 +35,10 @@ export default class TradecraftCheckExecution extends executionMixins.Tradecraft
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.toPanel());
+  }
+
+  /** @inheritDoc */
+  async _getTargets() {
+    this.targets = Array.from(game.user.targets);
   }
 }

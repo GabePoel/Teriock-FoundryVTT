@@ -20,6 +20,11 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
     return this.parent;
   }
 
+  /** @inheritDoc */
+  get visible() {
+    return true;
+  }
+
   /**
    * Perform subtype-specific alterations to the final chat message HTML.
    * @param {object} _context
