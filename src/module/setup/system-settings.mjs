@@ -316,6 +316,13 @@ export const settings = {
       scope: "world",
       type: tradecraftsField(),
     },
+    showPrivateTradecraftDiceRolls: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.showPrivateTradecraftDiceRolls.hint",
+      name: "TERIOCK.SETTINGS.showPrivateTradecraftDiceRolls.name",
+      scope: "world",
+      type: Boolean,
+    },
   },
   suppression: {
     showSuppressionTipsOnSheets: {

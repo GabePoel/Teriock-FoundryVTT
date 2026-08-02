@@ -111,7 +111,8 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
    * @returns {string}
    */
   get speakerImg() {
-    return this.system.img ?? this.speakerToken?.img ?? this.speakerActor?.img ?? this.author.avatar;
+    return this.system.img ?? this.speakerToken?.img ?? this.constructor.getSpeakerActor(this.speaker)?.img
+      ?? this.author.avatar;
   }
 
   /**
@@ -124,6 +125,11 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
       return scene?.tokens.get(this.speaker.token) ?? null;
     }
     return null;
+  }
+
+  /** @inheritDoc */
+  get visible() {
+    return super.visible && (this.system?.visible ?? true);
   }
 
   /** @inheritDoc */

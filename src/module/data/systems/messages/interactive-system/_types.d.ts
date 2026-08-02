@@ -11,6 +11,8 @@ declare global {
       img: string;
       /** <schema> Panels to render */
       panels: Teriock.Panels.PanelParts[];
+      /** <schema> Whether this should restrict viewership more than base messages do by default */
+      restrictVisibility: boolean;
       /** <schema> Source document */
       source: UUID<TeriockDocument> | null;
       /** <schema> Strings to be wrapped as tags at the bottom of the message */
@@ -23,6 +25,7 @@ declare global {
       activations: TypeCollection<ID<BaseActivation>, BaseActivation>;
       img: string;
       panels: Teriock.Panels.PanelParts[];
+      restrictVisibility: boolean;
       source: UUID<TeriockDocument> | null;
       tags: string[];
 

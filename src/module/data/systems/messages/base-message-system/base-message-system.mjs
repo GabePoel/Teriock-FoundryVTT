@@ -21,6 +21,14 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
   }
 
   /**
+   * Whether this message is visible.
+   * @return {boolean}
+   */
+  get visible() {
+    return true;
+  }
+
+  /**
    * Perform subtype-specific alterations to the final chat message HTML.
    * @param {object} _context
    * @param {object} options
@@ -52,7 +60,9 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
   async _prepareContext(options = {}) {
     const speakerToken = this.document.speakerToken;
     return {
-      hasSpeakerInteraction: Boolean(speakerToken || this.document.speakerActor?.visible),
+      hasSpeakerInteraction: Boolean(
+        speakerToken || this.document.constructor.getSpeakerActor(this.document.speaker)?.visible,
+      ),
       isContentVisible: this.document.isContentVisible,
       speakerImg: this.document.speakerImg,
       speakerToken,

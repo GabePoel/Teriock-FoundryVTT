@@ -28,6 +28,13 @@ export default function TradecraftExecutionMixin(Base) {
       }
 
       /** @inheritDoc */
+      get chatData() {
+        return foundry.utils.mergeObject(super.chatData, {
+          system: { restrictVisibility: !game.settings.get("teriock", "showPrivateTradecraftDiceRolls") },
+        });
+      }
+
+      /** @inheritDoc */
       get executionNames() {
         return [...super.executionNames, "Tradecraft"];
       }

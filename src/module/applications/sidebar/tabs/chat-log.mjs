@@ -82,14 +82,15 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
       onClick: async (_ev, li) => {
         const message = game.messages.get(li.dataset.messageId);
-        const doc = await fromUuid(message.system._src);
+        const doc = await fromUuid(message?.system?._src);
         if (!doc) { return; }
         if (doc.documentName === "JournalEntryPage") { await doc.parent.sheet.render({ force: true, pageId: doc.id }); }
         else { await doc.sheet?.render({ force: true, mode: "view" }); }
       },
       visible: li => {
         const message = game.messages.get(li.dataset.messageId);
-        const src = message.system._src;
+        if (!message.isContentVisible) { return false; }
+        const src = message?.system?._src;
         if (!src) { return false; }
         let doc;
         if (!src.startsWith("Compendium")) { doc = fromUuidSync(src); }
@@ -138,7 +139,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       const li of /** @type {NodeListOf<HTMLLIElement>} */ document.querySelectorAll(".chat-message[data-message-id]")
     ) {
       const message = game.messages.get(li.dataset.messageId);
-      if (message.system?.collapsedByDefault) {
+      if (message?.system?.collapsedByDefault) {
         li.querySelectorAll("[data-collapsible-id]").forEach(el => {
           if (!this.noAutoCollapse.has(el.dataset.collapsibleId)) {
             this._toggleCollapsed(el.dataset.collapsibleId, true);

@@ -38,6 +38,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     return Object.assign(super.defineSchema(), {
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
       panels: panelsField(),
+      restrictVisibility: new fields.BooleanField({ initial: true }),
       source: new fields.DocumentUUIDField(),
       tags: new fields.ArrayField(new fields.StringField()),
     });
@@ -60,6 +61,38 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     return this.document.timestamp < Date.now() - game.settings.get("teriock", "autoPanelCollapseTime") * 60 * 1000;
   }
 
+  /**
+   * Show activations.
+   * @return {boolean}
+   */
+  get showActivations() {
+    return this.activations.contents.some(a => a?.visible) && this.parent.isContentVisible;
+  }
+
+  /**
+   * Show panels.
+   * @return {0|boolean}
+   */
+  get showPanels() {
+    return this.panels.length && (this.parent.isAuthor || this.parent.isContentVisible);
+  }
+
+  /**
+   * Show tags.
+   * @return {boolean}
+   */
+  get showTags() {
+    return this.tags.length && (this.parent.isAuthor || this.parent.isContentVisible);
+  }
+
+  /** @inheritDoc */
+  get visible() {
+    if (this.restrictVisibility && this.parent.whisper.length) {
+      return this.parent.isAuthor || this.parent.whisper.includes(game.user.id);
+    }
+    return super.visible;
+  }
+
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
@@ -70,21 +103,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
         el.classList.toggle("collapsed", true);
       });
     }
-
-    // Remove custom content if it shouldn't be visible
-    if (!this.document.isContentVisible) {
-      element.querySelectorAll(".teriock-target-container, .teriock-dice-total-icon").forEach(el => el.remove());
-      element.querySelectorAll(".dice-total.teriock-dice-total").forEach(el => {
-        el.className = "dice-total teriock-dice-total";
-      });
-      element.querySelectorAll(".dice-formula.teriock-dice-formula").forEach(el => {
-        el.className = "dice-formula teriock-dice-formula";
-      });
-      element.querySelectorAll(".dice-total, .dice-formula").forEach(/** @param {HTMLElement} el */ el => {
-        delete el.dataset.tooltip;
-        delete el.dataset.tooltipHtml;
-      });
-    }
   }
 
   /** @inheritDoc */
@@ -92,6 +110,10 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     await game.teriock.identifiers.initializing;
     return Object.assign(await super._prepareContext(options), {
       activations: this.activations.contents.filter(a => a?.visible),
+      hideContent: !this.parent.isContentVisible && !this.parent.rolls.length,
+      showActivations: this.showActivations,
+      showPanels: this.showPanels,
+      showTags: this.showTags,
     });
   }
 }
