@@ -1,10 +1,16 @@
 import TeriockTextEditor from "../../applications/ux/text-editor.mjs";
-import { toClass } from "../../helpers/string.mjs";
+import { toClass } from "../string.mjs";
 
 const { TooltipManager } = foundry.helpers.interaction;
 
 /** @inheritDoc */
 export default class TeriockTooltipManager extends TooltipManager {
+  /**
+   * The HTML to display for a tooltip that's loading.
+   * @type {string}
+   */
+  static LOADING_TOOLTIP_HTML;
+
   /**
    * A custom CSS class which has different padding and other styling for rich document tooltips.
    * @type {string}
@@ -16,6 +22,16 @@ export default class TeriockTooltipManager extends TooltipManager {
    * @type {number}
    */
   static RICH_TOOLTIP_WIDTH = 350;
+
+  /**
+   * Initialize the loading tooltip.
+   * @return {Promise<void>}
+   */
+  static async initializeLoadingTooltip() {
+    TeriockTooltipManager.LOADING_TOOLTIP_HTML = await TeriockTextEditor.makeTooltip(
+      TERIOCK.display.panel.premade.loading,
+    );
+  }
 
   /**
    * Internal cache of allowed document names.
@@ -68,7 +84,7 @@ export default class TeriockTooltipManager extends TooltipManager {
       const tooltipClass = [element.dataset.tooltipClass];
       tooltipClass.push(TeriockTooltipManager.RICH_TOOLTIP_CLASS);
       element.dataset.tooltipClass = toClass(tooltipClass.filter(Boolean));
-      element.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
+      element.dataset.tooltipHtml = TeriockTooltipManager.LOADING_TOOLTIP_HTML;
       this.#fetchRichTooltip(element);
     }
   }

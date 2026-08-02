@@ -1,5 +1,7 @@
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { dedent } from "../../helpers/string.mjs";
+import { icons } from "./icons.mjs";
 
 export const displayPanel = {
   classes: {
@@ -21,4 +23,18 @@ export const displayPanel = {
         </div>
       </header>
     </div>`),
+  premade: {
+    loading: /** @type {Teriock.Panels.PanelParts} */ {
+      icon: "fa-spinner fa-spin",
+      img: systemPath("icons/documents/uncertainty.svg"),
+      name: "TERIOCK.COMMON.Loading",
+    },
+    unknown: /** @type {Teriock.Panels.PanelParts} */ {
+      icon: icons.ui.variable,
+      img: systemPath("icons/documents/uncertainty.svg"),
+      name: "???",
+    },
+  },
 };
+
+preLocalizeConfig("display.panel.premade", { keys: ["name"] });

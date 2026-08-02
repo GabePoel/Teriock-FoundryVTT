@@ -62,7 +62,7 @@ declare global {
       classes?: string[];
       /** Color to assign to the image border */
       color?: Color;
-      /** Font Awesome icons */
+      /** Material Symbol or Material Design icon */
       icon?: string;
       /** The URL or path to the image associated with the panel */
       img?: string;

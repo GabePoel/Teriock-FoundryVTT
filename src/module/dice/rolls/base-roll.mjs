@@ -234,8 +234,8 @@ export default class BaseRoll extends Roll {
     Object.assign(context, {
       hideRoll: this.options.hideRoll,
       id: this.id,
-      styles: foundry.utils.deepClone(this.options.styles),
-      targets: this.options.targets,
+      styles: options.isPrivate ? {} : foundry.utils.deepClone(this.options.styles),
+      targets: options.isPrivate ? [] : this.options.targets,
     });
     return context;
   }

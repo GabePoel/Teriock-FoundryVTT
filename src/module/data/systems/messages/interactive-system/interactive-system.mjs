@@ -82,7 +82,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
    * @return {boolean}
    */
   get showTags() {
-    return this.tags.length && (this.parent.isAuthor || this.parent.isContentVisible);
+    return this.tags.length && this.parent.isContentVisible;
   }
 
   /** @inheritDoc */
@@ -111,6 +111,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     return Object.assign(await super._prepareContext(options), {
       activations: this.activations.contents.filter(a => a?.visible),
       hideContent: !this.parent.isContentVisible && !this.parent.rolls.length,
+      panels: this.parent.isContentVisible ? this.panels : [TERIOCK.display.panel.premade.unknown],
       showActivations: this.showActivations,
       showPanels: this.showPanels,
       showTags: this.showTags,

@@ -78,22 +78,24 @@ export default class ThresholdRoll extends BaseRoll {
   /** @inheritDoc */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
-    if (this.success) {
-      context.styles.total.classes.push("success");
-      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.success");
-      context.styles.total.icon = TERIOCK.display.icons.ui.enable;
-    } else if (this.failure) {
-      context.styles.total.classes.push("failure");
-      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.failure");
-      context.styles.total.icon = TERIOCK.display.icons.ui.disable;
-    }
-    if (this.critSuccess) {
-      context.styles.total.classes.push("crit-success");
-      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critSuccess");
-    }
-    if (this.critFailure) {
-      context.styles.total.classes.push("crit-failure");
-      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critFailure");
+    if (!options.isPrivate) {
+      if (this.success) {
+        context.styles.total.classes.push("success");
+        context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.success");
+        context.styles.total.icon = TERIOCK.display.icons.ui.enable;
+      } else if (this.failure) {
+        context.styles.total.classes.push("failure");
+        context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.failure");
+        context.styles.total.icon = TERIOCK.display.icons.ui.disable;
+      }
+      if (this.critSuccess) {
+        context.styles.total.classes.push("crit-success");
+        context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critSuccess");
+      }
+      if (this.critFailure) {
+        context.styles.total.classes.push("crit-failure");
+        context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critFailure");
+      }
     }
     return context;
   }

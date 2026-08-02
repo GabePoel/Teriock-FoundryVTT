@@ -10,14 +10,6 @@ const { TextEditor } = foundry.applications.ux;
 /** @inheritDoc */
 export default class TeriockTextEditor extends TextEditor {
   /**
-   * Localized HTML string to represent a loading panel.
-   * @returns {string}
-   */
-  static get loadingPanelHTML() {
-    return TERIOCK.display.panel.loading.replace("TERIOCK.LOADING", _loc("TERIOCK.COMMON.Loading"));
-  }
-
-  /**
    * Patched to allow for identifiers as well as UUIDs.
    * @inheritDoc
    */
@@ -68,11 +60,6 @@ export default class TeriockTextEditor extends TextEditor {
       b.text = await this.enrichHTML(b.text, options);
       b.text = wrapPanelTables(b.text, `panel-${panelId}-block-${i}`, { collapsed: collapseTables });
     }));
-    for (const association of panel.associations ?? []) {
-      for (const card of association.cards ?? []) {
-        if (card.uuid && card.makeTooltip) { card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML); }
-      }
-    }
     return panel;
   }
 
