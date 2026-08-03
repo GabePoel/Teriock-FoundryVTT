@@ -9,6 +9,7 @@ export const displayPanel = {
     editable: "editable-display-field",
     elderSorcery: "elder-sorcery-display-field",
     faded: "faded-display-field",
+    gmNotes: "gm-notes-display-field",
     instructions: "instructions-display-field",
   },
   loading: dedent(`

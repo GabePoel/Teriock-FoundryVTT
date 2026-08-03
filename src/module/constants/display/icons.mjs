@@ -243,7 +243,7 @@ export const icons = {
     automatedBehavior: "mdi-auto-fix",
     dialog: "mdi-script",
     display: "ms-display-settings",
-    gameMasterControls: "mdi-crown",
+    gameMasterControls: "fa-crown",
     tips: "mdi-message-alert",
   },
   species: {

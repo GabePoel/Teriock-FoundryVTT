@@ -1,4 +1,4 @@
-import type Color from "@common/utils/color.mjs";
+import { Color } from "@common/utils/_module.mjs";
 
 declare global {
   namespace Teriock.Panels {
@@ -16,6 +16,8 @@ declare global {
     export type PanelBlock = {
       /** Additional CSS classes to add */
       classes?: string[];
+      /** Whether only GMs should be able to see this. */
+      gmOnly?: boolean;
       /** The main text content of the message block. */
       text?: string;
       /** The title of the message block. */

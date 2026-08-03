@@ -72,10 +72,13 @@ export default class TeriockTextEditor extends TextEditor {
       }
     }
     const panelId = panel._id || foundry.utils.randomID(16);
-    await Promise.all((panel.blocks ?? []).map(async (b, i) => {
-      b.text = await this.enrichHTML(b.text, options);
-      b.text = wrapPanelTables(b.text, `panel-${panelId}-block-${i}`, { collapsed: collapseTables });
-    }));
+    panel.blocks = await Promise.all(
+      (panel.blocks ?? []).filter(b => game.user.isGM || !b.gmOnly).map(async (b, i) => {
+        b.text = await this.enrichHTML(b.text, options);
+        b.text = wrapPanelTables(b.text, `panel-${panelId}-block-${i}`, { collapsed: collapseTables });
+        return b;
+      }),
+    );
     return panel;
   }
 

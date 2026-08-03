@@ -25,7 +25,18 @@ export default function InstructionsSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), { instructions: new fields.HTMLField({ initial: "" }) });
+        return Object.assign(super.defineSchema(), {
+          gmNotes: new fields.HTMLField({ initial: "" }),
+          instructions: new fields.HTMLField({ initial: "" }),
+        });
+      }
+
+      /**
+       * Display field for GM notes.
+       * @return {Teriock.Display.DisplayField}
+       */
+      get _displayFieldGmNotes() {
+        return { classes: [TERIOCK.display.panel.classes.gmNotes], gmOnly: true, path: "system.gmNotes" };
       }
 
       /**
@@ -38,15 +49,23 @@ export default function InstructionsSystemMixin(Base) {
 
       /** @inheritDoc */
       get _displayFields() {
-        return [this._displayFieldInstructions, ...super._displayFields.filter(f => !this.isInstructionsField(f))];
+        return [...this._displayFieldsFirst, ...super._displayFields.filter(f => !this._isFirstDisplayField(f))];
+      }
+
+      /**
+       * Display fields that appear first.
+       * @return {Teriock.Display.FancyDisplayField)[]}
+       */
+      get _displayFieldsFirst() {
+        return [this._displayFieldInstructions, this._displayFieldGmNotes];
       }
 
       /**
        * @param {Teriock.Display.DisplayField} field
        * @returns {boolean}
        */
-      isInstructionsField(field) {
-        return (typeof field === "string" ? field : field.path) === "system.instructions";
+      _isFirstDisplayField(field) {
+        return ["system.gmNotes", "system.instructions"].includes(typeof field === "string" ? field : field.path);
       }
     }
   );

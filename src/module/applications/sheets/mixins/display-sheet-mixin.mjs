@@ -95,12 +95,13 @@ export default function DisplaySheetMixin(Base) {
               button: f?.button,
               choices: f.choices || this.document?.getFieldForProperty(f.path)?.choices,
               editable: f.editable === false ? false : (f?.value ?? value) === sourceValue,
+              gmOnly: f?.gmOnly ?? false,
               label: f?.label || _loc(this.document?.getFieldForProperty(f.path)?.label),
               schema: this.document?.getFieldForProperty(f.path),
               value: sourceValue || value,
             },
           };
-        });
+        }).filter(f => game.user.isGM || !f.gmOnly);
       }
 
       /**

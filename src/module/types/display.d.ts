@@ -8,6 +8,7 @@ declare global {
       classes: string[];
       dataset: Record<string, string>;
       editable: boolean;
+      gmOnly?: boolean;
       label: string;
       path: string;
       value: never;

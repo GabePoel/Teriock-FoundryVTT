@@ -17,14 +17,13 @@ export default class IdentificationModel extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      flaws: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
+      flaws: new fields.HTMLField({ initial: "", required: false }),
       identified: new fields.BooleanField({ initial: true }),
-      name: new fields.StringField({ gmOnly: true, initial: "" }),
-      notes: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
+      name: new fields.StringField({ initial: "" }),
+      notes: new fields.HTMLField({ initial: "", required: false }),
       powerLevel: new fields.StringField({
         blank: false,
         choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
-        gmOnly: true,
         initial: "mundane",
         nullable: false,
         required: true,

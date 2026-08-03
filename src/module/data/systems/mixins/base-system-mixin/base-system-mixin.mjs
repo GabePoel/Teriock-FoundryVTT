@@ -117,11 +117,13 @@ export default function BaseSystemMixin(Base) {
        * @returns {Teriock.Panels.PanelBlock[]}
        */
       get _panelBlocks() {
-        return fancifyFields(this._displayFields).map(f => {
+        return fancifyFields(this._displayFields ?? []).map(f => {
           const schema = this.parent.getFieldForProperty(f.path);
           let value = foundry.utils.getProperty(this.parent._source, f.path);
           if (!value) { value = foundry.utils.getProperty(this.parent, f.path); }
-          if (value && !schema.gmOnly) { return { classes: f.classes, text: value, title: f.label || schema.label }; }
+          if (value) {
+            return { classes: f.classes, gmOnly: f.gmOnly ?? false, text: value, title: f.label || schema.label };
+          }
         }).filter(f => f);
       }
 

@@ -24,15 +24,17 @@ export default function EquipmentIdentificationPart(Base) {
 
       /** @inheritDoc */
       get _displayFields() {
-        return [this._displayFieldInstructions, {
+        return [...this._displayFieldsFirst, {
           classes: [TERIOCK.display.panel.classes.faded],
+          gmOnly: true,
           path: "system.identification.notes",
-          visible: game.user.isGM && !this.identification.identified,
+          visible: !this.identification.identified,
         }, {
           classes: [TERIOCK.display.panel.classes.faded],
+          gmOnly: true,
           path: "system.identification.flaws",
-          visible: game.user.isGM && !this.identification.identified,
-        }, ...super._displayFields.filter(f => !this.isInstructionsField(f))];
+          visible: !this.identification.identified,
+        }, ...super._displayFields.filter(f => !this._isFirstDisplayField(f))];
       }
 
       /**

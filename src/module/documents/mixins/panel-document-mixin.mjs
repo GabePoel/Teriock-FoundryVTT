@@ -52,7 +52,7 @@ export default function PanelDocumentMixin(Base) {
        */
       async getPanelParts() {
         const parts = {
-          _id: this.id,
+          _id: foundry.utils.randomID(),
           bars: [],
           blocks: [],
           icon: TERIOCK.display.icons.ui.document,

@@ -146,6 +146,7 @@ export function blocksField() {
   return new ArrayField(
     new SchemaField({
       classes: new ArrayField(new StringField(), { initial: [] }),
+      gmOnly: new BooleanField(),
       text: new HTMLField({ blank: true, nullable: true }),
       title: new StringField(),
     }),

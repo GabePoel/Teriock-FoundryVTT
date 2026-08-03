@@ -21,12 +21,13 @@ export function fancifyFields(displayFields) {
       classes = [],
       dataset = {},
       editable = true,
+      gmOnly = false,
       label = "",
       path = fancy.path,
       value,
       visible = true,
     } = fancy;
-    return { button, choices, classes, dataset, editable, label, path, value, visible };
+    return { button, choices, classes, dataset, editable, gmOnly, label, path, value, visible };
   }).filter(f => f.visible);
 }
 

@@ -200,6 +200,7 @@ export default class AbilitySystem
   get _displayFields() {
     const fields = [
       this._displayFieldInstructions,
+      this._displayFieldGmNotes,
       {
         button: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
         classes: [TERIOCK.display.panel.classes.elderSorcery],
