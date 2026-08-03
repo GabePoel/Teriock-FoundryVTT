@@ -131,7 +131,7 @@ export default class DeathBagExecution extends DocumentExecution {
       img: TERIOCK.display.iconManifest.misc.deathBag,
       name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
     };
-    this.panels.push(await TeriockTextEditor.enrichPanel(resultPanel));
+    this.panels.push(resultPanel);
   }
 
   /** @inheritDoc */

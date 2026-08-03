@@ -90,7 +90,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
         name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown", { type: _loc(`TYPES.Item.${this.source.type}`) }),
       };
     }
-    return this.source.toPanel();
+    return this.source.getPanelParts();
   }
 
   /** @inheritDoc */

@@ -75,6 +75,6 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels = [await this.journalEntryPage.toPanel()];
+    this.panels = [await this.journalEntryPage.getPanelParts()];
   }
 }

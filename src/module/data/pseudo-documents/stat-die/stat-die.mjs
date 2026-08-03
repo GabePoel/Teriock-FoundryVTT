@@ -1,5 +1,4 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
@@ -127,7 +126,7 @@ export default class StatDie extends BasePseudoDocument {
       const messageData = {
         rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({ actor: this.parent.parent.parent.actor }),
-        system: { panels: await TeriockTextEditor.enrichPanels(this.parent.panels) },
+        system: { panels: this.parent.panels },
         type: "interactive",
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });

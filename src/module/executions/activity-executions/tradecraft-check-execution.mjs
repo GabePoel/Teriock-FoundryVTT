@@ -39,6 +39,6 @@ export default class TradecraftCheckExecution extends executionMixins.Tradecraft
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels.push(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.toPanel());
+    this.panels.push(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.getPanelParts());
   }
 }

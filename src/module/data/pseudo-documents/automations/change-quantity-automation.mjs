@@ -1,4 +1,3 @@
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
@@ -100,14 +99,17 @@ export default class ChangeQuantityAutomation
       label: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
       name: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
     };
-    const panel = await TeriockTextEditor.enrichPanel(panelData);
     const messageData = {
       rolls: [roll],
       speaker: TeriockChatMessage.getSpeaker({ actor: scope?.actor || this.actor }),
-      system: { panels: [panel] },
+      system: { panels: [panelData] },
       type: "interactive",
     };
-    await TeriockChatMessage.create(messageData, { defaultMode: true });
+    TeriockChatMessage.applyMode(
+      messageData,
+      scope?.execution?._messageMode ?? game.settings.get("core", "messageMode"),
+    );
+    await TeriockChatMessage.create(messageData);
     await consumable.update({
       "system.quantity.value": Math.clamp(
         consumable.system.quantity.value + roll.total,

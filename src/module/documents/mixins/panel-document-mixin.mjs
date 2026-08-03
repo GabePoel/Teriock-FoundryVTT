@@ -5,6 +5,10 @@ import { systemPath } from "../../helpers/path.mjs";
 import { toId } from "../../helpers/string.mjs";
 
 /**
+ * @import { PanelEnrichmentOptions } from "../../applications/ux/text-editor.mjs"
+ */
+
+/**
  * @template {Constructor<BaseDocument>} T
  * @param {T} Base
  */
@@ -35,6 +39,7 @@ export default function PanelDocumentMixin(Base) {
               noBars: config.values.includes("noBars"),
               noBlocks: config.values.includes("noBlocks"),
               relativeTo: this,
+              secrets: this.isOwner,
             }),
           );
         }
@@ -47,11 +52,13 @@ export default function PanelDocumentMixin(Base) {
        */
       async getPanelParts() {
         const parts = {
+          _id: this.id,
           bars: [],
           blocks: [],
           icon: TERIOCK.display.icons.ui.document,
           img: this.img ?? systemPath("icons/documents/uncertainty.svg"),
           name: this.fullName || this.name,
+          uuid: this.uuid,
         };
         if (typeof this.system?.getPanelParts === "function") { Object.assign(
             parts,
@@ -72,7 +79,7 @@ export default function PanelDocumentMixin(Base) {
 
       /** @inheritDoc */
       async toMessage(options = {}) {
-        const panel = await this.toPanel();
+        const panel = await this.getPanelParts();
         const actor = options?.actor || this.actor
           || TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
         const messageData = {
@@ -92,15 +99,9 @@ export default function PanelDocumentMixin(Base) {
         return TeriockChatMessage.create(messageData, { defaultMode: true });
       }
 
-      /** @returns {Promise<Teriock.Panels.PanelParts>} */
-      async toPanel() {
-        const parts = await this.getPanelParts();
-        return TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
-      }
-
       /** @inheritDoc */
       async toTooltip() {
-        return TeriockTextEditor.makeTooltip(await this.getPanelParts(), { relativeTo: this });
+        return TeriockTextEditor.makeTooltip(await this.getPanelParts(), { relativeTo: this, secrets: this.isOwner });
       }
     }
   );

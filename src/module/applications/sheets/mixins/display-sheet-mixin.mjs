@@ -160,7 +160,13 @@ export default function DisplaySheetMixin(Base) {
         }).filter(b => b.editable !== false);
         context.displayFields = /** @type {Teriock.Display.EnrichedDisplayField[]} */ await Promise.all(
           expandedDisplayFields.filter(f => f.value).map(async f => {
-            return { ...f, enriched: await TeriockTextEditor.enrichHTML(f.value, { relativeTo: this.document }) };
+            return {
+              ...f,
+              enriched: await TeriockTextEditor.enrichHTML(f.value, {
+                relativeTo: this.document,
+                secrets: this.document.isOwner,
+              }),
+            };
           }),
         );
         context.displayTips = this.document.system.displayTips.filter(tip =>

@@ -111,7 +111,7 @@ export default class DocumentExecution extends BaseExecution {
    * @returns {Promise<Teriock.Panels.PanelParts|false>}
    */
   async _buildSourcePanel() {
-    return this.source.toPanel?.() ?? false;
+    return this.source.getPanelParts?.() ?? false;
   }
 
   /** @inheritDoc */

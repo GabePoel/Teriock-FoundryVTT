@@ -1,4 +1,3 @@
-import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { BaseExecution } from "../abstract/_module.mjs";
 
 /**
@@ -68,6 +67,7 @@ export default class AffinityExecution extends BaseExecution {
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push({
+      _id: this.journalEntryPage?.id,
       bars: [{ icon: this.icon, label: this.name, wrappers: this.wrappers }],
       blocks: [{ text: this.journalEntryPage?.text?.content, title: this.name }],
       color: foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
@@ -75,7 +75,7 @@ export default class AffinityExecution extends BaseExecution {
       img: this.img,
       label: _loc("TERIOCK.AFFINITIES.Base.LABEL"),
       name: this.name,
+      uuid: this.journalEntryPage?.uuid,
     });
-    await TeriockTextEditor.enrichPanels(this.panels);
   }
 }

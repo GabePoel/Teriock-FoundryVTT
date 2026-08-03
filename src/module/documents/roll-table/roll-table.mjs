@@ -141,10 +141,10 @@ export default class TeriockRollTable
       type: "interactive",
     }, messageData);
     if (this.displayRoll && roll) { messageData.rolls.push(roll); }
+    const text = await TeriockTextEditor.enrichHTML(this.description, { relativeTo: this });
     messageData.system.panels.forEach(panel => {
-      panel.blocks.push({ classes: [TERIOCK.display.panel.classes.derived], text: this.description, title: this.name });
+      panel.blocks.push({ classes: [TERIOCK.display.panel.classes.derived], text, title: this.name });
     });
-    messageData.system.panels = await TeriockTextEditor.enrichPanels(messageData.system.panels);
     return TeriockChatMessage.create(messageData, messageOptions);
   }
 

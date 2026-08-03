@@ -4,7 +4,16 @@ import { parseIdentifier } from "../../helpers/utils.mjs";
 const { TextEditor } = foundry.applications.ux;
 
 /**
- * @import { DocumentHTMLEmbedConfig } from "@client/applications/ux/text-editor.mjs";
+ * @import { DocumentHTMLEmbedConfig, EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
+ */
+
+/**
+ * @typedef {EnrichmentOptions} PanelEnrichmentOptions
+ * @param {boolean} [collapseTables=true]
+ * @param {boolean} [noAssociations=false]
+ * @param {boolean} [noBars=false]
+ * @param {boolean} [noBlocks=false]
+ * @param {boolean} [usePanelRelativeTo=true]
  */
 
 /** @inheritDoc */
@@ -48,13 +57,20 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Enrich all the blocks within a panel.
    * @param {Teriock.Panels.PanelParts} panel
-   * @param {object} [options]
-   * @param {boolean} [options.collapseTables=true]
+   * @param {PanelEnrichmentOptions} [options]
    * @returns {Promise<Teriock.Panels.PanelParts>}
    */
   static async enrichPanel(panel, options = {}) {
-    const { collapseTables = true } = options;
+    const { collapseTables = true, usePanelRelativeTo = true } = options;
+    panel = foundry.utils.deepClone(panel);
     if (panel.bars) { panel.bars = cleanBars(panel.bars); }
+    if (panel.uuid && (usePanelRelativeTo || !options?.relativeTo)) {
+      const doc = await fromUuid(panel.uuid);
+      if (doc) {
+        options.relativeTo = doc;
+        options.secrets = doc.isOwner;
+      }
+    }
     const panelId = panel._id || foundry.utils.randomID(16);
     await Promise.all((panel.blocks ?? []).map(async (b, i) => {
       b.text = await this.enrichHTML(b.text, options);
@@ -66,7 +82,7 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Enrich an array of panels.
    * @param {Teriock.Panels.PanelParts[]} panels
-   * @param {object} [options]
+   * @param {PanelEnrichmentOptions} [options]
    * @returns {Promise<Teriock.Panels.PanelParts[]>}
    */
   static async enrichPanels(panels, options = {}) {
@@ -76,23 +92,19 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Convert the panel to an HTML string.
    * @param {Teriock.Panels.PanelParts} parts
-   * @param {object} [options]
-   * @param {boolean} [options.noBars]
-   * @param {boolean} [options.noBlocks]
-   * @param {boolean} [options.noAssociations]
-   * @param {ClientDocument} [options.relativeTo]
+   * @param {PanelEnrichmentOptions} [options]
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts, options = {}) {
-    if (options.noBars) { delete parts.bars; }
-    if (options.noBlocks) { delete parts.blocks; }
-    if (options.noAssociations) { delete parts.associations; }
-    const tips = options.relativeTo?.system?.displayTips?.filter(tip =>
+    if (options?.noBars) { delete parts.bars; }
+    if (options?.noBlocks) { delete parts.blocks; }
+    if (options?.noAssociations) { delete parts.associations; }
+    const tips = options?.relativeTo?.system?.displayTips?.filter(tip =>
       (tip.level !== "warning" || game.settings.get("teriock", "showSuppressionTipsOnTooltips"))
       && (tip.level !== "error" || game.settings.get("teriock", "showErrorTipsOnTooltips"))
     );
     if (tips?.length) { parts.tips = tips; }
-    await this.enrichPanel(parts, options);
+    parts = await this.enrichPanel(parts, options);
     return this.renderTemplate("teriock/ui/panel", parts);
   }
 

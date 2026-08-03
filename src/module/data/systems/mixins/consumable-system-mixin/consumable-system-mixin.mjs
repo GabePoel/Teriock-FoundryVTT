@@ -135,9 +135,9 @@ export default function ConsumableSystemMixin(Base) {
         return {
           ...super.getLocalRollData(),
           consumable: Number(this.consumable),
-          max: this.quantity.max,
+          max: Math.min(this.quantity.max, TERIOCK.config.system.safeInf),
           quantity: this.quantity.value,
-          "quantity.max": this.quantity.max,
+          "quantity.max": Math.min(this.quantity.max, TERIOCK.config.system.safeInf),
         };
       }
 

@@ -1,3 +1,4 @@
+import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { panelsField } from "../../../fields/tools/builders.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
@@ -48,6 +49,16 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
   static migrateData(source, options, state) {
     for (const panel of source.panels ?? []) { migrateKey(panel, "image", "img"); }
     return super.migrateData(source, options, state);
+  }
+
+  /**
+   * Enriched panel context.
+   * @returns {Promise<Teriock.Panels.PanelParts[]>}
+   */
+  async #preparePanelContext() {
+    if (!this.parent.isContentVisible) { return [TERIOCK.display.panel.premade]; }
+    const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
+    return TeriockTextEditor.enrichPanels(this.panels, { relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM });
   }
 
   /**
@@ -111,7 +122,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     return Object.assign(await super._prepareContext(options), {
       activations: this.activations.contents.filter(a => a?.visible),
       hideContent: !this.parent.isContentVisible && !this.parent.rolls.length,
-      panels: this.parent.isContentVisible ? this.panels : [TERIOCK.display.panel.premade.unknown],
+      panels: await this.#preparePanelContext(),
       showActivations: this.showActivations,
       showPanels: this.showPanels,
       showTags: this.showTags,
