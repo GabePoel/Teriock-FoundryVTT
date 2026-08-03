@@ -1,5 +1,4 @@
-// @ts-expect-error Can't find field
-import { HTMLField } from "@common/data/fields";
+import { HTMLField } from "@common/data/fields.mjs";
 
 declare global {
   namespace Teriock.Display {
