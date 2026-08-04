@@ -1,8 +1,6 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
@@ -28,34 +26,36 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "attunement", usable: true });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "attunement", usable: true });
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       inheritTier: new fields.BooleanField({ initial: true }),
-      origin: new fields.StringField({
-        blank: false,
-        choices: localizeChoices(objectMap(attunementConfig.origin, v => v.label)),
-        initial: "effect",
-        nullable: false,
-        required: true,
-      }),
       target: new LocalDocumentField(foundry.documents.BaseItem),
       tier: new fields.NumberField({ initial: 0 }),
     });
   }
 
   /** @inheritDoc */
+  static kinds() {
+    return attunementConfig.kind;
+  }
+
+  /** @inheritDoc */
   static migrateData(source, options, state) {
-    migrateKey(source, "type", "origin");
+    migrateKey(source, "type", "kind");
+    migrateKey(source, "origin", "kind");
     return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
-  get _color() {
-    return this.target ? TERIOCK.display.colors.palette.green : TERIOCK.display.colors.palette.orange;
+  get _displayTags() {
+    const tags = super._displayTags;
+    const usage = this.usage;
+    if (usage) { tags.push(usage); }
+    return tags;
   }
 
   /** @inheritDoc */
@@ -78,7 +78,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", { tier: this.tier || 0 });
-    parts.text = dotJoin([attunementConfig.origin[this.origin].label, this.usage]);
+    parts.text = dotJoin([this._kindEntry.label, this.usage]);
     return parts;
   }
 
@@ -123,25 +123,17 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
-      ...super.getLocalRollData(),
-      [`origin.${toCamelCase(this.origin)}`]: 1,
-      target: this.target ? 1 : 0,
-      tier: this.tier,
-    };
+    return { ...super.getLocalRollData(), target: this.target ? 1 : 0, tier: this.tier };
   }
 
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    parts.bars = [{
+    parts.bars = this._withKindBar([{
       icon: TERIOCK.display.icons.attunable.tier,
       label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
-      wrappers: [
-        attunementConfig.origin[this.origin].label,
-        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier || 0 }),
-      ],
-    }];
+      wrappers: [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier || 0 })],
+    }]);
     if (this.target) {
       parts.associations = [{
         cards: [{

@@ -387,7 +387,7 @@ export default function ArmamentSystemMixin(Base) {
       for (const p of properties.filter(p => p.active)) {
         if (p.system.damageType) { this.damage.types.add(p.system._source.damageType); }
       }
-      if (this.powerLevel === "magic") { this.damage.types.add("magic"); }
+      if (this.kind === "magic") { this.damage.types.add("magic"); }
       this.damage.base = addTypesToFormula(this.damage.base, this.damage.types);
       this.damage.twoHanded = addTypesToFormula(this.damage.twoHanded, this.damage.types);
 

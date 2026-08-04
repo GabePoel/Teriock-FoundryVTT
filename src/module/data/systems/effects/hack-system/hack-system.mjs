@@ -13,6 +13,11 @@ export default class HackSystem extends ApplicableEffectSystem {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Hack"];
 
   /** @inheritDoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "flaw", type: "hack" });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       escalation: new fields.NumberField({ initial: 1, integer: true, min: 0, required: true }),
@@ -27,11 +32,6 @@ export default class HackSystem extends ApplicableEffectSystem {
   }
 
   /** @inheritDoc */
-  get _color() {
-    return TERIOCK.display.colors.palette.red;
-  }
-
-  /** @inheritDoc */
   get _durationBar() {
     const bar = super._durationBar;
     if (this.permanent) { bar.wrappers.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label")); }
@@ -40,7 +40,7 @@ export default class HackSystem extends ApplicableEffectSystem {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["permanent", "part", "escalation"];
+    return ["permanent", "part", "escalation", ...super._formPaths];
   }
 
   /** @inheritDoc */

@@ -31,9 +31,9 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       }),
       equipped: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label") }),
       identified: new TernaryField({ label: _loc("TERIOCK.MODELS.Identification.FIELDS.identified.label") }),
-      powerLevel: nullString({
-        choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
-        label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label"),
+      kind: nullString({
+        choices: objectMap(TERIOCK.config.equipment.kind, e => e.label),
+        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label"),
       }),
       properties: nullString({ choices: TERIOCK.reference.properties, label: _loc("TERIOCK.PACKS.properties") }),
       weaponFightingStyles: nullString({
@@ -60,7 +60,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       "filters.equipmentClasses",
       "filters.properties",
       "filters.weaponFightingStyles",
-      "filters.powerLevel",
+      "filters.kind",
     ];
   }
 
@@ -86,9 +86,9 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       equipmentType: e => e.system.equipmentType ?? "",
       equipped: e => Number(e.system.equipped),
       identified: e => Number(e.system.identification?.identified ?? 0),
+      kind: e => e.system.kind ?? "",
       minStr: e => e.system.minStr ?? 0,
       name: e => e.name,
-      powerLevel: e => e.system.powerLevel ?? 0,
       shattered: e => Number(e.system.shattered),
       tier: e => e.system.tier?.value ?? 0,
       weight: e => e.system.totalWeight ?? e.system.weight ?? 0,
@@ -110,7 +110,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         && this._checkTernaryFilter(f.attuned, system?.isAttuned)
         && this._checkTernaryFilter(f.identified, system?.identification?.identified)
         && this._checkTernaryFilter(f.consumable, system?.consumable)
-        && (!f.powerLevel || system?.powerLevel === f.powerLevel)
+        && (!f.kind || system?.kind === f.kind)
         && (!f.equipmentClasses || (system?.equipmentClasses || new Set()).has(f.equipmentClasses))
         && (!f.weaponFightingStyles || system?.fightingStyle === f.weaponFightingStyles)
       ) { yield document; }

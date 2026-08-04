@@ -1,4 +1,5 @@
 import effectConfig from "../../../../constants/config/effect-config.mjs";
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -30,15 +31,20 @@ export default function AdjustableSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         badge: new fields.StringField({ initial: "" }),
-        form: new fields.StringField({ blank: false, choices: effectConfig.form, initial: "normal", required: true }),
         improvement: new fields.HTMLField({ initial: "" }),
         limitation: new fields.HTMLField({ initial: "" }),
       });
     }
 
     /** @inheritDoc */
-    get _color() {
-      return TERIOCK.config.effect.form[this.form].color;
+    static kinds() {
+      return effectConfig.kind;
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options, state) {
+      migrateKey(source, "form", "kind");
+      return super.migrateData(source, options, state);
     }
 
     /** @inheritDoc */
@@ -73,17 +79,12 @@ export default function AdjustableSystemMixin(Base) {
 
     /** @inheritDoc */
     get needsAttunement() {
-      return this.form !== "intrinsic" && super.needsAttunement;
+      return this.kind !== "intrinsic" && super.needsAttunement;
     }
 
     /** @inheritDoc */
     _isSuppressedDampened() {
-      return this.form !== "intrinsic" && super._isSuppressedDampened();
-    }
-
-    /** @inheritDoc */
-    getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { [`form.${this.form}`]: 1, form: this.form });
+      return this.kind !== "intrinsic" && super._isSuppressedDampened();
     }
   }
 

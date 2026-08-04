@@ -69,6 +69,7 @@ declare global {
       childItemTypes: Teriock.Documents.ItemType[];
       consumable: boolean;
       hierarchy: boolean;
+      initialKind?: string;
       isTextPage?: boolean;
       passive: boolean;
       preservedProperties: string[];

@@ -14,7 +14,7 @@ export default function AbilityPanelPart(Base) {
    * @extends {AbilityDurationPart}
    * @extends {AbilityEquipmentPart}
    * @extends {AbilityInfoPart}
-   * @extends {AbilityMetaphysicsPart}
+   * @extends {AbilityElderSorceryPart}
    * @extends {AbilityOverviewPart}
    * @extends {AbilityResultsPart}
    * @extends {AbilityUpgradesPart}
@@ -25,7 +25,7 @@ export default function AbilityPanelPart(Base) {
   class AbilityPanelPart extends Base {
     /** @inheritDoc */
     async getPanelParts() {
-      const bars = [
+      const bars = this._withKindBar([
         {
           icon: icons.ability.execution,
           label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.execution"),
@@ -48,11 +48,11 @@ export default function AbilityPanelPart(Base) {
         },
         { icon: icons.ui.info, label: "TERIOCK.SYSTEMS.Ability.PANELS.info", wrappers: simplifyTags(this._infoTags) },
         {
-          icon: TERIOCK.config.effect.form[this.form].icon,
+          icon: icons.ability.effectType,
           label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-          wrappers: [TERIOCK.config.effect.form[this.form].label || "", ...simplifyTags(this._metaphysicsTags)],
+          wrappers: simplifyTags(this._metaphysicsTags),
         },
-      ];
+      ]);
       return {
         ...(await super.getPanelParts()),
         bars,

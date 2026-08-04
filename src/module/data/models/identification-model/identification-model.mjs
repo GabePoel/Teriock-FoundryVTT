@@ -1,9 +1,11 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
+import equipmentConfig from "../../../constants/config/equipment-config.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { buildWriteOperation, fromIdentifier, getName, objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
+import { migrateKey } from "../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -16,20 +18,27 @@ export default class IdentificationModel extends BaseDataModel {
 
   /** @inheritDoc */
   static defineSchema() {
+    const kinds = equipmentConfig.kind;
     return {
       flaws: new fields.HTMLField({ initial: "", required: false }),
       identified: new fields.BooleanField({ initial: true }),
-      name: new fields.StringField({ initial: "" }),
-      notes: new fields.HTMLField({ initial: "", required: false }),
-      powerLevel: new fields.StringField({
+      kind: new fields.StringField({
         blank: false,
-        choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
+        choices: objectMap(kinds, e => e.label),
         initial: "mundane",
         nullable: false,
         required: true,
       }),
+      name: new fields.StringField({ initial: "" }),
+      notes: new fields.HTMLField({ initial: "", required: false }),
       read: new fields.BooleanField({ initial: true }),
     };
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "powerLevel", "kind");
+    return super.migrateData(source, options, state);
   }
 
   /**
@@ -97,9 +106,7 @@ export default class IdentificationModel extends BaseDataModel {
         },
       });
       if (doReadMagic) {
-        await this.document.update({ "system.identification.read": true, "system.powerLevel": this.powerLevel }, {
-          asGM: true,
-        });
+        await this.document.update({ "system.identification.read": true, "system.kind": this.kind }, { asGM: true });
         ui.notifications.success("TERIOCK.MODELS.Identification.QUERY.ReadMagic.success", {
           format: { name: this.parent.parent.fullName },
           localize: true,
@@ -156,12 +163,12 @@ export default class IdentificationModel extends BaseDataModel {
           "system.flaws": "",
           "system.identification.flaws": this.parent.flaws,
           "system.identification.identified": false,
+          "system.identification.kind": this.parent.kind,
           "system.identification.name": this.parent.parent.name,
           "system.identification.notes": this.parent.notes,
-          "system.identification.powerLevel": this.parent.powerLevel,
           "system.identification.read": false,
+          "system.kind": "unknown",
           "system.notes": "",
-          "system.powerLevel": "unknown",
         },
         uuid: this.parent.parent.uuid,
       });

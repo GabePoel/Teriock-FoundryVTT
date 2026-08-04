@@ -12,16 +12,6 @@ const { fields } = foundry.data;
  */
 export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */
-  static get defaultSortOption() {
-    return "name";
-  }
-
-  /** @inheritDoc */
-  static get sortOrders() {
-    return TERIOCK.config.display.abilitySortOrders;
-  }
-
-  /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
       basic: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label") }),
@@ -123,17 +113,6 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       ...Object.keys(TERIOCK.config.cost.components.keys).map((k) => `filters.costs.components.${k}`),
       ...Object.keys(TERIOCK.config.cost.tweaks).map((k) => `filters.costs.tweaks.${k}`),
     ];
-  }
-
-  /** @inheritDoc */
-  get _sortMap() {
-    return {
-      enabled: a => Number(a.disabled),
-      name: a => a.name,
-      sourceName: a => a.parent?.name ?? "",
-      sourceType: a => a.parent?.type ?? "",
-      type: a => a.system.form ?? "",
-    };
   }
 
   /**

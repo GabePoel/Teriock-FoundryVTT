@@ -14,7 +14,7 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
   /** @type {string[]} */
   static BARS = [
     "teriock/sheets/items/equipment/status-bar",
-    ...super.BARS,
+    "teriock/sheets/shared/bars/armament-bars",
     "teriock/sheets/items/equipment/load-bar",
     "teriock/sheets/shared/bars/consumable-bar",
     "teriock/sheets/items/equipment/ammunition-bar",

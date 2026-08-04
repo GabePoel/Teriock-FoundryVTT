@@ -25,8 +25,8 @@ const abilityContext = {
   ub: "TERIOCK.TERMS.Properties.unblockable",
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
 
-  form: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
   interaction: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
+  kind: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.kind.label",
   maneuver: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
   range: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
   time: "TERIOCK.COMMON.ExecutionTime",
@@ -70,8 +70,8 @@ Hooks.once("i18nInit", () => {
     abilityContext[`attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.attribute", { name });
     abilityContext[`expansion.attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansionAttribute", { name });
   });
-  Object.entries(TERIOCK.config.effect.form).forEach(([k, v]) => {
-    abilityContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", { name: _loc(v.label) });
+  Object.entries(TERIOCK.config.effect.kind).forEach(([k, v]) => {
+    abilityContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.config.cost.tweaks).forEach(([k, v]) => {
     abilityContext[`tweaks.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.tweak", { name: _loc(v.label) });

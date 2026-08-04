@@ -7,5 +7,5 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
  */
 export default class ResourceSheet extends ChildSheet {
   /** @type {string[]} */
-  static BARS = ["teriock/sheets/shared/bars/consumable-bar"];
+  static BARS = ["teriock/sheets/shared/bars/status-bar", "teriock/sheets/shared/bars/consumable-bar"];
 }

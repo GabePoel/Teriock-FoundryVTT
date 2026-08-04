@@ -15,16 +15,16 @@ export default class RankPreviewModel extends BasePreviewModel {
     return Object.assign(super.defineFilters(), {
       archetype: archetypeField({ initial: null, nullable: true }),
       class: classField({ initial: null, nullable: true }),
-      origin: nullString({
-        choices: objectMap(TERIOCK.config.class.origins, v => v.label),
-        label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.origin.label"),
+      kind: nullString({
+        choices: objectMap(TERIOCK.config.class.kind, v => v.label),
+        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label"),
       }),
     });
   }
 
   /** @inheritDoc */
   get _formPathsSelect() {
-    return [...super._formPathsSelect, "filters.archetype", "filters.class", "filters.origin"];
+    return [...super._formPathsSelect, "filters.archetype", "filters.class", "filters.kind"];
   }
 
   /**
@@ -44,8 +44,8 @@ export default class RankPreviewModel extends BasePreviewModel {
         matches = this._checkValueFilter(f.archetype, system?.archetype)
           && this._checkValueFilter(f.class, system?.class);
       }
-      // Archetypes have no origin of their own, so they take the origin of the ranks they hold.
-      matches &&= this._checkValueFilter(f.origin, system?.innate ? "innate" : "learned");
+      // Archetypes have no kind of their own, so they take the kind of the ranks they hold.
+      matches &&= this._checkValueFilter(f.kind, system?.kind ?? (system?.innate ? "innate" : "learned"));
       if (matches) { yield document; }
     }
   }

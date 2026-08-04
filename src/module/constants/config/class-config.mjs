@@ -1,6 +1,7 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { colors } from "../display/colors.mjs";
 import { icons } from "../display/icons.mjs";
+import systemConfig from "./system-config.mjs";
 
 export default {
   archetypes: {
@@ -34,12 +35,13 @@ export default {
     veteran: { archetype: "warrior", icon: icons.class.veteran, label: "TERIOCK.TERMS.Classes.veteran" },
   },
   defaults: { maxAv: 2 },
-  origins: /** @enum {Teriock.Config.SubtypeEntry} */ {
-    innate: { color: colors.palette.purple, icon: icons.power.innate, label: "TERIOCK.TERMS.Origins.innate" },
-    learned: { color: colors.palette.green, icon: icons.power.learned, label: "TERIOCK.TERMS.Origins.learned" },
+  kind: /** @enum {Teriock.Config.KindEntry} */ {
+    innate: { color: colors.palette.purple, icon: icons.power.innate, label: "TERIOCK.TERMS.RankKind.innate" },
+    learned: { color: colors.palette.green, icon: icons.power.learned, label: "TERIOCK.TERMS.RankKind.learned" },
+    ...systemConfig.childKinds,
   },
 };
 
 preLocalizeConfig("config.class.archetypes", { keys: ["label"] });
 preLocalizeConfig("config.class.classes", { keys: ["label"] });
-preLocalizeConfig("config.class.origins", { keys: ["label"] });
+preLocalizeConfig("config.class.kind", { keys: ["label"] });

@@ -16,7 +16,7 @@ export default class RankOriginUpdater extends BaseUpdater {
 
   /** @inheritDoc */
   get _dataPaths() {
-    return ["system.origin"];
+    return ["system.kind"];
   }
 
   /** @inheritDoc */
@@ -24,11 +24,11 @@ export default class RankOriginUpdater extends BaseUpdater {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "form" && this.document.sup?.type === "species") {
       for (const field of context.fields) {
-        if (field.name === "system.origin") {
+        if (field.name === "system.kind") {
           // A species forces its ranks innate, so show that rather than the overridden source value.
           field.disabled = true;
           field.hint = _loc("TERIOCK.SYSTEMS.Rank.DIALOG.speciesInnate");
-          field.value = this.document.system.origin;
+          field.value = this.document.system.kind;
         }
       }
     }

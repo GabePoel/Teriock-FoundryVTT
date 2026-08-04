@@ -184,6 +184,7 @@ export const icons = {
     nose: "ms-oxygen-saturation",
   },
   interaction: { attack: "ms-swords", block: "ms-shield", feat: "ms-star", manifest: "ms-flare" },
+  kind: { flaw: "ms-block", normal: "ms-nearby", other: "ms-category", unknown: "ms-question-mark" },
   maneuver: { active: "ms-arrow-right-alt", passive: "ms-cycle", reactive: "ms-redo", slow: "ms-airwave" },
   movement: {
     climb: "ms-tools-ladder",
@@ -215,7 +216,7 @@ export const icons = {
     holiday: "ms-celebration",
     innate: "ms-person",
     learned: "ms-cognition-2",
-    other: "ms-question-mark",
+    other: "ms-category",
     pact: "ms-signature",
     traits: "ms-flag",
   },

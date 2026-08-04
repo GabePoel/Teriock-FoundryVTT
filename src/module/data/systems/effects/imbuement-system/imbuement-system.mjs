@@ -11,11 +11,18 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
 export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, systemMixins.GrantedSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "imbuement" });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "imbuement" });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["applyIfDampened", "applyIfDeattuned", "applyIfDestroyed", "applyIfShattered", "applyIfUnequipped"];
+    return [
+      "applyIfDampened",
+      "applyIfDeattuned",
+      "applyIfDestroyed",
+      "applyIfShattered",
+      "applyIfUnequipped",
+      ...super._formPaths,
+    ];
   }
 }

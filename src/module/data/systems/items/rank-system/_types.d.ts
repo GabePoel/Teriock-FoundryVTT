@@ -11,8 +11,6 @@ declare global {
       maxAv: number;
       /** <schema> What number rank this is, with respect to its class */
       number: number;
-      /** <schema> Whether this rank was gained innately or learned */
-      origin: Teriock.Keys.RankOrigin;
 
       get innate(): boolean;
 

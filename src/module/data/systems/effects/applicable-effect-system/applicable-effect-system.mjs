@@ -127,6 +127,11 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
+  get _formPaths() {
+    return ["kind"];
+  }
+
+  /** @inheritDoc */
   get _nameTags() {
     const tags = super._nameTags;
     if (this.critical) { tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical")); }

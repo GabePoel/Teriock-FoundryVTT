@@ -23,16 +23,11 @@ export default function EquipmentPanelPart(Base) {
 
     /** @inheritDoc */
     async getPanelParts() {
-      const bars = [
+      const bars = this._withKindBar([
         {
-          icon: TERIOCK.config.equipment.powerLevel[this.powerLevel].icon,
+          icon: TERIOCK.display.icons.equipment.equipmentType,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
-          wrappers: [
-            TERIOCK.config.equipment.powerLevel[this.powerLevel].label,
-            getName(this.equipmentType),
-            this.range.description,
-            ...simplifyTags(this._armamentTags),
-          ],
+          wrappers: [getName(this.equipmentType), this.range.description, ...simplifyTags(this._armamentTags)],
         },
         this._attackBar,
         this._defenseBar,
@@ -78,7 +73,7 @@ export default function EquipmentPanelPart(Base) {
             ]
             : [],
         },
-      ];
+      ]);
       return { ...(await super.getPanelParts()), bars };
     }
   }

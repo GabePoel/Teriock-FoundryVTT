@@ -401,7 +401,7 @@ export default class AbilitySystem
   /** @inheritDoc */
   toRefreshObject(document) {
     const obj = super.toRefreshObject(document);
-    if (!["flaw", "normal", "special"].includes(this.form)) { foundry.utils.deleteProperty(obj, "system.form"); }
+    if (!["flaw", "normal", "special"].includes(this.kind)) { foundry.utils.deleteProperty(obj, "system.kind"); }
     return obj;
   }
 }

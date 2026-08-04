@@ -54,8 +54,8 @@ export default async function identifyItemQuery(queryData) {
         "system.identification.identified": true,
         "system.identification.notes": "",
         "system.identification.read": true,
+        "system.kind": item.system.identification.kind,
         "system.notes": item.system.identification.notes,
-        "system.powerLevel": item.system.identification.powerLevel,
       },
       uuid: item.uuid,
     });

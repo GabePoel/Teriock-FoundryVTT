@@ -19,7 +19,7 @@ export default class MetaphysicsPreviewModel extends BasePreviewModel {
         choices: TERIOCK.reference.elements,
         label: _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label"),
       }),
-      form: nullString({ choices: effectConfig.form, label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label") }),
+      kind: nullString({ choices: effectConfig.kind, label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label") }),
       powerSource: nullString({
         choices: TERIOCK.reference.powerSources,
         label: _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label"),
@@ -29,7 +29,7 @@ export default class MetaphysicsPreviewModel extends BasePreviewModel {
 
   /** @inheritDoc */
   get _formPathsSelect() {
-    return [...super._formPathsSelect, "filters.effectType", "filters.element", "filters.form", "filters.powerSource"];
+    return [...super._formPathsSelect, "filters.effectType", "filters.element", "filters.kind", "filters.powerSource"];
   }
 
   /** @inheritDoc */
@@ -38,7 +38,7 @@ export default class MetaphysicsPreviewModel extends BasePreviewModel {
       if (
         this._checkValueFilter(this.filters.effectType, document?.system?.effectTypes)
         && this._checkValueFilter(this.filters.element, document?.system?.elements)
-        && this._checkValueFilter(this.filters.form, document?.system?.form)
+        && this._checkValueFilter(this.filters.kind, document?.system?.kind)
         && this._checkValueFilter(this.filters.powerSource, document?.system?.powerSources)
       ) { yield document; }
     }

@@ -20,7 +20,7 @@ export default class BodySystem
 {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "body", usable: true });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "body", usable: true });
   }
 
   /** @inheritDoc */
@@ -37,7 +37,7 @@ export default class BodySystem
   async getPanelParts() {
     return {
       ...(await super.getPanelParts()),
-      bars: [this._attackBar, this._defenseBar, {
+      bars: this._withKindBar([this._attackBar, this._defenseBar, {
         icon: TERIOCK.display.icons.equipment.equipmentClasses,
         label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
         wrappers: [
@@ -45,7 +45,7 @@ export default class BodySystem
           ...simplifyTags(this._equipmentClassesTags),
           ...simplifyTags(this._armamentTags),
         ],
-      }],
+      }]),
     };
   }
 

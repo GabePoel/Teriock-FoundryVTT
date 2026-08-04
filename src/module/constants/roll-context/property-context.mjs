@@ -8,15 +8,15 @@ const propertyContext = {
 
   "dmg.extra": "TERIOCK.ROLL_CONTEXT.Property.extraDamage",
   "dmg.type": "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label",
-  form: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
+  kind: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.kind.label",
 };
 
 export default propertyContext;
 
 preLocalizeConfig("rollContext.property");
 Hooks.once("i18nInit", () => {
-  Object.entries(TERIOCK.config.effect.form).forEach(([k, v]) => {
-    propertyContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", { name: _loc(v.label) });
+  Object.entries(TERIOCK.config.effect.kind).forEach(([k, v]) => {
+    propertyContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
     propertyContext[`dmg.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name: _loc(v) });

@@ -28,7 +28,7 @@ declare global {
     export type MetaphysicsFilters = BaseFilters & {
       effectType: Teriock.Keys.EffectType | null;
       element: Teriock.Keys.Element | null;
-      form: Teriock.Keys.Form | null;
+      kind: Teriock.Keys.EffectKind | null;
       powerSource: Teriock.Keys.PowerSource | null;
     };
 
@@ -56,7 +56,7 @@ declare global {
       equipmentClasses: Teriock.Keys.EquipmentClass | null;
       equipped: boolean | null;
       identified: boolean | null;
-      powerLevel: Teriock.Keys.PowerLevel | null;
+      kind: Teriock.Keys.EquipmentKind | null;
       properties: string | null;
       weaponFightingStyles: string | null;
     };
@@ -66,7 +66,7 @@ declare global {
       tradecraft: Teriock.Keys.Tradecraft | null;
     };
 
-    export type PowerFilters = BaseFilters & { type: Teriock.Keys.PowerType | null };
+    export type PowerFilters = BaseFilters & { kind: Teriock.Keys.PowerKind | null };
 
     export type PropertyFilters = MetaphysicsFilters & {
       applyIfDampened: boolean | null;
@@ -79,7 +79,7 @@ declare global {
     export type RankFilters = BaseFilters & {
       archetype: Teriock.Keys.Archetype | null;
       class: Teriock.Keys.Class | null;
-      origin: Teriock.Keys.RankOrigin | null;
+      kind: Teriock.Keys.RankKind | null;
     };
   }
 }

@@ -44,7 +44,7 @@ export default function ActorLimitsPart(Base) {
      * @returns {TeriockPower[]}
      */
     get curseDocuments() {
-      return this.parent.powers.filter(p => p.system.type === "curse");
+      return this.parent.powers.filter(p => p.system.kind === "curse");
     }
 
     /**

@@ -1,21 +1,12 @@
 <div class="teriock-sheet-bar">
   {{#if (and isGM (not system.identification.read))}}
-    {{formBox
-      (path TERIOCK.config.equipment.powerLevel system.identification.powerLevel "label")
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.powerLevel")
-      icon=(path TERIOCK.config.equipment.powerLevel "unknown" "icon")
-      iconColor=(path TERIOCK.config.equipment.powerLevel system.identification.powerLevel "color")
-      tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
+    {{> "teriock/sheets/shared/forms/kind-form"
+      kindValue=system.identification.kind
+      kindIcon="unknown"
     }}
   {{else}}
-    {{formBox
-      (path TERIOCK.config.equipment.powerLevel system.powerLevel "label")
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.powerLevel")
-      icon=(path TERIOCK.config.equipment.powerLevel system.powerLevel "icon")
-      iconColor=(path TERIOCK.config.equipment.powerLevel system.powerLevel "color")
-      tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
+    {{> "teriock/sheets/shared/forms/kind-form"
+      kindValue=system.kind
     }}
   {{/if}}
   {{formBox

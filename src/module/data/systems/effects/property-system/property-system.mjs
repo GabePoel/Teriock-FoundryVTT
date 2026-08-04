@@ -103,22 +103,22 @@ export default class PropertySystem
   /** @inheritDoc */
   get _panelBars() {
     return [{
-      icon: TERIOCK.config.effect.form[this.form].icon,
-      label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
-      wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
+      icon: TERIOCK.display.icons.form.normal,
+      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
+      wrappers: simplifyTags(this._metaphysicsTags),
     }];
   }
 
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) { parts.subtitle = TERIOCK.config.effect.form[this.form].label; }
+    if (!this.consumable) { parts.subtitle = this._kindEntry.label; }
     return parts;
   }
 
   /** @inheritDoc */
   get needsAttunement() {
-    return this.form !== "intrinsic" && super.needsAttunement;
+    return this.kind !== "intrinsic" && super.needsAttunement;
   }
 
   /** @inheritDoc */
@@ -130,10 +130,8 @@ export default class PropertySystem
   getLocalRollData() {
     const data = {
       ...super.getLocalRollData(),
-      [`form.${this.form}`]: 1,
       "dmg.extra": this.extraDamage || 0,
       "dmg.type": this._source.damageType || 0,
-      form: this.form,
     };
     if (this._source.damageType) { data[`dmg.type.${this._source.damageType}`] = 1; }
     return data;

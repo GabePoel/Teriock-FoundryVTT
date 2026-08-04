@@ -70,13 +70,13 @@ export function rankSort(ranks) {
  * @returns {TeriockAbility[]}
  */
 export function effectSort(abilities) {
-  const effectFormOrder = Object.keys(TERIOCK.config.effect.form || {});
+  const effectKindOrder = Object.keys(TERIOCK.config.effect.kind || {});
   return abilities.sort((a, b) => {
-    if (!a.system?.form || !b.system?.form) { return a.name.localeCompare(b.name); }
-    const typeA = a.system?.form || "";
-    const typeB = b.system?.form || "";
-    const indexA = effectFormOrder.indexOf(typeA);
-    const indexB = effectFormOrder.indexOf(typeB);
+    if (!a.system?.kind || !b.system?.kind) { return a.name.localeCompare(b.name); }
+    const typeA = a.system?.kind || "";
+    const typeB = b.system?.kind || "";
+    const indexA = effectKindOrder.indexOf(typeA);
+    const indexB = effectKindOrder.indexOf(typeB);
     if (indexA !== indexB) { return indexA - indexB; }
     return (a.name || "").localeCompare(b.name || "");
   });

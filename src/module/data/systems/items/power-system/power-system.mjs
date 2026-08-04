@@ -1,10 +1,9 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -37,7 +36,7 @@ export default class PowerSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "power" });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "power" });
   }
 
   /** @inheritDoc */
@@ -45,27 +44,26 @@ export default class PowerSystem
     return Object.assign(super.defineSchema(), {
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       maxAv: new InfiniteNumberField({ integer: true }),
-      type: new fields.StringField({
-        blank: false,
-        choices: localizeChoices(objectMap(powerConfig.type, v => v.label)),
-        initial: "other",
-        required: true,
-      }),
     });
   }
 
   /** @inheritDoc */
-  get _color() {
-    return powerConfig.type[this.type].color;
+  static kinds() {
+    return powerConfig.kind;
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "type", "kind");
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, {
-      icon: powerConfig.type[this.type].icon,
-      label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
+      icon: TERIOCK.display.icons.armament.av,
+      label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.maxAv.label"),
       wrappers: [
-        powerConfig.type[this.type].label,
         this.maxAv === 0
           ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
           : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: asInf(this.maxAv) }),
@@ -76,7 +74,7 @@ export default class PowerSystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([powerConfig.type[this.type].label, parts.text]);
+    parts.text = dotJoin([this._kindEntry.label, parts.text]);
     parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }
@@ -96,7 +94,7 @@ export default class PowerSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return { ...super.getLocalRollData(), [`type.${toCamelCase(this.type)}`]: 1, av: this.maxAv, maxAv: this.maxAv };
+    return { ...super.getLocalRollData(), av: this.maxAv, maxAv: this.maxAv };
   }
 
   /** @inheritDoc */

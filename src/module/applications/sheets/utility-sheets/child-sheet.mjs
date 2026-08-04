@@ -35,7 +35,7 @@ export default class ChildSheet
   }
 
   /** @type {string[]} */
-  static BARS = [];
+  static BARS = ["teriock/sheets/shared/bars/status-bar"];
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { actions: { openSource: this.#onOpenSource } };

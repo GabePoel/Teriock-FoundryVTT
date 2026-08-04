@@ -52,6 +52,7 @@ export default function BaseDocumentSheetMixin(Base) {
         img: this.document?.img,
         imgPath: "img",
         isGM: game.user.isGM,
+        kinds: this.document.system?.constructor?.kinds?.() ?? {},
         limited: this.document?.limited,
         name: this.document.name,
         owner: this.document?.isOwner,

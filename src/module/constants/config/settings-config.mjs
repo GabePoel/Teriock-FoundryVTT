@@ -1,6 +1,5 @@
 /**
  * Default values for inheritable document settings.
- * @satisfies {Teriock.Config.SettingsConfig}
  */
 export default {
   categories: {

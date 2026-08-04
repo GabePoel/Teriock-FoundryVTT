@@ -53,7 +53,11 @@ export default class BasePreviewModel extends BaseDataModel {
    * @returns {Record<string, string>}
    */
   static get sortOrders() {
-    return { default: "COMMON.Default", name: "DOCUMENT.FIELDS.name.label" };
+    return {
+      default: "COMMON.Default",
+      kind: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
+      name: "DOCUMENT.FIELDS.name.label",
+    };
   }
 
   /**
@@ -212,7 +216,7 @@ export default class BasePreviewModel extends BaseDataModel {
    * @returns {Record<string, (document: *) => string|number>}
    */
   get _sortMap() {
-    return { default: d => d?.sort ?? 0, name: d => d?.name ?? "" };
+    return { default: d => d?.sort ?? 0, kind: d => d?.system?.kind ?? "", name: d => d?.name ?? "" };
   }
 
   /**

@@ -77,7 +77,7 @@ export default function AbilityDurationPart(Base) {
 
       // Gifted modifications
       if (this.costs.tweaks.gifted) {
-        this.form = "gifted";
+        this.kind = "gifted";
         if (this.maneuver === "passive") {
           this.maneuver = "active";
           this.executionTime = "a1";

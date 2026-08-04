@@ -11,16 +11,16 @@ export default class PowerPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      type: nullString({
-        choices: objectMap(TERIOCK.config.power.type, v => v.label),
-        label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
+      kind: nullString({
+        choices: objectMap(TERIOCK.config.power.kind, v => v.label),
+        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label"),
       }),
     });
   }
 
   /** @inheritDoc */
   get _formPathsSelect() {
-    return [...super._formPathsSelect, "filters.type"];
+    return [...super._formPathsSelect, "filters.kind"];
   }
 
   /**
@@ -30,7 +30,7 @@ export default class PowerPreviewModel extends BasePreviewModel {
    */
   *filterDocuments(documents) {
     for (const document of super.filterDocuments(documents)) {
-      if (this._checkValueFilter(this.filters.type, document?.system?.type)) { yield document; }
+      if (this._checkValueFilter(this.filters.kind, document?.system?.kind)) { yield document; }
     }
   }
 }

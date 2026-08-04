@@ -1,8 +1,9 @@
+import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";
+import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
-import { migrateValueTransform } from "../../../migrations/source-migrations.mjs";
+import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -56,7 +57,7 @@ export default class EquipmentSystem
     "system.flaws",
     "system.instructions",
     "system.notes",
-    "system.powerLevel",
+    "system.kind",
     ...super.PRESERVED_PROPERTIES,
   ];
 
@@ -82,6 +83,7 @@ export default class EquipmentSystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["equipment"],
+      initialKind: "mundane",
       type: "equipment",
       usable: true,
       visibleTypes: ["equipment", ...super.metadata.visibleTypes],
@@ -93,18 +95,18 @@ export default class EquipmentSystem
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
       equipmentType: new IdentifierField({ type: "equipment" }),
-      powerLevel: new fields.StringField({
-        blank: false,
-        choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label, { localize: true }),
-        initial: "mundane",
-        required: true,
-      }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
   }
 
   /** @inheritDoc */
+  static kinds() {
+    return equipmentConfig.kind;
+  }
+
+  /** @inheritDoc */
   static migrateData(source, options, state) {
+    migrateKey(source, "powerLevel", "kind");
     if (source?.equipmentType) { migrateValueTransform(source, "equipmentType", toKebabCase); }
     return super.migrateData(source, options, state);
   }
@@ -119,7 +121,7 @@ export default class EquipmentSystem
   get _color() {
     if (this.isOverCapacity) { return TERIOCK.display.colors.palette.red; }
     if (!this.identification.read) { return TERIOCK.display.colors.palette.grey; }
-    return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
+    return super._color;
   }
 
   /** @inheritDoc */
@@ -180,7 +182,6 @@ export default class EquipmentSystem
   /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
-      [`power.${toCamelCase(this.powerLevel)}`]: 1,
       [`type.${toCamelCase(this._source.equipmentType)}`]: 1,
       price: this.price,
     });

@@ -54,7 +54,9 @@ declare global {
     // Armament Keys
     export type EquipmentClass = keyof typeof index.equipmentClasses;
     export type WeaponFightingStyle = keyof typeof index.weaponFightingStyles;
-    export type PowerLevel = keyof typeof config.equipment.powerLevel;
+    export type EquipmentKind = keyof typeof config.equipment.kind;
+    /** @deprecated Use {@link EquipmentKind} */
+    export type PowerLevel = EquipmentKind;
 
     // Property Keys
     export type Property = keyof typeof index.properties;
@@ -62,11 +64,22 @@ declare global {
     // Species Keys
     export type Trait = keyof typeof index.traits;
 
-    // Power Keys
-    export type PowerType = keyof typeof config.power.type;
+    // Kind Keys
+    export type Kind = keyof typeof config.system.defaultKinds;
+    export type PowerKind = keyof typeof config.power.kind;
+    /** @deprecated Use {@link PowerKind} */
+    export type PowerType = PowerKind;
+    export type EffectKind = keyof typeof config.effect.kind;
+    /** @deprecated Use {@link EffectKind} */
+    export type Form = EffectKind;
+    export type AttunementKind = keyof typeof config.attunement.kind;
+    /** @deprecated Use {@link AttunementKind} */
+    export type AttunementOrigin = AttunementKind;
+    export type RankKind = keyof typeof config.class.kind;
+    /** @deprecated Use {@link RankKind} */
+    export type RankOrigin = RankKind;
 
     // Effect Keys
-    export type Form = keyof typeof config.effect.form;
     export type ApplicationTarget = keyof typeof config.effect.applicationTargets;
     export type IllusionLevel = keyof typeof config.illusion.level;
     export type TransformationLevel = keyof typeof config.transformation.level;
@@ -82,13 +95,9 @@ declare global {
     export type Hack = (typeof statuses.hacks)[keyof typeof statuses.hacks]["id"];
     export type Status = Condition | Cover | Hack;
 
-    // Attunement Keys
-    export type AttunementOrigin = keyof typeof config.attunement.origin;
-
     // Rank Keys
     export type Archetype = keyof typeof config.class.archetypes;
     export type Class = keyof typeof config.class.classes;
-    export type RankOrigin = keyof typeof config.class.origins;
 
     // Cost Keys
     export type Component = keyof typeof config.cost.components.keys;

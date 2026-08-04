@@ -2,9 +2,8 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { getName, objectMap } from "../../../../helpers/utils.mjs";
+import { getName } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
@@ -42,7 +41,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "rank" });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "learned", type: "rank" });
   }
 
   /** @inheritDoc */
@@ -54,20 +53,20 @@ export default class RankSystem
       description: new fields.HTMLField(),
       maxAv: new InfiniteNumberField({ initial: classConfig.defaults.maxAv, integer: true }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
-      origin: new fields.StringField({
-        blank: false,
-        choices: localizeChoices(objectMap(classConfig.origins, v => v.label)),
-        initial: "learned",
-        required: true,
-      }),
     });
+  }
+
+  /** @inheritDoc */
+  static kinds() {
+    return classConfig.kind;
   }
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
     migrateKey(source, "className", "class");
     migrateKey(source, "classRank", "number");
-    migrateKey(source, "innate", "origin", val => (val ? "innate" : "learned"));
+    migrateKey(source, "innate", "kind", val => (val ? "innate" : "learned"));
+    migrateKey(source, "origin", "kind");
     migrateValueTransform(source, "class", toKebabCase);
     return super.migrateData(source, options, state);
   }
@@ -142,11 +141,6 @@ export default class RankSystem
   }
 
   /** @inheritDoc */
-  get _color() {
-    return classConfig.origins[this.origin].color;
-  }
-
-  /** @inheritDoc */
   get _panelBars() {
     return [
       {
@@ -166,7 +160,6 @@ export default class RankSystem
           this.maxAv === 0
             ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
             : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
-          classConfig.origins[this.origin].label,
         ],
       },
     ];
@@ -189,7 +182,7 @@ export default class RankSystem
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = getName(this.archetype);
-    parts.text ||= classConfig.origins[this.origin].label;
+    parts.text ||= this._kindEntry.label;
     return parts;
   }
 
@@ -198,7 +191,7 @@ export default class RankSystem
    * @returns {boolean}
    */
   get innate() {
-    return this.origin === "innate";
+    return this.kind === "innate";
   }
 
   /** @inheritDoc */
@@ -251,11 +244,9 @@ export default class RankSystem
       class: this._source.class || 0,
       maxAv: this.maxAv,
       number: this.number,
-      origin: this.origin || 0,
     };
     if (this._source.archetype) { data[`archetype.${this._source.archetype}`] = 1; }
     if (this._source.class) { data[`class.${this._source.class}`] = 1; }
-    if (this.origin) { data[`origin.${this.origin}`] = 1; }
     return data;
   }
 
@@ -266,7 +257,7 @@ export default class RankSystem
     this.archetype = `archetype:${
       TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.archetype ?? this._source.archetype
     }`;
-    if (this.parent.sup?.type === "species") { this.origin = "innate"; }
+    if (this.parent.sup?.type === "species") { this.kind = "innate"; }
     if (
       game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
     ) {

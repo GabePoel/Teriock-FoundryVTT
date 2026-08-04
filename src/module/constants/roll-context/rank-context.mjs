@@ -7,9 +7,9 @@ const rankContext = {
 
   archetype: "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
   class: "TERIOCK.SYSTEMS.Rank.FIELDS.class.label",
+  kind: "TERIOCK.SYSTEMS.Rank.FIELDS.kind.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   number: "TERIOCK.SYSTEMS.Rank.FIELDS.number.label",
-  origin: "TERIOCK.SYSTEMS.Rank.FIELDS.origin.label",
 };
 
 export default rankContext;
@@ -22,7 +22,7 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
     rankContext[`archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });
   });
-  Object.entries(TERIOCK.config.class.origins).forEach(([k, v]) => {
-    rankContext[`origin.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.origin", { name: _loc(v.label) });
+  Object.entries(TERIOCK.config.class.kind).forEach(([k, v]) => {
+    rankContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.kind", { name: _loc(v.label) });
   });
 });

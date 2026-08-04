@@ -123,11 +123,11 @@ export default class FluencySystem
   async getPanelParts() {
     return {
       ...(await super.getPanelParts()),
-      bars: [{
+      bars: this._withKindBar([{
         icon: TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft].icon,
         label: _loc("TERIOCK.COMMON.Tradecraft"),
         wrappers: [TERIOCK.config.tradecraft.fields[this._source.field].label, getName(this.tradecraft)],
-      }],
+      }]),
     };
   }
 

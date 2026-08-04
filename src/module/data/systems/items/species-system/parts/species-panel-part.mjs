@@ -17,7 +17,7 @@ export default function SpeciesPanelPart(Base) {
     async getPanelParts() {
       const statBar = this._statBar;
       statBar.wrappers.push(_loc("TERIOCK.SYSTEMS.Species.PANELS.br", { value: this.br }));
-      const bars = [statBar, {
+      const bars = this._withKindBar([statBar, {
         icon: icons.species.lifespan,
         label: _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.label"),
         wrappers: [
@@ -46,7 +46,7 @@ export default function SpeciesPanelPart(Base) {
         icon: icons.species.traits,
         label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.traits.label"),
         wrappers: simplifyTags(this._traitTags),
-      }];
+      }]);
       return { ...(await super.getPanelParts()), bars };
     }
   }

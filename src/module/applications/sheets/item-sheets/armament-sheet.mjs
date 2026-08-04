@@ -32,7 +32,7 @@ export default class ArmamentSheet extends ChildSheet {
   }
 
   /** @type {string[]} */
-  static BARS = ["teriock/sheets/shared/bars/armament-bars"];
+  static BARS = ["teriock/sheets/shared/bars/status-bar", "teriock/sheets/shared/bars/armament-bars"];
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {

@@ -1,7 +1,10 @@
 import impactConfig from "../../../../constants/config/impact-config.mjs";
+import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
@@ -52,7 +55,13 @@ export default function ChildSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, { initialKind: "normal" });
+      }
+
+      /** @inheritDoc */
       static defineSchema() {
+        const kinds = this.kinds();
         return Object.assign(super.defineSchema(), {
           boosts: new fields.SchemaField(
             objectMap(impactConfig, e => new FormulaField({ deterministic: false, initial: "", label: e.label }), {
@@ -62,8 +71,22 @@ export default function ChildSystemMixin(Base) {
           ),
           description: new fields.HTMLField({ initial: "" }),
           forceSuppressed: new initialBoolean(),
+          kind: new fields.StringField({
+            blank: false,
+            choices: localizeChoices(objectMap(kinds, v => v.label)),
+            initial: this.metadata.initialKind,
+            required: true,
+          }),
           settings: new fields.EmbeddedDataField(CommonDocumentSettingsModel),
         });
+      }
+
+      /**
+       * Kind entries available for this system. Override on subclasses.
+       * @returns {Record<string, Teriock.Config.KindEntry>}
+       */
+      static kinds() {
+        return systemConfig.defaultKinds;
       }
 
       /**
@@ -89,6 +112,11 @@ export default function ChildSystemMixin(Base) {
             game.settings.get("teriock", "suppressionMessages").has(k) && v()
           ).map(([k, _v]) => k),
         ).map(k => TERIOCK.config.tip.suppression[k]);
+      }
+
+      /** @inheritDoc */
+      get _color() {
+        return this._kindEntry.color;
       }
 
       /** @inheritDoc */
@@ -128,6 +156,22 @@ export default function ChildSystemMixin(Base) {
           visible: this.parent.isOwner,
           onClick: () => this.parent.toggleDisabled(),
         }];
+      }
+
+      /**
+       * Panel bar that shows only this document's kind.
+       * @returns {Teriock.Panels.PanelBar}
+       */
+      get _kindBar() {
+        return { icon: this._kindEntry.icon, label: this.schema.fields.kind.label, wrappers: [this._kindEntry.label] };
+      }
+
+      /**
+       * Config entry for the current kind.
+       * @returns {Teriock.Config.KindEntry}
+       */
+      get _kindEntry() {
+        return this.constructor.kinds()[this.kind];
       }
 
       /** @inheritDoc */
@@ -244,6 +288,15 @@ export default function ChildSystemMixin(Base) {
         await this.constructor.Execution.create(data, options);
       }
 
+      /**
+       * Ensure {@link ChildSystem._kindBar} is the first panel bar.
+       * @param {Teriock.Panels.PanelBar[]} [bars]
+       * @returns {Teriock.Panels.PanelBar[]}
+       */
+      _withKindBar(bars = []) {
+        return [this._kindBar, ...bars];
+      }
+
       /** @inheritDoc */
       getEmbedContextMenuEntries(doc) {
         const entries = super.getEmbedContextMenuEntries(doc);
@@ -312,6 +365,18 @@ export default function ChildSystemMixin(Base) {
           },
         ]);
         return entries;
+      }
+
+      /** @inheritDoc */
+      getLocalRollData() {
+        return { ...super.getLocalRollData(), [`kind.${toCamelCase(this.kind)}`]: 1, kind: this.kind };
+      }
+
+      /** @inheritDoc */
+      async getPanelParts() {
+        const parts = await super.getPanelParts();
+        parts.bars = this._withKindBar(parts.bars);
+        return parts;
       }
     }
   );
