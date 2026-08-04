@@ -285,6 +285,62 @@ effects:
       targets:
         - self
     type: ability
+  - _id: urBmFyvLtZjhUTeJ
+    _key: "!items.effects!0615c1e02cf44dbd.urBmFyvLtZjhUTeJ"
+    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    name: Adept Flame Spell Cast
+    system:
+      _sup: 12XEx0cPJzWyXTJE
+      automations:
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Flame element spells]{flame spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-flame-spell-cast
+    type: resource
+  - _id: f1KySEQceM867q8m
+    _key: "!items.effects!0615c1e02cf44dbd.f1KySEQceM867q8m"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.D4zf8b3n9RnHOVWd
+    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+    name: Bombastic Casting
+    system:
+      _sup: 12XEx0cPJzWyXTJE
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      effectTypes:
+        - loud
+      executionTime:
+        base: r0
+      identifier: bombastic-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering @Wiki[Category:Spells]{spell} becomes extremely visible and loud. Visually the
+          @Wiki[Category:Spells]{spell} extends 10 feet in all directions from a line between the caster and each of its
+          @Identifier[core:targets]{targets}. The spell can be heard up to 600 feet away.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
+    type: ability
   - _id: IGwlc5qWJqhIjQvn
     _key: "!items.effects!0615c1e02cf44dbd.IGwlc5qWJqhIjQvn"
     _stats:
@@ -339,6 +395,28 @@ effects:
       targets:
         - vitals
     type: ability
+  - _id: B50L2RueB8vIWxvI
+    _key: "!items.effects!0615c1e02cf44dbd.B50L2RueB8vIWxvI"
+    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    name: Half-Time Ritual Flame Spell Cast
+    system:
+      _sup: 12XEx0cPJzWyXTJE
+      automations:
+        - _id: XqnlTxp6N0lZCFaB
+          formula: "1"
+          trigger: shortRest
+          type: changeQuantity
+        - _id: lnI5XgS0RD02tQbn
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
+        spells]{ritual} @Wiki[Category:Flame element spells]{flame spell} in half the time it would normally take.</p>
+      identifier: half-time-ritual-flame-spell-cast
+    type: resource
   - _id: NMHRERuGVzVJdnox
     _key: "!items.effects!0615c1e02cf44dbd.NMHRERuGVzVJdnox"
     _stats:
@@ -451,14 +529,20 @@ effects:
       targets:
         - weapon
     type: ability
-  - _id: f1KySEQceM867q8m
-    _key: "!items.effects!0615c1e02cf44dbd.f1KySEQceM867q8m"
+  - _id: 6uIqbbQhN2EqXkDZ
+    _key: "!items.effects!0615c1e02cf44dbd.6uIqbbQhN2EqXkDZ"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.D4zf8b3n9RnHOVWd
-    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-    name: Bombastic Casting
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
     system:
-      _sup: 12XEx0cPJzWyXTJE
+      _sup: 8MbKNAuiNlYyDOmq
+      automations:
+        - _id: bJn9LIvdgJ11S1tr
+          local:
+            qualifier: and(@spell, @delivery.missile, @pro)
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 1
       costs:
@@ -466,28 +550,25 @@ effects:
           mp:
             formula: "1"
             type: formula
-      delivery: self
-      effectTypes:
-        - loud
       executionTime:
         base: r0
-      identifier: bombastic-casting
+      identifier: spell-strike
       interaction: manifest
+      limitation: <p>Only usable with @Identifier[ability:flame-ray]{Flame Ray} and @Identifier[ability:fire-ball]{Fire Ball}.</p>
       maneuver: reactive
       overview:
         base: >-
-          <p>The triggering @Wiki[Category:Spells]{spell} becomes extremely visible and loud. Visually the
-          @Wiki[Category:Spells]{spell} extends 10 feet in all directions from a line between the caster and each of its
-          @Identifier[core:targets]{targets}. The spell can be heard up to 600 feet away.</p>
+          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
+          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
+          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      range:
-        unit: self
       skill: true
       standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
+        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
+        successfully applied.</p>
     type: ability
   - _id: CtmkreidBA2YB3UH
     _key: "!items.effects!0615c1e02cf44dbd.CtmkreidBA2YB3UH"
@@ -537,87 +618,6 @@ effects:
         <p>Another creatures would move out of sight or out of @Identifier[core:range]{range} of a @Wiki[Category:Single
         action spells]{single action spell} you could cast.</p>
     type: ability
-  - _id: 6uIqbbQhN2EqXkDZ
-    _key: "!items.effects!0615c1e02cf44dbd.6uIqbbQhN2EqXkDZ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: 8MbKNAuiNlYyDOmq
-      automations:
-        - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      executionTime:
-        base: r0
-      identifier: spell-strike
-      interaction: manifest
-      limitation: <p>Only usable with @Identifier[ability:flame-ray]{Flame Ray} and @Identifier[ability:fire-ball]{Fire Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
-          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
-          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
-      powerSources:
-        - magical
-      skill: true
-      standard: true
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
-        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
-        successfully applied.</p>
-    type: ability
-  - _id: urBmFyvLtZjhUTeJ
-    _key: "!items.effects!0615c1e02cf44dbd.urBmFyvLtZjhUTeJ"
-    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-    name: Adept Flame Spell Cast
-    system:
-      _sup: 12XEx0cPJzWyXTJE
-      automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Flame element spells]{flame spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-flame-spell-cast
-    type: resource
-  - _id: B50L2RueB8vIWxvI
-    _key: "!items.effects!0615c1e02cf44dbd.B50L2RueB8vIWxvI"
-    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-    name: Half-Time Ritual Flame Spell Cast
-    system:
-      _sup: 12XEx0cPJzWyXTJE
-      automations:
-        - _id: XqnlTxp6N0lZCFaB
-          formula: "1"
-          trigger: shortRest
-          type: changeQuantity
-        - _id: lnI5XgS0RD02tQbn
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
-        spells]{ritual} @Wiki[Category:Flame element spells]{flame spell} in half the time it would normally take.</p>
-      identifier: half-time-ritual-flame-spell-cast
-    type: resource
 folder: abd25a387353ae4e
 img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
 name: Rank 3 Flame Mage

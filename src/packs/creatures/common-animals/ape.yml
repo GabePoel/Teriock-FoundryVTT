@@ -373,6 +373,139 @@ items:
           targets:
             - vitals
         type: ability
+      - _id: QKIOd1kwnTrvn1c7
+        _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.QKIOd1kwnTrvn1c7"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+        img: systems/teriock/src/icons/abilities/agile.webp
+        name: Agile
+        system:
+          _sup: biqdFveft3Renitf
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.difficultTerrain
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: agile
+          interaction: manifest
+          limitation: <p>Forest terrain only.</p>
+          maneuver: passive
+          overview:
+            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: OQJH1CBHSHTLvi4Q
+        _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.OQJH1CBHSHTLvi4Q"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
+        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+        name: Battle Cry Aura
+        system:
+          _sup: vRmlkDPBRHdGJHnS
+          automations:
+            - _id: 7400b41f20d9f100
+              regionType: emanation
+              restriction:
+                enabled: true
+                type: sound
+              trigger: executeInput
+              type: region
+            - _id: b4960732f0b9ed9f
+              status: frightened
+              type: status
+          competence:
+            raw: 1
+          costs:
+            components:
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: "1"
+                type: formula
+          delivery: aura
+          duration:
+            raw: "1"
+            unit: minute
+          effectTypes:
+            - loud
+          endCondition: >-
+            <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
+            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+          expirations:
+            - _id: 66672059c7a29a30
+              method: roll
+              type: combat
+          featSaveAttribute: int
+          identifier: battle-cry-aura
+          interaction: feat
+          powerSources:
+            - martial
+          range:
+            raw: "10"
+            unit: ft
+          requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
+          results:
+            fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
+          skill: true
+          standard: true
+        type: ability
+      - _id: 8tJXRBmGvrsrpT4L
+        _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.8tJXRBmGvrsrpT4L"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
+        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+        name: Battle Cry Resistance
+        system:
+          _sup: vRmlkDPBRHdGJHnS
+          affinities:
+            - _id: oJH3v7kvIbVGDlBS
+              category: statuses
+              type: resistance
+              value: frightened
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            raw: "5"
+            unit: minute
+          effectTypes:
+            - resistance
+          endCondition: <p>You die or 1 minute passes without combat.</p>
+          executionTime:
+            base: a0
+          identifier: battle-cry-resistance
+          interaction: manifest
+          overview:
+            base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
       - _id: rGwNpcO8VQQ8XymV
         _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.rGwNpcO8VQQ8XymV"
         _stats:
@@ -501,139 +634,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: OQJH1CBHSHTLvi4Q
-        _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.OQJH1CBHSHTLvi4Q"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
-        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-        name: Battle Cry Aura
-        system:
-          _sup: vRmlkDPBRHdGJHnS
-          automations:
-            - _id: 7400b41f20d9f100
-              regionType: emanation
-              restriction:
-                enabled: true
-                type: sound
-              trigger: executeInput
-              type: region
-            - _id: b4960732f0b9ed9f
-              status: frightened
-              type: status
-          competence:
-            raw: 1
-          costs:
-            components:
-              verbal:
-                type: tag
-            primary:
-              mp:
-                formula: "1"
-                type: formula
-          delivery: aura
-          duration:
-            raw: "1"
-            unit: minute
-          effectTypes:
-            - loud
-          endCondition: >-
-            <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
-            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          expirations:
-            - _id: 66672059c7a29a30
-              method: roll
-              type: combat
-          featSaveAttribute: int
-          identifier: battle-cry-aura
-          interaction: feat
-          powerSources:
-            - martial
-          range:
-            raw: "10"
-            unit: ft
-          requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
-          results:
-            fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-          skill: true
-          standard: true
-        type: ability
-      - _id: 8tJXRBmGvrsrpT4L
-        _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.8tJXRBmGvrsrpT4L"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
-        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-        name: Battle Cry Resistance
-        system:
-          _sup: vRmlkDPBRHdGJHnS
-          affinities:
-            - _id: oJH3v7kvIbVGDlBS
-              category: statuses
-              type: resistance
-              value: frightened
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            raw: "5"
-            unit: minute
-          effectTypes:
-            - resistance
-          endCondition: <p>You die or 1 minute passes without combat.</p>
-          executionTime:
-            base: a0
-          identifier: battle-cry-resistance
-          interaction: manifest
-          overview:
-            base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-      - _id: QKIOd1kwnTrvn1c7
-        _key: "!actors.items.effects!f9f2d419a0407d03.f9f2d419a0407d03.QKIOd1kwnTrvn1c7"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-        img: systems/teriock/src/icons/abilities/agile.webp
-        name: Agile
-        system:
-          _sup: biqdFveft3Renitf
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.speedAdjustments.difficultTerrain
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "3"
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - movement
-          executionTime:
-            base: passive
-          identifier: agile
-          interaction: manifest
-          limitation: <p>Forest terrain only.</p>
-          maneuver: passive
-          overview:
-            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/ape.webp
     name: Ape
@@ -687,6 +687,53 @@ items:
         img: systems/teriock/src/icons/creatures/ape.webp
         ringImg: systems/teriock/src/icons/tokens/ape.webp
     type: species
+  - _id: vjzHCr3s6hOrdpRD
+    _key: "!actors.items!f9f2d419a0407d03.vjzHCr3s6hOrdpRD"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+    effects:
+      - _id: TWk5AP5nzZgpXkaM
+        _key: "!actors.items.effects!f9f2d419a0407d03.vjzHCr3s6hOrdpRD.TWk5AP5nzZgpXkaM"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
+            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+        type: property
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: "!actors.items.effects!f9f2d419a0407d03.vjzHCr3s6hOrdpRD.IDLUUjkSFtpaiKuJ"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property is easily concealed and can often be used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+          form: intrinsic
+          identifier: small
+        type: property
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: f9f2d419a0407d03
+      damage:
+        base: "1"
+      identifier: foot
+      range:
+        long:
+          unit: melee
+    type: body
   - _id: Skk4KChGg2MYSqvE
     _key: "!actors.items!f9f2d419a0407d03.Skk4KChGg2MYSqvE"
     _stats:
@@ -817,53 +864,6 @@ items:
         base: 1d6
       fightingStyle: savage
       identifier: prehensile-sharp-claw
-      range:
-        long:
-          unit: melee
-    type: body
-  - _id: vjzHCr3s6hOrdpRD
-    _key: "!actors.items!f9f2d419a0407d03.vjzHCr3s6hOrdpRD"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
-    effects:
-      - _id: TWk5AP5nzZgpXkaM
-        _key: "!actors.items.effects!f9f2d419a0407d03.vjzHCr3s6hOrdpRD.TWk5AP5nzZgpXkaM"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-        type: property
-      - _id: IDLUUjkSFtpaiKuJ
-        _key: "!actors.items.effects!f9f2d419a0407d03.vjzHCr3s6hOrdpRD.IDLUUjkSFtpaiKuJ"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
-          form: intrinsic
-          identifier: small
-        type: property
-    folder: 30f4d11e5e53d332
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
-    system:
-      _sup: f9f2d419a0407d03
-      damage:
-        base: "1"
-      identifier: foot
       range:
         long:
           unit: melee

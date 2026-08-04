@@ -3,6 +3,29 @@ _key: "!items!PUX5Y1gTA2IAjlre"
 _stats:
   compendiumSource: Compendium.teriock.bodyParts.Item.3ccbad21a9a3d41a
 effects:
+  - _id: ZqWlXZP6cVmElt50
+    _key: "!items.effects!PUX5Y1gTA2IAjlre.ZqWlXZP6cVmElt50"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: derived
+              priority: 10
+              target: Item
+              type: upgrade
+              value: "1"
+          type: changes
+      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+    type: property
   - _id: NKoDQFexITllA4Nt
     _key: "!items.effects!PUX5Y1gTA2IAjlre.NKoDQFexITllA4Nt"
     _stats:
@@ -34,29 +57,6 @@ effects:
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    type: property
-  - _id: ZqWlXZP6cVmElt50
-    _key: "!items.effects!PUX5Y1gTA2IAjlre.ZqWlXZP6cVmElt50"
-    _stats:
-      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-    img: systems/teriock/src/icons/properties/armor-voiding.webp
-    name: Armor Voiding
-    system:
-      applyIfDampened: true
-      applyIfDeattuned: true
-      automations:
-        - _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              phase: derived
-              priority: 10
-              target: Item
-              type: upgrade
-              value: "1"
-          type: changes
-      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-      form: intrinsic
-      identifier: armor-voiding
     type: property
 folder: 2033c7bcef60c5ce
 img: systems/teriock/src/icons/body-parts/crushing-jaw.webp

@@ -333,6 +333,207 @@ items:
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
         type: ability
+      - _id: a15aavhMrPVUaYx6
+        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.a15aavhMrPVUaYx6"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
+        system:
+          _sup: 2XWiJphRKfrNQlIU
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "120"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          identifier: ethereal-senses
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
+              feet.</p>
+          powerSources:
+            - magical
+            - primal
+            - spiritual
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: A46WMov5BX4ARbqI
+        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.A46WMov5BX4ARbqI"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: 2XWiJphRKfrNQlIU
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: healing-sensitivity
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
+              providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you
+              roll your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
+              @Identifier[core:healing]{healing} effect. This does not consume any of your
+              @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: kKRfhNBJAIbMCYa9
+        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.kKRfhNBJAIbMCYa9"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
+        img: systems/teriock/src/icons/abilities/impure-durability.webp
+        name: Impure Durability
+        system:
+          _sup: 2XWiJphRKfrNQlIU
+          affinities:
+            - _id: uevhIJEJYaY0sz5X
+              category: other
+              type: immunity
+              value: Non-Magical Non-Silver Damage
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: special
+          identifier: impure-durability
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to non-@Identifier[damage:magic]{magic}
+              non-@Identifier[damage:silver]{silver} @Identifier[core:damage]{damage}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: 2Wm6eUik1clCIhpD
+        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.2Wm6eUik1clCIhpD"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
+        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+        name: Mana Drain Grasp
+        system:
+          _sup: 2XWiJphRKfrNQlIU
+          automations:
+            - _id: iAyFzPzJgTNeDbbH
+              type: revitalize
+            - _id: 157afc517847f562
+              formula: 1d8[mana]
+              impact: drain
+              type: roll
+          competence:
+            raw: 1
+          delivery: hand
+          effectTypes:
+            - draining
+            - revitalization
+          executionTime:
+            base: a2
+          form: special
+          identifier: mana-drain-grasp
+          powerSources:
+            - magical
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
+              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
+              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        type: ability
+      - _id: WKy5iVovlLSyjShG
+        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.WKy5iVovlLSyjShG"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
+        system:
+          _sup: 2XWiJphRKfrNQlIU
+          affinities:
+            - _id: EEiHRIyCxZhUuw07
+              category: statuses
+              type: immunity
+              value: charmed
+            - _id: Glnnr440sVehTfZ5
+              category: statuses
+              type: immunity
+              value: frightened
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: special
+          identifier: undead-mind
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened}
+              and @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
+              @Identifier[condition:transformed]{transformed}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: t65M9Pn02xPSx4rr
         _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.t65M9Pn02xPSx4rr"
         _stats:
@@ -384,207 +585,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: kKRfhNBJAIbMCYa9
-        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.kKRfhNBJAIbMCYa9"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
-        img: systems/teriock/src/icons/abilities/impure-durability.webp
-        name: Impure Durability
-        system:
-          _sup: 2XWiJphRKfrNQlIU
-          affinities:
-            - _id: uevhIJEJYaY0sz5X
-              category: other
-              type: immunity
-              value: Non-Magical Non-Silver Damage
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-          form: special
-          identifier: impure-durability
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to non-@Identifier[damage:magic]{magic}
-              non-@Identifier[damage:silver]{silver} @Identifier[core:damage]{damage}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: A46WMov5BX4ARbqI
-        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.A46WMov5BX4ARbqI"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-        name: Healing Sensitivity
-        system:
-          _sup: 2XWiJphRKfrNQlIU
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-          form: flaw
-          identifier: healing-sensitivity
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
-              providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you
-              roll your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
-              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
-              @Identifier[core:healing]{healing} effect. This does not consume any of your
-              @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: WKy5iVovlLSyjShG
-        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.WKy5iVovlLSyjShG"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
-        img: systems/teriock/src/icons/abilities/undead-mind.webp
-        name: Undead Mind
-        system:
-          _sup: 2XWiJphRKfrNQlIU
-          affinities:
-            - _id: EEiHRIyCxZhUuw07
-              category: statuses
-              type: immunity
-              value: charmed
-            - _id: Glnnr440sVehTfZ5
-              category: statuses
-              type: immunity
-              value: frightened
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-          form: special
-          identifier: undead-mind
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened}
-              and @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
-              @Identifier[condition:transformed]{transformed}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: a15aavhMrPVUaYx6
-        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.a15aavhMrPVUaYx6"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        name: Ethereal Senses
-        system:
-          _sup: 2XWiJphRKfrNQlIU
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.senses.ethereal
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "120"
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - sensory
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-          identifier: ethereal-senses
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
-              feet.</p>
-          powerSources:
-            - magical
-            - primal
-            - spiritual
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: 2Wm6eUik1clCIhpD
-        _key: "!actors.items.effects!fc547c9afdc4a9b6.fc547c9afdc4a9b6.2Wm6eUik1clCIhpD"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
-        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
-        name: Mana Drain Grasp
-        system:
-          _sup: 2XWiJphRKfrNQlIU
-          automations:
-            - _id: iAyFzPzJgTNeDbbH
-              type: revitalize
-            - _id: 157afc517847f562
-              formula: 1d8[mana]
-              impact: drain
-              type: roll
-          competence:
-            raw: 1
-          delivery: hand
-          effectTypes:
-            - draining
-            - revitalization
-          executionTime:
-            base: a2
-          form: special
-          identifier: mana-drain-grasp
-          powerSources:
-            - magical
-          results:
-            critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
-              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-            hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
-              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        type: ability
     folder: 79fd5713820acc9f
     img: systems/teriock/src/icons/creatures/plague-ghoul.webp
     name: Plague Ghoul
@@ -611,6 +611,29 @@ items:
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
     effects:
+      - _id: dyRYEEhB3N7j2eaE
+        _key: "!actors.items.effects!fc547c9afdc4a9b6.OV9Ln09gGrNnXUmd.dyRYEEhB3N7j2eaE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!fc547c9afdc4a9b6.OV9Ln09gGrNnXUmd.Q3eKznomGL4eVOGB"
         _stats:
@@ -642,29 +665,6 @@ items:
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        type: property
-      - _id: dyRYEEhB3N7j2eaE
-        _key: "!actors.items.effects!fc547c9afdc4a9b6.OV9Ln09gGrNnXUmd.dyRYEEhB3N7j2eaE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
         type: property
     folder: 79fd5713820acc9f
     img: systems/teriock/src/icons/body-parts/ferocious-jaw.webp

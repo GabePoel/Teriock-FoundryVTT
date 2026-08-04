@@ -521,6 +521,201 @@ effects:
           attribute: int
           value: 4
     type: ability
+  - _id: iWFFmBubLuvYTobn
+    _key: "!items.effects!98605fc407a1e54d.iWFFmBubLuvYTobn"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: U9Ntpnmp05raMUTZ
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: beastly-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    type: ability
+  - _id: JuGeZrDzdKPpuBoJ
+    _key: "!items.effects!98605fc407a1e54d.JuGeZrDzdKPpuBoJ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: emU9xewNxWWUDroG
+      automations:
+        - _id: AXwLjBzDx4XcVcAJ
+          movementAction: climb
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+        - _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          competencies:
+            - 1
+            - 2
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: climbing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 74QMEQFD7g2zrpzA
+    _key: "!items.effects!98605fc407a1e54d.74QMEQFD7g2zrpzA"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
+    system:
+      _sup: f0QepoC7vOXYwKjq
+      automations:
+        - _id: tS17fIFj24KkwiGX
+          identifier: property:cumbersome
+          type: suppress
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: giant-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength} and
+          @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In addition, you are no longer suffer the
+          consequences of @Identifier[property:cumbersome]{cumbersome} items.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 3
+    type: ability
+  - _id: aZR1h7S3fRlRt3jR
+    _key: "!items.effects!98605fc407a1e54d.aZR1h7S3fRlRt3jR"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: U9Ntpnmp05raMUTZ
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: U9Ntpnmp05raMUTZ
+    _key: "!items.effects!98605fc407a1e54d.U9Ntpnmp05raMUTZ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: 74QMEQFD7g2zrpzA
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: improved-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength} and
+          @Identifier[ability:improved-armor-piercing]{Improved Armor Piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
   - _id: 97k3vVdwjI31Igep
     _key: "!items.effects!98605fc407a1e54d.97k3vVdwjI31Igep"
     _stats:
@@ -585,238 +780,6 @@ effects:
         proficient: >-
           <p>You instead vertically leap at @Identifier[core:movement-speed]{half speed} and horizontally leap at
           @Identifier[core:movement-speed]{full speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: JuGeZrDzdKPpuBoJ
-    _key: "!items.effects!98605fc407a1e54d.JuGeZrDzdKPpuBoJ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    name: Climbing
-    system:
-      _sup: emU9xewNxWWUDroG
-      automations:
-        - _id: AXwLjBzDx4XcVcAJ
-          movementAction: climb
-          type: changeMovement
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.climb
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "2"
-          type: changes
-        - _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.climb
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "3"
-          competencies:
-            - 1
-            - 2
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-      identifier: climbing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
-        proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: f0QepoC7vOXYwKjq
-    _key: "!items.effects!98605fc407a1e54d.f0QepoC7vOXYwKjq"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
-    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-    name: Supernatural Strength
-    system:
-      _sup: 1l7pvITnBPu6qkhF
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      form: special
-      identifier: supernatural-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
-          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
-          @Identifier[keyword:deboosted]{deboost} any melee
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-          @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 4
-    type: ability
-  - _id: 74QMEQFD7g2zrpzA
-    _key: "!items.effects!98605fc407a1e54d.74QMEQFD7g2zrpzA"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
-    img: systems/teriock/src/icons/abilities/giant-strength.webp
-    name: Giant Strength
-    system:
-      _sup: f0QepoC7vOXYwKjq
-      automations:
-        - _id: tS17fIFj24KkwiGX
-          identifier: property:cumbersome
-          type: suppress
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: giant-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @Identifier[ability:improved-strength]{Improved Strength} and
-          @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In addition, you are no longer suffer the
-          consequences of @Identifier[property:cumbersome]{cumbersome} items.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 3
-    type: ability
-  - _id: U9Ntpnmp05raMUTZ
-    _key: "!items.effects!98605fc407a1e54d.U9Ntpnmp05raMUTZ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    name: Improved Strength
-    system:
-      _sup: 74QMEQFD7g2zrpzA
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: improved-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength} and
-          @Identifier[ability:improved-armor-piercing]{Improved Armor Piercing}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-    type: ability
-  - _id: iWFFmBubLuvYTobn
-    _key: "!items.effects!98605fc407a1e54d.iWFFmBubLuvYTobn"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: U9Ntpnmp05raMUTZ
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
-          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
-          @Identifier[keyword:armor-voiding]{AV0}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    type: ability
-  - _id: aZR1h7S3fRlRt3jR
-    _key: "!items.effects!98605fc407a1e54d.aZR1h7S3fRlRt3jR"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: U9Ntpnmp05raMUTZ
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
       powerSources:
         - martial
       range:
@@ -893,6 +856,35 @@ effects:
       targets:
         - item
     type: ability
+  - _id: BlS3J1b1VKJYU6KD
+    _key: "!items.effects!98605fc407a1e54d.BlS3J1b1VKJYU6KD"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.12bf6dfa45ae8af0
+    img: icons/creatures/webs/webthin-blue.webp
+    name: Spiga Snare
+    system:
+      _sup: 4qCEQjLICq1sBBKy
+      automations:
+        - _id: 5d57231066693cee
+          status: snared
+          type: status
+      competence:
+        raw: 1
+      duration:
+        unit: unlimited
+      endCondition: >-
+        <p>The @Identifier[condition:snared]{snare} caused by this ability does not end on its own. It can be escaped by
+        @Identifier[ability:interact]{interacting} with the web making a @Identifier[core:difficulty-class]{DC} 25
+        @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat save}. This can be done either by the
+        creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The
+        @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
+        @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
+      identifier: spiga-snare
+      powerSources:
+        - martial
+      results:
+        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
+    type: ability
   - _id: Z6Pe5OVxKTEboS4Z
     _key: "!items.effects!98605fc407a1e54d.Z6Pe5OVxKTEboS4Z"
     _stats:
@@ -923,35 +915,6 @@ effects:
       range:
         raw: "30"
         unit: ft
-      results:
-        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
-    type: ability
-  - _id: BlS3J1b1VKJYU6KD
-    _key: "!items.effects!98605fc407a1e54d.BlS3J1b1VKJYU6KD"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.12bf6dfa45ae8af0
-    img: icons/creatures/webs/webthin-blue.webp
-    name: Spiga Snare
-    system:
-      _sup: 4qCEQjLICq1sBBKy
-      automations:
-        - _id: 5d57231066693cee
-          status: snared
-          type: status
-      competence:
-        raw: 1
-      duration:
-        unit: unlimited
-      endCondition: >-
-        <p>The @Identifier[condition:snared]{snare} caused by this ability does not end on its own. It can be escaped by
-        @Identifier[ability:interact]{interacting} with the web making a @Identifier[core:difficulty-class]{DC} 25
-        @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat save}. This can be done either by the
-        creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The
-        @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
-        @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
-      identifier: spiga-snare
-      powerSources:
-        - martial
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
     type: ability
@@ -987,6 +950,43 @@ effects:
         unit: ft
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
+    type: ability
+  - _id: f0QepoC7vOXYwKjq
+    _key: "!items.effects!98605fc407a1e54d.f0QepoC7vOXYwKjq"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
+    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    name: Supernatural Strength
+    system:
+      _sup: 1l7pvITnBPu6qkhF
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: special
+      identifier: supernatural-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
+          @Identifier[keyword:deboosted]{deboost} any melee
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 4
     type: ability
 folder: 479155f14ad8612d
 img: systems/teriock/src/icons/creatures/blood-spiga.webp

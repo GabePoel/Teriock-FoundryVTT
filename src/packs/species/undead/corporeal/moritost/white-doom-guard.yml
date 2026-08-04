@@ -262,6 +262,49 @@ effects:
         score:
           attribute: snk
     type: ability
+  - _id: e32DtkFs6XUl8iMY
+    _key: "!items.effects!2fb92421fc48d666.e32DtkFs6XUl8iMY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: wNyETYHg6tqvo0pj
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
+      powerSources:
+        - magical
+        - primal
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: bbQtTkFqUNeBjq3A
     _key: "!items.effects!2fb92421fc48d666.bbQtTkFqUNeBjq3A"
     _stats:
@@ -328,100 +371,6 @@ effects:
         base: >-
           <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[damage:mundane]{mundane}
           @Identifier[core:damage]{damage}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: e32DtkFs6XUl8iMY
-    _key: "!items.effects!2fb92421fc48d666.e32DtkFs6XUl8iMY"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
-    system:
-      _sup: wNyETYHg6tqvo0pj
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "120"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      identifier: ethereal-senses
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
-      powerSources:
-        - magical
-        - primal
-        - spiritual
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: 5YTHUsY4fVoEGFhP
-    _key: "!items.effects!2fb92421fc48d666.5YTHUsY4fVoEGFhP"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
-    img: systems/teriock/src/icons/abilities/undying-durability.webp
-    name: Undying Durability
-    system:
-      _sup: wNyETYHg6tqvo0pj
-      affinities:
-        - _id: HaVjAr78BgQGd92W
-          category: statuses
-          type: immunity
-          value: poisoned
-        - _id: OlGtbdaImhaj6OiM
-          category: statuses
-          type: immunity
-          value: suffocating
-        - _id: W3eMyYlHd3WnCnAm
-          category: statuses
-          type: immunity
-          value: unconscious
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - immunity
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      form: special
-      identifier: undying-durability
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
-          @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You do
-          not @Identifier[condition:down]{drop} due to being at negative
-          @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you reach
-          half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have to
-          @Identifier[core:drowning]{breathe}.</p>
       powerSources:
         - magical
       range:
@@ -503,6 +452,57 @@ effects:
           <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened} and
           @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
           @Identifier[condition:transformed]{transformed}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 5YTHUsY4fVoEGFhP
+    _key: "!items.effects!2fb92421fc48d666.5YTHUsY4fVoEGFhP"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+    img: systems/teriock/src/icons/abilities/undying-durability.webp
+    name: Undying Durability
+    system:
+      _sup: wNyETYHg6tqvo0pj
+      affinities:
+        - _id: HaVjAr78BgQGd92W
+          category: statuses
+          type: immunity
+          value: poisoned
+        - _id: OlGtbdaImhaj6OiM
+          category: statuses
+          type: immunity
+          value: suffocating
+        - _id: W3eMyYlHd3WnCnAm
+          category: statuses
+          type: immunity
+          value: unconscious
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: special
+      identifier: undying-durability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
+          @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You do
+          not @Identifier[condition:down]{drop} due to being at negative
+          @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you reach
+          half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have to
+          @Identifier[core:drowning]{breathe}.</p>
       powerSources:
         - magical
       range:

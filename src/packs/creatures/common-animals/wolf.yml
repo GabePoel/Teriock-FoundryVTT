@@ -522,50 +522,44 @@ items:
           targets:
             - vitals
         type: ability
-      - _id: TBqU6LwaC6jYmhoM
-        _key: "!actors.items.effects!9b160c0238003ba9.9b160c0238003ba9.TBqU6LwaC6jYmhoM"
+      - _id: DbbGovJxI3VMDNwk
+        _key: "!actors.items.effects!9b160c0238003ba9.9b160c0238003ba9.DbbGovJxI3VMDNwk"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
-        img: systems/teriock/src/icons/abilities/scent-seeing.webp
-        name: Scent Seeing
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+        img: systems/teriock/src/icons/abilities/agile.webp
+        name: Agile
         system:
-          _sup: BRV3YsAOUJeVFkSz
+          _sup: fG33tukDbYt0Xq6H
           automations:
             - _id: e789ed5e109ebd1a
-              activeQualifier: not(@status.down)
               changes:
-                - key: system.senses.smell
+                - key: system.speedAdjustments.difficultTerrain
                   phase: derived
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "10"
+                  value: "3"
               type: changes
           competence:
             raw: 1
-          delivery: aura
+          delivery: self
+          duration:
+            unit: unlimited
           effectTypes:
-            - sensory
+            - movement
           executionTime:
             base: passive
-          identifier: scent-seeing
+          identifier: agile
           interaction: manifest
           maneuver: passive
           overview:
-            base: >-
-              <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know
-              the location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving
-              or not, so long as they are still within 10 feet of you.</p>
+            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
           powerSources:
             - martial
           range:
-            raw: "10"
-            unit: ft
-          requirements: >-
-            <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
-            @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
-          skill: true
-          standard: true
+            unit: self
+          targets:
+            - self
         type: ability
       - _id: fGof4zGmhF3FYApg
         _key: "!actors.items.effects!9b160c0238003ba9.9b160c0238003ba9.fGof4zGmhF3FYApg"
@@ -660,44 +654,50 @@ items:
           targets:
             - self
         type: ability
-      - _id: DbbGovJxI3VMDNwk
-        _key: "!actors.items.effects!9b160c0238003ba9.9b160c0238003ba9.DbbGovJxI3VMDNwk"
+      - _id: TBqU6LwaC6jYmhoM
+        _key: "!actors.items.effects!9b160c0238003ba9.9b160c0238003ba9.TBqU6LwaC6jYmhoM"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-        img: systems/teriock/src/icons/abilities/agile.webp
-        name: Agile
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+        img: systems/teriock/src/icons/abilities/scent-seeing.webp
+        name: Scent Seeing
         system:
-          _sup: fG33tukDbYt0Xq6H
+          _sup: BRV3YsAOUJeVFkSz
           automations:
             - _id: e789ed5e109ebd1a
+              activeQualifier: not(@status.down)
               changes:
-                - key: system.speedAdjustments.difficultTerrain
+                - key: system.senses.smell
                   phase: derived
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: "3"
+                  value: "10"
               type: changes
           competence:
             raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
+          delivery: aura
           effectTypes:
-            - movement
+            - sensory
           executionTime:
             base: passive
-          identifier: agile
+          identifier: scent-seeing
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
+            base: >-
+              <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know
+              the location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving
+              or not, so long as they are still within 10 feet of you.</p>
           powerSources:
             - martial
           range:
-            unit: self
-          targets:
-            - self
+            raw: "10"
+            unit: ft
+          requirements: >-
+            <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
+            @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
+          skill: true
+          standard: true
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/wolf.webp

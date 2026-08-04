@@ -3,6 +3,29 @@ _key: "!items!CI5Y6C7QRvdrwsnp"
 _stats:
   compendiumSource: Compendium.teriock.bodyParts.Item.3dbcdff7350d91b0
 effects:
+  - _id: rkWfpVjpx5uC0zqt
+    _key: "!items.effects!CI5Y6C7QRvdrwsnp.rkWfpVjpx5uC0zqt"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: derived
+              priority: 10
+              target: Item
+              type: upgrade
+              value: "1"
+          type: changes
+      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+    type: property
   - _id: pNwuDfcrz8c1MBq1
     _key: "!items.effects!CI5Y6C7QRvdrwsnp.pNwuDfcrz8c1MBq1"
     _stats:
@@ -51,29 +74,6 @@ effects:
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    type: property
-  - _id: rkWfpVjpx5uC0zqt
-    _key: "!items.effects!CI5Y6C7QRvdrwsnp.rkWfpVjpx5uC0zqt"
-    _stats:
-      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-    img: systems/teriock/src/icons/properties/armor-voiding.webp
-    name: Armor Voiding
-    system:
-      applyIfDampened: true
-      applyIfDeattuned: true
-      automations:
-        - _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              phase: derived
-              priority: 10
-              target: Item
-              type: upgrade
-              value: "1"
-          type: changes
-      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-      form: intrinsic
-      identifier: armor-voiding
     type: property
 folder: c602ce7a824494c1
 img: systems/teriock/src/icons/body-parts/prehensile-ripping-claw.webp

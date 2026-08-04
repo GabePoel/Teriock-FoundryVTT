@@ -262,6 +262,85 @@ effects:
         score:
           attribute: snk
     type: ability
+  - _id: JJl2cTo2cTUgG1KY
+    _key: "!items.effects!3fd555d4baf4a6f0.JJl2cTo2cTUgG1KY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: EqMmt5Svq96jjcTg
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
+      powerSources:
+        - magical
+        - primal
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: KCgPC9RmQVX0iKVs
+    _key: "!items.effects!3fd555d4baf4a6f0.KCgPC9RmQVX0iKVs"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: EqMmt5Svq96jjcTg
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: healing-sensitivity
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
+          providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you roll
+          your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
+          @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
+          @Identifier[core:healing]{healing} effect. This does not consume any of your
+          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: 9X411ehhs4wT9ZmY
     _key: "!items.effects!3fd555d4baf4a6f0.9X411ehhs4wT9ZmY"
     _stats:
@@ -298,6 +377,43 @@ effects:
         unit: self
       targets:
         - self
+    type: ability
+  - _id: hp97McyVUNxt14hp
+    _key: "!items.effects!3fd555d4baf4a6f0.hp97McyVUNxt14hp"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+    name: Mana Drain Touch
+    system:
+      _sup: EqMmt5Svq96jjcTg
+      automations:
+        - _id: xreyNK2IzDp9qCUE
+          type: revitalize
+        - _id: 157afc517847f562
+          formula: 1d8[mana]
+          impact: drain
+          type: roll
+      competence:
+        raw: 1
+      delivery: hand
+      effectTypes:
+        - draining
+        - revitalization
+      form: special
+      identifier: mana-drain-touch
+      powerSources:
+        - magical
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
+          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
+          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
     type: ability
   - _id: 03aVF9NAEtqFTr68
     _key: "!items.effects!3fd555d4baf4a6f0.03aVF9NAEtqFTr68"
@@ -342,122 +458,6 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: KCgPC9RmQVX0iKVs
-    _key: "!items.effects!3fd555d4baf4a6f0.KCgPC9RmQVX0iKVs"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    name: Healing Sensitivity
-    system:
-      _sup: EqMmt5Svq96jjcTg
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      form: flaw
-      identifier: healing-sensitivity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
-          providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you roll
-          your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
-          @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
-          @Identifier[core:healing]{healing} effect. This does not consume any of your
-          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: JJl2cTo2cTUgG1KY
-    _key: "!items.effects!3fd555d4baf4a6f0.JJl2cTo2cTUgG1KY"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
-    system:
-      _sup: EqMmt5Svq96jjcTg
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "120"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      identifier: ethereal-senses
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
-      powerSources:
-        - magical
-        - primal
-        - spiritual
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: hp97McyVUNxt14hp
-    _key: "!items.effects!3fd555d4baf4a6f0.hp97McyVUNxt14hp"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
-    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
-    name: Mana Drain Touch
-    system:
-      _sup: EqMmt5Svq96jjcTg
-      automations:
-        - _id: xreyNK2IzDp9qCUE
-          type: revitalize
-        - _id: 157afc517847f562
-          formula: 1d8[mana]
-          impact: drain
-          type: roll
-      competence:
-        raw: 1
-      delivery: hand
-      effectTypes:
-        - draining
-        - revitalization
-      form: special
-      identifier: mana-drain-touch
-      powerSources:
-        - magical
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
-          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
-          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
     type: ability
   - _id: Ss1byKxfOmN4pas3
     _key: "!items.effects!3fd555d4baf4a6f0.Ss1byKxfOmN4pas3"

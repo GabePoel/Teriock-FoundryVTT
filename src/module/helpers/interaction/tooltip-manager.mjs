@@ -6,12 +6,6 @@ const { TooltipManager } = foundry.helpers.interaction;
 /** @inheritDoc */
 export default class TeriockTooltipManager extends TooltipManager {
   /**
-   * The HTML to display for a tooltip that's loading.
-   * @type {string}
-   */
-  static LOADING_TOOLTIP_HTML;
-
-  /**
    * A custom CSS class which has different padding and other styling for rich document tooltips.
    * @type {string}
    */
@@ -24,20 +18,16 @@ export default class TeriockTooltipManager extends TooltipManager {
   static RICH_TOOLTIP_WIDTH = 350;
 
   /**
-   * Initialize the loading tooltip.
-   * @return {Promise<void>}
-   */
-  static async initializeLoadingTooltip() {
-    TeriockTooltipManager.LOADING_TOOLTIP_HTML = await TeriockTextEditor.makeTooltip(
-      TERIOCK.display.panel.premade.loading,
-    );
-  }
-
-  /**
    * Internal cache of allowed document names.
    * @type {Set<string>}
    */
   #allowedDocumentNames;
+
+  /**
+   * The HTML to display for a tooltip that's loading.
+   * @type {string}
+   */
+  #loadingTooltipHTML;
 
   /**
    * Constrain a rich tooltip to the space below its current top so any content that expands doesn't go off screen.
@@ -84,7 +74,7 @@ export default class TeriockTooltipManager extends TooltipManager {
       const tooltipClass = [element.dataset.tooltipClass];
       tooltipClass.push(TeriockTooltipManager.RICH_TOOLTIP_CLASS);
       element.dataset.tooltipClass = toClass(tooltipClass.filter(Boolean));
-      element.dataset.tooltipHtml = TeriockTooltipManager.LOADING_TOOLTIP_HTML;
+      element.dataset.tooltipHtml = this.#loadingTooltipHTML;
       this.#fetchRichTooltip(element);
     }
   }
@@ -142,6 +132,14 @@ export default class TeriockTooltipManager extends TooltipManager {
     document.body.addEventListener("pointerenter", this.#onActivateRich.bind(this), { capture: true, passive: true });
     document.body.addEventListener("click", this.#onToggleCollapse.bind(this), { capture: true });
     super.activateListeners(document, { _deprecated });
+  }
+
+  /**
+   * Initialize the loading tooltip.
+   * @return {Promise<void>}
+   */
+  async initializeLoadingTooltip() {
+    this.#loadingTooltipHTML = await TeriockTextEditor.makeTooltip(TERIOCK.display.panel.premade.loading);
   }
 
   /**

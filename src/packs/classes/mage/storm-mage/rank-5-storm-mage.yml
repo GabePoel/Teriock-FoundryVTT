@@ -284,6 +284,237 @@ effects:
       targets:
         - self
     type: ability
+  - _id: CA9h9ZxWrQYGbf4C
+    _key: "!items.effects!5f40dd167e5eda8d.CA9h9ZxWrQYGbf4C"
+    img: systems/teriock/src/icons/abilities/storm-disciplines.webp
+    name: Adept Storm Spell Cast
+    system:
+      _sup: 4q5c1jkk9JJuVuOG
+      automations:
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Storm element spells]{storm spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-storm-spell-cast
+    type: resource
+  - _id: xTXyWY5vdT0Gcve1
+    _key: "!items.effects!5f40dd167e5eda8d.xTXyWY5vdT0Gcve1"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.05be51aae1ccc8d4
+    img: systems/teriock/src/icons/abilities/bouncy-casting.webp
+    name: Bouncy Casting
+    system:
+      _sup: 4q5c1jkk9JJuVuOG
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      effectTypes:
+        - displacement
+      executionTime:
+        base: r0
+      identifier: bouncy-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may choose a new @Identifier[core:targets]{target} for the @Wiki[Category:Spells]{spell}. All
+          @Identifier[core:attack-interaction]{attack rolls}, @Identifier[core:feat-interaction]{feat saves}, and other
+          dice rolls or effects are re-rolled or re-calculated as if the @Wiki[Category:Spells]{spell} was cast on the
+          new target. The @Identifier[core:range]{range} of the @Wiki[Category:Spells]{spell} remains unchanged, but is
+          calculated from the new @Identifier[core:targets]{target} instead of from you.</p><p class="note"><b>Note:</b>
+          If the @Wiki[Category:Spells]{spell} was @Identifier[core:heightening]{heightened}, or you spent any other
+          @Wiki[Category:Cost spells]{costs} on the @Wiki[Category:Spells]{spell}, those remain unchanged and do not
+          need to be re-spent.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>The @Identifier[core:targets]{target} of a @Wiki[Category:Spells]{spell} does not get affected by your
+        @Wiki[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: VzQLIiSAGTueTMsn
+    _key: "!items.effects!5f40dd167e5eda8d.VzQLIiSAGTueTMsn"
+    img: systems/teriock/src/icons/abilities/storm-disciplines.webp
+    name: Half-Time Ritual Storm Spell Cast
+    system:
+      _sup: 4q5c1jkk9JJuVuOG
+      automations:
+        - _id: XqnlTxp6N0lZCFaB
+          formula: "1"
+          trigger: shortRest
+          type: changeQuantity
+        - _id: lnI5XgS0RD02tQbn
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
+        spells]{ritual} @Wiki[Category:Storm element spells]{storm spell} in half the time it would normally take.</p>
+      identifier: half-time-ritual-storm-spell-cast
+    type: resource
+  - _id: YI2nUhdpfts3RDQk
+    _key: "!items.effects!5f40dd167e5eda8d.YI2nUhdpfts3RDQk"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QM3oXhyj81ZXmp3
+    img: systems/teriock/src/icons/abilities/illusive-casting.webp
+    name: Illusive Casting
+    system:
+      _sup: 4q5c1jkk9JJuVuOG
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      duration:
+        raw: "24"
+        unit: hour
+      effectTypes:
+        - illusion
+        - mental
+      endCondition: <p>You are no longer casting the triggering @Wiki[Category:Spells]{spell}.</p>
+      executionTime:
+        base: r0
+      identifier: illusive-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering @Wiki[Category:Spells]{spell} appears to be a different @Pack[teriock.abilities]{ability} of
+          the same @Wiki[Category:Delivery abilities]{delivery}. This is a @Identifier[keyword:illusionary]{minor
+          illusion}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: FXZsIEH1YkqdNjOg
+    _key: "!items.effects!5f40dd167e5eda8d.FXZsIEH1YkqdNjOg"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.45d262c72421007d
+    img: systems/teriock/src/icons/abilities/reflect-magic.webp
+    name: Reflect Magic
+    system:
+      _sup: NsJ8jXC941tUnRzb
+      automations:
+        - _id: 7400b41f20d9f100
+          deleteOnTurnChange: false
+          radius: 10 + 15 * @h
+          restriction:
+            type: move
+          trigger: executeInput
+          type: region
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: aura
+      elements:
+        - storm
+      executionTime:
+        base: r1
+      form: special
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+        @Identifier[core:range]{range} of this increases by 15 feet.</p>
+      identifier: reflect-magic
+      interaction: manifest
+      invoked: true
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
+          @Identifier[core:fizzles]{fizzles}, as do any others cast simultaneously within
+          @Identifier[core:range]{range}. Their casters take the @Wiki[Category:Conjured spells]{spells'} effects
+          instead.</p>
+      powerSources:
+        - magical
+      range:
+        raw: "10"
+        unit: ft
+      requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
+    type: ability
+  - _id: kqfb2BYdL2YWDVbs
+    _key: "!items.effects!5f40dd167e5eda8d.kqfb2BYdL2YWDVbs"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: 0I3QIXHQZOPnIqJv
+      automations:
+        - _id: bJn9LIvdgJ11S1tr
+          local:
+            qualifier: and(@spell, @delivery.missile, @pro)
+          trigger: execute
+          type: useDocuments
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      executionTime:
+        base: r0
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @Identifier[ability:lightning-ray]{Lightning Ray} and @Identifier[ability:ice-ball]{Ice
+        Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
+          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
+          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
+      powerSources:
+        - magical
+      skill: true
+      standard: true
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
+        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
+        successfully applied.</p>
+    type: ability
   - _id: 2GY9ZYLOAlhnWDdn
     _key: "!items.effects!5f40dd167e5eda8d.2GY9ZYLOAlhnWDdn"
     _stats:
@@ -352,237 +583,6 @@ effects:
         - area
         - creature
     type: ability
-  - _id: FXZsIEH1YkqdNjOg
-    _key: "!items.effects!5f40dd167e5eda8d.FXZsIEH1YkqdNjOg"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.45d262c72421007d
-    img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    name: Reflect Magic
-    system:
-      _sup: NsJ8jXC941tUnRzb
-      automations:
-        - _id: 7400b41f20d9f100
-          deleteOnTurnChange: false
-          radius: 10 + 15 * @h
-          restriction:
-            type: move
-          trigger: executeInput
-          type: region
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: aura
-      elements:
-        - storm
-      executionTime:
-        base: r1
-      form: special
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
-        @Identifier[core:range]{range} of this increases by 15 feet.</p>
-      identifier: reflect-magic
-      interaction: manifest
-      invoked: true
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
-          @Identifier[core:fizzles]{fizzles}, as do any others cast simultaneously within
-          @Identifier[core:range]{range}. Their casters take the @Wiki[Category:Conjured spells]{spells'} effects
-          instead.</p>
-      powerSources:
-        - magical
-      range:
-        raw: "10"
-        unit: ft
-      requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
-    type: ability
-  - _id: xTXyWY5vdT0Gcve1
-    _key: "!items.effects!5f40dd167e5eda8d.xTXyWY5vdT0Gcve1"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.05be51aae1ccc8d4
-    img: systems/teriock/src/icons/abilities/bouncy-casting.webp
-    name: Bouncy Casting
-    system:
-      _sup: 4q5c1jkk9JJuVuOG
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      effectTypes:
-        - displacement
-      executionTime:
-        base: r0
-      identifier: bouncy-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may choose a new @Identifier[core:targets]{target} for the @Wiki[Category:Spells]{spell}. All
-          @Identifier[core:attack-interaction]{attack rolls}, @Identifier[core:feat-interaction]{feat saves}, and other
-          dice rolls or effects are re-rolled or re-calculated as if the @Wiki[Category:Spells]{spell} was cast on the
-          new target. The @Identifier[core:range]{range} of the @Wiki[Category:Spells]{spell} remains unchanged, but is
-          calculated from the new @Identifier[core:targets]{target} instead of from you.</p><p class="note"><b>Note:</b>
-          If the @Wiki[Category:Spells]{spell} was @Identifier[core:heightening]{heightened}, or you spent any other
-          @Wiki[Category:Cost spells]{costs} on the @Wiki[Category:Spells]{spell}, those remain unchanged and do not
-          need to be re-spent.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>The @Identifier[core:targets]{target} of a @Wiki[Category:Spells]{spell} does not get affected by your
-        @Wiki[Category:Spells]{spell}.</p>
-    type: ability
-  - _id: YI2nUhdpfts3RDQk
-    _key: "!items.effects!5f40dd167e5eda8d.YI2nUhdpfts3RDQk"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QM3oXhyj81ZXmp3
-    img: systems/teriock/src/icons/abilities/illusive-casting.webp
-    name: Illusive Casting
-    system:
-      _sup: 4q5c1jkk9JJuVuOG
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      duration:
-        raw: "24"
-        unit: hour
-      effectTypes:
-        - illusion
-        - mental
-      endCondition: <p>You are no longer casting the triggering @Wiki[Category:Spells]{spell}.</p>
-      executionTime:
-        base: r0
-      identifier: illusive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The triggering @Wiki[Category:Spells]{spell} appears to be a different @Pack[teriock.abilities]{ability} of
-          the same @Wiki[Category:Delivery abilities]{delivery}. This is a @Identifier[keyword:illusionary]{minor
-          illusion}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    type: ability
-  - _id: kqfb2BYdL2YWDVbs
-    _key: "!items.effects!5f40dd167e5eda8d.kqfb2BYdL2YWDVbs"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: 0I3QIXHQZOPnIqJv
-      automations:
-        - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      executionTime:
-        base: r0
-      identifier: spell-strike
-      interaction: manifest
-      limitation: >-
-        <p>Only usable with @Identifier[ability:lightning-ray]{Lightning Ray} and @Identifier[ability:ice-ball]{Ice
-        Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
-          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
-          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
-      powerSources:
-        - magical
-      skill: true
-      standard: true
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
-        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
-        successfully applied.</p>
-    type: ability
-  - _id: VzQLIiSAGTueTMsn
-    _key: "!items.effects!5f40dd167e5eda8d.VzQLIiSAGTueTMsn"
-    img: systems/teriock/src/icons/abilities/storm-disciplines.webp
-    name: Half-Time Ritual Storm Spell Cast
-    system:
-      _sup: 4q5c1jkk9JJuVuOG
-      automations:
-        - _id: XqnlTxp6N0lZCFaB
-          formula: "1"
-          trigger: shortRest
-          type: changeQuantity
-        - _id: lnI5XgS0RD02tQbn
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
-        spells]{ritual} @Wiki[Category:Storm element spells]{storm spell} in half the time it would normally take.</p>
-      identifier: half-time-ritual-storm-spell-cast
-    type: resource
-  - _id: CA9h9ZxWrQYGbf4C
-    _key: "!items.effects!5f40dd167e5eda8d.CA9h9ZxWrQYGbf4C"
-    img: systems/teriock/src/icons/abilities/storm-disciplines.webp
-    name: Adept Storm Spell Cast
-    system:
-      _sup: 4q5c1jkk9JJuVuOG
-      automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Storm element spells]{storm spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-storm-spell-cast
-    type: resource
 folder: df169041e7e45124
 img: systems/teriock/src/icons/ranks/rank-5-storm-mage.webp
 name: Rank 5 Storm Mage

@@ -278,6 +278,46 @@ items:
             score:
               attribute: snk
         type: ability
+      - _id: bwtZ8hklw1lI8N3j
+        _key: "!actors.items.effects!7c7c15dee4e37db6.7c7c15dee4e37db6.bwtZ8hklw1lI8N3j"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+        img: systems/teriock/src/icons/abilities/agile.webp
+        name: Agile
+        system:
+          _sup: ARCFpHfaK5e1O1jm
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.difficultTerrain
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: agile
+          interaction: manifest
+          limitation: <p>Mountainous terrain only.</p>
+          maneuver: passive
+          overview:
+            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: 9z9XDKRnSEJFLQYS
         _key: "!actors.items.effects!7c7c15dee4e37db6.7c7c15dee4e37db6.9z9XDKRnSEJFLQYS"
         _stats:
@@ -377,46 +417,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: bwtZ8hklw1lI8N3j
-        _key: "!actors.items.effects!7c7c15dee4e37db6.7c7c15dee4e37db6.bwtZ8hklw1lI8N3j"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-        img: systems/teriock/src/icons/abilities/agile.webp
-        name: Agile
-        system:
-          _sup: ARCFpHfaK5e1O1jm
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.speedAdjustments.difficultTerrain
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "3"
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - movement
-          executionTime:
-            base: passive
-          identifier: agile
-          interaction: manifest
-          limitation: <p>Mountainous terrain only.</p>
-          maneuver: passive
-          overview:
-            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/llama.webp
     name: Llama
@@ -436,56 +436,6 @@ items:
         img: systems/teriock/src/icons/creatures/llama.webp
         ringImg: systems/teriock/src/icons/tokens/llama.webp
     type: species
-  - _id: TYNNDpFwGijb9f8c
-    _key: "!actors.items!7c7c15dee4e37db6.TYNNDpFwGijb9f8c"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.5b8d8919d83132d9
-    effects:
-      - _id: RPhAUSwovZYktIQm
-        _key: "!actors.items.effects!7c7c15dee4e37db6.TYNNDpFwGijb9f8c.RPhAUSwovZYktIQm"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
-            abilities}.</p>
-          form: intrinsic
-          identifier: biting
-          powerSources:
-            - martial
-        type: property
-      - _id: StZ8lJiQ1zrTkWMW
-        _key: "!actors.items.effects!7c7c15dee4e37db6.TYNNDpFwGijb9f8c.StZ8lJiQ1zrTkWMW"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
-        img: systems/teriock/src/icons/properties/weapon.webp
-        name: Weapon
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Identifier[core:attack-interaction]{attack}.</p>
-          form: intrinsic
-          identifier: weapon
-        type: property
-    folder: 30f4d11e5e53d332
-    img: systems/teriock/src/icons/body-parts/jaw.webp
-    name: Jaw
-    system:
-      _sup: 7c7c15dee4e37db6
-      damage:
-        base: 1d4
-      fightingStyle: savage
-      identifier: jaw
-      range:
-        long:
-          unit: melee
-    type: body
   - _id: YFM1NorPgOv38IvW
     _key: "!actors.items!7c7c15dee4e37db6.YFM1NorPgOv38IvW"
     _stats:
@@ -548,6 +498,56 @@ items:
       range:
         long:
           unit: self
+    type: body
+  - _id: TYNNDpFwGijb9f8c
+    _key: "!actors.items!7c7c15dee4e37db6.TYNNDpFwGijb9f8c"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.5b8d8919d83132d9
+    effects:
+      - _id: RPhAUSwovZYktIQm
+        _key: "!actors.items.effects!7c7c15dee4e37db6.TYNNDpFwGijb9f8c.RPhAUSwovZYktIQm"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: biting
+          powerSources:
+            - martial
+        type: property
+      - _id: StZ8lJiQ1zrTkWMW
+        _key: "!actors.items.effects!7c7c15dee4e37db6.TYNNDpFwGijb9f8c.StZ8lJiQ1zrTkWMW"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+        type: property
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/icons/body-parts/jaw.webp
+    name: Jaw
+    system:
+      _sup: 7c7c15dee4e37db6
+      damage:
+        base: 1d4
+      fightingStyle: savage
+      identifier: jaw
+      range:
+        long:
+          unit: melee
     type: body
 name: Llama
 prototypeToken:

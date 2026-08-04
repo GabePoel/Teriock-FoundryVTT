@@ -656,6 +656,49 @@ effects:
       targets:
         - self
     type: ability
+  - _id: gdP1XGYM8iFvzM1s
+    _key: "!items.effects!073355c8b877b782.gdP1XGYM8iFvzM1s"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: l8SDHfTGZEmCI7mF
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
+      powerSources:
+        - magical
+        - primal
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: zNuM68aTDFssm36u
     _key: "!items.effects!073355c8b877b782.zNuM68aTDFssm36u"
     _stats:
@@ -720,6 +763,80 @@ effects:
       targets:
         - self
     type: ability
+  - _id: lsCaG8905YirOCkV
+    _key: "!items.effects!073355c8b877b782.lsCaG8905YirOCkV"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
+    img: systems/teriock/src/icons/abilities/magical-durability.webp
+    name: Magical Durability
+    system:
+      _sup: l8SDHfTGZEmCI7mF
+      affinities:
+        - _id: NxGVe5qLdm9laW3Q
+          category: damageTypes
+          type: immunity
+          value: mundane
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime:
+        base: passive
+      form: special
+      identifier: magical-durability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[damage:mundane]{mundane}
+          @Identifier[core:damage]{damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: MDx8ZwSffjvUn8ke
+    _key: "!items.effects!073355c8b877b782.MDx8ZwSffjvUn8ke"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+    name: Mana Drain Touch
+    system:
+      _sup: l8SDHfTGZEmCI7mF
+      automations:
+        - _id: xreyNK2IzDp9qCUE
+          type: revitalize
+        - _id: 157afc517847f562
+          formula: 1d8[mana]
+          impact: drain
+          type: roll
+      competence:
+        raw: 1
+      delivery: hand
+      effectTypes:
+        - draining
+        - revitalization
+      form: special
+      identifier: mana-drain-touch
+      powerSources:
+        - magical
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
+          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
+          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+    type: ability
   - _id: 3XlHbf2OGRpthQIx
     _key: "!items.effects!073355c8b877b782.3XlHbf2OGRpthQIx"
     _stats:
@@ -757,86 +874,6 @@ effects:
           <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened} and
           @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
           @Identifier[condition:transformed]{transformed}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: gdP1XGYM8iFvzM1s
-    _key: "!items.effects!073355c8b877b782.gdP1XGYM8iFvzM1s"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
-    system:
-      _sup: l8SDHfTGZEmCI7mF
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "120"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      identifier: ethereal-senses
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
-      powerSources:
-        - magical
-        - primal
-        - spiritual
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: lsCaG8905YirOCkV
-    _key: "!items.effects!073355c8b877b782.lsCaG8905YirOCkV"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
-    img: systems/teriock/src/icons/abilities/magical-durability.webp
-    name: Magical Durability
-    system:
-      _sup: l8SDHfTGZEmCI7mF
-      affinities:
-        - _id: NxGVe5qLdm9laW3Q
-          category: damageTypes
-          type: immunity
-          value: mundane
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - immunity
-      executionTime:
-        base: passive
-      form: special
-      identifier: magical-durability
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[damage:mundane]{mundane}
-          @Identifier[core:damage]{damage}.</p>
       powerSources:
         - magical
       range:
@@ -894,43 +931,6 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: MDx8ZwSffjvUn8ke
-    _key: "!items.effects!073355c8b877b782.MDx8ZwSffjvUn8ke"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
-    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
-    name: Mana Drain Touch
-    system:
-      _sup: l8SDHfTGZEmCI7mF
-      automations:
-        - _id: xreyNK2IzDp9qCUE
-          type: revitalize
-        - _id: 157afc517847f562
-          formula: 1d8[mana]
-          impact: drain
-          type: roll
-      competence:
-        raw: 1
-      delivery: hand
-      effectTypes:
-        - draining
-        - revitalization
-      form: special
-      identifier: mana-drain-touch
-      powerSources:
-        - magical
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
-          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
-          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
     type: ability
 folder: bd7120d756dc6f4f
 img: systems/teriock/src/icons/creatures/white-mist-wraith.webp

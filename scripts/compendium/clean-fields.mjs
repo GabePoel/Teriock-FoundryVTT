@@ -65,6 +65,7 @@ const COLLECTION_RECORD = {
   effects: "ActiveEffect",
   items: "Item",
   pages: "JournalEntryPage",
+  results: "TableResult",
   tables: "RollTable",
 };
 

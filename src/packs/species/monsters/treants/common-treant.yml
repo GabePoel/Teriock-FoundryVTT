@@ -466,14 +466,14 @@ effects:
       targets:
         - self
     type: ability
-  - _id: GiQvaq44AnGXK4I6
-    _key: "!items.effects!ccd0715987a869ba.GiQvaq44AnGXK4I6"
+  - _id: KLWm3ha4NdkE8NcJ
+    _key: "!items.effects!ccd0715987a869ba.KLWm3ha4NdkE8NcJ"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
-    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-    name: Supernatural Strength
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      _sup: gsna80Va4M0x2TWO
+      _sup: zuAgWP6Rw5gqSdM0
       competence:
         raw: 1
       delivery: self
@@ -481,27 +481,26 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: special
-      identifier: supernatural-strength
+      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
-          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
-          @Identifier[keyword:deboosted]{deboost} any melee
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-          @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</p>
       powerSources:
         - martial
       range:
         unit: self
+      skill: true
+      standard: true
       targets:
         - self
       upgrades:
         score:
           attribute: str
-          value: 4
+          value: 1
     type: ability
   - _id: vMAzz0AfSX9kKKLj
     _key: "!items.effects!ccd0715987a869ba.vMAzz0AfSX9kKKLj"
@@ -543,6 +542,35 @@ effects:
           attribute: str
           value: 3
     type: ability
+  - _id: DgviC26xUDvYw2eo
+    _key: "!items.effects!ccd0715987a869ba.DgviC26xUDvYw2eo"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: zuAgWP6Rw5gqSdM0
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: zuAgWP6Rw5gqSdM0
     _key: "!items.effects!ccd0715987a869ba.zuAgWP6Rw5gqSdM0"
     _stats:
@@ -577,71 +605,6 @@ effects:
         score:
           attribute: str
           value: 2
-    type: ability
-  - _id: KLWm3ha4NdkE8NcJ
-    _key: "!items.effects!ccd0715987a869ba.KLWm3ha4NdkE8NcJ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: zuAgWP6Rw5gqSdM0
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
-          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
-          @Identifier[keyword:armor-voiding]{AV0}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    type: ability
-  - _id: DgviC26xUDvYw2eo
-    _key: "!items.effects!ccd0715987a869ba.DgviC26xUDvYw2eo"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: zuAgWP6Rw5gqSdM0
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
     type: ability
   - _id: vvNeZkJanEXYCa7E
     _key: "!items.effects!ccd0715987a869ba.vvNeZkJanEXYCa7E"
@@ -709,6 +672,43 @@ effects:
       requirements: <p>You are holding the target.</p>
       targets:
         - item
+    type: ability
+  - _id: GiQvaq44AnGXK4I6
+    _key: "!items.effects!ccd0715987a869ba.GiQvaq44AnGXK4I6"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
+    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    name: Supernatural Strength
+    system:
+      _sup: gsna80Va4M0x2TWO
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: special
+      identifier: supernatural-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
+          @Identifier[keyword:deboosted]{deboost} any melee
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 4
     type: ability
 folder: 615ff873d830ae70
 img: systems/teriock/src/icons/creatures/common-treant.webp

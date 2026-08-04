@@ -365,6 +365,42 @@ items:
           targets:
             - self
         type: ability
+      - _id: G1HTN84p4xIshEjz
+        _key: "!actors.items.effects!2df073aface0d752.2df073aface0d752.G1HTN84p4xIshEjz"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.103a1d356ae8fc20
+        img: systems/teriock/src/icons/abilities/diving.webp
+        name: Diving
+        system:
+          _sup: ncKdIdklPmWSchjx
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: diving
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
+            fluent: >-
+              <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
+              @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>
+            proficient: >-
+              <p>You are also skilled at landing from difficult @Identifier[core:falling]{falls} into water. The
+              @Identifier[core:damage]{damage} you would take from @Identifier[core:falling]{falling} into water is
+              @Identifier[keyword:deboosted]{deboosted} @Identifier[core:proficiency-bonus]{P} times.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
       - _id: 5acAEoFc61AhLvNc
         _key: "!actors.items.effects!2df073aface0d752.2df073aface0d752.5acAEoFc61AhLvNc"
         _stats:
@@ -409,42 +445,6 @@ items:
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
-        type: ability
-      - _id: G1HTN84p4xIshEjz
-        _key: "!actors.items.effects!2df073aface0d752.2df073aface0d752.G1HTN84p4xIshEjz"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.103a1d356ae8fc20
-        img: systems/teriock/src/icons/abilities/diving.webp
-        name: Diving
-        system:
-          _sup: ncKdIdklPmWSchjx
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: diving
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
-            fluent: >-
-              <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
-              @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>
-            proficient: >-
-              <p>You are also skilled at landing from difficult @Identifier[core:falling]{falls} into water. The
-              @Identifier[core:damage]{damage} you would take from @Identifier[core:falling]{falling} into water is
-              @Identifier[keyword:deboosted]{deboosted} @Identifier[core:proficiency-bonus]{P} times.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
         type: ability
       - _id: BvZ8SezrAH1mHPPi
         _key: "!actors.items.effects!2df073aface0d752.2df073aface0d752.BvZ8SezrAH1mHPPi"
@@ -577,6 +577,29 @@ items:
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
     effects:
+      - _id: dyRYEEhB3N7j2eaE
+        _key: "!actors.items.effects!2df073aface0d752.ROpBlJkdVidU4swK.dyRYEEhB3N7j2eaE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!2df073aface0d752.ROpBlJkdVidU4swK.Q3eKznomGL4eVOGB"
         _stats:
@@ -608,29 +631,6 @@ items:
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        type: property
-      - _id: dyRYEEhB3N7j2eaE
-        _key: "!actors.items.effects!2df073aface0d752.ROpBlJkdVidU4swK.dyRYEEhB3N7j2eaE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/ferocious-jaw.webp

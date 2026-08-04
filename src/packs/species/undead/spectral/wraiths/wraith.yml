@@ -536,6 +536,42 @@ effects:
       targets:
         - self
     type: ability
+  - _id: 6kBEQXrBi77zFHiZ
+    _key: "!items.effects!d2c2c8c7ff9c7586.6kBEQXrBi77zFHiZ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: BoTxWAzux7mRGo3l
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: healing-sensitivity
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
+          providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you roll
+          your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
+          @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
+          @Identifier[core:healing]{healing} effect. This does not consume any of your
+          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: cPpqERpydTjgawvN
     _key: "!items.effects!d2c2c8c7ff9c7586.cPpqERpydTjgawvN"
     _stats:
@@ -572,6 +608,43 @@ effects:
         unit: self
       targets:
         - self
+    type: ability
+  - _id: dukMNdfFGbxr5wjm
+    _key: "!items.effects!d2c2c8c7ff9c7586.dukMNdfFGbxr5wjm"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+    name: Mana Drain Touch
+    system:
+      _sup: BoTxWAzux7mRGo3l
+      automations:
+        - _id: xreyNK2IzDp9qCUE
+          type: revitalize
+        - _id: 157afc517847f562
+          formula: 1d8[mana]
+          impact: drain
+          type: roll
+      competence:
+        raw: 1
+      delivery: hand
+      effectTypes:
+        - draining
+        - revitalization
+      form: special
+      identifier: mana-drain-touch
+      powerSources:
+        - magical
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
+          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
+          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
     type: ability
   - _id: S22TYD9GKSnQ0hqB
     _key: "!items.effects!d2c2c8c7ff9c7586.S22TYD9GKSnQ0hqB"
@@ -610,42 +683,6 @@ effects:
           <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened} and
           @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
           @Identifier[condition:transformed]{transformed}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: 6kBEQXrBi77zFHiZ
-    _key: "!items.effects!d2c2c8c7ff9c7586.6kBEQXrBi77zFHiZ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    name: Healing Sensitivity
-    system:
-      _sup: BoTxWAzux7mRGo3l
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      form: flaw
-      identifier: healing-sensitivity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
-          providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you roll
-          your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
-          @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
-          @Identifier[core:healing]{healing} effect. This does not consume any of your
-          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
       powerSources:
         - magical
       range:
@@ -703,43 +740,6 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: dukMNdfFGbxr5wjm
-    _key: "!items.effects!d2c2c8c7ff9c7586.dukMNdfFGbxr5wjm"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
-    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
-    name: Mana Drain Touch
-    system:
-      _sup: BoTxWAzux7mRGo3l
-      automations:
-        - _id: xreyNK2IzDp9qCUE
-          type: revitalize
-        - _id: 157afc517847f562
-          formula: 1d8[mana]
-          impact: drain
-          type: roll
-      competence:
-        raw: 1
-      delivery: hand
-      effectTypes:
-        - draining
-        - revitalization
-      form: special
-      identifier: mana-drain-touch
-      powerSources:
-        - magical
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
-          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
-          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
     type: ability
 folder: bd7120d756dc6f4f
 img: systems/teriock/src/icons/creatures/wraith.webp

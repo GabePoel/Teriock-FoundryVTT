@@ -89,46 +89,24 @@ effects:
           attribute: int
           value: 1
     type: ability
-  - _id: 9elYP3Wu3I3wnutv
-    _key: "!items.effects!nNYNMDLB23QAc92H.9elYP3Wu3I3wnutv"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d90fdbbec5b331d
-    img: systems/teriock/src/icons/abilities/territorial-casting.webp
-    name: Territorial Casting
+  - _id: LDmruapFAx0ULGlC
+    _key: "!items.effects!nNYNMDLB23QAc92H.LDmruapFAx0ULGlC"
+    img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+    name: Adept Nature Spell Cast
     system:
       _sup: o51YzM1EY4vQpr4C
       automations:
-        - _id: 4ReYeDgqGQpnJFk3
-          automatic: false
-          local:
-            qualifier: and(@ability, @spell, @time.a1)
-          trigger: execute
-          type: useDocuments
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
       competence:
         raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r1
-      identifier: territorial-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You cast a @Wiki[Category:Single action spells]{single action spell} at the triggering creature.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>Another creature moves within 5 feet of you.</p>
-    type: ability
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Nature element spells]{nature spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-nature-spell-cast
+    type: resource
   - _id: O8YyDZgnTKaqgo2t
     _key: "!items.effects!nNYNMDLB23QAc92H.O8YyDZgnTKaqgo2t"
     _stats:
@@ -191,24 +169,46 @@ effects:
         spells]{ritual} @Wiki[Category:Nature element spells]{nature spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-nature-spell-cast
     type: resource
-  - _id: LDmruapFAx0ULGlC
-    _key: "!items.effects!nNYNMDLB23QAc92H.LDmruapFAx0ULGlC"
-    img: systems/teriock/src/icons/abilities/nature-disciplines.webp
-    name: Adept Nature Spell Cast
+  - _id: 9elYP3Wu3I3wnutv
+    _key: "!items.effects!nNYNMDLB23QAc92H.9elYP3Wu3I3wnutv"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d90fdbbec5b331d
+    img: systems/teriock/src/icons/abilities/territorial-casting.webp
+    name: Territorial Casting
     system:
       _sup: o51YzM1EY4vQpr4C
       automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
+        - _id: 4ReYeDgqGQpnJFk3
+          automatic: false
+          local:
+            qualifier: and(@ability, @spell, @time.a1)
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Nature element spells]{nature spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-nature-spell-cast
-    type: resource
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      executionTime:
+        base: r1
+      identifier: territorial-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: <p>You cast a @Wiki[Category:Single action spells]{single action spell} at the triggering creature.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>Another creature moves within 5 feet of you.</p>
+    type: ability
 folder: 997cd433ccad17d7
 img: systems/teriock/src/icons/ranks/rank-4-nature-mage.webp
 name: Rank 4 Nature Mage

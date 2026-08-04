@@ -364,6 +364,61 @@ items:
           targets:
             - self
         type: ability
+      - _id: OxATBIBieAP3DvRa
+        _key: "!actors.items.effects!1c1270d2c7f44138.1c1270d2c7f44138.OxATBIBieAP3DvRa"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
+        system:
+          _sup: bKmkQhfi0JZm1g3p
+          automations:
+            - _id: AXwLjBzDx4XcVcAJ
+              movementAction: climb
+              type: changeMovement
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.climb
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
+            - _id: f025905e157ac261
+              changes:
+                - key: system.speedAdjustments.climb
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              competencies:
+                - 1
+                - 2
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: climbing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: fjgqrITyddhm76KW
         _key: "!actors.items.effects!1c1270d2c7f44138.1c1270d2c7f44138.fjgqrITyddhm76KW"
         _stats:
@@ -437,61 +492,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: OxATBIBieAP3DvRa
-        _key: "!actors.items.effects!1c1270d2c7f44138.1c1270d2c7f44138.OxATBIBieAP3DvRa"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
-        img: systems/teriock/src/icons/abilities/climbing.webp
-        name: Climbing
-        system:
-          _sup: bKmkQhfi0JZm1g3p
-          automations:
-            - _id: AXwLjBzDx4XcVcAJ
-              movementAction: climb
-              type: changeMovement
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.speedAdjustments.climb
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "2"
-              type: changes
-            - _id: f025905e157ac261
-              changes:
-                - key: system.speedAdjustments.climb
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "3"
-              competencies:
-                - 1
-                - 2
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - movement
-          executionTime:
-            base: passive
-          identifier: climbing
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
-            proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
       - _id: xJFBYxaPD99H1Ivh
         _key: "!actors.items.effects!1c1270d2c7f44138.1c1270d2c7f44138.xJFBYxaPD99H1Ivh"
         _stats:
@@ -547,6 +547,29 @@ items:
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
     effects:
+      - _id: dyRYEEhB3N7j2eaE
+        _key: "!actors.items.effects!1c1270d2c7f44138.0Jpl3wICQvAVedrt.dyRYEEhB3N7j2eaE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!1c1270d2c7f44138.0Jpl3wICQvAVedrt.Q3eKznomGL4eVOGB"
         _stats:
@@ -578,29 +601,6 @@ items:
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        type: property
-      - _id: dyRYEEhB3N7j2eaE
-        _key: "!actors.items.effects!1c1270d2c7f44138.0Jpl3wICQvAVedrt.dyRYEEhB3N7j2eaE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/ferocious-jaw.webp
@@ -669,6 +669,29 @@ items:
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7260c2d897d27b39
     effects:
+      - _id: N3v2gCnZl7LzFaYE
+        _key: "!actors.items.effects!1c1270d2c7f44138.wsob6YHFBEmQtOU9.N3v2gCnZl7LzFaYE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: GhjutpAE4maLSrd2
         _key: "!actors.items.effects!1c1270d2c7f44138.wsob6YHFBEmQtOU9.GhjutpAE4maLSrd2"
         _stats:
@@ -700,29 +723,6 @@ items:
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        type: property
-      - _id: N3v2gCnZl7LzFaYE
-        _key: "!actors.items.effects!1c1270d2c7f44138.wsob6YHFBEmQtOU9.N3v2gCnZl7LzFaYE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/rending-claw.webp

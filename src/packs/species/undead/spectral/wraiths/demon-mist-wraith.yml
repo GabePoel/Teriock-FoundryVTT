@@ -759,6 +759,49 @@ effects:
           attribute: int
           value: 4
     type: ability
+  - _id: TVxLNTRFblKoMnjG
+    _key: "!items.effects!fdec3f206b747460.TVxLNTRFblKoMnjG"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: Ie7STenDc7Ro4bLE
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
+      powerSources:
+        - magical
+        - primal
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: XQ3vAISNiIN8kBIT
     _key: "!items.effects!fdec3f206b747460.XQ3vAISNiIN8kBIT"
     _stats:
@@ -832,6 +875,43 @@ effects:
       targets:
         - self
     type: ability
+  - _id: a5BIFSxbB50saF5C
+    _key: "!items.effects!fdec3f206b747460.a5BIFSxbB50saF5C"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+    name: Mana Drain Touch
+    system:
+      _sup: Ie7STenDc7Ro4bLE
+      automations:
+        - _id: xreyNK2IzDp9qCUE
+          type: revitalize
+        - _id: 157afc517847f562
+          formula: 1d8[mana]
+          impact: drain
+          type: roll
+      competence:
+        raw: 1
+      delivery: hand
+      effectTypes:
+        - draining
+        - revitalization
+      form: special
+      identifier: mana-drain-touch
+      powerSources:
+        - magical
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
+          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
+          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+    type: ability
   - _id: 9SEBhSJhXfsOGN27
     _key: "!items.effects!fdec3f206b747460.9SEBhSJhXfsOGN27"
     _stats:
@@ -875,86 +955,6 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: TVxLNTRFblKoMnjG
-    _key: "!items.effects!fdec3f206b747460.TVxLNTRFblKoMnjG"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
-    system:
-      _sup: Ie7STenDc7Ro4bLE
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "120"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - sensory
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      identifier: ethereal-senses
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
-      powerSources:
-        - magical
-        - primal
-        - spiritual
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: a5BIFSxbB50saF5C
-    _key: "!items.effects!fdec3f206b747460.a5BIFSxbB50saF5C"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
-    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
-    name: Mana Drain Touch
-    system:
-      _sup: Ie7STenDc7Ro4bLE
-      automations:
-        - _id: xreyNK2IzDp9qCUE
-          type: revitalize
-        - _id: 157afc517847f562
-          formula: 1d8[mana]
-          impact: drain
-          type: roll
-      competence:
-        raw: 1
-      delivery: hand
-      effectTypes:
-        - draining
-        - revitalization
-      form: special
-      identifier: mana-drain-touch
-      powerSources:
-        - magical
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
-          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
-          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
     type: ability
   - _id: Hd0ASm1VKGUfHjSN
     _key: "!items.effects!fdec3f206b747460.Hd0ASm1VKGUfHjSN"

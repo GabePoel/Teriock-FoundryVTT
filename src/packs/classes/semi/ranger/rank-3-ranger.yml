@@ -235,58 +235,6 @@ effects:
       targets:
         - self
     type: ability
-  - _id: 5A7AQIGYGLrrgrtZ
-    _key: "!items.effects!14c5aab31b12ed13.5A7AQIGYGLrrgrtZ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5f951de778479e56
-    img: systems/teriock/src/icons/abilities/stamina.webp
-    name: Stamina
-    system:
-      _sup: Y2GUAf4QcOtmWtLz
-      affinities:
-        - _id: suLYYH4S6R39pqk6
-          activeQualifier: not(@status.down)
-          category: other
-          type: resistance
-          value: Dropping From Negative MP
-      automations:
-        - _id: np5FDWRYR63xXIdt
-          changes:
-            - key: system.mp.causes.unconscious
-              phase: derived
-              priority: 10
-              target: Actor
-              type: override
-              value: "false"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - resistance
-      executionTime:
-        base: passive
-      identifier: stamina
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You @Identifier[keyword:resistance]{resist} @Identifier[condition:down]{dropping} due to being at negative
-          @Identifier[core:hit-points-and-mana-points]{MP}. You still @Identifier[condition:dead]{die} when you reach
-          half your maximum @Identifier[core:hit-points-and-mana-points]{MP} below zero and suffer other consequences
-          from negative @Identifier[core:hit-points-and-mana-points]{MP}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: <p>You are @Identifier[rule:up]{up}.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
   - _id: N729ESvR0YY3Jiv8
     _key: "!items.effects!14c5aab31b12ed13.N729ESvR0YY3Jiv8"
     _stats:
@@ -364,6 +312,58 @@ effects:
         - martial
       range:
         unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 5A7AQIGYGLrrgrtZ
+    _key: "!items.effects!14c5aab31b12ed13.5A7AQIGYGLrrgrtZ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5f951de778479e56
+    img: systems/teriock/src/icons/abilities/stamina.webp
+    name: Stamina
+    system:
+      _sup: Y2GUAf4QcOtmWtLz
+      affinities:
+        - _id: suLYYH4S6R39pqk6
+          activeQualifier: not(@status.down)
+          category: other
+          type: resistance
+          value: Dropping From Negative MP
+      automations:
+        - _id: np5FDWRYR63xXIdt
+          changes:
+            - key: system.mp.causes.unconscious
+              phase: derived
+              priority: 10
+              target: Actor
+              type: override
+              value: "false"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+      identifier: stamina
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You @Identifier[keyword:resistance]{resist} @Identifier[condition:down]{dropping} due to being at negative
+          @Identifier[core:hit-points-and-mana-points]{MP}. You still @Identifier[condition:dead]{die} when you reach
+          half your maximum @Identifier[core:hit-points-and-mana-points]{MP} below zero and suffer other consequences
+          from negative @Identifier[core:hit-points-and-mana-points]{MP}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are @Identifier[rule:up]{up}.</p>
+      skill: true
+      standard: true
       targets:
         - self
     type: ability

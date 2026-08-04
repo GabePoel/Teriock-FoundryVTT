@@ -283,35 +283,6 @@ items:
           spell: true
           standard: true
         type: ability
-      - _id: OPAfj7DFzhMx2Ziy
-        _key: "!actors.items.effects!8f0a2557617120b8.8f0a2557617120b8.OPAfj7DFzhMx2Ziy"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        name: Improved Armor Piercing
-        system:
-          _sup: Jfjh8qc9TEQTq9XE
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: improved-armor-piercing
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
       - _id: OTvs8UlEfKA9yjtA
         _key: "!actors.items.effects!8f0a2557617120b8.8f0a2557617120b8.OTvs8UlEfKA9yjtA"
         _stats:
@@ -348,6 +319,35 @@ items:
               attribute: str
               value: 1
         type: ability
+      - _id: OPAfj7DFzhMx2Ziy
+        _key: "!actors.items.effects!8f0a2557617120b8.8f0a2557617120b8.OPAfj7DFzhMx2Ziy"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: Jfjh8qc9TEQTq9XE
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: improved-armor-piercing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
     folder: 481b13774ffecbdd
     img: systems/teriock/src/icons/creatures/weevil-beast.webp
     name: Weevil Beast
@@ -372,30 +372,53 @@ items:
         img: systems/teriock/src/icons/creatures/weevil-beast.webp
         ringImg: systems/teriock/src/icons/tokens/weevil-beast.webp
     type: species
-  - _id: BthhKaXtsU2XoBUL
-    _key: "!actors.items!8f0a2557617120b8.BthhKaXtsU2XoBUL"
+  - _id: dgw687xmo0dWJgZT
+    _key: "!actors.items!8f0a2557617120b8.dgw687xmo0dWJgZT"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
+      compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
     effects:
-      - _id: vgYp2OlY2QgragN9
-        _key: "!actors.items.effects!8f0a2557617120b8.BthhKaXtsU2XoBUL.vgYp2OlY2QgragN9"
+      - _id: dyRYEEhB3N7j2eaE
+        _key: "!actors.items.effects!8f0a2557617120b8.dgw687xmo0dWJgZT.dyRYEEhB3N7j2eaE"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
+      - _id: Q3eKznomGL4eVOGB
+        _key: "!actors.items.effects!8f0a2557617120b8.dgw687xmo0dWJgZT.Q3eKznomGL4eVOGB"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+            <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
           form: intrinsic
-          identifier: handy
+          identifier: biting
           powerSources:
             - martial
         type: property
-      - _id: rxHvNMZbvlGHFxTl
-        _key: "!actors.items.effects!8f0a2557617120b8.BthhKaXtsU2XoBUL.rxHvNMZbvlGHFxTl"
+      - _id: KcaZmxo03XNP3ZbE
+        _key: "!actors.items.effects!8f0a2557617120b8.dgw687xmo0dWJgZT.KcaZmxo03XNP3ZbE"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
         img: systems/teriock/src/icons/properties/weapon.webp
@@ -410,16 +433,16 @@ items:
           identifier: weapon
         type: property
     folder: 481b13774ffecbdd
-    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
-    name: Sharp Claw
+    img: systems/teriock/src/icons/body-parts/ferocious-jaw.webp
+    name: Ferocious Jaw
     system:
       _sup: 8f0a2557617120b8
       bv:
         raw: 1
       damage:
-        base: 1d6
+        base: 1d8
       fightingStyle: savage
-      identifier: sharp-claw
+      identifier: ferocious-jaw
       range:
         long:
           unit: melee
@@ -471,30 +494,30 @@ items:
         long:
           unit: melee
     type: body
-  - _id: dgw687xmo0dWJgZT
-    _key: "!actors.items!8f0a2557617120b8.dgw687xmo0dWJgZT"
+  - _id: BthhKaXtsU2XoBUL
+    _key: "!actors.items!8f0a2557617120b8.BthhKaXtsU2XoBUL"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
+      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
     effects:
-      - _id: Q3eKznomGL4eVOGB
-        _key: "!actors.items.effects!8f0a2557617120b8.dgw687xmo0dWJgZT.Q3eKznomGL4eVOGB"
+      - _id: vgYp2OlY2QgragN9
+        _key: "!actors.items.effects!8f0a2557617120b8.BthhKaXtsU2XoBUL.vgYp2OlY2QgragN9"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
+            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
           form: intrinsic
-          identifier: biting
+          identifier: handy
           powerSources:
             - martial
         type: property
-      - _id: KcaZmxo03XNP3ZbE
-        _key: "!actors.items.effects!8f0a2557617120b8.dgw687xmo0dWJgZT.KcaZmxo03XNP3ZbE"
+      - _id: rxHvNMZbvlGHFxTl
+        _key: "!actors.items.effects!8f0a2557617120b8.BthhKaXtsU2XoBUL.rxHvNMZbvlGHFxTl"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
         img: systems/teriock/src/icons/properties/weapon.webp
@@ -508,40 +531,17 @@ items:
           form: intrinsic
           identifier: weapon
         type: property
-      - _id: dyRYEEhB3N7j2eaE
-        _key: "!actors.items.effects!8f0a2557617120b8.dgw687xmo0dWJgZT.dyRYEEhB3N7j2eaE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
-        type: property
     folder: 481b13774ffecbdd
-    img: systems/teriock/src/icons/body-parts/ferocious-jaw.webp
-    name: Ferocious Jaw
+    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
+    name: Sharp Claw
     system:
       _sup: 8f0a2557617120b8
       bv:
         raw: 1
       damage:
-        base: 1d8
+        base: 1d6
       fightingStyle: savage
-      identifier: ferocious-jaw
+      identifier: sharp-claw
       range:
         long:
           unit: melee

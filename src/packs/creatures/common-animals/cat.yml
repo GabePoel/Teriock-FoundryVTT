@@ -279,6 +279,61 @@ items:
               attribute: snk
               value: 1
         type: ability
+      - _id: JNNQE70jgCIsUe2t
+        _key: "!actors.items.effects!0bec2719aa9daf87.0bec2719aa9daf87.JNNQE70jgCIsUe2t"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
+        system:
+          _sup: De7GQN6aa3rgGqk8
+          automations:
+            - _id: AXwLjBzDx4XcVcAJ
+              movementAction: climb
+              type: changeMovement
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.climb
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
+            - _id: f025905e157ac261
+              changes:
+                - key: system.speedAdjustments.climb
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              competencies:
+                - 1
+                - 2
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: climbing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: bpFbLyI0g5jMQoVt
         _key: "!actors.items.effects!0bec2719aa9daf87.0bec2719aa9daf87.bpFbLyI0g5jMQoVt"
         _stats:
@@ -352,61 +407,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: JNNQE70jgCIsUe2t
-        _key: "!actors.items.effects!0bec2719aa9daf87.0bec2719aa9daf87.JNNQE70jgCIsUe2t"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
-        img: systems/teriock/src/icons/abilities/climbing.webp
-        name: Climbing
-        system:
-          _sup: De7GQN6aa3rgGqk8
-          automations:
-            - _id: AXwLjBzDx4XcVcAJ
-              movementAction: climb
-              type: changeMovement
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.speedAdjustments.climb
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "2"
-              type: changes
-            - _id: f025905e157ac261
-              changes:
-                - key: system.speedAdjustments.climb
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "3"
-              competencies:
-                - 1
-                - 2
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - movement
-          executionTime:
-            base: passive
-          identifier: climbing
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
-            proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/creatures/cat.webp
     name: Cat
@@ -425,6 +425,56 @@ items:
         img: systems/teriock/src/icons/creatures/cat.webp
         ringImg: systems/teriock/src/icons/tokens/cat.webp
     type: species
+  - _id: pkL2ZIaHOYLjTSrw
+    _key: "!actors.items!0bec2719aa9daf87.pkL2ZIaHOYLjTSrw"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.3e24239d1ef97ac2
+    effects:
+      - _id: T6tkKBbgt98kmWzP
+        _key: "!actors.items.effects!0bec2719aa9daf87.pkL2ZIaHOYLjTSrw.T6tkKBbgt98kmWzP"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          powerSources:
+            - martial
+        type: property
+      - _id: r6y26RRRAVSDlLW4
+        _key: "!actors.items.effects!0bec2719aa9daf87.pkL2ZIaHOYLjTSrw.r6y26RRRAVSDlLW4"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+        type: property
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/icons/body-parts/claw.webp
+    name: Claw
+    system:
+      _sup: 0bec2719aa9daf87
+      damage:
+        base: 1d4
+      fightingStyle: savage
+      identifier: claw
+      range:
+        long:
+          unit: melee
+    type: body
   - _id: iUx3gASFnSFK2vYa
     _key: "!actors.items!0bec2719aa9daf87.iUx3gASFnSFK2vYa"
     _stats:
@@ -473,56 +523,6 @@ items:
         base: 1d6
       fightingStyle: savage
       identifier: fanged-jaw
-      range:
-        long:
-          unit: melee
-    type: body
-  - _id: pkL2ZIaHOYLjTSrw
-    _key: "!actors.items!0bec2719aa9daf87.pkL2ZIaHOYLjTSrw"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.3e24239d1ef97ac2
-    effects:
-      - _id: T6tkKBbgt98kmWzP
-        _key: "!actors.items.effects!0bec2719aa9daf87.pkL2ZIaHOYLjTSrw.T6tkKBbgt98kmWzP"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
-            abilities}.</p>
-          form: intrinsic
-          identifier: handy
-          powerSources:
-            - martial
-        type: property
-      - _id: r6y26RRRAVSDlLW4
-        _key: "!actors.items.effects!0bec2719aa9daf87.pkL2ZIaHOYLjTSrw.r6y26RRRAVSDlLW4"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
-        img: systems/teriock/src/icons/properties/weapon.webp
-        name: Weapon
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Identifier[core:attack-interaction]{attack}.</p>
-          form: intrinsic
-          identifier: weapon
-        type: property
-    folder: 30f4d11e5e53d332
-    img: systems/teriock/src/icons/body-parts/claw.webp
-    name: Claw
-    system:
-      _sup: 0bec2719aa9daf87
-      damage:
-        base: 1d4
-      fightingStyle: savage
-      identifier: claw
       range:
         long:
           unit: melee

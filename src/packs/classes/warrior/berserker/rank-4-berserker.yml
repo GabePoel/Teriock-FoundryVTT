@@ -258,43 +258,6 @@ effects:
       skill: true
       standard: true
     type: ability
-  - _id: GW0neZ9YNoKjwBDS
-    _key: "!items.effects!b30faafcad7128b2.GW0neZ9YNoKjwBDS"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    name: Battle Cry Resistance
-    system:
-      _sup: Twt8FZWmnIjSW58R
-      affinities:
-        - _id: oJH3v7kvIbVGDlBS
-          category: statuses
-          type: resistance
-          value: frightened
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        raw: "5"
-        unit: minute
-      effectTypes:
-        - resistance
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime:
-        base: a0
-      identifier: battle-cry-resistance
-      interaction: manifest
-      overview:
-        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
   - _id: bzxBeP9GUjjb9F4X
     _key: "!items.effects!b30faafcad7128b2.bzxBeP9GUjjb9F4X"
     _stats:
@@ -351,45 +314,42 @@ effects:
       skill: true
       standard: true
     type: ability
-  - _id: fapsFy1VByYOajv0
-    _key: "!items.effects!b30faafcad7128b2.fapsFy1VByYOajv0"
+  - _id: GW0neZ9YNoKjwBDS
+    _key: "!items.effects!b30faafcad7128b2.GW0neZ9YNoKjwBDS"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.VcgCaSiWMSU15jS8
-    img: systems/teriock/src/icons/abilities/terrify.webp
-    name: Terrify
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    name: Battle Cry Resistance
     system:
-      _sup: dbJPDVq2wmgowY99
-      automations:
-        - _id: 29b275994cf9f5b1
-          formula: 1d4[psychic]
-          type: roll
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+      _sup: Twt8FZWmnIjSW58R
+      affinities:
+        - _id: oJH3v7kvIbVGDlBS
+          category: statuses
+          type: resistance
+          value: frightened
       competence:
         raw: 1
-      delivery: sight
+      delivery: self
       duration:
         raw: "5"
         unit: minute
       effectTypes:
-        - mental
-      featSaveAttribute: int
-      identifier: terrify
-      interaction: feat
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime:
+        base: a0
+      identifier: battle-cry-resistance
+      interaction: manifest
+      overview:
+        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
       powerSources:
         - martial
       range:
-        raw: "30"
-        unit: ft
-      results:
-        fail: >-
-          <p>If the @Identifier[core:targets]{target} is @Identifier[condition:frightened]{frightened}, they immediately
-          take [[/damage 1d4[psychic]]] @Identifier[core:damage]{damage}. Additionally, if some effect would cause them
-          to become @Identifier[condition:frightened]{frightened}, they take [[/damage 1d4[psychic]]]
-          @Identifier[core:damage]{damage} as well.</p>
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
     type: ability
   - _id: xxGnIKGxb6tqNSMZ
     _key: "!items.effects!b30faafcad7128b2.xxGnIKGxb6tqNSMZ"
@@ -429,6 +389,46 @@ effects:
       standard: true
       targets:
         - self
+    type: ability
+  - _id: fapsFy1VByYOajv0
+    _key: "!items.effects!b30faafcad7128b2.fapsFy1VByYOajv0"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.VcgCaSiWMSU15jS8
+    img: systems/teriock/src/icons/abilities/terrify.webp
+    name: Terrify
+    system:
+      _sup: dbJPDVq2wmgowY99
+      automations:
+        - _id: 29b275994cf9f5b1
+          formula: 1d4[psychic]
+          type: roll
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
+      competence:
+        raw: 1
+      delivery: sight
+      duration:
+        raw: "5"
+        unit: minute
+      effectTypes:
+        - mental
+      featSaveAttribute: int
+      identifier: terrify
+      interaction: feat
+      powerSources:
+        - martial
+      range:
+        raw: "30"
+        unit: ft
+      results:
+        fail: >-
+          <p>If the @Identifier[core:targets]{target} is @Identifier[condition:frightened]{frightened}, they immediately
+          take [[/damage 1d4[psychic]]] @Identifier[core:damage]{damage}. Additionally, if some effect would cause them
+          to become @Identifier[condition:frightened]{frightened}, they take [[/damage 1d4[psychic]]]
+          @Identifier[core:damage]{damage} as well.</p>
+      skill: true
+      standard: true
     type: ability
 folder: 97760b47881c8b1e
 img: systems/teriock/src/icons/ranks/rank-4-berserker.webp

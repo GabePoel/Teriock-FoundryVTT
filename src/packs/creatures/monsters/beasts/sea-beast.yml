@@ -408,27 +408,34 @@ items:
         img: systems/teriock/src/icons/creatures/sea-beast.webp
         ringImg: systems/teriock/src/icons/tokens/sea-beast.webp
     type: species
-  - _id: 50giJBg5YSdryDAi
-    _key: "!actors.items!86654c6f730e4acb.50giJBg5YSdryDAi"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.f584d10362908b69
-    folder: f58e0946f732c09d
-    img: systems/teriock/src/icons/body-parts/hardened-scales.webp
-    name: Hardened Scales
-    system:
-      _sup: 86654c6f730e4acb
-      av:
-        raw: 3
-      identifier: hardened-scales
-      range:
-        long:
-          unit: self
-    type: body
   - _id: gqXDjmclnVB0NGXn
     _key: "!actors.items!86654c6f730e4acb.gqXDjmclnVB0NGXn"
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7c5e00d2a8866a3a
     effects:
+      - _id: dyRYEEhB3N7j2eaE
+        _key: "!actors.items.effects!86654c6f730e4acb.gqXDjmclnVB0NGXn.dyRYEEhB3N7j2eaE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!86654c6f730e4acb.gqXDjmclnVB0NGXn.Q3eKznomGL4eVOGB"
         _stats:
@@ -461,29 +468,6 @@ items:
           form: intrinsic
           identifier: weapon
         type: property
-      - _id: dyRYEEhB3N7j2eaE
-        _key: "!actors.items.effects!86654c6f730e4acb.gqXDjmclnVB0NGXn.dyRYEEhB3N7j2eaE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
-        type: property
     folder: f58e0946f732c09d
     img: systems/teriock/src/icons/body-parts/ferocious-jaw.webp
     name: Ferocious Jaw
@@ -498,6 +482,22 @@ items:
       range:
         long:
           unit: melee
+    type: body
+  - _id: 50giJBg5YSdryDAi
+    _key: "!actors.items!86654c6f730e4acb.50giJBg5YSdryDAi"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.f584d10362908b69
+    folder: f58e0946f732c09d
+    img: systems/teriock/src/icons/body-parts/hardened-scales.webp
+    name: Hardened Scales
+    system:
+      _sup: 86654c6f730e4acb
+      av:
+        raw: 3
+      identifier: hardened-scales
+      range:
+        long:
+          unit: self
     type: body
 name: Sea Beast
 prototypeToken:

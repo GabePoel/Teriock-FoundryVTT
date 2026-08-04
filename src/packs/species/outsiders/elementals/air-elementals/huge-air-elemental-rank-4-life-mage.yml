@@ -89,42 +89,24 @@ effects:
           attribute: int
           value: 1
     type: ability
-  - _id: O2KllBZpI0CIVPtC
-    _key: "!items.effects!w0nOvyoHgWIsGshl.O2KllBZpI0CIVPtC"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.671450423362e586
-    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
-    name: Sheltered Casting
+  - _id: xiCyqPjZIzLspfdt
+    _key: "!items.effects!w0nOvyoHgWIsGshl.xiCyqPjZIzLspfdt"
+    img: systems/teriock/src/icons/abilities/life-disciplines.webp
+    name: Adept Life Spell Cast
     system:
       _sup: rOcOIi3HSAQOJwRg
+      automations:
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
       competence:
         raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r0
-      identifier: sheltered-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may keep the triggering @Wiki[Category:Spells]{spell} from @Identifier[core:targets]{targeting} up to
-          @Identifier[core:proficiency-bonus]{P} @Identifier[core:targets]{targets} of your choice that it would
-          otherwise target.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    type: ability
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Life element spells]{life spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-life-spell-cast
+    type: resource
   - _id: yohHep3CdkNTRcSN
     _key: "!items.effects!w0nOvyoHgWIsGshl.yohHep3CdkNTRcSN"
     _stats:
@@ -187,24 +169,42 @@ effects:
         spells]{ritual} @Wiki[Category:Life element spells]{life spell} in half the time it would normally take.</p>
       identifier: half-time-ritual-life-spell-cast
     type: resource
-  - _id: xiCyqPjZIzLspfdt
-    _key: "!items.effects!w0nOvyoHgWIsGshl.xiCyqPjZIzLspfdt"
-    img: systems/teriock/src/icons/abilities/life-disciplines.webp
-    name: Adept Life Spell Cast
+  - _id: O2KllBZpI0CIVPtC
+    _key: "!items.effects!w0nOvyoHgWIsGshl.O2KllBZpI0CIVPtC"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.671450423362e586
+    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
+    name: Sheltered Casting
     system:
       _sup: rOcOIi3HSAQOJwRg
-      automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
       competence:
         raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Life element spells]{life spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-life-spell-cast
-    type: resource
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      executionTime:
+        base: r0
+      identifier: sheltered-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may keep the triggering @Wiki[Category:Spells]{spell} from @Identifier[core:targets]{targeting} up to
+          @Identifier[core:proficiency-bonus]{P} @Identifier[core:targets]{targets} of your choice that it would
+          otherwise target.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
+    type: ability
 folder: c0c0ec104c5cd2eb
 img: systems/teriock/src/icons/ranks/rank-4-life-mage.webp
 name: Rank 4 Life Mage

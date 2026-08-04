@@ -111,6 +111,64 @@ effects:
       targets:
         - self
     type: ability
+  - _id: 3KYBHa7iIM4XBDIM
+    _key: "!items.effects!grP9Bhe1ni5Oub3l.3KYBHa7iIM4XBDIM"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QbMxtzwRThtJgm8
+    img: systems/teriock/src/icons/abilities/bellows.webp
+    name: Bellows
+    system:
+      _sup: cirogt3aILQXokIv
+      automations:
+        - _id: hEOQSeJ8HpNRH1gY
+          macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
+          trigger: executeSpell
+          type: abilityMacro
+        - _id: Y4tkQwce00WMBG20
+          key: system.boosts.damage
+          qualifier: "@spell"
+          type: childChange
+          value: 1 + @h
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      duration:
+        raw: "1"
+        unit: minute
+      elements:
+        - flame
+      form: special
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the next
+        @Wiki[Category:Spells]{spell} you cast is @Identifier[keyword:boosted]{boosted} again.</p>
+      identifier: bellows
+      interaction: manifest
+      invoked: true
+      overview:
+        base: >-
+          <p>The next @Wiki[Category:Spells]{spell} you cast that would deal @Identifier[core:damage]{damage} is
+          @Identifier[keyword:boosted]{boosted}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
   - _id: XgGzhdDeIf5TATSm
     _key: "!items.effects!grP9Bhe1ni5Oub3l.XgGzhdDeIf5TATSm"
     _stats:
@@ -190,6 +248,130 @@ effects:
       range:
         unit: self
       skill: true
+      targets:
+        - self
+    type: ability
+  - _id: 2WkstCMZkBBJDAJA
+    _key: "!items.effects!grP9Bhe1ni5Oub3l.2WkstCMZkBBJDAJA"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1794713e6e1eaa6d
+    img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
+    name: Control and Resist Fire
+    system:
+      _sup: cirogt3aILQXokIv
+      affinities:
+        - _id: al3xVPNELugSBHWw
+          category: damageTypes
+          type: resistance
+          value: fire
+      automations:
+        - _id: xcIT6RMeLEKOON09
+          key: system.damage
+          qualifier: "@dmg"
+          target: armament
+          type: childChange
+          value: 1d4[fire magic]
+        - _id: dYuGyhEwQceIhEHF
+          formula: 1d4[fire magic]
+          type: roll
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      duration:
+        raw: "1"
+        unit: hour
+      effectTypes:
+        - resistance
+      elements:
+        - flame
+      form: special
+      identifier: control-and-resist-fire
+      interaction: manifest
+      invoked: true
+      overview:
+        base: >-
+          <p>Your @Identifier[core:standard-and-critical-damage]{standard damage} increases by [[/damage 1d4[fire
+          magic]]] @Identifier[core:damage]{damage}. You also @Identifier[keyword:resistance]{resist}
+          @Identifier[damage:fire]{fire damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: nyxA7ndlr96UmNE9
+    _key: "!items.effects!grP9Bhe1ni5Oub3l.nyxA7ndlr96UmNE9"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5b0849eece36c49e
+    img: systems/teriock/src/icons/abilities/crown-of-flame.webp
+    name: Crown of Flame
+    system:
+      _sup: cirogt3aILQXokIv
+      automations:
+        - _id: aa4fa44804f6e58a
+          identifiers:
+            - ability:burning-touch
+          type: addDocuments
+        - _id: d032756e5fee7434
+          identifiers:
+            - ability:inferno-aura
+          type: addDocuments
+        - _id: E2w7M2N45twcSWyA
+          light:
+            animation:
+              type: sunburst
+            color: "#e01b24"
+            dim: 0.01
+          type: light
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      duration:
+        raw: "8"
+        unit: hour
+      elements:
+        - flame
+      form: special
+      identifier: crown-of-flame
+      interaction: manifest
+      invoked: true
+      overview:
+        base: >-
+          <p>A small circle of smokeless fire circles above your head. You gain
+          @Identifier[ability:burning-touch]{Burning Touch} and @Identifier[ability:inferno-aura]{Inferno Aura}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
       targets:
         - self
     type: ability
@@ -305,6 +487,42 @@ effects:
       targets:
         - self
     type: ability
+  - _id: vcwFoiTAvTJYDaAy
+    _key: "!items.effects!grP9Bhe1ni5Oub3l.vcwFoiTAvTJYDaAy"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6078c188ebffa71a
+    img: systems/teriock/src/icons/abilities/melting-grasp.webp
+    name: Melting Grasp
+    system:
+      _sup: cirogt3aILQXokIv
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: hand
+      elements:
+        - flame
+      form: special
+      identifier: melting-grasp
+      invoked: true
+      powerSources:
+        - magical
+      results:
+        hit: <p>Item is @Identifier[property:shattered]{shattered}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - item
+    type: ability
   - _id: 1ngUVMbqsQRVPTvZ
     _key: "!items.effects!grP9Bhe1ni5Oub3l.1ngUVMbqsQRVPTvZ"
     _stats:
@@ -343,224 +561,6 @@ effects:
       rotator: true
       spell: true
       standard: true
-    type: ability
-  - _id: 2WkstCMZkBBJDAJA
-    _key: "!items.effects!grP9Bhe1ni5Oub3l.2WkstCMZkBBJDAJA"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1794713e6e1eaa6d
-    img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
-    name: Control and Resist Fire
-    system:
-      _sup: cirogt3aILQXokIv
-      affinities:
-        - _id: al3xVPNELugSBHWw
-          category: damageTypes
-          type: resistance
-          value: fire
-      automations:
-        - _id: xcIT6RMeLEKOON09
-          key: system.damage
-          qualifier: "@dmg"
-          target: armament
-          type: childChange
-          value: 1d4[fire magic]
-        - _id: dYuGyhEwQceIhEHF
-          formula: 1d4[fire magic]
-          type: roll
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      duration:
-        raw: "1"
-        unit: hour
-      effectTypes:
-        - resistance
-      elements:
-        - flame
-      form: special
-      identifier: control-and-resist-fire
-      interaction: manifest
-      invoked: true
-      overview:
-        base: >-
-          <p>Your @Identifier[core:standard-and-critical-damage]{standard damage} increases by [[/damage 1d4[fire
-          magic]]] @Identifier[core:damage]{damage}. You also @Identifier[keyword:resistance]{resist}
-          @Identifier[damage:fire]{fire damage}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: 3KYBHa7iIM4XBDIM
-    _key: "!items.effects!grP9Bhe1ni5Oub3l.3KYBHa7iIM4XBDIM"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QbMxtzwRThtJgm8
-    img: systems/teriock/src/icons/abilities/bellows.webp
-    name: Bellows
-    system:
-      _sup: cirogt3aILQXokIv
-      automations:
-        - _id: hEOQSeJ8HpNRH1gY
-          macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
-          trigger: executeSpell
-          type: abilityMacro
-        - _id: Y4tkQwce00WMBG20
-          key: system.boosts.damage
-          qualifier: "@spell"
-          type: childChange
-          value: 1 + @h
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      duration:
-        raw: "1"
-        unit: minute
-      elements:
-        - flame
-      form: special
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the next
-        @Wiki[Category:Spells]{spell} you cast is @Identifier[keyword:boosted]{boosted} again.</p>
-      identifier: bellows
-      interaction: manifest
-      invoked: true
-      overview:
-        base: >-
-          <p>The next @Wiki[Category:Spells]{spell} you cast that would deal @Identifier[core:damage]{damage} is
-          @Identifier[keyword:boosted]{boosted}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: vcwFoiTAvTJYDaAy
-    _key: "!items.effects!grP9Bhe1ni5Oub3l.vcwFoiTAvTJYDaAy"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6078c188ebffa71a
-    img: systems/teriock/src/icons/abilities/melting-grasp.webp
-    name: Melting Grasp
-    system:
-      _sup: cirogt3aILQXokIv
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: hand
-      elements:
-        - flame
-      form: special
-      identifier: melting-grasp
-      invoked: true
-      powerSources:
-        - magical
-      results:
-        hit: <p>Item is @Identifier[property:shattered]{shattered}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - item
-    type: ability
-  - _id: nyxA7ndlr96UmNE9
-    _key: "!items.effects!grP9Bhe1ni5Oub3l.nyxA7ndlr96UmNE9"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5b0849eece36c49e
-    img: systems/teriock/src/icons/abilities/crown-of-flame.webp
-    name: Crown of Flame
-    system:
-      _sup: cirogt3aILQXokIv
-      automations:
-        - _id: aa4fa44804f6e58a
-          identifiers:
-            - ability:burning-touch
-          type: addDocuments
-        - _id: d032756e5fee7434
-          identifiers:
-            - ability:inferno-aura
-          type: addDocuments
-        - _id: E2w7M2N45twcSWyA
-          light:
-            animation:
-              type: sunburst
-            color: "#e01b24"
-            dim: 0.01
-          type: light
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      duration:
-        raw: "8"
-        unit: hour
-      elements:
-        - flame
-      form: special
-      identifier: crown-of-flame
-      interaction: manifest
-      invoked: true
-      overview:
-        base: >-
-          <p>A small circle of smokeless fire circles above your head. You gain
-          @Identifier[ability:burning-touch]{Burning Touch} and @Identifier[ability:inferno-aura]{Inferno Aura}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
     type: ability
 folder: 9eb51b53c8495b9d
 img: systems/teriock/src/icons/ranks/rank-2-flame-mage.webp

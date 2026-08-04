@@ -317,6 +317,45 @@ items:
               attribute: per
               value: 1
         type: ability
+      - _id: kOyytkS2627uO9Pm
+        _key: "!actors.items.effects!66193214b8972ac3.66193214b8972ac3.kOyytkS2627uO9Pm"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+        img: systems/teriock/src/icons/abilities/agile.webp
+        name: Agile
+        system:
+          _sup: o6joUuO8HZQkHgIo
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.difficultTerrain
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: agile
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: OHXu5K9WLDbOeq7C
         _key: "!actors.items.effects!66193214b8972ac3.66193214b8972ac3.OHXu5K9WLDbOeq7C"
         _stats:
@@ -445,45 +484,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: kOyytkS2627uO9Pm
-        _key: "!actors.items.effects!66193214b8972ac3.66193214b8972ac3.kOyytkS2627uO9Pm"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-        img: systems/teriock/src/icons/abilities/agile.webp
-        name: Agile
-        system:
-          _sup: o6joUuO8HZQkHgIo
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.speedAdjustments.difficultTerrain
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "3"
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - movement
-          executionTime:
-            base: passive
-          identifier: agile
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/creatures/mongoose-squirrel.webp
     name: Mongoose Squirrel
@@ -554,6 +554,53 @@ items:
         base: 1d6
       fightingStyle: savage
       identifier: fanged-jaw
+      range:
+        long:
+          unit: melee
+    type: body
+  - _id: bf2OSt6EvljCMk45
+    _key: "!actors.items!66193214b8972ac3.bf2OSt6EvljCMk45"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+    effects:
+      - _id: TWk5AP5nzZgpXkaM
+        _key: "!actors.items.effects!66193214b8972ac3.bf2OSt6EvljCMk45.TWk5AP5nzZgpXkaM"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
+            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+        type: property
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: "!actors.items.effects!66193214b8972ac3.bf2OSt6EvljCMk45.IDLUUjkSFtpaiKuJ"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property is easily concealed and can often be used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+          form: intrinsic
+          identifier: small
+        type: property
+    folder: dbf885a327caa735
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: 66193214b8972ac3
+      damage:
+        base: "1"
+      identifier: foot
       range:
         long:
           unit: melee
@@ -654,53 +701,6 @@ items:
       range:
         long:
           unit: self
-    type: body
-  - _id: bf2OSt6EvljCMk45
-    _key: "!actors.items!66193214b8972ac3.bf2OSt6EvljCMk45"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
-    effects:
-      - _id: TWk5AP5nzZgpXkaM
-        _key: "!actors.items.effects!66193214b8972ac3.bf2OSt6EvljCMk45.TWk5AP5nzZgpXkaM"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-        type: property
-      - _id: IDLUUjkSFtpaiKuJ
-        _key: "!actors.items.effects!66193214b8972ac3.bf2OSt6EvljCMk45.IDLUUjkSFtpaiKuJ"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
-          form: intrinsic
-          identifier: small
-        type: property
-    folder: dbf885a327caa735
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
-    system:
-      _sup: 66193214b8972ac3
-      damage:
-        base: "1"
-      identifier: foot
-      range:
-        long:
-          unit: melee
     type: body
 name: Mongoose Squirrel
 prototypeToken:

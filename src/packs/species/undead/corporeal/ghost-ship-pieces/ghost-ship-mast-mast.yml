@@ -3,6 +3,29 @@ _key: "!items!SXt4slGDWPfgL8AO"
 _stats:
   compendiumSource: Compendium.teriock.equipment.Item.49c559aecfeb8044
 effects:
+  - _id: mgHSaJkA0TN7nfFz
+    _key: "!items.effects!SXt4slGDWPfgL8AO.mgHSaJkA0TN7nfFz"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: derived
+              priority: 10
+              target: Item
+              type: upgrade
+              value: "1"
+          type: changes
+      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+    type: property
   - _id: zJOh1pYcKaOtg5Qo
     _key: "!items.effects!SXt4slGDWPfgL8AO.zJOh1pYcKaOtg5Qo"
     _stats:
@@ -57,29 +80,6 @@ effects:
       description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
       form: intrinsic
       identifier: reach
-    type: property
-  - _id: mgHSaJkA0TN7nfFz
-    _key: "!items.effects!SXt4slGDWPfgL8AO.mgHSaJkA0TN7nfFz"
-    _stats:
-      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-    img: systems/teriock/src/icons/properties/armor-voiding.webp
-    name: Armor Voiding
-    system:
-      applyIfDampened: true
-      applyIfDeattuned: true
-      automations:
-        - _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              phase: derived
-              priority: 10
-              target: Item
-              type: upgrade
-              value: "1"
-          type: changes
-      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-      form: intrinsic
-      identifier: armor-voiding
     type: property
 folder: b7395e9186081f19
 img: icons/commodities/wood/wood-pole.webp

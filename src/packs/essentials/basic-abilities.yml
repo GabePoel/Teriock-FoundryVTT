@@ -80,6 +80,50 @@ effects:
         <p>Another creature is about to use an action that requires a @Identifier[core:tradecrafts]{tradecraft check},
         @Identifier[core:attack-interaction]{attack roll}, or some other check.</p>
     type: ability
+  - _id: PoWmWx6brcGlJ8KL
+    _key: "!items.effects!fb31c853fddd91bb.PoWmWx6brcGlJ8KL"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f9a3e0199ffcbd16
+    img: systems/teriock/src/icons/abilities/aim.webp
+    name: Aim
+    system:
+      automations:
+        - _id: im4atrn7Ogi2RhVV
+          changes:
+            - key: system.offense.sb
+              phase: derived
+              priority: 5
+              target: Actor
+              type: upgrade
+              value: "true"
+          type: changes
+      basic: true
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: "10"
+        unit: second
+      endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
+      expirations:
+        - _id: 2a949cb4ad557294
+          relation: executor
+          type: combat
+      form: intrinsic
+      identifier: aim
+      interaction: manifest
+      overview:
+        base: >-
+          <p>You gain @Identifier[core:style-bonus]{SB} with all your
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} until the start of your next turn.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      sustained: true
+      targets:
+        - self
+    type: ability
   - _id: 82eKeAWGMwGgyT3H
     _key: "!items.effects!fb31c853fddd91bb.82eKeAWGMwGgyT3H"
     _stats:
@@ -1635,50 +1679,6 @@ effects:
         - martial
       range:
         unit: self
-      targets:
-        - self
-    type: ability
-  - _id: PoWmWx6brcGlJ8KL
-    _key: "!items.effects!fb31c853fddd91bb.PoWmWx6brcGlJ8KL"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f9a3e0199ffcbd16
-    img: systems/teriock/src/icons/abilities/aim.webp
-    name: Aim
-    system:
-      automations:
-        - _id: im4atrn7Ogi2RhVV
-          changes:
-            - key: system.offense.sb
-              phase: derived
-              priority: 5
-              target: Actor
-              type: upgrade
-              value: "true"
-          type: changes
-      basic: true
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        raw: "10"
-        unit: second
-      endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-      expirations:
-        - _id: 2a949cb4ad557294
-          relation: executor
-          type: combat
-      form: intrinsic
-      identifier: aim
-      interaction: manifest
-      overview:
-        base: >-
-          <p>You gain @Identifier[core:style-bonus]{SB} with all your
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} until the start of your next turn.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      sustained: true
       targets:
         - self
     type: ability

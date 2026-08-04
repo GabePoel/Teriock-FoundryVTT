@@ -285,6 +285,24 @@ effects:
       targets:
         - self
     type: ability
+  - _id: Qro5HhE8tiz1BBzX
+    _key: "!items.effects!e63584c2d4729cfc.Qro5HhE8tiz1BBzX"
+    img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+    name: Adept Nature Spell Cast
+    system:
+      _sup: o51YzM1EY4vQpr4C
+      automations:
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Nature element spells]{nature spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-nature-spell-cast
+    type: resource
   - _id: MTTzxsvDHQlyme1W
     _key: "!items.effects!e63584c2d4729cfc.MTTzxsvDHQlyme1W"
     _stats:
@@ -336,6 +354,151 @@ effects:
       standard: true
       targets:
         - self
+    type: ability
+  - _id: AfBZ256aJNpsCtTF
+    _key: "!items.effects!e63584c2d4729cfc.AfBZ256aJNpsCtTF"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HeH6mh0l1bgWQV7C
+    img: systems/teriock/src/icons/abilities/branching-casting.webp
+    name: Branching Casting
+    system:
+      _sup: o51YzM1EY4vQpr4C
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      executionTime:
+        base: r0
+      identifier: branching-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may select an additional @Identifier[core:targets]{target} within 30 feet of the triggering
+          @Wiki[Category:Spells]{spell's} original @Identifier[core:targets]{target}. Your @Wiki[Category:Spells]{spell}
+          @Identifier[core:targets]{targets} them as well. Any @Identifier[core:attack-interaction]{attack rolls},
+          @Identifier[core:feat-interaction]{feat saves}, or other necessary rolls must be made for the new
+          @Identifier[core:targets]{target} as well.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>A @Wiki[Category:Spells]{spell} you cast affects at least one target other than @Wiki[Category:Self target
+        spells]{yourself}.</p>
+    type: ability
+  - _id: hk3P86YtVLbHclR9
+    _key: "!items.effects!e63584c2d4729cfc.hk3P86YtVLbHclR9"
+    img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+    name: Half-Time Ritual Nature Spell Cast
+    system:
+      _sup: o51YzM1EY4vQpr4C
+      automations:
+        - _id: XqnlTxp6N0lZCFaB
+          formula: "1"
+          trigger: shortRest
+          type: changeQuantity
+        - _id: lnI5XgS0RD02tQbn
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
+        spells]{ritual} @Wiki[Category:Nature element spells]{nature spell} in half the time it would normally take.</p>
+      identifier: half-time-ritual-nature-spell-cast
+    type: resource
+  - _id: KTMpIEBlnnx9Fuck
+    _key: "!items.effects!e63584c2d4729cfc.KTMpIEBlnnx9Fuck"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: hvaCBIfeQRi24WGy
+      automations:
+        - _id: bJn9LIvdgJ11S1tr
+          local:
+            qualifier: and(@spell, @delivery.missile, @pro)
+          trigger: execute
+          type: useDocuments
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      executionTime:
+        base: r0
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @Identifier[ability:empathic-ray]{Empathic Ray} and
+        @Identifier[ability:treeform-ball]{Treeform Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
+          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
+          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
+      powerSources:
+        - magical
+      skill: true
+      standard: true
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
+        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
+        successfully applied.</p>
+    type: ability
+  - _id: dl1slBp34TO9PlL1
+    _key: "!items.effects!e63584c2d4729cfc.dl1slBp34TO9PlL1"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d90fdbbec5b331d
+    img: systems/teriock/src/icons/abilities/territorial-casting.webp
+    name: Territorial Casting
+    system:
+      _sup: o51YzM1EY4vQpr4C
+      automations:
+        - _id: 4ReYeDgqGQpnJFk3
+          automatic: false
+          local:
+            qualifier: and(@ability, @spell, @time.a1)
+          trigger: execute
+          type: useDocuments
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      executionTime:
+        base: r1
+      identifier: territorial-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: <p>You cast a @Wiki[Category:Single action spells]{single action spell} at the triggering creature.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>Another creature moves within 5 feet of you.</p>
     type: ability
   - _id: DCOP6eCO0XPnu5aj
     _key: "!items.effects!e63584c2d4729cfc.DCOP6eCO0XPnu5aj"
@@ -404,169 +567,6 @@ effects:
         - self
       trigger: <p>You would take a @UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{standard ability}.</p>
     type: ability
-  - _id: AfBZ256aJNpsCtTF
-    _key: "!items.effects!e63584c2d4729cfc.AfBZ256aJNpsCtTF"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HeH6mh0l1bgWQV7C
-    img: systems/teriock/src/icons/abilities/branching-casting.webp
-    name: Branching Casting
-    system:
-      _sup: o51YzM1EY4vQpr4C
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r0
-      identifier: branching-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may select an additional @Identifier[core:targets]{target} within 30 feet of the triggering
-          @Wiki[Category:Spells]{spell's} original @Identifier[core:targets]{target}. Your @Wiki[Category:Spells]{spell}
-          @Identifier[core:targets]{targets} them as well. Any @Identifier[core:attack-interaction]{attack rolls},
-          @Identifier[core:feat-interaction]{feat saves}, or other necessary rolls must be made for the new
-          @Identifier[core:targets]{target} as well.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>A @Wiki[Category:Spells]{spell} you cast affects at least one target other than @Wiki[Category:Self target
-        spells]{yourself}.</p>
-    type: ability
-  - _id: dl1slBp34TO9PlL1
-    _key: "!items.effects!e63584c2d4729cfc.dl1slBp34TO9PlL1"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d90fdbbec5b331d
-    img: systems/teriock/src/icons/abilities/territorial-casting.webp
-    name: Territorial Casting
-    system:
-      _sup: o51YzM1EY4vQpr4C
-      automations:
-        - _id: 4ReYeDgqGQpnJFk3
-          automatic: false
-          local:
-            qualifier: and(@ability, @spell, @time.a1)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r1
-      identifier: territorial-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You cast a @Wiki[Category:Single action spells]{single action spell} at the triggering creature.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>Another creature moves within 5 feet of you.</p>
-    type: ability
-  - _id: KTMpIEBlnnx9Fuck
-    _key: "!items.effects!e63584c2d4729cfc.KTMpIEBlnnx9Fuck"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: hvaCBIfeQRi24WGy
-      automations:
-        - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      executionTime:
-        base: r0
-      identifier: spell-strike
-      interaction: manifest
-      limitation: >-
-        <p>Only usable with @Identifier[ability:empathic-ray]{Empathic Ray} and
-        @Identifier[ability:treeform-ball]{Treeform Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
-          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
-          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
-      powerSources:
-        - magical
-      skill: true
-      standard: true
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
-        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
-        successfully applied.</p>
-    type: ability
-  - _id: hk3P86YtVLbHclR9
-    _key: "!items.effects!e63584c2d4729cfc.hk3P86YtVLbHclR9"
-    img: systems/teriock/src/icons/abilities/nature-disciplines.webp
-    name: Half-Time Ritual Nature Spell Cast
-    system:
-      _sup: o51YzM1EY4vQpr4C
-      automations:
-        - _id: XqnlTxp6N0lZCFaB
-          formula: "1"
-          trigger: shortRest
-          type: changeQuantity
-        - _id: lnI5XgS0RD02tQbn
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
-        spells]{ritual} @Wiki[Category:Nature element spells]{nature spell} in half the time it would normally take.</p>
-      identifier: half-time-ritual-nature-spell-cast
-    type: resource
-  - _id: Qro5HhE8tiz1BBzX
-    _key: "!items.effects!e63584c2d4729cfc.Qro5HhE8tiz1BBzX"
-    img: systems/teriock/src/icons/abilities/nature-disciplines.webp
-    name: Adept Nature Spell Cast
-    system:
-      _sup: o51YzM1EY4vQpr4C
-      automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Nature element spells]{nature spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-nature-spell-cast
-    type: resource
 folder: fda2f0e9a683c338
 img: systems/teriock/src/icons/ranks/rank-4-nature-mage.webp
 name: Rank 4 Nature Mage

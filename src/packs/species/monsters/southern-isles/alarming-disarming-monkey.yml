@@ -319,6 +319,101 @@ effects:
       targets:
         - item
     type: ability
+  - _id: jroWsRloMzsASejD
+    _key: "!items.effects!a159dd784336fe79.jroWsRloMzsASejD"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
+    system:
+      _sup: EBHnDS1rPdYRPJOt
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: agile
+      interaction: manifest
+      limitation: <p>Forest terrain only.</p>
+      maneuver: passive
+      overview:
+        base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: C7KAjExut6oYxwey
+    _key: "!items.effects!a159dd784336fe79.C7KAjExut6oYxwey"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: nMfS3c3xjW7AVrdL
+      automations:
+        - _id: AXwLjBzDx4XcVcAJ
+          movementAction: climb
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+        - _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          competencies:
+            - 1
+            - 2
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: climbing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: lgBlNCVKmibzBpkL
     _key: "!items.effects!a159dd784336fe79.lgBlNCVKmibzBpkL"
     _stats:
@@ -389,101 +484,6 @@ effects:
         unit: self
       skill: true
       standard: true
-      targets:
-        - self
-    type: ability
-  - _id: C7KAjExut6oYxwey
-    _key: "!items.effects!a159dd784336fe79.C7KAjExut6oYxwey"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    name: Climbing
-    system:
-      _sup: nMfS3c3xjW7AVrdL
-      automations:
-        - _id: AXwLjBzDx4XcVcAJ
-          movementAction: climb
-          type: changeMovement
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.climb
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "2"
-          type: changes
-        - _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.climb
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "3"
-          competencies:
-            - 1
-            - 2
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-      identifier: climbing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
-        proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: jroWsRloMzsASejD
-    _key: "!items.effects!a159dd784336fe79.jroWsRloMzsASejD"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-    img: systems/teriock/src/icons/abilities/agile.webp
-    name: Agile
-    system:
-      _sup: EBHnDS1rPdYRPJOt
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.difficultTerrain
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "3"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-      identifier: agile
-      interaction: manifest
-      limitation: <p>Forest terrain only.</p>
-      maneuver: passive
-      overview:
-        base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
       targets:
         - self
     type: ability

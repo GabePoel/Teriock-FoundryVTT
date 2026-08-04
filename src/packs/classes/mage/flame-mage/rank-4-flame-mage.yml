@@ -285,6 +285,138 @@ effects:
       targets:
         - self
     type: ability
+  - _id: bBsMlq6JhGDnZ7PG
+    _key: "!items.effects!bedec58b28a6c43a.bBsMlq6JhGDnZ7PG"
+    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    name: Adept Flame Spell Cast
+    system:
+      _sup: ZmjFFlMRQIBtml1N
+      automations:
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Flame element spells]{flame spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-flame-spell-cast
+    type: resource
+  - _id: 4AJLW1byGffguoi1
+    _key: "!items.effects!bedec58b28a6c43a.4AJLW1byGffguoi1"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.D4zf8b3n9RnHOVWd
+    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+    name: Bombastic Casting
+    system:
+      _sup: ZmjFFlMRQIBtml1N
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      effectTypes:
+        - loud
+      executionTime:
+        base: r0
+      identifier: bombastic-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering @Wiki[Category:Spells]{spell} becomes extremely visible and loud. Visually the
+          @Wiki[Category:Spells]{spell} extends 10 feet in all directions from a line between the caster and each of its
+          @Identifier[core:targets]{targets}. The spell can be heard up to 600 feet away.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: mL7tssU9FeUdlSKX
+    _key: "!items.effects!bedec58b28a6c43a.mL7tssU9FeUdlSKX"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
+    img: systems/teriock/src/icons/abilities/cremate.webp
+    name: Cremate
+    system:
+      _sup: ki0hegmY9eebSjuZ
+      automations:
+        - _id: 1728b3a84ea27844
+          common:
+            - bag
+          type: common
+        - _id: 3a62dd96319ca135
+          relation: apply
+          status: burned
+          type: status
+        - _id: 5e9e1d2033fe152a
+          relation: apply
+          status: ruined
+          type: status
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      effectTypes:
+        - damaging
+        - killing
+      elements:
+        - flame
+      form: special
+      identifier: cremate
+      invoked: true
+      powerSources:
+        - magical
+      requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
+      results:
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is @Identifier[condition:burned]{burned}, and
+          @Identifier[condition:ruined]{ruined}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+  - _id: Grd1F2RiRY5GCpdB
+    _key: "!items.effects!bedec58b28a6c43a.Grd1F2RiRY5GCpdB"
+    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    name: Half-Time Ritual Flame Spell Cast
+    system:
+      _sup: ZmjFFlMRQIBtml1N
+      automations:
+        - _id: XqnlTxp6N0lZCFaB
+          formula: "1"
+          trigger: shortRest
+          type: changeQuantity
+        - _id: lnI5XgS0RD02tQbn
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
+        spells]{ritual} @Wiki[Category:Flame element spells]{flame spell} in half the time it would normally take.</p>
+      identifier: half-time-ritual-flame-spell-cast
+    type: resource
   - _id: FdmXMbkWrNGx0X9o
     _key: "!items.effects!bedec58b28a6c43a.FdmXMbkWrNGx0X9o"
     _stats:
@@ -397,59 +529,46 @@ effects:
       targets:
         - weapon
     type: ability
-  - _id: mL7tssU9FeUdlSKX
-    _key: "!items.effects!bedec58b28a6c43a.mL7tssU9FeUdlSKX"
+  - _id: J1rP6fk21QdPjz5Y
+    _key: "!items.effects!bedec58b28a6c43a.J1rP6fk21QdPjz5Y"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
-    img: systems/teriock/src/icons/abilities/cremate.webp
-    name: Cremate
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
     system:
-      _sup: ki0hegmY9eebSjuZ
+      _sup: DWJKPILQ7NOTFn2m
       automations:
-        - _id: 1728b3a84ea27844
-          common:
-            - bag
-          type: common
-        - _id: 3a62dd96319ca135
-          relation: apply
-          status: burned
-          type: status
-        - _id: 5e9e1d2033fe152a
-          relation: apply
-          status: ruined
-          type: status
+        - _id: bJn9LIvdgJ11S1tr
+          local:
+            qualifier: and(@spell, @delivery.missile, @pro)
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 1
       costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
         primary:
           mp:
             formula: "1"
             type: formula
-      effectTypes:
-        - damaging
-        - killing
-      elements:
-        - flame
-      form: special
-      identifier: cremate
-      invoked: true
+      executionTime:
+        base: r0
+      identifier: spell-strike
+      interaction: manifest
+      limitation: <p>Only usable with @Identifier[ability:flame-ray]{Flame Ray} and @Identifier[ability:fire-ball]{Fire Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
+          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
+          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
-      requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
-      results:
-        hit: >-
-          <p>@Identifier[core:targets]{Target} is @Identifier[condition:burned]{burned}, and
-          @Identifier[condition:ruined]{ruined}.</p>
-      rotator: true
-      spell: true
+      skill: true
       standard: true
-      targets:
-        - vitals
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
+        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
+        successfully applied.</p>
     type: ability
   - _id: 2tOQEnjSYQfODta7
     _key: "!items.effects!bedec58b28a6c43a.2tOQEnjSYQfODta7"
@@ -499,125 +618,6 @@ effects:
         <p>Another creatures would move out of sight or out of @Identifier[core:range]{range} of a @Wiki[Category:Single
         action spells]{single action spell} you could cast.</p>
     type: ability
-  - _id: 4AJLW1byGffguoi1
-    _key: "!items.effects!bedec58b28a6c43a.4AJLW1byGffguoi1"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.D4zf8b3n9RnHOVWd
-    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-    name: Bombastic Casting
-    system:
-      _sup: ZmjFFlMRQIBtml1N
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      effectTypes:
-        - loud
-      executionTime:
-        base: r0
-      identifier: bombastic-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The triggering @Wiki[Category:Spells]{spell} becomes extremely visible and loud. Visually the
-          @Wiki[Category:Spells]{spell} extends 10 feet in all directions from a line between the caster and each of its
-          @Identifier[core:targets]{targets}. The spell can be heard up to 600 feet away.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are casting a @Wiki[Category:Spells]{spell}.</p>
-    type: ability
-  - _id: J1rP6fk21QdPjz5Y
-    _key: "!items.effects!bedec58b28a6c43a.J1rP6fk21QdPjz5Y"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: DWJKPILQ7NOTFn2m
-      automations:
-        - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      executionTime:
-        base: r0
-      identifier: spell-strike
-      interaction: manifest
-      limitation: <p>Only usable with @Identifier[ability:flame-ray]{Flame Ray} and @Identifier[ability:fire-ball]{Fire Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
-          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
-          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
-      powerSources:
-        - magical
-      skill: true
-      standard: true
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
-        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
-        successfully applied.</p>
-    type: ability
-  - _id: bBsMlq6JhGDnZ7PG
-    _key: "!items.effects!bedec58b28a6c43a.bBsMlq6JhGDnZ7PG"
-    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-    name: Adept Flame Spell Cast
-    system:
-      _sup: ZmjFFlMRQIBtml1N
-      automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Flame element spells]{flame spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-flame-spell-cast
-    type: resource
-  - _id: Grd1F2RiRY5GCpdB
-    _key: "!items.effects!bedec58b28a6c43a.Grd1F2RiRY5GCpdB"
-    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-    name: Half-Time Ritual Flame Spell Cast
-    system:
-      _sup: ZmjFFlMRQIBtml1N
-      automations:
-        - _id: XqnlTxp6N0lZCFaB
-          formula: "1"
-          trigger: shortRest
-          type: changeQuantity
-        - _id: lnI5XgS0RD02tQbn
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
-        spells]{ritual} @Wiki[Category:Flame element spells]{flame spell} in half the time it would normally take.</p>
-      identifier: half-time-ritual-flame-spell-cast
-    type: resource
 folder: abd25a387353ae4e
 img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp
 name: Rank 4 Flame Mage

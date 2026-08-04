@@ -424,118 +424,6 @@ effects:
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
     type: ability
-  - _id: UVIkNRnXnBr0TyuB
-    _key: "!items.effects!8e30941541fc2583.UVIkNRnXnBr0TyuB"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
-    img: systems/teriock/src/icons/abilities/scent-seeing.webp
-    name: Scent Seeing
-    system:
-      _sup: plQWgQJodxJW3Tms
-      automations:
-        - _id: e789ed5e109ebd1a
-          activeQualifier: not(@status.down)
-          changes:
-            - key: system.senses.smell
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "10"
-          type: changes
-      competence:
-        raw: 1
-      delivery: aura
-      effectTypes:
-        - sensory
-      executionTime:
-        base: passive
-      identifier: scent-seeing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know the
-          location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving or not,
-          so long as they are still within 10 feet of you.</p>
-      powerSources:
-        - martial
-      range:
-        raw: "10"
-        unit: ft
-      requirements: >-
-        <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
-        @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
-      skill: true
-      standard: true
-    type: ability
-  - _id: HYOL5MnjdNszPhaF
-    _key: "!items.effects!8e30941541fc2583.HYOL5MnjdNszPhaF"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-    name: Melee Damage Boost
-    system:
-      _sup: ZpmDpRTc0goeu9zU
-      competence:
-        raw: 1
-      effectTypes:
-        - damaging
-      executionTime:
-        base: r0
-      identifier: melee-damage-boost
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You may spend an unused @Identifier[core:active-maneuvers]{action} to @Identifier[keyword:boosted]{boost}
-          the triggering @Identifier[core:damage]{damage}.</p>
-        proficient: >-
-          <p>You may spend an additional unused @Identifier[core:active-maneuvers]{action} to
-          @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
-      powerSources:
-        - martial
-      skill: true
-      standard: true
-      trigger: >-
-        <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
-        delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
-    type: ability
-  - _id: aNTGoi8FvRIh1Tdu
-    _key: "!items.effects!8e30941541fc2583.aNTGoi8FvRIh1Tdu"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    name: Improved Strength
-    system:
-      _sup: ZpmDpRTc0goeu9zU
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: improved-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength} and
-          @Identifier[ability:improved-armor-piercing]{Improved Armor Piercing}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-    type: ability
   - _id: liz1Jn0pyWlBGCiW
     _key: "!items.effects!8e30941541fc2583.liz1Jn0pyWlBGCiW"
     _stats:
@@ -600,6 +488,118 @@ effects:
       standard: true
       targets:
         - self
+    type: ability
+  - _id: aNTGoi8FvRIh1Tdu
+    _key: "!items.effects!8e30941541fc2583.aNTGoi8FvRIh1Tdu"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: ZpmDpRTc0goeu9zU
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: improved-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength} and
+          @Identifier[ability:improved-armor-piercing]{Improved Armor Piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: HYOL5MnjdNszPhaF
+    _key: "!items.effects!8e30941541fc2583.HYOL5MnjdNszPhaF"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: ZpmDpRTc0goeu9zU
+      competence:
+        raw: 1
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r0
+      identifier: melee-damage-boost
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action} to @Identifier[keyword:boosted]{boost}
+          the triggering @Identifier[core:damage]{damage}.</p>
+        proficient: >-
+          <p>You may spend an additional unused @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering @Identifier[core:damage]{damage} again.</p>
+      powerSources:
+        - martial
+      skill: true
+      standard: true
+      trigger: >-
+        <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee @Wiki[Category:Weapon
+        delivery abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
+    type: ability
+  - _id: UVIkNRnXnBr0TyuB
+    _key: "!items.effects!8e30941541fc2583.UVIkNRnXnBr0TyuB"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+    img: systems/teriock/src/icons/abilities/scent-seeing.webp
+    name: Scent Seeing
+    system:
+      _sup: plQWgQJodxJW3Tms
+      automations:
+        - _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
+          changes:
+            - key: system.senses.smell
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "10"
+          type: changes
+      competence:
+        raw: 1
+      delivery: aura
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: scent-seeing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know the
+          location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving or not,
+          so long as they are still within 10 feet of you.</p>
+      powerSources:
+        - martial
+      range:
+        raw: "10"
+        unit: ft
+      requirements: >-
+        <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
+        @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
+      skill: true
+      standard: true
     type: ability
 folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/rhinoceros.webp

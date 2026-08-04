@@ -17,8 +17,8 @@ command: >-
     }
   };
 
-  for (const documentName of ["Actor", "Item", "ActiveEffect", "JournalEntryPage", "RollTable", "JournalEntry",
-  "Scene"]) {
+  for (const documentName of ["Actor", "Item", "ActiveEffect", "JournalEntryPage", "RollTable", "JournalEntry", "Scene",
+  "TableResult"]) {
     const Cls = foundry.utils.getDocumentClass(documentName);
     const types = Cls.TYPES.filter(t => t !== "base");
     defaults.documents[documentName] = {};
@@ -27,7 +27,7 @@ command: >-
       continue;
     }
     for (const type of types) {
-      defaults.documents[documentName][type] = new Cls({ name: "Default", type }).toObject();
+      defaults.documents[documentName][type] = new Cls({ name: "Default", type, range: [-9999, 9999] }).toObject();
       traverseSchema(CONFIG[documentName]?.dataModels?.[type]?.schema);
     }
   }

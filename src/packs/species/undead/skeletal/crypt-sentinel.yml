@@ -291,139 +291,48 @@ effects:
       targets:
         - self
     type: ability
-  - _id: nRK5u7hC7rcefSJk
-    _key: "!items.effects!7e8536c74ff39e35.nRK5u7hC7rcefSJk"
+  - _id: EaeO2TdZF1JxmPFu
+    _key: "!items.effects!7e8536c74ff39e35.EaeO2TdZF1JxmPFu"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
-    img: systems/teriock/src/icons/abilities/undying-durability.webp
-    name: Undying Durability
-    system:
-      _sup: JzxU0RgvQzNxSIT6
-      affinities:
-        - _id: HaVjAr78BgQGd92W
-          category: statuses
-          type: immunity
-          value: poisoned
-        - _id: OlGtbdaImhaj6OiM
-          category: statuses
-          type: immunity
-          value: suffocating
-        - _id: W3eMyYlHd3WnCnAm
-          category: statuses
-          type: immunity
-          value: unconscious
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - immunity
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      form: special
-      identifier: undying-durability
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
-          @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You do
-          not @Identifier[condition:down]{drop} due to being at negative
-          @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you reach
-          half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have to
-          @Identifier[core:drowning]{breathe}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: GSQKblJqGFbnSuPJ
-    _key: "!items.effects!7e8536c74ff39e35.GSQKblJqGFbnSuPJ"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
-    img: systems/teriock/src/icons/abilities/undead-mind.webp
-    name: Undead Mind
-    system:
-      _sup: JzxU0RgvQzNxSIT6
-      affinities:
-        - _id: EEiHRIyCxZhUuw07
-          category: statuses
-          type: immunity
-          value: charmed
-        - _id: Glnnr440sVehTfZ5
-          category: statuses
-          type: immunity
-          value: frightened
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - immunity
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      form: special
-      identifier: undead-mind
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened} and
-          @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
-          @Identifier[condition:transformed]{transformed}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: RTaAhJriJTz7FP52
-    _key: "!items.effects!7e8536c74ff39e35.RTaAhJriJTz7FP52"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
-    img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
-    name: Mana Drain Grasp
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
     system:
       _sup: JzxU0RgvQzNxSIT6
       automations:
-        - _id: iAyFzPzJgTNeDbbH
-          type: revitalize
-        - _id: 157afc517847f562
-          formula: 1d8[mana]
-          impact: drain
-          type: roll
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
       competence:
         raw: 1
-      delivery: hand
+      delivery: self
+      duration:
+        unit: unlimited
       effectTypes:
-        - draining
-        - revitalization
+        - sensory
+      elements:
+        - necromancy
       executionTime:
-        base: a2
-      form: special
-      identifier: mana-drain-grasp
+        base: passive
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
       powerSources:
         - magical
-      results:
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
-          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
-          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        - primal
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
     type: ability
   - _id: uBgiYqB5TLenhyoz
     _key: "!items.effects!7e8536c74ff39e35.uBgiYqB5TLenhyoz"
@@ -498,44 +407,135 @@ effects:
       targets:
         - self
     type: ability
-  - _id: EaeO2TdZF1JxmPFu
-    _key: "!items.effects!7e8536c74ff39e35.EaeO2TdZF1JxmPFu"
+  - _id: RTaAhJriJTz7FP52
+    _key: "!items.effects!7e8536c74ff39e35.RTaAhJriJTz7FP52"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    name: Ethereal Senses
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
+    img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+    name: Mana Drain Grasp
     system:
       _sup: JzxU0RgvQzNxSIT6
       automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.senses.ethereal
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "120"
-          type: changes
+        - _id: iAyFzPzJgTNeDbbH
+          type: revitalize
+        - _id: 157afc517847f562
+          formula: 1d8[mana]
+          impact: drain
+          type: roll
+      competence:
+        raw: 1
+      delivery: hand
+      effectTypes:
+        - draining
+        - revitalization
+      executionTime:
+        base: a2
+      form: special
+      identifier: mana-drain-grasp
+      powerSources:
+        - magical
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is the
+          only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+          target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
+          part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+    type: ability
+  - _id: GSQKblJqGFbnSuPJ
+    _key: "!items.effects!7e8536c74ff39e35.GSQKblJqGFbnSuPJ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+    img: systems/teriock/src/icons/abilities/undead-mind.webp
+    name: Undead Mind
+    system:
+      _sup: JzxU0RgvQzNxSIT6
+      affinities:
+        - _id: EEiHRIyCxZhUuw07
+          category: statuses
+          type: immunity
+          value: charmed
+        - _id: Glnnr440sVehTfZ5
+          category: statuses
+          type: immunity
+          value: frightened
       competence:
         raw: 1
       delivery: self
       duration:
         unit: unlimited
       effectTypes:
-        - sensory
+        - immunity
       elements:
         - necromancy
       executionTime:
         base: passive
-      identifier: ethereal-senses
+      form: special
+      identifier: undead-mind
       interaction: manifest
       maneuver: passive
       overview:
-        base: <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120 feet.</p>
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened} and
+          @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
+          @Identifier[condition:transformed]{transformed}.</p>
       powerSources:
         - magical
-        - primal
-        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: nRK5u7hC7rcefSJk
+    _key: "!items.effects!7e8536c74ff39e35.nRK5u7hC7rcefSJk"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+    img: systems/teriock/src/icons/abilities/undying-durability.webp
+    name: Undying Durability
+    system:
+      _sup: JzxU0RgvQzNxSIT6
+      affinities:
+        - _id: HaVjAr78BgQGd92W
+          category: statuses
+          type: immunity
+          value: poisoned
+        - _id: OlGtbdaImhaj6OiM
+          category: statuses
+          type: immunity
+          value: suffocating
+        - _id: W3eMyYlHd3WnCnAm
+          category: statuses
+          type: immunity
+          value: unconscious
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: special
+      identifier: undying-durability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
+          @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You do
+          not @Identifier[condition:down]{drop} due to being at negative
+          @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you reach
+          half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have to
+          @Identifier[core:drowning]{breathe}.</p>
+      powerSources:
+        - magical
       range:
         unit: self
       targets:

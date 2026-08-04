@@ -11,6 +11,36 @@ effects:
       identifier: lion-tamer
       tradecraft: tamer
     type: fluency
+  - _id: I7VyUeLfs4ermo1Q
+    _key: "!items.effects!e4781b08f06660b6.I7VyUeLfs4ermo1Q"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e4f10469b5a423c1
+    img: systems/teriock/src/icons/abilities/martial-arts.webp
+    name: Martial Arts
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:offensive-martial-arts]{Offensive Martial Arts} and
+          @Identifier[ability:defensive-martial-arts]{Defensive Martial Arts}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: bpx6OlRPssqYhzmq
     _key: "!items.effects!e4781b08f06660b6.bpx6OlRPssqYhzmq"
     _stats:
@@ -65,13 +95,42 @@ effects:
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
     type: ability
-  - _id: I7VyUeLfs4ermo1Q
-    _key: "!items.effects!e4781b08f06660b6.I7VyUeLfs4ermo1Q"
+  - _id: GTwV0a8OAJVobgS3
+    _key: "!items.effects!e4781b08f06660b6.GTwV0a8OAJVobgS3"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e4f10469b5a423c1
-    img: systems/teriock/src/icons/abilities/martial-arts.webp
-    name: Martial Arts
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    name: Defensive Martial Arts
     system:
+      _sup: I7VyUeLfs4ermo1Q
+      automations:
+        - _id: F9NLbFodo8GgQLdh
+          changeType: upgrade
+          competencies:
+            - 0
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "1"
+        - _id: iijE8Q6bC3GKvrTX
+          changeType: upgrade
+          competencies:
+            - 1
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "2"
+        - _id: pI8dAIbbmiCqE5n9
+          changeType: upgrade
+          competencies:
+            - 2
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "3"
       competence:
         raw: 1
       delivery: self
@@ -79,13 +138,19 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      identifier: martial-arts
+      identifier: defensive-martial-arts
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @Identifier[ability:offensive-martial-arts]{Offensive Martial Arts} and
-          @Identifier[ability:defensive-martial-arts]{Defensive Martial Arts}.</p>
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target them} (although they cannot be
+          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+          @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
+          +1.</p>
+        fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+        proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
       powerSources:
         - martial
       range:
@@ -168,71 +233,6 @@ effects:
           and their damage die is now [[/damage 1d4]].</p>
         fluent: <p>The damage die is instead [[/damage 1d8]].</p>
         proficient: <p>The damage die is instead [[/damage 1d6]].</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: GTwV0a8OAJVobgS3
-    _key: "!items.effects!e4781b08f06660b6.GTwV0a8OAJVobgS3"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    name: Defensive Martial Arts
-    system:
-      _sup: I7VyUeLfs4ermo1Q
-      automations:
-        - _id: F9NLbFodo8GgQLdh
-          changeType: upgrade
-          competencies:
-            - 0
-          key: system.bv.bonus
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: "1"
-        - _id: iijE8Q6bC3GKvrTX
-          changeType: upgrade
-          competencies:
-            - 1
-          key: system.bv.bonus
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: "2"
-        - _id: pI8dAIbbmiCqE5n9
-          changeType: upgrade
-          competencies:
-            - 2
-          key: system.bv.bonus
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: "3"
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: defensive-martial-arts
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
-          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of @Wiki[Category:Weapon
-          target abilities]{abilities that target them} (although they cannot be
-          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
-          @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
-          +1.</p>
-        fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
-        proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
       powerSources:
         - martial
       range:

@@ -537,6 +537,71 @@ items:
               attribute: snk
               value: 1
         type: ability
+      - _id: c0PecCAZvS5TGCdL
+        _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.c0PecCAZvS5TGCdL"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+        img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+        name: Defensive Martial Arts
+        system:
+          _sup: wj7eXV4Atpq0yfEQ
+          automations:
+            - _id: F9NLbFodo8GgQLdh
+              changeType: upgrade
+              competencies:
+                - 0
+              key: system.bv.bonus
+              qualifier: "@prop.handy"
+              target: armament
+              type: childChange
+              value: "1"
+            - _id: iijE8Q6bC3GKvrTX
+              changeType: upgrade
+              competencies:
+                - 1
+              key: system.bv.bonus
+              qualifier: "@prop.handy"
+              target: armament
+              type: childChange
+              value: "2"
+            - _id: pI8dAIbbmiCqE5n9
+              changeType: upgrade
+              competencies:
+                - 2
+              key: system.bv.bonus
+              qualifier: "@prop.handy"
+              target: armament
+              type: childChange
+              value: "3"
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: defensive-martial-arts
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
+              @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of
+              @Wiki[Category:Weapon target abilities]{abilities that target them} (although they cannot be
+              @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+              @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
+              +1.</p>
+            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
       - _id: b27CtiqDD25QmOMp
         _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.b27CtiqDD25QmOMp"
         _stats:
@@ -619,71 +684,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: c0PecCAZvS5TGCdL
-        _key: "!actors.items.effects!30f73615ee60f6a9.30f73615ee60f6a9.c0PecCAZvS5TGCdL"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
-        img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-        name: Defensive Martial Arts
-        system:
-          _sup: wj7eXV4Atpq0yfEQ
-          automations:
-            - _id: F9NLbFodo8GgQLdh
-              changeType: upgrade
-              competencies:
-                - 0
-              key: system.bv.bonus
-              qualifier: "@prop.handy"
-              target: armament
-              type: childChange
-              value: "1"
-            - _id: iijE8Q6bC3GKvrTX
-              changeType: upgrade
-              competencies:
-                - 1
-              key: system.bv.bonus
-              qualifier: "@prop.handy"
-              target: armament
-              type: childChange
-              value: "2"
-            - _id: pI8dAIbbmiCqE5n9
-              changeType: upgrade
-              competencies:
-                - 2
-              key: system.bv.bonus
-              qualifier: "@prop.handy"
-              target: armament
-              type: childChange
-              value: "3"
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: defensive-martial-arts
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
-              @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of
-              @Wiki[Category:Weapon target abilities]{abilities that target them} (although they cannot be
-              @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
-              @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
-              +1.</p>
-            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
-            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
     folder: ff7afe06984df507
     img: systems/teriock/src/icons/creatures/blue-dragonfly.webp
     name: Blue Dragonfly
@@ -733,6 +733,29 @@ items:
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7260c2d897d27b39
     effects:
+      - _id: N3v2gCnZl7LzFaYE
+        _key: "!actors.items.effects!30f73615ee60f6a9.fuhZsm809JpAthf1.N3v2gCnZl7LzFaYE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: GhjutpAE4maLSrd2
         _key: "!actors.items.effects!30f73615ee60f6a9.fuhZsm809JpAthf1.GhjutpAE4maLSrd2"
         _stats:
@@ -764,29 +787,6 @@ items:
             @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
-        type: property
-      - _id: N3v2gCnZl7LzFaYE
-        _key: "!actors.items.effects!30f73615ee60f6a9.fuhZsm809JpAthf1.N3v2gCnZl7LzFaYE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
         type: property
     folder: ff7afe06984df507
     img: systems/teriock/src/icons/body-parts/rending-claw.webp

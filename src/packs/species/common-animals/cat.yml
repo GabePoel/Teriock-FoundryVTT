@@ -272,6 +272,61 @@ effects:
           attribute: snk
           value: 1
     type: ability
+  - _id: JNNQE70jgCIsUe2t
+    _key: "!items.effects!0bec2719aa9daf87.JNNQE70jgCIsUe2t"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: De7GQN6aa3rgGqk8
+      automations:
+        - _id: AXwLjBzDx4XcVcAJ
+          movementAction: climb
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+        - _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.climb
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          competencies:
+            - 1
+            - 2
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: climbing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: bpFbLyI0g5jMQoVt
     _key: "!items.effects!0bec2719aa9daf87.bpFbLyI0g5jMQoVt"
     _stats:
@@ -342,61 +397,6 @@ effects:
         unit: self
       skill: true
       standard: true
-      targets:
-        - self
-    type: ability
-  - _id: JNNQE70jgCIsUe2t
-    _key: "!items.effects!0bec2719aa9daf87.JNNQE70jgCIsUe2t"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a907b978a24ebd6
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    name: Climbing
-    system:
-      _sup: De7GQN6aa3rgGqk8
-      automations:
-        - _id: AXwLjBzDx4XcVcAJ
-          movementAction: climb
-          type: changeMovement
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.speedAdjustments.climb
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "2"
-          type: changes
-        - _id: f025905e157ac261
-          changes:
-            - key: system.speedAdjustments.climb
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "3"
-          competencies:
-            - 1
-            - 2
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-      identifier: climbing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
-        proficient: <p>You instead climb at @Identifier[core:movement-speed]{normal speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
       targets:
         - self
     type: ability

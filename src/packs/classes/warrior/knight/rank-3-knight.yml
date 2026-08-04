@@ -275,6 +275,94 @@ effects:
       targets:
         - self
     type: ability
+  - _id: ClCnF1BfLrqwx4CO
+    _key: "!items.effects!dcb02352d66dc55f.ClCnF1BfLrqwx4CO"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.29d83a03609fbb9a
+    img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
+    name: Master Weapon Smith
+    system:
+      _sup: aohUofsTp0MVBP9L
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: master-weapon-smith
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @Identifier[keyword:expertise]{expert} @Identifier[tradecraft:blacksmith]{blacksmith}. In
+          addition, you gain the ability to create @Identifier[property:master-crafted]{Master Crafted} weapons.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: QhtMNwxvCHGtO5ae
+    _key: "!items.effects!dcb02352d66dc55f.QhtMNwxvCHGtO5ae"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f48c3fc32a01ac3b
+    img: systems/teriock/src/icons/abilities/runic-weapons.webp
+    name: Runic Weapons
+    system:
+      _sup: aohUofsTp0MVBP9L
+      automations:
+        - _id: cA34hJRKJud2tWev
+          identifiers:
+            - property:runic
+          type: addDocuments
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: sight
+      duration:
+        raw: "24"
+        unit: hour
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: "10"
+          unit: minute
+      identifier: runic-weapons
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The @Identifier[core:targets]{targeted} @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          becomes @Identifier[property:runic]{runic}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: "5"
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - weapon
+    type: ability
   - _id: lVtkiO1bPhKVTaHx
     _key: "!items.effects!dcb02352d66dc55f.lVtkiO1bPhKVTaHx"
     _stats:
@@ -349,94 +437,6 @@ effects:
       targets:
         - self
       trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
-    type: ability
-  - _id: QhtMNwxvCHGtO5ae
-    _key: "!items.effects!dcb02352d66dc55f.QhtMNwxvCHGtO5ae"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f48c3fc32a01ac3b
-    img: systems/teriock/src/icons/abilities/runic-weapons.webp
-    name: Runic Weapons
-    system:
-      _sup: aohUofsTp0MVBP9L
-      automations:
-        - _id: cA34hJRKJud2tWev
-          identifiers:
-            - property:runic
-          type: addDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: sight
-      duration:
-        raw: "24"
-        unit: hour
-      executionTime:
-        base: 10 Minutes
-        slow:
-          raw: "10"
-          unit: minute
-      identifier: runic-weapons
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>The @Identifier[core:targets]{targeted} @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-          becomes @Identifier[property:runic]{runic}.</p>
-      powerSources:
-        - magical
-      range:
-        raw: "5"
-        unit: ft
-      ritual: true
-      skill: true
-      standard: true
-      targets:
-        - weapon
-    type: ability
-  - _id: ClCnF1BfLrqwx4CO
-    _key: "!items.effects!dcb02352d66dc55f.ClCnF1BfLrqwx4CO"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.29d83a03609fbb9a
-    img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
-    name: Master Weapon Smith
-    system:
-      _sup: aohUofsTp0MVBP9L
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - key: system.tradecrafts.blacksmith.score
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "2"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: master-weapon-smith
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are an @Identifier[keyword:expertise]{expert} @Identifier[tradecraft:blacksmith]{blacksmith}. In
-          addition, you gain the ability to create @Identifier[property:master-crafted]{Master Crafted} weapons.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
     type: ability
 folder: 00689e4c34a8455c
 img: systems/teriock/src/icons/ranks/rank-3-knight.webp

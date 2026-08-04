@@ -694,11 +694,50 @@ items:
         img: systems/teriock/src/icons/creatures/black-dragonfly.webp
         ringImg: systems/teriock/src/icons/tokens/black-dragonfly.webp
     type: species
+  - _id: TYBf4i6VN3Wq2QdE
+    _key: "!actors.items!264a821e65338a2c.TYBf4i6VN3Wq2QdE"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.5c6cbc659795738c
+    folder: ff7afe06984df507
+    img: systems/teriock/src/icons/body-parts/reinforced-carapace.webp
+    name: Reinforced Carapace
+    system:
+      _sup: 264a821e65338a2c
+      av:
+        raw: 4
+      identifier: reinforced-carapace
+      range:
+        long:
+          unit: self
+    type: body
   - _id: 9ZTxsK8myqOWrMOB
     _key: "!actors.items!264a821e65338a2c.9ZTxsK8myqOWrMOB"
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7260c2d897d27b39
     effects:
+      - _id: N3v2gCnZl7LzFaYE
+        _key: "!actors.items.effects!264a821e65338a2c.9ZTxsK8myqOWrMOB.N3v2gCnZl7LzFaYE"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
       - _id: GhjutpAE4maLSrd2
         _key: "!actors.items.effects!264a821e65338a2c.9ZTxsK8myqOWrMOB.GhjutpAE4maLSrd2"
         _stats:
@@ -731,29 +770,6 @@ items:
           form: intrinsic
           identifier: weapon
         type: property
-      - _id: N3v2gCnZl7LzFaYE
-        _key: "!actors.items.effects!264a821e65338a2c.9ZTxsK8myqOWrMOB.N3v2gCnZl7LzFaYE"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
-        type: property
     folder: ff7afe06984df507
     img: systems/teriock/src/icons/body-parts/rending-claw.webp
     name: Rending Claw
@@ -768,22 +784,6 @@ items:
       range:
         long:
           unit: melee
-    type: body
-  - _id: TYBf4i6VN3Wq2QdE
-    _key: "!actors.items!264a821e65338a2c.TYBf4i6VN3Wq2QdE"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.5c6cbc659795738c
-    folder: ff7afe06984df507
-    img: systems/teriock/src/icons/body-parts/reinforced-carapace.webp
-    name: Reinforced Carapace
-    system:
-      _sup: 264a821e65338a2c
-      av:
-        raw: 4
-      identifier: reinforced-carapace
-      range:
-        long:
-          unit: self
     type: body
 name: Black Dragonfly
 prototypeToken:

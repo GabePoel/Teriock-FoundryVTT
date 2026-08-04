@@ -1,6 +1,30 @@
 _id: a3ff22426104ff03
 _key: "!items!a3ff22426104ff03"
 effects:
+  - _id: lm1uqvzllTvBHNK8
+    _key: "!items.effects!a3ff22426104ff03.lm1uqvzllTvBHNK8"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: derived
+              priority: 10
+              target: Item
+              type: upgrade
+              value: "1"
+          type: changes
+      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+      material: false
+    type: property
   - _id: WLaRPIZxodAAGnbq
     _key: "!items.effects!a3ff22426104ff03.WLaRPIZxodAAGnbq"
     _stats:
@@ -32,30 +56,6 @@ effects:
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    type: property
-  - _id: lm1uqvzllTvBHNK8
-    _key: "!items.effects!a3ff22426104ff03.lm1uqvzllTvBHNK8"
-    _stats:
-      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-    img: systems/teriock/src/icons/properties/armor-voiding.webp
-    name: Armor Voiding
-    system:
-      applyIfDampened: true
-      applyIfDeattuned: true
-      automations:
-        - _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              phase: derived
-              priority: 10
-              target: Item
-              type: upgrade
-              value: "1"
-          type: changes
-      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-      form: intrinsic
-      identifier: armor-voiding
-      material: false
     type: property
 folder: c3c558ce7decc029
 img: systems/teriock/src/icons/body-parts/ripping-claw.webp

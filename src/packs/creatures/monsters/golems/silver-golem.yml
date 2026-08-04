@@ -339,6 +339,44 @@ items:
           targets:
             - item
         type: ability
+      - _id: y55C8eaj0MKiwMnn
+        _key: "!actors.items.effects!ece1371a8713b02c.ece1371a8713b02c.y55C8eaj0MKiwMnn"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9f2c260239342d87
+        img: systems/teriock/src/icons/abilities/silver-being.webp
+        name: Silver Being
+        system:
+          automations:
+            - _id: nrgR5jjTBxRzPswX
+              changeType: typeAdd
+              key: system.damage
+              qualifier: and(@body, @dmg)
+              target: armament
+              type: childChange
+              value: silver
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          identifier: silver-being
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[drain:mana]{mana drain} and your
+              @Pack[teriock.bodyParts]{body parts} deal @Identifier[damage:silver]{silver damage}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: VNiJBUS4ZJYt8IuZ
         _key: "!actors.items.effects!ece1371a8713b02c.ece1371a8713b02c.VNiJBUS4ZJYt8IuZ"
         _stats:
@@ -478,44 +516,6 @@ items:
               attribute: int
               value: 4
         type: ability
-      - _id: y55C8eaj0MKiwMnn
-        _key: "!actors.items.effects!ece1371a8713b02c.ece1371a8713b02c.y55C8eaj0MKiwMnn"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9f2c260239342d87
-        img: systems/teriock/src/icons/abilities/silver-being.webp
-        name: Silver Being
-        system:
-          automations:
-            - _id: nrgR5jjTBxRzPswX
-              changeType: typeAdd
-              key: system.damage
-              qualifier: and(@body, @dmg)
-              target: armament
-              type: childChange
-              value: silver
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-          identifier: silver-being
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[drain:mana]{mana drain} and your
-              @Pack[teriock.bodyParts]{body parts} deal @Identifier[damage:silver]{silver damage}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
     folder: 68067747b6a57d8c
     img: systems/teriock/src/icons/creatures/silver-golem.webp
     name: Silver Golem
@@ -607,43 +607,52 @@ items:
         img: systems/teriock/src/icons/creatures/silver-golem.webp
         ringImg: systems/teriock/src/icons/tokens/silver-golem.webp
     type: species
-  - _id: LU6iwHUpZI9y3smd
-    _key: "!actors.items!ece1371a8713b02c.LU6iwHUpZI9y3smd"
+  - _id: fSiu754OEPSrvyNB
+    _key: "!actors.items!ece1371a8713b02c.fSiu754OEPSrvyNB"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.7caf61307b492868
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
     effects:
-      - _id: wqfdDsQm1GJrMQCa
-        _key: "!actors.items.effects!ece1371a8713b02c.LU6iwHUpZI9y3smd.wqfdDsQm1GJrMQCa"
+      - _id: TWk5AP5nzZgpXkaM
+        _key: "!actors.items.effects!ece1371a8713b02c.fSiu754OEPSrvyNB.TWk5AP5nzZgpXkaM"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.c3e51adeeaf12580
-        img: systems/teriock/src/icons/properties/silver.webp
-        name: Silver
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
-          damageType: silver
+          applyIfDampened: true
+          applyIfDeattuned: true
           description: >-
-            <p>Items that are <b>[[lookup name style=lc]]</b> can @Identifier[core:block-interaction]{block}
-            @Identifier[drain:mana]{mana draining} @Identifier[core:attack-interaction]{attacks} even if they are
-            @Identifier[keyword:unblockable]{UB}. If you are wearing [[lookup name style=lc]]
-            @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}, then @Identifier[drain:mana]{mana
-            draining} @Identifier[core:attack-interaction]{attacks} made against you are not
-            @Identifier[keyword:armor-voiding]{AV0}. [[lookup name]] items also deal @Identifier[damage:silver]{silver
-            damage}.</p>
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
+            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
-          identifier: silver
-          powerSources:
-            - material
+          identifier: bashing
+        type: property
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: "!actors.items.effects!ece1371a8713b02c.fSiu754OEPSrvyNB.IDLUUjkSFtpaiKuJ"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property is easily concealed and can often be used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+          form: intrinsic
+          identifier: small
         type: property
     folder: 68067747b6a57d8c
-    img: systems/teriock/src/icons/body-parts/reinforced-silver-plating.webp
-    name: Reinforced Silver Plating
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
     system:
       _sup: ece1371a8713b02c
-      av:
-        raw: 4
-      identifier: reinforced-silver-plating
+      damage:
+        base: "1"
+      identifier: foot
       range:
         long:
-          unit: self
+          unit: melee
     type: body
   - _id: aDkeppbqA3hWKcHw
     _key: "!actors.items!ece1371a8713b02c.aDkeppbqA3hWKcHw"
@@ -726,52 +735,43 @@ items:
         long:
           unit: melee
     type: body
-  - _id: fSiu754OEPSrvyNB
-    _key: "!actors.items!ece1371a8713b02c.fSiu754OEPSrvyNB"
+  - _id: LU6iwHUpZI9y3smd
+    _key: "!actors.items!ece1371a8713b02c.LU6iwHUpZI9y3smd"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      compendiumSource: Compendium.teriock.bodyParts.Item.7caf61307b492868
     effects:
-      - _id: TWk5AP5nzZgpXkaM
-        _key: "!actors.items.effects!ece1371a8713b02c.fSiu754OEPSrvyNB.TWk5AP5nzZgpXkaM"
+      - _id: wqfdDsQm1GJrMQCa
+        _key: "!actors.items.effects!ece1371a8713b02c.LU6iwHUpZI9y3smd.wqfdDsQm1GJrMQCa"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.c3e51adeeaf12580
+        img: systems/teriock/src/icons/properties/silver.webp
+        name: Silver
         system:
-          applyIfDampened: true
-          applyIfDeattuned: true
+          damageType: silver
           description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
+            <p>Items that are <b>[[lookup name style=lc]]</b> can @Identifier[core:block-interaction]{block}
+            @Identifier[drain:mana]{mana draining} @Identifier[core:attack-interaction]{attacks} even if they are
+            @Identifier[keyword:unblockable]{UB}. If you are wearing [[lookup name style=lc]]
+            @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}, then @Identifier[drain:mana]{mana
+            draining} @Identifier[core:attack-interaction]{attacks} made against you are not
+            @Identifier[keyword:armor-voiding]{AV0}. [[lookup name]] items also deal @Identifier[damage:silver]{silver
+            damage}.</p>
           form: intrinsic
-          identifier: bashing
-        type: property
-      - _id: IDLUUjkSFtpaiKuJ
-        _key: "!actors.items.effects!ece1371a8713b02c.fSiu754OEPSrvyNB.IDLUUjkSFtpaiKuJ"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
-          form: intrinsic
-          identifier: small
+          identifier: silver
+          powerSources:
+            - material
         type: property
     folder: 68067747b6a57d8c
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
+    img: systems/teriock/src/icons/body-parts/reinforced-silver-plating.webp
+    name: Reinforced Silver Plating
     system:
       _sup: ece1371a8713b02c
-      damage:
-        base: "1"
-      identifier: foot
+      av:
+        raw: 4
+      identifier: reinforced-silver-plating
       range:
         long:
-          unit: melee
+          unit: self
     type: body
 name: Silver Golem
 prototypeToken:

@@ -1,21 +1,54 @@
 _id: 21b38d71792642dd
 _key: "!items!21b38d71792642dd"
 effects:
-  - _id: QfYIvnVdhSo69Db6
-    _key: "!items.effects!21b38d71792642dd.QfYIvnVdhSo69Db6"
+  - _id: tFJU61ATYk8dIyh4
+    _key: "!items.effects!21b38d71792642dd.tFJU61ATYk8dIyh4"
     _stats:
-      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
-    img: systems/teriock/src/icons/properties/weapon.webp
-    name: Weapon
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.25a219e3670cd776
+    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
+    name: Spell Catch
     system:
-      applyIfDampened: true
-      applyIfDeattuned: true
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @Identifier[core:attack-interaction]{attack}.</p>
-      form: intrinsic
-      identifier: weapon
-    type: property
+      automations:
+        - _id: ac7f15d75b31c07a
+          data: >-
+            {"system":{"improvement":"<p>You are considered to have and be
+            @Identifier[core:proficiency-bonus]{proficient} in the stored @Wiki[Category:Missile delivery spells]{spell}
+            for this purpose.</p>","limitation":"<p>Can only be used with the stored @Wiki[Category:Missile delivery
+            spells]{spell} and the item it is stored in.</p>","costs":{"tweaks":{"adept":1}}}}
+          identifiers:
+            - ability:spell-strike
+          overrideData: true
+          type: addDocuments
+      duration:
+        raw: "1"
+        unit: hour
+      executionTime:
+        base: r1
+      form: special
+      grantOnly: true
+      identifier: spell-catch
+      interaction: block
+      maneuver: reactive
+      powerSources:
+        - magical
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Missile delivery spells]{missile attack spell} being
+        cast by an opponent.</p>
+      results:
+        fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
+        save: >-
+          <p>The @Identifier[core:targets]{target} @Identifier[core:interactions]{attack} @Wiki[Category:Missile
+          delivery spells]{spell} @Identifier[core:fizzles]{fizzles} and gets "stored" in the
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} used to deliver [[lookup name]]. For the
+          duration of [[lookup name]], you gain @Identifier[keyword:adept]{Adept} @Identifier[keyword:limited]{Limited}
+          @Identifier[keyword:improved]{Improved} @Identifier[ability:spell-strike]{Spell Strike} with the stored
+          @Wiki[Category:Missile delivery spells]{spell}. You are considered to be
+          @Identifier[core:proficiency-bonus]{proficient} with it. Only one @Wiki[Category:Missile delivery
+          spells]{spell} can be stored in the @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} at a
+          time.</p>
+      targets:
+        - spell
+    type: ability
   - _id: YO5TamPRhJOmWbtw
     _key: "!items.effects!21b38d71792642dd.YO5TamPRhJOmWbtw"
     _stats:
@@ -71,54 +104,21 @@ effects:
       targets:
         - weapon
     type: ability
-  - _id: tFJU61ATYk8dIyh4
-    _key: "!items.effects!21b38d71792642dd.tFJU61ATYk8dIyh4"
+  - _id: QfYIvnVdhSo69Db6
+    _key: "!items.effects!21b38d71792642dd.QfYIvnVdhSo69Db6"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.25a219e3670cd776
-    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
-    name: Spell Catch
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
     system:
-      automations:
-        - _id: ac7f15d75b31c07a
-          data: >-
-            {"system":{"improvement":"<p>You are considered to have and be
-            @Identifier[core:proficiency-bonus]{proficient} in the stored @Wiki[Category:Missile delivery spells]{spell}
-            for this purpose.</p>","limitation":"<p>Can only be used with the stored @Wiki[Category:Missile delivery
-            spells]{spell} and the item it is stored in.</p>","costs":{"tweaks":{"adept":1}}}}
-          identifiers:
-            - ability:spell-strike
-          overrideData: true
-          type: addDocuments
-      duration:
-        raw: "1"
-        unit: hour
-      executionTime:
-        base: r1
-      form: special
-      grantOnly: true
-      identifier: spell-catch
-      interaction: block
-      maneuver: reactive
-      powerSources:
-        - magical
-      requirements: >-
-        <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Missile delivery spells]{missile attack spell} being
-        cast by an opponent.</p>
-      results:
-        fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
-        save: >-
-          <p>The @Identifier[core:targets]{target} @Identifier[core:interactions]{attack} @Wiki[Category:Missile
-          delivery spells]{spell} @Identifier[core:fizzles]{fizzles} and gets "stored" in the
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} used to deliver [[lookup name]]. For the
-          duration of [[lookup name]], you gain @Identifier[keyword:adept]{Adept} @Identifier[keyword:limited]{Limited}
-          @Identifier[keyword:improved]{Improved} @Identifier[ability:spell-strike]{Spell Strike} with the stored
-          @Wiki[Category:Missile delivery spells]{spell}. You are considered to be
-          @Identifier[core:proficiency-bonus]{proficient} with it. Only one @Wiki[Category:Missile delivery
-          spells]{spell} can be stored in the @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} at a
-          time.</p>
-      targets:
-        - spell
-    type: ability
+      applyIfDampened: true
+      applyIfDeattuned: true
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @Identifier[core:attack-interaction]{attack}.</p>
+      form: intrinsic
+      identifier: weapon
+    type: property
 folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/tordils-spellmace.webp
 name: Tordil's Spellmace

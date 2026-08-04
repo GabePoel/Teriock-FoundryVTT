@@ -407,52 +407,46 @@ items:
           targets:
             - self
         type: ability
-      - _id: hsTLetjeArUHREjy
-        _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.hsTLetjeArUHREjy"
+      - _id: kk6EgVV6qqooIZWB
+        _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.kk6EgVV6qqooIZWB"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
-        img: systems/teriock/src/icons/abilities/undying-durability.webp
-        name: Undying Durability
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
         system:
           _sup: dYSax77QcviFPtud
-          affinities:
-            - _id: HaVjAr78BgQGd92W
-              category: statuses
-              type: immunity
-              value: poisoned
-            - _id: OlGtbdaImhaj6OiM
-              category: statuses
-              type: immunity
-              value: suffocating
-            - _id: W3eMyYlHd3WnCnAm
-              category: statuses
-              type: immunity
-              value: unconscious
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "120"
+              type: changes
           competence:
             raw: 1
           delivery: self
           duration:
             unit: unlimited
           effectTypes:
-            - immunity
+            - sensory
           elements:
             - necromancy
           executionTime:
             base: passive
-          form: special
-          identifier: undying-durability
+          identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
-              @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You
-              do not @Identifier[condition:down]{drop} due to being at negative
-              @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you
-              reach half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have
-              to @Identifier[core:drowning]{breathe}.</p>
+              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
+              feet.</p>
           powerSources:
             - magical
+            - primal
+            - spiritual
           range:
             unit: self
           targets:
@@ -531,6 +525,45 @@ items:
           targets:
             - self
         type: ability
+      - _id: IDEtn7hT6WBY9lBg
+        _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.IDEtn7hT6WBY9lBg"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
+        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+        name: Mana Drain Grasp
+        system:
+          _sup: dYSax77QcviFPtud
+          automations:
+            - _id: iAyFzPzJgTNeDbbH
+              type: revitalize
+            - _id: 157afc517847f562
+              formula: 1d8[mana]
+              impact: drain
+              type: roll
+          competence:
+            raw: 1
+          delivery: hand
+          effectTypes:
+            - draining
+            - revitalization
+          executionTime:
+            base: a2
+          form: special
+          identifier: mana-drain-grasp
+          powerSources:
+            - magical
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
+              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
+              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        type: ability
       - _id: V04c7WJg6NJKhcH6
         _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.V04c7WJg6NJKhcH6"
         _stats:
@@ -575,89 +608,56 @@ items:
           targets:
             - self
         type: ability
-      - _id: kk6EgVV6qqooIZWB
-        _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.kk6EgVV6qqooIZWB"
+      - _id: hsTLetjeArUHREjy
+        _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.hsTLetjeArUHREjy"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        name: Ethereal Senses
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+        img: systems/teriock/src/icons/abilities/undying-durability.webp
+        name: Undying Durability
         system:
           _sup: dYSax77QcviFPtud
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.senses.ethereal
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "120"
-              type: changes
+          affinities:
+            - _id: HaVjAr78BgQGd92W
+              category: statuses
+              type: immunity
+              value: poisoned
+            - _id: OlGtbdaImhaj6OiM
+              category: statuses
+              type: immunity
+              value: suffocating
+            - _id: W3eMyYlHd3WnCnAm
+              category: statuses
+              type: immunity
+              value: unconscious
           competence:
             raw: 1
           delivery: self
           duration:
             unit: unlimited
           effectTypes:
-            - sensory
+            - immunity
           elements:
             - necromancy
           executionTime:
             base: passive
-          identifier: ethereal-senses
+          form: special
+          identifier: undying-durability
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
-              feet.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
+              @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You
+              do not @Identifier[condition:down]{drop} due to being at negative
+              @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you
+              reach half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have
+              to @Identifier[core:drowning]{breathe}.</p>
           powerSources:
             - magical
-            - primal
-            - spiritual
           range:
             unit: self
           targets:
             - self
-        type: ability
-      - _id: IDEtn7hT6WBY9lBg
-        _key: "!actors.items.effects!5553d72b216a8152.5553d72b216a8152.IDEtn7hT6WBY9lBg"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
-        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
-        name: Mana Drain Grasp
-        system:
-          _sup: dYSax77QcviFPtud
-          automations:
-            - _id: iAyFzPzJgTNeDbbH
-              type: revitalize
-            - _id: 157afc517847f562
-              formula: 1d8[mana]
-              impact: drain
-              type: roll
-          competence:
-            raw: 1
-          delivery: hand
-          effectTypes:
-            - draining
-            - revitalization
-          executionTime:
-            base: a2
-          form: special
-          identifier: mana-drain-grasp
-          powerSources:
-            - magical
-          results:
-            critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
-              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-            hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
-              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
         type: ability
     folder: 65fbed36e42b583a
     img: systems/teriock/src/icons/creatures/beast-vampire.webp
@@ -684,58 +684,6 @@ items:
         img: systems/teriock/src/icons/creatures/beast-vampire.webp
         ringImg: systems/teriock/src/icons/tokens/beast-vampire.webp
     type: species
-  - _id: PFjxyaJEpGn3COSY
-    _key: "!actors.items!5553d72b216a8152.PFjxyaJEpGn3COSY"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
-    effects:
-      - _id: vgYp2OlY2QgragN9
-        _key: "!actors.items.effects!5553d72b216a8152.PFjxyaJEpGn3COSY.vgYp2OlY2QgragN9"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
-            abilities}.</p>
-          form: intrinsic
-          identifier: handy
-          powerSources:
-            - martial
-        type: property
-      - _id: rxHvNMZbvlGHFxTl
-        _key: "!actors.items.effects!5553d72b216a8152.PFjxyaJEpGn3COSY.rxHvNMZbvlGHFxTl"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
-        img: systems/teriock/src/icons/properties/weapon.webp
-        name: Weapon
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Identifier[core:attack-interaction]{attack}.</p>
-          form: intrinsic
-          identifier: weapon
-        type: property
-    folder: 65fbed36e42b583a
-    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
-    name: Sharp Claw
-    system:
-      _sup: 5553d72b216a8152
-      bv:
-        raw: 1
-      damage:
-        base: 1d6
-      fightingStyle: savage
-      identifier: sharp-claw
-      range:
-        long:
-          unit: melee
-    type: body
   - _id: SXCzmuDmCan3Iblp
     _key: "!actors.items!5553d72b216a8152.SXCzmuDmCan3Iblp"
     _stats:
@@ -831,6 +779,58 @@ items:
       damage:
         base: "1"
       identifier: foot
+      range:
+        long:
+          unit: melee
+    type: body
+  - _id: PFjxyaJEpGn3COSY
+    _key: "!actors.items!5553d72b216a8152.PFjxyaJEpGn3COSY"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
+    effects:
+      - _id: vgYp2OlY2QgragN9
+        _key: "!actors.items.effects!5553d72b216a8152.PFjxyaJEpGn3COSY.vgYp2OlY2QgragN9"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          powerSources:
+            - martial
+        type: property
+      - _id: rxHvNMZbvlGHFxTl
+        _key: "!actors.items.effects!5553d72b216a8152.PFjxyaJEpGn3COSY.rxHvNMZbvlGHFxTl"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+        type: property
+    folder: 65fbed36e42b583a
+    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
+    name: Sharp Claw
+    system:
+      _sup: 5553d72b216a8152
+      bv:
+        raw: 1
+      damage:
+        base: 1d6
+      fightingStyle: savage
+      identifier: sharp-claw
       range:
         long:
           unit: melee

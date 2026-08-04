@@ -3,6 +3,94 @@ _key: "!actors!7e14d563534e10ca"
 folder: 6c73074fd40cac00
 img: systems/teriock/src/icons/creatures/red-wisp-guard.webp
 items:
+  - _id: 4a095aaed0254ec3
+    _key: "!actors.items!7e14d563534e10ca.4a095aaed0254ec3"
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
+    effects:
+      - _id: NGCuRUaVtXnxAbRe
+        _key: "!actors.items.effects!7e14d563534e10ca.4a095aaed0254ec3.NGCuRUaVtXnxAbRe"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
+        img: systems/teriock/src/icons/abilities/arcane-ray.webp
+        name: Arcane Ray
+        system:
+          automations:
+            - _id: 800c70e6560525a8
+              formula: (1 + @h)d4[magic]
+              type: roll
+          competence:
+            raw: 1
+          delivery: missile
+          effectTypes:
+            - damaging
+          heightened: >-
+            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+            1d4[magic]]] @Identifier[core:damage]{damage}.</p>
+          identifier: arcane-ray
+          powerSources:
+            - magical
+          range:
+            raw: "60"
+            unit: ft
+          results:
+            critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
+            hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
+          spell: true
+          standard: true
+        type: ability
+      - _id: aCWLNsvSFjEuLTyl
+        _key: "!actors.items.effects!7e14d563534e10ca.4a095aaed0254ec3.aCWLNsvSFjEuLTyl"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
+        img: systems/teriock/src/icons/abilities/staff-touch.webp
+        name: Staff Touch
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: staff-touch
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You may use your @Identifier[property:magelore]{magelore} items as though they were your
+              @Identifier[body:hand]{hand}. This makes them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not @Identifier[core:proficiency-bonus]{proficient}
+              nor @Identifier[core:fluency-bonus]{fluent} with @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
+            fluent: >-
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an @Pack[teriock.abilities]{ability} you use
+              through your @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that @Pack[teriock.abilities]{ability}.</p>
+            proficient: >-
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with an @Pack[teriock.abilities]{ability}
+              you use through your @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that @Pack[teriock.abilities]{ability}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+    folder: 4a095aaed0254ec3
+    img: systems/teriock/src/icons/archetypes/mage.webp
+    name: Mage
+    system:
+      description: >-
+        <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical spells} and each class has a different
+        approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
+        prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
+        avoiding messy melees.</p>
+      identifier: mage
+    type: archetype
   - _id: 7e14d563534e10ca
     _key: "!actors.items!7e14d563534e10ca.7e14d563534e10ca"
     _stats:
@@ -491,6 +579,51 @@ items:
           spell: true
           standard: true
         type: ability
+      - _id: F0pW5wQmZmI47san
+        _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.F0pW5wQmZmI47san"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
+        system:
+          _sup: AoFWm4xlEVPWCwuj
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "120"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          identifier: ethereal-senses
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
+              feet.</p>
+          powerSources:
+            - magical
+            - primal
+            - spiritual
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: GqxmMJqPY6Z9PAfW
         _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.GqxmMJqPY6Z9PAfW"
         _stats:
@@ -526,6 +659,82 @@ items:
             unit: self
           targets:
             - self
+        type: ability
+      - _id: YnKrZv2RkEsYU6nG
+        _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.YnKrZv2RkEsYU6nG"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
+        img: systems/teriock/src/icons/abilities/impure-durability.webp
+        name: Impure Durability
+        system:
+          _sup: AoFWm4xlEVPWCwuj
+          affinities:
+            - _id: uevhIJEJYaY0sz5X
+              category: other
+              type: immunity
+              value: Non-Magical Non-Silver Damage
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: special
+          identifier: impure-durability
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to non-@Identifier[damage:magic]{magic}
+              non-@Identifier[damage:silver]{silver} @Identifier[core:damage]{damage}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: FArsrAbEaHkfiQVF
+        _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.FArsrAbEaHkfiQVF"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
+        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+        name: Mana Drain Grasp
+        system:
+          _sup: AoFWm4xlEVPWCwuj
+          automations:
+            - _id: iAyFzPzJgTNeDbbH
+              type: revitalize
+            - _id: 157afc517847f562
+              formula: 1d8[mana]
+              impact: drain
+              type: roll
+          competence:
+            raw: 1
+          delivery: hand
+          effectTypes:
+            - draining
+            - revitalization
+          executionTime:
+            base: a2
+          form: special
+          identifier: mana-drain-grasp
+          powerSources:
+            - magical
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
+              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
+              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
         type: ability
       - _id: bX2cey50NmvNOUEj
         _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.bX2cey50NmvNOUEj"
@@ -617,127 +826,6 @@ items:
               to @Identifier[core:drowning]{breathe}.</p>
           powerSources:
             - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: YnKrZv2RkEsYU6nG
-        _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.YnKrZv2RkEsYU6nG"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
-        img: systems/teriock/src/icons/abilities/impure-durability.webp
-        name: Impure Durability
-        system:
-          _sup: AoFWm4xlEVPWCwuj
-          affinities:
-            - _id: uevhIJEJYaY0sz5X
-              category: other
-              type: immunity
-              value: Non-Magical Non-Silver Damage
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime:
-            base: passive
-          form: special
-          identifier: impure-durability
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to non-@Identifier[damage:magic]{magic}
-              non-@Identifier[damage:silver]{silver} @Identifier[core:damage]{damage}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: FArsrAbEaHkfiQVF
-        _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.FArsrAbEaHkfiQVF"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
-        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
-        name: Mana Drain Grasp
-        system:
-          _sup: AoFWm4xlEVPWCwuj
-          automations:
-            - _id: iAyFzPzJgTNeDbbH
-              type: revitalize
-            - _id: 157afc517847f562
-              formula: 1d8[mana]
-              impact: drain
-              type: roll
-          competence:
-            raw: 1
-          delivery: hand
-          effectTypes:
-            - draining
-            - revitalization
-          executionTime:
-            base: a2
-          form: special
-          identifier: mana-drain-grasp
-          powerSources:
-            - magical
-          results:
-            critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
-              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-            hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
-              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        type: ability
-      - _id: F0pW5wQmZmI47san
-        _key: "!actors.items.effects!7e14d563534e10ca.7e14d563534e10ca.F0pW5wQmZmI47san"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        name: Ethereal Senses
-        system:
-          _sup: AoFWm4xlEVPWCwuj
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.senses.ethereal
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "120"
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - sensory
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-          identifier: ethereal-senses
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
-              feet.</p>
-          powerSources:
-            - magical
-            - primal
-            - spiritual
           range:
             unit: self
           targets:
@@ -926,11 +1014,11 @@ items:
               @Identifier[core:difficulty-class]{DC}. This @Identifier[core:detonate-expansion]{detonating}
               @Identifier[core:aura-delivery]{aura} is @Wiki[Category:Loud effects]{loud}.</p>
             fluent: >-
-              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the [[:Core:Feat
-              Interaction|feat save @Identifier[core:difficulty-class]{DC}]].</p>
+              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the
+              @Identifier[core:feat-interaction]{feat save} @Identifier[core:difficulty-class]{DC}.</p>
             proficient: >-
-              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the [[:Core:Feat
-              Interaction|feat save @Identifier[core:difficulty-class]{DC}]] and you may
+              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the
+              @Identifier[core:feat-interaction]{feat save} @Identifier[core:difficulty-class]{DC} and you may
               @Identifier[core:targets]{target} creatures other than yourself.</p>
           powerSources:
             - magical
@@ -944,53 +1032,6 @@ items:
           spell: true
           standard: true
           sustained: true
-        type: ability
-      - _id: GqFMBH8Gex1rjDnA
-        _key: "!actors.items.effects!7e14d563534e10ca.1YcqlwwcsA0PYIyU.GqFMBH8Gex1rjDnA"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3b0ab4b52326316f
-        img: systems/teriock/src/icons/abilities/light.webp
-        name: Light
-        system:
-          _sup: LbLjjWiopqGfltmW
-          automations:
-            - _id: LdZVSs1LskViKI2J
-              light:
-                angle: 60
-                animation:
-                  type: flame
-                bright: 100
-                color: "#c64600"
-                dim: 50
-              type: light
-            - _id: FoFDvat2UIccUJn4
-              preventBlockCone: true
-              type: override
-          competence:
-            raw: 1
-          delivery: cone
-          duration:
-            raw: "1"
-            unit: minute
-          elements:
-            - flame
-          identifier: light
-          interaction: manifest
-          overview:
-            base: >-
-              <p>The area is illuminated. This [[lookup name style=lc]] emanates from your hand and moves with you. You
-              may change its direction at will.</p>
-          powerSources:
-            - magical
-          range:
-            raw: "100"
-            unit: ft
-          spell: true
-          standard: true
-          sustained: true
-          targets:
-            - area
-            - self
         type: ability
       - _id: KWU33VDULzJOZZfI
         _key: "!actors.items.effects!7e14d563534e10ca.1YcqlwwcsA0PYIyU.KWU33VDULzJOZZfI"
@@ -1045,6 +1086,53 @@ items:
           targets:
             - item
         type: ability
+      - _id: GqFMBH8Gex1rjDnA
+        _key: "!actors.items.effects!7e14d563534e10ca.1YcqlwwcsA0PYIyU.GqFMBH8Gex1rjDnA"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3b0ab4b52326316f
+        img: systems/teriock/src/icons/abilities/light.webp
+        name: Light
+        system:
+          _sup: LbLjjWiopqGfltmW
+          automations:
+            - _id: LdZVSs1LskViKI2J
+              light:
+                angle: 60
+                animation:
+                  type: flame
+                bright: 100
+                color: "#c64600"
+                dim: 50
+              type: light
+            - _id: FoFDvat2UIccUJn4
+              preventBlockCone: true
+              type: override
+          competence:
+            raw: 1
+          delivery: cone
+          duration:
+            raw: "1"
+            unit: minute
+          elements:
+            - flame
+          identifier: light
+          interaction: manifest
+          overview:
+            base: >-
+              <p>The area is illuminated. This [[lookup name style=lc]] emanates from your hand and moves with you. You
+              may change its direction at will.</p>
+          powerSources:
+            - magical
+          range:
+            raw: "100"
+            unit: ft
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - area
+            - self
+        type: ability
     folder: 6c73074fd40cac00
     img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
     name: Rank 1 Flame Mage
@@ -1067,94 +1155,6 @@ items:
         mp:
           formula: 1d12
     type: rank
-  - _id: 4a095aaed0254ec3
-    _key: "!actors.items!7e14d563534e10ca.4a095aaed0254ec3"
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
-    effects:
-      - _id: NGCuRUaVtXnxAbRe
-        _key: "!actors.items.effects!7e14d563534e10ca.4a095aaed0254ec3.NGCuRUaVtXnxAbRe"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
-        img: systems/teriock/src/icons/abilities/arcane-ray.webp
-        name: Arcane Ray
-        system:
-          automations:
-            - _id: 800c70e6560525a8
-              formula: (1 + @h)d4[magic]
-              type: roll
-          competence:
-            raw: 1
-          delivery: missile
-          effectTypes:
-            - damaging
-          heightened: >-
-            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
-            1d4[magic]]] @Identifier[core:damage]{damage}.</p>
-          identifier: arcane-ray
-          powerSources:
-            - magical
-          range:
-            raw: "60"
-            unit: ft
-          results:
-            critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
-            hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
-          spell: true
-          standard: true
-        type: ability
-      - _id: aCWLNsvSFjEuLTyl
-        _key: "!actors.items.effects!7e14d563534e10ca.4a095aaed0254ec3.aCWLNsvSFjEuLTyl"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
-        img: systems/teriock/src/icons/abilities/staff-touch.webp
-        name: Staff Touch
-        system:
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: staff-touch
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You may use your @Identifier[property:magelore]{magelore} items as though they were your
-              @Identifier[body:hand]{hand}. This makes them @Identifier[property:handy]{handy} and
-              @Identifier[property:prehensile]{prehensile}. You are not @Identifier[core:proficiency-bonus]{proficient}
-              nor @Identifier[core:fluency-bonus]{fluent} with @Pack[teriock.abilities]{abilities} you use through your
-              @Identifier[property:magelore]{magelore} items.</p>
-            fluent: >-
-              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an @Pack[teriock.abilities]{ability} you use
-              through your @Identifier[property:magelore]{magelore} items, you regain the
-              @Identifier[core:fluency-bonus]{fluency bonus} for that @Pack[teriock.abilities]{ability}.</p>
-            proficient: >-
-              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with an @Pack[teriock.abilities]{ability}
-              you use through your @Identifier[property:magelore]{magelore} items, you regain the
-              @Identifier[core:proficiency-bonus]{proficiency bonus} for that @Pack[teriock.abilities]{ability}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-    folder: 4a095aaed0254ec3
-    img: systems/teriock/src/icons/archetypes/mage.webp
-    name: Mage
-    system:
-      description: >-
-        <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical spells} and each class has a different
-        approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
-        prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
-        avoiding messy melees.</p>
-      identifier: mage
-    type: archetype
 name: Red Wisp Guard
 prototypeToken:
   displayBars: 20

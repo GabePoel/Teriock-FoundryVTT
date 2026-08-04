@@ -3,6 +3,29 @@ _key: "!items!6Ku1gup3FAYG6Awo"
 _stats:
   compendiumSource: Compendium.teriock.bodyParts.Item.92b4a6adb56ebb60
 effects:
+  - _id: nHenDNvcU7WGQblm
+    _key: "!items.effects!6Ku1gup3FAYG6Awo.nHenDNvcU7WGQblm"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              phase: derived
+              priority: 10
+              target: Item
+              type: upgrade
+              value: "1"
+          type: changes
+      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+    type: property
   - _id: guAm8CgIaPG3oGjQ
     _key: "!items.effects!6Ku1gup3FAYG6Awo.guAm8CgIaPG3oGjQ"
     _stats:
@@ -46,29 +69,6 @@ effects:
         @Identifier[core:attack-interaction]{attack}.</p>
       form: intrinsic
       identifier: weapon
-    type: property
-  - _id: nHenDNvcU7WGQblm
-    _key: "!items.effects!6Ku1gup3FAYG6Awo.nHenDNvcU7WGQblm"
-    _stats:
-      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-    img: systems/teriock/src/icons/properties/armor-voiding.webp
-    name: Armor Voiding
-    system:
-      applyIfDampened: true
-      applyIfDeattuned: true
-      automations:
-        - _id: parameterChanges
-          changes:
-            - key: system.piercing.raw
-              phase: derived
-              priority: 10
-              target: Item
-              type: upgrade
-              value: "1"
-          type: changes
-      description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-      form: intrinsic
-      identifier: armor-voiding
     type: property
 folder: 8185a98b7551093c
 img: systems/teriock/src/icons/body-parts/piercing-stinger.webp

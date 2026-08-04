@@ -434,6 +434,79 @@ effects:
       targets:
         - self
     type: ability
+  - _id: 5Wb1Zx75cObAnqLp
+    _key: "!items.effects!7bd9a75a1618ca30.5Wb1Zx75cObAnqLp"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: UvbNcN3QJy19oMns
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: healing-sensitivity
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
+          providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you roll
+          your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
+          @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
+          @Identifier[core:healing]{healing} effect. This does not consume any of your
+          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: F6etH4jl9d4pxh5h
+    _key: "!items.effects!7bd9a75a1618ca30.F6etH4jl9d4pxh5h"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0xeUItY3xpmcwjmG
+    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
+    name: Slow Mana Drain
+    system:
+      _sup: UvbNcN3QJy19oMns
+      automations:
+        - _id: 8XZ7f1wVBuhfreru
+          type: revitalize
+        - _id: VwMG074x6235laJJ
+          amount: 999999
+          impact: drain
+          type: take
+      competence:
+        raw: 1
+      delivery: hand
+      effectTypes:
+        - draining
+        - revitalization
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: "10"
+          unit: minute
+      identifier: slow-mana-drain
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Deal enough @Identifier[drain:mana]{mana drain} to @Identifier[condition:dead]{kill} the target. If this
+          successfully @Identifier[condition:dead]{kills} the target, you
+          @Identifier[core:revitalizing]{revitalize}.</p>
+      powerSources:
+        - magical
+    type: ability
   - _id: 3rGaSkrSqxRVX9tm
     _key: "!items.effects!7bd9a75a1618ca30.3rGaSkrSqxRVX9tm"
     _stats:
@@ -528,79 +601,6 @@ effects:
         unit: self
       targets:
         - self
-    type: ability
-  - _id: 5Wb1Zx75cObAnqLp
-    _key: "!items.effects!7bd9a75a1618ca30.5Wb1Zx75cObAnqLp"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    name: Healing Sensitivity
-    system:
-      _sup: UvbNcN3QJy19oMns
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      elements:
-        - necromancy
-      executionTime:
-        base: passive
-      form: flaw
-      identifier: healing-sensitivity
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
-          providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you roll
-          your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
-          @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
-          @Identifier[core:healing]{healing} effect. This does not consume any of your
-          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: F6etH4jl9d4pxh5h
-    _key: "!items.effects!7bd9a75a1618ca30.F6etH4jl9d4pxh5h"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0xeUItY3xpmcwjmG
-    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
-    name: Slow Mana Drain
-    system:
-      _sup: UvbNcN3QJy19oMns
-      automations:
-        - _id: 8XZ7f1wVBuhfreru
-          type: revitalize
-        - _id: VwMG074x6235laJJ
-          amount: 999999
-          impact: drain
-          type: take
-      competence:
-        raw: 1
-      delivery: hand
-      effectTypes:
-        - draining
-        - revitalization
-      executionTime:
-        base: 10 Minutes
-        slow:
-          raw: "10"
-          unit: minute
-      identifier: slow-mana-drain
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Deal enough @Identifier[drain:mana]{mana drain} to @Identifier[condition:dead]{kill} the target. If this
-          successfully @Identifier[condition:dead]{kills} the target, you
-          @Identifier[core:revitalizing]{revitalize}.</p>
-      powerSources:
-        - magical
     type: ability
 folder: b8dcf1ebf1b3e669
 img: systems/teriock/src/icons/creatures/ghost.webp

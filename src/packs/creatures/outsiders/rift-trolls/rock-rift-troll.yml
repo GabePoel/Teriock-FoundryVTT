@@ -479,14 +479,14 @@ items:
           targets:
             - self
         type: ability
-      - _id: rqrEvgsiUPPIsEAe
-        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.rqrEvgsiUPPIsEAe"
+      - _id: rQ8SPqqG0NmGLaHH
+        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.rQ8SPqqG0NmGLaHH"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
-        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-        name: Supernatural Strength
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          _sup: q5hx5wSGyiwC8io7
+          _sup: wNh2PKIhnLdtvVef
           competence:
             raw: 1
           delivery: self
@@ -494,27 +494,70 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: special
-          identifier: supernatural-strength
+          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
-              @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
-              @Identifier[keyword:deboosted]{deboost} any melee
-              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-              @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p
+              class="note"><b>Note:</b> @Identifier[property:armor-piercing]{Armor piercing} weapons must still be
+              wielded in two hands to be @Identifier[keyword:armor-voiding]{AV0}.</p>
           powerSources:
             - martial
           range:
             unit: self
+          skill: true
+          standard: true
           targets:
             - self
           upgrades:
             score:
               attribute: str
-              value: 4
+              value: 1
+        type: ability
+      - _id: 7UiQRCbC6fR12AQL
+        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.7UiQRCbC6fR12AQL"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5kiWISOrId6roSdR
+        img: systems/teriock/src/icons/abilities/command-elite.webp
+        name: Command Elite
+        system:
+          _sup: 2RT3ng4w4zTDCVN5
+          competence:
+            raw: 1
+          costs:
+            primary:
+              mp:
+                formula: "3"
+                type: formula
+          delivery: sight
+          duration:
+            raw: "1"
+            unit: minute
+          effectTypes:
+            - control
+            - mental
+          elements:
+            - necromancy
+          featSaveAttribute: unp
+          form: special
+          identifier: command-elite
+          interaction: feat
+          limitation: >-
+            <p>@Wiki[Category:Elemental creatures]{Earth elementals} only. Creatures remain under your command only
+            while they are within range of Nature Element Shaping.</p>
+          overview:
+            fluent: <p>The command may be up to 3 × (1 + @Identifier[core:fluency-bonus]{F}) words in length.</p>
+            proficient: <p>The command may be up to 3 × (1 + @Identifier[core:proficiency-bonus]{P}) words in length.</p>
+          powerSources:
+            - magical
+          range:
+            raw: "10"
+            unit: ft
+          results:
+            fail: >-
+              <p>Give a command of up to 3 words in length. The @Identifier[core:targets]{target} must follow this
+              command for the duration of this effect.</p>
         type: ability
       - _id: n3FP3ocuH8ItXlxo
         _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.n3FP3ocuH8ItXlxo"
@@ -556,6 +599,35 @@ items:
               attribute: str
               value: 3
         type: ability
+      - _id: Ldi1SrwdEVRQ9ZGG
+        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.Ldi1SrwdEVRQ9ZGG"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: wNh2PKIhnLdtvVef
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: improved-armor-piercing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
       - _id: wNh2PKIhnLdtvVef
         _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.wNh2PKIhnLdtvVef"
         _stats:
@@ -590,71 +662,6 @@ items:
             score:
               attribute: str
               value: 2
-        type: ability
-      - _id: rQ8SPqqG0NmGLaHH
-        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.rQ8SPqqG0NmGLaHH"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        name: Beastly Strength
-        system:
-          _sup: wNh2PKIhnLdtvVef
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: beastly-strength
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p
-              class="note"><b>Note:</b> @Identifier[property:armor-piercing]{Armor piercing} weapons must still be
-              wielded in two hands to be @Identifier[keyword:armor-voiding]{AV0}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-        type: ability
-      - _id: Ldi1SrwdEVRQ9ZGG
-        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.Ldi1SrwdEVRQ9ZGG"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        name: Improved Armor Piercing
-        system:
-          _sup: wNh2PKIhnLdtvVef
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: improved-armor-piercing
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
         type: ability
       - _id: HimCbT6X4xkJD0K2
         _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.HimCbT6X4xkJD0K2"
@@ -723,49 +730,42 @@ items:
           targets:
             - item
         type: ability
-      - _id: 7UiQRCbC6fR12AQL
-        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.7UiQRCbC6fR12AQL"
+      - _id: rqrEvgsiUPPIsEAe
+        _key: "!actors.items.effects!ca4dae638fd0baf0.ca4dae638fd0baf0.rqrEvgsiUPPIsEAe"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5kiWISOrId6roSdR
-        img: systems/teriock/src/icons/abilities/command-elite.webp
-        name: Command Elite
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
+        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+        name: Supernatural Strength
         system:
-          _sup: 2RT3ng4w4zTDCVN5
+          _sup: q5hx5wSGyiwC8io7
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "3"
-                type: formula
-          delivery: sight
+          delivery: self
           duration:
-            raw: "1"
-            unit: minute
-          effectTypes:
-            - control
-            - mental
-          elements:
-            - necromancy
-          featSaveAttribute: unp
+            unit: unlimited
+          executionTime:
+            base: passive
           form: special
-          identifier: command-elite
-          interaction: feat
-          limitation: >-
-            <p>@Wiki[Category:Elemental creatures]{Earth elementals} only. Creatures remain under your command only
-            while they are within range of Nature Element Shaping.</p>
+          identifier: supernatural-strength
+          interaction: manifest
+          maneuver: passive
           overview:
-            fluent: <p>The command may be up to 3 × (1 + @Identifier[core:fluency-bonus]{F}) words in length.</p>
-            proficient: <p>The command may be up to 3 × (1 + @Identifier[core:proficiency-bonus]{P}) words in length.</p>
+            base: >-
+              <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+              @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
+              @Identifier[keyword:deboosted]{deboost} any melee
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
           powerSources:
-            - magical
+            - martial
           range:
-            raw: "10"
-            unit: ft
-          results:
-            fail: >-
-              <p>Give a command of up to 3 words in length. The @Identifier[core:targets]{target} must follow this
-              command for the duration of this effect.</p>
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 4
         type: ability
     folder: 4a7a806a79c3098a
     img: systems/teriock/src/icons/creatures/rock-rift-troll.webp
@@ -796,97 +796,68 @@ items:
         img: systems/teriock/src/icons/creatures/rock-rift-troll.webp
         ringImg: systems/teriock/src/icons/tokens/rock-rift-troll.webp
     type: species
-  - _id: 7fBZh6Wl4OvoAIaZ
-    _key: "!actors.items!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ"
+  - _id: nvjharJyOoAUspDc
+    _key: "!actors.items!ca4dae638fd0baf0.nvjharJyOoAUspDc"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.5fc9240e0297a542
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
     effects:
-      - _id: Sp0ZJRJdCTJSSn9m
-        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.Sp0ZJRJdCTJSSn9m"
+      - _id: TWk5AP5nzZgpXkaM
+        _key: "!actors.items.effects!ca4dae638fd0baf0.nvjharJyOoAUspDc.TWk5AP5nzZgpXkaM"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
-            abilities}.</p>
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
+            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
-          identifier: handy
-          powerSources:
-            - martial
+          identifier: bashing
         type: property
-      - _id: BSADIipS65gkiSsK
-        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.BSADIipS65gkiSsK"
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: "!actors.items.effects!ca4dae638fd0baf0.nvjharJyOoAUspDc.IDLUUjkSFtpaiKuJ"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
-        img: systems/teriock/src/icons/properties/prehensile.webp
-        name: Prehensile
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such as while using
-            @Identifier[ability:interact]{Interact}.</p>
+            <p>An item with this property is easily concealed and can often be used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
-          identifier: prehensile
-          powerSources:
-            - martial
-        type: property
-      - _id: n6MmBcTDYrDSMa6C
-        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.n6MmBcTDYrDSMa6C"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
-        img: systems/teriock/src/icons/properties/weapon.webp
-        name: Weapon
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Identifier[core:attack-interaction]{attack}.</p>
-          form: intrinsic
-          identifier: weapon
-        type: property
-      - _id: up27i6uO2YFqMy5x
-        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.up27i6uO2YFqMy5x"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
+          identifier: small
         type: property
     folder: 4a7a806a79c3098a
-    img: systems/teriock/src/icons/body-parts/prehensile-rending-claw.webp
-    name: Prehensile Rending Claw
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
     system:
       _sup: ca4dae638fd0baf0
-      bv:
-        raw: 1
       damage:
-        base: 1d8
-      fightingStyle: savage
-      identifier: prehensile-rending-claw
+        base: "1"
+      identifier: foot
       range:
         long:
           unit: melee
+    type: body
+  - _id: fQZyJ3gvZdGiaYtP
+    _key: "!actors.items!ca4dae638fd0baf0.fQZyJ3gvZdGiaYtP"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.9df212d89cab196d
+    folder: 4a7a806a79c3098a
+    img: systems/teriock/src/icons/body-parts/hide.webp
+    name: Hide
+    system:
+      _sup: ca4dae638fd0baf0
+      av:
+        raw: 1
+      identifier: hide
+      range:
+        long:
+          unit: self
     type: body
   - _id: eDPMAI2tZEzkMlGb
     _key: "!actors.items!ca4dae638fd0baf0.eDPMAI2tZEzkMlGb"
@@ -953,65 +924,94 @@ items:
         long:
           unit: melee
     type: body
-  - _id: fQZyJ3gvZdGiaYtP
-    _key: "!actors.items!ca4dae638fd0baf0.fQZyJ3gvZdGiaYtP"
+  - _id: 7fBZh6Wl4OvoAIaZ
+    _key: "!actors.items!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.9df212d89cab196d
-    folder: 4a7a806a79c3098a
-    img: systems/teriock/src/icons/body-parts/hide.webp
-    name: Hide
-    system:
-      _sup: ca4dae638fd0baf0
-      av:
-        raw: 1
-      identifier: hide
-      range:
-        long:
-          unit: self
-    type: body
-  - _id: nvjharJyOoAUspDc
-    _key: "!actors.items!ca4dae638fd0baf0.nvjharJyOoAUspDc"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      compendiumSource: Compendium.teriock.bodyParts.Item.5fc9240e0297a542
     effects:
-      - _id: TWk5AP5nzZgpXkaM
-        _key: "!actors.items.effects!ca4dae638fd0baf0.nvjharJyOoAUspDc.TWk5AP5nzZgpXkaM"
+      - _id: up27i6uO2YFqMy5x
+        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.up27i6uO2YFqMy5x"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
-          identifier: bashing
+          identifier: armor-voiding
         type: property
-      - _id: IDLUUjkSFtpaiKuJ
-        _key: "!actors.items.effects!ca4dae638fd0baf0.nvjharJyOoAUspDc.IDLUUjkSFtpaiKuJ"
+      - _id: Sp0ZJRJdCTJSSn9m
+        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.Sp0ZJRJdCTJSSn9m"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
-          identifier: small
+          identifier: handy
+          powerSources:
+            - martial
+        type: property
+      - _id: BSADIipS65gkiSsK
+        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.BSADIipS65gkiSsK"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such as while using
+            @Identifier[ability:interact]{Interact}.</p>
+          form: intrinsic
+          identifier: prehensile
+          powerSources:
+            - martial
+        type: property
+      - _id: n6MmBcTDYrDSMa6C
+        _key: "!actors.items.effects!ca4dae638fd0baf0.7fBZh6Wl4OvoAIaZ.n6MmBcTDYrDSMa6C"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
         type: property
     folder: 4a7a806a79c3098a
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
+    img: systems/teriock/src/icons/body-parts/prehensile-rending-claw.webp
+    name: Prehensile Rending Claw
     system:
       _sup: ca4dae638fd0baf0
+      bv:
+        raw: 1
       damage:
-        base: "1"
-      identifier: foot
+        base: 1d8
+      fightingStyle: savage
+      identifier: prehensile-rending-claw
       range:
         long:
           unit: melee

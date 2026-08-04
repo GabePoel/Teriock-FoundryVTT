@@ -8,6 +8,40 @@ items:
     _stats:
       compendiumSource: Compendium.teriock.species.Item.4455770206d3c370
     effects:
+      - _id: tCyGq7D3ddcRUq0H
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.tCyGq7D3ddcRUq0H"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.13b3d010d6b4a76d
+        img: systems/teriock/src/icons/abilities/battle-roar.webp
+        name: Battle Roar
+        system:
+          automations:
+            - _id: insnA3UruLUet7RD
+              key: system.costs.tweaks.adept
+              qualifier: "@identifier.battle-cry-aura"
+              type: childChange
+              value: "1"
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: battle-roar
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @Identifier[ability:battle-roar-aura]{Battle Roar Aura} and
+              @Identifier[keyword:improved]{Improved} @Identifier[ability:battle-cry]{Battle Cry}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: awMHydLddRNhTAG3
         _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.awMHydLddRNhTAG3"
         _stats:
@@ -245,19 +279,14 @@ items:
             score:
               attribute: per
         type: ability
-      - _id: tCyGq7D3ddcRUq0H
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.tCyGq7D3ddcRUq0H"
+      - _id: GtGxunSSzv1CDaVQ
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.GtGxunSSzv1CDaVQ"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.13b3d010d6b4a76d
-        img: systems/teriock/src/icons/abilities/battle-roar.webp
-        name: Battle Roar
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
+        img: systems/teriock/src/icons/abilities/battle-cry.webp
+        name: Battle Cry
         system:
-          automations:
-            - _id: insnA3UruLUet7RD
-              key: system.costs.tweaks.adept
-              qualifier: "@identifier.battle-cry-aura"
-              type: childChange
-              value: "1"
+          _sup: tCyGq7D3ddcRUq0H
           competence:
             raw: 1
           delivery: self
@@ -265,28 +294,179 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          identifier: battle-roar
+          identifier: battle-cry
+          improvement: <p>You are @Identifier[keyword:adept]{adept} at @Identifier[ability:battle-cry-aura]{Battle Cry Aura}.</p>
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @Identifier[ability:battle-roar-aura]{Battle Roar Aura} and
-              @Identifier[keyword:improved]{Improved} @Identifier[ability:battle-cry]{Battle Cry}.</p>
+              <p>You gain @Identifier[ability:battle-cry-aura]{Battle Cry Aura} and
+              @Identifier[ability:battle-cry-resistance]{Battle Cry Resistance}.</p>
           powerSources:
             - martial
           range:
             unit: self
+          skill: true
+          standard: true
           targets:
             - self
         type: ability
-      - _id: BfQihYhGGGlP95UW
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.BfQihYhGGGlP95UW"
+      - _id: CyWX2vChaLCmFPn0
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.CyWX2vChaLCmFPn0"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
-        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-        name: Supernatural Strength
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
+        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+        name: Battle Cry Aura
         system:
-          _sup: w9XmG7nFYE1gHvdv
+          _sup: GtGxunSSzv1CDaVQ
+          automations:
+            - _id: 7400b41f20d9f100
+              regionType: emanation
+              restriction:
+                enabled: true
+                type: sound
+              trigger: executeInput
+              type: region
+            - _id: b4960732f0b9ed9f
+              status: frightened
+              type: status
+          competence:
+            raw: 1
+          costs:
+            components:
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: "1"
+                type: formula
+          delivery: aura
+          duration:
+            raw: "1"
+            unit: minute
+          effectTypes:
+            - loud
+          endCondition: >-
+            <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
+            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+          expirations:
+            - _id: 66672059c7a29a30
+              method: roll
+              type: combat
+          featSaveAttribute: int
+          identifier: battle-cry-aura
+          interaction: feat
+          powerSources:
+            - martial
+          range:
+            raw: "10"
+            unit: ft
+          requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
+          results:
+            fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
+          skill: true
+          standard: true
+        type: ability
+      - _id: ko0hphx3xOUpPeQo
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.ko0hphx3xOUpPeQo"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
+        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+        name: Battle Cry Resistance
+        system:
+          _sup: GtGxunSSzv1CDaVQ
+          affinities:
+            - _id: oJH3v7kvIbVGDlBS
+              category: statuses
+              type: resistance
+              value: frightened
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            raw: "5"
+            unit: minute
+          effectTypes:
+            - resistance
+          endCondition: <p>You die or 1 minute passes without combat.</p>
+          executionTime:
+            base: a0
+          identifier: battle-cry-resistance
+          interaction: manifest
+          overview:
+            base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: LzDV9X5SWi9hk7cX
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.LzDV9X5SWi9hk7cX"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.15d5f45cbc367c6c
+        img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
+        name: Battle Roar Aura
+        system:
+          _sup: tCyGq7D3ddcRUq0H
+          automations:
+            - _id: 7400b41f20d9f100
+              regionType: emanation
+              restriction:
+                enabled: true
+                type: sound
+              trigger: executeInput
+              type: region
+            - _id: b4960732f0b9ed9f
+              executor: true
+              status: frightened
+              type: status
+          competence:
+            raw: 1
+          costs:
+            components:
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: "2"
+                type: formula
+          delivery: aura
+          duration:
+            raw: "1"
+            unit: minute
+          effectTypes:
+            - loud
+          endCondition: >-
+            <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
+            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+          expirations:
+            - _id: 66672059c7a29a30
+              method: roll
+              type: combat
+          featSaveAttribute: int
+          identifier: battle-roar-aura
+          interaction: feat
+          powerSources:
+            - martial
+          range:
+            raw: "150"
+            unit: ft
+          requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
+          results:
+            fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
+        type: ability
+      - _id: ulPIY91QMezPTa3e
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.ulPIY91QMezPTa3e"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: vxGBcxfH5oJdxneT
           competence:
             raw: 1
           delivery: self
@@ -294,27 +474,26 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          form: special
-          identifier: supernatural-strength
+          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
-              @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
-              @Identifier[keyword:deboosted]{deboost} any melee
-              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-              @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p
+              class="note"><b>Note:</b> @Identifier[property:armor-piercing]{Armor piercing} weapons must still be
+              wielded in two hands to be @Identifier[keyword:armor-voiding]{AV0}.</p>
           powerSources:
             - martial
           range:
             unit: self
+          skill: true
+          standard: true
           targets:
             - self
           upgrades:
             score:
               attribute: str
-              value: 4
+              value: 1
         type: ability
       - _id: DA0nd6SNdwsEUyfy
         _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.DA0nd6SNdwsEUyfy"
@@ -356,6 +535,35 @@ items:
               attribute: str
               value: 3
         type: ability
+      - _id: jI4CQU9UTVp3BLDo
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.jI4CQU9UTVp3BLDo"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: vxGBcxfH5oJdxneT
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: improved-armor-piercing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
       - _id: vxGBcxfH5oJdxneT
         _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.vxGBcxfH5oJdxneT"
         _stats:
@@ -390,71 +598,6 @@ items:
             score:
               attribute: str
               value: 2
-        type: ability
-      - _id: ulPIY91QMezPTa3e
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.ulPIY91QMezPTa3e"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        name: Beastly Strength
-        system:
-          _sup: vxGBcxfH5oJdxneT
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: beastly-strength
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p
-              class="note"><b>Note:</b> @Identifier[property:armor-piercing]{Armor piercing} weapons must still be
-              wielded in two hands to be @Identifier[keyword:armor-voiding]{AV0}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-        type: ability
-      - _id: jI4CQU9UTVp3BLDo
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.jI4CQU9UTVp3BLDo"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        name: Improved Armor Piercing
-        system:
-          _sup: vxGBcxfH5oJdxneT
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: improved-armor-piercing
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
         type: ability
       - _id: PbhQ3QYlPT9zNYKs
         _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.PbhQ3QYlPT9zNYKs"
@@ -523,14 +666,14 @@ items:
           targets:
             - item
         type: ability
-      - _id: GtGxunSSzv1CDaVQ
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.GtGxunSSzv1CDaVQ"
+      - _id: BfQihYhGGGlP95UW
+        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.BfQihYhGGGlP95UW"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1DpSwqGbKUAvbn3q
-        img: systems/teriock/src/icons/abilities/battle-cry.webp
-        name: Battle Cry
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
+        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+        name: Supernatural Strength
         system:
-          _sup: tCyGq7D3ddcRUq0H
+          _sup: w9XmG7nFYE1gHvdv
           competence:
             raw: 1
           delivery: self
@@ -538,170 +681,27 @@ items:
             unit: unlimited
           executionTime:
             base: passive
-          identifier: battle-cry
-          improvement: <p>You are @Identifier[keyword:adept]{adept} at @Identifier[ability:battle-cry-aura]{Battle Cry Aura}.</p>
+          form: special
+          identifier: supernatural-strength
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @Identifier[ability:battle-cry-aura]{Battle Cry Aura} and
-              @Identifier[ability:battle-cry-resistance]{Battle Cry Resistance}.</p>
+              <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+              @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
+              @Identifier[keyword:deboosted]{deboost} any melee
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
           powerSources:
             - martial
           range:
             unit: self
-          skill: true
-          standard: true
           targets:
             - self
-        type: ability
-      - _id: ko0hphx3xOUpPeQo
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.ko0hphx3xOUpPeQo"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
-        img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-        name: Battle Cry Resistance
-        system:
-          _sup: GtGxunSSzv1CDaVQ
-          affinities:
-            - _id: oJH3v7kvIbVGDlBS
-              category: statuses
-              type: resistance
-              value: frightened
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            raw: "5"
-            unit: minute
-          effectTypes:
-            - resistance
-          endCondition: <p>You die or 1 minute passes without combat.</p>
-          executionTime:
-            base: a0
-          identifier: battle-cry-resistance
-          interaction: manifest
-          overview:
-            base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-      - _id: CyWX2vChaLCmFPn0
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.CyWX2vChaLCmFPn0"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
-        img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-        name: Battle Cry Aura
-        system:
-          _sup: GtGxunSSzv1CDaVQ
-          automations:
-            - _id: 7400b41f20d9f100
-              regionType: emanation
-              restriction:
-                enabled: true
-                type: sound
-              trigger: executeInput
-              type: region
-            - _id: b4960732f0b9ed9f
-              status: frightened
-              type: status
-          competence:
-            raw: 1
-          costs:
-            components:
-              verbal:
-                type: tag
-            primary:
-              mp:
-                formula: "1"
-                type: formula
-          delivery: aura
-          duration:
-            raw: "1"
-            unit: minute
-          effectTypes:
-            - loud
-          endCondition: >-
-            <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
-            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          expirations:
-            - _id: 66672059c7a29a30
-              method: roll
-              type: combat
-          featSaveAttribute: int
-          identifier: battle-cry-aura
-          interaction: feat
-          powerSources:
-            - martial
-          range:
-            raw: "10"
-            unit: ft
-          requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
-          results:
-            fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-          skill: true
-          standard: true
-        type: ability
-      - _id: LzDV9X5SWi9hk7cX
-        _key: "!actors.items.effects!4455770206d3c370.4455770206d3c370.LzDV9X5SWi9hk7cX"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.15d5f45cbc367c6c
-        img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
-        name: Battle Roar Aura
-        system:
-          _sup: tCyGq7D3ddcRUq0H
-          automations:
-            - _id: 7400b41f20d9f100
-              regionType: emanation
-              restriction:
-                enabled: true
-                type: sound
-              trigger: executeInput
-              type: region
-            - _id: b4960732f0b9ed9f
-              executor: true
-              status: frightened
-              type: status
-          competence:
-            raw: 1
-          costs:
-            components:
-              verbal:
-                type: tag
-            primary:
-              mp:
-                formula: "2"
-                type: formula
-          delivery: aura
-          duration:
-            raw: "1"
-            unit: minute
-          effectTypes:
-            - loud
-          endCondition: >-
-            <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
-            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          expirations:
-            - _id: 66672059c7a29a30
-              method: roll
-              type: combat
-          featSaveAttribute: int
-          identifier: battle-roar-aura
-          interaction: feat
-          powerSources:
-            - martial
-          range:
-            raw: "150"
-            unit: ft
-          requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
-          results:
-            fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
+          upgrades:
+            score:
+              attribute: str
+              value: 4
         type: ability
     folder: 2033c7bcef60c5ce
     img: systems/teriock/src/icons/creatures/wyrm.webp
@@ -728,30 +728,53 @@ items:
         img: systems/teriock/src/icons/creatures/wyrm.webp
         ringImg: systems/teriock/src/icons/tokens/wyrm.webp
     type: species
-  - _id: GJvG7ZXvfkB9dFIC
-    _key: "!actors.items!4455770206d3c370.GJvG7ZXvfkB9dFIC"
+  - _id: rTw7VhVRJrkeKMdI
+    _key: "!actors.items!4455770206d3c370.rTw7VhVRJrkeKMdI"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
+      compendiumSource: Compendium.teriock.bodyParts.Item.3ccbad21a9a3d41a
     effects:
-      - _id: vgYp2OlY2QgragN9
-        _key: "!actors.items.effects!4455770206d3c370.GJvG7ZXvfkB9dFIC.vgYp2OlY2QgragN9"
+      - _id: ZqWlXZP6cVmElt50
+        _key: "!actors.items.effects!4455770206d3c370.rTw7VhVRJrkeKMdI.ZqWlXZP6cVmElt50"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "1"
+              type: changes
+          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        type: property
+      - _id: NKoDQFexITllA4Nt
+        _key: "!actors.items.effects!4455770206d3c370.rTw7VhVRJrkeKMdI.NKoDQFexITllA4Nt"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+            <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
             abilities}.</p>
           form: intrinsic
-          identifier: handy
+          identifier: biting
           powerSources:
             - martial
         type: property
-      - _id: rxHvNMZbvlGHFxTl
-        _key: "!actors.items.effects!4455770206d3c370.GJvG7ZXvfkB9dFIC.rxHvNMZbvlGHFxTl"
+      - _id: 1lakJWztKadFWNR6
+        _key: "!actors.items.effects!4455770206d3c370.rTw7VhVRJrkeKMdI.1lakJWztKadFWNR6"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
         img: systems/teriock/src/icons/properties/weapon.webp
@@ -766,61 +789,19 @@ items:
           identifier: weapon
         type: property
     folder: 2033c7bcef60c5ce
-    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
-    name: Sharp Claw
+    img: systems/teriock/src/icons/body-parts/crushing-jaw.webp
+    name: Crushing Jaw
     system:
       _sup: 4455770206d3c370
       bv:
-        raw: 1
+        raw: 2
       damage:
-        base: 1d6
+        base: 1d10
       fightingStyle: savage
-      identifier: sharp-claw
+      identifier: crushing-jaw
       range:
         long:
           unit: melee
-    type: body
-  - _id: PjXHMzasE33EpU1L
-    _key: "!actors.items!4455770206d3c370.PjXHMzasE33EpU1L"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.b10be321d77ca578
-    effects:
-      - _id: EhvdlFzRoc0PdUuV
-        _key: "!actors.items.effects!4455770206d3c370.PjXHMzasE33EpU1L.EhvdlFzRoc0PdUuV"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.ba2e5441ff3a18b0
-        img: systems/teriock/src/icons/properties/dragon-scale.webp
-        name: Dragon Scale
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.av.bonus
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "2"
-              type: changes
-          description: >-
-            <p>@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{Armor} that's <b>[[lookup name style=lc]]</b>
-            has its @Identifier[core:armor-class]{AV} increased by 2.</p>
-          form: intrinsic
-          identifier: dragon-scale
-        type: property
-    folder: 2033c7bcef60c5ce
-    img: systems/teriock/src/icons/body-parts/reinforced-dragon-scales.webp
-    name: Reinforced Dragon Scales
-    system:
-      _sup: 4455770206d3c370
-      av:
-        raw: 4
-      identifier: reinforced-dragon-scales
-      range:
-        long:
-          unit: self
     type: body
   - _id: QqaWD61B2kxnlZby
     _key: "!actors.items!4455770206d3c370.QqaWD61B2kxnlZby"
@@ -869,30 +850,72 @@ items:
         long:
           unit: melee
     type: body
-  - _id: rTw7VhVRJrkeKMdI
-    _key: "!actors.items!4455770206d3c370.rTw7VhVRJrkeKMdI"
+  - _id: PjXHMzasE33EpU1L
+    _key: "!actors.items!4455770206d3c370.PjXHMzasE33EpU1L"
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.3ccbad21a9a3d41a
+      compendiumSource: Compendium.teriock.bodyParts.Item.b10be321d77ca578
     effects:
-      - _id: NKoDQFexITllA4Nt
-        _key: "!actors.items.effects!4455770206d3c370.rTw7VhVRJrkeKMdI.NKoDQFexITllA4Nt"
+      - _id: EhvdlFzRoc0PdUuV
+        _key: "!actors.items.effects!4455770206d3c370.PjXHMzasE33EpU1L.EhvdlFzRoc0PdUuV"
         _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        name: Biting
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.ba2e5441ff3a18b0
+        img: systems/teriock/src/icons/properties/dragon-scale.webp
+        name: Dragon Scale
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            - _id: parameterChanges
+              changes:
+                - key: system.av.bonus
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: "2"
+              type: changes
+          description: >-
+            <p>@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{Armor} that's <b>[[lookup name style=lc]]</b>
+            has its @Identifier[core:armor-class]{AV} increased by 2.</p>
+          form: intrinsic
+          identifier: dragon-scale
+        type: property
+    folder: 2033c7bcef60c5ce
+    img: systems/teriock/src/icons/body-parts/reinforced-dragon-scales.webp
+    name: Reinforced Dragon Scales
+    system:
+      _sup: 4455770206d3c370
+      av:
+        raw: 4
+      identifier: reinforced-dragon-scales
+      range:
+        long:
+          unit: self
+    type: body
+  - _id: GJvG7ZXvfkB9dFIC
+    _key: "!actors.items!4455770206d3c370.GJvG7ZXvfkB9dFIC"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
+    effects:
+      - _id: vgYp2OlY2QgragN9
+        _key: "!actors.items.effects!4455770206d3c370.GJvG7ZXvfkB9dFIC.vgYp2OlY2QgragN9"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
           description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Bite delivery abilities]{bite delivery
+            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
             abilities}.</p>
           form: intrinsic
-          identifier: biting
+          identifier: handy
           powerSources:
             - martial
         type: property
-      - _id: 1lakJWztKadFWNR6
-        _key: "!actors.items.effects!4455770206d3c370.rTw7VhVRJrkeKMdI.1lakJWztKadFWNR6"
+      - _id: rxHvNMZbvlGHFxTl
+        _key: "!actors.items.effects!4455770206d3c370.GJvG7ZXvfkB9dFIC.rxHvNMZbvlGHFxTl"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
         img: systems/teriock/src/icons/properties/weapon.webp
@@ -906,40 +929,17 @@ items:
           form: intrinsic
           identifier: weapon
         type: property
-      - _id: ZqWlXZP6cVmElt50
-        _key: "!actors.items.effects!4455770206d3c370.rTw7VhVRJrkeKMdI.ZqWlXZP6cVmElt50"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
-        img: systems/teriock/src/icons/properties/armor-voiding.webp
-        name: Armor Voiding
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          automations:
-            - _id: parameterChanges
-              changes:
-                - key: system.piercing.raw
-                  phase: derived
-                  priority: 10
-                  target: Item
-                  type: upgrade
-                  value: "1"
-              type: changes
-          description: <p>An item with this property is always @Identifier[keyword:armor-voiding]{AV0}.</p>
-          form: intrinsic
-          identifier: armor-voiding
-        type: property
     folder: 2033c7bcef60c5ce
-    img: systems/teriock/src/icons/body-parts/crushing-jaw.webp
-    name: Crushing Jaw
+    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
+    name: Sharp Claw
     system:
       _sup: 4455770206d3c370
       bv:
-        raw: 2
+        raw: 1
       damage:
-        base: 1d10
+        base: 1d6
       fightingStyle: savage
-      identifier: crushing-jaw
+      identifier: sharp-claw
       range:
         long:
           unit: melee

@@ -285,6 +285,222 @@ effects:
       targets:
         - self
     type: ability
+  - _id: qVXv8JjKYyc35gV6
+    _key: "!items.effects!3c3003c23cb3c4a1.qVXv8JjKYyc35gV6"
+    img: systems/teriock/src/icons/abilities/necromancy-disciplines.webp
+    name: Adept Necromancy Spell Cast
+    system:
+      _sup: AEhBZiAA4BX4QZVf
+      automations:
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Necromancy element spells]{necromancy spell} as though you
+        were @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-necromancy-spell-cast
+    type: resource
+  - _id: ihAg4xGr8IZvcULK
+    _key: "!items.effects!3c3003c23cb3c4a1.ihAg4xGr8IZvcULK"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.36c0ec02f2b411fd
+    img: systems/teriock/src/icons/abilities/augment-undead.webp
+    name: Augment Undead
+    system:
+      _sup: Tn5EQuAwOZUq3KZv
+      automations:
+        - _id: R3YSJHv94rQAJx84
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: sight
+      duration:
+        raw: "24"
+        unit: hour
+      elements:
+        - necromancy
+      endCondition: >-
+        <p>@Identifier[core:targets]{Target} is no longer
+        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: "10"
+          unit: minute
+      form: special
+      identifier: augment-undead
+      interaction: manifest
+      invoked: true
+      maneuver: slow
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} gains 1
+          @UUID[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f]{common undead ability} of your
+          choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f rollable]</p>
+      powerSources:
+        - magical
+      range:
+        raw: "5"
+        unit: ft
+      requirements: <p>@Identifier[core:targets]{Target} is @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+    type: ability
+  - _id: Eo31AgHx0mAMwWPM
+    _key: "!items.effects!3c3003c23cb3c4a1.Eo31AgHx0mAMwWPM"
+    img: systems/teriock/src/icons/abilities/necromancy-disciplines.webp
+    name: Half-Time Ritual Necromancy Spell Cast
+    system:
+      _sup: AEhBZiAA4BX4QZVf
+      automations:
+        - _id: XqnlTxp6N0lZCFaB
+          formula: "1"
+          trigger: shortRest
+          type: changeQuantity
+        - _id: lnI5XgS0RD02tQbn
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
+        spells]{ritual} @Wiki[Category:Necromancy element spells]{necromancy spell} in half the time it would normally
+        take.</p>
+      identifier: half-time-ritual-necromancy-spell-cast
+    type: resource
+  - _id: eN2naerYLlbkzdUV
+    _key: "!items.effects!3c3003c23cb3c4a1.eN2naerYLlbkzdUV"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.YCSGNa0EM2gEFOhu
+    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
+    name: Intrusive Casting
+    system:
+      _sup: AEhBZiAA4BX4QZVf
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      executionTime:
+        base: r0
+      identifier: intrusive-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: <p>The @Identifier[core:range]{range} of the triggering @Wiki[Category:Spells]{spell} is doubled.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are casting a @Wiki[Category:Spells]{spell} with a @Identifier[core:range]{range} other than
+        @Wiki[Category:Self target spells]{self}.</p>
+    type: ability
+  - _id: 8zZoPiOG2wZiujHy
+    _key: "!items.effects!3c3003c23cb3c4a1.8zZoPiOG2wZiujHy"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4269f3e018a6c618
+    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
+    name: Oppressive Casting
+    system:
+      _sup: AEhBZiAA4BX4QZVf
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      executionTime:
+        base: r0
+      identifier: oppressive-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>If the triggering @Wiki[Category:Spells]{spell} is an @Wiki[Category:Attack spells]{attack spell}, you make
+          the @Identifier[core:attack-interaction]{attack roll} with @Identifier[core:advantage]{advantage}. If it is a
+          @Wiki[Category:Feat spells]{feat spell}, its @Identifier[core:targets]{targets} make their
+          @Identifier[core:feat-interaction]{feat save} with @Identifier[core:disadvantage]{disadvantage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You cast an @Wiki[Category:Attack spells]{attack} or @Wiki[Category:Feat spells]{feat interaction spell}.</p>
+    type: ability
+  - _id: bupXBI4GDIlMhvZD
+    _key: "!items.effects!3c3003c23cb3c4a1.bupXBI4GDIlMhvZD"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: TdPnxVkYeZuUtZkM
+      automations:
+        - _id: bJn9LIvdgJ11S1tr
+          local:
+            qualifier: and(@spell, @delivery.missile, @pro)
+          trigger: execute
+          type: useDocuments
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      executionTime:
+        base: r0
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @Identifier[ability:death-ray]{Death Ray} and @Identifier[ability:terror-ball]{Terror
+        Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
+          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
+          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
+      powerSources:
+        - magical
+      skill: true
+      standard: true
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
+        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
+        successfully applied.</p>
+    type: ability
   - _id: sWzIfIz0c4WuFyIv
     _key: "!items.effects!3c3003c23cb3c4a1.sWzIfIz0c4WuFyIv"
     _stats:
@@ -363,222 +579,6 @@ effects:
       targets:
         - other
     type: ability
-  - _id: ihAg4xGr8IZvcULK
-    _key: "!items.effects!3c3003c23cb3c4a1.ihAg4xGr8IZvcULK"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.36c0ec02f2b411fd
-    img: systems/teriock/src/icons/abilities/augment-undead.webp
-    name: Augment Undead
-    system:
-      _sup: Tn5EQuAwOZUq3KZv
-      automations:
-        - _id: R3YSJHv94rQAJx84
-          type: addDocuments
-          uuids:
-            - Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: sight
-      duration:
-        raw: "24"
-        unit: hour
-      elements:
-        - necromancy
-      endCondition: >-
-        <p>@Identifier[core:targets]{Target} is no longer
-        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
-      executionTime:
-        base: 10 Minutes
-        slow:
-          raw: "10"
-          unit: minute
-      form: special
-      identifier: augment-undead
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} gains 1
-          @UUID[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f]{common undead ability} of your
-          choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f rollable]</p>
-      powerSources:
-        - magical
-      range:
-        raw: "5"
-        unit: ft
-      requirements: <p>@Identifier[core:targets]{Target} is @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-    type: ability
-  - _id: 8zZoPiOG2wZiujHy
-    _key: "!items.effects!3c3003c23cb3c4a1.8zZoPiOG2wZiujHy"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4269f3e018a6c618
-    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
-    name: Oppressive Casting
-    system:
-      _sup: AEhBZiAA4BX4QZVf
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r0
-      identifier: oppressive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>If the triggering @Wiki[Category:Spells]{spell} is an @Wiki[Category:Attack spells]{attack spell}, you make
-          the @Identifier[core:attack-interaction]{attack roll} with @Identifier[core:advantage]{advantage}. If it is a
-          @Wiki[Category:Feat spells]{feat spell}, its @Identifier[core:targets]{targets} make their
-          @Identifier[core:feat-interaction]{feat save} with @Identifier[core:disadvantage]{disadvantage}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You cast an @Wiki[Category:Attack spells]{attack} or @Wiki[Category:Feat spells]{feat interaction spell}.</p>
-    type: ability
-  - _id: eN2naerYLlbkzdUV
-    _key: "!items.effects!3c3003c23cb3c4a1.eN2naerYLlbkzdUV"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.YCSGNa0EM2gEFOhu
-    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
-    name: Intrusive Casting
-    system:
-      _sup: AEhBZiAA4BX4QZVf
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r0
-      identifier: intrusive-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>The @Identifier[core:range]{range} of the triggering @Wiki[Category:Spells]{spell} is doubled.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: >-
-        <p>You are casting a @Wiki[Category:Spells]{spell} with a @Identifier[core:range]{range} other than
-        @Wiki[Category:Self target spells]{self}.</p>
-    type: ability
-  - _id: bupXBI4GDIlMhvZD
-    _key: "!items.effects!3c3003c23cb3c4a1.bupXBI4GDIlMhvZD"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: TdPnxVkYeZuUtZkM
-      automations:
-        - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      executionTime:
-        base: r0
-      identifier: spell-strike
-      interaction: manifest
-      limitation: >-
-        <p>Only usable with @Identifier[ability:death-ray]{Death Ray} and @Identifier[ability:terror-ball]{Terror
-        Ball}.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
-          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
-          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
-      powerSources:
-        - magical
-      skill: true
-      standard: true
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Bite
-        delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
-        successfully applied.</p>
-    type: ability
-  - _id: qVXv8JjKYyc35gV6
-    _key: "!items.effects!3c3003c23cb3c4a1.qVXv8JjKYyc35gV6"
-    img: systems/teriock/src/icons/abilities/necromancy-disciplines.webp
-    name: Adept Necromancy Spell Cast
-    system:
-      _sup: AEhBZiAA4BX4QZVf
-      automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Necromancy element spells]{necromancy spell} as though you
-        were @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-necromancy-spell-cast
-    type: resource
-  - _id: Eo31AgHx0mAMwWPM
-    _key: "!items.effects!3c3003c23cb3c4a1.Eo31AgHx0mAMwWPM"
-    img: systems/teriock/src/icons/abilities/necromancy-disciplines.webp
-    name: Half-Time Ritual Necromancy Spell Cast
-    system:
-      _sup: AEhBZiAA4BX4QZVf
-      automations:
-        - _id: XqnlTxp6N0lZCFaB
-          formula: "1"
-          trigger: shortRest
-          type: changeQuantity
-        - _id: lnI5XgS0RD02tQbn
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
-        spells]{ritual} @Wiki[Category:Necromancy element spells]{necromancy spell} in half the time it would normally
-        take.</p>
-      identifier: half-time-ritual-necromancy-spell-cast
-    type: resource
 folder: 5776174f35755cf8
 img: systems/teriock/src/icons/ranks/rank-3-necromancer.webp
 name: Rank 3 Necromancer

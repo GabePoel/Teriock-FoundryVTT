@@ -281,14 +281,14 @@ effects:
       targets:
         - self
     type: ability
-  - _id: E8qVJ83YtqMofBJ2
-    _key: "!items.effects!511a5852392458c1.E8qVJ83YtqMofBJ2"
+  - _id: jRTWJuxeVhEh9w9V
+    _key: "!items.effects!511a5852392458c1.jRTWJuxeVhEh9w9V"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
-    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-    name: Supernatural Strength
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      _sup: znPXdOKMLovsKC9m
+      _sup: NsEVO2ItkLMQPHGc
       competence:
         raw: 1
       delivery: self
@@ -296,27 +296,62 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      form: special
-      identifier: supernatural-strength
+      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
-          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
-          @Identifier[keyword:deboosted]{deboost} any melee
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-          @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</p>
       powerSources:
         - martial
       range:
         unit: self
+      skill: true
+      standard: true
       targets:
         - self
       upgrades:
         score:
           attribute: str
-          value: 4
+          value: 1
+    type: ability
+  - _id: Q7de9z9OmAehsntZ
+    _key: "!items.effects!511a5852392458c1.Q7de9z9OmAehsntZ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.103a1d356ae8fc20
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
+    system:
+      _sup: z6yxXfQ2G0M8iZXX
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: diving
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
+        fluent: >-
+          <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
+          @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>
+        proficient: >-
+          <p>You are also skilled at landing from difficult @Identifier[core:falling]{falls} into water. The
+          @Identifier[core:damage]{damage} you would take from @Identifier[core:falling]{falling} into water is
+          @Identifier[keyword:deboosted]{deboosted} @Identifier[core:proficiency-bonus]{P} times.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
     type: ability
   - _id: 1vHAxTRUNNRNKEsQ
     _key: "!items.effects!511a5852392458c1.1vHAxTRUNNRNKEsQ"
@@ -358,6 +393,35 @@ effects:
           attribute: str
           value: 3
     type: ability
+  - _id: aOmrd5YKEyOhelbs
+    _key: "!items.effects!511a5852392458c1.aOmrd5YKEyOhelbs"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: NsEVO2ItkLMQPHGc
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: NsEVO2ItkLMQPHGc
     _key: "!items.effects!511a5852392458c1.NsEVO2ItkLMQPHGc"
     _stats:
@@ -392,71 +456,6 @@ effects:
         score:
           attribute: str
           value: 2
-    type: ability
-  - _id: jRTWJuxeVhEh9w9V
-    _key: "!items.effects!511a5852392458c1.jRTWJuxeVhEh9w9V"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: NsEVO2ItkLMQPHGc
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
-          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
-          @Identifier[keyword:armor-voiding]{AV0}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    type: ability
-  - _id: aOmrd5YKEyOhelbs
-    _key: "!items.effects!511a5852392458c1.aOmrd5YKEyOhelbs"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: NsEVO2ItkLMQPHGc
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
     type: ability
   - _id: qY61XBYJpte2wbPR
     _key: "!items.effects!511a5852392458c1.qY61XBYJpte2wbPR"
@@ -525,14 +524,14 @@ effects:
       targets:
         - item
     type: ability
-  - _id: Q7de9z9OmAehsntZ
-    _key: "!items.effects!511a5852392458c1.Q7de9z9OmAehsntZ"
+  - _id: E8qVJ83YtqMofBJ2
+    _key: "!items.effects!511a5852392458c1.E8qVJ83YtqMofBJ2"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.103a1d356ae8fc20
-    img: systems/teriock/src/icons/abilities/diving.webp
-    name: Diving
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ItRjMpo3XSZAYYQQ
+    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    name: Supernatural Strength
     system:
-      _sup: z6yxXfQ2G0M8iZXX
+      _sup: znPXdOKMLovsKC9m
       competence:
         raw: 1
       delivery: self
@@ -540,26 +539,27 @@ effects:
         unit: unlimited
       executionTime:
         base: passive
-      identifier: diving
+      form: special
+      identifier: supernatural-strength
       interaction: manifest
       maneuver: passive
       overview:
-        base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
-        fluent: >-
-          <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
-          @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>
-        proficient: >-
-          <p>You are also skilled at landing from difficult @Identifier[core:falling]{falls} into water. The
-          @Identifier[core:damage]{damage} you would take from @Identifier[core:falling]{falling} into water is
-          @Identifier[keyword:deboosted]{deboosted} @Identifier[core:proficiency-bonus]{P} times.</p>
+        base: >-
+          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition, you may
+          @Identifier[keyword:deboosted]{deboost} any melee
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          @Identifier[core:attack-interaction]{attack} to make it @Identifier[keyword:armor-voiding]{AV0}.</p>
       powerSources:
         - martial
       range:
         unit: self
-      skill: true
-      standard: true
       targets:
         - self
+      upgrades:
+        score:
+          attribute: str
+          value: 4
     type: ability
   - _id: 5TIsSDpRONeiBxKB
     _key: "!items.effects!511a5852392458c1.5TIsSDpRONeiBxKB"

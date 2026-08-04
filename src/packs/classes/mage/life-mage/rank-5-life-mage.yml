@@ -285,101 +285,86 @@ effects:
       targets:
         - self
     type: ability
-  - _id: dD3tODy22NiCij8n
-    _key: "!items.effects!92b0bad64c0e4250.dD3tODy22NiCij8n"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
-    img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
-    name: Swift Sleep Aura
+  - _id: QxE7gGr7PJNdB7uX
+    _key: "!items.effects!92b0bad64c0e4250.QxE7gGr7PJNdB7uX"
+    img: systems/teriock/src/icons/abilities/life-disciplines.webp
+    name: Adept Life Spell Cast
     system:
-      _sup: 5IOuO1uIHpljLfnP
-      affinities:
-        - _id: XcW4SOfd4F6EXygH
-          category: effectTypes
-          heighten:
-            - 1
-          type: resistance
-          value: awakening
+      _sup: JY5l0gsoIeBVGo9W
       automations:
-        - _id: 7400b41f20d9f100
-          regionType: emanation
-          restriction:
-            type: move
-          trigger: executeInput
-          type: region
-        - _id: e1c7d7174b360e93
-          competencies:
-            - 0
-          formula: (1 + @h)d8
-          impact: sleep
-          type: roll
-        - _id: ebd880725105dde4
-          competencies:
-            - 1
-          formula: (1 + @p + @h)d8
-          impact: sleep
-          type: roll
-        - _id: a394fca7e6444945
-          competencies:
-            - 2
-          formula: (1 + @f + @h)d8
-          impact: sleep
-          type: roll
-        - _id: PXielxmkr3bcWsV4
-          status: asleep
-          type: status
+        - _id: XQJLVWyVRpuO5on4
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per long rest, you may cast a @Wiki[Category:Life element spells]{life spell} as though you were
+        @Identifier[keyword:adept]{adept} at it.</p>
+      identifier: adept-life-spell-cast
+    type: resource
+  - _id: NO9WR5mG04QBta2h
+    _key: "!items.effects!92b0bad64c0e4250.NO9WR5mG04QBta2h"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f68fe7471c02cad3
+    img: systems/teriock/src/icons/abilities/emergency-casting.webp
+    name: Emergency Casting
+    system:
+      _sup: JY5l0gsoIeBVGo9W
+      automations:
+        - _id: HeyBF3KxuHVI6712
+          automatic: false
+          local:
+            qualifier: and(@ability, @spell, @time.a1)
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 1
       costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
         primary:
           mp:
             formula: "1"
             type: formula
-      delivery: aura
-      duration:
-        raw: "24"
-        unit: hour
-      elements:
-        - life
-      endCondition: <p>The break of dawn.</p>
-      expirations:
-        - _id: d1f6b6eaa581aa10
-          triggers:
-            - dawn
-          type: trigger
-      featSaveAttribute: per
-      form: special
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/sleep
-        1d8]]. @Identifier[core:targets]{Target} is also @Identifier[keyword:resistance]{resistant} to being
-        @Identifier[keyword:awaken]{awakened}.</p>
-      identifier: swift-sleep-aura
-      interaction: feat
-      invoked: true
+      delivery: self
+      executionTime:
+        base: r1
+      identifier: emergency-casting
+      interaction: manifest
+      maneuver: reactive
       overview:
-        base: >-
-          <p>A hypnotizing shimmer spreads through the air around you. Roll [[/sleep 1d8]] to determine the strength of
-          this effect.</p>
-        fluent: <p>Instead roll [[/sleep 1d8 + (@f)d8]].</p>
-        proficient: <p>Instead roll [[/sleep 1d8 + (@p)d8]].</p>
+        base: <p>You cast a @Wiki[Category:Single action spells]{single action spell} at the triggering creature.</p>
       powerSources:
         - magical
       range:
-        raw: "10"
-        unit: ft
-      results:
-        fail: >-
-          <p>Any creatures who have fewer @Identifier[core:hit-points-and-mana-points]{HP} than the result of the die
-          roll are rendered @Identifier[condition:asleep]{asleep} until this effect ends.</p>
-      rotator: true
-      spell: true
+        unit: self
+      skill: true
       standard: true
+      targets:
+        - spell
+      trigger: <p>You are being @Identifier[core:attack-interaction]{attacked} by another creature.</p>
     type: ability
+  - _id: 2tgjT0ClHyYZdC7J
+    _key: "!items.effects!92b0bad64c0e4250.2tgjT0ClHyYZdC7J"
+    img: systems/teriock/src/icons/abilities/life-disciplines.webp
+    name: Half-Time Ritual Life Spell Cast
+    system:
+      _sup: JY5l0gsoIeBVGo9W
+      automations:
+        - _id: XqnlTxp6N0lZCFaB
+          formula: "1"
+          trigger: shortRest
+          type: changeQuantity
+        - _id: lnI5XgS0RD02tQbn
+          formula: "1"
+          trigger: longRest
+          type: changeQuantity
+      competence:
+        raw: 1
+      description: >-
+        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
+        spells]{ritual} @Wiki[Category:Life element spells]{life spell} in half the time it would normally take.</p>
+      identifier: half-time-ritual-life-spell-cast
+    type: resource
   - _id: aLWt0PRRPhi7EEZr
     _key: "!items.effects!92b0bad64c0e4250.aLWt0PRRPhi7EEZr"
     _stats:
@@ -485,46 +470,6 @@ effects:
       targets:
         - item
     type: ability
-  - _id: NO9WR5mG04QBta2h
-    _key: "!items.effects!92b0bad64c0e4250.NO9WR5mG04QBta2h"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f68fe7471c02cad3
-    img: systems/teriock/src/icons/abilities/emergency-casting.webp
-    name: Emergency Casting
-    system:
-      _sup: JY5l0gsoIeBVGo9W
-      automations:
-        - _id: HeyBF3KxuHVI6712
-          automatic: false
-          local:
-            qualifier: and(@ability, @spell, @time.a1)
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: self
-      executionTime:
-        base: r1
-      identifier: emergency-casting
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You cast a @Wiki[Category:Single action spells]{single action spell} at the triggering creature.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>You are being @Identifier[core:attack-interaction]{attacked} by another creature.</p>
-    type: ability
   - _id: kk9Y85kD3niAC780
     _key: "!items.effects!92b0bad64c0e4250.kk9Y85kD3niAC780"
     _stats:
@@ -604,46 +549,101 @@ effects:
         delivery abilities]{bite} @Identifier[core:attack-interaction]{attack} on another creature and the effect has
         successfully applied.</p>
     type: ability
-  - _id: QxE7gGr7PJNdB7uX
-    _key: "!items.effects!92b0bad64c0e4250.QxE7gGr7PJNdB7uX"
-    img: systems/teriock/src/icons/abilities/life-disciplines.webp
-    name: Adept Life Spell Cast
+  - _id: dD3tODy22NiCij8n
+    _key: "!items.effects!92b0bad64c0e4250.dD3tODy22NiCij8n"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7060a27da46df3f2
+    img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+    name: Swift Sleep Aura
     system:
-      _sup: JY5l0gsoIeBVGo9W
+      _sup: 5IOuO1uIHpljLfnP
+      affinities:
+        - _id: XcW4SOfd4F6EXygH
+          category: effectTypes
+          heighten:
+            - 1
+          type: resistance
+          value: awakening
       automations:
-        - _id: XQJLVWyVRpuO5on4
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
+        - _id: 7400b41f20d9f100
+          regionType: emanation
+          restriction:
+            type: move
+          trigger: executeInput
+          type: region
+        - _id: e1c7d7174b360e93
+          competencies:
+            - 0
+          formula: (1 + @h)d8
+          impact: sleep
+          type: roll
+        - _id: ebd880725105dde4
+          competencies:
+            - 1
+          formula: (1 + @p + @h)d8
+          impact: sleep
+          type: roll
+        - _id: a394fca7e6444945
+          competencies:
+            - 2
+          formula: (1 + @f + @h)d8
+          impact: sleep
+          type: roll
+        - _id: PXielxmkr3bcWsV4
+          status: asleep
+          type: status
       competence:
         raw: 1
-      description: >-
-        <p>Once per long rest, you may cast a @Wiki[Category:Life element spells]{life spell} as though you were
-        @Identifier[keyword:adept]{adept} at it.</p>
-      identifier: adept-life-spell-cast
-    type: resource
-  - _id: 2tgjT0ClHyYZdC7J
-    _key: "!items.effects!92b0bad64c0e4250.2tgjT0ClHyYZdC7J"
-    img: systems/teriock/src/icons/abilities/life-disciplines.webp
-    name: Half-Time Ritual Life Spell Cast
-    system:
-      _sup: JY5l0gsoIeBVGo9W
-      automations:
-        - _id: XqnlTxp6N0lZCFaB
-          formula: "1"
-          trigger: shortRest
-          type: changeQuantity
-        - _id: lnI5XgS0RD02tQbn
-          formula: "1"
-          trigger: longRest
-          type: changeQuantity
-      competence:
-        raw: 1
-      description: >-
-        <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a @Wiki[Category:Ritual delivery
-        spells]{ritual} @Wiki[Category:Life element spells]{life spell} in half the time it would normally take.</p>
-      identifier: half-time-ritual-life-spell-cast
-    type: resource
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: aura
+      duration:
+        raw: "24"
+        unit: hour
+      elements:
+        - life
+      endCondition: <p>The break of dawn.</p>
+      expirations:
+        - _id: d1f6b6eaa581aa10
+          triggers:
+            - dawn
+          type: trigger
+      featSaveAttribute: per
+      form: special
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/sleep
+        1d8]]. @Identifier[core:targets]{Target} is also @Identifier[keyword:resistance]{resistant} to being
+        @Identifier[keyword:awaken]{awakened}.</p>
+      identifier: swift-sleep-aura
+      interaction: feat
+      invoked: true
+      overview:
+        base: >-
+          <p>A hypnotizing shimmer spreads through the air around you. Roll [[/sleep 1d8]] to determine the strength of
+          this effect.</p>
+        fluent: <p>Instead roll [[/sleep 1d8 + (@f)d8]].</p>
+        proficient: <p>Instead roll [[/sleep 1d8 + (@p)d8]].</p>
+      powerSources:
+        - magical
+      range:
+        raw: "10"
+        unit: ft
+      results:
+        fail: >-
+          <p>Any creatures who have fewer @Identifier[core:hit-points-and-mana-points]{HP} than the result of the die
+          roll are rendered @Identifier[condition:asleep]{asleep} until this effect ends.</p>
+      rotator: true
+      spell: true
+      standard: true
+    type: ability
 folder: 2b70a453a734079b
 img: systems/teriock/src/icons/ranks/rank-5-life-mage.webp
 name: Rank 5 Life Mage

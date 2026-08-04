@@ -184,6 +184,17 @@ function transformEntry(doc) {
   cleanEntry(doc);
   if (doc.system) { conformDataValues(doc.system); }
   DOCUMENT_COLLECTION_KEYS.forEach(key => doc[key]?.forEach(d => transformEntry(d)));
+  ["effects", "items"].forEach(key => {
+    doc[key]?.sort((a, b) => {
+      const hasSupA = a.system?._sup != null;
+      const hasSupB = b.system?._sup != null;
+      if (hasSupA !== hasSupB) { return hasSupA - hasSupB; }
+      return (a.name ?? "").localeCompare(b.name ?? "");
+    });
+  });
+  if (doc.results) {
+    doc.results.sort((a, b) => (a.range[0] - b.range[0]));
+  }
   if (!doc._key.includes("scene")) { conformDataValues(doc); }
 }
 
@@ -211,6 +222,7 @@ function conformDataValues(obj) {
     for (const key in obj) {
       if (obj[key] === "") { delete obj[key]; }
       if (obj[key] === "{}") { delete obj[key]; }
+      if (obj[key] === {}) { delete obj[key]; }
       else if (obj[key] === null) { delete obj[key]; }
       else if (Array.isArray(obj[key])) {
         if (obj[key].length === 0) { delete obj[key]; }

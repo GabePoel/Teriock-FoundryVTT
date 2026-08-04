@@ -344,6 +344,99 @@ effects:
         <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
     type: ability
+  - _id: BBoZn62OJjnwHasY
+    _key: "!items.effects!3cfb81b47fdfefdf.BBoZn62OJjnwHasY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+    name: Battle Cry Aura
+    system:
+      _sup: Vbnvju4bB2k6SY09
+      automations:
+        - _id: 7400b41f20d9f100
+          regionType: emanation
+          restriction:
+            enabled: true
+            type: sound
+          trigger: executeInput
+          type: region
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
+      competence:
+        raw: 1
+      costs:
+        components:
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: aura
+      duration:
+        raw: "1"
+        unit: minute
+      effectTypes:
+        - loud
+      endCondition: >-
+        <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      expirations:
+        - _id: 66672059c7a29a30
+          method: roll
+          type: combat
+      featSaveAttribute: int
+      identifier: battle-cry-aura
+      interaction: feat
+      powerSources:
+        - martial
+      range:
+        raw: "10"
+        unit: ft
+      requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
+      results:
+        fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
+      skill: true
+      standard: true
+    type: ability
+  - _id: gS7slRdLm0T1TWls
+    _key: "!items.effects!3cfb81b47fdfefdf.gS7slRdLm0T1TWls"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    name: Battle Cry Resistance
+    system:
+      _sup: Vbnvju4bB2k6SY09
+      affinities:
+        - _id: oJH3v7kvIbVGDlBS
+          category: statuses
+          type: resistance
+          value: frightened
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: "5"
+        unit: minute
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime:
+        base: a0
+      identifier: battle-cry-resistance
+      interaction: manifest
+      overview:
+        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: rrVPlq9gUQxA0P3k
     _key: "!items.effects!3cfb81b47fdfefdf.rrVPlq9gUQxA0P3k"
     _stats:
@@ -471,99 +564,6 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: gS7slRdLm0T1TWls
-    _key: "!items.effects!3cfb81b47fdfefdf.gS7slRdLm0T1TWls"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EORCpLPDSV6sGlHv
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    name: Battle Cry Resistance
-    system:
-      _sup: Vbnvju4bB2k6SY09
-      affinities:
-        - _id: oJH3v7kvIbVGDlBS
-          category: statuses
-          type: resistance
-          value: frightened
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        raw: "5"
-        unit: minute
-      effectTypes:
-        - resistance
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime:
-        base: a0
-      identifier: battle-cry-resistance
-      interaction: manifest
-      overview:
-        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: BBoZn62OJjnwHasY
-    _key: "!items.effects!3cfb81b47fdfefdf.BBoZn62OJjnwHasY"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf8b295f6088182
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-    name: Battle Cry Aura
-    system:
-      _sup: Vbnvju4bB2k6SY09
-      automations:
-        - _id: 7400b41f20d9f100
-          regionType: emanation
-          restriction:
-            enabled: true
-            type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
-      competence:
-        raw: 1
-      costs:
-        components:
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: aura
-      duration:
-        raw: "1"
-        unit: minute
-      effectTypes:
-        - loud
-      endCondition: >-
-        <p>At the start of each of the @Identifier[core:targets]{targets'} @Identifier[core:turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expirations:
-        - _id: 66672059c7a29a30
-          method: roll
-          type: combat
-      featSaveAttribute: int
-      identifier: battle-cry-aura
-      interaction: feat
-      powerSources:
-        - martial
-      range:
-        raw: "10"
-        unit: ft
-      requirements: <p>@Identifier[core:targets]{Target} is not @Identifier[condition:deaf]{deaf}.</p>
-      results:
-        fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
-      skill: true
-      standard: true
     type: ability
   - _id: 71MTeo3VT5aF6xYk
     _key: "!items.effects!3cfb81b47fdfefdf.71MTeo3VT5aF6xYk"

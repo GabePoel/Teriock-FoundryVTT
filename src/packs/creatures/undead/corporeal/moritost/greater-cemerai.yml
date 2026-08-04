@@ -382,6 +382,51 @@ items:
             score:
               attribute: str
         type: ability
+      - _id: UX2WRc4FCBjB87Uh
+        _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.UX2WRc4FCBjB87Uh"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
+        system:
+          _sup: Lsy4GBwffna4MiZB
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "120"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          identifier: ethereal-senses
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
+              feet.</p>
+          powerSources:
+            - magical
+            - primal
+            - spiritual
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
       - _id: slLQuBQj1gXxY6O5
         _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.slLQuBQj1gXxY6O5"
         _stats:
@@ -455,46 +500,82 @@ items:
           targets:
             - self
         type: ability
-      - _id: UX2WRc4FCBjB87Uh
-        _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.UX2WRc4FCBjB87Uh"
+      - _id: 1Yl7nV2cOcYkp7ti
+        _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.1Yl7nV2cOcYkp7ti"
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        name: Ethereal Senses
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+        img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+        name: Mana Drain Touch
         system:
           _sup: Lsy4GBwffna4MiZB
           automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.senses.ethereal
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "120"
-              type: changes
+            - _id: xreyNK2IzDp9qCUE
+              type: revitalize
+            - _id: 157afc517847f562
+              formula: 1d8[mana]
+              impact: drain
+              type: roll
+          competence:
+            raw: 1
+          delivery: hand
+          effectTypes:
+            - draining
+            - revitalization
+          form: special
+          identifier: mana-drain-touch
+          powerSources:
+            - magical
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
+              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
+              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+        type: ability
+      - _id: AvLlkzebI6XDLIpJ
+        _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.AvLlkzebI6XDLIpJ"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
+        system:
+          _sup: Lsy4GBwffna4MiZB
+          affinities:
+            - _id: EEiHRIyCxZhUuw07
+              category: statuses
+              type: immunity
+              value: charmed
+            - _id: Glnnr440sVehTfZ5
+              category: statuses
+              type: immunity
+              value: frightened
           competence:
             raw: 1
           delivery: self
           duration:
             unit: unlimited
           effectTypes:
-            - sensory
+            - immunity
           elements:
             - necromancy
           executionTime:
             base: passive
-          identifier: ethereal-senses
+          form: special
+          identifier: undead-mind
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
-              feet.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened}
+              and @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
+              @Identifier[condition:transformed]{transformed}.</p>
           powerSources:
             - magical
-            - primal
-            - spiritual
           range:
             unit: self
           targets:
@@ -551,87 +632,6 @@ items:
           targets:
             - self
         type: ability
-      - _id: AvLlkzebI6XDLIpJ
-        _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.AvLlkzebI6XDLIpJ"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
-        img: systems/teriock/src/icons/abilities/undead-mind.webp
-        name: Undead Mind
-        system:
-          _sup: Lsy4GBwffna4MiZB
-          affinities:
-            - _id: EEiHRIyCxZhUuw07
-              category: statuses
-              type: immunity
-              value: charmed
-            - _id: Glnnr440sVehTfZ5
-              category: statuses
-              type: immunity
-              value: frightened
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime:
-            base: passive
-          form: special
-          identifier: undead-mind
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened}
-              and @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
-              @Identifier[condition:transformed]{transformed}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          targets:
-            - self
-        type: ability
-      - _id: 1Yl7nV2cOcYkp7ti
-        _key: "!actors.items.effects!631ee800e7393cd3.631ee800e7393cd3.1Yl7nV2cOcYkp7ti"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
-        img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
-        name: Mana Drain Touch
-        system:
-          _sup: Lsy4GBwffna4MiZB
-          automations:
-            - _id: xreyNK2IzDp9qCUE
-              type: revitalize
-            - _id: 157afc517847f562
-              formula: 1d8[mana]
-              impact: drain
-              type: roll
-          competence:
-            raw: 1
-          delivery: hand
-          effectTypes:
-            - draining
-            - revitalization
-          form: special
-          identifier: mana-drain-touch
-          powerSources:
-            - magical
-          results:
-            critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
-              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-            hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
-              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
-              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
-        type: ability
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/creatures/greater-cemerai.webp
     name: Greater Cemerai
@@ -654,6 +654,467 @@ items:
         img: systems/teriock/src/icons/creatures/greater-cemerai.webp
         ringImg: systems/teriock/src/icons/tokens/greater-cemerai.webp
     type: species
+  - _id: 380dac2710b593e9
+    _key: "!actors.items!631ee800e7393cd3.380dac2710b593e9"
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
+    effects:
+      - _id: 8e9roKoeCSmTjbbo
+        _key: "!actors.items.effects!631ee800e7393cd3.380dac2710b593e9.8e9roKoeCSmTjbbo"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
+        img: systems/teriock/src/icons/abilities/warrior-techniques.webp
+        name: Warrior Techniques
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: warrior-techniques
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>For every 2 ranks you train in @Identifier[archetype:warrior]{warrior classes}, you gain a
+              @Wiki[Category:Warrior guildmaster abilities]{warrior guildmaster ability} of your choice. You also gain
+              @Identifier[keyword:limited]{Limited} @Identifier[ability:defensive-martial-arts]{Defensive Martial
+              Arts}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: aOvOlScH5bn7jX7m
+        _key: "!actors.items.effects!631ee800e7393cd3.380dac2710b593e9.aOvOlScH5bn7jX7m"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+        img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+        name: Defensive Martial Arts
+        system:
+          _sup: 8e9roKoeCSmTjbbo
+          automations:
+            - _id: F9NLbFodo8GgQLdh
+              changeType: upgrade
+              competencies:
+                - 0
+              key: system.bv.bonus
+              qualifier: "@prop.handy"
+              target: armament
+              type: childChange
+              value: "1"
+            - _id: iijE8Q6bC3GKvrTX
+              changeType: upgrade
+              competencies:
+                - 1
+              key: system.bv.bonus
+              qualifier: "@prop.handy"
+              target: armament
+              type: childChange
+              value: "2"
+            - _id: pI8dAIbbmiCqE5n9
+              changeType: upgrade
+              competencies:
+                - 2
+              key: system.bv.bonus
+              qualifier: "@prop.handy"
+              target: armament
+              type: childChange
+              value: "3"
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: defensive-martial-arts
+          interaction: manifest
+          limitation: <p>While wearing @Wiki[Category:Armor]{armor} only.</p>
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
+              @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of
+              @Wiki[Category:Weapon target abilities]{abilities that target them} (although they cannot be
+              @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+              @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
+              +1.</p>
+            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+    folder: 380dac2710b593e9
+    img: systems/teriock/src/icons/archetypes/warrior.webp
+    name: Warrior
+    system:
+      description: >-
+        <p>Warriors are primarily fighters and can handle themselves well in heavy melee
+        @Identifier[core:combat]{combat}. Though they all have similar combat strength, they achieve different goals in
+        battle in order to win their objective.</p>
+      identifier: warrior
+      instructions: >-
+        <p>Add @Pack[teriock.abilities]{abilities} from @Identifier[ability:warrior-techniques] here when you gain
+        them.</p>
+    type: archetype
+  - _id: PsiPloj0mj7VLXv5
+    _key: "!actors.items!631ee800e7393cd3.PsiPloj0mj7VLXv5"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+    effects:
+      - _id: TWk5AP5nzZgpXkaM
+        _key: "!actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.TWk5AP5nzZgpXkaM"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
+            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+        type: property
+      - _id: IDLUUjkSFtpaiKuJ
+        _key: "!actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.IDLUUjkSFtpaiKuJ"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property is easily concealed and can often be used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+          form: intrinsic
+          identifier: small
+        type: property
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: 631ee800e7393cd3
+      damage:
+        base: "1"
+      identifier: foot
+      range:
+        long:
+          unit: melee
+    type: body
+  - _id: TSoqI1hEZavnDgna
+    _key: "!actors.items!631ee800e7393cd3.TSoqI1hEZavnDgna"
+    _stats:
+      compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/equipment/full-plate.webp
+    name: Full Plate
+    system:
+      _sup: 631ee800e7393cd3
+      av:
+        raw: 4
+      equipmentClasses:
+        - armor
+      equipmentType: full-plate
+      equipped: true
+      identifier: full-plate
+      minStr: -1
+      range:
+        long:
+          unit: self
+      weight: 65
+    type: equipment
+  - _id: SzQmEtRvnFBIWoQa
+    _key: "!actors.items!631ee800e7393cd3.SzQmEtRvnFBIWoQa"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
+    effects:
+      - _id: H7Q5z5528FgfgbLp
+        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.H7Q5z5528FgfgbLp"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
+            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+        type: property
+      - _id: lKaLyYYTTIEFOLb5
+        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.lKaLyYYTTIEFOLb5"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          powerSources:
+            - martial
+        type: property
+      - _id: m7Va2Fuah1K2t2Ab
+        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.m7Va2Fuah1K2t2Ab"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such as while using
+            @Identifier[ability:interact]{Interact}.</p>
+          form: intrinsic
+          identifier: prehensile
+          powerSources:
+            - martial
+        type: property
+      - _id: IJM1yhiyKnnwlbXh
+        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.IJM1yhiyKnnwlbXh"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          description: >-
+            <p>An item with this property is easily concealed and can often be used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+          form: intrinsic
+          identifier: small
+        type: property
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/body-parts/hand.webp
+    name: Hand
+    system:
+      _sup: 631ee800e7393cd3
+      damage:
+        base: "1"
+      identifier: hand
+      range:
+        long:
+          unit: melee
+    type: body
+  - _id: KLENiLsr670sxg55
+    _key: "!actors.items!631ee800e7393cd3.KLENiLsr670sxg55"
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.f49c6d015bc8589a
+    effects:
+      - _id: Uz1hvRPju7UkGtEK
+        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.Uz1hvRPju7UkGtEK"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.043078efb9756b45
+        img: systems/teriock/src/icons/abilities/defy-death.webp
+        name: Defy Death
+        system:
+          automations:
+            - _id: 96a33dac897ee269
+              status: defyingDeath
+              type: status
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            raw: "1"
+            unit: minute
+          executionTime:
+            base: r1
+          identifier: defy-death
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: <p>You begin @Identifier[condition:defying-death]{defying death}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+          trigger: <p>You would @Identifier[condition:down]{drop}.</p>
+        type: ability
+      - _id: A4WZCzLVp8Jq9ykR
+        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.A4WZCzLVp8Jq9ykR"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.47728b72f6c25e3b
+        img: systems/teriock/src/icons/abilities/duel.webp
+        name: Duel
+        system:
+          automations:
+            - _id: sGyei1adB2IsKjZP
+              makeEffect: false
+              type: override
+            - _id: 52f4d0b87363b1c1
+              relation: apply
+              status: dueling
+              type: status
+            - _id: 747b3e9c9b617af6
+              executor: true
+              relation: apply
+              status: lighted
+              type: status
+          competence:
+            raw: 1
+          delivery: sight
+          duration:
+            unit: unlimited
+          effectTypes:
+            - duelModifying
+          identifier: duel
+          interaction: manifest
+          overview:
+            base: >-
+              <p>You challenge the @Identifier[core:targets]{target} to advance and fight you. They may immediately
+              @Identifier[ability:move]{Move} towards you as a @Identifier[core:reactive-maneuvers]{free reaction} to
+              this and begin @Identifier[condition:dueling]{dueling} with you. If they choose not to or are unable to do
+              so, then they are considered to have "forfeited" the [[lookup name style=lc]] (but are not considered to
+              have "lost" it). Any creature that forfeits this [[lookup name style=lc]] becomes
+              @Identifier[condition:lighted]{lighted} to each of their would-be opponents in the [[lookup name
+              style=lc]] until the end of that opponent's next @Identifier[core:turns]{turn}.</p>
+            proficient: >-
+              <p>You may also @Identifier[ability:move]{Move} or make a @Wiki[Category:Single action abilities]{single
+              action} @Wiki[Category:Duelist class abilities]{Duelist ability} as a
+              @Identifier[core:reactive-maneuvers]{free reaction} to the @Identifier[core:targets]{target's} decision
+              and subsequent movement.</p>
+          powerSources:
+            - spiritual
+          range:
+            raw: "30"
+            unit: ft
+          requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
+          skill: true
+          standard: true
+        type: ability
+      - _id: ez42WB6ZV9yzul09
+        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.ez42WB6ZV9yzul09"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.10797b5ac88b2f6b
+        img: systems/teriock/src/icons/abilities/resolve-conflict.webp
+        name: Resolve Conflict
+        system:
+          automations:
+            - _id: e789ed5e109ebd1a
+              changes:
+                - key: system.tradecrafts.peacekeeper.score
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: resolve-conflict
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are an @Identifier[keyword:expertise]{expert} @Identifier[tradecraft:peacekeeper]{peacekeeper}. In
+              addition, you gain @Identifier[ability:detect-lie]{Detect Lie}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: 7f1XQVbvaHBzHZnL
+        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.7f1XQVbvaHBzHZnL"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.BtsHXqEsRV6Snbao
+        img: systems/teriock/src/icons/abilities/detect-lie.webp
+        name: Detect Lie
+        system:
+          _sup: ez42WB6ZV9yzul09
+          competence:
+            raw: 1
+          costs:
+            primary:
+              mp:
+                formula: "1"
+                type: formula
+          delivery: sight
+          effectTypes:
+            - truthDetecting
+          executionTime:
+            base: r0
+          featSaveAttribute: snk
+          identifier: detect-lie
+          interaction: feat
+          maneuver: reactive
+          powerSources:
+            - spiritual
+          range:
+            raw: "15"
+            unit: ft
+          results:
+            fail: <p>You detect whether the @Identifier[core:targets]{target} believes the statement is true or false.</p>
+            save: >-
+              <p>You detect that the statement is true, regardless of what the @Identifier[core:targets]{target}
+              actually believes. This also applies if [[lookup name]] is @Identifier[keyword:resistance]{resisted} or
+              @Identifier[core:fizzles]{fizzles} for some other reason.</p>
+          skill: true
+          standard: true
+          trigger: <p>Someone makes a statement which could, in principle, be true or false.</p>
+        type: ability
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
+    name: Rank 1 Duelist
+    system:
+      _sup: 631ee800e7393cd3
+      archetype: warrior
+      class: duelist
+      description: >-
+        <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for
+        duels as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above
+        any sort of personal gain and thus strive for excellence in everything that they do. A true
+        @Identifier[class:duelist]{Duelist} wins the battle before it has begun. Strategy and personal perfection are
+        the @Identifier[class:duelist]{Duelist}'s way. If you are a @Identifier[class:duelist]{Duelist}, be calm,
+        focused, well spoken and confident in yourself.</p>
+      flaws: <p>Duelists cannot use @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
+      identifier: rank-1-duelist
+      maxAv: 4
+      number: 1
+      statDice:
+        hp:
+          formula: 1d12
+        mp:
+          formula: 1d8
+    type: rank
   - _id: 5ynwnr447S30LpeO
     _key: "!actors.items!631ee800e7393cd3.5ynwnr447S30LpeO"
     _stats:
@@ -932,201 +1393,6 @@ items:
         mp:
           formula: 1d8
     type: rank
-  - _id: KLENiLsr670sxg55
-    _key: "!actors.items!631ee800e7393cd3.KLENiLsr670sxg55"
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.f49c6d015bc8589a
-    effects:
-      - _id: Uz1hvRPju7UkGtEK
-        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.Uz1hvRPju7UkGtEK"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.043078efb9756b45
-        img: systems/teriock/src/icons/abilities/defy-death.webp
-        name: Defy Death
-        system:
-          automations:
-            - _id: 96a33dac897ee269
-              status: defyingDeath
-              type: status
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            raw: "1"
-            unit: minute
-          executionTime:
-            base: r1
-          identifier: defy-death
-          interaction: manifest
-          maneuver: reactive
-          overview:
-            base: <p>You begin @Identifier[condition:defying-death]{defying death}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          sustained: true
-          targets:
-            - self
-          trigger: <p>You would @Identifier[condition:down]{drop}.</p>
-        type: ability
-      - _id: A4WZCzLVp8Jq9ykR
-        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.A4WZCzLVp8Jq9ykR"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.47728b72f6c25e3b
-        img: systems/teriock/src/icons/abilities/duel.webp
-        name: Duel
-        system:
-          automations:
-            - _id: sGyei1adB2IsKjZP
-              makeEffect: false
-              type: override
-            - _id: 52f4d0b87363b1c1
-              relation: apply
-              status: dueling
-              type: status
-            - _id: 747b3e9c9b617af6
-              executor: true
-              relation: apply
-              status: lighted
-              type: status
-          competence:
-            raw: 1
-          delivery: sight
-          duration:
-            unit: unlimited
-          effectTypes:
-            - duelModifying
-          identifier: duel
-          interaction: manifest
-          overview:
-            base: >-
-              <p>You challenge the @Identifier[core:targets]{target} to advance and fight you. They may immediately
-              @Identifier[ability:move]{Move} towards you as a @Identifier[core:reactive-maneuvers]{free reaction} to
-              this and begin @Identifier[condition:dueling]{dueling} with you. If they choose not to or are unable to do
-              so, then they are considered to have "forfeited" the [[lookup name style=lc]] (but are not considered to
-              have "lost" it). Any creature that forfeits this [[lookup name style=lc]] becomes
-              @Identifier[condition:lighted]{lighted} to each of their would-be opponents in the [[lookup name
-              style=lc]] until the end of that opponent's next @Identifier[core:turns]{turn}.</p>
-            proficient: >-
-              <p>You may also @Identifier[ability:move]{Move} or make a @Wiki[Category:Single action abilities]{single
-              action} @Wiki[Category:Duelist class abilities]{Duelist ability} as a
-              @Identifier[core:reactive-maneuvers]{free reaction} to the @Identifier[core:targets]{target's} decision
-              and subsequent movement.</p>
-          powerSources:
-            - spiritual
-          range:
-            raw: "30"
-            unit: ft
-          requirements: <p>You are not @Identifier[condition:dueling]{dueling} and can only use this on an opponent.</p>
-          skill: true
-          standard: true
-        type: ability
-      - _id: ez42WB6ZV9yzul09
-        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.ez42WB6ZV9yzul09"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.10797b5ac88b2f6b
-        img: systems/teriock/src/icons/abilities/resolve-conflict.webp
-        name: Resolve Conflict
-        system:
-          automations:
-            - _id: e789ed5e109ebd1a
-              changes:
-                - key: system.tradecrafts.peacekeeper.score
-                  phase: derived
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: "2"
-              type: changes
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: resolve-conflict
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are an @Identifier[keyword:expertise]{expert} @Identifier[tradecraft:peacekeeper]{peacekeeper}. In
-              addition, you gain @Identifier[ability:detect-lie]{Detect Lie}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-      - _id: 7f1XQVbvaHBzHZnL
-        _key: "!actors.items.effects!631ee800e7393cd3.KLENiLsr670sxg55.7f1XQVbvaHBzHZnL"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.BtsHXqEsRV6Snbao
-        img: systems/teriock/src/icons/abilities/detect-lie.webp
-        name: Detect Lie
-        system:
-          _sup: ez42WB6ZV9yzul09
-          competence:
-            raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "1"
-                type: formula
-          delivery: sight
-          effectTypes:
-            - truthDetecting
-          executionTime:
-            base: r0
-          featSaveAttribute: snk
-          identifier: detect-lie
-          interaction: feat
-          maneuver: reactive
-          powerSources:
-            - spiritual
-          range:
-            raw: "15"
-            unit: ft
-          results:
-            fail: <p>You detect whether the @Identifier[core:targets]{target} believes the statement is true or false.</p>
-            save: >-
-              <p>You detect that the statement is true, regardless of what the @Identifier[core:targets]{target}
-              actually believes. This also applies if [[lookup name]] is @Identifier[keyword:resistance]{resisted} or
-              @Identifier[core:fizzles]{fizzles} for some other reason.</p>
-          skill: true
-          standard: true
-          trigger: <p>Someone makes a statement which could, in principle, be true or false.</p>
-        type: ability
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
-    name: Rank 1 Duelist
-    system:
-      _sup: 631ee800e7393cd3
-      archetype: warrior
-      class: duelist
-      description: >-
-        <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists} are often judges and referees for
-        duels as well as devoted warriors. @Identifier[class:duelist]{Duelists} prize the honor of their family above
-        any sort of personal gain and thus strive for excellence in everything that they do. A true
-        @Identifier[class:duelist]{Duelist} wins the battle before it has begun. Strategy and personal perfection are
-        the @Identifier[class:duelist]{Duelist}'s way. If you are a @Identifier[class:duelist]{Duelist}, be calm,
-        focused, well spoken and confident in yourself.</p>
-      flaws: <p>Duelists cannot use @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
-      identifier: rank-1-duelist
-      maxAv: 4
-      number: 1
-      statDice:
-        hp:
-          formula: 1d12
-        mp:
-          formula: 1d8
-    type: rank
   - _id: NnFHNoc9A3Dp1ix6
     _key: "!actors.items!631ee800e7393cd3.NnFHNoc9A3Dp1ix6"
     _stats:
@@ -1250,272 +1516,6 @@ items:
         mp:
           formula: 1d8
     type: rank
-  - _id: PsiPloj0mj7VLXv5
-    _key: "!actors.items!631ee800e7393cd3.PsiPloj0mj7VLXv5"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
-    effects:
-      - _id: TWk5AP5nzZgpXkaM
-        _key: "!actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.TWk5AP5nzZgpXkaM"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-        type: property
-      - _id: IDLUUjkSFtpaiKuJ
-        _key: "!actors.items.effects!631ee800e7393cd3.PsiPloj0mj7VLXv5.IDLUUjkSFtpaiKuJ"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
-          form: intrinsic
-          identifier: small
-        type: property
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
-    system:
-      _sup: 631ee800e7393cd3
-      damage:
-        base: "1"
-      identifier: foot
-      range:
-        long:
-          unit: melee
-    type: body
-  - _id: SzQmEtRvnFBIWoQa
-    _key: "!actors.items!631ee800e7393cd3.SzQmEtRvnFBIWoQa"
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
-    effects:
-      - _id: H7Q5z5528FgfgbLp
-        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.H7Q5z5528FgfgbLp"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
-          form: intrinsic
-          identifier: bashing
-        type: property
-      - _id: lKaLyYYTTIEFOLb5
-        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.lKaLyYYTTIEFOLb5"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
-        img: systems/teriock/src/icons/properties/handy.webp
-        name: Handy
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
-            abilities}.</p>
-          form: intrinsic
-          identifier: handy
-          powerSources:
-            - martial
-        type: property
-      - _id: m7Va2Fuah1K2t2Ab
-        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.m7Va2Fuah1K2t2Ab"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
-        img: systems/teriock/src/icons/properties/prehensile.webp
-        name: Prehensile
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such as while using
-            @Identifier[ability:interact]{Interact}.</p>
-          form: intrinsic
-          identifier: prehensile
-          powerSources:
-            - martial
-        type: property
-      - _id: IJM1yhiyKnnwlbXh
-        _key: "!actors.items.effects!631ee800e7393cd3.SzQmEtRvnFBIWoQa.IJM1yhiyKnnwlbXh"
-        _stats:
-          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
-        system:
-          applyIfDampened: true
-          applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
-          form: intrinsic
-          identifier: small
-        type: property
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/body-parts/hand.webp
-    name: Hand
-    system:
-      _sup: 631ee800e7393cd3
-      damage:
-        base: "1"
-      identifier: hand
-      range:
-        long:
-          unit: melee
-    type: body
-  - _id: TSoqI1hEZavnDgna
-    _key: "!actors.items!631ee800e7393cd3.TSoqI1hEZavnDgna"
-    _stats:
-      compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/equipment/full-plate.webp
-    name: Full Plate
-    system:
-      _sup: 631ee800e7393cd3
-      av:
-        raw: 4
-      equipmentClasses:
-        - armor
-      equipmentType: full-plate
-      equipped: true
-      identifier: full-plate
-      minStr: -1
-      range:
-        long:
-          unit: self
-      weight: 65
-    type: equipment
-  - _id: 380dac2710b593e9
-    _key: "!actors.items!631ee800e7393cd3.380dac2710b593e9"
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
-    effects:
-      - _id: 8e9roKoeCSmTjbbo
-        _key: "!actors.items.effects!631ee800e7393cd3.380dac2710b593e9.8e9roKoeCSmTjbbo"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
-        img: systems/teriock/src/icons/abilities/warrior-techniques.webp
-        name: Warrior Techniques
-        system:
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: warrior-techniques
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>For every 2 ranks you train in @Identifier[archetype:warrior]{warrior classes}, you gain a
-              @Wiki[Category:Warrior guildmaster abilities]{warrior guildmaster ability} of your choice. You also gain
-              @Identifier[keyword:limited]{Limited} @Identifier[ability:defensive-martial-arts]{Defensive Martial
-              Arts}.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-      - _id: aOvOlScH5bn7jX7m
-        _key: "!actors.items.effects!631ee800e7393cd3.380dac2710b593e9.aOvOlScH5bn7jX7m"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
-        img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-        name: Defensive Martial Arts
-        system:
-          _sup: 8e9roKoeCSmTjbbo
-          automations:
-            - _id: F9NLbFodo8GgQLdh
-              changeType: upgrade
-              competencies:
-                - 0
-              key: system.bv.bonus
-              qualifier: "@prop.handy"
-              target: armament
-              type: childChange
-              value: "1"
-            - _id: iijE8Q6bC3GKvrTX
-              changeType: upgrade
-              competencies:
-                - 1
-              key: system.bv.bonus
-              qualifier: "@prop.handy"
-              target: armament
-              type: childChange
-              value: "2"
-            - _id: pI8dAIbbmiCqE5n9
-              changeType: upgrade
-              competencies:
-                - 2
-              key: system.bv.bonus
-              qualifier: "@prop.handy"
-              target: armament
-              type: childChange
-              value: "3"
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          identifier: defensive-martial-arts
-          interaction: manifest
-          limitation: <p>While wearing @Wiki[Category:Armor]{armor} only.</p>
-          maneuver: passive
-          overview:
-            base: >-
-              <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
-              @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of
-              @Wiki[Category:Weapon target abilities]{abilities that target them} (although they cannot be
-              @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
-              @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
-              +1.</p>
-            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
-            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-    folder: 380dac2710b593e9
-    img: systems/teriock/src/icons/archetypes/warrior.webp
-    name: Warrior
-    system:
-      description: >-
-        <p>Warriors are primarily fighters and can handle themselves well in heavy melee
-        @Identifier[core:combat]{combat}. Though they all have similar combat strength, they achieve different goals in
-        battle in order to win their objective.</p>
-      identifier: warrior
-      instructions: >-
-        <p>Add @Pack[teriock.abilities]{abilities} from @Identifier[ability:warrior-techniques] here when you gain
-        them.</p>
-    type: archetype
 name: Greater Cemerai
 prototypeToken:
   displayBars: 20

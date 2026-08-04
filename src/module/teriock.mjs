@@ -532,7 +532,7 @@ Hooks.once("i18nInit", () => {
     ...TERIOCK.rollContext.resource,
     ...TERIOCK.rollContext.species,
   });
-  helpers.interaction.TeriockTooltipManager.initializeLoadingTooltip();
+  game.tooltip.initializeLoadingTooltip();
 });
 
 // Final Steps

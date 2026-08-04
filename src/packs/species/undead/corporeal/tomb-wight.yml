@@ -343,6 +343,107 @@ effects:
           attribute: snk
           value: 1
     type: ability
+  - _id: 5gSyLsiZW2dwqkFF
+    _key: "!items.effects!9adc7d1898bb64ee.5gSyLsiZW2dwqkFF"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: f5J8k1miy9KiMwMj
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: beastly-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    type: ability
+  - _id: UXSTJY8aif3Cgedv
+    _key: "!items.effects!9adc7d1898bb64ee.UXSTJY8aif3Cgedv"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    name: Defensive Martial Arts
+    system:
+      _sup: lGCkmZ7khN6r3U6D
+      automations:
+        - _id: F9NLbFodo8GgQLdh
+          changeType: upgrade
+          competencies:
+            - 0
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "1"
+        - _id: iijE8Q6bC3GKvrTX
+          changeType: upgrade
+          competencies:
+            - 1
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "2"
+        - _id: pI8dAIbbmiCqE5n9
+          changeType: upgrade
+          competencies:
+            - 2
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "3"
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: defensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target them} (although they cannot be
+          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+          @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
+          +1.</p>
+        fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+        proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: FbQCpKRDk0EgxEXC
     _key: "!items.effects!9adc7d1898bb64ee.FbQCpKRDk0EgxEXC"
     _stats:
@@ -422,6 +523,35 @@ effects:
       targets:
         - self
     type: ability
+  - _id: pu88DZOYJYIgSro8
+    _key: "!items.effects!9adc7d1898bb64ee.pu88DZOYJYIgSro8"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: f5J8k1miy9KiMwMj
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: bmyCJUtQz9y2IaYM
     _key: "!items.effects!9adc7d1898bb64ee.bmyCJUtQz9y2IaYM"
     _stats:
@@ -495,6 +625,88 @@ effects:
           target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
           @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the only
           part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
+    type: ability
+  - _id: wVzd3cAglLEyx34A
+    _key: "!items.effects!9adc7d1898bb64ee.wVzd3cAglLEyx34A"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    name: Offensive Martial Arts
+    system:
+      _sup: lGCkmZ7khN6r3U6D
+      automations:
+        - _id: xX7Z0MBjQuUVHdLg
+          changeType: upgrade
+          competencies:
+            - 0
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d4
+        - _id: IlASfQucE28oO7eo
+          changeType: upgrade
+          competencies:
+            - 1
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d6
+        - _id: LNqxuNUNDqEtcbmb
+          changeType: upgrade
+          competencies:
+            - 2
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d8
+        - _id: 29b275994cf9f5b1
+          formula: 1d4
+          type: roll
+        - _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          type: roll
+        - _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          type: roll
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: offensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy items} count as
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target} or are @Wiki[Category:Weapon delivery abilities]{delivered by} them
+          (although they cannot be @Identifier[property:shattered]{shattered} or
+          @Identifier[property:destroyed]{destroyed}). You may @Identifier[core:attack-interaction]{attack} with them
+          and their damage die is now [[/damage 1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
     type: ability
   - _id: KZoK6QppfrY0nnQm
     _key: "!items.effects!9adc7d1898bb64ee.KZoK6QppfrY0nnQm"
@@ -588,218 +800,6 @@ effects:
         - magical
       range:
         unit: self
-      targets:
-        - self
-    type: ability
-  - _id: pu88DZOYJYIgSro8
-    _key: "!items.effects!9adc7d1898bb64ee.pu88DZOYJYIgSro8"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: f5J8k1miy9KiMwMj
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: improved-armor-piercing
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>Melee weapons you use are @Identifier[property:armor-piercing]{armor piercing}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: 5gSyLsiZW2dwqkFF
-    _key: "!items.effects!9adc7d1898bb64ee.5gSyLsiZW2dwqkFF"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
-    system:
-      _sup: f5J8k1miy9KiMwMj
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: beastly-strength
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><p class="note"><b>Note:</b>
-          @Identifier[property:armor-piercing]{Armor piercing} weapons must still be wielded in two hands to be
-          @Identifier[keyword:armor-voiding]{AV0}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-    type: ability
-  - _id: wVzd3cAglLEyx34A
-    _key: "!items.effects!9adc7d1898bb64ee.wVzd3cAglLEyx34A"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
-    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
-    name: Offensive Martial Arts
-    system:
-      _sup: lGCkmZ7khN6r3U6D
-      automations:
-        - _id: xX7Z0MBjQuUVHdLg
-          changeType: upgrade
-          competencies:
-            - 0
-          key: system.damage
-          priority: 10
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: 1d4
-        - _id: IlASfQucE28oO7eo
-          changeType: upgrade
-          competencies:
-            - 1
-          key: system.damage
-          priority: 10
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: 1d6
-        - _id: LNqxuNUNDqEtcbmb
-          changeType: upgrade
-          competencies:
-            - 2
-          key: system.damage
-          priority: 10
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: 1d8
-        - _id: 29b275994cf9f5b1
-          formula: 1d4
-          type: roll
-        - _id: 5e4d195ed81a10cc
-          competencies:
-            - 1
-            - 2
-          formula: 1d6
-          type: roll
-        - _id: 3f7fa7707643426f
-          competencies:
-            - 2
-          formula: 1d8
-          type: roll
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: offensive-martial-arts
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy items} count as
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} for the purposes of @Wiki[Category:Weapon
-          target abilities]{abilities that target} or are @Wiki[Category:Weapon delivery abilities]{delivered by} them
-          (although they cannot be @Identifier[property:shattered]{shattered} or
-          @Identifier[property:destroyed]{destroyed}). You may @Identifier[core:attack-interaction]{attack} with them
-          and their damage die is now [[/damage 1d4]].</p>
-        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
-        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: UXSTJY8aif3Cgedv
-    _key: "!items.effects!9adc7d1898bb64ee.UXSTJY8aif3Cgedv"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    name: Defensive Martial Arts
-    system:
-      _sup: lGCkmZ7khN6r3U6D
-      automations:
-        - _id: F9NLbFodo8GgQLdh
-          changeType: upgrade
-          competencies:
-            - 0
-          key: system.bv.bonus
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: "1"
-        - _id: iijE8Q6bC3GKvrTX
-          changeType: upgrade
-          competencies:
-            - 1
-          key: system.bv.bonus
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: "2"
-        - _id: pI8dAIbbmiCqE5n9
-          changeType: upgrade
-          competencies:
-            - 2
-          key: system.bv.bonus
-          qualifier: "@prop.handy"
-          target: armament
-          type: childChange
-          value: "3"
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: defensive-martial-arts
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
-          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of @Wiki[Category:Weapon
-          target abilities]{abilities that target them} (although they cannot be
-          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
-          @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
-          +1.</p>
-        fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
-        proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
       targets:
         - self
     type: ability

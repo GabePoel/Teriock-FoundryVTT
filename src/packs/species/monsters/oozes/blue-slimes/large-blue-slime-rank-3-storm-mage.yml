@@ -117,6 +117,66 @@ effects:
       targets:
         - self
     type: ability
+  - _id: hIupvzG6jq8nVkmB
+    _key: "!items.effects!01ySNwJ1bAdh4pe9.hIupvzG6jq8nVkmB"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.45d262c72421007d
+    img: systems/teriock/src/icons/abilities/reflect-magic.webp
+    name: Reflect Magic
+    system:
+      _sup: BVSGkZaYwHz2UPKP
+      automations:
+        - _id: 7400b41f20d9f100
+          deleteOnTurnChange: false
+          radius: 10 + 15 * @h
+          restriction:
+            type: move
+          trigger: executeInput
+          type: region
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: aura
+      elements:
+        - storm
+      executionTime:
+        base: r1
+      form: special
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+        @Identifier[core:range]{range} of this increases by 15 feet.</p>
+      identifier: reflect-magic
+      interaction: manifest
+      invoked: true
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
+          @Identifier[core:fizzles]{fizzles}, as do any others cast simultaneously within
+          @Identifier[core:range]{range}. Their casters take the @Wiki[Category:Conjured spells]{spells'} effects
+          instead.</p>
+      powerSources:
+        - magical
+      range:
+        raw: "10"
+        unit: ft
+      requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
+    type: ability
   - _id: gnI00Em2bRS2YalH
     _key: "!items.effects!01ySNwJ1bAdh4pe9.gnI00Em2bRS2YalH"
     _stats:
@@ -184,66 +244,6 @@ effects:
       targets:
         - area
         - creature
-    type: ability
-  - _id: hIupvzG6jq8nVkmB
-    _key: "!items.effects!01ySNwJ1bAdh4pe9.hIupvzG6jq8nVkmB"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.45d262c72421007d
-    img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    name: Reflect Magic
-    system:
-      _sup: BVSGkZaYwHz2UPKP
-      automations:
-        - _id: 7400b41f20d9f100
-          deleteOnTurnChange: false
-          radius: 10 + 15 * @h
-          restriction:
-            type: move
-          trigger: executeInput
-          type: region
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: "1"
-            type: formula
-      delivery: aura
-      elements:
-        - storm
-      executionTime:
-        base: r1
-      form: special
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
-        @Identifier[core:range]{range} of this increases by 15 feet.</p>
-      identifier: reflect-magic
-      interaction: manifest
-      invoked: true
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
-          @Identifier[core:fizzles]{fizzles}, as do any others cast simultaneously within
-          @Identifier[core:range]{range}. Their casters take the @Wiki[Category:Conjured spells]{spells'} effects
-          instead.</p>
-      powerSources:
-        - magical
-      range:
-        raw: "10"
-        unit: ft
-      requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - spell
-      trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
     type: ability
 folder: 973c51c989f887b2
 img: systems/teriock/src/icons/ranks/rank-3-storm-mage.webp
