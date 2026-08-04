@@ -3,6 +3,8 @@ declare global {
     export type AttunableSystemData = {
       /** <schema> If this requires attunement */
       needsAttunement: boolean;
+      /** <schema> Price */
+      price: number;
       /** <schema> Presence tier */
       tier: {
         /** <schema> Formula for presence cost */
@@ -10,8 +12,6 @@ declare global {
         /** <derived> Evaluated presence cost */
         value: number;
       };
-      /** <schema> Price */
-      price: number;
     };
   }
 }
