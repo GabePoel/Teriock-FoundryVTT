@@ -51,7 +51,7 @@ export default class HarmSystem
   /** @inheritDoc */
   get _panelBars() {
     return [{
-      icon: icons.form.normal,
+      icon: icons.ability.effectType,
       label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
       wrappers: simplifyTags(this._metaphysicsTags),
     }];

@@ -1,3 +1,5 @@
+import effectConfig from "../../../../constants/config/effect-config.mjs";
+import systemConfig from "../../../../constants/config/system-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
@@ -20,7 +22,12 @@ export default class BodySystem
 {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "body", usable: true });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "intrinsic", type: "body", usable: true });
+  }
+
+  /** @inheritDoc */
+  static kinds() {
+    return { intrinsic: effectConfig.kind.intrinsic, ...systemConfig.defaultKinds };
   }
 
   /** @inheritDoc */

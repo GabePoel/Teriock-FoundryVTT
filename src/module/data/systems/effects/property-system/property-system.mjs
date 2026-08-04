@@ -103,7 +103,7 @@ export default class PropertySystem
   /** @inheritDoc */
   get _panelBars() {
     return [{
-      icon: TERIOCK.display.icons.form.normal,
+      icon: TERIOCK.display.icons.ability.effectType,
       label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
       wrappers: simplifyTags(this._metaphysicsTags),
     }];
