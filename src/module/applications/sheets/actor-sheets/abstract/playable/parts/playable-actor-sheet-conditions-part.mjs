@@ -18,13 +18,15 @@ export default function PlayableActorSheetConditionsPart(Base) {
      * @returns {Promise<string>}
      */
     async #conditionTooltip(condition) {
+      const flaw = TERIOCK.config.system.defaultKinds.flaw;
       const panelParts = {
         associations: [],
-        bars: [],
+        bars: [{ icon: flaw.icon, label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label"), wrappers: [flaw.label] }],
         blocks: [{
           text: TERIOCK.statuses.conditions[condition].description,
-          title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+          title: _loc("EFFECT.FIELDS.description.label"),
         }],
+        color: foundry.utils.Color.from(TERIOCK.display.colors.palette.red),
         icon: TERIOCK.config.document.condition.icon,
         img: TERIOCK.statuses.conditions[condition].img,
         name: TERIOCK.statuses.conditions[condition].name,
