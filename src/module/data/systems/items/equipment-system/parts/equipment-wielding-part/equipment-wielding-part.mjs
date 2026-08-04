@@ -20,6 +20,9 @@ export default function EquipmentWieldingPart(Base) {
      */
     class EquipmentWieldingPart extends Base {
       /** @inheritDoc */
+      static PRESERVED_PROPERTIES = ["system.equipped", ...super.PRESERVED_PROPERTIES];
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           ammunition: new fields.SchemaField({
