@@ -146,7 +146,9 @@ export default class CostPayer extends ResolvableDialog {
     this.#hintsPrepared = true;
     for (const k of Object.keys(statConfig)) {
       const description = this.#ability.system.costs.primary[k].description;
-      if (description) { this.#hints[k] = await TeriockTextEditor.enrichHTML(description); }
+      if (description) {
+        this.#hints[k] = await TeriockTextEditor.enrichHTML(description, { relativeTo: this.#ability });
+      }
     }
     if (this.#ability.system.heightened) {
       this.#hints.heightened = await TeriockTextEditor.enrichHTML(this.#ability.system.heightened, {

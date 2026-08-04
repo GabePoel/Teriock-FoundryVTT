@@ -5,8 +5,6 @@ declare global {
       equipmentType: TypedIdentifier<"equipment">;
       /** <schema> Power Level */
       powerLevel: Teriock.Keys.PowerLevel;
-      /** <schema> Price */
-      price: number;
 
       get parent(): TeriockEquipment;
     };

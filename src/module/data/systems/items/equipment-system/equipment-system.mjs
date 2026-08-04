@@ -99,7 +99,6 @@ export default class EquipmentSystem
         initial: "mundane",
         required: true,
       }),
-      price: new fields.NumberField({ initial: 0 }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
   }

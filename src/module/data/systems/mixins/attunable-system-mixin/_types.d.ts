@@ -10,6 +10,8 @@ declare global {
         /** <derived> Evaluated presence cost */
         value: number;
       };
+      /** <schema> Price */
+      price: number;
     };
   }
 }

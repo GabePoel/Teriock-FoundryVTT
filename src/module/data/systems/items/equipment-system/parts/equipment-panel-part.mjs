@@ -1,4 +1,3 @@
-import { formulaExists } from "../../../../../helpers/formula.mjs";
 import { simplifyTags } from "../../../../../helpers/panel.mjs";
 import { getName } from "../../../../../helpers/utils.mjs";
 
@@ -9,6 +8,7 @@ import { getName } from "../../../../../helpers/utils.mjs";
  */
 export default function EquipmentPanelPart(Base) {
   /**
+   * @extends {AttunableSystem}
    * @extends {EquipmentIdentificationPart}
    * @extends {EquipmentStoragePart}
    * @extends {EquipmentWieldingPart}
@@ -16,6 +16,11 @@ export default function EquipmentPanelPart(Base) {
    * @property {TeriockEquipment} parent
    */
   class EquipmentPanelPart extends Base {
+    /** @inheritDoc */
+    get _shouldShowTierWrapper() {
+      return (this.identification.identified || this.isAttuned) && super._shouldShowTierWrapper;
+    }
+
     /** @inheritDoc */
     async getPanelParts() {
       const bars = [
@@ -40,12 +45,13 @@ export default function EquipmentPanelPart(Base) {
           icon: TERIOCK.display.icons.armament.load,
           label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.load"),
           wrappers: [
+            ...simplifyTags(this._identificationTags),
+            ...this._attunableWrappers,
             _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.weight }),
             _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", { value: this.minStr }),
-            (this.identification.identified || this.isAttuned) && formulaExists(this.tier.raw)
-              ? _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw })
+            typeof this.price === "number"
+              ? _loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: this.price.toNearest(0.01) })
               : "",
-            ...simplifyTags(this._identificationTags),
           ],
         },
         {

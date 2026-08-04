@@ -20,12 +20,25 @@ export default function AttunableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunable"];
 
     /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.needsAttunement", "system.tier", ...super.PRESERVED_PROPERTIES];
+    static PRESERVED_PROPERTIES = [
+      "system.needsAttunement",
+      "system.tier",
+      "system.price",
+      ...super.PRESERVED_PROPERTIES,
+    ];
 
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         needsAttunement: new fields.BooleanField({ initial: true }),
+        price: new fields.NumberField({
+          blank: true,
+          initial: null,
+          min: 0,
+          nullable: true,
+          placeholder: _loc("COMMON.None"),
+          required: true,
+        }),
         tier: new fields.SchemaField({
           raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),
           value: new fields.NumberField({ integer: true, min: 0, persisted: false, placeholder: "0" }),
@@ -51,9 +64,14 @@ export default function AttunableSystemMixin(Base) {
      * @returns {string[]}
      */
     get _attunableWrappers() {
-      return formulaExists(this.tier.raw)
-        ? [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw })]
-        : [];
+      const wrappers = [];
+      if (this._shouldShowTierWrapper) {
+        wrappers.push(_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw }));
+      }
+      if (typeof this.price === "number") {
+        wrappers.push(_loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: this.price.toNearest(0.01) }));
+      }
+      return wrappers;
     }
 
     /** @inheritDoc */
@@ -75,6 +93,14 @@ export default function AttunableSystemMixin(Base) {
           else { await this.attune(); }
         },
       }, ...super._embedIcons];
+    }
+
+    /**
+     * Whether to show the tier wrapper.
+     * @return {boolean}
+     */
+    get _shouldShowTierWrapper() {
+      return formulaExists(this.tier.raw);
     }
 
     /**
