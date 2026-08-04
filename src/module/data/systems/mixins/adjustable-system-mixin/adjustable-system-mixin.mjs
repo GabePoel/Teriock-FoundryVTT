@@ -7,85 +7,85 @@ const { fields } = foundry.data;
  * @param {T} Base
  */
 export default function AdjustableSystemMixin(Base) {
-  return (
+  /**
+   * @extends {BaseEffectSystem}
+   * @extends {Teriock.Models.AdjustableSystemData}
+   * @mixin
+   */
+  class AdjustableSystem extends Base {
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Adjustable"];
+
+    /** @inheritDoc */
+    static PRESERVED_PROPERTIES = ["system.badge", ...this._adjustableTextFields, ...super.PRESERVED_PROPERTIES];
+
     /**
-     * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.AdjustableSystemData}
-     * @mixin
+     * @returns {string[]}
      */
-    class AdjustableSystem extends Base {
-      /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Adjustable"];
+    static get _adjustableTextFields() {
+      return ["system.improvement", "system.limitation"];
+    }
 
-      /** @inheritDoc */
-      static PRESERVED_PROPERTIES = ["system.badge", ...this._adjustableTextFields, ...super.PRESERVED_PROPERTIES];
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        badge: new fields.StringField({ initial: "" }),
+        form: new fields.StringField({ blank: false, choices: effectConfig.form, initial: "normal", required: true }),
+        improvement: new fields.HTMLField({ initial: "" }),
+        limitation: new fields.HTMLField({ initial: "" }),
+      });
+    }
 
-      /**
-       * @returns {string[]}
-       */
-      static get _adjustableTextFields() {
-        return ["system.improvement", "system.limitation"];
-      }
+    /** @inheritDoc */
+    get _color() {
+      return TERIOCK.config.effect.form[this.form].color;
+    }
 
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          badge: new fields.StringField({ initial: "" }),
-          form: new fields.StringField({ blank: false, choices: effectConfig.form, initial: "normal", required: true }),
-          improvement: new fields.HTMLField({ initial: "" }),
-          limitation: new fields.HTMLField({ initial: "" }),
+    /** @inheritDoc */
+    get _displayButtons() {
+      const buttons = super._displayButtons;
+      if (!this.badge) {
+        buttons.push({
+          button: "badge",
+          label: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.label",
+          update: { "system.badge": "x" },
         });
       }
-
-      /** @inheritDoc */
-      get _color() {
-        return TERIOCK.config.effect.form[this.form].color;
-      }
-
-      /** @inheritDoc */
-      get _displayButtons() {
-        const buttons = super._displayButtons;
-        if (!this.badge) {
-          buttons.push({
-            button: "badge",
-            label: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.label",
-            update: { "system.badge": "x" },
-          });
-        }
-        return buttons;
-      }
-
-      /** @inheritDoc */
-      get _nameBadge() {
-        return this.badge || "";
-      }
-
-      /** @inheritDoc */
-      get _nameTags() {
-        const tags = [];
-        if (this.limitation && this.limitation.length > 0) {
-          tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.limited"));
-        }
-        if (this.improvement && this.improvement.length > 0) {
-          tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.improved"));
-        }
-        return [...tags, ...super._nameTags];
-      }
-
-      /** @inheritDoc */
-      get needsAttunement() {
-        return this.form !== "intrinsic" && super.needsAttunement;
-      }
-
-      /** @inheritDoc */
-      _isSuppressedDampened() {
-        return this.form !== "intrinsic" && super._isSuppressedDampened();
-      }
-
-      /** @inheritDoc */
-      getLocalRollData() {
-        return Object.assign(super.getLocalRollData(), { [`form.${this.form}`]: 1, form: this.form });
-      }
+      return buttons;
     }
-  );
+
+    /** @inheritDoc */
+    get _nameBadge() {
+      return this.badge || "";
+    }
+
+    /** @inheritDoc */
+    get _nameTags() {
+      const tags = [];
+      if (this.limitation && this.limitation.length > 0) {
+        tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.limited"));
+      }
+      if (this.improvement && this.improvement.length > 0) {
+        tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.improved"));
+      }
+      return [...tags, ...super._nameTags];
+    }
+
+    /** @inheritDoc */
+    get needsAttunement() {
+      return this.form !== "intrinsic" && super.needsAttunement;
+    }
+
+    /** @inheritDoc */
+    _isSuppressedDampened() {
+      return this.form !== "intrinsic" && super._isSuppressedDampened();
+    }
+
+    /** @inheritDoc */
+    getLocalRollData() {
+      return Object.assign(super.getLocalRollData(), { [`form.${this.form}`]: 1, form: this.form });
+    }
+  }
+
+  return AdjustableSystem;
 }

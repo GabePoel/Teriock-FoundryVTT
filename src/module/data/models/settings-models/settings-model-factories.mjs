@@ -69,7 +69,7 @@ export class CommonDocumentSettingsModel extends BaseDataModel {
  */
 export function documentSettingsModelFactory(category) {
   const groups = settingsConfig.compositions[category];
-  return class DocumentSettingsModel extends CommonDocumentSettingsModel {
+  class DocumentSettingsModel extends CommonDocumentSettingsModel {
     /** @type {Teriock.Config.DocumentSettingsCategory} */
     static CATEGORY = category;
 
@@ -82,7 +82,9 @@ export function documentSettingsModelFactory(category) {
     static defineSchema() {
       return Object.assign({}, ...groups.map(g => settingsSchema(g, TernaryField, { initial: null })));
     }
-  };
+  }
+
+  return DocumentSettingsModel;
 }
 
 /**
@@ -91,10 +93,12 @@ export function documentSettingsModelFactory(category) {
  * @returns {Teriock.Models.UserSettingsModelConstructor<Category>}
  */
 export function userSettingsModelFactory(category) {
-  return class UserSettingsModel extends BaseDataModel {
+  class UserSettingsModel extends BaseDataModel {
     /** @inheritDoc */
     static defineSchema() {
       return settingsSchema(category, foundry.data.fields.BooleanField);
     }
-  };
+  }
+
+  return UserSettingsModel;
 }

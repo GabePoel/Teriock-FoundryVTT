@@ -17,69 +17,69 @@ const MIGRATED_RELATIONS = {
  * @param {T} Base
  */
 export default function AffinableSystemMixin(Base) {
-  return (
+  /**
+   * @extends {ReturnType<TeriockSystem}
+   * @extends {Teriock.Models.AffinableSystemData}
+   * @mixin
+   */
+  class AffinableSystem extends Base {
     /**
-     * @extends {ReturnType<TeriockSystem}
-     * @extends {Teriock.Models.AffinableSystemData}
-     * @mixin
+     * Array of the types of affinities that this system can have.
+     * @returns {(typeof AnyAffinity)[]}
      */
-    class AffinableSystem extends Base {
-      /**
-       * Array of the types of affinities that this system can have.
-       * @returns {(typeof AnyAffinity)[]}
-       */
-      static get _affinityTypes() {
-        return [];
-      }
-
-      /**
-       * The types of affinities that this system can have.
-       * @returns {Record<string, (typeof AnyAffinity)>}
-       */
-      static get affinityTypes() {
-        return Object.fromEntries(this._affinityTypes.map(a => [a.TYPE, a]));
-      }
-
-      /** @inheritDoc */
-      static get metadata() {
-        return foundry.utils.mergeObject(super.metadata, { pseudos: { Affinity: "system.affinities" } });
-      }
-
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          affinities: new PseudoCollectionField(BaseAffinity, { types: this.affinityTypes }),
-        });
-      }
-
-      /**
-       * Move protection automations over to affinities, which replaced them.
-       * @inheritDoc
-       */
-      static migrateData(source, options, state) {
-        const automations = foundry.utils.getProperty(source, "automations");
-        if (foundry.utils.isPlainObject(automations)) {
-          for (const [id, automation] of Object.entries(automations)) {
-            if (foundry.utils.getProperty(automation, "type") !== "protection") { continue; }
-            delete automations[id];
-            const type = MIGRATED_RELATIONS[foundry.utils.getProperty(automation, "relation")];
-            if (!type) { continue; }
-            const affinity = foundry.utils.mergeObject(automation, { type }, { inplace: false });
-            delete affinity.relation;
-            source.affinities ??= {};
-            source.affinities[id] ??= affinity;
-          }
-        }
-        return super.migrateData(source, options, state);
-      }
-
-      /**
-       * Active affinities.
-       * @returns {AnyAffinity[]}
-       */
-      get activeAffinities() {
-        return this.affinities.contents.filter(a => a.active && a.valid);
-      }
+    static get _affinityTypes() {
+      return [];
     }
-  );
+
+    /**
+     * The types of affinities that this system can have.
+     * @returns {Record<string, (typeof AnyAffinity)>}
+     */
+    static get affinityTypes() {
+      return Object.fromEntries(this._affinityTypes.map(a => [a.TYPE, a]));
+    }
+
+    /** @inheritDoc */
+    static get metadata() {
+      return foundry.utils.mergeObject(super.metadata, { pseudos: { Affinity: "system.affinities" } });
+    }
+
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        affinities: new PseudoCollectionField(BaseAffinity, { types: this.affinityTypes }),
+      });
+    }
+
+    /**
+     * Move protection automations over to affinities, which replaced them.
+     * @inheritDoc
+     */
+    static migrateData(source, options, state) {
+      const automations = foundry.utils.getProperty(source, "automations");
+      if (foundry.utils.isPlainObject(automations)) {
+        for (const [id, automation] of Object.entries(automations)) {
+          if (foundry.utils.getProperty(automation, "type") !== "protection") { continue; }
+          delete automations[id];
+          const type = MIGRATED_RELATIONS[foundry.utils.getProperty(automation, "relation")];
+          if (!type) { continue; }
+          const affinity = foundry.utils.mergeObject(automation, { type }, { inplace: false });
+          delete affinity.relation;
+          source.affinities ??= {};
+          source.affinities[id] ??= affinity;
+        }
+      }
+      return super.migrateData(source, options, state);
+    }
+
+    /**
+     * Active affinities.
+     * @returns {AnyAffinity[]}
+     */
+    get activeAffinities() {
+      return this.affinities.contents.filter(a => a.active && a.valid);
+    }
+  }
+
+  return AffinableSystem;
 }

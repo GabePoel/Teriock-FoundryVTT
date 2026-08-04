@@ -7,195 +7,199 @@ const { fields } = foundry.data;
 
 /**
  * Equipment data model mixin that handles equipping, gluing, and attunement.
+ *
+ * Relevant wiki pages:
+ * - [Bearing](https://wiki.teriock.com/index.php/Keyword:Bearing)
+ *
  * @template {Constructor<BaseItemSystem>} T
  * @param {T} Base
  */
 export default function EquipmentWieldingPart(Base) {
-  return (
-    /**
-     * @extends {BaseItemSystem}
-     * @extends {Teriock.Models.EquipmentWieldingPartData}
-     * @mixin
-     * @property {TeriockEquipment} parent
-     */
-    class EquipmentWieldingPart extends Base {
-      /** @inheritDoc */
-      static PRESERVED_PROPERTIES = ["system.equipped", ...super.PRESERVED_PROPERTIES];
+  /**
+   * @extends {BaseItemSystem}
+   * @extends {Teriock.Models.EquipmentWieldingPartData}
+   * @mixin
+   * @property {TeriockEquipment} parent
+   */
+  class EquipmentWieldingPart extends Base {
+    /** @inheritDoc */
+    static PRESERVED_PROPERTIES = ["system.equipped", ...super.PRESERVED_PROPERTIES];
 
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          ammunition: new fields.SchemaField({
-            consumptionAmount: new fields.NumberField({
-              initial: 1,
-              integer: true,
-              nullable: false,
-              placeholder: "1",
-              required: true,
-            }),
-            enabled: initialBoolean(),
-            type: new IdentifierField({ type: "equipment" }),
-          }),
-          equipped: new fields.BooleanField({ initial: false }),
-          glued: initialBoolean(),
-          minStr: new fields.NumberField({
-            initial: -3,
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        ammunition: new fields.SchemaField({
+          consumptionAmount: new fields.NumberField({
+            initial: 1,
             integer: true,
-            min: -3,
             nullable: false,
-            placeholder: "-3",
+            placeholder: "1",
             required: true,
           }),
-        });
-      }
+          enabled: initialBoolean(),
+          type: new IdentifierField({ type: "equipment" }),
+        }),
+        equipped: new fields.BooleanField({ initial: false }),
+        glued: initialBoolean(),
+        minStr: new fields.NumberField({
+          initial: -3,
+          integer: true,
+          min: -3,
+          nullable: false,
+          placeholder: "-3",
+          required: true,
+        }),
+      });
+    }
 
-      /** @inheritDoc */
-      get _embedIcons() {
-        return [
-          {
-            action: "toggleGluedDoc",
-            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
-            tooltip: this.glued
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
-            onClick: async () => {
-              if (this.glued) {await this.unglue();}
-              else { await this.glue(); }
-            },
+    /** @inheritDoc */
+    get _embedIcons() {
+      return [
+        {
+          action: "toggleGluedDoc",
+          icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
+          tooltip: this.glued
+            ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+            : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
+          visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
+          onClick: async () => {
+            if (this.glued) {await this.unglue();}
+            else { await this.glue(); }
           },
-          ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
-          {
-            action: "toggleEquippedDoc",
-            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
-            tooltip: this.equipped
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
-            visible: this.parent.isOwner,
-            onClick: async () => {
-              if (this.equipped) {await this.unequip();}
-              else { await this.equip(); }
-            },
+        },
+        ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
+        {
+          action: "toggleEquippedDoc",
+          icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
+          tooltip: this.equipped
+            ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+            : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
+          visible: this.parent.isOwner,
+          onClick: async () => {
+            if (this.equipped) {await this.unequip();}
+            else { await this.equip(); }
           },
-        ];
-      }
+        },
+      ];
+    }
 
-      /**
-       * Checks if equipping is a valid operation.
-       * @returns {boolean}
-       */
-      get canEquip() {
-        return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && !this.equipped;
-      }
+    /**
+     * Checks if equipping is a valid operation.
+     * @returns {boolean}
+     */
+    get canEquip() {
+      return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && !this.equipped;
+    }
 
-      /**
-       * Checks if unequipping is a valid operation.
-       * @returns {boolean}
-       */
-      get canUnequip() {
-        return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && this.equipped;
-      }
+    /**
+     * Checks if unequipping is a valid operation.
+     * @returns {boolean}
+     */
+    get canUnequip() {
+      return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && this.equipped;
+    }
 
-      /** @inheritDoc */
-      get embedParts() {
-        return Object.assign(super.embedParts, { struck: !this.equipped });
-      }
+    /** @inheritDoc */
+    get embedParts() {
+      return Object.assign(super.embedParts, { struck: !this.equipped });
+    }
 
-      /** @inheritDoc */
-      _onCreate(data, options, userId) {
-        super._onCreate(data, options, userId);
-        if (this.parent.checkEditor(userId)) { this.unglue(); }
-      }
+    /** @inheritDoc */
+    _onCreate(data, options, userId) {
+      super._onCreate(data, options, userId);
+      if (this.parent.checkEditor(userId)) { this.unglue(); }
+    }
 
-      /**
-       * Equip this equipment.
-       * @returns {Promise<void>}
-       */
-      async equip() {
-        await this.parent.hookCall("equip", { scope: { equipment: this.parent } });
-        await this.parent.update({ "system.equipped": true });
-      }
+    /**
+     * Equip this equipment.
+     * @returns {Promise<void>}
+     */
+    async equip() {
+      await this.parent.hookCall("equip", { scope: { equipment: this.parent } });
+      await this.parent.update({ "system.equipped": true });
+    }
 
-      /** @inheritdoc */
-      getEmbedContextMenuEntries(doc) {
-        return [...super.getEmbedContextMenuEntries(doc), {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
-          onClick: this.equip.bind(this),
-          visible: this.canEquip && this.parent._checkValidEditorDocument(doc, { self: false }),
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
-          onClick: this.unequip.bind(this),
-          visible: this.canUnequip && this.parent._checkValidEditorDocument(doc, { self: false }),
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
-          onClick: this.glue.bind(this),
-          visible: !this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.equipment.unglue, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
-          onClick: this.unglue.bind(this),
-          visible: this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-        }];
-      }
+    /** @inheritdoc */
+    getEmbedContextMenuEntries(doc) {
+      return [...super.getEmbedContextMenuEntries(doc), {
+        group: "control",
+        icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
+        onClick: this.equip.bind(this),
+        visible: this.canEquip && this.parent._checkValidEditorDocument(doc, { self: false }),
+      }, {
+        group: "control",
+        icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
+        onClick: this.unequip.bind(this),
+        visible: this.canUnequip && this.parent._checkValidEditorDocument(doc, { self: false }),
+      }, {
+        group: "control",
+        icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
+        onClick: this.glue.bind(this),
+        visible: !this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+      }, {
+        group: "control",
+        icon: makeIcon(TERIOCK.display.icons.equipment.unglue, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
+        onClick: this.unglue.bind(this),
+        visible: this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+      }];
+    }
 
-      /** @inheritDoc */
-      getLocalRollData() {
-        return Object.assign(super.getLocalRollData(), {
-          equipped: Number(this.equipped),
-          glued: Number(this.glued),
-          minStr: this.minStr,
-          str: this.minStr,
-        });
-      }
+    /** @inheritDoc */
+    getLocalRollData() {
+      return Object.assign(super.getLocalRollData(), {
+        equipped: Number(this.equipped),
+        glued: Number(this.glued),
+        minStr: this.minStr,
+        str: this.minStr,
+      });
+    }
 
-      /**
-       * Glue this equipment.
-       * @returns {Promise<void>}
-       */
-      async glue() {
-        await this.parent.hookCall("glue", { scope: { equipment: this.parent } });
-        await this.parent.toggleChild("property:glued", { active: true });
-      }
+    /**
+     * Glue this equipment.
+     * @returns {Promise<void>}
+     */
+    async glue() {
+      await this.parent.hookCall("glue", { scope: { equipment: this.parent } });
+      await this.parent.toggleChild("property:glued", { active: true });
+    }
 
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        if (!this.actor) {
-          this.equipped = true;
-          this.stashed = false;
-        }
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        if (this.consumable && this.quantity.value === 0) { this.equipped = false; }
-      }
-
-      /**
-       * Unequip this equipment.
-       * @returns {Promise<void>}
-       */
-      async unequip() {
-        await this.parent.hookCall("unequip", { scope: { equipment: this.parent } });
-        await this.parent.update({ "system.equipped": false });
-      }
-
-      /**
-       * Unglue this equipment.
-       * @returns {Promise<void>}
-       */
-      async unglue() {
-        await this.parent.hookCall("unglue", { scope: { equipment: this.parent } });
-        await this.parent.toggleChild("property:glued", { active: false });
+    /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      if (!this.actor) {
+        this.equipped = true;
+        this.stashed = false;
       }
     }
-  );
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      if (this.consumable && this.quantity.value === 0) { this.equipped = false; }
+    }
+
+    /**
+     * Unequip this equipment.
+     * @returns {Promise<void>}
+     */
+    async unequip() {
+      await this.parent.hookCall("unequip", { scope: { equipment: this.parent } });
+      await this.parent.update({ "system.equipped": false });
+    }
+
+    /**
+     * Unglue this equipment.
+     * @returns {Promise<void>}
+     */
+    async unglue() {
+      await this.parent.hookCall("unglue", { scope: { equipment: this.parent } });
+      await this.parent.toggleChild("property:glued", { active: false });
+    }
+  }
+
+  return EquipmentWieldingPart;
 }

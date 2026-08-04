@@ -10,193 +10,193 @@ const { fields } = foundry.data;
  * @param {T} Base
  */
 export default function AttunableSystemMixin(Base) {
-  return (
+  /**
+   * @extends {BaseItemSystem}
+   * @extends {Teriock.Models.AttunableSystemData}
+   * @mixin
+   */
+  class AttunableSystem extends Base {
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunable"];
+
+    /** @inheritDoc */
+    static PRESERVED_PROPERTIES = ["system.needsAttunement", "system.tier", ...super.PRESERVED_PROPERTIES];
+
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        needsAttunement: new fields.BooleanField({ initial: true }),
+        tier: new fields.SchemaField({
+          raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),
+          value: new fields.NumberField({ integer: true, min: 0, persisted: false, placeholder: "0" }),
+        }),
+      });
+    }
+
     /**
-     * @extends {BaseItemSystem}
-     * @extends {Teriock.Models.AttunableSystemData}
-     * @mixin
+     * Attunable tags.
+     * @returns {Teriock.Display.DisplayTag[]}
      */
-    class AttunableSystem extends Base {
-      /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunable"];
+    get _attunableTags() {
+      const key = this.needsAttunement.toString();
+      const tags = [{ label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` }];
+      if (this.isAttuned) { tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }); }
+      return tags.map(t => {
+        return { label: t.label, tooltip: "TYPES.ActiveEffect.attunement" };
+      });
+    }
 
-      /** @inheritDoc */
-      static PRESERVED_PROPERTIES = ["system.needsAttunement", "system.tier", ...super.PRESERVED_PROPERTIES];
+    /**
+     * Attunable wrappers.
+     * @returns {string[]}
+     */
+    get _attunableWrappers() {
+      return formulaExists(this.tier.raw)
+        ? [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw })]
+        : [];
+    }
 
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          needsAttunement: new fields.BooleanField({ initial: true }),
-          tier: new fields.SchemaField({
-            raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),
-            value: new fields.NumberField({ integer: true, min: 0, persisted: false, placeholder: "0" }),
-          }),
-        });
-      }
+    /** @inheritDoc */
+    get _displayToggles() {
+      return ["system.needsAttunement", ...super._displayToggles];
+    }
 
-      /**
-       * Attunable tags.
-       * @returns {Teriock.Display.DisplayTag[]}
-       */
-      get _attunableTags() {
-        const key = this.needsAttunement.toString();
-        const tags = [{ label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` }];
-        if (this.isAttuned) { tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }); }
-        return tags.map(t => {
-          return { label: t.label, tooltip: "TYPES.ActiveEffect.attunement" };
-        });
-      }
+    /** @inheritDoc */
+    get _embedIcons() {
+      return [{
+        action: "toggleAttunedDoc",
+        icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
+        tooltip: this.isAttuned
+          ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
+          : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
+        visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
+        onClick: async () => {
+          if (this.isAttuned) { await this.deattune(); }
+          else { await this.attune(); }
+        },
+      }, ...super._embedIcons];
+    }
 
-      /**
-       * Attunable wrappers.
-       * @returns {string[]}
-       */
-      get _attunableWrappers() {
-        return formulaExists(this.tier.raw)
-          ? [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw })]
-          : [];
-      }
+    /**
+     * Gets the current attunement data for this item.
+     * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
+     */
+    get attunement() {
+      return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
+    }
 
-      /** @inheritDoc */
-      get _displayToggles() {
-        return ["system.needsAttunement", ...super._displayToggles];
-      }
+    /**
+     * Checks if the item is currently attuned.
+     * @returns {boolean} True if the item is attuned, false otherwise.
+     */
+    get isAttuned() {
+      return Boolean(this.attunement);
+    }
 
-      /** @inheritDoc */
-      get _embedIcons() {
-        return [{
-          action: "toggleAttunedDoc",
-          icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
-          tooltip: this.isAttuned
-            ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
-            : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-          visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
-          onClick: async () => {
-            if (this.isAttuned) { await this.deattune(); }
-            else { await this.attune(); }
-          },
-        }, ...super._embedIcons];
-      }
-
-      /**
-       * Gets the current attunement data for this item.
-       * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
-       */
-      get attunement() {
-        return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
-      }
-
-      /**
-       * Checks if the item is currently attuned.
-       * @returns {boolean} True if the item is attuned, false otherwise.
-       */
-      get isAttuned() {
-        return Boolean(this.attunement);
-      }
-
-      /** @inheritDoc */
-      _onUpdate(changed, options, userId) {
-        super._onUpdate(changed, options, userId);
-        if (this.parent.checkEditor(userId) && foundry.utils.hasProperty(changed, "system.tier")) {
-          if (this.attunement) { this.attunement.update({ "system.tier": this.tier.value }); }
-        }
-      }
-
-      /**
-       * Attunes the item to the current character.
-       *
-       * Relevant wiki pages:
-       * - [Attune](https://wiki.teriock.com/index.php/Ability:Attune)
-       *
-       * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
-       */
-      async attune() {
-        await this.parent.hookCall("attune", { scope: { attunable: this.parent } });
-        let attunement = this.attunement;
-        if (attunement) { return attunement; }
-        const attunementData = {
-          changes: [{ key: "system.attunements", phase: "initial", priority: 10, type: "add", value: this.parent._id }],
-          img: this.parent.img,
-          name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.parent.name }),
-          system: { inheritTier: true, origin: this.parent.type, target: this.parent._id, tier: this.tier.value },
-          type: "attunement",
-        };
-        if (this.parent.actor && (await this.canAttune())) {
-          attunement = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
-          ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", {
-            format: { name: this.parent.fullName },
-            localize: true,
-          });
-          await this.parent.render();
-        } else {
-          ui.notifications.error("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", {
-            format: { name: this.parent.fullName },
-            localize: true,
-          });
-        }
-        return attunement;
-      }
-
-      /**
-       * Checks if the character can attune to the item based on available presence.
-       * Considers reference item tier if the item is not identified.
-       * @returns {Promise<boolean>} Promise that resolves to true if attunement is possible, false otherwise.
-       */
-      async canAttune() {
-        if (this.parent.actor) {
-          const unp = this.parent.actor.system.presence.max - this.parent.actor.system.presence.value;
-          return this.tier.value <= unp;
-        }
-        return false;
-      }
-
-      /**
-       * Removes attunement from the item.
-       *
-       * Relevant wiki pages:
-       * - [Deattune](https://wiki.teriock.com/index.php/Ability:Deattune)
-       *
-       * @returns {Promise<void>}
-       */
-      async deattune() {
-        await this.parent.hookCall("deattune", { scope: { attunable: this.parent } });
-        if (this.attunement) {
-          await this.attunement.delete();
-          ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success", {
-            format: { name: this.parent.fullName },
-            localize: true,
-          });
-          await this.parent?.render();
-        }
-      }
-
-      /** @inheritDoc */
-      getEmbedContextMenuEntries(doc) {
-        return [...super.getEmbedContextMenuEntries(doc), {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
-          onClick: this.attune.bind(this),
-          visible: !this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-          onClick: this.deattune.bind(this),
-          visible: this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-        }];
-      }
-
-      /** @inheritDoc */
-      getLocalRollData() {
-        return { ...super.getLocalRollData(), attuned: Number(this.isAttuned), tier: this.tier.value || 0 };
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        this.tier.value = Math.max(0, Math.floor(BaseRoll.minValue(this.tier.raw || "0", this.getRollData())));
+    /** @inheritDoc */
+    _onUpdate(changed, options, userId) {
+      super._onUpdate(changed, options, userId);
+      if (this.parent.checkEditor(userId) && foundry.utils.hasProperty(changed, "system.tier")) {
+        if (this.attunement) { this.attunement.update({ "system.tier": this.tier.value }); }
       }
     }
-  );
+
+    /**
+     * Attunes the item to the current character.
+     *
+     * Relevant wiki pages:
+     * - [Attune](https://wiki.teriock.com/index.php/Ability:Attune)
+     *
+     * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
+     */
+    async attune() {
+      await this.parent.hookCall("attune", { scope: { attunable: this.parent } });
+      let attunement = this.attunement;
+      if (attunement) { return attunement; }
+      const attunementData = {
+        changes: [{ key: "system.attunements", phase: "initial", priority: 10, type: "add", value: this.parent._id }],
+        img: this.parent.img,
+        name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.parent.name }),
+        system: { inheritTier: true, origin: this.parent.type, target: this.parent._id, tier: this.tier.value },
+        type: "attunement",
+      };
+      if (this.parent.actor && (await this.canAttune())) {
+        attunement = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
+        ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", {
+          format: { name: this.parent.fullName },
+          localize: true,
+        });
+        await this.parent.render();
+      } else {
+        ui.notifications.error("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", {
+          format: { name: this.parent.fullName },
+          localize: true,
+        });
+      }
+      return attunement;
+    }
+
+    /**
+     * Checks if the character can attune to the item based on available presence.
+     * Considers reference item tier if the item is not identified.
+     * @returns {Promise<boolean>} Promise that resolves to true if attunement is possible, false otherwise.
+     */
+    async canAttune() {
+      if (this.parent.actor) {
+        const unp = this.parent.actor.system.presence.max - this.parent.actor.system.presence.value;
+        return this.tier.value <= unp;
+      }
+      return false;
+    }
+
+    /**
+     * Removes attunement from the item.
+     *
+     * Relevant wiki pages:
+     * - [Deattune](https://wiki.teriock.com/index.php/Ability:Deattune)
+     *
+     * @returns {Promise<void>}
+     */
+    async deattune() {
+      await this.parent.hookCall("deattune", { scope: { attunable: this.parent } });
+      if (this.attunement) {
+        await this.attunement.delete();
+        ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success", {
+          format: { name: this.parent.fullName },
+          localize: true,
+        });
+        await this.parent?.render();
+      }
+    }
+
+    /** @inheritDoc */
+    getEmbedContextMenuEntries(doc) {
+      return [...super.getEmbedContextMenuEntries(doc), {
+        group: "control",
+        icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
+        onClick: this.attune.bind(this),
+        visible: !this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+      }, {
+        group: "control",
+        icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+        onClick: this.deattune.bind(this),
+        visible: this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+      }];
+    }
+
+    /** @inheritDoc */
+    getLocalRollData() {
+      return { ...super.getLocalRollData(), attuned: Number(this.isAttuned), tier: this.tier.value || 0 };
+    }
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      this.tier.value = Math.max(0, Math.floor(BaseRoll.minValue(this.tier.raw || "0", this.getRollData())));
+    }
+  }
+
+  return AttunableSystem;
 }

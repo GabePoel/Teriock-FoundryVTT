@@ -180,4 +180,4 @@ export default {
 };
 
 preLocalizeConfig("config.affinity.categories", { keys: ["label"] });
-preLocalizeConfig("config.affinity.types", { keys: ["label", "button"] });
+preLocalizeConfig("config.affinity.types", { key: "label", keys: ["label", "button"], sort: true });

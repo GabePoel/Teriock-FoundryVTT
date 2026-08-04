@@ -4,23 +4,24 @@ import { migrateEvaluationToNumber } from "../../../../migrations/evaluation-mig
  * Equipment migrate data part.
  * @template {Constructor<BaseItemSystem>} T
  * @param {T} Base
+ * @todo Remove this.
  */
 export default function EquipmentMigrationPart(Base) {
-  return (
-    /**
-     * @extends {BaseItemSystem}
-     * @mixin
-     * @property {TeriockEquipment} parent
-     */
-    class EquipmentMigrationPart extends Base {
-      /** @inheritDoc */
-      static migrateData(source, options, state) {
-        migrateEvaluationToNumber(source, "weight");
-        migrateEvaluationToNumber(source, "minStr");
-        migrateEvaluationToNumber(source, "storage.maxCount");
-        migrateEvaluationToNumber(source, "storage.maxWeight");
-        return super.migrateData(source, options, state);
-      }
+  /**
+   * @extends {BaseItemSystem}
+   * @mixin
+   * @property {TeriockEquipment} parent
+   */
+  class EquipmentMigrationPart extends Base {
+    /** @inheritDoc */
+    static migrateData(source, options, state) {
+      migrateEvaluationToNumber(source, "weight");
+      migrateEvaluationToNumber(source, "minStr");
+      migrateEvaluationToNumber(source, "storage.maxCount");
+      migrateEvaluationToNumber(source, "storage.maxWeight");
+      return super.migrateData(source, options, state);
     }
-  );
+  }
+
+  return EquipmentMigrationPart;
 }

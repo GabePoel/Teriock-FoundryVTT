@@ -15,7 +15,7 @@ export default function SourceRefreshButtonSheetMixin(Base) {
    * @extends {TeriockDocumentSheet}
    * @mixin
    */
-  return class SourceRefreshButtonSheet extends Base {
+  class SourceRefreshButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: { sourceRefresh: this._onSourceRefresh },
@@ -39,5 +39,7 @@ export default function SourceRefreshButtonSheetMixin(Base) {
     static async _onSourceRefresh() {
       await SourceRefresher.create({ document: this.document });
     }
-  };
+  }
+
+  return SourceRefreshButtonSheet;
 }

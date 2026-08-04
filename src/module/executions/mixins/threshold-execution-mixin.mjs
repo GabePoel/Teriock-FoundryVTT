@@ -12,140 +12,140 @@ const { fields } = foundry.data;
  * @param {T} Base
  */
 export default function ThresholdExecutionMixin(Base) {
-  return (
+  /**
+   * @extends {BaseExecution}
+   * @mixin
+   * @property {Teriock.Keys.Comparison} comparison
+   * @property {Teriock.System.FormulaString} bonus
+   * @property {number} edge
+   */
+  class ThresholdExecution extends Base {
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Threshold"];
+
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        bonus: rollableFormulaField(),
+        comparison: new fields.StringField({
+          blank: false,
+          choices: objectMap(mathConfig.comparisons, (c) => c.label, { localize: true }),
+          initial: "gte",
+          label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.comparison.label",
+          required: true,
+        }),
+        edge: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
+      });
+    }
+
     /**
-     * @extends {BaseExecution}
-     * @mixin
-     * @property {Teriock.Keys.Comparison} comparison
-     * @property {Teriock.System.FormulaString} bonus
-     * @property {number} edge
+     * @param {object} [data]
+     * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
      */
-    class ThresholdExecution extends Base {
-      /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Threshold"];
+    constructor(data = {}, options = {}) {
+      super(data, options);
+      this.threshold = options.threshold;
+    }
 
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          bonus: rollableFormulaField(),
-          comparison: new fields.StringField({
-            blank: false,
-            choices: objectMap(mathConfig.comparisons, (c) => c.label, { localize: true }),
-            initial: "gte",
-            label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.comparison.label",
-            required: true,
-          }),
-          edge: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
-        });
-      }
+    /** @type {number|undefined} */
+    threshold;
 
-      /**
-       * @param {object} [data]
-       * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
-       */
-      constructor(data = {}, options = {}) {
-        super(data, options);
-        this.threshold = options.threshold;
-      }
+    /** @inheritDoc */
+    get _dialogButtons() {
+      if (!this.isRoll) { return super._dialogButtons; }
+      return [{
+        action: "confirm",
+        default: this.edge < 0,
+        icon: "fa-dice-d20",
+        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+        name: "disadvantage",
+        type: "button",
+        callback: () => this.updateSource({ edge: -1 }),
+      }, {
+        action: "confirm",
+        default: this.edge === 0,
+        icon: "fa-dice-d20",
+        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+        name: "normal",
+        callback: () => this.updateSource({ edge: 0 }),
+      }, {
+        action: "confirm",
+        default: this.edge > 0,
+        icon: "fa-dice-d20",
+        label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+        name: "advantage",
+        type: "button",
+        callback: () => this.updateSource({ edge: 1 }),
+      }];
+    }
 
-      /** @type {number|undefined} */
-      threshold;
+    /** @inheritDoc */
+    get _formPaths() {
+      const paths = [];
+      if (this.requiresCompetence) { paths.push("competence.raw"); }
+      if (this.hasBonus) { paths.push("bonus"); }
+      return [...paths, ...super._formPaths];
+    }
 
-      /** @inheritDoc */
-      get _dialogButtons() {
-        if (!this.isRoll) { return super._dialogButtons; }
-        return [{
-          action: "confirm",
-          default: this.edge < 0,
-          icon: "fa-dice-d20",
-          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
-          name: "disadvantage",
-          type: "button",
-          callback: () => this.updateSource({ edge: -1 }),
-        }, {
-          action: "confirm",
-          default: this.edge === 0,
-          icon: "fa-dice-d20",
-          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
-          name: "normal",
-          callback: () => this.updateSource({ edge: 0 }),
-        }, {
-          action: "confirm",
-          default: this.edge > 0,
-          icon: "fa-dice-d20",
-          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
-          name: "advantage",
-          type: "button",
-          callback: () => this.updateSource({ edge: 1 }),
-        }];
-      }
+    /** @inheritDoc */
+    get _RollClass() {
+      return ThresholdRoll;
+    }
 
-      /** @inheritDoc */
-      get _formPaths() {
-        const paths = [];
-        if (this.requiresCompetence) { paths.push("competence.raw"); }
-        if (this.hasBonus) { paths.push("bonus"); }
-        return [...paths, ...super._formPaths];
-      }
+    /**
+     * Whether this can have a bonus applied.
+     * @return {boolean}
+     */
+    get hasBonus() {
+      return this.isRoll;
+    }
 
-      /** @inheritDoc */
-      get _RollClass() {
-        return ThresholdRoll;
-      }
+    /**
+     * If this is a roll.
+     * @return {boolean}
+     */
+    get isRoll() {
+      return true;
+    }
 
-      /**
-       * Whether this can have a bonus applied.
-       * @return {boolean}
-       */
-      get hasBonus() {
-        return this.isRoll;
-      }
+    /**
+     * Whether this execution requires competence.
+     * @return {boolean}
+     */
+    get requiresCompetence() {
+      return this.isRoll;
+    }
 
-      /**
-       * If this is a roll.
-       * @return {boolean}
-       */
-      get isRoll() {
-        return true;
-      }
+    /** @inheritDoc */
+    get rollOptions() {
+      return { comparison: this.comparison, flavor: this.flavor, threshold: this.threshold };
+    }
 
-      /**
-       * Whether this execution requires competence.
-       * @return {boolean}
-       */
-      get requiresCompetence() {
-        return this.isRoll;
-      }
+    /** @inheritDoc */
+    async _improveFormula() {
+      await super._improveFormula();
+      if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
+    }
 
-      /** @inheritDoc */
-      get rollOptions() {
-        return { comparison: this.comparison, flavor: this.flavor, threshold: this.threshold };
-      }
-
-      /** @inheritDoc */
-      async _improveFormula() {
-        await super._improveFormula();
-        if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
-      }
-
-      /**
-       * Prepare an underlying core formula.
-       * @returns {Promise<void>}
-       */
-      async _prepareBaseFormula() {
-        if (!this.formula) {
-          let suffix = "";
-          if (this.edge > 0) { suffix = "kh1"; }
-          if (this.edge < 0) { suffix = "kl1"; }
-          this.formula = `${1 + Math.abs(this.edge)}d20${suffix}`;
-        }
-      }
-
-      /** @inheritDoc */
-      async _prepareFormula() {
-        await this._prepareBaseFormula();
-        await super._prepareFormula();
+    /**
+     * Prepare an underlying core formula.
+     * @returns {Promise<void>}
+     */
+    async _prepareBaseFormula() {
+      if (!this.formula) {
+        let suffix = "";
+        if (this.edge > 0) { suffix = "kh1"; }
+        if (this.edge < 0) { suffix = "kl1"; }
+        this.formula = `${1 + Math.abs(this.edge)}d20${suffix}`;
       }
     }
-  );
+
+    /** @inheritDoc */
+    async _prepareFormula() {
+      await this._prepareBaseFormula();
+      await super._prepareFormula();
+    }
+  }
+
+  return ThresholdExecution;
 }

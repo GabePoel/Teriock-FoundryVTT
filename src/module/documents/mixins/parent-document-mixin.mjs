@@ -4,28 +4,28 @@
  * @param {T} Base
  */
 export default function ParentDocumentMixin(Base) {
-  return (
+  /**
+   * @extends {BaseDocument}
+   * @mixin
+   */
+  class ParentDocument extends Base {
     /**
-     * @extends {BaseDocument}
-     * @mixin
+     * @inheritDoc
+     * @returns {Teriock.Documents.DocumentMetadata}
      */
-    class ParentDocument extends Base {
-      /**
-       * @inheritDoc
-       * @returns {Teriock.Documents.DocumentMetadata}
-       */
-      static get documentMetadata() {
-        return Object.assign(super.documentMetadata, { parent: true });
-      }
-
-      /**
-       * Gets the list of {@link TeriockActiveEffect} documents associated with this document.
-       * Helper method for prepareDerivedData() that can be called explicitly.
-       * @returns {TeriockActiveEffect[]}
-       */
-      get validEffects() {
-        return [];
-      }
+    static get documentMetadata() {
+      return Object.assign(super.documentMetadata, { parent: true });
     }
-  );
+
+    /**
+     * Gets the list of {@link TeriockActiveEffect} documents associated with this document.
+     * Helper method for prepareDerivedData() that can be called explicitly.
+     * @returns {TeriockActiveEffect[]}
+     */
+    get validEffects() {
+      return [];
+    }
+  }
+
+  return ParentDocument;
 }

@@ -6,18 +6,18 @@ const { fields } = foundry.data;
  * @param {T} Base
  */
 export default function ActorInformationPart(Base) {
-  return (
-    /**
-     * @extends {CommonSystem}
-     * @extends {Teriock.Models.ActorInformationPartData}
-     * @mixin
-     * @property {AnyActor} parent
-     */
-    class ActorInformationPart extends Base {
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), { notes: new fields.HTMLField({ initial: "" }) });
-      }
+  /**
+   * @extends {CommonSystem}
+   * @extends {Teriock.Models.ActorInformationPartData}
+   * @mixin
+   * @property {AnyActor} parent
+   */
+  class ActorInformationPart extends Base {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), { notes: new fields.HTMLField({ initial: "" }) });
     }
-  );
+  }
+
+  return ActorInformationPart;
 }

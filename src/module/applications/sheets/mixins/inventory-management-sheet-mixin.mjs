@@ -6,24 +6,24 @@ import { TeriockDragDrop } from "../../ux/_module.mjs";
  * @param {T} Base
  */
 export default function InventoryManagementSheetMixin(Base) {
-  return (
-    /**
-     * @extends {TeriockDocumentSheet}
-     * @mixin
-     * @property {AnyCommonDocument} document
-     */
-    class InventoryManagementSheet extends Base {
-      /** @inheritDoc */
-      _payloadDropEffect() {
-        const document = TeriockDragDrop.payload?.document;
-        if (
-          document?.type === "equipment" && document.actor && document.isOwner
-          && (document.actor === this.document.actor || !document.inCompendium)
-        ) {
-          return "move";
-        }
-        return super._payloadDropEffect();
+  /**
+   * @extends {TeriockDocumentSheet}
+   * @mixin
+   * @property {AnyCommonDocument} document
+   */
+  class InventoryManagementSheet extends Base {
+    /** @inheritDoc */
+    _payloadDropEffect() {
+      const document = TeriockDragDrop.payload?.document;
+      if (
+        document?.type === "equipment" && document.actor && document.isOwner
+        && (document.actor === this.document.actor || !document.inCompendium)
+      ) {
+        return "move";
       }
+      return super._payloadDropEffect();
     }
-  );
+  }
+
+  return InventoryManagementSheet;
 }

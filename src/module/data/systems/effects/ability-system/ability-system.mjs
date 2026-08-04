@@ -42,7 +42,7 @@ const { fields } = foundry.data;
  * @mixes AbilityPanelPart
  * @mixes AbilityRankPart
  * @mixes AbilityResultsPart
- * @mixes AbilityMetaphysicsPart
+ * @mixes AbilityElderSorceryPart
  * @implements {Teriock.Models.AbilitySystemData}
  */
 export default class AbilitySystem
@@ -69,7 +69,7 @@ export default class AbilitySystem
     parts.AbilityPanelPart,
     parts.AbilityRankPart,
     parts.AbilityResultsPart,
-    parts.AbilityMetaphysicsPart,
+    parts.AbilityElderSorceryPart,
   )
 {
   /** @inheritDoc */

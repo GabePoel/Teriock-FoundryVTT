@@ -4,34 +4,34 @@
  * @param {T} Base
  */
 export default function AutomatedDataMixin(Base) {
-  return (
+  /**
+   * @extends {ChildSystem | BaseDataModel}
+   * @mixin
+   */
+  class AutomatedData extends Base {
     /**
-     * @extends {ChildSystem | BaseDataModel}
-     * @mixin
+     * All the automations that this considers to be currently active.
+     * @returns {AnyAutomation[]}
      */
-    class AutomatedData extends Base {
-      /**
-       * All the automations that this considers to be currently active.
-       * @returns {AnyAutomation[]}
-       */
-      get activeAutomations() {
-        const automations = this.automations.contents;
-        return automations.filter(a => a.active);
-      }
-
-      /**
-       * Get all the automations of a given type.
-       * @template {Teriock.Automations.Type} T
-       * @param {T} type
-       * @param {object} [options]
-       * @param {boolean} [options.active]
-       * @returns {Teriock.Automations.TypeMap[T][]}
-       */
-      getAutomations(type, options = {}) {
-        const { active } = options;
-        if (active) { return this.activeAutomations.filter(a => a.type === type); }
-        return this.automations.contents.filter(a => a.type === type);
-      }
+    get activeAutomations() {
+      const automations = this.automations.contents;
+      return automations.filter(a => a.active);
     }
-  );
+
+    /**
+     * Get all the automations of a given type.
+     * @template {Teriock.Automations.Type} T
+     * @param {T} type
+     * @param {object} [options]
+     * @param {boolean} [options.active]
+     * @returns {Teriock.Automations.TypeMap[T][]}
+     */
+    getAutomations(type, options = {}) {
+      const { active } = options;
+      if (active) { return this.activeAutomations.filter(a => a.type === type); }
+      return this.automations.contents.filter(a => a.type === type);
+    }
+  }
+
+  return AutomatedData;
 }

@@ -7,59 +7,59 @@ import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_
  * @param {T} Base
  */
 export default function AutomatableSystemMixin(Base) {
-  return (
+  /**
+   * @extends {TeriockSystem}
+   * @extends {Teriock.Models.AutomatableSystemData}
+   * @mixin
+   */
+  class AutomatableSystem extends Base {
     /**
-     * @extends {TeriockSystem}
-     * @extends {Teriock.Models.AutomatableSystemData}
-     * @mixin
+     * Array of the types of automations that this system can have.
+     * @returns {(typeof AnyAutomation)[]}
      */
-    class AutomatableSystem extends Base {
-      /**
-       * Array of the types of automations that this system can have.
-       * @returns {(typeof AnyAutomation)[]}
-       */
-      static get _automationTypes() {
-        return [];
-      }
+    static get _automationTypes() {
+      return [];
+    }
 
-      /**
-       * The types of automations that this system can have.
-       * @returns {Record<string, AnyAutomation>}
-       */
-      static get automationTypes() {
-        return Object.fromEntries(
-          this._automationTypes.map(a => [a.TYPE, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
-        );
-      }
+    /**
+     * The types of automations that this system can have.
+     * @returns {Record<string, AnyAutomation>}
+     */
+    static get automationTypes() {
+      return Object.fromEntries(
+        this._automationTypes.map(a => [a.TYPE, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
+      );
+    }
 
-      /** @inheritDoc */
-      static get metadata() {
-        return foundry.utils.mergeObject(super.metadata, { pseudos: { Automation: "system.automations" } });
-      }
+    /** @inheritDoc */
+    static get metadata() {
+      return foundry.utils.mergeObject(super.metadata, { pseudos: { Automation: "system.automations" } });
+    }
 
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          automations: new PseudoCollectionField(BaseAutomation, { types: this.automationTypes }),
-        });
-      }
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        automations: new PseudoCollectionField(BaseAutomation, { types: this.automationTypes }),
+      });
+    }
 
-      /** @inheritDoc */
-      static migrateData(source, options, state) {
-        if (foundry.utils.hasProperty(source, "automations")) {
-          for (const a of Object.values(source.automations)) {
-            migrateValue(a, "type", "modifyEffect", "override");
-            if (foundry.utils.getProperty(a, "type") === "combatExpiration") {
-              migrateValue(a, "type", "combatExpiration", "expiration");
-              foundry.utils.setProperty(a, "override.combat", true);
-              migrateKey(a, "who", "combat.who");
-              migrateKey(a, "what", "combat.what");
-              migrateKey(a, "when", "combat.when");
-            }
+    /** @inheritDoc */
+    static migrateData(source, options, state) {
+      if (foundry.utils.hasProperty(source, "automations")) {
+        for (const a of Object.values(source.automations)) {
+          migrateValue(a, "type", "modifyEffect", "override");
+          if (foundry.utils.getProperty(a, "type") === "combatExpiration") {
+            migrateValue(a, "type", "combatExpiration", "expiration");
+            foundry.utils.setProperty(a, "override.combat", true);
+            migrateKey(a, "who", "combat.who");
+            migrateKey(a, "what", "combat.what");
+            migrateKey(a, "when", "combat.when");
           }
         }
-        return super.migrateData(source, options, state);
       }
+      return super.migrateData(source, options, state);
     }
-  );
+  }
+
+  return AutomatableSystem;
 }

@@ -8,104 +8,101 @@ const { fields } = foundry.data;
  * @param {T} Base
  */
 export default function MetaphysicsSystemMixin(Base) {
-  return (
+  /**
+   * @extends {ChildSystem}
+   * @extends {Teriock.Models.MetaphysicsSystemData}
+   * @mixin
+   */
+  class MetaphysicsSystem extends Base {
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Metaphysics"];
+
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        effectTypes: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.effectTypes })),
+        elements: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.elements })),
+        powerSources: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.powerSources })),
+      });
+    }
+
+    /** @inheritDoc */
+    get _displayInputs() {
+      return [...super._displayInputs, ...this._displayInputsMetaphysics];
+    }
+
     /**
-     * @extends {ChildSystem}
-     * @extends {Teriock.Models.MetaphysicsSystemData}
-     * @mixin
+     * Metaphysics display inputs.
+     * @returns {Teriock.Display.DisplayField[]}
      */
-    class MetaphysicsSystem extends Base {
-      /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Metaphysics"];
+    get _displayInputsMetaphysics() {
+      return ["system.powerSources", "system.elements", "system.effectTypes"];
+    }
 
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          effectTypes: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.effectTypes })),
-          elements: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.elements })),
-          powerSources: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.powerSources })),
-        });
+    /** @inheritDoc */
+    get _displayTags() {
+      return [...super._displayTags, ...this._metaphysicsTags];
+    }
+
+    /**
+     * Metaphysics tags.
+     * @returns {Teriock.Display.DisplayTag[]}
+     */
+    get _metaphysicsTags() {
+      return [
+        ...Array.from(this.powerSources).map(t => {
+          return {
+            label: TERIOCK.reference.powerSources[t],
+            tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
+          };
+        }),
+        ...Array.from(this.elements).map(t => {
+          return { label: TERIOCK.reference.elements[t], tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label" };
+        }),
+        ...Array.from(this.effectTypes).filter(t => !this.powerSources.has(t)).map(t => {
+          return {
+            label: TERIOCK.reference.effectTypes[t],
+            tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
+          };
+        }),
+      ];
+    }
+
+    /**
+     * A string representing the elements for this.
+     * @returns {string}
+     */
+    get elementString() {
+      if (this.elements.size === 0) { return _loc("TERIOCK.COMMON.Celestial"); }
+      return listFormat(this.elements.map(e => TERIOCK.reference.elements[e]));
+    }
+
+    /** @inheritDoc */
+    getLocalRollData() {
+      const data = super.getLocalRollData();
+      // Add power sources
+      for (const powerSource of this.powerSources) { data[`power.${powerSource}`] = 1; }
+      // Add elements
+      for (const element of this.elements) {
+        data[`element.${element}`] = 1;
       }
+      // Add effect types
+      for (const effectType of this.effectTypes) { data[`effect.${effectType}`] = 1; }
+      return data;
+    }
 
-      /** @inheritDoc */
-      get _displayInputs() {
-        return [...super._displayInputs, ...this._displayInputsMetaphysics];
-      }
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
 
-      /**
-       * Metaphysics display inputs.
-       * @returns {Teriock.Display.DisplayField[]}
-       */
-      get _displayInputsMetaphysics() {
-        return ["system.powerSources", "system.elements", "system.effectTypes"];
-      }
-
-      /** @inheritDoc */
-      get _displayTags() {
-        return [...super._displayTags, ...this._metaphysicsTags];
-      }
-
-      /**
-       * Metaphysics tags.
-       * @returns {Teriock.Display.DisplayTag[]}
-       */
-      get _metaphysicsTags() {
-        return [
-          ...Array.from(this.powerSources).map(t => {
-            return {
-              label: TERIOCK.reference.powerSources[t],
-              tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
-            };
-          }),
-          ...Array.from(this.elements).map(t => {
-            return {
-              label: TERIOCK.reference.elements[t],
-              tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
-            };
-          }),
-          ...Array.from(this.effectTypes).filter(t => !this.powerSources.has(t)).map(t => {
-            return {
-              label: TERIOCK.reference.effectTypes[t],
-              tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
-            };
-          }),
-        ];
-      }
-
-      /**
-       * A string representing the elements for this.
-       * @returns {string}
-       */
-      get elementString() {
-        if (this.elements.size === 0) { return _loc("TERIOCK.COMMON.Celestial"); }
-        return listFormat(this.elements.map(e => TERIOCK.reference.elements[e]));
-      }
-
-      /** @inheritDoc */
-      getLocalRollData() {
-        const data = super.getLocalRollData();
-        // Add power sources
-        for (const powerSource of this.powerSources) { data[`power.${powerSource}`] = 1; }
-        // Add elements
-        for (const element of this.elements) {
-          data[`element.${element}`] = 1;
-        }
-        // Add effect types
-        for (const effectType of this.effectTypes) { data[`effect.${effectType}`] = 1; }
-        return data;
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-
-        // Enforce power sources
-        for (const ps of this.powerSources) {
-          if (Object.keys(TERIOCK.reference.effectTypes).includes(ps) && !this.effectTypes.has(ps)) {
-            this.effectTypes.add(ps);
-          }
+      // Enforce power sources
+      for (const ps of this.powerSources) {
+        if (Object.keys(TERIOCK.reference.effectTypes).includes(ps) && !this.effectTypes.has(ps)) {
+          this.effectTypes.add(ps);
         }
       }
     }
-  );
+  }
+
+  return MetaphysicsSystem;
 }

@@ -7,90 +7,90 @@ import { TeriockTextEditor } from "../../../../../ux/_module.mjs";
  * @param {T} Base
  */
 export default function PlayableActorSheetConditionsPart(Base) {
-  return (
+  /**
+   * @extends {BaseActorSheet}
+   * @mixin
+   */
+  class PlayableActorSheetConditionsPart extends Base {
     /**
-     * @extends {BaseActorSheet}
-     * @mixin
+     * The rich tooltip for a condition the actor is forced into, which has no effect of its own to describe it.
+     * @param {Teriock.Keys.Condition} condition
+     * @returns {Promise<string>}
      */
-    class PlayableActorSheetConditionsPart extends Base {
-      /**
-       * The rich tooltip for a condition the actor is forced into, which has no effect of its own to describe it.
-       * @param {Teriock.Keys.Condition} condition
-       * @returns {Promise<string>}
-       */
-      async #conditionTooltip(condition) {
-        const panelParts = {
-          associations: [],
-          bars: [],
-          blocks: [{
-            text: TERIOCK.statuses.conditions[condition].description,
-            title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-          }],
-          icon: TERIOCK.config.document.condition.icon,
-          img: TERIOCK.statuses.conditions[condition].img,
-          name: TERIOCK.statuses.conditions[condition].name,
-        };
-        /** @type {TeriockTokenDocument[]} */
-        const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers ?? []).map(uuid =>
-          fromUuidSync(uuid)
-        ).filter(t => t);
-        if (tokenDocs.length > 0) {
-          panelParts.associations.push({
-            cards: tokenDocs.map(tokenDoc => ({
-              id: tokenDoc.id,
-              img: tokenDoc.texture.src,
-              makeTooltip: false,
-              name: tokenDoc.name,
-              type: "TokenDocument",
-              uuid: tokenDoc.uuid,
-            })),
-            icon: TERIOCK.config.document.creature.icon,
-            title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
-          });
-        }
-        return TeriockTextEditor.makeTooltip(panelParts);
+    async #conditionTooltip(condition) {
+      const panelParts = {
+        associations: [],
+        bars: [],
+        blocks: [{
+          text: TERIOCK.statuses.conditions[condition].description,
+          title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+        }],
+        icon: TERIOCK.config.document.condition.icon,
+        img: TERIOCK.statuses.conditions[condition].img,
+        name: TERIOCK.statuses.conditions[condition].name,
+      };
+      /** @type {TeriockTokenDocument[]} */
+      const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers ?? []).map(uuid =>
+        fromUuidSync(uuid)
+      ).filter(t => t);
+      if (tokenDocs.length > 0) {
+        panelParts.associations.push({
+          cards: tokenDocs.map(tokenDoc => ({
+            id: tokenDoc.id,
+            img: tokenDoc.texture.src,
+            makeTooltip: false,
+            name: tokenDoc.name,
+            type: "TokenDocument",
+            uuid: tokenDoc.uuid,
+          })),
+          icon: TERIOCK.config.document.creature.icon,
+          title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
+        });
       }
-
-      /**
-       * Add conditions to rendering context.
-       * @param {object} context
-       */
-      _prepareConditionContext(context) {
-        context.removableConditions = this.actor.conditions.map(c => c.system.conditionKey);
-      }
-
-      /** @inheritDoc */
-      async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        this._prepareConditionContext(context);
-        return context;
-      }
-
-      /**
-       * The conditions this actor currently has, as virtual models a preview can render.
-       * @returns {Promise<VirtualConditionModel[]>}
-       */
-      async _virtualConditions() {
-        /** @type {Record<Teriock.Keys.Condition, TeriockCondition>} */
-        const effects = {};
-        for (const c of this.actor.conditions) { effects[c.system.conditionKey] = c; }
-        const live = conditionSort(
-          Array.from(this.actor.statuses || []).filter(c => Object.keys(TERIOCK.index.conditions).includes(c)),
-        );
-        return Promise.all(live.map(async condition => {
-          const info = this.document.system.conditionInformation[condition];
-          const model = new VirtualConditionModel({
-            conditionKey: condition,
-            locked: info.locked,
-            providers: Array.from(info.reasons),
-            sources: Array.from(info.sources),
-            // Only a forced condition renders from this; the rest use their own effect's tooltip.
-            tooltip: info.locked ? await this.#conditionTooltip(condition) : "",
-          }, { parent: this.document.system });
-          model.effect = effects[condition];
-          return model;
-        }));
-      }
+      return TeriockTextEditor.makeTooltip(panelParts);
     }
-  );
+
+    /**
+     * Add conditions to rendering context.
+     * @param {object} context
+     */
+    _prepareConditionContext(context) {
+      context.removableConditions = this.actor.conditions.map(c => c.system.conditionKey);
+    }
+
+    /** @inheritDoc */
+    async _prepareContext(options = {}) {
+      const context = await super._prepareContext(options);
+      this._prepareConditionContext(context);
+      return context;
+    }
+
+    /**
+     * The conditions this actor currently has, as virtual models a preview can render.
+     * @returns {Promise<VirtualConditionModel[]>}
+     */
+    async _virtualConditions() {
+      /** @type {Record<Teriock.Keys.Condition, TeriockCondition>} */
+      const effects = {};
+      for (const c of this.actor.conditions) { effects[c.system.conditionKey] = c; }
+      const live = conditionSort(
+        Array.from(this.actor.statuses || []).filter(c => Object.keys(TERIOCK.index.conditions).includes(c)),
+      );
+      return Promise.all(live.map(async condition => {
+        const info = this.document.system.conditionInformation[condition];
+        const model = new VirtualConditionModel({
+          conditionKey: condition,
+          locked: info.locked,
+          providers: Array.from(info.reasons),
+          sources: Array.from(info.sources),
+          // Only a forced condition renders from this; the rest use their own effect's tooltip.
+          tooltip: info.locked ? await this.#conditionTooltip(condition) : "",
+        }, { parent: this.document.system });
+        model.effect = effects[condition];
+        return model;
+      }));
+    }
+  }
+
+  return PlayableActorSheetConditionsPart;
 }

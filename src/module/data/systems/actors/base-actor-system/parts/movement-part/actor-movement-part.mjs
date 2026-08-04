@@ -6,61 +6,65 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles movement.
+ *
+ * Relevant wiki pages:
+ * - [Movement](https://wiki.teriock.com/index.php/Core:Movement)
+ *
  * @template {Constructor<BaseActorSystem>} T
  * @param {T} Base
  */
 export default function ActorMovementPart(Base) {
-  return (
-    /**
-     * @extends {AbstractActorSystem}
-     * @extends {Teriock.Models.ActorMovementPartData}
-     * @mixin
-     * @property {AnyActor} parent
-     */
-    class ActorMovementPart extends Base {
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          movementSpeed: initialNumber(30),
-          speedAdjustments: new fields.SchemaField(
-            objectMap(config.character.movement, e => speedField(e.initial, e.label)),
-          ),
-        });
-      }
+  /**
+   * @extends {AbstractActorSystem}
+   * @extends {Teriock.Models.ActorMovementPartData}
+   * @mixin
+   * @property {AnyActor} parent
+   */
+  class ActorMovementPart extends Base {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        movementSpeed: initialNumber(30),
+        speedAdjustments: new fields.SchemaField(
+          objectMap(config.character.movement, e => speedField(e.initial, e.label)),
+        ),
+      });
+    }
 
-      /** @inheritDoc */
-      getRollData() {
-        const rollData = super.getRollData();
-        rollData.speed = this.movementSpeed;
-        for (const k of Object.keys(config.character.movement)) {
-          rollData[`speed.${k}`] = this.speedAdjustments[k] || 0;
-        }
-        return rollData;
+    /** @inheritDoc */
+    getRollData() {
+      const rollData = super.getRollData();
+      rollData.speed = this.movementSpeed;
+      for (const k of Object.keys(config.character.movement)) {
+        rollData[`speed.${k}`] = this.speedAdjustments[k] || 0;
       }
+      return rollData;
+    }
 
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.movementSpeed = 30 + 10 * this.attributes.mov.score;
-      }
+    /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      this.movementSpeed = 30 + 10 * this.attributes.mov.score;
+    }
 
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        this.movementSpeed = 30 + 10 * this.attributes.mov.score;
-      }
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      this.movementSpeed = 30 + 10 * this.attributes.mov.score;
+    }
 
-      /** @inheritDoc */
-      prepareVirtualEffects() {
-        super.prepareVirtualEffects();
-        for (const key of Object.keys(this.speedAdjustments)) {
-          if (this.parent.statuses.has("slowed")) { this.speedAdjustments[key] -= 1; }
-          if (this.parent.statuses.has("immobilized")) { this.speedAdjustments[key] = 0; }
-          this.speedAdjustments[key] = Math.max(this.speedAdjustments[key], 0);
-        }
+    /** @inheritDoc */
+    prepareVirtualEffects() {
+      super.prepareVirtualEffects();
+      for (const key of Object.keys(this.speedAdjustments)) {
+        if (this.parent.statuses.has("slowed")) { this.speedAdjustments[key] -= 1; }
+        if (this.parent.statuses.has("immobilized")) { this.speedAdjustments[key] = 0; }
+        this.speedAdjustments[key] = Math.max(this.speedAdjustments[key], 0);
       }
     }
-  );
+  }
+
+  return ActorMovementPart;
 }
 
 /**

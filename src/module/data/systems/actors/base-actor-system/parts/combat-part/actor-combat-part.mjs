@@ -19,161 +19,162 @@ function nullifyWielded(doc) {
 
 /**
  * Actor data model that handles combat.
+ *
+ * Relevant wiki pages:
+ * - [Combat](https://wiki.teriock.com/index.php/Core:Combat)
+ *
  * @template {Constructor<BaseActorSystem>} T
  * @param {T} Base
  */
 export default function ActorCombatPart(Base) {
-  return (
-    /**
-     * @extends {CommonSystem}
-     * @extends {Teriock.Models.ActorCombatPartData}
-     * @mixin
-     * @property {AnyActor} parent
-     */
-    class ActorCombatPart extends Base {
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          combat: new fields.SchemaField({
-            attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0 }),
-            hasReaction: new fields.BooleanField({ initial: true }),
+  /**
+   * @extends {CommonSystem}
+   * @extends {Teriock.Models.ActorCombatPartData}
+   * @mixin
+   * @property {AnyActor} parent
+   */
+  class ActorCombatPart extends Base {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        combat: new fields.SchemaField({
+          attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0 }),
+          hasReaction: new fields.BooleanField({ initial: true }),
+        }),
+        defense: initialSchema({
+          ac: initialNumber(systemConfig.baseValues.ac),
+          av: initialSchema({
+            base: initialNumber(),
+            natural: initialNumber(),
+            value: initialNumber(),
+            worn: initialNumber(),
           }),
-          defense: initialSchema({
-            ac: initialNumber(systemConfig.baseValues.ac),
-            av: initialSchema({
-              base: initialNumber(),
-              natural: initialNumber(),
-              value: initialNumber(),
-              worn: initialNumber(),
-            }),
-            bv: initialNumber(),
-            cc: initialNumber(systemConfig.baseValues.ac),
-          }),
-          initiative: new fields.EmbeddedDataField(InitiativeModel),
-          offense: new fields.SchemaField({
-            piercing: new fields.EmbeddedDataField(PiercingModel),
-            sb: new fields.BooleanField({ initial: false }),
-            warded: new fields.BooleanField({ initial: false }),
-          }),
-          wielding: new fields.SchemaField({
-            attacker: new LocalDocumentField(foundry.documents.BaseItem, { nullify: nullifyWielded }),
-            blocker: new LocalDocumentField(foundry.documents.BaseItem, { nullify: nullifyWielded }),
-          }),
-        });
-      }
-
-      /**
-       * Get defense roll data.
-       * @returns {object}
-       */
-      #getDefenseRollData() {
-        return {
-          ac: this.defense.ac,
-          av: this.defense.av.value,
-          "av.base": this.defense.av.base,
-          "av.nat": this.defense.av.natural,
-          "av.worn": this.defense.av.worn,
-          bv: this.defense.bv,
-          cc: this.defense.cc,
-        };
-      }
-
-      /**
-       * Get equipment roll data.
-       * @returns {object}
-       */
-      #getEquipmentRollData() {
-        const data = {};
-        const { attacker, blocker } = this.wielding;
-        if (attacker) { Object.assign(data, prefixObject(attacker.system.getLocalRollData(), "atk")); }
-        if (blocker) { Object.assign(data, prefixObject(blocker.system.getLocalRollData(), "blk")); }
-        return data;
-      }
-
-      /**
-       * Get offense roll data.
-       * @returns {object}
-       */
-      #getOffenseRollData() {
-        const weaponAv0 = Boolean(this.wielding.attacker?.system.piercing.av0);
-        const naturalAv0 = this.offense.piercing.av0;
-        const hasAv0 = weaponAv0 || naturalAv0;
-        const weaponUb = Boolean(this.wielding.attacker?.system.piercing.ub);
-        const naturalUb = this.offense.piercing.ub;
-        const hasUb = weaponUb || naturalUb;
-        const weaponWarded = Boolean(this.wielding.attacker?.system.warded);
-        return {
-          ap: this.combat.attackPenalty,
-          av0: Number(hasAv0) * 2,
-          "av0.abi": 0,
-          "av0.nat": Number(naturalAv0) * 2,
-          "av0.wep": Number(weaponAv0) * 2,
-          sb: this.offense.sb ? this.scaling.p : 0,
-          ub: Number(hasUb),
-          "ub.abi": 0,
-          "ub.nat": Number(naturalUb),
-          "ub.wep": Number(weaponUb),
-          ward: Number(weaponWarded),
-          "ward.abi": 0,
-          "ward.wep": Number(weaponWarded),
-        };
-      }
-
-      /** @inheritDoc */
-      getRollData() {
-        const rollData = super.getRollData();
-        Object.assign(rollData, {
-          ...this.#getDefenseRollData(),
-          ...this.#getOffenseRollData(),
-          ...this.#getEquipmentRollData(),
-        });
-        return rollData;
-      }
-
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        const armor = this.parent.equipment.filter(e => e.system.equipped && e.system.equipmentClasses.has("armor"));
-        this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
-      }
-
-      /** @inheritDoc */
-      prepareSpecialData() {
-        super.prepareSpecialData();
-        this.defense.av.worn = Math.max(
-          0,
-          ...this.parent.equipment.filter(e => e.active && !e.system.shattered).map(e => e.system.av.value),
-        );
-        this.defense.av.natural = Math.max(
-          0,
-          ...this.parent.bodyParts.filter(b => b.active).map(b => b.system.av.value),
-        );
-        this.defense.av.value = Math.max(0, this.defense.av.natural, this.defense.av.worn);
-        this.defense.ac += this.defense.av.value;
-        this.defense.bv = this.wielding.blocker?.system.bv.value || 0;
-        this.defense.cc = this.defense.ac + this.defense.bv;
-      }
-
-      /**
-       * Rolls an attack.
-       *
-       * Relevant wiki pages:
-       * - [Attack Interaction](https://wiki.teriock.com/index.php/Core:Attack_Interaction)
-       *
-       * @param {Partial<Teriock.Execution.AttackExecutionOptions>} [options] - Options for the roll.
-       * @returns {Promise<void>}
-       */
-      async rollAttack(options = {}) {
-        const data = { ...options };
-        // Competence is construction context, not schema data
-        delete data.competence;
-        if (options.event) {
-          data.edge = ThresholdRoll.parseEvent(options.event).edge;
-          Object.assign(options, BaseRoll.parseEvent(options.event));
-        }
-        if (typeof options.armament === "string") { options.armament = await fromUuid(options.armament); }
-        await teriock.executions.activity.AttackRollExecution.create(data, { ...options, actor: this.parent });
-      }
+          bv: initialNumber(),
+          cc: initialNumber(systemConfig.baseValues.ac),
+        }),
+        initiative: new fields.EmbeddedDataField(InitiativeModel),
+        offense: new fields.SchemaField({
+          piercing: new fields.EmbeddedDataField(PiercingModel),
+          sb: new fields.BooleanField({ initial: false }),
+          warded: new fields.BooleanField({ initial: false }),
+        }),
+        wielding: new fields.SchemaField({
+          attacker: new LocalDocumentField(foundry.documents.BaseItem, { nullify: nullifyWielded }),
+          blocker: new LocalDocumentField(foundry.documents.BaseItem, { nullify: nullifyWielded }),
+        }),
+      });
     }
-  );
+
+    /**
+     * Get defense roll data.
+     * @returns {object}
+     */
+    #getDefenseRollData() {
+      return {
+        ac: this.defense.ac,
+        av: this.defense.av.value,
+        "av.base": this.defense.av.base,
+        "av.nat": this.defense.av.natural,
+        "av.worn": this.defense.av.worn,
+        bv: this.defense.bv,
+        cc: this.defense.cc,
+      };
+    }
+
+    /**
+     * Get equipment roll data.
+     * @returns {object}
+     */
+    #getEquipmentRollData() {
+      const data = {};
+      const { attacker, blocker } = this.wielding;
+      if (attacker) { Object.assign(data, prefixObject(attacker.system.getLocalRollData(), "atk")); }
+      if (blocker) { Object.assign(data, prefixObject(blocker.system.getLocalRollData(), "blk")); }
+      return data;
+    }
+
+    /**
+     * Get offense roll data.
+     * @returns {object}
+     */
+    #getOffenseRollData() {
+      const weaponAv0 = Boolean(this.wielding.attacker?.system.piercing.av0);
+      const naturalAv0 = this.offense.piercing.av0;
+      const hasAv0 = weaponAv0 || naturalAv0;
+      const weaponUb = Boolean(this.wielding.attacker?.system.piercing.ub);
+      const naturalUb = this.offense.piercing.ub;
+      const hasUb = weaponUb || naturalUb;
+      const weaponWarded = Boolean(this.wielding.attacker?.system.warded);
+      return {
+        ap: this.combat.attackPenalty,
+        av0: Number(hasAv0) * 2,
+        "av0.abi": 0,
+        "av0.nat": Number(naturalAv0) * 2,
+        "av0.wep": Number(weaponAv0) * 2,
+        sb: this.offense.sb ? this.scaling.p : 0,
+        ub: Number(hasUb),
+        "ub.abi": 0,
+        "ub.nat": Number(naturalUb),
+        "ub.wep": Number(weaponUb),
+        ward: Number(weaponWarded),
+        "ward.abi": 0,
+        "ward.wep": Number(weaponWarded),
+      };
+    }
+
+    /** @inheritDoc */
+    getRollData() {
+      const rollData = super.getRollData();
+      Object.assign(rollData, {
+        ...this.#getDefenseRollData(),
+        ...this.#getOffenseRollData(),
+        ...this.#getEquipmentRollData(),
+      });
+      return rollData;
+    }
+
+    /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      const armor = this.parent.equipment.filter(e => e.system.equipped && e.system.equipmentClasses.has("armor"));
+      this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
+    }
+
+    /** @inheritDoc */
+    prepareSpecialData() {
+      super.prepareSpecialData();
+      this.defense.av.worn = Math.max(
+        0,
+        ...this.parent.equipment.filter(e => e.active && !e.system.shattered).map(e => e.system.av.value),
+      );
+      this.defense.av.natural = Math.max(0, ...this.parent.bodyParts.filter(b => b.active).map(b => b.system.av.value));
+      this.defense.av.value = Math.max(0, this.defense.av.natural, this.defense.av.worn);
+      this.defense.ac += this.defense.av.value;
+      this.defense.bv = this.wielding.blocker?.system.bv.value || 0;
+      this.defense.cc = this.defense.ac + this.defense.bv;
+    }
+
+    /**
+     * Rolls an attack.
+     *
+     * Relevant wiki pages:
+     * - [Attack Interaction](https://wiki.teriock.com/index.php/Core:Attack_Interaction)
+     *
+     * @param {Partial<Teriock.Execution.AttackExecutionOptions>} [options] - Options for the roll.
+     * @returns {Promise<void>}
+     */
+    async rollAttack(options = {}) {
+      const data = { ...options };
+      // Competence is construction context, not schema data
+      delete data.competence;
+      if (options.event) {
+        data.edge = ThresholdRoll.parseEvent(options.event).edge;
+        Object.assign(options, BaseRoll.parseEvent(options.event));
+      }
+      if (typeof options.armament === "string") { options.armament = await fromUuid(options.armament); }
+      await teriock.executions.activity.AttackRollExecution.create(data, { ...options, actor: this.parent });
+    }
+  }
+
+  return ActorCombatPart;
 }

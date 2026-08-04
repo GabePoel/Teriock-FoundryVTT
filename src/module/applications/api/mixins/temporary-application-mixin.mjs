@@ -12,110 +12,110 @@ const { FormDataExtended } = foundry.applications.ux;
  * @param {T} Base
  */
 export default function TemporaryApplicationMixin(Base) {
-  return (
+  /**
+   * @extends {ApplicationV2 & BaseApplication}
+   * @mixin
+   * @property {Record<string, any>} state - State data automatically updated in {@link _onChangeForm}.
+   */
+  class TemporaryApplication extends Base {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
+    static DEFAULT_OPTIONS = {
+      doubles: { openDocument: this._onDoubleClickOpenDocument },
+      form: { closeOnSubmit: false, submitOnChange: false },
+    };
+
     /**
-     * @extends {ApplicationV2 & BaseApplication}
-     * @mixin
-     * @property {Record<string, any>} state - State data automatically updated in {@link _onChangeForm}.
+     * Open a document sheet when a row is double-clicked.
+     * @param {MouseEvent} _event
+     * @param {HTMLElement} target
+     * @this {TemporaryApplication}
      */
-    class TemporaryApplication extends Base {
-      /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        doubles: { openDocument: this._onDoubleClickOpenDocument },
-        form: { closeOnSubmit: false, submitOnChange: false },
-      };
+    static async _onDoubleClickOpenDocument(_event, target) {
+      const row = /** @type {HTMLElement|null} */ (target.closest("[data-uuid]") ?? target);
+      if (!row?.dataset.uuid) { return; }
+      const doc = /** @type {AnyChildDocument} */ await fromUuid(row.dataset.uuid);
+      await doc?.sheet?.render(true);
+    }
 
-      /**
-       * Open a document sheet when a row is double-clicked.
-       * @param {MouseEvent} _event
-       * @param {HTMLElement} target
-       * @this {TemporaryApplication}
-       */
-      static async _onDoubleClickOpenDocument(_event, target) {
-        const row = /** @type {HTMLElement|null} */ (target.closest("[data-uuid]") ?? target);
-        if (!row?.dataset.uuid) { return; }
-        const doc = /** @type {AnyChildDocument} */ await fromUuid(row.dataset.uuid);
-        await doc?.sheet?.render(true);
+    /**
+     * Record of registered model instances.
+     * @type {Record<string, BaseDataModel>}
+     */
+    models = {};
+
+    /**
+     * State data bound to form fields via `name="state.<path>"`.
+     * @type {Record<string, any>}
+     */
+    state = {};
+
+    /** @inheritDoc */
+    _onChangeForm(formConfig, event) {
+      super._onChangeForm(formConfig, event);
+      if (!this.state) { return; }
+      const target = /** @type {HTMLElement} */ (event.target);
+      const form = /** @type {HTMLFormElement} */ (target.form ?? this.form ?? event.currentTarget);
+      const formData = new FormDataExtended(form);
+      const data = typeof this._processFormData === "function"
+        ? this._processFormData(event, form, formData)
+        : foundry.utils.expandObject(formData.object);
+      if (foundry.utils.hasProperty(data, "state")) {
+        foundry.utils.mergeObject(this.state, data.state, { inplace: true });
       }
+      this._onStateChanged(event, data);
+    }
 
-      /**
-       * Record of registered model instances.
-       * @type {Record<string, BaseDataModel>}
-       */
-      models = {};
-
-      /**
-       * State data bound to form fields via `name="state.<path>"`.
-       * @type {Record<string, any>}
-       */
-      state = {};
-
-      /** @inheritDoc */
-      _onChangeForm(formConfig, event) {
-        super._onChangeForm(formConfig, event);
-        if (!this.state) { return; }
-        const target = /** @type {HTMLElement} */ (event.target);
-        const form = /** @type {HTMLFormElement} */ (target.form ?? this.form ?? event.currentTarget);
-        const formData = new FormDataExtended(form);
-        const data = typeof this._processFormData === "function"
-          ? this._processFormData(event, form, formData)
-          : foundry.utils.expandObject(formData.object);
-        if (foundry.utils.hasProperty(data, "state")) {
-          foundry.utils.mergeObject(this.state, data.state, { inplace: true });
-        }
-        this._onStateChanged(event, data);
-      }
-
-      /** @inheritDoc */
-      _onPressKey(event) {
-        if (event.key === "Escape") {
-          event.preventDefault();
-          event.stopPropagation();
-          this.close();
-        }
-      }
-
-      /**
-       * Called after {@link TemporaryApplication.state} is updated from the form.
-       * @param {Event} _event
-       * @param {object} data
-       */
-      _onStateChanged(_event, data) {
-        const stateData = data.state ?? {};
-        for (const [id, model] of Object.entries(this.models)) {
-          if (!stateData[id]) { continue; }
-          try {
-            model.updateSource(this.state[id]);
-          } catch (err) {
-            console.error(err);
-          }
-          this.state[id] = model.toObject();
-        }
-      }
-
-      /**
-       * Prepare fields for a registered data model. Only works with flat data models without nested schema. Every model
-       * must be registered using {@link _registerModelFields.}
-       * @param {string} id
-       * @returns {{field: DataField, name: string, value: *}[]}
-       */
-      _prepareModelFields(id) {
-        return Object.entries(this.models[id].schema.fields).map(([name, field]) => ({
-          field,
-          name: `state.${id}.${name}`,
-          value: this.state[id][name],
-        }));
-      }
-
-      /**
-       * Register fields from a data model.
-       * @param {typeof BaseDataModel} Model
-       * @param {string} id
-       */
-      _registerModelFields(Model, id) {
-        this.models[id] = new Model();
-        this.state[id] = this.models[id].toObject();
+    /** @inheritDoc */
+    _onPressKey(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        this.close();
       }
     }
-  );
+
+    /**
+     * Called after {@link TemporaryApplication.state} is updated from the form.
+     * @param {Event} _event
+     * @param {object} data
+     */
+    _onStateChanged(_event, data) {
+      const stateData = data.state ?? {};
+      for (const [id, model] of Object.entries(this.models)) {
+        if (!stateData[id]) { continue; }
+        try {
+          model.updateSource(this.state[id]);
+        } catch (err) {
+          console.error(err);
+        }
+        this.state[id] = model.toObject();
+      }
+    }
+
+    /**
+     * Prepare fields for a registered data model. Only works with flat data models without nested schema. Every model
+     * must be registered using {@link _registerModelFields.}
+     * @param {string} id
+     * @returns {{field: DataField, name: string, value: *}[]}
+     */
+    _prepareModelFields(id) {
+      return Object.entries(this.models[id].schema.fields).map(([name, field]) => ({
+        field,
+        name: `state.${id}.${name}`,
+        value: this.state[id][name],
+      }));
+    }
+
+    /**
+     * Register fields from a data model.
+     * @param {typeof BaseDataModel} Model
+     * @param {string} id
+     */
+    _registerModelFields(Model, id) {
+      this.models[id] = new Model();
+      this.state[id] = this.models[id].toObject();
+    }
+  }
+
+  return TemporaryApplication;
 }

@@ -8,282 +8,291 @@ const { fields } = foundry.data;
 
 /**
  * Ability usage part: delivery, timing, interaction, targets, range, expansion.
+ *
+ * Relevant wiki pages:
+ * - [Abilities](https://wiki.teriock.com/index.php/Core:Abilities)
+ * - [Deliveries](https://wiki.teriock.com/index.php/Core:Deliveries)
+ * - [Expansions](https://wiki.teriock.com/index.php/Core:Expansions)
+ * - [Interactions](https://wiki.teriock.com/index.php/Core:Interactions)
+ * - [Maneuvers](https://wiki.teriock.com/index.php/Core:Maneuvers)
+ * - [Targets](https://wiki.teriock.com/index.php/Core:Targets)
+ *
  * @template {Constructor<AbilitySystem>} T
  * @param {T} Base
  */
 export default function AbilityUsagePart(Base) {
-  return (
-    /**
-     * @extends {AttackSystem}
-     * @extends {BaseEffectSystem}
-     * @extends {Teriock.Models.AbilityUsagePartData}
-     * @mixin
-     * @property {TeriockAbility} parent
-     */
-    class AbilityUsagePart extends Base {
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          delivery: new fields.StringField({
-            blank: false,
-            choices: objectMap(TERIOCK.config.ability.delivery, v => v.label, { localize: true }),
-            initial: "weapon",
-            nullable: false,
-            required: true,
-          }),
-          executionTime: new fields.SchemaField({
-            base: new fields.StringField({ blank: false, initial: "a1", required: true }),
-            slow: new fields.EmbeddedDataField(SlowExecutionTimeModel),
-          }),
-          expansion: new fields.SchemaField({
-            cap: rollableFormulaField(),
-            featSaveAttribute: new fields.StringField({
-              blank: false,
-              choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
-              initial: "mov",
-              required: true,
-            }),
-            range: new fields.EmbeddedDataField(RangeModel),
-            type: new fields.StringField({ initial: null, nullable: true }),
-          }),
+  /**
+   * @extends {AttackSystem}
+   * @extends {BaseEffectSystem}
+   * @extends {Teriock.Models.AbilityUsagePartData}
+   * @mixin
+   * @property {TeriockAbility} parent
+   */
+  class AbilityUsagePart extends Base {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        delivery: new fields.StringField({
+          blank: false,
+          choices: objectMap(TERIOCK.config.ability.delivery, v => v.label, { localize: true }),
+          initial: "weapon",
+          nullable: false,
+          required: true,
+        }),
+        executionTime: new fields.SchemaField({
+          base: new fields.StringField({ blank: false, initial: "a1", required: true }),
+          slow: new fields.EmbeddedDataField(SlowExecutionTimeModel),
+        }),
+        expansion: new fields.SchemaField({
+          cap: rollableFormulaField(),
           featSaveAttribute: new fields.StringField({
             blank: false,
             choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
             initial: "mov",
             required: true,
           }),
-          interaction: new fields.StringField({
-            blank: false,
-            choices: TERIOCK.config.ability.interaction,
-            initial: "attack",
-            required: true,
-          }),
-          maneuver: new fields.StringField({
-            blank: false,
-            choices: TERIOCK.config.ability.maneuver,
-            initial: "active",
-            nullable: false,
-            required: true,
-          }),
           range: new fields.EmbeddedDataField(RangeModel),
-          targets: new fields.SetField(
-            new fields.StringField({
-              choices: objectMap(TERIOCK.config.ability.targets, v => v.label, { localize: true }),
-            }),
-            { initial: ["creature"] },
-          ),
-        });
+          type: new fields.StringField({ initial: null, nullable: true }),
+        }),
+        featSaveAttribute: new fields.StringField({
+          blank: false,
+          choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
+          initial: "mov",
+          required: true,
+        }),
+        interaction: new fields.StringField({
+          blank: false,
+          choices: TERIOCK.config.ability.interaction,
+          initial: "attack",
+          required: true,
+        }),
+        maneuver: new fields.StringField({
+          blank: false,
+          choices: TERIOCK.config.ability.maneuver,
+          initial: "active",
+          nullable: false,
+          required: true,
+        }),
+        range: new fields.EmbeddedDataField(RangeModel),
+        targets: new fields.SetField(
+          new fields.StringField({
+            choices: objectMap(TERIOCK.config.ability.targets, v => v.label, { localize: true }),
+          }),
+          { initial: ["creature"] },
+        ),
+      });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options, state) {
+      // Range migration
+      if (typeof source.range === "string") { source.range = { raw: source.range }; }
+
+      // Expansion migration
+      if (typeof source.expansion === "string") { source.expansion = { type: source.expansion }; }
+      if (typeof source.expansion !== "object") { source.expansion = {}; }
+      if (foundry.utils.hasProperty(source, "expansion.cap.raw")) {
+        foundry.utils.setProperty(source, "expansion.cap", foundry.utils.getProperty(source, "expansion.cap.raw"));
+        foundry.utils.deleteProperty(source, "expansion.cap.raw");
       }
+      if (typeof source.expansion?.cap === "number") { source.expansion.cap = `${source.expansion.cap}`; }
+      migrateKey(source, "expansionRange", "expansion.range.raw");
 
-      /** @inheritDoc */
-      static migrateData(source, options, state) {
-        // Range migration
-        if (typeof source.range === "string") { source.range = { raw: source.range }; }
-
-        // Expansion migration
-        if (typeof source.expansion === "string") { source.expansion = { type: source.expansion }; }
-        if (typeof source.expansion !== "object") { source.expansion = {}; }
-        if (foundry.utils.hasProperty(source, "expansion.cap.raw")) {
-          foundry.utils.setProperty(source, "expansion.cap", foundry.utils.getProperty(source, "expansion.cap.raw"));
-          foundry.utils.deleteProperty(source, "expansion.cap.raw");
-        }
-        if (typeof source.expansion?.cap === "number") { source.expansion.cap = `${source.expansion.cap}`; }
-        migrateKey(source, "expansionRange", "expansion.range.raw");
-
-        // Execution time migration
-        if (typeof source.executionTime === "string") {
-          source.executionTime = { base: source.executionTime };
-          if (source.maneuver === "slow") {
-            let unit;
-            let raw;
-            const lower = source.executionTime.base.toLowerCase();
-            if (lower.includes("short")) { unit = "shortRest"; }
-            if (lower.includes("long")) { unit = "longRest"; }
-            const units = ["second", "minute", "hour", "day", "week", "year"];
-            for (const u of units) {
-              if (lower.includes(u)) {
-                unit = u;
-                raw = lower.trim().split(" ")[0];
-              }
+      // Execution time migration
+      if (typeof source.executionTime === "string") {
+        source.executionTime = { base: source.executionTime };
+        if (source.maneuver === "slow") {
+          let unit;
+          let raw;
+          const lower = source.executionTime.base.toLowerCase();
+          if (lower.includes("short")) { unit = "shortRest"; }
+          if (lower.includes("long")) { unit = "longRest"; }
+          const units = ["second", "minute", "hour", "day", "week", "year"];
+          for (const u of units) {
+            if (lower.includes(u)) {
+              unit = u;
+              raw = lower.trim().split(" ")[0];
             }
-            source.executionTime.slow = { raw, unit };
           }
+          source.executionTime.slow = { raw, unit };
         }
-
-        // Delivery migration
-        migrateKey(source, "delivery.base", "delivery");
-
-        return super.migrateData(source, options, state);
       }
 
-      /**
-       * Execution wrappers.
-       * @returns {string[]}
-       */
-      get _executionWrappers() {
-        let time;
-        if (this.maneuver !== "slow") {
-          time = TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime.base];
-        } else { time = this.executionTime.slow.text; }
-        return [
-          time || "",
-          this.piercing.label,
-          TERIOCK.config.ability.delivery[this.delivery]?.label || "",
-          this.interaction === "feat" ? TERIOCK.config.attribute[this.featSaveAttribute]?.label : "",
-          TERIOCK.config.ability.interaction[this.interaction] || "",
-        ];
-      }
+      // Delivery migration
+      migrateKey(source, "delivery.base", "delivery");
 
-      /**
-       * Expansion wrappers.
-       * @returns {string[]}
-       */
-      get _expansionWrappers() {
-        return this.expansion.type
-          ? [
-            ["detonate", "ripple"].includes(this.expansion.type)
-              ? TERIOCK.config.attribute[this.expansion.featSaveAttribute]?.label
-              : "",
-            TERIOCK.config.ability.expansion[this.expansion.type]?.label || "",
-            this.expansion.range.abbreviation,
-            formulaExists(this.expansion.cap)
-              ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
-              : "",
-          ]
-          : [];
-      }
+      return super.migrateData(source, options, state);
+    }
 
-      /**
-       * Targeting wrappers.
-       * @returns {string[]}
-       */
-      get _targetingWrappers() {
-        return [
-          this.isRanged ? this.range.abbreviation : "",
-          ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target]?.label)),
-          this.duration.text || "",
-        ];
-      }
+    /**
+     * Execution wrappers.
+     * @returns {string[]}
+     */
+    get _executionWrappers() {
+      let time;
+      if (this.maneuver !== "slow") {
+        time = TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime.base];
+      } else { time = this.executionTime.slow.text; }
+      return [
+        time || "",
+        this.piercing.label,
+        TERIOCK.config.ability.delivery[this.delivery]?.label || "",
+        this.interaction === "feat" ? TERIOCK.config.attribute[this.featSaveAttribute]?.label : "",
+        TERIOCK.config.ability.interaction[this.interaction] || "",
+      ];
+    }
 
-      /**
-       * Whether this has an area of effect.
-       * @returns {boolean}
-       */
-      get isAoe() {
-        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.aoe)
-          || Boolean(TERIOCK.config.ability.expansion[this.expansion.type]?.aoe);
-      }
+    /**
+     * Expansion wrappers.
+     * @returns {string[]}
+     */
+    get _expansionWrappers() {
+      return this.expansion.type
+        ? [
+          ["detonate", "ripple"].includes(this.expansion.type)
+            ? TERIOCK.config.attribute[this.expansion.featSaveAttribute]?.label
+            : "",
+          TERIOCK.config.ability.expansion[this.expansion.type]?.label || "",
+          this.expansion.range.abbreviation,
+          formulaExists(this.expansion.cap)
+            ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
+            : "",
+        ]
+        : [];
+    }
 
-      /**
-       * If this ability is a ball.
-       * @returns {boolean}
-       */
-      get isBall() {
-        return this.delivery === "missile" && this.piercing.raw === 2;
-      }
+    /**
+     * Targeting wrappers.
+     * @returns {string[]}
+     */
+    get _targetingWrappers() {
+      return [
+        this.isRanged ? this.range.abbreviation : "",
+        ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target]?.label)),
+        this.duration.text || "",
+      ];
+    }
 
-      /**
-       * Whether this requires contact with a target.
-       * @returns {boolean}
-       */
-      get isContact() {
-        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.contact);
-      }
+    /**
+     * Whether this has an area of effect.
+     * @returns {boolean}
+     */
+    get isAoe() {
+      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.aoe)
+        || Boolean(TERIOCK.config.ability.expansion[this.expansion.type]?.aoe);
+    }
 
-      /**
-       * If this ability is ranged.
-       * @returns {boolean}
-       */
-      get isRanged() {
-        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.ranged);
-      }
+    /**
+     * If this ability is a ball.
+     * @returns {boolean}
+     */
+    get isBall() {
+      return this.delivery === "missile" && this.piercing.raw === 2;
+    }
 
-      /**
-       * If this ability is a ray.
-       * @returns {boolean}
-       */
-      get isRay() {
-        return this.delivery === "missile" && this.piercing.raw === 1;
-      }
+    /**
+     * Whether this requires contact with a target.
+     * @returns {boolean}
+     */
+    get isContact() {
+      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.contact);
+    }
 
-      /**
-       * If this ability is a strike.
-       * @returns {boolean}
-       */
-      get isStrike() {
-        return this.delivery === "weapon" && this.interaction === "attack";
-      }
+    /**
+     * If this ability is ranged.
+     * @returns {boolean}
+     */
+    get isRanged() {
+      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.ranged);
+    }
 
-      /**
-       * If this ability is a touch.
-       * @returns {boolean}
-       */
-      get isTouch() {
-        return this.delivery === "hand" && this.piercing.raw === 2;
-      }
+    /**
+     * If this ability is a ray.
+     * @returns {boolean}
+     */
+    get isRay() {
+      return this.delivery === "missile" && this.piercing.raw === 1;
+    }
 
-      /**
-       * If this ability needs an item.
-       * @returns {boolean}
-       */
-      get needsItem() {
-        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.needsItem);
-      }
+    /**
+     * If this ability is a strike.
+     * @returns {boolean}
+     */
+    get isStrike() {
+      return this.delivery === "weapon" && this.interaction === "attack";
+    }
 
-      /** @inheritDoc */
-      getLocalRollData() {
-        const data = super.getLocalRollData();
+    /**
+     * If this ability is a touch.
+     * @returns {boolean}
+     */
+    get isTouch() {
+      return this.delivery === "hand" && this.piercing.raw === 2;
+    }
+
+    /**
+     * If this ability needs an item.
+     * @returns {boolean}
+     */
+    get needsItem() {
+      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.needsItem);
+    }
+
+    /** @inheritDoc */
+    getLocalRollData() {
+      const data = super.getLocalRollData();
+      Object.assign(data, {
+        [`interaction.${this.interaction}`]: 1,
+        [`maneuver.${this.maneuver}`]: 1,
+        [`time.${this.executionTime.base}`]: 1,
+        interaction: this.interaction,
+        maneuver: this.maneuver,
+        range: this.range.rollValue,
+        time: this.executionTime.base,
+      });
+      // Add deliveries
+      if (this.delivery) { data[`delivery.${this.delivery}`] = 1; }
+      data["delivery.ball"] = Number(this.isBall);
+      data["delivery.ray"] = Number(this.isRay);
+      data["delivery.touch"] = Number(this.isTouch);
+      data["delivery.strike"] = Number(this.isStrike);
+      data["delivery.item"] = Number(this.needsItem);
+      if (this.interaction === "feat") { data[`attr.${this.featSaveAttribute}`] = 1; }
+      if (this.expansion.type) {
         Object.assign(data, {
-          [`interaction.${this.interaction}`]: 1,
-          [`maneuver.${this.maneuver}`]: 1,
-          [`time.${this.executionTime.base}`]: 1,
-          interaction: this.interaction,
-          maneuver: this.maneuver,
-          range: this.range.rollValue,
-          time: this.executionTime.base,
+          [`expansion.${this.expansion.type}`]: 1,
+          [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
+          expansion: this.expansion,
+          ["expansion.range"]: this.expansion.range.rollValue,
         });
-        // Add deliveries
-        if (this.delivery) { data[`delivery.${this.delivery}`] = 1; }
-        data["delivery.ball"] = Number(this.isBall);
-        data["delivery.ray"] = Number(this.isRay);
-        data["delivery.touch"] = Number(this.isTouch);
-        data["delivery.strike"] = Number(this.isStrike);
-        data["delivery.item"] = Number(this.needsItem);
-        if (this.interaction === "feat") { data[`attr.${this.featSaveAttribute}`] = 1; }
-        if (this.expansion.type) {
-          Object.assign(data, {
-            [`expansion.${this.expansion.type}`]: 1,
-            [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
-            expansion: this.expansion,
-            ["expansion.range"]: this.expansion.range.rollValue,
-          });
-        }
-        // Add targets
-        for (const target of this.targets) { data[`target.${target}`] = 1; }
-        return data;
       }
+      // Add targets
+      for (const target of this.targets) { data[`target.${target}`] = 1; }
+      return data;
+    }
 
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        if (this.maneuver === "passive") { this.executionTime.base = "passive"; }
-      }
+    /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      if (this.maneuver === "passive") { this.executionTime.base = "passive"; }
+    }
 
-      /** @inheritDoc */
-      prepareCleanupData() {
-        if (!TERIOCK.config.ability.delivery[this.delivery].allowPiercing) { this.piercing.raw = 0; }
-        super.prepareCleanupData();
-      }
+    /** @inheritDoc */
+    prepareCleanupData() {
+      if (!TERIOCK.config.ability.delivery[this.delivery].allowPiercing) { this.piercing.raw = 0; }
+      super.prepareCleanupData();
+    }
 
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        if (this.maneuver === "slow") {
-          if (this.executionTime.slow.unit === "shortRest") { this.executionTime.base = "shortRest"; }
-          else if (this.executionTime.slow.unit === "longRest") { this.executionTime.base = "longRest"; }
-          else { this.executionTime.base = "custom"; }
-        }
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      if (this.maneuver === "slow") {
+        if (this.executionTime.slow.unit === "shortRest") { this.executionTime.base = "shortRest"; }
+        else if (this.executionTime.slow.unit === "longRest") { this.executionTime.base = "longRest"; }
+        else { this.executionTime.base = "custom"; }
       }
     }
-  );
+  }
+
+  return AbilityUsagePart;
 }

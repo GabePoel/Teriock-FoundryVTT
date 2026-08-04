@@ -8,33 +8,33 @@ const { fields } = foundry.data;
  * @param {T} Base
  */
 export default function CritMechanicMixin(Base) {
-  return (
-    /**
-     * @extends {MechanicPseudoDocument}
-     * @mixin
-     * @property {Set<number>} crit
-     */
-    class CritMechanic extends Base {
-      /** @inheritDoc */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          crit: new fields.SetField(
-            new fields.NumberField({
-              choices: localizeChoices({
-                0: "TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.0",
-                1: "TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.1",
-              }, { sort: false }),
-            }),
-            { initial: [0, 1] },
-          ),
-        });
-      }
-
-      /** @inheritDoc */
-      get canCrit() {
-        if (this.document.type === "ability") { return true; }
-        return super.canCrit;
-      }
+  /**
+   * @extends {MechanicPseudoDocument}
+   * @mixin
+   * @property {Set<number>} crit
+   */
+  class CritMechanic extends Base {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        crit: new fields.SetField(
+          new fields.NumberField({
+            choices: localizeChoices({
+              0: "TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.0",
+              1: "TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.1",
+            }, { sort: false }),
+          }),
+          { initial: [0, 1] },
+        ),
+      });
     }
-  );
+
+    /** @inheritDoc */
+    get canCrit() {
+      if (this.document.type === "ability") { return true; }
+      return super.canCrit;
+    }
+  }
+
+  return CritMechanic;
 }

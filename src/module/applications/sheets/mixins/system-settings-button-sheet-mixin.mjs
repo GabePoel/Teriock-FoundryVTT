@@ -15,7 +15,7 @@ export default function SystemSettingsButtonSheetMixin(Base) {
    * @extends {TeriockDocumentSheet}
    * @mixin
    */
-  return class SystemSettingsButtonSheet extends Base {
+  class SystemSettingsButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: { openDocumentSettings: this._onOpenDocumentSettings },
@@ -39,5 +39,7 @@ export default function SystemSettingsButtonSheetMixin(Base) {
     static async _onOpenDocumentSettings() {
       await DocumentSettingsSheet.create({ document: this.document, sheetConfig: false });
     }
-  };
+  }
+
+  return SystemSettingsButtonSheet;
 }
