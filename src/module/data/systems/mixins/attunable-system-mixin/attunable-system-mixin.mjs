@@ -34,10 +34,12 @@ export default function AttunableSystemMixin(Base) {
         price: new fields.NumberField({
           blank: true,
           initial: null,
+          integer: false,
           min: 0,
           nullable: true,
           placeholder: _loc("COMMON.None"),
           required: true,
+          step: 0.01,
         }),
         tier: new fields.SchemaField({
           raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),

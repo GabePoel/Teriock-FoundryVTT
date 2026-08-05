@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { BaseUpdater } from "../../dialogs/_module.mjs";
+import { BaseUpdater, KindUpdater } from "../../dialogs/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -16,6 +16,16 @@ export default function FieldsSheetMixin(Base) {
    * @property {AnyCommonDocument} document
    */
   class FieldsSheet extends Base {
+    /**
+     * Edit this document's kind.
+     * @returns {Promise<void>}
+     * @this {FieldsSheet}
+     */
+    static async #onEditKind() {
+      if (!game.teriock.checkEditable(this)) { return; }
+      await KindUpdater.create({ document: this.document });
+    }
+
     /**
      * Increment forwards.
      * @param {PointerEvent} event
@@ -69,6 +79,7 @@ export default function FieldsSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
+        editKind: this.#onEditKind,
         increment: { buttons: [0, 2], handler: this.#onIncrement },
         updatePaths: this.#onUpdatePaths,
         updateUnit: this.#onUpdateUnit,

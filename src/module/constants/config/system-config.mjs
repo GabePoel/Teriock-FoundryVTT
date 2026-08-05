@@ -21,7 +21,7 @@ export default {
   safeInf: 99,
   target: { limb: 2, vitals: 3 },
   timeout: { writeOperation: 5 * 1000 },
-  unitPrecision: 0.01,
+  unitPrecision: 0.001,
 };
 
 preLocalizeConfig("config.system.childKinds", { keys: ["label"] });
