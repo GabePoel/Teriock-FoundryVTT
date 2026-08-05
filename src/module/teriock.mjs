@@ -487,7 +487,7 @@ foundry.helpers.Hooks.once("init", function() {
   // Register Handlebars Templates
   // =============================
 
-  foundry.applications.handlebars.loadTemplates(templates);
+  game.teriock.templatesReady = foundry.applications.handlebars.loadTemplates(templates);
 });
 
 // Override Compendium Applications

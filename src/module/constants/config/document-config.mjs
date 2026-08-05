@@ -43,7 +43,7 @@ export default {
     label: "TYPES.Item.archetype",
     plural: "TERIOCK.DOCUMENTS.archetype.plural",
     previewModel: RankPreviewModel,
-    sorter: docSort,
+    sorter: rankSort,
   },
   attunement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",

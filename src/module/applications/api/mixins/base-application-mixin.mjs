@@ -237,6 +237,12 @@ export default function BaseApplicationMixin(Base) {
       return Object.assign(await super._prepareContext(options), { appId: this.id, TERIOCK });
     }
 
+    /** @inheritDoc */
+    async _preRender(context, options) {
+      await game.teriock.templatesReady;
+      return super._preRender(context, options);
+    }
+
     /**
      * Re-apply every tracked collapsible state.
      * @param {ParentNode} [element]

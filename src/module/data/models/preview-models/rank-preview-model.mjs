@@ -1,3 +1,4 @@
+import { rankSort } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { archetypeField, classField, nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
@@ -10,6 +11,11 @@ import BasePreviewModel from "./base-preview-model.mjs";
  * @see {RankSystem}
  */
 export default class RankPreviewModel extends BasePreviewModel {
+  /** @inheritDoc */
+  static get defaultSortOption() {
+    return "default";
+  }
+
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
@@ -48,5 +54,15 @@ export default class RankPreviewModel extends BasePreviewModel {
       matches &&= this._checkValueFilter(f.kind, system?.kind ?? (system?.innate ? "innate" : "learned"));
       if (matches) { yield document; }
     }
+  }
+
+  /** @inheritDoc */
+  sortDocuments(documents) {
+    if (!Array.isArray(documents) || documents.length === 0) { return []; }
+    if (this.sort.option === "default") {
+      const sorted = rankSort([...documents]);
+      return this.sort.ascending ? sorted : sorted.reverse();
+    }
+    return super.sortDocuments(documents);
   }
 }

@@ -46,13 +46,15 @@ export function docSort(docs, options = { alphabetical: true }) {
 }
 
 /**
- * Sort ranks.
- * @param {TeriockRank[]} ranks
- * @returns {TeriockRank[]}
+ * Sort ranks and archetypes.
+ * @param {(TeriockRank|TeriockArchetype)[]} ranks
+ * @returns {(TeriockRank|TeriockArchetype)[]}
  */
 export function rankSort(ranks) {
   return ranks.sort((a, b) => {
-    if (!a.system?._source.class || !b.system?._source.class) { return a.name.localeCompare(b.name); }
+    const aIsRank = a.type === "rank" && a.system?._source?.class;
+    const bIsRank = b.type === "rank" && b.system?._source?.class;
+    if (!aIsRank || !bIsRank) { return (a.name ?? "").localeCompare(b.name ?? ""); }
     if (a.system.innate !== b.system.innate) { return a.system.innate ? -1 : 1; }
     if (a.system._source.archetype === "everyman" && b.system._source.archetype !== "everyman") { return -1; }
     if (a.system._source.archetype !== "everyman" && b.system._source.archetype === "everyman") { return 1; }

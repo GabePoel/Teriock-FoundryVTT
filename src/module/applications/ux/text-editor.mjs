@@ -118,6 +118,7 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<string>}
    */
   static async renderTemplate(path, data) {
+    await game.teriock.templatesReady;
     return foundry.applications.handlebars.renderTemplate(path, { ...data, TERIOCK });
   }
 }

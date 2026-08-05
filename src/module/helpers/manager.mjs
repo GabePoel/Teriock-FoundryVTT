@@ -44,6 +44,12 @@ export default class TeriockManager {
   i18nReady = false;
 
   /**
+   * Resolves when all Handlebars template aliases from `templates.json` are registered.
+   * @type {Promise<Handlebars.TemplateDelegate[]>}
+   */
+  templatesReady = Promise.resolve([]);
+
+  /**
    * All the basic abilities.
    * @returns {TeriockAbility[]}
    */

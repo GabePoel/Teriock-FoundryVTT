@@ -139,6 +139,7 @@ export default class TeriockTooltipManager extends TooltipManager {
    * @return {Promise<void>}
    */
   async initializeLoadingTooltip() {
+    await game.teriock.templatesReady;
     this.#loadingTooltipHTML = await TeriockTextEditor.makeTooltip(TERIOCK.display.panel.premade.loading);
   }
 
