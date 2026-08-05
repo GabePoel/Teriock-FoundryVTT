@@ -14,7 +14,9 @@ export default class InventorySystem extends BaseActorSystem {
    * @returns {string}
    */
   get containing() {
-    const equipmentAmount = this.parent.equipment.length;
+    const equipmentAmount = this.parent.equipment.map(e =>
+      (e.system?.consumable ? (e.system?.quantity?.value ?? 1) : 1) || 1
+    ).reduce((a, b) => a + b, 0);
     if (equipmentAmount === 1) { return _loc("TERIOCK.SYSTEMS.Inventory.PANEL.contents.single"); }
     return _loc("TERIOCK.SYSTEMS.Inventory.PANEL.contents.plural", { number: equipmentAmount });
   }
