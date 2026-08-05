@@ -42,7 +42,11 @@ export function cleanDocument(doc) {
     delete doc._stats.modifiedTime;
     delete doc._stats.ownership;
   }
-  if (doc.flags) { delete doc.flags.teriockDocumentSettings; }
+  if (doc.flags) {
+    for (const k of Object.keys(doc.flags)) {
+      if (k !== "teriock") { delete doc.flags[k]; }
+    }
+  }
   if (doc.system) {
     if (doc.name !== "Basic Abilities") { delete doc.system.settings; }
     delete doc.system._ref;

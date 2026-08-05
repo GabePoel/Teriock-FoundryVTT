@@ -1,0 +1,108 @@
+_id: 8890d58460a4e886
+_key: "!items!8890d58460a4e886"
+effects:
+  - _id: 3d2cc8d952adebec
+    _key: "!items.effects!8890d58460a4e886.3d2cc8d952adebec"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      description: >-
+        <p>An item with this property is easily concealed and can often be used in the same hand as a
+        @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+      identifier: small
+      kind: intrinsic
+    type: property
+  - _id: sTUs9SBM95bSWD9G
+    _key: "!items.effects!8890d58460a4e886.sTUs9SBM95bSWD9G"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.61fbeeda5169ef73
+    img: systems/teriock/src/icons/properties/thrown.webp
+    name: Thrown
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.range.ranged
+              phase: derived
+              priority: 10
+              target: Item
+              type: override
+              value: "true"
+          type: changes
+      description: <p>A weapon with this property can be tossed to make a @Identifier[property:ranged]{ranged} attack.</p>
+      identifier: thrown
+      kind: intrinsic
+    type: property
+  - _id: 891de334396620e1
+    _key: "!items.effects!8890d58460a4e886.891de334396620e1"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @Identifier[core:attack-interaction]{attack}.</p>
+      identifier: weapon
+      kind: intrinsic
+    type: property
+  - _id: HY3QmoaHLRUxV2fl
+    _key: "!items.effects!8890d58460a4e886.HY3QmoaHLRUxV2fl"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.87e86f2640702582
+    img: systems/teriock/src/icons/properties/ranged.webp
+    name: Ranged
+    system:
+      _sup: sTUs9SBM95bSWD9G
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.range.ranged
+              phase: derived
+              priority: 10
+              target: Item
+              type: override
+              value: "true"
+          type: changes
+      description: >-
+        <p>Weapons with this property can hit targets at a distance. A weapon that can be used to make a [[lookup name
+        style=lc]] attack has a range in parentheses after specifying if it requires
+        @Identifier[property:ammunition]{ammunition} or if is @Identifier[property:thrown]{thrown}. The range lists two
+        numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's long range. When
+        attacking a target beyond normal range, you have @Identifier[core:disadvantage]{disadvantage} on the
+        @Identifier[core:attack-interaction]{attack roll}. You can't attack a target beyond the weapon's long range.</p>
+      identifier: ranged
+      kind: intrinsic
+    type: property
+folder: zx1BGzvFUDnS4aBa
+img: systems/teriock/src/icons/equipment/shuriken.webp
+name: Shuriken
+system:
+  attackPenalty: "-1"
+  damage:
+    base: 1d4
+  equipmentClasses:
+    - daggers
+    - specialtyWeapons
+  equipmentType: shuriken
+  fightingStyle: shurikenjutsu
+  identifier: shuriken
+  price: 3
+  range:
+    long:
+      raw: "60"
+      unit: ft
+    short:
+      raw: "20"
+  weight: 1
+type: equipment
