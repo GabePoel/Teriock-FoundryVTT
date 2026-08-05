@@ -27,7 +27,7 @@ export default class InventorySheet extends BaseActorSheet {
   static DEFAULT_OPTIONS = { position: { height: 600, width: 525 } };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { all: { scrollable: [""], template: "teriock/sheets/actors/inventory/inventory" } };
+  static PARTS = { all: { scrollable: [".actor-tab-content"], template: "teriock/sheets/actors/inventory/inventory" } };
 
   /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
   static PREVIEWS = {
