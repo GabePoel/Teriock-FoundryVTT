@@ -68,7 +68,7 @@ export default function AttunableSystemMixin(Base) {
       if (this._shouldShowTierWrapper) {
         wrappers.push(_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw }));
       }
-      if (typeof this.price === "number") {
+      if (this._shouldShowPriceWrapper) {
         wrappers.push(_loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: this.price.toNearest(0.01) }));
       }
       return wrappers;
@@ -93,6 +93,14 @@ export default function AttunableSystemMixin(Base) {
           else { await this.attune(); }
         },
       }, ...super._embedIcons];
+    }
+
+    /**
+     * Whether to show the price wrapper.
+     * @return {boolean}
+     */
+    get _shouldShowPriceWrapper() {
+      return typeof this.price === "number" && this.parent.parent?.type === "inventory";
     }
 
     /**
