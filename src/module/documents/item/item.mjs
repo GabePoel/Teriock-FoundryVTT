@@ -70,6 +70,17 @@ export default class TeriockItem
     return this.effects.contents;
   }
 
+  /** @inheritdoc */
+  get visibleChildren() {
+    const children = super.visibleChildren;
+    if (!this.metadata.armament) { return children; }
+    const knownChildren = new Set(children.map(c => c.id));
+    const fromImbuements = this.effects.contents.filter(e =>
+      e.elder?.type === "imbuement" && !knownChildren.has(e.id) && (e.system.revealed || game.user.isGM)
+    );
+    return fromImbuements.length ? [...children, ...fromImbuements] : children;
+  }
+
   /**
    * @inheritDoc
    * @yields {TeriockActiveEffect}
