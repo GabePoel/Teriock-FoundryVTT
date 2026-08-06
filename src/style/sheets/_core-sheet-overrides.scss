@@ -59,3 +59,11 @@
     }
   }
 }
+
+// Fix to make sure the document identifier field on table result configs is only visible when type is document
+.table-result-config {
+  .form-group[hidden]:has(.form-fields [name="documentUuid"])
+    + .form-group:has(.form-fields [name="flags.teriock.documentIdentifier"]) {
+    display: none;
+  }
+}
