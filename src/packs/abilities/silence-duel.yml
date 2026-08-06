@@ -3,5 +3,27 @@ _key: "!effects!b24dbe3017434ad6"
 img: systems/teriock/src/icons/abilities/silence-duel.webp
 name: Silence Duel
 system:
+  costs:
+    primary:
+      mp:
+        formula: "1"
+        type: formula
+  duration:
+    unit: unlimited
+  effectTypes:
+    - duelModifying
+  endCondition: <p>The @Identifier[condition:dueling]{duel} ends.</p>
+  executionTime:
+    base: r0
   identifier: silence-duel
+  maneuver: reactive
+  overview:
+    base: >-
+      <p>Every creature in the triggering @Identifier[condition:dueling]{duel} is
+      @Identifier[condition:silenced]{silenced} as long as they remain in the @Identifier[condition:dueling]{duel}.</p>
+  powerSources:
+    - spiritual
+  targets:
+    - other
+  trigger: <p>You begin @Identifier[condition:dueling]{dueling}.</p>
 type: ability

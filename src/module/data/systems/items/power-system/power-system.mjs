@@ -1,6 +1,7 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
+import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
@@ -16,6 +17,7 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.PowerSystemData}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
+ * @mixes MetaphysicsSystem
  * @mixes StatGiverSystem
  */
 export default class PowerSystem
@@ -23,6 +25,7 @@ export default class PowerSystem
     BaseItemSystem,
     systemMixins.ArmorSuppressionSystemMixin,
     systemMixins.CompetenceDisplaySystemMixin,
+    systemMixins.MetaphysicsSystemMixin,
     systemMixins.StatGiverSystemMixin,
   )
 {
@@ -61,6 +64,10 @@ export default class PowerSystem
   /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, {
+      icon: TERIOCK.display.icons.ability.effectType,
+      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
+      wrappers: simplifyTags(this._metaphysicsTags),
+    }, {
       icon: TERIOCK.display.icons.armament.av,
       label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.maxAv.label"),
       wrappers: [
