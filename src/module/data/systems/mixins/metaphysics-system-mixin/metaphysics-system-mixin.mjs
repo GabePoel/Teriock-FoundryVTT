@@ -1,4 +1,6 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { listFormat } from "../../../../helpers/localization.mjs";
+import { simplifyTags } from "../../../../helpers/panel.mjs";
 
 const { fields } = foundry.data;
 
@@ -42,6 +44,31 @@ export default function MetaphysicsSystemMixin(Base) {
     /** @inheritDoc */
     get _displayTags() {
       return [...super._displayTags, ...this._metaphysicsTags];
+    }
+
+    /** @inheritDoc */
+    get _formPaths() {
+      return [...super._formPaths, ...this._formPathsMetaphysics];
+    }
+
+    /**
+     * Metaphysics form paths.
+     * @returns {string[]}
+     */
+    get _formPathsMetaphysics() {
+      return ["powerSources", "elements", "effectTypes"];
+    }
+
+    /**
+     * Metaphysics panel bar.
+     * @returns {Teriock.Panels.PanelBar}
+     */
+    get _metaphysicsBar() {
+      return {
+        icon: icons.ability.effectType,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
+        wrappers: simplifyTags(this._metaphysicsTags),
+      };
     }
 
     /**

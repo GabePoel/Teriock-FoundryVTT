@@ -47,11 +47,7 @@ export default function AbilityPanelPart(Base) {
           wrappers: simplifyTags(this._costTags),
         },
         { icon: icons.ui.info, label: "TERIOCK.SYSTEMS.Ability.PANELS.info", wrappers: simplifyTags(this._infoTags) },
-        {
-          icon: icons.ability.effectType,
-          label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-          wrappers: simplifyTags(this._metaphysicsTags),
-        },
+        this._metaphysicsBar,
       ]);
       return {
         ...(await super.getPanelParts()),

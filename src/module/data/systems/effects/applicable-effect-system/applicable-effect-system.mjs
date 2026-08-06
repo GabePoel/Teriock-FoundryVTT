@@ -17,6 +17,7 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.ApplicableEffectSystemData}
  * @mixes AffinableSystem
  * @mixes ExpirableSystem
+ * @mixes MetaphysicsSystem
  * @mixes ThresholdData
  * @see {DurationModel}
  */
@@ -25,6 +26,7 @@ export default class ApplicableEffectSystem
     BaseEffectSystem,
     systemMixins.AffinableSystemMixin,
     systemMixins.ExpirableSystemMixin,
+    systemMixins.MetaphysicsSystemMixin,
     dataMixins.ThresholdDataMixin,
   )
 {
@@ -128,7 +130,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["kind"];
+    return ["kind", ...super._formPaths];
   }
 
   /** @inheritDoc */
@@ -140,7 +142,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   get _panelBars() {
-    return [this._durationBar, this._statusBar];
+    return [this._durationBar, this._metaphysicsBar, this._statusBar];
   }
 
   /** @inheritDoc */

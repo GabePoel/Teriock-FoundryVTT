@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -102,11 +101,7 @@ export default class PropertySystem
 
   /** @inheritDoc */
   get _panelBars() {
-    return [{
-      icon: TERIOCK.display.icons.ability.effectType,
-      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-      wrappers: simplifyTags(this._metaphysicsTags),
-    }];
+    return [this._metaphysicsBar];
   }
 
   /** @inheritDoc */

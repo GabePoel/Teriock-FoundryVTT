@@ -63,7 +63,9 @@ export default class HackSystem extends ApplicableEffectSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    this.parent.updateSource({ statuses: ["hacked"], ...data });
+    this.parent.updateSource(
+      foundry.utils.mergeObject({ statuses: ["hacked"], system: { effectTypes: ["damaging"] } }, data),
+    );
   }
 
   /** @inheritDoc */

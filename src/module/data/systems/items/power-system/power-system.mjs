@@ -1,7 +1,6 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
-import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
@@ -63,11 +62,7 @@ export default class PowerSystem
 
   /** @inheritDoc */
   get _panelBars() {
-    return [this._statBar, {
-      icon: TERIOCK.display.icons.ability.effectType,
-      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-      wrappers: simplifyTags(this._metaphysicsTags),
-    }, {
+    return [this._statBar, this._metaphysicsBar, {
       icon: TERIOCK.display.icons.armament.av,
       label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.maxAv.label"),
       wrappers: [

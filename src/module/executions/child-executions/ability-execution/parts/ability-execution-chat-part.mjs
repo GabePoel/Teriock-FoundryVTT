@@ -257,10 +257,13 @@ export default function AbilityExecutionChatPart(Base) {
           blocks: (await this.source.system.getPanelParts()).blocks,
           competence: { raw: this.competence.value },
           critical: crit,
+          effectTypes: Array.from(this.source.system.effectTypes),
+          elements: Array.from(this.source.system.elements),
           executor: this.actor?.uuid ?? null,
           expirations: this.#generateEffectExpirations(crit),
           heightened: this.heightened,
           identifier: `${this.source.forcedIdentifier}-effect`,
+          powerSources: Array.from(this.source.system.powerSources),
         },
         type: "imbuement",
       };
@@ -284,8 +287,10 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       const makeEffect = overrideAutomation?.makeEffect ?? null;
+      const makeCritEffect = overrideAutomation?.makeCritEffect ?? null;
       const targetsActor = overrideAutomation?.targetsActor ?? this.targetsActor;
       const targetsArmament = overrideAutomation?.targetsArmament ?? this.targetsArmament;
+      const shouldMakeCrit = makeCritEffect === true || (makeCritEffect !== false && this.shouldMakeCritEffect);
       if (
         makeEffect !== false
         && (makeEffect === true
@@ -293,7 +298,7 @@ export default function AbilityExecutionChatPart(Base) {
         && (targetsActor || targetsArmament)
       ) {
         const variants = [];
-        for (const crit of [false, true]) {
+        for (const crit of shouldMakeCrit ? [false, true] : [false]) {
           variants.push({
             con: {
               children: this.source.subs.map(s => {
@@ -370,7 +375,7 @@ export default function AbilityExecutionChatPart(Base) {
             new acts.AddDocumentsActivation({
               display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label" },
               primary: group(norm, "con"),
-              secondary: group(crit, "con"),
+              secondary: shouldMakeCrit ? group(crit, "con") : {},
               target: "actor",
             }),
           );
@@ -380,7 +385,7 @@ export default function AbilityExecutionChatPart(Base) {
             new acts.AddDocumentsActivation({
               display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament" },
               primary: group(norm, "imb"),
-              secondary: group(crit, "imb"),
+              secondary: shouldMakeCrit ? group(crit, "imb") : {},
               target: "armament",
             }),
           );

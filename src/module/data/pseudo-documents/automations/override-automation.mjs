@@ -15,6 +15,7 @@ const { fields } = foundry.data;
  * @mixes OverrideCompetenceMechanic
  * @property {Teriock.System.FormulaString} rollBonus
  * @property {boolean|null} makeEffect
+ * @property {boolean|null} makeCritEffect
  * @property {boolean|null} targetsActor
  * @property {boolean|null} targetsArmament
  * @property {boolean} preventAttack
@@ -51,6 +52,7 @@ export default class OverrideAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      makeCritEffect: new TernaryField(),
       makeEffect: new TernaryField(),
       preventAttack: new fields.BooleanField({ initial: false }),
       preventBlockCone: new fields.BooleanField({ initial: false }),
@@ -74,6 +76,7 @@ export default class OverrideAutomation
     return [
       "display.label",
       "makeEffect",
+      "makeCritEffect",
       "targetsActor",
       "targetsArmament",
       "hr",

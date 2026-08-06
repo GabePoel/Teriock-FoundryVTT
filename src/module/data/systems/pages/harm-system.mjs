@@ -1,6 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { simplifyTags } from "../../../helpers/panel.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../mixins/_module.mjs";
@@ -50,11 +48,7 @@ export default class HarmSystem
 
   /** @inheritDoc */
   get _panelBars() {
-    return [{
-      icon: icons.ability.effectType,
-      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-      wrappers: simplifyTags(this._metaphysicsTags),
-    }];
+    return [this._metaphysicsBar];
   }
 
   /** @inheritDoc */
