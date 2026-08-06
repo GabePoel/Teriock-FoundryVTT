@@ -14,8 +14,8 @@ pages:
     text:
       content: >-
         <p>The following is a list of common abbreviations in <a target="_blank" rel="nofollow noreferrer noopener"
-        class="external text" href="https://www.teriock.com/">Teriock</a> Online.</p><table class="wikitable
-        sortable"><tbody><tr><th>Abbreviation</th><th>Meaning</th><th>Numerical Value
+        class="external text" href="https://www.teriock.com/">Teriock</a>
+        Online.</p><table><tbody><tr><th>Abbreviation</th><th>Meaning</th><th>Numerical Value
         </th></tr><tr><td>@Identifier[core:armor-class]{AC}</td><td>@Identifier[core:armor-class]{Armor
         class}</td><td>Yes
         </td></tr><tr><td>@Identifier[core:multiple-attacks]{AP}</td><td>@Identifier[core:multiple-attacks]{Attack
@@ -161,7 +161,7 @@ pages:
         ability}.</p><p>Regardless of where it comes from, each ability has the same underlying
         structure.</p><h2>Executor</h2><p>The <b>executor</b> (or user) of an @Pack[teriock.abilities]{ability} is the
         creature that executes it.</p><h2>Target</h2><p>An ability's <b>target</b> type determines what kinds of things
-        can be affected by the Ability. Some of the most common ones are listed here.</p><h4>Creature</h4><p>Abilities
+        can be affected by the ability. Some of the most common ones are listed here.</p><h4>Creature</h4><p>Abilities
         that target @Pack[teriock.creatures]{creatures} affect some sort of being. A "creature" doesn't necessarily have
         to be an @Wiki[Category:Animal creatures]{animal}, it may be an animated statue or a sentient
         @Wiki[Category:Plant creatures]{plant}. Check with your @Identifier[core:game-master]{GM} if in doubt of whether
@@ -401,7 +401,7 @@ pages:
         equipment} can be used to attack or
         @Identifier[core:block-interaction]{block}.</dd><dt>@Identifier[equipment:tower-shield]{Tower
         Shields}</dt><dd>Only @Identifier[property:small]{small equipment} can be held in an arm that's
-        @Identifier[keyword:using]{using} @Identifier[property:tower-shielding]{tower shielding equipment}. But but no
+        @Identifier[keyword:using]{using} @Identifier[property:tower-shielding]{tower shielding equipment}. But no
         @Pack[teriock.equipment]{equipment} can be used to attack or
         @Identifier[core:block-interaction]{block}.</dd></dl><h2>Multiple Attacks</h2><p>The first
         @Identifier[core:attack-interaction]{attack} you make in a given @Identifier[core:turns]{turn} has no penalty to
@@ -412,7 +412,12 @@ pages:
         @Identifier[core:attack-interaction]{attack} has an AP of -3. This is the AP for @Wiki[Category:Missile delivery
         abilities]{missile attacks} as well as any other @Identifier[core:attack-interaction]{attack} where an -3 isn't
         stated. Your attack penalty resets to 0 at the end of each @Identifier[core:turns]{turn} (not just your
-        own).</p><p><img class="interaction-routine"
+        own).</p><h2>Types of Attacks</h2><p>A <b>ranged</b> @Identifier[core:attack-interaction]{attack} is one that
+        has a @Identifier[core:missile-delivery]{missile delivery} or that is @Identifier[core:deliveries]{delivered}
+        with a @Identifier[property:ranged]{ranged} @Identifier[property:ranged]{item} that its
+        @Identifier[keyword:using]{user} is no longer @Identifier[keyword:bearing]{bearing}. A <b>melee</b>
+        @Identifier[core:attack-interaction]{attack} is one that is not @Identifier[keyword:ranged]{ranged}.</p><p><img
+        class="interaction-routine"
         src="systems/teriock/src/assets/interaction-routines/complete-attack-block-interaction.svg"></p>
     type: rule
   - _id: armorClass000000
@@ -479,23 +484,22 @@ pages:
         capacity to lift and carry other objects. By default, a creature's STR is 0, but there are @Wiki[Category:STR
         setting abilities]{various abilities that set it to different values}.</p><h4>Carrying Capacity</h4><p>How much
         a creature can lift and carry is determined by its @Identifier[core:strength]{STR} and
-        @Identifier[core:size]{size}.</p><table class="wikitable"><caption>Carrying Capacity Under Size 5
-        </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
+        @Identifier[core:size]{size}.</p><table><caption>Carrying Capacity Under Size 5 </caption><tbody><tr><th>Amount
+        in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
         @Identifier[core:strength]{STR})</td><td>@Identifier[condition:encumbered]{Lightly Encumbered}
         </td></tr><tr><td>130 + (40 × @Identifier[core:strength]{STR})</td><td>@Identifier[condition:encumbered]{Heavily
         Encumbered} </td></tr><tr><td>195 + (60 × @Identifier[core:strength]{STR})</td><td>Cannot carry anything more
-        </td></tr></tbody></table><table class="wikitable"><caption>Carrying Capacity of Size 5 and Larger
-        </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
-        (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} -
-        4)²))</td><td>@Identifier[condition:encumbered]{Lightly Encumbered} </td></tr><tr><td>130 + (40 ×
-        (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} -
+        </td></tr></tbody></table><table><caption>Carrying Capacity of Size 5 and Larger </caption><tbody><tr><th>Amount
+        in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 × (@Identifier[core:strength]{STR} +
+        (@Identifier[core:size]{size} - 4)²))</td><td>@Identifier[condition:encumbered]{Lightly Encumbered}
+        </td></tr><tr><td>130 + (40 × (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} -
         4)²))</td><td>@Identifier[condition:encumbered]{Heavily Encumbered} </td></tr><tr><td>195 + (60 ×
         (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} - 4)²))</td><td>Cannot carry anything more
         </td></tr></tbody></table><p>A creature may also push, drag, or lift a weight in pounds up to twice their
         carrying capacity. While pushing or dragging weight in excess of their carrying capacity, the creature's
         @Identifier[core:movement-speed]{movement speed} drops to 5 feet. The amount a creature can carry without
-        becoming @Identifier[condition:encumbered]{encumbered} is shown in the table below.</p><table
-        class="wikitable"><caption>Lightly Encumbered Carrying Capacity
+        becoming @Identifier[condition:encumbered]{encumbered} is shown in the table below.</p><table><caption>Lightly
+        Encumbered Carrying Capacity
         </caption><tbody><tr><th>@Identifier[core:size]{Size}</th><th>@Identifier[core:strength]{STR} =
         -3</th><th>@Identifier[core:strength]{STR} = -2</th><th>@Identifier[core:strength]{STR} =
         -1</th><th>@Identifier[core:strength]{STR} = 0</th><th>@Identifier[core:strength]{STR} =
@@ -560,30 +564,29 @@ pages:
         movement, such as walking, leaping, swimming, climbing, and flying. The possible speed adjustments are double,
         normal, half, quarter, and none. Moving 5 feet at half speed uses 10 feet of movement, while moving 5 feet at
         double speed uses only 2.5 feet of movement. The following table summarizes the different movement speed
-        adjustments.</p><table class="wikitable"><caption>Movement Speed Adjustments
-        </caption><tbody><tr><th>Step</th><th>Speed Adjustment</th><th>Cost of Moving 5 Feet
-        </th></tr><tr><td>4</td><td>Double</td><td>2.5 feet </td></tr><tr><td>3</td><td>Normal</td><td>5 feet
-        </td></tr><tr><td>2</td><td>Half</td><td>10 feet </td></tr><tr><td>1</td><td>Quarter</td><td>20 feet
-        </td></tr><tr><td>0</td><td>None</td><td><i>Cannot move in this way at all</i></td></tr></tbody></table><p>The
-        default speed adjustments for different types of movement are as follows.</p><table
-        class="wikitable"><caption>Default Movement Speed Adjustments </caption><tbody><tr><th>Move Type</th><th>Speed
-        Adjustment </th></tr><tr><td>Walk Speed</td><td>Normal </td></tr><tr><td>Difficult Terrain Speed</td><td>Half
-        </td></tr><tr><td>Crawl Speed</td><td>Quarter </td></tr><tr><td>Swim Speed</td><td>Quarter
+        adjustments.</p><table><caption>Movement Speed Adjustments </caption><tbody><tr><th>Step</th><th>Speed
+        Adjustment</th><th>Cost of Moving 5 Feet </th></tr><tr><td>4</td><td>Double</td><td>2.5 feet
+        </td></tr><tr><td>3</td><td>Normal</td><td>5 feet </td></tr><tr><td>2</td><td>Half</td><td>10 feet
+        </td></tr><tr><td>1</td><td>Quarter</td><td>20 feet </td></tr><tr><td>0</td><td>None</td><td><i>Cannot move in
+        this way at all</i></td></tr></tbody></table><p>The default speed adjustments for different types of movement
+        are as follows.</p><table><caption>Default Movement Speed Adjustments </caption><tbody><tr><th>Move
+        Type</th><th>Speed Adjustment </th></tr><tr><td>Walk Speed</td><td>Normal </td></tr><tr><td>Difficult Terrain
+        Speed</td><td>Half </td></tr><tr><td>Crawl Speed</td><td>Quarter </td></tr><tr><td>Swim Speed</td><td>Quarter
         </td></tr><tr><td>Climb Speed</td><td>Quarter </td></tr><tr><td>@Identifier[condition:hidden]{Hidden
         Speed}</td><td>Quarter </td></tr><tr><td>Leap Speed (horizontal)</td><td>Quarter </td></tr><tr><td>Leap Speed
         (vertical)</td><td>None </td></tr><tr><td>Fly Speed</td><td>None </td></tr><tr><td>Dig Speed</td><td>None
         </td></tr><tr><td>Dive Speed</td><td>None </td></tr></tbody></table><h5>Special Movements</h5><p><b>Special
         movements</b> are the types of movement aren't easily described as traversing some distance. Instead of having a
-        @Identifier[core:movement-speed]{rate}, these have a fixed amount of movement that they cost.</p><table
-        class="wikitable"><caption>Special Movements </caption><tbody><tr><th>Name</th><th>Description</th><th>Cost
+        @Identifier[core:movement-speed]{rate}, these have a fixed amount of movement that they
+        cost.</p><table><caption>Special Movements </caption><tbody><tr><th>Name</th><th>Description</th><th>Cost
         </th></tr><tr><td>Descending</td><td>You move down a vertical distance. This requires that you are somehow
         @Identifier[ability:flying]{hovering in the air} of your own volition.</td><td>5 feet
         </td></tr></tbody></table><h3>Sneak (SNK)</h3><p>A creature's sneak (abbreviated as <b>SNK</b>) is a measure of
         how stealthy it is. By default, a creature's SNK is determined by its @Identifier[core:size]{size}, but there
         are @Wiki[Category:SNK setting abilities]{various abilities that set it to different values}.</p><h4>SNK by
         SIZE</h4><p>If there's no @Wiki[Category:SNK setting abilities]{ability} that sets a creature's SNK, it is
-        determined by its @Identifier[core:size]{size} as follows.</p><table
-        class="wikitable"><tbody><tr><th>@Identifier[core:size]{size}</th><th>SNK </th></tr><tr><td>20+</td><td>-4
+        determined by its @Identifier[core:size]{size} as
+        follows.</p><table><tbody><tr><th>@Identifier[core:size]{size}</th><th>SNK </th></tr><tr><td>20+</td><td>-4
         </td></tr><tr><td>10 - 19</td><td>-3 </td></tr><tr><td>6 - 9</td><td>-2 </td></tr><tr><td>4 - 5</td><td>-1
         </td></tr><tr><td>3</td><td>0 </td></tr><tr><td>2</td><td>+1 </td></tr><tr><td>1</td><td>+2
         </td></tr><tr><td>½</td><td>+3 </td></tr><tr><td>¼</td><td>+4 </td></tr></tbody></table><h3>Perception
@@ -591,15 +594,15 @@ pages:
         the world around them. By default, a creature's PER is 0, but there are @Wiki[Category:PER setting
         abilities]{various abilities that set it to different values}.</p><h2>Passive Attributes</h2><p>For each
         attribute, there is an associated <b>passive attribute</b> value that is often used in cases where the attribute
-        in question is relevant, but no check is being done.</p><table class="wikitable"><caption>Passive Attributes
+        in question is relevant, but no check is being done.</p><table><caption>Passive Attributes
         </caption><tbody><tr><th>Passive Attribute</th><th>Value </th></tr><tr><td>Passive
         @Identifier[core:intelligence]{intelligence}</td><td>10 + 2 × @Identifier[core:intelligence]{INT}
         </td></tr><tr><td>Passive @Identifier[core:strength]{strength}</td><td>10 + 2 × @Identifier[core:strength]{STR}
         </td></tr><tr><td>Passive @Identifier[core:movement]{movement}</td><td>10 + 2 × @Identifier[core:movement]{MOV}
         </td></tr><tr><td>Passive @Identifier[core:sneak]{sneak}</td><td>10 + 2 × @Identifier[core:sneak]{SNK}
         </td></tr><tr><td>Passive @Identifier[core:perception]{perception}</td><td>10 + 2 ×
-        @Identifier[core:perception]{PER} </td></tr></tbody></table><h2>Attribute by Ability</h2><table
-        class="wikitable"><tbody><tr><th></th><th>INT</th><th>STR</th><th>MOV</th><th>SNK</th><th>PER
+        @Identifier[core:perception]{PER} </td></tr></tbody></table><h2>Attribute by
+        Ability</h2><table><tbody><tr><th></th><th>INT</th><th>STR</th><th>MOV</th><th>SNK</th><th>PER
         </th></tr><tr><td>-3</td><td><ul><li>@Identifier[ability:stupid-intelligence]{Stupid
         Intelligence}</li></ul></td><td><ul><li>@Identifier[ability:no-strength]{No
         Strength}</li></ul></td><td><ul><li>@Identifier[ability:stationary]{Stationary}</li></ul></td><td><ul><li>@Identifier[ability:lumbering]{Lumbering}</li></ul></td><td><ul><li>@Identifier[ability:oblivious]{Oblivious}</li></ul></td></tr><tr><td>-2</td><td><ul><li>@Identifier[ability:dense-intelligence]{Dense
@@ -642,7 +645,7 @@ pages:
         Saves</h2><p>@Identifier[core:feat-interaction]{Feat saves} always have an attribute associated with them. You
         add the value of that attribute when making the [[/roll d20]] roll for that save. In addition, some abilities
         grant @Identifier[core:proficiency-bonus]{proficiency} or @Identifier[core:fluency-bonus]{fluency} to the save
-        as well.</p><table class="wikitable"><tbody><tr><th></th><th>INT</th><th>STR</th><th>MOV</th><th>SNK</th><th>PER
+        as well.</p><table><tbody><tr><th></th><th>INT</th><th>STR</th><th>MOV</th><th>SNK</th><th>PER
         </th></tr><tr><td>@Identifier[core:proficiency-bonus]{Proficiency}</td><td><ul><li>@Identifier[ability:flame-disciplines]{Flame
         Disciplines}</li><li>@Identifier[ability:life-disciplines]{Life
         Disciplines}</li><li>@Identifier[ability:nature-disciplines]{Nature
@@ -666,23 +669,22 @@ pages:
     text:
       content: >-
         <p>How much a creature can lift and carry is determined by its @Identifier[core:strength]{STR} and
-        @Identifier[core:size]{size}.</p><table class="wikitable"><caption>Carrying Capacity Under Size 5
-        </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
+        @Identifier[core:size]{size}.</p><table><caption>Carrying Capacity Under Size 5 </caption><tbody><tr><th>Amount
+        in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
         @Identifier[core:strength]{STR})</td><td>@Identifier[condition:encumbered]{Lightly Encumbered}
         </td></tr><tr><td>130 + (40 × @Identifier[core:strength]{STR})</td><td>@Identifier[condition:encumbered]{Heavily
         Encumbered} </td></tr><tr><td>195 + (60 × @Identifier[core:strength]{STR})</td><td>Cannot carry anything more
-        </td></tr></tbody></table><table class="wikitable"><caption>Carrying Capacity of Size 5 and Larger
-        </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
-        (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} -
-        4)²))</td><td>@Identifier[condition:encumbered]{Lightly Encumbered} </td></tr><tr><td>130 + (40 ×
-        (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} -
+        </td></tr></tbody></table><table><caption>Carrying Capacity of Size 5 and Larger </caption><tbody><tr><th>Amount
+        in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 × (@Identifier[core:strength]{STR} +
+        (@Identifier[core:size]{size} - 4)²))</td><td>@Identifier[condition:encumbered]{Lightly Encumbered}
+        </td></tr><tr><td>130 + (40 × (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} -
         4)²))</td><td>@Identifier[condition:encumbered]{Heavily Encumbered} </td></tr><tr><td>195 + (60 ×
         (@Identifier[core:strength]{STR} + (@Identifier[core:size]{size} - 4)²))</td><td>Cannot carry anything more
         </td></tr></tbody></table><p>A creature may also push, drag, or lift a weight in pounds up to twice their
         carrying capacity. While pushing or dragging weight in excess of their carrying capacity, the creature's
         @Identifier[core:movement-speed]{movement speed} drops to 5 feet. The amount a creature can carry without
-        becoming @Identifier[condition:encumbered]{encumbered} is shown in the table below.</p><table
-        class="wikitable"><caption>Lightly Encumbered Carrying Capacity
+        becoming @Identifier[condition:encumbered]{encumbered} is shown in the table below.</p><table><caption>Lightly
+        Encumbered Carrying Capacity
         </caption><tbody><tr><th>@Identifier[core:size]{Size}</th><th>@Identifier[core:strength]{STR} =
         -3</th><th>@Identifier[core:strength]{STR} = -2</th><th>@Identifier[core:strength]{STR} =
         -1</th><th>@Identifier[core:strength]{STR} = 0</th><th>@Identifier[core:strength]{STR} =
@@ -1172,9 +1174,8 @@ pages:
         to their followers, and what they represent.</p><h2>Domain Benefits</h2><p>Several @Wiki[Category:Divinely
         powered abilities]{divinely powered abilities} such as @Identifier[ability:might-strike]{Might Strike},
         @Identifier[ability:righteous-aura]{Righteous Aura}, and @Identifier[ability:zone-of-divinity]{Zone of Divinity}
-        have different effects depending on the domain of the deity that granted them.</p><table class="wikitable
-        sortable"><caption>Benefits by Domain
-        </caption><tbody><tr><th>Domain</th><th>@Identifier[ability:might-strike]{Might Strike} Damage
+        have different effects depending on the domain of the deity that granted them.</p><table><caption>Benefits by
+        Domain </caption><tbody><tr><th>Domain</th><th>@Identifier[ability:might-strike]{Might Strike} Damage
         Type</th><th>@Identifier[ability:righteous-aura]{Righteous Aura}
         Ability</th><th>@Identifier[ability:zone-of-divinity]{Zone of Divinity} Ability
         </th></tr><tr><td>Celestial</td><td>@Identifier[damage:silver]{Silver}</td><td>@Identifier[ability:isolation-aura]{Isolation
@@ -1205,9 +1206,9 @@ pages:
         Blast Aura}</td><td>@Identifier[ability:storm-shelter]{Storm Shelter} </td></tr></tbody></table><h2>Domain
         Blessings</h2><p>Other @Pack[teriock.abilities]{abilities}, such as @Identifier[ability:blessing]{Blessing},
         allow for selecting an @Pack[teriock.abilities]{ability} from a the following table based on the deity's
-        domain.</p><table class="wikitable sortable"><tbody><tr><th></th><th>Celestial </th><th>Crafting </th><th>Death
-        </th><th>Destruction </th><th>Fortune </th><th>Healing </th><th>Hearth </th><th>Knowledge </th><th>Nature
-        </th><th>Spirit </th><th>Trickster </th><th>Value </th><th>Weather </th></tr><tr><td>1
+        domain.</p><table><tbody><tr><th></th><th>Celestial </th><th>Crafting </th><th>Death </th><th>Destruction
+        </th><th>Fortune </th><th>Healing </th><th>Hearth </th><th>Knowledge </th><th>Nature </th><th>Spirit
+        </th><th>Trickster </th><th>Value </th><th>Weather </th></tr><tr><td>1
         </td><td>@Identifier[ability:familiar-bond]{Familiar Bond} </td><td>@Identifier[ability:mage-light]{Mage Light}
         </td><td>@Identifier[ability:spirit-guide]{Spirit Guide} </td><td>@Identifier[ability:hack]{Hack}
         </td><td>@Identifier[ability:unglue]{Unglue} </td><td>@Identifier[ability:healing-touch]{Healing Touch}
@@ -1293,9 +1294,9 @@ pages:
         </td><td>@Identifier[ability:enchantment-sense]{Enchantment Sense}
         </td><td>@Identifier[ability:fall-durability]{Fall Durability} </td></tr></tbody></table><h2>Domain
         Flaws</h2><p>It is also possible to have @Wiki[Category:Flaw abilities]{flaws} based on a deity's
-        domain.</p><table class="wikitable sortable"><tbody><tr><th></th><th>Celestial </th><th>Crafting </th><th>Death
-        </th><th>Destruction </th><th>Fortune </th><th>Healing </th><th>Hearth </th><th>Knowledge </th><th>Nature
-        </th><th>Spirit </th><th>Trickster </th><th>Value </th><th>Weather </th></tr><tr><td>1
+        domain.</p><table><tbody><tr><th></th><th>Celestial </th><th>Crafting </th><th>Death </th><th>Destruction
+        </th><th>Fortune </th><th>Healing </th><th>Hearth </th><th>Knowledge </th><th>Nature </th><th>Spirit
+        </th><th>Trickster </th><th>Value </th><th>Weather </th></tr><tr><td>1
         </td><td>@Identifier[ability:sky-energized]{Sky Energized}
         </td><td>@Identifier[ability:echoed-item-damage]{Echoed Item Damage}
         </td><td>@Identifier[ability:necessary-sacrifice]{Necessary Sacrifice}
@@ -1397,15 +1398,15 @@ pages:
         <p>A character's <b>fluency bonus</b> increases as they @Identifier[core:leveling-up]{level up}.</p><p>Unless
         otherwise noted, if you are fluent in an ability that provides some other ability, then that second ability has
         fluency as well.</p><p>As a shorthand, your fluency bonus may sometimes be written a "F".</p><p>The levels at
-        which characters gain increased Proficiency are shown highlighted in the table below.</p><table
-        class="wikitable"><caption>Bonuses By Level </caption><tbody><tr><th>Rank </th><th>Level
-        </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
-        </th><th>@Identifier[archetype:mage]{Mage} </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus}
-        </th><th>Fluency Bonus </th><th>@Identifier[core:presence]{Presence Tier} </th></tr><tr><th rowspan="5">0
-        </th><td>1 </td><td colspan="3">@Identifier[power:basic-abilities]{Basic abilities} </td><td rowspan="6">+0
-        </td><td style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)" rowspan="6">+1
-        </td><td rowspan="3">1 </td></tr><tr><td>2 </td><td colspan="3">@Identifier[core:proficiency-bonus]{Proficiency}
-        in @Identifier[power:basic-abilities]{basic abilities} </td></tr><tr><td>3 </td><td colspan="3">New
+        which characters gain increased Proficiency are shown highlighted in the table below.</p><table><caption>Bonuses
+        By Level </caption><tbody><tr><th>Rank </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior}
+        </th><th>@Identifier[archetype:semi]{Semi} </th><th>@Identifier[archetype:mage]{Mage}
+        </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus} </th><th>Fluency Bonus
+        </th><th>@Identifier[core:presence]{Presence Tier} </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td
+        colspan="3">@Identifier[power:basic-abilities]{Basic abilities} </td><td rowspan="6">+0 </td><td
+        style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)" rowspan="6">+1 </td><td
+        rowspan="3">1 </td></tr><tr><td>2 </td><td colspan="3">@Identifier[core:proficiency-bonus]{Proficiency} in
+        @Identifier[power:basic-abilities]{basic abilities} </td></tr><tr><td>3 </td><td colspan="3">New
         @Identifier[core:tradecrafts]{tradecraft} or @Identifier[core:tradecraft-fluencies]{tradecraft fluency}
         </td></tr><tr><td>4 </td><td colspan="3">+1 @Identifier[core:presence]{presence tier} </td><td rowspan="5">2
         </td></tr><tr><td>5 </td><td colspan="3">+6 HP ([[/roll 1d10]]) / +6 MP ([[/roll 1d10]]) </td></tr><tr><th
@@ -1652,11 +1653,11 @@ pages:
         experience bonus, is based on @Identifier[core:proficiency-bonus]{proficiency} and
         @Identifier[core:fluency-bonus]{fluency}. The assistance and effort bonuses have a maximum of +25. And the
         metaphysics penalty is typically negative and can take on any value. Some possible modifiers are outlined
-        below.</p><table class="wikitable"><caption>Spell Creation Bonuses </caption><tbody><tr><th>Category
-        </th><th>Bonus </th><th>Circumstance </th></tr><tr><td>Experience Bonus </td><td>+(10 *
-        @Identifier[core:fluency-bonus]{F}) </td><td>This is an area that the character is particularly fluent in based
-        on other spells they've created, things they've done, <i>and</i> certain abilities they have. This bonus should
-        only be given out under truly exceptional circumstances. </td></tr><tr><td>Experience Bonus </td><td>+(10 *
+        below.</p><table><caption>Spell Creation Bonuses </caption><tbody><tr><th>Category </th><th>Bonus
+        </th><th>Circumstance </th></tr><tr><td>Experience Bonus </td><td>+(10 * @Identifier[core:fluency-bonus]{F})
+        </td><td>This is an area that the character is particularly fluent in based on other spells they've created,
+        things they've done, <i>and</i> certain abilities they have. This bonus should only be given out under truly
+        exceptional circumstances. </td></tr><tr><td>Experience Bonus </td><td>+(10 *
         @Identifier[core:proficiency-bonus]{P}) </td><td>This is an area that the character is particular proficient in
         based on other spells they've created, things they've done, or certain abilities they have.
         </td></tr><tr><td>Experience Bonus </td><td>+(10 * @Identifier[core:proficiency-bonus]{P}) </td><td>The
@@ -1851,8 +1852,8 @@ pages:
         1d10]])s), and then get different ones as they keep ranking up.</p><p>Hit dice (but not mana dice) can be
         expended for @Identifier[core:healing]{healing} or during a @Identifier[core:short-rest]{short rest}. Both hit
         dice and mana dice are regained during a @Identifier[core:long-rest]{long rest}.</p><p>The levels at which
-        characters gain HP and MP are shown highlighted in the table below.</p><table class="wikitable"><caption>Bonuses
-        By Level </caption><tbody><tr><th>Rank </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior}
+        characters gain HP and MP are shown highlighted in the table below.</p><table><caption>Bonuses By Level
+        </caption><tbody><tr><th>Rank </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior}
         </th><th>@Identifier[archetype:semi]{Semi} </th><th>@Identifier[archetype:mage]{Mage}
         </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus} </th><th>@Identifier[core:fluency-bonus]{Fluency
         Bonus} </th><th>@Identifier[core:presence]{Presence Tier} </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td
@@ -1936,8 +1937,8 @@ pages:
       content: >-
         <p>A creature's intelligence (abbreviated as <b>INT</b>) is a measure of its mental acuity. It has no standard
         intrinsic mechanical effects on its own. By default, a creature's INT is 0, but there are @Wiki[Category:INT
-        setting abilities]{various abilities that set it to different values}.</p><table
-        class="wikitable"><caption>Abilities that affect INT </caption><tbody><tr><th>Value</th><th>Ability
+        setting abilities]{various abilities that set it to different values}.</p><table><caption>Abilities that affect
+        INT </caption><tbody><tr><th>Value</th><th>Ability
         </th></tr><tr><td>-3</td><td><ul><li>@Identifier[ability:stupid-intelligence]{Stupid
         Intelligence}</li></ul></td></tr><tr><td>-2</td><td><ul><li>@Identifier[ability:dense-intelligence]{Dense
         Intelligence}</li></ul></td></tr><tr><td>-1</td><td><ul><li>@Identifier[ability:low-intelligence]{Low
@@ -2014,7 +2015,7 @@ pages:
         equipment} can be used to @Identifier[core:attack-interaction]{attack} or
         @Identifier[core:block-interaction]{block}.</dd><dt>@Identifier[equipment:tower-shield]{Tower
         Shields}</dt><dd>Only @Identifier[property:small]{small equipment} can be held in an arm that's
-        @Identifier[keyword:using]{using} @Identifier[property:tower-shielding]{tower shielding equipment}. But but no
+        @Identifier[keyword:using]{using} @Identifier[property:tower-shielding]{tower shielding equipment}. But no
         @Pack[teriock.equipment]{equipment} can be used to @Identifier[core:attack-interaction]{attack} or
         @Identifier[core:block-interaction]{block}.</dd></dl><div class="ext-mermaid"
         data-mermaid="{&quot;content&quot;:&quot;flowchart TD\nai[&amp;quot;Attack Interaction
@@ -2114,18 +2115,18 @@ pages:
       img: systems/teriock/src/icons/core-rules/leveling-up.webp
     text:
       content: >-
-        <p>As your character levels up, they increase in power in the following ways.</p><table
-        class="wikitable"><caption>Bonuses By Level </caption><tbody><tr><th>Rank </th><th>Level
-        </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
-        </th><th>@Identifier[archetype:mage]{Mage} </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus}
-        </th><th>@Identifier[core:fluency-bonus]{Fluency Bonus} </th><th>@Identifier[core:presence]{Presence Tier}
-        </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td colspan="3">@Identifier[power:basic-abilities]{Basic
-        abilities} </td><td rowspan="6">+0 </td><td rowspan="6">+1 </td><td rowspan="3">1 </td></tr><tr><td>2 </td><td
-        colspan="3">@Identifier[core:proficiency-bonus]{Proficiency} in @Identifier[power:basic-abilities]{basic
-        abilities} </td></tr><tr><td>3 </td><td colspan="3">New @Identifier[core:tradecrafts]{tradecraft} or
-        @Identifier[core:tradecraft-fluencies]{tradecraft fluency} </td></tr><tr><td>4 </td><td colspan="3">+1
-        @Identifier[core:presence]{presence tier} </td><td rowspan="5">2 </td></tr><tr><td>5 </td><td colspan="3">+6 HP
-        ([[/roll 1d10]]) / +6 MP ([[/roll 1d10]]) </td></tr><tr><th rowspan="5">1 </th><td>6 </td><td
+        <p>As your character levels up, they increase in power in the following ways.</p><table><caption>Bonuses By
+        Level </caption><tbody><tr><th>Rank </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior}
+        </th><th>@Identifier[archetype:semi]{Semi} </th><th>@Identifier[archetype:mage]{Mage}
+        </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus} </th><th>@Identifier[core:fluency-bonus]{Fluency
+        Bonus} </th><th>@Identifier[core:presence]{Presence Tier} </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td
+        colspan="3">@Identifier[power:basic-abilities]{Basic abilities} </td><td rowspan="6">+0 </td><td rowspan="6">+1
+        </td><td rowspan="3">1 </td></tr><tr><td>2 </td><td colspan="3">@Identifier[core:proficiency-bonus]{Proficiency}
+        in @Identifier[power:basic-abilities]{basic abilities} </td></tr><tr><td>3 </td><td colspan="3">New
+        @Identifier[core:tradecrafts]{tradecraft} or @Identifier[core:tradecraft-fluencies]{tradecraft fluency}
+        </td></tr><tr><td>4 </td><td colspan="3">+1 @Identifier[core:presence]{presence tier} </td><td rowspan="5">2
+        </td></tr><tr><td>5 </td><td colspan="3">+6 HP ([[/roll 1d10]]) / +6 MP ([[/roll 1d10]]) </td></tr><tr><th
+        rowspan="5">1 </th><td>6 </td><td
         colspan="3">@UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{Class abilities} and
         @Identifier[core:proficiency-bonus]{proficiency} in them </td></tr><tr><td>7 </td><td colspan="3">+1
         @Identifier[core:proficiency-bonus]{proficiency bonus} / +1 @Identifier[core:fluency-bonus]{fluency bonus}
@@ -2531,24 +2532,24 @@ pages:
         Every creature has speeds for different types of movement, such as walking, leaping, swimming, climbing, and
         flying. The possible speed adjustments are double, normal, half, quarter, and none. Moving 5 feet at half speed
         uses 10 feet of movement, while moving 5 feet at double speed uses only 2.5 feet of movement. The following
-        table summarizes the different movement speed adjustments.</p><table class="wikitable"><caption>Movement Speed
-        Adjustments </caption><tbody><tr><th>Step</th><th>Speed Adjustment</th><th>Cost of Moving 5 Feet
+        table summarizes the different movement speed adjustments.</p><table><caption>Movement Speed Adjustments
+        </caption><tbody><tr><th>Step</th><th>Speed Adjustment</th><th>Cost of Moving 5 Feet
         </th></tr><tr><td>4</td><td>Double</td><td>2.5 feet </td></tr><tr><td>3</td><td>Normal</td><td>5 feet
         </td></tr><tr><td>2</td><td>Half</td><td>10 feet </td></tr><tr><td>1</td><td>Quarter</td><td>20 feet
         </td></tr><tr><td>0</td><td>None</td><td><i>Cannot move in this way at all</i></td></tr></tbody></table><p>The
-        default speed adjustments for different types of movement are as follows.</p><table
-        class="wikitable"><caption>Default Movement Speed Adjustments </caption><tbody><tr><th>Move Type</th><th>Speed
-        Adjustment </th></tr><tr><td>Walk Speed</td><td>Normal </td></tr><tr><td>Difficult Terrain Speed</td><td>Half
-        </td></tr><tr><td>Crawl Speed</td><td>Quarter </td></tr><tr><td>Swim Speed</td><td>Quarter
-        </td></tr><tr><td>Climb Speed</td><td>Quarter </td></tr><tr><td>@Identifier[condition:hidden]{Hidden
-        Speed}</td><td>Quarter </td></tr><tr><td>Leap Speed (horizontal)</td><td>Quarter </td></tr><tr><td>Leap Speed
-        (vertical)</td><td>None </td></tr><tr><td>Fly Speed</td><td>None </td></tr><tr><td>Dig Speed</td><td>None
-        </td></tr><tr><td>Dive Speed</td><td>None </td></tr></tbody></table><h2>Special Movements</h2><p><b>Special
-        movements</b> are the types of movement aren't easily described as traversing some distance. Instead of having a
-        rate, these have a fixed amount of movement that they cost.</p><table class="wikitable"><caption>Special
-        Movements </caption><tbody><tr><th>Name</th><th>Description</th><th>Cost
-        </th></tr><tr><td>Descending</td><td>You move down a vertical distance. This requires that you are somehow
-        @Identifier[ability:flying]{hovering in the air} of your own volition.</td><td>5 feet </td></tr></tbody></table>
+        default speed adjustments for different types of movement are as follows.</p><table><caption>Default Movement
+        Speed Adjustments </caption><tbody><tr><th>Move Type</th><th>Speed Adjustment </th></tr><tr><td>Walk
+        Speed</td><td>Normal </td></tr><tr><td>Difficult Terrain Speed</td><td>Half </td></tr><tr><td>Crawl
+        Speed</td><td>Quarter </td></tr><tr><td>Swim Speed</td><td>Quarter </td></tr><tr><td>Climb Speed</td><td>Quarter
+        </td></tr><tr><td>@Identifier[condition:hidden]{Hidden Speed}</td><td>Quarter </td></tr><tr><td>Leap Speed
+        (horizontal)</td><td>Quarter </td></tr><tr><td>Leap Speed (vertical)</td><td>None </td></tr><tr><td>Fly
+        Speed</td><td>None </td></tr><tr><td>Dig Speed</td><td>None </td></tr><tr><td>Dive Speed</td><td>None
+        </td></tr></tbody></table><h2>Special Movements</h2><p><b>Special movements</b> are the types of movement aren't
+        easily described as traversing some distance. Instead of having a rate, these have a fixed amount of movement
+        that they cost.</p><table><caption>Special Movements
+        </caption><tbody><tr><th>Name</th><th>Description</th><th>Cost </th></tr><tr><td>Descending</td><td>You move
+        down a vertical distance. This requires that you are somehow @Identifier[ability:flying]{hovering in the air} of
+        your own volition.</td><td>5 feet </td></tr></tbody></table>
     type: rule
   - _id: movement00000000
     _key: "!journal.pages!core000000000000.movement00000000"
@@ -2563,8 +2564,7 @@ pages:
       content: >-
         <p>A creature's movement (abbreviated as <b>MOV</b>) is a measure of how quickly it can move. By default, a
         creature's MOV is 0, but there are @Wiki[Category:MOV setting abilities]{various abilities that set it to
-        different values}.</p><table class="wikitable"><caption>Abilities that affect MOV
-        </caption><tbody><tr><th>Value</th><th>Ability
+        different values}.</p><table><caption>Abilities that affect MOV </caption><tbody><tr><th>Value</th><th>Ability
         </th></tr><tr><td>-3</td><td><ul><li>@Identifier[ability:stationary]{Stationary}</li></ul></td></tr><tr><td>-2</td><td><ul><li>@Identifier[ability:very-slow]{Very
         Slow}</li></ul></td></tr><tr><td>-1</td><td><ul><li>@Identifier[ability:slow]{Slow}</li></ul></td></tr><tr><td>0</td><td><ul><li>@Identifier[ability:normal-movement]{Normal
         Movement}</li></ul></td></tr><tr><td>+1</td><td><ul><li>@Identifier[ability:fast]{Fast}</li></ul></td></tr><tr><td>+2</td><td><ul><li>@Identifier[ability:swift]{Swift}</li></ul></td></tr><tr><td>+3</td><td><ul><li>@Identifier[ability:speed]{Speed}</li></ul></td></tr><tr><td>+4</td><td><ul><li>@Identifier[ability:super-speed]{Super
@@ -2577,22 +2577,21 @@ pages:
         movement, such as walking, leaping, swimming, climbing, and flying. The possible speed adjustments are double,
         normal, half, quarter, and none. Moving 5 feet at half speed uses 10 feet of movement, while moving 5 feet at
         double speed uses only 2.5 feet of movement. The following table summarizes the different movement speed
-        adjustments.</p><table class="wikitable"><caption>Movement Speed Adjustments
-        </caption><tbody><tr><th>Step</th><th>Speed Adjustment</th><th>Cost of Moving 5 Feet
-        </th></tr><tr><td>4</td><td>Double</td><td>2.5 feet </td></tr><tr><td>3</td><td>Normal</td><td>5 feet
-        </td></tr><tr><td>2</td><td>Half</td><td>10 feet </td></tr><tr><td>1</td><td>Quarter</td><td>20 feet
-        </td></tr><tr><td>0</td><td>None</td><td><i>Cannot move in this way at all</i></td></tr></tbody></table><p>The
-        default speed adjustments for different types of movement are as follows.</p><table
-        class="wikitable"><caption>Default Movement Speed Adjustments </caption><tbody><tr><th>Move Type</th><th>Speed
-        Adjustment </th></tr><tr><td>Walk Speed</td><td>Normal </td></tr><tr><td>Difficult Terrain Speed</td><td>Half
-        </td></tr><tr><td>Crawl Speed</td><td>Quarter </td></tr><tr><td>Swim Speed</td><td>Quarter
+        adjustments.</p><table><caption>Movement Speed Adjustments </caption><tbody><tr><th>Step</th><th>Speed
+        Adjustment</th><th>Cost of Moving 5 Feet </th></tr><tr><td>4</td><td>Double</td><td>2.5 feet
+        </td></tr><tr><td>3</td><td>Normal</td><td>5 feet </td></tr><tr><td>2</td><td>Half</td><td>10 feet
+        </td></tr><tr><td>1</td><td>Quarter</td><td>20 feet </td></tr><tr><td>0</td><td>None</td><td><i>Cannot move in
+        this way at all</i></td></tr></tbody></table><p>The default speed adjustments for different types of movement
+        are as follows.</p><table><caption>Default Movement Speed Adjustments </caption><tbody><tr><th>Move
+        Type</th><th>Speed Adjustment </th></tr><tr><td>Walk Speed</td><td>Normal </td></tr><tr><td>Difficult Terrain
+        Speed</td><td>Half </td></tr><tr><td>Crawl Speed</td><td>Quarter </td></tr><tr><td>Swim Speed</td><td>Quarter
         </td></tr><tr><td>Climb Speed</td><td>Quarter </td></tr><tr><td>@Identifier[condition:hidden]{Hidden
         Speed}</td><td>Quarter </td></tr><tr><td>Leap Speed (horizontal)</td><td>Quarter </td></tr><tr><td>Leap Speed
         (vertical)</td><td>None </td></tr><tr><td>Fly Speed</td><td>None </td></tr><tr><td>Dig Speed</td><td>None
         </td></tr><tr><td>Dive Speed</td><td>None </td></tr></tbody></table><h3>Special Movements</h3><p><b>Special
         movements</b> are the types of movement aren't easily described as traversing some distance. Instead of having a
-        @Identifier[core:movement-speed]{rate}, these have a fixed amount of movement that they cost.</p><table
-        class="wikitable"><caption>Special Movements </caption><tbody><tr><th>Name</th><th>Description</th><th>Cost
+        @Identifier[core:movement-speed]{rate}, these have a fixed amount of movement that they
+        cost.</p><table><caption>Special Movements </caption><tbody><tr><th>Name</th><th>Description</th><th>Cost
         </th></tr><tr><td>Descending</td><td>You move down a vertical distance. This requires that you are somehow
         @Identifier[ability:flying]{hovering in the air} of your own volition.</td><td>5 feet </td></tr></tbody></table>
     type: rule
@@ -2609,7 +2608,7 @@ pages:
       content: >-
         <p>A creature's perception (abbreviated as <b>PER</b>) is a measure of how perceptive they are about the world
         around them. By default, a creature's PER is 0, but there are @Wiki[Category:PER setting abilities]{various
-        abilities that set it to different values}.</p><table class="wikitable"><caption>Abilities that affect PER
+        abilities that set it to different values}.</p><table><caption>Abilities that affect PER
         </caption><tbody><tr><th>Value</th><th>Ability
         </th></tr><tr><td>-3</td><td><ul><li>@Identifier[ability:oblivious]{Oblivious}</li></ul></td></tr><tr><td>-2</td><td><ul><li>@Identifier[ability:unobservant]{Unobservant}</li></ul></td></tr><tr><td>-1</td><td><ul><li>@Identifier[ability:poor-perception]{Poor
         Perception}</li></ul></td></tr><tr><td>0</td><td><ul><li>@Identifier[ability:normal-perception]{Normal
@@ -2715,17 +2714,17 @@ pages:
         effects]{revived}, they release control over anything that is no longer on their person, freeing up the
         corresponding presence in the process. This includes @Pack[teriock.equipment]{equipment} that is no longer
         equipped, mounts that no longer with them, and so on.</p><p>The levels at which characters gain presence are
-        shown highlighted in the table below.</p><table class="wikitable"><caption>Bonuses By Level
-        </caption><tbody><tr><th>Rank </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior}
-        </th><th>@Identifier[archetype:semi]{Semi} </th><th>@Identifier[archetype:mage]{Mage}
-        </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus} </th><th>@Identifier[core:fluency-bonus]{Fluency
-        Bonus} </th><th>Presence Tier </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td
-        colspan="3">@Identifier[power:basic-abilities]{Basic abilities} </td><td rowspan="6">+0 </td><td rowspan="6">+1
-        </td><td style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)" rowspan="3">1
-        </td></tr><tr><td>2 </td><td colspan="3">@Identifier[core:proficiency-bonus]{Proficiency} in
-        @Identifier[power:basic-abilities]{basic abilities} </td></tr><tr><td>3 </td><td colspan="3">New
-        @Identifier[core:tradecrafts]{tradecraft} or @Identifier[core:tradecraft-fluencies]{tradecraft fluency}
-        </td></tr><tr><td style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)">4 </td><td
+        shown highlighted in the table below.</p><table><caption>Bonuses By Level </caption><tbody><tr><th>Rank
+        </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
+        </th><th>@Identifier[archetype:mage]{Mage} </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus}
+        </th><th>@Identifier[core:fluency-bonus]{Fluency Bonus} </th><th>Presence Tier </th></tr><tr><th rowspan="5">0
+        </th><td>1 </td><td colspan="3">@Identifier[power:basic-abilities]{Basic abilities} </td><td rowspan="6">+0
+        </td><td rowspan="6">+1 </td><td style="background-color:color-mix(in srgb, var(--color-warning) 10%,
+        transparent)" rowspan="3">1 </td></tr><tr><td>2 </td><td
+        colspan="3">@Identifier[core:proficiency-bonus]{Proficiency} in @Identifier[power:basic-abilities]{basic
+        abilities} </td></tr><tr><td>3 </td><td colspan="3">New @Identifier[core:tradecrafts]{tradecraft} or
+        @Identifier[core:tradecraft-fluencies]{tradecraft fluency} </td></tr><tr><td
+        style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)">4 </td><td
         style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)" colspan="3">+1 presence tier
         </td><td style="background-color:color-mix(in srgb, var(--color-warning) 10%, transparent)" rowspan="5">2
         </td></tr><tr><td>5 </td><td colspan="3">+6 HP ([[/roll 1d10]]) / +6 MP ([[/roll 1d10]]) </td></tr><tr><th
@@ -2801,7 +2800,7 @@ pages:
         @Identifier[core:armor-class]{maximum AV}. Unless otherwise noted, if you are proficient in an ability that
         provides some other ability, then that second ability has proficiency as well.</p><p>As a shorthand, your
         proficiency bonus may sometimes be written as "P".</p><p>The levels at which characters gain increased
-        Proficiency are shown highlighted in the table below.</p><table class="wikitable"><caption>Bonuses By Level
+        Proficiency are shown highlighted in the table below.</p><table><caption>Bonuses By Level
         </caption><tbody><tr><th>Rank </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior}
         </th><th>@Identifier[archetype:semi]{Semi} </th><th>@Identifier[archetype:mage]{Mage} </th><th>Proficiency Bonus
         </th><th>@Identifier[core:fluency-bonus]{Fluency Bonus} </th><th>@Identifier[core:presence]{Presence Tier}
@@ -3049,13 +3048,13 @@ pages:
       content: >-
         <p>A creature's sneak (abbreviated as <b>SNK</b>) is a measure of how stealthy it is. By default, a creature's
         SNK is determined by its @Identifier[core:size]{size}, but there are @Wiki[Category:SNK setting
-        abilities]{various abilities that set it to different values}.</p><table class="wikitable"><caption>Abilities
-        that affect SNK </caption><tbody><tr><th>Value</th><th>Ability
+        abilities]{various abilities that set it to different values}.</p><table><caption>Abilities that affect SNK
+        </caption><tbody><tr><th>Value</th><th>Ability
         </th></tr><tr><td>-3</td><td><ul><li>@Identifier[ability:lumbering]{Lumbering}</li></ul></td></tr><tr><td>-2</td><td><ul><li>@Identifier[ability:bumbling]{Bumbling}</li></ul></td></tr><tr><td>-1</td><td><ul><li>@Identifier[ability:clumsy]{Clumsy}</li></ul></td></tr><tr><td>0</td><td><ul><li>@Identifier[ability:normal-sneak]{Normal
         Sneak}</li></ul></td></tr><tr><td>+1</td><td><ul><li>@Identifier[ability:hitman]{Hitman}</li><li>@Identifier[ability:sneaky]{Sneaky}</li></ul></td></tr><tr><td>+2</td><td><ul><li>@Identifier[ability:furtive]{Furtive}</li><li>@Identifier[ability:hide]{Hide}</li></ul></td></tr><tr><td>+3</td><td><ul><li>@Identifier[ability:stealth]{Stealth}</li><li>@Identifier[ability:stealthy]{Stealthy}</li></ul></td></tr><tr><td>+4</td><td><ul><li>@Identifier[ability:elusive]{Elusive}</li></ul></td></tr><tr><td>+5</td><td><ul><li>@Identifier[ability:ghostlike]{Ghostlike}</li></ul></td></tr><tr><td>Proficiency</td><td><ul><li>@Identifier[ability:hide]{Hide}</li></ul></td></tr><tr><td>Fluency</td><td><ul><li>@Identifier[ability:stealth]{Stealth}</li></ul></td></tr></tbody></table><h2>SNK
         by SIZE</h2><p>If there's no @Wiki[Category:SNK setting abilities]{ability} that sets a creature's SNK, it is
-        determined by its @Identifier[core:size]{size} as follows.</p><table
-        class="wikitable"><tbody><tr><th>@Identifier[core:size]{size}</th><th>SNK </th></tr><tr><td>20+</td><td>-4
+        determined by its @Identifier[core:size]{size} as
+        follows.</p><table><tbody><tr><th>@Identifier[core:size]{size}</th><th>SNK </th></tr><tr><td>20+</td><td>-4
         </td></tr><tr><td>10 - 19</td><td>-3 </td></tr><tr><td>6 - 9</td><td>-2 </td></tr><tr><td>4 - 5</td><td>-1
         </td></tr><tr><td>3</td><td>0 </td></tr><tr><td>2</td><td>+1 </td></tr><tr><td>1</td><td>+2
         </td></tr><tr><td>½</td><td>+3 </td></tr><tr><td>¼</td><td>+4 </td></tr></tbody></table>
@@ -3112,42 +3111,41 @@ pages:
       content: >-
         <p>A creature's size affects how @Identifier[core:sneak]{sneaky} it is, how much it weighs, how far it can reach
         with its @Identifier[core:attack-interaction]{attacks}, and how much space it takes up on the battlefield. The
-        space it takes up is as follows.</p><table class="wikitable"><tbody><tr><th>Size</th><th>Size
-        Category</th><th>Space Taken Up</th><th>Reach </th></tr><tr><td>0 - ½</td><td>Tiny</td><td>2.5 × 2.5
-        feet</td><td>5 feet </td></tr><tr><td>1 - 2</td><td>Small</td><td>5 × 5 feet</td><td>5 feet </td></tr><tr><td>3
-        - 4</td><td>Medium</td><td>5 × 5 feet</td><td>5 feet </td></tr><tr><td>5 - 9</td><td>Large</td><td>10 × 10
-        feet</td><td>10 feet </td></tr><tr><td>10 - 14</td><td>Huge</td><td>15 × 15 feet</td><td>15 feet
-        </td></tr><tr><td>15 - 19</td><td>Massive</td><td>20 × 20 feet</td><td>20 feet </td></tr><tr><td>20 -
-        24</td><td>Gargantuan</td><td>25 × 25 feet</td><td>25 feet </td></tr><tr><td>25+</td><td>Colossal</td><td>30 ×
-        30 feet (or more)</td><td>30 feet (or more) </td></tr></tbody></table><h2>Weight</h2><p>A creature's weight is
-        determined by its size. Typically, it is equal to (3 + size)³ lb. However, there is some variation from creature
-        to creature. The actual weight could be anything from (3 + (size - 0.5))³ lb. to (3 + (size + 0.5))³ lb.
-        Creatures with a size of 0.5 typical have a weight of 15 lb. And those of size 0.25 have typically have a weight
-        of 0.002 lb. The complete values are given in the table below.</p><table class="wikitable"><caption>Weight
-        </caption><tbody><tr><th>size</th><th>Minimum Weight</th><th>Typical Weight</th><th>Maximum Weight
-        </th></tr><tr><td>0.25</td><td>0.001 lb.</td><td>0.5 lb.</td><td>1 lb. </td></tr><tr><td>0.5</td><td>1
-        lb.</td><td>15 lb.</td><td>43 lb. </td></tr><tr><td>1</td><td>43 lb.</td><td>64 lb.</td><td>91 lb.
-        </td></tr><tr><td>2</td><td>91 lb.</td><td>125 lb.</td><td>166 lb. </td></tr><tr><td>3</td><td>166
-        lb.</td><td>216 lb.</td><td>275 lb. </td></tr><tr><td>4</td><td>275 lb.</td><td>343 lb.</td><td>422 lb.
-        </td></tr><tr><td>5</td><td>422 lb.</td><td>512 lb.</td><td>614 lb. </td></tr><tr><td>6</td><td>614
-        lb.</td><td>729 lb.</td><td>857 lb. </td></tr><tr><td>7</td><td>857 lb.</td><td>1000 lb.</td><td>1158 lb.
-        </td></tr><tr><td>8</td><td>1158 lb.</td><td>1331 lb.</td><td>1521 lb. </td></tr><tr><td>9</td><td>1521
-        lb.</td><td>1728 lb.</td><td>1953 lb. </td></tr><tr><td>10</td><td>1953 lb.</td><td>2197 lb.</td><td>2460 lb.
-        </td></tr><tr><td>11</td><td>2460 lb.</td><td>2744 lb.</td><td>3049 lb. </td></tr><tr><td>12</td><td>3049
-        lb.</td><td>3375 lb.</td><td>3724 lb. </td></tr><tr><td>13</td><td>3724 lb.</td><td>4096 lb.</td><td>4492 lb.
-        </td></tr><tr><td>14</td><td>4492 lb.</td><td>4913 lb.</td><td>5359 lb. </td></tr><tr><td>15</td><td>5359
-        lb.</td><td>5832 lb.</td><td>6332 lb. </td></tr><tr><td>16</td><td>6332 lb.</td><td>6859 lb.</td><td>7415 lb.
-        </td></tr><tr><td>17</td><td>7415 lb.</td><td>8000 lb.</td><td>8615 lb. </td></tr><tr><td>18</td><td>8615
-        lb.</td><td>9261 lb.</td><td>9938 lb. </td></tr><tr><td>19</td><td>9938 lb.</td><td>10648 lb.</td><td>11391 lb.
-        </td></tr><tr><td>20</td><td>11391 lb.</td><td>12167 lb.</td><td>12978 lb. </td></tr><tr><td>21</td><td>12978
-        lb.</td><td>13824 lb.</td><td>14706 lb. </td></tr><tr><td>22</td><td>14706 lb.</td><td>15625 lb.</td><td>16581
-        lb. </td></tr><tr><td>23</td><td>16581 lb.</td><td>17576 lb.</td><td>18610 lb.
-        </td></tr><tr><td>24</td><td>18610 lb.</td><td>19683 lb.</td><td>20797 lb. </td></tr><tr><td>25</td><td>20797
-        lb.</td><td>21952 lb.</td><td>23149 lb. </td></tr><tr><td>26</td><td>23149 lb.</td><td>24389 lb.</td><td>25672
-        lb. </td></tr><tr><td>27</td><td>25672 lb.</td><td>27000 lb.</td><td>28373 lb.
-        </td></tr><tr><td>28</td><td>28373 lb.</td><td>29791 lb.</td><td>31256 lb. </td></tr><tr><td>29</td><td>31256
-        lb.</td><td>32768 lb.</td><td>34328 lb. </td></tr><tr><td>30</td><td>34328 lb.</td><td>35937 lb.</td><td>37595
-        lb. </td></tr></tbody></table>
+        space it takes up is as follows.</p><table><tbody><tr><th>Size</th><th>Size Category</th><th>Space Taken
+        Up</th><th>Reach </th></tr><tr><td>0 - ½</td><td>Tiny</td><td>2.5 × 2.5 feet</td><td>5 feet </td></tr><tr><td>1
+        - 2</td><td>Small</td><td>5 × 5 feet</td><td>5 feet </td></tr><tr><td>3 - 4</td><td>Medium</td><td>5 × 5
+        feet</td><td>5 feet </td></tr><tr><td>5 - 9</td><td>Large</td><td>10 × 10 feet</td><td>10 feet
+        </td></tr><tr><td>10 - 14</td><td>Huge</td><td>15 × 15 feet</td><td>15 feet </td></tr><tr><td>15 -
+        19</td><td>Massive</td><td>20 × 20 feet</td><td>20 feet </td></tr><tr><td>20 - 24</td><td>Gargantuan</td><td>25
+        × 25 feet</td><td>25 feet </td></tr><tr><td>25+</td><td>Colossal</td><td>30 × 30 feet (or more)</td><td>30 feet
+        (or more) </td></tr></tbody></table><h2>Weight</h2><p>A creature's weight is determined by its size. Typically,
+        it is equal to (3 + size)³ lb. However, there is some variation from creature to creature. The actual weight
+        could be anything from (3 + (size - 0.5))³ lb. to (3 + (size + 0.5))³ lb. Creatures with a size of 0.5 typical
+        have a weight of 15 lb. And those of size 0.25 have typically have a weight of 0.002 lb. The complete values are
+        given in the table below.</p><table><caption>Weight </caption><tbody><tr><th>size</th><th>Minimum
+        Weight</th><th>Typical Weight</th><th>Maximum Weight </th></tr><tr><td>0.25</td><td>0.001 lb.</td><td>0.5
+        lb.</td><td>1 lb. </td></tr><tr><td>0.5</td><td>1 lb.</td><td>15 lb.</td><td>43 lb.
+        </td></tr><tr><td>1</td><td>43 lb.</td><td>64 lb.</td><td>91 lb. </td></tr><tr><td>2</td><td>91 lb.</td><td>125
+        lb.</td><td>166 lb. </td></tr><tr><td>3</td><td>166 lb.</td><td>216 lb.</td><td>275 lb.
+        </td></tr><tr><td>4</td><td>275 lb.</td><td>343 lb.</td><td>422 lb. </td></tr><tr><td>5</td><td>422
+        lb.</td><td>512 lb.</td><td>614 lb. </td></tr><tr><td>6</td><td>614 lb.</td><td>729 lb.</td><td>857 lb.
+        </td></tr><tr><td>7</td><td>857 lb.</td><td>1000 lb.</td><td>1158 lb. </td></tr><tr><td>8</td><td>1158
+        lb.</td><td>1331 lb.</td><td>1521 lb. </td></tr><tr><td>9</td><td>1521 lb.</td><td>1728 lb.</td><td>1953 lb.
+        </td></tr><tr><td>10</td><td>1953 lb.</td><td>2197 lb.</td><td>2460 lb. </td></tr><tr><td>11</td><td>2460
+        lb.</td><td>2744 lb.</td><td>3049 lb. </td></tr><tr><td>12</td><td>3049 lb.</td><td>3375 lb.</td><td>3724 lb.
+        </td></tr><tr><td>13</td><td>3724 lb.</td><td>4096 lb.</td><td>4492 lb. </td></tr><tr><td>14</td><td>4492
+        lb.</td><td>4913 lb.</td><td>5359 lb. </td></tr><tr><td>15</td><td>5359 lb.</td><td>5832 lb.</td><td>6332 lb.
+        </td></tr><tr><td>16</td><td>6332 lb.</td><td>6859 lb.</td><td>7415 lb. </td></tr><tr><td>17</td><td>7415
+        lb.</td><td>8000 lb.</td><td>8615 lb. </td></tr><tr><td>18</td><td>8615 lb.</td><td>9261 lb.</td><td>9938 lb.
+        </td></tr><tr><td>19</td><td>9938 lb.</td><td>10648 lb.</td><td>11391 lb. </td></tr><tr><td>20</td><td>11391
+        lb.</td><td>12167 lb.</td><td>12978 lb. </td></tr><tr><td>21</td><td>12978 lb.</td><td>13824 lb.</td><td>14706
+        lb. </td></tr><tr><td>22</td><td>14706 lb.</td><td>15625 lb.</td><td>16581 lb.
+        </td></tr><tr><td>23</td><td>16581 lb.</td><td>17576 lb.</td><td>18610 lb. </td></tr><tr><td>24</td><td>18610
+        lb.</td><td>19683 lb.</td><td>20797 lb. </td></tr><tr><td>25</td><td>20797 lb.</td><td>21952 lb.</td><td>23149
+        lb. </td></tr><tr><td>26</td><td>23149 lb.</td><td>24389 lb.</td><td>25672 lb.
+        </td></tr><tr><td>27</td><td>25672 lb.</td><td>27000 lb.</td><td>28373 lb. </td></tr><tr><td>28</td><td>28373
+        lb.</td><td>29791 lb.</td><td>31256 lb. </td></tr><tr><td>29</td><td>31256 lb.</td><td>32768 lb.</td><td>34328
+        lb. </td></tr><tr><td>30</td><td>34328 lb.</td><td>35937 lb.</td><td>37595 lb. </td></tr></tbody></table>
     type: rule
   - _id: slowManeuvers000
     _key: "!journal.pages!core000000000000.slowManeuvers000"
@@ -3258,7 +3256,7 @@ pages:
       content: >-
         <p>A creature's strength (abbreviated as <b>STR</b>) is a measure of its capacity to lift and carry other
         objects. By default, a creature's STR is 0, but there are @Wiki[Category:STR setting abilities]{various
-        abilities that set it to different values}.</p><table class="wikitable"><caption>Abilities that affect STR
+        abilities that set it to different values}.</p><table><caption>Abilities that affect STR
         </caption><tbody><tr><th>Value</th><th>Ability
         </th></tr><tr><td>-3</td><td><ul><li>@Identifier[ability:no-strength]{No
         Strength}</li></ul></td></tr><tr><td>-2</td><td><ul><li>@Identifier[ability:tiny-strength]{Tiny
@@ -3278,21 +3276,20 @@ pages:
         and Battle
         Training}</li></ul></td></tr><tr><td>Fluency</td><td><ul><li>@Identifier[ability:warrior-stance]{Warrior
         Stance}</li></ul></td></tr></tbody></table><h2>Carrying Capacity</h2><p>How much a creature can lift and carry
-        is determined by its STR and @Identifier[core:size]{size}.</p><table class="wikitable"><caption>Carrying
-        Capacity Under Size 5 </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold
-        </th></tr><tr><td>65 + (20 × STR)</td><td>@Identifier[condition:encumbered]{Lightly Encumbered}
-        </td></tr><tr><td>130 + (40 × STR)</td><td>@Identifier[condition:encumbered]{Heavily Encumbered}
-        </td></tr><tr><td>195 + (60 × STR)</td><td>Cannot carry anything more </td></tr></tbody></table><table
-        class="wikitable"><caption>Carrying Capacity of Size 5 and Larger </caption><tbody><tr><th>Amount in
-        Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 × (STR + (@Identifier[core:size]{size} -
-        4)²))</td><td>@Identifier[condition:encumbered]{Lightly Encumbered} </td></tr><tr><td>130 + (40 × (STR +
-        (@Identifier[core:size]{size} - 4)²))</td><td>@Identifier[condition:encumbered]{Heavily Encumbered}
-        </td></tr><tr><td>195 + (60 × (STR + (@Identifier[core:size]{size} - 4)²))</td><td>Cannot carry anything more
-        </td></tr></tbody></table><p>A creature may also push, drag, or lift a weight in pounds up to twice their
-        carrying capacity. While pushing or dragging weight in excess of their carrying capacity, the creature's
-        @Identifier[core:movement-speed]{movement speed} drops to 5 feet. The amount a creature can carry without
-        becoming @Identifier[condition:encumbered]{encumbered} is shown in the table below.</p><table
-        class="wikitable"><caption>Lightly Encumbered Carrying Capacity
+        is determined by its STR and @Identifier[core:size]{size}.</p><table><caption>Carrying Capacity Under Size 5
+        </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65 + (20 ×
+        STR)</td><td>@Identifier[condition:encumbered]{Lightly Encumbered} </td></tr><tr><td>130 + (40 ×
+        STR)</td><td>@Identifier[condition:encumbered]{Heavily Encumbered} </td></tr><tr><td>195 + (60 ×
+        STR)</td><td>Cannot carry anything more </td></tr></tbody></table><table><caption>Carrying Capacity of Size 5
+        and Larger </caption><tbody><tr><th>Amount in Pounds</th><th>Effect Upon Hitting Threshold </th></tr><tr><td>65
+        + (20 × (STR + (@Identifier[core:size]{size} - 4)²))</td><td>@Identifier[condition:encumbered]{Lightly
+        Encumbered} </td></tr><tr><td>130 + (40 × (STR + (@Identifier[core:size]{size} -
+        4)²))</td><td>@Identifier[condition:encumbered]{Heavily Encumbered} </td></tr><tr><td>195 + (60 × (STR +
+        (@Identifier[core:size]{size} - 4)²))</td><td>Cannot carry anything more </td></tr></tbody></table><p>A creature
+        may also push, drag, or lift a weight in pounds up to twice their carrying capacity. While pushing or dragging
+        weight in excess of their carrying capacity, the creature's @Identifier[core:movement-speed]{movement speed}
+        drops to 5 feet. The amount a creature can carry without becoming @Identifier[condition:encumbered]{encumbered}
+        is shown in the table below.</p><table><caption>Lightly Encumbered Carrying Capacity
         </caption><tbody><tr><th>@Identifier[core:size]{Size}</th><th>STR = -3</th><th>STR = -2</th><th>STR =
         -1</th><th>STR = 0</th><th>STR = 1</th><th>STR = 2</th><th>STR = 3</th><th>STR = 4</th><th>STR = 5
         </th></tr><tr><td>1</td><td>5 lb.</td><td>25 lb.</td><td>45 lb.</td><td>65 lb.</td><td>85 lb.</td><td>105
@@ -3363,14 +3360,13 @@ pages:
         also get SB by using @Identifier[ability:aim]{Aim}. If an @Identifier[core:attack-interaction]{attack} would
         have SB from multiple sources, it still only gets a +@Identifier[core:proficiency-bonus]{P} bonus to hit.
         However, SB stacks with other bonuses, such as those granted by @Identifier[core:proficiency-bonus]{proficiency}
-        or @Identifier[keyword:armor-voiding]{AV0}.</p><table class="wikitable sortable"><tbody><tr><th>Style
-        </th><th>When it grants SB </th><th>What gets it </th></tr><tr><td>@Wiki[Property:Blunt Force Fighting
-        Style]{Blunt Force Fighting Style} </td><td>@Identifier[core:attack-interaction]{Attacking} with a
-        @Wiki[Category:Knockout effects]{knockout effect}. </td><td><div>@Identifier[equipment:battle-staff]{Battle
-        Staff}, @Identifier[equipment:rod]{Rod}, @Identifier[equipment:short-staff]{Short
-        Staff}</div></td></tr><tr><td>@Wiki[Property:Charging Fighting Style]{Charging Fighting Style}
-        </td><td>@Identifier[core:attack-interaction]{Attacking} a creature you moved at least 5 feet towards this
-        @Identifier[core:turns]{turn}. </td><td><div>@Identifier[body:bump]{Bump},
+        or @Identifier[keyword:armor-voiding]{AV0}.</p><table><tbody><tr><th>Style </th><th>When it grants SB
+        </th><th>What gets it </th></tr><tr><td>@Wiki[Property:Blunt Force Fighting Style]{Blunt Force Fighting Style}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} with a @Wiki[Category:Knockout effects]{knockout
+        effect}. </td><td><div>@Identifier[equipment:battle-staff]{Battle Staff}, @Identifier[equipment:rod]{Rod},
+        @Identifier[equipment:short-staff]{Short Staff}</div></td></tr><tr><td>@Wiki[Property:Charging Fighting
+        Style]{Charging Fighting Style} </td><td>@Identifier[core:attack-interaction]{Attacking} a creature you moved at
+        least 5 feet towards this @Identifier[core:turns]{turn}. </td><td><div>@Identifier[body:bump]{Bump},
         @Identifier[body:colossal-horn]{Colossal Horn}, @Identifier[body:goring-horn]{Goring Horn},
         @Identifier[body:horn]{Horn}, @Identifier[body:piercing-horn]{Piercing Horn},
         @Identifier[body:stabbing-horn]{Stabbing Horn}</div></td></tr><tr><td>@Wiki[Property:Gladiator Fighting
@@ -3416,18 +3412,18 @@ pages:
         @Identifier[condition:suffocating]{suffocating}, or @Identifier[condition:immobilized]{immobilized} creature.
         </td><td><div>@Identifier[body:air-tendril]{Air Tendril}, @Identifier[body:beak]{Beak},
         @Identifier[equipment:boomerang]{Boomerang}, @Identifier[equipment:brass-knuckles]{Brass Knuckles},
-        @Identifier[equipment:chain]{Chain}, @Identifier[body:claw]{Claw}, @Identifier[equipment:crowbar]{Crowbar},
-        @Identifier[body:crushing-beak]{Crushing Beak}, @Identifier[body:crushing-jaw]{Crushing Jaw},
-        @Identifier[body:devouring-beak]{Devouring Beak}, @Identifier[body:devouring-maw]{Devouring Maw},
-        @Identifier[body:earth-tendril]{Earth Tendril}, @Identifier[body:fanged-jaw]{Fanged Jaw},
-        @Identifier[body:ferocious-beak]{Ferocious Beak}, @Identifier[body:ferocious-jaw]{Ferocious Jaw},
-        @Identifier[body:fire-tendril]{Fire Tendril}, @Identifier[equipment:glove-claw]{Glove Claw},
-        @Identifier[equipment:hammer]{Hammer}, @Identifier[equipment:hook-hand]{Hook Hand}, @Identifier[body:jaw]{Jaw},
-        @Identifier[body:mouth]{Mouth}, @Identifier[body:nipper]{Nipper}, @Identifier[equipment:nunchucks]{Nunchucks},
-        @Identifier[body:paw]{Paw}, @Identifier[body:pecker]{Pecker}, @Identifier[body:pincer]{Pincer},
-        @Identifier[equipment:pipe]{Pipe}, @Identifier[body:prehensile-claw]{Prehensile Claw},
-        @Identifier[body:prehensile-rending-claw]{Prehensile Rending Claw},
-        @Identifier[body:prehensile-ripping-claw]{Prehensile Ripping Claw},
+        @Identifier[equipment:chain]{Chain}, @Identifier[body:claw]{Claw}, @Identifier[equipment:cleaver]{Cleaver},
+        @Identifier[equipment:crowbar]{Crowbar}, @Identifier[body:crushing-beak]{Crushing Beak},
+        @Identifier[body:crushing-jaw]{Crushing Jaw}, @Identifier[body:devouring-beak]{Devouring Beak},
+        @Identifier[body:devouring-maw]{Devouring Maw}, @Identifier[body:earth-tendril]{Earth Tendril},
+        @Identifier[body:fanged-jaw]{Fanged Jaw}, @Identifier[body:ferocious-beak]{Ferocious Beak},
+        @Identifier[body:ferocious-jaw]{Ferocious Jaw}, @Identifier[body:fire-tendril]{Fire Tendril},
+        @Identifier[equipment:glove-claw]{Glove Claw}, @Identifier[equipment:hammer]{Hammer},
+        @Identifier[equipment:hook-hand]{Hook Hand}, @Identifier[body:jaw]{Jaw}, @Identifier[body:mouth]{Mouth},
+        @Identifier[body:nipper]{Nipper}, @Identifier[equipment:nunchucks]{Nunchucks}, @Identifier[body:paw]{Paw},
+        @Identifier[body:pecker]{Pecker}, @Identifier[body:pincer]{Pincer}, @Identifier[equipment:pipe]{Pipe},
+        @Identifier[body:prehensile-claw]{Prehensile Claw}, @Identifier[body:prehensile-rending-claw]{Prehensile Rending
+        Claw}, @Identifier[body:prehensile-ripping-claw]{Prehensile Ripping Claw},
         @Identifier[body:prehensile-savage-claw]{Prehensile Savage Claw},
         @Identifier[body:prehensile-sharp-claw]{Prehensile Sharp Claw}, @Identifier[body:rending-claw]{Rending Claw},
         @Identifier[body:rending-pincer]{Rending Pincer}, @Identifier[body:ripping-claw]{Ripping Claw},
@@ -3435,8 +3431,12 @@ pages:
         @Identifier[body:savage-pincer]{Savage Pincer}, @Identifier[equipment:saw]{Saw},
         @Identifier[equipment:scythe]{Scythe}, @Identifier[body:shadow-tendril]{Shadow Tendril},
         @Identifier[body:sharp-beak]{Sharp Beak}, @Identifier[body:sharp-claw]{Sharp Claw},
-        @Identifier[body:sharp-pincer]{Sharp Pincer}, @Identifier[equipment:sickle]{Sickle},
-        @Identifier[body:water-tendril]{Water Tendril}</div></td></tr><tr><td>@Wiki[Property:Sniper Fighting
+        @Identifier[body:sharp-pincer]{Sharp Pincer}, @Identifier[equipment:shears]{Shears},
+        @Identifier[equipment:sickle]{Sickle}, @Identifier[body:water-tendril]{Water
+        Tendril}</div></td></tr><tr><td>@Wiki[Property:Shurikenjutsu Fighting Style]{Shurikenjutsu Fighting Style}
+        </td><td>@Identifier[core:attack-interaction]{Attacking} on another creature's @Identifier[core:turns]{turn}
+        while @Identifier[condition:hidden]{hidden}.
+        </td><td><div>@Identifier[equipment:shuriken]{Shuriken}</div></td></tr><tr><td>@Wiki[Property:Sniper Fighting
         Style]{Sniper Fighting Style} </td><td>@Identifier[core:attack-interaction]{Attacking} on your
         @Identifier[core:turns]{turn} if you have not @Identifier[ability:move]{moved} since the end of your last
         @Identifier[core:turns]{turn} and will have no actions remaining after this
@@ -3483,7 +3483,7 @@ pages:
       img: systems/teriock/src/icons/core-rules/targets.webp
     text:
       content: >-
-        <p>An ability's <b>target</b> type determines what kinds of things can be affected by the Ability. Some of the
+        <p>An ability's <b>target</b> type determines what kinds of things can be affected by the ability. Some of the
         most common ones are listed here.</p><h3>Creature</h3><p>Abilities that target
         @Pack[teriock.creatures]{creatures} affect some sort of being. A "creature" doesn't necessarily have to be an
         @Wiki[Category:Animal creatures]{animal}, it may be an animated statue or a sentient @Wiki[Category:Plant
@@ -3542,8 +3542,8 @@ pages:
         @Identifier[core:game-master]{GM} may also tailor the results of your check with regards to your
         fluency.</p><p>The levels at which characters gain
         @UUID[Compendium.teriock.rules.JournalEntry.tradecraft000000]{tradecrafts} and fluencies are shown highlighted
-        in the table below.</p><table class="wikitable"><caption>Bonuses By Level </caption><tbody><tr><th>Rank
-        </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
+        in the table below.</p><table><caption>Bonuses By Level </caption><tbody><tr><th>Rank </th><th>Level
+        </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
         </th><th>@Identifier[archetype:mage]{Mage} </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus}
         </th><th>@Identifier[core:fluency-bonus]{Fluency Bonus} </th><th>@Identifier[core:presence]{Presence Tier}
         </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td colspan="3">@Identifier[power:basic-abilities]{Basic
@@ -3665,8 +3665,8 @@ pages:
         instead of your @Identifier[core:proficiency-bonus]{proficiency bonus} (P) to the roll. The
         @Identifier[core:game-master]{GM} may also tailor the results of your check with regards to your
         fluency.</p><p>The levels at which characters gain tradecrafts and tradecraft fluencies are shown highlighted in
-        the table below.</p><table class="wikitable"><caption>Bonuses By Level </caption><tbody><tr><th>Rank
-        </th><th>Level </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
+        the table below.</p><table><caption>Bonuses By Level </caption><tbody><tr><th>Rank </th><th>Level
+        </th><th>@Identifier[archetype:warrior]{Warrior} </th><th>@Identifier[archetype:semi]{Semi}
         </th><th>@Identifier[archetype:mage]{Mage} </th><th>@Identifier[core:proficiency-bonus]{Proficiency Bonus}
         </th><th>@Identifier[core:fluency-bonus]{Fluency Bonus} </th><th>@Identifier[core:presence]{Presence Tier}
         </th></tr><tr><th rowspan="5">0 </th><td>1 </td><td colspan="3">@Identifier[power:basic-abilities]{Basic
@@ -3727,11 +3727,11 @@ pages:
         1d8]]) / +7 MP ([[/roll 1d12]]) </td></tr></tbody></table><h2>List of Tradecrafts</h2><p>What follows are the
         main tradecrafts that are available in <a target="_blank" rel="nofollow noreferrer noopener" class="external
         text" href="https://www.teriock.com/">Teriock</a> Online. The @Identifier[core:game-master]{GM} will typically
-        pick checks that correspond to one of these.</p><h3>Artisan Tradecrafts</h3><table
-        class="wikitable"><tbody><tr><th>Tradecraft </th><th>Description
-        </th></tr><tr><td>@Identifier[tradecraft:artist]{Artist} </td><td>Artist checks can be used to create and
-        evaluate works of art. </td></tr><tr><td>@Identifier[tradecraft:blacksmith]{Blacksmith} </td><td>Blacksmith
-        checks can be used to forge @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor},
+        pick checks that correspond to one of these.</p><h3>Artisan Tradecrafts</h3><table><tbody><tr><th>Tradecraft
+        </th><th>Description </th></tr><tr><td>@Identifier[tradecraft:artist]{Artist} </td><td>Artist checks can be used
+        to create and evaluate works of art. </td></tr><tr><td>@Identifier[tradecraft:blacksmith]{Blacksmith}
+        </td><td>Blacksmith checks can be used to forge
+        @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor},
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}, and other metal goods. It can also be used
         to understand the make and quality of metal @Pack[teriock.equipment]{items}.
         </td></tr><tr><td>@Identifier[tradecraft:builder]{Builder} </td><td>Builder checks can be used to build and
@@ -3744,8 +3744,8 @@ pages:
         ships and how to repair them. </td></tr><tr><td>@Identifier[tradecraft:tailor]{Tailor} </td><td>Tailor checks
         can be used to sew and repair @UUID[Compendium.teriock.tables.RollTable.b75bd9b799785f73]{clothing} and other
         cloth @Pack[teriock.equipment]{items}. It can also be used to understand the make and quality of cloth
-        @Pack[teriock.equipment]{items}. </td></tr></tbody></table><h3>Mediator Tradecrafts</h3><table
-        class="wikitable"><tbody><tr><th>Tradecraft </th><th>Description
+        @Pack[teriock.equipment]{items}. </td></tr></tbody></table><h3>Mediator
+        Tradecrafts</h3><table><tbody><tr><th>Tradecraft </th><th>Description
         </th></tr><tr><td>@Identifier[tradecraft:courtier]{Courtier} </td><td>Courtier checks can be used to befriend,
         manipulate, and deceive, and adjust the attitudes of other cratures.
         </td></tr><tr><td>@Identifier[tradecraft:enforcer]{Enforcer} </td><td>Enforcer checks can be used to intimidate
@@ -3759,21 +3759,21 @@ pages:
         entertain, and distract other creatures. It can also be used to recognize or evaluate the quality of
         performances. </td></tr><tr><td>@Identifier[tradecraft:trader]{Trader} </td><td>Trader checks can be used to
         make deals with other creatures and find opportunities to trade that wouldn't otherwise be available.
-        </td></tr></tbody></table><h3>Scholarly Tradecrafts</h3><table class="wikitable"><tbody><tr><th>Tradecraft
-        </th><th>Description </th></tr><tr><td>@Identifier[tradecraft:cartographer]{Cartographer} </td><td>Cartographer
-        checks can be used to navigate and read or make <a target="_blank" rel="nofollow noreferrer noopener"
-        class="external text" href="https://map.teriock.com/">maps</a>.
-        </td></tr><tr><td>@Identifier[tradecraft:diplomat]{Diplomat} </td><td>Diplomat checks can be used to understand
-        the law and navigate the political landscape. </td></tr><tr><td>@Identifier[tradecraft:historian]{Historian}
-        </td><td>Historian checks can be used to research and understand past events as well as the people, places, and
-        items associated with them. </td></tr><tr><td>@Identifier[tradecraft:messenger]{Messenger} </td><td>Messenger
-        checks can be used to recall words, phrases, and other information you have encountered previously.
+        </td></tr></tbody></table><h3>Scholarly Tradecrafts</h3><table><tbody><tr><th>Tradecraft </th><th>Description
+        </th></tr><tr><td>@Identifier[tradecraft:cartographer]{Cartographer} </td><td>Cartographer checks can be used to
+        navigate and read or make <a target="_blank" rel="nofollow noreferrer noopener" class="external text"
+        href="https://map.teriock.com/">maps</a>. </td></tr><tr><td>@Identifier[tradecraft:diplomat]{Diplomat}
+        </td><td>Diplomat checks can be used to understand the law and navigate the political landscape.
+        </td></tr><tr><td>@Identifier[tradecraft:historian]{Historian} </td><td>Historian checks can be used to research
+        and understand past events as well as the people, places, and items associated with them.
+        </td></tr><tr><td>@Identifier[tradecraft:messenger]{Messenger} </td><td>Messenger checks can be used to recall
+        words, phrases, and other information you have encountered previously.
         </td></tr><tr><td>@Identifier[tradecraft:priest]{Priest} </td><td>Priest checks can be used to tend shrines or
         temples and understand theology. </td></tr><tr><td>@Identifier[tradecraft:scribe]{Scribe} </td><td>Scribe checks
         can be used to speak, read, and write in Common or other languages.
         </td></tr><tr><td>@Identifier[tradecraft:teacher]{Teacher} </td><td>Teacher checks can be used to train others
-        and share your knowledge. </td></tr></tbody></table><h3>Survivalist Tradecrafts</h3><table
-        class="wikitable"><tbody><tr><th>Tradecraft </th><th>Description
+        and share your knowledge. </td></tr></tbody></table><h3>Survivalist
+        Tradecrafts</h3><table><tbody><tr><th>Tradecraft </th><th>Description
         </th></tr><tr><td>@Identifier[tradecraft:farmer]{Farmer} </td><td>Farmer checks can be used to grow and tend
         crops or gardens to produce food. It can also be used to recognize edible plants.
         </td></tr><tr><td>@Identifier[tradecraft:herbalist]{Herbalist} </td><td>Herbalist checks can be used to gather
@@ -3787,8 +3787,8 @@ pages:
         </td></tr><tr><td>@Identifier[tradecraft:tamer]{Tamer} </td><td>Tamer checks can be used to tame, calm, or rile
         up wild and domesticated animals. It can also be used to intuit an animal's intentions.
         </td></tr><tr><td>@Identifier[tradecraft:tracker]{Tracker} </td><td>Tracker checks can be used to find your way
-        in the wild and follow or evade others. </td></tr></tbody></table><h3>Prestige Tradecrafts</h3><table
-        class="wikitable"><tbody><tr><th>Tradecraft </th><th>Description
+        in the wild and follow or evade others. </td></tr></tbody></table><h3>Prestige
+        Tradecrafts</h3><table><tbody><tr><th>Tradecraft </th><th>Description
         </th></tr><tr><td>@Identifier[tradecraft:metaphysicist]{Metaphysicist} </td><td>Metaphysicist checks can be used
         to recognize and interpret arcane features of the world. Although this tradecraft may often come up, it is not
         standardly learnable. </td></tr><tr><td>@Identifier[tradecraft:tinkerer]{Tinkerer} </td><td>Tinkerer checks can
@@ -3861,31 +3861,31 @@ pages:
         @Identifier[core:size]{size})³ lb. However, there is some variation from creature to creature. The actual weight
         could be anything from (3 + (@Identifier[core:size]{size} - 0.5))³ lb. to (3 + (@Identifier[core:size]{size} +
         0.5))³ lb. Creatures with a size of 0.5 typical have a weight of 15 lb. And those of size 0.25 have typically
-        have a weight of 0.002 lb. The complete values are given in the table below.</p><table
-        class="wikitable"><caption>Weight </caption><tbody><tr><th>@Identifier[core:size]{size}</th><th>Minimum
-        Weight</th><th>Typical Weight</th><th>Maximum Weight </th></tr><tr><td>0.25</td><td>0.001 lb.</td><td>0.5
-        lb.</td><td>1 lb. </td></tr><tr><td>0.5</td><td>1 lb.</td><td>15 lb.</td><td>43 lb.
-        </td></tr><tr><td>1</td><td>43 lb.</td><td>64 lb.</td><td>91 lb. </td></tr><tr><td>2</td><td>91 lb.</td><td>125
-        lb.</td><td>166 lb. </td></tr><tr><td>3</td><td>166 lb.</td><td>216 lb.</td><td>275 lb.
-        </td></tr><tr><td>4</td><td>275 lb.</td><td>343 lb.</td><td>422 lb. </td></tr><tr><td>5</td><td>422
-        lb.</td><td>512 lb.</td><td>614 lb. </td></tr><tr><td>6</td><td>614 lb.</td><td>729 lb.</td><td>857 lb.
-        </td></tr><tr><td>7</td><td>857 lb.</td><td>1000 lb.</td><td>1158 lb. </td></tr><tr><td>8</td><td>1158
-        lb.</td><td>1331 lb.</td><td>1521 lb. </td></tr><tr><td>9</td><td>1521 lb.</td><td>1728 lb.</td><td>1953 lb.
-        </td></tr><tr><td>10</td><td>1953 lb.</td><td>2197 lb.</td><td>2460 lb. </td></tr><tr><td>11</td><td>2460
-        lb.</td><td>2744 lb.</td><td>3049 lb. </td></tr><tr><td>12</td><td>3049 lb.</td><td>3375 lb.</td><td>3724 lb.
-        </td></tr><tr><td>13</td><td>3724 lb.</td><td>4096 lb.</td><td>4492 lb. </td></tr><tr><td>14</td><td>4492
-        lb.</td><td>4913 lb.</td><td>5359 lb. </td></tr><tr><td>15</td><td>5359 lb.</td><td>5832 lb.</td><td>6332 lb.
-        </td></tr><tr><td>16</td><td>6332 lb.</td><td>6859 lb.</td><td>7415 lb. </td></tr><tr><td>17</td><td>7415
-        lb.</td><td>8000 lb.</td><td>8615 lb. </td></tr><tr><td>18</td><td>8615 lb.</td><td>9261 lb.</td><td>9938 lb.
-        </td></tr><tr><td>19</td><td>9938 lb.</td><td>10648 lb.</td><td>11391 lb. </td></tr><tr><td>20</td><td>11391
-        lb.</td><td>12167 lb.</td><td>12978 lb. </td></tr><tr><td>21</td><td>12978 lb.</td><td>13824 lb.</td><td>14706
-        lb. </td></tr><tr><td>22</td><td>14706 lb.</td><td>15625 lb.</td><td>16581 lb.
-        </td></tr><tr><td>23</td><td>16581 lb.</td><td>17576 lb.</td><td>18610 lb. </td></tr><tr><td>24</td><td>18610
-        lb.</td><td>19683 lb.</td><td>20797 lb. </td></tr><tr><td>25</td><td>20797 lb.</td><td>21952 lb.</td><td>23149
-        lb. </td></tr><tr><td>26</td><td>23149 lb.</td><td>24389 lb.</td><td>25672 lb.
-        </td></tr><tr><td>27</td><td>25672 lb.</td><td>27000 lb.</td><td>28373 lb. </td></tr><tr><td>28</td><td>28373
-        lb.</td><td>29791 lb.</td><td>31256 lb. </td></tr><tr><td>29</td><td>31256 lb.</td><td>32768 lb.</td><td>34328
-        lb. </td></tr><tr><td>30</td><td>34328 lb.</td><td>35937 lb.</td><td>37595 lb. </td></tr></tbody></table>
+        have a weight of 0.002 lb. The complete values are given in the table below.</p><table><caption>Weight
+        </caption><tbody><tr><th>@Identifier[core:size]{size}</th><th>Minimum Weight</th><th>Typical
+        Weight</th><th>Maximum Weight </th></tr><tr><td>0.25</td><td>0.001 lb.</td><td>0.5 lb.</td><td>1 lb.
+        </td></tr><tr><td>0.5</td><td>1 lb.</td><td>15 lb.</td><td>43 lb. </td></tr><tr><td>1</td><td>43 lb.</td><td>64
+        lb.</td><td>91 lb. </td></tr><tr><td>2</td><td>91 lb.</td><td>125 lb.</td><td>166 lb.
+        </td></tr><tr><td>3</td><td>166 lb.</td><td>216 lb.</td><td>275 lb. </td></tr><tr><td>4</td><td>275
+        lb.</td><td>343 lb.</td><td>422 lb. </td></tr><tr><td>5</td><td>422 lb.</td><td>512 lb.</td><td>614 lb.
+        </td></tr><tr><td>6</td><td>614 lb.</td><td>729 lb.</td><td>857 lb. </td></tr><tr><td>7</td><td>857
+        lb.</td><td>1000 lb.</td><td>1158 lb. </td></tr><tr><td>8</td><td>1158 lb.</td><td>1331 lb.</td><td>1521 lb.
+        </td></tr><tr><td>9</td><td>1521 lb.</td><td>1728 lb.</td><td>1953 lb. </td></tr><tr><td>10</td><td>1953
+        lb.</td><td>2197 lb.</td><td>2460 lb. </td></tr><tr><td>11</td><td>2460 lb.</td><td>2744 lb.</td><td>3049 lb.
+        </td></tr><tr><td>12</td><td>3049 lb.</td><td>3375 lb.</td><td>3724 lb. </td></tr><tr><td>13</td><td>3724
+        lb.</td><td>4096 lb.</td><td>4492 lb. </td></tr><tr><td>14</td><td>4492 lb.</td><td>4913 lb.</td><td>5359 lb.
+        </td></tr><tr><td>15</td><td>5359 lb.</td><td>5832 lb.</td><td>6332 lb. </td></tr><tr><td>16</td><td>6332
+        lb.</td><td>6859 lb.</td><td>7415 lb. </td></tr><tr><td>17</td><td>7415 lb.</td><td>8000 lb.</td><td>8615 lb.
+        </td></tr><tr><td>18</td><td>8615 lb.</td><td>9261 lb.</td><td>9938 lb. </td></tr><tr><td>19</td><td>9938
+        lb.</td><td>10648 lb.</td><td>11391 lb. </td></tr><tr><td>20</td><td>11391 lb.</td><td>12167 lb.</td><td>12978
+        lb. </td></tr><tr><td>21</td><td>12978 lb.</td><td>13824 lb.</td><td>14706 lb.
+        </td></tr><tr><td>22</td><td>14706 lb.</td><td>15625 lb.</td><td>16581 lb. </td></tr><tr><td>23</td><td>16581
+        lb.</td><td>17576 lb.</td><td>18610 lb. </td></tr><tr><td>24</td><td>18610 lb.</td><td>19683 lb.</td><td>20797
+        lb. </td></tr><tr><td>25</td><td>20797 lb.</td><td>21952 lb.</td><td>23149 lb.
+        </td></tr><tr><td>26</td><td>23149 lb.</td><td>24389 lb.</td><td>25672 lb. </td></tr><tr><td>27</td><td>25672
+        lb.</td><td>27000 lb.</td><td>28373 lb. </td></tr><tr><td>28</td><td>28373 lb.</td><td>29791 lb.</td><td>31256
+        lb. </td></tr><tr><td>29</td><td>31256 lb.</td><td>32768 lb.</td><td>34328 lb.
+        </td></tr><tr><td>30</td><td>34328 lb.</td><td>35937 lb.</td><td>37595 lb. </td></tr></tbody></table>
     type: rule
   - _id: falling000000000
     _key: "!journal.pages!core000000000000.falling000000000"
@@ -3936,7 +3936,7 @@ pages:
     name: Ball Delivery Package
     system:
       identifier: ball-delivery-package
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/ball-delivery-package.webp
     text:
       content: >-
         <p>A <b>ball</b> is a @Identifier[keyword:unblockable]{UB} @Identifier[core:missile-delivery]{missile
@@ -3950,7 +3950,7 @@ pages:
     name: Executor
     system:
       identifier: executor
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/executor.webp
     text:
       content: <p>The <b>executor</b> (or user) of an @Pack[teriock.abilities]{ability} is the creature that executes it.</p>
     type: rule
@@ -3963,7 +3963,7 @@ pages:
     name: Ray Delivery Package
     system:
       identifier: ray-delivery-package
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/ray-delivery-package.webp
     text:
       content: >-
         <p>A <b>ray</b> is an @Identifier[keyword:armor-voiding]{AV0} @Identifier[core:missile-delivery]{missile
@@ -3978,7 +3978,7 @@ pages:
     name: Strike Delivery Package
     system:
       identifier: strike-delivery-package
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/strike-delivery-package.webp
     text:
       content: >-
         <p>A <b>strike</b> is a @Identifier[core:item-delivery]{weapon delivery}
@@ -3993,7 +3993,7 @@ pages:
     name: Touch Delivery Package
     system:
       identifier: touch-delivery-package
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/touch-delivery-package.webp
     text:
       content: <p>A <b>touch</b> is a @Identifier[keyword:unblockable]{UB} @Identifier[core:hand-delivery]{hand delivery}.</p>
     type: rule
@@ -4005,7 +4005,7 @@ pages:
     name: Deliveries
     system:
       identifier: deliveries
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/deliveries.webp
     text:
       content: >-
         <p>Every @Pack[teriock.abilities]{ability} has one and <i>only one</i><b>delivery</b>. This always has at least
@@ -4087,7 +4087,7 @@ pages:
     name: Difficulty Class
     system:
       identifier: difficulty-class
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: icons/sundries/gaming/gaming-set-dice.webp
     text:
       content: >-
         <p>A <b>difficulty class</b> (or <b>DC</b>) is a numerical threshold that a [[/roll d20]] roll such as a
@@ -4108,12 +4108,12 @@ pages:
     name: Passive Attributes
     system:
       identifier: passive-attributes
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/passive-attributes.webp
     text:
       content: >-
         <p>For each @Identifier[core:attributes]{attribute}, there is an associated <b>passive attribute</b> value that
-        is often used in cases where the attribute in question is relevant, but no check is being done.</p><table
-        class="wikitable"><caption>Passive Attributes </caption><tbody><tr><th>Passive Attribute</th><th>Value
+        is often used in cases where the attribute in question is relevant, but no check is being
+        done.</p><table><caption>Passive Attributes </caption><tbody><tr><th>Passive Attribute</th><th>Value
         </th></tr><tr><td>Passive @Identifier[core:intelligence]{intelligence}</td><td>10 + 2 ×
         @Identifier[core:intelligence]{INT} </td></tr><tr><td>Passive @Identifier[core:strength]{strength}</td><td>10 +
         2 × @Identifier[core:strength]{STR} </td></tr><tr><td>Passive @Identifier[core:movement]{movement}</td><td>10 +
@@ -4129,26 +4129,27 @@ pages:
     name: Price
     system:
       identifier: price
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/price.webp
     text:
       content: >-
         <p>The <b>price</b> of different goods, services, and @Pack[teriock.equipment]{equipment} is typically denoted
         in "[[gp]]" (which stands for "gold pieces" or "gold piece equivalent"). But this does not mean everything is
         bought and sold using gold coins. There are numerous currencies that all have different [[gp]]
-        values.</p><h2>Currencies</h2><table class="wikitable sortable"><tbody><tr><th>Currency </th><th>Value
-        </th><th>Weight </th><th>Type </th></tr><tr><td>Copper </td><td>[[gp 0.01]] </td><td>0.02 lb.
-        </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Silver </td><td>[[gp 0.1]] </td><td>0.02 lb.
-        </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Gold </td><td>[[gp 1]] </td><td>0.02 lb.
-        </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Ent Tear Amber </td><td>[[gp 5]] </td><td>0.05 lb.
-        </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Fire Eye Ruby </td><td>[[gp 10]]
-        </td><td>0.05 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Pixie Plum Amethyst
-        </td><td>[[gp 20]] </td><td>0.1 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Snow
-        Diamond </td><td>[[gp 50]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
-        </td></tr><tr><td>Dragon Emerald </td><td>[[gp 100]] </td><td>0.2 lb.
-        </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Moon Opal </td><td>[[gp 500]] </td><td>0.2
-        lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Magus Quartz </td><td>[[gp 1000]]
-        </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Heartstone Ruby
-        </td><td>[[gp 5000]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
+        values.</p><h2>Currencies</h2><table><tbody><tr><th>Currency </th><th>Symbol </th><th>Value </th><th>Weight
+        </th><th>Type </th></tr><tr><td>Copper </td><td>CP </td><td>[[gp 0.01]] </td><td>0.02 lb.
+        </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Silver </td><td>SP </td><td>[[gp 0.1]]
+        </td><td>0.02 lb. </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Gold </td><td>GP </td><td>[[gp
+        1]] </td><td>0.02 lb. </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Ent Tear Amber </td><td>EA
+        </td><td>[[gp 5]] </td><td>0.05 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Fire
+        Eye Ruby </td><td>FR </td><td>[[gp 10]] </td><td>0.05 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
+        </td></tr><tr><td>Pixie Plum Amethyst </td><td>PA </td><td>[[gp 20]] </td><td>0.1 lb.
+        </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Snow Diamond </td><td>SD </td><td>[[gp 50]]
+        </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Dragon Emerald </td><td>DE
+        </td><td>[[gp 100]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Moon
+        Opal </td><td>MO </td><td>[[gp 500]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
+        </td></tr><tr><td>Magus Quartz </td><td>MQ </td><td>[[gp 1000]] </td><td>0.2 lb.
+        </td><td>@Identifier[equipment:gemstone]{Gemstone} </td></tr><tr><td>Heartstone Ruby </td><td>HR </td><td>[[gp
+        5000]] </td><td>0.2 lb. </td><td>@Identifier[equipment:gemstone]{Gemstone}
         </td></tr></tbody></table><h2>Property Prices</h2><p>Many types of @Pack[teriock.equipment]{equipment} have a
         listed price. This does not mean that every piece of @Pack[teriock.equipment]{equipment} of that type costs that
         much. Rather, it is a baseline price for the most basic form of that @Pack[teriock.equipment]{equipment} without
@@ -4164,21 +4165,21 @@ pages:
         from certain specialty dealers.</p><p>In most cases, multiple @Pack[teriock.properties]{properties} can be added
         to the same @Pack[teriock.equipment]{item} and the total price can be determined by multiplying all the
         multipliers together. But @Wiki[Category:Material properties]{material properties} are typically compatible and
-        cannot be added to the same @Pack[teriock.equipment]{item}.</p><table class="wikitable
-        sortable"><tbody><tr><th>Property </th><th>Price Multiplier </th><th>Restrictions
-        </th></tr><tr><td>@Identifier[property:fragile]{Fragile} </td><td>×0.5 </td><td>Crafted
-        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:magelore]{Magelore} </td><td>×2
+        cannot be added to the same @Pack[teriock.equipment]{item}.</p><table><tbody><tr><th>Property </th><th>Price
+        Multiplier </th><th>Restrictions </th></tr><tr><td>@Identifier[property:fragile]{Fragile} </td><td>×0.5
         </td><td>Crafted @Pack[teriock.equipment]{equipment} only.
-        </td></tr><tr><td>@Identifier[property:master-crafted]{Master Crafted} </td><td>×2 </td><td>Crafted
-        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:runic]{Runic} </td><td>×2
-        </td><td>Crafted @Pack[teriock.equipment]{equipment} only.
-        </td></tr><tr><td>@Identifier[property:silver]{Silver} </td><td>×2 </td><td>Crafted metallic
-        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:bejeweled]{Bejeweled}
-        </td><td>×4 </td><td>Crafted @Pack[teriock.equipment]{equipment} only.
-        </td></tr><tr><td>@Identifier[property:dirtydark]{Dirtydark} </td><td>×150 </td><td>Crafted metallic
-        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:morganti]{Morganti}
-        </td><td>×300 </td><td>Crafted metallic @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
-        only. </td></tr><tr><td>@Identifier[property:darksteel]{Darksteel} </td><td>×2000 </td><td>Crafted metallic
+        </td></tr><tr><td>@Identifier[property:magelore]{Magelore} </td><td>×2 </td><td>Crafted
+        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:master-crafted]{Master Crafted}
+        </td><td>×2 </td><td>Crafted @Pack[teriock.equipment]{equipment} only.
+        </td></tr><tr><td>@Identifier[property:runic]{Runic} </td><td>×2 </td><td>Crafted
+        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:silver]{Silver} </td><td>×2
+        </td><td>Crafted metallic @Pack[teriock.equipment]{equipment} only.
+        </td></tr><tr><td>@Identifier[property:bejeweled]{Bejeweled} </td><td>×4 </td><td>Crafted
+        @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:dirtydark]{Dirtydark}
+        </td><td>×150 </td><td>Crafted metallic @Pack[teriock.equipment]{equipment} only.
+        </td></tr><tr><td>@Identifier[property:morganti]{Morganti} </td><td>×300 </td><td>Crafted metallic
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} only.
+        </td></tr><tr><td>@Identifier[property:darksteel]{Darksteel} </td><td>×2000 </td><td>Crafted metallic
         @Pack[teriock.equipment]{equipment} only. </td></tr><tr><td>@Identifier[property:spider-silk]{Spider Silk}
         </td><td>×3000 </td><td>Crafted fabric @UUID[Compendium.teriock.tables.RollTable.b75bd9b799785f73]{clothing}
         only. </td></tr><tr><td>@Identifier[property:mithril]{Mithril} </td><td>×40000 </td><td>Crafted metallic

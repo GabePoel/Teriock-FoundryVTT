@@ -1,0 +1,72 @@
+_id: 6138e46ace0a94db
+_key: "!items!6138e46ace0a94db"
+effects:
+  - _id: voizAB3DKavlp4QF
+    _key: "!items.effects!6138e46ace0a94db.voizAB3DKavlp4QF"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+    img: systems/teriock/src/icons/properties/bashing.webp
+    name: Bashing
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make a
+        @Identifier[ability:basic-attack]{Basic Attack}.</p>
+      identifier: bashing
+      kind: intrinsic
+    type: property
+  - _id: ScMjepaO0fFW7qNg
+    _key: "!items.effects!6138e46ace0a94db.ScMjepaO0fFW7qNg"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    name: Cumbersome
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      applyIfUnequipped: false
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.encumbranceLevel
+              phase: derived
+              priority: 10
+              target: Actor
+              type: add
+              value: "1"
+          type: changes
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item} <i>always</i> makes its user
+        @Identifier[condition:encumbered]{encumbered}, regardless of how much they are
+        @Identifier[core:carrying-capacity]{carrying}. If the user would have not been
+        @Identifier[condition:encumbered]{encumbered} otherwise, they are @Identifier[condition:encumbered]{lightly
+        encumbered}. If they would have been @Identifier[condition:encumbered]{lightly encumbered} otherwise, they are
+        @Identifier[condition:encumbered]{heavily encumbered}. And if they would have been
+        @Identifier[condition:encumbered]{heavily encumbered} otherwise, they are rendered
+        @Identifier[condition:immobilized]{immobile}.</p>
+      identifier: cumbersome
+      kind: flaw
+    type: property
+folder: Erdyuu7diwNlm1AK
+img: icons/tools/cooking/cauldron-empty.webp
+name: Cauldron
+system:
+  bv:
+    raw: 2
+  damage:
+    base: "1"
+  equipmentClasses:
+    - containers
+  equipmentType: cauldron
+  identifier: cauldron
+  minStr: 3
+  price: 20
+  range:
+    long:
+      unit: melee
+  storage:
+    enabled: true
+    maxWeight: 500
+  weight: 500
+type: equipment

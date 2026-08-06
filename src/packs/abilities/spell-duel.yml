@@ -1,0 +1,52 @@
+_id: c9a39d32dbb0ab71
+_key: "!effects!c9a39d32dbb0ab71"
+img: systems/teriock/src/icons/abilities/spell-duel.webp
+name: Spell Duel
+system:
+  automations:
+    - _id: CZOnGisPET5pvcfZ
+      display:
+        label: ""
+      makeEffect: true
+      rollBonus: ""
+      targetsActor: true
+      targetsArmament: false
+      type: override
+  costs:
+    components: {}
+    primary: {}
+  delivery: self
+  duration:
+    unit: unlimited
+  effectTypes:
+    - duelModifying
+  endCondition: <p>The @Identifier[condition:dueling]{duel} ends.</p>
+  executionTime:
+    base: r0
+  expirations:
+    - _id: qk58ZUfBkF1Ede7j
+      statuses:
+        absent:
+          - dueling
+      type: status
+  identifier: spell-duel
+  interaction: manifest
+  maneuver: reactive
+  overview:
+    base: >-
+      <p>The only @Identifier[core:attack-interaction]{attacks} that can be made in the triggering
+      @Identifier[condition:dueling]{duel} are @Wiki[Category:Spells]{spells}.</p>
+  powerSources:
+    - spiritual
+  range:
+    unit: self
+  requirements: >-
+    <p>Every creature in the triggering @Identifier[condition:dueling]{duel} is able to cast
+    @Identifier[core:attack-interaction]{attack} @Wiki[Category:Spells]{spells}. If any non-allied creature is not able
+    to, they are allowed to leave the @Identifier[condition:dueling]{duel} without counting as "forfeiting" or "losing".
+    You are not able to use [[lookup name]] if you cannot cast @Identifier[core:attack-interaction]{attack}
+    @Wiki[Category:Spells]{spells}.</p>
+  targets:
+    - other
+  trigger: <p>You begin @Identifier[condition:dueling]{dueling}.</p>
+type: ability

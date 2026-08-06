@@ -1,0 +1,52 @@
+_id: 31fda05244cf4b15
+_key: "!effects!31fda05244cf4b15"
+img: systems/teriock/src/icons/abilities/chi-duel.webp
+name: Chi Duel
+system:
+  automations:
+    - _id: jlz9vsyj0eCXPFbA
+      display:
+        label: ""
+      makeEffect: true
+      rollBonus: ""
+      targetsActor: true
+      targetsArmament: false
+      type: override
+  costs:
+    components: {}
+    primary: {}
+  delivery: self
+  duration:
+    unit: unlimited
+  effectTypes:
+    - duelModifying
+  endCondition: <p>The @Identifier[condition:dueling]{duel} ends.</p>
+  executionTime:
+    base: r0
+  expirations:
+    - _id: QpjHmH0DzARhEBTo
+      statuses:
+        absent:
+          - dueling
+      type: status
+  identifier: chi-duel
+  interaction: manifest
+  maneuver: reactive
+  overview:
+    base: >-
+      <p>All @Wiki[Category:Damaging effects]{damaging effects} in the triggering @Identifier[condition:dueling]{duel}
+      instead count as @Wiki[Category:Draining effects]{draining effects}. They deal @Identifier[drain:mana]{mana}
+      @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} instead of @Identifier[core:damage]{damage}.
+      They have no @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} but are otherwise treated
+      the same <i>prior</i> to being resolved. So, @Identifier[ability:triumphant-damage-boost]{Triumphant Damage Boost}
+      would still @Identifier[keyword:boosted]{boost} @Identifier[core:attack-interaction]{attacks}, but
+      @Identifier[ability:improved-brace]{Improved Brace} would not @Identifier[keyword:deboosted]{deboost}
+      @Identifier[core:attack-interaction]{attacks}.</p>
+  powerSources:
+    - spiritual
+  range:
+    unit: self
+  targets:
+    - other
+  trigger: <p>You begin @Identifier[condition:dueling]{dueling}.</p>
+type: ability

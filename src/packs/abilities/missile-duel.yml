@@ -1,0 +1,55 @@
+_id: dab90320f4df865f
+_key: "!effects!dab90320f4df865f"
+img: systems/teriock/src/icons/abilities/missile-duel.webp
+name: Missile Duel
+system:
+  automations:
+    - _id: GzKOItGHDGiLm5go
+      display:
+        label: ""
+      makeEffect: true
+      rollBonus: ""
+      targetsActor: true
+      targetsArmament: false
+      type: override
+    - _id: GNyS8KgoFbrsj2QR
+      status: silenced
+      type: status
+  costs:
+    components: {}
+    primary: {}
+  delivery: self
+  duration:
+    unit: unlimited
+  effectTypes:
+    - duelModifying
+  endCondition: <p>The @Identifier[condition:dueling]{duel} ends.</p>
+  executionTime:
+    base: r0
+  expirations:
+    - _id: ddGiNGLybVgptDhk
+      statuses:
+        absent:
+          - dueling
+      type: status
+  identifier: missile-duel
+  interaction: manifest
+  maneuver: reactive
+  overview:
+    base: >-
+      <p>The only @Identifier[core:attack-interaction]{attacks} that can be made in the triggering
+      @Identifier[condition:dueling]{duel} are @Identifier[keyword:ranged]{ranged} ones.</p>
+  powerSources:
+    - spiritual
+  range:
+    unit: self
+  requirements: >-
+    <p>Every creature in the triggering @Identifier[condition:dueling]{duel} is able to make
+    @Identifier[keyword:ranged]{ranged} @Identifier[core:attack-interaction]{attacks}. If any non-allied creature is not
+    able to, they are allowed to leave the @Identifier[condition:dueling]{duel} without counting as "forfeiting" or
+    "losing". You are not able to use [[lookup name]] if you cannot make @Identifier[keyword:ranged]{ranged}
+    @Identifier[core:attack-interaction]{attacks}.</p>
+  targets:
+    - other
+  trigger: <p>You begin @Identifier[condition:dueling]{dueling}.</p>
+type: ability
