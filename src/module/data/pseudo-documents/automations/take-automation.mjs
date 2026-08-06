@@ -34,11 +34,6 @@ export default class TakeAutomation
   }
 
   /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { activationTime: "on" });
-  }
-
-  /** @inheritDoc */
   static get TYPE() {
     return "take";
   }
@@ -73,7 +68,7 @@ export default class TakeAutomation
   get _formPaths() {
     const paths = ["impact", "amount"];
     if (TERIOCK.config.impact[this.impact]?.morganti) { paths.push("morganti"); }
-    paths.push(...[...this._triggerPaths, ...this._triggerDisplayPaths]);
+    paths.push("hr", ...this._triggerDisplayPaths);
     return paths;
   }
 

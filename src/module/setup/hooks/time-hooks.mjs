@@ -35,9 +35,7 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
  */
 function fireTimeTriggerFactory(trigger) {
   return function fireTrigger() {
-    for (const actor of game.actors.visible) {
-      if (game.user.id === actor.defaultUser.id) { actor?.system[`take${trigger.capitalize()}`](); }
-    }
+    for (const actor of game.actors.visible) { actor.takeTimeTrigger(trigger); }
   };
 }
 

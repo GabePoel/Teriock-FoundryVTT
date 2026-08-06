@@ -1,9 +1,14 @@
 import { TakeCoverActivation, TakeUncoverActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class CoverAutomation extends BaseAutomation {
+/**
+ * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
+ */
+export default class CoverAutomation extends automationMixins.TriggerAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Cover"];
 
@@ -24,11 +29,11 @@ export default class CoverAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["reverse"];
+    return ["reverse", ...super._formPaths];
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async _getActivations() {
     if (this.reverse) { return [new TakeUncoverActivation()]; }
     return [new TakeCoverActivation()];
   }

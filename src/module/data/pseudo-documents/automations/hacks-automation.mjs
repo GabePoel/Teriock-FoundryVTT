@@ -2,13 +2,16 @@ import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TakeHackActivation, TakeUnhackActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
  * @property {Set<Teriock.Keys.HackableBodyPart>} hacks
  */
-export default class HacksAutomation extends BaseAutomation {
+export default class HacksAutomation extends automationMixins.TriggerAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Hacks"];
 
@@ -35,11 +38,11 @@ export default class HacksAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["hacks", "reverse"];
+    return ["hacks", "reverse", ...super._formPaths];
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async _getActivations() {
     if (this.reverse) { return Array.from(this.hacks).map(h => new TakeUnhackActivation({ options: { part: h } })); }
     return Array.from(this.hacks).map(h => new TakeHackActivation({ options: { part: h } }));
   }

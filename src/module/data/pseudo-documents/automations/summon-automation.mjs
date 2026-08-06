@@ -31,7 +31,7 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionOnly: true });
+    return Object.assign(super.triggerMetadata, { executionTriggers: ["execute"] });
   }
 
   /** @inheritdoc */
@@ -55,7 +55,7 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...this._selectionPaths, "hr", ...this._triggerPaths, ...this._triggerDisplayPaths];
+    return [...this._selectionPaths, "hr", ...this._triggerDisplayPaths];
   }
 
   /** @inheritDoc */
@@ -66,37 +66,25 @@ export default class SummonAutomation
   }
 
   /** @inheritDoc */
-  async _getActivations() {
+  async _getActivations(options = {}) {
+    const uuids = (await this.choose(options)).filter(this.#validateUuid);
+    if (!uuids.length) { return []; }
+    if (this.merge) { return [new SummonActivation({ display: this.display, uuids })]; }
     const activations = [];
-    const uuids = Array.from(this.uuids).filter(this.#validateUuid);
-    if (this.merge) { activations.push(new SummonActivation({ display: this.display, uuids })); }
-    else {
-      for (const uuid of uuids) {
-        const doc = await resolveDocument(uuid);
-        const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
-          name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
-        });
-        const display = foundry.utils.deepClone(this.display);
-        display.label ||= label;
-        activations.push(new SummonActivation({ display, uuids: [uuid] }));
-      }
+    for (const uuid of uuids) {
+      const doc = await resolveDocument(uuid);
+      const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
+        name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
+      });
+      const display = foundry.utils.deepClone(this.display);
+      display.label ||= label;
+      activations.push(new SummonActivation({ display, uuids: [uuid] }));
     }
     return activations;
   }
 
   /** @inheritDoc */
-  async _preFire() {
-    await this.placeTokens();
-  }
-
-  /**
-   * Place this automation's tokens.
-   * @returns {Promise<TeriockTokenDocument[]>}
-   */
-  async placeTokens() {
-    const chosen = await this.choose();
-    const uuids = chosen.filter(this.#validateUuid);
-    const activation = new SummonActivation({ uuids });
-    return activation?.primaryAction();
+  async getDocuments(options = {}) {
+    return (await super.getDocuments(options)).filter(d => d?.documentName === "Actor");
   }
 }

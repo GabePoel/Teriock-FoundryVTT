@@ -21,7 +21,7 @@ export default function PropagationDataMixin(Base) {
      * @param {Teriock.System.TriggerScope} [scope]
      */
     _onFireTrigger(trigger, scope = {}) {
-      this._propagateOperation("_onFireTrigger", false, [trigger, scope]);
+      return this._propagateOperation("_onFireTrigger", true, [trigger, scope]);
     }
 
     /**
@@ -70,7 +70,7 @@ export default function PropagationDataMixin(Base) {
      */
     async fireTrigger(trigger, scope = {}) {
       await this._preFireTrigger(trigger, scope);
-      this._onFireTrigger(trigger, scope);
+      await this._onFireTrigger(trigger, scope);
     }
 
     /**

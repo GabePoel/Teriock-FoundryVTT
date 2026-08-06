@@ -34,6 +34,14 @@ export default function MacroAutomationMixin(Base) {
       return Object.assign(super.metadata, { macro: true });
     }
 
+    /**
+     * Macros run via {@link executeMacro} on execute, not the default activation path.
+     * @inheritDoc
+     */
+    static get triggerMetadata() {
+      return Object.assign(super.triggerMetadata, { activationTime: null, executionTriggers: true });
+    }
+
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { macro: new fields.DocumentUUIDField({ type: "Macro" }) });
@@ -54,7 +62,7 @@ export default function MacroAutomationMixin(Base) {
 
     /** @inheritDoc */
     get _formPaths() {
-      return ["macro", ...super._formPaths, ...this._triggerDisplayPaths];
+      return ["macro", "hr", ...this._triggerDisplayPaths];
     }
 
     /** @inheritDoc */
@@ -79,7 +87,7 @@ export default function MacroAutomationMixin(Base) {
     }
 
     /** @inheritDoc */
-    async _preFire(scope) {
+    async _preFireExecutionTrigger(scope) {
       await this.executeMacro(scope);
     }
 

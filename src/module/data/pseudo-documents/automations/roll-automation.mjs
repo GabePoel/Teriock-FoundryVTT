@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { commands } from "../../../helpers/interaction/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
@@ -61,30 +60,22 @@ export default class RollAutomation
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["impact", "formula", ...this._triggerPaths, ...this._triggerDisplayPaths];
+    return ["impact", "formula", "hr", ...this._triggerDisplayPaths];
   }
 
   /** @inheritDoc */
-  async _getActivations() {
-    if (this.formula && this.impact) {
+  async _getActivations(options = {}) {
+    const formula = options?.execution?._heightenString?.(this.formula) ?? this.formula;
+    if (formula && this.impact) {
       return [
         new RollActivation({
           display: this.display,
-          formula: this.formula,
+          formula,
           impact: this.impact,
           merge: this.impact === "other" ? false : this.merge,
         }),
       ];
     }
     return [];
-  }
-
-  /** @inheritDoc */
-  _onFire(scope) {
-    commands[this.impact]?.primary(this.document.actor, {
-      boost: true,
-      formula: this.formula,
-      rollData: scope?.execution?.getRollData() ?? {},
-    });
   }
 }

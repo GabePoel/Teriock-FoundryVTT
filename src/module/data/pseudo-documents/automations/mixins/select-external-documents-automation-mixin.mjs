@@ -70,6 +70,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
      * Select one or more documents.
      * @param {object} [options]
      * @param {AnyActor} [options.actor]
+     * @param {BaseExecution} [options.execution]
      * @param {boolean} [options.expandFolders]
      * @param {boolean} [options.expandTables]
      * @return {Promise<TeriockDocument[]>}
@@ -79,6 +80,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
       if (choices.length === 0) { return []; }
       if (this.automatic && choices.length === 1) { return choices; }
       if (this.multi && this.all) { return choices; }
+      if (!options.execution) { return choices; }
       return DocumentSelector.selectMulti(choices, {
         multi: this.multi,
         title: this.document.fullName || this.document.name,
@@ -89,6 +91,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
      * Choose documents to add.
      * @param {object} [options]
      * @param {AnyActor} [options.actor]
+     * @param {BaseExecution} [options.execution]
      * @param {boolean} [options.expandFolders]
      * @param {boolean} [options.expandTables]
      * @return {Promise<UUID<TeriockDocument>[]>}

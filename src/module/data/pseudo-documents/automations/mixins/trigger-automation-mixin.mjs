@@ -11,8 +11,8 @@ const { fields } = foundry.data;
  * @typedef {object} TriggerMetadata
  * @property {"pre"|"on"|null} activationTime - Default time for to call activations for a simple trigger effect.
  * @property {Teriock.Fields.DynamicChoices} choices - Available trigger choices to select from.
+ * @property {boolean|Teriock.System.Trigger[]} executionTriggers - Which execution triggers are available.
  * @property {Teriock.System.Trigger|null} initial - Initial trigger this is set to.
- * @property {boolean} executionOnly - Force trigger to only have execution trigger choices.
  * @property {boolean} nullable - Whether trigger is nullable.
  */
 
@@ -36,9 +36,16 @@ export default function TriggerAutomationMixin(Base) {
      * @returns {Record<string, FormSelectOption>}
      */
     static get _processedTriggerChoices() {
-      const choices = this.triggerMetadata.executionOnly && this.triggerMetadata.choices.execution
-        ? { execution: this.triggerMetadata.choices.execution }
-        : this.triggerMetadata.choices;
+      const meta = this.triggerMetadata;
+      const choices = { ...meta.choices };
+      const exec = meta.executionTriggers;
+      if (exec) {
+        const group = TERIOCK.config.trigger.execution;
+        const keys = exec === true ? Object.keys(group.choices) : exec;
+        const filtered = Object.fromEntries(keys.filter(k => k in group.choices).map(k => [k, group.choices[k]]));
+        if (Object.keys(filtered).length) { choices.execution = { ...group, choices: filtered }; }
+        else { delete choices.execution; }
+      } else { delete choices.execution; }
       return formatDynamicSelectOptions(choices, { localize: true, none: true });
     }
 
@@ -53,17 +60,16 @@ export default function TriggerAutomationMixin(Base) {
      */
     static get triggerMetadata() {
       return {
-        activationTime: null,
+        activationTime: "on",
         choices: {
           activity: TERIOCK.config.trigger.activity,
           combat: TERIOCK.config.trigger.combat,
           consequence: TERIOCK.config.trigger.consequence,
-          execution: TERIOCK.config.trigger.execution,
           impact: TERIOCK.config.trigger.impact,
           protection: TERIOCK.config.trigger.protection,
           time: TERIOCK.config.trigger.time,
         },
-        executionOnly: false,
+        executionTriggers: false,
         initial: null,
         nullable: true,
       };
@@ -202,34 +208,50 @@ export default function TriggerAutomationMixin(Base) {
     }
 
     /**
-     * What happens when this automation is triggered.
+     * What happens when this automation is triggered by a non-execution trigger.
+     * Collects activations onto a per-source chat payload for later message creation.
      * @param {Teriock.System.TriggerScope} scope
+     * @returns {Promise<void>}
      */
-    _onFire(scope) {
-      if (this.triggerMetadata.activationTime === "on") { this._activateActivations(scope); }
+    async _onFire(scope) {
+      const document = this.document;
+      const actor = scope.actor ?? this.actor;
+      if (!document || !actor?.prepareTriggeredChatData) { return; }
+      const activations = await this._getActivations({
+        actor: scope.actor,
+        execution: scope.execution ?? null,
+        rollData: scope.execution?.getRollData?.() ?? this.getRollData() ?? {},
+      });
+      if (!activations.length) { return; }
+      scope.chatDataBySource ??= {};
+      const key = document.uuid;
+      scope.chatDataBySource[key] ??= actor.prepareTriggeredChatData(scope.trigger, document);
+      teriock.data.systems.messages.TriggeredSystem.addActivations(scope.chatDataBySource[key], activations);
     }
 
     /** @inheritDoc */
-    _onFireTrigger(trigger, scope) {
-      super._onFireTrigger(trigger, scope);
-      if (this.canFire(trigger)) { this._onFire(scope); }
+    async _onFireTrigger(trigger, scope) {
+      await super._onFireTrigger(trigger, scope);
+      if (this.canFire(trigger) && !this._isActiveTrigger(trigger)) { await this._onFire(scope); }
     }
 
     /**
-     * What happens before this automation is triggered.
+     * What happens when this automation is triggered by an execution trigger.
      * @param {Teriock.System.TriggerScope} scope
      * @returns {Promise<void|any[]>}
      */
-    async _preFire(scope) {
-      if (this.triggerMetadata.activationTime === "pre") { return this._activateActivations(scope); }
+    async _preFireExecutionTrigger(scope) {
+      if (this.triggerMetadata.activationTime === "pre" || this.triggerMetadata.activationTime === "on") {
+        return this._activateActivations(scope);
+      }
     }
 
     /** @inheritDoc */
     async _preFireTrigger(trigger, scope) {
       await super._preFireTrigger(trigger, scope);
-      if (this.canFire(trigger)) {
-        if (scope.awaitFire) { return this._preFire(scope); }
-        this._preFire(scope);
+      if (this.canFire(trigger) && this._isActiveTrigger(trigger)) {
+        if (scope.awaitFire) { return this._preFireExecutionTrigger(scope); }
+        this._preFireExecutionTrigger(scope);
       }
     }
 

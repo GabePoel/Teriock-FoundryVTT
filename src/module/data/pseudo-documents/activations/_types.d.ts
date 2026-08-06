@@ -5,6 +5,7 @@ import {
   AttuneActivation,
   AwakenActivation,
   ChangeMovementActivation,
+  ChangeQuantityActivation,
   DampenActivation,
   DeathBagActivation,
   DeattuneActivation,
@@ -51,6 +52,7 @@ declare global {
     awaken: AwakenActivation;
     bag: DeathBagActivation;
     changeMovement: ChangeMovementActivation;
+    changeQuantity: ChangeQuantityActivation;
     cover: TakeCoverActivation;
     dampen: DampenActivation;
     deattune: DeattuneActivation;

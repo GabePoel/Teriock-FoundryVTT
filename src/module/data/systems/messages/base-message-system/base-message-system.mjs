@@ -53,6 +53,11 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
   }
 
   /**
+   * Stuff that happens when timestamp is updated.
+   */
+  _onUpdateTimestamp() {}
+
+  /**
    * Prepare chat message render context.
    * @param {object} options
    * @returns {Promise<object>}
@@ -68,6 +73,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
       speakerToken,
       system: this,
       TERIOCK,
+      type: this.document.type,
       writer: this.document.alias !== this.document.author?.name ? this.document.author?.name : null,
       ...options,
     };

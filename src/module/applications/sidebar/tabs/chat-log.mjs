@@ -146,6 +146,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
           }
         });
       }
+      message?.system?._onUpdateTimestamp?.();
     }
   }
 }

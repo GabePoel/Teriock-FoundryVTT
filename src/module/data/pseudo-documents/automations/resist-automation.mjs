@@ -1,10 +1,15 @@
 import { omit } from "../../../helpers/utils.mjs";
 import { ResistActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class ResistAutomation extends ThresholdAutomation {
+/**
+ * @extends {ThresholdAutomation}
+ * @mixes TriggerAutomation
+ */
+export default class ResistAutomation extends automationMixins.TriggerAutomationMixin(ThresholdAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Resist"];
 
@@ -28,11 +33,11 @@ export default class ResistAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["hex", "bonus"];
+    return ["hex", "bonus", ...this._triggerPaths];
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async _getActivations() {
     return [new ResistActivation({ options: { bonus: this.bonus, type: this.hex ? "hexproof" : "resistance" } })];
   }
 }

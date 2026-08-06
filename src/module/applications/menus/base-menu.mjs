@@ -129,6 +129,7 @@ export default class BaseMenu extends TeriockApplication {
       throw new Error("Automatic field generation only available for Boolean, Number, or String types");
     }
     const data = {
+      classes: ["teriock-icon-placeholder"],
       field: isDataField ? setting.type : new Field({ blank: false, required: true }),
       hint: setting.hint,
       label: setting.name,

@@ -50,7 +50,8 @@ export default class ToggleChildrenAutomation
     return ["add", "remove", "qualifier", ...this._triggerPaths];
   }
 
-  async _preFire() {
+  /** @inheritDoc */
+  async _onFire() {
     if (this.document && BaseRoll.qualify(this.qualifier, this.getRollData())) {
       await ensureChildren(this.document, Array.from(this.add));
       await ensureNoChildren(this.document, Array.from(this.remove));

@@ -6,16 +6,20 @@ import {
 } from "../activations/command-activations.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
+ * @mixes TriggerAutomation
  * @property {Teriock.Keys.Condition} status
  * @property {"apply"|"remove"|"toggle"} relation
  */
-export default class ChatStatusAutomation extends CritMechanicMixin(BaseAutomation) {
+export default class ChatStatusAutomation
+  extends automationMixins.TriggerAutomationMixin(CritMechanicMixin(BaseAutomation))
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChatStatus"];
 
@@ -70,11 +74,13 @@ export default class ChatStatusAutomation extends CritMechanicMixin(BaseAutomati
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["status", "relation"];
+    const paths = ["status", "relation"];
+    if (this.relation !== "include") { paths.push(...super._formPaths); }
+    return paths;
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async _getActivations() {
     if (this.relation === "apply") { return [new ApplyStatusActivation({ options: { status: this.status } })]; }
     else if (this.relation === "remove") { return [new RemoveStatusActivation({ options: { status: this.status } })]; }
     else if (this.relation === "toggle") { return [new ToggleStatusActivation({ options: { status: this.status } })]; }

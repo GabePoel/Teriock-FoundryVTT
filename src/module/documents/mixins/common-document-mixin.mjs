@@ -334,7 +334,10 @@ export default function CommonDocumentMixin(Base) {
       async hookCall(trigger, options = {}) {
         const { scope = {}, skipCall = false, skipPropagation = false } = options;
         scope.trigger = trigger;
-        if (!skipPropagation) { await this.actor?.fireTrigger(trigger, scope); }
+        if (!skipPropagation && this.actor) {
+          await this.actor.fireTrigger(trigger, scope);
+          await this.actor.createTriggeredMessages(scope);
+        }
         if (!skipCall) { return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope)); }
       }
 

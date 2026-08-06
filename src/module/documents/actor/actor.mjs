@@ -4,6 +4,7 @@ import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
+import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -146,6 +147,17 @@ export default class TeriockActor
       this._cache.modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c => !c.isReference);
     }
     return this._cache.modifiableChildren;
+  }
+
+  /**
+   * Whether the current user should fire triggers and create triggered chat messages for this actor.
+   * @returns {boolean}
+   */
+  get shouldFireTriggers() {
+    const fireScope = game.settings.get("teriock", "triggerFireScope");
+    if (fireScope === "gm") { return game.user.isGM; }
+    if (fireScope === "owners") { return this.isOwner; }
+    return this.defaultUser?.isSelf ?? game.user.isGM;
   }
 
   /**
@@ -298,6 +310,36 @@ export default class TeriockActor
     await this.createEmbeddedDocuments("ActiveEffect", effects, { keepId: true });
   }
 
+  /**
+   * Create a triggered chat message per source document collected during a {@link CommonDocument.hookCall}.
+   * @param {Teriock.System.TriggerScope} scope
+   * @returns {Promise<TeriockChatMessage[]>}
+   */
+  async createTriggeredMessages(scope = {}) {
+    if (!this.shouldFireTriggers) { return []; }
+    const bySource = scope.chatDataBySource ?? {};
+    const allChatData = [];
+    for (const chatData of Object.values(bySource)) {
+      if (!Object.keys(chatData.system?.activations ?? {}).length) { continue; }
+      const panel = chatData.system.panels?.[0];
+      if (panel?.associations?.[0] && !panel.associations[0].cards.length) { delete panel.associations; }
+      TeriockChatMessage.applyMode(chatData, game.settings.get("teriock", "triggerMessageMode"));
+      allChatData.push(chatData);
+    }
+    return TeriockChatMessage.createDocuments(allChatData);
+  }
+
+  /**
+   * Call {@link hookCall} if the current user should fire triggers for this actor.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {Parameters<TeriockActor["hookCall"]>[1]} [options]
+   * @returns {Promise<void|false>}
+   */
+  async fireHookTrigger(trigger, options = {}) {
+    if (!this.shouldFireTriggers) { return; }
+    return this.hookCall(trigger, options);
+  }
+
   /** @inheritDoc */
   async getEffectiveChildren() {
     return [...(await super.getEffectiveChildren()), ...game.teriock.basicAbilities];
@@ -333,6 +375,49 @@ export default class TeriockActor
   }
 
   /**
+   * Build chat message data for triggered activations from a single source document.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {TeriockDocument} [document]
+   * @returns {Partial<Teriock.Data.ChatMessageData>}
+   */
+  prepareTriggeredChatData(trigger, document = null) {
+    let label = trigger;
+    for (const category of Object.values(TERIOCK.config.trigger)) {
+      if (category.choices?.[trigger]) {
+        label = _loc(category.choices[trigger]);
+        break;
+      }
+    }
+    const associations = [];
+    if (document) {
+      associations.push({
+        cards: [{
+          img: document.img,
+          makeTooltip: true,
+          name: document.fullName || document.name,
+          type: document.type,
+          uuid: document.uuid,
+        }],
+        icon: TERIOCK.display.icons.ui.document,
+        title: _loc("TERIOCK.MESSAGE.Trigger.sources"),
+      });
+    }
+    return {
+      speaker: TeriockChatMessage.getSpeaker({ actor: this }),
+      system: {
+        activations: {},
+        panels: [{
+          associations,
+          img: document?.img || TERIOCK.display.iconManifest.coreRules.difficultyClass,
+          name: _loc("TERIOCK.MESSAGE.Trigger.panel", { label }),
+        }],
+        source: document?.uuid ?? this.uuid,
+      },
+      type: "triggered",
+    };
+  }
+
+  /**
    * Remove multiple status effects from the actor.
    * @param {string[]} statusIds
    * @returns {Promise<void>}
@@ -348,6 +433,16 @@ export default class TeriockActor
     super.resetChildMaps();
     delete this._cache.validEffects;
     delete this._cache.modifiableChildren;
+  }
+
+  /**
+   * Fire a time-based trigger for this actor if the current user should handle it.
+   * @param {Teriock.System.TimeTrigger} trigger
+   * @returns {Promise<void>}
+   */
+  async takeTimeTrigger(trigger) {
+    if (!this.shouldFireTriggers) { return; }
+    await this.system[`take${trigger.capitalize()}`]?.();
   }
 
   /**

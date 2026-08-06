@@ -42,7 +42,11 @@ export default function DisplayAutomationMixin(Base) {
      * @returns {string[]}
      */
     get _triggerDisplayPaths() {
-      return this._source.trigger ? [] : this._displayPaths;
+      const paths = [];
+      const triggerPaths = this._triggerPaths;
+      if (Array.isArray(triggerPaths)) { paths.push(...triggerPaths); }
+      if (!this._source.trigger || this.isRepeatable) { paths.push(...this._displayPaths); }
+      return paths;
     }
   }
 

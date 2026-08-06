@@ -219,6 +219,7 @@ foundry.helpers.Hooks.once("init", function() {
       dataModels: {
         base: data.systems.messages.BaseMessageSystem,
         interactive: data.systems.messages.InteractiveSystem,
+        triggered: data.systems.messages.TriggeredSystem,
       },
       defaultType: "interactive",
       documentClass: documents.TeriockChatMessage,

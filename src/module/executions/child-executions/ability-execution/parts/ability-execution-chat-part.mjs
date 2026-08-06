@@ -345,7 +345,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
         const transformationAutomations = this.getAutomations("transformation", { active: true });
         for (const a of transformationAutomations) {
-          const toAdd = await a?.choose({ actor: this.actor });
+          const toAdd = await a?.choose({ actor: this.actor, execution: this });
           for (const [i, v] of variants.entries()) {
             if (a?.crit.has(i)) { v.con.data.system.transformation.uuids.push(...toAdd); }
           }
@@ -394,12 +394,6 @@ export default function AbilityExecutionChatPart(Base) {
 
       // Add all pre-defined activations
       await super._buildActivations();
-
-      // Replace `@h` with heightening amount in all rolls
-      this.activations.filter(a => a?.type === acts.RollActivation.TYPE).forEach(a => {
-        a.formula = this._heightenString(a.formula);
-        a?.updateSource({ formula: this._heightenString(a.formula) });
-      });
     }
 
     /** @inheritDoc */

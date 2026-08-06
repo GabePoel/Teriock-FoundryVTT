@@ -20,7 +20,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
    * @param {Teriock.System.Trigger} trigger
    */
   #fireTrigger(actor, trigger) {
-    actor?.defaultUser?.query("teriock.fireTrigger", { trigger, uuid: actor.uuid });
+    actor?.fireHookTrigger(trigger);
   }
 
   /**

@@ -70,6 +70,7 @@ declare global {
       attribute?: Teriock.Keys.Attribute;
       automation?: BaseAutomation;
       awaitFire?: boolean;
+      chatDataBySource?: Record<string, Partial<Teriock.Data.ChatMessageData>>;
       effect?: AnyActiveEffect;
       equipment?: TeriockEquipment;
       execution?: AbilityExecution | ArmamentExecution | BaseExecution;

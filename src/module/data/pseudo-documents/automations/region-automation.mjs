@@ -72,7 +72,7 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { activationTime: "pre", executionOnly: true });
+    return Object.assign(super.triggerMetadata, { activationTime: "pre", executionTriggers: ["executeInput"] });
   }
 
   /** @inheritdoc */
@@ -188,7 +188,6 @@ export default class RegionAutomation
       ...this._restrictionPaths,
       "visibility",
       "hr",
-      ...this._triggerPaths,
       ...this._triggerDisplayPaths,
       "hr",
       ...this._selectionPaths,
@@ -249,8 +248,8 @@ export default class RegionAutomation
   }
 
   /** @inheritDoc */
-  async _preFire(scope) {
-    const out = await super._preFire(scope);
+  async _preFireExecutionTrigger(scope) {
+    const out = await super._preFireExecutionTrigger(scope);
     const region = Array.isArray(out) && out.length ? out[0] : null;
     if (!region) { return; }
     if (scope.trigger === "executeInput" && this.targeting) {
@@ -290,7 +289,7 @@ export default class RegionAutomation
       shapes: this.#getRegionShapeData(options),
       visibility: this.visibility,
     }, this.overrideData ? this.data : {});
-    const uuids = await this.choose({ actor: options.execution?.actor });
+    const uuids = await this.choose({ actor: options.execution?.actor, execution: options.execution });
     if (uuids.length) {
       data.behaviors.push({
         name: _loc("TYPES.RegionBehavior.applyActiveEffect"),

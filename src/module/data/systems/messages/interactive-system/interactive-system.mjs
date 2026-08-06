@@ -69,7 +69,8 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
     if (defaultCollapse === "closed") { return true; }
     else if (defaultCollapse === "open") { return false; }
-    return this.document.timestamp < Date.now() - game.settings.get("teriock", "autoPanelCollapseTime") * 60 * 1000;
+    return this.document.timestamp
+      < Date.now() - (game.settings.get("teriock", "autoPanelCollapseTime") ?? Infinity) * 60 * 1000;
   }
 
   /**

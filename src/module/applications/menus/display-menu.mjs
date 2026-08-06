@@ -19,7 +19,7 @@ export default class DisplayMenu extends BaseMenu {
     general: super.PARTS.general,
     actorSheet: { template: "teriock/menus/base-menu" },
     dragDrop: { template: "teriock/menus/base-menu" },
-    panels: { template: "teriock/menus/base-menu" },
+    chat: { template: "teriock/menus/base-menu" },
     tooltips: { template: "teriock/menus/base-menu" },
     footer: super.PARTS.footer,
   };
@@ -38,9 +38,9 @@ export default class DisplayMenu extends BaseMenu {
       case "general":
         context.fields = this.createSettingFields(settings.generalDisplay);
         break;
-      case "panels":
-        context.fields = this.createSettingFields(settings.panel);
-        context.legend = "TERIOCK.MENUS.Display.parts.panels";
+      case "chat":
+        context.fields = this.createSettingFields(settings.chat);
+        context.legend = "TERIOCK.MENUS.Display.parts.chat";
         break;
       case "tooltips":
         context.fields = this.createSettingFields(settings.tooltip);

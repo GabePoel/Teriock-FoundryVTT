@@ -1,4 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { getRollIcon } from "../../../helpers/icon.mjs";
 import commands from "../../../helpers/interaction/commands/_module.mjs";
 import RollAutomation from "../automations/roll-automation.mjs";
@@ -33,13 +34,19 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
     let actors = this.actors;
     if (!this.actors.length) { actors = [null]; }
     for (const actor of actors) {
-      await commands[this.impact][action](actor, {
-        boost: true,
-        boosts: this.boosts,
-        document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
-        formula: this.formula,
-        type: this.impact,
-      });
+      if (this.impact === "other") {
+        const roll = new BaseRoll(this.formula, actor?.getRollData?.() ?? {});
+        await roll.evaluate();
+        await roll.toMessage({ messageMode: game.settings.get("core", "messageMode") });
+      } else {
+        await commands[this.impact][action](actor, {
+          boost: true,
+          boosts: this.boosts,
+          document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
+          formula: this.formula,
+          type: this.impact,
+        });
+      }
     }
   }
 

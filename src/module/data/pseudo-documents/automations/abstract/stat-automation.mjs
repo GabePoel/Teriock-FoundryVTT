@@ -18,11 +18,6 @@ export default class StatAutomation extends automationMixins.TriggerAutomationMi
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Stat"];
 
   /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { activationTime: "on" });
-  }
-
-  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       consumeStatDice: new fields.BooleanField({ initial: true }),

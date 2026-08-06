@@ -3,8 +3,13 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
-export default class AttunementAutomation extends BaseAutomation {
+/**
+ * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
+ */
+export default class AttunementAutomation extends automationMixins.TriggerAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 
@@ -27,11 +32,11 @@ export default class AttunementAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["tier"];
+    return ["tier", ...super._formPaths];
   }
 
   /** @inheritDoc */
-  async getActivations(options = { rollData: {} }) {
+  async _getActivations(options = { rollData: {} }) {
     const rollData = Object.assign(this.getRollData(), options?.rollData ?? {});
     const tier = await BaseRoll.getValue(this.tier, rollData);
     const attunementData = {

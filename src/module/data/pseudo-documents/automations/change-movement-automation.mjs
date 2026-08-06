@@ -1,8 +1,13 @@
 import { movementActionField } from "../../fields/tools/builders.mjs";
 import { ChangeMovementActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
-export default class ChangeMovementAutomation extends BaseAutomation {
+/**
+ * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
+ */
+export default class ChangeMovementAutomation extends automationMixins.TriggerAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeMovement"];
 
@@ -23,11 +28,11 @@ export default class ChangeMovementAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["movementAction"];
+    return ["movementAction", ...super._formPaths];
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async _getActivations() {
     return [new ChangeMovementActivation({ movementAction: this.movementAction })];
   }
 }

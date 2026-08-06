@@ -1,10 +1,10 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../fields/_module.mjs";
 import { rollableFormulaField } from "../../fields/tools/builders.mjs";
+import { ChangeQuantityActivation } from "../activations/_module.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
@@ -14,18 +14,13 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
  * @property {Teriock.System.FormulaString} formula
  * @property {TypedIdentifier|Identifier} identifier
  * @property {boolean} targetParent
  */
 export default class ChangeQuantityAutomation
-  extends mixClasses(
-    CritMechanicMixin(BaseAutomation),
-    automationMixins.ConfirmationDialogAutomationMixin,
-    automationMixins.TriggerAutomationMixin,
-  )
+  extends mixClasses(CritMechanicMixin(BaseAutomation), automationMixins.TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
@@ -37,7 +32,7 @@ export default class ChangeQuantityAutomation
 
   /** @inheritDoc */
   static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { initial: "execute", nullable: false });
+    return Object.assign(super.triggerMetadata, { executionTriggers: true, initial: "execute", nullable: false });
   }
 
   /** @inheritDoc */
@@ -56,75 +51,11 @@ export default class ChangeQuantityAutomation
   }
 
   /**
-   * Change the quantity of the target consumable.
-   * @param {Partial<Teriock.System.TriggerScope>} [scope]
-   * @returns {Promise<void>}
-   */
-  async #changeQuantity(scope = {}) {
-    if (!formulaExists(this.formula)) { return; }
-    const consumable = await this.#findConsumable(scope);
-    if (!consumable) { return; }
-    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(this.formula) <= 0) { return; }
-    if (
-      consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(this.formula) >= 0
-    ) { return; }
-    const shouldChange = await this.getConfirmation({
-      content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
-      data: { amount: `[[/r ${this.formula}]]`, name: `@UUID[${consumable.uuid}]` },
-      icon: TERIOCK.config.document[consumable.type]?.icon ?? undefined,
-    });
-    if (!shouldChange) { return; }
-    const roll = new BaseRoll(this.formula, this.getRollData(), {
-      flavor: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.roll"),
-    });
-    await roll.evaluate();
-    const panelData = {
-      bars: [{
-        icon: TERIOCK.display.icons.pseudoDocument.automation,
-        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-        wrappers: [
-          _loc("TERIOCK.AUTOMATIONS.Base.LABEL"),
-          this.constructor._processedTriggerChoices[this.trigger].label,
-        ],
-      }],
-      blocks: [{
-        text: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.description", {
-          amount: roll.total.toString(),
-          name: consumable.fullName,
-        }),
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-      }],
-      icon: TERIOCK.display.icons.pseudoDocument.automation,
-      img: consumable.img,
-      label: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
-      name: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
-    };
-    const messageData = {
-      rolls: [roll],
-      speaker: TeriockChatMessage.getSpeaker({ actor: scope?.actor || this.actor }),
-      system: { panels: [panelData] },
-      type: "interactive",
-    };
-    TeriockChatMessage.applyMode(
-      messageData,
-      scope?.execution?._messageMode ?? game.settings.get("core", "messageMode"),
-    );
-    await TeriockChatMessage.create(messageData);
-    await consumable.update({
-      "system.quantity.value": Math.clamp(
-        consumable.system.quantity.value + roll.total,
-        consumable.system.quantity.min,
-        consumable.system.quantity.max,
-      ),
-    });
-  }
-
-  /**
    * Find the best consumable document.
-   * @param {Partial<Teriock.System.TriggerScope>} scope
+   * @param {Partial<Teriock.Automations.GetActivationsOptions> & Partial<Teriock.System.TriggerScope>} [options]
    * @returns {Promise<AnyChildDocument|null>}
    */
-  async #findConsumable(scope = {}) {
+  async #findConsumable(options = {}) {
     if (this.targetParent && this.document?.system?.consumable) { return this.document; }
     if (!this.identifier) { return null; }
     let doc = this.document;
@@ -136,11 +67,22 @@ export default class ChangeQuantityAutomation
       else { doc = null; }
     }
     if (!consumable) {
-      const actor = scope?.actor ?? this.document.actor;
+      const actor = options?.actor ?? options?.execution?.actor ?? this.document?.actor;
       if (!actor) { return null; }
       consumable = await fromIdentifierLocal(this.identifier, actor);
     }
     return consumable ?? null;
+  }
+
+  /**
+   * Formula with heightening applied from the execution, if any.
+   * @param {Teriock.Automations.GetActivationsOptions} [options]
+   * @returns {Teriock.System.FormulaString}
+   */
+  #formula(options = {}) {
+    const execution = options?.execution;
+    if (typeof execution?._heightenString === "function") { return execution._heightenString(this.formula); }
+    return this.formula;
   }
 
   /** @inheritDoc */
@@ -157,7 +99,7 @@ export default class ChangeQuantityAutomation
   get _formPaths() {
     const paths = ["targetParent"];
     if (!this.targetParent) { paths.push("identifier"); }
-    paths.push(...["formula", ...this._confirmationPaths, ...super._formPaths]);
+    paths.push(...["formula", ...super._formPaths]);
     return paths;
   }
 
@@ -171,7 +113,22 @@ export default class ChangeQuantityAutomation
   }
 
   /** @inheritDoc */
-  _onFire(scope) {
-    this.#changeQuantity(scope);
+  async _getActivations(options = {}) {
+    const formula = this.#formula(options);
+    if (!formulaExists(formula)) { return []; }
+    const consumable = await this.#findConsumable(options);
+    if (!consumable) { return []; }
+    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula) <= 0) { return []; }
+    if (consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(formula) >= 0) {
+      return [];
+    }
+    return [
+      new ChangeQuantityActivation({
+        consumable: consumable.uuid,
+        formula,
+        messageMode: options?.execution?._messageMode ?? null,
+        triggerLabel: this.constructor._processedTriggerChoices[this.trigger]?.label ?? "",
+      }),
+    ];
   }
 }

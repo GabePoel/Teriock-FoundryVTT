@@ -2,6 +2,7 @@ import { FormulaField, TernaryField } from "../../fields/_module.mjs";
 import { AttackActivation } from "../activations/_module.mjs";
 import { OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -9,6 +10,7 @@ const { fields } = foundry.data;
  * An automation that makes an attack roll with no ability associated with it.
  * @extends {ThresholdAutomation}
  * @mixes OverrideCompetenceMechanic
+ * @mixes TriggerAutomation
  * @property {Teriock.System.FormulaString} attackPenalty
  * @property {boolean|null} consumeAmmunition
  * @property {boolean|null} limb
@@ -19,7 +21,9 @@ const { fields } = foundry.data;
  * @property {boolean|null} warded
  * @see {AttackRollExecution}
  */
-export default class AttackAutomation extends OverrideCompetenceMechanicMixin(ThresholdAutomation) {
+export default class AttackAutomation
+  extends OverrideCompetenceMechanicMixin(automationMixins.TriggerAutomationMixin(ThresholdAutomation))
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Attack"];
 
@@ -55,7 +59,7 @@ export default class AttackAutomation extends OverrideCompetenceMechanicMixin(Th
   }
 
   /** @inheritDoc */
-  async getActivations(options) {
+  async _getActivations(options) {
     const threshold = await this.getThreshold(options?.rollData ?? {});
     return [
       new AttackActivation({

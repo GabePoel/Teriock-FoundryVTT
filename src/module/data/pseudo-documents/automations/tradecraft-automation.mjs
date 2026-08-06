@@ -31,7 +31,7 @@ export default class TradecraftAutomation
 
   /** @inheritDoc */
   static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionOnly: true });
+    return Object.assign(super.triggerMetadata, { executionTriggers: true });
   }
 
   /** @inheritDoc */
@@ -65,51 +65,35 @@ export default class TradecraftAutomation
     ];
   }
 
+  /**
+   * Select one or more configured tradecrafts.
+   * Dialogs only open when an execution context is provided.
+   * @param {object} [options]
+   * @param {BaseExecution} [options.execution]
+   * @returns {Promise<Teriock.Keys.Tradecraft[]>}
+   */
+  async _choose(options = {}) {
+    const choices = Array.from(this.tradecrafts).filter(Boolean);
+    if (choices.length === 0) { return []; }
+    if (this.automatic && choices.length === 1) { return choices; }
+    if (this.multi && this.all) { return choices; }
+    if (!options.execution) { return choices; }
+    if (this.multi) { return selectTradecraftsDialog(choices); }
+    const chosen = await selectTradecraftDialog(choices);
+    return chosen ? [chosen] : [];
+  }
+
   /** @inheritDoc */
-  async _getActivations(options) {
-    const threshold = await this.getThreshold(options?.rollData ?? {});
-    return Array.from(this.tradecrafts).filter(Boolean).map(tradecraft =>
+  async _getActivations(options = {}) {
+    const selected = await this._choose(options);
+    if (!selected.length) { return []; }
+    const rollData = options.execution?.getRollData?.() ?? options.rollData ?? {};
+    const threshold = await this.getThreshold(rollData);
+    return selected.map(tradecraft =>
       new TradecraftActivation({
         display: this.getDisplayData(threshold),
         options: { bonus: this.bonus, competence: this.getCompetence(options), threshold, tradecraft },
       })
     );
-  }
-
-  /** @inheritDoc */
-  async _preFire(scope) {
-    await this.executeTradecraft(scope);
-  }
-
-  /**
-   * Execute one selected tradecraft.
-   * @param {Teriock.System.TriggerScope} scope
-   * @returns {Promise<void>}
-   */
-  async executeTradecraft(scope = {}) {
-    if (this.tradecrafts.size === 0) { return; }
-    const choices = Array.from(this.tradecrafts);
-    let selected;
-    if (this.automatic && choices.length === 1) { selected = choices; }
-    else {
-      if (this.multi) {
-        selected = await selectTradecraftsDialog(choices);
-        if (selected.length === 0) { return; }
-      } else {
-        const chosen = await selectTradecraftDialog(choices);
-        if (!chosen) { return; }
-        selected = [chosen];
-      }
-    }
-    const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
-    if (!actor) { return; }
-    await Promise.all(selected.map(async tradecraft => {
-      const threshold = await this.getThreshold(scope?.execution?.getRollData() ?? {});
-      return actor.system.rollTradecraft(tradecraft, {
-        bonus: this.bonus,
-        competence: this.getCompetence(scope),
-        threshold,
-      });
-    }));
   }
 }

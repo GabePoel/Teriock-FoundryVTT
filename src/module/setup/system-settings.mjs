@@ -4,7 +4,7 @@ import dieConfig from "../constants/config/death-bag-config.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
-import { TypedIdentifierSetField } from "../data/fields/_module.mjs";
+import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import * as documents from "../documents/_module.mjs";
@@ -61,6 +61,41 @@ export const settings = {
       hint: "TERIOCK.SETTINGS.armorWeakensRanks.hint",
       name: "TERIOCK.SETTINGS.armorWeakensRanks.name",
       scope: "world",
+      type: Boolean,
+    },
+  },
+  chat: {
+    autoPanelCollapseTime: {
+      default: 5,
+      hint: "TERIOCK.SETTINGS.autoPanelCollapseTime.hint",
+      name: "TERIOCK.SETTINGS.autoPanelCollapseTime.name",
+      scope: "client",
+      type: new InfiniteNumberField(),
+    },
+    autoTriggerDeleteTime: {
+      default: 5,
+      hint: "TERIOCK.SETTINGS.autoTriggerDeleteTime.hint",
+      name: "TERIOCK.SETTINGS.autoTriggerDeleteTime.name",
+      scope: "client",
+      type: new InfiniteNumberField(),
+    },
+    defaultPanelCollapseState: {
+      choices: {
+        auto: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.auto",
+        closed: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.closed",
+        open: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.open",
+      },
+      default: "auto",
+      hint: "TERIOCK.SETTINGS.defaultPanelCollapseState.hint",
+      name: "TERIOCK.SETTINGS.defaultPanelCollapseState.name",
+      scope: "client",
+      type: String,
+    },
+    openPanelContextMenuEntry: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.openPanelContextMenuEntry.hint",
+      name: "TERIOCK.SETTINGS.openPanelContextMenuEntry.name",
+      scope: "client",
       type: Boolean,
     },
   },
@@ -237,6 +272,29 @@ export const settings = {
       scope: "world",
       type: Boolean,
     },
+    triggerFireScope: {
+      choices: {
+        default: "TERIOCK.SETTINGS.triggerFireScope.choices.default",
+        gm: "TERIOCK.SETTINGS.triggerFireScope.choices.gm",
+        owners: "TERIOCK.SETTINGS.triggerFireScope.choices.owners",
+      },
+      default: "default",
+      hint: "TERIOCK.SETTINGS.triggerFireScope.hint",
+      name: "TERIOCK.SETTINGS.triggerFireScope.name",
+      scope: "world",
+      type: String,
+    },
+    triggerMessageMode: {
+      default: "self",
+      hint: "TERIOCK.SETTINGS.triggerMessageMode.hint",
+      name: "TERIOCK.SETTINGS.triggerMessageMode.name",
+      scope: "world",
+      type: new fields.StringField({
+        choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label),
+        initial: "self",
+        nullable: false,
+      }),
+    },
   },
   generalDisplay: {
     openConditionsAsJournalEntryPages: {
@@ -250,34 +308,6 @@ export const settings = {
       default: true,
       hint: "TERIOCK.SETTINGS.styleDice.hint",
       name: "TERIOCK.SETTINGS.styleDice.name",
-      scope: "client",
-      type: Boolean,
-    },
-  },
-  panel: {
-    autoPanelCollapseTime: {
-      default: 5,
-      hint: "TERIOCK.SETTINGS.autoPanelCollapseTime.hint",
-      name: "TERIOCK.SETTINGS.autoPanelCollapseTime.name",
-      scope: "client",
-      type: Number,
-    },
-    defaultPanelCollapseState: {
-      choices: {
-        auto: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.auto",
-        closed: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.closed",
-        open: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.open",
-      },
-      default: "auto",
-      hint: "TERIOCK.SETTINGS.defaultPanelCollapseState.hint",
-      name: "TERIOCK.SETTINGS.defaultPanelCollapseState.name",
-      scope: "client",
-      type: String,
-    },
-    openPanelContextMenuEntry: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.openPanelContextMenuEntry.hint",
-      name: "TERIOCK.SETTINGS.openPanelContextMenuEntry.name",
       scope: "client",
       type: Boolean,
     },

@@ -16,6 +16,7 @@ const { fields } = foundry.data;
  * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataAutomation
  * @mixes DisplayAutomation
+ * @mixes TriggerAutomation
  * @property {boolean} attachDocuments
  * @property {boolean} separate
  * @property {{enabled: boolean, data: object, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[]}} children
@@ -27,6 +28,7 @@ export default class AddDocumentsAutomation
     OverrideCompetenceMechanicMixin,
     automationMixins.OverrideDataAutomationMixin,
     automationMixins.DisplayAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
   )
 {
   /** @inheritDoc */
@@ -107,8 +109,11 @@ export default class AddDocumentsAutomation
    * @returns {string[]}
    */
   get _attachmentPaths() {
-    if (this.document?.type !== "ability") { return ["display.label"]; }
-    return ["separate", this.separate ? "display.label" : "attachDocuments"];
+    if (this.document?.type !== "ability") { return this._triggerDisplayPaths; }
+    const paths = ["separate"];
+    if (this.separate) { paths.push(...this._triggerDisplayPaths); }
+    else { paths.push("attachDocuments"); }
+    return paths;
   }
 
   /**
@@ -151,6 +156,32 @@ export default class AddDocumentsAutomation
   }
 
   /** @inheritDoc */
+  async _getActivations(options = {}) {
+    if (!this.hasActivations) { return []; }
+    const choices = await this.choose(options);
+    const activations = [];
+    for (const choice of choices) {
+      const activationFamily = { root: choice };
+      if (this.children.enabled) {
+        const uuids = [
+          ...Array.from(this.children.uuids),
+          ...Array.from(this.children.identifiers).map(i => game.teriock.identifiers.get(i)).filter(Boolean),
+        ];
+        activationFamily.children = uuids.map(uuid => {
+          return { data: this.children.overrideData ? this.children.data : {}, uuid };
+        });
+      }
+      const activationData = {
+        display: { label: this.display.label || this.#inferLabel(activationFamily.root) },
+        primary: activationFamily,
+        secondary: activationFamily,
+      };
+      activations.push(new AddDocumentsActivation(activationData));
+    }
+    return activations;
+  }
+
+  /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
     if (path === "children.data") { groupConfig.stacked = true; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
@@ -172,32 +203,6 @@ export default class AddDocumentsAutomation
       this.#updateConstructionName(construction);
       return construction;
     });
-  }
-
-  /** @inheritDoc */
-  async getActivations() {
-    if (!this.hasActivations) { return []; }
-    const choices = await this.choose();
-    const activations = [];
-    for (const choice of choices) {
-      const activationFamily = { root: choice };
-      if (this.children.enabled) {
-        const uuids = [
-          ...Array.from(this.children.uuids),
-          ...Array.from(this.children.identifiers).map(i => game.teriock.identifiers.get(i)).filter(Boolean),
-        ];
-        activationFamily.children = uuids.map(uuid => {
-          return { data: this.children.overrideData ? this.children.data : {}, uuid };
-        });
-      }
-      const activationData = {
-        display: { label: this.display.label || this.#inferLabel(activationFamily.root) },
-        primary: activationFamily,
-        secondary: activationFamily,
-      };
-      activations.push(new AddDocumentsActivation(activationData));
-    }
-    return activations;
   }
 
   /** @inheritDoc */

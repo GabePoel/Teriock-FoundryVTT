@@ -50,15 +50,14 @@ export default class TeriockTooltipManager extends TooltipManager {
     const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
     if (!this.#validateUuid(uuid)) { return; }
     const doc = await fromUuid(uuid);
-    if (doc && typeof doc.toTooltip === "function") {
-      if (doc.isViewer) { element.dataset.tooltipHtml = await doc.toTooltip(); }
-      else {
-        delete element.dataset.tooltipClass;
-        delete element.dataset.tooltipHtml;
-      }
-      element.dataset.tooltipFetched = "true";
-      if (element === this.element) { this.activate(element); }
+    if (doc && typeof doc.toTooltip === "function" && doc.isViewer) {
+      element.dataset.tooltipHtml = await doc.toTooltip();
+    } else {
+      delete element.dataset.tooltipClass;
+      delete element.dataset.tooltipHtml;
     }
+    element.dataset.tooltipFetched = "true";
+    if (element === this.element) { this.activate(element); }
   }
 
   /**

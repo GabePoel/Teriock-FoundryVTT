@@ -1,10 +1,15 @@
 import { objectMap } from "../../../helpers/utils.mjs";
 import { FeatActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class FeatAutomation extends ThresholdAutomation {
+/**
+ * @extends {ThresholdAutomation}
+ * @mixes TriggerAutomation
+ */
+export default class FeatAutomation extends automationMixins.TriggerAutomationMixin(ThresholdAutomation) {
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.TERMS.Interaction.feat";
@@ -33,7 +38,7 @@ export default class FeatAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  async getActivations(options) {
+  async _getActivations(options) {
     const threshold = await this.getThreshold(options?.rollData ?? {});
     return [
       new FeatActivation({

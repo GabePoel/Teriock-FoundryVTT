@@ -11,12 +11,15 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes DisplayAutomation
+ * @mixes TriggerAutomation
  * @property {"chosen"|"executor"|"random"|"target"} origin
  * @property {Teriock.System.FormulaString} distance
  * @property {boolean} originBarrier
  * @property {string} movementAction
  */
-export default class RepositionAutomation extends mixClasses(BaseAutomation, automationMixins.DisplayAutomationMixin) {
+export default class RepositionAutomation
+  extends mixClasses(BaseAutomation, automationMixins.DisplayAutomationMixin, automationMixins.TriggerAutomationMixin)
+{
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */
@@ -50,7 +53,7 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, aut
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["distance", ...this._originPaths, "movementAction", ...this._displayPaths];
+    return ["distance", ...this._originPaths, "movementAction", "hr", ...this._triggerDisplayPaths];
   }
 
   /**
@@ -71,6 +74,23 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, aut
     return this.origin === "random";
   }
 
+  /** @inheritDoc */
+  async _getActivations(options = {}) {
+    const originToken = await this._getOriginToken(options.execution);
+    if (!this.randomDirection && !originToken) { return []; }
+    const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
+    return [
+      new MoveActivation({
+        display: this.display,
+        distance,
+        movementAction: this.movementAction || null,
+        originBarrier: this.originBarrier,
+        randomDirection: this.randomDirection,
+        token: originToken?.uuid,
+      }),
+    ];
+  }
+
   /**
    * Get the movement's origin token.
    * @param {AbilityExecution} execution
@@ -88,22 +108,5 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, aut
       });
     }
     return null;
-  }
-
-  /** @inheritDoc */
-  async getActivations(options = {}) {
-    const originToken = await this._getOriginToken(options.execution);
-    if (!this.randomDirection && !originToken) { return []; }
-    const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
-    return [
-      new MoveActivation({
-        display: this.display,
-        distance,
-        movementAction: this.movementAction || null,
-        originBarrier: this.originBarrier,
-        randomDirection: this.randomDirection,
-        token: originToken?.uuid,
-      }),
-    ];
   }
 }
