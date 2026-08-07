@@ -1,4 +1,6 @@
+import characterConfig from "../../constants/config/character-config.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { addFormula } from "../../helpers/formula.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
 import * as executionMixins from "../mixins/_module.mjs";
 
@@ -8,6 +10,15 @@ import * as executionMixins from "../mixins/_module.mjs";
  * @property {TeriockCombatant} source
  */
 export default class InitiativeExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
+  /**
+   * The default initiative formula.
+   * @type {Teriock.System.FormulaString}
+   */
+  static DEFAULT_FORMULA = addFormula(
+    addFormula(characterConfig.defaults.initiative.base, characterConfig.defaults.initiative.competence),
+    characterConfig.defaults.initiative.bonus,
+  );
+
   constructor(data = {}, options = {}) {
     foundry.utils.mergeObject(data, {
       bonus: options.source?.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,

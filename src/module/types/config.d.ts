@@ -46,7 +46,7 @@ declare global {
       group: keyof typeof changeConfig.child.groups;
       label: string;
       targets: (keyof typeof changeConfig.child.targets)[];
-      types?: Teriock.Changes.Type[];
+      types?: string[];
     };
 
     export type CurrencyEntry = { conversion: number, label: string, weight: number };

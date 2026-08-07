@@ -1,7 +1,6 @@
 import { EffectChangeData } from "@common/documents/_types.mjs";
 
 import changeConfig from "../constants/config/change-config.mjs";
-import { changeConfigs } from "../setup/_module.mjs";
 
 declare global {
   namespace Teriock.Changes {
@@ -15,7 +14,7 @@ declare global {
       | "override"
       | "subtract"
       | "upgrade"
-      | keyof typeof changeConfigs;
+      | keyof typeof changeConfig.types;
 
     export type Target = "ability" | "Actor" | "armament" | "Item";
 

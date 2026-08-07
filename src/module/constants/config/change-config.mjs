@@ -7,7 +7,7 @@ const numericalTypes = [...simpleTypes, "multiply"];
 const formulaTypes = [...numericalTypes, "boost", "substitute"];
 const harmTypes = [...formulaTypes, "typeAdd", "typeRemove", "typeSet"];
 
-/** @type {Record<string, Teriock.Changes.Type[]>} */
+/** @type {Record<string, string[]>} */
 const typeSubsets = {
   boolean: booleanTypes,
   formula: formulaTypes,
@@ -159,6 +159,14 @@ const phase = {
   },
 };
 
+const types = {
+  boost: { defaultPriority: 60, label: "TERIOCK.EFFECTS.Changes.boost" },
+  substitute: { defaultPriority: 70, label: "TERIOCK.EFFECTS.Changes.substitute" },
+  typeAdd: { defaultPriority: 15, label: "TERIOCK.EFFECTS.Changes.typeAdd" },
+  typeRemove: { defaultPriority: 15, label: "TERIOCK.EFFECTS.Changes.typeRemove" },
+  typeSet: { defaultPriority: 45, label: "TERIOCK.EFFECTS.Changes.typeSet" },
+};
+
 const parentTargets = { Actor: "DOCUMENT.Actor", Item: "DOCUMENT.Item" };
 
 const parent = { targets: parentTargets };
@@ -167,9 +175,10 @@ const defaultPhase = Object.entries(phase).find(([_k, v]) => v.default)[0];
 
 const tokenPhase = "initial";
 
-export default { child, defaultPhase, parent, phase, tokenPhase };
+export default { child, defaultPhase, parent, phase, tokenPhase, types };
 
 preLocalizeConfig("config.change.child.groups");
 preLocalizeConfig("config.change.child.paths", { key: "label", sort: true });
 preLocalizeConfig("config.change.parent.target");
 preLocalizeConfig("config.change.phase", { keys: ["hint", "label"] });
+preLocalizeConfig("config.change.types", { keys: ["label"] });

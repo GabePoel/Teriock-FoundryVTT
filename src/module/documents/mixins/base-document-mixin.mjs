@@ -159,7 +159,7 @@ export default function BaseDocumentMixin(Base) {
      * @returns {Identifier}
      */
     get defaultIdentifier() {
-      return tm.string.toKebabCase(this.name);
+      return teriock.helpers.string.toKebabCase(this.name);
     }
 
     /**

@@ -188,8 +188,8 @@ export default function CommonDocumentMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) { return false; }
 
-        if (!foundry.utils.hasProperty(data, "img")) {
-          this.updateSource({ img: this.constructor.getDefaultImageForType(data?.type) });
+        if (!foundry.utils.hasProperty(data, "img") && data?.type && data.type !== "base") {
+          this.updateSource({ img: this.constructor.getDefaultImageForType(data.type) });
         }
       }
 

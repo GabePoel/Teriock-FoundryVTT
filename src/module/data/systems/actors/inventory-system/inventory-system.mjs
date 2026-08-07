@@ -6,7 +6,12 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "inventory", visibleTypes: ["equipment"] });
+    return foundry.utils.mergeObject(super.metadata, {
+      childEffectTypes: ["base", "consequence"],
+      childItemTypes: ["equipment"],
+      type: "inventory",
+      visibleTypes: ["equipment"],
+    });
   }
 
   /**
@@ -75,18 +80,21 @@ export default class InventorySystem extends BaseActorSystem {
           displayName: CONST.TOKEN_DISPLAY_MODES.NONE,
           disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
         },
+        system: {
+          settings: Object.fromEntries(Object.keys(TERIOCK.config.settings.categories.actor).map(k => [k, false])),
+        },
       }, data),
     );
   }
 
   /** @inheritDoc */
   async getPanelParts() {
-    const parts = await super.getPanelParts();
-    parts.bars = [{
-      icon: TERIOCK.display.icons.ui.info,
-      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-      wrappers: [this.containing],
-    }];
-    return parts;
+    return Object.assign(await super.getPanelParts(), {
+      bars: [{
+        icon: TERIOCK.display.icons.ui.info,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [this.containing],
+      }],
+    });
   }
 }

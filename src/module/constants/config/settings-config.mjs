@@ -7,6 +7,7 @@ export default {
     actor: {
       autoColoration: true,
       autoDetectionModes: true,
+      autoEncumbrance: true,
       autoLighting: true,
       autoScale: true,
       autoTransformation: true,

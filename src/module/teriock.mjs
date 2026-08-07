@@ -10,9 +10,6 @@ import * as helpers from "./helpers/_module.mjs";
 import { makeIconClass } from "./helpers/icon.mjs";
 import * as setup from "./setup/_module.mjs";
 
-const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
-const { DocumentSheetConfig } = foundry.applications.apps;
-
 // Register Global References
 // ==========================
 
@@ -29,48 +26,9 @@ Object.assign(globalThis, {
     fromIdentifierSync: helpers.utils.fromIdentifierSync,
     helpers,
   },
-  tm: { ...helpers, dialogs: applications.dialogs },
 });
 
-// Handle Dark Reader Conflicts
-// ============================
-
-// Tell Dark Reader to ignore this through their recommended method.
-document.head.append(Object.assign(document.createElement("meta"), { name: "darkreader-lock" }));
-
-// Sometimes Dark Reader ignores this request, so we explicitly load the CSS in those cases. This has the downside of
-// messing with Foundry's CSS layers so it could in theory annoy some modules.
-if ([...document.querySelectorAll("style")].some((el) => el.classList.contains("darkreader"))) {
-  document.head.append(
-    Object.assign(document.createElement("link"), { href: "systems/teriock/css/teriock.css", rel: "stylesheet" }),
-  );
-}
-
 foundry.helpers.Hooks.once("init", function() {
-  /**
-   * Helper function to assign configs to `CONFIG` one level deep.
-   * @param {object} configs
-   */
-  function assign(configs) {
-    for (const [key, config] of Object.entries(configs)) { Object.assign(CONFIG[key], config); }
-  }
-
-  /**
-   * Make a panel sheet for a given document class.
-   * @template T
-   * @param {T} doc
-   * @returns {{ cls: typeof PanelSheet, doc: T, makeDefault: boolean, types: string[] }}
-   */
-  function makePanelSheet(doc) {
-    return {
-      cls: applications.sheets.utility.PanelSheet,
-      doc,
-      label: "TERIOCK.SHEETS.Panel.LABEL",
-      makeDefault: false,
-      types: doc.TYPES,
-    };
-  }
-
   // Register Game Shortcuts
   // =======================
 
@@ -100,30 +58,28 @@ foundry.helpers.Hooks.once("init", function() {
     ...TERIOCK.statuses.hacks,
   });
 
-  // Configure UI Components
+  // Configure UI and UX Components
   // =======================
 
-  assign({
-    ui: {
-      actors: applications.sidebar.tabs.TeriockActorDirectory,
-      chat: applications.sidebar.tabs.TeriockChatLog,
-      combat: applications.sidebar.tabs.TeriockCombatTracker,
-      compendium: applications.sidebar.tabs.TeriockCompendiumDirectory,
-      hotbar: applications.ui.TeriockHotbar,
-      items: applications.sidebar.tabs.TeriockItemDirectory,
-      notifications: applications.ui.TeriockNotifications,
-      pause: applications.ui.TeriockGamePause,
-      tables: applications.sidebar.tabs.TeriockRollTableDirectory,
-    },
-    ux: {
-      ContextMenu: applications.ux.TeriockContextMenu,
-      DragDrop: applications.ux.TeriockDragDrop,
-      TextEditor: applications.ux.TeriockTextEditor,
-      TooltipManager: helpers.interaction.TeriockTooltipManager,
-    },
-  });
+  CONFIG.ui.actors = applications.sidebar.tabs.TeriockActorDirectory;
+  CONFIG.ui.chat = applications.sidebar.tabs.TeriockChatLog;
+  CONFIG.ui.combat = applications.sidebar.tabs.TeriockCombatTracker;
+  CONFIG.ui.compendium = applications.sidebar.tabs.TeriockCompendiumDirectory;
+  CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
+  CONFIG.ui.items = applications.sidebar.tabs.TeriockItemDirectory;
+  CONFIG.ui.notifications = applications.ui.TeriockNotifications;
+  CONFIG.ui.pause = applications.ui.TeriockGamePause;
+  CONFIG.ui.tables = applications.sidebar.tabs.TeriockRollTableDirectory;
+
+  CONFIG.ux.ContextMenu = applications.ux.TeriockContextMenu;
+  CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
+  CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;
+  CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
+
   applications.ux.enrichment.registerEnrichers();
+
   const fontPath = (s) => `${helpers.path.systemPath(`assets/fonts/${s}`)}`;
+
   Object.assign(CONFIG.fontDefinitions, {
     "Alegreya SC": {
       editor: true,
@@ -174,116 +130,100 @@ foundry.helpers.Hooks.once("init", function() {
   // Assign Document and Collection Classes
   // --------------------------------------
 
-  assign({
-    ActiveEffect: {
-      changeTypes: setup.changeConfigs,
-      compendiumIndexFields: ["system._sup"],
-      dataModels: {
-        ability: data.systems.effects.AbilitySystem,
-        attunement: data.systems.effects.AttunementSystem,
-        base: data.systems.effects.BaseEffectSystem,
-        condition: data.systems.effects.ConditionSystem,
-        consequence: data.systems.effects.ConsequenceSystem,
-        cover: data.systems.effects.BaseEffectSystem,
-        fluency: data.systems.effects.FluencySystem,
-        hack: data.systems.effects.HackSystem,
-        imbuement: data.systems.effects.ImbuementSystem,
-        property: data.systems.effects.PropertySystem,
-        resource: data.systems.effects.ResourceSystem,
-      },
-      defaultType: "consequence",
-      documentClass: documents.TeriockActiveEffect,
-      expiryAction: "delete",
-      phases: constants.config.change.phase,
-    },
-    Actor: {
-      collection: documents.collections.TeriockActors,
-      dataModels: {
-        character: data.systems.actors.CharacterSystem,
-        creature: data.systems.actors.CreatureSystem,
-        inventory: data.systems.actors.InventorySystem,
-      },
-      defaultType: "character",
-      documentClass: documents.TeriockActor,
-    },
-    AmbientLight: {
-      documentClass: documents.TeriockAmbientLightDocument,
-      objectClass: canvas.placeables.TeriockAmbientLight,
-    },
-    Card: {
-      dataModels: { card: data.systems.cards.BaseCardsSystem, stone: data.systems.cards.StoneSystem },
-      documentClass: documents.TeriockCard,
-    },
-    ChatMessage: {
-      collection: documents.collections.TeriockChatMessages,
-      dataModels: {
-        base: data.systems.messages.BaseMessageSystem,
-        interactive: data.systems.messages.InteractiveSystem,
-        triggered: data.systems.messages.TriggeredSystem,
-      },
-      defaultType: "interactive",
-      documentClass: documents.TeriockChatMessage,
-      popoutClass: applications.sidebar.apps.TeriockChatPopout,
-      template: "teriock/ui/chat-message",
-    },
-    Combat: {
-      documentClass: documents.TeriockCombat,
-      initiative: {
-        decimals: 2,
-        formula: teriock.helpers.formula.addFormula(
-          teriock.helpers.formula.addFormula(
-            TERIOCK.config.character.defaults.initiative.base,
-            TERIOCK.config.character.defaults.initiative.competence,
-          ),
-          TERIOCK.config.character.defaults.initiative.bonus,
-        ),
-      },
-    },
-    Combatant: { documentClass: documents.TeriockCombatant },
-    Folder: { collection: documents.collections.TeriockFolders, documentClass: documents.TeriockFolder },
-    Item: {
-      collection: documents.collections.TeriockItems,
-      compendiumIndexFields: ["system._sup"],
-      dataModels: {
-        archetype: data.systems.items.ArchetypeSystem,
-        body: data.systems.items.BodySystem,
-        equipment: data.systems.items.EquipmentSystem,
-        mount: data.systems.items.MountSystem,
-        power: data.systems.items.PowerSystem,
-        rank: data.systems.items.RankSystem,
-        species: data.systems.items.SpeciesSystem,
-      },
-      defaultType: "power",
-      documentClass: documents.TeriockItem,
-    },
-    JournalEntry: { collection: documents.collections.TeriockJournal, documentClass: documents.TeriockJournalEntry },
-    JournalEntryCategory: { documentClass: documents.TeriockJournalEntryCategory },
-    JournalEntryPage: {
-      dataModels: {
-        class: data.systems.pages.ClassSystem,
-        damage: data.systems.pages.HarmSystem,
-        drain: data.systems.pages.HarmSystem,
-        rule: data.systems.pages.RuleSystem,
-        tradecraft: data.systems.pages.TradecraftSystem,
-      },
-      documentClass: documents.TeriockJournalEntryPage,
-    },
-    Macro: {
-      collection: documents.collections.TeriockMacros,
-      defaultType: "script",
-      documentClass: documents.TeriockMacro,
-    },
-    Region: { documentClass: documents.TeriockRegionDocument },
-    RollTable: { collection: documents.collections.TeriockRollTables, documentClass: documents.TeriockRollTable },
-    Scene: { collection: documents.collections.TeriockScenes, documentClass: documents.TeriockScene },
-    TableResult: { documentClass: documents.TeriockTableResult },
-    Token: {
-      documentClass: documents.TeriockTokenDocument,
-      hudClass: applications.hud.TeriockTokenHUD,
-      objectClass: canvas.placeables.TeriockToken,
-    },
-    User: { collection: documents.collections.TeriockUsers, documentClass: documents.TeriockUser },
-  });
+  CONFIG.ActiveEffect.changeTypes = constants.config.change.types;
+  CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
+  CONFIG.ActiveEffect.dataModels.ability = data.systems.effects.AbilitySystem;
+  CONFIG.ActiveEffect.dataModels.attunement = data.systems.effects.AttunementSystem;
+  CONFIG.ActiveEffect.dataModels.base = data.systems.effects.BaseEffectSystem;
+  CONFIG.ActiveEffect.dataModels.condition = data.systems.effects.ConditionSystem;
+  CONFIG.ActiveEffect.dataModels.consequence = data.systems.effects.ConsequenceSystem;
+  CONFIG.ActiveEffect.dataModels.cover = data.systems.effects.BaseEffectSystem;
+  CONFIG.ActiveEffect.dataModels.fluency = data.systems.effects.FluencySystem;
+  CONFIG.ActiveEffect.dataModels.hack = data.systems.effects.HackSystem;
+  CONFIG.ActiveEffect.dataModels.imbuement = data.systems.effects.ImbuementSystem;
+  CONFIG.ActiveEffect.dataModels.property = data.systems.effects.PropertySystem;
+  CONFIG.ActiveEffect.dataModels.resource = data.systems.effects.ResourceSystem;
+  CONFIG.ActiveEffect.defaultType = "consequence";
+  CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
+  CONFIG.ActiveEffect.expiryAction = "delete";
+  CONFIG.ActiveEffect.phases = constants.config.change.phase;
+
+  CONFIG.Actor.collection = documents.collections.TeriockActors;
+  CONFIG.Actor.dataModels.character = data.systems.actors.CharacterSystem;
+  CONFIG.Actor.dataModels.creature = data.systems.actors.CreatureSystem;
+  CONFIG.Actor.dataModels.inventory = data.systems.actors.InventorySystem;
+  CONFIG.Actor.defaultType = "character";
+  CONFIG.Actor.documentClass = documents.TeriockActor;
+
+  CONFIG.AmbientLight.documentClass = documents.TeriockAmbientLightDocument;
+  CONFIG.AmbientLight.objectClass = canvas.placeables.TeriockAmbientLight;
+
+  CONFIG.Card.dataModels.card = data.systems.cards.BaseCardsSystem;
+  CONFIG.Card.dataModels.stone = data.systems.cards.StoneSystem;
+  CONFIG.Card.documentClass = documents.TeriockCard;
+
+  CONFIG.ChatMessage.collection = documents.collections.TeriockChatMessages;
+  CONFIG.ChatMessage.dataModels.base = data.systems.messages.BaseMessageSystem;
+  CONFIG.ChatMessage.dataModels.interactive = data.systems.messages.InteractiveSystem;
+  CONFIG.ChatMessage.dataModels.triggered = data.systems.messages.TriggeredSystem;
+  CONFIG.ChatMessage.defaultType = "interactive";
+  CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
+  CONFIG.ChatMessage.popoutClass = applications.sidebar.apps.TeriockChatPopout;
+  CONFIG.ChatMessage.template = "teriock/ui/chat-message";
+
+  CONFIG.Combat.documentClass = documents.TeriockCombat;
+  CONFIG.Combat.initiative.decimals = 2;
+  CONFIG.Combat.initiative.formula = teriock.executions.activity.InitiativeExecution.DEFAULT_FORMULA;
+
+  CONFIG.Combatant.documentClass = documents.TeriockCombatant;
+
+  CONFIG.Folder.collection = documents.collections.TeriockFolders;
+  CONFIG.Folder.documentClass = documents.TeriockFolder;
+
+  CONFIG.Item.collection = documents.collections.TeriockItems;
+  CONFIG.Item.compendiumIndexFields = ["system._sup"];
+  CONFIG.Item.dataModels.archetype = data.systems.items.ArchetypeSystem;
+  CONFIG.Item.dataModels.body = data.systems.items.BodySystem;
+  CONFIG.Item.dataModels.equipment = data.systems.items.EquipmentSystem;
+  CONFIG.Item.dataModels.mount = data.systems.items.MountSystem;
+  CONFIG.Item.dataModels.power = data.systems.items.PowerSystem;
+  CONFIG.Item.dataModels.rank = data.systems.items.RankSystem;
+  CONFIG.Item.dataModels.species = data.systems.items.SpeciesSystem;
+  CONFIG.Item.defaultType = "power";
+  CONFIG.Item.documentClass = documents.TeriockItem;
+
+  CONFIG.JournalEntry.collection = documents.collections.TeriockJournal;
+  CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
+
+  CONFIG.JournalEntryCategory.documentClass = documents.TeriockJournalEntryCategory;
+
+  CONFIG.JournalEntryPage.dataModels.class = data.systems.pages.ClassSystem;
+  CONFIG.JournalEntryPage.dataModels.damage = data.systems.pages.HarmSystem;
+  CONFIG.JournalEntryPage.dataModels.drain = data.systems.pages.HarmSystem;
+  CONFIG.JournalEntryPage.dataModels.rule = data.systems.pages.RuleSystem;
+  CONFIG.JournalEntryPage.dataModels.tradecraft = data.systems.pages.TradecraftSystem;
+  CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
+
+  CONFIG.Macro.collection = documents.collections.TeriockMacros;
+  CONFIG.Macro.defaultType = "script";
+  CONFIG.Macro.documentClass = documents.TeriockMacro;
+
+  CONFIG.Region.documentClass = documents.TeriockRegionDocument;
+
+  CONFIG.RollTable.collection = documents.collections.TeriockRollTables;
+  CONFIG.RollTable.documentClass = documents.TeriockRollTable;
+
+  CONFIG.Scene.collection = documents.collections.TeriockScenes;
+  CONFIG.Scene.documentClass = documents.TeriockScene;
+
+  CONFIG.TableResult.documentClass = documents.TeriockTableResult;
+
+  CONFIG.Token.documentClass = documents.TeriockTokenDocument;
+  CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;
+  CONFIG.Token.objectClass = canvas.placeables.TeriockToken;
+
+  CONFIG.User.collection = documents.collections.TeriockUsers;
+  CONFIG.User.documentClass = documents.TeriockUser;
 
   // Configure Type Icons and Hints
   // ------------------------------
@@ -298,160 +238,56 @@ foundry.helpers.Hooks.once("init", function() {
   // Configure Sheets
   // ----------------
 
-  // Unregister V1 Sheets
-  DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);
-  DocumentSheetConfig.unregisterSheet(documents.TeriockItem, "teriock", ItemSheet);
+  const rs = (doc, sheet, label, options = {}) => {
+    foundry.applications.apps.DocumentSheetConfig.registerSheet(doc, "teriock", sheet, {
+      label: `TERIOCK.SHEETS.${label}.LABEL`,
+      makeDefault: true,
+      ...options,
+    });
+  };
 
-  // Register Custom V2 Sheets
-  const sheetMap = [
-    // Ambient Lights
-    {
-      cls: applications.sheets.TeriockAmbientLightConfig,
-      doc: documents.TeriockAmbientLightDocument,
-      label: "TERIOCK.SHEETS.AmbientLight.LABEL",
-    },
-    {
-      cls: applications.sheets.TeriockTableResultConfig,
-      doc: documents.TeriockTableResult,
-      label: "TERIOCK.SHEETS.TableResult.LABEL",
-    },
-    {
-      cls: applications.sheets.TeriockRollTableSheet,
-      doc: documents.TeriockRollTable,
-      label: "TERIOCK.SHEETS.RollTable.LABEL",
-    },
-    // Actors
-    {
-      cls: applications.sheets.actor.PlayableActorSheet,
-      doc: documents.TeriockActor,
-      label: "TERIOCK.SHEETS.Playable.LABEL",
-      types: ["character", "creature", "inventory"],
-    },
-    {
-      cls: applications.sheets.actor.InventorySheet,
-      doc: documents.TeriockActor,
-      label: "TERIOCK.SHEETS.Inventory.LABEL",
-      types: ["inventory"],
-    },
-    // Items
-    {
-      cls: applications.sheets.utility.ChildSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Child.LABEL",
-      types: ["archetype"],
-    },
-    {
-      cls: applications.sheets.item.ArmamentSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Armament.LABEL",
-      types: ["body"],
-    },
-    {
-      cls: applications.sheets.item.EquipmentSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Equipment.LABEL",
-      types: ["equipment"],
-    },
-    {
-      cls: applications.sheets.item.MountSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Mount.LABEL",
-      types: ["mount"],
-    },
-    {
-      cls: applications.sheets.item.RankSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Rank.LABEL",
-      types: ["rank"],
-    },
-    {
-      cls: applications.sheets.item.PowerSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Power.LABEL",
-      types: ["power"],
-    },
-    {
-      cls: applications.sheets.item.SpeciesSheet,
-      doc: documents.TeriockItem,
-      label: "TERIOCK.SHEETS.Species.LABEL",
-      types: ["species"],
-    },
-    // Effects
-    {
-      cls: applications.sheets.effect.AbilitySheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Ability.LABEL",
-      types: ["ability"],
-    },
-    {
-      cls: applications.sheets.effect.FluencySheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Fluency.LABEL",
-      types: ["fluency"],
-    },
-    {
-      cls: applications.sheets.effect.ResourceSheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Resource.LABEL",
-      types: ["resource"],
-    },
-    {
-      cls: applications.sheets.effect.PropertySheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Property.LABEL",
-      types: ["property"],
-    },
-    {
-      cls: applications.sheets.effect.ConsequenceSheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Consequence.LABEL",
-      types: ["consequence"],
-    },
-    {
-      cls: applications.sheets.effect.ConditionSheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Condition.LABEL",
-      types: ["condition"],
-    },
-    {
-      cls: applications.sheets.effect.AttunementSheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Attunement.LABEL",
-      types: ["attunement"],
-    },
-    {
-      cls: applications.sheets.effect.ApplicableEffectSheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.ApplicableEffect.LABEL",
-      types: ["imbuement"],
-    },
-    {
-      cls: applications.sheets.effect.HackSheet,
-      doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Hack.LABEL",
-      types: ["hack"],
-    },
-    // Journal Entries
-    {
-      cls: applications.sheets.TeriockJournalEntrySheet,
-      doc: documents.TeriockJournalEntry,
-      label: "TERIOCK.SHEETS.Journal.LABEL",
-    },
-    // Pages
-    {
-      cls: applications.sheets.TeriockPageSheet,
-      doc: documents.TeriockJournalEntryPage,
-      label: "TYPES.SHEETS.Page.LABEL",
-      types: ["class", "damage", "drain", "rule", "tradecraft"],
-    },
-    // Anything that can have panels other than journal entry pages
-    makePanelSheet(documents.TeriockActiveEffect),
-    makePanelSheet(documents.TeriockItem),
-    makePanelSheet(documents.TeriockActor),
-  ];
-  sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
-    DocumentSheetConfig.registerSheet(doc, "teriock", cls, { label, makeDefault, types })
-  );
+  const d = documents;
+  const s = applications.sheets;
+  const se = s.effect;
+  const sa = s.actor;
+  const si = s.item;
+  const su = s.utility;
+
+  rs(d.TeriockActiveEffect, se.AbilitySheet, "Ability", { types: ["ability"] });
+  rs(d.TeriockActiveEffect, se.ApplicableEffectSheet, "ApplicableEffect", { types: ["imbuement"] });
+  rs(d.TeriockActiveEffect, se.AttunementSheet, "Attunement", { types: ["attunement"] });
+  rs(d.TeriockActiveEffect, se.ConditionSheet, "Condition", { types: ["condition"] });
+  rs(d.TeriockActiveEffect, se.ConsequenceSheet, "Consequence", { types: ["consequence"] });
+  rs(d.TeriockActiveEffect, se.FluencySheet, "Fluency", { types: ["fluency"] });
+  rs(d.TeriockActiveEffect, se.HackSheet, "Hack", { types: ["hack"] });
+  rs(d.TeriockActiveEffect, se.PropertySheet, "Property", { types: ["property"] });
+  rs(d.TeriockActiveEffect, se.ResourceSheet, "Resource", { types: ["resource"] });
+  rs(d.TeriockActiveEffect, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActiveEffect.TYPES });
+
+  rs(d.TeriockActor, sa.InventorySheet, "Inventory", { types: ["inventory"] });
+  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["character", "creature"] });
+  rs(d.TeriockActor, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActor.TYPES });
+
+  rs(d.TeriockAmbientLightDocument, s.TeriockAmbientLightConfig, "AmbientLight");
+
+  rs(d.TeriockItem, si.ArmamentSheet, "Armament", { types: ["body"] });
+  rs(d.TeriockItem, si.EquipmentSheet, "Equipment", { types: ["equipment"] });
+  rs(d.TeriockItem, si.MountSheet, "Mount", { types: ["mount"] });
+  rs(d.TeriockItem, si.PowerSheet, "Power", { types: ["power"] });
+  rs(d.TeriockItem, si.RankSheet, "Rank", { types: ["rank"] });
+  rs(d.TeriockItem, si.SpeciesSheet, "Species", { types: ["species"] });
+  rs(d.TeriockItem, su.ChildSheet, "Child", { types: ["archetype"] });
+  rs(d.TeriockItem, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockItem.TYPES });
+
+  rs(d.TeriockJournalEntry, s.TeriockJournalEntrySheet, "Journal");
+
+  rs(d.TeriockJournalEntryPage, s.TeriockPageSheet, "Page", {
+    types: ["class", "damage", "drain", "rule", "tradecraft"],
+  });
+
+  rs(d.TeriockRollTable, s.TeriockRollTableSheet, "RollTable");
+
+  rs(d.TeriockTableResult, s.TeriockTableResultConfig, "TableResult");
 
   // Configure Dice
   // ==============
