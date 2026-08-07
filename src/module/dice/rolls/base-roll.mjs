@@ -140,14 +140,15 @@ export default class BaseRoll extends Roll {
   /**
    * Check if a formula evaluates to a truthy or falsy value.
    * @param {Teriock.System.FormulaString} formula
-   * @param {object} data
+   * @param {object|(() => object)} data
    * @returns {boolean}
    */
   static qualify(formula, data = {}) {
     if (formula === "1") { return true; }
     if (formula === "0") { return false; }
     if (formula === "") { return false; }
-    return Boolean(this.minValue(formula, data));
+    const resolvedData = typeof data === "function" ? data() : data;
+    return Boolean(this.minValue(formula, resolvedData));
   }
 
   /**

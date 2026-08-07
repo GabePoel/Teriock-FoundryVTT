@@ -253,10 +253,12 @@ export default function AbilityUsagePart(Base) {
       // Add deliveries
       if (this.delivery) { data[`delivery.${this.delivery}`] = 1; }
       data["delivery.ball"] = Number(this.isBall);
-      data["delivery.ray"] = Number(this.isRay);
-      data["delivery.touch"] = Number(this.isTouch);
-      data["delivery.strike"] = Number(this.isStrike);
+      data["delivery.contact"] = Number(this.isContact);
       data["delivery.item"] = Number(this.needsItem);
+      data["delivery.ranged"] = Number(this.isRanged);
+      data["delivery.ray"] = Number(this.isRay);
+      data["delivery.strike"] = Number(this.isStrike);
+      data["delivery.touch"] = Number(this.isTouch);
       if (this.interaction === "feat") { data[`attr.${this.featSaveAttribute}`] = 1; }
       if (this.expansion.type) {
         Object.assign(data, {

@@ -152,7 +152,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @inheritDoc */
   get activeAutomations() {
     return this.automations.contents.filter(a =>
-      a.competencies.has(this.competence.raw) && a.checkIfQualified(this.getRollData())
+      a.competencies.has(this.competence.raw) && a.checkIfQualified(() => this.getRollData())
     );
   }
 

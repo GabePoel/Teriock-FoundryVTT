@@ -1,4 +1,6 @@
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
+import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { migrateValue } from "../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
@@ -26,6 +28,7 @@ export default function TriggerAutomationMixin(Base) {
    * @extends {BaseAutomation}
    * @mixin
    * @property {string|null} trigger
+   * @property {Teriock.System.FormulaString} triggerQualifier
    */
   class TriggerAutomation extends Base {
     /** @inheritDoc */
@@ -84,6 +87,7 @@ export default function TriggerAutomationMixin(Base) {
           initial: this.triggerMetadata.initial,
           nullable: this.triggerMetadata.nullable,
         }),
+        triggerQualifier: qualifierField({ initial: "1" }),
       });
     }
 
@@ -140,7 +144,7 @@ export default function TriggerAutomationMixin(Base) {
      * @returns {string[]}
      */
     get _triggerPaths() {
-      return ["trigger"];
+      return ["trigger", "triggerQualifier"];
     }
 
     /** @inheritDoc */
@@ -220,7 +224,7 @@ export default function TriggerAutomationMixin(Base) {
       const activations = await this._getActivations({
         actor: scope.actor,
         execution: scope.execution ?? null,
-        rollData: scope.execution?.getRollData?.() ?? this.getRollData() ?? {},
+        rollData: this._getFireRollData(scope),
       });
       if (!activations.length) { return; }
       scope.chatDataBySource ??= {};
@@ -232,7 +236,7 @@ export default function TriggerAutomationMixin(Base) {
     /** @inheritDoc */
     async _onFireTrigger(trigger, scope) {
       await super._onFireTrigger(trigger, scope);
-      if (this.canFire(trigger) && !this._isActiveTrigger(trigger)) { await this._onFire(scope); }
+      if (this.canFire(trigger, scope) && !this._isActiveTrigger(trigger)) { await this._onFire(scope); }
     }
 
     /**
@@ -249,7 +253,7 @@ export default function TriggerAutomationMixin(Base) {
     /** @inheritDoc */
     async _preFireTrigger(trigger, scope) {
       await super._preFireTrigger(trigger, scope);
-      if (this.canFire(trigger) && this._isActiveTrigger(trigger)) {
+      if (this.canFire(trigger, scope) && this._isActiveTrigger(trigger)) {
         if (scope.awaitFire) { return this._preFireExecutionTrigger(scope); }
         this._preFireExecutionTrigger(scope);
       }
@@ -258,11 +262,13 @@ export default function TriggerAutomationMixin(Base) {
     /**
      * Whether this can fire.
      * @param {string} trigger
+     * @param {Teriock.System.TriggerScope} [scope]
      * @returns {boolean}
      */
-    canFire(trigger) {
+    canFire(trigger, scope = {}) {
       return (trigger === this.trigger
         && this.checkIfQualified()
+        && BaseRoll.qualify(this.triggerQualifier, () => this._getFireRollData(scope))
         && (this._isActiveTrigger(trigger) || (this.active && this._canRunPassively && this._documentActive)));
     }
 

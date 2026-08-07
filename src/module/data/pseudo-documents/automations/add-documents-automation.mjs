@@ -1,5 +1,7 @@
+import effectConfig from "../../../constants/config/effect-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/tools/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
@@ -19,6 +21,7 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  * @property {boolean} attachDocuments
  * @property {boolean} separate
+ * @property {Teriock.Keys.ApplicationTarget} target
  * @property {{enabled: boolean, data: object, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[]}} children
  */
 export default class AddDocumentsAutomation
@@ -56,6 +59,13 @@ export default class AddDocumentsAutomation
         uuids: new fields.SetField(new fields.DocumentUUIDField()),
       }),
       separate: new fields.BooleanField({ initial: false }),
+      target: new fields.StringField({
+        blank: false,
+        choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
+        initial: "actor",
+        nullable: false,
+        required: true,
+      }),
     });
   }
 
@@ -111,8 +121,10 @@ export default class AddDocumentsAutomation
   get _attachmentPaths() {
     if (this.document?.type !== "ability") { return this._triggerDisplayPaths; }
     const paths = ["separate"];
-    if (this.separate) { paths.push(...this._triggerDisplayPaths); }
-    else { paths.push("attachDocuments"); }
+    if (this.separate) {
+      paths.push("target");
+      paths.push(...this._triggerDisplayPaths);
+    } else { paths.push("attachDocuments"); }
     return paths;
   }
 
@@ -175,6 +187,7 @@ export default class AddDocumentsAutomation
         display: { label: this.display.label || this.#inferLabel(activationFamily.root) },
         primary: activationFamily,
         secondary: activationFamily,
+        target: this.target,
       };
       activations.push(new AddDocumentsActivation(activationData));
     }

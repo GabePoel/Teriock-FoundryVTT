@@ -2,6 +2,7 @@ import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
 import { PiercingModel } from "../../data/models/_module.mjs";
 import { BaseRoll, ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../helpers/formula.mjs";
+import { prefixObject } from "../../helpers/utils.mjs";
 import * as executionMixins from "./_module.mjs";
 
 const { fields } = foundry.data;
@@ -434,7 +435,7 @@ export default function AttackExecutionMixin(Base) {
 
     /** @inheritDoc */
     getRollData() {
-      return Object.assign(super.getRollData(), {
+      return Object.assign(super.getRollData(), prefixObject(this.armament?.system.getLocalRollData() ?? {}, "arm"), {
         ap: this.existingAttackPenalty,
         av0: Number(this.piercing.av0) * 2,
         "av0.wep": Number(this.armament?.system.piercing.av0) * 2,

@@ -26,11 +26,6 @@ export default function GrantedSystemMixin(Base) {
     }
 
     /** @inheritDoc */
-    get needsAttunement() {
-      return !this.applyIfDeattuned;
-    }
-
-    /** @inheritDoc */
     _isSuppressedDampened() {
       return !this.applyIfDampened && super._isSuppressedDampened();
     }

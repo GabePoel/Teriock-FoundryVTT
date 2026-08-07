@@ -75,6 +75,7 @@ declare global {
       equipment?: TeriockEquipment;
       execution?: AbilityExecution | ArmamentExecution | BaseExecution;
       item?: AnyItem;
+      rollData?: object;
       tradecraft?: Teriock.Keys.Tradecraft;
       trigger?: string;
     };

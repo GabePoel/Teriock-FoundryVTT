@@ -92,8 +92,8 @@ export default function MacroAutomationMixin(Base) {
     }
 
     /** @inheritDoc */
-    canFire(trigger) {
-      return super.canFire(trigger) && this.hasMacro;
+    canFire(trigger, scope) {
+      return super.canFire(trigger, scope) && this.hasMacro;
     }
 
     /**

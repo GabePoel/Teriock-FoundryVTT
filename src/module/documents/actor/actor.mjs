@@ -373,7 +373,7 @@ export default class TeriockActor
   /** @inheritDoc */
   async hookCall(trigger, options = {}) {
     const out = await super.hookCall(trigger, options);
-    BaseExpiration.massExpire([this], TriggerExpiration.TYPE, { trigger });
+    BaseExpiration.massExpire([this], TriggerExpiration.TYPE, { ...options.scope, trigger });
     return out;
   }
 

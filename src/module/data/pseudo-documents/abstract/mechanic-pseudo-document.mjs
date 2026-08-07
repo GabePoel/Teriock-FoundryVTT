@@ -1,5 +1,6 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
+import { prefixObject } from "../../../helpers/utils.mjs";
 import { competenceField, qualifierField } from "../../fields/tools/builders.mjs";
 import * as dataMixins from "../../mixins/_module.mjs";
 import TypedPseudoDocument from "./typed-pseudo-document.mjs";
@@ -76,12 +77,31 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   }
 
   /**
+   * The roll data used to evaluate something scope-dependent.
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
+   * @returns {object}
+   */
+  _getFireRollData(scope = {}) {
+    const rollData = scope.rollData ?? scope.execution?.getRollData?.() ?? this.getRollData() ?? {};
+    const doc = this.document;
+    const effect = doc?.documentName === "ActiveEffect" ? doc : null;
+    const item = doc?.documentName === "Item" ? doc : (effect?.parent?.documentName === "Item" ? effect.parent : null);
+    const itemData = { identifier: item?.forcedIdentifier, type: item?.type };
+    return {
+      ...rollData,
+      ...prefixObject({ identifier: effect?.forcedIdentifier, type: effect?.type }, "mech.effect"),
+      ...prefixObject(itemData, "mech.item"),
+      ...(item?.metadata.armament ? prefixObject(itemData, "mech.arm") : {}),
+    };
+  }
+
+  /**
    * Whether this is qualified.
-   * @param {object} [rollData]
+   * @param {object|(() => object)} [rollData]
    * @returns {boolean}
    */
   checkIfQualified(rollData) {
-    return BaseRoll.qualify(this.activeQualifier, rollData ?? this.getRollData());
+    return BaseRoll.qualify(this.activeQualifier, rollData ?? (() => this.getRollData()));
   }
 
   /**
