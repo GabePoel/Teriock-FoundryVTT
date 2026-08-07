@@ -21,7 +21,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL";
+    return "TERIOCK.ACTIVATIONS.ChangeQuantity.BUTTON";
   }
 
   /** @inheritDoc */

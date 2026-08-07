@@ -1,5 +1,7 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { FeatActivation } from "../activations/command-activations.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -7,9 +9,12 @@ const { fields } = foundry.data;
 
 /**
  * @extends {ThresholdAutomation}
+ * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class FeatAutomation extends automationMixins.TriggerAutomationMixin(ThresholdAutomation) {
+export default class FeatAutomation
+  extends mixClasses(ThresholdAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.TERMS.Interaction.feat";

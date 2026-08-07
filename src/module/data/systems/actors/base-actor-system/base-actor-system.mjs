@@ -2,8 +2,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
-import { StatusExpiration } from "../../../pseudo-documents/expirations/_module.mjs";
-import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -152,12 +150,9 @@ export default class BaseActorSystem
     return this.getLocalRollData();
   }
 
-  /**
-   * Performs post-update operations for the actor.
-   * @returns {Promise<void>}
-   */
+  /** @inheritDoc */
   async postUpdate() {
+    await super.postUpdate();
     await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
-    await BaseExpiration.massExpire([this.parent], StatusExpiration.TYPE, {}, true);
   }
 }

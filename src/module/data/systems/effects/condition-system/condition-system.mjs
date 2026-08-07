@@ -95,11 +95,12 @@ export default class ConditionSystem
   }
 
   /** @inheritDoc */
-  async expire() {
+  async expire(options = {}) {
     const actor = this.actor;
     const key = this.conditionKey;
-    await super.expire();
-    await actor?.toggleStatusEffect(key, { active: false });
+    const expired = await super.expire(options);
+    if (expired) { await actor?.toggleStatusEffect(key, { active: false }); }
+    return expired;
   }
 
   /** @inheritDoc */

@@ -1,6 +1,7 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../fields/_module.mjs";
 import { AttackActivation } from "../activations/_module.mjs";
-import { OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
+import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -9,8 +10,9 @@ const { fields } = foundry.data;
 /**
  * An automation that makes an attack roll with no ability associated with it.
  * @extends {ThresholdAutomation}
- * @mixes OverrideCompetenceMechanic
+ * @mixes CritMechanic
  * @mixes TriggerAutomation
+ * @mixes OverrideCompetenceMechanic
  * @property {Teriock.System.FormulaString} attackPenalty
  * @property {boolean|null} consumeAmmunition
  * @property {boolean|null} limb
@@ -22,7 +24,12 @@ const { fields } = foundry.data;
  * @see {AttackRollExecution}
  */
 export default class AttackAutomation
-  extends OverrideCompetenceMechanicMixin(automationMixins.TriggerAutomationMixin(ThresholdAutomation))
+  extends mixClasses(
+    ThresholdAutomation,
+    CritMechanicMixin,
+    automationMixins.TriggerAutomationMixin,
+    OverrideCompetenceMechanicMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Attack"];

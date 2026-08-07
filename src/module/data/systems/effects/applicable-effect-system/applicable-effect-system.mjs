@@ -210,18 +210,6 @@ export default class ApplicableEffectSystem
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    // Don't bother creating if this would just immediately expire.
-    if (this.parent.actor) {
-      if ((this.expirations.documentsByType.status ?? []).some((e) => e.shouldExpire)) {
-        if (options?.notifyOnFailure) {
-          ui.notifications.error("TERIOCK.OPERATIONS.autoExpire", {
-            format: { name: this.parent.name },
-            localize: true,
-          });
-        }
-        return false;
-      }
-    }
     // Ensure duration is always set properly.
     if (this.parent.parent) {
       const start = TeriockActiveEffect.getEffectStart();

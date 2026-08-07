@@ -50,9 +50,23 @@ export default class StatusExpiration extends BaseExpiration {
     return false;
   }
 
+  /**
+   * Whether a set of changed statuses includes any that this cares about.
+   * @param {Set<Teriock.Keys.Condition>} [changedStatuses]
+   * @returns {boolean}
+   */
+  _isRelevantChange(changedStatuses) {
+    if (!changedStatuses) { return true; }
+    for (const c of this.statuses.present) { if (changedStatuses.has(c)) { return true; } }
+    for (const c of this.statuses.absent) { if (changedStatuses.has(c)) { return true; } }
+    return false;
+  }
+
   /** @inheritDoc */
   _validateExpirationAttempt(type, context) {
-    return super._validateExpirationAttempt(type, context) && this.shouldExpire;
+    return super._validateExpirationAttempt(type, context)
+      && this._isRelevantChange(context.changedStatuses)
+      && this.shouldExpire;
   }
 
   /** @inheritDoc */

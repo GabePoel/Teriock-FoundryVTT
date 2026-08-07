@@ -1,15 +1,20 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class AttunementAutomation extends automationMixins.TriggerAutomationMixin(BaseAutomation) {
+export default class AttunementAutomation
+  extends mixClasses(BaseAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 

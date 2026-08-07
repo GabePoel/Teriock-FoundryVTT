@@ -1,6 +1,7 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -8,6 +9,7 @@ const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes SelectExternalDocumentsAutomation
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
@@ -16,6 +18,7 @@ const { fields } = foundry.data;
 export default class SummonAutomation
   extends mixClasses(
     BaseAutomation,
+    CritMechanicMixin,
     automationMixins.SelectExternalDocumentsAutomationMixin,
     automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,

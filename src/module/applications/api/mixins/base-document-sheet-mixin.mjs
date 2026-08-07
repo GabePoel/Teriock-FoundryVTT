@@ -16,6 +16,7 @@ export default function BaseDocumentSheetMixin(Base) {
    * @mixes BaseApplication
    * @mixin
    * @property {ApplicationConfiguration & Teriock.Sheet._SheetConfiguration} options
+   * @property {BaseDocument} document
    */
   class BaseDocumentSheet extends BaseApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -34,11 +35,8 @@ export default function BaseDocumentSheetMixin(Base) {
     async _onFirstRender(context, options) {
       await super._onFirstRender(context, options);
       if (!this.options.teriock?.autoIcon || !this.window.header) { return; }
-      const typeIcons = CONFIG[this.document.documentName]?.typeIcons;
-      const typeIcon = typeIcons ? typeIcons[this.document.type] : null;
-      const sidebarIcon = CONFIG[this.document.documentName]?.sidebarIcon;
-      const icon = typeIcon ?? sidebarIcon ?? TERIOCK.config.document.document.icon;
-      this.window.icon.className = makeIconClass(icon, "title");
+      const icon = this.document.typeIcon;
+      if (icon) { this.window.icon.className = makeIconClass(icon, "title"); }
     }
 
     /** @inheritDoc */

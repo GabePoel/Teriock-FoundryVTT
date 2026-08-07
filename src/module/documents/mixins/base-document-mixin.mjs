@@ -256,6 +256,18 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * An icon for this document type.
+     * @return {string|null}
+     */
+    get typeIcon() {
+      const typeIcons = CONFIG[this.documentName]?.typeIcons;
+      const typeIcon = typeIcons ? typeIcons[this.type] : null;
+      const sidebarIcon = CONFIG[this.documentName]?.sidebarIcon;
+      const icon = typeIcon ?? sidebarIcon ?? TERIOCK.config.document.document.icon;
+      return icon ?? null;
+    }
+
+    /**
      * Helper to start a benchmark.
      * @param {string} key
      */

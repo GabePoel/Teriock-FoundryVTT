@@ -1,4 +1,6 @@
 import { objectMap } from "../../../../../../helpers/utils.mjs";
+import { StatusExpiration } from "../../../../../pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../../../../pseudo-documents/expirations/abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -64,11 +66,34 @@ export default function ActorConditionsPart(Base) {
       }
     }
 
+    /**
+     * The statuses that were added or removed since the last time they were checked, tracking the previous set on
+     * the actor's cache so status expirations only get checked against the statuses that actually changed.
+     * @returns {Set<Teriock.Keys.Condition>}
+     */
+    get _changedStatuses() {
+      const statuses = this.parent.statuses;
+      const cached = this.parent._cache.statuses ?? new Set();
+      const changed = new Set([...statuses].filter(s => !cached.has(s)));
+      for (const s of cached) { if (!statuses.has(s)) { changed.add(s); } }
+      this.parent._cache.statuses = new Set(statuses);
+      return changed;
+    }
+
     /** @inheritDoc */
     getRollData() {
       const data = super.getRollData();
       for (const s of this.parent.statuses) { data[`status.${s}`] = 1; }
       return data;
+    }
+
+    /** @inheritDoc */
+    async postUpdate() {
+      await super.postUpdate();
+      const changedStatuses = this._changedStatuses;
+      if (changedStatuses.size) {
+        await BaseExpiration.massExpire([this.parent], StatusExpiration.TYPE, { changedStatuses });
+      }
     }
 
     /** @inheritDoc */

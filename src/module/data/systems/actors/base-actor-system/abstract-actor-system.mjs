@@ -33,6 +33,12 @@ export default class AbstractActorSystem extends mixClasses(TypeDataModel, syste
     for (const condition of conditions) { this._addVirtualStatus(condition, reason, options); }
   }
 
+  /**
+   * Performs post-update operations for the actor.
+   * @returns {Promise<void>}
+   */
+  async postUpdate() {}
+
   /** @inheritDoc */
   prepareCleanupData() {
     this.prepareVirtualEffects();

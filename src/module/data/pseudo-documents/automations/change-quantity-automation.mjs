@@ -45,7 +45,6 @@ export default class ChangeQuantityAutomation
     return Object.assign(super.defineSchema(), {
       formula: rollableFormulaField(),
       identifier: new TypedIdentifierField(),
-      showDialog: new fields.BooleanField({ initial: true }),
       targetParent: new fields.BooleanField({ initial: true }),
     });
   }

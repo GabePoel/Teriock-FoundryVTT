@@ -1,4 +1,6 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { TakeCoverActivation, TakeUncoverActivation } from "../activations/command-activations.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -6,9 +8,12 @@ const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class CoverAutomation extends automationMixins.TriggerAutomationMixin(BaseAutomation) {
+export default class CoverAutomation
+  extends mixClasses(BaseAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Cover"];
 

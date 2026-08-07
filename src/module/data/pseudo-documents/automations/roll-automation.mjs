@@ -17,7 +17,6 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
- * @property {boolean} merge
  */
 export default class RollAutomation
   extends mixClasses(
@@ -67,14 +66,7 @@ export default class RollAutomation
   async _getActivations(options = {}) {
     const formula = options?.execution?._heightenString?.(this.formula) ?? this.formula;
     if (formula && this.impact) {
-      return [
-        new RollActivation({
-          display: this.display,
-          formula,
-          impact: this.impact,
-          merge: this.impact === "other" ? false : this.merge,
-        }),
-      ];
+      return [new RollActivation({ display: this.display, formula, impact: this.impact })];
     }
     return [];
   }

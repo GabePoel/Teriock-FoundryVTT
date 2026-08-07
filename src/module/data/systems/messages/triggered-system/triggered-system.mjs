@@ -46,6 +46,7 @@ export default class TriggeredSystem extends InteractiveSystem {
     if (
       this.document.timestamp
         < Date.now() - (game.settings.get("teriock", "autoTriggerDeleteTime") ?? Infinity) * 60 * 1000
+      && this.parent.trackable
     ) {
       this.parent.delete();
     }

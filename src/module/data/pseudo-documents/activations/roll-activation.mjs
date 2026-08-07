@@ -10,7 +10,6 @@ const { fields } = foundry.data;
 /**
  * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
- * @property {boolean} merge
  * @property {number} boosts
  * @extends {BaseActivation}
  */

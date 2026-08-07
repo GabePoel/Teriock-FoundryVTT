@@ -73,6 +73,11 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
   }
 
   /** @inheritDoc */
+  get activeAutomations() {
+    return [];
+  }
+
+  /** @inheritDoc */
   get icon() {
     return TERIOCK.display.icons.pseudoDocument.expiration;
   }

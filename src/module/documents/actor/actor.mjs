@@ -32,6 +32,25 @@ export default class TeriockActor
     documentMixins.RetrievalDocumentMixin,
   )
 {
+  /**
+   * Config for {@link TeriockActor.prepareTriggeredChatData}.
+   * @returns {Record<"expiration"|"trigger", {icon: string, panelKey: string, titleKey: string}>}
+   */
+  static get #triggeredChatConfig() {
+    return {
+      expiration: {
+        icon: TERIOCK.display.icons.pseudoDocument.expiration,
+        panelKey: "TERIOCK.MESSAGE.Expiration.panel",
+        titleKey: "TERIOCK.MESSAGE.Expiration.title",
+      },
+      trigger: {
+        icon: TERIOCK.display.icons.pseudoDocument.automation,
+        panelKey: "TERIOCK.MESSAGE.Trigger.panel",
+        titleKey: "TERIOCK.MESSAGE.Trigger.title",
+      },
+    };
+  }
+
   /** @inheritDoc */
   static getDefaultArtwork(actorData) {
     const img = actorData?.img ?? this.getDefaultImageForType(actorData?.type);
@@ -354,7 +373,7 @@ export default class TeriockActor
   /** @inheritDoc */
   async hookCall(trigger, options = {}) {
     const out = await super.hookCall(trigger, options);
-    BaseExpiration.massExpire([this], TriggerExpiration.TYPE, { trigger }, false);
+    BaseExpiration.massExpire([this], TriggerExpiration.TYPE, { trigger });
     return out;
   }
 
@@ -378,9 +397,12 @@ export default class TeriockActor
    * Build chat message data for triggered activations from a single source document.
    * @param {Teriock.System.Trigger} trigger
    * @param {TeriockDocument} [document]
+   * @param {"expiration"|"trigger"} [type]
    * @returns {Partial<Teriock.Data.ChatMessageData>}
    */
-  prepareTriggeredChatData(trigger, document = null) {
+  prepareTriggeredChatData(trigger, document = null, type = "trigger") {
+    const config = TeriockActor.#triggeredChatConfig;
+    const { icon, panelKey, titleKey } = config[type] ?? config.trigger;
     let label = trigger;
     for (const category of Object.values(TERIOCK.config.trigger)) {
       if (category.choices?.[trigger]) {
@@ -398,8 +420,8 @@ export default class TeriockActor
           type: document.type,
           uuid: document.uuid,
         }],
-        icon: TERIOCK.display.icons.ui.document,
-        title: _loc("TERIOCK.MESSAGE.Trigger.sources"),
+        icon: document.typeIcon ?? TERIOCK.display.icons.ui.document,
+        title: _loc(titleKey),
       });
     }
     return {
@@ -408,8 +430,9 @@ export default class TeriockActor
         activations: {},
         panels: [{
           associations,
+          icon,
           img: document?.img || TERIOCK.display.iconManifest.coreRules.difficultyClass,
-          name: _loc("TERIOCK.MESSAGE.Trigger.panel", { label }),
+          name: _loc(panelKey, { label }),
         }],
         source: document?.uuid ?? this.uuid,
       },

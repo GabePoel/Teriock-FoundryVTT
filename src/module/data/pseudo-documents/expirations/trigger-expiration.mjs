@@ -38,4 +38,9 @@ export default class TriggerExpiration extends BaseExpiration {
   _validateExpirationAttempt(type, context) {
     return super._validateExpirationAttempt(type, context) && this.triggers.has(context.trigger);
   }
+
+  /** @inheritDoc */
+  getTriggerLabel(context) {
+    return context.trigger ?? super.getTriggerLabel(context);
+  }
 }

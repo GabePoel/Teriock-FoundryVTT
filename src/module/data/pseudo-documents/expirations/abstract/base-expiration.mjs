@@ -1,9 +1,10 @@
 import mathConfig from "../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
-import { buildWriteOperation, consolidateWriteOperations, objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
+import { ExpirationActivation } from "../../activations/_module.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -65,27 +66,27 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
    * @param {TeriockActor[]} actors - Actors to check the Expirations of
    * @param {Teriock.Expirations.Type} type - The type of Expiration to check
    * @param {object} context - Any context relevant to the type of Expiration we check
-   * @param {boolean} delegate - Whether to delegate the rolls to each Actor's default User
    * @returns {Promise<void>}
    */
-  static async massExpire(actors, type, context, delegate = false) {
-    const effects = actors.flatMap(actor =>
-      actor.applicables.filter(effect =>
-        effect.active && effect.system.activeExpirations.some((e) => e.attempt(type, context, delegate))
-      )
-    );
-    if (!effects.length) { return; }
-    const operations = await Promise.all(
-      effects.map(async (e) =>
-        buildWriteOperation({
-          action: CONFIG.ActiveEffect.expiryAction,
-          docData: { "duration.expired": true },
-          uuid: e.uuid,
-        })
-      ),
-    );
-    const consolidatedOperations = consolidateWriteOperations(operations.filter(Boolean));
-    await foundry.documents.modifyBatch(consolidatedOperations);
+  static async massExpire(actors, type, context) {
+    for (const actor of actors) {
+      const scope = { chatDataBySource: {} };
+      for (const effect of actor.applicables) {
+        if (!effect.active) { continue; }
+        for (const expiration of effect.system.activeExpirations) {
+          const activation = expiration.attempt(type, context);
+          if (!activation) { continue; }
+          const key = effect.uuid;
+          scope.chatDataBySource[key] ??= actor.prepareTriggeredChatData(
+            expiration.getTriggerLabel(context),
+            effect,
+            "expiration",
+          );
+          teriock.data.systems.messages.TriggeredSystem.addActivations(scope.chatDataBySource[key], [activation]);
+        }
+      }
+      await actor.createTriggeredMessages(scope);
+    }
   }
 
   /** @inheritDoc */
@@ -113,20 +114,23 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
   }
 
   /**
-   * Attempt to expire.
+   * Attempt this expiration for a given event.
    * @param {Teriock.Expirations.Type} type
    * @param {object} context
-   * @param {boolean} delegate
-   * @returns {boolean} Whether this should expire but didn't manage its own handling.
+   * @returns {ExpirationActivation|null} An activation that resolves this expiration, if it applies.
    */
-  attempt(type, context, delegate) {
-    if (this._validateExpirationAttempt(type, context)) {
-      if (this.method === "roll") {
-        if (delegate) { this.actor.defaultUser.query("teriock.use", { uuid: this.uuid }); }
-        else { this.use(); }
-      } else { return true; }
-    }
-    return false;
+  attempt(type, context) {
+    if (!this._validateExpirationAttempt(type, context)) { return null; }
+    return new ExpirationActivation({ expiration: this.uuid });
+  }
+
+  /**
+   * A label for the triggered chat message panel header.
+   * @param {object} _context
+   * @returns {string}
+   */
+  getTriggerLabel(_context) {
+    return this.label;
   }
 
   /**
@@ -136,6 +140,6 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
   async use() {
     if (this.method === "roll") {
       await ExpirationExecution.create({}, { actor: this.actor, expiration: this, source: this.document });
-    } else { await this.document.system.expire(); }
+    } else { await this.document.system.expire({ dialog: true }); }
   }
 }

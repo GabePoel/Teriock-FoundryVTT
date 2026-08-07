@@ -179,11 +179,25 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
 
   /**
    * Expires the effect manually.
-   * @returns {Promise<void>}
+   * @param {object} [options]
+   * @param {boolean} [options.dialog]
+   * @returns {Promise<boolean>} Whether the effect actually expired (a dialog prompt may have been cancelled).
    */
-  async expire() {
-    if (CONFIG.ActiveEffect.expiryAction === "delete") { await this.parent.delete(); }
-    else if (CONFIG.ActiveEffect.expiryAction === "update") { await this.parent.update({ "duration.expired": true }); }
+  async expire(options = {}) {
+    let expired = true;
+    if (CONFIG.ActiveEffect.expiryAction === "delete") {
+      if (options?.dialog) { expired = Boolean(await this.parent.deleteDialog()); }
+      else { await this.parent.delete(); }
+    } else if (CONFIG.ActiveEffect.expiryAction === "update") { await this.parent.update({
+        "duration.expired": true,
+      }); }
+    if (expired && !this.parent.trackable) {
+      ui.notifications.success("TERIOCK.OPERATIONS.expiredUntracked", {
+        format: { name: this.parent.name },
+        localize: true,
+      });
+    }
+    return expired;
   }
 
   /** @inheritDoc */
