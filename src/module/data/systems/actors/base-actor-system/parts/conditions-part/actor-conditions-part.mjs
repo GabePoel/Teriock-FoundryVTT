@@ -1,3 +1,4 @@
+import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { StatusExpiration } from "../../../../../pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../../../../pseudo-documents/expirations/abstract/_module.mjs";
@@ -83,7 +84,7 @@ export default function ActorConditionsPart(Base) {
     /** @inheritDoc */
     getRollData() {
       const data = super.getRollData();
-      for (const s of this.parent.statuses) { data[`status.${s}`] = 1; }
+      for (const s of this.parent.statuses) { data[`status.${toKebabCase(s)}`] = 1; }
       return data;
     }
 

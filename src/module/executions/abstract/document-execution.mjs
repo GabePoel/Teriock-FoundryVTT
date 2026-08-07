@@ -1,4 +1,5 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import { prefixObject } from "../../helpers/utils.mjs";
 import BaseExecution from "./base-execution.mjs";
 
 const { fields } = foundry.data;
@@ -175,12 +176,8 @@ export default class DocumentExecution extends BaseExecution {
    * @returns {object}
    */
   getRollData() {
-    const data = {};
-    const sourceType = this.source.type;
-    const sourceIdentifier = this.source?.system?.identifier;
-    if (sourceType) { data[`source.${sourceType}`] = 1; }
-    if (sourceIdentifier) { data[`source.identifier.${sourceIdentifier}`] = 1; }
-    return Object.assign(this.source.system?.getSystemRollData?.() ?? {}, super.getRollData(), data);
+    const sourceData = prefixObject(this.source.system?.getLocalRollData?.() ?? {}, "source");
+    return Object.assign(this.source.system?.getSystemRollData?.() ?? {}, super.getRollData(), sourceData);
   }
 
   /** @inheritDoc*/

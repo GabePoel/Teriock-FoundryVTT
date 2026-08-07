@@ -1,7 +1,7 @@
 import { AttackSystemMixin } from "../_module.mjs";
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
+import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -361,14 +361,14 @@ export default function ArmamentSystemMixin(Base) {
         "range.ranged": Number(this.range.ranged),
         "range.short": this.range.short.rollValue,
         spellTurning: Number(this.spellTurning),
-        style: this.fightingStyle || 0,
+        style: this.fightingStyle ? toKebabCase(this.fightingStyle) : 0,
         vitals: Number(this.vitals),
       });
-      if (this.fightingStyle) { data[`style.${this.fightingStyle}`] = 1; }
+      if (this.fightingStyle) { data[`style.${toKebabCase(this.fightingStyle)}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
-      for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
-      for (const impact of this.impacts) { data[`impact.${impact}`] = 1; }
-      for (const equipmentClass of this.equipmentClasses) { data[`class.${equipmentClass}`] = 1; }
+      for (const p of this.props || new Set()) { data[`prop.${toKebabCase(p)}`] = 1; }
+      for (const impact of this.impacts) { data[`impact.${toKebabCase(impact)}`] = 1; }
+      for (const equipmentClass of this.equipmentClasses) { data[`class.${toKebabCase(equipmentClass)}`] = 1; }
       return data;
     }
 

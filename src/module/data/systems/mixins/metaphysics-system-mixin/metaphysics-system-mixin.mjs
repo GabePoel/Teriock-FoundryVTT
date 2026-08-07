@@ -1,6 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { listFormat } from "../../../../helpers/localization.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
 
 const { fields } = foundry.data;
 
@@ -108,13 +109,13 @@ export default function MetaphysicsSystemMixin(Base) {
     getLocalRollData() {
       const data = super.getLocalRollData();
       // Add power sources
-      for (const powerSource of this.powerSources) { data[`power.${powerSource}`] = 1; }
+      for (const powerSource of this.powerSources) { data[`ps.${toKebabCase(powerSource)}`] = 1; }
       // Add elements
       for (const element of this.elements) {
-        data[`element.${element}`] = 1;
+        data[`el.${toKebabCase(element)}`] = 1;
       }
       // Add effect types
-      for (const effectType of this.effectTypes) { data[`effect.${effectType}`] = 1; }
+      for (const effectType of this.effectTypes) { data[`et.${toKebabCase(effectType)}`] = 1; }
       return data;
     }
 

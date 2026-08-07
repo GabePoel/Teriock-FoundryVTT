@@ -77,7 +77,7 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   }
 
   /**
-   * The roll data used to evaluate something scope-dependent.
+   * The roll data used to evaluate something scope-dependent. Documents are scoped under `@mechanic`.
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {object}
    */
@@ -86,12 +86,10 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
     const doc = this.document;
     const effect = doc?.documentName === "ActiveEffect" ? doc : null;
     const item = doc?.documentName === "Item" ? doc : (effect?.parent?.documentName === "Item" ? effect.parent : null);
-    const itemData = { identifier: item?.forcedIdentifier, type: item?.type };
     return {
       ...rollData,
-      ...prefixObject({ identifier: effect?.forcedIdentifier, type: effect?.type }, "mech.effect"),
-      ...prefixObject(itemData, "mech.item"),
-      ...(item?.metadata.armament ? prefixObject(itemData, "mech.arm") : {}),
+      ...(effect ? prefixObject(effect.system.getSystemRollData(), "mechanic") : {}),
+      ...(item ? prefixObject(item.system.getSystemRollData(), "mechanic") : {}),
     };
   }
 

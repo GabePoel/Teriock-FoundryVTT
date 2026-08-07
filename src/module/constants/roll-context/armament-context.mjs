@@ -1,4 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { toKebabCase } from "../../helpers/string.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
@@ -47,22 +48,22 @@ export default armamentContext;
 preLocalizeConfig("rollContext.armament");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.weaponFightingStyles).forEach(([k, v]) => {
-    armamentContext[`style.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name: _loc(v) });
+    armamentContext[`style.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name: _loc(v) });
   });
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
-    armamentContext[`dmg.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.damageType", { name: _loc(v) });
+    armamentContext[`dmg.type.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.damageType", { name: _loc(v) });
   });
   Object.entries(TERIOCK.reference.properties).forEach(([k, v]) => {
-    armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name: _loc(v) });
+    armamentContext[`prop.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name: _loc(v) });
   });
   Object.entries(TERIOCK.config.impact).forEach(([k, v]) => {
-    armamentContext[`impact.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: _loc(v.label) });
+    armamentContext[`impact.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.equipmentClasses).forEach(([k, v]) => {
-    armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: _loc(v) });
+    armamentContext[`class.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: _loc(v) });
   });
   Object.entries(TERIOCK.reference.equipment).forEach(([k, v]) => {
-    armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name: _loc(v) });
+    armamentContext[`type.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name: _loc(v) });
   });
   Object.keys(TERIOCK.config.equipment.kind).forEach(k => {
     armamentContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.kind", {

@@ -169,9 +169,9 @@ export default function CommonSystemMixin(Base) {
       /** @inheritDoc */
       getLocalRollData() {
         const rollData = {
-          [`identifier.${this.identifier}`]: 1,
+          [`identifier.${this.parent.forcedIdentifier}`]: 1,
           [`type.${this.parent.type}`]: 1,
-          identifier: this.identifier,
+          identifier: this.parent.forcedIdentifier,
           name: this.parent.name,
           [this.parent.type]: 1,
           type: this.parent.type,
@@ -229,12 +229,17 @@ export default function CommonSystemMixin(Base) {
       }
 
       /**
-       * All the roll data that is specific to this document from {@link getLocalRollData} but prefixed by its type.
+       * All the roll data that is specific to this document from {@link getLocalRollData} but prefixed by its
+       * type. If this document is an armament (equipment or a body part), the same data is also aliased under
+       * `armament`, so it can be referenced without caring whether it's equipment or a body part.
        * This gets merged into {@link getRollData} so that all of an Actor's roll data is always available.
        * @returns {object}
        */
       getSystemRollData() {
-        return { ...prefixObject(this.getLocalRollData(), this.parent.type) };
+        const localData = this.getLocalRollData();
+        const rollData = { ...prefixObject(localData, this.parent.type) };
+        if (this.parent.metadata.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
+        return rollData;
       }
 
     }

@@ -1,4 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { toKebabCase } from "../../helpers/string.mjs";
 
 const actorContext = {
   c: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.c.label",
@@ -95,7 +96,7 @@ Hooks.once("i18nInit", () => {
     Object.assign(actorContext, { [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", { part: _loc(v.part) }) });
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v }) });
+    Object.assign(actorContext, { [`rank.${toKebabCase(k)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v }) });
   });
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
     Object.assign(actorContext, {
@@ -108,6 +109,6 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(TERIOCK.statuses.conditions).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`status.${k}`]: _loc(v.name) });
+    Object.assign(actorContext, { [`status.${toKebabCase(k)}`]: _loc(v.name) });
   });
 });

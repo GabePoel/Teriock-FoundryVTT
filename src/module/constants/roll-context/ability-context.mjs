@@ -1,4 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { toKebabCase } from "../../helpers/string.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
@@ -59,7 +60,7 @@ Hooks.once("i18nInit", () => {
   });
   Object.entries(TERIOCK.config.ability.executionTime).forEach(([_group, values]) => {
     Object.entries(values).forEach(([k, v]) => {
-      abilityContext[`time.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", { name: _loc(v) });
+      abilityContext[`time.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", { name: _loc(v) });
     });
   });
   Object.entries(TERIOCK.config.ability.expansion).forEach(([k, v]) => {
@@ -83,7 +84,7 @@ Hooks.once("i18nInit", () => {
     abilityContext[`costs.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: _loc(v) });
+    abilityContext[`class.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: _loc(v) });
   });
   abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
 });

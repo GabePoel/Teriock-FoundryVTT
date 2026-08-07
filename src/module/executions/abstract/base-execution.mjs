@@ -453,10 +453,11 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * @returns {Promise<false|void>}
    */
   async _prepareUpdates() {
-    if (this.actor && Object.keys(this.actorUpdates).length) {
+    if (this.actor && Object.keys(this.actorUpdates).length && this.actor.isOwner && !this.actor.inCompendium) {
       this.operations.push({
         action: "update",
         documentName: "Actor",
+        pack: this.actor?.pack,
         parent: this.actor?.parent,
         updates: [{ _id: this.actor.id, ...this.actorUpdates }],
       });

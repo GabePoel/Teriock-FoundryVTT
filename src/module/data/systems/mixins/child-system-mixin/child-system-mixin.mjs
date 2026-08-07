@@ -4,7 +4,7 @@ import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
@@ -369,7 +369,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        return { ...super.getLocalRollData(), [`kind.${toCamelCase(this.kind)}`]: 1, kind: this.kind };
+        return { ...super.getLocalRollData(), [`kind.${toKebabCase(this.kind)}`]: 1, kind: this.kind };
       }
 
       /** @inheritDoc */

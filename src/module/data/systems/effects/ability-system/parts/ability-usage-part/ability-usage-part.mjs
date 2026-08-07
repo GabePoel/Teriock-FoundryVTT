@@ -1,4 +1,5 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
+import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
@@ -244,11 +245,11 @@ export default function AbilityUsagePart(Base) {
       Object.assign(data, {
         [`interaction.${this.interaction}`]: 1,
         [`maneuver.${this.maneuver}`]: 1,
-        [`time.${this.executionTime.base}`]: 1,
+        [`time.${toKebabCase(this.executionTime.base)}`]: 1,
         interaction: this.interaction,
         maneuver: this.maneuver,
         range: this.range.rollValue,
-        time: this.executionTime.base,
+        time: toKebabCase(this.executionTime.base),
       });
       // Add deliveries
       if (this.delivery) { data[`delivery.${this.delivery}`] = 1; }

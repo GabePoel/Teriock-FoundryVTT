@@ -1,7 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
+import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -129,7 +129,7 @@ export default class MountSystem
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`type.${toCamelCase(this._source.mountType)}`]: 1,
+      [`type.${toKebabCase(this._source.mountType)}`]: 1,
       mounted: Number(this.mounted),
     };
   }

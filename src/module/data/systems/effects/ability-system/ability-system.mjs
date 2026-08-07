@@ -392,9 +392,9 @@ export default class AbilitySystem
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    Object.assign(rollData, { av0: 0, "av0.abi": 0, ub: 0, "ub.abi": 0, warded: 0, "warded.abi": 0 });
-    if (this.piercing === "av0") { Object.assign(rollData, { av0: 2, "av0.abi": 2 }); }
-    if (this.piercing === "ub") { Object.assign(rollData, { av0: 2, "av0.abi": 2, ub: 1, "ub.abi": 1 }); }
+    Object.assign(rollData, { av0: 0, ub: 0, warded: 0 });
+    if (this.piercing === "av0") { Object.assign(rollData, { av0: 2 }); }
+    if (this.piercing === "ub") { Object.assign(rollData, { av0: 2, ub: 1 }); }
     return rollData;
   }
 

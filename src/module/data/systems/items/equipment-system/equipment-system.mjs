@@ -177,7 +177,7 @@ export default class EquipmentSystem
   /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
-      [`type.${toCamelCase(this._source.equipmentType)}`]: 1,
+      [`type.${toKebabCase(this._source.equipmentType)}`]: 1,
       price: this.price,
     });
   }

@@ -1,3 +1,4 @@
+import { toKebabCase } from "../../../../helpers/string.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -203,7 +204,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   /** @inheritDoc */
   getLocalRollData() {
     const data = super.getLocalRollData();
-    for (const status of this.parent.statuses) { data[`condition.${status}`] = 1; }
+    for (const status of this.parent.statuses) { data[`condition.${toKebabCase(status)}`] = 1; }
     return data;
   }
 

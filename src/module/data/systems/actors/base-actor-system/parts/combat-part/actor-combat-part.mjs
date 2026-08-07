@@ -1,6 +1,5 @@
 import systemConfig from "../../../../../../constants/config/system-config.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
-import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../models/_module.mjs";
@@ -82,18 +81,6 @@ export default function ActorCombatPart(Base) {
     }
 
     /**
-     * Get equipment roll data.
-     * @returns {object}
-     */
-    #getEquipmentRollData() {
-      const data = {};
-      const { attacker, blocker } = this.wielding;
-      if (attacker) { Object.assign(data, prefixObject(attacker.system.getLocalRollData(), "atk")); }
-      if (blocker) { Object.assign(data, prefixObject(blocker.system.getLocalRollData(), "blk")); }
-      return data;
-    }
-
-    /**
      * Get offense roll data.
      * @returns {object}
      */
@@ -108,28 +95,16 @@ export default function ActorCombatPart(Base) {
       return {
         ap: this.combat.attackPenalty,
         av0: Number(hasAv0) * 2,
-        "av0.abi": 0,
-        "av0.nat": Number(naturalAv0) * 2,
-        "av0.wep": Number(weaponAv0) * 2,
         sb: this.offense.sb ? this.scaling.p : 0,
         ub: Number(hasUb),
-        "ub.abi": 0,
-        "ub.nat": Number(naturalUb),
-        "ub.wep": Number(weaponUb),
-        ward: Number(weaponWarded),
-        "ward.abi": 0,
-        "ward.wep": Number(weaponWarded),
+        warded: Number(weaponWarded),
       };
     }
 
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
-      Object.assign(rollData, {
-        ...this.#getDefenseRollData(),
-        ...this.#getOffenseRollData(),
-        ...this.#getEquipmentRollData(),
-      });
+      Object.assign(rollData, { ...this.#getDefenseRollData(), ...this.#getOffenseRollData() });
       return rollData;
     }
 
