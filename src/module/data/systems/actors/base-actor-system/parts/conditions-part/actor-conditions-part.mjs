@@ -67,11 +67,11 @@ export default function ActorConditionsPart(Base) {
     }
 
     /**
-     * The statuses that were added or removed since the last time they were checked, tracking the previous set on
+     * The statuses that were added or removed since the last time this was called, tracking the previous set on
      * the actor's cache so status expirations only get checked against the statuses that actually changed.
      * @returns {Set<Teriock.Keys.Condition>}
      */
-    get _changedStatuses() {
+    #consumeChangedStatuses() {
       const statuses = this.parent.statuses;
       const cached = this.parent._cache.statuses ?? new Set();
       const changed = new Set([...statuses].filter(s => !cached.has(s)));
@@ -90,7 +90,7 @@ export default function ActorConditionsPart(Base) {
     /** @inheritDoc */
     async postUpdate() {
       await super.postUpdate();
-      const changedStatuses = this._changedStatuses;
+      const changedStatuses = this.#consumeChangedStatuses();
       if (changedStatuses.size) {
         await BaseExpiration.massExpire([this.parent], StatusExpiration.TYPE, { changedStatuses });
       }
