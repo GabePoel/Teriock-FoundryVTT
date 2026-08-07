@@ -1,0 +1,33 @@
+_id: gXeRHhnU3N2CceOa
+_key: "!effects!gXeRHhnU3N2CceOa"
+duration:
+  units: minutes
+  value: 1
+folder: tym9EnqKfu692d6V
+img: systems/teriock/src/icons/abilities/ward.webp
+name: Ward Hand Effect
+system:
+  applyIfDeattuned: true
+  automations:
+    - _id: kFO9JycS17x7ZrNe
+      changeType: upgrade
+      key: system.warded
+      priority: null
+      qualifier: and(@spell, or(@delivery.hand, @delivery.missile))
+      type: childChange
+      value: "true"
+  elements:
+    - life
+  expirations:
+    - _id: LNS8PY2JRJTFcGB8
+      triggerQualifier: >-
+        or(and(@ability.interaction.attack, eq(@arm.identifier, @mech.arm.identifier), eq(@arm.type, @mech.arm.type)),
+        and(@spell, or(@delivery.hand, @delivery.missile)))
+      triggers:
+        - executeAbility
+      type: trigger
+  identifier: ward-hand-effect
+  powerSources:
+    - magical
+transfer: false
+type: imbuement

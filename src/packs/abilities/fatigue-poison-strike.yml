@@ -12,11 +12,13 @@ system:
       relation: apply
       status: slowed
       trigger: turnStart
+      triggerQualifier: not(@status.slowed)
       type: status
     - _id: T2m5C4ht03LnKk2e
       relation: apply
       status: immobilized
       trigger: turnStart
+      triggerQualifier: and(@status.slowed, not(@status.immobilized))
       type: status
   duration:
     raw: "24"

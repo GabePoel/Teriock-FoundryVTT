@@ -178,8 +178,8 @@ export default class DocumentExecution extends BaseExecution {
     const data = {};
     const sourceType = this.source.type;
     const sourceIdentifier = this.source?.system?.identifier;
-    if (sourceType) { data[`source.${sourceType}`] = 1 };
-    if (sourceIdentifier) { data[`source.identifier.${sourceIdentifier}`] = 1 };
+    if (sourceType) { data[`source.${sourceType}`] = 1; }
+    if (sourceIdentifier) { data[`source.identifier.${sourceIdentifier}`] = 1; }
     return Object.assign(this.source.system?.getSystemRollData?.() ?? {}, super.getRollData(), data);
   }
 
