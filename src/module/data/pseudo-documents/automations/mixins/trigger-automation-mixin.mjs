@@ -150,10 +150,10 @@ export default function TriggerAutomationMixin(Base) {
 
     /**
      * Whether the trigger for this automation can fire multiple times.
-     * @returns {number}
+     * @returns {boolean}
      */
     get isRepeatable() {
-      return Boolean(this.trigger) & !Object.keys(TERIOCK.config.trigger.execution.choices).includes(this.trigger);
+      return Boolean(this.trigger) && !Object.keys(TERIOCK.config.trigger.execution.choices).includes(this.trigger);
     }
 
     /**

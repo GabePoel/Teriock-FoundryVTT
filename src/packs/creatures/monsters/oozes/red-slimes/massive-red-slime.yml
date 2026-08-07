@@ -832,8 +832,6 @@ items:
           automations:
             - _id: 800c70e6560525a8
               formula: (1 + @h)d8[fire magic]
-              heighten:
-                - 1
               type: roll
           competence:
             raw: 1
@@ -1207,12 +1205,9 @@ items:
         system:
           _sup: cirogt3aILQXokIv
           automations:
-            - _id: hEOQSeJ8HpNRH1gY
-              macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
-              trigger: executeSpell
-              type: abilityMacro
             - _id: Y4tkQwce00WMBG20
               key: system.boosts.damage
+              priority: null
               qualifier: "@spell"
               type: childChange
               value: 1 + @h
@@ -1234,6 +1229,11 @@ items:
             unit: minute
           elements:
             - flame
+          expirations:
+            - _id: F7GW42g4mv18vvPe
+              triggers:
+                - executeSpell
+              type: trigger
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the next
             @Wiki[Category:Spells]{spell} you cast is @Identifier[keyword:boosted]{boosted} again.</p>
@@ -1822,10 +1822,6 @@ items:
         system:
           _sup: CaTTWTstOULxfkrp
           automations:
-            - _id: 1728b3a84ea27844
-              common:
-                - bag
-              type: common
             - _id: 3a62dd96319ca135
               relation: apply
               status: burned

@@ -58,6 +58,7 @@ export default class EquipmentSystem
     "system.instructions",
     "system.notes",
     "system.kind",
+    "system.consumable.maxFormula",
     ...super.PRESERVED_PROPERTIES,
   ];
 

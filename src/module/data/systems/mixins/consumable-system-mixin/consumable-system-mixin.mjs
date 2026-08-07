@@ -22,7 +22,7 @@ export default function ConsumableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consumable"];
 
     /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.consumable", "system.quantity", ...super.PRESERVED_PROPERTIES];
+    static PRESERVED_PROPERTIES = ["system.consumable", "system.quantity.value", ...super.PRESERVED_PROPERTIES];
 
     /** @inheritDoc */
     static get _automationTypes() {
