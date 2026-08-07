@@ -1,9 +1,6 @@
 _id: 989bee0dce350480
 _key: "!macros!989bee0dce350480"
 command: >-
-  const applyActivation = scope.execution.activations.find((a) => a.type === "addDocuments");
-
-
   const choices = teriock.helpers.localization.localizeChoices({
     awakening: "TERIOCK.TERMS.EffectTypes.awakening",
     control: "TERIOCK.TERMS.EffectTypes.control",
@@ -29,7 +26,7 @@ command: >-
 
 
   const documents = Object.entries(choices).map(([uuid, name]) => {
-    const img = tm.path.getImage("effect-types", name);
+    const img = teriock.helpers.path.getImage("effect-types", name);
     return { img, name, uuid };
   });
 
@@ -41,7 +38,9 @@ command: >-
   const id = "resistEffects000";
 
 
-  if (choice) {
+  const act = scope.execution.activations.find(a => a.type === "addDocuments");
+
+  if (choice && act) {
     const auto = {
       _id: id,
       category: "effectTypes",
@@ -52,9 +51,7 @@ command: >-
       type: "protection",
       value: choice.uuid,
     };
-
-    applyActivation._source.primary.root.data.system.automations[id] = auto;
-    applyActivation._source.secondary.root.data.system.automations[id] = auto;
+    act.updateSource({ [`primary.root.data.system.automations.${id}`]: auto });
   }
 folder: SsB1D27Gn6q9lTTV
 img: icons/svg/dice-target.svg

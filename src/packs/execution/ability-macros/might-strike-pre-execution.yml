@@ -3,9 +3,10 @@ _key: "!macros!e805e3fad6cedde3"
 command: |-
   const act = scope.execution.activations.find((a) => a.type === "addDocuments");
   const effectObject = act._source.primary.root.data;
-  const equipmentClass = await tm.dialogs.selectEquipmentClassDialog();
+  const equipmentClass = await teriock.applications.dialogs.selectEquipmentClassDialog();
+  const qualifier = `@class.${teriock.helpers.string.toKebabCase(equipmentClass)}`;
   const childChangeId = foundry.utils.randomID();
-  const shared = { category: "armament", qualifier: `@class.${equipmentClass}`, type: "childChange" };
+  const shared = { category: "armament", qualifier, type: "childChange" };
   effectObject.system.automations[childChangeId] = {
     _id: childChangeId,
     changeType: "add",
