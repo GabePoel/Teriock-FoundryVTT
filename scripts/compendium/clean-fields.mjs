@@ -100,7 +100,7 @@ function stripPseudoDefaults(doc) {
  * @param {AnyCommonDocument} doc
  */
 function cleanCommon(doc) {
-  if (!doc.system.consumable) {
+  if (doc.system.consumable === false) {
     delete doc.system.quantity;
     delete doc.system.consumptionAmount;
   }
