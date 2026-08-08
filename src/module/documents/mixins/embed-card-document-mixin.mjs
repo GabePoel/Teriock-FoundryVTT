@@ -47,6 +47,16 @@ export default function EmbedCardDocumentMixin(Base) {
 
     /** @inheritDoc */
     async _buildEmbedHTML(config, options = {}) {
+      if (typeof config.path === "string") {
+        const field = this.getFieldForProperty(config.path);
+        if (field instanceof foundry.data.fields.HTMLField) {
+          const html = await TeriockTextEditor.enrichHTML(foundry.utils.getProperty(this, config.path), {
+            relativeTo: this,
+          });
+          return foundry.utils.parseHTML(html);
+        }
+      }
+
       const content = await super._buildEmbedHTML(config, options);
       if (content) { return content; }
 

@@ -1,6 +1,6 @@
 _id: EsyeOc5YXq5sQl6r
 _key: "!effects!EsyeOc5YXq5sQl6r"
-description: <p>Take [[/damage 1d4[magic fire]]] at the end of each of your @Identifier[core:turns]{turns}.</p>
+description: <p>@Embed[ability:circle-of-fire path=system.overview.base inline]</p>
 folder: UygwjuBE3MKG5S6W
 img: systems/teriock/src/icons/abilities/circle-of-fire.webp
 name: Circle of Fire Base Area Effect
@@ -8,12 +8,21 @@ showIcon: 0
 system:
   automations:
     - _id: rTHTRSkKWOmyVkTe
+      display:
+        label: ""
       formula: 1d4[magic fire]
       trigger: turnEnd
       type: roll
+  effectTypes:
+    - damaging
+  elements:
+    - flame
   expirations:
     - _id: f80e1296bda0b3c4
       type: combat
   identifier: circle-of-fire-base-area-effect
+  kind: flaw
+  powerSources:
+    - magical
 transfer: false
 type: consequence

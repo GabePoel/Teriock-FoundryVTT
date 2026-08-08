@@ -11,21 +11,9 @@
     overflow-x: auto;
 
     .editor-content {
-      > p {
-        margin-inline: 0.25em;
-
-        &:first-child {
-          margin-top: 0.25em;
-        }
-
-        &:last-child {
-          margin-bottom: 0.25em;
-        }
+      p {
+        margin-inline: 0.375em;
       }
-    }
-
-    .editor-content {
-      @include mixins.strip-edge-margins(1);
     }
   }
 
@@ -39,7 +27,8 @@
     width: 100%;
 
     &.inactive .editor-content {
-      display: contents;
+      display: block;
+      position: static;
     }
 
     &.active .editor-content {

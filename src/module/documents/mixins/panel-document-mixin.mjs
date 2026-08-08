@@ -11,6 +11,7 @@ import { toId } from "../../helpers/string.mjs";
 /**
  * @template {Constructor<BaseDocument>} T
  * @param {T} Base
+ * @todo Move panels into their own pseudo-document with a render call and various helper methods.
  */
 export default function PanelDocumentMixin(Base) {
   /**
