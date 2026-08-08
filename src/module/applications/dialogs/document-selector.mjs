@@ -1,5 +1,7 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
+import { resolveDocuments } from "../../helpers/resolve.mjs";
+import { fromIdentifierLocal, fromQualifier } from "../../helpers/utils.mjs";
 import ResolvableDialog from "../api/resolvable-dialog.mjs";
 
 const { SearchFilter } = foundry.applications.ux;
@@ -133,6 +135,51 @@ export default class DocumentSelector extends ResolvableDialog {
     const app = new this(prepared.entries, prepared.options, config);
     await app.render(true);
     return app._result;
+  }
+
+  /**
+   * Every document a selection config points to, without prompting for a selection.
+   * @param {Teriock.Select.DocumentSelectionConfig} [config]
+   * @returns {Promise<TeriockDocument[]>}
+   */
+  static async getFromConfig(config = {}) {
+    const {
+      expandFolders = true,
+      expandTables = true,
+      globalIdentifiers = [],
+      globalUuids = [],
+      localIdentifiers = [],
+      localQualifier = "",
+      localUuids = [],
+      relativeTo = null,
+    } = config;
+    const pending = [];
+    if (relativeTo) {
+      pending.push(
+        ...Array.from(localUuids, uuid => foundry.utils.fromUuid(uuid, { relative: relativeTo })),
+        ...Array.from(localIdentifiers, identifier => fromIdentifierLocal(identifier, relativeTo)),
+      );
+    }
+    const local = (await Promise.all(pending)).filter(Boolean);
+    const qualified = await fromQualifier(relativeTo, localQualifier);
+    const global = [...Array.from(globalUuids), ...Array.from(globalIdentifiers)];
+    const documents = await resolveDocuments([...global, ...local, ...qualified], { expandFolders, expandTables });
+    return Array.from(new Set(documents));
+  }
+
+  /**
+   * Select documents from a config instead of a provided group of documents. No dialog if no choices.
+   * @param {Teriock.Select.DocumentSelectionConfig} [config]
+   * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
+   * @return {Promise<TeriockDocument[]>}
+   */
+  static async selectFromConfig(config = {}, options = {}) {
+    const { all = false, auto = true, multi = false } = config;
+    const documents = await this.getFromConfig(config);
+    if (documents.length === 0) { return []; }
+    if (multi && all) { return documents; }
+    if (auto && documents.length === 1) { return documents; }
+    return this.selectMulti(documents, { ...options, multi });
   }
 
   /**

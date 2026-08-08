@@ -62,6 +62,31 @@ declare global {
       /** Dialog title. */
       title?: string;
     };
+
+    export type DocumentSelectionConfig = {
+      /** Whether all options should automatically be selected */
+      all?: boolean;
+      /** Whether to automatically provide a document if only one is available */
+      auto?: boolean;
+      /** Whether to recursively expand folders in finding documents */
+      expandFolders?: boolean;
+      /** Whether to recursively expand tables in finding documents */
+      expandTables?: boolean;
+      /** Identifiers to get documents from globally */
+      globalIdentifiers?: Iterable<TypedIdentifier>;
+      /** UUIDs to get documents from globally */
+      globalUuids?: Iterable<UUID>;
+      /** Identifiers to get documents from relative to the provided document */
+      localIdentifiers?: Iterable<TypedIdentifier>;
+      /** Qualifier to get documents from relative to the provided document */
+      localQualifier?: Teriock.System.FormulaString;
+      /** Relative UUIDs to get documents from relative to the provided document */
+      localUuids?: Iterable<UUID>;
+      /** Whether to allow for multiple documents to be selected */
+      multi?: boolean;
+      /** A document to find local documents relative to */
+      relativeTo?: AnyCommonDocument;
+    };
   }
 }
 

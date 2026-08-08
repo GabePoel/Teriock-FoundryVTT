@@ -1,4 +1,4 @@
-import { FormulaField, IdentifierField } from "../_module.mjs";
+import { FormulaField, IdentifierField, TypedIdentifierSetField } from "../_module.mjs";
 import attributeConfig from "../../../constants/config/attribute-config.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
@@ -417,4 +417,23 @@ export function archetypeField(options = {}) {
     type: "archetype",
     ...options,
   });
+}
+
+/**
+ * Schema for fields for a {@link Teriock.Select.DocumentSelectionConfig}.
+ * @return {DataSchema}
+ */
+export function selectionSchema() {
+  return {
+    all: new BooleanField(),
+    auto: new BooleanField(),
+    expandFolders: new BooleanField(),
+    expandTables: new BooleanField(),
+    globalIdentifiers: new TypedIdentifierSetField(),
+    globalUuids: new SetField(new DocumentUUIDField()),
+    localIdentifiers: new TypedIdentifierSetField(),
+    localQualifier: qualifierField(),
+    localUuids: new SetField(new DocumentUUIDField({ relative: true })),
+    multi: new BooleanField(),
+  };
 }
