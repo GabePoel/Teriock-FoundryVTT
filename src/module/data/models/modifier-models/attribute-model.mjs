@@ -29,7 +29,7 @@ export default class AttributeModel extends BaseModifierModel {
    * @returns {number}
    */
   get passive() {
-    return 10 + this.score;
+    return 10 + this.score * 2;
   }
 
   /** @inheritDoc */
