@@ -1,6 +1,7 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockActiveEffect, TeriockItem } from "../../../documents/_module.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { objectMap, omit } from "../../../helpers/utils.mjs";
@@ -97,11 +98,11 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
     if (!construction) { return []; }
     if (!this.hasSelection) { return [await this.constructFamily(construction)]; }
     const documents = await this.selectDocuments();
-    return Promise.all(
-      documents.map(d =>
-        this.constructFamily({ ...construction, root: { data: construction.root?.data ?? {}, uuid: d.uuid } })
-      ),
-    );
+    return Promise.all(documents.map(d => {
+      const data = foundry.utils.deepClone(construction.root?.data ?? {});
+      if (data.name) { data.name = BaseRoll.replaceFormulaData(data.name, { base: d.name }); }
+      return this.constructFamily({ ...construction, root: { data, uuid: d.uuid } });
+    }));
   }
 
   /**

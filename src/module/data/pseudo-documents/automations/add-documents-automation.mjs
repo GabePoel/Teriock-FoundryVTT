@@ -94,8 +94,9 @@ export default class AddDocumentsAutomation
    */
   #inferLabel(construction) {
     let name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
-    if (foundry.utils.hasProperty(construction, "data.name")) {
-      name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name: construction.data.name });
+    const inferred = foundry.utils.getProperty(construction, "data.name");
+    if (inferred !== undefined && !/@\w/.test(inferred)) {
+      name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name: inferred });
     }
     return name;
   }

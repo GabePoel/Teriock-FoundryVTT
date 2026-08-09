@@ -97,6 +97,20 @@ export default function SelectionPseudoDocumentMixin(Base) {
     }
 
     /**
+     * If this can only select one document then this gives that. Otherwise, it gives `null`.
+     * @param {Teriock.Select.DocumentSelectionConfig} overrides
+     * @returns {Promise<TeriockDocument|null>}
+     */
+    async #onlySelectableDocument(overrides) {
+      if (formulaExists(this.localQualifier)) { return null; }
+      const sources = (this.globalUuids?.size ?? 0) + (this.globalIdentifiers?.size ?? 0)
+        + (this.localUuids?.size ?? 0) + (this.localIdentifiers?.size ?? 0);
+      if (sources !== 1) { return null; }
+      const documents = await this.getSelectableDocuments(overrides);
+      return documents.length === 1 ? documents[0] : null;
+    }
+
+    /**
      * A selection that resolves to exactly the given documents without prompting again.
      * @param {TeriockDocument[]} documents
      * @returns {object}
@@ -189,7 +203,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
     async _getSelections(overrides = {}) {
       if (!this.hasSelection) { return []; }
       if (this._defersSelection && !this.makeSeparateActivations) {
-        return [{ config: this.#selectionData, document: null }];
+        return [{ config: this.#selectionData, document: await this.#onlySelectableDocument(overrides) }];
       }
       const documents = this._defersSelection
         ? await this.getSelectableDocuments(overrides)
