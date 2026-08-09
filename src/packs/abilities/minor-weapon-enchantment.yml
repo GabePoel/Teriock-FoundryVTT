@@ -5,15 +5,15 @@ name: Minor Weapon Enchantment
 system:
   automations:
     - _id: FZiTANhHbYeUrxD6
-      identifiers:
+      globalIdentifiers:
         - property:magelore
       type: addDocuments
     - _id: TUjBJXUmGzXEFt79
-      identifiers:
+      globalIdentifiers:
         - property:magic
       type: addDocuments
     - _id: WDPfYxMp2lWJxkW4
-      automatic: false
+      auto: false
       data: |-
         {
           "system": {
@@ -30,8 +30,7 @@ system:
             }
           }
         }
-      local:
-        qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+      localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
       overrideData: true
       type: addDocuments
     - _id: Tu4qrPot571fIQao

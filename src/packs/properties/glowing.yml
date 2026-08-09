@@ -6,8 +6,31 @@ system:
   applyIfDeattuned: true
   applyIfUnequipped: false
   automations:
+    - _id: parameterChanges
+      changes:
+        - key: token.light.dim
+          phase: derived
+          priority: 5
+          target: Actor
+          type: upgrade
+          value: "10"
+        - key: token.light.color
+          phase: derived
+          priority: 5
+          target: Actor
+          type: override
+          value: "#C64600"
+        - key: token.light.animation.type
+          phase: derived
+          priority: 5
+          target: Actor
+          type: override
+          value: torch
+      type: changes
     - _id: MwpH0UCfGn6VqfN8
       light:
+        animation:
+          type: null
         color: "#c64600"
         dim: 10
       type: light
