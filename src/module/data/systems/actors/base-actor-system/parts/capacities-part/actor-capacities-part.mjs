@@ -1,10 +1,7 @@
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
 import { initialNumber, initialString } from "../../../../../fields/tools/initializers.mjs";
-import { migrateEvaluationToNumber } from "../../../../../migrations/_module.mjs";
-import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
-const { utils } = foundry;
 
 /**
  * Actor capacities part.
@@ -50,20 +47,6 @@ export default function ActorCapacitiesPart(Base) {
           value: initialNumber(),
         }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      if (
-        utils.getType(utils.getProperty(source, "weight")) === "string"
-        && utils.getProperty(source, "weight").includes("lb")
-      ) {
-        source.weight = parseFloat(utils.getProperty(source, "weight").replace("lb", "").trim());
-      }
-      migrateEvaluationToNumber(source, "size.number", { fallback: 3 });
-      migrateKey(source, "size.number", "size.value");
-      migrateEvaluationToNumber(source, "weight.self", { fallback: null });
-      return super.migrateData(source, options, state);
     }
 
     /**

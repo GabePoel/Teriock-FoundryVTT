@@ -1,7 +1,6 @@
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { qualifierField } from "../../fields/tools/builders.mjs";
-import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
@@ -53,12 +52,6 @@ export default class ChildChangeAutomation extends CritMechanicMixin(BaseAutomat
       }),
       value: new FormulaField({ deterministic: false, initial: "" }),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "category", "target");
-    return super.migrateData(source, options, state);
   }
 
   /** @returns {Record<string, string>} */

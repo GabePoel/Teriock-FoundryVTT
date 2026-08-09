@@ -3,7 +3,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -52,12 +51,6 @@ export default class PowerSystem
   /** @inheritDoc */
   static kinds() {
     return powerConfig.kind;
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "type", "kind");
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

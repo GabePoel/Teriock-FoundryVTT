@@ -1,5 +1,4 @@
 export { default as EquipmentIdentificationPart } from "./equipment-identification-part/equipment-identification-part.mjs";
-export { default as EquipmentMigrationPart } from "./equipment-migration-part.mjs";
 export { default as EquipmentPanelPart } from "./equipment-panel-part.mjs";
 export { default as EquipmentStoragePart } from "./equipment-storage-part/equipment-storage-part.mjs";
 export { default as EquipmentSuppressionPart } from "./equipment-suppression-part/equipment-suppression-part.mjs";

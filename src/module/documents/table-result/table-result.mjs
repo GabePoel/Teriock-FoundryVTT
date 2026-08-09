@@ -1,5 +1,4 @@
 import { icons } from "../../constants/display/icons.mjs";
-import { migrateUuid, migrateValueTransform } from "../../data/migrations/source-migrations.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -22,11 +21,6 @@ export default class TeriockTableResult
     documentMixins.EmbedCardDocumentMixin,
   )
 {
-  static migrateData(source, options, state) {
-    migrateValueTransform(source, "documentUuid", migrateUuid);
-    return super.migrateData(source, options, state);
-  }
-
   /**
    * Typed identifier for the referenced document on document-type results.
    * @returns {TypedIdentifier|null}

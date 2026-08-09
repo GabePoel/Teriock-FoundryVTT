@@ -117,16 +117,6 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
-  static migrateData(source, options, state) {
-    if (typeof source.expirations === "object") {
-      for (const k of Object.keys(source.expirations)) {
-        if (k.length !== 16) { delete source.expirations[k]; }
-      }
-    }
-    return super.migrateData(source, options, state);
-  }
-
-  /** @inheritDoc */
   get _displayFields() {
     return ["description"];
   }

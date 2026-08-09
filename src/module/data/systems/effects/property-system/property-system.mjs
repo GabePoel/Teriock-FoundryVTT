@@ -1,8 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
-import { migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
@@ -73,12 +72,6 @@ export default class PropertySystem
       damageType: new IdentifierField({ type: "damage" }),
       extraDamage: rollableFormulaField(),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateValueTransform(source, "damageType", toKebabCase);
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

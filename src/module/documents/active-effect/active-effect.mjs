@@ -1,4 +1,3 @@
-import { migrateUuid, migrateValueTransform } from "../../data/migrations/source-migrations.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
@@ -30,12 +29,6 @@ export default class TeriockActiveEffect
     // Restrict changes to just structured data fields, flags, and token properties. Yoinked from Ryuutama.
     if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) { return; }
     return super._applyChangeUnguided(targetDoc, change, changes, options);
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateValueTransform(source, "_stats.compendiumSource", migrateUuid);
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

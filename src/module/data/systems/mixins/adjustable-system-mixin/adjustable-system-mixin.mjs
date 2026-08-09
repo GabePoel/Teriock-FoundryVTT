@@ -1,5 +1,4 @@
 import effectConfig from "../../../../constants/config/effect-config.mjs";
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -39,12 +38,6 @@ export default function AdjustableSystemMixin(Base) {
     /** @inheritDoc */
     static kinds() {
       return effectConfig.kind;
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      migrateKey(source, "form", "kind");
-      return super.migrateData(source, options, state);
     }
 
     /** @inheritDoc */

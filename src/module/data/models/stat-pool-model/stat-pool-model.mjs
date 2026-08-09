@@ -36,19 +36,6 @@ export default class StatPoolModel extends BaseDataModel {
     };
   }
 
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    if (foundry.utils.hasProperty(source, "faces") && !foundry.utils.hasProperty(source, "formula")) {
-      let number = source.number.raw || "1";
-      if (!Number.isNumeric(Number(number))) { number = `(${number})`; }
-      source.formula = `${number}d${source.faces}`;
-      delete source.faces;
-      delete source.number;
-    }
-    delete source.stat;
-    return super.migrateData(source, options, state);
-  }
-
   /**
    * Config entry for this pool's stat.
    * @returns {Teriock.Config.StatEntry}

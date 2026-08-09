@@ -1,8 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
-import { migrateValue } from "../../../migrations/source-migrations.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -89,25 +87,6 @@ export default function TriggerAutomationMixin(Base) {
         }),
         triggerQualifier: qualifierField({ initial: "1" }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      migrateValue(source, "trigger", "none", null);
-      // Condition prerequisites have been folded into the active qualifier.
-      if (source.conditions) {
-        const conditions = source.conditions;
-        delete source.conditions;
-        const pieces = [
-          ...(conditions.present ?? []).map((c) => `@status.${c}`),
-          ...(conditions.absent ?? []).map((c) => `not(@status.${c})`),
-        ];
-        if (pieces.length) {
-          if (source.activeQualifier && source.activeQualifier !== "1") { pieces.unshift(source.activeQualifier); }
-          source.activeQualifier = pieces.length === 1 ? pieces[0] : `and(${pieces.join(", ")})`;
-        }
-      }
-      return super.migrateData(source, options, state);
     }
 
     /**

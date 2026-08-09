@@ -1,6 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../fields/_module.mjs";
-import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
@@ -62,13 +61,6 @@ export default class OverrideAutomation
       targetsActor: new TernaryField(),
       targetsArmament: new TernaryField(),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "prevent", "preventEffect");
-    migrateKey(source, "preventEffect", "makeEffect", v => v === true ? false : null);
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

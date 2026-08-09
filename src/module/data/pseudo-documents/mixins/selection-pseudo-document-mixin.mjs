@@ -2,7 +2,6 @@ import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { qualifierField } from "../../fields/tools/builders.mjs";
-import { migrateKey, migrateUuid } from "../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -67,18 +66,6 @@ export default function SelectionPseudoDocumentMixin(Base) {
         multi: new fields.BooleanField(),
         selectInExecution: new fields.BooleanField(),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      migrateKey(source, "documents", "globalUuids", v => v.map(migrateUuid));
-      migrateKey(source, "uuids", "globalUuids", v => v.map(migrateUuid));
-      migrateKey(source, "identifiers", "globalIdentifiers");
-      migrateKey(source, "qualifier", "localQualifier");
-      migrateKey(source, "local.qualifier", "localQualifier");
-      migrateKey(source, "local.identifiers", "localIdentifiers");
-      migrateKey(source, "automatic", "auto");
-      return super.migrateData(source, options, state);
     }
 
     /**

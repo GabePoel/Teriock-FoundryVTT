@@ -73,21 +73,6 @@ export default class AddDocumentsAutomation
     });
   }
 
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    // Replace "{name}" with "@base" in the document name.
-    if (typeof source.data === "string" && source.data.includes("{name}")) {
-      try {
-        const data = JSON.parse(source.data);
-        if (typeof data?.name === "string") {
-          data.name = data.name.replaceAll("{name}", "@base");
-          source.data = JSON.stringify(data);
-        }
-      } catch { /* Leave malformed JSON untouched. */ }
-    }
-    return super.migrateData(source, options, state);
-  }
-
   /**
    * Determine the label for an activation from a construction.
    * @param {DocumentConstruction} construction

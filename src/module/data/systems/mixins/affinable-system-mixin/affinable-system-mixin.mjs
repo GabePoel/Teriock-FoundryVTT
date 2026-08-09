@@ -2,17 +2,6 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**
- * Affinities used to be protection automations, keyed by a plural "relation".
- * @type {Record<string, Teriock.Affinities.Type>}
- */
-const MIGRATED_RELATIONS = {
-  hexproofs: "hexproof",
-  hexseals: "hexseal",
-  immunities: "immunity",
-  resistances: "resistance",
-};
-
-/**
  * @template {Constructor<TeriockSystem>} T
  * @param {T} Base
  */
@@ -49,27 +38,6 @@ export default function AffinableSystemMixin(Base) {
       return Object.assign(super.defineSchema(), {
         affinities: new PseudoCollectionField(BaseAffinity, { types: this.affinityTypes }),
       });
-    }
-
-    /**
-     * Move protection automations over to affinities, which replaced them.
-     * @inheritDoc
-     */
-    static migrateData(source, options, state) {
-      const automations = foundry.utils.getProperty(source, "automations");
-      if (foundry.utils.isPlainObject(automations)) {
-        for (const [id, automation] of Object.entries(automations)) {
-          if (foundry.utils.getProperty(automation, "type") !== "protection") { continue; }
-          delete automations[id];
-          const type = MIGRATED_RELATIONS[foundry.utils.getProperty(automation, "relation")];
-          if (!type) { continue; }
-          const affinity = foundry.utils.mergeObject(automation, { type }, { inplace: false });
-          delete affinity.relation;
-          source.affinities ??= {};
-          source.affinities[id] ??= affinity;
-        }
-      }
-      return super.migrateData(source, options, state);
     }
 
     /**

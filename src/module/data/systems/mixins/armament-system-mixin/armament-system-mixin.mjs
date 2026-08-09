@@ -6,7 +6,6 @@ import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -75,13 +74,6 @@ export default function ArmamentSystemMixin(Base) {
         spellTurning: new fields.BooleanField(),
         vitals: new fields.BooleanField(),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      const evaluationMigrations = ["damage.base", "damage.twoHanded", "attackPenalty"];
-      for (const e of evaluationMigrations) { migrateKey(source, `${e}.raw`, e); }
-      return super.migrateData(source, options, state);
     }
 
     /** @inheritDoc */

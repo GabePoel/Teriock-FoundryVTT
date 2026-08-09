@@ -40,32 +40,6 @@ export default function AbilityUpgradesPart(Base) {
     }
 
     /** @inheritDoc */
-    static migrateData(source, options, state) {
-      if (source.improvements) {
-        source.upgrades = {
-          competence: { attribute: source.improvements.featSaveImprovement.attribute, value: 1 },
-          score: {
-            attribute: source.improvements.attributeImprovement.attribute,
-            value: source.improvements.attributeImprovement.minVal,
-          },
-        };
-        switch (source.improvements.featSaveImprovement.amount) {
-          case "fluency":
-            source.upgrades.competence.value = 2;
-            break;
-          case "proficiency":
-            source.upgrades.competence.value = 1;
-            break;
-          default:
-            source.upgrades.competence.value = 0;
-            break;
-        }
-        delete source.improvements;
-      }
-      return super.migrateData(source, options, state);
-    }
-
-    /** @inheritDoc */
     get _displayInputs() {
       return [...super._displayInputs, ...this._displayInputsUpgrades];
     }

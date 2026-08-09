@@ -2,7 +2,6 @@ import { formulaExists } from "../../../../../../helpers/formula.mjs";
 import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
-import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -82,47 +81,6 @@ export default function AbilityUsagePart(Base) {
           { initial: ["creature"] },
         ),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      // Range migration
-      if (typeof source.range === "string") { source.range = { raw: source.range }; }
-
-      // Expansion migration
-      if (typeof source.expansion === "string") { source.expansion = { type: source.expansion }; }
-      if (typeof source.expansion !== "object") { source.expansion = {}; }
-      if (foundry.utils.hasProperty(source, "expansion.cap.raw")) {
-        foundry.utils.setProperty(source, "expansion.cap", foundry.utils.getProperty(source, "expansion.cap.raw"));
-        foundry.utils.deleteProperty(source, "expansion.cap.raw");
-      }
-      if (typeof source.expansion?.cap === "number") { source.expansion.cap = `${source.expansion.cap}`; }
-      migrateKey(source, "expansionRange", "expansion.range.raw");
-
-      // Execution time migration
-      if (typeof source.executionTime === "string") {
-        source.executionTime = { base: source.executionTime };
-        if (source.maneuver === "slow") {
-          let unit;
-          let raw;
-          const lower = source.executionTime.base.toLowerCase();
-          if (lower.includes("short")) { unit = "shortRest"; }
-          if (lower.includes("long")) { unit = "longRest"; }
-          const units = ["second", "minute", "hour", "day", "week", "year"];
-          for (const u of units) {
-            if (lower.includes(u)) {
-              unit = u;
-              raw = lower.trim().split(" ")[0];
-            }
-          }
-          source.executionTime.slow = { raw, unit };
-        }
-      }
-
-      // Delivery migration
-      migrateKey(source, "delivery.base", "delivery");
-
-      return super.migrateData(source, options, state);
     }
 
     /**

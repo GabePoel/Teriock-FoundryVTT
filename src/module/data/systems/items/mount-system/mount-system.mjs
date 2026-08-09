@@ -39,13 +39,6 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
-  static migrateData(source, options, state) {
-    // Mounts briefly shared equipment kinds; map those back to the default.
-    if (["enchanted", "magic", "mundane"].includes(source.kind)) { source.kind = "normal"; }
-    return super.migrateData(source, options, state);
-  }
-
-  /** @inheritDoc */
   get _displayTags() {
     return [...super._displayTags, ...this._attunableTags];
   }

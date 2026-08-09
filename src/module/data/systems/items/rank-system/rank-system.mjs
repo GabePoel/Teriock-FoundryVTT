@@ -2,11 +2,10 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
-import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -59,16 +58,6 @@ export default class RankSystem
   /** @inheritDoc */
   static kinds() {
     return classConfig.kind;
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "className", "class");
-    migrateKey(source, "classRank", "number");
-    migrateKey(source, "innate", "kind", val => (val ? "innate" : "learned"));
-    migrateKey(source, "origin", "kind");
-    migrateValueTransform(source, "class", toKebabCase);
-    return super.migrateData(source, options, state);
   }
 
   /**

@@ -44,12 +44,6 @@ export default function OverrideCompetenceMechanicMixin(Base) {
       });
     }
 
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      if (source.setCompetence === "none") { source.setCompetence = ""; }
-      return super.migrateData(source, options, state);
-    }
-
     /**
      * Competence paths.
      * @returns {string[]}

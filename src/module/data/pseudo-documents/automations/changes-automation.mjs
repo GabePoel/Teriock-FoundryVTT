@@ -1,7 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { TeriockActiveEffect } from "../../../documents/_module.mjs";
 import { qualifiedChangeField } from "../../fields/tools/builders.mjs";
-import { migrateChange } from "../../migrations/change-migrations.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
@@ -31,13 +30,6 @@ export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation)
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), { changes: new fields.ArrayField(qualifiedChangeField()) });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    for (const change of source.changes ?? []) { migrateChange(change); }
-    for (const change of source.changes ?? []) { if (change.target === "parent") { change.target = "Item"; } }
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

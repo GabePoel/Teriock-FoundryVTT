@@ -1,6 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { omit } from "../../../helpers/utils.mjs";
-import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
 import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -49,12 +48,6 @@ export default class SummonAutomation
       "localQualifier",
       "localUuids",
     ]);
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "merge", "makeSeparateActivations", v => !v);
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

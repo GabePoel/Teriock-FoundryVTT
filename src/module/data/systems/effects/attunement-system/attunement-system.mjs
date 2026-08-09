@@ -2,7 +2,6 @@ import attunementConfig from "../../../../constants/config/attunement-config.mjs
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -41,13 +40,6 @@ export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   static kinds() {
     return attunementConfig.kind;
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "type", "kind");
-    migrateKey(source, "origin", "kind");
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

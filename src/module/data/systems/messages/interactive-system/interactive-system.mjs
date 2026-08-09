@@ -1,7 +1,6 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { panelsField } from "../../../fields/tools/builders.mjs";
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -43,12 +42,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
       source: new fields.DocumentUUIDField(),
       tags: new fields.ArrayField(new fields.StringField()),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    for (const panel of source.panels ?? []) { migrateKey(panel, "image", "img"); }
-    return super.migrateData(source, options, state);
   }
 
   /**

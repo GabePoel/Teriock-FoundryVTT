@@ -1,7 +1,5 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
-import { lcFirst } from "../../../../helpers/string.mjs";
-import { migrateKey, migrateValue } from "../../../migrations/source-migrations.mjs";
 import MacroActivation from "../../activations/macro-activation.mjs";
 import DisplayAutomationMixin from "./display-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
@@ -49,20 +47,6 @@ export default function MacroAutomationMixin(Base) {
         primaryMacro: new fields.DocumentUUIDField({ type: "Macro" }),
         secondaryMacro: new fields.DocumentUUIDField({ type: "Macro" }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      migrateKey(source, "macro", "primaryMacro");
-      migrateKey(source, "pseudoHook", "trigger");
-      migrateValue(source, "relation", "pseudoHook", "trigger");
-      migrateValue(source, "trigger", "effectApplication", "applyEffect");
-      migrateValue(source, "trigger", "effectExpiration", "expireEffect");
-      if (source.trigger?.includes("equipment")) {
-        source.trigger = source.trigger.replace("equipment", "");
-        source.trigger = lcFirst(source.trigger);
-      }
-      return super.migrateData(source, options, state);
     }
 
     /** @inheritDoc */

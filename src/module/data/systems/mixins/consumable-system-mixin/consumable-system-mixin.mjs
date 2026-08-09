@@ -49,16 +49,6 @@ export default function ConsumableSystemMixin(Base) {
       });
     }
 
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      if (typeof source.quantity === "number") { source.quantity = { value: source.quantity }; }
-      else if (!source.quantity || typeof source.quantity !== "object") { source.quantity = {}; }
-      const raw = source.maxQuantity?.raw;
-      if (["number", "string"].includes(typeof raw)) { source.quantity.maxFormula ??= `${raw}`; }
-      delete source.maxQuantity;
-      return super.migrateData(source, options, state);
-    }
-
     /** @returns {Teriock.Panels.PanelBar} */
     get _consumableBar() {
       return {

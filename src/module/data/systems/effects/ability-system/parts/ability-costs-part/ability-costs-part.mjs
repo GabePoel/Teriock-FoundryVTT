@@ -65,44 +65,6 @@ export default function AbilityCostsPart(Base) {
       });
     }
 
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      // 2025-12-18 HP and MP point cost migration
-      for (const pointCost of ["mp", "hp"]) {
-        if (source.costs) {
-          if (source.costs[pointCost] === null) {
-            source.costs[pointCost] = { type: "none", value: { formula: "", static: 0, variable: "" } };
-          }
-          if (typeof source.costs[pointCost] == "string") {
-            const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
-            source.costs[pointCost] = {
-              type: "variable",
-              value: { formula: "", static: 0, variable: variableCost || "" },
-            };
-          }
-          if (typeof source.costs[pointCost] == "number") {
-            source.costs[pointCost] = {
-              type: "static",
-              value: { formula: "", static: Number(source.costs[pointCost]), variable: "" },
-            };
-          }
-          if (typeof source.costs[pointCost]?.value == "number") {
-            source.costs[pointCost] = {
-              type: "static",
-              value: { formula: "", static: source.costs[pointCost].value, variable: "" },
-            };
-          }
-          if (typeof source.costs[pointCost]?.value == "string") {
-            source.costs[pointCost] = {
-              type: "variable",
-              value: { formula: "", static: 0, variable: String(source.costs[pointCost].value) },
-            };
-          }
-        }
-      }
-      return super.migrateData(source, options, state);
-    }
-
     /**
      * Cost tags.
      * @returns {Teriock.Display.DisplayTag[]}

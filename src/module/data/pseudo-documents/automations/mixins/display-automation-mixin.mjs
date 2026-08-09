@@ -1,5 +1,3 @@
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -21,12 +19,6 @@ export default function DisplayAutomationMixin(Base) {
       return Object.assign(super.defineSchema(), {
         display: new fields.SchemaField({ label: new fields.StringField({ placeholder: _loc("COMMON.Default") }) }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options, state) {
-      migrateKey(source, "title", "display.label");
-      return super.migrateData(source, options, state);
     }
 
     /**

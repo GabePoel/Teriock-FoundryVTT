@@ -5,7 +5,6 @@ import equipmentConfig from "../../../constants/config/equipment-config.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { buildWriteOperation, fromIdentifier, getName, objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
-import { migrateKey } from "../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -33,12 +32,6 @@ export default class IdentificationModel extends BaseDataModel {
       notes: new fields.HTMLField({ initial: "", required: false }),
       read: new fields.BooleanField({ initial: true }),
     };
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "powerLevel", "kind");
-    return super.migrateData(source, options, state);
   }
 
   /**

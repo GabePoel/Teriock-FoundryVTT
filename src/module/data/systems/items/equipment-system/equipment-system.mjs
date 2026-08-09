@@ -3,7 +3,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
-import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -25,7 +24,6 @@ const { fields } = foundry.data;
  * @mixes ConsumableSystem
  * @mixes WikiSystem
  * @mixes EquipmentIdentificationPart
- * @mixes EquipmentMigrationPart
  * @mixes EquipmentPanelPart
  * @mixes EquipmentStoragePart
  * @mixes EquipmentSuppressionPart
@@ -39,7 +37,6 @@ export default class EquipmentSystem
     systemMixins.ConsumableSystemMixin,
     systemMixins.WikiSystemMixin,
     parts.EquipmentIdentificationPart,
-    parts.EquipmentMigrationPart,
     parts.EquipmentPanelPart,
     parts.EquipmentStoragePart,
     parts.EquipmentSuppressionPart,
@@ -103,13 +100,6 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static kinds() {
     return equipmentConfig.kind;
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "powerLevel", "kind");
-    if (source?.equipmentType) { migrateValueTransform(source, "equipmentType", toKebabCase); }
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */

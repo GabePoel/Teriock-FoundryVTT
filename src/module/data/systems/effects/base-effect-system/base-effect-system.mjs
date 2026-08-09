@@ -1,5 +1,4 @@
 import { toKebabCase } from "../../../../helpers/string.mjs";
-import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
@@ -24,12 +23,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
       ...super.defineSchema(),
       applyIfDeattuned: new fields.BooleanField(),
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateKey(source, "mundane", "applyIfDeattuned");
-    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
