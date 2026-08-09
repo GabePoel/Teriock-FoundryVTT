@@ -34,14 +34,16 @@ export function tableResultSort(results) {
  * Sort documents.
  * @template T
  * @param {T[]} docs
- * @param {object} [options]
- * @param {boolean} [options.alphabetical]
+ * @param {"alphabetical" | "createdTime" | "sort"} [method="alphabetical"]
  * @returns {T[]}
  */
-export function docSort(docs, options = { alphabetical: true }) {
+export function docSort(docs, method = "alphabetical") {
   return docs.sort((a, b) => {
-    if (!options.alphabetical && a.sort !== b.sort) { return a.sort - b.sort; }
-    return a.name.localeCompare(b.name);
+    if (
+      method === "alphabetical" || (a.sort === b.sort) && (a?._stats?.creationTime === b?._stats?.creationTime)
+    ) { return a.name.localeCompare(b.name); }
+    if (method === "createdTime" || (a.name === b.name) && (a.sort === b.sort)) { return a.sort - b.sort; }
+    return (a?._stats?.creationTime ?? 0) - (b?._stats?.creationTime ?? 0);
   });
 }
 

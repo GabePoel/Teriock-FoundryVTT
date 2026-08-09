@@ -255,7 +255,7 @@ export default function ActorStatsPart(Base) {
     prepareStatDice() {
       const items = [
         ...docSort(this.parent.species),
-        ...rankSort(this.parent.ranks),
+        ...docSort(this.parent.ranks, "createdTime"),
         ...docSort(this.parent.powers),
         ...docSort(this.parent.mounts),
       ];
