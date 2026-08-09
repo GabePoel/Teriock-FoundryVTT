@@ -268,6 +268,7 @@ effects:
           radius: 30 + 10 * @h
           restriction:
             type: move
+          targeting: false
           trigger: executeInput
           type: region
       competence:
@@ -514,9 +515,11 @@ effects:
       _sup: 1klgEP0n84zFa2hg
       automations:
         - _id: R7rIJDoFAEvz00wl
-          automatic: false
-          local:
-            qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+          auto: false
+          display:
+            label: ""
+          localQualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:

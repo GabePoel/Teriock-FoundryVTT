@@ -258,10 +258,17 @@ effects:
     system:
       automations:
         - _id: X1yoOCJGcyr8gR2X
-          local:
-            identifiers:
-              - ability:light-ray
-              - ability:medicine-ball
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localIdentifiers:
+            - ability:light-ray
+            - ability:medicine-ball
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
@@ -315,9 +322,11 @@ effects:
       _sup: si4IIiwmrSVb3KFR
       automations:
         - _id: HeyBF3KxuHVI6712
-          automatic: false
-          local:
-            qualifier: and(@ability, @spell, @time.a1)
+          auto: false
+          display:
+            label: ""
+          localQualifier: and(@ability, @spell, @time.a1)
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
@@ -520,8 +529,15 @@ effects:
       _sup: cyTxNCLIpZkWNZpB
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localQualifier: and(@spell, @delivery.missile, @pro)
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:

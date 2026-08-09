@@ -258,10 +258,17 @@ effects:
     system:
       automations:
         - _id: 4kZRSij54vIELR6U
-          local:
-            identifiers:
-              - ability:empathic-ray
-              - ability:treeform-ball
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localIdentifiers:
+            - ability:empathic-ray
+            - ability:treeform-ball
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
@@ -431,8 +438,15 @@ effects:
       _sup: hvaCBIfeQRi24WGy
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localQualifier: and(@spell, @delivery.missile, @pro)
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
@@ -474,9 +488,11 @@ effects:
       _sup: o51YzM1EY4vQpr4C
       automations:
         - _id: 4ReYeDgqGQpnJFk3
-          automatic: false
-          local:
-            qualifier: and(@ability, @spell, @time.a1)
+          auto: false
+          display:
+            label: ""
+          localQualifier: and(@ability, @spell, @time.a1)
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:

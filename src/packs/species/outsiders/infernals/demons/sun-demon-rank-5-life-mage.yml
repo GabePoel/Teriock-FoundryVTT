@@ -63,10 +63,17 @@ effects:
     system:
       automations:
         - _id: X1yoOCJGcyr8gR2X
-          local:
-            identifiers:
-              - ability:light-ray
-              - ability:medicine-ball
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localIdentifiers:
+            - ability:light-ray
+            - ability:medicine-ball
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
@@ -100,8 +107,15 @@ effects:
       _sup: ARunLguXJBf7xHwi
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localQualifier: and(@spell, @delivery.missile, @pro)
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:

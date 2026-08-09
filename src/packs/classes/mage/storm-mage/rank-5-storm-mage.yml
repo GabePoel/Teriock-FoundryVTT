@@ -257,10 +257,17 @@ effects:
     system:
       automations:
         - _id: Eny3zxX22Ce5EhbM
-          local:
-            identifiers:
-              - ability:ice-ball
-              - ability:lightning-ray
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localIdentifiers:
+            - ability:ice-ball
+            - ability:lightning-ray
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
@@ -430,6 +437,7 @@ effects:
           radius: 10 + 15 * @h
           restriction:
             type: move
+          targeting: false
           trigger: executeInput
           type: region
       competence:
@@ -486,8 +494,15 @@ effects:
       _sup: 0I3QIXHQZOPnIqJv
       automations:
         - _id: bJn9LIvdgJ11S1tr
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
+          data: |-
+            {
+              "attackPenalty": "0"
+            }
+          display:
+            label: ""
+          localQualifier: and(@spell, @delivery.missile, @pro)
+          overrideData: true
+          selectInExecution: true
           trigger: execute
           type: useDocuments
       competence:
