@@ -99,7 +99,7 @@ export default class TeriockManager {
    * @returns {boolean}
    */
   checkScene() {
-    const valid = Boolean(canvas.scene);
+    const valid = Boolean(canvas?.scene);
     if (!valid) { ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.noScene", "error", { localize: true }); }
     return valid;
   }

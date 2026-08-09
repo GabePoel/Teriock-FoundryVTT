@@ -146,7 +146,7 @@ export default class RegionAutomation
     if (path !== "angle" && !this[path] && execution) { out = execution.source.system.range.value ?? 0; }
     else if (this[path]) { out = BaseRoll.minValue(this[path], rollData); }
     if (path === "angle") { return out; }
-    out *= canvas.dimensions.distancePixels;
+    if (canvas?.dimensions?.distancePixels) { out *= canvas.dimensions.distancePixels; }
     if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
       out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
     }
@@ -284,7 +284,7 @@ export default class RegionAutomation
       displayMeasurements: false,
       flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
       highlightMode: this.targeting ? "coverage" : "shapes",
-      levels: [canvas.level.id],
+      levels: canvas?.level?.id ? [canvas.level.id] : [],
       name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
         name: options.execution?.source.name ?? this.document.name,
       }),

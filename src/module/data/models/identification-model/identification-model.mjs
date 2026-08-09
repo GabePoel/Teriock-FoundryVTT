@@ -17,13 +17,12 @@ export default class IdentificationModel extends BaseDataModel {
 
   /** @inheritDoc */
   static defineSchema() {
-    const kinds = equipmentConfig.kind;
     return {
       flaws: new fields.HTMLField({ initial: "", required: false }),
       identified: new fields.BooleanField({ initial: true }),
       kind: new fields.StringField({
         blank: false,
-        choices: objectMap(kinds, e => e.label),
+        choices: objectMap(equipmentConfig.kind, e => e.label),
         initial: "mundane",
         nullable: false,
         required: true,

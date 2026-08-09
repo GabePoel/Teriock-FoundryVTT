@@ -221,6 +221,7 @@ export default class SummonActivation extends SelectionPseudoDocumentMixin(BaseA
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async primaryAction() {
+    if (!game.teriock.checkScene()) { return []; }
     await game.teriock.minimizeStart();
     const tokens = await this.#placeTokens();
     await game.teriock.minimizeEnd();
@@ -229,6 +230,7 @@ export default class SummonActivation extends SelectionPseudoDocumentMixin(BaseA
 
   /** @inheritDoc */
   async secondaryAction() {
+    if (!game.teriock.checkScene()) { return []; }
     await canvas.scene.deleteEmbeddedDocuments(
       "Token",
       canvas.scene.tokens.contents.filter(t =>

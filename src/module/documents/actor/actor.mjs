@@ -366,7 +366,7 @@ export default class TeriockActor
 
   /** @inheritDoc */
   async getTokenDocument(data = {}, options = {}) {
-    if (game.canvas.scene.grid.type === 0) { data.shape ??= 0; }
+    if (game.canvas?.scene?.grid?.type === 0) { data.shape ??= 0; }
     return super.getTokenDocument(data, options);
   }
 
