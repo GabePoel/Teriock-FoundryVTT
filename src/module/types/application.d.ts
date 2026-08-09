@@ -50,7 +50,7 @@ declare global {
           };
         };
         /** Whether this should start locked */
-        startLocked?: boolean;
+        startLocked?: boolean | null;
       };
     };
 

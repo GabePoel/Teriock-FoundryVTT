@@ -1,9 +1,11 @@
 import {
+  AdeptitudeAffinity,
   BindingAffinity,
   HexproofAffinity,
   HexsealAffinity,
   ImmunityAffinity,
   IncapabilityAffinity,
+  IneptitudeAffinity,
   ResistanceAffinity,
   TakeBoostAffinity,
   TakeDeboostAffinity,
@@ -12,6 +14,7 @@ import {
 
 declare global {
   export interface AffinityTypeMap {
+    adeptitude: AdeptitudeAffinity;
     binding: BindingAffinity;
     hexproof: HexproofAffinity;
     hexseal: HexsealAffinity;
@@ -21,6 +24,7 @@ declare global {
     takeDeboost: TakeDeboostAffinity;
     vulnerability: VulnerabilityAffinity;
     incapability: IncapabilityAffinity;
+    ineptitude: IneptitudeAffinity;
   }
 
   namespace Teriock.Affinities {

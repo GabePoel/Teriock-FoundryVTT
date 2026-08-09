@@ -54,10 +54,10 @@ export default function ActorStatsPart(Base) {
       const statDead = hpDead || mpDead;
       const statCrit = hpCrit || mpCrit;
 
-      const protUncn = this.isProtected("statuses", "unconscious");
-      const protCrit = this.isProtected("statuses", "criticallyWounded");
-      const protDead = this.isProtected("statuses", "dead");
-      const protDown = this.isProtected("statuses", "down");
+      const protUncn = this.isProtected("conditions", "unconscious");
+      const protCrit = this.isProtected("conditions", "criticallyWounded");
+      const protDead = this.isProtected("conditions", "dead");
+      const protDown = this.isProtected("conditions", "down");
 
       const autoDead = statDead && !protDead && !protDown;
       const autoCrit = statCrit && !protCrit && !protDown && !autoDead;

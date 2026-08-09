@@ -17,15 +17,15 @@ export function interpretCommandInput(input, command) {
 
 /**
  * Get a value from a specified property of a command.
- * @param {Teriock.Command.CommandEntry} interaction
+ * @param {Teriock.Command.CommandEntry} entry
  * @param {string} property
  * @param {object} options
  * @returns {string}
  */
-export function getCommandEntryValue(interaction, property, options) {
-  if (!interaction[property]) { return ""; }
-  if (typeof interaction[property] === "string") { return interaction[property]; }
-  return interaction[property](options);
+export function getCommandEntryValue(entry, property, options) {
+  if (!entry[property]) { return ""; }
+  if (typeof entry[property] === "string") { return entry[property]; }
+  return entry[property](options);
 }
 
 /**

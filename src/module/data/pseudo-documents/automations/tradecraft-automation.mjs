@@ -6,18 +6,21 @@ import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_m
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * @extends {ThresholdAutomation}
  * @mixes CritMechanic
- * @mixes SelectAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
+ * @property {boolean} all
+ * @property {boolean} automatic
+ * @property {boolean} multi
  */
 export default class TradecraftAutomation
   extends mixClasses(
     ThresholdAutomation,
     CritMechanicMixin,
-    automationMixins.SelectAutomationMixin,
     automationMixins.TriggerAutomationMixin,
     OverrideCompetenceMechanicMixin,
   )
@@ -42,7 +45,12 @@ export default class TradecraftAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { tradecrafts: tradecraftsField() });
+    return Object.assign(super.defineSchema(), {
+      all: new fields.BooleanField({ initial: false }),
+      automatic: new fields.BooleanField({ initial: true }),
+      multi: new fields.BooleanField(),
+      tradecrafts: tradecraftsField(),
+    });
   }
 
   /** @inheritDoc */
@@ -50,7 +58,7 @@ export default class TradecraftAutomation
     return [
       "tradecrafts",
       "hr",
-      ...this._selectionOptionPaths,
+      ...this._selectionPaths,
       "hr",
       ...this._triggerPaths,
       "hr",
@@ -58,6 +66,17 @@ export default class TradecraftAutomation
       "threshold",
       ...this._competencePaths,
     ];
+  }
+
+  /**
+   * Paths relating to how tradecrafts get selected.
+   * @returns {string[]}
+   */
+  get _selectionPaths() {
+    const paths = ["multi"];
+    if (this.multi) { paths.push("all"); }
+    if (!this.multi || !this.all) { paths.push("automatic"); }
+    return paths;
   }
 
   /**

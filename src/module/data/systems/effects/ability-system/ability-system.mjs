@@ -6,6 +6,7 @@ import { toCamelCase } from "../../../../helpers/string.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
+import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -79,15 +80,7 @@ export default class AbilitySystem
   static get _affinityTypes() {
     return [
       ...super._affinityTypes,
-      affinities.BindingAffinity,
-      affinities.HexproofAffinity,
-      affinities.HexsealAffinity,
-      affinities.ImmunityAffinity,
-      affinities.IncapabilityAffinity,
-      affinities.ResistanceAffinity,
-      affinities.TakeBoostAffinity,
-      affinities.TakeDeboostAffinity,
-      affinities.VulnerabilityAffinity,
+      ...Object.values(affinities).filter(a => foundry.utils.isSubclass(a, BaseAffinity)),
     ];
   }
 

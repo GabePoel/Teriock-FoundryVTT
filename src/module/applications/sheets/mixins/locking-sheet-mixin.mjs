@@ -14,7 +14,7 @@ export default function LockingSheetMixin(Base) {
    */
   class LockingSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-    static DEFAULT_OPTIONS = { actions: { toggleLockThis: this._onToggleLockThis }, teriock: { startLocked: true } };
+    static DEFAULT_OPTIONS = { actions: { toggleLockThis: this._onToggleLockThis }, teriock: { startLocked: null } };
 
     /**
      * Toggles the lock state of the current sheet.
@@ -29,7 +29,7 @@ export default function LockingSheetMixin(Base) {
 
     constructor(...args) {
       super(...args);
-      this.#locked = this.options?.teriock?.startLocked ?? false;
+      this.#locked = this.options?.teriock?.startLocked ?? !game.settings.get("teriock", "unlockSheetsByDefault");
     }
 
     /** @type {boolean} */

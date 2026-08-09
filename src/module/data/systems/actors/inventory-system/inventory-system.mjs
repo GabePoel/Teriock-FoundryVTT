@@ -36,7 +36,7 @@ export default class InventorySystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    const STATUS_IMMUNITY = { category: "statuses", relation: "immunities", type: "protection" };
+    const STATUS_IMMUNITY = { category: "conditions", relation: "immunities", type: "protection" };
     const LIGHT_CHANGE = {
       priority: 150,
       qualifier: "1",

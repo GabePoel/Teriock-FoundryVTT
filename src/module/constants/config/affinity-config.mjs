@@ -18,6 +18,20 @@ export default {
       label: "TYPES.Item.body",
       type: "body",
     },
+    classes: {
+      choices: "reference.classes",
+      format: "kebab",
+      imgCategory: "classes",
+      label: "TYPES.JournalEntryPage.class",
+      type: "class",
+    },
+    conditions: {
+      choices: "reference.conditions",
+      format: "camel",
+      imgCategory: "conditions",
+      label: "TYPES.ActiveEffect.condition",
+      type: "condition",
+    },
     damageTypes: {
       choices: "reference.damageTypes",
       format: "kebab",
@@ -71,13 +85,6 @@ export default {
       label: "TYPES.Item.species",
       type: "species",
     },
-    statuses: {
-      choices: "reference.conditions",
-      format: "camel",
-      imgCategory: "conditions",
-      label: "TYPES.ActiveEffect.condition",
-      type: "condition",
-    },
     tradecrafts: {
       choices: "reference.tradecrafts",
       format: "camel",
@@ -96,7 +103,10 @@ export default {
     },
     boosts: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.boosts", types: ["takeDeboost", "takeBoost"] },
     bindings: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.bindings", types: ["binding"] },
-    incapabilities: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.incapabilities", types: ["incapability"] },
+    capabilities: {
+      label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.capabilities",
+      types: ["adeptitude", "ineptitude", "incapability"],
+    },
   },
   // no sort
   types: {
@@ -170,11 +180,28 @@ export default {
       label: "TERIOCK.TERMS.Affinities.binding.single",
       weakness: true,
     },
+    adeptitude: {
+      color: colors.palette.green,
+      identifier: "keyword:adept",
+      img: iconManifest.keywords.adept,
+      label: "TERIOCK.TERMS.Affinities.adeptitude.single",
+      stacking: true,
+      tips: [{ level: "warning", text: "TERIOCK.TERMS.Affinities.adeptitude.tips.notAutomatic" }],
+    },
+    ineptitude: {
+      color: colors.palette.red,
+      identifier: "keyword:inept",
+      img: iconManifest.keywords.inept,
+      label: "TERIOCK.TERMS.Affinities.ineptitude.single",
+      stacking: true,
+      tips: [{ level: "warning", text: "TERIOCK.TERMS.Affinities.ineptitude.tips.notAutomatic" }],
+    },
     incapability: {
       color: colors.palette.red,
       identifier: "keyword:incapable",
       img: iconManifest.keywords.incapable,
       label: "TERIOCK.TERMS.Affinities.incapability.single",
+      tips: [{ level: "warning", text: "TERIOCK.TERMS.Affinities.incapability.tips.notAutomatic" }],
     },
   },
 };

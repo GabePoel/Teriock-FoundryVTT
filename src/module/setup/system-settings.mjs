@@ -301,7 +301,7 @@ export const settings = {
       default: true,
       hint: "TERIOCK.SETTINGS.openConditionsAsJournalEntryPages.hint",
       name: "TERIOCK.SETTINGS.openConditionsAsJournalEntryPages.name",
-      scope: "client",
+      scope: "user",
       type: Boolean,
     },
     styleDice: {
@@ -309,6 +309,13 @@ export const settings = {
       hint: "TERIOCK.SETTINGS.styleDice.hint",
       name: "TERIOCK.SETTINGS.styleDice.name",
       scope: "client",
+      type: Boolean,
+    },
+    unlockSheetsByDefault: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.unlockSheetsByDefault.hint",
+      name: "TERIOCK.SETTINGS.unlockSheetsByDefault.name",
+      scope: "user",
       type: Boolean,
     },
   },

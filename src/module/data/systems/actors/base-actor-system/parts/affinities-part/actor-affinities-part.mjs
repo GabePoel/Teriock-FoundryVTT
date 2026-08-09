@@ -72,6 +72,7 @@ export default function ActorAffinitiesPart(Base) {
     #addConditionAffinity(condition, type, category, value) {
       if (!this.parent.statuses.has(condition)) { return; }
       this.addVirtualAffinity(type, category, value, TERIOCK.reference.conditions[condition], {
+        amount: 1,
         sources: this.conditionInformation[condition]?.sources,
       });
     }
@@ -189,12 +190,13 @@ export default function ActorAffinitiesPart(Base) {
       this.#addConditionAffinity("hollied", "resistance", "effectTypes", "reanimation");
       this.#addConditionAffinity("terrored", "resistance", "effectTypes", "healing");
       this.#addConditionAffinity("terrored", "resistance", "effectTypes", "revival");
-      this.#addConditionAffinity("frenzied", "resistance", "statuses", "frightened");
-      this.#addConditionAffinity("defyingDeath", "resistance", "statuses", "dead");
-      this.#addConditionAffinity("defyingDeath", "resistance", "statuses", "unconscious");
-      this.#addConditionAffinity("allured", "binding", "statuses", "allured");
+      this.#addConditionAffinity("frenzied", "resistance", "conditions", "frightened");
+      this.#addConditionAffinity("defyingDeath", "resistance", "conditions", "dead");
+      this.#addConditionAffinity("defyingDeath", "resistance", "conditions", "unconscious");
+      this.#addConditionAffinity("allured", "binding", "conditions", "allured");
       this.#addConditionAffinity("burned", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.burned"));
       this.#addConditionAffinity("silenced", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.silenced"));
+      this.#addConditionAffinity("frenzied", "ineptitude", "other", _loc("TERIOCK.AFFINITIES.Condition.frenzied"));
     }
 
     /**

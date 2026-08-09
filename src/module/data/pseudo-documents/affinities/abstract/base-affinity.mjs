@@ -49,6 +49,12 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
     });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (source.category === "statuses") { source.category = "conditions"; }
+    return super.migrateData(source, options);
+  }
+
   /**
    * Valid values for this affinity's category.
    * @returns {Record<string, string>}
