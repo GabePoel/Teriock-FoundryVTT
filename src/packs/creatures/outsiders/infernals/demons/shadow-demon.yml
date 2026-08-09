@@ -1626,11 +1626,11 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 34c83d4c84860906
-              identifiers:
+              globalIdentifiers:
                 - ability:fear-aura
               type: addDocuments
             - _id: 3b2978862c7f9d50
-              identifiers:
+              globalIdentifiers:
                 - ability:fear-touch
               type: addDocuments
             - _id: JB09RCj8EnrKPqjG
@@ -1681,8 +1681,7 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: PKZXkwmO94niPsUb
-              local:
-                qualifier: and(@ability, @time.a1)
+              localQualifier: and(@ability, @time.a1)
               trigger: execute
               type: useDocuments
           competence:
@@ -1728,16 +1727,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -1957,11 +1962,11 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 3aed26608863c262
-              identifiers:
+              globalIdentifiers:
                 - ability:animate-dead
               type: addDocuments
             - _id: 66d7ecce476652ad
-              identifiers:
+              globalIdentifiers:
                 - ability:zombify
               type: addDocuments
           competence:
@@ -2146,9 +2151,9 @@ items:
           _sup: Tn5EQuAwOZUq3KZv
           automations:
             - _id: R3YSJHv94rQAJx84
-              type: addDocuments
-              uuids:
+              globalUuids:
                 - Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
+              type: addDocuments
           competence:
             raw: 1
           costs:
@@ -2209,10 +2214,10 @@ items:
           automations:
             - _id: iNtBahVjA3ZpbPXV
               attachDocuments: false
+              globalUuids:
+                - Compendium.teriock.powers.Item.hlxi7JP3OqyIBeuC
               separate: true
               type: addDocuments
-              uuids:
-                - Compendium.teriock.powers.Item.hlxi7JP3OqyIBeuC
           competence:
             raw: 1
           costs:
@@ -2599,10 +2604,9 @@ items:
         system:
           automations:
             - _id: qApOHCicX4ZC0TSa
-              local:
-                identifiers:
-                  - ability:death-ray
-                  - ability:terror-ball
+              localIdentifiers:
+                - ability:death-ray
+                - ability:terror-ball
               trigger: execute
               type: useDocuments
           competence:
@@ -2636,8 +2640,7 @@ items:
           _sup: NV2xRIOWuOeqby2I
           automations:
             - _id: bJn9LIvdgJ11S1tr
-              local:
-                qualifier: and(@spell, @delivery.missile, @pro)
+              localQualifier: and(@spell, @delivery.missile, @pro)
               trigger: execute
               type: useDocuments
           competence:

@@ -37,11 +37,13 @@ system:
     - _id: Tu4qrPot571fIQao
       changes:
         - key: system.tier.raw
+          phase: setup
           priority: 5
           target: Item
           type: add
           value: "1"
-        - key: system.powerLevel
+        - key: system.kind
+          phase: derived
           priority: 5
           target: Item
           type: override
@@ -96,6 +98,9 @@ system:
   range:
     raw: "5"
     unit: ft
+  requirements: >-
+    <p>@Identifier[core:targets]{Target} is @Identifier[core:presence]{tier 0} and not
+    @Identifier[property:magic]{magic}.</p>
   ritual: true
   rotator: true
   spell: true

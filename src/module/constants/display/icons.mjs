@@ -325,7 +325,7 @@ export const icons = {
     dice: "mdi-dice-multiple",
     disable: "ms-close",
     disabled: "ms-circle",
-    document: "ms-description",
+    document: "ms-sword-rose",
     done: "ms-check",
     duplicate: "ms-file-copy",
     edit: "ms-edit",

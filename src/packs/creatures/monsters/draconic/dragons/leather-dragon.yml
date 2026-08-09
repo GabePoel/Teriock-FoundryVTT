@@ -1000,16 +1000,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -2070,24 +2076,24 @@ items:
         name: Avoid
         system:
           automations:
-            - _id: wC7tdBKENRukqitZ
+            - _id: E2OwN6DAGzNXVtMm
               competencies:
                 - 0
-              local:
-                identifiers:
-                  - ability:drop-prone
-                  - ability:stand-up
+              localIdentifiers:
+                - ability:drop-prone
+                - ability:stand-up
+              selectInExecution: true
               trigger: execute
               type: useDocuments
-            - _id: c3tMiZNqKXm8sQNW
+            - _id: 3wpbgchAOCi8xG4n
               competencies:
                 - 1
                 - 2
-              local:
-                identifiers:
-                  - ability:drop-prone
-                  - ability:move
-                  - ability:stand-up
+              localIdentifiers:
+                - ability:drop-prone
+                - ability:move
+                - ability:stand-up
+              selectInExecution: true
               trigger: execute
               type: useDocuments
           competence:
@@ -2120,8 +2126,8 @@ items:
           targets:
             - self
           trigger: >-
-            <p>You would or some @Pack[teriock.equipment]{equipment} you @Identifier[keyword:bearing]{bear} would be hit
-            by an @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive abilities]{reactive}
+            <p>You or some @Pack[teriock.equipment]{equipment} you @Identifier[keyword:bearing]{bear} would be hit by an
+            @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive abilities]{reactive}
             @Identifier[core:attack-interaction]{attack} you can see.</p>
         type: ability
       - _id: jvjQqGr5JQAC23oS
@@ -2132,15 +2138,11 @@ items:
         name: Hunting Party
         system:
           automations:
-            - _id: 9b7d937fb93aaace
-              macro: Compendium.teriock.execution.Macro.UqkWyQDB563ezNf8
-              trigger: preExecute
-              type: abilityMacro
             - _id: 009a75729d2156be
               data: >-
                 {"system":{"limitation":"<p>You only get the benefits of [[lookup name]] against creatures of the chosen
                 species.</p>"}}
-              identifiers:
+              globalIdentifiers:
                 - ability:flanking
               overrideData: true
               type: addDocuments
@@ -2148,9 +2150,25 @@ items:
               data: >-
                 {"system":{"limitation":"<p>You can only use [[lookup name]] against the chosen
                 species.</p>","costs":{"tweaks":{"gifted":1}}}}
-              identifiers:
+              globalIdentifiers:
                 - ability:snare
               overrideData: true
+              type: addDocuments
+            - _id: elhOdMrRcCSrnntJ
+              display:
+                label: Apply Ally Effect
+              globalIdentifiers:
+                - consequence:hunting-party-ally-effect
+              separate: true
+              trigger: ""
+              type: addDocuments
+            - _id: SjiNs9v85keUIjch
+              display:
+                label: Apply Executor Effect
+              globalIdentifiers:
+                - consequence:hunting-party-executor-effect
+              separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1

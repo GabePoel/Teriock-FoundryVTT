@@ -1,0 +1,47 @@
+_id: DJHibZQ6dgHvDQa3
+_key: "!effects!DJHibZQ6dgHvDQa3"
+_stats:
+  compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+folder: vBbs7yzx4yC6fp9V
+img: systems/teriock/src/icons/abilities/snare.webp
+name: Snare
+system:
+  _sup: 2lcSWqYdJpoFunrv
+  automations:
+    - _id: 5d57231066693cee
+      status: snared
+      type: status
+  costs:
+    tweaks:
+      gifted: 1
+  duration:
+    unit: unlimited
+  endCondition: >-
+    <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  expirations:
+    - _id: 66672059c7a29a30
+      crit:
+        - 0
+      method: roll
+      timing: end
+      type: combat
+    - _id: 28294dbc80493c2c
+      crit:
+        - 1
+      method: roll
+      skip: 1
+      timing: end
+      type: combat
+  identifier: snare
+  limitation: <p>You can only use [[lookup name]] against the chosen species.</p>
+  powerSources:
+    - martial
+  results:
+    critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+    hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
+  skill: true
+  standard: true
+  targets:
+    - leg
+type: ability

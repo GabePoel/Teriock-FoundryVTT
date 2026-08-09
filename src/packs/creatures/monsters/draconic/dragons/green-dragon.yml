@@ -1002,16 +1002,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -1929,9 +1935,19 @@ items:
         system:
           automations:
             - _id: s830o7SWhITduNHX
-              type: addDocuments
-              uuids:
+              display:
+                label: Select and Apply Familiar Power
+              globalUuids:
                 - Compendium.teriock.powers.Folder.31fe961f0b485187
+              separate: true
+              trigger: ""
+              type: addDocuments
+            - _id: ZAn9viHGdQPyCkj0
+              display:
+                label: ""
+              makeEffect: false
+              rollBonus: ""
+              type: override
           competence:
             raw: 1
           costs:
@@ -2055,7 +2071,7 @@ items:
               status: transformed
               type: status
             - _id: iB9yugE9ZXYHDeCK
-              identifiers:
+              globalIdentifiers:
                 - species:tree
               level: minor
               override:
@@ -2332,11 +2348,11 @@ items:
           _sup: Z2r70pjjG6JKLhqd
           automations:
             - _id: 8434365ea22454e2
-              identifiers:
+              globalIdentifiers:
                 - ability:earthbind-aura
               type: addDocuments
             - _id: f8698f0406646514
-              identifiers:
+              globalIdentifiers:
                 - ability:earthbind-touch
               type: addDocuments
             - _id: ZnqPryFKHegsj30g
@@ -2390,16 +2406,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -2526,11 +2548,11 @@ items:
               status: transformed
               type: status
             - _id: D55WBiqM2QcyO7Vv
+              globalUuids:
+                - Compendium.teriock.species.Folder.30f4d11e5e53d332
               level: full
               setCompetence: override
               type: transformation
-              uuids:
-                - Compendium.teriock.species.Folder.30f4d11e5e53d332
           competence:
             raw: 1
           costs:
@@ -2598,7 +2620,7 @@ items:
                 @Identifier[core:hit-points-and-mana-points]{hit die} as normal (except that it can
                 @Wiki[Category:Revival effects]{revive} you). This can only @Wiki[Category:Revival effects]{revive}
                 creatures that have been @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
-              identifiers:
+              globalIdentifiers:
                 - ability:regenerating
               overrideData: true
               type: addDocuments
@@ -2696,9 +2718,9 @@ items:
           _sup: Z2r70pjjG6JKLhqd
           automations:
             - _id: dx3ALeHkOrZZ9hCe
-              type: addDocuments
-              uuids:
+              globalUuids:
                 - Compendium.teriock.tables.RollTable.a63074fd2ac63eda
+              type: addDocuments
           competence:
             raw: 1
           costs:
@@ -3214,9 +3236,8 @@ items:
           _sup: o51YzM1EY4vQpr4C
           automations:
             - _id: 4ReYeDgqGQpnJFk3
-              automatic: false
-              local:
-                qualifier: and(@ability, @spell, @time.a1)
+              auto: false
+              localQualifier: and(@ability, @spell, @time.a1)
               trigger: execute
               type: useDocuments
           competence:
@@ -3334,10 +3355,9 @@ items:
         system:
           automations:
             - _id: 4kZRSij54vIELR6U
-              local:
-                identifiers:
-                  - ability:empathic-ray
-                  - ability:treeform-ball
+              localIdentifiers:
+                - ability:empathic-ray
+                - ability:treeform-ball
               trigger: execute
               type: useDocuments
           competence:
@@ -3371,8 +3391,7 @@ items:
           _sup: ojIO6Jux9N05JT8V
           automations:
             - _id: bJn9LIvdgJ11S1tr
-              local:
-                qualifier: and(@spell, @delivery.missile, @pro)
+              localQualifier: and(@spell, @delivery.missile, @pro)
               trigger: execute
               type: useDocuments
           competence:

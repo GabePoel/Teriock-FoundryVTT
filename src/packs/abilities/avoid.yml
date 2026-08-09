@@ -4,24 +4,24 @@ img: systems/teriock/src/icons/abilities/avoid.webp
 name: Avoid
 system:
   automations:
-    - _id: wC7tdBKENRukqitZ
+    - _id: E2OwN6DAGzNXVtMm
       competencies:
         - 0
-      local:
-        identifiers:
-          - ability:drop-prone
-          - ability:stand-up
+      localIdentifiers:
+        - ability:drop-prone
+        - ability:stand-up
+      selectInExecution: true
       trigger: execute
       type: useDocuments
-    - _id: c3tMiZNqKXm8sQNW
+    - _id: 3wpbgchAOCi8xG4n
       competencies:
         - 1
         - 2
-      local:
-        identifiers:
-          - ability:drop-prone
-          - ability:move
-          - ability:stand-up
+      localIdentifiers:
+        - ability:drop-prone
+        - ability:move
+        - ability:stand-up
+      selectInExecution: true
       trigger: execute
       type: useDocuments
   delivery: self
@@ -51,7 +51,7 @@ system:
   targets:
     - self
   trigger: >-
-    <p>You would or some @Pack[teriock.equipment]{equipment} you @Identifier[keyword:bearing]{bear} would be hit by an
+    <p>You or some @Pack[teriock.equipment]{equipment} you @Identifier[keyword:bearing]{bear} would be hit by an
     @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive abilities]{reactive}
     @Identifier[core:attack-interaction]{attack} you can see.</p>
 type: ability

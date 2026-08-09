@@ -799,27 +799,29 @@ items:
               value: skillShare
           automations:
             - _id: pZTzCOb2arggrQQw
-              automatic: false
+              auto: false
               competencies:
                 - 0
-              local:
-                qualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+              display:
+                label: ""
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+              trigger: ""
               type: addDocuments
             - _id: DKrkwLcllE5f9bjQ
-              automatic: false
+              auto: false
               competencies:
                 - 1
-              local:
-                qualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
               type: addDocuments
             - _id: LTtFZkqLk2QnwOfK
-              automatic: false
+              auto: false
               competencies:
                 - 2
-              local:
-                qualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
               type: addDocuments
             - _id: XdlHsYQu4RHDULLu
+              display:
+                label: ""
               rollBonus: ""
               setCompetence: override
               type: override
@@ -843,7 +845,10 @@ items:
               effects]{contract effect}, must be one you are @Identifier[core:proficiency-bonus]{proficient} in, and
               must be one you aren't @Identifier[keyword:incapable]{incapable} of. The @Identifier[core:targets]{target}
               also becomes @Identifier[keyword:incapable]{incapable} of [[lookup name]]. You may only have this active
-              on one creature at a time.</p>
+              on one creature at a time. You may not share @Pack[teriock.abilities]{abilities} you gain from
+              @Pack[teriock.classes]{class} <i>archetypes</i> such as @Identifier[ability:staff-touch]{Staff Touch} or
+              @Identifier[ability:warrior-techniques]{Warrior Techniques}, just from the specific
+              @Pack[teriock.classes]{classes} themselves.</p>
             fluent: >-
               <p>You can now share @Pack[teriock.abilities]{abilities} you have from any of your first 1 +
               @Identifier[core:fluency-bonus]{F} ranks in a @Pack[teriock.classes]{class}.</p>
@@ -916,6 +921,16 @@ items:
               target: armament
               type: childChange
               value: "1"
+            - _id: o1rWKhetIxMAFMHm
+              competencies:
+                - 1
+                - 2
+              expandTables: false
+              localIdentifiers:
+                - ability:interact
+              trigger: executeAbility
+              triggerQualifier: and(@armament.prop.thrown, @ability.interaction.attack, @ability.delivery.item)
+              type: useDocuments
           competence:
             raw: 1
           delivery: self

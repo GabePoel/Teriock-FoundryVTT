@@ -267,12 +267,16 @@ items:
           automations:
             - _id: k1y3pC8IhCR9FDHM
               all: true
-              automatic: false
-              identifiers:
+              auto: false
+              display:
+                label: ""
+              globalIdentifiers:
                 - consequence:gold-breath-attacked-effect
                 - consequence:gold-breath-base-effect
+              makeSeparateActivations: true
               multi: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: 7400b41f20d9f100
               angle: "@angle.dragon"
@@ -286,9 +290,12 @@ items:
               trigger: executeInput
               type: region
             - _id: 800c70e6560525a8
+              display:
+                label: ""
               formula: (2 * @h)d10[magic spiritual]
               heighten:
                 - 1
+              trigger: ""
               type: roll
           competence:
             raw: 1
@@ -1001,16 +1008,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -2128,7 +2141,7 @@ items:
                 @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} you made
                 @Identifier[property:armor-voiding]{AV0} and only against creatures you are
                 @Identifier[condition:dueling]{dueling}.</p>","applyIfDeattuned":true}}
-              identifiers:
+              globalIdentifiers:
                 - ability:chi-strike
               overrideData: true
               type: addDocuments
@@ -2140,7 +2153,7 @@ items:
                     "applyIfDeattuned": true
                   }
                 }
-              identifiers:
+              globalIdentifiers:
                 - property:armor-voiding
               overrideData: true
               type: addDocuments
@@ -2191,18 +2204,27 @@ items:
           automations:
             - _id: 6taozqKUQOZB9Pdx
               attachDocuments: false
-              separate: true
-              type: addDocuments
-              uuids:
+              display:
+                label: Apply False Effect
+              globalUuids:
                 - Compendium.teriock.templateEffects.ActiveEffect.JcORKsFyOrlW39RK
+              separate: true
+              trigger: ""
+              type: addDocuments
             - _id: EIeegrJoWQ7miIBl
               attachDocuments: false
-              separate: true
-              type: addDocuments
-              uuids:
+              display:
+                label: Apply True Effect
+              globalUuids:
                 - Compendium.teriock.templateEffects.ActiveEffect.RRSK2DKqVr6fWeHn
+              separate: true
+              trigger: ""
+              type: addDocuments
             - _id: PXJnQ6AbGlV3OaXb
+              display:
+                label: ""
               makeEffect: false
+              rollBonus: ""
               type: override
           competence:
             raw: 1

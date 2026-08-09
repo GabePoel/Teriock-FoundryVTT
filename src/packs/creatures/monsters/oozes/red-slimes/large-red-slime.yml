@@ -906,7 +906,7 @@ items:
           _sup: LbLjjWiopqGfltmW
           automations:
             - _id: HzyxPJ30wjiQSRG4
-              identifiers:
+              globalIdentifiers:
                 - property:flaming
               type: addDocuments
             - _id: 72ce567009179bea
@@ -1348,11 +1348,11 @@ items:
           _sup: cirogt3aILQXokIv
           automations:
             - _id: aa4fa44804f6e58a
-              identifiers:
+              globalIdentifiers:
                 - ability:burning-touch
               type: addDocuments
             - _id: d032756e5fee7434
-              identifiers:
+              globalIdentifiers:
                 - ability:inferno-aura
               type: addDocuments
             - _id: E2w7M2N45twcSWyA
@@ -1411,16 +1411,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -1809,15 +1815,15 @@ items:
           _sup: CaTTWTstOULxfkrp
           automations:
             - _id: FZiTANhHbYeUrxD6
-              identifiers:
+              globalIdentifiers:
                 - property:magelore
               type: addDocuments
             - _id: TUjBJXUmGzXEFt79
-              identifiers:
+              globalIdentifiers:
                 - property:magic
               type: addDocuments
             - _id: WDPfYxMp2lWJxkW4
-              automatic: false
+              auto: false
               data: |-
                 {
                   "system": {
@@ -1834,19 +1840,18 @@ items:
                     }
                   }
                 }
-              local:
-                qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+              localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
               overrideData: true
               type: addDocuments
             - _id: Tu4qrPot571fIQao
               changes:
                 - key: system.tier.raw
-                  phase: derived
+                  phase: setup
                   priority: 5
                   target: Item
                   type: add
                   value: "1"
-                - key: system.powerLevel
+                - key: system.kind
                   phase: derived
                   priority: 5
                   target: Item
@@ -1905,6 +1910,9 @@ items:
           range:
             raw: "5"
             unit: ft
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is @Identifier[core:presence]{tier 0} and not
+            @Identifier[property:magic]{magic}.</p>
           ritual: true
           rotator: true
           spell: true
@@ -2118,9 +2126,8 @@ items:
           _sup: ZmjFFlMRQIBtml1N
           automations:
             - _id: VX8HRH0mBRK2ACXr
-              automatic: false
-              local:
-                qualifier: and(@ability, @spell, @time.a1)
+              auto: false
+              localQualifier: and(@ability, @spell, @time.a1)
               trigger: execute
               type: useDocuments
           competence:

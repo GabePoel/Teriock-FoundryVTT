@@ -128,7 +128,7 @@ effects:
       _sup: byYbma8NDzi77Mh0
       automations:
         - _id: cCWrBymDkUeOHKmQ
-          automatic: false
+          auto: false
           data: |-
             {
               "system": {
@@ -140,23 +140,22 @@ effects:
                 "invoked": 1
               }
             }
-          local:
-            qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+          localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
           overrideData: true
           type: addDocuments
         - _id: g7vdRcjuuf35GPZ1
-          identifiers:
+          globalIdentifiers:
             - property:magelore
           type: addDocuments
         - _id: 8v0Wg06rCbu8V2LX
           changes:
             - key: system.tier.raw
-              phase: derived
+              phase: setup
               priority: 5
               target: Item
               type: add
               value: "1"
-            - key: system.powerLevel
+            - key: system.kind
               phase: derived
               priority: 5
               target: Item
@@ -214,7 +213,8 @@ effects:
         raw: "5"
         unit: ft
       requirements: >-
-        <p>@Identifier[core:targets]{Target} is not a
+        <p>@Identifier[core:targets]{Target} is @Identifier[core:presence]{tier 0}, not
+        @Identifier[property:magic]{magic}, and is not a
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
       ritual: true
       rotator: true

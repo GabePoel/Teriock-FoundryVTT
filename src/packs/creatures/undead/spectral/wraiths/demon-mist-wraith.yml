@@ -1440,27 +1440,29 @@ items:
               value: skillShare
           automations:
             - _id: pZTzCOb2arggrQQw
-              automatic: false
+              auto: false
               competencies:
                 - 0
-              local:
-                qualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+              display:
+                label: ""
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+              trigger: ""
               type: addDocuments
             - _id: DKrkwLcllE5f9bjQ
-              automatic: false
+              auto: false
               competencies:
                 - 1
-              local:
-                qualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
               type: addDocuments
             - _id: LTtFZkqLk2QnwOfK
-              automatic: false
+              auto: false
               competencies:
                 - 2
-              local:
-                qualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
               type: addDocuments
             - _id: XdlHsYQu4RHDULLu
+              display:
+                label: ""
               rollBonus: ""
               setCompetence: override
               type: override
@@ -1484,7 +1486,10 @@ items:
               effects]{contract effect}, must be one you are @Identifier[core:proficiency-bonus]{proficient} in, and
               must be one you aren't @Identifier[keyword:incapable]{incapable} of. The @Identifier[core:targets]{target}
               also becomes @Identifier[keyword:incapable]{incapable} of [[lookup name]]. You may only have this active
-              on one creature at a time.</p>
+              on one creature at a time. You may not share @Pack[teriock.abilities]{abilities} you gain from
+              @Pack[teriock.classes]{class} <i>archetypes</i> such as @Identifier[ability:staff-touch]{Staff Touch} or
+              @Identifier[ability:warrior-techniques]{Warrior Techniques}, just from the specific
+              @Pack[teriock.classes]{classes} themselves.</p>
             fluent: >-
               <p>You can now share @Pack[teriock.abilities]{abilities} you have from any of your first 1 +
               @Identifier[core:fluency-bonus]{F} ranks in a @Pack[teriock.classes]{class}.</p>
@@ -1557,6 +1562,16 @@ items:
               target: armament
               type: childChange
               value: "1"
+            - _id: o1rWKhetIxMAFMHm
+              competencies:
+                - 1
+                - 2
+              expandTables: false
+              localIdentifiers:
+                - ability:interact
+              trigger: executeAbility
+              triggerQualifier: and(@armament.prop.thrown, @ability.interaction.attack, @ability.delivery.item)
+              type: useDocuments
           competence:
             raw: 1
           delivery: self
@@ -1713,16 +1728,25 @@ items:
                 enabled: true
                 identifiers:
                   - property:improvised
-              data: "{\"name\":\"Improvised @base\"}"
+              data: |-
+                {
+                  "name": "Improvised @base"
+                }
+              display:
+                label: Apply Equipment
+              globalUuids:
+                - Compendium.teriock.equipment.Folder.6032372e5812d743
+                - Compendium.teriock.equipment.Folder.b78dfc2e510485db
               multi: true
               overrideData: true
               separate: true
+              trigger: ""
               type: addDocuments
-              uuids:
-                - Compendium.teriock.equipment.Folder.6032372e5812d743
-                - Compendium.teriock.equipment.Folder.b78dfc2e510485db
             - _id: mKNQhZp094oZbMh0
+              display:
+                label: ""
               makeEffect: false
+              rollBonus: ""
               type: override
           competence:
             raw: 1
@@ -2889,7 +2913,7 @@ items:
         system:
           automations:
             - _id: 38d2c1f713b3b432
-              identifiers:
+              globalIdentifiers:
                 - ability:triumphant-awaken
               type: addDocuments
           competence:
@@ -3321,11 +3345,11 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 34c83d4c84860906
-              identifiers:
+              globalIdentifiers:
                 - ability:fear-aura
               type: addDocuments
             - _id: 3b2978862c7f9d50
-              identifiers:
+              globalIdentifiers:
                 - ability:fear-touch
               type: addDocuments
             - _id: JB09RCj8EnrKPqjG
@@ -3376,8 +3400,7 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: PKZXkwmO94niPsUb
-              local:
-                qualifier: and(@ability, @time.a1)
+              localQualifier: and(@ability, @time.a1)
               trigger: execute
               type: useDocuments
           competence:
@@ -3423,16 +3446,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -3652,11 +3681,11 @@ items:
           _sup: GF9CzLYvEuHeIKIm
           automations:
             - _id: 3aed26608863c262
-              identifiers:
+              globalIdentifiers:
                 - ability:animate-dead
               type: addDocuments
             - _id: 66d7ecce476652ad
-              identifiers:
+              globalIdentifiers:
                 - ability:zombify
               type: addDocuments
           competence:
@@ -3919,11 +3948,11 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: 65b2fb4b1f8cdae3
-              identifiers:
+              globalIdentifiers:
                 - ability:blizzard-aura
               type: addDocuments
             - _id: 75dff24942d5b933
-              identifiers:
+              globalIdentifiers:
                 - ability:shock-touch
               type: addDocuments
             - _id: I1BIPKXYQZ1rA5JU
@@ -4091,16 +4120,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -4227,9 +4262,8 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: R7rIJDoFAEvz00wl
-              automatic: false
-              local:
-                qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+              auto: false
+              localQualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
               trigger: execute
               type: useDocuments
           competence:
@@ -4404,9 +4438,8 @@ items:
               movementAction: walk
               type: move
             - _id: zGqyHWcKnNUWmna8
-              local:
-                identifiers:
-                  - ability:catch-item
+              localIdentifiers:
+                - ability:catch-item
               type: useDocuments
           competence:
             raw: 1

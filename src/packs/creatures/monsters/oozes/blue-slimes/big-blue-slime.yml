@@ -1200,11 +1200,11 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: 65b2fb4b1f8cdae3
-              identifiers:
+              globalIdentifiers:
                 - ability:blizzard-aura
               type: addDocuments
             - _id: 75dff24942d5b933
-              identifiers:
+              globalIdentifiers:
                 - ability:shock-touch
               type: addDocuments
             - _id: I1BIPKXYQZ1rA5JU
@@ -1372,16 +1372,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -1508,9 +1514,8 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: R7rIJDoFAEvz00wl
-              automatic: false
-              local:
-                qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
+              auto: false
+              localQualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
               trigger: execute
               type: useDocuments
           competence:

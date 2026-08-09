@@ -720,7 +720,7 @@ items:
         system:
           automations:
             - _id: deef79aff6bd9b44
-              identifiers:
+              globalIdentifiers:
                 - ability:hibernation
               type: addDocuments
           competence:
@@ -1083,16 +1083,16 @@ items:
               competencies:
                 - 0
                 - 1
-              type: addDocuments
-              uuids:
+              globalUuids:
                 - Compendium.teriock.tables.RollTable.63d836072ece673b
+              type: addDocuments
             - _id: PhMG9NY6ssZbobIQ
               competencies:
                 - 2
+              globalUuids:
+                - Compendium.teriock.tables.RollTable.63d836072ece673b
               multi: true
               type: addDocuments
-              uuids:
-                - Compendium.teriock.tables.RollTable.63d836072ece673b
           competence:
             raw: 1
           costs:
@@ -1245,11 +1245,11 @@ items:
           _sup: BtjyB6cjHw37lX9f
           automations:
             - _id: 70095f59a20e3aa8
-              identifiers:
+              globalIdentifiers:
                 - ability:light-touch
               type: addDocuments
             - _id: db4756dbc366378e
-              identifiers:
+              globalIdentifiers:
                 - ability:light-aura
               type: addDocuments
             - _id: Lu71V2L9hiMtzyQr
@@ -1302,16 +1302,22 @@ items:
             - _id: akT2v3Q61GzX1nbh
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - power:created-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               competencies:
                 - 2
-              identifiers:
+              display:
+                label: ""
+              globalIdentifiers:
                 - power:learned-elder-sorceries
+              makeSeparateActivations: true
               separate: true
+              trigger: ""
               type: addDocuments
           competence:
             raw: 1
@@ -1377,11 +1383,11 @@ items:
           _sup: BtjyB6cjHw37lX9f
           automations:
             - _id: 63682dee443c42c0
-              identifiers:
+              globalIdentifiers:
                 - ability:healing-touch
               type: addDocuments
             - _id: 94f4cb28d83a43f6
-              identifiers:
+              globalIdentifiers:
                 - ability:cure-illness
               type: addDocuments
           competence:
@@ -1565,7 +1571,7 @@ items:
           _sup: BtjyB6cjHw37lX9f
           automations:
             - _id: x3HLBJilnUoU4gKo
-              identifiers:
+              globalIdentifiers:
                 - property:warded
               type: addDocuments
             - _id: fH9kmdq0dOggTr6z
@@ -1575,7 +1581,7 @@ items:
                 }
               display:
                 label: ""
-              identifiers:
+              globalIdentifiers:
                 - imbuement:ward-hand-effect
               overrideData: true
               separate: true
@@ -1782,7 +1788,7 @@ items:
           _sup: byYbma8NDzi77Mh0
           automations:
             - _id: cCWrBymDkUeOHKmQ
-              automatic: false
+              auto: false
               data: |-
                 {
                   "system": {
@@ -1794,23 +1800,22 @@ items:
                     "invoked": 1
                   }
                 }
-              local:
-                qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+              localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
               overrideData: true
               type: addDocuments
             - _id: g7vdRcjuuf35GPZ1
-              identifiers:
+              globalIdentifiers:
                 - property:magelore
               type: addDocuments
             - _id: 8v0Wg06rCbu8V2LX
               changes:
                 - key: system.tier.raw
-                  phase: derived
+                  phase: setup
                   priority: 5
                   target: Item
                   type: add
                   value: "1"
-                - key: system.powerLevel
+                - key: system.kind
                   phase: derived
                   priority: 5
                   target: Item
@@ -1869,7 +1874,8 @@ items:
             raw: "5"
             unit: ft
           requirements: >-
-            <p>@Identifier[core:targets]{Target} is not a
+            <p>@Identifier[core:targets]{Target} is @Identifier[core:presence]{tier 0}, not
+            @Identifier[property:magic]{magic}, and is not a
             @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
           ritual: true
           rotator: true
@@ -2117,9 +2123,8 @@ items:
           _sup: rOcOIi3HSAQOJwRg
           automations:
             - _id: HeyBF3KxuHVI6712
-              automatic: false
-              local:
-                qualifier: and(@ability, @spell, @time.a1)
+              auto: false
+              localQualifier: and(@ability, @spell, @time.a1)
               trigger: execute
               type: useDocuments
           competence:

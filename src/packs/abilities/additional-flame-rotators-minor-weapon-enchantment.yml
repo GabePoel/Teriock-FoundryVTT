@@ -8,15 +8,15 @@ system:
   _sup: 7dbf0f42e843d563
   automations:
     - _id: FZiTANhHbYeUrxD6
-      identifiers:
+      globalIdentifiers:
         - property:magelore
       type: addDocuments
     - _id: TUjBJXUmGzXEFt79
-      identifiers:
+      globalIdentifiers:
         - property:magic
       type: addDocuments
     - _id: WDPfYxMp2lWJxkW4
-      automatic: false
+      auto: false
       data: |-
         {
           "system": {
@@ -33,19 +33,18 @@ system:
             }
           }
         }
-      local:
-        qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+      localQualifier: and(@ability, @spell, not(@es), @delivery.ray)
       overrideData: true
       type: addDocuments
     - _id: Tu4qrPot571fIQao
       changes:
         - key: system.tier.raw
-          phase: derived
+          phase: setup
           priority: 5
           target: Item
           type: add
           value: "1"
-        - key: system.powerLevel
+        - key: system.kind
           phase: derived
           priority: 5
           target: Item
@@ -101,6 +100,9 @@ system:
   range:
     raw: "5"
     unit: ft
+  requirements: >-
+    <p>@Identifier[core:targets]{Target} is @Identifier[core:presence]{tier 0} and not
+    @Identifier[property:magic]{magic}.</p>
   ritual: true
   rotator: true
   spell: true
