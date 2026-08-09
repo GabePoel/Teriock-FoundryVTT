@@ -95,7 +95,8 @@ export default class TeriockItem
    * @param phase
    */
   applyActiveEffects(phase) {
-    if (!(phase in TeriockActiveEffect.CHANGE_PHASES)) { return; }
+    if (!(phase in TeriockActiveEffect.CHANGE_PHASES) || this._completedActiveEffectPhases.has(phase)) { return; }
+    this._completedActiveEffectPhases.add(phase);
     /** @type {ActiveEffectChangeData[]} */
     const changes = [];
     for (const effect of this.allApplicableEffects()) {
@@ -120,15 +121,19 @@ export default class TeriockItem
   /** @inheritDoc */
   prepareBaseData() {
     this.overrides = {};
+    this._completedActiveEffectPhases = new Set();
     super.prepareBaseData();
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) {
-      this.applyActiveEffects("setup");
-      this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
-    }
+    if (this.isTop) { this.applyActiveEffects(TERIOCK.config.change.defaultPhase); }
+  }
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    super.prepareEmbeddedDocuments();
+    this.applyActiveEffects("setup");
   }
 }
