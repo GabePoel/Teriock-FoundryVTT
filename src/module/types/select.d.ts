@@ -86,6 +86,8 @@ declare global {
       multi?: boolean;
       /** A document to find local documents relative to */
       relativeTo?: AnyCommonDocument;
+      /** Something every document must satisfy to be selectable */
+      filter?: (document: TeriockDocument) => boolean;
     };
   }
 }

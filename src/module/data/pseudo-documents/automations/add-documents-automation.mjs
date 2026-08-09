@@ -1,11 +1,15 @@
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { objectMap, omit } from "../../../helpers/utils.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/tools/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
-import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
+import {
+  CritMechanicMixin,
+  OverrideCompetenceMechanicMixin,
+  SelectionPseudoDocumentMixin,
+} from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -14,7 +18,7 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @mixes SelectDocumentsAutomation
+ * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataAutomation
  * @mixes DisplayAutomation
@@ -27,7 +31,7 @@ const { fields } = foundry.data;
 export default class AddDocumentsAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
-    automationMixins.SelectDocumentsAutomationMixin,
+    SelectionPseudoDocumentMixin,
     OverrideCompetenceMechanicMixin,
     automationMixins.OverrideDataAutomationMixin,
     automationMixins.DisplayAutomationMixin,
@@ -49,7 +53,7 @@ export default class AddDocumentsAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
+    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
       attachDocuments: new fields.BooleanField({ initial: true }),
       children: new fields.SchemaField({
         data: defaultJSONField(),
@@ -94,6 +98,21 @@ export default class AddDocumentsAutomation
       name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name: construction.data.name });
     }
     return name;
+  }
+
+  /**
+   * Build the construction for a single document, which is only known ahead of time when the
+   * selection isn't left for the created activation to make.
+   * @param {TeriockDocument|null} document
+   * @param {object} [options]
+   * @returns {DocumentConstruction}
+   */
+  #makeConstruction(document, options = {}) {
+    const data = foundry.utils.expandObject({ "system.competence.raw": this.getCompetence(options) });
+    if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
+    const construction = { data, uuid: document?.uuid };
+    if (document) { this.#updateConstructionName(construction); }
+    return construction;
   }
 
   /**
@@ -170,28 +189,33 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   async _getActivations(options = {}) {
     if (!this.hasActivations) { return []; }
-    const choices = await this.choose(options);
-    const activations = [];
-    for (const choice of choices) {
-      const activationFamily = { root: choice };
+    const selections = await this._getSelections({
+      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
+    });
+    return selections.map(({ config, document }) => {
+      const family = { root: this.#makeConstruction(document, options) };
       if (this.children.enabled) {
         const uuids = [
           ...Array.from(this.children.uuids),
           ...Array.from(this.children.identifiers).map(i => game.teriock.identifiers.get(i)).filter(Boolean),
         ];
-        activationFamily.children = uuids.map(uuid => {
+        family.children = uuids.map(uuid => {
           return { data: this.children.overrideData ? this.children.data : {}, uuid };
         });
       }
-      const activationData = {
-        display: { label: this.display.label || this.#inferLabel(activationFamily.root) },
-        primary: activationFamily,
-        secondary: activationFamily,
+      return new AddDocumentsActivation({
+        ...config,
+        display: { label: this.display.label || this.#inferLabel(family.root) },
+        primary: family,
+        secondary: family,
         target: this.target,
-      };
-      activations.push(new AddDocumentsActivation(activationData));
-    }
-    return activations;
+      });
+    });
+  }
+
+  /** @inheritDoc */
+  _isSelectable(document) {
+    return Boolean(document?.uuid);
   }
 
   /** @inheritDoc */
@@ -201,25 +225,17 @@ export default class AddDocumentsAutomation
   }
 
   /**
-   * @inheritDoc
+   * Constructions for the documents this adds as part of the main effect, rather than as its own
+   * activation. The selection is always made during the execution here.
    * @param {object} [options]
    * @param {AnyActor} [options.actor]
    * @param {BaseExecution} [options.execution]
    * @return {Promise<Teriock.System.Attachment<AnyChildDocument>[]>}
    */
   async choose(options = {}) {
-    const uuids = await super.choose(options);
-    return uuids.map(uuid => {
-      const data = foundry.utils.expandObject({ "system.competence.raw": this.getCompetence(options) });
-      if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
-      const construction = { data, uuid };
-      this.#updateConstructionName(construction);
-      return construction;
+    const documents = await this.selectDocuments({
+      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
     });
-  }
-
-  /** @inheritDoc */
-  async getDocuments(options = {}) {
-    return (await super.getDocuments(options)).filter(d => d && d.uuid);
+    return documents.map(d => this.#makeConstruction(d, options));
   }
 }

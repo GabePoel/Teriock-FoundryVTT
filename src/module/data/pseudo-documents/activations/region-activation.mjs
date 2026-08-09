@@ -1,8 +1,13 @@
+import { omit } from "../../../helpers/utils.mjs";
+import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class RegionActivation extends BaseActivation {
+/**
+ * @mixes SelectionPseudoDocument
+ */
+export default class RegionActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /** @inheritDoc */
   static get ICON() {
     return TERIOCK.display.icons.document.region;
@@ -20,10 +25,28 @@ export default class RegionActivation extends BaseActivation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      attachToToken: new fields.BooleanField(),
-      data: new fields.ObjectField(),
-    });
+    return Object.assign(
+      omit(super.defineSchema(), [
+        "expandFolders",
+        "expandTables",
+        "localIdentifiers",
+        "localQualifier",
+        "localUuids",
+        "makeSeparateActivations",
+        "selectInExecution",
+      ]),
+      { attachToToken: new fields.BooleanField(), data: new fields.ObjectField() },
+    );
+  }
+
+  /** @inheritDoc */
+  get _selectionRelativeTo() {
+    return this.document?.speakerActor ?? null;
+  }
+
+  /** @inheritDoc */
+  get _selectionTitle() {
+    return this.label;
   }
 
   /** @inheritDoc */
@@ -41,6 +64,15 @@ export default class RegionActivation extends BaseActivation {
       flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
     });
+    const uuids = (await this.selectDocuments()).map(d => d.uuid);
+    if (uuids.length) {
+      data.behaviors ??= [];
+      data.behaviors.push({
+        name: _loc("TYPES.RegionBehavior.applyActiveEffect"),
+        system: { effects: uuids },
+        type: "applyActiveEffect",
+      });
+    }
     data.color ??= game.user.color;
     await game.teriock.minimizeStart();
     const region = await canvas.regions.placeRegion(data, {

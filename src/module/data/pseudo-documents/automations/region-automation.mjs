@@ -1,9 +1,10 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
+import { omit } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { RegionActivation } from "../activations/_module.mjs";
-import { CritMechanicMixin } from "../mixins/_module.mjs";
+import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -12,7 +13,7 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @mixes SelectDocumentsAutomation
+ * @mixes SelectionPseudoDocument
  * @mixes TriggerAutomation
  * @mixes OverrideDataAutomation
  * @mixes DisplayAutomation
@@ -35,7 +36,7 @@ const { fields } = foundry.data;
 export default class RegionAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
-    automationMixins.SelectDocumentsAutomationMixin,
+    SelectionPseudoDocumentMixin,
     automationMixins.TriggerAutomationMixin,
     automationMixins.OverrideDataAutomationMixin,
     automationMixins.DisplayAutomationMixin,
@@ -82,52 +83,55 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      angle: new FormulaField({ deterministic: true, initial: "60" }),
-      attachToToken: new fields.BooleanField({ initial: true }),
-      deleteOnTurnChange: new fields.BooleanField({ initial: true }),
-      excludeToken: new fields.BooleanField({ initial: true }),
-      expandWithToken: new fields.BooleanField({ initial: true }),
-      height: this.#rangeField(),
-      innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
-      outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
-      radius: this.#rangeField(),
-      radiusX: this.#rangeField(),
-      radiusY: this.#rangeField(),
-      regionType: new fields.StringField({
-        choices: localizeChoices({
-          circle: "SHAPE.TYPES.circle.name",
-          cone: "SHAPE.TYPES.cone.name",
-          ellipse: "SHAPE.TYPES.ellipse.name",
-          emanation: "SHAPE.TYPES.emanation.name",
-          rectangle: "SHAPE.TYPES.rectangle.name",
-          ring: "SHAPE.TYPES.ring.name",
-        }),
-        initial: "circle",
-        nullable: false,
-        required: true,
-      }),
-      restriction: new fields.SchemaField({
-        enabled: new fields.BooleanField(),
-        priority: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, required: true }),
-        type: new fields.StringField({
-          choices: Object.fromEntries(
-            CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
-          ),
-          initial: "move",
+    return Object.assign(
+      omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations", "selectInExecution"]),
+      {
+        angle: new FormulaField({ deterministic: true, initial: "60" }),
+        attachToToken: new fields.BooleanField({ initial: true }),
+        deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+        excludeToken: new fields.BooleanField({ initial: true }),
+        expandWithToken: new fields.BooleanField({ initial: true }),
+        height: this.#rangeField(),
+        innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
+        outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
+        radius: this.#rangeField(),
+        radiusX: this.#rangeField(),
+        radiusY: this.#rangeField(),
+        regionType: new fields.StringField({
+          choices: localizeChoices({
+            circle: "SHAPE.TYPES.circle.name",
+            cone: "SHAPE.TYPES.cone.name",
+            ellipse: "SHAPE.TYPES.ellipse.name",
+            emanation: "SHAPE.TYPES.emanation.name",
+            rectangle: "SHAPE.TYPES.rectangle.name",
+            ring: "SHAPE.TYPES.ring.name",
+          }),
+          initial: "circle",
+          nullable: false,
           required: true,
         }),
-      }),
-      targeting: new fields.BooleanField({ initial: true }),
-      visibility: new fields.NumberField({
-        choices: Object.fromEntries(
-          Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
-        ),
-        initial: CONST.REGION_VISIBILITY.ALWAYS,
-        required: true,
-      }),
-      width: this.#rangeField(),
-    });
+        restriction: new fields.SchemaField({
+          enabled: new fields.BooleanField(),
+          priority: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, required: true }),
+          type: new fields.StringField({
+            choices: Object.fromEntries(
+              CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
+            ),
+            initial: "move",
+            required: true,
+          }),
+        }),
+        targeting: new fields.BooleanField({ initial: true }),
+        visibility: new fields.NumberField({
+          choices: Object.fromEntries(
+            Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
+          ),
+          initial: CONST.REGION_VISIBILITY.ALWAYS,
+          required: true,
+        }),
+        width: this.#rangeField(),
+      },
+    );
   }
 
   /**
@@ -238,13 +242,13 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async _getActivations(options = { rollData: {} }) {
-    return [
-      new RegionActivation({
-        attachToToken: this.attachToToken,
-        data: await this.getRegionData(options),
-        display: this.display,
-      }),
-    ];
+    const data = await this.getRegionData(options);
+    const selections = this.hasSelection
+      ? await this._getSelections({ relativeTo: options.execution?.actor ?? this.actor })
+      : [{ config: {} }];
+    return selections.map(({ config }) =>
+      new RegionActivation({ ...config, attachToToken: this.attachToToken, data, display: this.display })
+    );
   }
 
   /** @inheritDoc */
@@ -275,7 +279,7 @@ export default class RegionAutomation
    * @returns {Promise<object>}
    */
   async getRegionData(options = { execution: null, rollData: {} }) {
-    const data = Object.assign({
+    return Object.assign({
       behaviors: [],
       displayMeasurements: false,
       flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
@@ -289,14 +293,5 @@ export default class RegionAutomation
       shapes: this.#getRegionShapeData(options),
       visibility: this.visibility,
     }, this.overrideData ? this.data : {});
-    const uuids = await this.choose({ actor: options.execution?.actor, execution: options.execution });
-    if (uuids.length) {
-      data.behaviors.push({
-        name: _loc("TYPES.RegionBehavior.applyActiveEffect"),
-        system: { effects: uuids },
-        type: "applyActiveEffect",
-      });
-    }
-    return data;
   }
 }

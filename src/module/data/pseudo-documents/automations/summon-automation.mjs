@@ -1,25 +1,23 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { resolveDocument } from "../../../helpers/resolve.mjs";
+import { omit } from "../../../helpers/utils.mjs";
+import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
-import { CritMechanicMixin } from "../mixins/_module.mjs";
+import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @mixes SelectExternalDocumentsAutomation
+ * @mixes SelectionPseudoDocument
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
- * @property {boolean} merge
  */
 export default class SummonAutomation
   extends mixClasses(
     BaseAutomation,
     CritMechanicMixin,
-    automationMixins.SelectExternalDocumentsAutomationMixin,
+    SelectionPseudoDocumentMixin,
     automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,
   )
@@ -44,16 +42,19 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { merge: new fields.BooleanField({ initial: true }) });
+    return omit(super.defineSchema(), [
+      "expandFolders",
+      "expandTables",
+      "localIdentifiers",
+      "localQualifier",
+      "localUuids",
+    ]);
   }
 
-  /**
-   * @param {UUID<TeriockDocument>} uuid
-   * @returns {boolean}
-   */
-  #validateUuid(uuid) {
-    const parsed = foundry.utils.parseUuid(uuid);
-    return parsed?.type === "Actor";
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "merge", "makeSeparateActivations", v => !v);
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
@@ -62,32 +63,23 @@ export default class SummonAutomation
   }
 
   /** @inheritDoc */
-  get _selectionPaths() {
-    const paths = super._selectionPaths;
-    if (!this.trigger) { paths.push("merge"); }
-    return paths;
-  }
-
-  /** @inheritDoc */
   async _getActivations(options = {}) {
-    const uuids = (await this.choose(options)).filter(this.#validateUuid);
-    if (!uuids.length) { return []; }
-    if (this.merge) { return [new SummonActivation({ display: this.display, uuids })]; }
-    const activations = [];
-    for (const uuid of uuids) {
-      const doc = await resolveDocument(uuid);
-      const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
-        name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
-      });
+    const selections = await this._getSelections({
+      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
+    });
+    return selections.map(({ config, document }) => {
       const display = foundry.utils.deepClone(this.display);
-      display.label ||= label;
-      activations.push(new SummonActivation({ display, uuids: [uuid] }));
-    }
-    return activations;
+      if (document) {
+        display.label ||= _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
+          name: document.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
+        });
+      }
+      return new SummonActivation({ ...config, display });
+    });
   }
 
   /** @inheritDoc */
-  async getDocuments(options = {}) {
-    return (await super.getDocuments(options)).filter(d => d?.documentName === "Actor");
+  _isSelectable(document) {
+    return document?.documentName === "Actor";
   }
 }

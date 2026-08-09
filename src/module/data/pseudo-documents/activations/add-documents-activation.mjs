@@ -3,7 +3,8 @@ import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { TeriockActiveEffect, TeriockItem } from "../../../documents/_module.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { objectMap, omit } from "../../../helpers/utils.mjs";
+import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -35,11 +36,12 @@ const { fields } = foundry.data;
  */
 
 /**
+ * @mixes SelectionPseudoDocument
  * @property {FamilyConstruction} primary
  * @property {FamilyConstruction} secondary
  * @property {Teriock.Keys.ApplicationTarget} target
  */
-export default class AddDocumentsActivation extends BaseActivation {
+export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /**
    * Whether a family construction has any documents to create.
    * @param {Partial<FamilyConstruction>} famConstruct
@@ -70,17 +72,36 @@ export default class AddDocumentsActivation extends BaseActivation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      primary: familyConstructionField(),
-      secondary: familyConstructionField(),
-      target: new fields.StringField({
-        blank: false,
-        choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
-        initial: "actor",
-        nullable: false,
-        required: true,
-      }),
-    });
+    return Object.assign(
+      omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations", "selectInExecution"]),
+      {
+        primary: familyConstructionField(),
+        secondary: familyConstructionField(),
+        target: new fields.StringField({
+          blank: false,
+          choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
+          initial: "actor",
+          nullable: false,
+          required: true,
+        }),
+      },
+    );
+  }
+
+  /**
+   * The families to create, one per selected document when a selection is configured.
+   * @returns {Promise<Partial<ResolvedFamily>[]>}
+   */
+  async #chooseFamilies() {
+    const construction = await this.chooseFamily();
+    if (!construction) { return []; }
+    if (!this.hasSelection) { return [await this.constructFamily(construction)]; }
+    const documents = await this.selectDocuments();
+    return Promise.all(
+      documents.map(d =>
+        this.constructFamily({ ...construction, root: { data: construction.root?.data ?? {}, uuid: d.uuid } })
+      ),
+    );
   }
 
   /**
@@ -102,9 +123,19 @@ export default class AddDocumentsActivation extends BaseActivation {
     };
   }
 
+  /** @inheritDoc */
+  get _selectionRelativeTo() {
+    return this.document?.speakerActor ?? null;
+  }
+
+  /** @inheritDoc */
+  get _selectionTitle() {
+    return this.label;
+  }
+
   /**
-   * Choose between the constructed document families.
-   * @returns {Promise<Partial<ResolvedFamily>|null>} The chosen constructed family, or `null` if canceled.
+   * Choose between the document families.
+   * @returns {Promise<Partial<FamilyConstruction>|null>} The chosen family, or `null` if canceled.
    */
   async chooseFamily() {
     const useSecondary = Boolean(this.event?.altKey);
@@ -113,13 +144,11 @@ export default class AddDocumentsActivation extends BaseActivation {
       || foundry.utils.equals(this.primary, this.secondary)
       || !game.settings.get("teriock", "selectAddedDocuments")
     ) {
-      return this.constructFamily(useSecondary ? this.secondary : this.primary);
+      return useSecondary ? this.secondary : this.primary;
     }
-    const families = {
-      primary: await this.constructFamily(this.primary),
-      secondary: await this.constructFamily(this.secondary),
-    };
-    const entries = Object.entries(families).map(([key, fam]) => this.#familyEntry(key, fam));
+    const entries = await Promise.all(
+      ["primary", "secondary"].map(async key => this.#familyEntry(key, await this.constructFamily(this[key]))),
+    );
     const chosen = await DocumentSelector.selectSingle(entries, {
       checked: useSecondary ? "secondary" : "primary",
       hint: "TERIOCK.ACTIVATIONS.AddDocuments.DIALOG.hint",
@@ -127,7 +156,7 @@ export default class AddDocumentsActivation extends BaseActivation {
       title: "TERIOCK.ACTIVATIONS.AddDocuments.DIALOG.title",
       tooltip: false,
     });
-    return chosen ? families[chosen.uuid] : null;
+    return chosen ? this[chosen.uuid] : null;
   }
 
   /**
@@ -194,11 +223,11 @@ export default class AddDocumentsActivation extends BaseActivation {
   /** @inheritDoc */
   async primaryAction() {
     if (!this.checkActors()) { return; }
-    const family = await this.chooseFamily();
-    if (!family) { return; }
+    const families = await this.#chooseFamilies();
+    if (!families.length) { return; }
     await Promise.all(this.actors.map(async a => {
       if (this.target === "actor") {
-        await this.createFamily(a, family);
+        for (const family of families) { await this.createFamily(a, family); }
         ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
           format: { name: a.name },
           localize: true,
@@ -208,8 +237,8 @@ export default class AddDocumentsActivation extends BaseActivation {
         if (this.target === "armament") { choices = a.armaments; }
         if (this.target === "item") { choices = a.visibleChildren.filter(c => c.documentName === "Item"); }
         const chosen = await DocumentSelector.selectMulti(choices);
-        await Promise.all(chosen.map(c => {
-          this.createFamily(c, family);
+        await Promise.all(chosen.map(async c => {
+          for (const family of families) { await this.createFamily(c, family); }
           ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
             format: { name: c.name },
             localize: true,

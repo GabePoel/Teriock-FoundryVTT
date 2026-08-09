@@ -146,6 +146,7 @@ export default class DocumentSelector extends ResolvableDialog {
     const {
       expandFolders = true,
       expandTables = true,
+      filter = () => true,
       globalIdentifiers = [],
       globalUuids = [],
       localIdentifiers = [],
@@ -164,7 +165,7 @@ export default class DocumentSelector extends ResolvableDialog {
     const qualified = await fromQualifier(relativeTo, localQualifier);
     const global = [...Array.from(globalUuids), ...Array.from(globalIdentifiers)];
     const documents = await resolveDocuments([...global, ...local, ...qualified], { expandFolders, expandTables });
-    return Array.from(new Set(documents));
+    return Array.from(new Set(documents)).filter(filter);
   }
 
   /**

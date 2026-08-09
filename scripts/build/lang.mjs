@@ -27,6 +27,7 @@ import { default as models } from "../../src/en/models.json" with { type: "json"
 import { default as operations } from "../../src/en/operations.json" with { type: "json" };
 import { default as packs } from "../../src/en/packs.json" with { type: "json" };
 import { default as perception } from "../../src/en/perception.json" with { type: "json" };
+import { default as pseudos } from "../../src/en/pseudos.json" with { type: "json" };
 import { default as rollContext } from "../../src/en/roll-context.json" with { type: "json" };
 import { default as rolls } from "../../src/en/rolls.json" with { type: "json" };
 import { default as schema } from "../../src/en/schema.json" with { type: "json" };
@@ -138,6 +139,7 @@ mergeObjects(
   operations,
   packs,
   perception,
+  pseudos,
   rollContext,
   rolls,
   schema,

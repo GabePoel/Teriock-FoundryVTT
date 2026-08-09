@@ -345,7 +345,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
         const transformationAutomations = this.getAutomations("transformation", { active: true });
         for (const a of transformationAutomations) {
-          const toAdd = await a?.choose({ actor: this.actor, execution: this });
+          const toAdd = (await a.selectDocuments({ relativeTo: this.actor })).map(d => d.uuid);
           for (const [i, v] of variants.entries()) {
             if (a?.crit.has(i)) { v.con.data.system.transformation.uuids.push(...toAdd); }
           }

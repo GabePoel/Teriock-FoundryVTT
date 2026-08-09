@@ -39,6 +39,7 @@ import {
   TradecraftActivation,
   UndampenActivation,
   UnglueActivation,
+  UseDocumentsActivation,
   UseExternalActivation,
   UseLocalActivation,
 } from "./_module.mjs";
@@ -85,6 +86,7 @@ declare global {
     unglue: UnglueActivation;
     uncover: TakeUncoverActivation;
     unhack: TakeUnhackActivation;
+    useDocuments: UseDocumentsActivation;
     useExternal: UseExternalActivation;
     useLocal: UseLocalActivation;
   }

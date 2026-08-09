@@ -1,9 +1,9 @@
 import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { toId } from "../../../helpers/string.mjs";
+import { omit } from "../../../helpers/utils.mjs";
+import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @typedef {"unknown" | "ready" | "unowned" | "packed"} ActorState
@@ -16,9 +16,9 @@ const { fields } = foundry.data;
  */
 
 /**
- * @property {Set<UUID<AnyActor>>} uuids
+ * @mixes SelectionPseudoDocument
  */
-export default class SummonActivation extends BaseActivation {
+export default class SummonActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /** @inheritDoc */
   static get ICON() {
     return TERIOCK.display.icons.document.token;
@@ -36,9 +36,15 @@ export default class SummonActivation extends BaseActivation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      uuids: new fields.SetField(new fields.DocumentUUIDField({ nullable: false, type: "Actor" })),
-    });
+    return omit(super.defineSchema(), [
+      "expandFolders",
+      "expandTables",
+      "localIdentifiers",
+      "localQualifier",
+      "localUuids",
+      "makeSeparateActivations",
+      "selectInExecution",
+    ]);
   }
 
   /** @type {SummonNode[]} */
@@ -168,7 +174,7 @@ export default class SummonActivation extends BaseActivation {
   async #prepareActors() {
     this.#nodes = [];
     const srcPromises = [];
-    for (const uuid of Array.from(this.uuids)) {
+    for (const uuid of (await this.selectDocuments()).map(d => d.uuid)) {
       if (!uuid.startsWith("Compendium")) { srcPromises.push(uuid); }
       else {
         const summon = this.#findBestSummon(uuid);
@@ -191,8 +197,23 @@ export default class SummonActivation extends BaseActivation {
   }
 
   /** @inheritDoc */
+  get _selectionRelativeTo() {
+    return this.document?.speakerActor ?? null;
+  }
+
+  /** @inheritDoc */
+  get _selectionTitle() {
+    return this.label;
+  }
+
+  /** @inheritDoc */
   get visible() {
     return game.user.hasPermission("TOKEN_CREATE") && game.user.hasPermission("QUERY_USER");
+  }
+
+  /** @inheritDoc */
+  _isSelectable(document) {
+    return document?.documentName === "Actor";
   }
 
   /**

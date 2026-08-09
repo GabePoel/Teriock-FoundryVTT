@@ -1,26 +1,28 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { resolveDocument } from "../../../helpers/resolve.mjs";
-import { UseExternalActivation } from "../activations/command-activations.mjs";
-import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
+import { UseDocumentsActivation } from "../activations/_module.mjs";
+import {
+  CritMechanicMixin,
+  OverrideCompetenceMechanicMixin,
+  SelectionPseudoDocumentMixin,
+} from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @mixes SelectDocumentsAutomation
+ * @mixes SelectionPseudoDocument
+ * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataAutomation
- * @property {boolean} expandTables
  */
 export default class UseDocumentsAutomation
   extends mixClasses(
     BaseAutomation,
     CritMechanicMixin,
-    automationMixins.SelectDocumentsAutomationMixin,
+    SelectionPseudoDocumentMixin,
+    automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,
     OverrideCompetenceMechanicMixin,
     automationMixins.OverrideDataAutomationMixin,
@@ -45,32 +47,11 @@ export default class UseDocumentsAutomation
   }
 
   /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), { expandTables: new fields.BooleanField() });
-  }
-
-  /**
-   * Make an activation for a given document.
-   * @param {UUID<AnyChildDocument>} uuid
-   * @param {object} [useOptions]
-   * @returns {Promise<UseExternalActivation>}
-   */
-  async #makeExternalActivation(uuid, useOptions = {}) {
-    const doc = await resolveDocument(uuid);
-    const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name: doc.name || "" });
-    const icon = TERIOCK.config.document[doc.type]?.icon;
-    return new UseExternalActivation({
-      display: { icon: TERIOCK.config.document[doc.type]?.icon, label: doc.name },
-      options: { ...this.getUseOptions(), ...useOptions, expandTables: this.expandTables, icon, label, uuid },
-    });
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return [
       ...this._selectionPaths,
       "hr",
-      ...this._triggerPaths,
+      ...this._triggerDisplayPaths,
       "hr",
       ...this._competencePaths,
       ...this._overrideDataPaths,
@@ -78,30 +59,30 @@ export default class UseDocumentsAutomation
   }
 
   /** @inheritDoc */
-  get _selectionPaths() {
-    return [...super._selectionPaths, "expandTables"];
-  }
-
-  /** @inheritDoc */
   async _getActivations(options = {}) {
-    const docs = await this._choose({
-      actor: options.actor ?? options.execution?.actor,
-      execution: options.execution,
-      expandFolders: true,
-      expandTables: this.expandTables,
+    const selections = await this._getSelections({
+      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
     });
-    if (!docs.length) { return []; }
+    if (!selections.length) { return []; }
     const useOptions = {
+      ...this.getUseOptions(),
       competence: this.getCompetence(options),
       edge: options.execution?.edge,
       event: options.execution?.options?.event,
     };
-    return Promise.all(docs.map(d => this.#makeExternalActivation(d.uuid, useOptions)));
+    return selections.map(({ config, document }) => {
+      const display = foundry.utils.deepClone(this.display);
+      if (document) {
+        display.icon = TERIOCK.config.document[document.type]?.icon;
+        display.label ||= document.name;
+      }
+      return new UseDocumentsActivation({ ...config, display, options: useOptions });
+    });
   }
 
   /** @inheritDoc */
-  async getDocuments(options = {}) {
-    return (await super.getDocuments(options)).filter(d => d && typeof d.use === "function");
+  _isSelectable(document) {
+    return typeof document?.use === "function";
   }
 
   /**

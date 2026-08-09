@@ -11,3 +11,4 @@ export { default as RegionActivation } from "./region-activation.mjs";
 export { default as RollActivation } from "./roll-activation.mjs";
 export { default as SummonActivation } from "./summon-activation.mjs";
 export { default as TakeActivation } from "./take-activation.mjs";
+export { default as UseDocumentsActivation } from "./use-documents-activation.mjs";

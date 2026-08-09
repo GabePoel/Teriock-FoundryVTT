@@ -136,7 +136,9 @@ export default function TriggerAutomationMixin(Base) {
      * @return {boolean}
      */
     get _hasButtons() {
-      return !this.trigger || this.document?.documentName === "JournalEntryPage";
+      return !this.trigger
+        || this.document?.documentName === "JournalEntryPage"
+        || (this._isActiveTrigger(this.trigger) && Boolean(this._defersSelection));
     }
 
     /**
@@ -245,6 +247,7 @@ export default function TriggerAutomationMixin(Base) {
      * @returns {Promise<void|any[]>}
      */
     async _preFireExecutionTrigger(scope) {
+      if (this._defersSelection) { return; }
       if (this.triggerMetadata.activationTime === "pre" || this.triggerMetadata.activationTime === "on") {
         return this._activateActivations(scope);
       }

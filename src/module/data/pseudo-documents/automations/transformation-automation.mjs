@@ -1,22 +1,22 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { omit } from "../../../helpers/utils.mjs";
 import { automationTransformationFields } from "../../fields/tools/transformation-fields.mjs";
-import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
+import {
+  CritMechanicMixin,
+  OverrideCompetenceMechanicMixin,
+  SelectionPseudoDocumentMixin,
+} from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {BaseAutomation}
  * @extends {Teriock.Transformation.AutomationTransformationConfig}
  * @mixes CritMechanic
- * @mixes SelectExternalDocumentsAutomation
+ * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */
 export default class TransformationAutomation
-  extends mixClasses(
-    CritMechanicMixin(BaseAutomation),
-    automationMixins.SelectExternalDocumentsAutomationMixin,
-    OverrideCompetenceMechanicMixin,
-  )
+  extends mixClasses(BaseAutomation, CritMechanicMixin, SelectionPseudoDocumentMixin, OverrideCompetenceMechanicMixin)
 {
   /** @inheritDoc */
   static get LABEL() {
@@ -30,7 +30,18 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), automationTransformationFields());
+    return Object.assign(
+      omit(super.defineSchema(), [
+        "expandFolders",
+        "expandTables",
+        "localIdentifiers",
+        "localQualifier",
+        "localUuids",
+        "makeSeparateActivations",
+        "selectInExecution",
+      ]),
+      automationTransformationFields(),
+    );
   }
 
   /** @inheritDoc */
@@ -52,11 +63,10 @@ export default class TransformationAutomation
   }
 
   /** @inheritDoc */
-  async getDocuments(options = {}) {
-    let out = await super.getDocuments(options);
-    const actors = out.filter(d => d.documentName === "Actor");
-    out = out.filter(d => d.type === "species");
-    for (const a of actors) { out.push(...a.species); }
-    return out;
+  async getSelectableDocuments(overrides = {}) {
+    const out = await super.getSelectableDocuments(overrides);
+    const species = out.filter(d => d.type === "species");
+    for (const a of out.filter(d => d.documentName === "Actor")) { species.push(...a.species); }
+    return species;
   }
 }
