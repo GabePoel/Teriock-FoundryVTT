@@ -61,7 +61,7 @@ export default class TeriockTableResult
       activations.push(new acts.SummonActivation({ display: { label }, uuids: [this.documentUuid] }));
     }
     if (doc.documentName === "Macro") {
-      activations.push(new acts.MacroActivation({ display: { label: name }, macro: this.documentUuid }));
+      activations.push(new acts.MacroActivation({ display: { label: name }, primaryMacro: this.documentUuid }));
     }
     if (["ActiveEffect", "Item", "RollTable"].includes(doc.documentName)) {
       const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name });

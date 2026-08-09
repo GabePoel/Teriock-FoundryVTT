@@ -18,7 +18,8 @@ export default function MacroAutomationMixin(Base) {
    * @mixes TriggerAutomation
    * @mixes DisplayAutomation
    * @mixin
-   * @property {UUID<TeriockMacro>} macro
+   * @property {UUID<TeriockMacro>} primaryMacro
+   * @property {UUID<TeriockMacro>} secondaryMacro
    */
   class MacroAutomation extends mixClasses(Base, TriggerAutomationMixin, DisplayAutomationMixin) {
     /** @inheritDoc */
@@ -44,11 +45,15 @@ export default function MacroAutomationMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { macro: new fields.DocumentUUIDField({ type: "Macro" }) });
+      return Object.assign(super.defineSchema(), {
+        primaryMacro: new fields.DocumentUUIDField({ type: "Macro" }),
+        secondaryMacro: new fields.DocumentUUIDField({ type: "Macro" }),
+      });
     }
 
     /** @inheritDoc */
     static migrateData(source, options, state) {
+      migrateKey(source, "macro", "primaryMacro");
       migrateKey(source, "pseudoHook", "trigger");
       migrateValue(source, "relation", "pseudoHook", "trigger");
       migrateValue(source, "trigger", "effectApplication", "applyEffect");
@@ -62,7 +67,7 @@ export default function MacroAutomationMixin(Base) {
 
     /** @inheritDoc */
     get _formPaths() {
-      return ["macro", "hr", ...this._triggerDisplayPaths];
+      return [...this._macroPaths, "hr", ...this._triggerDisplayPaths];
     }
 
     /** @inheritDoc */
@@ -71,18 +76,38 @@ export default function MacroAutomationMixin(Base) {
     }
 
     /**
+     * Paths for the macros this can execute.
+     * @returns {string[]}
+     */
+    get _macroPaths() {
+      return this.makesActivation ? ["primaryMacro", "secondaryMacro"] : ["primaryMacro"];
+    }
+
+    /**
      * Convenience helper to check if this has a macro.
      * @returns {boolean}
      */
     get hasMacro() {
-      return this.macro && Boolean(fromUuidSync(this.macro));
+      return this.primaryMacro && Boolean(fromUuidSync(this.primaryMacro));
+    }
+
+    /**
+     * Whether this generates an activation for something to press.
+     * @returns {boolean}
+     */
+    get makesActivation() {
+      return !this._isActiveTrigger(this.trigger);
     }
 
     /** @inheritDoc */
     async _getActivations() {
-      const macro = await resolveDocument(this.macro);
+      const macro = await resolveDocument(this.primaryMacro);
       return [
-        new MacroActivation({ display: { label: this.display.label || macro?.name || this.label }, macro: this.macro }),
+        new MacroActivation({
+          display: { label: this.display.label || macro?.name || this.label },
+          primaryMacro: this.primaryMacro,
+          secondaryMacro: this.secondaryMacro,
+        }),
       ];
     }
 
@@ -97,13 +122,13 @@ export default function MacroAutomationMixin(Base) {
     }
 
     /**
-     * Execute the macro.
+     * Execute the primary macro.
      * @param {Teriock.System.TriggerScope} scope
      * @return {Promise<void>}
      */
     async executeMacro(scope = {}) {
       if (!this.hasMacro) { return; }
-      const macro = await fromUuid(this.macro);
+      const macro = await fromUuid(this.primaryMacro);
       await macro.execute(this.getScope(scope));
     }
   }

@@ -5,7 +5,8 @@ import { BaseActivation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {UUID<TeriockMacro>} macro
+ * @property {UUID<TeriockMacro>} primaryMacro
+ * @property {UUID<TeriockMacro>} secondaryMacro
  * @property {object} scope
  */
 export default class MacroActivation extends BaseActivation {
@@ -22,14 +23,29 @@ export default class MacroActivation extends BaseActivation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      macro: new fields.DocumentUUIDField({ type: "Macro" }),
+      primaryMacro: new fields.DocumentUUIDField({ type: "Macro" }),
       scope: new fields.ObjectField(),
+      secondaryMacro: new fields.DocumentUUIDField({ type: "Macro" }),
     });
   }
 
-  /** @inheritDoc */
-  async primaryAction() {
-    const scope = Object.assign({
+  /**
+   * Execute one of this activation's macros.
+   * @param {UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async #execute(uuid) {
+    if (!uuid) { return; }
+    const macro = await fromUuid(uuid);
+    await macro?.execute(this.#getScope());
+  }
+
+  /**
+   * The scope that this activation's macros are executed with.
+   * @returns {object}
+   */
+  #getScope() {
+    return Object.assign({
       activation: this,
       actor: this.actors.length > 0
         ? this.actors[0]
@@ -40,7 +56,15 @@ export default class MacroActivation extends BaseActivation {
       speaker: TeriockChatMessage.getSpeaker(),
       tokens: this.tokens,
     }, this.scope ?? {});
-    const macro = await fromUuid(this.macro);
-    await macro.execute(scope);
+  }
+
+  /** @inheritDoc */
+  async primaryAction() {
+    await this.#execute(this.primaryMacro);
+  }
+
+  /** @inheritDoc */
+  async secondaryAction() {
+    await this.#execute(this.secondaryMacro);
   }
 }

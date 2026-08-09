@@ -18,7 +18,12 @@ export default class CleanedEffectSystem extends systemMixins.InstructionsSystem
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    this.parent.updateSource({ duration: { expired: false, expiry: null, value: null }, statuses: [], transfer: true });
+    this.parent.updateSource({
+      duration: { expired: false, expiry: null, value: null },
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.NEVER,
+      statuses: [],
+      transfer: true,
+    });
   }
 
   /** @inheritDoc */
