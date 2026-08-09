@@ -1,9 +1,14 @@
-{{!-- Blatantly stolen from D&D 5E --}}
+{{!-- Blatantly stolen from D&D 5E and modified --}}
 {{#if fieldset}}
   <fieldset
     {{disabled disabled}}
   >
-    <legend>{{ifThen legend (localize legend) (localize "SETUP.Configuration")}}</legend>
+    <legend>
+      {{#if icon}}
+        {{makeIcon icon}}
+      {{/if}}
+      {{ifThen label (localize label) (localize "SETUP.Configuration")}}
+    </legend>
     {{> "teriock/shared/field-list"
       fields
     }}

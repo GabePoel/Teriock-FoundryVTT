@@ -81,7 +81,9 @@ export default class InventorySystem extends BaseActorSystem {
           disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
         },
         system: {
-          settings: Object.fromEntries(Object.keys(TERIOCK.config.settings.categories.actor).map(k => [k, false])),
+          settings: Object.fromEntries(
+            Object.keys(TERIOCK.config.documentBehavior.categories.actor.settings).map(k => [k, false]),
+          ),
         },
       }, data),
     );

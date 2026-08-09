@@ -1,4 +1,4 @@
-import settingsConfig from "../../../constants/config/settings-config.mjs";
+import documentBehaviorConfig from "../../../constants/config/document-behavior-config.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 
@@ -8,8 +8,8 @@ import { TernaryField } from "../../fields/_module.mjs";
  */
 
 /**
- * @param {Teriock.Config.SettingsCategory} category
- * @param {Teriock.Config.SettingsKey<Teriock.Config.SettingsCategory>} key
+ * @param {Teriock.Behavior.SettingsCategory} category
+ * @param {Teriock.Behavior.SettingsKey<Teriock.Behavior.SettingsCategory>} key
  * @param {"hint"|"name"} field
  * @returns {string}
  */
@@ -19,19 +19,19 @@ function settingsPath(category, key, field) {
 
 /**
  * Build a schema with one field per setting in a category.
- * @param {Teriock.Config.SettingsCategory} category
+ * @param {Teriock.Behavior.SettingsCategory} category
  * @param {typeof foundry.data.fields.DataField} FieldClass
  * @param {DataFieldOptions} [options]
  * @returns {DataSchema}
  */
 function settingsSchema(category, FieldClass, options = {}) {
   return Object.fromEntries(
-    Object.keys(settingsConfig.categories[category]).map(
+    Object.keys(documentBehaviorConfig.categories[category].settings).map(
       key => [
         key,
         new FieldClass({
           hint: settingsPath(category, key, "hint"),
-          initial: settingsConfig.categories[category][key],
+          initial: documentBehaviorConfig.categories[category].settings[key],
           label: settingsPath(category, key, "name"),
           ...options,
         }),
@@ -41,18 +41,18 @@ function settingsSchema(category, FieldClass, options = {}) {
 }
 
 export class CommonDocumentSettingsModel extends BaseDataModel {
-  /** @type {Teriock.Config.DocumentSettingsCategory} */
+  /** @type {Teriock.Behavior.DocumentSettingsCategory} */
   static CATEGORY;
 
   /**
    * Maps each setting key to the group whose user setting backs it.
-   * @type {Record<string, Teriock.Config.SettingsCategory>}
+   * @type {Record<string, Teriock.Behavior.SettingsCategory>}
    */
   static KEY_GROUPS = {};
 
   /**
    * Resolve a document setting against its user default.
-   * @param {Teriock.Config.ComposedSettingsKey} setting
+   * @param {Teriock.Behavior.ComposedSettingsKey} setting
    * @returns {boolean}
    */
   getSetting(setting) {
@@ -63,19 +63,19 @@ export class CommonDocumentSettingsModel extends BaseDataModel {
 }
 
 /**
- * @template {Teriock.Config.DocumentSettingsCategory} C
+ * @template {Teriock.Behavior.DocumentSettingsCategory} C
  * @param {C} category
  * @returns {Teriock.Models.DocumentSettingsModelConstructor<C>}
  */
-export function documentSettingsModelFactory(category) {
-  const groups = settingsConfig.compositions[category];
+export function DocumentSettingsModelFactory(category) {
+  const groups = documentBehaviorConfig.compositions[category];
   class DocumentSettingsModel extends CommonDocumentSettingsModel {
-    /** @type {Teriock.Config.DocumentSettingsCategory} */
+    /** @type {Teriock.Behavior.DocumentSettingsCategory} */
     static CATEGORY = category;
 
     /** @inheritDoc */
     static KEY_GROUPS = Object.fromEntries(
-      groups.flatMap(g => Object.keys(settingsConfig.categories[g]).map(k => [k, g])),
+      groups.flatMap(g => Object.keys(documentBehaviorConfig.categories[g].settings).map(k => [k, g])),
     );
 
     /** @inheritDoc */
@@ -88,11 +88,11 @@ export function documentSettingsModelFactory(category) {
 }
 
 /**
- * @template {Teriock.Config.SettingsCategory} Category
+ * @template {Teriock.Behavior.SettingsCategory} Category
  * @param {Category} category
  * @returns {Teriock.Models.UserSettingsModelConstructor<Category>}
  */
-export function userSettingsModelFactory(category) {
+export function UserSettingsModelFactory(category) {
   class UserSettingsModel extends BaseDataModel {
     /** @inheritDoc */
     static defineSchema() {

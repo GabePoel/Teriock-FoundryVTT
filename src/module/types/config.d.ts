@@ -1,36 +1,10 @@
 import changeConfig from "../constants/config/change-config.mjs";
-import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Config {
-    export type SettingsConfig = typeof settingsConfig;
-
-    export type SettingsCategory = keyof SettingsConfig["categories"];
-
-    export type SettingsKey<Category extends SettingsCategory = SettingsCategory> =
-      & keyof SettingsConfig["categories"][Category]
-      & string;
-
-    /** Settings categories composed into each document category's settings model. */
-    export interface SettingsCompositionMap {
-      ability: "ability" | "consumable";
-      actor: "actor";
-      armament: "armament";
-      consumable: "consumable";
-      equipment: "armament" | "consumable" | "equipment";
-    }
-
-    export type DocumentSettingsCategory = keyof SettingsCompositionMap;
-
-    /** Union of the setting keys from every group composed into a document settings category. */
-    export type ComposedSettingsKey<Category extends DocumentSettingsCategory = DocumentSettingsCategory> =
-      SettingsCompositionMap[Category] extends infer Group extends SettingsCategory
-        ? Group extends SettingsCategory ? SettingsKey<Group> : never
-        : never;
-
     // Tip Keys
     export type SuppressionMessageKey = keyof typeof tipConfig.suppression;
     export type ErrorMessageKey = keyof typeof tipConfig.error;

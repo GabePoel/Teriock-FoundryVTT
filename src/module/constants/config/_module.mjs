@@ -12,6 +12,7 @@ import costConfig from "./cost-config.mjs";
 import currencyConfig from "./currency-config.mjs";
 import deathBagConfig from "./death-bag-config.mjs";
 import displayConfig from "./display-config.mjs";
+import documentBehaviorConfig from "./document-behavior-config.mjs";
 import documentConfig from "./document-config.mjs";
 import effectConfig from "./effect-config.mjs";
 import equipmentConfig from "./equipment-config.mjs";
@@ -22,7 +23,6 @@ import indexConfig from "./index-config.mjs";
 import mathConfig from "./math-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
-import settingsConfig from "./settings-config.mjs";
 import statConfig from "./stat-config.mjs";
 import systemConfig from "./system-config.mjs";
 import tipConfig from "./tip-config.mjs";
@@ -47,6 +47,7 @@ const config = {
   deathBag: deathBagConfig,
   display: displayConfig,
   document: documentConfig,
+  documentBehavior: documentBehaviorConfig,
   effect: effectConfig,
   equipment: equipmentConfig,
   hack: hackConfig,
@@ -56,7 +57,6 @@ const config = {
   math: mathConfig,
   piercing: piercingConfig,
   power: powerConfig,
-  settings: settingsConfig,
   stat: statConfig,
   system: systemConfig,
   tip: tipConfig,

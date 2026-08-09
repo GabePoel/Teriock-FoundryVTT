@@ -13,18 +13,9 @@ const { SettingsConfig } = foundry.applications.settings;
 
 /**
  * Base application for configuring system settings.
- * Adapted from D&D 5E.
+ * Originally adapted from D&D 5E.
  */
 export default class BaseMenu extends TeriockApplication {
-  /**
-   * Count menu parts rendered with the base settings template.
-   * @param {typeof BaseMenu} cls
-   * @returns {number}
-   */
-  static #countMenuParts(cls) {
-    return Object.values(cls.PARTS ?? {}).filter(part => part.template === "teriock/menus/base-menu").length;
-  }
-
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, handler: BaseMenu._onCommitChanges },
@@ -108,20 +99,20 @@ export default class BaseMenu extends TeriockApplication {
     context = await super._preparePartContext(partId, context, options);
     if (partId in (context.tabs ?? {})) { context.tab = context.tabs[partId]; }
     context.fields = [];
-    context.legend = undefined;
-    context.fieldset = BaseMenu.#countMenuParts(this.constructor) > 1;
+    context.icon = undefined;
+    context.label = undefined;
+    context.fieldset = false;
     context.buttons = [{ icon: makeIconClass(icons.ui.save, "button"), label: "SETTINGS.Save", type: "submit" }];
     return context;
   }
 
   /**
    * Create the field data for a specific setting.
-   * @param {Teriock.Keys.Setting} name - Setting key within the teriock namespace.
+   * @param {string} name
    * @returns {object}
    */
   createSettingField(name) {
-    const setting = game.settings.settings.get(`teriock.${name}`);
-    if (!setting) { throw new Error(`Setting \`teriock.${name}\` not registered.`); }
+    const setting = this.getSetting(name);
     const isDataField = setting.type instanceof fields.DataField;
     const Field =
       { [Boolean]: fields.BooleanField, [Number]: fields.NumberField, [String]: fields.StringField }[setting.type];
@@ -129,12 +120,13 @@ export default class BaseMenu extends TeriockApplication {
       throw new Error("Automatic field generation only available for Boolean, Number, or String types");
     }
     const data = {
-      classes: ["teriock-icon-placeholder"],
+      classes: ["teriock-icon-placeholder", ...setting.classes ?? []],
       field: isDataField ? setting.type : new Field({ blank: false, required: true }),
       hint: setting.hint,
       label: setting.name,
       localize: true,
       name,
+      stacked: setting.stacked,
       value: game.settings.get("teriock", name),
     };
     if (setting.choices) {
@@ -144,17 +136,45 @@ export default class BaseMenu extends TeriockApplication {
   }
 
   /**
-   * Create many setting fields all at once.
-   * @param {Teriock.Keys.Setting[] | Record<string, *>} settings
+   * Create many setting fields at once.
+   * @param {string[] | Record<string, *>} settings
    * @returns {object[]}
    */
   createSettingFields(settings) {
-    if (typeof settings === "object") {
-      if (!game.user.isGM) {
-        settings = Object.fromEntries(Object.entries(settings).filter(([_k, v]) => v.scope !== "world"));
-      }
-      settings = Object.keys(settings);
-    }
-    return settings.map(s => this.createSettingField(s));
+    const names = Array.isArray(settings) ? settings : Object.keys(settings);
+    return names.filter(name => game.user.isGM || (this.getSetting(name).scope !== "world")).flatMap(name =>
+      foundry.utils.isSubclass(this.getSetting(name).type, foundry.abstract.DataModel)
+        ? this.createSettingModelFields(name)
+        : this.createSettingField(name)
+    );
+  }
+
+  /**
+   * Create the field data for a setting stored as a data model.
+   * @param {string} name
+   * @returns {object[]}
+   */
+  createSettingModelFields(name) {
+    const value = game.settings.get("teriock", name) ?? {};
+    const schemaFields = this.getSetting(name).type.schema.fields;
+    return Object.entries(schemaFields).map(([key, field]) => ({
+      field,
+      hint: field.hint,
+      label: field.label,
+      localize: true,
+      name: `${name}.${key}`,
+      value: value[key],
+    }));
+  }
+
+  /**
+   * Get the registered configuration for a setting.
+   * @param {string} name
+   * @returns {Teriock.Settings.SettingEntry}
+   */
+  getSetting(name) {
+    const setting = game.settings.settings.get(`teriock.${name}`);
+    if (!setting) { throw new Error(`Setting \`teriock.${name}\` not registered.`); }
+    return setting;
   }
 }
