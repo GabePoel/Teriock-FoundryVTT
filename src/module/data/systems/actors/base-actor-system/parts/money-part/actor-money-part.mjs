@@ -33,6 +33,22 @@ export default function ActorMoneyPart(Base) {
       });
     }
 
+    /**
+     * Adds an amount of money to a "wallet" (which is just a currency config object).
+     * @param {Record<Teriock.Keys.Currency, number>} wallet
+     * @param {{ key: Teriock.Keys.Currency, value: number }[]} currencies
+     * @param {number} amount
+     */
+    #addToWallet(wallet, currencies, amount) {
+      const precision = currencies.at(-1).value;
+      for (const currency of currencies) {
+        if (amount <= 0) { break; }
+        const count = (amount / currency.value).toNearest(1, "floor");
+        wallet[currency.key] += count;
+        amount = (amount - count * currency.value).toNearest(precision);
+      }
+    }
+
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
@@ -61,76 +77,54 @@ export default function ActorMoneyPart(Base) {
     }
 
     /**
-     * Actor pays money.
-     * @param {number} amount - The amount of gold-equivalent money to pay.
-     * @param {Teriock.Keys.PayMode} mode - Exact change or the closest denomination, rounded up.
+     * Actor pays money. A negative amount is money gained.
+     * @param {number} amount
+     * @param {Teriock.Keys.PayMode} [mode]
      * @returns {Promise<void>}
      */
-    async takePay(amount, mode) {
+    async takePay(amount, mode = "exact") {
       await this.parent.hookCall("takePay", { scope: { amount, mode } });
 
-      // TODO: Rework this so that instead of this arduous automatic payment algorithm it will open some dialog.
+      const currencies = Object.entries(TERIOCK.config.currency).map(([key, config]) => ({
+        held: Math.max(0, this.money[key] || 0),
+        key,
+        value: config.conversion,
+      })).sort((a, b) => b.value - a.value);
+      const wallet = Object.fromEntries(currencies.map(c => [c.key, c.held]));
+      const precision = currencies.at(-1).value;
 
-      // Simple check to see if it's more money than the character has
-      if (this.money.total < amount) {
-        await this.parent.update({
-          "system.money": { ...objectMap(TERIOCK.config.currency, () => 0), debt: amount - this.money.physical },
-        });
-        return;
-      }
-      const currencies = Object.entries(TERIOCK.config.currency).sort(([, a], [, b]) => b.conversion - a.conversion)
-        .map(([key, config]) => ({ key, ...config, current: this.money[key] || 0 }));
-      let remainingAmount = amount;
-      const toDeduct = {};
+      let owed = (amount || 0).toNearest(precision);
+      let debt = this.money.debt.toNearest(precision);
 
-      // Greedily spend currencies from highest to lowest denomination
-      for (const currency of currencies) {
-        if (remainingAmount <= 0) { break; }
-        const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.conversion));
-        if (canTake > 0) {
-          toDeduct[currency.key] = canTake;
-          remainingAmount -= canTake * currency.conversion;
-        }
-      }
-
-      // If we still need to pay more, take higher denominations for change
-      if (remainingAmount > 0) {
+      if (owed < 0) {
+        // Step 0: Pays off any outstanding debt first
+        const debtPaid = Math.min(debt, -owed);
+        debt = (debt - debtPaid).toNearest(precision);
+        this.#addToWallet(wallet, currencies, (-owed - debtPaid).toNearest(precision));
+      } else {
+        // Step 1: Spend highest denomination to smallest
         for (const currency of currencies) {
-          if (remainingAmount <= 0) { break; }
-          const alreadyTaken = toDeduct[currency.key] || 0;
-          const stillHave = currency.current - alreadyTaken;
-          if (stillHave > 0) {
-            toDeduct[currency.key] = (toDeduct[currency.key] || 0) + 1;
-            remainingAmount -= currency.conversion;
-            break;
-          }
+          if (owed <= 0) { break; }
+          const spent = Math.min(wallet[currency.key], (owed / currency.value).toNearest(1, "floor"));
+          wallet[currency.key] -= spent;
+          owed = (owed - spent * currency.value).toNearest(precision);
         }
-      }
 
-      // Calculate change needed (will be negative if we overpaid)
-      const changeNeeded = -remainingAmount;
-      const updateData = {};
-      for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct)) {
-        updateData[`system.money.${currencyKey}`] = this.money[currencyKey] - amountToDeduct;
-      }
-
-      // Handle change for exact mode
-      if (mode === "exact" && changeNeeded > 0) {
-        let changeRemaining = changeNeeded;
-        for (const currency of currencies) {
-          if (changeRemaining <= 0) { break; }
-          const changeAmount = Math.floor(changeRemaining / currency.conversion);
-          if (changeAmount > 0) {
-            const currentAmount = updateData[`system.money.${currency.key}`] !== undefined
-              ? updateData[`system.money.${currency.key}`]
-              : this.money[currency.key];
-            updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
-            changeRemaining -= changeAmount * currency.conversion;
+        // Step 2: Break the smallest denomination that covers the remainder
+        const breakable = currencies.filter(c => wallet[c.key] > 0).pop();
+        if (owed > 0 && breakable) {
+          wallet[breakable.key] -= 1;
+          if (mode === "exact") {
+            this.#addToWallet(wallet, currencies, (breakable.value - owed).toNearest(precision));
           }
+          owed = 0;
         }
+
+        // Step 3: Anything that still can't be paid for is taken on as debt
+        debt = (debt + owed).toNearest(precision);
       }
 
-      await this.parent.update(updateData);
+      await this.parent.update({ "system.money": { ...wallet, debt } });
     }
   }
 
