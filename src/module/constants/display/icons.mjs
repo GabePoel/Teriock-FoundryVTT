@@ -200,11 +200,11 @@ export const icons = {
     walk: "ms-directions-walk",
   },
   packs: {
-    essentials: "mdi-ship-wheel",
+    essentials: "ms-category",
     magicItems: "ms-experiment",
     maintenance: "ms-construction",
     playerUtilities: "ms-service-toolbox",
-    templateEffects: "ms-design-services",
+    templateEffects: "ms-circles-ext",
   },
   piercing: { av0: "ms-line-end-arrow-notch", none: "ms-close", ub: "ms-nat" },
   power: {
@@ -306,6 +306,7 @@ export const icons = {
     trader: "ms-balance",
   },
   ui: {
+    actorSheet: "ms-account-box",
     add: "ms-add",
     amount: "mdi-plus-minus",
     apply: "ms-forward",

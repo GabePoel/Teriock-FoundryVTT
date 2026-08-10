@@ -96,7 +96,7 @@ export const menus = {
     format: "tabs",
     groups: {
       actorSheet: {
-        icon: icons.document.character,
+        icon: icons.ui.actorSheet,
         settings: {
           floatingActorTabs: { default: true, requiresReload: true, scope: "client", type: Boolean },
           highlightModifiedValues: { default: false, requiresReload: true, scope: "client", type: Boolean },
