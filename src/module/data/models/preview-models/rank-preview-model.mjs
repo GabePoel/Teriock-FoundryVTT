@@ -1,4 +1,4 @@
-import { rankSorter } from "../../../helpers/sort.mjs";
+import { pathSorterFactory } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { archetypeField, classField, nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
@@ -18,7 +18,15 @@ export default class RankPreviewModel extends BasePreviewModel {
 
   /** @inheritDoc */
   static get sorters() {
-    return Object.assign(super.sorters, { default: { label: "COMMON.Default", sorter: rankSorter } });
+    return Object.assign(super.sorters, {
+      archetype: {
+        label: "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
+        sorter: pathSorterFactory("system.archetype"),
+      },
+      class: { label: "TERIOCK.SYSTEMS.Rank.FIELDS.class.label", sorter: pathSorterFactory("system.class") },
+      default: { label: "COMMON.Default", sorter: TERIOCK.config.document.rank.sorter },
+      number: { label: "TERIOCK.SYSTEMS.Rank.FIELDS.number.label", sorter: pathSorterFactory("system.number") },
+    });
   }
 
   /** @inheritDoc */

@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { tableResultSorter } from "../../helpers/sort.mjs";
+import { pathSorterFactory } from "../../helpers/sort.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
@@ -86,7 +86,7 @@ export default class TeriockRollTable
 
   /** @inheritDoc */
   async getPanelParts() {
-    const results = [...this.results].sort(tableResultSorter);
+    const results = [...this.results].sort(pathSorterFactory("range"));
     return Object.assign(await super.getPanelParts(), {
       associations: results.length
         ? [{

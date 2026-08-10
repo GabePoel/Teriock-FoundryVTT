@@ -1,4 +1,4 @@
-import { formulaSorterFactory, numberSorterFactory, stringSorterFactory } from "../../../helpers/sort.mjs";
+import { pathSorterFactory } from "../../../helpers/sort.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
@@ -14,24 +14,24 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static get sorters() {
     return Object.assign(super.sorters, {
-      av: { label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label", sorter: numberSorterFactory("system.av.value") },
-      bv: { label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label", sorter: numberSorterFactory("system.bv.value") },
+      av: { label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label", sorter: pathSorterFactory("system.av.value") },
+      bv: { label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label", sorter: pathSorterFactory("system.bv.value") },
       damage: {
         label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
-        sorter: formulaSorterFactory("system.damage.base"),
+        sorter: pathSorterFactory("system.damage.base"),
       },
       equipmentType: {
         label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
-        sorter: stringSorterFactory("system.equipmentType"),
+        sorter: pathSorterFactory("system.equipmentType"),
       },
-      minStr: { label: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label", sorter: numberSorterFactory("system.minStr") },
+      minStr: { label: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label", sorter: pathSorterFactory("system.minStr") },
       tier: {
         label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
-        sorter: numberSorterFactory("system.tier.value"),
+        sorter: pathSorterFactory("system.tier.value"),
       },
       weight: {
         label: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label",
-        sorter: numberSorterFactory("system.totalWeight"),
+        sorter: pathSorterFactory("system.totalWeight"),
       },
     });
   }

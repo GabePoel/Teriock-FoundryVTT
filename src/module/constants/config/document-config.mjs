@@ -14,7 +14,7 @@ import {
   RankPreviewModel,
 } from "../../data/models/preview-models/_module.mjs";
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { kindSorter, rankSorter } from "../../helpers/sort.mjs";
+import { kindSorter, pathSorterFactory } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
 /**
@@ -43,7 +43,6 @@ export default {
     label: "TYPES.Item.archetype",
     plural: "TERIOCK.DOCUMENTS.archetype.plural",
     previewModel: RankPreviewModel,
-    sorter: rankSorter,
   },
   attunement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -231,7 +230,14 @@ export default {
     pack: "classes",
     plural: "TERIOCK.DOCUMENTS.rank.plural",
     previewModel: RankPreviewModel,
-    sorter: rankSorter,
+    sorter: pathSorterFactory(
+      "system.innate",
+      "system.archetype",
+      "system.class",
+      "system.number",
+      "name",
+      "_stats.createdTime",
+    ),
   },
   resource: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",

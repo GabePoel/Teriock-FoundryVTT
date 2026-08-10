@@ -1,5 +1,5 @@
 import affinityConfig from "../../../constants/config/affinity-config.mjs";
-import { nameSorter, sortSorter, stringSorterFactory } from "../../../helpers/sort.mjs";
+import { pathSorterFactory } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 import { nullString } from "../../fields/tools/builders.mjs";
@@ -20,11 +20,11 @@ export default class AffinityPreviewModel extends BasePreviewModel {
     return {
       category: {
         label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
-        sorter: stringSorterFactory("categoryLabel"),
+        sorter: pathSorterFactory("categoryLabel"),
       },
-      default: { label: "COMMON.Default", sorter: sortSorter },
-      name: { label: "DOCUMENT.FIELDS.name.label", sorter: nameSorter },
-      type: { label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label", sorter: stringSorterFactory("typeLabel") },
+      default: { label: "COMMON.Default", sorter: pathSorterFactory("sort") },
+      name: { label: "DOCUMENT.FIELDS.name.label", sorter: pathSorterFactory("name") },
+      type: { label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label", sorter: pathSorterFactory("typeLabel") },
     };
   }
 

@@ -1,5 +1,5 @@
 import { createElement } from "../../../helpers/html.mjs";
-import { ageSorter, kindSorter, nameSorter } from "../../../helpers/sort.mjs";
+import { kindSorter, pathSorterFactory } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
@@ -56,9 +56,10 @@ export default class BasePreviewModel extends BaseDataModel {
    */
   static get sorters() {
     return {
-      age: { label: "TERIOCK.COMMON.Age", sorter: ageSorter },
+      age: { label: "TERIOCK.COMMON.Age", sorter: pathSorterFactory("_stats.createdTime") },
+      competence: { label: "TERIOCK.COMMON.Competence", sorter: pathSorterFactory("system.competence.value") },
       kind: { label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label", sorter: kindSorter },
-      name: { label: "DOCUMENT.FIELDS.name.label", sorter: nameSorter },
+      name: { label: "DOCUMENT.FIELDS.name.label", sorter: pathSorterFactory("name") },
     };
   }
 

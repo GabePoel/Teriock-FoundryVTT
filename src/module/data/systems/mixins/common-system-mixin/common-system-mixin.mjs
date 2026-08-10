@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { getTypeSorter } from "../../../../helpers/sort.mjs";
+import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -207,7 +207,7 @@ export default function CommonSystemMixin(Base) {
             if (TERIOCK.config.document[type].documentName === "ActiveEffect") {
               docs = docs.filter(e => !foundry.utils.hasProperty(e, "system.revealed") || e.system.revealed);
             }
-            docs = docs.sort(getTypeSorter(type));
+            docs = docs.sort(TERIOCK.config.document[type]?.sorter ?? pathSorterFactory("name"));
             quickAddAssociation(
               docs,
               TERIOCK.config.document[type].plural,
