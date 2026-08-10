@@ -83,16 +83,6 @@ export default class TeriockTextEditor extends TextEditor {
   }
 
   /**
-   * Enrich an array of panels.
-   * @param {Teriock.Panels.PanelParts[]} panels
-   * @param {PanelEnrichmentOptions} [options]
-   * @returns {Promise<Teriock.Panels.PanelParts[]>}
-   */
-  static async enrichPanels(panels, options = {}) {
-    return Promise.all(panels.map(p => this.enrichPanel(p, options)));
-  }
-
-  /**
    * Convert the panel to an HTML string.
    * @param {Teriock.Panels.PanelParts} parts
    * @param {PanelEnrichmentOptions} [options]

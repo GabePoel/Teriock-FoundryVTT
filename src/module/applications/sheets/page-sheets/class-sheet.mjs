@@ -15,7 +15,10 @@ export default class ClassSheet extends BasePageSheet {
     const archetype = await fromIdentifier(this.document.system.archetype);
     if (archetype) {
       const archetypePanelParts = await archetype.getPanelParts();
-      context.archetypePanel = await TeriockTextEditor.enrichPanel(archetypePanelParts);
+      context.archetypePanel = await TeriockTextEditor.enrichPanel(archetypePanelParts, {
+        relativeTo: this.document,
+        secrets: this.document.isOwner ?? game.user.isGM,
+      });
       context.archetype = getName(this.document.system.archetype).toLowerCase();
     }
     const ranks = (await Promise.all(Array.from(this.document.system.ranks).map(r => fromIdentifier(r)))).filter(
@@ -24,7 +27,14 @@ export default class ClassSheet extends BasePageSheet {
     if (ranks.length) {
       const rankPanelsParts = await Promise.all(ranks.map(r => r.getPanelParts()));
       for (const p of rankPanelsParts) { delete p.blocks; }
-      context.rankPanels = await TeriockTextEditor.enrichPanels(rankPanelsParts);
+      context.rankPanels = await Promise.all(
+        rankPanelsParts.map(p =>
+          TeriockTextEditor.enrichPanel(p, {
+            relativeTo: this.document,
+            secrets: this.document.isOwner ?? game.user.isGM,
+          })
+        ),
+      );
     }
     return context;
   }

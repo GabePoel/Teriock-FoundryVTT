@@ -51,7 +51,11 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
   async #preparePanelContext() {
     if (!this.parent.isContentVisible) { return [TERIOCK.display.panel.premade]; }
     const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
-    return TeriockTextEditor.enrichPanels(this.panels, { relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM });
+    return Promise.all(
+      this.panels.map(p =>
+        TeriockTextEditor.enrichPanel(p, { relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })
+      ),
+    );
   }
 
   /**
