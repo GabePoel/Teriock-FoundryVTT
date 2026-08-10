@@ -1,5 +1,5 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import { BaseDocumentSheetMixin } from "../api/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import {
   DisplaySheetMixin,
   DragDropSheetMixin,
@@ -7,7 +7,7 @@ import {
   MechanicsSheetMixin,
   MechanicsTabsSheetMixin,
   SystemSettingsButtonSheetMixin,
-} from "./mixins/_module.mjs";
+} from "../mixins/_module.mjs";
 
 const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal;
 
@@ -27,7 +27,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @mixes MechanicsTabsSheet
  * @property {TeriockJournalEntryPage} document
  */
-export default class TeriockPageSheet
+export default class BasePageSheet
   extends mixClasses(
     JournalEntryPageProseMirrorSheet,
     BaseDocumentSheetMixin,

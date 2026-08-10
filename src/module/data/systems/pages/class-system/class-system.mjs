@@ -2,7 +2,7 @@ import classConfig from "../../../../constants/config/class-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName, objectMap } from "../../../../helpers/utils.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
@@ -28,12 +28,13 @@ export default class ClassSystem
         required: true,
         type: "archetype",
       }),
+      ranks: new TypedIdentifierSetField({ label: "TERIOCK.DOCUMENTS.rank.plural" }),
     });
   }
 
   /** @inheritDoc */
   get _displayInputs() {
-    return [...super._displayInputs, "system.archetype"];
+    return [...super._displayInputs, "system.archetype", "system.ranks"];
   }
 
   /** @inheritDoc */

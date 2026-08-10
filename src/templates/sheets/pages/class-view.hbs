@@ -1,0 +1,41 @@
+<div>
+  {{> "teriock/sheets/pages/text-view"}}
+  {{#if archetypePanel}}
+    <section class="archetype-class-content">
+      <h2>{{localize "TYPES.Item.archetype"}}</h2>
+      <p>
+        {{localize
+          "TERIOCK.SHEETS.Class.DESCRIPTIONS.archetype"
+          archetype=archetype
+        }}
+      </p>
+      {{> "teriock/ui/panel"
+        archetypePanel
+      }}
+    </section>
+  {{/if}}
+  {{#if (exists rankPanels)}}
+    <h2>
+      {{localize "TERIOCK.DOCUMENTS.rank.plural"}}
+    </h2>
+    <div class="teriock-text-fields">
+      {{#if system.instructions}}
+        <div class="teriock-sheet-section-container theme-dark">
+          {{formGroup
+            systemFields.instructions
+            value=instructions
+            enriched=instructions
+            disabled=true
+            toggled=true
+            classes="instructions-display-field"
+          }}
+        </div>
+      {{/if}}
+      {{#each rankPanels as |rankPanel|}}
+        {{> "teriock/ui/panel"
+          rankPanel
+        }}
+      {{/each}}
+    </div>
+  {{/if}}
+</div>

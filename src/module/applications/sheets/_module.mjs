@@ -4,7 +4,7 @@ export * as effect from "./effect-sheets/_module.mjs";
 export * as item from "./item-sheets/_module.mjs";
 export { default as TeriockJournalEntrySheet } from "./journal-entry-sheet.mjs";
 export * as mixins from "./mixins/_module.mjs";
-export { default as TeriockPageSheet } from "./page-sheet.mjs";
+export * as page from "./page-sheets/_module.mjs";
 export { default as TeriockRollTableSheet } from "./roll-table-sheet.mjs";
 export { default as TeriockTableResultConfig } from "./table-result-config.mjs";
 export * as utility from "./utility-sheets/_module.mjs";

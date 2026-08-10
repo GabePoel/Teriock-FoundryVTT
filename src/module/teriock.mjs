@@ -248,9 +248,10 @@ foundry.helpers.Hooks.once("init", function() {
 
   const d = documents;
   const s = applications.sheets;
-  const se = s.effect;
   const sa = s.actor;
+  const se = s.effect;
   const si = s.item;
+  const sp = s.page;
   const su = s.utility;
 
   rs(d.TeriockActiveEffect, se.AbilitySheet, "Ability", { types: ["ability"] });
@@ -281,9 +282,8 @@ foundry.helpers.Hooks.once("init", function() {
 
   rs(d.TeriockJournalEntry, s.TeriockJournalEntrySheet, "Journal");
 
-  rs(d.TeriockJournalEntryPage, s.TeriockPageSheet, "Page", {
-    types: ["class", "damage", "drain", "rule", "tradecraft"],
-  });
+  rs(d.TeriockJournalEntryPage, sp.BasePageSheet, "Page", { types: ["damage", "drain", "rule", "tradecraft"] });
+  rs(d.TeriockJournalEntryPage, sp.ClassSheet, "Class", { types: ["class"] });
 
   rs(d.TeriockRollTable, s.TeriockRollTableSheet, "RollTable");
 

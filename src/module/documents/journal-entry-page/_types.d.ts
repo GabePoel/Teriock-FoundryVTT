@@ -1,7 +1,7 @@
 import { JournalEntryPage } from "@client/documents/_module.mjs";
 
 import { TeriockJournalEntry, TeriockJournalEntryPage } from "../_module.mjs";
-import { default as TeriockPageSheet } from "../../applications/sheets/page-sheet.mjs";
+import { default as TeriockPageSheet } from "../../applications/sheets/page-sheets/base-page-sheet.mjs";
 import { HarmSystem } from "../../data/systems/pages/_module.mjs";
 
 type JournalEntryPageDocument = Teriock.Documents.DocumentBase<TeriockJournalEntryPage, JournalEntryPage>;
