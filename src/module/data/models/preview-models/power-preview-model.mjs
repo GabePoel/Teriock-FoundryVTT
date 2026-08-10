@@ -13,7 +13,7 @@ export default class PowerPreviewModel extends BasePreviewModel {
     return Object.assign(super.defineFilters(), {
       kind: nullString({
         choices: objectMap(TERIOCK.config.power.kind, v => v.label),
-        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label"),
+        label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
     });
   }

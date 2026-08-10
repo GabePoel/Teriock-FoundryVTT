@@ -14,42 +14,42 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      basic: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label") }),
+      basic: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label" }),
       costs: new fields.SchemaField({
         components: new fields.SchemaField(objectMap(TERIOCK.config.cost.components.keys, (c) =>
           new TernaryField({ label: _loc("TERIOCK.COSTS.Long.component", { key: _loc(c) }) }))),
         primary: new fields.SchemaField(objectMap(TERIOCK.config.stat, (c) =>
           new TernaryField({ label: _loc("TERIOCK.COSTS.Long.primary", { key: _loc(c.label) }) }))),
         tweaks: new fields.SchemaField(objectMap(TERIOCK.config.cost.tweaks, (c) =>
-          new TernaryField({ label: _loc(c.label) }))),
+          new TernaryField({ label: c.label }))),
       }),
       delivery: nullString({
         choices: objectMap(TERIOCK.config.ability.delivery, v => v.label),
-        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label"),
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
       }),
       expansion: nullString({
         choices: objectMap(TERIOCK.config.ability.expansion, v => v.label),
-        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label"),
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
       }),
-      heightened: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label") }),
+      heightened: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label" }),
       interaction: nullString({
         choices: TERIOCK.config.ability.interaction,
-        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label"),
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
       }),
-      invoked: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label") }),
+      invoked: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label" }),
       maneuver: nullString({
         choices: TERIOCK.config.ability.maneuver,
-        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label"),
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
       }),
-      ritual: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label") }),
-      rotator: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label") }),
-      skill: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label") }),
-      spell: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label") }),
-      standard: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label") }),
-      sustained: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label") }),
+      ritual: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label" }),
+      rotator: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label" }),
+      skill: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label" }),
+      spell: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label" }),
+      standard: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.standard.label" }),
+      sustained: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label" }),
       target: nullString({
         choices: objectMap(TERIOCK.config.ability.targets, v => v.label),
-        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.targets.label"),
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
       }),
     });
   }

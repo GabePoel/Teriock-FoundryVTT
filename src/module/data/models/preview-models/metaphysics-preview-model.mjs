@@ -13,16 +13,16 @@ export default class MetaphysicsPreviewModel extends BasePreviewModel {
     return Object.assign(super.defineFilters(), {
       effectType: nullString({
         choices: TERIOCK.reference.effectTypes,
-        label: _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label"),
+        label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
       }),
       element: nullString({
         choices: TERIOCK.reference.elements,
-        label: _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label"),
+        label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
       }),
-      kind: nullString({ choices: effectConfig.kind, label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label") }),
+      kind: nullString({ choices: effectConfig.kind, label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label" }),
       powerSource: nullString({
         choices: TERIOCK.reference.powerSources,
-        label: _loc("TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label"),
+        label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
       }),
     });
   }

@@ -174,6 +174,7 @@ export default class ExecutionEditor extends ResolvableDialog {
       if (fieldContext.small) { smallFields.push(fieldContext); }
       else { mainFields.push(fieldContext); }
     }
+    smallFields.sort((a, b) => _loc(a.field.label).localeCompare(_loc(b.field.label)));
     const multipleDocuments = this.#execution._dialogDocuments.length > 1;
     const documents = this.#execution._dialogDocuments.map((entry, index) => {
       return {

@@ -10,11 +10,11 @@ export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      applyIfDampened: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Granted.FIELDS.applyIfDampened.label") }),
-      applyIfDeattuned: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.applyIfDeattuned.label") }),
-      applyIfShattered: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Granted.FIELDS.applyIfShattered.label") }),
-      applyIfUnequipped: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Granted.FIELDS.applyIfUnequipped.label") }),
-      consumable: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label") }),
+      applyIfDampened: new TernaryField({ label: "TERIOCK.SYSTEMS.Granted.FIELDS.applyIfDampened.label" }),
+      applyIfDeattuned: new TernaryField({ label: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.applyIfDeattuned.label" }),
+      applyIfShattered: new TernaryField({ label: "TERIOCK.SYSTEMS.Granted.FIELDS.applyIfShattered.label" }),
+      applyIfUnequipped: new TernaryField({ label: "TERIOCK.SYSTEMS.Granted.FIELDS.applyIfUnequipped.label" }),
+      consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label" }),
     });
   }
 

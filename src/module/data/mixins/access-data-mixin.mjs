@@ -1,4 +1,5 @@
 import { createElement } from "../../helpers/html.mjs";
+import AbstractDataMixin from "./abstract-data-mixin.mjs";
 
 /**
  * @import { DataModel, TypeDataModel } from "@common/abstract/_module.mjs";
@@ -13,10 +14,11 @@ import { createElement } from "../../helpers/html.mjs";
 export default function AccessDataMixin(Base) {
   /**
    * @extends {DataModel | TypeDataModel}
+   * @mixes AbstractData
    * @mixin
    * @property {AccessData} parent
    */
-  class AccessData extends Base {
+  class AccessData extends AbstractDataMixin(Base) {
     /**
      * Paths to forms to display in the editor.
      * @returns {string[]}

@@ -1,4 +1,5 @@
 import { createElement } from "../../../helpers/html.mjs";
+import { sortObjectEntries } from "../../../helpers/localization.mjs";
 import { kindSorter, pathSorterFactory } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
@@ -84,16 +85,16 @@ export default class BasePreviewModel extends BaseDataModel {
   static defineDisplay() {
     return {
       gapless: new fields.BooleanField({
-        hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint"),
+        hint: "TERIOCK.SCHEMA.BlackGapless.hint",
         initial: false,
-        label: _loc("TERIOCK.SCHEMA.BlackGapless.label"),
+        label: "TERIOCK.SCHEMA.BlackGapless.label",
       }),
       size: new fields.StringField({
         blank: false,
         choices: TERIOCK.config.display.sizes,
-        hint: _loc("TERIOCK.SCHEMA.BlockSize.hint"),
+        hint: "TERIOCK.SCHEMA.BlockSize.hint",
         initial: "medium",
-        label: _loc("TERIOCK.SCHEMA.BlockSize.label"),
+        label: "TERIOCK.SCHEMA.BlockSize.label",
         nullable: false,
         required: true,
       }),
@@ -106,11 +107,11 @@ export default class BasePreviewModel extends BaseDataModel {
    */
   static defineFilters() {
     return {
-      active: new TernaryField({ label: _loc("TERIOCK.SHEETS.Common.TAGS.active") }),
-      children: new TernaryField({ label: _loc("TERIOCK.CHANGES.Phase.children.label") }),
-      duplicates: new TernaryField({ label: _loc("TERIOCK.COMMON.Duplicates") }),
-      fluent: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.2") }),
-      proficient: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.1") }),
+      active: new TernaryField({ label: "TERIOCK.SHEETS.Common.TAGS.active" }),
+      children: new TernaryField({ label: "TERIOCK.CHANGES.Phase.children.label" }),
+      duplicates: new TernaryField({ label: "TERIOCK.COMMON.Duplicates" }),
+      fluent: new TernaryField({ label: "TERIOCK.SCHEMA.Competence.choices.2" }),
+      proficient: new TernaryField({ label: "TERIOCK.SCHEMA.Competence.choices.1" }),
     };
   }
 
@@ -125,7 +126,7 @@ export default class BasePreviewModel extends BaseDataModel {
         ascending: new fields.BooleanField({ initial: true }),
         option: new fields.StringField({
           blank: false,
-          choices: objectMap(this.sorters, (s) => s.label, { localize: true }),
+          choices: sortObjectEntries(objectMap(this.sorters, (s) => s.label, { localize: true })),
           initial: this.defaultSortOption,
           required: true,
         }),
@@ -193,7 +194,7 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...this._formPathsSelect, ...this._formPathsTernary];
+    return [...this._formPathsSelect.sort(this.fieldSorter), ...this._formPathsTernary.sort(this.fieldSorter)];
   }
 
   /**
@@ -271,7 +272,9 @@ export default class BasePreviewModel extends BaseDataModel {
   /** @inheritDoc */
   _getEditorFormsSync(config = {}) {
     const container = createElement("div", { className: "teriock-form-container" });
-    for (const pathsArrays of [this._formPathsSelect, this._formPathsTernary]) {
+    for (
+      const pathsArrays of [this._formPathsSelect.sort(this.fieldSorter), this._formPathsTernary.sort(this.fieldSorter)]
+    ) {
       if (!pathsArrays.length) { continue; }
       const group = createElement("div", { className: "ttable" });
       this._makeFormGroups(pathsArrays, config).forEach(fg => group.append(fg));

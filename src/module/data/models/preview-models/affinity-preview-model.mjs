@@ -33,14 +33,14 @@ export default class AffinityPreviewModel extends BasePreviewModel {
     return {
       category: nullString({
         choices: objectMap(affinityConfig.categories, c => c.label, { localize: true }),
-        label: _loc("TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label"),
+        label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
       }),
-      protection: new TernaryField({ label: _loc("TERIOCK.AFFINITIES.Preview.FIELDS.filters.protection.label") }),
+      protection: new TernaryField({ label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.protection.label" }),
       type: nullString({
         choices: objectMap(affinityConfig.types, t => t.label, { localize: true, sort: false }),
-        label: _loc("TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label"),
+        label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label",
       }),
-      weakness: new TernaryField({ label: _loc("TERIOCK.AFFINITIES.Preview.FIELDS.filters.weakness.label") }),
+      weakness: new TernaryField({ label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.weakness.label" }),
     };
   }
 

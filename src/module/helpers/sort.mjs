@@ -1,4 +1,5 @@
 /**
+ * @import { DataModel, Document, TypeDataModel } from "@common/abstract/_module.mjs";
  * @import { DataField } from "@common/data/fields.mjs";
  */
 
@@ -64,4 +65,18 @@ export function kindSorter(a, b) {
   const aKinds = Object.keys(a?.system?.constructor?.kinds?.() ?? {});
   const bKinds = Object.keys(b?.system?.constructor?.kinds?.() ?? {});
   return (aKinds.indexOf(a?.system?.kind) - bKinds.indexOf(b?.system?.kind)) || pathSorterFactory("name")(a, b);
+}
+
+/**
+ * Build a field sorter.
+ * @param {DataModel | Document | TypeDataModel} model
+ * @return {Teriock.Sort.FieldSorter}
+ */
+export function fieldSorterFactory(model) {
+  return function fieldSorter(a, b) {
+    const aField = model?.getFieldForProperty?.(a);
+    const bField = model?.getFieldForProperty?.(b);
+    if (aField?.label && bField?.label) { return _loc(aField.label).localeCompare(_loc(bField.label)); }
+    return 0;
+  };
 }

@@ -39,22 +39,22 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      attuned: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned") }),
-      consumable: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label") }),
+      attuned: new TernaryField({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }),
+      consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label" }),
       equipmentClasses: nullString({
         choices: TERIOCK.reference.equipmentClasses,
-        label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
+        label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
       }),
-      equipped: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label") }),
-      identified: new TernaryField({ label: _loc("TERIOCK.MODELS.Identification.FIELDS.identified.label") }),
+      equipped: new TernaryField({ label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label" }),
+      identified: new TernaryField({ label: "TERIOCK.MODELS.Identification.FIELDS.identified.label" }),
       kind: nullString({
         choices: objectMap(TERIOCK.config.equipment.kind, e => e.label),
-        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.kind.label"),
+        label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
-      properties: nullString({ choices: TERIOCK.reference.properties, label: _loc("TERIOCK.PACKS.properties") }),
+      properties: nullString({ choices: TERIOCK.reference.properties, label: "TERIOCK.PACKS.properties" }),
       weaponFightingStyles: nullString({
         choices: TERIOCK.reference.weaponFightingStyles,
-        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label"),
+        label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
       }),
     });
   }
