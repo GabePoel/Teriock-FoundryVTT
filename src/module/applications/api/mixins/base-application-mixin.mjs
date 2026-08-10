@@ -222,9 +222,17 @@ export default function BaseApplicationMixin(Base) {
     /** @inheritDoc */
     async _onRender(context, options = {}) {
       await super._onRender(context, options);
-      this.element.querySelectorAll("[data-never-disable]").forEach(el => {
-        el.disabled = false;
-        if (el.tagName === "IMG") { el.classList.remove("disabled"); }
+      this.element.querySelectorAll("[data-disable]").forEach(el => {
+        const state = el.dataset.disable;
+        if (state === "true") {
+          el.disabled = true;
+          if (el.tagName === "IMG") { el.classList.remove("disabled"); }
+        }
+        if (state === "false") {
+          el.disabled = false;
+          if (el.tagName === "IMG") { el.classList.add("disabled"); }
+        }
+        el.disabled = el.dataset.disable === "true";
       });
       this.element.querySelectorAll("[data-no-scroll]").forEach(el =>
         el.addEventListener("wheel", ev => ev.preventDefault())

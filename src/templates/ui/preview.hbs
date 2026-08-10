@@ -7,7 +7,7 @@
             class="{{ preview.id }}-block-menu-toggle block-menu-toggle"
             data-action="toggleCollapse"
             data-collapsible-target="preview-{{ preview.id }}-block"
-            data-never-disable="true"
+            data-disable="false"
             data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
             icon="{{ @root/TERIOCK.display.icons.ui.options }}"
             name="previews.{{ preview.id }}.toggles.block"
@@ -18,7 +18,7 @@
             class="{{ preview.id }}-sort-menu-toggle sort-menu-toggle"
             data-action="toggleCollapse"
             data-collapsible-target="preview-{{ preview.id }}-sort"
-            data-never-disable="true"
+            data-disable="false"
             data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
             icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
             name="previews.{{ preview.id }}.toggles.sort"
@@ -29,7 +29,7 @@
             class="{{ preview.id }}-filter-menu-toggle filter-menu-toggle"
             data-action="toggleCollapse"
             data-collapsible-target="preview-{{ preview.id }}-filter"
-            data-never-disable="true"
+            data-disable="false"
             data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
             icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
             name="previews.{{ preview.id }}.toggles.filter"
@@ -39,7 +39,7 @@
           <input
             class="{{ preview.id }}-search teriock-block-search"
             autocomplete="off"
-            data-never-disable="true"
+            data-disable="false"
             data-preview-search-key="{{ preview.id }}"
             data-type="{{ preview.id }}"
             placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
@@ -82,7 +82,7 @@
                   id=(concat @root/appId "-" preview.id "-gapless")
                   name=(concat "previews." preview.id ".display.gapless")
                   value=preview.display.gapless
-                  dataset=(object neverDisable="true")
+                  dataset=(object disable="false")
                 }}
               </div>
               <div class="tgrid-item gi3">
@@ -91,7 +91,7 @@
                   id=(concat @root/appId "-" preview.id "-size")
                   name=(concat "previews." preview.id ".display.size")
                   value=preview.display.size
-                  dataset=(object neverDisable="true")
+                  dataset=(object disable="false")
                 }}
               </div>
             </div>
@@ -115,7 +115,7 @@
                   id=(concat @root/appId "-" preview.id "-ascending")
                   name=(concat "previews." preview.id ".sort.ascending")
                   value=preview.sort.ascending
-                  dataset=(object neverDisable="true")
+                  dataset=(object disable="false")
                 }}
               </div>
               <div class="tgrid-item gi3">
@@ -125,7 +125,7 @@
                   name=(concat "previews." preview.id ".sort.option")
                   value=preview.sort.option
                   localize=true
-                  dataset=(object neverDisable="true")
+                  dataset=(object disable="false")
                 }}
               </div>
             </div>

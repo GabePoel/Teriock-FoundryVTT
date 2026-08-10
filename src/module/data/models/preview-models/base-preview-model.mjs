@@ -288,7 +288,7 @@ export default class BasePreviewModel extends BaseDataModel {
     const group = super._makeFormGroup(
       path,
       { ...groupConfig, classes: ["teriock-sheet-multi-select-label"], rootId: this.#rootId },
-      { ...inputConfig, dataset: { neverDisable: "true" }, name: `previews.${this.id}.${path}` },
+      { ...inputConfig, dataset: { disable: "false" }, name: `previews.${this.id}.${path}` },
       config,
     );
     const field = this.getFieldForProperty(path);
