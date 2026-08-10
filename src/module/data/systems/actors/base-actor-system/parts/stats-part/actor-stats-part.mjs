@@ -1,6 +1,6 @@
 import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
 import statConfig from "../../../../../../constants/config/stat-config.mjs";
-import { docSort } from "../../../../../../helpers/sort.mjs";
+import { ageSorter, nameSorter } from "../../../../../../helpers/sort.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -254,10 +254,10 @@ export default function ActorStatsPart(Base) {
     /** @inheritDoc */
     prepareStatDice() {
       const items = [
-        ...docSort(this.parent.species),
-        ...docSort(this.parent.ranks, "createdTime"),
-        ...docSort(this.parent.powers),
-        ...docSort(this.parent.mounts),
+        ...this.parent.species.sort(nameSorter),
+        ...this.parent.ranks.sort(ageSorter),
+        ...this.parent.powers.sort(nameSorter),
+        ...this.parent.mounts.sort(nameSorter),
       ];
       for (const item of items) { item.system.prepareStatDice(); }
       this._prepareStat("hp", items);

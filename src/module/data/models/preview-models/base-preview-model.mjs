@@ -1,4 +1,6 @@
 import { createElement } from "../../../helpers/html.mjs";
+import { ageSorter, kindSorter, nameSorter } from "../../../helpers/sort.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 
@@ -41,7 +43,7 @@ export default class BasePreviewModel extends BaseDataModel {
   }
 
   /**
-   * The sort option selected by default. The `default` option preserves the order documents are passed in.
+   * The sort option selected by default.
    * @returns {string}
    */
   static get defaultSortOption() {
@@ -49,14 +51,14 @@ export default class BasePreviewModel extends BaseDataModel {
   }
 
   /**
-   * Choices for the sort option select.
-   * @returns {Record<string, string>}
+   * Sorters.
+   * @returns {Record<string, Teriock.Sort.DocumentSorterEntry>}
    */
-  static get sortOrders() {
+  static get sorters() {
     return {
-      default: "COMMON.Default",
-      kind: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
-      name: "DOCUMENT.FIELDS.name.label",
+      age: { label: "TERIOCK.COMMON.Age", sorter: ageSorter },
+      kind: { label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label", sorter: kindSorter },
+      name: { label: "DOCUMENT.FIELDS.name.label", sorter: nameSorter },
     };
   }
 
@@ -122,7 +124,7 @@ export default class BasePreviewModel extends BaseDataModel {
         ascending: new fields.BooleanField({ initial: true }),
         option: new fields.StringField({
           blank: false,
-          choices: this.sortOrders,
+          choices: objectMap(this.sorters, (s) => s.label, { localize: true }),
           initial: this.defaultSortOption,
           required: true,
         }),
@@ -209,14 +211,6 @@ export default class BasePreviewModel extends BaseDataModel {
     const paths = ["filters.active", "filters.duplicates", "filters.fluent", "filters.proficient"];
     if (this.relativeTo && this.relativeTo?.documentName === "Actor") { paths.push("filters.children"); }
     return paths;
-  }
-
-  /**
-   * Map of sort options to accessor functions.
-   * @returns {Record<string, (document: *) => string|number>}
-   */
-  get _sortMap() {
-    return { default: d => d?.sort ?? 0, kind: d => d?.system?.kind ?? "", name: d => d?.name ?? "" };
   }
 
   /**
@@ -424,14 +418,8 @@ export default class BasePreviewModel extends BaseDataModel {
    */
   sortDocuments(documents) {
     if (!Array.isArray(documents) || documents.length === 0) { return []; }
-    const accessor = this._sortMap[this.sort.option];
-    const sorted = accessor
-      ? [...documents].sort((a, b) => {
-        const aVal = accessor(a) ?? "";
-        const bVal = accessor(b) ?? "";
-        return typeof aVal === "number" ? aVal - bVal : String(aVal).localeCompare(String(bVal));
-      })
-      : [...documents];
+    const { sorter } = this.constructor.sorters[this.sort.option] ?? {};
+    const sorted = sorter ? [...documents].sort(sorter) : [...documents];
     return this.sort.ascending ? sorted : sorted.reverse();
   }
 }

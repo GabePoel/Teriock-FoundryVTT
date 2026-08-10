@@ -1,3 +1,4 @@
+import { formulaSorterFactory, numberSorterFactory, stringSorterFactory } from "../../../helpers/sort.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
@@ -11,13 +12,28 @@ import BasePreviewModel from "./base-preview-model.mjs";
  */
 export default class EquipmentPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
-  static get defaultSortOption() {
-    return "name";
-  }
-
-  /** @inheritDoc */
-  static get sortOrders() {
-    return TERIOCK.config.display.equipmentSortOrders;
+  static get sorters() {
+    return Object.assign(super.sorters, {
+      av: { label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label", sorter: numberSorterFactory("system.av.value") },
+      bv: { label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label", sorter: numberSorterFactory("system.bv.value") },
+      damage: {
+        label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
+        sorter: formulaSorterFactory("system.damage.base"),
+      },
+      equipmentType: {
+        label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
+        sorter: stringSorterFactory("system.equipmentType"),
+      },
+      minStr: { label: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label", sorter: numberSorterFactory("system.minStr") },
+      tier: {
+        label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
+        sorter: numberSorterFactory("system.tier.value"),
+      },
+      weight: {
+        label: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label",
+        sorter: numberSorterFactory("system.totalWeight"),
+      },
+    });
   }
 
   /** @inheritDoc */
@@ -73,26 +89,6 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       "filters.identified",
       "filters.consumable",
     ];
-  }
-
-  /** @inheritDoc */
-  get _sortMap() {
-    return {
-      av: e => e.system.av?.value ?? 0,
-      bv: e => e.system.bv?.value ?? 0,
-      consumable: e => Number(e.system.consumable),
-      damage: e => e.system.damage?.base ?? "",
-      dampened: e => Number(e.system.dampened),
-      equipmentType: e => e.system.equipmentType ?? "",
-      equipped: e => Number(e.system.equipped),
-      identified: e => Number(e.system.identification?.identified ?? 0),
-      kind: e => e.system.kind ?? "",
-      minStr: e => e.system.minStr ?? 0,
-      name: e => e.name,
-      shattered: e => Number(e.system.shattered),
-      tier: e => e.system.tier?.value ?? 0,
-      weight: e => e.system.totalWeight ?? e.system.weight ?? 0,
-    };
   }
 
   /**

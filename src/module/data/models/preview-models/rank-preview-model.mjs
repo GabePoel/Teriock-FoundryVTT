@@ -1,4 +1,4 @@
-import { rankSort } from "../../../helpers/sort.mjs";
+import { rankSorter } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { archetypeField, classField, nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
@@ -14,6 +14,11 @@ export default class RankPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static get defaultSortOption() {
     return "default";
+  }
+
+  /** @inheritDoc */
+  static get sorters() {
+    return Object.assign(super.sorters, { default: { label: "COMMON.Default", sorter: rankSorter } });
   }
 
   /** @inheritDoc */
@@ -50,19 +55,9 @@ export default class RankPreviewModel extends BasePreviewModel {
         matches = this._checkValueFilter(f.archetype, system?.archetype)
           && this._checkValueFilter(f.class, system?.class);
       }
-      // Archetypes have no kind of their own, so they take the kind of the ranks they hold.
+      // Archetypes have no kind of their own, so they take the kind of their corresponding ranks.
       matches &&= this._checkValueFilter(f.kind, system?.kind ?? (system?.innate ? "innate" : "learned"));
       if (matches) { yield document; }
     }
-  }
-
-  /** @inheritDoc */
-  sortDocuments(documents) {
-    if (!Array.isArray(documents) || documents.length === 0) { return []; }
-    if (this.sort.option === "default") {
-      const sorted = rankSort([...documents]);
-      return this.sort.ascending ? sorted : sorted.reverse();
-    }
-    return super.sortDocuments(documents);
   }
 }

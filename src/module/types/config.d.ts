@@ -69,8 +69,8 @@ declare global {
       pack: string;
       plural: string;
       previewModel?: typeof BasePreviewModel;
+      sorter?: Teriock.Sort.DocumentSorter;
       importDialog?: () => Promise<TeriockDocument | void>;
-      sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];
     };
 
     export type ImpactEntry = {

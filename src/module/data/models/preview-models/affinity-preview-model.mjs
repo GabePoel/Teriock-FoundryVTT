@@ -1,4 +1,5 @@
 import affinityConfig from "../../../constants/config/affinity-config.mjs";
+import { nameSorter, sortSorter, stringSorterFactory } from "../../../helpers/sort.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 import { nullString } from "../../fields/tools/builders.mjs";
@@ -15,12 +16,15 @@ export default class AffinityPreviewModel extends BasePreviewModel {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AFFINITIES.Preview"];
 
   /** @inheritDoc */
-  static get sortOrders() {
+  static get sorters() {
     return {
-      category: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
-      default: "COMMON.Default",
-      name: "DOCUMENT.FIELDS.name.label",
-      type: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label",
+      category: {
+        label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
+        sorter: stringSorterFactory("categoryLabel"),
+      },
+      default: { label: "COMMON.Default", sorter: sortSorter },
+      name: { label: "DOCUMENT.FIELDS.name.label", sorter: nameSorter },
+      type: { label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label", sorter: stringSorterFactory("typeLabel") },
     };
   }
 
@@ -48,11 +52,6 @@ export default class AffinityPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   get _formPathsTernary() {
     return ["filters.protection", "filters.weakness"];
-  }
-
-  /** @inheritDoc */
-  get _sortMap() {
-    return { category: a => a.categoryLabel, name: a => a.name, type: a => a.typeLabel };
   }
 
   /**

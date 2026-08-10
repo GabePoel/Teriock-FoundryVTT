@@ -14,7 +14,7 @@ import {
   RankPreviewModel,
 } from "../../data/models/preview-models/_module.mjs";
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
+import { kindSorter, rankSorter } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
 /**
@@ -33,7 +33,7 @@ export default {
     pack: "abilities",
     plural: "TERIOCK.DOCUMENTS.ability.plural",
     previewModel: AbilityPreviewModel,
-    sorter: effectSort,
+    sorter: kindSorter,
   },
   archetype: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
@@ -43,7 +43,7 @@ export default {
     label: "TYPES.Item.archetype",
     plural: "TERIOCK.DOCUMENTS.archetype.plural",
     previewModel: RankPreviewModel,
-    sorter: rankSort,
+    sorter: rankSorter,
   },
   attunement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -52,7 +52,6 @@ export default {
     icon: icons.document.attunement,
     label: "TYPES.ActiveEffect.attunement",
     plural: "TERIOCK.DOCUMENTS.attunement.plural",
-    sorter: docSort,
   },
   base: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -70,7 +69,6 @@ export default {
     label: "TYPES.Item.body",
     pack: "bodyParts",
     plural: "TERIOCK.DOCUMENTS.body.plural",
-    sorter: docSort,
   },
   character: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
@@ -79,7 +77,6 @@ export default {
     icon: icons.document.character,
     label: "TYPES.Actor.character",
     plural: "TERIOCK.DOCUMENTS.character.plural",
-    sorter: docSort,
   },
   class: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
@@ -97,7 +94,6 @@ export default {
     index: "conditions",
     label: "TYPES.ActiveEffect.condition",
     plural: "TERIOCK.DOCUMENTS.condition.plural",
-    sorter: docSort,
   },
   consequence: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -106,7 +102,6 @@ export default {
     icon: icons.document.consequence,
     label: "TYPES.ActiveEffect.consequence",
     plural: "TERIOCK.DOCUMENTS.consequence.plural",
-    sorter: docSort,
   },
   cover: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -123,7 +118,6 @@ export default {
     label: "TYPES.Actor.creature",
     pack: "creatures",
     plural: "TERIOCK.DOCUMENTS.creature.plural",
-    sorter: docSort,
   },
   damage: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
@@ -152,7 +146,6 @@ export default {
     icon: icons.document.effect,
     label: "TYPES.ActiveEffect.effect",
     plural: "TERIOCK.DOCUMENTS.effect.plural",
-    sorter: docSort,
   },
   equipment: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
@@ -165,7 +158,6 @@ export default {
     pack: "equipment",
     plural: "TERIOCK.DOCUMENTS.equipment.plural",
     previewModel: EquipmentPreviewModel,
-    sorter: docSort,
   },
   fluency: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -175,7 +167,6 @@ export default {
     label: "TYPES.ActiveEffect.fluency",
     plural: "TERIOCK.DOCUMENTS.fluency.plural",
     previewModel: FluencyPreviewModel,
-    sorter: docSort,
   },
   hack: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -191,7 +182,6 @@ export default {
     icon: icons.document.imbuement,
     label: "TYPES.ActiveEffect.imbuement",
     plural: "TERIOCK.DOCUMENTS.imbuement.plural",
-    sorter: docSort,
   },
   inventory: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
@@ -200,7 +190,6 @@ export default {
     icon: icons.document.inventory,
     label: "TYPES.Actor.inventory",
     plural: "TERIOCK.DOCUMENTS.inventory.plural",
-    sorter: docSort,
   },
   mount: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
@@ -209,7 +198,6 @@ export default {
     icon: icons.document.mount,
     label: "TYPES.Item.mount",
     plural: "TERIOCK.DOCUMENTS.mount.plural",
-    sorter: docSort,
   },
   power: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
@@ -219,7 +207,6 @@ export default {
     label: "TYPES.Item.power",
     plural: "TERIOCK.DOCUMENTS.power.plural",
     previewModel: PowerPreviewModel,
-    sorter: docSort,
   },
   property: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -232,7 +219,7 @@ export default {
     pack: "properties",
     plural: "TERIOCK.DOCUMENTS.property.plural",
     previewModel: PropertyPreviewModel,
-    sorter: effectSort,
+    sorter: kindSorter,
   },
   rank: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
@@ -244,7 +231,7 @@ export default {
     pack: "classes",
     plural: "TERIOCK.DOCUMENTS.rank.plural",
     previewModel: RankPreviewModel,
-    sorter: rankSort,
+    sorter: rankSorter,
   },
   resource: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
@@ -253,7 +240,6 @@ export default {
     icon: icons.document.resource,
     label: "TYPES.ActiveEffect.resource",
     plural: "TERIOCK.DOCUMENTS.resource.plural",
-    sorter: docSort,
   },
   rule: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
@@ -272,7 +258,6 @@ export default {
     label: "TYPES.Item.species",
     pack: "species",
     plural: "TERIOCK.DOCUMENTS.species.plural",
-    sorter: docSort,
   },
   stone: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Card",

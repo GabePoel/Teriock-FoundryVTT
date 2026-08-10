@@ -49,8 +49,7 @@ export default function PreviewSheetMixin(Base) {
     };
 
     /**
-     * Open whatever document an identifier refers to. Virtual models stand in for things that are not documents, so
-     * they cannot use `openDoc`; this opens the thing they represent instead.
+     * Open whatever document an identifier refers to.
      * @param {PointerEvent} _event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
@@ -93,14 +92,12 @@ export default function PreviewSheetMixin(Base) {
     }
 
     /**
-     * The visible children of a given type, sorted by that type's configured sorter.
+     * The visible children of a given type.
      * @param {string} type
      * @returns {AnyCommonDocument[]}
      */
     _childrenOfType(type) {
-      const config = TERIOCK.config.document[type];
-      const docs = [...(this.document.visibleChildrenByType[type] ?? [])];
-      return config?.sorter ? config.sorter(docs) : docs;
+      return [...(this.document.visibleChildrenByType[type] ?? [])];
     }
 
     /** @inheritDoc */
