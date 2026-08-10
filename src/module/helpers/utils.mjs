@@ -330,13 +330,26 @@ export async function fromIdentifier(identifier, options = {}) {
  * Get a document from some key that specifies it. This could be either a typed identifier or a UUID.
  * @param {TypedIdentifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
- * @returns {Promise<unknown>}
+ * @returns {Promise<TeriockDocument|null>}
  */
 export async function fromKey(uuidOrIdentifier, options = {}) {
   if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {
     return fromIdentifier(uuidOrIdentifier, options);
   }
   return fromUuid(uuidOrIdentifier, options);
+}
+
+/**
+ * Synchronously get a document from some key that specifies it. This could be either a typed identifier or a UUID.
+ * @param {TypedIdentifier|UUID} uuidOrIdentifier
+ * @param {Teriock.System.FetchOptions} options
+ * @returns {TeriockDocument|null}
+ */
+export function fromKeySync(uuidOrIdentifier, options = {}) {
+  if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {
+    return fromIdentifierSync(uuidOrIdentifier, options);
+  }
+  return fromUuidSync(uuidOrIdentifier, options);
 }
 
 /**

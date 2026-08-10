@@ -1,5 +1,4 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { listFormat } from "../../../../helpers/localization.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 
@@ -102,7 +101,7 @@ export default function MetaphysicsSystemMixin(Base) {
      */
     get elementString() {
       if (this.elements.size === 0) { return _loc("TERIOCK.COMMON.Celestial"); }
-      return listFormat(this.elements.map(e => TERIOCK.reference.elements[e]));
+      return this.getStringForProperty("elements");
     }
 
     /** @inheritDoc */
