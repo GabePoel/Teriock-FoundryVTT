@@ -12,7 +12,6 @@ const { Item } = foundry.documents;
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument
- * @mixes ParentDocument
  * @mixes RetrievalDocument
  */
 export default class TeriockItem
@@ -21,7 +20,6 @@ export default class TeriockItem
     documentMixins.BaseDocumentMixin,
     documentMixins.CommonDocumentMixin,
     documentMixins.ChildDocumentMixin,
-    documentMixins.ParentDocumentMixin,
     documentMixins.RetrievalDocumentMixin,
   )
 {
@@ -58,14 +56,6 @@ export default class TeriockItem
     return this.system.disabled;
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TeriockActiveEffect[]}
-   */
-  get validEffects() {
-    return this.effects.contents;
-  }
-
   /** @inheritdoc */
   get visibleChildren() {
     const children = super.visibleChildren;
@@ -78,7 +68,7 @@ export default class TeriockItem
   }
 
   /**
-   * @inheritDoc
+   * Get all ActiveEffects that may apply to this document.
    * @yields {TeriockActiveEffect}
    * @returns {Generator<TeriockActiveEffect, void, void>}
    */

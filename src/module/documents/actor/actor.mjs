@@ -17,7 +17,6 @@ const { Actor } = foundry.documents;
  * The Teriock Actor implementation.
  * @mixes BaseDocument
  * @mixes CommonDocument
- * @mixes ParentDocument
  * @mixes RetrievalDocument
  */
 export default class TeriockActor
@@ -25,7 +24,6 @@ export default class TeriockActor
     Actor,
     documentMixins.BaseDocumentMixin,
     documentMixins.CommonDocumentMixin,
-    documentMixins.ParentDocumentMixin,
     documentMixins.RetrievalDocumentMixin,
   )
 {
@@ -185,7 +183,7 @@ export default class TeriockActor
   }
 
   /**
-   * @inheritDoc
+   * All active effects that apply to this actor.
    * @returns {TeriockActiveEffect[]}
    */
   get validEffects() {

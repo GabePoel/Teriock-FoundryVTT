@@ -36,11 +36,6 @@ export default function CommonDocumentMixin(Base) {
       documentMixins.PanelDocumentMixin,
     )
   {
-    /** @inheritDoc */
-    static get documentMetadata() {
-      return Object.assign(super.documentMetadata, { common: true, typed: true });
-    }
-
     /**
      * Get the default image for some type of this document.
      * @param {string} type
@@ -221,22 +216,6 @@ export default function CommonDocumentMixin(Base) {
       if (!op) { return []; }
       const out = await foundry.documents.modifyBatch([op]);
       return out[0];
-    }
-
-    /**
-     * Disables the document.
-     * @returns {Promise<void>}
-     */
-    async disable() {
-      await this.update({ "system.disabled": true });
-    }
-
-    /**
-     * Enables the document.
-     * @returns {Promise<void>}
-     */
-    async enable() {
-      await this.update({ "system.disabled": false });
     }
 
     /**

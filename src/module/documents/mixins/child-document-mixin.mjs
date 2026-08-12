@@ -52,14 +52,11 @@ export default function ChildDocumentMixin(Base) {
     }
 
     /**
-     * Get all ActiveEffects that may apply to this document.
-     * @yields {TeriockActiveEffect}
-     * @returns {Generator<TeriockActiveEffect, void, void>}
+     * Disables the document.
+     * @returns {Promise<void>}
      */
-    *allApplicableEffects() {
-      if (this.actor) {
-        for (const effect of this.actor.allApplicableEffects()) { yield effect; }
-      }
+    async disable() {
+      await this.update({ "system.disabled": true });
     }
 
     /**
@@ -69,16 +66,24 @@ export default function ChildDocumentMixin(Base) {
      */
     async duplicate(data = {}) {
       const copy = foundry.utils.mergeObject(this.toObject(true), {
+        _stats: { duplicateSource: this.uuid },
         name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
         ...data,
       });
-      copy._stats.duplicateSource = this.uuid;
       let copyDocument;
       if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
       else if (this.inCompendium) {
         copyDocument = await this.constructor.create(copy, { pack: this.compendium.collection });
       } else { copyDocument = await this.constructor.create(copy); }
       return copyDocument[0];
+    }
+
+    /**
+     * Enables the document.
+     * @returns {Promise<void>}
+     */
+    async enable() {
+      await this.update({ "system.disabled": false });
     }
 
     /** @inheritDoc */

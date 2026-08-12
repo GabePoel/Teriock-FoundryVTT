@@ -67,10 +67,7 @@ declare global {
 
     export type DocumentMetadata = {
       child: boolean;
-      common: boolean;
-      dependee: boolean;
       hierarchy: boolean;
-      model?: ModelMetadata;
       tooltip: boolean;
     };
   }

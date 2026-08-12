@@ -26,11 +26,6 @@ export default function DependeeDocumentMixin(Base) {
    * @mixin
    */
   class DependeeDocument extends Base {
-    /** @inheritDoc */
-    static get documentMetadata() {
-      return Object.assign(super.documentMetadata, { dependee: true });
-    }
-
     /**
      * Array of dependent documents.
      * @return {(TeriockActiveEffect|TeriockItem)[]}
