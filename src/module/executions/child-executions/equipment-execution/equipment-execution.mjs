@@ -38,7 +38,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     this.updateSource({ formula: this._readyUpdatedFormula() });
   }
 
-  /** @type {TeriockEquipment|null} */
+  /** @type {TeriockItem<"equipment">|null} */
   ammunition;
 
   /** @inheritDoc */

@@ -3,7 +3,7 @@ import { CompetenceModel } from "../../../models/scaling-models/_module.mjs";
 declare module "./attack-activation.mjs" {
   export default interface AttackActivation {
     competence: CompetenceModel;
-    armamentId: ID<TeriockArmament> | null;
+    armamentId: ID<TeriockItem<"body" | "equipment">> | null;
     attackPenalty: Teriock.System.FormulaString;
     bonus: Teriock.System.FormulaString;
     consumeAmmunition: boolean | null;

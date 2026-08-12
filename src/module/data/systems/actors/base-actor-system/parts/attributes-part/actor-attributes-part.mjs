@@ -23,7 +23,7 @@ export default function ActorAttributesPart(Base) {
   /**
    * @implements {Teriock.Models.ActorAttributesPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorAttributesPart extends Base {
     /** @inheritDoc */

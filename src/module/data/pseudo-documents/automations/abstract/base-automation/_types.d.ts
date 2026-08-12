@@ -1,6 +1,6 @@
 declare module "./base-automation.mjs" {
   export default interface BaseAutomation {
-    type: Teriock.Automations.Type;
+    type: AutomationType;
     _id: ID<BaseAutomation>;
   }
 }

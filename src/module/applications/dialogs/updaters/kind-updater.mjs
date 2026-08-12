@@ -3,7 +3,7 @@ import BaseUpdater from "./base-updater.mjs";
 
 /**
  * Dialog for updating a document's kind.
- * @property {AnyChildDocument} document
+ * @property {TeriockActiveEffect|TeriockItem} document
  */
 export default class KindUpdater extends BaseUpdater {
   /**

@@ -2,7 +2,7 @@ declare module "./user.mjs" {
   export default interface TeriockUser {
     _id: ID<TeriockUser>;
 
-    get character(): AnyActor | null;
+    get character(): TeriockActor | null;
 
     get documentName(): "User";
 

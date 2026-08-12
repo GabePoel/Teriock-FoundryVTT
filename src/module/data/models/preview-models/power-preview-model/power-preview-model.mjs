@@ -24,8 +24,8 @@ export default class PowerPreviewModel extends BasePreviewModel {
 
   /**
    * @inheritDoc
-   * @param {TeriockPower[]} documents
-   * @returns {Generator<TeriockPower, void, void>}
+   * @param {TeriockItem<"power">[]} documents
+   * @returns {Generator<TeriockItem<"power">, void, void>}
    */
   *filterDocuments(documents) {
     for (const document of super.filterDocuments(documents)) {

@@ -19,7 +19,7 @@ export default function ActorConditionsPart(Base) {
   /**
    * @implements {Teriock.Models.ActorConditionsPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorConditionsPart extends Base {
     /** @inheritDoc */

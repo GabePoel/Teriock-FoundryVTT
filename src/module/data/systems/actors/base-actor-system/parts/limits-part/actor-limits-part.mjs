@@ -20,7 +20,7 @@ export default function ActorLimitsPart(Base) {
   /**
    * @implements {Teriock.Models.ActorLimitsPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorLimitsPart extends Base {
     /** @inheritDoc */
@@ -41,7 +41,7 @@ export default function ActorLimitsPart(Base) {
 
     /**
      * The curses that count towards the maximum value.
-     * @returns {TeriockPower[]}
+     * @returns {TeriockItem<"power">[]}
      */
     get curseDocuments() {
       return this.parent.powers.filter(p => p.system.kind === "curse");
@@ -49,7 +49,7 @@ export default function ActorLimitsPart(Base) {
 
     /**
      * The rotators that count towards the maximum value.
-     * @returns {TeriockAbility[]}
+     * @returns {TeriockActiveEffect<"ability">[]}
      */
     get rotatorDocuments() {
       return this.parent.abilities.filter(a =>

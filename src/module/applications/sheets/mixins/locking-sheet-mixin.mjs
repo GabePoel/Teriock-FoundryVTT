@@ -10,7 +10,7 @@
 export default function LockingSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class LockingSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

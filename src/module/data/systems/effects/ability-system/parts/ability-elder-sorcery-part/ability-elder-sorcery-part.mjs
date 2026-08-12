@@ -14,7 +14,7 @@ export default function AbilityElderSorceryPart(Base) {
   /**
    * @implements {Teriock.Models.AbilityElderSorceryPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityElderSorceryPart extends Base {
     /** @inheritDoc */

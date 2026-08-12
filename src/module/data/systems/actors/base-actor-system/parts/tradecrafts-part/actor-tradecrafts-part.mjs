@@ -22,7 +22,7 @@ export default function ActorTradecraftsPart(Base) {
   /**
    * @implements {Teriock.Models.ActorTradecraftsPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorTradecraftsPart extends Base {
     /** @inheritDoc */

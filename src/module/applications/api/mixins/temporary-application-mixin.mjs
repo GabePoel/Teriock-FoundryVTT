@@ -33,7 +33,7 @@ export default function TemporaryApplicationMixin(Base) {
     static async _onDoubleClickOpenDocument(_event, target) {
       const row = /** @type {HTMLElement|null} */ (target.closest("[data-uuid]") ?? target);
       if (!row?.dataset.uuid) { return; }
-      const doc = /** @type {AnyChildDocument} */ await fromUuid(row.dataset.uuid);
+      const doc = await fromUuid(row.dataset.uuid);
       await doc?.sheet?.render(true);
     }
 

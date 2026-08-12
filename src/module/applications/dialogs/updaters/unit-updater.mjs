@@ -7,13 +7,13 @@ import BaseUpdater from "./base-updater.mjs";
 
 /**
  * Dialog for updating a unit model's unit and raw value.
- * @property {AnyCommonDocument} document
+ * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
  */
 export default class UnitUpdater extends BaseUpdater {
   /**
    * @inheritDoc
    * @param {Partial<ApplicationConfiguration & {
-   *   TeriockDocument: AnyCommonDocument,
+   *   TeriockDocument: TeriockActiveEffect|TeriockActor|TeriockItem,
    *   path: string,
    *   unitModel?: BaseUnitModel,
    * }>} options

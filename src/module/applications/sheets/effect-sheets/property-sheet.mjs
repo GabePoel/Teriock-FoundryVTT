@@ -1,8 +1,8 @@
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
- * {@link TeriockProperty} sheet.
- * @property {TeriockProperty} document
+ * Property sheet.
+ * @property {TeriockActiveEffect<"property">} document
  */
 export default class PropertySheet extends ChildSheet {
   /** @type {string[]} */

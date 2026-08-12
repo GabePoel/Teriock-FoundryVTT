@@ -225,7 +225,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * That document that has the most control over this one.
-     * @return {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>}
+     * @return {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
      */
     get master() {
       return this.parent;

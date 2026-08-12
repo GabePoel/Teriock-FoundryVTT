@@ -8,7 +8,7 @@ import BaseUpdater from "./base-updater.mjs";
 
 /**
  * Dialog for updating a stat pool's formula and disabled state.
- * @property {AnyCommonDocument} document
+ * @property {TeriockItem} document
  */
 export default class StatDiceUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

@@ -17,7 +17,7 @@ export default function AbilityOverviewPart(Base) {
   /**
    * @implements {Teriock.Models.AbilityOverviewPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityOverviewPart extends Base {
     /** @inheritDoc */

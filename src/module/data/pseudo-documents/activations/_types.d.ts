@@ -91,11 +91,8 @@ declare global {
     useLocal: UseLocalActivation;
   }
 
-  namespace Teriock.Activations {
-    export type TypeMap = ActivationTypeMap;
-    export type Type = TypeMapKey<ActivationTypeMap>;
-    export type Any = AnyActivation;
-  }
+  export type ActivationType = TypeMapKey<ActivationTypeMap>;
+  export type Activation<T extends ActivationType = ActivationType> = ActivationTypeMap[T];
 }
 
 export {};

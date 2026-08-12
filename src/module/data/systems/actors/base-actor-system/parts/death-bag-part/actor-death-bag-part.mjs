@@ -17,7 +17,7 @@ export default function ActorDeathBagPart(Base) {
   /**
    * @implements {Teriock.Models.ActorDeathBagPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorDeathBagPart extends Base {
     /** @inheritDoc */

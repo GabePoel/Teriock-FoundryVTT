@@ -5,9 +5,9 @@ import { InventoryManagementSheetMixin } from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 
 /**
- * Sheet for a {@link TeriockEquipment}.
+ * Equipment sheet.
  * @mixes InventoryManagementSheet
- * @property {TeriockEquipment} document
+ * @property {TeriockItem<"equipment">} document
  */
 export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryManagementSheetMixin) {
   /** @type {string[]} */

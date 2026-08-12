@@ -24,13 +24,13 @@ declare global {
       draggable?: boolean;
       hidden?: boolean;
       icons?: Teriock.Embeds.EmbedIcon[];
-      id?: ID<AnyCommonDocument>;
+      id?: ID<TeriockActiveEffect | TeriockActor | TeriockItem>;
       identifier?: string | TypedIdentifier;
       img: string;
       inactive?: boolean;
       makeTooltip?: boolean;
       openable?: boolean;
-      parentId?: ID<AnyCommonDocument>;
+      parentId?: ID<TeriockActiveEffect | TeriockActor | TeriockItem>;
       relative?: UUID<TeriockDocument>;
       shattered?: boolean;
       struck?: boolean;
@@ -42,7 +42,7 @@ declare global {
       tooltip?: string;
       tooltipUuid?: UUID<TeriockDocument>;
       usable?: boolean;
-      uuid?: string | UUID<AnyCommonDocument>;
+      uuid?: string | UUID<TeriockActiveEffect | TeriockActor | TeriockItem>;
     };
 
     /**

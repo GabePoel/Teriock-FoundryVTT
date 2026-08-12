@@ -8,13 +8,13 @@ const { fields } = foundry.data;
 
 /**
  * Every affinity type that stops or lessens something, and so counts as a protection.
- * @type {Teriock.Affinities.Type[]}
+ * @type {AffinityType[]}
  */
 const PROTECTION_TYPES = Object.entries(affinityConfig.types).filter(([, t]) => t.protection).map(([k]) => k);
 
 /**
  * The default display order for affinity types, taken from {@link affinityConfig}'s `groups`.
- * @type {Teriock.Affinities.Type[]}
+ * @type {AffinityType[]}
  */
 const TYPE_ORDER = Object.values(affinityConfig.groups).flatMap(group => group.types);
 
@@ -28,7 +28,7 @@ export default function ActorAffinitiesPart(Base) {
   /**
    * @implements {Teriock.Models.ActorAffinitiesPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorAffinitiesPart extends Base {
     /** @inheritDoc */
@@ -65,7 +65,7 @@ export default function ActorAffinitiesPart(Base) {
     /**
      * Add an affinity granted by a condition the actor has, crediting that condition as its provider.
      * @param {Teriock.Keys.Condition} condition
-     * @param {Teriock.Affinities.Type} type
+     * @param {AffinityType} type
      * @param {Teriock.Keys.AffinityCategory} category
      * @param {string} value
      */
@@ -90,7 +90,7 @@ export default function ActorAffinitiesPart(Base) {
 
     /**
      * Add an affinity that comes from something other than a {@link BaseAffinity}, such as a condition.
-     * @param {Teriock.Affinities.Type} type
+     * @param {AffinityType} type
      * @param {Teriock.Keys.AffinityCategory} category
      * @param {string} value
      * @param {string} provider - What gives this affinity to the actor.
@@ -116,7 +116,7 @@ export default function ActorAffinitiesPart(Base) {
 
     /**
      * The amount recorded for a specific affinity.
-     * @param {Teriock.Affinities.Type} type
+     * @param {AffinityType} type
      * @param {Teriock.Keys.AffinityCategory} category
      * @param {string} value
      * @returns {number}
@@ -127,7 +127,7 @@ export default function ActorAffinitiesPart(Base) {
 
     /**
      * Get a specific affinity, if this actor has it.
-     * @param {Teriock.Affinities.Type} type
+     * @param {AffinityType} type
      * @param {Teriock.Keys.AffinityCategory} category
      * @param {string} value
      * @returns {VirtualAffinityModel | undefined}
@@ -138,7 +138,7 @@ export default function ActorAffinitiesPart(Base) {
 
     /**
      * Checks whether this actor has a given affinity.
-     * @param {Teriock.Affinities.Type} type
+     * @param {AffinityType} type
      * @param {Teriock.Keys.AffinityCategory} category
      * @param {string} value
      * @returns {boolean}
@@ -209,7 +209,7 @@ export default function ActorAffinitiesPart(Base) {
      * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
      * - [Hexseal](https://wiki.teriock.com/index.php/Keyword:Hexseal)
      *
-     * @param {Teriock.Affinities.Type} type - The type of affinity to roll.
+     * @param {AffinityType} type - The type of affinity to roll.
      * @param {Partial<Teriock.Execution.AffinityExecutionOptions>} [options] - Options for the roll.
      * @returns {Promise<void>}
      */

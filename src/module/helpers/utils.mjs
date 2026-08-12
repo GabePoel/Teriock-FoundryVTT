@@ -250,10 +250,10 @@ export function parseIdentifier(identifier) {
  * Find the best document from a string that describes it. Typed identifiers are preferred over plain identifiers
  * which are preferred over names.
  * @param {TypedIdentifier|Identifier|string} lookup
- * @param {AnyCommonDocument} relativeTo
+ * @param {TeriockActiveEffect|TeriockActor|TeriockItem} relativeTo
  * @param {object} [options]
  * @param {boolean} [options.relativeOnly]
- * @returns {Promise<AnyCommonDocument|null>}
+ * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
  */
 export async function findBestDocument(lookup, relativeTo, options = {}) {
   if (options.relativeOnly && typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
@@ -267,8 +267,8 @@ export async function findBestDocument(lookup, relativeTo, options = {}) {
 /**
  * Get a local document from its identifier.
  * @param {Identifier|TypedIdentifier} identifier
- * @param {AnyCommonDocument} relativeTo - The document to compare against.
- * @returns {Promise<AnyCommonDocument|null>}
+ * @param {TeriockActiveEffect|TeriockActor|TeriockItem} relativeTo - The document to compare against.
+ * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
  */
 export async function fromIdentifierLocal(identifier, relativeTo) {
   if (typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
@@ -280,9 +280,9 @@ export async function fromIdentifierLocal(identifier, relativeTo) {
 /**
  * Effective children of a document for which the qualifier formula's minimum
  * value is truthy against each child's local roll data.
- * @param {AnyCommonDocument} document
+ * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
  * @param {Teriock.System.FormulaString} qualifier
- * @returns {Promise<AnyCommonDocument[]>}
+ * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
  */
 export async function fromQualifier(document, qualifier) {
   if (!document || !teriock.helpers.formula.formulaExists(qualifier)) { return []; }
@@ -302,7 +302,7 @@ export async function fromQualifier(document, qualifier) {
  * Get a world document from its identifier.
  * @param {TypedIdentifier} identifier
  * @param {Teriock.System.SyncFetchOptions} [options]
- * @returns {AnyCommonDocument|null}
+ * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
  */
 export function fromIdentifierSync(identifier, options = {}) {
   if (!identifier) { return null; }

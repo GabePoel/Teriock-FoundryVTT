@@ -19,7 +19,7 @@ export default function AbilityEquipmentPart(Base) {
    *
    * @implements {Teriock.Models.AbilityEquipmentPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityEquipmentPart extends Base {
     /** @inheritDoc */

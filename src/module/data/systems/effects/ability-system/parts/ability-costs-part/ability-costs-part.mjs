@@ -20,7 +20,7 @@ export default function AbilityCostsPart(Base) {
   /**
    * @implements {Teriock.Models.AbilityCostsPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityCostsPart extends Base {
     /** @inheritDoc */

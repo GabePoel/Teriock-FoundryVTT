@@ -8,7 +8,7 @@ import * as sheetMixins from "../mixins/_module.mjs";
  */
 
 /**
- * A simple sheet for {@link AnyChildDocument}.
+ * A simple sheet for child documents.
  * @mixes DisplaySheet
  * @mixes CommonSheet
  * @mixes MechanicsSheet

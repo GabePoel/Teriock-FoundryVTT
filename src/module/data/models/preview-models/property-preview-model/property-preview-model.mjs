@@ -31,8 +31,8 @@ export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
 
   /**
    * @inheritDoc
-   * @param {TeriockProperty[]} documents
-   * @returns {Generator<TeriockProperty, void, void>}
+   * @param {TeriockActiveEffect<"property">[]} documents
+   * @returns {Generator<TeriockActiveEffect<"property">, void, void>}
    */
   *filterDocuments(documents) {
     const f = this.filters;

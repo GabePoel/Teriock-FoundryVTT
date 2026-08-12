@@ -23,7 +23,7 @@ export default function ActorTransformationPart(Base) {
   /**
    * @implements {Teriock.Models.ActorTransformationPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorTransformationPart extends Base {
     /** @inheritDoc */

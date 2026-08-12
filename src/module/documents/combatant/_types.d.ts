@@ -2,7 +2,7 @@ declare module "./combatant.mjs" {
   export default interface TeriockCombatant {
     _id: ID<TeriockCombatant>;
 
-    get actor(): AnyActor | null;
+    get actor(): TeriockActor | null;
 
     get documentName(): "Combatant";
 

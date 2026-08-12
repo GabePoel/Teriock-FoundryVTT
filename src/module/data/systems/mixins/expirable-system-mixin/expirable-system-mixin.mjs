@@ -14,7 +14,7 @@ export default function ExpirableSystemMixin(Base) {
   class ExpirableSystem extends Base {
     /**
      * Array of the types of expirations that this system can have.
-     * @returns {(typeof AnyExpiration)[]}
+     * @returns {(typeof Expiration)[]}
      */
     static get _expirationTypes() {
       return [];
@@ -22,7 +22,7 @@ export default function ExpirableSystemMixin(Base) {
 
     /**
      * The types of expirations that this system can have.
-     * @returns {Record<string, (typeof AnyExpiration)>}
+     * @returns {Record<string, (typeof Expiration)>}
      */
     static get expirationTypes() {
       return Object.fromEntries(this._expirationTypes.map(e => [e.TYPE, e]));
@@ -42,7 +42,7 @@ export default function ExpirableSystemMixin(Base) {
 
     /**
      * Active expirations.
-     * @returns {AnyExpiration[]}
+     * @returns {Expiration[]}
      */
     get activeExpirations() {
       return this.expirations.contents.filter((e) => e.active);

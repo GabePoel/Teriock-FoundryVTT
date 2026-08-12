@@ -14,7 +14,7 @@ import SystemSettingsButtonSheetMixin from "./system-settings-button-sheet-mixin
  */
 
 /**
- * {@link AnyCommonDocument} sheet mixin.
+ * Common document sheet mixin.
  * @template {AnyConstructor} T
  * @param {T} Base - The base application class to mix in with.
  * @returns {MixinResult<T, CommonSheet>}
@@ -30,7 +30,7 @@ export default function CommonSheetMixin(Base) {
    * @mixes SourceRefreshButtonSheet
    * @mixes SystemSettingsButtonSheet
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class CommonSheet
     extends mixClasses(

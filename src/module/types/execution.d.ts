@@ -1,11 +1,10 @@
 import { VirtualAffinityModel } from "../data/models/_module.mjs";
 import { AttributeModel, TradecraftModel } from "../data/models/modifier-models/_module.mjs";
 import { BaseExpiration } from "../data/pseudo-documents/expirations/abstract/_module.mjs";
-import { TeriockActor } from "../documents/_module.mjs";
 
 declare module "../executions/child-executions/armament-execution/armament-execution.mjs" {
   export default interface ArmamentExecution {
-    get source(): TeriockArmament;
+    get source(): TeriockItem<"body" | "equipment">;
   }
 }
 
@@ -23,7 +22,7 @@ declare global {
       rollData?: object;
       rollOptions?: object;
       showDialog?: boolean;
-      source?: AnyChildDocument | AttributeModel | TradecraftModel;
+      source?: AttributeModel | TeriockActiveEffect | TeriockItem | TradecraftModel;
     };
 
     /**
@@ -38,7 +37,7 @@ declare global {
     };
 
     export type AttackExecutionOptions = ExecutionOptions & ThresholdExecutionOptions & {
-      armament?: TeriockArmament;
+      armament?: TeriockItem<"body" | "equipment">;
       attackPenalty?: Teriock.System.FormulaString;
       limb?: boolean;
       piercing?: Teriock.System.PiercingLevel;
@@ -48,12 +47,12 @@ declare global {
       warded?: boolean;
     };
 
-    export type ImpactsExecutionOptions = ExecutionOptions & { document?: AnyChildDocument };
+    export type ImpactsExecutionOptions = ExecutionOptions & { document?: TeriockActiveEffect | TeriockItem };
 
     export type AffinityExecutionOptions = ExecutionOptions & {
       /** The specific affinity being rolled, when the roll came from one. */
       affinity?: VirtualAffinityModel | null;
-      type?: Teriock.Affinities.Type;
+      type?: AffinityType;
       wrappers?: string[];
     };
 
@@ -65,12 +64,12 @@ declare global {
       noHp?: boolean;
       noLp?: boolean;
       noMp?: boolean;
-      source?: TeriockAbility;
+      source?: TeriockActiveEffect<"ability">;
     };
 
     export type ArmamentExecutionOptions = ExecutionOptions & {
       bonus?: Teriock.System.FormulaString;
-      source?: TeriockArmament;
+      source?: TeriockItem<"body" | "equipment">;
     };
     export type ExpirationExecutionOptions = ThresholdExecutionOptions & { expiration?: BaseExpiration };
 
@@ -84,14 +83,14 @@ declare global {
     };
 
     export type ExecutionDialogDocumentEntry = {
-      document: AnyChildDocument | null | undefined;
+      document: TeriockActiveEffect | TeriockItem | null | undefined;
       editable?: boolean;
       label?: string;
       openable?: boolean;
       selectHint?: string;
       selectTitle?: string;
-      getChoices?: () => AnyChildDocument[] | Promise<AnyChildDocument[]>;
-      update?: (document: AnyChildDocument | null) => Promise<void> | void;
+      getChoices?: () => (TeriockActiveEffect | TeriockItem)[] | Promise<(TeriockActiveEffect | TeriockItem)[]>;
+      update?: (document: TeriockActiveEffect | TeriockItem | null) => Promise<void> | void;
     };
   }
 }

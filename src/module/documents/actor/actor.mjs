@@ -100,9 +100,14 @@ export default class TeriockActor
     return true;
   }
 
+  /** @inheritDoc */
+  get actor() {
+    return this;
+  }
+
   /**
    * Consequences and imbuements.
-   * @returns {(TeriockConsequence|TeriockImbuement)[]}
+   * @returns {TeriockActiveEffect<"consequence"|"imbuement">[]}
    */
   get applicables() {
     return [...this.consequences, ...this.imbuements];
@@ -110,7 +115,7 @@ export default class TeriockActor
 
   /**
    * Body parts and equipment.
-   * @returns {TeriockArmament[]}
+   * @returns {TeriockItem<"body"|"equipment">[]}
    */
   get armaments() {
     return [...this.bodyParts, ...this.equipment];
@@ -156,7 +161,7 @@ export default class TeriockActor
 
   /**
    * All modifiable children, visible or otherwise.
-   * @returns {AnyActiveEffect[]}
+   * @returns {TeriockActiveEffect[]}
    */
   get modifiableChildren() {
     if (!this._cache.modifiableChildren) {
@@ -178,7 +183,7 @@ export default class TeriockActor
 
   /**
    * @inheritDoc
-   * @returns {AnyActiveEffect[]}
+   * @returns {TeriockActiveEffect[]}
    */
   get validEffects() {
     if (!this._cache.validEffects) { this._cache.validEffects = Array.from(this.allApplicableEffects()); }
@@ -229,7 +234,7 @@ export default class TeriockActor
   /**
    * Apply qualified changes to an array of documents.
    * @param {Teriock.Changes.QualifiedChangeData[]} changes
-   * @param {AnyChildDocument[]} documents
+   * @param {(TeriockActiveEffect|TeriockItem)[]} documents
    * @param {object} replacementData
    * @internal
    */

@@ -1,11 +1,17 @@
-import { TeriockCard } from "../_module.mjs";
+import { Card } from "@client/documents/_module.mjs";
+
+import { TeriockCard as CardClass } from "../_module.mjs";
 import { BaseCardsSystem } from "../../data/systems/cards/_module.mjs";
+
+type CardDocument = Teriock.Documents.DocumentBase<CardClass, Card>;
+
+interface CardSubtype<T extends CardType> extends Teriock.Documents.Subtype<CardDocument, T, null, CardSystemMap[T]> {}
 
 declare module "./card.mjs" {
   export default interface TeriockCard {
     _id: ID<TeriockCard>;
     system: BaseCardsSystem;
-    type: Teriock.Documents.CardType;
+    type: CardType;
 
     get documentName(): "Card";
 
@@ -16,9 +22,7 @@ declare module "./card.mjs" {
 }
 
 declare global {
-  export interface CardTypeMap {
-    stone: TeriockCard;
-  }
+  export type TeriockCard<T extends CardType = CardType> = T extends unknown ? CardSubtype<T> : never;
 }
 
 export {};

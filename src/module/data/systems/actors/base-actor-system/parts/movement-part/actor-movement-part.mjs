@@ -18,7 +18,7 @@ export default function ActorMovementPart(Base) {
   /**
    * @implements {Teriock.Models.ActorMovementPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorMovementPart extends Base {
     /** @inheritDoc */

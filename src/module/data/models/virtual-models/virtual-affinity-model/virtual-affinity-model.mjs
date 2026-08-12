@@ -17,7 +17,7 @@ export default class VirtualAffinityModel extends BaseVirtualModel {
   /**
    * A key that is identical across every affinity of the same type against the same thing, so that affinities from more
    * than one source consolidate into a single entry.
-   * @param {Teriock.Affinities.Type} type
+   * @param {AffinityType} type
    * @param {Teriock.Keys.AffinityCategory} category
    * @param {string} value
    * @returns {ID<VirtualAffinityModel>}

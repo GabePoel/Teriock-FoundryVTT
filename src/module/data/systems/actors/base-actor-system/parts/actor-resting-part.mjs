@@ -12,7 +12,7 @@ import { LongRestExecution, ShortRestExecution } from "../../../../../executions
 export default function ActorRestingPart(Base) {
   /**
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorRestingPart extends Base {
     /**

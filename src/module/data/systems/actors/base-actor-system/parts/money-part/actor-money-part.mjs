@@ -17,7 +17,7 @@ export default function ActorMoneyPart(Base) {
   /**
    * @implements {Teriock.Models.ActorMoneyPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorMoneyPart extends Base {
     /** @inheritDoc */

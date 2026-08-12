@@ -16,7 +16,7 @@ function getRootAffinity(config) {
 
 /**
  * A factory function to build an affinity from a config.
- * @param {Teriock.Affinities.Type} type
+ * @param {AffinityType} type
  * @returns {typeof BaseAffinity}
  */
 export default function AffinityFactory(type) {

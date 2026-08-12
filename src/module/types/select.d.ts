@@ -85,7 +85,7 @@ declare global {
       /** Whether to allow for multiple documents to be selected */
       multi?: boolean;
       /** A document to find local documents relative to */
-      relativeTo?: AnyCommonDocument;
+      relativeTo?: TeriockActiveEffect | TeriockActor | TeriockItem;
       /** Something every document must satisfy to be selectable */
       filter?: (document: TeriockDocument) => boolean;
     };

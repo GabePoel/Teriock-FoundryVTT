@@ -9,7 +9,7 @@ import { makeIcon } from "../../../../../helpers/icon.mjs";
 export default function AbilityRankPart(Base) {
   /**
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityRankPart extends Base {
     /** @inheritDoc */
@@ -65,7 +65,7 @@ export default function AbilityRankPart(Base) {
     getLocalRollData() {
       const data = super.getLocalRollData();
       if (this.parent.parent?.type === "rank") {
-        const rank = /** @type {TeriockRank} */ this.parent.parent;
+        const rank = /** @type {TeriockItem<"rank">} */ this.parent.parent;
         data[`class.${rank.system._source.class}`] = 1;
         data["class.rank"] = rank.system.number;
       }

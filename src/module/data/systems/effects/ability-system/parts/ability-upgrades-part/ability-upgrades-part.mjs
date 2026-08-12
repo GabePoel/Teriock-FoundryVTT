@@ -18,7 +18,7 @@ export default function AbilityUpgradesPart(Base) {
   /**
    * @implements {Teriock.Models.AbilityUpgradesPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityUpgradesPart extends Base {
     /** @inheritDoc */

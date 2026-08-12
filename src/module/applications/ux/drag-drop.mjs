@@ -12,13 +12,13 @@ export default class TeriockDragDrop extends DragDrop {
   /** @type {DragEvent|null} */
   static #initializedEvent = null;
 
-  /** @type {Teriock.Application.DragDropPayload<AnyCommonDocument>|null} */
+  /** @type {Teriock.Application.DragDropPayload<TeriockActiveEffect|TeriockActor|TeriockItem>|null} */
   static #payload = null;
 
   /**
    * Cleanup for any drag initialized via {@link initializeDragEvent}.
    * @param {DragEvent} event
-   * @todo Move to {@link this._handleDragEnd} when core fixes event binding in {@link CompendiumDirectory._onRender}.
+   * @todo Move to {@link DragDrop._handleDragEnd} when core fixes event binding in {@link CompendiumDirectory._onRender}.
    */
   static #onDragEnd(event) {
     TeriockDragDrop.dragStartApplication?._onDragEnd(event);
@@ -54,7 +54,7 @@ export default class TeriockDragDrop extends DragDrop {
 
   /**
    * The payload of the drag currently in progress.
-   * @returns {Teriock.Application.DragDropPayload<AnyCommonDocument>|null}
+   * @returns {Teriock.Application.DragDropPayload<TeriockActiveEffect|TeriockActor|TeriockItem>|null}
    */
   static get payload() {
     return TeriockDragDrop.#payload;

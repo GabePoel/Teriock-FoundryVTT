@@ -11,7 +11,7 @@ export default function AutomatedDataMixin(Base) {
   class AutomatedData extends Base {
     /**
      * All the automations that this considers to be currently active.
-     * @returns {AnyAutomation[]}
+     * @returns {Automation[]}
      */
     get activeAutomations() {
       const automations = this.automations.contents;
@@ -20,11 +20,11 @@ export default function AutomatedDataMixin(Base) {
 
     /**
      * Get all the automations of a given type.
-     * @template {Teriock.Automations.Type} T
+     * @template {AutomationType} T
      * @param {T} type
      * @param {object} [options]
      * @param {boolean} [options.active]
-     * @returns {Teriock.Automations.TypeMap[T][]}
+     * @returns {Automation<T>[]}
      */
     getAutomations(type, options = {}) {
       const { active } = options;

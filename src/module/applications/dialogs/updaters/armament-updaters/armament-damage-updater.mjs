@@ -8,7 +8,7 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
 
 /**
  * Dialog for updating armament damage formulas.
- * @property {TeriockEquipment} document
+ * @property {TeriockItem<"equipment">} document
  */
 export default class ArmamentDamageUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

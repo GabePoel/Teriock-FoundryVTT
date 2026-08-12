@@ -12,7 +12,7 @@ import { TeriockDragDrop } from "../../ux/_module.mjs";
 export default function MechanicsTabsSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class MechanicsTabsSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

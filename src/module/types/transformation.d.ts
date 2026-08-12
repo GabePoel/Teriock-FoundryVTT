@@ -15,7 +15,7 @@ declare global {
 
     export type ActorTransformationConfig = SpeciesTransformationConfig & {
       /** <schema> The primary transformation effect */
-      primary: TeriockLingering | null;
+      primary: TeriockActiveEffect<"condition" | "consequence"> | null;
     };
 
     export type AutomationTransformationConfig = SpeciesTransformationConfig & {
@@ -39,9 +39,9 @@ declare global {
       /** <schema> Whether transformation is enabled */
       enabled: boolean;
       /** <schema> The primary transformation species */
-      primary: TeriockSpecies | null;
+      primary: TeriockItem<"species"> | null;
       /** <schema> UUID of specific species to transform into */
-      uuids: UUID<TeriockSpecies>[];
+      uuids: UUID<TeriockItem<"species">>[];
     };
   }
 }

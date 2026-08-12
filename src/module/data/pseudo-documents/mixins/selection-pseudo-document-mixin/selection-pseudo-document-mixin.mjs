@@ -148,7 +148,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
 
     /**
      * The document that local sources are resolved against.
-     * @returns {AnyCommonDocument|null}
+     * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
      */
     get _selectionRelativeTo() {
       return this.actor ?? null;
@@ -191,7 +191,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
 
     /**
      * Whether a resolved document is a valid choice.
-     * @param {AnyCommonDocument} _document
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} _document
      * @returns {boolean}
      */
     _isSelectable(_document) {

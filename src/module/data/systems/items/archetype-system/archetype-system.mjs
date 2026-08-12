@@ -80,7 +80,7 @@ export default class ArchetypeSystem
 
   /**
    * The ranks that provide this.
-   * @returns {TeriockRank[]}
+   * @returns {TeriockItem<"rank">[]}
    */
   get ranks() {
     if (!this.actor) { return []; }

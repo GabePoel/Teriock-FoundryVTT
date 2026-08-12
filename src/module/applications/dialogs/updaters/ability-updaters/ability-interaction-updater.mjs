@@ -8,7 +8,7 @@ import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating an ability's interaction and feat save attribute.
- * @property {TeriockAbility} document
+ * @property {TeriockActiveEffect<"ability">} document
  */
 export default class AbilityInteractionUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

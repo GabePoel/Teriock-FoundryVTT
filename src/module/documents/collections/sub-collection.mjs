@@ -9,14 +9,14 @@ import TypeCollection from "./type-collection.mjs";
 export default class SubCollection extends TypeCollection {
   /**
    * @param {Iterable<[ID<K>, V]>} [entries]
-   * @param {ID<AnyCommonDocument>|null} [id] - The ID of the sup whose subs this collection holds.
+   * @param {ID<TeriockActiveEffect|TeriockActor|TeriockItem>|null} [id] - The ID of the sup whose subs this collection holds.
    */
   constructor(entries, id = null) {
     super(entries);
     this.#id = id;
   }
 
-  /** @type {ID<AnyCommonDocument>|null} */
+  /** @type {ID<TeriockActiveEffect|TeriockActor|TeriockItem>|null} */
   #id;
 
   /**
@@ -37,7 +37,7 @@ export default class SubCollection extends TypeCollection {
 
   /**
    * The ID of the sup whose subs this collection holds.
-   * @returns {ID<AnyCommonDocument>|null}
+   * @returns {ID<TeriockActiveEffect|TeriockActor|TeriockItem>|null}
    */
   get supId() {
     return this.#id;

@@ -50,7 +50,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
 
   /**
    * The current acting actor.
-   * @returns {AnyActor|null}
+   * @returns {TeriockActor|null}
    */
   get actor() {
     return this.combatant ? this.combatant.actor || null : null;
@@ -58,7 +58,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
 
   /**
    * The actors in this combat.
-   * @returns {AnyActor[]}
+   * @returns {TeriockActor[]}
    */
   get actors() {
     return this.combatants.filter(c => c.actor).map(c => c.actor);

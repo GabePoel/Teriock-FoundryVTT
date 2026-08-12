@@ -1,7 +1,8 @@
+import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
+
 import changeConfig from "../constants/config/change-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
-import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Config {
@@ -60,7 +61,7 @@ declare global {
     };
 
     export type DocumentEntry = {
-      documentName: "Card" | "JournalEntryPage" | CommonDocumentName;
+      documentName: (typeof ALL_DOCUMENT_TYPES)[number];
       getter: string;
       hint: string;
       icon: string;

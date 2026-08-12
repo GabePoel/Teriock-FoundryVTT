@@ -3,7 +3,7 @@ import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * @mixes TradecraftExecution
- * @property {TeriockFluency} source
+ * @property {TeriockActiveEffect<"fluency">} source
  */
 export default class FluencyExecution extends executionMixins.TradecraftExecutionMixin(DocumentExecution) {
   /** @inheritDoc */

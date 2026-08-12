@@ -6,8 +6,8 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
  */
 
 /**
- * Sheet for a {@link TeriockRank}.
- * @property {TeriockRank} document
+ * Rank sheet.
+ * @property {TeriockItem<"rank">} document
  */
 export default class RankSheet extends ChildSheet {
   /**

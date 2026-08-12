@@ -2,7 +2,6 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import effectConfig from "../../../../constants/config/effect-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { TeriockActiveEffect, TeriockItem } from "../../../../documents/_module.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { objectMap, omit } from "../../../../helpers/utils.mjs";
 import { SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -16,7 +15,7 @@ const { fields } = foundry.data;
 
 /**
  * @typedef DocumentConstruction
- * @property {UUID<AnyChildDocument>} uuid
+ * @property {UUID<TeriockActiveEffect|TeriockItem>} uuid
  * @property {object} data
  */
 
@@ -110,7 +109,7 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
    */
   #familyEntry(key, fam) {
     const representative = fam.root ?? fam.other?.[0] ?? {};
-    const documentName = TeriockActiveEffect.TYPES.includes(representative?.type) ? "ActiveEffect" : "Item";
+    const documentName = ActiveEffect.implementation.TYPES.includes(representative?.type) ? "ActiveEffect" : "Item";
     const Cls = foundry.utils.getDocumentClass(documentName);
     const doc = new Cls(representative);
     return {
@@ -248,15 +247,15 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
 
   /**
    * Safely sort and create valid documents.
-   * @param {AnyCommonDocument} parent
+   * @param {TeriockActiveEffect|TeriockActor|TeriockItem} parent
    * @param {object[]} docs
-   * @returns {Promise<AnyChildDocument[]>}
+   * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
    */
   async safeCreate(parent, docs) {
     // Don't create children if the document creation was rejected.
     if (!parent?.persisted) { return []; }
-    const effectData = docs.filter(d => TeriockActiveEffect.TYPES.includes(d?.type));
-    const itemData = docs.filter(d => TeriockItem.TYPES.includes(d?.type));
+    const effectData = docs.filter(d => ActiveEffect.implementation.TYPES.includes(d?.type));
+    const itemData = docs.filter(d => Item.implementation.TYPES.includes(d?.type));
     const operation = { keepCompetence: true, notifyOnFailure: true };
     const operations = [];
     if (effectData.length > 0) {

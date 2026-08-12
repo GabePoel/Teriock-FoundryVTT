@@ -15,10 +15,10 @@ const { fields } = foundry.data;
  * @property {Set<TeriockActor>} [actors]
  * @property {Set<UUID<BaseExpiration>>} [cleanup]
  * @property {string} [type]
- * @property {AnyActiveEffect} document
+ * @property {TeriockActiveEffect} document
  * @property {BaseEffectSystem} parent
  * @property {ID<BaseExpiration>} _id
- * @property {Teriock.Expirations.Type} type
+ * @property {ExpirationType} type
  */
 export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocument) {
   /** @inheritDoc */
@@ -62,7 +62,7 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
   /**
    * Attempt to expire each applicable ActiveEffect on an array of Actors.
    * @param {TeriockActor[]} actors - Actors to check the Expirations of
-   * @param {Teriock.Expirations.Type} type - The type of Expiration to check
+   * @param {ExpirationType} type - The type of Expiration to check
    * @param {object} context - Any context relevant to the type of Expiration we check
    * @returns {Promise<void>}
    */
@@ -103,7 +103,7 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
 
   /**
    * Validate an expiration attempt.
-   * @param {Teriock.Expirations.Type} type
+   * @param {ExpirationType} type
    * @param {object} _context
    * @returns {boolean}
    */
@@ -113,7 +113,7 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
 
   /**
    * Attempt this expiration for a given event.
-   * @param {Teriock.Expirations.Type} type
+   * @param {ExpirationType} type
    * @param {object} context
    * @returns {ExpirationActivation|null} An activation that resolves this expiration, if it applies.
    */

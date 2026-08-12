@@ -81,7 +81,7 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Active affinities.
-   * @returns {AnyAffinity[]}
+   * @returns {Affinity[]}
    */
   get activeAffinities() {
     return this.source.system.affinities.filter(a =>
@@ -99,7 +99,7 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Active expirations.
-   * @returns {AnyExpiration[]}
+   * @returns {Expiration[]}
    */
   get activeExpirations() {
     return this.source.system.expirations.filter(e =>
@@ -181,7 +181,7 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * @inheritDoc
-   * @returns {TeriockAbility}
+   * @returns {TeriockActiveEffect<"ability">}
    */
   get source() {
     return super.source;
@@ -235,10 +235,10 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Find the armament that matches a certain equipment class.
-   * @param {TeriockArmament|null} armament
+   * @param {TeriockItem<"body"|"equipment">|null} armament
    * @param {Teriock.Keys.Delivery} delivery
    * @param {Teriock.Keys.EquipmentClass} equipmentClass
-   * @returns {TeriockArmament|null}
+   * @returns {TeriockItem<"body"|"equipment">|null}
    */
   _reselectArmamentForEquipmentClass(armament, delivery, equipmentClass) {
     if (this.source.system.delivery === delivery && !armament?.system.equipmentClasses.has(equipmentClass)) {
@@ -249,10 +249,10 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Find the armament that matches certain properties.
-   * @param {TeriockArmament|null} armament
+   * @param {TeriockItem<"body"|"equipment">|null} armament
    * @param {Teriock.Keys.Delivery} delivery
    * @param {Identifier[]} properties
-   * @returns {TeriockArmament|null}
+   * @returns {TeriockItem<"body"|"equipment">|null}
    */
   _reselectArmamentForProperties(armament, delivery, properties) {
     if (
@@ -274,12 +274,12 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Get all the affinities of a given type.
-   * @template {Teriock.Affinities.Type} T
+   * @template {AffinityType} T
    * @param {T} type
    * @param {object} [options]
    * @param {boolean} [options.active]
    * @param {boolean} [options.crit]
-   * @returns {Teriock.Affinities.TypeMap[T][]}
+   * @returns {Affinity<T>[]}
    */
   getAffinities(type, options = {}) {
     const filter = (a) =>
@@ -294,12 +294,12 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * @inheritDoc
-   * @template {Teriock.Automations.Type} T
+   * @template {AutomationType} T
    * @param {T} type
    * @param {object} [options]
    * @param {boolean} [options.active]
    * @param {boolean} [options.crit]
-   * @returns {Teriock.Automations.TypeMap[T][]}
+   * @returns {Automation<T>[]}
    */
   getAutomations(type, options = {}) {
     const automations = super.getAutomations(type, options);
@@ -311,12 +311,12 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Get all the expirations of a given type.
-   * @template {Teriock.Expirations.Type} T
+   * @template {ExpirationType} T
    * @param {T} type
    * @param {object} [options]
    * @param {boolean} [options.active]
    * @param {boolean} [options.crit]
-   * @returns {Teriock.Expirations.TypeMap[T][]}
+   * @returns {Expiration<T>[]}
    */
   getExpirations(type, options = {}) {
     const filter = (e) =>

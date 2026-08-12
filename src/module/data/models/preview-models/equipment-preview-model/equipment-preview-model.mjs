@@ -60,7 +60,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
 
   /**
    * Whether some equipment has a property that matches some key.
-   * @param {TeriockEquipment} equipment
+   * @param {TeriockItem<"equipment">} equipment
    * @param {string} propertyKey
    * @returns {boolean}
    */
@@ -92,8 +92,8 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
 
   /**
    * @inheritDoc
-   * @param {TeriockEquipment[]} documents
-   * @returns {Generator<TeriockEquipment, void, void>}
+   * @param {TeriockItem<"equipment">[]} documents
+   * @returns {Generator<TeriockItem<"equipment">, void, void>}
    */
   *filterDocuments(documents) {
     const f = this.filters;

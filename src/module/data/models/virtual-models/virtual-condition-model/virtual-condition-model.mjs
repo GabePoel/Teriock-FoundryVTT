@@ -25,7 +25,7 @@ export default class VirtualConditionModel extends BaseVirtualModel {
 
   /**
    * The real condition effect on the actor, if it has one. Set by the sheet, since documents cannot live in a schema.
-   * @type {TeriockCondition | null}
+   * @type {TeriockActiveEffect<"condition"> | null}
    */
   effect = null;
 

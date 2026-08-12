@@ -16,7 +16,7 @@ export default function ActorCoverPart(Base) {
   /**
    * @implements {Teriock.Models.ActorCoverPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorCoverPart extends Base {
     /** @inheritDoc */

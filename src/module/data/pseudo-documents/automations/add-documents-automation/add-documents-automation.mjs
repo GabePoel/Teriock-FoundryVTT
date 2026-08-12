@@ -209,9 +209,9 @@ export default class AddDocumentsAutomation
    * Constructions for the documents this adds as part of the main effect, rather than as its own
    * activation. The selection is always made during the execution here.
    * @param {object} [options]
-   * @param {AnyActor} [options.actor]
+   * @param {TeriockActor} [options.actor]
    * @param {BaseExecution} [options.execution]
-   * @return {Promise<Teriock.System.Attachment<AnyChildDocument>[]>}
+   * @return {Promise<Teriock.System.Attachment<TeriockActiveEffect|TeriockItem>[]>}
    */
   async choose(options = {}) {
     const documents = await this.selectDocuments({

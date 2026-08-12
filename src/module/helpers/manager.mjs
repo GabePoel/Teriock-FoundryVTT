@@ -8,7 +8,7 @@ import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mj
  * Singleton class that manages Teriock-specific states and functionality.
  */
 export default class TeriockManager {
-  /** @type {TeriockAbility[]} */
+  /** @type {TeriockActiveEffect<"ability">[]} */
   #basicAbilities = [];
 
   /** @type {ApplicationV2[]} */
@@ -51,7 +51,7 @@ export default class TeriockManager {
 
   /**
    * All the basic abilities.
-   * @returns {TeriockAbility[]}
+   * @returns {TeriockActiveEffect<"ability">[]}
    */
   get basicAbilities() {
     return this.#basicAbilities;

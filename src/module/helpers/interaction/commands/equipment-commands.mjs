@@ -3,8 +3,8 @@ import { icons } from "../../../constants/display/icons.mjs";
 
 /**
  * Build an equipment command function.
- * @param {((equipment: TeriockEquipment) => boolean)} filter
- * @param {((equipment: TeriockEquipment) => Promise<*>)} onSelect
+ * @param {((equipment: TeriockItem<"equipment">) => boolean)} filter
+ * @param {((equipment: TeriockItem<"equipment">) => Promise<*>)} onSelect
  * @param {string} hint
  * @param {string} title
  * @returns {(actor: TeriockActor) => Promise<void>}

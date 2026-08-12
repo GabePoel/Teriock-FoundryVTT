@@ -21,7 +21,7 @@ export default function EquipmentStoragePart(Base) {
   /**
    * @implements {Teriock.Models.EquipmentStoragePartData}
    * @mixin
-   * @property {TeriockEquipment} parent
+   * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentStoragePart extends Base {
     /** @inheritDoc */
@@ -35,8 +35,8 @@ export default function EquipmentStoragePart(Base) {
 
     /**
      * Ask the user which matching, non-full consumable stack this equipment should merge into.
-     * @param {AnyCommonDocument} elder
-     * @returns {Promise<TeriockEquipment|null>}
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} elder
+     * @returns {Promise<TeriockItem<"equipment">|null>}
      */
     async #findStackTarget(elder) {
       if (!elder || !this.consumable || !this._source.quantity?.value) { return null; }
@@ -62,7 +62,7 @@ export default function EquipmentStoragePart(Base) {
 
     /**
      * The update that merges this equipment's quantity into a stack it is being combined with.
-     * @param {TeriockEquipment} stack
+     * @param {TeriockItem<"equipment">} stack
      * @returns {DatabaseUpdateOperation}
      */
     #stackOperation(stack) {
@@ -80,7 +80,7 @@ export default function EquipmentStoragePart(Base) {
 
     /**
      * Reject a document that can't hold this equipment.
-     * @param {AnyCommonDocument} elder
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} elder
      * @param {DatabaseWriteOperation & Teriock.System._Operation} operation
      * @returns {boolean}
      */
@@ -102,7 +102,7 @@ export default function EquipmentStoragePart(Base) {
 
     /**
      * Whether this can stack.
-     * @returns {TeriockEquipment[]}
+     * @returns {TeriockItem<"equipment">[]}
      */
     get _stackingCandidates() {
       return (this.parent.elder?.equipment ?? []).filter(e =>

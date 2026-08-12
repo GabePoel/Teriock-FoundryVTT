@@ -13,7 +13,7 @@ import { BaseUpdater, KindUpdater } from "../../dialogs/_module.mjs";
 export default function FieldsSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class FieldsSheet extends Base {
     /**

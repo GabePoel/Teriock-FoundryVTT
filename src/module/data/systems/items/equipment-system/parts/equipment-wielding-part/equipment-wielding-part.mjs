@@ -19,7 +19,7 @@ export default function EquipmentWieldingPart(Base) {
   /**
    * @implements {Teriock.Models.EquipmentWieldingPartData}
    * @mixin
-   * @property {TeriockEquipment} parent
+   * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentWieldingPart extends Base {
     /** @inheritDoc */

@@ -1,7 +1,7 @@
 import { RollOptions } from "@client/dice/_types.mjs";
 
 import { TeriockToken } from "../canvas/placeables/_module.mjs";
-import { TeriockActor, TeriockChatMessage, TeriockTokenDocument } from "../documents/_module.mjs";
+import { TeriockTokenDocument } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Dice {

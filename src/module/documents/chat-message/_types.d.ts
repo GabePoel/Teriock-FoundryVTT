@@ -1,27 +1,21 @@
 import { ChatSpeakerData } from "@client/documents/_types.mjs";
 
-import { TeriockChatMessage, TeriockUser } from "../_module.mjs";
-import { BaseMessageSystem, InteractiveSystem, TriggeredSystem } from "../../data/systems/messages/_module.mjs";
+import { TeriockUser } from "../_module.mjs";
+import { BaseMessageSystem } from "../../data/systems/messages/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
+
+interface ChatMessageSubtype<T extends ChatMessageType>
+  extends Teriock.Documents.Subtype<Teriock.Documents.ChatMessageInterface, T, null, ChatMessageSystemMap[T]>
+{}
 
 declare module "./chat-message.mjs" {
   export default interface TeriockChatMessage extends Teriock.Documents.ChatMessageInterface {}
 }
 
 declare global {
-  export interface TeriockInteractive
-    extends Teriock.Documents.Subtype<Teriock.Documents.ChatMessageInterface, "interactive", null, InteractiveSystem>
-  {}
-
-  export interface TeriockTriggered
-    extends Teriock.Documents.Subtype<Teriock.Documents.ChatMessageInterface, "triggered", null, TriggeredSystem>
-  {}
-
-  export interface ChatMessageTypeMap {
-    base: TeriockChatMessage;
-    interactive: TeriockInteractive;
-    triggered: TeriockTriggered;
-  }
+  export type TeriockChatMessage<T extends ChatMessageType = ChatMessageType> = T extends unknown
+    ? ChatMessageSubtype<T>
+    : never;
 }
 
 declare global {
@@ -40,13 +34,13 @@ declare global {
       _id: ID<TeriockChatMessage>;
       author: TeriockUser;
       rolls: BaseRoll[];
-      system: BaseMessageSystem | InteractiveSystem | TriggeredSystem;
+      system: BaseMessageSystem;
 
       get documentName(): "ChatMessage";
 
       get id(): ID<TeriockChatMessage>;
 
-      get speakerActor(): AnyActor | null;
+      get speakerActor(): TeriockActor | null;
 
       get uuid(): UUID<TeriockChatMessage>;
     }

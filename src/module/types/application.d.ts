@@ -64,7 +64,11 @@ declare global {
 
     export type DragDropPayload<T> = DropData<T> & { document?: T };
 
-    export type DropValidationOptions = { document?: AnyCommonDocument, dropEffect?: DropEffect, notify?: boolean };
+    export type DropValidationOptions = {
+      document?: TeriockActiveEffect | TeriockActor | TeriockItem;
+      dropEffect?: DropEffect;
+      notify?: boolean;
+    };
   }
 }
 

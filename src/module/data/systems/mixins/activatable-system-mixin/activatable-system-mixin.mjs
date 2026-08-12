@@ -22,7 +22,7 @@ export default function ActivatableSystemMixin(Base) {
 
     /**
      * The types of activations that this system can have.
-     * @returns {Record<string, Teriock.Activations.Any>}
+     * @returns {Record<string, Activation>}
      */
     static get activationTypes() {
       return Object.fromEntries(

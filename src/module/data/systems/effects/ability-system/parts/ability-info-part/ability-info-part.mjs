@@ -22,7 +22,7 @@ export default function AbilityInfoPart(Base) {
   /**
    * @implements {Teriock.Models.AbilityFlagsPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityInfoPart extends Base {
     /** @inheritDoc */

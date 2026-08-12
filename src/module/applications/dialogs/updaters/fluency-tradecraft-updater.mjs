@@ -8,7 +8,7 @@ import BaseUpdater from "./base-updater.mjs";
 
 /**
  * Dialog for updating a fluency's field and tradecraft.
- * @property {TeriockFluency} document
+ * @property {TeriockActiveEffect<"fluency">} document
  */
 export default class FluencyTradecraftUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

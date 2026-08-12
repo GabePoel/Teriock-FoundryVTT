@@ -55,7 +55,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
 
   /**
    * Whether an ability passes the cost, component, and tweak filters.
-   * @param {TeriockAbility} document
+   * @param {TeriockActiveEffect<"ability">} document
    * @returns {boolean}
    */
   #checkCostFilters(document) {
@@ -116,8 +116,8 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
 
   /**
    * @inheritDoc
-   * @param {TeriockAbility[]} documents
-   * @returns {Generator<TeriockAbility, void, void>}
+   * @param {TeriockActiveEffect<"ability">[]} documents
+   * @returns {Generator<TeriockActiveEffect<"ability">, void, void>}
    */
   *filterDocuments(documents) {
     for (const document of super.filterDocuments(documents)) {

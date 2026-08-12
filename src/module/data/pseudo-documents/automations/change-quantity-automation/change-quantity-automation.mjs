@@ -48,7 +48,7 @@ export default class ChangeQuantityAutomation
   /**
    * Find the best consumable document.
    * @param {Partial<Teriock.Automations.GetActivationsOptions> & Partial<Teriock.System.TriggerScope>} [options]
-   * @returns {Promise<AnyChildDocument|null>}
+   * @returns {Promise<TeriockActiveEffect|TeriockItem|null>}
    */
   async #findConsumable(options = {}) {
     if (this.targetParent && this.document?.system?.consumable) { return this.document; }

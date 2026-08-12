@@ -10,8 +10,8 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  */
 
 /**
- * {@link TeriockConsequence} sheet.
- * @property {TeriockConsequence} document
+ * Consequence sheet.
+ * @property {TeriockActiveEffect<"consequence">} document
  * @mixes MechanicsSheet
  */
 export default class ConsequenceSheet extends ApplicableEffectSheet {

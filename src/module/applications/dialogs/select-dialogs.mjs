@@ -32,7 +32,7 @@ export async function selectConditionDialog() {
 
 /**
  * Dialog to select a property.
- * @returns {Promise<TeriockProperty|void>}
+ * @returns {Promise<TeriockActiveEffect<"property">|void>}
  */
 export async function selectPropertyDialog() {
   return resolveDocument(
@@ -78,7 +78,7 @@ export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}
 
 /**
  * Dialog to select an ability.
- * @returns {Promise<TeriockAbility|void>}
+ * @returns {Promise<TeriockActiveEffect<"ability">|void>}
  */
 export async function selectAbilityDialog() {
   return resolveDocument(
@@ -111,7 +111,7 @@ export async function selectCompendiumsDialog(selected = true) {
 
 /**
  * Dialog to select equipment.
- * @returns {Promise<TeriockEquipment|void>}
+ * @returns {Promise<TeriockItem<"equipment">|void>}
  */
 export async function selectEquipmentTypeDialog() {
   return resolveDocument(
@@ -125,7 +125,7 @@ export async function selectEquipmentTypeDialog() {
 
 /**
  * Dialog to select a species.
- * @returns {Promise<TeriockSpecies|void>}
+ * @returns {Promise<TeriockItem<"species">|void>}
  */
 export async function selectSpeciesDialog() {
   return resolveDocument(
@@ -139,7 +139,7 @@ export async function selectSpeciesDialog() {
 
 /**
  * Dialog to select a body part.
- * @returns {Promise<TeriockBody|void>}
+ * @returns {Promise<TeriockItem<"body">|void>}
  */
 export async function selectBodyPartDialog() {
   return resolveDocument(
@@ -172,7 +172,7 @@ export async function selectClassDialog(classes = null) {
 }
 
 /**
- * @param {CompendiumCollection<AnyItem>} pack
+ * @param {CompendiumCollection<TeriockItem>} pack
  */
 async function noSup(pack) {
   if (!pack.indexed) {

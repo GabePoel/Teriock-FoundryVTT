@@ -4,7 +4,7 @@ declare global {
   namespace Teriock.Models {
     export type AffinableSystemData = {
       /** <schema> Affinities */
-      affinities: TypeCollection<ID<AnyAffinity>, AnyAffinity>;
+      affinities: TypeCollection<ID<Affinity>, Affinity>;
     };
   }
 }

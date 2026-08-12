@@ -89,7 +89,7 @@ export default function CommonSystemMixin(Base) {
       return this.parent.master?.fullName || this.parent.master?.name || "";
     }
 
-    /** @returns {AnyCommonDocument} */
+    /** @returns {TeriockActiveEffect|TeriockActor|TeriockItem} */
     get document() {
       return this.parent;
     }
@@ -100,12 +100,12 @@ export default function CommonSystemMixin(Base) {
         color: this.color,
         draggable: this.document.isViewer,
         icons: this._embedIcons.filter(i => this.#checkEmbedIcon(i)),
-        id: /** @type {ID<AnyCommonDocument>} */ this.parent.id,
+        id: /** @type {ID<TeriockActiveEffect|TeriockActor|TeriockItem>} */ this.parent.id,
         img: this.parent.img,
         inactive: !this.parent.active,
         makeTooltip: false,
         openable: true,
-        parentId: /** @type {ID<AnyCommonDocument>} */ this.parent.parent?.id,
+        parentId: /** @type {ID<TeriockActiveEffect|TeriockActor|TeriockItem>} */ this.parent.parent?.id,
         struck: this.parent.disabled,
         subtitle: TERIOCK.config.document[this.parent.type]?.label,
         text: this._masterText,

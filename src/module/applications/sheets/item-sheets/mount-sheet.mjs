@@ -1,8 +1,8 @@
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
- * Sheet for a {@link TeriockMount}.
- * @property {TeriockMount} document
+ * Mount sheet.
+ * @property {TeriockItem<"mount">} document
  */
 export default class MountSheet extends ChildSheet {
   /** @type {string[]} */

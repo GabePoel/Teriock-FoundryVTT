@@ -23,7 +23,7 @@ export default function MechanicsSheetMixin(Base) {
   /**
    * @mixes ChangesSheet
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class MechanicsSheet extends ChangesSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

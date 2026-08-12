@@ -9,7 +9,7 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
 
 /**
  * Dialog for updating armament long and short range.
- * @property {TeriockEquipment} document
+ * @property {TeriockItem<"equipment">} document
  */
 export default class ArmamentRangeUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

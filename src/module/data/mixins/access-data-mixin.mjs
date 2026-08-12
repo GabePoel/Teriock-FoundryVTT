@@ -37,7 +37,7 @@ export default function AccessDataMixin(Base) {
 
     /**
      * This data model's actor.
-     * @returns {AnyActor}
+     * @returns {TeriockActor}
      */
     get actor() {
       return this.parent?.actor;
@@ -45,7 +45,7 @@ export default function AccessDataMixin(Base) {
 
     /**
      * This data model's document.
-     * @returns {AnyCommonDocument}
+     * @returns {TeriockActiveEffect|TeriockActor|TeriockItem}
      */
     get document() {
       return this.parent?.document;

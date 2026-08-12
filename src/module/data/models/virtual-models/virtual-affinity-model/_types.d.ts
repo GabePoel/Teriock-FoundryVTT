@@ -3,7 +3,7 @@ declare module "./virtual-affinity-model.mjs" {
     amount: number;
     category: Teriock.Keys.AffinityCategory;
     competence: Teriock.System.CompetenceLevel;
-    type: Teriock.Affinities.Type;
+    type: AffinityType;
     value: string;
   }
 }

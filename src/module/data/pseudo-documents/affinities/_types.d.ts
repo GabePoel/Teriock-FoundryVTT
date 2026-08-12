@@ -27,11 +27,10 @@ declare global {
     ineptitude: IneptitudeAffinity;
   }
 
-  namespace Teriock.Affinities {
-    export type TypeMap = AffinityTypeMap;
-    export type Type = TypeMapKey<AffinityTypeMap>;
-    export type Any = AnyAffinity;
+  export type AffinityType = TypeMapKey<AffinityTypeMap>;
+  export type Affinity<T extends AffinityType = AffinityType> = AffinityTypeMap[T];
 
+  namespace Teriock.Affinities {
     /** The consolidated data an actor stores for each distinct affinity it has. */
     export type EntryData = {
       amount: number;
@@ -42,7 +41,7 @@ declare global {
       providers: string[];
       /** UUIDs of the documents that grant this affinity. */
       sources: UUID<TeriockDocument>[];
-      type: Type;
+      type: AffinityType;
       value: string;
     };
   }

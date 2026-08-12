@@ -49,7 +49,7 @@ export default function DocumentDirectoryMixin(Base) {
     /**
      * Get the document that corresponds to a certain list item.
      * @param {HTMLLIElement} li
-     * @returns {AnyCommonDocument}
+     * @returns {TeriockActiveEffect|TeriockActor|TeriockItem}
      */
     _getEntryFromLi(li) {
       return this.collection.get(li.closest("[data-entry-id]")?.dataset.entryId);

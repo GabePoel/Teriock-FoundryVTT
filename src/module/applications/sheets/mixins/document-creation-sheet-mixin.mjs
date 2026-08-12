@@ -15,7 +15,7 @@ import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../
 export default function DocumentCreationSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class DocumentCreationSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -85,7 +85,7 @@ export default function DocumentCreationSheetMixin(Base) {
     }
 
     /**
-     * Adds a new {@link TeriockFluency} to the current document.
+     * Adds a new fluency to the current document.
      * @returns {Promise<void>}
      */
     async _onCreateFluency() {
@@ -104,7 +104,7 @@ export default function DocumentCreationSheetMixin(Base) {
     }
 
     /**
-     * Adds a new {@link TeriockRank} to the current document.
+     * Adds a new rank to the current document.
      * @returns {Promise<void>}
      */
     async _onCreateRank() {
@@ -115,7 +115,7 @@ export default function DocumentCreationSheetMixin(Base) {
       const possibleRanks = await Promise.all(
         Array.from({ length: 5 }, (_v, i) => teriock.fromIdentifier(`rank:rank-${i + 1}-${classIdentifier}`)),
       );
-      const referenceRank = /** @type {TeriockRank} */ await DocumentSelector.selectSingle(possibleRanks, {
+      const referenceRank = /** @type {TeriockItem<"rank">} */ await DocumentSelector.selectSingle(possibleRanks, {
         openable: true,
         title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
       });

@@ -222,7 +222,7 @@ async function onReverseHack(application, event, target) {
 
 /**
  * Hack a specific body part.
- * @param {AnyActor} actor
+ * @param {TeriockActor} actor
  * @param {PointerEvent} event
  * @param {HTMLElement} target
  * @returns {Promise<void>}
@@ -236,7 +236,7 @@ async function onTakeHack(actor, event, target) {
 
 /**
  * Unhack a specific body part.
- * @param {AnyActor} actor
+ * @param {TeriockActor} actor
  * @param {PointerEvent} event
  * @param {HTMLElement} target
  * @returns {Promise<void>}

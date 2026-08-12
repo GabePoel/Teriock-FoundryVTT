@@ -45,10 +45,10 @@ export default function AttackExecutionMixin(Base) {
       this.armament = options.armament ? options.armament : this._determineDefaultArmament();
     }
 
-    /** @type {TeriockEquipment|null} */
+    /** @type {TeriockItem<"equipment">|null} */
     ammunition;
 
-    /** @type {TeriockArmament|null} */
+    /** @type {TeriockItem<"body"|"equipment">|null} */
     armament;
 
     /** @type {number} */
@@ -263,7 +263,7 @@ export default function AttackExecutionMixin(Base) {
 
     /**
      * Logic to pick the armament this attacks with.
-     * @returns {TeriockArmament|null}
+     * @returns {TeriockItem<"body"|"equipment">|null}
      */
     _determineDefaultArmament() {
       return this.actor?.system.wielding.attacker ?? null;
@@ -404,7 +404,7 @@ export default function AttackExecutionMixin(Base) {
 
     /**
      * Update the armament and re-derive dependent execution values.
-     * @param {TeriockArmament|null} armament
+     * @param {TeriockItem<"body"|"equipment">|null} armament
      * @param {Teriock.Execution.AttackExecutionOptions} [options]
      */
     _updateArmament(armament, options = {}) {

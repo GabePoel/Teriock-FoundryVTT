@@ -58,16 +58,13 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @type {TeriockJournalEntryPage} */
   #journalEntryPage;
 
-  /**
-   * The source this execution comes from.
-   * @type {AnyCommonDocument|BaseModifierModel}
-   */
+  /** @type {TeriockActiveEffect|TeriockActor|TeriockItem|BaseModifierModel} */
   #source;
 
-  /** @type {AnyActor|null} */
+  /** @type {TeriockActor|null} */
   _actor;
 
-  /** @type {AnyAutomation[]} */
+  /** @type {Automation[]} */
   _automations = [];
 
   /** @type {Record<Teriock.Keys.Impact, Teriock.System.FormulaString>} */
@@ -88,7 +85,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @type {boolean} */
   _showDialog = false;
 
-  /** @type {Teriock.Activations.Any[]} */
+  /** @type {Activation[]} */
   activations = [];
 
   /** @type {object} */
@@ -153,23 +150,23 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     );
   }
 
-  /** @returns {AnyActor} */
+  /** @returns {TeriockActor} */
   get actor() {
     if (this._actor) { return this._actor; }
     return game.actors.default;
   }
 
-  /** @param {AnyActor|null} actor */
+  /** @param {TeriockActor|null} actor */
   set actor(actor) {
     this._actor = actor;
   }
 
-  /** @returns {TypeCollection<ID<AnyAutomation>, AnyAutomation>} */
+  /** @returns {TypeCollection<ID<Automation>, Automation>} */
   get automations() {
     return new TypeCollection(this._automations.map(a => [a.id, a]));
   }
 
-  /** @param {TypeCollection | AnyAutomation[]} automations */
+  /** @param {TypeCollection | Automation[]} automations */
   set automations(automations) {
     if (Array.isArray(automations)) { this._automations = automations; }
     if (automations instanceof TypeCollection) { this._automations = automations.contents; }
@@ -272,7 +269,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /**
    * Source of this execution.
-   * @returns {AnyChildDocument|BaseModifierModel}
+   * @returns {TeriockActiveEffect|TeriockItem|BaseModifierModel}
    */
   get source() {
     return this.#source;
@@ -370,7 +367,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @param {object} [options]
-   * @param {AnyAutomation[]} [options.automations]
+   * @param {Automation[]} [options.automations]
    * @returns {Promise<false|void>}
    */
   async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {

@@ -20,7 +20,7 @@ export default class TeriockMacro
 {
   /**
    * Create a use macro from the given document.
-   * @param {AnyChildDocument} doc
+   * @param {TeriockActiveEffect|TeriockItem} doc
    * @param {string} command
    * @param {object} flags - Teriock-scoped flags specific to the macro type.
    * @returns {Promise<TeriockMacro>}
@@ -65,7 +65,7 @@ export default class TeriockMacro
 
   /**
    * Create a general use macro from the given document.
-   * @param {AnyChildDocument} doc
+   * @param {TeriockActiveEffect|TeriockItem} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async getGeneralUseMacro(doc) {
@@ -80,7 +80,7 @@ export default class TeriockMacro
 
   /**
    * Create a linked use macro from the given document.
-   * @param {AnyChildDocument} doc
+   * @param {TeriockActiveEffect|TeriockItem} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async getLinkedUseMacro(doc) {
@@ -93,7 +93,7 @@ export default class TeriockMacro
 
   /**
    * Create a general use macro from the given document.
-   * @param {AnyChildDocument} doc
+   * @param {TeriockActiveEffect|TeriockItem} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async makeGeneralUseMacro(doc) {
@@ -104,7 +104,7 @@ export default class TeriockMacro
 
   /**
    * Create a linked use macro from the given document.
-   * @param {AnyChildDocument} doc
+   * @param {TeriockActiveEffect|TeriockItem} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async makeLinkedUseMacro(doc) {
@@ -141,7 +141,7 @@ export default class TeriockMacro
 
   /**
    * Get a document from its UUID and use it.
-   * @param {UUID<AnyChildDocument>} uuid
+   * @param {UUID<TeriockActiveEffect|TeriockItem>} uuid
    * @param {Teriock.Command.UseOptions} [options]
    * @returns {Promise<void>}
    */

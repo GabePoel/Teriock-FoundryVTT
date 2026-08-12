@@ -19,7 +19,7 @@ export default function ActorScalingPart(Base) {
   /**
    * @implements {Teriock.Models.ActorScalingPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorScalingPart extends Base {
     /** @inheritDoc */

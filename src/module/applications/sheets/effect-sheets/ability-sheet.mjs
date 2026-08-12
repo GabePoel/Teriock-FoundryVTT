@@ -13,8 +13,8 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
  */
 
 /**
- * Sheet for a {@link TeriockAbility}.
- * @property {TeriockAbility} document
+ * Ability sheet.
+ * @property {TeriockActiveEffect<"ability">} document
  */
 export default class AbilitySheet extends ChildSheet {
   /**

@@ -19,7 +19,7 @@ export default function EquipmentIdentificationPart(Base) {
   /**
    * @implements {Teriock.Models.EquipmentIdentificationPartData}
    * @mixin
-   * @property {TeriockEquipment} parent
+   * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentIdentificationPart extends Base {
     /** @inheritDoc */

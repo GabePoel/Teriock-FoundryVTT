@@ -9,7 +9,7 @@ import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating an ability's maneuver and execution time.
- * @property {TeriockAbility} document
+ * @property {TeriockActiveEffect<"ability">} document
  */
 export default class AbilityExecutionTimeUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

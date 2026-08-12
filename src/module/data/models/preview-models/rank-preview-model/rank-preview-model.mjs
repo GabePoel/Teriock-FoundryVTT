@@ -47,8 +47,8 @@ export default class RankPreviewModel extends BasePreviewModel {
 
   /**
    * @inheritDoc
-   * @param {(TeriockRank|TeriockArchetype)[]} documents
-   * @returns {Generator<TeriockRank|TeriockArchetype, void, void>}
+   * @param {TeriockItem<"rank"|"archetype">[]} documents
+   * @returns {Generator<TeriockItem<"rank"|"archetype">, void, void>}
    */
   *filterDocuments(documents) {
     const f = this.filters;

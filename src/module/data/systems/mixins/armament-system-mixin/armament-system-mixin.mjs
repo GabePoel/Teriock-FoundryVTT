@@ -286,7 +286,7 @@ export default function ArmamentSystemMixin(Base) {
 
     /**
      * The abilities that activate on use.
-     * @returns {TeriockAbility[]}
+     * @returns {TeriockActiveEffect<"ability">[]}
      */
     get onUseAbilities() {
       return this.parent.abilities.filter(a => a.system.grantUse);
@@ -372,7 +372,9 @@ export default function ArmamentSystemMixin(Base) {
       if (!formulaExists(this.damage.twoHanded)) { this.damage.twoHanded = this.damage.base; }
 
       // Properties
-      const properties = /** @type {TeriockProperty[]} */ this.parent.effects.filter(e => e.type === "property");
+      const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
+        e.type === "property"
+      );
       this.props = new Set(Array.from(properties).map(p => toCamelCase(p.name)));
 
       // Propagate damage types

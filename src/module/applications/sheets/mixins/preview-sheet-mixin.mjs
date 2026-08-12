@@ -14,7 +14,7 @@ import { fromIdentifier } from "../../../helpers/utils.mjs";
 export default function PreviewSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class PreviewSheet extends Base {
     /**
@@ -94,7 +94,7 @@ export default function PreviewSheetMixin(Base) {
     /**
      * The visible children of a given type.
      * @param {string} type
-     * @returns {AnyCommonDocument[]}
+     * @returns {(TeriockActiveEffect|TeriockActor|TeriockItem)[]}
      */
     _childrenOfType(type) {
       return [...(this.document.visibleChildrenByType[type] ?? [])];

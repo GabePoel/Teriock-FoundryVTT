@@ -7,9 +7,9 @@ import { BaseActorSheet } from "./abstract/_module.mjs";
  */
 
 /**
- * Sheet for a {@link TeriockInventory}.
- * @property {TeriockInventory} actor
- * @property {TeriockInventory} document
+ * Inventory sheet.
+ * @property {TeriockActor<"inventory">} actor
+ * @property {TeriockActor<"inventory">} document
  */
 export default class InventorySheet extends BaseActorSheet {
   /**

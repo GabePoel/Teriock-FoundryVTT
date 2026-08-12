@@ -12,7 +12,7 @@ import { StatDiceUpdater } from "../../dialogs/updaters/_module.mjs";
 export default function StatDiceSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockItem} document
    */
   class StatDiceSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

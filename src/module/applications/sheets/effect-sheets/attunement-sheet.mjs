@@ -1,8 +1,8 @@
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
- * {@link TeriockAttunement} sheet.
- * @property {TeriockAttunement} document
+ * Attunement sheet.
+ * @property {TeriockActiveEffect<"attunement">} document
  */
 export default class AttunementSheet extends ChildSheet {
   /** @type {string[]} */

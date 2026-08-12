@@ -1,5 +1,3 @@
-import { TeriockActor } from "../../../../../documents/_module.mjs";
-
 /**
  * @import { ActiveEffectData } from "@common/documents/_types.mjs";
  */
@@ -13,10 +11,10 @@ import { TeriockActor } from "../../../../../documents/_module.mjs";
 export default function ActorTokenPart(Base) {
   /**
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorTokenPart extends Base {
-    /** @type {ActiveEffectData[]} */
+    /** @type {EffectChangeData[]} */
     _tokenChanges;
 
     /** @inheritDoc */
@@ -120,7 +118,8 @@ export default function ActorTokenPart(Base) {
 
       const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
       if (foundry.utils.hasProperty(changes, "system.size.value")) {
-        const tokenSize = TeriockActor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.value")).length;
+        const tokenSize =
+          this.parent.constructor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.value")).length;
         if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
           tokenUpdates.width = tokenSize;
           tokenUpdates.height = tokenSize;
@@ -133,12 +132,6 @@ export default function ActorTokenPart(Base) {
     prepareBaseData() {
       super.prepareBaseData();
       this._tokenChanges = [];
-    }
-
-    /** @inheritDoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
-      // this._prepareTokenDetectionModes();
     }
 
     /** @inheritDoc */

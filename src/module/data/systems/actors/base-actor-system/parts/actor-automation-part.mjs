@@ -7,7 +7,7 @@
 export default function ActorAutomationPart(Base) {
   /**
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorAutomationPart extends Base {
     /**

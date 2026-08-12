@@ -169,7 +169,7 @@ export default function TriggerAutomationMixin(Base) {
     /**
      * The activations this generates when used.
      * @param {Teriock.Automations.GetActivationsOptions} [_options]
-     * @returns {Promise<Teriock.Activations.Any[]>}
+     * @returns {Promise<Activation[]>}
      */
     async _getActivations(_options = { execution: null, rollData: {} }) {
       return [];

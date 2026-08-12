@@ -8,7 +8,7 @@ import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating an ability's delivery and piercing.
- * @property {TeriockAbility} document
+ * @property {TeriockActiveEffect<"ability">} document
  */
 export default class AbilityDeliveryUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

@@ -29,7 +29,7 @@ class RefreshOptions extends BaseDataModel {
 RefreshOptions.preLocalize();
 
 /**
- * @property {AnyCommonDocument & { system: RefreshSystem }} document
+ * @property {TeriockActiveEffect|TeriockActor|TeriockItem & { system: RefreshSystem }} document
  */
 export default class SourceRefresher extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */

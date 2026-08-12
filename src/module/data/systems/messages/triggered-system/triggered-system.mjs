@@ -13,7 +13,7 @@ export default class TriggeredSystem extends InteractiveSystem {
   /**
    * Add activations onto triggered chat message data.
    * @param {Partial<Teriock.Data.ChatMessageData>} chatData
-   * @param {Teriock.Activations.Any[]} activations
+   * @param {Activation[]} activations
    */
   static addActivations(chatData, activations) {
     if (!chatData?.system || !activations?.length) { return; }

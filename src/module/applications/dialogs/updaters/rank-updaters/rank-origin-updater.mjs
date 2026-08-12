@@ -2,7 +2,7 @@ import KindUpdater from "../kind-updater.mjs";
 
 /**
  * Dialog for updating where a rank came from.
- * @property {TeriockRank} document
+ * @property {TeriockItem<"rank">} document
  */
 export default class RankOriginUpdater extends KindUpdater {
   /** @inheritDoc */

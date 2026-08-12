@@ -3,9 +3,9 @@ import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
- * {@link TeriockCondition} sheet.
+ * Condition sheet.
  * @mixes BaseDocumentSheet
- * @property {TeriockCondition} document
+ * @property {TeriockActiveEffect<"condition">} document
  */
 export default class ConditionSheet extends BaseDocumentSheetMixin(ActiveEffectConfig) {
   /** @inheritDoc */

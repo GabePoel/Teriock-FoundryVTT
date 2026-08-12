@@ -7,7 +7,7 @@ import { fromIdentifier } from "../../../../helpers/utils.mjs";
 
 /**
  * @typedef RefreshSourceNode
- * @property {AnyCommonDocument|null} document
+ * @property {TeriockActiveEffect|TeriockActor|TeriockItem|null} document
  * @property {string} label
  */
 
@@ -42,8 +42,8 @@ export default function RefreshSystemMixin(Base) {
 
     /**
      * Group documents by their document name.
-     * @param {AnyChildDocument[]} documents
-     * @returns {Record<ChildDocumentName, AnyChildDocument[]>}
+     * @param {(TeriockActiveEffect|TeriockItem)[]} documents
+     * @returns {{ ActiveEffect: TeriockActiveEffect[], Item: TeriockItem[] }}
      */
     #groupByDocumentName(documents) {
       const map = {};
@@ -75,9 +75,9 @@ export default function RefreshSystemMixin(Base) {
     /**
      * The children considered when computing refresh deltas. With `fullOverride`, embedded children are replaced
      * by the refresh update itself, so only same-collection subs are considered.
-     * @param {AnyCommonDocument} document
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
      * @param {boolean} fullOverride
-     * @returns {Promise<AnyChildDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
      */
     async #refreshChildren(document, fullOverride) {
       const children = await document.getChildArray();
@@ -127,7 +127,7 @@ export default function RefreshSystemMixin(Base) {
 
     /**
      * Format a refresh promise properly.
-     * @param {Promise<AnyCommonDocument|null>} document
+     * @param {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>} document
      * @param {string} label
      * @returns {Promise<RefreshSourceNode>}
      */
@@ -137,7 +137,7 @@ export default function RefreshSystemMixin(Base) {
 
     /**
      * Recursively gather the database operations needed to refresh this document from a source document.
-     * @param {AnyCommonDocument|null} document
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem|null} document
      * @param {Partial<Teriock.System.RefreshOptions>} [options]
      * @returns {Promise<DatabaseWriteOperation[]>}
      */
@@ -225,7 +225,7 @@ export default function RefreshSystemMixin(Base) {
     /**
      * Refresh this document (and optionally its children) from a source document. All the required database
      * operations are gathered recursively and submitted as one batched request.
-     * @param {AnyCommonDocument} document
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
      * @param {Partial<Teriock.System.RefreshOptions>} [options]
      * @returns {Promise<void>}
      */
@@ -236,7 +236,7 @@ export default function RefreshSystemMixin(Base) {
 
     /**
      * Get a refresh object from a document with the same type as this one.
-     * @param {AnyCommonDocument} document
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
      * @param {Partial<Teriock.System.RefreshOptions>} [options]
      * @returns {object}
      */

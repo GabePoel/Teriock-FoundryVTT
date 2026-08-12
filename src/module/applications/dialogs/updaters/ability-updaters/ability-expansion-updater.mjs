@@ -9,7 +9,7 @@ import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating an ability's expansion type and feat save attribute.
- * @property {TeriockAbility} document
+ * @property {TeriockActiveEffect<"ability">} document
  */
 export default class AbilityExpansionUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

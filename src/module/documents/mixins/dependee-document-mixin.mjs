@@ -5,6 +5,10 @@ import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/u
  */
 
 /**
+ * @typedef {"ActiveEffect"|"Item"} DependentDocumentName
+ */
+
+/**
  * Document mixin for documents that other documents can be dependent on. Dependents are documents that have some sort
  * of ownership relationship with this one without being subs or embedded children of it. The relationship is stored on
  * the dependent as `system._dep` and tracked by the {@link DependentsRegistry}.
@@ -28,7 +32,7 @@ export default function DependeeDocumentMixin(Base) {
 
     /**
      * Array of dependent documents.
-     * @return {AnyChildDocument[]}
+     * @return {(TeriockActiveEffect|TeriockItem)[]}
      */
     get dependents() {
       return game.teriock?.dependents.get(this);
@@ -55,10 +59,10 @@ export default function DependeeDocumentMixin(Base) {
     /**
      * Create multiple dependent Document instances in this document's actor using provided input data. All
      * created documents will be dependent on this one. The operation fails silently if this does not have an actor.
-     * @param {ChildDocumentName} embeddedName
+     * @param {DependentDocumentName} embeddedName
      * @param {object[]} data
      * @param {Partial<DatabaseCreateOperation>} operation
-     * @return {Promise<AnyChildDocument[]>}
+     * @return {Promise<(TeriockActiveEffect|TeriockItem)[]>}
      */
     async createDependentDocuments(embeddedName, data = [], operation = {}) {
       const op = this.getCreateDependentDocumentsOperation(embeddedName, data, operation);
@@ -70,7 +74,7 @@ export default function DependeeDocumentMixin(Base) {
     /**
      * Get the operation to create dependent Documents in this document's actor. Returns null if this does not have
      * an actor, so that the operation fails silently.
-     * @param {ChildDocumentName} embeddedName
+     * @param {DependentDocumentName} embeddedName
      * @param {object[]} data
      * @param {Partial<DatabaseCreateOperation>} operation
      * @returns {Partial<DatabaseCreateOperation>|null}
@@ -92,8 +96,8 @@ export default function DependeeDocumentMixin(Base) {
     /**
      * Get the operation to delete dependent Documents from this document's actor. Returns null if this does not have
      * an actor, so that the operation fails silently.
-     * @param {ChildDocumentName} embeddedName
-     * @param {ID<AnyChildDocument>[]} ids
+     * @param {DependentDocumentName} embeddedName
+     * @param {ID<TeriockActiveEffect|TeriockItem>[]} ids
      * @param {Partial<DatabaseDeleteOperation & Teriock.System._Operation>} operation
      * @returns {Partial<DatabaseDeleteOperation & Teriock.System._Operation>|null}
      */
@@ -112,7 +116,7 @@ export default function DependeeDocumentMixin(Base) {
     /**
      * Get the operation to update dependent Documents in this document's actor. Returns null if this does not have
      * an actor, so that the operation fails silently.
-     * @param {ChildDocumentName} embeddedName
+     * @param {DependentDocumentName} embeddedName
      * @param {object[]} updates
      * @param {Partial<DatabaseUpdateOperation & Teriock.System._Operation>} operation
      * @returns {Partial<DatabaseUpdateOperation & Teriock.System._Operation>|null}

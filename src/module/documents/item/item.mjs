@@ -1,5 +1,4 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import TeriockActiveEffect from "../active-effect/active-effect.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -62,7 +61,7 @@ export default class TeriockItem
 
   /**
    * @inheritDoc
-   * @returns {AnyActiveEffect[]}
+   * @returns {TeriockActiveEffect[]}
    */
   get validEffects() {
     return this.effects.contents;
@@ -82,7 +81,7 @@ export default class TeriockItem
   /**
    * @inheritDoc
    * @yields {TeriockActiveEffect}
-   * @returns {Generator<AnyActiveEffect, void, void>}
+   * @returns {Generator<TeriockActiveEffect, void, void>}
    */
   *allApplicableEffects() {
     for (const effect of this.effects) { yield effect; }
@@ -93,7 +92,9 @@ export default class TeriockItem
    * @param phase
    */
   applyActiveEffects(phase) {
-    if (!(phase in TeriockActiveEffect.CHANGE_PHASES) || this._completedActiveEffectPhases.has(phase)) { return; }
+    if (!(phase in ActiveEffect.implementation.CHANGE_PHASES) || this._completedActiveEffectPhases.has(phase)) {
+      return;
+    }
     this._completedActiveEffectPhases.add(phase);
     /** @type {ActiveEffectChangeData[]} */
     const changes = [];
@@ -110,7 +111,7 @@ export default class TeriockItem
     const overrides = {};
     const replacementData = this.getRollData();
     for (const change of changes) {
-      const result = TeriockActiveEffect.applyChange(this, change, { replacementData });
+      const result = ActiveEffect.implementation.applyChange(this, change, { replacementData });
       if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
     }
     foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));

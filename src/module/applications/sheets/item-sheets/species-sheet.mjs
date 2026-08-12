@@ -1,8 +1,8 @@
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
- * Sheet for a {@link TeriockSpecies}.
- * @property {TeriockSpecies} document
+ * Species sheet.
+ * @property {TeriockItem<"species">} document
  */
 export default class SpeciesSheet extends ChildSheet {
   /** @type {string[]} */

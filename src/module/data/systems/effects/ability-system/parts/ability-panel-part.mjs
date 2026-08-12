@@ -11,7 +11,7 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 export default function AbilityPanelPart(Base) {
   /**
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityPanelPart extends Base {
     /** @inheritDoc */

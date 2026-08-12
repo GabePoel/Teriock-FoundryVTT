@@ -3,13 +3,17 @@ import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
 const { Document } = foundry.abstract;
 
 /**
+ * @typedef {TeriockActiveEffect} DependeeDocument
+ * @typedef {TeriockActiveEffect|TeriockItem} DependentDocument
+ * @typedef {ID<DependeeDocument>|UUID<DependeeDocument>} DepKey
+ * @typedef {DependentDocument} DepValue
+ * @typedef {DependeeDocument|UUID<DependeeDocument>} DepLookup
+ */
+
+/**
  * Registry of documents that are dependent on other documents but don't have an elder/child relationship. Based on
  * the implementation in D&D 5E with some Teriock-specific modifications.
- * @implements {Teriock.Registries.MultiRegistry<
- *   ID<AnyChildDocument>|UUID<AnyChildDocument>,
- *   AnyChildDocument,
- *   AnyChildDocument|UUID<AnyChildDocument>
- * >}
+ * @implements {Teriock.Registries.MultiRegistry<DepKey, DepValue, DepLookup>}
  */
 export default class DependentsRegistry extends BaseRegistryLifecycle {
   /**
@@ -17,15 +21,15 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * relationship. The map is keyed by the UUID of the document, which has dependents and contains a set of UUIDs for
    * that document's dependents. All UUIDs are expected to be world UUIDs or UUIDs of documents with the same
    * ancestor document as the one they are dependent on.
-   * @type {Map<ID<AnyChildDocument>|UUID<AnyChildDocument>, Set<UUID<AnyChildDocument>>>}
+   * @type {Map<UUID<DependeeDocument>, Set<UUID<DependentDocument>>>}
    */
   #dependents = new Map();
 
   /**
    * Safely fetch a document given its UUID and a reference document.
-   * @param {AnyChildDocument} ref
-   * @param {UUID<AnyChildDocument>} uuid
-   * @return {AnyChildDocument|null}
+   * @param {DependentDocument} ref
+   * @param {UUID<DependentDocument>} uuid
+   * @return {DependentDocument|null}
    */
   fetchFromUuid(ref, uuid) {
     // Special handling for documents that share a parent with the reference document. We only need two levels for
@@ -52,13 +56,14 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
 
   /**
    * Fetch documents dependent on some other document.
-   * @param {AnyChildDocument|UUID<AnyChildDocument>} doc - Document or UUID for which to get dependent documents.
-   * @returns {AnyChildDocument[]}
+   * @param {DepLookup} docOrUuid - Document or UUID for which to get dependent documents.
+   * @returns {DepValue[]}
    */
-  get(doc) {
+  get(docOrUuid) {
+    let doc = docOrUuid;
     if (!(doc instanceof Document)) {
       if (!this.initialized) { return []; }
-      doc = foundry.utils.fromUuidSync(doc);
+      doc = foundry.utils.fromUuidSync(docOrUuid);
     }
     const uuids = this.#dependents.get(doc?.uuid);
     if (!uuids) { return []; }
@@ -78,23 +83,24 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    *
    * A plain ID only resolves if the dependee is an effect directly on the dependent's parent or actor, or
    * an item on the dependent's actor. Dependees embedded anywhere else must be referenced by full UUID.
-   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
-   * @param {AnyChildDocument} dependent - Document to track as a dependent.
-   * @returns {UUID<AnyChildDocument>}
+   * @param {DepKey} idOrUuid - ID or UUID of a document.
+   * @param {DependentDocument} dependent - Document to track as a dependent.
+   * @returns {UUID<DependeeDocument>|undefined}
    */
   resolveDependentID(idOrUuid, dependent) {
     if (idOrUuid.length > 16) { return foundry.utils.parseUuid(idOrUuid, { relative: dependent })?.uuid; }
     if (dependent.parent) {
-      return (dependent.parent.effects.get(idOrUuid)
-        || dependent.actor?.effects.get(idOrUuid)
-        || dependent.actor?.items.get(idOrUuid))?.uuid;
+      return (
+        dependent.parent.effects.get(idOrUuid) || dependent.actor?.effects.get(idOrUuid)
+        // || dependent.actor?.items.get(idOrUuid)
+      )?.uuid;
     }
   }
 
   /**
    * Add a dependent document to the registry.
-   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
-   * @param {AnyChildDocument} dependent - Document to track as a dependent.
+   * @param {DepKey} idOrUuid - ID or UUID of a document.
+   * @param {DepValue} dependent - Document to track as a dependent.
    */
   track(idOrUuid, dependent) {
     const uuid = this.resolveDependentID(idOrUuid, dependent);
@@ -105,8 +111,8 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
 
   /**
    * Remove a dependent document from the registry.
-   * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
-   * @param {AnyChildDocument} dependent - Dependent document to stop tracking.
+   * @param {DepKey} idOrUuid - ID or UUID of a document.
+   * @param {DepValue} dependent - Dependent document to stop tracking.
    */
   untrack(idOrUuid, dependent) {
     const uuid = this.resolveDependentID(idOrUuid, dependent);

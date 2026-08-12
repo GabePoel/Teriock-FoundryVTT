@@ -32,7 +32,7 @@ export default function UsableDataMixin(Base) {
     /**
      * Parse an event into execution data and options for this type.
      * @param {PointerEvent} event
-     * @param {AnyCommonDocument} [_source]
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} [_source]
      * @returns {Teriock.Execution.ParsedEvent}
      */
     static parseEvent(event, _source) {

@@ -25,7 +25,7 @@ export default function ActorStatsPart(Base) {
    * @implements {Teriock.Functionality.StatProvider}
    * @implements {Teriock.Models.ActorStatsPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorStatsPart extends Base {
     /** @inheritDoc */
@@ -136,7 +136,7 @@ export default function ActorStatsPart(Base) {
     /**
      * Prepare a specific stat.
      * @param {Teriock.Keys.DieStat} stat
-     * @param {AnyItem[]} items
+     * @param {TeriockItem[]} items
      */
     _prepareStat(stat, items) {
       const statData = this[stat];

@@ -9,7 +9,7 @@ const { fields } = foundry.data;
 
 /**
  * Determine if a wielded document should be null.
- * @param {TeriockArmament} doc
+ * @param {TeriockItem<"body"|"equipment">} doc
  */
 function nullifyWielded(doc) {
   if (!["body", "equipment"].includes(doc.type) || !doc.active) { return true; }
@@ -30,7 +30,7 @@ export default function ActorCombatPart(Base) {
   /**
    * @implements {Teriock.Models.ActorCombatPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorCombatPart extends Base {
     /** @inheritDoc */

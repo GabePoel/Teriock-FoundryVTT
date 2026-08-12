@@ -1,5 +1,3 @@
-import { TeriockActor } from "../documents/_module.mjs";
-
 declare global {
   namespace Teriock.Command {
     export type CommandEntry = {
@@ -54,7 +52,7 @@ declare global {
       boost?: boolean;
       boosts?: number;
       crit?: boolean;
-      document?: AnyChildDocument;
+      document?: TeriockActiveEffect | TeriockItem;
       impact?: Teriock.Keys.Impact;
       reverse?: boolean;
       rollData?: object;
@@ -63,14 +61,14 @@ declare global {
     export type StatusOptions = UseOptions & { status?: Teriock.Keys.Condition };
 
     export type StandardDamageOptions = UseOptions & {
-      ammunition?: UUID<TeriockEquipment>;
-      armament?: UUID<TeriockArmament>;
+      ammunition?: UUID<TeriockItem<"equipment">>;
+      armament?: UUID<TeriockItem<"body" | "equipment">>;
       crit?: boolean;
       select?: boolean;
       twoHanded?: boolean;
     };
 
-    export type ResistOptions = ThresholdOptions & { type?: Teriock.Affinities.Type };
+    export type ResistOptions = ThresholdOptions & { type?: AffinityType };
 
     export type DocumentUseOptions = ThresholdOptions & Teriock.Execution.ExecutionOptions & {
       competence?: number;

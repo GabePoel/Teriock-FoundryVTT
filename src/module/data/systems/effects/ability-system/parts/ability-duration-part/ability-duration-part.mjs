@@ -16,7 +16,7 @@ export default function AbilityDurationPart(Base) {
   /**
    * @implements {Teriock.Models.AbilityDurationPartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityDurationPart extends Base {
     /** @inheritDoc */

@@ -1,7 +1,7 @@
 import { DocumentExecution } from "../abstract/_module.mjs";
 
 /**
- * @property {TeriockAttunement} source
+ * @property {TeriockActiveEffect<"attunement">} source
  */
 export default class AttunementExecution extends DocumentExecution {
   /** @type {boolean} */

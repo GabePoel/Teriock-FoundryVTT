@@ -1,28 +1,10 @@
 import { Item } from "@client/documents/_module.mjs";
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
-import { TeriockActiveEffect, TeriockItem } from "../_module.mjs";
-import {
-  ArmamentSheet,
-  EquipmentSheet,
-  MountSheet,
-  PowerSheet,
-  RankSheet,
-  SpeciesSheet,
-} from "../../applications/sheets/item-sheets/_module.mjs";
-import { ChildSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
-import {
-  ArchetypeSystem,
-  BaseItemSystem,
-  BodySystem,
-  EquipmentSystem,
-  MountSystem,
-  PowerSystem,
-  RankSystem,
-  SpeciesSystem,
-} from "../../data/systems/items/_module.mjs";
+import { TeriockItem as ItemClass } from "../_module.mjs";
+import { BaseItemSystem } from "../../data/systems/items/_module.mjs";
 
-type ItemDocument = Omit<Teriock.Documents.DocumentBase<TeriockItem, Item>, "documentName"> & {
+type ItemDocument = Omit<Teriock.Documents.DocumentBase<ItemClass, Item>, "documentName"> & {
   // @ts-expect-error Not a document
   effects: DocumentCollection<TeriockActiveEffect>;
 
@@ -31,50 +13,32 @@ type ItemDocument = Omit<Teriock.Documents.DocumentBase<TeriockItem, Item>, "doc
   get transferredEffects(): TeriockActiveEffect[];
 };
 
+interface ItemSubtype<T extends ItemType>
+  extends Teriock.Documents.Subtype<ItemDocument, T, ItemSheetMap[T], ItemSystemMap[T]>
+{}
+
 declare module "./item.mjs" {
   export default interface TeriockItem {
-    _id: ID<AnyItem>;
+    _id: ID<TeriockItem>;
     // @ts-expect-error Not a document
-    effects: DocumentCollection<AnyActiveEffect>;
+    effects: DocumentCollection<TeriockActiveEffect>;
     system: BaseItemSystem;
-    type: Teriock.Documents.ItemType;
+    type: ItemType;
 
-    get actor(): AnyActor | null;
+    get actor(): TeriockActor | null;
 
     get documentName(): "Item";
 
-    get id(): ID<AnyItem>;
+    get id(): ID<TeriockItem>;
 
-    get transferredEffects(): AnyActiveEffect[];
+    get transferredEffects(): TeriockActiveEffect[];
 
-    get uuid(): UUID<AnyItem>;
+    get uuid(): UUID<TeriockItem>;
   }
 }
 
 declare global {
-  export interface TeriockArchetype
-    extends Teriock.Documents.Subtype<ItemDocument, "archetype", ChildSheet, ArchetypeSystem>
-  {}
-  export interface TeriockBody extends Teriock.Documents.Subtype<ItemDocument, "body", ArmamentSheet, BodySystem> {}
-  export interface TeriockEquipment
-    extends Teriock.Documents.Subtype<ItemDocument, "equipment", EquipmentSheet, EquipmentSystem>
-  {}
-  export interface TeriockMount extends Teriock.Documents.Subtype<ItemDocument, "mount", MountSheet, MountSystem> {}
-  export interface TeriockPower extends Teriock.Documents.Subtype<ItemDocument, "power", PowerSheet, PowerSystem> {}
-  export interface TeriockRank extends Teriock.Documents.Subtype<ItemDocument, "rank", RankSheet, RankSystem> {}
-  export interface TeriockSpecies
-    extends Teriock.Documents.Subtype<ItemDocument, "species", SpeciesSheet, SpeciesSystem>
-  {}
-
-  export interface ItemTypeMap {
-    archetype: TeriockArchetype;
-    body: TeriockBody;
-    equipment: TeriockEquipment;
-    mount: TeriockMount;
-    power: TeriockPower;
-    rank: TeriockRank;
-    species: TeriockSpecies;
-  }
+  export type TeriockItem<T extends ItemType = ItemType> = T extends unknown ? ItemSubtype<T> : never;
 }
 
 export {};

@@ -6,7 +6,7 @@ import type {
 
 import type queries from "../helpers/queries/_module.mjs";
 
-import { TeriockActor, TeriockUser } from "../documents/_module.mjs";
+import { TeriockUser } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Queries {
@@ -42,9 +42,13 @@ declare global {
       operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
 
-    export type FireTriggerData = { options: object, trigger: Teriock.System.Trigger, uuid: UUID<AnyCommonDocument> };
+    export type FireTriggerData = {
+      options: object;
+      trigger: Teriock.System.Trigger;
+      uuid: UUID<TeriockActiveEffect | TeriockActor | TeriockItem>;
+    };
 
-    export type IdentifyItemData = { uuid: UUID<TeriockEquipment> };
+    export type IdentifyItemData = { uuid: UUID<TeriockItem<"equipment">> };
 
     export type TurnChangeData = { actorUuids: UUID<TeriockActor>[] };
 

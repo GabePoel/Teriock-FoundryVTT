@@ -10,7 +10,7 @@ import { getName } from "../../../../../helpers/utils.mjs";
 export default function EquipmentPanelPart(Base) {
   /**
    * @mixin
-   * @property {TeriockEquipment} parent
+   * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentPanelPart extends Base {
     /** @inheritDoc */

@@ -9,7 +9,7 @@ import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating a rank's archetype and class.
- * @property {TeriockRank} document
+ * @property {TeriockItem<"rank">} document
  */
 export default class RankClassUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

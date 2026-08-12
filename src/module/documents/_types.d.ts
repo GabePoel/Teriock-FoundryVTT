@@ -2,20 +2,16 @@ import { TypeCollection } from "./collections/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
-    export type ActorType = TypeMapKey<ActorTypeMap>;
-    export type ItemType = TypeMapKey<ItemTypeMap>;
-    export type ActiveEffectType = TypeMapKey<ActiveEffectTypeMap>;
-    export type CardType = TypeMapKey<CardTypeMap>;
-    export type ChildType = Teriock.Documents.ActiveEffectType | Teriock.Documents.ItemType;
-    export type CommonType = "base" | Teriock.Documents.ActorType | Teriock.Documents.ChildType;
+    export type ChildType = ActiveEffectType | ItemType;
+    export type CommonType = ActorType | Teriock.Documents.ChildType;
 
     export type DocumentBase<Class, Parent extends object = object> = Class & Parent;
 
     export type PseudoCollections = {
-      Activation?: TypeCollection<ID<AnyActivation>, AnyActivation>;
-      Affinity?: TypeCollection<ID<AnyAffinity>, AnyAffinity>;
-      Automation?: TypeCollection<ID<AnyAutomation>, AnyAutomation>;
-      Expiration?: TypeCollection<ID<AnyExpiration>, AnyExpiration>;
+      Activation?: TypeCollection<ID<Activation>, Activation>;
+      Affinity?: TypeCollection<ID<Affinity>, Affinity>;
+      Automation?: TypeCollection<ID<Automation>, Automation>;
+      Expiration?: TypeCollection<ID<Expiration>, Expiration>;
     };
 
     /**
@@ -25,9 +21,9 @@ declare global {
       /** All sups ancestral to this document or their indexes. */
       allSups?: TypeCollection<ID<TeriockDocument>, TeriockDocument>;
       /** All children of this document or their indexes. */
-      childArray?: AnyChildDocument[];
+      childArray?: (TeriockActiveEffect | TeriockItem)[];
       /** All children of this document or their indexes, keyed by id. */
-      children?: TypeCollection<ID<AnyChildDocument>, AnyChildDocument>;
+      children?: TypeCollection<ID<TeriockActiveEffect | TeriockItem>, TeriockActiveEffect | TeriockItem>;
       /** Previously-tracked dependency id, retained so it can be untracked when it changes. */
       dep?: string;
       /** Previously-tracked typed identifier, retained so it can be untracked when it changes. */
@@ -37,17 +33,17 @@ declare global {
       /** Whether this document is a status effect. */
       isStatus?: boolean;
       /** All modifiable children of this document, visible or otherwise. */
-      modifiableChildren?: AnyActiveEffect[];
+      modifiableChildren?: TeriockActiveEffect[];
       /** The subs of this document or their indexes. */
       subs?: TypeCollection<ID<TeriockDocument>, TeriockDocument>;
       /** Previously-tracked sup id, retained so a moved sub can reset its old sup. */
-      supId?: ID<AnyCommonDocument> | null;
+      supId?: ID<TeriockActiveEffect | TeriockActor | TeriockItem> | null;
       /** All valid active effects that apply to this document. */
-      validEffects?: AnyActiveEffect[];
+      validEffects?: TeriockActiveEffect[];
       /** All visible children of this document or their indexes. */
-      visibleChildren?: AnyChildDocument[];
+      visibleChildren?: (TeriockActiveEffect | TeriockItem)[];
       /** All visible children of this document or their indexes, keyed by type. */
-      visibleChildrenByType?: Record<Teriock.Documents.ChildType, AnyChildDocument[]>;
+      visibleChildrenByType?: Record<Teriock.Documents.ChildType, (TeriockActiveEffect | TeriockItem)[]>;
     };
 
     export type Subtype<Base, Type extends string, Sheet, System> =
@@ -65,8 +61,8 @@ declare global {
 
     export type ModelMetadata = {
       armament: boolean;
-      childEffectTypes: Teriock.Documents.ActiveEffectType[];
-      childItemTypes: Teriock.Documents.ItemType[];
+      childEffectTypes: ActiveEffectType[];
+      childItemTypes: ItemType[];
       consumable: boolean;
       hierarchy: boolean;
       initialKind?: string;

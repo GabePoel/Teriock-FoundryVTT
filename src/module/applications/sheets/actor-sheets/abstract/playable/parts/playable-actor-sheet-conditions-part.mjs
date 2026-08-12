@@ -9,6 +9,7 @@ import { TeriockTextEditor } from "../../../../../ux/_module.mjs";
 export default function PlayableActorSheetConditionsPart(Base) {
   /**
    * @mixin
+   * @property {TeriockActor<"character"|"creature">} document
    */
   class PlayableActorSheetConditionsPart extends Base {
     /**
@@ -30,7 +31,6 @@ export default function PlayableActorSheetConditionsPart(Base) {
         img: TERIOCK.statuses.conditions[condition].img,
         name: TERIOCK.statuses.conditions[condition].name,
       };
-      /** @type {TeriockTokenDocument[]} */
       const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers ?? []).map(uuid =>
         fromUuidSync(uuid)
       ).filter(t => t);
@@ -71,7 +71,6 @@ export default function PlayableActorSheetConditionsPart(Base) {
      * @returns {Promise<VirtualConditionModel[]>}
      */
     async _virtualConditions() {
-      /** @type {Record<Teriock.Keys.Condition, TeriockCondition>} */
       const effects = {};
       for (const c of this.actor.conditions) { effects[c.system.conditionKey] = c; }
       return Promise.all(
@@ -85,7 +84,6 @@ export default function PlayableActorSheetConditionsPart(Base) {
             locked: info.locked,
             providers: Array.from(info.reasons),
             sources: Array.from(info.sources),
-            // Only a forced condition renders from this; the rest use their own effect's tooltip.
             tooltip: info.locked ? await this.#conditionTooltip(condition) : "",
           }, { parent: this.document.system });
           model.effect = effects[condition];

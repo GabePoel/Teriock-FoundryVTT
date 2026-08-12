@@ -9,7 +9,7 @@ import { TeriockDragDrop } from "../../ux/_module.mjs";
 export default function InventoryManagementSheetMixin(Base) {
   /**
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class InventoryManagementSheet extends Base {
     /** @inheritDoc */

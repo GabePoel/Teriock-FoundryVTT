@@ -15,7 +15,7 @@ import {
   TeriockRollTableDirectory,
 } from "../applications/sidebar/tabs/_module.mjs";
 import { TeriockHotbar, TeriockNotifications } from "../applications/ui/_module.mjs";
-import { TeriockActor, TeriockUser } from "../documents/_module.mjs";
+import { TeriockUser } from "../documents/_module.mjs";
 import {
   TeriockActors,
   TeriockChatMessages,

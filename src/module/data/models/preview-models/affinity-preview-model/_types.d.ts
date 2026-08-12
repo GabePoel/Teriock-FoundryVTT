@@ -4,7 +4,7 @@ declare module "./affinity-preview-model.mjs" {
     filters: {
       category: Teriock.Keys.AffinityCategory | null;
       protection: boolean | null;
-      type: Teriock.Affinities.Type | null;
+      type: AffinityType | null;
       weakness: boolean | null;
     };
   }

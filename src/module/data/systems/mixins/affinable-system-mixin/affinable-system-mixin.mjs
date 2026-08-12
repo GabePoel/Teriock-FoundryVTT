@@ -14,7 +14,7 @@ export default function AffinableSystemMixin(Base) {
   class AffinableSystem extends Base {
     /**
      * Array of the types of affinities that this system can have.
-     * @returns {(typeof AnyAffinity)[]}
+     * @returns {(typeof Affinity)[]}
      */
     static get _affinityTypes() {
       return [];
@@ -22,7 +22,7 @@ export default function AffinableSystemMixin(Base) {
 
     /**
      * The types of affinities that this system can have.
-     * @returns {Record<string, (typeof AnyAffinity)>}
+     * @returns {Record<string, (typeof Affinity)>}
      */
     static get affinityTypes() {
       return Object.fromEntries(this._affinityTypes.map(a => [a.TYPE, a]));
@@ -42,7 +42,7 @@ export default function AffinableSystemMixin(Base) {
 
     /**
      * Active affinities.
-     * @returns {AnyAffinity[]}
+     * @returns {Affinity[]}
      */
     get activeAffinities() {
       return this.affinities.contents.filter(a => a.active && a.valid);

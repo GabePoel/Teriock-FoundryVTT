@@ -7,7 +7,7 @@ import * as previews from "../../../../../../data/models/preview-models/_module.
  * @import { ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  */
 
-/** @type {{ label: string, types: Teriock.Affinities.Type[] }[]} */
+/** @type {{ label: string, types: AffinityType[] }[]} */
 const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
 
 /**

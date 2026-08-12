@@ -11,7 +11,7 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 export default function SpeciesPanelPart(Base) {
   /**
    * @mixin
-   * @property {TeriockSpecies} parent
+   * @property {TeriockItem<"species">} parent
    */
   class SpeciesPanelPart extends Base {
     /** @inheritDoc */

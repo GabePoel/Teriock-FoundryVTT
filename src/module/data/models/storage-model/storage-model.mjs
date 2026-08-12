@@ -75,7 +75,7 @@ export default class StorageModel extends BaseDataModel {
 
   /**
    * Equipment stored in this storage.
-   * @returns {TeriockEquipment[]}
+   * @returns {TeriockItem<"equipment">[]}
    */
   get storedEquipment() {
     if (!this.enabled) { return []; }

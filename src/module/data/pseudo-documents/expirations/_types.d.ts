@@ -7,11 +7,8 @@ declare global {
     trigger: TriggerExpiration;
   }
 
-  namespace Teriock.Expirations {
-    export type TypeMap = ExpirationTypeMap;
-    export type Type = TypeMapKey<ExpirationTypeMap>;
-    export type Any = AnyExpiration;
-  }
+  export type ExpirationType = TypeMapKey<ExpirationTypeMap>;
+  export type Expiration<T extends ExpirationType = ExpirationType> = ExpirationTypeMap[T];
 }
 
 export {};

@@ -17,7 +17,7 @@ export default class ImpactsExecution extends executionMixins.ImpactsExecutionMi
     this._document = options.document ?? null;
   }
 
-  /** @type {AnyChildDocument|null} */
+  /** @type {TeriockActiveEffect|TeriockItem|null} */
   _document;
 
   /** @inheritDoc */

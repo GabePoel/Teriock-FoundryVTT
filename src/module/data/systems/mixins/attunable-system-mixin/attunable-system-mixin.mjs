@@ -115,7 +115,7 @@ export default function AttunableSystemMixin(Base) {
 
     /**
      * Gets the current attunement data for this item.
-     * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
+     * @returns {TeriockActiveEffect<"attunement">|null} The attunement data or null if not attuned.
      */
     get attunement() {
       return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
@@ -143,7 +143,7 @@ export default function AttunableSystemMixin(Base) {
      * Relevant wiki pages:
      * - [Attune](https://wiki.teriock.com/index.php/Ability:Attune)
      *
-     * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
+     * @returns {Promise<TeriockActiveEffect<"attunement"> | null>} Promise that resolves to the attunement effect or null.
      */
     async attune() {
       await this.parent.hookCall("attune", { scope: { attunable: this.parent } });

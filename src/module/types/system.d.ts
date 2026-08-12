@@ -63,18 +63,18 @@ declare global {
       | TimeTrigger;
 
     export type TriggerScope = {
-      ability?: TeriockAbility;
-      actor?: AnyActor;
+      ability?: TeriockActiveEffect<"ability">;
+      actor?: TeriockActor;
       amount?: number;
-      armament?: TeriockArmament;
+      armament?: TeriockItem<"body" | "equipment">;
       attribute?: Teriock.Keys.Attribute;
       automation?: BaseAutomation;
       awaitFire?: boolean;
       chatDataBySource?: Record<string, Partial<Teriock.Data.ChatMessageData>>;
-      effect?: AnyActiveEffect;
-      equipment?: TeriockEquipment;
+      effect?: TeriockActiveEffect;
+      equipment?: TeriockItem<"equipment">;
       execution?: AbilityExecution | ArmamentExecution | BaseExecution;
-      item?: AnyItem;
+      item?: TeriockItem;
       rollData?: object;
       tradecraft?: Teriock.Keys.Tradecraft;
       trigger?: string;
@@ -131,7 +131,7 @@ declare global {
       /** Whether to only fetch from the relative document's children. */
       relativeOnly?: boolean;
       /** An optional document to compare against. */
-      relativeTo?: AnyCommonDocument;
+      relativeTo?: TeriockActiveEffect | TeriockActor | TeriockItem;
     };
 
     /**

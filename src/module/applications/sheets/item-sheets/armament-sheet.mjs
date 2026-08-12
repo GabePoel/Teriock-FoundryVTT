@@ -8,8 +8,8 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
  */
 
 /**
- * Sheet for a {@link TeriockArmament}
- * @property {TeriockArmament} document
+ * Armament sheet
+ * @property {TeriockItem<"body"|"equipment">} document
  */
 export default class ArmamentSheet extends ChildSheet {
   /**

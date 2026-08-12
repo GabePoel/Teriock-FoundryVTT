@@ -37,7 +37,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /**
    * Notify that this was applied to or reversed for an actor.
-   * @param {AnyActor} actor
+   * @param {TeriockActor} actor
    * @param {"applied"|"reversed"} key
    * @param {boolean} [morganti]
    */

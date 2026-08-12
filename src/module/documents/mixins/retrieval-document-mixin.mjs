@@ -13,7 +13,7 @@ export default function RetrievalDocumentMixin(Base) {
   class RetrievalDocument extends Base {
     /**
      * Child abilities.
-     * @returns {TeriockAbility[]}
+     * @returns {TeriockActiveEffect<"ability">[]}
      */
     get abilities() {
       return this.visibleChildrenByType.ability ?? [];
@@ -21,7 +21,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child archetypes.
-     * @returns {TeriockArchetype[]}
+     * @returns {TeriockItem<"archetype">[]}
      */
     get archetypes() {
       return this.visibleChildrenByType.archetype ?? [];
@@ -29,7 +29,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child attunements.
-     * @returns {TeriockAttunement[]}
+     * @returns {TeriockActiveEffect<"attunement">[]}
      */
     get attunements() {
       return this.visibleChildrenByType.attunement ?? [];
@@ -37,7 +37,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child body parts.
-     * @returns {TeriockBody[]}
+     * @returns {TeriockItem<"body">[]}
      */
     get bodyParts() {
       return this.visibleChildrenByType.body ?? [];
@@ -45,7 +45,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child conditions.
-     * @returns {TeriockCondition[]}
+     * @returns {TeriockActiveEffect<"condition">[]}
      */
     get conditions() {
       return this.visibleChildrenByType.condition ?? [];
@@ -53,7 +53,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child consequences.
-     * @returns {TeriockConsequence[]}
+     * @returns {TeriockActiveEffect<"consequence">[]}
      */
     get consequences() {
       return this.visibleChildrenByType.consequence ?? [];
@@ -61,7 +61,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child equipment.
-     * @returns {TeriockEquipment[]}
+     * @returns {TeriockItem<"equipment">[]}
      */
     get equipment() {
       return this.visibleChildrenByType.equipment ?? [];
@@ -69,7 +69,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child fluencies.
-     * @returns {TeriockFluency[]}
+     * @returns {TeriockActiveEffect<"fluency">[]}
      */
     get fluencies() {
       return this.visibleChildrenByType.fluency ?? [];
@@ -77,7 +77,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child imbuements.
-     * @returns {TeriockImbuement[]}
+     * @returns {TeriockActiveEffect<"imbuement">[]}
      */
     get imbuements() {
       return this.visibleChildrenByType.imbuement ?? [];
@@ -85,7 +85,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child mounds.
-     * @returns {TeriockMount[]}
+     * @returns {TeriockItem<"mount">[]}
      */
     get mounts() {
       return this.visibleChildrenByType.mount ?? [];
@@ -93,7 +93,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child powers.
-     * @returns {TeriockPower[]}
+     * @returns {TeriockItem<"power">[]}
      */
     get powers() {
       return this.visibleChildrenByType.power ?? [];
@@ -101,7 +101,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child properties.
-     * @returns {TeriockProperty[]}
+     * @returns {TeriockActiveEffect<"property">[]}
      */
     get properties() {
       return this.visibleChildrenByType.property ?? [];
@@ -109,7 +109,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child ranks.
-     * @returns {TeriockRank[]}
+     * @returns {TeriockItem<"rank">[]}
      */
     get ranks() {
       return this.visibleChildrenByType.rank ?? [];
@@ -117,7 +117,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child resources.
-     * @returns {TeriockResource[]}
+     * @returns {TeriockActiveEffect<"resource">[]}
      */
     get resources() {
       return this.visibleChildrenByType.resource ?? [];
@@ -125,7 +125,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Child species.
-     * @returns {TeriockSpecies[]}
+     * @returns {TeriockItem<"species">[]}
      */
     get species() {
       return this.visibleChildrenByType.species ?? [];
@@ -133,7 +133,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child abilities.
-     * @returns {Promise<TeriockAbility[]>}
+     * @returns {Promise<TeriockActiveEffect<"ability">[]>}
      */
     async getAbilities() {
       return resolveDocuments(this.abilities);
@@ -141,7 +141,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child archetypes.
-     * @returns {Promise<TeriockArchetype[]>}
+     * @returns {Promise<TeriockItem<"archetype">[]>}
      */
     async getArchetypes() {
       return resolveDocuments(this.archetypes);
@@ -149,7 +149,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child attunements.
-     * @returns {Promise<TeriockAttunement[]>}
+     * @returns {Promise<TeriockActiveEffect<"attunement">[]>}
      */
     async getAttunements() {
       return resolveDocuments(this.attunements);
@@ -157,7 +157,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child body parts.
-     * @returns {Promise<TeriockBody[]>}
+     * @returns {Promise<TeriockItem<"body">[]>}
      */
     async getBodyParts() {
       return resolveDocuments(this.bodyParts);
@@ -165,7 +165,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child conditions.
-     * @returns {Promise<TeriockCondition[]>}
+     * @returns {Promise<TeriockActiveEffect<"condition">[]>}
      */
     async getConditions() {
       return resolveDocuments(this.conditions);
@@ -173,7 +173,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child consequences.
-     * @returns {Promise<TeriockConsequence[]>}
+     * @returns {Promise<TeriockActiveEffect<"consequence">[]>}
      */
     async getConsequences() {
       return resolveDocuments(this.consequences);
@@ -181,7 +181,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child equipment.
-     * @returns {Promise<TeriockEquipment[]>}
+     * @returns {Promise<TeriockItem<"equipment">[]>}
      */
     async getEquipment() {
       return resolveDocuments(this.equipment);
@@ -189,7 +189,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child fluencies.
-     * @returns {Promise<TeriockFluency[]>}
+     * @returns {Promise<TeriockActiveEffect<"fluency">[]>}
      */
     async getFluencies() {
       return resolveDocuments(this.fluencies);
@@ -197,7 +197,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child abilities.
-     * @returns {Promise<TeriockImbuement[]>}
+     * @returns {Promise<TeriockActiveEffect<"imbuement">[]>}
      */
     async getImbuements() {
       return resolveDocuments(this.imbuements);
@@ -205,7 +205,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child mounts.
-     * @returns {Promise<TeriockMount[]>}
+     * @returns {Promise<TeriockItem<"mount">[]>}
      */
     async getMounts() {
       return resolveDocuments(this.mounts);
@@ -213,7 +213,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child powers.
-     * @returns {Promise<TeriockPower[]>}
+     * @returns {Promise<TeriockItem<"power">[]>}
      */
     async getPowers() {
       return resolveDocuments(this.powers);
@@ -221,7 +221,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child properties.
-     * @returns {Promise<TeriockProperty[]>}
+     * @returns {Promise<TeriockActiveEffect<"property">[]>}
      */
     async getProperties() {
       return resolveDocuments(this.properties);
@@ -229,7 +229,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child ranks.
-     * @returns {Promise<TeriockRank[]>}
+     * @returns {Promise<TeriockItem<"rank">[]>}
      */
     async getRanks() {
       return resolveDocuments(this.ranks);
@@ -237,7 +237,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child resources.
-     * @returns {Promise<TeriockResource[]>}
+     * @returns {Promise<TeriockActiveEffect<"resource">[]>}
      */
     async getResources() {
       return resolveDocuments(this.resources);
@@ -245,7 +245,7 @@ export default function RetrievalDocumentMixin(Base) {
 
     /**
      * Resolved child species.
-     * @returns {Promise<TeriockSpecies[]>}
+     * @returns {Promise<TeriockItem<"species">[]>}
      */
     async getSpecies() {
       return resolveDocuments(this.species);

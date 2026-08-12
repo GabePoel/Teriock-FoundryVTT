@@ -1,4 +1,3 @@
-import { TeriockActor } from "../../../../../../documents/_module.mjs";
 import { initialNumber, initialString } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -20,7 +19,7 @@ export default function ActorCapacitiesPart(Base) {
   /**
    * @implements {Teriock.Models.ActorCapacitiesPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorCapacitiesPart extends Base {
     /** @inheritDoc */
@@ -108,11 +107,11 @@ export default function ActorCapacitiesPart(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      const sizeDefinition = TeriockActor.getSizeConfig(this.size.value);
+      const sizeDefinition = this.parent.constructor.getSizeConfig(this.size.value);
       this.size.category = sizeDefinition.category;
       this.size.length = sizeDefinition.length;
       this.size.reach = sizeDefinition.reach;
-      this.weight.self ??= this.weight.self = TeriockActor.getDefaultWeight(this.size.value);
+      this.weight.self ??= this.weight.self = this.parent.constructor.getDefaultWeight(this.size.value);
       this.weight.self = this.weight.self.toNearest(TERIOCK.config.system.unitPrecision);
     }
 

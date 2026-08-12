@@ -7,12 +7,12 @@
 export default function AbilityAutomationsPart(Base) {
   /**
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityAutomationsPart extends Base {
     /**
      * The automations that are active right now.
-     * @returns {AnyAutomation[]}
+     * @returns {Automation[]}
      */
     get activeAutomations() {
       if (this.maneuver !== "passive") { return []; }

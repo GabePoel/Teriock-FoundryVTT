@@ -28,7 +28,7 @@ export default function SpeciesTransformationPart(Base) {
   /**
    * @implements {Teriock.Models.SpeciesTransformationPartData}
    * @mixin
-   * @property {TeriockSpecies} parent
+   * @property {TeriockItem<"species">} parent
    */
   class SpeciesTransformationPart extends Base {
     /** @inheritDoc */
@@ -96,15 +96,16 @@ export default function SpeciesTransformationPart(Base) {
      * @returns {boolean}
      */
     get isTransformation() {
-      return Boolean(this.transformationEffect) && this.transformationEffect.system.isTransformation;
+      return Boolean(this.transformationEffect);
     }
 
     /**
      * Transformation that provides this.
-     * @returns {TeriockLingering|null}
+     * @returns {TeriockActiveEffect<"condition"|"consequence">|null}
      */
     get transformationEffect() {
       if (!this.actor) { return null; }
+      if (!this.parent.dependee?.system.isTransformation) { return null; }
       return this.parent.dependee ?? null;
     }
 

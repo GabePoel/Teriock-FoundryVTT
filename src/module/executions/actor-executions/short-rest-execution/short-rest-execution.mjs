@@ -31,7 +31,7 @@ export default class ShortRestExecution extends DocumentExecution {
     ];
   }
 
-  /** @type {TeriockAbility[]} */
+  /** @type {TeriockActiveEffect<"ability">[]} */
   #abilities = [];
 
   /** @inheritDoc */

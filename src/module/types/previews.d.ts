@@ -14,7 +14,7 @@ declare global {
     };
 
     /** A single arranged preview within a {@link RenderedPreviewGroup}. */
-    export type RenderedPreviewEntry<T = AnyCommonDocument> = {
+    export type RenderedPreviewEntry<T = TeriockActiveEffect | TeriockActor | TeriockItem> = {
       /** The document to render. */
       doc: T;
       /** Whether the card is hidden by the current filter/search. */

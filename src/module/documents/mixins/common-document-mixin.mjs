@@ -1,4 +1,3 @@
-import { TeriockActor } from "../_module.mjs";
 import * as dataMixins from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
@@ -9,6 +8,10 @@ import * as documentMixins from "./_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
+ * @typedef {"ActiveEffect" | "Item"} ChildDocumentName
  */
 
 /**
@@ -50,8 +53,8 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Validate whether a document supports a certain child type.
-     * @param {AnyCommonDocument} parent
-     * @param {AnyChildDocument} child
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} parent
+     * @param {TeriockActiveEffect|TeriockItem} child
      * @param {Partial<DatabaseWriteOperation & Teriock.System._Operation>} [operation]
      * @returns {boolean}
      */
@@ -83,16 +86,15 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * The actor associated with this document if there is one.
+     * @returns {TeriockActor}
      */
     get actor() {
-      if (this instanceof TeriockActor) { return this; }
-      else if (this.parent) { return this.parent.actor; }
-      return null;
+      return this.parent?.actor ?? null;
     }
 
     /**
      * Lazily recomputed array containing all children or their indexes.
-     * @returns {AnyChildDocument[]}
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
      */
     get childArray() {
       if (!this._cache.childArray) { this._cache.childArray = this._makeChildArray(); }
@@ -123,7 +125,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Lazily recomputed array containing all visible children.
-     * @returns {AnyChildDocument[]}
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
      */
     get visibleChildren() {
       if (!this._cache.visibleChildren) { this._cache.visibleChildren = this._makeVisibleChildrenArray(); }
@@ -132,7 +134,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Lazily recomputed map of all visible children by their types.
-     * @returns {Record<Teriock.Documents.ChildType, AnyChildDocument[]>}
+     * @returns {Record<Teriock.Documents.ChildType, (TeriockActiveEffect|TeriockItem)[]>}
      */
     get visibleChildrenByType() {
       if (!this._cache.visibleChildrenByType) {
@@ -156,7 +158,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Make an array of all children or their indexes.
-     * @returns {AnyChildDocument[]}
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
      */
     _makeChildArray() {
       return [
@@ -167,7 +169,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Make an array of visible children.
-     * @returns {AnyChildDocument[]}
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
      */
     _makeVisibleChildrenArray() {
       return this.childArray.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
@@ -197,7 +199,7 @@ export default function CommonDocumentMixin(Base) {
      * @param {ChildDocumentName} embeddedName
      * @param {object[]} data
      * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async createChildDocuments(embeddedName, data = [], operation = {}) {
       const op = this.getCreateChildDocumentsOperation(embeddedName, data, operation);
@@ -209,9 +211,9 @@ export default function CommonDocumentMixin(Base) {
     /**
      * Delete multiple child Document instances descendant from a Document using provided string ids.
      * @param {ChildDocumentName} embeddedName
-     * @param {ID<AnyCommonDocument>[]} ids
+     * @param {ID<TeriockActiveEffect|TeriockActor|TeriockItem>[]} ids
      * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
       const op = this.getDeleteChildDocumentsOperation(embeddedName, ids, operation);
@@ -238,7 +240,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Resolved array containing all children.
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async getChildArray() {
       return resolveDocuments(this.childArray);
@@ -267,7 +269,7 @@ export default function CommonDocumentMixin(Base) {
     /**
      * Get the operation to delete child Documents.
      * @param {ChildDocumentName} embeddedName
-     * @param {ID<AnyCommonDocument>[]} ids
+     * @param {ID<TeriockActiveEffect|TeriockActor|TeriockItem>[]} ids
      * @param {Partial<DatabaseDeleteOperation & Teriock.System._Operation>} operation
      * @returns {Partial<DatabaseDeleteOperation & Teriock.System._Operation>|null}
      */
@@ -277,7 +279,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Resolved children, either real or effective.
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async getEffectiveChildren() {
       return this.getVisibleChildren();
@@ -304,7 +306,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Resolved visible children.
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async getVisibleChildren() {
       return resolveDocuments(this.visibleChildren);
@@ -363,7 +365,7 @@ export default function CommonDocumentMixin(Base) {
      * @param {TypedIdentifier} identifier - An identifier existing in the world or a compendium.
      * @param {object} [options] - Additional options which modify how the child is created.
      * @param {boolean} [options.active] - Force the child to be active or inactive regardless of its current state.
-     * @returns {Promise<AnyChildDocument|boolean|undefined>} - A promise which resolves to one of the following
+     * @returns {Promise<TeriockActiveEffect|TeriockItem|boolean|undefined>} - A promise which resolves to one of the following
      * values:
      *  - ChildDocument if new child needs to be created
      *  - true if was already an existing child
@@ -388,7 +390,7 @@ export default function CommonDocumentMixin(Base) {
      * @param {ChildDocumentName} embeddedName
      * @param {object[]} updates
      * @param {DatabaseUpdateOperation} operation
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async updateChildDocuments(embeddedName, updates = [], operation = {}) {
       const op = this.getUpdateChildDocumentsOperation(embeddedName, updates, operation);

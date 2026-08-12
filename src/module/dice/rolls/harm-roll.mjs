@@ -4,7 +4,7 @@ import ImpactRoll from "./impact-roll.mjs";
 export default class HarmRoll extends ImpactRoll {
   /**
    * Cached array of harms to reduce async calls.
-   * @type {TeriockHarm[]}
+   * @type {TeriockJournalEntryPage<"damage" | "drain">[]}
    */
   _harms;
 
@@ -56,7 +56,7 @@ export default class HarmRoll extends ImpactRoll {
 
   /**
    * The harms that are invoked by this roll.
-   * @returns {Promise<TeriockHarm[]>}
+   * @returns {Promise<TeriockJournalEntryPage<"damage" | "drain">[]>}
    */
   async getHarmArray() {
     if (!["damage", "drain"].includes(this.impact)) { return []; }

@@ -5,7 +5,7 @@ declare module "./token-document.mjs" {
   export default interface TeriockTokenDocument {
     _id: ID<TeriockTokenDocument>;
 
-    get actor(): AnyActor | null;
+    get actor(): TeriockActor | null;
     get combat(): TeriockCombat | null;
     get documentName(): "TokenDocument";
     get id(): ID<TeriockTokenDocument>;

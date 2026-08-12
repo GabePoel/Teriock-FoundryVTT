@@ -13,7 +13,7 @@ const { fields } = foundry.data;
 export default function ActorImpactsPart(Base) {
   /**
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorImpactsPart extends Base {
     /**

@@ -17,7 +17,7 @@ export default function DragDropSheetMixin(Base) {
   /**
    * @mixes DragDropApplication
    * @mixin
-   * @property {AnyCommonDocument} document
+   * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class DragDropSheet extends DragDropApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
@@ -32,7 +32,7 @@ export default function DragDropSheetMixin(Base) {
 
     /**
      * Whether a drop should be performed by moving a sub.
-     * @param {AnyCommonDocument} droppedDocument
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @param {Teriock.Application.DropEffect} dropEffect
      * @returns {boolean}
      */
@@ -47,7 +47,7 @@ export default function DragDropSheetMixin(Base) {
 
     /**
      * Moves a sub.
-     * @param {AnyCommonDocument} droppedDocument
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @param {boolean} interactive
      * @returns {Promise<void>}
      */
@@ -65,8 +65,8 @@ export default function DragDropSheetMixin(Base) {
 
     /**
      * The sup a dropped document would be given by a sub move.
-     * @param {AnyCommonDocument} droppedDocument
-     * @returns {ID<AnyCommonDocument>|null}
+     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
+     * @returns {ID<TeriockActiveEffect|TeriockActor|TeriockItem>|null}
      */
     #subMoveTarget(droppedDocument) {
       return droppedDocument.documentName === this.document.documentName ? this.document.id : null;
@@ -105,7 +105,7 @@ export default function DragDropSheetMixin(Base) {
     /**
      * Handles dropping of potential children.
      * @param {DragEvent} event
-     * @param {Teriock.Application.DropData<AnyCommonDocument>} dropData
+     * @param {Teriock.Application.DropData<TeriockActiveEffect|TeriockActor|TeriockItem>} dropData
      * @returns {Promise<void>}
      */
     async _onDropChild(event, dropData) {

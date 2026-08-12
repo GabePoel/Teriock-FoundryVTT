@@ -219,7 +219,7 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /**
    * The document this is relative to.
-   * @returns {AnyCommonDocument|null}
+   * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
    */
   get relativeTo() {
     return this.parent;
@@ -356,8 +356,8 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /**
    * Filter an array of documents.
-   * @param {AnyChildDocument[]} documents
-   * @returns {Generator<AnyChildDocument, void, void>}
+   * @param {(TeriockActiveEffect|TeriockItem)[]} documents
+   * @returns {Generator<TeriockActiveEffect|TeriockItem, void, void>}
    */
   *filterDocuments(documents) {
     // Special handling for the duplicates filter since it has different

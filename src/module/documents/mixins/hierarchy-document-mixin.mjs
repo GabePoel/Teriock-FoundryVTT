@@ -72,7 +72,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {AnyCommonDocument[]} documents
+     * @param {(TeriockActiveEffect|TeriockActor|TeriockItem)[]} documents
      * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
      * @param {TeriockUser} user
      * @returns {Promise<boolean|void>}
@@ -115,7 +115,7 @@ export default function HierarchyDocumentMixin(Base) {
             const newId = keepId ? doc._id : foundry.utils.randomID();
             const newDoc = doc.clone({ _id: newId }, { keepId: true });
             toCreate.push(newDoc);
-            /** @type {Record<ID<AnyCommonDocument>, ID<AnyCommonDocument>>} */
+            /** @type {Record<ID<TeriockActiveEffect|TeriockActor|TeriockItem>, ID<TeriockActiveEffect|TeriockActor|TeriockItem>>} */
             const idMap = { [ref.id]: newDoc._id };
             const allRefSubs = await ref.getAllSubs();
             const clones = [];
@@ -144,7 +144,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {AnyCommonDocument[]} documents
+     * @param {(TeriockActiveEffect|TeriockActor|TeriockItem)[]} documents
      * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
      * @param {TeriockUser} user
      * @returns {Promise<boolean|void>}
@@ -160,7 +160,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {AnyCommonDocument[]} documents
+     * @param {(TeriockActiveEffect|TeriockActor|TeriockItem)[]} documents
      * @param {DatabaseUpdateOperation & Teriock.System._Operation} operation
      * @param {TeriockUser} user
      * @returns {Promise<boolean|void>}
@@ -201,7 +201,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @inheritDoc
      * @param {object|HierarchyDocument[]} data
      * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     static async createDocuments(data = [], operation = {}) {
       // Pre-clean documents so they always have their `_ref` UUID available.
@@ -309,7 +309,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * A document that this depends on.
-     * @return {AnyChildDocument|null}
+     * @return {TeriockActiveEffect|null}
      */
     get dependee() {
       if (this.system._dep) {
@@ -321,7 +321,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The document that most directly provides this one.
-     * @returns {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>}
+     * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
      */
     get elder() {
       return this.sup || this.parent;
@@ -357,7 +357,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The sup of this document or its index.
-     * @returns {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>|undefined}
+     * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>|undefined}
      */
     get sup() {
       if (this.system?._sup) { return this.siblingCollection?.get(this.system._sup); }
@@ -443,7 +443,7 @@ export default function HierarchyDocumentMixin(Base) {
      * Create multiple sub Document instances in a sup Document's collection using provided input data.
      * @param {object[]} [data]
      * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} [operation]
-     * @returns {Promise<AnyChildDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
      */
     async createSubDocuments(data = [], operation = {}) {
       const out = await foundry.documents.modifyBatch([this.getCreateSubDocumentsOperation(data, operation)]);
@@ -452,9 +452,9 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * Delete multiple sub Document instances in a sup Document's collection using provided string ids.
-     * @param {ID<AnyCommonDocument>[]} [ids]
+     * @param {ID<TeriockActiveEffect|TeriockActor|TeriockItem>[]} [ids]
      * @param {DatabaseDeleteOperation} [operation]
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async deleteSubDocuments(ids = [], operation = {}) {
       const out = await foundry.documents.modifyBatch([this.getDeleteSubDocumentsOperation(ids, operation)]);
@@ -513,7 +513,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * Get the operation to delete sub Documents.
-     * @param {ID<AnyCommonDocument>[]} ids
+     * @param {ID<TeriockActiveEffect|TeriockActor|TeriockItem>[]} ids
      * @param {Partial<DatabaseDeleteOperation & Teriock.System._Operation>} operation
      * @returns {Partial<DatabaseDeleteOperation & Teriock.System._Operation>}
      */
@@ -531,7 +531,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The document that provides this document.
-     * @returns {Promise<AnyCommonDocument|void>}
+     * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|void>}
      */
     async getElder() {
       return resolveDocument(this.elder);
@@ -547,7 +547,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The sup of this document.
-     * @returns {Promise<AnyCommonDocument|void>}
+     * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|void>}
      */
     async getSup() {
       return resolveDocument(this.sup);
@@ -630,7 +630,7 @@ export default function HierarchyDocumentMixin(Base) {
      * Update multiple sub Document instances in a sup Document's collection using provided differential data.
      * @param {object[]} [updates]
      * @param {DatabaseUpdateOperation} [operation]
-     * @returns {Promise<AnyCommonDocument[]>}
+     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     async updateSubDocuments(updates = [], operation = {}) {
       const out = await foundry.documents.modifyBatch([this.getUpdateSubDocumentsOperation(updates, operation)]);

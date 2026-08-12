@@ -10,7 +10,7 @@ const { fields } = foundry.data;
 /**
  * An affinity that some effect grants against a specific thing.
  * @mixes CritMechanic
- * @property {AnyActiveEffect} document
+ * @property {TeriockActiveEffect} document
  * @property {BaseEffectSystem} parent
  */
 export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocument) {

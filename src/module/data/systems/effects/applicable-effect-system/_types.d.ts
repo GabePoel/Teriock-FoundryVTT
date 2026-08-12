@@ -1,9 +1,7 @@
-import { TeriockActor } from "../../../../documents/_module.mjs";
-
 declare module "./applicable-effect-system.mjs" {
   export default interface ApplicableEffectSystem {
     /** <schema> UUID of the document this is sourced from */
-    _src: UUID<TeriockAbility> | null;
+    _src: UUID<TeriockActiveEffect<"ability">> | null;
     /** <schema> Blocks representing the source */
     blocks: Teriock.Panels.PanelBlock[];
     /** <schema> If this was the result of an effect that went critical */

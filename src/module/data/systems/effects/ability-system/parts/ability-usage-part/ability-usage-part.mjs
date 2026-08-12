@@ -25,7 +25,7 @@ export default function AbilityUsagePart(Base) {
   /**
    * @implements {Teriock.Models.AbilityUsagePartData}
    * @mixin
-   * @property {TeriockAbility} parent
+   * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityUsagePart extends Base {
     /** @inheritDoc */

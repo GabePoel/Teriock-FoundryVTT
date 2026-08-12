@@ -22,7 +22,7 @@ export default function ActorSensesPart(Base) {
   /**
    * @implements {Teriock.Models.ActorSensesPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorSensesPart extends Base {
     /** @inheritDoc */

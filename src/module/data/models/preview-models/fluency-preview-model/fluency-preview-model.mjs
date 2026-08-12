@@ -21,8 +21,8 @@ export default class FluencyPreviewModel extends BasePreviewModel {
 
   /**
    * @inheritDoc
-   * @param {TeriockFluency[]} documents
-   * @returns {Generator<TeriockFluency, void, void>}
+   * @param {TeriockActiveEffect<"fluency">[]} documents
+   * @returns {Generator<TeriockActiveEffect<"fluency">, void, void>}
    */
   *filterDocuments(documents) {
     for (const document of super.filterDocuments(documents)) {

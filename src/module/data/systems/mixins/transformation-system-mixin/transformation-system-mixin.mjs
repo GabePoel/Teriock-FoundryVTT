@@ -12,6 +12,13 @@ const { fields } = foundry.data;
  * @import { SpeciesTransformationPart } from "../../items/species-system/parts/species-transformation-part/species-transformation-part.mjs";
  */
 
+/**
+ * @typedef {object} FlagMap
+ * @property {ID<TeriockActiveEffect>[]} disabledEffects
+ * @property {ID<TeriockItem>[]} disabledItems
+ * @property {ID<TeriockItem>[]} disabledStatDiceItems
+ */
+
 const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
@@ -76,11 +83,7 @@ export default function TransformationSystemMixin(Base) {
     #batchedOperations = [];
 
     /**
-     * @returns {{
-     *  disabledEffects: ID<AnyActiveEffect>[],
-     *  disabledItems: ID<AnyItem>[],
-     *  disabledStatDiceItems: Record<Teriock.Keys.DieStat, ID<AnyItem>[]>
-     * }}
+     * @returns {FlagMap}
      */
     get #flagMap() {
       const hasItem = id => this.actor.items.has(id);
@@ -140,10 +143,10 @@ export default function TransformationSystemMixin(Base) {
       const uuids = this.transformation.uuids;
       const flags = this._buildTransformationFlags();
       this.parent.updateSource({ flags });
-      let species = /** @type {TeriockSpecies[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
+      let species = /** @type {TeriockItem<"species">[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
       species = species.filter(s => s);
       if (!species.length) { return; }
-      const itemData = /** @type {TeriockSpecies[]} */ species.map(s => s.toObject());
+      const itemData = /** @type {TeriockItem<"species">[]} */ species.map(s => s.toObject());
       itemData.forEach(s => {
         s._id = foundry.utils.randomID();
         s.system.transformationLevel = this.transformation.level;
@@ -168,7 +171,7 @@ export default function TransformationSystemMixin(Base) {
     /**
      * Batch a toggle update to a document embedded within the actor.
      * @param {DocumentCollection} collection
-     * @param {ID<AnyChildDocument>} id
+     * @param {ID<TeriockActiveEffect|TeriockItem>} id
      * @param {boolean} value
      */
     #addBatchToggle(collection, id, value) {
@@ -196,7 +199,7 @@ export default function TransformationSystemMixin(Base) {
     /**
      * Batch an update to a document embedded within the actor.
      * @param {DocumentCollection} collection
-     * @param {ID<AnyChildDocument>} id
+     * @param {ID<TeriockActiveEffect|TeriockItem>} id
      * @param {object} data
      */
     #addBatchUpdateDocument(collection, id, data) {
@@ -235,8 +238,8 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * Filter an array of documents to include only the ones that aren't disabled.
-     * @param {AnyChildDocument[]} docs
-     * @return {AnyChildDocument[]}
+     * @param {(TeriockActiveEffect|TeriockItem)[]} docs
+     * @return {(TeriockActiveEffect|TeriockItem)[]}
      */
     #enabledFilter(docs) {
       return docs.filter(d =>
@@ -294,8 +297,8 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * Map an array of documents to their ids.
-     * @param {AnyChildDocument[]} docs
-     * @return {ID<AnyChildDocument>[]}
+     * @param {(TeriockActiveEffect|TeriockItem)[]} docs
+     * @return {ID<TeriockActiveEffect|TeriockItem>[]}
      */
     #toIds(docs) {
       return docs.map(d => d.id);
@@ -320,7 +323,7 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * The primary species this transforms the actor into.
-     * @return {TeriockSpecies | null}
+     * @return {TeriockItem<"species"> | null}
      */
     get primarySpecies() {
       if (!this.isTransformation) { return null; }
@@ -501,7 +504,7 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * Set this as the primary transformation, optionally designating a primary species.
-     * @param {TeriockSpecies|null} [species] Species to set as this transformation's primary.
+     * @param {TeriockItem<"species">|null} [species] Species to set as this transformation's primary.
      * @returns {Promise<void>}
      */
     async setPrimaryTransformation(species = null) {

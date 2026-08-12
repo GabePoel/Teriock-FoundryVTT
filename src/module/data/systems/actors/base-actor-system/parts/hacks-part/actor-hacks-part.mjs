@@ -16,7 +16,7 @@ export default function ActorHacksPart(Base) {
   /**
    * @implements {Teriock.Models.ActorHacksPartData}
    * @mixin
-   * @property {AnyActor} parent
+   * @property {TeriockActor} parent
    */
   class ActorHacksPart extends Base {
     /** @inheritDoc */
@@ -67,7 +67,7 @@ export default function ActorHacksPart(Base) {
      */
     async takeUnhack(part, amount = 1) {
       await this.parent.hookCall("takeUnhack", { scope: { amount, part } });
-      /** @type {TeriockHack[]} */
+      /** @type {TeriockActiveEffect<"hack">[]} */
       const hacks = this.parent.effects.contents.filter(c => c.type === "hack" && c.system.part === part);
       const removable = hacks.filter(h => !h.system.permanent).sort((a, b) =>
         b.system.escalation - a.system.escalation

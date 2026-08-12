@@ -60,7 +60,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
    * @returns {boolean}
    */
   get isReference() {
-    const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
+    const sups = /** @type {TeriockActiveEffect<"ability">[]} */ this.parent.allSups.contents;
     for (const sup of sups) { if (sup.type === "ability" && sup.system?.maneuver !== "passive") { return true; } }
     return super.isReference;
   }

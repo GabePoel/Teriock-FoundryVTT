@@ -3,7 +3,12 @@ declare module "./add-documents-automation.mjs" {
     attachDocuments: boolean;
     separate: boolean;
     target: Teriock.Keys.ApplicationTarget;
-    children: { data: object, enabled: boolean, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[] };
+    children: {
+      data: object;
+      enabled: boolean;
+      overrideData: boolean;
+      uuids: Set<UUID<TeriockActiveEffect | TeriockItem>>[];
+    };
   }
 }
 

@@ -4,7 +4,7 @@ declare global {
   namespace Teriock.Models {
     export type ExpirableSystemData = {
       /** <schema> Expirations */
-      expirations: TypeCollection<ID<AnyExpiration>, AnyExpiration>;
+      expirations: TypeCollection<ID<Expiration>, Expiration>;
     };
   }
 }

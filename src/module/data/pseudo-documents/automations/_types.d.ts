@@ -75,11 +75,8 @@ declare global {
     useDocuments: UseDocumentsAutomation;
   }
 
-  namespace Teriock.Automations {
-    export type TypeMap = AutomationTypeMap;
-    export type Type = TypeMapKey<AutomationTypeMap>;
-    export type Any = AnyAutomation;
-  }
+  export type AutomationType = TypeMapKey<AutomationTypeMap>;
+  export type Automation<T extends AutomationType = AutomationType> = AutomationTypeMap[T];
 }
 
 export {};

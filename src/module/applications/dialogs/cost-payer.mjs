@@ -121,7 +121,7 @@ export default class CostPayer extends ResolvableDialog {
 
   /**
    * The ability this is paying costs for.
-   * @returns {TeriockAbility}
+   * @returns {TeriockActiveEffect<"ability">}
    */
   get #ability() {
     return this.#execution.source;

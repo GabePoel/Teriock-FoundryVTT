@@ -19,7 +19,7 @@ export default function EquipmentSuppressionPart(Base) {
   /**
    * @implements {Teriock.Models.EquipmentSuppressionPartData}
    * @mixin
-   * @property {TeriockEquipment} parent
+   * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentSuppressionPart extends Base {
     /** @inheritDoc */

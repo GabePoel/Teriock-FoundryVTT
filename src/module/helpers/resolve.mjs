@@ -60,9 +60,9 @@ export async function resolveCollection(collection) {
 
 /**
  * Ensure a document has all the predefined documents named.
- * @param {AnyCommonDocument} document
+ * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
  * @param {TypedIdentifier[]} identifiers
- * @returns {Promise<AnyChildDocument[]>}
+ * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
  */
 export async function ensureChildren(document, identifiers) {
   if (identifiers.length === 0) { return []; }
@@ -85,7 +85,6 @@ export async function ensureChildren(document, identifiers) {
     const data = filtered.filter(d => d?.documentName === documentName).map(d => d?.data);
     operations.push(document.getCreateChildDocumentsOperation(documentName, data));
   }
-  /** @type {AnyChildDocument[][]} */
   const childArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));
   const children = [];
   for (const childArray of childArrays) { children.push(...childArray.filter(Boolean)); }
@@ -94,9 +93,9 @@ export async function ensureChildren(document, identifiers) {
 
 /**
  * Ensure a document has none of the predefined documents named.
- * @param {AnyCommonDocument} document
+ * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
  * @param {TypedIdentifier[]} identifiers
- * @returns {Promise<AnyChildDocument[]>}
+ * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
  */
 export async function ensureNoChildren(document, identifiers) {
   if (identifiers.length === 0) { return []; }
@@ -108,7 +107,6 @@ export async function ensureNoChildren(document, identifiers) {
     const ids = toDelete.filter(c => c?.documentName === documentName).map(c => c.id);
     operations.push(document.getDeleteChildDocumentsOperation(documentName, ids));
   }
-  /** @type {AnyChildDocument[][]} */
   const deletedArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));
   const deletedDocs = [];
   for (const deletedArray of deletedArrays) { deletedDocs.push(...deletedArray.filter(Boolean)); }
