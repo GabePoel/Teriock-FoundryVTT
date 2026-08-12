@@ -1,10 +1,10 @@
+import * as systemMixins from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";

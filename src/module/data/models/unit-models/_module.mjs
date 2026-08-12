@@ -1,4 +1,4 @@
-export { default as BaseUnitModel } from "./base-unit-model.mjs";
+export { default as BaseUnitModel } from "./base-unit-model/base-unit-model.mjs";
 export { default as DurationModel } from "./duration-model.mjs";
 export { default as LengthUnitModel } from "./length-unit-model.mjs";
 export { default as RangeModel } from "./range-model.mjs";

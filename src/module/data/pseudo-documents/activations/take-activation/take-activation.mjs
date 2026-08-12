@@ -1,0 +1,95 @@
+import { icons } from "../../../../constants/display/icons.mjs";
+import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
+import { AutomationActivationFactory } from "../abstract/_module.mjs";
+
+export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
+  /** @inheritDoc */
+  static get ICON() {
+    return icons.consequence.crit;
+  }
+
+  /**
+   * The amount this should apply.
+   * @returns {number|null}
+   */
+  get #amount() {
+    return this.amount ?? this.document?.rolls?.find(r => r.hasImpact)?.total ?? null;
+  }
+
+  /**
+   * The config entry for this activation's impact.
+   * @returns {Teriock.Config.ImpactEntry}
+   */
+  get #entry() {
+    return TERIOCK.config.impact[this.impact];
+  }
+
+  /**
+   * Whether to show a dialog.
+   * @returns {boolean}
+   */
+  get #showDialog() {
+    if (typeof this.#amount !== "number") { return true; }
+    let showDialog = this.showDialog || game.settings.get("teriock", "showRollDialogs");
+    if (this.event.ctrlKey) { showDialog = !showDialog; }
+    return showDialog;
+  }
+
+  /**
+   * Notify that this was applied to or reversed for an actor.
+   * @param {AnyActor} actor
+   * @param {"applied"|"reversed"} key
+   * @param {boolean} [morganti]
+   */
+  #notify(actor, key, morganti) {
+    const message = _loc(`TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.${key}`, {
+      actor: actor.fullName,
+      amount: this.#amount,
+      impact: this.label,
+    });
+    if (morganti ?? this.morganti) { ui.notifications.morganti(message); }
+    else { ui.notifications.success(message); }
+  }
+
+  /** @inheritDoc */
+  get classes() {
+    return [super.classes, `${this.impact}-button`].join(" ");
+  }
+
+  /** @inheritDoc */
+  get icon() {
+    return this.display.icon || this.#entry?.icon || this.constructor.ICON;
+  }
+
+  /** @inheritDoc */
+  get label() {
+    return this.display.label || this.#entry?.take || this.constructor.LABEL;
+  }
+
+  get tooltip() {
+    return typeof this.#amount === "number" ? this.#amount.toString() : "";
+  }
+
+  /** @inheritDoc */
+  async primaryAction() {
+    if (!this.checkActors()) { return; }
+    let notify = true;
+    for (const actor of this.actors) {
+      if (this.#showDialog) {
+        notify = await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
+      } else {
+        await this.#entry.apply(actor, this.#amount);
+      }
+      if (notify) { this.#notify(actor, "applied", notify === "morganti"); }
+    }
+  }
+
+  /** @inheritDoc */
+  async secondaryAction() {
+    if (!this.checkActors()) { return; }
+    for (const actor of this.actors) {
+      await this.#entry?.reverse(actor, this.#amount);
+      this.#notify(actor, "reversed");
+    }
+  }
+}

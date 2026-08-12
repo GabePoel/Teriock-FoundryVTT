@@ -1,5 +1,5 @@
 import { getCommandEntryValue } from "../../../../helpers/interaction/command-helpers.mjs";
-import BaseActivation from "./base-activation.mjs";
+import BaseActivation from "./base-activation/base-activation.mjs";
 
 const { fields } = foundry.data;
 

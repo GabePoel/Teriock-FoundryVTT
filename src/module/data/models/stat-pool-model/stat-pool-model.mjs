@@ -12,8 +12,6 @@ const { Collection } = foundry.utils;
 
 /**
  * @property {StatGiverSystem} parent
- * @property {Set<number>} spent
- * @property {Teriock.Keys.DieStat} stat
  * @implements {Teriock.Functionality.StatProvider}
  */
 export default class StatPoolModel extends BaseDataModel {

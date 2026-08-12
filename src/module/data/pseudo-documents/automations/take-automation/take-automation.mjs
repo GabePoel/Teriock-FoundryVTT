@@ -1,0 +1,83 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
+import { TakeActivation } from "../../activations/_module.mjs";
+import { CritMechanicMixin } from "../../mixins/_module.mjs";
+import { BaseAutomation } from "../abstract/_module.mjs";
+import * as automationMixins from "../mixins/_module.mjs";
+
+const { fields } = foundry.data;
+
+/**
+ * @mixes CritMechanic
+ * @mixes DisplayAutomation
+ * @mixes TriggerAutomation
+ */
+export default class TakeAutomation
+  extends mixClasses(
+    CritMechanicMixin(BaseAutomation),
+    automationMixins.DisplayAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+  )
+{
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.Take.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "take";
+  }
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      amount: new fields.NumberField({ nullable: true, placeholder: _loc("COMMON.Default") }),
+      impact: new fields.StringField({
+        choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
+        initial: "damage",
+        nullable: false,
+        required: true,
+      }),
+      morganti: new fields.BooleanField(),
+      showDialog: new fields.BooleanField(),
+    });
+  }
+
+  /** @inheritDoc */
+  get _displayPaths() {
+    return ["hr", ...super._displayPaths, "showDialog"];
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    const paths = ["impact", "amount"];
+    if (TERIOCK.config.impact[this.impact]?.morganti) { paths.push("morganti"); }
+    paths.push("hr", ...this._triggerDisplayPaths);
+    return paths;
+  }
+
+  /** @inheritDoc */
+  async _getActivations() {
+    if (this.impact && this.impact !== "other") {
+      return [
+        new TakeActivation({
+          amount: this.amount,
+          display: this.display,
+          impact: this.impact,
+          morganti: this.morganti,
+          showDialog: this.showDialog,
+        }),
+      ];
+    }
+    return [];
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    if (this.isRepeatable) { this.showDialog = true; }
+  }
+}

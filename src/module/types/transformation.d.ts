@@ -24,7 +24,7 @@ declare global {
       /** <schema> Additional parameters this transformation should override */
       override: Set<keyof typeof transformationConfig.override>;
       /** <schema> Stats this transformation should reset */
-      reset: Set<
+      resets: Set<
         {
           [K in keyof typeof statConfig]: typeof statConfig[K] extends { transformationReset: object } ? K : never;
         }[keyof typeof statConfig]

@@ -1,0 +1,222 @@
+import { icons } from "../../../../constants/display/icons.mjs";
+import { BaseDataModel } from "../../../abstract/_module.mjs";
+
+const { fields } = foundry.data;
+
+/**
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
+ * @property {AccessData} parent
+ */
+export default class BasePseudoDocument extends BaseDataModel {
+  /**
+   * Icon for this pseudo-document class.
+   * @returns {string}
+   */
+  static get ICON() {
+    return icons.ui.document;
+  }
+
+  /**
+   * Label for this pseudo-document class.
+   * @returns {string}
+   */
+  static get LABEL() {
+    return "";
+  }
+
+  /**
+   * Metadata.
+   * @returns {{documentName: string, icon: string, label: string, sheetClass: null}}
+   */
+  static get metadata() {
+    return { documentName: "", icon: "", label: "", sheetClass: null };
+  }
+
+  /**
+   * Create a pseudo-document within some parent document.
+   * @param {object} data
+   * @param {CommonSystem | HarmSystem} parent
+   * @param {DatabaseCreateOperation} operation
+   * @returns {Promise<BasePseudoDocument>}
+   */
+  static async create(data = {}, { parent, ...operation } = {}) {
+    if (!parent) { throw new Error("Pseudo-documents must have parents"); }
+    const id = operation.keepId && foundry.data.validators.isValidId(data._id) ? data._id : foundry.utils.randomID();
+    /** @type {CommonSystem} */
+    const directParent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent : parent.system;
+    const fieldPath = directParent.metadata?.pseudos?.[this.metadata.documentName];
+    if (!fieldPath) { throw new Error("Invalid pseudo-document parent"); }
+    const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
+    await directParent.document.update(updateData, operation);
+    return foundry.utils.getProperty(directParent.parent, fieldPath).get(id);
+  }
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return { _id: new fields.DocumentIdField({ initial: () => foundry.utils.randomID() }) };
+  }
+
+  /**
+   * Helper function to obtain the relevant pseudo-document from drop data.
+   * @param {Teriock.Application.DropData<BasePseudoDocument>} data
+   * @returns {Promise<BasePseudoDocument>}
+   */
+  static async fromDropData(data) {
+    const pseudo = await fromUuid(data.uuid);
+    if (!pseudo) { throw new Error("Failed to resolve PseudoDocument."); }
+    if (pseudo.documentName !== this.metadata.documentName) { throw new Error("Invalid type provided.", pseudo); }
+    return pseudo;
+  }
+
+  /**
+   * Format an array of pseudo-documents into a collection data object.
+   * @template T
+   * @param {T[]} docs
+   * @param {object} [options]
+   * @param {boolean} [options.keepId]
+   * @param {boolean} [options.source=true]
+   * @returns {Record<ID<T>, object>}
+   */
+  static toCollectionObject(docs, options = {}) {
+    return Object.fromEntries(docs.map(d => {
+      const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
+      const data = foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true);
+      data._id = id;
+      return [id, data];
+    }));
+  }
+
+  /**
+   * The document name of this pseudo-document.
+   * @returns {null}
+   */
+  get documentName() {
+    return this.constructor.metadata.documentName;
+  }
+
+  /**
+   * Path to this pseudo-document in its parent document.
+   * @returns {string}
+   */
+  get fieldPath() {
+    let path = this.parent.constructor.metadata.pseudos[this.documentName];
+    if (this.parent instanceof BasePseudoDocument) { path = [this.parent.fieldPath, this.parent.id, path].join("."); }
+    return path;
+  }
+
+  /**
+   * Icon for this pseudo-document.
+   * @returns {string}
+   */
+  get icon() {
+    return this.constructor.ICON;
+  }
+
+  /**
+   * The ID of this pseudo-document.
+   * @returns {ID<BasePseudoDocument>}
+   */
+  get id() {
+    return this._id;
+  }
+
+  /**
+   * Label for this pseudo-document.
+   * @returns {string}
+   */
+  get label() {
+    return _loc(this.constructor.LABEL);
+  }
+
+  /** @inheritDoc */
+  get localPath() {
+    return `${this.fieldPath}.${this.id}`;
+  }
+
+  /**
+   * Metadata.
+   * @returns {{documentName: string, icon: string, label: string, sheetClass: null}}
+   */
+  get metadata() {
+    return this.constructor.metadata;
+  }
+
+  /**
+   * The UUID of this pseudo-document.
+   * @returns {UUID<BasePseudoDocument> | null}
+   */
+  get uuid() {
+    return this.document?.uuid ? [this.document.uuid, this.documentName, this.id].join(".") : null;
+  }
+
+  /**
+   * Delete this pseudo-document, removing it from the database.
+   * @param {Partial<DatabaseDeleteOperation>} operation - Parameters of the deletion operation
+   * @returns {Promise<BasePseudoDocument|undefined>} The deleted PseudoDocument instance, or undefined if not deleted
+   */
+  async delete(operation = {}) {
+    if (!this.document) { return undefined; }
+    const updateData = { [this.localPath]: _del };
+    const out = await this.document.update(updateData, operation);
+    if (!out) { return undefined; }
+    return this;
+  }
+
+  /**
+   * Delete this pseudo-document with a dialog.
+   * @param {object} [options]
+   * @param {DatabaseDeleteOperation} [operation]
+   * @returns {Promise<*>}
+   */
+  async deleteDialog(options = {}, operation = {}) {
+    let content = options.content;
+    const type = _loc(this.constructor.metadata.label);
+    if (!content) {
+      const question = _loc("COMMON.AreYouSure");
+      const warning = _loc("SIDEBAR.DeleteWarning", { type: type.toLowerCase() });
+      content = `<p><strong>${question}</strong> ${warning}</p>`;
+    }
+    return foundry.applications.api.DialogV2.confirm(
+      foundry.utils.mergeObject({
+        content,
+        window: {
+          icon: "fa-solid fa-trash",
+          title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name ?? this.label}`,
+        },
+        yes: { callback: () => this.delete(operation) },
+      }, options),
+    );
+  }
+
+  /**
+   * Duplicate this pseudo-document.
+   * @returns {Promise<void>}
+   */
+  async duplicate() {
+    await this.constructor.create(this.toObject(), { parent: this.document });
+  }
+
+  /**
+   * Drag data for storing on initiated drag events.
+   * @returns {Teriock.Application.DropData<BasePseudoDocument>}
+   */
+  toDragData() {
+    return { type: this.documentName, uuid: this.uuid };
+  }
+
+  /**
+   * Update this PseudoDocument using incremental data, saving it to the database.
+   * @param {object} [data={}] - Differential update data which modifies the existing values of this pseudo-document
+   * @param {Partial<Omit<DatabaseUpdateOperation, "updates">>} operation - Parameters of the update operation
+   * @returns {Promise<BasePseudoDocument|undefined>} The updated PseudoDocument instance, or undefined not updated
+   */
+  async update(data = {}, operation = {}) {
+    if (!this.document) { return undefined; }
+    const out = await this.document.update({ [this.localPath]: data }, operation);
+    if (!out) { return undefined; }
+    return this;
+  }
+}

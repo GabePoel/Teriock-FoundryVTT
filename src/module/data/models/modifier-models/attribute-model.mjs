@@ -1,4 +1,4 @@
-import BaseModifierModel from "./base-modifier-model.mjs";
+import BaseModifierModel from "./base-modifier-model/base-modifier-model.mjs";
 
 const { fields } = foundry.data;
 

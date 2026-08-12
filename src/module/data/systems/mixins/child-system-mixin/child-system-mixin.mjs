@@ -1,3 +1,4 @@
+import * as systemMixins from "../_module.mjs";
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
@@ -10,7 +11,6 @@ import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import { CommonDocumentSettingsModel } from "../../../models/settings-models/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;

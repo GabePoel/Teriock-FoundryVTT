@@ -36,10 +36,6 @@ import {
   UseDocumentsAutomation,
 } from "./_module.mjs";
 
-declare module "./transformation-automation.mjs" {
-  export default interface TransformationAutomation extends Teriock.Transformation.AutomationTransformationConfig {}
-}
-
 declare global {
   export interface AutomationTypeMap {
     abilityMacro: AbilityMacroAutomation;

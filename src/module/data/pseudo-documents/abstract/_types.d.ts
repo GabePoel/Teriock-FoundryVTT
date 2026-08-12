@@ -1,4 +1,4 @@
-declare module "./mechanic-pseudo-document.mjs" {
+declare module "./mechanic-pseudo-document/mechanic-pseudo-document.mjs" {
   export default interface MechanicPseudoDocument extends Teriock.PseudoDocuments.MechanicPseudoDocumentData {}
 }
 

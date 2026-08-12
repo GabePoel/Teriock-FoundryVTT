@@ -1,7 +1,7 @@
 import affinityConfig from "../../../../constants/config/affinity-config.mjs";
-import BaseAffinity from "./base-affinity.mjs";
+import BaseAffinity from "./base-affinity/base-affinity.mjs";
 import CompetentAffinity from "./competent-affinity.mjs";
-import StackingAffinity from "./stacking-affinity.mjs";
+import StackingAffinity from "./stacking-affinity/stacking-affinity.mjs";
 
 /**
  * Get the affinity class a type builds on.

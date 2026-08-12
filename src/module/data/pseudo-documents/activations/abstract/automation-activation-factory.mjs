@@ -1,4 +1,4 @@
-import BaseActivation from "./base-activation.mjs";
+import BaseActivation from "./base-activation/base-activation.mjs";
 
 /**
  * @param {typeof BaseAutomation} Automation

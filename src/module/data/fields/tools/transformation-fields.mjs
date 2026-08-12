@@ -63,7 +63,7 @@ export function actorTransformationConfig() {
 
 /**
  * Automation transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, reset: SetField, suppress: SetField}}
+ * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, resets: SetField, suppress: SetField}}
  */
 export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
@@ -84,8 +84,8 @@ export function automationTransformationFields() {
         label: "TERIOCK.COMMON.Override",
       },
     ),
-    reset: new fields.SetField(new fields.StringField({ choices: choiceMap(RESET_STATS, k => statConfig[k].label) }), {
-      hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
+    resets: new fields.SetField(new fields.StringField({ choices: choiceMap(RESET_STATS, k => statConfig[k].label) }), {
+      hint: "TERIOCK.SCHEMA.Transformation.resets.hint",
       initial: Object.keys(RESET_STATS).filter(k => RESET_STATS[k].transformationReset.initial),
       label: "SETTINGS.UI.ACTIONS.Reset",
     }),
@@ -102,7 +102,7 @@ export function automationTransformationFields() {
 
 /**
  * Effect transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, reset: SetField, suppress: SetField} & {competence: EmbeddedDataField, enabled: BooleanField, primary: LocalDocumentField, uuids: SetField}}
+ * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, resets: SetField, suppress: SetField} & {competence: EmbeddedDataField, enabled: BooleanField, primary: LocalDocumentField, uuids: SetField}}
  */
 export function effectTransformationFields() {
   return Object.assign(automationTransformationFields(), {

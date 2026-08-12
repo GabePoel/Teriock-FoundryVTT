@@ -18,6 +18,10 @@ declare global {
 
     export type Target = "ability" | "Actor" | "armament" | "Item";
 
+    export type ChildPath = keyof typeof changeConfig.child.paths;
+
+    export type ChildTarget = keyof typeof changeConfig.child.targets;
+
     export type QualifiedChangeData = EffectChangeData & {
       phase: Phase;
       qualifier: Teriock.System.FormulaString;

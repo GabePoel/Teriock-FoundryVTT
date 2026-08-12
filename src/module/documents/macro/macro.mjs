@@ -174,6 +174,7 @@ export default class TeriockMacro
 
   /**
    * Generate a scope and execute.
+   * @param event
    * @returns {Promise<void>}
    */
   async scopedExecute(event) {

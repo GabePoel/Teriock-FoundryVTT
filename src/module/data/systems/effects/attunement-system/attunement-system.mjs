@@ -11,7 +11,6 @@ const { fields } = foundry.data;
  *
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
- *
  */
 export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */

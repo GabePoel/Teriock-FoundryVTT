@@ -1,4 +1,4 @@
-import BaseUnitModel from "./base-unit-model.mjs";
+import BaseUnitModel from "./base-unit-model/base-unit-model.mjs";
 
 export default class LengthUnitModel extends BaseUnitModel {
   /**

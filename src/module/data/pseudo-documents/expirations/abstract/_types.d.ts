@@ -1,4 +1,4 @@
-declare module "./base-expiration.mjs" {
+declare module "./base-expiration/base-expiration.mjs" {
   export default interface BaseExpiration {
     method: "automatic" | "roll";
     result: "delete" | "disable";

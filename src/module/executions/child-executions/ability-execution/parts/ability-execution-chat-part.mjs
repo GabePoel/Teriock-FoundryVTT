@@ -133,7 +133,7 @@ export default function AbilityExecutionChatPart(Base) {
           img: a.img,
           level: a.level,
           override: Array.from(a.override),
-          reset: Array.from(a.reset),
+          resets: Array.from(a.resets),
           ring: a.ring,
           suppress: Array.from(a.suppress),
         });

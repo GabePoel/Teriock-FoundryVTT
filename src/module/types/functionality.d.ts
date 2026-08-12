@@ -1,8 +1,8 @@
-declare module "../data/models/scaling-models/competence-model.mjs" {
+declare module "../data/models/scaling-models/competence-model/competence-model.mjs" {
   export default interface CompetenceModel extends Teriock.Functionality.ScalingModel {}
 }
 
-declare module "../data/models/scaling-models/piercing-model.mjs" {
+declare module "../data/models/scaling-models/piercing-model/piercing-model.mjs" {
   export default interface PiercingModel extends Teriock.Functionality.ScalingModel {}
 }
 

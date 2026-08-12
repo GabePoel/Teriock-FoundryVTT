@@ -60,6 +60,15 @@ export default function TransformationSystemMixin(Base) {
       });
     }
 
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      if (source.transformation && "reset" in source.transformation) {
+        source.transformation.resets ??= source.transformation.reset;
+        delete source.transformation.reset;
+      }
+      return super.migrateData(source, options);
+    }
+
     /**
      * Batched operations waiting to be applied to the database.
      * @type {DatabaseWriteOperation[]}
@@ -101,7 +110,7 @@ export default function TransformationSystemMixin(Base) {
      */
     get #resetUpdateData() {
       const updateData = {};
-      for (const r of this.transformation.reset) {
+      for (const r of this.transformation.resets) {
         Object.assign(updateData, statConfig[r].transformationReset.update);
       }
       return updateData;
@@ -139,7 +148,7 @@ export default function TransformationSystemMixin(Base) {
         s._id = foundry.utils.randomID();
         s.system.transformationLevel = this.transformation.level;
         for (const stat of POOL_STATS) {
-          s.system.statDice[stat].disabled = !this.transformation.reset.has(stat);
+          s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
         }
         s.system.competence.raw = this.transformation.competence.value;
         if (s.system.size.min && s.system.size.max) {
@@ -219,7 +228,7 @@ export default function TransformationSystemMixin(Base) {
     #addBatchUpdatesRemoveTransformation() {
       if (!this.actor) { return; }
       this.#addBatchToggleDocuments(false);
-      if (this.transformation.reset.size) {
+      if (this.transformation.resets.size) {
         this.#addBatchActorUpdate(this.parent.getFlag("teriock", "preTransform") ?? {});
       }
     }
@@ -278,7 +287,7 @@ export default function TransformationSystemMixin(Base) {
       if (this.parent.disabled) { this.#addBatchUpdatesRemoveTransformation(); }
       else {
         this.#addBatchUpdatesApplyTransformation();
-        if (this.transformation.reset.size) { this.#addBatchActorUpdate(this.#resetUpdateData); }
+        if (this.transformation.resets.size) { this.#addBatchActorUpdate(this.#resetUpdateData); }
       }
       await this.#modifyBatch();
     }
@@ -337,12 +346,12 @@ export default function TransformationSystemMixin(Base) {
       }
       const statItems = this.actor.items.contents.filter(i => i.system.metadata.stats);
       for (const stat of POOL_STATS) {
-        if (this.transformation.reset.has(stat)) {
+        if (this.transformation.resets.has(stat)) {
           disabledStatDiceItems[stat].push(...statItems.filter(i => !i.system.statDice[stat].disabled));
         }
       }
       const preTransform = {};
-      for (const r of this.transformation.reset) {
+      for (const r of this.transformation.resets) {
         const update = statConfig[r].transformationReset.update;
         for (const k of Object.keys(update)) { preTransform[k] = foundry.utils.getProperty(this.actor, k); }
       }

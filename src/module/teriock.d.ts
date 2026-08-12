@@ -1,13 +1,13 @@
-import { ForcedDeletion, ForcedReplacement } from "@common/data/operators.mjs";
+// import { ForcedDeletion, ForcedReplacement } from "@common/data/operators.mjs";
 
 declare global {
   // const TERIOCK: typeof import("./constants/_module.mjs");
 
   const __brand: unique symbol;
 
-  const _del: () => ForcedDeletion;
-  const _loc: (stringId: string, data?: object) => string;
-  const _replace: (value: never) => ForcedReplacement;
+  // const _del: () => ForcedDeletion;
+  // const _loc: (stringId: string, data?: object) => string;
+  // const _replace: (value: never) => ForcedReplacement;
 
   /** Foundry VTT UUID */
   type UUID<T = unknown> = string & { [__brand]: T };
@@ -31,3 +31,5 @@ declare global {
   /** Safe Teriock UUID */
   type SafeUUID<T = unknown> = string & { [__brand]: T };
 }
+
+export {};
