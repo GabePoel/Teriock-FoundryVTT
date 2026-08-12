@@ -15,16 +15,13 @@ interface ActiveEffectSubtype<T extends ActiveEffectType>
 
 declare module "./active-effect.mjs" {
   export default interface TeriockActiveEffect {
-    _id: ID<TeriockActiveEffect>;
+    _id: Readonly<ID<TeriockActiveEffect>>;
     system: BaseEffectSystem;
     type: ActiveEffectType;
 
     get actor(): TeriockActor | null;
-
     get documentName(): "ActiveEffect";
-
     get id(): ID<TeriockActiveEffect>;
-
     get uuid(): UUID<TeriockActiveEffect>;
   }
 }

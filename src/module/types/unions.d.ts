@@ -5,6 +5,7 @@ declare global {
   type TypeMapKey<Map> = { [K in keyof Map]: K; }[keyof Map];
 
   export type TeriockDocument =
+    | documents.TeriockAmbientLightDocument
     | documents.TeriockCards
     | documents.TeriockCombat
     | documents.TeriockCombatant

@@ -20,7 +20,7 @@ interface ActorSubtype<T extends ActorType>
 
 declare module "./actor.mjs" {
   export default interface TeriockActor {
-    _id: ID<TeriockActor>;
+    _id: Readonly<ID<TeriockActor>>;
     // @ts-expect-error DocumentConstructionContext
     effects: DocumentCollection<TeriockActiveEffect>;
     // @ts-expect-error DocumentConstructionContext
@@ -30,15 +30,10 @@ declare module "./actor.mjs" {
     system: BaseActorSystem;
 
     get appliedEffects(): TeriockActiveEffect[];
-
     get documentName(): "Actor";
-
     get id(): ID<TeriockActor>;
-
     get temporaryEffects(): TeriockActiveEffect[];
-
     get token(): TeriockTokenDocument | null;
-
     get uuid(): UUID<TeriockActor>;
   }
 }

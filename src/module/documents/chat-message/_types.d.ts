@@ -31,17 +31,14 @@ declare global {
 
   namespace Teriock.Documents {
     export interface ChatMessageInterface {
-      _id: ID<TeriockChatMessage>;
+      _id: Readonly<ID<TeriockChatMessage>>;
       author: TeriockUser;
       rolls: BaseRoll[];
       system: BaseMessageSystem;
 
       get documentName(): "ChatMessage";
-
       get id(): ID<TeriockChatMessage>;
-
       get speakerActor(): TeriockActor | null;
-
       get uuid(): UUID<TeriockChatMessage>;
     }
   }

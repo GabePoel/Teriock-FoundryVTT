@@ -3,7 +3,7 @@ import { TeriockToken } from "../../canvas/placeables/_module.mjs";
 
 declare module "./token-document.mjs" {
   export default interface TeriockTokenDocument {
-    _id: ID<TeriockTokenDocument>;
+    _id: Readonly<ID<TeriockTokenDocument>>;
 
     get actor(): TeriockActor | null;
     get combat(): TeriockCombat | null;

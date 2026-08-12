@@ -4,16 +4,14 @@ import { TeriockJournalEntryCategory, TeriockJournalEntryPage } from "../_module
 
 declare module "./journal-entry.mjs" {
   export default interface TeriockJournalEntry {
-    _id: ID<TeriockJournalEntry>;
+    _id: Readonly<ID<TeriockJournalEntry>>;
     // @ts-expect-error DocumentConstructionContext
     categories: DocumentCollection<TeriockJournalEntryCategory>;
     // @ts-expect-error DocumentConstructionContext
     pages: DocumentCollection<TeriockJournalEntryPage>;
 
     get documentName(): "JournalEntry";
-
     get id(): ID<TeriockJournalEntry>;
-
     get uuid(): UUID<TeriockJournalEntry>;
   }
 }

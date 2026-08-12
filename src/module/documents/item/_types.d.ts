@@ -9,7 +9,6 @@ type ItemDocument = Omit<Teriock.Documents.DocumentBase<ItemClass, Item>, "docum
   effects: DocumentCollection<TeriockActiveEffect>;
 
   get documentName(): "Item";
-
   get transferredEffects(): TeriockActiveEffect[];
 };
 
@@ -19,20 +18,16 @@ interface ItemSubtype<T extends ItemType>
 
 declare module "./item.mjs" {
   export default interface TeriockItem {
-    _id: ID<TeriockItem>;
+    _id: Readonly<ID<TeriockItem>>;
     // @ts-expect-error Not a document
     effects: DocumentCollection<TeriockActiveEffect>;
     system: BaseItemSystem;
     type: ItemType;
 
     get actor(): TeriockActor | null;
-
     get documentName(): "Item";
-
     get id(): ID<TeriockItem>;
-
     get transferredEffects(): TeriockActiveEffect[];
-
     get uuid(): UUID<TeriockItem>;
   }
 }

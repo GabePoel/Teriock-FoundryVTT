@@ -9,14 +9,12 @@ interface CardSubtype<T extends CardType> extends Teriock.Documents.Subtype<Card
 
 declare module "./card.mjs" {
   export default interface TeriockCard {
-    _id: ID<TeriockCard>;
+    _id: Readonly<ID<TeriockCard>>;
     system: BaseCardsSystem;
     type: CardType;
 
     get documentName(): "Card";
-
     get id(): ID<TeriockCard>;
-
     get uuid(): UUID<TeriockCard>;
   }
 }

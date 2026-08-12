@@ -5,11 +5,8 @@ declare module "./combat.mjs" {
     _id: ID<TeriockCombat>;
 
     get combatant(): TeriockCombatant | null;
-
     get documentName(): "Combat";
-
     get id(): ID<TeriockCombat>;
-
     get uuid(): UUID<TeriockCombat>;
   }
 }

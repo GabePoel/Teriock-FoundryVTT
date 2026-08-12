@@ -11,12 +11,10 @@ interface PageSubtype<T extends JournalEntryPageType>
 
 declare module "./journal-entry-page.mjs" {
   export default interface TeriockJournalEntryPage {
-    _id: ID<TeriockJournalEntryPage>;
+    _id: Readonly<ID<TeriockJournalEntryPage>>;
 
     get documentName(): "JournalEntryPage";
-
     get id(): ID<TeriockJournalEntryPage>;
-
     get uuid(): UUID<TeriockJournalEntryPage>;
   }
 }

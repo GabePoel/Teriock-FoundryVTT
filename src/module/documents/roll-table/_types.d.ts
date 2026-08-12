@@ -4,7 +4,7 @@ import { TeriockTableResult } from "../_module.mjs";
 
 declare module "./roll-table.mjs" {
   export default interface TeriockRollTable {
-    _id: ID<TeriockRollTable>;
+    _id: Readonly<ID<TeriockRollTable>>;
     // @ts-expect-error Bad extension
     results: EmbeddedCollection<TeriockTableResult>;
 
