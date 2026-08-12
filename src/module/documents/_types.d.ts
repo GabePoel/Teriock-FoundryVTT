@@ -44,17 +44,18 @@ declare global {
 
     export type ModelMetadata = {
       armament: boolean;
+      attunable: boolean;
       childTypes: Teriock.Documents.ChildType[];
       consumable: boolean;
       disabledPath: "disabled" | "system.disabled" | null;
       hierarchy: boolean;
       initialKind?: string;
-      isTextPage?: boolean;
       passive: boolean;
       preservedProperties: string[];
       pseudos: Record<string, string>;
       revealable: boolean;
       stats: boolean;
+      text: boolean;
       tooltip: boolean;
       type: Teriock.Documents.CommonType;
       untrackable?: boolean;

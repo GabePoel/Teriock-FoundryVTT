@@ -78,7 +78,7 @@ export default class TeriockItem
 
   /**
    * Apply any transformations to the Item data which are caused by ActiveEffects.
-   * @param phase
+   * @param {string} phase
    */
   applyActiveEffects(phase) {
     if (!(phase in ActiveEffect.implementation.CHANGE_PHASES) || this._completedActiveEffectPhases.has(phase)) {

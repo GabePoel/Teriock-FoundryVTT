@@ -238,7 +238,7 @@ export default function CommonSystemMixin(Base) {
     getSystemRollData() {
       const localData = this.getLocalRollData();
       const rollData = { ...prefixObject(localData, this.parent.type) };
-      if (this.parent.metadata.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
+      if (this.metadata.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
       return rollData;
     }
 

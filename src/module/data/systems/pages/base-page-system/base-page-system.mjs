@@ -17,7 +17,7 @@ export default class BasePageSystem
 {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { isTextPage: true });
+    return Object.assign(super.metadata, { text: true });
   }
 
   /** @inheritDoc */

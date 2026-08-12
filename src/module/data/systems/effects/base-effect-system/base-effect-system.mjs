@@ -84,7 +84,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
    */
   get needsAttunement() {
     return (!this.applyIfDeattuned
-      && ["equipment", "mount"].includes(this.parent.parent?.type)
+      && this.parent.parent?.metadata?.attunable
       && Boolean(this.parent.parent?.system.needsAttunement));
   }
 

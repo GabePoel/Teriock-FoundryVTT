@@ -376,7 +376,7 @@ export default class AbilitySystem
    */
   async _use(data = {}, options = {}) {
     options.source = this.parent;
-    if (this.grantOnly && this.parent.parent.metadata.armament) { options.armament = this.parent.parent; }
+    if (this.grantOnly && this.parent.parent?.metadata?.armament) { options.armament = this.parent.parent; }
     await AbilityExecution.create(data, options);
   }
 

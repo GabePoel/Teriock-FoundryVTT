@@ -40,7 +40,7 @@ export default class TeriockJournalEntryPage
   /** @inheritDoc */
   async _buildEmbedHTML(config, options = {}) {
     const embed = await super._buildEmbedHTML(config, options);
-    if ((!embed || config.values.includes("text")) && this.system?.metadata?.isTextPage) {
+    if ((!embed || config.values.includes("text")) && this.system?.metadata?.text) {
       return this._embedTextPage(config, options);
     }
     return embed;

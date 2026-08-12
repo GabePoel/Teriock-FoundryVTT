@@ -26,6 +26,11 @@ export default function AttunableSystemMixin(Base) {
       "system.price",
       ...super.PRESERVED_PROPERTIES,
     ];
+    
+    /** @inheritDoc */
+    static get metadata() {
+      return foundry.utils.mergeObject(super.metadata, { attunable: true });
+    }
 
     /** @inheritDoc */
     static defineSchema() {
