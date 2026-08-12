@@ -6,6 +6,10 @@ import * as documentMixins from "../mixins/_module.mjs";
 const { TokenDocument } = foundry.documents;
 
 /**
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ */
+
+/**
  * The Teriock TokenDocument implementation.
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
@@ -77,7 +81,10 @@ export default class TeriockTokenDocument
     if (this.detectionModes.basicSight) { this.detectionModes.basicSight.enabled = false; }
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {ContextMenuEntry[]}
+   */
   getEmbedContextMenuEntries(doc) {
     return [{
       icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),

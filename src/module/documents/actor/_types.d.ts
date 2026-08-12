@@ -1,38 +1,28 @@
-import { Actor } from "@client/documents/_module.mjs";
-import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+import { EmbeddedCollection } from "@common/abstract/_module.mjs";
 
-import { TeriockActor as ActorClass, TeriockTokenDocument } from "../_module.mjs";
+import { TeriockActiveEffect as ActiveEffectClass, TeriockActor as ActorClass, TeriockTokenDocument } from "../_module.mjs";
 import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
 
-type ActorDocument = Omit<Teriock.Documents.DocumentBase<ActorClass, Actor>, "documentName"> & {
-  // @ts-expect-error DocumentConstructionContext
-  effects: DocumentCollection<TeriockActiveEffect>;
-  // @ts-expect-error DocumentConstructionContext
-  items: DocumentCollection<TeriockItem>;
-
-  get documentName(): "Actor";
+type ActorSubtype<T extends ActorType> = ActorClass & {
+  sheet: ActorSheetMap[T];
+  system: ActorSystemMap[T];
+  type: T;
 };
-
-interface ActorSubtype<T extends ActorType>
-  extends Teriock.Documents.Subtype<ActorDocument, T, ActorSheetMap[T], ActorSystemMap[T]>
-{}
 
 declare module "./actor.mjs" {
   export default interface TeriockActor {
     _id: Readonly<ID<TeriockActor>>;
-    // @ts-expect-error DocumentConstructionContext
-    effects: DocumentCollection<TeriockActiveEffect>;
-    // @ts-expect-error DocumentConstructionContext
-    items: DocumentCollection<TeriockItem>;
+    effects: EmbeddedCollection<ActiveEffectClass>;
+    items: EmbeddedCollection<TeriockItem>;
     sheet: BaseActorSheet;
-    statuses: Set<Teriock.Keys.Condition>;
     system: BaseActorSystem;
+    type: ActorType;
 
-    get appliedEffects(): TeriockActiveEffect[];
+    get appliedEffects(): ActiveEffectClass[];
     get documentName(): "Actor";
     get id(): ID<TeriockActor>;
-    get temporaryEffects(): TeriockActiveEffect[];
+    get temporaryEffects(): ActiveEffectClass[];
     get token(): TeriockTokenDocument | null;
     get uuid(): UUID<TeriockActor>;
   }

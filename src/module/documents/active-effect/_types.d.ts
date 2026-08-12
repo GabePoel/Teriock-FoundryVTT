@@ -1,17 +1,11 @@
-import { ActiveEffect } from "@client/documents/_module.mjs";
-
 import { TeriockActiveEffect as ActiveEffectClass } from "../_module.mjs";
 import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 
-type ActiveEffectDocument = Omit<Teriock.Documents.DocumentBase<ActiveEffectClass, ActiveEffect>, "documentName"> & {
-  parent: TeriockActor | TeriockItem;
-
-  get documentName(): "ActiveEffect";
+type ActiveEffectSubtype<T extends ActiveEffectType> = ActiveEffectClass & {
+  sheet: ActiveEffectSheetMap[T];
+  system: ActiveEffectSystemMap[T];
+  type: T;
 };
-
-interface ActiveEffectSubtype<T extends ActiveEffectType>
-  extends Teriock.Documents.Subtype<ActiveEffectDocument, T, ActiveEffectSheetMap[T], ActiveEffectSystemMap[T]>
-{}
 
 declare module "./active-effect.mjs" {
   export default interface TeriockActiveEffect {
@@ -19,7 +13,6 @@ declare module "./active-effect.mjs" {
     system: BaseEffectSystem;
     type: ActiveEffectType;
 
-    get actor(): TeriockActor | null;
     get documentName(): "ActiveEffect";
     get id(): ID<TeriockActiveEffect>;
     get uuid(): UUID<TeriockActiveEffect>;

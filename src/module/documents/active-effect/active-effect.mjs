@@ -5,7 +5,6 @@ const { ActiveEffect } = foundry.documents;
 
 /**
  * The Teriock ActiveEffect implementation.
- * @extends {ActiveEffect}
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument

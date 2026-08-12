@@ -1,4 +1,8 @@
 /**
+ * @import { TeriockActiveEffect } from "../_module.mjs";
+ */
+
+/**
  * Mixin for common functions used across document classes that embed children.
  * @template {AnyConstructor} T
  * @param {T} Base
@@ -18,7 +22,7 @@ export default function ParentDocumentMixin(Base) {
     }
 
     /**
-     * Gets the list of {@link TeriockActiveEffect} documents associated with this document.
+     * Gets the list of active effect documents associated with this document.
      * Helper method for prepareDerivedData() that can be called explicitly.
      * @returns {TeriockActiveEffect[]}
      */

@@ -5,6 +5,7 @@ const { Collection } = foundry.utils;
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
  */
 
 /**

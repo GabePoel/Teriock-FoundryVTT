@@ -100,7 +100,10 @@ export default class TeriockActor
     return true;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TeriockActor}
+   */
   get actor() {
     return this;
   }

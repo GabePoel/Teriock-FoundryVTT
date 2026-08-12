@@ -5,8 +5,6 @@ declare global {
     export type ChildType = ActiveEffectType | ItemType;
     export type CommonType = ActorType | Teriock.Documents.ChildType;
 
-    export type DocumentBase<Class, Parent extends object = object> = Class & Parent;
-
     export type PseudoCollections = {
       Activation?: TypeCollection<ID<Activation>, Activation>;
       Affinity?: TypeCollection<ID<Affinity>, Affinity>;
@@ -45,19 +43,6 @@ declare global {
       /** All visible children of this document or their indexes, keyed by type. */
       visibleChildrenByType?: Record<Teriock.Documents.ChildType, (TeriockActiveEffect | TeriockItem)[]>;
     };
-
-    export type Subtype<Base, Type extends string, Sheet, System> =
-      & Omit<Base, "_id" | "documentName" | "id" | "pseudoCollections" | "sheet" | "system" | "type" | "uuid">
-      & {
-        _id: ID<Subtype<Base, Type, Sheet, System>>;
-        sheet: Sheet;
-        system: System;
-        type: Type;
-        get documentName(): Base extends { documentName: infer N } ? N : string;
-        get id(): ID<Subtype<Base, Type, Sheet, System>>;
-        get pseudoCollections(): PseudoCollections;
-        get uuid(): UUID<Subtype<Base, Type, Sheet, System>>;
-      };
 
     export type ModelMetadata = {
       armament: boolean;

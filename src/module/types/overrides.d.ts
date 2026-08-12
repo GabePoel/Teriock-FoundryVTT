@@ -30,6 +30,30 @@ import {
 import { TeriockManager } from "../helpers/_module.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 
+/** Fix for common document patching */
+declare module "@common/documents/_module.mjs" {
+  export const ActiveEffect: typeof import("@client/documents/_module.mjs").ActiveEffect;
+  export const Actor: typeof import("@client/documents/_module.mjs").Actor;
+  export const AmbientLightDocument: typeof import("@client/documents/_module.mjs").AmbientLightDocument;
+  export const Card: typeof import("@client/documents/_module.mjs").Card;
+  export const Cards: typeof import("@client/documents/_module.mjs").Cards;
+  export const ChatMessage: typeof import("@client/documents/_module.mjs").ChatMessage;
+  export const Combat: typeof import("@client/documents/_module.mjs").Combat;
+  export const Combatant: typeof import("@client/documents/_module.mjs").Combatant;
+  export const Folder: typeof import("@client/documents/_module.mjs").Folder;
+  export const Item: typeof import("@client/documents/_module.mjs").Item;
+  export const JournalEntry: typeof import("@client/documents/_module.mjs").JournalEntry;
+  export const JournalEntryCategory: typeof import("@client/documents/_module.mjs").JournalEntryCategory;
+  export const JournalEntryPage: typeof import("@client/documents/_module.mjs").JournalEntryPage;
+  export const Macro: typeof import("@client/documents/_module.mjs").Macro;
+  export const RegionDocument: typeof import("@client/documents/_module.mjs").RegionDocument;
+  export const RollTable: typeof import("@client/documents/_module.mjs").RollTable;
+  export const Scene: typeof import("@client/documents/_module.mjs").Scene;
+  export const TableResult: typeof import("@client/documents/_module.mjs").TableResult;
+  export const TokenDocument: typeof import("@client/documents/_module.mjs").TokenDocument;
+  export const User: typeof import("@client/documents/_module.mjs").User;
+}
+
 declare global {
   // Definition for writing macros.
   let actor: TeriockActor;
@@ -46,7 +70,6 @@ declare global {
     journal: TeriockJournal;
     macros: TeriockMacros;
     messages: TeriockChatMessages;
-    // @ts-expect-error Document extension
     packs: Collection<string, CompendiumCollection<TeriockDocument>>;
     scenes: TeriockScenes;
     tables: TeriockRollTables;

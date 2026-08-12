@@ -1,14 +1,12 @@
-import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+import { EmbeddedCollection } from "@common/abstract/_module.mjs";
 
-import { TeriockJournalEntryCategory, TeriockJournalEntryPage } from "../_module.mjs";
+import { TeriockJournalEntryCategory } from "../_module.mjs";
 
 declare module "./journal-entry.mjs" {
   export default interface TeriockJournalEntry {
     _id: Readonly<ID<TeriockJournalEntry>>;
-    // @ts-expect-error DocumentConstructionContext
-    categories: DocumentCollection<TeriockJournalEntryCategory>;
-    // @ts-expect-error DocumentConstructionContext
-    pages: DocumentCollection<TeriockJournalEntryPage>;
+    categories: EmbeddedCollection<TeriockJournalEntryCategory>;
+    pages: EmbeddedCollection<TeriockJournalEntryPage>;
 
     get documentName(): "JournalEntry";
     get id(): ID<TeriockJournalEntry>;

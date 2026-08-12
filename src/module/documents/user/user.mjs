@@ -6,6 +6,10 @@ import * as documentMixins from "../mixins/_module.mjs";
 const { User } = foundry.documents;
 
 /**
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ */
+
+/**
  * The Teriock User implementation.
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
@@ -29,7 +33,10 @@ export default class TeriockUser
     return new Set(game.canvas?.tokens.placeables.filter(t => t.isVisible) ?? []);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {ContextMenuEntry[]}
+   */
   getEmbedContextMenuEntries(doc) {
     return [{
       icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),

@@ -3,11 +3,12 @@ import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
  */
 
 /**
  * Base mixin.
- * @template {Constructor<ClientDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, BaseDocument>}
  */

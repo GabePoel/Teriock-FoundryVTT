@@ -2,6 +2,7 @@ import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/u
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ * @import { TeriockActiveEffect, TeriockItem } from "../_module.mjs";
  */
 
 /**

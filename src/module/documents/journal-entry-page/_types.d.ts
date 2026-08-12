@@ -1,17 +1,17 @@
-import { JournalEntryPage } from "@client/documents/_module.mjs";
-
 import { TeriockJournalEntryPage as PageClass } from "../_module.mjs";
+import { BasePageSystem } from "../../data/systems/pages/_module.mjs";
 
-type JournalEntryPageDocument = Teriock.Documents.DocumentBase<PageClass, JournalEntryPage>;
-
-interface PageSubtype<T extends JournalEntryPageType>
-  extends
-    Teriock.Documents.Subtype<JournalEntryPageDocument, T, JournalEntryPageSheetMap[T], JournalEntryPageSystemMap[T]>
-{}
+type PageSubtype<T extends JournalEntryPageType> = PageClass & {
+  sheet: JournalEntryPageSheetMap[T];
+  system: JournalEntryPageSystemMap[T];
+  type: T;
+};
 
 declare module "./journal-entry-page.mjs" {
   export default interface TeriockJournalEntryPage {
     _id: Readonly<ID<TeriockJournalEntryPage>>;
+    system: BasePageSystem;
+    type: JournalEntryPageType;
 
     get documentName(): "JournalEntryPage";
     get id(): ID<TeriockJournalEntryPage>;

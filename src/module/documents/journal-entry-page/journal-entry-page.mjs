@@ -32,7 +32,7 @@ export default class TeriockJournalEntryPage
   get typedIdentifier() {
     if (this.inCompendium && this.compendium.collection === "teriock.rules") {
       const config = TERIOCK.config.wiki.namespaces[this.parent.name];
-      return `${config?.identifierType ?? "rule"}:${this.forcedIdentifier}`;
+      return /** @type {TypedIdentifier} */ (`${config?.identifierType ?? "rule"}:${this.forcedIdentifier}`);
     }
     return super.typedIdentifier;
   }

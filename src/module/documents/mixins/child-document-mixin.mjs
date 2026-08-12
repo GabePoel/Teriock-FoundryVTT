@@ -2,6 +2,10 @@ import { mixClasses } from "../../helpers/construction.mjs";
 import * as documentMixins from "./_module.mjs";
 
 /**
+ * @import { TeriockActiveEffect } from "../_module.mjs";
+ */
+
+/**
  * Mixin for common functions used across document classes embedded in actorsUuids.
  * @template {AnyConstructor} T
  * @param {T} Base

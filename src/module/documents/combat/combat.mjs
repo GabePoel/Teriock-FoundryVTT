@@ -8,7 +8,6 @@ const { Combat } = foundry.documents;
 /**
  * The Teriock Combat implementation.
  * @mixes BaseDocument
- * @property {DocumentCollection<TeriockCombatant>} combatants
  */
 export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Combat) {
   /**

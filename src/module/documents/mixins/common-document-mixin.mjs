@@ -8,6 +8,7 @@ import * as documentMixins from "./_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
  */
 
 /**
@@ -86,7 +87,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * The actor associated with this document if there is one.
-     * @returns {TeriockActor}
+     * @returns {TeriockActor|null}
      */
     get actor() {
       return this.parent?.actor ?? null;
