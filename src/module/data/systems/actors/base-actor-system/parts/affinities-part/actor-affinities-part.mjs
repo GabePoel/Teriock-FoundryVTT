@@ -167,8 +167,7 @@ export default function ActorAffinitiesPart(Base) {
      */
     prepareAffinities() {
       for (const id of Object.keys(this.derivedAffinities)) { delete this.derivedAffinities[id]; }
-      const effects = this.parent.validEffects.filter(e => e.active);
-      for (const effect of effects) {
+      for (const effect of this.parent.appliedEffects) {
         for (const affinity of effect.system.activeAffinities ?? []) { this.#addAffinity(affinity.toEntry()); }
       }
     }

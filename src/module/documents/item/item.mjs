@@ -73,7 +73,7 @@ export default class TeriockItem
    * @returns {Generator<TeriockActiveEffect, void, void>}
    */
   *allApplicableEffects() {
-    for (const effect of this.effects) { yield effect; }
+    for (const effect of this.effects) { if (!effect.isReference) { yield effect; } }
   }
 
   /**

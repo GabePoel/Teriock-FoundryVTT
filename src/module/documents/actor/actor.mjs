@@ -162,11 +162,11 @@ export default class TeriockActor
 
   /**
    * All modifiable children, visible or otherwise.
-   * @returns {TeriockActiveEffect[]}
+   * @returns {(TeriockActiveEffect|TeriockItem)[]}
    */
   get modifiableChildren() {
     if (!this._cache.modifiableChildren) {
-      this._cache.modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c => !c.isReference);
+      this._cache.modifiableChildren = [...this.allApplicableEffects(), ...this.items.contents];
     }
     return this._cache.modifiableChildren;
   }
@@ -183,15 +183,6 @@ export default class TeriockActor
   }
 
   /**
-   * All active effects that apply to this actor.
-   * @returns {TeriockActiveEffect[]}
-   */
-  get validEffects() {
-    if (!this._cache.validEffects) { this._cache.validEffects = Array.from(this.allApplicableEffects()); }
-    return this._cache.validEffects;
-  }
-
-  /**
    * Apply any transformations to child data which are caused by ActiveEffects.
    * @param {Teriock.Changes.Phase} phase
    * @internal
@@ -200,8 +191,7 @@ export default class TeriockActor
     if (!game.settings.get("teriock", "nonHierarchicalChanges")) { return; }
     /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
     const changeMap = { ability: [], armament: [] };
-    for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) { continue; }
+    for (const effect of this.appliedEffects) {
       for (const change of effect.system.childChanges) {
         if (
           !change.qualifier
@@ -308,6 +298,15 @@ export default class TeriockActor
   _resetStagedOperations() {
     this._staged.itemCreations.clear();
     this._staged.itemDeletions.clear();
+  }
+
+  /**
+   * @inheritDoc
+   * @yields {TeriockActiveEffect}
+   * @returns {Generator<TeriockActiveEffect, void, void>}
+   */
+  *allApplicableEffects() {
+    for (const effect of super.allApplicableEffects()) { if (!effect.isReference) { yield effect; } }
   }
 
   /** @inheritDoc */
@@ -457,7 +456,6 @@ export default class TeriockActor
   /** @inheritDoc */
   resetChildMaps() {
     super.resetChildMaps();
-    delete this._cache.validEffects;
     delete this._cache.modifiableChildren;
   }
 

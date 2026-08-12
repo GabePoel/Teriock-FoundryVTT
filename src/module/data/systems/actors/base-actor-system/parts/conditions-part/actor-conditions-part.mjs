@@ -43,7 +43,7 @@ export default function ActorConditionsPart(Base) {
      * Copy active effect names into condition information.
      */
     #applyEffectConditionReasons() {
-      for (const e of this.parent.validEffects) {
+      for (const e of this.parent.appliedEffects) {
         for (const s of e.statuses) {
           if (e.id.startsWith(s)) { continue; }
           this.conditionInformation[s]?.reasons.add(e.name);

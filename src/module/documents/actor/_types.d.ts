@@ -1,14 +1,14 @@
 import { EmbeddedCollection } from "@common/abstract/_module.mjs";
 
-import { TeriockActiveEffect as ActiveEffectClass, TeriockActor as ActorClass, TeriockTokenDocument } from "../_module.mjs";
+import {
+  TeriockActiveEffect as ActiveEffectClass,
+  TeriockActor as ActorClass,
+  TeriockTokenDocument,
+} from "../_module.mjs";
 import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
 
-type ActorSubtype<T extends ActorType> = ActorClass & {
-  sheet: ActorSheetMap[T];
-  system: ActorSystemMap[T];
-  type: T;
-};
+type ActorSubtype<T extends ActorType> = ActorClass & { sheet: ActorSheetMap[T], system: ActorSystemMap[T], type: T };
 
 declare module "./actor.mjs" {
   export default interface TeriockActor {

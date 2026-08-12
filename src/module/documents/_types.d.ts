@@ -31,13 +31,11 @@ declare global {
       /** Whether this document is a status effect. */
       isStatus?: boolean;
       /** All modifiable children of this document, visible or otherwise. */
-      modifiableChildren?: TeriockActiveEffect[];
+      modifiableChildren?: (TeriockActiveEffect | TeriockItem)[];
       /** The subs of this document or their indexes. */
       subs?: TypeCollection<ID<TeriockDocument>, TeriockDocument>;
       /** Previously-tracked sup id, retained so a moved sub can reset its old sup. */
       supId?: ID<TeriockActiveEffect | TeriockActor | TeriockItem> | null;
-      /** All valid active effects that apply to this document. */
-      validEffects?: TeriockActiveEffect[];
       /** All visible children of this document or their indexes. */
       visibleChildren?: (TeriockActiveEffect | TeriockItem)[];
       /** All visible children of this document or their indexes, keyed by type. */
@@ -65,11 +63,7 @@ declare global {
       wiki: boolean;
     };
 
-    export type DocumentMetadata = {
-      child: boolean;
-      hierarchy: boolean;
-      tooltip: boolean;
-    };
+    export type DocumentMetadata = { child: boolean, hierarchy: boolean, tooltip: boolean };
   }
 }
 
