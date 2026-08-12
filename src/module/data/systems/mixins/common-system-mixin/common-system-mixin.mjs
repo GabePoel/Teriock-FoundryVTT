@@ -47,9 +47,9 @@ export default function CommonSystemMixin(Base) {
     static get metadata() {
       return {
         armament: false,
-        childEffectTypes: [],
-        childItemTypes: [],
+        childTypes: [],
         consumable: false,
+        disabledPath: null,
         hierarchy: false,
         passive: false,
         preservedProperties: this.PRESERVED_PROPERTIES,

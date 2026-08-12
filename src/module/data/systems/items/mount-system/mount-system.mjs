@@ -22,10 +22,7 @@ export default class MountSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["ability", "fluency", "resource"],
-      type: "mount",
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "mount" });
   }
 
   /** @inheritDoc */

@@ -130,7 +130,7 @@ export default class AbilitySystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["ability", "fluency", "resource"],
+      childTypes: ["ability", "fluency", "resource"],
       passive: true,
       type: "ability",
       usable: true,

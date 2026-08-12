@@ -56,7 +56,7 @@ export default class SpeciesSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childItemTypes: ["body", "equipment", "rank"],
+      childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
       type: "species",
       visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
     });

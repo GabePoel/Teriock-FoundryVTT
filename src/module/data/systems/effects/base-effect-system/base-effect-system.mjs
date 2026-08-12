@@ -17,6 +17,11 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   static PRESERVED_PROPERTIES = ["disabled", "duration", "tint", "transfer", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, { disabledPath: "disabled" });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
       ...super.defineSchema(),

@@ -52,14 +52,6 @@ export default function ChildDocumentMixin(Base) {
     }
 
     /**
-     * Disables the document.
-     * @returns {Promise<void>}
-     */
-    async disable() {
-      await this.update({ "system.disabled": true });
-    }
-
-    /**
      * Duplicates the document within its parent.
      * @param {object} [data]
      * @returns {Promise<ChildDocument>}
@@ -78,26 +70,10 @@ export default function ChildDocumentMixin(Base) {
       return copyDocument[0];
     }
 
-    /**
-     * Enables the document.
-     * @returns {Promise<void>}
-     */
-    async enable() {
-      await this.update({ "system.disabled": false });
-    }
-
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
       if (this.isTop) { this.prepareChangeData(); }
-    }
-
-    /**
-     * Toggles whether this document is disabled.
-     * @returns {Promise<void>}
-     */
-    async toggleDisabled() {
-      await this.update({ "system.disabled": !this.system.disabled });
     }
 
     /** @inheritDoc */

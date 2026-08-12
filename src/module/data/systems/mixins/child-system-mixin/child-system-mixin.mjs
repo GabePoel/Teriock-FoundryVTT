@@ -152,8 +152,8 @@ export default function ChildSystemMixin(Base) {
         tooltip: this.parent.disabled
           ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
           : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-        visible: this.parent.isOwner,
-        onClick: () => this.parent.toggleDisabled(),
+        visible: this.parent.isOwner && Boolean(this.metadata.disabledPath),
+        onClick: () => this.parent.update({ [this.metadata.disabledPath]: !this.parent.disabled }),
       }];
     }
 
@@ -311,24 +311,26 @@ export default function ChildSystemMixin(Base) {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
-          onClick: this.parent.enable.bind(this.parent),
           visible: this.parent?.isOwner
             && this.parent.disabled
+            && Boolean(this.metadata.disabledPath)
             && this.parent.type !== "equipment"
             && this.parent.type !== "mount"
             && doc !== this.parent,
+          onClick: async () => await this.parent.update({ [this.metadata.disabledPath]: false }),
         },
         {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
-          onClick: this.parent.disable.bind(this.parent),
           visible: this.parent?.isOwner
             && !this.parent.disabled
+            && Boolean(this.metadata.disabledPath)
             && this.parent.type !== "equipment"
             && this.parent.type !== "mount"
             && !(this.parent.type === "ability" && this.isVirtual)
             && doc !== this.parent,
+          onClick: async () => await this.parent.update({ [this.metadata.disabledPath]: true }),
         },
         {
           group: "open",

@@ -21,8 +21,8 @@ export default class BaseItemSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["ability", "fluency", "resource"],
-      stats: false,
+      childTypes: ["ability", "fluency", "resource"],
+      disabledPath: "system.disabled",
       visibleTypes: ["ability", "fluency", "resource"],
     });
   }

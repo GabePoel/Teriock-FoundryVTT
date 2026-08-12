@@ -90,8 +90,7 @@ export default class ApplicableEffectSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["ability", "fluency", "property", "resource"],
-      childItemTypes: [],
+      childTypes: ["ability", "fluency", "property", "resource"],
       usable: true,
       visibleTypes: ["ability", "fluency", "property", "resource"],
     });

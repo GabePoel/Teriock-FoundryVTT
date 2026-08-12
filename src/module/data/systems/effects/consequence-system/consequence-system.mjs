@@ -16,8 +16,7 @@ export default class ConsequenceSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["ability", "fluency", "resource"],
-      childItemTypes: ["body", "equipment", "power", "rank", "species"],
+      childTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
       initialKind: "other",
       type: "consequence",
       visibleTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],

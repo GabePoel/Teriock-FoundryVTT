@@ -78,7 +78,7 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childItemTypes: ["equipment"],
+      childTypes: ["equipment", ...super.metadata.childTypes],
       initialKind: "mundane",
       type: "equipment",
       usable: true,

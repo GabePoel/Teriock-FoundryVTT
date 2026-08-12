@@ -121,13 +121,13 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       const enabled = await DocumentSelector.selectMulti(docs, {
         checked: docs.filter(d => !d.disabled).map(r => r.uuid),
       });
-      const freeOps = docs.map(d => {
+      const freeOps = docs.filter(d => d.metadata.disabledPath).map(d => {
         return {
           action: "update",
           documentName: d.documentName,
           pack: d.pack,
           parent: d.parent,
-          updates: [{ _id: d.id, [d.documentName === "Item" ? "system.disabled" : "disabled"]: !enabled.includes(d) }],
+          updates: [{ _id: d.id, [d.metadata.disabledPath]: !enabled.includes(d) }],
         };
       });
       await foundry.documents.modifyBatch(consolidateWriteOperations(freeOps));

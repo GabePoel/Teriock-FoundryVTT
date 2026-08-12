@@ -71,16 +71,6 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
-  async disable() {
-    await this.update({ disabled: true });
-  }
-
-  /** @inheritDoc */
-  async enable() {
-    await this.update({ disabled: false });
-  }
-
-  /** @inheritDoc */
   getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
     if (embeddedName === "Item") { return this.getCreateDependentDocumentsOperation(embeddedName, data, operation); }
     return super.getCreateChildDocumentsOperation(embeddedName, data, operation);
@@ -102,10 +92,5 @@ export default class TeriockActiveEffect
   resetChildMaps() {
     super.resetChildMaps();
     delete this._cache.isReference;
-  }
-
-  /** @inheritDoc */
-  async toggleDisabled() {
-    await this.update({ disabled: !this.disabled });
   }
 }

@@ -55,9 +55,8 @@ export default function CommonDocumentMixin(Base) {
      * @returns {boolean}
      */
     static validateChildType(parent, child, operation = {}) {
-      if (!parent?.metadata?.childItemTypes || !parent?.metadata?.childEffectTypes) { return true; }
-      const childTypes = new Set([...parent.metadata.childEffectTypes, ...parent.metadata.childItemTypes]);
-      const out = childTypes.has(child?.type);
+      if (!parent?.metadata?.childTypes) { return true; }
+      const out = parent.metadata.childTypes.includes(child?.type);
       if (!out && operation.notifyOnFailure) {
         ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
           format: {

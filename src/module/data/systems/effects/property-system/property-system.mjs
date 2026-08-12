@@ -55,7 +55,7 @@ export default class PropertySystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["property"],
+      childTypes: ["property"],
       passive: true,
       type: "property",
       usable: true,

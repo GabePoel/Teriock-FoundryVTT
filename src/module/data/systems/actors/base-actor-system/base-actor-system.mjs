@@ -67,8 +67,23 @@ export default class BaseActorSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["attunement", "base", "condition", "consequence", "cover", "fluency", "hack", "resource"],
-      childItemTypes: ["archetype", "body", "equipment", "mount", "power", "rank", "species"],
+      childTypes: [
+        "archetype",
+        "attunement",
+        "base",
+        "body",
+        "condition",
+        "consequence",
+        "cover",
+        "equipment",
+        "fluency",
+        "hack",
+        "mount",
+        "power",
+        "rank",
+        "resource",
+        "species",
+      ],
       visibleTypes: ["power", "rank", "species"],
     });
   }

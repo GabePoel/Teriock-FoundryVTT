@@ -44,9 +44,9 @@ declare global {
 
     export type ModelMetadata = {
       armament: boolean;
-      childEffectTypes: ActiveEffectType[];
-      childItemTypes: ItemType[];
+      childTypes: Teriock.Documents.ChildType[];
       consumable: boolean;
+      disabledPath: "disabled" | "system.disabled" | null;
       hierarchy: boolean;
       initialKind?: string;
       isTextPage?: boolean;

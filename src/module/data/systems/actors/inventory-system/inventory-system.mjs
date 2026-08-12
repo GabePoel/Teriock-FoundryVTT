@@ -4,8 +4,7 @@ export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: ["base", "consequence"],
-      childItemTypes: ["equipment"],
+      childTypes: ["base", "consequence", "equipment"],
       type: "inventory",
       visibleTypes: ["equipment"],
     });
