@@ -1,18 +1,14 @@
-import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
-import { TypeCollection } from "../../documents/collections/_module.mjs";
-import { addFormula, formulaExists } from "../../helpers/formula.mjs";
-import { DocumentExecution } from "../abstract/_module.mjs";
-import * as executionMixins from "../mixins/_module.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
+import { TypeCollection } from "../../../documents/collections/_module.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { DocumentExecution } from "../../abstract/_module.mjs";
+import * as executionMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @mixes ImpactsExecution
  * @param {HarmRoll[]} rolls
- * @property {boolean} dealImpacts
- * @property {boolean} secret
- * @property {boolean} twoHanded
- * @property {boolean} useAbilities
  */
 export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(DocumentExecution) {
   /** @inheritDoc */
@@ -131,9 +127,9 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
 
   /** @inheritDoc */
   async _prepareFormula() {
-    if (!this.dealImpacts) { this.formula = ""; }
+    if (!this.dealImpacts) { this.updateSource({ formula: "" }); }
     this._applyImpactModifiers();
-    if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
+    if (formulaExists(this.bonus)) { this.updateSource({ formula: addFormula(this.formula, this.bonus) }); }
   }
 
   /**

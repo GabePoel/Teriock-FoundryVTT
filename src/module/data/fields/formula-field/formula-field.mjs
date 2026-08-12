@@ -1,5 +1,5 @@
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import * as formula from "../../helpers/formula.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import * as formula from "../../../helpers/formula.mjs";
 
 const { StringField } = foundry.data.fields;
 
@@ -25,7 +25,11 @@ export default class FormulaField extends StringField {
    */
   constructor(options = {}, context = {}) {
     super(options, context);
+    this.#deterministic = options.deterministic;
   }
+
+  /** @type {boolean} */
+  #deterministic;
 
   /** @inheritDoc */
   _applyChangeAdd(value, delta, _model, _change) {
@@ -41,14 +45,14 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeBoost(value, delta, _model, _change) {
-    if (!delta || this.deterministic) { return value; }
+    if (!delta || this.#deterministic) { return value; }
     return formula.boostFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
     if (!value) { return delta; }
-    return this.deterministic
+    return this.#deterministic
       ? formula.downgradeDeterministicFormula(value, delta)
       : formula.downgradeIndeterministicFormula(value, delta);
   }
@@ -84,7 +88,7 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeAdd(value, delta, _model, _change) {
-    if (!delta || this.deterministic) { return value; }
+    if (!delta || this.#deterministic) { return value; }
     return formula.addTypesToFormula(value, delta);
   }
 
@@ -97,7 +101,7 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeRemove(value, delta, _model, _change) {
-    if (!delta || this.deterministic) { return value; }
+    if (!delta || this.#deterministic) { return value; }
     return formula.removeTypesFromFormula(value, delta);
   }
 
@@ -110,14 +114,14 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeSet(value, delta, _model, _change) {
-    if (!delta || this.deterministic) { return value; }
+    if (!delta || this.#deterministic) { return value; }
     return formula.setTypesOfFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
     if (!value) { return delta; }
-    return this.deterministic
+    return this.#deterministic
       ? formula.upgradeDeterministicFormula(value, delta)
       : formula.upgradeIndeterministicFormula(value, delta);
   }
@@ -138,13 +142,13 @@ export default class FormulaField extends StringField {
 
   /** @inheritdoc */
   _validateType(value) {
-    if (this.deterministic) {
+    if (this.#deterministic) {
       const roll = new BaseRoll(value, {});
       if (!roll.isDeterministic) {
         throw new Error(`Deterministic formula must not contain dice terms: ${value}`);
       }
     }
-    super._validateType(value);
+    return super._validateType(value);
   }
 
   /** @inheritDoc */
@@ -171,7 +175,7 @@ export default class FormulaField extends StringField {
   toFormGroup(groupConfig = {}, inputConfig = {}) {
     groupConfig.classes ||= [];
     groupConfig.classes.push("formula-input");
-    groupConfig.units ??= _loc(`TERIOCK.TERMS.Formula.${this.deterministic ? "deterministic" : "rollable"}`);
+    groupConfig.units ??= _loc(`TERIOCK.TERMS.Formula.${this.#deterministic ? "deterministic" : "rollable"}`);
     return super.toFormGroup(groupConfig, inputConfig);
   }
 }

@@ -2,7 +2,7 @@ import { UnitUpdater } from "../../../../applications/dialogs/updaters/_module.m
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { multiplyFormula } from "../../../../helpers/formula.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
-import FormulaField from "../../../fields/formula-field.mjs";
+import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 
 const { fields } = foundry.data;
 

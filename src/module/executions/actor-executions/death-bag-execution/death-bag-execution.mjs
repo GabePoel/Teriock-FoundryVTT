@@ -1,12 +1,8 @@
-import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { deathBagSchema } from "../../data/fields/tools/builders.mjs";
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { DocumentExecution } from "../abstract/_module.mjs";
+import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
+import { deathBagSchema } from "../../../data/fields/tools/builders.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { DocumentExecution } from "../../abstract/_module.mjs";
 
-/**
- * @property {Record<Teriock.Keys.DeathBagStoneColor, Teriock.System.FormulaString>} stones
- * @property {Teriock.System.FormulaString} pull
- */
 export default class DeathBagExecution extends DocumentExecution {
   /** @inheritDoc */
   static defineSchema() {
@@ -85,7 +81,7 @@ export default class DeathBagExecution extends DocumentExecution {
     return TERIOCK.display.icons.ui.deathBag;
   }
 
-  /** @inheritDoc */
+  /** @returns {TypedIdentifier} */
   get journalEntryPageIdentifier() {
     return "core:death-bag";
   }

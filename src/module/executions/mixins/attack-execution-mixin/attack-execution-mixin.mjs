@@ -1,8 +1,8 @@
-import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
-import { PiercingModel } from "../../data/models/_module.mjs";
-import { BaseRoll, ThresholdRoll } from "../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../helpers/formula.mjs";
-import * as executionMixins from "./_module.mjs";
+import * as executionMixins from "../_module.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
+import { PiercingModel } from "../../../data/models/_module.mjs";
+import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 
 const { fields } = foundry.data;
 
@@ -10,19 +10,13 @@ const { fields } = foundry.data;
  * Mixin for executions that can make an attack roll.
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, AttackExecution>}
+ * @returns {MixinResult<T, AttackExecution & Teriock.Execution.AttackExecutionData>}
  */
 export default function AttackExecutionMixin(Base) {
   /**
+   * @implements {Teriock.Execution.AttackExecutionData}
    * @mixes ThresholdExecution
    * @mixin
-   * @property {PiercingModel} piercing
-   * @property {Teriock.System.FormulaString} incurredAttackPenalty
-   * @property {boolean} sb
-   * @property {boolean} useArmament
-   * @property {boolean} vitals
-   * @property {boolean} warded
-   * @property {number} existingAttackPenalty
    */
   class AttackExecution extends executionMixins.ThresholdExecutionMixin(Base) {
     /** @inheritDoc */
@@ -300,8 +294,8 @@ export default function AttackExecutionMixin(Base) {
     /** @inheritDoc */
     async _improveFormula() {
       if (this.isAttack) {
-        if (this.piercing.av0) { this.formula = addFormula(this.formula, "@av0"); }
-        if (this.sb) { this.formula = addFormula(this.formula, "@sb"); }
+        if (this.piercing.av0) { this.updateSource({ formula: addFormula(this.formula, "@av0") }); }
+        if (this.sb) { this.updateSource({ formula: addFormula(this.formula, "@sb") }); }
       }
       await super._improveFormula();
     }
@@ -351,7 +345,7 @@ export default function AttackExecutionMixin(Base) {
     /** @inheritDoc */
     async _prepareBaseFormula() {
       await super._prepareBaseFormula();
-      if (this.isAttack) { this.formula = addFormula(this.formula, "@ap"); }
+      if (this.isAttack) { this.updateSource({ formula: addFormula(this.formula, "@ap") }); }
     }
 
     /** @inheritDoc */

@@ -63,7 +63,7 @@ export default class AbilitySystem
     parts.AbilityEquipmentPart,
     parts.AbilityInfoPart,
     parts.AbilityUsagePart,
-    parts.AbilityImprovementsPart,
+    parts.AbilityUpgradesPart,
     parts.AbilityOverviewPart,
     parts.AbilityPanelPart,
     parts.AbilityRankPart,

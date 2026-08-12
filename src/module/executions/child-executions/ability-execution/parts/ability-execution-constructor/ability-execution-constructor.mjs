@@ -1,17 +1,13 @@
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
-import { objectMap, omit } from "../../../../helpers/utils.mjs";
-import { DocumentExecution } from "../../../abstract/_module.mjs";
-import * as executionMixins from "../../../mixins/_module.mjs";
+import { BaseRoll } from "../../../../../dice/rolls/_module.mjs";
+import { addFormula, formulaExists } from "../../../../../helpers/formula.mjs";
+import { objectMap, omit } from "../../../../../helpers/utils.mjs";
+import { DocumentExecution } from "../../../../abstract/_module.mjs";
+import * as executionMixins from "../../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @mixes AttackExecution
- * @property {boolean} consumeEquipment
- * @property {boolean} autoPayCosts
- * @property {boolean} noHeighten
- * @property {boolean} usesReaction
  */
 export default class AbilityExecutionConstructor extends executionMixins.AttackExecutionMixin(DocumentExecution) {
   /** @inheritDoc */

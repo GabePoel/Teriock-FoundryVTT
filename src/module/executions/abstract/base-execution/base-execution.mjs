@@ -1,12 +1,12 @@
-import { ExecutionEditor } from "../../applications/dialogs/_module.mjs";
-import { BaseDataModel } from "../../data/abstract/_module.mjs";
-import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
-import * as dataMixins from "../../data/mixins/_module.mjs";
-import { CompetenceModel } from "../../data/models/_module.mjs";
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { TypeCollection } from "../../documents/collections/_module.mjs";
-import { addFormula, formulaExists } from "../../helpers/formula.mjs";
+import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
+import { BaseDataModel } from "../../../data/abstract/_module.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
+import * as dataMixins from "../../../data/mixins/_module.mjs";
+import { CompetenceModel } from "../../../data/models/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { TypeCollection } from "../../../documents/collections/_module.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 
 const { fields } = foundry.data;
 
@@ -18,8 +18,6 @@ const { fields } = foundry.data;
  * Executions are ephemeral classes that resolve some sort of roll, activity, document usage, etc. They show an
  * {@link ExecutionEditor} dialog for the user to interact with and configure.
  * @mixes AutomatedData
- * @property {CompetenceModel} competence
- * @property {Teriock.System.FormulaString} formula
  */
 export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDataModel) {
   /**
@@ -155,7 +153,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     );
   }
 
-  /** @returns {AnyActor|null} */
+  /** @returns {AnyActor} */
   get actor() {
     if (this._actor) { return this._actor; }
     return game.actors.default;
@@ -394,7 +392,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    */
   async _improveFormula() {
     if (this.competenceImprovesFormula) {
-      this.formula = addFormula(this.formula, this.competence.formula);
+      this.updateSource({ formula: addFormula(this.formula, this.competence.formula) });
     }
   }
 

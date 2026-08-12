@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
-import FormulaField from "../../../fields/formula-field.mjs";
+import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 import { RollActivation } from "../../activations/_module.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

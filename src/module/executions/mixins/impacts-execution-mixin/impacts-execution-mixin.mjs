@@ -1,25 +1,20 @@
-import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
-import { HarmRoll } from "../../dice/rolls/_module.mjs";
-import { formulaExists } from "../../helpers/formula.mjs";
-import { objectMap } from "../../helpers/utils.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
+import { HarmRoll } from "../../../dice/rolls/_module.mjs";
+import { formulaExists } from "../../../helpers/formula.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * Mixin for executions that deal an impact and can be modified with boosts, deboosts, and critical hits. This replicates
- * the logic of the old `boostDialog` inside the execution framework.
+ * Mixin for executions that deal an impact and can be modified with boosts, deboosts, and critical hits.
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, ImpactsExecution>}
+ * @returns {MixinResult<T, ImpactsExecution & Teriock.Execution.ImpactsExecutionData>}
  */
 export default function ImpactsExecutionMixin(Base) {
   /**
+   * @implements {Teriock.Execution.ImpactsExecutionData}
    * @mixin
-   * @property {Set<Teriock.Keys.Impact>} impacts
-   * @property {Teriock.System.FormulaString} formula
-   * @property {boolean} crit
-   * @property {number} boosts
-   * @property {number} deboosts
    */
   class ImpactsExecution extends Base {
     /** @inheritDoc */
@@ -138,10 +133,10 @@ export default function ImpactsExecutionMixin(Base) {
       if (this.crit) {
         const roll = new this._RollClass(this.formula, this.getRollData());
         roll.alter(2, 0, { multiplyNumeric: false });
-        this.formula = roll.formula;
+        this.updateSource({ formula: roll.formula });
       }
       const setBoostNumber = (this.boosts - this.deboosts) * (this.crit ? 2 : 1);
-      if (setBoostNumber !== 0) { this.formula = `sb(${this.formula}, ${setBoostNumber})`; }
+      if (setBoostNumber !== 0) { this.updateSource({ formula: `sb(${this.formula}, ${setBoostNumber})` }); }
     }
 
     /** @inheritDoc */

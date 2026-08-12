@@ -42,7 +42,7 @@ export default class BaseActorSystem
     parts.ActorHacksPart,
     parts.ActorCombatPart,
     parts.ActorCoverPart,
-    parts.ActorRollableTakesPart,
+    parts.ActorImpactsPart,
     parts.ActorTradecraftsPart,
     parts.ActorAttributesPart,
     parts.ActorCapacitiesPart,

@@ -1,13 +1,10 @@
-import { UseDocumentsAutomation } from "../../data/pseudo-documents/automations/_module.mjs";
-import { TypeCollection } from "../../documents/collections/_module.mjs";
-import { toId, toKebabCase } from "../../helpers/string.mjs";
-import { DocumentExecution } from "../abstract/_module.mjs";
+import { UseDocumentsAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
+import { TypeCollection } from "../../../documents/collections/_module.mjs";
+import { toId, toKebabCase } from "../../../helpers/string.mjs";
+import { DocumentExecution } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @property {boolean} useAbilities
- */
 export default class ShortRestExecution extends DocumentExecution {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.ShortRest"];
@@ -90,7 +87,7 @@ export default class ShortRestExecution extends DocumentExecution {
     return TERIOCK.display.icons.ui[this.executionTime];
   }
 
-  /** @inheritDoc */
+  /** @returns {TypedIdentifier} */
   get journalEntryPageIdentifier() {
     return `core:${toKebabCase(this.executionTime)}`;
   }

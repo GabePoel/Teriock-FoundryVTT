@@ -1,8 +1,8 @@
-import mathConfig from "../../constants/config/math-config.mjs";
-import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
-import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../helpers/formula.mjs";
-import { objectMap } from "../../helpers/utils.mjs";
+import mathConfig from "../../../constants/config/math-config.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
+import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -10,14 +10,12 @@ const { fields } = foundry.data;
  * Mixin for executions involving a d20 roll.
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, ThresholdExecution>}
+ * @returns {MixinResult<T, ThresholdExecution & Teriock.Execution.ThresholdExecutionData>}
  */
 export default function ThresholdExecutionMixin(Base) {
   /**
+   * @implements {Teriock.Execution.ThresholdExecutionData}
    * @mixin
-   * @property {Teriock.Keys.Comparison} comparison
-   * @property {Teriock.System.FormulaString} bonus
-   * @property {number} edge
    */
   class ThresholdExecution extends Base {
     /** @inheritDoc */
@@ -124,7 +122,7 @@ export default function ThresholdExecutionMixin(Base) {
     /** @inheritDoc */
     async _improveFormula() {
       await super._improveFormula();
-      if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
+      if (formulaExists(this.bonus)) { this.updateSource({ formula: addFormula(this.formula, this.bonus) }); }
     }
 
     /**
@@ -136,7 +134,7 @@ export default function ThresholdExecutionMixin(Base) {
         let suffix = "";
         if (this.edge > 0) { suffix = "kh1"; }
         if (this.edge < 0) { suffix = "kl1"; }
-        this.formula = `${1 + Math.abs(this.edge)}d20${suffix}`;
+        this.updateSource({ formula: `${1 + Math.abs(this.edge)}d20${suffix}` });
       }
     }
 

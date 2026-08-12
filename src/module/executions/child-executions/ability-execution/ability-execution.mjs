@@ -36,7 +36,7 @@ export default class AbilityExecution
   /** @inheritDoc */
   async _improveFormula() {
     if (this.competenceImprovesFormula && this.heightened > 0) {
-      this.formula = addFormula(this.formula, "@h");
+      this.updateSource({ formula: addFormula(this.formula, "@h") });
     }
     await super._improveFormula();
   }
@@ -44,8 +44,8 @@ export default class AbilityExecution
   /** @inheritDoc */
   async _prepareBaseFormula() {
     if (this.isAttack) { return super._prepareBaseFormula(); }
-    if (this.isFeat) { this.formula = "10"; }
-    else if (this.isBlock) { this.formula = "10 + @av + @bv"; }
+    if (this.isFeat) { this.updateSource({ formula: "10" }); }
+    else if (this.isBlock) { this.updateSource({ formula: "10 + @av + @bv" }); }
   }
 
   /** @inheritDoc */

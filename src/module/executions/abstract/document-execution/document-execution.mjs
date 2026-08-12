@@ -1,13 +1,9 @@
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { prefixObject } from "../../helpers/utils.mjs";
-import BaseExecution from "./base-execution.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { prefixObject } from "../../../helpers/utils.mjs";
+import BaseExecution from "../base-execution/base-execution.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @property {Teriock.Execution.ExecutionOptions} options
- * @property {boolean} consumeUses
- */
 export default class DocumentExecution extends BaseExecution {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Document"];
@@ -32,7 +28,7 @@ export default class DocumentExecution extends BaseExecution {
     }
   }
 
-  /** @inheritDoc */
+  /** @returns {Teriock.Execution.ExecutionDialogButtonEntry[]} */
   get _dialogButtons() {
     return [{
       action: "confirm",

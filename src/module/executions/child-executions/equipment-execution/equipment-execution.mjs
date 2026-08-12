@@ -1,14 +1,10 @@
-import { addTypesToFormula, formulaExists } from "../../helpers/formula.mjs";
-import { getImage, systemPath } from "../../helpers/path.mjs";
-import { getName } from "../../helpers/utils.mjs";
-import ArmamentExecution from "./armament-execution.mjs";
+import { addTypesToFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { getImage, systemPath } from "../../../helpers/path.mjs";
+import { getName } from "../../../helpers/utils.mjs";
+import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @property {boolean} consumeAmmunition
- * @property {boolean} inheritAmmunitionDamageTypes
- */
 export default class EquipmentExecution extends ArmamentExecution {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Equipment"];
