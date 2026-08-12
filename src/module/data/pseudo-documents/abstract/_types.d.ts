@@ -1,5 +1,6 @@
-import { BaseEffectSystem } from "../../systems/effects/_module.mjs";
-import { BaseItemSystem } from "../../systems/items/_module.mjs";
+declare module "./mechanic-pseudo-document.mjs" {
+  export default interface MechanicPseudoDocument extends Teriock.PseudoDocuments.MechanicPseudoDocumentData {}
+}
 
 declare global {
   namespace Teriock.PseudoDocuments {
@@ -7,8 +8,8 @@ declare global {
       activeQualifier: Teriock.System.FormulaString;
       competencies: Set<number>;
       heighten: Set<number>;
-
-      get parent(): BaseEffectSystem | BaseItemSystem;
     };
   }
 }
+
+export {};

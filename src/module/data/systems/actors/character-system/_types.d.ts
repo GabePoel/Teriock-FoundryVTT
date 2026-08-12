@@ -1,8 +1,5 @@
-declare global {
-  namespace Teriock.Models {
-    export interface CharacterSystemData extends Teriock.Models.BaseActorSystemData {
-      get parent(): TeriockCharacter;
-    }
+declare module "./character-system.mjs" {
+  export default interface CharacterSystem extends Teriock.Models.BaseActorSystemData {
   }
 }
 

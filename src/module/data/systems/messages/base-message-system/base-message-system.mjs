@@ -4,9 +4,8 @@ import * as systemMixins from "../../mixins/_module.mjs";
 const { TypeDataModel } = foundry.abstract;
 
 /**
- * @extends {TypeDataModel}
- * @extends {Teriock.Models.BaseMessageSystemData}
- * @extends {Teriock.Data.BaseMessageData}
+ * @implements {Teriock.Models.BaseMessageSystemData}
+ * @implements {Teriock.Data.BaseMessageData}
  * @mixes BaseSystem
  */
 export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemMixins.BaseSystemMixin) {

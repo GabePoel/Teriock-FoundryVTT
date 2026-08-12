@@ -9,13 +9,13 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles money.
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorMoneyPart & Teriock.Models.ActorMoneyPartData>}
  */
 export default function ActorMoneyPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorMoneyPartData}
+   * @implements {Teriock.Models.ActorMoneyPartData}
    * @mixin
    * @property {AnyActor} parent
    */

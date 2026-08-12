@@ -1,12 +1,12 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
- * @template {Constructor<AbilityExecutionConstructor>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityExecutionRolls>}
  */
 export default function AbilityExecutionRollsPart(Base) {
   /**
-   * @extends {AbilityExecutionConstructor}
    * @mixin
    */
   class AbilityExecutionRolls extends Base {

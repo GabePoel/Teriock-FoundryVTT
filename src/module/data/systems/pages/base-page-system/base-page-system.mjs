@@ -8,8 +8,7 @@ const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
 /**
- * @extends {TypeDataModel}
- * @extends {Teriock.Models.BasePageSystemData}
+ * @implements {Teriock.Models.BasePageSystemData}
  * @mixes RulesSystem
  * @mixes AccessData
  */

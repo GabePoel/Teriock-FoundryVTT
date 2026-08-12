@@ -5,12 +5,12 @@ import { TeriockDragDrop } from "../../ux/_module.mjs";
  */
 
 /**
- * @template {Constructor<DragDropSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, MechanicsTabsSheet>}
  */
 export default function MechanicsTabsSheetMixin(Base) {
   /**
-   * @extends {DragDropSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

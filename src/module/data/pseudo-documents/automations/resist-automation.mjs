@@ -8,7 +8,6 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {ThresholdAutomation}
  * @mixes CritMechanic
  * @mixes TriggerAutomation
  */

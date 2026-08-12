@@ -7,7 +7,6 @@ const { fields } = foundry.data;
 
 /**
  * An activation that makes an attack roll with no ability associated with it.
- * @extends {BaseActivation}
  * @property {CompetenceModel} competence
  * @property {ID<TeriockArmament>|null} armamentId
  * @property {Teriock.System.FormulaString} attackPenalty

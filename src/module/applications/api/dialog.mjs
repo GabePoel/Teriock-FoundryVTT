@@ -9,7 +9,6 @@ const { DialogV2 } = foundry.applications.api;
  */
 
 /**
- * @extends {DialogV2}
  * @mixes BaseApplication
  */
 export default class TeriockDialog extends BaseApplicationMixin(DialogV2) {

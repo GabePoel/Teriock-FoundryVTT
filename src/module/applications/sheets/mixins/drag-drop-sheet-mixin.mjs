@@ -9,12 +9,12 @@ const CHILD_DOCUMENT_TYPES = ["ActiveEffect", "Actor", "Item"];
 
 /**
  * Mixin adding drag-and-drop handling to sheets.
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, DragDropSheet>}
  */
 export default function DragDropSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixes DragDropApplication
    * @mixin
    * @property {AnyCommonDocument} document

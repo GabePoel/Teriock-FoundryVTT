@@ -1,4 +1,3 @@
-import { TeriockActiveEffect, TeriockItem } from "../../../../documents/_module.mjs";
 import { CommonDocumentSettingsModel } from "../../../models/settings-models/_module.mjs";
 
 declare global {
@@ -12,8 +11,8 @@ declare global {
       kind: string;
       /** <schema> Per-document behavior and display settings */
       settings: CommonDocumentSettingsModel;
-
-      get parent(): TeriockActiveEffect | TeriockItem;
     };
   }
 }
+
+export {};

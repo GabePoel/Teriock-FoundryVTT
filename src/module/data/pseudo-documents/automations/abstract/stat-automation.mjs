@@ -6,7 +6,6 @@ import BaseAutomation from "./base-automation.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  * @mixes CritMechanic
  * @param {boolean} consumeStatDice

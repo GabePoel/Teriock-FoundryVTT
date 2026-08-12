@@ -7,7 +7,6 @@ import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
  * A minimal document sheet with some edits to make it better resemble a dialog.
- * @extends {TeriockDocumentSheet}
  * @mixes TemporaryApplication
  */
 export default class DocumentDialog extends TemporaryApplicationMixin(TeriockDocumentSheet) {

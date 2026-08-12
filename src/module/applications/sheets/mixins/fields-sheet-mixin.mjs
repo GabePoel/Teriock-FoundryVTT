@@ -6,12 +6,12 @@ import { BaseUpdater, KindUpdater } from "../../dialogs/_module.mjs";
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, FieldsSheet>}
  */
 export default function FieldsSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

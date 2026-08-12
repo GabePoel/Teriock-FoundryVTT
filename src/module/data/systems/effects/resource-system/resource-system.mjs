@@ -5,8 +5,6 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 /**
  * Resource-specific effect data model.
- * @extends {CleanedEffectSystem}
- * @extends {Teriock.Models.ResourceSystemData}
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */

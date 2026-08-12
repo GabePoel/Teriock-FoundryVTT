@@ -97,3 +97,5 @@ declare global {
     export type Any = AnyActivation;
   }
 }
+
+export {};

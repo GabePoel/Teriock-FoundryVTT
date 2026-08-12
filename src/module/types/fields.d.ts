@@ -1,3 +1,7 @@
+declare module "../data/fields/formula-field.mjs" {
+  export default interface FormulaField extends Teriock.Fields._FormulaFieldOptions {}
+}
+
 declare global {
   namespace Teriock.Fields {
     export type _FormulaFieldOptions = {

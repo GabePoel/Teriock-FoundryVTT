@@ -1,12 +1,14 @@
-import { TeriockActor } from "../../../../documents/_module.mjs";
+declare module "./base-actor-system.mjs" {
+  export default interface BaseActorSystem extends Teriock.Models.BaseActorSystemData {}
+}
 
 declare global {
   namespace Teriock.Models {
-    export type BaseActorSystemData = {
+    export interface BaseActorSystemData {
       /** <schema> Per-document behavior and display settings */
       settings: Teriock.Models.DocumentSettingsModelInstance<"actor">;
-
-      get parent(): TeriockActor;
-    };
+    }
   }
 }
+
+export {};

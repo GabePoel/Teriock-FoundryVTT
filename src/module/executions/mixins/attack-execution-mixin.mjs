@@ -8,12 +8,12 @@ const { fields } = foundry.data;
 
 /**
  * Mixin for executions that can make an attack roll.
- * @template {Constructor<BaseExecution>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AttackExecution>}
  */
 export default function AttackExecutionMixin(Base) {
   /**
-   * @extends {BaseExecution}
    * @mixes ThresholdExecution
    * @mixin
    * @property {PiercingModel} piercing

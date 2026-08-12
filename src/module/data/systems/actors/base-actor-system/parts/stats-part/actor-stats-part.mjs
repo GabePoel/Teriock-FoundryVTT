@@ -16,14 +16,14 @@ const BAR_STATS = Object.entries(statConfig).filter(([_k, v]) => v.bar).map(([k,
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorStatsPart & Teriock.Models.ActorStatsPartData>}
  */
 export default function ActorStatsPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorStatsPartData}
    * @implements {Teriock.Functionality.StatProvider}
+   * @implements {Teriock.Models.ActorStatsPartData}
    * @mixin
    * @property {AnyActor} parent
    */

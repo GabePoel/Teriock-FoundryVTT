@@ -3,12 +3,12 @@
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, LockingSheet>}
  */
 export default function LockingSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

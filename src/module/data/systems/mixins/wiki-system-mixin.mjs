@@ -1,11 +1,11 @@
 /**
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
- * @template {Constructor<CommonSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, WikiSystem>}
  */
 export default function WikiSystemMixin(Base) {
   /**
-   * @extends {CommonSystem}
    * @mixin
    */
   class WikiSystem extends Base {

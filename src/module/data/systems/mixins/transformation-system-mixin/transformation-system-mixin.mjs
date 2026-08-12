@@ -38,15 +38,15 @@ function transformationStatFlag(stat) {
  * Relevant wiki pages:
  * - [Transformed](https://wiki.teriock.com/index.php/Condition:Transformed)
  *
- * @template {Constructor<ChildSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, TransformationSystem & Teriock.Models.TransformationSystemData>}
  * @see {ActorTransformationPart}
  * @see {SpeciesTransformationPart}
  */
 export default function TransformationSystemMixin(Base) {
   /**
-   * @extends {ChildSystem}
-   * @extends {Teriock.Models.TransformationSystemData}
+   * @implements {Teriock.Models.TransformationSystemData}
    * @mixin
    */
   class TransformationSystem extends Base {

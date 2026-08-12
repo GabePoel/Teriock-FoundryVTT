@@ -1,6 +1,6 @@
-declare global {
-  namespace Teriock.Models {
-    export type TradecraftSystemData = { field: TypedIdentifier<"field", Teriock.Keys.Field> };
+declare module "./tradecraft-system.mjs" {
+  export default interface TradecraftSystem {
+    field: TypedIdentifier<"field", Teriock.Keys.Field>;
   }
 }
 

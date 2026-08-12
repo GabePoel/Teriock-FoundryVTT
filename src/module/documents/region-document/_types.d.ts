@@ -1,13 +1,10 @@
-import { TeriockRegionDocument, TeriockScene } from "../_module.mjs";
+declare module "./region-document.mjs" {
+  export default interface TeriockRegionDocument {
+    _id: ID<TeriockRegionDocument>;
 
-declare global {
-  namespace Teriock.Documents {
-    export interface RegionDocumentInterface {
-      _id: ID<TeriockRegionDocument>;
-
-      get id(): ID<TeriockRegionDocument>;
-      get parent(): TeriockScene;
-      get uuid(): UUID<TeriockRegionDocument>;
-    }
+    get id(): ID<TeriockRegionDocument>;
+    get uuid(): UUID<TeriockRegionDocument>;
   }
 }
+
+export {};

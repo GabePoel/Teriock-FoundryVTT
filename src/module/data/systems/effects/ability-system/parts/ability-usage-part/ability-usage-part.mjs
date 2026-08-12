@@ -17,14 +17,13 @@ const { fields } = foundry.data;
  * - [Maneuvers](https://wiki.teriock.com/index.php/Core:Maneuvers)
  * - [Targets](https://wiki.teriock.com/index.php/Core:Targets)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityUsagePart & Teriock.Models.AbilityUsagePartData>}
  */
 export default function AbilityUsagePart(Base) {
   /**
-   * @extends {AttackSystem}
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AbilityUsagePartData}
+   * @implements {Teriock.Models.AbilityUsagePartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

@@ -5,7 +5,6 @@ import { DocumentDirectoryMixin } from "../tabs/_module.mjs";
 const { Compendium } = foundry.applications.sidebar.apps;
 
 /**
- * @extends {Compendium}
  * @mixes TeriockDocumentDirectory
  */
 export default class TeriockCompendium extends DocumentDirectoryMixin(Compendium) {

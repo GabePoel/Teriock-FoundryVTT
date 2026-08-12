@@ -5,12 +5,12 @@ const { ImagePopout } = foundry.applications.apps;
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ImageEditingSheet>}
  */
 export default function ImageEditingSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

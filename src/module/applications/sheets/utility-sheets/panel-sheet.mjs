@@ -10,7 +10,6 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
  * A simple sheet for displaying a document as a simple panel.
- * @extends {TeriockDocumentSheet}
  * @mixes DragDropApplication
  */
 export default class PanelSheet extends DragDropApplicationMixin(TeriockDocumentSheet) {

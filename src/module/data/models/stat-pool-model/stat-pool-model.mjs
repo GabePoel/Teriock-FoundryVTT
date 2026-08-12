@@ -11,7 +11,6 @@ const { fields } = foundry.data;
 const { Collection } = foundry.utils;
 
 /**
- * @extends {Teriock.Models.StatPoolModelData}
  * @property {StatGiverSystem} parent
  * @property {Set<number>} spent
  * @property {Teriock.Keys.DieStat} stat

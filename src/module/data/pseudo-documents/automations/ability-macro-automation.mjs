@@ -3,7 +3,6 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
- * @extends {BaseAutomation}
  * @mixes MacroAutomation
  * @mixes CritMechanic
  */

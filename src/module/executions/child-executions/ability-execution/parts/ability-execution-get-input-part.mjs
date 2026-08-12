@@ -1,13 +1,12 @@
 import { CostPayer } from "../../../../applications/dialogs/_module.mjs";
 
 /**
- * @template {Constructor<AbilityExecutionConstructor>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityExecutionGetInput>}
  */
 export default function AbilityExecutionGetInputPart(Base) {
   /**
-   * @extends {AbilityExecutionConstructor}
-   * @extends {DocumentExecution}
    * @mixin
    */
   class AbilityExecutionGetInput extends Base {

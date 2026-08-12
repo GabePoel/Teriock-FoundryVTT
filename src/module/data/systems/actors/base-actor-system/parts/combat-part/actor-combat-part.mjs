@@ -22,13 +22,13 @@ function nullifyWielded(doc) {
  * Relevant wiki pages:
  * - [Combat](https://wiki.teriock.com/index.php/Core:Combat)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorCombatPart & Teriock.Models.ActorCombatPartData>}
  */
 export default function ActorCombatPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorCombatPartData}
+   * @implements {Teriock.Models.ActorCombatPartData}
    * @mixin
    * @property {AnyActor} parent
    */

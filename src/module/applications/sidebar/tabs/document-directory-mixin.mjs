@@ -7,10 +7,10 @@ import { makeIcon } from "../../../helpers/icon.mjs";
 /**
  * @template {Constructor<DocumentDirectory>} T
  * @param {T} Base
+ * @returns {MixinResult<T, TeriockDocumentDirectory>}
  */
 export default function DocumentDirectoryMixin(Base) {
   /**
-   * @extends {DocumentDirectory}
    * @mixin
    */
   class TeriockDocumentDirectory extends Base {

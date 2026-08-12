@@ -1,22 +1,20 @@
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
-import { TeriockJournalEntry, TeriockJournalEntryCategory, TeriockJournalEntryPage } from "../_module.mjs";
+import { TeriockJournalEntryCategory, TeriockJournalEntryPage } from "../_module.mjs";
 
-declare global {
-  namespace Teriock.Documents {
-    export interface JournalEntryInterface {
-      _id: ID<TeriockJournalEntry>;
-      // @ts-expect-error DocumentConstructionContext
-      categories: DocumentCollection<TeriockJournalEntryCategory>;
-      // @ts-expect-error DocumentConstructionContext
-      pages: DocumentCollection<TeriockJournalEntryPage>;
+declare module "./journal-entry.mjs" {
+  export default interface TeriockJournalEntry {
+    _id: ID<TeriockJournalEntry>;
+    // @ts-expect-error DocumentConstructionContext
+    categories: DocumentCollection<TeriockJournalEntryCategory>;
+    // @ts-expect-error DocumentConstructionContext
+    pages: DocumentCollection<TeriockJournalEntryPage>;
 
-      get documentName(): "JournalEntry";
+    get documentName(): "JournalEntry";
 
-      get id(): ID<TeriockJournalEntry>;
+    get id(): ID<TeriockJournalEntry>;
 
-      get uuid(): UUID<TeriockJournalEntry>;
-    }
+    get uuid(): UUID<TeriockJournalEntry>;
   }
 }
 

@@ -8,12 +8,12 @@ const { fields } = foundry.data;
 /**
  * Mixin for executions that deal an impact and can be modified with boosts, deboosts, and critical hits. This replicates
  * the logic of the old `boostDialog` inside the execution framework.
- * @template {Constructor<BaseExecution>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ImpactsExecution>}
  */
 export default function ImpactsExecutionMixin(Base) {
   /**
-   * @extends {BaseExecution}
    * @mixin
    * @property {Set<Teriock.Keys.Impact>} impacts
    * @property {Teriock.System.FormulaString} formula

@@ -18,15 +18,15 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
  * Relevant wiki pages:
  * - [Transformed](https://wiki.teriock.com/index.php/Condition:Transformed)
  *
- * @template {Constructor<SpeciesSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, SpeciesTransformationPart & Teriock.Models.SpeciesTransformationPartData>}
  * @see {ActorTransformationPart}
  * @see {TransformationSystemMixin}
  */
 export default function SpeciesTransformationPart(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.SpeciesTransformationPartData}
+   * @implements {Teriock.Models.SpeciesTransformationPartData}
    * @mixin
    * @property {TeriockSpecies} parent
    */

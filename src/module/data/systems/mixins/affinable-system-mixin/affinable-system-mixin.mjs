@@ -2,13 +2,13 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**
- * @template {Constructor<TeriockSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AffinableSystem & Teriock.Models.AffinableSystemData>}
  */
 export default function AffinableSystemMixin(Base) {
   /**
-   * @extends {ReturnType<TeriockSystem}
-   * @extends {Teriock.Models.AffinableSystemData}
+   * @implements {Teriock.Models.AffinableSystemData}
    * @mixin
    */
   class AffinableSystem extends Base {

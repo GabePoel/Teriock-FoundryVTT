@@ -10,14 +10,14 @@ const { EmbeddedDataField } = foundry.data.fields;
  * - [Identify](https://wiki.teriock.com/index.php/Ability:Identify)
  * - [Read Magic](https://wiki.teriock.com/index.php/Ability:Read_Magic)
  *
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, EquipmentIdentificationPart & Teriock.Models.EquipmentIdentificationPartData>}
  * @see {IdentificationModel}
  */
 export default function EquipmentIdentificationPart(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.EquipmentIdentificationPartData}
+   * @implements {Teriock.Models.EquipmentIdentificationPartData}
    * @mixin
    * @property {TeriockEquipment} parent
    */

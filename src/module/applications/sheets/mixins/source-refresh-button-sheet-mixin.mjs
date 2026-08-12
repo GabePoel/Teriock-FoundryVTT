@@ -7,12 +7,12 @@ import { SourceRefresher } from "../../dialogs/_module.mjs";
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, SourceRefreshButtonSheet>}
  */
 export default function SourceRefreshButtonSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    */
   class SourceRefreshButtonSheet extends Base {

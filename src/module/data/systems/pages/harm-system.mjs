@@ -5,7 +5,6 @@ import * as systemMixins from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
- * @extends {BasePageSystem}
  * @mixes AutomatableSystem
  * @mixes InstructionsSystem
  * @mixes MetaphysicsSystem

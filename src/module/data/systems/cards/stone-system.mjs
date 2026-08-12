@@ -1,8 +1,5 @@
 import BaseCardsSystem from "./base-cards-system.mjs";
 
-/**
- * @extends {BaseCardsSystem}
- */
 export default class StoneSystem extends BaseCardsSystem {
   /** @inheritDoc */
   async _preCreate(data, options, user) {

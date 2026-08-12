@@ -4,7 +4,6 @@ import { BaseApplicationMixin } from "../api/mixins/_module.mjs";
 const { JournalEntrySheet } = foundry.applications.sheets.journal;
 
 /**
- * @extends {JournalEntrySheet}
  * @mixes BaseApplication
  */
 export default class TeriockJournalEntrySheet extends BaseApplicationMixin(JournalEntrySheet) {

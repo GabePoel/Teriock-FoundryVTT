@@ -17,7 +17,6 @@ const { fields } = foundry.data;
 /**
  * Executions are ephemeral classes that resolve some sort of roll, activity, document usage, etc. They show an
  * {@link ExecutionEditor} dialog for the user to interact with and configure.
- * @extends {BaseDataModel}
  * @mixes AutomatedData
  * @property {CompetenceModel} competence
  * @property {Teriock.System.FormulaString} formula

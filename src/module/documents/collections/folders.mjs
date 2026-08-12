@@ -7,7 +7,6 @@ const { Folders } = foundry.documents.collections;
  */
 
 /**
- * @extends {Folders}
  * @mixes BaseWorldCollection
  * @implements {TypeCollection<TeriockFolder, TeriockFolder>}
  * @implements {DocumentCollection<TeriockFolder>}

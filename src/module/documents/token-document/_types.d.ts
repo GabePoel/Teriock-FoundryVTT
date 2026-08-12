@@ -1,18 +1,16 @@
-import { TeriockCombat, TeriockTokenDocument } from "../_module.mjs";
+import { TeriockCombat } from "../_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
 
-declare global {
-  namespace Teriock.Documents {
-    export interface TokenDocumentInterface {
-      _id: ID<TeriockTokenDocument>;
+declare module "./token-document.mjs" {
+  export default interface TeriockTokenDocument {
+    _id: ID<TeriockTokenDocument>;
 
-      get actor(): AnyActor | null;
-      get combat(): TeriockCombat | null;
-      get documentName(): "TokenDocument";
-      get id(): ID<TeriockTokenDocument>;
-      get object(): TeriockToken;
-      get uuid(): UUID<TeriockTokenDocument>;
-    }
+    get actor(): AnyActor | null;
+    get combat(): TeriockCombat | null;
+    get documentName(): "TokenDocument";
+    get id(): ID<TeriockTokenDocument>;
+    get object(): TeriockToken;
+    get uuid(): UUID<TeriockTokenDocument>;
   }
 }
 

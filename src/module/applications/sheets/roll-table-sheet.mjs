@@ -10,7 +10,6 @@ const { RollTableSheet } = foundry.applications.sheets;
 /**
  * @mixes BaseApplication
  * @mixes DragDropSheet
- * @extends {RollTableSheet}
  */
 export default class TeriockRollTableSheet
   extends mixClasses(RollTableSheet, BaseApplicationMixin, DragDropApplicationMixin)

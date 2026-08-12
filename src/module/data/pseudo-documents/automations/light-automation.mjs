@@ -40,7 +40,6 @@ class AutomationLightData extends LightData {
 }
 
 /**
- * @extends {BaseAutomation}
  * @mixes CritMechanic
  * @property {AutomationLightData} light
  */

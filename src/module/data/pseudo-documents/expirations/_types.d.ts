@@ -13,3 +13,5 @@ declare global {
     export type Any = AnyExpiration;
   }
 }
+
+export {};

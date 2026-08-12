@@ -2,12 +2,12 @@ import impactConfig from "../../../../constants/config/impact-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 
 /**
- * @template {Constructor<AbilityExecutionConstructor>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityExecutionActorUpdate>}
  */
 export default function AbilityExecutionActorUpdatePart(Base) {
   /**
-   * @extends {AbilityExecutionConstructor}
    * @mixin
    */
   class AbilityExecutionActorUpdate extends Base {

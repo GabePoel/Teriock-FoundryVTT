@@ -9,7 +9,6 @@ const { fields } = foundry.data;
 
 /**
  * An affinity that some effect grants against a specific thing.
- * @extends {MechanicPseudoDocument}
  * @mixes CritMechanic
  * @property {AnyActiveEffect} document
  * @property {BaseEffectSystem} parent

@@ -25,10 +25,10 @@ function getChoiceLabel(config, value) {
  * Mixin for both documents and data models.
  * @template {Constructor<DataModel | Document | TypeDataModel>} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbstractData>}
  */
 export default function AbstractDataMixin(Base) {
   /**
-   * @extends {DataModel | Document | TypeDataModel}
    * @mixin
    */
   class AbstractData extends Base {

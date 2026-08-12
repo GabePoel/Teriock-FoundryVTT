@@ -7,9 +7,7 @@ import * as executionMixins from "../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {DocumentExecution}
  * @mixes ImpactsExecution
- * @implements {Teriock.Execution.ArmamentExecutionInterface}
  * @param {HarmRoll[]} rolls
  * @property {boolean} dealImpacts
  * @property {boolean} secret

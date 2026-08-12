@@ -9,8 +9,6 @@ import {
 } from "./parts/_module.mjs";
 
 /**
- * @extends {AbilityExecutionConstructor}
- * @extends {DocumentExecution}
  * @mixes AbilityExecutionGetInput
  * @mixes AbilityExecutionActorUpdate
  * @mixes AbilityExecutionRolls

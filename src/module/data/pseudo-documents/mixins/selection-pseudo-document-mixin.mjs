@@ -26,12 +26,12 @@ const CONFIG_PATHS = SELECTION_PATHS.filter(p => !["makeSeparateActivations", "s
 
 /**
  * Selecting documents from a stored {@link Teriock.Select.DocumentSelectionConfig}.
- * @template {Constructor<TypedPseudoDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, SelectionPseudoDocument>}
  */
 export default function SelectionPseudoDocumentMixin(Base) {
   /**
-   * @extends {AccessData}
    * @mixin
    * @property {boolean} all
    * @property {boolean} auto

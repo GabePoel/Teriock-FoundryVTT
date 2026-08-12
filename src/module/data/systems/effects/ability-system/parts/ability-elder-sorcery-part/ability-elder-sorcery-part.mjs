@@ -6,13 +6,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Elder Sorcery](https://wiki.teriock.com/index.php/Core:Elder_Sorcery)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityElderSorceryPart & Teriock.Models.AbilityElderSorceryPartData>}
  */
 export default function AbilityElderSorceryPart(Base) {
   /**
-   * @extends {AbilitySystem}
-   * @extends {Teriock.Models.AbilityElderSorceryPartData}
+   * @implements {Teriock.Models.AbilityElderSorceryPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

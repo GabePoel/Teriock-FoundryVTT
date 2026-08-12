@@ -31,6 +31,26 @@ type ItemDocument = Omit<Teriock.Documents.DocumentBase<TeriockItem, Item>, "doc
   get transferredEffects(): TeriockActiveEffect[];
 };
 
+declare module "./item.mjs" {
+  export default interface TeriockItem {
+    _id: ID<AnyItem>;
+    // @ts-expect-error Not a document
+    effects: DocumentCollection<AnyActiveEffect>;
+    system: BaseItemSystem;
+    type: Teriock.Documents.ItemType;
+
+    get actor(): AnyActor | null;
+
+    get documentName(): "Item";
+
+    get id(): ID<AnyItem>;
+
+    get transferredEffects(): AnyActiveEffect[];
+
+    get uuid(): UUID<AnyItem>;
+  }
+}
+
 declare global {
   export interface TeriockArchetype
     extends Teriock.Documents.Subtype<ItemDocument, "archetype", ChildSheet, ArchetypeSystem>
@@ -54,29 +74,6 @@ declare global {
     power: TeriockPower;
     rank: TeriockRank;
     species: TeriockSpecies;
-  }
-}
-
-declare global {
-  namespace Teriock.Documents {
-    export interface ItemInterface {
-      _id: ID<AnyItem>;
-      // @ts-expect-error Not a document
-      effects: DocumentCollection<AnyActiveEffect>;
-      parent?: AnyActor;
-      system: BaseItemSystem;
-      type: Teriock.Documents.ItemType;
-
-      get actor(): AnyActor | null;
-
-      get documentName(): "Item";
-
-      get id(): ID<AnyItem>;
-
-      get transferredEffects(): AnyActiveEffect[];
-
-      get uuid(): UUID<AnyItem>;
-    }
   }
 }
 

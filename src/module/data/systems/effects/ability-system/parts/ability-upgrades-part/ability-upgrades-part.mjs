@@ -10,13 +10,13 @@ const { fields } = foundry.data;
  * - [Attribute by Ability](https://wiki.teriock.com/index.php/Core:Attributes#Attribute_by_Ability)
  * - [Attributes and Feat Saves](https://wiki.teriock.com/index.php/Core:Attributes#Attributes_and_Feat_Saves)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityUpgradesPart & Teriock.Models.AbilityUpgradesPartData>}
  */
 export default function AbilityUpgradesPart(Base) {
   /**
-   * @extends {AbilitySystem}
-   * @extends {Teriock.Models.AbilityUpgradesPartData}
+   * @implements {Teriock.Models.AbilityUpgradesPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

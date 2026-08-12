@@ -8,13 +8,13 @@ import { ChangeQuantityAutomation } from "../../../pseudo-documents/automations/
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<ChildSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ConsumableSystem & Teriock.Models.ConsumableSystemData>}
  */
 export default function ConsumableSystemMixin(Base) {
   /**
-   * @extends {ChildSystem}
-   * @extends {Teriock.Models.ConsumableSystemData}
+   * @implements {Teriock.Models.ConsumableSystemData}
    * @mixin
    */
   class ConsumableSystem extends Base {

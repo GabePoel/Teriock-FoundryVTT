@@ -11,12 +11,12 @@ const BAR_STATS = Object.keys(statConfig).filter(k => statConfig[k].bar);
 
 /**
  * Mixin allowing hacks, impacts, and spending dice stats.
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, HackStatApplication>}
  */
 export default function HackStatApplicationMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {TeriockActor} document
    */

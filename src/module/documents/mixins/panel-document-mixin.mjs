@@ -9,13 +9,13 @@ import { toId } from "../../helpers/string.mjs";
  */
 
 /**
- * @template {Constructor<BaseDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PanelDocument>}
  * @todo Move panels into their own pseudo-document with a render call and various helper methods.
  */
 export default function PanelDocumentMixin(Base) {
   /**
-   * @extends {BaseDocument}
    * @mixin
    */
   class PanelDocument extends Base {

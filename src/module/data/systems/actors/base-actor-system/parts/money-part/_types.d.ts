@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorMoneyPartData = {
+    export interface ActorMoneyPartData {
       /** <schema> Interest rate */
       interestRate: number;
       /** <schema> Money */
@@ -12,7 +12,7 @@ declare global {
         /** <schema> Total money in gold */
         total: number;
       };
-    };
+    }
   }
 }
 

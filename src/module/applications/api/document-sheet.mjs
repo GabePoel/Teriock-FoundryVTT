@@ -4,7 +4,6 @@ import { BaseDocumentSheetMixin } from "./mixins/_module.mjs";
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * @extends {DocumentSheetV2}
  * @mixes HandlebarsApplication
  * @mixes BaseDocumentSheet
  * @property {TeriockDocument} document

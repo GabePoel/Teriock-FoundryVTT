@@ -8,12 +8,12 @@ import { resolveDocument } from "../../helpers/resolve.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.
- * @template {Constructor<BaseDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, EmbedCardDocument>}
  */
 export default function EmbedCardDocumentMixin(Base) {
   /**
-   * @extends {BaseDocument}
    * @implements {Teriock.Embeds.Embeddable}
    * @mixin
    */

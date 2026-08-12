@@ -7,7 +7,6 @@ const { fields } = foundry.data;
 /**
  * A single affinity an actor has, consolidated from every source that grants it. These are derived during preparation
  * and never stored to the database.
- * @extends {BaseVirtualModel}
  * @property {number} amount
  * @property {Teriock.Keys.AffinityCategory} category
  * @property {Teriock.System.CompetenceLevel} competence

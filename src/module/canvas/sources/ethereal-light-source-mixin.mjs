@@ -1,10 +1,10 @@
 /**
  * @template {Constructor<foundry.canvas.sources.BaseLightSource>} T
  * @param {T} Base
+ * @returns {MixinResult<T, EtherealLightSource>}
  */
 export default function EtherealLightSourceMixin(Base) {
   /**
-   * @extends {foundry.canvas.sources.BaseLightSource}
    * @mixin
    */
   class EtherealLightSource extends Base {

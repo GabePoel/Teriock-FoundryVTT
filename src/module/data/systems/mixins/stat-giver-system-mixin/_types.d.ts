@@ -5,3 +5,5 @@ declare global {
     export type StatGiverSystemData = { statDice: Record<Teriock.Keys.DieStat, StatPoolModel> };
   }
 }
+
+export {};

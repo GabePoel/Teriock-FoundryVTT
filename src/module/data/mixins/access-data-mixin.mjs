@@ -10,10 +10,10 @@ import AbstractDataMixin from "./abstract-data-mixin.mjs";
  * Mixin to ensure data models have access to the data they need.
  * @template {Constructor<DataModel | TypeDataModel>} T
  * @param {T} Base
+ * @returns {MixinResult<T, AccessData>}
  */
 export default function AccessDataMixin(Base) {
   /**
-   * @extends {DataModel | TypeDataModel}
    * @mixes AbstractData
    * @mixin
    * @property {AccessData} parent

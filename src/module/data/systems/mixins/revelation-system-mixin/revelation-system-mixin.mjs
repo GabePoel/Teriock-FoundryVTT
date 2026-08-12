@@ -3,13 +3,13 @@ import { makeIcon } from "../../../../helpers/icon.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<BaseEffectSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, RevelationSystem & Teriock.Models.RevelationSystemData>}
  */
 export default function RevelationSystemMixin(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.RevelationSystemData}
+   * @implements {Teriock.Models.RevelationSystemData}
    * @mixin
    */
   class RevelationSystem extends Base {

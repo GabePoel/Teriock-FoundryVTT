@@ -3,15 +3,12 @@ import { getName } from "../../../../../helpers/utils.mjs";
 
 /**
  * Equipment panel part.
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, EquipmentPanelPart>}
  */
 export default function EquipmentPanelPart(Base) {
   /**
-   * @extends {AttunableSystem}
-   * @extends {EquipmentIdentificationPart}
-   * @extends {EquipmentStoragePart}
-   * @extends {EquipmentWieldingPart}
    * @mixin
    * @property {TeriockEquipment} parent
    */

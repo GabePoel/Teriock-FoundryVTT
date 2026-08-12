@@ -10,13 +10,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Movement](https://wiki.teriock.com/index.php/Core:Movement)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorMovementPart & Teriock.Models.ActorMovementPartData>}
  */
 export default function ActorMovementPart(Base) {
   /**
-   * @extends {AbstractActorSystem}
-   * @extends {Teriock.Models.ActorMovementPartData}
+   * @implements {Teriock.Models.ActorMovementPartData}
    * @mixin
    * @property {AnyActor} parent
    */

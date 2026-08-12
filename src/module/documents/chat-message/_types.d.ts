@@ -4,6 +4,10 @@ import { TeriockChatMessage, TeriockUser } from "../_module.mjs";
 import { BaseMessageSystem, InteractiveSystem, TriggeredSystem } from "../../data/systems/messages/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
+declare module "./chat-message.mjs" {
+  export default interface TeriockChatMessage extends Teriock.Documents.ChatMessageInterface {}
+}
+
 declare global {
   export interface TeriockInteractive
     extends Teriock.Documents.Subtype<Teriock.Documents.ChatMessageInterface, "interactive", null, InteractiveSystem>

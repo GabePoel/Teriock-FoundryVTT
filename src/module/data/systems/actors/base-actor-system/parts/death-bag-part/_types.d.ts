@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorDeathBagPartData = {
+    export interface ActorDeathBagPartData {
       /** <schema> Death Bag */
       deathBag: {
         /** <schema> How many stones to pull from the Death Bag */
@@ -8,7 +8,7 @@ declare global {
         /** <schema> The colors of stones in the Death Bag */
         stones: Record<Teriock.Keys.DeathBagStoneColor, Teriock.System.FormulaString>;
       };
-    };
+    }
   }
 }
 

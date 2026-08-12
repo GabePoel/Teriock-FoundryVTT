@@ -50,3 +50,5 @@ declare global {
     };
   }
 }
+
+export {};

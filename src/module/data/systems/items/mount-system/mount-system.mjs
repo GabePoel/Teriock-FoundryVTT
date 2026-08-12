@@ -11,8 +11,6 @@ const { fields } = foundry.data;
 
 /**
  * Mount-specific item data model.
- * @extends {BaseItemSystem}
- * @extends {Teriock.Models.MountSystemData}
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */
@@ -90,7 +88,7 @@ export default class MountSystem
 
   /** @inheritDoc */
   _getTipSuppressions() {
-    return Object.assign(super._getTipSuppressions, { unmounted: this._isSuppressedUnmounted.bind(this) });
+    return Object.assign(super._getTipSuppressions(), { unmounted: this._isSuppressedUnmounted.bind(this) });
   }
 
   /**

@@ -9,13 +9,13 @@ const { fields } = foundry.data;
  * - [Improved](https://wiki.teriock.com/index.php/Keyword:Improved)
  * - [Limited](https://wiki.teriock.com/index.php/Keyword:Limited)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityOverviewPart & Teriock.Models.AbilityOverviewPartData>}
  */
 export default function AbilityOverviewPart(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AbilityOverviewPartData}
+   * @implements {Teriock.Models.AbilityOverviewPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

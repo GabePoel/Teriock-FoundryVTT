@@ -14,9 +14,7 @@ const { fields } = foundry.data;
 
 /**
  * Interactive chat message data model.
- * @extends {BaseMessageSystem}
- * @extends {Teriock.Models.InteractiveMessageSystemData}
- * @extends {Teriock.Data.InteractiveMessageData}
+ * @implements {Teriock.Data.InteractiveMessageData}
  * @mixes ActivatableSystem
  */
 export default class InteractiveSystem extends mixClasses(BaseMessageSystem, systemMixins.ActivatableSystemMixin) {

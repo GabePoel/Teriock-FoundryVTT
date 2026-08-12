@@ -3,12 +3,12 @@
  */
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetTradecraftsPart>}
  */
 export default function PlayableActorSheetTradecraftsPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetTradecraftsPart extends Base {

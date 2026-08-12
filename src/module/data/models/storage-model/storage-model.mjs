@@ -5,7 +5,6 @@ const { fields } = foundry.data;
 
 /**
  * Model that provides useful getters for equipment that stores other equipment.
- * @extends {Teriock.Models.StorageModelData}
  */
 export default class StorageModel extends BaseDataModel {
   /** @inheritDoc */

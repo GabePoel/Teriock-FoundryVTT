@@ -26,7 +26,6 @@ const { fromUuid } = foundry.utils;
 /**
  * A custom HTMLElement used to render a set of associated documents referenced by identifier.
  * Based on {@link HTMLDocumentTagsElement}.
- * @extends {AbstractFormInputElement<string|string[]|null>}
  */
 export default class HTMLIdentifierTagsElement extends AbstractFormInputElement {
   /** @inheritDoc */

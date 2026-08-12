@@ -90,8 +90,9 @@ declare global {
       dependee: boolean;
       hierarchy: boolean;
       model?: ModelMetadata;
-      parent: boolean;
       tooltip: boolean;
     };
   }
 }
+
+export {};

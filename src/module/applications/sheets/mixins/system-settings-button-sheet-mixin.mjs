@@ -7,12 +7,12 @@ import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, SystemSettingsButtonSheet>}
  */
 export default function SystemSettingsButtonSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    */
   class SystemSettingsButtonSheet extends Base {

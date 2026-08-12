@@ -13,15 +13,15 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Transformed](https://wiki.teriock.com/index.php/Condition:Transformed)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorTransformationPart & Teriock.Models.ActorTransformationPartData>}
  * @see {SpeciesTransformationPart}
  * @see {TransformationSystemMixin}
  */
 export default function ActorTransformationPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorTransformationPartData}
+   * @implements {Teriock.Models.ActorTransformationPartData}
    * @mixin
    * @property {AnyActor} parent
    */

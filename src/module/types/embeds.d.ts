@@ -1,6 +1,10 @@
 import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
 import { Color } from "@client/utils/_module.mjs";
 
+declare module "../data/models/virtual-models/base-virtual-model.mjs" {
+  export default interface BaseVirtualModel extends Teriock.Embeds.Embeddable {}
+}
+
 declare global {
   namespace Teriock.Embeds {
     export type EmbedIcon = {

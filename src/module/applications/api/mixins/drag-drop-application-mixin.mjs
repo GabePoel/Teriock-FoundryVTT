@@ -7,12 +7,12 @@ const { DragDrop } = foundry.applications.ux;
 
 /**
  * Mixin adding drag-and-drop handling to applications.
- * @template {Constructor<BaseApplication>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, DragDropApplication>}
  */
 export default function DragDropApplicationMixin(Base) {
   /**
-   * @extends {ApplicationV2}
    * @mixes BaseApplication
    * @property {ApplicationConfiguration & Teriock.Application._ApplicationConfiguration} options
    * @mixin

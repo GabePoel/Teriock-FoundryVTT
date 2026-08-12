@@ -11,13 +11,13 @@ const { fields } = foundry.data;
  * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
  * - [Battle Rating](https://wiki.teriock.com/index.php/Core:Battle_Rating)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorScalingPart & Teriock.Models.ActorScalingPartData>}
  */
 export default function ActorScalingPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorScalingPartData}
+   * @implements {Teriock.Models.ActorScalingPartData}
    * @mixin
    * @property {AnyActor} parent
    */

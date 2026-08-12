@@ -1,8 +1,5 @@
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
-/**
- * @implements {Teriock.Models.InventorySystemData}
- */
 export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
   static get metadata() {

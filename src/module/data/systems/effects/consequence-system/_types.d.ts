@@ -1,11 +1,7 @@
-declare global {
-  namespace Teriock.Models {
-    export type ConsequenceSystemData = {
-      /** <schema> Associations */
-      associations: Teriock.Panels.PanelAssociation[];
-
-      get parent(): TeriockConsequence;
-    };
+declare module "./consequence-system.mjs" {
+  export default interface ConsequenceSystem {
+    /** <schema> Associations */
+    associations: Teriock.Panels.PanelAssociation[];
   }
 }
 

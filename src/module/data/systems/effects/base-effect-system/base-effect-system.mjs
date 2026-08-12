@@ -6,8 +6,7 @@ const { ActiveEffectTypeDataModel, fields } = foundry.data;
 
 /**
  * Base effect data model.
- * @extends {ActiveEffectTypeDataModel}
- * @extends {Teriock.Models.BaseEffectSystemData}
+ * @implements {Teriock.Models.BaseEffectSystemData}
  * @mixes ChildSystem
  */
 export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(ActiveEffectTypeDataModel) {

@@ -17,8 +17,6 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
- * @extends {BaseItemSystem}
- * @extends {Teriock.Models.EquipmentSystemData}
  * @mixes ArmamentSystem
  * @mixes AttunableSystem
  * @mixes ConsumableSystem

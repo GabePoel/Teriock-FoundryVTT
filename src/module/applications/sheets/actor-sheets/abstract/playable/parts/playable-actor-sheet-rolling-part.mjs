@@ -5,12 +5,12 @@ import { VirtualAffinityModel } from "../../../../../../data/models/_module.mjs"
  */
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetRollingPart>}
  */
 export default function PlayableActorSheetRollingPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetRollingPart extends Base {

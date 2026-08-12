@@ -6,13 +6,13 @@ const { fields } = foundry.data;
 
 /**
  * Data mixin to support metaphysics tags.
- * @template {Constructor<ChildSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, MetaphysicsSystem & Teriock.Models.MetaphysicsSystemData>}
  */
 export default function MetaphysicsSystemMixin(Base) {
   /**
-   * @extends {ChildSystem}
-   * @extends {Teriock.Models.MetaphysicsSystemData}
+   * @implements {Teriock.Models.MetaphysicsSystemData}
    * @mixin
    */
   class MetaphysicsSystem extends Base {

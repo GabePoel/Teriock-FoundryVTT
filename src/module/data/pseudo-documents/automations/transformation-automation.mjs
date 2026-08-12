@@ -9,8 +9,7 @@ import {
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**
- * @extends {BaseAutomation}
- * @extends {Teriock.Transformation.AutomationTransformationConfig}
+ * @implements {Teriock.Transformation.AutomationTransformationConfig}
  * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic

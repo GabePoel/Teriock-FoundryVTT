@@ -8,8 +8,6 @@ const { fields } = foundry.data;
 
 /**
  * A data model for some rollable modifier that has a score associated with it.
- * @extends {BaseDataModel}
- * @extends {Teriock.Models.BaseModifierModelData}
  * @mixes UsableData
  * @mixes ThresholdData
  */

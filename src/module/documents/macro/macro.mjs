@@ -6,12 +6,9 @@ const { Macro } = foundry.documents;
 
 /**
  * The Teriock Macro implementation.
- * @extends {Macro}
- * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  * @mixes UsableDocument
- * @implements {Teriock.Documents.MacroInterface}
  */
 export default class TeriockMacro
   extends mixClasses(

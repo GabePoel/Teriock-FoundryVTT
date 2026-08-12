@@ -3,8 +3,6 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 const { Users } = foundry.documents.collections;
 
 /**
- * @extends {Users}
- * @extends {WorldCollection<TeriockUser>}
  * @mixes BaseWorldCollection
  * @property {TeriockUser|null} activeGM
  */

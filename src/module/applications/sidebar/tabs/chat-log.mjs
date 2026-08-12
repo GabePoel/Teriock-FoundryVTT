@@ -10,7 +10,6 @@ const { ChatLog } = foundry.applications.sidebar.tabs;
  */
 
 /**
- * @extends {ChatLog}
  * @mixes ChatMessageConnection
  */
 export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConnectionMixin) {

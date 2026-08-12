@@ -10,7 +10,6 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {BaseAutomation}
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  * @mixes CritMechanic

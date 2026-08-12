@@ -18,8 +18,6 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
- * @extends {CleanedEffectSystem}
- * @extends {Teriock.Models.FluencySystemData}
  * @mixes WikiSystem
  * @mixes RevelationSystem
  * @mixes CompetenceDisplaySystem

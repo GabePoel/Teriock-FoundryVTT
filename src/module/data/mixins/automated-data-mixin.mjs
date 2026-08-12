@@ -1,11 +1,11 @@
 /**
  * Mixin for classes that use automations even if they don't have them in their data model.
- * @template {Constructor<ChildSystem | BaseDataModel>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AutomatedData>}
  */
 export default function AutomatedDataMixin(Base) {
   /**
-   * @extends {ChildSystem | BaseDataModel}
    * @mixin
    */
   class AutomatedData extends Base {

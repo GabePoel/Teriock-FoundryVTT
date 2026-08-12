@@ -5,7 +5,6 @@ const { fields } = foundry.data;
 
 /**
  * Activation that resolves a pending expiration check from a triggered chat message.
- * @extends {BaseActivation}
  * @property {UUID<BaseExpiration>} expiration
  */
 export default class ExpirationActivation extends BaseActivation {

@@ -9,10 +9,10 @@ import { toId, toKebabCase } from "../../helpers/string.mjs";
  * Base mixin.
  * @template {Constructor<ClientDocument>} T
  * @param {T} Base
+ * @returns {MixinResult<T, BaseDocument>}
  */
 export default function BaseDocumentMixin(Base) {
   /**
-   * @extends {ClientDocument}
    * @mixes AbstractData
    * @mixin
    */

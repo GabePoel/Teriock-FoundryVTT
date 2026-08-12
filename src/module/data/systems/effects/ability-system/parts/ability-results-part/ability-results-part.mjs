@@ -6,13 +6,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Interactions](https://wiki.teriock.com/index.php/Core:Interactions)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityResultsPart & Teriock.Models.AbilityResultsPartData>}
  */
 export default function AbilityResultsPart(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AbilityResultsPartData}
+   * @implements {Teriock.Models.AbilityResultsPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

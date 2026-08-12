@@ -1,18 +1,16 @@
-import { TeriockCombat, TeriockCombatant } from "../_module.mjs";
+import { TeriockCombatant } from "../_module.mjs";
 
-declare global {
-  namespace Teriock.Documents {
-    export interface CombatInterface {
-      _id: ID<TeriockCombat>;
+declare module "./combat.mjs" {
+  export default interface TeriockCombat {
+    _id: ID<TeriockCombat>;
 
-      get combatant(): TeriockCombatant | null;
+    get combatant(): TeriockCombatant | null;
 
-      get documentName(): "Combat";
+    get documentName(): "Combat";
 
-      get id(): ID<TeriockCombat>;
+    get id(): ID<TeriockCombat>;
 
-      get uuid(): UUID<TeriockCombat>;
-    }
+    get uuid(): UUID<TeriockCombat>;
   }
 }
 

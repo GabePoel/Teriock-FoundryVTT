@@ -4,21 +4,12 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Ability panel part.
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityPanelPart>}
  */
 export default function AbilityPanelPart(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {AbilityCostsPart}
-   * @extends {AbilityDurationPart}
-   * @extends {AbilityEquipmentPart}
-   * @extends {AbilityInfoPart}
-   * @extends {AbilityElderSorceryPart}
-   * @extends {AbilityOverviewPart}
-   * @extends {AbilityResultsPart}
-   * @extends {AbilityUpgradesPart}
-   * @extends {AbilityUsagePart}
    * @mixin
    * @property {TeriockAbility} parent
    */

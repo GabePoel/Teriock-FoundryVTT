@@ -3,7 +3,6 @@ const { AbstractFormInputElement } = foundry.applications.elements;
 /**
  * Abstract button control that steps through a fixed cycle of values.
  * Left-click cycles forward. Subclasses define the cycle via {@link HTMLCycleButtonElement.ORDER}.
- * @extends {AbstractFormInputElement}
  */
 export default class HTMLCycleButtonElement extends AbstractFormInputElement {
   /**

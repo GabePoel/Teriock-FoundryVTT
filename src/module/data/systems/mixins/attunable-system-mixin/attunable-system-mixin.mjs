@@ -6,13 +6,13 @@ import { FormulaField } from "../../../fields/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AttunableSystem & Teriock.Models.AttunableSystemData>}
  */
 export default function AttunableSystemMixin(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.AttunableSystemData}
+   * @implements {Teriock.Models.AttunableSystemData}
    * @mixin
    */
   class AttunableSystem extends Base {

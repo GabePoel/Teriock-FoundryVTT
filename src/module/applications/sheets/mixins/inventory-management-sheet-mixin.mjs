@@ -2,12 +2,12 @@ import { TeriockDragDrop } from "../../ux/_module.mjs";
 
 /**
  * Mixin adding shared inventory drag-and-drop handling for sheets whose document is or belongs to an actor's inventory.
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, InventoryManagementSheet>}
  */
 export default function InventoryManagementSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

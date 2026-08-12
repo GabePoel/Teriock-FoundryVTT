@@ -8,13 +8,13 @@ import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
  * Relevant wiki pages:
  * - [Cover](https://wiki.teriock.com/index.php/Core:Cover)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorCoverPart & Teriock.Models.ActorCoverPartData>}
  */
 export default function ActorCoverPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorCoverPartData}
+   * @implements {Teriock.Models.ActorCoverPartData}
    * @mixin
    * @property {AnyActor} parent
    */

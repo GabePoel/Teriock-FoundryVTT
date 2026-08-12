@@ -6,12 +6,12 @@ import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
  */
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetSidebarPart>}
  */
 export default function PlayableActorSheetSidebarPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetSidebarPart extends Base {

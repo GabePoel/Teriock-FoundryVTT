@@ -1,11 +1,7 @@
-declare global {
-  namespace Teriock.Models {
-    export type EquipmentSystemData = {
-      /** <schema> Canonical Equipment Type */
-      equipmentType: TypedIdentifier<"equipment">;
-
-      get parent(): TeriockEquipment;
-    };
+declare module "./equipment-system.mjs" {
+  export default interface EquipmentSystem {
+    /** <schema> Canonical Equipment Type */
+    equipmentType: TypedIdentifier<"equipment">;
   }
 }
 

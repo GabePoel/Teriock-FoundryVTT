@@ -4,7 +4,6 @@ import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_m
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**
- * @extends {BaseAutomation}
  * @mixes OverrideCompetenceMechanic
  * @mixes CritMechanic
  * @property {TypedIdentifier} identifier

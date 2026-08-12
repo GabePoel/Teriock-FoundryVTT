@@ -7,7 +7,6 @@ const { fields } = foundry.data;
 /**
  * A condition an actor currently has. Conditions the actor is forced into have no effect of their own to render, so
  * they are shown as virtual models; ones the actor merely carries render from their real effect.
- * @extends {BaseVirtualModel}
  * @property {Teriock.Keys.Condition} conditionKey
  * @property {boolean} locked
  * @property {string} tooltip

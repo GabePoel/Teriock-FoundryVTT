@@ -2,7 +2,6 @@ import { DocumentExecution } from "../abstract/_module.mjs";
 import * as executionMixins from "../mixins/_module.mjs";
 
 /**
- * @extends {DocumentExecution}
  * @mixes TradecraftExecution
  * @property {TeriockFluency} source
  */

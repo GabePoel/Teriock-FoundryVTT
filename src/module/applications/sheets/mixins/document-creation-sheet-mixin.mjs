@@ -8,12 +8,12 @@ import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, DocumentCreationSheet>}
  */
 export default function DocumentCreationSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

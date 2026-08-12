@@ -2,7 +2,7 @@ import { InitiativeModel, PiercingModel } from "../../../../../models/_module.mj
 
 declare global {
   namespace Teriock.Models {
-    export type ActorCombatPartData = {
+    export interface ActorCombatPartData {
       /** <schema> Stuff that changes during combat */
       combat: {
         /** <schema> Attack penalty */
@@ -46,7 +46,7 @@ declare global {
         /** <schema> Primary blocker ID */
         blocker: TeriockArmament | null;
       };
-    };
+    }
   }
 }
 

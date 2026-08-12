@@ -7,11 +7,8 @@ const { User } = foundry.documents;
 
 /**
  * The Teriock User implementation.
- * @extends {User}
- * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
- * @implements {Teriock.Documents.UserInterface}
  * @property {Readonly<Set<TeriockToken>>} targets
  */
 export default class TeriockUser

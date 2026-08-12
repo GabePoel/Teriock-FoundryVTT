@@ -12,13 +12,13 @@ const { fields } = foundry.data;
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  * - [Weight](https://wiki.teriock.com/index.php/Core:Weight)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorCapacitiesPart & Teriock.Models.ActorCapacitiesPartData>}
  */
 export default function ActorCapacitiesPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorCapacitiesPartData}
+   * @implements {Teriock.Models.ActorCapacitiesPartData}
    * @mixin
    * @property {AnyActor} parent
    */

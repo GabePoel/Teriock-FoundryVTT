@@ -18,12 +18,12 @@ const { fields } = foundry.data;
 
 /**
  * Automation that hooks this into triggers.
- * @template {Constructor<BaseAutomation>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, TriggerAutomation>}
  */
 export default function TriggerAutomationMixin(Base) {
   /**
-   * @extends {BaseAutomation}
    * @mixin
    * @property {string|null} trigger
    * @property {Teriock.System.FormulaString} triggerQualifier

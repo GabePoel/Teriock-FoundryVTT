@@ -12,15 +12,15 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
  * Relevant wiki pages:
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorTradecraftsPart & Teriock.Models.ActorTradecraftsPartData>}
  * @see {TradecraftModel}
  * @see {TradecraftExecutionMixin}
  */
 export default function ActorTradecraftsPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorTradecraftsPartData}
+   * @implements {Teriock.Models.ActorTradecraftsPartData}
    * @mixin
    * @property {AnyActor} parent
    */

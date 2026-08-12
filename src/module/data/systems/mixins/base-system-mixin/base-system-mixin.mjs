@@ -10,11 +10,11 @@ const { fields } = foundry.data;
 /**
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base
+ * @returns {MixinResult<T, TeriockSystem & Teriock.Models.BaseSystemData>}
  */
 export default function BaseSystemMixin(Base) {
   /**
-   * @extends {TypeDataModel}
-   * @extends {Teriock.Models.BaseSystemData}
+   * @implements {Teriock.Models.BaseSystemData}
    * @mixin
    */
   class TeriockSystem extends Base {

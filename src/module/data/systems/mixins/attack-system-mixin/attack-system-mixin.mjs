@@ -4,13 +4,13 @@ import { PiercingModel } from "../../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<ChildSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AttackSystem & Teriock.Models.AttackSystemData>}
  */
 export default function AttackSystemMixin(Base) {
   /**
-   * @extends {ChildSystem}
-   * @extends {Teriock.Models.AttackSystemData}
+   * @implements {Teriock.Models.AttackSystemData}
    * @mixin
    */
   class AttackSystem extends Base {

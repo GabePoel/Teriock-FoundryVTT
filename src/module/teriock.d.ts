@@ -9,9 +9,6 @@ declare global {
   const _loc: (stringId: string, data?: object) => string;
   const _replace: (value: never) => ForcedReplacement;
 
-  /** A class constructor. Used for mixin factories and other generic class parameters. */
-  type Constructor<T = object> = abstract new(...args: never[]) => T;
-
   /** Foundry VTT UUID */
   type UUID<T = unknown> = string & { [__brand]: T };
 

@@ -1,11 +1,11 @@
 /**
  * Mixin that adds a competence icon to document embed cards.
- * @template {Constructor<ChildSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, CompetenceDisplaySystem>}
  */
 export default function CompetenceDisplaySystemMixin(Base) {
   /**
-   * @extends {ChildSystem}
    * @mixin
    */
   class CompetenceDisplaySystem extends Base {

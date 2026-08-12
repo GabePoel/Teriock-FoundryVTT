@@ -14,10 +14,10 @@ const { ImagePopout } = foundry.applications.apps;
  * Mixin that displays the parts of sheets configured in document systems.
  * @template {Constructor<BaseSheet>} T
  * @param {T} Base
+ * @returns {MixinResult<T, DisplaySheet>}
  */
 export default function DisplaySheetMixin(Base) {
   /**
-   * @extends {BaseSheet}
    * @mixin
    */
   class DisplaySheet extends Base {

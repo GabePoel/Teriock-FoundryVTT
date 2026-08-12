@@ -10,7 +10,6 @@ const { fields } = foundry.data;
 /**
  * Stat dice use the pseudo-document `_id` infrastructure, but are only ever derived inside a {@link StatPoolModel}.
  * They are never saved to the database.
- * @extends {Teriock.StatDie.StatDieModelData}
  */
 export default class StatDie extends BasePseudoDocument {
   /** @inheritDoc */

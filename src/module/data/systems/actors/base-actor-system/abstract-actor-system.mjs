@@ -4,7 +4,6 @@ import * as systemMixins from "../../mixins/_module.mjs";
 const { TypeDataModel } = foundry.abstract;
 
 /**
- * @extends {TypeDataModel}
  * @mixes CommonSystem
  */
 export default class AbstractActorSystem extends mixClasses(TypeDataModel, systemMixins.CommonSystemMixin) {

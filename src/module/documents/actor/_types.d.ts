@@ -19,6 +19,33 @@ type ActorDocument = Omit<Teriock.Documents.DocumentBase<TeriockActor, Actor>, "
   get documentName(): "Actor";
 };
 
+declare module "./actor.mjs" {
+  export default interface TeriockActor {
+    _id: ID<AnyActor>;
+    // @ts-expect-error DocumentConstructionContext
+    effects: DocumentCollection<AnyActiveEffect>;
+    // @ts-expect-error DocumentConstructionContext
+    items: DocumentCollection<AnyItem>;
+    sheet: BaseActorSheet;
+    statuses: Set<Teriock.Keys.Condition>;
+    system: BaseActorSystem;
+
+    get actor(): AnyActor;
+
+    get appliedEffects(): AnyActiveEffect[];
+
+    get documentName(): "Actor";
+
+    get id(): ID<AnyActor>;
+
+    get temporaryEffects(): TeriockActiveEffect[];
+
+    get token(): TeriockTokenDocument | null;
+
+    get uuid(): UUID<AnyActor>;
+  }
+}
+
 declare global {
   export interface TeriockCharacter
     extends Teriock.Documents.Subtype<ActorDocument, "character", PlayableActorSheet, CharacterSystem>
@@ -34,35 +61,6 @@ declare global {
     character: TeriockCharacter;
     creature: TeriockCreature;
     inventory: TeriockInventory;
-  }
-}
-
-declare global {
-  namespace Teriock.Documents {
-    export interface ActorInterface {
-      _id: ID<AnyActor>;
-      // @ts-expect-error DocumentConstructionContext
-      effects: DocumentCollection<AnyActiveEffect>;
-      // @ts-expect-error DocumentConstructionContext
-      items: DocumentCollection<AnyItem>;
-      sheet: BaseActorSheet;
-      statuses: Set<Teriock.Keys.Condition>;
-      system: BaseActorSystem;
-
-      get actor(): AnyActor;
-
-      get appliedEffects(): AnyActiveEffect[];
-
-      get documentName(): "Actor";
-
-      get id(): ID<AnyActor>;
-
-      get temporaryEffects(): TeriockActiveEffect[];
-
-      get token(): TeriockTokenDocument | null;
-
-      get uuid(): UUID<AnyActor>;
-    }
   }
 }
 

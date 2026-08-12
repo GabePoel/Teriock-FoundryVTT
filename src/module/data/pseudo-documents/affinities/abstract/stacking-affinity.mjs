@@ -5,7 +5,6 @@ const { fields } = foundry.data;
 /**
  * An affinity that contributes an amount rather than simply being present, and so adds up across every source that
  * grants it.
- * @extends {BaseAffinity}
  * @property {number} amount
  */
 export default class StackingAffinity extends BaseAffinity {

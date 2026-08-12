@@ -8,11 +8,9 @@ const { RollTable } = foundry.documents;
 
 /**
  * The Teriock RollTable implementation.
- * @extends {RollTable}
  * @mixes BaseDocument
  * @mixes UsableDocument
  * @mixes PanelDocument
- * @implements {Teriock.Documents.RollTableInterface}
  */
 export default class TeriockRollTable
   extends mixClasses(

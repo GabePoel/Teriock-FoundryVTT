@@ -7,10 +7,10 @@
  * Mixin to ensure that `TERIOCK` values are always available.
  * @template {Constructor<ApplicationV2>} T
  * @param {T} Base
+ * @returns {MixinResult<T, BaseApplication>}
  */
 export default function BaseApplicationMixin(Base) {
   /**
-   * @extends {ApplicationV2}
    * @mixin
    * @property {ApplicationConfiguration & Teriock.Application._ApplicationConfiguration} options
    */

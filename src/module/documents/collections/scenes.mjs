@@ -7,7 +7,6 @@ const { Scenes } = foundry.documents.collections;
  */
 
 /**
- * @extends {Scenes}
  * @mixes BaseWorldCollection
  * @implements {TypeCollection<TeriockScene, TeriockScene>}
  * @implements {DocumentCollection<TeriockScene>}

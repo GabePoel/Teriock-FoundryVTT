@@ -3,7 +3,6 @@ import { BaseExecution } from "../abstract/_module.mjs";
 import * as executionMixins from "../mixins/_module.mjs";
 
 /**
- * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
 export default class FeatExecution extends executionMixins.ThresholdExecutionMixin(BaseExecution) {

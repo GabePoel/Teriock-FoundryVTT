@@ -3,7 +3,6 @@ import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * An attack roll that has no ability associated with it.
- * @extends {BaseExecution}
  * @mixes AttackExecution
  */
 export default class AttackRollExecution extends executionMixins.AttackExecutionMixin(BaseExecution) {

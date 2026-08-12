@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorSensesPartData = {
+    export interface ActorSensesPartData {
       /** <schema> Detection parameters */
       detection: {
         /** <schema> Hiding based on sneak */
@@ -31,7 +31,7 @@ declare global {
         /** <schema> True sight */
         truth: number;
       };
-    };
+    }
   }
 }
 

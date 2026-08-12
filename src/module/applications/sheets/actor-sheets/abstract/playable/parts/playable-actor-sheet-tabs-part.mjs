@@ -1,12 +1,12 @@
 import { TeriockDragDrop } from "../../../../../ux/_module.mjs";
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetTabsPart>}
  */
 export default function PlayableActorSheetTabsPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetTabsPart extends Base {

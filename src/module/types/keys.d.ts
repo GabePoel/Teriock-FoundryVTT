@@ -1,3 +1,5 @@
+import type statConfig from "../constants/config/stat-config.mjs";
+
 import { config, display, index, statuses } from "../constants/_module.mjs";
 
 declare global {
@@ -14,7 +16,7 @@ declare global {
     export type ActiveExecutionTime = keyof typeof config.ability.executionTime.active;
     export type ReactiveExecutionTime = keyof typeof config.ability.executionTime.reactive;
     export type PassiveExecutionTime = keyof typeof config.ability.executionTime.passive;
-    export type SlowExecutionTime = string | keyof typeof config.ability.executionTime.slow;
+    export type SlowExecutionTime = keyof typeof config.ability.executionTime.slow;
     export type ExecutionTime =
       | Teriock.Keys.ActiveExecutionTime
       | Teriock.Keys.PassiveExecutionTime
@@ -31,11 +33,10 @@ declare global {
     export type Attribute = keyof typeof config.attribute;
 
     // Stat Keys
-    export type Stat = keyof typeof config.stat;
+    export type Stat = keyof typeof statConfig;
     export type DieStat = {
-      [K in keyof typeof config.stat]: typeof config.stat[K] extends { pool: { enabled: true } } ? K
-        : never;
-    }[keyof typeof config.stat];
+      [K in keyof typeof statConfig]: typeof statConfig[K] extends { pool: object } ? K : never;
+    }[keyof typeof statConfig];
 
     // Impact Keys
     export type PayMode = "exact" | "greedy";
@@ -59,17 +60,9 @@ declare global {
     // Kind Keys
     export type Kind = keyof typeof config.system.defaultKinds;
     export type PowerKind = keyof typeof config.power.kind;
-    /** @deprecated Use {@link PowerKind} */
-    export type PowerType = PowerKind;
     export type EffectKind = keyof typeof config.effect.kind;
-    /** @deprecated Use {@link EffectKind} */
-    export type Form = EffectKind;
     export type AttunementKind = keyof typeof config.attunement.kind;
-    /** @deprecated Use {@link AttunementKind} */
-    export type AttunementOrigin = AttunementKind;
     export type RankKind = keyof typeof config.class.kind;
-    /** @deprecated Use {@link RankKind} */
-    export type RankOrigin = RankKind;
 
     // Effect Keys
     export type ApplicationTarget = keyof typeof config.effect.applicationTargets;
@@ -83,8 +76,8 @@ declare global {
     // Status Keys
     export type HackableBodyPart = keyof typeof config.hack;
     export type Condition = keyof typeof index.conditions;
-    export type Cover = (typeof statuses.cover)[keyof typeof statuses.cover]["id"];
-    export type Hack = (typeof statuses.hacks)[keyof typeof statuses.hacks]["id"];
+    export type Cover = keyof typeof statuses.cover;
+    export type Hack = keyof typeof statuses.hacks;
     export type Status = Condition | Cover | Hack;
 
     // Rank Keys
@@ -93,7 +86,7 @@ declare global {
 
     // Cost Keys
     export type Component = keyof typeof config.cost.components.keys;
-    export type PrimaryCost = keyof typeof config.stat;
+    export type PrimaryCost = keyof typeof statConfig;
     export type CostTweak = keyof typeof config.cost.tweaks;
 
     // Affinity Keys

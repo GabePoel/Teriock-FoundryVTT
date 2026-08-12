@@ -1,10 +1,10 @@
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetDocumentCreationPart>}
  */
 export default function PlayableActorSheetDocumentCreationPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetDocumentCreationPart extends Base {

@@ -3,7 +3,6 @@ import AffinityExecution from "./affinity-execution.mjs";
 
 /**
  * Works for any affinity that is rolled against a threshold.
- * @extends {AffinityExecution}
  * @mixes ThresholdExecution
  */
 export default class ResistanceExecution extends executionMixins.ThresholdExecutionMixin(AffinityExecution) {

@@ -15,13 +15,12 @@ import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, MechanicsSheet>}
  */
 export default function MechanicsSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
-   * @extends {DragDropSheet}
    * @mixes ChangesSheet
    * @mixin
    * @property {AnyCommonDocument} document

@@ -14,13 +14,13 @@ const { fields } = foundry.data;
  * - [Sensory effects](https://wiki.teriock.com/index.php/Category:Sensory_effects)
  * - [Sneak](https://wiki.teriock.com/index.php/Core:Sneak)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorSensesPart & Teriock.Models.ActorSensesPartData>}
  */
 export default function ActorSensesPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorSensesPartData}
+   * @implements {Teriock.Models.ActorSensesPartData}
    * @mixin
    * @property {AnyActor} parent
    */

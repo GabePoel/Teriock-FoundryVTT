@@ -8,11 +8,11 @@ import { IdentifierField } from "../../../fields/_module.mjs";
 /**
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base
+ * @returns {MixinResult<T, RulesSystem & Teriock.Models.RulesSystemData>}
  */
 export default function RulesSystemMixin(Base) {
   /**
-   * @extends {TypeDataModel}
-   * @extends {Teriock.Models.RulesSystemData}
+   * @implements {Teriock.Models.RulesSystemData}
    * @mixes TeriockSystem
    * @mixin
    */

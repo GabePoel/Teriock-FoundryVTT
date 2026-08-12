@@ -15,7 +15,6 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
  * {@link TeriockImbuement} and {@link TeriockConsequence} sheet.
- * @extends {ActiveEffectConfig}
  * @mixes BaseDocumentSheet
  * @mixes SystemSettingsButtonSheet
  * @mixes DocumentCreationSheet

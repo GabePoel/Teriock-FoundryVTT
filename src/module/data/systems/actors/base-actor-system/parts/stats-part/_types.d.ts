@@ -4,14 +4,14 @@ import { StatDie } from "../../../../../pseudo-documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ActorStatsPartData = {
+    export interface ActorStatsPartData {
       /** <schema> Hit points (damage) */
       hp: CoreStat;
       /** <schema> Lifespan points (wither) */
       lp: Teriock.Fields.BarField;
       /** <schema> Mana points (drain) */
       mp: CoreStat;
-    };
+    }
 
     export type CoreStat = Teriock.Fields.BarField & {
       /** <base> Base */

@@ -5,9 +5,6 @@ import { objectMap } from "../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @extends {Teriock.Models.HackSystemData}
- */
 export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Hack"];

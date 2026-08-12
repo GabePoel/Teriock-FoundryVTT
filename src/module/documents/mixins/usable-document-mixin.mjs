@@ -1,11 +1,11 @@
 /**
  * Document mixin to support using this document.
- * @template {Constructor<BaseDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, UsableDocument>}
  */
 export default function UsableDocumentMixin(Base) {
   /**
-   * @extends {BaseDocument}
    * @mixin
    */
   class UsableDocument extends Base {

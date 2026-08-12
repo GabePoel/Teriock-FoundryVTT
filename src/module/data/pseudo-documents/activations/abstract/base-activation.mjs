@@ -2,9 +2,6 @@ import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @extends {Teriock.Activations.BaseActivationData}
- */
 export default class BaseActivation extends TypedPseudoDocument {
   /** @inheritDoc */
   static get metadata() {

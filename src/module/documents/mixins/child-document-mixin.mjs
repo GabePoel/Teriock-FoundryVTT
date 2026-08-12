@@ -3,99 +3,99 @@ import * as documentMixins from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
- * @template {Constructor<BaseDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ChildDocument>}
  */
 export default function ChildDocumentMixin(Base) {
-  return (
+  /**
+   * @mixes HierarchyDocument
+   * @mixes UsableDocument
+   * @mixin
+   */
+  class ChildDocument
+    extends mixClasses(Base, documentMixins.UsableDocumentMixin, documentMixins.HierarchyDocumentMixin)
+  {
+    /** @inheritDoc */
+    static get documentMetadata() {
+      return Object.assign(super.documentMetadata, { child: true });
+    }
+
+    /** @inheritDoc */
+    static async validateRelationship(sup, sub, operation) {
+      if (!this.validateChildType(sup, sub, operation)) { return false; }
+      return super.validateRelationship(sup, sub, operation);
+    }
+
     /**
-     * @extends {BaseDocument}
-     * @mixes HierarchyDocument
-     * @mixes UsableDocument
-     * @mixin
+     * Checks if the document is suppressed.
+     * @returns {boolean}
      */
-    class ChildDocument
-      extends mixClasses(Base, documentMixins.UsableDocumentMixin, documentMixins.HierarchyDocumentMixin)
-    {
-      /** @inheritDoc */
-      static get documentMetadata() {
-        return Object.assign(super.documentMetadata, { child: true });
-      }
+    get isSuppressed() {
+      return this.system.isSuppressed || super.isSuppressed;
+    }
 
-      /** @inheritDoc */
-      static async validateRelationship(sup, sub, operation) {
-        if (!this.validateChildType(sup, sub, operation)) { return false; }
-        return super.validateRelationship(sup, sub, operation);
-      }
+    /** @inheritDoc */
+    _onCreate(data, options, userId) {
+      super._onCreate(data, options, userId);
+      if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
+    }
 
-      /**
-       * Checks if the document is suppressed.
-       * @returns {boolean}
-       */
-      get isSuppressed() {
-        return this.system.isSuppressed || super.isSuppressed;
-      }
+    /** @inheritDoc */
+    _onDelete(options, userId) {
+      super._onDelete(options, userId);
+      if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
+    }
 
-      /** @inheritDoc */
-      _onCreate(data, options, userId) {
-        super._onCreate(data, options, userId);
-        if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
-      }
-
-      /** @inheritDoc */
-      _onDelete(options, userId) {
-        super._onDelete(options, userId);
-        if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
-      }
-
-      /**
-       * Get all ActiveEffects that may apply to this document.
-       * @yields {TeriockActiveEffect}
-       * @returns {Generator<TeriockActiveEffect, void, void>}
-       */
-      *allApplicableEffects() {
-        if (this.actor) {
-          for (const effect of this.actor.allApplicableEffects()) { yield effect; }
-        }
-      }
-
-      /**
-       * Duplicates the document within its parent.
-       * @param {object} [data]
-       * @returns {Promise<ChildDocument>}
-       */
-      async duplicate(data = {}) {
-        const copy = foundry.utils.mergeObject(this.toObject(true), {
-          name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
-          ...data,
-        });
-        copy._stats.duplicateSource = this.uuid;
-        let copyDocument;
-        if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
-        else if (this.inCompendium) {
-          copyDocument = await this.constructor.create(copy, { pack: this.compendium.collection });
-        } else { copyDocument = await this.constructor.create(copy); }
-        return copyDocument[0];
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        if (this.isTop) { this.prepareChangeData(); }
-      }
-
-      /**
-       * Toggles whether this document is disabled.
-       * @returns {Promise<void>}
-       */
-      async toggleDisabled() {
-        await this.update({ "system.disabled": !this.system.disabled });
-      }
-
-      /** @inheritDoc */
-      async use(options = {}) {
-        await this.system.use(options);
+    /**
+     * Get all ActiveEffects that may apply to this document.
+     * @yields {TeriockActiveEffect}
+     * @returns {Generator<TeriockActiveEffect, void, void>}
+     */
+    *allApplicableEffects() {
+      if (this.actor) {
+        for (const effect of this.actor.allApplicableEffects()) { yield effect; }
       }
     }
-  );
+
+    /**
+     * Duplicates the document within its parent.
+     * @param {object} [data]
+     * @returns {Promise<ChildDocument>}
+     */
+    async duplicate(data = {}) {
+      const copy = foundry.utils.mergeObject(this.toObject(true), {
+        name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
+        ...data,
+      });
+      copy._stats.duplicateSource = this.uuid;
+      let copyDocument;
+      if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
+      else if (this.inCompendium) {
+        copyDocument = await this.constructor.create(copy, { pack: this.compendium.collection });
+      } else { copyDocument = await this.constructor.create(copy); }
+      return copyDocument[0];
+    }
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      if (this.isTop) { this.prepareChangeData(); }
+    }
+
+    /**
+     * Toggles whether this document is disabled.
+     * @returns {Promise<void>}
+     */
+    async toggleDisabled() {
+      await this.update({ "system.disabled": !this.system.disabled });
+    }
+
+    /** @inheritDoc */
+    async use(options = {}) {
+      await this.system.use(options);
+    }
+  }
+
+  return ChildDocument;
 }

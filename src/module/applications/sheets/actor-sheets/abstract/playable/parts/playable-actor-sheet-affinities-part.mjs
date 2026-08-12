@@ -1,12 +1,12 @@
 import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetAffinitiesPart>}
  */
 export default function PlayableActorSheetAffinitiesPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetAffinitiesPart extends Base {

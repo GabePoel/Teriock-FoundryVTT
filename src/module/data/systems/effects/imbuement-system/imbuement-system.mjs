@@ -4,8 +4,6 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
 
 /**
  * Effect-specific effect data model.
- * @extends {ApplicableEffectSystem}
- * @extends {Teriock.Models.ImbuementSystemData}
  * @mixes GrantedSystem
  */
 export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, systemMixins.GrantedSystemMixin) {

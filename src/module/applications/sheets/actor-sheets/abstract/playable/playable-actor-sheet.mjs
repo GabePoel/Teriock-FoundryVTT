@@ -9,7 +9,6 @@ import * as parts from "./parts/_module.mjs";
 
 /**
  * Playable actor sheet.
- * @extends {BaseActorSheet}
  * @mixes PlayableActorSheetAvatarImagePart
  * @mixes PlayableActorSheetCombatPart
  * @mixes PlayableActorSheetConditionsPart

@@ -11,7 +11,6 @@ import { HackStatApplicationMixin } from "../../shared/_module.mjs";
  */
 
 /**
- * @extends {DocumentDialog}
  * @mixes HackStatApplication
  */
 export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialog) {

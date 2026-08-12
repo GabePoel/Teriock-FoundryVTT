@@ -6,13 +6,11 @@ const { ActiveEffect } = foundry.documents;
 /**
  * The Teriock ActiveEffect implementation.
  * @extends {ActiveEffect}
- * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument
  * @mixes DependeeDocument
  * @mixes RetrievalDocument
- * @implements {Teriock.Documents.ActiveEffectInterface}
  */
 export default class TeriockActiveEffect
   extends mixClasses(

@@ -11,7 +11,7 @@ const { StringField } = foundry.data.fields;
 
 /**
  * Special case {@link StringField} which represents a formula.
- * @extends {Teriock.Fields._FormulaFieldOptions}
+ * @implements {Teriock.Fields._FormulaFieldOptions}
  */
 export default class FormulaField extends StringField {
   /** @inheritdoc */

@@ -11,8 +11,6 @@ const { fields } = foundry.data;
 
 /**
  * Power-specific item data model.
- * @extends {BaseItemSystem}
- * @extends {Teriock.Models.PowerSystemData}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  * @mixes MetaphysicsSystem

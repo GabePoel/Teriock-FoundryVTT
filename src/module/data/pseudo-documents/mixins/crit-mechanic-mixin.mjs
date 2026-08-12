@@ -4,12 +4,12 @@ const { fields } = foundry.data;
 
 /**
  * Adds critical-hit gating to a {@link MechanicPseudoDocument}.
- * @template {Constructor<MechanicPseudoDocument>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, CritMechanic>}
  */
 export default function CritMechanicMixin(Base) {
   /**
-   * @extends {MechanicPseudoDocument}
    * @mixin
    * @property {Set<number>} crit
    */

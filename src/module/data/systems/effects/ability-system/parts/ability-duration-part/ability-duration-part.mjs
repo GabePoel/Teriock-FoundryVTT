@@ -8,13 +8,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Duration](https://wiki.teriock.com/index.php/Core:Duration)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityDurationPart & Teriock.Models.AbilityDurationPartData>}
  */
 export default function AbilityDurationPart(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AbilityDurationPartData}
+   * @implements {Teriock.Models.AbilityDurationPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

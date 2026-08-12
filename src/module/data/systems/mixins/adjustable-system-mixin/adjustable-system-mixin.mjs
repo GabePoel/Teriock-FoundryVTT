@@ -3,13 +3,13 @@ import effectConfig from "../../../../constants/config/effect-config.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<BaseEffectSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AdjustableSystem & Teriock.Models.AdjustableSystemData>}
  */
 export default function AdjustableSystemMixin(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AdjustableSystemData}
+   * @implements {Teriock.Models.AdjustableSystemData}
    * @mixin
    */
   class AdjustableSystem extends Base {

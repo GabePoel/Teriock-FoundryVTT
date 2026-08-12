@@ -11,13 +11,11 @@ const { Item } = foundry.documents;
 /**
  * The Teriock Item implementation.
  * @extends {Item}
- * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @implements {Teriock.Documents.ItemInterface}
  */
 export default class TeriockItem
   extends mixClasses(

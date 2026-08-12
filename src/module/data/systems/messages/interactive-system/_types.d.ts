@@ -1,6 +1,16 @@
-import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { TypeCollection } from "../../../../documents/collections/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
+
+declare module "./interactive-system.mjs" {
+  export default interface InteractiveSystem extends Teriock.Models.BaseMessageSystemData {
+    activations: TypeCollection<ID<BaseActivation>, BaseActivation>;
+    img: string;
+    panels: Teriock.Panels.PanelParts[];
+    restrictVisibility: boolean;
+    source: UUID<TeriockDocument> | null;
+    tags: string[];
+  }
+}
 
 declare global {
   namespace Teriock.Data {
@@ -21,16 +31,6 @@ declare global {
   }
 
   namespace Teriock.Models {
-    export type InteractiveMessageSystemData = Teriock.Models.BaseMessageSystemData & {
-      activations: TypeCollection<ID<BaseActivation>, BaseActivation>;
-      img: string;
-      panels: Teriock.Panels.PanelParts[];
-      restrictVisibility: boolean;
-      source: UUID<TeriockDocument> | null;
-      tags: string[];
-
-      get parent(): TeriockChatMessage;
-    };
   }
 }
 

@@ -5,11 +5,11 @@
 /**
  * @template {Constructor<WorldCollection>} T
  * @param {T} Base
+ * @returns {MixinResult<T, BaseWorldCollection>}
  */
 export default function BaseWorldCollectionMixin(Base) {
   /**
    * @template TeriockDocument
-   * @extends {WorldCollection<TeriockDocument>}
    * @mixin
    */
   class BaseWorldCollection extends Base {

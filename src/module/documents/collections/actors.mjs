@@ -4,8 +4,6 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 const { Actors } = foundry.documents.collections;
 
 /**
- * @extends {Actors}
- * @extends {WorldCollection<TeriockActor>}
  * @mixes BaseWorldCollection
  * @property {Record<ID<TeriockActor>, TeriockActor>} tokens
  */

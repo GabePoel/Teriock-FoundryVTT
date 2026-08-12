@@ -10,8 +10,6 @@ import { CritMechanicMixin } from "../../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {MechanicPseudoDocument}
- * @extends {Teriock.Expirations.BaseExpirationData}
  * @mixes CritMechanic
  * @typedef {object} ExpirationEventContext
  * @property {Set<TeriockActor>} [actors]

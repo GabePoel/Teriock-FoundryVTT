@@ -10,8 +10,6 @@ const { fields } = foundry.data;
 
 /**
  * Archetype-specific item data model.
- * @extends {BaseItemSystem}
- * @extends {Teriock.Models.ArchetypeSystemData}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  */

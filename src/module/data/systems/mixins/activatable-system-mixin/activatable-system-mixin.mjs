@@ -2,13 +2,13 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 
 /**
- * @template {Constructor<TeriockSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActivatableSystem & Teriock.Models.ActivatableSystemData>}
  */
 export default function ActivatableSystemMixin(Base) {
   /**
-   * @extends {TeriockSystem}
-   * @extends {Teriock.Models.ActivatableSystemData}
+   * @implements {Teriock.Models.ActivatableSystemData}
    * @mixin
    */
   class ActivatableSystem extends Base {

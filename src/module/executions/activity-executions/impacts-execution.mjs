@@ -4,7 +4,6 @@ import * as executionMixins from "../mixins/_module.mjs";
 /**
  * Execution that rolls one or more impacts (damage, drain, healing, etc.) and offers boost/deboost/critical modifiers.
  * This replaces the standalone `boostDialog` usage in the impact chat commands.
- * @extends {BaseExecution}
  * @mixes ImpactsExecution
  */
 export default class ImpactsExecution extends executionMixins.ImpactsExecutionMixin(BaseExecution) {

@@ -1,8 +1,5 @@
-declare global {
-  namespace Teriock.Models {
-    export interface CreatureSystemData extends Teriock.Models.BaseActorSystemData {
-      get parent(): TeriockCreature;
-    }
+declare module "./creature-system.mjs" {
+  export default interface CreatureSystem extends Teriock.Models.BaseActorSystemData {
   }
 }
 

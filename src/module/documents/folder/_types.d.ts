@@ -1,16 +1,12 @@
-import { TeriockFolder } from "../_module.mjs";
+declare module "./folder.mjs" {
+  export default interface TeriockFolder {
+    _id: ID<TeriockFolder>;
 
-declare global {
-  namespace Teriock.Documents {
-    export interface FolderInterface {
-      _id: ID<TeriockFolder>;
+    get documentName(): "Folder";
 
-      get documentName(): "Folder";
+    get id(): ID<TeriockFolder>;
 
-      get id(): ID<TeriockFolder>;
-
-      get uuid(): UUID<TeriockFolder>;
-    }
+    get uuid(): UUID<TeriockFolder>;
   }
 }
 

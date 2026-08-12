@@ -2,13 +2,13 @@ const { fields } = foundry.data;
 
 /**
  * Data mixin to support equipment suppression configuration.
- * @template {Constructor<BaseEffectSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, GrantedSystem & Teriock.Models.GrantedSystemData>}
  */
 export default function GrantedSystemMixin(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.GrantedSystemData}
+   * @implements {Teriock.Models.GrantedSystemData}
    * @mixin
    */
   class GrantedSystem extends Base {

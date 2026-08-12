@@ -4,8 +4,7 @@ import * as systemMixins from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
- * @extends {BasePageSystem}
- * @extends {Teriock.Models.BasePageSystemData}
+ * @implements {Teriock.Models.BasePageSystemData}
  * @mixes WikiSystem
  */
 export default class RuleSystem extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin) {

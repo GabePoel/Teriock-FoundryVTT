@@ -5,12 +5,12 @@ import { StatDiceUpdater } from "../../dialogs/updaters/_module.mjs";
  */
 
 /**
- * @template {Constructor<TeriockDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, StatDiceSheet>}
  */
 export default function StatDiceSheetMixin(Base) {
   /**
-   * @extends {TeriockDocumentSheet}
    * @mixin
    * @property {AnyCommonDocument} document
    */

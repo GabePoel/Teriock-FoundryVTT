@@ -1,9 +1,9 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorCoverPartData = {
+    export interface ActorCoverPartData {
       /** <base> Cover */
       cover: number;
-    };
+    }
   }
 }
 

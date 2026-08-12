@@ -6,8 +6,6 @@ const { TypeDataModel } = foundry.abstract;
 /**
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
- * @extends {TypeDataModel}
- * @extends {Teriock.Models.BaseItemSystemData}
  * @mixes InstructionsSystem
  * @mixes ChildSystem
  */

@@ -8,7 +8,6 @@ import HTMLCycleButtonElement from "./cycle-button.mjs";
  * A three-state toggle control representing `true`, `false`, or `null`.
  * Left-click cycles forward (`null` -> `true` -> `false` -> `null`).
  * Right-click cycles backward (`null` -> `false` -> `true` -> `null`).
- * @extends {HTMLCycleButtonElement}
  */
 export default class HTMLTernaryElement extends HTMLCycleButtonElement {
   /** @inheritDoc */

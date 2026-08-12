@@ -2,12 +2,12 @@ import { VirtualConditionModel } from "../../../../../../data/models/_module.mjs
 import { TeriockTextEditor } from "../../../../../ux/_module.mjs";
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetConditionsPart>}
  */
 export default function PlayableActorSheetConditionsPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetConditionsPart extends Base {

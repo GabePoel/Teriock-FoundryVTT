@@ -4,7 +4,6 @@ const { Collection } = foundry.utils;
  * @inheritDoc
  * @template K
  * @template V
- * @extends {Collection<ID<K>, V>}
  */
 export default class TypeCollection extends Collection {
   /**

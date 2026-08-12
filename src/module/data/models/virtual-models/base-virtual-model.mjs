@@ -8,7 +8,6 @@ const { fields } = foundry.data;
 
 /**
  * Something an actor derives during preparation that is displayed as though it were a document, but is not one.
- * @extends {BaseDataModel}
  * @implements {Teriock.Embeds.Embeddable}
  * @property {Teriock.System.ImageString} img
  * @property {Set<string>} providers

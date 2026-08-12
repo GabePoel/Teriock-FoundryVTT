@@ -17,7 +17,6 @@ const { setInputAttributes } = foundry.applications.fields;
 /**
  * A text input for plain identifiers with an optional reset button.
  * Used by {@link IdentifierField} when `reset` is configured.
- * @extends {AbstractFormInputElement<string|null>}
  */
 export default class HTMLIdentifierInputElement extends AbstractFormInputElement {
   /** @inheritDoc */

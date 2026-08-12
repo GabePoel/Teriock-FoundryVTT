@@ -11,13 +11,13 @@ import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs"
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ArmamentSystem & Teriock.Models.ArmamentSystemData>}
  */
 export default function ArmamentSystemMixin(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.ArmamentSystemData}
+   * @implements {Teriock.Models.ArmamentSystemData}
    * @mixes AttackSystem
    * @mixin
    */

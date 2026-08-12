@@ -5,12 +5,12 @@ const { fields } = foundry.data;
 
 /**
  * Mixin for data models that can be used. This typically involves running an execution.
- * @template {Constructor<BaseDataModel | CommonSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, UsableData>}
  */
 export default function UsableDataMixin(Base) {
   /**
-   * @extends {BaseDataModel | CommonSystem}
    * @mixin
    */
   class UsableData extends Base {

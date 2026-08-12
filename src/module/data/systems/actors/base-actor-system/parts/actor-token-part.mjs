@@ -6,12 +6,12 @@ import { TeriockActor } from "../../../../../documents/_module.mjs";
 
 /**
  * Actor data model that handles automatically derived token changes.
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorTokenPart>}
  */
 export default function ActorTokenPart(Base) {
   /**
-   * @extends {AbstractActorSystem}
    * @mixin
    * @property {AnyActor} parent
    */

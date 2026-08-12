@@ -2,12 +2,12 @@ import statConfig from "../../../../constants/config/stat-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
- * @template {Constructor<AbilityExecutionConstructor>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityExecutionChat>}
  */
 export default function AbilityExecutionChatPart(Base) {
   /**
-   * @extends {AbilityExecutionConstructor}
    * @mixin
    */
   class AbilityExecutionChat extends Base {

@@ -4,12 +4,12 @@
 
 /**
  * Mixin to support manipulating changes arrays in automations.
- * @template {Constructor<BaseDocumentSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ChangesSheet>}
  */
 export default function ChangesSheetMixin(Base) {
   /**
-   * @extends {BaseDocumentSheet}
    * @mixin
    */
   class ChangesSheet extends Base {

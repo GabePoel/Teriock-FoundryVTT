@@ -9,13 +9,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Death Bag](https://wiki.teriock.com/index.php/Core:Death_Bag)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorDeathBagPart & Teriock.Models.ActorDeathBagPartData>}
  */
 export default function ActorDeathBagPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorDeathBagPartData}
+   * @implements {Teriock.Models.ActorDeathBagPartData}
    * @mixin
    * @property {AnyActor} parent
    */

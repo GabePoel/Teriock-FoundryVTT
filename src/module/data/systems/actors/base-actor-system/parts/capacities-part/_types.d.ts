@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ActorCapacitiesPartData = {
+    export interface ActorCapacitiesPartData {
       carryingCapacity: { factor: number, heavy: number, light: number, max: number };
       /** <base> Encumbrance level */
       encumbranceLevel: number;
@@ -28,7 +28,7 @@ declare global {
         /** <derived> Total weight of actor and everything they carry (self + carried) */
         value: number;
       };
-    };
+    }
   }
 }
 

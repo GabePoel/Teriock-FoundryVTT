@@ -7,7 +7,6 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
  * {@link TeriockFluency} sheet.
- * @extends {ChildSheet}
  * @property {TeriockFluency} document
  */
 export default class FluencySheet extends ChildSheet {

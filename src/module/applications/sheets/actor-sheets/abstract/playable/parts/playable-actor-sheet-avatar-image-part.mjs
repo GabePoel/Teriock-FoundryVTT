@@ -3,12 +3,12 @@
  */
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetAvatarImagePart>}
  */
 export default function PlayableActorSheetAvatarImagePart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetAvatarImagePart extends Base {

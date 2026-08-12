@@ -8,12 +8,12 @@ const { FormDataExtended } = foundry.applications.ux;
 
 /**
  * Mixin for short-lived applications.
- * @template {Constructor<ApplicationV2 & BaseApplication>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, TemporaryApplication>}
  */
 export default function TemporaryApplicationMixin(Base) {
   /**
-   * @extends {ApplicationV2 & BaseApplication}
    * @mixin
    * @property {Record<string, any>} state - State data automatically updated in {@link _onChangeForm}.
    */

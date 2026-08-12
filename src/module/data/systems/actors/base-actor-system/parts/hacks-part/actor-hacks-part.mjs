@@ -8,13 +8,13 @@ import { initialBar, initialSchema } from "../../../../../fields/tools/initializ
  * Relevant wiki pages:
  * - [Hacked](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorHacksPart & Teriock.Models.ActorHacksPartData>}
  */
 export default function ActorHacksPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorHacksPartData}
+   * @implements {Teriock.Models.ActorHacksPartData}
    * @mixin
    * @property {AnyActor} parent
    */

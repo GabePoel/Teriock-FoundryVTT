@@ -1,8 +1,6 @@
-declare global {
-  namespace Teriock.Activations {
-    export type BaseActivationData = {
-      display: { classes: Set<string>, icon: string, label: string, tooltip: string }[];
-    };
+declare module "./base-activation.mjs" {
+  export default interface BaseActivation {
+    display: { classes: Set<string>, icon: string, label: string, tooltip: string }[];
   }
 }
 

@@ -7,7 +7,6 @@ import * as executionMixins from "../../../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {DocumentExecution}
  * @mixes AttackExecution
  * @property {boolean} consumeEquipment
  * @property {boolean} autoPayCosts

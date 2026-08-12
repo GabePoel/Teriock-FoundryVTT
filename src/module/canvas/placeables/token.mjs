@@ -9,7 +9,6 @@ const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new
 
 /**
  * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
- * @extends {Token}
  * @mixes EtherealLightPlaceable
  * @inheritDoc
  * @property {Scene} scene

@@ -5,7 +5,6 @@ import { AutomationActivationFactory } from "./abstract/_module.mjs";
 /**
  * @property {Teriock.Keys.Impact} impact
  * @property {number} amount
- * @extends {BaseActivation}
  */
 export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */

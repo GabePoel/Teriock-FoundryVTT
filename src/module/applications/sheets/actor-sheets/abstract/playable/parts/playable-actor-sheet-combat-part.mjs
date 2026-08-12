@@ -5,12 +5,12 @@ import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
  */
 
 /**
- * @template {Constructor<BaseActorSheet>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, PlayableActorSheetCombatPart>}
  */
 export default function PlayableActorSheetCombatPart(Base) {
   /**
-   * @extends {BaseActorSheet}
    * @mixin
    */
   class PlayableActorSheetCombatPart extends Base {

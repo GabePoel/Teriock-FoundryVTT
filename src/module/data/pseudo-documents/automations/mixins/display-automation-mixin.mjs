@@ -1,12 +1,12 @@
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<BaseAutomation>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, DisplayAutomation>}
  */
 export default function DisplayAutomationMixin(Base) {
   /**
-   * @extends {BaseAutomation}
    * @mixin
    * @property {{label: string}} display
    */

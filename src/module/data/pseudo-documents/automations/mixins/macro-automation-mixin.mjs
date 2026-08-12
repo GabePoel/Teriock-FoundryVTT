@@ -7,12 +7,12 @@ import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {Constructor<BaseAutomation>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, MacroAutomation>}
  */
 export default function MacroAutomationMixin(Base) {
   /**
-   * @extends {BaseAutomation}
    * @mixes TriggerAutomation
    * @mixes DisplayAutomation
    * @mixin

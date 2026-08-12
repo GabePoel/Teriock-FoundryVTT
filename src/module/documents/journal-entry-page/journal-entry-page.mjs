@@ -7,12 +7,9 @@ const { JournalEntryPage } = foundry.documents;
 
 /**
  * The Teriock JournalEntryPage implementation.
- * @extends {JournalEntryPage}
- * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  * @mixes PanelDocument
- * @implements {Teriock.Documents.JournalEntryPageInterface}
  */
 export default class TeriockJournalEntryPage
   extends mixClasses(

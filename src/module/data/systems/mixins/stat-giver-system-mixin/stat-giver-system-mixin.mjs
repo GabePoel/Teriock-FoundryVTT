@@ -8,13 +8,13 @@ const { fields } = foundry.data;
 const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, StatGiverSystem & Teriock.Models.StatGiverSystemData>}
  */
 export default function StatGiverSystemMixin(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.StatGiverSystemData}
+   * @implements {Teriock.Models.StatGiverSystemData}
    * @implements {Teriock.Functionality.StatProvider}
    * @mixin
    */

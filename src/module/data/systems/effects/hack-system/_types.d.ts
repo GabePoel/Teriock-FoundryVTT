@@ -1,6 +1,8 @@
-declare global {
-  namespace Teriock.Models {
-    export type HackSystemData = { escalation: number, part: boolean, permanent: boolean };
+declare module "./hack-system.mjs" {
+  export default interface HackSystem {
+    escalation: number;
+    part: boolean;
+    permanent: boolean;
   }
 }
 

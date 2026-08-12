@@ -11,13 +11,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorConditionsPart & Teriock.Models.ActorConditionsPartData>}
  */
 export default function ActorConditionsPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorConditionsPartData}
+   * @implements {Teriock.Models.ActorConditionsPartData}
    * @mixin
    * @property {AnyActor} parent
    */

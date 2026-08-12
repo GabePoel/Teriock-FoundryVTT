@@ -8,12 +8,12 @@ const { fields } = foundry.data;
 
 /**
  * Mixin for executions involving a d20 roll.
- * @template {Constructor<BaseExecution>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ThresholdExecution>}
  */
 export default function ThresholdExecutionMixin(Base) {
   /**
-   * @extends {BaseExecution}
    * @mixin
    * @property {Teriock.Keys.Comparison} comparison
    * @property {Teriock.System.FormulaString} bonus

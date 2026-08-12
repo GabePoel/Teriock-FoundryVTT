@@ -12,13 +12,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Costs](https://wiki.teriock.com/index.php/Core:Costs)
  *
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityCostsPart & Teriock.Models.AbilityCostsPartData>}
  */
 export default function AbilityCostsPart(Base) {
   /**
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AbilityCostsPartData}
+   * @implements {Teriock.Models.AbilityCostsPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

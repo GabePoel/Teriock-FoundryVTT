@@ -7,11 +7,9 @@ const { TableResult } = foundry.documents;
 
 /**
  * The Teriock TableResult implementation.
- * @extends {TableResult}
  * @mixes BaseDocument
  * @mixes PanelDocument
  * @mixes EmbedCardDocument
- * @implements {Teriock.Documents.TableResultInterface}
  */
 export default class TeriockTableResult
   extends mixClasses(

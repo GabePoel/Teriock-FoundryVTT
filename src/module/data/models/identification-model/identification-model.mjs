@@ -8,9 +8,6 @@ import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @extends {Teriock.Models.IdentificationModelData}
- */
 export default class IdentificationModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Identification"];

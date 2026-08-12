@@ -1,18 +1,14 @@
-import { TeriockUser } from "../_module.mjs";
+declare module "./user.mjs" {
+  export default interface TeriockUser {
+    _id: ID<TeriockUser>;
 
-declare global {
-  namespace Teriock.Documents {
-    export interface UserInterface {
-      _id: ID<TeriockUser>;
+    get character(): AnyActor | null;
 
-      get character(): AnyActor | null;
+    get documentName(): "User";
 
-      get documentName(): "User";
+    get id(): ID<TeriockUser>;
 
-      get id(): ID<TeriockUser>;
-
-      get uuid(): UUID<TeriockUser>;
-    }
+    get uuid(): UUID<TeriockUser>;
   }
 }
 

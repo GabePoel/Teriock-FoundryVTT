@@ -1,17 +1,12 @@
-import { TeriockRollTable, TeriockTableResult } from "../_module.mjs";
+declare module "./table-result.mjs" {
+  export default interface TeriockTableResult {
+    _id: ID<TeriockTableResult>;
 
-declare global {
-  namespace Teriock.Documents {
-    export interface TableResultInterface {
-      _id: ID<TeriockTableResult>;
-      parent: TeriockRollTable;
+    get documentName(): "TableResult";
 
-      get documentName(): "TableResult";
+    get id(): ID<TeriockTableResult>;
 
-      get id(): ID<TeriockTableResult>;
-
-      get uuid(): UUID<TeriockTableResult>;
-    }
+    get uuid(): UUID<TeriockTableResult>;
   }
 }
 

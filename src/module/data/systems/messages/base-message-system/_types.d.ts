@@ -1,4 +1,6 @@
-import { TeriockChatMessage } from "../../../../documents/_module.mjs";
+declare module "./base-message-system.mjs" {
+  export default interface BaseMessageSystem extends Teriock.Models.BaseMessageSystemData {}
+}
 
 declare global {
   namespace Teriock.Data {
@@ -6,7 +8,7 @@ declare global {
   }
 
   namespace Teriock.Models {
-    export type BaseMessageSystemData = Teriock.Models.BaseSystemData & { get parent(): TeriockChatMessage };
+    export type BaseMessageSystemData = Teriock.Models.BaseSystemData & {};
   }
 }
 

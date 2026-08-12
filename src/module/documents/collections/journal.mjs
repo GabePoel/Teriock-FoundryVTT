@@ -7,7 +7,6 @@ const { Journal } = foundry.documents.collections;
  */
 
 /**
- * @extends {Journal}
  * @mixes BaseWorldCollection
  * @implements {TypeCollection<TeriockJournalEntry, TeriockJournalEntry>}
  * @implements {DocumentCollection<TeriockJournalEntry>}

@@ -9,7 +9,6 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
  * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  *
- * @implements {Teriock.Models.CharacterSystemData}
  */
 export default class CharacterSystem extends BaseActorSystem {
   /** @inheritDoc */

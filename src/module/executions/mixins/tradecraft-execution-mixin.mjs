@@ -2,12 +2,12 @@ import { addFormula } from "../../helpers/formula.mjs";
 import * as executionMixins from "./_module.mjs";
 
 /**
- * @template {Constructor<BaseExecution>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, TradecraftExecution>}
  */
 export default function TradecraftExecutionMixin(Base) {
   /**
-   * @extends {BaseExecution}
    * @mixes ThresholdExecution
    * @mixin
    */

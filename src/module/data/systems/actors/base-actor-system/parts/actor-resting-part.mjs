@@ -5,12 +5,12 @@ import { LongRestExecution, ShortRestExecution } from "../../../../../executions
  * - [Long Rest](https://wiki.teriock.com/index.php/Core:Long_Rest)
  * - [Short Rest](https://wiki.teriock.com/index.php/Core:Short_Rest)
  *
- * @template {Constructor<CommonSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorRestingPart>}
  */
 export default function ActorRestingPart(Base) {
   /**
-   * @extends {CommonSystem}
    * @mixin
    * @property {AnyActor} parent
    */

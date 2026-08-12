@@ -32,6 +32,22 @@ type ActiveEffectDocument = Omit<Teriock.Documents.DocumentBase<TeriockActiveEff
   get documentName(): "ActiveEffect";
 };
 
+declare module "./active-effect.mjs" {
+  export default interface TeriockActiveEffect {
+    _id: ID<AnyActiveEffect>;
+    system: BaseEffectSystem;
+    type: Teriock.Documents.ActiveEffectType;
+
+    get actor(): AnyActor | null;
+
+    get documentName(): "ActiveEffect";
+
+    get id(): ID<AnyActiveEffect>;
+
+    get uuid(): UUID<AnyActiveEffect>;
+  }
+}
+
 declare global {
   export interface TeriockAbility
     extends Teriock.Documents.Subtype<ActiveEffectDocument, "ability", AbilitySheet, AbilitySystem>
@@ -73,25 +89,6 @@ declare global {
     imbuement: TeriockImbuement;
     property: TeriockProperty;
     resource: TeriockResource;
-  }
-}
-
-declare global {
-  namespace Teriock.Documents {
-    export interface ActiveEffectInterface {
-      _id: ID<AnyActiveEffect>;
-      parent: AnyParent;
-      system: BaseEffectSystem;
-      type: Teriock.Documents.ActiveEffectType;
-
-      get actor(): AnyActor | null;
-
-      get documentName(): "ActiveEffect";
-
-      get id(): ID<AnyActiveEffect>;
-
-      get uuid(): UUID<AnyActiveEffect>;
-    }
   }
 }
 

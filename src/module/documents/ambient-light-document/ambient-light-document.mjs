@@ -5,8 +5,6 @@ const { AmbientLightDocument } = foundry.documents;
 
 /**
  * The Teriock AmbientLightDocument implementation.
- * @extends {AmbientLightDocument}
- * @extends {ClientDocument}
  * @mixes BaseDocument
  */
 export default class TeriockAmbientLightDocument

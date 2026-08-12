@@ -8,16 +8,16 @@ const { fields } = foundry.data;
 
 /**
  * Ability equipment part.
- * @template {Constructor<AbilitySystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityEquipmentPart & Teriock.Models.AbilityEquipmentPartData>}
  */
 export default function AbilityEquipmentPart(Base) {
   /**
    * Relevant wiki pages:
    * - [Granting](https://wiki.teriock.com/index.php/Property:Granting)
    *
-   * @extends {BaseEffectSystem}
-   * @extends {Teriock.Models.AbilityEquipmentPartData}
+   * @implements {Teriock.Models.AbilityEquipmentPartData}
    * @mixin
    * @property {TeriockAbility} parent
    */

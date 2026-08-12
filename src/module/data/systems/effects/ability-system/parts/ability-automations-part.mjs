@@ -1,11 +1,11 @@
 /**
  * Ability automations part.
- * @template {Constructor<BaseEffectSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, AbilityAutomationsPart>}
  */
 export default function AbilityAutomationsPart(Base) {
   /**
-   * @extends {BaseEffectSystem}
    * @mixin
    * @property {TeriockAbility} parent
    */

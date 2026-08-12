@@ -1,16 +1,12 @@
-import { TeriockMacro } from "../_module.mjs";
+declare module "./macro.mjs" {
+  export default interface TeriockMacro {
+    _id: ID<TeriockMacro>;
 
-declare global {
-  namespace Teriock.Documents {
-    export interface MacroInterface {
-      _id: ID<TeriockMacro>;
+    get documentName(): "Macro";
 
-      get documentName(): "Macro";
+    get id(): ID<TeriockMacro>;
 
-      get id(): ID<TeriockMacro>;
-
-      get uuid(): UUID<TeriockMacro>;
-    }
+    get uuid(): UUID<TeriockMacro>;
   }
 }
 

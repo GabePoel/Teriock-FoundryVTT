@@ -11,13 +11,13 @@ const { fields } = foundry.data;
  * - [Destroyed](https://wiki.teriock.com/index.php/Property:Destroyed)
  * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
  *
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, EquipmentSuppressionPart & Teriock.Models.EquipmentSuppressionPartData>}
  */
 export default function EquipmentSuppressionPart(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.EquipmentSuppressionPartData}
+   * @implements {Teriock.Models.EquipmentSuppressionPartData}
    * @mixin
    * @property {TeriockEquipment} parent
    */

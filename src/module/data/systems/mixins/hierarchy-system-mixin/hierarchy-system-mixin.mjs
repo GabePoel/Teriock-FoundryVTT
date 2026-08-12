@@ -2,13 +2,13 @@ const { fields } = foundry.data;
 
 /**
  * Data mixin to support hierarchies of the same document type.
- * @template {Constructor<CommonSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, HierarchySystem & Teriock.Models.HierarchySystemData>}
  */
 export default function HierarchySystemMixin(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.HierarchySystemData}
+   * @implements {Teriock.Models.HierarchySystemData}
    * @mixin
    */
   class HierarchySystem extends Base {

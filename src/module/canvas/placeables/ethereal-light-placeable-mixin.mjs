@@ -5,10 +5,10 @@
 /**
  * @template {Constructor<PlaceableObject>} T
  * @param {T} Base
+ * @returns {MixinResult<T, EtherealLightPlaceable>}
  */
 export default function EtherealLightPlaceableMixin(Base) {
   /**
-   * @extends {PlaceableObject}
    * @mixin
    */
   class EtherealLightPlaceable extends Base {

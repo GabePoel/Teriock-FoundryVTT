@@ -12,8 +12,6 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
  * Relevant wiki pages:
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
- * @extends {BaseEffectSystem}
- * @extends {Teriock.Models.ConditionSystemData}
  * @mixes WikiSystem
  * @mixes TransformationSystem
  * @mixes ThresholdData

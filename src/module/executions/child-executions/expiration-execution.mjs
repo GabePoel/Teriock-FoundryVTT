@@ -5,7 +5,6 @@ import DocumentExecution from "../abstract/document-execution.mjs";
 import * as executionMixins from "../mixins/_module.mjs";
 
 /**
- * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  * @property {Teriock.System.FormulaString} formula
  * @property {Teriock.System.FormulaString} thresholdFormula

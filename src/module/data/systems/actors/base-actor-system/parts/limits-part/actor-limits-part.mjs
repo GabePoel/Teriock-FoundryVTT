@@ -12,13 +12,13 @@ const { fields } = foundry.data;
  * - [Rotator Fluency](https://wiki.teriock.com/index.php/Ability:Rotator_Fluency)
  * - [Rotators](https://wiki.teriock.com/index.php/Ability:Rotators)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorLimitsPart & Teriock.Models.ActorLimitsPartData>}
  */
 export default function ActorLimitsPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorLimitsPartData}
+   * @implements {Teriock.Models.ActorLimitsPartData}
    * @mixin
    * @property {AnyActor} parent
    */

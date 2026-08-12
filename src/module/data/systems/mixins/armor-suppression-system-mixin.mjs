@@ -4,12 +4,12 @@
  * Relevant wiki pages:
  * - [Armor Value](https://wiki.teriock.com/index.php/Core:Armor_Value)
  *
- * @template {Constructor<ChildSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ArmorSuppressionSystem>}
  */
 export default function ArmorSuppressionSystemMixin(Base) {
   /**
-   * @extends {ChildSystem}
    * @mixin
    */
   class ArmorSuppressionSystem extends Base {

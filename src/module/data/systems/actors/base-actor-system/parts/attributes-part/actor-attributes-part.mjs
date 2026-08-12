@@ -13,15 +13,15 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
  * Relevant wiki pages:
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  *
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorAttributesPart & Teriock.Models.ActorAttributesPartData>}
  * @see {AttributeModel}
  * @see {FeatExecution}
  */
 export default function ActorAttributesPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorAttributesPartData}
+   * @implements {Teriock.Models.ActorAttributesPartData}
    * @mixin
    * @property {AnyActor} parent
    */

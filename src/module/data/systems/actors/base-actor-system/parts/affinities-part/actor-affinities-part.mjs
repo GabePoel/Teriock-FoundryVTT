@@ -20,13 +20,13 @@ const TYPE_ORDER = Object.values(affinityConfig.groups).flatMap(group => group.t
 
 /**
  * Actor data model that handles affinities.
- * @template {Constructor<BaseActorSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, ActorAffinitiesPart & Teriock.Models.ActorAffinitiesPartData>}
  */
 export default function ActorAffinitiesPart(Base) {
   /**
-   * @extends {CommonSystem}
-   * @extends {Teriock.Models.ActorAffinitiesPartData}
+   * @implements {Teriock.Models.ActorAffinitiesPartData}
    * @mixin
    * @property {AnyActor} parent
    */

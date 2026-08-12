@@ -11,13 +11,13 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Bearing](https://wiki.teriock.com/index.php/Keyword:Bearing)
  *
- * @template {Constructor<BaseItemSystem>} T
+ * @template {AnyConstructor} T
  * @param {T} Base
+ * @returns {MixinResult<T, EquipmentWieldingPart & Teriock.Models.EquipmentWieldingPartData>}
  */
 export default function EquipmentWieldingPart(Base) {
   /**
-   * @extends {BaseItemSystem}
-   * @extends {Teriock.Models.EquipmentWieldingPartData}
+   * @implements {Teriock.Models.EquipmentWieldingPartData}
    * @mixin
    * @property {TeriockEquipment} parent
    */
