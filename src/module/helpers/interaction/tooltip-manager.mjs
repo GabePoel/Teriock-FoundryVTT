@@ -19,7 +19,7 @@ export default class TeriockTooltipManager extends TooltipManager {
 
   /**
    * Internal cache of allowed document names.
-   * @type {Set<string>}
+   * @type {Set<Teriock.Documents.DocumentName>}
    */
   #allowedDocumentNames;
 

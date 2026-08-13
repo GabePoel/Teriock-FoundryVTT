@@ -5,8 +5,8 @@ import BaseVirtualModel from "../base-virtual-model/base-virtual-model.mjs";
 const { fields } = foundry.data;
 
 /**
- * A condition an actor currently has. Conditions the actor is forced into have no effect of their own to render, so
- * they are shown as virtual models; ones the actor merely carries render from their real effect.
+ * Consolidate all the sources of a condition an actor has.
+ * @todo Merge with {@link ActorConditionsPartData.conditionInformation}.
  */
 export default class VirtualConditionModel extends BaseVirtualModel {
   /** @inheritDoc */
@@ -24,15 +24,12 @@ export default class VirtualConditionModel extends BaseVirtualModel {
   }
 
   /**
-   * The real condition effect on the actor, if it has one. Set by the sheet, since documents cannot live in a schema.
+   * The actual condition
    * @type {TeriockActiveEffect<"condition"> | null}
    */
   effect = null;
 
-  /**
-   * Something is forcing this condition, so it cannot simply be removed.
-   * @inheritDoc
-   */
+  /** @inheritDoc */
   get _embedIcons() {
     return [
       { icon: TERIOCK.display.icons.ui.locked, tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked") },
@@ -51,7 +48,6 @@ export default class VirtualConditionModel extends BaseVirtualModel {
         draggable: false,
         identifier: this.identifier,
         openable: false,
-        // Nothing is forcing this condition, so let the effect speak for itself.
         text: this.text || parts.text,
         uuid: this.uuid,
       });
@@ -74,10 +70,7 @@ export default class VirtualConditionModel extends BaseVirtualModel {
     return getName(this.identifier);
   }
 
-  /**
-   * Points at the real effect when there is one, so that the preview matches the card it rendered.
-   * @returns {UUID<Teriock.Embeds.Embeddable>}
-   */
+  /** @inheritDoc */
   get uuid() {
     if (!this.locked && this.effect) { return this.effect.uuid; }
     return super.uuid;

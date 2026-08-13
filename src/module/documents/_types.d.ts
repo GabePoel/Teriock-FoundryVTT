@@ -1,9 +1,13 @@
+import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
+
 import { TypeCollection } from "./collections/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     export type ChildType = ActiveEffectType | ItemType;
     export type CommonType = ActorType | Teriock.Documents.ChildType;
+
+    export type DocumentName = (typeof ALL_DOCUMENT_TYPES)[number];
 
     export type PseudoCollections = {
       Activation?: TypeCollection<ID<Activation>, Activation>;

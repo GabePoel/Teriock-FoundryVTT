@@ -88,7 +88,7 @@ export default class VirtualAffinityModel extends BaseVirtualModel {
   }
 
   /**
-   * Whether this affinity stops or lessens something, rather than making it worse.
+   * Any affinity for which the [LARP](https://www.fanwar.com) equivalent is "no effect".
    * @returns {boolean}
    */
   get protection() {
@@ -101,7 +101,7 @@ export default class VirtualAffinityModel extends BaseVirtualModel {
   }
 
   /**
-   * The label for this kind of affinity, annotated with its amount when it stacks.
+   * The label for this type of affinity.
    * @returns {string}
    */
   get typeLabel() {

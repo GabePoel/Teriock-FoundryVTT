@@ -7,8 +7,8 @@ command: |-
   const consequenceData = {
     img: scope.effect?.img,
     name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", { name: scope.effect?.name || "" }).trim(),
+    origin: scope.effect.uuid,
     system: {
-      _dep: game.settings.get("teriock", "trackSustainedConsequences") ? scope.effect.uuid : undefined,
       automations: {
         [childChangeId]: {
           _id: childChangeId,

@@ -9,10 +9,11 @@ const { fields } = foundry.data;
 /**
  * Something an actor derives during preparation that is displayed as though it were a document, but is not one.
  * @implements {Teriock.Embeds.Embeddable}
+ * @todo Completely rework this as proper (but still derived) pseudo-documents.
  */
 export default class BaseVirtualModel extends BaseDataModel {
   /**
-   * The name this stands in for, used to build {@link uuid}.
+   * Something resembling a `documentName`.
    * @returns {string}
    */
   static get VIRTUAL_NAME() {

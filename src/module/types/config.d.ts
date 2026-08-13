@@ -1,5 +1,3 @@
-import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
-
 import changeConfig from "../constants/config/change-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
@@ -61,7 +59,7 @@ declare global {
     };
 
     export type DocumentEntry = {
-      documentName: (typeof ALL_DOCUMENT_TYPES)[number];
+      documentName: Teriock.Documents.DocumentName;
       getter: string;
       hint: string;
       icon: string;
