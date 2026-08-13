@@ -241,6 +241,15 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * The top document of this chain.
+     * @return {TeriockDocument}
+     */
+    get top() {
+      if (this.isTop) { return this; }
+      return this.parent.top;
+    }
+
+    /**
      * Whether this is the actual document persisted to the database and not a sneaky clone.
      * @returns {boolean}
      */
@@ -339,6 +348,28 @@ export default function BaseDocumentMixin(Base) {
      */
     checkEditor(user) {
       return game.user.id === (user.id || user._id || user) && this.isOwner;
+    }
+
+    /**
+     * Fetch a document from its UUID without rebuilding actor deltas if it's part of the same hierarchy as this one.
+     * @param {UUID<TeriockDocument>} uuid
+     * @param {object} [options]
+     * @param {boolean} [options.invalid]
+     * @returns {TeriockDocument|null}
+     */
+    fetchFromUuid(uuid, { invalid = false } = {}) {
+      let doc = this.top;
+      if (uuid === doc.uuid) { return doc; }
+      if (uuid.startsWith(doc.uuid)) {
+        const embeddedPath = uuid.substring(this.top.uuid.length + 1);
+        const parts = embeddedPath.split(".");
+        while (doc && (parts.length > 1)) {
+          const [embeddedName, embeddedId] = parts.splice(0, 2);
+          doc = doc.getEmbeddedDocument(embeddedName, embeddedId, { invalid });
+        }
+        return doc ?? fromUuidSync(uuid);
+      }
+      return fromUuidSync(uuid);
     }
 
     /** @inheritdoc */

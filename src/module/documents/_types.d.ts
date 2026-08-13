@@ -16,6 +16,8 @@ declare global {
      * Store of lazily-computed values cached on a document.
      */
     export type DocumentCache = {
+      /** If the document is active. */
+      active?: boolean;
       /** All sups ancestral to this document or their indexes. */
       allSups?: TypeCollection<ID<TeriockDocument>, TeriockDocument>;
       /** All children of this document or their indexes. */

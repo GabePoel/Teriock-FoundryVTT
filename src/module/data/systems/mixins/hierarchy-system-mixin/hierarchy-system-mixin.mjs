@@ -23,7 +23,6 @@ export default function HierarchySystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        _dep: new fields.StringField({ blank: true, nullable: true, required: false }),
         // This is not intended to be persisted in the database, but
         // hierarchies break if we set persisted to false.
         _ref: new fields.DocumentUUIDField({ blank: true, nullable: true, required: false }),

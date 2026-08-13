@@ -5,7 +5,7 @@ const suppression = {
   consumed: "TERIOCK.SYSTEMS.Consumable.MESSAGES.suppression.consumed",
   dampened: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.dampened",
   deattuned: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.deattuned",
-  dependee: "TERIOCK.SYSTEMS.Child.MESSAGES.suppression.dependee",
+  dependee: "TERIOCK.SYSTEMS.BaseItem.MESSAGES.suppression.dependee",
   destroyed: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.destroyed",
   disabled: "TERIOCK.SYSTEMS.Child.MESSAGES.suppression.disabled",
   elder: "TERIOCK.SYSTEMS.Child.MESSAGES.suppression.elder",
@@ -18,8 +18,9 @@ const suppression = {
   parentUnequipped: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.unequipped",
   shattered: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.shattered",
   stashed: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.stashed",
-  unequipped: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.unequipped",
+  unequipped: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.unequipped",
   unmounted: "TERIOCK.SYSTEMS.Mount.MESSAGES.suppression.unmounted",
+  unsustained: "TERIOCK.SYSTEMS.Applicable.MESSAGES.suppression.unsustained",
 };
 
 const error = {

@@ -41,6 +41,12 @@ export default class TeriockItem
   }
 
   /**
+   * This document's dependee.
+   * @type {TeriockActiveEffect|null};
+   */
+  dependee;
+
+  /**
    * Checks if the item is active.
    * @returns {boolean}
    */
@@ -54,6 +60,11 @@ export default class TeriockItem
    */
   get disabled() {
     return this.system.disabled;
+  }
+
+  /** @inheritDoc */
+  get master() {
+    return this.dependee || super.master;
   }
 
   /** @inheritdoc */
@@ -110,6 +121,13 @@ export default class TeriockItem
   prepareBaseData() {
     this.overrides = {};
     this._completedActiveEffectPhases = new Set();
+    if (this.system._dep?.length === 16) {
+      const dependee = this.actor?.effects.get(this.system._dep);
+      if (dependee) {
+        dependee.dependents.set(this.id, this);
+        this.dependee = dependee;
+      } else { this.dependee = null; }
+    }
     super.prepareBaseData();
   }
 
@@ -123,5 +141,11 @@ export default class TeriockItem
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     this.applyActiveEffects("setup");
+  }
+
+  /** @inheritDoc */
+  renderRelativeSheets() {
+    super.renderRelativeSheets();
+    if (this.dependee?.isViewer) { this.dependee.render(); }
   }
 }

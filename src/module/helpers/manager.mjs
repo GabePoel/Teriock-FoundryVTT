@@ -1,4 +1,4 @@
-import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mjs";
+import { IdentifiersRegistry } from "./registries/_module.mjs";
 
 /**
  * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
@@ -16,9 +16,9 @@ export default class TeriockManager {
 
   /**
    * A private record of registries.
-   * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
+   * @type {{identifiers: IdentifiersRegistry}}
    */
-  #registries = { dependents: new DependentsRegistry(), identifiers: new IdentifiersRegistry() };
+  #registries = { identifiers: new IdentifiersRegistry() };
 
   /**
    * Check if what's provided exists or is an empty array or set.
@@ -55,14 +55,6 @@ export default class TeriockManager {
    */
   get basicAbilities() {
     return this.#basicAbilities;
-  }
-
-  /**
-   * The singleton dependents registry.
-   * @returns {DependentsRegistry}
-   */
-  get dependents() {
-    return this.#registries.dependents;
   }
 
   /**
@@ -111,13 +103,6 @@ export default class TeriockManager {
    */
   checkTokens(tokens) {
     return this.#check(tokens, "TERIOCK.DIALOGS.Common.ERRORS.noToken");
-  }
-
-  /**
-   * Initialize the dependents registry.
-   */
-  initializeDependents() {
-    this.#registries.dependents._initialize();
   }
 
   /**

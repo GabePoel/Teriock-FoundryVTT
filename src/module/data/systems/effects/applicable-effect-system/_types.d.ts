@@ -10,6 +10,8 @@ declare module "./applicable-effect-system.mjs" {
     executor: UUID<TeriockActor> | null;
     /** <schema> How much the source was heightened */
     heightened: number;
+    /** <schema> If this effect is sustained */
+    sustained: boolean;
   }
 }
 

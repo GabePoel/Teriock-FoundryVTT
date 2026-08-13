@@ -49,19 +49,19 @@ export default function AbilityInfoPart(Base) {
      */
     get _infoTags() {
       const tags = [];
-      if (this.basic) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label"); }
-      if (this.sustained) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label"); }
-      if (this.standard && !this.skill && !this.spell) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label"); }
+      if (this.basic) { tags.push(this.getStringForProperty("basic")); }
+      if (this.sustained) { tags.push(this.getStringForProperty("sustained")); }
+      if (this.standard && !this.skill && !this.spell) { tags.push(this.getStringForProperty("standard")); }
       if (this.standard && this.skill) { tags.push("TERIOCK.COMMON.Semblant"); }
-      if (this.skill) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label"); }
+      if (this.skill) { tags.push(this.getStringForProperty("skill")); }
       if (this.standard && this.spell) { tags.push("TERIOCK.COMMON.Conjured"); }
-      if (this.spell) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label"); }
+      if (this.spell) { tags.push(this.getStringForProperty("spell")); }
       if (this.invoked) {
         tags.push({ label: "TERIOCK.COSTS.Components.invoked", tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label" });
       }
-      if (this.ritual) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label"); }
-      if (this.rotator) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label"); }
-      if (this.guildmaster) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.guildmaster.label"); }
+      if (this.ritual) { tags.push(this.getStringForProperty("ritual")); }
+      if (this.rotator) { tags.push(this.getStringForProperty("rotator")); }
+      if (this.guildmaster) { tags.push(this.getStringForProperty("guildmaster")); }
       // if (this.lore) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.lore.label");
       return tags;
     }

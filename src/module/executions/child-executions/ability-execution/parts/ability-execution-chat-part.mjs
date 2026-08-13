@@ -247,9 +247,6 @@ export default function AbilityExecutionChatPart(Base) {
         origin: this.source.uuid,
         showIcon: 0,
         system: {
-          _dep: this.source.system.sustained && game.settings.get("teriock", "trackSustainedConsequences")
-            ? this.source.uuid
-            : undefined,
           _src: this.source.uuid,
           affinities: this.#generateEffectAffinities(crit),
           applyIfDeattuned: true,
@@ -264,6 +261,7 @@ export default function AbilityExecutionChatPart(Base) {
           heightened: this.heightened,
           identifier: `${this.source.forcedIdentifier}-effect`,
           powerSources: Array.from(this.source.system.powerSources),
+          sustained: this.source.system.sustained,
         },
         type: "imbuement",
       };

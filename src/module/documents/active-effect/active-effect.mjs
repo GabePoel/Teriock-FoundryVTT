@@ -1,4 +1,5 @@
 import { mixClasses } from "../../helpers/construction.mjs";
+import { TypeCollection } from "../collections/_module.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
@@ -8,7 +9,6 @@ const { ActiveEffect } = foundry.documents;
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument
- * @mixes DependeeDocument
  * @mixes RetrievalDocument
  */
 export default class TeriockActiveEffect
@@ -17,7 +17,6 @@ export default class TeriockActiveEffect
     documentMixins.BaseDocumentMixin,
     documentMixins.CommonDocumentMixin,
     documentMixins.ChildDocumentMixin,
-    documentMixins.DependeeDocumentMixin,
     documentMixins.RetrievalDocumentMixin,
   )
 {
@@ -27,6 +26,12 @@ export default class TeriockActiveEffect
     if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) { return; }
     return super._applyChangeUnguided(targetDoc, change, changes, options);
   }
+
+  /**
+   * Collection of the items that depend on this.
+   * @type {TypeCollection<ID<TeriockItem>, TeriockItem>}
+   */
+  dependents = new TypeCollection();
 
   /** @inheritDoc */
   get isExpiryTrackable() {
@@ -71,9 +76,57 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
+  _makeChildArray() {
+    return [...super._makeChildArray(), ...this.dependents.contents];
+  }
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if (this.actor?.isOwner) { this.actor.deleteEmbeddedDocuments("Item", this.dependents.map(d => d.id)); }
+  }
+
+  /**
+   * Create multiple dependent Document instances in this document's actor using provided input data. All
+   * created documents will be dependent on this one. The operation fails silently if this does not have an actor.
+   * @param {"Item"} embeddedName
+   * @param {object[]} data
+   * @param {Partial<DatabaseCreateOperation>} operation
+   * @return {Promise<(TeriockActiveEffect|TeriockItem)[]>}
+   */
+  async createDependentDocuments(embeddedName, data = [], operation = {}) {
+    const op = this.getCreateDependentDocumentsOperation(embeddedName, data, operation);
+    if (!op) { return []; }
+    const out = await foundry.documents.modifyBatch([op]);
+    return out[0];
+  }
+
+  /** @inheritDoc */
   getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
     if (embeddedName === "Item") { return this.getCreateDependentDocumentsOperation(embeddedName, data, operation); }
     return super.getCreateChildDocumentsOperation(embeddedName, data, operation);
+  }
+
+  /**
+   * Get the operation to create dependent Documents in this document's actor. Returns null if this does not have
+   * an actor, so that the operation fails silently.
+   * @param {"Item"} embeddedName
+   * @param {object[]} data
+   * @param {Partial<DatabaseCreateOperation>} operation
+   * @returns {Partial<DatabaseCreateOperation>|null}
+   */
+  getCreateDependentDocumentsOperation(embeddedName, data = [], operation = {}) {
+    if (!this.actor) { return null; }
+    data = foundry.utils.deepClone(data);
+    for (const d of data) { foundry.utils.setProperty(d, "system._dep", this.id); }
+    return {
+      ...operation,
+      action: "create",
+      data,
+      documentName: embeddedName,
+      pack: this.actor.pack,
+      parent: this.actor,
+    };
   }
 
   /** @inheritDoc */
@@ -82,10 +135,50 @@ export default class TeriockActiveEffect
     return super.getDeleteChildDocumentsOperation(embeddedName, ids, operation);
   }
 
+  /**
+   * Get the operation to delete dependent Documents from this document's actor. Returns null if this does not have
+   * an actor, so that the operation fails silently.
+   * @param {"Item"} embeddedName
+   * @param {ID<TeriockActiveEffect|TeriockItem>[]} ids
+   * @param {Partial<DatabaseDeleteOperation & Teriock.System._Operation>} operation
+   * @returns {Partial<DatabaseDeleteOperation & Teriock.System._Operation>|null}
+   */
+  getDeleteDependentDocumentsOperation(embeddedName, ids = [], operation = {}) {
+    if (!this.actor) { return null; }
+    return {
+      ...operation,
+      action: "delete",
+      documentName: embeddedName,
+      ids,
+      pack: this.actor.pack,
+      parent: this.actor,
+    };
+  }
+
   /** @inheritDoc */
   getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
     if (embeddedName === "Item") { return this.getUpdateDependentDocumentsOperation(embeddedName, updates, operation); }
     return super.getUpdateChildDocumentsOperation(embeddedName, updates, operation);
+  }
+
+  /**
+   * Get the operation to update dependent Documents in this document's actor. Returns null if this does not have
+   * an actor, so that the operation fails silently.
+   * @param {"Item"} embeddedName
+   * @param {object[]} updates
+   * @param {Partial<DatabaseUpdateOperation & Teriock.System._Operation>} operation
+   * @returns {Partial<DatabaseUpdateOperation & Teriock.System._Operation>|null}
+   */
+  getUpdateDependentDocumentsOperation(embeddedName, updates = [], operation = {}) {
+    if (!this.actor) { return null; }
+    return {
+      ...operation,
+      action: "update",
+      documentName: embeddedName,
+      pack: this.actor.pack,
+      parent: this.actor,
+      updates,
+    };
   }
 
   /** @inheritDoc */

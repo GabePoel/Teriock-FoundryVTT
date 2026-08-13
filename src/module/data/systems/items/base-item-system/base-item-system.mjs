@@ -16,7 +16,7 @@ export default class BaseItemSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["effects", "system.disabled", ...super.PRESERVED_PROPERTIES];
+  static PRESERVED_PROPERTIES = ["effects", "system.disabled", "system._dep", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static get metadata() {
@@ -30,9 +30,16 @@ export default class BaseItemSystem
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
+      _dep: new fields.DocumentIdField({ blank: true, initial: null, nullable: true, required: true }),
       disabled: new fields.BooleanField(),
       flaws: new fields.HTMLField({ initial: "" }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (source._dep?.length !== 16) { delete source._dep; }
+    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */
@@ -43,5 +50,18 @@ export default class BaseItemSystem
   /** @inheritDoc */
   get _displayToggles() {
     return [...super._displayToggles, "system.disabled"];
+  }
+
+  /** @inheritDoc */
+  _getTipSuppressions() {
+    return { ...super._getTipSuppressions(), dependee: this._isSuppressedDependee.bind(this) };
+  }
+
+  /**
+   * If this is suppressed due to its dependee being inactive.
+   * @returns {boolean}
+   */
+  _isSuppressedDependee() {
+    return this.parent.dependee?.active === false;
   }
 }

@@ -103,6 +103,7 @@ export default class ApplicableEffectSystem
       critical: new fields.BooleanField(),
       executor: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),
       heightened: new fields.NumberField(),
+      sustained: new fields.BooleanField(),
     });
   }
 
@@ -125,7 +126,14 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["kind", ...super._formPaths];
+    return ["sustained", "kind", ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  get _metaphysicsTags() {
+    const tags = super._metaphysicsTags;
+    if (this.sustained) { tags.push(this.getStringForProperty("sustained")); }
+    return tags;
   }
 
   /** @inheritDoc */
@@ -171,9 +179,34 @@ export default class ApplicableEffectSystem
     return Object.assign(super.embedParts, { subtitle: this.parent.remainingString });
   }
 
+  /**
+   * The document that this is sustained by.
+   * @return {TeriockDocument|null}
+   */
+  get sustainedBy() {
+    if (this.sustained && this.parent.origin) { return this.parent.fetchFromUuid(this.parent.origin); }
+    return null;
+  }
+
   /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", { value: this.parent.name });
+  }
+
+  /** @inheritDoc */
+  _getTipSuppressions() {
+    return { ...super._getTipSuppressions(), unsustained: this._isSuppressedUnsustained.bind(this) };
+  }
+
+  /**
+   * If this is suppressed due to its sustainedBy being inactive.
+   * @return {boolean}
+   */
+  _isSuppressedUnsustained() {
+    if (!game.settings.get("teriock", "trackSustainedConsequences")) { return false; }
+    const sustainedBy = this.sustainedBy;
+    if (!sustainedBy || sustainedBy === this.parent) { return false; }
+    return (sustainedBy.top === this.parent.top && !sustainedBy.active);
   }
 
   /** @inheritDoc */

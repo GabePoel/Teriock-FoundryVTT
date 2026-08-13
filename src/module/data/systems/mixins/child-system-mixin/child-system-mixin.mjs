@@ -241,19 +241,10 @@ export default function ChildSystemMixin(Base) {
      */
     _getTipSuppressions() {
       return {
-        dependee: this._isSuppressedDependee.bind(this),
         disabled: this._isSuppressedDisabled.bind(this),
         elder: this._isSuppressedElder.bind(this),
         forced: this._isSuppressedForced.bind(this),
       };
-    }
-
-    /**
-     * If this is suppressed due to its dependee being inactive.
-     * @returns {boolean}
-     */
-    _isSuppressedDependee() {
-      return this.parent.dependee?.active === false;
     }
 
     /**

@@ -379,8 +379,17 @@ export default class TeriockActor
     return out;
   }
 
+  /**
+   * Data preparation that happens before `prepareEmbeddedDocuments()`. This initializes dependents collections before
+   * other data is prepared.
+   */
+  prepareDependeeDocuments() {
+    for (const e of this.allApplicableEffects()) { e.dependents.clear(); }
+  }
+
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
+    this.prepareDependeeDocuments();
     super.prepareEmbeddedDocuments();
     this.system.prepareChildAutomations();
     this.prepareChangeData();

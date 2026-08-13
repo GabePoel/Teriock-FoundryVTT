@@ -9,9 +9,8 @@ const { Collection } = foundry.utils;
  */
 
 /**
- * Document mixin to support hierarchies of the same document type as well as dependencies. This requires infastructure
- * in lots of other parts of the codebase. Dependencies are typically active effects that have some sort of ownership
- * over items or documents on other creatures. These are handled by the {@link DependentsRegistry}.
+ * Document mixin to support hierarchies of the same document type. This requires infrastructure in lots of other parts
+ * of the codebase.
  *
  * Hierarchies of documents of the same type are for cases like "items in items" or "active effects in active effects".
  * They take the form of documents that share the same collection (and, where possible, the same folder) and have some
@@ -24,8 +23,6 @@ const { Collection } = foundry.utils;
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, HierarchyDocument>}
- * @todo Move dependent stuff to its own mixin that complements {@link DependeeDocumentMixin}.
- * @todo Fix issue where dependent documents aren't known on first load which messes with initial suppression.
  * @see {HierarchySystemMixin}
  * @see {SubCollection}
  * @see {TeriockCompendiumDirectory}
@@ -235,16 +232,6 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /**
-     * Render the sheet of the dependee.
-     */
-    #reloadDependee() {
-      const doc = this.dependee;
-      if (!doc) { return; }
-      if (typeof doc.resetChildMaps === "function") { doc.resetChildMaps(); }
-      if (doc.isViewer) { doc.render(); }
-    }
-
-    /**
      * Render the sheets of all the sups.
      */
     #reloadSups() {
@@ -259,14 +246,6 @@ export default function HierarchyDocumentMixin(Base) {
           if (app.rendered) { app.render(); }
         });
       }
-    }
-
-    /**
-     * Render sheets of documents which have control over this.
-     */
-    #renderSheets() {
-      this.#reloadSups();
-      this.#reloadDependee();
     }
 
     /**
@@ -309,18 +288,6 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /**
-     * A document that this depends on.
-     * @return {TeriockActiveEffect|null}
-     */
-    get dependee() {
-      if (this.system._dep) {
-        const uuid = game.teriock?.dependents.resolveDependentID(this.system._dep, this);
-        if (uuid) { return game.teriock?.dependents.fetchFromUuid(this, uuid); }
-      }
-      return null;
-    }
-
-    /**
      * The document that most directly provides this one.
      * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
      */
@@ -330,7 +297,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /** @inheritDoc */
     get master() {
-      return this.sup || this.dependee || this.parent;
+      return this.sup || super.master;
     }
 
     /**
@@ -384,13 +351,12 @@ export default function HierarchyDocumentMixin(Base) {
     /** @inheritDoc */
     _onCreate(data, options, userId) {
       super._onCreate(data, options, userId);
-      if (options.render !== false) { this.#renderSheets(); }
+      if (options.render !== false) { this.renderRelativeSheets(); }
     }
 
     /** @inheritDoc */
     _onDelete(options, userId) {
       super._onDelete(options, userId);
-      if (this.system._dep && this.uuid) { game.teriock?.dependents.untrack(this.system._dep, this); }
       // If this is deleted as part of a folder it might not call the appropriate operation and descendents need to be
       // deleted separately. Only remaining documents get deleted. This sucks but IDK a better solution.
       if (this.checkEditor(userId)) {
@@ -401,13 +367,13 @@ export default function HierarchyDocumentMixin(Base) {
           })
         ).catch(err => console.warn(`Failed to delete subs of ${this.uuid}.`, err));
       }
-      if (options.render !== false) { this.#renderSheets(); }
+      if (options.render !== false) { this.renderRelativeSheets(); }
     }
 
     /** @inheritDoc */
     _onUpdate(data, options, userId) {
       super._onUpdate(data, options, userId);
-      if (options.render !== false) { this.#renderSheets(); }
+      if (options.render !== false) { this.renderRelativeSheets(); }
     }
 
     /** @inheritDoc */
@@ -581,14 +547,6 @@ export default function HierarchyDocumentMixin(Base) {
     /** @inheritDoc */
     prepareData() {
       super.prepareData();
-      // Ony mutate dependents registry if this is actually saved to the database.
-      if (this.trackable) {
-        if (this._cache.dep && this._cache.dep !== this.system._dep) {
-          game.teriock?.dependents.untrack(this._cache.dep, this);
-        }
-        if (this.system._dep) { game.teriock?.dependents.track(this.system._dep, this); }
-        this._cache.dep = this.system._dep;
-      }
       // If this moved to a different sup, the old sup isn't reached by #reloadSups and must be reset directly.
       if (this._cache.supId && this._cache.supId !== this.system._sup) {
         const previousSup = this.siblingCollection?.get(this._cache.supId);
@@ -598,6 +556,13 @@ export default function HierarchyDocumentMixin(Base) {
         }
       }
       this._cache.supId = this.system._sup;
+    }
+
+    /**
+     * Render sheets of documents which have control over this.
+     */
+    renderRelativeSheets() {
+      this.#reloadSups();
     }
 
     /** @inheritDoc */
