@@ -1,11 +1,11 @@
 import { TeriockActiveEffect as ActiveEffectClass } from "../_module.mjs";
 import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 
-type ActiveEffectSubtype<T extends ActiveEffectType> = ActiveEffectClass & {
+interface ActiveEffectSubtype<T extends ActiveEffectType> extends ActiveEffectClass {
   sheet: ActiveEffectSheetMap[T];
   system: ActiveEffectSystemMap[T];
   type: T;
-};
+}
 
 declare module "./active-effect.mjs" {
   export default interface TeriockActiveEffect {

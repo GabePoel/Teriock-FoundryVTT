@@ -7,6 +7,10 @@ import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 /**
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ */
+
+/**
  * Condition-specific effect data model.
  *
  * Relevant wiki pages:
@@ -103,13 +107,13 @@ export default class ConditionSystem
 
   /** @inheritDoc */
   getEmbedContextMenuEntries(_doc) {
-    return [{
+    return /** @type {ContextMenuEntry[]} */ ([{
       group: "usage",
       icon: makeIcon(this.useIcon, "contextMenu"),
       label: this.useText,
       onClick: this.use.bind(this),
       visible: this.parent.isOwner,
-    }];
+    }]);
   }
 
   /** @inheritDoc */

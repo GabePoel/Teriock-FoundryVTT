@@ -8,12 +8,16 @@ import {
 import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
 
-type ActorSubtype<T extends ActorType> = ActorClass & { sheet: ActorSheetMap[T], system: ActorSystemMap[T], type: T };
+interface ActorSubtype<T extends ActorType> extends ActorClass {
+  sheet: ActorSheetMap[T];
+  system: ActorSystemMap[T];
+  type: T;
+}
 
 declare module "./actor.mjs" {
   export default interface TeriockActor {
     _id: Readonly<ID<TeriockActor>>;
-    effects: EmbeddedCollection<ActiveEffectClass>;
+    effects: EmbeddedCollection<TeriockActiveEffect>;
     items: EmbeddedCollection<TeriockItem>;
     sheet: BaseActorSheet;
     system: BaseActorSystem;

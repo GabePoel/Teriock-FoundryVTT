@@ -1,5 +1,4 @@
 import * as dataMixins from "../../data/mixins/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren, resolveDocuments } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
@@ -29,11 +28,8 @@ export default function CommonDocumentMixin(Base) {
    * @mixin
    */
   class CommonDocument
-    extends mixClasses(
-      Base,
-      dataMixins.PropagationDataMixin,
-      documentMixins.EmbedCardDocumentMixin,
-      documentMixins.PanelDocumentMixin,
+    extends documentMixins.PanelDocumentMixin(
+      documentMixins.EmbedCardDocumentMixin(dataMixins.PropagationDataMixin(Base)),
     )
   {
     /**

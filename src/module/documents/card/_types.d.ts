@@ -1,7 +1,10 @@
 import { TeriockCard as CardClass } from "../_module.mjs";
 import { BaseCardsSystem } from "../../data/systems/cards/_module.mjs";
 
-type CardSubtype<T extends CardType> = CardClass & { system: CardSystemMap[T], type: T };
+interface CardSubtype<T extends CardType> extends CardClass {
+  system: CardSystemMap[T];
+  type: T;
+}
 
 declare module "./card.mjs" {
   export default interface TeriockCard {

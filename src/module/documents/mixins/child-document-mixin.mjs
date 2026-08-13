@@ -1,4 +1,3 @@
-import { mixClasses } from "../../helpers/construction.mjs";
 import * as documentMixins from "./_module.mjs";
 
 /**
@@ -17,9 +16,7 @@ export default function ChildDocumentMixin(Base) {
    * @mixes UsableDocument
    * @mixin
    */
-  class ChildDocument
-    extends mixClasses(Base, documentMixins.UsableDocumentMixin, documentMixins.HierarchyDocumentMixin)
-  {
+  class ChildDocument extends documentMixins.HierarchyDocumentMixin(documentMixins.UsableDocumentMixin(Base)) {
     /** @inheritDoc */
     static get documentMetadata() {
       return Object.assign(super.documentMetadata, { child: true });
