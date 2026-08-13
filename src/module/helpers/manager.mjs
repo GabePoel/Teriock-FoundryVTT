@@ -1,4 +1,4 @@
-import { IdentifiersRegistry } from "./registries/_module.mjs";
+import { IdentifiersRegistry, StatusGroupsRegistry } from "./registries/_module.mjs";
 
 /**
  * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
@@ -16,9 +16,9 @@ export default class TeriockManager {
 
   /**
    * A private record of registries.
-   * @type {{identifiers: IdentifiersRegistry}}
+   * @type {{identifiers: IdentifiersRegistry, statusGroups: StatusGroupsRegistry }}
    */
-  #registries = { identifiers: new IdentifiersRegistry() };
+  #registries = { identifiers: new IdentifiersRegistry(), statusGroups: new StatusGroupsRegistry() };
 
   /**
    * Check if what's provided exists or is an empty array or set.
@@ -63,6 +63,14 @@ export default class TeriockManager {
    */
   get identifiers() {
     return this.#registries.identifiers;
+  }
+
+  /**
+   * The singleton status groups registry.
+   * @return {StatusGroupsRegistry}
+   */
+  get statusGroups() {
+    return this.#registries.statusGroups;
   }
 
   /**

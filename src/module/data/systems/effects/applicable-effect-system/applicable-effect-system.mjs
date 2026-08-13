@@ -17,6 +17,7 @@ const { fields } = foundry.data;
  * @mixes AffinableSystem
  * @mixes ExpirableSystem
  * @mixes MetaphysicsSystem
+ * @mixes TrackableSystem
  * @mixes ThresholdData
  * @see {DurationModel}
  */
@@ -26,6 +27,7 @@ export default class ApplicableEffectSystem
     systemMixins.AffinableSystemMixin,
     systemMixins.ExpirableSystemMixin,
     systemMixins.MetaphysicsSystemMixin,
+    systemMixins.TrackableSystemMixin,
     dataMixins.ThresholdDataMixin,
   )
 {

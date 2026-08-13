@@ -4,3 +4,4 @@ export * as automations from "./automations/_module.mjs";
 export * as expirations from "./expirations/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as StatDie } from "./stat-die/stat-die.mjs";
+export { default as Tracker } from "./tracker/tracker.mjs";

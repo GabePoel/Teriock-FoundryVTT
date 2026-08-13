@@ -1,7 +1,7 @@
 import { TypeCollection } from "../../documents/collections/_module.mjs";
-import { TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
+import { BasePseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
 
-const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
+const { EmbeddedDataField, TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
 /**
  * @import { DataFieldContext, DataFieldOptions } from "@common/data/_types.mjs";
@@ -22,20 +22,22 @@ export default class PseudoCollectionField extends TypedObjectField {
   }
 
   /**
-   * @param {typeof TypedPseudoDocument} model
+   * @param {typeof BasePseudoDocument} model
    * @param {DataFieldOptions & Partial<{ collection: typeof TypeCollection}>} [options]
-   * @param {Record<string, typeof TypedPseudoDocument>} [options.types]
+   * @param {Record<string, typeof BasePseudoDocument>} [options.types]
    * @param {DataFieldContext} [context]
    */
   constructor(model, options = {}, context = {}) {
-    if (!foundry.utils.isSubclass(model, TypedPseudoDocument)) {
+    if (!foundry.utils.isSubclass(model, BasePseudoDocument)) {
       throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"));
     }
+    let field = new EmbeddedDataField(model);
     const types = (options.types ||= model.TYPES);
-    if (!types) { throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes")); }
-    super(new PseudoTypedSchemaField(types), options, context);
+    if (types) { field = new PseudoTypedSchemaField(types); }
+    super(field, options, context);
     this.#documentClass = model;
     this.#collectionClass = options.collection ?? TypeCollection;
+    console.log(this);
   }
 
   /**
@@ -69,6 +71,6 @@ export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */
   initialize(value, model, options = {}) {
     const obj = super.initialize(value, model, options);
-    return new this.#collectionClass(Object.entries(obj).filter(([_k, inst]) => inst instanceof TypedPseudoDocument));
+    return new this.#collectionClass(Object.entries(obj).filter(([_k, inst]) => inst instanceof this.documentClass));
   }
 }

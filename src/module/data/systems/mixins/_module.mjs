@@ -20,5 +20,6 @@ export { default as RefreshSystemMixin } from "./refresh-system-mixin/refresh-sy
 export { default as RevelationSystemMixin } from "./revelation-system-mixin/revelation-system-mixin.mjs";
 export { default as RulesSystemMixin } from "./rules-system-mixin/rules-system-mixin.mjs";
 export { default as StatGiverSystemMixin } from "./stat-giver-system-mixin/stat-giver-system-mixin.mjs";
+export { default as TrackableSystemMixin } from "./trackable-system-mixin/trackable-system-mixin.mjs";
 export { default as TransformationSystemMixin } from "./transformation-system-mixin/transformation-system-mixin.mjs";
 export { default as WikiSystemMixin } from "./wiki-system-mixin.mjs";
