@@ -6,7 +6,7 @@ const { fields } = foundry.data;
 /**
  * A factory function to build a simple activation from a command entry.
  * @param {Teriock.Command.CommandEntry} entry
- * @returns {typeof CommandActivation}
+ * @returns {typeof BaseActivation}
  */
 export default function CommandActivationFactory(entry) {
   /**

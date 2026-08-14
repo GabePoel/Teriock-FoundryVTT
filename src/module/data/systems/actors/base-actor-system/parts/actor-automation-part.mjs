@@ -16,7 +16,7 @@ export default function ActorAutomationPart(Base) {
      */
     #applyCompetenceAutomations(value) {
       const autos = this.parent.appliedEffects.flatMap(e =>
-        e.system.activeAutomations.filter(a => a?.type === "changeCompetence" && a?.competence.value === value)
+        e.system.automations.getType("changeCompetence", { active: true, competence: value, ongoing: true })
       );
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiableChildren) {
@@ -31,7 +31,7 @@ export default function ActorAutomationPart(Base) {
      */
     #applySuppressAutomations() {
       const autos = this.parent.appliedEffects.flatMap(e =>
-        e.system.activeAutomations.filter(a => a?.type === "suppress")
+        e.system.automations.getType("suppress", { active: true, ongoing: true })
       );
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiableChildren) {

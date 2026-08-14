@@ -31,7 +31,6 @@ const { fields } = foundry.data;
  * @mixes AdjustableSystem
  * @mixes AffinableSystem
  * @mixes ExpirableSystem
- * @mixes AbilityAutomationsPart
  * @mixes AbilityCostsPart
  * @mixes AbilityDurationPart
  * @mixes AbilityEquipmentPart
@@ -57,7 +56,6 @@ export default class AbilitySystem
     systemMixins.AdjustableSystemMixin,
     systemMixins.AffinableSystemMixin,
     systemMixins.ExpirableSystemMixin,
-    parts.AbilityAutomationsPart,
     parts.AbilityCostsPart,
     parts.AbilityDurationPart,
     parts.AbilityEquipmentPart,

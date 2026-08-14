@@ -63,7 +63,7 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
    * @returns {boolean}
    */
   get competent() {
-    return this.competencies.has(this.parent.competence.value);
+    return this.parent?.competence ? this.competencies.has(this.parent.competence.value) : true;
   }
 
   /**
@@ -72,6 +72,15 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
    */
   get formTips() {
     return [];
+  }
+
+  /**
+   * Whether this is ongoing.
+   * @returns {boolean}
+   * @todo Redo this handling with metadata and stuff.
+   */
+  get ongoing() {
+    return !(this.document?.type === "ability" && this.document.system.maneuver !== "passive");
   }
 
   /**

@@ -36,6 +36,7 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
     super(data, options);
     this.#expiration = expiration;
     this.threshold = BaseRoll.minValue(this.thresholdFormula);
+    this.automations.clear();
   }
 
   /** @type {BaseExpiration} */
@@ -67,11 +68,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
    */
   get _formPaths() {
     return ["formula", "comparison", "thresholdFormula"];
-  }
-
-  /** @inheritDoc */
-  get activeAutomations() {
-    return [];
   }
 
   /** @inheritDoc */

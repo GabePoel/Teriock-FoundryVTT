@@ -21,7 +21,6 @@ function getRootAffinity(config) {
  */
 export default function AffinityFactory(type) {
   const name = type.capitalize();
-
   class Affinity extends getRootAffinity(affinityConfig.types[type]) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, `TERIOCK.AFFINITIES.${name}`];
@@ -36,6 +35,7 @@ export default function AffinityFactory(type) {
       return type;
     }
 
+    /** @inheritDoc */
     get formTips() {
       const tips = super.formTips;
       if (affinityConfig.types[type].tips) {

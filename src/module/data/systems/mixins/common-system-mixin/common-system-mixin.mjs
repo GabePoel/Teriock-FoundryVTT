@@ -22,7 +22,6 @@ export default function CommonSystemMixin(Base) {
    * @mixes RulesSystem
    * @mixes PropagationData
    * @mixes AccessData
-   * @mixes AutomatedData
    * @mixes RefreshSystem
    * @mixin
    */
@@ -33,7 +32,6 @@ export default function CommonSystemMixin(Base) {
       systemMixins.RulesSystemMixin,
       dataMixins.PropagationDataMixin,
       dataMixins.AccessDataMixin,
-      dataMixins.AutomatedDataMixin,
       systemMixins.RefreshSystemMixin,
     )
   {

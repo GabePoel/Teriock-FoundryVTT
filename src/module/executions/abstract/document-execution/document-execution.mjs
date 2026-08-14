@@ -1,3 +1,4 @@
+import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { prefixObject } from "../../../helpers/utils.mjs";
 import BaseExecution from "../base-execution/base-execution.mjs";
@@ -21,7 +22,7 @@ export default class DocumentExecution extends BaseExecution {
     data.consumeUses ??= options.source?.system?.settings?.getSetting("consumeOnUse");
     super(data, options);
     this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
-    this._automations = this.source.system?.automations?.contents ?? [];
+    this.automations = new ExecutionPseudoCollection(this.source.system?.automations?.entries?.() ?? [], this);
     this._boosts = options.boosts ?? this.source.system?.boosts ?? this._boosts;
     if (game.settings.get("teriock", "secretDocuments").has(this.source?.typedIdentifier)) {
       this._messageMode = options.messageMode ?? "blind";
@@ -72,7 +73,7 @@ export default class DocumentExecution extends BaseExecution {
   /** @inheritDoc */
   async _buildActivations() {
     const activationLists = await Promise.all(
-      this.activeAutomations.map(a => a.getActivations({ execution: this, rollData: this.getRollData() })),
+      this.automations.active.map(a => a.getActivations({ execution: this, rollData: this.getRollData() })),
     );
     for (const activations of activationLists) { this.activations.push(...activations); }
     for (const a of this.activations) {

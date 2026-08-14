@@ -1,5 +1,4 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import * as executionMixins from "../../mixins/_module.mjs";
@@ -42,6 +41,9 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     data.dealImpacts ??= formulaExists(data.formula);
     data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
     super(data, options);
+    for (const p of this.source.properties.filter(p => p.active)) {
+      for (const a of p.system.automations) { this.automations.set(a.id, a); }
+    }
     this.bonus = options.bonus ?? "";
   }
 
@@ -55,13 +57,6 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     paths.push("dealImpacts");
     if (this.source.system.onUseAbilities.length > 0) { paths.push("useAbilities"); }
     return paths;
-  }
-
-  /** @inheritDoc */
-  get automations() {
-    const automations = [...this._automations];
-    for (const p of this.source.properties) { automations.push(...p.system.automations.contents); }
-    return new TypeCollection(automations.map(a => [a.id, a]));
   }
 
   /** @inheritDoc */

@@ -1,4 +1,3 @@
-export { default as AbilityAutomationsPart } from "./ability-automations-part.mjs";
 export { default as AbilityCostsPart } from "./ability-costs-part/ability-costs-part.mjs";
 export { default as AbilityDurationPart } from "./ability-duration-part/ability-duration-part.mjs";
 export { default as AbilityElderSorceryPart } from "./ability-elder-sorcery-part/ability-elder-sorcery-part.mjs";

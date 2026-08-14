@@ -71,7 +71,7 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
       const scope = { chatDataBySource: {} };
       for (const effect of actor.applicables) {
         if (!effect.active) { continue; }
-        for (const expiration of effect.system.activeExpirations) {
+        for (const expiration of effect.system.expirations.active) {
           const activation = expiration.attempt(type, context);
           if (!activation) { continue; }
           const key = effect.uuid;

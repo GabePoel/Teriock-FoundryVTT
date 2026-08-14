@@ -1,11 +1,10 @@
 import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
 import { BaseDataModel } from "../../../data/abstract/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
-import * as dataMixins from "../../../data/mixins/_module.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
+import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 
 const { fields } = foundry.data;
@@ -17,9 +16,8 @@ const { fields } = foundry.data;
 /**
  * Executions are ephemeral classes that resolve some sort of roll, activity, document usage, etc. They show an
  * {@link ExecutionEditor} dialog for the user to interact with and configure.
- * @mixes AutomatedData
  */
-export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDataModel) {
+export default class BaseExecution extends BaseDataModel {
   /**
    * Create an execution and immediately execute it.
    * @param {object} [data] - Initial schema data.
@@ -53,6 +51,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     this._rollOptions = options.rollOptions ?? {};
     this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
     this._determineCompetence(options);
+    this.automations = new ExecutionPseudoCollection([], this);
   }
 
   /** @type {TeriockJournalEntryPage} */
@@ -63,9 +62,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /** @type {TeriockActor|null} */
   _actor;
-
-  /** @type {Automation[]} */
-  _automations = [];
 
   /** @type {Record<Teriock.Keys.Impact, Teriock.System.FormulaString>} */
   _boosts;
@@ -90,6 +86,9 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /** @type {object} */
   actorUpdates = {};
+
+  /** @type {ExecutionPseudoCollection<Automation>} */
+  automations;
 
   /** @type {TeriockChatMessage|undefined} */
   message;
@@ -143,13 +142,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     return BaseRoll;
   }
 
-  /** @inheritDoc */
-  get activeAutomations() {
-    return this.automations.contents.filter(a =>
-      a.competencies.has(this.competence.raw) && a.checkIfQualified(() => this.getRollData())
-    );
-  }
-
   /** @returns {TeriockActor} */
   get actor() {
     if (this._actor) { return this._actor; }
@@ -159,17 +151,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @param {TeriockActor|null} actor */
   set actor(actor) {
     this._actor = actor;
-  }
-
-  /** @returns {TypeCollection<ID<Automation>, Automation>} */
-  get automations() {
-    return new TypeCollection(this._automations.map(a => [a.id, a]));
-  }
-
-  /** @param {TypeCollection | Automation[]} automations */
-  set automations(automations) {
-    if (Array.isArray(automations)) { this._automations = automations; }
-    if (automations instanceof TypeCollection) { this._automations = automations.contents; }
   }
 
   /**
@@ -371,7 +352,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * @returns {Promise<false|void>}
    */
   async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {
-    const automations = options.automations ?? this.activeAutomations;
+    const automations = options.automations ?? this.automations.active;
     await Promise.all(automations.map(a => a.fireTrigger(trigger, this.getScope({ ...scope, trigger }))));
   }
 
@@ -496,7 +477,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * @returns {Promise<void|false>}
    */
   async fireTrigger(trigger, scope) {
-    const automations = this.activeAutomations.filter(a => a.actor !== this.actor);
+    const automations = this.automations.active.filter(a => a.actor !== this.actor);
     await this._fireAutomationsTrigger(trigger, scope, { automations });
     return this._fireActorTrigger(trigger, scope);
   }

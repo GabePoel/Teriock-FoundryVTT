@@ -1,10 +1,10 @@
-import { TypeCollection } from "../../../../documents/collections/_module.mjs";
+import { PseudoCollection } from "../../../pseudo-documents/collections/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
     export type ExpirableSystemData = {
       /** <schema> Expirations */
-      expirations: TypeCollection<ID<Expiration>, Expiration>;
+      expirations: PseudoCollection<Expiration>;
     };
   }
 }

@@ -1,5 +1,5 @@
-import { TypeCollection } from "../../documents/collections/_module.mjs";
 import { TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
+import { PseudoCollection } from "../pseudo-documents/collections/_module.mjs";
 
 const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
@@ -23,7 +23,7 @@ export default class PseudoCollectionField extends TypedObjectField {
 
   /**
    * @param {typeof TypedPseudoDocument} model
-   * @param {DataFieldOptions & Partial<{ collection: typeof TypeCollection}>} [options]
+   * @param {DataFieldOptions} [options]
    * @param {Record<string, typeof TypedPseudoDocument>} [options.types]
    * @param {DataFieldContext} [context]
    */
@@ -35,14 +35,7 @@ export default class PseudoCollectionField extends TypedObjectField {
     if (!types) { throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes")); }
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
-    this.#collectionClass = options.collection ?? TypeCollection;
   }
-
-  /**
-   * The collection class.
-   * @type {typeof TypeCollection}
-   */
-  #collectionClass;
 
   /**
    * The pseudo-document class.
@@ -69,6 +62,8 @@ export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */
   initialize(value, model, options = {}) {
     const obj = super.initialize(value, model, options);
-    return new this.#collectionClass(Object.entries(obj).filter(([_k, inst]) => inst instanceof TypedPseudoDocument));
+    return new PseudoCollection(Object.entries(obj).filter(([_k, inst]) => inst instanceof TypedPseudoDocument), {
+      types: Object.keys(this.options?.types),
+    });
   }
 }

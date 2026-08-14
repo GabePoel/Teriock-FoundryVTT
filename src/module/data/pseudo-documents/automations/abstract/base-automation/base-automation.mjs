@@ -54,4 +54,13 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   getCompetence(scope) {
     return scope?.execution?.competence?.raw ?? super.getCompetence(scope);
   }
+
+  /**
+   * Data this adds to effects.
+   * @returns {object}
+   * @todo Implement this instead of all the ability execution chat part handling.
+   */
+  getEffectData() {
+    return {};
+  }
 }

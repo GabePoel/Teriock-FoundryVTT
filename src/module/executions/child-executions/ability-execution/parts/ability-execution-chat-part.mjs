@@ -97,7 +97,7 @@ export default function AbilityExecutionChatPart(Base) {
     async #generateConsequenceAssociations() {
       this.#associationMap = { crit: [], normal: [] };
       this.#trackerMap = { crit: [], normal: [] };
-      const statusAutomations = this.getAutomations("status", { active: true });
+      const statusAutomations = this.automations.getType("status", { active: true });
       const targetAutomations = statusAutomations.filter(a => a.target);
       for (const a of targetAutomations) {
         const uuids = (await a.selectVisibleTokens()).map(t => t.uuid);
@@ -115,7 +115,7 @@ export default function AbilityExecutionChatPart(Base) {
      * @returns {Teriock.Keys.Status[]}
      */
     #generateConsequenceStatuses(crit = false) {
-      const statusAutomations = this.getAutomations("status", { active: true, crit });
+      const statusAutomations = this.automations.getType("status", { active: true, crit });
       return statusAutomations.filter(a => a.relation === "include").map(a => a.status);
     }
 
@@ -124,7 +124,7 @@ export default function AbilityExecutionChatPart(Base) {
      * @returns {Promise<Partial<Teriock.Transformation.EffectTransformationConfig>>}
      */
     async #generateConsequenceTransformation(crit = false) {
-      const transformationAutomations = this.getAutomations("transformation", { active: true, crit });
+      const transformationAutomations = this.automations.getType("transformation", { active: true, crit });
       const transformation = { enabled: Boolean(transformationAutomations.length), uuids: [] };
       if (transformation.enabled) {
         const a = transformationAutomations[0];
@@ -149,7 +149,7 @@ export default function AbilityExecutionChatPart(Base) {
       const types = CONFIG.ActiveEffect.dataModels.consequence._affinityTypes;
       const out = {};
       for (const Cls of types) {
-        const affinities = this.getAffinities(Cls.TYPE, { active: true, crit });
+        const affinities = this.affinities.getType(Cls.TYPE, { active: true, crit });
         for (const a of affinities) {
           const data = a.toObject();
           data._id = foundry.utils.randomID();
@@ -167,7 +167,7 @@ export default function AbilityExecutionChatPart(Base) {
       const types = CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
       const out = {};
       for (const Cls of types) {
-        const automations = this.getAutomations(Cls.TYPE, { active: true, crit });
+        const automations = this.automations.getType(Cls.TYPE, { active: true, crit });
         for (const a of automations) {
           const data = a.toObject();
           data._id = foundry.utils.randomID();
@@ -202,7 +202,7 @@ export default function AbilityExecutionChatPart(Base) {
      * @returns {Promise<number>}
      */
     async #generateEffectDuration(crit = false) {
-      const durationAutomations = this.getAutomations("duration", { active: true, crit });
+      const durationAutomations = this.automations.getType("duration", { active: true, crit });
       let durationFormula = this.source.system.duration.formula;
       durationAutomations.forEach(a => {
         durationFormula = BaseRoll.replaceFormulaData(a.substitution, {
@@ -223,7 +223,7 @@ export default function AbilityExecutionChatPart(Base) {
       const types = CONFIG.ActiveEffect.dataModels.consequence._expirationTypes;
       const out = {};
       for (const Cls of types) {
-        const expirations = this.getExpirations(Cls.TYPE, { active: true, crit });
+        const expirations = this.expirations.getType(Cls.TYPE, { active: true, crit });
         for (const e of expirations) {
           const data = e.toObject();
           data._id = foundry.utils.randomID();
@@ -270,7 +270,7 @@ export default function AbilityExecutionChatPart(Base) {
     /** @inheritDoc */
     async _buildActivations() {
       const acts = teriock.data.pseudoDocuments.activations;
-      const overrideAutomation = this.activeAutomations.find(a => a.type === "override");
+      const overrideAutomation = this.automations.getType("override", { active: true })[0];
 
       // Add feat save activation
       if (this.isFeat && !overrideAutomation?.preventFeat) {
@@ -316,7 +316,7 @@ export default function AbilityExecutionChatPart(Base) {
           v.con.data.system.associations = this.#associationMap[key];
           v.con.data.changes.push(...this.#trackerMap[key]);
         }
-        const addAutomations = this.getAutomations("addDocuments", { active: true }).filter(a => !a.separate);
+        const addAutomations = this.automations.getType("addDocuments", { active: true }).filter(a => !a.separate);
         for (const a of addAutomations) {
           const toAdd = await a.choose({ actor: this.actor, execution: this });
           const grandchildren = [];
@@ -341,7 +341,7 @@ export default function AbilityExecutionChatPart(Base) {
             v.grandchildren.push(...grandchildren);
           }
         }
-        const transformationAutomations = this.getAutomations("transformation", { active: true });
+        const transformationAutomations = this.automations.getType("transformation", { active: true });
         for (const a of transformationAutomations) {
           const toAdd = (await a.selectDocuments({ relativeTo: this.actor })).map(d => d.uuid);
           for (const [i, v] of variants.entries()) {
@@ -349,7 +349,7 @@ export default function AbilityExecutionChatPart(Base) {
           }
         }
         for (const v of variants) {
-          this.getAutomations("override", { active: true, crit: v.crit }).forEach(a => {
+          this.automations.getType("override", { active: true, crit: v.crit }).forEach(a => {
             for (const effectData of [v.con.data, v.imb.data]) {
               const competence = a?.getCompetence({ execution: this });
               if (typeof competence === "number") {

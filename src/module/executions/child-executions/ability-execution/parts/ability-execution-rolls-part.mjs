@@ -20,7 +20,7 @@ export default function AbilityExecutionRollsPart(Base) {
 
     /** @inheritDoc */
     async _buildRolls() {
-      const overrideAutomation = this.activeAutomations.find(a => a.type === "override");
+      const overrideAutomation = this.automations.getType("override", { active: true });
       if (this.isAttack) {
         if (overrideAutomation?.preventAttack) { return; }
         return super._buildRolls();

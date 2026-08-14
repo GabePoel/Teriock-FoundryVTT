@@ -1,3 +1,4 @@
+import { ExecutionPseudoCollection } from "../../../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseRoll } from "../../../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../../../helpers/formula.mjs";
 import { objectMap, omit } from "../../../../../helpers/utils.mjs";
@@ -36,10 +37,14 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
   constructor(data = {}, options = {}) {
     data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
     super(data, options);
-    const bonusAutomation = this.getAutomations("override", { active: true }).find(a => formulaExists(a.rollBonus));
+    const bonusAutomation = this.automations.getType("override", { active: true }).find(a =>
+      formulaExists(a.rollBonus)
+    );
     if (bonusAutomation) { this.updateSource({ bonus: addFormula(this.bonus, bonusAutomation.rollBonus) }); }
     this.rootBonus = this.bonus;
     this.initializeExecution(options);
+    this.affinities = new ExecutionPseudoCollection(this.source.system.affinities.entries());
+    this.expirations = new ExecutionPseudoCollection(this.source.system.expirations.entries());
   }
 
   /** @type {Record<Teriock.Keys.PrimaryCost, number>} */
@@ -87,13 +92,6 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
     return this.source.system.affinities.filter(a =>
       a.competencies.has(this.competence.raw) && a.checkIfQualified(() => this.getRollData())
       && ((a.heighten.has(0) && !this.heightened) || (a.heighten.has(1) && this.heightened))
-    );
-  }
-
-  /** @inheritDoc */
-  get activeAutomations() {
-    return super.activeAutomations.filter(a =>
-      (a.heighten.has(0) && !this.heightened) || (a.heighten.has(1) && this.heightened)
     );
   }
 
@@ -174,7 +172,7 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
   get shouldMakeCritEffect() {
     const { results } = this.source.system;
     if (results.critHit || results.critMiss || results.critFail || results.critSave) { return true; }
-    return [...this.activeAffinities, ...this.activeAutomations, ...this.activeExpirations].some(m =>
+    return [...this.affinities.active, ...this.automations.active, ...this.expirations.active].some(m =>
       m.crit instanceof Set && !(m.crit.has(0) && m.crit.has(1))
     );
   }
@@ -270,63 +268,6 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
   _updateArmament(armament, options = {}) {
     super._updateArmament(armament, options);
     this.updateSource({ bv: this.armament?.system.bv.value });
-  }
-
-  /**
-   * Get all the affinities of a given type.
-   * @template {AffinityType} T
-   * @param {T} type
-   * @param {object} [options]
-   * @param {boolean} [options.active]
-   * @param {boolean} [options.crit]
-   * @returns {Affinity<T>[]}
-   */
-  getAffinities(type, options = {}) {
-    const filter = (a) =>
-      (a.type === type)
-      && (typeof options.crit === "boolean"
-        ? ((options.crit && a.crit.has(1)) || (!options.crit && a.crit.has(0)))
-        : true);
-    const { active } = options;
-    if (active) { return this.activeAffinities.filter(filter); }
-    return this.source.system.affinities.contents.filter(filter);
-  }
-
-  /**
-   * @inheritDoc
-   * @template {AutomationType} T
-   * @param {T} type
-   * @param {object} [options]
-   * @param {boolean} [options.active]
-   * @param {boolean} [options.crit]
-   * @returns {Automation<T>[]}
-   */
-  getAutomations(type, options = {}) {
-    const automations = super.getAutomations(type, options);
-    if (typeof options.crit === "boolean") {
-      return automations.filter(a => (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)));
-    }
-    return automations;
-  }
-
-  /**
-   * Get all the expirations of a given type.
-   * @template {ExpirationType} T
-   * @param {T} type
-   * @param {object} [options]
-   * @param {boolean} [options.active]
-   * @param {boolean} [options.crit]
-   * @returns {Expiration<T>[]}
-   */
-  getExpirations(type, options = {}) {
-    const filter = (e) =>
-      (e.type === type)
-      && (typeof options.crit === "boolean"
-        ? ((options.crit && e.crit.has(1)) || (!options.crit && e.crit.has(0)))
-        : true);
-    const { active } = options;
-    if (active) { return this.activeExpirations.filter(filter); }
-    return this.source.system.expirations.contents.filter(filter);
   }
 
   /** @inheritDoc */
