@@ -32,7 +32,6 @@ export default function RefreshSystemMixin(Base) {
       "ownership",
       "sort",
       "system._dep",
-      "system._ref",
       "system._sup",
       "type",
     ];

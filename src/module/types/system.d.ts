@@ -28,16 +28,14 @@ declare global {
        * {@link HierarchyDocument.createDocuments}.
        */
       cachedKeepId?: boolean;
-      /** If true then subs will not be removed prior to document creation. */
-      dontFilterSubs?: boolean;
       /** Skip rendering of sheets for documents with these IDs. */
       dontRenderSheets?: ID<TeriockDocument>[];
-      /** Tracker to see if the value of `cachedKeepId` should be read. */
-      isKeepIdCached?: boolean;
       /** Keep competence instead of inheriting from elder. */
       keepCompetence?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
+      /** UUIDs of known subs to filter out. */
+      knownSubs?: Set<UUID>;
     } & _Operation;
 
     export type ActivityTrigger = keyof typeof tc.activity.choices;

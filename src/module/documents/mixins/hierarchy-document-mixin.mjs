@@ -1,7 +1,7 @@
 import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
-const { Collection } = foundry.utils;
+const { Collection, deepClone, deleteProperty, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -61,7 +61,7 @@ export default function HierarchyDocumentMixin(Base) {
         operation.renderSheet = false;
         for (const [i, document] of documents.entries()) {
           if (operation.dontRenderSheets.includes(document.id)) { continue; }
-          document?.render(true, { renderContext: `create${this.documentName}`, renderData: operation.data[i] });
+          document.sheet?.render(true, { renderContext: `create${this.documentName}`, renderData: operation.data[i] });
         }
       }
       await super._onCreateOperation(documents, operation, user);
@@ -80,64 +80,19 @@ export default function HierarchyDocumentMixin(Base) {
       if (yes === false) { return false; }
 
       operation.cachedKeepId = operation.keepId;
-      operation.isKeepIdCached = true;
-      operation.dontRenderSheets = [];
-      documents.sort((a, b) => {
-        const aSup = Boolean(a?.system?._sup);
-        const bSup = Boolean(b?.system?._sup);
-        return aSup - bSup;
-      });
-      const filteredDocuments = documents.filter(d => {
-        const collection = d.siblingCollection;
-        if (d?.system?._sup && !operation.dontFilterSubs) { return collection.has(d.system._sup); }
-        return true;
-      });
-      if (!operation.allowDuplicateSubs) {
-        documents.length = 0;
-        documents.push(...filteredDocuments);
-      }
-      const keepId = operation.keepId;
-      const toCreate = [];
-      const knownRefs = [];
-      await this._cacheDocumentReferenceCompendiums(documents);
-      for (const doc of documents) {
-        if (doc.system?._ref) {
-          const ref = /** @type {HierarchyDocument} */ await fromUuid(doc.system._ref);
-          let create = true;
-          if (ref) {
-            if (knownRefs.includes(ref.uuid) && !operation.allowDuplicateSubs) { create = false; }
-            else { knownRefs.push(ref.uuid); }
-          }
-          if (ref && ref.subs.size && create) {
-            operation.keepId = true;
-            const newId = keepId ? doc._id : foundry.utils.randomID();
-            const newDoc = doc.clone({ _id: newId }, { keepId: true });
-            toCreate.push(newDoc);
-            /** @type {Record<ID<TeriockActiveEffect|TeriockActor|TeriockItem>, ID<TeriockActiveEffect|TeriockActor|TeriockItem>>} */
-            const idMap = { [ref.id]: newDoc._id };
-            const allRefSubs = await ref.getAllSubs();
-            const clones = [];
-            for (const sub of allRefSubs.contents) {
-              knownRefs.push(sub.uuid);
-              const subClone = sub.clone({ folder: newDoc.folder }, { keepId });
-              if (!subClone._id && !operation.keepSubIds) {
-                subClone.updateSource({ _id: foundry.utils.randomID() });
-              }
-              idMap[sub.id] = subClone._id;
-              clones.push(subClone);
-              operation.dontRenderSheets.push(subClone._id);
-            }
-            for (const clone of clones) { clone.updateSource({ "system._sup": idMap[clone.system._sup] }); }
-            toCreate.push(...clones);
-          } else if (create) {
-            toCreate.push(doc);
-          }
-        } else {
-          toCreate.push(doc);
+      operation.keepId = true;
+      operation.dontRenderSheets ??= [];
+      for (const d of documents) { if (!d._id) { d.updateSource({ _id: randomID() }); } }
+      const supDocs = documents.filter(d => hasProperty(d, "flags._teriock.id"));
+      const idMap = new Map(supDocs.map(d => [getProperty(d, "flags._teriock.id"), d]));
+      for (const d of documents) {
+        if (hasProperty(d, "flags._teriock.sup")) {
+          const sup = idMap.get(getProperty(d, "flags._teriock.sup"));
+          d.updateSource({ folder: sup?.folder, "system._sup": sup?.id });
+          if (d._id) { operation.dontRenderSheets.push(d._id); }
         }
+        d.updateSource({ "flags._teriock": _del });
       }
-      documents.length = 0;
-      documents.push(...toCreate);
     }
 
     /**
@@ -168,9 +123,7 @@ export default function HierarchyDocumentMixin(Base) {
       if (yes === false) { return false; }
 
       for (const doc of documents) {
-        const folderUpdate = operation.updates.find(update =>
-          update._id === doc._id && foundry.utils.hasProperty(update, "folder")
-        );
+        const folderUpdate = operation.updates.find(update => update._id === doc._id && hasProperty(update, "folder"));
         if (folderUpdate) {
           const subIds = doc.allSubs.contents.map(s => s._id);
           for (const subId of subIds) {
@@ -184,8 +137,8 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * Check if there is a circular dependencies between a sup and sub.
-     * @param {HierarchyDocument} sup
-     * @param {HierarchyDocument} sub
+     * @param {TeriockDocument} sup
+     * @param {TeriockDocument} sub
      * @todo Make a synchronous version of this so it can run during drag and drop.
      */
     static async checkIfCyclic(sup, sub) {
@@ -202,15 +155,67 @@ export default function HierarchyDocumentMixin(Base) {
      * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
      */
     static async createDocuments(data = [], operation = {}) {
-      // Pre-clean documents so they always have their `_ref` UUID available.
-      for (let i = 0; i < data.length; i++) {
-        const doc = data[i];
-        if (doc instanceof foundry.abstract.Document) { data[i] = doc.toObject(true); }
+      if (typeof operation.cachedKeepId === "boolean") {
+        operation.keepId = operation.cachedKeepId;
+        delete operation.cachedKeepId;
       }
-      if (operation.isKeepIdCached) { operation.keepId = operation.cachedKeepId; }
-      delete operation.isKeepIdCached;
-      delete operation.cachedKeepId;
-      return super.createDocuments(data, operation);
+      const cleanedData = data.map(doc => doc instanceof foundry.abstract.Document ? doc.toObject(true) : doc);
+      const resolvedData = await Promise.all(cleanedData.map(doc => this.resolveObject(doc)));
+      const expandedData = this.expandDocumentDataArray(resolvedData, null, operation);
+      const hasNonSub = expandedData.some(d => !getProperty(d, "system._sup"));
+      const filteredData = expandedData.filter(d => {
+        const knownSubs = operation.knownSubs ?? new Set();
+        if (hasNonSub && getProperty(d, "system._sup") && !getProperty(d, "flags._teriock.keep")) { return false; }
+        return !(knownSubs.has(getProperty(d, "flags._teriock.ref")) && !getProperty(d, "flags._teriock.keep"));
+      });
+      return super.createDocuments(filteredData, operation);
+    }
+
+    /**
+     * Expand data arrays.
+     * @param {object[]} data
+     * @param {string|null} sup
+     * @param {object} operation
+     * @returns {object[]}
+     */
+    static expandDocumentDataArray(data, sup = null, operation = {}) {
+      operation.knownSubs ??= new Set();
+      const result = [];
+      for (const d of data) {
+        if (sup && !(operation?.keepSubIds === false)) { setProperty(d, "_id", randomID()); }
+        if (!sup && !(operation?.keepId === false)) { setProperty(d, "_id", randomID()); }
+        if (sup) {
+          setProperty(d, "flags._teriock.sup", sup);
+          setProperty(d, "flags._teriock.keep", true);
+          deleteProperty(d, "system._sup");
+          if (!operation?.allowDuplicateSubs && getProperty(d, "flags._teriock.ref")) {
+            operation.knownSubs.add(getProperty(d, "flags._teriock.ref"));
+          }
+        }
+        const id = randomID();
+        setProperty(d, "flags._teriock.id", id);
+        const subs = d.subs ?? [];
+        delete d.subs;
+        result.push(d);
+        result.push(...this.expandDocumentDataArray(subs, id, operation));
+      }
+      return result;
+    }
+
+    /**
+     * Resolve a `toObject` call.
+     * @param {UUID|object} obj
+     * @returns {Promise<object>}
+     */
+    static async resolveObject(obj) {
+      if (typeof obj === "string") {
+        const doc = await fromUuid(obj);
+        return this.resolveObject(doc?.toObject() ?? {});
+      }
+      if (Array.isArray(obj?.subs) && obj.subs.length) {
+        obj.subs = await Promise.all(obj.subs.map(s => this.resolveObject(s)));
+      }
+      return obj;
     }
 
     /**
@@ -258,7 +263,7 @@ export default function HierarchyDocumentMixin(Base) {
       while (toSearchFor.size) {
         const nextSearch = new Set();
         for (const entry of this.siblingCollection ?? []) {
-          if (toSearchFor.has(foundry.utils.getProperty(entry, "system._sup")) && !found.has(entry._id)) {
+          if (toSearchFor.has(getProperty(entry, "system._sup")) && !found.has(entry._id)) {
             found.set(entry._id, entry);
             nextSearch.add(entry._id);
           }
@@ -280,7 +285,7 @@ export default function HierarchyDocumentMixin(Base) {
           const sup = this.siblingCollection?.get(supId);
           if (!sup) { break; }
           sups.set(supId, sup);
-          supId = foundry.utils.getProperty(sup, "system._sup");
+          supId = getProperty(sup, "system._sup");
         }
         this._cache.allSups = new TypeCollection(sups);
       }
@@ -316,8 +321,7 @@ export default function HierarchyDocumentMixin(Base) {
      */
     get subs() {
       if (!this._cache.subs) {
-        const subArray = this.siblingCollection?.filter(d => foundry.utils.getProperty(d, "system._sup") === this.id)
-          ?? [];
+        const subArray = this.siblingCollection?.filter(d => getProperty(d, "system._sup") === this.id) ?? [];
         this._cache.subs = new SubCollection(subArray.map(d => [d._id, d]), this.id);
       }
       return this._cache.subs;
@@ -339,7 +343,7 @@ export default function HierarchyDocumentMixin(Base) {
     /** @inheritDoc */
     get visibleChildren() {
       return super.visibleChildren.filter(c =>
-        c?.parent === this || foundry.utils.getProperty(c, "system._sup") === this.id || c?.master === this
+        c?.parent === this || getProperty(c, "system._sup") === this.id || c?.master === this
       );
     }
 
@@ -391,7 +395,7 @@ export default function HierarchyDocumentMixin(Base) {
       const yes = await super._preUpdate(changes, options, user);
       if (yes === false) { return false; }
 
-      const _sup = foundry.utils.getProperty(changes, "system._sup");
+      const _sup = getProperty(changes, "system._sup");
       if (_sup) {
         const collection = this.siblingCollection;
         const sup = await resolveDocument(collection?.get(_sup));
@@ -457,10 +461,10 @@ export default function HierarchyDocumentMixin(Base) {
      * @returns {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>}
      */
     getCreateSubDocumentsOperation(data = [], operation = {}) {
-      data = foundry.utils.deepClone(data);
+      data = deepClone(data);
       for (const d of data) {
-        foundry.utils.setProperty(d, "system._sup", this.id);
-        foundry.utils.setProperty(d, "folder", this.folder?.id || null);
+        setProperty(d, "system._sup", this.id);
+        setProperty(d, "folder", this.folder?.id || null);
       }
       return {
         ...operation,
@@ -575,7 +579,11 @@ export default function HierarchyDocumentMixin(Base) {
     /** @inheritDoc */
     toObject(source = true) {
       const out = super.toObject(source);
-      if (this.collection) { foundry.utils.setProperty(out, "system._ref", this.uuid); }
+      if (this.collection) { setProperty(out, "flags._teriock.ref", this.uuid); }
+      out.subs = this.subs.map(s => {
+        if (typeof s.toObject === "function") { return s.toObject(source); }
+        return s.uuid;
+      }).filter(Boolean);
       return out;
     }
 
@@ -588,7 +596,6 @@ export default function HierarchyDocumentMixin(Base) {
     async toObjects(source = true) {
       const data = [this.toObject(source)];
       for (const s of (await this.getAllSubs()).contents) { data.push(s?.toObject(source)); }
-      for (const d of data) { foundry.utils.deleteProperty(d, "system._ref"); }
       return data;
     }
 
