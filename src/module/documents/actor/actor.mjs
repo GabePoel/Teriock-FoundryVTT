@@ -3,6 +3,7 @@ import { TriggerExpiration } from "../../data/pseudo-documents/expirations/_modu
 import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
+import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
 import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -44,6 +45,21 @@ export default class TeriockActor
         titleKey: "TERIOCK.MESSAGE.Trigger.title",
       },
     };
+  }
+
+  /** @inheritDoc */
+  static async createDocuments(data = [], operation = {}) {
+    for (const d of data) {
+      for (const c of ["effects", "items"]) {
+        if (Array.isArray(d[c])) {
+          d[c] = expandDocumentDataArray(d[c], null, { keepSubIds: operation.keepId }, {
+            inplace: true,
+            keepId: operation.keepEmbeddedIds,
+          });
+        }
+      }
+    }
+    return super.createDocuments(data, operation);
   }
 
   /** @inheritDoc */
@@ -498,18 +514,5 @@ export default class TeriockActor
         localize: true,
       });
     }
-  }
-
-  /** @inheritDoc */
-  static async createDocuments(data = [], operation = {}) {
-    for (const d of data) {
-      if (Array.isArray(d.effects)) {
-        d.effects = ActiveEffect.implementation.expandDocumentDataArray(d.effects, null, {}, { inplace: true });
-      }
-      if (Array.isArray(d.items)) {
-        d.items = Item.implementation.expandDocumentDataArray(d.items, null, {}, { inplace: true });
-      }
-    }
-    return super.createDocuments(data, operation);
   }
 }

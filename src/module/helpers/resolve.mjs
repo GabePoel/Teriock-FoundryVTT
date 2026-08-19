@@ -1,7 +1,3 @@
-import { SubCollection, TypeCollection } from "../documents/collections/_module.mjs";
-
-const { Document } = foundry.abstract;
-
 /**
  * Ensure a document is not an index.
  * @template T
@@ -12,7 +8,7 @@ export async function resolveDocument(syncDoc) {
   let out = null;
   if (!syncDoc) { return out; }
   if (typeof syncDoc === "string") { out = await teriock.helpers.utils.fromKey(syncDoc); }
-  else if (syncDoc instanceof Document) { out = syncDoc; }
+  else if (syncDoc instanceof foundry.abstract.Document) { out = syncDoc; }
   else { out = await foundry.utils.fromUuid(syncDoc.uuid); }
   return out;
 }
@@ -31,18 +27,14 @@ export async function resolveDocuments(syncDocs, options = {}) {
   if (options.expandFolders) {
     const toAdd = await Promise.all(folders.map(d => d.getAllContents()));
     for (const arr of toAdd) { out.push(...arr); }
-  } else {
-    out.push(...folders);
-  }
+  } else { out.push(...folders); }
   // Add rollable tables. This includes the tables that were in folders.
   const tables = /** @type {TeriockRollTable[]} */ out.filter(d => d?.documentName === "RollTable");
   out = out.filter(d => d?.documentName !== "RollTable");
   if (options.expandTables) {
     const toAdd = await Promise.all(tables.map(d => d.getAllContents()));
     for (const arr of toAdd) { out.push(...arr); }
-  } else {
-    out.push(...tables);
-  }
+  } else { out.push(...tables); }
   return out.filter(Boolean);
 }
 
@@ -54,8 +46,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
 export async function resolveCollection(collection) {
   const syncDocs = await resolveDocuments(collection.contents);
   const entries = syncDocs.map(d => [d.id, d]);
-  if (collection instanceof SubCollection) { return new SubCollection(entries, collection.supId); }
-  return new TypeCollection(entries);
+  return new collection.constructor(entries, collection.supId);
 }
 
 /**
@@ -111,4 +102,38 @@ export async function ensureNoChildren(document, identifiers) {
   const deletedDocs = [];
   for (const deletedArray of deletedArrays) { deletedDocs.push(...deletedArray.filter(Boolean)); }
   return deletedDocs;
+}
+
+/**
+ * Expand data arrays.
+ * @param {object[]} data
+ * @param {string|null} [sup]
+ * @param {object} [operation]
+ * @param {object} [options]
+ * @param {boolean} [options.inplace=false]
+ * @param {boolean} [options.keepId=false]
+ * @returns {object[]}
+ */
+export function expandDocumentDataArray(data, sup = null, operation = {}, options = {}) {
+  operation.knownSubs ??= new Set();
+  const result = [];
+  for (const d of data) {
+    const newId = options.keepId && !sup && d._id ? d._id : foundry.utils.randomID();
+    if (sup && !(operation?.keepSubIds === false)) { foundry.utils.setProperty(d, "_id", newId); }
+    if (!sup && !(operation?.keepId === false)) { foundry.utils.setProperty(d, "_id", newId); }
+    if (options.inplace) { foundry.utils.setProperty(d, "_id", newId); }
+    if (sup) {
+      foundry.utils.setProperty(d, "flags._teriock.sup", sup);
+      foundry.utils.setProperty(d, "flags._teriock.keep", true);
+      foundry.utils.deleteProperty(d, "system._sup");
+      if (options.inplace) { foundry.utils.setProperty(d, "system._sup", sup); }
+      if (!operation?.allowDuplicateSubs && foundry.utils.getProperty(d, "flags._teriock.ref")) {
+        operation.knownSubs.add(foundry.utils.getProperty(d, "flags._teriock.ref"));
+      }
+    }
+    foundry.utils.setProperty(d, "flags._teriock.id", newId);
+    result.push(...[d, ...expandDocumentDataArray(d.subs ?? [], newId, operation, options)]);
+    delete d.subs;
+  }
+  return result;
 }

@@ -1,7 +1,7 @@
-import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
+import { expandDocumentDataArray, resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
-const { Collection, deepClone, deleteProperty, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
+const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -161,8 +161,7 @@ export default function HierarchyDocumentMixin(Base) {
       }
       const cleanedData = data.map(doc => doc instanceof foundry.abstract.Document ? doc.toObject(true) : doc);
       const resolvedData = await Promise.all(cleanedData.map(doc => this.resolveObject(doc)));
-      const expandedData = this.expandDocumentDataArray(resolvedData, null, operation);
-      const hasNonSub = expandedData.some(d => !getProperty(d, "system._sup"));
+      const expandedData = expandDocumentDataArray(resolvedData, null, operation);
       const filteredData = expandedData.filter(d => {
         const knownSubs = operation.knownSubs ?? new Set();
         // TODO: Monkey patch compendium collections to communicate this in their operation instead of hard coding batch
@@ -172,38 +171,6 @@ export default function HierarchyDocumentMixin(Base) {
         return !(knownSubs.has(getProperty(d, "flags._teriock.ref")) && !getProperty(d, "flags._teriock.keep"));
       });
       return super.createDocuments(filteredData, operation);
-    }
-
-    /**
-     * Expand data arrays.
-     * @param {object[]} data
-     * @param {string|null} [sup]
-     * @param {object} [operation]
-     * @param {object} [options]
-     * @returns {object[]}
-     */
-    static expandDocumentDataArray(data, sup = null, operation = {}, options = {}) {
-      operation.knownSubs ??= new Set();
-      const result = [];
-      for (const d of data) {
-        const newId = randomID();
-        if (sup && !(operation?.keepSubIds === false)) { setProperty(d, "_id", newId); }
-        if (!sup && !(operation?.keepId === false)) { setProperty(d, "_id", newId); }
-        if (options.inplace) { setProperty(d, "_id", newId); }
-        if (sup) {
-          setProperty(d, "flags._teriock.sup", sup);
-          setProperty(d, "flags._teriock.keep", true);
-          deleteProperty(d, "system._sup");
-          if (options.inplace) { setProperty(d, "system._sup", sup); }
-          if (!operation?.allowDuplicateSubs && getProperty(d, "flags._teriock.ref")) {
-            operation.knownSubs.add(getProperty(d, "flags._teriock.ref"));
-          }
-        }
-        setProperty(d, "flags._teriock.id", newId);
-        result.push(...[d, ...this.expandDocumentDataArray(d.subs ?? [], newId, operation, options)]);
-        delete d.subs;
-      }
-      return result;
     }
 
     /**

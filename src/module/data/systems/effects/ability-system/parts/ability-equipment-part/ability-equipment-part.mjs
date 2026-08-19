@@ -141,6 +141,8 @@ export default function AbilityEquipmentPart(Base) {
           img = getImage("consumables", `${this.elements.first().titleCase()} Spell Scroll`);
         } else { img = TERIOCK.display.iconManifest.consumables.celestialSpellScroll; }
       }
+      const effects = [this.parent.toObject()];
+      effects[0].system.grantUse = true;
       let out = foundry.utils.mergeObject(reference, {
         name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.name", {
           spell: this.parent.fullName,
@@ -149,7 +151,7 @@ export default function AbilityEquipmentPart(Base) {
         system: {
           _src: this.parent.uuid,
           consumable: true,
-          description: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.description", { id: this.parent.id }),
+          description: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.description", { id: effects[0]._id }),
           identifier: `${equipmentType}-of-${this.parent.forcedIdentifier}`,
           kind: "enchanted",
           needsAttunement: false,
@@ -158,8 +160,6 @@ export default function AbilityEquipmentPart(Base) {
       });
       if (img) { out.img = img; }
       out = foundry.utils.mergeObject(out, data);
-      const effects = [this.parent.toObject()];
-      effects[0].system.grantUse = true;
       out.effects ??= [];
       out.effects.push(...effects);
       return out;

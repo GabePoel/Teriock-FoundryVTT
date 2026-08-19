@@ -6,7 +6,7 @@ import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
+import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -203,7 +203,7 @@ export default class SpeciesSystem
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
     });
-    for (const trait of this.traits) { data[`trait.${toCamelCase(trait)}`] = 1; }
+    for (const trait of this.traits) { data[`trait.${toKebabCase(trait)}`] = 1; }
     return data;
   }
 
