@@ -229,7 +229,7 @@ export default class SpeciesSystem
     return foundry.utils.mergeObject({
       _id: this.parent.id,
       img: this.parent.img,
-      items: await this.parent.toObjects(),
+      items: [this.parent.toObject()],
       name: this.parent.name,
       prototypeToken: {
         height: TeriockActor.getSizeConfig(this.size.value).length,

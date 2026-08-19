@@ -148,4 +148,14 @@ export default class TeriockItem
     super.renderRelativeSheets();
     if (this.dependee?.isViewer) { this.dependee.render(); }
   }
+
+  /** @inheritDoc */
+  static async createDocuments(data = [], operation = {}) {
+    for (const d of data) {
+      if (Array.isArray(d.effects)) {
+        d.effects = ActiveEffect.implementation.expandDocumentDataArray(d.effects, null, {}, { inplace: true });
+      }
+    }
+    return super.createDocuments(data, operation);
+  }
 }

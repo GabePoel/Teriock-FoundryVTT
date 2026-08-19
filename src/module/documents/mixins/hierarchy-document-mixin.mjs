@@ -165,7 +165,10 @@ export default function HierarchyDocumentMixin(Base) {
       const hasNonSub = expandedData.some(d => !getProperty(d, "system._sup"));
       const filteredData = expandedData.filter(d => {
         const knownSubs = operation.knownSubs ?? new Set();
-        if (hasNonSub && getProperty(d, "system._sup") && !getProperty(d, "flags._teriock.keep")) { return false; }
+        // TODO: Monkey patch compendium collections to communicate this in their operation instead of hard coding batch
+        if (
+          data.length === 100 && getProperty(d, "system._sup") && !getProperty(d, "flags._teriock.keep")
+        ) { return false; }
         return !(knownSubs.has(getProperty(d, "flags._teriock.ref")) && !getProperty(d, "flags._teriock.keep"));
       });
       return super.createDocuments(filteredData, operation);
@@ -174,30 +177,31 @@ export default function HierarchyDocumentMixin(Base) {
     /**
      * Expand data arrays.
      * @param {object[]} data
-     * @param {string|null} sup
-     * @param {object} operation
+     * @param {string|null} [sup]
+     * @param {object} [operation]
+     * @param {object} [options]
      * @returns {object[]}
      */
-    static expandDocumentDataArray(data, sup = null, operation = {}) {
+    static expandDocumentDataArray(data, sup = null, operation = {}, options = {}) {
       operation.knownSubs ??= new Set();
       const result = [];
       for (const d of data) {
-        if (sup && !(operation?.keepSubIds === false)) { setProperty(d, "_id", randomID()); }
-        if (!sup && !(operation?.keepId === false)) { setProperty(d, "_id", randomID()); }
+        const newId = randomID();
+        if (sup && !(operation?.keepSubIds === false)) { setProperty(d, "_id", newId); }
+        if (!sup && !(operation?.keepId === false)) { setProperty(d, "_id", newId); }
+        if (options.inplace) { setProperty(d, "_id", newId); }
         if (sup) {
           setProperty(d, "flags._teriock.sup", sup);
           setProperty(d, "flags._teriock.keep", true);
           deleteProperty(d, "system._sup");
+          if (options.inplace) { setProperty(d, "system._sup", sup); }
           if (!operation?.allowDuplicateSubs && getProperty(d, "flags._teriock.ref")) {
             operation.knownSubs.add(getProperty(d, "flags._teriock.ref"));
           }
         }
-        const id = randomID();
-        setProperty(d, "flags._teriock.id", id);
-        const subs = d.subs ?? [];
+        setProperty(d, "flags._teriock.id", newId);
+        result.push(...[d, ...this.expandDocumentDataArray(d.subs ?? [], newId, operation, options)]);
         delete d.subs;
-        result.push(d);
-        result.push(...this.expandDocumentDataArray(subs, id, operation));
       }
       return result;
     }
@@ -585,18 +589,6 @@ export default function HierarchyDocumentMixin(Base) {
         return s.uuid;
       }).filter(Boolean);
       return out;
-    }
-
-    /**
-     * Copy and transform the data model of this and all its subs into an array of plain objects.
-     * Refs are stripped from the array so that children aren't created multiple times.
-     * @param {boolean} [source=true]
-     * @returns {Promise<object[]>}
-     */
-    async toObjects(source = true) {
-      const data = [this.toObject(source)];
-      for (const s of (await this.getAllSubs()).contents) { data.push(s?.toObject(source)); }
-      return data;
     }
 
     /**

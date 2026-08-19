@@ -158,12 +158,9 @@ export default function AbilityEquipmentPart(Base) {
       });
       if (img) { out.img = img; }
       out = foundry.utils.mergeObject(out, data);
-      const effects = await this.parent.toObjects();
-      if (effects.length) {
-        const root = effects.find((e) => e._id === this.parent.id);
-        if (root) { root.system.grantUse = true; }
-      }
-      if (!out.effects) { out.effects = []; }
+      const effects = [this.parent.toObject()];
+      effects[0].system.grantUse = true;
+      out.effects ??= [];
       out.effects.push(...effects);
       return out;
     }

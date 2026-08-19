@@ -499,4 +499,17 @@ export default class TeriockActor
       });
     }
   }
+
+  /** @inheritDoc */
+  static async createDocuments(data = [], operation = {}) {
+    for (const d of data) {
+      if (Array.isArray(d.effects)) {
+        d.effects = ActiveEffect.implementation.expandDocumentDataArray(d.effects, null, {}, { inplace: true });
+      }
+      if (Array.isArray(d.items)) {
+        d.items = Item.implementation.expandDocumentDataArray(d.items, null, {}, { inplace: true });
+      }
+    }
+    return super.createDocuments(data, operation);
+  }
 }
