@@ -2,6 +2,7 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
@@ -63,7 +64,7 @@ export default class RankSystem
    */
   async #onCreateSelectAbilities() {
     const elder = await this.parent.getElder();
-    const otherRanks = (await elder?.getRanks() ?? []).filter(r =>
+    const otherRanks = (await resolveDocuments(elder?.ranks ?? [])).filter(r =>
       r.system.class === this.class && r.id !== this.parent.id
     );
     const toDelete = [];

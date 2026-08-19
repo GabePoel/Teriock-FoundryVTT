@@ -54,7 +54,7 @@ export default class TeriockActor
         if (Array.isArray(d[c])) {
           d[c] = expandDocumentDataArray(d[c], null, { keepSubIds: operation.keepId }, {
             inplace: true,
-            keepId: operation.keepEmbeddedIds,
+            keepId: operation.keepEmbeddedIds ?? true,
           });
         }
       }

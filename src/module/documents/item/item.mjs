@@ -41,7 +41,7 @@ export default class TeriockItem
       if (Array.isArray(d.effects)) {
         d.effects = expandDocumentDataArray(d.effects, null, { keepSubIds: operation.keepId }, {
           inplace: true,
-          keepId: operation.keepEmbeddedIds,
+          keepId: operation.keepEmbeddedIds ?? true,
         });
       }
     }
