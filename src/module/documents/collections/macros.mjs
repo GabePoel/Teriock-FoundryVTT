@@ -8,7 +8,6 @@ const { Macros } = foundry.documents.collections;
 
 /**
  * @mixes BaseWorldCollection
- * @implements {TypeCollection<TeriockMacro, TeriockMacro>}
  * @implements {DocumentCollection<TeriockMacro>}
  */
 export default class TeriockMacros extends BaseWorldCollectionMixin(Macros) {}

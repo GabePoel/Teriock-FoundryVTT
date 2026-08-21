@@ -195,8 +195,8 @@ export default function CommonSystemMixin(Base) {
       });
       const typeMap = {};
       const children = this.parent.documentName === "Actor"
-        ? (await this.parent.getChildren()).contents
-        : await this.parent.getVisibleChildren();
+        ? (await this.parent.children.getContents())
+        : await this.parent.previewed.getContents();
       for (const c of children) { (typeMap[c.type] ??= []).push(c); }
       for (const type of this.metadata.visibleTypes) {
         if (typeMap[type]) {

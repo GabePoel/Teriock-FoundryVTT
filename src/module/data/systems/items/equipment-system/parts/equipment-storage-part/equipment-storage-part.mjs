@@ -40,7 +40,7 @@ export default function EquipmentStoragePart(Base) {
      */
     async #findStackTarget(elder) {
       if (!elder || !this.consumable || !this._source.quantity?.value) { return null; }
-      const stackCandidates = (await elder.getEquipment()).filter(e =>
+      const stackCandidates = (await elder.children.getType("equipment")).filter(e =>
         e.master?.uuid === elder.uuid
         && e.uuid !== this.parent.uuid
         && e.name === this.parent.name

@@ -79,7 +79,7 @@ export default function RefreshSystemMixin(Base) {
      * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
      */
     async #refreshChildren(document, fullOverride) {
-      const children = await document.getChildArray();
+      const children = await document.children.getContents();
       return fullOverride ? children.filter(c => c.sup?.uuid === document.uuid) : children;
     }
 

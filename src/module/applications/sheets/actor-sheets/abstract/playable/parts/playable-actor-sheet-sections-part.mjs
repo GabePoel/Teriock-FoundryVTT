@@ -23,6 +23,7 @@ const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, PlayableActorSheetSectionsPart>}
+ * @property {TeriockActor} document
  */
 export default function PlayableActorSheetSectionsPart(Base) {
   /**
@@ -34,14 +35,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupAbility() {
-      const visible = a => !a.isReference && (a.system.revealed || game.user.isGM);
       return [{
-        docs: this.document.abilities.filter(visible),
+        docs: this.document.previewed.getTypeSync("ability").filter(a => !a.system.isBasic),
         empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.nonBasic"),
-      }, {
-        docs: game.teriock.basicAbilities.filter(visible),
-        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.basic"),
-      }];
+      }, { docs: game.teriock.basicAbilities, empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.basic") }];
     }
 
     /**
@@ -63,18 +60,17 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupConsequence() {
-      return [
-        { docs: this._childrenOfType("consequence"), empty: TERIOCK.config.document.consequence.plural.toLowerCase() },
-        { docs: this._childrenOfType("attunement"), empty: TERIOCK.config.document.attunement.plural.toLowerCase() },
-        {
-          docs: this.document.effects.filter(e =>
-            ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus
-          ),
-          empty: TERIOCK.config.document.effect.plural.toLowerCase(),
-          optional: true,
-        },
-        { docs: await this._virtualConditions(), empty: TERIOCK.config.document.condition.plural.toLowerCase() },
-      ];
+      return [{
+        docs: this.document.previewed.getTypeSync("consequence"),
+        empty: TERIOCK.config.document.consequence.plural.toLowerCase(),
+      }, {
+        docs: this.document.previewed.getTypeSync("attunement"),
+        empty: TERIOCK.config.document.attunement.plural.toLowerCase(),
+      }, {
+        docs: this.document.effects.filter(e => ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus),
+        empty: TERIOCK.config.document.effect.plural.toLowerCase(),
+        optional: true,
+      }, { docs: await this._virtualConditions(), empty: TERIOCK.config.document.condition.plural.toLowerCase() }];
     }
 
     /**
@@ -82,14 +78,16 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupEquipment() {
-      return [
-        {
-          docs: this._childrenOfType("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
-          empty: TERIOCK.config.document.equipment.plural.toLowerCase(),
-        },
-        { docs: this._childrenOfType("body"), empty: TERIOCK.config.document.body.plural.toLowerCase() },
-        { docs: this._childrenOfType("mount"), empty: TERIOCK.config.document.mount.plural.toLowerCase() },
-      ];
+      return [{
+        docs: this.document.previewed.getTypeSync("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
+        empty: TERIOCK.config.document.equipment.plural.toLowerCase(),
+      }, {
+        docs: this.document.previewed.getTypeSync("body"),
+        empty: TERIOCK.config.document.body.plural.toLowerCase(),
+      }, {
+        docs: this.document.previewed.getTypeSync("mount"),
+        empty: TERIOCK.config.document.mount.plural.toLowerCase(),
+      }];
     }
 
     /**
@@ -97,7 +95,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupFluency() {
-      return [{ docs: this._childrenOfType("fluency"), empty: TERIOCK.config.document.fluency.plural.toLowerCase() }];
+      return [{
+        docs: this.document.previewed.getTypeSync("fluency"),
+        empty: TERIOCK.config.document.fluency.plural.toLowerCase(),
+      }];
     }
 
     /**
@@ -105,8 +106,11 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupPower() {
-      return [{ docs: this._childrenOfType("species"), empty: TERIOCK.config.document.species.plural.toLowerCase() }, {
-        docs: this._childrenOfType("power"),
+      return [{
+        docs: this.document.previewed.getTypeSync("species"),
+        empty: TERIOCK.config.document.species.plural.toLowerCase(),
+      }, {
+        docs: this.document.previewed.getTypeSync("power"),
         empty: TERIOCK.config.document.power.plural.toLowerCase(),
       }];
     }
@@ -116,8 +120,11 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupRank() {
-      return [{ docs: this._childrenOfType("rank"), empty: TERIOCK.config.document.rank.plural.toLowerCase() }, {
-        docs: this._childrenOfType("archetype"),
+      return [{
+        docs: this.document.previewed.getTypeSync("rank"),
+        empty: TERIOCK.config.document.rank.plural.toLowerCase(),
+      }, {
+        docs: this.document.previewed.getTypeSync("archetype"),
         empty: TERIOCK.config.document.archetype.plural.toLowerCase(),
         optional: true,
       }];
@@ -129,17 +136,16 @@ export default function PlayableActorSheetSectionsPart(Base) {
      */
     static async #previewGroupResource() {
       const consumable = "TERIOCK.SHEETS.Actor.TABS.Resources.consumable";
-      return [
-        { docs: this._childrenOfType("resource"), empty: TERIOCK.config.document.resource.plural.toLowerCase() },
-        {
-          docs: this.document.abilities.filter(a => a.system.consumable),
-          empty: _loc(consumable, { value: TERIOCK.config.document.ability.plural.toLowerCase() }),
-        },
-        {
-          docs: this.document.properties.filter(a => a.system.consumable),
-          empty: _loc(consumable, { value: TERIOCK.config.document.property.plural.toLowerCase() }),
-        },
-      ];
+      return [{
+        docs: this.document.previewed.getTypeSync("resource"),
+        empty: TERIOCK.config.document.resource.plural.toLowerCase(),
+      }, {
+        docs: this.document.previewed.getTypeSync("ability").filter(a => a.system.consumable),
+        empty: _loc(consumable, { value: TERIOCK.config.document.ability.plural.toLowerCase() }),
+      }, {
+        docs: this.document.previewed.getTypeSync("property").filter(p => p.system.consumable),
+        empty: _loc(consumable, { value: TERIOCK.config.document.property.plural.toLowerCase() }),
+      }];
     }
 
     /**

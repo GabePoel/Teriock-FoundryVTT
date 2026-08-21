@@ -1,4 +1,6 @@
+import { BaseAffinity } from "../../../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../../../data/pseudo-documents/collections/_module.mjs";
+import { BaseExpiration } from "../../../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../../../helpers/formula.mjs";
 import { objectMap, omit } from "../../../../../helpers/utils.mjs";
@@ -37,14 +39,18 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
   constructor(data = {}, options = {}) {
     data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
     super(data, options);
-    const bonusAutomation = this.automations.getType("override", { active: true }).find(a =>
+    const bonusAutomation = this.automations.getTypeSync("override", { active: true }).find(a =>
       formulaExists(a.rollBonus)
     );
     if (bonusAutomation) { this.updateSource({ bonus: addFormula(this.bonus, bonusAutomation.rollBonus) }); }
     this.rootBonus = this.bonus;
     this.initializeExecution(options);
-    this.affinities = new ExecutionPseudoCollection(this.source.system.affinities.entries());
-    this.expirations = new ExecutionPseudoCollection(this.source.system.expirations.entries());
+    this.affinities = new ExecutionPseudoCollection("affinities", this, this.source.system.affinities.values(), {
+      documentClass: BaseAffinity,
+    });
+    this.expirations = new ExecutionPseudoCollection("expirations", this, this.source.system.expirations.values(), {
+      documentClass: BaseExpiration,
+    });
   }
 
   /** @type {Record<Teriock.Keys.PrimaryCost, number>} */

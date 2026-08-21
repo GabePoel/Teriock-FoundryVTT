@@ -31,7 +31,7 @@ export default class PseudoCollectionField extends TypedObjectField {
     if (!foundry.utils.isSubclass(model, TypedPseudoDocument)) {
       throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"));
     }
-    const types = (options.types ||= model.TYPES);
+    const types = options.types;
     if (!types) { throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes")); }
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
@@ -62,8 +62,11 @@ export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */
   initialize(value, model, options = {}) {
     const obj = super.initialize(value, model, options);
-    return new PseudoCollection(Object.entries(obj).filter(([_k, inst]) => inst instanceof TypedPseudoDocument), {
-      types: Object.keys(this.options?.types),
-    });
+    return new PseudoCollection(
+      this.name,
+      model,
+      Object.values(obj).filter(inst => inst instanceof TypedPseudoDocument),
+      { documentClass: this.documentClass, types: Object.keys(this.options?.types) },
+    );
   }
 }

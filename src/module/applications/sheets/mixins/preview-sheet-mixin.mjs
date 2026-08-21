@@ -24,7 +24,7 @@ export default function PreviewSheetMixin(Base) {
      */
     static async #previewGroupChildren() {
       const types = this.document.visibleTypes;
-      const children = await this.document.getVisibleChildren();
+      const children = await this.document.previewed.getContents();
       /** @type {Record<string, Teriock.Previews.PreviewGroup>} */
       const groupRecord = Object.fromEntries(
         types.map(t => [t, { docs: [], empty: TERIOCK.config.document[t].plural.toLowerCase(), optional: true }]),
@@ -89,15 +89,6 @@ export default function PreviewSheetMixin(Base) {
         }
       }
       return virtuals;
-    }
-
-    /**
-     * The visible children of a given type.
-     * @param {string} type
-     * @returns {(TeriockActiveEffect|TeriockActor|TeriockItem)[]}
-     */
-    _childrenOfType(type) {
-      return [...(this.document.visibleChildrenByType[type] ?? [])];
     }
 
     /** @inheritDoc */

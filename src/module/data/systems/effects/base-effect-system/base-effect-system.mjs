@@ -57,7 +57,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get childChanges() {
-    return this.automations.getType("childChange", { active: true, ongoing: true }).flatMap(a => a.getChanges());
+    return this.automations.getTypeSync("childChange", { active: true, ongoing: true }).flatMap(a => a.getChanges());
   }
 
   /**
@@ -208,7 +208,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    const statusAutomations = this.automations.getType(StatusAutomation.TYPE, { active: true });
+    const statusAutomations = this.automations.getTypeSync(StatusAutomation.TYPE, { active: true });
     statusAutomations.forEach(a => {
       if (a.relation === "include") { this.parent.statuses.add(a.status); }
     });

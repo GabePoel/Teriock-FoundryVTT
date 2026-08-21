@@ -232,7 +232,7 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
       } else {
         let choices = [];
         if (this.target === "armament") { choices = a.armaments; }
-        if (this.target === "item") { choices = a.visibleChildren.filter(c => c.documentName === "Item"); }
+        if (this.target === "item") { choices = a.previewed.filter(c => c.documentName === "Item"); }
         const chosen = await DocumentSelector.selectMulti(choices);
         await Promise.all(chosen.map(async c => {
           for (const family of families) { await this.createFamily(c, family); }
@@ -274,12 +274,12 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
   async secondaryAction() {
     if (!this.checkActors()) { return; }
     await Promise.all(this.actors.map(async a => {
-      const children = await a.getChildArray();
+      const children = await a.children.getContents();
       if (this.target === "armament") {
-        for (const armament of a.armaments) { children.push(...armament.childArray); }
+        for (const armament of a.armaments) { children.push(...(await armament.children.getContents())); }
       }
       if (this.target === "item") {
-        for (const item of a.items.contents) { children.push(...item.childArray); }
+        for (const item of a.items.contents) { children.push(...(await item.children.getContents())); }
       }
       const toDelete = children.filter(c => c.getFlag("teriock", "createdBy") === this.uuid);
       if (this.target === "armament") { await Promise.all(toDelete.map(d => d.delete())); }

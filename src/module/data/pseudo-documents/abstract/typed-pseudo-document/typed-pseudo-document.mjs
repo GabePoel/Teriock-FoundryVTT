@@ -13,10 +13,10 @@ export default class TypedPseudoDocument extends BasePseudoDocument {
 
   /**
    * Subtypes of this pseudo-document.
-   * @returns {Record<string, TypedPseudoDocument>}
+   * @returns {string[]}
    */
   static get TYPES() {
-    return {};
+    return [];
   }
 
   /** @inheritDoc */

@@ -39,17 +39,6 @@ export async function resolveDocuments(syncDocs, options = {}) {
 }
 
 /**
- * Ensure all documents in a collection are not indexes.
- * @param {SubCollection|TypeCollection} collection
- * @returns {Promise<SubCollection|TypeCollection>}
- */
-export async function resolveCollection(collection) {
-  const syncDocs = await resolveDocuments(collection.contents);
-  const entries = syncDocs.map(d => [d.id, d]);
-  return new collection.constructor(entries, collection.supId);
-}
-
-/**
  * Ensure a document has all the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
  * @param {TypedIdentifier[]} identifiers
@@ -57,12 +46,10 @@ export async function resolveCollection(collection) {
  */
 export async function ensureChildren(document, identifiers) {
   if (identifiers.length === 0) { return []; }
-  const typed = (await document.getChildren()).documentsByType;
+  const existing = document.children.identifiers;
   const candidates = await Promise.all(identifiers.map(async identifier => {
-    const parsed = teriock.helpers.utils.parseIdentifier(identifier);
     if (!(teriock.data.fields.tools.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
-    const existing = (typed[parsed.type] || []).filter(n => n?.system?.identifier === parsed.identifier);
-    if (existing.length) { return; }
+    if (existing?.has(identifier)) { return; }
     const doc = await teriock.helpers.utils.fromIdentifier(identifier);
     if (!doc) { return; }
     const obj = doc.toObject(true);
@@ -90,7 +77,7 @@ export async function ensureChildren(document, identifiers) {
  */
 export async function ensureNoChildren(document, identifiers) {
   if (identifiers.length === 0) { return []; }
-  const toDelete = (await document.getChildArray()).filter(c => identifiers.includes(c.typedIdentifier));
+  const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.typedIdentifier));
   if (toDelete.length === 0) { return []; }
   const documentNames = new Set(toDelete.map(c => c?.documentName));
   const operations = [];

@@ -59,7 +59,7 @@ foundry.helpers.Hooks.once("init", function() {
   });
 
   // Configure UI and UX Components
-  // =======================
+  // ==============================
 
   CONFIG.ui.actors = applications.sidebar.tabs.TeriockActorDirectory;
   CONFIG.ui.chat = applications.sidebar.tabs.TeriockChatLog;
@@ -77,6 +77,9 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
 
   applications.ux.enrichment.registerEnrichers();
+
+  // Define Fonts
+  // ------------
 
   const fontPath = (s) => `${helpers.path.systemPath(`assets/fonts/${s}`)}`;
 
@@ -334,8 +337,8 @@ foundry.helpers.Hooks.once("setup", function() {
   for (const pack of game.packs) { pack.applicationClass = applications.sidebar.apps.TeriockCompendium; }
 });
 
-// Perform one-time pre-localization and sorting of some configuration objects
-// ===========================================================================
+// Localization and Config Sorting
+// ===============================
 
 Hooks.once("i18nInit", () => {
   game.teriock.i18nReady = true;
@@ -352,6 +355,10 @@ Hooks.once("i18nInit", () => {
     }
   }
   helpers.localization.performPreLocalization(TERIOCK);
+
+  // Formula Editor Context
+  // ----------------------
+
   Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
     ...TERIOCK.rollContext.ability,
     ...TERIOCK.rollContext.archetype,

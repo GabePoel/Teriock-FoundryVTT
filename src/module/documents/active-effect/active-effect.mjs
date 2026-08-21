@@ -27,11 +27,10 @@ export default class TeriockActiveEffect
     return super._applyChangeUnguided(targetDoc, change, changes, options);
   }
 
-  /**
-   * Collection of the items that depend on this.
-   * @type {TypeCollection<ID<TeriockItem>, TeriockItem>}
-   */
-  dependents = new TypeCollection();
+  /** @inheritDoc */
+  get _childrenSource() {
+    return [...super._childrenSource, ...this.dependents.contents];
+  }
 
   /** @inheritDoc */
   get isExpiryTrackable() {
@@ -76,8 +75,13 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
-  _makeChildArray() {
-    return [...super._makeChildArray(), ...this.dependents.contents];
+  _initialize(options = {}) {
+    /**
+     * Collection of the Items that depend on this even though they are embedded in a parallel Collection.
+     * @type {TypeCollection<TeriockItem>}
+     */
+    this.dependents = new TypeCollection("dependents", this, [], { documentClass: Item.implementation });
+    super._initialize(options);
   }
 
   /** @inheritDoc */

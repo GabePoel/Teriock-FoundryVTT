@@ -1,9 +1,8 @@
-import { TypeCollection } from "../../../../documents/collections/_module.mjs";
-import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
+import { PseudoCollection } from "../../../pseudo-documents/collections/_module.mjs";
 
 declare module "./interactive-system.mjs" {
   export default interface InteractiveSystem extends Teriock.Models.BaseMessageSystemData {
-    activations: TypeCollection<ID<BaseActivation>, BaseActivation>;
+    activations: PseudoCollection<Activation>;
     img: string;
     panels: Teriock.Panels.PanelParts[];
     restrictVisibility: boolean;

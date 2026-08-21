@@ -2,6 +2,7 @@ import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
 import { BaseDataModel } from "../../../data/abstract/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
+import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
@@ -51,7 +52,7 @@ export default class BaseExecution extends BaseDataModel {
     this._rollOptions = options.rollOptions ?? {};
     this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
     this._determineCompetence(options);
-    this.automations = new ExecutionPseudoCollection([], this);
+    this.automations = new ExecutionPseudoCollection("automations", this, [], { documentClass: BaseAutomation });
   }
 
   /** @type {TeriockJournalEntryPage} */

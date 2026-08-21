@@ -102,11 +102,9 @@ export default class ShortRestExecution extends DocumentExecution {
     const yes = await super._fetchData();
     if (yes === false) { return false; }
 
-    this.#abilities = ((await this.actor?.getEffectiveChildren()) ?? []).filter(c => {
-      return c.type === "ability"
-        && (c.system.executionTime.base === this.executionTime
-          || c.system.executionTime.slow.unit === this.executionTime);
-    });
+    this.#abilities = (await this.actor.previewed.getType("ability")).filter(c =>
+      c.system.executionTime.base === this.executionTime || c.system.executionTime.slow.unit === this.executionTime
+    );
   }
 
   /** @inheritDoc */

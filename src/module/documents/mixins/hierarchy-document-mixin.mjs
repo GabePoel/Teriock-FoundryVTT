@@ -1,4 +1,4 @@
-import { expandDocumentDataArray, resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
+import { expandDocumentDataArray, resolveDocument } from "../../helpers/resolve.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
 const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
@@ -137,15 +137,14 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * Check if there is a circular dependencies between a sup and sub.
-     * @param {TeriockDocument} sup
-     * @param {TeriockDocument} sub
+     * @param {TeriockDocument | HierarchyDocument} sup
+     * @param {TeriockDocument | HierarchyDocument} sub
      * @todo Make a synchronous version of this so it can run during drag and drop.
      */
     static async checkIfCyclic(sup, sub) {
       if (sup?.documentName !== sub?.documentName) { return false; }
       if (sup?.id === sub?.id) { return true; }
-      if (typeof sup.getAllSups === "function") { return (await sup.getAllSups()).has(sub.id); }
-      return false;
+      return sup?.allSups?.has?.(sub.id) ?? false;
     }
 
     /**
@@ -208,59 +207,58 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /**
-     * Render the sheets of all the sups.
+     * Source for the subs descendent to this Document or their indexes.
+     * @returns {HierarchyDocument[]}
      */
-    #reloadSups() {
-      this.getAllSups().then(result => {
-        result.forEach(doc => {
-          if (typeof doc.resetChildMaps === "function") { doc.resetChildMaps(); }
-          if (doc.isViewer) { doc.render(); }
-        });
-      });
-      if (this.collection.name === "CompendiumCollection") {
-        this.collection.apps.forEach(app => {
-          if (app.rendered) { app.render(); }
-        });
-      }
-    }
-
-    /**
-     * All the subs descendant of this document or their indexes.
-     * @returns {TypeCollection}
-     */
-    get allSubs() {
-      const found = new Map();
+    get _allSubsSource() {
+      if (!this.id) { return []; }
+      const foundIds = new Set();
+      const found = [];
       let toSearchFor = new Set([this.id]);
       while (toSearchFor.size) {
         const nextSearch = new Set();
         for (const entry of this.siblingCollection ?? []) {
-          if (toSearchFor.has(getProperty(entry, "system._sup")) && !found.has(entry._id)) {
-            found.set(entry._id, entry);
+          if (toSearchFor.has(getProperty(entry, "system._sup")) && !foundIds.has(entry._id)) {
+            foundIds.add(entry._id);
+            found.push(entry);
             nextSearch.add(entry._id);
           }
         }
         toSearchFor = nextSearch;
       }
-      return new TypeCollection(found);
+      return found;
     }
 
     /**
-     * Lazily recomputed collection of all the sups ancestral to this document or their indexes.
-     * @returns {TypeCollection}
+     * Source for the sups ancestral to this Document or their indexes.
+     * @returns {HierarchyDocument[]}
      */
-    get allSups() {
-      if (!this._cache.allSups) {
-        const sups = new Map();
-        let supId = this.system?._sup;
-        while (supId && !sups.has(supId)) {
-          const sup = this.siblingCollection?.get(supId);
-          if (!sup) { break; }
-          sups.set(supId, sup);
-          supId = getProperty(sup, "system._sup");
-        }
-        this._cache.allSups = new TypeCollection(sups);
+    get _allSupsSource() {
+      const supIds = new Set();
+      const sups = [];
+      let supId = getProperty(this, "system._sup");
+      while (supId && !supIds.has(supId)) {
+        const sup = this.siblingCollection?.get(supId);
+        if (!sup) { break; }
+        supIds.add(supId);
+        sups.push(sup);
+        supId = getProperty(sup, "system._sup");
       }
-      return this._cache.allSups;
+      return sups;
+    }
+
+    /** @inheritDoc */
+    get _childrenSource() {
+      return [...super._childrenSource, ...this.subs.contents];
+    }
+
+    /**
+     * Subs source.
+     * @returns {HierarchyDocument[]}
+     */
+    get _subsSource() {
+      if (!this.id) { return []; }
+      return this.siblingCollection?.filter(d => getProperty(d, "system._sup") === this.id) ?? [];
     }
 
     /**
@@ -278,7 +276,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The collection that contains this and its siblings or their indexes.
-     * @returns {TypeCollection<HierarchyDocument, HierarchyDocument>}
+     * @returns {DocumentCollection<HierarchyDocument>}
      */
     get siblingCollection() {
       let collection = this.collection;
@@ -287,23 +285,11 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /**
-     * Lazily recomputed collection of the subs of this document or their indexes.
-     * @returns {SubCollection}
-     */
-    get subs() {
-      if (!this._cache.subs) {
-        const subArray = this.siblingCollection?.filter(d => getProperty(d, "system._sup") === this.id) ?? [];
-        this._cache.subs = new SubCollection(subArray.map(d => [d._id, d]), this.id);
-      }
-      return this._cache.subs;
-    }
-
-    /**
      * The sup of this document or its index.
      * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>|undefined}
      */
     get sup() {
-      if (this.system?._sup) { return this.siblingCollection?.get(this.system._sup); }
+      if (this.system._sup) { return this.siblingCollection?.get(this.system._sup); }
     }
 
     /** @inheritDoc */
@@ -312,15 +298,23 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /** @inheritDoc */
-    get visibleChildren() {
-      return super.visibleChildren.filter(c =>
-        c?.parent === this || getProperty(c, "system._sup") === this.id || c?.master === this
-      );
-    }
-
-    /** @inheritDoc */
-    _makeChildArray() {
-      return [...super._makeChildArray(), ...(this.subs.contents || [])];
+    _initialize(options = {}) {
+      /**
+       * The subs descendent to this Document or their indexes.
+       * @type {TypeCollection<HierarchyDocument>}
+       */
+      this.allSubs = new TypeCollection("allSubs", this, this._allSubsSource, { documentClass: this });
+      /**
+       * The sups ancestral to this Document or their indexes.
+       * @type {TypeCollection<HierarchyDocument>}
+       */
+      this.allSups = new TypeCollection("allSups", this, this._allSupsSource, { documentClass: this });
+      /**
+       * The subs directly descendent to this Document or their indexes.
+       * @type {TypeCollection<HierarchyDocument>}
+       */
+      this.subs = new SubCollection("subs", this, this._subsSource, { documentClass: this });
+      super._initialize(options);
     }
 
     /** @inheritDoc */
@@ -335,7 +329,7 @@ export default function HierarchyDocumentMixin(Base) {
       // If this is deleted as part of a folder it might not call the appropriate operation and descendents need to be
       // deleted separately. Only remaining documents get deleted. This sucks but IDK a better solution.
       if (this.checkEditor(userId)) {
-        this.getAllSubs().then((subs) =>
+        this.allSubs.getContents().then((subs) =>
           this.constructor.deleteDocuments(subs.contents.filter((s) => s?.persisted).map((s) => s._id), {
             pack: this.compendium?.collection,
             parent: this.parent,
@@ -403,22 +397,6 @@ export default function HierarchyDocumentMixin(Base) {
       return out[0];
     }
 
-    /**
-     * All the subs descendant of this document.
-     * @returns {Promise<TypeCollection>}
-     */
-    async getAllSubs() {
-      return resolveCollection(this.allSubs);
-    }
-
-    /**
-     * All the sups ancestral to this document.
-     * @returns {Promise<TypeCollection>}
-     */
-    async getAllSups() {
-      return resolveCollection(this.allSups);
-    }
-
     /** @inheritDoc */
     getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
       if (embeddedName === this.documentName) { return this.getCreateSubDocumentsOperation(data, operation); }
@@ -479,22 +457,6 @@ export default function HierarchyDocumentMixin(Base) {
       return resolveDocument(this.elder);
     }
 
-    /**
-     * The subs of this document.
-     * @returns {Promise<TypeCollection>}
-     */
-    async getSubs() {
-      return resolveCollection(this.subs);
-    }
-
-    /**
-     * The sup of this document.
-     * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|void>}
-     */
-    async getSup() {
-      return resolveDocument(this.sup);
-    }
-
     /** @inheritDoc */
     getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
       if (embeddedName === this.documentName) { return this.getUpdateSubDocumentsOperation(updates, operation); }
@@ -537,14 +499,19 @@ export default function HierarchyDocumentMixin(Base) {
      * Render sheets of documents which have control over this.
      */
     renderRelativeSheets() {
-      this.#reloadSups();
+      this.allSups.renderSheets();
+      if (this.collection instanceof foundry.documents.collections.CompendiumCollection) {
+        this.collection.render();
+      }
+      this.children.renderSheets();
     }
 
     /** @inheritDoc */
     resetChildMaps() {
+      this.subs.resetDocuments(this._subsSource);
+      this.allSubs.resetDocuments(this._allSubsSource);
+      this.allSups.resetDocuments(this._allSupsSource);
       super.resetChildMaps();
-      delete this._cache.allSups;
-      delete this._cache.subs;
     }
 
     /** @inheritDoc */

@@ -8,7 +8,6 @@ const { Folders } = foundry.documents.collections;
 
 /**
  * @mixes BaseWorldCollection
- * @implements {TypeCollection<TeriockFolder, TeriockFolder>}
  * @implements {DocumentCollection<TeriockFolder>}
  */
 export default class TeriockFolders extends BaseWorldCollectionMixin(Folders) {}

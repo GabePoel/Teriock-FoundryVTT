@@ -20,11 +20,7 @@ export default class CharacterSystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    const defaultItemIdentifiers = [
-      "power:created-elder-sorceries",
-      "power:learned-elder-sorceries",
-      "rank:journeyman",
-    ];
+    const defaultItemIdentifiers = ["rank:journeyman"];
     const items = await Promise.all(
       defaultItemIdentifiers.filter(identifier => !this.parent.items.find(i => i.typedIdentifier === identifier)).map(
         identifier => fromIdentifier(identifier)

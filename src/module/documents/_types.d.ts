@@ -1,6 +1,6 @@
 import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
 
-import { TypeCollection } from "./collections/_module.mjs";
+import { PseudoCollection } from "../data/pseudo-documents/collections/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
@@ -10,10 +10,10 @@ declare global {
     export type DocumentName = (typeof ALL_DOCUMENT_TYPES)[number];
 
     export type PseudoCollections = {
-      Activation?: TypeCollection<ID<Activation>, Activation>;
-      Affinity?: TypeCollection<ID<Affinity>, Affinity>;
-      Automation?: TypeCollection<ID<Automation>, Automation>;
-      Expiration?: TypeCollection<ID<Expiration>, Expiration>;
+      Activation?: PseudoCollection<Activation>;
+      Affinity?: PseudoCollection<Affinity>;
+      Automation?: PseudoCollection<Automation>;
+      Expiration?: PseudoCollection<Expiration>;
     };
 
     /**
@@ -22,12 +22,6 @@ declare global {
     export type DocumentCache = {
       /** If the document is active. */
       active?: boolean;
-      /** All sups ancestral to this document or their indexes. */
-      allSups?: TypeCollection<ID<TeriockDocument>, TeriockDocument>;
-      /** All children of this document or their indexes. */
-      childArray?: (TeriockActiveEffect | TeriockItem)[];
-      /** All children of this document or their indexes, keyed by id. */
-      children?: TypeCollection<ID<TeriockActiveEffect | TeriockItem>, TeriockActiveEffect | TeriockItem>;
       /** Previously-tracked dependency id, retained so it can be untracked when it changes. */
       dep?: string;
       /** Previously-tracked typed identifier, retained so it can be untracked when it changes. */
@@ -36,16 +30,8 @@ declare global {
       isReference?: boolean;
       /** Whether this document is a status effect. */
       isStatus?: boolean;
-      /** All modifiable children of this document, visible or otherwise. */
-      modifiableChildren?: (TeriockActiveEffect | TeriockItem)[];
-      /** The subs of this document or their indexes. */
-      subs?: TypeCollection<ID<TeriockDocument>, TeriockDocument>;
       /** Previously-tracked sup id, retained so a moved sub can reset its old sup. */
       supId?: ID<TeriockActiveEffect | TeriockActor | TeriockItem> | null;
-      /** All visible children of this document or their indexes. */
-      visibleChildren?: (TeriockActiveEffect | TeriockItem)[];
-      /** All visible children of this document or their indexes, keyed by type. */
-      visibleChildrenByType?: Record<Teriock.Documents.ChildType, (TeriockActiveEffect | TeriockItem)[]>;
     };
 
     export type ModelMetadata = {

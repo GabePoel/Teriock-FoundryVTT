@@ -3,6 +3,7 @@
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, RetrievalDocument>}
+ * @todo Migrate all uses of these to chilren/previewed.
  */
 export default function RetrievalDocumentMixin(Base) {
   /**
@@ -14,7 +15,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"ability">[]}
      */
     get abilities() {
-      return this.visibleChildrenByType.ability ?? [];
+      return this.previewed?.documentsByType.ability ?? [];
     }
 
     /**
@@ -22,7 +23,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"archetype">[]}
      */
     get archetypes() {
-      return this.visibleChildrenByType.archetype ?? [];
+      return this.previewed?.documentsByType.archetype ?? [];
     }
 
     /**
@@ -30,7 +31,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"attunement">[]}
      */
     get attunements() {
-      return this.visibleChildrenByType.attunement ?? [];
+      return this.previewed?.documentsByType.attunement ?? [];
     }
 
     /**
@@ -38,7 +39,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"body">[]}
      */
     get bodyParts() {
-      return this.visibleChildrenByType.body ?? [];
+      return this.previewed?.documentsByType.body ?? [];
     }
 
     /**
@@ -46,7 +47,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"condition">[]}
      */
     get conditions() {
-      return this.visibleChildrenByType.condition ?? [];
+      return this.previewed?.documentsByType.condition ?? [];
     }
 
     /**
@@ -54,7 +55,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"consequence">[]}
      */
     get consequences() {
-      return this.visibleChildrenByType.consequence ?? [];
+      return this.previewed?.documentsByType.consequence ?? [];
     }
 
     /**
@@ -62,7 +63,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"equipment">[]}
      */
     get equipment() {
-      return this.visibleChildrenByType.equipment ?? [];
+      return this.previewed?.documentsByType.equipment ?? [];
     }
 
     /**
@@ -70,7 +71,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"fluency">[]}
      */
     get fluencies() {
-      return this.visibleChildrenByType.fluency ?? [];
+      return this.previewed?.documentsByType.fluency ?? [];
     }
 
     /**
@@ -78,7 +79,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"imbuement">[]}
      */
     get imbuements() {
-      return this.visibleChildrenByType.imbuement ?? [];
+      return this.previewed?.documentsByType.imbuement ?? [];
     }
 
     /**
@@ -86,7 +87,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"mount">[]}
      */
     get mounts() {
-      return this.visibleChildrenByType.mount ?? [];
+      return this.previewed?.documentsByType.mount ?? [];
     }
 
     /**
@@ -94,7 +95,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"power">[]}
      */
     get powers() {
-      return this.visibleChildrenByType.power ?? [];
+      return this.previewed?.documentsByType.power ?? [];
     }
 
     /**
@@ -102,7 +103,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"property">[]}
      */
     get properties() {
-      return this.visibleChildrenByType.property ?? [];
+      return this.previewed?.documentsByType.property ?? [];
     }
 
     /**
@@ -110,7 +111,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"rank">[]}
      */
     get ranks() {
-      return this.visibleChildrenByType.rank ?? [];
+      return this.previewed?.documentsByType.rank ?? [];
     }
 
     /**
@@ -118,7 +119,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockActiveEffect<"resource">[]}
      */
     get resources() {
-      return this.visibleChildrenByType.resource ?? [];
+      return this.previewed?.documentsByType.resource ?? [];
     }
 
     /**
@@ -126,7 +127,7 @@ export default function RetrievalDocumentMixin(Base) {
      * @returns {TeriockItem<"species">[]}
      */
     get species() {
-      return this.visibleChildrenByType.species ?? [];
+      return this.previewed?.documentsByType.species ?? [];
     }
   }
 

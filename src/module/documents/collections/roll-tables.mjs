@@ -8,7 +8,6 @@ const { RollTables } = foundry.documents.collections;
 
 /**
  * @mixes BaseWorldCollection
- * @implements {TypeCollection<TeriockRollTable, TeriockRollTable>}
  * @implements {DocumentCollection<TeriockRollTable>}
  * @property {TeriockRollTable|null} activeGM
  */

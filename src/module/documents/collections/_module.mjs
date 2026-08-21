@@ -1,5 +1,6 @@
 export { default as TeriockActors } from "./actors.mjs";
 export { default as TeriockChatMessages } from "./chat-messages.mjs";
+export { default as ChildCollection } from "./child-collection.mjs";
 export { default as TeriockFolders } from "./folders.mjs";
 export { default as TeriockItems } from "./items.mjs";
 export { default as TeriockJournal } from "./journal.mjs";

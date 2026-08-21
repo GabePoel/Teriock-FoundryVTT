@@ -16,10 +16,10 @@ export default function ActorAutomationPart(Base) {
      */
     #applyCompetenceAutomations(value) {
       const autos = this.parent.appliedEffects.flatMap(e =>
-        e.system.automations.getType("changeCompetence", { active: true, competence: value, ongoing: true })
+        e.system.automations.getTypeSync("changeCompetence", { active: true, competence: value, ongoing: true })
       );
       const identifiers = new Set(autos.map(a => a.identifier));
-      for (const c of this.parent.modifiableChildren) {
+      for (const c of this.parent.modifiable?.contents ?? []) {
         if (identifiers.has(c.typedIdentifier) && c.system.competence.raw < value) {
           c.system.competence.raw = value;
         }
@@ -31,10 +31,10 @@ export default function ActorAutomationPart(Base) {
      */
     #applySuppressAutomations() {
       const autos = this.parent.appliedEffects.flatMap(e =>
-        e.system.automations.getType("suppress", { active: true, ongoing: true })
+        e.system.automations.getTypeSync("suppress", { active: true, ongoing: true })
       );
       const identifiers = new Set(autos.map(a => a.identifier));
-      for (const c of this.parent.modifiableChildren) {
+      for (const c of this.parent.modifiable?.contents ?? []) {
         if (identifiers.has(c.typedIdentifier)) { c.system.forceSuppressed = true; }
       }
     }

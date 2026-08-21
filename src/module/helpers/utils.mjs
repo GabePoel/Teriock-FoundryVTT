@@ -260,7 +260,7 @@ export async function findBestDocument(lookup, relativeTo, options = {}) {
   if (!lookup) { return null; }
   const doc = await fromIdentifier(lookup, { relativeOnly: Boolean(options.relativeOnly), relativeTo });
   if (doc) { return doc; }
-  const children = await relativeTo.getEffectiveChildren();
+  const children = await relativeTo.previewed.getContents();
   return children.find(c => c.lookupKey === lookup) ?? null;
 }
 
@@ -273,7 +273,7 @@ export async function findBestDocument(lookup, relativeTo, options = {}) {
 export async function fromIdentifierLocal(identifier, relativeTo) {
   if (typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
   if (!identifier) { return null; }
-  const children = await relativeTo.getEffectiveChildren();
+  const children = await relativeTo.previewed.getContents();
   return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;
 }
 
@@ -285,9 +285,8 @@ export async function fromIdentifierLocal(identifier, relativeTo) {
  * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
  */
 export async function fromQualifier(document, qualifier) {
-  if (!document || !teriock.helpers.formula.formulaExists(qualifier)) { return []; }
-  if (typeof document.getEffectiveChildren !== "function") { return []; }
-  const children = await document.getEffectiveChildren();
+  if (!document?.previewed?.getContents || !teriock.helpers.formula.formulaExists(qualifier)) { return []; }
+  const children = await document.previewed.getContents();
   const matched = [];
   for (const child of children) {
     const rollData = child.system?.getLocalRollData?.();

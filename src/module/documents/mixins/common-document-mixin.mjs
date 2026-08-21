@@ -1,8 +1,8 @@
 import * as dataMixins from "../../data/mixins/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { ensureChildren, ensureNoChildren, resolveDocuments } from "../../helpers/resolve.mjs";
+import { ensureChildren, ensureNoChildren } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
-import { TypeCollection } from "../collections/_module.mjs";
+import { ChildCollection, TypeCollection } from "../collections/_module.mjs";
 import * as documentMixins from "./_module.mjs";
 
 /**
@@ -65,6 +65,14 @@ export default function CommonDocumentMixin(Base) {
       return out;
     }
 
+    /**
+     * Make an array of all children or their indexes.
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
+     */
+    get _childrenSource() {
+      return [];
+    }
+
     /** @inheritDoc */
     get _embedActions() {
       return { ...super._embedActions, ...this.system._embedActions };
@@ -76,29 +84,19 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
+     * Make an array of visible children.
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
+     */
+    get _previewedSource() {
+      return this._childrenSource.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
+    }
+
+    /**
      * The actor associated with this document if there is one.
      * @returns {TeriockActor|null}
      */
     get actor() {
       return this.parent?.actor ?? null;
-    }
-
-    /**
-     * Lazily recomputed array containing all children or their indexes.
-     * @returns {(TeriockActiveEffect|TeriockItem)[]}
-     */
-    get childArray() {
-      if (!this._cache.childArray) { this._cache.childArray = this._makeChildArray(); }
-      return this._cache.childArray;
-    }
-
-    /**
-     * Lazily recomputed collection containing all children or their indexes.
-     * @returns {TypeCollection}
-     */
-    get children() {
-      if (!this._cache.children) { this._cache.children = new TypeCollection(this.childArray.map(c => [c._id, c])); }
-      return this._cache.children;
     }
 
     /** @inheritDoc */
@@ -115,31 +113,6 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
-     * Lazily recomputed array containing all visible children.
-     * @returns {(TeriockActiveEffect|TeriockItem)[]}
-     */
-    get visibleChildren() {
-      if (!this._cache.visibleChildren) { this._cache.visibleChildren = this._makeVisibleChildrenArray(); }
-      return this._cache.visibleChildren;
-    }
-
-    /**
-     * Lazily recomputed map of all visible children by their types.
-     * @returns {Record<Teriock.Documents.ChildType, (TeriockActiveEffect|TeriockItem)[]>}
-     */
-    get visibleChildrenByType() {
-      if (!this._cache.visibleChildrenByType) {
-        const typeMap = {};
-        for (const c of this.visibleChildren) {
-          if (!typeMap[c.type]) { typeMap[c.type] = []; }
-          typeMap[c.type].push(c);
-        }
-        this._cache.visibleChildrenByType = typeMap;
-      }
-      return this._cache.visibleChildrenByType;
-    }
-
-    /**
      * Types that can be shown on this document's sheet.
      * @returns {Teriock.Documents.CommonType[]}
      */
@@ -147,23 +120,26 @@ export default function CommonDocumentMixin(Base) {
       return this.system.visibleTypes;
     }
 
-    /**
-     * Make an array of all children or their indexes.
-     * @returns {(TeriockActiveEffect|TeriockItem)[]}
-     */
-    _makeChildArray() {
-      return [
-        ...(this.effects?.contents || []).filter(e => !e.sup),
-        ...(this.items?.contents || []).filter(i => !i.sup),
-      ];
-    }
-
-    /**
-     * Make an array of visible children.
-     * @returns {(TeriockActiveEffect|TeriockItem)[]}
-     */
-    _makeVisibleChildrenArray() {
-      return this.childArray.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
+    /** @inheritDoc */
+    _initialize(options = {}) {
+      /**
+       * A Collection of all the children that are directly descendent from this. This includes both embedded Documents
+       * and sub-Documents that are in the same collection. May be actual Documents or their compendium indexes.
+       * @type {TypeCollection<TeriockActiveEffect|TeriockItem>}
+       */
+      this.children = new TypeCollection("children", this, this._childrenSource, {
+        types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
+      });
+      /**
+       * A Collection of Documents or their compendium indexes that are descendant from this to be displayed. These are a
+       * combination of direct descendants and ones two or more generations removed depending on specifics. In general,
+       * this shows any Documents which should be actively relevant at a glance in this Document's sheet or preview.
+       * @type {TypeCollection<TeriockActiveEffect|TeriockItem>}
+       */
+      this.previewed = new ChildCollection("previewed", this, this._previewedSource, {
+        types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
+      });
+      super._initialize(options);
     }
 
     /** @inheritDoc */
@@ -214,23 +190,6 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
-     * Resolved array containing all children.
-     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
-     */
-    async getChildArray() {
-      return resolveDocuments(this.childArray);
-    }
-
-    /**
-     * Resolved collection containing all children.
-     * @returns {Promise<TypeCollection>}
-     */
-    async getChildren() {
-      const children = await resolveDocuments(this.childArray);
-      return new TypeCollection(children.map(c => [c._id, c]));
-    }
-
-    /**
      * Get the operation to create child Documents.
      * @param {ChildDocumentName} embeddedName
      * @param {object[]} data
@@ -253,14 +212,6 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
-     * Resolved children, either real or effective.
-     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
-     */
-    async getEffectiveChildren() {
-      return this.getVisibleChildren();
-    }
-
-    /**
      * Roll data.
      * @returns {object}
      */
@@ -277,25 +228,6 @@ export default function CommonDocumentMixin(Base) {
      */
     getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
       return { ...operation, action: "update", documentName: embeddedName, pack: this.pack, parent: this, updates };
-    }
-
-    /**
-     * Resolved visible children.
-     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
-     */
-    async getVisibleChildren() {
-      return resolveDocuments(this.visibleChildren);
-    }
-
-    /**
-     * Check if this document has a child with the given identifier.
-     * @param {TypedIdentifier} identifier
-     * @returns {Promise<boolean>}
-     */
-    async hasChild(identifier) {
-      const parsed = parseIdentifier(identifier);
-      if (!parsed) { return false; }
-      return Boolean((await this.getChildArray()).some(c => c.typedIdentifier === identifier));
     }
 
     /**
@@ -329,10 +261,8 @@ export default function CommonDocumentMixin(Base) {
      * Clear all references to existing visible children so they can be recomputed.
      */
     resetChildMaps() {
-      delete this._cache.childArray;
-      delete this._cache.children;
-      delete this._cache.visibleChildren;
-      delete this._cache.visibleChildrenByType;
+      this.children.resetDocuments(this._childrenSource);
+      this.previewed.resetDocuments(this._previewedSource);
     }
 
     /**
@@ -349,7 +279,7 @@ export default function CommonDocumentMixin(Base) {
      */
     async toggleChild(identifier, options = {}) {
       if (!parseIdentifier(identifier)) { return; }
-      const hasChild = await this.hasChild(identifier);
+      const hasChild = this.children.identifiers.has(identifier);
       if (hasChild && options.active) { return true; }
       else if (hasChild && !options.active) {
         await ensureNoChildren(this, [identifier]);

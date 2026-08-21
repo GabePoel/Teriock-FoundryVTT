@@ -189,7 +189,7 @@ export default function SpeciesTransformationPart(Base) {
       else if (this.transformation.img) { this.transformation.ring = false; }
       // Abilities from minor transformations are not proficient.
       if (this.isTransformation && this.transformationEffect?.system.transformation.level === "minor") {
-        this.parent.abilities.forEach((a) => a.system.competence.raw = 0);
+        this.parent.previewed.getTypeSync("ability").forEach((a) => a.system.competence.raw = 0);
       }
     }
 

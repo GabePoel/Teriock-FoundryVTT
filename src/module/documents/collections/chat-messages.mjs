@@ -8,7 +8,6 @@ const { ChatMessages } = foundry.documents.collections;
 
 /**
  * @mixes BaseWorldCollection
- * @implements {TypeCollection<TeriockChatMessage, TeriockChatMessage>}
  * @implements {DocumentCollection<TeriockChatMessage>}
  */
 export default class TeriockChatMessages extends BaseWorldCollectionMixin(ChatMessages) {}

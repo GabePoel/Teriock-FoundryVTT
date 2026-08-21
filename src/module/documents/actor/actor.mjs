@@ -6,6 +6,7 @@ import { mixClasses } from "../../helpers/construction.mjs";
 import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
 import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
+import { ChildCollection } from "../collections/_module.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -98,6 +99,32 @@ export default class TeriockActor
     return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
+  /** @inheritDoc */
+  get _childrenSource() {
+    return [
+      ...super._childrenSource,
+      ...(this.effects?.contents || []).filter(e => !e.sup),
+      ...(this.items?.contents || []).filter(i => !i.sup),
+    ];
+  }
+
+  /**
+   * Modifiable source.
+   * @returns {(TeriockActiveEffect|TeriockItem)[]}
+   */
+  get _modifiableSource() {
+    return [...this.allApplicableEffects(), ...this.items.contents];
+  }
+
+  /** @inheritDoc */
+  get _previewedSource() {
+    if (!game.teriock.identifiers.initialized) { game.teriock.actorsNeedingBasicAbilities.add(this); }
+    return [
+      ...this._modifiableSource.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM),
+      ...game.teriock.basicAbilities,
+    ];
+  }
+
   /**
    * Store of pending item operations staged for the next database write.
    * @returns {{itemCreations: Set<UUID<TeriockItem>|TypedIdentifier>, itemDeletions: Set<ID<TeriockItem>>}}
@@ -174,17 +201,6 @@ export default class TeriockActor
   /** @inheritDoc */
   get isTop() {
     return true;
-  }
-
-  /**
-   * All modifiable children, visible or otherwise.
-   * @returns {(TeriockActiveEffect|TeriockItem)[]}
-   */
-  get modifiableChildren() {
-    if (!this._cache.modifiableChildren) {
-      this._cache.modifiableChildren = [...this.allApplicableEffects(), ...this.items.contents];
-    }
-    return this._cache.modifiableChildren;
   }
 
   /**
@@ -304,8 +320,15 @@ export default class TeriockActor
   }
 
   /** @inheritDoc */
-  _makeVisibleChildrenArray() {
-    return this.modifiableChildren.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM);
+  _initialize(options = {}) {
+    /**
+     * Descendant documents that can be modified by ActiveEffect changes.
+     * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
+     */
+    this.modifiable = new ChildCollection("modifiable", this, this._modifiableSource, {
+      types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
+    });
+    super._initialize(options);
   }
 
   /**
@@ -375,11 +398,6 @@ export default class TeriockActor
   async fireHookTrigger(trigger, options = {}) {
     if (!this.shouldFireTriggers) { return; }
     return this.hookCall(trigger, options);
-  }
-
-  /** @inheritDoc */
-  async getEffectiveChildren() {
-    return [...(await super.getEffectiveChildren()), ...game.teriock.basicAbilities];
   }
 
   /** @inheritDoc */
@@ -481,7 +499,7 @@ export default class TeriockActor
   /** @inheritDoc */
   resetChildMaps() {
     super.resetChildMaps();
-    delete this._cache.modifiableChildren;
+    this.modifiable?.resetDocuments(this._modifiableSource);
   }
 
   /**

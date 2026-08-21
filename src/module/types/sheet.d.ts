@@ -1,12 +1,12 @@
 import { MechanicPseudoDocument } from "../data/pseudo-documents/abstract/_module.mjs";
-import { TypeCollection } from "../documents/collections/_module.mjs";
+import { PseudoCollection } from "../data/pseudo-documents/collections/_module.mjs";
 
 declare global {
   namespace Teriock.Sheet {
     export type MechanicCollectionConfig = {
       addLabel: string;
       baseClass: typeof MechanicPseudoDocument;
-      collection: TypeCollection<ID<MechanicPseudoDocument>, MechanicPseudoDocument>;
+      collection: PseudoCollection<MechanicPseudoDocument>;
       hint: string;
       icon: string;
       id: string;

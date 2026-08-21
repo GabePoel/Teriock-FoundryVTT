@@ -8,7 +8,6 @@ const { Journal } = foundry.documents.collections;
 
 /**
  * @mixes BaseWorldCollection
- * @implements {TypeCollection<TeriockJournalEntry, TeriockJournalEntry>}
  * @implements {DocumentCollection<TeriockJournalEntry>}
  */
 export default class TeriockJournal extends BaseWorldCollectionMixin(Journal) {}

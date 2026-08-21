@@ -38,6 +38,12 @@ export default class TeriockManager {
   }
 
   /**
+   * Actors that need basic abilities added to them once ready.
+   * @type {Set<TeriockActor>}
+   */
+  actorsNeedingBasicAbilities = new Set();
+
+  /**
    * Whether i18n localization is ready.
    * @type {boolean}
    */
@@ -111,8 +117,10 @@ export default class TeriockManager {
   initializeIdentifiers() {
     this.#registries.identifiers._initialize();
     this.#registries.identifiers.initializing.then(async () => {
-      this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities")).abilities;
+      this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities"))?.children.documentsByType.ability;
       game.tables.forEach(t => t.prepareData());
+      for (const a of this.actorsNeedingBasicAbilities) { a.resetChildMaps(); }
+      this.actorsNeedingBasicAbilities.clear();
     });
   }
 

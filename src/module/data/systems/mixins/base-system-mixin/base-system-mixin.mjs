@@ -33,7 +33,7 @@ export default function BaseSystemMixin(Base) {
 
     /**
      * Cached pseudo-document collections map.
-     * @type {Record<string, TypeCollection>}
+     * @type {Record<string, PseudoCollection>}
      */
     #pseudoCollections;
 

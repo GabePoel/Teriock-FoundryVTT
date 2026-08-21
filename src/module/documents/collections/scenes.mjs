@@ -8,7 +8,6 @@ const { Scenes } = foundry.documents.collections;
 
 /**
  * @mixes BaseWorldCollection
- * @implements {TypeCollection<TeriockScene, TeriockScene>}
  * @implements {DocumentCollection<TeriockScene>}
  * @property {TeriockScene|null} viewed
  */
