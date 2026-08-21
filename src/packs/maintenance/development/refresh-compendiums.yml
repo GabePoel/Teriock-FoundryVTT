@@ -1,19 +1,20 @@
 _id: c65e729ad2ff19f2
 _key: "!macros!c65e729ad2ff19f2"
 command: >-
-  const packIds = scope?.packIds ?? []; let packs; if (packIds.length) packs = packIds.map((p) => game.packs.get(p));
-  else packs = await teriock.applications.dialogs.selectCompendiumsDialog(); await
-  teriock.helpers.utils.progressBar(packs, _loc("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"), /** @param
+  const packIds = scope?.packIds ?? []; let packs; if (packIds.length) { packs = packIds.map((p) => game.packs.get(p));
+  } else { packs = await teriock.applications.dialogs.selectCompendiumsDialog(); } await
+  teriock.helpers.utils.progressBar( packs, _loc("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"), /** @param
   {CompendiumCollection<TeriockDocument>} p */ async (p) => { if (!p.locked) { await p.getIndex(); const indexes =
-  p.index.contents.filter((d) => !d?.system?._sup).sort(teriock.helpers.sort.pathSorterFactory("name")) await
-  teriock.helpers.utils.progressBar(indexes, _loc("TERIOCK.DIALOGS.RefreshCompendium.messageNamed", { name:
+  p.index.contents.filter((d) => !d?.system?._sup).sort( teriock.helpers.sort.pathSorterFactory("name"), ); await
+  teriock.helpers.utils.progressBar( indexes, _loc("TERIOCK.DIALOGS.RefreshCompendium.messageNamed", { name:
   _loc(p.title) }), async (i) => { const doc = await teriock.helpers.resolve.resolveDocument(i); if
   (doc?.defaultIdentifier) { const identifier = doc.defaultIdentifier; await doc.update({ "system.identifier":
   identifier }); } if (typeof doc?.system?.refreshFromSource === "function") { const options = {}; if (p.collection ===
   "teriock.magicItems") { options.deleteChildren = false; options.recursive = false; } const docSource = await
   fromUuid(doc?._stats.compendiumSource); await doc?.system.refreshFromSource(docSource, options); if (p.collection ===
-  "teriock.magicItems") { for (const child of (await doc?.getChildArray()) || []) { const source = await
-  fromUuid(child._stats.compendiumSource); await child.system.refreshFromSource(source); } } } }, { batch: 20 }); } });
+  "teriock.magicItems") { for (const child of (await doc?.children?.getContents?.()) || []) { const source = await
+  fromUuid(child._stats.compendiumSource); await child.system.refreshFromSource(source); } } } }, { batch: 20 }, ); } },
+  );
 folder: 35429c9dc2319aea
 img: icons/svg/portal.svg
 name: Refresh Compendiums

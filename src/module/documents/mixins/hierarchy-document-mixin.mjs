@@ -330,7 +330,7 @@ export default function HierarchyDocumentMixin(Base) {
       // deleted separately. Only remaining documents get deleted. This sucks but IDK a better solution.
       if (this.checkEditor(userId)) {
         this.allSubs.getContents().then((subs) =>
-          this.constructor.deleteDocuments(subs.contents.filter((s) => s?.persisted).map((s) => s._id), {
+          this.constructor.deleteDocuments(subs.filter((s) => s?.persisted).map((s) => s._id), {
             pack: this.compendium?.collection,
             parent: this.parent,
           })
