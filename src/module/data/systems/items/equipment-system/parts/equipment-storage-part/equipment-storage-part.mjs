@@ -316,7 +316,7 @@ export default function EquipmentStoragePart(Base) {
     async groupUnstackDialog() {
       if (!this.consumable || !this.quantity.value) { return; }
       const content = document.createElement("div");
-      const amountField = new NumberField({
+      const amountField = new fields.NumberField({
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.hint"),
         initial: 1,
         integer: true,
