@@ -105,7 +105,7 @@ export function expandDocumentDataArray(data, sup = null, operation = {}, option
   operation.knownSubs ??= new Set();
   const result = [];
   for (const d of data) {
-    const newId = options.keepId && !sup && d._id ? d._id : foundry.utils.randomID();
+    const newId = (operation.keepId || options.keepId) && !sup && d._id ? d._id : foundry.utils.randomID();
     if (sup && !(operation?.keepSubIds === false)) { foundry.utils.setProperty(d, "_id", newId); }
     if (!sup && !(operation?.keepId === false)) { foundry.utils.setProperty(d, "_id", newId); }
     if (options.inplace) { foundry.utils.setProperty(d, "_id", newId); }

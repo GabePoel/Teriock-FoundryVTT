@@ -63,35 +63,35 @@ export default function ActorStatsPart(Base) {
       const autoCrit = statCrit && !protCrit && !protDown && !autoDead;
 
       if (hpDead && !protDead && !protDown) {
-        this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp");
+        this._addVirtualConditions(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp");
       }
       if (mpDead && !protDead && !protDown) {
-        this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp");
+        this._addVirtualConditions(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp");
       }
       if (hpCrit && !protCrit && !protDown && !autoDead) {
-        this._addVirtualStatuses(
+        this._addVirtualConditions(
           ["criticallyWounded", "down"],
           "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeHp",
         );
       }
       if (mpCrit && !protCrit && !protDown && !autoDead) {
-        this._addVirtualStatuses(
+        this._addVirtualConditions(
           ["criticallyWounded", "down"],
           "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeMp",
         );
       }
       if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
         if (this.hp.value === 0) {
-          this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp");
+          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp");
         } else {
-          this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp");
+          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp");
         }
       }
       if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
         if (this.mp.value === 0) {
-          this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp");
+          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp");
         } else {
-          this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp");
+          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp");
         }
       }
 

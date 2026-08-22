@@ -5,3 +5,4 @@ export * as collections from "./collections/_module.mjs";
 export * as expirations from "./expirations/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as StatDie } from "./stat-die/stat-die.mjs";
+export { default as VirtualCondition } from "./virtual-condition/virtual-condition.mjs";

@@ -70,7 +70,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
         docs: this.document.effects.filter(e => ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus),
         empty: TERIOCK.config.document.effect.plural.toLowerCase(),
         optional: true,
-      }, { docs: await this._virtualConditions(), empty: TERIOCK.config.document.condition.plural.toLowerCase() }];
+      }, {
+        docs: this.document.system.virtualConditions.contents,
+        empty: TERIOCK.config.document.condition.plural.toLowerCase(),
+      }];
     }
 
     /**

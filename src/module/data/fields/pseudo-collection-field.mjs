@@ -1,7 +1,7 @@
-import { TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
+import { BasePseudoDocument, TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
 import { PseudoCollection } from "../pseudo-documents/collections/_module.mjs";
 
-const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
+const { EmbeddedDataField, TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
 /**
  * @import { DataFieldContext, DataFieldOptions } from "@common/data/_types.mjs";
@@ -28,12 +28,16 @@ export default class PseudoCollectionField extends TypedObjectField {
    * @param {DataFieldContext} [context]
    */
   constructor(model, options = {}, context = {}) {
-    if (!foundry.utils.isSubclass(model, TypedPseudoDocument)) {
+    if (!foundry.utils.isSubclass(model, BasePseudoDocument)) {
       throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"));
     }
-    const types = options.types;
-    if (!types) { throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes")); }
-    super(new PseudoTypedSchemaField(types), options, context);
+    if (foundry.utils.isSubclass(model, TypedPseudoDocument)) {
+      const types = options.types;
+      if (!types) { throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes")); }
+      super(new PseudoTypedSchemaField(types), options, context);
+    } else {
+      super(new EmbeddedDataField(model, options, context));
+    }
     this.#documentClass = model;
   }
 
@@ -65,8 +69,8 @@ export default class PseudoCollectionField extends TypedObjectField {
     return new PseudoCollection(
       this.name,
       model,
-      Object.values(obj).filter(inst => inst instanceof TypedPseudoDocument),
-      { documentClass: this.documentClass, types: Object.keys(this.options?.types) },
+      Object.values(obj).filter(inst => inst instanceof BasePseudoDocument),
+      { documentClass: this.documentClass, types: Object.keys(this.options?.types ?? {}) },
     );
   }
 }

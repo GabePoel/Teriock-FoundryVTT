@@ -124,6 +124,14 @@ export default class BasePseudoDocument extends BaseDataModel {
   }
 
   /**
+   * If this is visible.
+   * @returns {boolean}
+   */
+  get isViewer() {
+    return this.document.isViewer;
+  }
+
+  /**
    * Label for this pseudo-document.
    * @returns {string}
    */

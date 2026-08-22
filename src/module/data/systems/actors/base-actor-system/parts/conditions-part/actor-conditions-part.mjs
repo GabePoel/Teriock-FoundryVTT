@@ -1,5 +1,7 @@
 import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
+import { PseudoCollectionField } from "../../../../../fields/_module.mjs";
+import { VirtualCondition } from "../../../../../pseudo-documents/_module.mjs";
 import { StatusExpiration } from "../../../../../pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../../../../pseudo-documents/expirations/abstract/_module.mjs";
 
@@ -23,6 +25,11 @@ export default function ActorConditionsPart(Base) {
    */
   class ActorConditionsPart extends Base {
     /** @inheritDoc */
+    static get metadata() {
+      return foundry.utils.mergeObject(super.metadata, { pseudos: { VirtualCondition: "system.virtualConditions" } });
+    }
+
+    /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         conditionInformation: new fields.SchemaField(
@@ -36,6 +43,7 @@ export default function ActorConditionsPart(Base) {
           }),
           { persisted: false },
         ),
+        virtualConditions: new PseudoCollectionField(VirtualCondition),
       });
     }
 
@@ -44,11 +52,7 @@ export default function ActorConditionsPart(Base) {
      */
     #applyEffectConditionReasons() {
       for (const e of this.parent.appliedEffects) {
-        for (const s of e.statuses) {
-          if (e.id.startsWith(s)) { continue; }
-          this.conditionInformation[s]?.reasons.add(e.name);
-          this.conditionInformation[s]?.sources.add(e.uuid);
-        }
+        this._addVirtualConditions(Array.from(e.statuses), e);
       }
     }
 
@@ -79,6 +83,27 @@ export default function ActorConditionsPart(Base) {
       for (const s of cached) { if (!statuses.has(s)) { changed.add(s); } }
       this.parent._cache.statuses = new Set(statuses);
       return changed;
+    }
+
+    /**
+     * Add a virtual condition to this actor.
+     * @param {Teriock.Keys.Condition} status
+     * @param {TeriockDocument|string} source
+     */
+    _addVirtualCondition(status, source) {
+      VirtualCondition.addVirtualCondition(this.parent, status, source);
+      this.parent.statuses.add(status);
+    }
+
+    /**
+     * Add virtual conditions to this actor.
+     * @param {Teriock.Keys.Condition} status
+     * @param {TeriockDocument|string} source
+     */
+    _addVirtualConditions(statuses, source) {
+      for (const status of statuses) {
+        this._addVirtualCondition(status, source);
+      }
     }
 
     /** @inheritDoc */

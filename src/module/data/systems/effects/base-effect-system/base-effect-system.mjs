@@ -208,7 +208,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    const statusAutomations = this.automations.getTypeSync(StatusAutomation.TYPE, { active: true });
+    const statusAutomations = this.automations.getTypeSync(StatusAutomation.TYPE, { active: true, ongoing: true });
     statusAutomations.forEach(a => {
       if (a.relation === "include") { this.parent.statuses.add(a.status); }
     });
