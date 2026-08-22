@@ -6,8 +6,8 @@ const { fields } = foundry.data;
 
 export default class MacroActivation extends BaseActivation {
   /** @inheritDoc */
-  static get ICON() {
-    return icons.document.macro;
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: icons.document.macro });
   }
 
   /** @inheritDoc */

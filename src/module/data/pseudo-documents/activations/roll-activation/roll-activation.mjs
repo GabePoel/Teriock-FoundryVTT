@@ -9,8 +9,8 @@ const { fields } = foundry.data;
 
 export default class RollActivation extends AutomationActivationFactory(RollAutomation) {
   /** @inheritDoc */
-  static get ICON() {
-    return icons.ui.dice;
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: icons.ui.dice });
   }
 
   /** @inheritDoc */
@@ -44,11 +44,6 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   }
 
   /** @inheritDoc */
-  get icon() {
-    return this.display.icon || getRollIcon(this.formula) || super.icon;
-  }
-
-  /** @inheritDoc */
   get label() {
     return (this.display.label
       || _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", { impact: TERIOCK.config.impact[this.impact]?.label })
@@ -58,6 +53,11 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   /** @inheritDoc */
   get tooltip() {
     return this.formula;
+  }
+
+  /** @inheritDoc */
+  get typeIcon() {
+    return this.display.icon || getRollIcon(this.formula) || super.typeIcon;
   }
 
   /** @inheritDoc */

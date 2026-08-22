@@ -499,6 +499,10 @@ export default function HierarchyDocumentMixin(Base) {
      * Render sheets of documents which have control over this.
      */
     renderRelativeSheets() {
+      this.getElder().then((e) => {
+        e?.resetChildMaps();
+        e?.sheet?.render();
+      });
       this.allSups.renderSheets();
       if (this.collection instanceof foundry.documents.collections.CompendiumCollection) {
         this.collection.render();

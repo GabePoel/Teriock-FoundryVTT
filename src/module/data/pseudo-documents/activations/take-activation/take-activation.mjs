@@ -4,8 +4,8 @@ import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
 export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */
-  static get ICON() {
-    return icons.consequence.crit;
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: icons.consequence.crit });
   }
 
   /**

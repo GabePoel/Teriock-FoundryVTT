@@ -20,13 +20,13 @@ import { BaseActivation } from "./abstract/_module.mjs";
  */
 export default class SummonActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /** @inheritDoc */
-  static get ICON() {
-    return TERIOCK.display.icons.document.token;
+  static get LABEL() {
+    return "TERIOCK.ACTIVATIONS.Summon.BUTTON";
   }
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.ACTIVATIONS.Summon.BUTTON";
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.document.token });
   }
 
   /** @inheritDoc */

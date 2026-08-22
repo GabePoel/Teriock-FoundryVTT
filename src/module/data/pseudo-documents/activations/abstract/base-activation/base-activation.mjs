@@ -70,11 +70,6 @@ export default class BaseActivation extends TypedPseudoDocument {
   }
 
   /** @inheritDoc */
-  get icon() {
-    return this.display.icon || super.icon;
-  }
-
-  /** @inheritDoc */
   get label() {
     return this.display.label || super.label;
   }
@@ -141,6 +136,11 @@ export default class BaseActivation extends TypedPseudoDocument {
    */
   get tooltip() {
     return this.display.tooltip || "";
+  }
+
+  /** @inheritDoc */
+  get typeIcon() {
+    return this.display.icon || super.typeIcon;
   }
 
   /**

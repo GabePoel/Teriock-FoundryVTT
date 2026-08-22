@@ -9,13 +9,13 @@ const { fields } = foundry.data;
 
 export default class ChangeQuantityActivation extends BaseActivation {
   /** @inheritDoc */
-  static get ICON() {
-    return icons.pseudoDocument.automation;
+  static get LABEL() {
+    return "TERIOCK.ACTIVATIONS.ChangeQuantity.BUTTON";
   }
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.ACTIVATIONS.ChangeQuantity.BUTTON";
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: icons.pseudoDocument.automation });
   }
 
   /** @inheritDoc */

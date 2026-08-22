@@ -3,8 +3,8 @@ import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
 export default class ChangeMovementActivation extends AutomationActivationFactory(ChangeMovementAutomation) {
   /** @inheritDoc */
-  static get ICON() {
-    return "ms-sprint";
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: "ms-sprint" });
   }
 
   /**

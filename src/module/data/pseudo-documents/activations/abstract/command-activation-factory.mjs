@@ -24,13 +24,13 @@ export default function CommandActivationFactory(entry) {
     }
 
     /** @inheritDoc */
-    get icon() {
-      return this.symbol || getCommandEntryValue(entry, "icon", this.options);
+    get label() {
+      return this.title || getCommandEntryValue(entry, "label", this.options);
     }
 
     /** @inheritDoc */
-    get label() {
-      return this.title || getCommandEntryValue(entry, "label", this.options);
+    get typeIcon() {
+      return this.display.icon || getCommandEntryValue(entry, "icon", this.options) || this.metadata.icon;
     }
 
     /** @inheritDoc */

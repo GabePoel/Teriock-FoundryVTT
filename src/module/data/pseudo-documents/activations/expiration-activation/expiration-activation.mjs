@@ -8,13 +8,13 @@ const { fields } = foundry.data;
  */
 export default class ExpirationActivation extends BaseActivation {
   /** @inheritDoc */
-  static get ICON() {
-    return icons.pseudoDocument.expiration;
+  static get LABEL() {
+    return "TERIOCK.EXPIRATIONS.Base.LABEL";
   }
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.EXPIRATIONS.Base.LABEL";
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: icons.pseudoDocument.expiration });
   }
 
   /** @inheritDoc */

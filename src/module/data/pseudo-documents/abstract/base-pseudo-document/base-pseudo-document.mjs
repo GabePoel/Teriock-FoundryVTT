@@ -12,14 +12,6 @@ const { fields } = foundry.data;
  */
 export default class BasePseudoDocument extends BaseDataModel {
   /**
-   * Icon for this pseudo-document class.
-   * @returns {string}
-   */
-  static get ICON() {
-    return icons.ui.document;
-  }
-
-  /**
    * Label for this pseudo-document class.
    * @returns {string}
    */
@@ -29,10 +21,18 @@ export default class BasePseudoDocument extends BaseDataModel {
 
   /**
    * Metadata.
-   * @returns {{documentName: string, icon: string, label: string, sheetClass: null}}
+   * @returns {Teriock.Metadata.PseudoDocumentMetadata}
    */
   static get metadata() {
-    return { documentName: "", icon: "", label: "", sheetClass: null };
+    return {
+      documentName: "",
+      embed: false,
+      icon: icons.ui.document,
+      panel: false,
+      pseudos: {},
+      tags: {},
+      type: "base",
+    };
   }
 
   /**
@@ -108,14 +108,6 @@ export default class BasePseudoDocument extends BaseDataModel {
   }
 
   /**
-   * Icon for this pseudo-document.
-   * @returns {string}
-   */
-  get icon() {
-    return this.constructor.ICON;
-  }
-
-  /**
    * The ID of this pseudo-document.
    * @returns {ID<BasePseudoDocument>}
    */
@@ -150,6 +142,14 @@ export default class BasePseudoDocument extends BaseDataModel {
    */
   get metadata() {
     return this.constructor.metadata;
+  }
+
+  /**
+   * Icon for this pseudo-document.
+   * @returns {string}
+   */
+  get typeIcon() {
+    return this.metadata.icon;
   }
 
   /**
