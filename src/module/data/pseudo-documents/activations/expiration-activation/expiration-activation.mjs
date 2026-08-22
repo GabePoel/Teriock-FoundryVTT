@@ -36,12 +36,6 @@ export default class ExpirationActivation extends BaseActivation {
   }
 
   /** @inheritDoc */
-  get icon() {
-    return this.display.icon
-      || (this.expirationDocument?.method === "roll" ? icons.ui.dice : icons.pseudoDocument.expiration);
-  }
-
-  /** @inheritDoc */
   get label() {
     return this.display.label
       || _loc(
@@ -49,6 +43,13 @@ export default class ExpirationActivation extends BaseActivation {
           ? "TERIOCK.EXPIRATIONS.Base.EXECUTION.roll"
           : "TERIOCK.EXPIRATIONS.Base.EXECUTION.expire",
       );
+  }
+
+  /** @inheritDoc */
+  get typeIcon() {
+    return this.display.icon
+      || (this.expirationDocument?.method === "roll" ? icons.ui.dice : icons.pseudoDocument.expiration)
+      || this.metadata.icon;
   }
 
   /** @inheritDoc */

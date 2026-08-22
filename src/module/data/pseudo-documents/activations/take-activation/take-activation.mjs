@@ -57,17 +57,17 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   }
 
   /** @inheritDoc */
-  get icon() {
-    return this.display.icon || this.#entry?.icon || this.constructor.ICON;
-  }
-
-  /** @inheritDoc */
   get label() {
     return this.display.label || this.#entry?.take || this.constructor.LABEL;
   }
 
   get tooltip() {
     return typeof this.#amount === "number" ? this.#amount.toString() : "";
+  }
+
+  /** @inheritDoc */
+  get typeIcon() {
+    return this.display.icon || this.#entry?.icon || this.metadata.icon;
   }
 
   /** @inheritDoc */

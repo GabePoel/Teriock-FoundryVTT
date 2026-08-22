@@ -16,13 +16,13 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
   }
 
   /** @inheritDoc */
-  get icon() {
-    return this.symbol || CONFIG.Token.movement.actions[this.movementAction]?.icon || this.constructor.ICON;
+  get label() {
+    return this.display.label || ChangeMovementActivation.getLabel(this.movementAction) || this.constructor.LABEL;
   }
 
   /** @inheritDoc */
-  get label() {
-    return this.display.label || ChangeMovementActivation.getLabel(this.movementAction) || this.constructor.LABEL;
+  get typeIcon() {
+    return this.symbol || CONFIG.Token.movement.actions[this.movementAction]?.icon || this.metadata.icon;
   }
 
   /** @inheritDoc */
