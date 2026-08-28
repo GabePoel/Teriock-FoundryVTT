@@ -1,3 +1,4 @@
+import * as dataMixins from "../../data/mixins/_module.mjs";
 import { CompetenceModel } from "../../data/models/scaling-models/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
@@ -10,10 +11,10 @@ const { Combatant } = foundry.documents;
 /**
  * The Teriock Combatant implementation.
  * @mixes BaseDocument
- * @mixes EmbedCardDocument
+ * @mixes EmbeddableData
  */
 export default class TeriockCombatant
-  extends mixClasses(Combatant, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)
+  extends mixClasses(Combatant, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin)
 {
   /**
    * Competence for this combatant's initiative.

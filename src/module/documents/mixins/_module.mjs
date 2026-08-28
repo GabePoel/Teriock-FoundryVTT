@@ -1,7 +1,6 @@
 export { default as BaseDocumentMixin } from "./base-document-mixin.mjs";
 export { default as ChildDocumentMixin } from "./child-document-mixin.mjs";
 export { default as CommonDocumentMixin } from "./common-document-mixin.mjs";
-export { default as EmbedCardDocumentMixin } from "./embed-card-document-mixin.mjs";
 export { default as HierarchyDocumentMixin } from "./hierarchy-document-mixin.mjs";
 export { default as RetrievalDocumentMixin } from "./retrieval-document-mixin.mjs";
 export { default as UsableDocumentMixin } from "./usable-document-mixin.mjs";

@@ -1,4 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
+import * as dataMixins from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -12,10 +13,10 @@ const { TokenDocument } = foundry.documents;
 /**
  * The Teriock TokenDocument implementation.
  * @mixes BaseDocument
- * @mixes EmbedCardDocument
+ * @mixes EmbeddableData
  */
 export default class TeriockTokenDocument
-  extends mixClasses(TokenDocument, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)
+  extends mixClasses(TokenDocument, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin)
 {
   /** @inheritDoc */
   get embedParts() {

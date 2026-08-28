@@ -1,10 +1,9 @@
 import * as dataMixins from "../../data/mixins/_module.mjs";
-import { PanelDataMixin } from "../../data/mixins/_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 import { ChildCollection, TypeCollection } from "../collections/_module.mjs";
-import * as documentMixins from "./_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -23,14 +22,12 @@ import * as documentMixins from "./_module.mjs";
  */
 export default function CommonDocumentMixin(Base) {
   /**
-   * @mixes EmbedCardDocument
+   * @mixes EmbeddableData
    * @mixes PanelData
    * @mixes PropagationData
    * @mixin
    */
-  class CommonDocument
-    extends PanelDataMixin(documentMixins.EmbedCardDocumentMixin(dataMixins.PropagationDataMixin(Base)))
-  {
+  class CommonDocument extends mixClasses(Base, dataMixins.PropagationDataMixin, dataMixins.EmbeddableDataMixin, dataMixins.PanelDataMixin) {
     /**
      * Get the default image for some type of this document.
      * @param {string} type

@@ -10,15 +10,15 @@ import { resolveDocument } from "../../helpers/resolve.mjs";
  * Mixin that provides support for embedding as a card.
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, EmbedCardDocument>}
+ * @returns {MixinResult<T, EmbeddableData>}
  * @todo Turn into data mixin.
  */
-export default function EmbedCardDocumentMixin(Base) {
+export default function EmbeddableDataMixin(Base) {
   /**
    * @implements {Teriock.Embeds.Embeddable}
    * @mixin
    */
-  class EmbedCardDocument extends Base {
+  class EmbeddableData extends Base {
     /** @inheritDoc */
     get _embedActions() {
       const actions = { openDoc: { primary: async () => this.sheet.render(true) } };
@@ -140,9 +140,9 @@ export default function EmbedCardDocumentMixin(Base) {
           });
         });
       }
-      super.onEmbed(element);
+      super.onEmbed?.(element);
     }
   }
 
-  return EmbedCardDocument;
+  return EmbeddableData;
 }

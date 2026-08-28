@@ -21,9 +21,4 @@ export default class StackingAffinity extends BaseAffinity {
   get _formPaths() {
     return [...super._formPaths, "amount"];
   }
-
-  /** @inheritDoc */
-  getAmount() {
-    return this.amount;
-  }
 }

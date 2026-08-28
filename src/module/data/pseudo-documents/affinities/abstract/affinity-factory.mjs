@@ -21,9 +21,15 @@ function getRootAffinity(config) {
  */
 export default function AffinityFactory(type) {
   const name = type.capitalize();
+  const config = affinityConfig.types[type];
   class Affinity extends getRootAffinity(affinityConfig.types[type]) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, `TERIOCK.AFFINITIES.${name}`];
+
+    /** @inheritDoc */
+    static get Execution() {
+      return config.competence ? teriock.executions.activity.ResistanceExecution : super.Execution;
+    }
 
     /** @inheritDoc */
     static get LABEL() {
@@ -38,10 +44,8 @@ export default function AffinityFactory(type) {
     /** @inheritDoc */
     get formTips() {
       const tips = super.formTips;
-      if (affinityConfig.types[type].tips) {
-        for (const tip of affinityConfig.types[type].tips) {
-          tips.push({ level: tip.level, text: _loc(tip.text, affinityConfig.types[type]) });
-        }
+      if (config.tips) {
+        for (const tip of config.tips) { tips.push({ level: tip.level, text: _loc(tip.text, config) }); }
       }
       return tips;
     }

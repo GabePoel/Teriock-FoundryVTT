@@ -14,8 +14,8 @@ export default class AffinityExecution extends BaseExecution {
    */
   constructor(data = {}, options = {}) {
     super(data, options);
-    this.type = options.type ?? "immunity";
-    this.affinity = options.affinity ?? null;
+    this.type = options.type ?? this.source.type ?? "immunity";
+    this.affinity = options.affinity ?? this.source ?? null;
     this.wrappers = options.wrappers
       ?? [this.affinity?.typeLabel, this.affinity?.categoryLabel, this.affinity?.name].filter(Boolean);
     this.wrappers.push(
@@ -66,7 +66,7 @@ export default class AffinityExecution extends BaseExecution {
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push({
-      _id: this.journalEntryPage?.id,
+      _id: foundry.utils.randomID(),
       bars: [{ icon: this.icon, label: this.name, wrappers: this.wrappers }],
       blocks: [{ text: this.journalEntryPage?.text?.content, title: this.name }],
       color: foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),

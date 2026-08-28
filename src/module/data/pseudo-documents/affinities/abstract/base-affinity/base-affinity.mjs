@@ -1,11 +1,10 @@
-import { TeriockContextMenu } from "../../../../../applications/ux/_module.mjs";
 import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
 import { makeIcon } from "../../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { dotJoin } from "../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
-import { PanelDataMixin } from "../../../../mixins/_module.mjs";
+import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
 import { CritMechanicMixin } from "../../../mixins/_module.mjs";
 
@@ -16,12 +15,21 @@ const { fields } = foundry.data;
  * @implements Teriock.Embeds.Embeddable
  * @mixes CritMechanic
  * @mixes PanelData
+ * @mixes UsableData
+ * @mixes EmbeddableData
  * @property {BaseEffectSystem} parent
  * @property {TeriockActiveEffect} document
  */
-export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(MechanicPseudoDocument)) {
+export default class BaseAffinity
+  extends EmbeddableDataMixin(UsableDataMixin(PanelDataMixin(CritMechanicMixin(MechanicPseudoDocument))))
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AFFINITIES.Base"];
+
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.activity.AffinityExecution;
+  }
 
   /** @inheritDoc */
   static get LABEL() {
@@ -76,6 +84,19 @@ export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(Mecha
     return foundry.utils.getProperty(TERIOCK, TERIOCK.config.affinity.categories[this.category]?.choices || {}) || {};
   }
 
+  /**
+   * @inheritDoc
+   * @todo Deal with this duplicated code.
+   */
+  get _embedActions() {
+    return Object.assign(super._embedActions, {
+      useDoc: {
+        primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+        secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+      },
+    });
+  }
+
   /** @inheritDoc */
   get _embedIcons() {
     if (!this.#config.competence) { return []; }
@@ -99,6 +120,7 @@ export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(Mecha
   /** @inheritDoc */
   get embedParts() {
     return {
+      action: "useDoc",
       draggable: false,
       icons: this._embedIcons,
       identifier: this.typedIdentifier,
@@ -107,6 +129,7 @@ export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(Mecha
       subtitle: dotJoin([this.typeLabel, this.categoryLabel]),
       text: this.sourceName,
       title: this.name,
+      usable: true,
       uuid: this.uuid,
     };
   }
@@ -183,12 +206,10 @@ export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(Mecha
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
-  /**
-   * The amount this affinity contributes to an actor's total. Only meaningful for stacking affinities.
-   * @returns {number}
-   */
-  getAmount() {
-    return 0;
+  /** @inheritDoc */
+  async _use(data = {}, options = {}) {
+    options.competence = this.getCompetence();
+    return super._use(data, options);
   }
 
   /** @inheritDoc */
@@ -218,28 +239,6 @@ export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(Mecha
     });
   }
 
-  /**
-   * @inheritDoc
-   * @todo Remove duplicated {@link VirtualCondition} code
-   */
-  onEmbed(element) {
-    const menuEntries = this.getEmbedContextMenuEntries();
-    if (!menuEntries.length) {
-      return;
-    }
-    element.addEventListener("contextmenu", (event) => {
-      const action = /** @type {HTMLElement} */ (event.target).closest("[data-action]")?.dataset.action;
-      if (action && action === this.embedParts.action) {
-        event.stopImmediatePropagation();
-      }
-    });
-    new TeriockContextMenu(element, ".teriock-block", menuEntries, {
-      eventName: "contextmenu",
-      fixed: true,
-      jQuery: false,
-    });
-  }
-
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
@@ -253,22 +252,5 @@ export default class BaseAffinity extends PanelDataMixin(CritMechanicMixin(Mecha
           fallback,
         ); }
     }
-  }
-
-  /**
-   * The data an actor stores for this affinity.
-   * @returns {Teriock.Affinities.EntryData}
-   */
-  toEntry() {
-    return {
-      amount: this.getAmount(),
-      category: this.category,
-      competence: this.getCompetence(),
-      img: this.img,
-      providers: [this.document?.name].filter(Boolean),
-      sources: [this.document?.uuid].filter(Boolean),
-      type: this.type,
-      value: this.value,
-    };
   }
 }
