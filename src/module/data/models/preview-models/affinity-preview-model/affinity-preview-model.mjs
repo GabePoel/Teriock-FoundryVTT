@@ -6,7 +6,7 @@ import { nullString } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
 /**
- * Previews for {@link VirtualAffinityModel}s. This has different filters than the normal document ones.
+ * Previews for {@link Affinity}. This has different filters than the normal document ones.
  * @inheritDoc
  */
 export default class AffinityPreviewModel extends BasePreviewModel {
@@ -54,8 +54,8 @@ export default class AffinityPreviewModel extends BasePreviewModel {
 
   /**
    * @inheritDoc
-   * @param {VirtualAffinityModel[]} affinities
-   * @returns {Generator<VirtualAffinityModel, void, void>}
+   * @param {Affinity[]} affinities
+   * @returns {Generator<Affinity, void, void>}
    */
   *filterDocuments(affinities) {
     for (const affinity of affinities) {

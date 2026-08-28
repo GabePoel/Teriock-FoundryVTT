@@ -1,4 +1,3 @@
-import { VirtualAffinityModel } from "../data/models/_module.mjs";
 import { AttributeModel, TradecraftModel } from "../data/models/modifier-models/_module.mjs";
 import { BaseExpiration } from "../data/pseudo-documents/expirations/abstract/_module.mjs";
 
@@ -51,7 +50,7 @@ declare global {
 
     export type AffinityExecutionOptions = ExecutionOptions & {
       /** The specific affinity being rolled, when the roll came from one. */
-      affinity?: VirtualAffinityModel | null;
+      affinity?: Affinity | null;
       type?: AffinityType;
       wrappers?: string[];
     };

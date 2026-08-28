@@ -20,7 +20,10 @@ export default class PseudoCollection extends TypeCollection {
    * @returns {boolean}
    */
   _checkIfActive(pseudo) {
-    return pseudo?.active ?? true;
+    // Special handling for actor collection aliases. A less hacky way to do this might be to have a separate
+    // `ActorPseudoCollection` class but then that would involve changing the data model (or removing it from there?)
+    return (this.model?.document?.documentName === "Actor" ? pseudo?.document.active : true)
+      && (pseudo?.active ?? true);
   }
 
   /**

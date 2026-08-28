@@ -122,6 +122,7 @@ export default class Panel extends BasePseudoDocument {
    * @returns {Promise<Teriock.Panels.PanelParts>}
    */
   async prepareContext(options = {}) {
+    // Todo: Fix draggable handling. Maybe needs a new DragDrop handler?
     const context = Object.assign(this.toObject(), { color: this.color });
     const { collapseTables = true, keepId = true, usePanelRelativeTo = true } = options;
     if (options.noAssociations) { context.associations = []; }
@@ -133,9 +134,9 @@ export default class Panel extends BasePseudoDocument {
       if (!wrappers.length) { continue; }
       bars.push({ icon: bar?.icon, label: bar?.label, wrappers });
     }
-    for (const association of context.associations) {
-      for (const card of association.cards) {
-        if (card.documentUuid) {
+    await Promise.all(
+      context.associations.flatMap(association =>
+        association.cards.filter(card => card.documentUuid).map(async card => {
           const doc = await fromUuid(card.documentUuid);
           Object.assign(card, {
             draggable: doc?.isViewer,
@@ -144,9 +145,9 @@ export default class Panel extends BasePseudoDocument {
             pack: doc?.pack,
             type: doc?.documentName,
           });
-        }
-      }
-    }
+        })
+      ),
+    );
     context.bars = bars;
     if (!context._id || !keepId) {
       context._id = toId(`${this.documentUuid}-${this.name}-${this.img}-${this.icon}`, { hash: true });
@@ -160,7 +161,6 @@ export default class Panel extends BasePseudoDocument {
         return b;
       }),
     );
-    console.log(context);
     return context;
   }
 

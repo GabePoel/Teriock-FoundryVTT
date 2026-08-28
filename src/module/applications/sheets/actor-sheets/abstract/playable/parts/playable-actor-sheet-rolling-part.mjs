@@ -1,5 +1,3 @@
-import { VirtualAffinityModel } from "../../../../../../data/models/_module.mjs";
-
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  */
@@ -8,6 +6,7 @@ import { VirtualAffinityModel } from "../../../../../../data/models/_module.mjs"
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, PlayableActorSheetRollingPart>}
+ * @todo Rename this
  */
 export default function PlayableActorSheetRollingPart(Base) {
   /**
@@ -19,12 +18,10 @@ export default function PlayableActorSheetRollingPart(Base) {
      * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
+     * @todo Fix the heck out of this. (This probably needs to happen within `BaseAffinity`.)
      */
     static async #onRollAffinity(event, target) {
-      const [virtualName, id] = (target.closest(".teriock-block")?.dataset.uuid ?? "").split(".");
-      const affinity = virtualName === VirtualAffinityModel.VIRTUAL_NAME
-        ? this.actor.system.derivedAffinities[id]
-        : null;
+      const affinity = await fromUuid(target.closest(".teriock-block")?.dataset.uuid);
       const type = affinity?.type ?? target.closest("[data-affinity-type]")?.dataset.affinityType;
       if (!type) { return; }
       await this.actor.system.rollAffinity(type, { affinity, event });

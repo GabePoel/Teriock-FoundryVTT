@@ -1,6 +1,3 @@
-import { TeriockChatMessage } from "../_module.mjs";
-import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
-import { Panel } from "../../data/pseudo-documents/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { toId } from "../../helpers/string.mjs";
 
@@ -11,14 +8,14 @@ import { toId } from "../../helpers/string.mjs";
 /**
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, PanelDocument>}
+ * @returns {MixinResult<T, PanelData>}
  * @todo Make this into a data mixin and remove virtual affinities.
  */
-export default function PanelDocumentMixin(Base) {
+export default function PanelDataMixin(Base) {
   /**
    * @mixin
    */
-  class PanelDocument extends Base {
+  class PanelData extends Base {
     /** @inheritDoc */
     static get documentMetadata() {
       return Object.assign(super.documentMetadata, { tooltip: true });
@@ -68,6 +65,7 @@ export default function PanelDocumentMixin(Base) {
      * @returns {Promise<void>}
      */
     async openPanelSheet() {
+      const PanelSheet = teriock.applications.sheets.utility.PanelSheet;
       let panelSheet = Object.values(this.apps).find((a) => a instanceof PanelSheet);
       if (!panelSheet) { panelSheet = new PanelSheet({ document: this }); }
       await panelSheet.render(true);
@@ -76,22 +74,14 @@ export default function PanelDocumentMixin(Base) {
     /** @inheritDoc */
     async toMessage(options = {}) {
       const panel = await this.toPanel();
-      const actor = options?.actor || this.actor || TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
-      const messageData = {
-        speaker: TeriockChatMessage.getSpeaker({ actor }),
-        system: {
-          _src: this.uuid,
-          bars: [],
-          blocks: [],
-          buttons: [],
-          extraContent: "",
-          panels: { [panel.id]: panel.toObject() },
-          source: null,
-          tags: [],
-        },
+      return ChatMessage.implementation.create({
+        speaker: ChatMessage.implementation.getSpeaker({
+          actor: options?.actor ?? this.actor
+            ?? ChatMessage.implementation.getSpeakerActor(ChatMessage.implementation.getSpeaker()),
+        }),
+        system: { _src: this.uuid, panels: { [panel.id]: panel.toObject() } },
         type: "interactive",
-      };
-      return TeriockChatMessage.create(messageData, { defaultMode: true });
+      }, { defaultMode: true });
     }
 
     /**
@@ -100,7 +90,7 @@ export default function PanelDocumentMixin(Base) {
      * @returns {Promise<Panel>}
      */
     async toPanel(data = {}) {
-      return new Panel(Object.assign(await this.getPanelParts(), data));
+      return new teriock.data.pseudoDocuments.Panel(Object.assign(await this.getPanelParts(), data));
     }
 
     /**
@@ -115,5 +105,5 @@ export default function PanelDocumentMixin(Base) {
     }
   }
 
-  return PanelDocument;
+  return PanelData;
 }

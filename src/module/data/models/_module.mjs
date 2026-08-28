@@ -7,4 +7,3 @@ export * from "./settings-models/_module.mjs";
 export { default as StatPoolModel } from "./stat-pool-model/stat-pool-model.mjs";
 export { default as StorageModel } from "./storage-model/storage-model.mjs";
 export * from "./unit-models/_module.mjs";
-export * from "./virtual-models/_module.mjs";

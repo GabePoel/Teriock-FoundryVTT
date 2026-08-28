@@ -97,7 +97,7 @@ export default function ActorConditionsPart(Base) {
 
     /**
      * Add virtual conditions to this actor.
-     * @param {Teriock.Keys.Condition} status
+     * @param {Teriock.Keys.Condition[]} statuses
      * @param {TeriockDocument|string} source
      */
     _addVirtualConditions(statuses, source) {

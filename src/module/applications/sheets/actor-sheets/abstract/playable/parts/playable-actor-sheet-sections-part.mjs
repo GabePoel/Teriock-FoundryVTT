@@ -47,9 +47,8 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupAffinity() {
-      const entries = this.document.system.affinityEntries;
       return AFFINITY_GROUPS.map(group => ({
-        docs: entries.filter(affinity => group.types.includes(affinity.type)),
+        docs: group.types.flatMap(t => this.document.system.affinities.getTypeSync(t, { active: true, ongoing: true })),
         empty: _loc(group.label).toLowerCase(),
         optional: true,
       }));

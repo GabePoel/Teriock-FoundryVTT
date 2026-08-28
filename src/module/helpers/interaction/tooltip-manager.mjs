@@ -105,6 +105,7 @@ export default class TeriockTooltipManager extends TooltipManager {
     if (!this.#allowedDocumentNames) {
       this.#allowedDocumentNames = game.settings.get("teriock", "documentTooltips");
       if (this.#allowedDocumentNames.has("ActiveEffect")) { this.#allowedDocumentNames.add("VirtualCondition"); }
+      if (this.#allowedDocumentNames.has("JournalEntryPage")) { this.#allowedDocumentNames.add("Affinity"); }
     }
     const documentName = foundry.utils.parseUuid(uuid)?.type;
     return this.#allowedDocumentNames.has(documentName);

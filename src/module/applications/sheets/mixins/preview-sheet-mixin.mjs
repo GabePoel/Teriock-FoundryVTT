@@ -1,5 +1,4 @@
 import { BasePreviewModel } from "../../../data/models/preview-models/_module.mjs";
-import { BaseVirtualModel } from "../../../data/models/virtual-models/_module.mjs";
 import { fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
@@ -75,31 +74,11 @@ export default function PreviewSheetMixin(Base) {
     /** @type {Record<string, BasePreviewModel>} */
     #previews = {};
 
-    /**
-     * Rendered virtual models.
-     * @returns {Map<string, Teriock.Embeds.Embeddable>}
-     */
-    #renderedVirtuals() {
-      const virtuals = new Map();
-      for (const preview of Object.values(this.#previews)) {
-        for (const group of preview.groups ?? []) {
-          for (const doc of group.docs ?? []) {
-            if (doc instanceof BaseVirtualModel) { virtuals.set(doc.uuid, doc); }
-          }
-        }
-      }
-      return virtuals;
-    }
-
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-      const virtuals = this.#renderedVirtuals();
       this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
-        const uuid = el.dataset.uuid;
-        const virtual = virtuals.get(uuid);
-        if (virtual) { virtual.onEmbed(el); }
-        else { fromUuid(uuid).then(doc => doc?.onEmbed(el)); }
+        fromUuid(el.dataset.uuid).then(doc => doc?.onEmbed(el));
       });
       for (const preview of Object.values(this.#previews)) { preview.bind(this.element); }
     }

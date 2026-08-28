@@ -11,6 +11,7 @@ import { resolveDocument } from "../../helpers/resolve.mjs";
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, EmbedCardDocument>}
+ * @todo Turn into data mixin.
  */
 export default function EmbedCardDocumentMixin(Base) {
   /**

@@ -8,7 +8,6 @@ import TypedPseudoDocument from "../typed-pseudo-document/typed-pseudo-document.
 const { fields } = foundry.data;
 
 /**
- * @implements {Teriock.PseudoDocuments.MechanicPseudoDocumentData}
  * @mixes PropagationData
  */
 export default class MechanicPseudoDocument extends dataMixins.PropagationDataMixin(TypedPseudoDocument) {
@@ -137,6 +136,8 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this.actor?.getEmbeddedCollection(this.documentName)?.set(this.uuid, this);
+    if (this.document.documentName !== "Actor") {
+      this.actor?.getEmbeddedCollection(this.documentName)?.set(this.uuid, this);
+    }
   }
 }

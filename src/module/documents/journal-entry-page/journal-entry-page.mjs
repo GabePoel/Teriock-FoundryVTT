@@ -1,4 +1,5 @@
 import documentConfig from "../../constants/config/document-config.mjs";
+import { PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { createElement } from "../../helpers/html.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -9,14 +10,14 @@ const { JournalEntryPage } = foundry.documents;
  * The Teriock JournalEntryPage implementation.
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
- * @mixes PanelDocument
+ * @mixes PanelData
  */
 export default class TeriockJournalEntryPage
   extends mixClasses(
     JournalEntryPage,
     documentMixins.BaseDocumentMixin,
     documentMixins.EmbedCardDocumentMixin,
-    documentMixins.PanelDocumentMixin,
+    PanelDataMixin,
   )
 {
   /**

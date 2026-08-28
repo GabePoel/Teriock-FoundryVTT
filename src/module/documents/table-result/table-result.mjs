@@ -1,4 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { Panel } from "../../data/pseudo-documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
@@ -9,14 +10,14 @@ const { TableResult } = foundry.documents;
 /**
  * The Teriock TableResult implementation.
  * @mixes BaseDocument
- * @mixes PanelDocument
+ * @mixes PanelData
  * @mixes EmbedCardDocument
  */
 export default class TeriockTableResult
   extends mixClasses(
     TableResult,
     documentMixins.BaseDocumentMixin,
-    documentMixins.PanelDocumentMixin,
+    PanelDataMixin,
     documentMixins.EmbedCardDocumentMixin,
   )
 {

@@ -169,7 +169,10 @@ export default class VirtualCondition extends BasePseudoDocument {
     }];
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @todo Remove duplicated {@link BaseAffinity} code
+   */
   onEmbed(element) {
     const menuEntries = this.getEmbedContextMenuEntries();
     if (!menuEntries.length) {

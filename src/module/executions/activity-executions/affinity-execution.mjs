@@ -3,7 +3,7 @@ import { BaseExecution } from "../abstract/_module.mjs";
 /**
  * Rolling one of an actor's affinities. Everything it displays comes from the affinity's own configuration, so it
  * works for any type. When the roll came from a specific affinity, that affinity supplies the image and wrappers.
- * @property {VirtualAffinityModel | null} affinity
+ * @property {Affinity | null} affinity
  * @property {AffinityType} type
  * @property {string[]} wrappers
  */
