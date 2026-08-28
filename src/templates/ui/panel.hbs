@@ -9,8 +9,8 @@
       {{/if}}
     >
       <img
-        {{#if (exists uuid)}}
-          data-uuid="{{ uuid }}"
+        {{#if (exists documentUuid)}}
+          data-uuid="{{ documentUuid }}"
         {{/if}}
         src="{{{ img }}}"
         alt="{{{ name }}}"
@@ -96,7 +96,7 @@
                             draggable
                           {{/if}}
                         "
-                        data-uuid="{{{ uuid }}}"
+                        data-uuid="{{{ documentUuid }}}"
                         data-id="{{{ id }}}"
                         data-type="{{{ type }}}"
                         data-pack="{{{ pack }}}"
@@ -106,7 +106,7 @@
                           data-action="openDocument"
                         {{/if}}
                         {{#if makeTooltip}}
-                          data-tooltip-uuid="{{{ uuid }}}"
+                          data-tooltip-uuid="{{{ documentUuid }}}"
                         {{/if}}
                         {{#if (exists tooltip)}}
                           data-tooltip="{{{ tooltip }}}"

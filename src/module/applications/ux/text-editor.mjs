@@ -1,19 +1,9 @@
-import { cleanBars, wrapPanelTables } from "../../helpers/panel.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 
 const { TextEditor } = foundry.applications.ux;
 
 /**
- * @import { DocumentHTMLEmbedConfig, EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
- */
-
-/**
- * @typedef {EnrichmentOptions} PanelEnrichmentOptions
- * @param {boolean} [collapseTables=true]
- * @param {boolean} [noAssociations=false]
- * @param {boolean} [noBars=false]
- * @param {boolean} [noBlocks=false]
- * @param {boolean} [usePanelRelativeTo=true]
+ * @import { DocumentHTMLEmbedConfig } from "@client/applications/ux/text-editor.mjs";
  */
 
 /** @inheritDoc */
@@ -52,53 +42,6 @@ export default class TeriockTextEditor extends TextEditor {
   static createAnchor({ attrs = {}, classes = [], dataset = {}, icon, name } = {}) {
     if (dataset.uuid && game.settings.get("teriock", "contentLinkTooltips")) { dataset.tooltipUuid = dataset.uuid; }
     return super.createAnchor({ attrs, classes, dataset, icon, name });
-  }
-
-  /**
-   * Enrich all the blocks within a panel.
-   * @param {Teriock.Panels.PanelParts} panel
-   * @param {PanelEnrichmentOptions} [options]
-   * @returns {Promise<Teriock.Panels.PanelParts>}
-   */
-  static async enrichPanel(panel, options = {}) {
-    const { collapseTables = true, usePanelRelativeTo = true } = options;
-    panel = foundry.utils.deepClone(panel);
-    if (panel.bars) { panel.bars = cleanBars(panel.bars); }
-    if (panel.uuid && (usePanelRelativeTo || !options?.relativeTo)) {
-      const doc = await fromUuid(panel.uuid);
-      if (doc) {
-        options.relativeTo = doc;
-        options.secrets = doc.isOwner;
-      }
-    }
-    const panelId = panel._id || foundry.utils.randomID(16);
-    panel.blocks = await Promise.all(
-      (panel.blocks ?? []).filter(b => game.user.isGM || !b.gmOnly).map(async (b, i) => {
-        b.text = await this.enrichHTML(b.text, options);
-        b.text = wrapPanelTables(b.text, `panel-${panelId}-block-${i}`, { collapsed: collapseTables });
-        return b;
-      }),
-    );
-    return panel;
-  }
-
-  /**
-   * Convert the panel to an HTML string.
-   * @param {Teriock.Panels.PanelParts} parts
-   * @param {PanelEnrichmentOptions} [options]
-   * @returns {Promise<string>}
-   */
-  static async makeTooltip(parts, options = {}) {
-    if (options?.noBars) { delete parts.bars; }
-    if (options?.noBlocks) { delete parts.blocks; }
-    if (options?.noAssociations) { delete parts.associations; }
-    const tips = options?.relativeTo?.system?.displayTips?.filter(tip =>
-      (tip.level !== "warning" || game.settings.get("teriock", "showSuppressionTipsOnTooltips"))
-      && (tip.level !== "error" || game.settings.get("teriock", "showErrorTipsOnTooltips"))
-    );
-    if (tips?.length) { parts.tips = tips; }
-    parts = await this.enrichPanel(parts, options);
-    return this.renderTemplate("teriock/ui/panel", parts);
   }
 
   /**

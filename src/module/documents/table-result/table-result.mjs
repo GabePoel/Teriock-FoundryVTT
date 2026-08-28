@@ -1,4 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { Panel } from "../../data/pseudo-documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -103,20 +104,10 @@ export default class TeriockTableResult
       wrappers: [this.type],
     });
     if (this.documentUuid) {
-      const index = fromUuidSync(this.documentUuid);
-      parts.associations = [{
-        cards: [{
-          draggable: true,
-          id: index._id,
-          img: index.img,
-          makeTooltip: true,
-          name: index.fullName || index.name,
-          type: index.type || "base",
-          uuid: index.uuid,
-        }],
-        icon: TERIOCK.display.icons.ui.document,
-        title: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.documents"),
-      }];
+      const document = await fromUuid(this.documentUuid);
+      if (document) {
+        parts.associations = [Panel.toAssociation([document], "TERIOCK.SYSTEMS.TableResult.PANELS.documents")];
+      }
     }
     return parts;
   }

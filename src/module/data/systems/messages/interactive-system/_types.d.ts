@@ -1,10 +1,14 @@
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { PseudoCollection } from "../../../pseudo-documents/collections/_module.mjs";
+
+// TODO: Deal with type errors
 
 declare module "./interactive-system.mjs" {
   export default interface InteractiveSystem extends Teriock.Models.BaseMessageSystemData {
     activations: PseudoCollection<Activation>;
     img: string;
-    panels: Teriock.Panels.PanelParts[];
+    // @ts-expect-error No type
+    panels: PseudoCollection<Panel>;
     restrictVisibility: boolean;
     source: UUID<TeriockDocument> | null;
     tags: string[];
@@ -19,7 +23,8 @@ declare global {
       /** <schema> Speaker avatar image */
       img: string;
       /** <schema> Panels to render */
-      panels: Teriock.Panels.PanelParts[];
+      // @ts-expect-error No type
+      panels: PseudoCollection<Panel>;
       /** <schema> Whether this should restrict viewership more than base messages do by default */
       restrictVisibility: boolean;
       /** <schema> Source document */

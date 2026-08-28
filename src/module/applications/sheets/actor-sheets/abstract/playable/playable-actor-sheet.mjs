@@ -11,7 +11,6 @@ import * as parts from "./parts/_module.mjs";
  * Playable actor sheet.
  * @mixes PlayableActorSheetAvatarImagePart
  * @mixes PlayableActorSheetCombatPart
- * @mixes PlayableActorSheetConditionsPart
  * @mixes PlayableActorSheetDocumentCreationPart
  * @mixes PlayableActorSheetMechanicalPart
  * @mixes PlayableActorSheetSectionsPart
@@ -26,7 +25,6 @@ export default class TeriockPlayableActorSheet
     BaseActorSheet,
     parts.PlayableActorSheetAvatarImagePart,
     parts.PlayableActorSheetCombatPart,
-    parts.PlayableActorSheetConditionsPart,
     parts.PlayableActorSheetDocumentCreationPart,
     parts.PlayableActorSheetMechanicalPart,
     parts.PlayableActorSheetSectionsPart,

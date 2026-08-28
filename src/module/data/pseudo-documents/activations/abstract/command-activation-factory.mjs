@@ -25,7 +25,7 @@ export default function CommandActivationFactory(entry) {
 
     /** @inheritDoc */
     get label() {
-      return this.title || getCommandEntryValue(entry, "label", this.options);
+      return this.display.label || getCommandEntryValue(entry, "label", this.options);
     }
 
     /** @inheritDoc */

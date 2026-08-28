@@ -8,6 +8,7 @@ const { fields } = foundry.data;
 
 /**
  * @implements {Teriock.Embeds.Embeddable}
+ * @todo Rename to `TrackedCondition`.
  */
 export default class VirtualCondition extends BasePseudoDocument {
   static #ALLOWED_STATUSES;
@@ -80,7 +81,7 @@ export default class VirtualCondition extends BasePseudoDocument {
     return {
       draggable: false,
       icons: this._embedIcons,
-      identifier: `condition:${this.status}`,
+      identifier: this.typedIdentifier,
       img: this.img,
       openable: true,
       subtitle: _loc("TYPES.ActiveEffect.condition"),

@@ -1,18 +1,18 @@
 import { TeriockChatMessage } from "../_module.mjs";
 import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
-import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
+import { Panel } from "../../data/pseudo-documents/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { toId } from "../../helpers/string.mjs";
 
 /**
- * @import { PanelEnrichmentOptions } from "../../applications/ux/text-editor.mjs"
+ * @import { EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
  */
 
 /**
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, PanelDocument>}
- * @todo Move panels into their own pseudo-document with a render call and various helper methods.
+ * @todo Make this into a data mixin and remove virtual affinities.
  */
 export default function PanelDocumentMixin(Base) {
   /**
@@ -27,21 +27,22 @@ export default function PanelDocumentMixin(Base) {
     /** @inheritDoc */
     async _buildEmbedHTML(config, options = {}) {
       if (config.values.includes("panel")) {
+        // TODO: Consider removing this caption removal
         if (!config.label) { config.caption = false; }
-        const parts = await this.getPanelParts();
-        parts._id = toId(
-          [options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filter(Boolean).join("-"),
-          { hash: true },
-        );
-        return foundry.utils.parseHTML(
-          await TeriockTextEditor.makeTooltip(parts, {
-            noAssociations: config.values.includes("noAssociations"),
-            noBars: config.values.includes("noBars"),
-            noBlocks: config.values.includes("noBlocks"),
-            relativeTo: this,
-            secrets: this.isOwner,
-          }),
-        );
+        const panelOptions = {
+          noAssociations: config.values.includes("noAssociations"),
+          noBars: config.values.includes("noBars"),
+          noBlocks: config.values.includes("noBlocks"),
+          relativeTo: this,
+          secrets: this.isOwner,
+        };
+        const panel = await this.toPanel({
+          _id: toId(
+            [options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filter(Boolean).join("-"),
+            { hash: true },
+          ),
+        });
+        return panel.renderElement(panelOptions);
       }
       return super._buildEmbedHTML(config, options);
     }
@@ -51,17 +52,15 @@ export default function PanelDocumentMixin(Base) {
      * @returns {Promise<Partial<Teriock.Panels.PanelParts>>}
      */
     async getPanelParts() {
-      const parts = {
+      return Object.assign({
         _id: foundry.utils.randomID(),
         bars: [],
         blocks: [],
+        documentUuid: this.uuid,
         icon: TERIOCK.display.icons.ui.document,
         img: this.img ?? systemPath("icons/documents/uncertainty.svg"),
         name: this.fullName || this.name,
-        uuid: this.uuid,
-      };
-      if (typeof this.system?.getPanelParts === "function") { Object.assign(parts, await this.system.getPanelParts()); }
-      return parts;
+      }, await this.system?.getPanelParts?.() ?? {});
     }
 
     /**
@@ -76,7 +75,7 @@ export default function PanelDocumentMixin(Base) {
 
     /** @inheritDoc */
     async toMessage(options = {}) {
-      const panel = await this.getPanelParts();
+      const panel = await this.toPanel();
       const actor = options?.actor || this.actor || TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
       const messageData = {
         speaker: TeriockChatMessage.getSpeaker({ actor }),
@@ -86,7 +85,7 @@ export default function PanelDocumentMixin(Base) {
           blocks: [],
           buttons: [],
           extraContent: "",
-          panels: [panel],
+          panels: { [panel.id]: panel.toObject() },
           source: null,
           tags: [],
         },
@@ -95,9 +94,24 @@ export default function PanelDocumentMixin(Base) {
       return TeriockChatMessage.create(messageData, { defaultMode: true });
     }
 
-    /** @inheritDoc */
-    async toTooltip() {
-      return TeriockTextEditor.makeTooltip(await this.getPanelParts(), { relativeTo: this, secrets: this.isOwner });
+    /**
+     * Represent this as a panel.
+     * @param {Partial<Teriock.Panels.PanelParts>} [data]
+     * @returns {Promise<Panel>}
+     */
+    async toPanel(data = {}) {
+      return new Panel(Object.assign(await this.getPanelParts(), data));
+    }
+
+    /**
+     * Represent this as a tooltip.
+     * @param {Partial<Teriock.Panels.PanelParts>} [data]
+     * @param {Teriock.Panels.EnrichmentOptions & EnrichmentOptions} [options]
+     * @returns {Promise<string>}
+     */
+    async toTooltip(data = {}, options = {}) {
+      const panel = await this.toPanel(data);
+      return panel.renderHTML({ relativeTo: this, secrets: this.isOwner, ...options });
     }
   }
 

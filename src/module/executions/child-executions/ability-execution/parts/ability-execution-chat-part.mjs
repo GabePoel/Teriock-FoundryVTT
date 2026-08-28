@@ -27,7 +27,7 @@ export default function AbilityExecutionChatPart(Base) {
       if (!existing) { associations.push(association); }
       else {
         const existingUuids = new Set(existing.cards.map(e => e.uuid));
-        existing.cards.push(...association.cards.filter(c => !existingUuids.has(c.uuid)));
+        existing.cards.push(...association.cards.filter(c => !existingUuids.has(c.documentUuid)));
       }
     }
 

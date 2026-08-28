@@ -1,4 +1,3 @@
-import TeriockTextEditor from "../../applications/ux/text-editor.mjs";
 import { toClass } from "../string.mjs";
 
 const { TooltipManager } = foundry.helpers.interaction;
@@ -142,7 +141,8 @@ export default class TeriockTooltipManager extends TooltipManager {
    */
   async initializeLoadingTooltip() {
     await game.teriock.templatesReady;
-    this.#loadingTooltipHTML = await TeriockTextEditor.makeTooltip(TERIOCK.display.panel.premade.loading);
+    const loadingPanel = new teriock.data.pseudoDocuments.Panel(TERIOCK.display.panel.premade.loading);
+    this.#loadingTooltipHTML = await loadingPanel.renderHTML();
   }
 
   /**

@@ -1,6 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { dedent } from "../../helpers/string.mjs";
 import { icons } from "./icons.mjs";
 
 export const displayPanel = {
@@ -12,18 +11,6 @@ export const displayPanel = {
     gmNotes: "gm-notes-display-field",
     instructions: "instructions-display-field",
   },
-  loading: dedent(`
-    <div class="teriock-panel">
-      <header class="teriock-panel-header">
-        <div class="teriock-panel-image">
-          <img src="${systemPath("icons/documents/uncertainty.svg")}" alt="">
-        </div>
-        <div class="teriock-panel-header-name">TERIOCK.LOADING</div>
-        <div class="teriock-panel-header-icon">
-          <i class="fa-fw fa-light fa-spinner fa-spin"></i>
-        </div>
-      </header>
-    </div>`),
   premade: {
     loading: /** @type {Teriock.Panels.PanelParts} */ {
       icon: "fa-spinner fa-spin",

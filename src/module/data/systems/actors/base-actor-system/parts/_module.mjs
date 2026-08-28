@@ -14,6 +14,7 @@ export { default as ActorInformationPart } from "./information-part/actor-inform
 export { default as ActorLimitsPart } from "./limits-part/actor-limits-part.mjs";
 export { default as ActorMoneyPart } from "./money-part/actor-money-part.mjs";
 export { default as ActorMovementPart } from "./movement-part/actor-movement-part.mjs";
+export { default as ActorPseudoDocumentsPart } from "./pseudo-documents-part/actor-pseudo-documents-part.mjs";
 export { default as ActorScalingPart } from "./scaling-part/actor-scaling-part.mjs";
 export { default as ActorSensesPart } from "./senses-part/actor-senses-part.mjs";
 export { default as ActorStatsPart } from "./stats-part/actor-stats-part.mjs";

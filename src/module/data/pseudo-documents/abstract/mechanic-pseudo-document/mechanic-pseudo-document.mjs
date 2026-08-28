@@ -133,4 +133,10 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   getCompetence(_scope) {
     return this.document?.system?.competence?.raw ?? 0;
   }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.actor?.getEmbeddedCollection(this.documentName)?.set(this.uuid, this);
+  }
 }

@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.PseudoDocuments {
-    export type SelectionPseudoDocumentData = {
+    export interface SelectionPseudoDocumentData {
       /** Whether all choices should be selected. */
       all: boolean;
       /** Whether one choice should be selected automatically if it's the only option. */
@@ -25,7 +25,7 @@ declare global {
       multi: boolean;
       /** Whether choices should be selected at execution time. */
       selectInExecution: boolean;
-    };
+    }
   }
 }
 

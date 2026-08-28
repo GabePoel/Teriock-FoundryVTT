@@ -5,6 +5,7 @@ import competenceConfig from "../../../constants/config/competence-config.mjs";
 import dieConfig from "../../../constants/config/death-bag-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
@@ -13,7 +14,6 @@ const {
   ArrayField,
   BooleanField,
   ColorField,
-  DocumentIdField,
   DocumentUUIDField,
   EmbeddedDataField,
   FilePathField,
@@ -113,36 +113,34 @@ export function qualifiedChangeField() {
 
 /**
  * Field that represents panel associations.
+ * @param {ArrayFieldOptions} [options]
  * @returns {ArrayField}
  */
-export function associationsField() {
+export function associationsField(options = {}) {
   return new ArrayField(
     new SchemaField({
       cards: new ArrayField(
         new SchemaField({
           color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
-          draggable: new BooleanField(),
-          id: new DocumentIdField(),
-          img: new FilePathField({ categories: ["IMAGE"] }),
-          makeTooltip: new BooleanField({ initial: false, required: false }),
+          documentUuid: new DocumentUUIDField(),
+          img: new FilePathField({ categories: ["IMAGE"], initial: systemPath("icons/documents/uncertainty.svg") }),
           name: new StringField(),
-          type: new StringField({ initial: "base", required: false }),
-          uuid: new DocumentUUIDField(),
         }),
         { initial: [], required: false },
       ),
       icon: new StringField({ initial: null, nullable: true, required: false }),
       title: new StringField({ initial: "Associations", required: false }),
     }),
-    { initial: [], required: false },
+    { initial: [], required: false, ...options },
   );
 }
 
 /**
  * Field that represents panel blocks.
+ * @param {ArrayFieldOptions} [options]
  * @returns {ArrayField}
  */
-export function blocksField() {
+export function blocksField(options) {
   return new ArrayField(
     new SchemaField({
       classes: new ArrayField(new StringField(), { initial: [] }),
@@ -150,21 +148,7 @@ export function blocksField() {
       text: new HTMLField({ blank: true, nullable: true }),
       title: new StringField(),
     }),
-  );
-}
-
-/**
- * Field that represents panel bars.
- * @returns {ArrayField}
- */
-export function barsField() {
-  return new ArrayField(
-    new SchemaField({
-      icon: new StringField({ initial: "", required: false }),
-      label: new StringField({ blank: true, nullable: true, required: false }),
-      wrappers: new ArrayField(new StringField(), { initial: [], required: false }),
-    }),
-    { initial: [], required: false },
+    { initial: [], required: false, ...options },
   );
 }
 
@@ -179,40 +163,19 @@ export function nullString(options) {
 
 /**
  * A JSON field with an empty object.
+ * @param {DataFieldOptions} [options]
  * @returns {JSONField}
  */
-export function defaultJSONField() {
-  return new JSONField({ blank: true, initial: "{}", nullable: true });
-}
-
-/**
- * Field that represents panels.
- * @returns {ArrayField}
- */
-export function panelsField() {
-  return new ArrayField(
-    new SchemaField({
-      _id: new DocumentIdField({ initial: () => foundry.utils.randomID(16) }),
-      associations: associationsField(),
-      bars: barsField(),
-      blocks: blocksField(),
-      classes: new ArrayField(new StringField(), { initial: [] }),
-      color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
-      icon: nullString(),
-      img: nullString(),
-      label: nullString(),
-      name: nullString(),
-      uuid: new DocumentUUIDField({ blank: true, initial: null, nullable: true }),
-    }),
-    { initial: [], required: false },
-  );
+export function defaultJSONField(options = {}) {
+  return new JSONField({ blank: true, initial: "{}", nullable: true, ...options });
 }
 
 /**
  * Competence field.
+ * @param {NumberFieldOptions} [options]
  * @returns {NumberField}
  */
-export function competenceField() {
+export function competenceField(options = {}) {
   return new NumberField({
     choices: objectMap(competenceConfig.levels, l => l.label, { localize: true, sort: false }),
     hint: _sloc("TERIOCK.SCHEMA.Competence.hint"),
@@ -222,6 +185,7 @@ export function competenceField() {
     min: 0,
     nullable: false,
     required: false,
+    ...options,
   });
 }
 
@@ -305,22 +269,25 @@ export function qualifierField(options = {}) {
  * Field for the number of a single color of stone in the death bag.
  * @param {Teriock.Keys.DeathBagStoneColor} color - Stone color key.
  * @param {number} number - Default number of stones of this color.
+ * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]
  * @returns {FormulaField}
  */
-function deathBagStoneField(color, number) {
+function deathBagStoneField(color, number, options = {}) {
   return new FormulaField({
     deterministic: false,
     initial: `${number}`,
     label: _sloc("TERIOCK.TERMS.Stones.ofColor", { color: _sloc(`TERIOCK.TERMS.StoneColor.${color}`) }),
     nullable: false,
+    ...options,
   });
 }
 
 /**
  * Schema fields for the death bag.
+ * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]
  * @returns {Record<string, FormulaField | SchemaField>}
  */
-export function deathBagSchema() {
+export function deathBagSchema(options = {}) {
   return {
     pull: new FormulaField({
       deterministic: false,
@@ -328,6 +295,7 @@ export function deathBagSchema() {
       initial: "10",
       label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
       nullable: false,
+      ...options,
     }),
     stones: new SchemaField(
       Object.fromEntries(

@@ -5,6 +5,7 @@ const { fields } = foundry.data;
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ * @import { PseudoCollection } from "../../collections/_module.mjs";
  */
 
 /**
@@ -87,6 +88,14 @@ export default class BasePseudoDocument extends BaseDataModel {
       data._id = id;
       return [id, data];
     }));
+  }
+
+  /**
+   * The collection this belongs to.
+   * @returns {PseudoCollection|null}
+   */
+  get collection() {
+    return this.document?.getEmbeddedCollection(this.documentName) ?? null;
   }
 
   /**

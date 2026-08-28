@@ -1,10 +1,10 @@
 import * as systemMixins from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
@@ -188,11 +188,9 @@ export default function CommonSystemMixin(Base) {
       const parts = Object.assign(await super.getPanelParts(), {
         color: this.color,
         icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
-        img: this.parent.img,
         label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,
-        name: this.parent.fullName,
-        uuid: this.parent.uuid,
       });
+      parts.associations ??= [];
       const typeMap = {};
       const children = this.parent.documentName === "Actor"
         ? (await this.parent.children.getContents())
@@ -205,12 +203,7 @@ export default function CommonSystemMixin(Base) {
             docs = docs.filter(e => !foundry.utils.hasProperty(e, "system.revealed") || e.system.revealed);
           }
           docs = docs.sort(TERIOCK.config.document[type]?.sorter ?? pathSorterFactory("name"));
-          quickAddAssociation(
-            docs,
-            TERIOCK.config.document[type].plural,
-            TERIOCK.config.document[type].icon,
-            parts.associations,
-          );
+          parts.associations.push(Panel.toAssociation(docs, TERIOCK.config.document[type].plural, TERIOCK.config.document[type].icon))
         }
       }
       return parts;

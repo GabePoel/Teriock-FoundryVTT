@@ -26,18 +26,14 @@ declare global {
 
     /** Definition for an association card. */
     export type PanelAssociationCard = {
-      badge?: string;
+      // badge?: string;
       color?: Color;
-      draggable?: boolean;
+      documentUuid?: UUID<TeriockDocument>;
       icon?: Teriock.Embeds.EmbedIcon;
-      id?: ID<TeriockDocument>;
       img: string;
       makeTooltip?: boolean;
       name: string;
-      pack?: string;
       tooltip?: string;
-      type?: Teriock.Documents.ChildType;
-      uuid?: UUID<TeriockDocument>;
     };
 
     /** Pieces of a group of associations within a panel. */
@@ -52,8 +48,6 @@ declare global {
 
     /** Represents the individual rules-parts that make up a panel. */
     export type PanelParts = {
-      /** ID for the panel */
-      _id?: ID<Teriock.Panels.PanelParts>;
       /** Panel associations */
       associations?: Teriock.Panels.PanelAssociation[];
       /** Panel bars */
@@ -64,18 +58,25 @@ declare global {
       classes?: string[];
       /** Color to assign to the image border */
       color?: Color;
+      /** UUID of a document that can be opened */
+      documentUuid?: UUID<TeriockDocument>;
       /** Material Symbol or Material Design icon */
       icon?: string;
       /** The URL or path to the image associated with the panel */
       img?: string;
-      /** Label that gets displayed upon hovering over icon */
-      label?: string;
       /** The name or title to display in the panel */
       name?: string;
       /** Tips, such as suppression reasons in tooltips */
       tips?: Teriock.UI.Tip[];
-      /** UUID of a document that can be opened */
-      uuid?: UUID<TeriockDocument>;
+    };
+
+    export type EnrichmentOptions = {
+      collapseTables?: boolean;
+      keepId?: boolean;
+      noAssociations?: boolean;
+      noBars?: boolean;
+      noBlocks?: boolean;
+      usePanelRelativeTo?: boolean;
     };
   }
 }

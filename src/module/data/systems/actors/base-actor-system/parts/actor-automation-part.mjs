@@ -15,9 +15,11 @@ export default function ActorAutomationPart(Base) {
      * @param {Teriock.System.CompetenceLevel} value
      */
     #applyCompetenceAutomations(value) {
-      const autos = this.parent.appliedEffects.flatMap(e =>
-        e.system.automations.getTypeSync("changeCompetence", { active: true, competence: value, ongoing: true })
-      );
+      const autos = this.automations.getTypeSync("changeCompetence", {
+        active: true,
+        competence: value,
+        ongoing: true,
+      });
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
         if (identifiers.has(c.typedIdentifier) && c.system.competence.raw < value) {
@@ -30,9 +32,7 @@ export default function ActorAutomationPart(Base) {
      * Apply all suppress automations that force certain children of this document to be suppressed.
      */
     #applySuppressAutomations() {
-      const autos = this.parent.appliedEffects.flatMap(e =>
-        e.system.automations.getTypeSync("suppress", { active: true, ongoing: true })
-      );
+      const autos = this.automations.getTypeSync("suppress", { active: true, ongoing: true });
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
         if (identifiers.has(c.typedIdentifier)) { c.system.forceSuppressed = true; }

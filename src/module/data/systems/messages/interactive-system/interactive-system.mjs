@@ -1,6 +1,6 @@
-import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { panelsField } from "../../../fields/tools/builders.mjs";
+import { PseudoCollectionField } from "../../../fields/_module.mjs";
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -25,7 +25,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "interactive" });
+    return foundry.utils.mergeObject(super.metadata, { pseudos: { Panel: "system.panels" }, type: "interactive" });
   }
 
   /**
@@ -35,11 +35,24 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
-      panels: panelsField(),
+      panels: new PseudoCollectionField(Panel),
       restrictVisibility: new fields.BooleanField({ initial: true }),
       source: new fields.DocumentUUIDField(),
       tags: new fields.ArrayField(new fields.StringField()),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (Array.isArray(source.panels)) {
+      const panels = {};
+      for (const panel of source.panels) {
+        panel._id ??= foundry.utils.randomID();
+        panels[panel._id] = panel;
+      }
+      source.panels = panels;
+    }
+    return super.migrateData(source, options);
   }
 
   /**
@@ -50,9 +63,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     if (!this.parent.isContentVisible) { return [TERIOCK.display.panel.premade]; }
     const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
     return Promise.all(
-      this.panels.map(p =>
-        TeriockTextEditor.enrichPanel(p, { relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })
-      ),
+      this.panels.contents.map(p => p?.prepareContext({ relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })),
     );
   }
 
@@ -81,7 +92,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
    * @return {0|boolean}
    */
   get showPanels() {
-    return this.panels.length && (this.parent.isAuthor || this.parent.isContentVisible);
+    return this.panels.size && (this.parent.isAuthor || this.parent.isContentVisible);
   }
 
   /**

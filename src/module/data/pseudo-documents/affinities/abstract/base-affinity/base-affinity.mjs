@@ -22,12 +22,13 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
     return "TERIOCK.AFFINITIES.Base.LABEL";
   }
 
-  /**
-   * @inheritDoc
-   * @returns {{ documentName: "Affinity" }}
-   */
+  /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { documentName: "Affinity", label: _loc("TERIOCK.AFFINITIES.Base.LABEL") });
+    return Object.assign(super.metadata, {
+      documentName: "Affinity",
+      icon: TERIOCK.display.icons.pseudoDocument.affinity,
+      label: _loc("TERIOCK.AFFINITIES.Base.LABEL"),
+    });
   }
 
   /** @inheritDoc */
@@ -88,6 +89,7 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
 
   /** @inheritDoc */
   prepareData() {
+    super.prepareData();
     if (!this.img) {
       /** @type {string} */
       const fallback = this.document?.img ?? TERIOCK.config.affinity.types[this.type].img;

@@ -31,6 +31,7 @@ const { fields } = foundry.data;
  * @mixes ActorTokenPart
  * @mixes ActorTradecraftsPart
  * @mixes ActorTransformationPart
+ * @mixes ActorPseudoDocumentsPart
  */
 export default class BaseActorSystem
   extends mixClasses(
@@ -56,6 +57,7 @@ export default class BaseActorSystem
     parts.ActorAffinitiesPart,
     parts.ActorRestingPart,
     parts.ActorTokenPart,
+    parts.ActorPseudoDocumentsPart,
   )
 {
   /** @inheritDoc */
@@ -167,6 +169,6 @@ export default class BaseActorSystem
   /** @inheritDoc */
   async postUpdate() {
     await super.postUpdate();
-    await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
+    await Promise.all([...this.parent.getDependentTokens().map((t) => t.postActorUpdate())]);
   }
 }
