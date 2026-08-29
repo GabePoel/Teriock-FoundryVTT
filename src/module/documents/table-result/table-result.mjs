@@ -14,7 +14,12 @@ const { TableResult } = foundry.documents;
  * @mixes EmbeddableData
  */
 export default class TeriockTableResult
-  extends mixClasses(TableResult, documentMixins.BaseDocumentMixin, dataMixins.PanelDataMixin, dataMixins.EmbeddableDataMixin)
+  extends mixClasses(
+    TableResult,
+    documentMixins.BaseDocumentMixin,
+    dataMixins.PanelDataMixin,
+    dataMixins.EmbeddableDataMixin,
+  )
 {
   /**
    * Typed identifier for the referenced document on document-type results.

@@ -12,7 +12,12 @@ const { Macro } = foundry.documents;
  * @mixes UsableDocument
  */
 export default class TeriockMacro
-  extends mixClasses(Macro, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin, documentMixins.UsableDocumentMixin)
+  extends mixClasses(
+    Macro,
+    documentMixins.BaseDocumentMixin,
+    dataMixins.EmbeddableDataMixin,
+    documentMixins.UsableDocumentMixin,
+  )
 {
   /**
    * Create a use macro from the given document.

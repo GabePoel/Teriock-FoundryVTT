@@ -13,7 +13,12 @@ const { JournalEntryPage } = foundry.documents;
  * @mixes PanelData
  */
 export default class TeriockJournalEntryPage
-  extends mixClasses(JournalEntryPage, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin, dataMixins.PanelDataMixin)
+  extends mixClasses(
+    JournalEntryPage,
+    documentMixins.BaseDocumentMixin,
+    dataMixins.EmbeddableDataMixin,
+    dataMixins.PanelDataMixin,
+  )
 {
   /**
    * An image that represents this.

@@ -12,6 +12,10 @@ const { fields } = foundry.data;
 
 /**
  * An affinity that some effect grants against a specific thing.
+ *
+ * Relevant wiki pages:
+ * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
+ *
  * @implements Teriock.Embeds.Embeddable
  * @mixes CritMechanic
  * @mixes PanelData

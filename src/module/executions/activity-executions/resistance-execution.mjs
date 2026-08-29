@@ -2,7 +2,12 @@ import * as executionMixins from "../mixins/_module.mjs";
 import AffinityExecution from "./affinity-execution.mjs";
 
 /**
- * Works for any affinity that is rolled against a threshold.
+ * Theoretically works for any affinity that is rolled against a threshold but is really for resistance/hexproof.
+ *
+ * Relevant wiki pages:
+ * - [Hexproof](https://wiki.teriock.com/index.php?title=Keyword:Hexproof)
+ * - [Resistance](https://wiki.teriock.com/index.php?title=Keyword:Resistance)
+ *
  * @mixes ThresholdExecution
  */
 export default class ResistanceExecution extends executionMixins.ThresholdExecutionMixin(AffinityExecution) {

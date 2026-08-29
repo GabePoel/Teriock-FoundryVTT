@@ -27,7 +27,9 @@ export default function CommonDocumentMixin(Base) {
    * @mixes PropagationData
    * @mixin
    */
-  class CommonDocument extends mixClasses(Base, dataMixins.PropagationDataMixin, dataMixins.EmbeddableDataMixin, dataMixins.PanelDataMixin) {
+  class CommonDocument
+    extends mixClasses(Base, dataMixins.PropagationDataMixin, dataMixins.EmbeddableDataMixin, dataMixins.PanelDataMixin)
+  {
     /**
      * Get the default image for some type of this document.
      * @param {string} type

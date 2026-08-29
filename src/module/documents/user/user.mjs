@@ -16,7 +16,9 @@ const { User } = foundry.documents;
  * @mixes EmbeddableData
  * @property {Readonly<Set<TeriockToken>>} targets
  */
-export default class TeriockUser extends mixClasses(User, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin) {
+export default class TeriockUser
+  extends mixClasses(User, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin)
+{
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, { img: this.avatar });

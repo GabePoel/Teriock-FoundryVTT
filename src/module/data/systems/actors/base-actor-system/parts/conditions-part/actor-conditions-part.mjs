@@ -72,8 +72,7 @@ export default function ActorConditionsPart(Base) {
     }
 
     /**
-     * The statuses that were added or removed since the last time this was called, tracking the previous set on
-     * the actor's cache so status expirations only get checked against the statuses that actually changed.
+     * The statuses that were added or removed since the last time this was called.
      * @returns {Set<Teriock.Keys.Condition>}
      */
     #consumeChangedStatuses() {
@@ -143,7 +142,7 @@ export default function ActorConditionsPart(Base) {
     }
 
     /**
-     * Remove the status and all consequences that provide it. Intended to be used with conditions, but all
+     * Remove the status and all consequences that provide it. This is intended to be used with conditions, but all
      * statuses work.
      * @param {Teriock.Keys.Status} status
      * @returns {Promise<void>}

@@ -1,8 +1,11 @@
 import { BaseExecution } from "../abstract/_module.mjs";
 
 /**
- * Rolling one of an actor's affinities. Everything it displays comes from the affinity's own configuration, so it
- * works for any type. When the roll came from a specific affinity, that affinity supplies the image and wrappers.
+ * Rolling an Affinity from an Actor.
+ *
+ * Relevant wiki pages:
+ * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
+ *
  * @property {Affinity | null} affinity
  * @property {AffinityType} type
  * @property {string[]} wrappers

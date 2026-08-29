@@ -112,10 +112,7 @@ export default function ActorAffinitiesPart(Base) {
      * {@link ResistanceExecution}.
      *
      * Relevant wiki pages:
-     * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
-     * - [Hexproof](https://wiki.teriock.com/index.php/Keyword:Hexproof)
-     * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
-     * - [Hexseal](https://wiki.teriock.com/index.php/Keyword:Hexseal)
+     * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
      *
      * @param {AffinityType} type - The type of affinity to roll.
      * @param {Partial<Teriock.Execution.AffinityExecutionOptions>} [options] - Options for the roll.
