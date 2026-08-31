@@ -253,7 +253,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   async _use(data = {}, options = {}) {
-    await super._use(
+    return super._use(
       data,
       Object.assign(options, {
         actor: this.actor,

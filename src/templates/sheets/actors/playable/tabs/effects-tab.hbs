@@ -13,7 +13,7 @@
             <div
               class="
                 condition-toggle
-                {{#unless (includes ../removableConditions key)}}
+                {{#unless (lookup ../conditions key)}}
                   inactive
                 {{/unless}}
               "
@@ -21,7 +21,7 @@
               data-condition="{{{ key }}}"
               data-tooltip='
                 {{localize "TERIOCK.SHEETS.Actor.TABS.Effects.toggle" name=condition.name state=(ifThen
-                (includes ../removableConditions key)
+                (lookup ../conditions key)
                 (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
                 (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on"))}}
               '

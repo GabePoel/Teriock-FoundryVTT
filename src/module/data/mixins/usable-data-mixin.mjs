@@ -63,7 +63,7 @@ export default function UsableDataMixin(Base) {
      */
     async _use(data = {}, options = {}) {
       options.actor ??= this.actor;
-      options.source = this;
+      options.source ??= this;
       await this.constructor.Execution.create(data, options);
     }
 

@@ -1,4 +1,5 @@
 import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
+import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
@@ -16,7 +17,6 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
  *
- * @implements Teriock.Embeds.Embeddable
  * @mixes CritMechanic
  * @mixes PanelData
  * @mixes UsableData
@@ -25,7 +25,7 @@ const { fields } = foundry.data;
  * @property {TeriockActiveEffect} document
  */
 export default class BaseAffinity
-  extends EmbeddableDataMixin(UsableDataMixin(PanelDataMixin(CritMechanicMixin(MechanicPseudoDocument))))
+  extends mixClasses(MechanicPseudoDocument, CritMechanicMixin, PanelDataMixin, UsableDataMixin, EmbeddableDataMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AFFINITIES.Base"];
@@ -121,10 +121,19 @@ export default class BaseAffinity
     return _loc(TERIOCK.config.affinity.categories[this.category]?.label ?? "");
   }
 
+  /**
+   * A color for this.
+   * @returns {Color}
+   */
+  get color() {
+    return foundry.utils.Color.from(this.#config?.color);
+  }
+
   /** @inheritDoc */
   get embedParts() {
     return {
       action: "useDoc",
+      color: this.color,
       draggable: false,
       icons: this._embedIcons,
       identifier: this.typedIdentifier,
@@ -236,7 +245,7 @@ export default class BaseAffinity
         label: this.name,
         wrappers: [this.typeLabel, this.categoryLabel, this.name].filter(Boolean),
       }],
-      color: foundry.utils.Color.from(this.#config?.colot),
+      color: this.color,
       icon: TERIOCK.display.icons.pseudoDocument.affinity,
       img: this.img,
       name: this.name,

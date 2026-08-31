@@ -1,7 +1,7 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
 import { createElement } from "../../../../../../helpers/html.mjs";
 import { asInf, makeIconClass } from "../../../../../../helpers/icon.mjs";
-import { toKebabCase } from "../../../../../../helpers/string.mjs";
+import { toId, toKebabCase } from "../../../../../../helpers/string.mjs";
 import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs";
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
 
@@ -184,6 +184,11 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           source: toRangeHTML(this.document.system._source.senses[key]),
           value: toRangeHTML(this.document.system.senses[key]),
         };
+      }
+      context.conditions = {};
+      for (const key of Object.keys(TERIOCK.statuses.conditions)) {
+        const id = toId(key);
+        context.conditions[key] = Boolean(this.document.effects.get(id)?.isStatus);
       }
       return context;
     }

@@ -136,7 +136,7 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (this.document.documentName !== "Actor") {
+    if (this.document?.documentName !== "Actor") {
       this.actor?.getEmbeddedCollection(this.documentName)?.set(this.uuid, this);
     }
   }

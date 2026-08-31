@@ -1,21 +1,32 @@
+import { Panel } from "../_module.mjs";
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { dotJoin, toId } from "../../../helpers/string.mjs";
+import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../mixins/_module.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @implements {Teriock.Embeds.Embeddable}
  * @todo Rename to `TrackedCondition`.
+ * @mixes PanelData
+ * @mixes UsableData
+ * @mixes EmbeddableData
  */
-export default class VirtualCondition extends BasePseudoDocument {
+export default class VirtualCondition
+  extends mixClasses(BasePseudoDocument, PanelDataMixin, UsableDataMixin, EmbeddableDataMixin)
+{
   static #ALLOWED_STATUSES;
 
   static get ALLOWED_STATUSES() {
     if (!this.#ALLOWED_STATUSES) { this.#ALLOWED_STATUSES = new Set(Object.keys(TERIOCK.statuses.conditions)); }
     return this.#ALLOWED_STATUSES;
+  }
+
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.document.ExpirationExecution;
   }
 
   /** @inheritDoc */
@@ -62,9 +73,17 @@ export default class VirtualCondition extends BasePseudoDocument {
   /** @type {Set<string>} */
   #sourceNames = new Set();
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @todo Deal with this duplicated code.
+   */
   get _embedActions() {
-    return { openDoc: { primary: async () => this.openCondition() } };
+    return Object.assign(super._embedActions, {
+      useDoc: {
+        primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+        secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+      },
+    });
   }
 
   /** @returns {Partial<Teriock.Embeds.EmbedIcon>[]} */
@@ -72,13 +91,25 @@ export default class VirtualCondition extends BasePseudoDocument {
     const icons = [];
     if (this.locked) {
       icons.push({ icon: TERIOCK.display.icons.ui.locked, tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked") });
+    } else {
+      icons.push({ icon: TERIOCK.display.icons.ui.unlocked, tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Unlocked") });
     }
     return icons;
+  }
+
+  /**
+   * A color for this.
+   * @returns {Color}
+   */
+  get color() {
+    return foundry.utils.Color.from(TERIOCK.display.colors.palette.red);
   }
 
   /** @inheritDoc */
   get embedParts() {
     return {
+      action: this.statusEffect ? "useDoc" : undefined,
+      color: this.color,
       draggable: false,
       icons: this._embedIcons,
       identifier: this.typedIdentifier,
@@ -87,6 +118,7 @@ export default class VirtualCondition extends BasePseudoDocument {
       subtitle: _loc("TYPES.ActiveEffect.condition"),
       text: dotJoin(Array.from(this.sourceNames)),
       title: this.name,
+      usable: Boolean(this.statusEffect),
       uuid: this.uuid,
     };
   }
@@ -104,7 +136,8 @@ export default class VirtualCondition extends BasePseudoDocument {
    * @returns {boolean}
    */
   get locked() {
-    return this.#sourceNames.size > 0 || this.#sourceDocuments.size > 1 || !this.#sourceDocuments.has(this.id);
+    return this.#sourceNames.size > 0 || this.#sourceDocuments.size > 1
+      || (this.#sourceDocuments.size === 1 && !this.statusEffect);
   }
 
   /**
@@ -127,6 +160,14 @@ export default class VirtualCondition extends BasePseudoDocument {
   }
 
   /**
+   * The associated status ActiveEffect.
+   * @returns {TeriockActiveEffect<"condition"> | null}
+   */
+  get statusEffect() {
+    return this.actor?.effects.get(this.id) ?? null;
+  }
+
+  /**
    * The identifier for this condition.
    * @returns {TypedIdentifier<TeriockActiveEffect<"condition">>}
    */
@@ -134,28 +175,27 @@ export default class VirtualCondition extends BasePseudoDocument {
     return `condition:${this.status}`;
   }
 
+  /** @inheritDoc */
+  async _use(data = {}, options = {}) {
+    if (!this.statusEffect) { return; }
+    return super._use(data, Object.assign(options, { source: this.statusEffect }));
+  }
+
   /**
    * Register something as being a source of this condition.
    * @param {TeriockDocument|string} source
    */
   addSource(source) {
-    if (typeof source === "string") {
-      this.#sourceNames.add(source);
-    } else {
-      this.#sourceDocuments.add(source);
-    }
+    if (typeof source === "string") { this.#sourceNames.add(source); }
+    else { this.#sourceDocuments.add(source); }
   }
 
   /**
    * The condition document.
-   * @returns {Promise<TeriockActiveEffect>}
+   * @returns {Promise<TeriockActiveEffect<"condition">>}
    */
   async getCondition() {
-    let condition = this.actor.effects.get(this.id);
-    if (!condition) {
-      condition = teriock.fromIdentifier(this.typedIdentifier);
-    }
-    return condition;
+    return this.statusEffect ?? await teriock.fromIdentifier(this.typedIdentifier);
   }
 
   /** @inheritDoc */
@@ -169,37 +209,36 @@ export default class VirtualCondition extends BasePseudoDocument {
     }];
   }
 
-  /**
-   * @inheritDoc
-   * @todo Remove duplicated {@link BaseAffinity} code
-   */
-  onEmbed(element) {
-    const menuEntries = this.getEmbedContextMenuEntries();
-    if (!menuEntries.length) {
-      return;
-    }
-    element.addEventListener("contextmenu", (event) => {
-      const action = /** @type {HTMLElement} */ (event.target).closest("[data-action]")?.dataset.action;
-      if (action && action === this.embedParts.action) {
-        event.stopImmediatePropagation();
-      }
-    });
-    new TeriockContextMenu(element, ".teriock-block", menuEntries, {
-      eventName: "contextmenu",
-      fixed: true,
-      jQuery: false,
+  /** @inheritDoc */
+  async getPanelParts() {
+    // TODO: Add named sources to the associations list?
+    const effect = await this.getCondition();
+    const trackers = await this.getTrackers();
+    return Object.assign(await effect?.getPanelParts?.() ?? {}, {
+      associations: [
+        Panel.toAssociation(
+          Array.from(this.#sourceDocuments),
+          _loc("TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend"),
+          TERIOCK.display.icons.ui.document,
+        ),
+        Panel.toAssociation(trackers, undefined, TERIOCK.display.icons.ability.target),
+      ],
+      color: this.color,
+      icon: TERIOCK.config.document.condition.icon,
+      img: this.img,
+      name: this.name,
     });
   }
 
   /**
-   * Open the sheet for this condition.
-   * @returns {Promise<void>}
+   * A temporary stop-gap to connect the old trackers schema to VirtualConditions until I make a better solution.
+   * @deprecated
+   * @returns {Promise<TeriockDocument[]>}
    */
-  async openCondition() {
-    const condition = await this.getCondition();
-    if (condition) {
-      await condition.sheet?.render(true);
-    }
+  async getTrackers() {
+    return Promise.all(
+      Array.from(this.actor.system?.conditionInformation[this.status]?.trackers ?? []).map(uuid => fromUuid(uuid)),
+    );
   }
 
   /**
@@ -213,15 +252,5 @@ export default class VirtualCondition extends BasePseudoDocument {
       title: "TERIOCK.DIALOGS.Select.Source.title",
     });
     await source?.sheet?.render(true);
-  }
-
-  /**
-   * Get a tooltip for this condition.
-   * @returns {Promise<*>}
-   * @todo Implement full panel handling with associated source documents, etc.
-   */
-  async toTooltip() {
-    const condition = await this.getCondition();
-    if (condition) { return condition.toTooltip(); }
   }
 }

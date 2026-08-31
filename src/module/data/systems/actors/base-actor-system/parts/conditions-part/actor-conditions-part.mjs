@@ -34,40 +34,20 @@ export default function ActorConditionsPart(Base) {
       return Object.assign(super.defineSchema(), {
         conditionInformation: new fields.SchemaField(
           objectMap(TERIOCK.index.conditions, () => {
-            return new fields.SchemaField({
-              locked: new fields.BooleanField(),
-              reasons: new fields.SetField(new fields.StringField()),
-              sources: new fields.SetField(new fields.DocumentUUIDField()),
-              trackers: new fields.SetField(new fields.DocumentUUIDField()),
-            });
+            return new fields.SchemaField({ trackers: new fields.SetField(new fields.DocumentUUIDField()) });
           }),
           { persisted: false },
         ),
-        virtualConditions: new PseudoCollectionField(VirtualCondition),
+        virtualConditions: new PseudoCollectionField(VirtualCondition, { persisted: false }),
       });
     }
 
     /**
-     * Copy active effect names into condition information.
+     * Add a VirtualCondition for each status from ActiveEffects.
      */
-    #applyEffectConditionReasons() {
+    #addAppliedVirtualConditions() {
       for (const e of this.parent.appliedEffects) {
         this._addVirtualConditions(Array.from(e.statuses), e);
-      }
-    }
-
-    /**
-     * Prepare condition information now that all virtual statuses have been applied.
-     */
-    #cleanConditionInformation() {
-      for (const part of ["arm", "leg"]) {
-        const str = `TERIOCK.STATUSES.Hacks.${part}Hack`;
-        if (this.conditionInformation.hacked.reasons.has(_loc(`${str}2`))) {
-          this.conditionInformation.hacked.reasons.delete(_loc(`${str}1`));
-        }
-      }
-      for (const info of Object.values(this.conditionInformation)) {
-        if (info.reasons.size > 0) { info.locked = true; }
       }
     }
 
@@ -122,12 +102,6 @@ export default function ActorConditionsPart(Base) {
     }
 
     /** @inheritDoc */
-    prepareCleanupData() {
-      super.prepareCleanupData();
-      this.#cleanConditionInformation();
-    }
-
-    /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
       for (const uuid of this.conditionInformation.allured.trackers) {
@@ -137,7 +111,7 @@ export default function ActorConditionsPart(Base) {
 
     /** @inheritDoc */
     prepareVirtualEffects() {
-      this.#applyEffectConditionReasons();
+      this.#addAppliedVirtualConditions();
       super.prepareVirtualEffects();
     }
 
