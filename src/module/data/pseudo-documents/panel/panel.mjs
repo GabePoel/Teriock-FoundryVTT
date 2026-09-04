@@ -79,6 +79,14 @@ export default class Panel extends BasePseudoDocument {
       icon: nullString(),
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
       name: nullString(),
+      tips: new fields.ArrayField(
+        new fields.SchemaField({
+          icon: new fields.StringField(),
+          level: new fields.StringField(),
+          text: new fields.StringField(),
+        }),
+        { initial: [] },
+      ),
     });
   }
 

@@ -123,7 +123,7 @@ export default function EmbeddableDataMixin(Base) {
                 if (!fn || (isEmbedded && action !== "openDoc")) { return; }
                 ev.stopImmediatePropagation();
                 ev.preventDefault();
-                if (["openDoc", "useDoc"].includes(action) || game.teriock.checkEditable(relative)) {
+                if (["chatDoc", "openDoc", "useDoc"].includes(action) || game.teriock.checkEditable(relative)) {
                   await fn(ev, relative);
                 }
               }

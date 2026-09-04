@@ -70,6 +70,12 @@ export default function ChildDocumentMixin(Base) {
     }
 
     /** @inheritDoc */
+    async toTooltip(data = {}, options = {}) {
+      data.tips ??= this.system.displayTips;
+      return super.toTooltip(data, options);
+    }
+
+    /** @inheritDoc */
     async use(options = {}) {
       await this.system.use(options);
     }
