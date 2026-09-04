@@ -85,9 +85,26 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
+  _onCreate(data, options, user) {
+    if (this.actor && Array.isArray(foundry.utils.getProperty(options, `dependents.${this.id}`))) {
+      this.createDependentDocuments("Item", options.dependents[this.id]);
+    }
+    super._onCreate(data, options, user);
+  }
+
+  /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if (this.actor?.isOwner) { this.actor.deleteEmbeddedDocuments("Item", this.dependents.map(d => d.id)); }
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    options.dependents ??= {};
+    options.dependents[this._id] = foundry.utils.getProperty(this, "flags._teriock.dependents") ?? [];
   }
 
   /**
@@ -189,5 +206,10 @@ export default class TeriockActiveEffect
   resetChildMaps() {
     super.resetChildMaps();
     delete this._cache.isReference;
+  }
+
+  /** @inheritDoc */
+  toObject(source = true) {
+    return Object.assign(super.toObject(source), { dependents: this.dependents.map(d => d.toObject(source)) });
   }
 }

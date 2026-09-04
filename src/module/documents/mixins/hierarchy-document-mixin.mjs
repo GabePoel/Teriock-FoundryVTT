@@ -82,7 +82,6 @@ export default function HierarchyDocumentMixin(Base) {
       operation.cachedKeepId = operation.keepId;
       operation.keepId = true;
       operation.dontRenderSheets ??= [];
-      for (const d of documents) { if (!d._id) { d.updateSource({ _id: randomID() }); } }
       const supDocs = documents.filter(d => hasProperty(d, "flags._teriock.id"));
       const idMap = new Map(supDocs.map(d => [getProperty(d, "flags._teriock.id"), d]));
       for (const d of documents) {
@@ -353,6 +352,8 @@ export default function HierarchyDocumentMixin(Base) {
       const elder = await this.getElder();
       const valid = await this.constructor.validateRelationship(elder, this, options);
       if (!valid) { return false; }
+
+      if (!this._id) { this.updateSource({ _id: randomID() }); }
     }
 
     /** @inheritDoc */

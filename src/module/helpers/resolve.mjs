@@ -92,22 +92,65 @@ export async function ensureNoChildren(document, identifiers) {
 }
 
 /**
- * Expand data arrays.
- * @param {object[]} data
- * @param {string|null} [sup]
- * @param {object} [operation]
- * @param {object} [options]
- * @param {boolean} [options.inplace=false]
- * @param {boolean} [options.keepId=false]
+ * Infer the `documentName` for a common document from its UUID or creation data.
+ * @param {object|UUID} data
+ * @returns {"ActiveEffect" | "Item" | null}
+ */
+function inferChildDocumentName(data) {
+  if (typeof data === "string") { return foundry.utils.parseUuid(data)?.type || null; }
+  if (ActiveEffect.implementation.TYPES.includes(data?.type)) { return "ActiveEffect"; }
+  if (Item.implementation.TYPES.includes(data?.type)) { return "Item"; }
+  return null;
+}
+
+/**
+ * Expand document data arrays recursively.
+ * @param {object[]} [data]
+ * @param {string|null} [sup=null]
+ * @param {object} [operation={}]
+ * @param {object} [options={}]
  * @returns {object[]}
  */
-export function expandDocumentDataArray(data, sup = null, operation = {}, options = {}) {
+export function expandDocumentDataArray(data = [], sup = null, operation = {}, options = {}) {
   operation.knownSubs ??= new Set();
-  const result = [];
+  const expandedData = [];
+
   for (const d of data) {
+    if (!d || typeof d !== "object") { continue; }
+    const masterDocumentName = inferChildDocumentName(d);
+
+    // Expand children array and sort them into their collections.
+    // TODO: Do something about `type="base"` type collisions. This is only gonna be a problem with modules though.
+    if (Array.isArray(d.children) && d.children.length) {
+      const childrenByDocumentName = {};
+      for (const c of d.children) {
+        const childDocumentName = inferChildDocumentName(c);
+        if (childDocumentName) {
+          childrenByDocumentName[childDocumentName] ??= [];
+          childrenByDocumentName[childDocumentName].push(c);
+        }
+      }
+
+      // Special handling by master document name.
+      if (masterDocumentName === "ActiveEffect") {
+        d.dependents ??= [];
+        d.dependents.push(...(childrenByDocumentName.Item ?? []));
+      } else if (masterDocumentName === "Item") {
+        d.effects ??= [];
+        d.effects.push(...(childrenByDocumentName.ActiveEffect ?? []));
+      }
+
+      if (masterDocumentName) {
+        d.subs ??= [];
+        d.subs.push(...(childrenByDocumentName[masterDocumentName] ?? []));
+      }
+      delete d.children;
+    }
+
+    // Assign sup id.
     const newId = (operation.keepId || options.keepId) && !sup && d._id ? d._id : foundry.utils.randomID();
-    if (sup && !(operation?.keepSubIds === false)) { foundry.utils.setProperty(d, "_id", newId); }
-    if (!sup && !(operation?.keepId === false)) { foundry.utils.setProperty(d, "_id", newId); }
+    if (sup && operation?.keepSubIds !== false) { foundry.utils.setProperty(d, "_id", newId); }
+    if (!sup && operation?.keepId !== false) { foundry.utils.setProperty(d, "_id", newId); }
     if (options.inplace) { foundry.utils.setProperty(d, "_id", newId); }
     if (sup) {
       foundry.utils.setProperty(d, "flags._teriock.sup", sup);
@@ -119,8 +162,25 @@ export function expandDocumentDataArray(data, sup = null, operation = {}, option
       }
     }
     foundry.utils.setProperty(d, "flags._teriock.id", newId);
-    result.push(...[d, ...expandDocumentDataArray(d.subs ?? [], newId, operation, options)]);
+
+    // Expand embedded effects array.
+    if (masterDocumentName === "Item" && Array.isArray(d.effects) && d.effects.length) {
+      d.effects = expandDocumentDataArray(d.effects, null, {
+        keepSubIds: operation.keepId,
+        knownSubs: operation.knownSubs,
+      }, { inplace: true, keepId: operation.keepEmbeddedIds ?? true });
+    }
+
+    // Migrate the dependents array to flags.
+    foundry.utils.setProperty(d, "flags._teriock.dependents", d.dependents ?? []);
+    delete d.dependents;
+
+    // Expand the sub array.
+    const expandedSubs = expandDocumentDataArray(d.subs ?? [], newId, operation, options);
     delete d.subs;
+
+    expandedData.push(d, ...expandedSubs);
   }
-  return result;
+
+  return expandedData;
 }

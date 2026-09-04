@@ -1,5 +1,4 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -33,19 +32,6 @@ export default class TeriockItem
       await foundry.documents.modifyBatch(operations);
     }
     await super._onWriteOperation(documents, operation, user);
-  }
-
-  /** @inheritDoc */
-  static async createDocuments(data = [], operation = {}) {
-    for (const d of data) {
-      if (Array.isArray(d.effects)) {
-        d.effects = expandDocumentDataArray(d.effects, null, { keepSubIds: operation.keepId }, {
-          inplace: true,
-          keepId: operation.keepEmbeddedIds ?? true,
-        });
-      }
-    }
-    return super.createDocuments(data, operation);
   }
 
   /** @inheritDoc */
