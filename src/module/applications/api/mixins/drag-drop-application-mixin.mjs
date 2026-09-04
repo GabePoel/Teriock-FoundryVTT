@@ -2,7 +2,6 @@ const { DragDrop } = foundry.applications.ux;
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
- * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
  */
 
 /**
@@ -14,8 +13,8 @@ const { DragDrop } = foundry.applications.ux;
 export default function DragDropApplicationMixin(Base) {
   /**
    * @mixes BaseApplication
-   * @property {ApplicationConfiguration & Teriock.Application._ApplicationConfiguration} options
    * @mixin
+   * @property {ApplicationConfiguration & Teriock.Application._ApplicationConfiguration} options
    */
   class DragDropApplication extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */

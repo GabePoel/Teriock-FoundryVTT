@@ -121,23 +121,9 @@ export default function ChatMessageConnectionMixin(Base) {
       connect(".dice-total[data-id]", ({ config, roll }) => roll._getTotalContextOptions(config));
     }
 
-    /**
-     * Suppress default context menus for elements that have a right click button.
-     * @param {MouseEvent} event
-     */
-    #suppressContextMenu(event) {
-      const target = /** @type {HTMLElement} */ event.target.closest("[data-action]");
-      const action = target && this.options.actions[target.dataset.action];
-      if (action?.suppressContextMenu || event.target.closest("[data-suppress-context-menu]")) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-    }
-
     /** @inheritDoc */
     _attachFrameListeners() {
       super._attachFrameListeners();
-      this.element.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
       this.#connectImageContextMenu();
       this.#connectRollContextMenus();
     }

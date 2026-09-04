@@ -26,9 +26,26 @@ export default function MechanicsSheetMixin(Base) {
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
   class MechanicsSheet extends ChangesSheetMixin(Base) {
+    /**
+     * Handle click events to copy the UUID of this Pseudo-Document to clipboard.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     */
+    static async #onCopyMechanicUuid(event, target) {
+      const pseudo = await fromUuid(target.dataset.uuid);
+      if (!pseudo) { return; }
+      const id = event.button === 2 ? pseudo.id : pseudo.uuid;
+      const type = event.button === 2 ? "ID" : "UUID";
+      const label = _loc(`DOCUMENT.${pseudo.documentName}`);
+      game.clipboard.copyPlainText(id);
+      ui.notifications.info("DOCUMENT.IdCopiedClipboard", { format: { id, label, type } });
+    }
+
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
+        copyMechanicUuid: { buttons: [0, 2], handler: this.#onCopyMechanicUuid, suppressContextMenu: true },
         createMechanic: this._onCreateMechanic,
         deleteMechanic: this._onDeleteMechanic,
         editActiveQualifier: this._onEditActiveQualifier,

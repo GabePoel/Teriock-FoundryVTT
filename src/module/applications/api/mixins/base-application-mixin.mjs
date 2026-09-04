@@ -144,6 +144,19 @@ export default function BaseApplicationMixin(Base) {
     }
 
     /**
+     * Suppress default context menus for elements that have a right click button.
+     * @param {MouseEvent} event
+     */
+    #suppressContextMenu(event) {
+      const target = /** @type {HTMLElement} */ event.target.closest("[data-action]");
+      const action = target && this.options.actions[target.dataset.action];
+      if (action?.suppressContextMenu || event.target.closest("[data-suppress-context-menu]")) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }
+
+    /**
      * Whether this application is detached.
      * @returns {boolean}
      */
@@ -167,6 +180,7 @@ export default function BaseApplicationMixin(Base) {
       this.element.addEventListener("keydown", this._onPressKey.bind(this));
       this.element.addEventListener("dblclick", this.#onDoubleClick.bind(this));
       this.element.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
+      this.element.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
     }
 
     /**
