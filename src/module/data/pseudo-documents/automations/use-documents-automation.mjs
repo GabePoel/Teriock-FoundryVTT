@@ -2,7 +2,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { UseDocumentsActivation } from "../activations/_module.mjs";
 import {
   CritMechanicMixin,
-  OverrideCompetenceMechanicMixin,
+  OverrideCompetencePseudoDocumentMixin,
   SelectionPseudoDocumentMixin,
 } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -23,7 +23,7 @@ export default class UseDocumentsAutomation
     SelectionPseudoDocumentMixin,
     automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,
-    OverrideCompetenceMechanicMixin,
+    OverrideCompetencePseudoDocumentMixin,
     automationMixins.OverrideDataAutomationMixin,
   )
 {

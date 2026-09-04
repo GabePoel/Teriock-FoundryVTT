@@ -49,7 +49,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
     const rollData = this.actors[0]?.getRollData?.() ?? consumable.getRollData?.() ?? {};
     const roll = new BaseRoll(formula, rollData, { flavor: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.roll") });
     await roll.evaluate();
-    const wrappers = [_loc("TERIOCK.AUTOMATIONS.Base.LABEL")];
+    const wrappers = [_loc("DOCUMENT.Automation")];
     if (this.triggerLabel) { wrappers.push(this.triggerLabel); }
     const panelData = {
       bars: [{

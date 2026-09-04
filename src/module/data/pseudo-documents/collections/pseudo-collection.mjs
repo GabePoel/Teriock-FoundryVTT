@@ -2,7 +2,7 @@ import { TypeCollection } from "../../../documents/collections/_module.mjs";
 
 /**
  * Used for the specific task of containing embedded Pseudo-Document instances within a parent Document.
- * @template {{ type: string }} TPseudo
+ * @template TPseudo
  * @extends {TypeCollection<TPseudo>}
  */
 export default class PseudoCollection extends TypeCollection {

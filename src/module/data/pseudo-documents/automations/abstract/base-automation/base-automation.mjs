@@ -4,11 +4,6 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
 
-  /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Base.LABEL";
-  }
-
   /**
    * @inheritDoc
    * @returns {{ documentName: "Automation", macro: boolean }}
@@ -18,7 +13,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
       changes: false,
       crit: false,
       documentName: "Automation",
-      label: _loc("TERIOCK.AUTOMATIONS.Base.LABEL"),
+      label: _loc("DOCUMENT.Automation"),
       macro: false,
       trigger: false,
     });

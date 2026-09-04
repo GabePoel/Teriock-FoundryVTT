@@ -25,13 +25,8 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.EXPIRATIONS.Base.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { documentName: "Expiration", label: _loc("TERIOCK.EXPIRATIONS.Base.LABEL") });
+    return Object.assign(super.metadata, { documentName: "Expiration", label: _loc("DOCUMENT.Expiration") });
   }
 
   /** @inheritDoc */

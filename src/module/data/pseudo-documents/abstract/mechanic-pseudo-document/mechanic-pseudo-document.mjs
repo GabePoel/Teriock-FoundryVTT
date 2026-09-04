@@ -15,11 +15,6 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Base"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.MECHANICS.Base.LABEL";
-  }
-
-  /** @inheritDoc */
   static get TYPE() {
     return "base";
   }

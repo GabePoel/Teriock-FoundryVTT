@@ -36,16 +36,11 @@ export default class BaseAffinity
   }
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AFFINITIES.Base.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, {
       documentName: "Affinity",
       icon: TERIOCK.display.icons.pseudoDocument.affinity,
-      label: _loc("TERIOCK.AFFINITIES.Base.LABEL"),
+      label: _loc("DOCUMENT.Affinity"),
     });
   }
 

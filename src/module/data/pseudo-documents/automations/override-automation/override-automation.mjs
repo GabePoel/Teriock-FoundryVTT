@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
-import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../../mixins/_module.mjs";
+import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import * as automationMixins from "../mixins/_module.mjs";
 
@@ -17,7 +17,7 @@ export default class OverrideAutomation
     CritMechanicMixin(BaseAutomation),
     automationMixins.DisplayAutomationMixin,
     automationMixins.OverrideDataAutomationMixin,
-    OverrideCompetenceMechanicMixin,
+    OverrideCompetencePseudoDocumentMixin,
   )
 {
   /** @inheritDoc */

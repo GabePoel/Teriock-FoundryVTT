@@ -7,12 +7,12 @@ const { fields } = foundry.data;
  * Adds an optional competence override to a {@link MechanicPseudoDocument}.
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, OverrideCompetenceMechanic & Teriock.PseudoDocuments.OverrideCompetenceMechanicData>}
+ * @returns {MixinResult<T, OverrideCompetenceMechanic & Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData>}
  */
-export default function OverrideCompetenceMechanicMixin(Base) {
+export default function OverrideCompetencePseudoDocumentMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.PseudoDocuments.OverrideCompetenceMechanicData}
+   * @implements {Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData}
    */
   class OverrideCompetenceMechanic extends Base {
     /** @inheritDoc */

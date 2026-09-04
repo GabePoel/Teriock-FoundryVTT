@@ -9,7 +9,7 @@ const { fields } = foundry.data;
 export default class ExpirationActivation extends BaseActivation {
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.EXPIRATIONS.Base.LABEL";
+    return "DOCUMENT.Expiration";
   }
 
   /** @inheritDoc */

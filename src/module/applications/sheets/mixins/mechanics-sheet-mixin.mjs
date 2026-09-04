@@ -72,7 +72,7 @@ export default function MechanicsSheetMixin(Base) {
         });
       }
       if (!choice) { return; }
-      await config.baseClass.create({ type: choice }, { parent: this.document });
+      await this.document.createPseudoDocuments(config.baseClass.documentName, [{ type: choice }]);
     }
 
     /**
@@ -129,8 +129,7 @@ export default function MechanicsSheetMixin(Base) {
      * @returns {Record<string, Teriock.Sheet.MechanicCollectionConfig>}
      */
     get _mechanicCollections() {
-      const system = this.document.system;
-      const pseudos = system.pseudoCollections ?? {};
+      const pseudos = this.document.pseudoCollections;
       const collections = {};
       if (pseudos.Automation) {
         collections.automations = {
@@ -141,7 +140,7 @@ export default function MechanicsSheetMixin(Base) {
           icon: TERIOCK.display.icons.pseudoDocument.automation,
           id: "automations",
           title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
-          types: system.constructor.automationTypes,
+          types: this.document.system.constructor.automationTypes,
         };
       }
       if (pseudos.Affinity) {
@@ -153,7 +152,7 @@ export default function MechanicsSheetMixin(Base) {
           icon: TERIOCK.display.icons.pseudoDocument.affinity,
           id: "affinities",
           title: _loc("TERIOCK.DIALOGS.Select.AddAffinity.title"),
-          types: system.constructor.affinityTypes,
+          types: this.document.system.constructor.affinityTypes,
         };
       }
       if (pseudos.Expiration) {
@@ -165,7 +164,7 @@ export default function MechanicsSheetMixin(Base) {
           icon: TERIOCK.display.icons.pseudoDocument.expiration,
           id: "expirations",
           title: _loc("TERIOCK.DIALOGS.Select.AddExpiration.title"),
-          types: system.constructor.expirationTypes,
+          types: this.document.system.constructor.expirationTypes,
         };
       }
       return collections;
@@ -225,9 +224,9 @@ export default function MechanicsSheetMixin(Base) {
     async _onDropMechanic(_event, dropData) {
       const baseClass = this._mechanicCollectionFor(dropData.type)?.baseClass;
       if (!baseClass) { return false; }
-      const document = await baseClass.fromDropData(dropData);
-      if (!document || !this._validateDrop({ document })) { return false; }
-      await baseClass.create(document.toObject(), { parent: this.document });
+      const pseudo = await baseClass.fromDropData(dropData);
+      if (!pseudo || !this._validateDrop({ document: pseudo })) { return false; }
+      await this.document.createPseudoDocuments(pseudo.documentName, [pseudo.toObject()]);
       return true;
     }
 

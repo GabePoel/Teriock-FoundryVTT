@@ -7,7 +7,7 @@ import { defaultJSONField } from "../../../fields/tools/builders.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import {
   CritMechanicMixin,
-  OverrideCompetenceMechanicMixin,
+  OverrideCompetencePseudoDocumentMixin,
   SelectionPseudoDocumentMixin,
 } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -27,7 +27,7 @@ export default class AddDocumentsAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
     SelectionPseudoDocumentMixin,
-    OverrideCompetenceMechanicMixin,
+    OverrideCompetencePseudoDocumentMixin,
     automationMixins.OverrideDataAutomationMixin,
     automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,

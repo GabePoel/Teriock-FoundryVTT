@@ -12,6 +12,7 @@ export { default as ChatStatusAutomation } from "./chat-status-automation/chat-s
 export { default as ChildChangeAutomation } from "./child-change-automation/child-change-automation.mjs";
 export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation/common-outcomes-automation.mjs";
+export { default as ConstructDocumentsAutomation } from "./construct-documents-automation/construct-documents-automation.mjs";
 export { default as CoverAutomation } from "./cover-automation/cover-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation/duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation/feat-automation.mjs";

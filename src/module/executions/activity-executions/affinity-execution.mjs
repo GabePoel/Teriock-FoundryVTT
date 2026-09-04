@@ -75,7 +75,7 @@ export default class AffinityExecution extends BaseExecution {
       color: foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
       icon: this.icon,
       img: this.img,
-      label: _loc("TERIOCK.AFFINITIES.Base.LABEL"),
+      label: _loc("DOCUMENT.Affinity"),
       name: this.name,
       uuid: this.journalEntryPage?.uuid,
     });

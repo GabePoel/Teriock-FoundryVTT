@@ -5,7 +5,7 @@ const { fields } = foundry.data;
 export default class BaseActivation extends TypedPseudoDocument {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { documentName: "Activation", label: _loc("TERIOCK.ACTIVATIONS.Base.LABEL") });
+    return Object.assign(super.metadata, { documentName: "Activation", label: _loc("DOCUMENT.Activation") });
   }
 
   /** @inheritDoc */

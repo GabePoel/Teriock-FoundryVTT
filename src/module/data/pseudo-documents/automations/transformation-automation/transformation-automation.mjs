@@ -3,19 +3,23 @@ import { omit } from "../../../../helpers/utils.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 import {
   CritMechanicMixin,
-  OverrideCompetenceMechanicMixin,
+  OverrideCompetencePseudoDocumentMixin,
   SelectionPseudoDocumentMixin,
 } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 /**
- * @implements {Teriock.Transformation.AutomationTransformationConfig}
  * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */
 export default class TransformationAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, SelectionPseudoDocumentMixin, OverrideCompetenceMechanicMixin)
+  extends mixClasses(
+    BaseAutomation,
+    CritMechanicMixin,
+    SelectionPseudoDocumentMixin,
+    OverrideCompetencePseudoDocumentMixin,
+  )
 {
   /** @inheritDoc */
   static get LABEL() {

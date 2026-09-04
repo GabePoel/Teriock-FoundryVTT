@@ -32,12 +32,6 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
-     * Cached pseudo-document collections map.
-     * @type {Record<string, PseudoCollection>}
-     */
-    #pseudoCollections;
-
-    /**
      * Raw color source or null.
      * @returns {ColorSource|null}
      */
@@ -171,21 +165,6 @@ export default function BaseSystemMixin(Base) {
     /** @returns {Partial<Teriock.Documents.ModelMetadata>} */
     get metadata() {
       return this.constructor.metadata;
-    }
-
-    /**
-     * The pseudo-document collections.
-     * @returns {Teriock.Documents.PseudoCollections}
-     */
-    get pseudoCollections() {
-      if (!this.#pseudoCollections) {
-        this.#pseudoCollections = {};
-        const pseudoMap = this.metadata?.pseudos ?? {};
-        for (const [documentName, path] of Object.entries(pseudoMap)) {
-          this.#pseudoCollections[documentName] = foundry.utils.getProperty(this.parent, path);
-        }
-      }
-      return this.#pseudoCollections;
     }
 
     /**

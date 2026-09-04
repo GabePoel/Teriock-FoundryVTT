@@ -1,5 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
+import { PseudoCollectionsDataMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -11,13 +13,21 @@ const { fields } = foundry.data;
 /**
  * @property {AccessData} parent
  */
-export default class BasePseudoDocument extends BaseDataModel {
+export default class BasePseudoDocument extends mixClasses(BaseDataModel, PseudoCollectionsDataMixin) {
+  /**
+   * The document name of this Pseudo-Document.
+   * @returns {string}
+   */
+  static get documentName() {
+    return this.metadata.documentName;
+  }
+
   /**
    * Label for this pseudo-document class.
    * @returns {string}
    */
   static get LABEL() {
-    return "";
+    return _loc(`DOCUMENT.${this.documentName}`);
   }
 
   /**
@@ -37,22 +47,33 @@ export default class BasePseudoDocument extends BaseDataModel {
   }
 
   /**
-   * Create a pseudo-document within some parent document.
+   * Create a Pseudo-Document within some parent Document or Pseudo-Document.
    * @param {object} data
-   * @param {CommonSystem | HarmSystem} parent
+   * @param {TeriockDocument|BasePseudoDocument} parent
    * @param {DatabaseCreateOperation} operation
    * @returns {Promise<BasePseudoDocument>}
    */
   static async create(data = {}, { parent, ...operation } = {}) {
+    return (await this.createDocuments([data], { parent, ...operation }))[0];
+  }
+
+  /**
+   * Create Pseudo-Documents within some parent Document or Pseudo-Document.
+   * @param {object[]} data
+   * @param {TeriockDocument|BasePseudoDocument} parent
+   * @param {DatabaseCreateOperation} operation
+   * @returns {Promise<BasePseudoDocument[]>}
+   */
+  static async createDocuments(data = [], { parent, ...operation } = {}) {
+    if (operation.parentUuid && !parent) { parent = await fromUuid(operation.parentUuid); }
     if (!parent) { throw new Error("Pseudo-documents must have parents"); }
-    const id = operation.keepId && foundry.data.validators.isValidId(data._id) ? data._id : foundry.utils.randomID();
-    /** @type {CommonSystem} */
-    const directParent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent : parent.system;
-    const fieldPath = directParent.metadata?.pseudos?.[this.metadata.documentName];
+    parent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent.parent : parent;
+    const fieldPath = parent.metadata?.pseudos?.[this.documentName];
     if (!fieldPath) { throw new Error("Invalid pseudo-document parent"); }
-    const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
-    await directParent.document.update(updateData, operation);
-    return foundry.utils.getProperty(directParent.parent, fieldPath).get(id);
+    const newData = this.toCollectionObject(data);
+    await parent.update({ [fieldPath]: newData });
+    const collection = parent.getEmbeddedCollection(this.documentName);
+    return Object.keys(newData).map(id => collection?.get(id));
   }
 
   /** @inheritDoc */
@@ -99,11 +120,11 @@ export default class BasePseudoDocument extends BaseDataModel {
   }
 
   /**
-   * The document name of this pseudo-document.
-   * @returns {null}
+   * The document name of this Pseudo-Document.
+   * @returns {string}
    */
   get documentName() {
-    return this.constructor.metadata.documentName;
+    return this.constructor.documentName;
   }
 
   /**
@@ -170,9 +191,9 @@ export default class BasePseudoDocument extends BaseDataModel {
   }
 
   /**
-   * Delete this pseudo-document, removing it from the database.
+   * Delete this Pseudo-Document, removing it from the database.
    * @param {Partial<DatabaseDeleteOperation>} operation - Parameters of the deletion operation
-   * @returns {Promise<BasePseudoDocument|undefined>} The deleted PseudoDocument instance, or undefined if not deleted
+   * @returns {Promise<BasePseudoDocument|undefined>} The deleted Pseudo-Document instance, or undefined if not deleted
    */
   async delete(operation = {}) {
     if (!this.document) { return undefined; }
@@ -190,7 +211,7 @@ export default class BasePseudoDocument extends BaseDataModel {
    */
   async deleteDialog(options = {}, operation = {}) {
     let content = options.content;
-    const type = _loc(this.constructor.metadata.label);
+    const type = _loc(`DOCUMENT.${this.documentName}`);
     if (!content) {
       const question = _loc("COMMON.AreYouSure");
       const warning = _loc("SIDEBAR.DeleteWarning", { type: type.toLowerCase() });

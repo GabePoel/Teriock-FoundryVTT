@@ -103,14 +103,6 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
-     * The document type's metadata.
-     * @returns {Teriock.Documents.ModelMetadata}
-     */
-    get metadata() {
-      return this.system.constructor.metadata;
-    }
-
-    /**
      * Types that can be shown on this document's sheet.
      * @returns {Teriock.Documents.CommonType[]}
      */

@@ -1,4 +1,5 @@
-import { AbstractDataMixin } from "../../data/mixins/_module.mjs";
+import { AbstractDataMixin, PseudoCollectionsDataMixin } from "../../data/mixins/_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
@@ -15,9 +16,10 @@ import { toId, toKebabCase } from "../../helpers/string.mjs";
 export default function BaseDocumentMixin(Base) {
   /**
    * @mixes AbstractData
+   * @mixes PseudoCollectionsData
    * @mixin
    */
-  class BaseDocument extends AbstractDataMixin(Base) {
+  class BaseDocument extends mixClasses(Base, AbstractDataMixin, PseudoCollectionsDataMixin) {
     /**
      * Metadata that Teriock uses but Foundry doesn't.
      * @returns {Teriock.Documents.DocumentMetadata}
@@ -233,11 +235,11 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
-     * The pseudo-document collections.
-     * @returns {Teriock.Documents.PseudoCollections}
+     * The document type's metadata.
+     * @returns {Teriock.Documents.ModelMetadata}
      */
-    get pseudoCollections() {
-      return this.system?.pseudoCollections ?? {};
+    get metadata() {
+      return this.system?.constructor.metadata;
     }
 
     /**
@@ -370,11 +372,6 @@ export default function BaseDocumentMixin(Base) {
         return doc ?? fromUuidSync(uuid);
       }
       return fromUuidSync(uuid);
-    }
-
-    /** @inheritdoc */
-    getEmbeddedCollection(embeddedName) {
-      return this.pseudoCollections[embeddedName] ?? super.getEmbeddedCollection(embeddedName);
     }
 
     /** @inheritDoc */

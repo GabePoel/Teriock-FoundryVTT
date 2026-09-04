@@ -2,7 +2,7 @@ import { selectTradecraftDialog, selectTradecraftsDialog } from "../../../../app
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { tradecraftsField } from "../../../fields/tools/builders.mjs";
 import { TradecraftActivation } from "../../activations/command-activations.mjs";
-import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../../mixins/_module.mjs";
+import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import * as automationMixins from "../mixins/_module.mjs";
 
@@ -18,7 +18,7 @@ export default class TradecraftAutomation
     ThresholdAutomation,
     CritMechanicMixin,
     automationMixins.TriggerAutomationMixin,
-    OverrideCompetenceMechanicMixin,
+    OverrideCompetencePseudoDocumentMixin,
   )
 {
   /** @inheritDoc */

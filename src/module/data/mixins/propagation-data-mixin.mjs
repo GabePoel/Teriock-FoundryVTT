@@ -43,15 +43,12 @@ export default function PropagationDataMixin(Base) {
      */
     async _propagateOperation(methodName, isAsync = false, args = []) {
       // Propagate operation to embedded collections
-      const collections = this.constructor.metadata?.embedded || {};
-      for (const path of Object.values(collections)) {
-        const collection = foundry.utils.getProperty(this, path);
-        if (collection) {
-          for (const doc of collection) {
-            if (typeof doc[methodName] === "function") {
-              if (isAsync) { await doc[methodName](...args); }
-              else { doc[methodName](...args); }
-            }
+      const collections = [...Object.values(this.collections ?? {}), ...Object.values(this.pseudoCollections ?? {})];
+      for (const collection of collections) {
+        for (const doc of collection) {
+          if (typeof doc[methodName] === "function") {
+            if (isAsync) { await doc[methodName](...args); }
+            else { doc[methodName](...args); }
           }
         }
       }

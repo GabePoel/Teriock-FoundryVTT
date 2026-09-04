@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { AttackActivation } from "../../activations/_module.mjs";
-import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../../mixins/_module.mjs";
+import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import * as automationMixins from "../mixins/_module.mjs";
 
@@ -19,7 +19,7 @@ export default class AttackAutomation
     ThresholdAutomation,
     CritMechanicMixin,
     automationMixins.TriggerAutomationMixin,
-    OverrideCompetenceMechanicMixin,
+    OverrideCompetencePseudoDocumentMixin,
   )
 {
   /** @inheritDoc */

@@ -142,19 +142,6 @@ export default function CommonSystemMixin(Base) {
       }
     }
 
-    /** @inheritDoc */
-    async _propagateOperation(methodName, isAsync = false, args = []) {
-      for (const collection of Object.values(this.pseudoCollections)) {
-        for (const pseudo of collection.contents) {
-          if (typeof pseudo[methodName] === "function") {
-            if (isAsync) { await pseudo[methodName](...args); }
-            else { pseudo[methodName](...args); }
-          }
-        }
-      }
-      await super._propagateOperation(methodName, isAsync, args);
-    }
-
     /**
      * Open a panel instead of a full editable sheet.
      * @param {TeriockDocument} _doc
