@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { omit } from "../../../helpers/utils.mjs";
@@ -63,8 +63,8 @@ export default class ApplicableEffectSheet
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
-      tabs: [...super.TABS.sheet.tabs, { icon: makeIconClass(icons.ui.document, "solid"), id: "children" }, {
-        icon: makeIconClass(icons.pseudoDocument.mechanic, "solid"),
+      tabs: [...super.TABS.sheet.tabs, { icon: makeIconClass(icons.manifest.ui.document, "solid"), id: "children" }, {
+        icon: makeIconClass(icons.manifest.pseudoDocument.mechanic, "solid"),
         id: "mechanics",
       }],
     },

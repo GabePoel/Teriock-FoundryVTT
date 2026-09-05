@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import TeriockChatMessage from "../../../../documents/chat-message/chat-message.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -7,7 +6,7 @@ const { fields } = foundry.data;
 export default class MacroActivation extends BaseActivation {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.document.macro, type: "macro" });
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.document.macro, type: "macro" });
   }
 
   /** @inheritDoc */

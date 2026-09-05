@@ -1,5 +1,5 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 
 /**
  * Build an equipment command function.
@@ -108,7 +108,7 @@ const takeReadMagic = equipmentCommandFunctionFactory(
  * @type {Teriock.Command.CommandEntry}
  */
 export const shatterCommand = {
-  icon: icons.break.shatter,
+  icon: icons.manifest.break.shatter,
   id: "shatter",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
   primary: takeShatter,
@@ -120,7 +120,7 @@ export const shatterCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const repairCommand = {
-  icon: icons.break.repair,
+  icon: icons.manifest.break.repair,
   id: "repair",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.repair",
   primary: takeRepair,
@@ -132,7 +132,7 @@ export const repairCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const destroyCommand = {
-  icon: icons.break.destroy,
+  icon: icons.manifest.break.destroy,
   id: "destroy",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
   primary: takeDestroy,
@@ -144,7 +144,7 @@ export const destroyCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const reforgeCommand = {
-  icon: icons.break.reforge,
+  icon: icons.manifest.break.reforge,
   id: "reforge",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
   primary: takeReforge,
@@ -156,7 +156,7 @@ export const reforgeCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const glueCommand = {
-  icon: icons.equipment.glue,
+  icon: icons.manifest.equipment.glue,
   id: "glue",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
   primary: takeGlue,
@@ -168,7 +168,7 @@ export const glueCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const unglueCommand = {
-  icon: icons.equipment.unglue,
+  icon: icons.manifest.equipment.unglue,
   id: "unglue",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
   primary: takeUnglue,
@@ -180,7 +180,7 @@ export const unglueCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const dampenCommand = {
-  icon: icons.equipment.dampen,
+  icon: icons.manifest.equipment.dampen,
   id: "dampen",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
   primary: takeDampen,
@@ -192,7 +192,7 @@ export const dampenCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const undampenCommand = {
-  icon: icons.equipment.undampen,
+  icon: icons.manifest.equipment.undampen,
   id: "undampen",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
   primary: takeUndampen,
@@ -204,7 +204,7 @@ export const undampenCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const identifyCommand = {
-  icon: icons.equipment.identify,
+  icon: icons.manifest.equipment.identify,
   id: "identify",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
   primary: takeIdentify,
@@ -215,7 +215,7 @@ export const identifyCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const readMagicCommand = {
-  icon: icons.equipment.readMagic,
+  icon: icons.manifest.equipment.readMagic,
   id: "readMagic",
   label: "TERIOCK.SYSTEMS.Equipment.MENU.readMagic",
   primary: takeReadMagic,

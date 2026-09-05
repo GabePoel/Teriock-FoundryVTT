@@ -142,7 +142,7 @@ export default class TeriockTooltipManager extends TooltipManager {
    */
   async initializeLoadingTooltip() {
     await game.teriock.templatesReady;
-    const loadingPanel = new teriock.data.pseudoDocuments.Panel(TERIOCK.display.panel.premade.loading);
+    const loadingPanel = new teriock.data.pseudoDocuments.Panel(TERIOCK.display.panels.common.loading);
     this.#loadingTooltipHTML = await loadingPanel.renderHTML();
   }
 

@@ -1,4 +1,4 @@
-import { icons } from "../display/icons.mjs";
+import { icons } from "../display/_module.mjs";
 
 /**
  * Default values and display data for inheritable document settings.
@@ -6,11 +6,11 @@ import { icons } from "../display/icons.mjs";
 export default {
   categories: {
     ability: {
-      icon: icons.document.ability,
+      icon: icons.manifest.document.ability,
       settings: { autoPayCosts: true, consumeAmmunition: true, consumeEquipment: false },
     },
     actor: {
-      icon: icons.document.character,
+      icon: icons.manifest.document.character,
       settings: {
         autoColoration: true,
         autoDetectionModes: true,
@@ -25,11 +25,11 @@ export default {
       },
     },
     armament: {
-      icon: icons.target.weapon,
+      icon: icons.manifest.target.weapon,
       settings: { rollAttackOnUse: false, rollSecretly: false, rollTwoHanded: false },
     },
-    consumable: { icon: icons.ui.quantity, settings: { consumeOnUse: true } },
-    equipment: { icon: icons.document.equipment, settings: { consumeAmmunition: false } },
+    consumable: { icon: icons.manifest.ui.quantity, settings: { consumeOnUse: true } },
+    equipment: { icon: icons.manifest.document.equipment, settings: { consumeAmmunition: false } },
   },
   compositions: {
     ability: ["ability", "consumable"],

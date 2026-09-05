@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentSelector } from "../../dialogs/_module.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
@@ -50,7 +50,10 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
-      tabs: [...super.TABS.sheet.tabs, { icon: makeIconClass(icons.effect.transform, "solid"), id: "transformation" }],
+      tabs: [...super.TABS.sheet.tabs, {
+        icon: makeIconClass(icons.manifest.effect.transform, "solid"),
+        id: "transformation",
+      }],
     },
   };
 

@@ -1,4 +1,4 @@
-import { icons } from "../../../../../../constants/display/icons.mjs";
+import { icons } from "../../../../../../constants/display/_module.mjs";
 import { createElement } from "../../../../../../helpers/html.mjs";
 import { asInf, makeIconClass } from "../../../../../../helpers/icon.mjs";
 import { toId, toKebabCase } from "../../../../../../helpers/string.mjs";
@@ -149,7 +149,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       window: {
         controls: [{
           action: "deathBagPull",
-          icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
+          icon: makeIconClass(icons.manifest.ui.deathBag, "contextMenu"),
           label: "TERIOCK.EFFECTS.Common.bag",
           ownership: "OWNER",
           visible() {
@@ -157,7 +157,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           },
         }, {
           action: "takeLongRest",
-          icon: makeIconClass(icons.ui.longRest, "contextMenu"),
+          icon: makeIconClass(icons.manifest.ui.longRest, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
           ownership: "OWNER",
           visible() {
@@ -165,7 +165,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           },
         }, {
           action: "takeShortRest",
-          icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
+          icon: makeIconClass(icons.manifest.ui.shortRest, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
           ownership: "OWNER",
           visible() {

@@ -1,4 +1,3 @@
-import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { TeriockApplication } from "../api/_module.mjs";
 
@@ -102,7 +101,11 @@ export default class BaseMenu extends TeriockApplication {
     context.icon = undefined;
     context.label = undefined;
     context.fieldset = false;
-    context.buttons = [{ icon: makeIconClass(icons.ui.save, "button"), label: "SETTINGS.Save", type: "submit" }];
+    context.buttons = [{
+      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.save, "button"),
+      label: "SETTINGS.Save",
+      type: "submit",
+    }];
     return context;
   }
 

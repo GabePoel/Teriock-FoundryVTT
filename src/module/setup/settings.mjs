@@ -4,7 +4,7 @@ import dieConfig from "../constants/config/death-bag-config.mjs";
 import documentBehaviorConfig from "../constants/config/document-behavior-config.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
-import { icons } from "../constants/display/icons.mjs";
+import { icons } from "../constants/display/_module.mjs";
 import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
@@ -34,21 +34,21 @@ export const menus = {
   alternateRules: {
     groups: {
       armor: {
-        icon: icons.target.armor,
+        icon: icons.manifest.target.armor,
         settings: {
           armorSuppressesRanks: { default: false, scope: "world", type: Boolean },
           armorWeakensRanks: { default: false, scope: "world", type: Boolean },
         },
       },
       cone: {
-        icon: icons.delivery.cone,
+        icon: icons.manifest.delivery.cone,
         settings: {
           defaultConeAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
           defaultDragonBreathAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
         },
       },
     },
-    icon: icons.settings.alternateRules,
+    icon: icons.manifest.settings.alternateRules,
   },
   compendiumPriority: {
     application: CompendiumPriorityMenu,
@@ -78,7 +78,7 @@ export const menus = {
         template: "teriock/menus/compendium-priority-menu",
       },
     },
-    icon: icons.ui.compendium,
+    icon: icons.manifest.ui.compendium,
   },
   dialog: {
     groups: {
@@ -90,20 +90,20 @@ export const menus = {
         },
       },
     },
-    icon: icons.settings.dialog,
+    icon: icons.manifest.settings.dialog,
   },
   display: {
     format: "tabs",
     groups: {
       actorSheet: {
-        icon: icons.ui.actorSheet,
+        icon: icons.manifest.ui.actorSheet,
         settings: {
           floatingActorTabs: { default: true, requiresReload: true, scope: "client", type: Boolean },
           highlightModifiedValues: { default: false, requiresReload: true, scope: "client", type: Boolean },
         },
       },
       chat: {
-        icon: icons.ui.chat,
+        icon: icons.manifest.ui.chat,
         settings: {
           autoPanelCollapseTime: { default: 5, scope: "client", type: new InfiniteNumberField() },
           autoTriggerDeleteTime: { default: 5, scope: "client", type: new InfiniteNumberField() },
@@ -121,14 +121,14 @@ export const menus = {
         },
       },
       dragDrop: {
-        icon: icons.ui.dragDrop,
+        icon: icons.manifest.ui.dragDrop,
         settings: {
           maximizeApplicationsOnDragEnter: { default: true, scope: "client", type: Boolean },
           minimizeApplicationsOnDragStart: { default: true, scope: "client", type: Boolean },
         },
       },
       general: {
-        icon: icons.ui.settings,
+        icon: icons.manifest.ui.settings,
         settings: {
           openConditionsAsJournalEntryPages: { default: true, scope: "user", type: Boolean },
           styleDice: { default: true, scope: "client", type: Boolean },
@@ -136,7 +136,7 @@ export const menus = {
         },
       },
       tooltip: {
-        icon: icons.ui.tooltip,
+        icon: icons.manifest.ui.tooltip,
         settings: {
           compendiumTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
           contentLinkTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
@@ -160,14 +160,14 @@ export const menus = {
         },
       },
     },
-    icon: icons.settings.display,
+    icon: icons.manifest.settings.display,
   },
-  documentBehavior: { format: "tabs", groups: DOCUMENT_BEHAVIOR_GROUPS, icon: icons.ui.document },
+  documentBehavior: { format: "tabs", groups: DOCUMENT_BEHAVIOR_GROUPS, icon: icons.manifest.ui.document },
   gameMasterControls: {
     format: "tabs",
     groups: {
       general: {
-        icon: icons.ui.settings,
+        icon: icons.manifest.ui.settings,
         settings: {
           deathBagStoneColors: {
             default: Object.keys(dieConfig.stones).filter(k => dieConfig.stones[k].initial),
@@ -202,7 +202,7 @@ export const menus = {
         },
       },
       secrets: {
-        icon: icons.ui.secret,
+        icon: icons.manifest.ui.secret,
         settings: {
           deathBagMessageMode: {
             default: null,
@@ -226,20 +226,20 @@ export const menus = {
       },
 
       developer: {
-        icon: icons.ui.developer,
+        icon: icons.manifest.ui.developer,
         settings: {
           developerMode: { default: false, scope: "world", type: Boolean },
           dontDropUuidsInTables: { default: false, scope: "world", type: Boolean },
         },
       },
     },
-    icon: icons.settings.gameMasterControls,
+    icon: icons.manifest.settings.gameMasterControls,
   },
   tips: {
     format: "tabs",
     groups: {
       error: {
-        icon: icons.ui.error,
+        icon: icons.manifest.ui.error,
         settings: {
           errorMessages: {
             default: Object.keys(tipConfig.error),
@@ -255,7 +255,7 @@ export const menus = {
         },
       },
       suppression: {
-        icon: icons.ui.suppression,
+        icon: icons.manifest.ui.suppression,
         settings: {
           showSuppressionTipsOnSheets: { default: true, requiresReload: true, scope: "client", type: Boolean },
           showSuppressionTipsOnTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
@@ -291,7 +291,7 @@ export const menus = {
         },
       },
     },
-    icon: icons.settings.tips,
+    icon: icons.manifest.settings.tips,
   },
 };
 

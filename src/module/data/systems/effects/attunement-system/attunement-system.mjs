@@ -52,7 +52,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get _embedIcons() {
     return [{
       action: "deattuneDoc",
-      icon: TERIOCK.display.icons.attunable.deattune,
+      icon: TERIOCK.display.icons.manifest.attunable.deattune,
       tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
       visible: this.parent.isOwner,
       onClick: async () => await this.deattune(),
@@ -105,7 +105,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
     );
     return [...entries, {
       group: "attunement",
-      icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.attunable.deattune, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
       onClick: async () => await this.deattune(),
     }];
@@ -120,7 +120,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   async getPanelParts() {
     const parts = await super.getPanelParts();
     parts.bars = this._withKindBar([{
-      icon: TERIOCK.display.icons.attunable.tier,
+      icon: TERIOCK.display.icons.manifest.attunable.tier,
       label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
       wrappers: [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier || 0 })],
     }]);

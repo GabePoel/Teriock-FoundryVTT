@@ -12,7 +12,7 @@ export default class AttunementExecution extends DocumentExecution {
     const [useButton] = super._dialogButtons;
     return [useButton, {
       action: "confirm",
-      icon: TERIOCK.display.icons.attunable.deattune,
+      icon: TERIOCK.display.icons.manifest.attunable.deattune,
       label: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
       name: "deattune",
       callback: () => (this.#deattune = true),

@@ -35,7 +35,7 @@ export default function InstructionsSystemMixin(Base) {
      * @return {Teriock.Display.DisplayField}
      */
     get _displayFieldGmNotes() {
-      return { classes: [TERIOCK.display.panel.classes.gmNotes], gmOnly: true, path: "system.gmNotes" };
+      return { gmOnly: true, path: "system.gmNotes", styles: [TERIOCK.display.panels.styles.gmNotes] };
     }
 
     /**
@@ -43,7 +43,7 @@ export default function InstructionsSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField}
      */
     get _displayFieldInstructions() {
-      return { classes: [TERIOCK.display.panel.classes.instructions, "theme-dark"], path: "system.instructions" };
+      return { classes: [TERIOCK.display.panels.styles.instructions, "theme-dark"], path: "system.instructions" };
     }
 
     /** @inheritDoc */

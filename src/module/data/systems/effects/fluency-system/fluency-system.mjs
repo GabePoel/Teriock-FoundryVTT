@@ -1,4 +1,3 @@
-import { iconManifest } from "../../../../constants/display/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
@@ -63,7 +62,7 @@ export default class FluencySystem
   /** @inheritDoc */
   get _displayFields() {
     return [this._displayFieldInstructions, "system.description", {
-      classes: [TERIOCK.display.panel.classes.derived],
+      classes: [TERIOCK.display.panels.styles.derived],
       editable: false,
       label: TERIOCK.reference.tradecrafts[this._source.tradecraft],
       path: "system.tradecraftDescription",
@@ -92,7 +91,7 @@ export default class FluencySystem
     if (yes === false) { return false; }
 
     if (!foundry.utils.hasProperty(data, "img")) {
-      this.parent.updateSource({ img: TERIOCK.display.iconManifest.tradecrafts.artist });
+      this.parent.updateSource({ img: TERIOCK.display.images.manifest.tradecrafts.artist });
     }
   }
 
@@ -102,7 +101,8 @@ export default class FluencySystem
     if (yes === false) { return false; }
 
     if (
-      Object.values(iconManifest.tradecrafts).includes(this.parent.img) && !foundry.utils.hasProperty(changes, "img")
+      Object.values(TERIOCK.display.images.manifest.tradecrafts).includes(this.parent.img)
+      && !foundry.utils.hasProperty(changes, "img")
     ) {
       let tradecraft = this._source.tradecraft;
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {

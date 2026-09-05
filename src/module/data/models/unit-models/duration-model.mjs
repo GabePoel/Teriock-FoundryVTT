@@ -22,7 +22,7 @@ export default class DurationModel extends TimeUnitModel {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.ability.duration;
+    return TERIOCK.display.icons.manifest.ability.duration;
   }
 
   /** @inheritDoc */

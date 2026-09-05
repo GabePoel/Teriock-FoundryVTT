@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { formulaExists, multiplyFormula } from "../../../../helpers/formula.mjs";
@@ -10,7 +9,10 @@ const { fields } = foundry.data;
 export default class ChangeQuantityActivation extends BaseActivation {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.pseudoDocument.automation, type: "changeQuantity" });
+    return Object.assign(super.metadata, {
+      icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
+      type: "changeQuantity",
+    });
   }
 
   /** @inheritDoc */
@@ -43,7 +45,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
     if (this.triggerLabel) { wrappers.push(this.triggerLabel); }
     const panelData = {
       bars: [{
-        icon: TERIOCK.display.icons.pseudoDocument.automation,
+        icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers,
       }],
@@ -54,7 +56,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
         }),
         title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
-      icon: TERIOCK.display.icons.pseudoDocument.automation,
+      icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
       img: consumable.img,
       label: _loc("TYPES.Automation.changeQuantity"),
       name: _loc("TYPES.Automation.changeQuantity"),

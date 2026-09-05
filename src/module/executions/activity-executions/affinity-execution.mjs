@@ -45,7 +45,7 @@ export default class AffinityExecution extends BaseExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.pseudoDocument.affinity;
+    return TERIOCK.display.icons.manifest.pseudoDocument.affinity;
   }
 
   /**

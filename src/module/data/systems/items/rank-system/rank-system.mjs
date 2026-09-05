@@ -1,6 +1,5 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
-import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
@@ -143,7 +142,7 @@ export default class RankSystem
       },
       this._statBar,
       {
-        icon: icons.armament.av,
+        icon: TERIOCK.display.icons.manifest.armament.av,
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details"),
         wrappers: [
           this.maxAv === 0

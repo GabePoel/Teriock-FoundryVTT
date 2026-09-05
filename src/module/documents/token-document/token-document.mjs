@@ -1,4 +1,3 @@
-import { icons } from "../../constants/display/icons.mjs";
 import * as dataMixins from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
@@ -20,7 +19,10 @@ export default class TeriockTokenDocument
 {
   /** @inheritDoc */
   get embedParts() {
-    const parts = Object.assign(super.embedParts, { icon: icons.document.token, img: this.img });
+    const parts = Object.assign(super.embedParts, {
+      icon: TERIOCK.display.icons.manifest.document.token,
+      img: this.img,
+    });
     if (this.actor && this.actor.fullName !== parts.title) { parts.text = this.actor.fullName; }
     return parts;
   }

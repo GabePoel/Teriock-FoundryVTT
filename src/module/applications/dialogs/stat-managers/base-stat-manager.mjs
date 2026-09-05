@@ -1,4 +1,3 @@
-import { icons } from "../../../constants/display/icons.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
@@ -116,7 +115,7 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
       context.buttons = [{
         action: "ok",
         default: true,
-        icon: makeIconClass(icons.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done, "button"),
         label: "TERIOCK.COMMON.Done",
         type: "submit",
       }];

@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
@@ -72,10 +72,10 @@ export default function MechanicsSheetMixin(Base) {
       mechanics: {
         initial: "automations",
         labelPrefix: "EFFECT.TABS",
-        tabs: [{ icon: makeIconClass(icons.pseudoDocument.automation, "solid"), id: "automations" }, {
-          icon: makeIconClass(icons.pseudoDocument.affinity, "solid"),
+        tabs: [{ icon: makeIconClass(icons.manifest.pseudoDocument.automation, "solid"), id: "automations" }, {
+          icon: makeIconClass(icons.manifest.pseudoDocument.affinity, "solid"),
           id: "affinities",
-        }, { icon: makeIconClass(icons.pseudoDocument.expiration, "solid"), id: "expirations" }],
+        }, { icon: makeIconClass(icons.manifest.pseudoDocument.expiration, "solid"), id: "expirations" }],
       },
     };
 
@@ -167,7 +167,7 @@ export default function MechanicsSheetMixin(Base) {
           baseClass: BaseAutomation,
           collection: pseudos.Automation,
           hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
-          icon: TERIOCK.display.icons.pseudoDocument.automation,
+          icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
           id: "automations",
           title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
           types: this.document.system.constructor.automationTypes,
@@ -179,7 +179,7 @@ export default function MechanicsSheetMixin(Base) {
           baseClass: BaseAffinity,
           collection: pseudos.Affinity,
           hint: _loc("TERIOCK.DIALOGS.Select.AddAffinity.hint"),
-          icon: TERIOCK.display.icons.pseudoDocument.affinity,
+          icon: TERIOCK.display.icons.manifest.pseudoDocument.affinity,
           id: "affinities",
           title: _loc("TERIOCK.DIALOGS.Select.AddAffinity.title"),
           types: this.document.system.constructor.affinityTypes,
@@ -191,7 +191,7 @@ export default function MechanicsSheetMixin(Base) {
           baseClass: BaseExpiration,
           collection: pseudos.Expiration,
           hint: _loc("TERIOCK.DIALOGS.Select.AddExpiration.hint"),
-          icon: TERIOCK.display.icons.pseudoDocument.expiration,
+          icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
           id: "expirations",
           title: _loc("TERIOCK.DIALOGS.Select.AddExpiration.title"),
           types: this.document.system.constructor.expirationTypes,
@@ -265,7 +265,7 @@ export default function MechanicsSheetMixin(Base) {
       await super._onRender(context, options);
       this._createContextMenu(
         () => [{
-          icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.duplicate),
           label: _loc("SIDEBAR.Duplicate"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;
@@ -275,7 +275,7 @@ export default function MechanicsSheetMixin(Base) {
           },
           visible: () => this.isEditable,
         }, {
-          icon: makeIcon(TERIOCK.display.icons.ui.delete),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.delete),
           label: _loc("COMMON.Delete"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;

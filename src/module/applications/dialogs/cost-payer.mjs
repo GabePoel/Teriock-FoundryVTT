@@ -1,6 +1,6 @@
 import costConfig from "../../constants/config/cost-config.mjs";
 import statConfig from "../../constants/config/stat-config.mjs";
-import { icons } from "../../constants/display/icons.mjs";
+import { icons } from "../../constants/display/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
@@ -53,7 +53,7 @@ export default class CostPayer extends ResolvableDialog {
     form: { closeOnSubmit: false, submitOnChange: false },
     position: { width: 450 },
     tag: "form",
-    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.ability.cost, "title") },
+    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.manifest.ability.cost, "title") },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
@@ -250,7 +250,7 @@ export default class CostPayer extends ResolvableDialog {
       context.buttons = [{
         action: "ok",
         default: true,
-        icon: makeIconClass(icons.ui.done, "button"),
+        icon: makeIconClass(icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }];

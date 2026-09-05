@@ -104,7 +104,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @returns {Teriock.Panels.PanelBar} */
     get _attackBar() {
       return {
-        icon: TERIOCK.display.icons.interaction.attack,
+        icon: TERIOCK.display.icons.manifest.interaction.attack,
         label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
         wrappers: [
           this.piercing.label,
@@ -133,7 +133,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @returns {Teriock.Panels.PanelBar} */
     get _defenseBar() {
       return {
-        icon: TERIOCK.display.icons.interaction.block,
+        icon: TERIOCK.display.icons.manifest.interaction.block,
         label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
         wrappers: [
           this.av.value ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.av", { value: this.av.value }) : "",
@@ -186,7 +186,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @inheritDoc */
     get _displayFields() {
       return [this._displayFieldInstructions, "system.notes", "system.description", {
-        classes: [TERIOCK.display.panel.classes.derived],
+        classes: [TERIOCK.display.panels.styles.derived],
         editable: false,
         label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
           name: TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
@@ -310,7 +310,7 @@ export default function ArmamentSystemMixin(Base) {
 
     /** @inheritDoc */
     get useIcon() {
-      return this.hasAttack ? TERIOCK.display.icons.ui.damage : super.useIcon;
+      return this.hasAttack ? TERIOCK.display.icons.manifest.ui.damage : super.useIcon;
     }
 
     /**
@@ -330,7 +330,7 @@ export default function ArmamentSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       const entries = [{
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.equipment.twoHanded, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.twoHanded, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
         onClick: this.use.bind(this, { twoHanded: true }),
         visible: this.parent.isOwner && this.hasTwoHandedAttack,

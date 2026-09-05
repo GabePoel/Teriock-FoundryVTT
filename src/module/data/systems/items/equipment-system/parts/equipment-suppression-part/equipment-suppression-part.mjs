@@ -36,7 +36,9 @@ export default function EquipmentSuppressionPart(Base) {
     get _embedIcons() {
       return [super._embedIcons.find(i => i.action?.toLowerCase().includes("attuned")), {
         action: "toggleDampenedDoc",
-        icon: this.dampened ? TERIOCK.display.icons.equipment.dampen : TERIOCK.display.icons.equipment.undampen,
+        icon: this.dampened
+          ? TERIOCK.display.icons.manifest.equipment.dampen
+          : TERIOCK.display.icons.manifest.equipment.undampen,
         tooltip: this.dampened
           ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
           : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
@@ -47,7 +49,9 @@ export default function EquipmentSuppressionPart(Base) {
         },
       }, {
         action: "toggleShatteredDoc",
-        icon: this.shattered ? TERIOCK.display.icons.break.shatter : TERIOCK.display.icons.break.repair,
+        icon: this.shattered
+          ? TERIOCK.display.icons.manifest.break.shatter
+          : TERIOCK.display.icons.manifest.break.repair,
         tooltip: this.shattered
           ? _loc("TERIOCK.TERMS.Properties.shattered")
           : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
@@ -134,49 +138,49 @@ export default function EquipmentSuppressionPart(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.break.shatter, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
         onClick: this.shatter.bind(this),
         visible: !this.shattered && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.break.repair, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
         onClick: this.repair.bind(this),
         visible: this.shattered && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.break.destroy, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
         onClick: this.destroy.bind(this),
         visible: !this.destroyed && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.break.reforge, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
         onClick: this.reforge.bind(this),
         visible: this.destroyed && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.equipment.dampen, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.dampen, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
         onClick: this.dampen.bind(this),
         visible: !this.dampened && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.equipment.undampen, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.undampen, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
         onClick: this.undampen.bind(this),
         visible: this.dampened && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.equipment.stash, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.stash, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
         onClick: this.stash.bind(this),
         visible: !this.stashed && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.equipment.unstash, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unstash, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
         onClick: this.unstash.bind(this),
         visible: this.stashed && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),

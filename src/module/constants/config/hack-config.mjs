@@ -1,10 +1,10 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { icons } from "../display/icons.mjs";
+import { icons } from "../display/_module.mjs";
 
 /** @enum {Teriock.Config.HackEntry} */
 export default {
   arm: {
-    icon: icons.hack.arm,
+    icon: icons.manifest.hack.arm,
     label: "TERIOCK.EFFECTS.Hacks.arm.apply",
     max: 2,
     part: "TERIOCK.EFFECTS.Hacks.arm.part",
@@ -12,7 +12,7 @@ export default {
     statuses: ["armHack1", "armHack2"],
   },
   leg: {
-    icon: icons.hack.leg,
+    icon: icons.manifest.hack.leg,
     label: "TERIOCK.EFFECTS.Hacks.leg.apply",
     max: 2,
     part: "TERIOCK.EFFECTS.Hacks.leg.part",
@@ -21,7 +21,7 @@ export default {
   },
 
   body: {
-    icon: icons.hack.body,
+    icon: icons.manifest.hack.body,
     label: "TERIOCK.EFFECTS.Hacks.body.apply",
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.body.part",
@@ -30,7 +30,7 @@ export default {
   },
 
   ear: {
-    icon: icons.hack.ear,
+    icon: icons.manifest.hack.ear,
     label: "TERIOCK.EFFECTS.Hacks.ear.apply",
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.ear.part",
@@ -38,7 +38,7 @@ export default {
     statuses: ["earHack"],
   },
   eye: {
-    icon: icons.hack.eye,
+    icon: icons.manifest.hack.eye,
     label: "TERIOCK.EFFECTS.Hacks.eye.apply",
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.eye.part",
@@ -46,7 +46,7 @@ export default {
     statuses: ["eyeHack"],
   },
   mouth: {
-    icon: icons.hack.mouth,
+    icon: icons.manifest.hack.mouth,
     label: "TERIOCK.EFFECTS.Hacks.mouth.apply",
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.mouth.part",
@@ -54,7 +54,7 @@ export default {
     statuses: ["mouthHack"],
   },
   nose: {
-    icon: icons.hack.nose,
+    icon: icons.manifest.hack.nose,
     label: "TERIOCK.EFFECTS.Hacks.nose.apply",
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.nose.part",

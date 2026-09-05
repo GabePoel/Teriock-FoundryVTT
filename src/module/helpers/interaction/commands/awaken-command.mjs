@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
@@ -6,7 +6,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  * @type {Teriock.Command.CommandEntry}
  */
 const command = {
-  icon: icons.effect.awaken,
+  icon: icons.manifest.effect.awaken,
   id: "awaken",
   label: "TERIOCK.EFFECTS.Common.awaken",
   primary: simpleCommandFunctionFactory(a => a.system.takeAwaken()),

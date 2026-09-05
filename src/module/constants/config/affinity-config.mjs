@@ -1,6 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { iconManifest } from "../display/_module.mjs";
-import { colors } from "../display/colors.mjs";
+import { colors, images } from "../display/_module.mjs";
 
 export default {
   categories: {
@@ -116,7 +115,7 @@ export default {
       hex: true,
       hook: "hexseal",
       identifier: "keyword:hexseal",
-      img: iconManifest.effectTypes.hexseal,
+      img: images.manifest.effectTypes.hexseal,
       label: "TERIOCK.TERMS.Affinities.hexseal.single",
       protection: true,
     },
@@ -125,7 +124,7 @@ export default {
       color: colors.palette.green,
       hook: "immune",
       identifier: "keyword:immunity",
-      img: iconManifest.effectTypes.immunity,
+      img: images.manifest.effectTypes.immunity,
       label: "TERIOCK.TERMS.Affinities.immunity.single",
       protection: true,
     },
@@ -136,7 +135,7 @@ export default {
       hex: true,
       hook: "hexproof",
       identifier: "keyword:hexproof",
-      img: iconManifest.effectTypes.hexproof,
+      img: images.manifest.effectTypes.hexproof,
       label: "TERIOCK.TERMS.Affinities.hexproof.single",
       protection: true,
       threshold: true,
@@ -147,7 +146,7 @@ export default {
       competence: true,
       hook: "resist",
       identifier: "keyword:resistance",
-      img: iconManifest.effectTypes.resistance,
+      img: images.manifest.effectTypes.resistance,
       label: "TERIOCK.TERMS.Affinities.resistance.single",
       protection: true,
       threshold: true,
@@ -155,35 +154,35 @@ export default {
     vulnerability: {
       color: colors.palette.red,
       identifier: "keyword:vulnerability",
-      img: iconManifest.keywords.vulnerability,
+      img: images.manifest.keywords.vulnerability,
       label: "TERIOCK.TERMS.Affinities.vulnerability.single",
       weakness: true,
     },
     takeBoost: {
       color: colors.palette.red,
       identifier: "keyword:boosted",
-      img: iconManifest.keywords.boosted,
+      img: images.manifest.keywords.boosted,
       label: "TERIOCK.TERMS.Affinities.takeBoost.single",
       stacking: true,
     },
     takeDeboost: {
       color: colors.palette.green,
       identifier: "keyword:deboosted",
-      img: iconManifest.keywords.deboosted,
+      img: images.manifest.keywords.deboosted,
       label: "TERIOCK.TERMS.Affinities.takeDeboost.single",
       stacking: true,
     },
     binding: {
       color: colors.palette.red,
       identifier: "condition:bound",
-      img: iconManifest.conditions.bound,
+      img: images.manifest.conditions.bound,
       label: "TERIOCK.TERMS.Affinities.binding.single",
       weakness: true,
     },
     adeptitude: {
       color: colors.palette.green,
       identifier: "keyword:adept",
-      img: iconManifest.keywords.adept,
+      img: images.manifest.keywords.adept,
       label: "TERIOCK.TERMS.Affinities.adeptitude.single",
       stacking: true,
       tips: [{ level: "warning", text: "TERIOCK.TERMS.Affinities.adeptitude.tips.notAutomatic" }],
@@ -191,7 +190,7 @@ export default {
     ineptitude: {
       color: colors.palette.red,
       identifier: "keyword:inept",
-      img: iconManifest.keywords.inept,
+      img: images.manifest.keywords.inept,
       label: "TERIOCK.TERMS.Affinities.ineptitude.single",
       stacking: true,
       tips: [{ level: "warning", text: "TERIOCK.TERMS.Affinities.ineptitude.tips.notAutomatic" }],
@@ -199,7 +198,7 @@ export default {
     incapability: {
       color: colors.palette.red,
       identifier: "keyword:incapable",
-      img: iconManifest.keywords.incapable,
+      img: images.manifest.keywords.incapable,
       label: "TERIOCK.TERMS.Affinities.incapability.single",
       tips: [{ level: "warning", text: "TERIOCK.TERMS.Affinities.incapability.tips.notAutomatic" }],
     },

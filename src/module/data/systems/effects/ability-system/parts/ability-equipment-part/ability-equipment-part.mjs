@@ -44,7 +44,9 @@ export default function AbilityEquipmentPart(Base) {
     get grantUseIcon() {
       return {
         action: "toggleGrantUseDoc",
-        icon: this.grantUse ? TERIOCK.display.icons.ability.onUse : TERIOCK.display.icons.ability.notOnUse,
+        icon: this.grantUse
+          ? TERIOCK.display.icons.manifest.ability.onUse
+          : TERIOCK.display.icons.manifest.ability.notOnUse,
         tooltip: this.grantUse
           ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
           : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
@@ -79,7 +81,7 @@ export default function AbilityEquipmentPart(Base) {
       const entries = super.getEmbedContextMenuEntries(doc);
       entries.push({
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.ability.scroll, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
         visible: Boolean(
           this.parent.parent?.isOwner && this.spell && doc !== this.parent
@@ -139,7 +141,7 @@ export default function AbilityEquipmentPart(Base) {
       if (equipmentType.toLowerCase() === "scroll") {
         if (this.elements.size === 1) {
           img = getImage("consumables", `${this.elements.first().titleCase()} Spell Scroll`);
-        } else { img = TERIOCK.display.iconManifest.consumables.celestialSpellScroll; }
+        } else { img = TERIOCK.display.images.manifest.consumables.celestialSpellScroll; }
       }
       const effects = [this.parent.toObject()];
       effects[0].system.grantUse = true;

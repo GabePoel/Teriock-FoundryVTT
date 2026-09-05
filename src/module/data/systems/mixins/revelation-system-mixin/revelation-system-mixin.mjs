@@ -39,13 +39,13 @@ export default function RevelationSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "reveal",
-        icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.ui.show, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
         visible: !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
         onClick: async () => this.parent.update({ "system.revealed": true }),
       }, {
         group: "reveal",
-        icon: makeIcon(TERIOCK.display.icons.ui.hide, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.ui.hide, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.unreveal"),
         visible: this.revealed && game.user.isGM && doc?.sheet?.isEditable,
         onClick: async () => this.parent.update({ "system.revealed": false }),

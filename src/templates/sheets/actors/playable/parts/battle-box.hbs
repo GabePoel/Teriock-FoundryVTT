@@ -37,20 +37,20 @@
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.blockingWith"}}</div>
         <div class="title-right">
           <i
-            class='{{makeIconClass TERIOCK.display.icons.ui.d20 "light"}} thover'
+            class='{{makeIconClass TERIOCK.display.icons.manifest.ui.d20 "light"}} thover'
             data-action="rollAffinity"
             data-affinity-type="resistance"
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollResistance"}}'
           ></i>
           {{#if (exists system.wielding.blocker)}}
             <i
-              class='{{makeIconClass TERIOCK.display.icons.interaction.block "light"}} thover'
+              class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.block "light"}} thover'
               data-action="useAbility"
               data-ability="ability:basic-block"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollBlock"}}'
             ></i>
             <i
-              class='{{makeIconClass TERIOCK.display.icons.ui.openWindow "light"}} thover'
+              class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}} thover'
               data-action="openPrimaryBlocker"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}'
             ></i>
@@ -85,19 +85,19 @@
       <div class="right-container thover" data-tooltip-class="" data-tooltip-direction="DOWN">
         <i
           {{#if (eq system.cover 0)}}
-            class='{{makeIconClass TERIOCK.display.icons.ui.off "solid"}}'
+            class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "solid"}}'
             data-tooltip='{{localize "TERIOCK.STATUSES.Cover.noCover"}}'
           {{/if}}
           {{#if (eq system.cover 1)}}
-            class='{{makeIconClass TERIOCK.display.icons.cover.half "solid"}}'
+            class='{{makeIconClass TERIOCK.display.icons.manifest.cover.half "solid"}}'
             data-tooltip='{{localize "TERIOCK.STATUSES.Cover.halfCover"}}'
           {{/if}}
           {{#if (eq system.cover 2)}}
-            class='{{makeIconClass TERIOCK.display.icons.cover.partial "solid"}}'
+            class='{{makeIconClass TERIOCK.display.icons.manifest.cover.partial "solid"}}'
             data-tooltip='{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}'
           {{/if}}
           {{#if (eq system.cover 3)}}
-            class='{{makeIconClass TERIOCK.display.icons.cover.full "solid"}}'
+            class='{{makeIconClass TERIOCK.display.icons.manifest.cover.full "solid"}}'
             data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
           {{/if}}
         ></i>
@@ -109,7 +109,17 @@
         <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
         >
           <i
-            class='thover {{makeIconClass (lookup TERIOCK.display.icons.ui (ifThen system.combat.hasReaction "on" "off")) "light"}}'
+            class='
+              thover
+              {{makeIconClass
+              (lookup
+              TERIOCK.display.icons.manifest.ui
+              (ifThen
+              system.combat.hasReaction
+              "on"
+              "off"))
+              "light"}}
+            '
           ></i>
         </div>
       </div>
@@ -144,7 +154,7 @@
                 {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.av0.normal"}}
               {{/if}}
             {{else}}
-              <i class='{{makeIconClass TERIOCK.display.icons.ui.off "light"}} thover'></i>
+              <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "light"}} thover'></i>
             {{/if}}
           {{/if}}
         </div>
@@ -157,7 +167,7 @@
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}'
         >
           <i
-            class='thover {{makeIconClass (path TERIOCK.display.icons.ui (ifThen system.offense.sb "on" "off")) "light"}}'
+            class='thover {{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen system.offense.sb "on" "off")) "light"}}'
           ></i>
         </div>
       </div>
@@ -178,20 +188,20 @@
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.attackingWith"}}</div>
         <div class="title-right">
           <i
-            class='{{makeIconClass TERIOCK.display.icons.interaction.attack "light"}} thover'
+            class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.attack "light"}} thover'
             data-action="useAbility"
             data-ability="ability:basic-attack"
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollAttack"}}'
           ></i>
           {{#if (exists system.wielding.attacker)}}
             <i
-              class='{{makeIconClass TERIOCK.display.icons.effect.dealDamage "light"}} thover'
+              class='{{makeIconClass TERIOCK.display.icons.manifest.effect.dealDamage "light"}} thover'
               data-action="quickUse"
               data-id="{{ system.wielding.attacker._id }}"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollDamage"}}'
             ></i>
             <i
-              class='{{makeIconClass TERIOCK.display.icons.ui.openWindow "light"}} thover'
+              class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}} thover'
               data-action="openPrimaryAttacker"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}'
             ></i>

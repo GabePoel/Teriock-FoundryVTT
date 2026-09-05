@@ -1,5 +1,5 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { resolveDocuments } from "../../resolve.mjs";
 import { getIcon } from "../../utils.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
@@ -75,6 +75,6 @@ export const useExternalCommand = {
   id: "useExternal",
   primary: useExternal,
   secondary: useExternal,
-  icon: options => options?.icon || icons.ui.document,
+  icon: options => options?.icon || icons.manifest.ui.document,
   label: options => options?.label || _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
 };

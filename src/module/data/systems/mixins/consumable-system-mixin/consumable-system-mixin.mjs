@@ -52,7 +52,7 @@ export default function ConsumableSystemMixin(Base) {
     /** @returns {Teriock.Panels.PanelBar} */
     get _consumableBar() {
       return {
-        icon: TERIOCK.display.icons.ui.quantity,
+        icon: TERIOCK.display.icons.manifest.ui.quantity,
         label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label"),
         wrappers: [
           _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity.value }),

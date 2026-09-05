@@ -35,5 +35,5 @@ export function createElement(tagName, attributes = {}) {
  */
 export function getPackIcon(pack) {
   return foundry.utils.getProperty(pack, "metadata.flags.teriock.icon") ?? CONFIG[pack.documentName]?.sidebarIcon
-    ?? TERIOCK.display.icons.ui.compendium;
+    ?? TERIOCK.display.icons.manifest.ui.compendium;
 }

@@ -43,7 +43,7 @@ export default class BodySystem
     return {
       ...(await super.getPanelParts()),
       bars: this._withKindBar([this._attackBar, this._defenseBar, {
-        icon: TERIOCK.display.icons.equipment.equipmentClasses,
+        icon: TERIOCK.display.icons.manifest.equipment.equipmentClasses,
         label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
         wrappers: [
           this.range.description,

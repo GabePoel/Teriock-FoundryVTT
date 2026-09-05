@@ -1,11 +1,11 @@
-import { icons } from "../../../../constants/display/icons.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
 export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.consequence.crit });
+    return Object.assign(super.metadata, { icon: icons.manifest.consequence.crit });
   }
 
   /**

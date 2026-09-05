@@ -1,5 +1,5 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 
 /**
  * @param {TeriockActor} actor
@@ -40,7 +40,7 @@ const command = {
   aliases: ["sd", "standard"],
   alt: "crit",
   ctrl: "twoHanded",
-  icon: icons.effect.dealDamage,
+  icon: icons.manifest.effect.dealDamage,
   id: "standardDamage",
   label: "TERIOCK.EFFECTS.Common.standardDamage",
   primary: use,

@@ -130,12 +130,12 @@ export default class BaseUpdater extends DocumentDialog {
     if (partId === "footer") {
       context.buttons = [{
         default: true,
-        icon: makeIconClass(TERIOCK.display.icons.ui.done),
+        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done),
         label: _loc("COMMON.Confirm"),
         type: "submit",
       }, {
         action: "reset",
-        icon: makeIconClass(TERIOCK.display.icons.ui.reset),
+        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.reset),
         label: "SETTINGS.UI.ACTIONS.Reset",
         type: "button",
       }];

@@ -1,6 +1,6 @@
 import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
 import documentConfig from "../../../../../../constants/config/document-config.mjs";
-import { icons } from "../../../../../../constants/display/icons.mjs";
+import { icons } from "../../../../../../constants/display/_module.mjs";
 import * as previews from "../../../../../../data/models/preview-models/_module.mjs";
 
 /**
@@ -221,7 +221,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
         groups: this.#previewGroupConsequence,
       },
     }, {
-      icon: icons.pseudoDocument.affinity,
+      icon: icons.manifest.pseudoDocument.affinity,
       id: "affinities",
       label: "TERIOCK.SHEETS.Actor.TABS.Affinities.title",
       preview: {
@@ -229,7 +229,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
         groups: this.#previewGroupAffinity,
         model: previews.AffinityPreviewModel,
       },
-    }, { icon: icons.ui.details, id: "details", label: "TERIOCK.SHEETS.Actor.TABS.Details.title" }];
+    }, { icon: icons.manifest.ui.details, id: "details", label: "TERIOCK.SHEETS.Actor.TABS.Details.title" }];
 
     /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
     static PREVIEWS = Object.fromEntries(

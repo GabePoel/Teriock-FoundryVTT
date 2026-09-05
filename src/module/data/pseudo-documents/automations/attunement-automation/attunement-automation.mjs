@@ -1,5 +1,5 @@
 import { ConstructionNode } from "../../_module.mjs";
-import { icons } from "../../../../constants/display/icons.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
@@ -52,7 +52,7 @@ export default class AttunementAutomation
           overrideData: true,
         }]),
         display: {
-          icon: icons.attunable.attune,
+          icon: icons.manifest.attunable.attune,
           label: _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: _loc("TYPES.ActiveEffect.attunement") }),
         },
       }),

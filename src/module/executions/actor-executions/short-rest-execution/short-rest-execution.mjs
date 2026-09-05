@@ -79,7 +79,7 @@ export default class ShortRestExecution extends DocumentExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.ui[this.executionTime];
+    return TERIOCK.display.icons.manifest.ui[this.executionTime];
   }
 
   /** @returns {TypedIdentifier} */

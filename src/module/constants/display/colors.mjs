@@ -1,7 +1,7 @@
 /**
  * Colors based on the Adwaita color palette.
  */
-export const colors = {
+export default {
   palette: {
     blue: "#1A5FB4",
     brown: "#986A44",

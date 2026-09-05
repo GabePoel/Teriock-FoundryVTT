@@ -1,4 +1,3 @@
-import { icons } from "../../../../../constants/display/icons.mjs";
 import { asInf } from "../../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
@@ -19,7 +18,7 @@ export default function SpeciesPanelPart(Base) {
       const statBar = this._statBar;
       statBar.wrappers.push(_loc("TERIOCK.SYSTEMS.Species.PANELS.br", { value: this.br }));
       const bars = this._withKindBar([statBar, {
-        icon: icons.species.lifespan,
+        icon: TERIOCK.display.icons.manifest.species.lifespan,
         label: _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.label"),
         wrappers: [
           this.adult ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult", { value: this.adult }) : "",
@@ -30,7 +29,7 @@ export default function SpeciesPanelPart(Base) {
             : "",
         ],
       }, {
-        icon: icons.species.size,
+        icon: TERIOCK.display.icons.manifest.species.size,
         label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label"),
         wrappers: this.size.enabled
           ? [
@@ -44,7 +43,7 @@ export default function SpeciesPanelPart(Base) {
           ]
           : [],
       }, {
-        icon: icons.species.traits,
+        icon: TERIOCK.display.icons.manifest.species.traits,
         label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.traits.label"),
         wrappers: simplifyTags(this._traitTags),
       }]);

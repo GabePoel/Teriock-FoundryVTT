@@ -135,7 +135,7 @@ export default class BaseActorSystem
   getEmbedContextMenuEntries(doc) {
     return [
       {
-        icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.document.token, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         onClick: async () => this.parent.token.sheet.render(true),
         visible: () => this.parent.token && this.parent.token.isViewer,
@@ -149,11 +149,11 @@ export default class BaseActorSystem
   async getPanelParts() {
     return Object.assign(await super.getPanelParts(), {
       bars: [{
-        icon: TERIOCK.display.icons.ui.info,
+        icon: TERIOCK.display.icons.manifest.ui.info,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers: this._scalingTags,
       }, {
-        icon: TERIOCK.display.icons.interaction.feat,
+        icon: TERIOCK.display.icons.manifest.interaction.feat,
         label: _loc("TERIOCK.COMMON.Attributes"),
         wrappers: this._attributeTags,
       }],

@@ -90,7 +90,7 @@ export default class IdentificationModel extends BaseDataModel {
         content,
         modal: false,
         window: {
-          icon: makeIconClass(TERIOCK.display.icons.equipment.readMagic, "title"),
+          icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.readMagic, "title"),
           title: _loc("TERIOCK.MODELS.Identification.QUERY.ReadMagic.title"),
         },
       });

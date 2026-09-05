@@ -1,4 +1,4 @@
-import { iconStyles } from "../constants/display/icon-styles.mjs";
+import { icons } from "../constants/display/_module.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome, Material Design, or Material Symbols classes.
@@ -31,7 +31,7 @@ export function makeIconClass(icon, ...styles) {
   if (!icon) { return ""; }
   const prefix = "fa-";
   let start = "fa-fw";
-  const styleClasses = styles.map(s => iconStyles[s] || s).filter(s => typeof s === "string");
+  const styleClasses = styles.map(s => icons.styles[s] || s).filter(s => typeof s === "string");
   if (icon.startsWith("ms-")) { start += " mic"; }
   if (icon.startsWith("mdi-")) {
     start += " mdi";
@@ -65,6 +65,8 @@ export function getRollIcon(rollFormula) {
  * @return {string}
  */
 export function asInf(val) {
-  if (["", Infinity, null, undefined].includes(val)) { return makeIcon(TERIOCK.display.icons.ui.infinity, "regular"); }
+  if (["", Infinity, null, undefined].includes(val)) {
+    return makeIcon(TERIOCK.display.icons.manifest.ui.infinity, "regular");
+  }
   return val;
 }

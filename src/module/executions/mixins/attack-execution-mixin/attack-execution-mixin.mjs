@@ -211,7 +211,7 @@ export default function AttackExecutionMixin(Base) {
       const styles = { dice: { classes: ["attack"] }, total: { classes: ["attack"] } };
       const generalRollOptions = { flavor: this.flavor, styles, targets: [] };
       if (this.piercing.ub) {
-        generalRollOptions.styles.dice.icon = TERIOCK.display.icons.piercing.ub;
+        generalRollOptions.styles.dice.icon = TERIOCK.display.icons.manifest.piercing.ub;
         generalRollOptions.styles.dice.classes.push("ub");
         generalRollOptions.styles.dice.tooltip = _loc("TERIOCK.TERMS.Properties.unblockable");
       }

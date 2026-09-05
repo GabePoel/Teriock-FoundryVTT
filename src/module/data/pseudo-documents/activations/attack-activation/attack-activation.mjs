@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import AttackAutomation from "../../automations/attack-automation/attack-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
@@ -13,7 +12,7 @@ const { fields } = foundry.data;
 export default class AttackActivation extends AutomationActivationFactory(AttackAutomation) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.interaction.attack });
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.interaction.attack });
   }
 
   /** @inheritDoc */

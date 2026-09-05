@@ -159,7 +159,7 @@ async function resolveCreateObject(type) {
   const typeName = label.toLowerCase();
   const decision = await TeriockDialog.prompt({
     buttons: [{
-      icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
+      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.custom, "button"),
       label: _loc("CONTROLS.CommonCreate"),
       callback: () => "create",
     }],
@@ -167,12 +167,12 @@ async function resolveCreateObject(type) {
     modal: true,
     ok: {
       default: true,
-      icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
+      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.import, "button"),
       label: _loc("APPLICATION.ACTIONS.ImportDocument"),
       callback: () => "import",
     },
     window: {
-      icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
+      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.add, "title"),
       title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: label }),
     },
   });

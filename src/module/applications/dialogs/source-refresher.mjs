@@ -1,4 +1,4 @@
-import { icons } from "../../constants/display/icons.mjs";
+import { icons } from "../../constants/display/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { DocumentDialog } from "../api/_module.mjs";
@@ -37,7 +37,11 @@ export default class SourceRefresher extends DocumentDialog {
     actions: { ok: this._onRefresh },
     classes: ["dynamic-select", "dialog"],
     position: { width: 450 },
-    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.ui.compendium, "title"), resizable: false },
+    window: {
+      contentClasses: ["standard-form"],
+      icon: makeIconClass(icons.manifest.ui.compendium, "title"),
+      resizable: false,
+    },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
@@ -78,7 +82,7 @@ export default class SourceRefresher extends DocumentDialog {
     return Object.assign(await super._prepareContext(options), {
       buttons: [{
         action: "ok",
-        icon: makeIconClass(icons.ui.done, "button"),
+        icon: makeIconClass(icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }],

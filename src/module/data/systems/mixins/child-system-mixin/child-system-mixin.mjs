@@ -142,13 +142,15 @@ export default function ChildSystemMixin(Base) {
     get _embedIcons() {
       return [...super._embedIcons, {
         action: "chatDoc",
-        icon: TERIOCK.display.icons.ui.chat,
+        icon: TERIOCK.display.icons.manifest.ui.chat,
         tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
         visible: this.parent.isViewer,
         onClick: async () => await this.parent.toMessage(),
       }, {
         action: "toggleDisabledDoc",
-        icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
+        icon: this.parent.disabled
+          ? TERIOCK.display.icons.manifest.ui.disabled
+          : TERIOCK.display.icons.manifest.ui.enabled,
         tooltip: this.parent.disabled
           ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
           : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
@@ -282,6 +284,7 @@ export default function ChildSystemMixin(Base) {
      * Ensure {@link ChildSystem._kindBar} is the first panel bar.
      * @param {Teriock.Panels.PanelBar[]} [bars]
      * @returns {Teriock.Panels.PanelBar[]}
+     * @todo This is clunky and I should do better. The homies deserve better.
      */
     _withKindBar(bars = []) {
       return [this._kindBar, ...bars];
@@ -300,7 +303,7 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.enable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
           visible: this.parent?.isOwner
             && this.parent.disabled
@@ -312,7 +315,7 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.disable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
           visible: this.parent?.isOwner
             && !this.parent.disabled
@@ -325,7 +328,7 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "open",
-          icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.image, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
           onClick: async () => {
             await new ImagePopout({
@@ -337,20 +340,20 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "share",
-          icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.shareImage, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
           onClick: async () => TeriockChatMessage.fromImg(this.parent.img, { actor: this.actor }),
         },
         {
           group: "share",
-          icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.shareText, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
           onClick: this.parent.toMessage.bind(this.parent),
         },
         this._getPanelCardContextMenuEntry(),
         {
           group: "document",
-          icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.manifest.ui.duplicate, "contextMenu"),
           label: _loc("SIDEBAR.Duplicate"),
           onClick: async () => await this.parent.duplicate(),
           visible: () => this.parent._checkValidEditorDocument(doc, { self: false }),

@@ -90,9 +90,15 @@ export default class VirtualCondition
   get _embedIcons() {
     const icons = [];
     if (this.locked) {
-      icons.push({ icon: TERIOCK.display.icons.ui.locked, tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked") });
+      icons.push({
+        icon: TERIOCK.display.icons.manifest.ui.locked,
+        tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked"),
+      });
     } else {
-      icons.push({ icon: TERIOCK.display.icons.ui.unlocked, tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Unlocked") });
+      icons.push({
+        icon: TERIOCK.display.icons.manifest.ui.unlocked,
+        tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Unlocked"),
+      });
     }
     return icons;
   }
@@ -202,7 +208,7 @@ export default class VirtualCondition
   getEmbedContextMenuEntries(_relative) {
     return [{
       group: "open",
-      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
       onClick: async () => await this.openSource(),
       visible: () => this.#sourceDocuments.size > 0,
@@ -219,9 +225,9 @@ export default class VirtualCondition
         Panel.toAssociation(
           Array.from(this.#sourceDocuments),
           _loc("TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend"),
-          TERIOCK.display.icons.ui.document,
+          TERIOCK.display.icons.manifest.ui.document,
         ),
-        Panel.toAssociation(trackers, undefined, TERIOCK.display.icons.ability.target),
+        Panel.toAssociation(trackers, undefined, TERIOCK.display.icons.manifest.ability.target),
       ],
       color: this.color,
       icon: TERIOCK.config.document.condition.icon,

@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 
@@ -65,7 +64,7 @@ export default function MetaphysicsSystemMixin(Base) {
      */
     get _metaphysicsBar() {
       return {
-        icon: icons.ability.effectType,
+        icon: TERIOCK.display.icons.manifest.ability.effectType,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
         wrappers: simplifyTags(this._metaphysicsTags),
       };

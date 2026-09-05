@@ -1,4 +1,4 @@
-export const icons = {
+export default {
   ability: {
     adept: "ms-add",
     break: "ms-destruction",

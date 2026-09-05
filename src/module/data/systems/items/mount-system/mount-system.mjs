@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
@@ -42,7 +41,7 @@ export default class MountSystem
   get _embedIcons() {
     return [...super._embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")), {
       action: "toggleMountedDoc",
-      icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
+      icon: this.mounted ? TERIOCK.display.icons.manifest.ui.enabled : TERIOCK.display.icons.manifest.ui.disabled,
       tooltip: this.mounted
         ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
         : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
@@ -57,7 +56,7 @@ export default class MountSystem
   /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, {
-      icon: TERIOCK.display.icons.armament.load,
+      icon: TERIOCK.display.icons.manifest.armament.load,
       label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
       wrappers: [...this._attunableWrappers, getName(this.mountType)],
     }];
@@ -100,13 +99,13 @@ export default class MountSystem
   getEmbedContextMenuEntries(doc) {
     return [...super.getEmbedContextMenuEntries(doc), {
       group: "control",
-      icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.ui.enable, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
       onClick: this.mount.bind(this),
       visible: !this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
     }, {
       group: "control",
-      icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.ui.disable, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
       onClick: this.unmount.bind(this),
       visible: this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),

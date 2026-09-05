@@ -407,7 +407,7 @@ export default function AbilityExecutionChatPart(Base) {
         const block = panel.blocks.find(b => b.title === _loc(labelKey));
         if (!block) { continue; }
         if (active) { delete block.classes; }
-        else { block.classes = [TERIOCK.display.panel.classes.faded]; }
+        else { block.classes = [TERIOCK.display.panels.styles.faded]; }
       }
       return panel;
     }

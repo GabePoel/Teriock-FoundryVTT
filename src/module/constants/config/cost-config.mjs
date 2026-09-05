@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { icons } from "../display/icons.mjs";
+import { icons } from "../display/_module.mjs";
 
 export default {
   components: {
@@ -17,9 +17,9 @@ export default {
   },
   primary: { types: { description: "TERIOCK.COSTS.Types.description", formula: "TERIOCK.COSTS.Types.formula" } },
   tweaks: {
-    adept: { icon: icons.form.special, label: "TERIOCK.COSTS.Tweaks.adept", multiplier: -1, primary: "mp" },
-    gifted: { icon: icons.form.gifted, label: "TERIOCK.COSTS.Tweaks.gifted", multiplier: 1, primary: "mp" },
-    inept: { icon: icons.form.flaw, label: "TERIOCK.COSTS.Tweaks.inept", multiplier: 1, primary: "mp" },
+    adept: { icon: icons.manifest.form.special, label: "TERIOCK.COSTS.Tweaks.adept", multiplier: -1, primary: "mp" },
+    gifted: { icon: icons.manifest.form.gifted, label: "TERIOCK.COSTS.Tweaks.gifted", multiplier: 1, primary: "mp" },
+    inept: { icon: icons.manifest.form.flaw, label: "TERIOCK.COSTS.Tweaks.inept", multiplier: 1, primary: "mp" },
   },
 };
 

@@ -53,7 +53,7 @@ export default class InitiativeExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.roll.initiative;
+    return TERIOCK.display.icons.manifest.roll.initiative;
   }
 
   /** @inheritDoc */

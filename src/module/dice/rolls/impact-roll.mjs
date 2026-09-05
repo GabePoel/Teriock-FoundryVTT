@@ -62,14 +62,14 @@ export default class ImpactRoll extends BaseRoll {
   /** @inheritDoc */
   _getFormulaContextOptions(config = {}) {
     return [{
-      icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.roll.boost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
       onClick: async () => {
         const newRoll = await this.boost(this.options);
         await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
     }, {
-      icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.roll.deboost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
       onClick: async () => {
         const newRoll = await this.deboost(this.options);

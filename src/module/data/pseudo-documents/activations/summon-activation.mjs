@@ -21,7 +21,7 @@ import { BaseActivation } from "./abstract/_module.mjs";
 export default class SummonActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.document.token, type: "summon" });
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.document.token, type: "summon" });
   }
 
   /** @inheritDoc */

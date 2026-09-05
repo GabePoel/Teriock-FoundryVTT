@@ -36,12 +36,12 @@ export default class TeriockActor
   static get #triggeredChatConfig() {
     return {
       expiration: {
-        icon: TERIOCK.display.icons.pseudoDocument.expiration,
+        icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
         panelKey: "TERIOCK.MESSAGE.Expiration.panel",
         titleKey: "TERIOCK.MESSAGE.Expiration.title",
       },
       trigger: {
-        icon: TERIOCK.display.icons.pseudoDocument.automation,
+        icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
         panelKey: "TERIOCK.MESSAGE.Trigger.panel",
         titleKey: "TERIOCK.MESSAGE.Trigger.title",
       },
@@ -462,7 +462,7 @@ export default class TeriockActor
     if (document) {
       associations.push({
         cards: [{ documentUuid: document.uuid, img: document.img, name: document.fullName || document.name }],
-        icon: document.typeIcon ?? TERIOCK.display.icons.ui.document,
+        icon: document.typeIcon ?? TERIOCK.display.icons.manifest.ui.document,
         title: _loc(titleKey),
       });
     }
@@ -473,7 +473,7 @@ export default class TeriockActor
         panels: [{
           associations,
           icon,
-          img: document?.img || TERIOCK.display.iconManifest.coreRules.difficultyClass,
+          img: document?.img || TERIOCK.display.images.manifest.coreRules.difficultyClass,
           name: _loc(panelKey, { label }),
         }],
         source: document?.uuid ?? this.uuid,

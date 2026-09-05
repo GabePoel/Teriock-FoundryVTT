@@ -1,5 +1,4 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { icons } from "../../../constants/display/icons.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { toId } from "../../../helpers/string.mjs";
@@ -38,9 +37,11 @@ export default class Panel extends BasePseudoDocument {
         className: "teriock-panel-table-title",
         dataset: { action: "toggleCollapse" },
         innerHTML: `
-        <div class="teriock-panel-table-icon">${makeIcon(TERIOCK.display.icons.document.table, "light")}</div>
+        <div class="teriock-panel-table-icon">${makeIcon(TERIOCK.display.icons.manifest.document.table, "light")}</div>
         <div class="teriock-panel-table-name">${_loc("EDITOR.Table")}</div>
-        <div class="teriock-panel-table-expander">${makeIcon(TERIOCK.display.icons.ui.menuOpen, "light")}</div>`,
+        <div class="teriock-panel-table-expander">${
+          makeIcon(TERIOCK.display.icons.manifest.ui.menuOpen, "light")
+        }</div>`,
       });
       const content = createElement("div", { className: "teriock-panel-table-content" });
       const spacer = createElement("div", {
@@ -103,7 +104,7 @@ export default class Panel extends BasePseudoDocument {
    * @param {boolean} [options.makeTooltip]
    * @returns {Teriock.Panels.PanelAssociation}
    */
-  static toAssociation(documents, title, icon = icons.ui.document, options = {}) {
+  static toAssociation(documents, title, icon = TERIOCK.display.icons.manifest.ui.document, options = {}) {
     return { cards: documents.map(d => this.toAssociationCard(d, options)), icon, title: _loc(title) };
   }
 

@@ -1,7 +1,7 @@
 <div class="teriock-sheet-bar">
   {{formBox
     executionTime
-    icon=TERIOCK.display.icons.ability.execution
+    icon=TERIOCK.display.icons.manifest.ability.execution
     tooltip=(localize "TERIOCK.COMMON.ExecutionTime")
     action=(ifThen editable "editExecutionTime" "")
     dataset=(object maneuver=(lookup TERIOCK.config.ability.maneuver system.maneuver))
@@ -9,7 +9,7 @@
   }}
   {{formBox
     (concat system.piercing.label " " (lookup (lookup TERIOCK.config.ability.delivery system.delivery) "label"))
-    icon=TERIOCK.display.icons.ability.delivery
+    icon=TERIOCK.display.icons.manifest.ability.delivery
     action=(ifThen editable "editDelivery" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label")
   }}
@@ -20,7 +20,7 @@
         (concat (path TERIOCK.config.attribute system.featSaveAttribute "abbreviation") " ")
         "")
       (lookup TERIOCK.config.ability.interaction system.interaction))
-    icon=TERIOCK.display.icons.ability.interaction
+    icon=TERIOCK.display.icons.manifest.ability.interaction
     action=(ifThen editable "editInteraction" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")
   }}

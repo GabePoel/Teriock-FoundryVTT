@@ -435,7 +435,7 @@ export default function TransformationSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.effect.transform, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         onClick: this.setPrimaryTransformation.bind(this),
         visible: this.isTransformation && !this.isPrimaryTransformation,

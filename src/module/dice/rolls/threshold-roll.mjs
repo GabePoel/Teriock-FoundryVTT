@@ -82,11 +82,11 @@ export default class ThresholdRoll extends BaseRoll {
       if (this.success) {
         context.styles.total.classes.push("success");
         context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.success");
-        context.styles.total.icon = TERIOCK.display.icons.ui.enable;
+        context.styles.total.icon = TERIOCK.display.icons.manifest.ui.enable;
       } else if (this.failure) {
         context.styles.total.classes.push("failure");
         context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.failure");
-        context.styles.total.icon = TERIOCK.display.icons.ui.disable;
+        context.styles.total.icon = TERIOCK.display.icons.manifest.ui.disable;
       }
       if (this.critSuccess) {
         context.styles.total.classes.push("crit-success");

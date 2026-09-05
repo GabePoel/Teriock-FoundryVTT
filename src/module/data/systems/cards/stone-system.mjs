@@ -10,7 +10,7 @@ export default class StoneSystem extends BaseCardsSystem {
     this.parent.updateSource(
       foundry.utils.mergeObject({
         back: {
-          img: TERIOCK.display.iconManifest.deathBagStones.unknown,
+          img: TERIOCK.display.images.manifest.deathBagStones.unknown,
           name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
         },
       }, data),
@@ -18,7 +18,7 @@ export default class StoneSystem extends BaseCardsSystem {
     if (!foundry.utils.hasProperty(copy, "faces") || Object.keys(copy.faces[0]).length === 0) {
       this.parent.updateSource({
         faces: [{
-          img: TERIOCK.display.iconManifest.deathBagStones.brown,
+          img: TERIOCK.display.images.manifest.deathBagStones.brown,
           name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.faces"),
         }],
       });

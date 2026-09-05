@@ -31,7 +31,7 @@ export default function AbilityExecutionRollsPart(Base) {
         total: { classes: [this.source.system.interaction] },
       };
       if (this.isFeat && !preventThreshold) {
-        styles.total.icon = TERIOCK.display.icons.interaction.feat;
+        styles.total.icon = TERIOCK.display.icons.manifest.interaction.feat;
         this.rolls.push(
           new BaseRoll(this.formula, this.getRollData(), {
             flavor: this.flavor,
@@ -41,7 +41,7 @@ export default function AbilityExecutionRollsPart(Base) {
           }),
         );
       } else if (this.isBlock) {
-        styles.total.icon = TERIOCK.display.icons.interaction.block;
+        styles.total.icon = TERIOCK.display.icons.manifest.interaction.block;
         this.rolls.push(
           new BaseRoll(this.formula, this.getRollData(), {
             flavor: this.flavor,

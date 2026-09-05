@@ -6,13 +6,17 @@ export default {
   kind: /** @enum {Teriock.Config.KindEntry} */ {
     enchanted: {
       color: colors.palette.blue,
-      icon: icons.powerLevel.enchanted,
+      icon: icons.manifest.powerLevel.enchanted,
       label: "TERIOCK.TERMS.EquipmentKind.enchanted",
     },
-    magic: { color: colors.palette.purple, icon: icons.powerLevel.magic, label: "TERIOCK.TERMS.EquipmentKind.magic" },
+    magic: {
+      color: colors.palette.purple,
+      icon: icons.manifest.powerLevel.magic,
+      label: "TERIOCK.TERMS.EquipmentKind.magic",
+    },
     mundane: {
       color: colors.palette.brown,
-      icon: icons.powerLevel.mundane,
+      icon: icons.manifest.powerLevel.mundane,
       label: "TERIOCK.TERMS.EquipmentKind.mundane",
     },
     ...systemConfig.childKinds,

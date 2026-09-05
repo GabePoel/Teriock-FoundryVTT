@@ -89,7 +89,7 @@ export default class InventorySystem extends BaseActorSystem {
   async getPanelParts() {
     return Object.assign(await super.getPanelParts(), {
       bars: [{
-        icon: TERIOCK.display.icons.ui.info,
+        icon: TERIOCK.display.icons.manifest.ui.info,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers: [this.containing],
       }],

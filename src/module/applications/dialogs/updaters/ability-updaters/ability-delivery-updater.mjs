@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/icons.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -12,7 +12,7 @@ import BaseUpdater from "../base-updater.mjs";
  */
 export default class AbilityDeliveryUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.delivery, "title") } };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ability.delivery, "title") } };
 
   /** @inheritDoc */
   get _dataPaths() {

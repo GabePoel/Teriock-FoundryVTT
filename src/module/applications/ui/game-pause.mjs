@@ -1,4 +1,4 @@
-import { holdIcons } from "../../constants/display/_module.mjs";
+import { images } from "../../constants/display/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
 const { GamePause } = foundry.applications.ui;
@@ -6,15 +6,15 @@ const { GamePause } = foundry.applications.ui;
 /** @inheritDoc */
 export default class TeriockGamePause extends GamePause {
   /** @type {string[]} */
-  static HOLD_ICONS = Object.values(holdIcons);
+  static HOLD_IMAGES = Object.values(images.hold);
 
   /**
    * Select a random hold image.
    * @returns {Promise<string>}
    */
   async #selectHoldImage() {
-    const index = await BaseRoll.getValue(`1d${this.constructor.HOLD_ICONS.length} - 1`);
-    return this.constructor.HOLD_ICONS[index];
+    const index = await BaseRoll.getValue(`1d${this.constructor.HOLD_IMAGES.length} - 1`);
+    return this.constructor.HOLD_IMAGES[index];
   }
 
   /** @inheritDoc */

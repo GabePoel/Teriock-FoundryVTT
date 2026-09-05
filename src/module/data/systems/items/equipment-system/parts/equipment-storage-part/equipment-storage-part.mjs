@@ -209,7 +209,7 @@ export default function EquipmentStoragePart(Base) {
       const entries = super.getEmbedContextMenuEntries(doc);
       entries.push(...[{
         group: "document",
-        icon: makeIcon(TERIOCK.display.icons.equipment.stack, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.stack, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
         onClick: async () => await this.groupStackDialog(),
         visible: () =>
@@ -219,7 +219,7 @@ export default function EquipmentStoragePart(Base) {
           && this.document.isOwner && this.document.checkAncestor(doc),
       }, {
         group: "document",
-        icon: makeIcon(TERIOCK.display.icons.equipment.unstack, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unstack, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         onClick: async () => await this.groupUnstackDialog(),
         visible: () =>
@@ -254,7 +254,7 @@ export default function EquipmentStoragePart(Base) {
       const chosen = await DocumentSelector.selectSingle(candidates, {
         auto: true,
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.hint"),
-        icon: makeIconClass(TERIOCK.display.icons.equipment.stack, "title"),
+        icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.stack, "title"),
         openable: true,
         textKey: "system.remainingString",
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
@@ -335,7 +335,7 @@ export default function EquipmentStoragePart(Base) {
           },
         },
         window: {
-          icon: makeIconClass(TERIOCK.display.icons.equipment.unstack, "title"),
+          icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.unstack, "title"),
           title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         },
       });

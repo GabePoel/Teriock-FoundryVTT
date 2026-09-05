@@ -11,7 +11,7 @@ const { Ray } = foundry.canvas.geometry;
 export default class MoveActivation extends BaseActivation {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.ui.move, type: "move" });
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.ui.move, type: "move" });
   }
 
   /** @inheritDoc */

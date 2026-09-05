@@ -48,11 +48,11 @@ export default function PlayableActorSheetSidebarPart(Base) {
      */
     #scalingContextMenu() {
       return TeriockContextMenu.makeUpdateEntries(this.actor, [{
-        icon: TERIOCK.display.icons.document.rank,
+        icon: TERIOCK.display.icons.manifest.document.rank,
         label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
         value: false,
       }, {
-        icon: TERIOCK.display.icons.species.br,
+        icon: TERIOCK.display.icons.manifest.species.br,
         label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
         value: true,
       }], { path: "system.scaling.brScale" });

@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -9,7 +8,10 @@ const { fields } = foundry.data;
 export default class ExpirationActivation extends BaseActivation {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.pseudoDocument.expiration, type: "expiration" });
+    return Object.assign(super.metadata, {
+      icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
+      type: "expiration",
+    });
   }
 
   /** @inheritDoc */
@@ -38,7 +40,9 @@ export default class ExpirationActivation extends BaseActivation {
   /** @inheritDoc */
   get typeIcon() {
     return this.display.icon
-      || (this.expirationDocument?.method === "roll" ? icons.ui.dice : icons.pseudoDocument.expiration)
+      || (this.expirationDocument?.method === "roll"
+        ? TERIOCK.display.icons.manifest.ui.dice
+        : TERIOCK.display.icons.manifest.pseudoDocument.expiration)
       || this.metadata.icon;
   }
 

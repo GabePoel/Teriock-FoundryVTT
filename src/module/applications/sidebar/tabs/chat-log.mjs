@@ -59,7 +59,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [...super._getEntryContextOptions(), {
-      icon: makeIcon(TERIOCK.display.icons.ui.expand, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.ui.expand, "contextMenu"),
       label: "TERIOCK.MESSAGE.Menu.expandAll",
       onClick: (_ev, li) => {
         li.querySelectorAll(".collapsible[data-collapsible-id]").forEach(el => {
@@ -68,7 +68,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       },
       visible: li => Boolean(li.querySelector(".collapsible.collapsed")),
     }, {
-      icon: makeIcon(TERIOCK.display.icons.ui.collapse, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.ui.collapse, "contextMenu"),
       label: "TERIOCK.MESSAGE.Menu.collapseAll",
       onClick: (_ev, li) => {
         li.querySelectorAll(".collapsible[data-collapsible-id]").forEach(el => {
@@ -77,7 +77,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       },
       visible: li => Boolean(li.querySelector(".collapsible:not(.collapsed)")),
     }, {
-      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
       label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
       onClick: async (_ev, li) => {
         const message = game.messages.get(li.dataset.messageId);

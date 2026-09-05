@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 
 /**
@@ -24,5 +24,5 @@ async function use() {
   await TeriockChatMessage.create(chatData);
 }
 
-const helpCommand = { icon: icons.ui.info, id: "help", primary: use, secondary: use };
+const helpCommand = { icon: icons.manifest.ui.info, id: "help", primary: use, secondary: use };
 export default helpCommand;

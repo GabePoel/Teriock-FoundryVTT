@@ -1,6 +1,7 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { formulaExists } from "../../../helpers/formula.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { omit } from "../../../helpers/utils.mjs";
@@ -131,17 +132,6 @@ export default class ConstructionNode
   }
 
   /**
-   * Add children to some target Document.
-   * @param {TeriockDocument[]} targets
-   * @param {Partial<ConstructionScope>} scope
-   * @returns {Promise<void>}
-   */
-  async addChildren(targets, scope = {}) {
-    const operations = await this.getAddChildrenOperations(targets, scope);
-    await foundry.documents.modifyBatch(operations);
-  }
-
-  /**
    * Construct documents for this node.
    * @param {Partial<ConstructionScope>} [scope]
    * @returns {Promise<object>}
@@ -210,12 +200,17 @@ export default class ConstructionNode
    * @returns {Promise<Record<Teriock.Documents.DocumentName, object[]>>}
    */
   async getDocumentRecord(scope = {}) {
-    const record = { ActiveEffect: [], Actor: [], Item: [] };
+    const documentNames = ["ActiveEffect", "Actor", "Item"];
+    const Classes = documentNames.map(dn => foundry.utils.getDocumentClass(dn));
+    const record = Object.fromEntries(documentNames.map(dn => [dn, []]));
     const constructed = await this.constructDocuments(scope);
     for (const c of constructed) {
-      if (ActiveEffect.implementation.TYPES.includes(c?.type)) { record.ActiveEffect.push(c); }
-      else if (Actor.implementation.TYPES.includes(c?.type)) { record.Actor.push(c); }
-      else if (Item.implementation.TYPES.includes(c?.type)) { record.Item.push(c); }
+      for (const Cls of Classes) {
+        if (Cls.implementation.TYPES.includes(c?.type)) {
+          record[Cls.documentName].push(c);
+          break;
+        }
+      }
     }
     return record;
   }
@@ -242,9 +237,21 @@ export default class ConstructionNode
   prepareData() {
     super.prepareData();
     if (!this.name) {
-      this.name = this.data.name
-        ? BaseRoll.replaceFormulaData(this.data.name, { base: _loc(this.constructor.typeLabel) })
-        : _loc(this.constructor.typeLabel);
+      let name = _loc(this.constructor.typeLabel);
+      if (
+        this.globalIdentifiers.length + this.globalUuids.length + this.localIdentifiers.length + this.localUuids.length
+          === 1 && !formulaExists(this.localQualifier)
+      ) {
+        if (this.globalIdentifiers.length) {
+          name = teriock.fromIdentifierSync(this.globalIdentifiers[0])?.name ?? name;
+        }
+        if (this.globalUuids.length) { name = fromUuidSync(this.globalIdentifiers[0])?.name ?? name; }
+        if (this.localUuids.length && this.actor) {
+          name = fromUuidSync(this.localUuids[0], { relative: this.actor })?.name ?? name;
+        }
+        // TODO: Think of something for `localIdentifiers`.
+      }
+      this.name = this.data.name ? BaseRoll.replaceFormulaData(this.data.name, { base: name }) : name;
     }
     this.img = this.data.img ?? systemPath("icons/documents/uncertainty.svg");
   }

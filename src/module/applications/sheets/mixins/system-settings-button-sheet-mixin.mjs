@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
 
@@ -22,7 +22,7 @@ export default function SystemSettingsButtonSheetMixin(Base) {
       window: {
         controls: [{
           action: "openDocumentSettings",
-          icon: makeIconClass(icons.ui.configure, "contextMenu"),
+          icon: makeIconClass(icons.manifest.ui.configure, "contextMenu"),
           label: "TERIOCK.SYSTEMS.Common.MENU.configureDocument",
           ownership: "OWNER",
           visible() {

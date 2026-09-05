@@ -100,8 +100,8 @@ export default function PlayableActorSheetAvatarImagePart(Base) {
         displayedImg: foundry.utils.getProperty(this.document, this.displayedImgPath),
         displayedImgDocument: this.#imageToDisplay,
         displayedImgIcon: this.#imageToDisplay === "actor"
-          ? TERIOCK.display.icons.document.character
-          : TERIOCK.display.icons.document.token,
+          ? TERIOCK.display.icons.manifest.document.character
+          : TERIOCK.display.icons.manifest.document.token,
         displayedImgPath: this.displayedImgPath,
         displayedImgRing: this.#imageToDisplay === "token" && this.imgToken.ring.enabled,
         displayedImgTooltip: this.displayedImgTooltip,

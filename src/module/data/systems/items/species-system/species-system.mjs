@@ -110,7 +110,7 @@ export default class SpeciesSystem
       modal: true,
       position: { width: 400 },
       window: {
-        icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
+        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.confirm, "title"),
         title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
       },
     });

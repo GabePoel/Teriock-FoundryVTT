@@ -39,7 +39,7 @@ export default function DocumentDirectoryMixin(Base) {
     /** @inheritDoc */
     _getEntryContextOptions() {
       return [{
-        icon: makeIcon(TERIOCK.display.icons.ui.panel),
+        icon: makeIcon(TERIOCK.display.icons.manifest.ui.panel),
         label: _loc("TERIOCK.SHEETS.Panel.OPEN"),
         visible: this._validateOpenPanelEntryContextOption.bind(this),
         onClick: async (_ev, li) => (await this._getEntryFromLi(li))?.openPanelSheet(),

@@ -93,17 +93,17 @@ export default class TeriockRollTable
             type: r.documentName,
             uuid: r.uuid,
           })),
-          icon: TERIOCK.display.icons.document.tableResult,
+          icon: TERIOCK.display.icons.manifest.document.tableResult,
           title: _loc("TERIOCK.DOCUMENTS.result.plural"),
         }]
         : [],
       bars: [{
-        icon: TERIOCK.display.icons.ui.formula,
+        icon: TERIOCK.display.icons.manifest.ui.formula,
         label: _loc("TERIOCK.COMMON.Formula"),
         wrappers: [this.formula ?? ""],
       }],
       blocks: [{ text: this.description, title: this.getFieldForProperty("description").label }],
-      icon: TERIOCK.display.icons.document.table,
+      icon: TERIOCK.display.icons.manifest.document.table,
     });
   }
 
@@ -137,7 +137,7 @@ export default class TeriockRollTable
     if (this.displayRoll && roll) { messageData.rolls.push(roll); }
     const text = await TeriockTextEditor.enrichHTML(this.description, { relativeTo: this });
     messageData.system.panels.forEach(panel => {
-      panel.blocks.push({ classes: [TERIOCK.display.panel.classes.derived], text, title: this.name });
+      panel.blocks.push({ classes: [TERIOCK.display.panels.styles.derived], text, title: this.name });
     });
     messageData.system.panels = teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
       messageData.system.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),

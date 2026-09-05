@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
@@ -7,7 +7,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  */
 export const longRestCommand = {
   aliases: ["lr"],
-  icon: icons.ui.longRest,
+  icon: icons.manifest.ui.longRest,
   id: "longRest",
   label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
   primary: simpleCommandFunctionFactory(a => a.system.takeLongRest()),
@@ -19,7 +19,7 @@ export const longRestCommand = {
  */
 export const shortRestCommand = {
   aliases: ["sr"],
-  icon: icons.ui.shortRest,
+  icon: icons.manifest.ui.shortRest,
   id: "shortRest",
   label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
   primary: simpleCommandFunctionFactory(a => a.system.takeShortRest()),

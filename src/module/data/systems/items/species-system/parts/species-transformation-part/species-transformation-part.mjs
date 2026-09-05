@@ -149,7 +149,7 @@ export default function SpeciesTransformationPart(Base) {
           modal: true,
           rejectClose: false,
           window: {
-            icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
+            icon: makeIconClass(TERIOCK.display.icons.manifest.effect.transform, "title"),
             title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
           },
         }).then((p) => {
@@ -163,7 +163,7 @@ export default function SpeciesTransformationPart(Base) {
       const isPrimarySpecies = this.transformationEffect?.system.primarySpecies === this.parent;
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.effect.transform, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         onClick: this.setPrimaryTransformation.bind(this),
         visible: this.isTransformation && !(this.isPrimaryTransformation && isPrimarySpecies),

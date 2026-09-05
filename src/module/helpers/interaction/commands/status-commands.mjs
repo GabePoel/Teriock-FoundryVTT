@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { validateTypedIdentifier } from "../../../data/fields/tools/validators.mjs";
 
 /**
@@ -30,7 +30,7 @@ const toggle = fnFactory((a, s) =>
  */
 export const applyStatusCommand = {
   args: ["status"],
-  icon: icons.ui.apply,
+  icon: icons.manifest.ui.apply,
   id: "apply",
   primary: apply,
   secondary: remove,
@@ -45,7 +45,7 @@ export const applyStatusCommand = {
  */
 export const removeStatusCommand = {
   args: ["status"],
-  icon: icons.ui.undo,
+  icon: icons.manifest.ui.undo,
   id: "remove",
   primary: remove,
   secondary: apply,
@@ -60,7 +60,7 @@ export const removeStatusCommand = {
  */
 export const toggleStatusCommand = {
   args: ["status"],
-  icon: icons.ui.toggle,
+  icon: icons.manifest.ui.toggle,
   id: "toggle",
   primary: toggle,
   label: options => options?.status

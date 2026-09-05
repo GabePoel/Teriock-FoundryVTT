@@ -53,7 +53,7 @@ export default function TradecraftExecutionMixin(Base) {
 
     /** @inheritDoc */
     get icon() {
-      return super.icon ?? TERIOCK.display.icons.tradecraft[this.tradecraft];
+      return super.icon ?? TERIOCK.display.icons.manifest.tradecraft[this.tradecraft];
     }
 
     /** @inheritDoc */

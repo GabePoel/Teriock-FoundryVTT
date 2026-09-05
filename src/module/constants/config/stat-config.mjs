@@ -1,7 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { iconManifest } from "../display/_module.mjs";
-import { colors } from "../display/colors.mjs";
-import { icons } from "../display/icons.mjs";
+import { colors, icons, images } from "../display/_module.mjs";
 import currencyConfig from "./currency-config.mjs";
 import systemConfig from "./system-config.mjs";
 
@@ -12,15 +10,15 @@ export default {
     color: colors.hp,
     die: "hit",
     hacks: true,
-    icon: icons.stat.hp,
+    icon: icons.manifest.stat.hp,
     impact: "damage",
     label: "TERIOCK.COSTS.Primary.hp",
     morganti: true,
     multiplier: -1,
     pool: {
       enabled: true,
-      icons: { disabled: icons.stat.hpOff, enabled: icons.stat.hpOn },
-      img: iconManifest.misc.hitDie,
+      icons: { disabled: icons.manifest.stat.hpOff, enabled: icons.manifest.stat.hpOn },
+      img: images.manifest.misc.hitDie,
       panel: { name: "TERIOCK.MODELS.HpPool.PANELS.name", text: "TERIOCK.MODELS.HpPool.PANELS.text" },
     },
     style: { colorset: "red" },
@@ -32,15 +30,15 @@ export default {
     bar: { class: "mana", initial: 1, temp: true },
     color: colors.mp,
     die: "mana",
-    icon: icons.stat.mp,
+    icon: icons.manifest.stat.mp,
     impact: "drain",
     label: "TERIOCK.COSTS.Primary.mp",
     morganti: true,
     multiplier: -1,
     pool: {
       enabled: true,
-      icons: { disabled: icons.stat.mpOff, enabled: icons.stat.mpOn },
-      img: iconManifest.misc.manaDie,
+      icons: { disabled: icons.manifest.stat.mpOff, enabled: icons.manifest.stat.mpOn },
+      img: images.manifest.misc.manaDie,
       panel: { name: "TERIOCK.MODELS.MpPool.PANELS.name", text: "TERIOCK.MODELS.MpPool.PANELS.text" },
     },
     style: { colorset: "blue" },
@@ -51,7 +49,7 @@ export default {
     abbreviation: "TERIOCK.STATS.lp.abbreviation",
     bar: { class: "lifespan", initial: 20, max: 100 },
     color: colors.lp,
-    icon: icons.stat.lp,
+    icon: icons.manifest.stat.lp,
     impact: "wither",
     label: "TERIOCK.COSTS.Primary.lp",
     multiplier: +1,
@@ -60,7 +58,7 @@ export default {
 
   gp: {
     abbreviation: "TERIOCK.STATS.gp.abbreviation",
-    icon: icons.stat.gp,
+    icon: icons.manifest.stat.gp,
     impact: "pay",
     label: "TERIOCK.COSTS.Primary.gp",
     multiplier: -1,

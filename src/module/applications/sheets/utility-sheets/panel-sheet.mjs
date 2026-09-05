@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DragDropApplicationMixin, TeriockDocumentSheet } from "../../api/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
@@ -30,11 +30,11 @@ export default class PanelSheet extends DragDropApplicationMixin(TeriockDocument
     window: {
       controls: [{
         action: "openSheet",
-        icon: makeIconClass(icons.ui.sheet),
+        icon: makeIconClass(icons.manifest.ui.sheet),
         label: "TERIOCK.SHEETS.Panel.OPEN_SHEET",
         ownership: "VIEWER",
       }],
-      icon: makeIconClass(icons.ui.panel, "title"),
+      icon: makeIconClass(icons.manifest.ui.panel, "title"),
       resizable: false,
     },
   };

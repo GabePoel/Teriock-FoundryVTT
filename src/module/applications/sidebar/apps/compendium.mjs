@@ -28,7 +28,7 @@ export default class TeriockCompendium extends DocumentDirectoryMixin(Compendium
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [...super._getEntryContextOptions(), {
-      icon: makeIconClass(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.duplicate, "contextMenu"),
       label: "TERIOCK.COMPENDIUM.DuplicateEntry",
       onClick: async (_ev, li) => {
         const document = await this.collection?.getDocument(li.dataset.entryId);

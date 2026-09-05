@@ -90,7 +90,9 @@ export default function AttunableSystemMixin(Base) {
     get _embedIcons() {
       return [{
         action: "toggleAttunedDoc",
-        icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
+        icon: this.isAttuned
+          ? TERIOCK.display.icons.manifest.attunable.attune
+          : TERIOCK.display.icons.manifest.attunable.deattune,
         tooltip: this.isAttuned
           ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
           : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
@@ -214,13 +216,13 @@ export default function AttunableSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.attunable.attune, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
         onClick: this.attune.bind(this),
         visible: !this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.attunable.deattune, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
         onClick: this.deattune.bind(this),
         visible: this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),

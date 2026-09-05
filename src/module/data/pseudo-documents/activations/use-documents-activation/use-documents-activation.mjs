@@ -10,7 +10,7 @@ const { fields } = foundry.data;
 export default class UseDocumentsActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.ui.document, type: "useDocuments" });
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.ui.document, type: "useDocuments" });
   }
 
   /** @inheritDoc */

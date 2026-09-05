@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/icons.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { SourceRefresher } from "../../dialogs/_module.mjs";
 
@@ -22,7 +22,7 @@ export default function SourceRefreshButtonSheetMixin(Base) {
       window: {
         controls: [{
           action: "sourceRefresh",
-          icon: makeIconClass(icons.ui.compendium, "contextMenu"),
+          icon: makeIconClass(icons.manifest.ui.compendium, "contextMenu"),
           label: "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh",
           ownership: "OWNER",
           visible() {

@@ -50,7 +50,7 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.attribute[this.attribute];
+    return TERIOCK.display.icons.manifest.attribute[this.attribute];
   }
 
   /** @inheritDoc */

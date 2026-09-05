@@ -21,7 +21,7 @@ const packEnricher = {
         pack: parsed.arguments[0],
         tooltip: _loc("TERIOCK.COMMANDS.OpenPack", { title: pack?.title }),
       },
-      icon: makeIconClass(TERIOCK.display.icons.ui.compendium, "inline"),
+      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.compendium, "inline"),
       name: _loc(parsed.label ?? pack?.title),
     });
   },

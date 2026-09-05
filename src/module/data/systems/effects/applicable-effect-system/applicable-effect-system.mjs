@@ -118,7 +118,7 @@ export default class ApplicableEffectSystem
    */
   get _durationBar() {
     return {
-      icon: TERIOCK.display.icons.ability.duration,
+      icon: TERIOCK.display.icons.manifest.ability.duration,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.duration"),
       wrappers: [this.parent.remainingString],
     };
@@ -160,7 +160,7 @@ export default class ApplicableEffectSystem
    */
   get _statusBar() {
     return {
-      icon: TERIOCK.display.icons.document.condition,
+      icon: TERIOCK.display.icons.manifest.document.condition,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
       wrappers: [
         ...Array.from(this.parent.statuses.map(status => TERIOCK.reference.conditions[status])),

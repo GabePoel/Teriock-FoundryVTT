@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/icons.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { getRollIcon } from "../../../../helpers/icon.mjs";
 import commands from "../../../../helpers/interaction/commands/_module.mjs";
@@ -10,7 +10,7 @@ const { fields } = foundry.data;
 export default class RollActivation extends AutomationActivationFactory(RollAutomation) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.ui.dice });
+    return Object.assign(super.metadata, { icon: icons.manifest.ui.dice });
   }
 
   /** @inheritDoc */

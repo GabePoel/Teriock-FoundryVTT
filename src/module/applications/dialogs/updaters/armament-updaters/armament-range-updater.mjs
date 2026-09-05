@@ -1,5 +1,5 @@
 import { BaseUpdater } from "../_module.mjs";
-import { icons } from "../../../../constants/display/icons.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { RangeModel } from "../../../../data/models/unit-models/_module.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 
@@ -13,7 +13,7 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
  */
 export default class ArmamentRangeUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.range, "title") } };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ability.range, "title") } };
 
   /** @inheritDoc */
   get _dataPaths() {

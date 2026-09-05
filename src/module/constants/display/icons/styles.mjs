@@ -1,4 +1,4 @@
-export const iconStyles = {
+export default {
   button: "solid",
   contextMenu: "solid",
   duotone: "duotone",

@@ -1,9 +1,21 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { icons } from "./icons.mjs";
+import { icons } from "./_module.mjs";
 
-export const displayPanel = {
-  classes: {
+export default {
+  common: {
+    loading: /** @type {Teriock.Panels.PanelParts} */ {
+      icon: "fa-spinner fa-spin",
+      img: systemPath("icons/documents/uncertainty.svg"),
+      name: "TERIOCK.COMMON.Loading",
+    },
+    unknown: /** @type {Teriock.Panels.PanelParts} */ {
+      icon: icons.manifest.ui.variable,
+      img: systemPath("icons/documents/uncertainty.svg"),
+      name: "???",
+    },
+  },
+  styles: {
     derived: "italic-display-field",
     editable: "editable-display-field",
     elderSorcery: "elder-sorcery-display-field",
@@ -11,18 +23,6 @@ export const displayPanel = {
     gmNotes: "gm-notes-display-field",
     instructions: "instructions-display-field",
   },
-  premade: {
-    loading: /** @type {Teriock.Panels.PanelParts} */ {
-      icon: "fa-spinner fa-spin",
-      img: systemPath("icons/documents/uncertainty.svg"),
-      name: "TERIOCK.COMMON.Loading",
-    },
-    unknown: /** @type {Teriock.Panels.PanelParts} */ {
-      icon: icons.ui.variable,
-      img: systemPath("icons/documents/uncertainty.svg"),
-      name: "???",
-    },
-  },
 };
 
-preLocalizeConfig("display.panel.premade", { keys: ["name"] });
+preLocalizeConfig("display.panels.common", { keys: ["name"] });

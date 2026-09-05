@@ -1,4 +1,4 @@
-import { icons } from "../../constants/display/icons.mjs";
+import { icons } from "../../constants/display/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { resolveDocuments } from "../../helpers/resolve.mjs";
 import { fromIdentifierLocal, fromQualifier } from "../../helpers/utils.mjs";
@@ -32,7 +32,7 @@ export default class DocumentSelector extends ResolvableDialog {
     actions: { ok: this._onGetSelected },
     classes: ["dynamic-select"],
     position: { width: 450 },
-    window: { icon: makeIconClass(icons.ui.select, "title"), title: "TERIOCK.DIALOGS.Select.Document.title" },
+    window: { icon: makeIconClass(icons.manifest.ui.select, "title"), title: "TERIOCK.DIALOGS.Select.Document.title" },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
@@ -275,7 +275,7 @@ export default class DocumentSelector extends ResolvableDialog {
       buttons: [{
         action: "ok",
         default: !this.unchecked,
-        icon: makeIconClass(TERIOCK.display.icons.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }],

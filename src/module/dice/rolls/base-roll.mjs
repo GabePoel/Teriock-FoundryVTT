@@ -210,7 +210,7 @@ export default class BaseRoll extends Roll {
    */
   _getFormulaContextOptions(config = {}) {
     return [{
-      icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.manifest.roll.reroll, "contextMenu"),
       label: "TERIOCK.ROLLS.Base.reroll",
       onClick: async () => {
         const newRoll = this.clone();

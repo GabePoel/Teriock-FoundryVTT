@@ -1,4 +1,4 @@
-import { icons } from "../display/icons.mjs";
+import { icons } from "../display/_module.mjs";
 import documentConfig from "./document-config.mjs";
 
 export default {
@@ -25,7 +25,7 @@ export default {
     },
     Core: {
       collection: "pages",
-      icon: icons.document.core,
+      icon: icons.manifest.document.core,
       identifierType: "core",
       index: "coreRules",
       packs: ["teriock.rules"],
@@ -63,7 +63,7 @@ export default {
     },
     Keyword: {
       collection: "pages",
-      icon: icons.document.keyword,
+      icon: icons.manifest.document.keyword,
       identifierType: "keyword",
       index: "keywords",
       packs: ["teriock.rules"],

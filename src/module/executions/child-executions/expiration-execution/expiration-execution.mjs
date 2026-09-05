@@ -50,12 +50,12 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.ui.dice,
+      icon: TERIOCK.display.icons.manifest.ui.dice,
       label: "TERIOCK.EXPIRATIONS.Base.EXECUTION.roll",
       name: "roll",
     }, {
       action: "confirm",
-      icon: TERIOCK.display.icons.pseudoDocument.expiration,
+      icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
       label: "TERIOCK.EXPIRATIONS.Base.EXECUTION.expire",
       name: "expire",
       callback: () => (this.autoExpire = true),
@@ -72,7 +72,7 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.pseudoDocument.expiration;
+    return TERIOCK.display.icons.manifest.pseudoDocument.expiration;
   }
 
   /** @inheritDoc */

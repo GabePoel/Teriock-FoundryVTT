@@ -10,7 +10,7 @@ const { fields } = foundry.data;
 export default class RegionActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.document.region, type: "region" });
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.document.region, type: "region" });
   }
 
   /** @inheritDoc */

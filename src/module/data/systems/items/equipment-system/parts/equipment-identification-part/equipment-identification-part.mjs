@@ -30,12 +30,12 @@ export default function EquipmentIdentificationPart(Base) {
     /** @inheritDoc */
     get _displayFields() {
       return [...this._displayFieldsFirst, {
-        classes: [TERIOCK.display.panel.classes.faded],
+        classes: [TERIOCK.display.panels.styles.faded],
         gmOnly: true,
         path: "system.identification.notes",
         visible: !this.identification.identified,
       }, {
-        classes: [TERIOCK.display.panel.classes.faded],
+        classes: [TERIOCK.display.panels.styles.faded],
         gmOnly: true,
         path: "system.identification.flaws",
         visible: !this.identification.identified,
@@ -77,19 +77,19 @@ export default function EquipmentIdentificationPart(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.equipment.identify, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.identify, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
         onClick: this.identification.identify.bind(this.identification),
         visible: this.parent.isOwner && !this.identification.identified,
       }, {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.equipment.readMagic, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.readMagic, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
         onClick: this.identification.readMagic.bind(this.identification),
         visible: this.parent.isOwner && !this.identification.identified && !this.identification.read,
       }, {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.equipment.unidentify, "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unidentify, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
         onClick: this.identification.unidentify.bind(this.identification),
         visible: this.parent.isOwner && this.identification.identified && game.user.isGM,

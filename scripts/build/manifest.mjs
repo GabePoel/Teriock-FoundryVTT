@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { icons } from "../../src/module/constants/display/icons.mjs";
+import { default as icons } from "../../src/module/constants/display/icons/_module.mjs";
 import { default as manifest } from "../../system.json" with { type: "json" };
 import { sortObject } from "../script-utils.mjs";
 
@@ -12,24 +12,24 @@ const DST = "system.json";
  * @type {Record<string, string>}
  */
 const PACK_ICONS = {
-  abilities: icons.document.ability,
-  bodyParts: icons.document.body,
-  classes: icons.document.rank,
-  creatures: icons.document.creature,
-  equipment: icons.document.equipment,
-  essentials: icons.packs.essentials,
-  execution: icons.document.macro,
-  magicItems: icons.packs.magicItems,
-  maintenance: icons.packs.maintenance,
-  maps: icons.tradecraft.cartographer,
-  player: icons.packs.playerUtilities,
-  powers: icons.document.power,
-  properties: icons.document.property,
-  rules: icons.ability.scroll,
-  species: icons.document.species,
-  stacks: icons.tradecraft.gambler,
-  tables: icons.document.table,
-  templateEffects: icons.packs.templateEffects,
+  abilities: icons.manifest.document.ability,
+  bodyParts: icons.manifest.document.body,
+  classes: icons.manifest.document.rank,
+  creatures: icons.manifest.document.creature,
+  equipment: icons.manifest.document.equipment,
+  essentials: icons.manifest.packs.essentials,
+  execution: icons.manifest.document.macro,
+  magicItems: icons.manifest.packs.magicItems,
+  maintenance: icons.manifest.packs.maintenance,
+  maps: icons.manifest.tradecraft.cartographer,
+  player: icons.manifest.packs.playerUtilities,
+  powers: icons.manifest.document.power,
+  properties: icons.manifest.document.property,
+  rules: icons.manifest.ability.scroll,
+  species: icons.manifest.document.species,
+  stacks: icons.manifest.tradecraft.gambler,
+  tables: icons.manifest.document.table,
+  templateEffects: icons.manifest.packs.templateEffects,
 };
 
 manifest.packs.sort((a, b) => a.name.localeCompare(b.name));

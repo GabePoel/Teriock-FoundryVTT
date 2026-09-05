@@ -41,14 +41,14 @@ export default function ImpactsExecutionMixin(Base) {
       return [{
         action: "confirm",
         default: !this.crit,
-        icon: TERIOCK.display.icons.consequence.none,
+        icon: TERIOCK.display.icons.manifest.consequence.none,
         label: "TERIOCK.DIALOGS.Boost.BUTTONS.ok",
         name: "ok",
         callback: () => this.updateSource({ crit: false }),
       }, {
         action: "confirm",
         default: this.crit,
-        icon: TERIOCK.display.icons.consequence.crit,
+        icon: TERIOCK.display.icons.manifest.consequence.crit,
         label: "TERIOCK.DIALOGS.Boost.BUTTONS.crit",
         name: "crit",
         type: "button",
@@ -105,7 +105,7 @@ export default function ImpactsExecutionMixin(Base) {
 
     /** @inheritDoc */
     get icon() {
-      return super.icon ?? TERIOCK.display.icons.ui.dice;
+      return super.icon ?? TERIOCK.display.icons.manifest.ui.dice;
     }
 
     /**

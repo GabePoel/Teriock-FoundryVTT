@@ -192,7 +192,7 @@ export default class AbilitySystem
       this._displayFieldGmNotes,
       {
         button: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
-        classes: [TERIOCK.display.panel.classes.elderSorcery],
+        classes: [TERIOCK.display.panels.styles.elderSorcery],
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements", { elements: this.elementString }),
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
@@ -229,22 +229,22 @@ export default class AbilitySystem
       fields.push(...["system.results.save", "system.results.fail"]);
     }
     fields.push(...[{
-      classes: this.competence.proficient ? [] : [TERIOCK.display.panel.classes.faded],
+      classes: this.competence.proficient ? [] : [TERIOCK.display.panels.styles.faded],
       path: "system.overview.proficient",
     }, {
-      classes: this.competence.fluent ? [] : [TERIOCK.display.panel.classes.faded],
+      classes: this.competence.fluent ? [] : [TERIOCK.display.panels.styles.faded],
       path: "system.overview.fluent",
     }]);
     fields.push(...[
       "system.heightened",
       "system.endCondition",
-      { classes: [TERIOCK.display.panel.classes.derived], editable: false, path: "system.grantOnlyText" },
-      { classes: [TERIOCK.display.panel.classes.derived], editable: false, path: "system.grantUseText" },
-      { classes: [TERIOCK.display.panel.classes.derived], editable: false, path: "system.consumeSourceText" },
+      { classes: [TERIOCK.display.panels.styles.derived], editable: false, path: "system.grantOnlyText" },
+      { classes: [TERIOCK.display.panels.styles.derived], editable: false, path: "system.grantUseText" },
+      { classes: [TERIOCK.display.panels.styles.derived], editable: false, path: "system.consumeSourceText" },
       {
-        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable],
+        classes: [TERIOCK.display.panels.styles.derived, TERIOCK.display.panels.styles.editable],
         dataset: {
-          icon: TERIOCK.display.icons.ui.numerical,
+          icon: TERIOCK.display.icons.manifest.ui.numerical,
           paths: "system.upgrades.score.attribute system.upgrades.score.value",
           title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
         },
@@ -252,9 +252,9 @@ export default class AbilitySystem
         path: "system.upgrades.score.text",
       },
       {
-        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable],
+        classes: [TERIOCK.display.panels.styles.derived, TERIOCK.display.panels.styles.editable],
         dataset: {
-          icon: TERIOCK.display.icons.competence.fluent,
+          icon: TERIOCK.display.icons.manifest.competence.fluent,
           paths: "system.upgrades.competence.attribute system.upgrades.competence.value",
           title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update"),
         },
@@ -299,7 +299,7 @@ export default class AbilitySystem
     if (this.isBasic) {
       icons.push({
         action: "toggleDisableLocked",
-        icon: TERIOCK.display.icons.ui.locked,
+        icon: TERIOCK.display.icons.manifest.ui.locked,
         tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked"),
         visible: this.basic,
         onClick: () => {
@@ -347,7 +347,7 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   get useIcon() {
-    return TERIOCK.display.icons.interaction[this.interaction];
+    return TERIOCK.display.icons.manifest.interaction[this.interaction];
   }
 
   /** @inheritDoc */

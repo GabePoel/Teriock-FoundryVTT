@@ -1,4 +1,3 @@
-import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { PseudoCollectionsDataMixin } from "../../../mixins/_module.mjs";
@@ -33,7 +32,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
     return {
       documentName: "",
       embed: false,
-      icon: icons.ui.document,
+      icon: TERIOCK.display.icons.manifest.ui.document,
       panel: false,
       pseudos: {},
       tags: {},
