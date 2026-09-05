@@ -1,5 +1,7 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
@@ -38,7 +40,10 @@ export default class ConstructionNode
   static defineSchema() {
     return Object.assign(
       omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations", "selectInExecution"]),
-      { parentId: new fields.StringField() },
+      {
+        name: new fields.StringField({ placeholder: _loc(this.typeLabel) }),
+        parentId: new fields.DocumentIdField({ initial: null, nullable: true, readonly: false }),
+      },
     );
   }
 
@@ -58,7 +63,7 @@ export default class ConstructionNode
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...this._selectionPaths, "hr", ...this._competencePaths, "hr", ...this._overrideDataPaths, "hr"];
+    return ["name", ...this._selectionPaths, "hr", ...this._competencePaths, "hr", ...this._overrideDataPaths, "hr"];
   }
 
   /**
@@ -79,6 +84,14 @@ export default class ConstructionNode
    */
   get childNodes() {
     return new PseudoCollection("childNodes", this, this.collection.filter(n => n.parentNode === this));
+  }
+
+  /**
+   * A full name for this.
+   * @returns {string}
+   */
+  get fullName() {
+    return _loc("TERIOCK.AUTOMATIONS.ConstructDocuments.NAME", { header: this.header, name: this.name });
   }
 
   /**
@@ -138,8 +151,8 @@ export default class ConstructionNode
     const data = (await this.selectDocuments(overrides)).map(d => d.toObject());
     if (!data.length) { data.push({}); }
     for (const d of data) {
-      foundry.utils.mergeObject(d, this.data, { inplace: true });
-      if (scope.data) { foundry.utils.mergeObject(d, scope.data, { inplace: true }); }
+      specialMerge(d, this.data);
+      if (scope.data) { specialMerge(d, scope.data); }
       d.children ??= [];
       foundry.utils.setProperty(d, "system.competence.raw", this.getCompetence(scope));
       for (const n of this.childNodes.contents) {
@@ -224,4 +237,29 @@ export default class ConstructionNode
     childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));
     return container;
   }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    if (!this.name) {
+      this.name = this.data.name
+        ? BaseRoll.replaceFormulaData(this.data.name, { base: _loc(this.constructor.typeLabel) })
+        : _loc(this.constructor.typeLabel);
+    }
+    this.img = this.data.img ?? systemPath("icons/documents/uncertainty.svg");
+  }
+}
+
+/**
+ * Merge two objects.
+ * @param {object} a
+ * @param {object} b
+ * @returns {object}
+ */
+function specialMerge(a, b) {
+  let name;
+  if (b.name) { name = BaseRoll.replaceFormulaData(b.name, { base: a.name ?? "" }); }
+  foundry.utils.mergeObject(a, b, { inplace: true });
+  if (name) { a.name = name; }
+  return a;
 }

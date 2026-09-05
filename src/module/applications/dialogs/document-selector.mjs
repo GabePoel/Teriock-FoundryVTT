@@ -110,7 +110,8 @@ export default class DocumentSelector extends ResolvableDialog {
     const idToDoc = new Map();
     /** @type {Record<string, Teriock.Select.DocumentSelectionEntry>} */
     const entries = {};
-    documents.sort((a, b) => a.name.localeCompare(b.name));
+    const getName = (doc) => doc.fullName || doc.name;
+    documents.sort((a, b) => getName(a).localeCompare(getName(b)));
     if (!options.multi && options.checked?.length > 0) { options.checked.length = 1; }
     for (const doc of documents) {
       const id = doc.uuid;
@@ -118,7 +119,7 @@ export default class DocumentSelector extends ResolvableDialog {
       entries[id] = {
         checked: options.checked.includes(id),
         img: foundry.utils.getProperty(doc, options.imgKey),
-        name: doc.name,
+        name: getName(doc),
         text: options.textKey ? foundry.utils.getProperty(doc, options.textKey) || "" : "",
         uuid: doc.uuid,
       };

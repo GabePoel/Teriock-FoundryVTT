@@ -14,6 +14,9 @@ const { fields } = foundry.data;
  * @property {AccessData} parent
  */
 export default class BasePseudoDocument extends mixClasses(BaseDataModel, PseudoCollectionsDataMixin) {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Base"];
+
   /**
    * The document name of this Pseudo-Document.
    * @returns {string}
@@ -292,7 +295,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
     const type = _loc(`DOCUMENT.${this.documentName}`);
     if (!content) {
       const question = _loc("COMMON.AreYouSure");
-      const warning = _loc("SIDEBAR.DeleteWarning", { type: type.toLowerCase() });
+      const warning = _loc("SIDEBAR.DeleteWarning", { type });
       content = `<p><strong>${question}</strong> ${warning}</p>`;
     }
     return foundry.applications.api.DialogV2.confirm(
