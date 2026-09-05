@@ -397,6 +397,7 @@ export default function AbilityExecutionChatPart(Base) {
     /** @inheritDoc */
     async _buildSourcePanel() {
       const panel = await super._buildSourcePanel();
+      if (!panel) { return panel; }
       const blockStates = {
         "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label": this.heightened,
         "TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label": this.competence.fluent,

@@ -62,7 +62,11 @@ export default class ChangeQuantityActivation extends BaseActivation {
     const messageData = {
       rolls: [roll],
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actors[0] || consumable.actor }),
-      system: { panels: [panelData] },
+      system: {
+        panels: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject([
+          new teriock.data.pseudoDocuments.Panel(panelData),
+        ]),
+      },
       type: "interactive",
     };
     TeriockChatMessage.applyMode(messageData, this.messageMode ?? game.settings.get("core", "messageMode"));

@@ -80,7 +80,7 @@ export default function PanelDataMixin(Base) {
             ?? ChatMessage.implementation.getSpeakerActor(ChatMessage.implementation.getSpeaker()),
         }),
         system: { _src: this.uuid, panels: { [panel.id]: panel.toObject() } },
-        type: "interactive",
+        type: "shared",
       }, { defaultMode: true });
     }
 

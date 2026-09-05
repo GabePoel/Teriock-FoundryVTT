@@ -139,6 +139,9 @@ export default class TeriockRollTable
     messageData.system.panels.forEach(panel => {
       panel.blocks.push({ classes: [TERIOCK.display.panel.classes.derived], text, title: this.name });
     });
+    messageData.system.panels = teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
+      messageData.system.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
+    );
     return TeriockChatMessage.create(messageData, messageOptions);
   }
 

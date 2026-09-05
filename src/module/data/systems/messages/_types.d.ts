@@ -1,9 +1,10 @@
-import { BaseMessageSystem, InteractiveSystem, TriggeredSystem } from "./_module.mjs";
+import { BaseMessageSystem, InteractiveSystem, SharedSystem, TriggeredSystem } from "./_module.mjs";
 
 declare global {
   export interface ChatMessageSystemMap {
     base: BaseMessageSystem;
     interactive: InteractiveSystem;
+    shared: SharedSystem;
     triggered: TriggeredSystem;
   }
 

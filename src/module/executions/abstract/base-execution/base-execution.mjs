@@ -173,7 +173,9 @@ export default class BaseExecution extends BaseDataModel {
       system: {
         activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(this.activations),
         buttons: this.buttons,
-        panels: this.panels,
+        panels: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
+          this.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
+        ),
         tags: this.tags,
       },
       type: "interactive",

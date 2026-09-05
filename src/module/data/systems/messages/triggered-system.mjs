@@ -1,5 +1,5 @@
-import { BasePseudoDocument } from "../../../pseudo-documents/abstract/_module.mjs";
-import InteractiveSystem from "../interactive-system/interactive-system.mjs";
+import { BasePseudoDocument } from "../../pseudo-documents/abstract/_module.mjs";
+import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 
 /**
  * Chat message data model for triggered automation prompts.
@@ -19,24 +19,6 @@ export default class TriggeredSystem extends InteractiveSystem {
     if (!chatData?.system || !activations?.length) { return; }
     chatData.system.activations ??= {};
     Object.assign(chatData.system.activations, BasePseudoDocument.toCollectionObject(activations));
-  }
-
-  /**
-   * Add a source document association onto triggered chat message data.
-   * @param {Partial<Teriock.Data.ChatMessageData>} chatData
-   * @param {TeriockDocument} document
-   */
-  static addAssociation(chatData, document) {
-    const association = chatData?.system?.panels?.[0]?.associations?.[0];
-    if (!document || !association) { return; }
-    if (association.cards.some(c => c.uuid === document.uuid)) { return; }
-    association.cards.push({
-      img: document.img,
-      makeTooltip: true,
-      name: document.fullName || document.name,
-      type: document.type,
-      uuid: document.uuid,
-    });
   }
 
   /** @inheritDoc */

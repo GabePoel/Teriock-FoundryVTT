@@ -383,6 +383,9 @@ export default class TeriockActor
       if (!Object.keys(chatData.system?.activations ?? {}).length) { continue; }
       const panel = chatData.system.panels?.[0];
       if (panel?.associations?.[0] && !panel.associations[0].cards.length) { delete panel.associations; }
+      chatData.system.panels = teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
+        (chatData.system.panels ?? []).filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
+      );
       TeriockChatMessage.applyMode(chatData, game.settings.get("teriock", "triggerMessageMode"));
       allChatData.push(chatData);
     }
@@ -458,13 +461,7 @@ export default class TeriockActor
     const associations = [];
     if (document) {
       associations.push({
-        cards: [{
-          img: document.img,
-          makeTooltip: true,
-          name: document.fullName || document.name,
-          type: document.type,
-          uuid: document.uuid,
-        }],
+        cards: [{ documentUuid: document.uuid, img: document.img, name: document.fullName || document.name }],
         icon: document.typeIcon ?? TERIOCK.display.icons.ui.document,
         title: _loc(titleKey),
       });

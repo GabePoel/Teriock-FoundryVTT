@@ -168,6 +168,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ChatMessage.collection = documents.collections.TeriockChatMessages;
   CONFIG.ChatMessage.dataModels.base = data.systems.messages.BaseMessageSystem;
   CONFIG.ChatMessage.dataModels.interactive = data.systems.messages.InteractiveSystem;
+  CONFIG.ChatMessage.dataModels.shared = data.systems.messages.SharedSystem;
   CONFIG.ChatMessage.dataModels.triggered = data.systems.messages.TriggeredSystem;
   CONFIG.ChatMessage.defaultType = "interactive";
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;

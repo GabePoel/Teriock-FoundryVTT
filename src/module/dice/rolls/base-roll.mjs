@@ -323,7 +323,9 @@ export default class BaseRoll extends Roll {
     messageData = foundry.utils.mergeObject({
       system: {
         activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(activations),
-        panels,
+        panels: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
+          panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
+        ),
         tags: this.options?.tags,
       },
       type: "interactive",

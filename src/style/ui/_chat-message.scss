@@ -1,6 +1,38 @@
-.teriock.chat-message.triggered {
-  background: url("../../../ui/parchment-white.jpg") repeat;
-  --color-panel-edge: #afafaf;
-  --color-panel-icon: var(--color-panel-edge);
-  --color-panel-divider: var(--color-panel-edge);
+.teriock.chat-message {
+  isolation: isolate;
+  position: relative;
+
+  &.interactive, &.triggered {
+    &:not(.blind):not(.whisper):not(.emote) {
+      background-image: none;
+    }
+
+    &::before {
+      border-radius: inherit;
+      content: "";
+      inset: 0;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &:is(.blind, .whisper, .emote)::before {
+      mix-blend-mode: multiply;
+    }
+  }
+
+  &.interactive::before {
+    background: url("../../../ui/parchment-white.jpg") repeat;
+    filter: sepia(0.1) saturate(1.1);
+  }
+
+  &.triggered {
+    --color-panel-edge: #afafaf;
+    --color-panel-icon: var(--color-panel-edge);
+    --color-panel-divider: var(--color-panel-edge);
+
+    &::before {
+      background: url("../../../ui/denim-light.png") repeat;
+      filter: invert(1) brightness(1.3);
+    }
+  }
 }
