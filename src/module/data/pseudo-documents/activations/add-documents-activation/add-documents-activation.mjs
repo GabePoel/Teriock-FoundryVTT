@@ -59,12 +59,7 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.ui.apply });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "addDocuments";
+    return Object.assign(super.metadata, { icon: icons.ui.apply, type: "addDocuments" });
   }
 
   /** @inheritDoc */

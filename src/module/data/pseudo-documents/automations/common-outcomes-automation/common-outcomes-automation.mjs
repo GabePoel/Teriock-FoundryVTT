@@ -22,8 +22,8 @@ export default class CommonOutcomesAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "common";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "common" });
   }
 
   /** @inheritDoc */
@@ -51,7 +51,7 @@ export default class CommonOutcomesAutomation
     }
     const activationClasses = Object.values(activations);
     return Array.from(this.common).filter(Boolean).map(c => {
-      const Act = activationClasses.find(A => A.TYPE === c);
+      const Act = activationClasses.find(A => A.metadata.type === c);
       if (Act) { return new Act(foundry.utils.deepClone(activationOptions)); }
     }).filter(Boolean);
   }

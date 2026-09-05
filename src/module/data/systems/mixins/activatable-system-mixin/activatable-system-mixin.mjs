@@ -26,7 +26,7 @@ export default function ActivatableSystemMixin(Base) {
      */
     static get activationTypes() {
       return Object.fromEntries(
-        this._activationTypes.map(a => [a.TYPE, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
+        this._activationTypes.map(a => [a.metadata.type, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
       );
     }
 

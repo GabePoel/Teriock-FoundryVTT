@@ -15,12 +15,7 @@ export default class UseDocumentsActivation extends SelectionPseudoDocumentMixin
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.ui.document });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "useDocuments";
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.ui.document, type: "useDocuments" });
   }
 
   /** @inheritDoc */

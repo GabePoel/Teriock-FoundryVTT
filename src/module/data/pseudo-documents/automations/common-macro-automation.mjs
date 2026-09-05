@@ -6,7 +6,7 @@ import * as automationMixins from "./mixins/_module.mjs";
  */
 export default class CommonMacroAutomation extends automationMixins.MacroAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
-  static get TYPE() {
-    return "commonMacro";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "commonMacro" });
   }
 }

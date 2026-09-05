@@ -37,7 +37,7 @@ export default class PseudoCollectionField extends TypedObjectField {
     if (!foundry.utils.isSubclass(model, BasePseudoDocument)) {
       throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"));
     }
-    const types = options.types ?? { [model.TYPE]: model };
+    const types = options.types ?? { [model.metadata.type]: model };
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
   }

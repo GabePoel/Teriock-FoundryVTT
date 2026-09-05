@@ -26,7 +26,7 @@ export default function AutomatableSystemMixin(Base) {
      */
     static get automationTypes() {
       return Object.fromEntries(
-        this._automationTypes.map(a => [a.TYPE, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
+        this._automationTypes.map(a => [a.metadata.type, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
       );
     }
 

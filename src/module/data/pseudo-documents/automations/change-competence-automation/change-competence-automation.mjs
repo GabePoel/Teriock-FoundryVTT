@@ -19,8 +19,8 @@ export default class ChangeCompetenceAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "changeCompetence";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "changeCompetence" });
   }
 
   /** @inheritDoc */

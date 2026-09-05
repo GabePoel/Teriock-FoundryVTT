@@ -13,8 +13,8 @@ export default class CombatExpiration extends BaseExpiration {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "combat";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "combat" });
   }
 
   /** @inheritDoc */

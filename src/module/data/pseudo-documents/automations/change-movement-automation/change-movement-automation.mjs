@@ -21,8 +21,8 @@ export default class ChangeMovementAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "changeMovement";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "changeMovement" });
   }
 
   /** @inheritDoc */

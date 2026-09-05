@@ -97,7 +97,7 @@ export default function ActorConditionsPart(Base) {
       await super.postUpdate();
       const changedStatuses = this.#consumeChangedStatuses();
       if (changedStatuses.size) {
-        await BaseExpiration.massExpire([this.parent], StatusExpiration.TYPE, { changedStatuses });
+        await BaseExpiration.massExpire([this.parent], StatusExpiration.metadata.type, { changedStatuses });
       }
     }
 

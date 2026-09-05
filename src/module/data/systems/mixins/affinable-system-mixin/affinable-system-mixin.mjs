@@ -25,7 +25,7 @@ export default function AffinableSystemMixin(Base) {
      * @returns {Record<string, (typeof Affinity)>}
      */
     static get affinityTypes() {
-      return Object.fromEntries(this._affinityTypes.map(a => [a.TYPE, a]));
+      return Object.fromEntries(this._affinityTypes.map(a => [a.metadata.type, a]));
     }
 
     /** @inheritDoc */

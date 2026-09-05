@@ -23,8 +23,8 @@ export default class AttunementAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "attunement";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "attunement" });
   }
 
   /** @inheritDoc */

@@ -27,13 +27,13 @@ export default class ChangeQuantityAutomation
   }
 
   /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: true, initial: "execute", nullable: false });
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "changeQuantity" });
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "changeQuantity";
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { executionTriggers: true, initial: "execute", nullable: false });
   }
 
   /** @inheritDoc */

@@ -22,8 +22,8 @@ export default class CoverAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "cover";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "cover" });
   }
 
   /** @inheritDoc */

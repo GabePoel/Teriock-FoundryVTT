@@ -46,8 +46,8 @@ export default class ChatStatusAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "chatStatus";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "chatStatus" });
   }
 
   /** @inheritDoc */

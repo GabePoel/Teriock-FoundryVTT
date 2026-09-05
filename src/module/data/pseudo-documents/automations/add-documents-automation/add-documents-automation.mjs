@@ -43,8 +43,8 @@ export default class AddDocumentsAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "addDocuments";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "addDocuments" });
   }
 
   /** @inheritDoc */

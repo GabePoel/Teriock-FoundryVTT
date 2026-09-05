@@ -26,12 +26,7 @@ export default class SummonActivation extends SelectionPseudoDocumentMixin(BaseA
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.document.token });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "summon";
+    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.document.token, type: "summon" });
   }
 
   /** @inheritDoc */

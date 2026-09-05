@@ -11,8 +11,8 @@ export default class RevitalizeAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "revitalize";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "revitalize" });
   }
 
   /** @inheritDoc */

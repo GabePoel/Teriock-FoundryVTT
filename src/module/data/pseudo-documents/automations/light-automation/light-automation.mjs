@@ -50,12 +50,7 @@ export default class LightAutomation extends CritMechanicMixin(BaseAutomation) {
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { changes: true });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "light";
+    return Object.assign(super.metadata, { changes: true, type: "light" });
   }
 
   /** @inheritDoc */

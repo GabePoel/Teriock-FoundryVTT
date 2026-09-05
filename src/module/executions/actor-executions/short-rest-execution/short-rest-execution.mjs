@@ -20,7 +20,7 @@ export default class ShortRestExecution extends DocumentExecution {
   constructor(data = {}, options = {}) {
     super(data, options);
     const useAutomation = new UseDocumentsAutomation({
-      _id: toId(UseDocumentsAutomation.TYPE, { hash: true }),
+      _id: toId(UseDocumentsAutomation.metadata.type, { hash: true }),
       all: false,
       auto: false,
       localQualifier: `and(@ability, @time.${toKebabCase(this.executionTime)})`,

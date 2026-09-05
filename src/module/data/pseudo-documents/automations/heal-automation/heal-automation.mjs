@@ -16,8 +16,8 @@ export default class HealAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "heal";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "heal" });
   }
 
   /** @inheritDoc */

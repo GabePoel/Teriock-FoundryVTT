@@ -29,12 +29,10 @@ export default class ConstructDocumentsAutomation
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { pseudos: { ConstructionNode: "constructionNodes" } });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "constructDocuments";
+    return foundry.utils.mergeObject(super.metadata, {
+      pseudos: { ConstructionNode: "constructionNodes" },
+      type: "constructDocuments",
+    });
   }
 
   /** @inheritDoc */
@@ -64,6 +62,7 @@ export default class ConstructDocumentsAutomation
     return [
       new ConstructDocumentsActivation({
         constructionNodes: ConstructionNode.toCollectionObject(nodes.map(n => n.toObject())),
+        display: this.display,
         target: this.target,
       }),
     ];

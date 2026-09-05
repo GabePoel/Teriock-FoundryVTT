@@ -6,8 +6,8 @@ import * as automationMixins from "./mixins/_module.mjs";
  */
 export default class PropertyMacroAutomation extends automationMixins.MacroAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
-  static get TYPE() {
-    return "propertyMacro";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "propertyMacro" });
   }
 
   /** @inheritDoc */

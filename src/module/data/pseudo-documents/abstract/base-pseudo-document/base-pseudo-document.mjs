@@ -27,7 +27,9 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {string}
    */
   static get LABEL() {
-    return _loc(`DOCUMENT.${this.documentName}`);
+    return this.metadata.typed
+      ? _loc(`TYPES.${this.documentName}.${this.metadata.type}`)
+      : _loc(`DOCUMENT.${this.documentName}`);
   }
 
   /**
@@ -48,19 +50,11 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * The key for this pseudo-document's type.
-   * @returns {string}
-   */
-  static get TYPE() {
-    return "base";
-  }
-
-  /**
    * Subtypes of this pseudo-document.
    * @returns {string[]}
    */
   static get TYPES() {
-    return [this.TYPE];
+    return [this.metadata.type];
   }
 
   /**
@@ -111,7 +105,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument[]>}
    */
   static async createDocuments(data = [], operation = {}) {
-    if (!this.metadata.typed) { data.forEach(d => d.type = this.TYPE); }
+    if (!this.metadata.typed) { data.forEach(d => d.type = this.metadata.type); }
     const parsed = await this._parseParent(this.toCollectionObject(data, operation), operation);
     await parsed.document.update(parsed.updateData);
     const parent = await fromUuid(parsed.parent.uuid);
@@ -122,7 +116,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   static defineSchema() {
     return {
       _id: new fields.DocumentIdField({ initial: () => foundry.utils.randomID() }),
-      type: new fields.StringField({ blank: false, initial: this.TYPE, nullable: false, required: true }),
+      type: new fields.StringField({ blank: false, initial: this.metadata.type, nullable: false, required: true }),
     };
   }
 

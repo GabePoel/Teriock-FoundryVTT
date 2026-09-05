@@ -15,12 +15,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.pseudoDocument.automation });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "changeQuantity";
+    return Object.assign(super.metadata, { icon: icons.pseudoDocument.automation, type: "changeQuantity" });
   }
 
   /** @inheritDoc */

@@ -14,8 +14,8 @@ export default function CommandActivationFactory(entry) {
    */
   class CommandActivation extends BaseActivation {
     /** @inheritDoc */
-    static get TYPE() {
-      return entry.id;
+    static get metadata() {
+      return Object.assign(super.metadata, { type: entry.id });
     }
 
     /** @inheritDoc */

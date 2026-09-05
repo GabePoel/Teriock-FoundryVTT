@@ -23,8 +23,8 @@ export default class ResistAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "resist";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "resist" });
   }
 
   /** @inheritDoc */

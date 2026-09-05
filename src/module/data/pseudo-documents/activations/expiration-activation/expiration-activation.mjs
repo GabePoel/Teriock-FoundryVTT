@@ -14,12 +14,7 @@ export default class ExpirationActivation extends BaseActivation {
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.pseudoDocument.expiration });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "expiration";
+    return Object.assign(super.metadata, { icon: icons.pseudoDocument.expiration, type: "expiration" });
   }
 
   /** @inheritDoc */

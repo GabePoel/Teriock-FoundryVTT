@@ -59,14 +59,14 @@ export default class RegionAutomation
     return "TERIOCK.AUTOMATIONS.Region.LABEL";
   }
 
+  /** @inheritdoc */
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "region" });
+  }
+
   /** @inheritDoc */
   static get triggerMetadata() {
     return Object.assign(super.triggerMetadata, { activationTime: "pre", executionTriggers: ["executeInput"] });
-  }
-
-  /** @inheritdoc */
-  static get TYPE() {
-    return "region";
   }
 
   /** @inheritDoc */

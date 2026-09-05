@@ -28,14 +28,14 @@ export default class SummonAutomation
     return "TERIOCK.AUTOMATIONS.Summon.LABEL";
   }
 
+  /** @inheritdoc */
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "summon" });
+  }
+
   /** @inheritDoc */
   static get triggerMetadata() {
     return Object.assign(super.triggerMetadata, { executionTriggers: ["execute"] });
-  }
-
-  /** @inheritdoc */
-  static get TYPE() {
-    return "summon";
   }
 
   /** @inheritDoc */

@@ -4,8 +4,8 @@ import * as automationMixins from "./mixins/_module.mjs";
 
 export default class ChatMacroAutomation extends automationMixins.MacroAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
-  static get TYPE() {
-    return "chatMacro";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "chatMacro" });
   }
 
   /** @inheritDoc */

@@ -31,8 +31,8 @@ export default class AttackAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "attack";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "attack" });
   }
 
   /** @inheritDoc */

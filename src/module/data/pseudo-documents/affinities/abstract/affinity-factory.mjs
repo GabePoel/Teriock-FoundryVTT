@@ -37,8 +37,8 @@ export default function AffinityFactory(type) {
     }
 
     /** @inheritDoc */
-    static get TYPE() {
-      return type;
+    static get metadata() {
+      return Object.assign(super.metadata, { type });
     }
 
     /** @inheritDoc */

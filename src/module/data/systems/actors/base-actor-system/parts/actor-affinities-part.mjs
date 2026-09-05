@@ -42,7 +42,7 @@ export default function ActorAffinitiesPart(Base) {
       if (!AFFINITY_TYPES[type]) {
         AFFINITY_TYPES[type] = Object.values(teriock.data.pseudoDocuments.affinities).filter(a =>
           foundry.utils.isSubclass(a, BaseAffinity)
-        ).find(a => a.TYPE === type);
+        ).find(a => a.metadata.type === type);
       }
       const affinity = new AFFINITY_TYPES[type]({ _id: id, category, type, value, ...data }, { parent: this });
       affinity.sourceName = source;

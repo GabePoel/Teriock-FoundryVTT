@@ -30,13 +30,13 @@ export default class TradecraftAutomation
   }
 
   /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: true });
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "tradecraft" });
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "tradecraft";
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { executionTriggers: true });
   }
 
   /** @inheritDoc */

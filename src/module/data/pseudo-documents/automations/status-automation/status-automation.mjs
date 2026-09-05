@@ -17,8 +17,8 @@ export default class StatusAutomation extends ChatStatusAutomation {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "status";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "status" });
   }
 
   /** @inheritDoc */

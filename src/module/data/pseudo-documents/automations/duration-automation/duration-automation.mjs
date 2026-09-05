@@ -18,8 +18,8 @@ export default class DurationAutomation extends CritMechanicMixin(BaseAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "duration";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "duration" });
   }
 
   /** @inheritDoc */

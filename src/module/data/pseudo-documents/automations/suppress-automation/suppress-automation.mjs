@@ -12,8 +12,8 @@ export default class SuppressAutomation extends CritMechanicMixin(BaseAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "suppress";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "suppress" });
   }
 
   /** @inheritDoc */

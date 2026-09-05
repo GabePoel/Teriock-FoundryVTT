@@ -149,7 +149,7 @@ export default function AbilityExecutionChatPart(Base) {
       const types = CONFIG.ActiveEffect.dataModels.consequence._affinityTypes;
       const out = {};
       for (const Cls of types) {
-        const affinities = this.affinities.getTypeSync(Cls.TYPE, { active: true, crit });
+        const affinities = this.affinities.getTypeSync(Cls.metadata.type, { active: true, crit });
         for (const a of affinities) {
           const data = a.toObject();
           data._id = foundry.utils.randomID();
@@ -167,7 +167,7 @@ export default function AbilityExecutionChatPart(Base) {
       const types = CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
       const out = {};
       for (const Cls of types) {
-        const automations = this.automations.getTypeSync(Cls.TYPE, { active: true, crit });
+        const automations = this.automations.getTypeSync(Cls.metadata.type, { active: true, crit });
         for (const a of automations) {
           const data = a.toObject();
           data._id = foundry.utils.randomID();
@@ -223,7 +223,7 @@ export default function AbilityExecutionChatPart(Base) {
       const types = CONFIG.ActiveEffect.dataModels.consequence._expirationTypes;
       const out = {};
       for (const Cls of types) {
-        const expirations = this.expirations.getTypeSync(Cls.TYPE, { active: true, crit });
+        const expirations = this.expirations.getTypeSync(Cls.metadata.type, { active: true, crit });
         for (const e of expirations) {
           const data = e.toObject();
           data._id = foundry.utils.randomID();

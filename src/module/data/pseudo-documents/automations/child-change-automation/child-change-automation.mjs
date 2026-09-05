@@ -20,8 +20,8 @@ export default class ChildChangeAutomation extends CritMechanicMixin(BaseAutomat
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "childChange";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "childChange" });
   }
 
   /** @inheritDoc */

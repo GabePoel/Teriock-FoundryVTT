@@ -23,13 +23,13 @@ export default class ToggleChildrenAutomation
   }
 
   /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { choices: { update: TERIOCK.config.trigger.update } });
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "toggleChildren" });
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "toggleChildren";
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { choices: { update: TERIOCK.config.trigger.update } });
   }
 
   /** @inheritDoc */

@@ -25,7 +25,7 @@ export default function ExpirableSystemMixin(Base) {
      * @returns {Record<string, (typeof Expiration)>}
      */
     static get expirationTypes() {
-      return Object.fromEntries(this._expirationTypes.map(e => [e.TYPE, e]));
+      return Object.fromEntries(this._expirationTypes.map(e => [e.metadata.type, e]));
     }
 
     /** @inheritDoc */

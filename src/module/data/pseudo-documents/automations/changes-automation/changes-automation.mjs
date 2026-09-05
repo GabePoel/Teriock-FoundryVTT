@@ -17,12 +17,7 @@ export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation)
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { changes: true });
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "changes";
+    return Object.assign(super.metadata, { changes: true, type: "changes" });
   }
 
   /** @inheritDoc */

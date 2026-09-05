@@ -28,7 +28,7 @@ export default function ActorPseudoDocumentsPart(Base) {
       return new PseudoCollectionField(Base, {
         persisted: false,
         types: Object.fromEntries(
-          Object.values(module).filter((p) => foundry.utils.isSubclass(p, Base)).map((p) => [p.TYPE, p]),
+          Object.values(module).filter((p) => foundry.utils.isSubclass(p, Base)).map((p) => [p.metadata.type, p]),
         ),
       });
     }

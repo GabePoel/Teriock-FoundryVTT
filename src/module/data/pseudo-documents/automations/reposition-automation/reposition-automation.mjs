@@ -30,8 +30,8 @@ export default class RepositionAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "move";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "move" });
   }
 
   /** @inheritDoc */

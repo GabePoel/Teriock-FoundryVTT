@@ -37,13 +37,13 @@ export default class UseDocumentsAutomation
   }
 
   /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: ["execute"] });
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "useDocuments" });
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "useDocuments";
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { executionTriggers: ["execute"] });
   }
 
   /** @inheritDoc */

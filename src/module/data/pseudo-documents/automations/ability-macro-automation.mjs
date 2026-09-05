@@ -10,8 +10,8 @@ export default class AbilityMacroAutomation
   extends automationMixins.MacroAutomationMixin(CritMechanicMixin(BaseAutomation))
 {
   /** @inheritDoc */
-  static get TYPE() {
-    return "abilityMacro";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "abilityMacro" });
   }
 
   /** @inheritDoc */

@@ -25,7 +25,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
    * @param {Teriock.Keys.CombatTiming} timing
    */
   #refreshCombatExpirations(actor, event, timing) {
-    BaseExpiration.massExpire(this.actors, CombatExpiration.TYPE, { actor, event, timing });
+    BaseExpiration.massExpire(this.actors, CombatExpiration.metadata.type, { actor, event, timing });
   }
 
   /**

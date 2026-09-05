@@ -38,8 +38,8 @@ export default class OverrideAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "override";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "override" });
   }
 
   /** @inheritDoc */

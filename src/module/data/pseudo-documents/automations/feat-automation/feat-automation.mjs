@@ -20,8 +20,8 @@ export default class FeatAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "feat";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "feat" });
   }
 
   /** @inheritDoc */

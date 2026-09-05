@@ -51,7 +51,7 @@ export default class ConditionSystem
   get _embedIcons() {
     return [{
       action: "removeConditionDoc",
-      icon: "dice-d4",
+      icon: "mdi-dice-d4",
       tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
       visible: true,
       onClick: async () => this.parent.use(),

@@ -52,7 +52,7 @@ export function getRollIcon(rollFormula) {
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
-    if (polyhedralDice.includes(die.faces)) { return `fa-dice-d${die.faces}`; }
+    if (polyhedralDice.includes(die.faces)) { return `mdi-dice-d${die.faces}`; }
     else if (die.faces === 2) { return "fa-coins"; }
     else if (die.faces === 100) { return "fa-percent"; }
   }

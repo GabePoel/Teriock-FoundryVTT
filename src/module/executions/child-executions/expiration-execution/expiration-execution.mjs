@@ -77,7 +77,7 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   get name() {
-    if (this.#expiration.type === BaseExpiration.TYPE) { return this.#expiration.label; }
+    if (this.#expiration.type === BaseExpiration.metadata.type) { return this.#expiration.label; }
     return _loc("TERIOCK.EXPIRATIONS.Base.EXECUTION.name", { label: this.#expiration.label });
   }
 

@@ -13,12 +13,10 @@ export default function AutomationActivationFactory(Automation) {
 
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { pseudos: Automation.metadata.pseudos });
-    }
-
-    /** @inheritDoc */
-    static get TYPE() {
-      return Automation.TYPE;
+      return foundry.utils.mergeObject(super.metadata, {
+        pseudos: Automation.metadata.pseudos,
+        type: Automation.metadata.type,
+      });
     }
 
     /** @inheritDoc */

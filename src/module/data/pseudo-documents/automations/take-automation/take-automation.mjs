@@ -28,8 +28,8 @@ export default class TakeAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "take";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "take" });
   }
 
   /** @inheritDoc */

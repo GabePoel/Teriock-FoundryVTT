@@ -15,8 +15,8 @@ export default class TriggerExpiration extends BaseExpiration {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "trigger";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "trigger" });
   }
 
   /** @inheritDoc */

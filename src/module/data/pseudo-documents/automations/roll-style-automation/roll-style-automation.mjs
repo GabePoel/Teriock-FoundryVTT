@@ -11,8 +11,8 @@ export default class RollStyleAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "rollStyle";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "rollStyle" });
   }
 
   /** @inheritDoc */

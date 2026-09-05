@@ -27,8 +27,8 @@ export default class TransformationAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "transformation";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "transformation" });
   }
 
   /** @inheritDoc */

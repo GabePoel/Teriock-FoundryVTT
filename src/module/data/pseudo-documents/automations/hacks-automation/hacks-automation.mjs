@@ -24,8 +24,8 @@ export default class HacksAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "hacks";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "hacks" });
   }
 
   /** @inheritDoc */

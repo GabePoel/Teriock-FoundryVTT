@@ -12,8 +12,8 @@ export default class StatusExpiration extends BaseExpiration {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "status";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "status" });
   }
 
   /** @inheritDoc */

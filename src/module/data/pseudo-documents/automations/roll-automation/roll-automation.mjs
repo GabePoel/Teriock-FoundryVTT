@@ -30,8 +30,8 @@ export default class RollAutomation
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "roll";
+  static get metadata() {
+    return Object.assign(super.metadata, { type: "roll" });
   }
 
   /** @inheritDoc */
