@@ -59,7 +59,7 @@ export default {
     lifeMage: "ms-sunny",
     natureMage: "ms-nest-eco-leaf",
     necromancer: "ms-hand-bones",
-    paladin: "ms-health-and-safety",
+    paladin: "mdi-shield-sun",
     ranger: "mdi-paw",
     stormMage: "ms-filter-drama",
     thief: "mdi-hand-coin",
