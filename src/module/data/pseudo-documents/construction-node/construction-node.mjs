@@ -83,7 +83,7 @@ export default class ConstructionNode
    * @returns {PseudoCollection<ConstructionNode>}
    */
   get childNodes() {
-    return new PseudoCollection("childNodes", this, this.collection.filter(n => n.parentNode === this));
+    return new PseudoCollection("childNodes", this, this.collection.filter(n => n.parentId === this._id));
   }
 
   /**
@@ -91,7 +91,7 @@ export default class ConstructionNode
    * @returns {string}
    */
   get fullName() {
-    return _loc("TERIOCK.AUTOMATIONS.ConstructDocuments.NAME", { header: this.header, name: this.name });
+    return _loc("TERIOCK.AUTOMATIONS.AddDocuments.NAME", { header: this.header, name: this.name });
   }
 
   /**

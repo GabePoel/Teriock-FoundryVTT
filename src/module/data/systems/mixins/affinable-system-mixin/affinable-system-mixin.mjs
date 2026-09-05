@@ -39,14 +39,6 @@ export default function AffinableSystemMixin(Base) {
         affinities: new PseudoCollectionField(BaseAffinity, { types: this.affinityTypes }),
       });
     }
-
-    /**
-     * Active affinities.
-     * @returns {Affinity[]}
-     */
-    get activeAffinities() {
-      return this.affinities.contents.filter(a => a.active && a.valid);
-    }
   }
 
   return AffinableSystem;

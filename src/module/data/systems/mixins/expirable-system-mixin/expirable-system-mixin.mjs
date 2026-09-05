@@ -39,14 +39,6 @@ export default function ExpirableSystemMixin(Base) {
         expirations: new PseudoCollectionField(BaseExpiration, { types: this.expirationTypes }),
       });
     }
-
-    /**
-     * Active expirations.
-     * @returns {Expiration[]}
-     */
-    get activeExpirations() {
-      return this.expirations.contents.filter((e) => e.active);
-    }
   }
 
   return ExpirableSystem;

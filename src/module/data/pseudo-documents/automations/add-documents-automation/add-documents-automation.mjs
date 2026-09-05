@@ -1,59 +1,55 @@
+import { ConstructionNode } from "../../_module.mjs";
+import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import effectConfig from "../../../../constants/config/effect-config.mjs";
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { objectMap, omit } from "../../../../helpers/utils.mjs";
-import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
-import { defaultJSONField } from "../../../fields/tools/builders.mjs";
+import { toId } from "../../../../helpers/string.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
+import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
-import {
-  CritMechanicMixin,
-  OverrideCompetencePseudoDocumentMixin,
-  OverrideDataPseudoDocumentMixin,
-  SelectionPseudoDocumentMixin,
-} from "../../mixins/_module.mjs";
+import { ConstructNodesPseudoDocumentMixin, CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @mixes CritMechanic
- * @mixes SelectionPseudoDocument
- * @mixes OverrideCompetenceMechanic
- * @mixes OverrideDataPseudoDocument
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
 export default class AddDocumentsAutomation
   extends mixClasses(
-    CritMechanicMixin(BaseAutomation),
-    SelectionPseudoDocumentMixin,
-    OverrideCompetencePseudoDocumentMixin,
-    OverrideDataPseudoDocumentMixin,
-    automationMixins.DisplayAutomationMixin,
-    automationMixins.TriggerAutomationMixin,
+    BaseAutomation,
+    CritMechanicMixin,
+    DisplayAutomationMixin,
+    TriggerAutomationMixin,
+    ConstructNodesPseudoDocumentMixin,
   )
 {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.AddDocuments"];
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.PSEUDOS.Selection",
+    "TERIOCK.AUTOMATIONS.AddDocuments",
+  ];
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { type: "addDocuments" });
+    return foundry.utils.mergeObject(super.metadata, {
+      pseudos: { ConstructionNode: "constructionNodes" },
+      type: "addDocuments",
+    });
   }
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
-      attachDocuments: new fields.BooleanField({ initial: true }),
-      children: new fields.SchemaField({
-        data: defaultJSONField(),
-        enabled: new fields.BooleanField({ initial: false }),
-        identifiers: new TypedIdentifierSetField(),
-        overrideData: new fields.BooleanField({ initial: false }),
-        uuids: new fields.SetField(new fields.DocumentUUIDField()),
-      }),
-      separate: new fields.BooleanField({ initial: false }),
+    return Object.assign(super.defineSchema(), {
+      all: new fields.BooleanField({ initial: true }),
+      attachToEffect: new fields.BooleanField({ initial: true }),
+      auto: new fields.BooleanField({ initial: true }),
+      constructionNodes: new PseudoCollectionField(ConstructionNode),
+      multi: new fields.BooleanField({ initial: false }),
+      selectInExecution: new fields.BooleanField(),
       target: new fields.StringField({
         blank: false,
         choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
@@ -64,155 +60,126 @@ export default class AddDocumentsAutomation
     });
   }
 
-  /**
-   * Determine the label for an activation from a construction.
-   * @param {DocumentConstruction} construction
-   */
-  #inferLabel(construction) {
-    let name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
-    const inferred = foundry.utils.getProperty(construction, "data.name");
-    if (inferred !== undefined && !/@\w/.test(inferred)) {
-      name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name: inferred });
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (!source.constructionNodes && (source.children || "attachDocuments" in source || "separate" in source)) {
+      const baseIdKey = `${source._id}-addDocuments`;
+      const rootId = toId(`${baseIdKey}-root`, { hash: true });
+      const nodes = {
+        [rootId]: {
+          _id: rootId,
+          all: source.all,
+          auto: source.auto,
+          competence: source.competence,
+          data: source.data,
+          globalIdentifiers: source.globalIdentifiers,
+          globalUuids: source.globalUuids,
+          localIdentifiers: source.localIdentifiers,
+          localQualifier: source.localQualifier,
+          localUuids: source.localUuids,
+          multi: source.multi,
+          overrideData: source.overrideData,
+          parentId: null,
+          setCompetence: source.setCompetence,
+          type: "base",
+        },
+      };
+      if (source.children?.enabled) {
+        const overrideData = Boolean(source.children.overrideData);
+        const uuids = Array.from(source.children.uuids ?? []);
+        const identifiers = Array.from(source.children.identifiers ?? []);
+        for (const uuid of uuids) {
+          const id = toId(`${baseIdKey}-child-uuid-${uuid}`, { hash: true });
+          nodes[id] = { _id: id, globalUuids: [uuid], overrideData, parentId: rootId, type: "base" };
+          if (overrideData) { nodes[id].data = source.children.data; }
+        }
+        for (const identifier of identifiers) {
+          const id = toId(`${baseIdKey}-child-identifier-${identifier}`, { hash: true });
+          nodes[id] = { _id: id, globalIdentifiers: [identifier], overrideData, parentId: rootId, type: "base" };
+          if (overrideData) { nodes[id].data = source.children.data; }
+        }
+      }
+      source.constructionNodes = nodes;
+      source.attachToEffect = !source.separate;
+      delete source.all;
+      delete source.attachDocuments;
+      delete source.auto;
+      delete source.children;
+      delete source.competence;
+      delete source.data;
+      delete source.globalIdentifiers;
+      delete source.globalUuids;
+      delete source.localIdentifiers;
+      delete source.localQualifier;
+      delete source.localUuids;
+      delete source.makeSeparateActivations;
+      delete source.multi;
+      delete source.overrideData;
+      delete source.separate;
+      delete source.setCompetence;
     }
-    return name;
-  }
-
-  /**
-   * Build the construction for a single document, which is only known ahead of time when the
-   * selection isn't left for the created activation to make.
-   * @param {TeriockDocument|null} document
-   * @param {object} [options]
-   * @returns {DocumentConstruction}
-   */
-  #makeConstruction(document, options = {}) {
-    const data = foundry.utils.expandObject({ "system.competence.raw": this.getCompetence(options) });
-    if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
-    const construction = { data, uuid: document?.uuid };
-    if (document) { this.#updateConstructionName(construction); }
-    return construction;
-  }
-
-  /**
-   * Update the name of the document construction.
-   * @param {DocumentConstruction} construction
-   */
-  #updateConstructionName(construction) {
-    let uuidName;
-    let name;
-    if (construction.uuid) {
-      const index = fromUuidSync(construction.uuid);
-      if (index) { uuidName = index.name; }
-      name = uuidName;
-    }
-    if (foundry.utils.hasProperty(construction, "data.name")) {
-      name = BaseRoll.replaceFormulaData(construction.data.name, { base: uuidName });
-    }
-    if (name) { foundry.utils.setProperty(construction, "data.name", name); }
-  }
-
-  /**
-   * Attachment paths.
-   * @returns {string[]}
-   */
-  get _attachmentPaths() {
-    if (this.document?.type !== "ability") { return this._triggerDisplayPaths; }
-    const paths = ["separate"];
-    if (this.separate) {
-      paths.push("target");
-      paths.push(...this._triggerDisplayPaths);
-    } else { paths.push("attachDocuments"); }
-    return paths;
-  }
-
-  /**
-   * Children paths.
-   * @returns {string[]}
-   */
-  get _childrenPaths() {
-    const paths = ["children.enabled"];
-    if (this.children.enabled) {
-      paths.push(...["children.identifiers", "children.uuids", "children.overrideData"]);
-      if (this.children.overrideData) { paths.push("children.data"); }
-    }
-    return paths;
+    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      ...this._selectionPaths,
-      "hr",
-      ...this._attachmentPaths,
-      ...this._competencePaths,
-      ...this._overrideDataPaths,
-      "hr",
-      ...this._childrenPaths,
-    ];
-  }
-
-  /** @inheritDoc */
-  get canCrit() {
-    return !this.separate && super.canCrit;
+    const paths = [];
+    if (this.canAttachToEffect) { paths.push("attachToEffect"); }
+    if (!this.attachToEffect) { paths.push(...[...this._triggerDisplayPaths], "target"); }
+    paths.push(...["hr", "selectInExecution", "all"]);
+    if (!this.all) { paths.push(...["auto", "multi"]); }
+    paths.push("hr");
+    return paths;
   }
 
   /**
-   * Whether this is separate from the ability's main effect.
+   * Whether this can attach to a generated effect.
    * @returns {boolean}
    */
-  get hasActivations() {
-    return this.document.type !== "ability" || this.separate;
+  get canAttachToEffect() {
+    // TODO: Consider changing this if effect generation is ever generalized to not just be abilities.
+    return this.document?.type === "ability" && this.document?.system?.maneuver !== "passive";
   }
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    if (!this.hasActivations) { return []; }
-    const selections = await this._getSelections({
-      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
-    });
-    return selections.map(({ config, document }) => {
-      const family = { root: this.#makeConstruction(document, options) };
-      if (this.children.enabled) {
-        const uuids = [
-          ...Array.from(this.children.uuids),
-          ...Array.from(this.children.identifiers).map(i => game.teriock.identifiers.get(i)).filter(Boolean),
-        ];
-        family.children = uuids.map(uuid => {
-          return { data: this.children.overrideData ? this.children.data : {}, uuid };
-        });
-      }
-      return new AddDocumentsActivation({
-        ...config,
-        display: { label: this.display.label || this.#inferLabel(family.root) },
-        primary: family,
-        secondary: family,
+    if (this.attachToEffect) { return []; }
+    const roots = this.selectInExecution ? await this.getNodes() : this.rootNodes;
+    let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
+    if (this.selectInExecution) {
+      nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(options)));
+    }
+    return [
+      new AddDocumentsActivation({
+        all: this.all,
+        auto: this.auto,
+        constructionNodes: ConstructionNode.toCollectionObject(nodes.map(n => n.toObject()), { keepId: true }),
+        display: this.display,
+        multi: this.multi,
         target: this.target,
-      });
-    });
+      }),
+    ];
   }
 
   /** @inheritDoc */
-  _isSelectable(document) {
-    return Boolean(document?.uuid);
+  async getEditor(config) {
+    const editor = await super.getEditor(config);
+    const childEditorElements = await Promise.all(this.rootNodes.map(n => n.getEditor(config)));
+    const html = await TeriockTextEditor.renderTemplate("teriock/ui/construction-node-content", {
+      childEditors: childEditorElements.map(() => ""),
+      formEditor: "",
+      parentUuid: this.uuid,
+    });
+    const container = foundry.utils.parseHTML(html);
+    container.querySelector(".construction-node-editor")?.replaceChildren(editor);
+    const listItemElements = container.querySelectorAll(".construction-node-list-item");
+    childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));
+    return container;
   }
 
   /** @inheritDoc */
-  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (path === "children.data") { groupConfig.stacked = true; }
-    return super._makeFormGroup(path, groupConfig, inputConfig, config);
-  }
-
-  /**
-   * Constructions for the documents this adds as part of the main effect, rather than as its own
-   * activation. The selection is always made during the execution here.
-   * @param {object} [options]
-   * @param {TeriockActor} [options.actor]
-   * @param {BaseExecution} [options.execution]
-   * @return {Promise<Teriock.System.Attachment<TeriockActiveEffect|TeriockItem>[]>}
-   */
-  async choose(options = {}) {
-    const documents = await this.selectDocuments({
-      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
-    });
-    return documents.map(d => this.#makeConstruction(d, options));
+  prepareData() {
+    super.prepareData();
+    if (!this.canAttachToEffect) { this.attachToEffect = false; }
   }
 }

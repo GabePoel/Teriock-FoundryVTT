@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
 import * as dataMixins from "../../data/mixins/_module.mjs";
-import { Panel } from "../../data/pseudo-documents/_module.mjs";
+import { ConstructionNode, Panel } from "../../data/pseudo-documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -68,12 +68,10 @@ export default class TeriockTableResult
       const label = name
         ? _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name })
         : _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
-      const activationFamily = { root: { uuid: this.documentUuid } };
       activations.push(
         new acts.AddDocumentsActivation({
+          constructionNodes: ConstructionNode.toCollectionObject([{ globalUuids: [this.documentUuid] }]),
           display: { label },
-          primary: activationFamily,
-          secondary: activationFamily,
           target: ["imbuement", "property"].includes(doc.type) ? "armament" : "actor",
         }),
       );

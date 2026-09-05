@@ -1,3 +1,4 @@
+import { ConstructionNode } from "../../_module.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
@@ -46,11 +47,14 @@ export default class AttunementAutomation
     };
     return [
       new AddDocumentsActivation({
+        constructionNodes: ConstructionNode.toCollectionObject([{
+          data: JSON.stringify(attunementData),
+          overrideData: true,
+        }]),
         display: {
           icon: icons.attunable.attune,
           label: _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: _loc("TYPES.ActiveEffect.attunement") }),
         },
-        primary: { root: { data: attunementData } },
       }),
     ];
   }

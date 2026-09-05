@@ -10,8 +10,8 @@ export default class ExecutionPseudoCollection extends PseudoCollection {
   /** @inheritDoc */
   _checkIfActive(pseudo) {
     if (
-      typeof this.model?.heightened === "boolean" && foundry.utils.getType(pseudo.heighten) === "Set"
-      && !pseudo?.heighten?.has(Number(this.model.heightened))
+      typeof this.model?.heightened === "number" && foundry.utils.getType(pseudo.heighten) === "Set"
+      && !pseudo?.heighten?.has(Number(Boolean(this.model.heightened)))
     ) {
       return false;
     }

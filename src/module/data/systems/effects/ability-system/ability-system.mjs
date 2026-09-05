@@ -93,7 +93,6 @@ export default class AbilitySystem
       automations.ChangesAutomation,
       automations.ChildChangeAutomation,
       automations.CommonOutcomesAutomation,
-      automations.ConstructDocumentsAutomation,
       automations.CoverAutomation,
       automations.DurationAutomation,
       automations.FeatAutomation,
@@ -321,12 +320,6 @@ export default class AbilitySystem
     }
     if (this.grantOnly) { tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted")); }
     return [...tags, ...super._nameTags];
-  }
-
-  /** @inheritDoc */
-  get activeAffinities() {
-    if (this.maneuver !== "passive") { return []; }
-    return super.activeAffinities;
   }
 
   /** @inheritDoc */

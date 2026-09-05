@@ -1,15 +1,17 @@
+import type effectConfig from "../../../../constants/config/effect-config.mjs";
+
+import { ConstructionNode } from "../../_module.mjs";
+import { PseudoCollection } from "../../collections/_module.mjs";
+
 declare module "./add-documents-automation.mjs" {
   export default interface AddDocumentsAutomation {
-    attachDocuments: boolean;
-    separate: boolean;
-    target: Teriock.Keys.ApplicationTarget;
-    children: {
-      data: object;
-      enabled: boolean;
-      overrideData: boolean;
-      uuids: Set<UUID<TeriockActiveEffect | TeriockItem>>[];
-    };
+    all: boolean;
+    attachToEffect: boolean;
+    auto: boolean;
+    constructionNodes: PseudoCollection<ConstructionNode>;
+    multi: boolean;
+    selectInExecution: boolean;
+    target: keyof typeof effectConfig.applicationTargets;
   }
 }
-
 export {};

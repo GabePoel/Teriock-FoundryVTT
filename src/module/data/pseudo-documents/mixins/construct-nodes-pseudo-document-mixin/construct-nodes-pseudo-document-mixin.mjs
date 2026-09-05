@@ -24,18 +24,14 @@ export default function ConstructNodesPseudoDocumentMixin(Base) {
 
     /**
      * Get the construction nodes to build with.
-     * @param {object} options
+     * @param {Teriock.Select.SelectDocumentsDialogOptions} options
      * @returns {Promise<ConstructionNode[]>}
      */
     async getNodes(options) {
-      let nodes = this.rootNodes;
-      if (this.selectInExecution) {
-        if (!this.all) {
-          nodes = await DocumentSelector.selectMulti(nodes, { auto: this.auto, multi: this.multi, silent: true });
-        }
-        nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(options)));
-      }
-      return nodes;
+      // TODO: This length/all handling can probably be moved into `DocumentSelector` directly.
+      const nodes = this.rootNodes;
+      if (nodes.length <= 1 || this.all) { return nodes; }
+      return DocumentSelector.selectMulti(nodes, { auto: this.auto, multi: this.multi, silent: true, ...options });
     }
   }
 

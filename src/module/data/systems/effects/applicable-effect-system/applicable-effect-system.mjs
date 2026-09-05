@@ -257,7 +257,7 @@ export default class ApplicableEffectSystem
       data,
       Object.assign(options, {
         actor: this.actor,
-        expiration: this.activeExpirations.find((e) => e.method === "roll"),
+        expiration: this.expirations.active.find((e) => e.method === "roll"),
         source: this.parent,
       }),
     );

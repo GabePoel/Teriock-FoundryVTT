@@ -240,11 +240,11 @@ export default function BaseApplicationMixin(Base) {
         const state = el.dataset.disable;
         if (state === "true") {
           el.disabled = true;
-          if (el.tagName === "IMG") { el.classList.remove("disabled"); }
+          if (el.tagName === "IMG") { el.classList.add("disabled"); }
         }
         if (state === "false") {
           el.disabled = false;
-          if (el.tagName === "IMG") { el.classList.add("disabled"); }
+          if (el.tagName === "IMG") { el.classList.remove("disabled"); }
         }
         el.disabled = el.dataset.disable === "true";
       });

@@ -1,4 +1,5 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
+import { ConstructionNode } from "../../../../data/pseudo-documents/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
@@ -34,6 +35,7 @@ export default function AbilityExecutionChatPart(Base) {
     /**
      * @param {Teriock.Changes.QualifiedChangeData[]} trackers
      * @param {string} key
+     * @todo This craves death.
      */
     #addTrackersToMap(trackers, key) {
       const existingValues = new Set(this.#trackerMap[key].map(e => e?.value));
@@ -43,6 +45,7 @@ export default function AbilityExecutionChatPart(Base) {
     /**
      * @param {StatusAutomation} automation
      * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
+     * @todo This will get got like `#generateConditionTracker`.
      */
     #attachTrackedStatusAutomationUuids(automation, uuids) {
       /** @type {Teriock.Panels.PanelAssociation} */
@@ -79,6 +82,7 @@ export default function AbilityExecutionChatPart(Base) {
      * @param {Teriock.Keys.Condition} status
      * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
      * @returns {Teriock.Changes.QualifiedChangeData}
+     * @todo Completely redo this as part of the new condition handling once the shared condition registry is made.
      */
     #generateConditionTracker(status, uuid) {
       return {
@@ -284,6 +288,8 @@ export default function AbilityExecutionChatPart(Base) {
         this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
       }
 
+      // Add custom effect activations
+      // TODO: All of this can be done better by delegating effect data manipulation to the automations... Someday...
       const makeEffect = overrideAutomation?.makeEffect ?? null;
       const makeCritEffect = overrideAutomation?.makeCritEffect ?? null;
       const targetsActor = overrideAutomation?.targetsActor ?? this.targetsActor;
@@ -297,18 +303,11 @@ export default function AbilityExecutionChatPart(Base) {
       ) {
         const variants = [];
         for (const crit of shouldMakeCrit ? [false, true] : [false]) {
-          variants.push({
-            con: {
-              children: this.source.subs.map(s => {
-                return { uuid: s.uuid };
-              }),
-              data: await this.#generateEffectConsequence(crit),
-            },
-            crit,
-            docs: [],
-            grandchildren: [],
-            imb: { children: [], data: await this.#generateEffectImbuement(crit) },
-          });
+          const conData = await this.#generateEffectConsequence(crit);
+          conData.children = this.source.subs.map(s => s.toObject());
+          const imbData = await this.#generateEffectImbuement(crit);
+          imbData.children = [];
+          variants.push({ con: { data: conData, nodes: [] }, crit, imb: { data: imbData, nodes: [] } });
         }
         await this.#generateConsequenceAssociations();
         for (const v of variants) {
@@ -316,29 +315,20 @@ export default function AbilityExecutionChatPart(Base) {
           v.con.data.system.associations = this.#associationMap[key];
           v.con.data.changes.push(...this.#trackerMap[key]);
         }
-        const addAutomations = this.automations.getTypeSync("addDocuments", { active: true }).filter(a => !a.separate);
+        const addAutomations = this.automations.getTypeSync("addDocuments", { active: true }).filter(a =>
+          a.attachToEffect
+        );
         for (const a of addAutomations) {
-          const toAdd = await a.choose({ actor: this.actor, execution: this });
-          const grandchildren = [];
-          if (a.children.enabled) {
-            const uuids = Array.from(a.children.uuids ?? []);
-            for (const uuid of uuids) {
-              const grandchild = { uuid };
-              if (a.children.overrideData && a.children.data) {
-                grandchild.data = foundry.utils.deepClone(a.children.data);
-              }
-              grandchildren.push(grandchild);
-            }
+          const roots = await a.getNodes({ actor: this.actor, execution: this });
+          const rootIds = new Set(roots.map(n => n._id));
+          let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
+          if (a.selectInExecution) {
+            nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy({ actor: this.actor, execution: this })));
           }
           for (const [i, v] of variants.entries()) {
             if (!a.crit.has(i)) { continue; }
-            if (a.attachDocuments) {
-              v.con.children.push(...toAdd);
-              v.imb.children.push(...toAdd);
-            } else {
-              v.docs.push(...toAdd);
-            }
-            v.grandchildren.push(...grandchildren);
+            v.con.nodes.push({ nodes, rootIds });
+            v.imb.nodes.push({ nodes, rootIds });
           }
         }
         const transformationAutomations = this.automations.getTypeSync("transformation", { active: true });
@@ -359,35 +349,45 @@ export default function AbilityExecutionChatPart(Base) {
             }
           });
         }
-        const group = (v, kind) => {
-          return {
-            children: v[kind].children,
-            grandchildren: v.grandchildren,
-            other: v.docs,
-            root: { data: v[kind].data },
-          };
+        const makeRootNode = (data, name) => ({
+          _id: foundry.utils.randomID(),
+          competence: { raw: foundry.utils.getProperty(data, "system.competence.raw") ?? 0 },
+          data: JSON.stringify(data),
+          name,
+          overrideData: true,
+          parentId: null,
+          setCompetence: "override",
+          type: "base",
+        });
+        const critName = crit => _loc(`TERIOCK.AUTOMATIONS.Crit.FIELDS.crit.choices.${crit ? 1 : 0}`);
+        const addActivation = (target, kind, labelKey) => {
+          const effectNodes = [];
+          for (const v of variants) {
+            // TODO: Improve names for these
+            const rootNode = makeRootNode(v[kind].data, critName(v.crit));
+            effectNodes.push(rootNode);
+            for (const { nodes, rootIds } of v[kind].nodes) {
+              for (const node of nodes) {
+                const obj = node.toObject();
+                if (rootIds.has(obj._id)) { obj.parentId = rootNode._id; }
+                effectNodes.push(obj);
+              }
+            }
+          }
+          // TODO: Improve labels for these
+          this.activations.push(
+            new acts.AddDocumentsActivation({
+              all: false,
+              auto: true,
+              constructionNodes: ConstructionNode.toCollectionObject(effectNodes, { keepId: true }),
+              display: { label: overrideAutomation?.display?.label || `TERIOCK.COMMANDS.ApplyEffect.${labelKey}` },
+              multi: false,
+              target,
+            }),
+          );
         };
-        const [norm, crit] = variants;
-        if (targetsActor) {
-          this.activations.push(
-            new acts.AddDocumentsActivation({
-              display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label" },
-              primary: group(norm, "con"),
-              secondary: shouldMakeCrit ? group(crit, "con") : {},
-              target: "actor",
-            }),
-          );
-        }
-        if (targetsArmament) {
-          this.activations.push(
-            new acts.AddDocumentsActivation({
-              display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament" },
-              primary: group(norm, "imb"),
-              secondary: shouldMakeCrit ? group(crit, "imb") : {},
-              target: "armament",
-            }),
-          );
-        }
+        if (targetsActor) { addActivation("actor", "con", "label"); }
+        if (targetsArmament) { addActivation("armament", "imb", "armament"); }
       }
 
       // Add all pre-defined activations

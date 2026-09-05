@@ -90,28 +90,6 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
     return Boolean(this.source.system.warded);
   }
 
-  /**
-   * Active affinities.
-   * @returns {Affinity[]}
-   */
-  get activeAffinities() {
-    return this.source.system.affinities.filter(a =>
-      a.competencies.has(this.competence.raw) && a.checkIfQualified(() => this.getRollData())
-      && ((a.heighten.has(0) && !this.heightened) || (a.heighten.has(1) && this.heightened))
-    );
-  }
-
-  /**
-   * Active expirations.
-   * @returns {Expiration[]}
-   */
-  get activeExpirations() {
-    return this.source.system.expirations.filter(e =>
-      e.competencies.has(this.competence.raw) && e.checkIfQualified(() => this.getRollData())
-      && ((e.heighten.has(0) && !this.heightened) || (e.heighten.has(1) && this.heightened))
-    );
-  }
-
   /** @returns {boolean} */
   get canHeighten() {
     return this.competence.proficient && Boolean(this.source.system.heightened) && !this.noHeighten
