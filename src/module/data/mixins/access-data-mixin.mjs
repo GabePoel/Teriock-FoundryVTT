@@ -45,7 +45,7 @@ export default function AccessDataMixin(Base) {
 
     /**
      * This data model's document.
-     * @returns {TeriockActiveEffect|TeriockActor|TeriockItem}
+     * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|TeriockJournalEntryPage}
      */
     get document() {
       return this.parent?.document;

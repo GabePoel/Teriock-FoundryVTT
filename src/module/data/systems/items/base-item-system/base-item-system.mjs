@@ -1,16 +1,17 @@
-import * as systemMixins from "../../mixins/_module.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
+import { nullIdField } from "../../../fields/tools/builders.mjs";
+import { ChildSystemMixin, InstructionsSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
 /**
- * Base item data model for all Teriock items.
- * Provides common functionality for disabled state and update tracking.
+ * Base item data model.
  * @mixes InstructionsSystem
  * @mixes ChildSystem
  */
 export default class BaseItemSystem
-  extends systemMixins.InstructionsSystemMixin(systemMixins.ChildSystemMixin(TypeDataModel))
+  extends mixClasses(TypeDataModel, ChildSystemMixin, InstructionsSystemMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
@@ -30,7 +31,7 @@ export default class BaseItemSystem
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      _dep: new fields.DocumentIdField({ blank: true, initial: null, nullable: true, required: true }),
+      _dep: nullIdField(),
       disabled: new fields.BooleanField(),
       flaws: new fields.HTMLField({ initial: "" }),
     });

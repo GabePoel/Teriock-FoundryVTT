@@ -1,4 +1,4 @@
-const { fields } = foundry.data;
+import { nullIdField } from "../../../fields/tools/builders.mjs";
 
 /**
  * Data mixin to support hierarchies of the same document type.
@@ -23,7 +23,7 @@ export default function HierarchySystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        _sup: new fields.DocumentIdField({ blank: true, nullable: true, required: false }),
+        _sup: nullIdField(),
       });
     }
   }

@@ -1,5 +1,5 @@
 import effectConfig from "../../../../constants/config/effect-config.mjs";
-import { nullString } from "../../../fields/tools/builders.mjs";
+import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
 /**
@@ -10,16 +10,16 @@ export default class MetaphysicsPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      effectType: nullString({
+      effectType: nullStringField({
         choices: TERIOCK.reference.effectTypes,
         label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
       }),
-      element: nullString({
+      element: nullStringField({
         choices: TERIOCK.reference.elements,
         label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
       }),
-      kind: nullString({ choices: effectConfig.kind, label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label" }),
-      powerSource: nullString({
+      kind: nullStringField({ choices: effectConfig.kind, label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label" }),
+      powerSource: nullStringField({
         choices: TERIOCK.reference.powerSources,
         label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
       }),

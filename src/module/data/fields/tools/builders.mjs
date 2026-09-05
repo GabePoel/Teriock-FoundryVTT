@@ -14,6 +14,7 @@ const {
   ArrayField,
   BooleanField,
   ColorField,
+  DocumentIdField,
   DocumentUUIDField,
   EmbeddedDataField,
   FilePathField,
@@ -157,8 +158,17 @@ export function blocksField(options) {
  * @param {StringFieldOptions} options
  * @returns {StringField}
  */
-export function nullString(options) {
+export function nullStringField(options) {
   return new StringField({ blank: true, initial: null, nullable: true, required: false, ...options });
+}
+
+/**
+ * An ID that is initially null.
+ * @param {StringFieldOptions} options
+ * @returns {DocumentIdField}
+ */
+export function nullIdField(options) {
+  return new DocumentIdField({ blank: true, initial: null, nullable: true, readonly: false, required: true, ...options });
 }
 
 /**

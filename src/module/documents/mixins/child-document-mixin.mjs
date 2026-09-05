@@ -1,4 +1,5 @@
-import * as documentMixins from "./_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
+import { HierarchyDocumentMixin, UsableDocumentMixin } from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -12,7 +13,7 @@ export default function ChildDocumentMixin(Base) {
    * @mixes UsableDocument
    * @mixin
    */
-  class ChildDocument extends documentMixins.HierarchyDocumentMixin(documentMixins.UsableDocumentMixin(Base)) {
+  class ChildDocument extends mixClasses(Base, UsableDocumentMixin, HierarchyDocumentMixin) {
     /** @inheritDoc */
     static get documentMetadata() {
       return Object.assign(super.documentMetadata, { child: true });

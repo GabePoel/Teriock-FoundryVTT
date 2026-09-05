@@ -1,6 +1,6 @@
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
-import { nullString } from "../../../fields/tools/builders.mjs";
+import { nullStringField } from "../../../fields/tools/builders.mjs";
 import MetaphysicsPreviewModel from "../metaphysics-preview-model/metaphysics-preview-model.mjs";
 
 const { fields } = foundry.data;
@@ -22,21 +22,21 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
         tweaks: new fields.SchemaField(objectMap(TERIOCK.config.cost.tweaks, (c) =>
           new TernaryField({ label: c.label }))),
       }),
-      delivery: nullString({
+      delivery: nullStringField({
         choices: objectMap(TERIOCK.config.ability.delivery, v => v.label),
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
       }),
-      expansion: nullString({
+      expansion: nullStringField({
         choices: objectMap(TERIOCK.config.ability.expansion, v => v.label),
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
       }),
       heightened: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label" }),
-      interaction: nullString({
+      interaction: nullStringField({
         choices: TERIOCK.config.ability.interaction,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
       }),
       invoked: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label" }),
-      maneuver: nullString({
+      maneuver: nullStringField({
         choices: TERIOCK.config.ability.maneuver,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
       }),
@@ -46,7 +46,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       spell: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label" }),
       standard: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.standard.label" }),
       sustained: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label" }),
-      target: nullString({
+      target: nullStringField({
         choices: objectMap(TERIOCK.config.ability.targets, v => v.label),
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
       }),

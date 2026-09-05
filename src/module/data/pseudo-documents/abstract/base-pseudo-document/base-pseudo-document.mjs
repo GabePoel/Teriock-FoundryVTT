@@ -94,8 +94,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument>}
    */
   static async create(data = {}, { parent, ...operation } = {}) {
-    const out = await this.createDocuments([data], { parent, ...operation });
-    return out.shift();
+    return (await this.createDocuments([data], { parent, ...operation }))?.shift();
   }
 
   /**
@@ -166,8 +165,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   static toCollectionObject(docs, options = {}) {
     return Object.fromEntries(docs.map(d => {
       const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
-      const data = foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true);
-      data._id = id;
+      const data = Object.assign(foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true), { _id: id });
       return [id, data];
     }));
   }
@@ -198,8 +196,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {TeriockDocument|BasePseudoDocument}
    */
   get controller() {
-    if (this.parent instanceof BasePseudoDocument) { return this.parent; }
-    return this.document;
+    return this.parent instanceof BasePseudoDocument ? this.parent : this.document;
   }
 
   /**
@@ -279,8 +276,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument|undefined>} The deleted Pseudo-Document instance, or undefined if not deleted
    */
   async delete(operation = {}) {
-    const out = await this.constructor.deleteDocuments([this.id], { ...operation, parent: this.controller });
-    return out.shift();
+    return (await this.constructor.deleteDocuments([this.id], { ...operation, parent: this.controller }))?.shift();
   }
 
   /**
@@ -324,8 +320,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {BasePseudoDocument}
    */
   getEmbeddedDocument(embeddedName, id) {
-    const collection = this.getEmbeddedCollection(embeddedName);
-    return collection.get(id);
+    return this.getEmbeddedCollection(embeddedName)?.get(id);
   }
 
   /**

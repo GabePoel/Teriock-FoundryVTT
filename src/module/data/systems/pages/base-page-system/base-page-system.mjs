@@ -1,19 +1,19 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { AccessDataMixin } from "../../../mixins/_module.mjs";
+import { RulesSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
 /**
- * @implements {Teriock.Models.BasePageSystemData}
+ * Base page data model.
  * @mixes RulesSystem
  * @mixes AccessData
  */
 export default class BasePageSystem
-  extends mixClasses(TypeDataModel, systemMixins.RulesSystemMixin, dataMixins.AccessDataMixin)
+  extends mixClasses(TypeDataModel, AccessDataMixin, RulesSystemMixin)
 {
   /** @inheritDoc */
   static get metadata() {
@@ -41,7 +41,7 @@ export default class BasePageSystem
     }];
   }
 
-  /** @inheritDoc */
+  /** @returns {TeriockJournalEntryPage} */
   get document() {
     return this.parent;
   }

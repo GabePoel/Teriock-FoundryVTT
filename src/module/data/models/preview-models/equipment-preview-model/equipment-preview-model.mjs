@@ -2,7 +2,7 @@ import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
-import { nullString } from "../../../fields/tools/builders.mjs";
+import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
 /**
@@ -40,18 +40,18 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
     return Object.assign(super.defineFilters(), {
       attuned: new TernaryField({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }),
       consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label" }),
-      equipmentClasses: nullString({
+      equipmentClasses: nullStringField({
         choices: TERIOCK.reference.equipmentClasses,
         label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
       }),
       equipped: new TernaryField({ label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label" }),
       identified: new TernaryField({ label: "TERIOCK.MODELS.Identification.FIELDS.identified.label" }),
-      kind: nullString({
+      kind: nullStringField({
         choices: objectMap(TERIOCK.config.equipment.kind, e => e.label),
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
-      properties: nullString({ choices: TERIOCK.reference.properties, label: "TERIOCK.PACKS.properties" }),
-      weaponFightingStyles: nullString({
+      properties: nullStringField({ choices: TERIOCK.reference.properties, label: "TERIOCK.PACKS.properties" }),
+      weaponFightingStyles: nullStringField({
         choices: TERIOCK.reference.weaponFightingStyles,
         label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
       }),

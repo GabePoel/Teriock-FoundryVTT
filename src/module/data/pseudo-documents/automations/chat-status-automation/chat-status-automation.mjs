@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import {
   ApplyStatusActivation,
@@ -6,7 +7,7 @@ import {
 } from "../../activations/command-activations.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,7 +16,7 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class ChatStatusAutomation
-  extends automationMixins.TriggerAutomationMixin(CritMechanicMixin(BaseAutomation))
+  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChatStatus"];

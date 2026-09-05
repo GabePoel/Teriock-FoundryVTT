@@ -5,14 +5,14 @@ import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 /**
  * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
 export default class ToggleChildrenAutomation
-  extends mixClasses(CritMechanicMixin(BaseAutomation), automationMixins.TriggerAutomationMixin)
+  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ToggleChildren"];

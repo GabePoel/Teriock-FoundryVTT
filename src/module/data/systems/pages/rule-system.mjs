@@ -1,13 +1,12 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import * as systemMixins from "../mixins/_module.mjs";
+import { WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
- * @implements {Teriock.Models.BasePageSystemData}
  * @mixes WikiSystem
  */
-export default class RuleSystem extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin) {
+export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
   get wikiPage() {
     const namespace = this.parent.parent?.name ?? "";

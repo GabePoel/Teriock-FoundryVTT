@@ -7,7 +7,7 @@ import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { ChangeQuantityActivation } from "../../activations/_module.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -16,7 +16,7 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class ChangeQuantityAutomation
-  extends mixClasses(CritMechanicMixin(BaseAutomation), automationMixins.TriggerAutomationMixin)
+  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];

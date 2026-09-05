@@ -8,7 +8,7 @@ import * as parts from "./parts/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * Base {@link TeriockActor} data model.
+ * Base actor data model.
  * @implements {Teriock.Models.BaseActorSystemData}
  * @mixes ActorAffinitiesPart
  * @mixes ActorAttributesPart

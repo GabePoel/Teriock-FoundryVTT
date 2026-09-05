@@ -2,7 +2,7 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { toId } from "../../../helpers/string.mjs";
-import { associationsField, blocksField, nullString } from "../../fields/tools/builders.mjs";
+import { associationsField, blocksField, nullStringField } from "../../fields/tools/builders.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -80,9 +80,9 @@ export default class Panel extends BasePseudoDocument {
       classes: new fields.SetField(new fields.StringField(), { initial: [] }),
       color: new fields.ColorField({ blank: true, initial: null, nullable: true, required: false }),
       documentUuid: new fields.DocumentUUIDField({ blank: true, initial: null, nullable: true, required: false }),
-      icon: nullString(),
+      icon: nullStringField(),
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
-      name: nullString(),
+      name: nullStringField(),
       tips: new fields.ArrayField(
         new fields.SchemaField({
           icon: new fields.StringField(),
