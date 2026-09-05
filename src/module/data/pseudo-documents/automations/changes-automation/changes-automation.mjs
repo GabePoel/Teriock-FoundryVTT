@@ -11,11 +11,6 @@ const { fields } = foundry.data;
  */
 export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Changes.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { changes: true, type: "changes" });
   }

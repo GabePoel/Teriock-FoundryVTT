@@ -6,11 +6,6 @@ export default class RollStyleAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.RollStyle"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.RollStyle.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "rollStyle" });
   }

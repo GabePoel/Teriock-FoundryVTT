@@ -15,11 +15,6 @@ export default class FeatAutomation
   extends mixClasses(ThresholdAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
 {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.TERMS.Interaction.feat";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "feat" });
   }

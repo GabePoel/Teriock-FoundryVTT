@@ -38,11 +38,6 @@ export default class AddDocumentsAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.AddDocuments"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.AddDocuments.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "addDocuments" });
   }

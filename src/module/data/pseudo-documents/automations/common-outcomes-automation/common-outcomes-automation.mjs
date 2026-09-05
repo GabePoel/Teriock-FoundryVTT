@@ -17,11 +17,6 @@ export default class CommonOutcomesAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.CommonOutcomes"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.CommonOutcomes.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "common" });
   }

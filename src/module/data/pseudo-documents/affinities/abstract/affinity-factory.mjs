@@ -32,11 +32,6 @@ export default function AffinityFactory(type) {
     }
 
     /** @inheritDoc */
-    static get LABEL() {
-      return `TERIOCK.TERMS.Affinities.${type}.single`;
-    }
-
-    /** @inheritDoc */
     static get metadata() {
       return Object.assign(super.metadata, { type });
     }

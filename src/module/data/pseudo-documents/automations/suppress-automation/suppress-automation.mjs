@@ -7,11 +7,6 @@ export default class SuppressAutomation extends CritMechanicMixin(BaseAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Suppress"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Suppress.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "suppress" });
   }

@@ -18,11 +18,6 @@ export default class ResistAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Resist"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.TERMS.EffectTypes.resistance";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "resist" });
   }

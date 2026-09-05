@@ -89,7 +89,7 @@ export default function MechanicsSheetMixin(Base) {
     static async _onCreateMechanic(_event, target) {
       const config = this._mechanicCollections[target.dataset.collection];
       if (!config) { return; }
-      const choices = localizeChoices(objectMap(config.types, p => p.LABEL), { sort: true });
+      const choices = localizeChoices(objectMap(config.types, p => p.typeLabel), { sort: true });
       if (Object.keys(choices).length === 0) { return; }
       let choice;
       if (Object.keys(choices).length === 1) { choice = Object.keys(choices)[0]; }

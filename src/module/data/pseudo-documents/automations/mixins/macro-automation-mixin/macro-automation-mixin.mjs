@@ -23,11 +23,6 @@ export default function MacroAutomationMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Macro"];
 
     /** @inheritDoc */
-    static get LABEL() {
-      return "TERIOCK.AUTOMATIONS.Macro.LABEL";
-    }
-
-    /** @inheritDoc */
     static get metadata() {
       return Object.assign(super.metadata, { macro: true });
     }

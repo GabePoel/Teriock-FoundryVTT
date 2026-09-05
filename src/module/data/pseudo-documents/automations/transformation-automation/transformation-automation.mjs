@@ -22,11 +22,6 @@ export default class TransformationAutomation
   )
 {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Transformation.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "transformation" });
   }

@@ -6,11 +6,6 @@ export default class RevitalizeAutomation extends StatAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Revitalize"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.EFFECTS.Common.revitalize";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "revitalize" });
   }

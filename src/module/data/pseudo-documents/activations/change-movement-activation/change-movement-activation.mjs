@@ -17,7 +17,9 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /** @inheritDoc */
   get label() {
-    return this.display.label || ChangeMovementActivation.getLabel(this.movementAction) || this.constructor.LABEL;
+    return this.display.label
+      || ChangeMovementActivation.getLabel(this.movementAction)
+      || _loc(this.constructor.typeLabel);
   }
 
   /** @inheritDoc */

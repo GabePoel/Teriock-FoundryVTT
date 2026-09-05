@@ -23,16 +23,6 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * Label for this pseudo-document class.
-   * @returns {string}
-   */
-  static get LABEL() {
-    return this.metadata.typed
-      ? _loc(`TYPES.${this.documentName}.${this.metadata.type}`)
-      : _loc(`DOCUMENT.${this.documentName}`);
-  }
-
-  /**
    * Metadata.
    * @returns {Teriock.Metadata.PseudoDocumentMetadata}
    */
@@ -47,6 +37,14 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
       type: "base",
       typed: false,
     };
+  }
+
+  /**
+   * Localization key for this pseudo-document class' type label.
+   * @returns {string}
+   */
+  static get typeLabel() {
+    return this.metadata.typed ? `TYPES.${this.documentName}.${this.metadata.type}` : `DOCUMENT.${this.documentName}`;
   }
 
   /**
@@ -241,7 +239,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {string}
    */
   get label() {
-    return _loc(this.constructor.LABEL);
+    return _loc(this.constructor.typeLabel);
   }
 
   /** @inheritDoc */

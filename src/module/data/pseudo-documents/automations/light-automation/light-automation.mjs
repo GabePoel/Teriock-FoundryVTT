@@ -44,11 +44,6 @@ class AutomationLightData extends LightData {
  */
 export default class LightAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Light.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { changes: true, type: "light" });
   }

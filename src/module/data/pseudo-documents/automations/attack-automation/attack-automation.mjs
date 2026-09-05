@@ -26,11 +26,6 @@ export default class AttackAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Attack"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.TERMS.Interaction.attack";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "attack" });
   }

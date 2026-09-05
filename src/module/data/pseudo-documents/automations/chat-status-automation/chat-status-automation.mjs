@@ -41,11 +41,6 @@ export default class ChatStatusAutomation
   }
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TYPES.ActiveEffect.condition";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "chatStatus" });
   }

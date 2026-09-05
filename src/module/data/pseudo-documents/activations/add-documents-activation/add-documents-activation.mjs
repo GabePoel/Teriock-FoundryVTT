@@ -53,11 +53,6 @@ export default class AddDocumentsActivation extends SelectionPseudoDocumentMixin
   }
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.COMMANDS.ApplyEffect.label";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { icon: icons.ui.apply, type: "addDocuments" });
   }

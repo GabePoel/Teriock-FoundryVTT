@@ -10,11 +10,6 @@ const { Ray } = foundry.canvas.geometry;
 
 export default class MoveActivation extends BaseActivation {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Move.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { icon: TERIOCK.display.icons.ui.move, type: "move" });
   }
@@ -77,7 +72,7 @@ export default class MoveActivation extends BaseActivation {
   get label() {
     return (this.display.label
       || _loc("TERIOCK.ACTIVATIONS.Move.BUTTON", { distance: this.distance })
-      || this.constructor.LABEL);
+      || _loc(this.constructor.typeLabel));
   }
 
   /**

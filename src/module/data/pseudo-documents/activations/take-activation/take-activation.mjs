@@ -58,7 +58,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   get label() {
-    return this.display.label || this.#entry?.take || this.constructor.LABEL;
+    return this.display.label || this.#entry?.take || _loc(this.constructor.typeLabel);
   }
 
   get tooltip() {

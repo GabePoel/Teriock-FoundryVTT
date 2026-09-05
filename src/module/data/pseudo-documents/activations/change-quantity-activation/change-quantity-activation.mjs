@@ -9,11 +9,6 @@ const { fields } = foundry.data;
 
 export default class ChangeQuantityActivation extends BaseActivation {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.ACTIVATIONS.ChangeQuantity.BUTTON";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { icon: icons.pseudoDocument.automation, type: "changeQuantity" });
   }
@@ -61,8 +56,8 @@ export default class ChangeQuantityActivation extends BaseActivation {
       }],
       icon: TERIOCK.display.icons.pseudoDocument.automation,
       img: consumable.img,
-      label: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
-      name: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
+      label: _loc("TYPES.Automation.changeQuantity"),
+      name: _loc("TYPES.Automation.changeQuantity"),
     };
     const messageData = {
       rolls: [roll],

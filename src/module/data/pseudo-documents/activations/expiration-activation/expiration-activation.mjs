@@ -8,11 +8,6 @@ const { fields } = foundry.data;
  */
 export default class ExpirationActivation extends BaseActivation {
   /** @inheritDoc */
-  static get LABEL() {
-    return "DOCUMENT.Expiration";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { icon: icons.pseudoDocument.expiration, type: "expiration" });
   }

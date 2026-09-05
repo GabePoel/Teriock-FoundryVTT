@@ -55,11 +55,6 @@ export default class RegionAutomation
   ];
 
   /** @inheritdoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Region.LABEL";
-  }
-
-  /** @inheritdoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "region" });
   }

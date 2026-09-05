@@ -12,11 +12,6 @@ const { fields } = foundry.data;
  */
 export default class AttackActivation extends AutomationActivationFactory(AttackAutomation) {
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.ROLLS.Attack.button";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { icon: icons.interaction.attack });
   }

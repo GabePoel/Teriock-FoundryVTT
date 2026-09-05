@@ -7,11 +7,6 @@ import BaseActivation from "./base-activation/base-activation.mjs";
 export default function AutomationActivationFactory(Automation) {
   class AutomationActivation extends BaseActivation {
     /** @inheritDoc */
-    static get LABEL() {
-      return Automation.LABEL;
-    }
-
-    /** @inheritDoc */
     static get metadata() {
       return foundry.utils.mergeObject(super.metadata, {
         pseudos: Automation.metadata.pseudos,

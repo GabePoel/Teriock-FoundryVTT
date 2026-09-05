@@ -25,11 +25,6 @@ export default class TradecraftAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.COMMON.Tradecraft";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "tradecraft" });
   }

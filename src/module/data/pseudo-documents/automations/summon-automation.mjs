@@ -24,11 +24,6 @@ export default class SummonAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
   /** @inheritdoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Summon.LABEL";
-  }
-
-  /** @inheritdoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "summon" });
   }

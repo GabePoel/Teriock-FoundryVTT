@@ -23,11 +23,6 @@ export default class ConstructDocumentsAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Selection"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ConstructDocuments.LABEL";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       pseudos: { ConstructionNode: "constructionNodes" },

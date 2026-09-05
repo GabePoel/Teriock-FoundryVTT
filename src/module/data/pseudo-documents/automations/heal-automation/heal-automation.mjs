@@ -11,11 +11,6 @@ export default class HealAutomation extends StatAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Heal"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.EFFECTS.Common.heal";
-  }
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "heal" });
   }
