@@ -1,14 +1,15 @@
 import ConstructDocumentsAutomation from "../../automations/construct-documents-automation/construct-documents-automation.mjs";
+import { ConstructNodesPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
-export default class ConstructDocumentsActivation extends AutomationActivationFactory(ConstructDocumentsAutomation) {
+export default class ConstructDocumentsActivation
+  extends ConstructNodesPseudoDocumentMixin(AutomationActivationFactory(ConstructDocumentsAutomation))
+{
   /** @inheritDoc */
   async primaryAction() {
     if (!this.checkActors()) { return; }
-    /** @type {ConstructionNode[]} */
-    const rootNodes = this.constructionNodes.filter(n => !n.parentNode);
     const operations = [];
-    for (const node of rootNodes) {
+    for (const node of this.rootNodes) {
       for (const actor of this.actors) {
         const ops = await node.getAddChildrenOperations([actor], {
           actor,

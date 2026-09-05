@@ -1,12 +1,11 @@
 import { ConstructionNode } from "../../_module.mjs";
-import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import effectConfig from "../../../../constants/config/effect-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { ConstructDocumentsActivation } from "../../activations/_module.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
+import { ConstructNodesPseudoDocumentMixin, CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -18,7 +17,13 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class ConstructDocumentsAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, DisplayAutomationMixin, TriggerAutomationMixin)
+  extends mixClasses(
+    BaseAutomation,
+    CritMechanicMixin,
+    DisplayAutomationMixin,
+    TriggerAutomationMixin,
+    ConstructNodesPseudoDocumentMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -64,14 +69,6 @@ export default class ConstructDocumentsAutomation
     return paths;
   }
 
-  /**
-   * The root nodes.
-   * @returns {ConstructionNode[]}
-   */
-  get rootNodes() {
-    return this.constructionNodes.filter(n => !n.parentNode);
-  }
-
   /** @inheritDoc */
   async _getActivations(options = {}) {
     const nodes = await this.getNodes(options);
@@ -98,21 +95,5 @@ export default class ConstructDocumentsAutomation
     const listItemElements = container.querySelectorAll(".construction-node-list-item");
     childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));
     return container;
-  }
-
-  /**
-   * Get the construction nodes to build with.
-   * @param {object} options
-   * @returns {Promise<ConstructionNode[]>}
-   */
-  async getNodes(options) {
-    let nodes = this.rootNodes;
-    if (this.selectInExecution) {
-      if (!this.all) {
-        nodes = await DocumentSelector.selectMulti(nodes, { auto: this.auto, multi: this.multi, silent: true });
-      }
-      nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(options)));
-    }
-    return nodes;
   }
 }

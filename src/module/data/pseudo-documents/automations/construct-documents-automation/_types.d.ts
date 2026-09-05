@@ -5,8 +5,11 @@ import { PseudoCollection } from "../../collections/_module.mjs";
 
 declare module "./construct-documents-automation.mjs" {
   export default interface ConstructDocumentsAutomation {
-    constructionNodes: PseudoCollection<ConstructionNode>;
+    all: boolean;
     attachToEffect: boolean;
+    auto: boolean;
+    constructionNodes: PseudoCollection<ConstructionNode>;
+    multi: boolean;
     selectInExecution: boolean;
     target: keyof typeof effectConfig.applicationTargets;
   }
