@@ -1,11 +1,15 @@
-import TypedPseudoDocument from "../../../abstract/typed-pseudo-document/typed-pseudo-document.mjs";
+import { BasePseudoDocument } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class BaseActivation extends TypedPseudoDocument {
+export default class BaseActivation extends BasePseudoDocument {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { documentName: "Activation", label: _loc("DOCUMENT.Activation") });
+    return Object.assign(super.metadata, {
+      documentName: "Activation",
+      label: _loc("DOCUMENT.Activation"),
+      typed: true,
+    });
   }
 
   /** @inheritDoc */

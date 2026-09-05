@@ -26,7 +26,11 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { documentName: "Expiration", label: _loc("DOCUMENT.Expiration") });
+    return Object.assign(super.metadata, {
+      documentName: "Expiration",
+      label: _loc("DOCUMENT.Expiration"),
+      typed: true,
+    });
   }
 
   /** @inheritDoc */

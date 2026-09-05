@@ -88,16 +88,13 @@ export default function AccessDataMixin(Base) {
      * @returns {HTMLDivElement}
      */
     _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-      return this.schema.getField(path).toFormGroup({
-        localize: true,
-        rootId: [config.rootId, this.localPath].filterJoin("-"),
-        ...groupConfig,
-      }, {
+      const gc = { localize: true, rootId: [config.rootId, this.localPath].filterJoin("-") };
+      const ic = {
         context: this._inputContextKey,
         name: `${this.localPath}.${path}`,
         value: foundry.utils.getProperty(this, `_source.${path}`),
-        ...inputConfig,
-      });
+      };
+      return this.getFieldForProperty(path).toFormGroup(Object.assign(gc, groupConfig), Object.assign(ic, inputConfig));
     }
 
     /**

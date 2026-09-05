@@ -1,0 +1,25 @@
+<div class="teriock-form-container teriock-full-width">
+  <div class="construction-node-editor teriock-full-width">{{{ formEditor }}}</div>
+  <div class="construction-node-children form-group stacked teriock-full-width">
+    <label>{{localize "EFFECT.TABS.children"}}</label>
+  </div>
+  <div class="construction-node-list teriock-full-width teriock-form-container">
+    {{#each childEditors as |childEditor|}}
+      <div class="construction-node-list-item teriock-full-width">
+        {{{ childEditor }}}
+      </div>
+    {{/each}}
+    {{!-- prettier-ignore --}}
+    <button
+      class="teriock-full-width"
+      type="button" data-action="createConstructionNode"
+      data-parent-uuid="{{ parentUuid }}"
+      {{#if node}}
+        data-node-id="{{ node.id }}"
+      {{/if}}
+    >
+      {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}
+      {{localize "TERIOCK.SHEETS.Common.PREVIEW.addType" type=(localize "EFFECT.TABS.children")}}
+    </button>
+  </div>
+</div>

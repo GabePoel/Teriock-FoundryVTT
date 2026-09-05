@@ -3,6 +3,7 @@ import { UseDocumentsActivation } from "../activations/_module.mjs";
 import {
   CritMechanicMixin,
   OverrideCompetencePseudoDocumentMixin,
+  OverrideDataPseudoDocumentMixin,
   SelectionPseudoDocumentMixin,
 } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -14,7 +15,7 @@ import * as automationMixins from "./mixins/_module.mjs";
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
- * @mixes OverrideDataAutomation
+ * @mixes OverrideDataPseudoDocument
  */
 export default class UseDocumentsAutomation
   extends mixClasses(
@@ -24,7 +25,7 @@ export default class UseDocumentsAutomation
     automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,
     OverrideCompetencePseudoDocumentMixin,
-    automationMixins.OverrideDataAutomationMixin,
+    OverrideDataPseudoDocumentMixin,
   )
 {
   /** @inheritDoc */

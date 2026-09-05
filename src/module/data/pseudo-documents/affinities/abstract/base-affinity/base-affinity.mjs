@@ -41,6 +41,7 @@ export default class BaseAffinity
       documentName: "Affinity",
       icon: TERIOCK.display.icons.pseudoDocument.affinity,
       label: _loc("DOCUMENT.Affinity"),
+      typed: true,
     });
   }
 

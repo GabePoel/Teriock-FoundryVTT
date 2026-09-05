@@ -68,14 +68,17 @@ export default class Panel extends BasePseudoDocument {
         new fields.SchemaField({
           icon: new fields.StringField({ initial: "", required: false }),
           label: new fields.StringField({ blank: true, nullable: true, required: false }),
-          wrappers: new fields.ArrayField(new fields.StringField(), { initial: [], required: false }),
+          wrappers: new fields.ArrayField(new fields.StringField({ blank: true, nullable: true }), {
+            initial: [],
+            required: false,
+          }),
         }),
         { initial: [], required: false },
       ),
       blocks: blocksField(),
       classes: new fields.SetField(new fields.StringField(), { initial: [] }),
       color: new fields.ColorField({ blank: true, initial: null, nullable: true, required: false }),
-      documentUuid: new fields.DocumentUUIDField({ blank: true, initial: null, nullable: true }),
+      documentUuid: new fields.DocumentUUIDField({ blank: true, initial: null, nullable: true, required: false }),
       icon: nullString(),
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
       name: nullString(),
@@ -85,7 +88,7 @@ export default class Panel extends BasePseudoDocument {
           level: new fields.StringField(),
           text: new fields.StringField(),
         }),
-        { initial: [] },
+        { initial: [], required: false },
       ),
     });
   }

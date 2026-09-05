@@ -1,0 +1,48 @@
+<div
+  class="teriock-mechanic-container collapsible teriock-full-width"
+  data-collapsible-id="construction-node-{{ collapsibleId }}"
+>
+  <header class="teriock-mechanic-header" data-action="toggleCollapse">
+    <div class="teriock-mechanic-header-name">
+      {{!-- {{localize "DOCUMENT.ConstructionNode"}} --}}
+      {{localize
+        "TERIOCK.AUTOMATIONS.ConstructDocuments.NAME"
+        header=node.header
+      }}
+    </div>
+    <div class="teriock-mechanic-header-buttons" data-collapsible-ignore>
+      <div class="teriock-mechanic-header-button-group">
+        {{!-- prettier-ignore --}}
+        <button
+          type="button"
+          data-tooltip='{{localize "APPLICATION.ACTIONS.CopyUuid"}}'
+          data-action="copyMechanicUuid"
+          data-id="{{ node.id }}"
+          data-uuid="{{ node.uuid }}"
+          data-disable="false"
+        >
+          {{makeIcon "fa-passport" "button"}}
+        </button>
+      </div>
+      <div class="teriock-mechanic-header-button-group">
+        {{!-- prettier-ignore --}}
+        <button
+          type="button"
+          data-tooltip='{{localize "COMMON.Delete"}}'
+          data-action="deleteMechanic"
+          data-id="{{ node.id }}"
+          data-uuid="{{ node.uuid }}"
+        >
+          {{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="teriock-mechanic-collapse-target">
+    <div class="teriock-mechanic-spacer">
+      <div class="teriock-mechanic-content teriock-full-width">
+        {{> "teriock/ui/construction-node-content"}}
+      </div>
+    </div>
+  </div>
+</div>

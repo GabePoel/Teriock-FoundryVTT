@@ -1,6 +1,10 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
-import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
+import {
+  CritMechanicMixin,
+  OverrideCompetencePseudoDocumentMixin,
+  OverrideDataPseudoDocumentMixin,
+} from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import * as automationMixins from "../mixins/_module.mjs";
 
@@ -9,14 +13,14 @@ const { fields } = foundry.data;
 /**
  * @mixes CritMechanic
  * @mixes DisplayAutomation
- * @mixes OverrideDataAutomation
+ * @mixes OverrideDataPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */
 export default class OverrideAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
     automationMixins.DisplayAutomationMixin,
-    automationMixins.OverrideDataAutomationMixin,
+    OverrideDataPseudoDocumentMixin,
     OverrideCompetencePseudoDocumentMixin,
   )
 {

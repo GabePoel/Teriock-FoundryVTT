@@ -168,6 +168,14 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * The document.
+     * @returns {BaseDocument}
+     */
+    get document() {
+      return this;
+    }
+
+    /**
      * Metadata that Teriock uses but Foundry doesn't.
      * @returns {Teriock.Documents.DocumentMetadata}
      */

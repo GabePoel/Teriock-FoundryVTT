@@ -3,21 +3,16 @@ import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import { competenceField, qualifierField } from "../../../fields/tools/builders.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
-import TypedPseudoDocument from "../typed-pseudo-document/typed-pseudo-document.mjs";
+import BasePseudoDocument from "../base-pseudo-document/base-pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @mixes PropagationData
  */
-export default class MechanicPseudoDocument extends dataMixins.PropagationDataMixin(TypedPseudoDocument) {
+export default class MechanicPseudoDocument extends dataMixins.PropagationDataMixin(BasePseudoDocument) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Base"];
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "base";
-  }
 
   /** @inheritDoc */
   static defineSchema() {

@@ -1,18 +1,18 @@
-import { defaultJSONField } from "../../../../fields/tools/builders.mjs";
+import { defaultJSONField } from "../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, OverrideDataAutomation & Teriock.Automations.OverrideDataAutomationData>}
+ * @returns {MixinResult<T, OverrideDataPseudoDocument & Teriock.PseudoDocuments.OverrideDataPseudoDocumentData>}
  */
-export default function OverrideDataAutomationMixin(Base) {
+export default function OverrideDataPseudoDocumentMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.Automations.OverrideDataAutomationData}
+   * @implements {Teriock.PseudoDocuments.OverrideDataPseudoDocumentData}
    */
-  class OverrideDataAutomation extends Base {
+  class OverrideDataPseudoDocument extends Base {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.OverrideData"];
 
@@ -39,7 +39,13 @@ export default function OverrideDataAutomationMixin(Base) {
       if (path === "data") { groupConfig.stacked = true; }
       return super._makeFormGroup(path, groupConfig, inputConfig, config);
     }
+
+    /** @inheritDoc */
+    prepareData() {
+      super.prepareData();
+      if (this.overrideData === false) { this.data = {}; }
+    }
   }
 
-  return OverrideDataAutomation;
+  return OverrideDataPseudoDocument;
 }

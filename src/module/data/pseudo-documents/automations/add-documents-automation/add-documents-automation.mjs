@@ -8,6 +8,7 @@ import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import {
   CritMechanicMixin,
   OverrideCompetencePseudoDocumentMixin,
+  OverrideDataPseudoDocumentMixin,
   SelectionPseudoDocumentMixin,
 } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -19,7 +20,7 @@ const { fields } = foundry.data;
  * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
- * @mixes OverrideDataAutomation
+ * @mixes OverrideDataPseudoDocument
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
@@ -28,7 +29,7 @@ export default class AddDocumentsAutomation
     CritMechanicMixin(BaseAutomation),
     SelectionPseudoDocumentMixin,
     OverrideCompetencePseudoDocumentMixin,
-    automationMixins.OverrideDataAutomationMixin,
+    OverrideDataPseudoDocumentMixin,
     automationMixins.DisplayAutomationMixin,
     automationMixins.TriggerAutomationMixin,
   )

@@ -6,7 +6,7 @@ import { PseudoCollectionsDataMixin } from "../../../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
+ * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
  * @import { PseudoCollection } from "../../collections/_module.mjs";
  */
 
@@ -43,7 +43,53 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
       pseudos: {},
       tags: {},
       type: "base",
+      typed: false,
     };
+  }
+
+  /**
+   * The key for this pseudo-document's type.
+   * @returns {string}
+   */
+  static get TYPE() {
+    return "base";
+  }
+
+  /**
+   * Subtypes of this pseudo-document.
+   * @returns {string[]}
+   */
+  static get TYPES() {
+    return [this.TYPE];
+  }
+
+  /**
+   * @param {object} data
+   * @param {DatabaseWriteOperation} operation
+   * @returns {Promise<{document: TeriockDocument, fieldPath: string, parent: TeriockDocument|BasePseudoDocument, updateData: object}>}
+   * @private
+   */
+  static async _parseParent(data, operation) {
+    const resolved = await this._resolveParent(operation);
+    const updateData = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [`${resolved.fieldPath}.${key}`, value]),
+    );
+    return { ...resolved, updateData };
+  }
+
+  /**
+   * @param {DatabaseWriteOperation} operation
+   * @returns {Promise<{collectionKey: string, document: TeriockDocument, fieldPath: string, parent: TeriockDocument|BasePseudoDocument}>}
+   * @private
+   */
+  static async _resolveParent(operation) {
+    let parent = operation.parent;
+    if (operation.parentUuid && !parent) { parent = await fromUuid(operation.parentUuid); }
+    if (!parent) { throw new Error("Pseudo-documents must have parents"); }
+    parent = parent instanceof foundry.abstract.TypeDataModel ? parent.parent : parent;
+    const collectionKey = parent.metadata?.pseudos?.[this.documentName];
+    const fieldPath = [parent.localPath, collectionKey].filter(Boolean).join(".");
+    return { collectionKey, document: parent.document, fieldPath, parent };
   }
 
   /**
@@ -54,31 +100,52 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument>}
    */
   static async create(data = {}, { parent, ...operation } = {}) {
-    return (await this.createDocuments([data], { parent, ...operation }))[0];
+    const out = await this.createDocuments([data], { parent, ...operation });
+    return out.shift();
   }
 
   /**
    * Create Pseudo-Documents within some parent Document or Pseudo-Document.
    * @param {object[]} data
-   * @param {TeriockDocument|BasePseudoDocument} parent
-   * @param {DatabaseCreateOperation} operation
+   * @param {Partial<DatabaseCreateOperation>} operation
    * @returns {Promise<BasePseudoDocument[]>}
    */
-  static async createDocuments(data = [], { parent, ...operation } = {}) {
-    if (operation.parentUuid && !parent) { parent = await fromUuid(operation.parentUuid); }
-    if (!parent) { throw new Error("Pseudo-documents must have parents"); }
-    parent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent.parent : parent;
-    const fieldPath = parent.metadata?.pseudos?.[this.documentName];
-    if (!fieldPath) { throw new Error("Invalid pseudo-document parent"); }
-    const newData = this.toCollectionObject(data);
-    await parent.update({ [fieldPath]: newData });
-    const collection = parent.getEmbeddedCollection(this.documentName);
-    return Object.keys(newData).map(id => collection?.get(id));
+  static async createDocuments(data = [], operation = {}) {
+    if (!this.metadata.typed) { data.forEach(d => d.type = this.TYPE); }
+    const parsed = await this._parseParent(this.toCollectionObject(data, operation), operation);
+    await parsed.document.update(parsed.updateData);
+    const parent = await fromUuid(parsed.parent.uuid);
+    return data.map(d => parent.getEmbeddedDocument(this.documentName, d?._id));
   }
 
   /** @inheritDoc */
   static defineSchema() {
-    return { _id: new fields.DocumentIdField({ initial: () => foundry.utils.randomID() }) };
+    return {
+      _id: new fields.DocumentIdField({ initial: () => foundry.utils.randomID() }),
+      type: new fields.StringField({ blank: false, initial: this.TYPE, nullable: false, required: true }),
+    };
+  }
+
+  /**
+   * Delete Pseudo-Documents from some parent Document or Pseudo-Document.
+   * @param {ID<BasePseudoDocument>[]} ids
+   * @param {Partial<DatabaseDeleteOperation>} operation
+   * @returns {Promise<BasePseudoDocument[]>}
+   */
+  static async deleteDocuments(ids = [], operation = {}) {
+    const resolved = await this._resolveParent(operation);
+    const out = ids.map(id => resolved.parent.getEmbeddedDocument(this.documentName, id));
+    // Workaround for issue where _del isn't deleting Pseudo-Documents embedded within Pseudo-Documents.
+    if (resolved.parent instanceof BasePseudoDocument) {
+      const parentData = resolved.parent.toObject();
+      const collection = foundry.utils.getProperty(parentData, resolved.collectionKey) ?? {};
+      for (const id of ids) { delete collection[id]; }
+      await resolved.document.update({ [resolved.parent.localPath]: _replace(parentData) });
+    } else {
+      const updateData = Object.fromEntries(ids.map(id => [`${resolved.fieldPath}.${id}`, _del]));
+      await resolved.document.update(updateData);
+    }
+    return out;
   }
 
   /**
@@ -112,11 +179,33 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
+   * Update Pseudo-Documents within some parent Document or Pseudo-Document.
+   * @param {object[]} updates
+   * @param {Partial<DatabaseCreateOperation>} operation
+   * @returns {Promise<BasePseudoDocument[]>}
+   */
+  static async updateDocuments(updates = [], operation = {}) {
+    const parsed = await this._parseParent(this.toCollectionObject(updates, { keepId: true }), operation);
+    await parsed.document.update(parsed.updateData);
+    const parent = await fromUuid(parsed.parent.uuid);
+    return updates.map(d => parent.getEmbeddedDocument(this.documentName, d?._id));
+  }
+
+  /**
    * The collection this belongs to.
    * @returns {PseudoCollection|null}
    */
   get collection() {
-    return this.document?.getEmbeddedCollection(this.documentName) ?? null;
+    return this.controller?.getEmbeddedCollection(this.documentName) ?? null;
+  }
+
+  /**
+   * The Document or Pseudo-Document that controls this.
+   * @returns {TeriockDocument|BasePseudoDocument}
+   */
+  get controller() {
+    if (this.parent instanceof BasePseudoDocument) { return this.parent; }
+    return this.document;
   }
 
   /**
@@ -132,7 +221,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {string}
    */
   get fieldPath() {
-    let path = this.parent.constructor.metadata.pseudos[this.documentName];
+    let path = this.controller.metadata.pseudos[this.documentName];
     if (this.parent instanceof BasePseudoDocument) { path = [this.parent.fieldPath, this.parent.id, path].join("."); }
     return path;
   }
@@ -187,7 +276,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {UUID<BasePseudoDocument> | null}
    */
   get uuid() {
-    return this.document?.uuid ? [this.document.uuid, this.documentName, this.id].join(".") : null;
+    return this.controller?.uuid ? [this.controller.uuid, this.documentName, this.id].join(".") : null;
   }
 
   /**
@@ -196,11 +285,8 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument|undefined>} The deleted Pseudo-Document instance, or undefined if not deleted
    */
   async delete(operation = {}) {
-    if (!this.document) { return undefined; }
-    const updateData = { [this.localPath]: _del };
-    const out = await this.document.update(updateData, operation);
-    if (!out) { return undefined; }
-    return this;
+    const out = await this.constructor.deleteDocuments([this.id], { ...operation, parent: this.controller });
+    return out.shift();
   }
 
   /**
@@ -231,10 +317,21 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
 
   /**
    * Duplicate this pseudo-document.
-   * @returns {Promise<void>}
+   * @returns {Promise<BasePseudoDocument>}
    */
   async duplicate() {
-    await this.constructor.create(this.toObject(), { parent: this.document });
+    return this.constructor.create(this.toObject(), { parent: this.controller });
+  }
+
+  /**
+   * Get an embedded Pseudo-Document by its id from a named collection in the parent Pseudo-Document.
+   * @param {string} embeddedName
+   * @param {ID<BasePseudoDocument>} id
+   * @returns {BasePseudoDocument}
+   */
+  getEmbeddedDocument(embeddedName, id) {
+    const collection = this.getEmbeddedCollection(embeddedName);
+    return collection.get(id);
   }
 
   /**
@@ -252,9 +349,10 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument|undefined>} The updated PseudoDocument instance, or undefined not updated
    */
   async update(data = {}, operation = {}) {
-    if (!this.document) { return undefined; }
-    const out = await this.document.update({ [this.localPath]: data }, operation);
-    if (!out) { return undefined; }
-    return this;
+    const out = await this.constructor.updateDocuments([{ ...data, _id: this.id }], {
+      ...operation,
+      parent: this.controller,
+    });
+    return out.shift();
   }
 }

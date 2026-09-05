@@ -42,10 +42,23 @@ export default function MechanicsSheetMixin(Base) {
       ui.notifications.info("DOCUMENT.IdCopiedClipboard", { format: { id, label, type } });
     }
 
+    /**
+     * Create a construction node that's a child of another one.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     */
+    static async #onCreateConstructionNode(_event, target) {
+      const parentMechanic = await fromUuid(target.dataset.parentUuid);
+      if (!parentMechanic) { return; }
+      await parentMechanic.createPseudoDocuments("ConstructionNode", [{ parentId: target.dataset.nodeId }]);
+    }
+
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         copyMechanicUuid: { buttons: [0, 2], handler: this.#onCopyMechanicUuid, suppressContextMenu: true },
+        createConstructionNode: this.#onCreateConstructionNode,
         createMechanic: this._onCreateMechanic,
         deleteMechanic: this._onDeleteMechanic,
         editActiveQualifier: this._onEditActiveQualifier,

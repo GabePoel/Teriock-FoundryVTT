@@ -4,10 +4,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
 
-  /**
-   * @inheritDoc
-   * @returns {{ documentName: "Automation", macro: boolean }}
-   */
+  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, {
       changes: false,
@@ -16,6 +13,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
       label: _loc("DOCUMENT.Automation"),
       macro: false,
       trigger: false,
+      typed: true,
     });
   }
 

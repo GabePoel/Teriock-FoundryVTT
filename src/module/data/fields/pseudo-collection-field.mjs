@@ -1,13 +1,19 @@
-import { BasePseudoDocument, TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
+import { BasePseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
 import { PseudoCollection } from "../pseudo-documents/collections/_module.mjs";
 
-const { EmbeddedDataField, TypedObjectField, TypedSchemaField } = foundry.data.fields;
+const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
 /**
  * @import { DataFieldContext, DataFieldOptions } from "@common/data/_types.mjs";
  */
 
 class PseudoTypedSchemaField extends TypedSchemaField {
+  /** @inheritDoc */
+  _migrate(value, options, state) {
+    if (!options.partial && foundry.utils.isPlainObject(value)) { value.type ??= "base"; }
+    return super._migrate(value, options, state);
+  }
+
   /** @inheritdoc */
   _validateSpecial(value) {
     if (!value || value.type in this.types) { return super._validateSpecial(value); }
@@ -22,34 +28,29 @@ export default class PseudoCollectionField extends TypedObjectField {
   }
 
   /**
-   * @param {typeof TypedPseudoDocument} model
+   * @param {typeof BasePseudoDocument} model
    * @param {DataFieldOptions} [options]
-   * @param {Record<string, typeof TypedPseudoDocument>} [options.types]
+   * @param {Record<string, typeof BasePseudoDocument>} [options.types]
    * @param {DataFieldContext} [context]
    */
   constructor(model, options = {}, context = {}) {
     if (!foundry.utils.isSubclass(model, BasePseudoDocument)) {
       throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"));
     }
-    if (foundry.utils.isSubclass(model, TypedPseudoDocument)) {
-      const types = options.types;
-      if (!types) { throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes")); }
-      super(new PseudoTypedSchemaField(types), options, context);
-    } else {
-      super(new EmbeddedDataField(model), options, context);
-    }
+    const types = options.types ?? { [model.TYPE]: model };
+    super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
   }
 
   /**
    * The pseudo-document class.
-   * @type {typeof TypedPseudoDocument}
+   * @type {typeof BasePseudoDocument}
    */
   #documentClass;
 
   /**
    * The pseudo-document class.
-   * @returns {typeof TypedPseudoDocument}
+   * @returns {typeof BasePseudoDocument}
    */
   get documentClass() {
     return this.#documentClass;
@@ -70,7 +71,7 @@ export default class PseudoCollectionField extends TypedObjectField {
       this.name,
       model,
       Object.values(obj).filter(inst => inst instanceof BasePseudoDocument),
-      { documentClass: this.documentClass, types: Object.keys(this.options?.types ?? {}) },
+      { documentClass: this.documentClass, types: this.options.types ? Object.keys(this.options?.types) : ["base"] },
     );
   }
 

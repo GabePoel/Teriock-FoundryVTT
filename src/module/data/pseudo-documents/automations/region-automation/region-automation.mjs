@@ -4,7 +4,11 @@ import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
-import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
+import {
+  CritMechanicMixin,
+  OverrideDataPseudoDocumentMixin,
+  SelectionPseudoDocumentMixin,
+} from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import * as automationMixins from "../mixins/_module.mjs";
 
@@ -14,7 +18,7 @@ const { fields } = foundry.data;
  * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes TriggerAutomation
- * @mixes OverrideDataAutomation
+ * @mixes OverrideDataPseudoDocument
  * @mixes DisplayAutomation
  */
 export default class RegionAutomation
@@ -22,7 +26,7 @@ export default class RegionAutomation
     CritMechanicMixin(BaseAutomation),
     SelectionPseudoDocumentMixin,
     automationMixins.TriggerAutomationMixin,
-    automationMixins.OverrideDataAutomationMixin,
+    OverrideDataPseudoDocumentMixin,
     automationMixins.DisplayAutomationMixin,
   )
 {

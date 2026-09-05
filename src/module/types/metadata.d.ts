@@ -9,7 +9,7 @@ declare global {
       type: string;
     };
 
-    export type PseudoDocumentMetadata = BaseMetadata & { documentName: string, icon: string };
+    export type PseudoDocumentMetadata = BaseMetadata & { documentName: string, icon: string, typed: boolean };
 
     export type SystemMetadata = BaseMetadata & {
       childTypes: Teriock.Documents.ChildType[];
