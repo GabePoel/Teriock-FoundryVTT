@@ -4,6 +4,7 @@ export { default as AttackActivation } from "./attack-activation/attack-activati
 export { default as ChangeMovementActivation } from "./change-movement-activation/change-movement-activation.mjs";
 export { default as ChangeQuantityActivation } from "./change-quantity-activation/change-quantity-activation.mjs";
 export * from "./command-activations.mjs";
+export { default as ConstructDocumentsActivation } from "./construct-documents-activation/construct-documents-activation.mjs";
 export { default as ExpirationActivation } from "./expiration-activation/expiration-activation.mjs";
 export { default as MacroActivation } from "./macro-activation/macro-activation.mjs";
 export { default as MoveActivation } from "./move-activation/move-activation.mjs";

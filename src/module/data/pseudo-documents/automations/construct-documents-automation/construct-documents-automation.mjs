@@ -1,14 +1,23 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
+import effectConfig from "../../../../constants/config/effect-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
-import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
+import { ConstructDocumentsActivation } from "../../activations/_module.mjs";
+import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
+import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @mixes CritMechanic
+ * @mixes DisplayAutomation
+ * @mixes TriggerAutomation
+ */
 export default class ConstructDocumentsAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, SelectionPseudoDocumentMixin)
+  extends mixClasses(BaseAutomation, CritMechanicMixin, DisplayAutomationMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Selection"];
@@ -32,14 +41,32 @@ export default class ConstructDocumentsAutomation
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       constructionNodes: new PseudoCollectionField(ConstructionNode),
-      makeSeparateActivations: new fields.BooleanField(),
       selectInExecution: new fields.BooleanField(),
+      target: new fields.StringField({
+        blank: false,
+        choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
+        initial: "actor",
+        nullable: false,
+        required: true,
+      }),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["selectInExecution", "makeSeparateActivations", "hr"];
+    return [...this._triggerDisplayPaths, "target", "selectInExecution", "hr"];
+  }
+
+  /** @inheritDoc */
+  async _getActivations(options = {}) {
+    let nodes = this.constructionNodes.contents;
+    if (this.selectInExecution) { nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(options))); }
+    return [
+      new ConstructDocumentsActivation({
+        constructionNodes: ConstructionNode.toCollectionObject(nodes.map(n => n.toObject())),
+        target: this.target,
+      }),
+    ];
   }
 
   /** @inheritDoc */

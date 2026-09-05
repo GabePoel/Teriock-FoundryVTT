@@ -10,6 +10,15 @@ import {
   SelectionPseudoDocumentMixin,
 } from "../mixins/_module.mjs";
 
+/**
+ * @import {  DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
+
+/**
+ * @typedef {Teriock.System.TriggerScope} ConstructionScope
+ * @property {object} data
+ */
+
 const { fields } = foundry.data;
 
 export default class ConstructionNode
@@ -109,29 +118,93 @@ export default class ConstructionNode
   }
 
   /**
+   * Add children to some target Document.
+   * @param {TeriockDocument[]} targets
+   * @param {Partial<ConstructionScope>} scope
+   * @returns {Promise<void>}
+   */
+  async addChildren(targets, scope = {}) {
+    const operations = await this.getAddChildrenOperations(targets, scope);
+    await foundry.documents.modifyBatch(operations);
+  }
+
+  /**
    * Construct documents for this node.
-   * @param {Partial<Teriock.System.TriggerScope>} [scope]
+   * @param {Partial<ConstructionScope>} [scope]
    * @returns {Promise<object>}
    */
   async constructDocuments(scope = {}) {
-    const data = (await this.selectDocuments()).map(d => d.toObject());
+    const overrides = { relativeTo: scope.execution?.actor ?? scope.actor ?? this._selectionRelativeTo };
+    const data = (await this.selectDocuments(overrides)).map(d => d.toObject());
     if (!data.length) { data.push({}); }
     for (const d of data) {
       foundry.utils.mergeObject(d, this.data, { inplace: true });
+      if (scope.data) { foundry.utils.mergeObject(d, scope.data, { inplace: true }); }
       d.children ??= [];
       foundry.utils.setProperty(d, "system.competence.raw", this.getCompetence(scope));
       for (const n of this.childNodes.contents) {
-        const children = await n.constructDocuments();
+        const children = await n.constructDocuments(overrides);
         d.children.push(...children);
       }
     }
     return data;
   }
 
+  /**
+   * Get operations for adding children to some target Document.
+   * @param {TeriockDocument[]} targets
+   * @param {Partial<ConstructionScope>} scope
+   * @returns {Promise<(Partial<DatabaseWriteOperation>)[]>}
+   */
+  async getAddChildrenOperations(targets, scope = {}) {
+    const record = await this.getDocumentRecord(scope);
+    const operations = [];
+    targets.forEach(t => {
+      Object.entries(record).forEach(([k, v]) => operations.push(t.getCreateChildDocumentsOperation(k, v)));
+    });
+    return operations;
+  }
+
   /** @inheritDoc */
   getCompetence(scope = {}) {
     if (this.setCompetence === "inherit" && this.parentNode) { return this.parentNode.getCompetence(scope); }
     return super.getCompetence(scope);
+  }
+
+  /**
+   * Get a deterministic copy of this by applying all selections.
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
+   * @returns {Promise<ConstructionNode>}
+   */
+  async getDeterministicCopy(scope = {}) {
+    const documents = await this.selectDocuments({
+      relativeTo: scope.execution?.actor ?? scope.actor ?? this._selectionRelativeTo,
+    });
+    return this.clone({
+      all: true,
+      auto: true,
+      globalIdentifiers: [],
+      globalUuids: documents.map(d => d.uuid),
+      localIdentifiers: [],
+      localQualifier: "",
+      localUuids: [],
+    });
+  }
+
+  /**
+   * Get a record of documents by their `documentName`.
+   * @param {Partial<ConstructionScope>} scope
+   * @returns {Promise<Record<Teriock.Documents.DocumentName, object[]>>}
+   */
+  async getDocumentRecord(scope = {}) {
+    const record = { ActiveEffect: [], Actor: [], Item: [] };
+    const constructed = await this.constructDocuments(scope);
+    for (const c of constructed) {
+      if (ActiveEffect.implementation.TYPES.includes(c?.type)) { record.ActiveEffect.push(c); }
+      else if (Actor.implementation.TYPES.includes(c?.type)) { record.Actor.push(c); }
+      else if (Item.implementation.TYPES.includes(c?.type)) { record.Item.push(c); }
+    }
+    return record;
   }
 
   /** @inheritDoc */
