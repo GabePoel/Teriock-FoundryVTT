@@ -31,7 +31,7 @@ export default function StatGiverSystemMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { stats: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { statGiver: true } });
     }
 
     /** @inheritDoc */

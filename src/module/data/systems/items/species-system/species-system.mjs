@@ -9,7 +9,6 @@ import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
-import { CompetenceModel } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -57,6 +56,7 @@ export default class SpeciesSystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
+      initialCompetence: 1,
       type: "species",
       visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
     });
@@ -69,7 +69,6 @@ export default class SpeciesSystem
       appearance: new fields.HTMLField(),
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
-      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       innateRanks: new fields.HTMLField(),
       lifespan: new InfiniteNumberField({ initial: 0 }),

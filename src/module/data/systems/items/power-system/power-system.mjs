@@ -3,11 +3,8 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
-import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Power-specific item data model.
@@ -35,20 +32,17 @@ export default class PowerSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "power" });
+    return foundry.utils.mergeObject(super.metadata, {
+      initialCompetence: 1,
+      initialKind: "other",
+      kinds: _replace(powerConfig.kind),
+      type: "power",
+    }, { applyOperators: true });
   }
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
-      maxAv: new InfiniteNumberField({ integer: true }),
-    });
-  }
-
-  /** @inheritDoc */
-  static kinds() {
-    return powerConfig.kind;
+    return Object.assign(super.defineSchema(), { maxAv: new InfiniteNumberField({ integer: true }) });
   }
 
   /** @inheritDoc */

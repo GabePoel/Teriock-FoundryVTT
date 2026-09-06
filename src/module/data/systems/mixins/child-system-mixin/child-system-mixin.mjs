@@ -47,9 +47,12 @@ export default function ChildSystemMixin(Base) {
       return teriock.executions.abstract.DocumentExecution;
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Teriock.Metadata.ChildSystemMetadata}
+     */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { initialKind: "normal" });
+      return foundry.utils.mergeObject(super.metadata, { initialKind: "normal", kinds: systemConfig.defaultKinds });
     }
 
     /** @inheritDoc */
@@ -61,24 +64,16 @@ export default function ChildSystemMixin(Base) {
           }),
           { persisted: false },
         ),
-        description: new fields.HTMLField({ initial: "" }),
+        description: new fields.HTMLField(),
         forceSuppressed: new initialBoolean(),
         kind: new fields.StringField({
           blank: false,
-          choices: localizeChoices(objectMap(this.kinds(), v => v.label)),
+          choices: localizeChoices(objectMap(this.metadata.kinds, v => v.label)),
           initial: this.metadata.initialKind,
           required: true,
         }),
         settings: new fields.EmbeddedDataField(CommonDocumentSettingsModel),
       });
-    }
-
-    /**
-     * Kind entries available for this system. Override on subclasses.
-     * @returns {Record<string, Teriock.Config.KindEntry>}
-     */
-    static kinds() {
-      return systemConfig.defaultKinds;
     }
 
     /**
@@ -165,7 +160,7 @@ export default function ChildSystemMixin(Base) {
      * @returns {Teriock.Config.KindEntry}
      */
     get _kindEntry() {
-      return this.constructor.kinds()[this.kind];
+      return this.constructor.metadata.kinds[this.kind];
     }
 
     /** @inheritDoc */
@@ -212,7 +207,7 @@ export default function ChildSystemMixin(Base) {
 
     /** @returns {boolean} */
     get isUsable() {
-      return this.constructor.metadata.usable;
+      return this.constructor.metadata.tags.usable;
     }
 
     /** @inheritDoc */

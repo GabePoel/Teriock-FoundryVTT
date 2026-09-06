@@ -27,17 +27,17 @@ export default function AdjustableSystemMixin(Base) {
     }
 
     /** @inheritDoc */
-    static defineSchema() {
-      return Object.assign(super.defineSchema(), {
-        badge: new fields.StringField({ initial: "" }),
-        improvement: new fields.HTMLField({ initial: "" }),
-        limitation: new fields.HTMLField({ initial: "" }),
-      });
+    static get metadata() {
+      return Object.assign(super.metadata, { kinds: effectConfig.kind });
     }
 
     /** @inheritDoc */
-    static kinds() {
-      return effectConfig.kind;
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        badge: new fields.StringField(),
+        improvement: new fields.HTMLField(),
+        limitation: new fields.HTMLField(),
+      });
     }
 
     /** @inheritDoc */

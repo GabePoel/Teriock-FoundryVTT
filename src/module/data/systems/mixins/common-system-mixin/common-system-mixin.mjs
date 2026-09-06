@@ -39,25 +39,12 @@ export default function CommonSystemMixin(Base) {
     /** @inheritDoc */
     static PRESERVED_PROPERTIES = ["system.identifier", ...super.PRESERVED_PROPERTIES];
 
-    /** @returns {Teriock.Documents.ModelMetadata} */
+    /**
+     * @inheritDoc
+     * @returns {Teriock.Metadata.CommonSystemMetadata}
+     */
     static get metadata() {
-      return {
-        armament: false,
-        childTypes: [],
-        consumable: false,
-        disabledPath: null,
-        hierarchy: false,
-        passive: false,
-        preservedProperties: this.PRESERVED_PROPERTIES,
-        pseudos: {},
-        revealable: false,
-        stats: false,
-        tooltip: true,
-        type: "base",
-        usable: false,
-        visibleTypes: [],
-        wiki: false,
-      };
+      return foundry.utils.mergeObject(super.metadata, { childTypes: [], visibleTypes: [] });
     }
 
     /**
@@ -209,7 +196,7 @@ export default function CommonSystemMixin(Base) {
     getSystemRollData() {
       const localData = this.getLocalRollData();
       const rollData = { ...prefixObject(localData, this.parent.type) };
-      if (this.metadata.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
+      if (this.metadata.tags.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
       return rollData;
     }
 

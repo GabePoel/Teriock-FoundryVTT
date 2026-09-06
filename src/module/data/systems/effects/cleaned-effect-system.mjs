@@ -10,7 +10,7 @@ import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 export default class CleanedEffectSystem extends mixClasses(BaseEffectSystem, InstructionsSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { untrackable: true });
+    return foundry.utils.mergeObject(super.metadata, { tags: { untrackable: true } });
   }
 
   /** @inheritDoc */

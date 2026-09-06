@@ -29,7 +29,7 @@ export default function AttunableSystemMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { attunable: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { attunable: true } });
     }
 
     /** @inheritDoc */

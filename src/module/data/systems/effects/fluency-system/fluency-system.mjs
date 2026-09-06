@@ -4,12 +4,9 @@ import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
-import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Fluency-specific effect data model.
@@ -46,13 +43,12 @@ export default class FluencySystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "fluency", usable: true });
+    return foundry.utils.mergeObject(super.metadata, { initialCompetence: 2, tags: { usable: true }, type: "fluency" });
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 2 } }),
       field: fieldField({ required: true }),
       tradecraft: tradecraftField({ required: true }),
       tradecraftDescription: initialText({ label: "TERIOCK.COMMON.Tradecraft" }),

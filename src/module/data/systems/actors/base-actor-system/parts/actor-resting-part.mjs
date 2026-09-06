@@ -33,7 +33,7 @@ export default function ActorRestingPart(Base) {
       if (options.hp) { actorUpdate["system.hp.value"] = this.hp.max; }
       if (options.mp) { actorUpdate["system.mp.value"] = this.mp.max; }
       if (options.hpDice || options.mpDice) {
-        for (const item of this.parent.items.filter(i => i.metadata.stats)) {
+        for (const item of this.parent.items.filter(i => i.metadata.tags.statGiver)) {
           const itemUpdate = { _id: item.id };
           if (options.hpDice) { itemUpdate["system.statDice.hp.spent"] = []; }
           if (options.mpDice) { itemUpdate["system.statDice.mp.spent"] = []; }

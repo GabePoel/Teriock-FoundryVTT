@@ -34,7 +34,7 @@ export default class TeriockActiveEffect
 
   /** @inheritDoc */
   get isExpiryTrackable() {
-    if (this.metadata.untrackable) { return false; }
+    if (this.metadata.tags.untrackable) { return false; }
     return super.isExpiryTrackable;
   }
 
@@ -60,7 +60,7 @@ export default class TeriockActiveEffect
 
   /** @inheritDoc */
   get isTemporary() {
-    if (this.metadata.untrackable) { return false; }
+    if (this.metadata.tags.untrackable) { return false; }
     return super.isTemporary;
   }
 

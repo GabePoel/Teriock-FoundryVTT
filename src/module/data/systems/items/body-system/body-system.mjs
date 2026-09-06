@@ -20,12 +20,12 @@ export default class BodySystem
 {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "intrinsic", type: "body", usable: true });
-  }
-
-  /** @inheritDoc */
-  static kinds() {
-    return { intrinsic: effectConfig.kind.intrinsic, ...systemConfig.defaultKinds };
+    return foundry.utils.mergeObject(super.metadata, {
+      initialKind: "intrinsic",
+      kinds: _replace({ intrinsic: effectConfig.kind.intrinsic, ...systemConfig.defaultKinds }),
+      tags: { usable: true },
+      type: "body",
+    }, { applyOperators: true });
   }
 
   /** @inheritDoc */

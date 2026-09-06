@@ -25,8 +25,8 @@ export default function InstructionsSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        gmNotes: new fields.HTMLField({ initial: "" }),
-        instructions: new fields.HTMLField({ initial: "" }),
+        gmNotes: new fields.HTMLField(),
+        instructions: new fields.HTMLField(),
       });
     }
 

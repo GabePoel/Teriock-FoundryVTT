@@ -153,9 +153,10 @@ export function expandDocumentDataArray(data = [], sup = null, operation = {}, o
     if (!sup && operation?.keepId !== false) { foundry.utils.setProperty(d, "_id", newId); }
     if (options.inplace) { foundry.utils.setProperty(d, "_id", newId); }
     if (sup) {
-      foundry.utils.setProperty(d, "flags._teriock.sup", sup);
-      foundry.utils.setProperty(d, "flags._teriock.keep", true);
-      foundry.utils.deleteProperty(d, "system._sup");
+      foundry.utils.mergeObject(d, { "flags._teriock.keep": true, "flags._teriock.sup": sup, "system._sup": _del }, {
+        applyOperators: true,
+        inplace: true,
+      });
       if (options.inplace) { foundry.utils.setProperty(d, "system._sup", sup); }
       if (!operation?.allowDuplicateSubs && foundry.utils.getProperty(d, "flags._teriock.ref")) {
         operation.knownSubs.add(foundry.utils.getProperty(d, "flags._teriock.ref"));

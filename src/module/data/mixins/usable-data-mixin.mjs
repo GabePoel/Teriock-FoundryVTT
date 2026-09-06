@@ -23,7 +23,9 @@ export default function UsableDataMixin(Base) {
     /** @inheritDoc */
     static defineSchema(...args) {
       return Object.assign(super.defineSchema(...args), {
-        competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 0 } }),
+        competence: new fields.EmbeddedDataField(CompetenceModel, {
+          initial: { raw: this.metadata.initialCompetence ?? 0 },
+        }),
       });
     }
 

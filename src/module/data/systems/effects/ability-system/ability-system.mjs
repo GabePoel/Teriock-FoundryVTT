@@ -108,9 +108,8 @@ export default class AbilitySystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childTypes: ["ability", "fluency", "resource"],
-      passive: true,
+      tags: { usable: true },
       type: "ability",
-      usable: true,
       visibleTypes: ["ability", "fluency", "resource"],
     });
   }
@@ -347,7 +346,7 @@ export default class AbilitySystem
    */
   async _use(data = {}, options = {}) {
     options.source = this.parent;
-    if (this.grantOnly && this.parent.parent?.metadata?.armament) { options.armament = this.parent.parent; }
+    if (this.grantOnly && this.parent.parent?.metadata?.tags?.armament) { options.armament = this.parent.parent; }
     await AbilityExecution.create(data, options);
   }
 

@@ -77,7 +77,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
    */
   get needsAttunement() {
     return (!this.applyIfDeattuned
-      && this.parent.parent?.metadata?.attunable
+      && this.parent.parent?.metadata?.tags?.attunable
       && Boolean(this.parent.parent?.system.needsAttunement));
   }
 

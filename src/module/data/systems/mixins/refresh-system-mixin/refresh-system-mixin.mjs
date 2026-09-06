@@ -1,4 +1,4 @@
-import { fromIdentifier } from "../../../../helpers/utils.mjs";
+import { deleteProperties, fromIdentifier } from "../../../../helpers/utils.mjs";
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
@@ -192,7 +192,7 @@ export default function RefreshSystemMixin(Base) {
       }
       if (recursive || updateChildren) {
         // Children queued for creation are skipped.
-        const children = await this.#refreshChildren(this.parent, fullOverride && this.metadata.hierarchy);
+        const children = await this.#refreshChildren(this.parent, fullOverride && this.metadata.tags.hierarchy);
         for (const child of children) {
           if (deletedIds.has(child.id)) { continue; }
           const childSource = await fromUuid(child._stats.compendiumSource);
@@ -242,7 +242,7 @@ export default function RefreshSystemMixin(Base) {
       const preservedProperties = options.fullOverride
         ? this.constructor.DEFAULT_PRESERVED_PROPERTIES
         : this.metadata.preservedProperties;
-      for (const p of preservedProperties || []) { foundry.utils.deleteProperty(obj, p); }
+      deleteProperties(obj, ...preservedProperties);
       return obj;
     }
   }

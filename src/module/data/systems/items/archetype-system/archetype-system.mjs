@@ -2,11 +2,8 @@ import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
-import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Archetype-specific item data model.
@@ -25,14 +22,7 @@ export default class ArchetypeSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "archetype" });
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
-    });
+    return foundry.utils.mergeObject(super.metadata, { initialCompetence: 1, type: "archetype" });
   }
 
   /** @inheritDoc */

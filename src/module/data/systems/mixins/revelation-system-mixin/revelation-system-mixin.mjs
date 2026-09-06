@@ -18,13 +18,13 @@ export default function RevelationSystemMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { revealable: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { revealable: true } });
     }
 
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        revealed: new fields.BooleanField({ initial: true, nullable: false, required: false }),
+        revealed: new fields.BooleanField({ initial: true, nullable: false, required: true }),
       });
     }
 
@@ -60,7 +60,7 @@ export default function RevelationSystemMixin(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      if (this.parent.elder && this.parent.elder?.metadata?.revealable) {
+      if (this.parent.elder && this.parent.elder?.metadata?.tags?.revealable) {
         this.revealed &&= this.parent.elder?.system.revealed;
       }
     }

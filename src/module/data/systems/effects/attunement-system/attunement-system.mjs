@@ -23,7 +23,12 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "attunement", usable: true });
+    return foundry.utils.mergeObject(super.metadata, {
+      initialKind: "other",
+      kinds: _replace(attunementConfig.kind),
+      tags: { usable: true },
+      type: "attunement",
+    }, { applyOperators: true });
   }
 
   /** @inheritDoc */
@@ -33,11 +38,6 @@ export default class AttunementSystem extends CleanedEffectSystem {
       target: new LocalDocumentField(foundry.documents.BaseItem),
       tier: new fields.NumberField({ initial: 0 }),
     });
-  }
-
-  /** @inheritDoc */
-  static kinds() {
-    return attunementConfig.kind;
   }
 
   /** @inheritDoc */

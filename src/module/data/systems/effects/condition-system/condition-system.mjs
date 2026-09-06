@@ -35,11 +35,7 @@ export default class ConditionSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      initialKind: "flaw",
-      namespace: "Condition",
-      type: "condition",
-    });
+    return foundry.utils.mergeObject(super.metadata, { initialKind: "flaw", type: "condition" });
   }
 
   /** @inheritDoc */

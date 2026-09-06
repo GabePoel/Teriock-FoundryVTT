@@ -6,7 +6,6 @@ import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
-import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -37,7 +36,12 @@ export default class RankSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "learned", type: "rank" });
+    return foundry.utils.mergeObject(super.metadata, {
+      initialCompetence: 1,
+      initialKind: "learned",
+      kinds: _replace(classConfig.kind),
+      type: "rank",
+    }, { applyOperators: true });
   }
 
   /** @inheritDoc */
@@ -45,16 +49,10 @@ export default class RankSystem
     return Object.assign(super.defineSchema(), {
       archetype: archetypeField({ blank: false, initial: "everyman", required: true }),
       class: classField({ blank: false, initial: "journeyman", required: true }),
-      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       maxAv: new InfiniteNumberField({ initial: classConfig.defaults.maxAv, integer: true }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });
-  }
-
-  /** @inheritDoc */
-  static kinds() {
-    return classConfig.kind;
   }
 
   /**

@@ -25,20 +25,17 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * Metadata.
+   * @inheritDoc.
    * @returns {Teriock.Metadata.PseudoDocumentMetadata}
    */
   static get metadata() {
-    return {
+    return foundry.utils.mergeObject(super.metadata, {
       documentName: "",
-      embed: false,
       icon: TERIOCK.display.icons.manifest.ui.document,
-      panel: false,
-      pseudos: {},
-      tags: {},
+      tags: { embed: false, panel: false },
       type: "base",
       typed: false,
-    };
+    });
   }
 
   /**

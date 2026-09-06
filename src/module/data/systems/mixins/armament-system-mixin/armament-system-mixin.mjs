@@ -33,8 +33,8 @@ export default function ArmamentSystemMixin(Base) {
     /** @inheritDoc */
     static get metadata() {
       return foundry.utils.mergeObject(super.metadata, {
-        armament: true,
         childTypes: ["ability", "fluency", "property", "resource", "imbuement"],
+        tags: { armament: true },
         visibleTypes: ["ability", "fluency", "property", "resource", "imbuement"],
       });
     }
@@ -62,7 +62,7 @@ export default function ArmamentSystemMixin(Base) {
           }),
           { initial: ["damage"] },
         ),
-        notes: new fields.HTMLField({ initial: "" }),
+        notes: new fields.HTMLField(),
         range: new MultiChangeField({
           long: new fields.EmbeddedDataField(RangeModel),
           melee: new fields.BooleanField({ initial: true }),

@@ -23,7 +23,7 @@ export default class BasePageSystem
 {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { text: true });
+    return foundry.utils.mergeObject(super.metadata, { tags: { text: true } });
   }
 
   /** @inheritDoc */

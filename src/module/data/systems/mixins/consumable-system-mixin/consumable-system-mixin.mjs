@@ -31,7 +31,7 @@ export default function ConsumableSystemMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { consumable: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { consumable: true } });
     }
 
     /** @inheritDoc */

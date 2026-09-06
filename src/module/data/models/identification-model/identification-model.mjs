@@ -15,7 +15,7 @@ export default class IdentificationModel extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      flaws: new fields.HTMLField({ initial: "", required: false }),
+      flaws: new fields.HTMLField(),
       identified: new fields.BooleanField({ initial: true }),
       kind: new fields.StringField({
         blank: false,
@@ -24,8 +24,8 @@ export default class IdentificationModel extends BaseDataModel {
         nullable: false,
         required: true,
       }),
-      name: new fields.StringField({ initial: "" }),
-      notes: new fields.HTMLField({ initial: "", required: false }),
+      name: new fields.StringField(),
+      notes: new fields.HTMLField(),
       read: new fields.BooleanField({ initial: true }),
     };
   }

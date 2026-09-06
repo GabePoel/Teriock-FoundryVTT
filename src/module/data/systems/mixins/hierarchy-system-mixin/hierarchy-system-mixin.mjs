@@ -17,7 +17,7 @@ export default function HierarchySystemMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return Object.assign(super.metadata, { hierarchy: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { hierarchy: true } });
     }
 
     /** @inheritDoc */

@@ -39,28 +39,6 @@ declare global {
       supId?: ID<TeriockActiveEffect | TeriockActor | TeriockItem> | null;
     };
 
-    export type ModelMetadata = {
-      armament: boolean;
-      attunable: boolean;
-      childTypes: Teriock.Documents.ChildType[];
-      consumable: boolean;
-      disabledPath: "disabled" | "system.disabled" | null;
-      hierarchy: boolean;
-      initialKind?: string;
-      passive: boolean;
-      preservedProperties: string[];
-      pseudos: Record<string, string>;
-      revealable: boolean;
-      stats: boolean;
-      text: boolean;
-      tooltip: boolean;
-      type: Teriock.Documents.CommonType;
-      untrackable?: boolean;
-      usable: boolean;
-      visibleTypes: Teriock.Documents.CommonType[];
-      wiki: boolean;
-    };
-
     export type DocumentMetadata = { child: boolean, hierarchy: boolean, tooltip: boolean };
   }
 }

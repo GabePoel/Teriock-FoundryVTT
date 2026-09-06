@@ -23,17 +23,17 @@ export default function AbilityOverviewPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        endCondition: new fields.HTMLField({ initial: "" }),
-        heightened: new fields.HTMLField({ initial: "" }),
-        improvement: new fields.HTMLField({ initial: "" }),
-        limitation: new fields.HTMLField({ initial: "" }),
+        endCondition: new fields.HTMLField(),
+        heightened: new fields.HTMLField(),
+        improvement: new fields.HTMLField(),
+        limitation: new fields.HTMLField(),
         overview: new fields.SchemaField({
-          base: new fields.HTMLField({ initial: "" }),
-          fluent: new fields.HTMLField({ initial: "" }),
-          proficient: new fields.HTMLField({ initial: "" }),
+          base: new fields.HTMLField(),
+          fluent: new fields.HTMLField(),
+          proficient: new fields.HTMLField(),
         }),
-        requirements: new fields.HTMLField({ initial: "" }),
-        trigger: new fields.HTMLField({ initial: "" }),
+        requirements: new fields.HTMLField(),
+        trigger: new fields.HTMLField(),
       });
     }
   }

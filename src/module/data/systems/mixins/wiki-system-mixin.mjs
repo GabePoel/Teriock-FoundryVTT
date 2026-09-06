@@ -9,7 +9,7 @@ export default function WikiSystemMixin(Base) {
   class WikiSystem extends Base {
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { wiki: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { wiki: true } });
     }
 
     /**

@@ -25,9 +25,31 @@ export default function BaseSystemMixin(Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [];
 
-    /** @returns {Partial<Teriock.Documents.ModelMetadata>} */
+    /**
+     * @inheritDoc
+     * @returns {Teriock.Metadata.SystemMetadata}
+     */
     static get metadata() {
-      return {};
+      return foundry.utils.mergeObject(super.metadata, {
+        disabledPath: null,
+        icon: TERIOCK.display.icons.manifest.ui.document,
+        preservedProperties: this.PRESERVED_PROPERTIES,
+        tags: {
+          armament: false,
+          attunable: false,
+          consumable: false,
+          embed: false,
+          hierarchy: false,
+          panel: false,
+          revealable: false,
+          statGiver: false,
+          text: false,
+          untrackable: false,
+          usable: false,
+          wiki: false,
+        },
+        type: "base",
+      });
     }
 
     /** @inheritDoc */
@@ -171,7 +193,7 @@ export default function BaseSystemMixin(Base) {
       return false;
     }
 
-    /** @returns {Partial<Teriock.Documents.ModelMetadata>} */
+    /** @returns {Teriock.Metadata.SystemMetadata} */
     get metadata() {
       return this.constructor.metadata;
     }

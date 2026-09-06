@@ -28,7 +28,7 @@ export default class ResourceSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "resource", usable: true });
+    return foundry.utils.mergeObject(super.metadata, { tags: { usable: true }, type: "resource" });
   }
 
   /** @inheritDoc */

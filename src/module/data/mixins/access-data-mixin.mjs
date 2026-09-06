@@ -15,6 +15,14 @@ export default function AccessDataMixin(Base) {
   /** @mixin */
   class AccessData extends Base {
     /**
+     * Data model metadata.
+     * @returns {Teriock.Metadata.BaseMetadata}
+     */
+    static get metadata() {
+      return { initialCompetence: 0, pseudos: {} };
+    }
+
+    /**
      * Paths to forms to display in the editor.
      * @returns {string[]}
      */
@@ -36,6 +44,14 @@ export default function AccessDataMixin(Base) {
      */
     get actor() {
       return this.parent?.actor;
+    }
+
+    /**
+     * Data model metadata.
+     * @returns {Teriock.Metadata.BaseMetadata}
+     */
+    get metadata() {
+      return this.constructor.metadata;
     }
 
     /**

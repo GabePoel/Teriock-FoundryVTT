@@ -120,7 +120,7 @@ export default class TeriockActor
   get _previewedSource() {
     if (!game.teriock.identifiers.initialized) { game.teriock.actorsNeedingBasicAbilities.add(this); }
     return [
-      ...this._modifiableSource.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM),
+      ...this._modifiableSource.filter(c => !c.metadata.tags.revealable || c.system.revealed || game.user.isGM),
       ...game.teriock.basicAbilities,
     ];
   }

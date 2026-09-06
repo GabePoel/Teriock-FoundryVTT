@@ -15,7 +15,7 @@ export default function ActorInformationPart(Base) {
   class ActorInformationPart extends Base {
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { notes: new fields.HTMLField({ initial: "" }) });
+      return Object.assign(super.defineSchema(), { notes: new fields.HTMLField() });
     }
   }
 

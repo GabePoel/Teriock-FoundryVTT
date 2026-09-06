@@ -56,9 +56,8 @@ export default class PropertySystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childTypes: ["property"],
-      passive: true,
+      tags: { usable: true },
       type: "property",
-      usable: true,
       visibleTypes: ["property"],
     });
   }

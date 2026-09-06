@@ -21,14 +21,14 @@ export default function AbilityResultsPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         results: new fields.SchemaField({
-          critFail: new fields.HTMLField({ initial: "" }),
-          critHit: new fields.HTMLField({ initial: "" }),
-          critMiss: new fields.HTMLField({ initial: "" }),
-          critSave: new fields.HTMLField({ initial: "" }),
-          fail: new fields.HTMLField({ initial: "" }),
-          hit: new fields.HTMLField({ initial: "" }),
-          miss: new fields.HTMLField({ initial: "" }),
-          save: new fields.HTMLField({ initial: "" }),
+          critFail: new fields.HTMLField(),
+          critHit: new fields.HTMLField(),
+          critMiss: new fields.HTMLField(),
+          critSave: new fields.HTMLField(),
+          fail: new fields.HTMLField(),
+          hit: new fields.HTMLField(),
+          miss: new fields.HTMLField(),
+          save: new fields.HTMLField(),
         }),
       });
     }

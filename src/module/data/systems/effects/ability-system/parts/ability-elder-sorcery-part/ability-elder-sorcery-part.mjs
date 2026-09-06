@@ -20,8 +20,8 @@ export default function AbilityElderSorceryPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        elderSorcery: new fields.BooleanField({ initial: false }),
-        elderSorceryIncant: new fields.HTMLField({ initial: "" }),
+        elderSorcery: new fields.BooleanField(),
+        elderSorceryIncant: new fields.HTMLField(),
       });
     }
 

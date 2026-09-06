@@ -80,10 +80,11 @@ export default class EquipmentSystem
     return foundry.utils.mergeObject(super.metadata, {
       childTypes: ["equipment", ...super.metadata.childTypes],
       initialKind: "mundane",
+      kinds: _replace(equipmentConfig.kind),
+      tags: { usable: true },
       type: "equipment",
-      usable: true,
       visibleTypes: ["equipment", ...super.metadata.visibleTypes],
-    });
+    }, { applyOperators: true });
   }
 
   /** @inheritDoc */
@@ -93,11 +94,6 @@ export default class EquipmentSystem
       equipmentType: new IdentifierField({ type: "equipment" }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
-  }
-
-  /** @inheritDoc */
-  static kinds() {
-    return equipmentConfig.kind;
   }
 
   /** @inheritDoc */

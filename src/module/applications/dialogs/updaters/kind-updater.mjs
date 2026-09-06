@@ -12,7 +12,7 @@ export default class KindUpdater extends BaseUpdater {
    */
   get #kindEntry() {
     const kind = foundry.utils.getProperty(this._currentData, "system.kind");
-    return this.document.system.constructor.kinds()?.[kind];
+    return this.document.metadata.kinds?.[kind];
   }
 
   /** @inheritDoc */
