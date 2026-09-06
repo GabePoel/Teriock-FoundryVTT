@@ -1,4 +1,5 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
+import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
 import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**
@@ -12,22 +13,6 @@ export default function AffinableSystemMixin(Base) {
    * @mixin
    */
   class AffinableSystem extends Base {
-    /**
-     * Array of the types of affinities that this system can have.
-     * @returns {(typeof Affinity)[]}
-     */
-    static get _affinityTypes() {
-      return [];
-    }
-
-    /**
-     * The types of affinities that this system can have.
-     * @returns {Record<string, (typeof Affinity)>}
-     */
-    static get affinityTypes() {
-      return Object.fromEntries(this._affinityTypes.map(a => [a.metadata.type, a]));
-    }
-
     /** @inheritDoc */
     static get metadata() {
       return foundry.utils.mergeObject(super.metadata, { pseudos: { Affinity: "system.affinities" } });
@@ -36,7 +21,13 @@ export default function AffinableSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        affinities: new PseudoCollectionField(BaseAffinity, { types: this.affinityTypes }),
+        affinities: new PseudoCollectionField(BaseAffinity, {
+          types: Object.fromEntries(
+            Object.values(affinities).filter(a => foundry.utils.isSubclass(a, BaseAffinity)).map(
+              a => [a.metadata.type, a]
+            ),
+          ),
+        }),
       });
     }
   }

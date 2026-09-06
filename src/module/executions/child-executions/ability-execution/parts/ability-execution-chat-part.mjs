@@ -1,5 +1,9 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import { ConstructionNode } from "../../../../data/pseudo-documents/_module.mjs";
+import * as affinityTypes from "../../../../data/pseudo-documents/affinities/_module.mjs";
+import { BaseAffinity } from "../../../../data/pseudo-documents/affinities/abstract/_module.mjs";
+import * as expirationTypes from "../../../../data/pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
@@ -150,7 +154,7 @@ export default function AbilityExecutionChatPart(Base) {
      * @returns {Record<string, object>}
      */
     #generateEffectAffinities(crit = false) {
-      const types = CONFIG.ActiveEffect.dataModels.consequence._affinityTypes;
+      const types = Object.values(affinityTypes).filter(a => foundry.utils.isSubclass(a, BaseAffinity));
       const out = {};
       for (const Cls of types) {
         const affinities = this.affinities.getTypeSync(Cls.metadata.type, { active: true, crit });
@@ -224,7 +228,7 @@ export default function AbilityExecutionChatPart(Base) {
      * @returns {Record<string, object>}
      */
     #generateEffectExpirations(crit = false) {
-      const types = CONFIG.ActiveEffect.dataModels.consequence._expirationTypes;
+      const types = Object.values(expirationTypes).filter(e => foundry.utils.isSubclass(e, BaseExpiration));
       const out = {};
       for (const Cls of types) {
         const expirations = this.expirations.getTypeSync(Cls.metadata.type, { active: true, crit });

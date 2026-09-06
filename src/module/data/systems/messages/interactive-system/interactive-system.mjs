@@ -1,9 +1,7 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import { ActivatableSystemMixin } from "../../mixins/_module.mjs";
 import BaseMessageSystem from "../base-message-system.mjs";
 
 const { fields } = foundry.data;
@@ -14,17 +12,14 @@ const { fields } = foundry.data;
 
 /**
  * Interactive chat message data model.
- * @mixes ActivatableSystem
  */
-export default class InteractiveSystem extends mixClasses(BaseMessageSystem, ActivatableSystemMixin) {
-  /** @inheritDoc */
-  static get _activationTypes() {
-    return Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation));
-  }
-
+export default class InteractiveSystem extends BaseMessageSystem {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { pseudos: { Panel: "system.panels" }, type: "interactive" });
+    return foundry.utils.mergeObject(super.metadata, {
+      pseudos: { Activation: "system.activations", Panel: "system.panels" },
+      type: "interactive",
+    });
   }
 
   /**
@@ -33,6 +28,13 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, Act
    */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      activations: new PseudoCollectionField(BaseActivation, {
+        types: Object.fromEntries(
+          Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation)).map(
+            a => [a.metadata.type, a]
+          ),
+        ),
+      }),
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
       panels: new PseudoCollectionField(Panel),
       restrictVisibility: new fields.BooleanField({ initial: true }),

@@ -38,11 +38,7 @@ export default function MechanicsTabsSheetMixin(Base) {
     constructor(...args) {
       super(...args);
       this._tab = "overview";
-      this.#canHaveMechanics = Boolean(
-        this.document.system.constructor._automationTypes?.length
-          || this.document.system.constructor._affinityTypes?.length
-          || this.document.system.constructor._expirationTypes?.length,
-      );
+      this.#canHaveMechanics = Boolean(Object.keys(this.document.pseudoCollections).length);
     }
 
     /** @type {boolean} */

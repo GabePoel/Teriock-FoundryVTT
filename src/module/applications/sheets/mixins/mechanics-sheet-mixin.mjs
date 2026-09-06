@@ -1,7 +1,4 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
-import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstract/_module.mjs";
-import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -159,45 +156,22 @@ export default function MechanicsSheetMixin(Base) {
      * @returns {Record<string, Teriock.Sheet.MechanicCollectionConfig>}
      */
     get _mechanicCollections() {
-      const pseudos = this.document.pseudoCollections;
-      const collections = {};
-      if (pseudos.Automation) {
-        collections.automations = {
-          addLabel: "TERIOCK.SHEETS.Common.NAVIGATION.addAutomation",
-          baseClass: BaseAutomation,
-          collection: pseudos.Automation,
-          hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
-          icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
-          id: "automations",
-          title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
-          types: this.document.system.constructor.automationTypes,
-        };
-      }
-      if (pseudos.Affinity) {
-        collections.affinities = {
-          addLabel: "TERIOCK.SHEETS.Common.NAVIGATION.addAffinity",
-          baseClass: BaseAffinity,
-          collection: pseudos.Affinity,
-          hint: _loc("TERIOCK.DIALOGS.Select.AddAffinity.hint"),
-          icon: TERIOCK.display.icons.manifest.pseudoDocument.affinity,
-          id: "affinities",
-          title: _loc("TERIOCK.DIALOGS.Select.AddAffinity.title"),
-          types: this.document.system.constructor.affinityTypes,
-        };
-      }
-      if (pseudos.Expiration) {
-        collections.expirations = {
-          addLabel: "TERIOCK.SHEETS.Common.NAVIGATION.addExpiration",
-          baseClass: BaseExpiration,
-          collection: pseudos.Expiration,
-          hint: _loc("TERIOCK.DIALOGS.Select.AddExpiration.hint"),
-          icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
-          id: "expirations",
-          title: _loc("TERIOCK.DIALOGS.Select.AddExpiration.title"),
-          types: this.document.system.constructor.expirationTypes,
-        };
-      }
-      return collections;
+      return Object.fromEntries(
+        Object.entries(this.document.pseudoCollections).map(([documentName, collection]) => {
+          const name = _loc(`DOCUMENT.${documentName}`);
+          return [collection.name, {
+            addLabel: _loc("TERIOCK.SHEETS.Common.ACTIONS.addChild", { name }),
+            baseClass: collection.documentClass,
+            collection,
+            hint: _loc("TERIOCK.DIALOGS.Select.AddType.hint", { name }),
+            icon: icons.manifest.pseudoDocument[documentName.toLowerCase()] ?? icons.manifest.pseudoDocument.mechanic,
+            id: collection.name,
+            title: _loc("TERIOCK.DIALOGS.Select.AddType.title", { name }),
+            types: this.document.getFieldForProperty(this.document.metadata.pseudos[documentName])?.options?.types
+              ?? {},
+          }];
+        }),
+      );
     }
 
     /** @inheritDoc */

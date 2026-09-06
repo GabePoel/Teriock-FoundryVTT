@@ -5,10 +5,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
-import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
-import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -73,14 +70,6 @@ export default class AbilitySystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Ability"];
 
   /** @inheritDoc */
-  static get _affinityTypes() {
-    return [
-      ...super._affinityTypes,
-      ...Object.values(affinities).filter(a => foundry.utils.isSubclass(a, BaseAffinity)),
-    ];
-  }
-
-  /** @inheritDoc */
   static get _automationTypes() {
     return [
       ...super._automationTypes,
@@ -112,16 +101,6 @@ export default class AbilitySystem
       automations.TradecraftAutomation,
       automations.TransformationAutomation,
       automations.UseDocumentsAutomation,
-    ];
-  }
-
-  /** @inheritDoc */
-  static get _expirationTypes() {
-    return [
-      ...super._expirationTypes,
-      expirations.CombatExpiration,
-      expirations.StatusExpiration,
-      expirations.TriggerExpiration,
     ];
   }
 

@@ -3,6 +3,7 @@ import { PseudoCollection } from "../../../pseudo-documents/collections/_module.
 
 declare module "./interactive-system.mjs" {
   export default interface InteractiveSystem {
+    activations: PseudoCollection<Activation>;
     img: string;
     panels: PseudoCollection<Panel>;
     restrictVisibility: boolean;

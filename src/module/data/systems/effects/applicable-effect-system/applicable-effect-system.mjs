@@ -3,10 +3,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent, toClass } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
-import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
-import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -31,14 +28,6 @@ export default class ApplicableEffectSystem
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
-
-  /** @inheritDoc */
-  static get _affinityTypes() {
-    return [
-      ...super._affinityTypes,
-      ...Object.values(affinities).filter(a => foundry.utils.isSubclass(a, BaseAffinity)),
-    ];
-  }
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -69,16 +58,6 @@ export default class ApplicableEffectSystem
       automations.TakeAutomation,
       automations.TradecraftAutomation,
       automations.UseDocumentsAutomation,
-    ];
-  }
-
-  /** @inheritDoc */
-  static get _expirationTypes() {
-    return [
-      ...super._expirationTypes,
-      expirations.TriggerExpiration,
-      expirations.CombatExpiration,
-      expirations.StatusExpiration,
     ];
   }
 
