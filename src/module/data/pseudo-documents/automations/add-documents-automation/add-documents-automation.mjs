@@ -3,7 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import effectConfig from "../../../../constants/config/effect-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toId } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { deleteProperties, objectMap } from "../../../../helpers/utils.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import { ConstructNodesPseudoDocumentMixin, CritMechanicMixin } from "../../mixins/_module.mjs";
@@ -62,7 +62,22 @@ export default class AddDocumentsAutomation
 
   /** @inheritDoc */
   static migrateData(source, options) {
-    if (!source.constructionNodes && (source.children || "attachDocuments" in source || "separate" in source)) {
+    const oldProperties = [
+      "attachDocuments",
+      "children",
+      "competence",
+      "data",
+      "globalIdentifiers",
+      "globalUuids",
+      "localIdentifiers",
+      "localQualifier",
+      "localUuids",
+      "makeSeparateActivations",
+      "overrideData",
+      "separate",
+      "setCompetence",
+    ];
+    if (!source.constructionNodes || oldProperties.some(p => p in source)) {
       const baseIdKey = `${source._id}-addDocuments`;
       const rootId = toId(`${baseIdKey}-root`, { hash: true });
       const nodes = {
@@ -85,39 +100,25 @@ export default class AddDocumentsAutomation
         },
       };
       if (source.children?.enabled) {
-        const overrideData = Boolean(source.children.overrideData);
-        const uuids = Array.from(source.children.uuids ?? []);
-        const identifiers = Array.from(source.children.identifiers ?? []);
-        for (const uuid of uuids) {
-          const id = toId(`${baseIdKey}-child-uuid-${uuid}`, { hash: true });
-          nodes[id] = { _id: id, globalUuids: [uuid], overrideData, parentId: rootId, type: "base" };
-          if (overrideData) { nodes[id].data = source.children.data; }
-        }
-        for (const identifier of identifiers) {
-          const id = toId(`${baseIdKey}-child-identifier-${identifier}`, { hash: true });
-          nodes[id] = { _id: id, globalIdentifiers: [identifier], overrideData, parentId: rootId, type: "base" };
-          if (overrideData) { nodes[id].data = source.children.data; }
-        }
+        const childId = toId(`${baseIdKey}-children`, { hash: true });
+        nodes[childId] = {
+          _id: childId,
+          all: true,
+          auto: true,
+          data: source.children.data,
+          globalIdentifiers: source.children.identifiers,
+          globalUuids: source.children.uuids,
+          multi: true,
+          overrideData: source.children.overrideData,
+          parentId: rootId,
+          type: "base",
+        };
       }
       source.constructionNodes = nodes;
       source.attachToEffect = !source.separate;
-      delete source.all;
-      delete source.attachDocuments;
-      delete source.auto;
-      delete source.children;
-      delete source.competence;
-      delete source.data;
-      delete source.globalIdentifiers;
-      delete source.globalUuids;
-      delete source.localIdentifiers;
-      delete source.localQualifier;
-      delete source.localUuids;
-      delete source.makeSeparateActivations;
-      delete source.multi;
-      delete source.overrideData;
-      delete source.separate;
-      delete source.setCompetence;
+      deleteProperties(source, "all", "auto", "multi");
     }
+    deleteProperties(source, ...oldProperties);
     return super.migrateData(source, options);
   }
 
@@ -125,7 +126,7 @@ export default class AddDocumentsAutomation
   get _formPaths() {
     const paths = [];
     if (this.canAttachToEffect) { paths.push("attachToEffect"); }
-    if (!this.attachToEffect) { paths.push(...[...this._triggerDisplayPaths], "target"); }
+    if (!this.attachToEffect) { paths.push(...this._triggerDisplayPaths, "target"); }
     paths.push(...["hr", "selectInExecution", "all"]);
     if (!this.all) { paths.push(...["auto", "multi"]); }
     paths.push("hr");

@@ -1,4 +1,3 @@
-import * as systemMixins from "../_module.mjs";
 import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";

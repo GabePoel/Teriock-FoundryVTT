@@ -244,8 +244,8 @@ export default class ConstructionNode
     if (!this.name) {
       let name = _loc(this.constructor.typeLabel);
       if (
-        this.globalIdentifiers.size + this.globalUuids.size + this.localIdentifiers.size + this.localUuids.size
-          === 1 && !formulaExists(this.localQualifier)
+        this.globalIdentifiers.size + this.globalUuids.size + this.localIdentifiers.size + this.localUuids.size === 1
+        && !formulaExists(this.localQualifier)
       ) {
         if (this.globalIdentifiers.size) {
           name = teriock.fromIdentifierSync(this.globalIdentifiers.first())?.name ?? name;

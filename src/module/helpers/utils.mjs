@@ -364,3 +364,18 @@ export function omit(obj, keys) {
   for (const k of keys) { delete out[k]; }
   return out;
 }
+
+/**
+ * A helper function to delete multiple properties.
+ * @param {object} object - The object to traverse
+ * @param {...string} keys - Property paths using dot notation (e.g., 'a.b.c')
+ * @returns {boolean} Were all the properties deleted?
+ */
+export function deleteProperties(object, ...keys) {
+  let allDeleted = true;
+  for (const key of keys) {
+    const success = foundry.utils.deleteProperty(object, key);
+    if (!success) { allDeleted = false; }
+  }
+  return allDeleted;
+}
