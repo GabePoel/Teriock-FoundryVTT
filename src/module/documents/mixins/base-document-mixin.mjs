@@ -167,10 +167,7 @@ export default function BaseDocumentMixin(Base) {
       return teriock.helpers.string.toKebabCase(this.name);
     }
 
-    /**
-     * The document.
-     * @returns {BaseDocument}
-     */
+    /** @inheritDoc */
     get document() {
       return this;
     }

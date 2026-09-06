@@ -114,11 +114,10 @@ export default class MountSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
-      ...super.getLocalRollData(),
+    return Object.assign(super.getLocalRollData(), {
       [`type.${toKebabCase(this._source.mountType)}`]: 1,
       mounted: Number(this.mounted),
-    };
+    });
   }
 
   /**

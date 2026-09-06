@@ -1,9 +1,10 @@
 import * as systemMixins from "../_module.mjs";
+import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
+import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
 /**
@@ -21,7 +22,6 @@ export default function CommonSystemMixin(Base) {
    * @implements {Teriock.Models.CommonSystemData}
    * @mixes RulesSystem
    * @mixes PropagationData
-   * @mixes AccessData
    * @mixes RefreshSystem
    * @mixin
    */
@@ -29,10 +29,9 @@ export default function CommonSystemMixin(Base) {
   class CommonSystem
     extends mixClasses(
       Base,
-      systemMixins.RulesSystemMixin,
-      dataMixins.PropagationDataMixin,
-      dataMixins.AccessDataMixin,
-      systemMixins.RefreshSystemMixin,
+      PropagationDataMixin,
+      RulesSystemMixin,
+      RefreshSystemMixin,
     )
   {
     /** @inheritDoc */
@@ -85,11 +84,6 @@ export default function CommonSystemMixin(Base) {
     /** @returns {string} */
     get _masterText() {
       return this.parent.master?.fullName || this.parent.master?.name || "";
-    }
-
-    /** @returns {TeriockActiveEffect|TeriockActor|TeriockItem} */
-    get document() {
-      return this.parent;
     }
 
     /** @returns {Partial<Teriock.Embeds.EmbedParts>} */
@@ -167,7 +161,7 @@ export default function CommonSystemMixin(Base) {
       if (this.parent.parent?.type) rollData[`parent.${this.parent.parent.type}`] = 1;
       const actor = this.actor;
       if (actor) Object.assign(rollData, actor.system.getScalingRollData());
-      return rollData;
+      return Object.assign(super.getLocalRollData(), rollData);
     }
 
     /** @returns {Promise<Partial<Teriock.Panels.PanelParts>>} */

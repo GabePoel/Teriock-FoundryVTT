@@ -1,5 +1,4 @@
 import { createElement } from "../../helpers/html.mjs";
-import AbstractDataMixin from "./abstract-data-mixin.mjs";
 
 /**
  * @import { DataModel, TypeDataModel } from "@common/abstract/_module.mjs";
@@ -14,11 +13,9 @@ import AbstractDataMixin from "./abstract-data-mixin.mjs";
  */
 export default function AccessDataMixin(Base) {
   /**
-   * @mixes AbstractData
    * @mixin
-   * @property {AccessData} parent
    */
-  class AccessData extends AbstractDataMixin(Base) {
+  class AccessData extends Base {
     /**
      * Paths to forms to display in the editor.
      * @returns {string[]}
@@ -41,22 +38,6 @@ export default function AccessDataMixin(Base) {
      */
     get actor() {
       return this.parent?.actor;
-    }
-
-    /**
-     * This data model's document.
-     * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|TeriockJournalEntryPage}
-     */
-    get document() {
-      return this.parent?.document;
-    }
-
-    /**
-     * Path to this data model.
-     * @returns {string}
-     */
-    get localPath() {
-      return this.schema.fieldPath;
     }
 
     /**

@@ -57,11 +57,6 @@ export default function AbilityUpgradesPart(Base) {
     }
 
     /** @inheritDoc */
-    get canChange() {
-      return super.canChange || Boolean(this.upgrades.score.attribute) || Boolean(this.upgrades.competence.attribute);
-    }
-
-    /** @inheritDoc */
     get qualifiedChanges() {
       const changes = super.qualifiedChanges;
       if (this.upgrades.score.attribute) {

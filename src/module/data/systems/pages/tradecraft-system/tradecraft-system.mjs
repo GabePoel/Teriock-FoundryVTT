@@ -3,16 +3,13 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
 /**
  * @mixes WikiSystem
- * @mixes InstructionsSystem
  */
-export default class TradecraftSystem
-  extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin, systemMixins.InstructionsSystemMixin)
-{
+export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 

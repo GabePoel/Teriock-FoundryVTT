@@ -1,15 +1,16 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { BaseSystemMixin, ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
 
 /**
  * Base effect data model.
- * @implements {Teriock.Models.BaseEffectSystemData}
+ * @mixes BaseSystem
  * @mixes ChildSystem
  */
-export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(ActiveEffectTypeDataModel) {
+export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataModel, BaseSystemMixin, ChildSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseEffect"];
 
@@ -42,14 +43,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     const tags = super._statusTags;
     if (this.needsAttunement) { tags.push("TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true"); }
     return tags;
-  }
-
-  /**
-   * Whether this can provide qualified changes.
-   * @returns {boolean}
-   */
-  get canChange() {
-    return this.automations.contents.some(a => a.metadata.changes);
   }
 
   /**
@@ -200,9 +193,10 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
 
   /** @inheritDoc */
   getLocalRollData() {
-    const data = super.getLocalRollData();
-    for (const status of this.parent.statuses) { data[`condition.${toKebabCase(status)}`] = 1; }
-    return data;
+    return Object.assign(
+      super.getLocalRollData(),
+      Object.fromEntries(Array.from(this.parent.statuses).map(s => [`condition.${toKebabCase(s)}`, 1])),
+    );
   }
 
   /** @inheritDoc */

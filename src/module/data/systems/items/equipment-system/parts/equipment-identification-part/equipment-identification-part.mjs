@@ -98,11 +98,10 @@ export default function EquipmentIdentificationPart(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return {
-        ...super.getLocalRollData(),
+      return Object.assign(super.getLocalRollData(), {
         identified: Number(this.identification.identified),
         read: Number(this.identification.read),
-      };
+      });
     }
 
     /** @inheritDoc */

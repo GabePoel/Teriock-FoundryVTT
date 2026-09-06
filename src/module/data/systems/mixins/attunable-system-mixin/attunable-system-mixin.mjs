@@ -231,7 +231,7 @@ export default function AttunableSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return { ...super.getLocalRollData(), attuned: Number(this.isAttuned), tier: this.tier.value || 0 };
+      return Object.assign(super.getLocalRollData(), { attuned: Number(this.isAttuned), tier: this.tier.value || 0 });
     }
 
     /** @inheritDoc */

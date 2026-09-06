@@ -84,17 +84,4 @@ export default class PowerSystem
       return false;
     }
   }
-
-  /** @inheritDoc */
-  getLocalRollData() {
-    return { ...super.getLocalRollData(), av: this.maxAv, maxAv: this.maxAv };
-  }
-
-  /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    if (
-      game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
-    ) { this.proficient = false; }
-  }
 }

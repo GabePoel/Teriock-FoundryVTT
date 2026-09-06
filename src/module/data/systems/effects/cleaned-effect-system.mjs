@@ -1,4 +1,5 @@
-import * as systemMixins from "../mixins/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import { InstructionsSystemMixin } from "../mixins/_module.mjs";
 import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 
 /**
@@ -6,7 +7,7 @@ import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
  * effects in Foundry normally do.
  * @mixes InstructionsSystem
  */
-export default class CleanedEffectSystem extends systemMixins.InstructionsSystemMixin(BaseEffectSystem) {
+export default class CleanedEffectSystem extends mixClasses(BaseEffectSystem, InstructionsSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { untrackable: true });

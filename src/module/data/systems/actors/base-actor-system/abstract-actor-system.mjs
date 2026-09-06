@@ -1,37 +1,13 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { BaseSystemMixin, CommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 
 /**
+ * @mixes BaseSystem
  * @mixes CommonSystem
  */
-export default class AbstractActorSystem extends mixClasses(TypeDataModel, systemMixins.CommonSystemMixin) {
-  /**
-   * Helper method to add a virtual status.
-   * @param {Teriock.Keys.Condition} condition
-   * @param {string} reason
-   * @param {object} [options]
-   * @param {boolean} [options.localize]
-   */
-  _addVirtualStatus(condition, reason, options = {}) {
-    const { localize = true } = options;
-    if (!reason) { reason = TERIOCK.reference.conditions[condition]; }
-    this.conditionInformation[condition]?.reasons?.add(localize ? _loc(reason) : reason);
-    this.parent.statuses.add(condition);
-  }
-
-  /**
-   * Helper method to add multiple virtual statuses with the same reason.
-   * @param {Teriock.Keys.Condition[]} conditions
-   * @param {string} reason
-   * @param {object} [options]
-   * @param {boolean} [options.localize]
-   */
-  _addVirtualStatuses(conditions, reason, options = {}) {
-    for (const condition of conditions) { this._addVirtualStatus(condition, reason, options); }
-  }
-
+export default class AbstractActorSystem extends mixClasses(TypeDataModel, BaseSystemMixin, CommonSystemMixin) {
   /**
    * Performs post-update operations for the actor.
    * @returns {Promise<void>}

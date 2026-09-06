@@ -124,9 +124,9 @@ export default function StatGiverSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return {
-        ...super.getLocalRollData(),
-        ...Object.fromEntries(
+      return Object.assign(
+        super.getLocalRollData(),
+        Object.fromEntries(
           POOL_STATS.flatMap(
             k => [[k, this.statDice[k].formula || 0], [`${k}.disabled`, Number(this.statDice[k].disabled)], [
               `${k}.value`,
@@ -134,7 +134,7 @@ export default function StatGiverSystemMixin(Base) {
             ]]
           ),
         ),
-      };
+      );
     }
 
     /** @inheritDoc */

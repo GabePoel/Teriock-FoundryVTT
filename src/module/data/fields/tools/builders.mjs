@@ -168,7 +168,14 @@ export function nullStringField(options) {
  * @returns {DocumentIdField}
  */
 export function nullIdField(options) {
-  return new DocumentIdField({ blank: true, initial: null, nullable: true, readonly: false, required: true, ...options });
+  return new DocumentIdField({
+    blank: true,
+    initial: null,
+    nullable: true,
+    readonly: false,
+    required: true,
+    ...options,
+  });
 }
 
 /**

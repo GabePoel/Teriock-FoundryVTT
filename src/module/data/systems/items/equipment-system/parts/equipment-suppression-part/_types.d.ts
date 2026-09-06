@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type EquipmentSuppressionPartData = {
+    export interface EquipmentSuppressionPartData {
       /** <schema> Is the equipment dampened? */
       dampened: boolean;
       /** <schema> Is the equipment destroyed? */
@@ -9,7 +9,7 @@ declare global {
       shattered: boolean;
       /** <schema> Is the equipment stashed? If it is, it has no weight. */
       stashed: boolean;
-    };
+    }
   }
 }
 

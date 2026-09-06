@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { nullIdField } from "../../../fields/tools/builders.mjs";
-import { ChildSystemMixin, InstructionsSystemMixin } from "../../mixins/_module.mjs";
+import { BaseSystemMixin, ChildSystemMixin, InstructionsSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -11,7 +11,7 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes ChildSystem
  */
 export default class BaseItemSystem
-  extends mixClasses(TypeDataModel, ChildSystemMixin, InstructionsSystemMixin)
+  extends mixClasses(TypeDataModel, BaseSystemMixin, ChildSystemMixin, InstructionsSystemMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
@@ -33,7 +33,7 @@ export default class BaseItemSystem
     return foundry.utils.mergeObject(super.defineSchema(), {
       _dep: nullIdField(),
       disabled: new fields.BooleanField(),
-      flaws: new fields.HTMLField({ initial: "" }),
+      flaws: new fields.HTMLField(),
     });
   }
 

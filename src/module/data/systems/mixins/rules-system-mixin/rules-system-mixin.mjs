@@ -1,4 +1,3 @@
-import { BaseSystemMixin } from "../_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 
 /**
@@ -13,12 +12,11 @@ import { IdentifierField } from "../../../fields/_module.mjs";
 export default function RulesSystemMixin(Base) {
   /**
    * @implements {Teriock.Models.RulesSystemData}
-   * @mixes TeriockSystem
    * @mixin
    */
-  class RulesSystem extends BaseSystemMixin(Base) {
+  class RulesSystem extends Base {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rules"];
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rules"];
 
     /** @inheritDoc */
     static defineSchema() {

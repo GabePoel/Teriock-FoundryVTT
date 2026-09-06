@@ -1,5 +1,6 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import { preLocalizeDataModel } from "../../helpers/localization.mjs";
-import * as dataMixins from "../mixins/_module.mjs";
+import { AbstractDataMixin, AccessDataMixin } from "../mixins/_module.mjs";
 
 const { DataModel } = foundry.abstract;
 
@@ -11,7 +12,7 @@ const { DataModel } = foundry.abstract;
  * Model for data that gets embedded within some parent document.
  * @mixes AccessData
  */
-export default class BaseDataModel extends dataMixins.AccessDataMixin(DataModel) {
+export default class BaseDataModel extends mixClasses(DataModel, AbstractDataMixin, AccessDataMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [];
 

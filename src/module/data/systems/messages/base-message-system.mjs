@@ -1,22 +1,15 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import { BaseSystemMixin } from "../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 
 /**
- * @implements {Teriock.Models.BaseMessageSystemData}
- * @implements {Teriock.Data.BaseMessageData}
  * @mixes BaseSystem
  */
-export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemMixins.BaseSystemMixin) {
-  /** @returns {TeriockActor|null} */
+export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSystemMixin) {
+  /** @inheritDoc */
   get actor() {
     return game.actors.default;
-  }
-
-  /** @returns {TeriockChatMessage} */
-  get document() {
-    return this.parent;
   }
 
   /**

@@ -2,7 +2,7 @@ import { CommonDocumentSettingsModel } from "../../../models/settings-models/_mo
 
 declare global {
   namespace Teriock.Models {
-    export type ChildSystemData = {
+    export interface ChildSystemData {
       /** <schema> Description */
       description: string;
       /** <derived> Whether this is forcibly suppressed by something else */
@@ -11,7 +11,7 @@ declare global {
       kind: string;
       /** <schema> Per-document behavior and display settings */
       settings: CommonDocumentSettingsModel;
-    };
+    }
   }
 }
 

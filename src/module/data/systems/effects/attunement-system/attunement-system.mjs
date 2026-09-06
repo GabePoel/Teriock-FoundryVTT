@@ -113,7 +113,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   getLocalRollData() {
-    return { ...super.getLocalRollData(), target: this.target ? 1 : 0, tier: this.tier };
+    return Object.assign(super.getLocalRollData(), { target: Number(this.target), tier: this.tier });
   }
 
   /** @inheritDoc */

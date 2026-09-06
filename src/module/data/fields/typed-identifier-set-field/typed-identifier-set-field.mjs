@@ -23,7 +23,7 @@ export default class TypedIdentifierSetField extends SetField {
 
   /** @inheritDoc */
   _toInput(config) {
-    Object.assign(config, { single: false, types: this.element.types });
+    Object.assign(config, { single: false, types: this.element.options.types });
     return HTMLIdentifierTagsElement.create(config);
   }
 }

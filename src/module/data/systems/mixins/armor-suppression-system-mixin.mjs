@@ -30,6 +30,23 @@ export default function ArmorSuppressionSystemMixin(Base) {
           && this.actor.system.defense.av.base > this.maxAv,
       );
     }
+
+    /** @inheritDoc */
+    getLocalRollData() {
+      return Object.assign(super.getLocalRollData(), { maxAv: this.maxAv });
+    }
+
+    /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      if (
+        game.settings.get("teriock", "armorWeakensRanks") && this.actor
+        && this.actor.system.defense.av.base > this.maxAv
+      ) {
+        this.competence.raw = 0;
+        for (const e of this.parent.effects) { foundry.utils.setProperty(e, "system.competence.raw", 0); }
+      }
+    }
   }
 
   return ArmorSuppressionSystem;

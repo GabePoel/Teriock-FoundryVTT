@@ -13,9 +13,7 @@ const { fields } = foundry.data;
  * @param {boolean} forHarm
  * @param {Teriock.System.FormulaString} substitution
  */
-export default class StatAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
-{
+export default class StatAutomation extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Stat"];
 

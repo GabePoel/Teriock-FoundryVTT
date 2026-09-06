@@ -22,9 +22,7 @@ export default function HierarchySystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), {
-        _sup: nullIdField(),
-      });
+      return Object.assign(super.defineSchema(), { _sup: nullIdField() });
     }
   }
 

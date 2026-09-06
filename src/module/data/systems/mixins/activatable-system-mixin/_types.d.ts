@@ -2,10 +2,10 @@ import { PseudoCollection } from "../../../pseudo-documents/collections/_module.
 
 declare global {
   namespace Teriock.Models {
-    export type ActivatableSystemData = {
+    export interface ActivatableSystemData {
       /** <schema> Automations */
       activations: PseudoCollection<Activation>;
-    };
+    }
   }
 }
 

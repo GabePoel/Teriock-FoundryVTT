@@ -24,6 +24,11 @@ import {
 
 const { fields } = foundry.data;
 
+/**
+ * @mixes SelectionPseudoDocument
+ * @mixes OverrideCompetencePseudoDocument
+ * @mixes OverrideDataPseudoDocument
+ */
 export default class ConstructionNode
   extends mixClasses(
     BasePseudoDocument,
@@ -239,15 +244,15 @@ export default class ConstructionNode
     if (!this.name) {
       let name = _loc(this.constructor.typeLabel);
       if (
-        this.globalIdentifiers.length + this.globalUuids.length + this.localIdentifiers.length + this.localUuids.length
+        this.globalIdentifiers.size + this.globalUuids.size + this.localIdentifiers.size + this.localUuids.size
           === 1 && !formulaExists(this.localQualifier)
       ) {
-        if (this.globalIdentifiers.length) {
-          name = teriock.fromIdentifierSync(this.globalIdentifiers[0])?.name ?? name;
+        if (this.globalIdentifiers.size) {
+          name = teriock.fromIdentifierSync(this.globalIdentifiers.first())?.name ?? name;
         }
-        if (this.globalUuids.length) { name = fromUuidSync(this.globalIdentifiers[0])?.name ?? name; }
-        if (this.localUuids.length && this.actor) {
-          name = fromUuidSync(this.localUuids[0], { relative: this.actor })?.name ?? name;
+        if (this.globalUuids.size) { name = fromUuidSync(this.globalIdentifiers.first())?.name ?? name; }
+        if (this.localUuids.size && this.actor) {
+          name = fromUuidSync(this.localUuids.first(), { relative: this.actor })?.name ?? name;
         }
         // TODO: Think of something for `localIdentifiers`.
       }

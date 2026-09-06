@@ -54,7 +54,7 @@ export default function RevelationSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return { ...super.getLocalRollData(), revealed: Number(this.revealed) };
+      return Object.assign(super.getLocalRollData(), { revealed: Number(this.revealed) });
     }
 
     /** @inheritDoc */

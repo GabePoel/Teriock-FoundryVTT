@@ -1,4 +1,6 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { fancifyFields } from "../../../../helpers/utils.mjs";
+import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -10,14 +12,16 @@ const { fields } = foundry.data;
 /**
  * @template {Constructor<TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, TeriockSystem & Teriock.Models.BaseSystemData>}
+ * @returns {MixinResult<T, BaseSystem & Teriock.Models.BaseSystemData>}
  */
 export default function BaseSystemMixin(Base) {
   /**
    * @implements {Teriock.Models.BaseSystemData}
+   * @mixes AbstractData
+   * @mixes AccessData
    * @mixin
    */
-  class TeriockSystem extends Base {
+  class BaseSystem extends mixClasses(Base, AbstractDataMixin, AccessDataMixin) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [];
 
@@ -136,6 +140,11 @@ export default function BaseSystemMixin(Base) {
       return [];
     }
 
+    /** @inheritDoc */
+    get document() {
+      return this.parent;
+    }
+
     /**
      * A string containing the document's name and any other additional adjustments that go along with it.
      * @returns {string}
@@ -180,5 +189,5 @@ export default function BaseSystemMixin(Base) {
     }
   }
 
-  return TeriockSystem;
+  return BaseSystem;
 }

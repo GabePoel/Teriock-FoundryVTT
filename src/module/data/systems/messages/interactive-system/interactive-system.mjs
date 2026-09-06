@@ -3,8 +3,8 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
-import BaseMessageSystem from "../base-message-system/base-message-system.mjs";
+import { ActivatableSystemMixin } from "../../mixins/_module.mjs";
+import BaseMessageSystem from "../base-message-system.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,10 +14,9 @@ const { fields } = foundry.data;
 
 /**
  * Interactive chat message data model.
- * @implements {Teriock.Data.InteractiveMessageData}
  * @mixes ActivatableSystem
  */
-export default class InteractiveSystem extends mixClasses(BaseMessageSystem, systemMixins.ActivatableSystemMixin) {
+export default class InteractiveSystem extends mixClasses(BaseMessageSystem, ActivatableSystemMixin) {
   /** @inheritDoc */
   static get _activationTypes() {
     return Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation));

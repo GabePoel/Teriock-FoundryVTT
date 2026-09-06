@@ -189,14 +189,12 @@ export default function EquipmentSuppressionPart(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      const data = super.getLocalRollData();
-      Object.assign(data, {
+      return Object.assign(super.getLocalRollData(), {
         dampened: Number(this.dampened),
         destroyed: Number(this.destroyed),
         shattered: Number(this.shattered),
         stashed: Number(this.stashed),
       });
-      return data;
     }
 
     /**

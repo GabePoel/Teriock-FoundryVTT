@@ -1,4 +1,4 @@
-import * as systemMixins from "../_module.mjs";
+import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../_module.mjs";
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
@@ -9,7 +9,7 @@ import { toKebabCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
+import { UsableDataMixin } from "../../../mixins/_module.mjs";
 import { CommonDocumentSettingsModel } from "../../../models/settings-models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -34,13 +34,7 @@ export default function ChildSystemMixin(Base) {
    * @mixin
    */
   class ChildSystem
-    extends mixClasses(
-      Base,
-      systemMixins.CommonSystemMixin,
-      systemMixins.AutomatableSystemMixin,
-      dataMixins.UsableDataMixin,
-      systemMixins.HierarchySystemMixin,
-    )
+    extends mixClasses(Base, CommonSystemMixin, UsableDataMixin, AutomatableSystemMixin, HierarchySystemMixin)
   {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
@@ -60,7 +54,6 @@ export default function ChildSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      const kinds = this.kinds();
       return Object.assign(super.defineSchema(), {
         boosts: new fields.SchemaField(
           objectMap(impactConfig, e => new FormulaField({ deterministic: false, initial: "", label: e.label }), {
@@ -72,7 +65,7 @@ export default function ChildSystemMixin(Base) {
         forceSuppressed: new initialBoolean(),
         kind: new fields.StringField({
           blank: false,
-          choices: localizeChoices(objectMap(kinds, v => v.label)),
+          choices: localizeChoices(objectMap(this.kinds(), v => v.label)),
           initial: this.metadata.initialKind,
           required: true,
         }),
@@ -364,7 +357,7 @@ export default function ChildSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return { ...super.getLocalRollData(), [`kind.${toKebabCase(this.kind)}`]: 1, kind: this.kind };
+      return Object.assign(super.getLocalRollData(), { [`kind.${toKebabCase(this.kind)}`]: 1, kind: this.kind });
     }
 
     /** @inheritDoc */
