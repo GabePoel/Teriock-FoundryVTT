@@ -2,8 +2,8 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
+import { TransformationSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 /**
@@ -21,12 +21,7 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
  * @mixes ThresholdData
  */
 export default class ConditionSystem
-  extends mixClasses(
-    BaseEffectSystem,
-    systemMixins.WikiSystemMixin,
-    systemMixins.TransformationSystemMixin,
-    dataMixins.ThresholdDataMixin,
-  )
+  extends mixClasses(BaseEffectSystem, WikiSystemMixin, TransformationSystemMixin, ThresholdDataMixin)
 {
   /** @inheritDoc */
   static get Execution() {

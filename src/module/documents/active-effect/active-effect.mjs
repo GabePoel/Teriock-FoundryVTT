@@ -1,6 +1,6 @@
 import { mixClasses } from "../../helpers/construction.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
 
@@ -9,16 +9,9 @@ const { ActiveEffect } = foundry.documents;
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument
- * @mixes RetrievalDocument
  */
 export default class TeriockActiveEffect
-  extends mixClasses(
-    ActiveEffect,
-    documentMixins.BaseDocumentMixin,
-    documentMixins.CommonDocumentMixin,
-    documentMixins.ChildDocumentMixin,
-    documentMixins.RetrievalDocumentMixin,
-  )
+  extends mixClasses(ActiveEffect, BaseDocumentMixin, CommonDocumentMixin, ChildDocumentMixin)
 {
   /** @inheritDoc */
   static _applyChangeUnguided(targetDoc, change, changes, options = {}) {
@@ -81,6 +74,7 @@ export default class TeriockActiveEffect
      * @type {TypeCollection<TeriockItem>}
      */
     this.dependents = new TypeCollection("dependents", this, [], { documentClass: Item.implementation });
+
     super._initialize(options);
   }
 

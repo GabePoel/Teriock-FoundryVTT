@@ -1,9 +1,9 @@
-import * as dataMixins from "../../data/mixins/_module.mjs";
+import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
-import { ChildCollection, TypeCollection } from "../collections/_module.mjs";
+import { ChildCollection } from "../collections/_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -27,9 +27,7 @@ export default function CommonDocumentMixin(Base) {
    * @mixes PropagationData
    * @mixin
    */
-  class CommonDocument
-    extends mixClasses(Base, dataMixins.PropagationDataMixin, dataMixins.EmbeddableDataMixin, dataMixins.PanelDataMixin)
-  {
+  class CommonDocument extends mixClasses(Base, PropagationDataMixin, EmbeddableDataMixin, PanelDataMixin) {
     /**
      * Get the default image for some type of this document.
      * @param {string} type
@@ -86,7 +84,7 @@ export default function CommonDocumentMixin(Base) {
      * @returns {(TeriockActiveEffect|TeriockItem)[]}
      */
     get _previewedSource() {
-      return this._childrenSource.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
+      return this._childrenSource.filter(c => !c.metadata?.tags?.revealable || c?.system?.revealed || game.user.isGM);
     }
 
     /**
@@ -103,6 +101,15 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
+     * A convenience getter to an object that organizes all embedded previewed instances by subtype. The object is
+     * cached and lazily re-computed as needed. Works like {@link Actor.itemTypes}.
+     * @returns {{ [K in (TeriockActiveEffect|TeriockItem)["type"]]: Extract<TeriockActiveEffect|TeriockItem, {type: K}>[] }}
+     */
+    get previewedTypes() {
+      return this.previewed.documentsByType;
+    }
+
+    /**
      * Types that can be shown on this document's sheet.
      * @returns {Teriock.Documents.CommonType[]}
      */
@@ -115,20 +122,22 @@ export default function CommonDocumentMixin(Base) {
       /**
        * A Collection of all the children that are directly descendent from this. This includes both embedded Documents
        * and sub-Documents that are in the same collection. May be actual Documents or their compendium indexes.
-       * @type {TypeCollection<TeriockActiveEffect|TeriockItem>}
+       * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
        */
-      this.children = new TypeCollection("children", this, this._childrenSource, {
+      this.children = new ChildCollection("children", this, this._childrenSource, {
         types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
       });
+
       /**
        * A Collection of Documents or their compendium indexes that are descendant from this to be displayed. These are a
        * combination of direct descendants and ones two or more generations removed depending on specifics. In general,
        * this shows any Documents which should be actively relevant at a glance in this Document's sheet or preview.
-       * @type {TypeCollection<TeriockActiveEffect|TeriockItem>}
+       * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
        */
       this.previewed = new ChildCollection("previewed", this, this._previewedSource, {
         types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
       });
+
       super._initialize(options);
     }
 

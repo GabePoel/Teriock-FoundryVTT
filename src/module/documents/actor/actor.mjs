@@ -7,7 +7,7 @@ import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
 import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -19,16 +19,8 @@ const { Actor } = foundry.documents;
  * The Teriock Actor implementation.
  * @mixes BaseDocument
  * @mixes CommonDocument
- * @mixes RetrievalDocument
  */
-export default class TeriockActor
-  extends mixClasses(
-    Actor,
-    documentMixins.BaseDocumentMixin,
-    documentMixins.CommonDocumentMixin,
-    documentMixins.RetrievalDocumentMixin,
-  )
-{
+export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, CommonDocumentMixin) {
   /**
    * Config for {@link TeriockActor.prepareTriggeredChatData}.
    * @returns {Record<"expiration"|"trigger", {icon: string, panelKey: string, titleKey: string}>}
@@ -154,7 +146,7 @@ export default class TeriockActor
    * @returns {TeriockActiveEffect<"consequence"|"imbuement">[]}
    */
   get applicables() {
-    return [...this.consequences, ...this.imbuements];
+    return [...this.previewedTypes.consequence, ...this.previewedTypes.imbuement];
   }
 
   /**
@@ -162,7 +154,7 @@ export default class TeriockActor
    * @returns {TeriockItem<"body"|"equipment">[]}
    */
   get armaments() {
-    return [...this.bodyParts, ...this.equipment];
+    return [...this.previewedTypes.body, ...this.previewedTypes.equipment];
   }
 
   /**
@@ -241,7 +233,7 @@ export default class TeriockActor
     }
     for (const c of Object.values(changeMap)) { c.sort((a, b) => a?.priority - b?.priority); }
     const data = this.getRollData();
-    this._applyChangesToDocuments(changeMap.ability, this.abilities, data);
+    this._applyChangesToDocuments(changeMap.ability, this.previewedTypes.ability, data);
     this._applyChangesToDocuments(changeMap.armament, this.armaments, data);
   }
 

@@ -105,7 +105,7 @@ export default function EquipmentStoragePart(Base) {
      * @returns {TeriockItem<"equipment">[]}
      */
     get _stackingCandidates() {
-      return (this.parent.elder?.equipment ?? []).filter(e =>
+      return (this.parent.elder?.previewedTypes.equipment ?? []).filter(e =>
         e.name === this.parent.name
         && e.typedIdentifier === this.parent.typedIdentifier
         && e.elder?.uuid === this.parent.elder?.uuid
@@ -152,8 +152,8 @@ export default function EquipmentStoragePart(Base) {
     _onUpdate(changed, options, userId) {
       super._onUpdate(changed, options, userId);
       if (this.parent.checkEditor(userId)) {
-        if (!this.storage.enabled && this.parent.equipment.length > 0) {
-          const updateData = this.parent.equipment.map(e => {
+        if (!this.storage.enabled && this.parent.previewedTypes.equipment.length > 0) {
+          const updateData = this.parent.previewedTypes.equipment.map(e => {
             return { _id: e._id, "system._sup": null };
           });
           this.parent.updateChildDocuments("Item", updateData);

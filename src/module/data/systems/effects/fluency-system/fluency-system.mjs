@@ -3,9 +3,9 @@ import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
+import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { CompetenceDisplaySystemMixin, RevelationSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 /**
@@ -22,10 +22,10 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 export default class FluencySystem
   extends mixClasses(
     CleanedEffectSystem,
-    systemMixins.WikiSystemMixin,
-    systemMixins.RevelationSystemMixin,
-    systemMixins.CompetenceDisplaySystemMixin,
-    dataMixins.ThresholdDataMixin,
+    WikiSystemMixin,
+    RevelationSystemMixin,
+    CompetenceDisplaySystemMixin,
+    ThresholdDataMixin,
   )
 {
   /** @inheritDoc */

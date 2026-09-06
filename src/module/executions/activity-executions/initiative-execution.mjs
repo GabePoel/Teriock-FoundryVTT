@@ -1,14 +1,15 @@
 import characterConfig from "../../constants/config/character-config.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { addFormula } from "../../helpers/formula.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
-import * as executionMixins from "../mixins/_module.mjs";
+import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
 
 /**
  * @mixes ThresholdExecution
  * @property {TeriockCombatant} source
  */
-export default class InitiativeExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
+export default class InitiativeExecution extends mixClasses(DocumentExecution, ThresholdExecutionMixin) {
   /**
    * The default initiative formula.
    * @type {Teriock.System.FormulaString}

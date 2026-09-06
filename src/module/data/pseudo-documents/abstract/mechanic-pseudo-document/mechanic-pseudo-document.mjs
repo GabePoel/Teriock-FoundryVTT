@@ -1,8 +1,9 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import { competenceField, qualifierField } from "../../../fields/tools/builders.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
+import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import BasePseudoDocument from "../base-pseudo-document/base-pseudo-document.mjs";
 
 const { fields } = foundry.data;
@@ -10,7 +11,7 @@ const { fields } = foundry.data;
 /**
  * @mixes PropagationData
  */
-export default class MechanicPseudoDocument extends dataMixins.PropagationDataMixin(BasePseudoDocument) {
+export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocument, PropagationDataMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Base"];
 

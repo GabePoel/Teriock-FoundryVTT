@@ -1,4 +1,5 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -42,7 +43,7 @@ class AutomationLightData extends LightData {
 /**
  * @mixes CritMechanic
  */
-export default class LightAutomation extends CritMechanicMixin(BaseAutomation) {
+export default class LightAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { changes: true, type: "light" });

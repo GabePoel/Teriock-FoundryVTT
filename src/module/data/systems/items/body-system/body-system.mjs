@@ -3,7 +3,7 @@ import systemConfig from "../../../../constants/config/system-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { ArmamentSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 /**
@@ -15,9 +15,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  * @mixes WikiSystem
  * @mixes ArmamentSystem
  */
-export default class BodySystem
-  extends mixClasses(BaseItemSystem, systemMixins.WikiSystemMixin, systemMixins.ArmamentSystemMixin)
-{
+export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMixin, ArmamentSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {

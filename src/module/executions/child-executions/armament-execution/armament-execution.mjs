@@ -1,7 +1,8 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
-import * as executionMixins from "../../mixins/_module.mjs";
+import { ImpactsExecutionMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -9,7 +10,7 @@ const { fields } = foundry.data;
  * @mixes ImpactsExecution
  * @param {HarmRoll[]} rolls
  */
-export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(DocumentExecution) {
+export default class ArmamentExecution extends mixClasses(DocumentExecution, ImpactsExecutionMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Armament"];
 
@@ -41,7 +42,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     data.dealImpacts ??= formulaExists(data.formula);
     data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
     super(data, options);
-    for (const p of this.source.properties.filter(p => p.active)) {
+    for (const p of this.source.previewedTypes.property.filter(p => p.active)) {
       for (const a of p.system.automations) { this.automations.set(a.id, a); }
     }
     this.bonus = options.bonus ?? "";

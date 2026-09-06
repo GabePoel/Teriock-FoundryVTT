@@ -26,7 +26,7 @@ declare global {
 
     /** Definition for an association card. */
     export type PanelAssociationCard = {
-      // badge?: string;
+      badge?: string;
       color?: Color;
       documentUuid?: UUID<TeriockDocument>;
       icon?: Teriock.Embeds.EmbedIcon;

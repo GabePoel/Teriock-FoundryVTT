@@ -1,3 +1,4 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Scenes } = foundry.documents.collections;
@@ -11,4 +12,4 @@ const { Scenes } = foundry.documents.collections;
  * @implements {DocumentCollection<TeriockScene>}
  * @property {TeriockScene|null} viewed
  */
-export default class TeriockScenes extends BaseWorldCollectionMixin(Scenes) {}
+export default class TeriockScenes extends mixClasses(Scenes, BaseWorldCollectionMixin) {}

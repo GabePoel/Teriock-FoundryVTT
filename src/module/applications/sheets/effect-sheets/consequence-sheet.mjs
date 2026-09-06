@@ -21,7 +21,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
    */
   static async #onSelectPrimarySpecies() {
     if (!this.isEditable || !this.document.system.isTransformation) { return; }
-    const selected = await DocumentSelector.selectSingle(this.document.species, {
+    const selected = await DocumentSelector.selectSingle(this.document.previewedTypes.species, {
       auto: false,
       checked: this.document.system.primarySpecies?.uuid,
       hint: _loc("TERIOCK.SHEETS.Consequence.ACTIONS.SelectPrimarySpecies.hint"),

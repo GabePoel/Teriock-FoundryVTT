@@ -1,13 +1,14 @@
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import DocumentExecution from "../../abstract/document-execution/document-execution.mjs";
-import * as executionMixins from "../../mixins/_module.mjs";
+import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 
 /**
  * @mixes ThresholdExecution
  */
-export default class ExpirationExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
+export default class ExpirationExecution extends mixClasses(DocumentExecution, ThresholdExecutionMixin) {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {

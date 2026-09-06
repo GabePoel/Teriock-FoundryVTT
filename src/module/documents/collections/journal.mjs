@@ -1,3 +1,4 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Journal } = foundry.documents.collections;
@@ -10,4 +11,4 @@ const { Journal } = foundry.documents.collections;
  * @mixes BaseWorldCollection
  * @implements {DocumentCollection<TeriockJournalEntry>}
  */
-export default class TeriockJournal extends BaseWorldCollectionMixin(Journal) {}
+export default class TeriockJournal extends mixClasses(Journal, BaseWorldCollectionMixin) {}

@@ -44,7 +44,7 @@ export default function ActorLimitsPart(Base) {
      * @returns {TeriockItem<"power">[]}
      */
     get curseDocuments() {
-      return this.parent.powers.filter(p => p.system.kind === "curse");
+      return this.parent.previewedTypes.power.filter(p => p.system.kind === "curse");
     }
 
     /**
@@ -52,7 +52,7 @@ export default function ActorLimitsPart(Base) {
      * @returns {TeriockActiveEffect<"ability">[]}
      */
     get rotatorDocuments() {
-      return this.parent.abilities.filter(a =>
+      return this.parent.previewedTypes.ability.filter(a =>
         a.system.rotator && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type))
       );
     }

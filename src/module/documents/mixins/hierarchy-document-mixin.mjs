@@ -303,16 +303,19 @@ export default function HierarchyDocumentMixin(Base) {
        * @type {TypeCollection<HierarchyDocument>}
        */
       this.allSubs = new TypeCollection("allSubs", this, this._allSubsSource, { documentClass: this });
+
       /**
        * The sups ancestral to this Document or their indexes.
        * @type {TypeCollection<HierarchyDocument>}
        */
       this.allSups = new TypeCollection("allSups", this, this._allSupsSource, { documentClass: this });
+
       /**
        * The subs directly descendent to this Document or their indexes.
        * @type {TypeCollection<HierarchyDocument>}
        */
       this.subs = new SubCollection("subs", this, this._subsSource, { documentClass: this });
+
       super._initialize(options);
     }
 

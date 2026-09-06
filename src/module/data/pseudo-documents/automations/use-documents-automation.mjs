@@ -7,7 +7,7 @@ import {
   SelectionPseudoDocumentMixin,
 } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import * as automationMixins from "./mixins/_module.mjs";
+import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
  * @mixes CritMechanic
@@ -22,8 +22,8 @@ export default class UseDocumentsAutomation
     BaseAutomation,
     CritMechanicMixin,
     SelectionPseudoDocumentMixin,
-    automationMixins.DisplayAutomationMixin,
-    automationMixins.TriggerAutomationMixin,
+    DisplayAutomationMixin,
+    TriggerAutomationMixin,
     OverrideCompetencePseudoDocumentMixin,
     OverrideDataPseudoDocumentMixin,
   )

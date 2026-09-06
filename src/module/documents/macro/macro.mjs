@@ -1,7 +1,7 @@
-import * as dataMixins from "../../data/mixins/_module.mjs";
+import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
@@ -12,12 +12,7 @@ const { Macro } = foundry.documents;
  * @mixes UsableDocument
  */
 export default class TeriockMacro
-  extends mixClasses(
-    Macro,
-    documentMixins.BaseDocumentMixin,
-    dataMixins.EmbeddableDataMixin,
-    documentMixins.UsableDocumentMixin,
-  )
+  extends mixClasses(Macro, BaseDocumentMixin, EmbeddableDataMixin, UsableDocumentMixin)
 {
   /**
    * Create a use macro from the given document.

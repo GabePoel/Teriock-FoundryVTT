@@ -1,7 +1,8 @@
 import { CombatExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
 
@@ -9,7 +10,7 @@ const { Combat } = foundry.documents;
  * The Teriock Combat implementation.
  * @mixes BaseDocument
  */
-export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Combat) {
+export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin) {
   /**
    * Call a trigger on the provided actor.
    * @param {TeriockActor} actor

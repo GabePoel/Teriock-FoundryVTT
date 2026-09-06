@@ -1,3 +1,4 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { ChatMessages } = foundry.documents.collections;
@@ -10,4 +11,4 @@ const { ChatMessages } = foundry.documents.collections;
  * @mixes BaseWorldCollection
  * @implements {DocumentCollection<TeriockChatMessage>}
  */
-export default class TeriockChatMessages extends BaseWorldCollectionMixin(ChatMessages) {}
+export default class TeriockChatMessages extends mixClasses(ChatMessages, BaseWorldCollectionMixin) {}

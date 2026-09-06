@@ -1,6 +1,6 @@
-import * as dataMixins from "../../data/mixins/_module.mjs";
+import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { JournalEntry } = foundry.documents;
 
@@ -9,9 +9,7 @@ const { JournalEntry } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbeddableData
  */
-export default class TeriockJournalEntry
-  extends mixClasses(JournalEntry, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin)
-{
+export default class TeriockJournalEntry extends mixClasses(JournalEntry, BaseDocumentMixin, EmbeddableDataMixin) {
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, { img: "icons/svg/book.svg" });

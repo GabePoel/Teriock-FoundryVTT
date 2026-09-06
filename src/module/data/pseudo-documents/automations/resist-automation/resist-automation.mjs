@@ -3,7 +3,7 @@ import { omit } from "../../../../helpers/utils.mjs";
 import { ResistActivation } from "../../activations/command-activations.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,7 +12,7 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class ResistAutomation
-  extends mixClasses(ThresholdAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
+  extends mixClasses(ThresholdAutomation, CritMechanicMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Resist"];

@@ -5,9 +5,20 @@ import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import {
+  ArmamentSystemMixin,
+  AttunableSystemMixin,
+  ConsumableSystemMixin,
+  WikiSystemMixin,
+} from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
-import * as parts from "./parts/_module.mjs";
+import {
+  EquipmentIdentificationPart,
+  EquipmentPanelPart,
+  EquipmentStoragePart,
+  EquipmentSuppressionPart,
+  EquipmentWieldingPart,
+} from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -30,15 +41,15 @@ const { fields } = foundry.data;
 export default class EquipmentSystem
   extends mixClasses(
     BaseItemSystem,
-    systemMixins.ArmamentSystemMixin,
-    systemMixins.AttunableSystemMixin,
-    systemMixins.ConsumableSystemMixin,
-    systemMixins.WikiSystemMixin,
-    parts.EquipmentIdentificationPart,
-    parts.EquipmentPanelPart,
-    parts.EquipmentStoragePart,
-    parts.EquipmentSuppressionPart,
-    parts.EquipmentWieldingPart,
+    ArmamentSystemMixin,
+    AttunableSystemMixin,
+    ConsumableSystemMixin,
+    WikiSystemMixin,
+    EquipmentIdentificationPart,
+    EquipmentPanelPart,
+    EquipmentStoragePart,
+    EquipmentSuppressionPart,
+    EquipmentWieldingPart,
   )
 {
   /** @inheritDoc */

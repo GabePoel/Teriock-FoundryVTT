@@ -37,7 +37,8 @@ export default function PlayableActorSheetCombatPart(Base) {
       if (event.button === 2) { await this.document.system.wielding.attacker?.sheet.render(true); }
       if (!game.teriock.checkEditable(this)) { return; }
       const attacker = await DocumentSelector.selectSingle(
-        [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
+        [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
+          .filter(a => a.active),
         {
           checked: this.document.system.wielding.attacker?.uuid,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint"),
@@ -57,7 +58,8 @@ export default function PlayableActorSheetCombatPart(Base) {
       if (event.button === 2 || !this.isEditable) { await this.document.system.wielding.blocker?.sheet.render(true); }
       if (!game.teriock.checkEditable(this)) { return; }
       const attacker = await DocumentSelector.selectSingle(
-        [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
+        [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
+          .filter(a => a.active),
         {
           checked: this.document.system.wielding.blocker?.uuid,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint"),

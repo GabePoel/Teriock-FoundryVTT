@@ -1,3 +1,4 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import TeriockDocumentSheet from "./document-sheet.mjs";
 import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
@@ -9,7 +10,7 @@ import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
  * A minimal document sheet with some edits to make it better resemble a dialog.
  * @mixes TemporaryApplication
  */
-export default class DocumentDialog extends TemporaryApplicationMixin(TeriockDocumentSheet) {
+export default class DocumentDialog extends mixClasses(TeriockDocumentSheet, TemporaryApplicationMixin) {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { teriock: { autoIcon: false } };
 

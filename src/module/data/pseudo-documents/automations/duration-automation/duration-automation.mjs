@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
@@ -8,7 +9,7 @@ const { fields } = foundry.data;
 /**
  * @mixes CritMechanic
  */
-export default class DurationAutomation extends CritMechanicMixin(BaseAutomation) {
+export default class DurationAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Duration"];
 

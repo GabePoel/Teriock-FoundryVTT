@@ -49,7 +49,7 @@ export default function ActorScalingPart(Base) {
      */
     #getRankRollData() {
       const data = {};
-      const ranks = this.parent.ranks;
+      const ranks = this.parent.previewedTypes.rank;
       for (const c of Object.keys(TERIOCK.index.classes)) {
         data[`rank.${toKebabCase(c)}`] = ranks.filter(r => toCamelCase(r.system._source.class) === c).length;
       }
@@ -66,7 +66,7 @@ export default function ActorScalingPart(Base) {
     #getSpeciesRollData() {
       const data = {};
       for (
-        const s of this.parent.species.filter(s => s.active && s.system.identifier)
+        const s of this.parent.previewedTypes.species.filter(s => s.active && s.system.identifier)
       ) { data[`species.${s.system.identifier}`] = 1; }
       return data;
     }
@@ -93,7 +93,7 @@ export default function ActorScalingPart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       this.presence.max = Math.max(config.character.defaults.maxPresence, Math.floor(1 + (this.scaling.lvl + 1) / 5));
-      this.scaling.br = Math.max(0, ...this.parent.species.map(s => s.system.br));
+      this.scaling.br = Math.max(0, ...this.parent.previewedTypes.species.map(s => s.system.br));
       this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
       this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
       this.scaling.p = Math.max(

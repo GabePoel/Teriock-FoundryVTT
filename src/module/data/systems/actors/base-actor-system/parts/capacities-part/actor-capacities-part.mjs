@@ -72,7 +72,9 @@ export default function ActorCapacitiesPart(Base) {
      */
     #prepareWeightCarried() {
       let equipmentWeight = 0;
-      for (const e of this.parent.equipment) { equipmentWeight += e.system.totalWeight; }
+      for (const e of this.parent.previewedTypes.equipment) {
+        equipmentWeight += e.system.totalWeight;
+      }
       this.weight.equipment = equipmentWeight;
       const carried = this.weight.equipment + this.weight.money;
       this.weight.carried = carried.toNearest(TERIOCK.config.system.unitPrecision);

@@ -4,7 +4,15 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import { TeriockDragDrop } from "../../ux/_module.mjs";
-import * as sheetMixins from "../mixins/_module.mjs";
+import {
+  DocumentCreationSheetMixin,
+  DragDropSheetMixin,
+  FieldsSheetMixin,
+  LockingSheetMixin,
+  MechanicsSheetMixin,
+  PreviewSheetMixin,
+  SystemSettingsButtonSheetMixin,
+} from "../mixins/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -29,13 +37,13 @@ export default class ApplicableEffectSheet
   extends mixClasses(
     ActiveEffectConfig,
     BaseDocumentSheetMixin,
-    sheetMixins.SystemSettingsButtonSheetMixin,
-    sheetMixins.DocumentCreationSheetMixin,
-    sheetMixins.DragDropSheetMixin,
-    sheetMixins.FieldsSheetMixin,
-    sheetMixins.LockingSheetMixin,
-    sheetMixins.MechanicsSheetMixin,
-    sheetMixins.PreviewSheetMixin,
+    SystemSettingsButtonSheetMixin,
+    DocumentCreationSheetMixin,
+    DragDropSheetMixin,
+    FieldsSheetMixin,
+    LockingSheetMixin,
+    MechanicsSheetMixin,
+    PreviewSheetMixin,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
@@ -7,7 +8,7 @@ const { fields } = foundry.data;
 /**
  * @mixes SelectionPseudoDocument
  */
-export default class UseDocumentsActivation extends SelectionPseudoDocumentMixin(BaseActivation) {
+export default class UseDocumentsActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.ui.document, type: "useDocuments" });

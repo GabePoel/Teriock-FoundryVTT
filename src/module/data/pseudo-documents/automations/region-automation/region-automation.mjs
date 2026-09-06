@@ -10,7 +10,7 @@ import {
   SelectionPseudoDocumentMixin,
 } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -25,9 +25,9 @@ export default class RegionAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
     SelectionPseudoDocumentMixin,
-    automationMixins.TriggerAutomationMixin,
+    TriggerAutomationMixin,
     OverrideDataPseudoDocumentMixin,
-    automationMixins.DisplayAutomationMixin,
+    DisplayAutomationMixin,
   )
 {
   /**

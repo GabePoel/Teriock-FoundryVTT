@@ -8,7 +8,7 @@ import { icons } from "../../../constants/display/_module.mjs";
  */
 async function takeAttune(actor) {
   if (!game.actors.check(actor)) { return; }
-  const choices = [...actor.equipment, ...actor.mounts].filter(a => !a.system.isAttuned);
+  const choices = [...actor.previewedTypes.equipment, ...actor.previewedTypes.mount].filter(a => !a.system.isAttuned);
   const chosen = await DocumentSelector.selectMulti(choices, {
     hint: "TERIOCK.COMMANDS.Attune.hint",
     localize: true,
@@ -25,7 +25,7 @@ async function takeAttune(actor) {
  */
 async function takeDeattune(actor) {
   if (!game.actors.check(actor)) { return; }
-  const choices = [...actor.equipment, ...actor.mounts].filter(a => a.system.isAttuned);
+  const choices = [...actor.previewedTypes.equipment, ...actor.previewedTypes.mount].filter(a => a.system.isAttuned);
   const chosen = await DocumentSelector.selectMulti(choices, {
     hint: "TERIOCK.COMMANDS.Deattune.hint",
     localize: true,

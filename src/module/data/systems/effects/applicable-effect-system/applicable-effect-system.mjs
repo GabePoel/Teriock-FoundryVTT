@@ -2,9 +2,9 @@ import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent, toClass } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
+import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { AffinableSystemMixin, ExpirableSystemMixin, MetaphysicsSystemMixin } from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -20,10 +20,10 @@ const { fields } = foundry.data;
 export default class ApplicableEffectSystem
   extends mixClasses(
     BaseEffectSystem,
-    systemMixins.AffinableSystemMixin,
-    systemMixins.ExpirableSystemMixin,
-    systemMixins.MetaphysicsSystemMixin,
-    dataMixins.ThresholdDataMixin,
+    AffinableSystemMixin,
+    ExpirableSystemMixin,
+    MetaphysicsSystemMixin,
+    ThresholdDataMixin,
   )
 {
   /** @inheritDoc */

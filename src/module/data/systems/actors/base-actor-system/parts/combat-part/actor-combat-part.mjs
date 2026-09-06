@@ -111,7 +111,9 @@ export default function ActorCombatPart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
-      const armor = this.parent.equipment.filter(e => e.system.equipped && e.system.equipmentClasses.has("armor"));
+      const armor = this.parent.previewedTypes.equipment.filter(e =>
+        e.system.equipped && e.system.equipmentClasses.has("armor")
+      );
       this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
     }
 
@@ -120,9 +122,14 @@ export default function ActorCombatPart(Base) {
       super.prepareSpecialData();
       this.defense.av.worn = Math.max(
         0,
-        ...this.parent.equipment.filter(e => e.active && !e.system.shattered).map(e => e.system.av.value),
+        ...this.parent.previewedTypes.equipment.filter(e => e.active && !e.system.shattered).map(e =>
+          e.system.av.value
+        ),
       );
-      this.defense.av.natural = Math.max(0, ...this.parent.bodyParts.filter(b => b.active).map(b => b.system.av.value));
+      this.defense.av.natural = Math.max(
+        0,
+        ...this.parent.previewedTypes.body.filter(b => b.active).map(b => b.system.av.value),
+      );
       this.defense.av.value = Math.max(0, this.defense.av.natural, this.defense.av.worn);
       this.defense.ac += this.defense.av.value;
       this.defense.bv = this.wielding.blocker?.system.bv.value || 0;

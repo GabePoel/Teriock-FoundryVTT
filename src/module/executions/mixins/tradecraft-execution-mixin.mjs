@@ -1,5 +1,6 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import { addFormula } from "../../helpers/formula.mjs";
-import * as executionMixins from "./_module.mjs";
+import { ThresholdExecutionMixin } from "./_module.mjs";
 
 /**
  * @template {AnyConstructor} T
@@ -11,7 +12,7 @@ export default function TradecraftExecutionMixin(Base) {
    * @mixes ThresholdExecution
    * @mixin
    */
-  class TradecraftExecution extends executionMixins.ThresholdExecutionMixin(Base) {
+  class TradecraftExecution extends mixClasses(Base, ThresholdExecutionMixin) {
     /**
      * @param {object} [data]
      * @param {Teriock.Execution.ThresholdExecutionOptions} [options]

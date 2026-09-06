@@ -1,4 +1,5 @@
-import * as executionMixins from "../mixins/_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
+import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
 import AffinityExecution from "./affinity-execution.mjs";
 
 /**
@@ -10,7 +11,7 @@ import AffinityExecution from "./affinity-execution.mjs";
  *
  * @mixes ThresholdExecution
  */
-export default class ResistanceExecution extends executionMixins.ThresholdExecutionMixin(AffinityExecution) {
+export default class ResistanceExecution extends mixClasses(AffinityExecution, ThresholdExecutionMixin) {
   /**
    * @param {object} [data]
    * @param {Teriock.Execution.ResistanceExecutionOptions} [options]

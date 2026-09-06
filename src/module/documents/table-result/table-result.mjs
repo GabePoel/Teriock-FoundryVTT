@@ -1,8 +1,8 @@
-import * as dataMixins from "../../data/mixins/_module.mjs";
+import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { ConstructionNode, Panel } from "../../data/pseudo-documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
@@ -13,12 +13,7 @@ const { TableResult } = foundry.documents;
  * @mixes EmbeddableData
  */
 export default class TeriockTableResult
-  extends mixClasses(
-    TableResult,
-    documentMixins.BaseDocumentMixin,
-    dataMixins.PanelDataMixin,
-    dataMixins.EmbeddableDataMixin,
-  )
+  extends mixClasses(TableResult, BaseDocumentMixin, PanelDataMixin, EmbeddableDataMixin)
 {
   /**
    * Typed identifier for the referenced document on document-type results.

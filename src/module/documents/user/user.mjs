@@ -1,8 +1,8 @@
 import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
-import * as dataMixins from "../../data/mixins/_module.mjs";
+import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
 
@@ -16,9 +16,7 @@ const { User } = foundry.documents;
  * @mixes EmbeddableData
  * @property {Readonly<Set<TeriockToken>>} targets
  */
-export default class TeriockUser
-  extends mixClasses(User, documentMixins.BaseDocumentMixin, dataMixins.EmbeddableDataMixin)
-{
+export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, EmbeddableDataMixin) {
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, { img: this.avatar });

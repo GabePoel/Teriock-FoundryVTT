@@ -3,7 +3,7 @@ import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { AttunableSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
@@ -13,9 +13,7 @@ const { fields } = foundry.data;
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */
-export default class MountSystem
-  extends mixClasses(BaseItemSystem, systemMixins.AttunableSystemMixin, systemMixins.StatGiverSystemMixin)
-{
+export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSystemMixin, StatGiverSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];
 

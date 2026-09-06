@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
 
@@ -10,7 +11,7 @@ const { ChatPopout } = foundry.applications.sidebar.apps;
 /**
  * @mixes ChatMessageConnection
  */
-export default class TeriockChatPopout extends ChatMessageConnectionMixin(ChatPopout) {
+export default class TeriockChatPopout extends mixClasses(ChatPopout, ChatMessageConnectionMixin) {
   /**
    * Handle toggling the expanded state of a roll breakdown.
    * @this {ChatLog}

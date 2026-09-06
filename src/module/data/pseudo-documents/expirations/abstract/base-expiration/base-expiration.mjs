@@ -1,5 +1,6 @@
 import mathConfig from "../../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../../executions/child-executions/_module.mjs";
+import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../fields/tools/builders.mjs";
@@ -20,7 +21,7 @@ const { fields } = foundry.data;
  * @property {ID<BaseExpiration>} _id
  * @property {ExpirationType} type
  */
-export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocument) {
+export default class BaseExpiration extends mixClasses(MechanicPseudoDocument, CritMechanicMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
 

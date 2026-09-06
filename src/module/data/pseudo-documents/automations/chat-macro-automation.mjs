@@ -1,8 +1,9 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import * as automationMixins from "./mixins/_module.mjs";
+import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
-export default class ChatMacroAutomation extends automationMixins.MacroAutomationMixin(BaseAutomation) {
+export default class ChatMacroAutomation extends mixClasses(BaseAutomation, MacroAutomationMixin) {
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "chatMacro" });

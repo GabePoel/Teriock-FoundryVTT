@@ -6,7 +6,7 @@ import {
   OverrideDataPseudoDocumentMixin,
 } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { DisplayAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,7 +19,7 @@ const { fields } = foundry.data;
 export default class OverrideAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
-    automationMixins.DisplayAutomationMixin,
+    DisplayAutomationMixin,
     OverrideDataPseudoDocumentMixin,
     OverrideCompetencePseudoDocumentMixin,
   )

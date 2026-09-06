@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseApplicationMixin from "./base-application-mixin.mjs";
 
@@ -18,7 +19,7 @@ export default function BaseDocumentSheetMixin(Base) {
    * @property {ApplicationConfiguration & Teriock.Sheet._SheetConfiguration} options
    * @property {BaseDocument} document
    */
-  class BaseDocumentSheet extends BaseApplicationMixin(Base) {
+  class BaseDocumentSheet extends mixClasses(Base, BaseApplicationMixin) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       classes: ["teriock-sheet"],

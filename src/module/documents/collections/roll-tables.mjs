@@ -1,3 +1,4 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { RollTables } = foundry.documents.collections;
@@ -11,4 +12,4 @@ const { RollTables } = foundry.documents.collections;
  * @implements {DocumentCollection<TeriockRollTable>}
  * @property {TeriockRollTable|null} activeGM
  */
-export default class TeriockRollTables extends BaseWorldCollectionMixin(RollTables) {}
+export default class TeriockRollTables extends mixClasses(RollTables, BaseWorldCollectionMixin) {}

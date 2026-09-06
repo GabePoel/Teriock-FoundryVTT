@@ -327,7 +327,7 @@ export default function TransformationSystemMixin(Base) {
      */
     get primarySpecies() {
       if (!this.isTransformation) { return null; }
-      return this.transformation.primary ?? this.parent.species[0] ?? null;
+      return this.transformation.primary ?? this.parent.previewedTypes.species[0] ?? null;
     }
 
     /**

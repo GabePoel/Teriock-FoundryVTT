@@ -12,7 +12,7 @@ import { icons } from "../../../constants/display/_module.mjs";
 function equipmentCommandFunctionFactory(filter, onSelect, hint, title) {
   return async function equipmentCommandFunction(actor) {
     if (!game.actors.check(actor)) { return; }
-    const choices = actor.equipment.filter(filter);
+    const choices = actor.previewedTypes.equipment.filter(filter);
     const chosen = await DocumentSelector.selectMulti(choices, {
       hint,
       localize: true,

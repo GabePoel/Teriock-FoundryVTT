@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
@@ -10,7 +11,7 @@ const { fields } = foundry.data;
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
  */
 
-export default class ChildChangeAutomation extends CritMechanicMixin(BaseAutomation) {
+export default class ChildChangeAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChildChange"];
 

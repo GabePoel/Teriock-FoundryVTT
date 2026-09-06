@@ -3,14 +3,14 @@ import { movementActionField } from "../../../fields/tools/builders.mjs";
 import { ChangeMovementActivation } from "../../activations/_module.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 /**
  * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
 export default class ChangeMovementAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
+  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeMovement"];

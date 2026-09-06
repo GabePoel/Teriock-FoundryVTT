@@ -3,7 +3,7 @@ import { omit } from "../../../helpers/utils.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
 import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import * as automationMixins from "./mixins/_module.mjs";
+import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
  * @mixes CritMechanic
@@ -16,8 +16,8 @@ export default class SummonAutomation
     BaseAutomation,
     CritMechanicMixin,
     SelectionPseudoDocumentMixin,
-    automationMixins.DisplayAutomationMixin,
-    automationMixins.TriggerAutomationMixin,
+    DisplayAutomationMixin,
+    TriggerAutomationMixin,
   )
 {
   /** @inheritDoc */

@@ -1,4 +1,3 @@
-import { systemPath } from "../../helpers/path.mjs";
 import { toId } from "../../helpers/string.mjs";
 
 /**
@@ -53,7 +52,7 @@ export default function PanelDataMixin(Base) {
         blocks: [],
         documentUuid: this.uuid,
         icon: TERIOCK.display.icons.manifest.ui.document,
-        img: this.img ?? systemPath("icons/documents/uncertainty.svg"),
+        img: this.img ?? TERIOCK.display.images.common.uncertainty,
         name: this.fullName || this.name,
       }, await this.system?.getPanelParts?.() ?? {});
     }

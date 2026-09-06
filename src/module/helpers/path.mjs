@@ -19,7 +19,7 @@ export function systemPath(path) {
  * @returns {string}
  */
 export function getImage(category, name, fallback) {
-  const out = fallback || systemPath("icons/documents/uncertainty.svg");
+  const out = fallback || TERIOCK.display.images.common.uncertainty;
   let l1 = toCamelCase(category);
   if (!iconManifest[l1]) { l1 = indexConfig[category]; }
   if (!iconManifest[l1]) { return out; }

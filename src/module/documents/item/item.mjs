@@ -1,5 +1,5 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
 
@@ -12,17 +12,8 @@ const { Item } = foundry.documents;
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument
- * @mixes RetrievalDocument
  */
-export default class TeriockItem
-  extends mixClasses(
-    Item,
-    documentMixins.BaseDocumentMixin,
-    documentMixins.CommonDocumentMixin,
-    documentMixins.ChildDocumentMixin,
-    documentMixins.RetrievalDocumentMixin,
-  )
-{
+export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, CommonDocumentMixin, ChildDocumentMixin) {
   /** @inheritDoc */
   static async _onWriteOperation(documents, operation, user) {
     const actors = new Set();

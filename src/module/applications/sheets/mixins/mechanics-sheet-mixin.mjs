@@ -1,4 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -22,7 +23,7 @@ export default function MechanicsSheetMixin(Base) {
    * @mixin
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
-  class MechanicsSheet extends ChangesSheetMixin(Base) {
+  class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin) {
     /**
      * Handle click events to copy the UUID of this Pseudo-Document to clipboard.
      * @param {PointerEvent} event

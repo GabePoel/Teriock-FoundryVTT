@@ -49,7 +49,7 @@ export default class TeriockPlayableActorSheet
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
-    if (this.document.species.length === 0) {
+    if (this.document.previewedTypes.species.length === 0) {
       ui.notifications.warn("TERIOCK.SHEETS.Actor.NOTIFICATIONS.noSpecies", {
         format: { compendium: _loc(game.packs.get("teriock.species").title), name: this.document.name },
         localize: true,

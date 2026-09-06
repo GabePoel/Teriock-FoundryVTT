@@ -1,6 +1,12 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { TeriockDocumentSheet } from "../../api/_module.mjs";
-import * as sheetMixins from "../mixins/_module.mjs";
+import {
+  CommonSheetMixin,
+  DisplaySheetMixin,
+  MechanicsSheetMixin,
+  MechanicsTabsSheetMixin,
+  StatDiceSheetMixin,
+} from "../mixins/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -18,11 +24,11 @@ import * as sheetMixins from "../mixins/_module.mjs";
 export default class ChildSheet
   extends mixClasses(
     TeriockDocumentSheet,
-    sheetMixins.DisplaySheetMixin,
-    sheetMixins.CommonSheetMixin,
-    sheetMixins.MechanicsSheetMixin,
-    sheetMixins.MechanicsTabsSheetMixin,
-    sheetMixins.StatDiceSheetMixin,
+    DisplaySheetMixin,
+    CommonSheetMixin,
+    MechanicsSheetMixin,
+    MechanicsTabsSheetMixin,
+    StatDiceSheetMixin,
   )
 {
   /**

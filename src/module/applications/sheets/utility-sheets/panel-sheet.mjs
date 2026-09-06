@@ -1,4 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DragDropApplicationMixin, TeriockDocumentSheet } from "../../api/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
@@ -12,7 +13,7 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
  * A simple sheet for displaying a document as a simple panel.
  * @mixes DragDropApplication
  */
-export default class PanelSheet extends DragDropApplicationMixin(TeriockDocumentSheet) {
+export default class PanelSheet extends mixClasses(TeriockDocumentSheet, DragDropApplicationMixin) {
   /**
    * Open this document's main sheet.
    * @returns {Promise<void>}

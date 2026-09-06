@@ -1,5 +1,6 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import { dedent } from "../../helpers/string.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;
 
@@ -11,7 +12,7 @@ const { ChatMessage } = foundry.documents;
  * The Teriock ChatMessage implementation.
  * @mixes BaseDocument
  */
-export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin(ChatMessage) {
+export default class TeriockChatMessage extends mixClasses(ChatMessage, BaseDocumentMixin) {
   /**
    * @inheritDoc
    * @param {object[]} [data]

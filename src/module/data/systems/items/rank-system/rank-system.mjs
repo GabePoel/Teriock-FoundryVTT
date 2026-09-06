@@ -6,7 +6,12 @@ import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import {
+  ArmorSuppressionSystemMixin,
+  CompetenceDisplaySystemMixin,
+  StatGiverSystemMixin,
+  WikiSystemMixin,
+} from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
@@ -25,10 +30,10 @@ const { fields } = foundry.data;
 export default class RankSystem
   extends mixClasses(
     BaseItemSystem,
-    systemMixins.ArmorSuppressionSystemMixin,
-    systemMixins.CompetenceDisplaySystemMixin,
-    systemMixins.WikiSystemMixin,
-    systemMixins.StatGiverSystemMixin,
+    ArmorSuppressionSystemMixin,
+    CompetenceDisplaySystemMixin,
+    WikiSystemMixin,
+    StatGiverSystemMixin,
   )
 {
   /** @inheritDoc */
@@ -61,7 +66,7 @@ export default class RankSystem
    */
   async #onCreateSelectAbilities() {
     const elder = await this.parent.getElder();
-    const otherRanks = (await resolveDocuments(elder?.ranks ?? [])).filter(r =>
+    const otherRanks = (await resolveDocuments(elder?.previewedTypes.rank ?? [])).filter(r =>
       r.system.class === this.class && r.id !== this.parent.id
     );
     const toDelete = [];
@@ -111,7 +116,10 @@ export default class RankSystem
    */
   #stageArchetypeCreation() {
     const archetypeConfig = TERIOCK.config.class.archetypes[this._source.archetype];
-    if (!archetypeConfig?.dontStage && !this.actor.archetypes.some(a => a.typedIdentifier === this.archetype)) {
+    if (
+      !archetypeConfig?.dontStage
+      && !this.actor.previewedTypes.archetype.some(a => a.typedIdentifier === this.archetype)
+    ) {
       this.actor._staged.itemCreations.add(this.archetype);
     }
   }
@@ -120,8 +128,8 @@ export default class RankSystem
    * Stage unneeded archetypes for deletion.
    */
   #stageArchetypeDeletion() {
-    const neededArchetypes = new Set(this.actor.ranks.map(r => r.system.archetype));
-    for (const a of this.actor.archetypes) {
+    const neededArchetypes = new Set(this.actor.previewedTypes.rank.map(r => r.system.archetype));
+    for (const a of this.actor.previewedTypes.archetype) {
       if (!neededArchetypes.has(a.typedIdentifier)) { this.actor._staged.itemDeletions.add(a.id); }
     }
   }
@@ -153,7 +161,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   get _refreshCanCreateChildren() {
-    return this.number < 3 || this.parent.abilities.length !== 2;
+    return this.number < 3 || this.parent.previewedTypes.ability.length !== 2;
   }
 
   /**

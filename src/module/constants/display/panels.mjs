@@ -1,17 +1,16 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { systemPath } from "../../helpers/path.mjs";
-import { icons } from "./_module.mjs";
+import { icons, images } from "./_module.mjs";
 
 export default {
   common: {
     loading: /** @type {Teriock.Panels.PanelParts} */ {
       icon: "fa-spinner fa-spin",
-      img: systemPath("icons/documents/uncertainty.svg"),
+      img: images.common.uncertainty,
       name: "TERIOCK.COMMON.Loading",
     },
     unknown: /** @type {Teriock.Panels.PanelParts} */ {
       icon: icons.manifest.ui.variable,
-      img: systemPath("icons/documents/uncertainty.svg"),
+      img: images.common.uncertainty,
       name: "???",
     },
   },

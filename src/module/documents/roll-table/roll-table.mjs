@@ -3,7 +3,7 @@ import { PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { pathSorterFactory } from "../../helpers/sort.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
 
 const { RollTable } = foundry.documents;
 
@@ -14,7 +14,7 @@ const { RollTable } = foundry.documents;
  * @mixes PanelData
  */
 export default class TeriockRollTable
-  extends mixClasses(RollTable, documentMixins.BaseDocumentMixin, documentMixins.UsableDocumentMixin, PanelDataMixin)
+  extends mixClasses(RollTable, BaseDocumentMixin, UsableDocumentMixin, PanelDataMixin)
 {
   /**
    * Format a roll table result range for display in associations.

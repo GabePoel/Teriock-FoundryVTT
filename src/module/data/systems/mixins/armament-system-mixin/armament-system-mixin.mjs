@@ -1,4 +1,5 @@
 import { AttackSystemMixin } from "../_module.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
@@ -21,7 +22,7 @@ export default function ArmamentSystemMixin(Base) {
    * @mixes AttackSystem
    * @mixin
    */
-  class ArmamentSystem extends AttackSystemMixin(Base) {
+  class ArmamentSystem extends mixClasses(Base, AttackSystemMixin) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Armament"];
 
@@ -289,7 +290,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {TeriockActiveEffect<"ability">[]}
      */
     get onUseAbilities() {
-      return this.parent.abilities.filter(a => a.system.grantUse);
+      return this.parent.previewedTypes.ability.filter(a => a.system.grantUse);
     }
 
     /**

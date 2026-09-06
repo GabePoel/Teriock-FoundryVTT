@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { getPackIcon } from "../../../helpers/html.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDirectoryMixin } from "../tabs/_module.mjs";
@@ -7,7 +8,7 @@ const { Compendium } = foundry.applications.sidebar.apps;
 /**
  * @mixes TeriockDocumentDirectory
  */
-export default class TeriockCompendium extends DocumentDirectoryMixin(Compendium) {
+export default class TeriockCompendium extends mixClasses(Compendium, DocumentDirectoryMixin) {
   static _entryPartial = "teriock/sidebar/index-partial";
 
   /**

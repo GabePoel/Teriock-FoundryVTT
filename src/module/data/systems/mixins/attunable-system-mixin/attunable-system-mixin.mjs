@@ -125,7 +125,7 @@ export default function AttunableSystemMixin(Base) {
      * @returns {TeriockActiveEffect<"attunement">|null} The attunement data or null if not attuned.
      */
     get attunement() {
-      return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
+      return this.actor?.previewedTypes.attunement.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
     }
 
     /**

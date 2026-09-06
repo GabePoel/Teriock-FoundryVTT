@@ -2,7 +2,6 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
@@ -258,7 +257,7 @@ export default class ConstructionNode
       }
       this.name = this.data.name ? BaseRoll.replaceFormulaData(this.data.name, { base: name }) : name;
     }
-    this.img = this.data.img ?? systemPath("icons/documents/uncertainty.svg");
+    this.img = this.data.img ?? TERIOCK.display.images.common.uncertainty;
   }
 }
 

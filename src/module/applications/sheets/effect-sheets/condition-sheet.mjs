@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -7,7 +8,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @mixes BaseDocumentSheet
  * @property {TeriockActiveEffect<"condition">} document
  */
-export default class ConditionSheet extends BaseDocumentSheetMixin(ActiveEffectConfig) {
+export default class ConditionSheet extends mixClasses(ActiveEffectConfig, BaseDocumentSheetMixin) {
   /** @inheritDoc */
   _canRender(options) {
     // Prevent normal sheet rendering for known conditions.

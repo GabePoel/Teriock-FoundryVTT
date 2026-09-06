@@ -254,10 +254,10 @@ export default function ActorStatsPart(Base) {
     /** @inheritDoc */
     prepareStatDice() {
       const items = [
-        ...this.parent.species.sort(pathSorterFactory("name")),
-        ...this.parent.ranks.sort(pathSorterFactory("_stats.createdTime")),
-        ...this.parent.powers.sort(pathSorterFactory("name")),
-        ...this.parent.mounts.sort(pathSorterFactory("name")),
+        ...this.parent.previewedTypes.species.sort(pathSorterFactory("name")),
+        ...this.parent.previewedTypes.rank.sort(pathSorterFactory("_stats.createdTime")),
+        ...this.parent.previewedTypes.power.sort(pathSorterFactory("name")),
+        ...this.parent.previewedTypes.mount.sort(pathSorterFactory("name")),
       ];
       for (const item of items) { item.system.prepareStatDice(); }
       this._prepareStat("hp", items);

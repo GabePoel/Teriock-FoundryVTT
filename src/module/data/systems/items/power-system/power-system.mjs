@@ -3,7 +3,12 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import {
+  ArmorSuppressionSystemMixin,
+  CompetenceDisplaySystemMixin,
+  MetaphysicsSystemMixin,
+  StatGiverSystemMixin,
+} from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 /**
@@ -16,10 +21,10 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 export default class PowerSystem
   extends mixClasses(
     BaseItemSystem,
-    systemMixins.ArmorSuppressionSystemMixin,
-    systemMixins.CompetenceDisplaySystemMixin,
-    systemMixins.MetaphysicsSystemMixin,
-    systemMixins.StatGiverSystemMixin,
+    ArmorSuppressionSystemMixin,
+    CompetenceDisplaySystemMixin,
+    MetaphysicsSystemMixin,
+    StatGiverSystemMixin,
   )
 {
   /** @inheritDoc */
@@ -72,7 +77,7 @@ export default class PowerSystem
     if (yes === false) { return false; }
 
     if (
-      this.actor?.powers.some(p => p.system.identifier === this.identifier)
+      this.actor?.previewedTypes.power.some(p => p.system.identifier === this.identifier)
       && ["mage", "semi", "warrior"].includes(this.identifier)
     ) {
       return false;

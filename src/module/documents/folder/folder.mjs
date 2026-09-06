@@ -1,5 +1,6 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import { resolveDocuments } from "../../helpers/resolve.mjs";
-import * as documentMixins from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;
 
@@ -11,7 +12,7 @@ const { Folder } = foundry.documents;
  * The Teriock Folder implementation.
  * @mixes BaseDocument
  */
-export default class TeriockFolder extends documentMixins.BaseDocumentMixin(Folder) {
+export default class TeriockFolder extends mixClasses(Folder, BaseDocumentMixin) {
   /**
    * Get all the entries recursively from a child node.
    * @param {FolderChildNode} node

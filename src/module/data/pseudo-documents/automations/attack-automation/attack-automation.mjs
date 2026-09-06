@@ -3,7 +3,7 @@ import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { AttackActivation } from "../../activations/_module.mjs";
 import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -18,7 +18,7 @@ export default class AttackAutomation
   extends mixClasses(
     ThresholdAutomation,
     CritMechanicMixin,
-    automationMixins.TriggerAutomationMixin,
+    TriggerAutomationMixin,
     OverrideCompetencePseudoDocumentMixin,
   )
 {

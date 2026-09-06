@@ -5,7 +5,7 @@ import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 import { RollActivation } from "../../activations/_module.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,11 +15,7 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class RollAutomation
-  extends mixClasses(
-    CritMechanicMixin(BaseAutomation),
-    automationMixins.DisplayAutomationMixin,
-    automationMixins.TriggerAutomationMixin,
-  )
+  extends mixClasses(CritMechanicMixin(BaseAutomation), DisplayAutomationMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Roll"];

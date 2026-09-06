@@ -10,9 +10,9 @@ import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mj
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { CompetenceDisplaySystemMixin, StatGiverSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
-import * as parts from "./parts/_module.mjs";
+import { SpeciesPanelPart, SpeciesTransformationPart } from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -37,11 +37,11 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
 export default class SpeciesSystem
   extends mixClasses(
     BaseItemSystem,
-    systemMixins.WikiSystemMixin,
-    systemMixins.CompetenceDisplaySystemMixin,
-    systemMixins.StatGiverSystemMixin,
-    parts.SpeciesPanelPart,
-    parts.SpeciesTransformationPart,
+    WikiSystemMixin,
+    CompetenceDisplaySystemMixin,
+    StatGiverSystemMixin,
+    SpeciesPanelPart,
+    SpeciesTransformationPart,
   )
 {
   /** @inheritDoc */

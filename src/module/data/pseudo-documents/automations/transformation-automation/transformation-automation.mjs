@@ -73,7 +73,9 @@ export default class TransformationAutomation
   async getSelectableDocuments(overrides = {}) {
     const out = await super.getSelectableDocuments(overrides);
     const species = out.filter(d => d.type === "species");
-    for (const a of out.filter(d => d.documentName === "Actor")) { species.push(...a.species); }
+    for (const a of out.filter(d => d.documentName === "Actor")) {
+      species.push(...a.previewedTypes.species);
+    }
     return species;
   }
 }

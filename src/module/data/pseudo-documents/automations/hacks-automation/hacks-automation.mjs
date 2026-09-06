@@ -4,7 +4,7 @@ import { objectMap } from "../../../../helpers/utils.mjs";
 import { TakeHackActivation, TakeUnhackActivation } from "../../activations/command-activations.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import * as automationMixins from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,9 +12,7 @@ const { fields } = foundry.data;
  * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class HacksAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, automationMixins.TriggerAutomationMixin)
-{
+export default class HacksAutomation extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Hacks"];
 

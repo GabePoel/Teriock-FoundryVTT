@@ -1,11 +1,12 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import { BaseExecution } from "../abstract/_module.mjs";
-import * as executionMixins from "../mixins/_module.mjs";
+import { AttackExecutionMixin } from "../mixins/_module.mjs";
 
 /**
  * An attack roll that has no ability associated with it.
  * @mixes AttackExecution
  */
-export default class AttackRollExecution extends executionMixins.AttackExecutionMixin(BaseExecution) {
+export default class AttackRollExecution extends mixClasses(BaseExecution, AttackExecutionMixin) {
   /**
    * @param {object} [data]
    * @param {Teriock.Execution.AttackExecutionOptions} [options]

@@ -1,5 +1,6 @@
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
 /**
@@ -11,7 +12,7 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
  *
  * @mixes WikiSystem
  */
-export default class CreatureSystem extends systemMixins.WikiSystemMixin(BaseActorSystem) {
+export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { type: "creature" });
@@ -38,7 +39,7 @@ export default class CreatureSystem extends systemMixins.WikiSystemMixin(BaseAct
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    for (const species of this.parent.species) {
+    for (const species of this.parent.previewedTypes.species) {
       const speciesParts = await species.system.getPanelParts();
       parts.blocks.push(...speciesParts.blocks);
     }

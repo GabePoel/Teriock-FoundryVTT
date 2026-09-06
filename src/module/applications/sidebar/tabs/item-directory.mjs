@@ -1,5 +1,6 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
 import { TeriockActor } from "../../../documents/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import DocumentDirectoryMixin from "./document-directory-mixin.mjs";
 
@@ -8,7 +9,7 @@ const { ItemDirectory } = foundry.applications.sidebar.tabs;
 /**
  * @mixes TeriockDocumentDirectory
  */
-export default class TeriockItemDirectory extends DocumentDirectoryMixin(ItemDirectory) {
+export default class TeriockItemDirectory extends mixClasses(ItemDirectory, DocumentDirectoryMixin) {
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [{

@@ -2,17 +2,18 @@ import { BaseAffinity } from "../../../../../data/pseudo-documents/affinities/ab
 import { ExecutionPseudoCollection } from "../../../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../../../dice/rolls/_module.mjs";
+import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../../../helpers/formula.mjs";
 import { objectMap, omit } from "../../../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../../../abstract/_module.mjs";
-import * as executionMixins from "../../../../mixins/_module.mjs";
+import { AttackExecutionMixin } from "../../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @mixes AttackExecution
  */
-export default class AbilityExecutionConstructor extends executionMixins.AttackExecutionMixin(DocumentExecution) {
+export default class AbilityExecutionConstructor extends mixClasses(DocumentExecution, AttackExecutionMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Ability"];
 
@@ -197,7 +198,7 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
     armament = this._reselectArmamentForProperties(armament, "weapon", ["weapon"]);
     armament = this._reselectArmamentForProperties(armament, "bite", ["biting"]);
     const handPropertyIdentifiers = ["handy"];
-    if (this.actor?.abilities.some(a => a.active && a.system.identifier === "staff-touch")) {
+    if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.identifier === "staff-touch")) {
       handPropertyIdentifiers.push("magelore");
     }
     armament = this._reselectArmamentForProperties(armament, "hand", handPropertyIdentifiers);
@@ -239,10 +240,10 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
   _reselectArmamentForProperties(armament, delivery, properties) {
     if (
       this.source.system.delivery === delivery
-      && !armament?.properties.some((p) => p.active && properties.includes(p.system.identifier))
+      && !armament?.previewedTypes.property.some((p) => p.active && properties.includes(p.system.identifier))
     ) {
       armament = this.actor.armaments.find((a) =>
-        a.active && a.properties.some(p => p.active && properties.includes(p.system.identifier))
+        a.active && a.previewedTypes.property.some(p => p.active && properties.includes(p.system.identifier))
       );
     }
     return armament;

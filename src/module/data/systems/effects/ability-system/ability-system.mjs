@@ -3,7 +3,7 @@ import statConfig from "../../../../constants/config/stat-config.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import * as dataMixins from "../../../mixins/_module.mjs";
+import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -43,7 +43,7 @@ const { fields } = foundry.data;
 export default class AbilitySystem
   extends mixClasses(
     CleanedEffectSystem,
-    dataMixins.ThresholdDataMixin,
+    ThresholdDataMixin,
     systemMixins.AttackSystemMixin,
     systemMixins.ConsumableSystemMixin,
     systemMixins.CompetenceDisplaySystemMixin,

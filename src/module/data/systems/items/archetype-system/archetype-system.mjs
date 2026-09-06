@@ -2,7 +2,7 @@ import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { ArmorSuppressionSystemMixin, CompetenceDisplaySystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 /**
@@ -11,11 +11,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  * @mixes CompetenceDisplaySystem
  */
 export default class ArchetypeSystem
-  extends mixClasses(
-    BaseItemSystem,
-    systemMixins.ArmorSuppressionSystemMixin,
-    systemMixins.CompetenceDisplaySystemMixin,
-  )
+  extends mixClasses(BaseItemSystem, ArmorSuppressionSystemMixin, CompetenceDisplaySystemMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Archetype"];
@@ -35,7 +31,9 @@ export default class ArchetypeSystem
    */
   get classIdentifiers() {
     return new Set(
-      this.actor?.ranks.filter(r => r.system._source.archetype === this.identifier).map(r => r.system.class),
+      this.actor?.previewedTypes.rank.filter(r => r.system._source.archetype === this.identifier).map(r =>
+        r.system.class
+      ),
     );
   }
 
@@ -74,7 +72,7 @@ export default class ArchetypeSystem
    */
   get ranks() {
     if (!this.actor) { return []; }
-    return this.actor.ranks.filter(r => r.system._source.archetype === this.identifier);
+    return this.actor.previewedTypes.rank.filter(r => r.system._source.archetype === this.identifier);
   }
 
   /** @inheritDoc */

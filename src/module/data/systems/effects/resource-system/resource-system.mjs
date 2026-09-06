@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as systemMixins from "../../mixins/_module.mjs";
+import { ConsumableSystemMixin, RevelationSystemMixin } from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 /**
@@ -9,7 +9,7 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
  * @mixes RevelationSystem
  */
 export default class ResourceSystem
-  extends mixClasses(CleanedEffectSystem, systemMixins.ConsumableSystemMixin, systemMixins.RevelationSystemMixin)
+  extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, RevelationSystemMixin)
 {
   /** @inheritDoc */
   static get _automationTypes() {

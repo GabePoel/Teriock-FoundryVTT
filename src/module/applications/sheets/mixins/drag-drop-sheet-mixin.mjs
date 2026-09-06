@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 
@@ -19,7 +20,7 @@ export default function DragDropSheetMixin(Base) {
    * @mixin
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
-  class DragDropSheet extends DragDropApplicationMixin(Base) {
+  class DragDropSheet extends mixClasses(Base, DragDropApplicationMixin) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       teriock: {

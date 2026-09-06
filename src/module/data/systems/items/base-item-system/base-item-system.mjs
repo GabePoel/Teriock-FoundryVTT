@@ -39,7 +39,7 @@ export default class BaseItemSystem
 
   /** @inheritDoc */
   static migrateData(source, options) {
-    if (source._dep?.length !== 16) { delete source._dep; }
+    if (source._dep && source._dep.length !== 16) { delete source._dep; }
     return super.migrateData(source, options);
   }
 

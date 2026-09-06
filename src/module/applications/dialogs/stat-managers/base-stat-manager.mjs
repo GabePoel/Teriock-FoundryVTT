@@ -1,4 +1,5 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
@@ -12,7 +13,7 @@ import { HackStatApplicationMixin } from "../../shared/_module.mjs";
 /**
  * @mixes HackStatApplication
  */
-export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialog) {
+export default class BaseStatManager extends mixClasses(DocumentDialog, HackStatApplicationMixin) {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onDone },

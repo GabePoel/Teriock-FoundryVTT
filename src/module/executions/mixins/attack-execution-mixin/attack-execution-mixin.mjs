@@ -1,7 +1,8 @@
-import * as executionMixins from "../_module.mjs";
+import { ThresholdExecutionMixin } from "../_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { PiercingModel } from "../../../data/models/_module.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 
 const { fields } = foundry.data;
@@ -18,7 +19,7 @@ export default function AttackExecutionMixin(Base) {
    * @mixes ThresholdExecution
    * @mixin
    */
-  class AttackExecution extends executionMixins.ThresholdExecutionMixin(Base) {
+  class AttackExecution extends mixClasses(Base, ThresholdExecutionMixin) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Attack"];
 
@@ -130,7 +131,7 @@ export default function AttackExecutionMixin(Base) {
             document: this.ammunition,
             editable: true,
             label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-            getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
+            getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumable) ?? [],
             update: ammunition => this.ammunition = ammunition,
           });
         }
@@ -252,12 +253,14 @@ export default function AttackExecutionMixin(Base) {
     _determineDefaultAmmunition() {
       if (!this.isContact || !this.armament?.system.ammunition?.enabled) { return; }
       const type = this.armament.system.ammunition.type;
-      this.ammunition = this.actor?.equipment.find(e =>
+      this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
         e.active && e.system.consumable && (e.system.equipmentType === type)
       );
       // Fall back to inactive ammunition
       if (!this.ammunition) {
-        this.ammunition = this.actor?.equipment.find(e => e.system.consumable && (e.system.equipmentType === type));
+        this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
+          e.system.consumable && (e.system.equipmentType === type)
+        );
       }
     }
 

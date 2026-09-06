@@ -121,7 +121,9 @@ export default class IdentificationModel extends BaseDataModel {
     if (this.identified && game.user.isGM) {
       const uncheckedPropertyIdentifiers = [...TERIOCK.config.equipment.unidentifiedProperties];
       const reference = await fromIdentifier(this.parent.equipmentType);
-      if (reference) { uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier)); }
+      if (reference) {
+        uncheckedPropertyIdentifiers.push(...reference.previewedTypes.property.map(p => p.system.identifier));
+      }
       const revealed = [
         ...this.parent.parent.children.documentsByType.property.filter(p => p.system.revealed),
         ...this.parent.parent.children.documentsByType.ability.filter(a => a.system.revealed),

@@ -1,21 +1,22 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 
 const { Token } = foundry.canvas.placeables;
 
 /*
+ * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
  * @type {{global: Set<Teriock.Keys.Condition>, local: Set<Teriock.Keys.Condition>}}
  */
 const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
 
 /**
- * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
  * @mixes EtherealLightPlaceable
  * @inheritDoc
  * @property {Scene} scene
  * @property {TeriockActor|null} actor
  * @property {TeriockTokenDocument} document
  */
-export default class TeriockToken extends EtherealLightPlaceableMixin(Token) {
+export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceableMixin) {
   /** @inheritDoc */
   get isEthereal() {
     return this.document?.hasStatusEffect("ethereal");

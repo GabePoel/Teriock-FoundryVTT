@@ -2,7 +2,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import { CommonSheetMixin, InventoryManagementSheetMixin } from "../../mixins/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -27,8 +27,8 @@ export default class BaseActorSheet
     HackStatApplicationMixin,
     HandlebarsApplicationMixin,
     BaseDocumentSheetMixin,
-    mixins.CommonSheetMixin,
-    mixins.InventoryManagementSheetMixin,
+    CommonSheetMixin,
+    InventoryManagementSheetMixin,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
