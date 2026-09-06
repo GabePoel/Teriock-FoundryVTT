@@ -12,9 +12,7 @@ import { createElement } from "../../helpers/html.mjs";
  * @returns {MixinResult<T, AccessData>}
  */
 export default function AccessDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class AccessData extends Base {
     /**
      * Paths to forms to display in the editor.

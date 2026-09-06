@@ -12,9 +12,7 @@ import { toId } from "../../helpers/string.mjs";
  * @todo Make this into a data mixin and remove virtual affinities.
  */
 export default function PanelDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PanelData extends Base {
     /** @inheritDoc */
     static get documentMetadata() {

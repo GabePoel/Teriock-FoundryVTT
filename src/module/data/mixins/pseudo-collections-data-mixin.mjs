@@ -11,9 +11,7 @@ import { objectMap } from "../../helpers/utils.mjs";
  * @returns {MixinResult<T, PseudoCollectionsData>}
  */
 export default function PseudoCollectionsDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PseudoCollectionsData extends Base {
     _initialize(options) {
       super._initialize(options);

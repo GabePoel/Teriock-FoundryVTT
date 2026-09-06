@@ -6,9 +6,7 @@
  * @todo Migrate all uses of these to chilren/previewed.
  */
 export default function RetrievalDocumentMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class RetrievalDocument extends Base {
     /**
      * Child abilities.

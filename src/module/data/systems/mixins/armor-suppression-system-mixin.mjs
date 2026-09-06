@@ -9,9 +9,7 @@
  * @returns {MixinResult<T, ArmorSuppressionSystem>}
  */
 export default function ArmorSuppressionSystemMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class ArmorSuppressionSystem extends Base {
     /** @inheritDoc */
     _getTipSuppressions() {

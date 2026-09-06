@@ -28,9 +28,7 @@ function getChoiceLabel(config, value) {
  * @returns {MixinResult<T, AbstractData>}
  */
 export default function AbstractDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class AbstractData extends Base {
     /**
      * A field sorter for this data model.

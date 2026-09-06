@@ -6,9 +6,7 @@ import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
  * @returns {MixinResult<T, AbilityExecutionRolls>}
  */
 export default function AbilityExecutionRollsPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class AbilityExecutionRolls extends Base {
     /** @inheritDoc */
     get flavor() {

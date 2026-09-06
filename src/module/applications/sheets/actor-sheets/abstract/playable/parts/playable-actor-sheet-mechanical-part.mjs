@@ -15,9 +15,7 @@ import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
  * @returns {MixinResult<T, PlayableActorSheetMechanicalPart>}
  */
 export default function PlayableActorSheetMechanicalPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetMechanicalPart extends Base {
     /**
      * Pull from the Death Bag.

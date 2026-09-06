@@ -12,9 +12,7 @@ import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
  * @returns {MixinResult<T, SystemSettingsButtonSheet>}
  */
 export default function SystemSettingsButtonSheetMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class SystemSettingsButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {

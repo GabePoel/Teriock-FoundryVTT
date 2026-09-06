@@ -6,9 +6,7 @@ import affinityConfig from "../../../../../../constants/config/affinity-config.m
  * @returns {MixinResult<T, PlayableActorSheetAffinitiesPart>}
  */
 export default function PlayableActorSheetAffinitiesPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetAffinitiesPart extends Base {
     /**
      * Prepare affinity roll buttons context.

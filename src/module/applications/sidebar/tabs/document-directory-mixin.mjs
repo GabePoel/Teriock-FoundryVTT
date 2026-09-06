@@ -10,9 +10,7 @@ import { makeIcon } from "../../../helpers/icon.mjs";
  * @returns {MixinResult<T, TeriockDocumentDirectory>}
  */
 export default function DocumentDirectoryMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class TeriockDocumentDirectory extends Base {
     static _entryPartial = "teriock/sidebar/document-partial";
 

@@ -6,9 +6,7 @@ import { CostPayer } from "../../../../applications/dialogs/_module.mjs";
  * @returns {MixinResult<T, AbilityExecutionGetInput>}
  */
 export default function AbilityExecutionGetInputPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class AbilityExecutionGetInput extends Base {
     /** @inheritDoc */
     get _postAttackFormPaths() {

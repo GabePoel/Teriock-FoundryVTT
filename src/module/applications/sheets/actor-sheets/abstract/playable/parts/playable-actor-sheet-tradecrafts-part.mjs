@@ -8,9 +8,7 @@
  * @returns {MixinResult<T, PlayableActorSheetTradecraftsPart>}
  */
 export default function PlayableActorSheetTradecraftsPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetTradecraftsPart extends Base {
     /**
      * Rolls a tradecraft check with optional advantage/disadvantage.

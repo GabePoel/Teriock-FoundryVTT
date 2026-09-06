@@ -11,9 +11,7 @@ import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
  * @returns {MixinResult<T, PlayableActorSheetSidebarPart>}
  */
 export default function PlayableActorSheetSidebarPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetSidebarPart extends Base {
     /**
      * Reset attack penalty to zero.

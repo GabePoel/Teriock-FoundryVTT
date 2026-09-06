@@ -4,9 +4,7 @@
  * @returns {MixinResult<T, PlayableActorSheetDocumentCreationPart>}
  */
 export default function PlayableActorSheetDocumentCreationPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetDocumentCreationPart extends Base {
     /** @inheritDoc */
     async _prepareContext(options) {

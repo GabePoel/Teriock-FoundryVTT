@@ -6,9 +6,7 @@ import { TeriockDragDrop } from "../../../../../ux/_module.mjs";
  * @returns {MixinResult<T, PlayableActorSheetTabsPart>}
  */
 export default function PlayableActorSheetTabsPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetTabsPart extends Base {
     /** @type {string|null} */
     #tabBeforeDrag = null;

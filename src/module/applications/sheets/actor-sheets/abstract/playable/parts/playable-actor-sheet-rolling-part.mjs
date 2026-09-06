@@ -9,9 +9,7 @@
  * @todo Rename this
  */
 export default function PlayableActorSheetRollingPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetRollingPart extends Base {
     /**
      * Rolls an affinity.

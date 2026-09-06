@@ -12,9 +12,7 @@ import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
  * @returns {MixinResult<T, AbilityExecutionChat>}
  */
 export default function AbilityExecutionChatPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class AbilityExecutionChat extends Base {
     /** @type {Record<"normal"|"crit", Teriock.Panels.PanelAssociation[]>} */
     #associationMap;

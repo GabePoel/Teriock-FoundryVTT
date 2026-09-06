@@ -8,9 +8,7 @@
  * @returns {MixinResult<T, EtherealLightPlaceable>}
  */
 export default function EtherealLightPlaceableMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class EtherealLightPlaceable extends Base {
     /**
      * Whether this is considered Ethereal.

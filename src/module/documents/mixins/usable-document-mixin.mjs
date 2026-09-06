@@ -5,9 +5,7 @@
  * @returns {MixinResult<T, UsableDocument>}
  */
 export default function UsableDocumentMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class UsableDocument extends Base {
     /**
      * Does whatever the default roll/execution for this document is.

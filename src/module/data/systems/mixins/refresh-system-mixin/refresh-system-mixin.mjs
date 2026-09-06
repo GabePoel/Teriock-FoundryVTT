@@ -18,9 +18,7 @@ import { fromIdentifier } from "../../../../helpers/utils.mjs";
  * @returns {MixinResult<T, RefreshSystem>}
  */
 export default function RefreshSystemMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class RefreshSystem extends Base {
     /** @type {string[]} */
     static DEFAULT_PRESERVED_PROPERTIES = [

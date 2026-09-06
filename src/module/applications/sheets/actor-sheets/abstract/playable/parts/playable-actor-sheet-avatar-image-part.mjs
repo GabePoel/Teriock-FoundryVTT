@@ -8,9 +8,7 @@
  * @returns {MixinResult<T, PlayableActorSheetAvatarImagePart>}
  */
 export default function PlayableActorSheetAvatarImagePart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetAvatarImagePart extends Base {
     /**
      * Toggle which image is shown.

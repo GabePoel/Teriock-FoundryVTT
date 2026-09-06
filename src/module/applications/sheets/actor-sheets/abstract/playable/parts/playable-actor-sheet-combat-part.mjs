@@ -10,9 +10,7 @@ import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
  * @returns {MixinResult<T, PlayableActorSheetCombatPart>}
  */
 export default function PlayableActorSheetCombatPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetCombatPart extends Base {
     /**
      * Opens the primary attacker's sheet.

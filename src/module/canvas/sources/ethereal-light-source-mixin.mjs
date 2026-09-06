@@ -4,9 +4,7 @@
  * @returns {MixinResult<T, EtherealLightSource>}
  */
 export default function EtherealLightSourceMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class EtherealLightSource extends Base {
     /** @inheritDoc */
     get active() {

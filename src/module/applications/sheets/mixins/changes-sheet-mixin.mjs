@@ -9,9 +9,7 @@
  * @returns {MixinResult<T, ChangesSheet>}
  */
 export default function ChangesSheetMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class ChangesSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {

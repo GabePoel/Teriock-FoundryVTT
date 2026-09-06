@@ -5,9 +5,7 @@
  * @returns {MixinResult<T, WikiSystem>}
  */
 export default function WikiSystemMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class WikiSystem extends Base {
     /** @inheritDoc */
     static get metadata() {

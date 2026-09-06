@@ -10,9 +10,7 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
  * @returns {MixinResult<T, ConstructNodesPseudoDocument>}
  */
 export default function ConstructNodesPseudoDocumentMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class ConstructNodesPseudoDocument extends Base {
     /**
      * The root nodes.

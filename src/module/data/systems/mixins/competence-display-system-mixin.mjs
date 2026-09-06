@@ -5,9 +5,7 @@
  * @returns {MixinResult<T, CompetenceDisplaySystem>}
  */
 export default function CompetenceDisplaySystemMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class CompetenceDisplaySystem extends Base {
     /** @inheritDoc */
     get _embedIcons() {

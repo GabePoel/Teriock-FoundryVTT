@@ -11,9 +11,7 @@ const SCOPE_MAP = { ActiveEffect: "effect", Actor: "actor", Automation: "automat
  * @returns {MixinResult<T, PropagationData>}
  */
 export default function PropagationDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PropagationData extends Base {
     /**
      * Stuff that happens when a trigger event is fired.

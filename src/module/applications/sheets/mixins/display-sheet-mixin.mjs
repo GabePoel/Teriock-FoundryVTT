@@ -17,9 +17,7 @@ const { ImagePopout } = foundry.applications.apps;
  * @returns {MixinResult<T, DisplaySheet>}
  */
 export default function DisplaySheetMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class DisplaySheet extends Base {
     /**
      * Open the image for this document.

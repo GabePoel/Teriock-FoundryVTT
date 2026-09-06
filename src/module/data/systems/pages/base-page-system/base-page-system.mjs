@@ -1,7 +1,12 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
-import { BaseSystemMixin, InstructionsSystemMixin, RulesSystemMixin } from "../../mixins/_module.mjs";
+import {
+  BaseSystemMixin,
+  InstructionsSystemMixin,
+  RulesSystemMixin,
+  UncommonSystemMixin,
+} from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -9,11 +14,12 @@ const { TypeDataModel } = foundry.abstract;
 /**
  * Base page data model.
  * @mixes BaseSystem
+ * @mixes UncommonSystem
  * @mixes RulesSystem
  * @mixes InstructionsSystem
  */
 export default class BasePageSystem
-  extends mixClasses(TypeDataModel, BaseSystemMixin, RulesSystemMixin, InstructionsSystemMixin)
+  extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin, RulesSystemMixin, InstructionsSystemMixin)
 {
   /** @inheritDoc */
   static get metadata() {
@@ -39,11 +45,6 @@ export default class BasePageSystem
       choices: this.parent ? Object.fromEntries(this.parent.parent?.categories.contents.map(c => [c.id, c.name])) : {},
       path: "category",
     }];
-  }
-
-  /** @inheritDoc */
-  get actor() {
-    return game.actors.default;
   }
 
   /** @inheritDoc */

@@ -10,9 +10,7 @@ const { fields } = foundry.data;
  * @returns {MixinResult<T, UsableData>}
  */
 export default function UsableDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class UsableData extends Base {
     /**
      * The type of execution this uses.

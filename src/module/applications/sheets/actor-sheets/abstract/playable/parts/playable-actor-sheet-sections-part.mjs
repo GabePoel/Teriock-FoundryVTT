@@ -26,9 +26,7 @@ const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
  * @property {TeriockActor} document
  */
 export default function PlayableActorSheetSectionsPart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class PlayableActorSheetSectionsPart extends Base {
     /**
      * @this {PlayableActorSheetSectionsPart}

@@ -20,4 +20,5 @@ export { default as RevelationSystemMixin } from "./revelation-system-mixin/reve
 export { default as RulesSystemMixin } from "./rules-system-mixin/rules-system-mixin.mjs";
 export { default as StatGiverSystemMixin } from "./stat-giver-system-mixin/stat-giver-system-mixin.mjs";
 export { default as TransformationSystemMixin } from "./transformation-system-mixin/transformation-system-mixin.mjs";
+export { default as UncommonSystemMixin } from "./uncommon-system-mixin.mjs";
 export { default as WikiSystemMixin } from "./wiki-system-mixin.mjs";

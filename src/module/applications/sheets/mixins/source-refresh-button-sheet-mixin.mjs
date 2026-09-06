@@ -12,9 +12,7 @@ import { SourceRefresher } from "../../dialogs/_module.mjs";
  * @returns {MixinResult<T, SourceRefreshButtonSheet>}
  */
 export default function SourceRefreshButtonSheetMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class SourceRefreshButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {

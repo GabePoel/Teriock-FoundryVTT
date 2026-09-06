@@ -7,9 +7,7 @@ import statConfig from "../../../../constants/config/stat-config.mjs";
  * @returns {MixinResult<T, AbilityExecutionActorUpdate>}
  */
 export default function AbilityExecutionActorUpdatePart(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class AbilityExecutionActorUpdate extends Base {
     /**
      * Costs that are being paid.

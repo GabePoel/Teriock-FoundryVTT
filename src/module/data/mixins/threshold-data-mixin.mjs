@@ -6,9 +6,7 @@ import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
  * @returns {MixinResult<T, ThresholdData>}
  */
 export default function ThresholdDataMixin(Base) {
-  /**
-   * @mixin
-   */
+  /** @mixin */
   class ThresholdData extends Base {
     /** @inheritDoc */
     static parseEvent(event, source) {
