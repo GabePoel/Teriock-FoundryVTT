@@ -103,7 +103,7 @@ export default class OverrideAutomation
         "targetsArmament",
       ]
     ) {
-      if (typeof this[k] === "boolean") { execution[k] = this[k]; }
+      if (typeof this[k] === "boolean") { execution.updateSource({ [k]: this[k] }); }
     }
   }
 

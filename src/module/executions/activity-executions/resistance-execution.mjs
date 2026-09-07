@@ -21,7 +21,10 @@ export default class ResistanceExecution extends mixClasses(AffinityExecution, T
     this.threshold ??= TERIOCK.config.system.resistanceThreshold;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<false|void>}
+   */
   async _buildActivations() {
     if (await super._buildActivations() === false) { return false; }
 

@@ -206,7 +206,10 @@ export default function AttackExecutionMixin(Base) {
       return this.isAttack;
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _buildRolls() {
       if (!this.isAttack) { return super._buildRolls(); }
       const styles = { dice: { classes: ["attack"] }, total: { classes: ["attack"] } };
@@ -236,7 +239,10 @@ export default function AttackExecutionMixin(Base) {
       }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _buildTags() {
       await super._buildTags();
       if (this.isAttack) {
@@ -294,7 +300,10 @@ export default function AttackExecutionMixin(Base) {
       for (const target of game.user.targets) { this.targets.add(target); }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _improveFormula() {
       if (this.isAttack) {
         if (this.piercing.av0) { this.updateSource({ formula: addFormula(this.formula, "@av0") }); }
@@ -303,7 +312,10 @@ export default function AttackExecutionMixin(Base) {
       await super._improveFormula();
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _postInput() {
       const out = await super._postInput();
       await this._getTargets();
@@ -351,7 +363,10 @@ export default function AttackExecutionMixin(Base) {
       if (this.isAttack) { this.updateSource({ formula: addFormula(this.formula, "@ap") }); }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _prepareUpdates() {
       await this._prepareAttackPenalty();
       this._prepareAmmunitionConsumption();

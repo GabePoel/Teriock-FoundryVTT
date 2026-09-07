@@ -139,25 +139,37 @@ export default function ImpactsExecutionMixin(Base) {
       if (setBoostNumber !== 0) { this.updateSource({ formula: `sb(${this.formula}, ${setBoostNumber})` }); }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _buildActivations() {
       for (const roll of this._typedRolls) { this.activations.push(...(await roll.getActivations())); }
       if (await super._buildActivations() === false) { return false; }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _buildPanels() {
       await super._buildPanels();
       for (const roll of this._typedRolls) { this.panels.push(...(await roll.getPanels())); }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _buildTags() {
       await super._buildTags();
       if (this.crit) { this.tags.push(_loc("TERIOCK.DIALOGS.Boost.TAGS.crit")); }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {Promise<false|void>}
+     */
     async _prepareFormula() {
       await super._prepareFormula();
       this._applyImpactModifiers();

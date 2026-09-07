@@ -374,9 +374,9 @@ export default function BaseDocumentMixin(Base) {
           const [embeddedName, embeddedId] = parts.splice(0, 2);
           doc = doc.getEmbeddedDocument(embeddedName, embeddedId, { invalid });
         }
-        return doc ?? fromUuidSync(uuid);
+        return doc ?? uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
       }
-      return fromUuidSync(uuid);
+      return uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
     }
 
     /** @inheritDoc */

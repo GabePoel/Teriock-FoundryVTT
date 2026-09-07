@@ -34,7 +34,14 @@ export default class BaseExecution extends BaseDataModel {
 
   /** @inheritDoc */
   static defineSchema() {
-    return { competence: new fields.EmbeddedDataField(CompetenceModel), formula: rollableFormulaField() };
+    return {
+      competence: new fields.EmbeddedDataField(CompetenceModel),
+      formula: rollableFormulaField(),
+      makeCritEffect: new fields.BooleanField(),
+      makeEffect: new fields.BooleanField(),
+      targetsActor: new fields.BooleanField(),
+      targetsArmament: new fields.BooleanField(),
+    };
   }
 
   /**
@@ -92,12 +99,6 @@ export default class BaseExecution extends BaseDataModel {
   /** @type {ExecutionPseudoCollection<Automation>} */
   automations;
 
-  /** @type {boolean} */
-  makeCritEffect = false;
-
-  /** @type {boolean} */
-  makeEffect = false;
-
   /** @type {TeriockChatMessage|undefined} */
   message;
 
@@ -112,12 +113,6 @@ export default class BaseExecution extends BaseDataModel {
 
   /** @type {string[]} */
   tags = [];
-
-  /** @type {boolean} */
-  targetsActor = false;
-
-  /** @type {boolean} */
-  targetsArmament = false;
 
   /**
    * Buttons displayed in this execution's input dialog.

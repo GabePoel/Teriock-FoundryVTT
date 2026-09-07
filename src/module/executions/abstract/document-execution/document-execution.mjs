@@ -69,7 +69,10 @@ export default class DocumentExecution extends BaseExecution {
     return this.source.system.fullName ?? this.source.name;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<false|void>}
+   */
   async _buildActivations() {
     if (await super._buildActivations() === false) { return false; }
 
@@ -98,7 +101,10 @@ export default class DocumentExecution extends BaseExecution {
     }
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<false|void>}
+   */
   async _buildPanels() {
     this.panels.length = 0;
     const panel = await this._buildSourcePanel();
@@ -113,7 +119,10 @@ export default class DocumentExecution extends BaseExecution {
     return this.source.getPanelParts?.() ?? false;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<false|void>}
+   */
   async _buildTags() {
     await super._buildTags();
     this._buildBoostTags();
@@ -139,7 +148,10 @@ export default class DocumentExecution extends BaseExecution {
     return this._boostsResolved[impact] && this.activations.some(a => a.type === "roll" && a.impact === impact);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<false|void>}
+   */
   async _prepareUpdates() {
     const yes = await super._prepareUpdates();
     if (yes === false) { return false; }
