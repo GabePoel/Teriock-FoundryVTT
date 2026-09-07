@@ -3,11 +3,10 @@ import BaseExecution from "../abstract/base-execution/base-execution.mjs";
 import { ImpactsExecutionMixin } from "../mixins/_module.mjs";
 
 /**
- * Execution that rolls one or more impacts (damage, drain, healing, etc.) and offers boost/deboost/critical modifiers.
- * This replaces the standalone `boostDialog` usage in the impact chat commands.
+ * Execution that rolls one or more impacts.
  * @mixes ImpactsExecution
  */
-export default class ImpactsExecution extends mixClasses(BaseExecution, ImpactsExecutionMixin) {
+export default class DealImpactExecution extends mixClasses(BaseExecution, ImpactsExecutionMixin) {
   /**
    * @param {object} [data]
    * @param {Teriock.Execution.ImpactsExecutionOptions} [options]

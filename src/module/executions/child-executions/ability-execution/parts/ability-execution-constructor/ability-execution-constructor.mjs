@@ -3,7 +3,6 @@ import { ExecutionPseudoCollection } from "../../../../../data/pseudo-documents/
 import { BaseExpiration } from "../../../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../../../helpers/construction.mjs";
-import { addFormula, formulaExists } from "../../../../../helpers/formula.mjs";
 import { objectMap, omit } from "../../../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../../../mixins/_module.mjs";
@@ -40,10 +39,6 @@ export default class AbilityExecutionConstructor extends mixClasses(DocumentExec
   constructor(data = {}, options = {}) {
     data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
     super(data, options);
-    const bonusAutomation = this.automations.getTypeSync("override", { active: true }).find(a =>
-      formulaExists(a.rollBonus)
-    );
-    if (bonusAutomation) { this.updateSource({ bonus: addFormula(this.bonus, bonusAutomation.rollBonus) }); }
     this.rootBonus = this.bonus;
     this.initializeExecution(options);
     this.affinities = new ExecutionPseudoCollection("affinities", this, this.source.system.affinities.values(), {
@@ -52,6 +47,13 @@ export default class AbilityExecutionConstructor extends mixClasses(DocumentExec
     this.expirations = new ExecutionPseudoCollection("expirations", this, this.source.system.expirations.values(), {
       documentClass: BaseExpiration,
     });
+    if (this.source.system.targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor)) {
+      this.targetsActor = true;
+    }
+    if (this.source.system.targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament)) {
+      this.targetsArmament = true;
+    }
+    this.makeEffect = this.source.system.duration.unit !== "instant" && this.source.system.maneuver !== "passive";
   }
 
   /** @type {Record<Teriock.Keys.PrimaryCost, number>} */
@@ -59,6 +61,18 @@ export default class AbilityExecutionConstructor extends mixClasses(DocumentExec
 
   /** @type {number} */
   heightened;
+
+  /** @type {boolean} */
+  preventAttack = false;
+
+  /** @type {boolean} */
+  preventBlockCone = false;
+
+  /** @type {boolean} */
+  preventFeat = false;
+
+  /** @type {boolean} */
+  preventThreshold = false;
 
   /** @inheritDoc */
   get _armamentWardedApplies() {
@@ -171,22 +185,6 @@ export default class AbilityExecutionConstructor extends mixClasses(DocumentExec
   }
 
   /**
-   * Whether this targets an actor.
-   * @returns {boolean}
-   */
-  get targetsActor() {
-    return this.source.system.targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor);
-  }
-
-  /**
-   * Whether this targets an armament.
-   * @returns {boolean}
-   */
-  get targetsArmament() {
-    return this.source.system.targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament);
-  }
-
-  /**
    * Logic to pick armament based on interaction type.
    * @inheritDoc
    */
@@ -214,6 +212,12 @@ export default class AbilityExecutionConstructor extends mixClasses(DocumentExec
    */
   _heightenString(formula) {
     return BaseRoll.replaceFormulaData(formula, { h: this.heightened });
+  }
+
+  /** @inheritDoc */
+  async _postInput() {
+    this.makeCritEffect = this.shouldMakeCritEffect;
+    return super._postInput();
   }
 
   /**

@@ -2,6 +2,7 @@ import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
 import { BaseDataModel } from "../../../data/abstract/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
+import { AddDocumentsActivation } from "../../../data/pseudo-documents/activations/_module.mjs";
 import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
@@ -91,6 +92,12 @@ export default class BaseExecution extends BaseDataModel {
   /** @type {ExecutionPseudoCollection<Automation>} */
   automations;
 
+  /** @type {boolean} */
+  makeCritEffect = false;
+
+  /** @type {boolean} */
+  makeEffect = false;
+
   /** @type {TeriockChatMessage|undefined} */
   message;
 
@@ -105,6 +112,12 @@ export default class BaseExecution extends BaseDataModel {
 
   /** @type {string[]} */
   tags = [];
+
+  /** @type {boolean} */
+  targetsActor = false;
+
+  /** @type {boolean} */
+  targetsArmament = false;
 
   /**
    * Buttons displayed in this execution's input dialog.
@@ -133,6 +146,14 @@ export default class BaseExecution extends BaseDataModel {
       });
     }
     return docs;
+  }
+
+  /**
+   * Active automations in priority order.
+   * @returns {Automation[]}
+   */
+  get _orderedAutomations() {
+    return this.automations.active.sort((a, b) => a._executionPriority - b._executionPriority);
   }
 
   /**
@@ -260,10 +281,83 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
+   * Copy construction nodes contributed by automations, hanging their roots off a generated effect's node.
+   * @param {object[]} nodes
+   * @param {ID<ConstructionNode>} parentId
+   * @returns {object[]}
+   */
+  _attachEffectNodes(nodes, parentId) {
+    const ids = new Map(nodes.map(n => [n._id, foundry.utils.randomID()]));
+    return nodes.map(n =>
+      Object.assign(foundry.utils.deepClone(n), { _id: ids.get(n._id), parentId: ids.get(n.parentId) ?? parentId })
+    );
+  }
+
+  /**
    * Build activations to attach to this execution's chat message.
    * @returns {Promise<false|void>}
    */
-  async _buildActivations() {}
+  async _buildActivations() {
+    if ((this.targetsActor || this.targetsArmament) && this.makeEffect) {
+      await this._buildEffectActivations();
+    }
+  }
+
+  /**
+   * Build the effect activations to attach to this execution's chat message.
+   * @returns {Promise<void>}
+   */
+  async _buildEffectActivations() {
+    await this._callAutomations(a => a.interactOnExecutionEffectData(this));
+    const variants = [{
+      crit: 0,
+      data: await this._getNormalEffectData(),
+      name: _loc("TERIOCK.EXECUTIONS.Base.DATA.normal"),
+      nodes: [],
+    }];
+    if (this.makeCritEffect) {
+      variants.push({
+        crit: 1,
+        data: await this._getCriticalEffectData(),
+        name: _loc("TERIOCK.EXECUTIONS.Base.DATA.crit"),
+        nodes: [],
+      });
+    }
+    for (const v of variants) {
+      for (const automation of this._orderedAutomations.filter(a => a.crit?.has(v.crit) ?? true)) {
+        await automation.modifyExecutionEffectData(this, v.data);
+        await automation.modifyExecutionEffectNodes(this, v.nodes);
+      }
+    }
+    const makeNodes = type =>
+      variants.flatMap(v => {
+        const data = foundry.utils.mergeObject(v.data, this._getEffectTypeData(type), { inplace: false });
+        const rootNode = {
+          _id: foundry.utils.randomID(),
+          competence: { raw: foundry.utils.getProperty(data, "system.competence.raw") ?? 0 },
+          data: JSON.stringify(data),
+          name: v.name,
+          overrideData: true,
+          parentId: null,
+          setCompetence: "override",
+        };
+        return [rootNode, ...this._attachEffectNodes(v.nodes, rootNode._id)];
+      });
+    const addActivation = async (target, type, label) => {
+      const activation = new AddDocumentsActivation({
+        all: false,
+        auto: true,
+        constructionNodes: AddDocumentsActivation.toCollectionObject(makeNodes(type), { keepId: true }),
+        display: { label },
+        multi: false,
+        target,
+      });
+      await this._callAutomations(a => a.modifyExecutionEffectActivation(this, activation));
+      this.activations.push(activation);
+    };
+    if (this.targetsActor) { await addActivation("actor", "consequence", "TERIOCK.COMMANDS.ApplyEffect.label"); }
+    if (this.targetsArmament) { await addActivation("armament", "imbuement", "TERIOCK.COMMANDS.ApplyEffect.armament"); }
+  }
 
   /**
    * Build panels displayed in this execution's chat message.
@@ -287,6 +381,17 @@ export default class BaseExecution extends BaseDataModel {
    */
   async _buildTags() {
     if (this.competence.proficient) { this.tags.push(this.competence.label); }
+  }
+
+  /**
+   * Call a function on all the automations.
+   * @param {(Automation) => Promise<false|void>} fn
+   * @returns {Promise<boolean|void>}
+   */
+  async _callAutomations(fn) {
+    const calls = [];
+    for (const automation of this._orderedAutomations) { calls.push(await fn(automation)); }
+    if (calls.includes(false)) { return false; }
   }
 
   /**
@@ -333,6 +438,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _fetchData() {
+    if (await this._callAutomations(a => a.modifyExecutionConstruction(this)) === false) { return false; }
     this.#journalEntryPage = await teriock.fromIdentifier(this.journalEntryPageIdentifier);
   }
 
@@ -360,11 +466,36 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
+   * Get the initial data for critical effects generated by this execution.
+   * @returns {Promise<object>}
+   */
+  async _getCriticalEffectData() {
+    return {};
+  }
+
+  /**
+   * Get the data that depends on the type of effect generated by this execution.
+   * @param {"consequence"|"imbuement"} type
+   * @returns {object}
+   */
+  _getEffectTypeData(type) {
+    return { type };
+  }
+
+  /**
    * Get any user input that is relevant for staging this execution.
    * @returns {Promise<false|void>}
    */
   async _getInput() {
     if (this.showDialog && (await this._showInputDialog()) === false) { return false; }
+  }
+
+  /**
+   * Get the initial data for normal effects generated by this execution.
+   * @returns {Promise<object>}
+   */
+  async _getNormalEffectData() {
+    return {};
   }
 
   /**
@@ -390,6 +521,8 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _postExecute() {
+    if (await this._callAutomations(a => a.interactOnExecutionCompletion(this)) === false) { return false; }
+
     this._fireAutomationsTrigger("execute");
     this.executionNames.map(n => this.fireTrigger(`execute${n}`));
   }
@@ -399,6 +532,9 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _postInput() {
+    if (await this._callAutomations(a => a.interactOnExecutionInput(this)) === false) { return false; }
+    if (await this._callAutomations(a => a.modifyExecution(this)) === false) { return false; }
+
     await this._fireAutomationsTrigger("executeInput", { awaitFire: true });
     const results = await Promise.all(
       this.executionNames.map(n => this.fireTrigger(`executeInput${n}`, { awaitFire: true })),

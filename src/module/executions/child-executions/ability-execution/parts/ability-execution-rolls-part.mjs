@@ -18,22 +18,19 @@ export default function AbilityExecutionRollsPart(Base) {
 
     /** @inheritDoc */
     async _buildRolls() {
-      const overrideAutomation = this.automations.getTypeSync("override", { active: true });
       if (this.isAttack) {
-        if (overrideAutomation?.preventAttack) { return; }
+        if (this.preventAttack) { return; }
         return super._buildRolls();
       }
-      const preventThreshold = Boolean(overrideAutomation?.preventThreshold);
       const styles = {
         dice: { classes: [this.source.system.interaction] },
         total: { classes: [this.source.system.interaction] },
       };
-      if (this.isFeat && !preventThreshold) {
+      if (this.isFeat && !this.preventThreshold) {
         styles.total.icon = TERIOCK.display.icons.manifest.interaction.feat;
         this.rolls.push(
           new BaseRoll(this.formula, this.getRollData(), {
             flavor: this.flavor,
-            hideRoll: preventThreshold,
             styles,
             targets: Array.from(this.targets),
           }),

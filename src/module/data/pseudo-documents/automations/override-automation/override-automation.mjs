@@ -1,4 +1,5 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import {
   CritMechanicMixin,
@@ -53,6 +54,11 @@ export default class OverrideAutomation
   }
 
   /** @inheritDoc */
+  get _executionPriority() {
+    return 1;
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
     return [
       "display.label",
@@ -81,5 +87,45 @@ export default class OverrideAutomation
     if (this.document.system.delivery === "cone") { paths.push("preventBlockCone"); }
     if (paths.length) { paths.push("hr"); }
     return paths;
+  }
+
+  /** @inheritDoc */
+  async modifyExecution(execution) {
+    for (
+      const k of [
+        "makeCritEffect",
+        "makeEffect",
+        "preventAttack",
+        "preventBlockCone",
+        "preventFeat",
+        "preventThreshold",
+        "targetsActor",
+        "targetsArmament",
+      ]
+    ) {
+      if (typeof this[k] === "boolean") { execution[k] = this[k]; }
+    }
+  }
+
+  /** @inheritDoc */
+  async modifyExecutionConstruction(execution) {
+    if (!formulaExists(this.rollBonus)) { return; }
+    execution.updateSource({ bonus: addFormula(execution.bonus, this.rollBonus) });
+    if (typeof execution.rootBonus === "string") {
+      execution.rootBonus = addFormula(execution.rootBonus, this.rollBonus);
+    }
+  }
+
+  /** @inheritDoc */
+  async modifyExecutionEffectActivation(_execution, activation) {
+    if (this.display.label) { activation.updateSource({ "display.label": this.display.label }); }
+  }
+
+  /** @inheritDoc */
+  async modifyExecutionEffectData(execution, data) {
+    await super.modifyExecutionEffectData(execution, data);
+    const competence = this.getCompetence({ execution });
+    if (typeof competence === "number") { foundry.utils.setProperty(data, "system.competence.raw", competence); }
+    if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
   }
 }

@@ -122,6 +122,9 @@ export default class AddDocumentsAutomation
     return super.migrateData(source, options);
   }
 
+  /** @type {object[]} */
+  #effectNodes = [];
+
   /** @inheritDoc */
   get _formPaths() {
     const paths = [];
@@ -176,6 +179,27 @@ export default class AddDocumentsAutomation
     const listItemElements = container.querySelectorAll(".construction-node-list-item");
     childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));
     return container;
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionEffectData(execution) {
+    this.#effectNodes = [];
+    if (!this.attachToEffect) { return; }
+    const scope = { actor: execution.actor, execution };
+    const roots = await this.getNodes(scope);
+    const rootIds = new Set(roots.map(n => n._id));
+    let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
+    if (this.selectInExecution) { nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(scope))); }
+    this.#effectNodes = nodes.map(n => {
+      const data = n.toObject();
+      if (rootIds.has(data._id)) { data.parentId = null; }
+      return data;
+    });
+  }
+
+  /** @inheritDoc */
+  async modifyExecutionEffectNodes(_execution, nodes) {
+    nodes.push(...this.#effectNodes);
   }
 
   /** @inheritDoc */

@@ -35,6 +35,7 @@ import {
   TransformationAutomation,
   UseDocumentsAutomation,
 } from "./_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 declare global {
   export interface AutomationTypeMap {
@@ -76,7 +77,7 @@ declare global {
   }
 
   export type AutomationType = TypeMapKey<AutomationTypeMap>;
-  export type Automation<T extends AutomationType = AutomationType> = AutomationTypeMap[T];
+  export type Automation<T extends AutomationType = AutomationType> = AutomationTypeMap[T] & BaseAutomation;
 }
 
 export {};

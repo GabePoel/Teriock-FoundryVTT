@@ -71,6 +71,8 @@ export default class DocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   async _buildActivations() {
+    if (await super._buildActivations() === false) { return false; }
+
     const activationLists = await Promise.all(
       this.automations.active.map(a => a.getActivations({ execution: this, rollData: this.getRollData() })),
     );

@@ -142,7 +142,7 @@ export default function ImpactsExecutionMixin(Base) {
     /** @inheritDoc */
     async _buildActivations() {
       for (const roll of this._typedRolls) { this.activations.push(...(await roll.getActivations())); }
-      await super._buildActivations();
+      if (await super._buildActivations() === false) { return false; }
     }
 
     /** @inheritDoc */

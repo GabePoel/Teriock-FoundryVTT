@@ -51,6 +51,12 @@ export default class TransformationAutomation
     return super.migrateData(source, options);
   }
 
+  /**
+   * Documents selected while generating effect data.
+   * @type {UUID<TeriockItem>[]}
+   */
+  #selectedUuids = [];
+
   /** @inheritDoc */
   get _formPaths() {
     const paths = [
@@ -77,5 +83,31 @@ export default class TransformationAutomation
       species.push(...a.previewedTypes.species);
     }
     return species;
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionEffectData(execution) {
+    this.#selectedUuids = (await this.selectDocuments({ relativeTo: execution.actor })).map(d => d.uuid);
+  }
+
+  /** @inheritDoc */
+  async modifyExecutionEffectData(execution, data) {
+    await super.modifyExecutionEffectData(execution, data);
+    const transformation = foundry.utils.getProperty(data, "system.transformation") ?? {};
+    if (!transformation.enabled) {
+      Object.assign(transformation, {
+        competence: { raw: this.getCompetence({ execution }) },
+        enabled: true,
+        img: this.img,
+        level: this.level,
+        override: Array.from(this.override),
+        resets: Array.from(this.resets),
+        ring: this.ring,
+        ringImg: this.ringImg,
+        suppress: Array.from(this.suppress),
+      });
+    }
+    transformation.uuids = [...(transformation.uuids ?? []), ...this.#selectedUuids];
+    foundry.utils.setProperty(data, "system.transformation", transformation);
   }
 }

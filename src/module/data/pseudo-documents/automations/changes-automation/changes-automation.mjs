@@ -22,6 +22,15 @@ export default class ChangesAutomation extends mixClasses(BaseAutomation, CritMe
   }
 
   /** @inheritDoc */
+  _getEffectAutomationData(execution) {
+    const data = super._getEffectAutomationData(execution);
+    data.changes.forEach(c => {
+      c.value = execution._heightenString?.(c.value) ?? c.value;
+    });
+    return data;
+  }
+
+  /** @inheritDoc */
   getChanges() {
     return this.changes.map(c => ({
       ...c,

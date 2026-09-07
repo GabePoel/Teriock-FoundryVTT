@@ -1,6 +1,6 @@
 import impactConfig from "../../../constants/config/impact-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { ImpactsExecution } from "../../../executions/activity-executions/_module.mjs";
+import { DealImpactExecution } from "../../../executions/activity-executions/_module.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -20,7 +20,7 @@ async function abstractImpactCommandOperation(actor, options) {
     return;
   }
   const netBoosts = options.boosts ?? 0;
-  await ImpactsExecution.create({
+  await DealImpactExecution.create({
     boosts: Math.max(netBoosts, 0),
     crit: options.crit,
     deboosts: Math.max(-netBoosts, 0),
