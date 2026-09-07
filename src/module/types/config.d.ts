@@ -76,7 +76,9 @@ declare global {
       aliases?: string[];
       deal: string;
       icon: string;
+      integer?: boolean;
       label: string;
+      min?: number;
       morganti?: boolean;
       nullable?: boolean;
       take: string;

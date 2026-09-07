@@ -28,6 +28,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async #takeHarm(amount, stat, options = {}) {
+      if (amount < 0) { amount = 0 }
       const sp = this[stat];
       const temp = Math.max(0, sp.temp - amount);
       amount = Math.max(0, amount - sp.temp);
@@ -50,9 +51,9 @@ export default function ActorImpactsPart(Base) {
       const initialAmount = options.amount ?? (entry.nullable ? null : 0);
       const amountField = new fields.NumberField({
         initial: initialAmount,
-        integer: true,
+        integer: entry.integer,
         label: _loc("TERIOCK.AUTOMATIONS.Take.FIELDS.amount.label"),
-        min: 0,
+        min: entry.min,
         nullable: Boolean(entry.nullable),
         placeholder: entry.nullable ? "" : "0",
       });
@@ -154,6 +155,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeHealing(amount) {
+      if (amount < 0) { amount = 0 }
       await this.parent.hookCall("healing", { scope: { amount } });
       await this.parent.update({ "system.hp.value": barClamp(this.hp, amount) });
     }
@@ -202,6 +204,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeRevitalizing(amount) {
+      if (amount < 0) { amount = 0 }
       await this.parent.hookCall("revitalizing", { scope: { amount } });
       await this.parent.update({ "system.mp.value": barClamp(this.mp, amount) });
     }
