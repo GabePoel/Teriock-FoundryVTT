@@ -7,9 +7,6 @@ import { BaseExpiration } from "./abstract/_module.mjs";
  */
 export default class TriggerExpiration extends mixClasses(BaseExpiration, TriggerMechanicMixin) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Trigger"];
-
-  /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "trigger" });
   }

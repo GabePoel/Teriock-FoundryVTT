@@ -14,9 +14,6 @@ export default function TriggerAutomationMixin(Base) {
    */
   class TriggerAutomation extends mixClasses(Base, TriggerMechanicMixin) {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Trigger"];
-
-    /** @inheritDoc */
     static get metadata() {
       return foundry.utils.mergeObject(super.metadata, { tags: { triggered: true } });
     }
