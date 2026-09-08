@@ -4,7 +4,7 @@ import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
-import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { MacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { CompetenceDisplaySystemMixin, RevelationSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
@@ -33,7 +33,7 @@ export default class FluencySystem
 
   /** @inheritDoc */
   static get _automationTypes() {
-    return [CommonMacroAutomation];
+    return [MacroAutomation];
   }
 
   /** @inheritDoc */

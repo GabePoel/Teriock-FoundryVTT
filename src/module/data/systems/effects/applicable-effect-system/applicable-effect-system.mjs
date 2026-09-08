@@ -33,7 +33,7 @@ export default class ApplicableEffectSystem
   static get _automationTypes() {
     return [
       ...super._automationTypes,
-      automations.AbilityMacroAutomation,
+      automations.MacroAutomation,
       automations.AddDocumentsAutomation,
       automations.AttackAutomation,
       automations.AttunementAutomation,

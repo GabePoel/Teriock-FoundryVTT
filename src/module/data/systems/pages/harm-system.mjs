@@ -19,7 +19,7 @@ export default class HarmSystem
       automations.AttackAutomation,
       automations.AttunementAutomation,
       automations.ChangeMovementAutomation,
-      automations.ChatMacroAutomation,
+      automations.MacroAutomation,
       automations.StatusAutomation,
       automations.CommonOutcomesAutomation,
       automations.CoverAutomation,

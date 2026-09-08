@@ -1,5 +1,4 @@
 import {
-  AbilityMacroAutomation,
   AddDocumentsAutomation,
   AttackAutomation,
   AttunementAutomation,
@@ -7,9 +6,7 @@ import {
   ChangeMovementAutomation,
   ChangeQuantityAutomation,
   ChangesAutomation,
-  ChatMacroAutomation,
   ChildChangeAutomation,
-  CommonMacroAutomation,
   CommonOutcomesAutomation,
   CoverAutomation,
   DurationAutomation,
@@ -17,8 +14,8 @@ import {
   HacksAutomation,
   HealAutomation,
   LightAutomation,
+  MacroAutomation,
   OverrideAutomation,
-  PropertyMacroAutomation,
   RegionAutomation,
   RepositionAutomation,
   ResistAutomation,
@@ -38,7 +35,6 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 
 declare global {
   export interface AutomationTypeMap {
-    abilityMacro: AbilityMacroAutomation;
     addDocuments: AddDocumentsAutomation;
     attack: AttackAutomation;
     attunement: AttunementAutomation;
@@ -46,19 +42,17 @@ declare global {
     changeMovement: ChangeMovementAutomation;
     changeQuantity: ChangeQuantityAutomation;
     changes: ChangesAutomation;
-    chatMacro: ChatMacroAutomation;
     childChange: ChildChangeAutomation;
     common: CommonOutcomesAutomation;
-    commonMacro: CommonMacroAutomation;
     cover: CoverAutomation;
     duration: DurationAutomation;
     feat: FeatAutomation;
     hacks: HacksAutomation;
     heal: HealAutomation;
     light: LightAutomation;
+    macro: MacroAutomation;
     move: RepositionAutomation;
     override: OverrideAutomation;
-    propertyMacro: PropertyMacroAutomation;
     region: RegionAutomation;
     resist: ResistAutomation;
     revitalize: RevitalizeAutomation;

@@ -51,7 +51,7 @@ export default class PropertySystem
       automations.CoverAutomation,
       automations.HacksAutomation,
       automations.LightAutomation,
-      automations.PropertyMacroAutomation,
+      automations.MacroAutomation,
       automations.RollAutomation,
       automations.StatusAutomation,
       automations.TakeAutomation,

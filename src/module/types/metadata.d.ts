@@ -26,6 +26,7 @@ declare global {
       revealable: boolean;
       statGiver: boolean;
       text: boolean;
+      triggerable: boolean;
       untrackable: boolean;
       usable: boolean;
       wiki: boolean;

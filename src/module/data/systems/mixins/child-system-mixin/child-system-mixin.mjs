@@ -52,7 +52,11 @@ export default function ChildSystemMixin(Base) {
      * @returns {Teriock.Metadata.ChildSystemMetadata}
      */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { initialKind: "normal", kinds: systemConfig.defaultKinds });
+      return foundry.utils.mergeObject(super.metadata, {
+        initialKind: "normal",
+        kinds: systemConfig.defaultKinds,
+        tags: { triggerable: true },
+      });
     }
 
     /** @inheritDoc */

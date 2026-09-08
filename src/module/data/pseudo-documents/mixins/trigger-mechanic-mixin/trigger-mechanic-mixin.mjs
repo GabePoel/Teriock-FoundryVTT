@@ -68,9 +68,18 @@ export default function TriggerMechanicMixin(Base) {
      * @returns {string[]}
      */
     get _triggerPaths() {
+      if (!this.canHaveTriggers) { return []; }
       const paths = ["triggers"];
       if (this.triggers.size) { paths.push("triggerQualifier"); }
       return paths;
+    }
+
+    /**
+     * Whether this can have triggers.
+     * @returns {boolean}
+     */
+    get canHaveTriggers() {
+      return Boolean(this.document?.metadata?.tags?.triggerable);
     }
 
     /** @inheritDoc */
@@ -86,6 +95,7 @@ export default function TriggerMechanicMixin(Base) {
       for (const trigger of [...this.triggers]) {
         if (!(trigger in offered)) { this.triggers.delete(trigger); }
       }
+      if (!this.canHaveTriggers) { this.triggers.clear(); }
     }
 
     /**

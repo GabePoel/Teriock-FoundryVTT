@@ -1,4 +1,3 @@
-export { default as AbilityMacroAutomation } from "./ability-macro-automation.mjs";
 export * as abstract from "./abstract/_module.mjs";
 export { default as AddDocumentsAutomation } from "./add-documents-automation/add-documents-automation.mjs";
 export { default as AttackAutomation } from "./attack-automation/attack-automation.mjs";
@@ -7,9 +6,7 @@ export { default as ChangeCompetenceAutomation } from "./change-competence-autom
 export { default as ChangeMovementAutomation } from "./change-movement-automation/change-movement-automation.mjs";
 export { default as ChangeQuantityAutomation } from "./change-quantity-automation/change-quantity-automation.mjs";
 export { default as ChangesAutomation } from "./changes-automation/changes-automation.mjs";
-export { default as ChatMacroAutomation } from "./chat-macro-automation.mjs";
 export { default as ChildChangeAutomation } from "./child-change-automation/child-change-automation.mjs";
-export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation/common-outcomes-automation.mjs";
 export { default as CoverAutomation } from "./cover-automation/cover-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation/duration-automation.mjs";
@@ -17,9 +14,9 @@ export { default as FeatAutomation } from "./feat-automation/feat-automation.mjs
 export { default as HacksAutomation } from "./hacks-automation/hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation/heal-automation.mjs";
 export { default as LightAutomation } from "./light-automation/light-automation.mjs";
+export { default as MacroAutomation } from "./macro-automation/macro-automation.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as OverrideAutomation } from "./override-automation/override-automation.mjs";
-export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";
 export { default as RegionAutomation } from "./region-automation/region-automation.mjs";
 export { default as RepositionAutomation } from "./reposition-automation/reposition-automation.mjs";
 export { default as ResistAutomation } from "./resist-automation/resist-automation.mjs";

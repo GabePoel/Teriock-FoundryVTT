@@ -71,7 +71,7 @@ export default class EquipmentSystem
   static get _automationTypes() {
     return [
       ...super._automationTypes,
-      automations.ChatMacroAutomation,
+      automations.MacroAutomation,
       automations.CommonOutcomesAutomation,
       automations.CoverAutomation,
       automations.HacksAutomation,

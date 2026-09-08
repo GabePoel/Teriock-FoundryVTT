@@ -17,7 +17,7 @@ export default class ResourceSystem
       ...super._automationTypes,
       automations.TradecraftAutomation,
       automations.CommonOutcomesAutomation,
-      automations.CommonMacroAutomation,
+      automations.MacroAutomation,
       automations.CoverAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,

@@ -1,7 +1,13 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
-const RENAMED_AUTOMATION_TYPES = { chatStatus: "status" };
+const RENAMED_AUTOMATION_TYPES = {
+  abilityMacro: "macro",
+  chatMacro: "macro",
+  chatStatus: "status",
+  commonMacro: "macro",
+  propertyMacro: "macro",
+};
 
 /**
  * @template {AnyConstructor} T

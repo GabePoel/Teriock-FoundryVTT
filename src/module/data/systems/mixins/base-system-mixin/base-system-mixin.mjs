@@ -45,6 +45,7 @@ export default function BaseSystemMixin(Base) {
           revealable: false,
           statGiver: false,
           text: false,
+          triggerable: false,
           untrackable: false,
           usable: false,
           wiki: false,
