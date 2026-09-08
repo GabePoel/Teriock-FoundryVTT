@@ -14,9 +14,4 @@ export default class AbilityMacroAutomation
   static get metadata() {
     return Object.assign(super.metadata, { type: "abilityMacro" });
   }
-
-  /** @inheritDoc */
-  get canCrit() {
-    return this.relation === "trigger" && super.canCrit;
-  }
 }

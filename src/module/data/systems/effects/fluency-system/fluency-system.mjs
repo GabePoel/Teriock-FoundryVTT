@@ -74,6 +74,11 @@ export default class FluencySystem
   }
 
   /** @inheritDoc */
+  get isPassive() {
+    return false;
+  }
+
+  /** @inheritDoc */
   get wikiPage() {
     return `Tradecraft:${TERIOCK.index.tradecrafts[toCamelCase(this._source.tradecraft ?? "")] ?? ""}`;
   }

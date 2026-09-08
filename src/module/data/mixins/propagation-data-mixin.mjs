@@ -14,6 +14,14 @@ export default function PropagationDataMixin(Base) {
   /** @mixin */
   class PropagationData extends Base {
     /**
+     * Collections that this propagates operations through.
+     * @returns {Collection[]}
+     */
+    get _propagationCollections() {
+      return [...Object.values(this.collections ?? {}), ...Object.values(this.pseudoCollections ?? {})];
+    }
+
+    /**
      * Stuff that happens when a trigger event is fired.
      * @param {string} trigger
      * @param {Teriock.System.TriggerScope} [scope]
@@ -41,8 +49,7 @@ export default function PropagationDataMixin(Base) {
      */
     async _propagateOperation(methodName, isAsync = false, args = []) {
       // Propagate operation to embedded collections
-      const collections = [...Object.values(this.collections ?? {}), ...Object.values(this.pseudoCollections ?? {})];
-      for (const collection of collections) {
+      for (const collection of this._propagationCollections) {
         for (const doc of collection) {
           if (typeof doc[methodName] === "function") {
             if (isAsync) { await doc[methodName](...args); }

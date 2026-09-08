@@ -53,14 +53,6 @@ const triggerConfig = {
     },
     label: "TYPES.Item.equipment",
   },
-  execution: {
-    choices: {
-      execute: "TERIOCK.TRIGGERS.Execution.choices.execute",
-      executeInput: "TERIOCK.TRIGGERS.Execution.choices.executeInput",
-      preExecute: "TERIOCK.TRIGGERS.Execution.choices.preExecute",
-    },
-    label: "TERIOCK.TRIGGERS.Execution.label",
-  },
   impact: {
     choices: objectMap(impactConfig, c => c.take, { filter: c => !c?.hidden }),
     label: "TERIOCK.TRIGGERS.Impact.label",
@@ -87,13 +79,6 @@ const triggerConfig = {
     },
     label: "TERIOCK.TRIGGERS.Time.label",
   },
-  update: {
-    choices: {
-      updateActor: "TERIOCK.TRIGGERS.Update.choices.updateActor",
-      updateDocument: "TERIOCK.TRIGGERS.Update.choices.updateDocument",
-    },
-    label: "TERIOCK.TRIGGERS.Update.label",
-  },
 };
 
 preLocalizeConfig("config.trigger", { keys: ["label"] });
@@ -102,11 +87,9 @@ preLocalizeConfig("config.trigger.attunable.choices");
 preLocalizeConfig("config.trigger.combat.choices");
 preLocalizeConfig("config.trigger.consequence.choices");
 preLocalizeConfig("config.trigger.equipment.choices");
-preLocalizeConfig("config.trigger.execution.choices");
 preLocalizeConfig("config.trigger.impact.choices");
 preLocalizeConfig("config.trigger.mount.choices");
 preLocalizeConfig("config.trigger.protection.choices");
 preLocalizeConfig("config.trigger.time.choices");
-preLocalizeConfig("config.trigger.update.choices");
 
 export default triggerConfig;

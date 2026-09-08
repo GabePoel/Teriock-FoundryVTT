@@ -109,6 +109,11 @@ export default class PropertySystem
   }
 
   /** @inheritDoc */
+  get isPassive() {
+    return null;
+  }
+
+  /** @inheritDoc */
   get needsAttunement() {
     return this.kind !== "intrinsic" && super.needsAttunement;
   }

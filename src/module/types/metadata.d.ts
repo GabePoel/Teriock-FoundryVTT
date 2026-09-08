@@ -8,10 +8,21 @@ declare global {
 
     export type PseudoDocumentMetadata = TypeMetadata & { documentName: string, typed: boolean };
 
+    type AutomationTags = TypeTags & {
+      changes: boolean;
+      choosePassive: boolean;
+      interactInExecution: boolean;
+      triggered: boolean;
+      useInExecution: boolean;
+    };
+
+    export type AutomationMetadata = PseudoDocumentMetadata & { tags: AutomationTags };
+
     type SystemMetadataTags = TypeTags & {
       armament: boolean;
       attunable: boolean;
       consumable: boolean;
+      granted: boolean;
       hierarchy: boolean;
       revealable: boolean;
       statGiver: boolean;

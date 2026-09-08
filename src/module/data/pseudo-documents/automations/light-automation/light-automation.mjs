@@ -46,7 +46,7 @@ class AutomationLightData extends LightData {
 export default class LightAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { changes: true, type: "light" });
+    return foundry.utils.mergeObject(super.metadata, { tags: { changes: true }, type: "light" });
   }
 
   /** @inheritDoc */

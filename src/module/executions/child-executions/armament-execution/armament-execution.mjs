@@ -43,7 +43,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
     super(data, options);
     for (const p of this.source.previewedTypes.property.filter(p => p.active)) {
-      for (const a of p.system.automations) { this.automations.set(a.id, a); }
+      this.automations.addDocuments(p.system.automations.contents);
     }
     this.bonus = options.bonus ?? "";
   }

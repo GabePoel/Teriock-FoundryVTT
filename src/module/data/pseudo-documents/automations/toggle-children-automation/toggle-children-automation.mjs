@@ -5,26 +5,17 @@ import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 /**
  * @mixes CritMechanic
- * @mixes TriggerAutomation
  */
-export default class ToggleChildrenAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
-{
+export default class ToggleChildrenAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ToggleChildren"];
 
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "toggleChildren" });
-  }
-
-  /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { choices: { update: TERIOCK.config.trigger.update } });
   }
 
   /** @inheritDoc */
@@ -37,15 +28,22 @@ export default class ToggleChildrenAutomation
   }
 
   /** @inheritDoc */
-  get _formPaths() {
-    return ["add", "remove", "qualifier", ...this._triggerPaths];
+  static migrateData(source, options) {
+    delete source.trigger;
+    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */
-  async _onFire() {
-    if (this.document && BaseRoll.qualify(this.qualifier, () => this.getRollData())) {
-      await ensureChildren(this.document, Array.from(this.add));
-      await ensureNoChildren(this.document, Array.from(this.remove));
-    }
+  get _formPaths() {
+    return ["add", "remove", "qualifier"];
+  }
+
+  /** @inheritDoc */
+  async _onFireTrigger(trigger, scope) {
+    await super._onFireTrigger(trigger, scope);
+    if (trigger !== "updateDocument" || !this.active || !this.document) { return; }
+    if (!BaseRoll.qualify(this.qualifier, () => this.getRollData())) { return; }
+    await ensureChildren(this.document, Array.from(this.add));
+    await ensureNoChildren(this.document, Array.from(this.remove));
   }
 }

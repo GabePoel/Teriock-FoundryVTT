@@ -16,6 +16,11 @@ export default function GrantedSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Granted"];
 
     /** @inheritDoc */
+    static get metadata() {
+      return foundry.utils.mergeObject(super.metadata, { tags: { granted: true } });
+    }
+
+    /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         applyIfDampened: new fields.BooleanField(),

@@ -39,6 +39,7 @@ export default function BaseSystemMixin(Base) {
           attunable: false,
           consumable: false,
           embed: false,
+          granted: false,
           hierarchy: false,
           panel: false,
           revealable: false,
@@ -183,6 +184,15 @@ export default function BaseSystemMixin(Base) {
         });
       }
       return name.trim();
+    }
+
+    /**
+     * Whether this document applies passively instead of only when used. `null` if it can be either, leaving
+     * the choice to each mechanic it holds.
+     * @returns {boolean|null}
+     */
+    get isPassive() {
+      return true;
     }
 
     /**

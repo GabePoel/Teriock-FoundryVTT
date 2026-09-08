@@ -24,7 +24,6 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
         "localQualifier",
         "localUuids",
         "makeSeparateActivations",
-        "selectInExecution",
       ]),
       { attachToToken: new fields.BooleanField(), data: new fields.ObjectField() },
     );

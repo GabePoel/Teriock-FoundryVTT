@@ -32,6 +32,11 @@ export default class ResourceSystem
   }
 
   /** @inheritDoc */
+  get isPassive() {
+    return false;
+  }
+
+  /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
     parts.bars.push(this._consumableBar);

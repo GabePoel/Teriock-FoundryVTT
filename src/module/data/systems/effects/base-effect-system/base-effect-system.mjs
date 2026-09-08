@@ -86,7 +86,8 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get qualifiedChanges() {
-    return this.automations.active.filter(a => a.metadata.changes && a.ongoing).flatMap(a => a.getChanges());
+    if (this.isPassive === false) { return []; }
+    return this.automations.active.filter(a => a.metadata.tags.changes).flatMap(a => a.getChanges());
   }
 
   /** @inheritDoc */

@@ -65,12 +65,11 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
-   * Whether this is ongoing.
+   * Whether this applies passively rather than only when its document is used.
    * @returns {boolean}
-   * @todo Redo this handling with metadata and stuff.
    */
-  get ongoing() {
-    return !(this.document?.type === "ability" && this.document.system.maneuver !== "passive");
+  get isPassive() {
+    return this.document?.system?.isPassive ?? true;
   }
 
   /**

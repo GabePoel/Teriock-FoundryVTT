@@ -34,7 +34,7 @@ export default class PseudoCollection extends TypeCollection {
    * @param {boolean} [options.active]
    * @param {boolean} [options.crit]
    * @param {boolean} [options.heighten]
-   * @param {boolean} [options.ongoing]
+   * @param {boolean} [options.isPassive]
    * @param {Teriock.System.CompetenceLevel} [options.competence]
    * @returns {Extract<TPseudo, { type: T }>[]}
    */
@@ -43,7 +43,7 @@ export default class PseudoCollection extends TypeCollection {
       if (typeof options.active === "boolean" && this._checkIfActive(p) !== options.active) { return false; }
       if (typeof options.crit === "boolean" && !p.crit?.has?.(Number(options.crit))) { return false; }
       if (typeof options.heighten === "boolean" && !p.heighten?.has?.(Number(options.heighten))) { return false; }
-      if (typeof options.ongoing === "boolean" && !p.ongoing === options.ongoing) { return false; }
+      if (typeof options.isPassive === "boolean" && p.isPassive !== options.isPassive) { return false; }
       return !(typeof options.competence === "number" && !p.competencies?.has?.(options.competence));
     });
   }

@@ -31,8 +31,7 @@ export default function CritMechanicMixin(Base) {
 
     /** @inheritDoc */
     get canCrit() {
-      if (this.document.type === "ability") { return true; }
-      return super.canCrit;
+      return this.document?.type === "ability" && !this.isPassive;
     }
   }
 

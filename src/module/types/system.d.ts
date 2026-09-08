@@ -43,7 +43,6 @@ declare global {
     export type CombatTrigger = keyof typeof tc.combat.choices;
     export type ConsequenceTrigger = keyof typeof tc.consequence.choices;
     export type EquipmentTrigger = keyof typeof tc.equipment.choices;
-    export type ExecutionTrigger = keyof typeof tc.execution.choices;
     export type ImpactTrigger = keyof typeof tc.impact.choices;
     export type MountTrigger = keyof typeof tc.mount.choices;
     export type ProtectionTrigger = keyof typeof tc.protection.choices;
@@ -54,7 +53,6 @@ declare global {
       | CombatTrigger
       | ConsequenceTrigger
       | EquipmentTrigger
-      | ExecutionTrigger
       | ImpactTrigger
       | MountTrigger
       | ProtectionTrigger
@@ -67,7 +65,6 @@ declare global {
       armament?: TeriockItem<"body" | "equipment">;
       attribute?: Teriock.Keys.Attribute;
       automation?: BaseAutomation;
-      awaitFire?: boolean;
       chatDataBySource?: Record<string, Partial<Teriock.Data.ChatMessageData>>;
       effect?: TeriockActiveEffect;
       equipment?: TeriockItem<"equipment">;

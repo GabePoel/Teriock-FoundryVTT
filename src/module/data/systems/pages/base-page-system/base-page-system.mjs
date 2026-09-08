@@ -48,6 +48,11 @@ export default class BasePageSystem
   }
 
   /** @inheritDoc */
+  get isPassive() {
+    return false;
+  }
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
@@ -64,10 +69,5 @@ export default class BasePageSystem
       icon: this.parent.getFlag("teriock", "journalIcon") ?? documentConfig[this.parent.type]?.icon
         ?? documentConfig.rule.icon,
     });
-  }
-
-  /** @inheritDoc */
-  getRollData() {
-    return {};
   }
 }

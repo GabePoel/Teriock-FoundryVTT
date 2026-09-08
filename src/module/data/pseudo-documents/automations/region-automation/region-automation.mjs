@@ -56,66 +56,61 @@ export default class RegionAutomation
 
   /** @inheritdoc */
   static get metadata() {
-    return Object.assign(super.metadata, { type: "region" });
-  }
-
-  /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { activationTime: "pre", executionTriggers: ["executeInput"] });
+    return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true }, type: "region" });
   }
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(
-      omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations", "selectInExecution"]),
-      {
-        angle: new FormulaField({ deterministic: true, initial: "60" }),
-        attachToToken: new fields.BooleanField({ initial: true }),
-        deleteOnTurnChange: new fields.BooleanField({ initial: true }),
-        excludeToken: new fields.BooleanField({ initial: true }),
-        expandWithToken: new fields.BooleanField({ initial: true }),
-        height: this.#rangeField(),
-        innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
-        outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
-        radius: this.#rangeField(),
-        radiusX: this.#rangeField(),
-        radiusY: this.#rangeField(),
-        regionType: new fields.StringField({
-          choices: localizeChoices({
-            circle: "SHAPE.TYPES.circle.name",
-            cone: "SHAPE.TYPES.cone.name",
-            ellipse: "SHAPE.TYPES.ellipse.name",
-            emanation: "SHAPE.TYPES.emanation.name",
-            rectangle: "SHAPE.TYPES.rectangle.name",
-            ring: "SHAPE.TYPES.ring.name",
-          }),
-          initial: "circle",
-          nullable: false,
-          required: true,
+    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations"]), {
+      angle: new FormulaField({ deterministic: true, initial: "60" }),
+      attachToToken: new fields.BooleanField({ initial: true }),
+      deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      excludeToken: new fields.BooleanField({ initial: true }),
+      expandWithToken: new fields.BooleanField({ initial: true }),
+      height: this.#rangeField(),
+      innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
+      outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
+      radius: this.#rangeField(),
+      radiusX: this.#rangeField(),
+      radiusY: this.#rangeField(),
+      regionType: new fields.StringField({
+        choices: localizeChoices({
+          circle: "SHAPE.TYPES.circle.name",
+          cone: "SHAPE.TYPES.cone.name",
+          ellipse: "SHAPE.TYPES.ellipse.name",
+          emanation: "SHAPE.TYPES.emanation.name",
+          rectangle: "SHAPE.TYPES.rectangle.name",
+          ring: "SHAPE.TYPES.ring.name",
         }),
-        restriction: new fields.SchemaField({
-          enabled: new fields.BooleanField(),
-          priority: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, required: true }),
-          type: new fields.StringField({
-            choices: Object.fromEntries(
-              CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
-            ),
-            initial: "move",
-            required: true,
-          }),
-        }),
-        targeting: new fields.BooleanField({ initial: true }),
-        visibility: new fields.NumberField({
+        initial: "circle",
+        nullable: false,
+        required: true,
+      }),
+      restriction: new fields.SchemaField({
+        enabled: new fields.BooleanField(),
+        priority: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, required: true }),
+        type: new fields.StringField({
           choices: Object.fromEntries(
-            Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
+            CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
           ),
-          initial: CONST.REGION_VISIBILITY.ALWAYS,
+          initial: "move",
           required: true,
         }),
-        width: this.#rangeField(),
-      },
-    );
+      }),
+      targeting: new fields.BooleanField({ initial: true }),
+      visibility: new fields.NumberField({
+        choices: Object.fromEntries(
+          Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
+        ),
+        initial: CONST.REGION_VISIBILITY.ALWAYS,
+        required: true,
+      }),
+      width: this.#rangeField(),
+    });
   }
+
+  /** @type {boolean} */
+  #placed = false;
 
   /**
    * Get the numeric value of some region shape path.
@@ -161,6 +156,26 @@ export default class RegionAutomation
       };
     }
     return [data];
+  }
+
+  /**
+   * Target every visible token inside a region that was placed during an execution.
+   * @param {TeriockRegionDocument} region
+   * @param {BaseExecution} execution
+   */
+  #targetInside(region, execution) {
+    if (!this.targeting || region.parent !== game.scenes.viewed) { return; }
+    let releaseOthers = true;
+    for (
+      const t of (game.scenes.viewed?.tokens.contents ?? []).filter(t =>
+        t?.object?.isVisible
+        && t.hasStatusEffect("ethereal") === Boolean(execution.actor?.statuses.has("ethereal"))
+        && t.testInsideRegion(region)
+      )
+    ) {
+      t?.object.setTarget(true, { releaseOthers });
+      releaseOthers = false;
+    }
   }
 
   /** @inheritdoc */
@@ -212,7 +227,7 @@ export default class RegionAutomation
    * @returns {string[]}
    */
   get _targetPaths() {
-    return this.trigger === "executeInput" ? ["targeting"] : [];
+    return this.interactInExecution ? ["targeting"] : [];
   }
 
   /**
@@ -225,6 +240,7 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async _getActivations(options = { rollData: {} }) {
+    if (this.#placed) { return []; }
     const data = await this.getRegionData(options);
     const selections = this.hasSelection
       ? await this._getSelections({ relativeTo: options.execution?.actor ?? this.actor })
@@ -232,28 +248,6 @@ export default class RegionAutomation
     return selections.map(({ config }) =>
       new RegionActivation({ ...config, attachToToken: this.attachToToken, data, display: this.display })
     );
-  }
-
-  /** @inheritDoc */
-  async _preFireExecutionTrigger(scope) {
-    const out = await super._preFireExecutionTrigger(scope);
-    const region = Array.isArray(out) && out.length ? out[0] : null;
-    if (!region) { return; }
-    if (scope.trigger === "executeInput" && this.targeting) {
-      if (scope.execution && region.parent === game.scenes.viewed) {
-        let releaseOthers = true;
-        for (
-          const t of (game.scenes.viewed?.tokens.contents ?? []).filter(t =>
-            t?.object?.isVisible
-            && t.hasStatusEffect("ethereal") === Boolean(scope.execution?.actor?.statuses.has("ethereal"))
-            && t.testInsideRegion(region)
-          )
-        ) {
-          t?.object.setTarget(true, { releaseOthers });
-          releaseOthers = false;
-        }
-      }
-    }
   }
 
   /**
@@ -276,5 +270,20 @@ export default class RegionAutomation
       shapes: this.#getRegionShapeData(options),
       visibility: this.visibility,
     }, this.overrideData ? this.data : {});
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionInput(execution) {
+    this.#placed = false;
+    if (!this.interactInExecution) { return; }
+    const activations = await this._getActivations({ execution, rollData: execution.getRollData() });
+    this.#placed = true;
+    const token = execution.executor ?? execution.actor?.defaultToken;
+    for (const activation of activations) {
+      if (execution.actor) { activation.actors = [execution.actor]; }
+      if (token) { activation.tokens = [token]; }
+      const region = await activation.primaryAction();
+      if (region) { this.#targetInside(region, execution); }
+    }
   }
 }

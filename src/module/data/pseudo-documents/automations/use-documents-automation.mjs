@@ -33,31 +33,27 @@ export default class UseDocumentsAutomation
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { type: "useDocuments" });
+    return foundry.utils.mergeObject(super.metadata, {
+      tags: { interactInExecution: true, useInExecution: true },
+      type: "useDocuments",
+    });
   }
 
-  /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: ["execute"] });
-  }
+  /** @type {{ config: object, document: TeriockDocument|null }[]|null} */
+  #selections = null;
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      ...this._selectionPaths,
-      "hr",
-      ...this._triggerDisplayPaths,
-      "hr",
-      ...this._competencePaths,
-      ...this._overrideDataPaths,
-    ];
+    const paths = [...this._selectionPaths, "hr", ...this._triggerDisplayPaths];
+    if (this.interactInExecution) { paths.push("useInExecution"); }
+    paths.push("hr", ...this._competencePaths, ...this._overrideDataPaths);
+    return paths;
   }
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selections = await this._getSelections({
-      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
-    });
+    const selections = this.#selections
+      ?? await this._getSelections({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
     if (!selections.length) { return []; }
     const useOptions = {
       ...this.getUseOptions(),
@@ -88,5 +84,27 @@ export default class UseDocumentsAutomation
     const options = { competence: this.getCompetence() };
     if (this.overrideData) { Object.assign(options, this.data); }
     return options;
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionCompletion(execution) {
+    if (!this.useInExecution) { return; }
+    const useOptions = {
+      ...this.getUseOptions(),
+      competence: this.getCompetence({ execution }),
+      edge: execution.edge,
+      event: execution.options?.event,
+    };
+    for (const { config } of this.#selections ?? []) {
+      const documents = await Promise.all((config.globalUuids ?? []).map(uuid => fromUuid(uuid)));
+      for (const document of documents.filter(Boolean)) {
+        await document.use({ ...useOptions, actor: execution.actor });
+      }
+    }
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionInput(execution) {
+    this.#selections = this.interactInExecution ? await this._getSelections({ relativeTo: execution.actor }) : null;
   }
 }

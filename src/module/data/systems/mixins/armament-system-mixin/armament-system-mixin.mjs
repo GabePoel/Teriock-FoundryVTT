@@ -285,6 +285,11 @@ export default function ArmamentSystemMixin(Base) {
       return formulaExists(this.damage.twoHanded) && (this.damage.twoHanded !== this.damage.base);
     }
 
+    /** @inheritDoc */
+    get isPassive() {
+      return false;
+    }
+
     /**
      * The abilities that activate on use.
      * @returns {TeriockActiveEffect<"ability">[]}

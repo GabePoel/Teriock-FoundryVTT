@@ -26,12 +26,7 @@ export default class TradecraftAutomation
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { type: "tradecraft" });
-  }
-
-  /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: true });
+    return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true }, type: "tradecraft" });
   }
 
   /** @inheritDoc */
@@ -43,6 +38,9 @@ export default class TradecraftAutomation
       tradecrafts: tradecraftsField(),
     });
   }
+
+  /** @type {Teriock.Keys.Tradecraft[]|null} */
+  #chosen = null;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -72,17 +70,13 @@ export default class TradecraftAutomation
 
   /**
    * Select one or more configured tradecrafts.
-   * Dialogs only open when an execution context is provided.
-   * @param {object} [options]
-   * @param {BaseExecution} [options.execution]
    * @returns {Promise<Teriock.Keys.Tradecraft[]>}
    */
-  async _choose(options = {}) {
+  async _choose() {
     const choices = Array.from(this.tradecrafts).filter(Boolean);
     if (choices.length === 0) { return []; }
     if (this.automatic && choices.length === 1) { return choices; }
     if (this.multi && this.all) { return choices; }
-    if (!options.execution) { return choices; }
     if (this.multi) { return selectTradecraftsDialog(choices); }
     const chosen = await selectTradecraftDialog(choices);
     return chosen ? [chosen] : [];
@@ -90,7 +84,7 @@ export default class TradecraftAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selected = await this._choose(options);
+    const selected = this.#chosen ?? Array.from(this.tradecrafts).filter(Boolean);
     if (!selected.length) { return []; }
     const rollData = options.execution?.getRollData?.() ?? options.rollData ?? {};
     const threshold = await this.getThreshold(rollData);
@@ -100,5 +94,10 @@ export default class TradecraftAutomation
         options: { bonus: this.bonus, competence: this.getCompetence(options), threshold, tradecraft },
       })
     );
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionInput() {
+    this.#chosen = this.interactInExecution ? await this._choose() : null;
   }
 }

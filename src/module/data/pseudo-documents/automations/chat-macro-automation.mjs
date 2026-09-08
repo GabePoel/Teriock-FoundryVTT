@@ -11,19 +11,11 @@ export default class ChatMacroAutomation extends mixClasses(BaseAutomation, Macr
 
   /** @inheritDoc */
   static defineSchema() {
-    return omit(super.defineSchema(), ["relation", "trigger"]);
+    return omit(super.defineSchema(), "trigger");
   }
 
   /** @inheritDoc */
   get _formPaths() {
     return [...this._macroPaths, "display.label"];
-  }
-
-  /**
-   * Getter that replaces the optional relation data.
-   * @return {string}
-   */
-  get relation() {
-    return "button";
   }
 }

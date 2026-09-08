@@ -34,12 +34,8 @@ export default function DisplayAutomationMixin(Base) {
      * @returns {string[]}
      */
     get _triggerDisplayPaths() {
-      const paths = [];
-      const triggerPaths = this._triggerPaths;
-      const makesOneButton = (!this._source.trigger || this.isRepeatable || this._defersSelection)
-        && !this.makeSeparateActivations;
-      if (Array.isArray(triggerPaths)) { paths.push(...triggerPaths); }
-      if (makesOneButton) { paths.push(...this._displayPaths); }
+      const paths = [...(this._triggerPaths ?? [])];
+      if (!this.makeSeparateActivations && !this.useInExecution) { paths.push(...this._displayPaths); }
       return paths;
     }
   }

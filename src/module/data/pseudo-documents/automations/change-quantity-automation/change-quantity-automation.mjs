@@ -23,12 +23,7 @@ export default class ChangeQuantityAutomation
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { type: "changeQuantity" });
-  }
-
-  /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: true, initial: "execute", nullable: false });
+    return foundry.utils.mergeObject(super.metadata, { tags: { choosePassive: true }, type: "changeQuantity" });
   }
 
   /** @inheritDoc */
@@ -76,21 +71,16 @@ export default class ChangeQuantityAutomation
   }
 
   /** @inheritDoc */
-  get _canRunPassively() {
-    return this.targetParent || super._canRunPassively;
-  }
-
-  /** @inheritDoc */
-  get _documentActive() {
-    return this.targetParent || super._documentActive;
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     const paths = ["targetParent"];
     if (!this.targetParent) { paths.push("identifier"); }
     paths.push(...["formula", ...super._formPaths]);
     return paths;
+  }
+
+  /** @inheritDoc */
+  get documentAllowsTrigger() {
+    return this.targetParent || super.documentAllowsTrigger;
   }
 
   /** @inheritDoc */

@@ -13,7 +13,7 @@ const { fields } = foundry.data;
 export default class ChangesAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { changes: true, type: "changes" });
+    return foundry.utils.mergeObject(super.metadata, { tags: { changes: true }, type: "changes" });
   }
 
   /** @inheritDoc */

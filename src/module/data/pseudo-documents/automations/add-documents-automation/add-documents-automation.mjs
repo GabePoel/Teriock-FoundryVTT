@@ -37,6 +37,7 @@ export default class AddDocumentsAutomation
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       pseudos: { ConstructionNode: "constructionNodes" },
+      tags: { interactInExecution: true },
       type: "addDocuments",
     });
   }
@@ -49,7 +50,6 @@ export default class AddDocumentsAutomation
       auto: new fields.BooleanField({ initial: true }),
       constructionNodes: new PseudoCollectionField(ConstructionNode),
       multi: new fields.BooleanField({ initial: false }),
-      selectInExecution: new fields.BooleanField(),
       target: new fields.StringField({
         blank: false,
         choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
@@ -128,29 +128,20 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   get _formPaths() {
     const paths = [];
-    if (this.canAttachToEffect) { paths.push("attachToEffect"); }
+    if (this.document?.type === "ability" && !this.isPassive) { paths.push("attachToEffect"); }
     if (!this.attachToEffect) { paths.push(...this._triggerDisplayPaths, "target"); }
-    paths.push(...["hr", "selectInExecution", "all"]);
+    paths.push(...["hr", "all"]);
     if (!this.all) { paths.push(...["auto", "multi"]); }
     paths.push("hr");
     return paths;
   }
 
-  /**
-   * Whether this can attach to a generated effect.
-   * @returns {boolean}
-   */
-  get canAttachToEffect() {
-    // TODO: Consider changing this if effect generation is ever generalized to not just be abilities.
-    return this.document?.type === "ability" && this.document?.system?.maneuver !== "passive";
-  }
-
   /** @inheritDoc */
   async _getActivations(options = {}) {
     if (this.attachToEffect) { return []; }
-    const roots = this.selectInExecution ? await this.getNodes() : this.rootNodes;
+    const roots = this.interactInExecution ? await this.getNodes() : this.rootNodes;
     let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
-    if (this.selectInExecution) {
+    if (this.interactInExecution) {
       nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(options)));
     }
     return [
@@ -189,7 +180,7 @@ export default class AddDocumentsAutomation
     const roots = await this.getNodes(scope);
     const rootIds = new Set(roots.map(n => n._id));
     let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
-    if (this.selectInExecution) { nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(scope))); }
+    if (this.interactInExecution) { nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(scope))); }
     this.#effectNodes = nodes.map(n => {
       const data = n.toObject();
       if (rootIds.has(data._id)) { data.parentId = null; }
@@ -205,6 +196,6 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.canAttachToEffect) { this.attachToEffect = false; }
+    if (this.isPassive) { this.attachToEffect = false; }
   }
 }

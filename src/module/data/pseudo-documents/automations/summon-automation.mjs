@@ -25,12 +25,7 @@ export default class SummonAutomation
 
   /** @inheritdoc */
   static get metadata() {
-    return Object.assign(super.metadata, { type: "summon" });
-  }
-
-  /** @inheritDoc */
-  static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, { executionTriggers: ["execute"] });
+    return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true }, type: "summon" });
   }
 
   /** @inheritDoc */
@@ -44,6 +39,9 @@ export default class SummonAutomation
     ]);
   }
 
+  /** @type {{ config: object, document: TeriockDocument|null }[]|null} */
+  #selections = null;
+
   /** @inheritDoc */
   get _formPaths() {
     return [...this._selectionPaths, "hr", ...this._triggerDisplayPaths];
@@ -51,9 +49,8 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selections = await this._getSelections({
-      relativeTo: options.execution?.actor ?? options.actor ?? this.actor,
-    });
+    const selections = this.#selections
+      ?? await this._getSelections({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
     return selections.map(({ config, document }) => {
       const display = foundry.utils.deepClone(this.display);
       if (document) {
@@ -68,5 +65,10 @@ export default class SummonAutomation
   /** @inheritDoc */
   _isSelectable(document) {
     return document?.documentName === "Actor";
+  }
+
+  /** @inheritDoc */
+  async interactOnExecutionInput(execution) {
+    this.#selections = this.interactInExecution ? await this._getSelections({ relativeTo: execution.actor }) : null;
   }
 }

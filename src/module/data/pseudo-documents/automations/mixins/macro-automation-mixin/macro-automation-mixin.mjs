@@ -24,15 +24,7 @@ export default function MacroAutomationMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return Object.assign(super.metadata, { macro: true });
-    }
-
-    /**
-     * Macros run via {@link executeMacro} on execute, not the default activation path.
-     * @inheritDoc
-     */
-    static get triggerMetadata() {
-      return Object.assign(super.triggerMetadata, { activationTime: null, executionTriggers: true });
+      return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true } });
     }
 
     /** @inheritDoc */
@@ -48,17 +40,17 @@ export default function MacroAutomationMixin(Base) {
       return [...this._macroPaths, "hr", ...this._triggerDisplayPaths];
     }
 
-    /** @inheritDoc */
-    get _hasButtons() {
-      return super._hasButtons && this.hasMacro;
-    }
-
     /**
      * Paths for the macros this can execute.
      * @returns {string[]}
      */
     get _macroPaths() {
-      return this.makesActivation ? ["primaryMacro", "secondaryMacro"] : ["primaryMacro"];
+      return this.interactInExecution ? ["primaryMacro"] : ["primaryMacro", "secondaryMacro"];
+    }
+
+    /** @inheritDoc */
+    get canGetActivations() {
+      return !this.interactInExecution && super.canGetActivations;
     }
 
     /**
@@ -67,14 +59,6 @@ export default function MacroAutomationMixin(Base) {
      */
     get hasMacro() {
       return this.primaryMacro && Boolean(fromUuidSync(this.primaryMacro));
-    }
-
-    /**
-     * Whether this generates an activation for something to press.
-     * @returns {boolean}
-     */
-    get makesActivation() {
-      return !this._isActiveTrigger(this.trigger);
     }
 
     /** @inheritDoc */
@@ -87,11 +71,6 @@ export default function MacroAutomationMixin(Base) {
           secondaryMacro: this.secondaryMacro,
         }),
       ];
-    }
-
-    /** @inheritDoc */
-    async _preFireExecutionTrigger(scope) {
-      await this.executeMacro(scope);
     }
 
     /** @inheritDoc */
@@ -108,6 +87,11 @@ export default function MacroAutomationMixin(Base) {
       if (!this.hasMacro) { return; }
       const macro = await fromUuid(this.primaryMacro);
       await macro.execute(this.getScope(scope));
+    }
+
+    /** @inheritDoc */
+    async interactOnExecutionInput(execution) {
+      if (this.interactInExecution) { await this.executeMacro(execution.getScope()); }
     }
   }
 

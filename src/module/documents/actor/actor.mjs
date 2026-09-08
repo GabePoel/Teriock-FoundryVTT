@@ -117,6 +117,11 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     ];
   }
 
+  /** @inheritDoc */
+  get _propagationCollections() {
+    return Object.values(this.collections);
+  }
+
   /**
    * Store of pending item operations staged for the next database write.
    * @returns {{itemCreations: Set<UUID<TeriockItem>|TypedIdentifier>, itemDeletions: Set<ID<TeriockItem>>}}

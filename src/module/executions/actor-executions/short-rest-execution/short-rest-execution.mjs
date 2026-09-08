@@ -23,13 +23,13 @@ export default class ShortRestExecution extends DocumentExecution {
       _id: toId(UseDocumentsAutomation.metadata.type, { hash: true }),
       all: false,
       auto: false,
+      interactInExecution: true,
       localQualifier: `and(@ability, @time.${toKebabCase(this.executionTime)})`,
       multi: true,
-      selectInExecution: true,
-      trigger: "execute",
       type: "useDocuments",
+      useInExecution: true,
     });
-    this.automations.set(useAutomation.id, useAutomation);
+    this.automations.addDocuments([useAutomation]);
   }
 
   /** @type {TeriockActiveEffect<"ability">[]} */

@@ -158,6 +158,11 @@ export default class ApplicableEffectSystem
     return Object.assign(super.embedParts, { subtitle: this.parent.remainingString });
   }
 
+  /** @inheritDoc */
+  get isPassive() {
+    return true;
+  }
+
   /**
    * The document that this is sustained by.
    * @return {TeriockDocument|null}

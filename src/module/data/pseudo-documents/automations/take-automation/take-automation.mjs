@@ -39,11 +39,6 @@ export default class TakeAutomation
   }
 
   /** @inheritDoc */
-  get _displayPaths() {
-    return ["hr", ...super._displayPaths, "showDialog"];
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "amount"];
     if (TERIOCK.config.impact[this.impact]?.morganti) { paths.push("morganti"); }
@@ -60,15 +55,9 @@ export default class TakeAutomation
           display: this.display,
           impact: this.impact,
           morganti: this.morganti,
-          showDialog: this.showDialog,
         }),
       ];
     }
     return [];
-  }
-
-  /** @inheritDoc */
-  prepareData() {
-    if (this.isRepeatable) { this.showDialog = true; }
   }
 }

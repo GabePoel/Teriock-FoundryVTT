@@ -23,8 +23,6 @@ declare global {
       makeSeparateActivations: boolean;
       /** Whether multiple choices can be selected. */
       multi: boolean;
-      /** Whether choices should be selected at execution time. */
-      selectInExecution: boolean;
     }
   }
 }

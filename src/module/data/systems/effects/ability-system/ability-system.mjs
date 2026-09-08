@@ -311,6 +311,11 @@ export default class AbilitySystem
   }
 
   /** @inheritDoc */
+  get isPassive() {
+    return this.maneuver === "passive";
+  }
+
+  /** @inheritDoc */
   get isUsable() {
     return super.usable && !this.isVirtual;
   }

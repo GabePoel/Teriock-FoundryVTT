@@ -36,7 +36,6 @@ export default class TransformationAutomation
         "localQualifier",
         "localUuids",
         "makeSeparateActivations",
-        "selectInExecution",
       ]),
       automationTransformationFields(),
     );

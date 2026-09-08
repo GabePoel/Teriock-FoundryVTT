@@ -16,6 +16,11 @@ export default function UncommonSystemMixin(Base) {
     get actor() {
       return game.actors.default;
     }
+
+    /** @inheritDoc */
+    get isPassive() {
+      return false;
+    }
   }
 
   return UncommonSystem;
