@@ -5,19 +5,15 @@ import { fromIdentifierLocal } from "../../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { ChangeQuantityActivation } from "../../activations/_module.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class ChangeQuantityAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
-{
+export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 

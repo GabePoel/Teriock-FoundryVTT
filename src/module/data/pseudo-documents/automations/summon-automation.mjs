@@ -1,24 +1,17 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
-import { CritMechanicMixin, SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
+import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
- * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
 export default class SummonAutomation
-  extends mixClasses(
-    BaseAutomation,
-    CritMechanicMixin,
-    SelectionPseudoDocumentMixin,
-    DisplayAutomationMixin,
-    TriggerAutomationMixin,
-  )
+  extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, DisplayAutomationMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];

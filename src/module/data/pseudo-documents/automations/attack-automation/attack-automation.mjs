@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { AttackActivation } from "../../activations/_module.mjs";
-import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
+import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -9,18 +9,12 @@ const { fields } = foundry.data;
 
 /**
  * An automation that makes an attack roll with no ability associated with it.
- * @mixes CritMechanic
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  * @see {AttackRollExecution}
  */
 export default class AttackAutomation
-  extends mixClasses(
-    ThresholdAutomation,
-    CritMechanicMixin,
-    TriggerAutomationMixin,
-    OverrideCompetencePseudoDocumentMixin,
-  )
+  extends mixClasses(ThresholdAutomation, TriggerAutomationMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Attack"];

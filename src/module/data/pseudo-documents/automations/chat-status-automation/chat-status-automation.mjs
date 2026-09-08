@@ -5,19 +5,15 @@ import {
   RemoveStatusActivation,
   ToggleStatusActivation,
 } from "../../activations/command-activations.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class ChatStatusAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
-{
+export default class ChatStatusAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChatStatus"];
 

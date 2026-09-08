@@ -1,9 +1,7 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
-export default class SuppressAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
+export default class SuppressAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Suppress"];
 

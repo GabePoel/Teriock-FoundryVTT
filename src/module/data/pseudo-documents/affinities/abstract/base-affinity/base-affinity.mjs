@@ -7,7 +7,6 @@ import { dotJoin } from "../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
-import { CritMechanicMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -17,7 +16,6 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
  *
- * @mixes CritMechanic
  * @mixes PanelData
  * @mixes UsableData
  * @mixes EmbeddableData
@@ -25,7 +23,7 @@ const { fields } = foundry.data;
  * @property {TeriockActiveEffect} document
  */
 export default class BaseAffinity
-  extends mixClasses(MechanicPseudoDocument, CritMechanicMixin, PanelDataMixin, UsableDataMixin, EmbeddableDataMixin)
+  extends mixClasses(MechanicPseudoDocument, PanelDataMixin, UsableDataMixin, EmbeddableDataMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AFFINITIES.Base"];

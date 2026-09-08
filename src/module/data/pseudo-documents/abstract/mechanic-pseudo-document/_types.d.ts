@@ -9,6 +9,7 @@ declare global {
     export type MechanicPseudoDocumentData = {
       activeQualifier: Teriock.System.FormulaString;
       competencies: Set<number>;
+      crit: Set<number>;
       heighten: Set<number>;
     };
   }

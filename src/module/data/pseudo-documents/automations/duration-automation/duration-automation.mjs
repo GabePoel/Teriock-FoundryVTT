@@ -1,16 +1,11 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @mixes CritMechanic
- */
-export default class DurationAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
+export default class DurationAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Duration"];
 

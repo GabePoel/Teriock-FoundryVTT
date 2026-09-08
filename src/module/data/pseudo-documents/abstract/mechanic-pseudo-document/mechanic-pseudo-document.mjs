@@ -20,6 +20,15 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
     return Object.assign(super.defineSchema(), {
       activeQualifier: qualifierField({ initial: "1" }),
       competencies: new fields.SetField(competenceField(), { initial: [0, 1, 2] }),
+      crit: new fields.SetField(
+        new fields.NumberField({
+          choices: localizeChoices({
+            0: "TERIOCK.MECHANICS.Base.FIELDS.crit.choices.0",
+            1: "TERIOCK.MECHANICS.Base.FIELDS.crit.choices.1",
+          }, { sort: false }),
+        }),
+        { initial: [0, 1] },
+      ),
       heighten: new fields.SetField(
         new fields.NumberField({
           choices: localizeChoices({
@@ -45,7 +54,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get canCrit() {
-    return false;
+    return this.document?.type === "ability" && !this.isPassive;
   }
 
   /**

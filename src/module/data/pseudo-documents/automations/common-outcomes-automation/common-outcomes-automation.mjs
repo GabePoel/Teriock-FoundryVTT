@@ -1,18 +1,14 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import * as activations from "../../activations/command-activations.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
-export default class CommonOutcomesAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin)
-{
+export default class CommonOutcomesAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.CommonOutcomes"];
 

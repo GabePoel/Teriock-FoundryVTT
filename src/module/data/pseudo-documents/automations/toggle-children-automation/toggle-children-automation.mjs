@@ -1,15 +1,10 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ensureChildren, ensureNoChildren } from "../../../../helpers/resolve.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
-/**
- * @mixes CritMechanic
- */
-export default class ToggleChildrenAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
+export default class ToggleChildrenAutomation extends BaseAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ToggleChildren"];
 

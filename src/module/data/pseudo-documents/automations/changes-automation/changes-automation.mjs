@@ -1,16 +1,11 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { qualifiedChangeField } from "../../../fields/tools/builders.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-/**
- * @mixes CritMechanic
- */
-export default class ChangesAutomation extends mixClasses(BaseAutomation, CritMechanicMixin) {
+export default class ChangesAutomation extends BaseAutomation {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { tags: { changes: true }, type: "changes" });

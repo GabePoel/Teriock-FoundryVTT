@@ -1,6 +1,5 @@
 import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { rollableFormulaField } from "../../../../fields/tools/builders.mjs";
-import { CritMechanicMixin } from "../../../mixins/_module.mjs";
 import { TriggerAutomationMixin } from "../../mixins/_module.mjs";
 import BaseAutomation from "../base-automation/base-automation.mjs";
 
@@ -8,12 +7,11 @@ const { fields } = foundry.data;
 
 /**
  * @mixes TriggerAutomation
- * @mixes CritMechanic
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm
  * @param {Teriock.System.FormulaString} substitution
  */
-export default class StatAutomation extends mixClasses(BaseAutomation, CritMechanicMixin, TriggerAutomationMixin) {
+export default class StatAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Stat"];
 

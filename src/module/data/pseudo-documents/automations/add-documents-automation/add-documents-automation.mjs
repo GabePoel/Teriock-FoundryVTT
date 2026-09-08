@@ -6,25 +6,18 @@ import { toId } from "../../../../helpers/string.mjs";
 import { deleteProperties, objectMap } from "../../../../helpers/utils.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
-import { ConstructNodesPseudoDocumentMixin, CritMechanicMixin } from "../../mixins/_module.mjs";
+import { ConstructNodesPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
 export default class AddDocumentsAutomation
-  extends mixClasses(
-    BaseAutomation,
-    CritMechanicMixin,
-    DisplayAutomationMixin,
-    TriggerAutomationMixin,
-    ConstructNodesPseudoDocumentMixin,
-  )
+  extends mixClasses(BaseAutomation, DisplayAutomationMixin, TriggerAutomationMixin, ConstructNodesPseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [

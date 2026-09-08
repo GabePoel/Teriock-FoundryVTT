@@ -1,7 +1,6 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { UseDocumentsActivation } from "../activations/_module.mjs";
 import {
-  CritMechanicMixin,
   OverrideCompetencePseudoDocumentMixin,
   OverrideDataPseudoDocumentMixin,
   SelectionPseudoDocumentMixin,
@@ -10,7 +9,6 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
- * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
@@ -20,7 +18,6 @@ import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module
 export default class UseDocumentsAutomation
   extends mixClasses(
     BaseAutomation,
-    CritMechanicMixin,
     SelectionPseudoDocumentMixin,
     DisplayAutomationMixin,
     TriggerAutomationMixin,

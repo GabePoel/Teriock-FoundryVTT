@@ -1,25 +1,15 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
-import {
-  CritMechanicMixin,
-  OverrideCompetencePseudoDocumentMixin,
-  SelectionPseudoDocumentMixin,
-} from "../../mixins/_module.mjs";
+import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 /**
- * @mixes CritMechanic
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */
 export default class TransformationAutomation
-  extends mixClasses(
-    BaseAutomation,
-    CritMechanicMixin,
-    SelectionPseudoDocumentMixin,
-    OverrideCompetencePseudoDocumentMixin,
-  )
+  extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
   static get metadata() {

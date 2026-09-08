@@ -1,17 +1,14 @@
 import mathConfig from "../../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../../executions/child-executions/_module.mjs";
-import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../fields/tools/builders.mjs";
 import MechanicPseudoDocument from "../../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
 import { ExpirationActivation } from "../../../activations/_module.mjs";
-import { CritMechanicMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @typedef {object} ExpirationEventContext
  * @property {Set<TeriockActor>} [actors]
  * @property {Set<UUID<BaseExpiration>>} [cleanup]
@@ -21,7 +18,7 @@ const { fields } = foundry.data;
  * @property {ID<BaseExpiration>} _id
  * @property {ExpirationType} type
  */
-export default class BaseExpiration extends mixClasses(MechanicPseudoDocument, CritMechanicMixin) {
+export default class BaseExpiration extends MechanicPseudoDocument {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
 

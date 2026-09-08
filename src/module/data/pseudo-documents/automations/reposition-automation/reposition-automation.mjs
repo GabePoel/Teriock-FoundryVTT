@@ -3,7 +3,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { movementActionField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { MoveActivation } from "../../activations/_module.mjs";
-import { CritMechanicMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -12,10 +11,9 @@ const { fields } = foundry.data;
 /**
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
- * @mixes CritMechanic
  */
 export default class RepositionAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, DisplayAutomationMixin, TriggerAutomationMixin)
+  extends mixClasses(BaseAutomation, DisplayAutomationMixin, TriggerAutomationMixin)
 {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 

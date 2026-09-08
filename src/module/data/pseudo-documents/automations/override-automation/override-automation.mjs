@@ -1,25 +1,20 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
-import {
-  CritMechanicMixin,
-  OverrideCompetencePseudoDocumentMixin,
-  OverrideDataPseudoDocumentMixin,
-} from "../../mixins/_module.mjs";
+import { OverrideCompetencePseudoDocumentMixin, OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { DisplayAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @mixes DisplayAutomation
  * @mixes OverrideDataPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */
 export default class OverrideAutomation
   extends mixClasses(
-    CritMechanicMixin(BaseAutomation),
+    BaseAutomation,
     DisplayAutomationMixin,
     OverrideDataPseudoDocumentMixin,
     OverrideCompetencePseudoDocumentMixin,

@@ -2,24 +2,18 @@ import { selectTradecraftDialog, selectTradecraftsDialog } from "../../../../app
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { tradecraftsField } from "../../../fields/tools/builders.mjs";
 import { TradecraftActivation } from "../../activations/command-activations.mjs";
-import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
+import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes CritMechanic
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  */
 export default class TradecraftAutomation
-  extends mixClasses(
-    ThresholdAutomation,
-    CritMechanicMixin,
-    TriggerAutomationMixin,
-    OverrideCompetencePseudoDocumentMixin,
-  )
+  extends mixClasses(ThresholdAutomation, TriggerAutomationMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];

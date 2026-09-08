@@ -1,15 +1,14 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
-import { CritMechanicMixin, OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
+import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 /**
  * @mixes OverrideCompetenceMechanic
- * @mixes CritMechanic
  */
 export default class ChangeCompetenceAutomation
-  extends mixClasses(BaseAutomation, CritMechanicMixin, OverrideCompetencePseudoDocumentMixin)
+  extends mixClasses(BaseAutomation, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeCompetence"];
