@@ -1,4 +1,4 @@
-import { deleteProperties, fromIdentifier } from "../../../../helpers/utils.mjs";
+import { deleteProperties, fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";

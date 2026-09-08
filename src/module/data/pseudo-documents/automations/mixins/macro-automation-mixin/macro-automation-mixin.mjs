@@ -2,7 +2,7 @@ import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../../helpers/resolve.mjs";
 import MacroActivation from "../../../activations/macro-activation/macro-activation.mjs";
 import DisplayAutomationMixin from "../display-automation-mixin/display-automation-mixin.mjs";
-import TriggerAutomationMixin from "../trigger-automation-mixin/trigger-automation-mixin.mjs";
+import TriggerAutomationMixin from "../trigger-automation-mixin.mjs";
 
 const { fields } = foundry.data;
 

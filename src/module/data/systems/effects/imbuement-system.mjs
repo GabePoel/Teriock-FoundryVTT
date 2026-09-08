@@ -1,6 +1,6 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
-import { GrantedSystemMixin } from "../../mixins/_module.mjs";
-import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import { GrantedSystemMixin } from "../mixins/_module.mjs";
+import ApplicableEffectSystem from "./applicable-effect-system/applicable-effect-system.mjs";
 
 /**
  * Effect-specific effect data model.

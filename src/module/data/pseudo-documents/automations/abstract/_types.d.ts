@@ -8,6 +8,8 @@ declare global {
       execution?: AbilityExecution | BaseExecution;
       /** Roll data the automation or activations should have access to. */
       rollData?: object;
+      /** The trigger that fired. */
+      trigger?: Teriock.System.Trigger;
     };
   }
 }

@@ -1,8 +1,8 @@
-import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
-import AddDocumentsAutomation from "../../automations/add-documents-automation/add-documents-automation.mjs";
-import { ConstructNodesPseudoDocumentMixin } from "../../mixins/_module.mjs";
-import { AutomationActivationFactory } from "../abstract/_module.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import AddDocumentsAutomation from "../automations/add-documents-automation/add-documents-automation.mjs";
+import { ConstructNodesPseudoDocumentMixin } from "../mixins/_module.mjs";
+import { AutomationActivationFactory } from "./abstract/_module.mjs";
 
 export default class AddDocumentsActivation
   extends mixClasses(AutomationActivationFactory(AddDocumentsAutomation), ConstructNodesPseudoDocumentMixin)

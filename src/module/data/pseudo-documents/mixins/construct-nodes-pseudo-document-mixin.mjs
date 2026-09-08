@@ -1,7 +1,7 @@
-import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 
 /**
- * @import { ConstructionNode } from "../../_module.mjs";
+ * @import { ConstructionNode } from "../_module.mjs";
  */
 
 /**

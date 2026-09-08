@@ -1,5 +1,5 @@
 export * as abstract from "./abstract/_module.mjs";
-export { default as AddDocumentsActivation } from "./add-documents-activation/add-documents-activation.mjs";
+export { default as AddDocumentsActivation } from "./add-documents-activation.mjs";
 export { default as AttackActivation } from "./attack-activation/attack-activation.mjs";
 export { default as ChangeMovementActivation } from "./change-movement-activation/change-movement-activation.mjs";
 export { default as ChangeQuantityActivation } from "./change-quantity-activation/change-quantity-activation.mjs";

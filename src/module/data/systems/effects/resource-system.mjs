@@ -1,7 +1,7 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import { ConsumableSystemMixin, RevelationSystemMixin } from "../../mixins/_module.mjs";
-import CleanedEffectSystem from "../cleaned-effect-system.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import * as automations from "../../pseudo-documents/automations/_module.mjs";
+import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
+import CleanedEffectSystem from "./cleaned-effect-system.mjs";
 
 /**
  * Resource-specific effect data model.

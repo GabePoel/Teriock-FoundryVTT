@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { omit } from "../../../helpers/utils.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -7,11 +6,6 @@ export default class ChatMacroAutomation extends mixClasses(BaseAutomation, Macr
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { type: "chatMacro" });
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return omit(super.defineSchema(), ["trigger"]);
   }
 
   /** @inheritDoc */

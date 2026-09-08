@@ -4,6 +4,7 @@ import impactConfig from "./impact-config.mjs";
 
 const triggerConfig = {
   activity: {
+    alwaysAvailable: true,
     choices: {
       executeAbility: "TERIOCK.TRIGGERS.Activity.choices.useAbility",
       executeArmament: "TERIOCK.TRIGGERS.Activity.choices.useArmament",
@@ -20,9 +21,11 @@ const triggerConfig = {
       attune: "TERIOCK.TRIGGERS.Attunable.choices.attune",
       deattune: "TERIOCK.TRIGGERS.Attunable.choices.deattune",
     },
+    granted: true,
     label: "TERIOCK.TRIGGERS.Attunable.label",
   },
   combat: {
+    alwaysAvailable: true,
     choices: {
       combatEnd: "TERIOCK.TRIGGERS.Combat.choices.combatEnd",
       combatStart: "TERIOCK.TRIGGERS.Combat.choices.combatStart",
@@ -32,6 +35,7 @@ const triggerConfig = {
     label: "TERIOCK.TRIGGERS.Combat.label",
   },
   consequence: {
+    alwaysAvailable: true,
     choices: {
       applyEffect: "TERIOCK.TRIGGERS.Consequence.choices.applyEffect",
       expireEffect: "TERIOCK.TRIGGERS.Consequence.choices.expireEffect",
@@ -51,9 +55,11 @@ const triggerConfig = {
       unequip: "TERIOCK.TRIGGERS.Equipment.choices.unequip",
       unglue: "TERIOCK.TRIGGERS.Equipment.choices.unglue",
     },
+    granted: true,
     label: "TYPES.Item.equipment",
   },
   impact: {
+    alwaysAvailable: true,
     choices: objectMap(impactConfig, c => c.take, { filter: c => !c?.hidden }),
     label: "TERIOCK.TRIGGERS.Impact.label",
   },
@@ -62,6 +68,7 @@ const triggerConfig = {
     label: "TYPES.Item.mount",
   },
   protection: {
+    alwaysAvailable: true,
     choices: {
       hexproof: "TERIOCK.ROLLS.Hexproof.button",
       hexseal: "TERIOCK.ROLLS.Hexseal.button",
@@ -71,6 +78,7 @@ const triggerConfig = {
     label: "TERIOCK.TRIGGERS.Protection.label",
   },
   time: {
+    alwaysAvailable: true,
     choices: {
       dawn: "TERIOCK.TRIGGERS.Time.choices.dawn",
       dusk: "TERIOCK.TRIGGERS.Time.choices.dusk",

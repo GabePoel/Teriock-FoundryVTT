@@ -1,10 +1,10 @@
-import mathConfig from "../../../../../constants/config/math-config.mjs";
-import { ExpirationExecution } from "../../../../../executions/child-executions/_module.mjs";
-import { objectMap } from "../../../../../helpers/utils.mjs";
-import { FormulaField } from "../../../../fields/_module.mjs";
-import { rollableFormulaField } from "../../../../fields/tools/builders.mjs";
-import MechanicPseudoDocument from "../../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
-import { ExpirationActivation } from "../../../activations/_module.mjs";
+import mathConfig from "../../../../constants/config/math-config.mjs";
+import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
+import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
+import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
+import { ExpirationActivation } from "../../activations/_module.mjs";
 
 const { fields } = foundry.data;
 

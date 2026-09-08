@@ -108,7 +108,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
         consumable: consumable.uuid,
         formula,
         messageMode: options?.execution?._messageMode ?? null,
-        triggerLabel: this.constructor._processedTriggerChoices[this.trigger]?.label ?? "",
+        triggerLabel: this.constructor._getTriggerChoices(true)[options?.trigger]?.label ?? "",
       }),
     ];
   }

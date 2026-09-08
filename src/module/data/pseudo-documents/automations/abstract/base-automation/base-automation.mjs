@@ -183,7 +183,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (this.metadata.tags.interactInExecution && this.trigger) { this.interactInExecution = false; }
+    if (this.metadata.tags.interactInExecution && this.triggers?.size) { this.interactInExecution = false; }
     if (this.metadata.tags.useInExecution && !this.interactInExecution) { this.useInExecution = false; }
   }
 }
