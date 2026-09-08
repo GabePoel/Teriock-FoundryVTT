@@ -3,7 +3,6 @@ declare module "./base-automation.mjs" {
     type: AutomationType;
     _id: ID<BaseAutomation>;
     interactInExecution: boolean;
-    passive: boolean;
     useInExecution: boolean;
   }
 }

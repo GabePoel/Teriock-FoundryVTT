@@ -53,6 +53,7 @@ export default class PropertySystem
       automations.LightAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,
+      automations.StatusAutomation,
       automations.TakeAutomation,
       automations.TradecraftAutomation,
       automations.UseDocumentsAutomation,
@@ -106,11 +107,6 @@ export default class PropertySystem
     const parts = super.embedParts;
     if (!this.consumable) { parts.subtitle = this._kindEntry.label; }
     return parts;
-  }
-
-  /** @inheritDoc */
-  get isPassive() {
-    return null;
   }
 
   /** @inheritDoc */

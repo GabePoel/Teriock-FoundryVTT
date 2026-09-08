@@ -19,7 +19,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { choosePassive: true }, type: "changeQuantity" });
+    return Object.assign(super.metadata, { type: "changeQuantity" });
   }
 
   /** @inheritDoc */
@@ -86,6 +86,11 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
       tips.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable" });
     }
     return tips;
+  }
+
+  /** @inheritDoc */
+  get isPassive() {
+    return this.targetParent || super.isPassive;
   }
 
   /** @inheritDoc */

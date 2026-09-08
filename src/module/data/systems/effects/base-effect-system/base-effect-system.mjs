@@ -50,7 +50,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get childChanges() {
-    return this.automations.getTypeSync("childChange", { active: true, ongoing: true }).flatMap(a => a.getChanges());
+    return this.automations.getTypeSync("childChange", { active: true, isPassive: true }).flatMap(a => a.getChanges());
   }
 
   /**
@@ -173,7 +173,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
    * Expires the effect manually.
    * @param {object} [options]
    * @param {boolean} [options.dialog]
-   * @returns {Promise<boolean>} Whether the effect actually expired (a dialog prompt may have been cancelled).
+   * @returns {Promise<boolean>} Whether the effect actually expired (a dialog prompt may have been canceled).
    */
   async expire(options = {}) {
     let expired = true;
@@ -205,7 +205,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     super.prepareBaseData();
     const statusAutomations = this.automations.getTypeSync(StatusAutomation.metadata.type, {
       active: true,
-      ongoing: true,
+      isPassive: true,
     });
     statusAutomations.forEach(a => {
       if (a.relation === "include") { this.parent.statuses.add(a.status); }

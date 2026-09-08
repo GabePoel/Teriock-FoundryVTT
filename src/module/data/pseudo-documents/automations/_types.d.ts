@@ -8,7 +8,6 @@ import {
   ChangeQuantityAutomation,
   ChangesAutomation,
   ChatMacroAutomation,
-  ChatStatusAutomation,
   ChildChangeAutomation,
   CommonMacroAutomation,
   CommonOutcomesAutomation,
@@ -48,7 +47,6 @@ declare global {
     changeQuantity: ChangeQuantityAutomation;
     changes: ChangesAutomation;
     chatMacro: ChatMacroAutomation;
-    chatStatus: ChatStatusAutomation;
     childChange: ChildChangeAutomation;
     common: CommonOutcomesAutomation;
     commonMacro: CommonMacroAutomation;

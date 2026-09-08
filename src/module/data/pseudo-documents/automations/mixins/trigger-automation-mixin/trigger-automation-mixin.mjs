@@ -84,16 +84,9 @@ export default function TriggerAutomationMixin(Base) {
      * @returns {string[]}
      */
     get _triggerPaths() {
-      const paths = [];
-      if (this.metadata.tags.choosePassive || typeof this.document?.system?.isPassive !== "boolean") {
-        paths.push("passive");
-      }
-      paths.push("trigger");
+      const paths = ["trigger"];
       if (this.trigger) { paths.push("triggerQualifier"); }
-      if (
-        this.canGetActivations && this.metadata.tags.interactInExecution
-        && this.document?.system?.metadata?.tags?.usable
-      ) {
+      if (!this.trigger && this.metadata.tags.interactInExecution && this.document?.system?.metadata?.tags?.usable) {
         paths.push("interactInExecution");
       }
       return paths;
@@ -101,7 +94,7 @@ export default function TriggerAutomationMixin(Base) {
 
     /** @inheritDoc */
     get canAddToEffect() {
-      return Boolean(this.trigger);
+      return Boolean(this.trigger) && super.canAddToEffect;
     }
 
     /** @inheritDoc */

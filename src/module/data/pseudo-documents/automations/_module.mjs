@@ -8,7 +8,6 @@ export { default as ChangeMovementAutomation } from "./change-movement-automatio
 export { default as ChangeQuantityAutomation } from "./change-quantity-automation/change-quantity-automation.mjs";
 export { default as ChangesAutomation } from "./changes-automation/changes-automation.mjs";
 export { default as ChatMacroAutomation } from "./chat-macro-automation.mjs";
-export { default as ChatStatusAutomation } from "./chat-status-automation/chat-status-automation.mjs";
 export { default as ChildChangeAutomation } from "./child-change-automation/child-change-automation.mjs";
 export { default as CommonMacroAutomation } from "./common-macro-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation/common-outcomes-automation.mjs";

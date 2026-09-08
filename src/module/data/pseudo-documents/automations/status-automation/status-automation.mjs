@@ -1,20 +1,30 @@
-import ChatStatusAutomation from "../chat-status-automation/chat-status-automation.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { omit } from "../../../../helpers/utils.mjs";
+import {
+  ApplyStatusActivation,
+  RemoveStatusActivation,
+  ToggleStatusActivation,
+} from "../../activations/command-activations.mjs";
+import { BaseAutomation } from "../abstract/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class StatusAutomation extends ChatStatusAutomation {
+/** Every relationship a condition can have. */
+const RELATION_CHOICES = {
+  apply: "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.apply",
+  include: "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include",
+  remove: "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.remove",
+  toggle: "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.toggle",
+};
+
+/**
+ * @mixes TriggerAutomation
+ */
+export default class StatusAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Status"];
-
-  /** @inheritDoc */
-  static get _relationChoices() {
-    return { ...super._relationChoices, include: _loc("TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include") };
-  }
-
-  /** @inheritDoc */
-  static get _relationInitial() {
-    return "include";
-  }
 
   /** @inheritDoc */
   static get metadata() {
@@ -26,6 +36,19 @@ export default class StatusAutomation extends ChatStatusAutomation {
     return Object.assign(super.defineSchema(), {
       executor: new fields.BooleanField(),
       multi: new fields.BooleanField(),
+      relation: new fields.StringField({
+        choices: localizeChoices(RELATION_CHOICES),
+        initial: "include",
+        label: "TERIOCK.AUTOMATIONS.Base.FIELDS.relation.label",
+        nullable: false,
+        required: true,
+      }),
+      status: new fields.StringField({
+        choices: TERIOCK.reference.conditions,
+        initial: Object.keys(TERIOCK.reference.conditions)[0],
+        label: "TERIOCK.COMMON.Condition",
+        required: true,
+      }),
       target: new fields.BooleanField(),
     });
   }
@@ -88,12 +111,35 @@ export default class StatusAutomation extends ChatStatusAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    const paths = super._formPaths;
-    if (this.relation === "include" && !this.isPassive) {
+    const paths = ["status", "relation"];
+    if (this.relation !== "include") { paths.push(...super._formPaths); }
+    else if (!this.isPassive) {
       paths.push(...["hr", "executor", "target"]);
       if (this.target) { paths.push("multi"); }
     }
     return paths;
+  }
+
+  /**
+   * The relations that are available given what this belongs to.
+   * @returns {Record<string, string>}
+   */
+  get _relationChoices() {
+    return localizeChoices(this.canModifyEffectData ? RELATION_CHOICES : omit(RELATION_CHOICES, ["include"]));
+  }
+
+  /** @inheritDoc */
+  async _getActivations() {
+    if (this.relation === "apply") { return [new ApplyStatusActivation({ options: { status: this.status } })]; }
+    else if (this.relation === "remove") { return [new RemoveStatusActivation({ options: { status: this.status } })]; }
+    else if (this.relation === "toggle") { return [new ToggleStatusActivation({ options: { status: this.status } })]; }
+    return [];
+  }
+
+  /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (path === "relation") { inputConfig.choices = this._relationChoices; }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
   /** @inheritDoc */
@@ -117,6 +163,12 @@ export default class StatusAutomation extends ChatStatusAutomation {
     if (!this.#trackedUuids.length) { return; }
     await this.#addAssociation(data);
     this.#addTrackers(data);
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    if (!this.canModifyEffectData && this.relation === "include") { this.relation = "apply"; }
   }
 
   /**

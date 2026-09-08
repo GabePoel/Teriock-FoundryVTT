@@ -10,7 +10,6 @@ declare global {
 
     type AutomationTags = TypeTags & {
       changes: boolean;
-      choosePassive: boolean;
       interactInExecution: boolean;
       triggered: boolean;
       useInExecution: boolean;

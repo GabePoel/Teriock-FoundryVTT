@@ -1,6 +1,8 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
+const RENAMED_AUTOMATION_TYPES = { chatStatus: "status" };
+
 /**
  * @template {AnyConstructor} T
  * @param {T} Base
@@ -42,6 +44,15 @@ export default function AutomatableSystemMixin(Base) {
       return Object.assign(super.defineSchema(), {
         automations: new PseudoCollectionField(BaseAutomation, { types: this.automationTypes }),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      for (const automation of Object.values(source.automations ?? {})) {
+        const renamed = RENAMED_AUTOMATION_TYPES[automation?.type];
+        if (renamed) { automation.type = renamed; }
+      }
+      return super.migrateData(source, options);
     }
   }
 

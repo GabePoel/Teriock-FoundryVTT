@@ -42,8 +42,14 @@ export default class UseDocumentsAutomation
   /** @inheritDoc */
   get _formPaths() {
     const paths = [...this._selectionPaths, "hr", ...this._triggerDisplayPaths];
-    if (this.interactInExecution) { paths.push("useInExecution"); }
     paths.push("hr", ...this._competencePaths, ...this._overrideDataPaths);
+    return paths;
+  }
+
+  /** @inheritDoc */
+  get _triggerPaths() {
+    const paths = super._triggerPaths;
+    if (this.interactInExecution) { paths.push("useInExecution"); }
     return paths;
   }
 

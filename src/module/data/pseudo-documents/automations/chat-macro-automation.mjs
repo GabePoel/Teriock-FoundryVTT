@@ -11,7 +11,7 @@ export default class ChatMacroAutomation extends mixClasses(BaseAutomation, Macr
 
   /** @inheritDoc */
   static defineSchema() {
-    return omit(super.defineSchema(), "trigger");
+    return omit(super.defineSchema(), ["trigger"]);
   }
 
   /** @inheritDoc */

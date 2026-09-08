@@ -77,9 +77,8 @@ export default function ActorAffinitiesPart(Base) {
      * @todo Test this
      */
     isProtected(category, value) {
-      return PROTECTION_TYPES.flatMap(type => this.affinities.getTypeSync(type, { active: true, ongoing: true })).some(
-        a => a.category === category && a.value === value
-      );
+      return PROTECTION_TYPES.flatMap(type => this.affinities.getTypeSync(type, { active: true, isPassive: true }))
+        .some(a => a.category === category && a.value === value);
     }
 
     /** @inheritDoc */

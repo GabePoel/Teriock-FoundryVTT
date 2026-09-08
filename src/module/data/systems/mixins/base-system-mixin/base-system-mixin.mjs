@@ -187,9 +187,8 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
-     * Whether this document applies passively instead of only when used. `null` if it can be either, leaving
-     * the choice to each mechanic it holds.
-     * @returns {boolean|null}
+     * Whether this document applies passively instead of only when used.
+     * @returns {boolean}
      */
     get isPassive() {
       return true;

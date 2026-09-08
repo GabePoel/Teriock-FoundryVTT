@@ -64,10 +64,6 @@
             "hint": "If checked, this asks for whatever input it needs while its document is being used, rather than creating a button that asks when pressed.",
             "label": "Interact During Execution"
           },
-          "passive": {
-            "hint": "If checked, this acts on its own via a trigger. Otherwise, it acts when its document is used.",
-            "label": "Passive"
-          },
           "relation": {
             "label": "Relation"
           },
@@ -116,26 +112,6 @@
         "USAGE": {
           "description": "The quantity of {name} has changed by {amount}.",
           "roll": "Change Quantity Roll"
-        }
-      },
-      "ChatStatus": {
-        "FIELDS": {
-          "executor": {
-            "hint": "Whether the creature that executes the ability will be associated with this condition.",
-            "label": "Associate Executor"
-          },
-          "relation": {
-            "choices": {
-              "apply": "Apply",
-              "remove": "Remove",
-              "toggle": "Toggle"
-            },
-            "hint": "What the relationship between the effect and condition is."
-          },
-          "target": {
-            "hint": "Whether to open a dialog to select tokens that will be associated with this condition.",
-            "label": "Select Associations"
-          }
         }
       },
       "ChildChange": {
@@ -453,15 +429,26 @@
           }
         },
         "FIELDS": {
+          "executor": {
+            "hint": "Whether the creature that executes the ability will be associated with this condition.",
+            "label": "Associate Executor"
+          },
           "multi": {
             "hint": "If checked, multiple tokens can be selected to be associated with this condition at once.",
             "label": "Multiple Selection"
           },
           "relation": {
             "choices": {
-              "include": "Include"
+              "apply": "Apply",
+              "include": "Include",
+              "remove": "Remove",
+              "toggle": "Toggle"
             },
             "hint": "Apply, remove, toggle, or include the condition as part of the ability's effect."
+          },
+          "target": {
+            "hint": "Whether to open a dialog to select tokens that will be associated with this condition.",
+            "label": "Select Associations"
           }
         }
       },

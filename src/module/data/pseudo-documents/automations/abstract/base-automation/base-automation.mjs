@@ -17,13 +17,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
     return foundry.utils.mergeObject(super.metadata, {
       documentName: "Automation",
       label: _loc("DOCUMENT.Automation"),
-      tags: {
-        changes: false,
-        choosePassive: false,
-        interactInExecution: false,
-        triggered: false,
-        useInExecution: false,
-      },
+      tags: { changes: false, interactInExecution: false, triggered: false, useInExecution: false },
       typed: true,
     });
   }
@@ -31,7 +25,6 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();
-    schema.passive = new fields.BooleanField();
     if (this.metadata.tags.interactInExecution) { schema.interactInExecution = new fields.BooleanField(); }
     if (this.metadata.tags.useInExecution) { schema.useInExecution = new fields.BooleanField({ initial: true }); }
     return schema;
@@ -47,7 +40,6 @@ export default class BaseAutomation extends MechanicPseudoDocument {
       source.interactInExecution = true;
       delete source.trigger;
     }
-    source.passive ??= Boolean(source.trigger);
     return super.migrateData(source, options);
   }
 
@@ -75,11 +67,12 @@ export default class BaseAutomation extends MechanicPseudoDocument {
     return !this.useInExecution;
   }
 
-  /** @inheritDoc */
-  get isPassive() {
-    const documentPassive = this.document?.system?.isPassive;
-    if (this.metadata.tags.choosePassive || typeof documentPassive !== "boolean") { return this.passive; }
-    return documentPassive;
+  /**
+   * Whether this can modify generated effect data.
+   * @returns {boolean}
+   */
+  get canModifyEffectData() {
+    return this.document?.type === "ability";
   }
 
   /**
@@ -190,7 +183,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (this.metadata.tags.interactInExecution && this.isPassive) { this.interactInExecution = false; }
+    if (this.metadata.tags.interactInExecution && this.trigger) { this.interactInExecution = false; }
     if (this.metadata.tags.useInExecution && !this.interactInExecution) { this.useInExecution = false; }
   }
 }

@@ -46,7 +46,9 @@ export default function PlayableActorSheetSectionsPart(Base) {
      */
     static async #previewGroupAffinity() {
       return AFFINITY_GROUPS.map(group => ({
-        docs: group.types.flatMap(t => this.document.system.affinities.getTypeSync(t, { active: true, ongoing: true })),
+        docs: group.types.flatMap(t =>
+          this.document.system.affinities.getTypeSync(t, { active: true, isPassive: true })
+        ),
         empty: _loc(group.label).toLowerCase(),
         optional: true,
       }));

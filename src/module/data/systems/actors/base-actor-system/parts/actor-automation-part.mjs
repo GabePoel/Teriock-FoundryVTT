@@ -18,7 +18,7 @@ export default function ActorAutomationPart(Base) {
       const autos = this.automations.getTypeSync("changeCompetence", {
         active: true,
         competence: value,
-        ongoing: true,
+        isPassive: true,
       });
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
@@ -32,7 +32,7 @@ export default function ActorAutomationPart(Base) {
      * Apply all suppress automations that force certain children of this document to be suppressed.
      */
     #applySuppressAutomations() {
-      const autos = this.automations.getTypeSync("suppress", { active: true, ongoing: true });
+      const autos = this.automations.getTypeSync("suppress", { active: true, isPassive: true });
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
         if (identifiers.has(c.typedIdentifier)) { c.system.forceSuppressed = true; }

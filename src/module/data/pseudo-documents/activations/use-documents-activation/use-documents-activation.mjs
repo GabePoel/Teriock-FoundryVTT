@@ -16,7 +16,9 @@ export default class UseDocumentsActivation extends mixClasses(BaseActivation, S
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), "makeSeparateActivations"), { options: new fields.ObjectField() });
+    return Object.assign(omit(super.defineSchema(), ["makeSeparateActivations"]), {
+      options: new fields.ObjectField(),
+    });
   }
 
   /** @inheritDoc */
