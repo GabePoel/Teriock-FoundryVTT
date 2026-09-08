@@ -17,14 +17,7 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(
-      omit(super.defineSchema(), [
-        "expandFolders",
-        "expandTables",
-        "localIdentifiers",
-        "localQualifier",
-        "localUuids",
-        "makeSeparateActivations",
-      ]),
+      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
       { attachToToken: new fields.BooleanField(), data: new fields.ObjectField() },
     );
   }

@@ -30,6 +30,11 @@ export default class CommonOutcomesAutomation extends mixClasses(BaseAutomation,
   }
 
   /** @inheritDoc */
+  get makesOneActivation() {
+    return false;
+  }
+
+  /** @inheritDoc */
   async _getActivations(options) {
     const activationOptions = {};
     if (options?.execution?.armament?.uuid && options?.execution?.actor?.uuid) {

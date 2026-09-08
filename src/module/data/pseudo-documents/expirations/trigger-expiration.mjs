@@ -21,7 +21,7 @@ export default class TriggerExpiration extends mixClasses(BaseExpiration, Trigge
 
   /** @inheritDoc */
   _validateExpirationAttempt(type, context) {
-    return super._validateExpirationAttempt(type, context) && this.triggeredBy(context.trigger, context);
+    return super._validateExpirationAttempt(type, context) && this.validateTrigger(context.trigger, context);
   }
 
   /** @inheritDoc */

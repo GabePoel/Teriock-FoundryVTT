@@ -43,7 +43,7 @@ export default class TradecraftAutomation
       "hr",
       ...this._selectionPaths,
       "hr",
-      ...this._triggerPaths,
+      ...this._triggerDisplayPaths,
       "hr",
       "bonus",
       "threshold",
@@ -60,6 +60,11 @@ export default class TradecraftAutomation
     if (this.multi) { paths.push("all"); }
     if (!this.multi || !this.all) { paths.push("automatic"); }
     return paths;
+  }
+
+  /** @inheritDoc */
+  get makesOneActivation() {
+    return false;
   }
 
   /**

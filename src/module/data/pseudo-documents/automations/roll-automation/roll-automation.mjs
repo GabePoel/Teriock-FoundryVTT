@@ -4,15 +4,14 @@ import { objectMap } from "../../../../helpers/utils.mjs";
 import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 import { RollActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class RollAutomation extends mixClasses(BaseAutomation, DisplayAutomationMixin, TriggerAutomationMixin) {
+export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Roll"];
 
@@ -43,7 +42,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, DisplayAu
   async _getActivations(options = {}) {
     const formula = options?.execution?._heightenString?.(this.formula) ?? this.formula;
     if (formula && this.impact) {
-      return [new RollActivation({ display: this.display, formula, impact: this.impact })];
+      return [new RollActivation({ formula, impact: this.impact })];
     }
     return [];
   }

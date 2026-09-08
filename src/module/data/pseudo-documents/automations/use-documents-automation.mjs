@@ -6,11 +6,10 @@ import {
   SelectionPseudoDocumentMixin,
 } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
+import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
  * @mixes SelectionPseudoDocument
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataPseudoDocument
@@ -19,7 +18,6 @@ export default class UseDocumentsAutomation
   extends mixClasses(
     BaseAutomation,
     SelectionPseudoDocumentMixin,
-    DisplayAutomationMixin,
     TriggerAutomationMixin,
     OverrideCompetencePseudoDocumentMixin,
     OverrideDataPseudoDocumentMixin,
@@ -36,8 +34,8 @@ export default class UseDocumentsAutomation
     });
   }
 
-  /** @type {{ config: object, document: TeriockDocument|null }[]|null} */
-  #selections = null;
+  /** @type {{ config: object, document: TeriockDocument|null }|null} */
+  #selection = null;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -55,23 +53,21 @@ export default class UseDocumentsAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selections = this.#selections
-      ?? await this._getSelections({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
-    if (!selections.length) { return []; }
+    const selection = this.#selection
+      ?? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
+    if (!selection) { return []; }
     const useOptions = {
       ...this.getUseOptions(),
       competence: this.getCompetence(options),
       edge: options.execution?.edge,
       event: options.execution?.options?.event,
     };
-    return selections.map(({ config, document }) => {
-      const display = foundry.utils.deepClone(this.display);
-      if (document) {
-        display.icon = TERIOCK.config.document[document.type]?.icon;
-        display.label ||= document.name;
-      }
-      return new UseDocumentsActivation({ ...config, display, options: useOptions });
-    });
+    const display = {};
+    if (selection.document) {
+      display.icon = TERIOCK.config.document[selection.document.type]?.icon;
+      display.label = selection.document.name;
+    }
+    return [new UseDocumentsActivation({ ...selection.config, display, options: useOptions })];
   }
 
   /** @inheritDoc */
@@ -98,16 +94,15 @@ export default class UseDocumentsAutomation
       edge: execution.edge,
       event: execution.options?.event,
     };
-    for (const { config } of this.#selections ?? []) {
-      const documents = await Promise.all((config.globalUuids ?? []).map(uuid => fromUuid(uuid)));
-      for (const document of documents.filter(Boolean)) {
-        await document.use({ ...useOptions, actor: execution.actor });
-      }
+    const uuids = this.#selection?.config.globalUuids ?? [];
+    const documents = await Promise.all(uuids.map(uuid => fromUuid(uuid)));
+    for (const document of documents.filter(Boolean)) {
+      await document.use({ ...useOptions, actor: execution.actor });
     }
   }
 
   /** @inheritDoc */
   async interactOnExecutionInput(execution) {
-    this.#selections = this.interactInExecution ? await this._getSelections({ relativeTo: execution.actor }) : null;
+    this.#selection = this.interactInExecution ? await this._getSelection({ relativeTo: execution.actor }) : null;
   }
 }

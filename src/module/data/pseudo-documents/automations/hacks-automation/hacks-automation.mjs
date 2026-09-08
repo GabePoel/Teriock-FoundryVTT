@@ -36,6 +36,11 @@ export default class HacksAutomation extends mixClasses(BaseAutomation, TriggerA
   }
 
   /** @inheritDoc */
+  get makesOneActivation() {
+    return false;
+  }
+
+  /** @inheritDoc */
   async _getActivations() {
     if (this.reverse) { return Array.from(this.hacks).map(h => new TakeUnhackActivation({ options: { part: h } })); }
     return Array.from(this.hacks).map(h => new TakeHackActivation({ options: { part: h } }));

@@ -23,7 +23,7 @@ export default function TriggerAutomationMixin(Base) {
 
     /** @inheritDoc */
     get _formPaths() {
-      return [...super._formPaths, ...this._triggerPaths];
+      return [...super._formPaths, ...this._triggerDisplayPaths];
     }
 
     /** @inheritDoc */
@@ -48,14 +48,6 @@ export default function TriggerAutomationMixin(Base) {
     }
 
     /**
-     * Whether the document this belongs to permits its triggers to fire.
-     * @returns {boolean}
-     */
-    get documentAllowsTrigger() {
-      return this.document.active;
-    }
-
-    /**
      * What happens when this automation is triggered.
      * @param {Teriock.System.TriggerScope} scope
      * @returns {Promise<void>}
@@ -64,12 +56,14 @@ export default function TriggerAutomationMixin(Base) {
       const document = this.document;
       const actor = scope.actor ?? this.actor;
       if (!document || !actor?.prepareTriggeredChatData) { return; }
-      const activations = await this._getActivations({
-        actor: scope.actor,
-        execution: scope.execution ?? null,
-        rollData: this._getFireRollData(scope),
-        trigger: scope.trigger,
-      });
+      const activations = this._applyDisplayToActivations(
+        await this._getActivations({
+          actor: scope.actor,
+          execution: scope.execution ?? null,
+          rollData: this._getFireRollData(scope),
+          trigger: scope.trigger,
+        }),
+      );
       if (!activations.length) { return; }
       scope.chatDataBySource ??= {};
       const key = document.uuid;
@@ -80,19 +74,7 @@ export default function TriggerAutomationMixin(Base) {
     /** @inheritDoc */
     async _onFireTrigger(trigger, scope) {
       await super._onFireTrigger(trigger, scope);
-      if (this.canFire(trigger, scope)) { await this._onFire(scope); }
-    }
-
-    /**
-     * Whether this can fire.
-     * @param {string} trigger
-     * @param {Teriock.System.TriggerScope} [scope]
-     * @returns {boolean}
-     */
-    canFire(trigger, scope = {}) {
-      return (this.triggeredBy(trigger, scope)
-        && this.checkIfQualified()
-        && this.active && this.isPassive && this.documentAllowsTrigger);
+      if (this.validateTrigger(trigger, scope)) { await this._onFire(scope); }
     }
   }
 

@@ -28,7 +28,7 @@ export default class ResistAutomation extends mixClasses(ThresholdAutomation, Tr
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["hex", "bonus", ...this._triggerPaths];
+    return ["hex", "bonus", ...this._triggerDisplayPaths];
   }
 
   /** @inheritDoc */

@@ -19,8 +19,6 @@ declare global {
       localQualifier: Teriock.System.FormulaString;
       /** Relative UUIDs to get results from relative to some local document. */
       localUuids: Set<UUID>;
-      /** Whether each result should have a separate activation made. */
-      makeSeparateActivations: boolean;
       /** Whether multiple choices can be selected. */
       multi: boolean;
     }

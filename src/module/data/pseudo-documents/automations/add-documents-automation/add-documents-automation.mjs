@@ -8,16 +8,15 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import { ConstructNodesPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
 export default class AddDocumentsAutomation
-  extends mixClasses(BaseAutomation, DisplayAutomationMixin, TriggerAutomationMixin, ConstructNodesPseudoDocumentMixin)
+  extends mixClasses(BaseAutomation, TriggerAutomationMixin, ConstructNodesPseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
@@ -65,7 +64,6 @@ export default class AddDocumentsAutomation
       "localIdentifiers",
       "localQualifier",
       "localUuids",
-      "makeSeparateActivations",
       "overrideData",
       "separate",
       "setCompetence",
@@ -142,7 +140,6 @@ export default class AddDocumentsAutomation
         all: this.all,
         auto: this.auto,
         constructionNodes: ConstructionNode.toCollectionObject(nodes.map(n => n.toObject()), { keepId: true }),
-        display: this.display,
         multi: this.multi,
         target: this.target,
       }),

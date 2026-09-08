@@ -2,17 +2,14 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { MacroActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class MacroAutomation
-  extends mixClasses(BaseAutomation, TriggerAutomationMixin, DisplayAutomationMixin)
-{
+export default class MacroAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Macro"];
 
@@ -64,16 +61,11 @@ export default class MacroAutomation
     const macro = await resolveDocument(this.primaryMacro);
     return [
       new MacroActivation({
-        display: { label: this.display.label || macro?.name || this.label },
+        display: { label: macro?.name || this.label },
         primaryMacro: this.primaryMacro,
         secondaryMacro: this.secondaryMacro,
       }),
     ];
-  }
-
-  /** @inheritDoc */
-  canFire(trigger, scope) {
-    return super.canFire(trigger, scope) && this.hasMacro;
   }
 
   /**
@@ -90,5 +82,10 @@ export default class MacroAutomation
   /** @inheritDoc */
   async interactOnExecutionInput(execution) {
     if (this.interactInExecution) { await this.executeMacro(execution.getScope()); }
+  }
+
+  /** @inheritDoc */
+  validateTrigger(trigger, scope) {
+    return super.validateTrigger(trigger, scope) && this.hasMacro;
   }
 }

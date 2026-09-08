@@ -19,14 +19,7 @@ export default class TransformationAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(
-      omit(super.defineSchema(), [
-        "expandFolders",
-        "expandTables",
-        "localIdentifiers",
-        "localQualifier",
-        "localUuids",
-        "makeSeparateActivations",
-      ]),
+      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
       automationTransformationFields(),
     );
   }

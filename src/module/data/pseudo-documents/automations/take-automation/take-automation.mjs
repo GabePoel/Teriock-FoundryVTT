@@ -2,15 +2,14 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TakeActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class TakeAutomation extends mixClasses(BaseAutomation, DisplayAutomationMixin, TriggerAutomationMixin) {
+export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];
 
@@ -30,7 +29,6 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, DisplayAu
         required: true,
       }),
       morganti: new fields.BooleanField(),
-      showDialog: new fields.BooleanField(),
     });
   }
 
@@ -45,14 +43,7 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, DisplayAu
   /** @inheritDoc */
   async _getActivations() {
     if (this.impact && this.impact !== "other") {
-      return [
-        new TakeActivation({
-          amount: this.amount,
-          display: this.display,
-          impact: this.impact,
-          morganti: this.morganti,
-        }),
-      ];
+      return [new TakeActivation({ amount: this.amount, impact: this.impact, morganti: this.morganti })];
     }
     return [];
   }

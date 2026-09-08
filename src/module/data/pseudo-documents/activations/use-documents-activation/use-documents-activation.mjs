@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { omit } from "../../../../helpers/utils.mjs";
 import { SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -16,9 +15,7 @@ export default class UseDocumentsActivation extends mixClasses(BaseActivation, S
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["makeSeparateActivations"]), {
-      options: new fields.ObjectField(),
-    });
+    return Object.assign(super.defineSchema(), { options: new fields.ObjectField() });
   }
 
   /** @inheritDoc */

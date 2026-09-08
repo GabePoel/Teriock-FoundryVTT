@@ -3,15 +3,14 @@ import { omit } from "../../../helpers/utils.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
+import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
  * @mixes SelectionPseudoDocument
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
 export default class SummonAutomation
-  extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, DisplayAutomationMixin, TriggerAutomationMixin)
+  extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
@@ -32,8 +31,8 @@ export default class SummonAutomation
     ]);
   }
 
-  /** @type {{ config: object, document: TeriockDocument|null }[]|null} */
-  #selections = null;
+  /** @type {{ config: object, document: TeriockDocument|null }|null} */
+  #selection = null;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -42,17 +41,16 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selections = this.#selections
-      ?? await this._getSelections({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
-    return selections.map(({ config, document }) => {
-      const display = foundry.utils.deepClone(this.display);
-      if (document) {
-        display.label ||= _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
-          name: document.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
-        });
-      }
-      return new SummonActivation({ ...config, display });
-    });
+    const selection = this.#selection
+      ?? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
+    if (!selection) { return []; }
+    const display = {};
+    if (selection.document) {
+      display.label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
+        name: selection.document.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
+      });
+    }
+    return [new SummonActivation({ ...selection.config, display })];
   }
 
   /** @inheritDoc */
@@ -62,6 +60,6 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   async interactOnExecutionInput(execution) {
-    this.#selections = this.interactInExecution ? await this._getSelections({ relativeTo: execution.actor }) : null;
+    this.#selection = this.interactInExecution ? await this._getSelection({ relativeTo: execution.actor }) : null;
   }
 }

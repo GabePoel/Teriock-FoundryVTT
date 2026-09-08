@@ -6,7 +6,7 @@ import { FormulaField } from "../../../fields/_module.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,7 +14,6 @@ const { fields } = foundry.data;
  * @mixes SelectionPseudoDocument
  * @mixes TriggerAutomation
  * @mixes OverrideDataPseudoDocument
- * @mixes DisplayAutomation
  */
 export default class RegionAutomation
   extends mixClasses(
@@ -22,7 +21,6 @@ export default class RegionAutomation
     SelectionPseudoDocumentMixin,
     TriggerAutomationMixin,
     OverrideDataPseudoDocumentMixin,
-    DisplayAutomationMixin,
   )
 {
   /**
@@ -56,7 +54,7 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations"]), {
+    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
       angle: new FormulaField({ deterministic: true, initial: "60" }),
       attachToToken: new fields.BooleanField({ initial: true }),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
@@ -237,12 +235,11 @@ export default class RegionAutomation
   async _getActivations(options = { rollData: {} }) {
     if (this.#placed) { return []; }
     const data = await this.getRegionData(options);
-    const selections = this.hasSelection
-      ? await this._getSelections({ relativeTo: options.execution?.actor ?? this.actor })
-      : [{ config: {} }];
-    return selections.map(({ config }) =>
-      new RegionActivation({ ...config, attachToToken: this.attachToToken, data, display: this.display })
-    );
+    const selection = this.hasSelection
+      ? await this._getSelection({ relativeTo: options.execution?.actor ?? this.actor })
+      : { config: {} };
+    if (!selection) { return []; }
+    return [new RegionActivation({ ...selection.config, attachToToken: this.attachToToken, data })];
   }
 
   /**

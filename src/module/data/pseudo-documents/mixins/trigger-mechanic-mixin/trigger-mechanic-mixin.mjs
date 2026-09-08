@@ -82,6 +82,14 @@ export default function TriggerMechanicMixin(Base) {
       return Boolean(this.document?.metadata?.tags?.triggerable);
     }
 
+    /**
+     * Whether the document this belongs to permits its triggers to fire.
+     * @returns {boolean}
+     */
+    get documentAllowsTrigger() {
+      return this.document.active;
+    }
+
     /** @inheritDoc */
     _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
       if (path === "triggers") { inputConfig.choices = this._triggerChoices; }
@@ -99,13 +107,15 @@ export default function TriggerMechanicMixin(Base) {
     }
 
     /**
-     * Whether a fired trigger triggers this.
+     * Validate whether a fired trigger event should trigger this.
      * @param {Teriock.System.Trigger} trigger
      * @param {Partial<Teriock.System.TriggerScope>} [scope]
      * @returns {boolean}
      */
-    triggeredBy(trigger, scope = {}) {
-      return this.triggers.has(trigger) && BaseRoll.qualify(this.triggerQualifier, () => this._getFireRollData(scope));
+    validateTrigger(trigger, scope = {}) {
+      return this.triggers.has(trigger)
+        && this.active && this.isPassive && this.documentAllowsTrigger
+        && BaseRoll.qualify(this.triggerQualifier, () => this._getFireRollData(scope));
     }
   }
 

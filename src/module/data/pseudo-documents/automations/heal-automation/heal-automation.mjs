@@ -22,7 +22,7 @@ export default class HealAutomation extends StatAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    const paths = this.noStatDice ? this._triggerPaths : super._formPaths;
+    const paths = this.noStatDice ? this._triggerDisplayPaths : super._formPaths;
     return ["noStatDice", ...paths];
   }
 
@@ -41,7 +41,7 @@ export default class HealAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  canFire(trigger, scope) {
-    return (this.actor?.system.isDamaged || this.forHarm) && super.canFire(trigger, scope);
+  validateTrigger(trigger, scope) {
+    return (this.actor?.system.isDamaged || this.forHarm) && super.validateTrigger(trigger, scope);
   }
 }

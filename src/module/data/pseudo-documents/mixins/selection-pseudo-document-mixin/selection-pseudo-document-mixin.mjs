@@ -17,11 +17,7 @@ const SELECTION_PATHS = [
   "multi",
   "all",
   "auto",
-  "makeSeparateActivations",
 ];
-
-/** The selection field paths that make up a {@link Teriock.Select.DocumentSelectionConfig}. */
-const CONFIG_PATHS = SELECTION_PATHS.filter(p => p !== "makeSeparateActivations");
 
 /**
  * Selecting documents from a stored {@link Teriock.Select.DocumentSelectionConfig}.
@@ -50,7 +46,6 @@ export default function SelectionPseudoDocumentMixin(Base) {
         localIdentifiers: new TypedIdentifierSetField(),
         localQualifier: qualifierField(),
         localUuids: new fields.SetField(new fields.DocumentUUIDField({ relative: true })),
-        makeSeparateActivations: new fields.BooleanField(),
         multi: new fields.BooleanField(),
       });
     }
@@ -67,7 +62,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
      * @returns {object}
      */
     get #selectionData() {
-      return Object.fromEntries(CONFIG_PATHS.filter(p => this.schema.has(p)).map(p => [p, this[p]]));
+      return Object.fromEntries(SELECTION_PATHS.filter(p => this.schema.has(p)).map(p => [p, this[p]]));
     }
 
     /**
@@ -158,21 +153,18 @@ export default function SelectionPseudoDocumentMixin(Base) {
     }
 
     /**
-     * Selection configs for the activations this creates and possible paired documents.
+     * Selection configs for the activations this creates and possible paired document.
      * @param {Teriock.Select.DocumentSelectionConfig} [overrides]
-     * @returns {Promise<{ config: object, document: TeriockDocument|null }[]>}
+     * @returns {Promise<{ config: object, document: TeriockDocument|null }|null>}
      */
-    async _getSelections(overrides = {}) {
-      if (!this.hasSelection) { return []; }
-      if (!this.interactInExecution && !this.makeSeparateActivations) {
-        return [{ config: this.#selectionData, document: await this.#onlySelectableDocument(overrides) }];
+    async _getSelection(overrides = {}) {
+      if (!this.hasSelection) { return null; }
+      if (!this.interactInExecution) {
+        return { config: this.#selectionData, document: await this.#onlySelectableDocument(overrides) };
       }
-      const documents = this.interactInExecution
-        ? await this.selectDocuments(overrides)
-        : await this.getSelectableDocuments(overrides);
-      if (!documents.length) { return []; }
-      if (!this.makeSeparateActivations) { return [{ config: this.#resolvedData(documents), document: null }]; }
-      return documents.map(d => ({ config: this.#resolvedData([d]), document: d }));
+      const documents = await this.selectDocuments(overrides);
+      if (!documents.length) { return null; }
+      return { config: this.#resolvedData(documents), document: null };
     }
 
     /**

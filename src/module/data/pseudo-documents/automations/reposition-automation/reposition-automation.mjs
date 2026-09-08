@@ -4,17 +4,14 @@ import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { movementActionField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { MoveActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class RepositionAutomation
-  extends mixClasses(BaseAutomation, DisplayAutomationMixin, TriggerAutomationMixin)
-{
+export default class RepositionAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */
@@ -71,7 +68,6 @@ export default class RepositionAutomation
     const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
     return [
       new MoveActivation({
-        display: this.display,
         distance,
         movementAction: this.movementAction || null,
         originBarrier: this.originBarrier,

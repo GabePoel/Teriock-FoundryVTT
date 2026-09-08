@@ -3,22 +3,15 @@ import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin, OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { DisplayAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @mixes DisplayAutomation
  * @mixes OverrideDataPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */
 export default class OverrideAutomation
-  extends mixClasses(
-    BaseAutomation,
-    DisplayAutomationMixin,
-    OverrideDataPseudoDocumentMixin,
-    OverrideCompetencePseudoDocumentMixin,
-  )
+  extends mixClasses(BaseAutomation, OverrideDataPseudoDocumentMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Override"];

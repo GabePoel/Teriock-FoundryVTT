@@ -33,7 +33,6 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
       "localIdentifiers",
       "localQualifier",
       "localUuids",
-      "makeSeparateActivations",
     ]);
   }
 

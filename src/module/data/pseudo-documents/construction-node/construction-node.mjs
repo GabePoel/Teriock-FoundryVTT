@@ -43,7 +43,7 @@ export default class ConstructionNode
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables", "makeSeparateActivations"]), {
+    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
       name: new fields.StringField({ placeholder: _loc(this.typeLabel) }),
       parentId: new fields.DocumentIdField({ initial: null, nullable: true, readonly: false }),
     });
