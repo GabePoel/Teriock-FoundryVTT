@@ -31,7 +31,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   get #showDialog() {
     if (typeof this.#amount !== "number") { return true; }
     const showDialog = game.settings.get("teriock", "showRollDialogs");
-    return this.event.ctrlKey ? showDialog : !showDialog;
+    return this.event.ctrlKey ? !showDialog : showDialog;
   }
 
   /**

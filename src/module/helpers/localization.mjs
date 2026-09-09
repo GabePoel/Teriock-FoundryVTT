@@ -168,7 +168,7 @@ export function listFormat(strings, options) {
  * @param {object} [options]
  * @param {boolean} [options.reverse]
  * @param {(string) => boolean} [options.secondFilter]
- * @returns {*|string}
+ * @returns {string}
  */
 export function secondaryFormat(primary, secondary, options = {}) {
   const secondFilter = options.secondFilter ?? (() => true);

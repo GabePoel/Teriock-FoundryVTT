@@ -89,14 +89,6 @@ export default class ConstructionNode
   }
 
   /**
-   * A full name for this.
-   * @returns {string}
-   */
-  get fullName() {
-    return _loc("TERIOCK.AUTOMATIONS.AddDocuments.NAME", { header: this.header, name: this.name });
-  }
-
-  /**
    * A dotted header string.
    * @returns {string}
    */
@@ -164,7 +156,9 @@ export default class ConstructionNode
     const record = await this.getDocumentRecord(scope);
     const operations = [];
     targets.forEach(t => {
-      Object.entries(record).forEach(([k, v]) => operations.push(t.getCreateChildDocumentsOperation(k, v)));
+      Object.entries(record).filter(([_k, v]) => v.length).forEach(([k, v]) =>
+        operations.push(t.getCreateChildDocumentsOperation(k, v))
+      );
     });
     return operations;
   }

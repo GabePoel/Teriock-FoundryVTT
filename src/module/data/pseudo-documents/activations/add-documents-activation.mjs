@@ -47,13 +47,18 @@ export default class AddDocumentsActivation
         operations.push(...ops);
       }
     }
-    await foundry.documents.modifyBatch(operations);
+    const results = await foundry.documents.modifyBatch(operations.filter(Boolean));
+    if (!results.length || results.some(r => !r?.length)) {
+      ui.notifications.error("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.notAdded", { localize: true });
+      return;
+    }
+    ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", { localize: true });
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     if (!this.checkActors()) { return; }
-    await Promise.all(this.actors.map(async a => {
+    const removed = await Promise.all(this.actors.map(async a => {
       const children = await a.children.getContents();
       if (this.target === "armament") {
         for (const armament of a.armaments) { children.push(...(await armament.children.getContents())); }
@@ -77,7 +82,12 @@ export default class AddDocumentsActivation
         }
         await foundry.documents.modifyBatch(operations.filter(Boolean));
       }
+      return toDelete.length;
     }));
+    if (!removed.some(Boolean)) {
+      ui.notifications.error("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.notRemoved", { localize: true });
+      return;
+    }
     ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.removed", { localize: true });
   }
 }
