@@ -27,7 +27,8 @@ export default function TriggerAutomationMixin(Base) {
     get _triggerPaths() {
       const paths = super._triggerPaths;
       if (
-        !this.triggers.size && this.metadata.tags.interactInExecution && this.document?.system?.metadata?.tags?.usable
+        !this.activeTriggers.size && this.metadata.tags.interactInExecution
+        && this.document?.system?.metadata?.tags?.usable
       ) {
         paths.push("interactInExecution");
       }
@@ -36,12 +37,12 @@ export default function TriggerAutomationMixin(Base) {
 
     /** @inheritDoc */
     get canAddToEffect() {
-      return this.triggers.size > 0 && super.canAddToEffect;
+      return this.activeTriggers.size > 0 && super.canAddToEffect;
     }
 
     /** @inheritDoc */
     get canGetActivations() {
-      return super.canGetActivations && !this.triggers.size;
+      return super.canGetActivations && !this.activeTriggers.size;
     }
 
     /**

@@ -1,4 +1,5 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import AddDocumentsAutomation from "../automations/add-documents-automation/add-documents-automation.mjs";
 import ConstructionNode from "../construction-node/construction-node.mjs";
@@ -8,6 +9,11 @@ import { AutomationActivationFactory } from "./abstract/_module.mjs";
 export default class AddDocumentsActivation
   extends mixClasses(AutomationActivationFactory(AddDocumentsAutomation), ConstructNodesPseudoDocumentMixin)
 {
+  /** @inheritDoc */
+  static get metadata() {
+    return Object.assign(super.metadata, { icon: icons.manifest.ui.apply });
+  }
+
   /** @inheritDoc */
   static migrateData(source, options) {
     if (!source.constructionNodes && (source.primary || source.secondary)) {
@@ -32,6 +38,7 @@ export default class AddDocumentsActivation
   async primaryAction() {
     if (!this.checkActors()) { return; }
     const nodes = await this.getNodes();
+    if (!nodes.length) { return; }
     const operations = [];
     for (const actor of this.actors) {
       let targets = [actor];
@@ -39,15 +46,17 @@ export default class AddDocumentsActivation
       if (this.target === "item") {
         targets = await DocumentSelector.selectMulti(actor.previewed.filter(c => c.documentName === "Item"));
       }
+      if (!targets.length) { continue; }
       for (const node of nodes) {
         const ops = await node.getAddChildrenOperations(targets, {
           actor,
           data: { "flags.teriock.createdBy": this.uuid },
         });
-        operations.push(...ops);
+        operations.push(...ops.filter(Boolean));
       }
     }
-    const results = await foundry.documents.modifyBatch(operations.filter(Boolean));
+    if (!operations.length) { return; }
+    const results = await foundry.documents.modifyBatch(operations);
     if (!results.length || results.some(r => !r?.length)) {
       ui.notifications.error("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.notAdded", { localize: true });
       return;
@@ -58,7 +67,8 @@ export default class AddDocumentsActivation
   /** @inheritDoc */
   async secondaryAction() {
     if (!this.checkActors()) { return; }
-    const removed = await Promise.all(this.actors.map(async a => {
+    const toDelete = [];
+    for (const a of this.actors) {
       const children = await a.children.getContents();
       if (this.target === "armament") {
         for (const armament of a.armaments) { children.push(...(await armament.children.getContents())); }
@@ -66,25 +76,22 @@ export default class AddDocumentsActivation
       if (this.target === "item") {
         for (const item of a.items.contents) { children.push(...(await item.children.getContents())); }
       }
-      const toDelete = children.filter(c => c.getFlag("teriock", "createdBy") === this.uuid);
-      if (this.target === "armament") { await Promise.all(toDelete.map(d => d.delete())); }
-      else {
-        const effectsToDelete = toDelete.filter(d => d.documentName === "ActiveEffect");
-        const itemsToDelete = toDelete.filter(d => d.documentName === "Item");
-        const operations = [];
-        if (effectsToDelete.length > 0) {
-          const ids = Array.from(new Set(effectsToDelete.map(e => e.id)));
-          operations.push(a.getDeleteChildDocumentsOperation("ActiveEffect", ids));
-        }
-        if (itemsToDelete.length > 0) {
-          const ids = Array.from(new Set(itemsToDelete.map(i => i.id)));
-          operations.push(a.getDeleteChildDocumentsOperation("Item", ids));
-        }
-        await foundry.documents.modifyBatch(operations.filter(Boolean));
+      toDelete.push(...children.filter(c => c.getFlag("teriock", "createdBy") === this.uuid));
+    }
+    const batches = new Map();
+    for (const doc of toDelete) {
+      if (!doc.parent?.getDeleteChildDocumentsOperation) { continue; }
+      const key = `${doc.parent.uuid}.${doc.documentName}`;
+      if (!batches.has(key)) {
+        batches.set(key, { documentName: doc.documentName, ids: new Set(), parent: doc.parent });
       }
-      return toDelete.length;
-    }));
-    if (!removed.some(Boolean)) {
+      batches.get(key).ids.add(doc.id);
+    }
+    const operations = Array.from(batches.values()).map(({ documentName, ids, parent }) =>
+      parent.getDeleteChildDocumentsOperation(documentName, Array.from(ids))
+    ).filter(Boolean);
+    const results = await foundry.documents.modifyBatch(operations);
+    if (!results.length || results.some(r => !r?.length)) {
       ui.notifications.error("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.notRemoved", { localize: true });
       return;
     }

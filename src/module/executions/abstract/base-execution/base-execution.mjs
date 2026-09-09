@@ -339,7 +339,7 @@ export default class BaseExecution extends BaseDataModel {
         const rootNode = {
           _id: foundry.utils.randomID(),
           competence: { raw: foundry.utils.getProperty(data, "system.competence.raw") ?? 0 },
-          data: JSON.stringify(data),
+          data,
           name: v.name,
           overrideData: true,
           parentId: null,
@@ -347,20 +347,27 @@ export default class BaseExecution extends BaseDataModel {
         };
         return [rootNode, ...this._attachEffectNodes(v.nodes, rootNode._id)];
       });
-    const addActivation = async (target, type, label) => {
+    const addActivation = async (target, type, namedLabel, label) => {
+      const nodes = makeNodes(type);
+      const name = nodes[0]?.data?.name;
       const activation = new AddDocumentsActivation({
         all: false,
         auto: true,
-        constructionNodes: AddDocumentsActivation.toCollectionObject(makeNodes(type), { keepId: true }),
-        display: { label },
+        constructionNodes: AddDocumentsActivation.toCollectionObject(nodes, { keepId: true }),
+        display: { label: name ? _loc(namedLabel, { name }) : _loc(label) },
         multi: false,
         target,
       });
       await this._callAutomations(a => a.modifyExecutionEffectActivation(this, activation));
       this.activations.push(activation);
     };
-    if (this.targetsActor) { await addActivation("actor", "consequence", "TERIOCK.COMMANDS.ApplyEffect.label"); }
-    if (this.targetsArmament) { await addActivation("armament", "imbuement", "TERIOCK.COMMANDS.ApplyEffect.armament"); }
+    const labels = "TERIOCK.COMMANDS.ApplyEffect";
+    if (this.targetsActor) {
+      await addActivation("actor", "consequence", `${labels}.applyNamed`, `${labels}.label`);
+    }
+    if (this.targetsArmament) {
+      await addActivation("armament", "imbuement", `${labels}.applyArmamentNamed`, `${labels}.armament`);
+    }
   }
 
   /**

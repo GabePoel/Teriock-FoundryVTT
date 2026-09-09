@@ -2,6 +2,7 @@ import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
@@ -136,7 +137,8 @@ export default function CommonSystemMixin(Base) {
       const rollData = {
         [`identifier.${this.parent.forcedIdentifier}`]: 1,
         [`type.${this.parent.type}`]: 1,
-        identifier: this.parent.forcedIdentifier,
+        // Apparently strings with hyphens will get read as minus signs
+        identifier: toCamelCase(this.parent.forcedIdentifier),
         name: this.parent.name,
         [this.parent.type]: 1,
         type: this.parent.type,

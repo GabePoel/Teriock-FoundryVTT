@@ -70,8 +70,18 @@ export default function TriggerMechanicMixin(Base) {
     get _triggerPaths() {
       if (!this.canHaveTriggers) { return []; }
       const paths = ["triggers"];
-      if (this.triggers.size) { paths.push("triggerQualifier"); }
+      if (this.activeTriggers.size) { paths.push("triggerQualifier"); }
       return paths;
+    }
+
+    /**
+     * The triggers this currently responds to.
+     * @returns {Set<Teriock.System.Trigger>}
+     */
+    get activeTriggers() {
+      if (!this.canHaveTriggers) { return new Set(); }
+      const choices = this._triggerChoices;
+      return new Set([...this.triggers].filter(t => t in choices));
     }
 
     /**
@@ -96,16 +106,6 @@ export default function TriggerMechanicMixin(Base) {
       return super._makeFormGroup(path, groupConfig, inputConfig, config);
     }
 
-    /** @inheritDoc */
-    prepareData() {
-      super.prepareData();
-      const offered = this._triggerChoices;
-      for (const trigger of [...this.triggers]) {
-        if (!(trigger in offered)) { this.triggers.delete(trigger); }
-      }
-      if (!this.canHaveTriggers) { this.triggers.clear(); }
-    }
-
     /**
      * Validate whether a fired trigger event should trigger this.
      * @param {Teriock.System.Trigger} trigger
@@ -113,9 +113,10 @@ export default function TriggerMechanicMixin(Base) {
      * @returns {boolean}
      */
     validateTrigger(trigger, scope = {}) {
-      return this.triggers.has(trigger)
-        && this.active && this.isPassive && this.documentAllowsTrigger
-        && BaseRoll.qualify(this.triggerQualifier, () => this._getFireRollData(scope));
+      if (!this.activeTriggers.has(trigger)) { return false; }
+      if (!this.active || !this.isPassive || !this.documentAllowsTrigger) { return false; }
+      const rollData = this._getFireRollData(scope);
+      return BaseRoll.qualify(this.triggerQualifier, rollData);
     }
   }
 
