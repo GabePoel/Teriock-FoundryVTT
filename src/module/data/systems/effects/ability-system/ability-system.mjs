@@ -98,6 +98,7 @@ export default class AbilitySystem
       automations.SummonAutomation,
       automations.SuppressAutomation,
       automations.TakeAutomation,
+      automations.TargetAutomation,
       automations.TradecraftAutomation,
       automations.TransformationAutomation,
       automations.UseDocumentsAutomation,

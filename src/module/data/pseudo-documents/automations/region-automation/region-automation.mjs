@@ -1,51 +1,27 @@
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
-import { FormulaField } from "../../../fields/_module.mjs";
-import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
-import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
+import TargetAutomation from "../target-automation/target-automation.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * A region that is placed from a button.
  * @mixes SelectionPseudoDocument
  * @mixes TriggerAutomation
  * @mixes OverrideDataPseudoDocument
  */
 export default class RegionAutomation
   extends mixClasses(
-    BaseAutomation,
+    TargetAutomation,
     SelectionPseudoDocumentMixin,
     TriggerAutomationMixin,
     OverrideDataPseudoDocumentMixin,
   )
 {
-  /**
-   * Make a field with a range placeholder.
-   * @returns {FormulaField}
-   */
-  static #rangeField() {
-    return new FormulaField({
-      deterministic: true,
-      initial: "",
-      placeholder: _loc("TERIOCK.AUTOMATIONS.Region.DATA.placeholder"),
-    });
-  }
-
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Region",
-    "SHAPE.TYPES.circle",
-    "SHAPE.TYPES.cone",
-    "SHAPE.TYPES.ellipse",
-    "SHAPE.TYPES.emanation",
-    "SHAPE.TYPES.rectangle",
-    "SHAPE.TYPES.ring",
-    "REGION",
-  ];
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Region"];
 
   /** @inheritdoc */
   static get metadata() {
@@ -55,42 +31,7 @@ export default class RegionAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
-      angle: new FormulaField({ deterministic: true, initial: "60" }),
-      attachToToken: new fields.BooleanField({ initial: true }),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
-      excludeToken: new fields.BooleanField({ initial: true }),
-      expandWithToken: new fields.BooleanField({ initial: true }),
-      height: this.#rangeField(),
-      innerWidth: new FormulaField({ deterministic: true, initial: "0" }),
-      outerWidth: new FormulaField({ deterministic: true, initial: "0" }),
-      radius: this.#rangeField(),
-      radiusX: this.#rangeField(),
-      radiusY: this.#rangeField(),
-      regionType: new fields.StringField({
-        choices: localizeChoices({
-          circle: "SHAPE.TYPES.circle.name",
-          cone: "SHAPE.TYPES.cone.name",
-          ellipse: "SHAPE.TYPES.ellipse.name",
-          emanation: "SHAPE.TYPES.emanation.name",
-          rectangle: "SHAPE.TYPES.rectangle.name",
-          ring: "SHAPE.TYPES.ring.name",
-        }),
-        initial: "circle",
-        nullable: false,
-        required: true,
-      }),
-      restriction: new fields.SchemaField({
-        enabled: new fields.BooleanField(),
-        priority: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, required: true }),
-        type: new fields.StringField({
-          choices: Object.fromEntries(
-            CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
-          ),
-          initial: "move",
-          required: true,
-        }),
-      }),
-      targeting: new fields.BooleanField({ initial: true }),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
           Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
@@ -98,90 +39,18 @@ export default class RegionAutomation
         initial: CONST.REGION_VISIBILITY.ALWAYS,
         required: true,
       }),
-      width: this.#rangeField(),
     });
   }
 
-  /** @type {boolean} */
-  #placed = false;
-
-  /**
-   * Get the numeric value of some region shape path.
-   * @param {string} path
-   * @param {object} rollData
-   * @param {AbilityExecution|null} [execution]
-   * @returns {number}
-   */
-  #evaluate(path, rollData, execution = null) {
-    let out = 0;
-    if (path !== "angle" && !this[path] && execution) { out = execution.source.system.range.value ?? 0; }
-    else if (this[path]) { out = BaseRoll.minValue(this[path], rollData); }
-    if (path === "angle") { return out; }
-    if (canvas?.dimensions?.distancePixels) { out *= canvas.dimensions.distancePixels; }
-    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
-      out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
-    }
-    return out;
-  }
-
-  /**
-   * Get the shape data for this automation's region.
-   * @param {{rollData?: object, execution?: BaseExecution}} [options]
-   * @returns {object}
-   */
-  #getRegionShapeData(options) {
-    const rollData = options.execution?.getRollData() ?? options.rollData ?? {};
-    const data = {
-      type: this.regionType,
-      x: 0,
-      y: 0,
-      ...Object.fromEntries(this._regionTypePaths.map(p => [p, this.#evaluate(p, rollData, options.execution)])),
-    };
-    if (this.regionType === "emanation") {
-      data.base = {
-        height: 1,
-        hole: this.excludeToken && this.attachToToken,
-        shape: 0,
-        type: "token",
-        width: 1,
-        x: 0,
-        y: 0,
-      };
-    }
-    return [data];
-  }
-
-  /**
-   * Target every visible token inside a region that was placed during an execution.
-   * @param {TeriockRegionDocument} region
-   * @param {BaseExecution} execution
-   */
-  #targetInside(region, execution) {
-    if (!this.targeting || region.parent !== game.scenes.viewed) { return; }
-    let releaseOthers = true;
-    for (
-      const t of (game.scenes.viewed?.tokens.contents ?? []).filter(t =>
-        t?.object?.isVisible
-        && t.hasStatusEffect("ethereal") === Boolean(execution.actor?.statuses.has("ethereal"))
-        && t.testInsideRegion(region)
-      )
-    ) {
-      t?.object.setTarget(true, { releaseOthers });
-      releaseOthers = false;
-    }
-  }
+  /** @type {{ config: object, document: TeriockDocument|null }|null} */
+  #selection = null;
 
   /** @inheritdoc */
   get _formPaths() {
     return [
-      "regionType",
-      ...this._regionTypePaths,
-      ...this._tokenPaths,
-      "deleteOnTurnChange",
-      ...this._targetPaths,
-      "hr",
-      ...this._restrictionPaths,
+      ...super._formPaths,
       "visibility",
+      "deleteOnTurnChange",
       "hr",
       ...this._triggerDisplayPaths,
       "hr",
@@ -191,91 +60,31 @@ export default class RegionAutomation
     ];
   }
 
-  /**
-   * Paths for region type-specific fields.
-   * @returns {string[]}
-   */
-  get _regionTypePaths() {
-    if (this.regionType === "rectangle") { return ["width", "height"]; }
-    if (this.regionType === "circle") { return ["radius"]; }
-    if (this.regionType === "ellipse") { return ["radiusX", "radiusY"]; }
-    if (this.regionType === "emanation") { return ["radius"]; }
-    if (this.regionType === "cone") { return ["radius", "angle"]; }
-    if (this.regionType === "ring") { return ["radius", "innerWidth", "outerWidth"]; }
-    return [];
-  }
-
-  /**
-   * Restriction paths.
-   * @returns {string[]}
-   */
-  get _restrictionPaths() {
-    const paths = ["restriction.enabled"];
-    if (this.restriction.enabled) { paths.push(...["restriction.type", "restriction.priority"]); }
-    return paths;
-  }
-
-  /**
-   * Paths to update targets to those contained in the region.
-   * @returns {string[]}
-   */
-  get _targetPaths() {
-    return this.interactInExecution ? ["targeting"] : [];
-  }
-
-  /**
-   * Token exclusion paths.
-   * @returns {string[]}
-   */
-  get _tokenPaths() {
-    return ["attachToToken", this.regionType === "emanation" ? "excludeToken" : "expandWithToken"];
+  /** @inheritDoc */
+  async _getActivations(options = { rollData: {} }) {
+    const selection = this.hasSelection
+      ? this.#selection ?? await this._getSelection({ relativeTo: options.execution?.actor ?? this.actor })
+      : { config: {} };
+    if (!selection) { return []; }
+    return [await this._buildRegionActivation(options, selection.config)];
   }
 
   /** @inheritDoc */
-  async _getActivations(options = { rollData: {} }) {
-    if (this.#placed) { return []; }
-    const data = await this.getRegionData(options);
-    const selection = this.hasSelection
-      ? await this._getSelection({ relativeTo: options.execution?.actor ?? this.actor })
-      : { config: {} };
-    if (!selection) { return []; }
-    return [new RegionActivation({ ...selection.config, attachToToken: this.attachToToken, data })];
-  }
-
-  /**
-   * Get the data for this automation's region.
-   * @param {{rollData?: object, execution?: BaseExecution}} [options]
-   * @returns {Promise<object>}
-   */
   async getRegionData(options = { execution: null, rollData: {} }) {
-    return Object.assign({
-      behaviors: [],
+    return foundry.utils.mergeObject(await super.getRegionData(options), {
       displayMeasurements: false,
-      flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
-      highlightMode: this.targeting ? "coverage" : "shapes",
-      levels: canvas?.level?.id ? [canvas.level.id] : [],
+      highlightMode: "shapes",
       name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
         name: options.execution?.source.name ?? this.document.name,
       }),
-      ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
-      restriction: this.restriction,
-      shapes: this.#getRegionShapeData(options),
-      visibility: this.visibility,
-    }, this.overrideData ? this.data : {});
+      ...this.data,
+    });
   }
 
   /** @inheritDoc */
   async interactOnExecutionInput(execution) {
-    this.#placed = false;
-    if (!this.interactInExecution) { return; }
-    const activations = await this._getActivations({ execution, rollData: execution.getRollData() });
-    this.#placed = true;
-    const token = execution.executor ?? execution.actor?.defaultToken;
-    for (const activation of activations) {
-      if (execution.actor) { activation.actors = [execution.actor]; }
-      if (token) { activation.tokens = [token]; }
-      const region = await activation.primaryAction();
-      if (region) { this.#targetInside(region, execution); }
-    }
+    this.#selection = this.interactInExecution && this.hasSelection
+      ? await this._getSelection({ relativeTo: execution.actor })
+      : null;
   }
 }

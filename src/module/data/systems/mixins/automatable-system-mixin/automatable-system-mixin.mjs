@@ -1,6 +1,9 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
+/** Selection sources that mean a region carries documents to apply. */
+const SELECTION_SOURCES = ["globalIdentifiers", "globalUuids", "localIdentifiers", "localQualifier", "localUuids"];
+
 const RENAMED_AUTOMATION_TYPES = {
   abilityMacro: "macro",
   chatMacro: "macro",
@@ -45,6 +48,30 @@ export default function AutomatableSystemMixin(Base) {
       return foundry.utils.mergeObject(super.metadata, { pseudos: { Automation: "system.automations" } });
     }
 
+    /**
+     * Migrate the source data for a single Automation.
+     * @param {object} automation
+     */
+    static _migrateAutomationData(automation) {
+      this._migrateAutomationRegionData(automation);
+      const renamed = RENAMED_AUTOMATION_TYPES[automation?.type];
+      if (renamed) { automation.type = renamed; }
+    }
+
+    /**
+     * Convert a targeting RegionAutomation into a TargetAutomation.
+     * @param {object} automation
+     */
+    static _migrateAutomationRegionData(automation) {
+      const isTargeting = automation?.type === "region"
+        && automation.trigger === "executeInput"
+        && automation.targeting !== false
+        && !automation.overrideData
+        && !SELECTION_SOURCES.some(k => automation[k]?.length)
+        && this._automationTypes.some(a => a.metadata.type === "target");
+      if (isTargeting) { automation.type = "target"; }
+    }
+
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
@@ -54,10 +81,7 @@ export default function AutomatableSystemMixin(Base) {
 
     /** @inheritDoc */
     static migrateData(source, options) {
-      for (const automation of Object.values(source.automations ?? {})) {
-        const renamed = RENAMED_AUTOMATION_TYPES[automation?.type];
-        if (renamed) { automation.type = renamed; }
-      }
+      for (const automation of Object.values(source.automations ?? {})) { this._migrateAutomationData(automation); }
       return super.migrateData(source, options);
     }
   }

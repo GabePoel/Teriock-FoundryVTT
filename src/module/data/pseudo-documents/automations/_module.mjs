@@ -27,6 +27,7 @@ export { default as StatusAutomation } from "./status-automation/status-automati
 export { default as SummonAutomation } from "./summon-automation.mjs";
 export { default as SuppressAutomation } from "./suppress-automation/suppress-automation.mjs";
 export { default as TakeAutomation } from "./take-automation/take-automation.mjs";
+export { default as TargetAutomation } from "./target-automation/target-automation.mjs";
 export { default as ToggleChildrenAutomation } from "./toggle-children-automation/toggle-children-automation.mjs";
 export { default as TradecraftAutomation } from "./tradecraft-automation/tradecraft-automation.mjs";
 export { default as TransformationAutomation } from "./transformation-automation/transformation-automation.mjs";

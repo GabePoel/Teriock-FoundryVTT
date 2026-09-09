@@ -26,6 +26,7 @@ import {
   SummonAutomation,
   SuppressAutomation,
   TakeAutomation,
+  TargetAutomation,
   ToggleChildrenAutomation,
   TradecraftAutomation,
   TransformationAutomation,
@@ -62,6 +63,7 @@ declare global {
     summon: SummonAutomation;
     suppress: SuppressAutomation;
     take: TakeAutomation;
+    target: TargetAutomation;
     toggleChildren: ToggleChildrenAutomation;
     tradecraft: TradecraftAutomation;
     transformation: TransformationAutomation;
