@@ -418,7 +418,9 @@ export default function TransformationSystemMixin(Base) {
       if (foundry.utils.hasProperty(changes, "disabled")) {
         const wasDisabled = changes.disabled === false;
         if (wasDisabled) {
-          const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags());
+          const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags(), {
+            inplace: false,
+          });
           foundry.utils.setProperty(changes, "flags", flags);
         } else {
           for (const stat of POOL_STATS) {

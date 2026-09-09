@@ -47,7 +47,7 @@ function repeatStr(n, block) {
  * @returns {object}
  */
 function merge(a, b) {
-  return foundry.utils.mergeObject(a ?? {}, b ?? {});
+  return foundry.utils.mergeObject(a ?? {}, b ?? {}, { inplace: false });
 }
 
 export default { defined, exists, merge, repeat, repeatStr };
