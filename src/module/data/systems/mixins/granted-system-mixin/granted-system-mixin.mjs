@@ -17,7 +17,7 @@ export default function GrantedSystemMixin(Base) {
 
     /** @inheritDoc */
     static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { granted: true } });
+      return foundry.utils.mergeObject(super.metadata, { tags: { crit: true, granted: true } });
     }
 
     /** @inheritDoc */

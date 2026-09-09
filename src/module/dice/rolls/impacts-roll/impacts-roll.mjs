@@ -1,24 +1,21 @@
-import impactConfig from "../../constants/config/impact-config.mjs";
-import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
-import BaseRoll from "./base-roll.mjs";
+import impactConfig from "../../../constants/config/impact-config.mjs";
+import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { makeIcon } from "../../../helpers/icon.mjs";
+import BaseRoll from "../base-roll/base-roll.mjs";
 
-/**
- * @property {Teriock.Keys.Impact} impact
- */
-export default class ImpactRoll extends BaseRoll {
+export default class ImpactsRoll extends BaseRoll {
   /**
    * @inheritDoc
-   * @returns {Teriock.Dice.ImpactRollOptions}
+   * @returns {Teriock.Dice.ImpactsRollOptions}
    */
   static get defaultOptions() {
-    return Object.assign(super.defaultOptions, { impact: "other" });
+    return Object.assign(super.defaultOptions, { impacts: [] });
   }
 
   /**
    * @param {Teriock.System.FormulaString} formula
    * @param {object} data
-   * @param {Partial<Teriock.Dice.ImpactRollOptions>} options
+   * @param {Partial<Teriock.Dice.ImpactsRollOptions>} options
    */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
@@ -29,33 +26,30 @@ export default class ImpactRoll extends BaseRoll {
    * Set the flavor if there's not one already defined.
    */
   #setImpactFlavor() {
-    if (this.hasImpact) {
-      this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", { value: impactConfig[this.impact]?.label });
+    if (!this.options.flavor) { this.options.autoFlavor = true; }
+    if (!this.options.autoFlavor) { return; }
+    if (!this.impacts.length) { delete this.options.flavor; }
+    else {
+      this.options.flavor = this.impacts.length === 1
+        ? _loc("TERIOCK.ROLLS.Base.name", { value: impactConfig[this.impacts[0]]?.label })
+        : _loc("TERIOCK.ROLLS.Harm.multi");
     }
   }
 
   /**
-   * Whether this roll has an impact associated with it.
-   * @returns {boolean}
+   * The impacts associated with this roll, excluding the placeholder one.
+   * @returns {Teriock.Keys.Impact[]}
    */
-  get hasImpact() {
-    return this.impact && this.impact !== "other";
+  get impacts() {
+    return this.options.impacts.filter(i => i !== "other");
   }
 
   /**
-   * The impact associated with this roll.
-   * @returns {Teriock.Keys.Impact}
+   * The impacts associated with this roll.
+   * @param {Iterable<Teriock.Keys.Impact>} impacts
    */
-  get impact() {
-    return this.options.impact;
-  }
-
-  /**
-   * The impact associated with this roll.
-   * @param impact
-   */
-  set impact(impact) {
-    this.options.impact = impact;
+  set impacts(impacts) {
+    this.options.impacts = Array.from(impacts);
     this.#setImpactFlavor();
   }
 
@@ -95,10 +89,9 @@ export default class ImpactRoll extends BaseRoll {
   }
 
   /** @inheritDoc */
-  async getActivations() {
-    if (this.hasImpact) {
-      return [new teriock.data.pseudoDocuments.activations.TakeActivation({ amount: this.total, impact: this.impact })];
-    }
-    return [];
+  async getAutomations() {
+    return this.impacts.map(impact =>
+      new teriock.data.pseudoDocuments.automations.TakeAutomation({ amount: this.total, impact, type: "take" })
+    );
   }
 }

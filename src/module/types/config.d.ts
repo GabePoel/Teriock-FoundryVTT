@@ -75,6 +75,7 @@ declare global {
     export type ImpactEntry = {
       aliases?: string[];
       deal: string;
+      harm?: boolean;
       icon: string;
       integer?: boolean;
       label: string;

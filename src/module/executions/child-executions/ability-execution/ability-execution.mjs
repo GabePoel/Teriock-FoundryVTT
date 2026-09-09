@@ -326,7 +326,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         _loc("TERIOCK.SYSTEMS.Applicable.PANELS.spent", { amount: this.costs[c], label: statConfig[c]?.abbreviation }),
       );
     }
-    this._buildBoostTags();
   }
 
   /**

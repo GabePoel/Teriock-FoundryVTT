@@ -20,7 +20,7 @@ declare global {
 
     export type BaseRollOptions = RollOptions & { hideRoll: boolean, styles: DieStyles, targets: DieTarget[] };
 
-    export type ImpactRollOptions = BaseRollOptions & { impact: Teriock.Keys.Impact };
+    export type ImpactsRollOptions = BaseRollOptions & { impacts: Teriock.Keys.Impact[] };
 
     export type ThresholdRollOptions = BaseRollOptions & {
       comparison?: Teriock.Keys.Comparison;

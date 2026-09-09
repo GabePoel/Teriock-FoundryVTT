@@ -54,7 +54,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get canCrit() {
-    return this.document?.type === "ability" && !this.isPassive;
+    return Boolean(this.document?.system?.metadata?.tags?.crit) && !this.isPassive;
   }
 
   /**

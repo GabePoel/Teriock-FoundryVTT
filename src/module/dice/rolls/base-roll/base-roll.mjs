@@ -1,8 +1,8 @@
-import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
-import { systemPath } from "../../helpers/path.mjs";
-import Booster from "../booster.mjs";
-import { selectWeightedMaxFaceDie } from "../helpers.mjs";
+import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { makeIcon } from "../../../helpers/icon.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
+import Booster from "../../booster.mjs";
+import { selectWeightedMaxFaceDie } from "../../helpers.mjs";
 
 const { Roll } = foundry.dice;
 
@@ -11,10 +11,7 @@ const { Roll } = foundry.dice;
  * @import { RollTerm } from "@client/dice/terms/_module.mjs";
  */
 
-/**
- * @inheritDoc
- * @property {Teriock.Dice.BaseRollOptions} options
- */
+/** @inheritDoc */
 export default class BaseRoll extends Roll {
   /**
    * Normalize a target into a plain, JSON serializable object. Already parsed targets pass through unchanged.
@@ -301,10 +298,10 @@ export default class BaseRoll extends Roll {
   }
 
   /**
-   * Activations that are created by this roll.
-   * @returns {Promise<BaseActivation[]>}
+   * Automations that are created or used by this roll.
+   * @returns {Promise<Automation[]>}
    */
-  async getActivations() {
+  async getAutomations() {
     return [];
   }
 
@@ -318,7 +315,8 @@ export default class BaseRoll extends Roll {
 
   /** @inheritDoc */
   async toMessage(messageData = {}, { create = true, messageMode } = {}) {
-    const activations = await this.getActivations();
+    const automations = await this.getAutomations();
+    const activations = (await Promise.all(automations.map(a => a.getActivations()))).flat();
     const panels = await this.getPanels();
     messageData = foundry.utils.mergeObject({
       system: {

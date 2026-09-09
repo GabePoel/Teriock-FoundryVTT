@@ -1,7 +1,7 @@
 import { fromIdentifier } from "../../helpers/utils.mjs";
-import ImpactRoll from "./impact-roll.mjs";
+import ImpactsRoll from "./impacts-roll/impacts-roll.mjs";
 
-export default class HarmRoll extends ImpactRoll {
+export default class HarmRoll extends ImpactsRoll {
   /**
    * Cached array of harms to reduce async calls.
    * @type {TeriockJournalEntryPage<"damage" | "drain">[]}
@@ -29,9 +29,7 @@ export default class HarmRoll extends ImpactRoll {
     for (const die of this.dice) {
       for (const [type, harm] of Object.entries(harmMap)) {
         if (die.flavor.includes(type)) {
-          const rollStyleAutomations = /** @type {RollStyleAutomation[]} */ harm.system.automations.filter(a =>
-            a.type === "rollStyle"
-          );
+          const rollStyleAutomations = harm.system.automations.getTypeSync("rollStyle");
           if (!rollStyleAutomations.length) { continue; }
           for (const a of rollStyleAutomations) {
             die.options.appearance = foundry.utils.mergeObject(die.options.appearance ?? {}, a.style || {});
@@ -43,15 +41,9 @@ export default class HarmRoll extends ImpactRoll {
   }
 
   /** @inheritDoc */
-  async getActivations() {
-    const activations = await super.getActivations();
+  async getAutomations() {
     const harmArray = await this.getHarmArray();
-    for (const h of harmArray) {
-      const automations = h.system.automations.contents;
-      const activationLists = await Promise.all(automations.map(a => a.getActivations()));
-      activationLists.forEach(a => activations.push(...a));
-    }
-    return activations;
+    return [...(await super.getAutomations()), ...harmArray.flatMap(h => h.system.automations.contents)];
   }
 
   /**
@@ -59,9 +51,9 @@ export default class HarmRoll extends ImpactRoll {
    * @returns {Promise<TeriockJournalEntryPage<"damage" | "drain">[]>}
    */
   async getHarmArray() {
-    if (!["damage", "drain"].includes(this.impact)) { return []; }
     if (this._harms) { return this._harms; }
-    const identifiers = this.harmIdentifiers.map(i => `${this.impact}:${i}`);
+    const impacts = this.impacts.filter(i => ["damage", "drain"].includes(i));
+    const identifiers = impacts.flatMap(impact => this.harmIdentifiers.map(i => `${impact}:${i}`));
     const harms = await Promise.all(identifiers.map(i => fromIdentifier(i)));
     this._harms = harms.filter(Boolean);
     return this._harms;

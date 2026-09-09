@@ -70,7 +70,13 @@ export default function AccessDataMixin(Base) {
      */
     _getEditorFormsSync(config = {}) {
       const group = createElement("div", { className: "teriock-form-container standard-form" });
-      this._makeFormGroups(this._formPaths, config).forEach(fg => group.append(fg));
+      const rawPaths = this._formPaths;
+      const cleanedPaths = rawPaths.filter((item, i) => item !== "hr" || rawPaths[i - 1] !== "hr").filter((
+        item,
+        i,
+        arr,
+      ) => item !== "hr" || (i > 0 && i < arr.length - 1));
+      this._makeFormGroups(cleanedPaths, config).forEach(fg => group.append(fg));
       return group;
     }
 

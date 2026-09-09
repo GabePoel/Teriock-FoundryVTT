@@ -1,4 +1,4 @@
-import BaseRoll from "./base-roll.mjs";
+import BaseRoll from "../base-roll/base-roll.mjs";
 
 /** @inheritDoc */
 export default class ThresholdRoll extends BaseRoll {

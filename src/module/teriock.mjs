@@ -300,7 +300,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(...[
     dice.rolls.BaseRoll,
     dice.rolls.ThresholdRoll,
-    dice.rolls.ImpactRoll,
+    dice.rolls.ImpactsRoll,
     dice.rolls.HarmRoll,
   ]);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;

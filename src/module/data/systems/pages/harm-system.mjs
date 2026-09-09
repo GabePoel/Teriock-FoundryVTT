@@ -39,6 +39,11 @@ export default class HarmSystem
   }
 
   /** @inheritDoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, { tags: { crit: true } });
+  }
+
+  /** @inheritDoc */
   get _panelBars() {
     return [this._metaphysicsBar];
   }

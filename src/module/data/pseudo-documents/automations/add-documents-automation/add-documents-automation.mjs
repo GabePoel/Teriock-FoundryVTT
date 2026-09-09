@@ -186,6 +186,6 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (this.isPassive) { this.attachToEffect = false; }
+    if (this.isPassive || !this.canModifyEffectData) { this.attachToEffect = false; }
   }
 }

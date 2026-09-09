@@ -35,7 +35,7 @@ export default function ArmamentSystemMixin(Base) {
     static get metadata() {
       return foundry.utils.mergeObject(super.metadata, {
         childTypes: ["ability", "fluency", "property", "resource", "imbuement"],
-        tags: { armament: true },
+        tags: { armament: true, crit: true },
         visibleTypes: ["ability", "fluency", "property", "resource", "imbuement"],
       });
     }

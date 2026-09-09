@@ -6,6 +6,7 @@ export default {
   damage: {
     aliases: ["dmg"],
     deal: "TERIOCK.EFFECTS.Impacts.damage.deal",
+    harm: true,
     icon: icons.manifest.effect.damage,
     integer: true,
     label: "TERIOCK.EFFECTS.Impacts.damage.label",
@@ -16,7 +17,9 @@ export default {
     reverse: async (actor, amt) => await actor?.system.takeHealing(amt),
   },
   drain: {
+    aliases: ["drn"],
     deal: "TERIOCK.EFFECTS.Impacts.drain.deal",
+    harm: true,
     icon: icons.manifest.effect.drain,
     integer: true,
     label: "TERIOCK.EFFECTS.Impacts.drain.label",

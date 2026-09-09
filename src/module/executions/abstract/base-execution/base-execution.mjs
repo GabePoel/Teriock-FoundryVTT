@@ -76,7 +76,7 @@ export default class BaseExecution extends BaseDataModel {
   _boosts;
 
   /** @type {Record<Teriock.Keys.Impact, number>} */
-  _boostsResolved;
+  _boostsResolved = {};
 
   /** @type {Teriock.Messages.Mode} */
   _messageMode;
@@ -293,8 +293,17 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _buildActivations() {
-    if ((this.targetsActor || this.targetsArmament) && this.makeEffect) {
-      await this._buildEffectActivations();
+    if ((this.targetsActor || this.targetsArmament) && this.makeEffect) { await this._buildEffectActivations(); }
+    const rollData = this.getRollData();
+    const fetched = await Promise.all(
+      this.automations.active.map(a => a.getActivations({ execution: this, rollData })),
+    );
+    this.activations.push(...fetched.flat());
+    for (const a of this.activations) {
+      const boosts = this._boostsResolved[a?.impact];
+      if (a?.type === "roll" && boosts) {
+        a.updateSource({ boosts });
+      }
     }
   }
 
@@ -376,6 +385,13 @@ export default class BaseExecution extends BaseDataModel {
    */
   async _buildTags() {
     if (this.competence.proficient) { this.tags.push(this.competence.label); }
+    for (const [k, v] of Object.entries(this._boostsResolved)) {
+      if (this._hasBoostForImpact(k)) {
+        this.tags.push(
+          _loc(`TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`, { formula: v, impact: k }),
+        );
+      }
+    }
   }
 
   /**
@@ -416,6 +432,17 @@ export default class BaseExecution extends BaseDataModel {
     }
     if (typeof options.competence === "number") { competence = options.competence; }
     this.updateSource({ "competence.raw": competence });
+  }
+
+  /**
+   * Evaluate boosts.
+   * @returns {Promise<false|void>}
+   */
+  async _evaluateBoosts() {
+    const boostPromises = Object.entries(this._boosts).map(async (
+      [k, v],
+    ) => [k, await BaseRoll.getValue(v || "0", this.getRollData())]);
+    this._boostsResolved = Object.fromEntries(await Promise.all(boostPromises));
   }
 
   /**
@@ -478,6 +505,15 @@ export default class BaseExecution extends BaseDataModel {
    */
   async _getNormalEffectData() {
     return {};
+  }
+
+  /**
+   * Whether this has boosts for a given impact.
+   * @param {Teriock.Keys.Impact} impact
+   * @returns {boolean}
+   */
+  _hasBoostForImpact(impact) {
+    return this._boostsResolved[impact] && this.activations.some(a => a.type === "roll" && a.impact === impact);
   }
 
   /**
@@ -557,6 +593,7 @@ export default class BaseExecution extends BaseDataModel {
    */
   async execute() {
     if ((await this._fetchData()) === false) { return false; }
+    if ((await this._evaluateBoosts()) === false) { return false; }
     if ((await this._getInput()) === false) { return false; }
     if ((await this._postInput()) === false) { return false; }
     if ((await this._prepareFormula()) === false) { return false; }

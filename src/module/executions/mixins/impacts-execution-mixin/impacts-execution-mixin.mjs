@@ -69,33 +69,6 @@ export default function ImpactsExecutionMixin(Base) {
     }
 
     /**
-     * A copy of the evaluated base roll for each impact this deals.
-     * @returns {HarmRoll[]}
-     */
-    get _typedRolls() {
-      if (this.rolls.length === 0) { return []; }
-      const roll = this.rolls[0];
-      return Array.from(this.impacts).map(impact => {
-        const impactRoll = roll.clone({ evaluated: true });
-        impactRoll.impact = impact;
-        return impactRoll;
-      });
-    }
-
-    /** @inheritDoc */
-    get chatData() {
-      return { ...super.chatData, rolls: this._typedRolls };
-    }
-
-    /** @inheritDoc */
-    get flavor() {
-      if (this.impacts.size === 1) {
-        return _loc("TERIOCK.ROLLS.Base.name", { value: TERIOCK.config.impact[this.impacts.first()]?.label });
-      }
-      return _loc("TERIOCK.ROLLS.Harm.multi");
-    }
-
-    /**
      * Whether to show the roll dialogs.
      * @returns {boolean}
      */
@@ -119,9 +92,7 @@ export default function ImpactsExecutionMixin(Base) {
 
     /** @inheritDoc */
     get rollOptions() {
-      const options = super.rollOptions;
-      if (this.impact) { options.impact = this.impact; }
-      return options;
+      return Object.assign(super.rollOptions, { impacts: Array.from(this.impacts) });
     }
 
     /**
@@ -144,8 +115,9 @@ export default function ImpactsExecutionMixin(Base) {
      * @returns {Promise<false|void>}
      */
     async _buildActivations() {
-      for (const roll of this._typedRolls) { this.activations.push(...(await roll.getActivations())); }
-      if (await super._buildActivations() === false) { return false; }
+      this.automations.addDocuments((await Promise.all(this.rolls.map(r => r.getAutomations()))).flat());
+      this.automations.resetDocuments(this.automations.filter(a => a.crit.has(Number(this.crit))));
+      return super._buildActivations();
     }
 
     /**
@@ -154,7 +126,7 @@ export default function ImpactsExecutionMixin(Base) {
      */
     async _buildPanels() {
       await super._buildPanels();
-      for (const roll of this._typedRolls) { this.panels.push(...(await roll.getPanels())); }
+      for (const roll of this.rolls) { this.panels.push(...(await roll.getPanels())); }
     }
 
     /**
@@ -164,6 +136,13 @@ export default function ImpactsExecutionMixin(Base) {
     async _buildTags() {
       await super._buildTags();
       if (this.crit) { this.tags.push(_loc("TERIOCK.DIALOGS.Boost.TAGS.crit")); }
+    }
+
+    /** @inheritDoc */
+    async _postInput() {
+      const boosts = Math.max(0, this.boosts - this.deboosts);
+      for (const impact of this.impacts) { this._boostsResolved[impact] = boosts; }
+      return super._postInput();
     }
 
     /**

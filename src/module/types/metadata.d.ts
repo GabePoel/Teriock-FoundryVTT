@@ -21,6 +21,7 @@ declare global {
       armament: boolean;
       attunable: boolean;
       consumable: boolean;
+      crit: boolean;
       granted: boolean;
       hierarchy: boolean;
       revealable: boolean;

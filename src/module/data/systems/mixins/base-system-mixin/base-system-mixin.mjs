@@ -38,6 +38,7 @@ export default function BaseSystemMixin(Base) {
           armament: false,
           attunable: false,
           consumable: false,
+          crit: false,
           embed: false,
           granted: false,
           hierarchy: false,

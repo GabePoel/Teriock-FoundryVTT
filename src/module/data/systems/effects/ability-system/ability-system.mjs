@@ -109,7 +109,7 @@ export default class AbilitySystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childTypes: ["ability", "fluency", "resource"],
-      tags: { usable: true },
+      tags: { crit: true, usable: true },
       type: "ability",
       visibleTypes: ["ability", "fluency", "resource"],
     });
