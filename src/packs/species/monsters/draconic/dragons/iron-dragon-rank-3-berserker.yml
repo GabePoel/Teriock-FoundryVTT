@@ -52,7 +52,8 @@ effects:
         - _id: 8QOdQYnnSxyi3PA8
           activeQualifier: and(not(@status.dead), @status.hacked, not(@status.burned), not(@status.frozen))
           noStatDice: true
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1
@@ -90,16 +91,15 @@ effects:
     system:
       _sup: AtUPPT2VKpl3SDUg
       automations:
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:

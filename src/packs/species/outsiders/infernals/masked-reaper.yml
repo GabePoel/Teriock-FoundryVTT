@@ -864,16 +864,15 @@ effects:
     system:
       _sup: 43X3QhTIozw5bFlG
       automations:
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:
@@ -1049,14 +1048,46 @@ effects:
       _sup: 1GxCClYzktjXRjtE
       automations:
         - _id: 34c83d4c84860906
-          globalIdentifiers:
-            - ability:fear-aura
-          setCompetence: inherit
+          constructionNodes:
+            970b354d95444fc7:
+              _id: 970b354d95444fc7
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:fear-aura
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: 3b2978862c7f9d50
-          globalIdentifiers:
-            - ability:fear-touch
-          setCompetence: inherit
+          constructionNodes:
+            4f7a05bb06f2948d:
+              _id: 4f7a05bb06f2948d
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:fear-touch
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: JB09RCj8EnrKPqjG
           light:
@@ -1106,14 +1137,46 @@ effects:
       _sup: m98BGBfXrCpU4TQU
       automations:
         - _id: 8434365ea22454e2
-          globalIdentifiers:
-            - ability:earthbind-aura
-          setCompetence: inherit
+          constructionNodes:
+            9635834287f7ce29:
+              _id: 9635834287f7ce29
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:earthbind-aura
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: f8698f0406646514
-          globalIdentifiers:
-            - ability:earthbind-touch
-          setCompetence: inherit
+          constructionNodes:
+            133b4c4cafb15a3b:
+              _id: 133b4c4cafb15a3b
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:earthbind-touch
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: ZnqPryFKHegsj30g
           light:
@@ -1166,9 +1229,8 @@ effects:
         - _id: PKZXkwmO94niPsUb
           display:
             label: ""
+          interactInExecution: true
           localQualifier: and(@ability, @time.a1)
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -1484,6 +1546,8 @@ effects:
         - revitalization
       identifier: mana-drain-touch
       kind: special
+      piercing:
+        raw: 2
       powerSources:
         - magical
       results:
@@ -1524,6 +1588,10 @@ effects:
             type: tag
           verbal:
             type: tag
+        primary:
+          mp:
+            formula: "1"
+            type: formula
       delivery: sight
       duration:
         raw: "1"
@@ -1611,15 +1679,30 @@ effects:
       _sup: m98BGBfXrCpU4TQU
       automations:
         - _id: f2ebb4a9ad0d1848
-          data: >-
-            {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
-            @Identifier[core:healing]{healing} in this way consumes a @Identifier[core:hit-points-and-mana-points]{hit
-            die} as normal (except that it can @Wiki[Category:Revival effects]{revive} you). This can only
-            @Wiki[Category:Revival effects]{revive} creatures that have been @Identifier[condition:dead]{dead} for 1
-            minute or less.</p>"}}
-          globalIdentifiers:
-            - ability:regenerating
-          overrideData: true
+          constructionNodes:
+            abb1a8caafccaea9:
+              _id: abb1a8caafccaea9
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: >-
+                {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
+                @Identifier[core:healing]{healing} in this way consumes a
+                @Identifier[core:hit-points-and-mana-points]{hit die} as normal (except that it can
+                @Wiki[Category:Revival effects]{revive} you). This can only @Wiki[Category:Revival effects]{revive}
+                creatures that have been @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
+              globalIdentifiers:
+                - ability:regenerating
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: true
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
       competence:
         raw: 1
@@ -1648,6 +1731,8 @@ effects:
       identifier: regeneration-touch
       invoked: true
       kind: special
+      piercing:
+        raw: 2
       powerSources:
         - magical
       results:
@@ -1771,12 +1856,46 @@ effects:
       _sup: 1GxCClYzktjXRjtE
       automations:
         - _id: 3aed26608863c262
-          globalIdentifiers:
-            - ability:animate-dead
+          constructionNodes:
+            3f58217f01efeaf3:
+              _id: 3f58217f01efeaf3
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:animate-dead
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: 66d7ecce476652ad
-          globalIdentifiers:
-            - ability:zombify
+          constructionNodes:
+            b0561bcaa58c27cc:
+              _id: b0561bcaa58c27cc
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:zombify
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
       competence:
         raw: 1
@@ -1892,6 +2011,8 @@ effects:
       identifier: unforge
       invoked: true
       kind: special
+      piercing:
+        raw: 1
       powerSources:
         - magical
       results:
@@ -1912,8 +2033,25 @@ effects:
       _sup: m98BGBfXrCpU4TQU
       automations:
         - _id: dx3ALeHkOrZZ9hCe
-          globalUuids:
-            - Compendium.teriock.tables.RollTable.a63074fd2ac63eda
+          constructionNodes:
+            cae090353954d2d8:
+              _id: cae090353954d2d8
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers: []
+              globalUuids:
+                - Compendium.teriock.tables.RollTable.a63074fd2ac63eda
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
       competence:
         raw: 1

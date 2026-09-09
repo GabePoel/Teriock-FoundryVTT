@@ -57,6 +57,8 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic fire]]] @Identifier[core:damage]{damage}.</p>
       identifier: fire-ball
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
@@ -90,6 +92,8 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d8[fire magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: flame-ray
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:
@@ -148,7 +152,8 @@ effects:
         - _id: Suc9ayhHqRkmjAwZ
           activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1

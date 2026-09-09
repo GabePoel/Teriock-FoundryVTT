@@ -14,9 +14,9 @@ const DST = path.resolve(__dirname, "../../src/icons/hold/hold-images.json");
 
 const files = (await fs.promises.readdir(SRC)).filter(file => file.endsWith(".svg")).sort((a, b) => a.localeCompare(b));
 
-const holdIcons = Object.fromEntries(files.map(file => {
+const holdImages = Object.fromEntries(files.map(file => {
   const name = file.slice(0, -4);
   return [toCamelCase(name), `${FOUNDRY_ROOT}/${file}`];
 }));
 
-await fs.promises.writeFile(DST, JSON.stringify(sortObject(holdIcons), null, 2), "utf-8");
+await fs.promises.writeFile(DST, JSON.stringify(sortObject(holdImages), null, 2), "utf-8");

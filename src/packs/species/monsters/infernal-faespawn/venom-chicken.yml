@@ -11,13 +11,13 @@ effects:
       automations:
         - _id: mYlde6caMjPRCchp
           status: poisoned
-          trigger: ""
           type: status
         - _id: XI5ZO4krNWBvgf51
           relation: apply
           status: blind
-          trigger: turnStart
           triggerQualifier: not(@status.blind)
+          triggers:
+            - turnStart
           type: status
       competence:
         raw: 1
@@ -243,7 +243,8 @@ effects:
         - _id: HMVJizUXvyQ9mtt9
           activeQualifier: not(@status.frozen)
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1

@@ -49,14 +49,48 @@ effects:
         - _id: eUm1UOhkyF3KmU1q
           competencies:
             - 1
-          globalIdentifiers:
-            - ability:fast
+          constructionNodes:
+            b99427192f40f8e2:
+              _id: b99427192f40f8e2
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:fast
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: qy0rKWHv0DFoFgqJ
           competencies:
             - 2
-          globalIdentifiers:
-            - ability:swift
+          constructionNodes:
+            720e51765677f2c9:
+              _id: 720e51765677f2c9
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - ability:swift
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           type: addDocuments
         - _id: mmCTbgaQIg38Y0II
           status: frenzied
@@ -113,7 +147,8 @@ effects:
         - _id: 8QOdQYnnSxyi3PA8
           activeQualifier: and(not(@status.dead), @status.hacked, not(@status.burned), not(@status.frozen))
           noStatDice: true
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1
@@ -267,16 +302,15 @@ effects:
     system:
       _sup: Twt8FZWmnIjSW58R
       automations:
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:

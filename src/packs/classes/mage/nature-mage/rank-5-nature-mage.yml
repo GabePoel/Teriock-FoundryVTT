@@ -264,12 +264,11 @@ effects:
             }
           display:
             label: ""
+          interactInExecution: true
           localIdentifiers:
             - ability:empathic-ray
             - ability:treeform-ball
           overrideData: true
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -301,7 +300,8 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          trigger: longRest
+          triggers:
+            - longRest
           type: changeQuantity
       competence:
         raw: 1
@@ -413,11 +413,13 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          trigger: shortRest
+          triggers:
+            - shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          trigger: longRest
+          triggers:
+            - longRest
           type: changeQuantity
       competence:
         raw: 1
@@ -444,10 +446,9 @@ effects:
             }
           display:
             label: ""
+          interactInExecution: true
           localQualifier: and(@spell, @delivery.missile, @pro)
           overrideData: true
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -491,9 +492,8 @@ effects:
           auto: false
           display:
             label: ""
+          interactInExecution: true
           localQualifier: and(@ability, @spell, @time.a1)
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1

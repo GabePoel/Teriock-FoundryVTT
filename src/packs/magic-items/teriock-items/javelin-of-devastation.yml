@@ -84,6 +84,8 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:
@@ -110,10 +112,9 @@ effects:
             }
           display:
             label: ""
+          interactInExecution: true
           localQualifier: and(@spell, @delivery.missile, @pro)
           overrideData: true
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       costs:
         primary:
@@ -191,6 +192,8 @@ effects:
         base: >-
           <p>This cannot reduce the @Identifier[core:targets]{target's} @Identifier[core:hit-points-and-mana-points]{HP}
           to below 0.</p>
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:

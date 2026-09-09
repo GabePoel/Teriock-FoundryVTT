@@ -4,6 +4,14 @@ img: systems/teriock/src/icons/abilities/platinum-dragon-breath.webp
 name: Platinum Dragon Breath
 system:
   automations:
+    - _id: 29b275994cf9f5b1
+      formula: 4d10[holy lethal magic]
+      type: roll
+    - _id: 800c70e6560525a8
+      formula: (2 * @h)d10[magic holy]
+      heighten:
+        - 1
+      type: roll
     - _id: 7400b41f20d9f100
       angle: "@angle.dragon"
       attachToToken: false
@@ -13,16 +21,7 @@ system:
       restriction:
         enabled: true
         type: move
-      trigger: executeInput
-      type: region
-    - _id: 29b275994cf9f5b1
-      formula: 4d10[holy lethal magic]
-      type: roll
-    - _id: 800c70e6560525a8
-      formula: (2 * @h)d10[magic holy]
-      heighten:
-        - 1
-      type: roll
+      type: target
   costs:
     primary:
       mp:

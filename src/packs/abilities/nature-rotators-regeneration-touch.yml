@@ -8,14 +8,30 @@ system:
   _sup: 063b0cceb9b65c6c
   automations:
     - _id: f2ebb4a9ad0d1848
-      data: >-
-        {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
-        @Identifier[core:healing]{healing} in this way consumes a @Identifier[core:hit-points-and-mana-points]{hit die}
-        as normal (except that it can @Wiki[Category:Revival effects]{revive} you). This can only @Wiki[Category:Revival
-        effects]{revive} creatures that have been @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
-      globalIdentifiers:
-        - ability:regenerating
-      overrideData: true
+      constructionNodes:
+        abb1a8caafccaea9:
+          _id: abb1a8caafccaea9
+          all: false
+          auto: true
+          competence:
+            raw: 0
+          data: >-
+            {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
+            @Identifier[core:healing]{healing} in this way consumes a @Identifier[core:hit-points-and-mana-points]{hit
+            die} as normal (except that it can @Wiki[Category:Revival effects]{revive} you). This can only
+            @Wiki[Category:Revival effects]{revive} creatures that have been @Identifier[condition:dead]{dead} for 1
+            minute or less.</p>"}}
+          globalIdentifiers:
+            - ability:regenerating
+          globalUuids: []
+          localIdentifiers: []
+          localQualifier: ""
+          localUuids: []
+          multi: false
+          overrideData: true
+          parentId: null
+          setCompetence: ""
+          type: base
       type: addDocuments
   costs:
     components:
@@ -42,6 +58,8 @@ system:
   identifier: regeneration-touch
   invoked: true
   kind: special
+  piercing:
+    raw: 2
   powerSources:
     - magical
   results:

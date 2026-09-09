@@ -121,6 +121,7 @@ export default class AddDocumentsAutomation
     const paths = [];
     if (this.document?.type === "ability" && !this.isPassive) { paths.push("attachToEffect"); }
     if (!this.canAttachToEffect) { paths.push(...this._triggerDisplayPaths, "target"); }
+    else { paths.push("interactInExecution"); }
     paths.push(...["hr", "all"]);
     if (!this.all) { paths.push(...["auto", "multi"]); }
     paths.push("hr");

@@ -102,14 +102,28 @@ effects:
     system:
       automations:
         - _id: mfunsvIP3nrRWlPg
-          attachDocuments: false
+          attachToEffect: false
+          constructionNodes:
+            b1031a39515ab799:
+              _id: b1031a39515ab799
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - power:divine-gift
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           display:
             label: ""
-          globalIdentifiers:
-            - power:divine-gift
-          makeSeparateActivations: true
-          separate: true
-          trigger: ""
           type: addDocuments
       competence:
         raw: 1
@@ -271,7 +285,8 @@ effects:
     system:
       automations:
         - _id: do0moPMb5BgARhLv
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1
@@ -432,7 +447,8 @@ effects:
         - _id: HwNcGwWCMHKZtKra
           activeQualifier: not(@status.frozen)
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: revitalize
       competence:
         raw: 1
@@ -485,7 +501,8 @@ effects:
         - _id: HMVJizUXvyQ9mtt9
           activeQualifier: not(@status.frozen)
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1
@@ -530,8 +547,7 @@ effects:
         - _id: 7400b41f20d9f100
           restriction:
             type: move
-          trigger: executeInput
-          type: region
+          type: target
       competence:
         raw: 1
       delivery: aura
@@ -568,10 +584,9 @@ effects:
       automations:
         - _id: 7400b41f20d9f100
           deleteOnTurnChange: false
+          interactInExecution: true
           restriction:
             type: move
-          targeting: false
-          trigger: executeInput
           type: region
       competence:
         raw: 1

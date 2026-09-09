@@ -4,19 +4,39 @@ img: systems/teriock/src/icons/abilities/golden-dragon-breath.webp
 name: Golden Dragon Breath
 system:
   automations:
-    - _id: k1y3pC8IhCR9FDHM
-      all: true
-      auto: false
+    - _id: wUnbCUOJKb0xjuHC
+      attachToEffect: false
+      constructionNodes:
+        b1ee5bb234d5c939:
+          _id: b1ee5bb234d5c939
+          all: false
+          auto: false
+          competence:
+            raw: 0
+          data: "{}"
+          globalIdentifiers:
+            - consequence:gold-breath-attacked-effect
+            - consequence:gold-breath-base-effect
+          globalUuids: []
+          localIdentifiers: []
+          localQualifier: ""
+          localUuids: []
+          multi: false
+          name: ""
+          overrideData: false
+          parentId: null
+          setCompetence: ""
+          type: base
       display:
         label: ""
-      globalIdentifiers:
-        - consequence:gold-breath-attacked-effect
-        - consequence:gold-breath-base-effect
-      makeSeparateActivations: true
-      multi: true
-      separate: true
-      trigger: ""
       type: addDocuments
+    - _id: 800c70e6560525a8
+      display:
+        label: ""
+      formula: (2 * @h)d10[magic spiritual]
+      heighten:
+        - 1
+      type: roll
     - _id: 7400b41f20d9f100
       angle: "@angle.dragon"
       attachToToken: false
@@ -26,16 +46,7 @@ system:
       restriction:
         enabled: true
         type: move
-      trigger: executeInput
-      type: region
-    - _id: 800c70e6560525a8
-      display:
-        label: ""
-      formula: (2 * @h)d10[magic spiritual]
-      heighten:
-        - 1
-      trigger: ""
-      type: roll
+      type: target
   costs:
     primary:
       mp:

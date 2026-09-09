@@ -263,12 +263,11 @@ effects:
             }
           display:
             label: ""
+          interactInExecution: true
           localIdentifiers:
             - ability:ice-ball
             - ability:lightning-ray
           overrideData: true
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -300,7 +299,8 @@ effects:
       automations:
         - _id: XQJLVWyVRpuO5on4
           formula: "1"
-          trigger: longRest
+          triggers:
+            - longRest
           type: changeQuantity
       competence:
         raw: 1
@@ -365,11 +365,13 @@ effects:
       automations:
         - _id: XqnlTxp6N0lZCFaB
           formula: "1"
-          trigger: shortRest
+          triggers:
+            - shortRest
           type: changeQuantity
         - _id: lnI5XgS0RD02tQbn
           formula: "1"
-          trigger: longRest
+          triggers:
+            - longRest
           type: changeQuantity
       competence:
         raw: 1
@@ -434,11 +436,10 @@ effects:
       automations:
         - _id: 7400b41f20d9f100
           deleteOnTurnChange: false
+          interactInExecution: true
           radius: 10 + 15 * @h
           restriction:
             type: move
-          targeting: false
-          trigger: executeInput
           type: region
       competence:
         raw: 1
@@ -500,10 +501,9 @@ effects:
             }
           display:
             label: ""
+          interactInExecution: true
           localQualifier: and(@spell, @delivery.missile, @pro)
           overrideData: true
-          selectInExecution: true
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1

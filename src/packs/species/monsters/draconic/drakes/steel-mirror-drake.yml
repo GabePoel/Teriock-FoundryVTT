@@ -180,6 +180,8 @@ effects:
       limitation: >-
         <p>Can only be used while @Identifier[ability:move]{moving}.-i-Can be used as a @Wiki[Category:Free action
         abilities]{free action} simultaneously with @Identifier[ability:move]{Move}.</p>
+      piercing:
+        raw: 2
       powerSources:
         - martial
       results:
@@ -323,6 +325,9 @@ effects:
           distance: "15"
           movementAction: walk
           type: move
+        - _id: 29b275994cf9f5b1
+          formula: 2d10[magic]
+          type: roll
         - _id: 7400b41f20d9f100
           angle: "@angle.normal"
           attachToToken: false
@@ -331,11 +336,7 @@ effects:
           restriction:
             enabled: true
             type: move
-          trigger: executeInput
-          type: region
-        - _id: 29b275994cf9f5b1
-          formula: 2d10[magic]
-          type: roll
+          type: target
       competence:
         raw: 1
       costs:
@@ -455,16 +456,15 @@ effects:
     system:
       _sup: Ho2GcpE9XqJiO1zA
       automations:
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:

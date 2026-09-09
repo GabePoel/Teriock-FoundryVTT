@@ -28,6 +28,8 @@ effects:
         1d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
       identifier: burning-touch
       invoked: true
+      piercing:
+        raw: 2
       powerSources:
         - magical
       results:
@@ -56,7 +58,8 @@ effects:
           activeQualifier: "@equipment.shattered"
           common:
             - repair
-          trigger: turnEnd
+          triggers:
+            - turnEnd
           type: common
         - _id: HAgV9y2PvS45bdPf
           activeQualifier: "@equipment.shattered"
@@ -64,7 +67,8 @@ effects:
             label: ""
           formula: 2d4kh1
           impact: other
-          trigger: turnEnd
+          triggers:
+            - turnEnd
           type: roll
       description: >-
         <p><b>[[lookup name]]</b> items [[/repair]]{repair} themselves. If a [[lookup name style=lc]] item is also
@@ -148,9 +152,9 @@ effects:
     system:
       automations:
         - _id: 14cf30d977e3b585
+          interactInExecution: true
           primaryMacro: Compendium.teriock.execution.Macro.090fd08ae26477da
-          trigger: preExecute
-          type: abilityMacro
+          type: macro
       delivery: self
       duration:
         unit: unlimited

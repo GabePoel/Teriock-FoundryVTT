@@ -30,6 +30,8 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d8[fire magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: flame-ray
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:
@@ -62,6 +64,8 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:
@@ -98,7 +102,8 @@ effects:
       automations:
         - _id: l4rM5VwfWLCUKVDc
           formula: (@property.max / 4)d4
-          trigger: dawn
+          triggers:
+            - dawn
           type: changeQuantity
         - _id: q7NnSZ2OIzRup4jF
           amount: 1

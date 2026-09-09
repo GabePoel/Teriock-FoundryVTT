@@ -72,7 +72,8 @@ effects:
         - _id: Suc9ayhHqRkmjAwZ
           activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1
@@ -114,7 +115,8 @@ effects:
         - _id: T0uGlilXyRymTD1v
           activeQualifier: and(not(@status.dead), not(@status.frozen))
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: revitalize
       competence:
         raw: 1
@@ -318,16 +320,15 @@ effects:
     system:
       _sup: GtGxunSSzv1CDaVQ
       automations:
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:
@@ -411,17 +412,16 @@ effects:
     system:
       _sup: tCyGq7D3ddcRUq0H
       automations:
+        - _id: b4960732f0b9ed9f
+          executor: true
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          executor: true
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:

@@ -4,17 +4,16 @@ img: systems/teriock/src/icons/abilities/explosion.webp
 name: Explosion
 system:
   automations:
+    - _id: 800c70e6560525a8
+      formula: (1 + @h)d6[magic fire]
+      type: roll
     - _id: 7400b41f20d9f100
       attachToToken: false
       expandWithToken: false
       radius: "30"
       restriction:
         type: move
-      trigger: executeInput
-      type: region
-    - _id: 800c70e6560525a8
-      formula: (1 + @h)d6[magic fire]
-      type: roll
+      type: target
   costs:
     primary:
       mp:
@@ -36,6 +35,8 @@ system:
     1d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
   identifier: explosion
   kind: special
+  piercing:
+    raw: 2
   powerSources:
     - magical
   range:

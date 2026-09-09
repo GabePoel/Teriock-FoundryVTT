@@ -54,10 +54,10 @@ export function cleanDocument(doc) {
     delete doc.system.forceSuppressed;
     cleanCommon(doc);
     cleanActiveEffect(doc);
-    stripPseudoDefaults(doc);
     if (doc.type === "ability") { cleanAbility(doc); }
     if (["body", "equipment"].includes(doc.type)) { cleanArmament(doc); }
     if (["character", "creature"].includes(doc.type)) { cleanActor(doc); }
+    stripPseudoDefaults(doc);
   }
   if (doc.text?.content && doc.type === "class") { doc.text.content = doc.text.content.replaceAll("\n", ""); }
   stripDefaults(doc, documentDefaults(doc));
@@ -190,13 +190,10 @@ function cleanArmament(doc) {
  */
 function cleanAbility(doc) {
   // Clean Usage
+  if (typeof doc.system.interaction === "string" && doc.system.interaction !== "attack") { delete doc.system.piercing; }
   if (doc.system.interaction !== "feat") { delete doc.system.featSaveAttribute; }
-  if (doc.system.interaction !== "attack") { delete doc.system.piercing; }
   if (!doc.system.expansion?.type) { delete doc.system.expansion; }
   if (doc.system.executionTime) {
-    if (typeof doc.system.executionTime === "string") {
-      doc.system.executionTime = { base: doc.system.executionTime };
-    }
     if (doc.system.maneuver !== "slow") { delete doc.system.executionTime.slow; }
     if (doc.system.maneuver === "passive") { doc.system.executionTime.base = "passive"; }
   }

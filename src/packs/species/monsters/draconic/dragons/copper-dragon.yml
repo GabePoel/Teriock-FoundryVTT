@@ -49,6 +49,11 @@ effects:
     name: Copper Dragon Breath
     system:
       automations:
+        - _id: 800c70e6560525a8
+          formula: (2 * @h)d10[magic]
+          heighten:
+            - 1
+          type: roll
         - _id: 7400b41f20d9f100
           angle: "@angle.dragon"
           attachToToken: false
@@ -58,13 +63,7 @@ effects:
           restriction:
             enabled: true
             type: move
-          trigger: executeInput
-          type: region
-        - _id: 800c70e6560525a8
-          formula: (2 * @h)d10[magic]
-          heighten:
-            - 1
-          type: roll
+          type: target
       competence:
         raw: 1
       costs:
@@ -294,7 +293,8 @@ effects:
         - _id: Suc9ayhHqRkmjAwZ
           activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: heal
       competence:
         raw: 1
@@ -336,7 +336,8 @@ effects:
         - _id: T0uGlilXyRymTD1v
           activeQualifier: and(not(@status.dead), not(@status.frozen))
           consumeStatDice: false
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: revitalize
       competence:
         raw: 1
@@ -623,14 +624,15 @@ effects:
       overview:
         base: >-
           <p>You know celestial OP 1 @Identifier[core:elder-sorcery-words]{Elder Sorcery words} and those of every
-          element.</p><table><caption style="white-space:nowrap">OP 1 @Identifier[core:elder-sorcery-words]{Elder
-          Sorcery Words} </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
-          style="background-color:#6135831A">Celestial Adjectives</th><th style="background-color:#6135831A">Celestial
-          Adverbs</th><th style="background-color:#6135831A">Celestial Articles</th><th
-          style="background-color:#6135831A">Celestial Conjunctions</th><th style="background-color:#6135831A">Celestial
-          Nouns</th><th style="background-color:#6135831A">Celestial Prepositions</th><th
-          style="background-color:#6135831A">Celestial Pronouns</th><th style="background-color:#6135831A">Celestial
-          Verbs</th><th style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Nouns}</th><th
+          element.</p><table><caption style="white-space:nowrap" class="citizen-overflow-sticky-header">OP 1
+          @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+          style="background-color:#e5a50a1A">OP</th><th style="background-color:#6135831A">Celestial Adjectives</th><th
+          style="background-color:#6135831A">Celestial Adverbs</th><th style="background-color:#6135831A">Celestial
+          Articles</th><th style="background-color:#6135831A">Celestial Conjunctions</th><th
+          style="background-color:#6135831A">Celestial Nouns</th><th style="background-color:#6135831A">Celestial
+          Prepositions</th><th style="background-color:#6135831A">Celestial Pronouns</th><th
+          style="background-color:#6135831A">Celestial Verbs</th><th
+          style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Nouns}</th><th
           style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Verbs}</th><th
           style="background-color:#9a99961A">@Identifier[class:life-mage]{Life Nouns}</th><th
           style="background-color:#9a99961A">@Identifier[class:life-mage]{Life Verbs}</th><th
@@ -781,16 +783,15 @@ effects:
     system:
       _sup: U8G2FFApMquMNvvo
       automations:
+        - _id: b4960732f0b9ed9f
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:
@@ -874,17 +875,16 @@ effects:
     system:
       _sup: sDitK0L7vpVpARlG
       automations:
+        - _id: b4960732f0b9ed9f
+          executor: true
+          status: frightened
+          type: status
         - _id: 7400b41f20d9f100
           regionType: emanation
           restriction:
             enabled: true
             type: sound
-          trigger: executeInput
-          type: region
-        - _id: b4960732f0b9ed9f
-          executor: true
-          status: frightened
-          type: status
+          type: target
       competence:
         raw: 1
       costs:
@@ -1009,24 +1009,54 @@ effects:
       _sup: zFZJiaEo31yg0oXh
       automations:
         - _id: akT2v3Q61GzX1nbh
+          attachToEffect: false
+          constructionNodes:
+            4b650ad4b6c61747:
+              _id: 4b650ad4b6c61747
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - power:created-elder-sorceries
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           display:
             label: ""
-          globalIdentifiers:
-            - power:created-elder-sorceries
-          makeSeparateActivations: true
-          separate: true
-          trigger: ""
           type: addDocuments
         - _id: WBvjNFpKtMRAX7Br
+          attachToEffect: false
           competencies:
             - 2
+          constructionNodes:
+            43bec888c0e1e5c5:
+              _id: 43bec888c0e1e5c5
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - power:learned-elder-sorceries
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           display:
             label: ""
-          globalIdentifiers:
-            - power:learned-elder-sorceries
-          makeSeparateActivations: true
-          separate: true
-          trigger: ""
           type: addDocuments
       competence:
         raw: 1

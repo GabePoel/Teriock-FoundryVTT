@@ -173,6 +173,8 @@ effects:
           @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
           still halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a
           @Wiki[Category:Revival effects]{revival effect}.</p>
+      piercing:
+        raw: 2
       powerSources:
         - magical
       requirements: >-
@@ -200,6 +202,11 @@ effects:
           type: transformation
       competence:
         raw: 1
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
       delivery: self
       duration:
         raw: "1"
@@ -266,6 +273,8 @@ effects:
       improvement: >-
         <p>May have up to 2 × @Identifier[core:presence]{PRES} creatures @Identifier[condition:charmed]{charmed} at a
         time.</p>
+      piercing:
+        raw: 2
       powerSources:
         - magical
       requirements: >-
@@ -830,7 +839,8 @@ effects:
           display:
             label: ""
           formula: 1d6[toxic]
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: roll
         - _id: 5e4d195ed81a10cc
           competencies:
@@ -838,7 +848,8 @@ effects:
           display:
             label: ""
           formula: 1d8[toxic]
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: roll
         - _id: 3f7fa7707643426f
           competencies:
@@ -846,7 +857,8 @@ effects:
           display:
             label: ""
           formula: 1d10[toxic]
-          trigger: turnStart
+          triggers:
+            - turnStart
           type: roll
         - _id: 743730f25f256b10
           status: poisoned
@@ -1023,14 +1035,15 @@ effects:
       overview:
         base: >-
           <p>You know celestial OP 1 @Identifier[core:elder-sorcery-words]{Elder Sorcery words} and those of every
-          element.</p><table><caption style="white-space:nowrap">OP 1 @Identifier[core:elder-sorcery-words]{Elder
-          Sorcery Words} </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
-          style="background-color:#6135831A">Celestial Adjectives</th><th style="background-color:#6135831A">Celestial
-          Adverbs</th><th style="background-color:#6135831A">Celestial Articles</th><th
-          style="background-color:#6135831A">Celestial Conjunctions</th><th style="background-color:#6135831A">Celestial
-          Nouns</th><th style="background-color:#6135831A">Celestial Prepositions</th><th
-          style="background-color:#6135831A">Celestial Pronouns</th><th style="background-color:#6135831A">Celestial
-          Verbs</th><th style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Nouns}</th><th
+          element.</p><table><caption style="white-space:nowrap" class="citizen-overflow-sticky-header">OP 1
+          @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+          style="background-color:#e5a50a1A">OP</th><th style="background-color:#6135831A">Celestial Adjectives</th><th
+          style="background-color:#6135831A">Celestial Adverbs</th><th style="background-color:#6135831A">Celestial
+          Articles</th><th style="background-color:#6135831A">Celestial Conjunctions</th><th
+          style="background-color:#6135831A">Celestial Nouns</th><th style="background-color:#6135831A">Celestial
+          Prepositions</th><th style="background-color:#6135831A">Celestial Pronouns</th><th
+          style="background-color:#6135831A">Celestial Verbs</th><th
+          style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Nouns}</th><th
           style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Verbs}</th><th
           style="background-color:#9a99961A">@Identifier[class:life-mage]{Life Nouns}</th><th
           style="background-color:#9a99961A">@Identifier[class:life-mage]{Life Verbs}</th><th
@@ -1242,11 +1255,10 @@ effects:
       automations:
         - _id: 7400b41f20d9f100
           deleteOnTurnChange: false
+          interactInExecution: true
           radius: 30 + 10 * @h
           restriction:
             type: move
-          targeting: false
-          trigger: executeInput
           type: region
       competence:
         raw: 1
@@ -1305,24 +1317,54 @@ effects:
       _sup: bsvXCKh0zEqyG95v
       automations:
         - _id: akT2v3Q61GzX1nbh
+          attachToEffect: false
+          constructionNodes:
+            4b650ad4b6c61747:
+              _id: 4b650ad4b6c61747
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - power:created-elder-sorceries
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           display:
             label: ""
-          globalIdentifiers:
-            - power:created-elder-sorceries
-          makeSeparateActivations: true
-          separate: true
-          trigger: ""
           type: addDocuments
         - _id: WBvjNFpKtMRAX7Br
+          attachToEffect: false
           competencies:
             - 2
+          constructionNodes:
+            43bec888c0e1e5c5:
+              _id: 43bec888c0e1e5c5
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers:
+                - power:learned-elder-sorceries
+              globalUuids: []
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              overrideData: false
+              parentId: null
+              setCompetence: ""
+              type: base
           display:
             label: ""
-          globalIdentifiers:
-            - power:learned-elder-sorceries
-          makeSeparateActivations: true
-          separate: true
-          trigger: ""
           type: addDocuments
       competence:
         raw: 1
@@ -1431,9 +1473,8 @@ effects:
         - _id: vl75ptJJ2PxGtxvp
           globalUuids:
             - Compendium.teriock.tables.RollTable.123c3761ef9170e0
-          selectInExecution: true
+          interactInExecution: true
           setCompetence: inherit
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -1480,9 +1521,8 @@ effects:
         - _id: rtS8pKZcrAIhuelB
           globalUuids:
             - Compendium.teriock.tables.RollTable.3b1c5fce9a12eb06
-          selectInExecution: true
+          interactInExecution: true
           setCompetence: inherit
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -1529,9 +1569,8 @@ effects:
         - _id: jXoLCDYUDYApcLy7
           globalUuids:
             - Compendium.teriock.tables.RollTable.412794b2cb657a29
-          selectInExecution: true
+          interactInExecution: true
           setCompetence: inherit
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -1578,9 +1617,8 @@ effects:
         - _id: 4Z2JbZy37j0NarGC
           globalUuids:
             - Compendium.teriock.tables.RollTable.7e812dd1925667ff
-          selectInExecution: true
+          interactInExecution: true
           setCompetence: inherit
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -1627,9 +1665,8 @@ effects:
         - _id: GztLDgb92t5uzFoQ
           globalUuids:
             - Compendium.teriock.tables.RollTable.0d091a6580655bf4
-          selectInExecution: true
+          interactInExecution: true
           setCompetence: inherit
-          trigger: execute
           type: useDocuments
       competence:
         raw: 1
@@ -1850,8 +1887,7 @@ effects:
         - _id: 7400b41f20d9f100
           restriction:
             type: move
-          trigger: executeInput
-          type: region
+          type: target
       competence:
         raw: 1
       costs:
@@ -2021,6 +2057,8 @@ effects:
         - revitalization
       identifier: mana-drain-touch
       kind: special
+      piercing:
+        raw: 2
       powerSources:
         - magical
       results:
@@ -2281,6 +2319,8 @@ effects:
         @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
         @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
       identifier: spiga-web-ball
+      piercing:
+        raw: 2
       powerSources:
         - martial
       range:
@@ -2314,6 +2354,8 @@ effects:
         @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
         @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
       identifier: spiga-web-packet
+      piercing:
+        raw: 1
       powerSources:
         - martial
       range:
