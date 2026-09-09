@@ -47,6 +47,10 @@ export const menus = {
           defaultDragonBreathAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
         },
       },
+      keyword: {
+        icon: icons.manifest.document.keyword,
+        settings: { randomBoostedTypes: { default: false, scope: "world", type: Boolean } },
+      },
     },
     icon: icons.manifest.settings.alternateRules,
   },

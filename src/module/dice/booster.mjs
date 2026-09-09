@@ -1,5 +1,5 @@
 import { transplantOverrides } from "../helpers/transplant.mjs";
-import { selectWeightedMaxFaceDie } from "./helpers.mjs";
+import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "./helpers.mjs";
 
 const { FunctionTerm } = foundry.dice.terms;
 
@@ -34,13 +34,16 @@ class BoosterTerm extends FunctionTerm {
    * @returns {Promise<void>}
    */
   static async _boost(roll, options = {}) {
-    const die = selectWeightedMaxFaceDie(roll);
-    if (die) {
-      if (typeof die._number === "number") { die._number += 1; }
-      else if (typeof die.number === "number") { die._number = die.number + 1; }
-      else {
-        await die._evaluateAsync(options);
-        if (typeof die.number === "number") { die._number = die.number + 1; }
+    if (!addCombinedMaxFaceDie(roll)) {
+      const die = selectWeightedMaxFaceDie(roll);
+      if (die) {
+        if (typeof die._number === "number") { die._number += 1; }
+        else if (typeof die.number === "number") { die._number = die.number + 1; }
+        else {
+          await die._evaluateAsync(options);
+          if (typeof die.number === "number") { die._number = die.number + 1; }
+        }
+        markBoostedDie(roll, die);
       }
     }
     roll.resetFormula();
@@ -53,7 +56,7 @@ class BoosterTerm extends FunctionTerm {
    * @returns {Promise<void>}
    */
   static async _deboost(roll, options = {}) {
-    const die = selectWeightedMaxFaceDie(roll);
+    const die = selectDeboostDie(roll);
     if (die) {
       if (typeof die._number === "number") { die._number = Math.max(0, die._number - 1); }
       else if (typeof die.number === "number") { die._number = Math.max(0, die.number - 1); }

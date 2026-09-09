@@ -246,7 +246,7 @@ export default class ConstructionNode
         if (this.globalIdentifiers.size) {
           name = teriock.fromIdentifierSync(this.globalIdentifiers.first())?.name ?? name;
         }
-        if (this.globalUuids.size) { name = fromUuidSync(this.globalIdentifiers.first())?.name ?? name; }
+        if (this.globalUuids.size) { name = fromUuidSync(this.globalUuids.first())?.name ?? name; }
         if (this.localUuids.size && this.actor) {
           name = fromUuidSync(this.localUuids.first(), { relative: this.actor })?.name ?? name;
         }

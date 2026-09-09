@@ -2,7 +2,7 @@ import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import Booster from "../../booster.mjs";
-import { selectWeightedMaxFaceDie } from "../../helpers.mjs";
+import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "../../helpers.mjs";
 
 const { Roll } = foundry.dice;
 
@@ -247,11 +247,19 @@ export default class BaseRoll extends Roll {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
     if (!clone._evaluated) { await clone.evaluate(); }
-    const die = selectWeightedMaxFaceDie(clone);
-    die._number = (die.number ?? 0) + 1;
-    const dieRoll = new BaseRoll(die.formula);
-    await dieRoll.evaluate();
-    die.results.push(dieRoll.dice[0].results.at(-1));
+    const combined = addCombinedMaxFaceDie(clone);
+    const die = combined ?? selectWeightedMaxFaceDie(clone);
+    if (!combined) {
+      die._number = (die.number ?? 0) + 1;
+      markBoostedDie(clone, die);
+    }
+    if (die._evaluated) {
+      const dieRoll = new BaseRoll(die.formula);
+      await dieRoll.evaluate();
+      die.results.push(dieRoll.dice[0].results.at(-1));
+    } else {
+      await die.evaluate();
+    }
     BaseRoll.resetFormulas(clone);
     return this.constructor.fromTerms(
       [new Booster({ fn: "b", result: clone.total, rolls: [clone], terms: [formula] })],
@@ -280,7 +288,7 @@ export default class BaseRoll extends Roll {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
     if (!clone._evaluated) { await clone.evaluate(); }
-    const die = selectWeightedMaxFaceDie(clone);
+    const die = selectDeboostDie(clone);
     die._number = Math.max(0, (die.number ?? 0) - 1);
     die.results.pop();
     this.constructor.resetFormulas(clone);
@@ -311,6 +319,20 @@ export default class BaseRoll extends Roll {
    */
   async getPanels() {
     return [];
+  }
+
+  /** @inheritDoc */
+  async getTooltip() {
+    const parts = this.getTooltipParts();
+    return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, { parts });
+  }
+
+  /**
+   * The dice parts for the tooltip.
+   * @returns {object[]}
+   */
+  getTooltipParts() {
+    return this.dice.filter(d => typeof d.number === "number" ? d.number !== 0 : true).map(d => d.getTooltipData());
   }
 
   /** @inheritDoc */

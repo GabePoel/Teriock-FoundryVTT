@@ -256,7 +256,7 @@ export function parseIdentifier(identifier) {
  * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
  */
 export async function findBestDocument(lookup, relativeTo, options = {}) {
-  if (options.relativeOnly && typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
+  if (options.relativeOnly && !relativeTo?.previewed?.getContents) { return null; }
   if (!lookup) { return null; }
   const doc = await fromIdentifier(lookup, { relativeOnly: Boolean(options.relativeOnly), relativeTo });
   if (doc) { return doc; }
@@ -271,7 +271,7 @@ export async function findBestDocument(lookup, relativeTo, options = {}) {
  * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
  */
 export async function fromIdentifierLocal(identifier, relativeTo) {
-  if (typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
+  if (!relativeTo?.previewed?.getContents) { return null; }
   if (!identifier) { return null; }
   const children = await relativeTo.previewed.getContents();
   return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;

@@ -1,3 +1,4 @@
+import { listFormat } from "../../helpers/localization.mjs";
 import { fromIdentifier } from "../../helpers/utils.mjs";
 import ImpactsRoll from "./impacts-roll/impacts-roll.mjs";
 
@@ -63,5 +64,29 @@ export default class HarmRoll extends ImpactsRoll {
   async getPanels() {
     const harmArray = await this.getHarmArray();
     return Promise.all(harmArray.map(h => h.getPanelParts()));
+  }
+
+  /** @inheritDoc */
+  getTooltipParts() {
+    const parts = super.getTooltipParts();
+    if (!this.impacts.includes("damage") && !this.impacts.includes("drain")) { return parts; }
+    for (const p of parts) {
+      if (p.flavor) {
+        p.flavor = listFormat(
+          p.flavor.split(" ").map(i => {
+            let flavor;
+            if (this.impacts.includes("damage") && !flavor) {
+              flavor = game.teriock.identifiers.getName(`damage:${i}`);
+            }
+            if (this.impacts.includes("drain") && !flavor) {
+              flavor = game.teriock.identifiers.getName(`drain:${i}`);
+            }
+            return flavor ? flavor : p.flavor;
+          }),
+          { sort: true, style: "short", type: "unit" },
+        );
+      }
+    }
+    return parts;
   }
 }

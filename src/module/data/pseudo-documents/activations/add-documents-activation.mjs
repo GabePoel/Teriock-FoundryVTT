@@ -1,6 +1,7 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import AddDocumentsAutomation from "../automations/add-documents-automation/add-documents-automation.mjs";
+import ConstructionNode from "../construction-node/construction-node.mjs";
 import { ConstructNodesPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { AutomationActivationFactory } from "./abstract/_module.mjs";
 
@@ -15,6 +16,16 @@ export default class AddDocumentsActivation
       delete source.secondary;
     }
     return super.migrateData(source, options);
+  }
+
+  /** @inheritDoc */
+  get label() {
+    if (this.display.label) { return this.display.label; }
+    const names = new Set(this.rootNodes.map(n => n.name));
+    const name = names.size === 1 ? names.first() : null;
+    return name && name !== _loc(ConstructionNode.typeLabel)
+      ? _loc("TERIOCK.ACTIVATIONS.AddDocuments.BUTTON.named", { name })
+      : _loc("TERIOCK.ACTIVATIONS.AddDocuments.BUTTON.generic");
   }
 
   /** @inheritDoc */
