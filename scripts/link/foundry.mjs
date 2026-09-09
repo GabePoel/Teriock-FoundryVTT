@@ -7,7 +7,20 @@ let command = "";
 let SRC = "";
 const DST = path.resolve(".", "foundry");
 const PLATFORM = os.platform();
-const PATHS = ["client", "common", "templates", "public"];
+const PATHS = [
+  "client",
+  "common",
+  "public/canvas",
+  "public/cards",
+  "public/fonts",
+  "public/icons",
+  "public/lang",
+  "public/less2",
+  "public/sounds",
+  "public/tours",
+  "public/ui",
+  "templates",
+];
 
 if (PLATFORM === "linux") { command = "zenity --file-selection --directory"; }
 console.log("Please select a folder where Foundry is installed.");
@@ -27,9 +40,10 @@ exec(command, (err, stdout) => {
       const src = path.join(SRC, p);
       const dst = path.join(DST, p);
       console.log(` - ${src} => ${dst}`);
-      if (fs.existsSync(src)) { fs.symlinkSync(src, dst); }
+      if (fs.existsSync(src)) {
+        fs.mkdirSync(path.dirname(dst), { recursive: true });
+        fs.symlinkSync(src, dst);
+      }
     }
-  } else {
-    console.error("No valid Foundry folder selected");
-  }
+  } else { console.error("No valid Foundry folder selected"); }
 });

@@ -1,6 +1,8 @@
 import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
+import { listFormat } from "../../helpers/localization.mjs";
+import { isKebabCase } from "../../helpers/string.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
@@ -9,13 +11,13 @@ const { fromUuid } = foundry.utils;
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";
+ * @import { HTMLDocumentTagsElement } from "@client/applications/elements/_module.mjs";
  */
 
 /**
  * @typedef IdentifierTagsInputConfig
- * @property {string[]} [types] - Allowed Teriock document type prefixes for typed identifiers.
- * @property {boolean} [single] - Only allow referencing a single identifier. The submitted form value will be a string rather than an array.
- * @property {number} [max] - Only allow attaching a maximum number of identifiers
+ * @property {string[]} [types] - Allowed type prefixes for typed identifiers.
+ * @property {boolean} [single] - Only allow referencing a single identifier. Submitted form will be a string.
  */
 
 /**
@@ -45,8 +47,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     const tags = new this({ values });
     tags.name = config.name;
     tags.setAttribute("value", values.join(","));
-    if (config.types?.length) { tags.types = config.types; }
-    tags.max = config.max;
+    tags.types = config.types;
     tags.single = config.single;
     foundry.applications.fields.setInputAttributes(tags, config);
     return tags;
@@ -104,23 +105,13 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /**
    * Add a new identifier to the tagged set, throwing an error if the identifier is not valid.
-   * @param {string} identifier - The identifier to add
-   * @throws {Error}           If the identifier is not valid
+   * @param {Identifier} identifier - The identifier to add
+   * @throws {Error} If the identifier is not valid
    */
   #add(identifier) {
     if (!this.editable) { return; }
     identifier = this.#validateIdentifier(identifier);
-
-    const { max, single } = this;
-
-    if (max && Object.keys(this._value).length >= max) {
-      throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorMax", { max, name: this.name }));
-    }
-
-    if (single) {
-      for (const k of Object.keys(this._value)) { delete this._value[k]; }
-    }
-
+    if (this.single) { for (const k of Object.keys(this._value)) { delete this._value[k]; } }
     this._value[identifier] = game.teriock.identifiers.getName(identifier) ?? identifier;
   }
 
@@ -209,9 +200,9 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   }
 
   /**
-   * Validate an identifier, returning the trimmed value.
+   * Validate an identifier.
    * @param {string} identifier
-   * @returns {string}
+   * @returns {Identifier}
    * @throws {Error}
    */
   #validateIdentifier(identifier) {
@@ -225,7 +216,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
         throw new Error(
           _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
             provided: parsed.type,
-            required: types.join(", "),
+            required: listFormat(types, { type: "disjunction" }),
           }),
         );
       }
@@ -242,21 +233,6 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   _value = {};
 
   /**
-   * Allow a maximum number of identifiers to be tagged to the element.
-   * @return {number}
-   */
-  get max() {
-    const max = parseInt(this.getAttribute("max"));
-    return isNaN(max) ? Infinity : max;
-  }
-
-  /** @param {number} value */
-  set max(value) {
-    if (Number.isInteger(value) && value > 0) { this.setAttribute("max", String(value)); }
-    else { this.removeAttribute("max"); }
-  }
-
-  /**
    * Restrict to only allow referencing a single identifier instead of an array of identifiers.
    * @return {boolean}
    */
@@ -270,7 +246,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   }
 
   /**
-   * Restrict identifiers to one or more Teriock document type prefixes.
+   * Restrict identifiers to only certain type prefixes.
    * @return {string[]}
    */
   get types() {
@@ -286,11 +262,9 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       return;
     }
     for (const type of value) {
-      if (!TERIOCK.config.document[type]) {
-        throw new Error(`"${type}" is not a valid Teriock document type in TERIOCK.config.document`);
-      }
+      if (!isKebabCase(type)) { throw new Error(`"${type}" is not a valid identifier type.`); }
     }
-    this.setAttribute("types", value.join(","));
+    this.setAttribute("types", value.map(v => v.trim()).filter(Boolean).join(","));
   }
 
   /** @inheritDoc */
@@ -331,14 +305,14 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   }
 
   /**
-   * Initialize innerText or an initial value attribute of the element as a comma-separated list.
+   * Initialize textContent or an initial value attribute of the element as a comma-separated list.
    * @param {string[]} [values] - An array of identifiers to initialize the element with.
    */
   _initializeTags(values) {
     let tags = [];
     if (Array.isArray(values)) { tags = values; }
     else {
-      const initial = this.getAttribute("value") || this.innerText || "";
+      const initial = this.getAttribute("value") || this.textContent || "";
       if (initial) { tags = initial.split(","); }
     }
     for (const t of tags) {
@@ -350,7 +324,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
         this._value[identifier] = `${identifier} [INVALID]`;
       }
     }
-    this.innerText = "";
+    this.textContent = "";
     this.removeAttribute("value");
   }
 

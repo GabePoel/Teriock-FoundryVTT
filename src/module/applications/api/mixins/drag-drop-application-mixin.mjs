@@ -65,7 +65,7 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * Return a cached copy of a DragDrop instance, creating one on first access.
+     * Return a cached copy of a DragDrop instance.
      * @returns {DragDrop}
      */
     get _dragDrop() {
@@ -84,7 +84,7 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * What may be dragged out of this application.
+     * Selected for intended drag target.
      * @returns {string|null}
      */
     get _dragSelector() {
@@ -92,8 +92,8 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * What may be dropped onto within this application. Null makes the whole application a drop target.
-     * @returns {string|null}
+     * Selector for intended drop target.
+     * @returns {string|null} Return is `null` if the whole application is a drop target.
      */
     get _dropSelector() {
       return this.options.teriock.dragDrop.selectors.drop;
@@ -108,8 +108,8 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * Checks if a drop is allowed. Evaluated when the drag handlers are bound rather than during a drag, so it
-     * cannot depend on what is currently being dragged. Per-drag checks belong in {@link _dropEffect}.
+     * Checks if a drop is allowed when the drag handlers are bound rather than during a drag. Use {@link _dropEffect}
+     * to check during a drag.
      * @returns {boolean}
      */
     _canDragDrop() {
@@ -135,8 +135,8 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * A field element under the cursor that handles drops itself, independent of whether the application as a whole
-     * is a valid drop target.
+     * A field element under the cursor that handles drops itself. This is independent of whether the application as a
+     * whole is a valid drop target.
      * @param {DragEvent} event
      * @returns {HTMLElement|null}
      */
@@ -195,7 +195,7 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * Handles the drag leaving the application, whether from a drag leave event or the drag ending elsewhere.
+     * Handles the drag leaving the application. This is also used if the drag ends somewhere outside the application.
      * @returns {Promise<void>}
      */
     async _onDragLeaveApplication() {
@@ -259,7 +259,7 @@ export default function DragDropApplicationMixin(Base) {
     /**
      * Explains why a drag that was released over this application couldn't be dropped.
      * @param {DragEvent} _event
-     * @returns {boolean} Whether the drag didn't start from this application, and so a rejection may apply.
+     * @returns {boolean} Whether the drag didn't start from this application.
      */
     _onDropRejected(_event) {
       return DragDrop.implementation.dragStartApplication !== this;
@@ -272,7 +272,7 @@ export default function DragDropApplicationMixin(Base) {
     }
 
     /**
-     * Change tabs, deferring to the next render if the navigation to change isn't in the DOM yet.
+     * Safely change tabs. This changes right away if possible or waits until next render if not.
      * @param {string} tab
      * @param {string} group
      */

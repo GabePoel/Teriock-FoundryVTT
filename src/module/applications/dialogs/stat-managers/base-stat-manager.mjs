@@ -3,7 +3,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
-import { HackStatApplicationMixin } from "../../shared/_module.mjs";
+import { HackStatApplicationMixin } from "../../mixins/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";

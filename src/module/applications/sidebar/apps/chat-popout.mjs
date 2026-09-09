@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
+import { ChatMessageConnectionMixin } from "../mixins/_module.mjs";
 
 const { ChatPopout } = foundry.applications.sidebar.apps;
 

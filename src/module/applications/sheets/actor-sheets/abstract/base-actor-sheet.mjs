@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
-import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
+import { HackStatApplicationMixin } from "../../../mixins/_module.mjs";
 import { CommonSheetMixin, InventoryManagementSheetMixin } from "../../mixins/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;

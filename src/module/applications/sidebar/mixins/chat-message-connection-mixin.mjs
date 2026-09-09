@@ -1,7 +1,7 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
-import { BaseApplicationMixin, DragDropApplicationMixin } from "../api/mixins/_module.mjs";
-import { TeriockContextMenu } from "../ux/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
+import { makeIcon } from "../../../helpers/icon.mjs";
+import { BaseApplicationMixin, DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
+import { TeriockContextMenu } from "../../ux/_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
 

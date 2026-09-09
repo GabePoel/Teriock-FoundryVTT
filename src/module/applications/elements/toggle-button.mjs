@@ -6,8 +6,8 @@ import HTMLCycleButtonElement from "./cycle-button.mjs";
  */
 
 /**
- * A two-state toggle control that behaves like a checkbox, displaying an icon.
- * Clicking the button toggles between `true` and `false`. The button lights up when `true` and is otherwise `false`.
+ * A two-state toggle control that behaves like a checkbox but looks like a button. Clicking the button toggles between
+ * `true` and `false`. Button is highlighted when `true` and is boring and lame when `false`.
  */
 export default class HTMLToggleButtonElement extends HTMLCycleButtonElement {
   /** @inheritDoc */

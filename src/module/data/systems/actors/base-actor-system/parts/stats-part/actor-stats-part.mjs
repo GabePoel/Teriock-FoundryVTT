@@ -121,11 +121,10 @@ export default function ActorStatsPart(Base) {
     /** @inheritDoc */
     _onUpdate(changed, options, userId) {
       super._onUpdate(changed, options, userId);
-      if (options.teriock) {
+      if (!foundry.utils.getProperty(options, "teriock.dontDisplayStatChange")) {
         for (const stat of BAR_STATS) {
-          const change = options.teriock[`${stat}Change`];
-          // The large number catch is used to keep from rendering the stat change upon applying transformations
-          if (change !== 0 && change < TERIOCK.config.system.inf / 2) {
+          const change = foundry.utils.getProperty(options, `teriock.${stat}Change`) ?? 0;
+          if (change) {
             const colors = statConfig[stat].color;
             this.animateStatChangeEffect(change, change > 0 ? colors.light : colors.dark);
           }
@@ -167,7 +166,6 @@ export default function ActorStatsPart(Base) {
       const yes = await super._preUpdate(changes, options, user);
       if (yes === false) { return false; }
 
-      options.teriock ??= {};
       for (const stat of BAR_STATS) {
         const newStat = foundry.utils.mergeObject(
           foundry.utils.deepClone(this[stat]),
@@ -175,7 +173,7 @@ export default function ActorStatsPart(Base) {
         );
         const realChange = newStat.value - this[stat].value;
         const tempChange = (newStat.temp ?? 0) - (this[stat].temp ?? 0);
-        options.teriock[`${stat}Change`] = realChange + tempChange;
+        foundry.utils.setProperty(options, `teriock.${stat}Change`, realChange + tempChange);
       }
     }
 

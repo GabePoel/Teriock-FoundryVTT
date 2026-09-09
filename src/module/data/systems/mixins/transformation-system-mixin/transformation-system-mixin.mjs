@@ -130,6 +130,7 @@ export default function TransformationSystemMixin(Base) {
         ids: [this.actor.id],
         pack: this.actor.pack,
         parent: this.actor.parent,
+        teriock: { dontDisplayStatChange: true },
         updates: [{ _id: this.actor.id, ...data }],
       });
     }
