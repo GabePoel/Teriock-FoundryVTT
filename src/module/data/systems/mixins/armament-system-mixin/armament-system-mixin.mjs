@@ -42,7 +42,7 @@ export default function ArmamentSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return foundry.utils.mergeObject(super.defineSchema(), {
+      return Object.assign(super.defineSchema(), {
         av: defenseField(),
         bv: defenseField(),
         damage: new MultiChangeField({

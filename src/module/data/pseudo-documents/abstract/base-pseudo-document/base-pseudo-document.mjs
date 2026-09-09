@@ -32,7 +32,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
     return foundry.utils.mergeObject(super.metadata, {
       documentName: "",
       icon: TERIOCK.display.icons.manifest.ui.document,
-      tags: { embed: false, panel: false },
+      tags: { embed: false, mechanic: false, panel: false },
       type: "base",
       typed: false,
     });

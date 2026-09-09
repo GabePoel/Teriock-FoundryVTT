@@ -6,6 +6,7 @@ import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
+import ConstructionNodesSheetMixin from "./construction-nodes-sheet-mixin.mjs";
 
 /**
  * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
@@ -23,7 +24,7 @@ export default function MechanicsSheetMixin(Base) {
    * @mixin
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
-  class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin) {
+  class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin, ConstructionNodesSheetMixin) {
     /**
      * Handle click events to copy the UUID of this Pseudo-Document to clipboard.
      * @param {PointerEvent} event
@@ -40,23 +41,10 @@ export default function MechanicsSheetMixin(Base) {
       ui.notifications.info("DOCUMENT.IdCopiedClipboard", { format: { id, label, type } });
     }
 
-    /**
-     * Create a construction node that's a child of another one.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     */
-    static async #onCreateConstructionNode(_event, target) {
-      const parentMechanic = await fromUuid(target.dataset.parentUuid);
-      if (!parentMechanic) { return; }
-      await parentMechanic.createPseudoDocuments("ConstructionNode", [{ parentId: target.dataset.nodeId }]);
-    }
-
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         copyMechanicUuid: { buttons: [0, 2], handler: this.#onCopyMechanicUuid, suppressContextMenu: true },
-        createConstructionNode: this.#onCreateConstructionNode,
         createMechanic: this._onCreateMechanic,
         deleteMechanic: this._onDeleteMechanic,
         editActiveQualifier: this._onEditActiveQualifier,
@@ -158,7 +146,9 @@ export default function MechanicsSheetMixin(Base) {
      */
     get _mechanicCollections() {
       return Object.fromEntries(
-        Object.entries(this.document.pseudoCollections).map(([documentName, collection]) => {
+        Object.entries(this.document.pseudoCollections).filter(([_documentName, collection]) =>
+          collection.documentClass?.metadata?.tags?.mechanic
+        ).map(([documentName, collection]) => {
           const name = _loc(`DOCUMENT.${documentName}`);
           return [collection.name, {
             addLabel: _loc("TERIOCK.SHEETS.Common.ACTIONS.addChild", { name }),

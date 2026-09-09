@@ -6,9 +6,15 @@ declare global {
 
     export type TypeMetadata = { icon: string, tags: TypeTags, type: string };
 
-    export type PseudoDocumentMetadata = TypeMetadata & { documentName: string, typed: boolean };
+    type PseudoDocumentTags = TypeTags & { mechanic: boolean };
 
-    type AutomationTags = TypeTags & {
+    export type PseudoDocumentMetadata = TypeMetadata & {
+      documentName: string;
+      tags: PseudoDocumentTags;
+      typed: boolean;
+    };
+
+    type AutomationTags = PseudoDocumentTags & {
       changes: boolean;
       interactInExecution: boolean;
       triggered: boolean;

@@ -33,7 +33,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    return Object.assign(super.defineSchema(), {
       inheritTier: new fields.BooleanField({ initial: true }),
       target: new LocalDocumentField(foundry.documents.BaseItem),
       tier: new fields.NumberField({ initial: 0 }),

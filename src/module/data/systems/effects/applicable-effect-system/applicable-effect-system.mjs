@@ -77,7 +77,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    return Object.assign(super.defineSchema(), {
       blocks: builders.blocksField(),
       critical: new fields.BooleanField(),
       executor: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),

@@ -1,5 +1,6 @@
 export { default as ChangesSheetMixin } from "./changes-sheet-mixin.mjs";
 export { default as CommonSheetMixin } from "./common-sheet-mixin.mjs";
+export { default as ConstructionNodesSheetMixin } from "./construction-nodes-sheet-mixin.mjs";
 export { default as DisplaySheetMixin } from "./display-sheet-mixin.mjs";
 export { default as DocumentCreationSheetMixin } from "./document-creation-sheet-mixin.mjs";
 export { default as DragDropSheetMixin } from "./drag-drop-sheet-mixin.mjs";

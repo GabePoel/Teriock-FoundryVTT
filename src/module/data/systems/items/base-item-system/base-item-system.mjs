@@ -30,7 +30,7 @@ export default class BaseItemSystem
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    return Object.assign(super.defineSchema(), {
       _dep: nullIdField(),
       disabled: new fields.BooleanField(),
       flaws: new fields.HTMLField(),

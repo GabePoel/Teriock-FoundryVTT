@@ -11,7 +11,10 @@ const { fields } = foundry.data;
 export default class RegionActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.document.region, type: "region" });
+    return Object.assign(super.metadata, {
+      icon: TERIOCK.display.icons.manifest.activation.placeRegion,
+      type: "region",
+    });
   }
 
   /** @inheritDoc */
@@ -46,7 +49,7 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
     const data = foundry.utils.mergeObject(this.data, {
       flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
-    });
+    }, { inplace: false });
     const uuids = (await this.selectDocuments()).map(d => d.uuid);
     if (uuids.length) {
       data.behaviors ??= [];

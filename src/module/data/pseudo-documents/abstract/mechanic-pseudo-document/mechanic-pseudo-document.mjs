@@ -16,6 +16,11 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Base"];
 
   /** @inheritDoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, { tags: { mechanic: true } });
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       activeQualifier: qualifierField({ initial: "1" }),
