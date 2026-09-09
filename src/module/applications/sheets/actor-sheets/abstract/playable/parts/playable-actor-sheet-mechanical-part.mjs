@@ -44,8 +44,8 @@ export default function PlayableActorSheetMechanicalPart(Base) {
 
     /**
      * Quickly uses an item with optional modifiers.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
     static async #onQuickUse(event, target) {
@@ -92,8 +92,8 @@ export default function PlayableActorSheetMechanicalPart(Base) {
 
     /**
      * Toggles a condition.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
     static async #onToggleCondition(event, target) {
@@ -109,8 +109,8 @@ export default function PlayableActorSheetMechanicalPart(Base) {
 
     /**
      * Toggle Documents to be enabled or disabled.
-     * @param {PointerEvent} _event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
     static async #onToggleDocs(_event, target) {

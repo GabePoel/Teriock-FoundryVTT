@@ -32,8 +32,8 @@ export default function HackStatApplicationMixin(Base) {
 
     /**
      * Rolls a stat die. Right-click unrolls it.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      * @this {HackStatApplication}
      */
@@ -48,8 +48,8 @@ export default function HackStatApplicationMixin(Base) {
 
     /**
      * Hacks a specific body part. Right-click hacks in the reverse direction.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      * @this {HackStatApplication}
      */
@@ -86,8 +86,8 @@ export default function HackStatApplicationMixin(Base) {
 
     /**
      * Unhacks a specific body part. Right-click hacks in the reverse direction.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      * @this {HackStatApplication}
      */
@@ -195,8 +195,8 @@ export default function HackStatApplicationMixin(Base) {
 
     /**
      * Unrolls a stat die.
-     * @param {PointerEvent} _event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
     async _unrollStatDie(_event, target) {

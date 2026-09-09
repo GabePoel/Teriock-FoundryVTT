@@ -13,8 +13,8 @@ export default function PlayableActorSheetRollingPart(Base) {
   class PlayableActorSheetRollingPart extends Base {
     /**
      * Rolls an affinity.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      * @todo Fix the heck out of this. (This probably needs to happen within `BaseAffinity`.)
      */
@@ -27,8 +27,8 @@ export default function PlayableActorSheetRollingPart(Base) {
 
     /**
      * Rolls a feat save.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
     static async #onRollFeatSave(event, target) {

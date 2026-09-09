@@ -12,8 +12,8 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
   class PlayableActorSheetTradecraftsPart extends Base {
     /**
      * Rolls a tradecraft check with optional advantage/disadvantage.
-     * @param {PointerEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
     static async #onRollTradecraft(event, target) {

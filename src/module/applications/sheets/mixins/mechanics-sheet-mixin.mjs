@@ -140,8 +140,7 @@ export default function MechanicsSheetMixin(Base) {
     }
 
     /**
-     * Configuration for each mechanic collection that can be rendered on this document. Keyed off the pseudo-document
-     * collections the document actually declares.
+     * Configuration for each mechanic collection that can be rendered on this document.
      * @returns {Record<string, Teriock.Sheet.MechanicCollectionConfig>}
      */
     get _mechanicCollections() {
