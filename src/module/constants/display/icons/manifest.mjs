@@ -314,6 +314,7 @@ export default {
     back: "ms-arrow-back",
     badge: "ms-label",
     chat: "ms-chat",
+    clearTargets: "ms-location-disabled",
     collapse: "ms-collapse-all",
     compendium: "fa-book-atlas",
     configure: "ms-build",

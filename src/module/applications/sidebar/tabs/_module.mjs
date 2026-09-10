@@ -4,4 +4,5 @@ export { default as TeriockCombatTracker } from "./combat-tracker.mjs";
 export { default as TeriockCompendiumDirectory } from "./compendium-directory.mjs";
 export { default as DocumentDirectoryMixin } from "./document-directory-mixin.mjs";
 export { default as TeriockItemDirectory } from "./item-directory.mjs";
+export { default as TeriockRegionTab } from "./region-tab.mjs";
 export { default as TeriockRollTableDirectory } from "./roll-table-directory.mjs";

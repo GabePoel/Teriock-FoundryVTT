@@ -88,6 +88,7 @@ export default class RegionAutomation
   async getRegionData(options = { execution: null, rollData: {} }) {
     return foundry.utils.mergeObject(await super.getRegionData(options), {
       displayMeasurements: false,
+      flags: { teriock: { targetRegion: false } },
       highlightMode: "shapes",
       name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
         name: options.execution?.source.name ?? this.document.name,

@@ -158,7 +158,10 @@ export default class TargetAutomation extends BaseAutomation {
    * @returns {string[]}
    */
   get _tokenPaths() {
-    return ["attachToToken", this.regionType === "emanation" ? "excludeToken" : "expandWithToken"];
+    const paths = ["attachToToken"];
+    if (this.type === "target" || this.regionType !== "emanation") { paths.push("excludeToken"); }
+    if (this.regionType === "emanation") { paths.push("expandWithToken"); }
+    return paths;
   }
 
   /**
@@ -170,7 +173,9 @@ export default class TargetAutomation extends BaseAutomation {
     return {
       behaviors: [],
       displayMeasurements: true,
-      flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange ?? true } },
+      flags: {
+        teriock: { deleteOnTurnChange: this.deleteOnTurnChange ?? true, fromAbility: true, targetRegion: true },
+      },
       highlightMode: "coverage",
       levels: canvas?.level?.id ? [canvas.level.id] : [],
       name: _loc("TERIOCK.AUTOMATIONS.Target.DATA.name", {
@@ -197,13 +202,18 @@ export default class TargetAutomation extends BaseAutomation {
     const data = await this.getRegionData({ execution, rollData: execution.getRollData() });
     data.color = game.user.color;
     const ethereal = Boolean(execution?.actor?.statuses.has("ethereal"));
+    const exclude = new Set();
+    if (this.excludeToken) {
+      const executorId = execution.executor?.id;
+      if (executorId) { exclude.add(executorId); }
+    }
     await canvas.regions.placeRegion(data, {
       allowRotation: true,
       attachToToken: this.attachToToken,
       create: game.settings.get("teriock", "preserveTargetRegions"),
       createOptions: { asGM: true },
-      onMove: ({ document }) => getTargets(document, ethereal),
-      onRotate: ({ document }) => getTargets(document, ethereal),
+      onMove: ({ document }) => getTargets(document, ethereal, exclude),
+      onRotate: ({ document }) => getTargets(document, ethereal, exclude),
     });
     await game.teriock.minimizeEnd();
   }
@@ -213,12 +223,13 @@ export default class TargetAutomation extends BaseAutomation {
  * Get the targets within a certain region.
  * @param {RegionDocument} region
  * @param {boolean} ethereal
+ * @param {Set<string>} exclude
  */
-function getTargets(region, ethereal) {
+function getTargets(region, ethereal, exclude) {
   const candidateTokens = canvas.tokens.quadtree.getObjects(region.bounds);
   const targetedTokens = candidateTokens.filter(t =>
     t.isVisible && t.document.testInsideRegion(region) && t.document.hasStatusEffect("ethereal") === ethereal
   );
-  const targetIds = targetedTokens.map(t => t.id);
+  const targetIds = targetedTokens.map(t => t.id).filter(t => !exclude.has(t));
   canvas.tokens.setTargets(targetIds, { mode: "replace" });
 }

@@ -76,7 +76,12 @@ export default class BaseAutomation extends MechanicPseudoDocument {
    * @returns {boolean}
    */
   get canAddToEffect() {
-    return true;
+    return Object.keys(teriock.data.systems.effects.ConsequenceSystem.automationTypes).includes(this.type);
+  }
+
+  /** @inheritDoc */
+  get canCrit() {
+    return super.canCrit && (this.canModifyEffectData || !this.hasEffectDataToModify);
   }
 
   /**
@@ -88,10 +93,18 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   }
 
   /**
-   * Whether this can modify generated effect data.
+   * Whether this can modify effect data.
    * @returns {boolean}
    */
   get canModifyEffectData() {
+    return this.canAddToEffect;
+  }
+
+  /**
+   * Whether this can modify generated effect data.
+   * @returns {boolean}
+   */
+  get hasEffectDataToModify() {
     return this.document?.type === "ability";
   }
 
@@ -205,7 +218,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
    * @returns {Promise<void>}
    */
   async modifyExecutionEffectData(execution, data) {
-    if (!this.canAddToEffect || !(this.type in CONFIG.ActiveEffect.dataModels.consequence.automationTypes)) { return; }
+    if (!this.canAddToEffect) { return; }
     const automations = foundry.utils.getProperty(data, "system.automations") ?? {};
     const automationData = this._getEffectAutomationData(execution);
     automations[automationData._id] = automationData;

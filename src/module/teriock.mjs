@@ -71,6 +71,8 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ui.pause = applications.ui.TeriockGamePause;
   CONFIG.ui.tables = applications.sidebar.tabs.TeriockRollTableDirectory;
 
+  CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
+
   CONFIG.ux.ContextMenu = applications.ux.TeriockContextMenu;
   CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
   CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;

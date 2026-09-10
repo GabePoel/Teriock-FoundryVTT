@@ -245,7 +245,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
 
   /**
    * Metadata.
-   * @returns {{documentName: string, icon: string, label: string, sheetClass: null}}
+   * @returns {Teriock.Metadata.PseudoDocumentMetadata}
    */
   get metadata() {
     return this.constructor.metadata;

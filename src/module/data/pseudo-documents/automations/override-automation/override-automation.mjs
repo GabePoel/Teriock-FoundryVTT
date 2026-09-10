@@ -18,7 +18,7 @@ export default class OverrideAutomation
 
   /** @inheritDoc */
   static get _setCompetenceInitial() {
-    return "inherit";
+    return undefined;
   }
 
   /** @inheritDoc */
@@ -75,6 +75,11 @@ export default class OverrideAutomation
     if (this.document.system.delivery === "cone") { paths.push("preventBlockCone"); }
     if (paths.length) { paths.push("hr"); }
     return paths;
+  }
+
+  /** @inheritDoc */
+  get canModifyEffectData() {
+    return this.setCompetence || this.overrideData || super.canModifyEffectData;
   }
 
   /** @inheritDoc */

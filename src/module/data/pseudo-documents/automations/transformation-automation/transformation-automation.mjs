@@ -58,6 +58,11 @@ export default class TransformationAutomation
   }
 
   /** @inheritDoc */
+  get canModifyEffectData() {
+    return true;
+  }
+
+  /** @inheritDoc */
   async getSelectableDocuments(overrides = {}) {
     const out = await super.getSelectableDocuments(overrides);
     const species = out.filter(d => d.type === "species");
