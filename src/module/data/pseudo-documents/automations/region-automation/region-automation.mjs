@@ -1,5 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
+import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 import TargetAutomation from "../target-automation/target-automation.mjs";
@@ -58,6 +59,20 @@ export default class RegionAutomation
       "hr",
       ...this._overrideDataPaths,
     ];
+  }
+
+  /**
+   * The activation that places this Automation's region.
+   * @param {Teriock.Automations.GetActivationsOptions} [options]
+   * @param {Teriock.Select.DocumentSelectionConfig} [selectionConfig] - Config for Documents the region should apply.
+   * @returns {Promise<RegionActivation>}
+   */
+  async _buildRegionActivation(options = {}, selectionConfig = {}) {
+    return new RegionActivation({
+      ...selectionConfig,
+      attachToToken: this.attachToToken,
+      data: await this.getRegionData(options),
+    });
   }
 
   /** @inheritDoc */

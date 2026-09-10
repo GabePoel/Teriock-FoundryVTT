@@ -27,7 +27,7 @@ export default class ThresholdRoll extends BaseRoll {
   }
 
   /**
-   * Whether the threshold has been met, ignoring crits.
+   * Whether the threshold has been met. This does not consider crits.
    * @returns {boolean}
    */
   get #thresholdMet() {
@@ -64,7 +64,7 @@ export default class ThresholdRoll extends BaseRoll {
    * @returns {boolean}
    */
   get hasThreshold() {
-    return Number.isFinite(this.options.threshold);
+    return Number.isFinite(this.options.threshold) && Boolean(this.options.comparison);
   }
 
   /**

@@ -60,7 +60,7 @@ export default class BaseRoll extends Roll {
 
   /**
    * Default roll options.
-   * @returns {Partial<Teriock.Dice.BaseRollOptions>}
+   * @returns {Teriock.Dice.BaseRollOptions}
    */
   static get defaultOptions() {
     return {

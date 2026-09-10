@@ -1,7 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
-import { RegionActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -76,6 +75,9 @@ export default class TargetAutomation extends BaseAutomation {
     });
   }
 
+  /** @type {Set<string>} */
+  #targetIds = new Set();
+
   /**
    * Get the numeric value of some region shape path.
    * @param {string} path
@@ -122,26 +124,6 @@ export default class TargetAutomation extends BaseAutomation {
     return [data];
   }
 
-  /**
-   * Target every visible token inside a placed region.
-   * @param {TeriockRegionDocument} region
-   * @param {BaseExecution} execution
-   */
-  #targetInside(region, execution) {
-    if (region.parent !== game.scenes.viewed) { return; }
-    let releaseOthers = true;
-    for (
-      const t of (game.scenes.viewed?.tokens.contents ?? []).filter(t =>
-        t?.object?.isVisible
-        && t.hasStatusEffect("ethereal") === Boolean(execution.actor?.statuses.has("ethereal"))
-        && t.testInsideRegion(region)
-      )
-    ) {
-      t?.object.setTarget(true, { releaseOthers });
-      releaseOthers = false;
-    }
-  }
-
   /** @inheritdoc */
   get _formPaths() {
     return ["regionType", ...this._regionTypePaths, ...this._tokenPaths, "hr", ...this._restrictionPaths];
@@ -180,20 +162,6 @@ export default class TargetAutomation extends BaseAutomation {
   }
 
   /**
-   * The activation that places this Automation's region.
-   * @param {Teriock.Automations.GetActivationsOptions} [options]
-   * @param {Teriock.Select.DocumentSelectionConfig} [selectionConfig] - Config for Documents the region should apply.
-   * @returns {Promise<RegionActivation>}
-   */
-  async _buildRegionActivation(options = {}, selectionConfig = {}) {
-    return new RegionActivation({
-      ...selectionConfig,
-      attachToToken: this.attachToToken,
-      data: await this.getRegionData(options),
-    });
-  }
-
-  /**
    * Get the data for this Automation's region.
    * @param {{rollData?: object, execution?: BaseExecution}} [options]
    * @returns {Promise<object>}
@@ -216,12 +184,41 @@ export default class TargetAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  async interactOnExecutionInput(execution) {
-    const activation = await this._buildRegionActivation({ execution, rollData: execution.getRollData() });
-    if (execution.actor) { activation.actors = [execution.actor]; }
-    const token = execution.executor ?? execution.actor?.defaultToken;
-    if (token) { activation.tokens = [token]; }
-    const region = await activation.primaryAction();
-    if (region) { this.#targetInside(region, execution); }
+  async interactOnExecutionCompletion() {
+    canvas.tokens.setTargets(this.#targetIds, { mode: "replace" });
+    this.#targetIds = new Set();
   }
+
+  /** @inheritDoc */
+  async interactOnExecutionInput(execution) {
+    if (!game.teriock.checkScene()) { return; }
+    this.#targetIds = game.user.targets.map(t => t.id);
+    await game.teriock.minimizeStart();
+    const data = await this.getRegionData({ execution, rollData: execution.getRollData() });
+    data.color = game.user.color;
+    const ethereal = Boolean(execution?.actor?.statuses.has("ethereal"));
+    await canvas.regions.placeRegion(data, {
+      allowRotation: true,
+      attachToToken: this.attachToToken,
+      create: game.settings.get("teriock", "preserveTargetRegions"),
+      createOptions: { asGM: true },
+      onMove: ({ document }) => getTargets(document, ethereal),
+      onRotate: ({ document }) => getTargets(document, ethereal),
+    });
+    await game.teriock.minimizeEnd();
+  }
+}
+
+/**
+ * Get the targets within a certain region.
+ * @param {RegionDocument} region
+ * @param {boolean} ethereal
+ */
+function getTargets(region, ethereal) {
+  const candidateTokens = canvas.tokens.quadtree.getObjects(region.bounds);
+  const targetedTokens = candidateTokens.filter(t =>
+    t.isVisible && t.document.testInsideRegion(region) && t.document.hasStatusEffect("ethereal") === ethereal
+  );
+  const targetIds = targetedTokens.map(t => t.id);
+  canvas.tokens.setTargets(targetIds, { mode: "replace" });
 }

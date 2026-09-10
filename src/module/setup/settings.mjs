@@ -182,6 +182,7 @@ export const menus = {
           openChatDocuments: { default: false, scope: "world", type: Boolean },
           openChatImages: { default: true, scope: "world", type: Boolean },
           playerMacrosFolderName: { default: "Player Macros", scope: "world", type: String },
+          preserveTargetRegions: { default: true, scope: "world", type: Boolean },
           sortNewPlayerMacros: { default: true, scope: "world", type: Boolean },
           trackSustainedConsequences: { default: true, scope: "world", type: Boolean },
           triggerFireScope: {
