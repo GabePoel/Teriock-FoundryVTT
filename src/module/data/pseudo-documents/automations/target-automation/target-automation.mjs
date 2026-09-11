@@ -174,7 +174,12 @@ export default class TargetAutomation extends BaseAutomation {
       behaviors: [],
       displayMeasurements: true,
       flags: {
-        teriock: { deleteOnTurnChange: this.deleteOnTurnChange ?? true, fromAbility: true, targetRegion: true },
+        teriock: {
+          deleteOnTurnChange: this.deleteOnTurnChange ?? true,
+          fromAbility: true,
+          placedBy: game.user.id,
+          targetRegion: true,
+        },
       },
       highlightMode: "coverage",
       levels: canvas?.level?.id ? [canvas.level.id] : [],
@@ -210,7 +215,7 @@ export default class TargetAutomation extends BaseAutomation {
     await canvas.regions.placeRegion(data, {
       allowRotation: true,
       attachToToken: this.attachToToken,
-      create: game.settings.get("teriock", "preserveTargetRegions"),
+      create: game.settings.get("teriock", "preserveTargetRegions") && !game.paused,
       createOptions: { asGM: true },
       onMove: ({ document }) => getTargets(document, ethereal, exclude),
       onRotate: ({ document }) => getTargets(document, ethereal, exclude),

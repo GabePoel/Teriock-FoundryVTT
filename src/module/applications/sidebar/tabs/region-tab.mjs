@@ -12,7 +12,10 @@ export default class TeriockRegionTab extends RegionTab {
     if (!game.teriock.checkScene()) { return; }
     await canvas.scene.deleteEmbeddedDocuments(
       "Region",
-      canvas.scene.regions.filter(t => t.isOwner && t.getFlag("teriock", "targetRegion")).map(t => t.id),
+      canvas.scene.regions.filter(t =>
+        (t.isOwner || (t.getFlag("teriock", "placedBy") === game.user.id)) && t.getFlag("teriock", "targetRegion")
+      ).map(t => t.id),
+      { asGM: true },
     );
   }
 
