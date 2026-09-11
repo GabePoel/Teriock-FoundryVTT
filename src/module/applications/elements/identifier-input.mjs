@@ -36,12 +36,6 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
   }
 
   /**
-   * The text input element.
-   * @type {HTMLInputElement}
-   */
-  #input;
-
-  /**
    * The reset button element.
    * @type {HTMLButtonElement}
    */
@@ -52,7 +46,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
    */
   #onReset() {
     if (!this.reset || !this.editable) { return; }
-    this.#input.value = this.reset;
+    this._primaryInput.value = this.reset;
     this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
     this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
   }
@@ -68,7 +62,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
   /** @inheritDoc */
   _activateListeners() {
     this.#resetButton.addEventListener("click", this.#onReset.bind(this));
-    this.#input.addEventListener("change", event => {
+    this._primaryInput.addEventListener("change", event => {
       event.stopPropagation();
       this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
     });
@@ -76,11 +70,8 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
 
   /** @inheritDoc */
   _buildElements() {
-    this.#input = this._primaryInput = createElement("input", {
-      placeholder: this.getAttribute("placeholder"),
-      type: "text",
-    });
-    this._applyInputAttributes(this.#input);
+    this._primaryInput = createElement("input", { placeholder: this.getAttribute("placeholder"), type: "text" });
+    this._applyInputAttributes(this._primaryInput);
     this.#resetButton = createElement("button", {
       ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
       className: `icon ${makeIconClass(icons.manifest.ui.reset, "button")}`,
@@ -88,32 +79,31 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
       type: "button",
     });
     const group = createElement("div", { className: "input-group" });
-    group.append(this.#input, this.#resetButton);
+    group.append(this._primaryInput, this.#resetButton);
     return [group];
   }
 
   /** @inheritDoc */
   _getValue() {
-    const value = this.#input?.value.trim();
-    return value || null;
+    return this._primaryInput?.value.trim() || null;
   }
 
   /** @inheritDoc */
   _refresh() {
-    if (!this.#input) { return; }
+    if (!this._primaryInput) { return; }
     const initial = this.getAttribute("value");
-    if (initial != null) { this.#input.value = initial; }
+    if (initial != null) { this._primaryInput.value = initial; }
     this.removeAttribute("value");
   }
 
   /** @inheritDoc */
   _setValue(value) {
-    if (this.#input) { this.#input.value = value ?? ""; }
+    if (this._primaryInput) { this._primaryInput.value = value ?? ""; }
   }
 
   /** @inheritDoc */
   _toggleDisabled(disabled) {
-    this.#input.disabled = disabled;
+    this._primaryInput.disabled = disabled;
     this.#resetButton.disabled = disabled;
   }
 }

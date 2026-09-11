@@ -44,7 +44,8 @@ export default function ActorAffinitiesPart(Base) {
           foundry.utils.isSubclass(a, BaseAffinity)
         ).find(a => a.metadata.type === type);
       }
-      const affinity = new AFFINITY_TYPES[type]({ _id: id, category, type, value, ...data }, { parent: this });
+      const keyed = category === "other" ? { name: value } : { identifier: value };
+      const affinity = new AFFINITY_TYPES[type]({ _id: id, category, type, ...keyed, ...data }, { parent: this });
       affinity.sourceName = source;
       this.affinities.set(affinity.id, affinity);
     }
@@ -78,7 +79,7 @@ export default function ActorAffinitiesPart(Base) {
      */
     isProtected(category, value) {
       return PROTECTION_TYPES.flatMap(type => this.affinities.getTypeSync(type, { active: true, isPassive: true }))
-        .some(a => a.category === category && a.value === value);
+        .some(a => a.category === category && (category === "other" ? a.name : a.identifier) === value);
     }
 
     /** @inheritDoc */

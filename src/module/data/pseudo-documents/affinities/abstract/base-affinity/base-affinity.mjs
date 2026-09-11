@@ -1,14 +1,19 @@
+import { HTMLAutocompleteInputElement } from "../../../../../applications/elements/_module.mjs";
 import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
 import { mixClasses } from "../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
-import { dotJoin } from "../../../../../helpers/string.mjs";
+import { dotJoin, toKebabCase } from "../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
+import { IdentifierField } from "../../../../fields/_module.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
+
+/** @type {Record<string, Record<Identifier, string>>} */
+const IDENTIFIER_CHOICES = {};
 
 /**
  * An affinity that some effect grants against a specific thing.
@@ -51,14 +56,20 @@ export default class BaseAffinity
         initial: "abilities",
         required: true,
       }),
+      identifier: new IdentifierField({ label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
-      value: new fields.StringField(),
+      name: new fields.StringField(),
     });
   }
 
   /** @inheritDoc */
   static migrateData(source, options) {
     if (source.category === "statuses") { source.category = "conditions"; }
+    if ("value" in source) {
+      if (source.category === "other") { source.name ??= source.value; }
+      else { source.identifier ??= toKebabCase(source.value); }
+      delete source.value;
+    }
     return super.migrateData(source, options);
   }
 
@@ -79,7 +90,31 @@ export default class BaseAffinity
    */
   get _choices() {
     if (this.category === "other") { return {}; }
-    return foundry.utils.getProperty(TERIOCK, TERIOCK.config.affinity.categories[this.category]?.choices || {}) || {};
+    const path = TERIOCK.config.affinity.categories[this.category]?.choices;
+    if (!path) { return {}; }
+    IDENTIFIER_CHOICES[path] ??= Object.fromEntries(
+      Object.entries(foundry.utils.getProperty(TERIOCK, path) || {}).map(([k, v]) => [toKebabCase(k), v]),
+    );
+    return IDENTIFIER_CHOICES[path];
+  }
+
+  /**
+   * The image this falls back to when none is set.
+   * @returns {string}
+   */
+  get _defaultImg() {
+    const fallback = this.document?.img ?? TERIOCK.config.affinity.types[this.type].img;
+    if (this.category === "other") { return fallback; }
+    return getImage(TERIOCK.config.affinity.categories[this.category]?.imgCategory, this.identifier, fallback);
+  }
+
+  /**
+   * The name this falls back to when none is set.
+   * @returns {string}
+   */
+  get _defaultName() {
+    if (this.category === "other") { return ""; }
+    return this._choices[this.identifier] || this.identifier;
   }
 
   /**
@@ -104,7 +139,8 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["category", "value", "img"];
+    if (this.category === "other") { return ["category", "name", "img"]; }
+    return ["category", "identifier", "name", "img"];
   }
 
   /**
@@ -139,12 +175,6 @@ export default class BaseAffinity
       usable: true,
       uuid: this.uuid,
     };
-  }
-
-  /** @inheritDoc */
-  get name() {
-    if (this.category === "other") { return this.value; }
-    return this._choices[this.value] || this.value;
   }
 
   /**
@@ -195,8 +225,8 @@ export default class BaseAffinity
    * @returns {boolean}
    */
   get valid() {
-    if (!this.value) { return false; }
-    return this.category === "other" || Boolean(this._choices[this.value]);
+    if (this.category === "other") { return Boolean(this.name); }
+    return Boolean(this._choices[this.identifier]);
   }
 
   /**
@@ -209,7 +239,17 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (this.category !== "other" && path.endsWith("value")) { inputConfig.choices = this._choices; }
+    if (path === "identifier") {
+      Object.assign(inputConfig, {
+        choices: this._choices,
+        name: `${this.localPath}.${path}`,
+        value: foundry.utils.getProperty(this, `_source.${path}`),
+      });
+      foundry.data.fields.StringField._prepareChoiceConfig(inputConfig);
+      groupConfig.input = HTMLAutocompleteInputElement.create(inputConfig);
+    }
+    if (path === "img") { inputConfig.placeholder = this._defaultImg; }
+    if (path === "name") { inputConfig.placeholder = this._defaultName; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
@@ -249,15 +289,7 @@ export default class BaseAffinity
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.img) {
-      /** @type {string} */
-      const fallback = this.document?.img ?? TERIOCK.config.affinity.types[this.type].img;
-      if (this.category === "other") { this.img = fallback; }
-      else { this.img = getImage(
-          TERIOCK.config.affinity.categories[this.category]?.imgCategory,
-          this.value,
-          fallback,
-        ); }
-    }
+    if (!this.name) { this.name = this._defaultName; }
+    if (!this.img) { this.img = this._defaultImg; }
   }
 }
