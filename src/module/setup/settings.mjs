@@ -14,19 +14,6 @@ import { objectMap } from "../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
- * One group per inheritable document behavior settings category.
- * @type {Record<Teriock.Behavior.SettingsCategory, Teriock.Settings.GroupEntry>}
- */
-const DOCUMENT_BEHAVIOR_GROUPS = Object.fromEntries(
-  Object.entries(documentBehaviorConfig.categories).map((
-    [category, { icon, settings }],
-  ) => [category, {
-    icon,
-    settings: { [category]: { default: settings, scope: "user", type: userSettingsModels[category] } },
-  }]),
-);
-
-/**
  * Every system setting.
  * @type {Record<string, Teriock.Settings.MenuEntry>}
  */
@@ -102,8 +89,18 @@ export const menus = {
       actorSheet: {
         icon: icons.manifest.ui.actorSheet,
         settings: {
-          floatingActorTabs: { default: true, requiresReload: true, scope: "client", type: Boolean },
-          highlightModifiedValues: { default: false, requiresReload: true, scope: "client", type: Boolean },
+          floatingActorTabs: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ actors: true }),
+          },
+          highlightModifiedValues: {
+            default: false,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ actors: true }),
+          },
         },
       },
       chat: {
@@ -142,13 +139,22 @@ export const menus = {
       tooltip: {
         icon: icons.manifest.ui.tooltip,
         settings: {
-          compendiumTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
-          contentLinkTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
+          compendiumTooltips: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ compendiums: true, tooltips: true }),
+          },
+          contentLinkTooltips: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ applications: true, tooltips: true }),
+          },
           documentTooltips: {
             default: Object.values(documents).filter((d) =>
               foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.tooltip
             ).map(d => d.documentName),
-            requiresReload: true,
             scope: "client",
             type: new fields.SetField(
               new fields.StringField({
@@ -159,14 +165,33 @@ export const menus = {
                 ),
               }),
             ),
+            onChange: () => game.teriock.render({ applications: true, tooltips: true }),
           },
-          sidebarTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
+          sidebarTooltips: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ sidebar: true, tooltips: true }),
+          },
         },
       },
     },
     icon: icons.manifest.settings.display,
   },
-  documentBehavior: { format: "tabs", groups: DOCUMENT_BEHAVIOR_GROUPS, icon: icons.manifest.ui.document },
+  documentBehavior: {
+    format: "tabs",
+    groups: Object.fromEntries(
+      Object.entries(documentBehaviorConfig.categories).map((
+        [category, { icon, settings }],
+      ) => [category, {
+        icon,
+        settings: {
+          [category]: { default: settings, requiresReload: true, scope: "user", type: userSettingsModels[category] },
+        },
+      }]),
+    ),
+    icon: icons.manifest.ui.document,
+  },
   gameMasterControls: {
     format: "tabs",
     groups: {
@@ -178,13 +203,14 @@ export const menus = {
             scope: "world",
             type: new fields.SetField(new fields.StringField({ choices: objectMap(dieConfig.stones, (c) => c.label) })),
           },
-          nonHierarchicalChanges: { default: true, requiresReload: true, scope: "world", type: Boolean },
-          openChatDocuments: { default: false, scope: "world", type: Boolean },
-          openChatImages: { default: true, scope: "world", type: Boolean },
           playerMacrosFolderName: { default: "Player Macros", scope: "world", type: String },
-          preserveTargetRegions: { default: true, scope: "world", type: Boolean },
+          preserveTargetRegions: {
+            default: true,
+            scope: "world",
+            type: Boolean,
+            onChange: () => game.teriock.render({ sidebar: true }),
+          },
           sortNewPlayerMacros: { default: true, scope: "world", type: Boolean },
-          trackSustainedConsequences: { default: true, scope: "world", type: Boolean },
           triggerFireScope: {
             choices: {
               default: "TERIOCK.SETTINGS.triggerFireScope.choices.default",
@@ -204,6 +230,13 @@ export const menus = {
               nullable: false,
             }),
           },
+        },
+      },
+      permissions: {
+        icon: icons.manifest.ui.permissions,
+        settings: {
+          openChatDocuments: { default: false, scope: "world", type: Boolean },
+          openChatImages: { default: true, scope: "world", type: Boolean },
         },
       },
       secrets: {
@@ -229,6 +262,13 @@ export const menus = {
           showPrivateTradecraftDiceRolls: { default: true, scope: "world", type: Boolean },
         },
       },
+      system: {
+        icon: icons.manifest.ui.system,
+        settings: {
+          nonHierarchicalChanges: { default: true, requiresReload: true, scope: "world", type: Boolean },
+          trackSustainedConsequences: { default: true, scope: "world", type: Boolean },
+        },
+      },
 
       developer: {
         icon: icons.manifest.ui.developer,
@@ -248,36 +288,55 @@ export const menus = {
         settings: {
           errorMessages: {
             default: Object.keys(tipConfig.error),
-            requiresReload: true,
             scope: "client",
             stacked: true,
             type: new fields.SetField(new fields.StringField({ choices: tipConfig.error }), {
               initial: Object.keys(tipConfig.error),
             }),
+            onChange: () => game.teriock.render({ applications: true, tooltips: true }),
           },
-          showErrorTipsOnSheets: { default: true, requiresReload: true, scope: "client", type: Boolean },
-          showErrorTipsOnTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
+          showErrorTipsOnSheets: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ applications: true }),
+          },
+          showErrorTipsOnTooltips: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ tooltips: true }),
+          },
         },
       },
       suppression: {
         icon: icons.manifest.ui.suppression,
         settings: {
-          showSuppressionTipsOnSheets: { default: true, requiresReload: true, scope: "client", type: Boolean },
-          showSuppressionTipsOnTooltips: { default: true, requiresReload: true, scope: "client", type: Boolean },
+          showSuppressionTipsOnSheets: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ applications: true }),
+          },
+          showSuppressionTipsOnTooltips: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ tooltips: true }),
+          },
           suppressionMessages: {
             default: Object.keys(tipConfig.suppression),
-            requiresReload: true,
             scope: "client",
             stacked: true,
             type: new fields.SetField(new fields.StringField({ choices: tipConfig.suppression }), {
               initial: Object.keys(tipConfig.suppression),
             }),
+            onChange: () => game.teriock.render({ applications: true }),
           },
           suppressionMessageTypes: {
             default: Object.entries(documentConfig).filter(([_k, v]) =>
               ["ActiveEffect", "Item"].includes(v.documentName)
             ).map(([k, _v]) => k),
-            requiresReload: true,
             scope: "client",
             stacked: true,
             type: new fields.SetField(
@@ -292,6 +351,7 @@ export const menus = {
                 ).map(([k, _v]) => k),
               },
             ),
+            onChange: () => game.teriock.render({ applications: true }),
           },
         },
       },
@@ -301,16 +361,39 @@ export const menus = {
 };
 
 /**
+ * Localize a menu entry.
+ * @param {string} menuKey
+ * @param {Teriock.Settings.MenuEntry} menuEntry
+ */
+function localizeSettingMenuEntry(menuKey, menuEntry) {
+  const path = `TERIOCK.MENUS.${menuKey.capitalize()}`;
+  menuEntry.hint ??= `${path}.hint`;
+  menuEntry.label ??= `${path}.label`;
+  menuEntry.title ??= `${path}.name`;
+  const settingEntries = [];
+  for (const [groupKey, groupEntry] of Object.entries(menuEntry.groups)) {
+    groupEntry.label ??= `${path}.parts.${groupKey}`;
+    for (const [settingKey, settingEntry] of Object.entries(groupEntry.settings)) {
+      settingEntry.name ??= `TERIOCK.SETTINGS.${settingKey}.name`;
+      settingEntry.hint ??= `TERIOCK.SETTINGS.${settingKey}.hint`;
+      settingEntries.push(settingEntry);
+    }
+  }
+  menuEntry.restricted ??= settingEntries.every(d => d.scope === "world");
+}
+
+/**
  * Register all settings and setting menus.
  */
 export function registerSettings() {
-  for (const [key, menu] of Object.entries(menus)) {
-    const application = MenuFactory(key, menu);
-    for (const group of Object.values(menu.groups)) {
-      for (const [settingKey, definition] of Object.entries(group.settings)) {
-        game.settings.register("teriock", settingKey, definition);
+  for (const [menuKey, menuEntry] of Object.entries(menus)) {
+    localizeSettingMenuEntry(menuKey, menuEntry);
+    const menuApplication = MenuFactory(menuKey, menuEntry);
+    for (const groupEntry of Object.values(menuEntry.groups)) {
+      for (const [settingKey, settingEntry] of Object.entries(groupEntry.settings)) {
+        game.settings.register("teriock", settingKey, settingEntry);
       }
     }
-    application.registerMenu();
+    menuApplication.registerMenu();
   }
 }

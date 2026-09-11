@@ -4,7 +4,11 @@ import { BaseMenu } from "../applications/menus/_module.mjs";
 
 declare global {
   namespace Teriock.Settings {
-    export type SettingEntry = Partial<SettingConfig> & { classes?: string[], stacked?: boolean };
+    export type SettingEntry = Partial<SettingConfig> & {
+      classes?: string[];
+      requiresReload?: boolean;
+      stacked?: boolean;
+    };
 
     export type GroupEntry = {
       icon?: string;

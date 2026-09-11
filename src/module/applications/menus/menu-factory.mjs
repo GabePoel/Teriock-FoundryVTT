@@ -2,35 +2,12 @@ import { makeIconClass } from "../../helpers/icon.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 /**
- * Localize a menu.
- * @param {string} key
- * @param {Teriock.Settings.MenuEntry} menu
- */
-function localizeMenu(key, menu) {
-  const path = `TERIOCK.MENUS.${key.capitalize()}`;
-  menu.hint ??= `${path}.hint`;
-  menu.label ??= `${path}.label`;
-  menu.title ??= `${path}.name`;
-  const definitions = [];
-  for (const [groupKey, group] of Object.entries(menu.groups)) {
-    group.label ??= `${path}.parts.${groupKey}`;
-    for (const [settingKey, definition] of Object.entries(group.settings)) {
-      definition.name ??= `TERIOCK.SETTINGS.${settingKey}.name`;
-      definition.hint ??= `TERIOCK.SETTINGS.${settingKey}.hint`;
-      definitions.push(definition);
-    }
-  }
-  menu.restricted ??= definitions.every(d => d.scope === "world");
-}
-
-/**
  * Build the application for a settings menu.
  * @param {string} key
  * @param {Teriock.Settings.MenuEntry} menu
  * @returns {typeof BaseMenu}
  */
 export default function MenuFactory(key, menu) {
-  localizeMenu(key, menu);
   const groups = Object.entries(menu.groups);
   const tabbed = menu.format === "tabs";
   const template = tabbed ? "teriock/menus/tabbed-menu" : "teriock/menus/base-menu";

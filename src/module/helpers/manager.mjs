@@ -144,4 +144,28 @@ export default class TeriockManager {
     );
     await Promise.all((this.#minimizedApplications || []).map(s => s?.minimize()));
   }
+
+  /**
+   * Re-render UI components.
+   * @param {object} [options]
+   * @param {boolean} [options.actors=false] - Re-render Actor sheets.
+   * @param {boolean} [options.applications=false] - Re-render all Applications.
+   * @param {boolean} [options.compendiums=false] - Re-render compendiums.
+   * @param {boolean} [options.sidebar=false] - Re-render sidebar.
+   * @param {boolean} [options.tooltips=false] - Re-render tooltips.
+   * @returns {Promise<void>}
+   */
+  async render({ actors = false, applications = false, compendiums = false, sidebar = false, tooltips = false } = {}) {
+    const promises = [];
+    for (const app of foundry.applications.instances.values()) {
+      if (!app.rendered) { continue; }
+      const shouldRender = applications
+        || (actors && app instanceof foundry.applications.sheets.ActorSheetV2)
+        || (compendiums && app instanceof foundry.applications.sidebar.apps.Compendium)
+        || (sidebar && app instanceof foundry.applications.sidebar.AbstractSidebarTab);
+      if (shouldRender) { promises.push(app.render()); }
+    }
+    await Promise.all(promises);
+    if (tooltips) { game.tooltip.reactivate(); }
+  }
 }
