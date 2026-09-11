@@ -146,7 +146,7 @@ export default function MechanicsSheetMixin(Base) {
     get _mechanicCollections() {
       return Object.fromEntries(
         Object.entries(this.document.pseudoCollections).filter(([_documentName, collection]) =>
-          collection.documentClass?.metadata?.tags?.mechanic
+          collection.documentClass?.metadata?.tags?.mechanic && collection.types.length
         ).map(([documentName, collection]) => {
           const name = _loc(`DOCUMENT.${documentName}`);
           return [collection.name, {
