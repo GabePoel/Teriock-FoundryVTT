@@ -1,4 +1,4 @@
-import HTMLCycleButtonElement from "./cycle-button.mjs";
+import AbstractCycleButtonElement from "./abstract-cycle-button.mjs";
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";
@@ -9,17 +9,17 @@ import HTMLCycleButtonElement from "./cycle-button.mjs";
  * Left-click cycles forward (`null` -> `true` -> `false` -> `null`).
  * Right-click cycles backward (`null` -> `false` -> `true` -> `null`).
  */
-export default class HTMLTernaryElement extends HTMLCycleButtonElement {
+export default class HTMLTernaryButtonElement extends AbstractCycleButtonElement {
   /** @inheritDoc */
   static ORDER = [null, true, false];
 
   /** @inheritDoc */
-  static tagName = "ternary-input";
+  static tagName = "ternary-button";
 
   /**
    * Create an HTMLTernaryElement from a form input config.
    * @param {FormInputConfig<boolean|null>} config
-   * @returns {HTMLTernaryElement}
+   * @returns {HTMLTernaryButtonElement}
    */
   static create(config) {
     const el = document.createElement(this.tagName);
@@ -36,7 +36,7 @@ export default class HTMLTernaryElement extends HTMLCycleButtonElement {
   /** @inheritDoc */
   _activateListeners() {
     super._activateListeners();
-    this._button.addEventListener("contextmenu", (event) => {
+    this._primaryInput.addEventListener("contextmenu", (event) => {
       event.preventDefault();
       this._step(-1);
     });
@@ -54,7 +54,7 @@ export default class HTMLTernaryElement extends HTMLCycleButtonElement {
   /** @inheritDoc */
   _buildElements() {
     const elements = super._buildElements();
-    this._button.appendChild(document.createElement("div"));
+    this._primaryInput.appendChild(document.createElement("div"));
     return elements;
   }
 

@@ -1,5 +1,6 @@
+import { createElement } from "../../helpers/html.mjs";
 import { makeIconElement } from "../../helpers/icon.mjs";
-import HTMLCycleButtonElement from "./cycle-button.mjs";
+import AbstractCycleButtonElement from "./abstract-cycle-button.mjs";
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";
@@ -9,7 +10,7 @@ import HTMLCycleButtonElement from "./cycle-button.mjs";
  * A two-state toggle control that behaves like a checkbox but looks like a button. Clicking the button toggles between
  * `true` and `false`. Button is highlighted when `true` and is boring and lame when `false`.
  */
-export default class HTMLToggleButtonElement extends HTMLCycleButtonElement {
+export default class HTMLToggleButtonElement extends AbstractCycleButtonElement {
   /** @inheritDoc */
   static ORDER = [false, true];
 
@@ -22,9 +23,7 @@ export default class HTMLToggleButtonElement extends HTMLCycleButtonElement {
    * @returns {HTMLToggleButtonElement}
    */
   static create(config) {
-    const el = document.createElement(this.tagName);
-    if (config.icon) { el.setAttribute("icon", config.icon); }
-    if (config.value !== undefined) { el.setAttribute("value", String(Boolean(config.value))); }
+    const el = createElement(this.tagName, { icon: config.icon, value: String(Boolean(config.value)) });
     foundry.applications.fields.setInputAttributes(el, config);
     return el;
   }
@@ -36,7 +35,7 @@ export default class HTMLToggleButtonElement extends HTMLCycleButtonElement {
   _buildElements() {
     const elements = super._buildElements();
     const icon = this.getAttribute("icon");
-    if (icon) { this._button.appendChild(makeIconElement(icon, "button")); }
+    if (icon) { this._primaryInput.appendChild(makeIconElement(icon, "button")); }
     return elements;
   }
 
