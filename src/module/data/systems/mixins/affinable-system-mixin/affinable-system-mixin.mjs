@@ -1,5 +1,4 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
-import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
 import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**

@@ -24,6 +24,8 @@ declare global {
       localize?: boolean;
       /** Whether document sheets can be opened on double click */
       openable?: boolean;
+      /** Whether to report cancelling the dialog as `false` instead of an empty selection */
+      reportCancel?: boolean;
       /** Whether to suppress warnings if there's no documents to select from. */
       silent?: boolean;
       /** Path to some extra text to display for each document */

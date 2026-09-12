@@ -130,7 +130,7 @@ export default class DocumentSelector extends ResolvableDialog {
   /**
    * @param {{ entries: Record<string, Teriock.Select.DocumentSelectionEntry>, options: Teriock.Select.SelectDocumentsDialogOptions }} prepared
    * @param {Partial<ApplicationConfiguration>} [config]
-   * @returns {Promise<string[]|null>}
+   * @returns {Promise<string[]|false|null>}
    */
   static async _promptPrepared(prepared, config = {}) {
     const app = new this(prepared.entries, prepared.options, config);
@@ -173,7 +173,7 @@ export default class DocumentSelector extends ResolvableDialog {
    * Select documents from a config instead of a provided group of documents. No dialog if no choices.
    * @param {Teriock.Select.DocumentSelectionConfig} [config]
    * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
-   * @return {Promise<TeriockDocument[]>}
+   * @return {Promise<TeriockDocument[]|false>} `false` if canceled while `reportCancel` is `true`
    */
   static async selectFromConfig(config = {}, options = {}) {
     const { all = false, auto = true, multi = false } = config;
@@ -189,12 +189,13 @@ export default class DocumentSelector extends ResolvableDialog {
    * @template T
    * @param {Iterable<T>|T[]} documents
    * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
-   * @returns {Promise<T[]>}
+   * @returns {Promise<T[]|false>} `false` if canceled while `reportCancel` is `true`
    */
   static async selectMulti(documents, options = {}) {
     const prepared = this._prepareDocuments(documents, { ...options });
     if (prepared.early !== undefined) { return prepared.early; }
     const selected = await this._promptPrepared(prepared);
+    if (selected === false) { return false; }
     if (selected) { return selected.map(id => prepared.idToDoc.get(id)).filter(Boolean); }
     return [];
   }
@@ -204,7 +205,7 @@ export default class DocumentSelector extends ResolvableDialog {
    * @template T
    * @param {Iterable<T>|T[]} documents
    * @param {Partial<Teriock.Select.SelectDocumentDialogOptions>} [options]
-   * @returns {Promise<T|null>}
+   * @returns {Promise<T|null|false>} `false` if canceled while `reportCancel` is `true`
    */
   static async selectSingle(documents, options = {}) {
     const docArray = this._coerceDocuments(documents);
@@ -215,6 +216,7 @@ export default class DocumentSelector extends ResolvableDialog {
       checked: options.checked ? [options.checked] : [],
       multi: false,
     });
+    if (selected === false) { return false; }
     return selected?.[0] ?? null;
   }
 
@@ -224,7 +226,7 @@ export default class DocumentSelector extends ResolvableDialog {
    * @param {Partial<ApplicationConfiguration>} [config]
    */
   constructor(documents, options = {}, config = {}) {
-    const { hint = "", multi = true, openable = false, tooltip = true } = options;
+    const { hint = "", multi = true, openable = false, reportCancel = false, tooltip = true } = options;
     super(config);
     this.documents = documents;
     this.multi = multi;
@@ -235,11 +237,12 @@ export default class DocumentSelector extends ResolvableDialog {
     if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
     this.config = foundry.utils.mergeObject(this.config ?? {}, this.options);
     this.unchecked = !Object.values(documents).some(d => d.checked);
+    this.reportCancel = reportCancel;
   }
 
   /** @inheritDoc */
   get _fallbackFinishValue() {
-    return this.multi ? [] : super._fallbackFinishValue;
+    return this.reportCancel ? false : this.multi ? [] : super._fallbackFinishValue;
   }
 
   /**

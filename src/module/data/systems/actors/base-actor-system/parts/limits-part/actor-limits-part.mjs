@@ -58,8 +58,8 @@ export default function ActorLimitsPart(Base) {
     }
 
     /** @inheritDoc */
-    prepareBaseData() {
-      super.prepareBaseData();
+    prepareCleanupData() {
+      super.prepareCleanupData();
       this.curses.value = this.curseDocuments.filter(c => c.active).length;
       this.rotators.value = this.rotatorDocuments.filter(r => r.active).length;
     }

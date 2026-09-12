@@ -1,6 +1,5 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
-import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 import BaseMessageSystem from "../base-message-system.mjs";
 
