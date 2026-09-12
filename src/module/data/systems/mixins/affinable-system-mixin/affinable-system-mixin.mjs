@@ -21,13 +21,7 @@ export default function AffinableSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        affinities: new PseudoCollectionField(BaseAffinity, {
-          types: Object.fromEntries(
-            Object.values(affinities).filter(a => foundry.utils.isSubclass(a, BaseAffinity)).map(
-              a => [a.metadata.type, a]
-            ),
-          ),
-        }),
+        affinities: new PseudoCollectionField(BaseAffinity),
       });
     }
   }

@@ -39,6 +39,14 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
+   * The models that are subtypes of this.
+   * @returns {Record<string, BasePseudoDocument>}
+   */
+  static get TYPE_MODELS() {
+    return { [this.metadata.type]: this };
+  }
+
+  /**
    * Localization key for this pseudo-document class' type label.
    * @returns {string}
    */
@@ -148,6 +156,17 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
     if (!pseudo) { throw new Error("Failed to resolve PseudoDocument."); }
     if (pseudo.documentName !== this.metadata.documentName) { throw new Error("Invalid type provided.", pseudo); }
     return pseudo;
+  }
+
+  /**
+   * The parts of a module that are subtypes of this.
+   * @param {object} module
+   * @returns {Record<string, typeof BasePseudoDocument>}
+   */
+  static getTypeModels(module) {
+    return Object.fromEntries(
+      Object.values(module).filter(v => foundry.utils.isSubclass(v, BasePseudoDocument)).map(v => [v.metadata.type, v]),
+    );
   }
 
   /**

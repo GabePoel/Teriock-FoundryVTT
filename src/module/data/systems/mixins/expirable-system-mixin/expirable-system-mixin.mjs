@@ -1,5 +1,4 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
-import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 
 /**
@@ -20,15 +19,7 @@ export default function ExpirableSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), {
-        expirations: new PseudoCollectionField(BaseExpiration, {
-          types: Object.fromEntries(
-            Object.values(expirations).filter(e => foundry.utils.isSubclass(e, BaseExpiration)).map(
-              e => [e.metadata.type, e]
-            ),
-          ),
-        }),
-      });
+      return Object.assign(super.defineSchema(), { expirations: new PseudoCollectionField(BaseExpiration) });
     }
   }
 

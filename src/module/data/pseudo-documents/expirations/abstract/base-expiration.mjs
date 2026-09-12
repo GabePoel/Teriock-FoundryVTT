@@ -32,6 +32,11 @@ export default class BaseExpiration extends MechanicPseudoDocument {
   }
 
   /** @inheritDoc */
+  static get TYPE_MODELS() {
+    return this.getTypeModels(teriock.data.pseudoDocuments.expirations);
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       method: new fields.StringField({

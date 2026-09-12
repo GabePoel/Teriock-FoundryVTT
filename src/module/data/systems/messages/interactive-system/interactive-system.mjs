@@ -28,13 +28,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
    */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      activations: new PseudoCollectionField(BaseActivation, {
-        types: Object.fromEntries(
-          Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation)).map(
-            a => [a.metadata.type, a]
-          ),
-        ),
-      }),
+      activations: new PseudoCollectionField(BaseActivation),
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
       panels: new PseudoCollectionField(Panel),
       restrictVisibility: new fields.BooleanField({ initial: true }),

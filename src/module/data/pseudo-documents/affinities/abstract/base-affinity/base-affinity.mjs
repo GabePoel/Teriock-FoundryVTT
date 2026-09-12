@@ -49,6 +49,11 @@ export default class BaseAffinity
   }
 
   /** @inheritDoc */
+  static get TYPE_MODELS() {
+    return this.getTypeModels(teriock.data.pseudoDocuments.affinities);
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       category: new fields.StringField({

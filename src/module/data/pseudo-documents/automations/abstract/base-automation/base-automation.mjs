@@ -23,6 +23,11 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   }
 
   /** @inheritDoc */
+  static get TYPE_MODELS() {
+    return this.getTypeModels(teriock.data.pseudoDocuments.automations);
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     const schema = Object.assign(super.defineSchema(), {
       display: new fields.SchemaField({ label: new fields.StringField({ placeholder: _loc("COMMON.Default") }) }),

@@ -66,6 +66,16 @@ function addDeveloperModeLoggingListener(application) {
       }
     });
   });
+  application.element.querySelectorAll("[data-action=deleteMechanic]").forEach(el => {
+    el.addEventListener("contextmenu", async e => {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      const pseudo = await fromUuid(el.dataset.uuid);
+      console.warn("Debug Pseudo");
+      if (pseudo) { console.log("Pseudo-Document", pseudo); }
+    });
+  });
 }
 
 /**
