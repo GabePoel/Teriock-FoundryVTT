@@ -68,14 +68,18 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
-  _initialize(options = {}) {
-    /**
-     * Collection of the Items that depend on this even though they are embedded in a parallel Collection.
-     * @type {TypeCollection<TeriockItem>}
-     */
-    this.dependents = new TypeCollection("dependents", this, [], { documentClass: Item.implementation });
-
-    super._initialize(options);
+  _configure(options = {}) {
+    Object.defineProperties(this, {
+      /**
+       * Collection of the Items that depend on this even though they are embedded in a parallel Collection.
+       * @type {TypeCollection<TeriockItem>}
+       */
+      dependents: {
+        value: new TypeCollection("dependents", this, [], { documentClass: Item.implementation }),
+        writable: false,
+      },
+    });
+    super._configure(options);
   }
 
   /** @inheritDoc */

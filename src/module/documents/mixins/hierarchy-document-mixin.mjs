@@ -216,7 +216,7 @@ export default function HierarchyDocumentMixin(Base) {
       let toSearchFor = new Set([this.id]);
       while (toSearchFor.size) {
         const nextSearch = new Set();
-        for (const entry of this.siblingCollection ?? []) {
+        for (const entry of this.supCollection ?? []) {
           if (toSearchFor.has(getProperty(entry, "system._sup")) && !foundIds.has(entry._id)) {
             foundIds.add(entry._id);
             found.push(entry);
@@ -237,7 +237,7 @@ export default function HierarchyDocumentMixin(Base) {
       const sups = [];
       let supId = getProperty(this, "system._sup");
       while (supId && !supIds.has(supId)) {
-        const sup = this.siblingCollection?.get(supId);
+        const sup = this.supCollection?.get(supId);
         if (!sup) { break; }
         supIds.add(supId);
         sups.push(sup);
@@ -257,7 +257,7 @@ export default function HierarchyDocumentMixin(Base) {
      */
     get _subsSource() {
       if (!this.id) { return []; }
-      return this.siblingCollection?.filter(d => getProperty(d, "system._sup") === this.id) ?? [];
+      return this.supCollection?.filter(d => getProperty(d, "system._sup") === this.id) ?? [];
     }
 
     /**
@@ -274,21 +274,21 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /**
-     * The collection that contains this and its siblings or their indexes.
-     * @returns {DocumentCollection<HierarchyDocument>}
-     */
-    get siblingCollection() {
-      let collection = this.collection;
-      if (collection?.index instanceof Collection) { collection = collection.index; }
-      return collection;
-    }
-
-    /**
      * The sup of this document or its index.
      * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>|undefined}
      */
     get sup() {
-      if (this.system._sup) { return this.siblingCollection?.get(this.system._sup); }
+      if (this.system._sup) { return this.supCollection?.get(this.system._sup); }
+    }
+
+    /**
+     * The collection that contains this and its siblings or their indexes.
+     * @returns {DocumentCollection<HierarchyDocument>}
+     */
+    get supCollection() {
+      let collection = this.collection;
+      if (collection?.index instanceof Collection) { collection = collection.index; }
+      return collection;
     }
 
     /** @inheritDoc */
@@ -297,25 +297,32 @@ export default function HierarchyDocumentMixin(Base) {
     }
 
     /** @inheritDoc */
+    _configure(options = {}) {
+      super._configure(options);
+      Object.defineProperties(this, {
+        /**
+         * The subs descendent to this Document or their indexes.
+         * @type {TypeCollection<HierarchyDocument>}
+         */
+        allSubs: { value: new TypeCollection("allSubs", this, [], { documentClass: this }), writable: false },
+        /**
+         * The sups ancestral to this Document or their indexes.
+         * @type {TypeCollection<HierarchyDocument>}
+         */
+        allSups: { value: new TypeCollection("allSups", this, [], { documentClass: this }), writable: false },
+        /**
+         * The subs directly descendent to this Document or their indexes.
+         * @type {TypeCollection<HierarchyDocument>}
+         */
+        subs: { value: new SubCollection("subs", this, [], { documentClass: this }), writable: false },
+      });
+    }
+
+    /** @inheritDoc */
     _initialize(options = {}) {
-      /**
-       * The subs descendent to this Document or their indexes.
-       * @type {TypeCollection<HierarchyDocument>}
-       */
-      this.allSubs = new TypeCollection("allSubs", this, this._allSubsSource, { documentClass: this });
-
-      /**
-       * The sups ancestral to this Document or their indexes.
-       * @type {TypeCollection<HierarchyDocument>}
-       */
-      this.allSups = new TypeCollection("allSups", this, this._allSupsSource, { documentClass: this });
-
-      /**
-       * The subs directly descendent to this Document or their indexes.
-       * @type {TypeCollection<HierarchyDocument>}
-       */
-      this.subs = new SubCollection("subs", this, this._subsSource, { documentClass: this });
-
+      this.allSubs.resetDocuments(this._allSubsSource);
+      this.allSups.resetDocuments(this._allSupsSource);
+      this.subs.resetDocuments(this._subsSource);
       super._initialize(options);
     }
 
@@ -366,7 +373,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       const _sup = getProperty(changes, "system._sup");
       if (_sup) {
-        const collection = this.siblingCollection;
+        const collection = this.supCollection;
         const sup = await resolveDocument(collection?.get(_sup));
         const valid = await this.constructor.validateRelationship(sup, this, options);
         if (!valid) { return false; }
@@ -490,7 +497,7 @@ export default function HierarchyDocumentMixin(Base) {
       super.prepareData();
       // If this moved to a different sup, the old sup isn't reached by #reloadSups and must be reset directly.
       if (this._cache.supId && this._cache.supId !== this.system._sup) {
-        const previousSup = this.siblingCollection?.get(this._cache.supId);
+        const previousSup = this.supCollection?.get(this._cache.supId);
         if (typeof previousSup?.resetChildMaps === "function") {
           previousSup.resetChildMaps();
           if (previousSup.isViewer) { previousSup.render(); }

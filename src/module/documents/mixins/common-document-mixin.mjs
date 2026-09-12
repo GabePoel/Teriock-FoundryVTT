@@ -118,26 +118,37 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /** @inheritDoc */
+    _configure(options = {}) {
+      super._configure(options);
+      Object.defineProperties(this, {
+        /**
+         * A Collection of all the children that are directly descendent from this. This includes both embedded Documents
+         * and sub-Documents that are in the same collection. May be actual Documents or their compendium indexes.
+         * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
+         */
+        children: {
+          value: new ChildCollection("children", this, [], {
+            types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
+          }),
+        },
+        /**
+         * A Collection of Documents or their compendium indexes that are descendant from this to be displayed. These are a
+         * combination of direct descendants and ones two or more generations removed depending on specifics. In general,
+         * this shows any Documents which should be actively relevant at a glance in this Document's sheet or preview.
+         * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
+         */
+        previewed: {
+          value: new ChildCollection("previewed", this, [], {
+            types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
+          }),
+        },
+      });
+    }
+
+    /** @inheritDoc */
     _initialize(options = {}) {
-      /**
-       * A Collection of all the children that are directly descendent from this. This includes both embedded Documents
-       * and sub-Documents that are in the same collection. May be actual Documents or their compendium indexes.
-       * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
-       */
-      this.children = new ChildCollection("children", this, this._childrenSource, {
-        types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
-      });
-
-      /**
-       * A Collection of Documents or their compendium indexes that are descendant from this to be displayed. These are a
-       * combination of direct descendants and ones two or more generations removed depending on specifics. In general,
-       * this shows any Documents which should be actively relevant at a glance in this Document's sheet or preview.
-       * @type {ChildCollection<TeriockActiveEffect|TeriockItem>}
-       */
-      this.previewed = new ChildCollection("previewed", this, this._previewedSource, {
-        types: [...ActiveEffect.implementation.TYPES, ...Item.implementation.TYPES],
-      });
-
+      this.children.resetDocuments(this._childrenSource);
+      this.previewed.resetDocuments(this._previewedSource);
       super._initialize(options);
     }
 

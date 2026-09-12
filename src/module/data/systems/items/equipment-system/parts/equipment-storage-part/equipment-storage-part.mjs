@@ -186,7 +186,7 @@ export default function EquipmentStoragePart(Base) {
       if (!foundry.utils.hasProperty(changes, "system._sup")) { return; }
       const _sup = foundry.utils.getProperty(changes, "system._sup");
       // A cleared sup means the equipment is being taken out of its container and back onto its actor.
-      const elder = _sup ? await resolveDocument(this.parent.siblingCollection?.get(_sup)) : this.parent.actor;
+      const elder = _sup ? await resolveDocument(this.parent.supCollection?.get(_sup)) : this.parent.actor;
       if (!this.#validateStorage(elder, options)) { return false; }
       if (options.interactive) {
         // Merging into a stack at the destination replaces the move, so original equipment is deleted.

@@ -20,9 +20,7 @@ export default function AffinableSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), {
-        affinities: new PseudoCollectionField(BaseAffinity),
-      });
+      return Object.assign(super.defineSchema(), { affinities: new PseudoCollectionField(BaseAffinity) });
     }
   }
 

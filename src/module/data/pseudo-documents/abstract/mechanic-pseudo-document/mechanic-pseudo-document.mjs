@@ -1,6 +1,7 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { toId } from "../../../../helpers/string.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import { competenceField, qualifierField } from "../../../fields/tools/builders.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
@@ -141,7 +142,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   prepareData() {
     super.prepareData();
     if (this.document?.documentName !== "Actor") {
-      this.actor?.getEmbeddedCollection(this.documentName)?.set(this.uuid, this);
+      this.actor?.getEmbeddedCollection(this.documentName)?.set(toId(this.uuid, { hash: true }), this);
     }
   }
 }

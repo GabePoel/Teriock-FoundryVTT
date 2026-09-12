@@ -23,6 +23,9 @@ class PseudoTypedSchemaField extends TypedSchemaField {
 
 export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */
+  static hierarchical = true;
+
+  /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, { validateKey: foundry.data.validators.isValidId });
   }
@@ -66,6 +69,7 @@ export default class PseudoCollectionField extends TypedObjectField {
 
   /** @inheritDoc */
   initialize(value, model, options = {}) {
+    // TODO: Make initialization happen more like embedded collections.
     const obj = super.initialize(value, model, options);
     return new PseudoCollection(
       this.name,

@@ -1,3 +1,4 @@
+import { toId } from "../../helpers/string.mjs";
 import TypeCollection from "./type-collection.mjs";
 
 /**
@@ -5,12 +6,12 @@ import TypeCollection from "./type-collection.mjs";
  */
 export default class ChildCollection extends TypeCollection {
   /**
-   * UUIDs are used instead of IDs because the contents of this may come from different Collections. Otherwise, we
-   * technically have a risk of collisions.
+   * A new set of deterministically generated IDs are used because the contents of this may come from different
+   * Collections. Otherwise, we technically have a risk of collisions.
    * @inheritDoc
    */
   _toEntry(document) {
-    return [document?.uuid ?? document?._id ?? foundry.utils.randomID(), document];
+    return [toId(document?.uuid ?? document?._id, { hash: true }) ?? document?._id, document];
   }
 
   /** @inheritDoc */
