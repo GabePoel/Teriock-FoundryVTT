@@ -25,7 +25,7 @@ export function _sloc(s) {
 export function localizeChoices(choices, options = {}) {
   const { none = false, sort = true } = options;
   let out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _sloc(v)]));
-  if (sort) { out = teriock.helpers.utils.sortObject(out, { value: true }); }
+  if (sort) { out = sortObjectEntries(out); }
   return none ? choicesWithNone(out) : out;
 }
 
@@ -53,8 +53,9 @@ export function choicesWithNone(choices = {}, { noneChoice = "COMMON.None" } = {
  */
 export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
+  // Locale may not be available yet when this runs during pre-localization.
   const sort = (lhs, rhs) =>
-    foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
+    foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game?.i18n?.lang) : lhs - rhs;
   if (foundry.utils.getType(sortKey) === "function") { sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1])); }
   else if (sortKey) { sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey])); }
   else { sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1])); }

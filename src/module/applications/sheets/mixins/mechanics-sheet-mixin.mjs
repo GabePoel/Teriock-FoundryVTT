@@ -131,9 +131,6 @@ export default function MechanicsSheetMixin(Base) {
       await this.document.update({ [path]: Array.from(set) });
     }
 
-    /** @type {string|null} */
-    #mechanicsTabBeforeDrag = null;
-
     /** @inheritDoc */
     get _droppableDocumentNames() {
       return [...super._droppableDocumentNames, ...Object.keys(this.document.pseudoCollections)];
@@ -185,25 +182,15 @@ export default function MechanicsSheetMixin(Base) {
     }
 
     /** @inheritDoc */
-    async _onDragLeaveApplication() {
-      await super._onDragLeaveApplication();
-      if (this.#mechanicsTabBeforeDrag) { this._safeChangeTab(this.#mechanicsTabBeforeDrag, "mechanics"); }
-      this.#mechanicsTabBeforeDrag = null;
-    }
-
-    /** @inheritDoc */
     async _onDragOver(event) {
       await super._onDragOver(event);
       if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
       const tabId = this._mechanicCollectionFor(TeriockDragDrop.payload?.type)?.id;
-      if (!tabId || tabId === this.tabGroups.mechanics) { return; }
-      this.#mechanicsTabBeforeDrag ??= this.tabGroups.mechanics;
-      this._safeChangeTab(tabId, "mechanics");
+      if (tabId) { this._revealDragTab(tabId, "mechanics"); }
     }
 
     /** @inheritDoc */
     async _onDrop(event) {
-      this.#mechanicsTabBeforeDrag = null;
       await super._onDrop(event);
       const dropData = TeriockTextEditor.getDragEventData(event);
       await this._onDropMechanic(event, dropData);

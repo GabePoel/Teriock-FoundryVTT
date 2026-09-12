@@ -68,7 +68,7 @@ function getClassChoices() {
  * @param {Teriock.Changes.Type[]} [types] - Restricts the choices to this subset of change types.
  * @returns {StringField}
  */
-export function changeTypeField(types = null) {
+function changeTypeField(types = null) {
   const allowed = types
     ? Object.fromEntries(Object.entries(ActiveEffect.CHANGE_TYPES).filter(([k]) => types.includes(k)))
     : ActiveEffect.CHANGE_TYPES;

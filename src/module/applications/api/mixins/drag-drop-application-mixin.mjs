@@ -40,6 +40,9 @@ export default function DragDropApplicationMixin(Base) {
     /** @type {boolean} */
     #dragIsInApplication = false;
 
+    /** @type {Map<string, string|null>} */
+    #tabsBeforeDrag = new Map();
+
     /** @type {boolean|null} */
     #wasMinimizedBeforeDragEnter = null;
 
@@ -200,6 +203,8 @@ export default function DragDropApplicationMixin(Base) {
      */
     async _onDragLeaveApplication() {
       this.#dragIsInApplication = false;
+      for (const [group, tab] of this.#tabsBeforeDrag) { if (tab) { this._safeChangeTab(tab, group); } }
+      this.#tabsBeforeDrag.clear();
       if (this.options.teriock.dragDrop.style.styleDropTarget) {
         this._dropTargetElement?.classList.remove(this.options.teriock.dragDrop.style.dropTargetClass);
       }
@@ -252,6 +257,7 @@ export default function DragDropApplicationMixin(Base) {
     async _onDrop(event) {
       this.#wasMinimizedBeforeDragEnter = false;
       this.#dragIsInApplication = false;
+      this.#tabsBeforeDrag.clear();
       DragDrop.implementation.leaveApplication(this);
       if (this.options.teriock.dragDrop.dropBehavior.inherit) { return super._onDrop?.(event); }
     }
@@ -269,6 +275,17 @@ export default function DragDropApplicationMixin(Base) {
     async _onRender(context, options) {
       await super._onRender(context, options);
       this._dragDrop.bind(this.element);
+    }
+
+    /**
+     * Reveal the tab a dragged document would be dropped into.
+     * @param {string} tab
+     * @param {string} group
+     */
+    _revealDragTab(tab, group) {
+      if (this.tabGroups[group] === tab) { return; }
+      if (!this.#tabsBeforeDrag.has(group)) { this.#tabsBeforeDrag.set(group, this.tabGroups[group]); }
+      this._safeChangeTab(tab, group);
     }
 
     /**

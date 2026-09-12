@@ -1,4 +1,3 @@
-import { transplantOverrides } from "../helpers/transplant.mjs";
 import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "./helpers.mjs";
 
 const { FunctionTerm } = foundry.dice.terms;
@@ -122,6 +121,19 @@ class BoosterTerm extends FunctionTerm {
 const members = ["function", "isDeterministic", "_evaluateAsync", "isBooster"];
 const staticMembers = ["BOOST_ALIASES", "BOOST_FUNCTIONS", "_boost", "_deboost", "_setboost"];
 
-transplantOverrides(FunctionTerm, BoosterTerm, members, { statics: staticMembers });
+// Monkey patch BoosterTerm stuff onto FunctionTerm.
+/** @param {PropertyDescriptor} d */
+const redefinable = d => ({ ...d, configurable: true, enumerable: false });
+const copyMembers = (src, dst, keys) => {
+  for (const name of keys) {
+    const d = Object.getOwnPropertyDescriptor(src, name);
+    if (d) { Object.defineProperty(dst, name, redefinable(d)); }
+  }
+};
+const original = Object.create(Object.getPrototypeOf(FunctionTerm.prototype));
+copyMembers(FunctionTerm.prototype, original, members);
+Object.setPrototypeOf(BoosterTerm.prototype, original);
+copyMembers(BoosterTerm.prototype, FunctionTerm.prototype, members);
+copyMembers(BoosterTerm, FunctionTerm, staticMembers);
 
 export default FunctionTerm;

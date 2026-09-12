@@ -43,29 +43,6 @@ export function toKebabCase(str) {
 }
 
 /**
- * Convert a string to kebab-case format. Handles camel case and acronyms.
- * @param {string} str - The string to convert.
- * @returns {string} The kebab-case version of the string.
- */
-export function toKebabCaseFull(str) {
-  return isKebabCase(str)
-    ? str
-    : str.replace(/[\s_]+/g, "-").replace(/([a-z\d])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-      .toLowerCase();
-}
-
-/**
- * Converts a string to an integer.
- * @param {string} str
- * @returns {number}
- */
-export function toInt(str) {
-  const result = parseInt(str, 10);
-  if (isNaN(result)) { return 0; }
-  return result;
-}
-
-/**
  * Join with a dot.
  * @param {string[]} strings
  * @returns {string}
@@ -124,13 +101,4 @@ export function dedent(str) {
     return Math.min(min, match ? match[1].length : 0);
   }, Infinity);
   return lines.map(line => line.slice(minIndent)).join("\n");
-}
-
-/**
- * Make the first character of a string lower case.
- * @param {string} str - The string to convert.
- * @returns {string} - The modified string.
- */
-export function lcFirst(str) {
-  return str.charAt(0).toLowerCase() + str.slice(1);
 }
