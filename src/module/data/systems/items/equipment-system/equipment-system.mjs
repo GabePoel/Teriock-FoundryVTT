@@ -65,7 +65,6 @@ export default class EquipmentSystem
       "name",
       "system.description",
       "system.flaws",
-      "system.instructions",
       "system.notes",
       "system.kind",
       "system.consumable.maxFormula",

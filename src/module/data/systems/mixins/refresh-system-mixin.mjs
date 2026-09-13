@@ -36,7 +36,7 @@ export default function RefreshSystemMixin(Base) {
   /** @mixin */
   class RefreshSystem extends Base {
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { preservedOnRefresh: DEFAULT_PRESERVE_ON_REFRESH });
+    static metadata = mergeMetadata(super.metadata, { preserveOnRefresh: [...DEFAULT_PRESERVE_ON_REFRESH] });
 
     /**
      * Group documents by their document name.

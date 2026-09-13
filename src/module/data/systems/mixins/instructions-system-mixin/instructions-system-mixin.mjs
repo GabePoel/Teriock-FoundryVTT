@@ -19,9 +19,12 @@ export default function InstructionsSystemMixin(Base) {
   class InstructionsSystem extends Base {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Instructions"];
+
+    /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
-      preserveOnRefresh: ["system.instructions", ...super.metadata.preserveOnRefresh],
+      preserveOnRefresh: ["system.gmNotes", "system.instructions", ...super.metadata.preserveOnRefresh],
     });
+
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

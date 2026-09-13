@@ -96,6 +96,16 @@ export default class TeriockTooltipManager extends TooltipManager {
   }
 
   /**
+   * Synchronize the Elder Sorcery spinner animation.
+   * @param {HTMLElement} element
+   */
+  #synchronizeSpinner(element) {
+    element?.querySelectorAll(".overlay").forEach(el => {
+      el.getAnimations({ subtree: true }).forEach(a => a.startTime = 0);
+    });
+  }
+
+  /**
    * Check if a UUID can have a rich tooltip. Only certain documents allow them.
    * @param {UUID<TeriockDocument>} uuid
    * @returns {boolean}
@@ -129,6 +139,12 @@ export default class TeriockTooltipManager extends TooltipManager {
   }
 
   /** @inheritDoc */
+  activate(element, options = {}) {
+    super.activate(element, options);
+    this.#synchronizeSpinner(this.tooltip);
+  }
+
+  /** @inheritDoc */
   activateListeners(document, { _deprecated = false } = {}) {
     document ??= window.document;
     document.body.addEventListener("pointerenter", this.#onActivateRich.bind(this), { capture: true, passive: true });
@@ -144,6 +160,13 @@ export default class TeriockTooltipManager extends TooltipManager {
     await game.teriock.templatesReady;
     const loadingPanel = new teriock.data.pseudoDocuments.Panel(TERIOCK.display.panels.common.loading);
     this.#loadingTooltipHTML = await loadingPanel.renderHTML();
+  }
+
+  /** @inheritDoc */
+  lockTooltip() {
+    const clone = super.lockTooltip();
+    this.#synchronizeSpinner(clone);
+    return clone;
   }
 
   /**

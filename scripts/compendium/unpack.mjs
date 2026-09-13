@@ -2,7 +2,7 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 
-import { toKebabCase, toKebabCaseFull } from "../../src/module/helpers/string.mjs";
+import { toKebabCase } from "../../src/module/helpers/string.mjs";
 import { cleanDocument, loadDefaults } from "./clean-fields.mjs";
 import {
   DOCUMENT_COLLECTION_KEYS,
@@ -60,8 +60,8 @@ function deriveName(pack, id) {
  * @param {boolean} buildRegistry
  */
 async function unpackPack(pack, buildRegistry) {
-  prefix = `./src/packs/${toKebabCaseFull(pack)}`;
-  const directory = `./src/packs/${toKebabCaseFull(pack)}`;
+  prefix = `./src/packs/${toKebabCase(pack)}`;
+  const directory = `./src/packs/${toKebabCase(pack)}`;
   if (buildRegistry) { console.log(`Building registry for ${pack}`); }
   else { console.log(`Unpacking ${pack} to ${directory}`); }
   const extractOptions = {
