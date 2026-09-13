@@ -11,6 +11,20 @@ import { deleteProperties, fromIdentifier } from "../../../helpers/utils.mjs";
  * @property {string} label
  */
 
+/** @type {string[]} */
+export const DEFAULT_PRESERVE_ON_REFRESH = [
+  "_id",
+  "_stats",
+  "flags",
+  "folder",
+  "origin",
+  "ownership",
+  "sort",
+  "system._dep",
+  "system._sup",
+  "type",
+];
+
 /**
  * Mixin for refreshing documents from the source documents they were created from.
  * @template {Constructor<TypeDataModel>} T
@@ -20,23 +34,6 @@ import { deleteProperties, fromIdentifier } from "../../../helpers/utils.mjs";
 export default function RefreshSystemMixin(Base) {
   /** @mixin */
   class RefreshSystem extends Base {
-    /** @type {string[]} */
-    static DEFAULT_PRESERVED_PROPERTIES = [
-      "_id",
-      "_stats",
-      "flags",
-      "folder",
-      "origin",
-      "ownership",
-      "sort",
-      "system._dep",
-      "system._sup",
-      "type",
-    ];
-
-    /** @type {string[]} */
-    static PRESERVED_PROPERTIES = [...this.DEFAULT_PRESERVED_PROPERTIES];
-
     /**
      * Group documents by their document name.
      * @param {(TeriockActiveEffect|TeriockItem)[]} documents
@@ -239,9 +236,7 @@ export default function RefreshSystemMixin(Base) {
      */
     toRefreshObject(document, options = {}) {
       const obj = document?.toObject(true) ?? {};
-      const preservedProperties = options.fullOverride
-        ? this.constructor.DEFAULT_PRESERVED_PROPERTIES
-        : this.metadata.preservedProperties;
+      const preservedProperties = options.fullOverride ? DEFAULT_PRESERVE_ON_REFRESH : this.metadata.preserveOnRefresh;
       deleteProperties(obj, ...preservedProperties);
       return obj;
     }

@@ -2,6 +2,7 @@ import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { fancifyFields } from "../../../../helpers/utils.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
+import { DEFAULT_PRESERVED_PROPERTIES } from "../refresh-system-mixin.mjs";
 
 const { fields } = foundry.data;
 
@@ -33,7 +34,7 @@ export default function BaseSystemMixin(Base) {
     static metadata = mergeMetadata(super.metadata, {
       disabledPath: null,
       icon: icons.manifest.ui.document,
-      preservedProperties: this.PRESERVED_PROPERTIES,
+      preserveOnRefresh: [...DEFAULT_PRESERVED_PROPERTIES],
       tags: {
         armament: false,
         attunable: false,

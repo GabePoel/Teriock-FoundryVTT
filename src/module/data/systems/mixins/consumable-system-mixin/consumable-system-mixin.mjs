@@ -23,10 +23,10 @@ export default function ConsumableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consumable"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { consumable: true } });
-
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.consumable", "system.quantity.value", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.consumable", "system.quantity.value", ...super.metadata.preserveOnRefresh],
+      tags: { consumable: true },
+    });
 
     /** @inheritDoc */
     static get _automationTypes() {

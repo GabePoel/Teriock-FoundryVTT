@@ -1,5 +1,6 @@
 import costConfig from "../../../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../../../constants/config/stat-config.mjs";
+import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
@@ -24,7 +25,9 @@ export default function AbilityCostsPart(Base) {
    */
   class AbilityCostsPart extends Base {
     /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.costs.tweaks", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.costs.tweaks", ...super.metadata.preserveOnRefresh],
+    });
 
     /** @inheritDoc */
     static defineSchema() {

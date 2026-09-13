@@ -15,10 +15,10 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseEffect"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { disabledPath: "disabled" });
-
-  /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["disabled", "duration", "tint", "transfer", ...super.PRESERVED_PROPERTIES];
+  static metadata = mergeMetadata(super.metadata, {
+    disabledPath: "disabled",
+    preserveOnRefresh: ["disabled", "duration", "tint", "transfer", ...super.metadata.preserveOnRefresh],
+  });
 
   /** @inheritDoc */
   static defineSchema() {

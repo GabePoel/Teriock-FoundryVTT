@@ -42,7 +42,7 @@ declare global {
 
     export type SystemMetadata = TypeMetadata & {
       disabledPath: "disabled" | "system.disabled" | null;
-      preservedProperties: string[];
+      preserveOnRefresh: string[];
       tags: SystemMetadataTags;
     };
 

@@ -1,4 +1,5 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
+import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../../helpers/icon.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { fromIdentifier, getName } from "../../../../../../helpers/utils.mjs";
@@ -23,7 +24,9 @@ export default function AbilityEquipmentPart(Base) {
    */
   class AbilityEquipmentPart extends Base {
     /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.grantOnly", "system.grantUse", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.grantOnly", "system.grantUse", ...super.metadata.preserveOnRefresh],
+    });
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 const { fields } = foundry.data;
 
 /**
@@ -19,8 +20,9 @@ export default function InstructionsSystemMixin(Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Instructions"];
 
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.instructions", ...(super.PRESERVED_PROPERTIES ?? [])];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.instructions", ...super.metadata.preserveOnRefresh],
+    });
 
     /** @inheritDoc */
     static defineSchema() {

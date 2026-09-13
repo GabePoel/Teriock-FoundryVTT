@@ -14,10 +14,10 @@ export default function HierarchySystemMixin(Base) {
    */
   class HierarchySystem extends Base {
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { hierarchy: true } });
-
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system._sup", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system._sup", ...super.metadata.preserveOnRefresh],
+      tags: { hierarchy: true },
+    });
 
     /** @inheritDoc */
     static defineSchema() {

@@ -33,10 +33,11 @@ export default function CommonSystemMixin(Base) {
      * @inheritDoc
      * @type {Teriock.Metadata.CommonSystemMetadata}
      */
-    static metadata = mergeMetadata(super.metadata, { childTypes: [], visibleTypes: [] });
-
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.identifier", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      childTypes: [],
+      preserveOnRefresh: ["system.identifier", ...super.metadata.preserveOnRefresh],
+      visibleTypes: [],
+    });
 
     /**
      * Check if an embed icon is visible.

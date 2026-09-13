@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../../helpers/icon.mjs";
 import { IdentifierField } from "../../../../../fields/_module.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
@@ -22,7 +23,9 @@ export default function EquipmentWieldingPart(Base) {
    */
   class EquipmentWieldingPart extends Base {
     /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.equipped", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.equipped", ...super.metadata.preserveOnRefresh],
+    });
 
     /** @inheritDoc */
     static defineSchema() {

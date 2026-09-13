@@ -18,10 +18,10 @@ export default function AdjustableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Adjustable"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { kinds: _replace(effectConfig.kind) });
-
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.badge", ...this._adjustableTextFields, ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, {
+      kinds: _replace(effectConfig.kind),
+      preserveOnRefresh: ["system.badge", ...this._adjustableTextFields, ...super.metadata.preserveOnRefresh],
+    });
 
     /**
      * @returns {string[]}

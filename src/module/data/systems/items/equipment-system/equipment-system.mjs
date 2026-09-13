@@ -60,23 +60,21 @@ export default class EquipmentSystem
     childTypes: ["equipment", ...super.metadata.childTypes],
     initialKind: "mundane",
     kinds: _replace(equipmentConfig.kind),
+    preserveOnRefresh: [
+      "img",
+      "name",
+      "system.description",
+      "system.flaws",
+      "system.instructions",
+      "system.notes",
+      "system.kind",
+      "system.consumable.maxFormula",
+      ...super.metadata.preserveOnRefresh,
+    ],
     tags: { usable: true },
     type: "equipment",
     visibleTypes: ["equipment", ...super.metadata.visibleTypes],
   });
-
-  /** @inheritDoc */
-  static PRESERVED_PROPERTIES = [
-    "img",
-    "name",
-    "system.description",
-    "system.flaws",
-    "system.instructions",
-    "system.notes",
-    "system.kind",
-    "system.consumable.maxFormula",
-    ...super.PRESERVED_PROPERTIES,
-  ];
 
   static get _automationTypes() {
     return [

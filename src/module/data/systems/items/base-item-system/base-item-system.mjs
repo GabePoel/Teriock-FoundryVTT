@@ -20,11 +20,9 @@ export default class BaseItemSystem
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "fluency", "resource"],
     disabledPath: "system.disabled",
+    preserveOnRefresh: ["effects", "system.disabled", "system._dep", ...super.metadata.preserveOnRefresh],
     visibleTypes: ["ability", "fluency", "resource"],
   });
-
-  /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["effects", "system.disabled", "system._dep", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static defineSchema() {

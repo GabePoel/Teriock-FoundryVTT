@@ -46,11 +46,9 @@ export default function ChildSystemMixin(Base) {
     static metadata = mergeMetadata(super.metadata, {
       initialKind: "normal",
       kinds: systemConfig.defaultKinds,
+      preserveOnRefresh: ["system.competence", ...super.metadata.preserveOnRefresh],
       tags: { triggerable: true },
     });
-
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.competence", ...super.PRESERVED_PROPERTIES];
 
     /** @inheritDoc */
     static get Execution() {

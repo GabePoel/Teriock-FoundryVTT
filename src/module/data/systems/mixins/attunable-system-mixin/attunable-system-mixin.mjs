@@ -21,15 +21,10 @@ export default function AttunableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunable"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { attunable: true } });
-
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = [
-      "system.needsAttunement",
-      "system.tier",
-      "system.price",
-      ...super.PRESERVED_PROPERTIES,
-    ];
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.needsAttunement", "system.tier", "system.price", ...super.metadata.preserveOnRefresh],
+      tags: { attunable: true },
+    });
 
     /** @inheritDoc */
     static defineSchema() {

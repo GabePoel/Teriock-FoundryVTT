@@ -82,11 +82,9 @@ export default class BaseActorSystem
       "resource",
       "species",
     ],
+    preserveOnRefresh: ["effects", "items", ...super.metadata.preserveOnRefresh],
     visibleTypes: ["power", "rank", "species"],
   });
-
-  /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["effects", "items", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static defineSchema() {
