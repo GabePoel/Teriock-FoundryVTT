@@ -19,6 +19,7 @@ export default class BaseItemSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "fluency", "resource"],
+    descriptionPath: "system.description",
     disabledPath: "system.disabled",
     preserveOnRefresh: ["effects", "system.disabled", "system._dep", ...super.metadata.preserveOnRefresh],
     visibleTypes: ["ability", "fluency", "resource"],
@@ -28,6 +29,7 @@ export default class BaseItemSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       _dep: nullIdField(),
+      description: new fields.HTMLField(),
       disabled: new fields.BooleanField(),
       flaws: new fields.HTMLField(),
     });
@@ -40,8 +42,8 @@ export default class BaseItemSystem
   }
 
   /** @inheritDoc */
-  get _displayFields() {
-    return [this._displayFieldInstructions, "system.description", "system.flaws"];
+  get _displayFieldsContent() {
+    return [...super._displayFieldsContent, "system.flaws"];
   }
 
   /** @inheritDoc */

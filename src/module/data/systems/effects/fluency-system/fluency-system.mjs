@@ -54,8 +54,8 @@ export default class FluencySystem
   }
 
   /** @inheritDoc */
-  get _displayFields() {
-    return [this._displayFieldInstructions, "system.description", {
+  get _displayFieldsContent() {
+    return [...super._displayFieldsContent, {
       classes: [TERIOCK.display.panels.styles.derived],
       editable: false,
       label: TERIOCK.reference.tradecrafts[this._source.tradecraft],

@@ -135,14 +135,13 @@ export default class SpeciesSystem
   }
 
   /** @inheritDoc */
-  get _displayFields() {
+  get _displayFieldsContent() {
     return [
-      this._displayFieldInstructions,
       ...POOL_STATS.map(k => `system.${k}Increase`),
       "system.attributeIncrease",
       "system.innateRanks",
       "system.appearance",
-      "system.description",
+      ...super._displayFieldsContent,
     ];
   }
 

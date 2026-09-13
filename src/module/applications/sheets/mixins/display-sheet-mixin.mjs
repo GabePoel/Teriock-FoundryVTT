@@ -84,7 +84,7 @@ export default function DisplaySheetMixin(Base) {
      */
     #expandFields(fields) {
       return fancifyFields(fields).map(f => {
-        const sourceValue = foundry.utils.getProperty(this.document, f.path.replace("system.", "_source.system."));
+        const sourceValue = foundry.utils.getProperty(this.document._source, f.path);
         const value = foundry.utils.getProperty(this.document, f.path);
         return {
           ...f,

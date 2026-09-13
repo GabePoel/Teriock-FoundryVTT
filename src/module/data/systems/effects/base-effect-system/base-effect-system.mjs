@@ -16,6 +16,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    descriptionPath: "description",
     disabledPath: "disabled",
     preserveOnRefresh: ["disabled", "duration", "tint", "transfer", ...super.metadata.preserveOnRefresh],
   });

@@ -32,11 +32,6 @@ export default class ConditionSystem
   }
 
   /** @inheritDoc */
-  get _displayFields() {
-    return ["description"];
-  }
-
-  /** @inheritDoc */
   get _embedIcons() {
     return [{
       action: "removeConditionDoc",

@@ -28,18 +28,21 @@ export default function EquipmentIdentificationPart(Base) {
     }
 
     /** @inheritDoc */
-    get _displayFields() {
-      return [...this._displayFieldsFirst, {
-        classes: [TERIOCK.display.panels.styles.faded],
-        gmOnly: true,
-        path: "system.identification.notes",
-        visible: !this.identification.identified,
-      }, {
-        classes: [TERIOCK.display.panels.styles.faded],
-        gmOnly: true,
-        path: "system.identification.flaws",
-        visible: !this.identification.identified,
-      }, ...super._displayFields.filter(f => !this._isFirstDisplayField(f))];
+    get _displayFieldsContent() {
+      const fields = [];
+      const identifiedFields = ["system.notes", "system.flaws"];
+      for (const f of super._displayFieldsContent) {
+        if (identifiedFields.includes(f)) {
+          fields.push({
+            classes: [TERIOCK.display.panels.styles.faded],
+            gmOnly: true,
+            path: f.replace("system", "system.identification"),
+            visible: !this.identification[f.slice("system.")],
+          });
+        }
+        fields.push(f);
+      }
+      return fields;
     }
 
     /**

@@ -59,11 +59,6 @@ export default class AttunementSystem extends CleanedEffectSystem {
   }
 
   /** @inheritDoc */
-  get _panelBlocks() {
-    return [];
-  }
-
-  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", { tier: this.tier || 0 });

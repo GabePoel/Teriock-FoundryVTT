@@ -41,6 +41,7 @@ declare global {
     };
 
     export type SystemMetadata = TypeMetadata & {
+      descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       preserveOnRefresh: string[];
       tags: SystemMetadataTags;

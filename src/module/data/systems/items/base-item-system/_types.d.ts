@@ -2,6 +2,8 @@ import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 
 declare module "./base-item-system.mjs" {
   export default interface BaseItemSystem {
+    /** <schema> Description */
+    description: string;
     /** <schema> Whether this is disabled */
     disabled: boolean;
     /** <schema> Text description of flaws */

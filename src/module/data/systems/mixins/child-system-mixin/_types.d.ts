@@ -3,8 +3,6 @@ import { CommonDocumentSettingsModel } from "../../../models/settings-models/_mo
 declare global {
   namespace Teriock.Models {
     export interface ChildSystemData {
-      /** <schema> Description */
-      description: string;
       /** <derived> Whether this is forcibly suppressed by something else */
       forceSuppressed: boolean;
       /** <schema> Categorical kind for this document */

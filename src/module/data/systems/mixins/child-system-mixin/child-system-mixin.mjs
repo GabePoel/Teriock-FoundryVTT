@@ -64,7 +64,6 @@ export default function ChildSystemMixin(Base) {
           }),
           { persisted: false },
         ),
-        description: new fields.HTMLField(),
         forceSuppressed: new initialBoolean(),
         kind: new fields.StringField({
           blank: false,
@@ -104,11 +103,6 @@ export default function ChildSystemMixin(Base) {
     /** @inheritDoc */
     get _color() {
       return this._kindEntry.color;
-    }
-
-    /** @inheritDoc */
-    get _displayFields() {
-      return ["system.description", ...super._displayFields];
     }
 
     /** @inheritDoc */

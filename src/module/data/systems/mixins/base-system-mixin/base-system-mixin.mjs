@@ -2,7 +2,6 @@ import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { fancifyFields } from "../../../../helpers/utils.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
-import { DEFAULT_PRESERVED_PROPERTIES } from "../refresh-system-mixin.mjs";
 
 const { fields } = foundry.data;
 
@@ -32,9 +31,10 @@ export default function BaseSystemMixin(Base) {
      * @type {Teriock.Metadata.SystemMetadata}
      */
     static metadata = mergeMetadata(super.metadata, {
+      descriptionPath: null,
       disabledPath: null,
       icon: icons.manifest.ui.document,
-      preserveOnRefresh: [...DEFAULT_PRESERVED_PROPERTIES],
+      preserveOnRefresh: [],
       tags: {
         armament: false,
         attunable: false,
@@ -77,10 +77,34 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
+     * The canonical description field.
+     * @returns {Teriock.Display.DisplayField}
+     */
+    get _displayFieldDescription() {
+      return { label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"), path: this.metadata.descriptionPath };
+    }
+
+    /**
      * HTML fields to display on sheets and in panels.
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayFields() {
+      return [...this._displayFieldsImportant, ...this._displayFieldsContent];
+    }
+
+    /**
+     * HTML content fields to display on sheets and in panels.
+     * @returns {Teriock.Display.DisplayField[]}
+     */
+    get _displayFieldsContent() {
+      return this.metadata.descriptionPath ? [this._displayFieldDescription] : [];
+    }
+
+    /**
+     * Important HTML fields to display on sheets and in panels.
+     * @returns {Teriock.Display.DisplayField[]}
+     */
+    get _displayFieldsImportant() {
       return [];
     }
 

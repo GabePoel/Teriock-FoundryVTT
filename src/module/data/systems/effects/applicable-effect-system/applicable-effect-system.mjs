@@ -84,11 +84,6 @@ export default class ApplicableEffectSystem
     });
   }
 
-  /** @inheritDoc */
-  get _displayFields() {
-    return ["description"];
-  }
-
   /**
    * A message bar with duration information.
    * @returns {Teriock.Panels.PanelBar}

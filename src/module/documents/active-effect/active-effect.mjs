@@ -21,6 +21,14 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
+  static migrateData(source, options) {
+    const description = foundry.utils.getProperty(source, "system.description");
+    if (description) { source.description = description; }
+    foundry.utils.deleteProperty(source, "system.description");
+    return super.migrateData(source, options);
+  }
+
+  /** @inheritDoc */
   get _childrenSource() {
     return [...super._childrenSource, ...this.dependents.contents];
   }

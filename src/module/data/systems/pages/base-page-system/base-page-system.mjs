@@ -22,19 +22,11 @@ export default class BasePageSystem
   extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin, RulesSystemMixin, InstructionsSystemMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { tags: { text: true } });
+  static metadata = mergeMetadata(super.metadata, { descriptionPath: "text.content", tags: { text: true } });
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), { img: new fields.FilePathField({ categories: ["IMAGE"] }) });
-  }
-
-  /** @inheritDoc */
-  get _displayFields() {
-    return [...super._displayFields, {
-      label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-      path: "text.content",
-    }];
   }
 
   /** @inheritDoc */
