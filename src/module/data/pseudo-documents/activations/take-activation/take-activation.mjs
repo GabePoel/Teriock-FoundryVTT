@@ -1,12 +1,11 @@
 import { icons } from "../../../../constants/display/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
 export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.manifest.consequence.crit });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.consequence.crit });
 
   /**
    * The amount this should apply.

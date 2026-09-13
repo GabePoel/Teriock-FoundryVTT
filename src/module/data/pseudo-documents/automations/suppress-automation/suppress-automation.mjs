@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -6,9 +7,7 @@ export default class SuppressAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Suppress"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "suppress" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "suppress" });
 
   /** @inheritDoc */
   static defineSchema() {

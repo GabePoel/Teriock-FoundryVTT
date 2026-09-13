@@ -1,11 +1,10 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import ChangeMovementAutomation from "../../automations/change-movement-automation/change-movement-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
 export default class ChangeMovementActivation extends AutomationActivationFactory(ChangeMovementAutomation) {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { icon: "ms-sprint" });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: "ms-sprint" });
 
   /**
    * @param {string} movementAction

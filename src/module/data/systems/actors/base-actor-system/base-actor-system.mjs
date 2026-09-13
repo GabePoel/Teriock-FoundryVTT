@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
@@ -64,31 +64,29 @@ export default class BaseActorSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseActor"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["effects", "items", ...super.PRESERVED_PROPERTIES];
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: [
+      "archetype",
+      "attunement",
+      "base",
+      "body",
+      "condition",
+      "consequence",
+      "cover",
+      "equipment",
+      "fluency",
+      "hack",
+      "mount",
+      "power",
+      "rank",
+      "resource",
+      "species",
+    ],
+    visibleTypes: ["power", "rank", "species"],
+  });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: [
-        "archetype",
-        "attunement",
-        "base",
-        "body",
-        "condition",
-        "consequence",
-        "cover",
-        "equipment",
-        "fluency",
-        "hack",
-        "mount",
-        "power",
-        "rank",
-        "resource",
-        "species",
-      ],
-      visibleTypes: ["power", "rank", "species"],
-    });
-  }
+  static PRESERVED_PROPERTIES = ["effects", "items", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static defineSchema() {

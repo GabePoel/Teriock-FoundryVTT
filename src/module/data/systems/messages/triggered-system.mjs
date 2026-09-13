@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../helpers/construction.mjs";
 import { BasePseudoDocument } from "../../pseudo-documents/abstract/_module.mjs";
 import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 
@@ -6,9 +7,7 @@ import InteractiveSystem from "./interactive-system/interactive-system.mjs";
  */
 export default class TriggeredSystem extends InteractiveSystem {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "triggered" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "triggered" });
 
   /**
    * Add activations onto triggered chat message data.

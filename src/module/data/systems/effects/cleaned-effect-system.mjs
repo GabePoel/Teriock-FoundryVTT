@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { InstructionsSystemMixin } from "../mixins/_module.mjs";
 import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 
@@ -9,9 +9,7 @@ import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
  */
 export default class CleanedEffectSystem extends mixClasses(BaseEffectSystem, InstructionsSystemMixin) {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { untrackable: true } });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { untrackable: true } });
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {

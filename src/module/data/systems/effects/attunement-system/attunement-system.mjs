@@ -1,4 +1,5 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
@@ -17,18 +18,16 @@ export default class AttunementSystem extends CleanedEffectSystem {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 
   /** @inheritDoc */
-  static get Execution() {
-    return teriock.executions.document.AttunementExecution;
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    initialKind: "other",
+    kinds: _replace(attunementConfig.kind),
+    tags: { usable: true },
+    type: "attunement",
+  });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      initialKind: "other",
-      kinds: _replace(attunementConfig.kind),
-      tags: { usable: true },
-      type: "attunement",
-    }, { applyOperators: true });
+  static get Execution() {
+    return teriock.executions.document.AttunementExecution;
   }
 
   /** @inheritDoc */
@@ -68,7 +67,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", { tier: this.tier || 0 });
-    parts.text = dotJoin([this._kindEntry.label, this.usage]);
+    parts.text = dotJoin([_loc(this._kindEntry.label), this.usage]);
     return parts;
   }
 

@@ -1,4 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { ensureChildren, ensureNoChildren } from "../../../../helpers/resolve.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
@@ -9,9 +10,7 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ToggleChildren"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "toggleChildren" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "toggleChildren" });
 
   /** @inheritDoc */
   static defineSchema() {

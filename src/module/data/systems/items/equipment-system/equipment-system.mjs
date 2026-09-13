@@ -1,5 +1,5 @@
 import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
@@ -56,6 +56,16 @@ export default class EquipmentSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Equipment"];
 
   /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["equipment", ...super.metadata.childTypes],
+    initialKind: "mundane",
+    kinds: _replace(equipmentConfig.kind),
+    tags: { usable: true },
+    type: "equipment",
+    visibleTypes: ["equipment", ...super.metadata.visibleTypes],
+  });
+
+  /** @inheritDoc */
   static PRESERVED_PROPERTIES = [
     "img",
     "name",
@@ -84,18 +94,6 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.document.EquipmentExecution;
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["equipment", ...super.metadata.childTypes],
-      initialKind: "mundane",
-      kinds: _replace(equipmentConfig.kind),
-      tags: { usable: true },
-      type: "equipment",
-      visibleTypes: ["equipment", ...super.metadata.visibleTypes],
-    }, { applyOperators: true });
   }
 
   /** @inheritDoc */

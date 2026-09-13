@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import {
@@ -27,9 +27,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Status"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "status" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "status" });
 
   /** @inheritDoc */
   static defineSchema() {

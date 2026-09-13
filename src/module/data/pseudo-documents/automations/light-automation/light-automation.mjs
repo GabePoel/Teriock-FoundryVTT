@@ -1,4 +1,5 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields, LightData } = foundry.data;
@@ -40,9 +41,7 @@ class AutomationLightData extends LightData {
 
 export default class LightAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { changes: true }, type: "light" });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { changes: true }, type: "light" });
 
   /** @inheritDoc */
   static defineSchema() {

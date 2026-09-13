@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { MacroActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -14,9 +14,7 @@ export default class MacroAutomation extends mixClasses(BaseAutomation, TriggerA
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Macro"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true }, type: "macro" });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { interactInExecution: true }, type: "macro" });
 
   /** @inheritDoc */
   static defineSchema() {

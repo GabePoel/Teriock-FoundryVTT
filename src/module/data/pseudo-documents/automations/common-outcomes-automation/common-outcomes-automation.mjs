@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import * as activations from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -13,9 +13,7 @@ export default class CommonOutcomesAutomation extends mixClasses(BaseAutomation,
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.CommonOutcomes"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "common" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "common" });
 
   /** @inheritDoc */
   static defineSchema() {

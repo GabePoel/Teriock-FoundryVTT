@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TakeActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -14,9 +14,7 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "take" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "take" });
 
   /** @inheritDoc */
   static defineSchema() {

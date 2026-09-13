@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../../../fields/_module.mjs";
 import { BaseAffinity } from "../../../../../pseudo-documents/affinities/abstract/_module.mjs";
 import { BaseAutomation } from "../../../../../pseudo-documents/automations/abstract/_module.mjs";
@@ -17,11 +18,9 @@ export default function ActorPseudoDocumentsPart(Base) {
    */
   class ActorPseudoDocumentsPart extends Base {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, {
-        pseudos: { Affinity: "system.affinities", Automation: "system.automations", Expiration: "system.expirations" },
-      });
-    }
+    static metadata = mergeMetadata(super.metadata, {
+      pseudos: { Affinity: "system.affinities", Automation: "system.automations", Expiration: "system.expirations" },
+    });
 
     /** @inheritDoc */
     static defineSchema() {

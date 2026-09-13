@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { GrantedSystemMixin } from "../mixins/_module.mjs";
 import ApplicableEffectSystem from "./applicable-effect-system/applicable-effect-system.mjs";
 
@@ -8,9 +8,7 @@ import ApplicableEffectSystem from "./applicable-effect-system/applicable-effect
  */
 export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, GrantedSystemMixin) {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "other", type: "imbuement" });
-  }
+  static metadata = mergeMetadata(super.metadata, { initialKind: "other", type: "imbuement" });
 
   /** @inheritDoc */
   get _formPaths() {

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -43,6 +43,14 @@ export default class PropertySystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Property"];
 
   /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["property"],
+    tags: { usable: true },
+    type: "property",
+    visibleTypes: ["property"],
+  });
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [
       ...super._automationTypes,
@@ -58,16 +66,6 @@ export default class PropertySystem
       automations.TradecraftAutomation,
       automations.UseDocumentsAutomation,
     ];
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["property"],
-      tags: { usable: true },
-      type: "property",
-      visibleTypes: ["property"],
-    });
   }
 
   /** @inheritDoc */
@@ -105,7 +103,7 @@ export default class PropertySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) { parts.subtitle = this._kindEntry.label; }
+    if (!this.consumable) { parts.subtitle = _loc(this._kindEntry.label); }
     return parts;
   }
 

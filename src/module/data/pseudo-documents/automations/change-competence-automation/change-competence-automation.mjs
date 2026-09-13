@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -14,9 +14,7 @@ export default class ChangeCompetenceAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeCompetence"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "changeCompetence" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "changeCompetence" });
 
   /** @inheritDoc */
   static defineSchema() {

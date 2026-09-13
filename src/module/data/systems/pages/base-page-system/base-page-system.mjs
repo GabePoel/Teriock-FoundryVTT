@@ -1,5 +1,5 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
 import {
   BaseSystemMixin,
@@ -22,9 +22,7 @@ export default class BasePageSystem
   extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin, RulesSystemMixin, InstructionsSystemMixin)
 {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { text: true } });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { text: true } });
 
   /** @inheritDoc */
   static defineSchema() {

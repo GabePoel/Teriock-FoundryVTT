@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { BaseSystemMixin, ChildSystemMixin } from "../../mixins/_module.mjs";
@@ -15,12 +15,10 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseEffect"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["disabled", "duration", "tint", "transfer", ...super.PRESERVED_PROPERTIES];
+  static metadata = mergeMetadata(super.metadata, { disabledPath: "disabled" });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { disabledPath: "disabled" });
-  }
+  static PRESERVED_PROPERTIES = ["disabled", "duration", "tint", "transfer", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static defineSchema() {

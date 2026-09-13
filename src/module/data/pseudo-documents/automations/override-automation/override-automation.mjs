@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin, OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -17,13 +17,11 @@ export default class OverrideAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Override"];
 
   /** @inheritDoc */
-  static get _setCompetenceInitial() {
-    return undefined;
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "override" });
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "override" });
+  static get _setCompetenceInitial() {
+    return undefined;
   }
 
   /** @inheritDoc */

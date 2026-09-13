@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { TriggerMechanicMixin } from "../mixins/_module.mjs";
 import { BaseExpiration } from "./abstract/_module.mjs";
 
@@ -7,9 +7,7 @@ import { BaseExpiration } from "./abstract/_module.mjs";
  */
 export default class TriggerExpiration extends mixClasses(BaseExpiration, TriggerMechanicMixin) {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "trigger" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "trigger" });
 
   /** @inheritDoc */
   get _formPaths() {

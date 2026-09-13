@@ -1,5 +1,7 @@
+import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { formulaExists, multiplyFormula } from "../../../../helpers/formula.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
@@ -8,12 +10,10 @@ const { fields } = foundry.data;
 
 export default class ChangeQuantityActivation extends BaseActivation {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, {
-      icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
-      type: "changeQuantity",
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.pseudoDocument.automation,
+    type: "changeQuantity",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

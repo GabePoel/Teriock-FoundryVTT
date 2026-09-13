@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import BaseActivation from "./base-activation/base-activation.mjs";
 
 /**
@@ -7,12 +8,10 @@ import BaseActivation from "./base-activation/base-activation.mjs";
 export default function AutomationActivationFactory(Automation) {
   class AutomationActivation extends BaseActivation {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, {
-        pseudos: Automation.metadata.pseudos,
-        type: Automation.metadata.type,
-      });
-    }
+    static metadata = mergeMetadata(super.metadata, {
+      pseudos: Automation.metadata.pseudos,
+      type: Automation.metadata.type,
+    });
 
     /** @inheritDoc */
     static defineSchema() {

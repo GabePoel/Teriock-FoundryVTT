@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { TakeCoverActivation, TakeUncoverActivation } from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -13,9 +13,7 @@ export default class CoverAutomation extends mixClasses(BaseAutomation, TriggerA
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Cover"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "cover" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "cover" });
 
   /** @inheritDoc */
   static defineSchema() {

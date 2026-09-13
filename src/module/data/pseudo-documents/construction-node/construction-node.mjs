@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { omit } from "../../../helpers/utils.mjs";
@@ -37,9 +37,7 @@ export default class ConstructionNode
   )
 {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { documentName: "ConstructionNode" });
-  }
+  static metadata = mergeMetadata(super.metadata, { documentName: "ConstructionNode" });
 
   /** @inheritDoc */
   static defineSchema() {

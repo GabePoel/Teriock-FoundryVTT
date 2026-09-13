@@ -1,14 +1,13 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
 export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["base", "consequence", "equipment"],
-      type: "inventory",
-      visibleTypes: ["equipment"],
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["base", "consequence", "equipment"],
+    type: "inventory",
+    visibleTypes: ["equipment"],
+  });
 
   /**
    * A string describing what this inventory contains.

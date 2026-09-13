@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { HealActivation } from "../../activations/command-activations.mjs";
 import { StatAutomation } from "../abstract/_module.mjs";
 
@@ -11,9 +12,7 @@ export default class HealAutomation extends StatAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Heal"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "heal" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "heal" });
 
   /** @inheritDoc */
   static defineSchema() {

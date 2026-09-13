@@ -1,6 +1,7 @@
 import { HTMLAutocompleteInputElement } from "../../../../../applications/elements/_module.mjs";
 import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
-import { mixClasses } from "../../../../../helpers/construction.mjs";
+import { icons } from "../../../../../constants/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
@@ -34,18 +35,15 @@ export default class BaseAffinity
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AFFINITIES.Base"];
 
   /** @inheritDoc */
-  static get Execution() {
-    return teriock.executions.activity.AffinityExecution;
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    documentName: "Affinity",
+    icon: icons.manifest.pseudoDocument.affinity,
+    typed: true,
+  });
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, {
-      documentName: "Affinity",
-      icon: TERIOCK.display.icons.manifest.pseudoDocument.affinity,
-      label: _loc("DOCUMENT.Affinity"),
-      typed: true,
-    });
+  static get Execution() {
+    return teriock.executions.activity.AffinityExecution;
   }
 
   /** @inheritDoc */

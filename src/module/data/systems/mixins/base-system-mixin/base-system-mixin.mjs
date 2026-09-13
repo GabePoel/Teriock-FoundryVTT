@@ -1,4 +1,5 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { fancifyFields } from "../../../../helpers/utils.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
@@ -27,33 +28,31 @@ export default function BaseSystemMixin(Base) {
 
     /**
      * @inheritDoc
-     * @returns {Teriock.Metadata.SystemMetadata}
+     * @type {Teriock.Metadata.SystemMetadata}
      */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, {
-        disabledPath: null,
-        icon: TERIOCK.display.icons.manifest.ui.document,
-        preservedProperties: this.PRESERVED_PROPERTIES,
-        tags: {
-          armament: false,
-          attunable: false,
-          consumable: false,
-          crit: false,
-          embed: false,
-          granted: false,
-          hierarchy: false,
-          panel: false,
-          revealable: false,
-          statGiver: false,
-          text: false,
-          triggerable: false,
-          untrackable: false,
-          usable: false,
-          wiki: false,
-        },
-        type: "base",
-      });
-    }
+    static metadata = mergeMetadata(super.metadata, {
+      disabledPath: null,
+      icon: icons.manifest.ui.document,
+      preservedProperties: this.PRESERVED_PROPERTIES,
+      tags: {
+        armament: false,
+        attunable: false,
+        consumable: false,
+        crit: false,
+        embed: false,
+        granted: false,
+        hierarchy: false,
+        panel: false,
+        revealable: false,
+        statGiver: false,
+        text: false,
+        triggerable: false,
+        untrackable: false,
+        usable: false,
+        wiki: false,
+      },
+      type: "base",
+    });
 
     /** @inheritDoc */
     static defineSchema() {

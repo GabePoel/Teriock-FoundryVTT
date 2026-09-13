@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -24,13 +24,11 @@ export default class ConditionSystem
   extends mixClasses(BaseEffectSystem, WikiSystemMixin, TransformationSystemMixin, ThresholdDataMixin)
 {
   /** @inheritDoc */
-  static get Execution() {
-    return teriock.executions.document.ExpirationExecution;
-  }
+  static metadata = mergeMetadata(super.metadata, { initialKind: "flaw", type: "condition" });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialKind: "flaw", type: "condition" });
+  static get Execution() {
+    return teriock.executions.document.ExpirationExecution;
   }
 
   /** @inheritDoc */

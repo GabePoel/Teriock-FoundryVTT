@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { ResistActivation } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
@@ -14,9 +14,7 @@ export default class ResistAutomation extends mixClasses(ThresholdAutomation, Tr
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Resist"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "resist" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "resist" });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -1,16 +1,11 @@
+import { mergeMetadata } from "../../../../../helpers/construction.mjs";
 import { BasePseudoDocument } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 export default class BaseActivation extends BasePseudoDocument {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, {
-      documentName: "Activation",
-      label: _loc("DOCUMENT.Activation"),
-      typed: true,
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, { documentName: "Activation", typed: true });
 
   /** @inheritDoc */
   static get TYPE_MODELS() {

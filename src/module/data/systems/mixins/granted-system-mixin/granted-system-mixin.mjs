@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 const { fields } = foundry.data;
 
 /**
@@ -16,9 +17,7 @@ export default function GrantedSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Granted"];
 
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { crit: true, granted: true } });
-    }
+    static metadata = mergeMetadata(super.metadata, { tags: { crit: true, granted: true } });
 
     /** @inheritDoc */
     static defineSchema() {

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -12,6 +12,9 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
 export default class HarmSystem
   extends mixClasses(BasePageSystem, AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin)
 {
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { tags: { crit: true } });
+
   /** @inheritDoc */
   static get _automationTypes() {
     return [
@@ -36,11 +39,6 @@ export default class HarmSystem
       automations.TradecraftAutomation,
       automations.UseDocumentsAutomation,
     ];
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { crit: true } });
   }
 
   /** @inheritDoc */

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { nullIdField } from "../../../fields/tools/builders.mjs";
 import { BaseSystemMixin, ChildSystemMixin, InstructionsSystemMixin } from "../../mixins/_module.mjs";
 
@@ -17,16 +17,14 @@ export default class BaseItemSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = ["effects", "system.disabled", "system._dep", ...super.PRESERVED_PROPERTIES];
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["ability", "fluency", "resource"],
+    disabledPath: "system.disabled",
+    visibleTypes: ["ability", "fluency", "resource"],
+  });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["ability", "fluency", "resource"],
-      disabledPath: "system.disabled",
-      visibleTypes: ["ability", "fluency", "resource"],
-    });
-  }
+  static PRESERVED_PROPERTIES = ["effects", "system.disabled", "system._dep", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static defineSchema() {

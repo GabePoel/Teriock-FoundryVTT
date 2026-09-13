@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { BaseExpiration } from "../abstract/_module.mjs";
 
@@ -8,9 +9,7 @@ export default class CombatExpiration extends BaseExpiration {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Combat"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "combat" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "combat" });
 
   /** @inheritDoc */
   static defineSchema() {

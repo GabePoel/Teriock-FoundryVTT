@@ -1,5 +1,5 @@
 import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
@@ -25,36 +25,26 @@ export default function CommonSystemMixin(Base) {
    * @mixes RefreshSystem
    * @mixin
    */
-  // dprint-ignore
-  class CommonSystem
-    extends mixClasses(
-      Base,
-      PropagationDataMixin,
-      RulesSystemMixin,
-      RefreshSystemMixin,
-    )
-  {
+  class CommonSystem extends mixClasses(Base, PropagationDataMixin, RulesSystemMixin, RefreshSystemMixin) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Common"];
 
-    /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system.identifier", ...super.PRESERVED_PROPERTIES];
-
     /**
      * @inheritDoc
-     * @returns {Teriock.Metadata.CommonSystemMetadata}
+     * @type {Teriock.Metadata.CommonSystemMetadata}
      */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { childTypes: [], visibleTypes: [] });
-    }
+    static metadata = mergeMetadata(super.metadata, { childTypes: [], visibleTypes: [] });
+
+    /** @inheritDoc */
+    static PRESERVED_PROPERTIES = ["system.identifier", ...super.PRESERVED_PROPERTIES];
 
     /**
      * Check if an embed icon is visible.
      * @param {Teriock.Embeds.EmbedIcon} icon
      */
     #checkEmbedIcon(icon) {
-      if (typeof icon.visible === "function") return icon.visible();
-      if (typeof icon.visible === "boolean") return icon.visible;
+      if (typeof icon.visible === "function") { return icon.visible(); }
+      if (typeof icon.visible === "boolean") { return icon.visible; }
       return true;
     }
 
@@ -120,7 +110,7 @@ export default function CommonSystemMixin(Base) {
         label: _loc("TERIOCK.SHEETS.Panel.OPEN"),
         onClick: async () => await this.document.openPanelSheet(),
         visible: () => game.settings.get("teriock", "openPanelContextMenuEntry") && this.document.isViewer,
-      }
+      };
     }
 
     /**
@@ -146,9 +136,9 @@ export default function CommonSystemMixin(Base) {
       if (Object.keys(this.parent.flags.rollData ?? {}).length) {
         Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));
       }
-      if (this.parent.parent?.type) rollData[`parent.${this.parent.parent.type}`] = 1;
+      if (this.parent.parent?.type) { rollData[`parent.${this.parent.parent.type}`] = 1; }
       const actor = this.actor;
-      if (actor) Object.assign(rollData, actor.system.getScalingRollData());
+      if (actor) { Object.assign(rollData, actor.system.getScalingRollData()); }
       return Object.assign(super.getLocalRollData(), rollData);
     }
 
@@ -172,7 +162,9 @@ export default function CommonSystemMixin(Base) {
             docs = docs.filter(e => !foundry.utils.hasProperty(e, "system.revealed") || e.system.revealed);
           }
           docs = docs.sort(TERIOCK.config.document[type]?.sorter ?? pathSorterFactory("name"));
-          parts.associations.push(Panel.toAssociation(docs, TERIOCK.config.document[type].plural, TERIOCK.config.document[type].icon))
+          parts.associations.push(
+            Panel.toAssociation(docs, TERIOCK.config.document[type].plural, TERIOCK.config.document[type].icon),
+          );
         }
       }
       return parts;
@@ -201,7 +193,6 @@ export default function CommonSystemMixin(Base) {
       if (this.metadata.tags.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
       return rollData;
     }
-
   }
 
   return CommonSystem;

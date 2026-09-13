@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { fromIdentifierLocal } from "../../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
@@ -18,9 +18,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "changeQuantity" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "changeQuantity" });
 
   /** @inheritDoc */
   static defineSchema() {

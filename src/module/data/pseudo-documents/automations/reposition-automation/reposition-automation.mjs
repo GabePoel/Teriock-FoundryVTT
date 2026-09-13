@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { movementActionField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { MoveActivation } from "../../activations/_module.mjs";
@@ -15,9 +15,7 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "move" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "move" });
 
   /** @inheritDoc */
   static defineSchema() {

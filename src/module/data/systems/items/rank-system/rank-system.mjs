@@ -1,6 +1,6 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
@@ -40,14 +40,12 @@ export default class RankSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rank"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      initialCompetence: 1,
-      initialKind: "learned",
-      kinds: _replace(classConfig.kind),
-      type: "rank",
-    }, { applyOperators: true });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    initialCompetence: 1,
+    initialKind: "learned",
+    kinds: _replace(classConfig.kind),
+    type: "rank",
+  });
 
   /** @inheritDoc */
   static defineSchema() {
@@ -176,7 +174,7 @@ export default class RankSystem
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = getName(this.archetype);
-    parts.text ||= this._kindEntry.label;
+    parts.text ||= _loc(this._kindEntry.label);
     return parts;
   }
 

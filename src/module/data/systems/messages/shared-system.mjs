@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../helpers/construction.mjs";
 import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 
 /**
@@ -5,7 +6,5 @@ import InteractiveSystem from "./interactive-system/interactive-system.mjs";
  */
 export default class SharedSystem extends InteractiveSystem {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "shared" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "shared" });
 }

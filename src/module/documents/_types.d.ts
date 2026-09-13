@@ -1,25 +1,11 @@
 import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
 
-import { ConstructionNode, Panel, StatDie, VirtualCondition } from "../data/pseudo-documents/_module.mjs";
-import { PseudoCollection } from "../data/pseudo-documents/collections/_module.mjs";
-
 declare global {
   namespace Teriock.Documents {
     export type ChildType = ActiveEffectType | ItemType;
     export type CommonType = ActorType | Teriock.Documents.ChildType;
 
     export type DocumentName = (typeof ALL_DOCUMENT_TYPES)[number];
-
-    export type PseudoCollections = {
-      Activation?: PseudoCollection<Activation>;
-      Affinity?: PseudoCollection<Affinity>;
-      Automation?: PseudoCollection<Automation>;
-      ConstructionNode?: PseudoCollection<ConstructionNode>;
-      Expiration?: PseudoCollection<Expiration>;
-      Panel?: PseudoCollection<Panel>;
-      StatDie?: PseudoCollection<StatDie>;
-      VirtualCondition?: PseudoCollection<VirtualCondition>;
-    };
 
     /**
      * Store of lazily-computed values cached on a document.

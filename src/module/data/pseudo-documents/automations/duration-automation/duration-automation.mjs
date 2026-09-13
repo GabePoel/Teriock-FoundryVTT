@@ -1,4 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -10,9 +11,7 @@ export default class DurationAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Duration"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "duration" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "duration" });
 
   /** @inheritDoc */
   static defineSchema() {

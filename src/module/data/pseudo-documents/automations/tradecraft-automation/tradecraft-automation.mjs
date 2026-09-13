@@ -1,5 +1,5 @@
 import { selectTradecraftDialog, selectTradecraftsDialog } from "../../../../applications/dialogs/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { tradecraftsField } from "../../../fields/tools/builders.mjs";
 import { TradecraftActivation } from "../../activations/command-activations.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -19,9 +19,7 @@ export default class TradecraftAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true }, type: "tradecraft" });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { interactInExecution: true }, type: "tradecraft" });
 
   /** @inheritDoc */
   static defineSchema() {

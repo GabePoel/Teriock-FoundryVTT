@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { movementActionField } from "../../../fields/tools/builders.mjs";
 import { ChangeMovementActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -12,9 +12,7 @@ export default class ChangeMovementAutomation extends mixClasses(BaseAutomation,
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeMovement"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "changeMovement" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "changeMovement" });
 
   /** @inheritDoc */
   static defineSchema() {

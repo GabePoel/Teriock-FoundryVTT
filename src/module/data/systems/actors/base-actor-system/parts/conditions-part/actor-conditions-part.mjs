@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { PseudoCollectionField } from "../../../../../fields/_module.mjs";
@@ -25,9 +26,7 @@ export default function ActorConditionsPart(Base) {
    */
   class ActorConditionsPart extends Base {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { pseudos: { VirtualCondition: "system.virtualConditions" } });
-    }
+    static metadata = mergeMetadata(super.metadata, { pseudos: { VirtualCondition: "system.virtualConditions" } });
 
     /** @inheritDoc */
     static defineSchema() {

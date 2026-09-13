@@ -1,5 +1,5 @@
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent, toClass } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
@@ -28,6 +28,13 @@ export default class ApplicableEffectSystem
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
+
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["ability", "fluency", "property", "resource"],
+    tags: { usable: true },
+    visibleTypes: ["ability", "fluency", "property", "resource"],
+  });
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -64,15 +71,6 @@ export default class ApplicableEffectSystem
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.document.ExpirationExecution;
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["ability", "fluency", "property", "resource"],
-      tags: { usable: true },
-      visibleTypes: ["ability", "fluency", "property", "resource"],
-    });
   }
 
   /** @inheritDoc */

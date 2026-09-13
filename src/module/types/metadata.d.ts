@@ -4,9 +4,9 @@ declare global {
 
     export type ModelMetadata = { initialCompetence: Teriock.System.CompetenceLevel, pseudos: Record<string, string> };
 
-    type TypeTags = ModelMetadata & { embed: boolean, panel: boolean };
+    type TypeTags = { embed: boolean, panel: boolean };
 
-    export type TypeMetadata = { icon: string, tags: TypeTags, type: string };
+    export type TypeMetadata = ModelMetadata & { icon: string, tags: TypeTags, type: string };
 
     type PseudoDocumentTags = TypeTags & { mechanic: boolean, triggered: boolean };
 

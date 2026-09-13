@@ -1,7 +1,7 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import effectConfig from "../../../../constants/config/effect-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toId } from "../../../../helpers/string.mjs";
 import { deleteProperties, objectMap } from "../../../../helpers/utils.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
@@ -26,13 +26,11 @@ export default class AddDocumentsAutomation
   ];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      pseudos: { ConstructionNode: "constructionNodes" },
-      tags: { interactInExecution: true },
-      type: "addDocuments",
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    pseudos: { ConstructionNode: "constructionNodes" },
+    tags: { interactInExecution: true },
+    type: "addDocuments",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

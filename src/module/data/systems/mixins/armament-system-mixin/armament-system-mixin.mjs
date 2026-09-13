@@ -1,5 +1,5 @@
 import { AttackSystemMixin } from "../_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
@@ -27,17 +27,15 @@ export default function ArmamentSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Armament"];
 
     /** @inheritDoc */
-    static get Execution() {
-      return teriock.executions.document.ArmamentExecution;
-    }
+    static metadata = mergeMetadata(super.metadata, {
+      childTypes: ["ability", "fluency", "property", "resource", "imbuement"],
+      tags: { armament: true, crit: true },
+      visibleTypes: ["ability", "fluency", "property", "resource", "imbuement"],
+    });
 
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, {
-        childTypes: ["ability", "fluency", "property", "resource", "imbuement"],
-        tags: { armament: true, crit: true },
-        visibleTypes: ["ability", "fluency", "property", "resource", "imbuement"],
-      });
+    static get Execution() {
+      return teriock.executions.document.ArmamentExecution;
     }
 
     /** @inheritDoc */

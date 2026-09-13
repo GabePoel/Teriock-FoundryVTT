@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { toId } from "../../../../helpers/string.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
@@ -17,9 +17,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Base"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { mechanic: true } });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { mechanic: true } });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { AttackActivation } from "../../activations/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -20,9 +20,7 @@ export default class AttackAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Attack"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "attack" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "attack" });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
@@ -23,6 +24,9 @@ export default function AutomatableSystemMixin(Base) {
    * @mixin
    */
   class AutomatableSystem extends Base {
+    /** @inheritDoc */
+    static metadata = mergeMetadata(super.metadata, { pseudos: { Automation: "system.automations" } });
+
     /**
      * Array of the types of automations that this system can have.
      * @returns {(typeof Automation)[]}
@@ -41,11 +45,6 @@ export default function AutomatableSystemMixin(Base) {
           _loc(a[1].typeLabel).localeCompare(_loc(b[1].typeLabel))
         ),
       );
-    }
-
-    /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { pseudos: { Automation: "system.automations" } });
     }
 
     /**

@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../helpers/construction.mjs";
 import { RevitalizeActivation } from "../activations/command-activations.mjs";
 import { StatAutomation } from "./abstract/_module.mjs";
 
@@ -6,9 +7,7 @@ export default class RevitalizeAutomation extends StatAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Revitalize"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "revitalize" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "revitalize" });
 
   /** @inheritDoc */
   async _getActivations() {

@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../helpers/construction.mjs";
 import { toId } from "../../helpers/string.mjs";
 import TypeCollection from "./type-collection.mjs";
 
@@ -6,9 +7,7 @@ import TypeCollection from "./type-collection.mjs";
  */
 export default class ChildCollection extends TypeCollection {
   /** @inheritdoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { validate: true });
-  }
+  static metadata = mergeMetadata(super.metadata, { validate: true });
 
   /**
    * A new set of deterministically generated IDs are used because the contents of this may come from different

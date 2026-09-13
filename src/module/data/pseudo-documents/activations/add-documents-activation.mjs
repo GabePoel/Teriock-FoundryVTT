@@ -1,6 +1,6 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { icons } from "../../../constants/display/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import AddDocumentsAutomation from "../automations/add-documents-automation/add-documents-automation.mjs";
 import ConstructionNode from "../construction-node/construction-node.mjs";
 import { ConstructNodesPseudoDocumentMixin } from "../mixins/_module.mjs";
@@ -10,9 +10,7 @@ export default class AddDocumentsActivation
   extends mixClasses(AutomationActivationFactory(AddDocumentsAutomation), ConstructNodesPseudoDocumentMixin)
 {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.manifest.ui.apply });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.ui.apply });
 
   /** @inheritDoc */
   static migrateData(source, options) {

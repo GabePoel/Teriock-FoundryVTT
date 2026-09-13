@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
@@ -14,12 +15,10 @@ const { fields } = foundry.data;
  */
 export default class InteractiveSystem extends BaseMessageSystem {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      pseudos: { Activation: "system.activations", Panel: "system.panels" },
-      type: "interactive",
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    pseudos: { Activation: "system.activations", Panel: "system.panels" },
+    type: "interactive",
+  });
 
   /**
    * @inheritDoc

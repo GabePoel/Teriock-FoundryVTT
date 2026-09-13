@@ -1,4 +1,5 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { StatPoolModel } from "../../../models/_module.mjs";
 
@@ -21,17 +22,15 @@ export default function StatGiverSystemMixin(Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.StatGiver"];
 
+    /** @inheritDoc */
+    static metadata = mergeMetadata(super.metadata, { tags: { statGiver: true } });
+
     /**
      * The initial stat pool formula to use.
      * @return {Teriock.System.FormulaString}
      */
     static get _initialStatPoolFormula() {
       return "1d10";
-    }
-
-    /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { statGiver: true } });
     }
 
     /** @inheritDoc */

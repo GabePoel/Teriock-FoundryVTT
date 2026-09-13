@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../../helpers/construction.mjs";
 import MechanicPseudoDocument from "../../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
 
 const { fields } = foundry.data;
@@ -11,16 +12,13 @@ export default class BaseAutomation extends MechanicPseudoDocument {
 
   /**
    * @inheritDoc
-   * @returns {Teriock.Metadata.AutomationMetadata}
+   * @type {Teriock.Metadata.AutomationMetadata}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      documentName: "Automation",
-      label: _loc("DOCUMENT.Automation"),
-      tags: { changes: false, interactInExecution: false, triggered: false, useInExecution: false },
-      typed: true,
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    documentName: "Automation",
+    tags: { changes: false, interactInExecution: false, useInExecution: false },
+    typed: true,
+  });
 
   /** @inheritDoc */
   static get TYPE_MODELS() {

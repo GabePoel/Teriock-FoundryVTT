@@ -1,13 +1,13 @@
+import { icons } from "../../../../constants/display/_module.mjs";
 import TeriockChatMessage from "../../../../documents/chat-message/chat-message.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 export default class MacroActivation extends BaseActivation {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.document.macro, type: "macro" });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.macro, type: "macro" });
 
   /** @inheritDoc */
   static defineSchema() {

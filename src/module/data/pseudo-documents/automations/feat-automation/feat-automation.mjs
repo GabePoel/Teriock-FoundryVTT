@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FeatActivation } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
@@ -11,9 +11,7 @@ const { fields } = foundry.data;
  */
 export default class FeatAutomation extends mixClasses(ThresholdAutomation, TriggerAutomationMixin) {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "feat" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "feat" });
 
   /** @inheritDoc */
   static defineSchema() {

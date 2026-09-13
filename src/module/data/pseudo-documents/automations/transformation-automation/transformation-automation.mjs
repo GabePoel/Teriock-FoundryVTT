@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -12,9 +12,7 @@ export default class TransformationAutomation
   extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "transformation" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "transformation" });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -1,3 +1,5 @@
+import { icons } from "../../../../constants/display/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -7,12 +9,10 @@ const { fields } = foundry.data;
  */
 export default class ExpirationActivation extends BaseActivation {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, {
-      icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
-      type: "expiration",
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.pseudoDocument.expiration,
+    type: "expiration",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -1,7 +1,7 @@
 import costConfig from "../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
@@ -70,6 +70,14 @@ export default class AbilitySystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Ability"];
 
   /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["ability", "fluency", "resource"],
+    tags: { crit: true, usable: true },
+    type: "ability",
+    visibleTypes: ["ability", "fluency", "resource"],
+  });
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [
       ...super._automationTypes,
@@ -103,16 +111,6 @@ export default class AbilitySystem
       automations.TransformationAutomation,
       automations.UseDocumentsAutomation,
     ];
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["ability", "fluency", "resource"],
-      tags: { crit: true, usable: true },
-      type: "ability",
-      visibleTypes: ["ability", "fluency", "resource"],
-    });
   }
 
   /** @inheritDoc */

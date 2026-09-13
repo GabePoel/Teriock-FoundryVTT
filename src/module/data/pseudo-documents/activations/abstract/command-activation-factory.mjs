@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { getCommandEntryValue } from "../../../../helpers/interaction/command-helpers.mjs";
 import BaseActivation from "./base-activation/base-activation.mjs";
 
@@ -14,9 +15,7 @@ export default function CommandActivationFactory(entry) {
    */
   class CommandActivation extends BaseActivation {
     /** @inheritDoc */
-    static get metadata() {
-      return Object.assign(super.metadata, { type: entry.id });
-    }
+    static metadata = mergeMetadata(super.metadata, { type: entry.id });
 
     /** @inheritDoc */
     static defineSchema() {

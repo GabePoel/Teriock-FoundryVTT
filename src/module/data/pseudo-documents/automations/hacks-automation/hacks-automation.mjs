@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TakeHackActivation, TakeUnhackActivation } from "../../activations/command-activations.mjs";
@@ -15,9 +15,7 @@ export default class HacksAutomation extends mixClasses(BaseAutomation, TriggerA
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Hacks"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "hacks" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "hacks" });
 
   /** @inheritDoc */
   static defineSchema() {

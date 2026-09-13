@@ -1,5 +1,6 @@
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
@@ -22,16 +23,14 @@ export default function ConsumableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consumable"];
 
     /** @inheritDoc */
+    static metadata = mergeMetadata(super.metadata, { tags: { consumable: true } });
+
+    /** @inheritDoc */
     static PRESERVED_PROPERTIES = ["system.consumable", "system.quantity.value", ...super.PRESERVED_PROPERTIES];
 
     /** @inheritDoc */
     static get _automationTypes() {
       return [...super._automationTypes, ChangeQuantityAutomation];
-    }
-
-    /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { consumable: true } });
     }
 
     /** @inheritDoc */

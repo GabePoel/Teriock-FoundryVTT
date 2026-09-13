@@ -1,4 +1,5 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
+import { mergeMetadata } from "../../../helpers/construction.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { toId } from "../../../helpers/string.mjs";
@@ -57,9 +58,7 @@ export default class Panel extends BasePseudoDocument {
   }
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { documentName: "Panel" });
-  }
+  static metadata = mergeMetadata(super.metadata, { documentName: "Panel" });
 
   /** @inheritDoc */
   static defineSchema() {

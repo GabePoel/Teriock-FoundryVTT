@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { nullIdField } from "../../../fields/tools/builders.mjs";
 
 /**
@@ -13,12 +14,10 @@ export default function HierarchySystemMixin(Base) {
    */
   class HierarchySystem extends Base {
     /** @inheritDoc */
-    static PRESERVED_PROPERTIES = ["system._sup", ...super.PRESERVED_PROPERTIES];
+    static metadata = mergeMetadata(super.metadata, { tags: { hierarchy: true } });
 
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { hierarchy: true } });
-    }
+    static PRESERVED_PROPERTIES = ["system._sup", ...super.PRESERVED_PROPERTIES];
 
     /** @inheritDoc */
     static defineSchema() {

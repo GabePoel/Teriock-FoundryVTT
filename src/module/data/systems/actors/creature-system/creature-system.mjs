@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
@@ -14,9 +14,7 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
  */
 export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSystemMixin) {
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "creature" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "creature" });
 
   /** @inheritDoc */
   get wikiPage() {

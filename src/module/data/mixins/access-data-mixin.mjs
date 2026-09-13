@@ -16,11 +16,9 @@ export default function AccessDataMixin(Base) {
   class AccessData extends Base {
     /**
      * Data model metadata.
-     * @returns {Teriock.Metadata.ModelMetadata}
+     * @type {Teriock.Metadata.ModelMetadata}
      */
-    static get metadata() {
-      return { initialCompetence: 0, pseudos: {} };
-    }
+    static metadata = Object.freeze({ initialCompetence: 0, pseudos: {} });
 
     /**
      * Paths to forms to display in the editor.

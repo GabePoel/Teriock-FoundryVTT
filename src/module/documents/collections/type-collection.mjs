@@ -13,11 +13,9 @@ const { Collection } = foundry.utils;
 export default class TypeCollection extends Collection {
   /**
    * Metadata for this collection.
-   * @returns {Teriock.Metadata.CollectionMetadata}
+   * @type {Teriock.Metadata.CollectionMetadata}
    */
-  static get metadata() {
-    return { validate: false };
-  }
+  static metadata = Object.freeze({ validate: false });
 
   /**
    * @param {string} name

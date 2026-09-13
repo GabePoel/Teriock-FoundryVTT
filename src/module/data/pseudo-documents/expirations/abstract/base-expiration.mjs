@@ -1,5 +1,6 @@
 import mathConfig from "../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -23,13 +24,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, {
-      documentName: "Expiration",
-      label: _loc("DOCUMENT.Expiration"),
-      typed: true,
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, { documentName: "Expiration", typed: true });
 
   /** @inheritDoc */
   static get TYPE_MODELS() {

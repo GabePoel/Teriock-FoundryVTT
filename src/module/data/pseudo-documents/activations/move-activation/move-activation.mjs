@@ -1,3 +1,5 @@
+import { icons } from "../../../../constants/display/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { movementActionField } from "../../../fields/tools/builders.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -10,9 +12,7 @@ const { Ray } = foundry.canvas.geometry;
 
 export default class MoveActivation extends BaseActivation {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { icon: TERIOCK.display.icons.manifest.ui.move, type: "move" });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.ui.move, type: "move" });
 
   /** @inheritDoc */
   static defineSchema() {

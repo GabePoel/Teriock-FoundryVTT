@@ -1,5 +1,6 @@
 import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { getRollIcon } from "../../../../helpers/icon.mjs";
 import commands from "../../../../helpers/interaction/commands/_module.mjs";
 import RollAutomation from "../../automations/roll-automation/roll-automation.mjs";
@@ -9,9 +10,7 @@ const { fields } = foundry.data;
 
 export default class RollActivation extends AutomationActivationFactory(RollAutomation) {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { icon: icons.manifest.ui.dice });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.ui.dice });
 
   /** @inheritDoc */
   static defineSchema() {

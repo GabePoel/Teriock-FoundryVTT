@@ -1,4 +1,5 @@
 import affinityConfig from "../../../../constants/config/affinity-config.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import BaseAffinity from "./base-affinity/base-affinity.mjs";
 import CompetentAffinity from "./competent-affinity.mjs";
 import StackingAffinity from "./stacking-affinity/stacking-affinity.mjs";
@@ -27,13 +28,11 @@ export default function AffinityFactory(type) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, `TERIOCK.AFFINITIES.${name}`];
 
     /** @inheritDoc */
-    static get Execution() {
-      return config.competence ? teriock.executions.activity.ResistanceExecution : super.Execution;
-    }
+    static metadata = mergeMetadata(super.metadata, { type });
 
     /** @inheritDoc */
-    static get metadata() {
-      return Object.assign(super.metadata, { type });
+    static get Execution() {
+      return config.competence ? teriock.executions.activity.ResistanceExecution : super.Execution;
     }
 
     /** @inheritDoc */

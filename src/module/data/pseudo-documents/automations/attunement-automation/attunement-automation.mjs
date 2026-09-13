@@ -1,7 +1,7 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -15,9 +15,7 @@ export default class AttunementAutomation extends mixClasses(BaseAutomation, Tri
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "attunement" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "attunement" });
 
   /** @inheritDoc */
   static defineSchema() {

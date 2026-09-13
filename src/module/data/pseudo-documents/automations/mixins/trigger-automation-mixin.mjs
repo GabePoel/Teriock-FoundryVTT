@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { TriggerMechanicMixin } from "../../mixins/_module.mjs";
 
 /**
@@ -14,9 +14,7 @@ export default function TriggerAutomationMixin(Base) {
    */
   class TriggerAutomation extends mixClasses(Base, TriggerMechanicMixin) {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { triggered: true } });
-    }
+    static metadata = mergeMetadata(super.metadata, { tags: { triggered: true } });
 
     /** @inheritDoc */
     get _formPaths() {

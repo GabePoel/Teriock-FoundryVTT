@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { associationsField } from "../../../fields/tools/builders.mjs";
 import { TransformationSystemMixin } from "../../mixins/_module.mjs";
 import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
@@ -12,14 +12,12 @@ export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consequence"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
-      initialKind: "other",
-      type: "consequence",
-      visibleTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
+    initialKind: "other",
+    type: "consequence",
+    visibleTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
+  });
 
   /** @inheritDoc */
   static defineSchema() {

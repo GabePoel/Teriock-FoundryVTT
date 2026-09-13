@@ -1,5 +1,5 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { dotJoin } from "../../../helpers/string.mjs";
 import { getName } from "../../../helpers/utils.mjs";
 import { ArmorSuppressionSystemMixin, CompetenceDisplaySystemMixin } from "../mixins/_module.mjs";
@@ -17,9 +17,7 @@ export default class ArchetypeSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Archetype"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialCompetence: 1, type: "archetype" });
-  }
+  static metadata = mergeMetadata(super.metadata, { initialCompetence: 1, type: "archetype" });
 
   /** @inheritDoc */
   get _panelBars() {

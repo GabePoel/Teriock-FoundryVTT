@@ -241,7 +241,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * The document type's metadata.
-     * @returns {Teriock.Metadata.SystemMetadata}
+     * @returns {Teriock.Metadata.SystemMetadata|undefined}
      */
     get metadata() {
       return this.system?.constructor.metadata;

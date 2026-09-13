@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../helpers/construction.mjs";
 /**
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
  * @template {AnyConstructor} T
@@ -8,9 +9,7 @@ export default function WikiSystemMixin(Base) {
   /** @mixin */
   class WikiSystem extends Base {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { wiki: true } });
-    }
+    static metadata = mergeMetadata(super.metadata, { tags: { wiki: true } });
 
     /**
      * Whether this document is on the [wiki](https://wiki.teriock.com).

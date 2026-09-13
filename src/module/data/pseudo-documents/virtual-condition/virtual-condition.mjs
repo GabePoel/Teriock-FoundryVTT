@@ -1,6 +1,6 @@
 import { Panel } from "../_module.mjs";
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { dotJoin, toId } from "../../../helpers/string.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../mixins/_module.mjs";
@@ -19,6 +19,9 @@ export default class VirtualCondition
 {
   static #ALLOWED_STATUSES;
 
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { documentName: "VirtualCondition" });
+
   static get ALLOWED_STATUSES() {
     if (!this.#ALLOWED_STATUSES) { this.#ALLOWED_STATUSES = new Set(Object.keys(TERIOCK.statuses.conditions)); }
     return this.#ALLOWED_STATUSES;
@@ -27,11 +30,6 @@ export default class VirtualCondition
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.document.ExpirationExecution;
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { documentName: "VirtualCondition" });
   }
 
   /**

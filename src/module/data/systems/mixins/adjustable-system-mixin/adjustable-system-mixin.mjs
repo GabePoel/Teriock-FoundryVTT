@@ -1,4 +1,5 @@
 import effectConfig from "../../../../constants/config/effect-config.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 
 const { fields } = foundry.data;
 
@@ -17,6 +18,9 @@ export default function AdjustableSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Adjustable"];
 
     /** @inheritDoc */
+    static metadata = mergeMetadata(super.metadata, { kinds: _replace(effectConfig.kind) });
+
+    /** @inheritDoc */
     static PRESERVED_PROPERTIES = ["system.badge", ...this._adjustableTextFields, ...super.PRESERVED_PROPERTIES];
 
     /**
@@ -24,11 +28,6 @@ export default function AdjustableSystemMixin(Base) {
      */
     static get _adjustableTextFields() {
       return ["system.improvement", "system.limitation"];
-    }
-
-    /** @inheritDoc */
-    static get metadata() {
-      return Object.assign(super.metadata, { kinds: effectConfig.kind });
     }
 
     /** @inheritDoc */

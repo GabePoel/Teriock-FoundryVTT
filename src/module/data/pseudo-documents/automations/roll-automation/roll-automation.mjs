@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import FormulaField from "../../../fields/formula-field/formula-field.mjs";
@@ -16,9 +16,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Roll"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "roll" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "roll" });
 
   /** @inheritDoc */
   static defineSchema() {

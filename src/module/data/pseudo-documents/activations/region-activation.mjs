@@ -1,4 +1,5 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
@@ -10,12 +11,7 @@ const { fields } = foundry.data;
  */
 export default class RegionActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, {
-      icon: TERIOCK.display.icons.manifest.activation.placeRegion,
-      type: "region",
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.activation.placeRegion, type: "region" });
 
   /** @inheritDoc */
   static defineSchema() {

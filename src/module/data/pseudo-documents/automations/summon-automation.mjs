@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
@@ -16,9 +16,7 @@ export default class SummonAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
   /** @inheritdoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { interactInExecution: true }, type: "summon" });
-  }
+  static metadata = mergeMetadata(super.metadata, { tags: { interactInExecution: true }, type: "summon" });
 
   /** @inheritDoc */
   static defineSchema() {

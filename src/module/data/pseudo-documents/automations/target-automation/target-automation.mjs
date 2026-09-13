@@ -1,4 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -22,9 +23,7 @@ export default class TargetAutomation extends BaseAutomation {
   ];
 
   /** @inheritdoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "target" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "target" });
 
   /**
    * Make a field with a range placeholder.

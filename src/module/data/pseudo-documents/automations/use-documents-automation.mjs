@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { UseDocumentsActivation } from "../activations/_module.mjs";
 import {
   OverrideCompetencePseudoDocumentMixin,
@@ -27,12 +27,10 @@ export default class UseDocumentsAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      tags: { interactInExecution: true, useInExecution: true },
-      type: "useDocuments",
-    });
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    tags: { interactInExecution: true, useInExecution: true },
+    type: "useDocuments",
+  });
 
   /** @type {{ config: object, document: TeriockDocument|null }|null} */
   #selection = null;

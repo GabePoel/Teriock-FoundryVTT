@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 
@@ -13,9 +14,7 @@ export default function AffinableSystemMixin(Base) {
    */
   class AffinableSystem extends Base {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { pseudos: { Affinity: "system.affinities" } });
-    }
+    static metadata = mergeMetadata(super.metadata, { pseudos: { Affinity: "system.affinities" } });
 
     /** @inheritDoc */
     static defineSchema() {

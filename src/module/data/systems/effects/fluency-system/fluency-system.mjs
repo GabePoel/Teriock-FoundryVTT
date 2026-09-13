@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
@@ -32,6 +32,9 @@ export default class FluencySystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
   /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { initialCompetence: 2, tags: { usable: true }, type: "fluency" });
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [MacroAutomation];
   }
@@ -39,11 +42,6 @@ export default class FluencySystem
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.document.FluencyExecution;
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { initialCompetence: 2, tags: { usable: true }, type: "fluency" });
   }
 
   /** @inheritDoc */

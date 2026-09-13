@@ -1,5 +1,5 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
@@ -31,18 +31,16 @@ export default class PowerSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Power"];
 
   /** @inheritDoc */
-  static get _initialStatPoolFormula() {
-    return "";
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    initialCompetence: 1,
+    initialKind: "other",
+    kinds: _replace(powerConfig.kind),
+    type: "power",
+  });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      initialCompetence: 1,
-      initialKind: "other",
-      kinds: _replace(powerConfig.kind),
-      type: "power",
-    }, { applyOperators: true });
+  static get _initialStatPoolFormula() {
+    return "";
   }
 
   /** @inheritDoc */
@@ -66,7 +64,7 @@ export default class PowerSystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([this._kindEntry.label, parts.text]);
+    parts.text = dotJoin([_loc(this._kindEntry.label), parts.text]);
     parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }

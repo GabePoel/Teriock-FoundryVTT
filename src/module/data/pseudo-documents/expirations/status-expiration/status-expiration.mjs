@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { BaseExpiration } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -7,9 +8,7 @@ export default class StatusExpiration extends BaseExpiration {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Status"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "status" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "status" });
 
   /** @inheritDoc */
   static defineSchema() {

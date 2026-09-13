@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
 import CleanedEffectSystem from "./cleaned-effect-system.mjs";
@@ -12,6 +12,9 @@ export default class ResourceSystem
   extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, RevelationSystemMixin)
 {
   /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { tags: { usable: true }, type: "resource" });
+
+  /** @inheritDoc */
   static get _automationTypes() {
     return [
       ...super._automationTypes,
@@ -24,11 +27,6 @@ export default class ResourceSystem
       automations.TakeAutomation,
       automations.UseDocumentsAutomation,
     ];
-  }
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { tags: { usable: true }, type: "resource" });
   }
 
   /** @inheritDoc */

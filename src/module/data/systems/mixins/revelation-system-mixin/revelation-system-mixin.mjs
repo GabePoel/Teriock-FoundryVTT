@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 
 const { fields } = foundry.data;
@@ -17,9 +18,7 @@ export default function RevelationSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Revelation"];
 
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { tags: { revealable: true } });
-    }
+    static metadata = mergeMetadata(super.metadata, { tags: { revealable: true } });
 
     /** @inheritDoc */
     static defineSchema() {

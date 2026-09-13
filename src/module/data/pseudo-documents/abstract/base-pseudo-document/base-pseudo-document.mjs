@@ -1,4 +1,5 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { PseudoControllerDataMixin } from "../../../mixins/_module.mjs";
 
@@ -17,25 +18,23 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Base"];
 
   /**
+   * @inheritDoc.
+   * @type {Teriock.Metadata.PseudoDocumentMetadata}
+   */
+  static metadata = mergeMetadata(super.metadata, {
+    documentName: "",
+    icon: icons.manifest.ui.document,
+    tags: { embed: false, mechanic: false, panel: false, triggered: false },
+    type: "base",
+    typed: false,
+  });
+
+  /**
    * The document name of this Pseudo-Document.
    * @returns {string}
    */
   static get documentName() {
     return this.metadata.documentName;
-  }
-
-  /**
-   * @inheritDoc.
-   * @returns {Teriock.Metadata.PseudoDocumentMetadata}
-   */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      documentName: "",
-      icon: TERIOCK.display.icons.manifest.ui.document,
-      tags: { embed: false, mechanic: false, panel: false },
-      type: "base",
-      typed: false,
-    });
   }
 
   /**

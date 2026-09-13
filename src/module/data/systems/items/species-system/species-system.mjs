@@ -3,7 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
@@ -48,18 +48,16 @@ export default class SpeciesSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Species"];
 
   /** @inheritDoc */
-  static get _automationTypes() {
-    return [...super._automationTypes, automations.ToggleChildrenAutomation];
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
+    initialCompetence: 1,
+    type: "species",
+    visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
+  });
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
-      initialCompetence: 1,
-      type: "species",
-      visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
-    });
+  static get _automationTypes() {
+    return [...super._automationTypes, automations.ToggleChildrenAutomation];
   }
 
   /** @inheritDoc */

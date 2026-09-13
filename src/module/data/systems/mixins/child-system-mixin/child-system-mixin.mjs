@@ -2,7 +2,7 @@ import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from 
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
@@ -39,24 +39,22 @@ export default function ChildSystemMixin(Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
 
+    /**
+     * @inheritDoc
+     * @type {Teriock.Metadata.ChildSystemMetadata}
+     */
+    static metadata = mergeMetadata(super.metadata, {
+      initialKind: "normal",
+      kinds: systemConfig.defaultKinds,
+      tags: { triggerable: true },
+    });
+
     /** @inheritDoc */
     static PRESERVED_PROPERTIES = ["system.competence", ...super.PRESERVED_PROPERTIES];
 
     /** @inheritDoc */
     static get Execution() {
       return teriock.executions.abstract.DocumentExecution;
-    }
-
-    /**
-     * @inheritDoc
-     * @returns {Teriock.Metadata.ChildSystemMetadata}
-     */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, {
-        initialKind: "normal",
-        kinds: systemConfig.defaultKinds,
-        tags: { triggerable: true },
-      });
     }
 
     /** @inheritDoc */
@@ -156,7 +154,11 @@ export default function ChildSystemMixin(Base) {
      * @returns {Teriock.Panels.PanelBar}
      */
     get _kindBar() {
-      return { icon: this._kindEntry.icon, label: this.schema.fields.kind.label, wrappers: [this._kindEntry.label] };
+      return {
+        icon: this._kindEntry.icon,
+        label: this.schema.fields.kind.label,
+        wrappers: [_loc(this._kindEntry.label)],
+      };
     }
 
     /**

@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { defaultJSONField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -6,9 +7,7 @@ export default class RollStyleAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.RollStyle"];
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { type: "rollStyle" });
-  }
+  static metadata = mergeMetadata(super.metadata, { type: "rollStyle" });
 
   /** @inheritDoc */
   static defineSchema() {

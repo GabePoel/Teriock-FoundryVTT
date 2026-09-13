@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 
@@ -13,9 +14,7 @@ export default function ExpirableSystemMixin(Base) {
    */
   class ExpirableSystem extends Base {
     /** @inheritDoc */
-    static get metadata() {
-      return foundry.utils.mergeObject(super.metadata, { pseudos: { Expiration: "system.expirations" } });
-    }
+    static metadata = mergeMetadata(super.metadata, { pseudos: { Expiration: "system.expirations" } });
 
     /** @inheritDoc */
     static defineSchema() {
