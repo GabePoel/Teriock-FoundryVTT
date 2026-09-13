@@ -1,8 +1,10 @@
 declare global {
   namespace Teriock.Metadata {
-    export type BaseMetadata = { initialCompetence: Teriock.System.CompetenceLevel, pseudos: Record<string, string> };
+    export type CollectionMetadata = { validate: boolean };
 
-    type TypeTags = BaseMetadata & { embed: boolean, panel: boolean };
+    export type ModelMetadata = { initialCompetence: Teriock.System.CompetenceLevel, pseudos: Record<string, string> };
+
+    type TypeTags = ModelMetadata & { embed: boolean, panel: boolean };
 
     export type TypeMetadata = { icon: string, tags: TypeTags, type: string };
 

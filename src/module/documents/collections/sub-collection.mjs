@@ -5,6 +5,11 @@ import TypeCollection from "./type-collection.mjs";
  * @see {HierarchyDocumentMixin}
  */
 export default class SubCollection extends TypeCollection {
+  /** @inheritdoc */
+  static get metadata() {
+    return Object.assign(super.metadata, { validate: true });
+  }
+
   /** @inheritDoc */
   _validateDocument(document) {
     return foundry.utils.getProperty(document, "system._sup") === this.model?.id;

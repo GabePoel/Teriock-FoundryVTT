@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
-import { PseudoCollectionsDataMixin } from "../../../mixins/_module.mjs";
+import { PseudoControllerDataMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,7 +12,7 @@ const { fields } = foundry.data;
 /**
  * @property {AccessData} parent
  */
-export default class BasePseudoDocument extends mixClasses(BaseDataModel, PseudoCollectionsDataMixin) {
+export default class BasePseudoDocument extends mixClasses(BaseDataModel, PseudoControllerDataMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Base"];
 

@@ -1,5 +1,5 @@
 import { BasePseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
-import { PseudoCollection } from "../pseudo-documents/collections/_module.mjs";
+import { PseudoCollection, SourcePseudoCollection } from "../pseudo-documents/collections/_module.mjs";
 
 const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
@@ -67,20 +67,24 @@ export default class PseudoCollectionField extends TypedObjectField {
     return this.documentClass.metadata.documentName;
   }
 
+  /**
+   * The Collection implementation to use when initializing the collection.
+   * @returns {typeof PseudoCollection}
+   */
+  get implementation() {
+    return this.persisted ? SourcePseudoCollection : PseudoCollection;
+  }
+
   /** @inheritDoc */
-  initialize(value, model, options = {}) {
-    // TODO: Make initialization happen more like embedded collections.
-    const obj = super.initialize(value, model, options);
-    return new PseudoCollection(
-      this.name,
-      model,
-      Object.values(obj).filter(inst => inst instanceof BasePseudoDocument),
-      { documentClass: this.documentClass, types: this.options.types ? Object.keys(this.options?.types) : ["base"] },
-    );
+  initialize(_value, model, options = {}) {
+    const controller = model instanceof BasePseudoDocument ? model : model.document;
+    const collection = controller?.pseudoCollections?.[this.documentName] ?? null;
+    collection?.initialize(model, options);
+    return collection;
   }
 
   /** @inheritDoc */
   toObject(value) {
-    return super.toObject(Object.fromEntries(value.entries()));
+    return super.toObject(Object.fromEntries(value?.entries() ?? []));
   }
 }

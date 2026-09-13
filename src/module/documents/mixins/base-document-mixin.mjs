@@ -1,4 +1,4 @@
-import { AbstractDataMixin, PseudoCollectionsDataMixin } from "../../data/mixins/_module.mjs";
+import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
@@ -16,10 +16,10 @@ import { toId, toKebabCase } from "../../helpers/string.mjs";
 export default function BaseDocumentMixin(Base) {
   /**
    * @mixes AbstractData
-   * @mixes PseudoCollectionsData
+   * @mixes PseudoControllerData
    * @mixin
    */
-  class BaseDocument extends mixClasses(Base, AbstractDataMixin, PseudoCollectionsDataMixin) {
+  class BaseDocument extends mixClasses(Base, AbstractDataMixin, PseudoControllerDataMixin) {
     /**
      * Metadata that Teriock uses but Foundry doesn't.
      * @returns {Teriock.Documents.DocumentMetadata}

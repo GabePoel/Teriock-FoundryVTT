@@ -1,11 +1,32 @@
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 
 /**
+ * @import { DataModel } from "@common/abstract/_module.mjs";
+ * @import PseudoCollectionField from "../../fields/pseudo-collection-field.mjs";
+ */
+
+/**
  * Used for the specific task of containing embedded Pseudo-Document instances within a parent Document.
  * @template {{ type: string }} TPseudo
  * @extends {TypeCollection<TPseudo>}
  */
 export default class PseudoCollection extends TypeCollection {
+  /**
+   * @inheritDoc
+   * @param {PseudoCollectionField} [options.field]
+   */
+  constructor(name, parent, sourceArray = [], options = {}) {
+    const field = options.field;
+    if (field) {
+      options = { documentClass: field.documentClass, types: Object.keys(field.element.types), ...options };
+    }
+    super(name, parent, sourceArray, options);
+    Object.defineProperty(this, "field", { configurable: false, value: field ?? null, writable: false });
+  }
+
+  /** @type {PseudoCollectionField|null} */
+  field;
+
   /**
    * Active Pseudo-Documents.
    * @returns {TPseudo[]}
@@ -46,5 +67,15 @@ export default class PseudoCollection extends TypeCollection {
       if (typeof options.isPassive === "boolean" && p.isPassive !== options.isPassive) { return false; }
       return !(typeof options.competence === "number" && !p.competencies?.has?.(options.competence));
     });
+  }
+
+  /**
+   * Initialize the model collection.
+   * @param {DataModel} model
+   * @param {object} [_options]
+   */
+  initialize(model, _options = {}) {
+    this.model = model;
+    this.clear();
   }
 }

@@ -1,7 +1,7 @@
 const { Collection } = foundry.utils;
 
 /**
- * @import { EmbeddedCollection } from "@common/abstract/_module.mjs";
+ * @import { DataModel, EmbeddedCollection } from "@common/abstract/_module.mjs";
  */
 
 /**
@@ -11,12 +11,28 @@ const { Collection } = foundry.utils;
  * @extends {Collection<ID<TDocument>, TDocument>}
  */
 export default class TypeCollection extends Collection {
+  /**
+   * Metadata for this collection.
+   * @returns {Teriock.Metadata.CollectionMetadata}
+   */
+  static get metadata() {
+    return { validate: false };
+  }
+
+  /**
+   * @param {string} name
+   * @param {DataModel} parent
+   * @param {object[]} [sourceArray]
+   * @param {object} [options]
+   * @param {string[]} [options.types]
+   * @param {typeof DataModel} [options.documentClass]
+   */
   constructor(name, parent, sourceArray = [], options = {}) {
     super();
     this.addDocuments(sourceArray);
     Object.defineProperties(this, {
       documentClass: { configurable: true, value: options.documentClass ?? parent?.constructor, writable: false },
-      model: { configurable: false, value: parent, writable: false },
+      model: { configurable: false, value: parent, writable: true },
       name: { configurable: false, value: name, writable: false },
       types: {
         configurable: false,
@@ -31,14 +47,10 @@ export default class TypeCollection extends Collection {
   /**
    * @template T
    * @param {T[]} documents
-   * @param {object} [options]
-   * @param {boolean} [options.validate=true]
    * @returns {Promise<T[]>}
    */
-  async #resolveDocuments(documents, options = {}) {
-    const results = await Promise.all(
-      documents.filter(d => !options.validate || this._validateDocument(d)).map(d => fromUuid(d?.uuid)),
-    );
+  async #resolveDocuments(documents) {
+    const results = await Promise.all(documents.map(d => fromUuid(d?.uuid)));
     return results.filter(Boolean);
   }
 
@@ -50,7 +62,7 @@ export default class TypeCollection extends Collection {
 
   /**
    * The parent Document to which this ChildCollection instance belongs.
-   * @type {TeriockDocument}
+   * @type {DataModel}
    */
   model;
 
@@ -80,6 +92,7 @@ export default class TypeCollection extends Collection {
       });
       this.#documentsByType = documentTypeMap;
     }
+    if (!this.metadata.validate) { return this.#documentsByType; }
     const out = {};
     for (const type of Object.keys(this.#documentsByType)) {
       Object.defineProperty(out, type, {
@@ -104,8 +117,17 @@ export default class TypeCollection extends Collection {
     );
   }
 
+  /**
+   * Metadata for this collection.
+   * @returns {Teriock.Metadata.CollectionMetadata}
+   */
+  get metadata() {
+    return this.constructor.metadata;
+  }
+
   /** @inheritDoc */
   get size() {
+    if (!this.metadata.validate) { return super.size; }
     let size = 0;
     for (const _value of this.values()) { size += 1; }
     return size;
@@ -153,12 +175,16 @@ export default class TypeCollection extends Collection {
 
   /** @inheritDoc */
   *entries() {
-    for (const [key, value] of super.entries()) { if (this._validateDocument(value)) { yield [key, value]; } }
+    const validate = this.metadata.validate;
+    for (const [key, value] of super.entries()) {
+      if (!validate || this._validateDocument(value)) { yield [key, value]; }
+    }
   }
 
   /** @inheritDoc */
   get(key, options) {
     const value = super.get(key, options);
+    if (!this.metadata.validate) { return value; }
     if (value === undefined || this._validateDocument(value)) { return value; }
     if (options?.strict) {
       throw new Error(`The key ${key} does not exist in the ${this.constructor.name} Collection`);
@@ -190,7 +216,7 @@ export default class TypeCollection extends Collection {
    * @returns {Promise<Extract<TDocument, { type: T }>[]>}
    */
   async getType(type) {
-    return this.#resolveDocuments(this.getTypeSync(type), { validate: false });
+    return this.#resolveDocuments(this.getTypeSync(type));
   }
 
   /**
@@ -205,12 +231,17 @@ export default class TypeCollection extends Collection {
 
   /** @inheritDoc */
   has(key) {
+    if (!this.metadata.validate) { return super.has(key); }
     const value = super.get(key);
     return value !== undefined && this._validateDocument(value);
   }
 
   /** @inheritDoc */
   *keys() {
+    if (!this.metadata.validate) {
+      yield* super.keys();
+      return;
+    }
     for (const [key] of this.entries()) { yield key; }
   }
 
@@ -250,8 +281,9 @@ export default class TypeCollection extends Collection {
 
   /** @inheritDoc */
   *values() {
+    const validate = this.metadata.validate;
     for (const value of super.values()) {
-      if (this._validateDocument(value)) { yield value; }
+      if (!validate || this._validateDocument(value)) { yield value; }
     }
   }
 }
