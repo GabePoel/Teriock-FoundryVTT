@@ -20,9 +20,9 @@ declare module "./journal-entry-page.mjs" {
 }
 
 declare global {
-  export type TeriockJournalEntryPage<T extends JournalEntryPageType = JournalEntryPageType> = T extends unknown
-    ? PageSubtype<T>
-    : never;
+  export type TeriockJournalEntryPage<T extends JournalEntryPageType = JournalEntryPageType> =
+    & (T extends unknown ? PageSubtype<T> : never)
+    & PageClass;
 }
 
 export {};

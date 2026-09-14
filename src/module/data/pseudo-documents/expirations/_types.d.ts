@@ -1,4 +1,5 @@
 import { CombatExpiration, StatusExpiration, TriggerExpiration } from "./_module.mjs";
+import { BaseExpiration } from "./abstract/_module.mjs";
 
 declare global {
   export interface ExpirationTypeMap {
@@ -8,7 +9,7 @@ declare global {
   }
 
   export type ExpirationType = TypeMapKey<ExpirationTypeMap>;
-  export type Expiration<T extends ExpirationType = ExpirationType> = ExpirationTypeMap[T];
+  export type Expiration<T extends ExpirationType = ExpirationType> = ExpirationTypeMap[T] & BaseExpiration;
 }
 
 export {};

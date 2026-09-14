@@ -25,9 +25,9 @@ declare module "./chat-message.mjs" {
 }
 
 declare global {
-  export type TeriockChatMessage<T extends ChatMessageType = ChatMessageType> = T extends unknown
-    ? ChatMessageSubtype<T>
-    : never;
+  export type TeriockChatMessage<T extends ChatMessageType = ChatMessageType> =
+    & (T extends unknown ? ChatMessageSubtype<T> : never)
+    & ChatMessageClass;
 
   namespace Teriock.Data {
     export interface ChatMessageData {
@@ -35,7 +35,7 @@ declare global {
       content: string;
       rolls: BaseRoll[];
       speaker: ChatSpeakerData;
-      system: Partial<Teriock.Data.InteractiveMessageData>;
+      system: object;
     }
   }
 }

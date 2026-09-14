@@ -19,7 +19,7 @@ declare module "./card.mjs" {
 }
 
 declare global {
-  export type TeriockCard<T extends CardType = CardType> = T extends unknown ? CardSubtype<T> : never;
+  export type TeriockCard<T extends CardType = CardType> = (T extends unknown ? CardSubtype<T> : never) & CardClass;
 }
 
 export {};

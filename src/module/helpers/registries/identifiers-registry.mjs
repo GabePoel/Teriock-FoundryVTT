@@ -14,33 +14,33 @@ import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
  */
 
 /**
- * Registry of document UUIDs based on their identifiers. Many documents could have the same identifier, but there is
- * only one canonical document for each identifier. Documents in Compendium packs are preferred over ones in the world
+ * Registry of Document UUIDs based on their identifiers. Many Documents could have the same identifier, but there is
+ * only one canonical Document for each identifier. Documents in Compendium packs are preferred over ones in the world
  * for establishing a single source of truth in regard to what identifiers refer to.
  * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
  */
 export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   /**
-   * The types of documents which can be tracked even if they're embedded.
+   * The types of Documents which can be tracked even if they're embedded.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
   #embeddedDocumentNames = new Set(["JournalEntryPage"]);
 
   /**
-   * Registration of document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
+   * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
    * priority score and name.
    * @type {Map<Teriock.Documents.CommonType|null, Map<Identifier, Map<UUID<IdentifiableDocument>, TrackedUuid>>>}
    */
   #identifiers = new Map();
 
   /**
-   * The types of documents which can support children with indexed identifiers.
+   * The types of Documents which can support embedded Documents with indexed identifiers.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
   #parentDocumentNames = new Set(["JournalEntry"]);
 
   /**
-   * The types of documents which support having identifiers.
+   * The types of Documents which support having identifiers.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
   #primaryDocumentNames = new Set(["ActiveEffect", "Actor", "Item", "JournalEntryPage"]);
@@ -71,7 +71,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   #getUuidPriority(uuid) {
     const parsed = foundry.utils.parseUuid(uuid);
-    // Null value if the UUID is invalid or if the document is a valid type
+    // Null value if the UUID is invalid or if the Document is a valid type
     if (!parsed || !this.#primaryDocumentNames.has(parsed.type)) { return null; }
     // Document must either be at the top level of a collection or the second level if it is an allowed embedded type
     const embeddable = parsed.embedded.length === 0
@@ -91,7 +91,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Deterministically convert a document's `_id` into an unsigned integer.
+   * Deterministically convert a Document's `_id` into an unsigned integer.
    * @param {string} str
    * @returns {number}
    */
@@ -106,7 +106,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Internally associate an identifier with a document UUID.
+   * Internally associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
    * @param {string} [name]
@@ -137,7 +137,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * The types of documents which need to be tracked for having identifiers.
+   * The types of Documents which need to be tracked for having identifiers.
    * @return {Set<Teriock.Documents.DocumentName>}
    */
   get documentNames() {
@@ -150,7 +150,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Get a canonical document from its identifier.
+   * Get a canonical Document from its identifier.
    * @param {TypedIdentifier} identifier
    * @param {Teriock.System.GlobalFetchOptions} [options]
    * @returns {Promise<IdentifiableDocument|null>}
@@ -160,7 +160,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Get a canonical document from its identifier synchronously.
+   * Get a canonical Document from its identifier synchronously.
    * @param {TypedIdentifier} identifier
    * @param {Teriock.System.SyncFetchOptions} [options]
    * @returns {IdentifiableDocument|null}
@@ -170,7 +170,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Get the UUID for the canonical document associated with an identifier.
+   * Get the UUID for the canonical Document associated with an identifier.
    * @param {TypedIdentifier} identifier
    * @returns {UUID<IdentifiableDocument>|undefined}
    */
@@ -183,7 +183,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Get the name of the canonical document associated with an identifier.
+   * Get the name of the canonical Document associated with an identifier.
    * @param {TypedIdentifier} identifier
    * @param {object} [options]
    * @param {boolean} [options.forced] - Force a string to be provided. This will be either the provided identifier or
@@ -241,7 +241,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Associate an identifier with a document UUID.
+   * Associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
    * @param {string} [name]
@@ -283,7 +283,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Track a document.
+   * Track a Document.
    * @param {IdentifiableDocument} document
    */
   trackDocument(document) {
@@ -313,7 +313,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
-   * Untrack a document.
+   * Untrack a Document.
    * @param {IdentifiableDocument} document
    */
   untrackDocument(document) {

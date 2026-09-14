@@ -33,7 +33,9 @@ declare module "./actor.mjs" {
 }
 
 declare global {
-  export type TeriockActor<T extends ActorType = ActorType> = T extends unknown ? ActorSubtype<T> : never;
+  export type TeriockActor<T extends ActorType = ActorType> =
+    & (T extends unknown ? ActorSubtype<T> : never)
+    & ActorClass;
 }
 
 export {};

@@ -8,6 +8,7 @@ interface ActiveEffectSubtype<T extends ActiveEffectType> extends ActiveEffectCl
 }
 
 declare module "./active-effect.mjs" {
+  // @ts-expect-error Recursive
   export default interface TeriockActiveEffect {
     _id: Readonly<ID<TeriockActiveEffect>>;
     system: BaseEffectSystem;
@@ -22,7 +23,7 @@ declare module "./active-effect.mjs" {
 declare global {
   export type TeriockActiveEffect<T extends ActiveEffectType = ActiveEffectType> = T extends unknown
     ? ActiveEffectSubtype<T>
-    : never;
+    : never & ActiveEffectClass;
 }
 
 export {};

@@ -43,6 +43,7 @@ import {
   UseExternalActivation,
   UseLocalActivation,
 } from "./_module.mjs";
+import { BaseActivation } from "./abstract/_module.mjs";
 
 declare global {
   export interface ActivationTypeMap {
@@ -92,7 +93,7 @@ declare global {
   }
 
   export type ActivationType = TypeMapKey<ActivationTypeMap>;
-  export type Activation<T extends ActivationType = ActivationType> = ActivationTypeMap[T];
+  export type Activation<T extends ActivationType = ActivationType> = ActivationTypeMap[T] & BaseActivation;
 }
 
 export {};
