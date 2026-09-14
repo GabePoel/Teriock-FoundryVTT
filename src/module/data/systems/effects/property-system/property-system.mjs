@@ -2,7 +2,6 @@ import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs"
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import {
   AdjustableSystemMixin,
   ConsumableSystemMixin,
@@ -53,20 +52,7 @@ export default class PropertySystem
 
   /** @inheritDoc */
   static get _automationTypes() {
-    return [
-      ...super._automationTypes,
-      automations.ChangesAutomation,
-      automations.CommonOutcomesAutomation,
-      automations.CoverAutomation,
-      automations.HacksAutomation,
-      automations.LightAutomation,
-      automations.MacroAutomation,
-      automations.RollAutomation,
-      automations.StatusAutomation,
-      automations.TakeAutomation,
-      automations.TradecraftAutomation,
-      automations.UseDocumentsAutomation,
-    ];
+    return [...super._automationTypes, ...this._activationAutomationTypes, ...this._passiveAutomationTypes];
   }
 
   /** @inheritDoc */

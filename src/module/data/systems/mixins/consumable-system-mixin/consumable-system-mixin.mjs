@@ -4,7 +4,6 @@ import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
-import { ChangeQuantityAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -27,11 +26,6 @@ export default function ConsumableSystemMixin(Base) {
       preserveOnRefresh: ["system.consumable", "system.quantity.value", ...super.metadata.preserveOnRefresh],
       tags: { consumable: true },
     });
-
-    /** @inheritDoc */
-    static get _automationTypes() {
-      return [...super._automationTypes, ChangeQuantityAutomation];
-    }
 
     /** @inheritDoc */
     static defineSchema() {

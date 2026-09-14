@@ -14,7 +14,7 @@ export default class ChangeCompetenceAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeCompetence"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "changeCompetence" });
+  static metadata = mergeMetadata(super.metadata, { tags: { passive: true }, type: "changeCompetence" });
 
   /** @inheritDoc */
   static defineSchema() {

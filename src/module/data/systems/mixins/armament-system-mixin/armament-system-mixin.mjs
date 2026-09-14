@@ -35,6 +35,11 @@ export default function ArmamentSystemMixin(Base) {
     });
 
     /** @inheritDoc */
+    static get _automationTypes() {
+      return [...super._automationTypes, ...this._activationAutomationTypes];
+    }
+
+    /** @inheritDoc */
     static get Execution() {
       return teriock.executions.document.ArmamentExecution;
     }

@@ -17,28 +17,7 @@ export default class HarmSystem
 
   /** @inheritDoc */
   static get _automationTypes() {
-    return [
-      automations.AddDocumentsAutomation,
-      automations.AttackAutomation,
-      automations.AttunementAutomation,
-      automations.ChangeMovementAutomation,
-      automations.MacroAutomation,
-      automations.StatusAutomation,
-      automations.CommonOutcomesAutomation,
-      automations.CoverAutomation,
-      automations.FeatAutomation,
-      automations.HacksAutomation,
-      automations.HealAutomation,
-      automations.RegionAutomation,
-      automations.ResistAutomation,
-      automations.RevitalizeAutomation,
-      automations.RollAutomation,
-      automations.RollStyleAutomation,
-      automations.SummonAutomation,
-      automations.TakeAutomation,
-      automations.TradecraftAutomation,
-      automations.UseDocumentsAutomation,
-    ];
+    return [...super._automationTypes, ...this._activationAutomationTypes, automations.RollStyleAutomation];
   }
 
   /** @inheritDoc */

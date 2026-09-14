@@ -18,7 +18,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "changeQuantity" });
+  static metadata = mergeMetadata(super.metadata, { requires: { consumable: true }, type: "changeQuantity" });
 
   /** @inheritDoc */
   static defineSchema() {

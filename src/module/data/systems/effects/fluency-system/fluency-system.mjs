@@ -4,7 +4,6 @@ import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
-import { MacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { CompetenceDisplaySystemMixin, RevelationSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
@@ -33,11 +32,6 @@ export default class FluencySystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { initialCompetence: 2, tags: { usable: true }, type: "fluency" });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [MacroAutomation];
-  }
 
   /** @inheritDoc */
   static get Execution() {

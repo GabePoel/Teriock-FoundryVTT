@@ -4,7 +4,6 @@ import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mj
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import {
   ArmamentSystemMixin,
   AttunableSystemMixin,
@@ -74,19 +73,6 @@ export default class EquipmentSystem
     type: "equipment",
     visibleTypes: ["equipment", ...super.metadata.visibleTypes],
   });
-
-  static get _automationTypes() {
-    return [
-      ...super._automationTypes,
-      automations.MacroAutomation,
-      automations.CommonOutcomesAutomation,
-      automations.CoverAutomation,
-      automations.HacksAutomation,
-      automations.RollAutomation,
-      automations.TakeAutomation,
-      automations.UseDocumentsAutomation,
-    ];
-  }
 
   /** @inheritDoc */
   static get Execution() {

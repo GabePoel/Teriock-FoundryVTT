@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
 import CleanedEffectSystem from "./cleaned-effect-system.mjs";
 
@@ -16,17 +15,7 @@ export default class ResourceSystem
 
   /** @inheritDoc */
   static get _automationTypes() {
-    return [
-      ...super._automationTypes,
-      automations.TradecraftAutomation,
-      automations.CommonOutcomesAutomation,
-      automations.MacroAutomation,
-      automations.CoverAutomation,
-      automations.HacksAutomation,
-      automations.RollAutomation,
-      automations.TakeAutomation,
-      automations.UseDocumentsAutomation,
-    ];
+    return [...super._automationTypes, ...this._activationAutomationTypes];
   }
 
   /** @inheritDoc */

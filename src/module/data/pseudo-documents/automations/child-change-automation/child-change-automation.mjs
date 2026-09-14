@@ -15,7 +15,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChildChange"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "childChange" });
+  static metadata = mergeMetadata(super.metadata, { tags: { passive: true }, type: "childChange" });
 
   /** @inheritDoc */
   static defineSchema() {

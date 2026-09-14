@@ -8,7 +8,7 @@ const { fields } = foundry.data;
 
 export default class ChangesAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { tags: { changes: true }, type: "changes" });
+  static metadata = mergeMetadata(super.metadata, { tags: { changes: true, passive: true }, type: "changes" });
 
   /** @inheritDoc */
   static defineSchema() {

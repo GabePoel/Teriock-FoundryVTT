@@ -7,7 +7,7 @@ export default class SuppressAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Suppress"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "suppress" });
+  static metadata = mergeMetadata(super.metadata, { tags: { passive: true }, type: "suppress" });
 
   /** @inheritDoc */
   static defineSchema() {

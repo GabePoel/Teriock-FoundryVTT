@@ -16,7 +16,8 @@ export default class BaseAutomation extends MechanicPseudoDocument {
    */
   static metadata = mergeMetadata(super.metadata, {
     documentName: "Automation",
-    tags: { changes: false, interactInExecution: false, useInExecution: false },
+    requires: {},
+    tags: { changes: false, interactInExecution: false, passive: false, useInExecution: false },
     typed: true,
   });
 

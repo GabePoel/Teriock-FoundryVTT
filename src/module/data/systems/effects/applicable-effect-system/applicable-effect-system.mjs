@@ -3,7 +3,6 @@ import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs"
 import { dedent, toClass } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { AffinableSystemMixin, ExpirableSystemMixin, MetaphysicsSystemMixin } from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -38,34 +37,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   static get _automationTypes() {
-    return [
-      ...super._automationTypes,
-      automations.MacroAutomation,
-      automations.AddDocumentsAutomation,
-      automations.AttackAutomation,
-      automations.AttunementAutomation,
-      automations.ChangeCompetenceAutomation,
-      automations.ChangeMovementAutomation,
-      automations.ChangesAutomation,
-      automations.ChildChangeAutomation,
-      automations.CommonOutcomesAutomation,
-      automations.CoverAutomation,
-      automations.FeatAutomation,
-      automations.HacksAutomation,
-      automations.HealAutomation,
-      automations.LightAutomation,
-      automations.RegionAutomation,
-      automations.RepositionAutomation,
-      automations.ResistAutomation,
-      automations.RevitalizeAutomation,
-      automations.RollAutomation,
-      automations.StatusAutomation,
-      automations.SummonAutomation,
-      automations.SuppressAutomation,
-      automations.TakeAutomation,
-      automations.TradecraftAutomation,
-      automations.UseDocumentsAutomation,
-    ];
+    return [...super._automationTypes, ...this._activationAutomationTypes, ...this._passiveAutomationTypes];
   }
 
   /** @inheritDoc */

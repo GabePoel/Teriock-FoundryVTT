@@ -41,7 +41,7 @@ class AutomationLightData extends LightData {
 
 export default class LightAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { tags: { changes: true }, type: "light" });
+  static metadata = mergeMetadata(super.metadata, { tags: { changes: true, passive: true }, type: "light" });
 
   /** @inheritDoc */
   static defineSchema() {

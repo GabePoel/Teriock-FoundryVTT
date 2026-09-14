@@ -19,10 +19,14 @@ declare global {
     type AutomationTags = PseudoDocumentTags & {
       changes: boolean;
       interactInExecution: boolean;
+      passive: boolean;
       useInExecution: boolean;
     };
 
-    export type AutomationMetadata = PseudoDocumentMetadata & { tags: AutomationTags };
+    export type AutomationMetadata = PseudoDocumentMetadata & {
+      requires: Partial<SystemMetadataTags>;
+      tags: AutomationTags;
+    };
 
     type SystemMetadataTags = TypeTags & {
       armament: boolean;
