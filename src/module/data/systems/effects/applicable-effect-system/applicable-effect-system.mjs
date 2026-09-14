@@ -156,6 +156,11 @@ export default class ApplicableEffectSystem
     return true;
   }
 
+  /** @inheritDoc */
+  get makesChatData() {
+    return false;
+  }
+
   /**
    * The document that this is sustained by.
    * @return {TeriockDocument|null}

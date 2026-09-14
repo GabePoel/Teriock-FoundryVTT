@@ -45,6 +45,7 @@ export default class PropertySystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["property"],
+    crit: { enabled: true, where: "chatData" },
     tags: { usable: true },
     type: "property",
     visibleTypes: ["property"],

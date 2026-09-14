@@ -116,7 +116,7 @@ export default function ImpactsExecutionMixin(Base) {
      */
     async _buildActivations() {
       this.automations.addDocuments((await Promise.all(this.rolls.map(r => r.getAutomations()))).flat());
-      this.automations.resetDocuments(this.automations.filter(a => a.crit.has(Number(this.crit))));
+      this._dropCritMismatches();
       return super._buildActivations();
     }
 
@@ -138,8 +138,16 @@ export default function ImpactsExecutionMixin(Base) {
       if (this.crit) { this.tags.push(_loc("TERIOCK.DIALOGS.Boost.TAGS.crit")); }
     }
 
+    /**
+     * Drop automations that don't apply to the chosen crit state.
+     */
+    _dropCritMismatches() {
+      this.automations.resetDocuments(this.automations.filter(a => a.crit.has(Number(this.crit))));
+    }
+
     /** @inheritDoc */
     async _postInput() {
+      this._dropCritMismatches();
       const boosts = Math.max(0, this.boosts - this.deboosts);
       for (const impact of this.impacts) { this._boostsResolved[impact] = boosts; }
       return super._postInput();

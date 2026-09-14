@@ -33,6 +33,11 @@ export default class DurationAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
+  get makesEffectData() {
+    return true;
+  }
+
+  /** @inheritDoc */
   async interactOnExecutionEffectData(execution) {
     this.#seconds = await BaseRoll.getValue(this.duration.formula, execution.getRollData());
   }

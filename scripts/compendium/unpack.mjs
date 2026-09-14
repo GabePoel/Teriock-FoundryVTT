@@ -2,7 +2,7 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 
-import { toKebabCase } from "../../src/module/helpers/string.mjs";
+import { isKebabCase, toKebabCase } from "../../src/module/helpers/string.mjs";
 import { cleanDocument, loadDefaults } from "./clean-fields.mjs";
 import {
   DOCUMENT_COLLECTION_KEYS,
@@ -40,6 +40,18 @@ function registerDocument(pack, doc) {
 }
 
 /**
+ * Convert a string to a kepap-case path.
+ * @param {string} str - The string to convert.
+ * @returns {string} The kebab-case version of the string.
+ */
+export function toPathKebabCase(str) {
+  return isKebabCase(str)
+    ? str
+    : str.replace(/[\s_]+/g, "-").replace(/([a-z\d])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+      .toLowerCase();
+}
+
+/**
  * Derive the name for a document by searching through the pack registry.
  * @param {string} pack
  * @param {string} id
@@ -60,8 +72,8 @@ function deriveName(pack, id) {
  * @param {boolean} buildRegistry
  */
 async function unpackPack(pack, buildRegistry) {
-  prefix = `./src/packs/${toKebabCase(pack)}`;
-  const directory = `./src/packs/${toKebabCase(pack)}`;
+  prefix = `./src/packs/${toPathKebabCase(pack)}`;
+  const directory = `./src/packs/${toPathKebabCase(pack)}`;
   if (buildRegistry) { console.log(`Building registry for ${pack}`); }
   else { console.log(`Unpacking ${pack} to ${directory}`); }
   const extractOptions = {

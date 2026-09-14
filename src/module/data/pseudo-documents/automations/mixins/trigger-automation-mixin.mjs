@@ -24,23 +24,20 @@ export default function TriggerAutomationMixin(Base) {
     /** @inheritDoc */
     get _triggerPaths() {
       const paths = super._triggerPaths;
-      if (
-        !this.activeTriggers.size && this.metadata.tags.interactInExecution
-        && this.document?.system?.metadata?.tags?.usable
-      ) {
+      if (this.makesChatData && this.metadata.tags.interactInExecution && this.document?.metadata?.tags?.usable) {
         paths.push("interactInExecution");
       }
       return paths;
     }
 
     /** @inheritDoc */
-    get canAddToEffect() {
-      return this.activeTriggers.size > 0 && super.canAddToEffect;
+    get isCopiedToEffect() {
+      return this.activeTriggers.size > 0 && super.isCopiedToEffect;
     }
 
     /** @inheritDoc */
-    get canGetActivations() {
-      return super.canGetActivations && !this.activeTriggers.size;
+    get makesChatData() {
+      return !this.activeTriggers.size;
     }
 
     /**

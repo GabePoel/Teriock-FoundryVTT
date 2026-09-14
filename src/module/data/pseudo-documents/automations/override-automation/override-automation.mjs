@@ -76,8 +76,8 @@ export default class OverrideAutomation
   }
 
   /** @inheritDoc */
-  get canModifyEffectData() {
-    return this.setCompetence || this.overrideData || super.canModifyEffectData;
+  get makesEffectData() {
+    return Boolean(this.setCompetence || this.overrideData || this.display.label) || super.makesEffectData;
   }
 
   /** @inheritDoc */

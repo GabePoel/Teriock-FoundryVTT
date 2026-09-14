@@ -31,6 +31,7 @@ export default function BaseSystemMixin(Base) {
      * @type {Teriock.Metadata.SystemMetadata}
      */
     static metadata = mergeMetadata(super.metadata, {
+      crit: { enabled: false, where: "chatData" },
       descriptionPath: null,
       disabledPath: null,
       icon: icons.manifest.ui.document,
@@ -39,7 +40,6 @@ export default function BaseSystemMixin(Base) {
         armament: false,
         attunable: false,
         consumable: false,
-        crit: false,
         embed: false,
         granted: false,
         hierarchy: false,
@@ -225,6 +225,22 @@ export default function BaseSystemMixin(Base) {
      * @return {boolean}
      */
     get isSecret() {
+      return false;
+    }
+
+    /**
+     * Whether using this document makes chat data.
+     * @returns {boolean}
+     */
+    get makesChatData() {
+      return this.metadata.tags.usable;
+    }
+
+    /**
+     * Whether using this document makes effect data.
+     * @returns {boolean}
+     */
+    get makesEffectData() {
       return false;
     }
 

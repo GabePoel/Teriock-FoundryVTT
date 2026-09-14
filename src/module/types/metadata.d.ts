@@ -28,7 +28,6 @@ declare global {
       armament: boolean;
       attunable: boolean;
       consumable: boolean;
-      crit: boolean;
       granted: boolean;
       hierarchy: boolean;
       revealable: boolean;
@@ -40,7 +39,10 @@ declare global {
       wiki: boolean;
     };
 
+    export type SystemCritMetadata = { enabled: boolean, where: "chatData" | "effectData" };
+
     export type SystemMetadata = TypeMetadata & {
+      crit: SystemCritMetadata;
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       preserveOnRefresh: string[];

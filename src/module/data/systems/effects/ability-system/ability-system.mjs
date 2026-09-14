@@ -72,7 +72,8 @@ export default class AbilitySystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "fluency", "resource"],
-    tags: { crit: true, usable: true },
+    crit: { enabled: true, where: "effectData" },
+    tags: { usable: true },
     type: "ability",
     visibleTypes: ["ability", "fluency", "resource"],
   });
@@ -323,6 +324,11 @@ export default class AbilitySystem
    */
   get isVirtual() {
     return this.parent.inCompendium && this.parent.parent?.system.identifier === "basic-abilities";
+  }
+
+  /** @inheritDoc */
+  get makesEffectData() {
+    return !this.isPassive;
   }
 
   /** @inheritDoc */

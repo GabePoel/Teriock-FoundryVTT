@@ -58,7 +58,25 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get canCrit() {
-    return Boolean(this.document?.system?.metadata?.tags?.crit) && !this.isPassive;
+    return this.canCritChatData || this.canCritEffectData;
+  }
+
+  /**
+   * Whether this can crit through the chat data its document makes.
+   * @returns {boolean}
+   */
+  get canCritChatData() {
+    const crit = this.document?.metadata?.crit;
+    return Boolean(crit?.enabled) && crit.where === "chatData" && this.modifiesChatData;
+  }
+
+  /**
+   * Whether this can crit through the effect data its document makes.
+   * @returns {boolean}
+   */
+  get canCritEffectData() {
+    const crit = this.document?.metadata?.crit;
+    return Boolean(crit?.enabled) && crit.where === "effectData" && this.modifiesEffectData;
   }
 
   /**
@@ -83,6 +101,38 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    */
   get isPassive() {
     return this.document?.system?.isPassive ?? true;
+  }
+
+  /**
+   * Whether this contributes to chat data if its document makes any.
+   * @returns {boolean}
+   */
+  get makesChatData() {
+    return false;
+  }
+
+  /**
+   * Whether this contributes to effect data if its document makes any.
+   * @returns {boolean}
+   */
+  get makesEffectData() {
+    return true;
+  }
+
+  /**
+   * Whether this modifies the chat data its document makes.
+   * @returns {boolean}
+   */
+  get modifiesChatData() {
+    return Boolean(this.document?.system?.makesChatData) && this.makesChatData;
+  }
+
+  /**
+   * Whether this modifies the effect data its document makes.
+   * @returns {boolean}
+   */
+  get modifiesEffectData() {
+    return Boolean(this.document?.system?.makesEffectData) && this.makesEffectData;
   }
 
   /**
@@ -139,6 +189,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
+    if (!this.canCrit) { this.crit = new Set([0, 1]); }
     if (this.document?.documentName !== "Actor") {
       this.actor?.getEmbeddedCollection(this.documentName)?.set(toId(this.uuid, { hash: true }), this);
     }

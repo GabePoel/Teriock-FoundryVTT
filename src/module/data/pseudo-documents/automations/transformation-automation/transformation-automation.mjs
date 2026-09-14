@@ -56,7 +56,7 @@ export default class TransformationAutomation
   }
 
   /** @inheritDoc */
-  get canModifyEffectData() {
+  get makesEffectData() {
     return true;
   }
 

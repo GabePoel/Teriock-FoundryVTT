@@ -75,40 +75,24 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   }
 
   /**
-   * Whether a copy of this gets added to generated effects.
-   * @returns {boolean}
-   */
-  get canAddToEffect() {
-    return Object.keys(teriock.data.systems.effects.ConsequenceSystem.automationTypes).includes(this.type);
-  }
-
-  /** @inheritDoc */
-  get canCrit() {
-    return super.canCrit && (this.canModifyEffectData || !this.hasEffectDataToModify);
-  }
-
-  /**
    * Whether this leaves its activations on the chat message.
    * @returns {boolean}
    */
   get canGetActivations() {
-    return !this.useInExecution;
+    return this.modifiesChatData && !this.useInExecution;
   }
 
   /**
-   * Whether this can modify effect data.
+   * Whether a copy of this gets added to generated effects.
    * @returns {boolean}
    */
-  get canModifyEffectData() {
-    return this.canAddToEffect;
+  get isCopiedToEffect() {
+    return Object.keys(teriock.data.systems.effects.ConsequenceSystem.automationTypes).includes(this.type);
   }
 
-  /**
-   * Whether this can modify generated effect data.
-   * @returns {boolean}
-   */
-  get hasEffectDataToModify() {
-    return this.document?.type === "ability";
+  /** @inheritDoc */
+  get makesEffectData() {
+    return this.isCopiedToEffect;
   }
 
   /**
@@ -221,7 +205,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
    * @returns {Promise<void>}
    */
   async modifyExecutionEffectData(execution, data) {
-    if (!this.canAddToEffect) { return; }
+    if (!this.isCopiedToEffect) { return; }
     const automations = foundry.utils.getProperty(data, "system.automations") ?? {};
     const automationData = this._getEffectAutomationData(execution);
     automations[automationData._id] = automationData;

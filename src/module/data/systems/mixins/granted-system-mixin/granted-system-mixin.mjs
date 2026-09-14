@@ -17,7 +17,7 @@ export default function GrantedSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Granted"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { crit: true, granted: true } });
+    static metadata = mergeMetadata(super.metadata, { tags: { granted: true } });
 
     /** @inheritDoc */
     static defineSchema() {

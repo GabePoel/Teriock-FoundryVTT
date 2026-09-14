@@ -117,6 +117,10 @@ function cleanActiveEffect(doc) {
     delete doc.duration;
     delete doc.start;
   }
+  if (doc._key.startsWith("!effects") && doc.system.description) {
+    doc.description = doc.system.description;
+    delete doc.system.description;
+  }
   if (["ability", "property"].includes(doc.type) || doc.transfer === true) { delete doc.transfer; }
   if (doc.system.transformation?.enabled === false) { delete doc.system.transformation; }
 }

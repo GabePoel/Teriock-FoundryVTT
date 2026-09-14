@@ -123,12 +123,14 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
    * @returns {Record<string, string>}
    */
   get _relationChoices() {
-    return localizeChoices(this.hasEffectDataToModify ? RELATION_CHOICES : omit(RELATION_CHOICES, ["include"]));
+    return localizeChoices(
+      this.document?.system?.makesEffectData ? RELATION_CHOICES : omit(RELATION_CHOICES, ["include"]),
+    );
   }
 
   /** @inheritDoc */
-  get canModifyEffectData() {
-    return this.relation === "include" || super.canModifyEffectData;
+  get makesEffectData() {
+    return this.relation === "include" || super.makesEffectData;
   }
 
   /** @inheritDoc */
@@ -171,7 +173,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.hasEffectDataToModify && this.relation === "include") { this.relation = "apply"; }
+    if (!this.document?.system?.makesEffectData && this.relation === "include") { this.relation = "apply"; }
   }
 
   /**

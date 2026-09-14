@@ -13,7 +13,7 @@ export default class HarmSystem
   extends mixClasses(BasePageSystem, AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { tags: { crit: true } });
+  static metadata = mergeMetadata(super.metadata, { crit: { enabled: true, where: "chatData" } });
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -44,6 +44,11 @@ export default class HarmSystem
   /** @inheritDoc */
   get _panelBars() {
     return [this._metaphysicsBar];
+  }
+
+  /** @inheritDoc */
+  get makesChatData() {
+    return true;
   }
 
   /** @inheritDoc */
