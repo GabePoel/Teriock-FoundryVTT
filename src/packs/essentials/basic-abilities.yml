@@ -276,7 +276,7 @@ effects:
       overview:
         base: >-
           <p>You take control over something that requires @Wiki[Core:Presence Tier]{presence}, becoming
-          @Wiki[Core:Attunement]{attuned} to it.</p>
+          @Identifier[core:presence]{attuned} to it.</p>
       powerSources:
         - spiritual
       range:
@@ -405,7 +405,7 @@ effects:
       powerSources:
         - martial
       requirements: >-
-        <p>The item you're using to @Identifier[core:block-interaction]{block} has the
+        <p>The item you're @Identifier[core:deliveries]{delivering} this with has the
         @Identifier[property:blocking]{blocking property}.</p>
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
@@ -449,15 +449,15 @@ effects:
       powerSources:
         - martial
       requirements: >-
-        <p>The item you're using [[lookup name]] with has the @Identifier[property:blocking]{blocking property}. The
-        @Pack[teriock.abilities]{ability} @Identifier[core:targets]{targeting} you is a @Wiki[Category:Cone delivery
-        abilities]{cone}.</p>
+        <p>The item you're @Identifier[core:deliveries]{delivering} this with has the
+        @Identifier[property:blocking]{blocking property}. The @Pack[teriock.abilities]{ability}
+        @Identifier[core:targets]{targeting} you is a @Identifier[core:cone-delivery]{cone}.</p>
       results:
-        fail: <p>The @Wiki[Category:Cone delivery abilities]{cone's} effect applies.</p>
-        save: <p>The @Wiki[Category:Cone delivery abilities]{cone's} effect @Identifier[core:fizzles]{fizzles}.</p>
+        fail: <p>The @Identifier[core:cone-delivery]{cone's} effect applies to you.</p>
+        save: <p>The @Identifier[core:cone-delivery]{cone's} effect @Identifier[core:fizzles]{fizzles} against you.</p>
       targets:
         - ability
-      trigger: <p>A @Wiki[Category:Cone delivery abilities]{cone} would @Identifier[core:targets]{target} you.</p>
+      trigger: <p>A @Identifier[core:cone-delivery]{cone} would @Identifier[core:targets]{target} you.</p>
     type: ability
   - _id: cz8cKzPPUTA1DCeC
     _key: "!items.effects!fb31c853fddd91bb.cz8cKzPPUTA1DCeC"
@@ -488,7 +488,9 @@ effects:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[condition:burned]{burned}.</p>
       powerSources:
         - martial
-      requirements: <p>Delivery item must be @Identifier[property:burning]{burning}.</p>
+      requirements: >-
+        <p>The item you're @Identifier[core:deliveries]{delivering} this with has the
+        @Identifier[property:burning]{burning property}.</p>
     type: ability
   - _id: bvBJvXq6JaID24XD
     _key: "!items.effects!fb31c853fddd91bb.bvBJvXq6JaID24XD"
@@ -613,7 +615,7 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>You release control over something you were @Wiki[Core:Attunement]{attuned} to that requires
+          <p>You release control over something you were @Identifier[core:presence]{attuned} to that requires
           @Wiki[Core:Presence Tier]{presence}, freeing yourself to control something else in the process.</p>
       powerSources:
         - spiritual
@@ -1093,8 +1095,8 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>You may make a @Wiki[Category:Single action abilities]{single action} @Wiki[Category:Weapon delivery
-          abilities]{weapon} or @Wiki[Category:Hand delivery abilities]{hand}
+          <p>You may make a @Wiki[Category:Single action abilities]{single action}
+          @Identifier[core:bite-delivery]{weapon} or @Identifier[core:hand-delivery]{hand}
           @Identifier[core:attack-interaction]{attack} against the triggering creature using a different
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or hand than the triggering
           @Identifier[core:attack-interaction]{attack}.</p>
@@ -1141,8 +1143,8 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>You may make a @Wiki[Category:Single action abilities]{single action} @Wiki[Category:Weapon delivery
-          abilities]{weapon} or @Wiki[Category:Hand delivery abilities]{hand}
+          <p>You may make a @Wiki[Category:Single action abilities]{single action}
+          @Identifier[core:bite-delivery]{weapon} or @Identifier[core:hand-delivery]{hand}
           @Identifier[core:attack-interaction]{attack} against the triggering creature.</p>
       powerSources:
         - martial
@@ -1389,14 +1391,14 @@ effects:
           <p>You prepare to use an action that will occur outside your turn. Choose a @Wiki[Category:Single action
           abilities]{single action} or @Wiki[Category:Free action abilities]{free action ability} you can use, and
           designate a trigger. Your turn then ends. If the trigger you designated occurs before the start of your next
-          turn, you can use the chosen @Wiki[Category:Single action abilities]{ability} as a @Wiki[Category:Reactive
-          abilities]{reaction} (provided you still meet the requirements to use it).</p><p>If you have an
-          @Wiki[Core:Attack Penalty]{attack penalty} from making multiple @Identifier[core:attack-interaction]{attacks}
-          and your readied @Wiki[Category:Single action abilities]{ability} is an
-          @Identifier[core:attack-interaction]{attack ability}, your readied @Wiki[Category:Single action
-          abilities]{ability} takes the same @Wiki[Core:Attack Penalty]{attack penalty} you had at the time you used
-          [[lookup name]]. This is one of the few times the @Wiki[Core:Attack Penalty]{attack penalty} applies when it's
-          not your turn.</p>
+          turn, you can use the chosen @Wiki[Category:Single action abilities]{ability} as a
+          @Identifier[core:reactive-maneuvers]{reaction} (provided you still meet the requirements to use it).</p><p>If
+          you have an @Wiki[Core:Attack Penalty]{attack penalty} from making multiple
+          @Identifier[core:attack-interaction]{attacks} and your readied @Wiki[Category:Single action
+          abilities]{ability} is an @Identifier[core:attack-interaction]{attack ability}, your readied
+          @Wiki[Category:Single action abilities]{ability} takes the same @Wiki[Core:Attack Penalty]{attack penalty} you
+          had at the time you used [[lookup name]]. This is one of the few times the @Wiki[Core:Attack Penalty]{attack
+          penalty} applies when it's not your turn.</p>
       powerSources:
         - martial
       range:
@@ -1669,11 +1671,11 @@ effects:
       kind: intrinsic
       overview:
         base: >-
-          <p>Either start or continue some @Wiki[Category:Slow abilities]{slow ability} that has an execution time
+          <p>Either start or continue some @Identifier[core:slow-maneuvers]{slow ability} that has an execution time
           that's well defined in one of the following
           units.</p><ul><li>Seconds</li><li>Minutes</li><li>Hours</li><li>Days</li><li>Weeks</li><li>Months</li><li>Years</li></ul><p
           class="note"><b>Note:</b> If you do not use [[lookup name]] at least once per turn, then the
-          @Wiki[Category:Slow abilities]{slow ability} @Identifier[core:fizzles]{fizzles}. You will have to restart
+          @Identifier[core:slow-maneuvers]{slow ability} @Identifier[core:fizzles]{fizzles}. You will have to restart
           it.</p>
       powerSources:
         - martial

@@ -115,10 +115,10 @@ pages:
     text:
       content: >-
         <p><b>Active maneuvers</b> are done proactively within the time scale of a single turn. On each creature's turn,
-        they may take up to <i>three</i> Actions in total. Every @Wiki[Category:Active abilities]{active ability} will
+        they may take up to <i>three</i> Actions in total. Every @Identifier[core:active-maneuvers]{active ability} will
         specify how many of these actions it consumes. They may be @Wiki[Category:Single action abilities]{single
         actions}, @Wiki[Category:Double action abilities]{double actions}, or @Wiki[Category:Triple action
-        abilities]{triple actions}. Some @Wiki[Category:Active abilities]{active abilities} may also be
+        abilities]{triple actions}. Some @Identifier[core:active-maneuvers]{active abilities} may also be
         @Wiki[Category:Free action abilities]{free actions}. These not only don't consume a creature's actions, but can
         be done at <i>any</i> time (even on other creatures' turns)! However, they cannot be used in reaction to other
         @Pack[teriock.abilities]{abilities}.</p>
@@ -167,14 +167,14 @@ pages:
         @Wiki[Category:Plant creatures]{plant}. Check with your @Identifier[core:game-master]{GM} if in doubt of whether
         something is a @Pack[teriock.creatures]{creature} or not.</p><h5>Limb</h5><p>Rather than hitting an entire
         creature, some @Pack[teriock.abilities]{abilities} will say that they only hit <b>arms</b>, <b>legs</b>, or
-        <b>limbs</b>. If @Wiki[Category:Limb target abilities]{these abilities} are
+        <b>limbs</b>. If @Identifier[core:limb-target]{these abilities} are
         @Identifier[core:attack-interaction]{attacks}, then they are slightly harder to land a hit with than ones that
         can hit a creature anywhere. They require hitting that creature's @Identifier[core:armor-class]{AC} +
         2.</p><h5>Vitals</h5><p><b>Vitals</b> targeted @Pack[teriock.abilities]{abilities} need to hit a creature's head
-        or other vital organs rather than landing anywhere. If @Wiki[Category:Vitals target abilities]{these abilities}
-        are @Identifier[core:attack-interaction]{attacks}, then they require hitting a creature's
-        @Identifier[core:armor-class]{AC} + 3.</p><h4>Item</h4><p>@Wiki[Category:Item target abilities]{Attacks that
-        target items} need different @Identifier[core:attack-interaction]{hit rolls} depending on the
+        or other vital organs rather than landing anywhere. If @Identifier[core:vitals-target]{these abilities} are
+        @Identifier[core:attack-interaction]{attacks}, then they require hitting a creature's
+        @Identifier[core:armor-class]{AC} + 3.</p><h4>Item</h4><p>@Identifier[core:item-target]{Attacks that target
+        items} need different @Identifier[core:attack-interaction]{hit rolls} depending on the
         @Pack[teriock.equipment]{type of item}.</p><ul><li>Wielded items (such as
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} or
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}): @Identifier[core:armor-class]{AC} + 3 -
@@ -182,7 +182,7 @@ pages:
         @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} or @Identifier[equipment:cloak]{cloaks}):
         @Identifier[core:armor-class]{AC}</li><li>@Identifier[property:small]{Small}
         @Identifier[property:searchable]{searchable items} (such as rings or amulets): @Identifier[core:armor-class]{AC}
-        + 6</li></ul><p>If an @Wiki[Category:Item target abilities]{ability that targets an item} is successfully
+        + 6</li></ul><p>If an @Identifier[core:item-target]{ability that targets an item} is successfully
         @Identifier[core:block-interaction]{blocked}, it automatically hits the item that
         @Identifier[core:block-interaction]{blocked} it.</p><h4>Area</h4><p>@Pack[teriock.abilities]{Abilities} that
         target an <b>area</b> do not have a precisely defined size. Rather, they affect a small, cohesive space such as
@@ -196,32 +196,31 @@ pages:
         @Pack[teriock.abilities]{abilities}.</p><h4>Other</h4><p>Some @Pack[teriock.abilities]{ability} targets don't
         fit nearly into one of the predefined categories. In these cases, the @Pack[teriock.abilities]{ability's} target
         will just say "<b>other</b>".</p><h2>Range</h2><p>Each @Pack[teriock.abilities]{ability} has some <b>range</b>
-        over which it can be used. If it is a @Wiki[Category:Missile delivery abilities]{missile}, @Wiki[Category:Sight
-        delivery abilities]{sight}, or @Wiki[Category:Area of effect abilities]{area of effect ability}, then the range
-        is specified by the @Wiki[Category:Ranged abilities]{ability} itself. For @Wiki[Category:Item delivery
-        abilities]{item delivery abilities}, the range is determined by the @Wiki[Category:Armaments]{item} that is
-        being used. If the @Wiki[Category:Armaments]{item} is melee, then it's the @Wiki[Category:Armaments]{item's}
-        range plus your @Identifier[core:size]{reach}. This includes @Wiki[Category:Hand delivery abilities]{hand} and
-        @Wiki[Category:Bite delivery abilities]{bite delivery abilities}. If it's @Identifier[property:ranged]{ranged},
-        then it's just the @Identifier[property:ranged]{range} of the
+        over which it can be used. If it is a @Identifier[core:missile-delivery]{missile},
+        @Identifier[core:sight-delivery]{sight}, or @Wiki[Category:Area of effect abilities]{area of effect ability},
+        then the range is specified by the @Wiki[Category:Ranged abilities]{ability} itself. For
+        @Identifier[core:bite-delivery]{item delivery abilities}, the range is determined by the
+        @Wiki[Category:Armaments]{item} that is being used. If the @Wiki[Category:Armaments]{item} is melee, then it's
+        the @Wiki[Category:Armaments]{item's} range plus your @Identifier[core:size]{reach}. This includes
+        @Identifier[core:hand-delivery]{hand} and @Identifier[core:bite-delivery]{bite delivery abilities}. If it's
+        @Identifier[property:ranged]{ranged}, then it's just the @Identifier[property:ranged]{range} of the
         @Identifier[property:ranged]{item}.</p><h2>Delivery</h2><p>Every @Pack[teriock.abilities]{ability} has one and
-        <i>only one</i><b>delivery</b>. This always has at least two parts, a <a href="#Source">source</a> and <a
-        href="#Interaction">interaction</a>.</p><h4>Source</h4><p>The source of an @Pack[teriock.abilities]{ability's}
-        delivery is the means by which it is transmitted from the @Identifier[core:executor]{executor} to the
-        @Identifier[core:targets]{target}. There are many possible sources, but the most common ones are as
-        follows.</p><h5>Item</h5><p><b>Item delivery</b> abilities are transmitted from the
-        @Identifier[core:executor]{executor} to the @Identifier[core:targets]{target} via one of the
-        @Identifier[core:executor]{executor's} items. Some @Wiki[Category:Item delivery abilities]{item delivery
-        abilities} may only specify "item" as the source. Others may give a more specific description such as
-        "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
+        <i>only one</i><b>delivery</b>. This always has at least two parts, a source and
+        interaction.</p><h4>Source</h4><p>The source of an @Pack[teriock.abilities]{ability's} delivery is the means by
+        which it is transmitted from the @Identifier[core:executor]{executor} to the @Identifier[core:targets]{target}.
+        There are many possible sources, but the most common ones are as follows.</p><h5>Item</h5><p><b>Item
+        delivery</b> abilities are transmitted from the @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target} via one of the @Identifier[core:executor]{executor's} items. Some
+        @Identifier[core:bite-delivery]{item delivery abilities} may only specify "item" as the source. Others may give
+        a more specific description such as "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
         "@UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}", or
         "@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}". These are all considered to be delivered
         with items and are just a shorthand for the type of item that can be used.</p><p>The
-        @Identifier[core:range]{range} of @Wiki[Category:Item delivery abilities]{item delivery abilities} is that of
-        the @Wiki[Category:Armaments]{item} that delivers it.</p><h5>Missile</h5><p>@Pack[teriock.abilities]{Abilities}
-        with the <b>missile</b> source are those that would have spell stones in live action <a target="_blank"
-        rel="nofollow noreferrer noopener" class="external text" href="https://www.fanwar.com/">FanWar</a>. These are
-        most often @Identifier[core:attack-interaction]{attacks}, but do not have any physical
+        @Identifier[core:range]{range} of @Identifier[core:bite-delivery]{item delivery abilities} is that of the
+        @Wiki[Category:Armaments]{item} that delivers it.</p><h5>Missile</h5><p>@Pack[teriock.abilities]{Abilities} with
+        the <b>missile</b> source are those that would have spell stones in live action <a target="_blank" rel="nofollow
+        noreferrer noopener" class="external text" href="https://www.fanwar.com/">FanWar</a>. These are most often
+        @Identifier[core:attack-interaction]{attacks}, but do not have any physical
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or other @Wiki[Category:Armaments]{item}
         that mediates them. Instead, these @Pack[teriock.abilities]{abilities} may correspond to a
         @Identifier[ability:fire-ball]{ball of fire}, a @Identifier[ability:lightning-ray]{bolt of lightning}, a
@@ -240,34 +239,43 @@ pages:
         instance, @Identifier[ability:duel]{Duel} operates by sight, but has a range of 30 feet even though the user may
         see the target from much further away.</p><h5>Aura</h5><p>@Pack[teriock.abilities]{Abilities} with the
         <b>aura</b> delivery source are ones that could affect every target within some specified radius, centered on
-        the @Identifier[core:executor]{executor}. Unless specifically noted by the @Pack[teriock.abilities]{ability},
-        the @Identifier[core:executor]{executor} is not affected by @Wiki[Category:Aura delivery abilities]{aura
-        abilities}.</p><h5>Hand</h5><p>Like with @Wiki[Category:Sight delivery abilities]{sight} and eyeballs,
-        @Wiki[Category:Hand delivery abilities]{hand delivery sourced abilities} don't require the user to physically
-        have a dexterous humanoid hand with recognizable fingers. Some creatures with claws, tentacles, or other
-        appendages can use hand abilities without problem. However, something of this nature is always required. Such
+        the @Identifier[core:executor]{executor}. Any targeted creatures that are at least partially within the area are
+        affected. Any targeted items @Identifier[keyword:bearing]{bared} by creatures at least partially within the area
+        are affected as well. Unless specifically noted by the @Pack[teriock.abilities]{ability}, the
+        @Identifier[core:executor]{executor} is not affected.</p><h5>Cone</h5><p>@Pack[teriock.abilities]{Abilities}
+        with the <b>cone</b> delivery source are ones that could affect every target within some specified radius,
+        originating from the @Identifier[core:executor]{executor}. Rather than extending uniformly from the
+        @Identifier[core:executor]{executor} like an @Identifier[core:aura-delivery]{aura}, these spread in a 60 degree
+        arc centered along a direction of @Identifier[core:executor]{executor's} choice. Any targeted creatures that are
+        at least partially within the area are affected. Any targeted items @Identifier[keyword:bearing]{bared} by
+        creatures at least partially within the area are affected as well. Unless specifically noted by the
+        @Pack[teriock.abilities]{ability}, the @Identifier[core:executor]{executor} is not
+        affected.</p><h5>Hand</h5><p>Like with @Identifier[core:sight-delivery]{sight} and eyeballs,
+        @Identifier[core:hand-delivery]{hand delivery sourced abilities} don't require the user to physically have a
+        dexterous humanoid hand with recognizable fingers. Some creatures with claws, tentacles, or other appendages can
+        use hand abilities without problem. However, something of this nature is always required. Such
         @Pack[teriock.bodyParts]{body parts} have the @Identifier[property:handy]{handy property}. If a creature that
         typically has @Identifier[body:hand]{literal hands} has their arms @Identifier[ability:hack]{Hacked} or has
-        their @Identifier[body:hand]{hands} cut off, then they are unable to use @Wiki[Category:Hand delivery
-        abilities]{hand delivered abilities}. It may be possible for them to find other ways to use @Wiki[Category:Hand
-        delivery abilities]{these abilities} in the future, but that's up to @Identifier[core:game-master]{GM}
-        discretion.</p><p>The range of @Wiki[Category:Hand delivery abilities]{hand delivery sourced abilities} is the
-        reach of the @Identifier[core:executor]{executor's} arm (or other appendage). This depends in part on the
-        creature's @Identifier[core:size]{size}, but is usually 5 feet.</p><h5>Bite</h5><p>Abilities with the
-        @Wiki[Category:Bite delivery abilities]{bite delivery source} are similar to @Wiki[Category:Hand delivery
-        abilities]{hand abilities}, but they are transmitted with something that at least <i>resembles</i> a
-        @Identifier[body:mouth]{mouth} rather than a @Identifier[body:hand]{hand}. These are typically
-        @Identifier[property:biting]{biting}.</p><p>The range of @Wiki[Category:Bite delivery abilities]{bite delivered
-        abilities} is the reach of the @Identifier[core:executor]{executor's} neck (or other similar body part). This
+        their @Identifier[body:hand]{hands} cut off, then they are unable to use @Identifier[core:hand-delivery]{hand
+        delivered abilities}. It may be possible for them to find other ways to use
+        @Identifier[core:hand-delivery]{these abilities} in the future, but that's up to
+        @Identifier[core:game-master]{GM} discretion.</p><p>The range of @Identifier[core:hand-delivery]{hand delivery
+        sourced abilities} is the reach of the @Identifier[core:executor]{executor's} arm (or other appendage). This
         depends in part on the creature's @Identifier[core:size]{size}, but is usually 5
+        feet.</p><h5>Bite</h5><p>Abilities with the @Identifier[core:bite-delivery]{bite delivery source} are similar to
+        @Identifier[core:hand-delivery]{hand abilities}, but they are transmitted with something that at least
+        <i>resembles</i> a @Identifier[body:mouth]{mouth} rather than a @Identifier[body:hand]{hand}. These are
+        typically @Identifier[property:biting]{biting}.</p><p>The range of @Identifier[core:bite-delivery]{bite
+        delivered abilities} is the reach of the @Identifier[core:executor]{executor's} neck (or other similar body
+        part). This depends in part on the creature's @Identifier[core:size]{size}, but is usually 5
         feet.</p><h5>Self</h5><p><b>Self</b> sourced @Pack[teriock.abilities]{abilities} are the simplest ones. They
         have no special means of transmission, but simply come from the @Identifier[core:executor]{executor}. This is
         sometimes used as a catch-all for @Pack[teriock.abilities]{abilities} that don't fit with any other
-        source.</p><h4>Interaction</h4><p>In addition to a <a href="#Source">source</a>, every
-        @Pack[teriock.abilities]{ability} is mediated by one of four @Identifier[core:interactions]{interactions}. This
-        determines what types of dice rolls, if any, need to be done for an @Pack[teriock.abilities]{ability} to affect
-        its @Wiki[Category:Targets]{target}. See the @Identifier[core:interactions]{interactions} page for complete
-        detail.</p><h4>Other Delivery Modifiers</h4><p>Some @Pack[teriock.abilities]{abilities} are <i>always</i>
+        source.</p><h4>Interaction</h4><p>In addition to a source, every @Pack[teriock.abilities]{ability} is mediated
+        by one of four @Identifier[core:interactions]{interactions}. This determines what types of dice rolls, if any,
+        need to be done for an @Pack[teriock.abilities]{ability} to affect its @Identifier[core:targets]{target}. See
+        the @Identifier[core:interactions]{interactions} page for complete detail.</p><h4>Other Delivery
+        Modifiers</h4><p>Some @Pack[teriock.abilities]{abilities} are <i>always</i>
         @Identifier[keyword:armor-voiding]{AV0} or @Identifier[keyword:unblockable]{UB}. When this is the case, it's
         mentioned within the delivery.</p><h4>Delivery Packages</h4><p>@Pack[teriock.abilities]{Abilities} may be listed
         as @Wiki[Category:Strike delivery abilities]{strikes}, @Wiki[Category:Ritual delivery abilities]{rituals},
@@ -292,7 +300,7 @@ pages:
         @Pack[teriock.abilities]{ability's} effect applies for. Many abilities have an "end condition" that can apply
         before the full duration is reached. Other abilities have an "@Wiki[Category:Instant duration
         abilities]{instant}" duration which means the effect is simply applied at once. The duration of
-        @Wiki[Category:Passive abilities]{passive abilities} describes the conditions under which they're in
+        @Identifier[core:passive-maneuvers]{passive abilities} describes the conditions under which they're in
         effect.</p><h2>Power Sources</h2><p>Every @Pack[teriock.abilities]{ability} is <b>@Wiki[Category:Powered
         abilities]{powered}</b> through some means. For many @Pack[teriock.abilities]{abilities}, the <b>power
         source</b> is simply "@Wiki[Category:Martially powered abilities]{martial}", which means they stem from the
@@ -336,8 +344,8 @@ pages:
         being within the expansion range of the previous. You choose the additional targets. These extra executions do
         <i>not</i> count as new attacks for the purposes of @Identifier[core:multiple-attacks]{attack penalties},
         although they must still be rolled.</p><h4>Detonate Expansion</h4><p>An @Pack[teriock.abilities]{ability} that
-        <b>detonates</b> is one that executes again as an @Wiki[Category:Aura delivery abilities]{aura} if it hits its
-        initial target and does not @Identifier[core:fizzles]{fizzle}.</p><h2>Standard Abilities</h2><p>Noted under the
+        <b>detonates</b> is one that executes again as an @Identifier[core:aura-delivery]{aura} if it hits its initial
+        target and does not @Identifier[core:fizzles]{fizzle}.</p><h2>Standard Abilities</h2><p>Noted under the
         "delivery sources" section of an @Pack[teriock.abilities]{ability}, is whether it is considered
         <b>@UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{standard}</b>. This is a legacy term inherited
         from live action <a target="_blank" rel="nofollow noreferrer noopener" class="external text"
@@ -409,15 +417,15 @@ pages:
         penalty</b> (AP) which will apply to future attacks made in the same @Identifier[core:turns]{turn}. The value of
         the penalty that's added is the AP of the @Pack[teriock.equipment]{equipment} or @Pack[teriock.bodyParts]{body
         part} you @Identifier[core:attack-interaction]{attack} with. Unless otherwise noted, an
-        @Identifier[core:attack-interaction]{attack} has an AP of -3. This is the AP for @Wiki[Category:Missile delivery
-        abilities]{missile attacks} as well as any other @Identifier[core:attack-interaction]{attack} where an -3 isn't
-        stated. Your attack penalty resets to 0 at the end of each @Identifier[core:turns]{turn} (not just your
-        own).</p><h2>Types of Attacks</h2><p>A <b>ranged</b> @Identifier[core:attack-interaction]{attack} is one that
-        has a @Identifier[core:missile-delivery]{missile delivery} or that is @Identifier[core:deliveries]{delivered}
-        with a @Identifier[property:ranged]{ranged} @Identifier[property:ranged]{item} that its
-        @Identifier[keyword:using]{user} is no longer @Identifier[keyword:bearing]{bearing}. A <b>melee</b>
-        @Identifier[core:attack-interaction]{attack} is one that is not @Identifier[keyword:ranged]{ranged}.</p><p><img
-        class="interaction-routine"
+        @Identifier[core:attack-interaction]{attack} has an AP of -3. This is the AP for
+        @Identifier[core:missile-delivery]{missile attacks} as well as any other
+        @Identifier[core:attack-interaction]{attack} where an -3 isn't stated. Your attack penalty resets to 0 at the
+        end of each @Identifier[core:turns]{turn} (not just your own).</p><h2>Types of Attacks</h2><p>A <b>ranged</b>
+        @Identifier[core:attack-interaction]{attack} is one that has a @Identifier[core:missile-delivery]{missile
+        delivery} or that is @Identifier[core:deliveries]{delivered} with a @Identifier[property:ranged]{ranged}
+        @Identifier[property:ranged]{item} that its @Identifier[keyword:using]{user} is no longer
+        @Identifier[keyword:bearing]{bearing}. A <b>melee</b> @Identifier[core:attack-interaction]{attack} is one that
+        is not @Identifier[keyword:ranged]{ranged}.</p><p><img class="interaction-routine"
         src="systems/teriock/src/assets/interaction-routines/complete-attack-block-interaction.svg"></p>
     type: rule
   - _id: armorClass000000
@@ -455,9 +463,11 @@ pages:
     text:
       content: >-
         <p>@Pack[teriock.abilities]{Abilities} with the <b>aura</b> delivery source are ones that could affect every
-        target within some specified radius, centered on the @Identifier[core:executor]{executor}. Unless specifically
-        noted by the @Pack[teriock.abilities]{ability}, the @Identifier[core:executor]{executor} is not affected by
-        @Wiki[Category:Aura delivery abilities]{aura abilities}.</p>
+        target within some specified radius, centered on the @Identifier[core:executor]{executor}. Any targeted
+        creatures that are at least partially within the area are affected. Any targeted items
+        @Identifier[keyword:bearing]{bared} by creatures at least partially within the area are affected as well. Unless
+        specifically noted by the @Pack[teriock.abilities]{ability}, the @Identifier[core:executor]{executor} is not
+        affected.</p>
     type: rule
   - _id: attributes000000
     _key: "!journal.pages!core000000000000.attributes000000"
@@ -809,10 +819,10 @@ pages:
       img: systems/teriock/src/icons/core-rules/bite-delivery.webp
     text:
       content: >-
-        <p>Abilities with the @Wiki[Category:Bite delivery abilities]{bite delivery source} are similar to
-        @Wiki[Category:Hand delivery abilities]{hand abilities}, but they are transmitted with something that at least
+        <p>Abilities with the @Identifier[core:bite-delivery]{bite delivery source} are similar to
+        @Identifier[core:hand-delivery]{hand abilities}, but they are transmitted with something that at least
         <i>resembles</i> a @Identifier[body:mouth]{mouth} rather than a @Identifier[body:hand]{hand}. These are
-        typically @Identifier[property:biting]{biting}.</p><p>The range of @Wiki[Category:Bite delivery abilities]{bite
+        typically @Identifier[property:biting]{biting}.</p><p>The range of @Identifier[core:bite-delivery]{bite
         delivered abilities} is the reach of the @Identifier[core:executor]{executor's} neck (or other similar body
         part). This depends in part on the creature's @Identifier[core:size]{size}, but is usually 5 feet.</p>
     type: rule
@@ -828,52 +838,52 @@ pages:
     text:
       content: >-
         <p><b>Combat</b> in <a target="_blank" rel="nofollow noreferrer noopener" class="external text"
-        href="https://www.teriock.com/">Teriock</a> Online is broken into <a href="#Rounds">rounds</a> and <a
-        href="#Turns">turns</a>.</p><h2>Rounds</h2><p>Each <b>round</b> of combat is considered to take 5
-        seconds.</p><h3>Initiative</h3><p>At the start of combat, every participant rolls for <b>initiative</b> ([[/roll
-        1d20]] + @Identifier[core:movement]{MOV} + @Identifier[core:proficiency-bonus]{P}). This determines the
-        combatants' turn order, with the higher rollers acting first. If another creature joins the combat partway
-        through, they roll initiative as well and can act at times in accordance with their roll.</p><h3>Surprise
-        Rounds</h3><p>Sometimes abilities or other circumstances will allow some combatants to get the upper hand on
-        their foes by surprising them at the start of combat. When this happens, everyone still rolls for initiative,
-        but the creatures that benefit from the <b>surprise round</b> are the only ones that get to act. Everyone else
-        has their turns skipped.</p><h2>Turns</h2><p>On a creature's <b>turn</b>, they may make up to
-        <i>three</i><b>actions</b>. @Identifier[ability:move]{Moving}, @Identifier[core:attack-interaction]{attacking},
-        and so on typically use some number of these actions. Creatures also have one <b>reaction</b> that can, in
-        principle, be use at any time within a round. They regain their reaction at the start of their turn. Creatures
-        cannot "save up" their actions or reactions between rounds or turns. Actions and reactions reset regardless of
-        whether or not they're used.</p><p>In addition, some effects may begin, apply, or cease at the start or end of a
-        creature's turn. These are specified within the relevant rules text.</p><h2>Maneuvers</h2><p>Everything a
-        creature does in combat turn is codified in terms of <b>@Identifier[core:abilities]{abilities}</b>. Each
-        @Identifier[core:abilities]{ability}, in turn, has one of four possible <b>maneuvers</b> that determine when it
-        can be used.</p><h3>Active Maneuvers</h3><p><b>Active maneuvers</b> are done proactively within the time scale
-        of a single turn. On each creature's turn, they may take up to <i>three</i> Actions in total. Every
-        @Wiki[Category:Active abilities]{active ability} will specify how many of these actions it consumes. They may be
-        @Wiki[Category:Single action abilities]{single actions}, @Wiki[Category:Double action abilities]{double
-        actions}, or @Wiki[Category:Triple action abilities]{triple actions}. Some @Wiki[Category:Active
-        abilities]{active abilities} may also be @Wiki[Category:Free action abilities]{free actions}. These not only
-        don't consume a creature's actions, but can be done at <i>any</i> time (even on other creatures' turns)!
-        However, they cannot be used in reaction to other @Pack[teriock.abilities]{abilities}.</p><h3>Reactive
-        Maneuvers</h3><p><b>Reactive maneuvers</b> can only be done in response to some event that <b>triggers</b> them.
-        Every reactive maneuver will specify what its <b>triggering conditions</b> are. These could be
-        @Identifier[ability:tumble]{taking damage}, @Identifier[ability:resolve-conflict]{hearing another creature
-        speak}, @Identifier[ability:opportunity-attack]{another creature moving away from you}, or anything else. Each
-        creature has <i>only one</i> @Wiki[Category:Reaction abilities]{reaction} per turn. However, some
-        @Wiki[Category:Reactive abilities]{reactive abilities} are @Wiki[Category:Free reaction abilities]{free
+        href="https://www.teriock.com/">Teriock</a> Online is broken into rounds and turns.</p><h2>Rounds</h2><p>Each
+        <b>round</b> of combat is considered to take 5 seconds.</p><h3>Initiative</h3><p>At the start of combat, every
+        participant rolls for <b>initiative</b> ([[/roll 1d20]] + @Identifier[core:movement]{MOV} +
+        @Identifier[core:proficiency-bonus]{P}). This determines the combatants' turn order, with the higher rollers
+        acting first. If another creature joins the combat partway through, they roll initiative as well and can act at
+        times in accordance with their roll.</p><h3>Surprise Rounds</h3><p>Sometimes abilities or other circumstances
+        will allow some combatants to get the upper hand on their foes by surprising them at the start of combat. When
+        this happens, everyone still rolls for initiative, but the creatures that benefit from the <b>surprise round</b>
+        are the only ones that get to act. Everyone else has their turns skipped.</p><h2>Turns</h2><p>On a creature's
+        <b>turn</b>, they may make up to <i>three</i><b>actions</b>. @Identifier[ability:move]{Moving},
+        @Identifier[core:attack-interaction]{attacking}, and so on typically use some number of these actions. Creatures
+        also have one <b>reaction</b> that can, in principle, be use at any time within a round. They regain their
+        reaction at the start of their turn. Creatures cannot "save up" their actions or reactions between rounds or
+        turns. Actions and reactions reset regardless of whether or not they're used.</p><p>In addition, some effects
+        may begin, apply, or cease at the start or end of a creature's turn. These are specified within the relevant
+        rules text.</p><h2>Maneuvers</h2><p>Everything a creature does in combat turn is codified in terms of
+        <b>@Identifier[core:abilities]{abilities}</b>. Each @Identifier[core:abilities]{ability}, in turn, has one of
+        four possible <b>maneuvers</b> that determine when it can be used.</p><h3>Active Maneuvers</h3><p><b>Active
+        maneuvers</b> are done proactively within the time scale of a single turn. On each creature's turn, they may
+        take up to <i>three</i> Actions in total. Every @Identifier[core:active-maneuvers]{active ability} will specify
+        how many of these actions it consumes. They may be @Wiki[Category:Single action abilities]{single actions},
+        @Wiki[Category:Double action abilities]{double actions}, or @Wiki[Category:Triple action abilities]{triple
+        actions}. Some @Identifier[core:active-maneuvers]{active abilities} may also be @Wiki[Category:Free action
+        abilities]{free actions}. These not only don't consume a creature's actions, but can be done at <i>any</i> time
+        (even on other creatures' turns)! However, they cannot be used in reaction to other
+        @Pack[teriock.abilities]{abilities}.</p><h3>Reactive Maneuvers</h3><p><b>Reactive maneuvers</b> can only be done
+        in response to some event that <b>triggers</b> them. Every reactive maneuver will specify what its <b>triggering
+        conditions</b> are. These could be @Identifier[ability:tumble]{taking damage},
+        @Identifier[ability:resolve-conflict]{hearing another creature speak},
+        @Identifier[ability:opportunity-attack]{another creature moving away from you}, or anything else. Each creature
+        has <i>only one</i> @Wiki[Category:Reaction abilities]{reaction} per turn. However, some
+        @Identifier[core:reactive-maneuvers]{reactive abilities} are @Wiki[Category:Free reaction abilities]{free
         reactions}. These have no limit on the number of times they can be used, so long as their triggering condition
         is met every time.</p><p>The order of reactive maneuver resolution is determined by a "last in, first out"
         stack. So if so if a creature casts @Identifier[ability:fire-ball]{Fire Ball}, and another casts
         @Identifier[ability:dispel-magic]{Dispel Magic}, and the creature that first cast
         @Identifier[ability:fire-ball]{Fire Ball} casts @Identifier[ability:dispel-magic]{Dispel Magic} on the first
         dispel, then the @Identifier[ability:fire-ball]{Fire Ball} resolves. A given creature can only use a given
-        @Wiki[Category:Reactive abilities]{reactive ability} once within a given stack.</p><h3>Passive
+        @Identifier[core:reactive-maneuvers]{reactive ability} once within a given stack.</p><h3>Passive
         Maneuvers</h3><p><b>Passive maneuvers</b> act in the background and don't require any decision to use.
-        @Wiki[Category:Passive abilities]{passive abilities} will always have a <b>duration</b> listed that tell you
-        when they are and aren't in effect.</p><p class="note"><b>Note:</b> @Wiki[Category:Passive abilities]{passive
+        @Identifier[core:passive-maneuvers]{passive abilities} will always have a <b>duration</b> listed that tell you
+        when they are and aren't in effect.</p><p class="note"><b>Note:</b> @Identifier[core:passive-maneuvers]{passive
         abilities} are in effect whether you like them or not. You can not simply choose to not use them.</p><h3>Slow
         Maneuvers</h3><p><b>Slow maneuvers</b> are those that take longer than a single turn to execute. Some may be on
         the scale of a @Wiki[Category:Short rest abilities]{short} or @Wiki[Category:Long rest abilities]{long rest}, in
-        which case they cannot be used in combat. Other @Wiki[Category:Slow abilities]{slow abilities}, such as most
+        which case they cannot be used in combat. Other @Identifier[core:slow-maneuvers]{slow abilities}, such as most
         @Wiki[Category:Ritual delivery abilities]{rituals}, have a more precise <b>execution time</b> (or <b>casting
         time</b>) specified in seconds, minutes, hours, or some other defined unit of time. These can be done during
         combat so long as a round doesn't pass without the creature executing them using
@@ -1156,7 +1166,7 @@ pages:
     text:
       content: >-
         <p>An @Pack[teriock.abilities]{ability} that <b>detonates</b> is one that executes again as an
-        @Wiki[Category:Aura delivery abilities]{aura} if it hits its initial target and does not
+        @Identifier[core:aura-delivery]{aura} if it hits its initial target and does not
         @Identifier[core:fizzles]{fizzle}.</p>
     type: rule
   - _id: domains000000000
@@ -1382,7 +1392,8 @@ pages:
         @Pack[teriock.abilities]{ability's} effect applies for. Many abilities have an "end condition" that can apply
         before the full duration is reached. Other abilities have an "@Wiki[Category:Instant duration
         abilities]{instant}" duration which means the effect is simply applied at once. The duration of
-        @Wiki[Category:Passive abilities]{passive abilities} describes the conditions under which they're in effect.</p>
+        @Identifier[core:passive-maneuvers]{passive abilities} describes the conditions under which they're in
+        effect.</p>
     type: rule
   - _id: fluencyBonus0000
     _key: "!journal.pages!core000000000000.fluencyBonus0000"
@@ -1482,9 +1493,9 @@ pages:
       content: >-
         <p>The <b>feat interaction</b> (or "feat save interaction") is used whenever a target would have the chance to
         respond to an @Pack[teriock.abilities]{ability} that doesn't hit them physically (such as area of effect
-        abilities like @Wiki[Category:Aura delivery abilities]{auras}). Any @Pack[teriock.abilities]{ability} using the
-        feat interaction has a "saving feature" section which describes which @Identifier[core:attributes]{attribute}
-        the target must use to make the save. They then add two times that @Identifier[core:attributes]{attribute}. For
+        abilities like @Identifier[core:aura-delivery]{auras}). Any @Pack[teriock.abilities]{ability} using the feat
+        interaction has a "saving feature" section which describes which @Identifier[core:attributes]{attribute} the
+        target must use to make the save. They then add two times that @Identifier[core:attributes]{attribute}. For
         instance, if an ability requires a "feat of strength" to make the save, then the target will roll [[/roll 1d20]]
         + (2 × @Identifier[core:strength]{STR}). If they are @Identifier[core:proficiency-bonus]{proficient} in the
         attribute they are saving with, they will add their @Identifier[core:proficiency-bonus]{proficiency bonus} to
@@ -1531,7 +1542,7 @@ pages:
         You choose the additional targets. These extra executions do <i>not</i> count as new attacks for the purposes of
         @Identifier[core:multiple-attacks]{attack penalties}, although they must still be rolled.</p><h3>Detonate
         Expansion</h3><p>An @Pack[teriock.abilities]{ability} that <b>detonates</b> is one that executes again as an
-        @Wiki[Category:Aura delivery abilities]{aura} if it hits its initial target and does not
+        @Identifier[core:aura-delivery]{aura} if it hits its initial target and does not
         @Identifier[core:fizzles]{fizzle}.</p>
     type: rule
   - _id: elderSorcery0000
@@ -1758,18 +1769,17 @@ pages:
       img: systems/teriock/src/icons/core-rules/hand-delivery.webp
     text:
       content: >-
-        <p>Like with @Wiki[Category:Sight delivery abilities]{sight} and eyeballs, @Wiki[Category:Hand delivery
-        abilities]{hand delivery sourced abilities} don't require the user to physically have a dexterous humanoid hand
-        with recognizable fingers. Some creatures with claws, tentacles, or other appendages can use hand abilities
-        without problem. However, something of this nature is always required. Such @Pack[teriock.bodyParts]{body parts}
-        have the @Identifier[property:handy]{handy property}. If a creature that typically has
-        @Identifier[body:hand]{literal hands} has their arms @Identifier[ability:hack]{Hacked} or has their
-        @Identifier[body:hand]{hands} cut off, then they are unable to use @Wiki[Category:Hand delivery abilities]{hand
-        delivered abilities}. It may be possible for them to find other ways to use @Wiki[Category:Hand delivery
-        abilities]{these abilities} in the future, but that's up to @Identifier[core:game-master]{GM}
-        discretion.</p><p>The range of @Wiki[Category:Hand delivery abilities]{hand delivery sourced abilities} is the
-        reach of the @Identifier[core:executor]{executor's} arm (or other appendage). This depends in part on the
-        creature's @Identifier[core:size]{size}, but is usually 5 feet.</p>
+        <p>Like with @Identifier[core:sight-delivery]{sight} and eyeballs, @Identifier[core:hand-delivery]{hand delivery
+        sourced abilities} don't require the user to physically have a dexterous humanoid hand with recognizable
+        fingers. Some creatures with claws, tentacles, or other appendages can use hand abilities without problem.
+        However, something of this nature is always required. Such @Pack[teriock.bodyParts]{body parts} have the
+        @Identifier[property:handy]{handy property}. If a creature that typically has @Identifier[body:hand]{literal
+        hands} has their arms @Identifier[ability:hack]{Hacked} or has their @Identifier[body:hand]{hands} cut off, then
+        they are unable to use @Identifier[core:hand-delivery]{hand delivered abilities}. It may be possible for them to
+        find other ways to use @Identifier[core:hand-delivery]{these abilities} in the future, but that's up to
+        @Identifier[core:game-master]{GM} discretion.</p><p>The range of @Identifier[core:hand-delivery]{hand delivery
+        sourced abilities} is the reach of the @Identifier[core:executor]{executor's} arm (or other appendage). This
+        depends in part on the creature's @Identifier[core:size]{size}, but is usually 5 feet.</p>
     type: rule
   - _id: healing000000000
     _key: "!journal.pages!core000000000000.healing000000000"
@@ -1969,14 +1979,13 @@ pages:
       content: >-
         <p><b>Item delivery</b> abilities are transmitted from the @Identifier[core:executor]{executor} to the
         @Identifier[core:targets]{target} via one of the @Identifier[core:executor]{executor's} items. Some
-        @Wiki[Category:Item delivery abilities]{item delivery abilities} may only specify "item" as the source. Others
-        may give a more specific description such as
-        "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
+        @Identifier[core:bite-delivery]{item delivery abilities} may only specify "item" as the source. Others may give
+        a more specific description such as "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
         "@UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}", or
         "@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}". These are all considered to be delivered
         with items and are just a shorthand for the type of item that can be used.</p><p>The
-        @Identifier[core:range]{range} of @Wiki[Category:Item delivery abilities]{item delivery abilities} is that of
-        the @Wiki[Category:Armaments]{item} that delivers it.</p>
+        @Identifier[core:range]{range} of @Identifier[core:bite-delivery]{item delivery abilities} is that of the
+        @Wiki[Category:Armaments]{item} that delivers it.</p>
     type: rule
   - _id: interactions0000
     _key: "!journal.pages!core000000000000.interactions0000"
@@ -2033,36 +2042,37 @@ pages:
         penalty</b> (AP) which will apply to future attacks made in the same @Identifier[core:turns]{turn}. The value of
         the penalty that's added is the AP of the @Pack[teriock.equipment]{equipment} or @Pack[teriock.bodyParts]{body
         part} you @Identifier[core:attack-interaction]{attack} with. Unless otherwise noted, an
-        @Identifier[core:attack-interaction]{attack} has an AP of -3. This is the AP for @Wiki[Category:Missile delivery
-        abilities]{missile attacks} as well as any other @Identifier[core:attack-interaction]{attack} where an -3 isn't
-        stated. Your attack penalty resets to 0 at the end of each @Identifier[core:turns]{turn} (not just your
-        own).</p><h3>Block Interaction</h3><p>If an attack hits, but has not gone critical, then the defender has a
-        chance to <b>block</b>. In addition to the @Identifier[core:armor-class]{AV} of
-        @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}, every @Pack[teriock.equipment]{other item}
-        has some <b>block value</b> (BV). If the defender attempts an @Pack[teriock.abilities]{ability} that uses the
-        <b>block interaction</b>, then they add the item's BV to their @Identifier[core:armor-class]{armor class}. If
-        the new total is <i>greater than</i> the attacker's attack roll, then the block succeeds. If the new total is
-        less than or equal to the attacker's attack roll, then the block fails. The consequence of a successful or
-        unsuccessful block are described in the "On success" and "On fail" section of the @Wiki[Category:Block
-        abilities]{ability} that's used. For a @Identifier[ability:basic-block]{Basic Block}, a successful block causes
-        the attacking effect to @Identifier[core:fizzles]{fizzle}.</p><p><img class="interaction-routine"
+        @Identifier[core:attack-interaction]{attack} has an AP of -3. This is the AP for
+        @Identifier[core:missile-delivery]{missile attacks} as well as any other
+        @Identifier[core:attack-interaction]{attack} where an -3 isn't stated. Your attack penalty resets to 0 at the
+        end of each @Identifier[core:turns]{turn} (not just your own).</p><h3>Block Interaction</h3><p>If an attack
+        hits, but has not gone critical, then the defender has a chance to <b>block</b>. In addition to the
+        @Identifier[core:armor-class]{AV} of @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}, every
+        @Pack[teriock.equipment]{other item} has some <b>block value</b> (BV). If the defender attempts an
+        @Pack[teriock.abilities]{ability} that uses the <b>block interaction</b>, then they add the item's BV to their
+        @Identifier[core:armor-class]{armor class}. If the new total is <i>greater than</i> the attacker's attack roll,
+        then the block succeeds. If the new total is less than or equal to the attacker's attack roll, then the block
+        fails. The consequence of a successful or unsuccessful block are described in the "On success" and "On fail"
+        section of the @Wiki[Category:Block abilities]{ability} that's used. For a
+        @Identifier[ability:basic-block]{Basic Block}, a successful block causes the attacking effect to
+        @Identifier[core:fizzles]{fizzle}.</p><p><img class="interaction-routine"
         src="systems/teriock/src/assets/interaction-routines/block-interaction.svg"></p><h3>Feat Interaction</h3><p>The
         <b>feat interaction</b> (or "feat save interaction") is used whenever a target would have the chance to respond
         to an @Pack[teriock.abilities]{ability} that doesn't hit them physically (such as area of effect abilities like
-        @Wiki[Category:Aura delivery abilities]{auras}). Any @Pack[teriock.abilities]{ability} using the feat
-        interaction has a "saving feature" section which describes which @Identifier[core:attributes]{attribute} the
-        target must use to make the save. They then add two times that @Identifier[core:attributes]{attribute}. For
-        instance, if an ability requires a "feat of strength" to make the save, then the target will roll [[/roll 1d20]]
-        + (2 × @Identifier[core:strength]{STR}). If they are @Identifier[core:proficiency-bonus]{proficient} in the
-        attribute they are saving with, they will add their @Identifier[core:proficiency-bonus]{proficiency bonus} to
-        the roll as well. If the roll is greater than or equal to the <b>save @Identifier[core:difficulty-class]{DC}</b>
-        then the save <b>succeeds</b>. If the roll is less than the save @Identifier[core:difficulty-class]{DC} then the
-        save <b>fails</b>. The consequence of a successful or unsuccessful save are described in the "on success" and
-        "on fail" section of the @Pack[teriock.abilities]{ability} that's used. Some feats may also be able to "go
-        critical" if the save is a natural 1.</p><p>The save @Identifier[core:difficulty-class]{DC} depends on the
-        creature using the @Pack[teriock.abilities]{ability}. If they're @Identifier[core:proficiency-bonus]{proficient}
-        in the ability, then the save @Identifier[core:difficulty-class]{DC} is 10 +
-        @Identifier[core:proficiency-bonus]{P}. If not, then it's just 10.</p><p><img class="interaction-routine"
+        @Identifier[core:aura-delivery]{auras}). Any @Pack[teriock.abilities]{ability} using the feat interaction has a
+        "saving feature" section which describes which @Identifier[core:attributes]{attribute} the target must use to
+        make the save. They then add two times that @Identifier[core:attributes]{attribute}. For instance, if an ability
+        requires a "feat of strength" to make the save, then the target will roll [[/roll 1d20]] + (2 ×
+        @Identifier[core:strength]{STR}). If they are @Identifier[core:proficiency-bonus]{proficient} in the attribute
+        they are saving with, they will add their @Identifier[core:proficiency-bonus]{proficiency bonus} to the roll as
+        well. If the roll is greater than or equal to the <b>save @Identifier[core:difficulty-class]{DC}</b> then the
+        save <b>succeeds</b>. If the roll is less than the save @Identifier[core:difficulty-class]{DC} then the save
+        <b>fails</b>. The consequence of a successful or unsuccessful save are described in the "on success" and "on
+        fail" section of the @Pack[teriock.abilities]{ability} that's used. Some feats may also be able to "go critical"
+        if the save is a natural 1.</p><p>The save @Identifier[core:difficulty-class]{DC} depends on the creature using
+        the @Pack[teriock.abilities]{ability}. If they're @Identifier[core:proficiency-bonus]{proficient} in the
+        ability, then the save @Identifier[core:difficulty-class]{DC} is 10 + @Identifier[core:proficiency-bonus]{P}. If
+        not, then it's just 10.</p><p><img class="interaction-routine"
         src="systems/teriock/src/assets/interaction-routines/feat-interaction.svg"></p><h3>Manifest
         Interaction</h3><p>The final interaction is the <b>manifest Interaction</b>. It's by far the simplest and is
         used whenever an effect "just happens". There's no built in way to deal with a manifest, only responses like
@@ -2300,7 +2310,7 @@ pages:
       img: systems/teriock/src/icons/core-rules/item-target.webp
     text:
       content: >-
-        <p>@Wiki[Category:Item target abilities]{Attacks that target items} need different
+        <p>@Identifier[core:item-target]{Attacks that target items} need different
         @Identifier[core:attack-interaction]{hit rolls} depending on the @Pack[teriock.equipment]{type of
         item}.</p><ul><li>Wielded items (such as @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} or
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}): @Identifier[core:armor-class]{AC} + 3 -
@@ -2308,7 +2318,7 @@ pages:
         @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} or @Identifier[equipment:cloak]{cloaks}):
         @Identifier[core:armor-class]{AC}</li><li>@Identifier[property:small]{Small}
         @Identifier[property:searchable]{searchable items} (such as rings or amulets): @Identifier[core:armor-class]{AC}
-        + 6</li></ul><p>If an @Wiki[Category:Item target abilities]{ability that targets an item} is successfully
+        + 6</li></ul><p>If an @Identifier[core:item-target]{ability that targets an item} is successfully
         @Identifier[core:block-interaction]{blocked}, it automatically hits the item that
         @Identifier[core:block-interaction]{blocked} it.</p>
     type: rule
@@ -2342,7 +2352,7 @@ pages:
     text:
       content: >-
         <p>Rather than hitting an entire creature, some @Pack[teriock.abilities]{abilities} will say that they only hit
-        <b>arms</b>, <b>legs</b>, or <b>limbs</b>. If @Wiki[Category:Limb target abilities]{these abilities} are
+        <b>arms</b>, <b>legs</b>, or <b>limbs</b>. If @Identifier[core:limb-target]{these abilities} are
         @Identifier[core:attack-interaction]{attacks}, then they are slightly harder to land a hit with than ones that
         can hit a creature anywhere. They require hitting that creature's @Identifier[core:armor-class]{AC} + 2.</p>
     type: rule
@@ -2361,10 +2371,10 @@ pages:
         <b>@Identifier[core:abilities]{abilities}</b>. Each @Identifier[core:abilities]{ability}, in turn, has one of
         four possible <b>maneuvers</b> that determine when it can be used.</p><h2>Active Maneuvers</h2><p><b>Active
         maneuvers</b> are done proactively within the time scale of a single turn. On each creature's turn, they may
-        take up to <i>three</i> Actions in total. Every @Wiki[Category:Active abilities]{active ability} will specify
+        take up to <i>three</i> Actions in total. Every @Identifier[core:active-maneuvers]{active ability} will specify
         how many of these actions it consumes. They may be @Wiki[Category:Single action abilities]{single actions},
         @Wiki[Category:Double action abilities]{double actions}, or @Wiki[Category:Triple action abilities]{triple
-        actions}. Some @Wiki[Category:Active abilities]{active abilities} may also be @Wiki[Category:Free action
+        actions}. Some @Identifier[core:active-maneuvers]{active abilities} may also be @Wiki[Category:Free action
         abilities]{free actions}. These not only don't consume a creature's actions, but can be done at <i>any</i> time
         (even on other creatures' turns)! However, they cannot be used in reaction to other
         @Pack[teriock.abilities]{abilities}.</p><h2>Reactive Maneuvers</h2><p><b>Reactive maneuvers</b> can only be done
@@ -2372,22 +2382,22 @@ pages:
         conditions</b> are. These could be @Identifier[ability:tumble]{taking damage},
         @Identifier[ability:resolve-conflict]{hearing another creature speak},
         @Identifier[ability:opportunity-attack]{another creature moving away from you}, or anything else. Each creature
-        has <i>only one</i> @Wiki[Category:Reaction abilities]{reaction} per turn. However, some @Wiki[Category:Reactive
-        abilities]{reactive abilities} are @Wiki[Category:Free reaction abilities]{free reactions}. These have no limit
-        on the number of times they can be used, so long as their triggering condition is met every time.</p><p>The
-        order of reactive maneuver resolution is determined by a "last in, first out" stack. So if so if a creature
-        casts @Identifier[ability:fire-ball]{Fire Ball}, and another casts @Identifier[ability:dispel-magic]{Dispel
-        Magic}, and the creature that first cast @Identifier[ability:fire-ball]{Fire Ball} casts
-        @Identifier[ability:dispel-magic]{Dispel Magic} on the first dispel, then the
-        @Identifier[ability:fire-ball]{Fire Ball} resolves. A given creature can only use a given
-        @Wiki[Category:Reactive abilities]{reactive ability} once within a given stack.</p><h2>Passive
+        has <i>only one</i> @Wiki[Category:Reaction abilities]{reaction} per turn. However, some
+        @Identifier[core:reactive-maneuvers]{reactive abilities} are @Wiki[Category:Free reaction abilities]{free
+        reactions}. These have no limit on the number of times they can be used, so long as their triggering condition
+        is met every time.</p><p>The order of reactive maneuver resolution is determined by a "last in, first out"
+        stack. So if so if a creature casts @Identifier[ability:fire-ball]{Fire Ball}, and another casts
+        @Identifier[ability:dispel-magic]{Dispel Magic}, and the creature that first cast
+        @Identifier[ability:fire-ball]{Fire Ball} casts @Identifier[ability:dispel-magic]{Dispel Magic} on the first
+        dispel, then the @Identifier[ability:fire-ball]{Fire Ball} resolves. A given creature can only use a given
+        @Identifier[core:reactive-maneuvers]{reactive ability} once within a given stack.</p><h2>Passive
         Maneuvers</h2><p><b>Passive maneuvers</b> act in the background and don't require any decision to use.
-        @Wiki[Category:Passive abilities]{passive abilities} will always have a <b>duration</b> listed that tell you
-        when they are and aren't in effect.</p><p class="note"><b>Note:</b> @Wiki[Category:Passive abilities]{passive
+        @Identifier[core:passive-maneuvers]{passive abilities} will always have a <b>duration</b> listed that tell you
+        when they are and aren't in effect.</p><p class="note"><b>Note:</b> @Identifier[core:passive-maneuvers]{passive
         abilities} are in effect whether you like them or not. You can not simply choose to not use them.</p><h2>Slow
         Maneuvers</h2><p><b>Slow maneuvers</b> are those that take longer than a single turn to execute. Some may be on
         the scale of a @Wiki[Category:Short rest abilities]{short} or @Wiki[Category:Long rest abilities]{long rest}, in
-        which case they cannot be used in combat. Other @Wiki[Category:Slow abilities]{slow abilities}, such as most
+        which case they cannot be used in combat. Other @Identifier[core:slow-maneuvers]{slow abilities}, such as most
         @Wiki[Category:Ritual delivery abilities]{rituals}, have a more precise <b>execution time</b> (or <b>casting
         time</b>) specified in seconds, minutes, hours, or some other defined unit of time. These can be done during
         combat so long as a round doesn't pass without the creature executing them using
@@ -2494,7 +2504,7 @@ pages:
         The value of the penalty that's added is the AP of the @Pack[teriock.equipment]{equipment} or
         @Pack[teriock.bodyParts]{body part} you @Identifier[core:attack-interaction]{attack} with. Unless otherwise
         noted, an @Identifier[core:attack-interaction]{attack} has an AP of -3. This is the AP for
-        @Wiki[Category:Missile delivery abilities]{missile attacks} as well as any other
+        @Identifier[core:missile-delivery]{missile attacks} as well as any other
         @Identifier[core:attack-interaction]{attack} where an -3 isn't stated. Your attack penalty resets to 0 at the
         end of each @Identifier[core:turns]{turn} (not just your own).</p>
     type: rule
@@ -2637,10 +2647,10 @@ pages:
       img: systems/teriock/src/icons/core-rules/passive-maneuvers.webp
     text:
       content: >-
-        <p><b>Passive maneuvers</b> act in the background and don't require any decision to use. @Wiki[Category:Passive
-        abilities]{passive abilities} will always have a <b>duration</b> listed that tell you when they are and aren't
-        in effect.</p><p class="note"><b>Note:</b> @Wiki[Category:Passive abilities]{passive abilities} are in effect
-        whether you like them or not. You can not simply choose to not use them.</p>
+        <p><b>Passive maneuvers</b> act in the background and don't require any decision to use.
+        @Identifier[core:passive-maneuvers]{passive abilities} will always have a <b>duration</b> listed that tell you
+        when they are and aren't in effect.</p><p class="note"><b>Note:</b> @Identifier[core:passive-maneuvers]{passive
+        abilities} are in effect whether you like them or not. You can not simply choose to not use them.</p>
     type: rule
   - _id: permanentDeath00
     _key: "!journal.pages!core000000000000.permanentDeath00"
@@ -2915,14 +2925,14 @@ pages:
     text:
       content: >-
         <p>Each @Pack[teriock.abilities]{ability} has some <b>range</b> over which it can be used. If it is a
-        @Wiki[Category:Missile delivery abilities]{missile}, @Wiki[Category:Sight delivery abilities]{sight}, or
-        @Wiki[Category:Area of effect abilities]{area of effect ability}, then the range is specified by the
-        @Wiki[Category:Ranged abilities]{ability} itself. For @Wiki[Category:Item delivery abilities]{item delivery
-        abilities}, the range is determined by the @Wiki[Category:Armaments]{item} that is being used. If the
-        @Wiki[Category:Armaments]{item} is melee, then it's the @Wiki[Category:Armaments]{item's} range plus your
-        @Identifier[core:size]{reach}. This includes @Wiki[Category:Hand delivery abilities]{hand} and
-        @Wiki[Category:Bite delivery abilities]{bite delivery abilities}. If it's @Identifier[property:ranged]{ranged},
-        then it's just the @Identifier[property:ranged]{range} of the @Identifier[property:ranged]{item}.</p>
+        @Identifier[core:missile-delivery]{missile}, @Identifier[core:sight-delivery]{sight}, or @Wiki[Category:Area of
+        effect abilities]{area of effect ability}, then the range is specified by the @Wiki[Category:Ranged
+        abilities]{ability} itself. For @Identifier[core:bite-delivery]{item delivery abilities}, the range is
+        determined by the @Wiki[Category:Armaments]{item} that is being used. If the @Wiki[Category:Armaments]{item} is
+        melee, then it's the @Wiki[Category:Armaments]{item's} range plus your @Identifier[core:size]{reach}. This
+        includes @Identifier[core:hand-delivery]{hand} and @Identifier[core:bite-delivery]{bite delivery abilities}. If
+        it's @Identifier[property:ranged]{ranged}, then it's just the @Identifier[property:ranged]{range} of the
+        @Identifier[property:ranged]{item}.</p>
     type: rule
   - _id: reactiveManeuver
     _key: "!journal.pages!core000000000000.reactiveManeuver"
@@ -2941,14 +2951,14 @@ pages:
         @Identifier[ability:tumble]{taking damage}, @Identifier[ability:resolve-conflict]{hearing another creature
         speak}, @Identifier[ability:opportunity-attack]{another creature moving away from you}, or anything else. Each
         creature has <i>only one</i> @Wiki[Category:Reaction abilities]{reaction} per turn. However, some
-        @Wiki[Category:Reactive abilities]{reactive abilities} are @Wiki[Category:Free reaction abilities]{free
+        @Identifier[core:reactive-maneuvers]{reactive abilities} are @Wiki[Category:Free reaction abilities]{free
         reactions}. These have no limit on the number of times they can be used, so long as their triggering condition
         is met every time.</p><p>The order of reactive maneuver resolution is determined by a "last in, first out"
         stack. So if so if a creature casts @Identifier[ability:fire-ball]{Fire Ball}, and another casts
         @Identifier[ability:dispel-magic]{Dispel Magic}, and the creature that first cast
         @Identifier[ability:fire-ball]{Fire Ball} casts @Identifier[ability:dispel-magic]{Dispel Magic} on the first
         dispel, then the @Identifier[ability:fire-ball]{Fire Ball} resolves. A given creature can only use a given
-        @Wiki[Category:Reactive abilities]{reactive ability} once within a given stack.</p>
+        @Identifier[core:reactive-maneuvers]{reactive ability} once within a given stack.</p>
     type: rule
   - _id: rounds0000000000
     _key: "!journal.pages!core000000000000.rounds0000000000"
@@ -3029,7 +3039,7 @@ pages:
     text:
       content: >-
         <p>@Wiki[Category:Shatter cost abilities]{Abilities with the shatter cost} are always delivered with some sort
-        of @Wiki[Category:Item delivery abilities]{item}. As a cost of using the @Wiki[Category:Shatter cost
+        of @Identifier[core:bite-delivery]{item}. As a cost of using the @Wiki[Category:Shatter cost
         abilities]{ability}, the @Pack[teriock.equipment]{item} is @Identifier[property:shattered]{shattered}. If the
         item cannot be @Identifier[property:shattered]{shattered}, the @Wiki[Category:Shatter cost abilities]{ability}
         can still be used. The @Pack[teriock.equipment]{item} must not already be
@@ -3161,7 +3171,7 @@ pages:
       content: >-
         <p><b>Slow maneuvers</b> are those that take longer than a single turn to execute. Some may be on the scale of a
         @Wiki[Category:Short rest abilities]{short} or @Wiki[Category:Long rest abilities]{long rest}, in which case
-        they cannot be used in combat. Other @Wiki[Category:Slow abilities]{slow abilities}, such as most
+        they cannot be used in combat. Other @Identifier[core:slow-maneuvers]{slow abilities}, such as most
         @Wiki[Category:Ritual delivery abilities]{rituals}, have a more precise <b>execution time</b> (or <b>casting
         time</b>) specified in seconds, minutes, hours, or some other defined unit of time. These can be done during
         combat so long as a round doesn't pass without the creature executing them using
@@ -3490,22 +3500,21 @@ pages:
         creatures]{plant}. Check with your @Identifier[core:game-master]{GM} if in doubt of whether something is a
         @Pack[teriock.creatures]{creature} or not.</p><h4>Limb</h4><p>Rather than hitting an entire creature, some
         @Pack[teriock.abilities]{abilities} will say that they only hit <b>arms</b>, <b>legs</b>, or <b>limbs</b>. If
-        @Wiki[Category:Limb target abilities]{these abilities} are @Identifier[core:attack-interaction]{attacks}, then
-        they are slightly harder to land a hit with than ones that can hit a creature anywhere. They require hitting
-        that creature's @Identifier[core:armor-class]{AC} + 2.</p><h4>Vitals</h4><p><b>Vitals</b> targeted
+        @Identifier[core:limb-target]{these abilities} are @Identifier[core:attack-interaction]{attacks}, then they are
+        slightly harder to land a hit with than ones that can hit a creature anywhere. They require hitting that
+        creature's @Identifier[core:armor-class]{AC} + 2.</p><h4>Vitals</h4><p><b>Vitals</b> targeted
         @Pack[teriock.abilities]{abilities} need to hit a creature's head or other vital organs rather than landing
-        anywhere. If @Wiki[Category:Vitals target abilities]{these abilities} are
-        @Identifier[core:attack-interaction]{attacks}, then they require hitting a creature's
-        @Identifier[core:armor-class]{AC} + 3.</p><h3>Item</h3><p>@Wiki[Category:Item target abilities]{Attacks that
-        target items} need different @Identifier[core:attack-interaction]{hit rolls} depending on the
-        @Pack[teriock.equipment]{type of item}.</p><ul><li>Wielded items (such as
-        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} or
+        anywhere. If @Identifier[core:vitals-target]{these abilities} are @Identifier[core:attack-interaction]{attacks},
+        then they require hitting a creature's @Identifier[core:armor-class]{AC} +
+        3.</p><h3>Item</h3><p>@Identifier[core:item-target]{Attacks that target items} need different
+        @Identifier[core:attack-interaction]{hit rolls} depending on the @Pack[teriock.equipment]{type of
+        item}.</p><ul><li>Wielded items (such as @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} or
         @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}): @Identifier[core:armor-class]{AC} + 3 -
         @Identifier[core:block-interaction]{BV}</li><li>Large worn items (such as
         @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} or @Identifier[equipment:cloak]{cloaks}):
         @Identifier[core:armor-class]{AC}</li><li>@Identifier[property:small]{Small}
         @Identifier[property:searchable]{searchable items} (such as rings or amulets): @Identifier[core:armor-class]{AC}
-        + 6</li></ul><p>If an @Wiki[Category:Item target abilities]{ability that targets an item} is successfully
+        + 6</li></ul><p>If an @Identifier[core:item-target]{ability that targets an item} is successfully
         @Identifier[core:block-interaction]{blocked}, it automatically hits the item that
         @Identifier[core:block-interaction]{blocked} it.</p><h3>Area</h3><p>@Pack[teriock.abilities]{Abilities} that
         target an <b>area</b> do not have a precisely defined size. Rather, they affect a small, cohesive space such as
@@ -3739,18 +3748,19 @@ pages:
         objects and structures. </td></tr><tr><td>@Identifier[tradecraft:chef]{Chef} </td><td>Chef checks can be used to
         cook, prepare, serve, and evaluate @Wiki[Category:Refreshments]{food and drink}.
         </td></tr><tr><td>@Identifier[tradecraft:locksmith]{Locksmith} </td><td>Locksmith checks can be used to
-        assemble, pick, and evaluate locks. </td></tr><tr><td>@Identifier[tradecraft:mariner]{Mariner} </td><td>Mariner
-        checks can be used to sail and understand ships and the sea. It can also be used to understand the workings of
-        ships and how to repair them. </td></tr><tr><td>@Identifier[tradecraft:tailor]{Tailor} </td><td>Tailor checks
-        can be used to sew and repair @UUID[Compendium.teriock.tables.RollTable.b75bd9b799785f73]{clothing} and other
-        cloth @Pack[teriock.equipment]{items}. It can also be used to understand the make and quality of cloth
+        assemble, pick, and evaluate @Identifier[equipment:lock]{locks}.
+        </td></tr><tr><td>@Identifier[tradecraft:mariner]{Mariner} </td><td>Mariner checks can be used to sail and
+        understand ships and the sea. It can also be used to understand the workings of ships and how to repair them.
+        </td></tr><tr><td>@Identifier[tradecraft:tailor]{Tailor} </td><td>Tailor checks can be used to sew and repair
+        @UUID[Compendium.teriock.tables.RollTable.b75bd9b799785f73]{clothing} and other cloth
+        @Pack[teriock.equipment]{items}. It can also be used to understand the make and quality of cloth
         @Pack[teriock.equipment]{items}. </td></tr></tbody></table><h3>Mediator
         Tradecrafts</h3><table><tbody><tr><th>Tradecraft </th><th>Description
         </th></tr><tr><td>@Identifier[tradecraft:courtier]{Courtier} </td><td>Courtier checks can be used to befriend,
         manipulate, and deceive, and adjust the attitudes of other cratures.
         </td></tr><tr><td>@Identifier[tradecraft:enforcer]{Enforcer} </td><td>Enforcer checks can be used to intimidate
         others and appear authoritative. </td></tr><tr><td>@Identifier[tradecraft:gambler]{Gambler} </td><td>Gambler
-        checks can be used to play games of skill or luck and assess the odds of things.
+        checks can be used to play @Wiki[Category:Games]{games} of skill or luck and assess the odds of things.
         </td></tr><tr><td>@Identifier[tradecraft:innkeeper]{Innkeeper} </td><td>Innkeeper checks can be used to find
         information about other people and hear or spread rumors.
         </td></tr><tr><td>@Identifier[tradecraft:peacekeeper]{Peacekeeper} </td><td>Peacekeeper checks can be used to
@@ -3842,7 +3852,7 @@ pages:
     text:
       content: >-
         <p><b>Vitals</b> targeted @Pack[teriock.abilities]{abilities} need to hit a creature's head or other vital
-        organs rather than landing anywhere. If @Wiki[Category:Vitals target abilities]{these abilities} are
+        organs rather than landing anywhere. If @Identifier[core:vitals-target]{these abilities} are
         @Identifier[core:attack-interaction]{attacks}, then they require hitting a creature's
         @Identifier[core:armor-class]{AC} + 3.</p>
     type: rule
@@ -4009,22 +4019,22 @@ pages:
     text:
       content: >-
         <p>Every @Pack[teriock.abilities]{ability} has one and <i>only one</i><b>delivery</b>. This always has at least
-        two parts, a <a href="#Source">source</a> and <a href="#Interaction">interaction</a>.</p><h3>Source</h3><p>The
-        source of an @Pack[teriock.abilities]{ability's} delivery is the means by which it is transmitted from the
-        @Identifier[core:executor]{executor} to the @Identifier[core:targets]{target}. There are many possible sources,
-        but the most common ones are as follows.</p><h4>Item</h4><p><b>Item delivery</b> abilities are transmitted from
-        the @Identifier[core:executor]{executor} to the @Identifier[core:targets]{target} via one of the
-        @Identifier[core:executor]{executor's} items. Some @Wiki[Category:Item delivery abilities]{item delivery
-        abilities} may only specify "item" as the source. Others may give a more specific description such as
+        two parts, a source and interaction.</p><h3>Source</h3><p>The source of an @Pack[teriock.abilities]{ability's}
+        delivery is the means by which it is transmitted from the @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target}. There are many possible sources, but the most common ones are as
+        follows.</p><h4>Item</h4><p><b>Item delivery</b> abilities are transmitted from the
+        @Identifier[core:executor]{executor} to the @Identifier[core:targets]{target} via one of the
+        @Identifier[core:executor]{executor's} items. Some @Identifier[core:bite-delivery]{item delivery abilities} may
+        only specify "item" as the source. Others may give a more specific description such as
         "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
         "@UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}", or
         "@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}". These are all considered to be delivered
         with items and are just a shorthand for the type of item that can be used.</p><p>The
-        @Identifier[core:range]{range} of @Wiki[Category:Item delivery abilities]{item delivery abilities} is that of
-        the @Wiki[Category:Armaments]{item} that delivers it.</p><h4>Missile</h4><p>@Pack[teriock.abilities]{Abilities}
-        with the <b>missile</b> source are those that would have spell stones in live action <a target="_blank"
-        rel="nofollow noreferrer noopener" class="external text" href="https://www.fanwar.com/">FanWar</a>. These are
-        most often @Identifier[core:attack-interaction]{attacks}, but do not have any physical
+        @Identifier[core:range]{range} of @Identifier[core:bite-delivery]{item delivery abilities} is that of the
+        @Wiki[Category:Armaments]{item} that delivers it.</p><h4>Missile</h4><p>@Pack[teriock.abilities]{Abilities} with
+        the <b>missile</b> source are those that would have spell stones in live action <a target="_blank" rel="nofollow
+        noreferrer noopener" class="external text" href="https://www.fanwar.com/">FanWar</a>. These are most often
+        @Identifier[core:attack-interaction]{attacks}, but do not have any physical
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or other @Wiki[Category:Armaments]{item}
         that mediates them. Instead, these @Pack[teriock.abilities]{abilities} may correspond to a
         @Identifier[ability:fire-ball]{ball of fire}, a @Identifier[ability:lightning-ray]{bolt of lightning}, a
@@ -4043,34 +4053,43 @@ pages:
         instance, @Identifier[ability:duel]{Duel} operates by sight, but has a range of 30 feet even though the user may
         see the target from much further away.</p><h4>Aura</h4><p>@Pack[teriock.abilities]{Abilities} with the
         <b>aura</b> delivery source are ones that could affect every target within some specified radius, centered on
-        the @Identifier[core:executor]{executor}. Unless specifically noted by the @Pack[teriock.abilities]{ability},
-        the @Identifier[core:executor]{executor} is not affected by @Wiki[Category:Aura delivery abilities]{aura
-        abilities}.</p><h4>Hand</h4><p>Like with @Wiki[Category:Sight delivery abilities]{sight} and eyeballs,
-        @Wiki[Category:Hand delivery abilities]{hand delivery sourced abilities} don't require the user to physically
-        have a dexterous humanoid hand with recognizable fingers. Some creatures with claws, tentacles, or other
-        appendages can use hand abilities without problem. However, something of this nature is always required. Such
+        the @Identifier[core:executor]{executor}. Any targeted creatures that are at least partially within the area are
+        affected. Any targeted items @Identifier[keyword:bearing]{bared} by creatures at least partially within the area
+        are affected as well. Unless specifically noted by the @Pack[teriock.abilities]{ability}, the
+        @Identifier[core:executor]{executor} is not affected.</p><h4>Cone</h4><p>@Pack[teriock.abilities]{Abilities}
+        with the <b>cone</b> delivery source are ones that could affect every target within some specified radius,
+        originating from the @Identifier[core:executor]{executor}. Rather than extending uniformly from the
+        @Identifier[core:executor]{executor} like an @Identifier[core:aura-delivery]{aura}, these spread in a 60 degree
+        arc centered along a direction of @Identifier[core:executor]{executor's} choice. Any targeted creatures that are
+        at least partially within the area are affected. Any targeted items @Identifier[keyword:bearing]{bared} by
+        creatures at least partially within the area are affected as well. Unless specifically noted by the
+        @Pack[teriock.abilities]{ability}, the @Identifier[core:executor]{executor} is not
+        affected.</p><h4>Hand</h4><p>Like with @Identifier[core:sight-delivery]{sight} and eyeballs,
+        @Identifier[core:hand-delivery]{hand delivery sourced abilities} don't require the user to physically have a
+        dexterous humanoid hand with recognizable fingers. Some creatures with claws, tentacles, or other appendages can
+        use hand abilities without problem. However, something of this nature is always required. Such
         @Pack[teriock.bodyParts]{body parts} have the @Identifier[property:handy]{handy property}. If a creature that
         typically has @Identifier[body:hand]{literal hands} has their arms @Identifier[ability:hack]{Hacked} or has
-        their @Identifier[body:hand]{hands} cut off, then they are unable to use @Wiki[Category:Hand delivery
-        abilities]{hand delivered abilities}. It may be possible for them to find other ways to use @Wiki[Category:Hand
-        delivery abilities]{these abilities} in the future, but that's up to @Identifier[core:game-master]{GM}
-        discretion.</p><p>The range of @Wiki[Category:Hand delivery abilities]{hand delivery sourced abilities} is the
-        reach of the @Identifier[core:executor]{executor's} arm (or other appendage). This depends in part on the
-        creature's @Identifier[core:size]{size}, but is usually 5 feet.</p><h4>Bite</h4><p>Abilities with the
-        @Wiki[Category:Bite delivery abilities]{bite delivery source} are similar to @Wiki[Category:Hand delivery
-        abilities]{hand abilities}, but they are transmitted with something that at least <i>resembles</i> a
-        @Identifier[body:mouth]{mouth} rather than a @Identifier[body:hand]{hand}. These are typically
-        @Identifier[property:biting]{biting}.</p><p>The range of @Wiki[Category:Bite delivery abilities]{bite delivered
-        abilities} is the reach of the @Identifier[core:executor]{executor's} neck (or other similar body part). This
+        their @Identifier[body:hand]{hands} cut off, then they are unable to use @Identifier[core:hand-delivery]{hand
+        delivered abilities}. It may be possible for them to find other ways to use
+        @Identifier[core:hand-delivery]{these abilities} in the future, but that's up to
+        @Identifier[core:game-master]{GM} discretion.</p><p>The range of @Identifier[core:hand-delivery]{hand delivery
+        sourced abilities} is the reach of the @Identifier[core:executor]{executor's} arm (or other appendage). This
         depends in part on the creature's @Identifier[core:size]{size}, but is usually 5
+        feet.</p><h4>Bite</h4><p>Abilities with the @Identifier[core:bite-delivery]{bite delivery source} are similar to
+        @Identifier[core:hand-delivery]{hand abilities}, but they are transmitted with something that at least
+        <i>resembles</i> a @Identifier[body:mouth]{mouth} rather than a @Identifier[body:hand]{hand}. These are
+        typically @Identifier[property:biting]{biting}.</p><p>The range of @Identifier[core:bite-delivery]{bite
+        delivered abilities} is the reach of the @Identifier[core:executor]{executor's} neck (or other similar body
+        part). This depends in part on the creature's @Identifier[core:size]{size}, but is usually 5
         feet.</p><h4>Self</h4><p><b>Self</b> sourced @Pack[teriock.abilities]{abilities} are the simplest ones. They
         have no special means of transmission, but simply come from the @Identifier[core:executor]{executor}. This is
         sometimes used as a catch-all for @Pack[teriock.abilities]{abilities} that don't fit with any other
-        source.</p><h3>Interaction</h3><p>In addition to a <a href="#Source">source</a>, every
-        @Pack[teriock.abilities]{ability} is mediated by one of four @Identifier[core:interactions]{interactions}. This
-        determines what types of dice rolls, if any, need to be done for an @Pack[teriock.abilities]{ability} to affect
-        its @Wiki[Category:Targets]{target}. See the @Identifier[core:interactions]{interactions} page for complete
-        detail.</p><h3>Other Delivery Modifiers</h3><p>Some @Pack[teriock.abilities]{abilities} are <i>always</i>
+        source.</p><h3>Interaction</h3><p>In addition to a source, every @Pack[teriock.abilities]{ability} is mediated
+        by one of four @Identifier[core:interactions]{interactions}. This determines what types of dice rolls, if any,
+        need to be done for an @Pack[teriock.abilities]{ability} to affect its @Identifier[core:targets]{target}. See
+        the @Identifier[core:interactions]{interactions} page for complete detail.</p><h3>Other Delivery
+        Modifiers</h3><p>Some @Pack[teriock.abilities]{abilities} are <i>always</i>
         @Identifier[keyword:armor-voiding]{AV0} or @Identifier[keyword:unblockable]{UB}. When this is the case, it's
         mentioned within the delivery.</p><h3>Delivery Packages</h3><p>@Pack[teriock.abilities]{Abilities} may be listed
         as @Wiki[Category:Strike delivery abilities]{strikes}, @Wiki[Category:Ritual delivery abilities]{rituals},
@@ -4134,9 +4153,9 @@ pages:
       content: >-
         <p>The <b>price</b> of different goods, services, and @Pack[teriock.equipment]{equipment} is typically denoted
         in "[[gp]]" (which stands for "gold pieces" or "gold piece equivalent"). But this does not mean everything is
-        bought and sold using gold coins. There are numerous currencies that all have different [[gp]]
-        values.</p><h2>Currencies</h2><table><tbody><tr><th>Currency </th><th>Symbol </th><th>Value </th><th>Weight
-        </th><th>Type </th></tr><tr><td>Copper </td><td>CP </td><td>[[gp 0.01]] </td><td>0.02 lb.
+        bought and sold using gold @Identifier[equipment:coin]{coins}. There are numerous currencies that all have
+        different [[gp]] values.</p><h2>Currencies</h2><table><tbody><tr><th>Currency </th><th>Symbol </th><th>Value
+        </th><th>Weight </th><th>Type </th></tr><tr><td>Copper </td><td>CP </td><td>[[gp 0.01]] </td><td>0.02 lb.
         </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Silver </td><td>SP </td><td>[[gp 0.1]]
         </td><td>0.02 lb. </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Gold </td><td>GP </td><td>[[gp
         1]] </td><td>0.02 lb. </td><td>@Identifier[equipment:coin]{Coin} </td></tr><tr><td>Ent Tear Amber </td><td>EA
@@ -4196,11 +4215,11 @@ pages:
     name: Elder Sorcery Words
     system:
       identifier: elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Elder Sorcery Words </caption><tbody><tr><th
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Elder Sorcery Words </caption><tbody><tr><th
         style="background-color:#e5a50a1A">OP</th><th style="background-color:#6135831A">Celestial Adjectives</th><th
         style="background-color:#6135831A">Celestial Adverbs</th><th style="background-color:#6135831A">Celestial
         Articles</th><th style="background-color:#6135831A">Celestial Conjunctions</th><th
@@ -4863,279 +4882,279 @@ pages:
     name: Celestial Elder Sorcery Words
     system:
       identifier: celestial-elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/celestial-elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Celestial @Identifier[core:elder-sorcery-words]{Elder Sorcery Words}
-        </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
-        style="background-color:#6135831A">Celestial Adjectives</th><th style="background-color:#6135831A">Celestial
-        Adverbs</th><th style="background-color:#6135831A">Celestial Articles</th><th
-        style="background-color:#6135831A">Celestial Conjunctions</th><th style="background-color:#6135831A">Celestial
-        Nouns</th><th style="background-color:#6135831A">Celestial Prepositions</th><th
-        style="background-color:#6135831A">Celestial Pronouns</th><th style="background-color:#6135831A">Celestial Verbs
-        </th></tr><tr><td rowspan="9" style="background-color:#f9f06b1A">1 </td><td
-        style="background-color:#dc8add1A">bad </td><td style="background-color:#dc8add1A">as </td><td
-        style="background-color:#dc8add1A">an </td><td style="background-color:#dc8add1A">as </td><td
-        style="background-color:#dc8add1A">color </td><td style="background-color:#dc8add1A">by </td><td
-        style="background-color:#dc8add1A">me </td><td style="background-color:#dc8add1A">are </td></tr><tr><td
-        style="background-color:#6135831A">big </td><td style="background-color:#6135831A">carefully </td><td
-        style="background-color:#6135831A">one </td><td style="background-color:#6135831A">but </td><td
-        style="background-color:#6135831A">cup </td><td style="background-color:#6135831A">for </td><td
-        style="background-color:#6135831A">my </td><td style="background-color:#6135831A">be </td></tr><tr><td
-        style="background-color:#dc8add1A">bright </td><td style="background-color:#dc8add1A">here </td><td
-        style="background-color:#dc8add1A">the </td><td style="background-color:#dc8add1A">or </td><td
-        style="background-color:#dc8add1A">dagger </td><td style="background-color:#dc8add1A">in </td><td
-        style="background-color:#dc8add1A">that </td><td style="background-color:#dc8add1A">begin </td></tr><tr><td
-        style="background-color:#6135831A">clean </td><td style="background-color:#6135831A">pretty </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">so </td><td
-        style="background-color:#6135831A">foot </td><td style="background-color:#6135831A">of </td><td
-        style="background-color:#6135831A">this </td><td style="background-color:#6135831A">did </td></tr><tr><td
-        style="background-color:#dc8add1A">little </td><td style="background-color:#dc8add1A">then </td><td
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Celestial
+        @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+        style="background-color:#e5a50a1A">OP</th><th style="background-color:#6135831A">Celestial Adjectives</th><th
+        style="background-color:#6135831A">Celestial Adverbs</th><th style="background-color:#6135831A">Celestial
+        Articles</th><th style="background-color:#6135831A">Celestial Conjunctions</th><th
+        style="background-color:#6135831A">Celestial Nouns</th><th style="background-color:#6135831A">Celestial
+        Prepositions</th><th style="background-color:#6135831A">Celestial Pronouns</th><th
+        style="background-color:#6135831A">Celestial Verbs </th></tr><tr><td rowspan="9"
+        style="background-color:#f9f06b1A">1 </td><td style="background-color:#dc8add1A">bad </td><td
+        style="background-color:#dc8add1A">as </td><td style="background-color:#dc8add1A">an </td><td
+        style="background-color:#dc8add1A">as </td><td style="background-color:#dc8add1A">color </td><td
+        style="background-color:#dc8add1A">by </td><td style="background-color:#dc8add1A">me </td><td
+        style="background-color:#dc8add1A">are </td></tr><tr><td style="background-color:#6135831A">big </td><td
+        style="background-color:#6135831A">carefully </td><td style="background-color:#6135831A">one </td><td
+        style="background-color:#6135831A">but </td><td style="background-color:#6135831A">cup </td><td
+        style="background-color:#6135831A">for </td><td style="background-color:#6135831A">my </td><td
+        style="background-color:#6135831A">be </td></tr><tr><td style="background-color:#dc8add1A">bright </td><td
+        style="background-color:#dc8add1A">here </td><td style="background-color:#dc8add1A">the </td><td
+        style="background-color:#dc8add1A">or </td><td style="background-color:#dc8add1A">dagger </td><td
+        style="background-color:#dc8add1A">in </td><td style="background-color:#dc8add1A">that </td><td
+        style="background-color:#dc8add1A">begin </td></tr><tr><td style="background-color:#6135831A">clean </td><td
+        style="background-color:#6135831A">pretty </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">so </td><td style="background-color:#6135831A">foot </td><td
+        style="background-color:#6135831A">of </td><td style="background-color:#6135831A">this </td><td
+        style="background-color:#6135831A">did </td></tr><tr><td style="background-color:#dc8add1A">little </td><td
+        style="background-color:#dc8add1A">then </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">hand </td><td
+        style="background-color:#dc8add1A">off </td><td style="background-color:#dc8add1A">you </td><td
+        style="background-color:#dc8add1A">may </td></tr><tr><td style="background-color:#6135831A">long </td><td
+        style="background-color:#6135831A">there </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">hat </td><td
+        style="background-color:#6135831A">on </td><td style="background-color:#6135831A">your </td><td
+        style="background-color:#6135831A">might </td></tr><tr><td style="background-color:#dc8add1A">short </td><td
+        style="background-color:#dc8add1A">today </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">skin </td><td
+        style="background-color:#dc8add1A">to </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">stand </td></tr><tr><td style="background-color:#6135831A">small </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">torch </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">tend </td></tr><tr><td style="background-color:#dc8add1A">this </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">hand </td><td style="background-color:#dc8add1A">off </td><td
-        style="background-color:#dc8add1A">you </td><td style="background-color:#dc8add1A">may </td></tr><tr><td
-        style="background-color:#6135831A">long </td><td style="background-color:#6135831A">there </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">hat </td><td style="background-color:#6135831A">on </td><td
-        style="background-color:#6135831A">your </td><td style="background-color:#6135831A">might </td></tr><tr><td
-        style="background-color:#dc8add1A">short </td><td style="background-color:#dc8add1A">today </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">wand </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">skin </td><td style="background-color:#dc8add1A">to </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">stand </td></tr><tr><td
-        style="background-color:#6135831A">small </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">torch </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">tend </td></tr><tr><td
-        style="background-color:#dc8add1A">this </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">use </td></tr><tr><td rowspan="10" style="background-color:#e5a50a1A">2
+        </td><td style="background-color:#6135831A">better </td><td style="background-color:#6135831A">down </td><td
+        style="background-color:#6135831A">two </td><td style="background-color:#6135831A">after </td><td
+        style="background-color:#6135831A">cloak </td><td style="background-color:#6135831A">about </td><td
+        style="background-color:#6135831A">each </td><td style="background-color:#6135831A">been </td></tr><tr><td
+        style="background-color:#dc8add1A">down </td><td style="background-color:#dc8add1A">first </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">before </td><td
+        style="background-color:#dc8add1A">damage </td><td style="background-color:#dc8add1A">after </td><td
+        style="background-color:#dc8add1A">he </td><td style="background-color:#dc8add1A">could </td></tr><tr><td
+        style="background-color:#6135831A">farther </td><td style="background-color:#6135831A">how </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">since </td><td
+        style="background-color:#6135831A">ear </td><td style="background-color:#6135831A">away </td><td
+        style="background-color:#6135831A">her </td><td style="background-color:#6135831A">draw </td></tr><tr><td
+        style="background-color:#dc8add1A">hard </td><td style="background-color:#dc8add1A">not </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">unless </td><td
+        style="background-color:#dc8add1A">eye </td><td style="background-color:#dc8add1A">from </td><td
+        style="background-color:#dc8add1A">him </td><td style="background-color:#dc8add1A">fix </td></tr><tr><td
+        style="background-color:#6135831A">less </td><td style="background-color:#6135831A">once </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">until </td><td
+        style="background-color:#6135831A">feet </td><td style="background-color:#6135831A">near </td><td
+        style="background-color:#6135831A">she </td><td style="background-color:#6135831A">had </td></tr><tr><td
+        style="background-color:#dc8add1A">more </td><td style="background-color:#dc8add1A">quite </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">wand </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">use </td></tr><tr><td
-        rowspan="10" style="background-color:#e5a50a1A">2 </td><td style="background-color:#6135831A">better </td><td
-        style="background-color:#6135831A">down </td><td style="background-color:#6135831A">two </td><td
-        style="background-color:#6135831A">after </td><td style="background-color:#6135831A">cloak </td><td
-        style="background-color:#6135831A">about </td><td style="background-color:#6135831A">each </td><td
-        style="background-color:#6135831A">been </td></tr><tr><td style="background-color:#dc8add1A">down </td><td
-        style="background-color:#dc8add1A">first </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">before </td><td style="background-color:#dc8add1A">damage </td><td
-        style="background-color:#dc8add1A">after </td><td style="background-color:#dc8add1A">he </td><td
-        style="background-color:#dc8add1A">could </td></tr><tr><td style="background-color:#6135831A">farther </td><td
-        style="background-color:#6135831A">how </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">since </td><td style="background-color:#6135831A">ear </td><td
-        style="background-color:#6135831A">away </td><td style="background-color:#6135831A">her </td><td
-        style="background-color:#6135831A">draw </td></tr><tr><td style="background-color:#dc8add1A">hard </td><td
-        style="background-color:#dc8add1A">not </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">unless </td><td style="background-color:#dc8add1A">eye </td><td
-        style="background-color:#dc8add1A">from </td><td style="background-color:#dc8add1A">him </td><td
-        style="background-color:#dc8add1A">fix </td></tr><tr><td style="background-color:#6135831A">less </td><td
-        style="background-color:#6135831A">once </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">until </td><td style="background-color:#6135831A">feet </td><td
-        style="background-color:#6135831A">near </td><td style="background-color:#6135831A">she </td><td
-        style="background-color:#6135831A">had </td></tr><tr><td style="background-color:#dc8add1A">more </td><td
-        style="background-color:#dc8add1A">quite </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">flesh </td><td
-        style="background-color:#dc8add1A">out </td><td style="background-color:#dc8add1A">these </td><td
-        style="background-color:#dc8add1A">made </td></tr><tr><td style="background-color:#6135831A">much </td><td
-        style="background-color:#6135831A">rarely </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">hands </td><td
-        style="background-color:#6135831A">up </td><td style="background-color:#6135831A">what </td><td
-        style="background-color:#6135831A">put </td></tr><tr><td style="background-color:#dc8add1A">soft </td><td
-        style="background-color:#dc8add1A">really </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">rod </td><td
-        style="background-color:#dc8add1A">with </td><td style="background-color:#dc8add1A">which </td><td
-        style="background-color:#dc8add1A">was </td></tr><tr><td style="background-color:#6135831A">soon </td><td
-        style="background-color:#6135831A">slowly </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">rope </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">who </td><td
-        style="background-color:#6135831A">were </td></tr><tr><td style="background-color:#dc8add1A">worse </td><td
-        style="background-color:#dc8add1A">very </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">sword </td><td
+        style="background-color:#dc8add1A">flesh </td><td style="background-color:#dc8add1A">out </td><td
+        style="background-color:#dc8add1A">these </td><td style="background-color:#dc8add1A">made </td></tr><tr><td
+        style="background-color:#6135831A">much </td><td style="background-color:#6135831A">rarely </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">hands </td><td style="background-color:#6135831A">up </td><td
+        style="background-color:#6135831A">what </td><td style="background-color:#6135831A">put </td></tr><tr><td
+        style="background-color:#dc8add1A">soft </td><td style="background-color:#dc8add1A">really </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">would </td></tr><tr><td rowspan="10" style="background-color:#f9f06b1A">3
-        </td><td style="background-color:#6135831A">all </td><td style="background-color:#6135831A">always </td><td
-        style="background-color:#6135831A">three </td><td style="background-color:#6135831A">although </td><td
-        style="background-color:#6135831A">arm </td><td style="background-color:#6135831A">above </td><td
-        style="background-color:#6135831A">it </td><td style="background-color:#6135831A">can </td></tr><tr><td
-        style="background-color:#dc8add1A">best </td><td style="background-color:#dc8add1A">later </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">because </td><td
-        style="background-color:#dc8add1A">belt </td><td style="background-color:#dc8add1A">across </td><td
-        style="background-color:#dc8add1A">others </td><td style="background-color:#dc8add1A">cause </td></tr><tr><td
-        style="background-color:#6135831A">far </td><td style="background-color:#6135831A">never </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">if </td><td
-        style="background-color:#6135831A">clothing </td><td style="background-color:#6135831A">before </td><td
-        style="background-color:#6135831A">our </td><td style="background-color:#6135831A">do </td></tr><tr><td
-        style="background-color:#dc8add1A">farthest </td><td style="background-color:#dc8add1A">no </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">than </td><td
-        style="background-color:#dc8add1A">food </td><td style="background-color:#dc8add1A">below </td><td
-        style="background-color:#dc8add1A">ours </td><td style="background-color:#dc8add1A">go </td></tr><tr><td
-        style="background-color:#6135831A">least </td><td style="background-color:#6135831A">sometime </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">when </td><td
-        style="background-color:#6135831A">leg </td><td style="background-color:#6135831A">between </td><td
-        style="background-color:#6135831A">theirs </td><td style="background-color:#6135831A">have </td></tr><tr><td
-        style="background-color:#dc8add1A">many </td><td style="background-color:#dc8add1A">tomorrow </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">while </td><td
-        style="background-color:#dc8add1A">mirror </td><td style="background-color:#dc8add1A">during </td><td
-        style="background-color:#dc8add1A">them </td><td style="background-color:#dc8add1A">invoke </td></tr><tr><td
-        style="background-color:#6135831A">most </td><td style="background-color:#6135831A">tonight </td><td
+        style="background-color:#dc8add1A">rod </td><td style="background-color:#dc8add1A">with </td><td
+        style="background-color:#dc8add1A">which </td><td style="background-color:#dc8add1A">was </td></tr><tr><td
+        style="background-color:#6135831A">soon </td><td style="background-color:#6135831A">slowly </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">rune </td><td style="background-color:#6135831A">into </td><td
-        style="background-color:#6135831A">we </td><td style="background-color:#6135831A">is </td></tr><tr><td
-        style="background-color:#dc8add1A">other </td><td style="background-color:#dc8add1A">up </td><td
+        style="background-color:#6135831A">rope </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">who </td><td style="background-color:#6135831A">were </td></tr><tr><td
+        style="background-color:#dc8add1A">worse </td><td style="background-color:#dc8add1A">very </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">staff </td><td style="background-color:#dc8add1A">over </td><td
-        style="background-color:#dc8add1A">yours </td><td style="background-color:#dc8add1A">like </td></tr><tr><td
-        style="background-color:#6135831A">well </td><td style="background-color:#6135831A">usually </td><td
+        style="background-color:#dc8add1A">sword </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">would </td></tr><tr><td
+        rowspan="10" style="background-color:#f9f06b1A">3 </td><td style="background-color:#6135831A">all </td><td
+        style="background-color:#6135831A">always </td><td style="background-color:#6135831A">three </td><td
+        style="background-color:#6135831A">although </td><td style="background-color:#6135831A">arm </td><td
+        style="background-color:#6135831A">above </td><td style="background-color:#6135831A">it </td><td
+        style="background-color:#6135831A">can </td></tr><tr><td style="background-color:#dc8add1A">best </td><td
+        style="background-color:#dc8add1A">later </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">because </td><td style="background-color:#dc8add1A">belt </td><td
+        style="background-color:#dc8add1A">across </td><td style="background-color:#dc8add1A">others </td><td
+        style="background-color:#dc8add1A">cause </td></tr><tr><td style="background-color:#6135831A">far </td><td
+        style="background-color:#6135831A">never </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">if </td><td style="background-color:#6135831A">clothing </td><td
+        style="background-color:#6135831A">before </td><td style="background-color:#6135831A">our </td><td
+        style="background-color:#6135831A">do </td></tr><tr><td style="background-color:#dc8add1A">farthest </td><td
+        style="background-color:#dc8add1A">no </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">than </td><td style="background-color:#dc8add1A">food </td><td
+        style="background-color:#dc8add1A">below </td><td style="background-color:#dc8add1A">ours </td><td
+        style="background-color:#dc8add1A">go </td></tr><tr><td style="background-color:#6135831A">least </td><td
+        style="background-color:#6135831A">sometime </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">when </td><td style="background-color:#6135831A">leg </td><td
+        style="background-color:#6135831A">between </td><td style="background-color:#6135831A">theirs </td><td
+        style="background-color:#6135831A">have </td></tr><tr><td style="background-color:#dc8add1A">many </td><td
+        style="background-color:#dc8add1A">tomorrow </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">while </td><td style="background-color:#dc8add1A">mirror </td><td
+        style="background-color:#dc8add1A">during </td><td style="background-color:#dc8add1A">them </td><td
+        style="background-color:#dc8add1A">invoke </td></tr><tr><td style="background-color:#6135831A">most </td><td
+        style="background-color:#6135831A">tonight </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">rune </td><td
+        style="background-color:#6135831A">into </td><td style="background-color:#6135831A">we </td><td
+        style="background-color:#6135831A">is </td></tr><tr><td style="background-color:#dc8add1A">other </td><td
+        style="background-color:#dc8add1A">up </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">staff </td><td
+        style="background-color:#dc8add1A">over </td><td style="background-color:#dc8add1A">yours </td><td
+        style="background-color:#dc8add1A">like </td></tr><tr><td style="background-color:#6135831A">well </td><td
+        style="background-color:#6135831A">usually </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">torso </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">torso </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">make </td></tr><tr><td
-        style="background-color:#dc8add1A">worst </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#6135831A">make </td></tr><tr><td style="background-color:#dc8add1A">worst </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">weapon </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">will </td></tr><tr><td
-        rowspan="5" style="background-color:#e5a50a1A">4 </td><td style="background-color:#6135831A">alert </td><td
-        style="background-color:#6135831A">away </td><td style="background-color:#6135831A">four </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">coin </td><td
-        style="background-color:#6135831A">against </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">close </td></tr><tr><td style="background-color:#dc8add1A">broken </td><td
-        style="background-color:#dc8add1A">fast </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">container </td><td
-        style="background-color:#dc8add1A">around </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">drink </td></tr><tr><td style="background-color:#6135831A">circular </td><td
-        style="background-color:#6135831A">quickly </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">head </td><td
-        style="background-color:#6135831A">behind </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">eat </td></tr><tr><td style="background-color:#dc8add1A">colorful </td><td
-        style="background-color:#dc8add1A">still </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">shield </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">weapon </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">open </td></tr><tr><td style="background-color:#6135831A">curious </td><td
-        style="background-color:#6135831A">yet </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">sound </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">repair </td></tr><tr><td rowspan="5" style="background-color:#f9f06b1A">5
-        </td><td style="background-color:#dc8add1A">blunt </td><td style="background-color:#dc8add1A">alone </td><td
-        style="background-color:#dc8add1A">five </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">herb </td><td style="background-color:#dc8add1A">beyond </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">act </td></tr><tr><td
-        style="background-color:#6135831A">dense </td><td style="background-color:#6135831A">anywhere </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">orb </td><td style="background-color:#6135831A">except </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">dance </td></tr><tr><td
-        style="background-color:#dc8add1A">dull </td><td style="background-color:#dc8add1A">back </td><td
+        style="background-color:#dc8add1A">will </td></tr><tr><td rowspan="5" style="background-color:#e5a50a1A">4
+        </td><td style="background-color:#6135831A">alert </td><td style="background-color:#6135831A">away </td><td
+        style="background-color:#6135831A">four </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">coin </td><td style="background-color:#6135831A">against </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">close </td></tr><tr><td
+        style="background-color:#dc8add1A">broken </td><td style="background-color:#dc8add1A">fast </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">potion </td><td style="background-color:#dc8add1A">like </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">drop </td></tr><tr><td
-        style="background-color:#6135831A">light </td><td style="background-color:#6135831A">immediately </td><td
+        style="background-color:#dc8add1A">container </td><td style="background-color:#dc8add1A">around </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">drink </td></tr><tr><td
+        style="background-color:#6135831A">circular </td><td style="background-color:#6135831A">quickly </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">scroll </td><td style="background-color:#6135831A">until </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">fill </td></tr><tr><td
-        style="background-color:#dc8add1A">sharp </td><td style="background-color:#dc8add1A">seldom </td><td
+        style="background-color:#6135831A">head </td><td style="background-color:#6135831A">behind </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">eat </td></tr><tr><td
+        style="background-color:#dc8add1A">colorful </td><td style="background-color:#dc8add1A">still </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">window </td><td style="background-color:#dc8add1A">without </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">sing </td></tr><tr><td
-        rowspan="5" style="background-color:#e5a50a1A">6 </td><td style="background-color:#6135831A">dark </td><td
-        style="background-color:#6135831A">again </td><td style="background-color:#6135831A">six </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">armor </td><td
-        style="background-color:#6135831A">inside </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">get </td></tr><tr><td style="background-color:#dc8add1A">pretty </td><td
-        style="background-color:#dc8add1A">nowhere </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">floor </td><td
-        style="background-color:#dc8add1A">outside </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">give </td></tr><tr><td style="background-color:#6135831A">slippery </td><td
+        style="background-color:#dc8add1A">shield </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">open </td></tr><tr><td
+        style="background-color:#6135831A">curious </td><td style="background-color:#6135831A">yet </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">heart </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">jump </td></tr><tr><td style="background-color:#dc8add1A">stiff </td><td
+        style="background-color:#6135831A">sound </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">repair </td></tr><tr><td
+        rowspan="5" style="background-color:#f9f06b1A">5 </td><td style="background-color:#dc8add1A">blunt </td><td
+        style="background-color:#dc8add1A">alone </td><td style="background-color:#dc8add1A">five </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">herb </td><td
+        style="background-color:#dc8add1A">beyond </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">act </td></tr><tr><td style="background-color:#6135831A">dense </td><td
+        style="background-color:#6135831A">anywhere </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">orb </td><td
+        style="background-color:#6135831A">except </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">dance </td></tr><tr><td style="background-color:#dc8add1A">dull </td><td
+        style="background-color:#dc8add1A">back </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">potion </td><td
+        style="background-color:#dc8add1A">like </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">drop </td></tr><tr><td style="background-color:#6135831A">light </td><td
+        style="background-color:#6135831A">immediately </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">scroll </td><td
+        style="background-color:#6135831A">until </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">fill </td></tr><tr><td style="background-color:#dc8add1A">sharp </td><td
+        style="background-color:#dc8add1A">seldom </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">window </td><td
+        style="background-color:#dc8add1A">without </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">sing </td></tr><tr><td rowspan="5" style="background-color:#e5a50a1A">6
+        </td><td style="background-color:#6135831A">dark </td><td style="background-color:#6135831A">again </td><td
+        style="background-color:#6135831A">six </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">armor </td><td style="background-color:#6135831A">inside </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">get </td></tr><tr><td
+        style="background-color:#dc8add1A">pretty </td><td style="background-color:#dc8add1A">nowhere </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">ritual </td><td
+        style="background-color:#dc8add1A">floor </td><td style="background-color:#dc8add1A">outside </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">give </td></tr><tr><td
+        style="background-color:#6135831A">slippery </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">heart </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">jump </td></tr><tr><td
+        style="background-color:#dc8add1A">stiff </td><td style="background-color:#dc8add1A"></td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">kick </td></tr><tr><td style="background-color:#6135831A">ugly </td><td
+        style="background-color:#dc8add1A">ritual </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">kick </td></tr><tr><td
+        style="background-color:#6135831A">ugly </td><td style="background-color:#6135831A"></td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">someone </td><td
+        style="background-color:#6135831A">someone </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">let </td></tr><tr><td rowspan="5"
+        style="background-color:#f9f06b1A">7 </td><td style="background-color:#dc8add1A">brittle </td><td
+        style="background-color:#dc8add1A">together </td><td style="background-color:#dc8add1A">seven </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">body </td><td
+        style="background-color:#dc8add1A">through </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">look </td></tr><tr><td style="background-color:#6135831A">elegant </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">let </td></tr><tr><td rowspan="5" style="background-color:#f9f06b1A">7
-        </td><td style="background-color:#dc8add1A">brittle </td><td style="background-color:#dc8add1A">together
-        </td><td style="background-color:#dc8add1A">seven </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">body </td><td style="background-color:#dc8add1A">through </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">look </td></tr><tr><td
-        style="background-color:#6135831A">elegant </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">friend </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">friend </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">must </td></tr><tr><td
-        style="background-color:#dc8add1A">huge </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#6135831A">must </td></tr><tr><td style="background-color:#dc8add1A">huge </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">missile </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">need </td></tr><tr><td
-        style="background-color:#6135831A">smart </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">structure </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">pull </td></tr><tr><td
-        style="background-color:#dc8add1A">stupid </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">missile </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">tunnel </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">push </td></tr><tr><td
-        rowspan="5" style="background-color:#e5a50a1A">8 </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">regularly </td><td style="background-color:#6135831A">eight </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">building </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">mine </td><td
-        style="background-color:#6135831A">say </td></tr><tr><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">need </td></tr><tr><td style="background-color:#6135831A">smart </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">structure </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">pull </td></tr><tr><td style="background-color:#dc8add1A">stupid </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">item </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">tunnel </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">shall </td></tr><tr><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">street </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td></tr><tr><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">push </td></tr><tr><td rowspan="5" style="background-color:#e5a50a1A">8
+        </td><td style="background-color:#6135831A"></td><td style="background-color:#6135831A">regularly </td><td
+        style="background-color:#6135831A">eight </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">building </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">mine </td><td style="background-color:#6135831A">say </td></tr><tr><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">touch </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td></tr><tr><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">wall </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td></tr><tr><td rowspan="5" style="background-color:#f9f06b1A">9 </td><td
-        style="background-color:#dc8add1A">new </td><td style="background-color:#dc8add1A">absolutely </td><td
-        style="background-color:#dc8add1A">nine </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">brain </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td></tr><tr><td
+        style="background-color:#dc8add1A">item </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">shall </td></tr><tr><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">bridge </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">street </td><td style="background-color:#6135831A"></td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td></tr><tr><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">foe </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">touch </td><td style="background-color:#dc8add1A"></td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td></tr><tr><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A">fortress </td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td></tr><tr><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A">shop </td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td></tr><tr><td rowspan="5"
-        style="background-color:#e5a50a1A">10 </td><td style="background-color:#6135831A">aged </td><td
-        style="background-color:#6135831A">everywhere </td><td style="background-color:#6135831A">ten </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">castle </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td></tr><tr><td style="background-color:#dc8add1A">old </td><td
-        style="background-color:#dc8add1A">yesterday </td><td style="background-color:#dc8add1A">zero </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">city </td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td></tr><tr><td style="background-color:#6135831A">young </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">energy </td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td></tr><tr><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
-        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">object </td><td
+        style="background-color:#6135831A">wall </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td></tr><tr><td rowspan="5"
+        style="background-color:#f9f06b1A">9 </td><td style="background-color:#dc8add1A">new </td><td
+        style="background-color:#dc8add1A">absolutely </td><td style="background-color:#dc8add1A">nine </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">brain </td><td
         style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
         style="background-color:#dc8add1A"></td></tr><tr><td style="background-color:#6135831A"></td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td><td style="background-color:#6135831A">spell </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">bridge </td><td
         style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
-        style="background-color:#6135831A"></td></tr></tbody></table>
+        style="background-color:#6135831A"></td></tr><tr><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">foe </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td></tr><tr><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A">fortress </td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td></tr><tr><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A">shop </td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td></tr><tr><td rowspan="5" style="background-color:#e5a50a1A">10 </td><td
+        style="background-color:#6135831A">aged </td><td style="background-color:#6135831A">everywhere </td><td
+        style="background-color:#6135831A">ten </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">castle </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td></tr><tr><td
+        style="background-color:#dc8add1A">old </td><td style="background-color:#dc8add1A">yesterday </td><td
+        style="background-color:#dc8add1A">zero </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">city </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td></tr><tr><td
+        style="background-color:#6135831A">young </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">energy </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td></tr><tr><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A">object </td><td style="background-color:#dc8add1A"></td><td
+        style="background-color:#dc8add1A"></td><td style="background-color:#dc8add1A"></td></tr><tr><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A">spell </td><td style="background-color:#6135831A"></td><td
+        style="background-color:#6135831A"></td><td style="background-color:#6135831A"></td></tr></tbody></table>
     type: rule
   - _id: flameElderSorcer
     _key: "!journal.pages!core000000000000.flameElderSorcer"
@@ -5146,12 +5165,13 @@ pages:
     name: Flame Elder Sorcery Words
     system:
       identifier: flame-elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/flame-elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Flame @Identifier[core:elder-sorcery-words]{Elder Sorcery Words}
-        </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Flame
+        @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+        style="background-color:#e5a50a1A">OP</th><th
         style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Nouns}</th><th
         style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame Verbs} </th></tr><tr><td rowspan="9"
         style="background-color:#f9f06b1A">1 </td><td style="background-color:#f661511A">ash </td><td
@@ -5247,12 +5267,13 @@ pages:
     name: Nature Elder Sorcery Words
     system:
       identifier: nature-elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/nature-elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Nature @Identifier[core:elder-sorcery-words]{Elder Sorcery Words}
-        </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Nature
+        @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+        style="background-color:#e5a50a1A">OP</th><th
         style="background-color:#26a2691A">@Identifier[class:nature-mage]{Nature Nouns}</th><th
         style="background-color:#26a2691A">@Identifier[class:nature-mage]{Nature Verbs} </th></tr><tr><td rowspan="10"
         style="background-color:#f9f06b1A">1 </td><td style="background-color:#8ff0a41A">dirt </td><td
@@ -5341,12 +5362,13 @@ pages:
     name: Necromancy Elder Sorcery Words
     system:
       identifier: necromancy-elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/necromancy-elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Necromancy @Identifier[core:elder-sorcery-words]{Elder Sorcery Words}
-        </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Necromancy
+        @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+        style="background-color:#e5a50a1A">OP</th><th
         style="background-color:#0000001A">@Identifier[class:necromancer]{Necromancy Nouns}</th><th
         style="background-color:#0000001A">@Identifier[class:necromancer]{Necromancy Verbs} </th></tr><tr><td
         rowspan="9" style="background-color:#f9f06b1A">1 </td><td style="background-color:#77767b1A">blemish </td><td
@@ -5433,12 +5455,13 @@ pages:
     name: Life Elder Sorcery Words
     system:
       identifier: life-elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/life-elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Life @Identifier[core:elder-sorcery-words]{Elder Sorcery Words}
-        </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Life
+        @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+        style="background-color:#e5a50a1A">OP</th><th
         style="background-color:#9a99961A">@Identifier[class:life-mage]{Life Nouns}</th><th
         style="background-color:#9a99961A">@Identifier[class:life-mage]{Life Verbs} </th></tr><tr><td rowspan="9"
         style="background-color:#f9f06b1A">1 </td><td style="background-color:#ffffff1A">amulet </td><td
@@ -5527,12 +5550,13 @@ pages:
     name: Storm Elder Sorcery Words
     system:
       identifier: storm-elder-sorcery-words
-      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+      img: systems/teriock/src/icons/core-rules/storm-elder-sorcery-words.webp
     text:
       content: >-
         <p>Italicized words may not always be learnable. Ask your @Identifier[core:game-master]{GM}.</p><table><caption
-        style="white-space:nowrap">Storm @Identifier[core:elder-sorcery-words]{Elder Sorcery Words}
-        </caption><tbody><tr><th style="background-color:#e5a50a1A">OP</th><th
+        style="white-space:nowrap" class="citizen-overflow-sticky-header">Storm
+        @Identifier[core:elder-sorcery-words]{Elder Sorcery Words} </caption><tbody><tr><th
+        style="background-color:#e5a50a1A">OP</th><th
         style="background-color:#1a5fb41A">@Identifier[class:storm-mage]{Storm Nouns}</th><th
         style="background-color:#1a5fb41A">@Identifier[class:storm-mage]{Storm Verbs} </th></tr><tr><td rowspan="9"
         style="background-color:#f9f06b1A">1 </td><td style="background-color:#99c1f11A">attention </td><td
@@ -5611,5 +5635,26 @@ pages:
         style="background-color:#1a5fb41A">population </td><td style="background-color:#1a5fb41A">reform
         </td></tr><tr><td style="background-color:#99c1f11A">time </td><td style="background-color:#99c1f11A">remain
         </td></tr></tbody></table>
+    type: rule
+  - _id: coneDelivery0000
+    _key: "!journal.pages!core000000000000.coneDelivery0000"
+    flags:
+      teriock:
+        hiddenSubpage: true
+        journalIcon: ms-book-2
+    name: Cone Delivery
+    system:
+      identifier: cone-delivery
+      img: systems/teriock/src/icons/core-rules/cone-delivery.webp
+    text:
+      content: >-
+        <p>@Pack[teriock.abilities]{Abilities} with the <b>cone</b> delivery source are ones that could affect every
+        target within some specified radius, originating from the @Identifier[core:executor]{executor}. Rather than
+        extending uniformly from the @Identifier[core:executor]{executor} like an @Identifier[core:aura-delivery]{aura},
+        these spread in a 60 degree arc centered along a direction of @Identifier[core:executor]{executor's} choice. Any
+        targeted creatures that are at least partially within the area are affected. Any targeted items
+        @Identifier[keyword:bearing]{bared} by creatures at least partially within the area are affected as well. Unless
+        specifically noted by the @Pack[teriock.abilities]{ability}, the @Identifier[core:executor]{executor} is not
+        affected.</p>
     type: rule
 sort: 0

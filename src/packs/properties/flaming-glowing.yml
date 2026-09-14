@@ -2,6 +2,11 @@ _id: ArkWczsz40lDHHoV
 _key: "!effects!ArkWczsz40lDHHoV"
 _stats:
   compendiumSource: Compendium.teriock.properties.ActiveEffect.639b14658b0d2e1c
+description: >-
+  <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the dark and produces light that makes other things
+  visible. When an item specifies if it's [[lookup name style=lc]], it may have a value in parentheses that indicates
+  the radius of the light. If no value is specified, then the item is visible, but glows faintly enough that it doesn't
+  illuminate other objects unless they are held <i>right</i> next to it.</p>
 img: systems/teriock/src/icons/properties/glowing.webp
 name: Glowing
 system:
@@ -11,19 +16,19 @@ system:
   automations:
     - _id: parameterChanges
       changes:
-        - key: token.light.dim
+        - key: system.light.dim
           phase: derived
           priority: 5
           target: Actor
           type: upgrade
           value: "10"
-        - key: token.light.color
+        - key: system.light.color
           phase: derived
           priority: 5
           target: Actor
           type: override
           value: "#C64600"
-        - key: token.light.animation.type
+        - key: system.light.animation.type
           phase: derived
           priority: 5
           target: Actor
@@ -38,11 +43,6 @@ system:
         dim: 10
       type: light
   badge: "10"
-  description: >-
-    <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the dark and produces light that makes other
-    things visible. When an item specifies if it's [[lookup name style=lc]], it may have a value in parentheses that
-    indicates the radius of the light. If no value is specified, then the item is visible, but glows faintly enough that
-    it doesn't illuminate other objects unless they are held <i>right</i> next to it.</p>
   identifier: glowing
   kind: intrinsic
 type: property

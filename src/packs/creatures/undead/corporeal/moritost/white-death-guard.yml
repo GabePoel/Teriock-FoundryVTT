@@ -237,22 +237,23 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You count as an @Pack[teriock.equipment]{item} for the purposes of certain @Wiki[Category:Item target
-              abilities]{abilities that target them}. The relevant @Wiki[Category:Item target abilities]{abilities} are
-              those would apply one of the following @Pack[teriock.properties]{properties} to a piece of
-              @Pack[teriock.equipment]{equipment}. You take the effect listed below instead. If the @Wiki[Category:Item
-              target abilities]{ability} was @Wiki[Category:Magically powered abilities]{magically powered}, then any
-              @Identifier[core:damage]{damage} dealt is @Identifier[damage:magic]{magic} in addition to its other
-              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}. If the @Wiki[Category:Item target
-              abilities]{ability} was delivered by a @Wiki[Category:Weapon delivery abilities]{weapon}, then the
-              @Identifier[core:damage]{damage} has all the
+              <p>You count as an @Pack[teriock.equipment]{item} for the purposes of certain
+              @Identifier[core:item-target]{abilities that target them}. The relevant
+              @Identifier[core:item-target]{abilities} are those would apply one of the following
+              @Pack[teriock.properties]{properties} to a piece of @Pack[teriock.equipment]{equipment}. You take the
+              effect listed below instead. If the @Identifier[core:item-target]{ability} was @Wiki[Category:Magically
+              powered abilities]{magically powered}, then any @Identifier[core:damage]{damage} dealt is
+              @Identifier[damage:magic]{magic} in addition to its other
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}. If the
+              @Identifier[core:item-target]{ability} was delivered by a @Identifier[core:bite-delivery]{weapon}, then
+              the @Identifier[core:damage]{damage} has all the
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} that
               @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} would deal in addition to its other
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
               Take [[/damage 1d10]]
               @Identifier[core:damage]{damage}.</li><li>@Identifier[property:shattered]{Shattered}: Take a
               @Identifier[damage:hack]{hack} of your choice.</li><li>@Identifier[property:warded]{Warded}: The next
-              @Wiki[Category:Self delivery abilities]{self delivery ability} you use is
+              @Identifier[core:self-delivery]{self delivery ability} you use is
               @Identifier[keyword:warded]{warded}.</li></ul><p>For any other passive
               @Pack[teriock.properties]{properties} that the @Pack[teriock.equipment]{equipment} may gain, your
               @Pack[teriock.bodyParts]{body parts} gain those @Pack[teriock.properties]{properties}. Additionally, any
@@ -635,9 +636,11 @@ items:
           _sup: z9xYawQNh6as6ECa
           affinities:
             - _id: uevhIJEJYaY0sz5X
-              category: other
+              category: damageTypes
+              identifier: null
+              img: ""
+              name: Non-Magic Non-Silver
               type: immunity
-              value: Non-Magical Non-Silver Damage
           competence:
             raw: 1
           delivery: self
@@ -712,12 +715,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: conditions
+              identifier: charmed
               type: immunity
-              value: charmed
             - _id: Glnnr440sVehTfZ5
               category: conditions
+              identifier: frightened
               type: immunity
-              value: frightened
           competence:
             raw: 1
           delivery: self
@@ -756,16 +759,16 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: conditions
+              identifier: poisoned
               type: immunity
-              value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: conditions
+              identifier: suffocating
               type: immunity
-              value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: conditions
+              identifier: unconscious
               type: immunity
-              value: unconscious
           competence:
             raw: 1
           delivery: self
@@ -824,38 +827,38 @@ items:
         ring: true
         ringImg: systems/teriock/src/icons/tokens/white-death-guard.webp
     type: species
-  - _id: hRDcSY8m0gqN3pmz
-    _key: "!actors.items!9b4af99ac7aa9f65.hRDcSY8m0gqN3pmz"
+  - _id: YyuleTisV3RcZPmG
+    _key: "!actors.items!9b4af99ac7aa9f65.YyuleTisV3RcZPmG"
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
     effects:
       - _id: TWk5AP5nzZgpXkaM
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.hRDcSY8m0gqN3pmz.TWk5AP5nzZgpXkaM"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.YyuleTisV3RcZPmG.TWk5AP5nzZgpXkaM"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        description: >-
+          <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make a
+          @Identifier[ability:basic-attack]{Basic Attack}.</p>
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           identifier: bashing
           kind: intrinsic
         type: property
       - _id: IDLUUjkSFtpaiKuJ
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.hRDcSY8m0gqN3pmz.IDLUUjkSFtpaiKuJ"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.YyuleTisV3RcZPmG.IDLUUjkSFtpaiKuJ"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        description: >-
+          <p>An item with this property is easily concealed and can often be used in the same hand as a
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           identifier: small
           kind: intrinsic
         type: property
@@ -871,8 +874,8 @@ items:
         long:
           unit: melee
     type: body
-  - _id: VIjiVy9nZt0k54XF
-    _key: "!actors.items!9b4af99ac7aa9f65.VIjiVy9nZt0k54XF"
+  - _id: ZpiqusEQrPf32dk4
+    _key: "!actors.items!9b4af99ac7aa9f65.ZpiqusEQrPf32dk4"
     _stats:
       compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
     folder: 0b00935e53673daa
@@ -893,72 +896,72 @@ items:
           unit: self
       weight: 65
     type: equipment
-  - _id: fIzTKJHHqOjewxHg
-    _key: "!actors.items!9b4af99ac7aa9f65.fIzTKJHHqOjewxHg"
+  - _id: Zp4RtQossSJXTwvj
+    _key: "!actors.items!9b4af99ac7aa9f65.Zp4RtQossSJXTwvj"
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.58ba95d8757c67c0
     effects:
       - _id: H7Q5z5528FgfgbLp
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.fIzTKJHHqOjewxHg.H7Q5z5528FgfgbLp"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.Zp4RtQossSJXTwvj.H7Q5z5528FgfgbLp"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        description: >-
+          <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make a
+          @Identifier[ability:basic-attack]{Basic Attack}.</p>
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           identifier: bashing
           kind: intrinsic
         type: property
       - _id: lKaLyYYTTIEFOLb5
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.fIzTKJHHqOjewxHg.lKaLyYYTTIEFOLb5"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.Zp4RtQossSJXTwvj.lKaLyYYTTIEFOLb5"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        description: >-
+          <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
+          abilities}.</p>
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with this property can be used to deliver @Wiki[Category:Hand delivery abilities]{hand delivery
-            abilities}.</p>
           identifier: handy
           kind: intrinsic
           powerSources:
             - martial
         type: property
       - _id: m7Va2Fuah1K2t2Ab
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.fIzTKJHHqOjewxHg.m7Va2Fuah1K2t2Ab"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.Zp4RtQossSJXTwvj.m7Va2Fuah1K2t2Ab"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+        description: >-
+          <p>An item can be used to grasp, hold, or manipulate objects, such as while using
+          @Identifier[ability:interact]{Interact}.</p>
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such as while using
-            @Identifier[ability:interact]{Interact}.</p>
           identifier: prehensile
           kind: intrinsic
           powerSources:
             - martial
         type: property
       - _id: IJM1yhiyKnnwlbXh
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.fIzTKJHHqOjewxHg.IJM1yhiyKnnwlbXh"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.Zp4RtQossSJXTwvj.IJM1yhiyKnnwlbXh"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+        description: >-
+          <p>An item with this property is easily concealed and can often be used in the same hand as a
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with this property is easily concealed and can often be used in the same hand as a
-            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           identifier: small
           kind: intrinsic
         type: property
@@ -974,13 +977,13 @@ items:
         long:
           unit: melee
     type: body
-  - _id: LjI4UN8M0QOBNrIN
-    _key: "!actors.items!9b4af99ac7aa9f65.LjI4UN8M0QOBNrIN"
+  - _id: W7U375UTAHa015jh
+    _key: "!actors.items!9b4af99ac7aa9f65.W7U375UTAHa015jh"
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.2eb28f45a753186c
     effects:
       - _id: 06z0wz68hsmApPL9
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.LjI4UN8M0QOBNrIN.06z0wz68hsmApPL9"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.W7U375UTAHa015jh.06z0wz68hsmApPL9"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.dccbed24e9bf8cf1
         img: systems/teriock/src/icons/abilities/hibernation-shield.webp
@@ -991,7 +994,7 @@ items:
               constructionNodes:
                 0543b6ece2b67604:
                   _id: 0543b6ece2b67604
-                  all: false
+                  all: true
                   auto: true
                   competence:
                     raw: 0
@@ -1051,7 +1054,7 @@ items:
           trigger: <p>You go @Identifier[condition:down]{down}.</p>
         type: ability
       - _id: JhNbjfOBP4vq6fDO
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.LjI4UN8M0QOBNrIN.JhNbjfOBP4vq6fDO"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.W7U375UTAHa015jh.JhNbjfOBP4vq6fDO"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3dea135aaa9525d7
         flags:
@@ -1112,7 +1115,7 @@ items:
           standard: true
         type: ability
       - _id: oGy0WqGTsolvIjRT
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.LjI4UN8M0QOBNrIN.oGy0WqGTsolvIjRT"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.W7U375UTAHa015jh.oGy0WqGTsolvIjRT"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.91cdb554fcab2b2a
         img: systems/teriock/src/icons/abilities/medicine-ball.webp
@@ -1155,7 +1158,7 @@ items:
           standard: true
         type: ability
       - _id: DuPrz66O8MibMz5a
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.LjI4UN8M0QOBNrIN.DuPrz66O8MibMz5a"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.W7U375UTAHa015jh.DuPrz66O8MibMz5a"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.5e1e504688ac1250
         img: systems/teriock/src/icons/abilities/resurrect.webp
@@ -1239,13 +1242,13 @@ items:
         mp:
           formula: 1d12
     type: rank
-  - _id: 1gHATO4uV0yhIDWk
-    _key: "!actors.items!9b4af99ac7aa9f65.1gHATO4uV0yhIDWk"
+  - _id: FUuUjIxq1ABvthQ1
+    _key: "!actors.items!9b4af99ac7aa9f65.FUuUjIxq1ABvthQ1"
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.ce7640052630fc9b
     effects:
       - _id: j5OCoQExiifYlXXK
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.1gHATO4uV0yhIDWk.j5OCoQExiifYlXXK"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.FUuUjIxq1ABvthQ1.j5OCoQExiifYlXXK"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
         img: systems/teriock/src/icons/abilities/brace.webp
@@ -1255,8 +1258,8 @@ items:
             - _id: hPfBt6zwzwH60lYt
               activeQualifier: "@flags.improvedBrace"
               category: effectTypes
+              identifier: damaging
               type: takeDeboost
-              value: damaging
           automations:
             - _id: 0BLOMYrODY3bzx8I
               competencies:
@@ -1312,7 +1315,7 @@ items:
             - self
         type: ability
       - _id: Nel4kQU109RUj1k2
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.1gHATO4uV0yhIDWk.Nel4kQU109RUj1k2"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.FUuUjIxq1ABvthQ1.Nel4kQU109RUj1k2"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.612719b68991bdad
         img: systems/teriock/src/icons/abilities/improvised-armor-and-shields.webp
@@ -1409,7 +1412,7 @@ items:
             - other
         type: ability
       - _id: shn8qx3LbBe4ktYg
-        _key: "!actors.items.effects!9b4af99ac7aa9f65.1gHATO4uV0yhIDWk.shn8qx3LbBe4ktYg"
+        _key: "!actors.items.effects!9b4af99ac7aa9f65.FUuUjIxq1ABvthQ1.shn8qx3LbBe4ktYg"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.5451b5caee0b5380
         img: systems/teriock/src/icons/abilities/partner-awaken.webp
@@ -1420,7 +1423,7 @@ items:
               constructionNodes:
                 923c04f492cb961f:
                   _id: 923c04f492cb961f
-                  all: false
+                  all: true
                   auto: true
                   competence:
                     raw: 0
@@ -1441,7 +1444,7 @@ items:
               constructionNodes:
                 da2d0447f801d386:
                   _id: da2d0447f801d386
-                  all: false
+                  all: true
                   auto: true
                   competence:
                     raw: 0
@@ -1520,6 +1523,6 @@ system:
   size:
     value: 4
   wielding:
-    attacker: hRDcSY8m0gqN3pmz
-    blocker: VIjiVy9nZt0k54XF
+    attacker: YyuleTisV3RcZPmG
+    blocker: ZpiqusEQrPf32dk4
 type: creature

@@ -18,20 +18,20 @@ items:
           affinities:
             - _id: 2SGEPU635vkgznfV
               category: conditions
+              identifier: allured
               type: immunity
-              value: allured
             - _id: RT16m3U0BI3FNkvA
               category: conditions
+              identifier: frenzied
               type: immunity
-              value: frenzied
             - _id: n7Dd3JcVMBqNFFEU
               category: conditions
+              identifier: frenzied
               type: immunity
-              value: frenzied
             - _id: ug99tkS0qQe8PRXF
               category: conditions
+              identifier: charmed
               type: immunity
-              value: charmed
           competence:
             raw: 1
           delivery: self
@@ -84,22 +84,23 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You count as an @Pack[teriock.equipment]{item} for the purposes of certain @Wiki[Category:Item target
-              abilities]{abilities that target them}. The relevant @Wiki[Category:Item target abilities]{abilities} are
-              those would apply one of the following @Pack[teriock.properties]{properties} to a piece of
-              @Pack[teriock.equipment]{equipment}. You take the effect listed below instead. If the @Wiki[Category:Item
-              target abilities]{ability} was @Wiki[Category:Magically powered abilities]{magically powered}, then any
-              @Identifier[core:damage]{damage} dealt is @Identifier[damage:magic]{magic} in addition to its other
-              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}. If the @Wiki[Category:Item target
-              abilities]{ability} was delivered by a @Wiki[Category:Weapon delivery abilities]{weapon}, then the
-              @Identifier[core:damage]{damage} has all the
+              <p>You count as an @Pack[teriock.equipment]{item} for the purposes of certain
+              @Identifier[core:item-target]{abilities that target them}. The relevant
+              @Identifier[core:item-target]{abilities} are those would apply one of the following
+              @Pack[teriock.properties]{properties} to a piece of @Pack[teriock.equipment]{equipment}. You take the
+              effect listed below instead. If the @Identifier[core:item-target]{ability} was @Wiki[Category:Magically
+              powered abilities]{magically powered}, then any @Identifier[core:damage]{damage} dealt is
+              @Identifier[damage:magic]{magic} in addition to its other
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}. If the
+              @Identifier[core:item-target]{ability} was delivered by a @Identifier[core:bite-delivery]{weapon}, then
+              the @Identifier[core:damage]{damage} has all the
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} that
               @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} would deal in addition to its other
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
               Take [[/damage 1d10]]
               @Identifier[core:damage]{damage}.</li><li>@Identifier[property:shattered]{Shattered}: Take a
               @Identifier[damage:hack]{hack} of your choice.</li><li>@Identifier[property:warded]{Warded}: The next
-              @Wiki[Category:Self delivery abilities]{self delivery ability} you use is
+              @Identifier[core:self-delivery]{self delivery ability} you use is
               @Identifier[keyword:warded]{warded}.</li></ul><p>For any other passive
               @Pack[teriock.properties]{properties} that the @Pack[teriock.equipment]{equipment} may gain, your
               @Pack[teriock.bodyParts]{body parts} gain those @Pack[teriock.properties]{properties}. Additionally, any
@@ -372,8 +373,8 @@ items:
             - _id: WCOWPl5PVXo46Bmp
               activeQualifier: not(@status.down)
               category: other
+              name: Spells
               type: immunity
-              value: Spells
           competence:
             raw: 1
           delivery: self
@@ -556,8 +557,8 @@ items:
         ring: true
         ringImg: systems/teriock/src/icons/tokens/ghost-ship-plank.webp
     type: species
-  - _id: V1KsoqBzzHgfq8NP
-    _key: "!actors.items!7f4d3b99bd9d26ca.V1KsoqBzzHgfq8NP"
+  - _id: aeI1gPu3XIsjN0Ys
+    _key: "!actors.items!7f4d3b99bd9d26ca.aeI1gPu3XIsjN0Ys"
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.c1a0f8a7a8de49e3
     folder: b7395e9186081f19
@@ -572,30 +573,31 @@ items:
         long:
           unit: self
     type: body
-  - _id: AKaQjuKPrR12vSXQ
-    _key: "!actors.items!7f4d3b99bd9d26ca.AKaQjuKPrR12vSXQ"
+  - _id: Rvl9NTxZVt8QNrAK
+    _key: "!actors.items!7f4d3b99bd9d26ca.Rvl9NTxZVt8QNrAK"
     _stats:
       compendiumSource: Compendium.teriock.equipment.Item.13a2fbafa077c41b
     effects:
       - _id: YrBUxpN9UHBPEYji
-        _key: "!actors.items.effects!7f4d3b99bd9d26ca.AKaQjuKPrR12vSXQ.YrBUxpN9UHBPEYji"
+        _key: "!actors.items.effects!7f4d3b99bd9d26ca.Rvl9NTxZVt8QNrAK.YrBUxpN9UHBPEYji"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+        description: >-
+          <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make a
+          @Identifier[ability:basic-attack]{Basic Attack}.</p>
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not a weapon, but can still be used to make
-            a @Identifier[ability:basic-attack]{Basic Attack}.</p>
           identifier: bashing
           kind: intrinsic
         type: property
       - _id: d6iX3vEtg1pdsfGd
-        _key: "!actors.items.effects!7f4d3b99bd9d26ca.AKaQjuKPrR12vSXQ.d6iX3vEtg1pdsfGd"
+        _key: "!actors.items.effects!7f4d3b99bd9d26ca.Rvl9NTxZVt8QNrAK.d6iX3vEtg1pdsfGd"
         _stats:
           compendiumSource: Compendium.teriock.properties.ActiveEffect.9bfc89548d1236b8
+        description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
         img: systems/teriock/src/icons/properties/reach.webp
         name: Reach
         system:
@@ -611,7 +613,6 @@ items:
                   type: upgrade
                   value: "10"
               type: changes
-          description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
           identifier: reach
           kind: intrinsic
         type: property
@@ -657,6 +658,6 @@ system:
   size:
     value: 0.5
   wielding:
-    attacker: AKaQjuKPrR12vSXQ
-    blocker: AKaQjuKPrR12vSXQ
+    attacker: Rvl9NTxZVt8QNrAK
+    blocker: Rvl9NTxZVt8QNrAK
 type: creature
