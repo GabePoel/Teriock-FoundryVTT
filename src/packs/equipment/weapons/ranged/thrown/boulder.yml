@@ -5,6 +5,15 @@ effects:
     _key: "!items.effects!a14fd6f72d42a432.cumbersome000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
+    description: >-
+      <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item} <i>always</i> makes its user
+      @Identifier[condition:encumbered]{encumbered}, regardless of how much they are
+      @Identifier[core:carrying-capacity]{carrying}. If the user would have not been
+      @Identifier[condition:encumbered]{encumbered} otherwise, they are @Identifier[condition:encumbered]{lightly
+      encumbered}. If they would have been @Identifier[condition:encumbered]{lightly encumbered} otherwise, they are
+      @Identifier[condition:encumbered]{heavily encumbered}. And if they would have been
+      @Identifier[condition:encumbered]{heavily encumbered} otherwise, they are rendered
+      @Identifier[condition:immobilized]{immobile}.</p>
     img: systems/teriock/src/icons/properties/cumbersome.webp
     name: Cumbersome
     system:
@@ -21,15 +30,6 @@ effects:
               type: add
               value: "1"
           type: changes
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item} <i>always</i> makes its user
-        @Identifier[condition:encumbered]{encumbered}, regardless of how much they are
-        @Identifier[core:carrying-capacity]{carrying}. If the user would have not been
-        @Identifier[condition:encumbered]{encumbered} otherwise, they are @Identifier[condition:encumbered]{lightly
-        encumbered}. If they would have been @Identifier[condition:encumbered]{lightly encumbered} otherwise, they are
-        @Identifier[condition:encumbered]{heavily encumbered}. And if they would have been
-        @Identifier[condition:encumbered]{heavily encumbered} otherwise, they are rendered
-        @Identifier[condition:immobilized]{immobile}.</p>
       identifier: cumbersome
       kind: flaw
     type: property
@@ -37,6 +37,9 @@ effects:
     _key: "!items.effects!a14fd6f72d42a432.missile000000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.b528592e5a4583e3
+    description: >-
+      <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make @Identifier[keyword:melee]{melee}
+      @Identifier[core:attack-interaction]{attacks}.</p>
     img: systems/teriock/src/icons/properties/missile.webp
     name: Missile
     system:
@@ -52,9 +55,6 @@ effects:
               type: override
               value: "false"
           type: changes
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make @Identifier[keyword:melee]{melee}
-        @Identifier[core:attack-interaction]{attacks}.</p>
       identifier: missile
       kind: flaw
     type: property
@@ -62,6 +62,7 @@ effects:
     _key: "!items.effects!a14fd6f72d42a432.PONgej6hhXAitw8j"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.61fbeeda5169ef73
+    description: <p>A weapon with this property can be tossed to make a @Identifier[property:ranged]{ranged} attack.</p>
     img: systems/teriock/src/icons/properties/thrown.webp
     name: Thrown
     system:
@@ -77,7 +78,6 @@ effects:
               type: override
               value: "true"
           type: changes
-      description: <p>A weapon with this property can be tossed to make a @Identifier[property:ranged]{ranged} attack.</p>
       identifier: thrown
       kind: intrinsic
     type: property
@@ -85,6 +85,7 @@ effects:
     _key: "!items.effects!a14fd6f72d42a432.unblockable00000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.7de0d6d87ef04c0b
+    description: <p>An item with this property is always @Identifier[keyword:unblockable]{UB}.</p>
     img: systems/teriock/src/icons/properties/unblockable.webp
     name: Unblockable
     system:
@@ -100,7 +101,6 @@ effects:
               type: upgrade
               value: "2"
           type: changes
-      description: <p>An item with this property is always @Identifier[keyword:unblockable]{UB}.</p>
       identifier: unblockable
       kind: intrinsic
     type: property
@@ -108,14 +108,14 @@ effects:
     _key: "!items.effects!a14fd6f72d42a432.wep0000000000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+    description: >-
+      <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+      @Identifier[core:attack-interaction]{attack}.</p>
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
       applyIfDampened: true
       applyIfDeattuned: true
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @Identifier[core:attack-interaction]{attack}.</p>
       identifier: weapon
       kind: intrinsic
     type: property
@@ -149,13 +149,6 @@ effects:
               type: override
               value: "true"
           type: changes
-      description: >-
-        <p>Weapons with this property can hit targets at a distance. A weapon that can be used to make a [[lookup name
-        style=lc]] attack has a range in parentheses after specifying if it requires
-        @Identifier[property:ammunition]{ammunition} or if is @Identifier[property:thrown]{thrown}. The range lists two
-        numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's long range. When
-        attacking a target beyond normal range, you have @Identifier[core:disadvantage]{disadvantage} on the
-        @Identifier[core:attack-interaction]{attack roll}. You can't attack a target beyond the weapon's long range.</p>
       identifier: ranged
       kind: intrinsic
     type: property

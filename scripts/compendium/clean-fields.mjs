@@ -117,7 +117,7 @@ function cleanActiveEffect(doc) {
     delete doc.duration;
     delete doc.start;
   }
-  if (doc._key.startsWith("!effects") && doc.system.description) {
+  if (doc._key.includes("effects!") && doc.system.description) {
     doc.description = doc.system.description;
     delete doc.system.description;
   }
