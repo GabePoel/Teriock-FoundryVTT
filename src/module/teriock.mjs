@@ -79,6 +79,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
 
   applications.ux.enrichment.registerEnrichers();
+  applications.ux.inserts.registerInserts();
 
   // Define Fonts
   // ------------

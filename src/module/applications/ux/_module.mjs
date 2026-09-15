@@ -1,4 +1,5 @@
 export { default as TeriockContextMenu } from "./context-menu.mjs";
 export { default as TeriockDragDrop } from "./drag-drop.mjs";
 export * as enrichment from "./enrichers/_module.mjs";
+export * as inserts from "./inserts/_module.mjs";
 export { default as TeriockTextEditor } from "./text-editor.mjs";

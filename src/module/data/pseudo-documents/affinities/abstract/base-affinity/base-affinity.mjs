@@ -259,6 +259,7 @@ export default class BaseAffinity
   /** @inheritDoc */
   async _use(data = {}, options = {}) {
     options.competence = this.getCompetence();
+    options.source = this;
     return super._use(data, options);
   }
 

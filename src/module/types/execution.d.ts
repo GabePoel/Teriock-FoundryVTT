@@ -1,12 +1,6 @@
 import { AttributeModel, TradecraftModel } from "../data/models/modifier-models/_module.mjs";
 import { BaseExpiration } from "../data/pseudo-documents/expirations/abstract/_module.mjs";
 
-declare module "../executions/child-executions/armament-execution/armament-execution.mjs" {
-  export default interface ArmamentExecution {
-    get source(): TeriockItem<"body" | "equipment">;
-  }
-}
-
 declare global {
   namespace Teriock.Execution {
     /**
@@ -70,6 +64,7 @@ declare global {
       bonus?: Teriock.System.FormulaString;
       source?: TeriockItem<"body" | "equipment">;
     };
+
     export type ExpirationExecutionOptions = ThresholdExecutionOptions & { expiration?: BaseExpiration };
 
     export type ExecutionDialogButtonEntry = {

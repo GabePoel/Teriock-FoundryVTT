@@ -4,6 +4,8 @@ declare module "./armament-execution.mjs" {
     secret: boolean;
     twoHanded: boolean;
     useAbilities: boolean;
+
+    get source(): TeriockItem<"body" | "equipment">;
   }
 }
 
