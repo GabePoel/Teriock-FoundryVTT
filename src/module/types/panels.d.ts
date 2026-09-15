@@ -71,6 +71,7 @@ declare global {
     };
 
     export type EnrichmentOptions = {
+      collapsed?: boolean;
       collapseTables?: boolean;
       keepId?: boolean;
       noAssociations?: boolean;

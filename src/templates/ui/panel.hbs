@@ -1,5 +1,15 @@
 {{!-- Make sure to update `ApplicableEffectSystem.prepareDerivedData()` when this is changed. --}}
-<div class="teriock-panel collapsible es-container" data-collapsible-id='{{concat "panel-" _id}}'>
+<div
+  class="
+    teriock-panel
+    collapsible
+    es-container
+    {{#if collapsed}}
+      collapsed
+    {{/if}}
+  "
+  data-collapsible-id='{{concat "panel-" _id}}'
+>
   <div class="overlay {{toClass classes}}"></div>
   <header class="teriock-panel-header" data-action="toggleCollapse">
     <div

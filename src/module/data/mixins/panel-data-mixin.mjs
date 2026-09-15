@@ -24,6 +24,7 @@ export default function PanelDataMixin(Base) {
         // TODO: Consider removing this caption removal
         if (!config.label) { config.caption = false; }
         const panelOptions = {
+          collapsed: config.values.includes("collapsed"),
           noAssociations: config.values.includes("noAssociations"),
           noBars: config.values.includes("noBars"),
           noBlocks: config.values.includes("noBlocks"),

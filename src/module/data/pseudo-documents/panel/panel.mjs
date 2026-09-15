@@ -134,7 +134,7 @@ export default class Panel extends BasePseudoDocument {
    */
   async prepareContext(options = {}) {
     // Todo: Fix draggable handling. Maybe needs a new DragDrop handler?
-    const context = Object.assign(this.toObject(), { color: this.color });
+    const context = Object.assign(this.toObject(), { collapsed: Boolean(options.collapsed), color: this.color });
     const { collapseTables = true, keepId = true, usePanelRelativeTo = true } = options;
     if (options.noAssociations) { context.associations = []; }
     if (options.noBars) { context.bars = []; }

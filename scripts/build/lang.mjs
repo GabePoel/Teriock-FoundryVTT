@@ -73,13 +73,7 @@ const LANG = base;
 
 if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 
-const content = {
-  TERIOCK: {
-    CONTENT: {
-      WeaponFightingStyles: weaponFightingStylesContent,
-    },
-  },
-};
+const content = { TERIOCK: { CONTENT: { WeaponFightingStyles: weaponFightingStylesContent } } };
 
 statuses.TERIOCK.STATUSES.Conditions = conditions;
 
