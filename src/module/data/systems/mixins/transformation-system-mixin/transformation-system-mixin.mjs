@@ -159,7 +159,7 @@ export default function TransformationSystemMixin(Base) {
           s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
         }
       });
-      const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData, { keepId: true });
+      const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData, { keepId: true, keepSubIds: false });
       if (op) { this.#batchedOperations.push(op); }
       this.#batchedOperations.push(
         this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{

@@ -14,6 +14,7 @@ export default class TeriockCompendium extends mixClasses(Compendium, DocumentDi
   /**
    * Remove entries with sups from the context tree.
    * @param {object} node
+   * @category Hierarchy
    */
   #purgeContextTree(node) {
     if (!node?.entries?.length && !node?.children?.length) { return; }
@@ -44,7 +45,10 @@ export default class TeriockCompendium extends mixClasses(Compendium, DocumentDi
     return this.collection?.getDocument(li.dataset.entryId);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Hierarchy
+   */
   async _prepareDirectoryContext(context, options) {
     if (this.collection?.index) {
       if (!this.collection._reindexing) { this.collection._reindexing = this.collection.getIndex(); }

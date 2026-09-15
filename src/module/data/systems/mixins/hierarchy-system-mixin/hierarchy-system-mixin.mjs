@@ -6,6 +6,7 @@ import { nullIdField } from "../../../fields/tools/builders.mjs";
  * @template {AnyConstructor} T
  * @param {T} Base
  * @returns {MixinResult<T, HierarchySystem & Teriock.Models.HierarchySystemData>}
+ * @category Hierarchy
  */
 export default function HierarchySystemMixin(Base) {
   /**

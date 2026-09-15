@@ -22,14 +22,20 @@ export default function DocumentDirectoryMixin(Base) {
       return "sidebarTooltips";
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @category Hierarchy
+     */
     _createDroppedEntry(entry, updates = {}) {
       if (!foundry.utils.getProperty(entry, "system._sup")) { return super._createDroppedEntry(entry, updates); }
       entry = entry.clone({ ...updates, "system._sup": null }, { keepId: true });
       return this.collection.importDocument(entry, { dialog: true, keepId: false });
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @category Hierarchy
+     */
     _entryAlreadyExists(entry) {
       return super._entryAlreadyExists(entry) && !foundry.utils.getProperty(entry, "system._sup");
     }

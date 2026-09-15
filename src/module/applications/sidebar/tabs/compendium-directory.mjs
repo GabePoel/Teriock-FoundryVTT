@@ -46,7 +46,10 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
     TeriockDragDrop.initializeDragEvent(event);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Hierarchy
+   */
   _onMatchSearchDocuments(indexEntries, listEl) {
     super._onMatchSearchDocuments(indexEntries, listEl);
     const makeTooltips = game.settings.get("teriock", "compendiumTooltips");

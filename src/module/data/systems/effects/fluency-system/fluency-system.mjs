@@ -137,6 +137,6 @@ export default class FluencySystem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.tradecraftDescription = TERIOCK.content.tradecrafts[this._source.tradecraft];
+    this.tradecraftDescription = `@Embed[${this.tradecraft} text inline=true]`;
   }
 }

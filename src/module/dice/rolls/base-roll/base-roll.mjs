@@ -321,15 +321,19 @@ export default class BaseRoll extends Roll {
     return [];
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @version 367
+   */
   async getTooltip() {
     const parts = this.getTooltipParts();
     return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, { parts });
   }
 
   /**
-   * The dice parts for the tooltip.
+   * The dice parts for the tooltip. Mirrors the internals of {@link Roll.getTooltip}.
    * @returns {object[]}
+   * @version 367
    */
   getTooltipParts() {
     return this.dice.filter(d => typeof d.number === "number" ? d.number !== 0 : true).map(d => d.getTooltipData());

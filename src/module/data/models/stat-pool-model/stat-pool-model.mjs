@@ -123,7 +123,10 @@ export default class StatPoolModel extends BaseDataModel {
     } else if (this.stat === "hp" && this.actor?.statuses.has("unconscious")) {
       panels.push({
         bars: [],
-        blocks: [{ text: TERIOCK.content.keywords.awaken, title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title") }],
+        blocks: [{
+          text: "@Embed[keyword:awaken text inline=true]",
+          title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
+        }],
         icon: TERIOCK.display.icons.manifest.effect.awaken,
         img: TERIOCK.display.images.manifest.effectTypes.awakening,
         name: _loc("TERIOCK.EFFECTS.Common.awaken"),

@@ -4,6 +4,7 @@ import TypeCollection from "./type-collection.mjs";
 /**
  * A collection of subs for a sup that validate that all the subs are still correct.
  * @see {HierarchyDocumentMixin}
+ * @category Hierarchy
  */
 export default class SubCollection extends TypeCollection {
   /** @inheritdoc */

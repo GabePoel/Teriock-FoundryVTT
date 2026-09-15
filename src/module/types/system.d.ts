@@ -32,7 +32,7 @@ declare global {
       dontRenderSheets?: ID<TeriockDocument>[];
       /** Keep competence instead of inheriting from elder. */
       keepCompetence?: boolean;
-      /** Force even subs to keep their `_id`. May cause `_id` collisions. */
+      /** Whether subs keep their `_id`. Defaults to `keepId`, and only applies when `keepId` is set. */
       keepSubIds?: boolean;
       /** UUIDs of known subs to filter out. */
       knownSubs?: Set<UUID>;

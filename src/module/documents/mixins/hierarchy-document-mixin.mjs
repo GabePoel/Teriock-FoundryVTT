@@ -27,6 +27,7 @@ const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty }
  * @see {SubCollection}
  * @see {TeriockCompendiumDirectory}
  * @see {TeriockCompendium}
+ * @category Hierarchy
  */
 export default function HierarchyDocumentMixin(Base) {
   /**

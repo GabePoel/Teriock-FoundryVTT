@@ -12,7 +12,7 @@ export default class EtherealFilter extends AbstractBaseFilter {
     return { ...super.defaultUniforms, blur: 1.0, desaturate: 1.0, time: 0 };
   }
 
-  /** @override */
+  /** @inheritDoc */
   static _createFragmentShader() {
     return `
     varying vec2 vTextureCoord;
@@ -66,7 +66,7 @@ export default class EtherealFilter extends AbstractBaseFilter {
   `;
   }
 
-  /** @override */
+  /** @inheritDoc */
   static _createVertexShader() {
     return `
     attribute vec2 aVertexPosition;

@@ -106,12 +106,17 @@ function inferChildDocumentName(data) {
 /**
  * Expand document data arrays recursively.
  * @param {object[]} [data]
- * @param {string|null} [sup=null]
- * @param {object} [operation={}]
+ * @param {string|null} [supId=null] ID of the sup that `data` are subs of.
+ * @param {object} [operation]
+ * @param {boolean} [operation.keepId] Top-level documents keep their `_id`.
+ * @param {boolean} [operation.keepSubIds] Subs keep their `_id`. Defaults to `operation.keepId` and only applies when
+ *   top-level documents keep theirs too.
  * @param {object} [options={}]
+ * @param {boolean} [options.inplace] Write `system._sup` directly instead of deferring to `_preCreateOperation`.
+ * @param {boolean} [options.keepId] Top-level documents keep their `_id`. Used for embedded arrays.
  * @returns {object[]}
  */
-export function expandDocumentDataArray(data = [], sup = null, operation = {}, options = {}) {
+export function expandDocumentDataArray(data = [], supId = null, operation = {}, options = {}) {
   operation.knownSubs ??= new Set();
   const expandedData = [];
 
@@ -147,17 +152,18 @@ export function expandDocumentDataArray(data = [], sup = null, operation = {}, o
       delete d.children;
     }
 
-    // Assign sup id.
-    const newId = (operation.keepId || options.keepId) && !sup && d._id ? d._id : foundry.utils.randomID();
-    if (sup && operation?.keepSubIds !== false) { foundry.utils.setProperty(d, "_id", newId); }
-    if (!sup && operation?.keepId !== false) { foundry.utils.setProperty(d, "_id", newId); }
-    if (options.inplace) { foundry.utils.setProperty(d, "_id", newId); }
-    if (sup) {
-      foundry.utils.mergeObject(d, { "flags._teriock.keep": true, "flags._teriock.sup": sup, "system._sup": _del }, {
+    // Assign the ID. Subs follow `keepSubIds` (defaulting to `keepId`), but never keep theirs when the top level isn't,
+    // since that would steal them from whatever sup already owns them.
+    const keepTopId = operation.keepId || options.keepId;
+    const keepId = supId ? keepTopId && (operation.keepSubIds ?? operation.keepId) : keepTopId;
+    const newId = keepId && d._id ? d._id : foundry.utils.randomID();
+    foundry.utils.setProperty(d, "_id", newId);
+    if (supId) {
+      foundry.utils.mergeObject(d, { "flags._teriock.keep": true, "flags._teriock.sup": supId, "system._sup": _del }, {
         applyOperators: true,
         inplace: true,
       });
-      if (options.inplace) { foundry.utils.setProperty(d, "system._sup", sup); }
+      if (options.inplace) { foundry.utils.setProperty(d, "system._sup", supId); }
       if (!operation?.allowDuplicateSubs && foundry.utils.getProperty(d, "flags._teriock.ref")) {
         operation.knownSubs.add(foundry.utils.getProperty(d, "flags._teriock.ref"));
       }
@@ -167,7 +173,7 @@ export function expandDocumentDataArray(data = [], sup = null, operation = {}, o
     // Expand embedded effects array.
     if (masterDocumentName === "Item" && Array.isArray(d.effects) && d.effects.length) {
       d.effects = expandDocumentDataArray(d.effects, null, {
-        keepSubIds: operation.keepId,
+        keepSubIds: operation.keepSubIds ?? operation.keepId,
         knownSubs: operation.knownSubs,
       }, { inplace: true, keepId: operation.keepEmbeddedIds ?? true });
     }

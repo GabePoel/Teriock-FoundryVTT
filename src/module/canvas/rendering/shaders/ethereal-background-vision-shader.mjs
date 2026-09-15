@@ -9,7 +9,7 @@ export default class EtherealBackgroundVisionShader extends BackgroundVisionShad
     return { ...super.defaultUniforms, colorTint: [0.5, 0.6, 0.8] };
   }
 
-  /** @override */
+  /** @inheritDoc */
   static _createFragmentShader() {
     return `
     ${this.SHADER_HEADER}

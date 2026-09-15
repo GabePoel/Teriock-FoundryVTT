@@ -52,7 +52,10 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     return addFormula(addFormula(base, competence), bonus);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @version 367
+   */
   getInitiativeRoll(formula) {
     formula ||= this._getInitiativeFormula();
     const rollData = this.actor?.getRollData() || {};
