@@ -5,8 +5,6 @@ name: Passive Dispel Magic
 system:
   automations:
     - _id: 7400b41f20d9f100
-      restriction:
-        type: move
       type: target
   delivery: aura
   elements:
@@ -17,17 +15,15 @@ system:
   interaction: manifest
   maneuver: passive
   overview:
-    base: >-
-      <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
-      @Identifier[core:fizzles]{fizzles}.</p>
+    base: <p>@Identifier[core:targets]{Target} @Identifier[keyword:conjured]{spell} @Identifier[core:fizzles]{fizzles}.</p>
   powerSources:
     - divine
     - magical
   range:
     raw: "30"
     unit: ft
-  requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+  requirements: <p>@Identifier[core:targets]{Target} is a @Identifier[keyword:conjured]{conjured spell}.</p>
   targets:
     - spell
-  trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
+  trigger: <p>A @Identifier[keyword:conjured]{conjured spell} is used within range.</p>
 type: ability

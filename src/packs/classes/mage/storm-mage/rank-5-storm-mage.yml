@@ -438,8 +438,6 @@ effects:
           deleteOnTurnChange: false
           interactInExecution: true
           radius: 10 + 15 * @h
-          restriction:
-            type: move
           type: region
       competence:
         raw: 1
@@ -468,22 +466,21 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
-          @Identifier[core:fizzles]{fizzles}, as do any others cast simultaneously within
-          @Identifier[core:range]{range}. Their casters take the @Wiki[Category:Conjured spells]{spells'} effects
-          instead.</p>
+          <p>@Identifier[core:targets]{Target} @Identifier[keyword:conjured]{spell} @Identifier[core:fizzles]{fizzles},
+          as do any others cast simultaneously within @Identifier[core:range]{range}. Their casters take the
+          @Identifier[keyword:conjured]{spells'} effects instead.</p>
       powerSources:
         - magical
       range:
         raw: "10"
         unit: ft
-      requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+      requirements: <p>@Identifier[core:targets]{Target} is a @Identifier[keyword:conjured]{conjured spell}.</p>
       rotator: true
       spell: true
       standard: true
       targets:
         - spell
-      trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
+      trigger: <p>A @Identifier[keyword:conjured]{conjured spell} is used within range.</p>
     type: ability
   - _id: kqfb2BYdL2YWDVbs
     _key: "!items.effects!5f40dd167e5eda8d.kqfb2BYdL2YWDVbs"
@@ -522,9 +519,9 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Wiki[Category:Missile delivery
-          spells]{missile spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit
-          was a critical hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
+          <p>@Identifier[core:targets]{Target} takes the "on hit" effect of a @Identifier[core:missile-delivery]{missile
+          spell} that you are @Identifier[core:proficiency-bonus]{proficient} in. If the triggering hit was a critical
+          hit, then the @Identifier[core:targets]{target} takes the "on critical hit" effect instead.</p>
       powerSources:
         - magical
       skill: true

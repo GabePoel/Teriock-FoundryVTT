@@ -23,7 +23,7 @@ export async function loadDefaults() {
   }
 }
 
-/** Keys to not delete during cleaning. */
+/** Top-level keys to not delete during cleaning. */
 const PROTECTED = new Set(["_id", "_key", "_stats", "name", "type"]);
 
 /**
@@ -227,16 +227,17 @@ function checkEquality(a, b) {
  * Recursively delete every value that already equals its default value.
  * @param {object} obj
  * @param {object} [defaults]
+ * @param {boolean} [root=true]
  */
-function stripDefaults(obj, defaults) {
+function stripDefaults(obj, defaults, root = true) {
   if (!obj || !defaults || typeof obj !== "object" || typeof defaults !== "object") { return; }
   for (const [key, value] of Object.entries(obj)) {
-    if (PROTECTED.has(key) || !(key in defaults)) { continue; }
+    if ((root && PROTECTED.has(key)) || !(key in defaults)) { continue; }
     const def = defaults[key];
     const bothPlain = value && typeof value === "object" && !Array.isArray(value)
       && def && typeof def === "object" && !Array.isArray(def);
     if (bothPlain) {
-      stripDefaults(value, def);
+      stripDefaults(value, def, false);
       if (Object.keys(value).length === 0) { delete obj[key]; }
     } else if (checkEquality(value, def)) {
       delete obj[key];

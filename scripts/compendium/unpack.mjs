@@ -245,8 +245,9 @@ function conformDataValues(obj) {
           obj[key].sort((a, b) => a - b);
         }
       } else if (typeof obj[key] === "object" && obj[key] !== null) {
+        // Conform children first so an object emptied by the recursion is removed in the same pass.
+        conformDataValues(obj[key]);
         if (Object.keys(obj[key]).length === 0) { delete obj[key]; }
-        else { conformDataValues(obj[key]); }
       } else if (typeof obj[key] === "string") {
         obj[key] = trimWhitespace(obj[key]);
       }

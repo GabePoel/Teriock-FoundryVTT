@@ -301,8 +301,6 @@ effects:
           deleteOnTurnChange: false
           interactInExecution: true
           radius: 30 + 10 * @h
-          restriction:
-            type: move
           type: region
       competence:
         raw: 1
@@ -328,7 +326,7 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured spells]{spell}
+          <p>@Identifier[core:targets]{Target} @Identifier[keyword:conjured]{spell}
           @Identifier[core:fizzles]{fizzles}.</p>
         fluent: >-
           <p>You may now use [[lookup name]] @Identifier[core:fluency-bonus]{F} additional times as a
@@ -343,13 +341,13 @@ effects:
       range:
         raw: "30"
         unit: ft
-      requirements: <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+      requirements: <p>@Identifier[core:targets]{Target} is a @Identifier[keyword:conjured]{conjured spell}.</p>
       rotator: true
       spell: true
       standard: true
       targets:
         - spell
-      trigger: <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within range.</p>
+      trigger: <p>A @Identifier[keyword:conjured]{conjured spell} is used within range.</p>
     type: ability
   - _id: WDtIKS8dYb2ZWtCs
     _key: "!items.effects!QYwUrN8XCUUYETmu.WDtIKS8dYb2ZWtCs"
@@ -394,8 +392,8 @@ effects:
       targets:
         - area
       trigger: >-
-        <p>You cast a @Wiki[Category:Missile delivery spells]{missile} or @Wiki[Category:Weapon delivery spells]{weapon
-        delivery spell}.</p>
+        <p>You cast a @Identifier[core:missile-delivery]{missile} or @Identifier[core:bite-delivery]{weapon delivery
+        spell}.</p>
     type: ability
   - _id: tlOqSz1k0ErZQdDX
     _key: "!items.effects!QYwUrN8XCUUYETmu.tlOqSz1k0ErZQdDX"
@@ -605,7 +603,7 @@ effects:
       overview:
         base: >-
           <p>You cast one @Wiki[Category:Single action spells]{single action spell} you have that is not
-          @Wiki[Category:Item delivery spells]{delivered by an item}.</p>
+          @Identifier[core:bite-delivery]{delivered by an item}.</p>
       powerSources:
         - magical
       range:

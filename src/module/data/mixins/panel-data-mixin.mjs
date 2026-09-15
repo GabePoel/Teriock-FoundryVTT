@@ -21,8 +21,6 @@ export default function PanelDataMixin(Base) {
     /** @inheritDoc */
     async _buildEmbedHTML(config, options = {}) {
       if (config.values.includes("panel")) {
-        // TODO: Consider removing this caption removal
-        if (!config.label) { config.caption = false; }
         const panelOptions = {
           collapsed: config.values.includes("collapsed"),
           noAssociations: config.values.includes("noAssociations"),
