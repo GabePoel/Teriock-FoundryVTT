@@ -50,7 +50,7 @@ export default function PanelDataMixin(Base) {
         bars: [],
         blocks: [],
         documentUuid: this.uuid,
-        icon: this.typeIcon,
+        icon: this.typeIcon ?? TERIOCK.display.icons.manifest.ui.document,
         img: this.img ?? TERIOCK.display.images.common.uncertainty,
         name: this.fullName || this.name,
       }, await this.system?.getPanelParts?.() ?? {});
@@ -71,10 +71,7 @@ export default function PanelDataMixin(Base) {
     async toMessage(options = {}) {
       const panel = await this.toPanel();
       return ChatMessage.implementation.create({
-        speaker: ChatMessage.implementation.getSpeaker({
-          actor: options?.actor ?? this.actor
-            ?? ChatMessage.implementation.getSpeakerActor(ChatMessage.implementation.getSpeaker()),
-        }),
+        speaker: ChatMessage.implementation.getSpeaker({ actor: options?.actor ?? this.actor }),
         system: { _src: this.uuid, panels: { [panel.id]: panel.toObject() } },
         type: "shared",
       }, { defaultMode: true });
