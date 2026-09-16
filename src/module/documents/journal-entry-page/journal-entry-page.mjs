@@ -1,4 +1,3 @@
-import documentConfig from "../../constants/config/document-config.mjs";
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { createElement } from "../../helpers/html.mjs";
@@ -28,7 +27,7 @@ export default class TeriockJournalEntryPage
   get typedIdentifier() {
     if (this.inCompendium && this.compendium.collection === "teriock.rules") {
       const config = TERIOCK.config.wiki.namespaces[this.parent.name];
-      return /** @type {TypedIdentifier} */ (`${config?.identifierType ?? "rule"}:${this.forcedIdentifier}`);
+      if (config) { return `${config?.identifierType ?? "rule"}:${this.forcedIdentifier}`; }
     }
     return super.typedIdentifier;
   }
