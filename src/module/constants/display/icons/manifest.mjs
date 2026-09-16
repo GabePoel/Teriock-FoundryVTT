@@ -67,6 +67,7 @@ export default {
     tradesman: "ms-home-repair-service",
     veteran: "ms-fort",
   },
+  combat: { combatant: "fa-chess-rook", commander: "fa-chess-king", minion: "fa-chess-pawn" },
   competence: { fluent: "ms-social-leaderboard", none: "ms-brightness-empty", proficient: "ms-license" },
   consequence: { crit: "ms-my-location", none: "ms-location-searching" },
   cover: { full: "ms-forest", half: "ms-grass", partial: "ms-park" },

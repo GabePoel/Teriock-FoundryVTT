@@ -51,6 +51,21 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     return this.group?.system?.commander === this;
   }
 
+  /**
+   * If this is a minion in a combat group.
+   * @returns {boolean}
+   */
+  get isMinion() {
+    return this.group && !this.isCommander;
+  }
+
+  /** @inheritDoc */
+  get typeIcon() {
+    if (this.isCommander) { return TERIOCK.display.icons.manifest.combat.commander; }
+    if (this.isMinion) { return TERIOCK.display.icons.manifest.combat.minion; }
+    return TERIOCK.display.icons.manifest.combat.combatant;
+  }
+
   /** @inheritDoc */
   _getInitiativeFormula() {
     const base = TERIOCK.config.character.defaults.initiative.base;
