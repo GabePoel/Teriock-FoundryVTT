@@ -35,13 +35,21 @@ export default function CommandActivationFactory(entry) {
     /** @inheritDoc */
     async primaryAction() {
       if (!this.checkActors() || typeof entry.primary !== "function") { return; }
-      for (const a of this.actors) { await entry.primary(a, Object.assign({ event: this.event }, this.options)); }
+      await Promise.all(this.actors.map(a => entry.primary(a, Object.assign({ event: this.event }, this.options))));
+      ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.applied", {
+        format: { command: this.label },
+        localize: true,
+      });
     }
 
     /** @inheritDoc */
     async secondaryAction() {
       if (!this.checkActors() || typeof entry.secondary !== "function") { return; }
-      for (const a of this.actors) { await entry.secondary(a, Object.assign({ event: this.event }, this.options)); }
+      await Promise.all(this.actors.map(a => entry.secondary(a, Object.assign({ event: this.event }, this.options))));
+      ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.reversed", {
+        format: { command: this.label },
+        localize: true,
+      });
     }
   }
 
