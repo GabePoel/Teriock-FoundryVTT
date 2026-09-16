@@ -44,6 +44,15 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
   }
 
   /**
+   * The combatant group.
+   * @returns {CombatantGroup}
+   */
+  get groupDocument() {
+    if (typeof this.group === "string") { return this.parent.groups.get(this.group); }
+    return this.group;
+  }
+
+  /**
    * If this is the commander of a combat group.
    * @returns {boolean}
    */
@@ -103,7 +112,7 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
    * @returns {Promise<void>}
    */
   async makeCommander() {
-    const groupId = this.group?.id ?? foundry.utils.randomID();
+    const groupId = this.groupDocument?.id ?? foundry.utils.randomID();
     if (this.group) {
       await this.group.update({ "system.commander": this.id });
     } else {
@@ -121,6 +130,14 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
         parent: this.parent,
         updates: [{ _id: this.id, group: groupId }],
       }]);
+    }
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.groupDocument && this.isMinion) {
+      this.initiative = this.groupDocument.commander?.initiative ?? this.groupDocument.initiative;
     }
   }
 }

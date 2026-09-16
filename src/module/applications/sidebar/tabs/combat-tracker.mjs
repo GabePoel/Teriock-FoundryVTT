@@ -66,21 +66,21 @@ export default class TeriockCombatTracker extends CombatTracker {
           parent: combatant.parent,
           updates: [{ _id: combatant.id, group: null }],
         }];
-        if (combatant.isCommander && combatant.group.members.size > 1) {
+        if (combatant.isCommander && combatant.groupDocument.members?.size > 1) {
           operations.push({
             action: "update",
-            documentName: combatant.group.documentName,
-            pack: combatant.group.pack,
-            parent: combatant.group.parent,
-            updates: [{ _id: combatant.group.id, "system.commander": null }],
+            documentName: combatant.groupDocument.documentName,
+            pack: combatant.groupDocument.pack,
+            parent: combatant.groupDocument.parent,
+            updates: [{ _id: combatant.groupDocument.id, "system.commander": null }],
           });
-        } else if (combatant.group.members.size === 1) {
+        } else if (combatant.groupDocument.members.size === 1) {
           operations.push({
             action: "delete",
-            documentName: combatant.group.documentName,
-            ids: [combatant.group.id],
-            pack: combatant.group.pack,
-            parent: combatant.group.parent,
+            documentName: combatant.groupDocument.documentName,
+            ids: [combatant.groupDocument.id],
+            pack: combatant.groupDocument.pack,
+            parent: combatant.groupDocument.parent,
           });
         }
         await foundry.documents.modifyBatch(operations);
@@ -115,8 +115,8 @@ export default class TeriockCombatTracker extends CombatTracker {
     const targetCombatant = this.#getCombatant(event.target?.closest(".combatant[data-combatant-id]"));
     const draggedCombatant = fromUuidSync(foundry.applications.ux.TextEditor.getDragEventData(event)?.uuid);
     if (targetCombatant?.documentName !== "Combatant" || draggedCombatant?.documentName !== "Combatant") { return; }
-    if (!targetCombatant.group) { await targetCombatant.makeCommander(); }
-    await draggedCombatant.update({ group: targetCombatant.group });
+    if (!targetCombatant.groupDocument) { await targetCombatant.makeCommander(); }
+    await draggedCombatant.update({ group: targetCombatant.groupDocument.id });
   }
 
   /** @inheritDoc */
@@ -131,15 +131,19 @@ export default class TeriockCombatTracker extends CombatTracker {
     content.querySelectorAll(".combatant[data-combatant-id]").forEach(el => {
       const combatant = this.#getCombatant(el);
       const controls = el.querySelector(".token-name .combatant-controls");
-      controls.insertAdjacentElement(
+      controls?.insertAdjacentElement(
         "afterbegin",
         createElement("button", {
           className: `inline-control combatant-control icon ${makeIconClass(combatant.typeIcon, "solid")}`,
-          dataset: { action: "changeGroupState", combatantId: combatant.id, groupId: combatant.group?.id ?? undefined },
+          dataset: {
+            action: "changeGroupState",
+            combatantId: combatant.id,
+            groupId: combatant.groupDocument?.id ?? undefined,
+          },
         }),
       );
       const initiativeInput = el.querySelector("input.initiative-input");
-      if (combatant.isMinion) { initiativeInput.setAttribute("disabled", "disabled"); }
+      if (initiativeInput && combatant.isMinion) { initiativeInput.setAttribute("disabled", "disabled"); }
     });
   }
 }

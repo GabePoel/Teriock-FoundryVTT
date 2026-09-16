@@ -46,9 +46,8 @@ export default class CommandedSystem extends BaseGroupSystem {
   }
 
   /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    const commanderId = typeof this.commander?.group === "string" ? this.commander.group : this.commander?.group?.id;
-    if (commanderId !== this.parent.id) { this.commander = null; }
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.commander?.groupDocument === this.parent) { this.initiative = this.commander.initiative; }
   }
 }
