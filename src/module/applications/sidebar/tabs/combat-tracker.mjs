@@ -6,6 +6,23 @@ const { CombatTracker } = foundry.applications.sidebar.tabs;
 
 /** @inheritDoc */
 export default class TeriockCombatTracker extends CombatTracker {
+  /**
+   * Toggler whether a combatant is a commander.
+   * @param {PointerEvent} _event
+   * @param {HTMLElement} target
+   * @returns {Promise<void>}
+   * @this {TeriockCombatTracker}
+   */
+  static async #onToggleCommander(_event, target) {
+    const combatant = this.#getCombatant(target);
+    if (!combatant) { return; }
+    if (combatant.isCommander) { await combatant.groupDocument.update({ "system.commanderId": null }); }
+    else { await combatant.makeCommander(); }
+  }
+
+  /** @type {Partial<ApplicationConfiguration>} */
+  static DEFAULT_OPTIONS = { actions: { toggleCommander: this.#onToggleCommander } };
+
   /** @type {Teriock.Command.ThresholdOptions} */
   #defaultInitiativeExecutionData;
 
@@ -30,7 +47,7 @@ export default class TeriockCombatTracker extends CombatTracker {
       ?? new foundry.applications.ux.DragDrop.implementation({
         callbacks: { dragstart: this._onDragStart.bind(this), drop: this._onDrop.bind(this) },
         dragSelector: ".combatant[data-combatant-id]",
-        dropSelector: ".combatant[data-combatant-id",
+        dropSelector: ".combatant[data-combatant-id]",
       });
   }
 
@@ -59,33 +76,9 @@ export default class TeriockCombatTracker extends CombatTracker {
       onClick: async (_vent, li) => {
         const combatant = this.#getCombatant(li);
         if (!combatant) { return; }
-        const operations = [{
-          action: "update",
-          documentName: combatant.documentName,
-          pack: combatant.pack,
-          parent: combatant.parent,
-          updates: [{ _id: combatant.id, group: null }],
-        }];
-        if (combatant.isCommander && combatant.groupDocument.members?.size > 1) {
-          operations.push({
-            action: "update",
-            documentName: combatant.groupDocument.documentName,
-            pack: combatant.groupDocument.pack,
-            parent: combatant.groupDocument.parent,
-            updates: [{ _id: combatant.groupDocument.id, "system.commander": null }],
-          });
-        } else if (combatant.groupDocument.members.size === 1) {
-          operations.push({
-            action: "delete",
-            documentName: combatant.groupDocument.documentName,
-            ids: [combatant.groupDocument.id],
-            pack: combatant.groupDocument.pack,
-            parent: combatant.groupDocument.parent,
-          });
-        }
-        await foundry.documents.modifyBatch(operations);
+        await combatant.leaveGroup();
       },
-      visible: li => game.user.isGM && this.#getCombatant(li)?.group,
+      visible: li => game.user.isGM && this.#getCombatant(li)?.groupDocument,
     }, ...super._getEntryContextOptions()];
   }
 
@@ -114,9 +107,9 @@ export default class TeriockCombatTracker extends CombatTracker {
   async _onDrop(event) {
     const targetCombatant = this.#getCombatant(event.target?.closest(".combatant[data-combatant-id]"));
     const draggedCombatant = fromUuidSync(foundry.applications.ux.TextEditor.getDragEventData(event)?.uuid);
-    if (targetCombatant?.documentName !== "Combatant" || draggedCombatant?.documentName !== "Combatant") { return; }
-    if (!targetCombatant.groupDocument) { await targetCombatant.makeCommander(); }
-    await draggedCombatant.update({ group: targetCombatant.groupDocument.id });
+    if (draggedCombatant?.documentName !== "Combatant") { return; }
+    if (targetCombatant?.documentName !== "Combatant") { await draggedCombatant.leaveGroup(); }
+    else { await draggedCombatant.joinGroup(targetCombatant); }
   }
 
   /** @inheritDoc */
@@ -136,9 +129,10 @@ export default class TeriockCombatTracker extends CombatTracker {
         createElement("button", {
           className: `inline-control combatant-control icon ${makeIconClass(combatant.typeIcon, "solid")}`,
           dataset: {
-            action: "changeGroupState",
+            action: "toggleCommander",
             combatantId: combatant.id,
             groupId: combatant.groupDocument?.id ?? undefined,
+            tooltip: combatant.isCommander ? "COMBATANT.ACTIONS.MakeMinion" : "COMBATANT.ACTIONS.MakeCommander",
           },
         }),
       );

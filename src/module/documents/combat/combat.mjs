@@ -138,6 +138,13 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
 
   /** @inheritDoc */
   async rollInitiative(ids, options = {}) {
+    ids = Array.from(
+      new Set(
+        ids.map(id =>
+          this.combatants.get(id)?.isMinion ? this.combatants.get(id).groupDocument.system.commander?.id : id
+        ).filter(Boolean),
+      ),
+    );
     if (ids.length === 1 && !options.noExecution) {
       const execution = await InitiativeExecution.create({}, { source: this.combatants.get(ids[0]) });
       if (execution?.message?.rolls?.length) {

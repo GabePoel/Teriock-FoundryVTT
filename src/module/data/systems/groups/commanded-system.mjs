@@ -8,12 +8,24 @@ export default class CommandedSystem extends BaseGroupSystem {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { commander: new LocalDocumentField(foundry.documents.BaseCombatant) });
+    return Object.assign(super.defineSchema(), {
+      commanderId: new LocalDocumentField(foundry.documents.BaseCombatant, { idOnly: true }),
+    });
   }
 
   /** @inheritDoc */
   get actor() {
     return this.commander?.actor;
+  }
+
+  /**
+   * The commander of this group.
+   * @returns {TeriockCombatant|null}
+   */
+  get commander() {
+    const commander = this.combat?.combatants.get(this.commanderId);
+    if (commander?.groupDocument === this.parent) { return commander; }
+    return null;
   }
 
   /**
@@ -40,9 +52,7 @@ export default class CommandedSystem extends BaseGroupSystem {
     const yes = await super._preUpdate(changed, options, userId);
     if (yes === false) { return false; }
 
-    if ("commander" in changed && this.commander) {
-      this.updateSource({ initiative: this.commander.initiative });
-    }
+    if ("commanderId" in changed && this.commander) { this.updateSource({ initiative: this.commander.initiative }); }
   }
 
   /** @inheritDoc */

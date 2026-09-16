@@ -1,8 +1,10 @@
+import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { CompetenceModel } from "../../data/models/scaling-models/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { addFormula } from "../../helpers/formula.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 import { dotJoin } from "../../helpers/string.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
@@ -108,36 +110,139 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
   }
 
   /**
-   * Make this into the commander of a group.
+   * Join a combat group.
+   * @param {TeriockCombatant|CombatantGroup} target
    * @returns {Promise<void>}
    */
-  async makeCommander() {
-    const groupId = this.groupDocument?.id ?? foundry.utils.randomID();
-    if (this.group) {
-      await this.group.update({ "system.commander": this.id });
-    } else {
-      await foundry.documents.modifyBatch([{
+  async joinGroup(target) {
+    const groupId = target.documentName === "CombatantGroup"
+      ? target.id
+      : target.groupDocument?.id ?? foundry.utils.randomID();
+    if (groupId === this.groupDocument?.id) { return; }
+    const makeGroup = target.documentName === "Combatant" && !target.groupDocument;
+    const operations = [];
+    if (this.groupDocument?.members.size === 1 || this.isCommander) {
+      operations.push({
+        action: "delete",
+        documentName: "CombatantGroup",
+        ids: [this.groupDocument.id],
+        pack: this.pack,
+        parent: this.parent,
+      });
+    }
+    if (makeGroup) {
+      operations.push({
         action: "create",
-        data: [{ _id: groupId, "system.commander": this.id, type: "commanded" }],
+        data: [{ _id: groupId, initiative: target.initiative, "system.commanderId": target.id, type: "commanded" }],
         documentName: "CombatantGroup",
         keepId: true,
         pack: this.pack,
         parent: this.parent,
-      }, {
-        action: "update",
-        documentName: this.documentName,
+      });
+    }
+    const updates = [];
+    if (makeGroup) { updates.push({ _id: target.id, group: groupId }); }
+    if (this.groupDocument) {
+      updates.push(
+        ...Array.from(this.groupDocument.members).map(m => {
+          return { _id: m.id, group: groupId, initiative: target.initiative };
+        }),
+      );
+    } else { updates.push({ _id: this.id, group: groupId, initiative: target.initiative }); }
+    operations.push({
+      action: "update",
+      documentName: this.documentName,
+      pack: this.pack,
+      parent: this.parent,
+      updates,
+    });
+    await foundry.documents.modifyBatch(operations);
+  }
+
+  /**
+   * Leave a combat group.
+   * @returns {Promise<void>}
+   */
+  async leaveGroup() {
+    if (!this.groupDocument) { return; }
+    const operations = [];
+    const deleteGroup = this.groupDocument.members.size === 1
+      || (this.isCommander
+        && await TeriockDialog.confirm({
+          content: `<p>${_loc("COMBATANT.ACTIONS.ConfirmDeleteGroup")}</p>`,
+          window: {
+            icon: makeIconClass(TERIOCK.display.icons.manifest.combat.combatant, "title"),
+            title: _loc("COMBATANT.ACTIONS.LeaveGroup"),
+          },
+        }));
+    if (deleteGroup) {
+      operations.push(...[{
+        action: "delete",
+        documentName: "CombatantGroup",
+        ids: [this.groupDocument.id],
         pack: this.pack,
         parent: this.parent,
-        updates: [{ _id: this.id, group: groupId }],
+      }, {
+        action: "update",
+        documentName: "Combatant",
+        pack: this.pack,
+        parent: this.parent,
+        updates: Array.from(this.groupDocument.members).map(m => {
+          return { _id: m.id, group: null };
+        }),
       }]);
+    } else {
+      operations.push({
+        action: "update",
+        documentName: "Combatant",
+        pack: this.pack,
+        parent: this.parent,
+        updates: [{ _id: this.id, group: null }],
+      });
     }
+    await foundry.documents.modifyBatch(operations);
+  }
+
+  /**
+   * Make this into the commander of a combat group.
+   * @returns {Promise<void>}
+   */
+  async makeCommander() {
+    const groupId = this.groupDocument?.id ?? foundry.utils.randomID();
+    const operations = [];
+    if (this.groupDocument) {
+      operations.push({
+        action: "update",
+        documentName: "CombatantGroup",
+        pack: this.pack,
+        parent: this.parent,
+        updates: [{ _id: groupId, initiative: this.initiative, "system.commanderId": this.id }],
+      });
+    } else {
+      operations.push({
+        action: "create",
+        data: [{ _id: groupId, initiative: this.initiative, "system.commanderId": this.id, type: "commanded" }],
+        documentName: "CombatantGroup",
+        keepId: true,
+        pack: this.pack,
+        parent: this.parent,
+      });
+    }
+    operations.push({
+      action: "update",
+      documentName: "Combatant",
+      pack: this.pack,
+      parent: this.parent,
+      updates: [{ _id: this.id, group: groupId }],
+    });
+    await foundry.documents.modifyBatch(operations);
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     if (this.groupDocument && this.isMinion) {
-      this.initiative = this.groupDocument.commander?.initiative ?? this.groupDocument.initiative;
+      this.initiative = this.groupDocument.system?.commander?.initiative ?? this.groupDocument.initiative;
     }
   }
 }
