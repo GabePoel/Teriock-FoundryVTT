@@ -1,5 +1,6 @@
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
@@ -282,7 +283,7 @@ export default function BaseDocumentMixin(Base) {
       const typeIcons = CONFIG[this.documentName]?.typeIcons;
       const typeIcon = typeIcons ? typeIcons[this.type] : null;
       const sidebarIcon = CONFIG[this.documentName]?.sidebarIcon;
-      const icon = typeIcon ?? sidebarIcon ?? TERIOCK.config.document.document.icon;
+      const icon = typeIcon ?? sidebarIcon;
       return icon ?? null;
     }
 
@@ -385,6 +386,12 @@ export default function BaseDocumentMixin(Base) {
       if (this.trackable) { game.teriock.identifiers.untrack(this._cache.identifier, this.uuid); }
       if (this.persisted) { game.teriock.identifiers.trackDocument(this); }
       this._cache.identifier = this.typedIdentifier;
+    }
+
+    /** @inheritDoc */
+    toAnchor(options = {}) {
+      const icon = this.typeIcon;
+      return super.toAnchor(Object.assign({ icon: icon ? makeIconClass(icon, "solid") : undefined }, options));
     }
 
     /** @inheritDoc */
