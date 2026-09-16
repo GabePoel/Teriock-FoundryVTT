@@ -43,6 +43,14 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     });
   }
 
+  /**
+   * If this is the commander of a combat group.
+   * @returns {boolean}
+   */
+  get isCommander() {
+    return this.group?.system?.commander === this;
+  }
+
   /** @inheritDoc */
   _getInitiativeFormula() {
     const base = TERIOCK.config.character.defaults.initiative.base;
@@ -50,6 +58,17 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     const bonus = this.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
     return addFormula(addFormula(base, competence), bonus);
+  }
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+
+    if ("initiative" in changed && this.isCommander) { this.group.update({ initiative: changed.initiative }); }
+    else if ("group" in changed) {
+      this.parent?.setupTurns();
+      if (this.parent?.isViewer) { ui.combat.render(); }
+    }
   }
 
   /**
@@ -62,5 +81,31 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     // Tags match `InitiativeExecution`.
     const rollOptions = { tags: [this.competence.label] };
     return new ThresholdRoll(formula, rollData, rollOptions);
+  }
+
+  /**
+   * Make this into the commander of a group.
+   * @returns {Promise<void>}
+   */
+  async makeCommander() {
+    const groupId = this.group?.id ?? foundry.utils.randomID();
+    if (this.group) {
+      await this.group.update({ "system.commander": this.id });
+    } else {
+      await foundry.documents.modifyBatch([{
+        action: "create",
+        data: [{ _id: groupId, "system.commander": this.id, type: "commanded" }],
+        documentName: "CombatantGroup",
+        keepId: true,
+        pack: this.pack,
+        parent: this.parent,
+      }, {
+        action: "update",
+        documentName: this.documentName,
+        pack: this.pack,
+        parent: this.parent,
+        updates: [{ _id: this.id, group: groupId }],
+      }]);
+    }
   }
 }

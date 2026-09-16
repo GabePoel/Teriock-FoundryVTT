@@ -114,6 +114,17 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /** @inheritDoc */
+  _sortCombatants(a, b) {
+    if (a.group || b.group) {
+      if (a.group === b.group) { return Number(b.isCommander) - Number(a.isCommander); }
+      const ia = Number.isNumeric(a.initiative) ? a.initiative : -Infinity;
+      const ib = Number.isNumeric(b.initiative) ? b.initiative : -Infinity;
+      return (ib - ia) || (a.group?.id > b.group?.id ? 1 : -1);
+    }
+    return super._sortCombatants(a, b);
+  }
+
+  /** @inheritDoc */
   async endCombat() {
     const out = await super.endCombat();
     this._onEndCombat();

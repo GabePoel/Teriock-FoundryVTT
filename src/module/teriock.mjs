@@ -184,6 +184,8 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
 
+  CONFIG.CombatantGroup.dataModels.commanded = data.systems.groups.CommandedSystem;
+
   CONFIG.Folder.collection = documents.collections.TeriockFolders;
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 
