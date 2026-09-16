@@ -42,12 +42,7 @@ declare global {
 
     export type ImpactsExecutionOptions = ExecutionOptions & { document?: TeriockActiveEffect | TeriockItem };
 
-    export type AffinityExecutionOptions = ExecutionOptions & {
-      /** The specific affinity being rolled, when the roll came from one. */
-      affinity?: Affinity | null;
-      type?: AffinityType;
-      wrappers?: string[];
-    };
+    export type AffinityExecutionOptions = ExecutionOptions & { type?: AffinityType, wrappers?: string[] };
 
     export type ResistanceExecutionOptions = AffinityExecutionOptions & ThresholdExecutionOptions;
 

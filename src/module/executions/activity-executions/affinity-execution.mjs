@@ -18,9 +18,8 @@ export default class AffinityExecution extends BaseExecution {
   constructor(data = {}, options = {}) {
     super(data, options);
     this.type = options.type ?? this.source.type ?? "immunity";
-    this.affinity = options.affinity ?? this.source ?? null;
     this.wrappers = options.wrappers
-      ?? [this.affinity?.typeLabel, this.affinity?.categoryLabel, this.affinity?.name].filter(Boolean);
+      ?? [this.source?.typeLabel, this.source?.categoryLabel, this.source?.name].filter(Boolean);
     this.wrappers.push(
       TERIOCK.config.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
     );
@@ -29,7 +28,7 @@ export default class AffinityExecution extends BaseExecution {
   /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments;
-    if (this.affinity) { docs.unshift({ document: this.affinity, label: this.name }); }
+    if (this.source) { docs.unshift({ document: this.source, label: this.name }); }
     return docs;
   }
 
@@ -50,15 +49,15 @@ export default class AffinityExecution extends BaseExecution {
 
   /**
    * Prefers the image of the specific affinity rolled, falling back to the one for its type.
-   * @returns {string}
+   * @returns {Teriock.System.ImageString}
    */
   get img() {
-    return this.affinity?.img ?? TERIOCK.config.affinity.types[this.type]?.img;
+    return this.source?.img ?? TERIOCK.config.affinity.types[this.type]?.img;
   }
 
   /** @inheritDoc */
   get journalEntryPageIdentifier() {
-    return TERIOCK.config.affinity.types[this.type]?.identifier;
+    return this.source?.typedIdentifier ?? TERIOCK.config.affinity.types[this.type]?.identifier;
   }
 
   /** @inheritDoc */
@@ -72,7 +71,8 @@ export default class AffinityExecution extends BaseExecution {
       _id: foundry.utils.randomID(),
       bars: [{ icon: this.icon, label: this.name, wrappers: this.wrappers }],
       blocks: [{ text: this.journalEntryPage?.text?.content, title: this.name }],
-      color: foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
+      collapsed: true,
+      color: this.source?.color ?? foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
       icon: this.icon,
       img: this.img,
       label: _loc("DOCUMENT.Affinity"),

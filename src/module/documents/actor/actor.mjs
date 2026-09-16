@@ -377,11 +377,11 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     const bySource = scope.chatDataBySource ?? {};
     const allChatData = [];
     for (const chatData of Object.values(bySource)) {
-      if (!Object.keys(chatData.system?.activations ?? {}).length) { continue; }
+      if (foundry.utils.isEmpty(chatData.system?.activations)) { continue; }
       const panel = chatData.system.panels?.[0];
       if (panel?.associations?.[0] && !panel.associations[0].cards.length) { delete panel.associations; }
-      chatData.system.panels = teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
-        (chatData.system.panels ?? []).filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
+      chatData.system.panels = (chatData.system.panels ?? []).filter(Boolean).map(p =>
+        new teriock.data.pseudoDocuments.Panel(p)
       );
       TeriockChatMessage.applyMode(chatData, game.settings.get("teriock", "triggerMessageMode"));
       allChatData.push(chatData);
@@ -466,7 +466,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     return {
       speaker: TeriockChatMessage.getSpeaker({ actor: this }),
       system: {
-        activations: {},
+        activations: [],
         panels: [{
           associations,
           icon,

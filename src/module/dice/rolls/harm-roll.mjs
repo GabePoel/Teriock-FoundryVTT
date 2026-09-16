@@ -63,7 +63,7 @@ export default class HarmRoll extends ImpactsRoll {
   /** @inheritDoc */
   async getPanels() {
     const harmArray = await this.getHarmArray();
-    return Promise.all(harmArray.map(h => h.getPanelParts()));
+    return Promise.all(harmArray.map(async h => Object.assign(await h.getPanelParts(), { collapsed: true })));
   }
 
   /** @inheritDoc */

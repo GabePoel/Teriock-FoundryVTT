@@ -32,10 +32,4 @@ export default class ResistanceExecution extends mixClasses(AffinityExecution, T
       new teriock.data.pseudoDocuments.activations.UseLocalActivation({ options: { lookup: "ability:resist" } }),
     );
   }
-
-  /** @inheritDoc */
-  _determineCompetence(options) {
-    super._determineCompetence(options);
-    if (options.affinity) { this.updateSource({ "competence.raw": options.affinity.competence }); }
-  }
 }

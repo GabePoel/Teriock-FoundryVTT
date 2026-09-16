@@ -26,7 +26,7 @@ export default function MechanicsSheetMixin(Base) {
    */
   class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin, ConstructionNodesSheetMixin) {
     /**
-     * Handle click events to copy the UUID of this Pseudo-Document to clipboard.
+     * Handle click events to copy the UUID of this PseudoDocument to clipboard.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @returns {Promise<void>}

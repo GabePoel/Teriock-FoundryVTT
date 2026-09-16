@@ -1,5 +1,5 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
-import { ConstructionNode, Panel } from "../../data/pseudo-documents/_module.mjs";
+import { Panel } from "../../data/pseudo-documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
@@ -64,7 +64,7 @@ export default class TeriockTableResult
         : _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
       activations.push(
         new acts.AddDocumentsActivation({
-          constructionNodes: ConstructionNode.toCollectionObject([{ globalUuids: [this.documentUuid] }]),
+          constructionNodes: [{ globalUuids: [this.documentUuid] }],
           display: { label },
           target: ["imbuement", "property"].includes(doc.type) ? "armament" : "actor",
         }),

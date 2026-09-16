@@ -1,4 +1,3 @@
-import { ConstructionNode } from "../../_module.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
@@ -33,18 +32,17 @@ export default class AttunementAutomation extends mixClasses(BaseAutomation, Tri
   async _getActivations(options = { rollData: {} }) {
     const rollData = Object.assign(this.getRollData(), options?.rollData ?? {});
     const tier = await BaseRoll.getValue(this.tier, rollData);
-    const attunementData = {
-      img: this.document.img,
-      name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.document.name }),
-      system: { inheritTier: false, origin: "effect", tier },
-      type: "attunement",
-    };
     return [
       new AddDocumentsActivation({
-        constructionNodes: ConstructionNode.toCollectionObject([{
-          data: JSON.stringify(attunementData),
+        constructionNodes: [{
+          data: {
+            img: this.document.img,
+            name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.document.name }),
+            system: { inheritTier: false, origin: "effect", tier },
+            type: "attunement",
+          },
           overrideData: true,
-        }]),
+        }],
         display: {
           icon: icons.manifest.attunable.attune,
           label: _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: _loc("TYPES.ActiveEffect.attunement") }),

@@ -78,4 +78,13 @@ export default class PseudoCollection extends TypeCollection {
     this.model = model;
     this.clear();
   }
+
+  /**
+   * Convert the PseudoCollection to an array of simple objects.
+   * @param {boolean} [source=true] - Draw data for contained PseudoDocuments from the underlying data source?
+   * @returns {object[]} The extracted array of primitive objects
+   */
+  toObject(source = true) {
+    return this.contents.map(pseudo => pseudo.toObject(source));
+  }
 }

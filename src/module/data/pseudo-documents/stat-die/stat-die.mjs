@@ -125,11 +125,7 @@ export default class StatDie extends BasePseudoDocument {
       const messageData = {
         rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({ actor: this.parent.parent.parent.actor }),
-        system: {
-          panels: teriock.data.pseudoDocuments.Panel.toCollectionObject(
-            this.parent.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
-          ),
-        },
+        system: { panels: this.parent.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)) },
         type: "interactive",
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });

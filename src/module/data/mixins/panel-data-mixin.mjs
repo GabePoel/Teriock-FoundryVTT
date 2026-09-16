@@ -72,7 +72,7 @@ export default function PanelDataMixin(Base) {
       const panel = await this.toPanel();
       return ChatMessage.implementation.create({
         speaker: ChatMessage.implementation.getSpeaker({ actor: options?.actor ?? this.actor }),
-        system: { _src: this.uuid, panels: { [panel.id]: panel.toObject() } },
+        system: { _src: this.uuid, panels: [panel] },
         type: "shared",
       }, { defaultMode: true });
     }

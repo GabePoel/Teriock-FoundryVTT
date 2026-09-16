@@ -61,7 +61,7 @@ export default function TriggerAutomationMixin(Base) {
       scope.chatDataBySource ??= {};
       const key = document.uuid;
       scope.chatDataBySource[key] ??= actor.prepareTriggeredChatData(scope.trigger, document);
-      teriock.data.systems.messages.TriggeredSystem.addActivations(scope.chatDataBySource[key], activations);
+      scope.chatDataBySource[key].system.activations.push(...activations);
     }
 
     /** @inheritDoc */

@@ -77,7 +77,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
             effect,
             "expiration",
           );
-          teriock.data.systems.messages.TriggeredSystem.addActivations(scope.chatDataBySource[key], [activation]);
+          scope.chatDataBySource[key].system.activations.push(activation);
         }
       }
       await actor.createTriggeredMessages(scope);

@@ -56,6 +56,8 @@ declare global {
       blocks?: Teriock.Panels.PanelBlock[];
       /** Additional CSS classes to add */
       classes?: string[];
+      /** Automatically collapse this */
+      collapsed?: boolean;
       /** Color to assign to the image border */
       color?: Color;
       /** UUID of a document that can be opened */

@@ -80,6 +80,6 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels = [await this.journalEntryPage.getPanelParts()];
+    this.panels = [Object.assign(await this.journalEntryPage.getPanelParts(), { collapsed: true })];
   }
 }

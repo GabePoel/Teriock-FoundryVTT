@@ -364,15 +364,15 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /** @inheritDoc */
   async _getCriticalEffectData() {
-    const data = await this._getNormalEffectData();
-    data.system.affinities = BaseAffinity.toCollectionObject(
-      this.affinities.active.filter(a => a.crit.has(1)).map(a => a.toObject()),
-    );
-    data.system.critical = true;
-    data.system.expirations = BaseExpiration.toCollectionObject(
-      this.expirations.active.filter(e => e.crit.has(1)).map(e => e.toObject()),
-    );
-    return data;
+    return foundry.utils.mergeObject(await this._getNormalEffectData(), {
+      system: {
+        affinities: this.affinities.active.filter(a => a?.crit.has(1)).map(a =>
+          a.toObject()
+        ),
+        critical: true,
+        expirations: this.expirations.active.filter(e => e?.crit.has(1)).map(e => e.toObject()),
+      },
+    });
   }
 
   /** @inheritDoc */
@@ -400,18 +400,14 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       showIcon: 0,
       system: {
         _src: this.source.uuid,
-        affinities: BaseAffinity.toCollectionObject(
-          this.affinities.active.filter(a => a.crit.has(0)).map(a => a.toObject()),
-        ),
+        affinities: this.affinities.active.filter(a => a?.crit.has(0)).map(a => a.toObject()),
         applyIfDeattuned: true,
         blocks: (await this.source.system.getPanelParts()).blocks,
         competence: { raw: this.competence.value },
         effectTypes: Array.from(this.source.system.effectTypes),
         elements: Array.from(this.source.system.elements),
         executor: this.actor?.uuid ?? null,
-        expirations: BaseExpiration.toCollectionObject(
-          this.expirations.active.filter(e => e.crit.has(0)).map(e => e.toObject()),
-        ),
+        expirations: this.expirations.active.filter(e => e?.crit.has(0)).map(e => e.toObject()),
         heightened: this.heightened,
         identifier: `${this.source.forcedIdentifier}-effect`,
         powerSources: Array.from(this.source.system.powerSources),

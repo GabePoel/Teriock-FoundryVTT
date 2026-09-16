@@ -62,20 +62,6 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * @param {object} data
-   * @param {DatabaseWriteOperation} operation
-   * @returns {Promise<{document: TeriockDocument, fieldPath: string, parent: TeriockDocument|BasePseudoDocument, updateData: object}>}
-   * @private
-   */
-  static async _parseParent(data, operation) {
-    const resolved = await this._resolveParent(operation);
-    const updateData = Object.fromEntries(
-      Object.entries(data).map(([key, value]) => [`${resolved.fieldPath}.${key}`, value]),
-    );
-    return { ...resolved, updateData };
-  }
-
-  /**
    * @param {DatabaseWriteOperation} operation
    * @returns {Promise<{collectionKey: string, document: TeriockDocument, fieldPath: string, parent: TeriockDocument|BasePseudoDocument}>}
    * @private
@@ -108,11 +94,16 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Promise<BasePseudoDocument[]>}
    */
   static async createDocuments(data = [], operation = {}) {
-    if (!this.metadata.typed) { data.forEach(d => d.type = this.metadata.type); }
-    const parsed = await this._parseParent(this.toCollectionObject(data, operation), operation);
-    await parsed.document.update(parsed.updateData);
-    const parent = await fromUuid(parsed.parent.uuid);
-    return data.map(d => parent.getEmbeddedDocument(this.documentName, d?._id));
+    const resolved = await this._resolveParent(operation);
+    const entries = data.map(d => {
+      const entry = foundry.utils.isPlainObject(d) ? d : d.toObject();
+      if (!this.metadata.typed) { entry.type = this.metadata.type; }
+      entry._id = operation.keepId && entry._id ? entry._id : foundry.utils.randomID();
+      return entry;
+    });
+    await resolved.document.update({ [resolved.fieldPath]: entries });
+    const parent = await fromUuid(resolved.parent.uuid);
+    return entries.map(e => parent.getEmbeddedDocument(this.documentName, e._id));
   }
 
   /** @inheritDoc */
@@ -169,33 +160,20 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * Format an array of pseudo-documents into a collection data object.
-   * @template T
-   * @param {T[]} docs
-   * @param {object} [options]
-   * @param {boolean} [options.keepId]
-   * @param {boolean} [options.source=true]
-   * @returns {Record<ID<T>, object>}
-   */
-  static toCollectionObject(docs, options = {}) {
-    return Object.fromEntries(docs.map(d => {
-      const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
-      const data = Object.assign(foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true), { _id: id });
-      return [id, data];
-    }));
-  }
-
-  /**
    * Update Pseudo-Documents within some parent Document or Pseudo-Document.
    * @param {object[]} updates
-   * @param {Partial<DatabaseCreateOperation>} operation
+   * @param {Partial<DatabaseUpdateOperation>} operation
    * @returns {Promise<BasePseudoDocument[]>}
    */
   static async updateDocuments(updates = [], operation = {}) {
-    const parsed = await this._parseParent(this.toCollectionObject(updates, { keepId: true }), operation);
-    await parsed.document.update(parsed.updateData);
-    const parent = await fromUuid(parsed.parent.uuid);
-    return updates.map(d => parent.getEmbeddedDocument(this.documentName, d?._id));
+    const resolved = await this._resolveParent(operation);
+    const entries = updates.map(u => foundry.utils.isPlainObject(u) ? u : u.toObject());
+    if (entries.some(e => !e._id)) {
+      throw new Error("You must provide an _id for every object in the update data Array.");
+    }
+    await resolved.document.update({ [resolved.fieldPath]: entries });
+    const parent = await fromUuid(resolved.parent.uuid);
+    return entries.map(e => parent.getEmbeddedDocument(this.documentName, e._id));
   }
 
   /**

@@ -94,7 +94,7 @@ export default class ShortRestExecution extends DocumentExecution {
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels = [Object.assign(await this.journalEntryPage.getPanelParts(), { icon: this.icon })];
+    this.panels = [Object.assign(await this.journalEntryPage.getPanelParts(), { collapsed: true, icon: this.icon })];
   }
 
   /** @inheritDoc */

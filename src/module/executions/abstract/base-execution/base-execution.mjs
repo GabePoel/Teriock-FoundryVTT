@@ -187,11 +187,9 @@ export default class BaseExecution extends BaseDataModel {
       rolls: this.rolls,
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
-        activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(this.activations),
+        activations: this.activations,
         buttons: this.buttons,
-        panels: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
-          this.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
-        ),
+        panels: this.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
         tags: this.tags,
       },
       type: "interactive",
@@ -353,7 +351,7 @@ export default class BaseExecution extends BaseDataModel {
       const activation = new AddDocumentsActivation({
         all: false,
         auto: true,
-        constructionNodes: AddDocumentsActivation.toCollectionObject(nodes, { keepId: true }),
+        constructionNodes: nodes,
         display: { label: name ? _loc(namedLabel, { name }) : _loc(label) },
         multi: false,
         target,

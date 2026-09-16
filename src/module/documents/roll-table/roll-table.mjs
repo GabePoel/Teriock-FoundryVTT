@@ -128,9 +128,7 @@ export default class TeriockRollTable
       speaker: TeriockChatMessage.getSpeaker(),
       system: {
         _src: this.uuid,
-        activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
-          (await Promise.all(results.map(r => r.getActivations()))).flat(),
-        ),
+        activations: (await Promise.all(results.map(r => r.getActivations()))).flat(),
         panels: await Promise.all(results.map(r => r.getPanelParts())),
       },
       type: "interactive",
@@ -140,8 +138,8 @@ export default class TeriockRollTable
     messageData.system.panels.forEach(panel => {
       panel.blocks.push({ classes: [TERIOCK.display.panels.styles.derived], text, title: this.name });
     });
-    messageData.system.panels = teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
-      messageData.system.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
+    messageData.system.panels = messageData.system.panels.filter(Boolean).map(p =>
+      new teriock.data.pseudoDocuments.Panel(p)
     );
     return TeriockChatMessage.create(messageData, messageOptions);
   }

@@ -190,8 +190,9 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   prepareData() {
     super.prepareData();
     if (!this.canCrit) { this.crit = new Set([0, 1]); }
-    if (this.document?.documentName !== "Actor") {
-      this.actor?.getEmbeddedCollection(this.documentName)?.set(toId(this.uuid, { hash: true }), this);
+    const uuid = this.uuid;
+    if (uuid && this.document?.documentName !== "Actor") {
+      this.actor?.getEmbeddedCollection(this.documentName)?.set(toId(uuid, { hash: true }), this);
     }
   }
 }

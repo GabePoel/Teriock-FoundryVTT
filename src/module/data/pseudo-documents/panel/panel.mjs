@@ -77,6 +77,7 @@ export default class Panel extends BasePseudoDocument {
       ),
       blocks: blocksField(),
       classes: new fields.SetField(new fields.StringField(), { initial: [] }),
+      collapsed: new fields.BooleanField({ blank: true }),
       color: new fields.ColorField({ blank: true, initial: null, nullable: true, required: false }),
       documentUuid: new fields.DocumentUUIDField({ blank: true, initial: null, nullable: true, required: false }),
       icon: nullStringField(),
@@ -134,7 +135,10 @@ export default class Panel extends BasePseudoDocument {
    */
   async prepareContext(options = {}) {
     // Todo: Fix draggable handling. Maybe needs a new DragDrop handler?
-    const context = Object.assign(this.toObject(), { collapsed: Boolean(options.collapsed), color: this.color });
+    const context = Object.assign(this.toObject(), {
+      collapsed: Boolean(options.collapsed ?? this.collapsed),
+      color: this.color,
+    });
     const { collapseTables = true, keepId = true, usePanelRelativeTo = true } = options;
     if (options.noAssociations) { context.associations = []; }
     if (options.noBars) { context.bars = []; }

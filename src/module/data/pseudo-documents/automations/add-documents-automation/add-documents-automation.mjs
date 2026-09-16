@@ -156,7 +156,7 @@ export default class AddDocumentsAutomation
       new AddDocumentsActivation({
         all: this.all,
         auto: this.auto,
-        constructionNodes: ConstructionNode.toCollectionObject(nodes.map(n => n.toObject()), { keepId: true }),
+        constructionNodes: nodes.map(n => n.toObject()),
         multi: this.multi,
         target: this.target,
       }),

@@ -35,19 +35,6 @@ export default class InteractiveSystem extends BaseMessageSystem {
     });
   }
 
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    if (Array.isArray(source.panels)) {
-      const panels = {};
-      for (const panel of source.panels) {
-        panel._id ??= foundry.utils.randomID();
-        panels[panel._id] = panel;
-      }
-      source.panels = panels;
-    }
-    return super.migrateData(source, options);
-  }
-
   /**
    * Enriched panel context.
    * @returns {Promise<Teriock.Panels.PanelParts[]>}

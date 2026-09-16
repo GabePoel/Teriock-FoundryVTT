@@ -76,6 +76,21 @@ export default class PseudoCollectionField extends TypedObjectField {
   }
 
   /** @inheritDoc */
+  _cast(value) {
+    if (value instanceof Map) { value = Array.from(value.values()); }
+    if (!Array.isArray(value)) { return super._cast(value); }
+    const object = {};
+    for (let entry of value) {
+      if (!entry) { continue; }
+      if (typeof entry.toObject === "function") { entry = entry.toObject(); }
+      if (!foundry.utils.isPlainObject(entry)) { continue; }
+      entry._id ||= foundry.utils.randomID();
+      object[entry._id] = entry;
+    }
+    return object;
+  }
+
+  /** @inheritDoc */
   initialize(_value, model, options = {}) {
     const controller = model instanceof BasePseudoDocument ? model : model.document;
     const collection = controller?.pseudoCollections?.[this.documentName] ?? null;
@@ -85,6 +100,7 @@ export default class PseudoCollectionField extends TypedObjectField {
 
   /** @inheritDoc */
   toObject(value) {
-    return super.toObject(Object.fromEntries(value?.entries() ?? []));
+    if (!value) { return value; }
+    return Array.from(value.values(), pseudo => this.element.toObject(pseudo));
   }
 }

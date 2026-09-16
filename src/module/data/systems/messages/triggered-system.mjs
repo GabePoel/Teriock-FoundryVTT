@@ -1,5 +1,4 @@
 import { mergeMetadata } from "../../../helpers/construction.mjs";
-import { BasePseudoDocument } from "../../pseudo-documents/abstract/_module.mjs";
 import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 
 /**
@@ -8,17 +7,6 @@ import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 export default class TriggeredSystem extends InteractiveSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { type: "triggered" });
-
-  /**
-   * Add activations onto triggered chat message data.
-   * @param {Partial<Teriock.Data.ChatMessageData>} chatData
-   * @param {Activation[]} activations
-   */
-  static addActivations(chatData, activations) {
-    if (!chatData?.system || !activations?.length) { return; }
-    chatData.system.activations ??= {};
-    Object.assign(chatData.system.activations, BasePseudoDocument.toCollectionObject(activations));
-  }
 
   /** @inheritDoc */
   _onUpdateTimestamp() {

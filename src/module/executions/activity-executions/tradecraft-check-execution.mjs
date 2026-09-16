@@ -39,6 +39,10 @@ export default class TradecraftCheckExecution extends mixClasses(BaseExecution, 
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels.push(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.getPanelParts());
+    this.panels.push(
+      Object.assign(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.getPanelParts(), {
+        collapsed: true,
+      }),
+    );
   }
 }

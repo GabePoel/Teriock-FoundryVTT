@@ -226,7 +226,7 @@ export default function DragDropSheetMixin(Base) {
     }
 
     /**
-     * Validates a dropped document or pseudo-document.
+     * Validates a dropped Document or PseudoDocument.
      * @param {Teriock.Application.DropValidationOptions} options
      * @returns {boolean}
      */
