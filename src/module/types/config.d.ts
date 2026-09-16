@@ -49,13 +49,9 @@ declare global {
     };
 
     export type WikiNamespaceEntry = {
-      collection?: string;
       icon: string;
-      identifierType?: string;
+      identifierType: string;
       index?: string;
-      packs: string[];
-      parentKey: string;
-      type: string;
     };
 
     export type DocumentEntry = {

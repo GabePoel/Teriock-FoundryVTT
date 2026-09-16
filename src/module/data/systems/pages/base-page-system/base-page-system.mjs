@@ -60,4 +60,9 @@ export default class BasePageSystem
         ?? documentConfig.rule.icon,
     });
   }
+
+  /** @inheritDoc */
+  getRollData() {
+    return {};
+  }
 }

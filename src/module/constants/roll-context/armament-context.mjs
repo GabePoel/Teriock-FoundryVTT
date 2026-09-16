@@ -17,7 +17,6 @@ const armamentContext = {
   "range.ranged": "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
   "range.short": "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
   spellTurning: "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
-  style: "TERIOCK.SYSTEMS.Equipment.FIELDS.fightingStyle.label",
   vitals: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
 
   dampened: "TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label",
@@ -47,7 +46,7 @@ export default armamentContext;
 
 preLocalizeConfig("rollContext.armament");
 Hooks.once("i18nInit", () => {
-  Object.entries(TERIOCK.reference.weaponFightingStyles).forEach(([k, v]) => {
+  Object.entries(TERIOCK.reference.fightingStyles).forEach(([k, v]) => {
     armamentContext[`style.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name: _loc(v) });
   });
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {

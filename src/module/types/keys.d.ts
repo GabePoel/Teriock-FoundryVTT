@@ -46,7 +46,7 @@ declare global {
 
     // Armament Keys
     export type EquipmentClass = keyof typeof index.equipmentClasses;
-    export type WeaponFightingStyle = keyof typeof index.weaponFightingStyles;
+    export type FightingStyle = keyof typeof index.fightingStyles;
     export type EquipmentKind = keyof typeof config.equipment.kind;
     /** @deprecated Use {@link EquipmentKind} */
     export type PowerLevel = EquipmentKind;

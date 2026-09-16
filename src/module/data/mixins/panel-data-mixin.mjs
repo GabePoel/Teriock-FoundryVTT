@@ -50,7 +50,7 @@ export default function PanelDataMixin(Base) {
         bars: [],
         blocks: [],
         documentUuid: this.uuid,
-        icon: TERIOCK.display.icons.manifest.ui.document,
+        icon: this.typeIcon,
         img: this.img ?? TERIOCK.display.images.common.uncertainty,
         name: this.fullName || this.name,
       }, await this.system?.getPanelParts?.() ?? {});

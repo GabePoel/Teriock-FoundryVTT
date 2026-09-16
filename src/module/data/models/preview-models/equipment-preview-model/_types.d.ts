@@ -8,7 +8,7 @@ declare module "./equipment-preview-model.mjs" {
       identified: boolean | null;
       kind: Teriock.Keys.EquipmentKind | null;
       properties: string | null;
-      weaponFightingStyles: string | null;
+      style: string | null;
     };
   }
 }

@@ -3,7 +3,7 @@ import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs"
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
@@ -55,12 +55,6 @@ export default function ArmamentSystemMixin(Base) {
           types: new fields.SetField(new IdentifierField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
         equipmentClasses: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.equipmentClasses })),
-        fightingStyle: new fields.StringField({
-          blank: true,
-          choices: objectMap(TERIOCK.reference.weaponFightingStyles, v => v, { localize: true, none: true }),
-          initial: null,
-          nullable: true,
-        }),
         impacts: new fields.SetField(
           new fields.StringField({
             choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
@@ -75,10 +69,20 @@ export default function ArmamentSystemMixin(Base) {
           short: new fields.EmbeddedDataField(RangeModel),
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
-        specialRules: initialText(),
         spellTurning: new fields.BooleanField(),
+        style: new IdentifierField({ initial: null, nullable: true, placeholder: _loc("COMMON.None"), type: "style" }),
+        styleDescription: initialText(),
         vitals: new fields.BooleanField(),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source) {
+      if ("fightingStyle" in source) {
+        source.style ??= source.fightingStyle ? toKebabCase(source.fightingStyle) : null;
+        delete source.fightingStyle;
+      }
+      return super.migrateData(source);
     }
 
     /** @inheritDoc */
@@ -193,10 +197,8 @@ export default function ArmamentSystemMixin(Base) {
       return ["system.notes", ...super._displayFieldsContent, {
         classes: [TERIOCK.display.panels.styles.derived],
         editable: false,
-        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
-          name: TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
-        }),
-        path: "system.specialRules",
+        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(this.style) }),
+        path: "system.styleDescription",
       }];
     }
 
@@ -210,7 +212,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsArmament() {
-      return ["system.fightingStyle"];
+      return [{ choices: game.teriock.identifiers.getNames("style"), path: "system.style" }];
     }
 
     /** @inheritDoc */
@@ -363,10 +365,9 @@ export default function ArmamentSystemMixin(Base) {
         "range.ranged": Number(this.range.ranged),
         "range.short": this.range.short.rollValue,
         spellTurning: Number(this.spellTurning),
-        style: this.fightingStyle ? toKebabCase(this.fightingStyle) : 0,
         vitals: Number(this.vitals),
       });
-      if (this.fightingStyle) { data[`style.${toKebabCase(this.fightingStyle)}`] = 1; }
+      if (this._source.style) { data[`style.${this._source.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
       for (const p of this.props || new Set()) { data[`prop.${toKebabCase(p)}`] = 1; }
       for (const impact of this.impacts) { data[`impact.${toKebabCase(impact)}`] = 1; }
@@ -408,9 +409,7 @@ export default function ArmamentSystemMixin(Base) {
       this.range.short.unit = this.range.long.unit;
 
       // Fighting Style
-      if (this.fightingStyle && this.fightingStyle.length > 0) {
-        this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
-      }
+      if (this.style) { this.styleDescription = `<p>@Embed[${this.style} text inline=true]</p>`; }
     }
   }
 

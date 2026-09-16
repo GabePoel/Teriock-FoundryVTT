@@ -38,7 +38,6 @@ import { default as statuses } from "../../src/en/statuses.json" with { type: "j
 import { default as systems } from "../../src/en/systems.json" with { type: "json" };
 import { default as terms } from "../../src/en/terms.json" with { type: "json" };
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
-import { default as weaponFightingStylesContent } from "../../src/json/content/weapon-fighting-styles.json" with { type: "json" };
 import { default as conditions } from "../../src/json/index/conditions.json" with { type: "json" };
 import * as index from "../../src/module/constants/index.mjs";
 import { sortObject } from "../script-utils.mjs";
@@ -73,8 +72,6 @@ const LANG = base;
 
 if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 
-const content = { TERIOCK: { CONTENT: { WeaponFightingStyles: weaponFightingStylesContent } } };
-
 statuses.TERIOCK.STATUSES.Conditions = conditions;
 
 Object.assign(terms.TERIOCK.TERMS, {
@@ -107,7 +104,6 @@ mergeObjects(
   commands,
   common,
   compendium,
-  content,
   costs,
   dialogs,
   documents,

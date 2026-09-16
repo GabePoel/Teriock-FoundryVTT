@@ -1,4 +1,4 @@
-import { ClassSystem, HarmSystem, RuleSystem, TradecraftSystem } from "./_module.mjs";
+import { ClassSystem, HarmSystem, RuleSystem, StyleSystem, TradecraftSystem } from "./_module.mjs";
 
 declare global {
   export interface JournalEntryPageSystemMap {
@@ -6,6 +6,7 @@ declare global {
     damage: HarmSystem;
     drain: HarmSystem;
     rule: RuleSystem;
+    style: StyleSystem;
     tradecraft: TradecraftSystem;
   }
 

@@ -157,12 +157,4 @@ export default class EquipmentSystem
       price: this.price,
     });
   }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if (this.fightingStyle && this.fightingStyle.length > 0) {
-      this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
-    }
-  }
 }

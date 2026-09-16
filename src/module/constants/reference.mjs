@@ -16,11 +16,11 @@ import {
   elements,
   equipment,
   equipmentClasses,
+  fightingStyles,
   powerSources,
   properties,
   tradecrafts,
   traits,
-  weaponFightingStyles,
 } from "./index.mjs";
 
 /**
@@ -48,11 +48,11 @@ const reference = {
   elements: prefixKeys(elements, "TERIOCK.TERMS.Elements"),
   equipment: prefixKeys(equipment, "TERIOCK.TERMS.Equipment"),
   equipmentClasses: prefixKeys(equipmentClasses, "TERIOCK.TERMS.EquipmentClasses"),
+  fightingStyles: prefixKeys(fightingStyles, "TERIOCK.TERMS.WeaponFightingStyles"),
   powerSources: prefixKeys(powerSources, "TERIOCK.TERMS.PowerSources"),
   properties: prefixKeys(properties, "TERIOCK.TERMS.Properties"),
   tradecrafts: prefixKeys(tradecrafts, "TERIOCK.TERMS.Tradecrafts"),
   traits: prefixKeys(traits, "TERIOCK.TERMS.Traits"),
-  weaponFightingStyles: prefixKeys(weaponFightingStyles, "TERIOCK.TERMS.WeaponFightingStyles"),
 };
 export default reference;
 

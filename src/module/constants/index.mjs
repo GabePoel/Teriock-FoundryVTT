@@ -24,6 +24,7 @@ export { default as effectTypes } from "../../json/index/effect-types.json" with
 export { default as elements } from "../../json/index/elements.json" with { type: "json" };
 export { default as equipmentClasses } from "../../json/index/equipment-classes.json" with { type: "json" };
 export { default as equipment } from "../../json/index/equipment.json" with { type: "json" };
+export { default as fightingStyles } from "../../json/index/fighting-styles.json" with { type: "json" };
 export { default as humanoids } from "../../json/index/humanoids.json" with { type: "json" };
 export { default as keywords } from "../../json/index/keywords.json" with { type: "json" };
 export { default as powerSources } from "../../json/index/power-sources.json" with { type: "json" };
@@ -31,4 +32,3 @@ export { default as properties } from "../../json/index/properties.json" with { 
 export { default as tradecrafts } from "../../json/index/tradecrafts.json" with { type: "json" };
 export { default as traits } from "../../json/index/traits.json" with { type: "json" };
 export { default as undead } from "../../json/index/undead.json" with { type: "json" };
-export { default as weaponFightingStyles } from "../../json/index/weapon-fighting-styles.json" with { type: "json" };

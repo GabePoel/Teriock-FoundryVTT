@@ -45,7 +45,7 @@ export default class BaseActorSheet
         [...Object.keys(TERIOCK.config.currency), "debt"].map(id => [id, getImage("currency", id)]),
       ),
       enrichedNotes: await this._enrich(this.document.system.notes),
-      enrichedSpecialRules: await this._enrich(this.document.system.wielding.attacker?.system?.specialRules),
+      enrichedStyleDescription: await this._enrich(this.document.system.wielding.attacker?.system?.styleDescription),
     });
   }
 }

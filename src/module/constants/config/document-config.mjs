@@ -272,6 +272,14 @@ export default {
     label: "TYPES.Card.stone",
     plural: "TERIOCK.DOCUMENTS.stone.plural",
   },
+  style: /** @type {Teriock.Config.DocumentEntry} */ {
+    documentName: "JournalEntryPage",
+    hint: "TERIOCK.DOCUMENTS.style.hint",
+    icon: icons.manifest.document.style,
+    index: "fightingStyles",
+    label: "TYPES.JournalEntryPage.style",
+    plural: "TERIOCK.DOCUMENTS.style.plural",
+  },
   tradecraft: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
     hint: "TERIOCK.DOCUMENTS.tradecraft.hint",

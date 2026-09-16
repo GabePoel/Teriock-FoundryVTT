@@ -18,8 +18,6 @@ declare global {
       };
       /** <schema> Equipment Classes */
       equipmentClasses: Set<Teriock.Keys.EquipmentClass>;
-      /** <schema> Style Bonus (Weapon Fighting Style) */
-      fightingStyle: Teriock.Keys.WeaponFightingStyle;
       /** <schema> Flaws */
       flaws: string;
       /** <schema> The impacts this deals */
@@ -41,10 +39,12 @@ declare global {
       };
       /** <schema> Per-document behavior and display settings */
       settings: Teriock.Models.DocumentSettingsModelInstance<"armament">;
-      /** <derived> Special Rules (Weapon Fighting Style) */
-      specialRules: string;
       /** <schema> Spell Turning */
       spellTurning: boolean;
+      /** <schema> Fighting style */
+      style: TypedIdentifier<"style", Teriock.Keys.FightingStyle>;
+      /** <derived> Special Rules (Weapon Fighting Style) */
+      styleDescription: string;
       /** <schema> Vitals */
       vitals: boolean;
     };

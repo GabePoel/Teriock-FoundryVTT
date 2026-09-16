@@ -34,6 +34,11 @@ export default class TeriockJournalEntryPage
   }
 
   /** @inheritDoc */
+  get typeIcon() {
+    return this.getFlag("teriock", "journalIcon") ?? super.typeIcon;
+  }
+
+  /** @inheritDoc */
   async _buildEmbedHTML(config, options = {}) {
     const embed = await super._buildEmbedHTML(config, options);
     if ((!embed || config.values.includes("text")) && this.system?.metadata?.tags?.text) {
@@ -54,8 +59,6 @@ export default class TeriockJournalEntryPage
         text: div.innerHTML,
         title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
-      icon: this.getFlag("teriock", "journalIcon") ?? documentConfig[this.type]?.icon ?? documentConfig.rule.icon,
-      img: this.img,
     };
   }
 

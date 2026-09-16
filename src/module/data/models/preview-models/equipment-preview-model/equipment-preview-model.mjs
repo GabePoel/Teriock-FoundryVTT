@@ -51,9 +51,9 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
       properties: nullStringField({ choices: TERIOCK.reference.properties, label: "TERIOCK.PACKS.properties" }),
-      weaponFightingStyles: nullStringField({
-        choices: TERIOCK.reference.weaponFightingStyles,
-        label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
+      style: nullStringField({
+        label: "TERIOCK.SYSTEMS.Armament.FIELDS.style.label",
+        choices: () => game.teriock.identifiers.getNames("style"),
       }),
     });
   }
@@ -74,7 +74,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       ...super._formPathsSelect,
       "filters.equipmentClasses",
       "filters.properties",
-      "filters.weaponFightingStyles",
+      "filters.style",
       "filters.kind",
     ];
   }
@@ -107,7 +107,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         && this._checkTernaryFilter(f.consumable, system?.consumable)
         && (!f.kind || system?.kind === f.kind)
         && (!f.equipmentClasses || (system?.equipmentClasses || new Set()).has(f.equipmentClasses))
-        && (!f.weaponFightingStyles || system?.fightingStyle === f.weaponFightingStyles)
+        && (!f.style || system?._source?.style === f.style)
       ) { yield document; }
     }
   }

@@ -208,6 +208,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.JournalEntryPage.dataModels.damage = data.systems.pages.HarmSystem;
   CONFIG.JournalEntryPage.dataModels.drain = data.systems.pages.HarmSystem;
   CONFIG.JournalEntryPage.dataModels.rule = data.systems.pages.RuleSystem;
+  CONFIG.JournalEntryPage.dataModels.style = data.systems.pages.StyleSystem;
   CONFIG.JournalEntryPage.dataModels.tradecraft = data.systems.pages.TradecraftSystem;
   CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
 
@@ -289,7 +290,9 @@ foundry.helpers.Hooks.once("init", function() {
 
   rs(d.TeriockJournalEntry, s.TeriockJournalEntrySheet, "Journal");
 
-  rs(d.TeriockJournalEntryPage, sp.BasePageSheet, "Page", { types: ["damage", "drain", "rule", "tradecraft"] });
+  rs(d.TeriockJournalEntryPage, sp.BasePageSheet, "Page", {
+    types: ["damage", "drain", "rule", "style", "tradecraft"],
+  });
   rs(d.TeriockJournalEntryPage, sp.ClassSheet, "Class", { types: ["class"] });
 
   rs(d.TeriockRollTable, s.TeriockRollTableSheet, "RollTable");
