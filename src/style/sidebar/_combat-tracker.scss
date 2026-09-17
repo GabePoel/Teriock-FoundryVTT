@@ -1,4 +1,70 @@
+@use "../mixins" as mixins;
+
 // Since we use colored imaged instead of svgs for effects, we need to remove the inversion filter
 .combat-sidebar .combat-tracker .token-effect {
   filter: none;
+}
+
+.combatant {
+  border-radius: 0;
+}
+
+.combat-sidebar .combat-tracker .token-name .name i {
+  font-size: var(--font-size-12);
+  margin-right: 0.25em;
+}
+
+.combatant-group {
+  border: 1px solid var(--group-color);
+  border-left-width: 6px;
+  border-radius: 4px;
+
+  .combatant-group-header {
+    background-color: color-mix(in srgb, var(--group-color) 20%, transparent);
+
+    .combatant-group-commander {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .combatant-group-expander {
+    @include mixins.centralize;
+    background-color: color-mix(in srgb, var(--group-color) 10%, transparent);
+    cursor: pointer;
+    height: 1.25em;
+    i {
+      transform: scaleY(-1);
+      transition: 250ms;
+    }
+    &:hover {
+      background-color: color-mix(in srgb, var(--group-color) 20%, transparent);
+    }
+  }
+
+  .combatant-group-minions-container {
+    @include mixins.collapsible;
+    @include mixins.collapsible-open;
+    background-color: color-mix(in srgb, var(--group-color) 10%, transparent);
+
+    .combatant-group-minions {
+      margin: 0;
+      overflow: hidden;
+      padding: 0;
+
+      .token-initiative {
+        display: none;
+      }
+    }
+  }
+
+  &.collapsed {
+    .combatant-group-expander i {
+      transform: none;
+    }
+
+    .combatant-group-minions-container {
+      @include mixins.collapsible-closed;
+    }
+  }
 }

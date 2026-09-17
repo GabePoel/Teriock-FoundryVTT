@@ -61,14 +61,6 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
-     * Raw color source or null.
-     * @returns {ColorSource|null}
-     */
-    get _color() {
-      return null;
-    }
-
-    /**
      * Custom buttons to activate things from sheet menus. Should not toggle HTML fields.
      * @returns {Teriock.Display.DisplayButton[]}
      */
@@ -171,14 +163,6 @@ export default function BaseSystemMixin(Base) {
           return { classes: f.classes, gmOnly: f.gmOnly ?? false, text: value, title: f.label || schema.label };
         }
       }).filter(f => f);
-    }
-
-    /**
-     * A color to display around the image for this document.
-     * @returns {Color}
-     */
-    get color() {
-      return foundry.utils.Color.from(this._color);
     }
 
     /**

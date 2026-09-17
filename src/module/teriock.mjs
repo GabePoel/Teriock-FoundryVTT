@@ -183,6 +183,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Combat.initiative.formula = teriock.executions.activity.InitiativeExecution.DEFAULT_FORMULA;
 
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
+  CONFIG.Combatant.dataModels.base = data.systems.combatants.BaseCombatantSystem;
 
   CONFIG.CombatantGroup.dataModels.commanded = data.systems.groups.CommandedSystem;
 

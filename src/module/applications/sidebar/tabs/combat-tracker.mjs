@@ -1,28 +1,12 @@
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { createElement } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass, makeIconElement } from "../../../helpers/icon.mjs";
+import { BaseApplicationMixin } from "../../api/mixins/_module.mjs";
 
 const { CombatTracker } = foundry.applications.sidebar.tabs;
 
 /** @inheritDoc */
-export default class TeriockCombatTracker extends CombatTracker {
-  /**
-   * Toggler whether a combatant is a commander.
-   * @param {PointerEvent} _event
-   * @param {HTMLElement} target
-   * @returns {Promise<void>}
-   * @this {TeriockCombatTracker}
-   */
-  static async #onToggleCommander(_event, target) {
-    const combatant = this.#getCombatant(target);
-    if (!combatant) { return; }
-    if (combatant.isCommander) { await combatant.groupDocument.update({ "system.commanderId": null }); }
-    else { await combatant.makeCommander(); }
-  }
-
-  /** @type {Partial<ApplicationConfiguration>} */
-  static DEFAULT_OPTIONS = { actions: { toggleCommander: this.#onToggleCommander } };
-
+export default class TeriockCombatTracker extends BaseApplicationMixin(CombatTracker) {
   /** @type {Teriock.Command.ThresholdOptions} */
   #defaultInitiativeExecutionData;
 
@@ -120,24 +104,45 @@ export default class TeriockCombatTracker extends CombatTracker {
 
   /** @inheritDoc */
   _replaceHTML(result, content, options) {
-    super._replaceHTML(result, content, options);
-    content.querySelectorAll(".combatant[data-combatant-id]").forEach(el => {
-      const combatant = this.#getCombatant(el);
-      const controls = el.querySelector(".token-name .combatant-controls");
-      controls?.insertAdjacentElement(
-        "afterbegin",
-        createElement("button", {
-          className: `inline-control combatant-control icon ${makeIconClass(combatant.typeIcon, "solid")}`,
-          dataset: {
-            action: "toggleCommander",
-            combatantId: combatant.id,
-            groupId: combatant.groupDocument?.id ?? undefined,
-            tooltip: combatant.isCommander ? "COMBATANT.ACTIONS.MakeMinion" : "COMBATANT.ACTIONS.MakeCommander",
-          },
-        }),
+    const tracker = result.tracker;
+    tracker.querySelectorAll("li.combatant[data-combatant-id]").forEach(/** @param {HTMLLIElement} li */ li => {
+      const combatant = this.#getCombatant(li);
+      const groupContainer = createElement("li", {
+        className: "combatant-group collapsible",
+        dataset: { collapsibleId: `group-${combatant.id}`, groupId: combatant.groupDocument?.id },
+      });
+      groupContainer.style.setProperty("--group-color", combatant.system.color.css);
+      const groupHeader = createElement("header", { className: "combatant-group-header" });
+      const groupCommanderContainer = createElement("ul", { className: "combatant-group-commander" });
+      groupHeader.append(groupCommanderContainer);
+      groupContainer.append(groupHeader);
+      li.replaceWith(groupContainer);
+      groupCommanderContainer.append(li);
+      const minionsContainer = createElement("div", { className: "combatant-group-minions-container" });
+      minionsContainer.append(
+        createElement("ul", { className: "combatant-group-minions", dataset: { combatantId: combatant.id } }),
       );
-      const initiativeInput = el.querySelector("input.initiative-input");
-      if (initiativeInput && combatant.isMinion) { initiativeInput.setAttribute("disabled", "disabled"); }
+      groupContainer.append(minionsContainer);
+      if (combatant.isCommander) {
+        const groupExpander = createElement("div", {
+          className: "combatant-group-expander",
+          dataset: { action: "toggleCollapse" },
+        });
+        groupExpander.append(makeIconElement(TERIOCK.display.icons.manifest.ui.menuOpen, "light"));
+        groupContainer.append(groupExpander);
+      }
     });
+    tracker.querySelectorAll("li.combatant[data-combatant-id]").forEach(/** @param {HTMLLIElement} li */ li => {
+      const combatant = this.#getCombatant(li);
+      li.querySelector(".token-name .name")?.prepend(makeIconElement(combatant.typeIcon, "solid"));
+      if (combatant.groupDocument?.system.commander && !combatant.isCommander) {
+        const groupContainer = li.closest(".combatant-group");
+        groupContainer?.remove();
+        const commander = combatant.groupDocument.system.commander;
+        const minionContainer = tracker.querySelector(`.combatant-group-minions[data-combatant-id="${commander?.id}"]`);
+        minionContainer.append(li);
+      }
+    });
+    super._replaceHTML(result, content, options);
   }
 }

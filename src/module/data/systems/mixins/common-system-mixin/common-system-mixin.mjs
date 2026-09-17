@@ -49,6 +49,14 @@ export default function CommonSystemMixin(Base) {
       return true;
     }
 
+    /**
+     * Raw color source or null.
+     * @returns {ColorSource|null}
+     */
+    get _color() {
+      return null;
+    }
+
     /** @returns {Record<string, Teriock.Embeds.EmbedAction>} */
     get _embedActions() {
       return {};
@@ -62,6 +70,14 @@ export default function CommonSystemMixin(Base) {
     /** @returns {string} */
     get _masterText() {
       return this.parent.master?.fullName || this.parent.master?.name || "";
+    }
+
+    /**
+     * A color to display around the image for this document.
+     * @returns {Color}
+     */
+    get color() {
+      return foundry.utils.Color.from(this._color);
     }
 
     /** @returns {Partial<Teriock.Embeds.EmbedParts>} */
