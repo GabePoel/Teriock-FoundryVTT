@@ -285,10 +285,11 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     };
     if (this.isFeat) { styles.total.icon = TERIOCK.display.icons.manifest.interaction.feat; }
     if (this.isBlock) { styles.total.icon = TERIOCK.display.icons.manifest.interaction.block; }
+    const formula = this.isManifest ? "0" : this.formula;
     this.rolls.push(
-      new BaseRoll("0", this.getRollData(), {
+      new BaseRoll(formula, this.getRollData(), {
         flavor: this.flavor,
-        hideRoll: true,
+        hideRoll: this.isManifest,
         styles,
         targets: Array.from(this.targets),
       }),

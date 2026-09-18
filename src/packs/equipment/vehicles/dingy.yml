@@ -1,0 +1,50 @@
+_id: 050ce7ffab49f9d4
+_key: "!items!050ce7ffab49f9d4"
+effects:
+  - _id: IFzRyThuJwzznJ2f
+    _key: "!items.effects!050ce7ffab49f9d4.IFzRyThuJwzznJ2f"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
+    description: >-
+      <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item} <i>always</i> makes its user
+      @Identifier[condition:encumbered]{encumbered}, regardless of how much they are
+      @Identifier[core:carrying-capacity]{carrying}. If the user would have not been
+      @Identifier[condition:encumbered]{encumbered} otherwise, they are @Identifier[condition:encumbered]{lightly
+      encumbered}. If they would have been @Identifier[condition:encumbered]{lightly encumbered} otherwise, they are
+      @Identifier[condition:encumbered]{heavily encumbered}. And if they would have been
+      @Identifier[condition:encumbered]{heavily encumbered} otherwise, they are rendered
+      @Identifier[condition:immobilized]{immobile}.</p>
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    name: Cumbersome
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      applyIfUnequipped: false
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.encumbranceLevel
+              phase: derived
+              priority: 10
+              target: Actor
+              type: add
+              value: "1"
+          type: changes
+      identifier: cumbersome
+      kind: flaw
+    type: property
+folder: bxiQ0DVbN19ixZlu
+img: systems/teriock/src/icons/equipment/dingy.webp
+name: Dingy
+system:
+  equipmentClasses:
+    - vehicles
+  equipmentType: dingy
+  identifier: dingy
+  minStr: 3
+  price: 4
+  range:
+    long:
+      unit: melee
+  weight: 200
+type: equipment

@@ -1,7 +1,6 @@
 import { icons } from "../../../constants/display/_module.mjs";
 import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
@@ -161,16 +160,8 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
    */
   async #prepareActors() {
     this.#nodes = [];
-    const srcPromises = [];
-    for (const uuid of (await this.selectDocuments()).map(d => d.uuid)) {
-      if (!uuid.startsWith("Compendium")) { srcPromises.push(uuid); }
-      else {
-        const summon = this.#findBestSummon(uuid);
-        if (summon) { srcPromises.push(summon); }
-        else { srcPromises.push(resolveDocument(uuid)); }
-      }
-    }
-    const srcActors = (await Promise.all(srcPromises)).filter(Boolean);
+    const srcActors = (await this.selectDocuments()).map(a => (a.inCompendium ? this.#findBestSummon(a.uuid) ?? a : a))
+      .filter(Boolean);
     const needsSummonFolder = srcActors.some(a => a?.inCompendium) && !this.#summonsFolder;
     if (needsSummonFolder) { await this.#createSummonsFolder(); }
     this.#nodes = srcActors.map(a => {

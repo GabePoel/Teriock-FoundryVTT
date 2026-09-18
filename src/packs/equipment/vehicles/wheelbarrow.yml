@@ -1,0 +1,52 @@
+_id: 21e1140289e53327
+_key: "!items!21e1140289e53327"
+effects:
+  - _id: Cfo1aK9NucnyNq5y
+    _key: "!items.effects!21e1140289e53327.Cfo1aK9NucnyNq5y"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
+    description: >-
+      <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item} <i>always</i> makes its user
+      @Identifier[condition:encumbered]{encumbered}, regardless of how much they are
+      @Identifier[core:carrying-capacity]{carrying}. If the user would have not been
+      @Identifier[condition:encumbered]{encumbered} otherwise, they are @Identifier[condition:encumbered]{lightly
+      encumbered}. If they would have been @Identifier[condition:encumbered]{lightly encumbered} otherwise, they are
+      @Identifier[condition:encumbered]{heavily encumbered}. And if they would have been
+      @Identifier[condition:encumbered]{heavily encumbered} otherwise, they are rendered
+      @Identifier[condition:immobilized]{immobile}.</p>
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    name: Cumbersome
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      applyIfUnequipped: false
+      automations:
+        - _id: parameterChanges
+          changes:
+            - key: system.encumbranceLevel
+              phase: derived
+              priority: 10
+              target: Actor
+              type: add
+              value: "1"
+          type: changes
+      identifier: cumbersome
+      kind: flaw
+    type: property
+folder: bxiQ0DVbN19ixZlu
+img: systems/teriock/src/icons/equipment/wheelbarrow.webp
+name: Wheelbarrow
+system:
+  equipmentClasses:
+    - containers
+    - furniture
+    - vehicles
+  equipmentType: wheelbarrow
+  identifier: wheelbarrow
+  minStr: 0
+  price: 2
+  range:
+    long:
+      unit: melee
+  weight: 70
+type: equipment

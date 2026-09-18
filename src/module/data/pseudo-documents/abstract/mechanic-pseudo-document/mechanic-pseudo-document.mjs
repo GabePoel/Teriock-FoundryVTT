@@ -124,7 +124,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get modifiesChatData() {
-    return Boolean(this.document?.system?.makesChatData) && this.makesChatData;
+    return (this.document ? Boolean(this.document.system?.makesChatData) : true) && this.makesChatData;
   }
 
   /**
