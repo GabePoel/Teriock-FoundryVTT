@@ -213,7 +213,8 @@ export default function AttackExecutionMixin(Base) {
     async _buildRolls() {
       if (!this.isAttack) { return super._buildRolls(); }
       const styles = { dice: { classes: ["attack"] }, total: { classes: ["attack"] } };
-      const generalRollOptions = { flavor: this.flavor, styles, targets: [] };
+      const generalRollOptions = Object.assign(this.rollOptions, { styles, targets: [] });
+      generalRollOptions.thresholds.push(...ThresholdRoll.defaultOptions.thresholds);
       if (this.piercing.ub) {
         generalRollOptions.styles.dice.icon = TERIOCK.display.icons.manifest.piercing.ub;
         generalRollOptions.styles.dice.classes.push("ub");
@@ -223,14 +224,21 @@ export default function AttackExecutionMixin(Base) {
         const rollOptions = foundry.utils.deepClone(generalRollOptions);
         rollOptions.targets = [target];
         if (target.actor) {
-          rollOptions.threshold = target.actor.system.defense.cc;
-          rollOptions.comparison = "gte";
+          let threshold = target.actor.system.defense.cc;
+          let comparison = "gte";
           if (this.piercing.ub && (this.warded || !target.actor.system.wielding.blocker?.system.spellTurning)) {
-            rollOptions.threshold = target.actor.system.defense.ac;
-            rollOptions.comparison = "gt";
+            threshold = target.actor.system.defense.ac;
+            comparison = "gt";
           }
-          if (this.limb) { rollOptions.threshold += TERIOCK.config.system.target.limb; }
-          else if (this.vitals) { rollOptions.threshold += TERIOCK.config.system.target.vitals; }
+          if (this.limb) { threshold += TERIOCK.config.system.target.limb; }
+          else if (this.vitals) { threshold += TERIOCK.config.system.target.vitals; }
+          rollOptions.thresholds = [...ThresholdRoll.defaultOptions.thresholds, {
+            comparison,
+            inverse: true,
+            level: 1,
+            target: threshold,
+            type: "roll",
+          }];
         }
         this.rolls.push(new ThresholdRoll(this.formula, this.getRollData(), rollOptions));
       }

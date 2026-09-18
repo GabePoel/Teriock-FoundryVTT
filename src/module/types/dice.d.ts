@@ -22,12 +22,22 @@ declare global {
 
     export type ImpactsRollOptions = BaseRollOptions & { impacts: Teriock.Keys.Impact[] };
 
-    export type ThresholdRollOptions = BaseRollOptions & {
-      comparison?: Teriock.Keys.Comparison;
-      critFailureThreshold: number;
-      critSuccessThreshold: number;
-      threshold?: number | null;
+    export type ThresholdTarget = number | "max" | "min";
+
+    export type ThresholdLevel = -1 | -2 | 0 | 1 | 2;
+
+    export type ThresholdType = "die" | "roll";
+
+    export type ThresholdData = {
+      comparison: Teriock.Keys.Comparison;
+      inverse: boolean;
+      label: string;
+      level: ThresholdLevel;
+      target: ThresholdTarget;
+      type: ThresholdType;
     };
+
+    export type ThresholdRollOptions = BaseRollOptions & { thresholds?: ThresholdData[] };
 
     export type RollContextMenuConfig = { message?: TeriockChatMessage, messageData?: object, target?: HTMLElement };
   }

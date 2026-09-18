@@ -1,9 +1,8 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 
-/** @enum {Teriock.Config.ImpactEntry} */
 export default {
-  damage: {
+  damage: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["dmg"],
     deal: "TERIOCK.EFFECTS.Impacts.damage.deal",
     harm: true,
@@ -16,7 +15,7 @@ export default {
     apply: async (actor, amt, options) => await actor?.system.takeDamage(amt, options),
     reverse: async (actor, amt) => await actor?.system.takeHealing(amt),
   },
-  drain: {
+  drain: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["drn"],
     deal: "TERIOCK.EFFECTS.Impacts.drain.deal",
     harm: true,
@@ -29,7 +28,7 @@ export default {
     apply: async (actor, amt, options) => await actor?.system.takeDrain(amt, options),
     reverse: async (actor, amt) => await actor?.system.takeRevitalizing(amt),
   },
-  wither: {
+  wither: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.wither.deal",
     icon: icons.manifest.effect.wither,
     integer: true,
@@ -39,7 +38,7 @@ export default {
     reverse: async (actor, amt) => await actor?.system.takeWither(-amt),
   },
 
-  healing: {
+  healing: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.heal.deal",
     icon: icons.manifest.effect.heal,
     integer: true,
@@ -49,7 +48,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takeHealing(amt),
     reverse: async (actor, amt) => await actor?.system.takeDamage(amt),
   },
-  revitalizing: {
+  revitalizing: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.revitalize.deal",
     icon: icons.manifest.effect.revitalize,
     integer: true,
@@ -60,7 +59,7 @@ export default {
     reverse: async (actor, amt) => await actor?.system.takeDrain(amt),
   },
 
-  gainTempHp: {
+  gainTempHp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["gth"],
     deal: "TERIOCK.EFFECTS.Impacts.gainTempHp.deal",
     icon: icons.manifest.stat.hp,
@@ -70,7 +69,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takeGainTempHp(amt),
     reverse: async (actor, amt) => await actor?.system.takeGainTempHp(-amt),
   },
-  gainTempMp: {
+  gainTempMp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["gtm"],
     deal: "TERIOCK.EFFECTS.Impacts.gainTempMp.deal",
     icon: icons.manifest.stat.mp,
@@ -80,7 +79,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takeGainTempMp(amt),
     reverse: async (actor, amt) => await actor?.system.takeGainTempMp(-amt),
   },
-  setTempHp: {
+  setTempHp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["sth"],
     deal: "TERIOCK.EFFECTS.Impacts.setTempHp.deal",
     icon: icons.manifest.stat.hp,
@@ -91,7 +90,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takeSetTempHp(amt),
     reverse: async actor => await actor?.system.takeSetTempHp(0),
   },
-  setTempMp: {
+  setTempMp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["stm"],
     deal: "TERIOCK.EFFECTS.Impacts.setTempMp.deal",
     icon: icons.manifest.stat.mp,
@@ -103,7 +102,7 @@ export default {
     reverse: async actor => await actor?.system.takeSetTempMp(0),
   },
 
-  hide: {
+  hide: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.hide.deal",
     icon: icons.manifest.ui.hide,
     integer: true,
@@ -113,7 +112,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takeHide(amt),
     reverse: async actor => await actor?.system.takeHide(null),
   },
-  perceive: {
+  perceive: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.perceive.deal",
     icon: icons.manifest.ui.show,
     integer: true,
@@ -124,7 +123,7 @@ export default {
     reverse: async actor => await actor?.system.takePerceive(null),
   },
 
-  kill: {
+  kill: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.kill.deal",
     icon: icons.manifest.effect.kill,
     integer: true,
@@ -133,7 +132,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takeKill(amt),
     reverse: async actor => await actor?.toggleStatusEffect("dead", { active: false }),
   },
-  pay: {
+  pay: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.pay.deal",
     icon: icons.manifest.stat.gp,
     label: "TERIOCK.EFFECTS.Impacts.pay.label",
@@ -141,7 +140,7 @@ export default {
     apply: async (actor, amt) => await actor?.system.takePay(amt),
     reverse: async (actor, amt) => await actor?.system.takePay(-amt),
   },
-  sleep: {
+  sleep: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.sleep.deal",
     icon: icons.manifest.effect.sleep,
     integer: true,
@@ -151,7 +150,7 @@ export default {
     reverse: async actor => await actor?.toggleStatusEffect("asleep", { active: false }),
   },
 
-  other: {
+  other: /** @type {Teriock.Config.ImpactEntry} */ {
     deal: "TERIOCK.EFFECTS.Impacts.other.label",
     hidden: true,
     icon: icons.manifest.ui.dice,

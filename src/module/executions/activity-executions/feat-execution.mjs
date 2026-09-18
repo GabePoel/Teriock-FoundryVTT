@@ -1,3 +1,4 @@
+import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { addFormula } from "../../helpers/formula.mjs";
 import { BaseExecution } from "../abstract/_module.mjs";
@@ -62,6 +63,13 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   /** @inheritDoc */
   get name() {
     return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.config.attribute[this.attribute]?.label });
+  }
+
+  /** @inheritDoc */
+  get rollOptions() {
+    const rollOptions = super.rollOptions;
+    rollOptions.thresholds.push(...ThresholdRoll.defaultOptions.thresholds);
+    return rollOptions;
   }
 
   /**

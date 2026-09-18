@@ -116,7 +116,12 @@ export default function ThresholdExecutionMixin(Base) {
 
     /** @inheritDoc */
     get rollOptions() {
-      return { comparison: this.comparison, flavor: this.flavor, threshold: this.threshold };
+      return {
+        flavor: this.flavor,
+        thresholds: typeof this.threshold === "number"
+          ? [{ comparison: this.comparison, inverse: true, level: 1, target: this.threshold, type: "roll" }]
+          : [],
+      };
     }
 
     /** @inheritDoc */

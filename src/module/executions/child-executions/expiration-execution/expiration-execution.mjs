@@ -84,7 +84,7 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
 
   /** @inheritDoc */
   async _postExecute() {
-    if (!this.autoExpire && this.message.rolls[0].success) { this.source.system.expire(); }
+    if (!this.autoExpire && (this.message.rolls[0]?.product ?? 0) > 0) { this.source.system.expire(); }
     return await super._postExecute();
   }
 
