@@ -193,6 +193,6 @@ export default class BaseUnitModel extends BaseDataModel {
    * @returns {Promise<void>}
    */
   async updateDialog() {
-    await UnitUpdater.create({ document: this.document, path: this.schema.fieldPath, unitModel: this });
+    await UnitUpdater.create({ document: this.getNearestDocument(), path: this.schema.fieldPath, unitModel: this });
   }
 }

@@ -183,7 +183,7 @@ export default class TargetAutomation extends BaseAutomation {
       highlightMode: "coverage",
       levels: canvas?.level?.id ? [canvas.level.id] : [],
       name: _loc("TERIOCK.AUTOMATIONS.Target.DATA.name", {
-        name: options.execution?.source.name ?? this.document.name,
+        name: options.execution?.source.name ?? this.getNearestDocument().name,
       }),
       ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
       restriction: this.restriction,

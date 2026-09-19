@@ -168,11 +168,6 @@ export default function BaseDocumentMixin(Base) {
       return teriock.helpers.string.toKebabCase(this.name);
     }
 
-    /** @inheritDoc */
-    get document() {
-      return this;
-    }
-
     /**
      * Metadata that Teriock uses but Foundry doesn't.
      * @returns {Teriock.Documents.DocumentMetadata}

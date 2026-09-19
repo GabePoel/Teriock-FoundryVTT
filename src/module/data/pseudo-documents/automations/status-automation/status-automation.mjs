@@ -124,7 +124,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
    */
   get _relationChoices() {
     return localizeChoices(
-      this.document?.system?.makesEffectData ? RELATION_CHOICES : omit(RELATION_CHOICES, ["include"]),
+      this.getNearestDocument()?.system?.makesEffectData ? RELATION_CHOICES : omit(RELATION_CHOICES, ["include"]),
     );
   }
 
@@ -173,7 +173,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.document?.system?.makesEffectData && this.relation === "include") { this.relation = "apply"; }
+    if (!this.getNearestDocument()?.system?.makesEffectData && this.relation === "include") { this.relation = "apply"; }
   }
 
   /**
@@ -184,7 +184,8 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   async selectVisibleTokens(options = {}) {
     return game.user.selectVisibleTokens({
       hint: _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.hint", {
-        effect: this.document?.name || _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect"),
+        effect: this.getNearestDocument()?.name
+          || _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect"),
         status: TERIOCK.reference.conditions[this.status],
       }),
       multi: this.multi,

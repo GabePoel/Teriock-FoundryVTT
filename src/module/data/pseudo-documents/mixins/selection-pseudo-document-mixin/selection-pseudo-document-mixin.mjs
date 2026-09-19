@@ -140,7 +140,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
      * @returns {string}
      */
     get _selectionTitle() {
-      return this.document?.fullName || this.document?.name || this.label;
+      return this.getNearestDocument()?.fullName || this.getNearestDocument()?.name || this.label;
     }
 
     /**

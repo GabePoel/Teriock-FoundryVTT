@@ -66,11 +66,11 @@ export default class OverrideAutomation
    * @returns {string[]}
    */
   get _preventPaths() {
-    if (this.document?.type !== "ability") { return []; }
+    if (this.getNearestDocument()?.type !== "ability") { return []; }
     const paths = [];
-    if (this.document.system.interaction === "attack") { paths.push("preventAttack"); }
-    if (this.document.system.interaction === "feat") { paths.push("preventFeat", "preventThreshold"); }
-    if (this.document.system.delivery === "cone") { paths.push("preventBlockCone"); }
+    if (this.getNearestDocument().system.interaction === "attack") { paths.push("preventAttack"); }
+    if (this.getNearestDocument().system.interaction === "feat") { paths.push("preventFeat", "preventThreshold"); }
+    if (this.getNearestDocument().system.delivery === "cone") { paths.push("preventBlockCone"); }
     if (paths.length) { paths.push("hr"); }
     return paths;
   }

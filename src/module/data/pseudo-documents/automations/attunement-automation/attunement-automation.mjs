@@ -36,8 +36,8 @@ export default class AttunementAutomation extends mixClasses(BaseAutomation, Tri
       new AddDocumentsActivation({
         constructionNodes: [{
           data: {
-            img: this.document.img,
-            name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.document.name }),
+            img: this.getNearestDocument().img,
+            name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.getNearestDocument().name }),
             system: { inheritTier: false, origin: "effect", tier },
             type: "attunement",
           },

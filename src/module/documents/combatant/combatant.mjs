@@ -54,7 +54,7 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
 
   /**
    * @inheritDoc
-   * @version 367
+   * @version 368
    */
   getInitiativeRoll(formula) {
     formula ||= this._getInitiativeFormula();

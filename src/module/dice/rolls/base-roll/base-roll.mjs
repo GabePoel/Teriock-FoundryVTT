@@ -323,7 +323,7 @@ export default class BaseRoll extends Roll {
 
   /**
    * @inheritDoc
-   * @version 367
+   * @version 368
    */
   async getTooltip() {
     const parts = this.getTooltipParts();
@@ -333,7 +333,7 @@ export default class BaseRoll extends Roll {
   /**
    * The dice parts for the tooltip. Mirrors the internals of {@link Roll.getTooltip}.
    * @returns {object[]}
-   * @version 367
+   * @version 368
    */
   getTooltipParts() {
     return this.dice.filter(d => typeof d.number === "number" ? d.number !== 0 : true).map(d => d.getTooltipData());

@@ -20,7 +20,11 @@ export default class StatDiceUpdater extends BaseUpdater {
    */
   constructor(options) {
     const pool = options.pool;
-    super({ ...options, document: pool.document, paths: [`${pool.localPath}.formula`, `${pool.localPath}.disabled`] });
+    super({
+      ...options,
+      document: pool.getNearestDocument(),
+      paths: [`${pool.localPath}.formula`, `${pool.localPath}.disabled`],
+    });
     this.#pool = pool;
   }
 

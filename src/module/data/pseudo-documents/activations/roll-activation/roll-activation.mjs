@@ -34,7 +34,9 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
         await commands[this.impact][action](actor, {
           boost: true,
           boosts: this.boosts,
-          document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
+          document: this.getNearestDocument()?.system?._src
+            ? await fromUuid(this.getNearestDocument().system._src)
+            : null,
           formula: this.formula,
           type: this.impact,
         });

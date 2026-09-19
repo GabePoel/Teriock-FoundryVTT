@@ -68,7 +68,7 @@ export default function CommonSystemMixin(Base) {
     get embedParts() {
       return {
         color: this.color,
-        draggable: this.document.isViewer,
+        draggable: this.getNearestDocument().isViewer,
         icons: this._embedIcons.filter(i => this.#checkEmbedIcon(i)),
         id: /** @type {ID<TeriockActiveEffect|TeriockActor|TeriockItem>} */ this.parent.id,
         img: this.parent.img,
@@ -109,8 +109,8 @@ export default function CommonSystemMixin(Base) {
         group: "share",
         icon: makeIcon(TERIOCK.display.icons.manifest.ui.panel),
         label: _loc("TERIOCK.SHEETS.Panel.OPEN"),
-        onClick: async () => await this.document.openPanelSheet(),
-        visible: () => game.settings.get("teriock", "openPanelContextMenuEntry") && this.document.isViewer,
+        onClick: async () => await this.getNearestDocument().openPanelSheet(),
+        visible: () => game.settings.get("teriock", "openPanelContextMenuEntry") && this.getNearestDocument().isViewer,
       };
     }
 

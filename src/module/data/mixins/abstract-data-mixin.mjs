@@ -37,14 +37,6 @@ export default function AbstractDataMixin(Base) {
     fieldSorter = fieldSorterFactory(this);
 
     /**
-     * This data model's document.
-     * @returns {TeriockDocument}
-     */
-    get document() {
-      return this.parent?.document;
-    }
-
-    /**
      * Path to this data model.
      * @returns {string}
      */

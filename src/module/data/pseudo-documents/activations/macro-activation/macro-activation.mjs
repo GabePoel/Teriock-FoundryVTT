@@ -41,7 +41,7 @@ export default class MacroActivation extends BaseActivation {
         : TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker()),
       actors: this.actors,
       event: this.event,
-      message: this.document,
+      message: this.getNearestDocument(),
       speaker: TeriockChatMessage.getSpeaker(),
       tokens: this.tokens,
     }, this.scope ?? {});

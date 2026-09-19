@@ -216,14 +216,15 @@ export default function EquipmentStoragePart(Base) {
           this.consumable
           && this.quantity.value < this.quantity.max
           && this._stackingCandidates.length
-          && this.document.isOwner && this.document.checkAncestor(doc),
+          && this.getNearestDocument().isOwner && this.getNearestDocument().checkAncestor(doc),
       }, {
         group: "document",
         icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unstack, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         onClick: async () => await this.groupUnstackDialog(),
         visible: () =>
-          this.consumable && this.quantity.value > 1 && this.document.isOwner && this.document.checkAncestor(doc),
+          this.consumable && this.quantity.value > 1 && this.getNearestDocument().isOwner
+          && this.getNearestDocument().checkAncestor(doc),
       }]);
       return entries;
     }
@@ -301,10 +302,10 @@ export default function EquipmentStoragePart(Base) {
       }, {
         action: "update",
         documentName: "Item",
-        ids: [this.document.id],
+        ids: [this.getNearestDocument().id],
         pack: this.parent.pack,
         parent: this.parent.parent,
-        updates: [{ _id: this.document.id, system: { quantity: { value: this.quantity.value - amount } } }],
+        updates: [{ _id: this.getNearestDocument().id, system: { quantity: { value: this.quantity.value - amount } } }],
       }];
       await foundry.documents.modifyBatch(operations);
     }

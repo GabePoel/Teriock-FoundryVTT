@@ -40,7 +40,7 @@ export default class ChangesAutomation extends BaseAutomation {
         defaultPriority: (TeriockActiveEffect.CHANGE_TYPES[c.type]?.defaultPriority ?? 0).toString(),
       })),
       changesPath: `${this.localPath}.changes`,
-      editable: this.document?.sheet?.isEditable,
+      editable: this.getNearestDocument()?.sheet?.isEditable,
       fieldDefs: this.schema.fields.changes.element.fields,
       rootId: [config.rootId, this.localPath].filterJoin("-"),
       types: TeriockActiveEffect.CHANGE_TYPES,

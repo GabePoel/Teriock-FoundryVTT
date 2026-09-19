@@ -66,7 +66,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get canCritChatData() {
-    const crit = this.document?.metadata?.crit;
+    const crit = this.getNearestDocument()?.metadata?.crit;
     return Boolean(crit?.enabled) && crit.where === "chatData" && this.modifiesChatData;
   }
 
@@ -75,7 +75,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get canCritEffectData() {
-    const crit = this.document?.metadata?.crit;
+    const crit = this.getNearestDocument()?.metadata?.crit;
     return Boolean(crit?.enabled) && crit.where === "effectData" && this.modifiesEffectData;
   }
 
@@ -100,7 +100,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get isPassive() {
-    return this.document?.system?.isPassive ?? true;
+    return this.getNearestDocument()?.system?.isPassive ?? true;
   }
 
   /**
@@ -124,7 +124,8 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get modifiesChatData() {
-    return (this.document ? Boolean(this.document.system?.makesChatData) : true) && this.makesChatData;
+    return (this.getNearestDocument() ? Boolean(this.getNearestDocument().system?.makesChatData) : true)
+      && this.makesChatData;
   }
 
   /**
@@ -132,7 +133,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   get modifiesEffectData() {
-    return Boolean(this.document?.system?.makesEffectData) && this.makesEffectData;
+    return Boolean(this.getNearestDocument()?.system?.makesEffectData) && this.makesEffectData;
   }
 
   /**
@@ -142,7 +143,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    */
   _getFireRollData(scope = {}) {
     const rollData = scope.rollData ?? scope.execution?.getRollData?.() ?? this.getRollData() ?? {};
-    const doc = this.document;
+    const doc = this.getNearestDocument();
     const effect = doc?.documentName === "ActiveEffect" ? doc : null;
     const item = doc?.documentName === "Item" ? doc : (effect?.parent?.documentName === "Item" ? effect.parent : null);
     return {
@@ -172,7 +173,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
       window: { title: this.getFieldForProperty("activeQualifier")?.label },
     });
     editor.addEventListener("close", async () => {
-      await this.document?.update({ [`${this.localPath}.activeQualifier`]: editor.formula });
+      await this.getNearestDocument()?.update({ [`${this.localPath}.activeQualifier`]: editor.formula });
     });
     await editor.render(true);
   }
@@ -183,7 +184,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {Teriock.System.CompetenceLevel|undefined}
    */
   getCompetence(_scope) {
-    return this.document?.system?.competence?.raw ?? 0;
+    return this.getNearestDocument()?.system?.competence?.raw ?? 0;
   }
 
   /** @inheritDoc */
@@ -191,7 +192,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
     super.prepareData();
     if (!this.canCrit) { this.crit = new Set([0, 1]); }
     const uuid = this.uuid;
-    if (uuid && this.document?.documentName !== "Actor") {
+    if (uuid && this.getNearestDocument()?.documentName !== "Actor") {
       this.actor?.getEmbeddedCollection(this.documentName)?.set(toId(uuid, { hash: true }), this);
     }
   }

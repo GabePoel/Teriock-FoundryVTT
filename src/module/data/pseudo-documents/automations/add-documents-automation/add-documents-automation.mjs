@@ -117,7 +117,7 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   get _formPaths() {
     const paths = [];
-    if (this.document?.system?.makesEffectData) { paths.push("attachToEffect"); }
+    if (this.getNearestDocument()?.system?.makesEffectData) { paths.push("attachToEffect"); }
     if (!this.attachesToEffect) { paths.push(...this._triggerDisplayPaths, "target"); }
     else { paths.push("interactInExecution"); }
     paths.push(...["hr", "all"]);
@@ -131,7 +131,7 @@ export default class AddDocumentsAutomation
    * @returns {boolean}
    */
   get attachesToEffect() {
-    return this.attachToEffect && Boolean(this.document?.system?.makesEffectData);
+    return this.attachToEffect && Boolean(this.getNearestDocument()?.system?.makesEffectData);
   }
 
   /** @inheritDoc */

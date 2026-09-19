@@ -23,7 +23,7 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
 
   /** @inheritDoc */
   get _selectionRelativeTo() {
-    return this.document?.speakerActor ?? null;
+    return this.getNearestDocument()?.speakerActor ?? null;
   }
 
   /** @inheritDoc */

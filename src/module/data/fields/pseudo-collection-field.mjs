@@ -92,7 +92,7 @@ export default class PseudoCollectionField extends TypedObjectField {
 
   /** @inheritDoc */
   initialize(_value, model, options = {}) {
-    const controller = model instanceof BasePseudoDocument ? model : model.document;
+    const controller = model instanceof BasePseudoDocument ? model : model.getNearestDocument();
     const collection = controller?.pseudoCollections?.[this.documentName] ?? null;
     collection?.initialize(model, options);
     return collection;

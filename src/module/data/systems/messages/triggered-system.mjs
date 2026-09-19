@@ -12,7 +12,7 @@ export default class TriggeredSystem extends InteractiveSystem {
   _onUpdateTimestamp() {
     super._onUpdateTimestamp();
     if (
-      this.document.timestamp
+      this.getNearestDocument().timestamp
         < Date.now() - (game.settings.get("teriock", "autoTriggerDeleteTime") ?? Infinity) * 60 * 1000
       && this.parent.trackable
     ) {

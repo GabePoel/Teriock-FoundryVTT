@@ -12,7 +12,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
    * @returns {number|null}
    */
   get #amount() {
-    return this.amount ?? this.document?.rolls?.find(r => r.impacts?.includes(this.impact))?.total ?? null;
+    return this.amount ?? this.getNearestDocument()?.rolls?.find(r => r.impacts?.includes(this.impact))?.total ?? null;
   }
 
   /**

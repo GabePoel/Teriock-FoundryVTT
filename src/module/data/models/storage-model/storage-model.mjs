@@ -79,6 +79,6 @@ export default class StorageModel extends BaseDataModel {
    */
   get storedEquipment() {
     if (!this.enabled) { return []; }
-    return this.document.previewedTypes.equipment;
+    return this.getNearestDocument().previewedTypes.equipment;
   }
 }

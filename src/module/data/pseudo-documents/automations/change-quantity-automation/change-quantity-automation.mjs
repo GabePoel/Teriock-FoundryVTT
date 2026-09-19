@@ -35,9 +35,9 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
    * @returns {Promise<TeriockActiveEffect|TeriockItem|null>}
    */
   async #findConsumable(options = {}) {
-    if (this.targetParent && this.document?.system?.consumable) { return this.document; }
+    if (this.targetParent && this.getNearestDocument()?.system?.consumable) { return this.getNearestDocument(); }
     if (!this.identifier) { return null; }
-    let doc = this.document;
+    let doc = this.getNearestDocument();
     let consumable;
     while (doc && !consumable) {
       const candidate = await fromIdentifierLocal(this.identifier, doc);
@@ -46,7 +46,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
       else { doc = null; }
     }
     if (!consumable) {
-      const actor = options?.actor ?? options?.execution?.actor ?? this.document?.actor;
+      const actor = options?.actor ?? options?.execution?.actor ?? this.getNearestDocument()?.actor;
       if (!actor) { return null; }
       consumable = await fromIdentifierLocal(this.identifier, actor);
     }
@@ -80,7 +80,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   /** @inheritDoc */
   get formTips() {
     const tips = super.formTips;
-    if (this.targetParent && !this.document?.system?.consumable) {
+    if (this.targetParent && !this.getNearestDocument()?.system?.consumable) {
       tips.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable" });
     }
     return tips;

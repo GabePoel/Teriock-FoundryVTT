@@ -35,9 +35,9 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
   /** @inheritDoc */
   async _onFireTrigger(trigger, scope) {
     await super._onFireTrigger(trigger, scope);
-    if (trigger !== "updateDocument" || !this.active || !this.document) { return; }
+    if (trigger !== "updateDocument" || !this.active || !this.getNearestDocument()) { return; }
     if (!BaseRoll.qualify(this.qualifier, () => this.getRollData())) { return; }
-    await ensureChildren(this.document, Array.from(this.add));
-    await ensureNoChildren(this.document, Array.from(this.remove));
+    await ensureChildren(this.getNearestDocument(), Array.from(this.add));
+    await ensureNoChildren(this.getNearestDocument(), Array.from(this.remove));
   }
 }

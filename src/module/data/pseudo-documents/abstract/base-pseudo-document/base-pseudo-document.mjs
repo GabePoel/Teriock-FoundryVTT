@@ -73,7 +73,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
     parent = parent instanceof foundry.abstract.TypeDataModel ? parent.parent : parent;
     const collectionKey = parent.metadata?.pseudos?.[this.documentName];
     const fieldPath = [parent.localPath, collectionKey].filter(Boolean).join(".");
-    return { collectionKey, document: parent.document, fieldPath, parent };
+    return { collectionKey, document: parent.getNearestDocument(), fieldPath, parent };
   }
 
   /**
@@ -189,7 +189,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {TeriockDocument|BasePseudoDocument}
    */
   get controller() {
-    return this.parent instanceof BasePseudoDocument ? this.parent : this.document;
+    return this.parent instanceof BasePseudoDocument ? this.parent : this.getNearestDocument();
   }
 
   /**
@@ -223,7 +223,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {boolean}
    */
   get isViewer() {
-    return this.document.isViewer;
+    return this.getNearestDocument().isViewer;
   }
 
   /**

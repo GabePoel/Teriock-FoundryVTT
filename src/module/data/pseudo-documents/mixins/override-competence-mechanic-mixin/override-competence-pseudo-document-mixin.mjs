@@ -60,8 +60,11 @@ export default function OverrideCompetencePseudoDocumentMixin(Base) {
 
     /** @inheritDoc */
     getCompetence(scope) {
-      if (this.setCompetence === "inherit" && (scope?.execution?.competence || this.document?.system?.competence)) {
-        return scope?.execution?.competence?.value ?? this.document?.system?.competence?.value;
+      if (
+        this.setCompetence === "inherit"
+        && (scope?.execution?.competence || this.getNearestDocument()?.system?.competence)
+      ) {
+        return scope?.execution?.competence?.value ?? this.getNearestDocument()?.system?.competence?.value;
       }
       if (this.setCompetence === "override") { return this.competence.value; }
       return undefined;

@@ -84,11 +84,15 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
     if (this.origin === "executor" && execution?.executor?.document?.uuid) { return execution.executor.document; }
     else if (this.origin === "target") {
       return game.user.selectTargetedToken({
-        title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", { name: this.document?.name || "" }),
+        title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", {
+          name: this.getNearestDocument()?.name || "",
+        }),
       });
     } else if (this.origin === "chosen") {
       return game.user.selectVisibleToken({
-        title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", { name: this.document?.name || "" }),
+        title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", {
+          name: this.getNearestDocument()?.name || "",
+        }),
       });
     }
     return null;

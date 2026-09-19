@@ -106,7 +106,7 @@ export default class BaseAffinity
    * @returns {string}
    */
   get _defaultImg() {
-    const fallback = this.document?.img ?? TERIOCK.config.affinity.types[this.type].img;
+    const fallback = this.getNearestDocument()?.img ?? TERIOCK.config.affinity.types[this.type].img;
     if (this.category === "other") { return fallback; }
     return getImage(TERIOCK.config.affinity.categories[this.category]?.imgCategory, this.identifier, fallback);
   }
@@ -193,8 +193,8 @@ export default class BaseAffinity
    * @returns {string}
    */
   get sourceName() {
-    if (this.document?.documentName === "Actor") { return this.#sourceName || ""; }
-    return this.document.fullName || this.document.name || "";
+    if (this.getNearestDocument()?.documentName === "Actor") { return this.#sourceName || ""; }
+    return this.getNearestDocument().fullName || this.getNearestDocument().name || "";
   }
 
   /**
@@ -270,7 +270,7 @@ export default class BaseAffinity
       group: "open",
       icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
-      onClick: async () => await this.document.sheet.render(true),
+      onClick: async () => await this.getNearestDocument().sheet.render(true),
     }];
   }
 

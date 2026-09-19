@@ -89,7 +89,7 @@ export default class RegionAutomation
       flags: { teriock: { targetRegion: false } },
       highlightMode: "shapes",
       name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
-        name: options.execution?.source.name ?? this.document.name,
+        name: options.execution?.source.name ?? this.getNearestDocument().name,
       }),
       ...this.data,
     });

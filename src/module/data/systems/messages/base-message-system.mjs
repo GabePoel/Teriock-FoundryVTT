@@ -51,18 +51,17 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
    * @returns {Promise<object>}
    */
   async _prepareContext(options = {}) {
-    const speakerToken = this.document.speakerToken;
+    const document = this.getNearestDocument();
+    const speakerToken = document.speakerToken;
     return {
-      hasSpeakerInteraction: Boolean(
-        speakerToken || this.document.constructor.getSpeakerActor(this.document.speaker)?.visible,
-      ),
-      isContentVisible: this.document.isContentVisible,
-      speakerImg: this.document.speakerImg,
+      hasSpeakerInteraction: Boolean(speakerToken || document.constructor.getSpeakerActor(document.speaker)?.visible),
+      isContentVisible: document.isContentVisible,
+      speakerImg: document.speakerImg,
       speakerToken,
       system: this,
       TERIOCK,
-      type: this.document.type,
-      writer: this.document.alias !== this.document.author?.name ? this.document.author?.name : null,
+      type: document.type,
+      writer: document.alias !== document.author?.name ? document.author?.name : null,
       ...options,
     };
   }

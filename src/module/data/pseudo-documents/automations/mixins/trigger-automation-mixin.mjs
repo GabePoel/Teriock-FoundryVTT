@@ -24,7 +24,10 @@ export default function TriggerAutomationMixin(Base) {
     /** @inheritDoc */
     get _triggerPaths() {
       const paths = super._triggerPaths;
-      if (this.makesChatData && this.metadata.tags.interactInExecution && this.document?.metadata?.tags?.usable) {
+      if (
+        this.makesChatData && this.metadata.tags.interactInExecution
+        && this.getNearestDocument()?.metadata?.tags?.usable
+      ) {
         paths.push("interactInExecution");
       }
       return paths;
@@ -46,7 +49,7 @@ export default function TriggerAutomationMixin(Base) {
      * @returns {Promise<void>}
      */
     async _onFire(scope) {
-      const document = this.document;
+      const document = this.getNearestDocument();
       const actor = scope.actor ?? this.actor;
       if (!document || !actor?.prepareTriggeredChatData) { return; }
       const activations = this._applyDisplayToActivations(

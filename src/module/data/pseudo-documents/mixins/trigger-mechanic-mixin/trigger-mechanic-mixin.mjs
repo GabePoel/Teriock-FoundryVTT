@@ -60,7 +60,7 @@ export default function TriggerMechanicMixin(Base) {
      * @returns {Record<string, FormSelectOption>}
      */
     get _triggerChoices() {
-      return this.constructor._getTriggerChoices(Boolean(this.document?.metadata?.tags?.granted));
+      return this.constructor._getTriggerChoices(Boolean(this.getNearestDocument()?.metadata?.tags?.granted));
     }
 
     /**
@@ -89,7 +89,7 @@ export default function TriggerMechanicMixin(Base) {
      * @returns {boolean}
      */
     get canHaveTriggers() {
-      return Boolean(this.document?.metadata?.tags?.triggerable);
+      return Boolean(this.getNearestDocument()?.metadata?.tags?.triggerable);
     }
 
     /**
@@ -97,7 +97,7 @@ export default function TriggerMechanicMixin(Base) {
      * @returns {boolean}
      */
     get documentAllowsTrigger() {
-      return this.document.active;
+      return this.getNearestDocument().active;
     }
 
     /** @inheritDoc */

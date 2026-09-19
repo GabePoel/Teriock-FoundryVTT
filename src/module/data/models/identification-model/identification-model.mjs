@@ -95,7 +95,9 @@ export default class IdentificationModel extends BaseDataModel {
         },
       });
       if (doReadMagic) {
-        await this.document.update({ "system.identification.read": true, "system.kind": this.kind }, { asGM: true });
+        await this.getNearestDocument().update({ "system.identification.read": true, "system.kind": this.kind }, {
+          asGM: true,
+        });
         ui.notifications.success("TERIOCK.MODELS.Identification.QUERY.ReadMagic.success", {
           format: { name: this.parent.parent.fullName },
           localize: true,

@@ -57,8 +57,9 @@ export default class CombatExpiration extends BaseExpiration {
   isValidActor(actor) {
     if (!actor) { return false; }
     if (this.relation === "target" && this.actor?.uuid === actor.uuid) { return true; }
-    else if (this.relation === "executor" && this.document?.system?.executor === actor.uuid) { return true; }
-    else if (this.relation === "everyone") { return true; }
+    else if (this.relation === "executor" && this.getNearestDocument()?.system?.executor === actor.uuid) {
+      return true;
+    } else if (this.relation === "everyone") { return true; }
     return false;
   }
 }

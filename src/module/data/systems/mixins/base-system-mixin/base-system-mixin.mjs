@@ -192,11 +192,6 @@ export default function BaseSystemMixin(Base) {
       return [];
     }
 
-    /** @inheritDoc */
-    get document() {
-      return this.parent;
-    }
-
     /**
      * A string containing the document's name and any other additional adjustments that go along with it.
      * @returns {string}

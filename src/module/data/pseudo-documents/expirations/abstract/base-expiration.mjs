@@ -134,7 +134,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
    */
   async use() {
     if (this.method === "roll") {
-      await ExpirationExecution.create({}, { actor: this.actor, expiration: this, source: this.document });
-    } else { await this.document.system.expire({ dialog: true }); }
+      await ExpirationExecution.create({}, { actor: this.actor, expiration: this, source: this.getNearestDocument() });
+    } else { await this.getNearestDocument().system.expire({ dialog: true }); }
   }
 }
