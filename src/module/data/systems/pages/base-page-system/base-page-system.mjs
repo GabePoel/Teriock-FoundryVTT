@@ -22,7 +22,10 @@ export default class BasePageSystem
   extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin, RulesSystemMixin, InstructionsSystemMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { descriptionPath: "text.content", tags: { text: true } });
+  static metadata = mergeMetadata(super.metadata, {
+    descriptionPath: "text.content",
+    tags: { embedPanelBlocks: true, text: true },
+  });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -32,6 +32,7 @@ declare global {
       armament: boolean;
       attunable: boolean;
       consumable: boolean;
+      embedPanelBlocks: boolean;
       granted: boolean;
       hierarchy: boolean;
       revealable: boolean;

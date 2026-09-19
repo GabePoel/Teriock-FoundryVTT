@@ -1,6 +1,5 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { createElement } from "../../helpers/html.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
@@ -50,12 +49,10 @@ export default class TeriockJournalEntryPage
   async getPanelParts() {
     const parts = await super.getPanelParts();
     if (this.type !== "text") { return parts; }
-    const div = createElement("div", { innerHTML: this.text.content });
-    div.querySelectorAll("table").forEach(t => t.remove());
     return {
       ...parts,
       blocks: [{
-        text: div.innerHTML,
+        text: `@Embed[${this.uuid} text inline=true]`,
         title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
     };

@@ -41,6 +41,7 @@ export default function BaseSystemMixin(Base) {
         attunable: false,
         consumable: false,
         embed: false,
+        embedPanelBlocks: false,
         granted: false,
         hierarchy: false,
         panel: false,
@@ -167,9 +168,11 @@ export default function BaseSystemMixin(Base) {
         const schema = this.parent.getFieldForProperty(f.path);
         let value = foundry.utils.getProperty(this.parent._source, f.path);
         if (!value) { value = foundry.utils.getProperty(this.parent, f.path); }
-        if (value) {
-          return { classes: f.classes, gmOnly: f.gmOnly ?? false, text: value, title: f.label || schema.label };
-        }
+        if (!value) { return; }
+        const text = this.metadata.tags.embedPanelBlocks
+          ? `@Embed[${this.parent.uuid} path=${f.path} inline=true]`
+          : value;
+        return { classes: f.classes, gmOnly: f.gmOnly ?? false, text, title: f.label || schema.label };
       }).filter(f => f);
     }
 

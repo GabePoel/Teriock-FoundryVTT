@@ -36,8 +36,8 @@ export default function CommandActivationFactory(entry) {
     async primaryAction() {
       if (!this.checkActors() || typeof entry.primary !== "function") { return; }
       await Promise.all(this.actors.map(a => entry.primary(a, Object.assign({ event: this.event }, this.options))));
-      ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.applied", {
-        format: { command: this.label },
+      ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.executed", {
+        format: { command: _loc(this.label) },
         localize: true,
       });
     }
@@ -47,7 +47,7 @@ export default function CommandActivationFactory(entry) {
       if (!this.checkActors() || typeof entry.secondary !== "function") { return; }
       await Promise.all(this.actors.map(a => entry.secondary(a, Object.assign({ event: this.event }, this.options))));
       ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.reversed", {
-        format: { command: this.label },
+        format: { command: _loc(this.label) },
         localize: true,
       });
     }
