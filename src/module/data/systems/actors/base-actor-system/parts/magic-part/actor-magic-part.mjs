@@ -1,6 +1,7 @@
 import systemConfig from "../../../../../../constants/config/system-config.mjs";
 import { ElderSorceryExecution } from "../../../../../../executions/actor-executions/_module.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
+import { elderSorceryCreationSchema } from "../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -33,6 +34,7 @@ export default function ActorMagicPart(Base) {
           min: initialNumber(),
           value: initialNumber(),
         }),
+        elderSorceryCreation: new fields.SchemaField(elderSorceryCreationSchema()),
         rotators: new fields.SchemaField({
           max: new InfiniteNumberField({ initial: 0, integer: true }),
           min: initialNumber(),

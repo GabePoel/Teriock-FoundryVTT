@@ -324,6 +324,51 @@ export function deathBagSchema(options = {}) {
 }
 
 /**
+ * Schema fields for Elder Sorcery creation.
+ *
+ * Relevant wiki pages:
+ * - [Elder Sorcery](https://wiki.teriock.com/index.php/Core:Elder_Sorcery)
+ *
+ * @returns {Record<"bonuses" | "penalties" | "ratings", SchemaField>}
+ */
+export function elderSorceryCreationSchema() {
+  const prefix = "TERIOCK.SYSTEMS.BaseActor.FIELDS.elderSorceryCreation";
+  const bonusField = key => rollableFormulaField({ label: `${prefix}.bonuses.${key}.label` });
+  const penaltyField = key => rollableFormulaField({ label: `${prefix}.penalties.${key}.label` });
+  const ratingField = key =>
+    new NumberField({
+      hint: `${prefix}.ratings.${key}.hint`,
+      initial: 0,
+      integer: true,
+      label: `${prefix}.ratings.${key}.label`,
+      max: 10,
+      min: 0,
+      nullable: false,
+    });
+  return {
+    // no sort
+    bonuses: new SchemaField({
+      assistance: bonusField("assistance"),
+      effort: bonusField("effort"),
+      experience: bonusField("experience"),
+      other: bonusField("other"),
+    }, { label: `${prefix}.bonuses.label` }),
+    // no sort
+    penalties: new SchemaField({
+      metaphysics: penaltyField("metaphysics"),
+      strain: penaltyField("strain"),
+      other: penaltyField("other"),
+    }, { label: `${prefix}.penalties.label` }),
+    ratings: new SchemaField({
+      castingCost: ratingField("castingCost"),
+      creationCost: ratingField("creationCost"),
+      incantation: ratingField("incantation"),
+      intention: ratingField("intention"),
+    }, { label: `${prefix}.ratings.label` }),
+  };
+}
+
+/**
  * Field for a defense.
  * @param {DataFieldOptions} [options]
  * @returns {EmbeddedDataField}

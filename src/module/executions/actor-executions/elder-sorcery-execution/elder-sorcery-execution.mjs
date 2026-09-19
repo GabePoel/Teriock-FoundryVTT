@@ -1,4 +1,4 @@
-import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
+import { elderSorceryCreationSchema } from "../../../data/fields/tools/builders.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula } from "../../../helpers/formula.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
@@ -17,28 +17,9 @@ export default class ElderSorceryExecution extends DocumentExecution {
 
   /** @inheritDoc */
   static defineSchema() {
-    const ratingField = () => new fields.NumberField({ initial: 0, integer: true, max: 10, min: 0, nullable: false });
     return Object.assign(super.defineSchema(), {
-      // no sort
-      bonuses: new fields.SchemaField({
-        assistance: rollableFormulaField(),
-        effort: rollableFormulaField(),
-        experience: rollableFormulaField(),
-        other: rollableFormulaField(),
-      }),
       level: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
-      // no sort
-      penalties: new fields.SchemaField({
-        metaphysics: rollableFormulaField(),
-        strain: rollableFormulaField(),
-        other: rollableFormulaField(),
-      }),
-      ratings: new fields.SchemaField({
-        castingCost: ratingField(),
-        creationCost: ratingField(),
-        incantation: ratingField(),
-        intention: ratingField(),
-      }),
+      ...elderSorceryCreationSchema(),
     });
   }
 
@@ -48,6 +29,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
    */
   constructor(data = {}, options = {}) {
     const actor = options.actor ?? options.source?.actor ?? game.actors.default;
+    data = foundry.utils.mergeObject(actor?.system.elderSorceryCreation ?? {}, data, { inplace: false });
     data.level ??= actor?.system.scaling.lvl ?? 0;
     super(data, options);
   }
@@ -117,7 +99,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
       const dc = 25 + 10 * (10 - rating) - this.level;
       const roll = new ThresholdRoll(this.formula, rollData, {
         flavor: _loc("TERIOCK.DIALOGS.ElderSorcery.flavor", {
-          category: _loc(`TERIOCK.EXECUTIONS.ElderSorcery.FIELDS.ratings.${category}.label`),
+          category: _loc(this.schema.getField(`ratings.${category}`).label),
           dc,
         }),
         thresholds: this._getThresholds(dc),
