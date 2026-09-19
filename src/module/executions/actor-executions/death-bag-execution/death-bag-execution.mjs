@@ -3,6 +3,12 @@ import { deathBagSchema } from "../../../data/fields/tools/builders.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 
+/**
+ * Pull from the Death Bag.
+ *
+ * Relevant wiki pages:
+ * - [Death Bag](https://wiki.teriock.com/index.php?title=Core:Death_Bag)
+ */
 export default class DeathBagExecution extends DocumentExecution {
   /** @inheritDoc */
   static defineSchema() {

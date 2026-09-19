@@ -1,28 +1,30 @@
 import systemConfig from "../../../../../../constants/config/system-config.mjs";
+import { ElderSorceryExecution } from "../../../../../../executions/actor-executions/_module.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * Actor data model that handles limits.
+ * Actor data model that handles magic stuff.
  *
  * Relevant wiki pages:
  * - [Curse](https://wiki.teriock.com/index.php/Keyword:Curse)
+ * - [Elder Sorcery](https://wiki.teriock.com/index.php/Core:Elder_Sorcery)
  * - [Rotator Fluency](https://wiki.teriock.com/index.php/Ability:Rotator_Fluency)
  * - [Rotators](https://wiki.teriock.com/index.php/Ability:Rotators)
  *
  * @template {AnyConstructor} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorLimitsPart & Teriock.Models.ActorLimitsPartData>}
+ * @returns {MixinResult<T, ActorMagicPart & Teriock.Models.ActorMagicPartData>}
  */
-export default function ActorLimitsPart(Base) {
+export default function ActorMagicPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorLimitsPartData}
+   * @implements {Teriock.Models.ActorMagicPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorLimitsPart extends Base {
+  class ActorMagicPart extends Base {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
@@ -57,6 +59,15 @@ export default function ActorLimitsPart(Base) {
       );
     }
 
+    /**
+     * Make the creation rolls for a new Elder Sorcery spell.
+     * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
+     * @returns {Promise<void>}
+     */
+    async createElderSorcery(options = {}) {
+      await ElderSorceryExecution.create({}, Object.assign(options, { actor: this.parent, source: this.parent }));
+    }
+
     /** @inheritDoc */
     prepareCleanupData() {
       super.prepareCleanupData();
@@ -65,5 +76,5 @@ export default function ActorLimitsPart(Base) {
     }
   }
 
-  return ActorLimitsPart;
+  return ActorMagicPart;
 }

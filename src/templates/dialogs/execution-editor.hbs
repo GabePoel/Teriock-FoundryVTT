@@ -37,13 +37,22 @@
     </section>
   {{/if}}
 
-  {{#if mainFields.length}}
-    <div class="teriock-form-container">
-      {{> "teriock/shared/field-list"
-        mainFields
-      }}
-    </div>
-  {{/if}}
+  {{#each sections as |section|}}
+    {{#if section.legend}}
+      <fieldset>
+        <legend>{{ section.legend }}</legend>
+        {{> "teriock/shared/field-list"
+          section.fields
+        }}
+      </fieldset>
+    {{else}}
+      <div class="teriock-form-container">
+        {{> "teriock/shared/field-list"
+          section.fields
+        }}
+      </div>
+    {{/if}}
+  {{/each}}
 
   {{#if smallFields.length}}
     <div class="ttable" style="column-gap: 1.5rem; row-gap: 0.75rem">

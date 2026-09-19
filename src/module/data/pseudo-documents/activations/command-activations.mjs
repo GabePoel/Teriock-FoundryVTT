@@ -2,6 +2,7 @@ import { attuneCommand, deattuneCommand } from "../../../helpers/interaction/com
 import awakenCommand from "../../../helpers/interaction/commands/awaken-command.mjs";
 import bagCommand from "../../../helpers/interaction/commands/bag-command.mjs";
 import { coverCommand, uncoverCommand } from "../../../helpers/interaction/commands/cover-commands.mjs";
+import elderSorceryCommand from "../../../helpers/interaction/commands/elder-sorcery-command.mjs";
 import {
   dampenCommand,
   destroyCommand,
@@ -38,6 +39,7 @@ export class DampenActivation extends Act(dampenCommand) {}
 export class DeathBagActivation extends Act(bagCommand) {}
 export class DeattuneActivation extends Act(deattuneCommand) {}
 export class DestroyActivation extends Act(destroyCommand) {}
+export class ElderSorceryActivation extends Act(elderSorceryCommand) {}
 export class FeatActivation extends Act(featCommand) {}
 export class GlueActivation extends Act(glueCommand) {}
 export class HealActivation extends Act(healCommand) {}

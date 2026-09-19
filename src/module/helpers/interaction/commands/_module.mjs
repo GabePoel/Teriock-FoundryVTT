@@ -3,6 +3,7 @@ import { attuneCommand, deattuneCommand } from "./attunable-commands.mjs";
 import awakenCommand from "./awaken-command.mjs";
 import bagCommand from "./bag-command.mjs";
 import { coverCommand, uncoverCommand } from "./cover-commands.mjs";
+import elderSorceryCommand from "./elder-sorcery-command.mjs";
 import {
   dampenCommand,
   destroyCommand,
@@ -40,6 +41,7 @@ const commandArray = [
   dampenCommand,
   deattuneCommand,
   destroyCommand,
+  elderSorceryCommand,
   featCommand,
   glueCommand,
   hackCommand,

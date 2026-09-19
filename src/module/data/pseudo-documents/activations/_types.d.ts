@@ -10,6 +10,7 @@ import {
   DeathBagActivation,
   DeattuneActivation,
   DestroyActivation,
+  ElderSorceryActivation,
   FeatActivation,
   GlueActivation,
   HealActivation,
@@ -59,6 +60,7 @@ declare global {
     dampen: DampenActivation;
     deattune: DeattuneActivation;
     destroy: DestroyActivation;
+    elderSorcery: ElderSorceryActivation;
     feat: FeatActivation;
     glue: GlueActivation;
     hack: TakeHackActivation;

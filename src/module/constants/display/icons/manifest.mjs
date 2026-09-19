@@ -336,6 +336,7 @@ export default {
     dragDrop: "ms-drag-click",
     duplicate: "ms-file-copy",
     edit: "ms-edit",
+    elderSorcery: "ms-auto-fix-high",
     enable: "ms-check",
     enabled: "ms-check-circle",
     error: "ms-error",

@@ -9,6 +9,7 @@ const triggerConfig = {
       executeAbility: "TERIOCK.TRIGGERS.Activity.choices.useAbility",
       executeArmament: "TERIOCK.TRIGGERS.Activity.choices.useArmament",
       executeDeathBag: "TERIOCK.TRIGGERS.Activity.choices.deathBagPull",
+      executeElderSorcery: "TERIOCK.TRIGGERS.Activity.choices.createElderSorcery",
       executeFeat: "TERIOCK.TRIGGERS.Activity.choices.rollFeatSave",
       executeSpell: "TERIOCK.TRIGGERS.Activity.choices.castSpell",
       executeTradecraft: "TERIOCK.TRIGGERS.Activity.choices.rollTradecraft",

@@ -8,6 +8,7 @@ export default {
     dampen: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
     deattune: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
     destroy: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
+    elderSorcery: "TERIOCK.EFFECTS.Common.elderSorcery",
     glue: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
     identify: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
     longRest: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",

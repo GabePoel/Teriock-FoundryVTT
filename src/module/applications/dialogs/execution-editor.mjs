@@ -108,6 +108,17 @@ export default class ExecutionEditor extends ResolvableDialog {
   #execution;
 
   /**
+   * Expand a form path into the paths of the inputs it renders. {@link SchemaField} renders sub-paths ina fieldset.
+   * @param {string} path
+   * @returns {string[]}
+   */
+  #expandPath(path) {
+    const field = this.#execution.schema.getField(path);
+    if (field instanceof fields.SchemaField) { return Object.keys(field.fields).map(k => `${path}.${k}`); }
+    return [path];
+  }
+
+  /**
    * Build the render context for a single execution schema field.
    * @param {string} path
    * @returns {object}
@@ -141,7 +152,7 @@ export default class ExecutionEditor extends ResolvableDialog {
     const form = /** @type {HTMLFormElement} */ (event.currentTarget);
     const submitted = new FormDataExtended(form).object;
     const changes = {};
-    for (const path of this.#execution._formPaths) {
+    for (const path of this.#execution._formPaths.flatMap(p => this.#expandPath(p))) {
       if (path in submitted) { changes[path] = submitted[path]; }
     }
     this.#execution.updateSource(changes);
@@ -166,13 +177,27 @@ export default class ExecutionEditor extends ResolvableDialog {
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const mainFields = [];
+    // TODO: Clean this up a little. It's a little much with small fields, normal fields, and fieldsets.
+    /** @type {{ fields: object[], legend?: string }[]} */
+    const sections = [];
     const smallFields = [];
     for (const path of this.#execution._formPaths) {
       if (path === "hr") { continue; }
+      const field = this.#execution.schema.getField(path);
+      if (field instanceof fields.SchemaField) {
+        sections.push({
+          fields: this.#expandPath(path).map(p => this.#prepareFieldContext(p)),
+          legend: _loc(field.label),
+        });
+        continue;
+      }
       const fieldContext = this.#prepareFieldContext(path);
-      if (fieldContext.small) { smallFields.push(fieldContext); }
-      else { mainFields.push(fieldContext); }
+      if (fieldContext.small) {
+        smallFields.push(fieldContext);
+        continue;
+      }
+      if (sections.at(-1)?.legend !== undefined || !sections.length) { sections.push({ fields: [] }); }
+      sections.at(-1).fields.push(fieldContext);
     }
     smallFields.sort((a, b) => _loc(a.field.label).localeCompare(_loc(b.field.label)));
     const multipleDocuments = this.#execution._dialogDocuments.length > 1;
@@ -195,10 +220,10 @@ export default class ExecutionEditor extends ResolvableDialog {
         label: _loc(button.label),
       })),
       documents,
-      mainFields,
       messageModes: Object.entries(CONFIG.ChatMessage.modes).map(([action, { icon, label }]) => {
         return { action, active: action === this.#execution._messageMode, icon, label };
       }),
+      sections,
       smallFields,
     });
   }
