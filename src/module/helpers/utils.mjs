@@ -65,35 +65,25 @@ export function prefixObject(obj, prefix) {
 
 /**
  * Map the values of an object.
- * @template T
- * @template U
- * @param {Record<string, T>} obj
- * @param {(T) => U} fn
+ * @template V1 - Initial values.
+ * @template V2 - Final values.
+ * @param {Record<string, V1>} obj
+ * @param {(V1) => V2} [transformValue]
  * @param {object} [options]
- * @param {(T) => boolean} [options.filter]
- * @param {boolean} [options.localize] - The output can only be localized if the output is a string.
- * @param {boolean} [options.none] - Prepend a blank "None" choice.
- * @returns {Record<string, U>}
+ * @param {(V1) => boolean} [options.filter] - Filter values before transformation.
+ * @param {boolean} [options.kebabify=false] - Make the keys kebab-case.
+ * @param {boolean} [options.localize=false] - The output can only be localized if the output is a string.
+ * @param {boolean} [options.none=false] - Prepend a blank "None" choice.
+ * @returns {Record<string, V2>}
  */
-export function objectMap(obj, fn, options = {}) {
-  const { filter = () => true, localize = false, none = false } = options;
-  const out = Object.fromEntries(Object.entries(obj).filter(([_k, v]) => filter(v)).map(([k, v]) => [k, fn(v)]));
+export function objectMap(obj, transformValue = (v) => v, options = {}) {
+  const { filter = () => true, kebabify = false, localize = false, none = false } = options;
+  const transformKey = kebabify ? (k) => teriock.helpers.string.toKebabCase(k) : (k) => k;
+  const out = Object.fromEntries(
+    Object.entries(obj).filter(([_k, v]) => filter(v)).map(([k, v]) => [transformKey(k), transformValue(v, k)]),
+  );
   if (localize) { return localizeChoices(out, { none }); }
   return none ? choicesWithNone(out) : out;
-}
-
-/**
- * Map the keys of an object to strings.
- * @param {Record<string, *>} obj
- * @param {(string) => string} fn
- * @param {object} [options]
- * @param {boolean} [options.localize] - Whether to localize the values of the returned object.
- * @returns {Record<string, string>}
- */
-export function choiceMap(obj, fn, options = { localize: true }) {
-  const out = Object.fromEntries(Object.keys(obj).map(k => [k, fn(k)]));
-  if (options.localize) { return teriock.helpers.localization.localizeChoices(out); }
-  return out;
 }
 
 /**

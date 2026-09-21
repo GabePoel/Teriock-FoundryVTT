@@ -1,8 +1,7 @@
-import { HTMLIdentifierInputElement } from "../../../applications/elements/_module.mjs";
+import { HTMLAutocompleteInputElement, HTMLIdentifierInputElement } from "../../../applications/elements/_module.mjs";
 import { validateIdentifier } from "../tools/validators.mjs";
 
 const { StringField } = foundry.data.fields;
-const { createTextInput } = foundry.applications.fields;
 
 /**
  * @import { DataFieldContext, FormInputConfig, StringFieldInputConfig, StringFieldOptions } from "@common/data/_types.mjs";
@@ -14,7 +13,14 @@ const { createTextInput } = foundry.applications.fields;
 export default class IdentifierField extends StringField {
   /** @inheritDoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null, type: null });
+    return foundry.utils.mergeObject(super._defaults, {
+      autocomplete: false,
+      blank: true,
+      nullable: true,
+      reset: null,
+      suggestions: null,
+      type: null,
+    });
   }
 
   /**
@@ -30,10 +36,18 @@ export default class IdentifierField extends StringField {
    * @param {FormInputConfig & StringFieldInputConfig & StringFieldOptions &  Teriock.Fields._IdentifierFieldOptions} config
    */
   _toInput(config) {
-    if (config.reset && !config.choices && !config.type && !this.choices && !this.options?.type) {
-      const reset = config.reset ?? this.reset;
-      if (reset) { return HTMLIdentifierInputElement.create({ ...config, reset }); }
-      return createTextInput(config);
+    config.autocomplete ??= this.autocomplete;
+    config.type ??= this.type;
+    config.reset ??= this.reset;
+    config.choices ??= this.choices ?? this.suggestions
+      ?? ((config.autocomplete && config.type) ? game.teriock.identifiers.getNames(config.type) : undefined);
+    if (config.autocomplete && config.choices) {
+      this.constructor._prepareChoiceConfig(config);
+      return HTMLAutocompleteInputElement.create(config);
+    }
+    if (config.reset && !config.type) {
+      this.constructor._prepareChoiceConfig(config);
+      return HTMLIdentifierInputElement.create(config);
     }
     return super._toInput(config);
   }

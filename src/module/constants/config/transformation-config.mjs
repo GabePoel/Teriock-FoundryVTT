@@ -1,6 +1,7 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import documentConfig from "./document-config.mjs";
 
-export default {
+const config = {
   // no sort
   level: {
     minor: "TERIOCK.EFFECTS.TransformationLevel.minor",
@@ -25,5 +26,10 @@ export default {
   tokenChange: { phase: "initial", priority: 5 },
 };
 
+export default config;
+
+for (const k of Object.keys(config.suppress)) { config.suppress[k].label = documentConfig[k]?.label; }
+
 preLocalizeConfig("config.transformation.level");
 preLocalizeConfig("config.transformation.override", { key: "label" });
+preLocalizeConfig("config.transformation.suppress", { key: "label" });

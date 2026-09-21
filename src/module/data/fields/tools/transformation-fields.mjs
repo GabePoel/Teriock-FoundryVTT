@@ -1,9 +1,8 @@
 import { LocalDocumentField, TernaryField } from "../_module.mjs";
-import documentConfig from "../../../constants/config/document-config.mjs";
 import statConfig from "../../../constants/config/stat-config.mjs";
 import transformationConfig from "../../../constants/config/transformation-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { choiceMap, objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -12,7 +11,7 @@ const { fields } = foundry.data;
  * @import { BooleanField, EmbeddedDataField, FilePathField, SetField, StringField } from "@common/data/fields.mjs";
  */
 
-const RESET_STATS = Object.fromEntries(Object.entries(statConfig).filter(([_k, v]) => v.transformationReset));
+const RESET_STATS = objectMap(statConfig, undefined, { filter: v => v.transformationReset });
 
 /**
  * Species transformation fields.
@@ -77,20 +76,27 @@ export function automationTransformationFields() {
       required: false,
     }),
     override: new fields.SetField(
-      new fields.StringField({ choices: localizeChoices(objectMap(transformationConfig.override, k => k.label)) }),
+      new fields.StringField({
+        choices: () => objectMap(transformationConfig.override, v => v.label, { localize: true }),
+      }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.override.hint",
         initial: Object.keys(transformationConfig.override).filter(k => transformationConfig.override[k].initial),
         label: "TERIOCK.COMMON.Override",
       },
     ),
-    resets: new fields.SetField(new fields.StringField({ choices: choiceMap(RESET_STATS, k => statConfig[k].label) }), {
-      hint: "TERIOCK.SCHEMA.Transformation.resets.hint",
-      initial: Object.keys(RESET_STATS).filter(k => RESET_STATS[k].transformationReset.initial),
-      label: "SETTINGS.UI.ACTIONS.Reset",
-    }),
+    resets: new fields.SetField(
+      new fields.StringField({ choices: () => objectMap(RESET_STATS, v => v.label, { localize: true }) }),
+      {
+        hint: "TERIOCK.SCHEMA.Transformation.resets.hint",
+        initial: Object.keys(RESET_STATS).filter(k => RESET_STATS[k].transformationReset.initial),
+        label: "SETTINGS.UI.ACTIONS.Reset",
+      },
+    ),
     suppress: new fields.SetField(
-      new fields.StringField({ choices: choiceMap(transformationConfig.suppress, k => documentConfig[k].label) }),
+      new fields.StringField({
+        choices: () => objectMap(transformationConfig.suppress, v => v?.label, { localize: true }),
+      }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
         initial: Object.keys(transformationConfig.suppress).filter(k => transformationConfig.suppress[k].initial),

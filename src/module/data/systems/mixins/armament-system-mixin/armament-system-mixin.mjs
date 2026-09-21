@@ -212,7 +212,10 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsArmament() {
-      return [{ choices: game.teriock.identifiers.getNames("style"), path: "system.style" }];
+      return [{
+        choices: objectMap(game.teriock.identifiers.getNames("style"), undefined, { none: true }),
+        path: "system.style",
+      }];
     }
 
     /** @inheritDoc */

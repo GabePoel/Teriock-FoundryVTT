@@ -19,7 +19,13 @@ declare global {
       nullify?: (doc: TeriockDocument) => boolean;
     };
 
-    export type _IdentifierFieldOptions = { reset?: string | null, type?: string | null };
+    export type _IdentifierFieldOptions = {
+      autocomplete?: boolean;
+      reset?: string | null;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+      suggestions?: object | Function | string[];
+      type?: string | null;
+    };
 
     export type _TypedIdentifierFieldOptions = { single?: boolean, types?: string[] };
 

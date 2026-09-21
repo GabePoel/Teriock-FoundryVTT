@@ -1,4 +1,3 @@
-import { HTMLAutocompleteInputElement } from "../../../../../applications/elements/_module.mjs";
 import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
 import { icons } from "../../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../../helpers/construction.mjs";
@@ -59,7 +58,7 @@ export default class BaseAffinity
         initial: "abilities",
         required: true,
       }),
-      identifier: new IdentifierField({ label: _loc("TERIOCK.COMMON.Identifier") }),
+      identifier: new IdentifierField({ autocomplete: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
       name: new fields.StringField(),
     });
@@ -95,9 +94,9 @@ export default class BaseAffinity
     if (this.category === "other") { return {}; }
     const path = TERIOCK.config.affinity.categories[this.category]?.choices;
     if (!path) { return {}; }
-    IDENTIFIER_CHOICES[path] ??= Object.fromEntries(
-      Object.entries(foundry.utils.getProperty(TERIOCK, path) || {}).map(([k, v]) => [toKebabCase(k), v]),
-    );
+    IDENTIFIER_CHOICES[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, undefined, {
+      kebabify: true,
+    });
     return IDENTIFIER_CHOICES[path];
   }
 
@@ -242,15 +241,7 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (path === "identifier") {
-      Object.assign(inputConfig, {
-        choices: this._choices,
-        name: `${this.localPath}.${path}`,
-        value: foundry.utils.getProperty(this, `_source.${path}`),
-      });
-      foundry.data.fields.StringField._prepareChoiceConfig(inputConfig);
-      groupConfig.input = HTMLAutocompleteInputElement.create(inputConfig);
-    }
+    if (path === "identifier") { inputConfig.choices = this._choices; }
     if (path === "img") { inputConfig.placeholder = this._defaultImg; }
     if (path === "name") { inputConfig.placeholder = this._defaultName; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);

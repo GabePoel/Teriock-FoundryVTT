@@ -1,6 +1,7 @@
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
+import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
@@ -373,6 +374,14 @@ export default function BaseDocumentMixin(Base) {
         return doc ?? uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
       }
       return uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
+    }
+
+    /**
+     * Get the document that has the most control over this one.
+     * @returns {Promise<TeriockDocument>}
+     */
+    async getMaster() {
+      return resolveDocument(this.master);
     }
 
     /** @inheritDoc */

@@ -42,7 +42,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
     while (doc && !consumable) {
       const candidate = await fromIdentifierLocal(this.identifier, doc);
       if (candidate?.system?.consumable) { consumable = candidate; }
-      if (typeof doc.getElder === "function") { doc = await doc.getElder(); }
+      if (typeof doc.getMaster === "function") { doc = await doc.getMaster(); }
       else { doc = null; }
     }
     if (!consumable) {
