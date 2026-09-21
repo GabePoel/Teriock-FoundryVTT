@@ -35,9 +35,9 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
    * @returns {Promise<TeriockActiveEffect|TeriockItem|null>}
    */
   async #findConsumable(options = {}) {
-    if (this.targetParent && this.getNearestDocument()?.system?.consumable) { return this.getNearestDocument(); }
-    if (!this.identifier) { return null; }
     let doc = this.getNearestDocument();
+    if (this.targetParent) { return doc?.system?.consumable ? doc : null; }
+    if (!this.identifier) { return null; }
     let consumable;
     while (doc && !consumable) {
       const candidate = await fromIdentifierLocal(this.identifier, doc);
