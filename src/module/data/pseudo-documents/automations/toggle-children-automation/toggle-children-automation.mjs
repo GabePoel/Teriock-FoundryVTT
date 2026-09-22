@@ -33,6 +33,14 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (path === "remove") {
+      inputConfig.suggestions = this.getNearestDocument()?.previewed.getNames({ filter: d => !d.system?.isBasic });
+    }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  }
+
+  /** @inheritDoc */
   async _onFireTrigger(trigger, scope) {
     await super._onFireTrigger(trigger, scope);
     if (trigger !== "updateDocument" || !this.active || !this.getNearestDocument()) { return; }

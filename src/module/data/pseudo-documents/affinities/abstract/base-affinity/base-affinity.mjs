@@ -13,7 +13,7 @@ import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /** @type {Record<string, Record<Identifier, string>>} */
-const IDENTIFIER_CHOICES = {};
+const IDENTIFIER_SUGGESTIONS = {};
 
 /**
  * An affinity that some effect grants against a specific thing.
@@ -58,7 +58,7 @@ export default class BaseAffinity
         initial: "abilities",
         required: true,
       }),
-      identifier: new IdentifierField({ autocomplete: true, label: _loc("TERIOCK.COMMON.Identifier") }),
+      identifier: new IdentifierField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
       name: new fields.StringField(),
     });
@@ -87,20 +87,6 @@ export default class BaseAffinity
   }
 
   /**
-   * Valid values for this affinity's category.
-   * @returns {Record<string, string>}
-   */
-  get _choices() {
-    if (this.category === "other") { return {}; }
-    const path = TERIOCK.config.affinity.categories[this.category]?.choices;
-    if (!path) { return {}; }
-    IDENTIFIER_CHOICES[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, undefined, {
-      kebabify: true,
-    });
-    return IDENTIFIER_CHOICES[path];
-  }
-
-  /**
    * The image this falls back to when none is set.
    * @returns {string}
    */
@@ -116,7 +102,7 @@ export default class BaseAffinity
    */
   get _defaultName() {
     if (this.category === "other") { return ""; }
-    return this._choices[this.identifier] || this.identifier;
+    return this._suggestions[this.identifier] || this.identifier;
   }
 
   /**
@@ -143,6 +129,20 @@ export default class BaseAffinity
   get _formPaths() {
     if (this.category === "other") { return ["category", "name", "img"]; }
     return ["category", "identifier", "name", "img"];
+  }
+
+  /**
+   * Suggested values for this affinity's category.
+   * @returns {Record<string, string>}
+   */
+  get _suggestions() {
+    if (this.category === "other") { return {}; }
+    const path = TERIOCK.config.affinity.categories[this.category]?.choices;
+    if (!path) { return {}; }
+    IDENTIFIER_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, undefined, {
+      kebabify: true,
+    });
+    return IDENTIFIER_SUGGESTIONS[path];
   }
 
   /**
@@ -228,7 +228,7 @@ export default class BaseAffinity
    */
   get valid() {
     if (this.category === "other") { return Boolean(this.name); }
-    return Boolean(this._choices[this.identifier]);
+    return Boolean(this._suggestions[this.identifier]);
   }
 
   /**
@@ -241,7 +241,7 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (path === "identifier") { inputConfig.choices = this._choices; }
+    if (path === "identifier") { inputConfig.suggestions = this._suggestions; }
     if (path === "img") { inputConfig.placeholder = this._defaultImg; }
     if (path === "name") { inputConfig.placeholder = this._defaultName; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);

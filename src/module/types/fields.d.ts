@@ -19,15 +19,24 @@ declare global {
       nullify?: (doc: TeriockDocument) => boolean;
     };
 
+    /** Suggestions for an identifier input. `true` pulls names from {@link IdentifiersRegistry}. */
+    export type IdentifierSuggestions =
+      | (() => Record<string, string> | string[])
+      | true
+      | Record<string, string>
+      | string[];
+
     export type _IdentifierFieldOptions = {
-      autocomplete?: boolean;
       reset?: string | null;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-      suggestions?: object | Function | string[];
+      suggestions?: IdentifierSuggestions | null;
       type?: string | null;
     };
 
-    export type _TypedIdentifierFieldOptions = { single?: boolean, types?: string[] };
+    export type _TypedIdentifierFieldOptions = {
+      single?: boolean;
+      suggestions?: IdentifierSuggestions | null;
+      types?: string[];
+    };
 
     /**
      * A single group that will be given the corresponding label in a generated `<select>` element.

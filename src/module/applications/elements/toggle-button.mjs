@@ -1,6 +1,6 @@
 import { createElement } from "../../helpers/html.mjs";
 import { makeIconElement } from "../../helpers/icon.mjs";
-import AbstractCycleButtonElement from "./abstract-cycle-button.mjs";
+import { AbstractCycleButtonElement } from "./abstract/_module.mjs";
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";

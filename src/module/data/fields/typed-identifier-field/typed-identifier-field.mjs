@@ -1,4 +1,5 @@
 import { HTMLIdentifierTagsElement } from "../../../applications/elements/_module.mjs";
+import { prepareSuggestions } from "../tools/suggestions.mjs";
 import { validateTypedIdentifier } from "../tools/validators.mjs";
 
 const { StringField } = foundry.data.fields;
@@ -10,12 +11,22 @@ const { StringField } = foundry.data.fields;
 export default class TypedIdentifierField extends StringField {
   /** @inheritDoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, single: true, types: undefined });
+    return foundry.utils.mergeObject(super._defaults, {
+      blank: true,
+      nullable: true,
+      single: true,
+      suggestions: null,
+      types: undefined,
+    });
   }
 
   /** @inheritDoc */
   _toInput(config) {
     Object.assign(config, { single: config.single ?? this.single, types: config.types ?? this.types });
+    config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
+      typed: true,
+      types: config.types ?? [],
+    });
     return HTMLIdentifierTagsElement.create(config);
   }
 

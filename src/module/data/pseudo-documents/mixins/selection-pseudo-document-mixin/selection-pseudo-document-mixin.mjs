@@ -176,6 +176,14 @@ export default function SelectionPseudoDocumentMixin(Base) {
       return true;
     }
 
+    /** @inheritDoc */
+    _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+      if (path === "localIdentifiers") {
+        inputConfig.suggestions = this._selectionRelativeTo?.previewed.getNames({ filter: d => this._isSelectable(d) });
+      }
+      return super._makeFormGroup(path, groupConfig, inputConfig, config);
+    }
+
     /**
      * Every document this can select from.
      * @param {Teriock.Select.DocumentSelectionConfig} [overrides]

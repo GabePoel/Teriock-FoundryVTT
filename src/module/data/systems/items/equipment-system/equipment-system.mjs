@@ -1,8 +1,8 @@
 import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
+import { equipmentTypeField } from "../../../fields/tools/builders.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import {
   ArmamentSystemMixin,
@@ -20,11 +20,6 @@ import {
 } from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
-
-// TODO: Find some way to safely inherit this from identifiers instead of a pre-defined set of keys.
-// The reason we can't do this is because equipment can be assigned identifiers that will appear in the registry even if
-// they aren't for a mundane equipment type.
-const EQUIPMENT_TYPES = {};
 
 /**
  * Equipment-specific item data model.
@@ -88,19 +83,7 @@ export default class EquipmentSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
-      equipmentType: new IdentifierField({
-        autocomplete: true,
-        blank: true,
-        initial: "",
-        required: false,
-        type: "equipment",
-        suggestions: () => {
-          if (Object.keys(EQUIPMENT_TYPES).length === 0) {
-            Object.assign(EQUIPMENT_TYPES, objectMap(TERIOCK.reference.equipment, undefined, { kebabify: true }));
-          }
-          return EQUIPMENT_TYPES;
-        },
-      }),
+      equipmentType: equipmentTypeField({ blank: true, initial: "", required: false }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
   }

@@ -1,4 +1,5 @@
-import { HTMLAutocompleteInputElement, HTMLIdentifierInputElement } from "../../../applications/elements/_module.mjs";
+import { HTMLIdentifierInputElement } from "../../../applications/elements/_module.mjs";
+import { prepareSuggestions } from "../tools/suggestions.mjs";
 import { validateIdentifier } from "../tools/validators.mjs";
 
 const { StringField } = foundry.data.fields;
@@ -14,7 +15,6 @@ export default class IdentifierField extends StringField {
   /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      autocomplete: false,
       blank: true,
       nullable: true,
       reset: null,
@@ -36,19 +36,13 @@ export default class IdentifierField extends StringField {
    * @param {FormInputConfig & StringFieldInputConfig & StringFieldOptions &  Teriock.Fields._IdentifierFieldOptions} config
    */
   _toInput(config) {
-    config.autocomplete ??= this.autocomplete;
-    config.type ??= this.type;
     config.reset ??= this.reset;
-    config.choices ??= this.choices ?? this.suggestions
-      ?? ((config.autocomplete && config.type) ? game.teriock.identifiers.getNames(config.type) : undefined);
-    if (config.autocomplete && config.choices) {
-      this.constructor._prepareChoiceConfig(config);
-      return HTMLAutocompleteInputElement.create(config);
-    }
-    if (config.reset && !config.type) {
-      this.constructor._prepareChoiceConfig(config);
-      return HTMLIdentifierInputElement.create(config);
-    }
+    config.type ??= this.type;
+    if (config.choices ?? this.choices) { return super._toInput(config); }
+    config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
+      types: config.type ? [config.type] : [],
+    });
+    if (config.reset || config.options) { return HTMLIdentifierInputElement.create(config); }
     return super._toInput(config);
   }
 

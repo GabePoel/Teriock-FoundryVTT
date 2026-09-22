@@ -1,4 +1,3 @@
-import { HTMLIdentifierTagsElement } from "../../../applications/elements/_module.mjs";
 import { omit } from "../../../helpers/utils.mjs";
 import TypedIdentifierField from "../typed-identifier-field/typed-identifier-field.mjs";
 
@@ -17,13 +16,16 @@ export default class TypedIdentifierSetField extends SetField {
    * @param {DataFieldContext} [context]
    */
   constructor(options = {}, context = {}) {
-    const { types } = options;
-    super(new TypedIdentifierField({ single: false, types }), omit(options, ["types"]), context);
+    const { suggestions, types } = options;
+    super(
+      new TypedIdentifierField({ single: false, suggestions, types }),
+      omit(options, ["suggestions", "types"]),
+      context,
+    );
   }
 
   /** @inheritDoc */
   _toInput(config) {
-    Object.assign(config, { single: false, types: this.element.options.types });
-    return HTMLIdentifierTagsElement.create(config);
+    return this.element._toInput(Object.assign(config, { single: false }));
   }
 }

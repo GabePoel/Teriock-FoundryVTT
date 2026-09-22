@@ -5,13 +5,15 @@ import { listFormat } from "../../helpers/localization.mjs";
 import { isKebabCase } from "../../helpers/string.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
+import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
-const { AbstractFormInputElement, HTMLStringTagsElement } = foundry.applications.elements;
+const { HTMLStringTagsElement } = foundry.applications.elements;
 const { fromUuid } = foundry.utils;
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";
  * @import { HTMLDocumentTagsElement } from "@client/applications/elements/_module.mjs";
+ * @import { AutocompleteSuggestionsInputConfig } from "./abstract/abstract-autocomplete-suggestions.mjs";
  */
 
 /**
@@ -29,13 +31,13 @@ const { fromUuid } = foundry.utils;
  * A custom HTMLElement used to render a set of associated documents referenced by identifier.
  * Based on {@link HTMLDocumentTagsElement}.
  */
-export default class HTMLIdentifierTagsElement extends AbstractFormInputElement {
+export default class HTMLIdentifierTagsElement extends AbstractAutocompleteSuggestionsElement {
   /** @inheritDoc */
   static tagName = "identifier-tags";
 
   /**
    * Create a HTMLIdentifierTagsElement using provided configuration data.
-   * @param {FormInputConfig & IdentifierTagsInputConfig} config
+   * @param {FormInputConfig & IdentifierTagsInputConfig & AutocompleteSuggestionsInputConfig} config
    * @returns {HTMLIdentifierTagsElement}
    */
   static create(config) {
@@ -50,6 +52,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     tags.types = config.types;
     tags.single = config.single;
     foundry.applications.fields.setInputAttributes(tags, config);
+    this._appendSuggestions(tags, config.options);
     return tags;
   }
 
@@ -269,6 +272,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /** @inheritDoc */
   _activateListeners() {
+    super._activateListeners();
     this.#button.addEventListener("click", () => this.#tryAdd(this.#input.value));
     this.#tags.addEventListener("click", this.#onClickTag.bind(this));
     this.#input.addEventListener("keydown", this.#onKeydown.bind(this));
@@ -309,10 +313,11 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    * @param {string[]} [values] - An array of identifiers to initialize the element with.
    */
   _initializeTags(values) {
+    const textNodes = [...this.childNodes].filter(n => n.nodeType === Node.TEXT_NODE);
     let tags = [];
     if (Array.isArray(values)) { tags = values; }
     else {
-      const initial = this.getAttribute("value") || this.textContent || "";
+      const initial = this.getAttribute("value") || textNodes.map(n => n.textContent).join("") || "";
       if (initial) { tags = initial.split(","); }
     }
     for (const t of tags) {
@@ -324,8 +329,13 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
         this._value[identifier] = `${identifier} [INVALID]`;
       }
     }
-    this.textContent = "";
+    for (const n of textNodes) { n.remove(); }
     this.removeAttribute("value");
+  }
+
+  /** @inheritDoc */
+  _onSelectSuggestion(identifier) {
+    this.#tryAdd(identifier);
   }
 
   /** @inheritDoc */
@@ -355,6 +365,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /** @inheritDoc */
   _toggleDisabled(disabled) {
+    super._toggleDisabled(disabled);
     this.#input.disabled = disabled;
     this.#button.disabled = disabled;
   }

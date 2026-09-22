@@ -23,7 +23,11 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
         required: true,
         type: "archetype",
       }),
-      ranks: new TypedIdentifierSetField({ label: "TERIOCK.DOCUMENTS.rank.plural" }),
+      ranks: new TypedIdentifierSetField({
+        label: "TERIOCK.DOCUMENTS.rank.plural",
+        suggestions: true,
+        types: ["rank"],
+      }),
     });
   }
 

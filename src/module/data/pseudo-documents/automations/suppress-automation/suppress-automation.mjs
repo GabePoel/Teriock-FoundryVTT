@@ -18,4 +18,12 @@ export default class SuppressAutomation extends BaseAutomation {
   get _formPaths() {
     return ["identifier"];
   }
+
+  /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (path === "identifier") {
+      inputConfig.suggestions = this.actor?.previewed.getNames({ filter: d => !d.system?.isBasic });
+    }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  }
 }

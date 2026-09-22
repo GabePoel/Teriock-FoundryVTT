@@ -1,6 +1,6 @@
 import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../../helpers/icon.mjs";
-import { IdentifierField } from "../../../../../fields/_module.mjs";
+import { equipmentTypeField } from "../../../../../fields/tools/builders.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -39,7 +39,7 @@ export default function EquipmentWieldingPart(Base) {
             required: true,
           }),
           enabled: initialBoolean(),
-          type: new IdentifierField({ type: "equipment" }),
+          type: equipmentTypeField(),
         }),
         equipped: new fields.BooleanField({ initial: false }),
         glued: initialBoolean(),

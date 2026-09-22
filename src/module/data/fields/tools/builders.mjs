@@ -64,6 +64,16 @@ function getClassChoices() {
 }
 
 /**
+ * Lazily build identifier suggestions from a localized reference index.
+ * @param {string} key - Key in `TERIOCK.reference`
+ * @returns {() => Record<Identifier, string>}
+ */
+function referenceSuggestions(key) {
+  let cache;
+  return () => cache ??= objectMap(TERIOCK.reference[key], undefined, { kebabify: true });
+}
+
+/**
  * A change type field.
  * @param {Teriock.Changes.Type[]} [types] - Restricts the choices to this subset of change types.
  * @returns {StringField}
@@ -432,6 +442,24 @@ export function classField(options = {}) {
     type: "class",
     ...options,
   });
+}
+
+/**
+ * Field for a damage type with reference-based suggestions.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function damageTypeField(options = {}) {
+  return new IdentifierField({ suggestions: referenceSuggestions("damageTypes"), type: "damage", ...options });
+}
+
+/**
+ * Field for an equipment type with reference-based suggestions.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function equipmentTypeField(options = {}) {
+  return new IdentifierField({ suggestions: referenceSuggestions("equipment"), type: "equipment", ...options });
 }
 
 /**

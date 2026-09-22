@@ -108,11 +108,7 @@ export default class TypeCollection extends Collection {
    * @todo Add caching.
    */
   get identifiers() {
-    return new Set(
-      this.contents.filter(d => d?.type && foundry.utils.getProperty(d, "system.identifier")).map(d =>
-        `${d?.type}:${d?.system?.identifier}`
-      ),
-    );
+    return new Set(Object.keys(this.getNames()));
   }
 
   /**
@@ -205,6 +201,22 @@ export default class TypeCollection extends Collection {
    */
   async getDocument(key) {
     return foundry.utils.fromUuid(this.get(key)?.uuid);
+  }
+
+  /**
+   * Names of the identifiers in this collection. This is useful for displaying options in menus.
+   * @param {object} [options]
+   * @param {(document: TDocument) => boolean} [options.filter] - Only include documents that pass this filter.
+   * @returns {Record<TypedIdentifier, string>}
+   */
+  getNames({ filter } = {}) {
+    const names = {};
+    for (const d of this.contents) {
+      if (filter && !filter(d)) { continue; }
+      const identifier = foundry.utils.getProperty(d, "system.identifier");
+      if (d?.type && identifier) { names[`${d.type}:${identifier}`] = d.name; }
+    }
+    return names;
   }
 
   /**

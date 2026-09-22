@@ -1,12 +1,13 @@
 import { icons } from "../../constants/display/_module.mjs";
 import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
+import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
-const { AbstractFormInputElement } = foundry.applications.elements;
 const { setInputAttributes } = foundry.applications.fields;
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";
+ * @import { AutocompleteSuggestionsInputConfig } from "./abstract/abstract-autocomplete-suggestions.mjs";
  */
 
 /**
@@ -16,15 +17,14 @@ const { setInputAttributes } = foundry.applications.fields;
 
 /**
  * A text input for plain identifiers with an optional reset button.
- * Used by {@link IdentifierField} when `reset` is configured.
  */
-export default class HTMLIdentifierInputElement extends AbstractFormInputElement {
+export default class HTMLIdentifierInputElement extends AbstractAutocompleteSuggestionsElement {
   /** @inheritDoc */
   static tagName = "identifier-input";
 
   /**
    * Create an HTMLIdentifierInputElement using provided configuration data.
-   * @param {FormInputConfig<string> & IdentifierInputConfig} config
+   * @param {FormInputConfig<string> & IdentifierInputConfig & AutocompleteSuggestionsInputConfig} config
    * @returns {HTMLIdentifierInputElement}
    */
   static create(config) {
@@ -32,14 +32,15 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
     if (config.reset) { el.setAttribute("reset", config.reset); }
     if (config.value != null) { el.setAttribute("value", String(config.value)); }
     setInputAttributes(el, config);
+    this._appendSuggestions(el, config.options);
     return el;
   }
 
   /**
    * The reset button element.
-   * @type {HTMLButtonElement}
+   * @type {HTMLButtonElement|null}
    */
-  #resetButton;
+  #resetButton = null;
 
   /**
    * Reset the identifier to the configured default value.
@@ -53,7 +54,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
 
   /**
    * The identifier applied when the reset button is clicked.
-   * @return {string|null}
+   * @return {Identifier|null}
    */
   get reset() {
     return this.getAttribute("reset");
@@ -61,7 +62,8 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
 
   /** @inheritDoc */
   _activateListeners() {
-    this.#resetButton.addEventListener("click", this.#onReset.bind(this));
+    super._activateListeners();
+    this.#resetButton?.addEventListener("click", this.#onReset.bind(this));
     this._primaryInput.addEventListener("change", event => {
       event.stopPropagation();
       this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
@@ -72,14 +74,17 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
   _buildElements() {
     this._primaryInput = createElement("input", { placeholder: this.getAttribute("placeholder"), type: "text" });
     this._applyInputAttributes(this._primaryInput);
-    this.#resetButton = createElement("button", {
-      ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
-      className: `icon ${makeIconClass(icons.manifest.ui.reset, "button")}`,
-      dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
-      type: "button",
-    });
     const group = createElement("div", { className: "input-group" });
-    group.append(this._primaryInput, this.#resetButton);
+    group.append(this._primaryInput);
+    if (this.reset) {
+      this.#resetButton = createElement("button", {
+        ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
+        className: `icon ${makeIconClass(icons.manifest.ui.reset, "button")}`,
+        dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
+        type: "button",
+      });
+      group.append(this.#resetButton);
+    }
     return [group];
   }
 
@@ -103,7 +108,8 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
 
   /** @inheritDoc */
   _toggleDisabled(disabled) {
+    super._toggleDisabled(disabled);
     this._primaryInput.disabled = disabled;
-    this.#resetButton.disabled = disabled;
+    if (this.#resetButton) { this.#resetButton.disabled = disabled; }
   }
 }

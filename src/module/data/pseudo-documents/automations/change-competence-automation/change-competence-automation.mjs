@@ -25,4 +25,12 @@ export default class ChangeCompetenceAutomation
   get _formPaths() {
     return ["identifier", "competence.raw"];
   }
+
+  /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (path === "identifier") {
+      inputConfig.suggestions = this.actor?.previewed.getNames({ filter: d => !d.system?.isBasic });
+    }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  }
 }
