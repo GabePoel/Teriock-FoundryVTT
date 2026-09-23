@@ -69,17 +69,17 @@
   }
 }
 
-.instructions-display-field {
-  @include notification-display-field("\f05a", var(--color-level-info-bg), var(--color-level-info-border));
-}
-
-.gm-notes-display-field {
-  @include notification-display-field("\f521", rgba(111, 47, 132, 0.8), #a25cb9);
-}
-
 .theme-light .instructions-display-field,
 .theme-light .gm-notes-display-field {
   border-color: var(--color-cool-5-25);
+}
+
+.instructions-display-field, .theme-dark .instructions-display-field {
+  @include notification-display-field("\f05a", var(--color-level-info-bg), var(--color-level-info-border));
+}
+
+.gm-notes-display-field, .theme-dark .gm-notes-display-field {
+  @include notification-display-field("\f521", rgba(111, 47, 132, 0.8), #a25cb9);
 }
 
 .teriock-panel .instructions-display-field,
