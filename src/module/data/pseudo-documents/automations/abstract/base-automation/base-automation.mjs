@@ -1,4 +1,5 @@
 import { mergeMetadata } from "../../../../../helpers/construction.mjs";
+import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import MechanicPseudoDocument from "../../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
 
 const { fields } = foundry.data;
@@ -38,6 +39,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
 
   /** @inheritDoc */
   static migrateData(source, options) {
+    migrateThumbnails(source, "img", "ringImg");
     if ("selectInExecution" in source) {
       source.interactInExecution ||= source.selectInExecution;
       delete source.selectInExecution;

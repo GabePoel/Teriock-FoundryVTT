@@ -4,6 +4,7 @@ import { createElement } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { associationsField, blocksField, nullStringField } from "../../fields/tools/builders.mjs";
+import { migrateThumbnails } from "../../fields/tools/migrations.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -92,6 +93,17 @@ export default class Panel extends BasePseudoDocument {
         { initial: [], required: false },
       ),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateThumbnails(source, "img");
+    for (const a of source?.associations ?? []) {
+      for (const c of a?.cards ?? []) {
+        migrateThumbnails(c, "img");
+      }
+    }
+    return super.migrateData(source, options);
   }
 
   /**

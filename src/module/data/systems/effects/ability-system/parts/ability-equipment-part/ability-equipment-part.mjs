@@ -1,7 +1,6 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
 import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../../helpers/icon.mjs";
-import { getImage } from "../../../../../../helpers/path.mjs";
 import { fromIdentifier, getName } from "../../../../../../helpers/utils.mjs";
 import { initialText } from "../../../../../fields/tools/initializers.mjs";
 
@@ -143,8 +142,9 @@ export default function AbilityEquipmentPart(Base) {
       let img;
       if (equipmentType.toLowerCase() === "scroll") {
         if (this.elements.size === 1) {
-          img = getImage("consumables", `${this.elements.first().titleCase()} Spell Scroll`);
-        } else { img = TERIOCK.display.images.manifest.consumables.celestialSpellScroll; }
+          img = TERIOCK.display.images.manifest.consumable[`${this.elements.first()}SpellScroll`];
+        }
+        img ??= TERIOCK.display.images.manifest.consumable.celestialSpellScroll;
       }
       const effects = [this.parent.toObject()];
       effects[0].system.grantUse = true;

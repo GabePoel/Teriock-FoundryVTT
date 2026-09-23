@@ -1,3 +1,4 @@
+import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
@@ -15,6 +16,12 @@ const { TokenDocument } = foundry.documents;
  * @mixes EmbeddableData
  */
 export default class TeriockTokenDocument extends mixClasses(TokenDocument, BaseDocumentMixin, EmbeddableDataMixin) {
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateThumbnails(source, "texture.src", "ring.subject.texture");
+    return super.migrateData(source, options);
+  }
+
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, {

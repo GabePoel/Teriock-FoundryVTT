@@ -9,16 +9,13 @@ export default class StoneSystem extends BaseCardsSystem {
     const copy = foundry.utils.deepClone(data);
     this.parent.updateSource(
       foundry.utils.mergeObject({
-        back: {
-          img: TERIOCK.display.images.manifest.deathBagStones.unknown,
-          name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
-        },
+        back: { img: TERIOCK.display.images.manifest.stone.unknown, name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.back") },
       }, data),
     );
     if (!foundry.utils.hasProperty(copy, "faces") || Object.keys(copy.faces[0]).length === 0) {
       this.parent.updateSource({
         faces: [{
-          img: TERIOCK.display.images.manifest.deathBagStones.brown,
+          img: TERIOCK.display.images.manifest.stone.brown,
           name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.faces"),
         }],
       });

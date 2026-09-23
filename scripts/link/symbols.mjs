@@ -7,8 +7,8 @@ const VARIANT = "MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D";
 const BASE = `https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/${VARIANT}`;
 const CODEPOINTS_SRC = `${BASE}.codepoints`;
 const FONT_SRC = `${BASE}.ttf`;
-const CSS_DST = "./src/assets/icon-classes/css/material-symbols.css";
-const FONT_DST = "./src/assets/icon-classes/fonts/material-symbols-rounded.ttf";
+const CSS_DST = "./src/assets/icons/css/material-symbols.css";
+const FONT_DST = "./src/assets/icons/fonts/material-symbols-rounded.ttf";
 
 console.log("Downloading Material Symbols codepoints and font...");
 const [codepointsResponse, fontResponse] = await Promise.all([fetch(CODEPOINTS_SRC), fetch(FONT_SRC)]);

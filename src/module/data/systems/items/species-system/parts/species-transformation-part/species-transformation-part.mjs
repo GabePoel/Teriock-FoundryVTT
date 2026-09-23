@@ -1,6 +1,7 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
+import { migrateThumbnails } from "../../../../../fields/tools/migrations.mjs";
 import { speciesTransformationFields } from "../../../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
@@ -36,6 +37,12 @@ export default function SpeciesTransformationPart(Base) {
       return Object.assign(super.defineSchema(), {
         transformation: new fields.SchemaField(speciesTransformationFields()),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateThumbnails(source, "transformation.img", "transformation.ringImg");
+      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */

@@ -1,3 +1,4 @@
+import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
@@ -124,6 +125,12 @@ export default function BaseDocumentMixin(Base) {
         return docs;
       }
       return super.deleteDocuments(ids, operation);
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateThumbnails(source, "img", "system.img");
+      return super.migrateData(source, options);
     }
 
     /**

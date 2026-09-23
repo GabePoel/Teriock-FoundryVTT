@@ -5,7 +5,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.f8d81hPrvcUtCUbr"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.bc223260c6f1bc70
-    img: systems/teriock/src/icons/abilities/acidic-blood.webp
+    img: systems/teriock/src/assets/thumbnails/ability/acidic-blood.webp
     name: Acidic Blood
     system:
       competence:
@@ -37,7 +37,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.EiwP2wIPnWzIOZbM"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f6aa56d2e5c27c4
-    img: systems/teriock/src/icons/abilities/advanced-smell.webp
+    img: systems/teriock/src/assets/thumbnails/ability/advanced-smell.webp
     name: Advanced Smell
     system:
       competence:
@@ -123,7 +123,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.n6fXZOI5hdg3Nbkf"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
-    img: systems/teriock/src/icons/abilities/dark-vision.webp
+    img: systems/teriock/src/assets/thumbnails/ability/dark-vision.webp
     name: Dark Vision
     system:
       automations:
@@ -161,7 +161,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.T7VFJWtgXPtHyv57"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.b231c43502dd9d39
-    img: systems/teriock/src/icons/abilities/death-ray.webp
+    img: systems/teriock/src/assets/thumbnails/ability/death-ray.webp
     name: Death Ray
     system:
       automations:
@@ -203,7 +203,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.NSyV6MGK6ZApoaiR"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f927c5a43cc3b312
-    img: systems/teriock/src/icons/abilities/devour.webp
+    img: systems/teriock/src/assets/thumbnails/ability/devour.webp
     name: Devour
     system:
       competence:
@@ -257,7 +257,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.yOvqioHR8gByRmTm"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    img: systems/teriock/src/assets/thumbnails/ability/normal-sneak.webp
     name: Normal Sneak
     system:
       competence:
@@ -333,14 +333,72 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.Mt7rDHwiZq0hPG7m"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2e92597058dd0b95
-    img: systems/teriock/src/icons/abilities/resist-effects.webp
+    img: systems/teriock/src/assets/thumbnails/ability/resist-effects.webp
     name: Resist Effects
     system:
       automations:
-        - _id: 63c7106d02025d43
+        - _id: AZhAw4nT080vlUvR
+          attachToEffect: false
+          constructionNodes:
+            64a3fcb18ba4360f:
+              _id: 64a3fcb18ba4360f
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers: []
+              globalUuids:
+                - Compendium.teriock.templateEffects.Folder.rzIJdMo1QTQX7YW1
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: false
+              name: ""
+              overrideData: false
+              parentId: null
+              setCompetence: inherit
+              type: base
+          display:
+            label: ""
+          heighten:
+            - 0
           interactInExecution: true
-          primaryMacro: Compendium.teriock.execution.Macro.989bee0dce350480
-          type: macro
+          type: addDocuments
+        - _id: SxOGWyI0nvOW6aWG
+          attachToEffect: false
+          constructionNodes:
+            64a3fcb18ba4360f:
+              _id: 64a3fcb18ba4360f
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: "{}"
+              globalIdentifiers: []
+              globalUuids:
+                - Compendium.teriock.templateEffects.Folder.rzIJdMo1QTQX7YW1
+              localIdentifiers: []
+              localQualifier: ""
+              localUuids: []
+              multi: true
+              name: ""
+              overrideData: false
+              parentId: null
+              setCompetence: inherit
+              type: base
+          display:
+            label: ""
+          heighten:
+            - 1
+          interactInExecution: true
+          type: addDocuments
+        - _id: X0jz8CbzTj5jz414
+          display:
+            label: ""
+          makeEffect: false
+          rollBonus: ""
+          type: override
       competence:
         raw: 1
       costs:
@@ -356,6 +414,9 @@ effects:
         - resistance
       elements:
         - storm
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may pick one additional
+        @Wiki[Category:Effects]{effect type} to @Identifier[keyword:resistance]{resist}.</p>
       identifier: resist-effects
       interaction: manifest
       kind: special
@@ -363,7 +424,7 @@ effects:
         base: >-
           <p>Pick one of the following @Wiki[Category:Effects]{effect types}. You
           @Identifier[keyword:resistance]{resist} @Wiki[Category:Effects]{effects} of that
-          type.</p><ol><li>@Wiki[Category:Awakening effects]{Awakening effects}</li><li>@Wiki[Category:Control
+          type.</p><div><ol><li>@Wiki[Category:Awakening effects]{Awakening effects}</li><li>@Wiki[Category:Control
           effects]{Control effects}</li><li>@Wiki[Category:Displacement effects]{Displacement
           effects}</li><li>@Wiki[Category:Duel modifying effects]{Duel modifying
           effects}</li><li>@Wiki[Category:Financial effects]{Financial effects}</li><li>@Wiki[Category:Healing
@@ -376,7 +437,7 @@ effects:
           effects]{Stealing effects}</li><li>@Wiki[Category:Summoning effects]{Summoning
           effects}</li><li>@Wiki[Category:Temporal effects]{Temporal effects}</li><li>@Wiki[Category:Transformation
           effects]{Transformation effects}</li><li>@Wiki[Category:Truth detecting effects]{Truth detecting
-          effects}</li></ol>
+          effects}</li></ol></div>
       powerSources:
         - magical
       range:
@@ -392,7 +453,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.guE4odZu1MEfjUYl"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.919e1424f589c498
-    img: systems/teriock/src/icons/abilities/slow.webp
+    img: systems/teriock/src/assets/thumbnails/ability/slow.webp
     name: Slow
     system:
       competence:
@@ -421,7 +482,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.e4GNf32WqSCTE9a0"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1a9a7ab79b2dc14
-    img: systems/teriock/src/icons/abilities/tiny-strength.webp
+    img: systems/teriock/src/assets/thumbnails/ability/tiny-strength.webp
     name: Tiny Strength
     system:
       competence:
@@ -450,7 +511,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.XmoQWfFoorfr9nBf"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.be49083356b0f9c7
-    img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+    img: systems/teriock/src/assets/thumbnails/ability/unconsciousness-immunity.webp
     name: Unconsciousness Immunity
     system:
       affinities:
@@ -485,7 +546,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.fF719KyDCt7vCNCG"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.be255d05a54f0291
-    img: systems/teriock/src/icons/abilities/vitals-durability.webp
+    img: systems/teriock/src/assets/thumbnails/ability/vitals-durability.webp
     name: Vitals Durability
     system:
       affinities:
@@ -524,7 +585,7 @@ effects:
     _key: "!items.effects!42fa9e1ae5f2f418.08JAYTPgZWGeiTix"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
-    img: systems/teriock/src/icons/abilities/scent-seeing.webp
+    img: systems/teriock/src/assets/thumbnails/ability/scent-seeing.webp
     name: Scent Seeing
     system:
       _sup: EiwP2wIPnWzIOZbM
@@ -566,7 +627,7 @@ effects:
       standard: true
     type: ability
 folder: 706f39d8fea214c5
-img: systems/teriock/src/icons/creatures/tiny-black-slime.webp
+img: systems/teriock/src/assets/thumbnails/creature/tiny-black-slime.webp
 name: Tiny Black Slime
 system:
   appearance: <p>A pool of thick opaque black liquid.</p>
@@ -583,7 +644,7 @@ system:
   traits:
     - ooze
   transformation:
-    img: systems/teriock/src/icons/creatures/tiny-black-slime.webp
+    img: systems/teriock/src/assets/thumbnails/creature/tiny-black-slime.webp
     ring: true
-    ringImg: systems/teriock/src/icons/tokens/tiny-black-slime.webp
+    ringImg: systems/teriock/src/assets/thumbnails/token/tiny-black-slime.webp
 type: species

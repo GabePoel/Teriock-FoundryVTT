@@ -51,7 +51,7 @@ export default class BasePageSystem
     if (yes === false) { return false; }
 
     this.parent.updateSource(
-      foundry.utils.mergeObject({ system: { img: systemPath(`icons/documents/${this.parent.type}.svg`) } }),
+      foundry.utils.mergeObject({ system: { img: systemPath(`assets/thumbnails/document/${this.parent.type}.svg`) } }),
       data,
     );
   }

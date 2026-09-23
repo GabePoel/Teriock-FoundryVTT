@@ -4,6 +4,7 @@
 export { default as abilities } from "../../json/index/abilities.json" with { type: "json" };
 export { default as bodyParts } from "../../json/index/body-parts.json" with { type: "json" };
 export { default as classes } from "../../json/index/classes.json" with { type: "json" };
+export { default as conditions } from "../../json/index/conditions.json" with { type: "json" };
 export { default as coreRules } from "../../json/index/core-rules.json" with { type: "json" };
 export { default as creatures } from "../../json/index/creatures.json" with { type: "json" };
 export { default as damageTypes } from "../../json/index/damage-types.json" with { type: "json" };

@@ -1,0 +1,43 @@
+The webp thumbnails in this directory and its subdirectories are licensed from [CraftPix](https://craftpix.net/),
+[Wenrexa](https://www.wenrexa.com/),
+[Poneti](https://poneti.artstation.com/), and Rexard.
+
+The thumbnails in [`./document`]() and [`./hold`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).
+Links to the original pages with the authors can be found below.
+
+- [`./documents/ability.svg`](https://game-icons.net/1x1/delapouite/sparkles.html)
+- [`./documents/archetype.svg`](https://game-icons.net/1x1/delapouite/star-altar.html)
+- [`./documents/attunement.svg`](https://game-icons.net/1x1/lorc/high-five.html)
+- [`./documents/body.svg`](https://game-icons.net/1x1/lorc/ribcage.html)
+- [`./documents/chest.svg`](https://game-icons.net/1x1/delapouite/chest.html)
+- [`./documents/class.svg`](https://game-icons.net/1x1/delapouite/skills.html)
+- [`./documents/condition.svg`](https://game-icons.net/1x1/lorc/fleshy-mass.html)
+- [`./documents/consequence.svg`](https://game-icons.net/1x1/lorc/ball-glow.html)
+- [`./documents/cover.svg`](https://game-icons.net/1x1/delapouite/forest.html)
+- [`./documents/creature.svg`](https://game-icons.net/1x1/caro-asercion/barn-owl.html)
+- [`./documents/damage.svg`](https://game-icons.net/1x1/delapouite/heart-stake.html)
+- [`./documents/drain.svg`](https://game-icons.net/1x1/lorc/droplets.html)
+- [`./documents/effect.svg`](https://game-icons.net/1x1/lorc/embrassed-energy.html)
+- [`./documents/equipment.svg`](https://game-icons.net/1x1/delapouite/chest.html)
+- [`./documents/fluency.svg`](https://game-icons.net/1x1/delapouite/freemasonry.html)
+- [`./documents/hack.svg`](https://game-icons.net/1x1/lorc/broken-bone.html)
+- [`./documents/imbuement.svg`](https://game-icons.net/1x1/delapouite/mesh-network.html)
+- [`./documents/inventory.svg`](https://game-icons.net/1x1/delapouite/backpack.html)
+- [`./documents/mount.svg`](https://game-icons.net/1x1/skoll/mounted-knight.html)
+- [`./documents/power.svg`](https://game-icons.net/1x1/lorc/aura.html)
+- [`./documents/property.svg`](https://game-icons.net/1x1/lorc/atomic-slashes.html)
+- [`./documents/rank.svg`](https://game-icons.net/1x1/delapouite/ribbon-medal.html)
+- [`./documents/resource.svg`](https://game-icons.net/1x1/delapouite/convergence-target.html)
+- [`./documents/rule.svg`](https://game-icons.net/1x1/lorc/scroll-unfurled.html)
+- [`./documents/species.svg`](https://game-icons.net/1x1/lorc/dna1.html)
+- [`./documents/style.svg`](https://game-icons.net/1x1/lorc/crossed-swords.html)
+- [`./documents/tradecraft.svg`](https://game-icons.net/1x1/delapouite/swiss-army-knife.html)
+- [`./documents/uncertainty.svg`](https://game-icons.net/1x1/lorc/uncertainty.html)
+- [`./hold/anchor.svg`](https://game-icons.net/1x1/lorc/anchor.html)
+- [`./hold/compass.svg`](https://game-icons.net/1x1/lorc/compass.html)
+- [`./hold/crab.svg`](https://game-icons.net/1x1/lorc/crab.html)
+- [`./hold/crown-coin.svg`](https://game-icons.net/1x1/lorc/crown-coin.html)
+- [`./hold/ship-wheel.svg`](https://game-icons.net/1x1/delapouite/ship-wheel.html)
+- [`./hold/shooner-sailboat.svg`](https://game-icons.net/1x1/pierre-leducq/shooner-sailboat.html)
+- [`./hold/spider-alt.svg`](https://game-icons.net/1x1/carl-olsen/spider-alt.html)
+- [`./hold/treasure-map.svg`](https://game-icons.net/1x1/lorc/treasure-map.html)

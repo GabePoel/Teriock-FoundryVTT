@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { getImage } from "../../../../helpers/path.mjs";
 import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../mixins/_module.mjs";
 import { CommonSheetMixin, InventoryManagementSheetMixin } from "../../mixins/_module.mjs";
@@ -41,9 +40,6 @@ export default class BaseActorSheet
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     return Object.assign(await super._prepareContext(options), {
-      currencyImages: Object.fromEntries(
-        [...Object.keys(TERIOCK.config.currency), "debt"].map(id => [id, getImage("currency", id)]),
-      ),
       enrichedNotes: await this._enrich(this.document.system.notes),
       enrichedStyleDescription: await this._enrich(this.document.system.wielding.attacker?.system?.styleDescription),
     });

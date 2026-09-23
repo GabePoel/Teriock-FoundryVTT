@@ -1,3 +1,4 @@
+import { migrateThumbnails } from "../../../data/fields/tools/migrations.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
@@ -49,7 +50,7 @@ export default class BaseRoll extends Roll {
     }
     return {
       actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || systemPath("icons/documents/character.svg"),
+      img: img || target?.img || systemPath("assets/thumbnails/document/character.svg"),
       name: name || target?.name,
       tokenUuid: token?.uuid || target.tokenUuid,
     };
@@ -172,6 +173,9 @@ export default class BaseRoll extends Roll {
     options.targets = options.targets.map(t => BaseRoll.#parseTarget(t));
     super(formula, data, options);
     this.id = foundry.utils.randomID();
+    for (const t of foundry.utils.getProperty(this, "options.targets") ?? []) {
+      migrateThumbnails(t, "img");
+    }
   }
 
   /** `

@@ -1,4 +1,5 @@
 import { config } from "../../constants/_module.mjs";
+import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { TriggerExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
@@ -89,6 +90,12 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   static getSizeConfig(size) {
     const minCategoryMaxSize = Math.min(...config.character.sizes.map(d => d.max).filter(m => m >= size));
     return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateThumbnails(source, "prototypeToken.texture.src", "prototypeToken.ring.subject.texture");
+    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */
@@ -470,7 +477,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
         panels: [{
           associations,
           icon,
-          img: document?.img || TERIOCK.display.images.manifest.coreRules.difficultyClass,
+          img: document?.img || TERIOCK.display.images.manifest.core.difficultyClass,
           name: _loc(panelKey, { label }),
         }],
         source: document?.uuid ?? this.uuid,

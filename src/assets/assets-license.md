@@ -4,9 +4,9 @@ The images in [`./items`](./items) were drawn by Christopher Melville. The [FanW
 
 # Icons
 
-The [Material Design Icons](./icon-classes/fonts/material-design-icons.woff2) are from [Pictogrammers](https://pictogrammers.com/) and are distributed under [Apache License 2.0](https://pictogrammers.com/docs/general/license/#user-content-fn-1).
+The [Material Design Icons](./icons/fonts/material-design-icons.woff2) are from [Pictogrammers](https://pictogrammers.com/) and are distributed under [Apache License 2.0](https://pictogrammers.com/docs/general/license/#user-content-fn-1).
 
-The [Material Symbols](./icon-classes/fonts/material-symbols-rounded.ttf) are from [Google](https://fonts.google.com/icons) and are distributed under [Apache License 2.0](https://pictogrammers.com/docs/general/license/#user-content-fn-1).
+The [Material Symbols](./icons/fonts/material-symbols-rounded.ttf) are from [Google](https://fonts.google.com/icons) and are distributed under [Apache License 2.0](https://pictogrammers.com/docs/general/license/#user-content-fn-1).
 
 # Fonts
 

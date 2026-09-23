@@ -2,8 +2,8 @@
   <div class="money-panels tgrid g3">
     {{#each TERIOCK.config.currency as |currency id|}}
       <div class="money-panel-container">
-        <div class="money-icon tcenter timage" data-src="{{lookup @root/currencyImages id}}">
-          <img src="{{lookup @root/currencyImages id}}" data-openable="true" alt="" loading="lazy" />
+        <div class="money-icon tcenter timage" data-src='{{path @root/TERIOCK.config.currency id "img"}}'>
+          <img src='{{path @root/TERIOCK.config.currency id "img"}}' data-openable="true" alt="" loading="lazy" />
         </div>
         <div class="money-panel tgrid g4">
           {{formInput
@@ -28,7 +28,12 @@
     {{/each}}
     <div class="money-panel-container">
       <div class="money-icon tcenter timage" data-src="{{ currencyImages.debt }}">
-        <img src="{{ currencyImages.debt }}" data-openable="true" alt="" loading="lazy" />
+        <img
+          src="{{ @root/TERIOCK.display.images.manifest.currency.debt }}"
+          data-openable="true"
+          alt=""
+          loading="lazy"
+        />
       </div>
       <div class="money-panel tgrid g4">
         {{formInput

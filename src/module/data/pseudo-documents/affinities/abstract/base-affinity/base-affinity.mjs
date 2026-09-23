@@ -1,10 +1,10 @@
 import { icons } from "../../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../helpers/icon.mjs";
-import { getImage } from "../../../../../helpers/path.mjs";
-import { dotJoin, toKebabCase } from "../../../../../helpers/string.mjs";
+import { dotJoin, toCamelCase, toKebabCase } from "../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../../fields/_module.mjs";
+import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
 
@@ -64,6 +64,7 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   static migrateData(source, options) {
+    migrateThumbnails(source, "img");
     if (source.category === "statuses") { source.category = "conditions"; }
     if ("value" in source) {
       if (source.category === "other") { source.name ??= source.value; }
@@ -91,11 +92,9 @@ export default class BaseAffinity
   get _defaultImg() {
     const fallback = this.getNearestDocument()?.img ?? this._typeConfig?.img;
     if (this.category === "other") { return fallback; }
-    const identifierImg = this._categoryConfig?.suggestions === "registry"
-      ? game.teriock.identifiers.getImg(this.targetIdentifier)
-      : undefined;
-    return identifierImg
-      ?? getImage(TERIOCK.config.affinity.categories[this.category]?.imgCategory, this.identifier, fallback);
+    return game.teriock.identifiers.getImg(this.targetIdentifier)
+      ?? TERIOCK.display.images.manifest[this._categoryConfig?.imgCategory]?.[toCamelCase(this.identifier)]
+      ?? fallback;
   }
 
   /**
@@ -104,10 +103,8 @@ export default class BaseAffinity
    */
   get _defaultName() {
     if (this.category === "other") { return ""; }
-    const identifierName = this._categoryConfig?.suggestions === "registry"
-      ? game.teriock.identifiers.getName(this.targetIdentifier)
-      : undefined;
-    return identifierName || this._suggestions[this.identifier] || this.identifier;
+    return game.teriock.identifiers.getName(this.targetIdentifier) || this._suggestions[this.identifier]
+      || this.identifier || "";
   }
 
   /**
@@ -308,7 +305,10 @@ export default class BaseAffinity
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.name) { this.name = this._defaultName; }
-    if (!this.img) { this.img = this._defaultImg; }
+    // Doing this before identifiers are initialized means name/img lookups can be broken.
+    game.teriock.identifiers.initializing.then(() => {
+      this.name ||= this._defaultName;
+      this.img ||= this._defaultImg;
+    });
   }
 }

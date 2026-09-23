@@ -1,5 +1,5 @@
 import { addTypesToFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { getImage, systemPath } from "../../../helpers/path.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 import { getName } from "../../../helpers/utils.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
@@ -77,15 +77,14 @@ export default class EquipmentExecution extends ArmamentExecution {
   /** @inheritDoc */
   async _buildSourcePanel() {
     if (this.secret) {
+      const referenceEquipment = await teriock.fromIdentifier(this.source.system.equipmentType);
+      if (referenceEquipment) { return await referenceEquipment.getPanelParts(); }
       return {
         blocks: [],
         icon: TERIOCK.config.document.equipment.icon,
-        img: getImage(
-          "equipment",
-          this.source.system._source.equipmentType,
-          systemPath("icons/documents/equipment.svg"),
-        ),
-        name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown", { type: getName(this.source.system.equipmentType) }),
+        img: game.teriock.identifiers.getImg(this.source.system.equipmentType)
+          ?? systemPath("assets/thumbnails/document/equipment.svg"),
+        name: getName(this.source.system.equipmentType),
       };
     }
     return super._buildSourcePanel();

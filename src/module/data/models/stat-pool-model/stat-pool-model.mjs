@@ -128,7 +128,7 @@ export default class StatPoolModel extends BaseDataModel {
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
         icon: TERIOCK.display.icons.manifest.effect.awaken,
-        img: TERIOCK.display.images.manifest.effectTypes.awakening,
+        img: TERIOCK.display.images.manifest.effect.awakening,
         name: _loc("TERIOCK.EFFECTS.Common.awaken"),
       });
     }

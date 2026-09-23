@@ -35,7 +35,7 @@ export default function CommonDocumentMixin(Base) {
      */
     static getDefaultImageForType(type) {
       if (type && TERIOCK.config.document[type]?.documentName === this.documentName) {
-        return systemPath(`icons/documents/${type}.svg`);
+        return systemPath(`assets/thumbnails/document/${type}.svg`);
       }
     }
 
