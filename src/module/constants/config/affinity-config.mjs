@@ -1,97 +1,69 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { colors, images } from "../display/_module.mjs";
 
+// TODO: Migrate everything to registry.
 export default {
   categories: {
     abilities: {
-      choices: "reference.abilities",
-      format: "kebab",
       imgCategory: "abilities",
       label: "TYPES.ActiveEffect.ability",
+      suggestions: "registry",
       type: "ability",
     },
-    bodyParts: {
-      choices: "reference.bodyParts",
-      format: "kebab",
-      imgCategory: "bodyParts",
-      label: "TYPES.Item.body",
-      type: "body",
-    },
-    classes: {
-      choices: "reference.classes",
-      format: "kebab",
-      imgCategory: "classes",
-      label: "TYPES.JournalEntryPage.class",
-      type: "class",
-    },
+    bodyParts: { imgCategory: "bodyParts", label: "TYPES.Item.body", suggestions: "registry", type: "body" },
+    classes: { imgCategory: "classes", label: "TYPES.JournalEntryPage.class", suggestions: "registry", type: "class" },
     conditions: {
-      choices: "reference.conditions",
-      format: "camel",
       imgCategory: "conditions",
       label: "TYPES.ActiveEffect.condition",
+      suggestions: "registry",
       type: "condition",
     },
     damageTypes: {
-      choices: "reference.damageTypes",
-      format: "kebab",
       imgCategory: "damageTypes",
       label: "TYPES.JournalEntryPage.damage",
+      suggestions: "registry",
       type: "damage",
     },
     drainTypes: {
-      choices: "reference.drainTypes",
-      format: "kebab",
       imgCategory: "drainTypes",
       label: "TYPES.JournalEntryPage.drain",
+      suggestions: "registry",
       type: "drain",
     },
     effectTypes: {
-      choices: "reference.effectTypes",
-      format: "camel",
       imgCategory: "effectTypes",
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
+      suggestions: "reference.effectTypes",
+      type: "effect",
     },
     elements: {
-      choices: "reference.elements",
-      format: "camel",
       imgCategory: "elements",
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
+      suggestions: "reference.elements",
+      type: "element",
     },
-    equipment: {
-      choices: "reference.equipment",
-      format: "kebab",
-      imgCategory: "equipment",
-      label: "TYPES.Item.equipment",
-      type: "equipment",
-    },
+    equipment: { imgCategory: "equipment", label: "TYPES.Item.equipment", suggestions: "registry", type: "equipment" },
     powerSources: {
-      choices: "reference.powerSources",
-      format: "camel",
       imgCategory: "effectTypes",
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
+      suggestions: "reference.powerSources",
+      type: "source",
     },
     properties: {
-      choices: "reference.properties",
-      format: "kebab",
       imgCategory: "properties",
       label: "TYPES.ActiveEffect.property",
+      suggestions: "registry",
       type: "property",
     },
-    species: {
-      choices: "reference.creatures",
-      format: "kebab",
-      imgCategory: "creatures",
-      label: "TYPES.Item.species",
-      type: "species",
-    },
+    species: { imgCategory: "creatures", label: "TYPES.Item.species", suggestions: "registry", type: "species" },
     tradecrafts: {
-      choices: "reference.tradecrafts",
-      format: "camel",
       imgCategory: "tradecrafts",
       label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
+      suggestions: "registry",
+      type: "tradecraft",
     },
 
-    other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.COMMON.Other" },
+    other: { format: "none", imgCategory: "none", label: "TERIOCK.COMMON.Other", suggestions: "none" },
   },
   // no sort
   groups: {

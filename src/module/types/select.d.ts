@@ -26,6 +26,8 @@ declare global {
       openable?: boolean;
       /** Whether to report cancelling the dialog as `false` instead of an empty selection */
       reportCancel?: boolean;
+      /** Whether to ensure selected documents are resolved to actual documents */
+      resolve?: boolean;
       /** Whether to suppress warnings if there's no documents to select from. */
       silent?: boolean;
       /** Path to some extra text to display for each document */
@@ -76,6 +78,10 @@ declare global {
       expandTables?: boolean;
       /** Identifiers to get documents from globally */
       globalIdentifiers?: Iterable<TypedIdentifier>;
+      /** IDs for compendium packs to get documents from globally */
+      globalPacks?: string[];
+      /** Identifier types to get documents from globally */
+      globalTypes?: string[];
       /** UUIDs to get documents from globally */
       globalUuids?: Iterable<UUID>;
       /** Identifiers to get documents from relative to the provided document */

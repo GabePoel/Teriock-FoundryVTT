@@ -395,7 +395,7 @@ export function defenseField(options = {}) {
 export function tradecraftField(options = {}) {
   return new IdentifierField({
     choices: getTradecraftChoices(),
-    initial: Object.keys(TERIOCK.reference.tradecrafts)[0],
+    initial: Object.keys(TERIOCK.config.tradecraft.tradecrafts)[0],
     label: _sloc("TERIOCK.COMMON.Tradecraft"),
     nullable: false,
     type: "tradecraft",
@@ -442,15 +442,6 @@ export function classField(options = {}) {
     type: "class",
     ...options,
   });
-}
-
-/**
- * Field for a damage type with reference-based suggestions.
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
- */
-export function damageTypeField(options = {}) {
-  return new IdentifierField({ suggestions: referenceSuggestions("damageTypes"), type: "damage", ...options });
 }
 
 /**

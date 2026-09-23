@@ -1,4 +1,4 @@
-import { selectTradecraftDialog, selectTradecraftsDialog } from "../../../../applications/dialogs/_module.mjs";
+import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { tradecraftsField } from "../../../fields/tools/builders.mjs";
 import { TradecraftActivation } from "../../activations/command-activations.mjs";
@@ -71,12 +71,12 @@ export default class TradecraftAutomation
    */
   async _choose() {
     const choices = Array.from(this.tradecrafts).filter(Boolean);
-    if (choices.length === 0) { return []; }
-    if (this.automatic && choices.length === 1) { return choices; }
-    if (this.multi && this.all) { return choices; }
-    if (this.multi) { return selectTradecraftsDialog(choices); }
-    const chosen = await selectTradecraftDialog(choices);
-    return chosen ? [chosen] : [];
+    const documents = await DocumentSelector.selectFromConfig({
+      auto: this.automatic,
+      globalIdentifiers: choices.map(c => `tradecraft:${c}`),
+      multi: this.multi,
+    }, { title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: TERIOCK.config.document.tradecraft.label }) });
+    return documents.map(d => d.system.identifier);
   }
 
   /** @inheritDoc */

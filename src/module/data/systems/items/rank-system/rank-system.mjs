@@ -85,6 +85,9 @@ export default class RankSystem
       }
       if (selectMap.size) {
         const chosen = await DocumentSelector.selectSingle(Array.from(selectMap.values()), {
+          hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
+            name: TERIOCK.config.document.ability.label.toLocaleLowerCase(game.i18n.lang),
+          }),
           openable: true,
           title: _loc(`TERIOCK.SHEETS.Common.MENU.CreateRank.select${category.capitalize()}`),
         });

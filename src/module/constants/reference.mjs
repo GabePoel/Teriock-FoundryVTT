@@ -4,14 +4,10 @@
 import { preLocalizeConfig } from "../helpers/localization.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
 import {
-  abilities,
-  bodyParts,
   classes,
   conditions,
-  creatures,
   damageTypes,
   deathBag,
-  drainTypes,
   effectTypes,
   elements,
   equipment,
@@ -36,14 +32,10 @@ function prefixKeys(obj, prefix, transform = toCamelCase) {
 }
 
 const reference = {
-  abilities: prefixKeys(abilities, "TERIOCK.TERMS.Abilities"),
-  bodyParts: prefixKeys(bodyParts, "TERIOCK.TERMS.BodyParts"),
   classes: prefixKeys(classes, "TERIOCK.TERMS.Classes"),
   conditions: prefixKeys(conditions, "TERIOCK.STATUSES.Conditions"),
-  creatures: prefixKeys(creatures, "TERIOCK.TERMS.Creatures"),
   damageTypes: prefixKeys(damageTypes, "TERIOCK.TERMS.DamageTypes"),
   deathBag: prefixKeys(deathBag, "TERIOCK.TERMS.StoneColor"),
-  drainTypes: prefixKeys(drainTypes, "TERIOCK.TERMS.DrainTypes"),
   effectTypes: prefixKeys(effectTypes, "TERIOCK.TERMS.EffectTypes"),
   elements: prefixKeys(elements, "TERIOCK.TERMS.Elements"),
   equipment: prefixKeys(equipment, "TERIOCK.TERMS.Equipment"),

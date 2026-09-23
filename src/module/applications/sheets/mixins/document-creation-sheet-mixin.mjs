@@ -1,7 +1,6 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { toKebabCase } from "../../../helpers/string.mjs";
 import { TeriockDialog } from "../../api/_module.mjs";
-import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../../dialogs/_module.mjs";
+import { DocumentSelector, selectDocument } from "../../dialogs/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -89,18 +88,17 @@ export default function DocumentCreationSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     async _onCreateFluency() {
-      const tc = await selectTradecraftDialog();
-      if (tc) {
-        const f = TERIOCK.config.tradecraft.tradecrafts[tc]?.field;
-        await this.document.createChildDocuments("ActiveEffect", [{
-          img: TERIOCK.config.tradecraft.tradecrafts[tc]?.img,
-          name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", {
-            tradecraft: TERIOCK.config.tradecraft.tradecrafts[tc]?.label,
-          }),
-          system: { field: f, tradecraft: tc },
-          type: "fluency",
-        }]);
-      }
+      const tc = await selectDocument("tradecraft", {
+        globalIdentifiers: Object.keys(TERIOCK.config.tradecraft.tradecrafts).map(t => `tradecraft:${t}`),
+        globalTypes: [],
+      });
+      if (!tc) { return; }
+      await this.document.createChildDocuments("ActiveEffect", [{
+        img: tc.img,
+        name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", { tradecraft: tc.name }),
+        system: { field: tc.system._source.field, tradecraft: tc.system.identifier },
+        type: "fluency",
+      }]);
     }
 
     /**
@@ -108,20 +106,24 @@ export default function DocumentCreationSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     async _onCreateRank() {
-      const rankClass = await selectClassDialog();
-      if (!rankClass) { return; }
-      const origin = this.document.documentName === "Actor" ? "learned" : "innate";
-      const classIdentifier = toKebabCase(rankClass);
-      const possibleRanks = await Promise.all(
-        Array.from({ length: 5 }, (_v, i) => teriock.fromIdentifier(`rank:rank-${i + 1}-${classIdentifier}`)),
-      );
-      const referenceRank = /** @type {TeriockItem<"rank">} */ await DocumentSelector.selectSingle(possibleRanks, {
-        openable: true,
-        title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
+      const classDocument = await selectDocument("class", {
+        globalIdentifiers: Object.keys(TERIOCK.config.class.classes).map(c => `class:${c}`),
+        globalTypes: [],
       });
-      if (!referenceRank) { return; }
+      if (!classDocument) { return; }
+      const globalIdentifiers = Array.from(classDocument?.system.ranks ?? []);
+      const selectedRanks = await DocumentSelector.selectFromConfig({ globalIdentifiers }, {
+        hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
+          name: TERIOCK.config.document.rank.label?.toLocaleLowerCase(game.i18n.lang),
+        }),
+        title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: TERIOCK.config.document.rank.label }),
+      });
+      if (!selectedRanks?.length) { return; }
+      const referenceRank = selectedRanks[0];
       const toCreate = game.items.fromCompendium(referenceRank);
-      toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { origin });
+      toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
+        origin: this.document.documentName === "Actor" ? "learned" : "innate",
+      });
       await this.document.createChildDocuments("Item", [toCreate], { interactive: true });
     }
 
@@ -178,10 +180,12 @@ async function resolveCreateObject(type) {
   });
   if (!decision) { return null; }
   if (decision === "import") {
-    const picked = await TERIOCK.config.document[type]?.importDialog();
-    if (!picked) { return null; }
-    if (TERIOCK.config.document[type]?.documentName === "Item") { return game.items.fromCompendium(picked); }
-    return foundry.utils.mergeObject(picked.toObject(), { _stats: { compendiumSource: picked.uuid } });
+    const selected = type === "equipment"
+      ? await selectDocument("equipment", { globalPacks: ["teriock.equipment"], globalTypes: [] })
+      : await selectDocument(type);
+    if (!selected) { return null; }
+    if (selected.documentName === "Item") { return game.items.fromCompendium(selected); }
+    return foundry.utils.mergeObject(selected.toObject(), { _stats: { compendiumSource: selected.uuid } });
   }
   return obj;
 }

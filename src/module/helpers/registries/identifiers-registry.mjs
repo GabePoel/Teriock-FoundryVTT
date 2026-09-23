@@ -3,6 +3,7 @@ import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
 
 /**
  * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ * @import { DOCUMENT_OWNERSHIP_LEVELS } from "@common/constants.mjs";
  */
 
 /**
@@ -10,7 +11,19 @@ import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
  */
 
 /**
- * @typedef {{ priority: number, name?: string }} TrackedUuid
+ * @typedef {{ img?: string, name?: string, pack?: string, priority: number }} TrackedUuid
+ */
+
+/**
+ * @typedef IdentifierEntry
+ * @property {string} [img]
+ * @property {string} [name]
+ * @property {UUID<IdentifiableDocument>} uuid
+ */
+
+/**
+ * @typedef CanonicalLookupOptions
+ * @property {number | keyof typeof DOCUMENT_OWNERSHIP_LEVELS} [permission] - Minimum required ownership level.
  */
 
 /**
@@ -48,29 +61,48 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   /**
    * Pick the highest-priority tracked UUID from a group.
    * @param {Map<UUID<IdentifiableDocument>, TrackedUuid>} group
+   * @param {{ packLevels: Map<string, number>, permission: number|undefined }} [options]
    * @returns {{ uuid: UUID<IdentifiableDocument>, entry: TrackedUuid }|undefined}
    */
-  #getCanonical(group) {
+  #getCanonical(group, options = {}) {
+    const { packLevels, permission } = options;
     let highestPriority = -Infinity;
     /** @type {{ uuid: UUID<IdentifiableDocument>, entry: TrackedUuid }|undefined} */
     let canonical = undefined;
     for (const [uuid, entry] of group.entries()) {
-      if (entry.priority > highestPriority) {
-        highestPriority = entry.priority;
-        canonical = { entry, uuid };
-      }
+      if (entry.priority <= highestPriority) { continue; }
+      if (permission !== undefined && this.#getLevel(uuid, entry, packLevels) < permission) { continue; }
+      highestPriority = entry.priority;
+      canonical = { entry, uuid };
     }
     return canonical;
   }
 
   /**
-   * Get a priority for a given UUID. Higher priority UUIDs are preferred over lower priority ones. If this returns null
-   * then the provided UUID cannot be tracked.
+   * Get the ownership level the current user has over a tracked UUID.
    * @param {UUID<IdentifiableDocument>} uuid
+   * @param {TrackedUuid} entry
+   * @param {Map<string, number>} packLevels
+   * @returns {number}
+   */
+  #getLevel(uuid, entry, packLevels) {
+    // Documents in a compendium take their ownership from that pack rather than from themselves
+    if (!entry.pack) {
+      return foundry.utils.fromUuidSync(uuid)?.getUserLevel?.(game.user) ?? CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE;
+    }
+    if (!packLevels.has(entry.pack)) {
+      packLevels.set(entry.pack, game.packs.get(entry.pack)?.getUserLevel() ?? CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE);
+    }
+    return packLevels.get(entry.pack);
+  }
+
+  /**
+   * Get a priority for a given parsed UUID. Higher priority UUIDs are preferred over lower priority ones. If this
+   * returns null then the provided UUID cannot be tracked.
+   * @param {object} parsed
    * @returns {number|null}
    */
-  #getUuidPriority(uuid) {
-    const parsed = foundry.utils.parseUuid(uuid);
+  #getUuidPriority(parsed) {
     // Null value if the UUID is invalid or if the Document is a valid type
     if (!parsed || !this.#primaryDocumentNames.has(parsed.type)) { return null; }
     // Document must either be at the top level of a collection or the second level if it is an allowed embedded type
@@ -106,13 +138,26 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
+   * Prepare shared state for a series of canonical lookups.
+   * @param {CanonicalLookupOptions} [options]
+   * @returns {{ packLevels: Map<string, number>, permission: number|undefined }}
+   */
+  #resolveLookupOptions({ permission } = {}) {
+    if (typeof permission === "string") {
+      permission = CONST.DOCUMENT_OWNERSHIP_LEVELS[permission] ?? CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+    }
+    return { packLevels: new Map(), permission };
+  }
+
+  /**
    * Internally associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
-   * @param {string} [name]
+   * @param {{ img?: string, name?: string }} [data]
    */
-  #track(identifier, uuid, name) {
-    const priority = this.#getUuidPriority(uuid);
+  #track(identifier, uuid, data = {}) {
+    const parsed = foundry.utils.parseUuid(uuid);
+    const priority = this.#getUuidPriority(parsed);
     if (priority === null) { return; }
     const { identifier: id, type } = parseIdentifier(identifier);
     if (!this.#identifiers.has(type)) { this.#identifiers.set(type, new Map()); }
@@ -120,7 +165,13 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     if (!typeMap.has(id)) { typeMap.set(id, new Map()); }
     const group = typeMap.get(id);
     const existing = group.get(uuid);
-    group.set(uuid, { name: name ?? existing?.name, priority });
+    group.set(uuid, {
+      img: data.img ?? existing?.img,
+      name: data.name ?? existing?.name,
+      // World UUIDs parse to a collection so the prefix is what distinguishes a pack
+      pack: uuid.startsWith("Compendium") ? parsed.collection?.collection : undefined,
+      priority,
+    });
   }
 
   /**
@@ -132,7 +183,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     if (!journalEntry) { return; }
     for (const p of journalEntry.pages) {
       const typedIdentifier = p?.typedIdentifier;
-      if (typedIdentifier) { this.#track(typedIdentifier, p?.uuid, p?.name); }
+      if (typedIdentifier) { this.#track(typedIdentifier, p?.uuid, { img: p?.img, name: p?.name }); }
     }
   }
 
@@ -172,20 +223,55 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   /**
    * Get the UUID for the canonical Document associated with an identifier.
    * @param {TypedIdentifier} identifier
+   * @param {CanonicalLookupOptions} [options]
    * @returns {UUID<IdentifiableDocument>|undefined}
    */
-  get(identifier) {
+  get(identifier, options = {}) {
     if (!this.initialized) { return undefined; }
     const { identifier: id, type } = parseIdentifier(identifier);
     const group = this.#identifiers.get(type)?.get(id);
     if (!group || group.size === 0) { return undefined; }
-    return this.#getCanonical(group)?.uuid;
+    return this.#getCanonical(group, this.#resolveLookupOptions(options))?.uuid;
+  }
+
+  /**
+   * Get the entries of all identifiers of a given type. This is useful for displaying options in menus.
+   * @param {string} type
+   * @param {CanonicalLookupOptions} [options]
+   * @returns {Record<Identifier, IdentifierEntry>}
+   */
+  getEntries(type, options = {}) {
+    if (!this.initialized) { return {}; }
+    const typeMap = this.#identifiers.get(type);
+    if (!typeMap) { return {}; }
+    const canonicalOptions = this.#resolveLookupOptions(options);
+    const entries = {};
+    for (const [identifier, group] of typeMap.entries()) {
+      const canonical = this.#getCanonical(group, canonicalOptions);
+      if (!canonical?.entry.name) { continue; }
+      entries[identifier] = { img: canonical.entry.img, name: canonical.entry.name, uuid: canonical.uuid };
+    }
+    return entries;
+  }
+
+  /**
+   * Get the image of the canonical Document associated with an identifier.
+   * @param {TypedIdentifier} identifier
+   * @param {CanonicalLookupOptions} [options]
+   * @returns {string|undefined}
+   */
+  getImg(identifier, options = {}) {
+    if (!this.initialized) { return undefined; }
+    const { identifier: id, type } = parseIdentifier(identifier);
+    const group = this.#identifiers.get(type)?.get(id);
+    if (!group || group.size === 0) { return undefined; }
+    return this.#getCanonical(group, this.#resolveLookupOptions(options))?.entry.img;
   }
 
   /**
    * Get the name of the canonical Document associated with an identifier.
    * @param {TypedIdentifier} identifier
-   * @param {object} [options]
+   * @param {CanonicalLookupOptions} [options]
    * @param {boolean} [options.forced] - Force a string to be provided. This will be either the provided identifier or
    * a blank string if the identifier is formatted incorrectly.
    * @returns {string|undefined}
@@ -196,37 +282,27 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const parsed = parseIdentifier(identifier);
     const { identifier: id, type } = parsed;
     const group = this.#identifiers.get(type)?.get(id);
-    if (group && group.size) { out = this.#getCanonical(group)?.entry.name; }
+    if (group && group.size) { out = this.#getCanonical(group, this.#resolveLookupOptions(options))?.entry.name; }
     return options.forced ? (out || parsed.identifier || "") : out;
   }
 
   /**
    * Get the names of all identifiers of a given type. This is useful for displaying options in menus.
    * @param {string} type
+   * @param {CanonicalLookupOptions} [options]
    * @returns {Record<Identifier, string>}
    */
-  getNames(type) {
+  getNames(type, options = {}) {
     if (!this.initialized) { return {}; }
     const typeMap = this.#identifiers.get(type);
     if (!typeMap) { return {}; }
-    return Object.fromEntries(
-      [...typeMap.entries()].map(([id, group]) => {
-        const name = this.#getCanonical(group)?.entry.name;
-        return name ? [id, name] : null;
-      }).filter(Boolean),
-    );
-  }
-
-  /**
-   * Get the UUIDs of all identifiers of a given type.
-   * @param {string} type
-   * @returns {Record<Identifier, UUID<TeriockDocument>>}
-   */
-  getUuids(type) {
-    if (!this.initialized) { return {}; }
-    const identifiers = this.#identifiers.get(type);
-    if (!identifiers) { return {}; }
-    return Object.fromEntries(identifiers.keys().map(k => [k, this.get(`${type}:${k}`)]));
+    const canonicalOptions = this.#resolveLookupOptions(options);
+    const names = {};
+    for (const [id, group] of typeMap.entries()) {
+      const name = this.#getCanonical(group, canonicalOptions)?.entry.name;
+      if (name) { names[id] = name; }
+    }
+    return names;
   }
 
   /**
@@ -244,10 +320,10 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * Associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
-   * @param {string} [name]
+   * @param {{ img?: string, name?: string }} [data]
    */
-  track(identifier, uuid, name) {
-    this.#track(identifier, uuid, name);
+  track(identifier, uuid, data = {}) {
+    this.#track(identifier, uuid, data);
   }
 
   /**
@@ -268,7 +344,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
           const uuid = d.uuid;
           if (!type || !identifier || !uuid || d.system?._sup) { continue; }
           const typedIdentifier = `${type}:${identifier}`;
-          this.#track(typedIdentifier, uuid, d.name);
+          this.#track(typedIdentifier, uuid, { img: d.img, name: d.name });
         }
       }
     }
@@ -291,7 +367,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
-    this.track(identifier, uuid, document.name);
+    this.track(identifier, uuid, { img: document.img, name: document.name });
   }
 
   /**

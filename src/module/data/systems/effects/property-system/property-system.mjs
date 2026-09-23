@@ -1,6 +1,7 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { damageTypeField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
+import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import {
   AdjustableSystemMixin,
   ConsumableSystemMixin,
@@ -58,7 +59,7 @@ export default class PropertySystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
-      damageType: damageTypeField(),
+      damageType: new IdentifierField({ suggestions: true, type: "damage" }),
       extraDamage: rollableFormulaField(),
     });
   }

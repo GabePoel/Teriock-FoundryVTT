@@ -1,8 +1,6 @@
-import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
 import { icons } from "../../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../../helpers/icon.mjs";
-import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { dotJoin, toKebabCase } from "../../../../../helpers/string.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
@@ -54,9 +52,9 @@ export default class BaseAffinity
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       category: new fields.StringField({
-        choices: localizeChoices(objectMap(affinityConfig.categories, c => c.label)),
         initial: "abilities",
         required: true,
+        choices: () => objectMap(TERIOCK.config.affinity.categories, c => c.label),
       }),
       identifier: new IdentifierField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
@@ -79,11 +77,11 @@ export default class BaseAffinity
   #sourceName = null;
 
   /**
-   * The config for this affinity.
+   * The category config for this Affinity.
    * @returns {object}
    */
-  get #config() {
-    return affinityConfig.types[this.type];
+  get _categoryConfig() {
+    return TERIOCK.config.affinity.categories[this.category];
   }
 
   /**
@@ -91,9 +89,13 @@ export default class BaseAffinity
    * @returns {string}
    */
   get _defaultImg() {
-    const fallback = this.getNearestDocument()?.img ?? TERIOCK.config.affinity.types[this.type].img;
+    const fallback = this.getNearestDocument()?.img ?? this._typeConfig?.img;
     if (this.category === "other") { return fallback; }
-    return getImage(TERIOCK.config.affinity.categories[this.category]?.imgCategory, this.identifier, fallback);
+    const identifierImg = this._categoryConfig?.suggestions === "registry"
+      ? game.teriock.identifiers.getImg(this.targetIdentifier)
+      : undefined;
+    return identifierImg
+      ?? getImage(TERIOCK.config.affinity.categories[this.category]?.imgCategory, this.identifier, fallback);
   }
 
   /**
@@ -102,7 +104,10 @@ export default class BaseAffinity
    */
   get _defaultName() {
     if (this.category === "other") { return ""; }
-    return this._suggestions[this.identifier] || this.identifier;
+    const identifierName = this._categoryConfig?.suggestions === "registry"
+      ? game.teriock.identifiers.getName(this.targetIdentifier)
+      : undefined;
+    return identifierName || this._suggestions[this.identifier] || this.identifier;
   }
 
   /**
@@ -120,7 +125,7 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   get _embedIcons() {
-    if (!this.#config.competence) { return []; }
+    if (!this._typeConfig.competence) { return []; }
     const level = TERIOCK.config.competence.levels[this.getCompetence()];
     return [{ icon: level?.icon, tooltip: level?.label }];
   }
@@ -137,8 +142,11 @@ export default class BaseAffinity
    */
   get _suggestions() {
     if (this.category === "other") { return {}; }
-    const path = TERIOCK.config.affinity.categories[this.category]?.choices;
+    const path = this._categoryConfig.suggestions;
     if (!path) { return {}; }
+    if (path === "registry") {
+      return game.teriock.identifiers.getNames(this._categoryConfig?.type, { permission: "LIMITED" });
+    }
     IDENTIFIER_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, undefined, {
       kebabify: true,
     });
@@ -146,11 +154,19 @@ export default class BaseAffinity
   }
 
   /**
+   * The type config for this Affinity.
+   * @returns {object}
+   */
+  get _typeConfig() {
+    return TERIOCK.config.affinity.types[this.type];
+  }
+
+  /**
    * The label for the kind of thing this affinity is against.
    * @returns {string}
    */
   get categoryLabel() {
-    return _loc(TERIOCK.config.affinity.categories[this.category]?.label ?? "");
+    return _loc(this._categoryConfig?.label ?? "");
   }
 
   /**
@@ -158,7 +174,7 @@ export default class BaseAffinity
    * @returns {Color}
    */
   get color() {
-    return foundry.utils.Color.from(this.#config?.color);
+    return foundry.utils.Color.from(this._typeConfig?.color);
   }
 
   /** @inheritDoc */
@@ -184,7 +200,7 @@ export default class BaseAffinity
    * @returns {boolean}
    */
   get protection() {
-    return Boolean(this.#config.protection);
+    return Boolean(this._typeConfig.protection);
   }
 
   /**
@@ -205,11 +221,19 @@ export default class BaseAffinity
   }
 
   /**
+   * The typed identifier for whatever this targets.
+   * @returns {TypedIdentifier}
+   */
+  get targetIdentifier() {
+    return `${this._categoryConfig?.type}:${this.identifier}`;
+  }
+
+  /**
    * The identifier for this type of affinity.
    * @returns {TypedIdentifier}
    */
   get typedIdentifier() {
-    return this.#config.identifier;
+    return this._typeConfig.identifier;
   }
 
   /**
@@ -217,8 +241,8 @@ export default class BaseAffinity
    * @returns {string}
    */
   get typeLabel() {
-    const label = _loc(this.#config?.label ?? "");
-    if (!this.#config?.stacking) { return label; }
+    const label = _loc(this._typeConfig?.label ?? "");
+    if (!this._typeConfig?.stacking) { return label; }
     return _loc("TERIOCK.SHEETS.Actor.TABS.Affinities.stackingLabel", { amount: this.amount, label });
   }
 
@@ -236,7 +260,7 @@ export default class BaseAffinity
    * @returns {boolean}
    */
   get weakness() {
-    return Boolean(this.#config.weakness);
+    return Boolean(this._typeConfig.weakness);
   }
 
   /** @inheritDoc */

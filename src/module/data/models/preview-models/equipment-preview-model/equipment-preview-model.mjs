@@ -50,10 +50,13 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         choices: objectMap(TERIOCK.config.equipment.kind, e => e.label),
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
-      properties: nullStringField({ choices: TERIOCK.reference.properties, label: "TERIOCK.PACKS.properties" }),
+      properties: nullStringField({
+        label: "TERIOCK.PACKS.properties",
+        choices: () => game.teriock.identifiers.getNames("property", { permission: "LIMITED" }),
+      }),
       style: nullStringField({
         label: "TERIOCK.SYSTEMS.Armament.FIELDS.style.label",
-        choices: () => game.teriock.identifiers.getNames("style"),
+        choices: () => game.teriock.identifiers.getNames("style", { permission: "LIMITED" }),
       }),
     });
   }

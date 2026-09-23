@@ -27,6 +27,17 @@ const DEFAULT_SELECT_OPTIONS = {
 };
 
 export default class DocumentSelector extends ResolvableDialog {
+  /**
+   * Optionally resolve some documents.
+   * @template T
+   * @param {T[]} documents
+   * @param {boolean} resolve
+   * @returns {Promise<T>}
+   */
+  static async #optionalResolve(documents, resolve) {
+    return resolve ? await resolveDocuments(documents) : documents;
+  }
+
   /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onGetSelected },
@@ -149,6 +160,8 @@ export default class DocumentSelector extends ResolvableDialog {
       expandTables = true,
       filter = () => true,
       globalIdentifiers = [],
+      globalPacks = [],
+      globalTypes = [],
       globalUuids = [],
       localIdentifiers = [],
       localQualifier = "",
@@ -166,6 +179,20 @@ export default class DocumentSelector extends ResolvableDialog {
     const qualified = await fromQualifier(relativeTo, localQualifier);
     const global = [...Array.from(globalUuids), ...Array.from(globalIdentifiers)];
     const documents = await resolveDocuments([...global, ...local, ...qualified], { expandFolders, expandTables });
+    const knownUuids = new Set(documents.map(d => d.uuid));
+    for (const type of globalTypes) {
+      documents.push(
+        ...Object.values(game.teriock.identifiers.getEntries(type, { permission: "LIMITED" })).filter(v =>
+          !knownUuids.has(v?.uuid)
+        ),
+      );
+    }
+    for (const packId of globalPacks) {
+      const pack = game.packs.get(packId);
+      if (!pack) { continue; }
+      const index = await pack.getIndex();
+      documents.push(...index.contents.filter(i => !i.system._sup && !knownUuids.has(i.uuid)));
+    }
     return Array.from(new Set(documents)).filter(filter);
   }
 
@@ -193,10 +220,15 @@ export default class DocumentSelector extends ResolvableDialog {
    */
   static async selectMulti(documents, options = {}) {
     const prepared = this._prepareDocuments(documents, { ...options });
-    if (prepared.early !== undefined) { return prepared.early; }
+    if (prepared.early !== undefined) { return this.#optionalResolve(prepared.early, options.resolve ?? false); }
     const selected = await this._promptPrepared(prepared);
     if (selected === false) { return false; }
-    if (selected) { return selected.map(id => prepared.idToDoc.get(id)).filter(Boolean); }
+    if (selected) {
+      return this.#optionalResolve(
+        selected.map(id => prepared.idToDoc.get(id)).filter(Boolean),
+        options.resolve ?? false,
+      );
+    }
     return [];
   }
 

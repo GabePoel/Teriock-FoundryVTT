@@ -75,13 +75,9 @@ if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 statuses.TERIOCK.STATUSES.Conditions = conditions;
 
 Object.assign(terms.TERIOCK.TERMS, {
-  Abilities: index.abilities,
-  BodyParts: index.bodyParts,
   Classes: index.classes,
-  Creatures: index.creatures,
   Currency: index.currency,
   DamageTypes: index.damageTypes,
-  DrainTypes: index.drainTypes,
   EffectTypes: index.effectTypes,
   Elements: index.elements,
   Equipment: index.equipment,
@@ -91,7 +87,7 @@ Object.assign(terms.TERIOCK.TERMS, {
   StoneColor: index.deathBag,
   Tradecrafts: index.tradecrafts,
   Traits: index.traits,
-  WeaponFightingStyles: index.weaponFightingStyles,
+  WeaponFightingStyles: index.fightingStyles,
 });
 
 mergeObjects(

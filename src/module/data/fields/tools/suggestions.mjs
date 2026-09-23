@@ -16,8 +16,10 @@ export function prepareSuggestions(suggestions, { typed = false, types = [] } = 
   if (suggestions === true) {
     resolved = {};
     for (const type of types) {
-      for (const [id, name] of Object.entries(game.teriock.identifiers.getNames(type))) {
-        resolved[typed ? `${type}:${id}` : id] = name;
+      for (
+        const [identifier, name] of Object.entries(game.teriock.identifiers.getNames(type, { permission: "LIMITED" }))
+      ) {
+        resolved[typed ? `${type}:${identifier}` : identifier] = name;
       }
     }
   } else if (typeof suggestions === "function") { resolved = suggestions(); }

@@ -213,7 +213,9 @@ export default function ArmamentSystemMixin(Base) {
      */
     get _displayInputsArmament() {
       return [{
-        choices: objectMap(game.teriock.identifiers.getNames("style"), undefined, { none: true }),
+        choices: teriock.helpers.localization.choicesWithNone(
+          game.teriock.identifiers.getNames("style", { permission: "LIMITED" }),
+        ),
         path: "system.style",
       }];
     }

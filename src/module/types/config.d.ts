@@ -55,13 +55,12 @@ declare global {
       getter: string;
       hint: string;
       icon: string;
-      index: string;
+      importDialog?: boolean;
       label: string;
       pack: string;
       plural: string;
       previewModel?: typeof BasePreviewModel;
       sorter?: Teriock.Sort.DocumentSorter;
-      importDialog?: () => Promise<TeriockDocument | void>;
     };
 
     export type ImpactEntry = {
