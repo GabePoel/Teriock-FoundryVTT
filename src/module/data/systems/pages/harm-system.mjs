@@ -32,7 +32,8 @@ export default class HarmSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `${this.parent.type.capitalize()}:${TERIOCK.index.damageTypes[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    const index = this.parent.type === "drain" ? TERIOCK.index.drainTypes : TERIOCK.index.damageTypes;
+    return `${this.parent.type.capitalize()}:${index[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */
