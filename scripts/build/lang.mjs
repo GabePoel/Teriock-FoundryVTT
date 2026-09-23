@@ -82,12 +82,12 @@ const WIKI_TITLE_SUFFIXES = [
 ];
 
 /**
- * Capitalize each word the way the wiki scraper does.
+ * Capitalize each word.
  * @param {string} str
  * @returns {string}
  */
 function toTitleCase(str) {
-  return str.toLowerCase().replace(/(?:^|\s|-)\w/g, (match) => match.toUpperCase());
+  return str.replace(/(?:^|\s|-)\w/g, (match) => match.toUpperCase());
 }
 
 /**
