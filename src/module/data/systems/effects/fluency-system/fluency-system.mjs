@@ -84,7 +84,7 @@ export default class FluencySystem
     if (yes === false) { return false; }
 
     if (!foundry.utils.hasProperty(data, "img")) {
-      this.parent.updateSource({ img: TERIOCK.display.images.manifest.tradecraft.artist });
+      this.parent.updateSource({ img: TERIOCK.display.thumbnails.manifest.tradecraft.artist });
     }
   }
 
@@ -94,7 +94,7 @@ export default class FluencySystem
     if (yes === false) { return false; }
 
     if (
-      Object.values(TERIOCK.display.images.manifest.tradecraft).includes(this.parent.img)
+      Object.values(TERIOCK.display.thumbnails.manifest.tradecraft).includes(this.parent.img)
       && !foundry.utils.hasProperty(changes, "img")
     ) {
       let tradecraft = this._source.tradecraft;

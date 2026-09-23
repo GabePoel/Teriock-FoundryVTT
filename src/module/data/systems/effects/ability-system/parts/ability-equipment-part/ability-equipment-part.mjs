@@ -142,9 +142,9 @@ export default function AbilityEquipmentPart(Base) {
       let img;
       if (equipmentType.toLowerCase() === "scroll") {
         if (this.elements.size === 1) {
-          img = TERIOCK.display.images.manifest.consumable[`${this.elements.first()}SpellScroll`];
+          img = TERIOCK.display.thumbnails.manifest.consumable[`${this.elements.first()}SpellScroll`];
         }
-        img ??= TERIOCK.display.images.manifest.consumable.celestialSpellScroll;
+        img ??= TERIOCK.display.thumbnails.manifest.consumable.celestialSpellScroll;
       }
       const effects = [this.parent.toObject()];
       effects[0].system.grantUse = true;

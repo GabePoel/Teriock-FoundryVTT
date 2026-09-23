@@ -1,5 +1,4 @@
 import { addTypesToFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { getName } from "../../../helpers/utils.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
@@ -83,7 +82,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         blocks: [],
         icon: TERIOCK.config.document.equipment.icon,
         img: game.teriock.identifiers.getImg(this.source.system.equipmentType)
-          ?? systemPath("assets/thumbnails/document/equipment.svg"),
+          ?? TERIOCK.display.thumbnails.manifest.document.equipment,
         name: getName(this.source.system.equipmentType),
       };
     }

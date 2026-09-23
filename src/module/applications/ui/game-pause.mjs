@@ -1,4 +1,4 @@
-import { images } from "../../constants/display/_module.mjs";
+import { thumbnails } from "../../constants/display/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
 const { GamePause } = foundry.applications.ui;
@@ -6,7 +6,7 @@ const { GamePause } = foundry.applications.ui;
 /** @inheritDoc */
 export default class TeriockGamePause extends GamePause {
   /** @type {string[]} */
-  static HOLD_IMAGES = Object.values(images.hold);
+  static HOLD_IMAGES = Object.values(thumbnails.manifest.hold);
 
   /**
    * Select a random hold image.

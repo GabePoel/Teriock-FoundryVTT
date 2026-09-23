@@ -1,6 +1,5 @@
 import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
@@ -35,7 +34,7 @@ export default function CommonDocumentMixin(Base) {
      */
     static getDefaultImageForType(type) {
       if (type && TERIOCK.config.document[type]?.documentName === this.documentName) {
-        return systemPath(`assets/thumbnails/document/${type}.svg`);
+        return TERIOCK.display.thumbnails.manifest.document[type];
       }
     }
 
@@ -167,7 +166,8 @@ export default function CommonDocumentMixin(Base) {
       if (yes === false) { return false; }
 
       if (!foundry.utils.hasProperty(data, "img") && data?.type && data.type !== "base") {
-        this.updateSource({ img: this.constructor.getDefaultImageForType(data.type) });
+        const img = this.constructor.getDefaultImageForType(data.type);
+        if (img) { this.updateSource({ img }); }
       }
     }
 

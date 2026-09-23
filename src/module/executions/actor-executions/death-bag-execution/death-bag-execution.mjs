@@ -130,7 +130,7 @@ export default class DeathBagExecution extends DocumentExecution {
         title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
       }, { text: outcome, title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome") }],
       icon: TERIOCK.display.icons.manifest.ui.deathBag,
-      img: TERIOCK.display.images.manifest.misc.deathBag,
+      img: TERIOCK.display.thumbnails.manifest.misc.deathBag,
       name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
     };
     this.panels.push(resultPanel);

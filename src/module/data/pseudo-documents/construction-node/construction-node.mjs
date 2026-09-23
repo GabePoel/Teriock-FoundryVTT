@@ -246,7 +246,7 @@ export default class ConstructionNode
       }
       this.name = this.data.name ? BaseRoll.replaceFormulaData(this.data.name, { base: name }) : name;
     }
-    this.img = this.data.img ?? TERIOCK.display.images.common.uncertainty;
+    this.img = this.data.img ?? TERIOCK.display.thumbnails.common.unknown;
   }
 }
 

@@ -93,7 +93,7 @@ export default class BaseAffinity
     const fallback = this.getNearestDocument()?.img ?? this._typeConfig?.img;
     if (this.category === "other") { return fallback; }
     return game.teriock.identifiers.getImg(this.targetIdentifier)
-      ?? TERIOCK.display.images.manifest[this._categoryConfig?.imgCategory]?.[toCamelCase(this.identifier)]
+      ?? TERIOCK.display.thumbnails.manifest[this._categoryConfig?.imgCategory]?.[toCamelCase(this.identifier)]
       ?? fallback;
   }
 

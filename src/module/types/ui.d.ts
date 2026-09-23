@@ -1,4 +1,4 @@
-import { icons, images } from "../constants/display/_module.mjs";
+import { icons } from "../constants/display/_module.mjs";
 
 declare global {
   namespace Teriock.UI {
@@ -7,8 +7,5 @@ declare global {
 
     /** Icon style */
     export type IconStyle = keyof typeof icons.styles;
-
-    /** Icon category */
-    export type IconCategory = keyof typeof images.manifest;
   }
 }

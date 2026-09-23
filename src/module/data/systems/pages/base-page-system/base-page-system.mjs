@@ -1,6 +1,5 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { systemPath } from "../../../../helpers/path.mjs";
 import {
   BaseSystemMixin,
   InstructionsSystemMixin,
@@ -51,7 +50,7 @@ export default class BasePageSystem
     if (yes === false) { return false; }
 
     this.parent.updateSource(
-      foundry.utils.mergeObject({ system: { img: systemPath(`assets/thumbnails/document/${this.parent.type}.svg`) } }),
+      foundry.utils.mergeObject({ system: { img: TERIOCK.display.thumbnails.manifest.document[this.parent.type] } }),
       data,
     );
   }

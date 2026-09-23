@@ -354,6 +354,7 @@ export default {
     infinity: "mdi-infinity",
     info: "ms-info",
     linked: "ms-link",
+    loading: "ms-progress-activity",
     locked: "ms-lock",
     longRest: "ms-camping",
     maximum: "ms-all-inclusive",

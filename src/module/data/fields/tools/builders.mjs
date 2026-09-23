@@ -4,7 +4,7 @@ import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
 import dieConfig from "../../../constants/config/death-bag-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
-import { images } from "../../../constants/display/_module.mjs";
+import { thumbnails } from "../../../constants/display/_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
@@ -135,7 +135,7 @@ export function associationsField(options = {}) {
           badge: new StringField(),
           color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
           documentUuid: new DocumentUUIDField(),
-          img: new FilePathField({ categories: ["IMAGE"], initial: images.common.uncertainty }),
+          img: new FilePathField({ categories: ["IMAGE"], initial: thumbnails.common.unknown }),
           name: new StringField(),
         }),
         { initial: [], required: false },

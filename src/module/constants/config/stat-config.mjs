@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { colors, icons, images } from "../display/_module.mjs";
+import { colors, icons, thumbnails } from "../display/_module.mjs";
 import currencyConfig from "./currency-config.mjs";
 import systemConfig from "./system-config.mjs";
 
@@ -18,7 +18,7 @@ export default {
     pool: {
       enabled: true,
       icons: { disabled: icons.manifest.stat.hpOff, enabled: icons.manifest.stat.hpOn },
-      img: images.manifest.misc.hitDie,
+      img: thumbnails.manifest.misc.hitDie,
       panel: { name: "TERIOCK.MODELS.HpPool.PANELS.name", text: "TERIOCK.MODELS.HpPool.PANELS.text" },
     },
     style: { colorset: "red" },
@@ -38,7 +38,7 @@ export default {
     pool: {
       enabled: true,
       icons: { disabled: icons.manifest.stat.mpOff, enabled: icons.manifest.stat.mpOn },
-      img: images.manifest.misc.manaDie,
+      img: thumbnails.manifest.misc.manaDie,
       panel: { name: "TERIOCK.MODELS.MpPool.PANELS.name", text: "TERIOCK.MODELS.MpPool.PANELS.text" },
     },
     style: { colorset: "blue" },

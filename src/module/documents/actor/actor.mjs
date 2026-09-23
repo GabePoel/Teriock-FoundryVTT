@@ -477,7 +477,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
         panels: [{
           associations,
           icon,
-          img: document?.img || TERIOCK.display.images.manifest.core.difficultyClass,
+          img: document?.img || TERIOCK.display.thumbnails.manifest.core.difficultyClass,
           name: _loc(panelKey, { label }),
         }],
         source: document?.uuid ?? this.uuid,

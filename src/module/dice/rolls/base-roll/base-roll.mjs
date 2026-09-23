@@ -1,7 +1,6 @@
 import { migrateThumbnails } from "../../../data/fields/tools/migrations.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import Booster from "../../booster.mjs";
 import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "../../helpers.mjs";
 
@@ -50,7 +49,7 @@ export default class BaseRoll extends Roll {
     }
     return {
       actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || systemPath("assets/thumbnails/document/character.svg"),
+      img: img || target?.img || TERIOCK.display.thumbnails.manifest.document.character,
       name: name || target?.name,
       tokenUuid: token?.uuid || target.tokenUuid,
     };
