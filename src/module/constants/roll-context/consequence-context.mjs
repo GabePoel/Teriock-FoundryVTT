@@ -6,7 +6,7 @@ const consequenceContext = { ...usableContext, consequence: "TYPES.ActiveEffect.
 
 export default consequenceContext;
 
-Hooks.once("teriock.i18nMetaphysicsInit", () => {
+Hooks.once("teriock.metaphysicsContextInit", () => {
   Object.assign(consequenceContext, metaphysicsContext);
 });
 

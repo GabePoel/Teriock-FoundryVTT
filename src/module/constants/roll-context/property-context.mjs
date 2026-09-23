@@ -23,6 +23,6 @@ Hooks.once("teriock.identifiersInit", () => {
   });
 });
 
-Hooks.once("teriock.i18nMetaphysicsInit", () => {
+Hooks.once("teriock.metaphysicsContextInit", () => {
   Object.assign(propertyContext, metaphysicsContext);
 });

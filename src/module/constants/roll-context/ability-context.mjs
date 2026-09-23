@@ -89,6 +89,6 @@ Hooks.once("teriock.identifiersInit", () => {
   abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
 });
 
-Hooks.once("teriock.i18nMetaphysicsInit", () => {
+Hooks.once("teriock.metaphysicsContextInit", () => {
   Object.assign(abilityContext, metaphysicsContext);
 });

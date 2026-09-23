@@ -5,7 +5,7 @@ const imbuementContext = { imbuement: "TYPES.ActiveEffect.imbuement" };
 
 export default imbuementContext;
 
-Hooks.once("teriock.i18nMetaphysicsInit", () => {
+Hooks.once("teriock.metaphysicsContextInit", () => {
   Object.assign(imbuementContext, metaphysicsContext);
 });
 
