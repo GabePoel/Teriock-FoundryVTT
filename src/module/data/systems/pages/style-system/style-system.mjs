@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
@@ -10,6 +9,6 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
 export default class StyleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
   get wikiPage() {
-    return `Property:${TERIOCK.index.fightingStyles[toCamelCase(this.identifier ?? "")] ?? ""} Fighting Style`;
+    return `Property:${TERIOCK.index.fightingStyles[this.identifier ?? ""] ?? ""} Fighting Style`;
   }
 }

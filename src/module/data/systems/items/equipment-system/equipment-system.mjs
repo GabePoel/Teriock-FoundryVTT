@@ -1,6 +1,6 @@
 import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
+import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
 import { equipmentTypeField } from "../../../fields/tools/builders.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
@@ -139,7 +139,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Equipment:${TERIOCK.index.equipment[toCamelCase(this._source.equipmentType ?? "")] ?? ""}`;
+    return `Equipment:${TERIOCK.index.equipment[this._source.equipmentType ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

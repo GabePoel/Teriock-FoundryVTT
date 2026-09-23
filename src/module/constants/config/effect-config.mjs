@@ -8,7 +8,7 @@ export default {
     armament: { effectType: "imbuement", label: "TERIOCK.DOCUMENTS.armament.plural" },
     item: { effectType: "imbuement", label: "DOCUMENT.Items" },
   },
-  cover: ["halfCover", "threeQuartersCover", "fullCover"],
+  cover: ["half-cover", "three-quarters-cover", "full-cover"],
   // no sort
   kind: /** @enum {Teriock.Config.KindEntry} */ {
     special: {

@@ -107,7 +107,7 @@ export default class ApplicableEffectSystem
       icon: TERIOCK.display.icons.manifest.document.condition,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
       wrappers: [
-        ...Array.from(this.parent.statuses.map(status => TERIOCK.reference.conditions[status])),
+        ...Array.from(this.parent.statuses.map(status => CONFIG.statusEffects[status]?.name)),
         this.critical ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical") : "",
         this.heightened
           ? this.heightened === 1

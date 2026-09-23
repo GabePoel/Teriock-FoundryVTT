@@ -89,8 +89,8 @@ export default function ActorAffinitiesPart(Base) {
       this._addVirtualConditionAffinity("terrored", "resistance", "effectTypes", "healing");
       this._addVirtualConditionAffinity("terrored", "resistance", "effectTypes", "revival");
       this._addVirtualConditionAffinity("frenzied", "resistance", "conditions", "frightened");
-      this._addVirtualConditionAffinity("defyingDeath", "resistance", "conditions", "dead");
-      this._addVirtualConditionAffinity("defyingDeath", "resistance", "conditions", "unconscious");
+      this._addVirtualConditionAffinity("defying-death", "resistance", "conditions", "dead");
+      this._addVirtualConditionAffinity("defying-death", "resistance", "conditions", "unconscious");
       this._addVirtualConditionAffinity("allured", "binding", "conditions", "allured");
       this._addVirtualConditionAffinity("burned", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.burned"));
       this._addVirtualConditionAffinity(

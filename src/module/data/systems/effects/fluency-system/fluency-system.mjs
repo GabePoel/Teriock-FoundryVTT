@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
@@ -72,7 +72,7 @@ export default class FluencySystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Tradecraft:${TERIOCK.index.tradecrafts[toCamelCase(this._source.tradecraft ?? "")] ?? ""}`;
+    return `Tradecraft:${TERIOCK.index.tradecrafts[this._source.tradecraft ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

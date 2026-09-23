@@ -1,21 +1,11 @@
-// The index is like the reference but with names always in English.
-// We maintain a copy of this to access rules journals and the like.
-
-import { default as allConditions } from "../../json/index/conditions.json" with { type: "json" };
-
-const conditionsCopy = { ...allConditions };
-delete conditionsCopy.alive;
-delete conditionsCopy.up;
-delete conditionsCopy.conscious;
+// The main purpose of the index is to track of which identifiers correspond to pages on the wiki and map to page names.
+// The index is also used for building English localization files.
 
 export { default as abilities } from "../../json/index/abilities.json" with { type: "json" };
-export { default as attributesFull } from "../../json/index/attributes-full.json" with { type: "json" };
 export { default as bodyParts } from "../../json/index/body-parts.json" with { type: "json" };
 export { default as classes } from "../../json/index/classes.json" with { type: "json" };
-export { conditionsCopy as conditions };
 export { default as coreRules } from "../../json/index/core-rules.json" with { type: "json" };
 export { default as creatures } from "../../json/index/creatures.json" with { type: "json" };
-export { default as currency } from "../../json/index/currency.json" with { type: "json" };
 export { default as damageTypes } from "../../json/index/damage-types.json" with { type: "json" };
 export { default as deathBag } from "../../json/index/death-bag.json" with { type: "json" };
 export { default as drainTypes } from "../../json/index/drain-types.json" with { type: "json" };

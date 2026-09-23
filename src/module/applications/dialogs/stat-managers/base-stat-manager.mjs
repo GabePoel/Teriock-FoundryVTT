@@ -47,7 +47,7 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
   static async _onRollStatDie(_event, target) {
     if (!game.teriock.checkEditable(this)) { return; }
     const statDie = this._getStatDie(target);
-    const criticallyWounded = this.document.statuses.has("criticallyWounded");
+    const criticallyWounded = this.document.statuses.has("critically-wounded");
     await statDie.use(this.state.consumeStatDice ?? true, { substitution: this.state.substitution });
     if (!criticallyWounded) { await this.document.system.takeAwaken(); }
   }

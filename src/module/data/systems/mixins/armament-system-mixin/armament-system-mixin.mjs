@@ -7,6 +7,7 @@ import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
+import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -82,6 +83,7 @@ export default function ArmamentSystemMixin(Base) {
         source.style ??= source.fightingStyle ? toKebabCase(source.fightingStyle) : null;
         delete source.fightingStyle;
       }
+      migrateIterables(source, "equipmentClasses");
       return super.migrateData(source);
     }
 

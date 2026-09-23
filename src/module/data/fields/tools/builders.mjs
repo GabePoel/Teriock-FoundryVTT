@@ -436,7 +436,7 @@ export function fieldField(options = {}) {
 export function classField(options = {}) {
   return new IdentifierField({
     choices: getClassChoices(),
-    initial: Object.keys(TERIOCK.reference.classes)[0],
+    initial: Object.keys(classConfig.classes)[0],
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
     nullable: false,
     type: "class",

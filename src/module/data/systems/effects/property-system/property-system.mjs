@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import {
@@ -101,7 +100,7 @@ export default class PropertySystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Property:${TERIOCK.index.properties[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Property:${TERIOCK.index.properties[this.identifier ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

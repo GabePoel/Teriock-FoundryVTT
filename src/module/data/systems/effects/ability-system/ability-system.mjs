@@ -2,7 +2,6 @@ import costConfig from "../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
@@ -321,7 +320,7 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Ability:${TERIOCK.index.abilities[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Ability:${TERIOCK.index.abilities[this.identifier ?? ""] ?? ""}`;
   }
 
   /**

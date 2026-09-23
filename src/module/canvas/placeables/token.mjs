@@ -33,7 +33,7 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
     if (this.document.hasStatusEffect("down") || this.document.hasStatusEffect("unconscious")) {
       overlayImg = "icons/svg/unconscious.svg";
     }
-    if (this.document.hasStatusEffect("criticallyWounded")) { overlayImg = "icons/svg/blood.svg"; }
+    if (this.document.hasStatusEffect("critically-wounded")) { overlayImg = "icons/svg/blood.svg"; }
     if (this.document.hasStatusEffect("dead")) { overlayImg = "icons/svg/skull.svg"; }
     if (overlayImg) { promises.push(this._drawOverlay(overlayImg)); }
     if (promises.length > 0) {

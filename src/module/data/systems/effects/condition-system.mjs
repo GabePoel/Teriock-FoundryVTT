@@ -1,6 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
-import { toCamelCase } from "../../../helpers/string.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { ThresholdDataMixin } from "../../mixins/_module.mjs";
 import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -66,9 +65,9 @@ export default class ConditionSystem
     if (yes === false) { return false; }
 
     // If this is a known condition, have it use the static ID.
-    if (
-      data?.system?.identifier && Object.keys(TERIOCK.statuses.conditions).includes(toCamelCase(data.system.identifier))
-    ) { options.keepId = true; }
+    if (data?.system?.identifier && Object.keys(TERIOCK.statuses.conditions).includes(data.system.identifier)) {
+      options.keepId = true;
+    }
     if (data.disabled === true) { return false; }
   }
 

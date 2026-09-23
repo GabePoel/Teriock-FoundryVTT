@@ -2,7 +2,6 @@ import effectConfig from "../../../constants/config/effect-config.mjs";
 import systemConfig from "../../../constants/config/system-config.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../helpers/panel.mjs";
-import { toCamelCase } from "../../../helpers/string.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 
@@ -31,7 +30,7 @@ export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMix
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Body:${TERIOCK.index.bodyParts[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Body:${TERIOCK.index.bodyParts[this.identifier ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

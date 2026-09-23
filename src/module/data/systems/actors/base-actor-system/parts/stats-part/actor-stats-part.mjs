@@ -55,7 +55,7 @@ export default function ActorStatsPart(Base) {
       const statCrit = hpCrit || mpCrit;
 
       const protUncn = this.isProtected("conditions", "unconscious");
-      const protCrit = this.isProtected("conditions", "criticallyWounded");
+      const protCrit = this.isProtected("conditions", "critically-wounded");
       const protDead = this.isProtected("conditions", "dead");
       const protDown = this.isProtected("conditions", "down");
 
@@ -70,13 +70,13 @@ export default function ActorStatsPart(Base) {
       }
       if (hpCrit && !protCrit && !protDown && !autoDead) {
         this._addVirtualConditions(
-          ["criticallyWounded", "down"],
+          ["critically-wounded", "down"],
           "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeHp",
         );
       }
       if (mpCrit && !protCrit && !protDown && !autoDead) {
         this._addVirtualConditions(
-          ["criticallyWounded", "down"],
+          ["critically-wounded", "down"],
           "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeMp",
         );
       }
@@ -97,9 +97,9 @@ export default function ActorStatsPart(Base) {
 
       if (this.parent.statuses.has("dead")) {
         this.parent.statuses.delete("unconscious");
-        this.parent.statuses.delete("criticallyWounded");
+        this.parent.statuses.delete("critically-wounded");
       }
-      if (this.parent.statuses.has("criticallyWounded")) { this.parent.statuses.delete("unconscious"); }
+      if (this.parent.statuses.has("critically-wounded")) { this.parent.statuses.delete("unconscious"); }
     }
 
     /**

@@ -6,8 +6,9 @@ import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
-import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
+import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
+import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { CompetenceDisplaySystemMixin, StatGiverSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
@@ -86,6 +87,12 @@ export default class SpeciesSystem
       }),
       traits: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.traits })),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateIterables(source, "traits");
+    return super.migrateData(source, options);
   }
 
   /**
@@ -175,7 +182,7 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Creature:${TERIOCK.index.creatures[this.identifier ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

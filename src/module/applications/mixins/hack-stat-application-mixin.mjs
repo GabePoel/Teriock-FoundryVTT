@@ -41,7 +41,7 @@ export default function HackStatApplicationMixin(Base) {
       if (!game.teriock.checkEditable(this)) { return; }
       if (event.button === 2) { return this._unrollStatDie(event, target); }
       const statDie = this._getStatDie(target);
-      const criticallyWounded = this.document.statuses.has("criticallyWounded");
+      const criticallyWounded = this.document.statuses.has("critically-wounded");
       await statDie.use(this.state?.consumeStatDice ?? true);
       if (!criticallyWounded) { await this.document.system.takeAwaken(); }
     }

@@ -1,6 +1,5 @@
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
@@ -52,6 +51,6 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Class:${TERIOCK.index.classes[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Class:${TERIOCK.index.classes[this.identifier ?? ""] ?? ""}`;
   }
 }

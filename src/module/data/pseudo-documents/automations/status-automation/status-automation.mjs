@@ -1,6 +1,7 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { omit } from "../../../../helpers/utils.mjs";
+import { objectMap, omit } from "../../../../helpers/utils.mjs";
+import { migrateStatuses } from "../../../fields/tools/migrations.mjs";
 import {
   ApplyStatusActivation,
   RemoveStatusActivation,
@@ -42,13 +43,19 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
         required: true,
       }),
       status: new fields.StringField({
-        choices: TERIOCK.reference.conditions,
-        initial: Object.keys(TERIOCK.reference.conditions)[0],
+        initial: Object.keys(TERIOCK.statuses.conditions)[0],
         label: "TERIOCK.COMMON.Condition",
         required: true,
+        choices: () => objectMap(TERIOCK.statuses.conditions, c => c.name, { localize: true }),
       }),
       target: new fields.BooleanField(),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateStatuses(source, "status");
+    return super.migrateData(source, options);
   }
 
   /** @type {UUID<TeriockTokenDocument|TeriockActor>[]} */
@@ -102,7 +109,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
       })),
       icon: TERIOCK.config.document.creature.icon,
       title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
-        status: TERIOCK.reference.conditions[this.status],
+        status: CONFIG.statusEffects[this.status]?.name,
       }),
     };
   }
@@ -186,7 +193,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
       hint: _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.hint", {
         effect: this.getNearestDocument()?.name
           || _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect"),
-        status: TERIOCK.reference.conditions[this.status],
+        status: CONFIG.statusEffects[this.status]?.name,
       }),
       multi: this.multi,
       ...options,

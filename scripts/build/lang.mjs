@@ -40,6 +40,7 @@ import { default as terms } from "../../src/en/terms.json" with { type: "json" }
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
 import { default as conditions } from "../../src/json/index/conditions.json" with { type: "json" };
 import * as index from "../../src/module/constants/index.mjs";
+import { toCamelCase } from "../../src/module/helpers/string.mjs";
 import { sortObject } from "../script-utils.mjs";
 
 /**
@@ -72,22 +73,31 @@ const LANG = base;
 
 if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 
-statuses.TERIOCK.STATUSES.Conditions = conditions;
+/**
+ * Index keys are identifiers so they are kebab-case. Localization keys are camelCase.
+ * @param {Record<string, string>} obj
+ * @returns {Record<string, string>}
+ * @todo Find another way to handle this.
+ */
+function camelKeys(obj) {
+  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [toCamelCase(k), v]));
+}
+
+statuses.TERIOCK.STATUSES.Conditions = camelKeys(conditions);
 
 Object.assign(terms.TERIOCK.TERMS, {
-  Classes: index.classes,
-  Currency: index.currency,
-  DamageTypes: index.damageTypes,
-  EffectTypes: index.effectTypes,
-  Elements: index.elements,
-  Equipment: index.equipment,
-  EquipmentClasses: index.equipmentClasses,
-  PowerSources: index.powerSources,
-  Properties: index.properties,
-  StoneColor: index.deathBag,
-  Tradecrafts: index.tradecrafts,
-  Traits: index.traits,
-  WeaponFightingStyles: index.fightingStyles,
+  Classes: camelKeys(index.classes),
+  DamageTypes: camelKeys(index.damageTypes),
+  EffectTypes: camelKeys(index.effectTypes),
+  Elements: camelKeys(index.elements),
+  Equipment: camelKeys(index.equipment),
+  EquipmentClasses: camelKeys(index.equipmentClasses),
+  PowerSources: camelKeys(index.powerSources),
+  Properties: camelKeys(index.properties),
+  StoneColor: camelKeys(index.deathBag),
+  Tradecrafts: camelKeys(index.tradecrafts),
+  Traits: camelKeys(index.traits),
+  WeaponFightingStyles: camelKeys(index.fightingStyles),
 });
 
 mergeObjects(

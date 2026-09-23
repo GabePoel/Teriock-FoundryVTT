@@ -35,7 +35,7 @@ export const applyStatusCommand = {
   primary: apply,
   secondary: remove,
   label: options => options?.status
-    ? _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: TERIOCK.reference.conditions[options.status] })
+    ? _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: CONFIG.statusEffects[options.status]?.name })
     : _loc("TERIOCK.COMMANDS.Status.applyUnnamed"),
 };
 
@@ -50,7 +50,7 @@ export const removeStatusCommand = {
   primary: remove,
   secondary: apply,
   label: options => options?.status
-    ? _loc("TERIOCK.COMMANDS.Status.removeNamed", { name: TERIOCK.reference.conditions[options.status] })
+    ? _loc("TERIOCK.COMMANDS.Status.removeNamed", { name: CONFIG.statusEffects[options.status]?.name })
     : _loc("TERIOCK.COMMANDS.Status.removeUnnamed"),
 };
 
@@ -64,6 +64,6 @@ export const toggleStatusCommand = {
   id: "toggle",
   primary: toggle,
   label: options => options?.status
-    ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", { name: TERIOCK.reference.conditions[options.status] })
+    ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", { name: CONFIG.statusEffects[options.status]?.name })
     : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
 };

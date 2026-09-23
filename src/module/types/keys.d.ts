@@ -75,7 +75,7 @@ declare global {
 
     // Status Keys
     export type HackableBodyPart = keyof typeof config.hack;
-    export type Condition = keyof typeof index.conditions;
+    export type Condition = keyof typeof statuses.conditions;
     export type Cover = keyof typeof statuses.cover;
     export type Hack = keyof typeof statuses.hacks;
     export type Status = Condition | Cover | Hack;

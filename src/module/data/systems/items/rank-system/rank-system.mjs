@@ -196,7 +196,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Class:${TERIOCK.index.classes[toCamelCase(this._source.class ?? "")] ?? ""}`;
+    return `Class:${TERIOCK.index.classes[this._source.class ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

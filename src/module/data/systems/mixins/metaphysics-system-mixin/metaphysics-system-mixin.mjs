@@ -1,5 +1,6 @@
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
+import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -25,6 +26,12 @@ export default function MetaphysicsSystemMixin(Base) {
         elements: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.elements })),
         powerSources: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.powerSources })),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateIterables(source, "effectTypes", "elements", "powerSources");
+      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */

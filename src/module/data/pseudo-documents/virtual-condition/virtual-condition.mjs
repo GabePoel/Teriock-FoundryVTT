@@ -3,6 +3,8 @@ import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { dotJoin, toId } from "../../../helpers/string.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
+import { migrateStatuses } from "../../fields/tools/migrations.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../mixins/_module.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
@@ -57,12 +59,18 @@ export default class VirtualCondition
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       status: new fields.StringField({
-        choices: TERIOCK.reference.conditions,
-        initial: Object.keys(TERIOCK.reference.conditions)[0],
+        initial: Object.keys(TERIOCK.statuses.conditions)[0],
         label: "TERIOCK.COMMON.Condition",
         required: true,
+        choices: () => objectMap(TERIOCK.statuses.conditions, c => c.name, { localize: true }),
       }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateStatuses(source, "status");
+    return super.migrateData(source, options);
   }
 
   /** @type {Set<TeriockDocument>} */

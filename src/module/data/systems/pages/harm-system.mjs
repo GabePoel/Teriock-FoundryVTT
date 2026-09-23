@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../helpers/string.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
@@ -33,7 +32,7 @@ export default class HarmSystem
   /** @inheritDoc */
   get wikiPage() {
     const index = this.parent.type === "drain" ? TERIOCK.index.drainTypes : TERIOCK.index.damageTypes;
-    return `${this.parent.type.capitalize()}:${index[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `${this.parent.type.capitalize()}:${index[this.identifier ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */

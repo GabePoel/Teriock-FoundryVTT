@@ -9,7 +9,7 @@ export default {
     max: 2,
     part: "TERIOCK.EFFECTS.Hacks.arm.part",
     remove: "TERIOCK.EFFECTS.Hacks.arm.remove",
-    statuses: ["armHack1", "armHack2"],
+    statuses: ["arm-hack-1", "arm-hack-2"],
   },
   leg: {
     icon: icons.manifest.hack.leg,
@@ -17,7 +17,7 @@ export default {
     max: 2,
     part: "TERIOCK.EFFECTS.Hacks.leg.part",
     remove: "TERIOCK.EFFECTS.Hacks.leg.remove",
-    statuses: ["legHack1", "legHack2"],
+    statuses: ["leg-hack-1", "leg-hack-2"],
   },
 
   body: {
@@ -26,7 +26,7 @@ export default {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.body.part",
     remove: "TERIOCK.EFFECTS.Hacks.body.remove",
-    statuses: ["bodyHack"],
+    statuses: ["body-hack"],
   },
 
   ear: {
@@ -35,7 +35,7 @@ export default {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.ear.part",
     remove: "TERIOCK.EFFECTS.Hacks.ear.remove",
-    statuses: ["earHack"],
+    statuses: ["ear-hack"],
   },
   eye: {
     icon: icons.manifest.hack.eye,
@@ -43,7 +43,7 @@ export default {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.eye.part",
     remove: "TERIOCK.EFFECTS.Hacks.eye.remove",
-    statuses: ["eyeHack"],
+    statuses: ["eye-hack"],
   },
   mouth: {
     icon: icons.manifest.hack.mouth,
@@ -51,7 +51,7 @@ export default {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.mouth.part",
     remove: "TERIOCK.EFFECTS.Hacks.mouth.remove",
-    statuses: ["mouthHack"],
+    statuses: ["mouth-hack"],
   },
   nose: {
     icon: icons.manifest.hack.nose,
@@ -59,7 +59,7 @@ export default {
     max: 1,
     part: "TERIOCK.EFFECTS.Hacks.nose.part",
     remove: "TERIOCK.EFFECTS.Hacks.nose.remove",
-    statuses: ["noseHack"],
+    statuses: ["nose-hack"],
   },
 };
 

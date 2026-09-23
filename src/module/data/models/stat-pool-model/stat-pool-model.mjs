@@ -60,7 +60,7 @@ export default class StatPoolModel extends BaseDataModel {
     const reverse = impactConfig[this.#config?.impact]?.reverse;
     return async amount => {
       await reverse?.(this.actor, amount);
-      if (this.stat === "hp" && !this.actor?.statuses.has("criticallyWounded")) {
+      if (this.stat === "hp" && !this.actor?.statuses.has("critically-wounded")) {
         await this.actor?.system.takeAwaken();
       }
     };
@@ -109,16 +109,16 @@ export default class StatPoolModel extends BaseDataModel {
       img: this.#config.pool.img,
       name: this.dieName,
     }];
-    if (this.stat === "hp" && this.actor?.statuses.has("criticallyWounded")) {
+    if (this.stat === "hp" && this.actor?.statuses.has("critically-wounded")) {
       panels.push({
         bars: [],
         blocks: [{
-          text: TERIOCK.statuses.conditions.criticallyWounded.description,
+          text: TERIOCK.statuses.conditions["critically-wounded"].description,
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
         icon: TERIOCK.config.document.condition.icon,
-        img: TERIOCK.statuses.conditions.criticallyWounded.img,
-        name: TERIOCK.statuses.conditions.criticallyWounded.name,
+        img: TERIOCK.statuses.conditions["critically-wounded"].img,
+        name: TERIOCK.statuses.conditions["critically-wounded"].name,
       });
     } else if (this.stat === "hp" && this.actor?.statuses.has("unconscious")) {
       panels.push({

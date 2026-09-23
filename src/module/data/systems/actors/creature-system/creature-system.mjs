@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
@@ -18,7 +17,7 @@ export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSyst
 
   /** @inheritDoc */
   get wikiPage() {
-    return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Creature:${TERIOCK.index.creatures[this.identifier ?? ""] ?? ""}`;
   }
 
   /** @inheritDoc */
