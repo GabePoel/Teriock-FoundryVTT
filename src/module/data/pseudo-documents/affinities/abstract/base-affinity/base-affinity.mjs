@@ -14,6 +14,25 @@ const { fields } = foundry.data;
 const IDENTIFIER_SUGGESTIONS = {};
 
 /**
+ * Affinity categories renamed to their identifier types.
+ * @type {Record<string, string>}
+ */
+const RENAMED_CATEGORIES = {
+  abilities: "ability",
+  bodyParts: "body",
+  classes: "class",
+  conditions: "condition",
+  damageTypes: "damage",
+  drainTypes: "drain",
+  effectTypes: "effect",
+  elements: "element",
+  powerSources: "source",
+  properties: "property",
+  statuses: "condition",
+  tradecrafts: "tradecraft",
+};
+
+/**
  * An affinity that some effect grants against a specific thing.
  *
  * Relevant wiki pages:
@@ -52,7 +71,7 @@ export default class BaseAffinity
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       category: new fields.StringField({
-        initial: "abilities",
+        initial: "ability",
         required: true,
         choices: () => objectMap(TERIOCK.config.affinity.categories, c => c.label),
       }),
@@ -65,7 +84,7 @@ export default class BaseAffinity
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateThumbnails(source, "img");
-    if (source.category === "statuses") { source.category = "conditions"; }
+    source.category = RENAMED_CATEGORIES[source.category] ?? source.category;
     if ("value" in source) {
       if (source.category === "other") { source.name ??= source.value; }
       else { source.identifier ??= toKebabCase(source.value); }
@@ -93,7 +112,8 @@ export default class BaseAffinity
     const fallback = this.getNearestDocument()?.img ?? this._typeConfig?.img;
     if (this.category === "other") { return fallback; }
     return game.teriock.identifiers.getImg(this.targetIdentifier)
-      ?? TERIOCK.display.thumbnails.manifest[this._categoryConfig?.imgCategory]?.[toCamelCase(this.identifier)]
+      ?? TERIOCK.display.thumbnails.manifest[this._categoryConfig?.imgCategory ?? this.category]
+        ?.[toCamelCase(this.identifier)]
       ?? fallback;
   }
 
@@ -142,7 +162,7 @@ export default class BaseAffinity
     const path = this._categoryConfig.suggestions;
     if (!path) { return {}; }
     if (path === "registry") {
-      return game.teriock.identifiers.getNames(this._categoryConfig?.type, { permission: "LIMITED" });
+      return game.teriock.identifiers.getNames(this.category, { permission: "LIMITED" });
     }
     IDENTIFIER_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, e => e.label);
     return IDENTIFIER_SUGGESTIONS[path];
@@ -220,7 +240,7 @@ export default class BaseAffinity
    * @returns {TypedIdentifier}
    */
   get targetIdentifier() {
-    return `${this._categoryConfig?.type}:${this.identifier}`;
+    return `${this.category}:${this.identifier}`;
   }
 
   /**

@@ -31,7 +31,7 @@ export default class InventorySystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    const STATUS_IMMUNITY = { category: "conditions", relation: "immunities", type: "protection" };
+    const CONDITION_IMMUNITY = { category: "condition", type: "immunity" };
     const LIGHT_CHANGE = {
       priority: 150,
       qualifier: "1",
@@ -46,12 +46,16 @@ export default class InventorySystem extends BaseActorSystem {
       foundry.utils.mergeObject({
         effects: [{
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableDown"),
-          system: { automations: { invImmunity00002: { _id: "invImmunity00002", value: "down", ...STATUS_IMMUNITY } } },
+          system: {
+            affinities: { invImmunity00002: { _id: "invImmunity00002", identifier: "down", ...CONDITION_IMMUNITY } },
+          },
           type: "consequence",
         }, {
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableEncumbered"),
           system: {
-            automations: { invImmunity00001: { _id: "invImmunity00001", value: "encumbered", ...STATUS_IMMUNITY } },
+            affinities: {
+              invImmunity00001: { _id: "invImmunity00001", identifier: "encumbered", ...CONDITION_IMMUNITY },
+            },
           },
           type: "consequence",
         }, {

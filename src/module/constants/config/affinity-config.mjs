@@ -4,61 +4,28 @@ import { colors, thumbnails } from "../display/_module.mjs";
 // TODO: Migrate everything to registry.
 export default {
   categories: {
-    abilities: {
-      imgCategory: "ability",
-      label: "TYPES.ActiveEffect.ability",
-      suggestions: "registry",
-      type: "ability",
-    },
-    bodyParts: { imgCategory: "body", label: "TYPES.Item.body", suggestions: "registry", type: "body" },
-    classes: { imgCategory: "class", label: "TYPES.JournalEntryPage.class", suggestions: "registry", type: "class" },
-    conditions: {
-      imgCategory: "condition",
-      label: "TYPES.ActiveEffect.condition",
-      suggestions: "registry",
-      type: "condition",
-    },
-    damageTypes: {
-      imgCategory: "damage",
-      label: "TYPES.JournalEntryPage.damage",
-      suggestions: "registry",
-      type: "damage",
-    },
-    drainTypes: { imgCategory: "drain", label: "TYPES.JournalEntryPage.drain", suggestions: "registry", type: "drain" },
-    effectTypes: {
-      imgCategory: "effect",
+    ability: { label: "TYPES.ActiveEffect.ability", suggestions: "registry" },
+    body: { label: "TYPES.Item.body", suggestions: "registry" },
+    class: { label: "TYPES.JournalEntryPage.class", suggestions: "registry" },
+    condition: { label: "TYPES.ActiveEffect.condition", suggestions: "registry" },
+    damage: { label: "TYPES.JournalEntryPage.damage", suggestions: "registry" },
+    drain: { label: "TYPES.JournalEntryPage.drain", suggestions: "registry" },
+    effect: {
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
       suggestions: "config.metaphysics.effectTypes",
-      type: "effect",
     },
-    elements: {
-      imgCategory: "element",
-      label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
-      suggestions: "config.metaphysics.elements",
-      type: "element",
-    },
-    equipment: { imgCategory: "equipment", label: "TYPES.Item.equipment", suggestions: "registry", type: "equipment" },
-    powerSources: {
-      imgCategory: "effect",
+    element: { label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label", suggestions: "config.metaphysics.elements" },
+    equipment: { label: "TYPES.Item.equipment", suggestions: "registry" },
+    property: { label: "TYPES.ActiveEffect.property", suggestions: "registry" },
+    source: {
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
       suggestions: "config.metaphysics.powerSources",
-      type: "source",
     },
-    properties: {
-      imgCategory: "property",
-      label: "TYPES.ActiveEffect.property",
-      suggestions: "registry",
-      type: "property",
-    },
-    species: { imgCategory: "creature", label: "TYPES.Item.species", suggestions: "registry", type: "species" },
-    tradecrafts: {
-      imgCategory: "tradecraft",
-      label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
-      suggestions: "registry",
-      type: "tradecraft",
-    },
+    species: { imgCategory: "creature", label: "TYPES.Item.species", suggestions: "registry" },
+    style: { label: "TYPES.JournalEntryPage.style", suggestions: "registry" },
+    tradecraft: { label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title", suggestions: "registry" },
 
-    other: { format: "none", imgCategory: "none", label: "TERIOCK.COMMON.Other", suggestions: "none" },
+    other: { format: "none", label: "TERIOCK.COMMON.Other", suggestions: "none" },
   },
   // no sort
   groups: {

@@ -72,26 +72,24 @@ export default function ActorAffinitiesPart(Base) {
      * Relevant wiki pages:
      * - [Protection keywords](https://wiki.teriock.com/index.php/Category:Protection_keywords)
      *
-     * @param {Teriock.Keys.AffinityCategory} category - Category of protection
-     * @param {string} value - Specific protection
-     * @returns {boolean} Whether or not there's some protection against the specified key and value
-     * @todo Test this
+     * @param {TypedIdentifier} identifier - What to check for protection against
+     * @returns {boolean} Whether or not there's some protection against the identifier
      */
-    isProtected(category, value) {
+    isProtected(identifier) {
       return PROTECTION_TYPES.flatMap(type => this.affinities.getTypeSync(type, { active: true, isPassive: true }))
-        .some(a => a.category === category && (category === "other" ? a.name : a.identifier) === value);
+        .some(a => a.targetIdentifier === identifier);
     }
 
     /** @inheritDoc */
     prepareVirtualEffects() {
       super.prepareVirtualEffects();
-      this._addVirtualConditionAffinity("hollied", "resistance", "effectTypes", "reanimation");
-      this._addVirtualConditionAffinity("terrored", "resistance", "effectTypes", "healing");
-      this._addVirtualConditionAffinity("terrored", "resistance", "effectTypes", "revival");
-      this._addVirtualConditionAffinity("frenzied", "resistance", "conditions", "frightened");
-      this._addVirtualConditionAffinity("defying-death", "resistance", "conditions", "dead");
-      this._addVirtualConditionAffinity("defying-death", "resistance", "conditions", "unconscious");
-      this._addVirtualConditionAffinity("allured", "binding", "conditions", "allured");
+      this._addVirtualConditionAffinity("hollied", "resistance", "effect", "reanimation");
+      this._addVirtualConditionAffinity("terrored", "resistance", "effect", "healing");
+      this._addVirtualConditionAffinity("terrored", "resistance", "effect", "revival");
+      this._addVirtualConditionAffinity("frenzied", "resistance", "condition", "frightened");
+      this._addVirtualConditionAffinity("defying-death", "resistance", "condition", "dead");
+      this._addVirtualConditionAffinity("defying-death", "resistance", "condition", "unconscious");
+      this._addVirtualConditionAffinity("allured", "binding", "condition", "allured");
       this._addVirtualConditionAffinity("burned", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.burned"));
       this._addVirtualConditionAffinity(
         "silenced",
