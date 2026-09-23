@@ -1,5 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
-import { toCamelCase, toKebabCase } from "../../../../../../helpers/string.mjs";
+import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -50,8 +50,8 @@ export default function ActorScalingPart(Base) {
     #getRankRollData() {
       const data = {};
       const ranks = this.parent.previewedTypes.rank;
-      for (const c of Object.keys(TERIOCK.index.classes)) {
-        data[`rank.${toKebabCase(c)}`] = ranks.filter(r => toCamelCase(r.system._source.class) === c).length;
+      for (const c of Object.keys(TERIOCK.config.class.classes)) {
+        data[`rank.${toKebabCase(c)}`] = ranks.filter(r => r.system._source.class === c).length;
       }
       for (const a of Object.keys(TERIOCK.config.class.archetypes)) {
         data[`rank.${a}`] = ranks.filter(r => r.system._source.archetype === a).length;

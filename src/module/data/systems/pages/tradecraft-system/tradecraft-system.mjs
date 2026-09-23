@@ -43,9 +43,4 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
       wrappers: [TERIOCK.config.tradecraft.fields[this._source.field]?.label],
     }];
   }
-
-  /** @inheritDoc */
-  get wikiPage() {
-    return `Tradecraft:${TERIOCK.index.tradecrafts[this.identifier ?? ""] ?? ""}`;
-  }
 }

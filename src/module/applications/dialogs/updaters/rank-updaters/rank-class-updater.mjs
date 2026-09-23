@@ -1,6 +1,5 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
-import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
 /**
@@ -21,9 +20,9 @@ export default class RankClassUpdater extends BaseUpdater {
    */
   #normalizeCurrentData() {
     const archetype = this._currentData.system.archetype;
-    if (TERIOCK.config.class.classes[toCamelCase(this._currentData.system.class)]?.archetype !== archetype) {
-      this._currentData.system.class = toKebabCase(
-        Object.keys(TERIOCK.config.class.classes).find(k => TERIOCK.config.class.classes[k].archetype === archetype),
+    if (TERIOCK.config.class.classes[this._currentData.system.class]?.archetype !== archetype) {
+      this._currentData.system.class = Object.keys(TERIOCK.config.class.classes).find(k =>
+        TERIOCK.config.class.classes[k].archetype === archetype
       );
     }
   }
@@ -39,7 +38,7 @@ export default class RankClassUpdater extends BaseUpdater {
       const archetype = this._currentData.system.archetype;
       const choices = {};
       for (const [key, config] of Object.entries(TERIOCK.config.class.classes)) {
-        if (config.archetype === archetype) { choices[toKebabCase(key)] = _loc(config.label); }
+        if (config.archetype === archetype) { choices[key] = _loc(config.label); }
       }
       return choices;
     }

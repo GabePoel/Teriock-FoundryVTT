@@ -1,3 +1,4 @@
+import { getName } from "../../../helpers/utils.mjs";
 import BaseModifierModel from "./base-modifier-model/base-modifier-model.mjs";
 
 const { fields } = foundry.data;
@@ -21,7 +22,7 @@ export default class TradecraftModel extends BaseModifierModel {
 
   /** @inheritDoc */
   get name() {
-    return TERIOCK.reference.tradecrafts[this.key];
+    return getName(`tradecraft:${this.key}`);
   }
 
   /** @inheritDoc */

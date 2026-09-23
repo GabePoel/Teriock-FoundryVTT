@@ -16,11 +16,6 @@ export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSyst
   static metadata = mergeMetadata(super.metadata, { type: "creature" });
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Creature:${TERIOCK.index.creatures[this.identifier ?? ""] ?? ""}`;
-  }
-
-  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }

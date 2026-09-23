@@ -28,20 +28,20 @@ export default {
     effectTypes: {
       imgCategory: "effect",
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
-      suggestions: "reference.effectTypes",
+      suggestions: "config.metaphysics.effectTypes",
       type: "effect",
     },
     elements: {
       imgCategory: "element",
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
-      suggestions: "reference.elements",
+      suggestions: "config.metaphysics.elements",
       type: "element",
     },
     equipment: { imgCategory: "equipment", label: "TYPES.Item.equipment", suggestions: "registry", type: "equipment" },
     powerSources: {
       imgCategory: "effect",
       label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
-      suggestions: "reference.powerSources",
+      suggestions: "config.metaphysics.powerSources",
       type: "source",
     },
     properties: {

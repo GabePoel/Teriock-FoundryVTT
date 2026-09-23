@@ -20,6 +20,7 @@ export default class IdentifierField extends StringField {
       reset: null,
       suggestions: null,
       type: null,
+      validateChoices: true,
     });
   }
 
@@ -29,6 +30,12 @@ export default class IdentifierField extends StringField {
    */
   constructor(options = {}, context = {}) {
     super(options, context);
+  }
+
+  /** @inheritDoc */
+  _isValidChoice(value) {
+    if (!this.validateChoices) { return true; }
+    return super._isValidChoice(value);
   }
 
   /**

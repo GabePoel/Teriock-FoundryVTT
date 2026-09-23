@@ -362,10 +362,13 @@ Hooks.once("i18nInit", () => {
     }
   }
   helpers.localization.performPreLocalization(TERIOCK);
+  game.tooltip.initializeLoadingTooltip();
+});
 
-  // Formula Editor Context
-  // ----------------------
+// Formula Editor Context
+// ======================
 
+Hooks.once("teriock.identifiersInit", () => {
   Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
     ...TERIOCK.rollContext.ability,
     ...TERIOCK.rollContext.archetype,
@@ -382,7 +385,6 @@ Hooks.once("i18nInit", () => {
     ...TERIOCK.rollContext.resource,
     ...TERIOCK.rollContext.species,
   });
-  game.tooltip.initializeLoadingTooltip();
 });
 
 // Final Steps

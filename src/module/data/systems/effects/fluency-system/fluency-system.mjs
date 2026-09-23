@@ -52,7 +52,7 @@ export default class FluencySystem
     return [...super._displayFieldsContent, {
       classes: [TERIOCK.display.panels.styles.derived],
       editable: false,
-      label: TERIOCK.reference.tradecrafts[this._source.tradecraft],
+      label: TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft]?.label,
       path: "system.tradecraftDescription",
     }];
   }
@@ -60,7 +60,7 @@ export default class FluencySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.reference.tradecrafts[this._source.tradecraft];
+    parts.subtitle = TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft]?.label;
     parts.text = dotJoin([TERIOCK.config.tradecraft.fields[this._source.field].label, parts.text]);
     return parts;
   }
@@ -71,8 +71,8 @@ export default class FluencySystem
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Tradecraft:${TERIOCK.index.tradecrafts[this._source.tradecraft ?? ""] ?? ""}`;
+  get wikiIdentifier() {
+    return this.tradecraft;
   }
 
   /** @inheritDoc */

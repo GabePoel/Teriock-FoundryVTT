@@ -55,7 +55,9 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
 
       const index = game.packs.get("teriock.player").index;
       context.tradecraftMacros = Object.fromEntries(
-        Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [tc, index.getName(`Make ${name} Check`)?.uuid]),
+        Object.entries(TERIOCK.config.tradecraft.tradecrafts).map((
+          [tc, v],
+        ) => [tc, index.getName(`Make ${v.label} Check`)?.uuid]),
       );
 
       const scoreIconClass = score => {
@@ -69,7 +71,7 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
       const competenceIconClass = level =>
         TERIOCK.config.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
       context.tradecraftDisplay = Object.fromEntries(
-        Object.keys(TERIOCK.index.tradecrafts).map(key => {
+        Object.keys(TERIOCK.config.tradecraft.tradecrafts).map(key => {
           const tradecraft = this.document.system.tradecrafts[key];
           const source = this.document.system._source.tradecrafts[key];
           const score = tradecraft?.score ?? 0;

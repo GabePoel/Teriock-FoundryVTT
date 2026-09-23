@@ -318,11 +318,6 @@ export default class AbilitySystem
     return super.useText;
   }
 
-  /** @inheritDoc */
-  get wikiPage() {
-    return `Ability:${TERIOCK.index.abilities[this.identifier ?? ""] ?? ""}`;
-  }
-
   /**
    * @inheritDoc
    * @param {object} [data]

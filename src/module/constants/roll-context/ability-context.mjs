@@ -43,7 +43,7 @@ const abilityContext = {
 export default abilityContext;
 
 preLocalizeConfig("rollContext.ability");
-Hooks.once("i18nInit", () => {
+Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.config.ability.maneuver).forEach(([k, v]) => {
     abilityContext[`maneuver.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.maneuver", { name: _loc(v) });
   });
@@ -83,8 +83,8 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.stat).forEach(([k, v]) => {
     abilityContext[`costs.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", { name: _loc(v.label) });
   });
-  Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    abilityContext[`class.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: _loc(v) });
+  Object.entries(TERIOCK.config.class.classes).forEach(([k, v]) => {
+    abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: _loc(v.label) });
   });
   abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
 });

@@ -1,4 +1,5 @@
 import { mergeMetadata } from "../../../helpers/construction.mjs";
+import { parseIdentifier } from "../../../helpers/utils.mjs";
 /**
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
  * @template {AnyConstructor} T
@@ -16,7 +17,15 @@ export default function WikiSystemMixin(Base) {
      * @returns {boolean}
      */
     get isOnWiki() {
-      return Boolean(this.wikiPage) && !this.wikiPage.endsWith(":");
+      return Boolean(this.wikiPage);
+    }
+
+    /**
+     * The identifier of this document's [wiki](https://wiki.teriock.com) page.
+     * @returns {TypedIdentifier|null}
+     */
+    get wikiIdentifier() {
+      return this.parent.typedIdentifier;
     }
 
     /**
@@ -24,7 +33,8 @@ export default function WikiSystemMixin(Base) {
      * @returns {string}
      */
     get wikiPage() {
-      return "";
+      const { identifier, type } = parseIdentifier(this.wikiIdentifier);
+      return TERIOCK.config.wiki.index[type]?.[identifier] ?? "";
     }
 
     /**

@@ -7,10 +7,9 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
  */
 export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
-  get wikiPage() {
-    const namespace = this.parent.parent?.name ?? "";
-    const indexKey = TERIOCK.config.wiki.namespaces[namespace]?.index;
-    const index = indexKey ? TERIOCK.index[indexKey] : null;
-    return `${namespace}:${index?.[this.identifier ?? ""] ?? ""}`;
+  get wikiIdentifier() {
+    const namespace = this.parent.parent?.name;
+    if (!TERIOCK.config.wiki.namespaces[namespace] || !this.identifier) { return null; }
+    return `${namespace.toLowerCase()}:${this.identifier}`;
   }
 }

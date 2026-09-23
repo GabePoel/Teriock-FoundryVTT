@@ -24,7 +24,9 @@ export default class TradecraftCheckExecution extends mixClasses(BaseExecution, 
 
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.reference.tradecrafts[this.tradecraft] });
+    return _loc("TERIOCK.ROLLS.Tradecraft.name", {
+      value: TERIOCK.config.tradecraft.tradecrafts[this.tradecraft]?.label,
+    });
   }
 
   /** @inheritDoc */

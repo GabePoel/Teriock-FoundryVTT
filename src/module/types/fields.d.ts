@@ -30,6 +30,7 @@ declare global {
       reset?: string | null;
       suggestions?: IdentifierSuggestions | null;
       type?: string | null;
+      validateChoices?: boolean;
     };
 
     export type _TypedIdentifierFieldOptions = {

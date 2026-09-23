@@ -1,3 +1,4 @@
+import { objectMap } from "../../helpers/utils.mjs";
 import ChoiceSelector from "./choice-selector.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
@@ -10,7 +11,7 @@ import DocumentSelector from "./document-selector.mjs";
  * @returns {Promise<Teriock.Keys.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
-  return ChoiceSelector.prompt(TERIOCK.reference.equipmentClasses, {
+  return ChoiceSelector.prompt(objectMap(TERIOCK.config.equipment.equipmentClasses, e => e.label), {
     hint: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.title"),

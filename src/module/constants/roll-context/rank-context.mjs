@@ -1,5 +1,4 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { toKebabCase } from "../../helpers/string.mjs";
 import usableContext from "./usable-context.mjs";
 
 const rankContext = {
@@ -16,9 +15,9 @@ const rankContext = {
 export default rankContext;
 
 preLocalizeConfig("rollContext.rank");
-Hooks.once("i18nInit", () => {
-  Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    rankContext[`class.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v) });
+Hooks.once("teriock.identifiersInit", () => {
+  Object.entries(TERIOCK.config.class.classes).forEach(([k, v]) => {
+    rankContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
     rankContext[`archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });

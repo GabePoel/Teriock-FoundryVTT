@@ -45,24 +45,24 @@ const armamentContext = {
 export default armamentContext;
 
 preLocalizeConfig("rollContext.armament");
-Hooks.once("i18nInit", () => {
-  Object.entries(TERIOCK.reference.fightingStyles).forEach(([k, v]) => {
-    armamentContext[`style.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name: _loc(v) });
+Hooks.once("teriock.identifiersInit", () => {
+  Object.entries(game.teriock.identifiers.getNames("style", { permission: "LIMITED" })).forEach(([k, name]) => {
+    armamentContext[`style.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name });
   });
-  Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
-    armamentContext[`dmg.type.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.damageType", { name: _loc(v) });
+  Object.entries(game.teriock.identifiers.getNames("damage", { permission: "LIMITED" })).forEach(([k, name]) => {
+    armamentContext[`dmg.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.damageType", { name });
   });
-  Object.entries(TERIOCK.reference.properties).forEach(([k, v]) => {
-    armamentContext[`prop.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name: _loc(v) });
+  Object.entries(game.teriock.identifiers.getNames("property", { permission: "LIMITED" })).forEach(([k, name]) => {
+    armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
   });
   Object.entries(TERIOCK.config.impact).forEach(([k, v]) => {
     armamentContext[`impact.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: _loc(v.label) });
   });
-  Object.entries(TERIOCK.reference.equipmentClasses).forEach(([k, v]) => {
-    armamentContext[`class.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: _loc(v) });
+  Object.entries(TERIOCK.config.equipment.equipmentClasses).forEach(([k, v]) => {
+    armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: _loc(v.label) });
   });
-  Object.entries(TERIOCK.reference.equipment).forEach(([k, v]) => {
-    armamentContext[`type.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name: _loc(v) });
+  Object.entries(game.teriock.identifiers.getNames("equipment", { permission: "LIMITED" })).forEach(([k, name]) => {
+    armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name });
   });
   Object.keys(TERIOCK.config.equipment.kind).forEach(k => {
     armamentContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.kind", {

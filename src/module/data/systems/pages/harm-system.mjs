@@ -30,12 +30,6 @@ export default class HarmSystem
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    const index = this.parent.type === "drain" ? TERIOCK.index.drainTypes : TERIOCK.index.damageTypes;
-    return `${this.parent.type.capitalize()}:${index[this.identifier ?? ""] ?? ""}`;
-  }
-
-  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }

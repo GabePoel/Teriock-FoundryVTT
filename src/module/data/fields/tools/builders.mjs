@@ -6,7 +6,6 @@ import dieConfig from "../../../constants/config/death-bag-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
 import { thumbnails } from "../../../constants/display/_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
-import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
 
@@ -42,7 +41,7 @@ function getTradecraftChoices() {
     if (!RAW_TRADECRAFT_CHOICES[fieldKey]) {
       RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: _sloc(tradecraftConfig.fields[fieldKey].label) };
     }
-    RAW_TRADECRAFT_CHOICES[fieldKey].choices[toKebabCase(k)] = _sloc(v.label);
+    RAW_TRADECRAFT_CHOICES[fieldKey].choices[k] = _sloc(v.label);
   }
   return formatDynamicSelectOptions(RAW_TRADECRAFT_CHOICES);
 }
@@ -58,19 +57,9 @@ function getClassChoices() {
     if (!RAW_CLASS_CHOICES[archetypeKey]) {
       RAW_CLASS_CHOICES[archetypeKey] = { choices: {}, label: _sloc(classConfig.archetypes[archetypeKey].label) };
     }
-    RAW_CLASS_CHOICES[archetypeKey].choices[toKebabCase(k)] = _sloc(v.label);
+    RAW_CLASS_CHOICES[archetypeKey].choices[k] = _sloc(v.label);
   }
   return formatDynamicSelectOptions(RAW_CLASS_CHOICES);
-}
-
-/**
- * Lazily build identifier suggestions from a localized reference index.
- * @param {string} key - Key in `TERIOCK.reference`
- * @returns {() => Record<Identifier, string>}
- */
-function referenceSuggestions(key) {
-  let cache;
-  return () => cache ??= objectMap(TERIOCK.reference[key], undefined, { kebabify: true });
 }
 
 /**
@@ -413,6 +402,16 @@ export function tradecraftsField(options = {}) {
 }
 
 /**
+ * Field for selecting identifiers from a config table.
+ * @param {Record<Identifier, { label: string }>} table
+ * @param {ArrayFieldOptions} [options]
+ * @returns {SetField}
+ */
+export function identifierSetField(table, options = {}) {
+  return new SetField(new IdentifierField({ blank: false, choices: table, nullable: false }), options);
+}
+
+/**
  * Field for selecting a field.
  * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
  * @returns {IdentifierField}
@@ -450,7 +449,7 @@ export function classField(options = {}) {
  * @returns {IdentifierField}
  */
 export function equipmentTypeField(options = {}) {
-  return new IdentifierField({ suggestions: referenceSuggestions("equipment"), type: "equipment", ...options });
+  return new IdentifierField({ suggestions: true, type: "equipment", ...options });
 }
 
 /**

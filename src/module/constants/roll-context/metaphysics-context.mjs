@@ -1,17 +1,15 @@
-import { toKebabCase } from "../../helpers/string.mjs";
-
 const metaphysicsContext = {};
 export default metaphysicsContext;
 
-Hooks.once("i18nInit", () => {
-  Object.entries(TERIOCK.reference.elements).forEach(([k, v]) => {
-    metaphysicsContext[`el.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", { name: _loc(v) });
+Hooks.once("teriock.identifiersInit", () => {
+  Object.entries(TERIOCK.config.metaphysics.elements).forEach(([k, v]) => {
+    metaphysicsContext[`el.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", { name: _loc(v.label) });
   });
-  Object.entries(TERIOCK.reference.effectTypes).forEach(([k, v]) => {
-    metaphysicsContext[`et.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.effectType", { name: _loc(v) });
+  Object.entries(TERIOCK.config.metaphysics.effectTypes).forEach(([k, v]) => {
+    metaphysicsContext[`et.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.effectType", { name: _loc(v.label) });
   });
-  Object.entries(TERIOCK.reference.powerSources).forEach(([k, v]) => {
-    metaphysicsContext[`ps.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.powerSource", { name: _loc(v) });
+  Object.entries(TERIOCK.config.metaphysics.powerSources).forEach(([k, v]) => {
+    metaphysicsContext[`ps.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.powerSource", { name: _loc(v.label) });
   });
   Hooks.call("teriock.i18nMetaphysicsInit");
 });

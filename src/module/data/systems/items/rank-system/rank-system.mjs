@@ -2,7 +2,6 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
@@ -170,7 +169,7 @@ export default class RankSystem
    * @returns {string}
    */
   get classIcon() {
-    return TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.icon;
+    return TERIOCK.config.class.classes[this._source.class]?.icon;
   }
 
   /** @inheritDoc */
@@ -195,8 +194,8 @@ export default class RankSystem
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Class:${TERIOCK.index.classes[this._source.class ?? ""] ?? ""}`;
+  get wikiIdentifier() {
+    return this.class;
   }
 
   /** @inheritDoc */
@@ -250,7 +249,7 @@ export default class RankSystem
     super.prepareBaseData();
     // Enforce matching class/archetype
     this.archetype = `archetype:${
-      TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.archetype ?? this._source.archetype
+      TERIOCK.config.class.classes[this._source.class]?.archetype ?? this._source.archetype
     }`;
     if (this.parent.sup?.type === "species") { this.kind = "innate"; }
   }

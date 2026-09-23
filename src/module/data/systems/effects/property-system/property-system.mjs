@@ -99,11 +99,6 @@ export default class PropertySystem
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Property:${TERIOCK.index.properties[this.identifier ?? ""] ?? ""}`;
-  }
-
-  /** @inheritDoc */
   getLocalRollData() {
     const data = Object.assign(super.getLocalRollData(), {
       "dmg.extra": this.extraDamage || 0,

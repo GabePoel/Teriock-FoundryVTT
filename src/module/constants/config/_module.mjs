@@ -19,10 +19,11 @@ import equipmentConfig from "./equipment-config.mjs";
 import hackConfig from "./hack-config.mjs";
 import illusionConfig from "./illusion-config.mjs";
 import impactConfig from "./impact-config.mjs";
-import indexConfig from "./index-config.mjs";
 import mathConfig from "./math-config.mjs";
+import metaphysicsConfig from "./metaphysics-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
+import speciesConfig from "./species-config.mjs";
 import statConfig from "./stat-config.mjs";
 import systemConfig from "./system-config.mjs";
 import tipConfig from "./tip-config.mjs";
@@ -53,10 +54,11 @@ const config = {
   hack: hackConfig,
   illusion: illusionConfig,
   impact: impactConfig,
-  index: indexConfig,
   math: mathConfig,
+  metaphysics: metaphysicsConfig,
   piercing: piercingConfig,
   power: powerConfig,
+  species: speciesConfig,
   stat: statConfig,
   system: systemConfig,
   tip: tipConfig,

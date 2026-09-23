@@ -41,7 +41,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       attuned: new TernaryField({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }),
       consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label" }),
       equipmentClasses: nullStringField({
-        choices: TERIOCK.reference.equipmentClasses,
+        choices: TERIOCK.config.equipment.equipmentClasses,
         label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
       }),
       equipped: new TernaryField({ label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label" }),

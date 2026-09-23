@@ -144,9 +144,7 @@ export default class BaseAffinity
     if (path === "registry") {
       return game.teriock.identifiers.getNames(this._categoryConfig?.type, { permission: "LIMITED" });
     }
-    IDENTIFIER_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, undefined, {
-      kebabify: true,
-    });
+    IDENTIFIER_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, e => e.label);
     return IDENTIFIER_SUGGESTIONS[path];
   }
 

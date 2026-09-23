@@ -38,8 +38,7 @@ import { default as statuses } from "../../src/en/statuses.json" with { type: "j
 import { default as systems } from "../../src/en/systems.json" with { type: "json" };
 import { default as terms } from "../../src/en/terms.json" with { type: "json" };
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
-import { default as conditions } from "../../src/json/index/conditions.json" with { type: "json" };
-import * as index from "../../src/module/constants/index.mjs";
+import { default as index } from "../../src/json/wiki-index.json" with { type: "json" };
 import { toCamelCase } from "../../src/module/helpers/string.mjs";
 import { sortObject } from "../script-utils.mjs";
 
@@ -73,31 +72,57 @@ const LANG = base;
 
 if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 
+const WIKI_TITLE_SUFFIXES = [
+  " creatures",
+  "ly powered abilities",
+  " powered abilities",
+  " effects",
+  " element abilities",
+  " Fighting Style",
+];
+
 /**
- * Index keys are identifiers so they are kebab-case. Localization keys are camelCase.
- * @param {Record<string, string>} obj
- * @returns {Record<string, string>}
- * @todo Find another way to handle this.
+ * Capitalize each word the way the wiki scraper does.
+ * @param {string} str
+ * @returns {string}
  */
-function camelKeys(obj) {
-  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [toCamelCase(k), v]));
+function toTitleCase(str) {
+  return str.toLowerCase().replace(/(?:^|\s|-)\w/g, (match) => match.toUpperCase());
 }
 
-statuses.TERIOCK.STATUSES.Conditions = camelKeys(conditions);
+/**
+ * Get a display name from a wiki page title.
+ * @param {string} title
+ * @param {boolean} titleCase
+ * @returns {string}
+ */
+function cleanWikiPage(title, titleCase) {
+  let name = title.split(":").slice(1).join(":");
+  const suffix = WIKI_TITLE_SUFFIXES.find(s => name.endsWith(s));
+  if (suffix) { name = name.slice(0, -suffix.length); }
+  return titleCase ? toTitleCase(name) : name;
+}
+
+/**
+ * Wiki index keys are identifiers so they are kebab-case. Localization keys are camelCase.
+ * @param {Record<string, string>} obj
+ * @param {boolean} [titleCase=false]
+ * @returns {Record<string, string>}
+ */
+function wikiKeys(obj, titleCase = false) {
+  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [toCamelCase(k), cleanWikiPage(v, titleCase)]));
+}
+
+statuses.TERIOCK.STATUSES.Conditions = wikiKeys(index.condition);
 
 Object.assign(terms.TERIOCK.TERMS, {
-  Classes: camelKeys(index.classes),
-  DamageTypes: camelKeys(index.damageTypes),
-  EffectTypes: camelKeys(index.effectTypes),
-  Elements: camelKeys(index.elements),
-  Equipment: camelKeys(index.equipment),
-  EquipmentClasses: camelKeys(index.equipmentClasses),
-  PowerSources: camelKeys(index.powerSources),
-  Properties: camelKeys(index.properties),
-  StoneColor: camelKeys(index.deathBag),
-  Tradecrafts: camelKeys(index.tradecrafts),
-  Traits: camelKeys(index.traits),
-  WeaponFightingStyles: camelKeys(index.fightingStyles),
+  Classes: wikiKeys(index.class),
+  EffectTypes: wikiKeys(index.effect, true),
+  Elements: wikiKeys(index.element),
+  EquipmentClasses: wikiKeys(index.classification, true),
+  PowerSources: wikiKeys(index.source),
+  Tradecrafts: wikiKeys(index.tradecraft),
+  Traits: wikiKeys(index.trait),
 });
 
 mergeObjects(

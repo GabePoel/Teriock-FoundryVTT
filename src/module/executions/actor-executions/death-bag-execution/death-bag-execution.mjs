@@ -152,7 +152,7 @@ export default class DeathBagExecution extends DocumentExecution {
       startingStones[color] = Math.floor(Math.max(await BaseRoll.getValue(this.stones[color], rollData), 0));
       totalStonesCount += startingStones[color];
       pulledStones[color] = 0;
-      this.wrappers.push(`${startingStones[color]} ${TERIOCK.reference.deathBag[color]}`);
+      this.wrappers.push(`${startingStones[color]} ${TERIOCK.config.deathBag.stones[color]?.label}`);
     }
     if (totalStonesCount > 99) {
       ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {

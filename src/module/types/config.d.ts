@@ -48,7 +48,9 @@ declare global {
       transformationReset?: { initial: boolean, update: Record<string, unknown> };
     };
 
-    export type WikiNamespaceEntry = { icon: string, identifierType: string, index?: string };
+    export type WikiNamespaceEntry = { icon: string, identifierType: string };
+
+    export type SimpleEntry = { img?: string, label: string };
 
     export type DocumentEntry = {
       documentName: Teriock.Documents.DocumentName;

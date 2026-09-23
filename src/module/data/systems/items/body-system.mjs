@@ -29,11 +29,6 @@ export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMix
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Body:${TERIOCK.index.bodyParts[this.identifier ?? ""] ?? ""}`;
-  }
-
-  /** @inheritDoc */
   async getPanelParts() {
     return {
       ...(await super.getPanelParts()),
@@ -51,7 +46,7 @@ export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMix
 
   /** @inheritDoc */
   prepareSpecialData() {
-    this.equipmentClasses.add("bodyParts");
+    this.equipmentClasses.add("body-parts");
     if (this.av.value) { this.equipmentClasses.add("armor"); }
     super.prepareSpecialData();
   }

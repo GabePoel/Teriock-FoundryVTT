@@ -121,6 +121,7 @@ export default class TeriockManager {
       game.tables.forEach(t => t.prepareData());
       for (const a of this.actorsNeedingBasicAbilities) { a.resetChildMaps(); }
       this.actorsNeedingBasicAbilities.clear();
+      Hooks.call("teriock.identifiersInit");
     });
   }
 

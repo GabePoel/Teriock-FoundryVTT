@@ -6,9 +6,4 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
  * Rules text for a weapon fighting style.
  * @mixes WikiSystem
  */
-export default class StyleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
-  /** @inheritDoc */
-  get wikiPage() {
-    return `Property:${TERIOCK.index.fightingStyles[this.identifier ?? ""] ?? ""} Fighting Style`;
-  }
-}
+export default class StyleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {}

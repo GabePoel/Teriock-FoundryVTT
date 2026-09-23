@@ -5,7 +5,7 @@ import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
-import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
+import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs";
@@ -55,7 +55,7 @@ export default function ArmamentSystemMixin(Base) {
           twoHanded: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
           types: new fields.SetField(new IdentifierField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
-        equipmentClasses: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.equipmentClasses })),
+        equipmentClasses: identifierSetField(TERIOCK.config.equipment.equipmentClasses),
         impacts: new fields.SetField(
           new fields.StringField({
             choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
@@ -71,7 +71,17 @@ export default function ArmamentSystemMixin(Base) {
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
         spellTurning: new fields.BooleanField(),
-        style: new IdentifierField({ initial: null, nullable: true, placeholder: _loc("COMMON.None"), type: "style" }),
+        style: new IdentifierField({
+          initial: null,
+          nullable: true,
+          placeholder: _loc("COMMON.None"),
+          type: "style",
+          validateChoices: false,
+          choices: () =>
+            teriock.helpers.localization.choicesWithNone(
+              game.teriock.identifiers.getNames("style", { permission: "LIMITED" }),
+            ),
+        }),
         styleDescription: initialText(),
         vitals: new fields.BooleanField(),
       });
@@ -214,12 +224,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {Teriock.Display.DisplayField[]}
      */
     get _displayInputsArmament() {
-      return [{
-        choices: teriock.helpers.localization.choicesWithNone(
-          game.teriock.identifiers.getNames("style", { permission: "LIMITED" }),
-        ),
-        path: "system.style",
-      }];
+      return ["system.style"];
     }
 
     /** @inheritDoc */
@@ -234,7 +239,7 @@ export default function ArmamentSystemMixin(Base) {
     get _equipmentClassesTags() {
       return Array.from(this.equipmentClasses).map(t => {
         return {
-          label: TERIOCK.reference.equipmentClasses[t],
+          label: TERIOCK.config.equipment.equipmentClasses[t]?.label,
           tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
         };
       });

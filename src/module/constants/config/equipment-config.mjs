@@ -1,8 +1,10 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { wikiIndexToConfig } from "../../helpers/utils.mjs";
 import { colors, icons } from "../display/_module.mjs";
 import systemConfig from "./system-config.mjs";
 
 export default {
+  equipmentClasses: wikiIndexToConfig("classification", "TERIOCK.TERMS.EquipmentClasses"),
   kind: /** @enum {Teriock.Config.KindEntry} */ {
     enchanted: {
       color: colors.palette.blue,
@@ -25,4 +27,5 @@ export default {
   unidentifiedProperties: ["cumbersome", "destroyed", "glowing", "master-crafted", "morganti", "shattered", "small"],
 };
 
+preLocalizeConfig("config.equipment.equipmentClasses", { key: "label" });
 preLocalizeConfig("config.equipment.kind", { keys: ["label"] });

@@ -1,6 +1,6 @@
 import type statConfig from "../constants/config/stat-config.mjs";
 
-import { config, display, index, statuses } from "../constants/_module.mjs";
+import { config, display, statuses } from "../constants/_module.mjs";
 
 declare global {
   namespace Teriock.Keys {
@@ -23,11 +23,11 @@ declare global {
       | Teriock.Keys.ReactiveExecutionTime
       | Teriock.Keys.SlowExecutionTime;
     export type Expansion = keyof typeof config.ability.expansion;
-    export type EffectType = keyof typeof index.effectTypes;
+    export type EffectType = keyof typeof config.metaphysics.effectTypes;
 
     // Tag Keys
-    export type Element = keyof typeof index.elements;
-    export type PowerSource = keyof typeof index.powerSources;
+    export type Element = keyof typeof config.metaphysics.elements;
+    export type PowerSource = keyof typeof config.metaphysics.powerSources;
 
     // Attribute Keys
     export type Attribute = keyof typeof config.attribute;
@@ -45,17 +45,17 @@ declare global {
     export type CommonOutcome = keyof typeof config.consequence.common;
 
     // Armament Keys
-    export type EquipmentClass = keyof typeof index.equipmentClasses;
-    export type FightingStyle = keyof typeof index.fightingStyles;
+    export type EquipmentClass = keyof typeof config.equipment.equipmentClasses;
+    export type FightingStyle = keyof typeof config.wiki.index.style;
     export type EquipmentKind = keyof typeof config.equipment.kind;
     /** @deprecated Use {@link EquipmentKind} */
     export type PowerLevel = EquipmentKind;
 
     // Property Keys
-    export type Property = keyof typeof index.properties;
+    export type Property = keyof typeof config.wiki.index.property;
 
     // Species Keys
-    export type Trait = keyof typeof index.traits;
+    export type Trait = keyof typeof config.species.traits;
 
     // Kind Keys
     export type Kind = keyof typeof config.system.defaultKinds;

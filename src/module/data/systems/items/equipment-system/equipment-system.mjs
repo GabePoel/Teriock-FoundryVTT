@@ -138,8 +138,8 @@ export default class EquipmentSystem
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Equipment:${TERIOCK.index.equipment[this._source.equipmentType ?? ""] ?? ""}`;
+  get wikiIdentifier() {
+    return this.equipmentType;
   }
 
   /** @inheritDoc */

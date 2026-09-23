@@ -1,4 +1,7 @@
+import { default as thumbnails } from "../../assets/thumbnails/manifest.json" with { type: "json" };
+import { default as index } from "../../json/wiki-index.json" with { type: "json" };
 import { choicesWithNone, localizeChoices } from "./localization.mjs";
+import { toCamelCase } from "./string.mjs";
 
 /**
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
@@ -351,4 +354,21 @@ export function deleteProperties(object, ...keys) {
     if (!success) { allDeleted = false; }
   }
   return allDeleted;
+}
+
+/**
+ * Build a simple config from the wiki index.
+ * @param {string} indexKey
+ * @param {string} localizationPrefix
+ * @returns {Record<string, Teriock.Config.SimpleEntry>}
+ */
+export function wikiIndexToConfig(indexKey, localizationPrefix) {
+  return Object.fromEntries(
+    Object.keys(index[indexKey]).map(k => {
+      const entry = { label: `${localizationPrefix}.${toCamelCase(k)}` };
+      const img = thumbnails[indexKey]?.[toCamelCase(k)];
+      if (img) { entry.img = img; }
+      return [k, entry];
+    }),
+  );
 }

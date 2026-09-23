@@ -8,6 +8,7 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
+import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
@@ -85,7 +86,7 @@ export default class SpeciesSystem
           validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
         }),
       }),
-      traits: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.traits })),
+      traits: identifierSetField(TERIOCK.config.species.traits),
     });
   }
 
@@ -168,7 +169,7 @@ export default class SpeciesSystem
    */
   get _traitTags() {
     return Array.from(this.traits).map(t => {
-      return { label: TERIOCK.reference.traits[t], tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
+      return { label: TERIOCK.config.species.traits[t]?.label, tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
     });
   }
 
@@ -181,8 +182,8 @@ export default class SpeciesSystem
   }
 
   /** @inheritDoc */
-  get wikiPage() {
-    return `Creature:${TERIOCK.index.creatures[this.identifier ?? ""] ?? ""}`;
+  get wikiIdentifier() {
+    return this.identifier ? `creature:${this.identifier}` : null;
   }
 
   /** @inheritDoc */

@@ -24,15 +24,19 @@ export default {
     berserker: { archetype: "warrior", icon: icons.manifest.class.berserker, label: "TERIOCK.TERMS.Classes.berserker" },
     corsair: { archetype: "semi", icon: icons.manifest.class.corsair, label: "TERIOCK.TERMS.Classes.corsair" },
     duelist: { archetype: "warrior", icon: icons.manifest.class.duelist, label: "TERIOCK.TERMS.Classes.duelist" },
-    flameMage: { archetype: "mage", icon: icons.manifest.class.flameMage, label: "TERIOCK.TERMS.Classes.flameMage" },
+    "flame-mage": { archetype: "mage", icon: icons.manifest.class.flameMage, label: "TERIOCK.TERMS.Classes.flameMage" },
     journeyman: {
       archetype: "everyman",
       icon: icons.manifest.class.journeyman,
       label: "TERIOCK.TERMS.Everyman.journeyman",
     },
     knight: { archetype: "warrior", icon: icons.manifest.class.knight, label: "TERIOCK.TERMS.Classes.knight" },
-    lifeMage: { archetype: "mage", icon: icons.manifest.class.lifeMage, label: "TERIOCK.TERMS.Classes.lifeMage" },
-    natureMage: { archetype: "mage", icon: icons.manifest.class.natureMage, label: "TERIOCK.TERMS.Classes.natureMage" },
+    "life-mage": { archetype: "mage", icon: icons.manifest.class.lifeMage, label: "TERIOCK.TERMS.Classes.lifeMage" },
+    "nature-mage": {
+      archetype: "mage",
+      icon: icons.manifest.class.natureMage,
+      label: "TERIOCK.TERMS.Classes.natureMage",
+    },
     necromancer: {
       archetype: "mage",
       icon: icons.manifest.class.necromancer,
@@ -40,7 +44,7 @@ export default {
     },
     paladin: { archetype: "warrior", icon: icons.manifest.class.paladin, label: "TERIOCK.TERMS.Classes.paladin" },
     ranger: { archetype: "semi", icon: icons.manifest.class.ranger, label: "TERIOCK.TERMS.Classes.ranger" },
-    stormMage: { archetype: "mage", icon: icons.manifest.class.stormMage, label: "TERIOCK.TERMS.Classes.stormMage" },
+    "storm-mage": { archetype: "mage", icon: icons.manifest.class.stormMage, label: "TERIOCK.TERMS.Classes.stormMage" },
     thief: { archetype: "semi", icon: icons.manifest.class.thief, label: "TERIOCK.TERMS.Classes.thief" },
     tradesman: {
       archetype: "everyman",

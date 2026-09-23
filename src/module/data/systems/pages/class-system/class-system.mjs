@@ -48,9 +48,4 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
       wrappers: [getName(this.archetype)],
     }];
   }
-
-  /** @inheritDoc */
-  get wikiPage() {
-    return `Class:${TERIOCK.index.classes[this.identifier ?? ""] ?? ""}`;
-  }
 }

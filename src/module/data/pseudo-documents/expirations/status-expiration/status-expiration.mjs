@@ -1,7 +1,21 @@
 import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import { BaseExpiration } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
+
+/**
+ * A condition chosen from the condition statuses.
+ * @returns {IdentifierField}
+ */
+function conditionField() {
+  return new IdentifierField({
+    blank: false,
+    nullable: false,
+    choices: () => objectMap(TERIOCK.statuses.conditions, c => c.name),
+  });
+}
 
 export default class StatusExpiration extends BaseExpiration {
   /** @inheritDoc */
@@ -14,8 +28,8 @@ export default class StatusExpiration extends BaseExpiration {
   static defineSchema() {
     const schema = Object.assign(super.defineSchema(), {
       statuses: new fields.SchemaField({
-        absent: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.conditions })),
-        present: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.conditions })),
+        absent: new fields.SetField(conditionField()),
+        present: new fields.SetField(conditionField()),
       }),
     });
     delete schema.method;
