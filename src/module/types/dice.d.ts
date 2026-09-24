@@ -18,7 +18,13 @@ declare global {
 
     export type RawDieTarget = DieTarget | TeriockActor | TeriockToken | TeriockTokenDocument;
 
-    export type BaseRollOptions = RollOptions & { hideRoll: boolean, styles: DieStyles, targets: DieTarget[] };
+    export type BaseRollOptions = RollOptions & {
+      autoFlavor: string;
+      flavor: string;
+      hideRoll: boolean;
+      styles: DieStyles;
+      targets: DieTarget[];
+    };
 
     export type ImpactsRollOptions = BaseRollOptions & { impacts: Teriock.Keys.Impact[] };
 

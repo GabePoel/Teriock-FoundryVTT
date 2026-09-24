@@ -1,6 +1,7 @@
 import impactConfig from "../../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
+import { listFormat } from "../../../helpers/localization.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
 export default class ImpactsRoll extends BaseRoll {
@@ -30,9 +31,8 @@ export default class ImpactsRoll extends BaseRoll {
     if (!this.options.autoFlavor) { return; }
     if (!this.impacts.length) { delete this.options.flavor; }
     else {
-      this.options.flavor = this.impacts.length === 1
-        ? _loc("TERIOCK.ROLLS.Base.name", { value: impactConfig[this.impacts[0]]?.label })
-        : _loc("TERIOCK.ROLLS.Harm.multi");
+      const impactLabels = this.impacts.map(i => impactConfig[i]?.label);
+      this.options.flavor = _loc("TERIOCK.ROLLS.Base.name", { value: listFormat(impactLabels, { style: "short" }) });
     }
   }
 
