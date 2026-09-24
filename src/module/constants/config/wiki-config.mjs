@@ -4,10 +4,19 @@ import documentConfig from "./document-config.mjs";
 
 export default {
   address: "https://wiki.teriock.com/index.php",
-  index: /** @type {Record<string, Record<Identifier, string>>} */ (index),
-  namespaces: /** @type {Record<string,Teriock.Config.WikiNamespaceEntry>} */ {
-    Condition: { icon: documentConfig.condition.icon, identifierType: "rule" },
-    Core: { icon: icons.manifest.document.core, identifierType: "core" },
-    Keyword: { icon: icons.manifest.document.keyword, identifierType: "keyword" },
+  index,
+  namespaces: {
+    Condition: /** @type {Teriock.Config.WikiNamespaceEntry} */ {
+      icon: documentConfig.condition.icon,
+      identifierType: "rule",
+    },
+    Core: /** @type {Teriock.Config.WikiNamespaceEntry} */ {
+      icon: icons.manifest.document.core,
+      identifierType: "core",
+    },
+    Keyword: /** @type {Teriock.Config.WikiNamespaceEntry} */ {
+      icon: icons.manifest.document.keyword,
+      identifierType: "keyword",
+    },
   },
 };

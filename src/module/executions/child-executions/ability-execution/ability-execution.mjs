@@ -367,9 +367,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   async _getCriticalEffectData() {
     return foundry.utils.mergeObject(await this._getNormalEffectData(), {
       system: {
-        affinities: this.affinities.active.filter(a => a?.crit.has(1)).map(a =>
-          a.toObject()
-        ),
+        affinities: this.affinities.active.filter(a => a?.crit.has(1)).map(a => a.toObject()),
         critical: true,
         expirations: this.expirations.active.filter(e => e?.crit.has(1)).map(e => e.toObject()),
       },
@@ -446,7 +444,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     const yes = await super._performUpdates();
     if (yes === false) { return false; }
 
-    if (this.actor && this.payCosts) {
+    if (this.actor) {
       for (const c of this.#paidCosts) {
         const config = statConfig[c];
         if (!config?.bar) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }
@@ -490,12 +488,12 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * Find the armament that matches a certain equipment class.
    * @param {TeriockItem<"body"|"equipment">|null} armament
    * @param {Teriock.Keys.Delivery} delivery
-   * @param {Teriock.Keys.EquipmentClass} equipmentClass
+   * @param {Teriock.Keys.Classification} equipmentClass
    * @returns {TeriockItem<"body"|"equipment">|null}
    */
   _reselectArmamentForEquipmentClass(armament, delivery, equipmentClass) {
     if (this.source.system.delivery === delivery && !armament?.system.equipmentClasses.has(equipmentClass)) {
-      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has(equipmentClass));
+      armament = this.actor.armaments.find(a => a.active && a.system.equipmentClasses.has(equipmentClass));
     }
     return armament;
   }

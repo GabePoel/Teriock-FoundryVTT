@@ -23,11 +23,11 @@ declare global {
       | Teriock.Keys.ReactiveExecutionTime
       | Teriock.Keys.SlowExecutionTime;
     export type Expansion = keyof typeof config.ability.expansion;
-    export type EffectType = keyof typeof config.metaphysics.effectTypes;
+    export type Effect = keyof typeof config.wiki.index.effect;
 
     // Tag Keys
-    export type Element = keyof typeof config.metaphysics.elements;
-    export type PowerSource = keyof typeof config.metaphysics.powerSources;
+    export type Element = keyof typeof config.wiki.index.element;
+    export type Source = keyof typeof config.wiki.index.source;
 
     // Attribute Keys
     export type Attribute = keyof typeof config.attribute;
@@ -45,8 +45,8 @@ declare global {
     export type CommonOutcome = keyof typeof config.consequence.common;
 
     // Armament Keys
-    export type EquipmentClass = keyof typeof config.equipment.equipmentClasses;
-    export type FightingStyle = keyof typeof config.wiki.index.style;
+    export type Classification = keyof typeof config.wiki.index.classification;
+    export type Style = keyof typeof config.wiki.index.style;
     export type EquipmentKind = keyof typeof config.equipment.kind;
     /** @deprecated Use {@link EquipmentKind} */
     export type PowerLevel = EquipmentKind;
@@ -55,7 +55,7 @@ declare global {
     export type Property = keyof typeof config.wiki.index.property;
 
     // Species Keys
-    export type Trait = keyof typeof config.species.traits;
+    export type Trait = keyof typeof config.wiki.index.trait;
 
     // Kind Keys
     export type Kind = keyof typeof config.system.defaultKinds;

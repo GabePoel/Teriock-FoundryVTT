@@ -7,10 +7,10 @@ declare module "./metaphysics-preview-model.mjs" {
 declare global {
   namespace Teriock.Models {
     export type MetaphysicsFilters = Teriock.Models.BaseFilters & {
-      effectType: Teriock.Keys.EffectType | null;
+      effectType: Teriock.Keys.Effect | null;
       element: Teriock.Keys.Element | null;
       kind: Teriock.Keys.EffectKind | null;
-      powerSource: Teriock.Keys.PowerSource | null;
+      powerSource: Teriock.Keys.Source | null;
     };
   }
 }

@@ -356,17 +356,18 @@ export function deleteProperties(object, ...keys) {
 
 /**
  * Build a simple config from the wiki index.
- * @param {string} indexKey
+ * @template {keyof typeof index} K
+ * @param {K} indexKey
  * @param {string} localizationPrefix
- * @returns {Record<string, Teriock.Config.SimpleEntry>}
+ * @returns {Record<keyof typeof index[K], Teriock.Config.SimpleEntry>}
  */
 export function wikiIndexToConfig(indexKey, localizationPrefix) {
-  return Object.fromEntries(
+  return /** @type {Record<keyof typeof index[K], Teriock.Config.SimpleEntry>} */ (Object.fromEntries(
     Object.keys(index[indexKey]).map(k => {
       const entry = { label: `${localizationPrefix}.${toCamelCase(k)}` };
       const img = thumbnails[indexKey]?.[toCamelCase(k)];
       if (img) { entry.img = img; }
       return [k, entry];
     }),
-  );
+  ));
 }

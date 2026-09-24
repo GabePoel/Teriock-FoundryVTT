@@ -3,7 +3,7 @@ declare module "./equipment-preview-model.mjs" {
     filters: Teriock.Models.BaseFilters & {
       attuned: boolean | null;
       consumable: boolean | null;
-      equipmentClasses: Teriock.Keys.EquipmentClass | null;
+      equipmentClasses: Teriock.Keys.Classification | null;
       equipped: boolean | null;
       identified: boolean | null;
       kind: Teriock.Keys.EquipmentKind | null;

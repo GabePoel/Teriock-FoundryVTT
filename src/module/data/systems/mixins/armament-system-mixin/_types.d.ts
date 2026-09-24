@@ -17,7 +17,7 @@ declare global {
         types: Set<Identifier>;
       };
       /** <schema> Equipment Classes */
-      equipmentClasses: Set<Teriock.Keys.EquipmentClass>;
+      equipmentClasses: Set<Teriock.Keys.Classification>;
       /** <schema> Flaws */
       flaws: string;
       /** <schema> The impacts this deals */
@@ -42,7 +42,7 @@ declare global {
       /** <schema> Spell Turning */
       spellTurning: boolean;
       /** <schema> Fighting style */
-      style: TypedIdentifier<"style", Teriock.Keys.FightingStyle>;
+      style: TypedIdentifier<"style", Teriock.Keys.Style>;
       /** <derived> Special Rules (Weapon Fighting Style) */
       styleDescription: string;
       /** <schema> Vitals */

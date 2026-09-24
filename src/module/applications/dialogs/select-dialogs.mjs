@@ -8,7 +8,7 @@ import DocumentSelector from "./document-selector.mjs";
 
 /**
  * Dialog to select an equipment class.
- * @returns {Promise<Teriock.Keys.EquipmentClass>}
+ * @returns {Promise<Teriock.Keys.Classification>}
  */
 export async function selectEquipmentClassDialog() {
   return ChoiceSelector.prompt(objectMap(TERIOCK.config.equipment.equipmentClasses, e => e.label), {
