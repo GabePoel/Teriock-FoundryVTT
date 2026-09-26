@@ -51,8 +51,6 @@ export default class RegionAutomation
       "visibility",
       "deleteOnTurnChange",
       "hr",
-      ...this._triggerDisplayPaths,
-      "hr",
       ...this._selectionPaths,
       "hr",
       ...this._overrideDataPaths,

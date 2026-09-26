@@ -11,7 +11,10 @@ const lookupEnricher = {
     if (key.startsWith("@")) { key = key.slice(1); }
     let textContent = "";
     const doc = options?.relativeTo;
-    if (key && doc) { textContent = doc.getStringForProperty(key, inputs.config); }
+    if (key && doc && typeof doc.getStringForProperty === "function") {textContent = doc.getStringForProperty(
+        key,
+        inputs.config,
+      );}
     if (inputs.config.link) {
       await game.teriock.identifiers.initializing;
       const doc = await fromKey(textContent);
