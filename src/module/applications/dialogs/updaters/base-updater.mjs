@@ -144,4 +144,10 @@ export default class BaseUpdater extends DocumentDialog {
     }
     return context;
   }
+
+  /** @inheritDoc */
+  async _processSubmitData(event, form, submitData, options = {}) {
+    options.interactive ??= true;
+    return super._processSubmitData(event, form, submitData, options);
+  }
 }

@@ -367,7 +367,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   async _getCriticalEffectData() {
     return foundry.utils.mergeObject(await this._getNormalEffectData(), {
       system: {
-        affinities: this.affinities.active.filter(a => a?.crit.has(1)).map(a => a.toObject()),
+        affinities: this.affinities.active.filter(a => a?.crit.has(1)).map(a =>
+          a.toObject()
+        ),
         critical: true,
         expirations: this.expirations.active.filter(e => e?.crit.has(1)).map(e => e.toObject()),
       },

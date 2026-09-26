@@ -100,7 +100,7 @@ export default class SpeciesSystem
    * Offer to resize the actor to match the size this species specifies.
    * @returns {Promise<void>}
    */
-  async #onCreateChangeSize() {
+  async #onChangeSize() {
     const actor = this.actor;
     if (!this.size.enabled || this.size.value === actor.system._source.size.value) { return; }
     const proceed = await TeriockDialog.confirm({
@@ -192,7 +192,18 @@ export default class SpeciesSystem
     if (
       this.parent.checkEditor(userId) && this.actor && options.interactive
       && this.parent.master?.documentName === "Actor"
-    ) { this.#onCreateChangeSize(); }
+    ) { this.#onChangeSize(); }
+  }
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if (
+      foundry.utils.hasProperty(changed, "system.size.value") && this.actor && options.interactive
+      && this.parent.master?.documentName === "Actor"
+    ) {
+      this.#onChangeSize();
+    }
   }
 
   /** @inheritDoc */
