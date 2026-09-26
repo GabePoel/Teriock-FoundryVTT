@@ -6,7 +6,6 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 /**
  * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
- * @import { ActiveEffectConfig } from "@client/applications/sheets/_module.mjs";
  */
 
 /**
@@ -71,12 +70,20 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
       primarySpecies: showPrimarySpecies ? this.document.system.primarySpecies : null,
       showPrimarySpecies,
       transformation: transformationPaths.map(p => {
-        return {
+        const entry = {
           field: this.document.system.schema.getField(`transformation.${p}`),
           localize: true,
           placeholder: this.document.system.transformation[p],
           value: this.document.system._source.transformation[p],
         };
+        if (TERIOCK.config.transformation.multiCheckboxPaths.includes(p)) {
+          entry.input = (field, ic) => {
+            ic.choices = field.element.choices;
+            foundry.data.fields.StringField._prepareChoiceConfig(ic);
+            return foundry.applications.elements.HTMLMultiCheckboxElement.create(ic);
+          };
+        }
+        return entry;
       }),
     });
   }

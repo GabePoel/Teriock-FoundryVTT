@@ -61,6 +61,18 @@ export default class TransformationAutomation
   }
 
   /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (TERIOCK.config.transformation.multiCheckboxPaths.includes(path)) {
+      inputConfig.input = (field, ic) => {
+        ic.choices = field.element.choices;
+        foundry.data.fields.StringField._prepareChoiceConfig(ic);
+        return foundry.applications.elements.HTMLMultiCheckboxElement.create(ic);
+      };
+    }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  }
+
+  /** @inheritDoc */
   async getSelectableDocuments(overrides = {}) {
     const out = await super.getSelectableDocuments(overrides);
     const species = out.filter(d => d.type === "species");

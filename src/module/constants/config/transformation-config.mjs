@@ -8,6 +8,7 @@ const config = {
     full: "TERIOCK.EFFECTS.TransformationLevel.full",
     greater: "TERIOCK.EFFECTS.TransformationLevel.greater",
   },
+  multiCheckboxPaths: ["override", "resets", "suppress"],
   override: {
     art: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.art" },
     size: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.size" },
