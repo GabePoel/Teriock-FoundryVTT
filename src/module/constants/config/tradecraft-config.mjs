@@ -3,11 +3,31 @@ import { icons, thumbnails } from "../display/_module.mjs";
 
 export default {
   fields: {
-    artisan: { icon: icons.manifest.field.artisan, label: "TERIOCK.TERMS.Fields.artisan" },
-    mediator: { icon: icons.manifest.field.mediator, label: "TERIOCK.TERMS.Fields.mediator" },
-    prestige: { icon: icons.manifest.field.prestige, label: "TERIOCK.TERMS.Fields.prestige" },
-    scholar: { icon: icons.manifest.field.scholar, label: "TERIOCK.TERMS.Fields.scholar" },
-    survivalist: { icon: icons.manifest.field.survivalist, label: "TERIOCK.TERMS.Fields.survivalist" },
+    artisan: {
+      icon: icons.manifest.field.artisan,
+      img: thumbnails.manifest.field.artisan,
+      label: "TERIOCK.TERMS.Fields.artisan",
+    },
+    mediator: {
+      icon: icons.manifest.field.mediator,
+      img: thumbnails.manifest.field.mediator,
+      label: "TERIOCK.TERMS.Fields.mediator",
+    },
+    prestige: {
+      icon: icons.manifest.field.prestige,
+      img: thumbnails.manifest.field.prestige,
+      label: "TERIOCK.TERMS.Fields.prestige",
+    },
+    scholar: {
+      icon: icons.manifest.field.scholar,
+      img: thumbnails.manifest.field.scholar,
+      label: "TERIOCK.TERMS.Fields.scholar",
+    },
+    survivalist: {
+      icon: icons.manifest.field.survivalist,
+      img: thumbnails.manifest.field.survivalist,
+      label: "TERIOCK.TERMS.Fields.survivalist",
+    },
   },
   tradecrafts: {
     artist: {
