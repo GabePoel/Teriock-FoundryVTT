@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { default as icons } from "../../src/module/constants/display/icons/_module.mjs";
+import * as icons from "../../src/module/constants/display/icons/_module.mjs";
 import { default as manifest } from "../../system.json" with { type: "json" };
 import { sortObject } from "../script-utils.mjs";
 
