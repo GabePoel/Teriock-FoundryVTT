@@ -46,6 +46,7 @@ export function cleanDocument(doc) {
     for (const k of Object.keys(doc.flags)) {
       if (k !== "teriock") { delete doc.flags[k]; }
     }
+    delete doc.flags.teriock?.dontConsume;
   }
   if (doc._key.includes("results!")) {
     if (doc.flags?.teriock?.documentIdentifier) { delete doc.documentUuid; }

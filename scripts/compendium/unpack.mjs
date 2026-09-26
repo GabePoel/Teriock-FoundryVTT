@@ -236,6 +236,8 @@ function conformDataValues(obj) {
       if (obj[key] === "{}") { delete obj[key]; }
       else if (obj[key] === null) { delete obj[key]; }
       else if (Array.isArray(obj[key])) {
+        // Pseudo-document collections are arrays by now, so their entries need conforming too.
+        conformDataValues(obj[key]);
         if (obj[key].length === 0) { delete obj[key]; }
         else if (typeof obj[key][0] === "string" && obj[key].length > 1) {
           {

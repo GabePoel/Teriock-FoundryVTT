@@ -110,14 +110,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", { name: this.source.name }),
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
       });
-      for (const ability of usedAbilities) {
-        if (ability.system.consumable && this.source.system.consumable) {
-          if (ability.system.quantity.value !== 1 && this.source.isOwner && !this.source.inCompendium) {
-            await this.source.setFlag("teriock", "dontConsume", true);
-          }
-        }
-        await ability.use({ ...this.options, armament: this.source });
-      }
+      for (const ability of usedAbilities) { await ability.use({ ...this.options, armament: this.source }); }
     }
     await super._postExecute();
   }
