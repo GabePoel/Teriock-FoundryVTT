@@ -9,7 +9,8 @@ command: >-
       if (types) {
         defaults.pseudos[name] ??= {};
         for (const [type, sub] of Object.entries(types)) {
-          defaults.pseudos[name][type] ??= sub.getInitialValue({});
+          console.log(type, sub)
+          defaults.pseudos[name][type] ??= sub?.getInitialValue?.({});
         }
       } else if (field?.fields) {
         traverseSchema(field);
@@ -27,7 +28,7 @@ command: >-
       continue;
     }
     for (const type of types) {
-      defaults.documents[documentName][type] = new Cls({ name: "Default", type, range: [-9999, 9999] }).toObject();
+      defaults.documents[documentName][type] = new Cls({ name: "Default", range: [-9999, 9999], type }).toObject();
       traverseSchema(CONFIG[documentName]?.dataModels?.[type]?.schema);
     }
   }

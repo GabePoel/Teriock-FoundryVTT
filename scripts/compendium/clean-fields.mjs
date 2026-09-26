@@ -47,6 +47,9 @@ export function cleanDocument(doc) {
       if (k !== "teriock") { delete doc.flags[k]; }
     }
   }
+  if (doc._key.includes("results!")) {
+    if (doc.flags?.teriock?.documentIdentifier) { delete doc.documentUuid; }
+  }
   if (doc.system) {
     if (doc.name !== "Basic Abilities") { delete doc.system.settings; }
     delete doc.system._ref;
@@ -179,6 +182,7 @@ function cleanActor(doc) {
   delete doc.system.senses;
   delete doc.system.speedAdjustments;
   delete doc.system.tradecrafts;
+  delete doc.system.elderSorceryCreation;
   if (doc.system.scaling) { delete doc.system.scaling.lvl; }
 }
 
