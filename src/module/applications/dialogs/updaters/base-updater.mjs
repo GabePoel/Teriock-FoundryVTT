@@ -115,11 +115,13 @@ export default class BaseUpdater extends DocumentDialog {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "form") {
       context.fields = [];
+      const inputContext = this.document.system?._inputContextKey ?? "actor";
       for (const p of this._formPaths) {
         const field = this.document.getFieldForProperty(p);
         context.fields.push({
           choices: this._getChoicesForPath(p),
           classes: ["teriock-icon-placeholder"],
+          context: inputContext,
           field,
           localize: true,
           name: p,

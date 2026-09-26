@@ -5,9 +5,6 @@ const rankContext = {
   ...usableContext,
   rank: "TYPES.Item.rank",
 
-  archetype: "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
-  class: "TERIOCK.SYSTEMS.Rank.FIELDS.class.label",
-  kind: "TERIOCK.SYSTEMS.Rank.FIELDS.kind.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   number: "TERIOCK.SYSTEMS.Rank.FIELDS.number.label",
 };

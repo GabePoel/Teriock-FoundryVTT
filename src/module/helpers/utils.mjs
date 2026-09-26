@@ -197,6 +197,15 @@ export function getIcon(identifier) {
 }
 
 /**
+ * Get the trigger config group that a trigger belongs to.
+ * @param {Teriock.System.Trigger} trigger
+ * @returns {Teriock.Fields.DynamicChoiceGroup|undefined}
+ */
+export function getTriggerGroup(trigger) {
+  return Object.values(TERIOCK.config.trigger).find(g => g.choices?.[trigger]);
+}
+
+/**
  * Get a document's name from an identifier.
  * @param {TypedIdentifier} identifier
  * @returns {string}

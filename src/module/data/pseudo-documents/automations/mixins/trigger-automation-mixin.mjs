@@ -43,11 +43,7 @@ export default function TriggerAutomationMixin(Base) {
       return !this.activeTriggers.size;
     }
 
-    /**
-     * What happens when this automation is triggered.
-     * @param {Teriock.System.TriggerScope} scope
-     * @returns {Promise<void>}
-     */
+    /** @inheritDoc */
     async _onFire(scope) {
       const document = this.getNearestDocument();
       const actor = scope.actor ?? this.actor;
@@ -65,12 +61,6 @@ export default function TriggerAutomationMixin(Base) {
       const key = document.uuid;
       scope.chatDataBySource[key] ??= actor.prepareTriggeredChatData(scope.trigger, document);
       scope.chatDataBySource[key].system.activations.push(...activations);
-    }
-
-    /** @inheritDoc */
-    async _onFireTrigger(trigger, scope) {
-      await super._onFireTrigger(trigger, scope);
-      if (this.validateTrigger(trigger, scope)) { await this._onFire(scope); }
     }
   }
 

@@ -686,7 +686,7 @@ items:
               angle: "@angle.dragon"
               attachToToken: false
               expandWithToken: false
-              radius: "@ability.range + 5 * @h"
+              radius: "@source.range + 5 * @h"
               regionType: cone
               restriction:
                 enabled: true
@@ -1756,9 +1756,9 @@ items:
         value: 10
       statDice:
         hp:
-          formula: (@species.size)d10
+          formula: (@this.item.size)d10
         mp:
-          formula: (@species.size - 6)d12
+          formula: (@this.item.size - 6)d12
       traits:
         - draconic
         - monstrous
@@ -3078,8 +3078,7 @@ items:
           expirations:
             - _id: wlQFNbMQfPC7oxJ9
               triggerQualifier: >-
-                and(@ability.interaction.attack, eq(@armament.identifier, @mechanic.armament.identifier),
-                eq(@armament.type, @mechanic.armament.type))
+                and(@source.interaction.attack, @this.armament)
               triggers:
                 - executeAbility
               type: trigger

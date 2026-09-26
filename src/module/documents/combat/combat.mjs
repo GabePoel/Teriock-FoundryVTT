@@ -17,7 +17,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @param {Teriock.System.Trigger} trigger
    */
   #fireTrigger(actor, trigger) {
-    actor?.fireHookTrigger(trigger);
+    if (actor?.shouldFireTriggers) { actor.fireTrigger(trigger); }
   }
 
   /**

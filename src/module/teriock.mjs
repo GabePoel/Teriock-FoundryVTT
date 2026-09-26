@@ -369,22 +369,44 @@ Hooks.once("i18nInit", () => {
 // ======================
 
 Hooks.once("teriock.identifiersInit", () => {
-  Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
-    ...TERIOCK.rollContext.ability,
-    ...TERIOCK.rollContext.archetype,
-    ...TERIOCK.rollContext.armament,
-    ...TERIOCK.rollContext.attunement,
-    ...TERIOCK.rollContext.condition,
-    ...TERIOCK.rollContext.consequence,
-    ...TERIOCK.rollContext.fluency,
-    ...TERIOCK.rollContext.imbuement,
-    ...TERIOCK.rollContext.mount,
-    ...TERIOCK.rollContext.power,
-    ...TERIOCK.rollContext.property,
-    ...TERIOCK.rollContext.rank,
-    ...TERIOCK.rollContext.resource,
-    ...TERIOCK.rollContext.species,
-  });
+  const rc = TERIOCK.rollContext;
+  const effectLabels = {
+    ...rc.ability,
+    ...rc.attunement,
+    ...rc.condition,
+    ...rc.consequence,
+    ...rc.fluency,
+    ...rc.imbuement,
+    ...rc.property,
+    ...rc.resource,
+  };
+  const itemLabels = { ...rc.archetype, ...rc.armament, ...rc.mount, ...rc.power, ...rc.rank, ...rc.species };
+  const namespaced = (labels, prefix, key) =>
+    Object.fromEntries(
+      Object.entries(labels).map((
+        [k, name],
+      ) => [`${prefix}.${k}`, _loc(`TERIOCK.ROLL_CONTEXT.Namespace.${key}`, { name })]),
+    );
+  // Local qualifiers see a single candidate's local data
+  Object.assign(rc.child, effectLabels, itemLabels);
+  // Executions see the actor and the documents involved in the execution
+  Object.assign(
+    rc.execution,
+    rc.actor,
+    namespaced({ ...effectLabels, ...itemLabels }, "source", "source"),
+    namespaced(rc.ability, "ability", "ability"),
+    namespaced(rc.armament, "armament", "armament"),
+    namespaced(rc.armament, "ammunition", "ammunition"),
+  );
+  // Document formulas may run in an execution or against the document's own nearest effect and item
+  Object.assign(
+    rc.document,
+    rc.execution,
+    namespaced(effectLabels, "this.effect", "thisEffect"),
+    namespaced(itemLabels, "this.item", "thisItem"),
+  );
+  // Mechanic formulas may also run from a fired trigger
+  Object.assign(rc.trigger, rc.document);
 });
 
 // Final Steps

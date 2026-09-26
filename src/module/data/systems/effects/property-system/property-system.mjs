@@ -100,10 +100,7 @@ export default class PropertySystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    const data = Object.assign(super.getLocalRollData(), {
-      "dmg.extra": this.extraDamage || 0,
-      "dmg.type": this._source.damageType || 0,
-    });
+    const data = Object.assign(super.getLocalRollData(), { "dmg.extra": this.extraDamage || 0 });
     if (this._source.damageType) { data[`dmg.type.${this._source.damageType}`] = 1; }
     return data;
   }

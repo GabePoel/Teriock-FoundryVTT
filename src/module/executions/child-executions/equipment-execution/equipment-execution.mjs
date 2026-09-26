@@ -1,5 +1,5 @@
 import { addTypesToFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { getName } from "../../../helpers/utils.mjs";
+import { getName, prefixObject } from "../../../helpers/utils.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
 const { fields } = foundry.data;
@@ -104,6 +104,15 @@ export default class EquipmentExecution extends ArmamentExecution {
       return oldFormula.replace(rawTypedDamage, newTypedDamage);
     }
     return oldFormula;
+  }
+
+  /** @inheritDoc */
+  getRollData() {
+    const rollData = super.getRollData();
+    if (this.source.system.ammunition.enabled && this.ammunition) {
+      Object.assign(rollData, prefixObject(this.ammunition.system.getLocalRollData(), "ammunition"));
+    }
+    return rollData;
   }
 
   /** @inheritDoc */

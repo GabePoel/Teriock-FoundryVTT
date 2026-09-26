@@ -8,6 +8,11 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes CommonSystem
  */
 export default class AbstractActorSystem extends mixClasses(TypeDataModel, BaseSystemMixin, CommonSystemMixin) {
+  /** @inheritDoc */
+  get _inputContextKey() {
+    return "actor";
+  }
+
   /**
    * Performs post-update operations for the actor.
    * @returns {Promise<void>}

@@ -45,6 +45,17 @@ export default function AbstractDataMixin(Base) {
     }
 
     /**
+     * @inheritdoc
+     * @param {string} [documentName]
+     * @returns {TeriockDocument|null}
+     */
+    getNearestDocument(documentName) {
+      let doc = super.getNearestDocument();
+      while (documentName && doc && doc.documentName !== documentName) { doc = doc.parent; }
+      return doc ?? null;
+    }
+
+    /**
      * Traverse the data model instance, getting a formatted string representation for a particular property.
      * @param {string|string[]} key
      * @param {object} [options]

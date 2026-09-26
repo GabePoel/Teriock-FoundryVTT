@@ -24,6 +24,7 @@ const triggerConfig = {
     },
     granted: true,
     label: "TERIOCK.TRIGGERS.Attunable.label",
+    self: true,
   },
   combat: {
     alwaysAvailable: true,
@@ -42,6 +43,7 @@ const triggerConfig = {
       expireEffect: "TERIOCK.TRIGGERS.Consequence.choices.expireEffect",
     },
     label: "TYPES.ActiveEffect.consequence",
+    self: true,
   },
   equipment: {
     choices: {
@@ -58,6 +60,7 @@ const triggerConfig = {
     },
     granted: true,
     label: "TYPES.Item.equipment",
+    self: true,
   },
   impact: {
     alwaysAvailable: true,
@@ -67,6 +70,7 @@ const triggerConfig = {
   mount: {
     choices: { mount: "TERIOCK.SYSTEMS.Mount.MENU.mount", unmount: "TERIOCK.SYSTEMS.Mount.MENU.unmount" },
     label: "TYPES.Item.mount",
+    self: true,
   },
   protection: {
     alwaysAvailable: true,

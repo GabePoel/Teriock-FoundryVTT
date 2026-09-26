@@ -110,8 +110,6 @@ export default class FluencySystem
     return Object.assign(super.getLocalRollData(), {
       [`field.${this._source.field}`]: 1,
       [`tradecraft.${this._source.tradecraft}`]: 1,
-      field: this._source.field || 0,
-      tradecraft: this._source.tradecraft || 0,
     });
   }
 

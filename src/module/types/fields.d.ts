@@ -48,6 +48,8 @@ declare global {
       choices: Record<string, string>;
       granted?: boolean;
       label: string;
+      /** Only mechanics whose own document is the trigger's source respond. */
+      self?: boolean;
     };
 
     /**

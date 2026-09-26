@@ -124,12 +124,6 @@ export default class DocumentExecution extends BaseExecution {
    * @returns {object}
    */
   getRollData() {
-    const sourceData = prefixObject(this.source.system?.getLocalRollData?.() ?? {}, "source");
-    return Object.assign(this.source.system?.getSystemRollData?.() ?? {}, super.getRollData(), sourceData);
-  }
-
-  /** @inheritDoc*/
-  getScope(scope = {}) {
-    return Object.assign(this.source?.getScope(scope) || {}, super.getScope(scope));
+    return Object.assign(super.getRollData(), prefixObject(this.source.system?.getLocalRollData?.() ?? {}, "source"));
   }
 }

@@ -33,7 +33,7 @@ export default function AccessDataMixin(Base) {
      * @returns {string}
      */
     get _inputContextKey() {
-      return "actor";
+      return this.parent?._inputContextKey ?? "actor";
     }
 
     /**

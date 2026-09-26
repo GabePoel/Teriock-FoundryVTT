@@ -277,7 +277,7 @@ export default function ActorStatsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeAwaken() {
-      await this.parent.hookCall("takeAwaken");
+      await this.parent.fireTrigger("takeAwaken");
       if (this.parent.statuses.has("unconscious") && !this.parent.statuses.has("dead")) {
         if (this.hp.value <= 0) { await this.parent.update({ "system.hp.value": 1 }); }
         if (this.parent.statuses.has("asleep")) { await this.parent.toggleStatusEffect("asleep", { active: false }); }
@@ -293,7 +293,7 @@ export default function ActorStatsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeHeal(options = {}) {
-      await this.parent.hookCall("takeHeal");
+      await this.parent.fireTrigger("takeHeal");
       await HealManager.create(this.actor, options);
     }
 
@@ -303,7 +303,7 @@ export default function ActorStatsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeRevitalize(options = {}) {
-      await this.parent.hookCall("takeRevitalize");
+      await this.parent.fireTrigger("takeRevitalize");
       await RevitalizeManager.create(this.actor, options);
     }
 
@@ -316,7 +316,7 @@ export default function ActorStatsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeRevive() {
-      await this.parent.hookCall("takeRevive");
+      await this.parent.fireTrigger("takeRevive");
       if (this.parent.statuses.has("dead")) {
         if (this.hp.value <= 0) { await this.takeHealing(1 - this.hp.value); }
         if (this.mp.value <= 0) { await this.takeRevitalizing(1 - this.mp.value); }

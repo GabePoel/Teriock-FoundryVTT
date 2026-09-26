@@ -1,6 +1,7 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { prefixObject } from "../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { ImpactsExecutionMixin } from "../../mixins/_module.mjs";
 
@@ -136,9 +137,14 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     return this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base;
   }
 
+  /** @inheritDoc */
+  getRollData() {
+    return Object.assign(super.getRollData(), prefixObject(this.source.system.getLocalRollData(), "armament"));
+  }
+
   /** @inheritDoc*/
   getScope(scope = {}) {
-    return Object.assign(super.getScope(scope), { armament: this.source });
+    return { ...super.getScope(), armament: this.source, ...scope };
   }
 
   /** @inheritDoc */

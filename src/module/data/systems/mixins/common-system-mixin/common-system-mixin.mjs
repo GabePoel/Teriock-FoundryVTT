@@ -2,7 +2,6 @@ import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
@@ -57,6 +56,11 @@ export default function CommonSystemMixin(Base) {
     /** @returns {Teriock.Embeds.EmbedIcon[]} */
     get _embedIcons() {
       return [];
+    }
+
+    /** @inheritDoc */
+    get _inputContextKey() {
+      return "document";
     }
 
     /** @returns {string} */
@@ -128,12 +132,9 @@ export default function CommonSystemMixin(Base) {
       const rollData = {
         [`identifier.${this.parent.forcedIdentifier}`]: 1,
         [`type.${this.parent.type}`]: 1,
-        // Apparently strings with hyphens will get read as minus signs
-        identifier: toCamelCase(this.parent.forcedIdentifier),
-        name: this.parent.name,
         [this.parent.type]: 1,
-        type: this.parent.type,
       };
+      if (this.metadata.tags.armament) { rollData.armament = 1; }
       if (Object.keys(this.parent.flags.rollData ?? {}).length) {
         Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));
       }
@@ -173,26 +174,23 @@ export default function CommonSystemMixin(Base) {
 
     /** @inheritDoc */
     getRollData() {
-      let rollData = {};
-      if (typeof this.parent.parent?.getRollData === "function") {
-        rollData = this.parent.parent.getRollData();
-      }
-      Object.assign(rollData, this.getSystemRollData());
-      return rollData;
+      const actor = this.parent.actor;
+      const rollData = actor && actor !== this.parent ? actor.getRollData() : {};
+      return Object.assign(rollData, this.getSystemRollData());
     }
 
     /**
-     * All the roll data that is specific to this document from {@link getLocalRollData} but prefixed by its
-     * type. If this document is an armament (equipment or a body part), the same data is also aliased under
-     * `armament`, so it can be referenced without caring whether it's equipment or a body part.
-     * This gets merged into {@link getRollData} so that all of an Actor's roll data is always available.
+     * The {@link getLocalRollData} of this document's nearest effect and item under `this.effect` and `this.item`.
+     * This gets merged into {@link getRollData} so that a document's formulas can reference itself and its host.
      * @returns {object}
      */
     getSystemRollData() {
-      const localData = this.getLocalRollData();
-      const rollData = { ...prefixObject(localData, this.parent.type) };
-      if (this.metadata.tags.armament) { Object.assign(rollData, prefixObject(localData, "armament")); }
-      return rollData;
+      const effect = this.parent.getNearestDocument("ActiveEffect");
+      const item = this.parent.getNearestDocument("Item");
+      return {
+        ...(item ? prefixObject(item.system.getLocalRollData(), "this.item") : {}),
+        ...(effect ? prefixObject(effect.system.getLocalRollData(), "this.effect") : {}),
+      };
     }
   }
 

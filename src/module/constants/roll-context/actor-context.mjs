@@ -7,21 +7,19 @@ const actorContext = {
   lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
   p: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.p.label",
 
+  hp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
   "hp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.max.label",
   "hp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.min.label",
   "hp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.morganti.label",
   "hp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.temp.label",
-  "hp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
 
+  mp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.value.label",
   "mp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.max.label",
   "mp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.min.label",
   "mp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.morganti.label",
   "mp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.temp.label",
-  "mp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.value.label",
 
-  "lp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.max.label",
-  "lp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.min.label",
-  "lp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.value.label",
+  lp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.value.label",
 
   pres: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.max.label",
   "pres.unused": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.unused.label",
@@ -57,9 +55,12 @@ const actorContext = {
 
   "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
 
+  "detection.hiding": "TERIOCK.SYSTEMS.BaseActor.FIELDS.detection.hiding.label",
+  "detection.perceiving": "TERIOCK.SYSTEMS.BaseActor.FIELDS.detection.perceiving.label",
+
+  money: "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.total.label",
   "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
-  "money.physical": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.physical",
-  "money.total": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.total.label",
+  "money.physical": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.physical.label",
 };
 
 export default actorContext;

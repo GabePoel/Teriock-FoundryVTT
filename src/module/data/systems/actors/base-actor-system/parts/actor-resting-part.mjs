@@ -57,7 +57,7 @@ export default function ActorRestingPart(Base) {
      * @returns {Promise<void>}
      */
     async takeDawn() {
-      await this.actor.hookCall("dawn");
+      await this.actor.fireTrigger("dawn");
     }
 
     /**
@@ -65,7 +65,7 @@ export default function ActorRestingPart(Base) {
      * @returns {Promise<void>}
      */
     async takeDusk() {
-      await this.actor.hookCall("dusk");
+      await this.actor.fireTrigger("dusk");
     }
 
     /**

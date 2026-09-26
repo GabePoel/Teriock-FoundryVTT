@@ -59,19 +59,35 @@ declare global {
       | TimeTrigger;
 
     export type TriggerScope = {
+      /** Set by ability executions. */
       ability?: TeriockActiveEffect<"ability">;
+      /** The execution's actor or the source's actor. */
       actor?: TeriockActor;
+      /** The amount of an impact or hack or payment. */
       amount?: number;
+      /** Set by attack and armament executions. */
       armament?: TeriockItem<"body" | "equipment">;
+      /** The attribute of a feat save. */
       attribute?: Teriock.Keys.Attribute;
+      /** The automation a macro is executed from. */
       automation?: BaseAutomation;
+      /** Triggered message data collected during dispatch keyed by source. */
       chatDataBySource?: Record<string, Partial<Teriock.Data.ChatMessageData>>;
+      /** The source or its nearest ancestor effect. */
       effect?: TeriockActiveEffect;
-      equipment?: TeriockItem<"equipment">;
+      /** The execution that fired the trigger. */
       execution?: AbilityExecution | ArmamentExecution | BaseExecution;
+      /** The source or its nearest ancestor item. */
       item?: TeriockItem;
-      rollData?: object;
+      /** The mode of a payment. */
+      mode?: Teriock.Keys.PayMode;
+      /** The body part of a hack or unhack. */
+      part?: Teriock.Keys.HackableBodyPart;
+      /** The document the trigger originated from. */
+      source?: TeriockActiveEffect | TeriockActor | TeriockItem;
+      /** The tradecraft of a tradecraft roll. */
       tradecraft?: Teriock.Keys.Tradecraft;
+      /** The trigger that was fired. */
       trigger?: string;
     };
 

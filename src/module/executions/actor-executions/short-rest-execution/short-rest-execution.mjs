@@ -110,7 +110,7 @@ export default class ShortRestExecution extends DocumentExecution {
   /** @inheritDoc */
   async _postExecute() {
     // Rests get a standalone hook call so that it can be invoked without an execution by the GM.
-    this.actor?.hookCall(this.executionTime, { scope: this.getScope() });
+    this.fireTrigger(this.executionTime);
     return super._postExecute();
   }
 

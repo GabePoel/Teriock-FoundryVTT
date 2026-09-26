@@ -420,7 +420,7 @@ items:
         - _id: b7dc74afdec1a704
           add:
             - ability:improved-strength
-          qualifier: and(gte(@species.size, 3), lt(@species.size, 4))
+          qualifier: and(gte(@this.item.size, 3), lt(@this.item.size, 4))
           remove:
             - ability:beastly-strength
             - ability:giant-strength
@@ -430,7 +430,7 @@ items:
         - _id: 1d5376fc7aec0a48
           add:
             - ability:beastly-strength
-          qualifier: and(gte(@species.size, 0), lt(@species.size, 3))
+          qualifier: and(gte(@this.item.size, 0), lt(@this.item.size, 3))
           remove:
             - ability:improved-strength
             - ability:giant-strength
@@ -440,7 +440,7 @@ items:
         - _id: 37634d0e6b2fae07
           add:
             - ability:giant-strength
-          qualifier: and(gte(@species.size, 4), lt(@species.size, 6))
+          qualifier: and(gte(@this.item.size, 4), lt(@this.item.size, 6))
           remove:
             - ability:improved-strength
             - ability:beastly-strength
@@ -450,7 +450,7 @@ items:
         - _id: ab3de966a8f99c9c
           add:
             - ability:supernatural-strength
-          qualifier: and(gte(@species.size, 6), lt(@species.size, 8))
+          qualifier: and(gte(@this.item.size, 6), lt(@this.item.size, 8))
           remove:
             - ability:improved-strength
             - ability:beastly-strength
@@ -460,7 +460,7 @@ items:
         - _id: 056bba8fd332660a
           add:
             - ability:monstrous-strength
-          qualifier: and(gte(@species.size, 8), lt(@species.size, 99))
+          qualifier: and(gte(@this.item.size, 8), lt(@this.item.size, 99))
           remove:
             - ability:improved-strength
             - ability:beastly-strength
@@ -482,7 +482,7 @@ items:
         value: 1
       statDice:
         hp:
-          formula: (@species.size + 1)d12
+          formula: (@this.item.size + 1)d12
       traits:
         - construct
         - humanoid

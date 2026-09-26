@@ -1,11 +1,9 @@
 import { config } from "../../constants/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
-import { TriggerExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
-import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
-import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
+import { findBestDocument, fromKey, getTriggerGroup } from "../../helpers/utils.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 import { BaseDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
@@ -290,6 +288,21 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
+   * Fire a trigger on every mechanic of this actor and create the resulting messages.
+   * @param {Teriock.System.Trigger} trigger
+   * @param {Teriock.System.TriggerScope} scope
+   * @returns {Promise<void>}
+   * @internal
+   */
+  async _dispatchTrigger(trigger, scope) {
+    scope.chatDataBySource ??= {};
+    for (const mechanic of [...this.system.automations, ...this.system.expirations]) {
+      if (mechanic.validateTrigger?.(trigger, scope)) { await mechanic._onFire(scope); }
+    }
+    await this.createTriggeredMessages(scope);
+  }
+
+  /**
    * Generate an operation for creating staged items.
    * @returns {Promise<Partial<DatabaseCreateOperation>|null>}
    */
@@ -375,7 +388,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Create a triggered chat message per source document collected during a {@link CommonDocument.hookCall}.
+   * Create a triggered chat message per source document collected during a {@link TeriockActor._dispatchTrigger}.
    * @param {Teriock.System.TriggerScope} scope
    * @returns {Promise<TeriockChatMessage[]>}
    */
@@ -396,28 +409,10 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     return TeriockChatMessage.createDocuments(allChatData);
   }
 
-  /**
-   * Call {@link hookCall} if the current user should fire triggers for this actor.
-   * @param {Teriock.System.Trigger} trigger
-   * @param {Parameters<TeriockActor["hookCall"]>[1]} [options]
-   * @returns {Promise<void|false>}
-   */
-  async fireHookTrigger(trigger, options = {}) {
-    if (!this.shouldFireTriggers) { return; }
-    return this.hookCall(trigger, options);
-  }
-
   /** @inheritDoc */
   async getTokenDocument(data = {}, options = {}) {
     if (game.canvas?.scene?.grid?.type === 0) { data.shape ??= 0; }
     return super.getTokenDocument(data, options);
-  }
-
-  /** @inheritDoc */
-  async hookCall(trigger, options = {}) {
-    const out = await super.hookCall(trigger, options);
-    BaseExpiration.massExpire([this], TriggerExpiration.metadata.type, { ...options.scope, trigger });
-    return out;
   }
 
   /**
@@ -455,13 +450,8 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   prepareTriggeredChatData(trigger, document = null, type = "trigger") {
     const config = TeriockActor.#triggeredChatConfig;
     const { icon, panelKey, titleKey } = config[type] ?? config.trigger;
-    let label = trigger;
-    for (const category of Object.values(TERIOCK.config.trigger)) {
-      if (category.choices?.[trigger]) {
-        label = _loc(category.choices[trigger]);
-        break;
-      }
-    }
+    const group = getTriggerGroup(trigger);
+    const label = group ? _loc(group.choices[trigger]) : trigger;
     const associations = [];
     if (document) {
       associations.push({

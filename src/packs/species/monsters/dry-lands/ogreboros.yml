@@ -580,7 +580,7 @@ system:
     - _id: 37634d0e6b2fae07
       add:
         - ability:giant-strength
-      qualifier: and(gte(@species.size, 7), lt(@species.size, 10))
+      qualifier: and(gte(@this.item.size, 7), lt(@this.item.size, 10))
       remove:
         - ability:improved-strength
         - ability:supernatural-strength
@@ -589,7 +589,7 @@ system:
     - _id: b7dc74afdec1a704
       add:
         - ability:improved-strength
-      qualifier: and(gte(@species.size, 0), lt(@species.size, 7))
+      qualifier: and(gte(@this.item.size, 0), lt(@this.item.size, 7))
       remove:
         - ability:giant-strength
         - ability:supernatural-strength
@@ -598,7 +598,7 @@ system:
     - _id: ab3de966a8f99c9c
       add:
         - ability:supernatural-strength
-      qualifier: and(gte(@species.size, 9), lt(@species.size, 99))
+      qualifier: and(gte(@this.item.size, 9), lt(@this.item.size, 99))
       remove:
         - ability:giant-strength
         - ability:improved-strength
@@ -607,7 +607,7 @@ system:
     - _id: 056bba8fd332660a
       add:
         - ability:monstrous-strength
-      qualifier: and(gte(@species.size, 10), lt(@species.size, 99))
+      qualifier: and(gte(@this.item.size, 10), lt(@this.item.size, 99))
       remove:
         - ability:giant-strength
         - ability:improved-strength
@@ -626,7 +626,7 @@ system:
     value: 5
   statDice:
     hp:
-      formula: (@species.size - 2)d6
+      formula: (@this.item.size - 2)d6
     mp:
       formula: 1d2
   traits:

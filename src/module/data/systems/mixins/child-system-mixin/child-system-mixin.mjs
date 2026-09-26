@@ -350,7 +350,7 @@ export default function ChildSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { [`kind.${toKebabCase(this.kind)}`]: 1, kind: this.kind });
+      return Object.assign(super.getLocalRollData(), { [`kind.${toKebabCase(this.kind)}`]: 1 });
     }
 
     /** @inheritDoc */

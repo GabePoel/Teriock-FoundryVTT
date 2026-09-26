@@ -26,11 +26,7 @@ const abilityContext = {
   ub: "TERIOCK.TERMS.Properties.unblockable",
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
 
-  interaction: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
-  kind: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.kind.label",
-  maneuver: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
   range: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-  time: "TERIOCK.COMMON.ExecutionTime",
 
   ability: "TYPES.ActiveEffect.ability",
   "delivery.ball": "TERIOCK.TERMS.DeliveryPackage.ball",

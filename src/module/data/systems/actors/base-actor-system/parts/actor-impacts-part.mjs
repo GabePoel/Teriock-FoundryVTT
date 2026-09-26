@@ -97,7 +97,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeDamage(amount, options = {}) {
-      await this.parent.hookCall("damage", { scope: { amount } });
+      await this.parent.fireTrigger("damage", { amount });
       await this.#takeHarm(amount, "hp", options);
     }
 
@@ -113,7 +113,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeDrain(amount, options = {}) {
-      await this.parent.hookCall("drain", { scope: { amount } });
+      await this.parent.fireTrigger("drain", { amount });
       await this.#takeHarm(amount, "mp", options);
     }
 
@@ -127,7 +127,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeGainTempHp(amount) {
-      await this.parent.hookCall("gainTempHp", { scope: { amount } });
+      await this.parent.fireTrigger("gainTempHp", { amount });
       await this.parent.update({ "system.hp.temp": Math.max(this.hp.temp + amount, 0) });
     }
 
@@ -141,7 +141,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeGainTempMp(amount) {
-      await this.parent.hookCall("gainTempMp", { scope: { amount } });
+      await this.parent.fireTrigger("gainTempMp", { amount });
       await this.parent.update({ "system.mp.temp": Math.max(this.mp.temp + amount, 0) });
     }
 
@@ -156,7 +156,7 @@ export default function ActorImpactsPart(Base) {
      */
     async takeHealing(amount) {
       if (amount < 0) { amount = 0; }
-      await this.parent.hookCall("healing", { scope: { amount } });
+      await this.parent.fireTrigger("healing", { amount });
       await this.parent.update({ "system.hp.value": barClamp(this.hp, amount) });
     }
 
@@ -166,7 +166,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeHide(amount) {
-      await this.parent.hookCall("hide", { scope: { amount } });
+      await this.parent.fireTrigger("hide", { amount });
       await this.parent.update({ "system.detection.hiding": amount });
     }
 
@@ -180,7 +180,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeKill(amount) {
-      await this.parent.hookCall("kill", { scope: { amount } });
+      await this.parent.fireTrigger("kill", { amount });
       if (this.hp.value <= amount) { await this.parent.toggleStatusEffect("dead", { active: true, overlay: true }); }
     }
 
@@ -190,7 +190,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takePerceive(amount) {
-      await this.parent.hookCall("perceive", { scope: { amount } });
+      await this.parent.fireTrigger("perceive", { amount });
       await this.parent.update({ "system.detection.perceiving": amount });
     }
 
@@ -205,7 +205,7 @@ export default function ActorImpactsPart(Base) {
      */
     async takeRevitalizing(amount) {
       if (amount < 0) { amount = 0; }
-      await this.parent.hookCall("revitalizing", { scope: { amount } });
+      await this.parent.fireTrigger("revitalizing", { amount });
       await this.parent.update({ "system.mp.value": barClamp(this.mp, amount) });
     }
 
@@ -219,7 +219,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeSetTempHp(amount) {
-      await this.parent.hookCall("setTempHp", { scope: { amount } });
+      await this.parent.fireTrigger("setTempHp", { amount });
       await this.parent.update({ "system.hp.temp": amount });
     }
 
@@ -233,7 +233,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeSetTempMp(amount) {
-      await this.parent.hookCall("setTempMp", { scope: { amount } });
+      await this.parent.fireTrigger("setTempMp", { amount });
       await this.parent.update({ "system.mp.temp": amount });
     }
 
@@ -247,7 +247,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeSleep(amount) {
-      await this.parent.hookCall("sleep", { scope: { amount } });
+      await this.parent.fireTrigger("sleep", { amount });
       if (this.hp.value <= amount) {
         await this.parent.toggleStatusEffect("asleep", { active: true, overlay: true });
       }
@@ -263,7 +263,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<void>}
      */
     async takeWither(amount) {
-      await this.parent.hookCall("wither", { scope: { amount } });
+      await this.parent.fireTrigger("wither", { amount });
       await this.parent.update({ "system.lp.value": barClamp(this.lp, amount) });
     }
   }

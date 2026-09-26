@@ -39,7 +39,7 @@ export default class IdentificationModel extends BaseDataModel {
    * @returns {Promise<void>}
    */
   async identify() {
-    await this.parent.parent.hookCall("identify", { scope: { equipment: this.parent.parent } });
+    await this.parent.parent.fireTrigger("identify");
     if (!this.identified) {
       ui.notifications.info("TERIOCK.MODELS.Identification.QUERY.Identify.ask", {
         format: { name: this.parent.parent.fullName },
@@ -73,7 +73,7 @@ export default class IdentificationModel extends BaseDataModel {
    * @returns {Promise<void>}
    */
   async readMagic() {
-    await this.parent.parent.hookCall("readMagic", { scope: { equipment: this.parent.parent } });
+    await this.parent.parent.fireTrigger("readMagic");
     if (!this.identified && !this.read) {
       const activeGM = game.users.activeGM;
       ui.notifications.info("TERIOCK.MODELS.Identification.QUERY.ReadMagic.ask", {

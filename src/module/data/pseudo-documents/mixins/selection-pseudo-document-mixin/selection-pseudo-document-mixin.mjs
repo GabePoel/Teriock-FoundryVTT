@@ -114,11 +114,6 @@ export default function SelectionPseudoDocumentMixin(Base) {
       };
     }
 
-    /** @inheritDoc */
-    get _inputContextKey() {
-      return this.schema.has("localQualifier") ? "child" : super._inputContextKey;
-    }
-
     /**
      * Paths for every selection field this defines and currently wants shown.
      * @returns {string[]}
@@ -178,6 +173,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
 
     /** @inheritDoc */
     _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+      if (path === "localQualifier") { inputConfig.context = "child"; }
       if (path === "localIdentifiers") {
         inputConfig.suggestions = this._selectionRelativeTo?.previewed.getNames({ filter: d => this._isSelectable(d) });
       }

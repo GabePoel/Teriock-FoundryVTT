@@ -156,7 +156,7 @@ export default function CommonDocumentMixin(Base) {
       super._onUpdate(changed, options, userId);
       if (this.checkEditor(userId)) {
         if (this.actor) { this.actor.system.postUpdate(); }
-        this.fireTrigger("updateDocument", this.getScope());
+        this._onUpdateDocument();
       }
     }
 
@@ -200,6 +200,18 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
+     * Fire a trigger from this document on its actor and call a hook with the same name.
+     * @param {Teriock.System.Trigger} trigger
+     * @param {Partial<Teriock.System.TriggerScope>} [scope] - Explicit scope that wins over the generated one.
+     * @returns {Promise<boolean>}
+     */
+    async fireTrigger(trigger, scope = {}) {
+      const fullScope = { ...this.getScope(), source: this, ...scope, trigger };
+      await this.actor?._dispatchTrigger(trigger, fullScope);
+      return Hooks.call(`teriock.${trigger}`, this, fullScope);
+    }
+
+    /**
      * Get the operation to create child Documents.
      * @param {ChildDocumentName} embeddedName
      * @param {object[]} data
@@ -238,25 +250,6 @@ export default function CommonDocumentMixin(Base) {
      */
     getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
       return { ...operation, action: "update", documentName: embeddedName, pack: this.pack, parent: this, updates };
-    }
-
-    /**
-     * Executes all macros for a given trigger and calls a regular hook with the same name.
-     * @param {Teriock.System.Trigger} trigger - What trigger to call.
-     * @param {object} [options]
-     * @param {Teriock.System.TriggerScope} [options.scope] - Optional scope to merge into the generated one.
-     * @param {boolean} [options.skipCall] - Whether to skip calling normal hooks.
-     * @param {boolean} [options.skipPropagation] - Whether to skip propagation.
-     * @returns {Promise<void|false>} The mutated data.
-     */
-    async hookCall(trigger, options = {}) {
-      const { scope = {}, skipCall = false, skipPropagation = false } = options;
-      scope.trigger = trigger;
-      if (!skipPropagation && this.actor) {
-        await this.actor.fireTrigger(trigger, scope);
-        await this.actor.createTriggeredMessages(scope);
-      }
-      if (!skipCall) { return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope)); }
     }
 
     /** @inheritDoc */

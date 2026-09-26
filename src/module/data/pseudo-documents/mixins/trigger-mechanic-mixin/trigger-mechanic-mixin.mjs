@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
+import { formatDynamicSelectOptions, getTriggerGroup } from "../../../../helpers/utils.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
@@ -107,6 +107,13 @@ export default function TriggerMechanicMixin(Base) {
     }
 
     /**
+     * What happens when a fired trigger is validated for this.
+     * @param {Teriock.System.TriggerScope} _scope
+     * @returns {Promise<void>}
+     */
+    async _onFire(_scope) {}
+
+    /**
      * Validate whether a fired trigger event should trigger this.
      * @param {Teriock.System.Trigger} trigger
      * @param {Partial<Teriock.System.TriggerScope>} [scope]
@@ -115,8 +122,8 @@ export default function TriggerMechanicMixin(Base) {
     validateTrigger(trigger, scope = {}) {
       if (!this.activeTriggers.has(trigger)) { return false; }
       if (!this.active || !this.isPassive || !this.documentAllowsTrigger) { return false; }
-      const rollData = this._getFireRollData(scope);
-      return BaseRoll.qualify(this.triggerQualifier, rollData);
+      if (getTriggerGroup(trigger)?.self && !this.isOwnDocument(scope.source)) { return false; }
+      return BaseRoll.qualify(this.triggerQualifier, () => this._getFireRollData(scope));
     }
   }
 

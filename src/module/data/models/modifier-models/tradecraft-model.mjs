@@ -32,7 +32,7 @@ export default class TradecraftModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    await this.actor.hookCall("rollTradecraft", { scope: { tradecraft: this.key } });
+    await this.actor.fireTrigger("rollTradecraft", { tradecraft: this.key });
     await super.use(Object.assign(options, { source: this }));
   }
 }

@@ -143,6 +143,11 @@ export default class BaseExecution extends BaseDataModel {
     return docs;
   }
 
+  /** @inheritDoc */
+  get _inputContextKey() {
+    return "execution";
+  }
+
   /**
    * Active automations in priority order.
    * @returns {Automation[]}
@@ -604,13 +609,13 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
-   * Propagate a trigger event.
+   * Fire a trigger on this execution's actor with this execution's scope.
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
-   * @returns {Promise<void|false>}
+   * @returns {Promise<boolean|undefined>}
    */
-  async fireTrigger(trigger, scope) {
-    return this.actor?.hookCall(trigger, { scope: this.getScope({ ...scope, trigger }) });
+  async fireTrigger(trigger, scope = {}) {
+    return this.actor?.fireTrigger(trigger, this.getScope(scope));
   }
 
   /**
@@ -626,11 +631,17 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
-   * A scope that can be used when executing macros from a fired trigger event.
-   * @param {Teriock.System.TriggerScope} [scope]
+   * A scope for this execution. Explicit keys win over this execution which wins over its source.
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {Teriock.System.TriggerScope}
    */
   getScope(scope = {}) {
-    return Object.assign({ actor: this.actor, execution: this }, scope);
+    return {
+      ...(this.source?.getScope?.() ?? {}),
+      actor: this.actor,
+      execution: this,
+      source: this.source ?? this.actor,
+      ...scope,
+    };
   }
 }

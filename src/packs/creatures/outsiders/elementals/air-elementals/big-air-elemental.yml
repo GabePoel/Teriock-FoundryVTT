@@ -469,7 +469,7 @@ items:
         value: 5
       statDice:
         hp:
-          formula: (@species.size)d6
+          formula: (@this.item.size)d6
         mp:
           formula: 4d6
       traits:
@@ -1735,8 +1735,7 @@ items:
           expirations:
             - _id: wlQFNbMQfPC7oxJ9
               triggerQualifier: >-
-                and(@ability.interaction.attack, eq(@armament.identifier, @mechanic.armament.identifier),
-                eq(@armament.type, @mechanic.armament.type))
+                and(@source.interaction.attack, @this.armament)
               triggers:
                 - executeAbility
               type: trigger

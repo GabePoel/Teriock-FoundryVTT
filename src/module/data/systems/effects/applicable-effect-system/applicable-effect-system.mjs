@@ -166,10 +166,7 @@ export default class ApplicableEffectSystem
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) { this.parent.fireTrigger(
-        "applyEffect",
-        this.parent.getScope(),
-      ); }
+    if (this.parent.checkEditor(userId) && this.actor) { this.parent.fireTrigger("applyEffect"); }
   }
 
   /** @inheritDoc */
@@ -191,7 +188,7 @@ export default class ApplicableEffectSystem
     if (yes === false) { return false; }
 
     if (CONFIG.ActiveEffect.expiryAction === "delete") {
-      this.parent.fireTrigger("expireEffect", this.parent.getScope());
+      this.parent.fireTrigger("expireEffect");
     }
   }
 
@@ -202,7 +199,7 @@ export default class ApplicableEffectSystem
 
     if (
       CONFIG.ActiveEffect.expiryAction === "update" && foundry.utils.getProperty(changes, "duration.expired") === true
-    ) { this.parent.fireTrigger("expireEffect", this.parent.getScope()); }
+    ) { this.parent.fireTrigger("expireEffect"); }
   }
 
   /** @inheritDoc */

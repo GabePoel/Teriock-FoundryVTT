@@ -121,7 +121,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
    * @returns {Promise<void>}
    */
   async mount() {
-    await this.parent.hookCall("mount", { scope: { mount: this.parent } });
+    await this.parent.fireTrigger("mount");
     await this.parent.update({ "system.mounted": true });
   }
 
@@ -136,7 +136,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
    * @returns {Promise<void>}
    */
   async unmount() {
-    await this.parent.hookCall("unmount", { scope: { mount: this.parent } });
+    await this.parent.fireTrigger("unmount");
     await this.parent.update({ "system.mounted": false });
   }
 }

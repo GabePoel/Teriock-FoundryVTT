@@ -83,7 +83,7 @@ export default function ActorMoneyPart(Base) {
      * @returns {Promise<void>}
      */
     async takePay(amount, mode = "exact") {
-      await this.parent.hookCall("takePay", { scope: { amount, mode } });
+      await this.parent.fireTrigger("takePay", { amount, mode });
 
       const currencies = Object.entries(TERIOCK.config.currency).map(([key, config]) => ({
         held: Math.max(0, this.money[key] || 0),

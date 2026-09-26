@@ -102,7 +102,7 @@ export default class TargetAutomation extends BaseAutomation {
    * @returns {object}
    */
   #getRegionShapeData(options) {
-    const rollData = options.execution?.getRollData() ?? options.rollData ?? {};
+    const rollData = options.rollData ?? options.execution?.getRollData() ?? {};
     const data = {
       type: this.regionType,
       x: 0,

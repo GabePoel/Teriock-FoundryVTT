@@ -22,22 +22,11 @@ export default function PropagationDataMixin(Base) {
     }
 
     /**
-     * Stuff that happens when a trigger event is fired.
-     * @param {string} trigger
-     * @param {Teriock.System.TriggerScope} [scope]
-     */
-    _onFireTrigger(trigger, scope = {}) {
-      return this._propagateOperation("_onFireTrigger", true, [trigger, scope]);
-    }
-
-    /**
-     * Stuff that happens before a trigger event is fired.
-     * @param {string} trigger
-     * @param {Teriock.System.TriggerScope} [scope]
+     * Stuff that happens after a document this belongs to is updated.
      * @returns {Promise<void>}
      */
-    async _preFireTrigger(trigger, scope = {}) {
-      await this._propagateOperation("_preFireTrigger", true, [trigger, scope]);
+    async _onUpdateDocument() {
+      await this._propagateOperation("_onUpdateDocument", true);
     }
 
     /**
@@ -65,26 +54,13 @@ export default function PropagationDataMixin(Base) {
     }
 
     /**
-     * Fire a designated trigger event.
-     * @param {string} trigger
-     * @param {Teriock.System.TriggerScope} [scope]
-     * @returns {Promise<void>}
-     */
-    async fireTrigger(trigger, scope = {}) {
-      await this._preFireTrigger(trigger, scope);
-      await this._onFireTrigger(trigger, scope);
-    }
-
-    /**
-     * A scope that can be used when executing macros from a fired trigger event.
+     * A scope built from this and its ancestors. Explicit keys win over this which wins over ancestors.
      * @param {Partial<Teriock.System.TriggerScope>} [scope]
      * @returns {Teriock.System.TriggerScope}
      */
     getScope(scope = {}) {
-      scope = { ...scope };
-      if (SCOPE_MAP[this.documentName]) { scope[SCOPE_MAP[this.documentName]] = this; }
-      if (this.parent && typeof this.parent.getScope === "function") { Object.assign(scope, this.parent.getScope()); }
-      return scope;
+      const key = SCOPE_MAP[this.documentName];
+      return { ...(this.parent?.getScope?.() ?? {}), ...(key ? { [key]: this } : {}), ...scope };
     }
 
     /**

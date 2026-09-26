@@ -117,7 +117,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async dampen() {
-      await this.parent.hookCall("dampen", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("dampen");
       await this.parent.toggleChild("property:dampened", { active: true });
     }
 
@@ -130,7 +130,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async destroy() {
-      await this.parent.hookCall("destroy", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("destroy");
       await this.parent.toggleChild("property:destroyed", { active: true });
     }
 
@@ -206,7 +206,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async reforge() {
-      await this.parent.hookCall("reforge", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("reforge");
       await this.parent.toggleChild("property:destroyed", { active: false });
     }
 
@@ -219,7 +219,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async repair() {
-      await this.parent.hookCall("repair", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("repair");
       await this.parent.toggleChild("property:shattered", { active: false });
     }
 
@@ -232,7 +232,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async shatter() {
-      await this.parent.hookCall("shatter", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("shatter");
       await this.parent.toggleChild("property:shattered", { active: true });
     }
 
@@ -253,7 +253,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @returns {Promise<void>}
      */
     async undampen() {
-      await this.parent.hookCall("undampen", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("undampen");
       await this.parent.toggleChild("property:dampened", { active: false });
     }
 

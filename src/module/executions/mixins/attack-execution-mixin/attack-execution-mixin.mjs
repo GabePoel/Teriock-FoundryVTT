@@ -4,6 +4,7 @@ import { PiercingModel } from "../../../data/models/_module.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { prefixObject } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -454,19 +455,25 @@ export default function AttackExecutionMixin(Base) {
 
     /** @inheritDoc */
     getRollData() {
-      return Object.assign(super.getRollData(), this.armament?.system.getSystemRollData() ?? {}, {
-        ap: this.existingAttackPenalty,
-        av0: Number(this.piercing.av0) * 2,
-        hit: this.armament?.system.hitBonus ?? 0,
-        sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
-        ub: Number(this.piercing.ub),
-        warded: Number(this.warded),
-      });
+      const usesAmmunition = this.isContact && this.armament?.system.ammunition?.enabled && this.ammunition;
+      return Object.assign(
+        super.getRollData(),
+        prefixObject(this.armament?.system.getLocalRollData() ?? {}, "armament"),
+        usesAmmunition ? prefixObject(this.ammunition.system.getLocalRollData(), "ammunition") : {},
+        {
+          ap: this.existingAttackPenalty,
+          av0: Number(this.piercing.av0) * 2,
+          hit: this.armament?.system.hitBonus ?? 0,
+          sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
+          ub: Number(this.piercing.ub),
+          warded: Number(this.warded),
+        },
+      );
     }
 
     /** @inheritDoc */
     getScope(scope = {}) {
-      return Object.assign(super.getScope(scope), { armament: this.armament });
+      return { ...super.getScope(), armament: this.armament, ...scope };
     }
 
     /**

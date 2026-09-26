@@ -44,7 +44,7 @@ export default function ActorHacksPart(Base) {
      * @returns {Promise<void>}
      */
     async takeHack(part, amount = 1) {
-      await this.parent.hookCall("takeHack", { scope: { amount, part } });
+      await this.parent.fireTrigger("takeHack", { amount, part });
       const value = this.parent.system.hacks[part].value;
       const max = Math.min(value + amount, hackConfig[part].max);
       const ids = [];
@@ -66,7 +66,7 @@ export default function ActorHacksPart(Base) {
      * @returns {Promise<void>}
      */
     async takeUnhack(part, amount = 1) {
-      await this.parent.hookCall("takeUnhack", { scope: { amount, part } });
+      await this.parent.fireTrigger("takeUnhack", { amount, part });
       /** @type {TeriockActiveEffect<"hack">[]} */
       const hacks = this.parent.effects.contents.filter(c => c.type === "hack" && c.system.part === part);
       const removable = hacks.filter(h => !h.system.permanent).sort((a, b) =>

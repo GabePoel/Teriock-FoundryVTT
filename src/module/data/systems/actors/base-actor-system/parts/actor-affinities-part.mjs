@@ -121,7 +121,7 @@ export default function ActorAffinitiesPart(Base) {
       const config = affinityConfig.types[type];
       if (!config) { return; }
       if (options.event) { Object.assign(options, ThresholdRoll.parseEvent(options.event)); }
-      if (config.hook) { await this.parent.hookCall(config.hook); }
+      if (config.hook) { await this.parent.fireTrigger(config.hook); }
       const Execution = config.threshold ? ResistanceExecution : AffinityExecution;
       await Execution.create({}, Object.assign(options, { actor: this.parent, type }));
     }

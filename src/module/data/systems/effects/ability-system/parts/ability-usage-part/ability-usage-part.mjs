@@ -203,10 +203,7 @@ export default function AbilityUsagePart(Base) {
         [`interaction.${this.interaction}`]: 1,
         [`maneuver.${this.maneuver}`]: 1,
         [`time.${toKebabCase(this.executionTime.base)}`]: 1,
-        interaction: this.interaction,
-        maneuver: this.maneuver,
         range: this.range.rollValue,
-        time: toKebabCase(this.executionTime.base),
       });
       // Add deliveries
       if (this.delivery) { data[`delivery.${this.delivery}`] = 1; }
@@ -222,7 +219,6 @@ export default function AbilityUsagePart(Base) {
         Object.assign(data, {
           [`expansion.${this.expansion.type}`]: 1,
           [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
-          expansion: this.expansion,
           ["expansion.range"]: this.expansion.range.rollValue,
         });
       }

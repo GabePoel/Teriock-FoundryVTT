@@ -83,7 +83,7 @@ export default class TradecraftAutomation
   async _getActivations(options = {}) {
     const selected = this.#chosen ?? Array.from(this.tradecrafts).filter(Boolean);
     if (!selected.length) { return []; }
-    const rollData = options.execution?.getRollData?.() ?? options.rollData ?? {};
+    const rollData = options.rollData ?? options.execution?.getRollData?.() ?? {};
     const threshold = await this.getThreshold(rollData);
     return selected.map(tradecraft =>
       new TradecraftActivation({

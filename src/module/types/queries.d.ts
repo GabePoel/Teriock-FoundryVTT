@@ -43,7 +43,7 @@ declare global {
     };
 
     export type FireTriggerData = {
-      options: object;
+      scope?: Partial<Teriock.System.TriggerScope>;
       trigger: Teriock.System.Trigger;
       uuid: UUID<TeriockActiveEffect | TeriockActor | TeriockItem>;
     };

@@ -7,8 +7,6 @@ const propertyContext = {
   property: "TYPES.ActiveEffect.property",
 
   "dmg.extra": "TERIOCK.ROLL_CONTEXT.Property.extraDamage",
-  "dmg.type": "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label",
-  kind: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.kind.label",
 };
 
 export default propertyContext;

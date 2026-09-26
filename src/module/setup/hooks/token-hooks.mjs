@@ -12,7 +12,7 @@
  * @see {moveToken}
  */
 async function fireMovementTrigger(document, _movement, _operation, user) {
-  if (document.checkEditor(user) && document.actor) { await document.actor.hookCall("movement"); }
+  if (document.checkEditor(user) && document.actor) { await document.actor.fireTrigger("movement"); }
 }
 
 const tokenHookEntries = [["moveToken", fireMovementTrigger]];

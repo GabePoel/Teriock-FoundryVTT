@@ -119,7 +119,7 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {Promise<void>}
      */
     async equip() {
-      await this.parent.hookCall("equip", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("equip");
       await this.parent.update({ "system.equipped": true });
     }
 
@@ -167,7 +167,7 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {Promise<void>}
      */
     async glue() {
-      await this.parent.hookCall("glue", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("glue");
       await this.parent.toggleChild("property:glued", { active: true });
     }
 
@@ -191,7 +191,7 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {Promise<void>}
      */
     async unequip() {
-      await this.parent.hookCall("unequip", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("unequip");
       await this.parent.update({ "system.equipped": false });
     }
 
@@ -200,7 +200,7 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {Promise<void>}
      */
     async unglue() {
-      await this.parent.hookCall("unglue", { scope: { equipment: this.parent } });
+      await this.parent.fireTrigger("unglue");
       await this.parent.toggleChild("property:glued", { active: false });
     }
   }

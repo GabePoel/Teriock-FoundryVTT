@@ -44,7 +44,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    await this.actor.hookCall("rollFeatSave", { scope: { attribute: this.key } });
+    await this.actor.fireTrigger("rollFeatSave", { attribute: this.key });
     await super.use(Object.assign(options, { source: this }));
   }
 }

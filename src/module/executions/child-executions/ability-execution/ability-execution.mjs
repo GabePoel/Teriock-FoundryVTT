@@ -7,7 +7,7 @@ import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstr
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula } from "../../../helpers/formula.mjs";
-import { objectMap, omit } from "../../../helpers/utils.mjs";
+import { objectMap, omit, prefixObject } from "../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
 
@@ -525,7 +525,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /** @inheritDoc */
   getRollData() {
-    return Object.assign(super.getRollData(), {
+    return Object.assign(super.getRollData(), prefixObject(this.source.system.getLocalRollData(), "ability"), {
       "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
       "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
       bv: this.bv ?? 0,
@@ -535,7 +535,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /** @inheritDoc */
   getScope(scope = {}) {
-    return Object.assign(super.getScope(scope), { ability: this.source });
+    return { ...super.getScope(), ability: this.source, ...scope };
   }
 
   /** @inheritDoc */

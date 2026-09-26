@@ -10,6 +10,15 @@ import BasePseudoDocument from "../base-pseudo-document/base-pseudo-document.mjs
 const { fields } = foundry.data;
 
 /**
+ * Scope keys whose string values become `@<key>.<value>` flags in fire roll data.
+ * @todo Move this into `fireTrigger` maybe?
+ */
+const SCOPE_FLAG_KEYS = ["attribute", "mode", "part", "tradecraft"];
+
+/** Scope keys whose documents are compared against this mechanic's own as `@this.<key>` flags. */
+const SCOPE_RELATION_KEYS = ["ability", "actor", "armament", "effect", "item", "source"];
+
+/**
  * @mixes PropagationData
  */
 export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocument, PropagationDataMixin) {
@@ -43,6 +52,11 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
         { initial: [0, 1] },
       ),
     });
+  }
+
+  /** @inheritDoc */
+  get _inputContextKey() {
+    return "trigger";
   }
 
   /**
@@ -137,20 +151,29 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
-   * The roll data used to evaluate something scope-dependent. Documents are scoped under `@mechanic`.
+   * The roll data used to evaluate a fired trigger. The event is under `@source` and this mechanic is under `@this`.
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {object}
    */
   _getFireRollData(scope = {}) {
-    const rollData = scope.rollData ?? scope.execution?.getRollData?.() ?? this.getRollData() ?? {};
+    const rollData = { ...(scope.execution?.getRollData() ?? (scope.actor ?? this.actor)?.getRollData() ?? {}) };
+    if (!scope.execution && scope.source?.system?.getLocalRollData) {
+      Object.assign(rollData, prefixObject(scope.source.system.getLocalRollData(), "source"));
+    }
+    rollData.amount = scope.amount ?? 0;
+    for (const key of SCOPE_FLAG_KEYS) { if (scope[key]) { rollData[`${key}.${scope[key]}`] = 1; } }
+    Object.assign(rollData, this._getOwnRollData());
+    for (const key of SCOPE_RELATION_KEYS) { rollData[`this.${key}`] = Number(this.isOwnDocument(scope[key])); }
+    return rollData;
+  }
+
+  /**
+   * The roll data of this mechanic's own nearest effect and item under `this.effect` and `this.item`.
+   * @returns {object}
+   */
+  _getOwnRollData() {
     const doc = this.getNearestDocument();
-    const effect = doc?.documentName === "ActiveEffect" ? doc : null;
-    const item = doc?.documentName === "Item" ? doc : (effect?.parent?.documentName === "Item" ? effect.parent : null);
-    return {
-      ...rollData,
-      ...(effect ? prefixObject(effect.system.getSystemRollData(), "mechanic") : {}),
-      ...(item ? prefixObject(item.system.getSystemRollData(), "mechanic") : {}),
-    };
+    return doc && doc.documentName !== "Actor" ? doc.system.getSystemRollData() : {};
   }
 
   /**
@@ -159,7 +182,11 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   checkIfQualified(rollData) {
-    return BaseRoll.qualify(this.activeQualifier, rollData ?? (() => this.getRollData()));
+    if (!rollData) { return BaseRoll.qualify(this.activeQualifier, () => this.getRollData()); }
+    return BaseRoll.qualify(
+      this.activeQualifier,
+      () => ({ ...(typeof rollData === "function" ? rollData() : rollData), ...this._getOwnRollData() }),
+    );
   }
 
   /**
@@ -168,7 +195,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    */
   async editActiveQualifier() {
     const editor = new foundry.applications.apps.FormulaEditor({
-      context: "actor",
+      context: this._inputContextKey,
       formula: this.activeQualifier,
       window: { title: this.getFieldForProperty("activeQualifier")?.label },
     });
@@ -185,6 +212,16 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    */
   getCompetence(_scope) {
     return this.getNearestDocument()?.system?.competence?.raw ?? 0;
+  }
+
+  /**
+   * Whether a document is the nearest document of its kind to this.
+   * @param {unknown} doc
+   * @returns {boolean}
+   */
+  isOwnDocument(doc) {
+    if (!(doc instanceof foundry.abstract.Document) || !doc.uuid) { return false; }
+    return this.getNearestDocument(doc.documentName)?.uuid === doc.uuid;
   }
 
   /** @inheritDoc */

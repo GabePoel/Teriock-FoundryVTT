@@ -6,7 +6,6 @@ const powerContext = {
   power: "TYPES.Item.power",
 
   av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-  kind: "TERIOCK.SYSTEMS.Power.FIELDS.kind.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
 
   hp: "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label",

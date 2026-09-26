@@ -147,7 +147,7 @@ export default function AttunableSystemMixin(Base) {
      * @returns {Promise<TeriockActiveEffect<"attunement"> | null>} Promise that resolves to the attunement effect or null.
      */
     async attune() {
-      await this.parent.hookCall("attune", { scope: { attunable: this.parent } });
+      await this.parent.fireTrigger("attune");
       let attunement = this.attunement;
       if (attunement) { return attunement; }
       const attunementData = {
@@ -195,7 +195,7 @@ export default function AttunableSystemMixin(Base) {
      * @returns {Promise<void>}
      */
     async deattune() {
-      await this.parent.hookCall("deattune", { scope: { attunable: this.parent } });
+      await this.parent.fireTrigger("deattune");
       if (this.attunement) {
         await this.attunement.delete();
         ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success", {

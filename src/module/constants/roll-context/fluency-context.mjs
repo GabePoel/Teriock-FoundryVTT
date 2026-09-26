@@ -1,13 +1,7 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
-const fluencyContext = {
-  ...usableContext,
-  fluency: "TYPES.ActiveEffect.fluency",
-
-  field: "TERIOCK.COMMON.Field",
-  tc: "TERIOCK.COMMON.Tradecraft",
-};
+const fluencyContext = { ...usableContext, fluency: "TYPES.ActiveEffect.fluency" };
 
 export default fluencyContext;
 
@@ -18,6 +12,6 @@ Hooks.once("teriock.identifiersInit", () => {
   });
 
   Object.entries(TERIOCK.config.tradecraft.tradecrafts).forEach(([k, v]) => {
-    fluencyContext[`tc.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.tradecraft", { name: _loc(v.label) });
+    fluencyContext[`tradecraft.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.tradecraft", { name: _loc(v.label) });
   });
 });
