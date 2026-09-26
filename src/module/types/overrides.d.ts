@@ -1,11 +1,10 @@
-import { Game } from "@client/_module.mjs";
+import { Game as BaseGame } from "@client/_module.mjs";
 import { Canvas } from "@client/canvas/_module.mjs";
 import { TokenLayer } from "@client/canvas/layers/_module.mjs";
 import { ClientDocumentMixin } from "@client/documents/abstract/_module.mjs";
 import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
-import { TeriockDocumentSheet } from "../applications/api/_module.mjs";
 import {
   TeriockActorDirectory,
   TeriockChatLog,
@@ -61,8 +60,8 @@ declare global {
 
   type ClientDocument = InstanceType<ReturnType<typeof ClientDocumentMixin>>;
 
-  // @ts-expect-error Can't redeclare block scope
-  const game: Game & {
+  // @ts-expect-error Incorrect extensions
+  interface Game extends BaseGame {
     actors: TeriockActors;
     canvas: Canvas & { tokens: TokenLayer };
     folders: TeriockFolders;
@@ -70,6 +69,7 @@ declare global {
     journal: TeriockJournal;
     macros: TeriockMacros;
     messages: TeriockChatMessages;
+    // @ts-expect-error Incorrect extensions
     packs: Collection<string, CompendiumCollection<TeriockDocument>>;
     scenes: TeriockScenes;
     tables: TeriockRollTables;
@@ -77,19 +77,22 @@ declare global {
     tooltip: TeriockTooltipManager;
     user: TeriockUser;
     users: TeriockUsers;
-  };
-  // @ts-expect-error Doesn't know about global `ui`
-  const ui: ui & {
-    activeWindow: TeriockDocumentSheet;
-    actors: TeriockActorDirectory;
-    chat: TeriockChatLog;
-    combat: TeriockCombatTracker;
-    compendium: TeriockCompendiumDirectory;
-    hotbar: TeriockHotbar;
-    items: TeriockItemDirectory;
-    notifications: TeriockNotifications;
-    tables: TeriockRollTableDirectory;
-  };
+  }
+
+  namespace ui {
+    let actors: TeriockActorDirectory;
+    // @ts-expect-error Can't redeclare
+    let chat: TeriockChatLog;
+    // @ts-expect-error Can't redeclare
+    let combat: TeriockCombatTracker;
+    let compendium: TeriockCompendiumDirectory;
+    // @ts-expect-error Can't redeclare
+    let hotbar: TeriockHotbar;
+    let items: TeriockItemDirectory;
+    // @ts-expect-error Can't redeclare
+    let notifications: TeriockNotifications;
+    let tables: TeriockRollTableDirectory;
+  }
 
   type FromUuidOptions = { invalid: boolean, relative: TeriockDocument };
 
