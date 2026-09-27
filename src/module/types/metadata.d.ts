@@ -6,15 +6,11 @@ declare global {
 
     type TypeTags = { embed: boolean, panel: boolean };
 
-    export type TypeMetadata = ModelMetadata & { icon: string, tags: TypeTags, type: string };
+    export type TypeMetadata = ModelMetadata & { documentName: string, icon: string, tags: TypeTags, type: string };
 
     type PseudoDocumentTags = TypeTags & { mechanic: boolean, triggered: boolean };
 
-    export type PseudoDocumentMetadata = TypeMetadata & {
-      documentName: string;
-      tags: PseudoDocumentTags;
-      typed: boolean;
-    };
+    export type PseudoDocumentMetadata = TypeMetadata & { tags: PseudoDocumentTags, typed: boolean };
 
     type AutomationTags = PseudoDocumentTags & {
       changes: boolean;
@@ -46,14 +42,12 @@ declare global {
 
     export type SystemCritMetadata = { enabled: boolean, where: "chatData" | "effectData" };
 
-    export type SystemMetadata = Omit<TypeMetadata, "type"> & {
+    export type SystemMetadata = TypeMetadata & {
       crit: SystemCritMetadata;
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       preserveOnRefresh: string[];
       tags: SystemMetadataTags;
-      /** The subtype this system is registered as, or `null` for abstract systems. */
-      type: string | null;
     };
 
     export type CommonSystemMetadata = SystemMetadata & {

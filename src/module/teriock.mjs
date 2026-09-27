@@ -136,22 +136,15 @@ foundry.helpers.Hooks.once("init", function() {
   // Assign Document and Collection Classes
   // --------------------------------------
 
-  const systemDocumentNames = {
-    actors: "Actor",
-    cards: "Card",
-    effects: "ActiveEffect",
-    items: "Item",
-    messages: "ChatMessage",
-    pages: "JournalEntryPage",
-  };
-  for (const [key, documentName] of Object.entries(systemDocumentNames)) {
-    for (const model of Object.values(data.systems[key])) {
-      const type = model.metadata.type;
-      if (type && type !== Object.getPrototypeOf(model).metadata.type) {
-        CONFIG[documentName].dataModels[type] = model;
-      }
+  const registerSubtypes = (module) => {
+    for (const model of Object.values(module)) {
+      if (!foundry.utils.isSubclass(model, foundry.abstract.TypeDataModel)) { continue; }
+      const type = model?.metadata?.type;
+      const documentName = model?.metadata?.documentName;
+      if (!type || !documentName) { continue; }
+      CONFIG[documentName].dataModels[type] = model;
     }
-  }
+  };
 
   CONFIG.ActiveEffect.changeTypes = constants.config.change.types;
   CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
@@ -159,20 +152,24 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
   CONFIG.ActiveEffect.expiryAction = "delete";
   CONFIG.ActiveEffect.phases = constants.config.change.phase;
+  registerSubtypes(data.systems.effects);
 
   CONFIG.Actor.collection = documents.collections.TeriockActors;
   CONFIG.Actor.defaultType = "character";
   CONFIG.Actor.documentClass = documents.TeriockActor;
+  registerSubtypes(data.systems.actors);
 
   CONFIG.AmbientLight.documentClass = documents.TeriockAmbientLightDocument;
   CONFIG.AmbientLight.objectClass = canvas.placeables.TeriockAmbientLight;
 
   CONFIG.Card.documentClass = documents.TeriockCard;
+  registerSubtypes(data.systems.cards);
 
   CONFIG.ChatMessage.defaultType = "interactive";
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.ChatMessage.popoutClass = applications.sidebar.apps.TeriockChatPopout;
   CONFIG.ChatMessage.template = "teriock/ui/chat-message";
+  registerSubtypes(data.systems.messages);
 
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Combat.initiative.decimals = 2;
@@ -185,12 +182,14 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Item.compendiumIndexFields = ["system._sup"];
   CONFIG.Item.defaultType = "power";
   CONFIG.Item.documentClass = documents.TeriockItem;
+  registerSubtypes(data.systems.items);
 
   CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
 
   CONFIG.JournalEntryCategory.documentClass = documents.TeriockJournalEntryCategory;
 
   CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
+  registerSubtypes(data.systems.pages);
 
   CONFIG.Macro.defaultType = "script";
   CONFIG.Macro.documentClass = documents.TeriockMacro;

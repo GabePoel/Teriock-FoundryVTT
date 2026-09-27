@@ -9,7 +9,7 @@ const { TypeDataModel } = foundry.abstract;
  */
 export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "base" });
+  static metadata = mergeMetadata(super.metadata, { documentName: "ChatMessage", type: "base" });
 
   /**
    * Whether this message is visible.

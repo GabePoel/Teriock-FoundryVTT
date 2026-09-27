@@ -21,6 +21,7 @@ export default class BaseItemSystem
     childTypes: ["ability", "fluency", "resource"],
     descriptionPath: "system.description",
     disabledPath: "system.disabled",
+    documentName: "Item",
     preserveOnRefresh: ["effects", "system.disabled", "system._dep", ...super.metadata.preserveOnRefresh],
     visibleTypes: ["ability", "fluency", "resource"],
   });

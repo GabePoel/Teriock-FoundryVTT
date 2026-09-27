@@ -50,6 +50,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {string}
    */
   static get typeLabel() {
+    if (!this.documentName) { return ""; }
     return this.metadata.typed ? `TYPES.${this.documentName}.${this.metadata.type}` : `DOCUMENT.${this.documentName}`;
   }
 

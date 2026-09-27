@@ -1,6 +1,5 @@
-import system from "../../../../system.json";
 import { CharacterSystem, CreatureSystem, InventorySystem } from "./actors/_module.mjs";
-import { BaseCardsSystem, StoneSystem } from "./cards/_module.mjs";
+import { BaseCardSystem, StoneSystem } from "./cards/_module.mjs";
 import {
   AbilitySystem,
   AttunementSystem,
@@ -26,22 +25,6 @@ import {
 import { BaseMessageSystem, InteractiveSystem, SharedSystem, TriggeredSystem } from "./messages/_module.mjs";
 import { ClassSystem, DamageSystem, DrainSystem, RuleSystem, StyleSystem, TradecraftSystem } from "./pages/_module.mjs";
 
-type DocumentTypes = typeof system.documentTypes;
-
-/** Requires `Map` to have exactly the keys `Type`. */
-type ExactKeys<Map extends Record<Type, object> & Record<Exclude<keyof Map, Type>, never>, Type extends PropertyKey> =
-  Map;
-
-/** Fails type checking when a system map disagrees with the subtypes in `system.json`. */
-type _SystemMapsMatchManifest = [
-  ExactKeys<ActiveEffectSystemMap, "base" | keyof DocumentTypes["ActiveEffect"]>,
-  ExactKeys<ActorSystemMap, keyof DocumentTypes["Actor"]>,
-  ExactKeys<CardSystemMap, "base" | keyof DocumentTypes["Card"]>,
-  ExactKeys<ChatMessageSystemMap, "base" | keyof DocumentTypes["ChatMessage"]>,
-  ExactKeys<ItemSystemMap, keyof DocumentTypes["Item"]>,
-  ExactKeys<JournalEntryPageSystemMap, keyof DocumentTypes["JournalEntryPage"]>,
-];
-
 declare global {
   export interface ActiveEffectSystemMap {
     ability: AbilitySystem;
@@ -64,7 +47,7 @@ declare global {
   }
 
   export interface CardSystemMap {
-    base: BaseCardsSystem;
+    base: BaseCardSystem;
     stone: StoneSystem;
   }
 

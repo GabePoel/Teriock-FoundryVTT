@@ -38,6 +38,7 @@ export default function BaseSystemMixin(Base) {
       crit: { enabled: false, where: "chatData" },
       descriptionPath: null,
       disabledPath: null,
+      documentName: "",
       icon: icons.manifest.ui.document,
       preserveOnRefresh: [],
       tags: {
@@ -57,7 +58,7 @@ export default function BaseSystemMixin(Base) {
         usable: false,
         wiki: false,
       },
-      type: null,
+      type: "",
     });
 
     /** @inheritDoc */

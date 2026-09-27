@@ -7,7 +7,7 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes BaseSystem
  * @mixes UncommonSystem
  */
-export default class BaseCardsSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
+export default class BaseCardSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "base" });
+  static metadata = mergeMetadata(super.metadata, { documentName: "Card", type: "base" });
 }

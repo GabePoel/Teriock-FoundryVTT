@@ -82,6 +82,7 @@ export default class BaseActorSystem
       "resource",
       "species",
     ],
+    documentName: "Actor",
     preserveOnRefresh: ["effects", "items", ...super.metadata.preserveOnRefresh],
     visibleTypes: ["power", "rank", "species"],
   });

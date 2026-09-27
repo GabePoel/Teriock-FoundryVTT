@@ -1,7 +1,7 @@
 import { mergeMetadata } from "../../../helpers/construction.mjs";
-import BaseCardsSystem from "./base-cards-system.mjs";
+import BaseCardSystem from "./base-card-system.mjs";
 
-export default class StoneSystem extends BaseCardsSystem {
+export default class StoneSystem extends BaseCardSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { type: "stone" });
 
