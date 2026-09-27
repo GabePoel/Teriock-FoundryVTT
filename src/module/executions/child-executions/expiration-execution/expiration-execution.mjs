@@ -25,24 +25,6 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
     });
   }
 
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.ExpirationExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    const expiration = options.expiration ?? new BaseExpiration({ method: "roll" }, { parent: options.source.system });
-    data.comparison ??= expiration.roll.comparison;
-    data.formula ??= expiration.roll.formula;
-    data.thresholdFormula ??= expiration.roll.threshold;
-    super(data, options);
-    this.#expiration = expiration;
-    this.threshold = BaseRoll.minValue(this.thresholdFormula);
-    this.automations.clear();
-  }
-
-  /** @type {BaseExpiration} */
-  #expiration;
-
   /** @type {boolean} */
   autoExpire = false;
 
@@ -78,8 +60,32 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
 
   /** @inheritDoc */
   get name() {
-    if (this.#expiration.type === BaseExpiration.metadata.type) { return this.#expiration.label; }
-    return _loc("TERIOCK.EXPIRATIONS.Base.EXECUTION.name", { label: this.#expiration.label });
+    if (this._expiration.type === BaseExpiration.metadata.type) { return this._expiration.label; }
+    return _loc("TERIOCK.EXPIRATIONS.Base.EXECUTION.name", { label: this._expiration.label });
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExpirationExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    this.threshold = BaseRoll.minValue(this._source.thresholdFormula);
+    this.automations.clear();
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExpirationExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    this._expiration = options.expiration ?? new BaseExpiration({ method: "roll" }, { parent: options.source.system });
+    data.comparison ??= this._expiration.roll.comparison;
+    data.formula ??= this._expiration.roll.formula;
+    data.thresholdFormula ??= this._expiration.roll.threshold;
+    return super._initializeSource(data, options);
   }
 
   /** @inheritDoc */

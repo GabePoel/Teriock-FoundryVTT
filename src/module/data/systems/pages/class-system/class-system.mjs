@@ -1,5 +1,5 @@
 import classConfig from "../../../../constants/config/class-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
@@ -11,6 +11,9 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
 export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rank"];
+
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { type: "class" });
 
   /** @inheritDoc */
   static defineSchema() {

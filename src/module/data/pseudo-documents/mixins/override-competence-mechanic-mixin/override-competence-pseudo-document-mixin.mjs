@@ -5,16 +5,16 @@ const { fields } = foundry.data;
 
 /**
  * Adds an optional competence override to a {@link MechanicPseudoDocument}.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, OverrideCompetenceMechanic & Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData>}
  */
 export default function OverrideCompetencePseudoDocumentMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData}
    */
-  class OverrideCompetenceMechanic extends Base {
+  class OverrideCompetenceMechanic
+    extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Competence"];
 

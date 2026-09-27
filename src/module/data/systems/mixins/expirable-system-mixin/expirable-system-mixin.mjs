@@ -3,16 +3,14 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ExpirableSystem & Teriock.Models.ExpirableSystemData>}
  */
 export default function ExpirableSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.ExpirableSystemData}
    * @mixin
    */
-  class ExpirableSystem extends Base {
+  class ExpirableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.ExpirableSystemData>} */ (Base) {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, { pseudos: { Expiration: "system.expirations" } });
 

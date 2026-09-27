@@ -4,9 +4,8 @@
 
 /**
  * Mixin to support manipulating construction nodes in automations.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ConstructionNodesSheet>}
  */
 export default function ConstructionNodesSheetMixin(Base) {
   /** @mixin */

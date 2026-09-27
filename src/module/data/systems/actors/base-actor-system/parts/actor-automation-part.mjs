@@ -1,8 +1,11 @@
 /**
+ * @import AbstractActorSystem from "../abstract-actor-system.mjs";
+ */
+
+/**
  * Actor data model that handles {@link BaseAutomation} application during preparation.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorAutomationPart>}
  */
 export default function ActorAutomationPart(Base) {
   /**

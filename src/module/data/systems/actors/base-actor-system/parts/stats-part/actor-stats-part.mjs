@@ -3,6 +3,10 @@ import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { pathSorterFactory } from "../../../../../../helpers/sort.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 const BAR_STATS = Object.entries(statConfig).filter(([_k, v]) => v.bar).map(([k, _v]) => k);
@@ -16,18 +20,16 @@ const BAR_STATS = Object.entries(statConfig).filter(([_k, v]) => v.bar).map(([k,
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorStatsPart & Teriock.Models.ActorStatsPartData>}
  */
 export default function ActorStatsPart(Base) {
   /**
    * @implements {Teriock.Functionality.StatProvider}
-   * @implements {Teriock.Models.ActorStatsPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorStatsPart extends Base {
+  class ActorStatsPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorStatsPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       const schema = Object.assign(super.defineSchema(), { presence: statField({ initial: 0, max: 1 }) });

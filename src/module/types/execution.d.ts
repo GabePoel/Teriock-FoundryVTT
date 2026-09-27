@@ -1,3 +1,5 @@
+import { DataModelConstructionContext } from "@common/abstract/_types.mjs";
+
 import { AttributeModel, TradecraftModel } from "../data/models/modifier-models/_module.mjs";
 import { BaseExpiration } from "../data/pseudo-documents/expirations/abstract/_module.mjs";
 
@@ -59,6 +61,10 @@ declare global {
       bonus?: Teriock.System.FormulaString;
       source?: TeriockItem<"body" | "equipment">;
     };
+
+    export type EquipmentExecutionOptions = ArmamentExecutionOptions & { ammunition?: TeriockItem<"equipment"> };
+
+    export type ConstructionOptions<Options = ExecutionOptions> = DataModelConstructionContext & Partial<Options>;
 
     export type ExpirationExecutionOptions = ThresholdExecutionOptions & { expiration?: BaseExpiration };
 

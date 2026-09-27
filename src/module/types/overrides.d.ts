@@ -1,8 +1,17 @@
 import { Game as BaseGame } from "@client/_module.mjs";
 import { Canvas } from "@client/canvas/_module.mjs";
 import { TokenLayer } from "@client/canvas/layers/_module.mjs";
-import { ClientDocumentMixin } from "@client/documents/abstract/_module.mjs";
-import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+import { ClientDocumentMixin, WorldCollection } from "@client/documents/abstract/_module.mjs";
+import {
+  ChatMessages,
+  CompendiumCollection,
+  Folders,
+  Items,
+  Journal,
+  Macros,
+  RollTables,
+  Scenes,
+} from "@client/documents/collections/_module.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
 import {
@@ -14,18 +23,15 @@ import {
   TeriockRollTableDirectory,
 } from "../applications/sidebar/tabs/_module.mjs";
 import { TeriockHotbar, TeriockNotifications } from "../applications/ui/_module.mjs";
-import { TeriockUser } from "../documents/_module.mjs";
 import {
-  TeriockActors,
-  TeriockChatMessages,
-  TeriockFolders,
-  TeriockItems,
-  TeriockJournal,
-  TeriockMacros,
-  TeriockRollTables,
-  TeriockScenes,
-  TeriockUsers,
-} from "../documents/collections/_module.mjs";
+  TeriockFolder,
+  TeriockJournalEntry,
+  TeriockMacro,
+  TeriockRollTable,
+  TeriockScene,
+  TeriockUser,
+} from "../documents/_module.mjs";
+import { TeriockActors, TeriockUsers } from "../documents/collections/_module.mjs";
 import { TeriockManager } from "../helpers/_module.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 
@@ -64,15 +70,14 @@ declare global {
   interface Game extends BaseGame {
     actors: TeriockActors;
     canvas: Canvas & { tokens: TokenLayer };
-    folders: TeriockFolders;
-    items: TeriockItems;
-    journal: TeriockJournal;
-    macros: TeriockMacros;
-    messages: TeriockChatMessages;
-    // @ts-expect-error Incorrect extensions
+    folders: WorldCollection<TeriockFolder> & Folders;
+    items: WorldCollection<TeriockItem> & Items;
+    journal: WorldCollection<TeriockJournalEntry> & Journal;
+    macros: WorldCollection<TeriockMacro> & Macros;
+    messages: WorldCollection<TeriockChatMessage> & ChatMessages;
     packs: Collection<string, CompendiumCollection<TeriockDocument>>;
-    scenes: TeriockScenes;
-    tables: TeriockRollTables;
+    scenes: WorldCollection<TeriockScene> & Scenes;
+    tables: WorldCollection<TeriockRollTable> & RollTables;
     teriock: TeriockManager;
     tooltip: TeriockTooltipManager;
     user: TeriockUser;

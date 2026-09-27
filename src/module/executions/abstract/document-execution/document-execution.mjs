@@ -12,22 +12,6 @@ export default class DocumentExecution extends BaseExecution {
     return Object.assign(super.defineSchema(), { consumeUses: new fields.BooleanField({ initial: true }) });
   }
 
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.ExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    data.consumeUses ??= options.source?.system?.settings?.getSetting("consumeOnUse");
-    super(data, options);
-    this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
-    this.automations.resetDocuments(this.source.system?.automations?.values?.() ?? []);
-    if (this.source.documentName === "Actor") { this.automations.resetDocuments([]); }
-    this._boosts = options.boosts ?? this.source.system?.boosts ?? this._boosts;
-    if (game.settings.get("teriock", "secretDocuments").has(this.source?.typedIdentifier)) {
-      this._messageMode = options.messageMode ?? "blind";
-    }
-  }
-
   /** @returns {Teriock.Execution.ExecutionDialogButtonEntry[]} */
   get _dialogButtons() {
     return [{
@@ -89,6 +73,31 @@ export default class DocumentExecution extends BaseExecution {
 
   /**
    * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    this.automations.resetDocuments(this.source.system?.automations?.values?.() ?? []);
+    if (this.source.documentName === "Actor") { this.automations.resetDocuments([]); }
+    this._boosts = options.boosts ?? this.source.system?.boosts ?? this._boosts;
+    if (game.settings.get("teriock", "secretDocuments").has(this.source?.typedIdentifier)) {
+      this._messageMode = options.messageMode ?? "blind";
+    }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    data.consumeUses ??= options.source?.system?.settings?.getSetting("consumeOnUse");
+    return super._initializeSource(data, options);
+  }
+
+  /**
+   * @inheritDoc
    * @returns {Promise<false|void>}
    */
   async _prepareUpdates() {
@@ -108,6 +117,11 @@ export default class DocumentExecution extends BaseExecution {
         }],
       });
     }
+  }
+
+  /** @inheritDoc */
+  _resolveActor(options) {
+    return options.actor ?? options.source?.actor ?? game.actors.default;
   }
 
   /** @inheritDoc */

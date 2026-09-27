@@ -13,17 +13,20 @@ import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs"
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ArmamentSystem & Teriock.Models.ArmamentSystemData>}
  */
 export default function ArmamentSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.ArmamentSystemData}
    * @mixes AttackSystem
    * @mixin
    */
-  class ArmamentSystem extends mixClasses(Base, AttackSystemMixin) {
+  class ArmamentSystem
+    extends mixClasses(
+      /** @type {InitializedDataModel<T, Teriock.Models.ArmamentSystemData>} */ (Base),
+      AttackSystemMixin,
+    )
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Armament"];
 

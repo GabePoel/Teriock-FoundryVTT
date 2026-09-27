@@ -14,9 +14,8 @@ import ConstructionNodesSheetMixin from "./construction-nodes-sheet-mixin.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, MechanicsSheet>}
  */
 export default function MechanicsSheetMixin(Base) {
   /**

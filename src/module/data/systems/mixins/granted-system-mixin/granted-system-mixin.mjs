@@ -3,16 +3,14 @@ const { fields } = foundry.data;
 
 /**
  * Data mixin to support equipment suppression configuration.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, GrantedSystem & Teriock.Models.GrantedSystemData>}
  */
 export default function GrantedSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.GrantedSystemData}
    * @mixin
    */
-  class GrantedSystem extends Base {
+  class GrantedSystem extends /** @type {InitializedDataModel<T, Teriock.Models.GrantedSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Granted"];
 

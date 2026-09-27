@@ -7,9 +7,8 @@ import { DocumentSelector, selectDocument } from "../../dialogs/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, DocumentCreationSheet>}
  */
 export default function DocumentCreationSheetMixin(Base) {
   /**

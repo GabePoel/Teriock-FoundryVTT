@@ -3,9 +3,8 @@ import { HierarchyDocumentMixin, UsableDocumentMixin } from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ChildDocument>}
  */
 export default function ChildDocumentMixin(Base) {
   /**

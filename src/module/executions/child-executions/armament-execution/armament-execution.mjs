@@ -31,27 +31,6 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     });
   }
 
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.ArmamentExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    const sys = options.source.system;
-    data.secret ??= sys.settings.getSetting("rollSecretly");
-    data.twoHanded = sys.hasTwoHandedAttack && (data.twoHanded ?? sys.settings.getSetting("rollTwoHanded"));
-    data.formula ??= data.twoHanded ? sys.damage.twoHanded : sys.damage.base;
-    data.dealImpacts ??= formulaExists(data.formula);
-    data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
-    super(data, options);
-    for (const p of this.source.previewedTypes.property.filter(p => p.active)) {
-      this.automations.addDocuments(p.system.automations.contents);
-    }
-    this.bonus = options.bonus ?? "";
-  }
-
-  /** @type {Teriock.System.FormulaString} */
-  bonus = "";
-
   /** @inheritDoc */
   get _formPaths() {
     const paths = [...super._formPaths, "secret"];
@@ -84,6 +63,18 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     return this.source.getPanelParts();
   }
 
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ArmamentExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    for (const p of this.source.previewedTypes.property.filter(p => p.active)) {
+      this.automations.addDocuments(p.system.automations.contents);
+    }
+    this.bonus = options.bonus ?? "";
+  }
+
   /** @inheritDoc */
   async _getInput() {
     if (this.showDialog) {
@@ -100,6 +91,22 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
   _hasBoostForImpact(impact) {
     return (super._hasBoostForImpact(impact)
       || (this._boostsResolved[impact] && this.impacts.has(impact) && formulaExists(this.formula)));
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ArmamentExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    const sys = options.source.system;
+    data.secret ??= sys.settings.getSetting("rollSecretly");
+    data.twoHanded = sys.hasTwoHandedAttack && (data.twoHanded ?? sys.settings.getSetting("rollTwoHanded"));
+    data.formula ??= data.twoHanded ? sys.damage.twoHanded : sys.damage.base;
+    data.dealImpacts ??= formulaExists(data.formula);
+    data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
+    return super._initializeSource(data, options);
   }
 
   /** @inheritDoc */

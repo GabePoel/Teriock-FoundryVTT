@@ -17,17 +17,15 @@ const { fields } = foundry.data;
  * - [Maneuvers](https://wiki.teriock.com/index.php/Core:Maneuvers)
  * - [Targets](https://wiki.teriock.com/index.php/Core:Targets)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityUsagePart & Teriock.Models.AbilityUsagePartData>}
  */
 export default function AbilityUsagePart(Base) {
   /**
-   * @implements {Teriock.Models.AbilityUsagePartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityUsagePart extends Base {
+  class AbilityUsagePart extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityUsagePartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

@@ -136,43 +136,39 @@ foundry.helpers.Hooks.once("init", function() {
   // Assign Document and Collection Classes
   // --------------------------------------
 
+  const systemDocumentNames = {
+    actors: "Actor",
+    cards: "Card",
+    effects: "ActiveEffect",
+    items: "Item",
+    messages: "ChatMessage",
+    pages: "JournalEntryPage",
+  };
+  for (const [key, documentName] of Object.entries(systemDocumentNames)) {
+    for (const model of Object.values(data.systems[key])) {
+      const type = model.metadata.type;
+      if (type && type !== Object.getPrototypeOf(model).metadata.type) {
+        CONFIG[documentName].dataModels[type] = model;
+      }
+    }
+  }
+
   CONFIG.ActiveEffect.changeTypes = constants.config.change.types;
   CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
-  CONFIG.ActiveEffect.dataModels.ability = data.systems.effects.AbilitySystem;
-  CONFIG.ActiveEffect.dataModels.attunement = data.systems.effects.AttunementSystem;
-  CONFIG.ActiveEffect.dataModels.base = data.systems.effects.BaseEffectSystem;
-  CONFIG.ActiveEffect.dataModels.condition = data.systems.effects.ConditionSystem;
-  CONFIG.ActiveEffect.dataModels.consequence = data.systems.effects.ConsequenceSystem;
-  CONFIG.ActiveEffect.dataModels.cover = data.systems.effects.BaseEffectSystem;
-  CONFIG.ActiveEffect.dataModels.fluency = data.systems.effects.FluencySystem;
-  CONFIG.ActiveEffect.dataModels.hack = data.systems.effects.HackSystem;
-  CONFIG.ActiveEffect.dataModels.imbuement = data.systems.effects.ImbuementSystem;
-  CONFIG.ActiveEffect.dataModels.property = data.systems.effects.PropertySystem;
-  CONFIG.ActiveEffect.dataModels.resource = data.systems.effects.ResourceSystem;
   CONFIG.ActiveEffect.defaultType = "consequence";
   CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
   CONFIG.ActiveEffect.expiryAction = "delete";
   CONFIG.ActiveEffect.phases = constants.config.change.phase;
 
   CONFIG.Actor.collection = documents.collections.TeriockActors;
-  CONFIG.Actor.dataModels.character = data.systems.actors.CharacterSystem;
-  CONFIG.Actor.dataModels.creature = data.systems.actors.CreatureSystem;
-  CONFIG.Actor.dataModels.inventory = data.systems.actors.InventorySystem;
   CONFIG.Actor.defaultType = "character";
   CONFIG.Actor.documentClass = documents.TeriockActor;
 
   CONFIG.AmbientLight.documentClass = documents.TeriockAmbientLightDocument;
   CONFIG.AmbientLight.objectClass = canvas.placeables.TeriockAmbientLight;
 
-  CONFIG.Card.dataModels.card = data.systems.cards.BaseCardsSystem;
-  CONFIG.Card.dataModels.stone = data.systems.cards.StoneSystem;
   CONFIG.Card.documentClass = documents.TeriockCard;
 
-  CONFIG.ChatMessage.collection = documents.collections.TeriockChatMessages;
-  CONFIG.ChatMessage.dataModels.base = data.systems.messages.BaseMessageSystem;
-  CONFIG.ChatMessage.dataModels.interactive = data.systems.messages.InteractiveSystem;
-  CONFIG.ChatMessage.dataModels.shared = data.systems.messages.SharedSystem;
-  CONFIG.ChatMessage.dataModels.triggered = data.systems.messages.TriggeredSystem;
   CONFIG.ChatMessage.defaultType = "interactive";
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.ChatMessage.popoutClass = applications.sidebar.apps.TeriockChatPopout;
@@ -184,44 +180,25 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
 
-  CONFIG.Folder.collection = documents.collections.TeriockFolders;
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 
-  CONFIG.Item.collection = documents.collections.TeriockItems;
   CONFIG.Item.compendiumIndexFields = ["system._sup"];
-  CONFIG.Item.dataModels.archetype = data.systems.items.ArchetypeSystem;
-  CONFIG.Item.dataModels.body = data.systems.items.BodySystem;
-  CONFIG.Item.dataModels.equipment = data.systems.items.EquipmentSystem;
-  CONFIG.Item.dataModels.mount = data.systems.items.MountSystem;
-  CONFIG.Item.dataModels.power = data.systems.items.PowerSystem;
-  CONFIG.Item.dataModels.rank = data.systems.items.RankSystem;
-  CONFIG.Item.dataModels.species = data.systems.items.SpeciesSystem;
   CONFIG.Item.defaultType = "power";
   CONFIG.Item.documentClass = documents.TeriockItem;
 
-  CONFIG.JournalEntry.collection = documents.collections.TeriockJournal;
   CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
 
   CONFIG.JournalEntryCategory.documentClass = documents.TeriockJournalEntryCategory;
 
-  CONFIG.JournalEntryPage.dataModels.class = data.systems.pages.ClassSystem;
-  CONFIG.JournalEntryPage.dataModels.damage = data.systems.pages.HarmSystem;
-  CONFIG.JournalEntryPage.dataModels.drain = data.systems.pages.HarmSystem;
-  CONFIG.JournalEntryPage.dataModels.rule = data.systems.pages.RuleSystem;
-  CONFIG.JournalEntryPage.dataModels.style = data.systems.pages.StyleSystem;
-  CONFIG.JournalEntryPage.dataModels.tradecraft = data.systems.pages.TradecraftSystem;
   CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
 
-  CONFIG.Macro.collection = documents.collections.TeriockMacros;
   CONFIG.Macro.defaultType = "script";
   CONFIG.Macro.documentClass = documents.TeriockMacro;
 
   CONFIG.Region.documentClass = documents.TeriockRegionDocument;
 
-  CONFIG.RollTable.collection = documents.collections.TeriockRollTables;
   CONFIG.RollTable.documentClass = documents.TeriockRollTable;
 
-  CONFIG.Scene.collection = documents.collections.TeriockScenes;
   CONFIG.Scene.documentClass = documents.TeriockScene;
 
   CONFIG.TableResult.documentClass = documents.TeriockTableResult;

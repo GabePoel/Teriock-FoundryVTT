@@ -20,9 +20,8 @@ const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty }
  *
  * This mixin is not related to pseudo-documents in any way.
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, HierarchyDocument>}
  * @see {HierarchySystemMixin}
  * @see {SubCollection}
  * @see {TeriockCompendiumDirectory}
@@ -71,7 +70,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {(TeriockActiveEffect|TeriockActor|TeriockItem)[]} documents
+     * @param {HierarchyDocument[]} documents
      * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
      * @param {TeriockUser} user
      * @returns {Promise<boolean|void>}
@@ -97,7 +96,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {(TeriockActiveEffect|TeriockActor|TeriockItem)[]} documents
+     * @param {HierarchyDocument[]} documents
      * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
      * @param {TeriockUser} user
      * @returns {Promise<boolean|void>}
@@ -113,7 +112,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {(TeriockActiveEffect|TeriockActor|TeriockItem)[]} documents
+     * @param {HierarchyDocument[]} documents
      * @param {DatabaseUpdateOperation & Teriock.System._Operation} operation
      * @param {TeriockUser} user
      * @returns {Promise<boolean|void>}
@@ -137,8 +136,8 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * Check if there is a circular dependencies between a sup and sub.
-     * @param {TeriockDocument | HierarchyDocument} sup
-     * @param {TeriockDocument | HierarchyDocument} sub
+     * @param {HierarchyDocument} sup
+     * @param {HierarchyDocument} sub
      * @todo Make a synchronous version of this so it can run during drag and drop.
      */
     static async checkIfCyclic(sup, sub) {
@@ -151,7 +150,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @inheritDoc
      * @param {object|HierarchyDocument[]} data
      * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
-     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
+     * @returns {Promise<HierarchyDocument[]>}
      */
     static async createDocuments(data = [], operation = {}) {
       if (typeof operation.cachedKeepId === "boolean") {
@@ -263,7 +262,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The document that most directly provides this one.
-     * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
+     * @returns {Teriock.Hierarchy.SyncDoc<this>}
      */
     get elder() {
       return this.sup || this.parent;
@@ -276,7 +275,7 @@ export default function HierarchyDocumentMixin(Base) {
 
     /**
      * The sup of this document or its index.
-     * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>|undefined}
+     * @returns {Teriock.Hierarchy.SyncDoc<this>|undefined}
      */
     get sup() {
       if (this.system._sup) { return this.supCollection?.get(this.system._sup); }
@@ -381,7 +380,10 @@ export default function HierarchyDocumentMixin(Base) {
       }
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @returns {boolean}
+     */
     checkAncestor(doc) {
       if (doc?.uuid === this.uuid) { return true; }
       return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false;

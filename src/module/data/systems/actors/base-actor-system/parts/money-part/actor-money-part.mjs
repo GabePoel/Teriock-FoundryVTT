@@ -1,25 +1,24 @@
 import currencyConfig from "../../../../../../constants/config/currency-config.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
+/**
+ * @import { NumberFieldOptions } from "@common/data/_types.mjs";
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
- * @import { NumberFieldOptions } from "@common/data/_types.mjs";
- */
-
-/**
  * Actor data model that handles money.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorMoneyPart & Teriock.Models.ActorMoneyPartData>}
  */
 export default function ActorMoneyPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorMoneyPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorMoneyPart extends Base {
+  class ActorMoneyPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorMoneyPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

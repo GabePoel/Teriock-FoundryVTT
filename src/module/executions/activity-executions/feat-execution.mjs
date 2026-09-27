@@ -9,20 +9,6 @@ import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
  */
 export default class FeatExecution extends mixClasses(BaseExecution, ThresholdExecutionMixin) {
   /**
-   * @param {object} [data]
-   * @param {Partial<Teriock.Execution.ThresholdExecutionOptions>} [options]
-   */
-  constructor(data = {}, options = {}) {
-    super(data, options);
-    if (this.actor) {
-      this.updateSource({ bonus: addFormula(this.actor.system.attributes[this.attribute].bonus, this.bonus) });
-    }
-    if (game.settings.get("teriock", "secretAttributes").has(this.attribute)) {
-      this._messageMode = options.messageMode ?? "blind";
-    }
-  }
-
-  /**
    * The attribute of this execution.
    * @returns {Teriock.Keys.Attribute}
    */
@@ -89,5 +75,19 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   /** @inheritDoc */
   async _buildPanels() {
     this.panels = [Object.assign(await this.journalEntryPage.getPanelParts(), { collapsed: true })];
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ThresholdExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    if (this.actor) {
+      this._source.bonus = addFormula(this.actor.system.attributes[this.attribute].bonus, this._source.bonus);
+    }
+    if (game.settings.get("teriock", "secretAttributes").has(this.attribute)) {
+      this._messageMode = options.messageMode ?? "blind";
+    }
   }
 }

@@ -8,9 +8,8 @@ import BaseApplicationMixin from "./base-application-mixin.mjs";
  */
 
 /**
- * @template {Constructor<DocumentSheetV2>} T
+ * @template {MixinBase<typeof DocumentSheetV2>} T
  * @param {T} Base
- * @returns {MixinResult<T, BaseDocumentSheet>}
  */
 export default function BaseDocumentSheetMixin(Base) {
   /**

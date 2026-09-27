@@ -4,16 +4,14 @@ import { makeIcon } from "../../../../helpers/icon.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, RevelationSystem & Teriock.Models.RevelationSystemData>}
  */
 export default function RevelationSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.RevelationSystemData}
    * @mixin
    */
-  class RevelationSystem extends Base {
+  class RevelationSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RevelationSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Revelation"];
 

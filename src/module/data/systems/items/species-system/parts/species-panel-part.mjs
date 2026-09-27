@@ -3,9 +3,8 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Species panel part.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, SpeciesPanelPart>}
  */
 export default function SpeciesPanelPart(Base) {
   /**

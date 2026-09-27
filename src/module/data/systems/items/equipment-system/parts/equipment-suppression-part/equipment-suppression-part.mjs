@@ -11,17 +11,17 @@ const { fields } = foundry.data;
  * - [Destroyed](https://wiki.teriock.com/index.php/Property:Destroyed)
  * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, EquipmentSuppressionPart & Teriock.Models.EquipmentSuppressionPartData>}
  */
 export default function EquipmentSuppressionPart(Base) {
   /**
-   * @implements {Teriock.Models.EquipmentSuppressionPartData}
    * @mixin
    * @property {TeriockItem<"equipment">} parent
    */
-  class EquipmentSuppressionPart extends Base {
+  class EquipmentSuppressionPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.EquipmentSuppressionPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

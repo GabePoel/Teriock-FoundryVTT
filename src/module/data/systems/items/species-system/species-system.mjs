@@ -181,7 +181,10 @@ export default class SpeciesSystem
     return parts;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
   get wikiIdentifier() {
     return this.identifier ? `creature:${this.identifier}` : null;
   }

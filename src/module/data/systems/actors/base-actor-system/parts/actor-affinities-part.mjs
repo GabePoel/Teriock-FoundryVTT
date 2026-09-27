@@ -5,6 +5,10 @@ import { toId } from "../../../../../helpers/string.mjs";
 import { BaseAffinity } from "../../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**
+ * @import AbstractActorSystem from "../abstract-actor-system.mjs";
+ */
+
+/**
  * Cache of the Affinity types that are "no effect" protections in the [FanWar](https://fanwar.com) context.
  * @type {AffinityType[]}
  */
@@ -19,9 +23,8 @@ const AFFINITY_TYPES = {};
 
 /**
  * Actor data model that handles affinities.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorAffinitiesPart>}
  */
 export default function ActorAffinitiesPart(Base) {
   /**

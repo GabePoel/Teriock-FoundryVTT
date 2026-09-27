@@ -4,16 +4,14 @@ import { PiercingModel } from "../../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AttackSystem & Teriock.Models.AttackSystemData>}
  */
 export default function AttackSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.AttackSystemData}
    * @mixin
    */
-  class AttackSystem extends Base {
+  class AttackSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AttackSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attack"];
 

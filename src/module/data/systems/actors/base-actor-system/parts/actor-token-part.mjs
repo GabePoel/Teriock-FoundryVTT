@@ -1,12 +1,12 @@
 /**
  * @import { ActiveEffectData } from "@common/documents/_types.mjs";
+ * @import AbstractActorSystem from "../abstract-actor-system.mjs";
  */
 
 /**
  * Actor data model that handles automatically derived token changes.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorTokenPart>}
  */
 export default function ActorTokenPart(Base) {
   /**

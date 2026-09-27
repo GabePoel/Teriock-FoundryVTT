@@ -5,9 +5,8 @@ import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ConstructNodesPseudoDocument>}
  */
 export default function ConstructNodesPseudoDocumentMixin(Base) {
   /** @mixin */

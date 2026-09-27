@@ -3,17 +3,15 @@ import { nullIdField } from "../../../fields/tools/builders.mjs";
 
 /**
  * Data mixin to support hierarchies of the same document type.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, HierarchySystem & Teriock.Models.HierarchySystemData>}
  * @category Hierarchy
  */
 export default function HierarchySystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.HierarchySystemData}
    * @mixin
    */
-  class HierarchySystem extends Base {
+  class HierarchySystem extends /** @type {InitializedDataModel<T, Teriock.Models.HierarchySystemData>} */ (Base) {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
       preserveOnRefresh: ["system._sup", ...super.metadata.preserveOnRefresh],

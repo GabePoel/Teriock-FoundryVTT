@@ -3,9 +3,8 @@ import { TriggerMechanicMixin } from "../../mixins/_module.mjs";
 
 /**
  * Automation that hooks this into triggers.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, TriggerAutomation>}
  */
 export default function TriggerAutomationMixin(Base) {
   /**

@@ -1,13 +1,9 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
-
 const { Users } = foundry.documents.collections;
 
 /**
- * @mixes BaseWorldCollection
  * @property {TeriockUser|null} activeGM
  */
-export default class TeriockUsers extends mixClasses(Users, BaseWorldCollectionMixin) {
+export default class TeriockUsers extends Users {
   /**
    * The currently active users.
    * @returns {TeriockUser[]}

@@ -1,7 +1,15 @@
 import { ALL_DOCUMENT_TYPES } from "@common/constants.mjs";
 
 declare global {
+  /** The subtype-specific part of a document. */
+  type Subtype<Systems, T extends keyof Systems> = { system: Systems[T], type: T };
+
   namespace Teriock.Documents {
+    /** Child documents grouped by subtype. */
+    export type ChildrenByType =
+      & { [K in ActiveEffectType]: TeriockActiveEffect<K>[]; }
+      & { [K in ItemType]: TeriockItem<K>[]; };
+
     export type ChildType = ActiveEffectType | ItemType;
     export type CommonType = ActorType | Teriock.Documents.ChildType;
 

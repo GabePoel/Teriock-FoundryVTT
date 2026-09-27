@@ -1,8 +1,7 @@
 /**
  * Document mixin to support using this document.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, UsableDocument>}
  */
 export default function UsableDocumentMixin(Base) {
   /** @mixin */

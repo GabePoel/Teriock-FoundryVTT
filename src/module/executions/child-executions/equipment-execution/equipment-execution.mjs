@@ -17,30 +17,6 @@ export default class EquipmentExecution extends ArmamentExecution {
   }
 
   /** @inheritDoc */
-  constructor(data = {}, options = {}) {
-    data.consumeAmmunition ??= options.source.system.settings.getSetting("consumeAmmunition");
-    super(data, options);
-    if (this.source.system.ammunition.enabled) {
-      if (options.ammunition?.system.consumable) { this.ammunition = options.ammunition; }
-      else {
-        this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
-          e.active && e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
-        );
-        // Fall back to inactive ammunition
-        if (!this.ammunition) {
-          this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
-            e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
-          );
-        }
-      }
-    }
-    this.updateSource({ formula: this._readyUpdatedFormula() });
-  }
-
-  /** @type {TeriockItem<"equipment">|null} */
-  ammunition;
-
-  /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments;
     if (this.source.system.ammunition.enabled) {
@@ -50,7 +26,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
         getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumable) ?? [],
         update: ammunition => {
-          this.ammunition = ammunition;
+          this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition);
           this.updateSource({ formula: this._readyUpdatedFormula() });
         },
       });
@@ -87,6 +63,69 @@ export default class EquipmentExecution extends ArmamentExecution {
       };
     }
     return super._buildSourcePanel();
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.EquipmentExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    if (!this.source.system.ammunition.enabled) { return; }
+    if (options.ammunition?.system.consumable) {
+      this.ammunition = options.ammunition;
+      return;
+    }
+    this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
+      e.active && e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
+    );
+    // Fall back to inactive ammunition
+    if (!this.ammunition) {
+      this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
+        e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
+      );
+    }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.EquipmentExecutionOptions>} [options]
+   */
+  _initialize(options = {}) {
+    super._initialize(options);
+    if (!("strict" in options)) { return; }
+    this.updateSource({ formula: this._readyUpdatedFormula() });
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.EquipmentExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    data.consumeAmmunition ??= options.source.system.settings.getSetting("consumeAmmunition");
+    return super._initializeSource(data, options);
+  }
+
+  /**
+   * @inheritDoc
+   * @returns {Promise<false|void>}
+   */
+  async _prepareUpdates() {
+    if (this.consumeAmmunition && this.source.system.ammunition.enabled && this.ammunition?.system.consumable) {
+      const amount = this.source.system.ammunition.consumptionAmount ?? this.ammunition.system.consumptionAmount;
+      this.operations.push({
+        action: "update",
+        documentName: "Item",
+        parent: this.ammunition.parent,
+        updates: [{
+          _id: this.ammunition.id,
+          system: { quantity: { value: Math.max(0, this.ammunition.system.quantity.value - amount) } },
+        }],
+      });
+    }
+    return super._prepareUpdates();
   }
 
   /** @inheritDoc */

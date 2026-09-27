@@ -8,12 +8,6 @@ import {
 import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
 
-interface ActorSubtype<T extends ActorType> extends ActorClass {
-  sheet: ActorSheetMap[T];
-  system: ActorSystemMap[T];
-  type: T;
-}
-
 declare module "./actor.mjs" {
   export default interface TeriockActor {
     _id: Readonly<ID<TeriockActor>>;
@@ -33,9 +27,7 @@ declare module "./actor.mjs" {
 }
 
 declare global {
-  export type TeriockActor<T extends ActorType = ActorType> =
-    & (T extends unknown ? ActorSubtype<T> : never)
-    & ActorClass;
+  export type TeriockActor<T extends ActorType = ActorType> = ActorClass & Subtype<ActorSystemMap, T>;
 }
 
 export {};

@@ -4,6 +4,10 @@ import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -15,17 +19,15 @@ const { fields } = foundry.data;
  * - [Rotator Fluency](https://wiki.teriock.com/index.php/Ability:Rotator_Fluency)
  * - [Rotators](https://wiki.teriock.com/index.php/Ability:Rotators)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorMagicPart & Teriock.Models.ActorMagicPartData>}
  */
 export default function ActorMagicPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorMagicPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorMagicPart extends Base {
+  class ActorMagicPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorMagicPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

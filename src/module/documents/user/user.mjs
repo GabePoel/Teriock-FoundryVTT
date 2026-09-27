@@ -41,7 +41,7 @@ export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, Emb
       icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.User.EMBED.openCharacter"),
       onClick: async () => await this.character.sheet.render(true),
-      visible: () => this.character && this.character.isViewer,
+      visible: () => Boolean(this.character?.isViewer),
     }, ...super.getEmbedContextMenuEntries(doc)];
   }
 

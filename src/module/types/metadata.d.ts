@@ -46,12 +46,14 @@ declare global {
 
     export type SystemCritMetadata = { enabled: boolean, where: "chatData" | "effectData" };
 
-    export type SystemMetadata = TypeMetadata & {
+    export type SystemMetadata = Omit<TypeMetadata, "type"> & {
       crit: SystemCritMetadata;
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       preserveOnRefresh: string[];
       tags: SystemMetadataTags;
+      /** The subtype this system is registered as, or `null` for abstract systems. */
+      type: string | null;
     };
 
     export type CommonSystemMetadata = SystemMetadata & {

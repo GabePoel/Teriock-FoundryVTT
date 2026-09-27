@@ -7,14 +7,6 @@ import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
  * @property {Teriock.Execution.ThresholdExecutionOptions} options
  */
 export default class TradecraftCheckExecution extends mixClasses(BaseExecution, TradecraftExecutionMixin) {
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    super(data, options);
-  }
-
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {

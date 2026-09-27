@@ -24,17 +24,6 @@ export default class ElderSorceryExecution extends DocumentExecution {
   }
 
   /**
-   * @param {object} [data]
-   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
-   */
-  constructor(data = {}, options = {}) {
-    const actor = options.actor ?? options.source?.actor ?? game.actors.default;
-    data = foundry.utils.mergeObject(actor?.system.elderSorceryCreation ?? {}, data, { inplace: false });
-    data.level ??= actor?.system.scaling.lvl ?? 0;
-    super(data, options);
-  }
-
-  /**
    * The net modifier applied to every spell creation roll.
    * @type {number}
    */
@@ -124,6 +113,19 @@ export default class ElderSorceryExecution extends DocumentExecution {
       target: minorTarget,
       type: "roll",
     }, { comparison: "gte", level: 1, target: minorTarget, type: "roll" }];
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    const actor = this._resolveActor(options);
+    data = foundry.utils.mergeObject(actor?.system.elderSorceryCreation ?? {}, data, { inplace: false });
+    data.level ??= actor?.system.scaling.lvl ?? 0;
+    return super._initializeSource(data, options);
   }
 
   /** @inheritDoc */

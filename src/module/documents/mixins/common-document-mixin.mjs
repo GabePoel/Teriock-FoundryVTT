@@ -15,9 +15,8 @@ import { ChildCollection } from "../collections/_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, CommonDocument>}
  */
 export default function CommonDocumentMixin(Base) {
   /**
@@ -102,7 +101,7 @@ export default function CommonDocumentMixin(Base) {
     /**
      * A convenience getter to an object that organizes all embedded previewed instances by subtype. The object is
      * cached and lazily re-computed as needed. Works like {@link Actor.itemTypes}.
-     * @returns {{ [K in (TeriockActiveEffect|TeriockItem)["type"]]: Extract<TeriockActiveEffect|TeriockItem, {type: K}>[] }}
+     * @returns {Teriock.Documents.ChildrenByType}
      */
     get previewedTypes() {
       return this.previewed.documentsByType;

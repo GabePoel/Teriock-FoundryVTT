@@ -8,17 +8,15 @@ const { fields } = foundry.data;
 const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, StatGiverSystem & Teriock.Models.StatGiverSystemData>}
  */
 export default function StatGiverSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.StatGiverSystemData}
    * @implements {Teriock.Functionality.StatProvider}
    * @mixin
    */
-  class StatGiverSystem extends Base {
+  class StatGiverSystem extends /** @type {InitializedDataModel<T, Teriock.Models.StatGiverSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.StatGiver"];
 

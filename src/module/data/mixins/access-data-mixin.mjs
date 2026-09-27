@@ -7,9 +7,8 @@ import { createElement } from "../../helpers/html.mjs";
 
 /**
  * Mixin to ensure data models have access to the data they need.
- * @template {Constructor<DataModel | TypeDataModel>} T
+ * @template {MixinBase<Constructor<DataModel | TypeDataModel>>} T
  * @param {T} Base
- * @returns {MixinResult<T, AccessData>}
  */
 export default function AccessDataMixin(Base) {
   /** @mixin */

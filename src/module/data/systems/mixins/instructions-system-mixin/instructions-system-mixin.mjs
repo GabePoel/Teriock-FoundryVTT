@@ -7,16 +7,16 @@ const { fields } = foundry.data;
 
 /**
  * Add instructions to the system.
- * @template {Constructor<TypeDataModel>} T
+ * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, InstructionsSystem & Teriock.Models.InstructionsSystemData>}
  */
 export default function InstructionsSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.InstructionsSystemData}
    * @mixin
    */
-  class InstructionsSystem extends Base {
+  class InstructionsSystem
+    extends /** @type {InitializedDataModel<T, Teriock.Models.InstructionsSystemData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Instructions"];
 

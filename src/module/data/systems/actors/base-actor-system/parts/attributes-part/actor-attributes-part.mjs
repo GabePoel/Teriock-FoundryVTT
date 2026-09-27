@@ -1,11 +1,12 @@
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { AttributeModel } from "../../../../../models/_module.mjs";
 
-const { EmbeddedDataField, SchemaField } = foundry.data.fields;
-
 /**
  * @import { FeatExecution } from "../../../../../../executions/activity-executions/feat-execution.mjs";
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  */
+
+const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 
 /**
  * Actor data model mixin that handles attributes.
@@ -13,19 +14,19 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
  * Relevant wiki pages:
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorAttributesPart & Teriock.Models.ActorAttributesPartData>}
  * @see {AttributeModel}
  * @see {FeatExecution}
  */
 export default function ActorAttributesPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorAttributesPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorAttributesPart extends Base {
+  class ActorAttributesPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.ActorAttributesPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       const attributes = {};

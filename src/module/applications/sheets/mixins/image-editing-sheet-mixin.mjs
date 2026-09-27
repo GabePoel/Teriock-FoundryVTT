@@ -5,9 +5,8 @@ const { ImagePopout } = foundry.applications.apps;
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ImageEditingSheet>}
  */
 export default function ImageEditingSheetMixin(Base) {
   /**

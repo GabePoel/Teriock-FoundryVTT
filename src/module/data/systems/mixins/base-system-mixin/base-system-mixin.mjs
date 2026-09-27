@@ -11,18 +11,22 @@ const { fields } = foundry.data;
  */
 
 /**
- * @template {Constructor<TypeDataModel>} T
+ * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, BaseSystem & Teriock.Models.BaseSystemData>}
  */
 export default function BaseSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.BaseSystemData}
    * @mixes AbstractData
    * @mixes AccessData
    * @mixin
    */
-  class BaseSystem extends mixClasses(Base, AbstractDataMixin, AccessDataMixin) {
+  class BaseSystem
+    extends mixClasses(
+      /** @type {InitializedDataModel<T, Teriock.Models.BaseSystemData>} */ (Base),
+      AbstractDataMixin,
+      AccessDataMixin,
+    )
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [];
 
@@ -53,7 +57,7 @@ export default function BaseSystemMixin(Base) {
         usable: false,
         wiki: false,
       },
-      type: "base",
+      type: null,
     });
 
     /** @inheritDoc */

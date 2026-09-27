@@ -2,9 +2,8 @@ import { mergeMetadata } from "../../../helpers/construction.mjs";
 import { parseIdentifier } from "../../../helpers/utils.mjs";
 /**
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, WikiSystem>}
  */
 export default function WikiSystemMixin(Base) {
   /** @mixin */

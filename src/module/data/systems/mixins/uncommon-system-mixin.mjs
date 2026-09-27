@@ -4,9 +4,8 @@
 
 /**
  * Mixin for systems that aren't common.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, UncommonSystem>}
  * @see {CommonSystemMixin}
  */
 export default function UncommonSystemMixin(Base) {

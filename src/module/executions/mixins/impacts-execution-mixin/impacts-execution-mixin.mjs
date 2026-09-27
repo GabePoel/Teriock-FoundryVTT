@@ -3,20 +3,22 @@ import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 
+/**
+ * @import BaseExecution from "../../abstract/base-execution/base-execution.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
  * Mixin for executions that deal an impact and can be modified with boosts, deboosts, and critical hits.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof BaseExecution>} T
  * @param {T} Base
- * @returns {MixinResult<T, ImpactsExecution & Teriock.Execution.ImpactsExecutionData>}
  */
 export default function ImpactsExecutionMixin(Base) {
   /**
-   * @implements {Teriock.Execution.ImpactsExecutionData}
    * @mixin
    */
-  class ImpactsExecution extends Base {
+  class ImpactsExecution extends /** @type {InitializedDataModel<T, Teriock.Execution.ImpactsExecutionData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Boost"];
 

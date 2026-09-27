@@ -5,9 +5,8 @@ import { toId } from "../../helpers/string.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PanelData>}
  * @todo Make this into a data mixin and remove virtual affinities.
  */
 export default function PanelDataMixin(Base) {

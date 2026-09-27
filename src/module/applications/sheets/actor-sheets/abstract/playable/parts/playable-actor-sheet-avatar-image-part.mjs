@@ -3,9 +3,8 @@
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PlayableActorSheetAvatarImagePart>}
  */
 export default function PlayableActorSheetAvatarImagePart(Base) {
   /** @mixin */

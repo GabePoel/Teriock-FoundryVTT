@@ -3,9 +3,12 @@ import { addFormula } from "../../helpers/formula.mjs";
 import { ThresholdExecutionMixin } from "./_module.mjs";
 
 /**
- * @template {AnyConstructor} T
+ * @import BaseExecution from "../abstract/base-execution/base-execution.mjs";
+ */
+
+/**
+ * @template {MixinBase<typeof BaseExecution>} T
  * @param {T} Base
- * @returns {MixinResult<T, TradecraftExecution>}
  */
 export default function TradecraftExecutionMixin(Base) {
   /**
@@ -13,20 +16,6 @@ export default function TradecraftExecutionMixin(Base) {
    * @mixin
    */
   class TradecraftExecution extends mixClasses(Base, ThresholdExecutionMixin) {
-    /**
-     * @param {object} [data]
-     * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
-     */
-    constructor(data = {}, options = {}) {
-      super(data, options);
-      if (this.actor) {
-        this.updateSource({ bonus: addFormula(this.actor.system.tradecrafts[this.tradecraft].bonus, this.bonus) });
-      }
-      if (game.settings.get("teriock", "secretTradecrafts").has(this.tradecraft)) {
-        this._messageMode = options.messageMode ?? "blind";
-      }
-    }
-
     /** @inheritDoc */
     get chatData() {
       return foundry.utils.mergeObject(super.chatData, {
@@ -69,6 +58,20 @@ export default function TradecraftExecutionMixin(Base) {
      */
     get tradecraft() {
       return "artist";
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ThresholdExecutionOptions>} [options]
+     */
+    _configure(options = {}) {
+      super._configure(options);
+      if (this.actor) {
+        this._source.bonus = addFormula(this.actor.system.tradecrafts[this.tradecraft].bonus, this._source.bonus);
+      }
+      if (game.settings.get("teriock", "secretTradecrafts").has(this.tradecraft)) {
+        this._messageMode = options.messageMode ?? "blind";
+      }
     }
   }
 

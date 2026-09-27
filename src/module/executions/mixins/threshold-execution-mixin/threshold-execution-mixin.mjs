@@ -4,20 +4,24 @@ import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 
+/**
+ * @import BaseExecution from "../../abstract/base-execution/base-execution.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
  * Mixin for executions involving a d20 roll.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof BaseExecution>} T
  * @param {T} Base
- * @returns {MixinResult<T, ThresholdExecution & Teriock.Execution.ThresholdExecutionData>}
  */
 export default function ThresholdExecutionMixin(Base) {
   /**
-   * @implements {Teriock.Execution.ThresholdExecutionData}
    * @mixin
    */
-  class ThresholdExecution extends Base {
+  class ThresholdExecution
+    extends /** @type {InitializedDataModel<T, Teriock.Execution.ThresholdExecutionData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Threshold"];
 
@@ -35,18 +39,6 @@ export default function ThresholdExecutionMixin(Base) {
         edge: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
       });
     }
-
-    /**
-     * @param {object} [data]
-     * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
-     */
-    constructor(data = {}, options = {}) {
-      super(data, options);
-      this.threshold = options.threshold;
-    }
-
-    /** @type {number|undefined} */
-    threshold;
 
     /** @inheritDoc */
     get _dialogButtons() {
@@ -122,6 +114,15 @@ export default function ThresholdExecutionMixin(Base) {
           ? [{ comparison: this.comparison, inverse: true, level: 1, target: this.threshold, type: "roll" }]
           : [],
       };
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ThresholdExecutionOptions>} [options]
+     */
+    _configure(options = {}) {
+      super._configure(options);
+      this.threshold = options.threshold;
     }
 
     /** @inheritDoc */

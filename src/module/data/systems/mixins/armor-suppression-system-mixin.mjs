@@ -4,9 +4,8 @@
  * Relevant wiki pages:
  * - [Armor Value](https://wiki.teriock.com/index.php/Core:Armor_Value)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ArmorSuppressionSystem>}
  */
 export default function ArmorSuppressionSystemMixin(Base) {
   /** @mixin */

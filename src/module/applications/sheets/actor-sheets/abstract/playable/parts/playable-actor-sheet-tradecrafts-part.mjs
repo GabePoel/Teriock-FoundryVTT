@@ -3,9 +3,8 @@
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PlayableActorSheetTradecraftsPart>}
  */
 export default function PlayableActorSheetTradecraftsPart(Base) {
   /** @mixin */

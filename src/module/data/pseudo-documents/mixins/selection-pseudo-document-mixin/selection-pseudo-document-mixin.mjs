@@ -21,16 +21,16 @@ const SELECTION_PATHS = [
 
 /**
  * Selecting documents from a stored {@link Teriock.Select.DocumentSelectionConfig}.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, SelectionPseudoDocument & Teriock.PseudoDocuments.SelectionPseudoDocumentData>}
  */
 export default function SelectionPseudoDocumentMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.PseudoDocuments.SelectionPseudoDocumentData}
    */
-  class SelectionPseudoDocument extends Base {
+  class SelectionPseudoDocument
+    extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.SelectionPseudoDocumentData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Selection"];
 

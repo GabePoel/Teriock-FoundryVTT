@@ -1,6 +1,10 @@
 import { icons } from "../../../constants/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
+/**
+ * Revitalize command
+ * @type {Teriock.Command.CommandEntry}
+ */
 const command = {
   icon: icons.manifest.effect.revitalize,
   id: "revitalize",

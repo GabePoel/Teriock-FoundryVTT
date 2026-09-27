@@ -4,9 +4,8 @@
 
 /**
  * Mixin to support manipulating changes arrays in automations.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ChangesSheet>}
  */
 export default function ChangesSheetMixin(Base) {
   /** @mixin */

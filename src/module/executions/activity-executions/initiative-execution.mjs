@@ -19,16 +19,6 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
     characterConfig.defaults.initiative.bonus,
   );
 
-  constructor(data = {}, options = {}) {
-    foundry.utils.mergeObject(data, {
-      bonus: options.source?.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,
-      ...ui.combat.defaultInitiativeExecutionData,
-    }, { inplace: true, overwrite: false });
-    ui.combat.defaultInitiativeExecutionData = {};
-    super(data, options);
-    if (!options.messageMode && this.source.hidden) { this._messageMode = "gm"; }
-  }
-
   /** @inheritDoc */
   get _dialogDocuments() {
     return super._dialogDocuments.map(d => Object.assign(d, { openable: false }));
@@ -65,6 +55,30 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
   /** @inheritDoc */
   async _buildRolls() {
     this.rolls.push(this.source.getInitiativeRoll(this.formula));
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    if (!options.messageMode && this.source.hidden) { this._messageMode = "gm"; }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    foundry.utils.mergeObject(data, {
+      bonus: options.source?.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,
+      ...ui.combat.defaultInitiativeExecutionData,
+    }, { inplace: true, overwrite: false });
+    ui.combat.defaultInitiativeExecutionData = {};
+    return super._initializeSource(data, options);
   }
 
   /** @inheritDoc */

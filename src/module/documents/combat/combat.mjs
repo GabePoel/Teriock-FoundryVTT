@@ -77,14 +77,14 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /** @inheritDoc */
-  _onEndRound(context) {
-    super._onEndRound(context);
+  async _onEndRound(context) {
+    await super._onEndRound(context);
     this.#refreshCombatExpirations(null, "round", "end");
   }
 
   /** @inheritDoc */
-  _onEndTurn(combatant, context) {
-    super._onEndTurn(combatant, context);
+  async _onEndTurn(combatant, context) {
+    await super._onEndTurn(combatant, context);
     this.#refreshCombatExpirations(combatant.actor, "turn", "end");
     this.#resetAttackPenalties();
     if (combatant.actor) { this.#fireTrigger(combatant.actor, "turnEnd"); }
@@ -100,14 +100,14 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /** @inheritDoc */
-  _onStartRound(context) {
-    super._onStartRound(context);
+  async _onStartRound(context) {
+    await super._onStartRound(context);
     this.#refreshCombatExpirations(null, "round", "start");
   }
 
   /** @inheritDoc */
-  _onStartTurn(combatant, context) {
-    super._onStartTurn(combatant, context);
+  async _onStartTurn(combatant, context) {
+    await super._onStartTurn(combatant, context);
     this.#refreshCombatExpirations(combatant.actor, "turn", "start");
     if (combatant.actor) { this.#fireTrigger(combatant.actor, "turnStart"); }
     this.#refreshCombatExpirations(combatant.actor, "action", "start");

@@ -5,16 +5,14 @@ import { IdentifierField } from "../../../fields/_module.mjs";
  */
 
 /**
- * @template {Constructor<TypeDataModel>} T
+ * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, RulesSystem & Teriock.Models.RulesSystemData>}
  */
 export default function RulesSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.RulesSystemData}
    * @mixin
    */
-  class RulesSystem extends Base {
+  class RulesSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RulesSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rules"];
 

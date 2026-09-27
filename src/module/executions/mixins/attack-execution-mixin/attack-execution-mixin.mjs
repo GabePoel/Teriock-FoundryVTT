@@ -6,21 +6,28 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { prefixObject } from "../../../helpers/utils.mjs";
 
+/**
+ * @import BaseExecution from "../../abstract/base-execution/base-execution.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
  * Mixin for executions that can make an attack roll.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof BaseExecution>} T
  * @param {T} Base
- * @returns {MixinResult<T, AttackExecution & Teriock.Execution.AttackExecutionData>}
  */
 export default function AttackExecutionMixin(Base) {
   /**
-   * @implements {Teriock.Execution.AttackExecutionData}
    * @mixes ThresholdExecution
    * @mixin
    */
-  class AttackExecution extends mixClasses(Base, ThresholdExecutionMixin) {
+  class AttackExecution
+    extends mixClasses(
+      /** @type {InitializedDataModel<T, Teriock.Execution.AttackExecutionData>} */ (Base),
+      ThresholdExecutionMixin,
+    )
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Attack"];
 
@@ -38,35 +45,8 @@ export default function AttackExecutionMixin(Base) {
       });
     }
 
-    /**
-     * @param {object} [data]
-     * @param {Teriock.Execution.AttackExecutionOptions} [options]
-     */
-    constructor(data = {}, options = {}) {
-      super(data, options);
-      this.armament = options.armament ? options.armament : this._determineDefaultArmament();
-    }
-
-    /** @type {TeriockItem<"equipment">|null} */
-    ammunition;
-
-    /** @type {TeriockItem<"body"|"equipment">|null} */
-    armament;
-
     /** @type {number} */
     attackPenalty;
-
-    /** @type {TeriockToken|null} */
-    executor;
-
-    /** @type {boolean} */
-    limb;
-
-    /** @type {Teriock.System.FormulaString} */
-    rootBonus = "";
-
-    /** @type {Set<TeriockToken>} */
-    targets;
 
     /**
      * Whether an armament's warded state carries over to this.
@@ -133,7 +113,7 @@ export default function AttackExecutionMixin(Base) {
             editable: true,
             label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
             getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumable) ?? [],
-            update: ammunition => this.ammunition = ammunition,
+            update: ammunition => this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition),
           });
         }
       }
@@ -263,6 +243,15 @@ export default function AttackExecutionMixin(Base) {
     }
 
     /**
+     * @inheritDoc
+     * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AttackExecutionOptions>} [options]
+     */
+    _configure(options = {}) {
+      super._configure(options);
+      this.rootBonus = this._source.bonus;
+    }
+
+    /**
      * Logic to pick the ammunition this attacks with.
      */
     _determineDefaultAmmunition() {
@@ -319,6 +308,24 @@ export default function AttackExecutionMixin(Base) {
         if (this.sb) { this.updateSource({ formula: addFormula(this.formula, "@sb") }); }
       }
       await super._improveFormula();
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AttackExecutionOptions>} [options]
+     */
+    _initialize(options = {}) {
+      super._initialize(options);
+      // Only construction passes options. Resets and source updates re-initialize without them. Not that those should
+      // ever matter though since executions are never saved to the database.
+      if (!("strict" in options)) { return; }
+      this._updateArmament(options.armament ? options.armament : this._determineDefaultArmament(), options);
+      if (!this.bonus) { this.updateSource({ bonus: "0" }); }
+      this.limb = this._resolveLimb(options);
+      let existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
+      if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
+      this.updateSource({ existingAttackPenalty: Math.min(existingAttackPenalty, 0) });
+      this.targets = new Set();
     }
 
     /**
@@ -473,23 +480,7 @@ export default function AttackExecutionMixin(Base) {
 
     /** @inheritDoc */
     getScope(scope = {}) {
-      return { ...super.getScope(), armament: this.armament, ...scope };
-    }
-
-    /**
-     * Initialize this execution from a set of options.
-     * @param {Teriock.Execution.AttackExecutionOptions} [options]
-     */
-    initializeExecution(options = {}) {
-      this._updateArmament(this.armament, options);
-      if (!this.bonus) { this.updateSource({ bonus: "0" }); }
-      this.limb = this._resolveLimb(options);
-      this.executor = (game.canvas?.tokens.controlled ?? []).find(t => t.actor?.uuid === this.actor?.uuid)
-        ?? this.actor?.defaultToken ?? null;
-      let existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
-      if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
-      this.updateSource({ existingAttackPenalty: Math.min(existingAttackPenalty, 0) });
-      this.targets = new Set();
+      return { ...super.getScope(), ...(this.armament ? { armament: this.armament } : {}), ...scope };
     }
   }
 

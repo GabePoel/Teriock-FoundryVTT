@@ -6,15 +6,15 @@ import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
+ * @import { Document } from "@common/abstract/_module.mjs";
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
  * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
  */
 
 /**
  * Base mixin.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof Document>} T
  * @param {T} Base
- * @returns {MixinResult<T, BaseDocument>}
  */
 export default function BaseDocumentMixin(Base) {
   /**
@@ -346,6 +346,7 @@ export default function BaseDocumentMixin(Base) {
     /**
      * Check whether the provided document or its index is an ancestor of this one.
      * @param {TeriockDocument|Teriock.Hierarchy.Index<TeriockDocument>} doc
+     * @returns {boolean}
      */
     checkAncestor(doc) {
       if (doc?.uuid === this.uuid) { return true; }
@@ -369,6 +370,7 @@ export default function BaseDocumentMixin(Base) {
      * @returns {TeriockDocument|null}
      */
     fetchFromUuid(uuid, { invalid = false } = {}) {
+      /** @type {TeriockDocument|null} */
       let doc = this.top;
       if (uuid === doc.uuid) { return doc; }
       if (uuid.startsWith(doc.uuid)) {
@@ -376,7 +378,7 @@ export default function BaseDocumentMixin(Base) {
         const parts = embeddedPath.split(".");
         while (doc && (parts.length > 1)) {
           const [embeddedName, embeddedId] = parts.splice(0, 2);
-          doc = doc.getEmbeddedDocument(embeddedName, embeddedId, { invalid });
+          doc = /** @type {TeriockDocument|null} */ (doc.getEmbeddedDocument(embeddedName, embeddedId, { invalid }));
         }
         return doc ?? uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
       }

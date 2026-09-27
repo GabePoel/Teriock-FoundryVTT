@@ -20,13 +20,11 @@ const { ImagePopout } = foundry.applications.apps;
  */
 
 /**
- * @template {Constructor<TypeDataModel>} T
+ * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, ChildSystem & Teriock.Models.ChildSystemData>}
  */
 export default function ChildSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.ChildSystemData}
    * @mixes CommonSystem
    * @mixes AutomatableSystem
    * @mixes UsableData
@@ -34,7 +32,13 @@ export default function ChildSystemMixin(Base) {
    * @mixin
    */
   class ChildSystem
-    extends mixClasses(Base, CommonSystemMixin, UsableDataMixin, AutomatableSystemMixin, HierarchySystemMixin)
+    extends mixClasses(
+      /** @type {InitializedDataModel<T, Teriock.Models.ChildSystemData>} */ (Base),
+      CommonSystemMixin,
+      UsableDataMixin,
+      AutomatableSystemMixin,
+      HierarchySystemMixin,
+    )
   {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");

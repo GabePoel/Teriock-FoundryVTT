@@ -1,11 +1,12 @@
 import { actorTransformationConfig } from "../../../../../fields/tools/transformation-fields.mjs";
 
-const { fields } = foundry.data;
-
 /**
  * @import { SpeciesTransformationPart } from "../../../../items/species-system/parts/species-panel-part.mjs";
  * @import { TransformationSystemMixin } from "../../../../mixins/transformation-system-mixin/transformation-system-mixin.mjs";
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  */
+
+const { fields } = foundry.data;
 
 /**
  * Actor data model that handles transformation behavior.
@@ -13,19 +14,19 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Transformed](https://wiki.teriock.com/index.php/Condition:Transformed)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorTransformationPart & Teriock.Models.ActorTransformationPartData>}
  * @see {SpeciesTransformationPart}
  * @see {TransformationSystemMixin}
  */
 export default function ActorTransformationPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorTransformationPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorTransformationPart extends Base {
+  class ActorTransformationPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.ActorTransformationPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

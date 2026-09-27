@@ -1,5 +1,5 @@
 declare module "./ability-system.mjs" {
-  export default interface AbilitySystem extends Teriock.Models.BaseEffectSystemData {
+  export default interface AbilitySystem {
     /** <schema> Per-document behavior and display settings */
     settings: Teriock.Models.DocumentSettingsModelInstance<"ability">;
   }

@@ -1,6 +1,10 @@
+import { mergeMetadata } from "../../../helpers/construction.mjs";
 import BaseCardsSystem from "./base-cards-system.mjs";
 
 export default class StoneSystem extends BaseCardsSystem {
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { type: "stone" });
+
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);

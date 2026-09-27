@@ -24,16 +24,14 @@ function getTaggedAutomationTypes(tag) {
 }
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AutomatableSystem & Teriock.Models.AutomatableSystemData>}
  */
 export default function AutomatableSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.AutomatableSystemData}
    * @mixin
    */
-  class AutomatableSystem extends Base {
+  class AutomatableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AutomatableSystemData>} */ (Base) {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, { pseudos: { Automation: "system.automations" } });
 

@@ -5,9 +5,8 @@ import { StatDiceUpdater } from "../../dialogs/updaters/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, StatDiceSheet>}
  */
 export default function StatDiceSheetMixin(Base) {
   /**

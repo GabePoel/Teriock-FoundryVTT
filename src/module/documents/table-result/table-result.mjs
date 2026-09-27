@@ -79,7 +79,7 @@ export default class TeriockTableResult
       icon: makeIcon(TERIOCK.display.icons.manifest.ui.document, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
       onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
-      visible: () => this.documentUuid,
+      visible: () => Boolean(this.documentUuid),
     }, ...super.getEmbedContextMenuEntries(doc)];
   }
 

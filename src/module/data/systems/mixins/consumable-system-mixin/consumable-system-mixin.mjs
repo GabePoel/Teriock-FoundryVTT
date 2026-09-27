@@ -8,16 +8,14 @@ import { documentSettingsModels } from "../../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, ConsumableSystem & Teriock.Models.ConsumableSystemData>}
  */
 export default function ConsumableSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.ConsumableSystemData}
    * @mixin
    */
-  class ConsumableSystem extends Base {
+  class ConsumableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.ConsumableSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consumable"];
 

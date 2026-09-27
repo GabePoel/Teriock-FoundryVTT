@@ -3,16 +3,16 @@ import { defaultJSONField } from "../../../fields/tools/builders.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, OverrideDataPseudoDocument & Teriock.PseudoDocuments.OverrideDataPseudoDocumentData>}
  */
 export default function OverrideDataPseudoDocumentMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.PseudoDocuments.OverrideDataPseudoDocumentData}
    */
-  class OverrideDataPseudoDocument extends Base {
+  class OverrideDataPseudoDocument
+    extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.OverrideDataPseudoDocumentData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.OverrideData"];
 

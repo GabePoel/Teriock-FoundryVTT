@@ -1,16 +1,11 @@
 import { TeriockActiveEffect as ActiveEffectClass } from "../_module.mjs";
+import { TeriockDocumentSheet } from "../../applications/api/_module.mjs";
 import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 
-interface ActiveEffectSubtype<T extends ActiveEffectType> extends ActiveEffectClass {
-  sheet: ActiveEffectSheetMap[T];
-  system: ActiveEffectSystemMap[T];
-  type: T;
-}
-
 declare module "./active-effect.mjs" {
-  // @ts-expect-error Recursive
   export default interface TeriockActiveEffect {
     _id: Readonly<ID<TeriockActiveEffect>>;
+    sheet: TeriockDocumentSheet;
     system: BaseEffectSystem;
     type: ActiveEffectType;
 
@@ -21,9 +16,9 @@ declare module "./active-effect.mjs" {
 }
 
 declare global {
-  export type TeriockActiveEffect<T extends ActiveEffectType = ActiveEffectType> = T extends unknown
-    ? ActiveEffectSubtype<T>
-    : never & ActiveEffectClass;
+  export type TeriockActiveEffect<T extends ActiveEffectType = ActiveEffectType> =
+    & ActiveEffectClass
+    & Subtype<ActiveEffectSystemMap, T>;
 }
 
 export {};

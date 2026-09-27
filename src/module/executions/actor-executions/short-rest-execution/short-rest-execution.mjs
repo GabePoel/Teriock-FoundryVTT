@@ -13,25 +13,6 @@ export default class ShortRestExecution extends DocumentExecution {
     return Object.assign(super.defineSchema(), { useAbilities: new fields.BooleanField({ initial: true }) });
   }
 
-  /**
-   * @param {object} [data]
-   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
-   */
-  constructor(data = {}, options = {}) {
-    super(data, options);
-    const useAutomation = new UseDocumentsAutomation({
-      _id: toId(UseDocumentsAutomation.metadata.type, { hash: true }),
-      all: false,
-      auto: false,
-      interactInExecution: true,
-      localQualifier: `and(@ability, @time.${toKebabCase(this.executionTime)})`,
-      multi: true,
-      type: "useDocuments",
-      useInExecution: true,
-    });
-    this.automations.addDocuments([useAutomation]);
-  }
-
   /** @type {TeriockActiveEffect<"ability">[]} */
   #abilities = [];
 
@@ -95,6 +76,25 @@ export default class ShortRestExecution extends DocumentExecution {
   /** @inheritDoc */
   async _buildPanels() {
     this.panels = [Object.assign(await this.journalEntryPage.getPanelParts(), { collapsed: true, icon: this.icon })];
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    const useAutomation = new UseDocumentsAutomation({
+      _id: toId(UseDocumentsAutomation.metadata.type, { hash: true }),
+      all: false,
+      auto: false,
+      interactInExecution: true,
+      localQualifier: `and(@ability, @time.${toKebabCase(this.executionTime)})`,
+      multi: true,
+      type: "useDocuments",
+      useInExecution: true,
+    });
+    this.automations.addDocuments([useAutomation]);
   }
 
   /** @inheritDoc */

@@ -15,23 +15,6 @@ export default class DeathBagExecution extends DocumentExecution {
     return Object.assign(super.defineSchema(), deathBagSchema());
   }
 
-  /**
-   * @param {object} [data]
-   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
-   */
-  constructor(data = {}, options = {}) {
-    const actor = options.actor ?? options.source?.actor ?? game.actors.default;
-    data.pull ??= actor?.system.deathBag.pull ?? "10";
-    data.stones ??= Object.fromEntries(
-      Object.keys(TERIOCK.config.deathBag.stones).map(color => [color, actor?.system.deathBag.stones[color] ?? "0"]),
-    );
-    super(data, options);
-    const defaultMessageMode = game.settings.get("teriock", "deathBagMessageMode");
-    if (defaultMessageMode) {
-      this._messageMode = options.messageMode ?? defaultMessageMode;
-    }
-  }
-
   /** @type {string} */
   content = "";
 
@@ -190,5 +173,32 @@ export default class DeathBagExecution extends DocumentExecution {
   /** @inheritDoc */
   async _buildTags() {
     this.tags.push(_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: this.toPullCount }));
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    const defaultMessageMode = game.settings.get("teriock", "deathBagMessageMode");
+    if (defaultMessageMode) {
+      this._messageMode = options.messageMode ?? defaultMessageMode;
+    }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    const actor = this._resolveActor(options);
+    data.pull ??= actor?.system.deathBag.pull ?? "10";
+    data.stones ??= Object.fromEntries(
+      Object.keys(TERIOCK.config.deathBag.stones).map(color => [color, actor?.system.deathBag.stones[color] ?? "0"]),
+    );
+    return super._initializeSource(data, options);
   }
 }

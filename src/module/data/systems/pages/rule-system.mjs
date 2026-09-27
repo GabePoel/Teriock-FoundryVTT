@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
@@ -7,6 +7,12 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
  */
 export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { type: "rule" });
+
+  /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
   get wikiIdentifier() {
     const namespace = this.parent.parent?.name;
     if (!TERIOCK.config.wiki.namespaces[namespace] || !this.identifier) { return null; }

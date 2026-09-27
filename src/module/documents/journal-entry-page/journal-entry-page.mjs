@@ -22,7 +22,10 @@ export default class TeriockJournalEntryPage
       || TERIOCK.display.thumbnails.manifest.power.learnedElderSorceries;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
   get typedIdentifier() {
     if (this.inCompendium && this.compendium.collection === "teriock.rules") {
       const config = TERIOCK.config.wiki.namespaces[this.parent.name];

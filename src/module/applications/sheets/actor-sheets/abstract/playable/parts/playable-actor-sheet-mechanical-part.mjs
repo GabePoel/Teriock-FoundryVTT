@@ -10,9 +10,8 @@ import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PlayableActorSheetMechanicalPart>}
  */
 export default function PlayableActorSheetMechanicalPart(Base) {
   /** @mixin */

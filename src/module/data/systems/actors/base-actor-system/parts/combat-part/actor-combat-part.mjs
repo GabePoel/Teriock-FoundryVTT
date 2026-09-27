@@ -5,6 +5,10 @@ import { initialNumber, initialSchema } from "../../../../../fields/tools/initia
 import { PiercingModel } from "../../../../../models/_module.mjs";
 import InitiativeModel from "../../../../../models/modifier-models/initiative-model.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -22,17 +26,15 @@ function nullifyWielded(doc) {
  * Relevant wiki pages:
  * - [Combat](https://wiki.teriock.com/index.php/Core:Combat)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorCombatPart & Teriock.Models.ActorCombatPartData>}
  */
 export default function ActorCombatPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorCombatPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorCombatPart extends Base {
+  class ActorCombatPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorCombatPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

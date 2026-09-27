@@ -2,6 +2,10 @@ import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -14,17 +18,15 @@ const { fields } = foundry.data;
  * - [Sensory effects](https://wiki.teriock.com/index.php/Category:Sensory_effects)
  * - [Sneak](https://wiki.teriock.com/index.php/Core:Sneak)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorSensesPart & Teriock.Models.ActorSensesPartData>}
  */
 export default function ActorSensesPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorSensesPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorSensesPart extends Base {
+  class ActorSensesPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorSensesPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

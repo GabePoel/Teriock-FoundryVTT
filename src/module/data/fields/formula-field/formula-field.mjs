@@ -64,7 +64,7 @@ export default class FormulaField extends StringField {
 
   /**
    * Apply a "substitute" change to this field.
-   * @param {Teriock.Select.FormulaField} value
+   * @param {Teriock.System.FormulaString} value
    * @param {Teriock.System.FormulaString} delta
    * @param {DataModel} _model
    * @param {ActiveEffectChangeData} _change

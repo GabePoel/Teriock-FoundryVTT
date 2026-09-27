@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
@@ -7,4 +7,7 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes BaseSystem
  * @mixes UncommonSystem
  */
-export default class BaseCardsSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {}
+export default class BaseCardsSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { type: "base" });
+}

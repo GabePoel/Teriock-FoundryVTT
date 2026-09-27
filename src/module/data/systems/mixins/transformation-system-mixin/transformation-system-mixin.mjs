@@ -46,18 +46,18 @@ function transformationStatFlag(stat) {
  * Relevant wiki pages:
  * - [Transformed](https://wiki.teriock.com/index.php/Condition:Transformed)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, TransformationSystem & Teriock.Models.TransformationSystemData>}
  * @see {ActorTransformationPart}
  * @see {SpeciesTransformationPart}
  */
 export default function TransformationSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.TransformationSystemData}
    * @mixin
    */
-  class TransformationSystem extends Base {
+  class TransformationSystem
+    extends /** @type {InitializedDataModel<T, Teriock.Models.TransformationSystemData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SCHEMA.Transformation"];
 

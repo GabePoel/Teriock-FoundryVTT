@@ -11,20 +11,6 @@ import { BaseExecution } from "../abstract/_module.mjs";
  * @property {string[]} wrappers
  */
 export default class AffinityExecution extends BaseExecution {
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.AffinityExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    super(data, options);
-    this.type = options.type ?? this.source.type ?? "immunity";
-    this.wrappers = options.wrappers
-      ?? [this.source?.typeLabel, this.source?.categoryLabel, this.source?.name].filter(Boolean);
-    this.wrappers.push(
-      TERIOCK.config.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
-    );
-  }
-
   /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments;
@@ -79,5 +65,19 @@ export default class AffinityExecution extends BaseExecution {
       name: this.name,
       uuid: this.journalEntryPage?.uuid,
     });
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AffinityExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    this.type = options.type ?? this.source.type ?? "immunity";
+    this.wrappers = options.wrappers
+      ?? [this.source?.typeLabel, this.source?.categoryLabel, this.source?.name].filter(Boolean);
+    this.wrappers.push(
+      TERIOCK.config.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
+    );
   }
 }

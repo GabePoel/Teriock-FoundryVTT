@@ -98,7 +98,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
       icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
       onClick: async () => this.actor.sheet.render(true),
-      visible: () => this.actor && this.actor.isViewer,
+      visible: () => Boolean(this.actor?.isViewer),
     }, ...super.getEmbedContextMenuEntries(doc)];
   }
 

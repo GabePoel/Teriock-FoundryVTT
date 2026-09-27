@@ -4,7 +4,7 @@ import { TeriockCombatant } from "../_module.mjs";
 
 declare module "./combat.mjs" {
   export default interface TeriockCombat {
-    _id: ID<TeriockCombat>;
+    _id: Readonly<ID<TeriockCombat>>;
     combatants: EmbeddedCollection<TeriockCombatant>;
 
     get combatant(): TeriockCombatant | null;

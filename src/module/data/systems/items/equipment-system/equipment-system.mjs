@@ -137,7 +137,10 @@ export default class EquipmentSystem
     });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
   get wikiIdentifier() {
     return this.equipmentType;
   }

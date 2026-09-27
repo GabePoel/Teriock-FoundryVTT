@@ -2,9 +2,8 @@ import { makeIcon } from "../../../../../helpers/icon.mjs";
 
 /**
  * Ability rank part.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityRankPart>}
  */
 export default function AbilityRankPart(Base) {
   /**

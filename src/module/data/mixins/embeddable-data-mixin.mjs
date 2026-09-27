@@ -8,9 +8,8 @@ import { resolveDocument } from "../../helpers/resolve.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, EmbeddableData>}
  * @todo Turn into data mixin.
  */
 export default function EmbeddableDataMixin(Base) {

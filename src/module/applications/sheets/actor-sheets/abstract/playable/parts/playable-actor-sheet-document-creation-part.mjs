@@ -1,7 +1,6 @@
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PlayableActorSheetDocumentCreationPart>}
  */
 export default function PlayableActorSheetDocumentCreationPart(Base) {
   /** @mixin */

@@ -19,6 +19,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     descriptionPath: "description",
     disabledPath: "disabled",
     preserveOnRefresh: ["disabled", "duration", "tint", "transfer", ...super.metadata.preserveOnRefresh],
+    type: "base",
   });
 
   /** @inheritDoc */

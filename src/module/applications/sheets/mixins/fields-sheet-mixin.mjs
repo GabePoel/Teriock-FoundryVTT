@@ -6,9 +6,8 @@ import { BaseUpdater, KindUpdater } from "../../dialogs/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, FieldsSheet>}
  */
 export default function FieldsSheetMixin(Base) {
   /**

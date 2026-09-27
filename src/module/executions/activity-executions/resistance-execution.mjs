@@ -13,15 +13,6 @@ import AffinityExecution from "./affinity-execution.mjs";
  */
 export default class ResistanceExecution extends mixClasses(AffinityExecution, ThresholdExecutionMixin) {
   /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.ResistanceExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    super(data, options);
-    this.threshold ??= TERIOCK.config.system.resistanceThreshold;
-  }
-
-  /**
    * @inheritDoc
    * @returns {Promise<false|void>}
    */
@@ -31,5 +22,14 @@ export default class ResistanceExecution extends mixClasses(AffinityExecution, T
     this.activations.push(
       new teriock.data.pseudoDocuments.activations.UseLocalActivation({ options: { lookup: "ability:resist" } }),
     );
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ResistanceExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    this.threshold ??= TERIOCK.config.system.resistanceThreshold;
   }
 }

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
@@ -8,6 +8,9 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes UncommonSystem
  */
 export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { type: "base" });
+
   /**
    * Whether this message is visible.
    * @return {boolean}

@@ -4,9 +4,8 @@
 
 /**
  * A mixin that adds the ability to embed Pseudo-Documents.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PseudoControllerData>}
  */
 export default function PseudoControllerDataMixin(Base) {
   /** @mixin */

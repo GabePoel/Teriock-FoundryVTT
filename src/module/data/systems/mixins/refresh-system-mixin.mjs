@@ -28,9 +28,8 @@ export const DEFAULT_PRESERVE_ON_REFRESH = [
 
 /**
  * Mixin for refreshing documents from the source documents they were created from.
- * @template {Constructor<TypeDataModel>} T
+ * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, RefreshSystem>}
  */
 export default function RefreshSystemMixin(Base) {
   /** @mixin */

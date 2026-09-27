@@ -1,14 +1,11 @@
 import { TeriockActor, TeriockChatMessage } from "../_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
-import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Actors } = foundry.documents.collections;
 
 /**
- * @mixes BaseWorldCollection
  * @property {Record<ID<TeriockActor>, TeriockActor>} tokens
  */
-export default class TeriockActors extends mixClasses(Actors, BaseWorldCollectionMixin) {
+export default class TeriockActors extends Actors {
   /**
    * Get the default actor for the current user.
    * @returns {TeriockActor|null}

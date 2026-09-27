@@ -5,6 +5,7 @@ export { default as BaseEffectSystem } from "./base-effect-system/base-effect-sy
 export { default as CleanedEffectSystem } from "./cleaned-effect-system.mjs";
 export { default as ConditionSystem } from "./condition-system.mjs";
 export { default as ConsequenceSystem } from "./consequence-system/consequence-system.mjs";
+export { default as CoverSystem } from "./cover-system.mjs";
 export { default as FluencySystem } from "./fluency-system/fluency-system.mjs";
 export { default as HackSystem } from "./hack-system/hack-system.mjs";
 export { default as ImbuementSystem } from "./imbuement-system.mjs";

@@ -1,5 +1,5 @@
 import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
@@ -11,6 +11,9 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
 export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
+
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, { type: "tradecraft" });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -7,17 +7,6 @@ import { AttackExecutionMixin } from "../mixins/_module.mjs";
  * @mixes AttackExecution
  */
 export default class AttackRollExecution extends mixClasses(BaseExecution, AttackExecutionMixin) {
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.AttackExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    data.consumeAmmunition ??= game.settings.get("teriock", "ability").consumeAmmunition;
-    super(data, options);
-    this.rootBonus = this.bonus;
-    this.initializeExecution(options);
-  }
-
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
@@ -38,5 +27,16 @@ export default class AttackRollExecution extends mixClasses(BaseExecution, Attac
   /** @inheritDoc */
   get name() {
     return _loc("TERIOCK.ROLLS.Attack.label");
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AttackExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    data.consumeAmmunition ??= game.settings.get("teriock", "ability").consumeAmmunition;
+    return super._initializeSource(data, options);
   }
 }

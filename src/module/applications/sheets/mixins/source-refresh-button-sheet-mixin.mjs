@@ -7,9 +7,8 @@ import { SourceRefresher } from "../../dialogs/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, SourceRefreshButtonSheet>}
  */
 export default function SourceRefreshButtonSheetMixin(Base) {
   /** @mixin */

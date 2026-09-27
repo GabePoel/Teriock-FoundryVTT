@@ -5,9 +5,8 @@ import { makeIcon } from "../../../helpers/icon.mjs";
  */
 
 /**
- * @template {Constructor<DocumentDirectory>} T
+ * @template {MixinBase<typeof DocumentDirectory>} T
  * @param {T} Base
- * @returns {MixinResult<T, TeriockDocumentDirectory>}
  */
 export default function DocumentDirectoryMixin(Base) {
   /** @mixin */
@@ -52,7 +51,7 @@ export default function DocumentDirectoryMixin(Base) {
 
     /**
      * Get the document that corresponds to a certain list item.
-     * @param {HTMLLIElement} li
+     * @param {HTMLElement} li
      * @returns {TeriockActiveEffect|TeriockActor|TeriockItem}
      */
     _getEntryFromLi(li) {
@@ -68,7 +67,7 @@ export default function DocumentDirectoryMixin(Base) {
 
     /**
      * Validate whether the open panel context menu entry option should be visible.
-     * @param {HTMLLIElement} li
+     * @param {HTMLElement} li
      * @returns {boolean}
      */
     _validateOpenPanelEntryContextOption(li) {

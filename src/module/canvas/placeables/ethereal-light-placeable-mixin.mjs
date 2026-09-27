@@ -3,9 +3,8 @@
  */
 
 /**
- * @template {Constructor<PlaceableObject>} T
+ * @template {MixinBase<typeof PlaceableObject>} T
  * @param {T} Base
- * @returns {MixinResult<T, EtherealLightPlaceable>}
  */
 export default function EtherealLightPlaceableMixin(Base) {
   /** @mixin */

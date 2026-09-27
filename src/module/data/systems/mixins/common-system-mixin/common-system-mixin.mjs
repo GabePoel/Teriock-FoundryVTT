@@ -12,19 +12,24 @@ import { Panel } from "../../../pseudo-documents/_module.mjs";
  */
 
 /**
- * @template {Constructor<TypeDataModel>} T
+ * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
- * @returns {MixinResult<T, CommonSystem & Teriock.Models.CommonSystemData>}
  */
 export default function CommonSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.CommonSystemData}
    * @mixes RulesSystem
    * @mixes PropagationData
    * @mixes RefreshSystem
    * @mixin
    */
-  class CommonSystem extends mixClasses(Base, PropagationDataMixin, RulesSystemMixin, RefreshSystemMixin) {
+  class CommonSystem
+    extends mixClasses(
+      /** @type {InitializedDataModel<T, Teriock.Models.CommonSystemData>} */ (Base),
+      PropagationDataMixin,
+      RulesSystemMixin,
+      RefreshSystemMixin,
+    )
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Common"];
 

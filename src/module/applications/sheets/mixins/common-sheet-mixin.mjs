@@ -15,9 +15,8 @@ import SystemSettingsButtonSheetMixin from "./system-settings-button-sheet-mixin
 
 /**
  * Common document sheet mixin.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base - The base application class to mix in with.
- * @returns {MixinResult<T, CommonSheet>}
  */
 export default function CommonSheetMixin(Base) {
   /**

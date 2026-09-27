@@ -1,6 +1,10 @@
 import { DeathBagExecution } from "../../../../../../executions/actor-executions/_module.mjs";
 import { deathBagSchema } from "../../../../../fields/tools/builders.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -9,17 +13,15 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Death Bag](https://wiki.teriock.com/index.php/Core:Death_Bag)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorDeathBagPart & Teriock.Models.ActorDeathBagPartData>}
  */
 export default function ActorDeathBagPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorDeathBagPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorDeathBagPart extends Base {
+  class ActorDeathBagPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorDeathBagPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { deathBag: new fields.SchemaField(deathBagSchema()) });

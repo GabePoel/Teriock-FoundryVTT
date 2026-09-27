@@ -5,10 +5,13 @@ import { BaseAutomation } from "../../../../../pseudo-documents/automations/abst
 import { BaseExpiration } from "../../../../../pseudo-documents/expirations/abstract/_module.mjs";
 
 /**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
+/**
  * Actor data model that handles Pseudo-Documents.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorPseudoDocumentsPart>}
  */
 export default function ActorPseudoDocumentsPart(Base) {
   /**

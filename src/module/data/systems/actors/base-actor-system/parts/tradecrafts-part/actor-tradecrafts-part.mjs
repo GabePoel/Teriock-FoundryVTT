@@ -1,30 +1,31 @@
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { TradecraftModel } from "../../../../../models/modifier-models/_module.mjs";
 
-const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 /**
  * @import { TradecraftExecutionMixin } from "../../../../../../executions/mixins/tradecraft-execution-mixin.mjs";
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  */
 
+const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 /**
  * Actor data model mixin that handles tradecrafts.
  *
  * Relevant wiki pages:
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorTradecraftsPart & Teriock.Models.ActorTradecraftsPartData>}
  * @see {TradecraftModel}
  * @see {TradecraftExecutionMixin}
  */
 export default function ActorTradecraftsPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorTradecraftsPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorTradecraftsPart extends Base {
+  class ActorTradecraftsPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.ActorTradecraftsPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       const tradecrafts = {};

@@ -4,16 +4,14 @@ import { mergeMetadata } from "../../../../helpers/construction.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AdjustableSystem & Teriock.Models.AdjustableSystemData>}
  */
 export default function AdjustableSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.AdjustableSystemData}
    * @mixin
    */
-  class AdjustableSystem extends Base {
+  class AdjustableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AdjustableSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Adjustable"];
 

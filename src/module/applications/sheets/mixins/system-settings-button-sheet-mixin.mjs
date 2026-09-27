@@ -7,9 +7,8 @@ import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, SystemSettingsButtonSheet>}
  */
 export default function SystemSettingsButtonSheetMixin(Base) {
   /** @mixin */

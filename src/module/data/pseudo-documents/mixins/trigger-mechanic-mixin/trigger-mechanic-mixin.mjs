@@ -10,16 +10,16 @@ const { fields } = foundry.data;
 
 /**
  * Adds the trigger events a {@link MechanicPseudoDocument} responds to.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, TriggerMechanic & Teriock.PseudoDocuments.TriggerMechanicData>}
  */
 export default function TriggerMechanicMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.PseudoDocuments.TriggerMechanicData}
    */
-  class TriggerMechanic extends Base {
+  class TriggerMechanic
+    extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.TriggerMechanicData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Trigger"];
 

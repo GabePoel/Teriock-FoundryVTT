@@ -2,6 +2,10 @@ import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -10,17 +14,15 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Movement](https://wiki.teriock.com/index.php/Core:Movement)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorMovementPart & Teriock.Models.ActorMovementPartData>}
  */
 export default function ActorMovementPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorMovementPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorMovementPart extends Base {
+  class ActorMovementPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorMovementPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

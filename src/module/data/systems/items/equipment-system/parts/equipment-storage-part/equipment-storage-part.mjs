@@ -12,18 +12,18 @@ const { fields } = foundry.data;
 
 /**
  * Equipment mixin that handles storage of other equipment.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, EquipmentStoragePart & Teriock.Models.EquipmentStoragePartData>}
  * @see {StorageModel}
  */
 export default function EquipmentStoragePart(Base) {
   /**
-   * @implements {Teriock.Models.EquipmentStoragePartData}
    * @mixin
    * @property {TeriockItem<"equipment">} parent
    */
-  class EquipmentStoragePart extends Base {
+  class EquipmentStoragePart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.EquipmentStoragePartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return {

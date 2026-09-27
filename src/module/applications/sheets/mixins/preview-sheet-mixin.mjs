@@ -6,9 +6,8 @@ import { fromIdentifier } from "../../../helpers/utils.mjs";
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PreviewSheet>}
  */
 export default function PreviewSheetMixin(Base) {
   /**

@@ -3,22 +3,24 @@ import { addFormula } from "../../../../../../helpers/formula.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 /**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
+/**
  * Actor data model that handles cover.
  *
  * Relevant wiki pages:
  * - [Cover](https://wiki.teriock.com/index.php/Core:Cover)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorCoverPart & Teriock.Models.ActorCoverPartData>}
  */
 export default function ActorCoverPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorCoverPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorCoverPart extends Base {
+  class ActorCoverPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorCoverPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { cover: initialNumber() });

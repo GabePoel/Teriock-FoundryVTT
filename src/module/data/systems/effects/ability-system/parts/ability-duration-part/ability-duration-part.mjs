@@ -8,17 +8,17 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Duration](https://wiki.teriock.com/index.php/Core:Duration)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityDurationPart & Teriock.Models.AbilityDurationPartData>}
  */
 export default function AbilityDurationPart(Base) {
   /**
-   * @implements {Teriock.Models.AbilityDurationPartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityDurationPart extends Base {
+  class AbilityDurationPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityDurationPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { duration: new fields.EmbeddedDataField(DurationModel) });

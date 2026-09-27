@@ -13,17 +13,15 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Costs](https://wiki.teriock.com/index.php/Core:Costs)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityCostsPart & Teriock.Models.AbilityCostsPartData>}
  */
 export default function AbilityCostsPart(Base) {
   /**
-   * @implements {Teriock.Models.AbilityCostsPartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityCostsPart extends Base {
+  class AbilityCostsPart extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityCostsPartData>} */ (Base) {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
       preserveOnRefresh: ["system.costs.tweaks", ...super.metadata.preserveOnRefresh],

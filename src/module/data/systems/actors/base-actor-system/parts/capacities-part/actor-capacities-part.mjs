@@ -1,5 +1,9 @@
 import { initialNumber, initialString } from "../../../../../fields/tools/initializers.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -11,17 +15,17 @@ const { fields } = foundry.data;
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  * - [Weight](https://wiki.teriock.com/index.php/Core:Weight)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorCapacitiesPart & Teriock.Models.ActorCapacitiesPartData>}
  */
 export default function ActorCapacitiesPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorCapacitiesPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorCapacitiesPart extends Base {
+  class ActorCapacitiesPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.ActorCapacitiesPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

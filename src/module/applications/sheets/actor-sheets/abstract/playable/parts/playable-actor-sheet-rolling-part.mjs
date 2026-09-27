@@ -3,9 +3,8 @@
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PlayableActorSheetRollingPart>}
  * @todo Rename this
  */
 export default function PlayableActorSheetRollingPart(Base) {

@@ -7,16 +7,14 @@ import { FormulaField } from "../../../fields/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AttunableSystem & Teriock.Models.AttunableSystemData>}
  */
 export default function AttunableSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.AttunableSystemData}
    * @mixin
    */
-  class AttunableSystem extends Base {
+  class AttunableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AttunableSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunable"];
 

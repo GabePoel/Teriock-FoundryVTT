@@ -6,17 +6,17 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Elder Sorcery](https://wiki.teriock.com/index.php/Core:Elder_Sorcery)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityElderSorceryPart & Teriock.Models.AbilityElderSorceryPartData>}
  */
 export default function AbilityElderSorceryPart(Base) {
   /**
-   * @implements {Teriock.Models.AbilityElderSorceryPartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityElderSorceryPart extends Base {
+  class AbilityElderSorceryPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityElderSorceryPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

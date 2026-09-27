@@ -4,11 +4,6 @@ import { TeriockActor as ActorClass, TeriockChatMessage as ChatMessageClass, Ter
 import { BaseMessageSystem } from "../../data/systems/messages/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
-interface ChatMessageSubtype<T extends ChatMessageType> extends ChatMessageClass {
-  system: ChatMessageSystemMap[T];
-  type: T;
-}
-
 declare module "./chat-message.mjs" {
   export default interface TeriockChatMessage {
     _id: Readonly<ID<TeriockChatMessage>>;
@@ -26,8 +21,8 @@ declare module "./chat-message.mjs" {
 
 declare global {
   export type TeriockChatMessage<T extends ChatMessageType = ChatMessageType> =
-    & (T extends unknown ? ChatMessageSubtype<T> : never)
-    & ChatMessageClass;
+    & ChatMessageClass
+    & Subtype<ChatMessageSystemMap, T>;
 
   namespace Teriock.Data {
     export interface ChatMessageData {

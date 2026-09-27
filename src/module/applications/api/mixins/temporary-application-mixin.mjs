@@ -8,9 +8,8 @@ const { FormDataExtended } = foundry.applications.ux;
 
 /**
  * Mixin for short-lived applications.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, TemporaryApplication>}
  */
 export default function TemporaryApplicationMixin(Base) {
   /**

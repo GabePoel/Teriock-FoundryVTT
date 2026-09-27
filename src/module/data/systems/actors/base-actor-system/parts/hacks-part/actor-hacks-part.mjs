@@ -3,22 +3,24 @@ import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { initialBar, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
 /**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
+/**
  * Actor data model mixin that handles hacks.
  *
  * Relevant wiki pages:
  * - [Hacked](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorHacksPart & Teriock.Models.ActorHacksPartData>}
  */
 export default function ActorHacksPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorHacksPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorHacksPart extends Base {
+  class ActorHacksPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorHacksPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

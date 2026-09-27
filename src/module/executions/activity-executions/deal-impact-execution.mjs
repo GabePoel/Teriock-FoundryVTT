@@ -7,16 +7,6 @@ import { ImpactsExecutionMixin } from "../mixins/_module.mjs";
  * @mixes ImpactsExecution
  */
 export default class DealImpactExecution extends mixClasses(BaseExecution, ImpactsExecutionMixin) {
-  /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.ImpactsExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    data.formula ??= "0";
-    super(data, options);
-    this._document = options.document ?? null;
-  }
-
   /** @type {TeriockActiveEffect|TeriockItem|null} */
   _document;
 
@@ -38,5 +28,26 @@ export default class DealImpactExecution extends mixClasses(BaseExecution, Impac
       return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.config.impact[this.impact]?.label });
     }
     return _loc("TERIOCK.DIALOGS.Boost.title");
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ImpactsExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    /** @type {TeriockDocument|null} */
+    this._document = options.document ?? null;
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ImpactsExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    data.formula ??= "0";
+    return super._initializeSource(data, options);
   }
 }

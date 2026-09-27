@@ -20,9 +20,8 @@ const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
  */
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, PlayableActorSheetSectionsPart>}
  * @property {TeriockActor} document
  */
 export default function PlayableActorSheetSectionsPart(Base) {

@@ -3,9 +3,8 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Ability panel part.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityPanelPart>}
  */
 export default function AbilityPanelPart(Base) {
   /**

@@ -6,6 +6,10 @@ import { VirtualCondition } from "../../../../../pseudo-documents/_module.mjs";
 import { StatusExpiration } from "../../../../../pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../../../../pseudo-documents/expirations/abstract/_module.mjs";
 
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
@@ -14,17 +18,17 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorConditionsPart & Teriock.Models.ActorConditionsPartData>}
  */
 export default function ActorConditionsPart(Base) {
   /**
-   * @implements {Teriock.Models.ActorConditionsPartData}
    * @mixin
    * @property {TeriockActor} parent
    */
-  class ActorConditionsPart extends Base {
+  class ActorConditionsPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.ActorConditionsPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, { pseudos: { VirtualCondition: "system.virtualConditions" } });
 

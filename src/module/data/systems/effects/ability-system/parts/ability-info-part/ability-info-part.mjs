@@ -14,17 +14,15 @@ const { fields } = foundry.data;
  * - [Standard Abilities](https://wiki.teriock.com/index.php/Core:Standard_Abilities)
  * - [Sustained](https://wiki.teriock.com/index.php/Core:Sustained)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityInfoPart & Teriock.Models.AbilityFlagsPartData>}
  */
 export default function AbilityInfoPart(Base) {
   /**
-   * @implements {Teriock.Models.AbilityFlagsPartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityInfoPart extends Base {
+  class AbilityInfoPart extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityFlagsPartData>} */ (Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

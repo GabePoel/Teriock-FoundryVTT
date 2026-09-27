@@ -5,16 +5,14 @@ import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 
 /**
  * Data mixin to support metaphysics tags.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, MetaphysicsSystem & Teriock.Models.MetaphysicsSystemData>}
  */
 export default function MetaphysicsSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.MetaphysicsSystemData}
    * @mixin
    */
-  class MetaphysicsSystem extends Base {
+  class MetaphysicsSystem extends /** @type {InitializedDataModel<T, Teriock.Models.MetaphysicsSystemData>} */ (Base) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Metaphysics"];
 

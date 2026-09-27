@@ -8,20 +8,20 @@ const { fields } = foundry.data;
 
 /**
  * Ability equipment part.
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityEquipmentPart & Teriock.Models.AbilityEquipmentPartData>}
  */
 export default function AbilityEquipmentPart(Base) {
   /**
    * Relevant wiki pages:
    * - [Granting](https://wiki.teriock.com/index.php/Property:Granting)
    *
-   * @implements {Teriock.Models.AbilityEquipmentPartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityEquipmentPart extends Base {
+  class AbilityEquipmentPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityEquipmentPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
       preserveOnRefresh: ["system.grantOnly", "system.grantUse", ...super.metadata.preserveOnRefresh],

@@ -10,17 +10,17 @@ const { fields } = foundry.data;
  * - [Attribute by Ability](https://wiki.teriock.com/index.php/Core:Attributes#Attribute_by_Ability)
  * - [Attributes and Feat Saves](https://wiki.teriock.com/index.php/Core:Attributes#Attributes_and_Feat_Saves)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AbilityUpgradesPart & Teriock.Models.AbilityUpgradesPartData>}
  */
 export default function AbilityUpgradesPart(Base) {
   /**
-   * @implements {Teriock.Models.AbilityUpgradesPartData}
    * @mixin
    * @property {TeriockActiveEffect<"ability">} parent
    */
-  class AbilityUpgradesPart extends Base {
+  class AbilityUpgradesPart
+    extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityUpgradesPartData>} */ (Base)
+  {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {

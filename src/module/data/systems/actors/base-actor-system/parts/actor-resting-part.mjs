@@ -1,13 +1,16 @@
 import { LongRestExecution, ShortRestExecution } from "../../../../../executions/actor-executions/_module.mjs";
 
 /**
+ * @import AbstractActorSystem from "../abstract-actor-system.mjs";
+ */
+
+/**
  * Relevant wiki pages:
  * - [Long Rest](https://wiki.teriock.com/index.php/Core:Long_Rest)
  * - [Short Rest](https://wiki.teriock.com/index.php/Core:Short_Rest)
  *
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorRestingPart>}
  */
 export default function ActorRestingPart(Base) {
   /**

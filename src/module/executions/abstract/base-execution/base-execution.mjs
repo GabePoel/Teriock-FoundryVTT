@@ -44,60 +44,17 @@ export default class BaseExecution extends BaseDataModel {
     };
   }
 
-  /**
-   * Construct an execution.
-   * @param {object} [data] - Initial schema data, handled by default {@link DataModel} construction.
-   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options] - Construction context.
-   */
-  constructor(data = {}, options = {}) {
-    super(data);
-    this.options = options;
-    this.#source = options.source;
-    this._showDialog = options.showDialog ?? game.settings.get("teriock", "showRollDialogs");
-    this._actor = options.actor ?? game.actors.default;
-    this._boosts = options.boosts ?? {};
-    this._rollData = options.rollData ?? {};
-    this._rollOptions = options.rollOptions ?? {};
-    this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
-    this._determineCompetence(options);
-    this.automations = new ExecutionPseudoCollection("automations", this, [], { documentClass: BaseAutomation });
-  }
-
   /** @type {TeriockJournalEntryPage} */
   #journalEntryPage;
 
-  /** @type {TeriockActiveEffect|TeriockActor|TeriockItem|BaseModifierModel} */
-  #source;
-
-  /** @type {TeriockActor|null} */
-  _actor;
-
-  /** @type {Record<Teriock.Keys.Impact, Teriock.System.FormulaString>} */
-  _boosts;
-
   /** @type {Record<Teriock.Keys.Impact, number>} */
   _boostsResolved = {};
-
-  /** @type {Teriock.Messages.Mode} */
-  _messageMode;
-
-  /** @type {object} */
-  _rollData;
-
-  /** @type {object} */
-  _rollOptions = {};
-
-  /** @type {boolean} */
-  _showDialog = false;
 
   /** @type {Activation[]} */
   activations = [];
 
   /** @type {object} */
   actorUpdates = {};
-
-  /** @type {ExecutionPseudoCollection<Automation>} */
-  automations;
 
   /** @type {TeriockChatMessage|undefined} */
   message;
@@ -227,7 +184,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {string}
    */
   get icon() {
-    return undefined;
+    return TERIOCK.display.icons.manifest.ability.execution;
   }
 
   /**
@@ -275,7 +232,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {TeriockActiveEffect|TeriockItem|BaseModifierModel}
    */
   get source() {
-    return this.#source;
+    return this._sourceDocument;
   }
 
   /**
@@ -416,6 +373,25 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    this.options = options;
+    this._sourceDocument = options.source;
+    this._showDialog = options.showDialog ?? game.settings.get("teriock", "showRollDialogs");
+    this._actor = this._resolveActor(options);
+    this.executor = (game.canvas?.tokens.controlled ?? []).find(t => t.actor?.uuid === this.actor?.uuid)
+      ?? this.actor?.defaultToken ?? null;
+    this._boosts = options.boosts ?? {};
+    this._rollData = options.rollData ?? {};
+    this._rollOptions = options.rollOptions ?? {};
+    this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
+    this.automations = new ExecutionPseudoCollection("automations", this, [], { documentClass: BaseAutomation });
+  }
+
+  /**
    * Create a chat message from this execution.
    * @param {object} [options]
    * @param {Teriock.Messages.Mode} [options.mode]
@@ -430,18 +406,19 @@ export default class BaseExecution extends BaseDataModel {
 
   /**
    * Determine this execution's competence.
-   * @param {Teriock.Execution.ExecutionOptions} options
+   * @param {Partial<Teriock.Execution.ExecutionOptions>} options
+   * @returns {Teriock.System.CompetenceLevel}
    */
   _determineCompetence(options) {
     let competence = 0;
-    if (foundry.utils.hasProperty(this.source, "system.competence.raw")) {
-      competence = foundry.utils.getProperty(this.source, "system.competence.value");
+    if (foundry.utils.hasProperty(options.source, "system.competence.raw")) {
+      competence = foundry.utils.getProperty(options.source, "system.competence.value");
     }
-    if (foundry.utils.hasProperty(this.source, "competence.raw")) {
-      competence = foundry.utils.getProperty(this.source, "competence.value");
+    if (foundry.utils.hasProperty(options.source, "competence.raw")) {
+      competence = foundry.utils.getProperty(options.source, "competence.value");
     }
     if (typeof options.competence === "number") { competence = options.competence; }
-    this.updateSource({ "competence.raw": competence });
+    return competence;
   }
 
   /**
@@ -527,6 +504,18 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    const source = /** @type {Record<string, any>} */ (super._initializeSource(data, options));
+    source.competence.raw = this._determineCompetence(options);
+    return source;
+  }
+
+  /**
    * Perform all staged update operations.
    * @returns {Promise<false|void>}
    */
@@ -575,6 +564,15 @@ export default class BaseExecution extends BaseDataModel {
         updates: [{ _id: this.actor.id, ...this.actorUpdates }],
       });
     }
+  }
+
+  /**
+   * The actor this execution is for.
+   * @param {Partial<Teriock.Execution.ExecutionOptions>} options
+   * @returns {TeriockActor|null}
+   */
+  _resolveActor(options) {
+    return options.actor ?? game.actors.default;
   }
 
   /**

@@ -3,16 +3,14 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**
- * @template {AnyConstructor} T
+ * @template {MixinBase} T
  * @param {T} Base
- * @returns {MixinResult<T, AffinableSystem & Teriock.Models.AffinableSystemData>}
  */
 export default function AffinableSystemMixin(Base) {
   /**
-   * @implements {Teriock.Models.AffinableSystemData}
    * @mixin
    */
-  class AffinableSystem extends Base {
+  class AffinableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AffinableSystemData>} */ (Base) {
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, { pseudos: { Affinity: "system.affinities" } });
 

@@ -2,13 +2,16 @@ import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
 import { makeIconClass } from "../../../../../helpers/icon.mjs";
 import { barClamp } from "../../../../../helpers/utils.mjs";
 
+/**
+ * @import AbstractActorSystem from "../abstract-actor-system.mjs";
+ */
+
 const { fields } = foundry.data;
 
 /**
  * Actor data model mixin that handles rollable takes.
- * @template {AnyConstructor} T
+ * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @returns {MixinResult<T, ActorImpactsPart>}
  */
 export default function ActorImpactsPart(Base) {
   /**

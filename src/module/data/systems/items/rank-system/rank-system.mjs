@@ -193,7 +193,10 @@ export default class RankSystem
     return this.number > 0 && this.number <= 5;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
   get wikiIdentifier() {
     return this.class;
   }

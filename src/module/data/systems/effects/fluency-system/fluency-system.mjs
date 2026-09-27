@@ -70,7 +70,10 @@ export default class FluencySystem
     return false;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
   get wikiIdentifier() {
     return this.tradecraft;
   }

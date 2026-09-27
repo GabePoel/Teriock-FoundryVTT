@@ -41,29 +41,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /**
-   * @param {object} [data]
-   * @param {Teriock.Execution.AbilityExecutionOptions} [options]
-   */
-  constructor(data = {}, options = {}) {
-    data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
-    super(data, options);
-    this.rootBonus = this.bonus;
-    this.initializeExecution(options);
-    this.affinities = new ExecutionPseudoCollection("affinities", this, this.source.system.affinities.values(), {
-      documentClass: BaseAffinity,
-    });
-    this.expirations = new ExecutionPseudoCollection("expirations", this, this.source.system.expirations.values(), {
-      documentClass: BaseExpiration,
-    });
-    const { duration, maneuver, targets } = this.source.system;
-    this.updateSource({
-      makeEffect: duration.unit !== "instant" && maneuver !== "passive",
-      targetsActor: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor),
-      targetsArmament: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament),
-    });
-  }
-
-  /**
    * Costs that are being paid.
    * @returns {string[]}
    */
@@ -101,9 +78,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       });
     }
   }
-
-  /** @type {Record<Teriock.Keys.PrimaryCost, number>} */
-  costs;
 
   /** @type {number} */
   heightened;
@@ -330,6 +304,21 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /**
+   * @inheritDoc
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AbilityExecutionOptions>} [options]
+   */
+  _configure(options = {}) {
+    super._configure(options);
+    this.costs = objectMap(TERIOCK.config.stat, () => 0);
+    this.affinities = new ExecutionPseudoCollection("affinities", this, this.source.system.affinities.values(), {
+      documentClass: BaseAffinity,
+    });
+    this.expirations = new ExecutionPseudoCollection("expirations", this, this.source.system.expirations.values(), {
+      documentClass: BaseExpiration,
+    });
+  }
+
+  /**
    * Logic to pick armament based on interaction type.
    * @inheritDoc
    */
@@ -441,6 +430,26 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     return super._improveFormula();
   }
 
+  /**
+   * @inheritDoc
+   * @param {Record<string, any>} data
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AbilityExecutionOptions>} [options]
+   * @returns {Record<string, any>}
+   */
+  _initializeSource(data, options = {}) {
+    data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
+    const source = super._initializeSource(data, options);
+    const { duration, executionTime, maneuver, settings, targets } = options.source.system;
+    Object.assign(source, {
+      autoPayCosts: settings.getSetting("autoPayCosts"),
+      makeEffect: duration.unit !== "instant" && maneuver !== "passive",
+      targetsActor: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor),
+      targetsArmament: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament),
+      usesReaction: maneuver === "reactive" && executionTime.base === "r1",
+    });
+    return source;
+  }
+
   /** @inheritDoc */
   async _performUpdates() {
     const yes = await super._performUpdates();
@@ -538,15 +547,5 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   /** @inheritDoc */
   getScope(scope = {}) {
     return { ...super.getScope(), ability: this.source, ...scope };
-  }
-
-  /** @inheritDoc */
-  initializeExecution(options = {}) {
-    this.costs = objectMap(TERIOCK.config.stat, () => 0);
-    super.initializeExecution(options);
-    this.updateSource({
-      autoPayCosts: this.source.system.settings.getSetting("autoPayCosts"),
-      usesReaction: this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1",
-    });
   }
 }
