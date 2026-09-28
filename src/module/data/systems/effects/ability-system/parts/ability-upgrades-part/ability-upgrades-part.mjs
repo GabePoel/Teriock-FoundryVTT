@@ -101,7 +101,7 @@ export default function AbilityUpgradesPart(Base) {
         const amount = this.upgrades.competence.value;
         const identifier = TERIOCK.config.competence.levels[amount].identifier;
         const level = TERIOCK.config.competence.levels[amount].label;
-        const upgrade = `@Identifier[${identifier}]{${level.toLowerCase()}}`;
+        const upgrade = `@Identifier[${identifier}]{${level.toLocaleLowerCase(game.i18n.lang)}}`;
         const savesLabel = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves");
         const saves = `@Identifier[core:feat-interaction]{${savesLabel}}`;
         this.upgrades.competence.text = `<p>${

@@ -1,4 +1,5 @@
 import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
@@ -57,6 +58,8 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["equipment", ...super.metadata.childTypes],
+    icon: icons.manifest.document.equipment,
+    importDialog: true,
     initialKind: "mundane",
     kinds: _replace(equipmentConfig.kind),
     preserveOnRefresh: [

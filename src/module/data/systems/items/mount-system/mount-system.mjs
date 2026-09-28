@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
@@ -18,7 +19,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "mount" });
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.mount, type: "mount" });
 
   /** @inheritDoc */
   static defineSchema() {

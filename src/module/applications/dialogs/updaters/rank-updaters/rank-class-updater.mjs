@@ -1,4 +1,4 @@
-import documentConfig from "../../../../constants/config/document-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -12,7 +12,7 @@ import BaseUpdater from "../base-updater.mjs";
  */
 export default class RankClassUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(documentConfig.rank.icon, "title") } };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.document.rank, "title") } };
 
   /**
    * Keep the selected class inside the selected archetype, so switching archetype doesn't leave a class from the

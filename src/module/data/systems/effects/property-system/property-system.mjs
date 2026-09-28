@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -44,6 +45,9 @@ export default class PropertySystem
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["property"],
     crit: { enabled: true, where: "chatData" },
+    icon: icons.manifest.document.property,
+    importDialog: true,
+    sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "property",
     visibleTypes: ["property"],

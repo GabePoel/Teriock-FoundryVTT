@@ -1,4 +1,5 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
@@ -32,6 +33,7 @@ export default class PowerSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.power,
     initialCompetence: 1,
     initialKind: "other",
     kinds: _replace(powerConfig.kind),

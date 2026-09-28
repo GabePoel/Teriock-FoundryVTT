@@ -53,7 +53,7 @@ export default class TeriockTableResult
     }
     if (["ActiveEffect", "Item", "RollTable"].includes(doc.documentName)) {
       const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name });
-      const icon = TERIOCK.config.document[doc.type]?.icon;
+      const icon = doc.system?.metadata?.icon;
       activations.push(
         new acts.UseExternalActivation({ display: { icon, label }, options: { icon, label, uuid: this.documentUuid } }),
       );

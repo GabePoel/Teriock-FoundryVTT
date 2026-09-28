@@ -1,5 +1,6 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
@@ -40,9 +41,11 @@ export default class RankSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.rank,
     initialCompetence: 1,
     initialKind: "learned",
     kinds: _replace(classConfig.kind),
+    sortPaths: ["system.innate", "system.archetype", "system.class", "system.number", "name", "_stats.createdTime"],
     type: "rank",
   });
 
@@ -85,7 +88,7 @@ export default class RankSystem
       if (selectMap.size) {
         const chosen = await DocumentSelector.selectSingle(Array.from(selectMap.values()), {
           hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
-            name: TERIOCK.config.document.ability.label.toLocaleLowerCase(game.i18n.lang),
+            name: _loc("TYPES.ActiveEffect.ability").toLocaleLowerCase(game.i18n.lang),
           }),
           openable: true,
           title: _loc(`TERIOCK.SHEETS.Common.MENU.CreateRank.select${category.capitalize()}`),

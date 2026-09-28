@@ -11,7 +11,7 @@ const command = {
   label: "TERIOCK.COMMANDS.Attack.label",
   primary: use,
   secondary: use,
-  icon: () => TERIOCK.config.document.ability.icon,
+  icon: () => teriock.data.systems.effects.AbilitySystem.metadata.icon,
 };
 
 export default command;

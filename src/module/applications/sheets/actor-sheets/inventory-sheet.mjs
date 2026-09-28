@@ -19,7 +19,7 @@ export default class InventorySheet extends BaseActorSheet {
   static async #previewGroupEquipment() {
     return [{
       docs: this.document.previewed.getTypeSync("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
-      empty: TERIOCK.config.document.equipment.plural.toLowerCase(),
+      empty: _loc("TERIOCK.DOCUMENTS.Item.equipment.plural").toLocaleLowerCase(game.i18n.lang),
     }];
   }
 

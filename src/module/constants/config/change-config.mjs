@@ -18,8 +18,8 @@ const typeSubsets = {
 
 /** @enum {Teriock.Config.ChildChangeTargetEntry} */
 const childTargets = {
-  ability: { label: "TERIOCK.DOCUMENTS.ability.plural", types: ["ability"] },
-  armament: { label: "TERIOCK.DOCUMENTS.armament.plural", types: ["body", "equipment"] },
+  ability: { label: "TERIOCK.DOCUMENTS.ActiveEffect.ability.plural", types: ["ability"] },
+  armament: { label: "TERIOCK.DOCUMENTS.Item.armament.plural", types: ["body", "equipment"] },
 };
 
 const groups = {

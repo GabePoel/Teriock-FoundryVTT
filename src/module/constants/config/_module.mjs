@@ -13,7 +13,6 @@ import currencyConfig from "./currency-config.mjs";
 import deathBagConfig from "./death-bag-config.mjs";
 import displayConfig from "./display-config.mjs";
 import documentBehaviorConfig from "./document-behavior-config.mjs";
-import documentConfig from "./document-config.mjs";
 import effectConfig from "./effect-config.mjs";
 import equipmentConfig from "./equipment-config.mjs";
 import hackConfig from "./hack-config.mjs";
@@ -47,7 +46,6 @@ const config = {
   currency: currencyConfig,
   deathBag: deathBagConfig,
   display: displayConfig,
-  document: documentConfig,
   documentBehavior: documentBehaviorConfig,
   effect: effectConfig,
   equipment: equipmentConfig,

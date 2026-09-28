@@ -1,4 +1,4 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { dotJoin } from "../../../helpers/string.mjs";
 import { getName } from "../../../helpers/utils.mjs";
@@ -17,11 +17,19 @@ export default class ArchetypeSystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Archetype"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { initialCompetence: 1, type: "archetype" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.archetype,
+    initialCompetence: 1,
+    type: "archetype",
+  });
 
   /** @inheritDoc */
   get _panelBars() {
-    return [{ icon: documentConfig.rank.icon, label: documentConfig.rank.plural, wrappers: this.classNames }];
+    return [{
+      icon: teriock.data.systems.items.RankSystem.metadata.icon,
+      label: _loc("TERIOCK.DOCUMENTS.Item.rank.plural"),
+      wrappers: this.classNames,
+    }];
   }
 
   /**

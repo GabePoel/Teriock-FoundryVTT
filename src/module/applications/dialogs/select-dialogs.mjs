@@ -1,4 +1,4 @@
-import { objectMap } from "../../helpers/utils.mjs";
+import { getTypeLabel, objectMap } from "../../helpers/utils.mjs";
 import ChoiceSelector from "./choice-selector.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
@@ -46,13 +46,12 @@ export async function selectCompendiumsDialog(checked = true) {
  * @returns {Promise<TeriockDocument|null>}
  */
 export async function selectDocument(type, config = {}, options = {}) {
+  const label = options.label ?? getTypeLabel(type) ?? type;
   const selected = await DocumentSelector.selectFromConfig({ globalTypes: [type], multi: false, ...config }, {
-    hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
-      name: (options.label ?? TERIOCK.config.document[type]?.label)?.toLocaleLowerCase(game.i18n.lang),
-    }),
+    hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", { name: label.toLocaleLowerCase(game.i18n.lang) }),
     openable: true,
     resolve: true,
-    title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: (options.label ?? TERIOCK.config.document[type])?.label }),
+    title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: label }),
   });
   if (!selected?.length) { return null; }
   return selected[0];

@@ -1,13 +1,12 @@
 import { default as index } from "../../../json/wiki-index.json" with { type: "json" };
 import { icons } from "../display/_module.mjs";
-import documentConfig from "./document-config.mjs";
 
 export default {
   address: "https://wiki.teriock.com/index.php",
   index,
   namespaces: {
     Condition: /** @type {Teriock.Config.WikiNamespaceEntry} */ {
-      icon: documentConfig.condition.icon,
+      icon: icons.manifest.document.condition,
       identifierType: "rule",
     },
     Core: /** @type {Teriock.Config.WikiNamespaceEntry} */ {

@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
@@ -19,6 +20,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     descriptionPath: "description",
     disabledPath: "disabled",
     documentName: "ActiveEffect",
+    icon: icons.manifest.ability.effectType,
     preserveOnRefresh: ["disabled", "duration", "tint", "transfer", ...super.metadata.preserveOnRefresh],
     type: "base",
   });

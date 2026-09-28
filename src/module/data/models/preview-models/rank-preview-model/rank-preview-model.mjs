@@ -23,7 +23,10 @@ export default class RankPreviewModel extends BasePreviewModel {
         sorter: pathSorterFactory("system.archetype"),
       },
       class: { label: "TERIOCK.SYSTEMS.Rank.FIELDS.class.label", sorter: pathSorterFactory("system.class") },
-      default: { label: "COMMON.Default", sorter: TERIOCK.config.document.rank.sorter },
+      default: {
+        label: "COMMON.Default",
+        sorter: pathSorterFactory(...teriock.data.systems.items.RankSystem.metadata.sortPaths),
+      },
       number: { label: "TERIOCK.SYSTEMS.Rank.FIELDS.number.label", sorter: pathSorterFactory("system.number") },
     });
   }

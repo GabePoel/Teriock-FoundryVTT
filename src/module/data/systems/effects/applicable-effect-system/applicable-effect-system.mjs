@@ -104,7 +104,7 @@ export default class ApplicableEffectSystem
    */
   get _statusBar() {
     return {
-      icon: TERIOCK.display.icons.manifest.document.condition,
+      icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
       wrappers: [
         ...Array.from(this.parent.statuses.map(status => CONFIG.statusEffects[status]?.name)),

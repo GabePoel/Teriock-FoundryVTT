@@ -123,7 +123,7 @@ export default class BaseActorSystem
   get embedParts() {
     return Object.assign(super.embedParts, {
       makeTooltip: this.parent.isViewer,
-      subtitle: TERIOCK.config.document[this.parent.type]?.label,
+      subtitle: this.parent.typeLabel,
       text: dotJoin(this._scalingTags),
     });
   }

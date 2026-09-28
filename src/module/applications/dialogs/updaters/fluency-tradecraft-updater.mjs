@@ -1,4 +1,4 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseUpdater from "./base-updater.mjs";
 
@@ -12,7 +12,7 @@ import BaseUpdater from "./base-updater.mjs";
  */
 export default class FluencyTradecraftUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(documentConfig.fluency.icon, "title") } };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.document.fluency, "title") } };
 
   /**
    * Keep the selected tradecraft inside the selected field, so switching field doesn't leave a tradecraft from the

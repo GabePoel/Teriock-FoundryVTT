@@ -1,5 +1,6 @@
 import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { fancifyFields } from "../../../../helpers/utils.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
@@ -40,7 +41,9 @@ export default function BaseSystemMixin(Base) {
       disabledPath: null,
       documentName: "",
       icon: icons.manifest.ui.document,
+      importDialog: false,
       preserveOnRefresh: [],
+      sortPaths: ["name", "_stats.createdTime"],
       tags: {
         armament: false,
         attunable: false,
@@ -64,6 +67,20 @@ export default function BaseSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return { _src: new fields.DocumentUUIDField({ initial: null, nullable: true }) };
+    }
+
+    /**
+     * Register this data model in the `CONFIG`.
+     */
+    static registerModel() {
+      const documentName = this.metadata.documentName;
+      const type = this.metadata.type;
+      if (documentName && type) {
+        CONFIG[documentName].dataModels[type] = this;
+        CONFIG[documentName].typeHints[type] = `TERIOCK.DOCUMENTS.${documentName}.${type}.hint`;
+        CONFIG[documentName].typeIcons[type] = makeIconClass(this.metadata.icon, "title");
+        CONFIG[documentName].typeLabels[type] = `TYPES.${documentName}.${type}`;
+      }
     }
 
     /**

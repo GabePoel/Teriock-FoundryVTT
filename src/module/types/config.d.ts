@@ -1,6 +1,5 @@
 import changeConfig from "../constants/config/change-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
-import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 
 declare global {
   namespace Teriock.Config {
@@ -51,19 +50,6 @@ declare global {
     export type WikiNamespaceEntry = { icon: string, identifierType: string };
 
     export type SimpleEntry = { img?: string, label: string };
-
-    export type DocumentEntry = {
-      documentName: Teriock.Documents.DocumentName;
-      getter: string;
-      hint: string;
-      icon: string;
-      importDialog?: boolean;
-      label: string;
-      pack: string;
-      plural: string;
-      previewModel?: typeof BasePreviewModel;
-      sorter?: Teriock.Sort.DocumentSorter;
-    };
 
     export type ImpactEntry = {
       aliases?: string[];

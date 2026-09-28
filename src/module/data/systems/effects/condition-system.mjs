@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -23,7 +24,11 @@ export default class ConditionSystem
   extends mixClasses(BaseEffectSystem, WikiSystemMixin, TransformationSystemMixin, ThresholdDataMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { initialKind: "flaw", type: "condition" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.condition,
+    initialKind: "flaw",
+    type: "condition",
+  });
 
   /** @inheritDoc */
   static get Execution() {

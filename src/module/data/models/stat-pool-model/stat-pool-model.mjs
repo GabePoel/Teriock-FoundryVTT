@@ -116,7 +116,7 @@ export default class StatPoolModel extends BaseDataModel {
           text: TERIOCK.statuses.conditions["critically-wounded"].description,
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
-        icon: TERIOCK.config.document.condition.icon,
+        icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,
         img: TERIOCK.statuses.conditions["critically-wounded"].img,
         name: TERIOCK.statuses.conditions["critically-wounded"].name,
       });

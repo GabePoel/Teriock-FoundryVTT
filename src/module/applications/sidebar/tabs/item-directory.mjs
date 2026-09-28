@@ -1,4 +1,3 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
 import { TeriockActor } from "../../../documents/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
@@ -13,7 +12,7 @@ export default class TeriockItemDirectory extends mixClasses(ItemDirectory, Docu
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [{
-      icon: makeIconClass(documentConfig.creature.icon, "contextMenu"),
+      icon: makeIconClass(teriock.data.systems.actors.CreatureSystem.metadata.icon, "contextMenu"),
       label: "TERIOCK.SYSTEMS.Species.EMBED.makeCreature",
       onClick: async (_ev, li) => {
         const data = await this._getEntryFromLi(li)?.system.toCreature();

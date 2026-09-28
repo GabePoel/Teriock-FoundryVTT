@@ -1,5 +1,6 @@
 import costConfig from "../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
@@ -72,6 +73,9 @@ export default class AbilitySystem
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "fluency", "resource"],
     crit: { enabled: true, where: "effectData" },
+    icon: icons.manifest.document.ability,
+    importDialog: true,
+    sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "ability",
     visibleTypes: ["ability", "fluency", "resource"],

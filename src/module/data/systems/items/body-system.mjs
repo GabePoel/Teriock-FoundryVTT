@@ -1,5 +1,6 @@
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import systemConfig from "../../../constants/config/system-config.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../helpers/panel.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -17,6 +18,8 @@ import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMixin, ArmamentSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.body,
+    importDialog: true,
     initialKind: "intrinsic",
     kinds: _replace({ intrinsic: effectConfig.kind.intrinsic, ...systemConfig.defaultKinds }),
     tags: { usable: true },

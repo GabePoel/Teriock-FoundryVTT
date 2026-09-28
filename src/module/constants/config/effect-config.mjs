@@ -5,7 +5,7 @@ import systemConfig from "./system-config.mjs";
 export default {
   applicationTargets: {
     actor: { effectType: "consequence", label: "DOCUMENT.Actors" },
-    armament: { effectType: "imbuement", label: "TERIOCK.DOCUMENTS.armament.plural" },
+    armament: { effectType: "imbuement", label: "TERIOCK.DOCUMENTS.Item.armament.plural" },
     item: { effectType: "imbuement", label: "DOCUMENT.Items" },
   },
   cover: ["half-cover", "three-quarters-cover", "full-cover"],

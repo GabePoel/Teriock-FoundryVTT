@@ -62,7 +62,7 @@ export default class UseDocumentsAutomation
     };
     const display = {};
     if (selection.document) {
-      display.icon = TERIOCK.config.document[selection.document.type]?.icon;
+      display.icon = selection.document.system?.metadata?.icon;
       display.label = selection.document.name;
     }
     return [new UseDocumentsActivation({ ...selection.config, display, options: useOptions })];

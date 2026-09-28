@@ -68,8 +68,8 @@ export default actorContext;
 preLocalizeConfig("rollContext.actor");
 
 Hooks.once("teriock.identifiersInit", () => {
-  Object.entries(TERIOCK.config.document).filter(([_k, v]) => v.documentName === "Actor").forEach(([k, v]) => {
-    actorContext[k] = _loc(v?.label);
+  Object.keys(CONFIG.Actor.dataModels).forEach((k) => {
+    actorContext[k] = _loc(`TYPES.Actor.${k}`);
   });
   Object.keys(TERIOCK.config.deathBag.stones).forEach((color) => {
     actorContext[`db.stones.${color}`] = _loc("TERIOCK.TERMS.Stones.ofColor", {

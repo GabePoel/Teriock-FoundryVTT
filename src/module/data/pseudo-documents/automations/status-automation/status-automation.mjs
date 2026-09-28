@@ -107,7 +107,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
         const doc = await fromUuid(uuid);
         return { documentUuid: uuid, img: doc.img, name: doc.name };
       })),
-      icon: TERIOCK.config.document.creature.icon,
+      icon: teriock.data.systems.actors.CreatureSystem.metadata.icon,
       title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
         status: CONFIG.statusEffects[this.status]?.name,
       }),

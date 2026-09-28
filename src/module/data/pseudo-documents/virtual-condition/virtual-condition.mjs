@@ -236,7 +236,7 @@ export default class VirtualCondition
         Panel.toAssociation(trackers, undefined, TERIOCK.display.icons.manifest.ability.target),
       ],
       color: this.color,
-      icon: TERIOCK.config.document.condition.icon,
+      icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,
       img: this.img,
       name: this.name,
     });

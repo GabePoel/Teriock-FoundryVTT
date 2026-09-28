@@ -212,6 +212,14 @@ export default function ChildSystemMixin(Base) {
       return this.constructor.metadata.tags.usable;
     }
 
+    /**
+     * Position of the current kind in this type's kinds.
+     * @returns {number}
+     */
+    get kindIndex() {
+      return Object.keys(this.metadata.kinds).indexOf(this.kind);
+    }
+
     /** @inheritDoc */
     get useText() {
       return _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: this.parent.name });

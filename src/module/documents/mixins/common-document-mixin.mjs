@@ -32,7 +32,7 @@ export default function CommonDocumentMixin(Base) {
      * @returns {string}
      */
     static getDefaultImageForType(type) {
-      if (type && TERIOCK.config.document[type]?.documentName === this.documentName) {
+      if (type && CONFIG[this.documentName].dataModels[type]) {
         return TERIOCK.display.thumbnails.manifest.document[type];
       }
     }
@@ -50,8 +50,10 @@ export default function CommonDocumentMixin(Base) {
       if (!out && operation.notifyOnFailure) {
         ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
           format: {
-            children: TERIOCK.config.document[child?.type]?.plural ?? "",
-            parents: TERIOCK.config.document[parent?.type]?.plural?.toLowerCase() ?? "",
+            children: _loc(`TERIOCK.DOCUMENTS.${child.documentName}.${child.type}.plural`),
+            parents: _loc(`TERIOCK.DOCUMENTS.${parent.documentName}.${parent.type}.plural`).toLocaleLowerCase(
+              game.i18n.lang,
+            ),
           },
           localize: true,
         });

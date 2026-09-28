@@ -1,9 +1,10 @@
+import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata } from "../../../helpers/construction.mjs";
 import BaseCardSystem from "./base-card-system.mjs";
 
 export default class StoneSystem extends BaseCardSystem {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "stone" });
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.stone, type: "stone" });
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {

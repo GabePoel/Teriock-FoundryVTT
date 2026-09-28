@@ -135,7 +135,7 @@ export default function AbstractDataMixin(Base) {
             break;
           case "lower":
           case "lc":
-            textContent = textContent.toLowerCase();
+            textContent = textContent.toLocaleLowerCase(game.i18n.lang);
             break;
           case "title":
           case "tc":

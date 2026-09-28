@@ -21,7 +21,7 @@ export default class ClassSheet extends BasePageSheet {
         relativeTo: this.document,
         secrets: this.document.isOwner ?? game.user.isGM,
       });
-      context.archetype = getName(this.document.system.archetype).toLowerCase();
+      context.archetype = getName(this.document.system.archetype).toLocaleLowerCase(game.i18n.lang);
     }
     const ranks = (await Promise.all(Array.from(this.document.system.ranks).map(r => fromIdentifier(r)))).filter(
       Boolean,

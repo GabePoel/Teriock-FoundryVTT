@@ -2,7 +2,7 @@ import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { prefixObject } from "../../../../helpers/utils.mjs";
+import { getSystemClass, prefixObject } from "../../../../helpers/utils.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
@@ -86,7 +86,7 @@ export default function CommonSystemMixin(Base) {
         openable: true,
         parentId: /** @type {ID<TeriockActiveEffect|TeriockActor|TeriockItem>} */ this.parent.parent?.id,
         struck: this.parent.disabled,
-        subtitle: TERIOCK.config.document[this.parent.type]?.label,
+        subtitle: this.parent.typeLabel,
         text: this._masterText,
         title: this.parent.fullName,
         uuid: this.parent.uuid,
@@ -153,8 +153,8 @@ export default function CommonSystemMixin(Base) {
     async getPanelParts() {
       const parts = Object.assign(await super.getPanelParts(), {
         color: this.color,
-        icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
-        label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,
+        icon: this.metadata.icon,
+        label: this.parent.typeLabel,
       });
       parts.associations ??= [];
       const typeMap = {};
@@ -164,13 +164,18 @@ export default function CommonSystemMixin(Base) {
       for (const c of children) { (typeMap[c.type] ??= []).push(c); }
       for (const type of this.metadata.visibleTypes) {
         if (typeMap[type]) {
+          const model = getSystemClass(type);
           let docs = typeMap[type];
-          if (TERIOCK.config.document[type].documentName === "ActiveEffect") {
+          if (model.metadata.documentName === "ActiveEffect") {
             docs = docs.filter(e => !foundry.utils.hasProperty(e, "system.revealed") || e.system.revealed);
           }
-          docs = docs.sort(TERIOCK.config.document[type]?.sorter ?? pathSorterFactory("name"));
+          docs = docs.sort(pathSorterFactory(...model.metadata.sortPaths));
           parts.associations.push(
-            Panel.toAssociation(docs, TERIOCK.config.document[type].plural, TERIOCK.config.document[type].icon),
+            Panel.toAssociation(
+              docs,
+              _loc(`TERIOCK.DOCUMENTS.${model.metadata.documentName}.${type}.plural`),
+              model.metadata.icon,
+            ),
           );
         }
       }

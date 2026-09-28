@@ -55,7 +55,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     if (this.secret) {
       return {
         blocks: [],
-        icon: TERIOCK.config.document[this.source.type]?.icon ?? this.icon,
+        icon: this.source.system.metadata.icon,
         img: this.source.img,
         name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown", { type: _loc(`TYPES.Item.${this.source.type}`) }),
       };

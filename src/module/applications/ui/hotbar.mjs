@@ -38,7 +38,7 @@ export default class TeriockHotbar extends Hotbar {
             actor: `@UUID[${document.actor?.uuid}]`,
             child: `@UUID[${document.uuid}]`,
             identifier: document.lookupKey,
-            label: TERIOCK.config.document[document.type].label.toLowerCase(),
+            label: document.typeLabel.toLocaleLowerCase(game.i18n.lang),
           }),
         ),
         modal: true,

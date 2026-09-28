@@ -1,4 +1,5 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
@@ -19,6 +20,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.attunement,
     initialKind: "other",
     kinds: _replace(attunementConfig.kind),
     tags: { usable: true },
@@ -128,7 +130,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
           type: this.target.type,
           uuid: this.target.uuid,
         }],
-        icon: TERIOCK.config.document.attunement.icon,
+        icon: this.metadata.icon,
         title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
       }];
     }

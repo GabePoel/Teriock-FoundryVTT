@@ -94,7 +94,7 @@ export default class TeriockRollTable
             uuid: r.uuid,
           })),
           icon: TERIOCK.display.icons.manifest.document.tableResult,
-          title: _loc("TERIOCK.DOCUMENTS.result.plural"),
+          title: _loc("TERIOCK.DOCUMENTS.TableResult.base.plural"),
         }]
         : [],
       bars: [{

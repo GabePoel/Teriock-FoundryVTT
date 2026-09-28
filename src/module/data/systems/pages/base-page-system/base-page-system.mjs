@@ -1,4 +1,3 @@
-import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import {
   BaseSystemMixin,
@@ -59,8 +58,7 @@ export default class BasePageSystem
   /** @inheritDoc */
   async getPanelParts() {
     return Object.assign(await super.getPanelParts(), {
-      icon: this.parent.getFlag("teriock", "journalIcon") ?? documentConfig[this.parent.type]?.icon
-        ?? documentConfig.rule.icon,
+      icon: this.parent.getFlag("teriock", "journalIcon") ?? this.metadata.icon,
     });
   }
 

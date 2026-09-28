@@ -2,7 +2,6 @@ import { CompendiumPriorityMenu, MenuFactory } from "../applications/menus/_modu
 import attributeConfig from "../constants/config/attribute-config.mjs";
 import dieConfig from "../constants/config/death-bag-config.mjs";
 import documentBehaviorConfig from "../constants/config/document-behavior-config.mjs";
-import documentConfig from "../constants/config/document-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
 import { icons } from "../constants/display/_module.mjs";
 import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_module.mjs";
@@ -334,23 +333,11 @@ export const menus = {
             onChange: () => game.teriock.render({ applications: true }),
           },
           suppressionMessageTypes: {
-            default: Object.entries(documentConfig).filter(([_k, v]) =>
-              ["ActiveEffect", "Item"].includes(v.documentName)
-            ).map(([k, _v]) => k),
             scope: "client",
             stacked: true,
-            type: new fields.SetField(
-              new fields.StringField({
-                choices: objectMap(documentConfig, (v) => v.label, {
-                  filter: v => ["ActiveEffect", "Item"].includes(v.documentName),
-                }),
-              }),
-              {
-                initial: Object.entries(documentConfig).filter(([_k, v]) =>
-                  ["ActiveEffect", "Item"].includes(v.documentName)
-                ).map(([k, _v]) => k),
-              },
-            ),
+            type: new fields.SetField(new fields.StringField({ choices: childTypeChoices }), {
+              initial: () => Object.keys(childTypeChoices()),
+            }),
             onChange: () => game.teriock.render({ applications: true }),
           },
         },
@@ -359,6 +346,16 @@ export const menus = {
     icon: icons.manifest.settings.tips,
   },
 };
+
+/**
+ * Labels for effect and item types.
+ * @returns {Record<string, string>}
+ */
+function childTypeChoices() {
+  return Object.fromEntries(
+    ["ActiveEffect", "Item"].flatMap(d => Object.keys(CONFIG[d].dataModels).map(k => [k, CONFIG[d].typeLabels[k]])),
+  );
+}
 
 /**
  * Localize a menu entry.

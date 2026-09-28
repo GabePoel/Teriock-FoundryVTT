@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
 import CleanedEffectSystem from "./cleaned-effect-system.mjs";
@@ -11,7 +12,11 @@ export default class ResourceSystem
   extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, RevelationSystemMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { tags: { usable: true }, type: "resource" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.resource,
+    tags: { usable: true },
+    type: "resource",
+  });
 
   /** @inheritDoc */
   static get _automationTypes() {

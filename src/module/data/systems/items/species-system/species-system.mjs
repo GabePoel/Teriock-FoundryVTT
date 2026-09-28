@@ -2,6 +2,7 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
@@ -52,6 +53,8 @@ export default class SpeciesSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
+    icon: icons.manifest.document.species,
+    importDialog: true,
     initialCompetence: 1,
     type: "species",
     visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],

@@ -1,7 +1,7 @@
 import { createElement } from "../../../../helpers/html.mjs";
 import { sortObjectEntries } from "../../../../helpers/localization.mjs";
 import { kindSorter, pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { getTypeLabel, objectMap } from "../../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 
@@ -33,7 +33,7 @@ export default class BasePreviewModel extends BaseDataModel {
     const tooltip = add.label
       ? _loc(add.label)
       : dataType
-      ? _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: TERIOCK.config.document[dataType].label })
+      ? _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: getTypeLabel(dataType) ?? dataType })
       : _loc("TERIOCK.SHEETS.Common.PREVIEW.addChildDocument");
     return { dataType, dataTypes: types.length > 1 ? types.join(",") : null, tooltip, types };
   }

@@ -1,6 +1,6 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { consolidateWriteOperations } from "../../../../helpers/utils.mjs";
+import { consolidateWriteOperations, getSystemClass } from "../../../../helpers/utils.mjs";
 import { migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 
@@ -346,10 +346,11 @@ export default function TransformationSystemMixin(Base) {
       const disabledStatDiceItems = Object.fromEntries(POOL_STATS.map(stat => [stat, []]));
       const typeMap = this.actor.children.documentsByType;
       for (const t of this.transformation.suppress) {
-        if (TERIOCK.config.document[t].documentName === "ActiveEffect") {
+        const documentName = getSystemClass(t)?.metadata.documentName;
+        if (documentName === "ActiveEffect") {
           disabledEffects.push(...this.#enabledFilter(typeMap[t] || []));
         }
-        if (TERIOCK.config.document[t].documentName === "Item") {
+        if (documentName === "Item") {
           disabledItems.push(...this.#enabledFilter(typeMap[t] || []));
         }
       }

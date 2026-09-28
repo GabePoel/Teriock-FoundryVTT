@@ -45,7 +45,7 @@ export default class DocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.config.document[this.source.type]?.icon ?? super.icon;
+    return this.source.system?.metadata?.icon ?? super.icon;
   }
 
   /** @inheritDoc */

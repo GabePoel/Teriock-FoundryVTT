@@ -1,4 +1,5 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
+import { getSystemClass, getTypeLabel } from "../../../helpers/utils.mjs";
 import { TeriockDialog } from "../../api/_module.mjs";
 import { DocumentSelector, selectDocument } from "../../dialogs/_module.mjs";
 
@@ -40,14 +41,14 @@ export default function DocumentCreationSheetMixin(Base) {
      */
     _connectChildrenCreateMenu() {
       const entries = () =>
-        Object.entries(TERIOCK.config.document).filter(([, config]) =>
-          ["ActiveEffect", "Item"].includes(config.documentName)
-        ).map(([type, config]) => ({
-          icon: makeIconClass(config.icon, "contextMenu"),
-          label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: config.label }),
-          onClick: () => this._createChild(type),
-          visible: target => parseAddTypes(target).includes(type) && this.isEditable,
-        }));
+        ["ActiveEffect", "Item"].flatMap(documentName =>
+          Object.entries(CONFIG[documentName].dataModels).map(([type, model]) => ({
+            icon: makeIconClass(model.metadata.icon, "contextMenu"),
+            label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: _loc(CONFIG[documentName].typeLabels[type]) }),
+            onClick: () => this._createChild(type),
+            visible: target => parseAddTypes(target).includes(type) && this.isEditable,
+          }))
+        );
       this._createContextMenu(entries, ".add-button[data-types]:not([data-type])", {
         eventName: "click",
         fixed: true,
@@ -75,7 +76,7 @@ export default function DocumentCreationSheetMixin(Base) {
         default: {
           const obj = await resolveCreateObject(type);
           if (!obj) { return; }
-          await this.document.createChildDocuments(TERIOCK.config.document[type]?.documentName, [obj], {
+          await this.document.createChildDocuments(getSystemClass(type)?.metadata.documentName, [obj], {
             interactive: true,
           });
         }
@@ -113,9 +114,9 @@ export default function DocumentCreationSheetMixin(Base) {
       const globalIdentifiers = Array.from(classDocument?.system.ranks ?? []);
       const selectedRanks = await DocumentSelector.selectFromConfig({ globalIdentifiers }, {
         hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
-          name: TERIOCK.config.document.rank.label?.toLocaleLowerCase(game.i18n.lang),
+          name: _loc("TYPES.Item.rank").toLocaleLowerCase(game.i18n.lang),
         }),
-        title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: TERIOCK.config.document.rank.label }),
+        title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: _loc("TYPES.Item.rank") }),
       });
       if (!selectedRanks?.length) { return; }
       const referenceRank = selectedRanks[0];
@@ -151,13 +152,11 @@ function parseAddTypes(target) {
  * @returns {Promise<object|null>}
  */
 async function resolveCreateObject(type) {
-  const obj = {
-    name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", { type: TERIOCK.config.document[type]?.label }),
-    type,
-  };
-  if (!TERIOCK.config.document[type]?.importDialog) { return obj; }
-  const label = TERIOCK.config.document[type]?.label;
-  const typeName = label.toLowerCase();
+  const model = getSystemClass(type);
+  const label = getTypeLabel(type) ?? type;
+  const obj = { name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", { type: label }), type };
+  if (!model?.metadata.importDialog) { return obj; }
+  const typeName = label.toLocaleLowerCase(game.i18n.lang);
   const decision = await TeriockDialog.prompt({
     buttons: [{
       icon: makeIconClass(TERIOCK.display.icons.manifest.ui.custom, "button"),

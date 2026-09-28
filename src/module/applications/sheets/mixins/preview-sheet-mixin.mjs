@@ -1,5 +1,5 @@
 import { BasePreviewModel } from "../../../data/models/preview-models/_module.mjs";
-import { fromIdentifier } from "../../../helpers/utils.mjs";
+import { fromIdentifier, getSystemClass } from "../../../helpers/utils.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -25,7 +25,15 @@ export default function PreviewSheetMixin(Base) {
       const children = await this.document.previewed.getContents();
       /** @type {Record<string, Teriock.Previews.PreviewGroup>} */
       const groupRecord = Object.fromEntries(
-        types.map(t => [t, { docs: [], empty: TERIOCK.config.document[t].plural.toLowerCase(), optional: true }]),
+        types.map(
+          t => [t, {
+            docs: [],
+            empty: _loc(`TERIOCK.DOCUMENTS.${getSystemClass(t).metadata.documentName}.${t}.plural`).toLocaleLowerCase(
+              game.i18n.lang,
+            ),
+            optional: true,
+          }]
+        ),
       );
       for (const child of children) { if (groupRecord[child.type]) { groupRecord[child.type].docs.push(child); } }
       return Object.values(groupRecord);

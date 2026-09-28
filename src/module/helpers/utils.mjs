@@ -4,6 +4,7 @@ import { choicesWithNone, localizeChoices } from "./localization.mjs";
 import { toCamelCase } from "./string.mjs";
 
 /**
+ * @import { TypeDataModel } from "@common/abstract/_module.mjs";
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
  * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
  */
@@ -190,10 +191,8 @@ export function consolidateWriteOperations(operations) {
  * @returns {string}
  */
 export function getIcon(identifier) {
-  let icon = TERIOCK.config.document.document.icon;
   const parsed = parseIdentifier(identifier);
-  if (parsed?.type) { icon = TERIOCK.config.document[parsed.type]?.icon ?? icon; }
-  return icon;
+  return getSystemClass(parsed?.type)?.metadata.icon ?? TERIOCK.display.icons.manifest.ui.document;
 }
 
 /**
@@ -379,4 +378,27 @@ export function wikiIndexToConfig(indexKey, localizationPrefix) {
       return [k, entry];
     }),
   ));
+}
+
+/**
+ * Get a system subtype data model from the type.
+ * @param {string} type
+ * @returns {typeof TypeDataModel | null}
+ */
+export function getSystemClass(type) {
+  for (const documentName of ["ActiveEffect", "Actor", "Card", "Item", "JournalEntryPage"]) {
+    const model = CONFIG[documentName].dataModels[type];
+    if (model) { return model; }
+  }
+  return null;
+}
+
+/**
+ * Get the label for a system subtype from the type.
+ * @param {string} type
+ * @returns {string|undefined}
+ */
+export function getTypeLabel(type) {
+  const documentName = getSystemClass(type)?.metadata.documentName;
+  return documentName ? _loc(CONFIG[documentName].typeLabels[type]) : undefined;
 }

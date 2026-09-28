@@ -291,6 +291,14 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * A label for this document type.
+     * @returns {string}
+     */
+    get typeLabel() {
+      return _loc(CONFIG[this.documentName]?.typeLabels?.[this.type] ?? `DOCUMENT.${this.documentName}`);
+    }
+
+    /**
      * Helper to start a benchmark.
      * @param {string} key
      */

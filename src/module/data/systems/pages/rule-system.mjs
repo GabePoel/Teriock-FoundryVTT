@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
@@ -7,7 +8,7 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
  */
 export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "rule" });
+  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.core, type: "rule" });
 
   /**
    * @inheritDoc

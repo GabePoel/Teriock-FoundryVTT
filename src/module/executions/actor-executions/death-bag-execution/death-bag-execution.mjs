@@ -103,7 +103,7 @@ export default class DeathBagExecution extends DocumentExecution {
     /** @type {Teriock.Panels.PanelParts} */
     const resultPanel = {
       bars: [{
-        icon: TERIOCK.config.document.stone.icon,
+        icon: teriock.data.systems.cards.StoneSystem.metadata.icon,
         label: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag"),
         wrappers: this.wrappers,
       }],

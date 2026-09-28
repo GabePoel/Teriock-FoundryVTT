@@ -56,7 +56,7 @@ export default class EquipmentExecution extends ArmamentExecution {
       if (referenceEquipment) { return await referenceEquipment.getPanelParts(); }
       return {
         blocks: [],
-        icon: TERIOCK.config.document.equipment.icon,
+        icon: this.source.system.metadata.icon,
         img: game.teriock.identifiers.getImg(this.source.system.equipmentType)
           ?? TERIOCK.display.thumbnails.manifest.document.equipment,
         name: getName(this.source.system.equipmentType),

@@ -75,7 +75,7 @@ export default class TradecraftAutomation
       auto: this.automatic,
       globalIdentifiers: choices.map(c => `tradecraft:${c}`),
       multi: this.multi,
-    }, { title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: TERIOCK.config.document.tradecraft.label }) });
+    }, { title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: _loc("TYPES.JournalEntryPage.tradecraft") }) });
     return documents.map(d => d.system.identifier);
   }
 

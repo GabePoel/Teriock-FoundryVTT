@@ -3,7 +3,7 @@ import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { listFormat } from "../../helpers/localization.mjs";
 import { isKebabCase } from "../../helpers/string.mjs";
-import { parseIdentifier } from "../../helpers/utils.mjs";
+import { getTypeLabel, parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
@@ -182,8 +182,8 @@ export default class HTMLIdentifierTagsElement extends AbstractAutocompleteSugge
   #resolvePlaceholderTypeLabel() {
     const { types } = this;
     if (!types.length) { return "TERIOCK.COMMON.Identifier"; }
-    if (types.length === 1) { return TERIOCK.config.document[types[0]]?.label ?? types[0]; }
-    return types.map(t => _loc(TERIOCK.config.document[t]?.label ?? t)).join(", ");
+    if (types.length === 1) { return getTypeLabel(types[0]) ?? types[0]; }
+    return types.map(t => getTypeLabel(t) ?? t).join(", ");
   }
 
   /**

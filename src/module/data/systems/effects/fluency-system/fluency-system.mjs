@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
@@ -31,7 +32,12 @@ export default class FluencySystem
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { initialCompetence: 2, tags: { usable: true }, type: "fluency" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.fluency,
+    initialCompetence: 2,
+    tags: { usable: true },
+    type: "fluency",
+  });
 
   /** @inheritDoc */
   static get Execution() {

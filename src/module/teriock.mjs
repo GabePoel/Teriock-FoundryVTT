@@ -7,7 +7,6 @@ import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as executions from "./executions/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
-import { makeIconClass } from "./helpers/icon.mjs";
 import * as setup from "./setup/_module.mjs";
 
 // Register Global References
@@ -138,11 +137,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   const registerSubtypes = (module) => {
     for (const model of Object.values(module)) {
-      if (!foundry.utils.isSubclass(model, foundry.abstract.TypeDataModel)) { continue; }
-      const type = model?.metadata?.type;
-      const documentName = model?.metadata?.documentName;
-      if (!type || !documentName) { continue; }
-      CONFIG[documentName].dataModels[type] = model;
+      if (foundry.utils.isSubclass(model, foundry.abstract.TypeDataModel)) { model.registerModel?.(); }
     }
   };
 
@@ -208,16 +203,6 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.User.collection = documents.collections.TeriockUsers;
   CONFIG.User.documentClass = documents.TeriockUser;
-
-  // Configure Type Icons and Hints
-  // ------------------------------
-
-  for (const [k, v] of Object.entries(constants.config.document)) {
-    if (v?.documentName) {
-      CONFIG[v.documentName].typeIcons[k] = makeIconClass(v.icon, "title");
-      CONFIG[v.documentName].typeHints[k] = v.hint;
-    }
-  }
 
   // Configure Sheets
   // ----------------

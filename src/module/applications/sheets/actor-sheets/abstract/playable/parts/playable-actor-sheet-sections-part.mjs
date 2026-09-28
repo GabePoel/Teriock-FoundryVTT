@@ -1,7 +1,14 @@
 import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
-import documentConfig from "../../../../../../constants/config/document-config.mjs";
 import { icons } from "../../../../../../constants/display/_module.mjs";
 import * as previews from "../../../../../../data/models/preview-models/_module.mjs";
+import { InventorySystem } from "../../../../../../data/systems/actors/_module.mjs";
+import {
+  AbilitySystem,
+  ConditionSystem,
+  FluencySystem,
+  ResourceSystem,
+} from "../../../../../../data/systems/effects/_module.mjs";
+import { PowerSystem, RankSystem } from "../../../../../../data/systems/items/_module.mjs";
 
 /**
  * @import { ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
@@ -48,7 +55,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
         docs: group.types.flatMap(t =>
           this.document.system.affinities.getTypeSync(t, { active: true, isPassive: true })
         ),
-        empty: _loc(group.label).toLowerCase(),
+        empty: _loc(group.label).toLocaleLowerCase(game.i18n.lang),
         optional: true,
       }));
     }
@@ -60,17 +67,17 @@ export default function PlayableActorSheetSectionsPart(Base) {
     static async #previewGroupConsequence() {
       return [{
         docs: this.document.previewed.getTypeSync("consequence"),
-        empty: TERIOCK.config.document.consequence.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.consequence.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.previewed.getTypeSync("attunement"),
-        empty: TERIOCK.config.document.attunement.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.attunement.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.effects.filter(e => ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus),
-        empty: TERIOCK.config.document.effect.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.effect.plural").toLocaleLowerCase(game.i18n.lang),
         optional: true,
       }, {
         docs: this.document.system.virtualConditions.contents,
-        empty: TERIOCK.config.document.condition.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.condition.plural").toLocaleLowerCase(game.i18n.lang),
       }];
     }
 
@@ -81,13 +88,13 @@ export default function PlayableActorSheetSectionsPart(Base) {
     static async #previewGroupEquipment() {
       return [{
         docs: this.document.previewed.getTypeSync("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
-        empty: TERIOCK.config.document.equipment.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.equipment.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.previewed.getTypeSync("body"),
-        empty: TERIOCK.config.document.body.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.body.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.previewed.getTypeSync("mount"),
-        empty: TERIOCK.config.document.mount.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.mount.plural").toLocaleLowerCase(game.i18n.lang),
       }];
     }
 
@@ -98,7 +105,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
     static async #previewGroupFluency() {
       return [{
         docs: this.document.previewed.getTypeSync("fluency"),
-        empty: TERIOCK.config.document.fluency.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.fluency.plural").toLocaleLowerCase(game.i18n.lang),
       }];
     }
 
@@ -109,10 +116,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
     static async #previewGroupPower() {
       return [{
         docs: this.document.previewed.getTypeSync("species"),
-        empty: TERIOCK.config.document.species.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.species.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.previewed.getTypeSync("power"),
-        empty: TERIOCK.config.document.power.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.power.plural").toLocaleLowerCase(game.i18n.lang),
       }];
     }
 
@@ -123,10 +130,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
     static async #previewGroupRank() {
       return [{
         docs: this.document.previewed.getTypeSync("rank"),
-        empty: TERIOCK.config.document.rank.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.rank.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.previewed.getTypeSync("archetype"),
-        empty: TERIOCK.config.document.archetype.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.Item.archetype.plural").toLocaleLowerCase(game.i18n.lang),
         optional: true,
       }];
     }
@@ -139,13 +146,17 @@ export default function PlayableActorSheetSectionsPart(Base) {
       const consumable = "TERIOCK.SHEETS.Actor.TABS.Resources.consumable";
       return [{
         docs: this.document.previewed.getTypeSync("resource"),
-        empty: TERIOCK.config.document.resource.plural.toLowerCase(),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.resource.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
         docs: this.document.previewed.getTypeSync("ability").filter(a => a.system.consumable),
-        empty: _loc(consumable, { value: TERIOCK.config.document.ability.plural.toLowerCase() }),
+        empty: _loc(consumable, {
+          value: _loc("TERIOCK.DOCUMENTS.ActiveEffect.ability.plural").toLocaleLowerCase(game.i18n.lang),
+        }),
       }, {
         docs: this.document.previewed.getTypeSync("property").filter(p => p.system.consumable),
-        empty: _loc(consumable, { value: TERIOCK.config.document.property.plural.toLowerCase() }),
+        empty: _loc(consumable, {
+          value: _loc("TERIOCK.DOCUMENTS.ActiveEffect.property.plural").toLocaleLowerCase(game.i18n.lang),
+        }),
       }];
     }
 
@@ -155,7 +166,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
      */
     static SECTIONS = [{
       dragTypes: ["fluency"],
-      icon: documentConfig.fluency.icon,
+      icon: FluencySystem.metadata.icon,
       id: "tradecrafts",
       label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
       preview: {
@@ -164,7 +175,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
         model: previews.FluencyPreviewModel,
       },
     }, {
-      icon: documentConfig.ability.icon,
+      icon: AbilitySystem.metadata.icon,
       id: "abilities",
       label: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
       preview: {
@@ -174,7 +185,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
       },
     }, {
       dragTypes: ["equipment", "body", "mount"],
-      icon: documentConfig.inventory.icon,
+      icon: InventorySystem.metadata.icon,
       id: "inventory",
       label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
       preview: {
@@ -185,13 +196,13 @@ export default function PlayableActorSheetSectionsPart(Base) {
       },
     }, {
       dragTypes: ["rank", "archetype"],
-      icon: documentConfig.rank.icon,
+      icon: RankSystem.metadata.icon,
       id: "classes",
       label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
       preview: { addButton: { type: "rank" }, groups: this.#previewGroupRank, model: previews.RankPreviewModel },
     }, {
       dragTypes: ["power", "species"],
-      icon: documentConfig.power.icon,
+      icon: PowerSystem.metadata.icon,
       id: "powers",
       label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
       preview: {
@@ -201,7 +212,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
       },
     }, {
       dragTypes: ["resource"],
-      icon: documentConfig.resource.icon,
+      icon: ResourceSystem.metadata.icon,
       id: "resources",
       label: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
       preview: {
@@ -211,7 +222,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
       },
     }, {
       dragTypes: ["attunement", "condition", "consequence", "cover", "hack"],
-      icon: documentConfig.condition.icon,
+      icon: ConditionSystem.metadata.icon,
       id: "effects",
       label: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
       preview: {
