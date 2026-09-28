@@ -1,7 +1,7 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { consolidateWriteOperations, getSystemClass } from "../../../../helpers/utils.mjs";
-import { migrateThumbnails } from "../../../fields/tools/migrations.mjs";
+import { migrateRename, migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
@@ -71,10 +71,7 @@ export default function TransformationSystemMixin(Base) {
     /** @inheritDoc */
     static migrateData(source, options) {
       migrateThumbnails(source, "transformation.img", "transformation.ringImg");
-      if (source.transformation && "reset" in source.transformation) {
-        source.transformation.resets ??= source.transformation.reset;
-        delete source.transformation.reset;
-      }
+      migrateRename(source, "transformation.reset", "transformation.resets");
       return super.migrateData(source, options);
     }
 

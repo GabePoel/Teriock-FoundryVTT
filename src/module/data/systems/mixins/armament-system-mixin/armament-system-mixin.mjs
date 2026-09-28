@@ -91,13 +91,13 @@ export default function ArmamentSystemMixin(Base) {
     }
 
     /** @inheritDoc */
-    static migrateData(source) {
+    static migrateData(source, options) {
       if ("fightingStyle" in source) {
         source.style ??= source.fightingStyle ? toKebabCase(source.fightingStyle) : null;
         delete source.fightingStyle;
       }
       migrateIterables(source, "equipmentClasses");
-      return super.migrateData(source);
+      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */

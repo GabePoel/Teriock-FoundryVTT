@@ -1,5 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { omit } from "../../../../helpers/utils.mjs";
+import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -24,10 +25,7 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   static migrateData(source, options) {
-    if ("reset" in source) {
-      source.resets ??= source.reset;
-      delete source.reset;
-    }
+    migrateRename(source, "reset", "resets");
     return super.migrateData(source, options);
   }
 

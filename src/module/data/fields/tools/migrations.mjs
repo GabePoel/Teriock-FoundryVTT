@@ -65,6 +65,19 @@ export function migrateIterables(source, ...fields) {
 }
 
 /**
+ * Migrate a renamed field.
+ * @param {object} source
+ * @param {string} oldPath
+ * @param {string} newPath
+ */
+export function migrateRename(source, oldPath, newPath) {
+  if (foundry.utils.hasProperty(source, oldPath) && !foundry.utils.hasProperty(source, newPath)) {
+    foundry.utils.setProperty(source, newPath, foundry.utils.getProperty(source, oldPath));
+  }
+  foundry.utils.deleteProperty(source, oldPath);
+}
+
+/**
  * Migrate renamed status ids.
  * @param {object} source
  * @param {...string} fields
