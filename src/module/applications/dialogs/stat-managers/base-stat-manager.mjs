@@ -38,21 +38,6 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
   }
 
   /**
-   * Rolls a stat die.
-   * @param {PointerEvent} _event
-   * @param {HTMLElement} target
-   * @returns {Promise<void>}
-   * @this {BaseStatManager}
-   */
-  static async _onRollStatDie(_event, target) {
-    if (!game.teriock.checkEditable(this)) { return; }
-    const statDie = this._getStatDie(target);
-    const criticallyWounded = this.document.statuses.has("critically-wounded");
-    await statDie.use(this.state.consumeStatDice ?? true, { substitution: this.state.substitution });
-    if (!criticallyWounded) { await this.document.system.takeAwaken(); }
-  }
-
-  /**
    * Creates a new stat manager instance.
    * @param {TeriockActor} actor
    * @param {Teriock.Dialog.StatDialogOptions} [options]
@@ -75,6 +60,14 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
 
   /** @type {FormulaField} */
   _substitutionField;
+
+  /**
+   * How a stat die rolls for harm.
+   * @returns {{ from: string, impact: Teriock.Keys.Impact, to: string }}
+   */
+  get _harmRoll() {
+    return { from: "hp", impact: "damage", to: "holy" };
+  }
 
   /**
    * Apply the dialog substitution to a stat die roll formula.
@@ -122,5 +115,18 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
       }];
     }
     return context;
+  }
+
+  /** @inheritDoc */
+  async _rollStatDie(event, statDie) {
+    if (!this.state.forHarm) { return super._rollStatDie(event, statDie); }
+    const { from, impact, to } = this._harmRoll;
+    const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
+      formula: this._getStatDieRollFormula(statDie.formula.replace(from, to)),
+      impact,
+    });
+    rollActivation.event = event;
+    await rollActivation.primaryAction();
+    if (this.state.consumeStatDice) { await statDie.toggle(true); }
   }
 }

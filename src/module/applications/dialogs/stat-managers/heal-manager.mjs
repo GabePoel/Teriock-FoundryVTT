@@ -12,10 +12,7 @@ const { fields } = foundry.data;
 export default class HealManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: {
-      rollStatDie: { buttons: [0, 2], handler: this._onRollStatDie },
-      takeHack: { buttons: [0, 2], handler: this._onTakeUnhack },
-    },
+    actions: { takeHack: { buttons: [0, 2], handler: this._onTakeUnhack } },
     window: { icon: makeIconClass(impactConfig.healing.icon, "title"), title: "TERIOCK.DIALOGS.Heal.title" },
   };
 
@@ -24,27 +21,6 @@ export default class HealManager extends BaseStatManager {
     content: { scrollable: [""], template: "teriock/dialogs/heal-manager" },
     footer: super.PARTS.footer,
   };
-
-  /**
-   * @inheritDoc
-   * @this {HealManager}
-   */
-  static async _onRollStatDie(event, target) {
-    if (!game.teriock.checkEditable(this)) { return; }
-    if (event.button === 2) { return this._unrollStatDie(event, target); }
-    const statDie = this._getStatDie(target);
-    if (this.state.forHarm) {
-      const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
-        formula: this._getStatDieRollFormula(statDie.formula.replace("hp", "holy")),
-        impact: "damage",
-      });
-      rollActivation.event = event;
-      await rollActivation.primaryAction();
-      if (this.state.consumeStatDice) { await statDie.toggle(true); }
-    } else {
-      await statDie.use(this.state.consumeStatDice, { substitution: this.state.substitution });
-    }
-  }
 
   /**
    * Creates a new healing manager instance.

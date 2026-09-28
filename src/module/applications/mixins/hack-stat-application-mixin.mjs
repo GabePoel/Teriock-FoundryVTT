@@ -39,10 +39,7 @@ export default function HackStatApplicationMixin(Base) {
     static async _onRollStatDie(event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
       if (event.button === 2) { return this._unrollStatDie(event, target); }
-      const statDie = this._getStatDie(target);
-      const criticallyWounded = this.document.statuses.has("critically-wounded");
-      await statDie.use(this.state?.consumeStatDice ?? true);
-      if (!criticallyWounded) { await this.document.system.takeAwaken(); }
+      await this._rollStatDie(event, this._getStatDie(target));
     }
 
     /**
@@ -190,6 +187,18 @@ export default function HackStatApplicationMixin(Base) {
       if (!temp) { tempHide = "display: none;"; }
       else if (max === value && !morganti) { tempHide = "border-right: none;"; }
       return { lost, morganti: morgantiPct, remaining, temp: tempPct, tempHide };
+    }
+
+    /**
+     * Rolls a stat die and awakens the actor unless they're critically wounded.
+     * @param {PointerEvent} _event
+     * @param {StatDie} statDie
+     * @returns {Promise<void>}
+     */
+    async _rollStatDie(_event, statDie) {
+      const criticallyWounded = this.document.statuses.has("critically-wounded");
+      await statDie.use(this.state?.consumeStatDice ?? true, { substitution: this.state?.substitution });
+      if (!criticallyWounded) { await this.document.system.takeAwaken(); }
     }
 
     /**

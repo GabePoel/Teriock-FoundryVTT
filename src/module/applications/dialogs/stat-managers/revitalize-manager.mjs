@@ -12,7 +12,6 @@ const { fields } = foundry.data;
 export default class RevitalizeManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { rollStatDie: { buttons: [0, 2], handler: this._onRollStatDie } },
     window: { icon: makeIconClass(impactConfig.revitalizing.icon, "title"), title: "TERIOCK.DIALOGS.Revitalize.title" },
   };
 
@@ -21,24 +20,6 @@ export default class RevitalizeManager extends BaseStatManager {
     content: { scrollable: [""], template: "teriock/dialogs/revitalize-manager" },
     footer: super.PARTS.footer,
   };
-
-  /** @inheritDoc */
-  static async _onRollStatDie(event, target) {
-    if (!game.teriock.checkEditable(this)) { return; }
-    if (event.button === 2) { return this._unrollStatDie(event, target); }
-    const statDie = this._getStatDie(target);
-    if (this.state.forHarm) {
-      const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
-        formula: this._getStatDieRollFormula(statDie.formula.replace("mp", "mana")),
-        impact: "drain",
-      });
-      rollActivation.event = event;
-      await rollActivation.primaryAction();
-      if (this.state.consumeStatDice) { await statDie.toggle(true); }
-    } else {
-      await super._onRollStatDie(event, target);
-    }
-  }
 
   /**
    * Creates a new revitalization manager instance.
@@ -58,6 +39,11 @@ export default class RevitalizeManager extends BaseStatManager {
       initial: true,
       label: _loc("TERIOCK.AUTOMATIONS.Revitalize.FIELDS.consumeStatDice.label"),
     });
+  }
+
+  /** @inheritDoc */
+  get _harmRoll() {
+    return { from: "mp", impact: "drain", to: "mana" };
   }
 
   /** @inheritDoc */
