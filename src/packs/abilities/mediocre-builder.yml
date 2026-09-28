@@ -1,0 +1,33 @@
+_id: 04a1b14fc1004070
+_key: "!effects!04a1b14fc1004070"
+img: icons/skills/trades/construction-carpentry-hammer-gray.webp
+name: Mediocre Builder
+showIcon: 0
+system:
+  automations:
+    - _id: IKMvlXvrt4s2lQnA
+      changes:
+        - key: system.tradecrafts.builder.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-2"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: mediocre-builder
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are a @Identifier[keyword:mediocre]{mediocre} @Identifier[tradecraft:builder]{builder}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

@@ -1,0 +1,33 @@
+_id: cbec233f5f05b599
+_key: "!effects!cbec233f5f05b599"
+img: icons/skills/social/trading-injustice-scale-gray.webp
+name: Inferior Trader
+showIcon: 0
+system:
+  automations:
+    - _id: 9hjbdJKFvzTFEPrX
+      changes:
+        - key: system.tradecrafts.trader.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-trader
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:trader]{trader}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

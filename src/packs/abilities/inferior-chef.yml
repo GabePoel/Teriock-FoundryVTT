@@ -1,0 +1,33 @@
+_id: fdd85f662d8820cd
+_key: "!effects!fdd85f662d8820cd"
+img: icons/consumables/food/cheese-wedge-swiss-white.webp
+name: Inferior Chef
+showIcon: 0
+system:
+  automations:
+    - _id: 5lD3tvLccKwwHcqG
+      changes:
+        - key: system.tradecrafts.chef.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-chef
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:chef]{chef}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

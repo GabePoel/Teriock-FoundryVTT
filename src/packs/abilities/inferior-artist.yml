@@ -1,0 +1,33 @@
+_id: 6b27b296908b96f6
+_key: "!effects!6b27b296908b96f6"
+img: icons/consumables/drinks/wine-amphora-cup-gray.webp
+name: Inferior Artist
+showIcon: 0
+system:
+  automations:
+    - _id: AvCgjkGLfH3y5BRy
+      changes:
+        - key: system.tradecrafts.artist.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-artist
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:artist]{artist}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

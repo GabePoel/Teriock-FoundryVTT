@@ -1,0 +1,33 @@
+_id: 9c70dfb7ec6e5e8f
+_key: "!effects!9c70dfb7ec6e5e8f"
+img: icons/skills/trades/smithing-anvil-brown.webp
+name: Inferior Blacksmith
+showIcon: 0
+system:
+  automations:
+    - _id: UNDc9s2b8Dc8XZdM
+      changes:
+        - key: system.tradecrafts.blacksmith.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-blacksmith
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:blacksmith]{blacksmith}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

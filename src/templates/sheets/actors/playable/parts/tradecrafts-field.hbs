@@ -6,14 +6,14 @@
     >
       {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.label"}}
     </div>
-    <div
-      class="tradecraft-panel-symbol field-panel-header"
-      data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.tooltip"}}'
-    >
-      {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.label"}}
-    </div>
     <div class="tradecraft-panel-name field-panel-header gi3">
       <span data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.name.tooltip"}}'>{{ field.label }}</span>
+    </div>
+    <div
+      class="tradecraft-panel-symbol field-panel-header"
+      data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.tooltip"}}'
+    >
+      {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.label"}}
     </div>
     <div
       class="tradecraft-panel-symbol field-panel-header"
@@ -57,11 +57,17 @@
           <i class='selected {{path @root/tradecraftDisplay name "sourceCompetenceIconClass"}}'></i>
         </div>
         <div
+          class="tradecraft-panel-name thover gi3 draggable"
+          data-action="rollTradecraft"
+          data-tradecraft="{{ name }}"
+          data-uuid="{{lookup @root/tradecraftMacros name}}"
+        >
+          {{ tradecraft.label }}
+        </div>
+        <div
           class="
             tradecraft-panel-symbol
-            thover
-            grid-fill
-            affix-icon
+            affix
             {{#if (and
             @root/highlightModified
             (not (eq
@@ -70,23 +76,22 @@
               modified
             {{/if}}
           "
-          data-action="increment"
-          data-path="system.tradecrafts.{{ name }}.score"
-          data-tradecraft="{{ name }}"
           data-tooltip='{{path @root/tradecraftDisplay name "scoreLabel"}}'
-          data-tooltip-direction="LEFT"
+          data-tooltip-direction="RIGHT"
           data-tooltip-class=""
         >
-          <i class='unselected {{path @root/tradecraftDisplay name "scoreIconClass"}}'></i>
-          <i class='selected {{path @root/tradecraftDisplay name "sourceScoreIconClass"}}'></i>
-        </div>
-        <div
-          class="tradecraft-panel-name thover gi3 draggable"
-          data-action="rollTradecraft"
-          data-tradecraft="{{ name }}"
-          data-uuid="{{lookup @root/tradecraftMacros name}}"
-        >
-          {{ tradecraft.label }}
+          <div class="unselected">
+            <span class="tradecraft-score-input tcenter ttransparent">
+              {{path @root/system.tradecrafts name "score"}}
+            </span>
+          </div>
+          {{formInput
+            (path @root/systemFields "tradecrafts.fields" name "fields.score")
+            classes="tradecraft-score-input tcenter ttransparent selected"
+            dataset=(object noScroll="true")
+            type="number"
+            value=(path @root/system._source.tradecrafts name "score")
+          }}
         </div>
         <div class="tradecraft-panel-symbol">{{sign (path @root/system.tradecrafts name 'value')}}</div>
       </div>

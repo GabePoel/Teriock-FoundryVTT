@@ -1,0 +1,33 @@
+_id: 3e95dd9ead658bd8
+_key: "!effects!3e95dd9ead658bd8"
+img: icons/skills/trades/construction-carpentry-hammer-gray.webp
+name: Inferior Builder
+showIcon: 0
+system:
+  automations:
+    - _id: h0qkMLAI9fo32UC3
+      changes:
+        - key: system.tradecrafts.builder.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-builder
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:builder]{builder}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

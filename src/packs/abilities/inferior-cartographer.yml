@@ -1,0 +1,33 @@
+_id: 52034db9d68de11b
+_key: "!effects!52034db9d68de11b"
+img: icons/tools/navigation/map-marked-blue.webp
+name: Inferior Cartographer
+showIcon: 0
+system:
+  automations:
+    - _id: N4mvObjnXzBpghC2
+      changes:
+        - key: system.tradecrafts.cartographer.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-cartographer
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:cartographer]{cartographer}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

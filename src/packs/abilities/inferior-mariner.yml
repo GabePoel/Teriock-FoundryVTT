@@ -1,0 +1,33 @@
+_id: d0bdb9ea7ad5ee37
+_key: "!effects!d0bdb9ea7ad5ee37"
+img: icons/skills/trades/profession-sailing-ship.webp
+name: Inferior Mariner
+showIcon: 0
+system:
+  automations:
+    - _id: GoBEsmazwGLNpqWl
+      changes:
+        - key: system.tradecrafts.mariner.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-mariner
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:mariner]{mariner}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

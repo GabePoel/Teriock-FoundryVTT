@@ -1,0 +1,33 @@
+_id: 92b9ce2c7c17d549
+_key: "!effects!92b9ce2c7c17d549"
+img: icons/skills/trades/gaming-gambling-dice-gray.webp
+name: Inferior Gambler
+showIcon: 0
+system:
+  automations:
+    - _id: iGy5zVpuv3AQd1QR
+      changes:
+        - key: system.tradecrafts.gambler.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-gambler
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:gambler]{gambler}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

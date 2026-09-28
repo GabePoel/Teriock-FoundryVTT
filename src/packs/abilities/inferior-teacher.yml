@@ -1,0 +1,33 @@
+_id: e2a16b7ab93f4d7d
+_key: "!effects!e2a16b7ab93f4d7d"
+img: icons/skills/trades/academics-study-reading-book.webp
+name: Inferior Teacher
+showIcon: 0
+system:
+  automations:
+    - _id: ZVd1Dqch6B2FM5Po
+      changes:
+        - key: system.tradecrafts.teacher.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-teacher
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:teacher]{teacher}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

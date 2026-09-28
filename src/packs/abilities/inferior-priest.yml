@@ -1,0 +1,33 @@
+_id: 9d1eaa655b193d12
+_key: "!effects!9d1eaa655b193d12"
+img: icons/environment/settlement/church.webp
+name: Inferior Priest
+showIcon: 0
+system:
+  automations:
+    - _id: 3nzeuOfrlZj3U1DJ
+      changes:
+        - key: system.tradecrafts.priest.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-priest
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:priest]{priest}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

@@ -1,0 +1,33 @@
+_id: e23dd4cc422c76e5
+_key: "!effects!e23dd4cc422c76e5"
+img: icons/skills/trades/security-locksmith-key-gray.webp
+name: Inferior Locksmith
+showIcon: 0
+system:
+  automations:
+    - _id: b9g6jtSF1jX1YPcS
+      changes:
+        - key: system.tradecrafts.locksmith.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-locksmith
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:locksmith]{locksmith}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

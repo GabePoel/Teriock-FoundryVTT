@@ -1,0 +1,33 @@
+_id: c4a03b4e5e70079b
+_key: "!effects!c4a03b4e5e70079b"
+img: icons/skills/social/diplomacy-offering-ritual.webp
+name: Mediocre Diplomat
+showIcon: 0
+system:
+  automations:
+    - _id: m8rHXBzVlhOcn3m6
+      changes:
+        - key: system.tradecrafts.diplomat.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-2"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: mediocre-diplomat
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are a @Identifier[keyword:mediocre]{mediocre} @Identifier[tradecraft:diplomat]{diplomat}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

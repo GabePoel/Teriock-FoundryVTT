@@ -1,0 +1,33 @@
+_id: 2024f6e72bc274d3
+_key: "!effects!2024f6e72bc274d3"
+img: icons/skills/social/diplomacy-offering-ritual.webp
+name: Inferior Diplomat
+showIcon: 0
+system:
+  automations:
+    - _id: MMpg5LCePtuE6Vvy
+      changes:
+        - key: system.tradecrafts.diplomat.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-diplomat
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:diplomat]{diplomat}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

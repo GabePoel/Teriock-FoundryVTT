@@ -1,0 +1,33 @@
+_id: 51f212f69aae0f1a
+_key: "!effects!51f212f69aae0f1a"
+img: icons/skills/trades/textiles-knitting-yarn-red.webp
+name: Inferior Tailor
+showIcon: 0
+system:
+  automations:
+    - _id: 9tdDZvfkdWywVCq9
+      changes:
+        - key: system.tradecrafts.tailor.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-tailor
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:tailor]{tailor}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

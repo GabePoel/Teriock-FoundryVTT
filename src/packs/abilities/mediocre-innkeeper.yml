@@ -1,0 +1,33 @@
+_id: c5800252e754f9aa
+_key: "!effects!c5800252e754f9aa"
+img: icons/consumables/drinks/pitcher-dripping-white.webp
+name: Mediocre Innkeeper
+showIcon: 0
+system:
+  automations:
+    - _id: tRoh77cewVHjimVw
+      changes:
+        - key: system.tradecrafts.innkeeper.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-2"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: mediocre-innkeeper
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are a @Identifier[keyword:mediocre]{mediocre} @Identifier[tradecraft:innkeeper]{innkeeper}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

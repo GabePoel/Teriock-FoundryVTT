@@ -1,0 +1,33 @@
+_id: e47129e2277080aa
+_key: "!effects!e47129e2277080aa"
+img: icons/skills/trades/farming-plant-seeds-gray.webp
+name: Inferior Farmer
+showIcon: 0
+system:
+  automations:
+    - _id: n4vylt9K4Z9iMrWL
+      changes:
+        - key: system.tradecrafts.farmer.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-farmer
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:farmer]{farmer}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability

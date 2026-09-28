@@ -1,0 +1,33 @@
+_id: 9c76bf271ed9dc32
+_key: "!effects!9c76bf271ed9dc32"
+img: icons/consumables/drinks/pitcher-dripping-white.webp
+name: Inferior Innkeeper
+showIcon: 0
+system:
+  automations:
+    - _id: mmQPlmyK4FcI9cfZ
+      changes:
+        - key: system.tradecrafts.innkeeper.score
+          phase: derived
+          priority: 5
+          target: Actor
+          type: downgrade
+          value: "-1"
+      type: changes
+  delivery: self
+  duration:
+    unit: unlimited
+  executionTime:
+    base: passive
+  identifier: inferior-innkeeper
+  interaction: manifest
+  maneuver: passive
+  overview:
+    base: <p>You are an @Identifier[keyword:inferior]{inferior} @Identifier[tradecraft:innkeeper]{innkeeper}.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  targets:
+    - self
+type: ability
