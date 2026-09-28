@@ -1,5 +1,5 @@
-import { simplifyTags } from "../../../../../helpers/panel.mjs";
 import { getName } from "../../../../../helpers/utils.mjs";
+import { Panel } from "../../../../pseudo-documents/_module.mjs";
 
 /**
  * Equipment panel part.
@@ -23,20 +23,20 @@ export default function EquipmentPanelPart(Base) {
         {
           icon: TERIOCK.display.icons.manifest.equipment.equipmentType,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
-          wrappers: [getName(this.equipmentType), this.range.description, ...simplifyTags(this._armamentTags)],
+          wrappers: [getName(this.equipmentType), this.range.description, ...Panel.simplifyTags(this._armamentTags)],
         },
         this._attackBar,
         this._defenseBar,
         {
           icon: TERIOCK.display.icons.manifest.equipment.equipmentClasses,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
-          wrappers: [...simplifyTags(this._equipmentClassesTags)],
+          wrappers: [...Panel.simplifyTags(this._equipmentClassesTags)],
         },
         {
           icon: TERIOCK.display.icons.manifest.armament.load,
           label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.load"),
           wrappers: [
-            ...simplifyTags(this._identificationTags),
+            ...Panel.simplifyTags(this._identificationTags),
             ...this._attunableWrappers,
             _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.weight }),
             _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", { value: this.minStr }),

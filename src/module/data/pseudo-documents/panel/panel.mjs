@@ -107,6 +107,19 @@ export default class Panel extends BasePseudoDocument {
   }
 
   /**
+   * Simplify display tags into the plain strings that panel bars use.
+   * @param {Teriock.Display.DisplayTag[]} tags
+   * @returns {string[]}
+   */
+  static simplifyTags(tags) {
+    return tags.map(tag => {
+      if (typeof tag === "string") { return _loc(tag); }
+      if (typeof tag.label === "string") { return _loc(tag.label); }
+      return "";
+    });
+  }
+
+  /**
    * Wrap Documents as a Panel association.
    * @param {TeriockDocument[]} documents
    * @param {string} title

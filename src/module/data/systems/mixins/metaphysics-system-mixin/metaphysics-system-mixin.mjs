@@ -1,7 +1,7 @@
-import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 
 /**
  * Data mixin to support metaphysics tags.
@@ -70,7 +70,7 @@ export default function MetaphysicsSystemMixin(Base) {
       return {
         icon: TERIOCK.display.icons.manifest.ability.effectType,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-        wrappers: simplifyTags(this._metaphysicsTags),
+        wrappers: Panel.simplifyTags(this._metaphysicsTags),
       };
     }
 

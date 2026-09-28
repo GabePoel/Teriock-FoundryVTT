@@ -1,3 +1,4 @@
+import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
@@ -287,7 +288,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
       const warning = _loc("SIDEBAR.DeleteWarning", { type });
       content = `<p><strong>${question}</strong> ${warning}</p>`;
     }
-    return foundry.applications.api.DialogV2.confirm(
+    return TeriockDialog.confirm(
       foundry.utils.mergeObject({
         content,
         window: {

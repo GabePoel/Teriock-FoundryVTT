@@ -6,12 +6,12 @@ import { icons } from "../../../../constants/display/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
-import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { CompetenceDisplaySystemMixin, StatGiverSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -179,7 +179,7 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.text = dotJoin([...simplifyTags(this._traitTags), parts.text]);
+    parts.text = dotJoin([...Panel.simplifyTags(this._traitTags), parts.text]);
     parts.subtitle = _loc("TYPES.Item.species");
     return parts;
   }

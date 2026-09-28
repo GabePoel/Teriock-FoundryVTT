@@ -2,7 +2,7 @@ import effectConfig from "../../../constants/config/effect-config.mjs";
 import systemConfig from "../../../constants/config/system-config.mjs";
 import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { simplifyTags } from "../../../helpers/panel.mjs";
+import { Panel } from "../../pseudo-documents/_module.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 
@@ -40,8 +40,8 @@ export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMix
         label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
         wrappers: [
           this.range.description,
-          ...simplifyTags(this._equipmentClassesTags),
-          ...simplifyTags(this._armamentTags),
+          ...Panel.simplifyTags(this._equipmentClassesTags),
+          ...Panel.simplifyTags(this._armamentTags),
         ],
       }]),
     };

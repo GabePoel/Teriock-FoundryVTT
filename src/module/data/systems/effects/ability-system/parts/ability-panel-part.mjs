@@ -1,5 +1,5 @@
 import { elementClass } from "../../../../../helpers/html.mjs";
-import { simplifyTags } from "../../../../../helpers/panel.mjs";
+import { Panel } from "../../../../pseudo-documents/_module.mjs";
 
 /**
  * Ability panel part.
@@ -29,11 +29,11 @@ export default function AbilityPanelPart(Base) {
       }, {
         icon: TERIOCK.display.icons.manifest.ability.cost,
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.costs.label"),
-        wrappers: simplifyTags(this._costTags),
+        wrappers: Panel.simplifyTags(this._costTags),
       }, {
         icon: TERIOCK.display.icons.manifest.ui.info,
         label: "TERIOCK.SYSTEMS.Ability.PANELS.info",
-        wrappers: simplifyTags(this._infoTags),
+        wrappers: Panel.simplifyTags(this._infoTags),
       }, this._metaphysicsBar]);
       return {
         ...(await super.getPanelParts()),

@@ -1,5 +1,5 @@
 import { asInf } from "../../../../../helpers/icon.mjs";
-import { simplifyTags } from "../../../../../helpers/panel.mjs";
+import { Panel } from "../../../../pseudo-documents/_module.mjs";
 
 /**
  * Species panel part.
@@ -44,7 +44,7 @@ export default function SpeciesPanelPart(Base) {
       }, {
         icon: TERIOCK.display.icons.manifest.species.traits,
         label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.traits.label"),
-        wrappers: simplifyTags(this._traitTags),
+        wrappers: Panel.simplifyTags(this._traitTags),
       }]);
       return { ...(await super.getPanelParts()), bars };
     }
