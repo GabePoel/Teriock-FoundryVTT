@@ -310,16 +310,9 @@ foundry.helpers.Hooks.once("setup", function() {
 
 Hooks.once("i18nInit", () => {
   game.teriock.i18nReady = true;
-  for (
-    const v of Object.values({
-      ...teriock.executions.abstract,
-      ...teriock.executions.activity,
-      ...teriock.executions.actor,
-      ...teriock.executions.document,
-    })
-  ) {
-    if (foundry.utils.isSubclass(v, teriock.executions.abstract.BaseExecution)) {
-      v.preLocalize();
+  for (const namespace of Object.values(teriock.executions)) {
+    for (const v of Object.values(namespace)) {
+      if (foundry.utils.isSubclass(v, teriock.executions.abstract.BaseExecution)) { v.preLocalize(); }
     }
   }
   helpers.localization.performPreLocalization(TERIOCK);

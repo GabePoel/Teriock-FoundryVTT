@@ -29,7 +29,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   static get Execution() {
-    return teriock.executions.document.AttunementExecution;
+    return teriock.executions.child.AttunementExecution;
   }
 
   /** @inheritDoc */

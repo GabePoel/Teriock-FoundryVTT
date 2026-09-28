@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { getPackIcon } from "../../../helpers/html.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { DocumentDirectoryMixin } from "../tabs/_module.mjs";
+import { DocumentDirectoryMixin } from "../mixins/_module.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
 

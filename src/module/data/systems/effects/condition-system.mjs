@@ -32,7 +32,7 @@ export default class ConditionSystem
 
   /** @inheritDoc */
   static get Execution() {
-    return teriock.executions.document.ExpirationExecution;
+    return teriock.executions.child.ExpirationExecution;
   }
 
   /** @inheritDoc */

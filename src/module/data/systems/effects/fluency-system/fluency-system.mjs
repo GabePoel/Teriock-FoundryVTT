@@ -41,7 +41,7 @@ export default class FluencySystem
 
   /** @inheritDoc */
   static get Execution() {
-    return teriock.executions.document.FluencyExecution;
+    return teriock.executions.child.FluencyExecution;
   }
 
   /** @inheritDoc */

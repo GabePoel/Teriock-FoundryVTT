@@ -79,7 +79,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   static get Execution() {
-    return teriock.executions.document.EquipmentExecution;
+    return teriock.executions.child.EquipmentExecution;
   }
 
   /** @inheritDoc */

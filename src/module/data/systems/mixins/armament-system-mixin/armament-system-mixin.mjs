@@ -45,7 +45,7 @@ export default function ArmamentSystemMixin(Base) {
 
     /** @inheritDoc */
     static get Execution() {
-      return teriock.executions.document.ArmamentExecution;
+      return teriock.executions.child.ArmamentExecution;
     }
 
     /** @inheritDoc */
