@@ -1,5 +1,5 @@
 import { mergeMetadata } from "../../../helpers/construction.mjs";
-import { deleteProperties, fromIdentifier } from "../../../helpers/utils.mjs";
+import { consolidateWriteOperations, deleteProperties, fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
@@ -46,27 +46,6 @@ export default function RefreshSystemMixin(Base) {
       const map = {};
       for (const doc of documents) { (map[doc.documentName] ??= []).push(doc); }
       return map;
-    }
-
-    /**
-     * Merge batched operations that share an action and target so that each target is written to only once.
-     * @param {DatabaseWriteOperation[]} operations
-     * @returns {DatabaseWriteOperation[]}
-     */
-    #mergeRefreshOperations(operations) {
-      const merged = new Map();
-      for (const operation of operations) {
-        const key = [operation.action, operation.documentName, operation.parent?.uuid, operation.pack].join("|");
-        const existing = merged.get(key);
-        if (!existing) {
-          merged.set(key, operation);
-          continue;
-        }
-        for (const field of ["data", "ids", "updates"]) {
-          if (operation[field]) { existing[field].push(...operation[field]); }
-        }
-      }
-      return Array.from(merged.values());
     }
 
     /**
@@ -228,7 +207,7 @@ export default function RefreshSystemMixin(Base) {
      */
     async refreshFromSource(document, options = {}) {
       const operations = await this._refreshOperations(document, options);
-      if (operations.length) { await foundry.documents.modifyBatch(this.#mergeRefreshOperations(operations)); }
+      if (operations.length) { await foundry.documents.modifyBatch(consolidateWriteOperations(operations)); }
     }
 
     /**

@@ -187,6 +187,16 @@ export function consolidateWriteOperations(operations) {
 }
 
 /**
+ * Build, consolidate, and write a bunch of batched operations.
+ * @param {(DatabaseWriteOperation & { uuid?: UUID<TeriockDocument>, docData?: object })[]} operations
+ * @returns {Promise<void>}
+ */
+export async function batchWrite(operations) {
+  const built = await Promise.all(operations.map(op => buildWriteOperation(op)));
+  await foundry.documents.modifyBatch(consolidateWriteOperations(built));
+}
+
+/**
  * Infer a document's icon from an identifier.
  * @param {TypedIdentifier|Identifier} identifier
  * @returns {string}

@@ -1,5 +1,5 @@
 import triggerConfig from "../../constants/config/trigger-config.mjs";
-import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/utils.mjs";
+import { batchWrite } from "../../helpers/utils.mjs";
 
 /**
  * Increase debt for all relevant actors.
@@ -23,9 +23,7 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
       });
     }
   }
-  const indOps = await Promise.all(operations.map(async op => buildWriteOperation(op)));
-  const conOps = consolidateWriteOperations(indOps.filter(Boolean));
-  await foundry.documents.modifyBatch(conOps);
+  await batchWrite(operations);
 }
 
 /**
