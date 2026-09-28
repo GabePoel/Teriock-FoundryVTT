@@ -54,14 +54,12 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   }
 
   /**
-   * Formula with heightening applied from the execution, if any.
+   * Formula resolved by the execution if there is one.
    * @param {Teriock.Automations.GetActivationsOptions} [options]
    * @returns {Teriock.System.FormulaString}
    */
   #formula(options = {}) {
-    const execution = options?.execution;
-    if (typeof execution?._heightenString === "function") { return execution._heightenString(this.formula); }
-    return this.formula;
+    return options?.execution?._resolveString(this.formula) ?? this.formula;
   }
 
   /** @inheritDoc */

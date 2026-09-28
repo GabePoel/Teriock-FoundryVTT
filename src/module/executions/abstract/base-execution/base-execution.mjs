@@ -580,6 +580,15 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
+   * Replace `@choice.*` with chosen values in a string.
+   * @param {string} formula
+   * @returns {string}
+   */
+  _resolveString(formula) {
+    return BaseRoll.replaceFormulaData(formula, { choice: this.choices });
+  }
+
+  /**
    * Show an input dialog to configure this execution before it resolves.
    * @returns {Promise<false|void>}
    */

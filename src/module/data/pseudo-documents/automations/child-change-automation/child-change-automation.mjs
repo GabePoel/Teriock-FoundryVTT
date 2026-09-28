@@ -95,14 +95,6 @@ export default class ChildChangeAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  _getEffectAutomationData(execution) {
-    const data = super._getEffectAutomationData(execution);
-    data.qualifier = execution._heightenString?.(data.qualifier) ?? data.qualifier;
-    data.value = execution._heightenString?.(data.value) ?? data.value;
-    return data;
-  }
-
-  /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
     if (path.endsWith("key")) { inputConfig.choices = this._processedKeyChoices; }
     if (path.endsWith("qualifier")) { inputConfig.context = this.target; }

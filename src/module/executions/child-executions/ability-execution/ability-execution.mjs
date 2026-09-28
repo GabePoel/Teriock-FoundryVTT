@@ -359,10 +359,10 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     return foundry.utils.mergeObject(await this._getNormalEffectData(), {
       system: {
         affinities: this.affinities.active.filter(a => a?.crit.has(1)).map(a =>
-          a.toObject()
+          a.getEffectData(this)
         ),
         critical: true,
-        expirations: this.expirations.active.filter(e => e?.crit.has(1)).map(e => e.toObject()),
+        expirations: this.expirations.active.filter(e => e?.crit.has(1)).map(e => e.getEffectData(this)),
       },
     });
   }
@@ -392,14 +392,14 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       showIcon: 0,
       system: {
         _src: this.source.uuid,
-        affinities: this.affinities.active.filter(a => a?.crit.has(0)).map(a => a.toObject()),
+        affinities: this.affinities.active.filter(a => a?.crit.has(0)).map(a => a.getEffectData(this)),
         applyIfDeattuned: true,
         blocks: (await this.source.system.getPanelParts()).blocks,
         competence: { raw: this.competence.value },
         effectTypes: Array.from(this.source.system.effectTypes),
         elements: Array.from(this.source.system.elements),
         executor: this.actor?.uuid ?? null,
-        expirations: this.expirations.active.filter(e => e?.crit.has(0)).map(e => e.toObject()),
+        expirations: this.expirations.active.filter(e => e?.crit.has(0)).map(e => e.getEffectData(this)),
         heightened: this.heightened,
         identifier: `${this.source.forcedIdentifier}-effect`,
         powerSources: Array.from(this.source.system.powerSources),
@@ -413,15 +413,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.source.system.targets.size === 1 && this.source.system.targets.has("self") && this.executor) {
       this.targets.add(this.executor);
     } else { await super._getTargets(); }
-  }
-
-  /**
-   * Replace `@h` with the heightened amount and `@choice` with chosen values in strings.
-   * @param {string} formula
-   * @returns {string}
-   */
-  _heightenString(formula) {
-    return BaseRoll.replaceFormulaData(formula, { choice: this.choices, h: this.heightened });
   }
 
   /** @inheritDoc */
@@ -534,6 +525,14 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       );
     }
     return armament;
+  }
+
+  /**
+   * Also replaces `@h` with the heightened amount.
+   * @inheritDoc
+   */
+  _resolveString(formula) {
+    return BaseRoll.replaceFormulaData(super._resolveString(formula), { h: this.heightened });
   }
 
   /** @inheritDoc */

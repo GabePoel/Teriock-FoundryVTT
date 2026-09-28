@@ -37,7 +37,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const formula = options?.execution?._heightenString?.(this.formula) ?? this.formula;
+    const formula = options?.execution?._resolveString(this.formula) ?? this.formula;
     if (formula && this.impact) {
       return [new RollActivation({ formula, impact: this.impact })];
     }
