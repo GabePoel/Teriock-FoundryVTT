@@ -49,14 +49,14 @@ export default class RevitalizeManager extends BaseStatManager {
   constructor(actor, options, ...args) {
     super(actor, options, ...args);
     this._forHarmField = new fields.BooleanField({
-      hint: _loc("TERIOCK.AUTOMATIONS.Revitalize.forHarm.hint"),
+      hint: _loc("TERIOCK.AUTOMATIONS.Revitalize.FIELDS.forHarm.hint"),
       initial: false,
-      label: _loc("TERIOCK.AUTOMATIONS.Revitalize.forHarm.label"),
+      label: _loc("TERIOCK.AUTOMATIONS.Revitalize.FIELDS.forHarm.label"),
     });
     this._consumeStatDiceField = new fields.BooleanField({
-      hint: _loc("TERIOCK.AUTOMATIONS.Revitalize.consumeStatDice.hint"),
+      hint: _loc("TERIOCK.AUTOMATIONS.Revitalize.FIELDS.consumeStatDice.hint"),
       initial: true,
-      label: _loc("TERIOCK.AUTOMATIONS.Revitalize.consumeStatDice.label"),
+      label: _loc("TERIOCK.AUTOMATIONS.Revitalize.FIELDS.consumeStatDice.label"),
     });
   }
 

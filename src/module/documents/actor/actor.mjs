@@ -3,7 +3,7 @@ import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
-import { findBestDocument, fromKey, getTriggerGroup, getTypeLabel } from "../../helpers/utils.mjs";
+import { findBestDocument, fromKey, getTriggerGroup } from "../../helpers/utils.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 import { BaseDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
@@ -515,11 +515,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     if (doc) { await doc.use(Object.assign(options, { actor: this })); }
     else {
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
-        format: {
-          actor: this.name,
-          name: lookup,
-          type: (getTypeLabel(options.type) ?? _loc("TYPES.Document.base")).toLocaleLowerCase(game.i18n.lang),
-        },
+        format: { actor: this.name, lookup },
         localize: true,
       });
     }

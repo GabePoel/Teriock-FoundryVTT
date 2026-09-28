@@ -77,14 +77,15 @@ export function prefixObject(obj, prefix) {
  * @param {(V1) => boolean} [options.filter] - Filter values before transformation.
  * @param {boolean} [options.localize=false] - The output can only be localized if the output is a string.
  * @param {boolean} [options.none=false] - Prepend a blank "None" choice.
+ * @param {boolean} [options.sort=true] - Sort localized output.
  * @returns {Record<string, V2>}
  */
 export function objectMap(obj, transformValue = (v) => v, options = {}) {
-  const { filter = () => true, localize = false, none = false } = options;
+  const { filter = () => true, localize = false, none = false, sort = true } = options;
   const out = Object.fromEntries(
     Object.entries(obj).filter(([_k, v]) => filter(v)).map(([k, v]) => [k, transformValue(v, k)]),
   );
-  if (localize) { return localizeChoices(out, { none }); }
+  if (localize) { return localizeChoices(out, { none, sort }); }
   return none ? choicesWithNone(out) : out;
 }
 

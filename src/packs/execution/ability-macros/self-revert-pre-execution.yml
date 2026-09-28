@@ -4,9 +4,7 @@ command: |-
   const transformationLevels = TERIOCK.config.transformation.level;
   const chosenTransformationLevel = await teriock.applications.dialogs.ChoiceSelector.prompt(transformationLevels, {
     hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
-    hintHtml: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-      (await teriock.fromIdentifier("rule:transformed")).text.content,
-    ),
+    hintHtml: (await teriock.fromIdentifier("rule:transformed")).text.content,
     hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
     initial: "minor",
     label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),
@@ -30,7 +28,7 @@ command: |-
           }),
           styles: {
             dice: { classes: ["feat"] },
-            total: { classes: ["feat"], icon: TERIOCK.display.icons.interaction.feat },
+            total: { classes: ["feat"], icon: TERIOCK.display.icons.manifest.interaction.feat },
           },
         });
         await newRoll.evaluate();

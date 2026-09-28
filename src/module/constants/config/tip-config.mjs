@@ -28,7 +28,12 @@ const error = {
   overCarriedWeight: "TERIOCK.SYSTEMS.Equipment.MESSAGES.error.overCarriedWeight",
 };
 
-export default { error, suppression };
+const settings = {
+  sheets: { error: "showErrorTipsOnSheets", warning: "showSuppressionTipsOnSheets" },
+  tooltips: { error: "showErrorTipsOnTooltips", warning: "showSuppressionTipsOnTooltips" },
+};
+
+export default { error, settings, suppression };
 
 preLocalizeConfig("config.tip.suppression");
 preLocalizeConfig("config.tip.error");

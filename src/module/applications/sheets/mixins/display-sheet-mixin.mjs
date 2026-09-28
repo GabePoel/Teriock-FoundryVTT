@@ -166,10 +166,7 @@ export default function DisplaySheetMixin(Base) {
           };
         }),
       );
-      context.displayTips = this.document.system.displayTips.filter(tip =>
-        (tip.level !== "warning" || game.settings.get("teriock", "showSuppressionTipsOnSheets"))
-        && (tip.level !== "error" || game.settings.get("teriock", "showErrorTipsOnSheets"))
-      );
+      context.displayTips = this.document.system.getVisibleTips("sheets");
       context.bars = this._tab === "overview" ? this.constructor.BARS : [];
     }
 

@@ -280,6 +280,16 @@ export default function BaseSystemMixin(Base) {
         blocks: this._panelBlocks,
       };
     }
+
+    /**
+     * Get the tips allowed by the client settings.
+     * @param {"sheets"|"tooltips"} category
+     * @returns {Teriock.UI.Tip[]}
+     */
+    getVisibleTips(category) {
+      const settings = TERIOCK.config.tip.settings[category];
+      return this.displayTips.filter(tip => !settings[tip.level] || game.settings.get("teriock", settings[tip.level]));
+    }
   }
 
   return BaseSystem;

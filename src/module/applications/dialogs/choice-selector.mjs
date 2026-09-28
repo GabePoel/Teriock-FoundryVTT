@@ -64,12 +64,12 @@ export default class ChoiceSelector extends ResolvableDialog {
     const app = new this({
       choices,
       hint: _loc("TERIOCK.DIALOGS.Select.defaults.hint"),
-      hintHtml: options.hintHtml ? await TeriockTextEditor.enrichHTML(options.hintTitle) : "",
       icon: icons.manifest.ui.select,
       label: _loc("CONTROLS.CommonSelect"),
       other: false,
       title: _loc("CONTROLS.CommonSelect"),
       ...options,
+      hintHtml: options.hintHtml ? await TeriockTextEditor.enrichHTML(options.hintHtml) : "",
     });
     await app.render(true);
     return app._result;
