@@ -1,6 +1,5 @@
 import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { findBestDocument } from "../../helpers/utils.mjs";
 import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
@@ -123,16 +122,7 @@ export default class TeriockMacro
     const actors = tokens.map(t => t.actor).filter(Boolean);
     if (actors.length === 0 && options.actor) { actors.push(actor); }
     game.actors.check(actors);
-    for (const a of actors) {
-      const doc = await findBestDocument(lookup, a);
-      if (doc) { await doc.system.use({ actor: a, event }); }
-      else {
-        ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
-          format: { actor: a.name, lookup },
-          localize: true,
-        });
-      }
-    }
+    for (const a of actors) { await a.useDocument(lookup, { event }); }
   }
 
   /**
