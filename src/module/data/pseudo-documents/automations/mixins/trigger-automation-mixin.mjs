@@ -43,6 +43,13 @@ export default function TriggerAutomationMixin(Base) {
     }
 
     /** @inheritDoc */
+    _getEffectAutomationData(execution) {
+      const data = super._getEffectAutomationData(execution);
+      data.triggerQualifier = execution._heightenString?.(data.triggerQualifier) ?? data.triggerQualifier;
+      return data;
+    }
+
+    /** @inheritDoc */
     async _onFire(scope) {
       const document = this.getNearestDocument();
       const actor = scope.actor ?? this.actor;

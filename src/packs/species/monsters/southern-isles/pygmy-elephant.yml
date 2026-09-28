@@ -288,6 +288,23 @@ effects:
           makeEffect: true
           targetsActor: true
           type: override
+        - _id: 9AlsM9aoZdUE8oTW
+          competencies:
+            - 0
+          localQualifier: and(@ability, @basic, @time.a1, not(@interaction.attack))
+          triggerQualifier: and(@source.interaction.attack, @source.time.a1, @source.delivery.item, @armament.class.@choice.ec)
+          triggers:
+            - executeAbility
+          type: useDocuments
+        - _id: B8omlh2YUMEvbbU6
+          competencies:
+            - 1
+            - 2
+          localQualifier: and(@ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
+          triggerQualifier: and(@source.interaction.attack, @source.time.a1, @source.delivery.item, @armament.class.@choice.ec)
+          triggers:
+            - executeAbility
+          type: useDocuments
       competence:
         raw: 1
       delivery: self
