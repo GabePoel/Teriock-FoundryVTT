@@ -957,13 +957,84 @@ items:
         name: Might Strike
         system:
           automations:
-            - _id: 9ad6dfd8be12f59a
-              interactInExecution: true
-              primaryMacro: Compendium.teriock.execution.Macro.e805e3fad6cedde3
-              type: macro
-            - _id: 29b275994cf9f5b1
-              formula: 1d4
-              type: roll
+            - _id: khDJiDjXQ0geuwml
+              key: system.damage
+              qualifier: "@class.@choice.ec"
+              target: armament
+              type: childChange
+              value: 1d4[holy @choice.domain]
+            - _id: Pz0g0zJmoKovXp5j
+              changeType: upgrade
+              competencies:
+                - 2
+              key: system.piercing.raw
+              qualifier: "@class.@choice.ec"
+              target: armament
+              type: childChange
+              value: "1"
+            - _id: twbMHeuWFf4GGgNb
+              competencies:
+                - 2
+              key: system.boosts.damage
+              qualifier: "@class.@choice.ec"
+              target: armament
+              type: childChange
+              value: "1"
+            - _id: OLfqlljtEa9uoAhg
+              activeQualifier: "1"
+              name: Select Equipment Class
+              namespace: ec
+              preset: classification
+              type: choices
+            - _id: H92j6Ht5EbQaqsHI
+              activeQualifier: "1"
+              choices:
+                6kQ6HMo6CRQOYMrh:
+                  label: Death (Terror)
+                  value: terror
+                7cT8feGqOQAjUoGH:
+                  label: Value (Financial)
+                  value: financial
+                FaIO06SLRxf1pEVG:
+                  label: Celestial (Silver)
+                  value: silver
+                HzZHQ772ihiNJ3WD:
+                  label: Crafting (Fire)
+                  value: fire
+                KwU3aJKBPs922wY7:
+                  label: Spirit (Spiritual)
+                  value: spiritual
+                LEY2YtGODG071Zkz:
+                  label: Weather (Ice)
+                  value: ice
+                TgwrZgB0j8FIx0ff:
+                  label: Hearth (Fire)
+                  value: fire
+                Y7xpoV82ZBP8pgSH:
+                  label: Trickster (Vine)
+                  value: vine
+                gmdQYfwVLXVDvZbF:
+                  label: Nature (Vine)
+                  value: vine
+                hfVllchNZBfARaE1:
+                  label: Fortune (Ice)
+                  value: ice
+                mOkMJNdR1rdVPTFX:
+                  label: Knowledge (Psychic)
+                  value: psychic
+                ufZE8lM8EPk7Igh5:
+                  label: Destruction (Fire)
+                  value: fire
+                xpeXqwey1S7rh6Ww:
+                  label: Healing (Terror)
+                  value: terror
+              description: >-
+                <aside class="notification info theme-dark"><p>The effect this creates will deal this damage type in
+                addition to @Identifier[damage:holy]{holy}. When using the item, you will have to announce which type
+                actually applies.</p></aside>
+              name: Select Domain and Damage Type
+              namespace: domain
+              type: choices
           competence:
             raw: 1
           costs:

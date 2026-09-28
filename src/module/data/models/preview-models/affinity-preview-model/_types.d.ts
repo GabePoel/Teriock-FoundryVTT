@@ -2,7 +2,7 @@ declare module "./affinity-preview-model.mjs" {
   // @ts-expect-error Filter override
   export default interface AffinityPreviewModel {
     filters: {
-      category: Teriock.Keys.AffinityCategory | null;
+      category: Teriock.Keys.Category | null;
       protection: boolean | null;
       type: AffinityType | null;
       weakness: boolean | null;

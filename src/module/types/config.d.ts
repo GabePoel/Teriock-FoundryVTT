@@ -21,6 +21,13 @@ declare global {
       types?: string[];
     };
 
+    export type CategoryEntry = {
+      format?: string;
+      imgCategory?: string;
+      label: string;
+      suggestions: "registry" | "none" | string;
+    };
+
     export type CurrencyEntry = { conversion: number, label: string, weight: number };
 
     export type StatEntry = {

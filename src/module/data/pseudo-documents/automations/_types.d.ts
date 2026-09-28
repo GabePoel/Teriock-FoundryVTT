@@ -7,7 +7,7 @@ import {
   ChangeQuantityAutomation,
   ChangesAutomation,
   ChildChangeAutomation,
-  ChoiceAutomation,
+  ChoicesAutomation,
   CommonOutcomesAutomation,
   CoverAutomation,
   DurationAutomation,
@@ -45,7 +45,7 @@ declare global {
     changeQuantity: ChangeQuantityAutomation;
     changes: ChangesAutomation;
     childChange: ChildChangeAutomation;
-    choice: ChoiceAutomation;
+    choices: ChoicesAutomation;
     common: CommonOutcomesAutomation;
     cover: CoverAutomation;
     duration: DurationAutomation;

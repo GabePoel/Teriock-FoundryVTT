@@ -2,6 +2,7 @@ import abilityConfig from "./ability-config.mjs";
 import affinityConfig from "./affinity-config.mjs";
 import attributeConfig from "./attribute-config.mjs";
 import attunementConfig from "./attunement-config.mjs";
+import categoryConfig from "./category-config.mjs";
 import changeConfig from "./change-config.mjs";
 import characterConfig from "./character-config.mjs";
 import classConfig from "./class-config.mjs";
@@ -36,6 +37,7 @@ const config = {
   affinity: affinityConfig,
   attribute: attributeConfig,
   attunement: attunementConfig,
+  category: categoryConfig,
   change: changeConfig,
   character: characterConfig,
   class: classConfig,

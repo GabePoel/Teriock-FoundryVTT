@@ -35,7 +35,7 @@ export default function ActorAffinitiesPart(Base) {
     /**
      * Add a virtual affinity.
      * @param {AffinityType} type
-     * @param {Teriock.Keys.AffinityCategory} category
+     * @param {Teriock.Keys.Category} category
      * @param {string} value
      * @param {string} source
      * @param {object} data
@@ -57,7 +57,7 @@ export default function ActorAffinitiesPart(Base) {
      * Add a virtual affinity for a condition.
      * @param {Teriock.Keys.Condition} status
      * @param {AffinityType} type
-     * @param {Teriock.Keys.AffinityCategory} category
+     * @param {Teriock.Keys.Category} category
      * @param {string} value
      * @param {object} data
      */

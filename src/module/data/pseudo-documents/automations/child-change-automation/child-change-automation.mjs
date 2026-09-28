@@ -97,6 +97,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
   /** @inheritDoc */
   _getEffectAutomationData(execution) {
     const data = super._getEffectAutomationData(execution);
+    data.qualifier = execution._heightenString?.(data.qualifier) ?? data.qualifier;
     data.value = execution._heightenString?.(data.value) ?? data.value;
     return data;
   }

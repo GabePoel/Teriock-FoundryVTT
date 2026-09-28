@@ -1,4 +1,5 @@
 import affinityConfig from "../../../../constants/config/affinity-config.mjs";
+import categoryConfig from "../../../../constants/config/category-config.mjs";
 import { pathSorterFactory } from "../../../../helpers/sort.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
@@ -30,7 +31,7 @@ export default class AffinityPreviewModel extends BasePreviewModel {
   static defineFilters() {
     return {
       category: nullStringField({
-        choices: objectMap(affinityConfig.categories, c => c.label, { localize: true }),
+        choices: objectMap(categoryConfig, c => c.label, { localize: true }),
         label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
       }),
       protection: new TernaryField({ label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.protection.label" }),

@@ -1,6 +1,24 @@
+import { objectMap } from "../../../helpers/utils.mjs";
+
 /**
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
  */
+
+/** @type {Record<string, Record<Identifier, string>>} */
+const CONFIG_SUGGESTIONS = {};
+
+/**
+ * Suggested identifiers and names for a category.
+ * @param {string} category
+ * @returns {Record<Identifier, string>}
+ */
+export function categorySuggestions(category) {
+  const path = TERIOCK.config.category[category]?.suggestions;
+  if (!path || path === "none") { return {}; }
+  if (path === "registry") { return game.teriock.identifiers.getNames(category, { permission: "LIMITED" }); }
+  CONFIG_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, e => e.label);
+  return CONFIG_SUGGESTIONS[path];
+}
 
 /**
  * Resolve a field's `suggestions` option into Autocomplete options.

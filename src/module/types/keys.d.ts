@@ -91,7 +91,9 @@ declare global {
 
     // Affinity Keys
     export type AffinityType = keyof typeof config.affinity.types;
-    export type AffinityCategory = keyof typeof config.affinity.categories;
+
+    // Category Keys
+    export type Category = keyof typeof config.category;
 
     // Character Keys
     export type Currency = keyof typeof config.currency;

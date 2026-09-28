@@ -5,13 +5,11 @@ import { dotJoin, toCamelCase, toKebabCase } from "../../../../../helpers/string
 import { objectMap } from "../../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../../fields/_module.mjs";
 import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
+import { categorySuggestions } from "../../../../fields/tools/suggestions.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
-
-/** @type {Record<string, Record<Identifier, string>>} */
-const IDENTIFIER_SUGGESTIONS = {};
 
 /**
  * Affinity categories renamed to their identifier types.
@@ -73,7 +71,7 @@ export default class BaseAffinity
       category: new fields.StringField({
         initial: "ability",
         required: true,
-        choices: () => objectMap(TERIOCK.config.affinity.categories, c => c.label),
+        choices: () => objectMap(TERIOCK.config.category, c => c.label),
       }),
       identifier: new IdentifierField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
@@ -101,7 +99,7 @@ export default class BaseAffinity
    * @returns {object}
    */
   get _categoryConfig() {
-    return TERIOCK.config.affinity.categories[this.category];
+    return TERIOCK.config.category[this.category];
   }
 
   /**
@@ -145,14 +143,7 @@ export default class BaseAffinity
    * @returns {Record<string, string>}
    */
   get _suggestions() {
-    if (this.category === "other") { return {}; }
-    const path = this._categoryConfig.suggestions;
-    if (!path) { return {}; }
-    if (path === "registry") {
-      return game.teriock.identifiers.getNames(this.category, { permission: "LIMITED" });
-    }
-    IDENTIFIER_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, e => e.label);
-    return IDENTIFIER_SUGGESTIONS[path];
+    return categorySuggestions(this.category);
   }
 
   /**
