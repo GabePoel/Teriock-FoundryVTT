@@ -4,10 +4,25 @@ img: systems/teriock/src/assets/thumbnails/ability/self-revert.webp
 name: Self Revert
 system:
   automations:
-    - _id: d9265af9e6f79615
-      interactInExecution: true
-      primaryMacro: Compendium.teriock.execution.Macro.66118e00b87f9946
-      type: macro
+    - _id: TduHhcQNuHqj6sLH
+      activeQualifier: "1"
+      choices:
+        ORjF6EP9s8GkKAEt:
+          label: Minor
+          value: "6"
+        QFt8z4LEZuZ3eW0G:
+          label: Greater
+          value: "18"
+        iO9ANfbKqKbGkMN3:
+          label: Full
+          value: "12"
+      description: <p>@Embed[condition:transformed path=description inline text]</p>
+      name: Select Transformation Level
+      namespace: transform
+      type: choice
+    - _id: zrmJO7fsphQwHDFZ
+      rollFormula: "@choice.transform - 2 * @h"
+      type: override
     - _id: 0de8ced768f08913
       relation: remove
       status: transformed

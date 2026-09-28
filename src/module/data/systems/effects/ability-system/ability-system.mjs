@@ -87,6 +87,7 @@ export default class AbilitySystem
       ...super._automationTypes,
       ...this._activationAutomationTypes,
       ...this._passiveAutomationTypes,
+      automations.ChoiceAutomation,
       automations.DurationAutomation,
       automations.OverrideAutomation,
       automations.TargetAutomation,

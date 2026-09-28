@@ -4,10 +4,25 @@ img: systems/teriock/src/assets/thumbnails/ability/disbelieve.webp
 name: Disbelieve
 system:
   automations:
-    - _id: 400b63a33f2cc249
-      interactInExecution: true
-      primaryMacro: Compendium.teriock.execution.Macro.d91c0c5ced0c6a58
-      type: macro
+    - _id: AGNmUkvxLiDwxldw
+      activeQualifier: "1"
+      choices:
+        ORjF6EP9s8GkKAEt:
+          label: Minor
+          value: "6"
+        QFt8z4LEZuZ3eW0G:
+          label: Greater
+          value: "18"
+        iO9ANfbKqKbGkMN3:
+          label: Full
+          value: "12"
+      description: <p>@Embed[keyword:illusionary inline text]</p>
+      name: Select Illusion Level
+      namespace: illusion
+      type: choice
+    - _id: FMc6LWSrSgneDzxR
+      rollFormula: "@choice.illusion - 2 * @h"
+      type: override
   basic: true
   delivery: sight
   duration:

@@ -80,9 +80,8 @@ export default class ChoiceSelector extends ResolvableDialog {
    */
   constructor(options) {
     super();
-    const { hintHtml, hintTitle, icon, other, title } = options;
+    const { hintHtml, icon, other, title } = options;
     this.hintHtml = hintHtml;
-    this.hintTitle = hintTitle;
     this.other = other;
     this.#field = new StringField(options);
     foundry.utils.mergeObject(this.options.window, { icon: makeIconClass(icon, "title"), title }, { inplace: true });
@@ -97,7 +96,6 @@ export default class ChoiceSelector extends ResolvableDialog {
     if (partId === "form") {
       context.fields = [{ field: this.#field, name: "selected", value: this.#field.initial }];
       context.hintHtml = this.hintHtml;
-      context.hintTitle = this.hintTitle;
     }
     if (partId === "footer") {
       /** @type {object[]} */

@@ -8,6 +8,7 @@ import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collec
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { prefixObject } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -55,6 +56,9 @@ export default class BaseExecution extends BaseDataModel {
 
   /** @type {object} */
   actorUpdates = {};
+
+  /** @type {Record<string, string>} */
+  choices = {};
 
   /** @type {TeriockChatMessage|undefined} */
   message;
@@ -625,7 +629,7 @@ export default class BaseExecution extends BaseDataModel {
       c: this.competence.fluent
         ? (this.actor?.system.scaling.f ?? 0)
         : (this.competence.proficient ? (this.actor?.system.scaling.p ?? 0) : 0),
-    });
+    }, prefixObject(this.choices, "choice"));
   }
 
   /**

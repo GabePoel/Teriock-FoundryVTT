@@ -1,12 +1,13 @@
 import { CostPayer } from "../../../applications/dialogs/_module.mjs";
 import impactConfig from "../../../constants/config/impact-config.mjs";
 import statConfig from "../../../constants/config/stat-config.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { addFormula } from "../../../helpers/formula.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { objectMap, omit, prefixObject } from "../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
@@ -32,6 +33,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       }),
       consumeEquipment: new fields.BooleanField({ initial: false }),
       noHeighten: new fields.BooleanField({ initial: false }),
+      overrideFormula: rollableFormulaField(),
       preventAttack: new fields.BooleanField(),
       preventBlockCone: new fields.BooleanField(),
       preventFeat: new fields.BooleanField(),
@@ -414,12 +416,12 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /**
-   * Replace `@h` with the heightened amount in strings.
+   * Replace `@h` with the heightened amount and `@choice` with chosen values in strings.
    * @param {string} formula
    * @returns {string}
    */
   _heightenString(formula) {
-    return BaseRoll.replaceFormulaData(formula, { h: this.heightened });
+    return BaseRoll.replaceFormulaData(formula, { choice: this.choices, h: this.heightened });
   }
 
   /** @inheritDoc */
@@ -475,6 +477,12 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     else if (this.isFeat) { this.updateSource({ formula: "10" }); }
     else if (this.isBlock) { this.updateSource({ formula: "10 + @av + @bv" }); }
     else { this.updateSource({ formula: "0" }); }
+  }
+
+  /** @inheritDoc */
+  async _prepareFormula() {
+    await super._prepareFormula();
+    if (formulaExists(this.overrideFormula)) { this.updateSource({ formula: this.overrideFormula }); }
   }
 
   /** @inheritDoc */

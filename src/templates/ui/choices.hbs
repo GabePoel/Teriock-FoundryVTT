@@ -1,0 +1,44 @@
+<ol class="change-config-container">
+  {{#each choices as |choice|}}
+    <li class="change-container">
+      <div class="change-entry">
+        {{formIcon
+          @root/fields.label
+          name=(concat @root/path "." choice.id ".label")
+          value=choice.label
+          disabled=(not @root/editable)
+          icon=@root/TERIOCK.display.icons.manifest.ui.badge
+          id=(concat @root/rootId "-" choice.id "-label")
+        }}
+        {{formIcon
+          @root/fields.value
+          name=(concat @root/path "." choice.id ".value")
+          value=choice.value
+          disabled=(not @root/editable)
+          icon=@root/TERIOCK.display.icons.manifest.change.value
+          id=(concat @root/rootId "-" choice.id "-value")
+        }}
+      </div>
+      <div class="change-controls">
+        {{!-- prettier-ignore --}}
+        <button
+          class="change-delete"
+          type="button"
+          data-action="deleteChoice"
+          data-tooltip='{{localize "COMMON.Delete"}}'
+          data-choice-id="{{ choice.id }}"
+          data-uuid="{{ @root/uuid }}"
+        >
+          {{makeIcon @root/TERIOCK.display.icons.manifest.ui.delete "button"}}
+        </button>
+      </div>
+    </li>
+  {{/each}}
+  <button class="add-change-button" type="button" data-action="createChoice" data-uuid="{{ uuid }}">
+    {{makeIcon TERIOCK.display.icons.manifest.ui.add "button"}}
+    {{localize
+      "TERIOCK.SHEETS.Common.PREVIEW.addType"
+      type=(localize "TYPES.Automation.choice")
+    }}
+  </button>
+</ol>

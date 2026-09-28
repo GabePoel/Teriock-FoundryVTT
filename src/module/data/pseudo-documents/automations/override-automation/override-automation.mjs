@@ -34,6 +34,7 @@ export default class OverrideAutomation
       preventFeat: new fields.BooleanField({ initial: false }),
       preventThreshold: new fields.BooleanField({ initial: false }),
       rollBonus: new FormulaField({ deterministic: false, placeholder: "0" }),
+      rollFormula: new FormulaField({ deterministic: false, placeholder: _loc("COMMON.Default") }),
       targetsActor: new TernaryField(),
       targetsArmament: new TernaryField(),
     });
@@ -53,6 +54,7 @@ export default class OverrideAutomation
       "targetsActor",
       "targetsArmament",
       "hr",
+      "rollFormula",
       "rollBonus",
       "hr",
       ...this._preventPaths,
@@ -96,6 +98,7 @@ export default class OverrideAutomation
     ) {
       if (typeof this[k] === "boolean") { execution.updateSource({ [k]: this[k] }); }
     }
+    if (formulaExists(this.rollFormula)) { execution.updateSource({ overrideFormula: this.rollFormula }); }
   }
 
   /** @inheritDoc */

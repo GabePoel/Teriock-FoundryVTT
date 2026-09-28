@@ -5,6 +5,7 @@ import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
+import ChoicesSheetMixin from "./choices-sheet-mixin.mjs";
 import ConstructionNodesSheetMixin from "./construction-nodes-sheet-mixin.mjs";
 
 /**
@@ -22,7 +23,7 @@ export default function MechanicsSheetMixin(Base) {
    * @mixin
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
-  class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin, ConstructionNodesSheetMixin) {
+  class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin, ChoicesSheetMixin, ConstructionNodesSheetMixin) {
     /**
      * Handle click events to copy the UUID of this PseudoDocument to clipboard.
      * @param {PointerEvent} event

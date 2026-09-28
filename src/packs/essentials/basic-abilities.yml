@@ -630,10 +630,25 @@ effects:
     name: Disbelieve
     system:
       automations:
-        - _id: 400b63a33f2cc249
-          interactInExecution: true
-          primaryMacro: Compendium.teriock.execution.Macro.d91c0c5ced0c6a58
-          type: macro
+        - _id: AGNmUkvxLiDwxldw
+          activeQualifier: "1"
+          choices:
+            ORjF6EP9s8GkKAEt:
+              label: Minor
+              value: "6"
+            QFt8z4LEZuZ3eW0G:
+              label: Greater
+              value: "18"
+            iO9ANfbKqKbGkMN3:
+              label: Full
+              value: "12"
+          description: <p>@Embed[keyword:illusionary inline text]</p>
+          name: Select Illusion Level
+          namespace: illusion
+          type: choice
+        - _id: FMc6LWSrSgneDzxR
+          rollFormula: "@choice.illusion - 2 * @h"
+          type: override
       basic: true
       competence:
         raw: 1
@@ -1431,10 +1446,25 @@ effects:
     name: Self Revert
     system:
       automations:
-        - _id: d9265af9e6f79615
-          interactInExecution: true
-          primaryMacro: Compendium.teriock.execution.Macro.66118e00b87f9946
-          type: macro
+        - _id: TduHhcQNuHqj6sLH
+          activeQualifier: "1"
+          choices:
+            ORjF6EP9s8GkKAEt:
+              label: Minor
+              value: "6"
+            QFt8z4LEZuZ3eW0G:
+              label: Greater
+              value: "18"
+            iO9ANfbKqKbGkMN3:
+              label: Full
+              value: "12"
+          description: <p>@Embed[condition:transformed path=description inline text]</p>
+          name: Select Transformation Level
+          namespace: transform
+          type: choice
+        - _id: zrmJO7fsphQwHDFZ
+          rollFormula: "@choice.transform - 2 * @h"
+          type: override
         - _id: 0de8ced768f08913
           relation: remove
           status: transformed

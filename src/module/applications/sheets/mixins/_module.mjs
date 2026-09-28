@@ -1,4 +1,5 @@
 export { default as ChangesSheetMixin } from "./changes-sheet-mixin.mjs";
+export { default as ChoicesSheetMixin } from "./choices-sheet-mixin.mjs";
 export { default as CommonSheetMixin } from "./common-sheet-mixin.mjs";
 export { default as ConstructionNodesSheetMixin } from "./construction-nodes-sheet-mixin.mjs";
 export { default as DisplaySheetMixin } from "./display-sheet-mixin.mjs";

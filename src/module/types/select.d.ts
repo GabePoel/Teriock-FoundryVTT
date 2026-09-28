@@ -55,8 +55,6 @@ declare global {
     export type _ChoiceSelectorOptions = {
       /** Additional hint with more complex HTML. */
       hintHtml?: string;
-      /** Title for the additional hint. */
-      hintTitle?: string;
       /** Icon to use for the select window. */
       icon?: string;
       /** Whether to include an "Other" button that resolves with `null`. */
