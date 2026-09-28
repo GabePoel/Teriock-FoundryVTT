@@ -211,7 +211,7 @@ export default function DragDropSheetMixin(Base) {
      */
     _validateDropChildType({ document, notify }) {
       return this.options.teriock.dragDrop.dropBehavior.child
-        ? this.document.constructor.validateChildType(this.document, document, { notifyOnFailure: notify })
+        ? this.document?.constructor?.validateChildType?.(this.document, document, { notifyOnFailure: notify })
         : true;
     }
 
