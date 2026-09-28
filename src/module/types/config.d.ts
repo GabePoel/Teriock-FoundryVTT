@@ -25,7 +25,7 @@ declare global {
       format?: string;
       imgCategory?: string;
       label: string;
-      suggestions: "registry" | "none" | string;
+      suggestions: string | "none" | "registry";
     };
 
     export type CurrencyEntry = { conversion: number, label: string, weight: number };
