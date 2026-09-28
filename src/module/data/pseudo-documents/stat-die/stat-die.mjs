@@ -53,6 +53,14 @@ export default class StatDie extends BasePseudoDocument {
   }
 
   /**
+   * The name of the document that provides this.
+   * @returns {string}
+   */
+  get sourceName() {
+    return this.getNearestDocument()?.name ?? "";
+  }
+
+  /**
    * String representing this die.
    * @returns {Teriock.Rolls.PolyhedralDie}
    */
