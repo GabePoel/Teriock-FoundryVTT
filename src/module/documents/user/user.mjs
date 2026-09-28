@@ -52,10 +52,10 @@ export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, Emb
    */
   async selectTargetedToken(options = {}) {
     return DocumentSelector.selectSingle(this.targets.map(t => t.document), {
-      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint",
+      hint: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint"),
       imgKey: "texture.src",
       silent: true,
-      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.title",
+      title: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.title"),
       tooltip: false,
       ...options,
     });
@@ -68,10 +68,10 @@ export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, Emb
    */
   async selectTargetedTokens(options = {}) {
     return DocumentSelector.selectMulti(this.targets.map(t => t.document), {
-      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint",
+      hint: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint"),
       imgKey: "texture.src",
       silent: true,
-      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.title",
+      title: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.title"),
       tooltip: false,
       ...options,
     });
@@ -83,10 +83,10 @@ export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, Emb
    */
   async selectVisibleToken(options = {}) {
     return DocumentSelector.selectSingle(this.visibleTokens.map(t => t.document), {
-      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint",
+      hint: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint"),
       imgKey: "texture.src",
       silent: true,
-      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.title",
+      title: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.title"),
       tooltip: false,
       ...options,
     });
@@ -99,10 +99,10 @@ export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, Emb
    */
   async selectVisibleTokens(options = {}) {
     return DocumentSelector.selectMulti(this.visibleTokens.map(t => t.document), {
-      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint",
+      hint: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint"),
       imgKey: "texture.src",
       silent: true,
-      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.title",
+      title: _loc("TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.title"),
       tooltip: false,
       ...options,
     });

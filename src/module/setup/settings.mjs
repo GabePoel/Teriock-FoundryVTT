@@ -75,7 +75,6 @@ export const menus = {
       general: {
         settings: {
           confirmStatDiceRerolls: { default: true, scope: "user", type: Boolean },
-          selectAddedDocuments: { default: true, scope: "user", type: Boolean },
           showRollDialogs: { default: true, scope: "user", type: Boolean },
         },
       },

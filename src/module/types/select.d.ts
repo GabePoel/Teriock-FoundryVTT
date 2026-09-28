@@ -20,8 +20,6 @@ declare global {
       icon?: string;
       /** Path to an image to display for each document */
       imgKey?: string;
-      /** Whether to localize title, hint, and warning strings */
-      localize?: boolean;
       /** Whether document sheets can be opened on double click */
       openable?: boolean;
       /** Whether to report cancelling the dialog as `false` instead of an empty selection */

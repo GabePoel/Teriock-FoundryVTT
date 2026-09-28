@@ -14,10 +14,9 @@ function equipmentCommandFunctionFactory(filter, onSelect, hint, title) {
     if (!game.actors.check(actor)) { return; }
     const choices = actor.previewedTypes.equipment.filter(filter);
     const chosen = await DocumentSelector.selectMulti(choices, {
-      hint,
-      localize: true,
-      noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
-      title,
+      hint: _loc(hint),
+      noDocumentsMessage: _loc("TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems"),
+      title: _loc(title),
     });
     await Promise.all(chosen.map(e => onSelect(e)));
   };

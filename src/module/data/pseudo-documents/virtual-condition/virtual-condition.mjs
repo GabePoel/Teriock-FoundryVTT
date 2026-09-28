@@ -248,7 +248,7 @@ export default class VirtualCondition
     const source = await DocumentSelector.selectSingle(this.#sourceDocuments.filter((d) => d?.isViewer), {
       hint: _loc("TERIOCK.DIALOGS.Select.Source.hint"),
       openable: true,
-      title: "TERIOCK.DIALOGS.Select.Source.title",
+      title: _loc("TERIOCK.DIALOGS.Select.Source.title"),
     });
     await source?.sheet?.render(true);
   }

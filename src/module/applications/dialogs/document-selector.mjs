@@ -16,7 +16,6 @@ const DEFAULT_SELECT_OPTIONS = {
   checked: [],
   hint: "",
   imgKey: "img",
-  localize: true,
   multi: true,
   noDocumentsMessage: "TERIOCK.DIALOGS.SelectDocument.noOptions",
   openable: false,
@@ -69,13 +68,12 @@ export default class DocumentSelector extends ResolvableDialog {
    * @returns {Teriock.Select.SelectDocumentsDialogOptions}
    */
   static _normalizeOptions(options = {}) {
-    options = { ...DEFAULT_SELECT_OPTIONS, ...options };
-    if (options.localize) {
-      options.noDocumentsMessage = _loc(options.noDocumentsMessage);
-      options.title = _loc(options.title);
-      options.hint = _loc(options.hint);
-    }
-    return options;
+    return {
+      ...DEFAULT_SELECT_OPTIONS,
+      noDocumentsMessage: _loc(DEFAULT_SELECT_OPTIONS.noDocumentsMessage),
+      title: _loc(DEFAULT_SELECT_OPTIONS.title),
+      ...options,
+    };
   }
 
   /**

@@ -304,7 +304,7 @@ export default class BaseRoll extends Roll {
   async evaluate(
     { allowInteractive = true, allowStrings = false, maximize = false, minimize = false, ...options } = {},
   ) {
-    await this._applyDiceStyles();
+    if (game.settings.get("teriock", "styleDice")) { await this._applyDiceStyles(); }
     return super.evaluate({ allowInteractive, allowStrings, maximize, minimize, ...options });
   }
 

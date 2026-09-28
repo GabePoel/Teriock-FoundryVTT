@@ -40,10 +40,7 @@ export default class TeriockPlayableActorSheet
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    all: {
-      scrollable: [".actor-sidebar", ".actor-tab-content"],
-      template: "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
-    },
+    all: { scrollable: [".actor-sidebar", ".actor-tab-content"], template: "teriock/sheets/actors/playable/playable" },
   };
 
   /** @inheritDoc */

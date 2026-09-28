@@ -10,10 +10,9 @@ async function takeAttune(actor) {
   if (!game.actors.check(actor)) { return; }
   const choices = [...actor.previewedTypes.equipment, ...actor.previewedTypes.mount].filter(a => !a.system.isAttuned);
   const chosen = await DocumentSelector.selectMulti(choices, {
-    hint: "TERIOCK.COMMANDS.Attune.hint",
-    localize: true,
-    noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
-    title: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
+    hint: _loc("TERIOCK.COMMANDS.Attune.hint"),
+    noDocumentsMessage: _loc("TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems"),
+    title: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
   });
   await Promise.all(chosen.map(a => a.system.attune()));
 }
@@ -27,10 +26,9 @@ async function takeDeattune(actor) {
   if (!game.actors.check(actor)) { return; }
   const choices = [...actor.previewedTypes.equipment, ...actor.previewedTypes.mount].filter(a => a.system.isAttuned);
   const chosen = await DocumentSelector.selectMulti(choices, {
-    hint: "TERIOCK.COMMANDS.Deattune.hint",
-    localize: true,
-    noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
-    title: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
+    hint: _loc("TERIOCK.COMMANDS.Deattune.hint"),
+    noDocumentsMessage: _loc("TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems"),
+    title: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
   });
   await Promise.all(chosen.map(a => a.system.deattune()));
 }
