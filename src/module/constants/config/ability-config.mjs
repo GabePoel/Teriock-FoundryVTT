@@ -72,11 +72,32 @@ export default {
       sizes: "radius",
     },
   },
-  interaction: {
-    attack: "TERIOCK.TERMS.Interaction.attack",
-    block: "TERIOCK.TERMS.Interaction.block",
-    feat: "TERIOCK.TERMS.Interaction.feat",
-    manifest: "TERIOCK.TERMS.Interaction.manifest",
+  interaction: /** @enum {Teriock.Config.InteractionEntry} */ {
+    attack: {
+      label: "TERIOCK.TERMS.Interaction.attack",
+      results: {
+        hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
+        miss: "TERIOCK.SYSTEMS.Ability.FIELDS.results.miss.label",
+      },
+    },
+    block: {
+      label: "TERIOCK.TERMS.Interaction.block",
+      results: {
+        fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
+        save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
+      },
+    },
+    feat: {
+      label: "TERIOCK.TERMS.Interaction.feat",
+      results: {
+        fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
+        save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
+      },
+    },
+    manifest: {
+      label: "TERIOCK.TERMS.Interaction.manifest",
+      results: { use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label" },
+    },
   },
   // no sort
   maneuver: {
@@ -116,7 +137,11 @@ preLocalizeConfig("config.ability.executionTime.reactive");
 preLocalizeConfig("config.ability.executionTime.slow");
 preLocalizeConfig("config.ability.expansion", { keys: ["label"] });
 preLocalizeConfig("config.ability.featSaveImprovementAmount");
-preLocalizeConfig("config.ability.interaction");
+preLocalizeConfig("config.ability.interaction", { keys: ["label"] });
+preLocalizeConfig("config.ability.interaction.attack.results");
+preLocalizeConfig("config.ability.interaction.block.results");
+preLocalizeConfig("config.ability.interaction.feat.results");
+preLocalizeConfig("config.ability.interaction.manifest.results");
 preLocalizeConfig("config.ability.maneuver");
 preLocalizeConfig("config.ability.targetParent");
 preLocalizeConfig("config.ability.targets", { keys: ["label"] });

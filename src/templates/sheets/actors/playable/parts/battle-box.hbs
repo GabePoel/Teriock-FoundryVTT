@@ -36,18 +36,19 @@
       <div class="tsubtle little-title">
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.blockingWith"}}</div>
         <div class="title-right">
-          <i
-            class='{{makeIconClass TERIOCK.display.icons.manifest.ui.d20 "light"}} thover'
-            data-action="rollAffinity"
-            data-affinity-type="resistance"
-            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollResistance"}}'
-          ></i>
           {{#if (exists system.wielding.blocker)}}
             <i
               class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.block "light"}} thover'
               data-action="useAbility"
               data-ability="ability:basic-block"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollBlock"}}'
+            ></i>
+            <i
+              class='{{makeIconClass TERIOCK.display.icons.manifest.effect.interact "light"}} thover'
+              data-action="quickUse"
+              data-id="{{ system.wielding.blocker._id }}"
+              data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollInteract"}}'
+              data-deal-impacts="false"
             ></i>
             <i
               class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}} thover'
@@ -199,6 +200,7 @@
               data-action="quickUse"
               data-id="{{ system.wielding.attacker._id }}"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollDamage"}}'
+              data-deal-impacts="true"
             ></i>
             <i
               class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}} thover'

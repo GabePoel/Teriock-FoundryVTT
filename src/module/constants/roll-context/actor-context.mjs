@@ -77,7 +77,7 @@ Hooks.once("teriock.identifiersInit", () => {
     });
   });
   Object.entries(TERIOCK.config.attribute).forEach(([k, v]) => {
-    const name = _loc(v.abbreviation);
+    const name = v.abbreviation;
     Object.assign(actorContext, {
       [`${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
       [`${k}.passive`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.passive", { name }),
@@ -86,7 +86,7 @@ Hooks.once("teriock.identifiersInit", () => {
     });
   });
   Object.entries(TERIOCK.config.tradecraft.tradecrafts).forEach(([k, v]) => {
-    const name = _loc(v.label);
+    const name = v.label;
     Object.assign(actorContext, {
       [`tc.${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
       [`tc.${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
@@ -94,22 +94,20 @@ Hooks.once("teriock.identifiersInit", () => {
     });
   });
   Object.entries(TERIOCK.config.hack).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", { part: _loc(v.part) }) });
+    Object.assign(actorContext, { [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", { part: v.part }) });
   });
   Object.entries(TERIOCK.config.class.classes).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: _loc(v.label) }) });
+    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v.label }) });
   });
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
-    Object.assign(actorContext, {
-      [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: _loc(v.label) }),
-    });
+    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: v.label }) });
   });
   Object.entries(TERIOCK.config.character.movement).forEach(([k, v]) => {
     Object.assign(actorContext, {
-      [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: _loc(v.label) }),
+      [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
     });
   });
   Object.entries(TERIOCK.statuses.conditions).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`status.${toKebabCase(k)}`]: _loc(v.name) });
+    Object.assign(actorContext, { [`status.${toKebabCase(k)}`]: v.name });
   });
 });

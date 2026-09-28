@@ -6,8 +6,8 @@ import changeConfig from "./change-config.mjs";
 import characterConfig from "./character-config.mjs";
 import classConfig from "./class-config.mjs";
 import combatConfig from "./combat-config.mjs";
+import commandConfig from "./command-config.mjs";
 import competenceConfig from "./competence-config.mjs";
-import consequenceConfig from "./consequence-config.mjs";
 import costConfig from "./cost-config.mjs";
 import currencyConfig from "./currency-config.mjs";
 import deathBagConfig from "./death-bag-config.mjs";
@@ -40,8 +40,8 @@ const config = {
   character: characterConfig,
   class: classConfig,
   combat: combatConfig,
+  command: commandConfig,
   competence: competenceConfig,
-  consequence: consequenceConfig,
   cost: costConfig,
   currency: currencyConfig,
   deathBag: deathBagConfig,

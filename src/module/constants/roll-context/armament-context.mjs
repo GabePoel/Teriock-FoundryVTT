@@ -56,17 +56,17 @@ Hooks.once("teriock.identifiersInit", () => {
     armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
   });
   Object.entries(TERIOCK.config.impact).forEach(([k, v]) => {
-    armamentContext[`impact.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: _loc(v.label) });
+    armamentContext[`impact.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: v.label });
   });
   Object.entries(TERIOCK.config.equipment.equipmentClasses).forEach(([k, v]) => {
-    armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: _loc(v.label) });
+    armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: v.label });
   });
   Object.entries(game.teriock.identifiers.getNames("equipment", { permission: "LIMITED" })).forEach(([k, name]) => {
     armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name });
   });
   Object.keys(TERIOCK.config.equipment.kind).forEach(k => {
     armamentContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.kind", {
-      name: _loc(TERIOCK.config.equipment.kind[k].label),
+      name: TERIOCK.config.equipment.kind[k].label,
     });
   });
 });

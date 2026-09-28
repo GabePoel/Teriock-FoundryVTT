@@ -42,7 +42,7 @@ declare global {
     export type PayMode = "exact" | "greedy";
     export type DeathBagStoneColor = keyof typeof config.deathBag.stones;
     export type Impact = keyof typeof config.impact;
-    export type CommonOutcome = keyof typeof config.consequence.common;
+    export type CommonCommand = keyof typeof config.command.common;
 
     // Armament Keys
     export type Classification = keyof typeof config.wiki.index.classification;

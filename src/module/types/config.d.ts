@@ -88,6 +88,8 @@ declare global {
 
     export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };
 
+    export type InteractionEntry = { label: string, results: Record<string, string> };
+
     export type DeliveryEntry = {
       allowPiercing?: boolean;
       aoe?: boolean;

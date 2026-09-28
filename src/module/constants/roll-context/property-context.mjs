@@ -14,7 +14,7 @@ export default propertyContext;
 preLocalizeConfig("rollContext.property");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.config.effect.kind).forEach(([k, v]) => {
-    propertyContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: _loc(v.label) });
+    propertyContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.kind", { name: v.label });
   });
   Object.entries(game.teriock.identifiers.getNames("damage", { permission: "LIMITED" })).forEach(([k, name]) => {
     propertyContext[`dmg.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name });

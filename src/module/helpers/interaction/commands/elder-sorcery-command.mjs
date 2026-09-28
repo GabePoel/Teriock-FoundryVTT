@@ -7,7 +7,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  */
 const command = {
   aliases: ["es"],
-  icon: icons.manifest.ui.elderSorcery,
+  icon: icons.manifest.execution.elderSorcery,
   id: "elderSorcery",
   label: "TERIOCK.EFFECTS.Common.elderSorcery",
   primary: simpleCommandFunctionFactory(a => a.system.createElderSorcery()),

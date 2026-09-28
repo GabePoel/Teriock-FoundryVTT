@@ -6,7 +6,7 @@ import { icons } from "../../../constants/display/_module.mjs";
  */
 const command = {
   args: ["distance"],
-  icon: icons.manifest.ui.fall,
+  icon: icons.manifest.execution.fall,
   id: "fall",
   label: "TERIOCK.EFFECTS.Common.fall",
   noActor: true,

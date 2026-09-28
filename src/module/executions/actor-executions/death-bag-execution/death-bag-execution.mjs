@@ -35,7 +35,7 @@ export default class DeathBagExecution extends DocumentExecution {
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.manifest.ui.deathBag,
+      icon: TERIOCK.display.icons.manifest.execution.deathBag,
       label: "TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull",
       name: "makePull",
     }];
@@ -67,7 +67,7 @@ export default class DeathBagExecution extends DocumentExecution {
    * @returns {string}
    */
   get icon() {
-    return TERIOCK.display.icons.manifest.ui.deathBag;
+    return TERIOCK.display.icons.manifest.execution.deathBag;
   }
 
   /** @returns {TypedIdentifier} */
@@ -112,7 +112,7 @@ export default class DeathBagExecution extends DocumentExecution {
         text: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText"),
         title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
       }, { text: outcome, title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome") }],
-      icon: TERIOCK.display.icons.manifest.ui.deathBag,
+      icon: TERIOCK.display.icons.manifest.execution.deathBag,
       img: TERIOCK.display.thumbnails.manifest.misc.deathBag,
       name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
     };

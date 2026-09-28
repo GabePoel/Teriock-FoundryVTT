@@ -22,9 +22,9 @@ export default speciesContext;
 preLocalizeConfig("rollContext.species");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.config.transformation.level).forEach(([k, v]) => {
-    speciesContext[`transformation.level.${k}`] = _loc(v);
+    speciesContext[`transformation.level.${k}`] = v;
   });
   Object.entries(TERIOCK.config.species.traits).forEach(([k, v]) => {
-    speciesContext[`trait.${k}`] = _loc(v.label);
+    speciesContext[`trait.${k}`] = v.label;
   });
 });

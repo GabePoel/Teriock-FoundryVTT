@@ -23,25 +23,6 @@ export default {
     undampen: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
     unglue: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
   },
-  interaction: {
-    attack: {
-      hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
-      miss: "TERIOCK.SYSTEMS.Ability.FIELDS.results.miss.label",
-    },
-    block: {
-      fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
-      save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
-    },
-    feat: {
-      fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
-      save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
-    },
-    manifest: { use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label" },
-  },
 };
 
-preLocalizeConfig("config.consequence.interaction.attack");
-preLocalizeConfig("config.consequence.interaction.feat");
-preLocalizeConfig("config.consequence.interaction.manifest");
-preLocalizeConfig("config.consequence.interaction.block");
-preLocalizeConfig("config.consequence.common");
+preLocalizeConfig("config.command.common");

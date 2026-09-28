@@ -59,7 +59,7 @@ export default function AbilityUsagePart(Base) {
         }),
         interaction: new fields.StringField({
           blank: false,
-          choices: TERIOCK.config.ability.interaction,
+          choices: objectMap(TERIOCK.config.ability.interaction, v => v.label, { localize: true }),
           initial: "attack",
           required: true,
         }),
@@ -94,7 +94,7 @@ export default function AbilityUsagePart(Base) {
         this.piercing.label,
         TERIOCK.config.ability.delivery[this.delivery]?.label || "",
         this.interaction === "feat" ? TERIOCK.config.attribute[this.featSaveAttribute]?.label : "",
-        TERIOCK.config.ability.interaction[this.interaction] || "",
+        TERIOCK.config.ability.interaction[this.interaction]?.label || "",
       ];
     }
 

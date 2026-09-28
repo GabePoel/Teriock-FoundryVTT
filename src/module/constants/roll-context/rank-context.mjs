@@ -14,12 +14,12 @@ export default rankContext;
 preLocalizeConfig("rollContext.rank");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.config.class.classes).forEach(([k, v]) => {
-    rankContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });
+    rankContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: v.label });
   });
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
-    rankContext[`archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });
+    rankContext[`archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: v.label });
   });
   Object.entries(TERIOCK.config.class.kind).forEach(([k, v]) => {
-    rankContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.kind", { name: _loc(v.label) });
+    rankContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.kind", { name: v.label });
   });
 });

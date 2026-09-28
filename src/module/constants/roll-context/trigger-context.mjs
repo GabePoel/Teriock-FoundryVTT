@@ -19,12 +19,12 @@ export default triggerContext;
 preLocalizeConfig("rollContext.trigger");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.config.attribute).forEach(([k, v]) => {
-    triggerContext[`attribute.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.attribute", { name: _loc(v.abbreviation) });
+    triggerContext[`attribute.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.attribute", { name: v.abbreviation });
   });
   Object.entries(TERIOCK.config.tradecraft.tradecrafts).forEach(([k, v]) => {
-    triggerContext[`tradecraft.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.tradecraft", { name: _loc(v.label) });
+    triggerContext[`tradecraft.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.tradecraft", { name: v.label });
   });
   Object.entries(TERIOCK.config.hack).forEach(([k, v]) => {
-    triggerContext[`part.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.hack", { part: _loc(v.part) });
+    triggerContext[`part.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.hack", { part: v.part });
   });
 });

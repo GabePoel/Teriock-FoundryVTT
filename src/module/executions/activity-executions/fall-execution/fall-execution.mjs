@@ -59,7 +59,7 @@ export default class FallExecution extends BaseExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.ui.fall;
+    return TERIOCK.display.icons.manifest.execution.fall;
   }
 
   /** @returns {TypedIdentifier} */

@@ -32,7 +32,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       }),
       heightened: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label" }),
       interaction: nullStringField({
-        choices: TERIOCK.config.ability.interaction,
+        choices: objectMap(TERIOCK.config.ability.interaction, v => v.label),
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
       }),
       invoked: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label" }),

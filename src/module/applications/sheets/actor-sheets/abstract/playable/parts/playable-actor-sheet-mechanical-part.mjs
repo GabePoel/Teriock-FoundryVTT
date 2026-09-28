@@ -50,7 +50,10 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     static async #onQuickUse(event, target) {
       const id = target.dataset.id;
       const item = this.document.items.get(id);
-      if (item) { await item.use({ event }); }
+      const options = { event };
+      if (target.dataset.dealImpacts === "false") { options.dealImpacts = false; }
+      if (target.dataset.dealImpacts === "true") { options.dealImpacts = true; }
+      if (item) { await item.use(options); }
     }
 
     /**
@@ -148,15 +151,15 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       window: {
         controls: [{
           action: "deathBagPull",
-          icon: makeIconClass(icons.manifest.ui.deathBag, "contextMenu"),
-          label: "TERIOCK.EFFECTS.Common.bag",
+          icon: makeIconClass(icons.manifest.execution.deathBag, "contextMenu"),
+          label: "TERIOCK.SHEETS.Actor.ACTIONS.DeathBagPull.label",
           ownership: "OWNER",
           visible() {
             return this.isEditable;
           },
         }, {
           action: "takeLongRest",
-          icon: makeIconClass(icons.manifest.ui.longRest, "contextMenu"),
+          icon: makeIconClass(icons.manifest.execution.longRest, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
           ownership: "OWNER",
           visible() {
@@ -164,7 +167,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           },
         }, {
           action: "takeShortRest",
-          icon: makeIconClass(icons.manifest.ui.shortRest, "contextMenu"),
+          icon: makeIconClass(icons.manifest.execution.shortRest, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
           ownership: "OWNER",
           visible() {
