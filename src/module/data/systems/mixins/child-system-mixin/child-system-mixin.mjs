@@ -4,7 +4,6 @@ import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
@@ -71,7 +70,7 @@ export default function ChildSystemMixin(Base) {
         forceSuppressed: new initialBoolean(),
         kind: new fields.StringField({
           blank: false,
-          choices: localizeChoices(objectMap(this.metadata.kinds, v => v.label)),
+          choices: objectMap(this.metadata.kinds, v => v.label, { localize: true }),
           initial: this.metadata.initialKind,
           required: true,
         }),

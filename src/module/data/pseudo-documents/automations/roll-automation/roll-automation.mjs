@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 import { RollActivation } from "../../activations/_module.mjs";
@@ -23,7 +22,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
     return Object.assign(super.defineSchema(), {
       formula: new FormulaField({ deterministic: false, nullable: true, placeholder: _loc("COMMON.None") }),
       impact: new fields.StringField({
-        choices: localizeChoices(objectMap(TERIOCK.config.impact, i => i.deal)),
+        choices: objectMap(TERIOCK.config.impact, i => i.deal, { localize: true }),
         initial: "damage",
         nullable: false,
         required: true,

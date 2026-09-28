@@ -1,7 +1,6 @@
 import { icons } from "../../../constants/display/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
-import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
@@ -74,7 +73,7 @@ export default function MechanicsSheetMixin(Base) {
     static async _onCreateMechanic(_event, target) {
       const config = this._mechanicCollections[target.dataset.collection];
       if (!config) { return; }
-      const choices = localizeChoices(objectMap(config.types, p => p.typeLabel), { sort: true });
+      const choices = objectMap(config.types, p => p.typeLabel, { localize: true });
       if (Object.keys(choices).length === 0) { return; }
       let choice;
       if (Object.keys(choices).length === 1) { choice = Object.keys(choices)[0]; }

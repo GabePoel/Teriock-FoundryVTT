@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { TakeHackActivation, TakeUnhackActivation } from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -21,7 +20,7 @@ export default class HacksAutomation extends mixClasses(BaseAutomation, TriggerA
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       hacks: new fields.SetField(
-        new fields.StringField({ choices: localizeChoices(objectMap(TERIOCK.config.hack, h => h.part)) }),
+        new fields.StringField({ choices: objectMap(TERIOCK.config.hack, h => h.part, { localize: true }) }),
         { label: "TERIOCK.COMMON.Hacks" },
       ),
       reverse: new fields.BooleanField(),
