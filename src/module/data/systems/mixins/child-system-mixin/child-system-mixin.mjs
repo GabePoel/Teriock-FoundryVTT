@@ -115,16 +115,6 @@ export default function ChildSystemMixin(Base) {
     }
 
     /** @inheritDoc */
-    get _embedActions() {
-      return Object.assign(super._embedActions, {
-        useDoc: {
-          primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-          secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-        },
-      });
-    }
-
-    /** @inheritDoc */
     get _embedIcons() {
       return [...super._embedIcons, {
         action: "chatDoc",

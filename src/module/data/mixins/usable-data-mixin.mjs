@@ -38,6 +38,16 @@ export default function UsableDataMixin(Base) {
       return { data: {}, options: BaseRoll.parseEvent(event) };
     }
 
+    /** @inheritDoc */
+    get _embedActions() {
+      return Object.assign(super._embedActions ?? {}, {
+        useDoc: {
+          primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+          secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+        },
+      });
+    }
+
     /**
      * An icon that represents using this.
      * @returns {string}

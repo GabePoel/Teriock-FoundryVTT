@@ -42,7 +42,7 @@ export function fancifyFields(displayFields) {
  * @param {function} callback
  * @param {object} [options]
  * @param {number} [options.batch=1]
- * @param {"info"|"success"|"warn"|"error"} [options.style="info"]
+ * @param {"info"|"success"|"warn"|"error"|"morganti"} [options.style="info"]
  */
 export async function progressBar(arr, message, callback, options = {}) {
   const { batch = 1, style = "info" } = options;

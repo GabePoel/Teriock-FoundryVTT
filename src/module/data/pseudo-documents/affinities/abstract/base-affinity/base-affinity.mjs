@@ -39,13 +39,13 @@ const RENAMED_CATEGORIES = {
  * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
  *
  * @mixes PanelData
- * @mixes UsableData
  * @mixes EmbeddableData
+ * @mixes UsableData
  * @property {BaseEffectSystem} parent
  * @property {TeriockActiveEffect} document
  */
 export default class BaseAffinity
-  extends mixClasses(MechanicPseudoDocument, PanelDataMixin, UsableDataMixin, EmbeddableDataMixin)
+  extends mixClasses(MechanicPseudoDocument, PanelDataMixin, EmbeddableDataMixin, UsableDataMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AFFINITIES.Base"];
@@ -125,19 +125,6 @@ export default class BaseAffinity
     if (this.category === "other") { return ""; }
     return game.teriock.identifiers.getName(this.targetIdentifier) || this._suggestions[this.identifier]
       || this.identifier || "";
-  }
-
-  /**
-   * @inheritDoc
-   * @todo Deal with this duplicated code.
-   */
-  get _embedActions() {
-    return Object.assign(super._embedActions, {
-      useDoc: {
-        primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-        secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-      },
-    });
   }
 
   /** @inheritDoc */

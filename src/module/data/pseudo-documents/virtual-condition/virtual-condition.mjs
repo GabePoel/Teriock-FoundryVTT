@@ -13,11 +13,11 @@ const { fields } = foundry.data;
 /**
  * @todo Rename to `TrackedCondition`.
  * @mixes PanelData
- * @mixes UsableData
  * @mixes EmbeddableData
+ * @mixes UsableData
  */
 export default class VirtualCondition
-  extends mixClasses(BasePseudoDocument, PanelDataMixin, UsableDataMixin, EmbeddableDataMixin)
+  extends mixClasses(BasePseudoDocument, PanelDataMixin, EmbeddableDataMixin, UsableDataMixin)
 {
   static #ALLOWED_STATUSES;
 
@@ -78,19 +78,6 @@ export default class VirtualCondition
 
   /** @type {Set<string>} */
   #sourceNames = new Set();
-
-  /**
-   * @inheritDoc
-   * @todo Deal with this duplicated code.
-   */
-  get _embedActions() {
-    return Object.assign(super._embedActions, {
-      useDoc: {
-        primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-        secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-      },
-    });
-  }
 
   /** @returns {Partial<Teriock.Embeds.EmbedIcon>[]} */
   get _embedIcons() {
