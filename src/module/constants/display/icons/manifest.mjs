@@ -341,6 +341,7 @@ export default {
     enabled: "ms-check-circle",
     error: "ms-error",
     expand: "ms-expand-all",
+    fall: "ms-falling",
     filled0: "ms-circle",
     filled1: "ms-adjust",
     filled2: "ms-circle-circle",

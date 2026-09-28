@@ -9,6 +9,7 @@ export default {
     deattune: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
     destroy: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
     elderSorcery: "TERIOCK.EFFECTS.Common.elderSorcery",
+    fall: "TERIOCK.EFFECTS.Common.fall",
     glue: "TERIOCK.SYSTEMS.Equipment.MENU.glue",
     identify: "TERIOCK.SYSTEMS.Equipment.MENU.identify",
     longRest: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",

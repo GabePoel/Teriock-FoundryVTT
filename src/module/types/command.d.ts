@@ -9,6 +9,7 @@ declare global {
       icon: ((options: object) => string) | string;
       id: string;
       label: ((options: object) => string) | string;
+      noActor?: boolean;
       shift?: string;
       tooltip?: ((options: object) => string) | string;
       primary: (actor: TeriockActor, options?: object) => Promise<void>;

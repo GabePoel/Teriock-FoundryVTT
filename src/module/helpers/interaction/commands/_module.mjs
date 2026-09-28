@@ -16,6 +16,7 @@ import {
   undampenCommand,
   unglueCommand,
 } from "./equipment-commands.mjs";
+import fallCommand from "./fall-command.mjs";
 import featCommand from "./feat-command.mjs";
 import { hackCommand, unhackCommand } from "./hack-commands.mjs";
 import healCommand from "./heal-command.mjs";
@@ -42,6 +43,7 @@ const commandArray = [
   deattuneCommand,
   destroyCommand,
   elderSorceryCommand,
+  fallCommand,
   featCommand,
   glueCommand,
   hackCommand,

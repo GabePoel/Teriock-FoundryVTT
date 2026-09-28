@@ -15,6 +15,7 @@ import {
   undampenCommand,
   unglueCommand,
 } from "../../../helpers/interaction/commands/equipment-commands.mjs";
+import fallCommand from "../../../helpers/interaction/commands/fall-command.mjs";
 import featCommand from "../../../helpers/interaction/commands/feat-command.mjs";
 import { hackCommand, unhackCommand } from "../../../helpers/interaction/commands/hack-commands.mjs";
 import healCommand from "../../../helpers/interaction/commands/heal-command.mjs";
@@ -40,6 +41,7 @@ export class DeathBagActivation extends Act(bagCommand) {}
 export class DeattuneActivation extends Act(deattuneCommand) {}
 export class DestroyActivation extends Act(destroyCommand) {}
 export class ElderSorceryActivation extends Act(elderSorceryCommand) {}
+export class FallActivation extends Act(fallCommand) {}
 export class FeatActivation extends Act(featCommand) {}
 export class GlueActivation extends Act(glueCommand) {}
 export class HealActivation extends Act(healCommand) {}

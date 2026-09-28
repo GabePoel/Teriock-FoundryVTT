@@ -22,9 +22,12 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
         fn(_commandString, match) {
           const payload = match[2] ? match[2].trim() : "";
           const commandOptions = buildCommandOptions(payload, command);
-          const actors = game.actors.selected;
-          if (!actors.length) { actors.push(null); }
-          actors.forEach(actor => command.primary(actor, commandOptions));
+          if (command.noActor) { command.primary(null, commandOptions); }
+          else {
+            const actors = game.actors.selected;
+            if (!actors.length) { actors.push(null); }
+            actors.forEach(actor => command.primary(actor, commandOptions));
+          }
           return false;
         },
       };

@@ -11,6 +11,7 @@ import {
   DeattuneActivation,
   DestroyActivation,
   ElderSorceryActivation,
+  FallActivation,
   FeatActivation,
   GlueActivation,
   HealActivation,
@@ -61,6 +62,7 @@ declare global {
     deattune: DeattuneActivation;
     destroy: DestroyActivation;
     elderSorcery: ElderSorceryActivation;
+    fall: FallActivation;
     feat: FeatActivation;
     glue: GlueActivation;
     hack: TakeHackActivation;

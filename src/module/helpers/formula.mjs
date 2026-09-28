@@ -19,8 +19,8 @@ export function addFormula(value, delta) {
 
 /**
  * Subtract something from a formula.
- * @param {Teriock.System.FormulaString} value
- * @param {Teriock.System.FormulaString} delta
+ * @param {Teriock.System.FormulaString} value - Original formula.
+ * @param {Teriock.System.FormulaString} delta - Modification to formula.
  * @returns {Teriock.System.FormulaString}
  */
 export function subtractFormula(value, delta) {
@@ -30,6 +30,15 @@ export function subtractFormula(value, delta) {
   if (!formulaExists(value)) { return `${minus} ${delta}`.trim(); }
   if (!formulaExists(delta)) { return value; }
   return `${value} ${operator} ${delta}`;
+}
+
+/**
+ * Add any number of formulas together.
+ * @param {...Teriock.System.FormulaString} formulas
+ * @returns {Teriock.System.FormulaString}
+ */
+export function addFormulas(...formulas) {
+  return formulas.reduce((value, delta) => addFormula(value, delta), "");
 }
 
 /**

@@ -1,6 +1,6 @@
 export const thresholdCommand = { alt: "advantage", shift: "disadvantage" };
 
-export const formulaCommand = { args: ["formula"], formula: true };
+export const formulaCommand = { args: ["formula"], formula: true, noActor: true };
 
 /**
  * Make a simple command function.
