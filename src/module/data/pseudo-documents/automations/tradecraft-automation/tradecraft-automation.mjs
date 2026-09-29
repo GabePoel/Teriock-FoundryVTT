@@ -9,6 +9,7 @@ import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {ThresholdAutomation}
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  */

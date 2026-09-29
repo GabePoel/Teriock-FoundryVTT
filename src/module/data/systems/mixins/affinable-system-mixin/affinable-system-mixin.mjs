@@ -9,6 +9,7 @@ import { BaseAffinity } from "../../../pseudo-documents/affinities/abstract/_mod
 export default function AffinableSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AffinableSystemData}
    */
   class AffinableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AffinableSystemData>} */ (Base) {
     /** @inheritDoc */

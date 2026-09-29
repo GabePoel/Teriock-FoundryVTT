@@ -8,6 +8,7 @@ const { RollTableSheet } = foundry.applications.sheets;
  */
 
 /**
+ * @extends {RollTableSheet}
  * @mixes BaseApplication
  * @mixes DragDropSheet
  */

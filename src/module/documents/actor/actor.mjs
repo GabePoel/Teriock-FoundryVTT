@@ -16,6 +16,7 @@ const { Actor } = foundry.documents;
 
 /**
  * The Teriock Actor implementation.
+ * @extends {Actor}
  * @mixes BaseDocument
  * @mixes CommonDocument
  */

@@ -6,6 +6,7 @@ const { JournalEntryPage } = foundry.documents;
 
 /**
  * The Teriock JournalEntryPage implementation.
+ * @extends {JournalEntryPage}
  * @mixes BaseDocument
  * @mixes EmbeddableData
  * @mixes PanelData

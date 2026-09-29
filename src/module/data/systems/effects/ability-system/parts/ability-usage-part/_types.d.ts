@@ -2,7 +2,7 @@ import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-m
 
 declare global {
   namespace Teriock.Models {
-    export type AbilityUsagePartData = {
+    export interface AbilityUsagePartData {
       /** <schema> This ability's delivery */
       delivery: Teriock.Keys.Delivery;
       /** <schema> This ability's execution time */
@@ -28,7 +28,7 @@ declare global {
       range: RangeModel;
       /** <schema> Appropriate targets */
       targets: Set<Teriock.Keys.Target>;
-    };
+    }
   }
 }
 

@@ -21,6 +21,7 @@ const RELATION_CHOICES = {
 };
 
 /**
+ * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  */
 export default class StatusAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {

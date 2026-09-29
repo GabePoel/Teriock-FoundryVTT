@@ -6,6 +6,7 @@ import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } f
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 /**
+ * @extends {BaseAutomation}
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
  */

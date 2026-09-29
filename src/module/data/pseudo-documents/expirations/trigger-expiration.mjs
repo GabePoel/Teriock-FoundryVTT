@@ -3,6 +3,7 @@ import { TriggerMechanicMixin } from "../mixins/_module.mjs";
 import { BaseExpiration } from "./abstract/_module.mjs";
 
 /**
+ * @extends {BaseExpiration}
  * @mixes TriggerMechanic
  */
 export default class TriggerExpiration extends mixClasses(BaseExpiration, TriggerMechanicMixin) {

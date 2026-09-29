@@ -11,6 +11,7 @@ const { fields } = foundry.data;
 export default function OverrideCompetencePseudoDocumentMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData}
    */
   class OverrideCompetenceMechanic
     extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.OverrideCompetencePseudoDocumentData>} */ (Base)

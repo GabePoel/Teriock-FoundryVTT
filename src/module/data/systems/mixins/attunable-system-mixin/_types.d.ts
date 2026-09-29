@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type AttunableSystemData = {
+    export interface AttunableSystemData {
       /** <schema> If this requires attunement */
       needsAttunement: boolean;
       /** <schema> Price */
@@ -12,7 +12,7 @@ declare global {
         /** <derived> Evaluated presence cost */
         value: number;
       };
-    };
+    }
   }
 }
 

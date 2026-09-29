@@ -27,6 +27,7 @@ const SELECTION_PATHS = [
 export default function SelectionPseudoDocumentMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.PseudoDocuments.SelectionPseudoDocumentData}
    */
   class SelectionPseudoDocument
     extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.SelectionPseudoDocumentData>} */ (Base)

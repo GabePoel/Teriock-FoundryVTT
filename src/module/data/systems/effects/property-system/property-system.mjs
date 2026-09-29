@@ -20,6 +20,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
+ * @extends {CleanedEffectSystem}
  * @mixes AdjustableSystem
  * @mixes ConsumableSystem
  * @mixes GrantedSystem

@@ -15,6 +15,7 @@ import {
 
 /**
  * A simple sheet for child documents.
+ * @extends {TeriockDocumentSheet}
  * @mixes DisplaySheet
  * @mixes CommonSheet
  * @mixes MechanicsSheet

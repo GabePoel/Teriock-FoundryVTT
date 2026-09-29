@@ -1,4 +1,4 @@
-import { TeriockCard as CardClass } from "../_module.mjs";
+import { TeriockCard as CardClass, TeriockCards } from "../_module.mjs";
 import { BaseCardSystem } from "../../data/systems/cards/_module.mjs";
 
 declare module "./card.mjs" {
@@ -7,6 +7,7 @@ declare module "./card.mjs" {
     system: BaseCardSystem;
     type: CardType;
 
+    readonly parent: TeriockCards;
     get documentName(): "Card";
     get id(): ID<TeriockCard>;
     get uuid(): UUID<TeriockCard>;

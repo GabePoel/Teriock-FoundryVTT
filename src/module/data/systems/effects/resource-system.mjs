@@ -5,6 +5,7 @@ import CleanedEffectSystem from "./cleaned-effect-system.mjs";
 
 /**
  * Resource-specific effect data model.
+ * @extends {CleanedEffectSystem}
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */

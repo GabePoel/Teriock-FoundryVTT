@@ -20,7 +20,7 @@ const { fields } = foundry.data;
 export default function AbilityInfoPart(Base) {
   /**
    * @mixin
-   * @property {TeriockActiveEffect<"ability">} parent
+   * @implements {Teriock.Models.AbilityFlagsPartData}
    */
   class AbilityInfoPart extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityFlagsPartData>} */ (Base) {
     /** @inheritDoc */

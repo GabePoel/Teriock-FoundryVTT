@@ -5,6 +5,7 @@ import ApplicableEffectSystem from "./applicable-effect-system/applicable-effect
 
 /**
  * Effect-specific effect data model.
+ * @extends {ApplicableEffectSystem}
  * @mixes GrantedSystem
  */
 export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, GrantedSystemMixin) {

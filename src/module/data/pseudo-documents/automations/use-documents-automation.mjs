@@ -9,6 +9,7 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
+ * @extends {BaseAutomation}
  * @mixes SelectionPseudoDocument
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic

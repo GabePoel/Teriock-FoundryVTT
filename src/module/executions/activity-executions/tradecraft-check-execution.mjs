@@ -3,6 +3,7 @@ import { BaseExecution } from "../abstract/_module.mjs";
 import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
 
 /**
+ * @extends {BaseExecution}
  * @mixes TradecraftExecution
  * @property {Teriock.Execution.ThresholdExecutionOptions} options
  */

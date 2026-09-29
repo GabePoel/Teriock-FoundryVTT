@@ -3,7 +3,7 @@ import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
-import { toId, toKebabCase } from "../../helpers/string.mjs";
+import { toKebabCase } from "../../helpers/string.mjs";
 
 /**
  * @import { Document } from "@common/abstract/_module.mjs";
@@ -153,14 +153,6 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
-     * Prefix to use in {@link _benchmarkStart} and {@link _benchmarkEnd}.
-     * @returns {string}
-     */
-    get _benchmarkString() {
-      return `${this.name}.${this.type}.${toId(this.collection ? this.uuid : this.name, { hash: true })}`;
-    }
-
-    /**
      * Lazy store of lazy values cached on this document.
      * @returns {Teriock.Documents.DocumentCache}
      */
@@ -296,22 +288,6 @@ export default function BaseDocumentMixin(Base) {
      */
     get typeLabel() {
       return _loc(CONFIG[this.documentName]?.typeLabels?.[this.type] ?? `DOCUMENT.${this.documentName}`);
-    }
-
-    /**
-     * Helper to start a benchmark.
-     * @param {string} key
-     */
-    _benchmarkEnd(key) {
-      console.timeEnd(`${key} - ${this._benchmarkString}`);
-    }
-
-    /**
-     * Helper to end a benchmark.
-     * @param {string} key
-     */
-    _benchmarkStart(key) {
-      console.time(`${key} - ${this._benchmarkString}`);
     }
 
     /**

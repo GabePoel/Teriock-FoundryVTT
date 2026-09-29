@@ -10,6 +10,7 @@ const { ChatMessage } = foundry.documents;
 
 /**
  * The Teriock ChatMessage implementation.
+ * @extends {ChatMessage}
  * @mixes BaseDocument
  */
 export default class TeriockChatMessage extends mixClasses(ChatMessage, BaseDocumentMixin) {
@@ -41,9 +42,9 @@ export default class TeriockChatMessage extends mixClasses(ChatMessage, BaseDocu
       <div class="timage" data-src="${img}" style="display: flex; justify-content: center;" data-openable="true">
         <img src="${img}" alt="${options.name || ""}" class="teriock-image" data-openable="true">
       </div>`),
-      speaker: this.getSpeaker({ actor: options.actor }, { defaultMode: true }),
+      speaker: this.getSpeaker({ actor: options.actor }),
       type: "shared",
-    });
+    }, { defaultMode: true });
   }
 
   /**

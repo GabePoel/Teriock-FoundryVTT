@@ -12,6 +12,7 @@ const { fields } = foundry.data;
 export default function AbilityElderSorceryPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AbilityElderSorceryPartData}
    * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityElderSorceryPart

@@ -1,55 +1,39 @@
-import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
-import { CompetenceModel } from "../../data/models/scaling-models/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { addFormula } from "../../helpers/formula.mjs";
-import { dotJoin } from "../../helpers/string.mjs";
+import { addFormulas } from "../../helpers/formula.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
+
+/**
+ * @import { InitiativeModel } from "../../data/models/modifier-models/_module.mjs";
+ */
 
 const { Combatant } = foundry.documents;
 
 /**
  * The Teriock Combatant implementation.
+ * @extends {Combatant}
  * @mixes BaseDocument
- * @mixes EmbeddableData
  */
-export default class TeriockCombatant extends mixClasses(Combatant, BaseDocumentMixin, EmbeddableDataMixin) {
+export default class TeriockCombatant extends mixClasses(Combatant, BaseDocumentMixin) {
   /**
-   * Competence for this combatant's initiative.
-   * @type {CompetenceModel}
+   * The initiative model to use.
+   * @returns {InitiativeModel}
    */
-  #competence = new CompetenceModel({ raw: 1 });
-
-  /**
-   * Competence for this combatant's initiative.
-   * @returns {CompetenceModel}
-   */
-  get competence() {
-    return this.actor?.system?.initiative?.competence ?? this.#competence;
+  get initiativeModel() {
+    return this.actor?.system?.initiative ?? this.system.initiative;
   }
 
-  /** @inheritDoc */
-  get embedParts() {
-    const parts = super.embedParts;
-    return Object.assign(parts, {
-      inactive: this.isDefeated,
-      struck: this.isDefeated,
-      subtitle: _loc("DOCUMENT.Combatant"),
-      text: dotJoin([
-        this.isDefeated ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.defeated") : "",
-        this.hidden ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.hidden") : "",
-        parts.text,
-      ]),
-    });
-  }
-
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @version 368
+   */
   _getInitiativeFormula() {
     const base = TERIOCK.config.character.defaults.initiative.base;
-    const competence = this.competence.formula ?? TERIOCK.config.character.defaults.initiative.competence;
-    const bonus = this.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus;
+    const competence = this.initiativeModel.competence.formula
+      ?? TERIOCK.config.character.defaults.initiative.competence;
+    const bonus = this.initiativeModel.bonus ?? TERIOCK.config.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
-    return addFormula(addFormula(base, competence), bonus);
+    return addFormulas(base, competence, bonus);
   }
 
   /**
@@ -60,7 +44,7 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     formula ||= this._getInitiativeFormula();
     const rollData = this.actor?.getRollData() || {};
     // Tags match `InitiativeExecution`.
-    const rollOptions = { tags: [this.competence.label] };
+    const rollOptions = { tags: [this.initiativeModel.competence.label] };
     return new ThresholdRoll(formula, rollData, rollOptions);
   }
 }

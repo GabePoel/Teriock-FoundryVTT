@@ -19,6 +19,7 @@ const { fields } = foundry.data;
 export default function ActorDeathBagPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorDeathBagPartData}
    * @property {TeriockActor} parent
    */
   class ActorDeathBagPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorDeathBagPartData>} */ (Base) {

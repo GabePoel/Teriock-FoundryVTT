@@ -18,6 +18,7 @@ const { fields } = foundry.data;
 export default function ThresholdExecutionMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Execution.ThresholdExecutionData}
    */
   class ThresholdExecution
     extends /** @type {InitializedDataModel<T, Teriock.Execution.ThresholdExecutionData>} */ (Base)

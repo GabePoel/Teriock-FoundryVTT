@@ -14,6 +14,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 /**
  * Power-specific item data model.
+ * @extends {BaseItemSystem}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  * @mixes MetaphysicsSystem

@@ -1,7 +1,5 @@
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
-import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
@@ -12,24 +10,14 @@ const { TokenDocument } = foundry.documents;
 
 /**
  * The Teriock TokenDocument implementation.
+ * @extends {TokenDocument}
  * @mixes BaseDocument
- * @mixes EmbeddableData
  */
-export default class TeriockTokenDocument extends mixClasses(TokenDocument, BaseDocumentMixin, EmbeddableDataMixin) {
+export default class TeriockTokenDocument extends mixClasses(TokenDocument, BaseDocumentMixin) {
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateThumbnails(source, "texture.src", "ring.subject.texture");
     return super.migrateData(source, options);
-  }
-
-  /** @inheritDoc */
-  get embedParts() {
-    const parts = Object.assign(super.embedParts, {
-      icon: TERIOCK.display.icons.manifest.document.token,
-      img: this.img,
-    });
-    if (this.actor && this.actor.fullName !== parts.title) { parts.text = this.actor.fullName; }
-    return parts;
   }
 
   /**
@@ -87,19 +75,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
       }
     }
     if (this.detectionModes.basicSight) { this.detectionModes.basicSight.enabled = false; }
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {ContextMenuEntry[]}
-   */
-  getEmbedContextMenuEntries(doc) {
-    return [{
-      icon: makeIcon(teriock.data.systems.actors.CharacterSystem.metadata.icon, "contextMenu"),
-      label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
-      onClick: async () => this.actor.sheet.render(true),
-      visible: () => Boolean(this.actor?.isViewer),
-    }, ...super.getEmbedContextMenuEntries(doc)];
   }
 
   /**

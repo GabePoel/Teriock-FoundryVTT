@@ -10,6 +10,7 @@ const { Token } = foundry.canvas.placeables;
 const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
 
 /**
+ * @extends {Token}
  * @mixes EtherealLightPlaceable
  * @inheritDoc
  * @property {Scene} scene

@@ -22,6 +22,7 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 export default function ActorAttributesPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorAttributesPartData}
    * @property {TeriockActor} parent
    */
   class ActorAttributesPart

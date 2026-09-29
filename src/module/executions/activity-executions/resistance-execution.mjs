@@ -9,6 +9,7 @@ import AffinityExecution from "./affinity-execution.mjs";
  * - [Hexproof](https://wiki.teriock.com/index.php?title=Keyword:Hexproof)
  * - [Resistance](https://wiki.teriock.com/index.php?title=Keyword:Resistance)
  *
+ * @extends {AffinityExecution}
  * @mixes ThresholdExecution
  */
 export default class ResistanceExecution extends mixClasses(AffinityExecution, ThresholdExecutionMixin) {

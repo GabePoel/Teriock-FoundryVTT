@@ -5,6 +5,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
  * Condition sheet.
+ * @extends {ActiveEffectConfig}
  * @mixes BaseDocumentSheet
  * @property {TeriockActiveEffect<"condition">} document
  */

@@ -6,6 +6,7 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
 
 /**
  * Effect-specific effect data model.
+ * @extends {ApplicableEffectSystem}
  * @mixes TransformationSystem
  */
 export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem, TransformationSystemMixin) {

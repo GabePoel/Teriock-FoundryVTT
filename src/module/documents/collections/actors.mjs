@@ -7,6 +7,14 @@ const { Actors } = foundry.documents.collections;
  */
 export default class TeriockActors extends Actors {
   /**
+   * All the actors visible in the current scene.
+   * @returns {TeriockActor[]}
+   */
+  get current() {
+    return game.scenes.viewed?.tokens.filter(token => token.actor).map(token => token.actor) ?? [];
+  }
+
+  /**
    * Get the default actor for the current user.
    * @returns {TeriockActor|null}
    */
@@ -38,7 +46,7 @@ export default class TeriockActors extends Actors {
    * @returns {TeriockActor[]}
    */
   get relevant() {
-    return Array.from(new Set([...this.pcs, ...this.visible]));
+    return Array.from(new Set([...this.pcs, ...this.current]));
   }
 
   /**
@@ -49,14 +57,6 @@ export default class TeriockActors extends Actors {
     const controlled = game.canvas.tokens.controlled.map(t => t?.actor).filter(Boolean);
     if (controlled.length) { return controlled; }
     return this.default ? [this.default] : [];
-  }
-
-  /**
-   * All the actors visible in the current scene.
-   * @returns {TeriockActor[]}
-   */
-  get visible() {
-    return game.scenes.viewed?.tokens.filter(token => token.actor).map(token => token.actor) ?? [];
   }
 
   /**

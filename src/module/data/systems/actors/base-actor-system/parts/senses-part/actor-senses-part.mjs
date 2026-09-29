@@ -24,6 +24,7 @@ const { fields } = foundry.data;
 export default function ActorSensesPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorSensesPartData}
    * @property {TeriockActor} parent
    */
   class ActorSensesPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorSensesPartData>} */ (Base) {

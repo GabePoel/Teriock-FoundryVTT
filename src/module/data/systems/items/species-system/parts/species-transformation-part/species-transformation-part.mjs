@@ -27,6 +27,7 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
 export default function SpeciesTransformationPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.SpeciesTransformationPartData}
    * @property {TeriockItem<"species">} parent
    */
   class SpeciesTransformationPart

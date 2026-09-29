@@ -6,6 +6,7 @@ import { DocumentDirectoryMixin } from "../mixins/_module.mjs";
 const { Compendium } = foundry.applications.sidebar.apps;
 
 /**
+ * @extends {Compendium}
  * @mixes TeriockDocumentDirectory
  */
 export default class TeriockCompendium extends mixClasses(Compendium, DocumentDirectoryMixin) {

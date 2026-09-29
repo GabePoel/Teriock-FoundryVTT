@@ -1,5 +1,7 @@
 declare module "./base-actor-system.mjs" {
-  export default interface BaseActorSystem extends Teriock.Models.BaseActorSystemData {}
+  export default interface BaseActorSystem extends Teriock.Models.BaseActorSystemData {
+    readonly parent: TeriockActor;
+  }
 }
 
 declare global {

@@ -1,20 +1,17 @@
-import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
+import { PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { Panel } from "../../data/pseudo-documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
 /**
  * The Teriock TableResult implementation.
+ * @extends {TableResult}
  * @mixes BaseDocument
  * @mixes PanelData
- * @mixes EmbeddableData
  */
-export default class TeriockTableResult
-  extends mixClasses(TableResult, BaseDocumentMixin, PanelDataMixin, EmbeddableDataMixin)
-{
+export default class TeriockTableResult extends mixClasses(TableResult, BaseDocumentMixin, PanelDataMixin) {
   /**
    * Typed identifier for the referenced document on document-type results.
    * @returns {TypedIdentifier|null}
@@ -22,11 +19,6 @@ export default class TeriockTableResult
   get documentIdentifier() {
     if (this.type !== "document") { return null; }
     return this.getFlag("teriock", "documentIdentifier") || null;
-  }
-
-  /** @inheritDoc */
-  get embedParts() {
-    return Object.assign(super.embedParts, { makeTooltip: true, subtitle: this.type, text: this.parent.name || "" });
   }
 
   /**
@@ -71,16 +63,6 @@ export default class TeriockTableResult
       );
     }
     return activations;
-  }
-
-  /** @inheritDoc */
-  getEmbedContextMenuEntries(doc) {
-    return [{
-      icon: makeIcon(TERIOCK.display.icons.manifest.ui.document, "contextMenu"),
-      label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
-      onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
-      visible: () => Boolean(this.documentUuid),
-    }, ...super.getEmbedContextMenuEntries(doc)];
   }
 
   /** @inheritDoc */

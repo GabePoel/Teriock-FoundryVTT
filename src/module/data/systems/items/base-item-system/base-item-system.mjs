@@ -7,6 +7,7 @@ const { TypeDataModel } = foundry.abstract;
 
 /**
  * Base item data model.
+ * @extends {TypeDataModel}
  * @mixes InstructionsSystem
  * @mixes ChildSystem
  */

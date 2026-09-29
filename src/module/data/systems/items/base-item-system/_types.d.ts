@@ -10,6 +10,8 @@ declare module "./base-item-system.mjs" {
     flaws: string;
     /** <schema> ID of the effect this depends on */
     _dep: ID<TeriockActiveEffect> | null;
+
+    readonly parent: TeriockItem;
   }
 }
 

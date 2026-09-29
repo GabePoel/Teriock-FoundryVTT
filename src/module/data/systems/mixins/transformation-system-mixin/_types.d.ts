@@ -1,9 +1,9 @@
 declare global {
   namespace Teriock.Models {
-    export type TransformationSystemData = {
+    export interface TransformationSystemData {
       /** <schema> Transformation configuration */
       transformation: Teriock.Transformation.EffectTransformationConfig;
-    };
+    }
   }
 }
 

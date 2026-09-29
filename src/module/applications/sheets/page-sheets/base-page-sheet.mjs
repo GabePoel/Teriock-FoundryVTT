@@ -17,6 +17,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  */
 
 /**
+ * @extends {JournalEntryPageProseMirrorSheet}
  * @mixes BaseDocumentSheet
  * @mixes DisplaySheet
  * @mixes SystemSettingsButtonSheet

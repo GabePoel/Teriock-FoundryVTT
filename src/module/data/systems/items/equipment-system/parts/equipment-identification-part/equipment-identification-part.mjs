@@ -17,6 +17,7 @@ const { EmbeddedDataField } = foundry.data.fields;
 export default function EquipmentIdentificationPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.EquipmentIdentificationPartData}
    * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentIdentificationPart

@@ -6,6 +6,7 @@ import { BaseActivation } from "../abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseActivation}
  * @mixes SelectionPseudoDocument
  */
 export default class UseDocumentsActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {

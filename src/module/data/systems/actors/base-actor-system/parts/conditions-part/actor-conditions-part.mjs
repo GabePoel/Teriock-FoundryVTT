@@ -24,6 +24,7 @@ const { fields } = foundry.data;
 export default function ActorConditionsPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorConditionsPartData}
    * @property {TeriockActor} parent
    */
   class ActorConditionsPart

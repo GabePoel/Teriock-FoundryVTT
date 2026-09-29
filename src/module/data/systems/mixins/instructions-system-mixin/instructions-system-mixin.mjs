@@ -13,6 +13,7 @@ const { fields } = foundry.data;
 export default function InstructionsSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.InstructionsSystemData}
    */
   class InstructionsSystem
     extends /** @type {InitializedDataModel<T, Teriock.Models.InstructionsSystemData>} */ (Base)

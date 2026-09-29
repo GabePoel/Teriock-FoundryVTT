@@ -14,6 +14,7 @@ const { fields } = foundry.data;
 export default function AbilityDurationPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AbilityDurationPartData}
    * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityDurationPart

@@ -2,7 +2,7 @@ import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import BaseMessageSystem from "../base-message-system.mjs";
+import BaseMessageSystem from "../base-message-system/base-message-system.mjs";
 
 const { fields } = foundry.data;
 
@@ -40,7 +40,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
    * @returns {Promise<Teriock.Panels.PanelParts[]>}
    */
   async #preparePanelContext() {
-    if (!this.parent.isContentVisible) { return [TERIOCK.display.panels.common]; }
+    if (!this.parent.isContentVisible) { return [TERIOCK.display.panels.common.unknown]; }
     const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
     return Promise.all(
       this.panels.contents.map(p => p?.prepareContext({ relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })),
@@ -55,7 +55,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
     const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
     if (defaultCollapse === "closed") { return true; }
     else if (defaultCollapse === "open") { return false; }
-    return this.getNearestDocument().timestamp
+    return this.parent.timestamp
       < Date.now() - (game.settings.get("teriock", "autoPanelCollapseTime") ?? Infinity) * 60 * 1000;
   }
 

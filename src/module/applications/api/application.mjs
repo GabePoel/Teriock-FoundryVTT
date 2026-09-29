@@ -4,6 +4,7 @@ import { BaseApplicationMixin } from "./mixins/_module.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
+ * @extends {ApplicationV2}
  * @mixes HandlebarsApplication
  * @mixes BaseApplication
  */

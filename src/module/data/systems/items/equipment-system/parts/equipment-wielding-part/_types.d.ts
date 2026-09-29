@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type EquipmentWieldingPartData = {
+    export interface EquipmentWieldingPartData {
       /** <schema> Ammunition */
       ammunition: {
         /** <schema> The amount of ammunition this consumes */
@@ -16,7 +16,7 @@ declare global {
       glued: boolean;
       /** <schema> Minimum STR */
       minStr: number;
-    };
+    }
   }
 }
 

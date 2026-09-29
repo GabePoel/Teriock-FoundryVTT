@@ -15,6 +15,7 @@ const { fields } = foundry.data;
 export default function AbilityOverviewPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AbilityOverviewPartData}
    * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityOverviewPart

@@ -21,6 +21,7 @@ export default function CommonSystemMixin(Base) {
    * @mixes PropagationData
    * @mixes RefreshSystem
    * @mixin
+   * @implements {Teriock.Models.CommonSystemData}
    */
   class CommonSystem
     extends mixClasses(

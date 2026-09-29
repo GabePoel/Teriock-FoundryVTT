@@ -19,6 +19,7 @@ const { fields } = foundry.data;
 export default function EquipmentStoragePart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.EquipmentStoragePartData}
    * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentStoragePart

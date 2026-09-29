@@ -1,13 +1,17 @@
-import { TeriockCombatant as CombatantClass } from "../_module.mjs";
+import { Combatant } from "@client/documents/_module.mjs";
+
+import { TeriockCombat, TeriockCombatant as CombatantClass } from "../_module.mjs";
 import { BaseCombatantSystem } from "../../data/systems/combatants/_module.mjs";
 
 declare module "./combatant.mjs" {
-  export default interface TeriockCombatant {
+  // @ts-expect-error Declare base class
+  export default interface TeriockCombatant extends Combatant {
     _id: Readonly<ID<TeriockCombatant>>;
     system: BaseCombatantSystem;
     type: CombatantType;
 
-    get actor(): TeriockActor | null;
+    readonly parent: TeriockCombat;
+    readonly actor: TeriockActor;
     get documentName(): "Combatant";
     get id(): ID<TeriockCombatant>;
     get uuid(): UUID<TeriockCombatant>;

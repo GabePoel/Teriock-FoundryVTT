@@ -21,6 +21,7 @@ const { fields } = foundry.data;
 export default function ActorScalingPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorScalingPartData}
    * @property {TeriockActor} parent
    */
   class ActorScalingPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorScalingPartData>} */ (Base) {

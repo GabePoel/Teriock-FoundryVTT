@@ -10,7 +10,7 @@ declare global {
       type: keyof typeof costConfig.primary.types | null;
     };
 
-    export type AbilityCostsPartData = {
+    export interface AbilityCostsPartData {
       costs: {
         /** <schema> Component costs */
         components: Record<Teriock.Keys.Component, CostComponentValue>;
@@ -19,7 +19,7 @@ declare global {
         /** <schema> Cost tweaks */
         tweaks: Record<Teriock.Keys.CostTweak, number>;
       };
-    };
+    }
   }
 }
 

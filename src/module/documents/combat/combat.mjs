@@ -17,6 +17,7 @@ function getResetUuids(combatants) {
 
 /**
  * The Teriock Combat implementation.
+ * @extends {Combat}
  * @mixes BaseDocument
  */
 export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin) {

@@ -18,6 +18,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
+ * @extends {CleanedEffectSystem}
  * @mixes ThresholdData
  * @mixes AttackSystem
  * @mixes ConsumableSystem

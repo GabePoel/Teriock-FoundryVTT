@@ -9,6 +9,7 @@ import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_
 export default function ExpirableSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ExpirableSystemData}
    */
   class ExpirableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.ExpirableSystemData>} */ (Base) {
     /** @inheritDoc */

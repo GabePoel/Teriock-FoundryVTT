@@ -5,6 +5,7 @@ import { BaseExecution } from "../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
 
 /**
+ * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
 export default class FeatExecution extends mixClasses(BaseExecution, ThresholdExecutionMixin) {

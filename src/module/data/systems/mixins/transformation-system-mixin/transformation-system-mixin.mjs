@@ -54,6 +54,7 @@ function transformationStatFlag(stat) {
 export default function TransformationSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.TransformationSystemData}
    */
   class TransformationSystem
     extends /** @type {InitializedDataModel<T, Teriock.Models.TransformationSystemData>} */ (Base)

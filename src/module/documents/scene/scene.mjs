@@ -5,6 +5,7 @@ const { Scene } = foundry.documents;
 
 /**
  * The Teriock Scene implementation.
+ * @extends {Scene}
  * @mixes BaseDocument
  */
 export default class TeriockScene

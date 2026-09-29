@@ -173,6 +173,9 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
   registerSubtypes(data.systems.combatants);
 
+  CONFIG.CombatantGroup.documentClass = documents.TeriockCombatantGroup;
+  registerSubtypes(data.systems.groups);
+
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 
   CONFIG.Item.compendiumIndexFields = ["system._sup"];

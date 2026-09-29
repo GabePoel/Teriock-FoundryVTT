@@ -16,6 +16,7 @@ import { AttackExecutionMixin } from "../../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {DocumentExecution}
  * @mixes AttackExecution
  */
 export default class AbilityExecution extends mixClasses(DocumentExecution, AttackExecutionMixin) {

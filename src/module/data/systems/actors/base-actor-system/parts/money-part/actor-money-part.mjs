@@ -16,6 +16,7 @@ const { fields } = foundry.data;
 export default function ActorMoneyPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorMoneyPartData}
    * @property {TeriockActor} parent
    */
   class ActorMoneyPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorMoneyPartData>} */ (Base) {

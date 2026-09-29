@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type ConsumableSystemData = {
+    export interface ConsumableSystemData {
       /** <schema> Whether this document is consumable */
       consumable: boolean;
       /** <schema> The amount of the document to consumer per use */
@@ -16,7 +16,7 @@ declare global {
         /** <schema> Current quantity remaining */
         value: number;
       };
-    };
+    }
   }
 }
 

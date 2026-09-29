@@ -19,6 +19,7 @@ const { fields } = foundry.data;
 export default function AbilityCostsPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AbilityCostsPartData}
    * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityCostsPart extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityCostsPartData>} */ (Base) {

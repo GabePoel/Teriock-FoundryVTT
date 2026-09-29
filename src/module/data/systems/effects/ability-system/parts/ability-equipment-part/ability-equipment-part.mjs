@@ -17,6 +17,7 @@ export default function AbilityEquipmentPart(Base) {
    * - [Granting](https://wiki.teriock.com/index.php/Property:Granting)
    *
    * @mixin
+   * @implements {Teriock.Models.AbilityEquipmentPartData}
    * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityEquipmentPart

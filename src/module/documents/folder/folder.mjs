@@ -10,6 +10,7 @@ const { Folder } = foundry.documents;
 
 /**
  * The Teriock Folder implementation.
+ * @extends {Folder}
  * @mixes BaseDocument
  */
 export default class TeriockFolder extends mixClasses(Folder, BaseDocumentMixin) {

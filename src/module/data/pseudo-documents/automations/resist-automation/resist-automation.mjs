@@ -7,6 +7,7 @@ import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {ThresholdAutomation}
  * @mixes TriggerAutomation
  */
 export default class ResistAutomation extends mixClasses(ThresholdAutomation, TriggerAutomationMixin) {

@@ -6,6 +6,7 @@ import DocumentExecution from "../../abstract/document-execution/document-execut
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 
 /**
+ * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
 export default class ExpirationExecution extends mixClasses(DocumentExecution, ThresholdExecutionMixin) {

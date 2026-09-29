@@ -9,6 +9,7 @@ const { fields } = foundry.data;
 
 /**
  * An automation that makes an attack roll with no ability associated with it.
+ * @extends {ThresholdAutomation}
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  * @see {AttackRollExecution}

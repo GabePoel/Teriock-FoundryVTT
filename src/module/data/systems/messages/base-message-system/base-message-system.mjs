@@ -1,10 +1,11 @@
-import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { BaseSystemMixin, UncommonSystemMixin } from "../mixins/_module.mjs";
+import { icons } from "../../../../constants/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 
 /**
+ * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes UncommonSystem
  */
@@ -59,7 +60,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
    * @returns {Promise<object>}
    */
   async _prepareContext(options = {}) {
-    const document = this.getNearestDocument();
+    const document = this.parent;
     const speakerToken = document.speakerToken;
     return {
       hasSpeakerInteraction: Boolean(speakerToken || document.constructor.getSpeakerActor(document.speaker)?.visible),

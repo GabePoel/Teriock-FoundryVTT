@@ -10,6 +10,7 @@ const { fields } = foundry.data;
 export default function RevelationSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.RevelationSystemData}
    */
   class RevelationSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RevelationSystemData>} */ (Base) {
     /** @inheritDoc */

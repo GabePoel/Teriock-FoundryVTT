@@ -6,6 +6,7 @@ import DocumentDirectoryMixin from "../mixins/document-directory-mixin.mjs";
 const { ItemDirectory } = foundry.applications.sidebar.tabs;
 
 /**
+ * @extends {ItemDirectory}
  * @mixes TeriockDocumentDirectory
  */
 export default class TeriockItemDirectory extends mixClasses(ItemDirectory, DocumentDirectoryMixin) {

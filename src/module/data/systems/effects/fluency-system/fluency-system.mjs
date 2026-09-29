@@ -14,6 +14,7 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
  * Relevant wiki pages:
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
+ * @extends {CleanedEffectSystem}
  * @mixes WikiSystem
  * @mixes RevelationSystem
  * @mixes CompetenceDisplaySystem

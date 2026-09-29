@@ -31,6 +31,7 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
  * Relevant wiki pages:
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
+ * @extends {BaseItemSystem}
  * @mixes WikiSystem
  * @mixes CompetenceDisplaySystem
  * @mixes StatGiverSystem

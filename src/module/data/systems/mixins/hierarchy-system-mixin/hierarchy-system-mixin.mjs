@@ -10,6 +10,7 @@ import { nullIdField } from "../../../fields/tools/builders.mjs";
 export default function HierarchySystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.HierarchySystemData}
    */
   class HierarchySystem extends /** @type {InitializedDataModel<T, Teriock.Models.HierarchySystemData>} */ (Base) {
     /** @inheritDoc */

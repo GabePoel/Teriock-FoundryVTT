@@ -17,6 +17,7 @@ const { fields } = foundry.data;
 export default function ImpactsExecutionMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Execution.ImpactsExecutionData}
    */
   class ImpactsExecution extends /** @type {InitializedDataModel<T, Teriock.Execution.ImpactsExecutionData>} */ (Base) {
     /** @inheritDoc */

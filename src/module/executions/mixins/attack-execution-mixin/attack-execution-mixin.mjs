@@ -21,6 +21,7 @@ export default function AttackExecutionMixin(Base) {
   /**
    * @mixes ThresholdExecution
    * @mixin
+   * @implements {Teriock.Execution.AttackExecutionData}
    */
   class AttackExecution
     extends mixClasses(

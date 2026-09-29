@@ -4,6 +4,7 @@ import { ImpactsExecutionMixin } from "../mixins/_module.mjs";
 
 /**
  * Execution that rolls one or more impacts.
+ * @extends {BaseExecution}
  * @mixes ImpactsExecution
  */
 export default class DealImpactExecution extends mixClasses(BaseExecution, ImpactsExecutionMixin) {

@@ -12,6 +12,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Base actor sheet.
+ * @extends {ActorSheetV2}
  * @mixes HackStatApplication
  * @mixes HandlebarsApplication
  * @mixes BaseDocumentSheet

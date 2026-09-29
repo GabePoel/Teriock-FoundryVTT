@@ -14,6 +14,7 @@ const { fields } = foundry.data;
 export default function ConsumableSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ConsumableSystemData}
    */
   class ConsumableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.ConsumableSystemData>} */ (Base) {
     /** @inheritDoc */

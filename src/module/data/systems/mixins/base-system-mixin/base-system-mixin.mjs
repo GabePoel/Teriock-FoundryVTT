@@ -20,6 +20,7 @@ export default function BaseSystemMixin(Base) {
    * @mixes AbstractData
    * @mixes AccessData
    * @mixin
+   * @implements {Teriock.Models.BaseSystemData}
    */
   class BaseSystem
     extends mixClasses(

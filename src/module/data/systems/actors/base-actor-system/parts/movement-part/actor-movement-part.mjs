@@ -20,6 +20,7 @@ const { fields } = foundry.data;
 export default function ActorMovementPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorMovementPartData}
    * @property {TeriockActor} parent
    */
   class ActorMovementPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorMovementPartData>} */ (Base) {

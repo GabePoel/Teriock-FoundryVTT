@@ -3,6 +3,7 @@ import { DocumentExecution } from "../abstract/_module.mjs";
 import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
 
 /**
+ * @extends {DocumentExecution}
  * @mixes TradecraftExecution
  * @property {TeriockActiveEffect<"fluency">} source
  */

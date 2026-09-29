@@ -9,6 +9,7 @@ const { Item } = foundry.documents;
 
 /**
  * The Teriock Item implementation.
+ * @extends {Item}
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ChildDocument

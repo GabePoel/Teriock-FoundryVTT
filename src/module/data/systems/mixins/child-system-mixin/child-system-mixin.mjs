@@ -29,6 +29,7 @@ export default function ChildSystemMixin(Base) {
    * @mixes UsableData
    * @mixes HierarchySystem
    * @mixin
+   * @implements {Teriock.Models.ChildSystemData}
    */
   class ChildSystem
     extends mixClasses(

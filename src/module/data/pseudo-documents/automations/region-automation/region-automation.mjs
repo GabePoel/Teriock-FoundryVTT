@@ -9,6 +9,7 @@ const { fields } = foundry.data;
 
 /**
  * A region that is placed from a button.
+ * @extends {TargetAutomation}
  * @mixes SelectionPseudoDocument
  * @mixes TriggerAutomation
  * @mixes OverrideDataPseudoDocument

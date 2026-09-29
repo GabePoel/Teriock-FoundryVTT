@@ -17,6 +17,7 @@ const { fields } = foundry.data;
 export default function EquipmentWieldingPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.EquipmentWieldingPartData}
    * @property {TeriockItem<"equipment">} parent
    */
   class EquipmentWieldingPart

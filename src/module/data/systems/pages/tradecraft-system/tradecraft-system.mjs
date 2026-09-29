@@ -7,6 +7,7 @@ import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
 /**
+ * @extends {BasePageSystem}
  * @mixes WikiSystem
  */
 export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {

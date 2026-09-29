@@ -6,6 +6,7 @@ export { default as TeriockCards } from "./cards/cards.mjs";
 export { default as TeriockChatMessage } from "./chat-message/chat-message.mjs";
 export * as collections from "./collections/_module.mjs";
 export { default as TeriockCombat } from "./combat/combat.mjs";
+export { default as TeriockCombatantGroup } from "./combatant-group/combatant-group.mjs";
 export { default as TeriockCombatant } from "./combatant/combatant.mjs";
 export { default as TeriockFolder } from "./folder/folder.mjs";
 export { default as TeriockItem } from "./item/item.mjs";

@@ -2,7 +2,7 @@ import { DefenseModel, RangeModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ArmamentSystemData = {
+    export interface ArmamentSystemData {
       /** <schema> Armor Value */
       av: DefenseModel;
       /** <schema> Block Value */
@@ -47,7 +47,7 @@ declare global {
       styleDescription: string;
       /** <schema> Vitals */
       vitals: boolean;
-    };
+    }
   }
 }
 

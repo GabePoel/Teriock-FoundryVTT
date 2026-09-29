@@ -12,6 +12,7 @@ const { fields } = foundry.data;
 export default function ActorInformationPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorInformationPartData}
    * @property {TeriockActor} parent
    */
   class ActorInformationPart

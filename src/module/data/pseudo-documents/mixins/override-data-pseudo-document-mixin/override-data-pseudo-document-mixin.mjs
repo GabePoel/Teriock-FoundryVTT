@@ -9,6 +9,7 @@ const { fields } = foundry.data;
 export default function OverrideDataPseudoDocumentMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.PseudoDocuments.OverrideDataPseudoDocumentData}
    */
   class OverrideDataPseudoDocument
     extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.OverrideDataPseudoDocumentData>} */ (Base)

@@ -14,6 +14,7 @@ import {
   PropertySystem,
   ResourceSystem,
 } from "./effects/_module.mjs";
+import { BaseGroupSystem } from "./groups/_module.mjs";
 import {
   ArchetypeSystem,
   BodySystem,
@@ -63,6 +64,10 @@ declare global {
     base: BaseCombatantSystem;
   }
 
+  export interface CombatantGroupSystemMap {
+    base: BaseGroupSystem;
+  }
+
   export interface ItemSystemMap {
     archetype: ArchetypeSystem;
     body: BodySystem;
@@ -87,6 +92,7 @@ declare global {
   export type CardType = TypeMapKey<CardSystemMap>;
   export type ChatMessageType = TypeMapKey<ChatMessageSystemMap>;
   export type CombatantType = TypeMapKey<CombatantSystemMap>;
+  export type CombatantGroupType = TypeMapKey<CombatantGroupSystemMap>;
   export type ItemType = TypeMapKey<ItemSystemMap>;
   export type JournalEntryPageType = TypeMapKey<JournalEntryPageSystemMap>;
 }

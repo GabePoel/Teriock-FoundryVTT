@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export type GrantedSystemData = {
+    export interface GrantedSystemData {
       /** <schema> Applies even if the parent equipment is dampened */
       applyIfDampened: boolean;
       /** <schema> Applies even if the parent equipment is destroyed */
@@ -9,7 +9,7 @@ declare global {
       applyIfShattered: boolean;
       /** <schema> Applies even if the parent equipment is unequipped */
       applyIfUnequipped: boolean;
-    };
+    }
   }
 }
 

@@ -11,6 +11,7 @@ const { TypeDataModel } = foundry.abstract;
 
 /**
  * Base page data model.
+ * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes UncommonSystem
  * @mixes RulesSystem

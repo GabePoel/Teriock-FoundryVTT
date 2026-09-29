@@ -10,6 +10,7 @@ const { fields } = foundry.data;
 export default function AttackSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AttackSystemData}
    */
   class AttackSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AttackSystemData>} */ (Base) {
     /** @inheritDoc */

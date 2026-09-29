@@ -45,7 +45,10 @@ export default function EmbeddableDataMixin(Base) {
       };
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @protected
+     */
     async _buildEmbedHTML(config, options = {}) {
       if (typeof config.path === "string") {
         const field = this.getFieldForProperty(config.path);

@@ -15,6 +15,7 @@ export default function StatGiverSystemMixin(Base) {
   /**
    * @implements {Teriock.Functionality.StatProvider}
    * @mixin
+   * @implements {Teriock.Models.StatGiverSystemData}
    */
   class StatGiverSystem extends /** @type {InitializedDataModel<T, Teriock.Models.StatGiverSystemData>} */ (Base) {
     /** @inheritDoc */

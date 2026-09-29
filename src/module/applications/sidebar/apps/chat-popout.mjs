@@ -9,6 +9,7 @@ const { ChatPopout } = foundry.applications.sidebar.apps;
  */
 
 /**
+ * @extends {ChatPopout}
  * @mixes ChatMessageConnection
  */
 export default class TeriockChatPopout extends mixClasses(ChatPopout, ChatMessageConnectionMixin) {

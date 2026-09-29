@@ -17,7 +17,10 @@ export default function PanelDataMixin(Base) {
       return Object.assign(super.documentMetadata, { tooltip: true });
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @protected
+     */
     async _buildEmbedHTML(config, options = {}) {
       if (config.values.includes("panel")) {
         const panelOptions = {

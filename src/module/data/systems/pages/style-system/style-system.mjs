@@ -5,6 +5,7 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
 /**
  * Rules text for a weapon fighting style.
+ * @extends {BasePageSystem}
  * @mixes WikiSystem
  */
 export default class StyleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {

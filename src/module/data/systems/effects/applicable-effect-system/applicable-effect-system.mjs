@@ -10,6 +10,7 @@ const { fields } = foundry.data;
 
 /**
  * Effect-specific effect data model.
+ * @extends {BaseEffectSystem}
  * @mixes AffinableSystem
  * @mixes ExpirableSystem
  * @mixes MetaphysicsSystem

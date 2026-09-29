@@ -20,6 +20,7 @@ const SCOPE_FLAG_KEYS = ["attribute", "mode", "part", "tradecraft"];
 const SCOPE_RELATION_KEYS = ["ability", "actor", "armament", "effect", "item", "source"];
 
 /**
+ * @extends {BasePseudoDocument}
  * @mixes PropagationData
  */
 export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocument, PropagationDataMixin) {

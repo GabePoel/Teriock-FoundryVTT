@@ -22,6 +22,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
+ * @extends {BaseItemSystem}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  * @mixes WikiSystem

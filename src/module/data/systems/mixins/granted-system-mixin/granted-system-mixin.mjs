@@ -9,6 +9,7 @@ const { fields } = foundry.data;
 export default function GrantedSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.GrantedSystemData}
    */
   class GrantedSystem extends /** @type {InitializedDataModel<T, Teriock.Models.GrantedSystemData>} */ (Base) {
     /** @inheritDoc */

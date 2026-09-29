@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
@@ -9,6 +8,7 @@ const { fields } = foundry.data;
 
 /**
  * Base actor data model.
+ * @extends {AbstractActorSystem}
  * @implements {Teriock.Models.BaseActorSystemData}
  * @mixes ActorAffinitiesPart
  * @mixes ActorAttributesPart
@@ -130,16 +130,7 @@ export default class BaseActorSystem
 
   /** @inheritDoc */
   getEmbedContextMenuEntries(doc) {
-    return [
-      {
-        icon: makeIcon(TERIOCK.display.icons.manifest.document.token, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
-        onClick: async () => this.parent.token.sheet.render(true),
-        visible: () => this.parent.token && this.parent.token.isViewer,
-      },
-      ...super.getEmbedContextMenuEntries(doc),
-      this._getPanelCardContextMenuEntry(),
-    ];
+    return [...super.getEmbedContextMenuEntries(doc), this._getPanelCardContextMenuEntry()];
   }
 
   /** @inheritDoc */

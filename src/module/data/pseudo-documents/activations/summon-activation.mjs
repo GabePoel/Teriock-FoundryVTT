@@ -17,6 +17,7 @@ import { BaseActivation } from "./abstract/_module.mjs";
  */
 
 /**
+ * @extends {BaseActivation}
  * @mixes SelectionPseudoDocument
  */
 export default class SummonActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {

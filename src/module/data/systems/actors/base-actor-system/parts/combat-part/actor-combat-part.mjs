@@ -32,6 +32,7 @@ function nullifyWielded(doc) {
 export default function ActorCombatPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorCombatPartData}
    * @property {TeriockActor} parent
    */
   class ActorCombatPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorCombatPartData>} */ (Base) {

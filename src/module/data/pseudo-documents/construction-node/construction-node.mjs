@@ -24,6 +24,7 @@ import {
 const { fields } = foundry.data;
 
 /**
+ * @extends {BasePseudoDocument}
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetencePseudoDocument
  * @mixes OverrideDataPseudoDocument

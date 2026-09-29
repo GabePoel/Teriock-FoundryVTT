@@ -5,6 +5,7 @@ import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs"
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 /**
+ * @extends {BaseAutomation}
  * @mixes OverrideCompetenceMechanic
  */
 export default class ChangeCompetenceAutomation

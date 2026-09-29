@@ -13,6 +13,7 @@ declare global {
     | documents.TeriockChatMessage
     | documents.TeriockCombat
     | documents.TeriockCombatant
+    | documents.TeriockCombatantGroup
     | documents.TeriockFolder
     | documents.TeriockItem
     | documents.TeriockJournalEntry

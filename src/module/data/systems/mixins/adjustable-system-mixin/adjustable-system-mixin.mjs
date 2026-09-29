@@ -10,6 +10,7 @@ const { fields } = foundry.data;
 export default function AdjustableSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AdjustableSystemData}
    */
   class AdjustableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AdjustableSystemData>} */ (Base) {
     /** @inheritDoc */

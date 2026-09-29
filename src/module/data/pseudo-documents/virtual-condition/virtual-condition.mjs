@@ -11,6 +11,7 @@ import { BasePseudoDocument } from "../abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BasePseudoDocument}
  * @todo Rename to `TrackedCondition`.
  * @mixes PanelData
  * @mixes EmbeddableData

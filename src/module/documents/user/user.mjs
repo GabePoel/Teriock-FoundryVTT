@@ -1,7 +1,5 @@
 import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
-import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
@@ -12,37 +10,17 @@ const { User } = foundry.documents;
 
 /**
  * The Teriock User implementation.
+ * @extends {User}
  * @mixes BaseDocument
- * @mixes EmbeddableData
  * @property {Readonly<Set<TeriockToken>>} targets
  */
-export default class TeriockUser extends mixClasses(User, BaseDocumentMixin, EmbeddableDataMixin) {
-  /** @inheritDoc */
-  get embedParts() {
-    const parts = Object.assign(super.embedParts, { img: this.avatar });
-    if (this.character) { parts.subtitle = this.character.fullName; }
-    return parts;
-  }
-
+export default class TeriockUser extends mixClasses(User, BaseDocumentMixin) {
   /**
    * The tokens this user can currently see.
    * @returns {Set<TeriockToken>}
    */
   get visibleTokens() {
     return new Set(game.canvas?.tokens.placeables.filter(t => t.isVisible) ?? []);
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {ContextMenuEntry[]}
-   */
-  getEmbedContextMenuEntries(doc) {
-    return [{
-      icon: makeIcon(teriock.data.systems.actors.CharacterSystem.metadata.icon, "contextMenu"),
-      label: _loc("TERIOCK.SYSTEMS.User.EMBED.openCharacter"),
-      onClick: async () => await this.character.sheet.render(true),
-      visible: () => Boolean(this.character?.isViewer),
-    }, ...super.getEmbedContextMenuEntries(doc)];
   }
 
   /**

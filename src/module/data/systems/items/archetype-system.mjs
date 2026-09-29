@@ -7,6 +7,7 @@ import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 
 /**
  * Archetype-specific item data model.
+ * @extends {BaseItemSystem}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  */

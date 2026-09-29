@@ -20,6 +20,7 @@ export default function ArmamentSystemMixin(Base) {
   /**
    * @mixes AttackSystem
    * @mixin
+   * @implements {Teriock.Models.ArmamentSystemData}
    */
   class ArmamentSystem
     extends mixClasses(

@@ -1,14 +1,13 @@
 import { TeriockActiveEffect as ActiveEffectClass } from "../_module.mjs";
-import { TeriockDocumentSheet } from "../../applications/api/_module.mjs";
 import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 
 declare module "./active-effect.mjs" {
   export default interface TeriockActiveEffect {
     _id: Readonly<ID<TeriockActiveEffect>>;
-    sheet: TeriockDocumentSheet;
     system: BaseEffectSystem;
     type: ActiveEffectType;
 
+    readonly parent: TeriockActor | TeriockItem;
     get documentName(): "ActiveEffect";
     get id(): ID<TeriockActiveEffect>;
     get uuid(): UUID<TeriockActiveEffect>;

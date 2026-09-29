@@ -11,6 +11,7 @@ const { fields } = foundry.data;
 
 /**
  * Mount-specific item data model.
+ * @extends {BaseItemSystem}
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */

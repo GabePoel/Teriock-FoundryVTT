@@ -12,6 +12,7 @@ const { fields } = foundry.data;
  */
 
 /**
+ * @extends {BaseDataModel}
  * @property {AccessData} parent
  */
 export default class BasePseudoDocument extends mixClasses(BaseDataModel, PseudoControllerDataMixin) {

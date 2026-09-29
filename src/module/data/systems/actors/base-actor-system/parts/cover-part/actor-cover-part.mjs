@@ -18,6 +18,7 @@ import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 export default function ActorCoverPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorCoverPartData}
    * @property {TeriockActor} parent
    */
   class ActorCoverPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorCoverPartData>} */ (Base) {

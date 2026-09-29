@@ -5,6 +5,7 @@ const { Cards } = foundry.documents;
 
 /**
  * The Teriock Cards implementation.
+ * @extends {Cards}
  * @mixes BaseDocument
  */
 export default class TeriockCards extends mixClasses(Cards, BaseDocumentMixin) {}

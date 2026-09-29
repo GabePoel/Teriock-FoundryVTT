@@ -6,6 +6,7 @@ import BaseAutomation from "../base-automation/base-automation.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm

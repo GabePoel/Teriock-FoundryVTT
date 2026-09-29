@@ -11,6 +11,7 @@ import { Panel } from "../../../pseudo-documents/_module.mjs";
 export default function MetaphysicsSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.MetaphysicsSystemData}
    */
   class MetaphysicsSystem extends /** @type {InitializedDataModel<T, Teriock.Models.MetaphysicsSystemData>} */ (Base) {
     /** @inheritDoc */

@@ -2,10 +2,10 @@ import { PseudoCollection } from "../../../pseudo-documents/collections/_module.
 
 declare global {
   namespace Teriock.Models {
-    export type ExpirableSystemData = {
+    export interface ExpirableSystemData {
       /** <schema> Expirations */
       expirations: PseudoCollection<Expiration>;
-    };
+    }
   }
 }
 

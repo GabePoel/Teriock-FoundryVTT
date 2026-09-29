@@ -30,6 +30,7 @@ function getTaggedAutomationTypes(tag) {
 export default function AutomatableSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AutomatableSystemData}
    */
   class AutomatableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AutomatableSystemData>} */ (Base) {
     /** @inheritDoc */

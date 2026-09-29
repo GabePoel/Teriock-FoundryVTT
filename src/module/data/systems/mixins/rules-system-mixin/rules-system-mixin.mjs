@@ -11,6 +11,7 @@ import { IdentifierField } from "../../../fields/_module.mjs";
 export default function RulesSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.RulesSystemData}
    */
   class RulesSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RulesSystemData>} */ (Base) {
     /** @inheritDoc */

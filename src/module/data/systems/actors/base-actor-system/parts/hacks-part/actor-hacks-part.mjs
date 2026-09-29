@@ -18,6 +18,7 @@ import { initialBar, initialSchema } from "../../../../../fields/tools/initializ
 export default function ActorHacksPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorHacksPartData}
    * @property {TeriockActor} parent
    */
   class ActorHacksPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorHacksPartData>} */ (Base) {

@@ -1,4 +1,3 @@
-import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
 
@@ -6,13 +5,11 @@ const { Macro } = foundry.documents;
 
 /**
  * The Teriock Macro implementation.
+ * @extends {Macro}
  * @mixes BaseDocument
- * @mixes EmbeddableData
  * @mixes UsableDocument
  */
-export default class TeriockMacro
-  extends mixClasses(Macro, BaseDocumentMixin, EmbeddableDataMixin, UsableDocumentMixin)
-{
+export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin, UsableDocumentMixin) {
   /**
    * Create a use macro from the given document.
    * @param {TeriockActiveEffect|TeriockItem} doc
@@ -137,16 +134,6 @@ export default class TeriockMacro
   }
 
   /** @inheritDoc */
-  get _embedActions() {
-    return { ...super._embedActions, execute: { primary: async event => await this.scopedExecute(event) } };
-  }
-
-  /** @inheritDoc */
-  get embedParts() {
-    return Object.assign(super.embedParts, { action: "execute", usable: true });
-  }
-
-  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
@@ -156,16 +143,6 @@ export default class TeriockMacro
         this.updateSource({ folder: (await this.constructor.ensureHotbarFolder())?.id });
       }
     }
-  }
-
-  /**
-   * Generate a scope and execute.
-   * @param event
-   * @returns {Promise<void>}
-   */
-  async scopedExecute(event) {
-    const actor = game.actors.default;
-    await this.execute({ actor, event, token: actor?.defaultToken });
   }
 
   /** @inheritDoc */

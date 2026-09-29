@@ -6,6 +6,7 @@ import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  */
 export default class CoverAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {

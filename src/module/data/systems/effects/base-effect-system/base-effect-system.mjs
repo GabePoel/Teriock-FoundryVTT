@@ -8,6 +8,7 @@ const { ActiveEffectTypeDataModel, fields } = foundry.data;
 
 /**
  * Base effect data model.
+ * @extends {ActiveEffectTypeDataModel}
  * @mixes BaseSystem
  * @mixes ChildSystem
  */

@@ -21,6 +21,7 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 export default function ActorTradecraftsPart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.ActorTradecraftsPartData}
    * @property {TeriockActor} parent
    */
   class ActorTradecraftsPart

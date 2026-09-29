@@ -4,6 +4,7 @@ import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from 
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
+ * @extends {BasePageSystem}
  * @mixes AutomatableSystem
  * @mixes MetaphysicsSystem
  * @mixes WikiSystem

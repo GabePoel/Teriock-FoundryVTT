@@ -1,11 +1,13 @@
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { InitiativeModel } from "../../../models/modifier-models/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
 /**
- * Base combatant data model.
+ * Base Combatant data model.
+ * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes UncommonSystem
  */
@@ -21,6 +23,7 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
     return Object.assign(super.defineSchema(), {
       actions: new fields.NumberField({ initial: 3, integer: true, max: 3, min: 0, nullable: false }),
       attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
+      initiative: new fields.EmbeddedDataField(InitiativeModel),
       reactions: new fields.NumberField({ initial: 1, integer: true, max: 1, min: 0, nullable: false }),
     });
   }

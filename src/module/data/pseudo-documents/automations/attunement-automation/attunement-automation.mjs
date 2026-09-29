@@ -7,6 +7,7 @@ import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 /**
+ * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  */
 export default class AttunementAutomation extends mixClasses(BaseAutomation, TriggerAutomationMixin) {

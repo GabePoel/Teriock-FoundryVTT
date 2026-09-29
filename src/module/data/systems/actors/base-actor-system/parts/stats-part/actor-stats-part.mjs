@@ -27,6 +27,7 @@ export default function ActorStatsPart(Base) {
   /**
    * @implements {Teriock.Functionality.StatProvider}
    * @mixin
+   * @implements {Teriock.Models.ActorStatsPartData}
    * @property {TeriockActor} parent
    */
   class ActorStatsPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorStatsPartData>} */ (Base) {

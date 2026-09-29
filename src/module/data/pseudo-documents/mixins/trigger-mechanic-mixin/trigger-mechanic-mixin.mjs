@@ -16,6 +16,7 @@ const { fields } = foundry.data;
 export default function TriggerMechanicMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.PseudoDocuments.TriggerMechanicData}
    */
   class TriggerMechanic
     extends /** @type {InitializedDataModel<T, Teriock.PseudoDocuments.TriggerMechanicData>} */ (Base)

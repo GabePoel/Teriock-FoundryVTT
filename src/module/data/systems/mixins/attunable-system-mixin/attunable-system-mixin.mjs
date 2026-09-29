@@ -13,6 +13,7 @@ const { fields } = foundry.data;
 export default function AttunableSystemMixin(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AttunableSystemData}
    */
   class AttunableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AttunableSystemData>} */ (Base) {
     /** @inheritDoc */

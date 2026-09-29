@@ -23,6 +23,7 @@ const { fields } = foundry.data;
 export default function AbilityUsagePart(Base) {
   /**
    * @mixin
+   * @implements {Teriock.Models.AbilityUsagePartData}
    * @property {TeriockActiveEffect<"ability">} parent
    */
   class AbilityUsagePart extends /** @type {InitializedDataModel<T, Teriock.Models.AbilityUsagePartData>} */ (Base) {

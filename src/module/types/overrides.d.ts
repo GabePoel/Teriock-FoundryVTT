@@ -12,6 +12,7 @@ import {
   RollTables,
   Scenes,
 } from "@client/documents/collections/_module.mjs";
+import { DataField } from "@common/data/fields.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
 import {
@@ -59,6 +60,13 @@ declare module "@common/documents/_module.mjs" {
   export const User: typeof import("@client/documents/_module.mjs").User;
 }
 
+// Dumb hacky fix for documents not being able to extend data models.
+declare module "@common/abstract/document.mjs" {
+  export default interface Document {
+    _initializationOrder(): Generator<[string, DataField]>;
+  }
+}
+
 declare global {
   // Definition for writing macros.
   let actor: TeriockActor;
@@ -84,20 +92,8 @@ declare global {
     users: TeriockUsers;
   }
 
-  namespace ui {
-    let actors: TeriockActorDirectory;
-    // @ts-expect-error Can't redeclare
-    let chat: TeriockChatLog;
-    // @ts-expect-error Can't redeclare
-    let combat: TeriockCombatTracker;
-    let compendium: TeriockCompendiumDirectory;
-    // @ts-expect-error Can't redeclare
-    let hotbar: TeriockHotbar;
-    let items: TeriockItemDirectory;
-    // @ts-expect-error Can't redeclare
-    let notifications: TeriockNotifications;
-    let tables: TeriockRollTableDirectory;
-  }
+  // @ts-expect-error Redeclare blocked scope
+  let game: Game;
 
   type FromUuidOptions = { invalid: boolean, relative: TeriockDocument };
 

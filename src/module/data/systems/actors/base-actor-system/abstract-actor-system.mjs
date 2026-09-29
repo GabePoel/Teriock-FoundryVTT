@@ -4,6 +4,7 @@ import { BaseSystemMixin, CommonSystemMixin } from "../../mixins/_module.mjs";
 const { TypeDataModel } = foundry.abstract;
 
 /**
+ * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes CommonSystem
  */

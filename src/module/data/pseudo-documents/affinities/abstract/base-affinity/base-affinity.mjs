@@ -36,6 +36,7 @@ const RENAMED_CATEGORIES = {
  * Relevant wiki pages:
  * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
  *
+ * @extends {MechanicPseudoDocument}
  * @mixes PanelData
  * @mixes EmbeddableData
  * @mixes UsableData

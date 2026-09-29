@@ -23,6 +23,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
  * Imbuement and consequence sheet.
+ * @extends {ActiveEffectConfig}
  * @mixes BaseDocumentSheet
  * @mixes SystemSettingsButtonSheet
  * @mixes DocumentCreationSheet
