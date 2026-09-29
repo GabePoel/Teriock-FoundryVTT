@@ -75,7 +75,7 @@ export default function PlayableActorSheetCombatPart(Base) {
      */
     static async #onToggleReaction() {
       if (!game.teriock.checkEditable(this)) { return; }
-      await this.document.update({ "system.combat.hasReaction": !this.document.system.combat.hasReaction });
+      await this.document.update({ "system.combat.reactions": this.document.system.combat.reactions ? 0 : 1 });
     }
 
     /**

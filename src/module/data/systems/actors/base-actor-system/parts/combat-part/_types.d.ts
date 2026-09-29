@@ -5,10 +5,12 @@ declare global {
     export interface ActorCombatPartData {
       /** <schema> Stuff that changes during combat */
       combat: {
+        /** <schema> Actions remaining */
+        actions: number;
         /** <schema> Attack penalty */
         attackPenalty: number;
-        /** <schema> Whether {@link TeriockActor} still has reaction */
-        hasReaction: boolean;
+        /** <schema> Reactions remaining */
+        reactions: number;
       };
       /** <base> Defense */
       defense: {

@@ -249,14 +249,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     return super.source;
   }
 
-  /**
-   * Whether this spends the actor's reaction.
-   * @returns {boolean}
-   */
-  get usesReaction() {
-    return this.executionTime === "r1";
-  }
-
   /** @inheritDoc */
   async _buildActivations() {
     const acts = teriock.data.pseudoDocuments.activations;
@@ -525,7 +517,16 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   async _prepareUpdates() {
     this.#prepareEquipmentConsumption();
     if (this.actor) {
-      if (this.usesReaction) { this.actorUpdates["system.combat.hasReaction"] = false; }
+      if (this.actor.inCombat) {
+        if (this.executionTime === "r1") {
+          this.actorUpdates["system.combat.reactions"] = Math.max(0, this.actor.system.combat.reactions - 1);
+        } else if (this.executionTime.length === 2 && this.executionTime.startsWith("a")) {
+          this.actorUpdates["system.combat.actions"] = Math.max(
+            0,
+            this.actor.system.combat.actions - Number(this.executionTime[1]),
+          );
+        }
+      }
       for (const c of this.#paidCosts) {
         const config = statConfig[c];
         if (config?.bar) {

@@ -50,7 +50,11 @@ declare global {
 
     export type IdentifyItemData = { uuid: UUID<TeriockItem<"equipment">> };
 
-    export type TurnChangeData = { actorUuids: UUID<TeriockActor>[] };
+    export type TurnChangeData = {
+      actionUuids: UUID<TeriockActor>[];
+      attackPenaltyUuids: UUID<TeriockActor>[];
+      reactionUuids: UUID<TeriockActor>[];
+    };
 
     export type CreateHotbarFolderData = { id: ID<TeriockUser>, name: string };
 

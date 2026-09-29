@@ -76,14 +76,14 @@
 
   <div class="defense-box middle-box">
     <div
-      class="cover-box"
+      class="actor-shortbox actor-cover-box"
       data-action="increaseCover"
       data-tooltip-class="teriock-no-tables"
       data-tooltip-direction="LEFT"
       data-tooltip-identifier="core:cover"
     >
-      <div class="title-left tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
-      <div class="right-container thover" data-tooltip-class="" data-tooltip-direction="DOWN">
+      <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
+      <div class="actor-smallbox-value thover" data-tooltip-class="" data-tooltip-direction="DOWN">
         <i
           {{#if (eq system.cover 0)}}
             class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "solid"}}'
@@ -104,25 +104,31 @@
         ></i>
       </div>
     </div>
-    <div class="reaction-box" data-action="toggleReaction">
-      <div class="title-left tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
-      <div class="right-container">
-        <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
-        >
-          <i
-            class='
-              thover
-              {{makeIconClass
-              (lookup
-              TERIOCK.display.icons.manifest.ui
-              (ifThen
-              system.combat.hasReaction
-              "on"
-              "off"))
-              "light"}}
-            '
-          ></i>
-        </div>
+    <div class="actor-shortbox actor-actions-box">
+      <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}</div>
+      {{numberInput
+        system.combat.actions
+        classes="actor-actions-input actor-smallbox-value thover-soft"
+        dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.tooltip"))
+        name="system.combat.actions"
+      }}
+    </div>
+    <div class="actor-shortbox actor-reaction-box" data-action="toggleReaction">
+      <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
+      <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'>
+        <i
+          class='
+            thover
+            {{makeIconClass
+            (lookup
+            TERIOCK.display.icons.manifest.ui
+            (ifThen
+            system.combat.reactions
+            "on"
+            "off"))
+            "light"}}
+          '
+        ></i>
       </div>
     </div>
   </div>

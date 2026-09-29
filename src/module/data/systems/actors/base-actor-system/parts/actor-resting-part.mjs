@@ -47,8 +47,9 @@ export default function ActorRestingPart(Base) {
       if (options.hacks) { statuses.push(...Object.values(TERIOCK.statuses.hacks).map(s => s.id)); }
       if (options.cover) { statuses.push(...Object.values(TERIOCK.statuses.cover).map(s => s.id)); }
       if (options.combat) {
+        actorUpdate["system.combat.actions"] = 3;
         actorUpdate["system.combat.attackPenalty"] = 0;
-        actorUpdate["system.combat.hasReaction"] = true;
+        actorUpdate["system.combat.reactions"] = 1;
       }
       await this.parent.updateEmbeddedDocuments("Item", itemUpdates);
       await this.parent.update(actorUpdate);

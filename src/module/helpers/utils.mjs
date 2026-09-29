@@ -158,6 +158,17 @@ export async function buildWriteOperation(operation) {
 }
 
 /**
+ * Merge updates that target the same document.
+ * @param {object[]} updates
+ * @returns {object[]}
+ */
+function mergeUpdates(updates) {
+  const merged = {};
+  for (const update of updates) { merged[update._id] = foundry.utils.mergeObject(merged[update._id] ?? {}, update); }
+  return Object.values(merged);
+}
+
+/**
  * Consolidate operations so that they are more easily batched.
  * @param {DatabaseWriteOperation[]} operations
  * @returns {DatabaseWriteOperation[]}
@@ -177,7 +188,7 @@ export function consolidateWriteOperations(operations) {
     if (comOp) {
       comOp.ids = [...(comOp.ids ?? []), ...(op?.ids ?? [])];
       comOp.data = [...(comOp.data ?? []), ...(op?.data ?? [])];
-      comOp.updates = [...(comOp.updates ?? []), ...(op?.updates ?? [])];
+      comOp.updates = mergeUpdates([...(comOp.updates ?? []), ...(op?.updates ?? [])]);
       comOp.replacements = Object.assign(comOp.replacements ?? {}, op?.replacements ?? {});
     } else {
       consolidated.push(op);

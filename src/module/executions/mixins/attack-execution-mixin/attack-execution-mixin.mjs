@@ -399,7 +399,7 @@ export default function AttackExecutionMixin(Base) {
      */
     _resolveAttackPenalty(options = {}) {
       if (options.attackPenalty !== undefined) { return options.attackPenalty; }
-      if (!this.isAttack) { return "0"; }
+      if (!this.isAttack || !this.actor?.inCombat) { return "0"; }
       return this.isContact && this.armament ? this.armament.system.attackPenalty : this._baseAttackPenalty;
     }
 

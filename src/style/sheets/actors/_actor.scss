@@ -349,15 +349,6 @@
         line-height: unset;
       }
 
-      .cover-box {
-        @include mixins.centralize;
-        border-right: 1px solid var(--color-border);
-        flex: 1;
-        padding-bottom: 0.5em;
-        padding-right: 0.5em;
-        padding-top: 0.5em;
-      }
-
       .defense-box-main,
       .attack-box-main,
       .carrying-box-main {
@@ -393,23 +384,13 @@
         }
 
         .middle-box {
+          @include mixins.centralize;
           flex-direction: row;
-          gap: 0.5em;
-          padding-block: 0;
 
-          .reaction-box {
-            align-items: center;
-            display: flex;
-            flex-direction: row;
-            width: 57%;
+          input {
+            height: unset;
+            line-height: unset;
           }
-        }
-
-        .right-container {
-          align-items: center;
-          display: flex;
-          flex: 1;
-          justify-content: end;
         }
 
         .actor-fighting-style-label {

@@ -39,8 +39,9 @@ export default function ActorCombatPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         combat: new fields.SchemaField({
+          actions: new fields.NumberField({ initial: 3, integer: true, max: 3, min: 0, nullable: false }),
           attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0 }),
-          hasReaction: new fields.BooleanField({ initial: true }),
+          reactions: new fields.NumberField({ initial: 1, integer: true, max: 1, min: 0, nullable: false }),
         }),
         defense: initialSchema({
           ac: initialNumber(systemConfig.baseValues.ac),
