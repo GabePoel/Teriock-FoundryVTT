@@ -93,7 +93,12 @@
             value=(path @root/system._source.tradecrafts name "score")
           }}
         </div>
-        <div class="tradecraft-panel-symbol">{{sign (path @root/system.tradecrafts name 'value')}}</div>
+        <div class="tradecraft-panel-symbol">
+          {{numberFormat
+            (path @root/system.tradecrafts name 'value')
+            sign=true
+          }}
+        </div>
       </div>
     {{/each}}
   </div>

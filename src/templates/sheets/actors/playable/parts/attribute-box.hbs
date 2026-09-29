@@ -90,7 +90,12 @@
               (path @root/system._source.attributes name "score"))
           }}
         </div>
-        <div class="tcolored tcenter">{{sign (path @root/system.attributes name "value")}}</div>
+        <div class="tcolored tcenter">
+          {{numberFormat
+            (path @root/system.attributes name "value")
+            sign=true
+          }}
+        </div>
       </div>
     {{/each}}
   </div>

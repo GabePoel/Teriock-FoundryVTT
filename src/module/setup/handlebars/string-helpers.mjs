@@ -11,4 +11,4 @@ function minLen(value, length) {
   return value.length >= length ? value : "";
 }
 
-export default { asInf, dotJoin, minLen, toClass, toKebabCase, sign: n => n.signedString() };
+export default { asInf, dotJoin, minLen, toClass, toKebabCase };
