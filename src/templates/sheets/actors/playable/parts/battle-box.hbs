@@ -1,6 +1,36 @@
 <div class="ch-battle-box tbox toutline">
   <div class="defense-box">
     <div class="defense-box-main">
+      <div
+        class="actor-shortbox actor-cover-box"
+        data-action="increaseCover"
+        data-tooltip-class="teriock-no-tables"
+        data-tooltip-direction="LEFT"
+        data-tooltip-identifier="core:cover"
+      >
+        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
+        <div class="actor-smallbox-value thover" data-tooltip-class="" data-tooltip-direction="DOWN">
+          <i
+            {{#if (eq system.cover 0)}}
+              class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "solid"}}'
+              data-tooltip='{{localize "TERIOCK.STATUSES.Cover.noCover"}}'
+            {{/if}}
+            {{#if (eq system.cover 1)}}
+              class='{{makeIconClass TERIOCK.display.icons.manifest.cover.half "solid"}}'
+              data-tooltip='{{localize "TERIOCK.STATUSES.Cover.halfCover"}}'
+            {{/if}}
+            {{#if (eq system.cover 2)}}
+              class='{{makeIconClass TERIOCK.display.icons.manifest.cover.partial "solid"}}'
+              data-tooltip='{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}'
+            {{/if}}
+            {{#if (eq system.cover 3)}}
+              class='{{makeIconClass TERIOCK.display.icons.manifest.cover.full "solid"}}'
+              data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
+            {{/if}}
+          ></i>
+        </div>
+      </div>
+
       <div class="actor-shortbox actor-ac-box">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}</div>
         <div
@@ -74,64 +104,44 @@
     </div>
   </div>
 
-  <div class="defense-box middle-box">
-    <div
-      class="actor-shortbox actor-cover-box"
-      data-action="increaseCover"
-      data-tooltip-class="teriock-no-tables"
-      data-tooltip-direction="LEFT"
-      data-tooltip-identifier="core:cover"
-    >
-      <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
-      <div class="actor-smallbox-value thover" data-tooltip-class="" data-tooltip-direction="DOWN">
-        <i
-          {{#if (eq system.cover 0)}}
-            class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "solid"}}'
-            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.noCover"}}'
-          {{/if}}
-          {{#if (eq system.cover 1)}}
-            class='{{makeIconClass TERIOCK.display.icons.manifest.cover.half "solid"}}'
-            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.halfCover"}}'
-          {{/if}}
-          {{#if (eq system.cover 2)}}
-            class='{{makeIconClass TERIOCK.display.icons.manifest.cover.partial "solid"}}'
-            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}'
-          {{/if}}
-          {{#if (eq system.cover 3)}}
-            class='{{makeIconClass TERIOCK.display.icons.manifest.cover.full "solid"}}'
-            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
-          {{/if}}
-        ></i>
+  {{#if inCombat}}
+    <div class="defense-box middle-box">
+      <div class="actor-shortbox actor-actions-box">
+        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}</div>
+        {{numberInput
+          actions
+          classes="actor-combatant-input actor-actions-input actor-smallbox-value thover-soft"
+          dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.tooltip"))
+          id=(concat @root/appId "-combatant-actions")
+          name="system.actions"
+          named=false
+          min=0
+          max=3
+        }}
+      </div>
+      <div class="actor-shortbox actor-reaction-box" data-action="toggleReaction">
+        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
+        <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
+        >
+          <i
+            class='thover {{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen reactions "on" "off")) "light"}}'
+          ></i>
+        </div>
+      </div>
+      <div class="actor-shortbox actor-penalty-box" data-action="resetAttackPenalty">
+        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
+        {{formInput
+          combatantFields.attackPenalty
+          value=attackPenalty
+          classes="actor-combatant-input actor-penalty-input actor-smallbox-value thover-soft"
+          dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.tooltip"))
+          id=(concat @root/appId "-combatant-attackPenalty")
+          name="system.attackPenalty"
+          named=false
+        }}
       </div>
     </div>
-    <div class="actor-shortbox actor-actions-box">
-      <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}</div>
-      {{numberInput
-        system.combat.actions
-        classes="actor-actions-input actor-smallbox-value thover-soft"
-        dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.tooltip"))
-        name="system.combat.actions"
-      }}
-    </div>
-    <div class="actor-shortbox actor-reaction-box" data-action="toggleReaction">
-      <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
-      <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'>
-        <i
-          class='
-            thover
-            {{makeIconClass
-            (lookup
-            TERIOCK.display.icons.manifest.ui
-            (ifThen
-            system.combat.reactions
-            "on"
-            "off"))
-            "light"}}
-          '
-        ></i>
-      </div>
-    </div>
-  </div>
+  {{/if}}
 
   <div class="attack-box">
     <div class="attack-box-main">
@@ -168,7 +178,7 @@
       </div>
 
       <div class="actor-shortbox actor-sb-box" data-action="toggleSb">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.label"}}</div>
+        <div class="tsubtle tcenter">{{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label"}}</div>
         <div
           class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}'
@@ -177,16 +187,6 @@
             class='thover {{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen system.offense.sb "on" "off")) "light"}}'
           ></i>
         </div>
-      </div>
-
-      <div class="actor-shortbox actor-penalty-box" data-action="resetAttackPenalty">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
-        {{formInput
-          systemFields.combat.fields.attackPenalty
-          value=system.combat.attackPenalty
-          classes="actor-penalty-input actor-smallbox-value thover-soft"
-          dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.tooltip"))
-        }}
       </div>
     </div>
 

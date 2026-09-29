@@ -152,7 +152,7 @@ export default function AttackExecutionMixin(Base) {
       const paths = [];
       if (this.isAttack) {
         paths.push("piercing.raw", "existingAttackPenalty");
-        if (this.actor) { paths.push("incurredAttackPenalty"); }
+        if (this.actor?.inCombat) { paths.push("incurredAttackPenalty"); }
       }
       return paths;
     }
@@ -322,7 +322,7 @@ export default function AttackExecutionMixin(Base) {
       this._updateArmament(options.armament ? options.armament : this._determineDefaultArmament(), options);
       if (!this.bonus) { this.updateSource({ bonus: "0" }); }
       this.limb = this._resolveLimb(options);
-      let existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
+      let existingAttackPenalty = Number(this.combatant?.system.attackPenalty);
       if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
       this.updateSource({ existingAttackPenalty: Math.min(existingAttackPenalty, 0) });
       this.targets = new Set();
@@ -386,8 +386,8 @@ export default function AttackExecutionMixin(Base) {
     async _prepareUpdates() {
       await this._prepareAttackPenalty();
       this._prepareAmmunitionConsumption();
-      if (this.actor && this.isAttack) {
-        this.actorUpdates["system.combat.attackPenalty"] = this.actor.system.combat.attackPenalty + this.attackPenalty;
+      if (this.combatant && this.isAttack) {
+        this.combatantUpdates["system.attackPenalty"] = this.combatant.system.attackPenalty + this.attackPenalty;
       }
       return super._prepareUpdates();
     }
@@ -399,7 +399,7 @@ export default function AttackExecutionMixin(Base) {
      */
     _resolveAttackPenalty(options = {}) {
       if (options.attackPenalty !== undefined) { return options.attackPenalty; }
-      if (!this.isAttack || !this.actor?.inCombat) { return "0"; }
+      if (!this.isAttack || !this.combatant) { return "0"; }
       return this.isContact && this.armament ? this.armament.system.attackPenalty : this._baseAttackPenalty;
     }
 

@@ -60,6 +60,9 @@ export default class BaseExecution extends BaseDataModel {
   /** @type {Record<string, string>} */
   choices = {};
 
+  /** @type {object} */
+  combatantUpdates = {};
+
   /** @type {TeriockChatMessage|undefined} */
   message;
 
@@ -160,6 +163,14 @@ export default class BaseExecution extends BaseDataModel {
       },
       type: "interactive",
     };
+  }
+
+  /**
+   * The combatant for this execution's actor.
+   * @returns {TeriockCombatant|null}
+   */
+  get combatant() {
+    return this.actor?.defaultCombatant ?? null;
   }
 
   /**
@@ -566,6 +577,15 @@ export default class BaseExecution extends BaseDataModel {
         pack: this.actor?.pack,
         parent: this.actor?.parent,
         updates: [{ _id: this.actor.id, ...this.actorUpdates }],
+      });
+    }
+    const combatant = this.combatant;
+    if (combatant && Object.keys(this.combatantUpdates).length && combatant.isOwner) {
+      this.operations.push({
+        action: "update",
+        documentName: "Combatant",
+        parent: combatant.parent,
+        updates: [{ _id: combatant.id, ...this.combatantUpdates }],
       });
     }
   }

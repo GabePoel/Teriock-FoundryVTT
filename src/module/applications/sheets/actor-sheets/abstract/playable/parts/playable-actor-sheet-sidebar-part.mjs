@@ -1,7 +1,6 @@
 import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
 
 /**
- * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
  */
 
@@ -12,33 +11,6 @@ import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
 export default function PlayableActorSheetSidebarPart(Base) {
   /** @mixin */
   class PlayableActorSheetSidebarPart extends Base {
-    /**
-     * Reset attack penalty to zero.
-     * @returns {Promise<void>}
-     */
-    static async #onResetAttackPenalty() {
-      if (!game.teriock.checkEditable(this)) { return; }
-      await this.document.update({ "system.combat.attackPenalty": 0 });
-    }
-
-    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-    static DEFAULT_OPTIONS = { actions: { resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty } } };
-
-    /**
-     * Creates a context menu for selecting piercing type.
-     * Provides options for none, AV0, and UB piercing types.
-     * @returns {ContextMenuEntry[]}
-     */
-    #piercingContextMenu() {
-      return TeriockContextMenu.makeUpdateEntries(
-        this.actor,
-        Object.entries(TERIOCK.config.piercing.levels).map(([k, v]) => {
-          return { icon: v.icon, label: v.label, value: k };
-        }),
-        { path: "system.offense.piercing.raw" },
-      );
-    }
-
     /**
      * Creates a context menu for selecting scaling type.
      * @returns {ContextMenuEntry[]}
@@ -58,7 +30,6 @@ export default function PlayableActorSheetSidebarPart(Base) {
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-      this._createContextMenu(this.#piercingContextMenu, ".actor-piercing-box", { eventName: "click" });
       this._createContextMenu(this.#scalingContextMenu, ".actor-basics", {
         eventName: "contextmenu",
         forceDirection: "down",

@@ -20,6 +20,20 @@ export default class TeriockCombatTracker extends CombatTracker {
   }
 
   /** @inheritDoc */
+  get viewed() {
+    return super.viewed;
+  }
+
+  /** @inheritDoc */
+  set viewed(combat) {
+    const previous = this.viewed;
+    super.viewed = combat;
+    if (this.isPopout || previous === this.viewed) { return; }
+    previous?.updateCombatantActors();
+    this.viewed?.updateCombatantActors();
+  }
+
+  /** @inheritDoc */
   _onCombatantControl(event, target) {
     if (target.dataset.action === "rollInitiative") {
       this.defaultInitiativeExecutionData = ThresholdRoll.parseEvent(event);

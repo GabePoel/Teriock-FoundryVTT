@@ -3,15 +3,6 @@ import { InitiativeModel, PiercingModel } from "../../../../../models/_module.mj
 declare global {
   namespace Teriock.Models {
     export interface ActorCombatPartData {
-      /** <schema> Stuff that changes during combat */
-      combat: {
-        /** <schema> Actions remaining */
-        actions: number;
-        /** <schema> Attack penalty */
-        attackPenalty: number;
-        /** <schema> Reactions remaining */
-        reactions: number;
-      };
       /** <base> Defense */
       defense: {
         /** <derived> Armor class (av + 10) */

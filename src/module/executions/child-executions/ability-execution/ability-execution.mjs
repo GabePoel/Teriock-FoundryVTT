@@ -517,13 +517,14 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   async _prepareUpdates() {
     this.#prepareEquipmentConsumption();
     if (this.actor) {
-      if (this.actor.inCombat) {
+      const combatant = this.combatant;
+      if (combatant) {
         if (this.executionTime === "r1") {
-          this.actorUpdates["system.combat.reactions"] = Math.max(0, this.actor.system.combat.reactions - 1);
+          this.combatantUpdates["system.reactions"] = Math.max(0, combatant.system.reactions - 1);
         } else if (this.executionTime.length === 2 && this.executionTime.startsWith("a")) {
-          this.actorUpdates["system.combat.actions"] = Math.max(
+          this.combatantUpdates["system.actions"] = Math.max(
             0,
-            this.actor.system.combat.actions - Number(this.executionTime[1]),
+            combatant.system.actions - Number(this.executionTime[1]),
           );
         }
       }

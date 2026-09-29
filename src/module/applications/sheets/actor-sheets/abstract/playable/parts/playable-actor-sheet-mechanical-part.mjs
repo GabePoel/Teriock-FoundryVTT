@@ -26,22 +26,6 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     }
 
     /**
-     * Increases cover by a step.
-     * @param {PointerEvent} event
-     * @returns {Promise<void>}
-     */
-    static async #onIncreaseCover(event) {
-      if (!game.teriock.checkEditable(this)) { return; }
-      if (event.button === 0) {
-        if (this.document.system.cover < 3) { await this.document.system.increaseCover(); }
-        else { await this.document.system.decreaseCover(3); }
-      } else if (event.button === 2) {
-        if (this.document.system.cover > 0) { await this.document.system.decreaseCover(); }
-        else { await this.document.system.increaseCover(3); }
-      }
-    }
-
-    /**
      * Quickly uses an item with optional modifiers.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
@@ -139,7 +123,6 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     static DEFAULT_OPTIONS = {
       actions: {
         deathBagPull: this.#onDeathBagPull,
-        increaseCover: { buttons: [0, 2], handler: this.#onIncreaseCover },
         quickUse: { buttons: [0, 2], handler: this.#onQuickUse },
         takeDawn: this.#onTakeDawn,
         takeDusk: this.#onTakeDusk,

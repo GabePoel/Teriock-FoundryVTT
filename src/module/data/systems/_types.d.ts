@@ -1,5 +1,6 @@
 import { CharacterSystem, CreatureSystem, InventorySystem } from "./actors/_module.mjs";
 import { BaseCardSystem, StoneSystem } from "./cards/_module.mjs";
+import { BaseCombatantSystem } from "./combatants/_module.mjs";
 import {
   AbilitySystem,
   AttunementSystem,
@@ -58,6 +59,10 @@ declare global {
     triggered: TriggeredSystem;
   }
 
+  export interface CombatantSystemMap {
+    base: BaseCombatantSystem;
+  }
+
   export interface ItemSystemMap {
     archetype: ArchetypeSystem;
     body: BodySystem;
@@ -81,6 +86,7 @@ declare global {
   export type ActorType = TypeMapKey<ActorSystemMap>;
   export type CardType = TypeMapKey<CardSystemMap>;
   export type ChatMessageType = TypeMapKey<ChatMessageSystemMap>;
+  export type CombatantType = TypeMapKey<CombatantSystemMap>;
   export type ItemType = TypeMapKey<ItemSystemMap>;
   export type JournalEntryPageType = TypeMapKey<JournalEntryPageSystemMap>;
 }

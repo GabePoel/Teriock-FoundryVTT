@@ -7,21 +7,31 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 const { Combat } = foundry.documents;
 
 /**
+ * Get the UUIDs of combatants and their default combatants.
+ * @param {TeriockCombatant[]} combatants
+ * @returns {UUID<TeriockCombatant>[]}
+ */
+function getResetUuids(combatants) {
+  return [...new Set(combatants.flatMap(c => [c, c.system.defaultCombatant]).filter(c => c).map(c => c.uuid))];
+}
+
+/**
  * The Teriock Combat implementation.
  * @mixes BaseDocument
  */
 export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin) {
   /**
-   * Reset every actor's attack penalty and the given actors' actions and reactions.
+   * Reset the given combatants' actions, attack penalties, and reactions along with their default combatants'.
    * @param {object} [options]
-   * @param {(TeriockActor|null)[]} [options.actionActors] - Actors whose actions reset.
-   * @param {(TeriockActor|null)[]} [options.reactionActors] - Actors whose reactions reset.
+   * @param {TeriockCombatant[]} [options.actions] - Combatants whose actions reset.
+   * @param {TeriockCombatant[]} [options.attackPenalties] - Combatants whose attack penalties reset.
+   * @param {TeriockCombatant[]} [options.reactions] - Combatants whose reactions reset.
    */
-  #changeTurn({ actionActors = [], reactionActors = [] } = {}) {
+  #changeTurn({ actions = [], attackPenalties = this.combatants.contents, reactions = [] } = {}) {
     game.users.queryGM("teriock.turnChange", {
-      actionUuids: actionActors.filter(a => a && a.system.combat.actions < 3).map(a => a.uuid),
-      attackPenaltyUuids: this.actors.filter(a => a.system.combat.attackPenalty !== 0).map(a => a.uuid),
-      reactionUuids: reactionActors.filter(a => a && a.system.combat.reactions < 1).map(a => a.uuid),
+      actionUuids: getResetUuids(actions),
+      attackPenaltyUuids: getResetUuids(attackPenalties),
+      reactionUuids: getResetUuids(reactions),
     }, { failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.turnChange.failPrefix", localize: true });
   }
 
@@ -64,7 +74,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    */
   _onEndCombat() {
     this.#refreshCombatExpirations(null, "combat", "end");
-    this.#changeTurn({ actionActors: this.actors, reactionActors: this.actors });
+    this.#changeTurn({ attackPenalties: [] });
     for (const actor of this.actors) { this.#fireTrigger(actor, "combatEnd"); }
   }
 
@@ -98,8 +108,8 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   async _onStartTurn(combatant, context) {
     await super._onStartTurn(combatant, context);
-    const actors = context.round === 1 && context.turn === 0 ? this.actors : [combatant.actor];
-    this.#changeTurn({ actionActors: actors, reactionActors: actors });
+    const combatants = context.round === 1 && context.turn === 0 ? this.combatants.contents : [combatant];
+    this.#changeTurn({ actions: combatants, reactions: combatants });
     this.#refreshCombatExpirations(combatant.actor, "turn", "start");
     if (combatant.actor) { this.#fireTrigger(combatant.actor, "turnStart"); }
     this.#refreshCombatExpirations(combatant.actor, "action", "start");

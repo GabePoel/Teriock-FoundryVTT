@@ -27,7 +27,6 @@ export default function ActorRestingPart(Base) {
      * @param {boolean} [options.conditions]
      * @param {boolean} [options.hacks]
      * @param {boolean} [options.cover]
-     * @param {boolean} [options.combat]
      */
     async partialReset(options = {}) {
       const actorUpdate = {};
@@ -46,11 +45,6 @@ export default function ActorRestingPart(Base) {
       if (options.conditions) { statuses.push(...Object.values(TERIOCK.statuses.conditions).map(s => s.id)); }
       if (options.hacks) { statuses.push(...Object.values(TERIOCK.statuses.hacks).map(s => s.id)); }
       if (options.cover) { statuses.push(...Object.values(TERIOCK.statuses.cover).map(s => s.id)); }
-      if (options.combat) {
-        actorUpdate["system.combat.actions"] = 3;
-        actorUpdate["system.combat.attackPenalty"] = 0;
-        actorUpdate["system.combat.reactions"] = 1;
-      }
       await this.parent.updateEmbeddedDocuments("Item", itemUpdates);
       await this.parent.update(actorUpdate);
       await this.parent.removeStatusEffects(statuses.filter(s => this.parent.statuses.has(s)));

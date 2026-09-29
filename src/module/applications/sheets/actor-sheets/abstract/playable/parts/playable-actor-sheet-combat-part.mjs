@@ -1,7 +1,9 @@
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
+import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
  */
 
 /**
@@ -11,6 +13,22 @@ import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
 export default function PlayableActorSheetCombatPart(Base) {
   /** @mixin */
   class PlayableActorSheetCombatPart extends Base {
+    /**
+     * Increases cover by a step.
+     * @param {PointerEvent} event
+     * @returns {Promise<void>}
+     */
+    static async #onIncreaseCover(event) {
+      if (!game.teriock.checkEditable(this)) { return; }
+      if (event.button === 0) {
+        if (this.document.system.cover < 3) { await this.document.system.increaseCover(); }
+        else { await this.document.system.decreaseCover(3); }
+      } else if (event.button === 2) {
+        if (this.document.system.cover > 0) { await this.document.system.decreaseCover(); }
+        else { await this.document.system.increaseCover(3); }
+      }
+    }
+
     /**
      * Opens the primary attacker's sheet.
      * @returns {Promise<void>}
@@ -25,6 +43,16 @@ export default function PlayableActorSheetCombatPart(Base) {
      */
     static async #onOpenPrimaryBlocker() {
       await this.document.system.wielding.blocker?.sheet.render(true);
+    }
+
+    /**
+     * Reset attack penalty to zero.
+     * @returns {Promise<void>}
+     */
+    static async #onResetAttackPenalty() {
+      const combatant = this.document.defaultCombatant;
+      if (!combatant || !game.teriock.checkEditable(this)) { return; }
+      await combatant.update({ "system.attackPenalty": 0 });
     }
 
     /**
@@ -74,8 +102,9 @@ export default function PlayableActorSheetCombatPart(Base) {
      * @returns {Promise<void>}
      */
     static async #onToggleReaction() {
-      if (!game.teriock.checkEditable(this)) { return; }
-      await this.document.update({ "system.combat.reactions": this.document.system.combat.reactions ? 0 : 1 });
+      const combatant = this.document.defaultCombatant;
+      if (!combatant || !game.teriock.checkEditable(this)) { return; }
+      await combatant.update({ "system.reactions": combatant.system.reactions ? 0 : 1 });
     }
 
     /**
@@ -100,8 +129,10 @@ export default function PlayableActorSheetCombatPart(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
+        increaseCover: { buttons: [0, 2], handler: this.#onIncreaseCover },
         openPrimaryAttacker: this.#onOpenPrimaryAttacker,
         openPrimaryBlocker: this.#onOpenPrimaryBlocker,
+        resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty },
         selectAttacker: { buttons: [0, 2], handler: this.#onSelectAttacker },
         selectBlocker: { buttons: [0, 2], handler: this.#onSelectBlocker },
         toggleReaction: this.#onToggleReaction,
@@ -109,6 +140,60 @@ export default function PlayableActorSheetCombatPart(Base) {
         useAbility: { buttons: [0, 2], handler: this.#onUseAbility },
       },
     };
+
+    /**
+     * Update the default combatant from an input without submitting the actor form.
+     * @param {Event} event
+     * @returns {Promise<void>}
+     */
+    async #onChangeCombatantInput(event) {
+      event.stopPropagation();
+      const combatant = this.document.defaultCombatant;
+      if (!combatant || !game.teriock.checkEditable(this)) { return; }
+      const input = /** @type {HTMLInputElement} */ (event.currentTarget);
+      await combatant.update({ [input.dataset.name]: Number(input.value) });
+      await this.render();
+    }
+
+    /**
+     * Creates a context menu for selecting piercing type.
+     * Provides options for none, AV0, and UB piercing types.
+     * @returns {ContextMenuEntry[]}
+     */
+    #piercingContextMenu() {
+      return TeriockContextMenu.makeUpdateEntries(
+        this.actor,
+        Object.entries(TERIOCK.config.piercing.levels).map(([k, v]) => {
+          return { icon: v.icon, label: v.label, value: k };
+        }),
+        { path: "system.offense.piercing.raw" },
+      );
+    }
+
+    /** @inheritDoc */
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+      this._createContextMenu(this.#piercingContextMenu, ".actor-piercing-box", { eventName: "click" });
+      for (const input of this.element.querySelectorAll(".actor-combatant-input")) {
+        input.addEventListener("change", this.#onChangeCombatantInput.bind(this));
+      }
+    }
+
+    /** @inheritDoc */
+    async _prepareContext(options = {}) {
+      const context = await super._prepareContext(options);
+      const combatant = this.document.defaultCombatant;
+      context.inCombat = Boolean(combatant);
+      if (context.inCombat) {
+        Object.assign(context, {
+          actions: combatant.system.actions,
+          attackPenalty: combatant.system.attackPenalty,
+          combatantFields: combatant.system.schema.fields,
+          reactions: combatant.system.reactions,
+        });
+      }
+      return context;
+    }
   }
 
   return PlayableActorSheetCombatPart;

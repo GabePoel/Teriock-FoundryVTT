@@ -171,6 +171,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Combat.initiative.formula = teriock.executions.activity.InitiativeExecution.DEFAULT_FORMULA;
 
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
+  registerSubtypes(data.systems.combatants);
 
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 

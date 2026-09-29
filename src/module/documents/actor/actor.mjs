@@ -168,6 +168,14 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
+   * Get the default combatant for this actor.
+   * @returns {TeriockCombatant|null}
+   */
+  get defaultCombatant() {
+    return (game.combat?.getCombatantsByActor(this) ?? [])[0] ?? null;
+  }
+
+  /**
    * Get the best token placeable for this actor.
    * @returns {TeriockToken|null}
    */

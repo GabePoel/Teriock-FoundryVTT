@@ -160,10 +160,6 @@ function cleanActor(doc) {
       delete doc.prototypeToken.texture.tint;
     }
   }
-  if (doc.system.combat) {
-    delete doc.system.combat.attackPenalty;
-    delete doc.system.combat.hasReaction;
-  }
   for (const stat of ["hp", "mp", "presence"]) {
     if (!doc.system[stat]) { continue; }
     delete doc.system[stat].max;

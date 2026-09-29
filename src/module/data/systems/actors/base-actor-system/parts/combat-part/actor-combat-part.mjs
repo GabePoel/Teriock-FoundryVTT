@@ -38,11 +38,6 @@ export default function ActorCombatPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        combat: new fields.SchemaField({
-          actions: new fields.NumberField({ initial: 3, integer: true, max: 3, min: 0, nullable: false }),
-          attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0 }),
-          reactions: new fields.NumberField({ initial: 1, integer: true, max: 1, min: 0, nullable: false }),
-        }),
         defense: initialSchema({
           ac: initialNumber(systemConfig.baseValues.ac),
           av: initialSchema({
@@ -96,7 +91,7 @@ export default function ActorCombatPart(Base) {
       const hasUb = weaponUb || naturalUb;
       const weaponWarded = Boolean(this.wielding.attacker?.system.warded);
       return {
-        ap: this.combat.attackPenalty,
+        ap: this.parent.defaultCombatant?.system.attackPenalty ?? 0,
         av0: Number(hasAv0) * 2,
         sb: this.offense.sb ? this.scaling.p : 0,
         ub: Number(hasUb),
