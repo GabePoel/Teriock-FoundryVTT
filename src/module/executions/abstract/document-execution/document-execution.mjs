@@ -86,6 +86,14 @@ export default class DocumentExecution extends BaseExecution {
   }
 
   /**
+   * The source's local roll data as seen by this execution.
+   * @returns {object}
+   */
+  _getSourceRollData() {
+    return this.source.system?.getLocalRollData?.() ?? {};
+  }
+
+  /**
    * @inheritDoc
    * @param {Record<string, any>} data
    * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
@@ -138,6 +146,6 @@ export default class DocumentExecution extends BaseExecution {
    * @returns {object}
    */
   getRollData() {
-    return Object.assign(super.getRollData(), prefixObject(this.source.system?.getLocalRollData?.() ?? {}, "source"));
+    return Object.assign(super.getRollData(), prefixObject(this._getSourceRollData(), "source"));
   }
 }

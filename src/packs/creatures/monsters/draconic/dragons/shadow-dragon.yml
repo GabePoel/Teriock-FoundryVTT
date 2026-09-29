@@ -2452,6 +2452,7 @@ items:
               value: "1"
             - _id: 9M3wsMS5DfR7Ryc9
               activeQualifier: "1"
+              allowNone: true
               name: Select Equipment Class
               namespace: ec
               preset: classification
@@ -2463,7 +2464,12 @@ items:
             - _id: 9AlsM9aoZdUE8oTW
               competencies:
                 - 0
+              data: |-
+                {
+                  "executionTime": "r0"
+                }
               localQualifier: and(@ability, @basic, @time.a1, not(@interaction.attack))
+              overrideData: true
               triggerQualifier: >-
                 and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item,
                 @armament.class.@choice.ec)
@@ -2474,7 +2480,12 @@ items:
               competencies:
                 - 1
                 - 2
+              data: |-
+                {
+                  "executionTime": "r0"
+                }
               localQualifier: and(@ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
+              overrideData: true
               triggerQualifier: >-
                 and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item,
                 @armament.class.@choice.ec)

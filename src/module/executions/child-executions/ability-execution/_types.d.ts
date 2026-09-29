@@ -7,12 +7,12 @@ declare module "./ability-execution.mjs" {
     autoPayCosts: boolean;
     bv: number;
     consumeEquipment: boolean;
+    executionTime: Teriock.Keys.ExecutionTime;
     noHeighten: boolean;
     preventAttack: boolean;
     preventBlockCone: boolean;
     preventFeat: boolean;
     preventThreshold: boolean;
-    usesReaction: boolean;
 
     affinities: ExecutionPseudoCollection<BaseAffinity>;
     costs: Record<Teriock.Keys.PrimaryCost, number>;

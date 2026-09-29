@@ -1,6 +1,7 @@
 import { ChoiceSelector } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { choicesWithNone } from "../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { categorySuggestions } from "../../../fields/tools/suggestions.mjs";
@@ -22,6 +23,7 @@ export default class ChoicesAutomation extends BaseAutomation {
   static defineSchema() {
     const prefix = "TERIOCK.AUTOMATIONS.Choices.FIELDS.choices.element";
     return Object.assign(super.defineSchema(), {
+      allowNone: new fields.BooleanField({ initial: true }),
       choices: new fields.TypedObjectField(
         new fields.SchemaField({
           label: new fields.StringField({ label: `${prefix}.label.label` }),
@@ -50,7 +52,7 @@ export default class ChoicesAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["name", "namespace", "description", "preset", ...super._formPaths];
+    return ["name", "namespace", "description", "preset", "allowNone", ...super._formPaths];
   }
 
   /** @inheritDoc */
@@ -73,12 +75,13 @@ export default class ChoicesAutomation extends BaseAutomation {
   async interactOnExecutionInput(execution) {
     const choices = this.preset ? categorySuggestions(this.preset) : objectMap(this.choices, c => c.label);
     if (!this.namespace || foundry.utils.isEmpty(choices)) { return; }
-    const id = await ChoiceSelector.prompt(choices, {
+    const id = await ChoiceSelector.prompt(this.allowNone ? choicesWithNone(choices) : choices, {
       hintHtml: this.description,
+      initial: Object.keys(choices)[0],
       required: true,
       title: this.name || this.display.label || this.label,
     });
-    if (!id) { return false; }
-    execution.choices[this.namespace] = this.preset ? id : this.choices[id].value;
+    if (id === null) { return false; }
+    execution.choices[this.namespace] = this.preset || !id ? id : this.choices[id].value;
   }
 }

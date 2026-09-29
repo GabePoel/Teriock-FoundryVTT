@@ -8,7 +8,8 @@ import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstr
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { objectMap, omit, prefixObject } from "../../../helpers/utils.mjs";
+import { toKebabCase } from "../../../helpers/string.mjs";
+import { formatDynamicSelectOptions, objectMap, omit, prefixObject } from "../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
 
@@ -32,13 +33,25 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         nullable: false,
       }),
       consumeEquipment: new fields.BooleanField({ initial: false }),
+      executionTime: new fields.StringField({
+        blank: false,
+        initial: "a1",
+        required: true,
+        choices: () =>
+          formatDynamicSelectOptions(
+            objectMap(
+              TERIOCK.config.ability.executionTime,
+              (choices, m) => ({ choices, label: TERIOCK.config.ability.maneuver[m] }),
+            ),
+            { localize: true },
+          ),
+      }),
       noHeighten: new fields.BooleanField({ initial: false }),
       overrideFormula: rollableFormulaField(),
       preventAttack: new fields.BooleanField(),
       preventBlockCone: new fields.BooleanField(),
       preventFeat: new fields.BooleanField(),
       preventThreshold: new fields.BooleanField(),
-      usesReaction: new fields.BooleanField(),
     });
   }
 
@@ -119,8 +132,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   get _postAttackFormPaths() {
     const paths = super._postAttackFormPaths;
     if (this.isContact && this.armament?.system.consumable) { paths.push("consumeEquipment"); }
-    if (this.source.system.maneuver === "reactive") { paths.push("usesReaction"); }
-    paths.push("autoPayCosts");
+    paths.push("executionTime", "autoPayCosts");
     return paths;
   }
 
@@ -202,6 +214,15 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     return this.source?.system.interaction === "manifest";
   }
 
+  /**
+   * The maneuver this is executed as.
+   * @returns {Teriock.Keys.Maneuver}
+   */
+  get maneuver() {
+    const groups = TERIOCK.config.ability.executionTime;
+    return Object.keys(groups).find(m => this.executionTime in groups[m]);
+  }
+
   /** @inheritDoc */
   get requiresCompetence() {
     return true;
@@ -226,6 +247,14 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    */
   get source() {
     return super.source;
+  }
+
+  /**
+   * Whether this spends the actor's reaction.
+   * @returns {boolean}
+   */
+  get usesReaction() {
+    return this.executionTime === "r1";
   }
 
   /** @inheritDoc */
@@ -297,6 +326,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.heightened > 0) {
       if (this.heightened === 1) { this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")); }
       else { this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened })); }
+    }
+    if (this.executionTime !== this.source.system.executionTime.base) {
+      this.tags.push(TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime]);
     }
     for (const c of Object.keys(this.costs).filter(c => this.costs[c] > 0)) {
       this.tags.push(
@@ -408,6 +440,19 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     };
   }
 
+  /**
+   * Also replaces the source's maneuver and execution time with this execution's.
+   * @inheritDoc
+   */
+  _getSourceRollData() {
+    const data = Object.fromEntries(
+      Object.entries(super._getSourceRollData()).filter(([k]) => !k.startsWith("maneuver.") && !k.startsWith("time.")),
+    );
+    data[`maneuver.${this.maneuver}`] = 1;
+    data[`time.${toKebabCase(this.executionTime)}`] = 1;
+    return data;
+  }
+
   /** @inheritDoc */
   async _getTargets() {
     if (this.source.system.targets.size === 1 && this.source.system.targets.has("self") && this.executor) {
@@ -431,14 +476,14 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    */
   _initializeSource(data, options = {}) {
     data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
+    data.executionTime ??= options.source?.system.executionTime.base;
     const source = super._initializeSource(data, options);
-    const { duration, executionTime, maneuver, settings, targets } = options.source.system;
+    const { duration, maneuver, settings, targets } = options.source.system;
     Object.assign(source, {
       autoPayCosts: settings.getSetting("autoPayCosts"),
       makeEffect: duration.unit !== "instant" && maneuver !== "passive",
       targetsActor: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor),
       targetsArmament: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament),
-      usesReaction: maneuver === "reactive" && executionTime.base === "r1",
     });
     return source;
   }
@@ -543,7 +588,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /** @inheritDoc */
   getRollData() {
-    return Object.assign(super.getRollData(), prefixObject(this.source.system.getLocalRollData(), "ability"), {
+    return Object.assign(super.getRollData(), prefixObject(this._getSourceRollData(), "ability"), {
       "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
       "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
       bv: this.bv ?? 0,

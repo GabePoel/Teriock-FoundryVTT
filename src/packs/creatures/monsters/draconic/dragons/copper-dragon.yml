@@ -2170,6 +2170,47 @@ items:
         img: systems/teriock/src/assets/thumbnails/ability/backstab.webp
         name: Backstab
         system:
+          automations:
+            - _id: QL5Jv2BwFmqzum5O
+              activeQualifier: "@status.hidden"
+              key: system.boosts.damage
+              qualifier: "@interaction.attack"
+              type: childChange
+              value: "1"
+            - _id: o8IjZIB7i2W94fEC
+              activeQualifier: "@status.hidden"
+              key: system.boosts.damage
+              qualifier: "@dmg"
+              target: armament
+              type: childChange
+              value: "1"
+            - _id: 0PBfjtxk0OavXesO
+              competencies:
+                - 0
+              data: |-
+                {
+                  "executionTime": "r0"
+                }
+              localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact))
+              overrideData: true
+              triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+              triggers:
+                - executeAbility
+              type: useDocuments
+            - _id: 4jwXmXbDfTSk1BJJ
+              competencies:
+                - 1
+                - 2
+              data: |-
+                {
+                  "executionTime": "r0"
+                }
+              localQualifier: and(@ability, @time.a1, or(@identifier.basic-attack, @identifier.interact, @class.thief))
+              overrideData: true
+              triggerQualifier: and(@source.time.a1, or(@source.identifier.interact, @source.identifier.unglue))
+              triggers:
+                - executeAbility
+              type: useDocuments
           competence:
             raw: 1
           delivery: self
