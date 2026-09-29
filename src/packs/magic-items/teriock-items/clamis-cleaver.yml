@@ -169,7 +169,9 @@ effects:
           competencies:
             - 0
           localQualifier: and(@ability, @basic, @time.a1, not(@interaction.attack))
-          triggerQualifier: and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item, @armament.class.@choice.ec)
+          triggerQualifier: >-
+            and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item,
+            @armament.class.@choice.ec)
           triggers:
             - executeAbility
           type: useDocuments
@@ -178,7 +180,9 @@ effects:
             - 1
             - 2
           localQualifier: and(@ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
-          triggerQualifier: and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item, @armament.class.@choice.ec)
+          triggerQualifier: >-
+            and(@this.effect.type.consequence, @source.interaction.attack, @source.time.a1, @source.delivery.item,
+            @armament.class.@choice.ec)
           triggers:
             - executeAbility
           type: useDocuments
