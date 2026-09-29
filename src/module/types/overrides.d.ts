@@ -16,15 +16,6 @@ import { DataField } from "@common/data/fields.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
 import {
-  TeriockActorDirectory,
-  TeriockChatLog,
-  TeriockCombatTracker,
-  TeriockCompendiumDirectory,
-  TeriockItemDirectory,
-  TeriockRollTableDirectory,
-} from "../applications/sidebar/tabs/_module.mjs";
-import { TeriockHotbar, TeriockNotifications } from "../applications/ui/_module.mjs";
-import {
   TeriockFolder,
   TeriockJournalEntry,
   TeriockMacro,

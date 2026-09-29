@@ -1,7 +1,7 @@
 import characterConfig from "../../constants/config/character-config.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { addFormula, addFormulas } from "../../helpers/formula.mjs";
+import { addFormulas } from "../../helpers/formula.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
 
