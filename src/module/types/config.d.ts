@@ -54,8 +54,6 @@ declare global {
       transformationReset?: { initial: boolean, update: Record<string, unknown> };
     };
 
-    export type WikiNamespaceEntry = { icon: string, identifierType: string };
-
     export type SimpleEntry = { img?: string, label: string };
 
     export type ImpactEntry = {

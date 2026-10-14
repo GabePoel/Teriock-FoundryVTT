@@ -101,6 +101,7 @@ export default {
     rank: "ms-military-tech",
     region: "mdi-checkerboard",
     resource: "mdi-abacus",
+    source: "ms-bolt",
     species: "ms-genetics",
     stone: "ms-circle",
     style: "ms-swords",

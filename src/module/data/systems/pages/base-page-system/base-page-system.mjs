@@ -56,13 +56,6 @@ export default class BasePageSystem
   }
 
   /** @inheritDoc */
-  async getPanelParts() {
-    return Object.assign(await super.getPanelParts(), {
-      icon: this.parent.getFlag("teriock", "journalIcon") ?? this.metadata.icon,
-    });
-  }
-
-  /** @inheritDoc */
   getRollData() {
     return {};
   }

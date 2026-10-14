@@ -15,8 +15,8 @@ export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMix
    * @returns {TypedIdentifier|null}
    */
   get wikiIdentifier() {
-    const namespace = this.parent.parent?.name;
-    if (!TERIOCK.config.wiki.namespaces[namespace] || !this.identifier) { return null; }
-    return `${namespace.toLowerCase()}:${this.identifier}`;
+    const type = this.parent.parent?.name?.toLowerCase();
+    if (!TERIOCK.config.wiki.index[type] || !this.identifier) { return null; }
+    return `${type}:${this.identifier}`;
   }
 }
