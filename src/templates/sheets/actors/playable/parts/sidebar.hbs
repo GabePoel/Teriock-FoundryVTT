@@ -61,27 +61,31 @@
           classes="actor-name-text"
         }}
       </div>
-      <div class="actor-basics">
+      <div
+        class="actor-basics updatable"
+        data-action="updatePaths"
+        data-path="system.scaling.lvl"
+        data-paths="system.scaling.lvl system.scaling.brScale"
+      >
         <div class="actor-shortbox actor-level-box">
-          {{formInput
-            systemFields.scaling.fields.lvl
-            value=system.scaling.lvl
-            classes="actor-level-input actor-shortbox-value thover-soft"
-            dataset=(object noScroll="true")
-          }}
+          <div class="actor-shortbox-value">{{ system.scaling.lvl }}</div>
           <div class="actor-level-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.lvl"}}
           </div>
         </div>
+        {{#if system.scaling.brScale}}
+          <div class="actor-shortbox actor-br-box">
+            <div class="actor-shortbox-value">{{ system.scaling.br }}</div>
+            <div class="actor-br-label actor-shortbox-label">
+              {{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.abbreviation"}}
+            </div>
+          </div>
+        {{/if}}
         <div
           class="actor-shortbox actor-rank-box"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
         >
-          {{numberInput
-            system.scaling.rank
-            class="actor-fluency-input actor-shortbox-value"
-            disabled=true
-          }}
+          <div class="actor-shortbox-value">{{ system.scaling.rank }}</div>
           <div class="actor-class-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.rank"}}
           </div>
@@ -94,11 +98,7 @@
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
           {{/if}}
         >
-          {{numberInput
-            system.scaling.p
-            class="actor-fluency-input actor-shortbox-value"
-            disabled=true
-          }}
+          <div class="actor-shortbox-value">{{ system.scaling.p }}</div>
           <div class="actor-level-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.pro"}}
           </div>
@@ -111,11 +111,7 @@
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
           {{/if}}
         >
-          {{numberInput
-            system.scaling.f
-            class="actor-fluency-input actor-shortbox-value"
-            disabled=true
-          }}
+          <div class="actor-shortbox-value">{{ system.scaling.f }}</div>
           <div class="actor-fluency-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.flu"}}
           </div>

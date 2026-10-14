@@ -23,7 +23,7 @@
     </div>
     {{#each field.tradecrafts as |tradecraft name|}}
       <div
-        class="tradecraft-container tgrid gi6"
+        class="tradecraft-container tgrid gi6 updatable"
         data-tooltip-class="teriock-no-tables"
         {{#if (and (not (eq ../index "artisan")) (not (eq ../index "scholar")) (not (eq ../index "p1")))}}
           data-tooltip-direction="RIGHT"
@@ -37,20 +37,19 @@
         data-title="{{ tradecraft.label }}"
       >
         <div
-          class="
+          class='
             tradecraft-panel-symbol
-            thover
             ch-tradecraft-pro-box
             grid-fill
             affix-icon
-            {{#if (and
-            @root/highlightModified
-            (not (eq
-            (path @root/system.tradecrafts name 'competence.raw')
-            (path @root/system._source.tradecrafts name 'competence.raw'))))}}
-              modified
-            {{/if}}
-          "
+            competence
+            {{formClasses
+            @root/document
+            path=(concat
+            "system.tradecrafts."
+            name
+            ".competence.raw")}}
+          '
           data-tooltip-class=""
           data-tooltip-direction="LEFT"
           data-tooltip='{{path @root/system.tradecrafts name "competence.description"}}'
@@ -67,17 +66,16 @@
           {{ tradecraft.label }}
         </div>
         <div
-          class="
+          class='
             tradecraft-panel-symbol
             affix
-            {{#if (and
-            @root/highlightModified
-            (not (eq
-            (path @root/system.tradecrafts name 'score')
-            (path @root/system._source.tradecrafts name 'score'))))}}
-              modified
-            {{/if}}
-          "
+            {{formClasses
+            @root/document
+            path=(concat
+            "system.tradecrafts."
+            name
+            ".score")}}
+          '
           data-tooltip='{{path @root/tradecraftDisplay name "scoreLabel"}}'
           data-tooltip-direction="RIGHT"
           data-tooltip-class=""

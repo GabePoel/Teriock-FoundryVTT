@@ -108,11 +108,11 @@ export default function AbstractDataMixin(Base) {
       }
       if (!fetched && !textContent && typeof value === "string") {
         try {
-        if (validateTypedIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
-        else {
-          const doc = fromKeySync(value);
-          if (doc) { value = doc; }
-        }
+          if (validateTypedIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
+          else {
+            const doc = fromKeySync(value);
+            if (doc) { value = doc; }
+          }
         } catch {
           // Don't do anything if fetching the document failed.
           // TODO: Handle this process better.

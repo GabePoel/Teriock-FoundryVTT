@@ -427,7 +427,7 @@ export function getTypeLabel(type) {
 
 /**
  * Ensure infinities are just large numbers for roll data.
- * @param {number} n 
+ * @param {number} n
  * @returns {number}
  */
 export function safeInf(n) {

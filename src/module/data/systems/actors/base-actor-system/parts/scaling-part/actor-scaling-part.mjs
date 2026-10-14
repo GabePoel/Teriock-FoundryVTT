@@ -35,7 +35,7 @@ export default function ActorScalingPart(Base) {
         }),
         scaling: new fields.SchemaField({
           br: initialNumber(),
-          brScale: new fields.BooleanField({ initial: false }),
+          brScale: new fields.BooleanField({ identifier: "core:battle-rating", initial: false }),
           f: initialNumber(),
           lvl: new fields.NumberField({ initial: 1, integer: true, min: 1 }),
           p: initialNumber(),

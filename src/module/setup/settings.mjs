@@ -97,7 +97,7 @@ export const menus = {
             default: false,
             scope: "client",
             type: Boolean,
-            onChange: () => game.teriock.render({ actors: true }),
+            onChange: () => game.teriock.render({ applications: true }),
           },
         },
       },

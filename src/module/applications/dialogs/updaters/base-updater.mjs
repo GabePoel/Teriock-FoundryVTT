@@ -150,7 +150,7 @@ export default class BaseUpdater extends DocumentDialog {
       const inputContext = this.document.system?._inputContextKey ?? "actor";
       for (const p of this._formPaths) {
         const field = this.document.getFieldForProperty(p);
-        context.fields.push({
+        const fieldContext = {
           choices: this._getChoicesForPath(p),
           classes: ["teriock-icon-placeholder"],
           context: inputContext,
@@ -158,7 +158,9 @@ export default class BaseUpdater extends DocumentDialog {
           localize: true,
           name: p,
           value: foundry.utils.getProperty(this._currentData, p),
-        });
+        };
+        if (field.options?.units) { fieldContext.units = field.options?.units; }
+        context.fields.push(fieldContext);
       }
     }
     if (partId === "footer") {
@@ -174,6 +176,7 @@ export default class BaseUpdater extends DocumentDialog {
         type: "button",
       }];
     }
+    console.log(context);
     return context;
   }
 
@@ -190,6 +193,12 @@ export default class BaseUpdater extends DocumentDialog {
     result.form?.querySelectorAll(".form-fields").forEach(el => {
       const path = el.querySelector("[name]")?.getAttribute("name");
       const locked = lockedPaths.has(path);
+      const identifier = path && this.document.getFieldForProperty(path)?.options?.identifier;
+      const label = el.closest(".form-group")?.querySelector(":scope > label");
+      if (identifier && label) {
+        label.dataset.tooltipDirection = "LEFT";
+        label.dataset.tooltipIdentifier = identifier;
+      }
       el.append(
         createElement("button", {
           className: `icon inline-control updater-toggle ${

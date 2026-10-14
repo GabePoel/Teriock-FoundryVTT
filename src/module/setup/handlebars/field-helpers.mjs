@@ -21,13 +21,17 @@ import { toKebabCase } from "../../helpers/string.mjs";
  * @param {object} [options]
  * @param {Partial<FormClassesHash>} [options.hash]
  * @returns {string}
- * @todo Have all the attribute/tradecraft boxes use this.
  */
 function formClasses(model, options = { hash: {} }) {
-  const { changed, isPlaceholder, locked, path } = options.hash;
+  const { changed, isPlaceholder, locked } = options.hash;
+  const path = String(options.hash.path ?? "");
   let cssClass = "teriock-form-value";
-  if (changed ?? foundry.utils.hasProperty(model?.overrides, path)) { cssClass += " teriock-form-changed"; }
-  else if (locked ?? model?.system?.lockedPaths?.has?.(path)) { cssClass += " teriock-form-locked"; }
+  if (
+    (changed ?? foundry.utils.hasProperty(model?.overrides, path))
+    && game.settings.get("teriock", "highlightModifiedValues")
+  ) { cssClass += " teriock-form-changed"; } else if (locked ?? model?.system?.lockedPaths?.has?.(path)) {
+    cssClass += " teriock-form-locked";
+  }
   if (isPlaceholder) { cssClass += " teriock-form-placeholder"; }
   return cssClass;
 }
@@ -52,7 +56,7 @@ function formClasses(model, options = { hash: {} }) {
  * @param {object} [options]
  * @param {Partial<FormUpdaterHash>} [options.hash]
  * @returns {Handlebars.SafeString}
- * @todo Simplify is possible.
+ * @todo Simplify if possible.
  */
 function formUpdater(model, options = { hash: {} }) {
   const { abbreviation, action = "updatePaths", changed, color, dataset = {}, icon, locked } = options.hash;
@@ -132,20 +136,21 @@ function formIcon(field, options = {}) {
 
 /**
  * Make a box that changes value on hover.
- * @param {object} options
+ * @param {AbstractData} model
+ * @param {object} [options]
  * @returns {Handlebars.SafeString}
  * @deprecated
  * @todo Find a way to replace this with something more similar to `formUpdater` or block helpers?
  */
-function formHover(options) {
+function formHover(model, options = { hash: {} }) {
   const {
     action,
-    classes,
+    classes = "",
     dataset = {},
-    highlightModified = game.settings.get("teriock", "highlightModifiedValues"),
     icon,
     nullValue,
-    paths = "",
+    path = "",
+    paths = path,
     selected,
     selectedFormat,
     tag = "div",
@@ -158,12 +163,12 @@ function formHover(options) {
   const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
   const selectedValue = [Infinity, null].includes(selected) ? nullValue : selectedFormat ?? selected;
   const unselectedValue = [Infinity, null].includes(unselected) ? nullValue : unselectedFormat ?? unselected;
+  const cssClasses = ["affix", classes, formClasses(model, { hash: { path } })];
+  if (selected === null) { cssClasses.push("details-muted"); }
   return new Handlebars.SafeString(`
-    <${tag} class="affix ${classes ?? ""} ${selected === null ? "details-muted" : ""} ${
-    highlightModified && selectedValue !== unselectedValue ? "modified" : ""
-  }" ${dataAttrs}>
-      <${tag} class="selected thover">${selectedValue}</${tag}>
-      <${tag} class="unselected thover">${unselectedValue}</${tag}>
+    <${tag} class="${cssClasses.filter(Boolean).join(" ")}" ${dataAttrs}>
+      <${tag} class="selected">${selectedValue}</${tag}>
+      <${tag} class="unselected">${unselectedValue}</${tag}>
     </${tag}>
   `);
 }
