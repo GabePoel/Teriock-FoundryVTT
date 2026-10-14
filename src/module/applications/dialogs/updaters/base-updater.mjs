@@ -176,7 +176,6 @@ export default class BaseUpdater extends DocumentDialog {
         type: "button",
       }];
     }
-    console.log(context);
     return context;
   }
 

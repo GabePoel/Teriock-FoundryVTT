@@ -83,7 +83,7 @@ export default class BaseRoll extends Roll {
       await roll.evaluate({ allowStrings: true });
       return roll.total;
     } catch (err) {
-      console.log("Roll was unable to evaluate", err);
+      console.error("Roll was unable to evaluate", err);
       return 0;
     }
   }

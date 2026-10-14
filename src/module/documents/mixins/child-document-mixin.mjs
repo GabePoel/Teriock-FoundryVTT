@@ -25,11 +25,25 @@ export default function ChildDocumentMixin(Base) {
     }
 
     /**
+     * Changes to this document's data that were applied during preparation.
+     * @type {object}
+     */
+    overrides = this.overrides ?? {};
+
+    /**
      * Checks if the document is suppressed.
      * @returns {boolean}
      */
     get isSuppressed() {
       return this.system.isSuppressed || super.isSuppressed;
+    }
+
+    /**
+     * Clear or replace properties not automatically reset by upstream initialization.
+     * @protected
+     */
+    _clearData() {
+      this.overrides = {};
     }
 
     /** @inheritDoc */
@@ -42,6 +56,12 @@ export default function ChildDocumentMixin(Base) {
     _onDelete(options, userId) {
       super._onDelete(options, userId);
       if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
+    }
+
+    /** @inheritDoc */
+    prepareBaseData() {
+      this._clearData();
+      super.prepareBaseData();
     }
 
     /** @inheritDoc */

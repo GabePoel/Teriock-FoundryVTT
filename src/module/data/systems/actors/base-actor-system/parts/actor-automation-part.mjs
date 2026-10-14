@@ -25,8 +25,13 @@ export default function ActorAutomationPart(Base) {
       });
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
-        if (identifiers.has(c.typedIdentifier) && c.system.competence.raw < value) {
+        if (
+          identifiers.has(c.typedIdentifier)
+          && c.system.competence.raw < value
+          && !c.system.lockedPaths?.has("system.competence.raw")
+        ) {
           c.system.competence.raw = value;
+          foundry.utils.setProperty(c.overrides, "system.competence.raw", value);
         }
       }
     }

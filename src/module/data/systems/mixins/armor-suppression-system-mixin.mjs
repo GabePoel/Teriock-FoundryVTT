@@ -10,6 +10,12 @@
 export default function ArmorSuppressionSystemMixin(Base) {
   /** @mixin */
   class ArmorSuppressionSystem extends Base {
+    /**
+     * Documents whose competence was weakened by armor during this preparation.
+     * @type {(TeriockActiveEffect|TeriockItem)[]}
+     */
+    #weakened = [];
+
     /** @inheritDoc */
     _getTipSuppressions() {
       return Object.assign(super._getTipSuppressions(), { armor: this._isSuppressedArmor.bind(this) });
@@ -36,12 +42,24 @@ export default function ArmorSuppressionSystemMixin(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
+      this.#weakened = [];
       if (
         game.settings.get("teriock", "armorWeakensRanks") && this.actor
         && this.actor.system.defense.av.base > this.maxAv
       ) {
-        this.competence.raw = 0;
-        for (const e of this.parent.effects) { foundry.utils.setProperty(e, "system.competence.raw", 0); }
+        for (const d of [this.parent, ...this.parent.effects]) {
+          if (d.system.lockedPaths?.has("system.competence.raw")) { continue; }
+          foundry.utils.setProperty(d, "system.competence.raw", 0);
+          this.#weakened.push(d);
+        }
+      }
+    }
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      for (const d of this.#weakened) {
+        foundry.utils.setProperty(d.overrides, "system.competence.raw", 0);
       }
     }
   }

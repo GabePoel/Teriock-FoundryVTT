@@ -45,6 +45,24 @@ effects:
     system:
       applyIfDampened: true
       applyIfDeattuned: true
+      automations:
+        - _id: XPChViJ1wli48yom
+          activeQualifier: >-
+            not(or(@this.item.type.arrow, @this.item.type.basket, @this.item.type.blowgun-dart, @this.item.type.bottle,
+            @this.item.type.chimes, @this.item.type.circlet, @this.item.type.compass, @this.item.type.conch,
+            @this.item.type.drum, @this.item.type.fan, @this.item.type.flag, @this.item.type.flute,
+            @this.item.type.hand-mirror, @this.item.type.hand-net, @this.item.type.harp, @this.item.type.hourglass,
+            @this.item.type.lantern, @this.item.type.lute, @this.item.type.maraca, @this.item.type.musket,
+            @this.item.type.orb, @this.item.type.pistol, @this.item.type.sail, @this.item.type.seashell,
+            @this.item.type.spectacles, @this.item.type.syringe))
+          changes:
+            - key: system.price
+              phase: derived
+              priority: 10
+              target: Item
+              type: multiply
+              value: "0.5"
+          type: changes
       identifier: fragile
       kind: flaw
     type: property
@@ -121,6 +139,8 @@ system:
   equipped: true
   identifier: greater-healing-potion
   kind: enchanted
+  lockedPaths:
+    - system.price
   needsAttunement: false
   notes: <p>@Embed[equipment:potion-template path=system.notes inline]</p>
   price: 70

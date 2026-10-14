@@ -44,20 +44,15 @@
     <div
       class="
         teriock-sheet-competence
-        thover
         affix-icon
-        {{#if (and
-        highlightModified
-        (not (eq system.competence.raw source.system.competence.raw)))}}
-          modified
-        {{/if}}
+        updatable
+        competence
+        {{formClasses document path="system.competence.raw"}}
       "
-      style="color: var(--color-text-subtle)"
+      data-action="updatePaths"
+      data-icon="{{ TERIOCK.display.icons.manifest.competence.proficient }}"
+      data-paths="system.competence.raw"
       data-tooltip="{{ system.competence.description }}"
-      {{#if editable}}
-        data-action="increment"
-      {{/if}}
-      data-path="system.competence.raw"
     >
       <i class="unselected mic fa-light {{ system.competence.icon }}"></i>
       <i class='selected mic fa-light {{path TERIOCK.config.competence.levels source.system.competence.raw "icon"}}'
