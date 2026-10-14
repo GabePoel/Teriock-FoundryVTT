@@ -14,19 +14,19 @@ export default function StatDiceSheetMixin(Base) {
    * @property {TeriockItem} document
    */
   class StatDiceSheet extends Base {
-    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-    static DEFAULT_OPTIONS = { actions: { setStatDice: this._onSetStatDice } };
-
     /**
      * Modify a specified stat pool.
      * @param {PointerEvent} _event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
-    static async _onSetStatDice(_event, target) {
-      if (!this.isEditable) { return; }
+    static async #onUpdateStatDice(_event, target) {
+      if (!game.teriock.checkEditable(this)) { return; }
       await StatDiceUpdater.create({ pool: this.document.system.statDice[target.dataset.stat] });
     }
+
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+    static DEFAULT_OPTIONS = { actions: { updateStatDice: this.#onUpdateStatDice } };
   }
 
   return StatDiceSheet;

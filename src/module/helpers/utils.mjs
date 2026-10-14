@@ -424,3 +424,12 @@ export function getTypeLabel(type) {
   const documentName = getSystemClass(type)?.metadata.documentName;
   return documentName ? _loc(CONFIG[documentName].typeLabels[type]) : undefined;
 }
+
+/**
+ * Ensure infinities are just large numbers for roll data.
+ * @param {number} n 
+ * @returns {number}
+ */
+export function safeInf(n) {
+  return n === Infinity ? TERIOCK.config.system.safeInf : n;
+}

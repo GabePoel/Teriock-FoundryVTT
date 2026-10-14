@@ -14,8 +14,8 @@ export default class FluencySheet extends ChildSheet {
    * Edit this fluency's field and tradecraft.
    * @returns {Promise<void>}
    */
-  static async #onEditTradecraft() {
-    if (!this.isEditable) { return; }
+  static async #onUpdateTradecraft() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await FluencyTradecraftUpdater.create({ document: this.document });
   }
 
@@ -23,5 +23,5 @@ export default class FluencySheet extends ChildSheet {
   static BARS = ["teriock/sheets/effects/fluency/tradecraft-bar"];
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { actions: { editTradecraft: this.#onEditTradecraft } };
+  static DEFAULT_OPTIONS = { actions: { updateTradecraft: this.#onUpdateTradecraft } };
 }

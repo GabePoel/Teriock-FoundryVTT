@@ -2,24 +2,16 @@
   {{#if (or system.identification.identified system.isAttuned)}}
     {{> "teriock/sheets/shared/forms/attunable-forms"}}
   {{/if}}
-  {{formBox
-    system._source.weight
-    action=(ifThen editable "updatePaths" "")
-    dataset=(object paths="system.weight")
+  {{formUpdater
+    document
+    abbreviation="lb"
     icon=TERIOCK.display.icons.manifest.equipment.weight
-    label="lb"
-    placeholder="0"
-    unselected=system.weight
-    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label")
+    path="system.weight"
   }}
-  {{formBox
-    system._source.minStr
-    action=(ifThen editable "updatePaths" "")
-    dataset=(object paths="system.minStr")
+  {{formUpdater
+    document
+    abbreviation=(localize "TERIOCK.TERMS.Attributes.str.abbreviation")
     icon=TERIOCK.display.icons.manifest.equipment.minStr
-    label=(localize "TERIOCK.TERMS.Attributes.str.abbreviation")
-    placeholder="0"
-    unselected=system.minStr
-    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label")
+    path="system.minStr"
   }}
 </div>

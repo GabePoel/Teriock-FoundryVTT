@@ -1,26 +1,31 @@
 <div class="teriock-sheet-bar">
   {{> "teriock/sheets/shared/forms/kind-form"
     kindValue=system.kind
-    kindAction="editOrigin"
   }}
-  {{formBox
-    (getName system.archetype)
-    action=(ifThen editable "editClass" "")
-    icon=(path TERIOCK.config.class.archetypes system._source.archetype "icon")
-    tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label")
+  {{formUpdater
+    document
+    action="updateClass"
+    data=(getName system.archetype)
+    icon=(path TERIOCK.config.class.archetypes system.archetype "icon")
+    label=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label")
+    path="system.archetype"
+    source=(getName system._source.archetype)
   }}
-  {{formBox
-    (getName system.class)
-    action=(ifThen editable "editClass" "")
+  {{formUpdater
+    document
+    action="updateClass"
+    data=(getName system.class)
     icon=system.classIcon
-    tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.class.label")
+    label=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.class.label")
+    path="system.class"
+    source=(getName system._source.class)
   }}
-  {{formBox
-    (localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system._source.number)
-    action=(ifThen editable "updatePaths" "")
-    dataset=(object paths="system.number")
-    unselected=(localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system.number)
+  {{formUpdater
+    document
+    data=(localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system.number)
     icon=system.metadata.icon
-    tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.number.label")
+    label=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.number.label")
+    path="system.number"
+    source=(localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system._source.number)
   }}
 </div>

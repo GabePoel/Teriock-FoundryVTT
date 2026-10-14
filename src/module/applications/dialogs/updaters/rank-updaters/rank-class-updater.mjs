@@ -12,20 +12,9 @@ import BaseUpdater from "../base-updater.mjs";
  */
 export default class RankClassUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.document.rank, "title") } };
-
-  /**
-   * Keep the selected class inside the selected archetype, so switching archetype doesn't leave a class from the
-   * previous one selected.
-   */
-  #normalizeCurrentData() {
-    const archetype = this._currentData.system.archetype;
-    if (TERIOCK.config.class.classes[this._currentData.system.class]?.archetype !== archetype) {
-      this._currentData.system.class = Object.keys(TERIOCK.config.class.classes).find(k =>
-        TERIOCK.config.class.classes[k].archetype === archetype
-      );
-    }
-  }
+  static DEFAULT_OPTIONS = {
+    window: { icon: makeIconClass(icons.manifest.document.rank, "title"), title: "TYPES.JournalEntryPage.class" },
+  };
 
   /** @inheritDoc */
   get _dataPaths() {
@@ -46,8 +35,12 @@ export default class RankClassUpdater extends BaseUpdater {
   }
 
   /** @inheritDoc */
-  _onChangeForm(formConfig, event) {
-    super._onChangeForm(formConfig, event);
-    this.#normalizeCurrentData();
+  _normalizeCurrentData() {
+    const archetype = this._currentData.system.archetype;
+    if (TERIOCK.config.class.classes[this._currentData.system.class]?.archetype !== archetype) {
+      this._currentData.system.class = Object.keys(TERIOCK.config.class.classes).find(k =>
+        TERIOCK.config.class.classes[k].archetype === archetype
+      );
+    }
   }
 }

@@ -1,7 +1,7 @@
-{{formBox
-  (localize (path metadata.kinds kindValue "label"))
-  action=(ifThen editable (ifThen kindAction kindAction "editKind") "")
+{{formUpdater
+  document
+  action=(ifThen kindPath "updatePaths" "updateKind")
+  path=(ifThen kindPath kindPath "system.kind")
   icon=(path metadata.kinds (ifThen kindIcon kindIcon kindValue) "icon")
-  iconColor=(path metadata.kinds kindValue "color")
-  tooltip=(localize "TERIOCK.SYSTEMS.Child.FIELDS.kind.label")
+  color=(path metadata.kinds kindValue "color")
 }}

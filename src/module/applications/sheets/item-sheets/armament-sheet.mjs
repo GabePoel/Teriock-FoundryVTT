@@ -16,8 +16,8 @@ export default class ArmamentSheet extends ChildSheet {
    * Edit armament damage formulas.
    * @returns {Promise<void>}
    */
-  static async #onEditArmamentDamage() {
-    if (!this.isEditable) { return; }
+  static async #onUpdateArmamentDamage() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await ArmamentDamageUpdater.create({ document: this.document });
   }
 
@@ -25,8 +25,8 @@ export default class ArmamentSheet extends ChildSheet {
    * Edit armament ranges.
    * @returns {Promise<void>}
    */
-  static async #onEditArmamentRange() {
-    if (!this.isEditable) { return; }
+  static async #onUpdateArmamentRange() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await ArmamentRangeUpdater.create({ document: this.document });
   }
 
@@ -35,20 +35,22 @@ export default class ArmamentSheet extends ChildSheet {
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { editArmamentDamage: this.#onEditArmamentDamage, editArmamentRange: this.#onEditArmamentRange },
+    actions: { updateArmamentDamage: this.#onUpdateArmamentDamage, updateArmamentRange: this.#onUpdateArmamentRange },
   };
 
   /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
-      damageString: secondaryFormat(this.document.system.damage.base || "0", this.document.system.damage.twoHanded, {
-        secondFilter: formulaExists,
-      }),
-      sourceDamageString: secondaryFormat(
-        this.document.system._source.damage.base || "0",
-        this.document.system._source.damage.twoHanded,
-        { secondFilter: formulaExists },
-      ),
+      damage: {
+        data: secondaryFormat(this.document.system.damage.base || "0", this.document.system.damage.twoHanded, {
+          secondFilter: formulaExists,
+        }),
+        source: secondaryFormat(
+          this.document.system._source.damage.base || "0",
+          this.document.system._source.damage.twoHanded,
+          { secondFilter: formulaExists },
+        ),
+      },
     });
   }
 }

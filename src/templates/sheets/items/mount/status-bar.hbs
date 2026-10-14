@@ -3,13 +3,10 @@
     kindValue=system.kind
   }}
   {{> "teriock/sheets/shared/forms/attunable-forms"}}
-  {{formBox
-    (ifThen system._source.mountType system._source.mountType "")
-    action=(ifThen editable "updatePaths" "")
-    dataset=(object paths="system.mountType")
-    placeholder=(localize "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label")
-    unselected=(getName system.mountType)
-    tooltip=(localize "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label")
+  {{formUpdater
+    document
     icon=TERIOCK.display.icons.manifest.equipment.equipmentType
+    path="system.mountType"
+    placeholder=(localize "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label")
   }}
 </div>

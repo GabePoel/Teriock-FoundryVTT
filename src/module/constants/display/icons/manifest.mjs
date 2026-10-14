@@ -258,7 +258,7 @@ export default {
     tips: "ms-chat-info",
   },
   species: {
-    adult: "ms-account-child-invert",
+    adulthood: "ms-account-child-invert",
     br: "ms-rubric",
     lifespan: "ms-elderly",
     maxSize: "ms-vertical-align-top",

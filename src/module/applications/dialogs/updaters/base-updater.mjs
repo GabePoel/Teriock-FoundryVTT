@@ -1,3 +1,4 @@
+import { createElement } from "../../../helpers/html.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 
@@ -15,7 +16,7 @@ const { FormDataExtended } = foundry.applications.ux;
 export default class BaseUpdater extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { reset: this._onReset },
+    actions: { reset: this._onReset, toggleLockedPath: this._onToggleLockedPath },
     form: { closeOnSubmit: true, submitOnChange: false },
     position: { width: 450 },
     window: { contentClasses: ["standard-form"], minimizable: false, resizable: false },
@@ -41,13 +42,29 @@ export default class BaseUpdater extends DocumentDialog {
   }
 
   /**
+   * Toggle whether a path is locked.
+   * @param {MouseEvent} _event
+   * @param {HTMLElement} target
+   * @this {BaseUpdater}
+   */
+  static async _onToggleLockedPath(_event, target) {
+    const path = target.dataset.path;
+    const locked = target.dataset.pathLocked === "true";
+    const lockedPaths = this.lockedPaths;
+    if (locked) { lockedPaths.delete(path); }
+    else { lockedPaths.add(path); }
+    foundry.utils.setProperty(this._currentData, "system.lockedPaths", Array.from(lockedPaths));
+    await this.render();
+  }
+
+  /**
    * @inheritDoc
    * @param {Partial<ApplicationConfiguration & { TeriockDocument: document, paths?: string[] }>} options
    */
   constructor(options) {
     super(options);
     if (options.paths) { this.#dataPaths = options.paths; }
-    this._currentData = {};
+    this._currentData = { system: { lockedPaths: this.document.system._source.lockedPaths } };
     for (const p of this._dataPaths) {
       foundry.utils.setProperty(
         this._currentData,
@@ -82,7 +99,16 @@ export default class BaseUpdater extends DocumentDialog {
 
   /** @inheritDoc */
   get _titlePrefix() {
-    return this.document.getFieldForProperty(this._formPaths[0])?.label ?? super._titlePrefix;
+    return this.options.window.title || this.document.getFieldForProperty(this._formPaths[0])?.label
+      || super._titlePrefix;
+  }
+
+  /**
+   * Set of paths that are currently locked.
+   * @returns {Set<string>}
+   */
+  get lockedPaths() {
+    return new Set(foundry.utils.getProperty(this._currentData, "system.lockedPaths"));
   }
 
   /**
@@ -94,6 +120,11 @@ export default class BaseUpdater extends DocumentDialog {
     return this.document.getFieldForProperty(path)?.choices;
   }
 
+  /**
+   * Keep the current data consistent.
+   */
+  _normalizeCurrentData() {}
+
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
@@ -101,6 +132,7 @@ export default class BaseUpdater extends DocumentDialog {
       this._currentData,
       this._processFormData(event, this.form, new FormDataExtended(this.form)),
     );
+    this._normalizeCurrentData();
     this.render();
   }
 
@@ -148,6 +180,30 @@ export default class BaseUpdater extends DocumentDialog {
   /** @inheritDoc */
   async _processSubmitData(event, form, submitData, options = {}) {
     options.interactive ??= true;
+    foundry.utils.setProperty(submitData, "system.lockedPaths", Array.from(this.lockedPaths));
     return super._processSubmitData(event, form, submitData, options);
+  }
+
+  /** @inheritDoc */
+  _replaceHTML(result, content, options) {
+    const lockedPaths = this.lockedPaths;
+    result.form?.querySelectorAll(".form-fields").forEach(el => {
+      const path = el.querySelector("[name]")?.getAttribute("name");
+      const locked = lockedPaths.has(path);
+      el.append(
+        createElement("button", {
+          className: `icon inline-control updater-toggle ${
+            makeIconClass(TERIOCK.display.icons.manifest.ui[locked ? "locked" : "unlocked"])
+          }`,
+          dataset: {
+            action: "toggleLockedPath",
+            path,
+            pathLocked: locked,
+            tooltip: `TERIOCK.SHEETS.Common.UPDATE.${locked ? "locked" : "unlocked"}`,
+          },
+        }),
+      );
+    });
+    super._replaceHTML(result, content, options);
   }
 }

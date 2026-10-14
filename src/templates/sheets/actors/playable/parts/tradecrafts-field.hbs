@@ -31,6 +31,10 @@
           data-tooltip-direction="LEFT"
         {{/if}}
         data-tooltip-identifier="tradecraft:{{ name }}"
+        data-action="updatePaths"
+        data-icon="{{ tradecraft.icon }}"
+        data-paths="system.tradecrafts.{{ name }}.competence.raw system.tradecrafts.{{ name }}.score system.tradecrafts.{{ name }}.bonus"
+        data-title="{{ tradecraft.label }}"
       >
         <div
           class="
@@ -47,11 +51,9 @@
               modified
             {{/if}}
           "
-          data-action="increment"
-          data-path="system.tradecrafts.{{ name }}.competence.raw"
-          data-tooltip='{{path @root/system.tradecrafts name "competence.description"}}'
-          data-tooltip-direction="LEFT"
           data-tooltip-class=""
+          data-tooltip-direction="LEFT"
+          data-tooltip='{{path @root/system.tradecrafts name "competence.description"}}'
         >
           <i class='unselected {{path @root/tradecraftDisplay name "competenceIconClass"}}'></i>
           <i class='selected {{path @root/tradecraftDisplay name "sourceCompetenceIconClass"}}'></i>
@@ -85,13 +87,11 @@
               {{path @root/system.tradecrafts name "score"}}
             </span>
           </div>
-          {{formInput
-            (path @root/systemFields "tradecrafts.fields" name "fields.score")
-            classes="tradecraft-score-input tcenter ttransparent selected"
-            dataset=(object noScroll="true")
-            type="number"
-            value=(path @root/system._source.tradecrafts name "score")
-          }}
+          <div class="selected">
+            <span class="tradecraft-score-input tcenter ttransparent">
+              {{path @root/system._source.tradecrafts name "score"}}
+            </span>
+          </div>
         </div>
         <div class="tradecraft-panel-symbol">
           {{numberFormat

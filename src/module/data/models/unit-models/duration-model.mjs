@@ -26,8 +26,8 @@ export default class DurationModel extends TimeUnitModel {
   }
 
   /** @inheritDoc */
-  get text() {
+  get label() {
     if (this.unit === "passive") { return _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive"); }
-    return super.text;
+    return super.label;
   }
 }

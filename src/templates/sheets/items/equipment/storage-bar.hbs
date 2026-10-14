@@ -1,43 +1,46 @@
 {{#if system.storage.enabled}}
   <div class="teriock-sheet-bar">
-    {{formBox
-      (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=(asInf system.storage._source.maxCount))
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.storage.maxCount")
-      icon=TERIOCK.display.icons.manifest.equipment.maxCount
-      placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
-      unselected=(ifThen
+    {{formUpdater
+      document
+      abbreviation="ITEMS"
+      color=(ifThen system.storage.isOverCountCapacity TERIOCK.display.colors.palette.red null)
+      data=(ifThen
         (isFinite system.storage.maxCount)
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage.maxCount)
         system.storage.carriedCount)
-      label="ITEMS"
-      iconColor=(ifThen system.storage.isOverCountCapacity TERIOCK.display.colors.palette.red null)
-      tooltip=(localize
+      icon=TERIOCK.display.icons.manifest.equipment.maxCount
+      label=(localize
         (concat "TERIOCK.MODELS.Storage.FIELDS.maxCount." (ifThen system.storage.isOverCountCapacity "over" "under")))
-    }}
-    {{formBox
-      (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=(asInf system.storage._source.maxWeight))
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.storage.maxWeight")
-      icon=TERIOCK.display.icons.manifest.equipment.maxWeight
+      path="system.storage.maxCount"
       placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
-      unselected=(ifThen
+      source=(ifThen
+        (eq system.storage._source.maxCount null)
+        system.storage.carriedCount
+        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage._source.maxCount))
+    }}
+    {{formUpdater
+      document
+      abbreviation="lb"
+      color=(ifThen system.storage.isOverWeightCapacity TERIOCK.display.colors.palette.red null)
+      data=(ifThen
         (isFinite system.storage.maxWeight)
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage.maxWeight)
         system.storage.carriedWeight)
-      label="lb"
-      iconColor=(ifThen system.storage.isOverWeightCapacity TERIOCK.display.colors.palette.red null)
-      tooltip=(localize
+      icon=TERIOCK.display.icons.manifest.equipment.maxWeight
+      label=(localize
         (concat "TERIOCK.MODELS.Storage.FIELDS.maxWeight." (ifThen system.storage.isOverWeightCapacity "over" "under")))
+      path="system.storage.maxWeight"
+      placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
+      source=(ifThen
+        (eq system.storage._source.maxWeight null)
+        system.storage.carriedWeight
+        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage._source.maxWeight))
     }}
-    {{formBox
-      system.storage._source.weightMultiplier
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.storage.weightMultiplier")
+    {{formUpdater
+      document
       icon=TERIOCK.display.icons.manifest.equipment.weightMultiplier
+      path="system.storage.weightMultiplier"
       placeholder="1"
-      unselected=system.storage.weightMultiplier
-      tooltip=(localize "TERIOCK.MODELS.Storage.FIELDS.weightMultiplier.label")
     }}
   </div>
 {{/if}}

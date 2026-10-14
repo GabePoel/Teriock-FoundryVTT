@@ -2,16 +2,22 @@
   {{> "teriock/sheets/shared/forms/kind-form"
     kindValue=system.kind
   }}
-  {{formBox
-    (path TERIOCK.config.tradecraft.fields system._source.field "label")
-    action=(ifThen editable "editTradecraft" "")
-    icon=(path TERIOCK.config.tradecraft.fields system._source.field "icon")
-    tooltip=(localize "TERIOCK.COMMON.Field")
+  {{formUpdater
+    document
+    action="updateTradecraft"
+    data=(path TERIOCK.config.tradecraft.fields system.field "label")
+    icon=(path TERIOCK.config.tradecraft.fields system.field "icon")
+    label=(localize "TERIOCK.COMMON.Field")
+    path="system.field"
+    source=(path TERIOCK.config.tradecraft.fields system._source.field "label")
   }}
-  {{formBox
-    (path TERIOCK.config.tradecraft.tradecrafts system._source.tradecraft "label")
-    action=(ifThen editable "editTradecraft" "")
-    icon=(path TERIOCK.config.tradecraft.tradecrafts system._source.tradecraft "icon")
-    tooltip=(localize "TERIOCK.COMMON.Tradecraft")
+  {{formUpdater
+    document
+    action="updateTradecraft"
+    data=(path TERIOCK.config.tradecraft.tradecrafts system.tradecraft "label")
+    icon=(path TERIOCK.config.tradecraft.tradecrafts system.tradecraft "icon")
+    label=(localize "TERIOCK.COMMON.Tradecraft")
+    path="system.tradecraft"
+    source=(path TERIOCK.config.tradecraft.tradecrafts system._source.tradecraft "label")
   }}
 </div>

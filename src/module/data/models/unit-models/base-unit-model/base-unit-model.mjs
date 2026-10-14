@@ -94,7 +94,7 @@ export default class BaseUnitModel extends BaseDataModel {
     if (this.unitType === "finite") {
       return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.formula, unit: _loc(this.symbol) });
     }
-    return this.text;
+    return this.label;
   }
 
   /**
@@ -132,6 +132,18 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
+   * Text that represents this unit value.
+   * @returns {string}
+   */
+  get label() {
+    if (this.unitType === "finite") {
+      const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
+      return `${this.raw || "0"} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
+    }
+    return this.constructor.choices[this.unit];
+  }
+
+  /**
    * Evaluated value that's safe to use in roll data.
    * @returns {number}
    */
@@ -145,18 +157,6 @@ export default class BaseUnitModel extends BaseDataModel {
    */
   get symbol() {
     return this.constructor.choiceEntries.find(e => e.id === this.unit).symbol || this.unit;
-  }
-
-  /**
-   * Text that represents this unit value.
-   * @returns {string}
-   */
-  get text() {
-    if (this.unitType === "finite") {
-      const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
-      return `${this.raw || "0"} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
-    }
-    return this.constructor.choices[this.unit];
   }
 
   /**

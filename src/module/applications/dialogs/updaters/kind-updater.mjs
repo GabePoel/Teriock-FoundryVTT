@@ -24,6 +24,6 @@ export default class KindUpdater extends BaseUpdater {
   async _onRender(context, options) {
     await super._onRender(context, options);
     const icon = this.#kindEntry?.icon;
-    if (icon && this.window?.icon) { this.window.icon.className = makeIconClass(icon, "title"); }
+    if (icon && this.window?.icon) { this.window.icon.className = `window-icon ${makeIconClass(icon, "title")}`; }
   }
 }

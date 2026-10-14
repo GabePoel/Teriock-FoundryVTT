@@ -1,35 +1,39 @@
 {{#if system.expansion.type}}
   <div class="teriock-sheet-bar">
-    {{formBox
-      (concat
+    {{formUpdater
+      document
+      action="updateExpansion"
+      data=(concat
         (ifThen
           (path TERIOCK.config.ability.expansion system.expansion.type "needsSaveAttribute")
           (concat (path TERIOCK.config.attribute system.expansion.featSaveAttribute "abbreviation") " ")
           "")
         (lookup (lookup TERIOCK.config.ability.expansion system.expansion.type) "label"))
-      action=(ifThen editable "editExpansion" "")
-      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label")
       icon=TERIOCK.display.icons.manifest.ability.expansion
-    }}
-    {{formBox
-      (concat
-        "<span style='flex: auto;' data-path='system.expansion.range' data-action='updateUnit'>"
+      label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label")
+      source=(concat
         (ifThen
-          (eq system.expansion.range.unitType "finite") system.expansion.range.formula system.expansion.range.text)
-        "</span>")
+          (path TERIOCK.config.ability.expansion system._source.expansion.type "needsSaveAttribute")
+          (concat (path TERIOCK.config.attribute system._source.expansion.featSaveAttribute "abbreviation") " ")
+          "")
+        (path TERIOCK.config.ability.expansion system._source.expansion.type "label"))
+    }}
+    {{formUpdater
+      document
+      abbreviation=(ifThen (eq system.expansion.range.unitType "finite") system.expansion.range.symbol "")
       action="updateUnit"
+      data=expansionRange.data
+      dataset=(object path="system.expansion.range")
       icon=TERIOCK.display.icons.manifest.ability.expansionRange
-      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label")
-      label=(ifThen (eq system.expansion.range.unitType "finite") (localize system.expansion.range.symbol) "")
+      label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label")
+      source=expansionRange.source
     }}
-    {{formBox
-      system._source.expansion.cap
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.expansion.cap")
-      icon=TERIOCK.display.icons.manifest.ability.expansionCap
-      unselected=system.expansion.cap
-      include=(exists system.expansion.cap)
-      tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label")
-    }}
+    {{#if (exists system.expansion.cap)}}
+      {{formUpdater
+        document
+        icon=TERIOCK.display.icons.manifest.ability.expansionCap
+        path="system.expansion.cap"
+      }}
+    {{/if}}
   </div>
 {{/if}}

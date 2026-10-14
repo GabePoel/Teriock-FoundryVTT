@@ -2,14 +2,12 @@
   {{> "teriock/sheets/shared/forms/kind-form"
     kindValue=system.kind
   }}
-  {{formBox
-    system._source.tier
-    action=(ifThen (and editable (not system.target)) "updatePaths" "")
-    dataset=(object paths="system.tier")
+  {{formUpdater
+    document
+    abbreviation=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.abbreviation")
+    action=(ifThen (not system.target) "updatePaths" "")
     icon=TERIOCK.display.icons.manifest.attunable.tier
-    label=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.abbreviation")
+    path="system.tier"
     placeholder="0"
-    tooltip=(localize "TERIOCK.SYSTEMS.Attunement.FIELDS.tier.label")
-    unselected=(ifThen system.tier system.tier "")
   }}
 </div>

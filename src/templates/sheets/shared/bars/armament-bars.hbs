@@ -1,60 +1,53 @@
 {{#if (or system.damage.base (exists system.damage.twoHanded) (exists system.hitBonus))}}
   <div class="teriock-sheet-bar">
-    {{formBox
-      sourceDamageString
-      action=(ifThen editable "editArmamentDamage" "")
-      icon=TERIOCK.display.icons.manifest.ui.damage
-      include=(or system.damage.base system.damage.twoHanded)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.abbreviation")
-      overflow=true
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
-      unselected=damageString
-    }}
-    {{formBox
-      system._source.hitBonus
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.hitBonus")
-      icon=TERIOCK.display.icons.manifest.armament.hitBonus
-      include=(exists system.hitBonus)
-      label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.abbreviation")
-      placeholder="0"
-      tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label")
-      unselected=system.hitBonus
-    }}
-    {{formBox
-      system._source.attackPenalty
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.attackPenalty")
-      icon=TERIOCK.display.icons.manifest.armament.ap
-      include=(or system.damage.base system.damage.twoHanded)
-      label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.abbreviation")
-      placeholder="0"
-      tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label")
-      unselected=system.attackPenalty
-    }}
+    {{#if (or system.damage.base system.damage.twoHanded)}}
+      {{formUpdater
+        document
+        abbreviation=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.abbreviation")
+        action="updateArmamentDamage"
+        data=damage.data
+        icon=TERIOCK.display.icons.manifest.ui.damage
+        label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
+        source=damage.source
+      }}
+    {{/if}}
+    {{#if (exists system.hitBonus)}}
+      {{formUpdater
+        document
+        abbreviation=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.abbreviation")
+        icon=TERIOCK.display.icons.manifest.armament.hitBonus
+        path="system.hitBonus"
+        placeholder="0"
+      }}
+    {{/if}}
+    {{#if (or system.damage.base system.damage.twoHanded)}}
+      {{formUpdater
+        document
+        abbreviation=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.abbreviation")
+        icon=TERIOCK.display.icons.manifest.armament.ap
+        path="system.attackPenalty"
+        placeholder="0"
+      }}
+    {{/if}}
   </div>
 {{/if}}
 {{#if (or (exists system.av.raw) (exists system.bv.raw))}}
   <div class="teriock-sheet-bar">
-    {{formBox
-      system._source.av.raw
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.av.raw")
-      icon=TERIOCK.display.icons.manifest.armament.av
-      include=(exists system.av.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.abbreviation")
-      unselected=system.av.value
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
-    }}
-    {{formBox
-      system._source.bv.raw
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.bv.raw")
-      icon=TERIOCK.display.icons.manifest.armament.bv
-      include=(exists system.bv.raw)
-      label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.abbreviation")
-      unselected=system.bv.value
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label")
-    }}
+    {{#if (exists system.av.raw)}}
+      {{formUpdater
+        document
+        abbreviation=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.abbreviation")
+        icon=TERIOCK.display.icons.manifest.armament.av
+        path="system.av.raw"
+      }}
+    {{/if}}
+    {{#if (exists system.bv.raw)}}
+      {{formUpdater
+        document
+        abbreviation=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.abbreviation")
+        icon=TERIOCK.display.icons.manifest.armament.bv
+        path="system.bv.raw"
+      }}
+    {{/if}}
   </div>
 {{/if}}

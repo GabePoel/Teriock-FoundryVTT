@@ -8,6 +8,7 @@
         <div class="money-panel tgrid g4">
           {{formInput
             (path ../systemFields.money "fields" id)
+            id=(concat @root/appId "-currency-" id)
             classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
             dataset=(object tooltip=(minLen (path ../system.money id) 4) noScroll="true")
             placeholder="0"
@@ -38,6 +39,7 @@
       <div class="money-panel tgrid g4">
         {{formInput
           systemFields.money.fields.debt
+          id=(concat @root/appId "-currency-debt")
           classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
           dataset=(object tooltip=(minLen system.money.debt 4) noScroll="true")
           placeholder="0"
@@ -55,17 +57,14 @@
       </div>
     </div>
   </div>
-  <div
-    class="
-      money-total
-      {{#if (lt system.money.total 0)}}
-        tred
-      {{/if}}
-    "
+  {{!-- prettier-ignore --}}
+  <output
+    class="money-total{{#if (lt system.money.total 0)}} tred{{/if}}"
+    for='{{#each TERIOCK.config.currency as |currency id|}}{{concat concat @root/appId "-currency-" id " "}}{{/each}}{{concat @root/appId "-currency-debt"}}'
   >
     {{ system.money.total }}
     ₲&nbsp;&nbsp;&nbsp;&nbsp;
     {{ system.weight.money }}
     lb
-  </div>
+  </output>
 </div>

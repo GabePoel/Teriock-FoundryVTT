@@ -2,8 +2,6 @@ declare module "./species-system.mjs" {
   export default interface SpeciesSystem
     extends Teriock.Models.SpeciesStatIncreaseFields, Teriock.Models.SpeciesTransformationPartData
   {
-    /** <schema> Age of maturity */
-    adult: number;
     /** <schema> Appearance */
     appearance: string;
     /** <schema> Attribute increase */
@@ -12,8 +10,15 @@ declare module "./species-system.mjs" {
     br: number;
     /** <schema> Innate ranks */
     innateRanks: string;
-    /** <schema> Maximum lifespan */
-    lifespan: number | null;
+    /** <schema> Lifespan constraints */
+    lifespan: {
+      /** <schema> Age of maturity */
+      adulthood: number;
+      /** <schema> Enabled */
+      enabled: boolean;
+      /** <schema> Maximum lifespan */
+      max: number;
+    };
     /** <schema> Size constraints */
     size: Teriock.Fields.BarField & {
       /** <schema> Enabled */

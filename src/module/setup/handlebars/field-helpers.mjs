@@ -7,82 +7,113 @@ import { toKebabCase } from "../../helpers/string.mjs";
  * @import { DataField } from "@common/data/fields.mjs";
  */
 
-/** Displayed value length past which overflowing content gets a full-text tooltip. */
-const OVERFLOW_TOOLTIP_THRESHOLD = 16;
+/**
+ * @typedef FormClassesHash
+ * @property {boolean} changed
+ * @property {boolean} isPlaceholder
+ * @property {boolean} locked
+ * @property {string} path
+ */
 
 /**
- * Builds an HTML attribute string, or an empty string when the value is blank.
- * @param {string} name - Attribute name.
- * @param {*} value - Attribute value.
+ * Add classes that style a form.
+ * @param {AbstractData} model
+ * @param {object} [options]
+ * @param {Partial<FormClassesHash>} [options.hash]
  * @returns {string}
+ * @todo Have all the attribute/tradecraft boxes use this.
  */
-function attr(name, value) {
-  return value != null && String(value).length > 0 ? ` ${name}="${value}"` : "";
+function formClasses(model, options = { hash: {} }) {
+  const { changed, isPlaceholder, locked, path } = options.hash;
+  let cssClass = "teriock-form-value";
+  if (changed ?? foundry.utils.hasProperty(model?.overrides, path)) { cssClass += " teriock-form-changed"; }
+  else if (locked ?? model?.system?.lockedPaths?.has?.(path)) { cssClass += " teriock-form-locked"; }
+  if (isPlaceholder) { cssClass += " teriock-form-placeholder"; }
+  return cssClass;
 }
 
 /**
- * Build a dataset attribute string.
- * @param {Record<string, string>} dataset
- * @returns {string}
+ * @typedef {FormClassesHash} FormUpdaterHash
+ * @property {Record<string, string>} dataset
+ * @property {string} abbreviation
+ * @property {string} action
+ * @property {string} color
+ * @property {string} data
+ * @property {string} icon
+ * @property {string} label
+ * @property {string} paths
+ * @property {string} placeholder
+ * @property {string} source
  */
-function buildDataAttrs(dataset) {
-  return Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
-}
 
 /**
- * Renders a labeled form box.
- * @param {string} input - Main (selected) HTML or text content.
- * @param {object} options
+ * Make a box that shows opens an updater.
+ * @param {AbstractData} model
+ * @param {object} [options]
+ * @param {Partial<FormUpdaterHash>} [options.hash]
  * @returns {Handlebars.SafeString}
+ * @todo Simplify is possible.
  */
-function formBox(input, options) {
-  const {
-    action = "",
-    classes = "",
-    dataset = {},
-    icon = "info",
-    iconColor = "",
-    include = true,
-    label = "",
-    overflow = false,
-    placeholder = "",
-    tooltip = "",
-    unselected = "",
-  } = options.hash;
-  if (!include) { return new Handlebars.SafeString(""); }
+function formUpdater(model, options = { hash: {} }) {
+  const { abbreviation, action = "updatePaths", changed, color, dataset = {}, icon, locked } = options.hash;
+  let { data, isPlaceholder = false, label, paths, placeholder, source } = options.hash;
+  const path = String(options.hash.path ?? "");
+  label ||= model?.getFieldForProperty(path)?.label || "";
+  placeholder = _loc(String(placeholder || model?.getFieldForProperty(path)?.placeholder || ""));
+  paths ??= path;
+  if (data != null && data !== "") { source ??= data; }
+  data ??= model?.getStringForProperty(path, { list: "unit", source: false }) ?? "";
+  source ??= model?.getStringForProperty(path, { list: "unit", source: true }) ?? "";
+  let isSourcePlaceholder = false;
+  if (data === "") {
+    data = placeholder;
+    isPlaceholder = true;
+  }
+  if (source === "") {
+    source = placeholder;
+    isSourcePlaceholder = true;
+  }
 
-  const main = input ?? "";
-  const alt = unselected ?? "";
-  const mainHtml = String(main).length > 0 || !placeholder
-    ? main
-    : `<span class="teriock-sheet-box-placeholder">${placeholder}</span>`;
-  const hasUnselected = String(alt).length > 0;
-  const displayed = hasUnselected ? String(alt) : String(main);
-  const content = hasUnselected
-    ? `<div class="unselected">${alt}</div><div class="selected">${mainHtml}</div>`
-    : mainHtml;
-  const iconStr = String(icon).startsWith("<i")
-    ? icon
-    : `<i class="${makeIconClass(icon, "light")}"${attr("data-tooltip", tooltip)}></i>`;
-  const fullDataset = action === "updatePaths" && !("icon" in dataset) ? { ...dataset, icon } : dataset;
-  const datasetStr = Object.entries(fullDataset).map(([key, value]) => attr(`data-${key}`, value)).join("");
-  const overflowTooltip = overflow && displayed.length > OVERFLOW_TOOLTIP_THRESHOLD ? displayed : "";
-
-  const out = `
-    <div class="teriock-sheet-box-container">
-      <div class="teriock-sheet-box${classes ? ` ${classes}` : ""}"${attr("data-action", action)}${datasetStr}>
-        <div class="teriock-sheet-box-icon"${attr("style", iconColor ? `color: ${iconColor};` : "")}>
-          ${iconStr}
-        </div>
-        <div class="teriock-sheet-box-content${overflow ? " teriock-sheet-text-content" : ""}"${
-    attr("data-tooltip", overflowTooltip)
-  }>
-          ${content}
-        </div>
-        ${label ? `<div class="teriock-sheet-box-label" style="text-transform: none;">${label}</div>` : ""}
-      </div>
-    </div>`;
-  return new Handlebars.SafeString(out);
+  const containerElement = createElement("div", {
+    className: "teriock-updater-container",
+    dataset: foundry.utils.mergeObject({ action: action ?? "updatePaths", icon, paths }, dataset),
+  });
+  const displayElement = createElement("div", { className: "teriock-updater-display" });
+  if (icon) {
+    const iconContainerElement = createElement("div", {
+      className: "teriock-updater-icon",
+      dataset: { tooltip: label },
+    });
+    const iconElement = createElement("i", { className: makeIconClass(icon, "light") });
+    if (color) { iconElement.style.color = color; }
+    iconContainerElement.append(iconElement);
+    displayElement.append(iconContainerElement);
+  }
+  const valueElement = createElement("div", {
+    className: `teriock-updater-value ${formClasses(model, { hash: { changed, locked, path } })}`,
+  });
+  valueElement.append(
+    createElement("div", {
+      className: `teriock-updater-data${isPlaceholder ? " teriock-form-placeholder" : ""}`,
+      innerHTML: data,
+    }),
+  );
+  if (String(data) !== String(source) || (changed ?? foundry.utils.hasProperty(model?.overrides, path))) {
+    valueElement.append(
+      createElement("div", {
+        className: `teriock-updater-source${isSourcePlaceholder ? " teriock-form-placeholder" : ""}`,
+        innerHTML: source,
+      }),
+    );
+  }
+  displayElement.append(valueElement);
+  if (abbreviation) {
+    displayElement.append(
+      createElement("div", { className: "teriock-updater-abbreviation", textContent: _loc(abbreviation) }),
+    );
+  }
+  containerElement.append(displayElement);
+  return new Handlebars.SafeString(containerElement.outerHTML);
 }
 
 /**
@@ -103,6 +134,8 @@ function formIcon(field, options = {}) {
  * Make a box that changes value on hover.
  * @param {object} options
  * @returns {Handlebars.SafeString}
+ * @deprecated
+ * @todo Find a way to replace this with something more similar to `formUpdater` or block helpers?
  */
 function formHover(options) {
   const {
@@ -122,7 +155,7 @@ function formHover(options) {
   if (icon) { dataset.icon = icon; }
   if (action) { dataset.action = action; }
   if (paths) { dataset.paths = paths; }
-  const dataAttrs = buildDataAttrs(dataset);
+  const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
   const selectedValue = [Infinity, null].includes(selected) ? nullValue : selectedFormat ?? selected;
   const unselectedValue = [Infinity, null].includes(unselected) ? nullValue : unselectedFormat ?? unselected;
   return new Handlebars.SafeString(`
@@ -135,4 +168,4 @@ function formHover(options) {
   `);
 }
 
-export default { formBox, formHover, formIcon };
+export default { formClasses, formHover, formIcon, formUpdater };

@@ -284,7 +284,7 @@ export default class AbilitySystem
     const parts = super.embedParts;
     if (!this.consumable) {
       parts.subtitle = TERIOCK.config.ability.executionTime[this.maneuver]?.[this.executionTime.base]
-        ?? this.executionTime.slow?.text;
+        ?? this.executionTime.slow?.label;
     }
     return parts;
   }
