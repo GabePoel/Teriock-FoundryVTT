@@ -92,6 +92,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /** @inheritDoc */
   static migrateData(source, options) {
+    if (source.type === "character") { source.type = "pc"; }
     migrateThumbnails(source, "prototypeToken.texture.src", "prototypeToken.ring.subject.texture");
     return super.migrateData(source, options);
   }

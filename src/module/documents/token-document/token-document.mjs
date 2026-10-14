@@ -95,7 +95,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    */
   getEmbedContextMenuEntries(doc) {
     return [{
-      icon: makeIcon(teriock.data.systems.actors.CharacterSystem.metadata.icon, "contextMenu"),
+      icon: makeIcon(teriock.data.systems.actors.PlayableCharacterSystem.metadata.icon, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
       onClick: async () => this.actor.sheet.render(true),
       visible: () => Boolean(this.actor?.isViewer),

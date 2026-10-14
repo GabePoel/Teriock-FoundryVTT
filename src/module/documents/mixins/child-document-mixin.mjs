@@ -44,25 +44,6 @@ export default function ChildDocumentMixin(Base) {
       if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
     }
 
-    /**
-     * Duplicates the document within its parent.
-     * @param {object} [data]
-     * @returns {Promise<ChildDocument>}
-     */
-    async duplicate(data = {}) {
-      const copy = foundry.utils.mergeObject(this.toObject(true), {
-        _stats: { duplicateSource: this.uuid },
-        name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
-        ...data,
-      });
-      let copyDocument;
-      if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
-      else if (this.inCompendium) {
-        copyDocument = await this.constructor.create(copy, { pack: this.compendium.collection });
-      } else { copyDocument = await this.constructor.create(copy); }
-      return copyDocument[0];
-    }
-
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();

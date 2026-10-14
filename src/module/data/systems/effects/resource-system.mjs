@@ -1,3 +1,4 @@
+import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
 import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
@@ -14,6 +15,7 @@ export default class ResourceSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: icons.manifest.document.resource,
+    kinds: _replace(effectConfig.kind),
     tags: { usable: true },
     type: "resource",
   });

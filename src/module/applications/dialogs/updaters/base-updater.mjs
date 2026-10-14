@@ -193,12 +193,6 @@ export default class BaseUpdater extends DocumentDialog {
     result.form?.querySelectorAll(".form-fields").forEach(el => {
       const path = el.querySelector("[name]")?.getAttribute("name");
       const locked = lockedPaths.has(path);
-      const identifier = path && this.document.getFieldForProperty(path)?.options?.identifier;
-      const label = el.closest(".form-group")?.querySelector(":scope > label");
-      if (identifier && label) {
-        label.dataset.tooltipDirection = "LEFT";
-        label.dataset.tooltipIdentifier = identifier;
-      }
       el.append(
         createElement("button", {
           className: `icon inline-control updater-toggle ${

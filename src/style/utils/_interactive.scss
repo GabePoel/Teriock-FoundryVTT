@@ -101,23 +101,7 @@
 .updatable:not([data-disabled]) {
   @include mixins.box-hover;
   border-radius: 3px;
-  cursor: pointer;
-
-  // Icons brighten instead of getting a background tint
-  &.competence {
-    transition: color 50ms;
-
-    &:hover,
-    &:active {
-      background-color: transparent;
-    }
-
-    &:hover {
-      color: color-mix(in srgb, var(--color-text-primary), var(--color-text-subtle));
-    }
-
-    &:active {
-      color: var(--color-text-primary);
-    }
+  &:not(input) {
+    cursor: pointer;
   }
 }

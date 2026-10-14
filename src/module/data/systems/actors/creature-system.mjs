@@ -1,7 +1,7 @@
-import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { WikiSystemMixin } from "../../mixins/_module.mjs";
-import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
+import { WikiSystemMixin } from "../mixins/_module.mjs";
+import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
 /**
  * Creature-specific actor data model.
