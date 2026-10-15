@@ -66,7 +66,7 @@ export function getRollIcon(rollFormula) {
  */
 export function asInf(val) {
   if (["", Infinity, null, undefined].includes(val)) {
-    return makeIcon(TERIOCK.display.icons.manifest.ui.infinity, "regular");
+    return makeIcon(TERIOCK.display.icons.manifest.ui.infinity, "text");
   }
   return val;
 }

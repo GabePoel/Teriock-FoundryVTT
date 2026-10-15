@@ -12,6 +12,7 @@ export default {
   sheet: "solid",
   sheetForm: "solid",
   solid: "solid",
+  text: "inline",
   thin: "solid",
   title: "solid",
 };
