@@ -35,7 +35,8 @@ export default function BaseApplicationMixin(Base) {
     static async _onOpenDocument(event, target) {
       event.stopPropagation();
       if (target.dataset.uuid) {
-        const document = await foundry.utils.fromUuid(target.dataset.uuid);
+        const uuid = target.dataset.uuid;
+        const document = await (this.document?.fetchFromUuid?.(uuid) ?? foundry.utils.fromUuid(uuid));
         await document?.sheet?.render(true);
       }
     }

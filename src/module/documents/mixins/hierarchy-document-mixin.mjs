@@ -1,4 +1,4 @@
-import { expandDocumentDataArray, resolveDocument } from "../../helpers/resolve.mjs";
+import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
 const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
@@ -374,7 +374,7 @@ export default function HierarchyDocumentMixin(Base) {
       const _sup = getProperty(changes, "system._sup");
       if (_sup) {
         const collection = this.supCollection;
-        const sup = await resolveDocument(collection?.get(_sup));
+        const sup = await this.fetchFromUuid(collection?.get(_sup)?.uuid);
         const valid = await this.constructor.validateRelationship(sup, this, options);
         if (!valid) { return false; }
       }
@@ -468,7 +468,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|void>}
      */
     async getElder() {
-      return resolveDocument(this.elder);
+      return this.fetchFromUuid(this.elder?.uuid);
     }
 
     /** @inheritDoc */

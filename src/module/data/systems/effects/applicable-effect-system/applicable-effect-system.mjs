@@ -138,7 +138,7 @@ export default class ApplicableEffectSystem
    * @return {TeriockDocument|null}
    */
   get sustainedBy() {
-    if (this.sustained && this.parent.origin) { return this.parent.fetchFromUuid(this.parent.origin); }
+    if (this.sustained && this.parent.origin) { return this.parent.fetchFromUuidSync(this.parent.origin); }
     return null;
   }
 

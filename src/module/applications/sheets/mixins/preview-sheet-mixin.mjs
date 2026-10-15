@@ -85,7 +85,7 @@ export default function PreviewSheetMixin(Base) {
     async _onRender(context, options) {
       await super._onRender(context, options);
       this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
-        fromUuid(el.dataset.uuid).then(doc => doc?.onEmbed(el));
+        this.document.fetchFromUuid(el.dataset.uuid).then(doc => doc?.onEmbed(el));
       });
       for (const preview of Object.values(this.#previews)) { preview.bind(this.element); }
     }
