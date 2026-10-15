@@ -15,7 +15,7 @@ export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      score: new fields.NumberField({ initial: -3, integer: true, max: 5, min: -3, required: true }),
+      score: new fields.NumberField({ initial: -3, integer: true, required: true }),
     });
   }
 
@@ -35,6 +35,11 @@ export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.ROLLS.Feat.name", { value: this.name });
+  }
+
+  /** @inheritDoc */
+  get value() {
+    return super.value + this.score;
   }
 
   /** @inheritDoc */

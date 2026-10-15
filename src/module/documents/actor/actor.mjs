@@ -40,12 +40,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /** @inheritDoc */
-  static _preCleanData(data, options, _state) {
-    if (data.type === "character") { data.type = "pc"; }
-    super._preCleanData(data, options, _state);
-  }
-
-  /** @inheritDoc */
   static async createDocuments(data = [], operation = {}) {
     for (const d of data) {
       for (const c of ["effects", "items"]) {
