@@ -74,7 +74,7 @@ function changeTypeField(types = null) {
   return new StringField({
     choices: objectMap(allowed, t => t.label, { localize: true }),
     initial: types && !types.includes("add") ? types[0] : "add",
-    label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
+    label: "EFFECT.FIELDS.changes.element.type.label",
     required: true,
   });
 }
@@ -82,20 +82,22 @@ function changeTypeField(types = null) {
 /**
  * Field that represents a qualified change.
  * @returns {SchemaField}
+ * @todo Simplify this. It has a lot of leftover complexity from earlier versions still.
  */
 export function qualifiedChangeField() {
   return new SchemaField({
-    key: new StringField({ initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.key.label" }),
+    key: new StringField({ initial: "", label: "EFFECT.FIELDS.changes.element.key.label" }),
     phase: new StringField({
       choices: objectMap(TERIOCK.config.change.phase, (p) => p.label, { localize: true, filter: p => p.visible }),
+      hint: "EFFECT.FIELDS.changes.element.phase.hint",
       initial: TERIOCK.config.change.defaultPhase,
-      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
+      label: "EFFECT.FIELDS.changes.element.phase.label",
       required: true,
     }),
     priority: new NumberField({
       blank: true,
       initial: null,
-      label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
+      label: "EFFECT.FIELDS.changes.element.priority.label",
       nullable: true,
       required: false,
     }),
@@ -107,7 +109,7 @@ export function qualifiedChangeField() {
       required: true,
     }),
     type: changeTypeField(),
-    value: new FormulaField({ deterministic: false, initial: "", label: "TERIOCK.COMMON.Value" }),
+    value: new FormulaField({ deterministic: false, initial: "", label: "EFFECT.FIELDS.changes.element.value.label" }),
   });
 }
 
@@ -412,7 +414,7 @@ export function identifierSetField(table, options = {}) {
 }
 
 /**
- * Field for selecting a field.
+ * Field for selecting a field. (Yes, the name is silly. It is what it is.)
  * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
  * @returns {IdentifierField}
  */
@@ -449,7 +451,16 @@ export function classField(options = {}) {
  * @returns {IdentifierField}
  */
 export function equipmentTypeField(options = {}) {
-  return new IdentifierField({ suggestions: true, type: "equipment", ...options });
+  return new IdentifierField({
+    type: "equipment",
+    suggestions: () =>
+      Object.fromEntries(
+        game.teriock.identifiers.equipmentTypes.entries().filter(([, e]) => e.name).map((
+          [identifier, e],
+        ) => [identifier, e.name]),
+      ),
+    ...options,
+  });
 }
 
 /**

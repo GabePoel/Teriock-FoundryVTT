@@ -11,14 +11,15 @@ import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
  */
 
 /**
- * @typedef {{ img?: string, name?: string, pack?: string, priority: number }} TrackedUuid
+ * @typedef {{ img?: string, name?: string, pack?: string, priority: number, isEquipmentType?: boolean }} TrackedUuid
  */
 
 /**
  * @typedef IdentifierEntry
+ * @property {UUID<IdentifiableDocument>} uuid
+ * @property {boolean} isEquipmentType
  * @property {string} [img]
  * @property {string} [name]
- * @property {UUID<IdentifiableDocument>} uuid
  */
 
 /**
@@ -38,6 +39,12 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @type {Set<Teriock.Documents.DocumentName>}
    */
   #embeddedDocumentNames = new Set(["JournalEntryPage"]);
+
+  /**
+   * Registration of equipment types.
+   * @type {Map<Identifier, IdentifierEntry>}
+   */
+  #equipmentTypes = new Map();
 
   /**
    * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
@@ -138,6 +145,21 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /**
+   * Refresh the cached equipment type entry for an identifier.
+   * @param {Identifier} identifier
+   */
+  #refreshEquipmentType(identifier) {
+    const group = this.#identifiers.get("equipment")?.get(identifier);
+    const canonical = group && this.#getCanonical(group);
+    if (canonical?.entry.isEquipmentType) {
+      const { img, name } = canonical.entry;
+      this.#equipmentTypes.set(identifier, { img, isEquipmentType: true, name, uuid: canonical.uuid });
+    } else {
+      this.#equipmentTypes.delete(identifier);
+    }
+  }
+
+  /**
    * Prepare shared state for a series of canonical lookups.
    * @param {CanonicalLookupOptions} [options]
    * @returns {{ packLevels: Map<string, number>, permission: number|undefined }}
@@ -153,7 +175,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * Internally associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
-   * @param {{ img?: string, name?: string }} [data]
+   * @param {{ img?: string, name?: string, isEquipmentType?: boolean }} [data]
    */
   #track(identifier, uuid, data = {}) {
     const parsed = foundry.utils.parseUuid(uuid);
@@ -167,11 +189,13 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const existing = group.get(uuid);
     group.set(uuid, {
       img: data.img ?? existing?.img,
+      isEquipmentType: data.isEquipmentType ?? existing?.isEquipmentType ?? false,
       name: data.name ?? existing?.name,
       // World UUIDs parse to a collection so the prefix is what distinguishes a pack
       pack: uuid.startsWith("Compendium") ? parsed.collection?.collection : undefined,
       priority,
     });
+    if (type === "equipment") { this.#refreshEquipmentType(id); }
   }
 
   /**
@@ -193,6 +217,14 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   get documentNames() {
     return new Set([...this.#primaryDocumentNames, ...this.#parentDocumentNames]);
+  }
+
+  /**
+   * Canonical entries of all equipment types.
+   * @returns {ReadonlyMap<Identifier, IdentifierEntry>}
+   */
+  get equipmentTypes() {
+    return this.initialized ? this.#equipmentTypes : new Map();
   }
 
   /** @inheritDoc */
@@ -249,7 +281,12 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     for (const [identifier, group] of typeMap.entries()) {
       const canonical = this.#getCanonical(group, canonicalOptions);
       if (!canonical?.entry.name) { continue; }
-      entries[identifier] = { img: canonical.entry.img, name: canonical.entry.name, uuid: canonical.uuid };
+      entries[identifier] = {
+        img: canonical.entry.img,
+        isEquipmentType: canonical.entry.isEquipmentType,
+        name: canonical.entry.name,
+        uuid: canonical.uuid,
+      };
     }
     return entries;
   }
@@ -309,6 +346,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * Re-initialize the registry.
    */
   reset() {
+    this.#equipmentTypes.clear();
     this.#identifiers.clear();
     for (const documentName of [...this.#primaryDocumentNames, ...this.#parentDocumentNames]) {
       game.collections.get(documentName)?.forEach(d => d.prepareData());
@@ -320,7 +358,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * Associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
-   * @param {{ img?: string, name?: string }} [data]
+   * @param {{ img?: string, name?: string, isEquipmentType?: boolean }} [data]
    */
   track(identifier, uuid, data = {}) {
     this.#track(identifier, uuid, data);
@@ -333,7 +371,9 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   async trackCompendium(pack) {
     if (this.documentNames.has(pack.documentName)) {
-      const index = await pack.getIndex({ fields: ["name", "system.identifier", "system._sup"] });
+      const fields = ["name", "system.identifier", "system._sup"];
+      if (pack.documentName === "Item") { fields.push("system.equipmentType"); }
+      const index = await pack.getIndex({ fields });
       if (pack.documentName === "JournalEntry") {
         const promises = index.contents.map(d => this.#trackJournalEntry(d.uuid));
         await Promise.all(promises);
@@ -343,8 +383,9 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
           const identifier = d.system?.identifier;
           const uuid = d.uuid;
           if (!type || !identifier || !uuid || d.system?._sup) { continue; }
+          const isEquipmentType = type === "equipment" && d.system?.equipmentType === identifier;
           const typedIdentifier = `${type}:${identifier}`;
-          this.#track(typedIdentifier, uuid, { img: d.img, name: d.name });
+          this.#track(typedIdentifier, uuid, { img: d.img, isEquipmentType, name: d.name });
         }
       }
     }
@@ -367,7 +408,8 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
-    this.track(identifier, uuid, { img: document.img, name: document.name });
+    const isEquipmentType = identifier?.startsWith("equipment:") && document.system?.equipmentType === identifier;
+    this.track(identifier, uuid, { img: document.img, isEquipmentType, name: document.name });
   }
 
   /**
@@ -386,6 +428,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
       typeMap.delete(id);
       if (typeMap.size === 0) { this.#identifiers.delete(type); }
     }
+    if (type === "equipment") { this.#refreshEquipmentType(id); }
   }
 
   /**
