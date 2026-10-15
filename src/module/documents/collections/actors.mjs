@@ -30,7 +30,9 @@ export default class TeriockActors extends Actors {
    * @returns {TeriockActor[]}
    */
   get pcs() {
-    return game.users.filter(u => u.character).map(u => u.character);
+    return Array.from(
+      new Set([...this.filter(a => a.type === "pc"), ...game.users.map(u => u.character)].filter(Boolean)),
+    );
   }
 
   /**
@@ -56,7 +58,7 @@ export default class TeriockActors extends Actors {
    * @returns {TeriockActor[]}
    */
   get visible() {
-    return game.scenes.viewed?.tokens.filter(token => token.actor).map(token => token.actor) ?? [];
+    return Array.from(new Set(game.scenes.viewed?.tokens.map(token => token.actor).filter(Boolean) ?? []));
   }
 
   /**
