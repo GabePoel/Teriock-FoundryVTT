@@ -1,22 +1,9 @@
-import { getTypeLabel, objectMap } from "../../helpers/utils.mjs";
-import ChoiceSelector from "./choice-selector.mjs";
+import { getTypeLabel } from "../../helpers/utils.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
 /**
  * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
  */
-
-/**
- * Dialog to select an equipment class.
- * @returns {Promise<Teriock.Keys.Classification>}
- */
-export async function selectEquipmentClassDialog() {
-  return ChoiceSelector.prompt(objectMap(TERIOCK.config.equipment.equipmentClasses, e => e.label), {
-    hint: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
-    label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
-    title: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
-  });
-}
 
 /**
  * Dialog to select compendiums.

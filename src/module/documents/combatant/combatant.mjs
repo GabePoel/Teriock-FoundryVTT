@@ -2,7 +2,7 @@ import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { CompetenceModel } from "../../data/models/scaling-models/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { addFormula } from "../../helpers/formula.mjs";
+import { addFormulas } from "../../helpers/formula.mjs";
 import { dotJoin } from "../../helpers/string.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
@@ -49,7 +49,7 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     const competence = this.competence.formula ?? TERIOCK.config.character.defaults.initiative.competence;
     const bonus = this.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
-    return addFormula(addFormula(base, competence), bonus);
+    return addFormulas(base, competence, bonus);
   }
 
   /**

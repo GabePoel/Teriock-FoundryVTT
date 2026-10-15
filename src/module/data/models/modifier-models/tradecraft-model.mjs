@@ -5,12 +5,12 @@ const { fields } = foundry.data;
 
 /**
  * A {@link BaseModifierModel} for tradecraft modifiers.
- * @see {TradecraftExecution}
+ * @see {TradecraftCheckExecution}
  */
 export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static get Execution() {
-    return teriock.executions.activity.TradecraftExecution;
+    return teriock.executions.activity.TradecraftCheckExecution;
   }
 
   /** @inheritDoc */

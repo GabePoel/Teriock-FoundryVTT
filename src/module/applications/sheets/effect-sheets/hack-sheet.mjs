@@ -6,7 +6,7 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
  */
 
-export default class CustomEffectSheet extends ApplicableEffectSheet {
+export default class HackSheet extends ApplicableEffectSheet {
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = omit(ApplicableEffectSheet.PARTS, ["children"]);
 
