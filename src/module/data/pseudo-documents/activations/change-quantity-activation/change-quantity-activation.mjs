@@ -34,11 +34,13 @@ export default class ChangeQuantityActivation extends BaseActivation {
     if (!formulaExists(formula) || !this.consumable) { return; }
     const consumable = await fromUuid(this.consumable);
     if (!consumable?.system?.consumable) { return; }
-    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula) <= 0) { return; }
-    if (consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(formula) >= 0) {
+    const rollData = consumable.getRollData?.() ?? this.actors[0]?.getRollData?.() ?? {};
+    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula, rollData) <= 0) { return; }
+    if (
+      consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(formula, rollData) >= 0
+    ) {
       return;
     }
-    const rollData = this.actors[0]?.getRollData?.() ?? consumable.getRollData?.() ?? {};
     const roll = new BaseRoll(formula, rollData, { flavor: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.roll") });
     await roll.evaluate();
     const wrappers = [_loc("DOCUMENT.Automation")];

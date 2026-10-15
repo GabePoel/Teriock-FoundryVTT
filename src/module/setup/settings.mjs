@@ -116,6 +116,7 @@ export const menus = {
             scope: "client",
             type: String,
           },
+          deleteTriggerOnActivation: { default: false, scope: "client", type: Boolean },
           openPanelContextMenuEntry: { default: true, scope: "client", type: Boolean },
         },
       },
