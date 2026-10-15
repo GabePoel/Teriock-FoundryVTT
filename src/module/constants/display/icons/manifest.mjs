@@ -359,6 +359,7 @@ export default {
     import: "ms-download",
     infinity: "mdi-infinity",
     info: "ms-info",
+    level: "ms-stairs",
     linked: "ms-link",
     loading: "ms-progress-activity",
     locked: "ms-lock",
