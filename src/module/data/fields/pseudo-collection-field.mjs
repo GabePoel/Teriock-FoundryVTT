@@ -16,7 +16,7 @@ class PseudoTypedSchemaField extends TypedSchemaField {
 
   /** @inheritdoc */
   _validateSpecial(value) {
-    if (!value || value.type in this.types) { return super._validateSpecial(value); }
+    if (!value?.type || value.type in this.types) { return super._validateSpecial(value); }
     return true;
   }
 }

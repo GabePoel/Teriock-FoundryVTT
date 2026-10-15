@@ -34,6 +34,14 @@ export default class BaseActivation extends BasePseudoDocument {
   #tokens;
 
   /**
+   * @inheritdoc
+   * @returns {TeriockActor|null}
+   */
+  get actor() {
+    return this.getNearestDocument()?.speakerActor ?? null;
+  }
+
+  /**
    * Actors to affect when this button is activated.
    * @returns {TeriockActor[]}
    */

@@ -18,11 +18,6 @@ export default class UseDocumentsActivation extends mixClasses(BaseActivation, S
   }
 
   /** @inheritDoc */
-  get _selectionRelativeTo() {
-    return this.getNearestDocument()?.speakerActor ?? null;
-  }
-
-  /** @inheritDoc */
   get _selectionTitle() {
     return this.label;
   }

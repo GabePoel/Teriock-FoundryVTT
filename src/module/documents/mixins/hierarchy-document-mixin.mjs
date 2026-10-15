@@ -84,9 +84,13 @@ export default function HierarchyDocumentMixin(Base) {
       operation.dontRenderSheets ??= [];
       const supDocs = documents.filter(d => hasProperty(d, "flags._teriock.id"));
       const idMap = new Map(supDocs.map(d => [getProperty(d, "flags._teriock.id"), d]));
-      for (const d of documents) {
+      for (const d of [...documents]) {
         if (hasProperty(d, "flags._teriock.sup")) {
           const sup = idMap.get(getProperty(d, "flags._teriock.sup"));
+          if (!(await this.validateRelationship(sup ?? d.parent, d, operation))) {
+            documents.splice(documents.indexOf(d), 1);
+            continue;
+          }
           d.updateSource({ folder: sup?.folder, "system._sup": sup?.id });
           if (d._id) { operation.dontRenderSheets.push(d._id); }
         }
@@ -359,9 +363,11 @@ export default function HierarchyDocumentMixin(Base) {
       const yes = await super._preCreate(data, options, user);
       if (yes === false) { return false; }
 
-      const elder = await this.getElder();
-      const valid = await this.constructor.validateRelationship(elder, this, options);
-      if (!valid) { return false; }
+      // Subs created with their sup are validated in `_preCreateOperation` once sup is known.
+      if (!hasProperty(this, "flags._teriock.sup")) {
+        const valid = await this.constructor.validateRelationship(await this.getElder(), this, options);
+        if (!valid) { return false; }
+      }
 
       if (!this._id) { this.updateSource({ _id: randomID() }); }
     }
