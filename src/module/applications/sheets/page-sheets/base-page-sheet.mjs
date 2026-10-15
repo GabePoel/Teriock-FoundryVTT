@@ -3,6 +3,7 @@ import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import {
   DisplaySheetMixin,
   DragDropSheetMixin,
+  ImageEditingSheetMixin,
   LockingSheetMixin,
   MechanicsSheetMixin,
   MechanicsTabsSheetMixin,
@@ -21,6 +22,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @mixes DisplaySheet
  * @mixes SystemSettingsButtonSheet
  * @mixes DragDropSheet
+ * @mixes ImageEditingSheet
  * @mixes LockingSheet
  * @mixes MechanicsSheet
  * @mixes MechanicsTabsSheet
@@ -33,6 +35,7 @@ export default class BasePageSheet
     DisplaySheetMixin,
     SystemSettingsButtonSheetMixin,
     DragDropSheetMixin,
+    ImageEditingSheetMixin,
     LockingSheetMixin,
     MechanicsSheetMixin,
     MechanicsTabsSheetMixin,

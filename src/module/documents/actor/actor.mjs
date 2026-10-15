@@ -40,6 +40,12 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /** @inheritDoc */
+  static _preCleanData(data, options, _state) {
+    if (data.type === "character") { data.type = "pc"; }
+    super._preCleanData(data, options, _state);
+  }
+
+  /** @inheritDoc */
   static async createDocuments(data = [], operation = {}) {
     for (const d of data) {
       for (const c of ["effects", "items"]) {
@@ -92,7 +98,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /** @inheritDoc */
   static migrateData(source, options) {
-    if (source.type === "character") { source.type = "pc"; }
     migrateThumbnails(source, "prototypeToken.texture.src", "prototypeToken.ring.subject.texture");
     return super.migrateData(source, options);
   }

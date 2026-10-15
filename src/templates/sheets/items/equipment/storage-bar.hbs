@@ -3,43 +3,43 @@
     {{formUpdater
       document
       abbreviation="ITEMS"
-      color=(ifThen system.storage.isOverCountCapacity TERIOCK.display.colors.palette.red null)
+      color=(ifThen system.storage.count.over TERIOCK.display.colors.palette.red null)
       data=(ifThen
-        (isFinite system.storage.maxCount)
-        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage.maxCount)
-        system.storage.carriedCount)
+        (isFinite system.storage.count.max)
+        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.count.value denominator=system.storage.count.max)
+        system.storage.count.value)
       icon=TERIOCK.display.icons.manifest.equipment.maxCount
       label=(localize
-        (concat "TERIOCK.MODELS.Storage.FIELDS.maxCount." (ifThen system.storage.isOverCountCapacity "over" "under")))
-      path="system.storage.maxCount"
+        (concat "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.count.max." (ifThen system.storage.count.over "over" "under")))
+      path="system.storage.count.max"
       placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
       source=(ifThen
-        (eq system.storage._source.maxCount null)
-        system.storage.carriedCount
-        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage._source.maxCount))
+        (eq system._source.storage.count.max null)
+        system.storage.count.value
+        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.count.value denominator=system._source.storage.count.max))
     }}
     {{formUpdater
       document
       abbreviation="lb"
-      color=(ifThen system.storage.isOverWeightCapacity TERIOCK.display.colors.palette.red null)
+      color=(ifThen system.storage.weight.over TERIOCK.display.colors.palette.red null)
       data=(ifThen
-        (isFinite system.storage.maxWeight)
-        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage.maxWeight)
-        system.storage.carriedWeight)
+        (isFinite system.storage.weight.max)
+        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.weight.value denominator=system.storage.weight.max)
+        system.storage.weight.value)
       icon=TERIOCK.display.icons.manifest.equipment.maxWeight
       label=(localize
-        (concat "TERIOCK.MODELS.Storage.FIELDS.maxWeight." (ifThen system.storage.isOverWeightCapacity "over" "under")))
-      path="system.storage.maxWeight"
+        (concat "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.weight.max." (ifThen system.storage.weight.over "over" "under")))
+      path="system.storage.weight.max"
       placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
       source=(ifThen
-        (eq system.storage._source.maxWeight null)
-        system.storage.carriedWeight
-        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage._source.maxWeight))
+        (eq system._source.storage.weight.max null)
+        system.storage.weight.value
+        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.weight.value denominator=system._source.storage.weight.max))
     }}
     {{formUpdater
       document
       icon=TERIOCK.display.icons.manifest.equipment.weightMultiplier
-      path="system.storage.weightMultiplier"
+      path="system.storage.weight.multiplier"
       placeholder="1"
     }}
   </div>

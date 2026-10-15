@@ -93,7 +93,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get _color() {
-    if (this.isOverCapacity) { return TERIOCK.display.colors.palette.red; }
+    if (this.storage.count.over || this.storage.weight.over) { return TERIOCK.display.colors.palette.red; }
     if (!this.identification.read) { return TERIOCK.display.colors.palette.grey; }
     return super._color;
   }

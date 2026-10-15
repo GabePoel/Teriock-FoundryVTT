@@ -86,18 +86,18 @@ const takeUndampen = equipmentCommandFunctionFactory(
   "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
 );
 
-/** @see {IdentificationModel.identify} */
+/** @see {EquipmentIdentificationPart.identify} */
 const takeIdentify = equipmentCommandFunctionFactory(
   e => !e.system.identification.identified,
-  e => e.system.identification.identify(),
+  e => e.system.identify(),
   "TERIOCK.COMMANDS.Identify.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.identify",
 );
 
-/** @see {IdentificationModel.readMagic} */
+/** @see {EquipmentIdentificationPart.readMagic} */
 const takeReadMagic = equipmentCommandFunctionFactory(
   e => !e.system.identification.read,
-  e => e.system.identification.readMagic(),
+  e => e.system.readMagic(),
   "TERIOCK.COMMANDS.ReadMagic.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.readMagic",
 );
