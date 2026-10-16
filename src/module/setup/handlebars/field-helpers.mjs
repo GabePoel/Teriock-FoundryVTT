@@ -78,13 +78,14 @@ function formUpdater(model, options = { hash: {} }) {
     isSourcePlaceholder = true;
   }
 
-  const containerElement = createElement("div", {
+  const containerElement = createElement("button", {
     className: "teriock-updater-container",
     dataset: foundry.utils.mergeObject({ action: action ?? "updatePaths", icon, paths }, dataset),
+    type: "button",
   });
-  const displayElement = createElement("div", { className: "teriock-updater-display" });
+  const displayElement = createElement("span", { className: "teriock-updater-display" });
   if (icon) {
-    const iconContainerElement = createElement("div", {
+    const iconContainerElement = createElement("span", {
       className: "teriock-updater-icon",
       dataset: { tooltip: label },
     });
@@ -93,18 +94,18 @@ function formUpdater(model, options = { hash: {} }) {
     iconContainerElement.append(iconElement);
     displayElement.append(iconContainerElement);
   }
-  const valueElement = createElement("div", {
+  const valueElement = createElement("span", {
     className: `teriock-updater-value ${formClasses(model, { hash: { changed, locked, path } })}`,
   });
   valueElement.append(
-    createElement("div", {
+    createElement("span", {
       className: `teriock-updater-data${isPlaceholder ? " teriock-form-placeholder" : ""}`,
       innerHTML: data,
     }),
   );
   if (String(data) !== String(source) || (changed ?? foundry.utils.hasProperty(model?.overrides, path))) {
     valueElement.append(
-      createElement("div", {
+      createElement("span", {
         className: `teriock-updater-source${isSourcePlaceholder ? " teriock-form-placeholder" : ""}`,
         innerHTML: source,
       }),
@@ -113,7 +114,7 @@ function formUpdater(model, options = { hash: {} }) {
   displayElement.append(valueElement);
   if (abbreviation) {
     displayElement.append(
-      createElement("div", { className: "teriock-updater-abbreviation", textContent: _loc(abbreviation) }),
+      createElement("span", { className: "teriock-updater-abbreviation", textContent: _loc(abbreviation) }),
     );
   }
   containerElement.append(displayElement);
@@ -148,12 +149,10 @@ function formHover(model, options = { hash: {} }) {
     classes = "",
     dataset = {},
     icon,
-    nullValue,
     path = "",
     paths = path,
     selected,
     selectedFormat,
-    tag = "div",
     unselected,
     unselectedFormat,
   } = options.hash;
@@ -161,15 +160,15 @@ function formHover(model, options = { hash: {} }) {
   if (action) { dataset.action = action; }
   if (paths) { dataset.paths = paths; }
   const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
-  const selectedValue = [Infinity, null].includes(selected) ? nullValue : selectedFormat ?? selected;
-  const unselectedValue = [Infinity, null].includes(unselected) ? nullValue : unselectedFormat ?? unselected;
+  const unselectedValue = unselectedFormat ?? unselected;
+  const selectedValue = selected === null ? unselectedValue : selectedFormat ?? selected;
   const cssClasses = ["affix", classes, formClasses(model, { hash: { path } })];
   if (selected === null) { cssClasses.push("details-muted"); }
   return new Handlebars.SafeString(`
-    <${tag} class="${cssClasses.filter(Boolean).join(" ")}" ${dataAttrs}>
-      <${tag} class="selected">${selectedValue}</${tag}>
-      <${tag} class="unselected">${unselectedValue}</${tag}>
-    </${tag}>
+    <button type="button" class="${cssClasses.filter(Boolean).join(" ")}" ${dataAttrs}>
+      <span class="selected">${selectedValue}</span>
+      <span class="unselected">${unselectedValue}</span>
+    </button>
   `);
 }
 

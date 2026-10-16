@@ -41,6 +41,24 @@
   flex: 1;
   min-width: 0;
   position: relative;
+  width: 100%;
+
+  &:focus-visible {
+    box-shadow: none;
+    outline: none;
+
+    .teriock-updater-display {
+      box-shadow: 0 0 5px var(--color-shadow-primary);
+    }
+  }
+
+  &:not(:disabled) .teriock-updater-display {
+    @include mixins.box-hover;
+  }
+
+  &:disabled .teriock-updater-display {
+    background-color: transparent;
+  }
 
   .teriock-sheet-bar & {
     &:not(:last-child)::after {
@@ -86,9 +104,8 @@
     padding: 0.25em;
     position: relative;
 
-    @include mixins.box-hover;
+    @include mixins.editable-background;
 
-    &:focus-within,
     &.context {
       box-shadow: 0 0 5px var(--color-shadow-primary);
     }
@@ -215,7 +232,7 @@
     }
   }
 
-  &[data-action] {
+  &[data-action]:not(:disabled) {
     .teriock-updater-display,
     .teriock-updater-value {
       cursor: pointer;

@@ -1,5 +1,8 @@
+@use "../../mixins" as mixins;
+
 .details-tab {
-  .details-columns {
+  .details-columns,
+  .details-limits {
     gap: 1em;
   }
 
@@ -9,55 +12,69 @@
     gap: 1em;
   }
 
-  .details-value {
-    height: 2rem;
+  .details-list .updatable {
+    @include mixins.editable-background;
   }
 
-  .details-movement {
-    .teriock-block-display-divider {
-      margin-bottom: 1rem;
-    }
+  .affix {
+    display: grid;
+    grid-template-columns: 1fr;
 
-    .tgrid {
+    .selected,
+    .unselected {
+      grid-area: 1 / 1;
       padding-inline: 0.5em;
-      row-gap: 0.55rem;
+      position: static;
+    }
+  }
+
+  .details-list {
+    align-items: center;
+    column-gap: 0.5em;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    row-gap: 0.25em;
+    width: 100%;
+
+    > :not(.affix) {
+      padding-inline: 0.5em;
     }
 
     .affix {
+      color: var(--color-text-subtle);
+      height: 1.75em;
+
       .selected,
       .unselected {
-        justify-content: left;
+        justify-content: flex-start;
       }
     }
   }
 
-  .details-senses {
-    padding: 1em;
+  .details-senses .details-list {
+    padding-top: 0.25em;
+  }
 
-    .tgrid {
-      padding-inline: 0.5em;
+  .details-muted {
+    color: var(--color-text-subtle);
+  }
+
+  .details-movement > .actor-stat {
+    flex: 1;
+    justify-content: center;
+
+    .actor-stat-value {
+      font-size: 1.5em;
     }
   }
 
-  .details-physical {
-    padding-top: 0.75em;
+  .details-fraction {
+    column-gap: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
 
-    .teriock-block-display-divider {
-      margin-bottom: 0.625em;
-      margin-top: 0.125em;
+    > .affix {
+      height: 100%;
     }
   }
-
-  .details-limits,
-  .details-detection {
-    padding-block: 0.75em 0.25em;
-  }
-
-  .details-detection {
-    flex-direction: row;
-  }
-}
-
-.actor-page .details-tab .details-value.details-muted {
-  color: var(--color-text-subtle);
 }

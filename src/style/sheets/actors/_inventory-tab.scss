@@ -1,0 +1,121 @@
+.teriock-block-display.carrying-display {
+  padding: calc(0.5em + 4px);
+
+  > .tsubtle {
+    text-box: trim-both cap alphabetic;
+  }
+}
+
+.carrying-bar {
+  --color-carrying-bar: var(--color-level-success);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-carrying-bar), transparent 90%),
+    color-mix(in srgb, var(--color-carrying-bar), transparent 70%)
+  );
+  border: 2px solid var(--color-carrying-bar);
+  border-radius: 4px;
+  box-shadow: 0 0 6px var(--color-block-shadow);
+  height: 0.75em;
+  margin-top: calc(0.5em + 4px);
+  outline: 1px solid var(--color-bar-outline);
+  position: relative;
+  width: 100%;
+
+  &[data-level="1"] {
+    --color-carrying-bar: var(--color-level-warning);
+  }
+
+  &[data-level="2"],
+  &[data-level="3"] {
+    --color-carrying-bar: var(--color-level-error);
+  }
+
+  .carrying-bar-fill {
+    background-color: var(--color-carrying-bar);
+    border-radius: 2px;
+    height: 100%;
+  }
+
+  .carrying-bar-marker {
+    bottom: 0;
+    left: round(nearest, var(--position), 1px);
+    position: absolute;
+    top: 0;
+
+    &::before,
+    &::after {
+      background-color: var(--color-bar-outline);
+      content: "";
+      left: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    &::before {
+      bottom: 0;
+      top: 0;
+    }
+
+    &.covered::before {
+      background-color: var(--color-cool-4);
+    }
+
+    &::after {
+      height: 0.375em;
+      top: calc(100% + 2px);
+    }
+
+    &:last-child {
+      left: auto;
+      right: 3px;
+
+      &::before {
+        content: none;
+      }
+    }
+  }
+}
+
+.carrying-labels {
+  display: grid;
+  line-height: 1;
+  margin-top: calc(0.5em + 4px);
+  width: 100%;
+
+  .carrying-label {
+    grid-area: 1 / 1;
+    justify-self: start;
+    margin-left: var(--position);
+    text-align: center;
+    text-box: trim-both cap alphabetic;
+    transform: translateX(-50%);
+
+    .tsubtle {
+      margin-bottom: 0.25em;
+    }
+
+    &:first-child,
+    &:last-child {
+      margin-left: 0;
+      transform: none;
+    }
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:last-child {
+      justify-self: end;
+      text-align: right;
+    }
+
+    &.exceeded {
+      color: var(--color-level-error-strong);
+
+      .tsubtle {
+        color: color-mix(in srgb, var(--color-level-error-strong), transparent 30%);
+      }
+    }
+  }
+}

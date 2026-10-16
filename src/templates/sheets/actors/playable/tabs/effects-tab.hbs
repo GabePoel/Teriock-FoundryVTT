@@ -9,31 +9,30 @@
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
         {{#each TERIOCK.statuses.conditions as |condition key|}}
-          {{#unless (eq key "conscious")}}
-            <div
-              class="
-                condition-toggle
-                {{#unless (lookup ../conditions key)}}
-                  inactive
-                {{/unless}}
-              "
-              data-action="toggleCondition"
-              data-condition="{{{ key }}}"
-              data-tooltip='
-                {{localize "TERIOCK.SHEETS.Actor.TABS.Effects.toggle" name=condition.name state=(ifThen
-                (lookup ../conditions key)
-                (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
-                (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on"))}}
-              '
-            >
-              <div class="condition-image-container">
-                <div class="condition-image">
-                  <img src="{{ condition.img }}" alt="{{ condition.name }}" loading="lazy" />
-                </div>
+          <div
+            class="
+              condition-toggle
+              {{#unless (lookup ../conditions key)}}
+                inactive
+              {{/unless}}
+            "
+            data-action="toggleCondition"
+            data-condition="{{{ key }}}"
+            data-tooltip='
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Effects.toggle" name=condition.name state=(ifThen
+              (lookup ../conditions key)
+              (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
+              (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on"))}}
+            '
+          >
+            {{infoIcon (concat "condition:" condition.system.identifier)}}
+            <div class="condition-image-container">
+              <div class="condition-image">
+                <img src="{{ condition.img }}" alt="{{ condition.name }}" loading="lazy" />
               </div>
-              <div class="condition-label tsubtle">{{ condition.name }}</div>
             </div>
-          {{/unless}}
+            <div class="condition-label tsubtle">{{ condition.name }}</div>
+          </div>
         {{/each}}
       </div>
     </div>

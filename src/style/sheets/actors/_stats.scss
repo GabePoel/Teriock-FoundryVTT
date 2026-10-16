@@ -1,0 +1,41 @@
+@use "../../mixins" as mixins;
+
+.actor-stats {
+  column-gap: 0.5em;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  width: 100%;
+}
+
+.actor-stat {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  min-width: 0;
+  padding-top: 0.25em;
+  width: 100%;
+}
+
+.actor-stat-value {
+  align-items: center;
+  display: flex;
+  font-size: 1.25em;
+  height: 1.6em;
+  justify-content: center;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.actor-stat .updatable {
+  @include mixins.editable-background;
+}
+
+input.actor-stat-value {
+  border: none;
+  box-shadow: none;
+  line-height: normal;
+  padding: 0;
+  text-align: center;
+}

@@ -254,6 +254,47 @@
   }
 }
 
+@mixin editable-background() {
+  background-color: color-mix(in srgb, var(--color-text-primary), transparent 95%);
+
+  &:disabled {
+    background-color: transparent;
+  }
+}
+
+@mixin button-reset() {
+  align-items: normal;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+  display: block;
+  font: inherit;
+  gap: 0;
+  height: auto;
+  justify-content: normal;
+  line-height: inherit;
+  min-height: 0;
+  padding: 0;
+  text-align: inherit;
+  transition: none;
+
+  > * {
+    pointer-events: auto;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 4px var(--button-focus-outline-color);
+    outline: 1px solid var(--button-focus-outline-color);
+  }
+}
+
 @mixin box-hover() {
   &:hover {
     .teriock-updater-icon {

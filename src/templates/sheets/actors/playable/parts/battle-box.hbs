@@ -1,15 +1,11 @@
 <div class="ch-battle-box tbox toutline">
   <div class="defense-box">
-    <div class="defense-box-main">
-      <div
-        class="actor-shortbox actor-cover-box"
-        data-tooltip-class="teriock-no-tables"
-        data-tooltip-direction="LEFT"
-        data-tooltip-identifier="core:cover"
-      >
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
-        <div
-          class="actor-smallbox-value updatable"
+    <div class="actor-stats defense-box-main">
+      <div class="actor-stat">
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
+        <button
+          class="actor-stat-value updatable"
+          type="button"
           data-action="increaseCover"
           data-tooltip-class=""
           data-tooltip-direction="DOWN"
@@ -32,35 +28,26 @@
               data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
             {{/if}}
           ></i>
-        </div>
+        </button>
       </div>
 
-      <div class="actor-shortbox actor-ac-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}</div>
-        <div
-          class="actor-smallbox-value"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'
-        >
+      <div class="actor-stat">
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}</div>
+        <div class="actor-stat-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'>
           {{{ system.defense.ac }}}
         </div>
       </div>
 
-      <div class="actor-shortbox actor-bv-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.label"}}</div>
-        <div
-          class="actor-smallbox-value"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'
-        >
+      <div class="actor-stat">
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.label"}}</div>
+        <div class="actor-stat-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'>
           {{{ system.defense.bv }}}
         </div>
       </div>
 
-      <div class="actor-shortbox actor-cc-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.label"}}</div>
-        <div
-          class="actor-smallbox-value"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.tooltip"}}'
-        >
+      <div class="actor-stat">
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.label"}}</div>
+        <div class="actor-stat-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.tooltip"}}'>
           {{{ system.defense.cc }}}
         </div>
       </div>
@@ -92,7 +79,7 @@
           {{/if}}
         </div>
       </div>
-      <div
+      <button
         class="
           actor-primary-blocker-select
           updatable
@@ -100,6 +87,8 @@
             draggable
           {{/if}}
         "
+        type="button"
+        data-disable="false"
         data-action="selectBlocker"
         data-tooltip-direction="LEFT"
         {{#if (exists system.wielding.blocker)}}
@@ -112,59 +101,63 @@
         {{else}}
           {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.none"}}
         {{/if}}
-      </div>
+      </button>
     </div>
   </div>
 
   {{#if inCombat}}
-    <div class="defense-box middle-box">
-      <div class="actor-shortbox actor-actions-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}</div>
-        {{numberInput
-          actions
-          classes="actor-combatant-input actor-actions-input actor-smallbox-value updatable"
-          dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.tooltip"))
-          id=(concat @root/appId "-combatant-actions")
-          name="system.actions"
-          named=false
-          min=0
-          max=3
-        }}
-      </div>
-      <div class="actor-shortbox actor-reaction-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
-        <div
-          class="actor-smallbox-value updatable"
-          data-action="toggleReaction"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
-        >
-          <i class='{{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen reactions "on" "off")) "light"}}'
-          ></i>
+    <div class="defense-box">
+      <div class="actor-stats">
+        <div class="actor-stat">
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}</div>
+          {{numberInput
+            actions
+            classes="actor-combatant-input actor-stat-value updatable"
+            dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.tooltip"))
+            id=(concat @root/appId "-combatant-actions")
+            name="system.actions"
+            named=false
+            min=0
+            max=3
+          }}
         </div>
-      </div>
-      <div class="actor-shortbox actor-penalty-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
-        {{formInput
-          combatantFields.attackPenalty
-          value=attackPenalty
-          classes="actor-combatant-input actor-penalty-input actor-smallbox-value updatable"
-          dataset=(object
+        <div class="actor-stat">
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
+          <button
+            class="actor-stat-value updatable"
+            type="button"
+            data-action="toggleReaction"
+            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
+          >
+            <i class='{{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen reactions "on" "off")) "light"}}'
+            ></i>
+          </button>
+        </div>
+        <div class="actor-stat">
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
+          {{formInput
+            combatantFields.attackPenalty
+            value=attackPenalty
+            classes="actor-combatant-input actor-stat-value updatable"
+            dataset=(object
             action="resetAttackPenalty"
             tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.tooltip"))
-          id=(concat @root/appId "-combatant-attackPenalty")
-          name="system.attackPenalty"
-          named=false
-        }}
+            id=(concat @root/appId "-combatant-attackPenalty")
+            name="system.attackPenalty"
+            named=false
+          }}
+        </div>
       </div>
     </div>
   {{/if}}
 
   <div class="attack-box">
-    <div class="attack-box-main">
-      <div class="actor-shortbox actor-piercing-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.label"}}</div>
-        <div
-          class="actor-smallbox-value updatable"
+    <div class="actor-stats attack-box-main">
+      <div class="actor-stat">
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.label"}}</div>
+        <button
+          class="actor-stat-value updatable"
+          type="button"
           data-action="updatePaths"
           data-icon="{{ TERIOCK.display.icons.manifest.piercing.ub }}"
           data-paths="system.offense.piercing.raw"
@@ -193,20 +186,21 @@
               <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "light"}}'></i>
             {{/if}}
           {{/if}}
-        </div>
+        </button>
       </div>
 
-      <div class="actor-shortbox actor-sb-box">
-        <div class="tsubtle tcenter">{{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label"}}</div>
-        <div
-          class="actor-smallbox-value updatable"
+      <div class="actor-stat">
+        <div class="tsubtle">{{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label"}}</div>
+        <button
+          class="actor-stat-value updatable"
+          type="button"
           data-action="toggleSb"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}'
         >
           <i
             class='{{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen system.offense.sb "on" "off")) "light"}}'
           ></i>
-        </div>
+        </button>
       </div>
     </div>
 
@@ -237,7 +231,7 @@
         </div>
       </div>
 
-      <div
+      <button
         class="
           actor-primary-attacker-select
           updatable
@@ -245,6 +239,8 @@
             draggable
           {{/if}}
         "
+        type="button"
+        data-disable="false"
         data-action="selectAttacker"
         data-tooltip-direction="LEFT"
         {{#if (exists system.wielding.attacker)}}
@@ -257,7 +253,7 @@
         {{else}}
           {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.none"}}
         {{/if}}
-      </div>
+      </button>
 
       {{#if (exists system.wielding.attacker.system.styleDescription)}}
         <div class="tsubtle little-title actor-fighting-style-label">

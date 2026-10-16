@@ -170,6 +170,21 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           value: toRangeHTML(this.document.system.senses[key]),
         };
       }
+      const { carryingCapacity, size, weight } = this.document.system;
+      const { heavy, light, max } = carryingCapacity;
+      context.carrying = {
+        fill: Math.clamp(weight.carried / max, 0, 1) * 100,
+        heavy: (heavy / max) * 100,
+        level: [light, heavy, max].filter(c => weight.carried >= c).length,
+        light: (light / max) * 100,
+      };
+      context.sizeDetails = {
+        reach: toRangeHTML(size.reach),
+        space: _loc("TERIOCK.SHEETS.Actor.TABS.Details.size.spaceFormat", {
+          length: size.length * game.system.grid.distance,
+          unit: _loc("TERIOCK.MODELS.LengthUnit.UNITS.ft.symbol"),
+        }),
+      };
       context.conditions = {};
       for (const key of Object.keys(TERIOCK.statuses.conditions)) {
         const id = toId(key);

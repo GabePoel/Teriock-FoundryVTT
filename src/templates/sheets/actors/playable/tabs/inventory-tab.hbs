@@ -1,6 +1,89 @@
 <section class="actor-tab inventory tab {{ tabClass }}" data-group="primary" data-tab="inventory">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.title"}}</h1>
   <div class="actor-tab-page">
+    <div class="teriock-block-display carrying-display">
+      {{infoIcon
+        "core:carrying-capacity"
+        noTables=true
+      }}
+      <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.title"}}</div>
+      <div class="carrying-bar" data-level="{{ carrying.level }}">
+        <div class="carrying-bar-fill" style="width: {{ carrying.fill }}%"></div>
+        <div
+          class="
+            carrying-bar-marker
+            {{#if (gte system.weight.carried system.carryingCapacity.light)}}
+              covered
+            {{/if}}
+          "
+          style="--position: {{ carrying.light }}%"
+        ></div>
+        <div
+          class="
+            carrying-bar-marker
+            {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}
+              covered
+            {{/if}}
+          "
+          style="--position: {{ carrying.heavy }}%"
+        ></div>
+        <div class="carrying-bar-marker"></div>
+      </div>
+      <div class="carrying-labels">
+        <div class="carrying-label">
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.label"}}</div>
+          {{{ system.weight.carried }}}
+          {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+        </div>
+        <div
+          class="
+            carrying-label
+            {{#if (gte system.weight.carried system.carryingCapacity.light)}}
+              exceeded
+            {{/if}}
+          "
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.lightCapacity"}}'
+          data-tooltip-direction="DOWN"
+          data-tooltip-class=""
+          style="--position: {{ carrying.light }}%"
+        >
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.light"}}</div>
+          {{{ system.carryingCapacity.light }}}
+          {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+        </div>
+        <div
+          class="
+            carrying-label
+            {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}
+              exceeded
+            {{/if}}
+          "
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavyCapacity"}}'
+          data-tooltip-direction="DOWN"
+          data-tooltip-class=""
+          style="--position: {{ carrying.heavy }}%"
+        >
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavy"}}</div>
+          {{{ system.carryingCapacity.heavy }}}
+          {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+        </div>
+        <div
+          class="
+            carrying-label
+            {{#if (gte system.weight.carried system.carryingCapacity.max)}}
+              exceeded
+            {{/if}}
+          "
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.maxCapacity"}}'
+          data-tooltip-direction="DOWN"
+          data-tooltip-class=""
+        >
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.max"}}</div>
+          {{{ system.carryingCapacity.max }}}
+          {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+        </div>
+      </div>
+    </div>
     {{> "teriock/sheets/actors/playable/parts/money-display"}}
     <div class="teriock-block-display">
       {{> "teriock/ui/preview"

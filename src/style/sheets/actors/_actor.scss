@@ -2,6 +2,8 @@
 @use "../../mixins" as mixins;
 @use "./details-tab";
 @use "./intro-box";
+@use "./inventory-tab";
+@use "./stats";
 @use "./status-box";
 
 .inventory-sheet {
@@ -228,15 +230,6 @@
     overflow: hidden;
     position: relative;
 
-    .actor-smallbox-value {
-      @include mixins.centralize;
-      @include mixins.text-cutoff;
-      background-color: transparent;
-      border: none;
-      color: var(--color-text);
-      text-align: center;
-    }
-
     .actor-shortbox {
       @include mixins.centralize;
       flex-direction: column;
@@ -250,31 +243,12 @@
         text-align: center;
       }
 
-      .actor-smallbox-value {
-        @include mixins.centralize;
-        font-size: 1.25em;
-        min-height: 22px;
-        width: 100%;
-      }
-
       .actor-shortbox-label {
         @include mixins.text-subtle;
         background-color: transparent;
         border: none;
         font-size: 1em;
         text-align: center;
-      }
-    }
-
-    .carrying-box-main {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-
-      > .actor-shortbox {
-        flex: 1 1 0;
-        min-width: 0;
-        width: 0;
       }
     }
 
@@ -329,40 +303,11 @@
         }
       }
 
-      .actor-size-box,
-      .actor-weight-box,
-      .actor-movement-box,
-      .actor-carrying-box {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-      }
-
-      .actor-movement-box {
-        border-bottom: 1px dotted var(--color-text-subtle);
-        margin-bottom: 0.75em;
-        padding-bottom: 0.25em;
-      }
-
-      .actor-detection-input {
-        height: unset;
-        line-height: unset;
-      }
-
       .defense-box-main,
-      .attack-box-main,
-      .carrying-box-main {
-        @include mixins.centralize;
+      .attack-box-main {
         border-bottom: 1px dotted var(--color-text-subtle);
-        flex-direction: row;
         margin-bottom: 0.5em;
-        padding-bottom: 0.25em;
-        width: 100%;
-
-        input {
-          height: unset;
-          line-height: unset;
-        }
+        padding-bottom: 0.5em;
       }
 
       .ch-battle-box {
@@ -381,16 +326,6 @@
 
         .defense-box {
           border-bottom: 1px solid var(--color-border);
-        }
-
-        .middle-box {
-          @include mixins.centralize;
-          flex-direction: row;
-
-          input {
-            height: unset;
-            line-height: unset;
-          }
         }
 
         .actor-fighting-style-label {
@@ -497,7 +432,7 @@
 
   .teriock-block-display-divider {
     border-top: 1px dotted var(--color-text-subtle);
-    margin: 0.5em;
+    margin: 0.5em 0;
     width: 100%;
   }
 
@@ -617,7 +552,7 @@
 
 .tradecraft-panels {
   display: grid;
-  gap: 0;
+  gap: 0 !important;
   grid-template-columns: 1fr 1fr;
   width: 100%;
 
@@ -848,5 +783,13 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
+}
+
+.actor-primary-blocker-select,
+.actor-primary-attacker-select {
+  @include mixins.editable-background;
+  margin-top: 0.25em;
+  padding: 0.25em 0.5em;
   width: 100%;
 }

@@ -3,27 +3,25 @@
   <div class="actor-tab-page">
     <div class="tgrid g2 details-columns">
       <div class="teriock-block-display details-movement">
-        <div
-          class="actor-shortbox actor-movement-box"
-          data-tooltip-class="teriock-no-tables"
-          data-tooltip-direction="LEFT"
-          data-tooltip-identifier="core:movement-speed"
-        >
-          <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}</div>
-          <div class="actor-shortbox-value">
+        {{infoIcon
+          "core:movement-speed"
+          noTables=true
+        }}
+        <div class="actor-stat">
+          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}</div>
+          <div class="actor-stat-value">
             {{{ system.movementSpeed }}}
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
           </div>
         </div>
         <div class="teriock-block-display-divider"></div>
-        <div class="tgrid g3">
+        <div class="details-list">
           {{#each TERIOCK.config.character.movement as |config key|}}
-            <div class="gi2">
+            <div>
               {{{ config.label }}}
             </div>
-            <div
+            <button
               class='
-                tcolored
                 affix
                 updatable
                 {{formClasses
@@ -32,33 +30,33 @@
                 "system.speedAdjustments."
                 key)}}
               '
+              type="button"
               data-action="updatePaths"
               data-icon="{{ config.icon }}"
               data-paths="system.speedAdjustments.{{ key }}"
             >
-              <div class="unselected">
+              <span class="unselected">
                 {{path @root/TERIOCK.config.character.speed (lookup @root/system.speedAdjustments key) "label"}}
-              </div>
-              <div class="selected">
+              </span>
+              <span class="selected">
                 {{path @root/TERIOCK.config.character.speed (lookup @root/system._source.speedAdjustments key) "label"}}
-              </div>
-            </div>
+              </span>
+            </button>
           {{/each}}
         </div>
       </div>
-      <div class="tgrid-item details-right-column">
+      <div class="details-right-column">
         <div class="teriock-block-display details-senses">
-          <div class="tgrid g3">
-            <div class="gi2 tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
-            <div class="tcenter tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
+          <div class="details-list">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
             {{#each TERIOCK.config.character.sense as |config key|}}
               {{#unless config.hidden}}
-                <div class="gi2">
+                <div>
                   {{{ config.label }}}
                 </div>
-                <div
+                <button
                   class='
-                    tcenter
                     affix
                     updatable
                     {{formClasses
@@ -67,228 +65,169 @@
                     "system.senses."
                     key)}}
                   '
+                  type="button"
                   data-action="updatePaths"
                   data-icon="{{ config.icon }}"
                   data-paths="system.senses.{{ key }}"
                 >
-                  <div class="unselected">
-                    <span class="tcolored tcenter ttransparent">{{{path @root/senses key "value"}}}</span>
-                  </div>
-                  <div class="selected">
-                    <span class="tcolored tcenter ttransparent">{{{path @root/senses key "source"}}}</span>
-                  </div>
-                </div>
+                  <span class="unselected">{{{path @root/senses key "value"}}}</span>
+                  <span class="selected">{{{path @root/senses key "source"}}}</span>
+                </button>
               {{/unless}}
             {{/each}}
           </div>
         </div>
-        <div class="teriock-block-display details-physical">
-          <div class="carrying-box-main" data-tooltip-identifier="core:size">
-            <div class="actor-shortbox actor-size-box">
-              <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}</div>
-              {{formHover
-                document
-                classes="actor-weight-input actor-smallbox-value details-value updatable"
-                selected=system._source.size.value
-                unselected=system.size.value
-                action="updatePaths"
-                path="system.size.value"
-                icon=TERIOCK.display.icons.manifest.species.size
-                dataset=(object
-                  tooltip=(localize "TERIOCK.SHEETS.Actor.TABS.Details.size.description" category=system.size.category reach=system.size.reach)
-                  tooltipDirection="DOWN"
-                  tooltipClass="")
-              }}
-            </div>
-            <div class="actor-shortbox actor-weight-box">
-              <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}</div>
-              {{formHover
-                document
-                classes="actor-weight-input actor-smallbox-value details-value updatable"
-                selected=system._source.weight.self
-                unselected=system.weight.self
-                selectedFormat=(localize
-                  "TERIOCK.MODELS.BaseUnit.FORMAT"
-                  number=system._source.weight.self
-                  unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
-                unselectedFormat=(localize
-                  "TERIOCK.MODELS.BaseUnit.FORMAT"
-                  number=system.weight.self
-                  unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
-                action="updatePaths"
-                path="system.weight.self"
-                nullValue=(localize "COMMON.Default")
-                icon=TERIOCK.display.icons.manifest.equipment.weight
-                dataset=(object
-                  tooltip=(localize
-                    "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment" value=system.weight.value)
-                  tooltipDirection="DOWN"
-                  tooltipClass="")
-              }}
-            </div>
-            <div class="actor-shortbox actor-carrying-box">
-              <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.label"}}</div>
-              <div
-                class="actor-smallbox-value tcenter details-value"
-                data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.includingSelf" value=system.weight.value}}'
-                data-tooltip-class=""
-                data-tooltip-direction="DOWN"
-              >
-                {{{ system.weight.carried }}}
-                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+        <div class="tgrid g2 details-limits">
+          <div class="teriock-block-display">
+            {{infoIcon "ability:rotators"}}
+            <div class="actor-stat">
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}</div>
+              <div class="actor-stat-value details-fraction">
+                {{formHover
+                  document
+                  classes="updatable"
+                  unselected=system.rotators.value
+                  selected=system.rotators.value
+                  action="toggleDocs"
+                  dataset=(object disable="false" path="system.rotatorDocuments")
+                }}
+                /
+                {{formHover
+                  document
+                  classes="updatable"
+                  action="updatePaths"
+                  icon=TERIOCK.display.icons.manifest.maneuver.passive
+                  path="system.rotators.max"
+                  selected=(asInf system._source.rotators.max)
+                  unselected=(asInf system.rotators.max)
+                }}
               </div>
             </div>
           </div>
-          <div class="teriock-block-display-divider"></div>
-          <div class="tgrid g3" data-tooltip-identifier="core:carrying-capacity">
-            <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.light"}}</div>
-            <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavy"}}</div>
-            <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.max"}}</div>
-            <div
-              class="
-                tcenter
-                tround
-                {{#if (gte system.weight.carried system.carryingCapacity.light)}}
-                  tred
-                {{/if}}
-              "
-              data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.lightCapacity"}}'
-              data-tooltip-direction="DOWN"
-              data-tooltip-class=""
-            >
-              {{{ system.carryingCapacity.light }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
-            </div>
-            <div
-              class="
-                tcenter
-                tround
-                {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}
-                  tred
-                {{/if}}
-              "
-              data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavyCapacity"}}'
-              data-tooltip-direction="DOWN"
-              data-tooltip-class=""
-            >
-              {{{ system.carryingCapacity.heavy }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
-            </div>
-            <div
-              class="
-                tcenter
-                tround
-                {{#if (gte system.weight.carried system.carryingCapacity.max)}}
-                  tred
-                {{/if}}
-              "
-              data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.maxCapacity"}}'
-              data-tooltip-direction="DOWN"
-              data-tooltip-class=""
-            >
-              {{{ system.carryingCapacity.max }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+          <div class="teriock-block-display">
+            {{infoIcon
+              "keyword:curse"
+              noTables=true
+            }}
+            <div class="actor-stat" data-action="toggleDocs" data-path="system.curseDocuments">
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
+              <div class="actor-stat-value details-fraction">
+                {{formHover
+                  document
+                  classes="updatable"
+                  unselected=system.curses.value
+                  selected=system.curses.value
+                  action="toggleDocs"
+                  dataset=(object disable="false" path="system.curseDocuments")
+                }}
+                /
+                {{formHover
+                  document
+                  classes="updatable"
+                  action="updatePaths"
+                  icon=TERIOCK.display.icons.manifest.power.curse
+                  path="system.curses.max"
+                  selected=(asInf system._source.curses.max)
+                  unselected=(asInf system.curses.max)
+                }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="teriock-block-display details-limits">
-        <div class="tgrid g2">
-          <div
-            class="actor-shortbox"
-            data-action="toggleDocs"
-            data-path="system.curseDocuments"
-            data-tooltip-class="teriock-no-tables"
-            data-tooltip-direction="LEFT"
-            data-tooltip-identifier="keyword:curse"
-          >
-            <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
-            <div
-              class="
-                actor-smallbox-value
-                details-value
-              "
-            >
+        <div class="teriock-block-display">
+          {{infoIcon "condition:hidden"}}
+          <div class="actor-stats">
+            <div class="actor-stat">
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
               {{formHover
                 document
-                classes="updatable"
-                unselected=system.curses.value
-                selected=system.curses.value
-                action="toggleDocs"
-                dataset=(object path="system.curseDocuments")
-                tag="span"
-              }}
-              &nbsp;/&nbsp;
-              {{formHover
-                document
-                classes="updatable"
+                classes="actor-stat-value updatable"
                 action="updatePaths"
-                icon=TERIOCK.display.icons.manifest.power.curse
-                path="system.curses.max"
-                selected=(asInf system._source.curses.max)
-                tag="span"
-                unselected=(asInf system.curses.max)
+                icon=TERIOCK.display.icons.manifest.attribute.snk
+                path="system.detection.hiding"
+                selected=system._source.detection.hiding
+                unselected=system.detection.hiding
               }}
             </div>
-          </div>
-          <div class="actor-shortbox">
-            <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}</div>
-            <div
-              class="
-                actor-smallbox-value
-                details-value
-              "
-            >
+            <div class="actor-stat">
+              <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
               {{formHover
                 document
-                classes="updatable"
-                unselected=system.rotators.value
-                selected=system.rotators.value
-                action="toggleDocs"
-                dataset=(object path="system.rotatorDocuments")
-                tag="span"
-              }}
-              &nbsp;/&nbsp;
-              {{formHover
-                document
-                classes="updatable"
+                classes="actor-stat-value updatable"
                 action="updatePaths"
-                icon=TERIOCK.display.icons.manifest.maneuver.passive
-                path="system.rotators.max"
-                selected=(asInf system._source.rotators.max)
-                tag="span"
-                unselected=(asInf system.rotators.max)
+                icon=TERIOCK.display.icons.manifest.attribute.per
+                path="system.detection.perceiving"
+                selected=system._source.detection.perceiving
+                unselected=system.detection.perceiving
               }}
             </div>
           </div>
         </div>
       </div>
-      <div class="teriock-block-display details-detection">
-        <div class="actor-shortbox">
-          <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
-          {{formHover
-            document
-            classes="actor detection-input actor-smallbox-value details-value updatable"
-            action="updatePaths"
-            icon=TERIOCK.display.icons.manifest.attribute.snk
-            nullValue=system.detection.hiding
-            path="system.detection.hiding"
-            selected=system._source.detection.hiding
-            unselected=system.detection.hiding
+      <div class="teriock-block-display gi2">
+        <div class="actor-stats">
+          {{infoIcon
+            "core:size"
+            noTables=true
           }}
+          <div class="actor-stat">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}</div>
+            {{formHover
+              document
+              classes="actor-stat-value updatable"
+              selected=system._source.size.value
+              unselected=system.size.value
+              action="updatePaths"
+              path="system.size.value"
+              icon=TERIOCK.display.icons.manifest.species.size
+            }}
+          </div>
+          <div class="actor-stat">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.category"}}</div>
+            <div class="actor-stat-value">{{localize system.size.category}}</div>
+          </div>
+          <div class="actor-stat">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.space"}}</div>
+            <div class="actor-stat-value">{{ sizeDetails.space }}</div>
+          </div>
+          <div class="actor-stat">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.reach"}}</div>
+            <div class="actor-stat-value">{{{ sizeDetails.reach }}}</div>
+          </div>
         </div>
-        <div class="actor-shortbox">
-          <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
-          {{formHover
-            document
-            classes="actor detection-input actor-smallbox-value details-value updatable"
-            action="updatePaths"
-            icon=TERIOCK.display.icons.manifest.attribute.per
-            nullValue=system.detection.perceiving
-            path="system.detection.perceiving"
-            selected=system._source.detection.perceiving
-            unselected=system.detection.perceiving
+        <div class="teriock-block-display-divider"></div>
+        <div class="actor-stats">
+          {{infoIcon
+            "core:weight"
+            noTables=true
           }}
+          <div class="actor-stat">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}</div>
+            {{formHover
+              document
+              classes="actor-stat-value updatable"
+              selected=system._source.weight.self
+              unselected=system.weight.self
+              selectedFormat=(localize
+                "TERIOCK.MODELS.BaseUnit.FORMAT"
+                number=system._source.weight.self
+                unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
+              unselectedFormat=(localize
+                "TERIOCK.MODELS.BaseUnit.FORMAT"
+                number=system.weight.self
+                unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
+              action="updatePaths"
+              path="system.weight.self"
+              icon=TERIOCK.display.icons.manifest.equipment.weight
+            }}
+          </div>
+          <div class="actor-stat">
+            <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.total"}}</div>
+            <div class="actor-stat-value">
+              {{{ system.weight.value }}}
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+            </div>
+          </div>
         </div>
       </div>
     </div>

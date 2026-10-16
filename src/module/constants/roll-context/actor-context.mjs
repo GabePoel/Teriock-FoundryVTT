@@ -30,12 +30,12 @@ const actorContext = {
   speed: "TERIOCK.SYSTEMS.BaseActor.FIELDS.speed.label",
   weight: "TERIOCK.SYSTEMS.BaseActor.FIELDS.weight.label",
 
-  "carry.factor": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.factor",
-  "carry.heavy": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavyCapacity",
+  "carry.factor": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.factor",
+  "carry.heavy": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavyCapacity",
   "carry.heavy.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
-  "carry.light": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.lightCapacity",
+  "carry.light": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.lightCapacity",
   "carry.light.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
-  "carry.max": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.maxCapacity",
+  "carry.max": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.maxCapacity",
   "carry.max.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
 
   ac: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.ac.label",
