@@ -1,9 +1,7 @@
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
-import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
- * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
  */
 
 /**
@@ -155,25 +153,9 @@ export default function PlayableActorSheetCombatPart(Base) {
       await this.render();
     }
 
-    /**
-     * Creates a context menu for selecting piercing type.
-     * Provides options for none, AV0, and UB piercing types.
-     * @returns {ContextMenuEntry[]}
-     */
-    #piercingContextMenu() {
-      return TeriockContextMenu.makeUpdateEntries(
-        this.actor,
-        Object.entries(TERIOCK.config.piercing.levels).map(([k, v]) => {
-          return { icon: v.icon, label: v.label, value: k };
-        }),
-        { path: "system.offense.piercing.raw" },
-      );
-    }
-
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-      this._createContextMenu(this.#piercingContextMenu, ".actor-piercing-box", { eventName: "click" });
       for (const input of this.element.querySelectorAll(".actor-combatant-input")) {
         input.addEventListener("change", this.#onChangeCombatantInput.bind(this));
       }
