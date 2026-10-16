@@ -22,11 +22,6 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
   );
 
   /** @inheritDoc */
-  get _dialogDocuments() {
-    return super._dialogDocuments.map(d => Object.assign(d, { openable: false }));
-  }
-
-  /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
       "core.initiativeRoll": true,
@@ -68,6 +63,14 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
     if (!options.messageMode && this.source.hidden) { this._messageMode = "gm"; }
   }
 
+  /** @inheritDoc */
+  _determineCompetence(options) {
+    if (foundry.utils.hasProperty(options.source, "initiativeModel.competence.raw")) {
+      return foundry.utils.getProperty(options.source, "initiativeModel.competence.raw");
+    }
+    return super._determineCompetence(options);
+  }
+
   /**
    * @inheritDoc
    * @param {Record<string, any>} data
@@ -76,7 +79,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    */
   _initializeSource(data, options = {}) {
     foundry.utils.mergeObject(data, {
-      bonus: options.source?.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,
+      bonus: options.source?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,
       ...ui.combat.defaultInitiativeExecutionData,
     }, { inplace: true, overwrite: false });
     ui.combat.defaultInitiativeExecutionData = {};

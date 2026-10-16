@@ -196,7 +196,7 @@ export default {
   },
   interaction: { attack: "ms-swords", block: "ms-shield", feat: "ms-star", manifest: "ms-flare" },
   kind: { flaw: "ms-block", normal: "ms-nearby", other: "ms-category", unknown: "ms-question-mark" },
-  maneuver: { active: "ms-arrow-right-alt", passive: "ms-cycle", reactive: "ms-redo", slow: "ms-airwave" },
+  maneuver: { active: "ms-arrow-right-alt", passive: "ms-cycle", reactive: "ms-undo", slow: "ms-airwave" },
   movement: {
     climb: "ms-tools-ladder",
     crawl: "mdi-snail",

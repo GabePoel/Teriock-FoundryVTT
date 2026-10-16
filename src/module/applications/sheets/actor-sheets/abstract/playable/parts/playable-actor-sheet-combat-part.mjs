@@ -150,7 +150,6 @@ export default function PlayableActorSheetCombatPart(Base) {
       if (!combatant || !game.teriock.checkEditable(this)) { return; }
       const input = /** @type {HTMLInputElement} */ (event.currentTarget);
       await combatant.update({ [input.dataset.name]: Number(input.value) });
-      await this.render();
     }
 
     /** @inheritDoc */

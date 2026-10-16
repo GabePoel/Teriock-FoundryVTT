@@ -1,6 +1,8 @@
+import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { addFormulas } from "../../helpers/formula.mjs";
+import { dotJoin } from "../../helpers/string.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 /**
@@ -14,7 +16,22 @@ const { Combatant } = foundry.documents;
  * @extends {Combatant}
  * @mixes BaseDocument
  */
-export default class TeriockCombatant extends mixClasses(Combatant, BaseDocumentMixin) {
+export default class TeriockCombatant extends mixClasses(Combatant, BaseDocumentMixin, EmbeddableDataMixin) {
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    return Object.assign(parts, {
+      inactive: this.isDefeated,
+      struck: this.isDefeated,
+      subtitle: _loc("DOCUMENT.Combatant"),
+      text: dotJoin([
+        this.isDefeated ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.defeated") : "",
+        this.hidden ? _loc("TERIOCK.SYSTEMS.Combatant.EMBED.hidden") : "",
+        parts.text,
+      ]),
+    });
+  }
+
   /**
    * The initiative model to use.
    * @returns {InitiativeModel}

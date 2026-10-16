@@ -5,17 +5,29 @@ export default class TeriockCombatantConfig extends CombatantConfig {
   /** @inheritDoc */
   _replaceHTML(result, content, options) {
     const initiativeGroup = result.body?.querySelector(".form-group:has(input[name='initiative'])");
+    const defaultCombatant = this.document.system.defaultCombatant;
+    const isDefault = defaultCombatant === this.document;
+    const actor = this.document.actor;
+    const hasActor = Boolean(actor);
     if (initiativeGroup) {
       const { system } = this.document;
-      initiativeGroup.after(
-        ...["attackPenalty", "actions", "reactions"].map(key =>
-          system.schema.fields[key].toFormGroup({ rootId: this.id }, {
-            name: `system.${key}`,
-            rootId: this.id,
-            value: system._source[key],
-          })
-        ),
-      );
+      const actorFields = ["initiative.competence.raw", "initiative.bonus"];
+      const defaultCombatantFields = ["attackPenalty", "actions", "reactions"];
+      initiativeGroup.after(...[...actorFields, ...defaultCombatantFields].map(key => {
+        const isActorField = actorFields.includes(key);
+        const isCombatantField = defaultCombatantFields.includes(key);
+        return this.document.system.getFieldForProperty(key).toFormGroup({ rootId: this.id }, {
+          disabled: isActorField ? hasActor : isCombatantField ? !isDefault : false,
+          hint: "",
+          name: `system.${key}`,
+          rootId: this.id,
+          value: isActorField && hasActor
+            ? foundry.utils.getProperty(actor.system, key)
+            : isDefault
+            ? foundry.utils.getProperty(system._source, key)
+            : foundry.utils.getProperty(defaultCombatant.system, key),
+        });
+      }));
     }
     super._replaceHTML(result, content, options);
   }

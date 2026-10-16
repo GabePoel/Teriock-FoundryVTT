@@ -10,6 +10,7 @@ const { fields } = foundry.data;
  * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes UncommonSystem
+ * @todo Implement minion/commander and mob group functionality. Will require shared turn handling.
  */
 export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
   /** @inheritDoc */

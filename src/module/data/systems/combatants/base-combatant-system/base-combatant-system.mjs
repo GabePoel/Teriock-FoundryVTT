@@ -34,11 +34,11 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   }
 
   /**
-   * If this has an actor, return its default combatant.
-   * @returns {TeriockCombatant|null}
+   * The default Combatant that this inherits data from in cases of a shared Actor.
+   * @returns {TeriockCombatant}
    */
   get defaultCombatant() {
-    return this.actor?.defaultCombatant ?? null;
+    return this.actor?.defaultCombatant ?? this.parent;
   }
 
   /** @inheritDoc */
@@ -57,5 +57,18 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if ("system" in changed) { this.actor?.render(); }
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    const defaultCombatant = this.defaultCombatant;
+    if (defaultCombatant !== this.parent) {
+      Object.assign(this, {
+        actions: defaultCombatant.system.actions,
+        attackPenalty: defaultCombatant.system.attackPenalty,
+        reactions: defaultCombatant.system.reactions,
+      });
+    }
   }
 }
