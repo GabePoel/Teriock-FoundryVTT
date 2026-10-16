@@ -244,6 +244,8 @@ foundry.helpers.Hooks.once("init", function() {
 
   rs(d.TeriockAmbientLightDocument, s.TeriockAmbientLightConfig, "AmbientLight");
 
+  rs(d.TeriockCombatant, s.TeriockCombatantConfig, "Combatant");
+
   rs(d.TeriockItem, si.ArmamentSheet, "Armament", { types: ["body"] });
   rs(d.TeriockItem, si.EquipmentSheet, "Equipment", { types: ["equipment"] });
   rs(d.TeriockItem, si.MountSheet, "Mount", { types: ["mount"] });
