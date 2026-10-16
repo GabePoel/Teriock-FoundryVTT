@@ -1,20 +1,34 @@
 _id: ed264d0830324deb
 _key: "!effects!ed264d0830324deb"
 description: >-
-  <p>Items that are <b>[[lookup name style=lc]]</b> are @Identifier[property:darksteel]{darksteel} and deal
-  @Identifier[damage:dirtydark]{dirtydark} @Identifier[core:damage]{damage}. If a creature is
-  @Identifier[keyword:bearing]{bearing} a [[lookup name style=lc]] item that gets
+  <p><b>[[lookup name]]</b> is a rare metal found only on the boundaries between areas where
+  @Identifier[source:magical]{magic} does and does not function. Items that are [[lookup name style=lc]] deal
+  @Identifier[damage:dirtydark]{dirtydark} @Identifier[core:damage]{damage} and have an uncanny resilience against
+  @Wiki[Category:Magical effects]{magical effects}. They can @Identifier[core:block-interaction]{block}
+  @Identifier[source:magical]{magically powered abilities} even if they are @Identifier[keyword:unblockable]{UB}. If you
+  are wearing [[lookup name style=lc]] @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}, then
+  @Identifier[source:magical]{magically powered} @Identifier[core:attack-interaction]{attacks} made against you are not
+  @Identifier[keyword:armor-voiding]{AV0}. [[lookup name]] items are also @Identifier[keyword:resistance]{resistant} to
+  all @Wiki[Category:Magical effects]{magical effects}. However, [[lookup name style=lc]] items can also be risky to
+  use. If a creature is @Identifier[keyword:bearing]{bearing} a [[lookup name style=lc]] item that gets
   @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}, it is as though they had
   taken [[/damage 8d20[dirtydark]]] @Identifier[core:damage]{damage} for the purpose of developing
-  @Identifier[damage:dirtydark]{black rot}. This is instead of the [[/damage 4d20[dirtydark]]]
-  @Identifier[core:damage]{damage} from @Identifier[property:darksteel]{darksteel}. In addition, every day spent
-  @Identifier[keyword:bearing]{bearing} a [[lookup name style=lc]] item acts as 1
-  @Identifier[damage:dirtydark]{dirtydark} for the purpose of develeoping @Identifier[damage:dirtydark]{black rot}.</p>
+  @Identifier[damage:dirtydark]{black rot}.</p>
 img: systems/teriock/src/assets/thumbnails/property/dirtydark.webp
 name: Dirtydark
 system:
   applyIfDampened: true
   applyIfDeattuned: true
+  automations:
+    - _id: Hc7Fidc1BDRoPpGj
+      changes:
+        - key: system.price
+          phase: derived
+          priority: 10
+          target: Item
+          type: multiply
+          value: "150"
+      type: changes
   damageType: dirtydark
   identifier: dirtydark
   kind: intrinsic

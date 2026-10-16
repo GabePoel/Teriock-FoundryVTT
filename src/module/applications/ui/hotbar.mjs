@@ -37,7 +37,7 @@ export default class TeriockHotbar extends Hotbar {
           await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", {
             actor: `@UUID[${document.actor?.uuid}]`,
             child: `@UUID[${document.uuid}]`,
-            identifier: document.lookupKey,
+            identifier: `[[code ${document.lookupKey}]]`,
             label: document.typeLabel.toLocaleLowerCase(game.i18n.lang),
           }),
         ),

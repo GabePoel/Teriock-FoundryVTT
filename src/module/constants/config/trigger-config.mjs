@@ -89,6 +89,8 @@ const triggerConfig = {
       dawn: "TERIOCK.TRIGGERS.Time.choices.dawn",
       dusk: "TERIOCK.TRIGGERS.Time.choices.dusk",
       longRest: "TERIOCK.TRIGGERS.Time.choices.longRest",
+      sessionEnd: "TERIOCK.TRIGGERS.Time.choices.sessionEnd",
+      sessionStart: "TERIOCK.TRIGGERS.Time.choices.sessionStart",
       shortRest: "TERIOCK.TRIGGERS.Time.choices.shortRest",
     },
     label: "TERIOCK.TRIGGERS.Time.label",

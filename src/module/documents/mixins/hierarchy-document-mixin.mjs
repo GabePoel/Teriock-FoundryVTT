@@ -1,4 +1,4 @@
-import { expandDocumentDataArray, resolveDocument } from "../../helpers/resolve.mjs";
+import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
 const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
@@ -84,9 +84,13 @@ export default function HierarchyDocumentMixin(Base) {
       operation.dontRenderSheets ??= [];
       const supDocs = documents.filter(d => hasProperty(d, "flags._teriock.id"));
       const idMap = new Map(supDocs.map(d => [getProperty(d, "flags._teriock.id"), d]));
-      for (const d of documents) {
+      for (const d of [...documents]) {
         if (hasProperty(d, "flags._teriock.sup")) {
           const sup = idMap.get(getProperty(d, "flags._teriock.sup"));
+          if (!(await this.validateRelationship(sup ?? d.parent, d, operation))) {
+            documents.splice(documents.indexOf(d), 1);
+            continue;
+          }
           d.updateSource({ folder: sup?.folder, "system._sup": sup?.id });
           if (d._id) { operation.dontRenderSheets.push(d._id); }
         }
@@ -359,9 +363,11 @@ export default function HierarchyDocumentMixin(Base) {
       const yes = await super._preCreate(data, options, user);
       if (yes === false) { return false; }
 
-      const elder = await this.getElder();
-      const valid = await this.constructor.validateRelationship(elder, this, options);
-      if (!valid) { return false; }
+      // Subs created with their sup are validated in `_preCreateOperation` once sup is known.
+      if (!hasProperty(this, "flags._teriock.sup")) {
+        const valid = await this.constructor.validateRelationship(await this.getElder(), this, options);
+        if (!valid) { return false; }
+      }
 
       if (!this._id) { this.updateSource({ _id: randomID() }); }
     }
@@ -374,7 +380,7 @@ export default function HierarchyDocumentMixin(Base) {
       const _sup = getProperty(changes, "system._sup");
       if (_sup) {
         const collection = this.supCollection;
-        const sup = await resolveDocument(collection?.get(_sup));
+        const sup = await this.fetchFromUuid(collection?.get(_sup)?.uuid);
         const valid = await this.constructor.validateRelationship(sup, this, options);
         if (!valid) { return false; }
       }
@@ -468,7 +474,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|void>}
      */
     async getElder() {
-      return resolveDocument(this.elder);
+      return this.fetchFromUuid(this.elder?.uuid);
     }
 
     /** @inheritDoc */

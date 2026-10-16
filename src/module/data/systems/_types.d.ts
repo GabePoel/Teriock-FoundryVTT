@@ -1,4 +1,9 @@
-import { CharacterSystem, CreatureSystem, InventorySystem } from "./actors/_module.mjs";
+import {
+  CreatureSystem,
+  InventorySystem,
+  NonPlayerCharacterSystem,
+  PlayableCharacterSystem,
+} from "./actors/_module.mjs";
 import { BaseCardSystem, StoneSystem } from "./cards/_module.mjs";
 import { BaseCombatantSystem } from "./combatants/_module.mjs";
 import {
@@ -43,9 +48,10 @@ declare global {
   }
 
   export interface ActorSystemMap {
-    character: CharacterSystem;
     creature: CreatureSystem;
     inventory: InventorySystem;
+    npc: NonPlayerCharacterSystem;
+    pc: PlayableCharacterSystem;
   }
 
   export interface CardSystemMap {

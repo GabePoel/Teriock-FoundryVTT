@@ -23,7 +23,7 @@
     </div>
     {{#each field.tradecrafts as |tradecraft name|}}
       <div
-        class="tradecraft-container tgrid gi6"
+        class="tradecraft-container tgrid gi6 updatable"
         data-tooltip-class="teriock-no-tables"
         {{#if (and (not (eq ../index "artisan")) (not (eq ../index "scholar")) (not (eq ../index "p1")))}}
           data-tooltip-direction="RIGHT"
@@ -31,27 +31,28 @@
           data-tooltip-direction="LEFT"
         {{/if}}
         data-tooltip-identifier="tradecraft:{{ name }}"
+        data-action="updatePaths"
+        data-icon="{{ tradecraft.icon }}"
+        data-paths="system.tradecrafts.{{ name }}.competence.raw system.tradecrafts.{{ name }}.score system.tradecrafts.{{ name }}.bonus"
+        data-title="{{ tradecraft.label }}"
       >
         <div
-          class="
+          class='
             tradecraft-panel-symbol
-            thover
             ch-tradecraft-pro-box
             grid-fill
             affix-icon
-            {{#if (and
-            @root/highlightModified
-            (not (eq
-            (path @root/system.tradecrafts name 'competence.raw')
-            (path @root/system._source.tradecrafts name 'competence.raw'))))}}
-              modified
-            {{/if}}
-          "
-          data-action="increment"
-          data-path="system.tradecrafts.{{ name }}.competence.raw"
-          data-tooltip='{{path @root/system.tradecrafts name "competence.description"}}'
-          data-tooltip-direction="LEFT"
+            competence
+            {{formClasses
+            @root/document
+            path=(concat
+            "system.tradecrafts."
+            name
+            ".competence.raw")}}
+          '
           data-tooltip-class=""
+          data-tooltip-direction="LEFT"
+          data-tooltip='{{path @root/system.tradecrafts name "competence.description"}}'
         >
           <i class='unselected {{path @root/tradecraftDisplay name "competenceIconClass"}}'></i>
           <i class='selected {{path @root/tradecraftDisplay name "sourceCompetenceIconClass"}}'></i>
@@ -65,17 +66,16 @@
           {{ tradecraft.label }}
         </div>
         <div
-          class="
+          class='
             tradecraft-panel-symbol
             affix
-            {{#if (and
-            @root/highlightModified
-            (not (eq
-            (path @root/system.tradecrafts name 'score')
-            (path @root/system._source.tradecrafts name 'score'))))}}
-              modified
-            {{/if}}
-          "
+            {{formClasses
+            @root/document
+            path=(concat
+            "system.tradecrafts."
+            name
+            ".score")}}
+          '
           data-tooltip='{{path @root/tradecraftDisplay name "scoreLabel"}}'
           data-tooltip-direction="RIGHT"
           data-tooltip-class=""
@@ -85,13 +85,11 @@
               {{path @root/system.tradecrafts name "score"}}
             </span>
           </div>
-          {{formInput
-            (path @root/systemFields "tradecrafts.fields" name "fields.score")
-            classes="tradecraft-score-input tcenter ttransparent selected"
-            dataset=(object noScroll="true")
-            type="number"
-            value=(path @root/system._source.tradecrafts name "score")
-          }}
+          <div class="selected">
+            <span class="tradecraft-score-input tcenter ttransparent">
+              {{path @root/system._source.tradecrafts name "score"}}
+            </span>
+          </div>
         </div>
         <div class="tradecraft-panel-symbol">
           {{numberFormat

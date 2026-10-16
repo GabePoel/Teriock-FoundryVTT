@@ -1,11 +1,11 @@
 <div class="dialog-form standard-form execution-editor-form scrollable scroll-fade">
   {{#if documents.length}}
     <section class="execution-editor-documents">
-      {{#each documents as |doc|}}
+      {{#each documents as |doc index|}}
         <div class="execution-editor-document">
           <div class="execution-editor-document-embed">
             {{> "teriock/ui/block"
-              (merge doc.document.embedParts (object openable=doc.openable usable=false text="" icons=""))
+              (merge doc.document.embedParts (object openable=doc.openable usable=false text="" icons="" tooltipDirection=(ifThen (and (gt ../documents.length 1) (eq index 0)) "LEFT" "RIGHT")))
             }}
           </div>
           {{#if doc.showFooter}}

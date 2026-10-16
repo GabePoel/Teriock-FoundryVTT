@@ -92,6 +92,7 @@
             }
           },
           "delivery": {
+            "full": "{piercing} {delivery}",
             "label": "Delivery"
           },
           "duration": {
@@ -693,7 +694,8 @@
           },
           "scaling": {
             "br": {
-              "abbreviation": "BR"
+              "abbreviation": "BR",
+              "label": "Battle Rating"
             },
             "brScale": {
               "hint": "Scale bonuses off BR instead of LVL.",
@@ -973,6 +975,28 @@
           "glued": {
             "label": "Glued"
           },
+          "identification": {
+            "flaws": {
+              "label": "Unidentified Flaws"
+            },
+            "identified": {
+              "inverse": "Unidentified",
+              "label": "Identified"
+            },
+            "kind": {
+              "label": "Unidentified Power Level"
+            },
+            "label": "Identification",
+            "name": {
+              "label": "Unidentified Name"
+            },
+            "notes": {
+              "label": "Unidentified Notes"
+            },
+            "read": {
+              "label": "Read"
+            }
+          },
           "kind": {
             "label": "Power Level"
           },
@@ -987,6 +1011,40 @@
           },
           "stashed": {
             "label": "Stashed"
+          },
+          "storage": {
+            "count": {
+              "max": {
+                "hint": "The maximum number of other pieces of equipment this can store.",
+                "label": "Maximum Count",
+                "over": "Over Maximum Number of Equipment Carried",
+                "under": "Maximum Number of Equipment Carried"
+              },
+              "value": {
+                "hint": "The number of other pieces of equipment this is storing.",
+                "label": "Carried Count"
+              }
+            },
+            "enabled": {
+              "hint": "If this should be able to store other equipment within it.",
+              "label": "Storage"
+            },
+            "weight": {
+              "max": {
+                "hint": "The maximum weight this can store.",
+                "label": "Maximum Weight",
+                "over": "Over Maximum Weight Carried",
+                "under": "Maximum Weight Carried"
+              },
+              "multiplier": {
+                "hint": "An amount to multiply the weight of all things this stores by.",
+                "label": "Weight Multiplier"
+              },
+              "value": {
+                "hint": "The weight of the other pieces of equipment this is storing.",
+                "label": "Carried Weight"
+              }
+            }
           },
           "weight": {
             "hint": "The weight of this equipment in pounds.",
@@ -1032,6 +1090,32 @@
           "price": "₲{value}",
           "weight": "{value} lb",
           "weightMultiplier": "× {value} Weight Multiplier"
+        },
+        "QUERY": {
+          "Identify": {
+            "ask": "Asking GMs to approve identification of {name}.",
+            "failPrefix": "Could not ask to identify.",
+            "failure": "{name} was not successfully identified.",
+            "hint": "Select effects to reveal.",
+            "noDocumentsMessage": "There are no effects to reveal.",
+            "question": "<p>Should {user} identify {item}?</p>",
+            "success": "{name} was successfully identified.",
+            "title": "Identify Item"
+          },
+          "ReadMagic": {
+            "ask": "Asking GMs to approve reading magic on {name}.",
+            "failPrefix": "Could not ask to read magic.",
+            "failure": "{name} was not successfully read magic on.",
+            "question": "<p>Should {user} read magic on {item}?</p>",
+            "success": "{name} was successfully read magic on.",
+            "title": "Read Magic"
+          },
+          "Unidentify": {
+            "alreadyUnidentified": "The item is already unidentified.",
+            "hint": "Select effects to hide",
+            "name": "Unidentified {type}",
+            "noDocumentsMessage": "There are no effects to hide."
+          }
         },
         "USAGE": {
           "twoHanded": "Use in Two Hands"
@@ -1261,10 +1345,6 @@
           "makeCreature": "Make Creature"
         },
         "FIELDS": {
-          "adult": {
-            "hint": "The age at which creatures of this species become adults.",
-            "label": "Age of Adulthood"
-          },
           "appearance": {
             "label": "Appearance"
           },
@@ -1284,8 +1364,18 @@
             "label": "Innate Ranks"
           },
           "lifespan": {
-            "hint": "The longest creatures of this species live in years.",
-            "label": "Maximum Lifespan"
+            "adulthood": {
+              "hint": "The age at which creatures of this species become adults.",
+              "label": "Age of Adulthood"
+            },
+            "enabled": {
+              "hint": "Whether or not this species has a lifespan associated with it.",
+              "label": "Lifespan"
+            },
+            "max": {
+              "hint": "The longest creatures of this species live in years.",
+              "label": "Maximum Lifespan"
+            }
           },
           "mpIncrease": {
             "label": "Mana Increase"
@@ -1330,9 +1420,8 @@
         "PANELS": {
           "br": "BR {value}",
           "lifespan": {
-            "adult": "Adult at {value} Years",
+            "adulthood": "Adult at {value} Years",
             "infinite": "Infinite lifespan",
-            "label": "Lifespan",
             "max": "{value} Year Lifespan"
           },
           "size": {

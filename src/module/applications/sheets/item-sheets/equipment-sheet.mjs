@@ -23,19 +23,22 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
 
   /** @inheritDoc */
   async _prepareContext(options) {
+    const sourceLong = this.document.system.range.long.clone();
     return Object.assign(await super._prepareContext(options), {
-      rangeString: this.document.system.range.long.unitType === "finite"
-        ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
-          reverse: true,
-          secondFilter: formulaExists,
-        })
-        : this.document.system.range.long.text,
-      sourceRangeString: this.document.system.range.long.unitType === "finite"
-        ? secondaryFormat(this.document.system._source.range.long.raw, this.document.system._source.range.short.raw, {
-          reverse: true,
-          secondFilter: formulaExists,
-        })
-        : this.document.system.range.long.text,
+      range: {
+        data: this.document.system.range.long.unitType === "finite"
+          ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
+            reverse: true,
+            secondFilter: formulaExists,
+          })
+          : this.document.system.range.long.label,
+        source: sourceLong.unitType === "finite"
+          ? secondaryFormat(sourceLong.raw, this.document.system._source.range.short.raw, {
+            reverse: true,
+            secondFilter: formulaExists,
+          })
+          : sourceLong.label,
+      },
     });
   }
 

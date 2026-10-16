@@ -1,4 +1,3 @@
-import { asInf } from "../../../../../helpers/icon.mjs";
 import { Panel } from "../../../../pseudo-documents/_module.mjs";
 
 /**
@@ -18,15 +17,17 @@ export default function SpeciesPanelPart(Base) {
       statBar.wrappers.push(_loc("TERIOCK.SYSTEMS.Species.PANELS.br", { value: this.br }));
       const bars = this._withKindBar([statBar, {
         icon: TERIOCK.display.icons.manifest.species.lifespan,
-        label: _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.label"),
-        wrappers: [
-          this.adult ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult", { value: this.adult }) : "",
-          this.adult
-            ? this.lifespan
-              ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.max", { value: asInf(this.lifespan) })
-              : _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite")
-            : "",
-        ],
+        label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.lifespan.enabled.label"),
+        wrappers: this.lifespan.enabled
+          ? [
+            this.lifespan.adulthood
+              ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.adulthood", { value: this.lifespan.adulthood })
+              : "",
+            Number.isFinite(this.lifespan.max)
+              ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.max", { value: this.lifespan.max })
+              : _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite"),
+          ]
+          : [],
       }, {
         icon: TERIOCK.display.icons.manifest.species.size,
         label: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label"),

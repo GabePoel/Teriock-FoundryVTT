@@ -1,9 +1,7 @@
-{{formBox
-  system.badge
-  action=(ifThen editable "updatePaths" "")
-  dataset=(object paths="system.badge")
-  include=(exists system.badge)
-  placeholder=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.placeholder")
-  tooltip=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.label")
-  icon=TERIOCK.display.icons.manifest.ui.badge
-}}
+{{#if (exists system.badge)}}
+  {{formUpdater
+    document
+    path="system.badge"
+    icon=TERIOCK.display.icons.manifest.ui.badge
+  }}
+{{/if}}

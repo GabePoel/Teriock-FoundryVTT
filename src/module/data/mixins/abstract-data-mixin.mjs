@@ -58,14 +58,20 @@ export default function AbstractDataMixin(Base) {
      * Traverse the data model instance, getting a formatted string representation for a particular property.
      * @param {string|string[]} key
      * @param {object} [options]
-     * @param {boolean} [options.name];
-     * @param {boolean} [options.sort];
-     * @param {boolean} [options.link];
-     * @param {string} [options.style];
+     * @param {boolean} [options.link=false] - Evaluate documents as UUIDs
+     * @param {boolean} [options.name=true] - Evaluate documents as their names
+     * @param {boolean} [options.sort=true] - Sort iterable options
+     * @param {boolean} [options.source=false] - Return source data
+     * @param {string} [options.style] - Style formatting
      */
     getStringForProperty(key, options = {}) {
       const field = this.getFieldForProperty(key);
-      let value = foundry.utils.getProperty(this, Array.isArray(key) ? key.join(".") : key);
+      let path = Array.isArray(key) ? key.join(".") : key;
+      if (options.source) {
+        if (path.startsWith("system.")) { path = path.replace("system.", "system._source."); }
+        else { path = `_source.${path}`; }
+      }
+      let value = foundry.utils.getProperty(this, path);
       let textContent = "";
       let fetched;
 
@@ -82,11 +88,8 @@ export default function AbstractDataMixin(Base) {
         }
         if (field instanceof fields.BooleanField && field.label) {
           // Just display the label or its inversion for a `BooleanField`
-          if (value) {
-            textContent = _loc(field.label);
-          } else {
-            textContent = _loc("TERIOCK.FORMAT.invert", { value: _loc(field.label) });
-          }
+          if (value) { textContent = _loc(field.label); }
+          else { textContent = _loc("TERIOCK.FORMAT.invert", { value: _loc(field.label) }); }
         }
         if (!fetched && field?.choices) {
           // Handling for single-value fields like `NumberField` and `StringField`
@@ -104,27 +107,25 @@ export default function AbstractDataMixin(Base) {
         }
       }
       if (!fetched && !textContent && typeof value === "string") {
-        const doc = fromKeySync(value);
-        if (doc) {
-          value = doc;
-        } else if (validateTypedIdentifier(value, { strict: true }) && name) {
-          textContent = getName(value);
+        try {
+          if (validateTypedIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
+          else {
+            const doc = fromKeySync(value);
+            if (doc) { value = doc; }
+          }
+        } catch {
+          // Don't do anything if fetching the document failed.
+          // TODO: Handle this process better.
         }
       }
       if (!fetched && !textContent && typeof value === "object") {
-        if (name && value.name) {
-          textContent = value.name;
-        }
-        if (link && value.link) {
-          textContent = value.uuid;
-        }
+        if (name && value?.name) { textContent = value.name; }
+        if (link && value?.link) { textContent = value.uuid; }
       }
       if (!fetched && !textContent && ["boolean", "number", "string"].includes(typeof value)) {
         textContent = value.toString();
       }
-      if (typeof textContent !== "string") {
-        textContent = "";
-      }
+      if (typeof textContent !== "string") { textContent = ""; }
 
       const style = options.style;
       if (style && !link) {

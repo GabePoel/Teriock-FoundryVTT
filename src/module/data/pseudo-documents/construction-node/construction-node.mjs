@@ -129,14 +129,15 @@ export default class ConstructionNode
    * @returns {Promise<object>}
    */
   async constructDocuments(scope = {}) {
-    const overrides = { relativeTo: scope.execution?.actor ?? scope.actor ?? this._selectionRelativeTo };
+    const overrides = { relativeTo: scope.execution?.actor ?? this._selectionRelativeTo };
     const data = (await this.selectDocuments(overrides)).map(d => d.toObject());
     if (!data.length) { data.push({}); }
+    const competence = this.getCompetence(scope);
     for (const d of data) {
       specialMerge(d, this.data);
       if (scope.data) { specialMerge(d, scope.data); }
       d.children ??= [];
-      foundry.utils.setProperty(d, "system.competence.raw", this.getCompetence(scope));
+      if (competence !== undefined) { foundry.utils.setProperty(d, "system.competence.raw", competence); }
       for (const n of this.childNodes.contents) {
         const children = await n.constructDocuments(overrides);
         d.children.push(...children);

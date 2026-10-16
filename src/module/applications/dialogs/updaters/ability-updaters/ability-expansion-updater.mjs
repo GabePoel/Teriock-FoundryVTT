@@ -13,7 +13,12 @@ import BaseUpdater from "../base-updater.mjs";
  */
 export default class AbilityExpansionUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ability.expansion, "title") } };
+  static DEFAULT_OPTIONS = {
+    window: {
+      icon: makeIconClass(icons.manifest.ability.expansion, "title"),
+      title: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
+    },
+  };
 
   /**
    * The currently selected expansion type.
@@ -21,13 +26,6 @@ export default class AbilityExpansionUpdater extends BaseUpdater {
    */
   get #expansionType() {
     return this._currentData.system.expansion.type || null;
-  }
-
-  /**
-   * Ensure expansion data stays consistent with the selected type.
-   */
-  #normalizeCurrentData() {
-    if (this._currentData.system.expansion.type === "") { this._currentData.system.expansion.type = null; }
   }
 
   /** @inheritDoc */
@@ -56,8 +54,7 @@ export default class AbilityExpansionUpdater extends BaseUpdater {
   }
 
   /** @inheritDoc */
-  _onChangeForm(formConfig, event) {
-    super._onChangeForm(formConfig, event);
-    this.#normalizeCurrentData();
+  _normalizeCurrentData() {
+    if (this._currentData.system.expansion.type === "") { this._currentData.system.expansion.type = null; }
   }
 }

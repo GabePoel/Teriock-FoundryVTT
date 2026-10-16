@@ -80,6 +80,22 @@ export default function ActorRestingPart(Base) {
     }
 
     /**
+     * Actor experiences the end of a session.
+     * @returns {Promise<void>}
+     */
+    async takeSessionEnd() {
+      await this.actor.fireTrigger("sessionEnd");
+    }
+
+    /**
+     * Actor experiences the start of a session.
+     * @returns {Promise<void>}
+     */
+    async takeSessionStart() {
+      await this.actor.fireTrigger("sessionStart");
+    }
+
+    /**
      * Take a short rest.
      *
      * Relevant wiki pages:

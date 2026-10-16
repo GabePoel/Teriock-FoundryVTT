@@ -6,13 +6,12 @@
   <div class="teriock-sheet-bar">
     {{#each TERIOCK.config.cost.tweaks as |value key|}}
       {{#if (gt (path @root/system.costs.tweaks key) 0)}}
-        {{formBox
-          (path @root/system.costs.tweaks key)
-          action=(ifThen @root/editable "updatePaths" "")
-          dataset=(object paths=(concat "system.costs.tweaks." key))
+        {{formUpdater
+          @root/document
+          abbreviation=value.label
           icon=value.icon
           label=value.label
-          tooltip=value.label
+          path=(concat "system.costs.tweaks." key)
         }}
       {{/if}}
     {{/each}}

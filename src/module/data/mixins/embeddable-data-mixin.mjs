@@ -1,6 +1,5 @@
 import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
-import { resolveDocument } from "../../helpers/resolve.mjs";
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
@@ -81,7 +80,7 @@ export default function EmbeddableDataMixin(Base) {
         icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
         onClick: async () => {
-          const resolved = await resolveDocument(this.master);
+          const resolved = await this.getMaster?.();
           if (resolved) { await resolved.sheet?.render(true); }
         },
         visible: () => this.master?.isViewer && relative?.uuid !== this.master?.uuid,
@@ -112,7 +111,7 @@ export default function EmbeddableDataMixin(Base) {
         || Boolean(element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`));
       if (addCallbacks) {
         const relativeUuid = element.dataset.relative ?? element.querySelector("[data-relative]")?.dataset.relative;
-        fromUuid(relativeUuid).then(relative => {
+        (this.fetchFromUuid?.(relativeUuid) ?? fromUuid(relativeUuid)).then(relative => {
           for (const [type, callback] of Object.entries({ click: "primary", contextmenu: "secondary" })) {
             // The only callback that always gets added is `openDoc`
             element.addEventListener(type, async ev => {

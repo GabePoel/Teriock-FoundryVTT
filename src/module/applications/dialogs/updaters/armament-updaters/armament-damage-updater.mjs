@@ -12,16 +12,16 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
  */
 export default class ArmamentDamageUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ui.damage, "title") } };
+  static DEFAULT_OPTIONS = {
+    window: {
+      icon: makeIconClass(icons.manifest.ui.damage, "title"),
+      title: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
+    },
+  };
 
   /** @inheritDoc */
   get _dataPaths() {
     return ["system.damage.base", "system.damage.twoHanded"];
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label";
   }
 
   /** @inheritDoc */

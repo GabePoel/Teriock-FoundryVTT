@@ -14,6 +14,9 @@ const { fields } = foundry.data;
  */
 export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableDataMixin, ThresholdDataMixin) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseModifier"];
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       bonus: rollableFormulaField(),
@@ -42,7 +45,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
    * @returns {number}
    */
   get value() {
-    return BaseRoll.minValue(this.bonus || "0", this.getRollData()) + this.competence?.bonus;
+    return BaseRoll.minValue(this.bonus || "0", this.getRollData()) + this.score + this.competence?.bonus;
   }
 
   /** @inheritDoc */

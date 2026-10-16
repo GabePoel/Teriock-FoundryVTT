@@ -1,30 +1,29 @@
 <div class="teriock-sheet-bar">
-  {{formBox
-    (concat
-      "<span style='flex: auto;' data-path='system.range' data-action='updateUnit'>"
-      (ifThen (eq system.range.unitType "finite") system.range.formula system.range.text)
-      "</span>")
-    action="updateUnit"
-    dataset=(object path="system.range")
-    icon=TERIOCK.display.icons.manifest.ability.range
-    label=(ifThen (eq system.range.unitType "finite") (localize system.range.symbol) "")
-    include=system.isRanged
-    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.range.label")
-  }}
-  {{formBox
-    targetString
-    action=(ifThen editable "updatePaths" "")
-    dataset=(object paths="system.targets")
+  {{#if system.isRanged}}
+    {{formUpdater
+      document
+      abbreviation=(ifThen (eq system.range.unitType "finite") (localize system.range.symbol) "")
+      action="updateUnit"
+      data=range.data
+      dataset=(object path="system.range")
+      icon=TERIOCK.display.icons.manifest.ability.range
+      label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.range.label")
+      source=range.source
+    }}
+  {{/if}}
+  {{formUpdater
+    document
     icon=TERIOCK.display.icons.manifest.ability.target
-    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label")
-    overflow=true
+    label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label")
+    path="system.targets"
   }}
-  {{formBox
-    system.duration.text
-    icon=TERIOCK.display.icons.manifest.ability.duration
-    action=(ifThen editable "updateUnit" "")
-    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.duration.label")
+  {{formUpdater
+    document
+    action="updateUnit"
+    data=duration.data
     dataset=(object path="system.duration")
-    overflow=true
+    icon=TERIOCK.display.icons.manifest.ability.duration
+    label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.duration.label")
+    source=duration.source
   }}
 </div>

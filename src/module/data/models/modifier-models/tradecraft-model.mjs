@@ -5,18 +5,18 @@ const { fields } = foundry.data;
 
 /**
  * A {@link BaseModifierModel} for tradecraft modifiers.
- * @see {TradecraftExecution}
+ * @see {TradecraftCheckExecution}
  */
 export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static get Execution() {
-    return teriock.executions.activity.TradecraftExecution;
+    return teriock.executions.activity.TradecraftCheckExecution;
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      score: new fields.NumberField({ initial: 0, integer: true, max: 3, min: -2, required: true }),
+      score: new fields.NumberField({ initial: 0, integer: true, required: true }),
     });
   }
 

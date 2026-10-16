@@ -1,15 +1,5 @@
 @use "../mixins" as mixins;
 
-.teriock-sheet-box-content {
-  .selected, .unselected {
-    i {
-      line-height: 0.2;
-      margin-inline: 0.2em;
-    }
-  }
-}
-
-.teriock-sheet-box-content,
 .affix {
   .unselected {
     @include mixins.centralize;
@@ -39,11 +29,16 @@
   }
 
   // Highlight if value differs from `_source`.
-  &.modified .unselected {
+  &.modified .unselected,
+  &.teriock-form-changed .unselected {
     &,
     * {
       color: var(--color-text-accent);
     }
+  }
+
+  &.teriock-form-locked {
+    opacity: 0.7;
   }
 
   &:hover,
@@ -56,17 +51,6 @@
       opacity: 1;
     }
   }
-}
-
-// Designed to match the selected form box content
-.teriock-sheet-box-content .unselected {
-  @include mixins.text-cutoff;
-  height: auto;
-  left: 1.5em;
-  right: 1.5em;
-  top: 50%;
-  transform: translateY(-50%);
-  width: auto;
 }
 
 .affix {
@@ -94,8 +78,13 @@
   }
 
   // Highlight if value differs from `_source`
-  &.modified .unselected {
+  &.modified .unselected,
+  &.teriock-form-changed .unselected {
     color: var(--color-text-accent);
+  }
+
+  &.teriock-form-locked {
+    opacity: 0.7;
   }
 
   &:hover {
@@ -106,5 +95,13 @@
     .unselected {
       opacity: 0;
     }
+  }
+}
+
+.updatable:not([data-disabled]) {
+  @include mixins.box-hover;
+  border-radius: 3px;
+  &:not(input) {
+    cursor: pointer;
   }
 }

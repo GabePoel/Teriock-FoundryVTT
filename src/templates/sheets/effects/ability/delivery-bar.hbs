@@ -1,27 +1,39 @@
 <div class="teriock-sheet-bar">
-  {{formBox
-    executionTime
-    icon=TERIOCK.display.icons.manifest.ability.execution
-    tooltip=(localize "TERIOCK.COMMON.ExecutionTime")
-    action=(ifThen editable "editExecutionTime" "")
+  {{formUpdater
+    document
+    path="system.executionTime.base"
+    action="updateExecutionTime"
+    changed=executionTime.changed
+    data=executionTime.data
+    source=executionTime.source
     dataset=(object maneuver=(lookup TERIOCK.config.ability.maneuver system.maneuver))
-    overflow=true
+    icon=TERIOCK.display.icons.manifest.ability.execution
+    label=(localize "TERIOCK.COMMON.ExecutionTime")
   }}
-  {{formBox
-    (concat system.piercing.label " " (lookup (lookup TERIOCK.config.ability.delivery system.delivery) "label"))
+  {{formUpdater
+    document
+    action="updateDelivery"
+    data=delivery.data
     icon=TERIOCK.display.icons.manifest.ability.delivery
-    action=(ifThen editable "editDelivery" "")
-    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label")
+    path="system.delivery"
+    source=delivery.source
   }}
-  {{formBox
-    (concat
+  {{formUpdater
+    document
+    action="updateInteraction"
+    data=(concat
       (ifThen
         (eq system.interaction "feat")
         (concat (path TERIOCK.config.attribute system.featSaveAttribute "abbreviation") " ")
         "")
       (path TERIOCK.config.ability.interaction system.interaction "label"))
     icon=TERIOCK.display.icons.manifest.ability.interaction
-    action=(ifThen editable "editInteraction" "")
-    tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")
+    label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")
+    source=(concat
+      (ifThen
+        (eq system._source.interaction "feat")
+        (concat (path TERIOCK.config.attribute system._source.featSaveAttribute "abbreviation") " ")
+        "")
+      (path TERIOCK.config.ability.interaction system._source.interaction "label"))
   }}
 </div>

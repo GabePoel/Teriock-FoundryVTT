@@ -69,6 +69,12 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
     return this.dependee || super.master;
   }
 
+  /** @inheritDoc */
+  _clearData() {
+    super._clearData();
+    this._completedActiveEffectPhases = new Set();
+  }
+
   /**
    * Get all ActiveEffects that may apply to this document.
    * @yields {TeriockActiveEffect}
@@ -110,8 +116,6 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
 
   /** @inheritDoc */
   prepareBaseData() {
-    this.overrides = {};
-    this._completedActiveEffectPhases = new Set();
     if (this.system._dep?.length === 16) {
       const dependee = this.actor?.effects.get(this.system._dep);
       if (dependee) {

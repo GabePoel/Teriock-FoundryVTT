@@ -1,6 +1,6 @@
-import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
+import { icons } from "../../../constants/display/_module.mjs";
+import { mergeMetadata } from "../../../helpers/construction.mjs";
+import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
 export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */

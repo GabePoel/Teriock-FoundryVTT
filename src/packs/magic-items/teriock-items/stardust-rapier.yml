@@ -185,7 +185,6 @@ effects:
           type: childChange
           value: "1"
         - _id: 9M3wsMS5DfR7Ryc9
-          activeQualifier: "1"
           name: Select Equipment Class
           namespace: ec
           preset: classification
@@ -307,6 +306,15 @@ effects:
               type: subtract
               value: "1"
           type: changes
+        - _id: owG6eOirlX1I6srN
+          changes:
+            - key: system.price
+              phase: derived
+              priority: 10
+              target: Item
+              type: multiply
+              value: "40000"
+          type: changes
       identifier: mithril
       kind: intrinsic
       powerSources:
@@ -327,6 +335,16 @@ effects:
     name: Silver
     system:
       _sup: V6z4x05KVTdARszh
+      automations:
+        - _id: JejFn57s6KSz53xM
+          changes:
+            - key: system.price
+              phase: derived
+              priority: 10
+              target: Item
+              type: multiply
+              value: "2"
+          type: changes
       damageType: silver
       identifier: silver
       kind: intrinsic
@@ -376,6 +394,8 @@ system:
   equipmentType: saber
   identifier: stardust-rapier
   kind: magic
+  lockedPaths:
+    - system.price
   minStr: -2
   range:
     long:

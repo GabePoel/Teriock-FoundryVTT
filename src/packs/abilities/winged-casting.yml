@@ -1,0 +1,82 @@
+_id: c0c88425b480998e
+_key: "!effects!c0c88425b480998e"
+img: systems/teriock/src/assets/thumbnails/ability/winged-casting.webp
+name: Winged Casting
+showIcon: 0
+system:
+  automations:
+    - _id: aa9d862c88cca692
+      constructionNodes:
+        6fa16957ca7c19d2:
+          _id: 6fa16957ca7c19d2
+          all: true
+          auto: true
+          competence:
+            raw: 0
+          data: >-
+            {"system":{"limitation":"<p>Only usable with the triggering @Identifier[core:missile-delivery]{missile
+            spell}.</p>","costs":{"tweaks":{"adept":1}}}}
+          globalIdentifiers:
+            - ability:spell-strike
+          multi: false
+          overrideData: true
+          type: base
+        maFq9Bt3a3j3d2dX:
+          _id: maFq9Bt3a3j3d2dX
+          all: false
+          auto: false
+          competence:
+            raw: 0
+          data: >-
+            { "system": { "limitation": "<p>Only usable via @Identifier[ability:spell-strike].</p>", "improvement":
+            "<p>This has no @Identifier[core:costs]{costs} as they are already paid.</p>" } }
+          localQualifier: and(@spell, @delivery.missile)
+          multi: false
+          overrideData: true
+          type: base
+      interactInExecution: true
+      type: addDocuments
+    - _id: 7b5tAfkb1gh5ulE7
+      makeEffect: true
+      targetsActor: true
+      type: override
+    - _id: eZipMwxmyRufOrYy
+      globalIdentifiers:
+        - creature:insect
+      type: summon
+  costs:
+    primary:
+      mp:
+        formula: "1"
+        type: formula
+  delivery: self
+  duration:
+    raw: "10"
+    unit: minute
+  effectTypes:
+    - transformation
+  executionTime:
+    base: r0
+  identifier: winged-casting
+  interaction: manifest
+  maneuver: reactive
+  overview:
+    base: >-
+      <p>The triggering @Identifier[core:missile-delivery]{missile spell} becomes animated as a small colorful
+      @Identifier[creature:insect]{insect} with faint glowing runes resembling the
+      @Identifier[core:missile-delivery]{spell} you cast. The @Identifier[creature:insect]{insect} is a
+      @Identifier[core:minions]{minion} under your command and has @Identifier[keyword:limited]{Limited}
+      @Identifier[keyword:adept]{Adept} @Identifier[ability:spell-strike]{Spell Strike} that causes the effect of your
+      @Identifier[core:missile-delivery]{spell} you cast. Any @Identifier[core:costs]{costs} for that
+      @Identifier[core:missile-delivery]{spell} do not need to be paid again. Once this is used, the
+      @Identifier[creature:insect]{insect} @Identifier[condition:dead]{dies} and dissipates.</p>
+  powerSources:
+    - magical
+  range:
+    unit: self
+  skill: true
+  standard: true
+  targets:
+    - spell
+  trigger: <p>You are casting a @Identifier[core:missile-delivery]{missile spell}.</p>
+type: ability

@@ -47,25 +47,25 @@ export default function EquipmentPanelPart(Base) {
         },
         {
           icon: TERIOCK.display.icons.manifest.equipment.storage,
-          label: _loc("TERIOCK.MODELS.Storage.FIELDS.enabled.label"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.storage.enabled.label"),
           wrappers: this.storage.enabled
             ? [
               _loc(
-                `TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount${this.storage.maxCount === Infinity ? "NoMax" : ""}${
-                  this.storage.carriedCount === 1 ? "Singular" : ""
+                `TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount${this.storage.count.max === Infinity ? "NoMax" : ""}${
+                  this.storage.count.value === 1 ? "Singular" : ""
                 }`,
                 {
-                  max: this.storage.maxCount === Infinity ? "" : this.storage.maxCount.toString(),
-                  value: this.storage.carriedCount,
+                  max: this.storage.count.max === Infinity ? "" : this.storage.count.max.toString(),
+                  value: this.storage.count.value,
                 },
               ),
-              this.storage.maxWeight === Infinity
-                ? _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeightNoMax", { value: this.storage.carriedWeight })
+              this.storage.weight.max === Infinity
+                ? _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeightNoMax", { value: this.storage.weight.value })
                 : _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight", {
-                  max: this.storage.maxWeight.toString(),
-                  value: this.storage.carriedWeight,
+                  max: this.storage.weight.max.toString(),
+                  value: this.storage.weight.value,
                 }),
-              _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", { value: this.storage.weightMultiplier }),
+              _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", { value: this.storage.weight.multiplier }),
             ]
             : [],
         },

@@ -48,6 +48,6 @@ export default class UnitUpdater extends BaseUpdater {
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
-    this.window.icon.className = makeIconClass(this.#unitModel.icon, "title");
+    this.window.icon.className = `window-icon ${makeIconClass(this.#unitModel.icon, "title")}`;
   }
 }

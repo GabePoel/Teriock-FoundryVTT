@@ -46,6 +46,12 @@ export default function SpeciesTransformationPart(Base) {
       return super.migrateData(source, options);
     }
 
+    /**
+     * Abilities made non-proficient by a minor transformation during data preparation.
+     * @type {TeriockActiveEffect<"ability">[]}
+     */
+    #minorAbilities = [];
+
     /** @inheritDoc */
     get _color() {
       if (this.isTransformation) {
@@ -196,14 +202,22 @@ export default function SpeciesTransformationPart(Base) {
       if (this.transformation.ringImg) { this.transformation.ring = true; }
       else if (this.transformation.img) { this.transformation.ring = false; }
       // Abilities from minor transformations are not proficient.
+      this.#minorAbilities = [];
       if (this.isTransformation && this.transformationEffect?.system.transformation.level === "minor") {
-        this.parent.previewed.getTypeSync("ability").forEach((a) => a.system.competence.raw = 0);
+        for (const a of this.parent.previewed.getTypeSync("ability")) {
+          if (a.system.lockedPaths.has("system.competence.raw")) { continue; }
+          a.system.competence.raw = 0;
+          this.#minorAbilities.push(a);
+        }
       }
     }
 
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
+      for (const a of this.#minorAbilities) {
+        foundry.utils.setProperty(a.overrides, "system.competence.raw", 0);
+      }
       if (this._isInactiveTransformation) {
         for (const stat of POOL_STATS) { this.statDice[stat].disabled = true; }
       }

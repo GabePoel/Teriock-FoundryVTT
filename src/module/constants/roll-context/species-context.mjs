@@ -5,9 +5,11 @@ const speciesContext = {
   ...usableContext,
   species: "TYPES.Item.species",
 
-  adult: "TERIOCK.SYSTEMS.Species.FIELDS.adult.label",
   br: "TERIOCK.SYSTEMS.Species.FIELDS.br.label",
-  lifespan: "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.label",
+  lifespan: "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.max.label",
+  "lifespan.adulthood": "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.adulthood.label",
+  "lifespan.enabled": "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.enabled.label",
+  "lifespan.max": "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.max.label",
   size: "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label",
   "size.enabled": "TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label",
   "size.max": "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label",

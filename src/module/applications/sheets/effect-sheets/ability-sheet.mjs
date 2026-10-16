@@ -1,5 +1,4 @@
 import { createElement, elementClass } from "../../../helpers/html.mjs";
-import { listFormat } from "../../../helpers/localization.mjs";
 import {
   AbilityDeliveryUpdater,
   AbilityExecutionTimeUpdater,
@@ -21,7 +20,8 @@ export default class AbilitySheet extends ChildSheet {
    * Open the delivery updater.
    * @returns {Promise<void>}
    */
-  static async #onEditDelivery() {
+  static async #onUpdateDelivery() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await AbilityDeliveryUpdater.create({ document: this.document });
   }
 
@@ -29,7 +29,8 @@ export default class AbilitySheet extends ChildSheet {
    * Open the execution time updater.
    * @returns {Promise<void>}
    */
-  static async #onEditExecutionTime() {
+  static async #onUpdateExecutionTime() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await AbilityExecutionTimeUpdater.create({ document: this.document });
   }
 
@@ -37,7 +38,8 @@ export default class AbilitySheet extends ChildSheet {
    * Open the expansion configuration dialog.
    * @returns {Promise<void>}
    */
-  static async #onEditExpansion() {
+  static async #onUpdateExpansion() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await AbilityExpansionUpdater.create({ document: this.document });
   }
 
@@ -45,7 +47,8 @@ export default class AbilitySheet extends ChildSheet {
    * Open the interaction updater.
    * @returns {Promise<void>}
    */
-  static async #onEditInteraction() {
+  static async #onUpdateInteraction() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await AbilityInteractionUpdater.create({ document: this.document });
   }
 
@@ -63,10 +66,10 @@ export default class AbilitySheet extends ChildSheet {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: {
-      editDelivery: this.#onEditDelivery,
-      editExecutionTime: this.#onEditExecutionTime,
-      editExpansion: this.#onEditExpansion,
-      editInteraction: this.#onEditInteraction,
+      updateDelivery: this.#onUpdateDelivery,
+      updateExecutionTime: this.#onUpdateExecutionTime,
+      updateExpansion: this.#onUpdateExpansion,
+      updateInteraction: this.#onUpdateInteraction,
     },
     classes: ["ability"],
   };
@@ -98,18 +101,36 @@ export default class AbilitySheet extends ChildSheet {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    let time;
-    const maneuver = this.document.system.maneuver;
-    const executionTime = this.document.system.executionTime;
-    if (maneuver === "active") { time = TERIOCK.config.ability.executionTime.active[executionTime.base]; }
-    else if (maneuver === "reactive") { time = TERIOCK.config.ability.executionTime.reactive[executionTime.base]; }
-    else if (maneuver === "passive") { time = TERIOCK.config.ability.executionTime.passive.passive; }
-    else { time = executionTime.slow.text; }
-    const targetString = listFormat(this.document.system.targets.map(t => TERIOCK.config.ability.targets[t]?.label), {
-      type: "unit",
+    return Object.assign(await super._prepareContext(options), {
+      delivery: {
+        data: getDeliveryString(this.document.system.delivery, this.document.system.piercing),
+        source: getDeliveryString(this.document.system._source.delivery, this.document.system.piercing.clone()),
+      },
+      duration: { data: this.document.system.duration.label, source: this.document.system.duration.clone().label },
+      executionTime: {
+        changed: ["system.maneuver", "system.executionTime"].some(p =>
+          foundry.utils.hasProperty(this.document.overrides, p)
+        ),
+        data: getExecutionTimeString(
+          this.document.system.maneuver,
+          this.document.system.executionTime.base,
+          this.document.system.executionTime.slow,
+        ),
+        source: getExecutionTimeString(
+          this.document.system._source.maneuver,
+          this.document.system._source.executionTime.base,
+          this.document.system.executionTime.slow.clone(),
+        ),
+      },
+      expansionRange: {
+        data: getUnitString(this.document.system.expansion.range),
+        source: getUnitString(this.document.system.expansion.range.clone()),
+      },
+      range: {
+        data: getUnitString(this.document.system.range),
+        source: getUnitString(this.document.system.range.clone()),
+      },
     });
-    return Object.assign(context, { executionTime: time, targetString });
   }
 
   /** @inheritDoc */
@@ -119,4 +140,36 @@ export default class AbilitySheet extends ChildSheet {
     this._assignScrollableIds(content);
     this._reapplyScrollPositions(content);
   }
+}
+
+/**
+ * @param {Teriock.Keys.Delivery} delivery
+ * @param {PiercingModel} piercing
+ */
+function getDeliveryString(delivery, piercing) {
+  if (TERIOCK.config.ability.delivery[delivery]?.allowPiercing && piercing.raw) {
+    return _loc("TERIOCK.SYSTEMS.Ability.FIELDS.delivery.full", {
+      delivery: TERIOCK.config.ability.delivery[delivery].label,
+      piercing: piercing.label,
+    });
+  }
+  return _loc(TERIOCK.config.ability.delivery[delivery]?.label);
+}
+
+/**
+ * @param {Teriock.Keys.Maneuver} maneuver
+ * @param {string} base
+ * @param {SlowExecutionTimeModel} slow
+ */
+function getExecutionTimeString(maneuver, base, slow) {
+  if (maneuver === "slow") { return slow.label; }
+  if (maneuver === "passive") { return TERIOCK.config.ability.executionTime.passive.passive; }
+  return TERIOCK.config.ability.executionTime[maneuver]?.[base];
+}
+
+/**
+ * @param {BaseUnitModel} unit
+ */
+function getUnitString(unit) {
+  return unit.unitType === "finite" ? unit.formula : unit.label;
 }

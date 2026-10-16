@@ -5,4 +5,4 @@ export { default as FallExecution } from "./fall-execution/fall-execution.mjs";
 export { default as FeatExecution } from "./feat-execution.mjs";
 export { default as InitiativeExecution } from "./initiative-execution.mjs";
 export { default as ResistanceExecution } from "./resistance-execution.mjs";
-export { default as TradecraftExecution } from "./tradecraft-check-execution.mjs";
+export { default as TradecraftCheckExecution } from "./tradecraft-check-execution.mjs";

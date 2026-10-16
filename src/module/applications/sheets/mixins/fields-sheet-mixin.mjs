@@ -16,16 +16,6 @@ export default function FieldsSheetMixin(Base) {
    */
   class FieldsSheet extends Base {
     /**
-     * Edit this document's kind.
-     * @returns {Promise<void>}
-     * @this {FieldsSheet}
-     */
-    static async #onEditKind() {
-      if (!game.teriock.checkEditable(this)) { return; }
-      await KindUpdater.create({ document: this.document });
-    }
-
-    /**
      * Increment forwards.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
@@ -48,6 +38,16 @@ export default function FieldsSheetMixin(Base) {
     }
 
     /**
+     * Edit this document's kind.
+     * @returns {Promise<void>}
+     * @this {FieldsSheet}
+     */
+    static async #onUpdateKind() {
+      if (!game.teriock.checkEditable(this)) { return; }
+      await KindUpdater.create({ document: this.document });
+    }
+
+    /**
      * Update several paths.
      * @param {PointerEvent} _event
      * @param {HTMLElement} target
@@ -56,10 +56,12 @@ export default function FieldsSheetMixin(Base) {
      */
     static async #onUpdatePaths(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
+      const paths = target.dataset.paths?.split(/\s+/).filter(Boolean);
+      if (!paths?.length) { return; }
       await BaseUpdater.create({
         document: this.document,
-        paths: target.dataset.paths.split(" ").map(p => p.trim()),
-        window: { icon: makeIconClass(target.dataset.icon, "title") },
+        paths,
+        window: { icon: makeIconClass(target.dataset.icon, "title"), title: target.dataset.title },
       });
     }
 
@@ -78,8 +80,8 @@ export default function FieldsSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
-        editKind: this.#onEditKind,
         increment: { buttons: [0, 2], handler: this.#onIncrement },
+        updateKind: this.#onUpdateKind,
         updatePaths: this.#onUpdatePaths,
         updateUnit: this.#onUpdateUnit,
       },

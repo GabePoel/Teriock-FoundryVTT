@@ -89,7 +89,7 @@ export default function AbilityUsagePart(Base) {
       let time;
       if (this.maneuver !== "slow") {
         time = TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime.base];
-      } else { time = this.executionTime.slow.text; }
+      } else { time = this.executionTime.slow.label; }
       return [
         time || "",
         this.piercing.label,
@@ -126,7 +126,7 @@ export default function AbilityUsagePart(Base) {
       return [
         this.isRanged ? this.range.abbreviation : "",
         ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target]?.label)),
-        this.duration.text || "",
+        this.duration.label || "",
       ];
     }
 

@@ -3,7 +3,7 @@ import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
-import { getName } from "../../../../helpers/utils.mjs";
+import { getName, safeInf } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import {
@@ -239,7 +239,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    const data = { ...super.getLocalRollData(), maxAv: this.maxAv, number: this.number };
+    const data = { ...super.getLocalRollData(), maxAv: safeInf(this.maxAv), number: this.number };
     if (this._source.archetype) { data[`archetype.${this._source.archetype}`] = 1; }
     if (this._source.class) { data[`class.${this._source.class}`] = 1; }
     return data;

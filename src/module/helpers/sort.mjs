@@ -56,18 +56,6 @@ export function pathSorterFactory(...paths) {
 }
 
 /**
- * Sort based on document kind, then name.
- * @param {TeriockDocument} a
- * @param {TeriockDocument} b
- * @returns {number}
- */
-export function kindSorter(a, b) {
-  const aKinds = Object.keys(a?.system?.constructor?.kinds?.() ?? {});
-  const bKinds = Object.keys(b?.system?.constructor?.kinds?.() ?? {});
-  return (aKinds.indexOf(a?.system?.kind) - bKinds.indexOf(b?.system?.kind)) || pathSorterFactory("name")(a, b);
-}
-
-/**
  * Build a field sorter.
  * @param {DataModel | Document | TypeDataModel} model
  * @return {Teriock.Sort.FieldSorter}

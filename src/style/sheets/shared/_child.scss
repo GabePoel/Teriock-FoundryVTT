@@ -67,16 +67,12 @@
 
   .teriock-sheet-competence {
     @include mixins.centralize;
-    height: 1.25em;
+    color: var(--color-text-subtle);
+    height: 1.75em;
     position: absolute;
-    right: 1rem;
-    top: 1rem;
-    width: 1.25em;
-
-    // `.thover` sets a pointer cursor. The header drops `data-action` when not editable.
-    &:not([data-action]) {
-      cursor: default;
-    }
+    right: calc(1rem - 0.25em);
+    top: calc(1rem - 0.25em);
+    width: 1.75em;
   }
 }
 
@@ -88,102 +84,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-
-    .teriock-sheet-box-container {
-      flex: 1;
-      min-width: 0;
-      position: relative;
-
-      &:not(:last-child)::after {
-        background-color: var(--color-bar-border);
-        content: "";
-        display: block;
-        height: calc(100% - 1em);
-        opacity: 0.5;
-        position: absolute;
-        right: 0;
-        top: 0.5em;
-        transform: translateX(50%);
-        width: 1px;
-      }
-
-      .teriock-sheet-box {
-        align-items: center;
-        border: 1px solid transparent;
-        border-radius: 3px;
-        display: flex;
-        flex-direction: row;
-        height: calc(100% - 0.5em);
-        justify-content: center;
-        margin: 0.25em;
-        max-height: 100%;
-        min-height: var(--input-height);
-        min-width: 0;
-        padding: 0.25em;
-        position: relative;
-
-        .teriock-sheet-box-icon {
-          display: block;
-          height: 1em;
-          left: 0.25em;
-          margin-right: 0.25em;
-          opacity: 0.5;
-          position: absolute;
-          text-align: center;
-          top: calc(50% - 0.5em);
-          width: 1em;
-
-          i {
-            font-size: 1em;
-
-            &.mic,
-            &.mdi {
-              vertical-align: unset;
-            }
-          }
-        }
-
-        .teriock-sheet-box-label {
-          @include mixins.text-subtle;
-          height: 1em;
-          position: absolute;
-          right: 0.25em;
-          top: calc(50% - 0.625em);
-        }
-
-        @include mixins.box-hover;
-
-        &:focus-within,
-        &.context {
-          box-shadow: 0 0 5px var(--color-shadow-primary);
-        }
-
-        .teriock-sheet-box-content {
-          @include mixins.centralize;
-          @include mixins.text-cutoff;
-          flex-direction: row;
-          min-width: 0;
-          padding-inline: 1.5em;
-          text-align: center;
-          white-space: nowrap;
-          width: 100%;
-
-          &.teriock-sheet-text-content {
-            display: block;
-            max-width: unset;
-          }
-
-          .teriock-sheet-box-placeholder {
-            color: var(--color-text-subtle);
-          }
-        }
-
-        // Only actionable boxes are clickable. `formBox` drops `data-action` when not editable.
-        &[data-action] .teriock-sheet-box-content {
-          cursor: pointer;
-        }
-      }
-    }
 
     button {
       height: unset;
@@ -507,26 +407,14 @@
     }
 
     .teriock-sheet-competence {
-      right: 0.75em;
-      top: 0.75em;
+      right: 0.5em;
+      top: 0.5em;
     }
   }
 
   .teriock-sheet-bars {
     .teriock-sheet-bar {
       flex-direction: column;
-
-      .teriock-sheet-box-container {
-        &:not(:last-child)::after {
-          bottom: 0;
-          height: 1px;
-          left: 1em;
-          right: unset;
-          top: unset;
-          transform: translateY(50%);
-          width: calc(100% - 2em);
-        }
-      }
     }
   }
 

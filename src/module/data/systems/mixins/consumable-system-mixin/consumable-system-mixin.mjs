@@ -2,6 +2,7 @@ import systemConfig from "../../../../constants/config/system-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { asInf } from "../../../../helpers/icon.mjs";
+import { safeInf } from "../../../../helpers/utils.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 
@@ -112,9 +113,9 @@ export default function ConsumableSystemMixin(Base) {
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
         consumable: Number(this.consumable),
-        max: Math.min(this.quantity.max, TERIOCK.config.system.safeInf),
+        max: safeInf(this.quantity.max),
         quantity: this.quantity.value,
-        "quantity.max": Math.min(this.quantity.max, TERIOCK.config.system.safeInf),
+        "quantity.max": safeInf(this.quantity.max),
       });
     }
 

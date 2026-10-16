@@ -13,7 +13,7 @@ export default async function identifyItemQuery(queryData) {
   const uuid = queryData.uuid;
   const item = await fromUuid(uuid);
   const content = await TeriockTextEditor.enrichHTML(
-    _loc("TERIOCK.MODELS.Identification.QUERY.Identify.question", {
+    _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.question", {
       item: `@UUID[${item.uuid}]{${item.system.identification.name}}`,
       user: game.user.link,
     }),
@@ -23,15 +23,15 @@ export default async function identifyItemQuery(queryData) {
     modal: false,
     window: {
       icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.identify, "title"),
-      title: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.title"),
+      title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.title"),
     },
   });
   if (doIdentify) {
     const unrevealed = item.previewed.contents.filter(c => c.metadata.tags.revealable && !c.system.revealed);
     const toReveal = await DocumentSelector.selectMulti(unrevealed, {
       checked: unrevealed.map(r => r.uuid),
-      hint: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.hint"),
-      noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage"),
+      hint: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.hint"),
+      noDocumentsMessage: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.noDocumentsMessage"),
       silent: true,
     });
     const revealOperation = item.getUpdateChildDocumentsOperation(

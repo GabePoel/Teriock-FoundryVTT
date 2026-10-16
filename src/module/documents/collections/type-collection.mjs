@@ -48,7 +48,9 @@ export default class TypeCollection extends Collection {
    * @returns {Promise<T[]>}
    */
   async #resolveDocuments(documents) {
-    const results = await Promise.all(documents.map(d => fromUuid(d?.uuid)));
+    const results = await Promise.all(
+      documents.map(d => (d instanceof foundry.abstract.DataModel ? d : fromUuid(d?.uuid))),
+    );
     return results.filter(Boolean);
   }
 

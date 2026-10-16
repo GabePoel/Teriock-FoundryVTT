@@ -23,6 +23,12 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
+  static applyChange(targetDoc, change, options = {}) {
+    if (foundry.utils.getProperty(targetDoc, "system.lockedPaths")?.has(change.key)) { return {}; }
+    return super.applyChange(targetDoc, change, options);
+  }
+
+  /** @inheritDoc */
   static migrateData(source, options) {
     const description = foundry.utils.getProperty(source, "system.description");
     if (description && !source.description) { source.description = description; }

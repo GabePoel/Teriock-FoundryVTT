@@ -34,12 +34,19 @@ export default function AbilityDurationPart(Base) {
 
       // Gifted modifications
       if (this.costs.tweaks.gifted) {
-        this.kind = "gifted";
+        const forced = { "system.kind": "gifted" };
         if (this.maneuver === "passive") {
-          this.maneuver = "active";
-          this.executionTime = "a1";
-          this.duration.unit = "minute";
-          this.duration.raw = "1";
+          Object.assign(forced, {
+            "system.duration.raw": "1",
+            "system.duration.unit": "minute",
+            "system.executionTime.base": "a1",
+            "system.maneuver": "active",
+          });
+        }
+        for (const [path, value] of Object.entries(forced)) {
+          if (this.lockedPaths.has(path)) { continue; }
+          foundry.utils.setProperty(this.parent, path, value);
+          foundry.utils.setProperty(this.parent.overrides, path, value);
         }
       }
     }

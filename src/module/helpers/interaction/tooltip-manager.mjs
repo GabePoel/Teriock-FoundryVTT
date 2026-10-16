@@ -48,7 +48,8 @@ export default class TeriockTooltipManager extends TooltipManager {
   async #fetchRichTooltip(element) {
     const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
     if (!this.#validateUuid(uuid)) { return; }
-    const doc = await fromUuid(uuid);
+    const application = foundry.applications.instances.get(element.closest(".application")?.id);
+    const doc = await (application?.document?.fetchFromUuid?.(uuid) ?? fromUuid(uuid));
     if (doc && typeof doc.toTooltip === "function" && doc.isViewer) {
       element.dataset.tooltipHtml = await doc.toTooltip();
     } else {

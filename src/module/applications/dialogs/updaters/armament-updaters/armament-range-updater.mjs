@@ -13,7 +13,12 @@ import { makeIconClass } from "../../../../helpers/icon.mjs";
  */
 export default class ArmamentRangeUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ability.range, "title") } };
+  static DEFAULT_OPTIONS = {
+    window: {
+      icon: makeIconClass(icons.manifest.ability.range, "title"),
+      title: "TERIOCK.SYSTEMS.Armament.FIELDS.range.label",
+    },
+  };
 
   /** @inheritDoc */
   get _dataPaths() {
@@ -27,11 +32,6 @@ export default class ArmamentRangeUpdater extends BaseUpdater {
       paths.push(...["system.range.short.raw", "system.range.long.raw"]);
     }
     return paths;
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.SYSTEMS.Armament.FIELDS.range.label";
   }
 
   /** @inheritDoc */

@@ -1,14 +1,14 @@
-{{formBox
-  (ifThen
-    (eq system._source.maxAv 0)
-    (localize "TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-    (localize "TERIOCK.SYSTEMS.Power.PANELS.maxAv" value=(asInf system._source.maxAv)))
-  action=(ifThen editable "updatePaths" "")
-  dataset=(object paths="system.maxAv")
-  icon=TERIOCK.display.icons.manifest.armament.av
-  unselected=(ifThen
+{{formUpdater
+  document
+  data=(ifThen
     (eq system.maxAv 0)
     (localize "TERIOCK.SYSTEMS.Power.PANELS.noArmor")
     (localize "TERIOCK.SYSTEMS.Power.PANELS.maxAv" value=(asInf system.maxAv)))
-  tooltip=(localize "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label")
+  icon=TERIOCK.display.icons.manifest.armament.av
+  label=(localize "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label")
+  path="system.maxAv"
+  source=(ifThen
+    (eq system._source.maxAv 0)
+    (localize "TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+    (localize "TERIOCK.SYSTEMS.Power.PANELS.maxAv" value=(asInf system._source.maxAv)))
 }}

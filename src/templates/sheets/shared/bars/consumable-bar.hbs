@@ -1,29 +1,29 @@
 {{#if system.consumable}}
   <div class="teriock-sheet-bar">
-    {{formBox
-      (localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system._source.quantity.value)
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.quantity.value")
+    {{formUpdater
+      document
+      data=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity.value)
       icon=TERIOCK.display.icons.manifest.ui.quantity
-      unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity.value)
-      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label")
+      label=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label")
+      path="system.quantity.value"
+      source=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system._source.quantity.value)
     }}
-    {{formBox
-      (localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=(asInf system._source.quantity.maxFormula))
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.quantity.maxFormula")
+    {{formUpdater
+      document
+      data=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=(asInf system.quantity.max))
       icon=TERIOCK.display.icons.manifest.ui.maximum
+      label=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label")
+      path="system.quantity.maxFormula"
       placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-      unselected=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=(asInf system.quantity.max))
-      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label")
+      source=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=(asInf system._source.quantity.maxFormula))
     }}
-    {{formBox
-      (localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system._source.consumptionAmount)
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.consumptionAmount")
+    {{formUpdater
+      document
+      data=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system.consumptionAmount)
       icon=TERIOCK.display.icons.manifest.ui.amount
-      unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system.consumptionAmount)
-      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.consumptionAmount.label")
+      label=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.consumptionAmount.label")
+      path="system.consumptionAmount"
+      source=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system._source.consumptionAmount)
     }}
   </div>
 {{/if}}

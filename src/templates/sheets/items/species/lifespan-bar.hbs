@@ -1,20 +1,26 @@
-{{#if (exists system.adult)}}
+{{#if system.lifespan.enabled}}
   <div class="teriock-sheet-bar">
-    {{formBox
-      (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult" value=system._source.adult)
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.adult")
-      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult" value=system.adult)
-      icon=TERIOCK.display.icons.manifest.species.adult
-      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.adult.label")
+    {{formUpdater
+      document
+      data=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adulthood" value=system.lifespan.adulthood)
+      icon=TERIOCK.display.icons.manifest.species.adulthood
+      path="system.lifespan.adulthood"
+      paths="system.lifespan.adulthood system.lifespan.max"
+      source=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adulthood" value=system._source.lifespan.adulthood)
+      dataset=(object
+        title="TERIOCK.SYSTEMS.Species.FIELDS.lifespan.enabled.label"
+        icon=TERIOCK.display.icons.manifest.species.adulthood)
     }}
-    {{formBox
-      (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=(asInf system._source.lifespan))
-      action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.lifespan")
-      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=(asInf system.lifespan))
+    {{formUpdater
+      document
+      data=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=(asInf system.lifespan.max))
       icon=TERIOCK.display.icons.manifest.species.lifespan
-      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.label")
+      path="system.lifespan.max"
+      paths="system.lifespan.adulthood system.lifespan.max"
+      source=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=(asInf system._source.lifespan.max))
+      dataset=(object
+        title="TERIOCK.SYSTEMS.Species.FIELDS.lifespan.enabled.label"
+        icon=TERIOCK.display.icons.manifest.species.adulthood)
     }}
   </div>
 {{/if}}

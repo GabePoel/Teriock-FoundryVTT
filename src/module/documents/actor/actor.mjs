@@ -291,7 +291,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
           if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
         }
       }
-      d.overrides ??= {};
       foundry.utils.mergeObject(d.overrides, foundry.utils.expandObject(overrides));
     }
   }

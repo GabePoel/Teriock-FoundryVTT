@@ -7,6 +7,7 @@ import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
+import { safeInf } from "../../../../helpers/utils.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
@@ -69,13 +70,16 @@ export default class SpeciesSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      adult: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),
       appearance: new fields.HTMLField(),
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
       description: new fields.HTMLField(),
       innateRanks: new fields.HTMLField(),
-      lifespan: new InfiniteNumberField({ initial: 0 }),
+      lifespan: new fields.SchemaField({
+        adulthood: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),
+        enabled: new fields.BooleanField({ initial: false }),
+        max: new InfiniteNumberField(),
+      }),
       ...Object.fromEntries(POOL_STATS.map(k => [`${k}Increase`, new fields.HTMLField()])),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({ initial: true }),
@@ -97,6 +101,11 @@ export default class SpeciesSystem
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateIterables(source, "traits");
+    if (
+      ("adult" in source || typeof source.lifespan === "number") && foundry.utils.getType(source.lifespan) !== "Object"
+    ) {
+      source.lifespan = { adulthood: source.adult, enabled: Boolean(source.adult), max: source.lifespan || null };
+    }
     return super.migrateData(source, options);
   }
 
@@ -127,26 +136,6 @@ export default class SpeciesSystem
   }
 
   /** @inheritDoc */
-  get _displayButtons() {
-    const buttons = super._displayButtons;
-    if (this.size.enabled && (!this.size.min || !this.size.max)) {
-      buttons.push({
-        button: "sizeRange",
-        label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",
-        update: { "system.size.max": this.size.value, "system.size.min": this.size.value },
-      });
-    }
-    if (!this.adult) {
-      buttons.push({
-        button: "lifespan",
-        label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
-        update: { "system.adult": 20, "system.lifespan": 100 },
-      });
-    }
-    return buttons;
-  }
-
-  /** @inheritDoc */
   get _displayFieldsContent() {
     return [
       ...POOL_STATS.map(k => `system.${k}Increase`),
@@ -164,7 +153,7 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   get _displayToggles() {
-    return ["system.size.enabled", ...super._displayToggles];
+    return ["system.lifespan.enabled", "system.size.enabled", ...super._displayToggles];
   }
 
   /**
@@ -217,9 +206,11 @@ export default class SpeciesSystem
   getLocalRollData() {
     const data = super.getLocalRollData();
     Object.assign(data, {
-      adult: this.adult,
       br: this.br,
-      lifespan: this.lifespan,
+      lifespan: this.lifespan.enabled ? this.lifespan.max : 0,
+      "lifespan.adulthood": this.lifespan.enabled ? this.lifespan.adulthood : 0,
+      "lifespan.enabled": Number(this.lifespan.enabled),
+      "lifespan.max": this.lifespan.enabled ? safeInf(this.lifespan.max) : 0,
       size: this.size.enabled ? this.size.value : 0,
       "size.enabled": Number(this.size.enabled),
       "size.max": this.size.enabled ? this.size.max : 0,

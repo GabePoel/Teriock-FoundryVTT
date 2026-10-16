@@ -1,4 +1,4 @@
-import { RankClassUpdater, RankOriginUpdater } from "../../dialogs/_module.mjs";
+import { RankClassUpdater, RankKindUpdater } from "../../dialogs/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
@@ -14,8 +14,8 @@ export default class RankSheet extends ChildSheet {
    * Edit this rank's archetype and class.
    * @returns {Promise<void>}
    */
-  static async #onEditClass() {
-    if (!this.isEditable) { return; }
+  static async #onUpdateClass() {
+    if (!game.teriock.checkEditable(this)) { return; }
     await RankClassUpdater.create({ document: this.document });
   }
 
@@ -23,9 +23,9 @@ export default class RankSheet extends ChildSheet {
    * Edit where this rank came from.
    * @returns {Promise<void>}
    */
-  static async #onEditOrigin() {
-    if (!this.isEditable) { return; }
-    await RankOriginUpdater.create({ document: this.document });
+  static async #onUpdateKind() {
+    if (!game.teriock.checkEditable(this)) { return; }
+    await RankKindUpdater.create({ document: this.document });
   }
 
   /** @type {string[]} */
@@ -37,7 +37,7 @@ export default class RankSheet extends ChildSheet {
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { editClass: this.#onEditClass, editOrigin: this.#onEditOrigin },
+    actions: { updateClass: this.#onUpdateClass, updateKind: this.#onUpdateKind },
     classes: ["rank"],
   };
 }

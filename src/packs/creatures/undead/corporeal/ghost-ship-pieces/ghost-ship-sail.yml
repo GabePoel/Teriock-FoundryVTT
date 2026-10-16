@@ -117,8 +117,8 @@ items:
               @Identifier[core:item-target]{abilities that target them}. The relevant
               @Identifier[core:item-target]{abilities} are those would apply one of the following
               @Pack[teriock.properties]{properties} to a piece of @Pack[teriock.equipment]{equipment}. You take the
-              effect listed below instead. If the @Identifier[core:item-target]{ability} was @Wiki[Category:Magically
-              powered abilities]{magically powered}, then any @Identifier[core:damage]{damage} dealt is
+              effect listed below instead. If the @Identifier[core:item-target]{ability} was
+              @Identifier[source:magical]{magically powered}, then any @Identifier[core:damage]{damage} dealt is
               @Identifier[damage:magic]{magic} in addition to its other
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}. If the
               @Identifier[core:item-target]{ability} was delivered by a @Identifier[core:item-delivery]{weapon}, then
@@ -786,6 +786,24 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          automations:
+            - _id: XPChViJ1wli48yom
+              activeQualifier: >-
+                not(or(@this.item.type.arrow, @this.item.type.basket, @this.item.type.blowgun-dart,
+                @this.item.type.bottle, @this.item.type.chimes, @this.item.type.circlet, @this.item.type.compass,
+                @this.item.type.conch, @this.item.type.drum, @this.item.type.fan, @this.item.type.flag,
+                @this.item.type.flute, @this.item.type.hand-mirror, @this.item.type.hand-net, @this.item.type.harp,
+                @this.item.type.hourglass, @this.item.type.lantern, @this.item.type.lute, @this.item.type.maraca,
+                @this.item.type.musket, @this.item.type.orb, @this.item.type.pistol, @this.item.type.sail,
+                @this.item.type.seashell, @this.item.type.spectacles, @this.item.type.syringe))
+              changes:
+                - key: system.price
+                  phase: derived
+                  priority: 10
+                  target: Item
+                  type: multiply
+                  value: "0.5"
+              type: changes
           identifier: fragile
           kind: flaw
         type: property
@@ -803,6 +821,9 @@ items:
       range:
         long:
           unit: melee
+      storage:
+        weight:
+          multiplier: 1
       style: wraparound
       weight: 30
     type: equipment

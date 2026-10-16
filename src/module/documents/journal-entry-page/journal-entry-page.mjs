@@ -28,16 +28,14 @@ export default class TeriockJournalEntryPage
    * @returns {TypedIdentifier|null}
    */
   get typedIdentifier() {
-    if (this.inCompendium && this.compendium.collection === "teriock.rules") {
-      const config = TERIOCK.config.wiki.namespaces[this.parent.name];
-      if (config) { return `${config?.identifierType ?? "rule"}:${this.forcedIdentifier}`; }
-    }
+    const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
+    if (ruleType) { return `${ruleType}:${this.forcedIdentifier}`; }
     return super.typedIdentifier;
   }
 
   /** @inheritDoc */
   get typeIcon() {
-    return this.getFlag("teriock", "journalIcon") ?? super.typeIcon;
+    return this.getFlag("teriock", "ruleIcon") ?? this.parent?.getFlag("teriock", "ruleIcon") ?? super.typeIcon;
   }
 
   /** @inheritDoc */

@@ -6,6 +6,8 @@ import { getSystemClass, prefixObject } from "../../../../helpers/utils.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
@@ -43,6 +45,11 @@ export default function CommonSystemMixin(Base) {
       preserveOnRefresh: ["system.identifier", ...super.metadata.preserveOnRefresh],
       visibleTypes: [],
     });
+
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), { lockedPaths: new fields.SetField(new fields.StringField()) });
+    }
 
     /**
      * Check if an embed icon is visible.

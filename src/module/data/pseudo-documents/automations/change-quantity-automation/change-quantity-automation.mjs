@@ -92,12 +92,15 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const formula = this.#formula(options);
+    const rollData = Object.assign(this.getRollData(), options?.rollData ?? {});
+    const formula = BaseRoll.replaceFormulaData(this.#formula(options), rollData);
     if (!formulaExists(formula)) { return []; }
     const consumable = await this.#findConsumable(options);
     if (!consumable) { return []; }
-    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula) <= 0) { return []; }
-    if (consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(formula) >= 0) {
+    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula, rollData) <= 0) { return []; }
+    if (
+      consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(formula, rollData) >= 0
+    ) {
       return [];
     }
     return [

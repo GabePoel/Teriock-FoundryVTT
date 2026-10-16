@@ -7,20 +7,22 @@
   <div class="teriock-sheet-bar">
     {{#each TERIOCK.config.stat as |value key|}}
       {{#if (path @root/system.costs.primary key "type")}}
-        {{formBox
-          (ifThen
+        {{formUpdater
+          @root/document
+          abbreviation=value.abbreviation
+          action=(ifThen (eq (path @root/system.costs.primary key "type") "formula") "updatePaths" "")
+          data=(ifThen
             (eq (path @root/system.costs.primary key "type") "formula")
             (path @root/system.costs.primary key "formula")
             @root/TERIOCK.config.cost.primary.types.description)
-          action=(ifThen
-            (and @root/editable (eq (path @root/system.costs.primary key "type") "formula"))
-            "updatePaths"
-            "")
-          dataset=(object paths=(concat "system.costs.primary." key ".formula"))
           icon=value.icon
-          label=value.abbreviation
+          label=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
+          path=(concat "system.costs.primary." key ".formula")
           placeholder="0"
-          tooltip=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
+          source=(ifThen
+            (eq (path @root/system._source.costs.primary key "type") "formula")
+            (path @root/system._source.costs.primary key "formula")
+            @root/TERIOCK.config.cost.primary.types.description)
         }}
       {{/if}}
     {{/each}}

@@ -1,7 +1,5 @@
-import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
-
 /**
- * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+ * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  */
 
 /**
@@ -12,29 +10,16 @@ export default function PlayableActorSheetSidebarPart(Base) {
   /** @mixin */
   class PlayableActorSheetSidebarPart extends Base {
     /**
-     * Creates a context menu for selecting scaling type.
-     * @returns {ContextMenuEntry[]}
+     * Reset attack penalty to zero.
+     * @returns {Promise<void>}
      */
-    #scalingContextMenu() {
-      return TeriockContextMenu.makeUpdateEntries(this.actor, [{
-        icon: teriock.data.systems.items.RankSystem.metadata.icon,
-        label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
-        value: false,
-      }, {
-        icon: TERIOCK.display.icons.manifest.species.br,
-        label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
-        value: true,
-      }], { path: "system.scaling.brScale" });
+    static async #onResetAttackPenalty() {
+      if (!game.teriock.checkEditable(this)) { return; }
+      await this.document.update({ "system.combat.attackPenalty": 0 });
     }
 
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this._createContextMenu(this.#scalingContextMenu, ".actor-basics", {
-        eventName: "contextmenu",
-        forceDirection: "down",
-      });
-    }
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+    static DEFAULT_OPTIONS = { actions: { resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty } } };
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {

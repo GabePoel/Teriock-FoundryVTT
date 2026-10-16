@@ -12,20 +12,9 @@ import BaseUpdater from "./base-updater.mjs";
  */
 export default class FluencyTradecraftUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.document.fluency, "title") } };
-
-  /**
-   * Keep the selected tradecraft inside the selected field, so switching field doesn't leave a tradecraft from the
-   * previous one selected.
-   */
-  #normalizeCurrentData() {
-    const field = this._currentData.system.field;
-    if (TERIOCK.config.tradecraft.tradecrafts[this._currentData.system.tradecraft]?.field !== field) {
-      this._currentData.system.tradecraft = Object.keys(TERIOCK.config.tradecraft.tradecrafts).find(k =>
-        TERIOCK.config.tradecraft.tradecrafts[k].field === field
-      );
-    }
-  }
+  static DEFAULT_OPTIONS = {
+    window: { icon: makeIconClass(icons.manifest.document.fluency, "title"), title: "TERIOCK.COMMON.Tradecraft" },
+  };
 
   /** @inheritDoc */
   get _dataPaths() {
@@ -46,8 +35,12 @@ export default class FluencyTradecraftUpdater extends BaseUpdater {
   }
 
   /** @inheritDoc */
-  _onChangeForm(formConfig, event) {
-    super._onChangeForm(formConfig, event);
-    this.#normalizeCurrentData();
+  _normalizeCurrentData() {
+    const field = this._currentData.system.field;
+    if (TERIOCK.config.tradecraft.tradecrafts[this._currentData.system.tradecraft]?.field !== field) {
+      this._currentData.system.tradecraft = Object.keys(TERIOCK.config.tradecraft.tradecrafts).find(k =>
+        TERIOCK.config.tradecraft.tradecrafts[k].field === field
+      );
+    }
   }
 }

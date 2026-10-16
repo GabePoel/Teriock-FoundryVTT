@@ -150,7 +150,7 @@ foundry.helpers.Hooks.once("init", function() {
   registerSubtypes(data.systems.effects);
 
   CONFIG.Actor.collection = documents.collections.TeriockActors;
-  CONFIG.Actor.defaultType = "character";
+  CONFIG.Actor.defaultType = "pc";
   CONFIG.Actor.documentClass = documents.TeriockActor;
   registerSubtypes(data.systems.actors);
 
@@ -239,7 +239,7 @@ foundry.helpers.Hooks.once("init", function() {
   rs(d.TeriockActiveEffect, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActiveEffect.TYPES });
 
   rs(d.TeriockActor, sa.InventorySheet, "Inventory", { types: ["inventory"] });
-  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["character", "creature"] });
+  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["creature", "npc", "pc"] });
   rs(d.TeriockActor, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActor.TYPES });
 
   rs(d.TeriockAmbientLightDocument, s.TeriockAmbientLightConfig, "AmbientLight");

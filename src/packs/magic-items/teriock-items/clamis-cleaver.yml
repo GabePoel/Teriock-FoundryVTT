@@ -60,6 +60,15 @@ effects:
     system:
       applyIfShattered: true
       automations:
+        - _id: VNRGd9o4tkopLIeA
+          changes:
+            - key: system.price
+              phase: derived
+              priority: 10
+              target: Item
+              type: multiply
+              value: "2"
+          type: changes
         - _id: UTATyzasio6nlxqs
           activeQualifier: "@this.item.shattered"
           common:
@@ -156,7 +165,6 @@ effects:
           type: childChange
           value: "1"
         - _id: 9M3wsMS5DfR7Ryc9
-          activeQualifier: "1"
           name: Select Equipment Class
           namespace: ec
           preset: classification
@@ -240,6 +248,8 @@ system:
   equipped: true
   identifier: clamis-cleaver
   kind: enchanted
+  lockedPaths:
+    - system.price
   minStr: -2
   notes: >-
     <p>Found mostly in the Far East, these [[lookup system.equipmentType style=lc]]s are uncommon everywhere in Roekron

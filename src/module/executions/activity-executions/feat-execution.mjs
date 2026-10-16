@@ -1,6 +1,6 @@
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { addFormula } from "../../helpers/formula.mjs";
+import { addFormulas } from "../../helpers/formula.mjs";
 import { BaseExecution } from "../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
 
@@ -85,7 +85,11 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   _configure(options = {}) {
     super._configure(options);
     if (this.actor) {
-      this._source.bonus = addFormula(this.actor.system.attributes[this.attribute].bonus, this._source.bonus);
+      this._source.bonus = addFormulas(
+        `2 * @${this.attribute}.score`,
+        this.actor.system.attributes[this.attribute].bonus,
+        this._source.bonus,
+      );
     }
     if (game.settings.get("teriock", "secretAttributes").has(this.attribute)) {
       this._messageMode = options.messageMode ?? "blind";

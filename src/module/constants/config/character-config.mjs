@@ -123,15 +123,6 @@ export default {
     3: { label: "TERIOCK.TERMS.SpeedAdjustments.3", multiplier: 1 },
     4: { label: "TERIOCK.TERMS.SpeedAdjustments.4", multiplier: 2 },
   },
-  tabs: [
-    { gapless: true, key: "Abilities", size: "small" },
-    { key: "Classes" },
-    { gapless: true, key: "Effects", size: "small" },
-    { gapless: true, key: "Inventory", size: "small" },
-    { key: "Powers" },
-    { key: "Resources" },
-    { key: "Tradecrafts" },
-  ],
 };
 
 preLocalizeConfig("config.character.movement", { key: "label" });

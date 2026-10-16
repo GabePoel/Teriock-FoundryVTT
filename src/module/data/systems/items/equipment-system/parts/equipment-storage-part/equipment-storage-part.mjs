@@ -1,8 +1,9 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
-import { resolveDocument } from "../../../../../../helpers/resolve.mjs";
-import { StorageModel } from "../../../../../models/_module.mjs";
+import { safeInf } from "../../../../../../helpers/utils.mjs";
+import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
+import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,7 +15,6 @@ const { fields } = foundry.data;
  * Equipment mixin that handles storage of other equipment.
  * @template {MixinBase} T
  * @param {T} Base
- * @see {StorageModel}
  */
 export default function EquipmentStoragePart(Base) {
   /**
@@ -29,9 +29,30 @@ export default function EquipmentStoragePart(Base) {
     static defineSchema() {
       return {
         ...super.defineSchema(),
-        storage: new fields.EmbeddedDataField(StorageModel),
+        storage: new fields.SchemaField({
+          count: new fields.SchemaField({ max: new InfiniteNumberField() }),
+          enabled: new fields.BooleanField({ initial: false, required: false }),
+          weight: new fields.SchemaField({
+            max: new InfiniteNumberField(),
+            multiplier: new fields.NumberField({
+              initial: 1,
+              min: 0,
+              nullable: false,
+              placeholder: "1",
+              required: true,
+            }),
+          }),
+        }),
         weight: new fields.NumberField({ initial: 0, nullable: false, placeholder: "0", required: true }),
       };
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateRename(source, "storage.maxCount", "storage.count.max");
+      migrateRename(source, "storage.maxWeight", "storage.weight.max");
+      migrateRename(source, "storage.weightMultiplier", "storage.weight.multiplier");
+      return super.migrateData(source, options);
     }
 
     /**
@@ -123,7 +144,7 @@ export default function EquipmentStoragePart(Base) {
     get totalWeight() {
       if (this.stashed) { return 0; }
       let total = this.weight * (this.consumable ? this.quantity.value : 1) * this.weightMultiplier;
-      if (this.storage.enabled) { total += this.storage.carriedWeight; }
+      if (this.storage.enabled) { total += this.storage.weight.value; }
       return total.toNearest(TERIOCK.config.system.unitPrecision);
     }
 
@@ -137,15 +158,16 @@ export default function EquipmentStoragePart(Base) {
      * @returns {number}
      */
     get weightMultiplier() {
-      if (this.parent.elder?.type === "equipment") { return this.parent.elder?.system?.storage?.weightMultiplier ?? 1; }
+      if (this.parent.elder?.type === "equipment") { return this.parent.elder?.system?.storage?.weight?.multiplier
+          ?? 1; }
       return 1;
     }
 
     /** @inheritDoc */
     _getTipErrors() {
       return Object.assign(super._getTipErrors(), {
-        overCarriedCount: () => this.storage.isOverCountCapacity,
-        overCarriedWeight: () => this.storage.isOverWeightCapacity,
+        overCarriedCount: () => this.storage.count.over,
+        overCarriedWeight: () => this.storage.weight.over,
       });
     }
 
@@ -187,7 +209,9 @@ export default function EquipmentStoragePart(Base) {
       if (!foundry.utils.hasProperty(changes, "system._sup")) { return; }
       const _sup = foundry.utils.getProperty(changes, "system._sup");
       // A cleared sup means the equipment is being taken out of its container and back onto its actor.
-      const elder = _sup ? await resolveDocument(this.parent.supCollection?.get(_sup)) : this.parent.actor;
+      const elder = _sup
+        ? await this.parent.fetchFromUuid(this.parent.supCollection?.get(_sup)?.uuid)
+        : this.parent.actor;
       if (!this.#validateStorage(elder, options)) { return false; }
       if (options.interactive) {
         // Merging into a stack at the destination replaces the move, so original equipment is deleted.
@@ -234,13 +258,13 @@ export default function EquipmentStoragePart(Base) {
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
         storage: Number(this.storage.enabled),
-        "storage.count": this.storage.carriedCount,
-        "storage.count.max": this.storage.maxCount,
-        "storage.count.over": Number(this.storage.isOverCountCapacity),
-        "storage.weight": this.storage.carriedWeight,
-        "storage.weight.max": this.storage.maxWeight,
-        "storage.weight.mult": this.storage.weightMultiplier,
-        "storage.weight.over": Number(this.storage.isOverWeightCapacity),
+        "storage.count": this.storage.count.value,
+        "storage.count.max": safeInf(this.storage.count.max),
+        "storage.count.over": Number(this.storage.count.over),
+        "storage.weight": this.storage.weight.value,
+        "storage.weight.max": safeInf(this.storage.weight.max),
+        "storage.weight.mult": this.storage.weight.multiplier,
+        "storage.weight.over": Number(this.storage.weight.over),
         weight: this.totalWeight,
       });
     }
@@ -344,11 +368,36 @@ export default function EquipmentStoragePart(Base) {
     }
 
     /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      const stored = () => (this.storage.enabled ? this.parent.previewedTypes.equipment : []);
+      Object.defineProperties(this.storage.count, {
+        over: { get: () => this.storage.count.value > this.storage.count.max },
+        // Async stored equipment is assumed to have a quantity of 1
+        value: {
+          get: () =>
+            stored().map(e => (e.system?.consumable ? (e.system?.quantity?.value ?? 1) : 1) || 1).reduce((a, b) =>
+              a + b, 0),
+        },
+      });
+      Object.defineProperties(this.storage.weight, {
+        over: { get: () => this.storage.weight.value > this.storage.weight.max },
+        // Async stored equipment is assumed to have a weight of 0
+        value: {
+          get: () =>
+            stored().map(e => e.system?.totalWeight ?? 0).reduce((a, b) => a + b, 0).toNearest(
+              TERIOCK.config.system.unitPrecision,
+            ),
+        },
+      });
+    }
+
+    /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
       if (this.stashed || this.parent.elder?.type === "species") {
         this.weight = 0;
-        this.storage.weightMultiplier = 0;
+        this.storage.weight.multiplier = 0;
       }
     }
 

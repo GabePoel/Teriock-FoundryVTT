@@ -2,7 +2,6 @@ import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
-import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toKebabCase } from "../../helpers/string.mjs";
 
 /**
@@ -347,26 +346,59 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * Duplicates the document within its parent.
+     * @param {object} [data]
+     * @returns {Promise<ChildDocument>}
+     */
+    async duplicate(data = {}) {
+      const copy = foundry.utils.mergeObject(this.toObject(true), {
+        _stats: { duplicateSource: this.uuid },
+        name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
+        ...data,
+      });
+      let copyDocument;
+      if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
+      else if (this.inCompendium) {
+        copyDocument = await this.constructor.create(copy, { pack: this.compendium.collection });
+      } else { copyDocument = await this.constructor.create(copy); }
+      return copyDocument[0];
+    }
+
+    /**
      * Fetch a document from its UUID without rebuilding actor deltas if it's part of the same hierarchy as this one.
+     * @param {UUID<TeriockDocument>} uuid
+     * @param {object} [options]
+     * @param {boolean} [options.invalid]
+     * @returns {Promise<TeriockDocument|null>}
+     */
+    async fetchFromUuid(uuid, { invalid = false } = {}) {
+      if (!uuid) { return null; }
+      return this.fetchFromUuidSync(uuid, { invalid }) ?? fromUuid(uuid, { invalid });
+    }
+
+    /**
+     * Synchronously fetch a document from its UUID without rebuilding actor deltas if it's part of the same hierarchy
+     * as this one. Compendium documents outside this hierarchy are not fetched.
      * @param {UUID<TeriockDocument>} uuid
      * @param {object} [options]
      * @param {boolean} [options.invalid]
      * @returns {TeriockDocument|null}
      */
-    fetchFromUuid(uuid, { invalid = false } = {}) {
-      /** @type {TeriockDocument|null} */
-      let doc = this.top;
-      if (uuid === doc.uuid) { return doc; }
-      if (uuid.startsWith(doc.uuid)) {
-        const embeddedPath = uuid.substring(this.top.uuid.length + 1);
-        const parts = embeddedPath.split(".");
-        while (doc && (parts.length > 1)) {
-          const [embeddedName, embeddedId] = parts.splice(0, 2);
-          doc = /** @type {TeriockDocument|null} */ (doc.getEmbeddedDocument(embeddedName, embeddedId, { invalid }));
-        }
-        return doc ?? uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
+    fetchFromUuidSync(uuid, { invalid = false } = {}) {
+      // Check if this.
+      if (uuid === this.uuid) { return this; }
+      // Check up the hierarchy.
+      if (!uuid.startsWith(`${this.uuid}.`)) {
+        if (this.parent?.fetchFromUuidSync) { return this.parent.fetchFromUuidSync(uuid, { invalid }); }
+        return uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
       }
-      return uuid.startsWith("Compendium") ? null : fromUuidSync(uuid);
+      // Check down the hierarchy.
+      const parts = uuid.substring(this.uuid.length + 1).split(".");
+      /** @type {TeriockDocument|null} */
+      let doc = this.getEmbeddedDocument(parts.shift(), parts.shift(), { invalid });
+      while (doc && (parts.length > 1)) { doc = doc.getEmbeddedDocument(parts.shift(), parts.shift(), { invalid }); }
+      // Fall back to `fromUuidSync` if possible.
+      return doc ?? (uuid.startsWith("Compendium") ? null : fromUuidSync(uuid));
     }
 
     /**
@@ -374,7 +406,7 @@ export default function BaseDocumentMixin(Base) {
      * @returns {Promise<TeriockDocument>}
      */
     async getMaster() {
-      return resolveDocument(this.master);
+      return this.fetchFromUuid(this.master?.uuid);
     }
 
     /** @inheritDoc */

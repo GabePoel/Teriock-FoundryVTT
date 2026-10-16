@@ -2,14 +2,11 @@
   {{> "teriock/sheets/shared/forms/kind-form"
     kindValue=system.kind
   }}
-  {{formBox
-    system._source.damageType
-    action=(ifThen editable "updatePaths" "")
-    dataset=(object paths="system.damageType")
-    placeholder=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.placeholder")
-    unselected=(getName system.damageType)
-    tooltip=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label")
+  {{formUpdater
+    document
     icon=TERIOCK.display.icons.manifest.effect.damage
+    path="system.damageType"
+    placeholder=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.placeholder")
   }}
   {{> "teriock/sheets/shared/forms/tag-form"}}
 </div>
