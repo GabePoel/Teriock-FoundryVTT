@@ -5,7 +5,7 @@ declare global {
     export interface ActorCombatPartData {
       /** <base> Defense */
       defense: {
-        /** <derived> Armor class (av + 10) */
+        /** <schema> Armor class (av + 10 unless set) */
         ac: number;
         /** <base> Armor value */
         av: {
@@ -18,7 +18,7 @@ declare global {
           /** <derived> Worn armor value */
           worn: number;
         };
-        /** <derived> Block value of primary blocker */
+        /** <schema> Block value of primary blocker unless set */
         bv: number;
         /** <derived> Combat class (ac + bv) */
         cc: number;

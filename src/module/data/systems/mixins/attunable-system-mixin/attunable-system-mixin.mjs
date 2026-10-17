@@ -156,19 +156,13 @@ export default function AttunableSystemMixin(Base) {
         system: { inheritTier: true, origin: this.parent.type, target: this.parent._id, tier: this.tier.value },
         type: "attunement",
       };
-      if (this.parent.actor && (await this.canAttune())) {
-        attunement = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
-        ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", {
-          format: { name: this.parent.fullName },
-          localize: true,
-        });
-        await this.parent.render();
-      } else {
-        ui.notifications.error("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", {
-          format: { name: this.parent.fullName },
-          localize: true,
-        });
-      }
+      if (!this.parent.actor) { return null; }
+      const enoughPresence = await this.canAttune();
+      [attunement] = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
+      const options = { format: { name: this.parent.fullName }, localize: true };
+      if (enoughPresence) { ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", options); }
+      else { ui.notifications.warn("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", options); }
+      await this.parent.render();
       return attunement;
     }
 

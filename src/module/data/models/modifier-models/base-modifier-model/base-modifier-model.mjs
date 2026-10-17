@@ -45,7 +45,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
    * @returns {number}
    */
   get value() {
-    return BaseRoll.minValue(this.bonus || "0", this.getRollData()) + this.score + this.competence?.bonus;
+    return BaseRoll.minValue(this.bonus || "0", this.getRollData()) + (this.score ?? 0) + this.competence?.bonus;
   }
 
   /** @inheritDoc */

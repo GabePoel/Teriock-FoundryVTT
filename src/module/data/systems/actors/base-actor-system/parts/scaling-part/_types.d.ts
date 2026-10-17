@@ -8,7 +8,7 @@ declare global {
       };
       /** <base> Scaling bonuses */
       scaling: {
-        /** <base> Battle rating */
+        /** <schema> Battle rating from species unless set */
         br: number;
         /** <schema> Scale off BR instead of LVL */
         brScale: boolean;

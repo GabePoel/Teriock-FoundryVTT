@@ -39,15 +39,15 @@ export default function ActorCombatPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        defense: initialSchema({
-          ac: initialNumber(systemConfig.baseValues.ac),
+        defense: new fields.SchemaField({
+          ac: new fields.NumberField({ initial: null, integer: true, nullable: true }),
           av: initialSchema({
             base: initialNumber(),
             natural: initialNumber(),
             value: initialNumber(),
             worn: initialNumber(),
           }),
-          bv: initialNumber(),
+          bv: new fields.NumberField({ initial: null, integer: true, nullable: true }),
           cc: initialNumber(systemConfig.baseValues.ac),
         }),
         initiative: new fields.EmbeddedDataField(InitiativeModel),
@@ -114,6 +114,8 @@ export default function ActorCombatPart(Base) {
         e.system.equipped && e.system.equipmentClasses.has("armor")
       );
       this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
+      this.defense.ac ??= systemConfig.baseValues.ac;
+      this.defense.bv ??= 0;
     }
 
     /** @inheritDoc */
@@ -130,8 +132,8 @@ export default function ActorCombatPart(Base) {
         ...this.parent.previewedTypes.body.filter(b => b.active).map(b => b.system.av.value),
       );
       this.defense.av.value = Math.max(0, this.defense.av.natural, this.defense.av.worn);
-      this.defense.ac += this.defense.av.value;
-      this.defense.bv = this.wielding.blocker?.system.bv.value || 0;
+      if (this._source.defense.ac === null) { this.defense.ac += this.defense.av.value; }
+      if (this._source.defense.bv === null) { this.defense.bv += this.wielding.blocker?.system.bv.value || 0; }
       this.defense.cc = this.defense.ac + this.defense.bv;
     }
 

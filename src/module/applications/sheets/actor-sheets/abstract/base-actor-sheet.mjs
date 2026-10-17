@@ -13,8 +13,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 /**
  * Base actor sheet.
  * @extends {ActorSheetV2}
- * @mixes HackStatApplication
  * @mixes HandlebarsApplication
+ * @mixes HackStatApplication
  * @mixes BaseDocumentSheet
  * @mixes CommonSheet
  * @mixes InventoryManagementSheet
@@ -24,8 +24,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 export default class BaseActorSheet
   extends mixClasses(
     ActorSheetV2,
-    HackStatApplicationMixin,
     HandlebarsApplicationMixin,
+    HackStatApplicationMixin,
     BaseDocumentSheetMixin,
     CommonSheetMixin,
     InventoryManagementSheetMixin,

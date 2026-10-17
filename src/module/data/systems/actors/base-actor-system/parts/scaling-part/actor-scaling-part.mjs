@@ -35,7 +35,7 @@ export default function ActorScalingPart(Base) {
           value: initialNumber(),
         }),
         scaling: new fields.SchemaField({
-          br: initialNumber(),
+          br: new fields.NumberField({ initial: null, nullable: true }),
           brScale: new fields.BooleanField({ initial: false }),
           f: initialNumber(),
           lvl: new fields.NumberField({ initial: 1, integer: true, min: 1 }),
@@ -96,7 +96,7 @@ export default function ActorScalingPart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       this.presence.max = Math.max(config.character.defaults.maxPresence, Math.floor(1 + (this.scaling.lvl + 1) / 5));
-      this.scaling.br = Math.max(0, ...this.parent.previewedTypes.species.map(s => s.system.br));
+      this.scaling.br ??= Math.max(0, ...this.parent.previewedTypes.species.map(s => s.system.br));
       this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
       this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
       this.scaling.p = Math.max(

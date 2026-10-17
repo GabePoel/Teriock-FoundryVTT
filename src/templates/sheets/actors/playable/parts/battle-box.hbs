@@ -34,16 +34,38 @@
 
       <div class="actor-stat">
         <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}</div>
-        <div class="actor-stat-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'>
-          {{{ system.defense.ac }}}
-        </div>
+        <button
+          id="{{ @root/appId }}-ac"
+          class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.ac"}}'
+          type="button"
+          data-action="updatePaths"
+          data-icon="{{ TERIOCK.display.icons.manifest.armament.av }}"
+          data-paths="system.defense.ac"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'
+        >
+          <span class="unselected">{{ system.defense.ac }}</span>
+          <span class="selected">
+            {{ifThen (eq system._source.defense.ac null) system.defense.ac system._source.defense.ac}}
+          </span>
+        </button>
       </div>
 
       <div class="actor-stat">
         <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.label"}}</div>
-        <div class="actor-stat-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'>
-          {{{ system.defense.bv }}}
-        </div>
+        <button
+          id="{{ @root/appId }}-bv"
+          class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.bv"}}'
+          type="button"
+          data-action="updatePaths"
+          data-icon="{{ TERIOCK.display.icons.manifest.armament.bv }}"
+          data-paths="system.defense.bv"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'
+        >
+          <span class="unselected">{{ system.defense.bv }}</span>
+          <span class="selected">
+            {{ifThen (eq system._source.defense.bv null) system.defense.bv system._source.defense.bv}}
+          </span>
+        </button>
       </div>
 
       <div class="actor-stat">

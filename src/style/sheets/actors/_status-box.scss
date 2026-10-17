@@ -109,8 +109,28 @@
     }
   }
 
+  .actor-bar-overlay-text,
+  .actor-bar-overlay-inputs {
+    align-items: center;
+    bottom: 0;
+    color: var(--color-light-2);
+    display: flex;
+    font-size: 1.5em;
+    gap: 0.25em;
+    left: 0;
+    padding-left: calc((2em - 1cap) / 2);
+    position: absolute;
+    right: 1.75em;
+    top: 0;
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  .actor-bar-overlay-text {
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
   .actor-bar-overlay {
-    align-content: center;
     bottom: 0;
     left: 0;
     position: absolute;
@@ -118,51 +138,42 @@
     top: 0;
 
     .take-harm-button {
+      @include mixins.centralize;
+      bottom: 0;
       color: var(--color-light-2);
+      height: 2.25em;
+      margin-block: auto;
       position: absolute;
-      right: 0.5em;
-      top: 0.5em;
+      right: 0.375em;
+      top: 0;
+      width: 2.25em;
     }
 
-    .actor-bar-overlay-row {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: start;
+    .actor-bar-overlay-inputs {
+      opacity: 0;
+      padding-inline: 0.25em;
 
       input {
-        border: none;
-        color: var(--color-light-2);
-        margin-inline: 2px;
-        padding-inline: 2px;
+        @include mixins.editable-background;
+        border: 1px solid color-mix(in srgb, currentColor, transparent 75%);
+        color: inherit;
+        flex: 1 1 0;
+        font-size: inherit;
+        height: 1.5em;
+        min-width: 0;
+        text-align: center;
+      }
+    }
 
-        &:not([disabled]) {
-          &:hover, &:active, &:focus {
-            color: var(--color-light-1);
-          }
-        }
+    &:hover,
+    &:focus-within,
+    &.active {
+      .actor-bar-overlay-text {
+        opacity: 0;
       }
 
-      .actor-bar-overlay-label {
-        align-items: center;
-        background-color: transparent;
-        box-shadow: none;
-        color: var(--color-light-2);
-        display: flex;
-        flex: none;
-        font-size: 1.5em;
-        height: var(--input-height);
-      }
-
-      .actor-bar-overlay-left {
-        margin-left: 0.25em;
-        text-align: right;
-        width: 2em;
-      }
-
-      .actor-bar-overlay-temp {
-        text-align: left;
-        width: 2em;
+      .actor-bar-overlay-inputs {
+        opacity: 1;
       }
     }
   }

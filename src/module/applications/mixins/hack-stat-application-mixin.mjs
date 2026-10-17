@@ -120,6 +120,10 @@ export default function HackStatApplicationMixin(Base) {
     _prepareBar(key, system) {
       const config = statConfig[key];
       const data = system[key] ?? { max: 0, morganti: 0, temp: 0, value: 0 };
+      const morganti = data.morganti ?? 0;
+      let text = `${data.value} / ${data.max + morganti}`;
+      if (data.temp) { text += ` + ${data.temp}`; }
+      if (morganti) { text += ` - ${morganti}`; }
       return {
         ...this._prepareStatContext(data),
         config,
@@ -128,11 +132,12 @@ export default function HackStatApplicationMixin(Base) {
         key,
         labels: {
           current: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.current`,
-          max: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.max`,
+          morganti: config.morganti ? `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.morganti` : null,
           take: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.take`,
           temp: config.bar.temp ? `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.temp` : null,
         },
-        paths: { temp: `system.${key}.temp`, value: `system.${key}.value` },
+        paths: { morganti: `system.${key}.morganti`, temp: `system.${key}.temp`, value: `system.${key}.value` },
+        text,
       };
     }
 
@@ -189,6 +194,15 @@ export default function HackStatApplicationMixin(Base) {
       return { lost, morganti: morgantiPct, remaining, temp: tempPct, tempHide };
     }
 
+    /** @inheritDoc */
+    _preSyncPartState(partId, newElement, priorElement, state) {
+      super._preSyncPartState(partId, newElement, priorElement, state);
+      state.activeBars = {};
+      for (const overlay of priorElement.querySelectorAll(".actor-bar-overlay:is(:hover, :focus-within)")) {
+        state.activeBars[overlay.dataset.bar] = overlay.matches(":hover");
+      }
+    }
+
     /**
      * Rolls a stat die and awakens the actor unless they're critically wounded.
      * @param {PointerEvent} _event
@@ -199,6 +213,22 @@ export default function HackStatApplicationMixin(Base) {
       const criticallyWounded = this.document.statuses.has("critically-wounded");
       await statDie.use(this.state?.consumeStatDice ?? true, { substitution: this.state?.substitution });
       if (!criticallyWounded) { await this.document.system.takeAwaken(); }
+    }
+
+    /** @inheritDoc */
+    _syncPartState(partId, newElement, priorElement, state) {
+      const overlays = Object.entries(state.activeBars ?? {}).map(([bar, hovered]) => {
+        const overlay = newElement.querySelector(`.actor-bar-overlay[data-bar="${bar}"]`);
+        overlay?.classList.add("active");
+        return [overlay, hovered];
+      });
+      super._syncPartState(partId, newElement, priorElement, state);
+      for (const [overlay, hovered] of overlays) {
+        if (!overlay) { continue; }
+        if (hovered) {
+          overlay.addEventListener("pointerleave", () => overlay.classList.remove("active"), { once: true });
+        } else { overlay.classList.remove("active"); }
+      }
     }
 
     /**

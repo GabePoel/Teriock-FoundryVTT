@@ -61,24 +61,42 @@
           classes="actor-name-text"
         }}
       </div>
-      <button
-        id="{{ @root/appId }}-basics"
-        class="actor-basics updatable"
-        type="button"
-        data-action="updatePaths"
-        data-icon="{{ TERIOCK.display.icons.manifest.ui.level }}"
-        data-path="system.scaling.lvl"
-        data-paths="system.scaling.lvl system.scaling.brScale"
-      >
+      <div class="actor-basics">
         <span class="actor-shortbox actor-level-box">
-          <span class="actor-shortbox-value">{{ system.scaling.lvl }}</span>
+          <span class="actor-shortbox-value">
+            <button
+              id="{{ @root/appId }}-lvl"
+              class='affix updatable {{formClasses @root/document path="system.scaling.lvl"}}'
+              type="button"
+              data-action="updatePaths"
+              data-icon="{{ TERIOCK.display.icons.manifest.ui.level }}"
+              data-paths="system.scaling.lvl system.scaling.br system.scaling.brScale"
+            >
+              <span class="unselected">{{ system.scaling.lvl }}</span>
+              <span class="selected">{{ system._source.scaling.lvl }}</span>
+            </button>
+          </span>
           <span class="actor-level-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.lvl"}}
           </span>
         </span>
         {{#if system.scaling.brScale}}
           <span class="actor-shortbox actor-br-box">
-            <span class="actor-shortbox-value">{{ system.scaling.br }}</span>
+            <span class="actor-shortbox-value">
+              <button
+                id="{{ @root/appId }}-br"
+                class='affix updatable {{formClasses @root/document path="system.scaling.br"}}'
+                type="button"
+                data-action="updatePaths"
+                data-icon="{{ TERIOCK.display.icons.manifest.ui.level }}"
+                data-paths="system.scaling.lvl system.scaling.br system.scaling.brScale"
+              >
+                <span class="unselected">{{ system.scaling.br }}</span>
+                <span class="selected">
+                  {{ifThen (eq system._source.scaling.br null) system.scaling.br system._source.scaling.br}}
+                </span>
+              </button>
+            </span>
             <span class="actor-br-label actor-shortbox-label">
               {{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.abbreviation"}}
             </span>
@@ -119,10 +137,11 @@
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.flu"}}
           </span>
         </span>
-      </button>
+      </div>
     </div>
     {{> "teriock/sheets/actors/playable/parts/status-box"}}
     {{> "teriock/sheets/actors/playable/parts/battle-box"}}
     {{> "teriock/sheets/actors/playable/parts/attribute-box"}}
+    {{> "teriock/sheets/actors/playable/parts/initiative-box"}}
   </div>
 </div>

@@ -57,10 +57,10 @@ export default function ActorCoverPart(Base) {
     prepareDerivedData() {
       super.prepareDerivedData();
       if (this.cover === 1) {
-        this.defense.ac += 2;
+        if (!this.lockedPaths.has("system.defense.ac")) { this.defense.ac += 2; }
         this.attributes.mov.bonus = addFormula(this.attributes.mov.bonus, "2");
       } else if (this.cover >= 2) {
-        this.defense.ac += 5;
+        if (!this.lockedPaths.has("system.defense.ac")) { this.defense.ac += 5; }
         this.attributes.mov.bonus = addFormula(this.attributes.mov.bonus, "5");
       }
     }

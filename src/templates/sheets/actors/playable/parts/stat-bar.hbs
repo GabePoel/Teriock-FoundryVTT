@@ -12,15 +12,16 @@
     </div>
     <div
       class="actor-bar-overlay"
+      data-bar="{{ bar.key }}"
       {{#if bar.config.pool.enabled}}
         data-action="toggleCollapseRightClick"
         data-collapsible-target="drawer-{{ bar.key }}"
       {{/if}}
     >
-      <div class="actor-bar-overlay-row actor-{{ bar.config.bar.class }}-bar-overlay-row">
+      <div class="actor-bar-overlay-text">{{ bar.text }}</div>
+      <div class="actor-bar-overlay-inputs">
         {{formInput
           (path @root/systemFields bar.key "fields.value")
-          classes="actor-bar-overlay-left actor-bar-overlay-label"
           dataset=(object tooltip=(localize bar.labels.current) noScroll="true")
           disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
           max=bar.data.max
@@ -29,24 +30,26 @@
           type="number"
           value=bar.data.value
         }}
-        <div class="actor-bar-overlay-max actor-bar-overlay-label" data-tooltip="{{ bar.labels.max }}">
-          <span>
-            /
-            {{ bar.data.max }}
-            {{#if bar.config.bar.temp}}
-              +
-            {{/if}}
-          </span>
-        </div>
         {{#if bar.config.bar.temp}}
+          <span>+</span>
           {{formInput
             (path @root/systemFields bar.key "fields.temp")
-            classes="actor-bar-overlay-temp actor-bar-overlay-label"
             dataset=(object tooltip=(localize bar.labels.temp) noScroll="true")
             disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
             min=0
             name=bar.paths.temp
             value=bar.data.temp
+          }}
+        {{/if}}
+        {{#if bar.config.morganti}}
+          <span>-</span>
+          {{formInput
+            (path @root/systemFields bar.key "fields.morganti")
+            dataset=(object tooltip=(localize bar.labels.morganti) noScroll="true")
+            disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
+            min=0
+            name=bar.paths.morganti
+            value=bar.data.morganti
           }}
         {{/if}}
       </div>
@@ -61,8 +64,6 @@
       >
         {{makeIcon (path @root/TERIOCK.config.impact bar.impact "icon") "light"}}
       </button>
-      {{#if (or @root/takeStatButtons (not bar.config.bar.temp))}}
-      {{/if}}
     </div>
   </div>
 {{/with}}

@@ -8,11 +8,7 @@
     {{/if}}
   "
 >
-  <div
-    class="actor-presence-bar"
-    style="grid-template-columns: {{repeatStr system.presence.max ' 1fr'}}"
-    data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.presence.tooltip" value=system.presence.value max=system.presence.max}}'
-  >
+  <div class="actor-presence-bar" style="grid-template-columns: {{repeatStr system.presence.max ' 1fr'}}">
     {{#if (gte system.presence.value 1)}}
       <div
         class="presence-indicator used"
@@ -26,5 +22,13 @@
     {{#repeat system.attributes.unp.score}}
       <div class="presence-indicator unused"></div>
     {{/repeat}}
+  </div>
+  <div
+    class="actor-bar-overlay-text"
+    data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.presence.tooltip" value=system.presence.value max=system.presence.max}}'
+  >
+    {{ system.presence.value }}
+    /
+    {{ system.presence.max }}
   </div>
 </div>
