@@ -1,6 +1,5 @@
 import { Game as BaseGame } from "@client/_module.mjs";
 import { Canvas } from "@client/canvas/_module.mjs";
-import { TokenLayer } from "@client/canvas/layers/_module.mjs";
 import { ClientDocumentMixin, WorldCollection } from "@client/documents/abstract/_module.mjs";
 import {
   ChatMessages,
@@ -15,6 +14,7 @@ import {
 import { DataField } from "@common/data/fields.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
+import { TeriockLightingLayer, TeriockTokenLayer } from "../canvas/layers/_module.mjs";
 import {
   TeriockFolder,
   TeriockJournalEntry,
@@ -68,7 +68,7 @@ declare global {
   // @ts-expect-error Incorrect extensions
   interface Game extends BaseGame {
     actors: TeriockActors;
-    canvas: Canvas & { tokens: TokenLayer };
+    canvas: Canvas & { lighting: TeriockLightingLayer, tokens: TeriockTokenLayer };
     folders: WorldCollection<TeriockFolder> & Folders;
     items: WorldCollection<TeriockItem> & Items;
     journal: WorldCollection<TeriockJournalEntry> & Journal;

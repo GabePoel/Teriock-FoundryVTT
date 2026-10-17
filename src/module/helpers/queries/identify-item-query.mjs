@@ -10,12 +10,13 @@ import { buildWriteOperation } from "../utils.mjs";
  * @returns {Promise<boolean>}
  */
 export default async function identifyItemQuery(queryData) {
-  const uuid = queryData.uuid;
-  const item = await fromUuid(uuid);
+  const item = await fromUuid(queryData.itemUuid);
+  const user = await fromUuid(queryData.userUuid);
+  if (!item || !user || item.system.identification.identified) { return false; }
   const content = await TeriockTextEditor.enrichHTML(
     _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.question", {
       item: `@UUID[${item.uuid}]{${item.system.identification.name}}`,
-      user: game.user.link,
+      user: user.link,
     }),
   );
   const doIdentify = await TeriockDialog.confirm({

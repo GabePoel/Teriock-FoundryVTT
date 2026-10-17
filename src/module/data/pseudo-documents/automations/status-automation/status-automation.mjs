@@ -190,7 +190,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectVisibleTokens(options = {}) {
-    return game.user.selectVisibleTokens({
+    return game.canvas.tokens.selectVisible({
       hint: _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.hint", {
         effect: this.getNearestDocument()?.name
           || _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect"),

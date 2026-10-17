@@ -142,10 +142,10 @@ export default function EquipmentIdentificationPart(Base) {
           format: { name: this.parent.fullName },
           localize: true,
         });
-        const doIdentify = await game.users.queryGM("teriock.identifyItem", { uuid: this.parent.uuid }, {
-          failPrefix: "TERIOCK.SYSTEMS.Equipment.QUERY.Identify.failPrefix",
-          localize: true,
-        });
+        const doIdentify = await game.users.queryGM("teriock.identifyItem", {
+          itemUuid: this.parent.uuid,
+          userUuid: game.user.uuid,
+        }, { failPrefix: "TERIOCK.SYSTEMS.Equipment.QUERY.Identify.failPrefix", localize: true });
         if (doIdentify) {
           ui.notifications.success("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.success", {
             format: { name: this.parent.fullName },

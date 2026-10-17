@@ -128,6 +128,7 @@ foundry.helpers.Hooks.once("init", function() {
     visionModes: { ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes },
   });
   CONFIG.Canvas.layers.lighting.layerClass = canvas.layers.TeriockLightingLayer;
+  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TeriockTokenLayer;
 
   // Configure Documents
   // ===================

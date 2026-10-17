@@ -84,17 +84,19 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
   async _getOriginToken(execution) {
     if (this.origin === "executor" && execution?.executor?.document?.uuid) { return execution.executor.document; }
     else if (this.origin === "target") {
-      return game.user.selectTargetedToken({
+      return (await game.canvas.tokens.selectTargeted({
+        multi: false,
         title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", {
           name: this.getNearestDocument()?.name || "",
         }),
-      });
+      }))[0] ?? null;
     } else if (this.origin === "chosen") {
-      return game.user.selectVisibleToken({
+      return (await game.canvas.tokens.selectVisible({
+        multi: false,
         title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", {
           name: this.getNearestDocument()?.name || "",
         }),
-      });
+      }))[0] ?? null;
     }
     return null;
   }

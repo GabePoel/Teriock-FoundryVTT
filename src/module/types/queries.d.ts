@@ -48,7 +48,7 @@ declare global {
       uuid: UUID<TeriockActiveEffect | TeriockActor | TeriockItem>;
     };
 
-    export type IdentifyItemData = { uuid: UUID<TeriockItem<"equipment">> };
+    export type IdentifyItemData = { itemUuid: UUID<TeriockItem<"equipment">>, userUuid: UUID<TeriockUser> };
 
     export type TurnChangeData = {
       actionUuids: UUID<TeriockCombatant>[];
