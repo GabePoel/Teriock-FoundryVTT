@@ -48,7 +48,7 @@
     outline: none;
 
     .teriock-updater-display {
-      box-shadow: 0 0 5px var(--color-shadow-primary);
+      outline-color: var(--color-focus-outline);
     }
   }
 
@@ -105,6 +105,9 @@
     position: relative;
 
     @include mixins.editable-background;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    transition: outline-color 0.5s;
 
     &.context {
       box-shadow: 0 0 5px var(--color-shadow-primary);
