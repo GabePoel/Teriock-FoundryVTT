@@ -8,6 +8,16 @@ import { toKebabCase } from "../../helpers/string.mjs";
  */
 
 /**
+ * Make a unique element ID.
+ * @param {object} options
+ * @param {...string} parts
+ * @returns {string}
+ */
+function makeElementId(options, ...parts) {
+  return [options.data?.root?.appId, ...parts].filter(Boolean).join("-").replace(/\s+/g, "-");
+}
+
+/**
  * @typedef FormClassesHash
  * @property {boolean} changed
  * @property {boolean} isPlaceholder
@@ -81,6 +91,7 @@ function formUpdater(model, options = { hash: {} }) {
   const containerElement = createElement("button", {
     className: "teriock-updater-container",
     dataset: foundry.utils.mergeObject({ action: action ?? "updatePaths", icon, paths }, dataset),
+    id: options.hash.id ?? makeElementId(options, action, paths),
     type: "button",
   });
   const displayElement = createElement("span", { className: "teriock-updater-display" });
@@ -164,8 +175,9 @@ function formHover(model, options = { hash: {} }) {
   const selectedValue = selected === null ? unselectedValue : selectedFormat ?? selected;
   const cssClasses = ["affix", classes, formClasses(model, { hash: { path } })];
   if (selected === null) { cssClasses.push("details-muted"); }
+  const id = options.hash.id ?? makeElementId(options, action, paths || dataset.path);
   return new Handlebars.SafeString(`
-    <button type="button" class="${cssClasses.filter(Boolean).join(" ")}" ${dataAttrs}>
+    <button type="button" id="${id}" class="${cssClasses.filter(Boolean).join(" ")}" ${dataAttrs}>
       <span class="selected">${selectedValue}</span>
       <span class="unselected">${unselectedValue}</span>
     </button>

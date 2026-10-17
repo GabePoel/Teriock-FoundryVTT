@@ -9,13 +9,16 @@
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
         {{#each TERIOCK.statuses.conditions as |condition key|}}
-          <div
+          <button
+            id="{{ @root/appId }}-condition-{{ key }}"
             class="
+              tbutton
               condition-toggle
               {{#unless (lookup ../conditions key)}}
                 inactive
               {{/unless}}
             "
+            type="button"
             data-action="toggleCondition"
             data-condition="{{{ key }}}"
             data-tooltip='
@@ -26,13 +29,13 @@
             '
           >
             {{infoIcon (concat "condition:" condition.system.identifier)}}
-            <div class="condition-image-container">
-              <div class="condition-image">
+            <span class="condition-image-container">
+              <span class="condition-image">
                 <img src="{{ condition.img }}" alt="{{ condition.name }}" loading="lazy" />
-              </div>
-            </div>
-            <div class="condition-label tsubtle">{{ condition.name }}</div>
-          </div>
+              </span>
+            </span>
+            <span class="condition-label tsubtle">{{ condition.name }}</span>
+          </button>
         {{/each}}
       </div>
     </div>

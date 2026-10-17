@@ -4,6 +4,7 @@
       <div class="actor-stat">
         <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
         <button
+          id="{{ @root/appId }}-cover"
           class="actor-stat-value updatable"
           type="button"
           data-action="increaseCover"
@@ -58,28 +59,44 @@
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.blockingWith"}}</div>
         <div class="title-right">
           {{#if (exists system.wielding.blocker)}}
-            <i
-              class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.block "light"}} thover'
+            <button
+              id="{{ @root/appId }}-block-roll"
+              class="tbutton thover"
+              type="button"
               data-action="useAbility"
               data-ability="ability:basic-block"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollBlock"}}'
-            ></i>
-            <i
-              class='{{makeIconClass TERIOCK.display.icons.manifest.effect.interact "light"}} thover'
+              data-disable="false"
+            >
+              <i class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.block "light"}}'></i>
+            </button>
+            <button
+              id="{{ @root/appId }}-block-interact"
+              class="tbutton thover"
+              type="button"
               data-action="quickUse"
               data-id="{{ system.wielding.blocker._id }}"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollInteract"}}'
               data-deal-impacts="false"
-            ></i>
-            <i
-              class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}} thover'
+              data-disable="false"
+            >
+              <i class='{{makeIconClass TERIOCK.display.icons.manifest.effect.interact "light"}}'></i>
+            </button>
+            <button
+              id="{{ @root/appId }}-block-open"
+              class="tbutton thover"
+              type="button"
               data-action="openPrimaryBlocker"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}'
-            ></i>
+              data-disable="false"
+            >
+              <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}}'></i>
+            </button>
           {{/if}}
         </div>
       </div>
       <button
+        id="{{ @root/appId }}-blocker"
         class="
           actor-primary-blocker-select
           updatable
@@ -124,6 +141,7 @@
         <div class="actor-stat">
           <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
           <button
+            id="{{ @root/appId }}-reaction"
             class="actor-stat-value updatable"
             type="button"
             data-action="toggleReaction"
@@ -156,6 +174,7 @@
       <div class="actor-stat">
         <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.label"}}</div>
         <button
+          id="{{ @root/appId }}-piercing"
           class="actor-stat-value updatable"
           type="button"
           data-action="updatePaths"
@@ -192,6 +211,7 @@
       <div class="actor-stat">
         <div class="tsubtle">{{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label"}}</div>
         <button
+          id="{{ @root/appId }}-sb"
           class="actor-stat-value updatable"
           type="button"
           data-action="toggleSb"
@@ -208,30 +228,46 @@
       <div class="tsubtle little-title">
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.attackingWith"}}</div>
         <div class="title-right">
-          <i
-            class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.attack "light"}} thover'
+          <button
+            id="{{ @root/appId }}-attack-roll"
+            class="tbutton thover"
+            type="button"
             data-action="useAbility"
             data-ability="ability:basic-attack"
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollAttack"}}'
-          ></i>
+            data-disable="false"
+          >
+            <i class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.attack "light"}}'></i>
+          </button>
           {{#if (exists system.wielding.attacker)}}
-            <i
-              class='{{makeIconClass TERIOCK.display.icons.manifest.effect.dealDamage "light"}} thover'
+            <button
+              id="{{ @root/appId }}-attack-damage"
+              class="tbutton thover"
+              type="button"
               data-action="quickUse"
               data-id="{{ system.wielding.attacker._id }}"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollDamage"}}'
               data-deal-impacts="true"
-            ></i>
-            <i
-              class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}} thover'
+              data-disable="false"
+            >
+              <i class='{{makeIconClass TERIOCK.display.icons.manifest.effect.dealDamage "light"}}'></i>
+            </button>
+            <button
+              id="{{ @root/appId }}-attack-open"
+              class="tbutton thover"
+              type="button"
               data-action="openPrimaryAttacker"
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}'
-            ></i>
+              data-disable="false"
+            >
+              <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}}'></i>
+            </button>
           {{/if}}
         </div>
       </div>
 
       <button
+        id="{{ @root/appId }}-attacker"
         class="
           actor-primary-attacker-select
           updatable

@@ -1,12 +1,14 @@
 <div class="tgrid g7">
   {{#each @root/hackParts as |hack|}}
-    <div
-      class="thover hack-marker-box grid-fill"
+    <button
+      id="{{ @root/appId }}-hack-{{ hack.part }}"
+      class="tbutton thover hack-marker-box grid-fill"
+      type="button"
       data-action="takeHack"
       data-part="{{ hack.part }}"
       data-tooltip="{{ hack.label }}"
     >
       <i class="fa-fw {{ hack.fill }} {{ hack.icon }}"></i>
-    </div>
+    </button>
   {{/each}}
 </div>

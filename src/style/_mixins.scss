@@ -218,17 +218,19 @@
 
 @mixin collapsible() {
   display: grid;
-  transition: grid-template-rows 250ms, opacity 250ms;
+  transition: grid-template-rows 250ms, opacity 250ms, visibility 250ms;
 }
 
 @mixin collapsible-open() {
   grid-template-rows: 1fr;
   opacity: 1;
+  visibility: visible;
 }
 
 @mixin collapsible-closed() {
   grid-template-rows: 0fr;
   opacity: 0;
+  visibility: hidden;
 }
 
 @mixin collapsible-content() {

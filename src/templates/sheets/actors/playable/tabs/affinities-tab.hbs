@@ -4,20 +4,23 @@
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
         {{#each affinityButtons as |b|}}
-          <div
-            class="condition-toggle"
+          <button
+            id="{{ @root/appId }}-affinity-{{ b.affinityType }}"
+            class="tbutton condition-toggle"
+            type="button"
+            data-disable="false"
             data-action="rollAffinity"
             data-affinity-type="{{ b.affinityType }}"
             data-tooltip="{{ b.tooltip }}"
           >
             {{infoIcon (concat "keyword:" b.affinityType)}}
-            <div class="condition-image-container">
-              <div class="condition-image">
+            <span class="condition-image-container">
+              <span class="condition-image">
                 <img src="{{ b.img }}" alt="" loading="lazy" />
-              </div>
-            </div>
-            <div class="condition-label tsubtle">{{ b.label }}</div>
-          </div>
+              </span>
+            </span>
+            <span class="condition-label tsubtle">{{ b.label }}</span>
+          </button>
         {{/each}}
       </div>
     </div>

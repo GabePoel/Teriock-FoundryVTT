@@ -59,8 +59,10 @@ export default function PlayableActorSheetCombatPart(Base) {
      * @returns {Promise<void>}
      */
     static async #onSelectAttacker(event) {
-      if (event.button === 2) { await this.document.system.wielding.attacker?.sheet.render(true); }
-      if (!game.teriock.checkEditable(this)) { return; }
+      if (event.button === 2 || !this.isEditable) {
+        await this.document.system.wielding.attacker?.sheet.render(true);
+        return;
+      }
       const attacker = await DocumentSelector.selectSingle(
         [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
           .filter(a => a.active),
@@ -80,8 +82,10 @@ export default function PlayableActorSheetCombatPart(Base) {
      * @returns {Promise<void>}
      */
     static async #onSelectBlocker(event) {
-      if (event.button === 2 || !this.isEditable) { await this.document.system.wielding.blocker?.sheet.render(true); }
-      if (!game.teriock.checkEditable(this)) { return; }
+      if (event.button === 2 || !this.isEditable) {
+        await this.document.system.wielding.blocker?.sheet.render(true);
+        return;
+      }
       const attacker = await DocumentSelector.selectSingle(
         [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
           .filter(a => a.active),

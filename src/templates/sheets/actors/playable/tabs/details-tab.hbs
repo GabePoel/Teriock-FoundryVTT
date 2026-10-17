@@ -21,6 +21,7 @@
               {{{ config.label }}}
             </div>
             <button
+              id="{{ @root/appId }}-speed-{{ key }}"
               class='
                 affix
                 updatable
@@ -56,6 +57,7 @@
                   {{{ config.label }}}
                 </div>
                 <button
+                  id="{{ @root/appId }}-sense-{{ key }}"
                   class='
                     affix
                     updatable
@@ -89,7 +91,7 @@
                   unselected=system.rotators.value
                   selected=system.rotators.value
                   action="toggleDocs"
-                  dataset=(object disable="false" path="system.rotatorDocuments")
+                  dataset=(object path="system.rotatorDocuments")
                 }}
                 /
                 {{formHover
@@ -109,7 +111,7 @@
               "keyword:curse"
               noTables=true
             }}
-            <div class="actor-stat" data-action="toggleDocs" data-path="system.curseDocuments">
+            <div class="actor-stat">
               <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
               <div class="actor-stat-value details-fraction">
                 {{formHover
@@ -118,7 +120,7 @@
                   unselected=system.curses.value
                   selected=system.curses.value
                   action="toggleDocs"
-                  dataset=(object disable="false" path="system.curseDocuments")
+                  dataset=(object path="system.curseDocuments")
                 }}
                 /
                 {{formHover

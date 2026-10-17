@@ -1,5 +1,11 @@
 @use "../mixins" as mixins;
 
-:where(button.updatable, button.teriock-updater-container) {
+:where(button.tbutton, button.updatable, button.teriock-updater-container) {
   @include mixins.button-reset;
+}
+
+:where(button.tbutton.thover):focus-visible {
+  box-shadow: none;
+  filter: drop-shadow(0 0 2px var(--button-focus-outline-color)) drop-shadow(0 0 3px var(--button-focus-outline-color));
+  outline: none;
 }

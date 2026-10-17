@@ -23,16 +23,13 @@
     </div>
     {{#each TERIOCK.config.attribute as |config name|}}
       <div
-        class="attribute-container tgrid g4 gi4 updatable"
+        class="attribute-container tgrid g4 gi4"
         data-tooltip-class="teriock-no-tables"
         data-tooltip-direction="LEFT"
         data-tooltip-identifier='{{path @root/TERIOCK.config.attribute name "identifier"}}'
-        data-icon="{{ config.icon }}"
-        data-paths="system.attributes.{{ name }}.competence.raw system.attributes.{{ name }}.score system.attributes.{{ name }}.bonus"
-        data-action="updatePaths"
-        data-title="{{ config.label }}"
       >
-        <div
+        <button
+          id="{{ @root/appId }}-attribute-{{ name }}-competence"
           class='
             tcolored
             tcenter
@@ -40,6 +37,7 @@
             grid-fill
             affix-icon
             competence
+            updatable
             {{formClasses
             @root/document
             path=(concat
@@ -47,26 +45,24 @@
             name
             ".competence.raw")}}
           '
-          data-path="system.attributes.{{ name }}.competence.raw"
+          type="button"
+          data-action="updatePaths"
+          data-icon="{{ config.icon }}"
+          data-paths="system.attributes.{{ name }}.competence.raw system.attributes.{{ name }}.score system.attributes.{{ name }}.bonus"
+          data-title="{{ config.label }}"
           data-tooltip='{{path @root/system.attributes name "competence.description"}}'
           data-tooltip-class=""
         >
           <i class='unselected {{path @root/attributeDisplay name "competenceIconClass"}}'></i>
           <i class='selected {{path @root/attributeDisplay name "sourceCompetenceIconClass"}}'></i>
-        </div>
-        <div
-          class="tcenter thover draggable ch-attribute-abbr"
-          data-action="rollFeatSave"
-          data-attribute="{{ name }}"
-          data-tooltip-direction="LEFT"
-          data-uuid="{{lookup @root/attributeMacros name}}"
-        >
-          {{path @root/TERIOCK.config.attribute name "abbreviation"}}
-        </div>
-        <div
+        </button>
+        <button id="{{ @root/appId }}-attribute-{{ name }}-roll" class="tbutton tcenter thover draggable ch-attribute-abbr" type="button" data-action="rollFeatSave" data-attribute="{{ name }}" data-disable="false" data-tooltip-direction="LEFT" data-uuid="{{lookup @root/attributeMacros name}}">{{path @root/TERIOCK.config.attribute name "abbreviation"}}</button>
+        <button
+          id="{{ @root/appId }}-attribute-{{ name }}-score"
           class='
             tcenter
             affix
+            updatable
             {{formClasses
             @root/document
             path=(concat
@@ -74,13 +70,18 @@
             name
             ".score")}}
           '
+          type="button"
+          data-action="updatePaths"
+          data-icon="{{ config.icon }}"
+          data-paths="system.attributes.{{ name }}.competence.raw system.attributes.{{ name }}.score system.attributes.{{ name }}.bonus"
+          data-title="{{ config.label }}"
         >
-          <div class="unselected">
+          <span class="unselected">
             <span class="ch-attribute-input tcolored tcenter ttransparent">
               {{{path @root/system.attributes name "score"}}}
             </span>
-          </div>
-          <div class="selected">
+          </span>
+          <span class="selected">
             <span class="ch-attribute-input tcolored tcenter ttransparent">
               {{#if (eq name "unp")}}
                 {{ @root/system.attributes.unp.score }}
@@ -88,8 +89,8 @@
                 {{path @root/system._source.attributes name "score"}}
               {{/if}}
             </span>
-          </div>
-        </div>
+          </span>
+        </button>
         <div class="tcolored tcenter">
           {{numberFormat
             (path @root/system.attributes name "value")

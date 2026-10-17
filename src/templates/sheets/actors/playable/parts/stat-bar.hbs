@@ -50,14 +50,17 @@
           }}
         {{/if}}
       </div>
-      <div
-        class="take-harm-button thover take-damage-button"
+      {{!-- prettier-ignore --}}
+      <button
+        class="tbutton take-harm-button thover"
         data-action="takeImpact"
-        data-tooltip="{{ bar.labels.take }}"
         data-impact="{{ bar.impact }}"
+        data-tooltip="{{ bar.labels.take }}"
+        id="{{ @root/appId }}-take-{{ bar.key }}"
+        type="button"
       >
         {{makeIcon (path @root/TERIOCK.config.impact bar.impact "icon") "light"}}
-      </div>
+      </button>
       {{#if (or @root/takeStatButtons (not bar.config.bar.temp))}}
       {{/if}}
     </div>
