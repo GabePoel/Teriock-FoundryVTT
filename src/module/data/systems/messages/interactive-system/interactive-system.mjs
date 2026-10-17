@@ -103,6 +103,13 @@ export default class InteractiveSystem extends BaseMessageSystem {
     }
   }
 
+  /**
+   * Check before an Activation activates. Cancels if this returns `false`.
+   * @param {BaseActivation} _activation
+   * @returns {Promise<void|boolean>}
+   */
+  async _preActivateActivation(_activation) {}
+
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     await game.teriock.identifiers.initializing;

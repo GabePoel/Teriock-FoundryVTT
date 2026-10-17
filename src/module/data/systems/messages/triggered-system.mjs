@@ -19,4 +19,11 @@ export default class TriggeredSystem extends InteractiveSystem {
       this.parent.delete();
     }
   }
+
+  /** @inheritDoc */
+  async _preActivateActivation(activation) {
+    const yes = await super._preActivateActivation(activation);
+    if (yes === false) { return false; }
+    activation.actors = [this.parent.speakerActor].filter(Boolean);
+  }
 }
