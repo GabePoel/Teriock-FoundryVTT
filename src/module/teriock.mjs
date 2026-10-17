@@ -373,6 +373,10 @@ Hooks.once("teriock.identifiersInit", () => {
 // ===========
 
 Hooks.once("ready", () => {
+  document.body.classList.toggle(
+    "teriock-no-editable-highlights",
+    !game.settings.get("teriock", "highlightEditableValues"),
+  );
   game.teriock.initializeIdentifiers();
   applications.ux.TeriockDragDrop.registerGlobalDragHandler();
 });

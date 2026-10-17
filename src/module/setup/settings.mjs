@@ -84,23 +84,6 @@ export const menus = {
   display: {
     format: "tabs",
     groups: {
-      actorSheet: {
-        icon: icons.manifest.ui.actorSheet,
-        settings: {
-          floatingActorTabs: {
-            default: true,
-            scope: "client",
-            type: Boolean,
-            onChange: () => game.teriock.render({ actors: true }),
-          },
-          highlightModifiedValues: {
-            default: false,
-            scope: "client",
-            type: Boolean,
-            onChange: () => game.teriock.render({ applications: true }),
-          },
-        },
-      },
       chat: {
         icon: icons.manifest.ui.chat,
         settings: {
@@ -118,6 +101,7 @@ export const menus = {
           },
           deleteTriggerOnActivation: { default: false, scope: "client", type: Boolean },
           openPanelContextMenuEntry: { default: true, scope: "client", type: Boolean },
+          styleDice: { default: true, scope: "client", type: Boolean },
         },
       },
       dragDrop: {
@@ -127,11 +111,28 @@ export const menus = {
           minimizeApplicationsOnDragStart: { default: true, scope: "client", type: Boolean },
         },
       },
-      general: {
-        icon: icons.manifest.ui.settings,
+      sheets: {
+        icon: icons.manifest.ui.sheet,
         settings: {
+          floatingActorTabs: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ actors: true }),
+          },
+          highlightEditableValues: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: value => document.body.classList.toggle("teriock-no-editable-highlights", !value),
+          },
+          highlightModifiedValues: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ applications: true }),
+          },
           openConditionsAsJournalEntryPages: { default: true, scope: "user", type: Boolean },
-          styleDice: { default: true, scope: "client", type: Boolean },
           unlockSheetsByDefault: { default: false, scope: "user", type: Boolean },
         },
       },

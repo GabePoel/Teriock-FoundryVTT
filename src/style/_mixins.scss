@@ -259,7 +259,8 @@
 @mixin editable-background() {
   background-color: color-mix(in srgb, var(--color-text-primary), transparent 95%);
 
-  &:disabled {
+  &:disabled,
+  &:where(body.teriock-no-editable-highlights *) {
     background-color: transparent;
   }
 }

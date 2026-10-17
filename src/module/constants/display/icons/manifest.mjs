@@ -317,7 +317,6 @@ export default {
     trader: "ms-balance",
   },
   ui: {
-    actorSheet: "ms-account-box",
     add: "ms-add",
     amount: "mdi-plus-minus",
     apply: "ms-forward",
