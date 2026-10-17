@@ -3,6 +3,7 @@ import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs"
 import { dedent, toClass } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
+import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { AffinableSystemMixin, ExpirableSystemMixin, MetaphysicsSystemMixin } from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
@@ -213,6 +214,14 @@ export default class ApplicableEffectSystem
         source: this.parent,
       }),
     );
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    for (const a of this.automations.getTypeSync(StatusAutomation.metadata.type, { active: true })) {
+      if (a.relation === "include") { this.parent.statuses.add(a.status); }
+    }
   }
 
   /** @inheritDoc */

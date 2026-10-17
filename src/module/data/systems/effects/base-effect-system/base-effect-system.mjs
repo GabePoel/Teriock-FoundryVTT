@@ -1,7 +1,6 @@
 import { icons } from "../../../../constants/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
-import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { BaseSystemMixin, ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
@@ -202,18 +201,6 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
       super.getLocalRollData(),
       Object.fromEntries(Array.from(this.parent.statuses).map(s => [`condition.${toKebabCase(s)}`, 1])),
     );
-  }
-
-  /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    const statusAutomations = this.automations.getTypeSync(StatusAutomation.metadata.type, {
-      active: true,
-      isPassive: true,
-    });
-    statusAutomations.forEach(a => {
-      if (a.relation === "include") { this.parent.statuses.add(a.status); }
-    });
   }
 
   /** @inheritDoc */
