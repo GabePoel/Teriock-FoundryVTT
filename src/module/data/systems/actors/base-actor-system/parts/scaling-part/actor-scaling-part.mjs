@@ -1,4 +1,3 @@
-import { config } from "../../../../../../constants/_module.mjs";
 import { toKebabCase } from "../../../../../../utils/_module.mjs";
 import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
@@ -29,7 +28,7 @@ export default function ActorScalingPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         presence: initialSchema({
-          max: initialNumber(config.character.defaults.maxPresence),
+          max: initialNumber(TERIOCK.CONFIG.character.defaults.maxPresence),
           min: initialNumber(),
           over: initialBoolean(),
           value: initialNumber(),
@@ -53,10 +52,10 @@ export default function ActorScalingPart(Base) {
     #getRankRollData() {
       const data = {};
       const ranks = this.parent.previewedTypes.rank;
-      for (const c of Object.keys(TERIOCK.config.class.classes)) {
+      for (const c of Object.keys(TERIOCK.CONFIG.class.classes)) {
         data[`rank.${toKebabCase(c)}`] = ranks.filter(r => r.system._source.class === c).length;
       }
-      for (const a of Object.keys(TERIOCK.config.class.archetypes)) {
+      for (const a of Object.keys(TERIOCK.CONFIG.class.archetypes)) {
         data[`rank.${a}`] = ranks.filter(r => r.system._source.archetype === a).length;
       }
       return data;
@@ -95,17 +94,20 @@ export default function ActorScalingPart(Base) {
 
     /** @inheritDoc */
     prepareBaseData() {
-      this.presence.max = Math.max(config.character.defaults.maxPresence, Math.floor(1 + (this.scaling.lvl + 1) / 5));
+      this.presence.max = Math.max(
+        TERIOCK.CONFIG.character.defaults.maxPresence,
+        Math.floor(1 + (this.scaling.lvl + 1) / 5),
+      );
       this.scaling.br ??= Math.max(0, ...this.parent.previewedTypes.species.map(s => s.system.br));
       this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
       this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
       this.scaling.p = Math.max(
-        TERIOCK.config.system.baseValues.p,
-        Math.floor(TERIOCK.config.system.baseValues.p + 1 + (this.scaling.scale - 7) / 10),
+        TERIOCK.CONFIG.system.baseValues.p,
+        Math.floor(TERIOCK.CONFIG.system.baseValues.p + 1 + (this.scaling.scale - 7) / 10),
       );
       this.scaling.f = Math.max(
-        TERIOCK.config.system.baseValues.f,
-        Math.floor(TERIOCK.config.system.baseValues.f + (this.scaling.scale - 2) / 5),
+        TERIOCK.CONFIG.system.baseValues.f,
+        Math.floor(TERIOCK.CONFIG.system.baseValues.f + (this.scaling.scale - 2) / 5),
       );
       super.prepareBaseData();
     }

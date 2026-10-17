@@ -129,7 +129,7 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) { this.applyActiveEffects(TERIOCK.config.change.defaultPhase); }
+    if (this.isTop) { this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase); }
   }
 
   /** @inheritDoc */

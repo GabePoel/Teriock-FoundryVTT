@@ -1,4 +1,4 @@
-import effectConfig from "../../../../../../constants/config/effect-config.mjs";
+import effectConfig from "../../../../../../static/config/effect-config.mjs";
 import { FormulaField } from "../../../../../fields/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 

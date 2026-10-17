@@ -1,6 +1,6 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
-import classConfig from "../../../../constants/config/class-config.mjs";
-import { icons } from "../../../../constants/display/_module.mjs";
+import classConfig from "../../../../static/config/class-config.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { getName, mergeMetadata, mixClasses, resolveDocuments, safeInf } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
@@ -117,7 +117,7 @@ export default class RankSystem
    * Stage needed archetypes for creation.
    */
   #stageArchetypeCreation() {
-    const archetypeConfig = TERIOCK.config.class.archetypes[this._source.archetype];
+    const archetypeConfig = TERIOCK.CONFIG.class.archetypes[this._source.archetype];
     if (
       !archetypeConfig?.dontStage
       && !this.actor.previewedTypes.archetype.some(a => a.typedIdentifier === this.archetype)
@@ -150,7 +150,7 @@ export default class RankSystem
       },
       this._statBar,
       {
-        icon: TERIOCK.display.icons.manifest.armament.av,
+        icon: TERIOCK.DISPLAY.icons.manifest.armament.av,
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details"),
         wrappers: [
           this.maxAv === 0
@@ -171,7 +171,7 @@ export default class RankSystem
    * @returns {string}
    */
   get classIcon() {
-    return TERIOCK.config.class.classes[this._source.class]?.icon;
+    return TERIOCK.CONFIG.class.classes[this._source.class]?.icon;
   }
 
   /** @inheritDoc */
@@ -248,7 +248,7 @@ export default class RankSystem
     super.prepareBaseData();
     // Enforce matching class/archetype
     this.archetype = `archetype:${
-      TERIOCK.config.class.classes[this._source.class]?.archetype ?? this._source.archetype
+      TERIOCK.CONFIG.class.classes[this._source.class]?.archetype ?? this._source.archetype
     }`;
     if (this.parent.sup?.type === "species") { this.kind = "innate"; }
   }

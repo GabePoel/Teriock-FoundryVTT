@@ -1,5 +1,5 @@
-import systemConfig from "../../../../../../constants/config/system-config.mjs";
 import { ElderSorceryExecution } from "../../../../../../executions/actor-executions/_module.mjs";
+import systemConfig from "../../../../../../static/config/system-config.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";

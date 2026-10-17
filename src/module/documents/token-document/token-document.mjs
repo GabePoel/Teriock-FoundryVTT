@@ -65,7 +65,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     const autoVisionRange = actor.system.settings.getSetting("autoVisionRange");
     if (autoDetectionMode || autoVisionRange) {
       this.sight.range = 0;
-      for (const [id, config] of Object.entries(TERIOCK.config.character.sense)) {
+      for (const [id, config] of Object.entries(TERIOCK.CONFIG.character.sense)) {
         const range = actor.system.senses[id];
         if (autoDetectionMode) {
           const mode = config?.detectionMode;
@@ -97,6 +97,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   prepareEmbeddedDocuments() {
     if (this.isLazyDelta) { return; }
     super.prepareEmbeddedDocuments();
-    this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
+    this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase);
   }
 }

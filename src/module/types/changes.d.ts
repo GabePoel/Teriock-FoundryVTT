@@ -1,6 +1,6 @@
 import { EffectChangeData } from "@common/documents/_types.mjs";
 
-import changeConfig from "../constants/config/change-config.mjs";
+import changeConfig from "../static/config/change-config.mjs";
 
 declare global {
   namespace Teriock.Changes {

@@ -1,9 +1,9 @@
-import costConfig from "../../constants/config/cost-config.mjs";
-import statConfig from "../../constants/config/stat-config.mjs";
-import { icons } from "../../constants/display/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import costConfig from "../../static/config/cost-config.mjs";
+import statConfig from "../../static/config/stat-config.mjs";
+import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";

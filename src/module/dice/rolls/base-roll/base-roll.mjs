@@ -49,7 +49,7 @@ export default class BaseRoll extends Roll {
     }
     return {
       actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || TERIOCK.display.thumbnails.manifest.document.character,
+      img: img || target?.img || TERIOCK.DISPLAY.thumbnails.manifest.document.character,
       name: name || target?.name,
       tokenUuid: token?.uuid || target.tokenUuid,
     };
@@ -197,7 +197,7 @@ export default class BaseRoll extends Roll {
    */
   async _applyDiceStyles() {
     for (const die of this.dice) {
-      for (const [type, stat] of Object.entries(TERIOCK.config.stat)) {
+      for (const [type, stat] of Object.entries(TERIOCK.CONFIG.stat)) {
         if (stat?.style && die.flavor.includes(type)) { die.options.appearance = stat.style; }
       }
     }
@@ -210,7 +210,7 @@ export default class BaseRoll extends Roll {
    */
   _getFormulaContextOptions(config = {}) {
     return [{
-      icon: makeIcon(TERIOCK.display.icons.manifest.roll.reroll, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.roll.reroll, "contextMenu"),
       label: "TERIOCK.ROLLS.Base.reroll",
       onClick: async () => {
         const newRoll = this.clone();

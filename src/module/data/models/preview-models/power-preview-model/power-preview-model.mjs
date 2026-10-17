@@ -11,7 +11,7 @@ export default class PowerPreviewModel extends BasePreviewModel {
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
       kind: nullStringField({
-        choices: objectMap(TERIOCK.config.power.kind, v => v.label),
+        choices: objectMap(TERIOCK.CONFIG.power.kind, v => v.label),
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
     });

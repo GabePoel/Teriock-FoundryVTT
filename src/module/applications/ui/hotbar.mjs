@@ -28,7 +28,7 @@ export default class TeriockHotbar extends Hotbar {
       const macroType = await TeriockDialog.prompt({
         buttons: [{
           action: "linked",
-          icon: makeIconClass(TERIOCK.display.icons.manifest.ui.linked),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.linked),
           label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
           callback: () => "linked",
         }],
@@ -43,7 +43,7 @@ export default class TeriockHotbar extends Hotbar {
         modal: true,
         ok: { default: true, label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"), callback: () => "general" },
         window: {
-          icon: makeIconClass(TERIOCK.display.icons.manifest.ui.confirm, "title"),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.confirm, "title"),
           title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
         },
       });
@@ -58,7 +58,7 @@ export default class TeriockHotbar extends Hotbar {
   _getContextMenuOptions() {
     const options = super._getContextMenuOptions();
     options.push({
-      icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.openWindow, "contextMenu"),
       label: _loc("TERIOCK.DIALOGS.HotbarDrop.entry"),
       onClick: async (ev, li) => {
         const macro = this.#getMacroForSlot(li);

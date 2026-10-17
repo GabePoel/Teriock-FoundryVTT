@@ -23,7 +23,7 @@ export default class TeriockJournalEntrySheet extends mixClasses(JournalEntryShe
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [...super._getEntryContextOptions(), {
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.wiki, "contextMenu"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.wiki, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
       onClick: (_ev, li) => this.#getPage(li)?.system?.wikiOpen(),
       visible: li => this.#getPage(li)?.system?.isOnWiki,

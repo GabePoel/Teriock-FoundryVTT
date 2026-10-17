@@ -1,11 +1,9 @@
-import mathConfig from "../constants/config/math-config.mjs";
-
 declare global {
   namespace Teriock.Rolls {
     /**
      * Allowable number of dice faces.
      */
-    export type PolyhedralDieFaces = keyof typeof mathConfig.dieFaces;
+    export type PolyhedralDieFaces = 10 | 100 | 12 | 2 | 20 | 4 | 6 | 8;
 
     /**
      * Allowable dice values.
@@ -13,3 +11,5 @@ declare global {
     export type PolyhedralDie = `d${PolyhedralDieFaces}`;
   }
 }
+
+export {};

@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -41,8 +41,8 @@ export default class ExpirationActivation extends BaseActivation {
   get typeIcon() {
     return this.display.icon
       || (this.expirationDocument?.method === "roll"
-        ? TERIOCK.display.icons.manifest.ui.dice
-        : TERIOCK.display.icons.manifest.pseudoDocument.expiration)
+        ? TERIOCK.DISPLAY.icons.manifest.ui.dice
+        : TERIOCK.DISPLAY.icons.manifest.pseudoDocument.expiration)
       || this.metadata.icon;
   }
 

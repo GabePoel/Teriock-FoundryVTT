@@ -1,4 +1,4 @@
-import piercingConfig from "../../../../constants/config/piercing-config.mjs";
+import piercingConfig from "../../../../static/config/piercing-config.mjs";
 import { objectMap } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 

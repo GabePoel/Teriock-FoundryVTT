@@ -128,7 +128,7 @@ function addShareImageToHeader(application, controls) {
   if (!application.window.header) { return; }
   controls.push({
     action: "shareImageInChat",
-    icon: makeIconClass(TERIOCK.display.icons.manifest.ui.shareImage, "contextMenu"),
+    icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.shareImage, "contextMenu"),
     label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
     onClick: () => TeriockChatMessage.fromImg(application.options.src),
   });
@@ -145,7 +145,7 @@ function addWikiOpenToHeader(application, controls) {
   if (application.document.system?.metadata?.tags?.wiki && application.document.system.isOnWiki) {
     controls.push({
       action: "wikiOpenThis",
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.wiki, "contextMenu"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.wiki, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
       onClick: () => application.document.system.wikiOpen(),
     });

@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../../../applications/ux/_module.mjs";
-import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
+import equipmentConfig from "../../../../../../static/config/equipment-config.mjs";
 import {
   buildWriteOperation,
   fromIdentifier,
@@ -60,7 +60,7 @@ export default function EquipmentIdentificationPart(Base) {
       for (const f of super._displayFieldsContent) {
         if (identifiedFields.includes(f)) {
           fields.push({
-            classes: [TERIOCK.display.panels.styles.faded],
+            classes: [TERIOCK.DISPLAY.panels.styles.faded],
             gmOnly: true,
             path: f.replace("system", "system.identification"),
             visible: !this.identification[f.slice("system.")],
@@ -106,19 +106,19 @@ export default function EquipmentIdentificationPart(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.identify, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.identify, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
         onClick: this.identify.bind(this),
         visible: this.parent.isOwner && !this.identification.identified,
       }, {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.readMagic, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
         onClick: this.readMagic.bind(this),
         visible: this.parent.isOwner && !this.identification.identified && !this.identification.read,
       }, {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unidentify, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.unidentify, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
         onClick: this.unidentify.bind(this),
         visible: this.parent.isOwner && this.identification.identified && game.user.isGM,
@@ -202,7 +202,7 @@ export default function EquipmentIdentificationPart(Base) {
           content,
           modal: false,
           window: {
-            icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.readMagic, "title"),
+            icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "title"),
             title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.title"),
           },
         });
@@ -233,7 +233,7 @@ export default function EquipmentIdentificationPart(Base) {
      */
     async unidentify() {
       if (this.identification.identified && game.user.isGM) {
-        const uncheckedPropertyIdentifiers = [...TERIOCK.config.equipment.unidentifiedProperties];
+        const uncheckedPropertyIdentifiers = [...TERIOCK.CONFIG.equipment.unidentifiedProperties];
         const reference = await fromIdentifier(this.equipmentType);
         if (reference) {
           uncheckedPropertyIdentifiers.push(...reference.previewedTypes.property.map(p => p.system.identifier));

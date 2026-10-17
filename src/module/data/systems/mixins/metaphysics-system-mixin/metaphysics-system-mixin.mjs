@@ -20,9 +20,9 @@ export default function MetaphysicsSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        effectTypes: identifierSetField(TERIOCK.config.metaphysics.effectTypes),
-        elements: identifierSetField(TERIOCK.config.metaphysics.elements),
-        powerSources: identifierSetField(TERIOCK.config.metaphysics.powerSources),
+        effectTypes: identifierSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
+        elements: identifierSetField(TERIOCK.CONFIG.metaphysics.elements),
+        powerSources: identifierSetField(TERIOCK.CONFIG.metaphysics.powerSources),
       });
     }
 
@@ -69,7 +69,7 @@ export default function MetaphysicsSystemMixin(Base) {
      */
     get _metaphysicsBar() {
       return {
-        icon: TERIOCK.display.icons.manifest.ability.effectType,
+        icon: TERIOCK.DISPLAY.icons.manifest.ability.effectType,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
         wrappers: Panel.simplifyTags(this._metaphysicsTags),
       };
@@ -83,19 +83,19 @@ export default function MetaphysicsSystemMixin(Base) {
       return [
         ...Array.from(this.powerSources).map(t => {
           return {
-            label: TERIOCK.config.metaphysics.powerSources[t]?.label,
+            label: TERIOCK.CONFIG.metaphysics.powerSources[t]?.label,
             tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
           };
         }),
         ...Array.from(this.elements).map(t => {
           return {
-            label: TERIOCK.config.metaphysics.elements[t]?.label,
+            label: TERIOCK.CONFIG.metaphysics.elements[t]?.label,
             tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
           };
         }),
         ...Array.from(this.effectTypes).filter(t => !this.powerSources.has(t)).map(t => {
           return {
-            label: TERIOCK.config.metaphysics.effectTypes[t]?.label,
+            label: TERIOCK.CONFIG.metaphysics.effectTypes[t]?.label,
             tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
           };
         }),
@@ -131,7 +131,7 @@ export default function MetaphysicsSystemMixin(Base) {
 
       // Enforce power sources
       for (const ps of this.powerSources) {
-        if (ps in TERIOCK.config.metaphysics.effectTypes && !this.effectTypes.has(ps)) {
+        if (ps in TERIOCK.CONFIG.metaphysics.effectTypes && !this.effectTypes.has(ps)) {
           this.effectTypes.add(ps);
         }
       }

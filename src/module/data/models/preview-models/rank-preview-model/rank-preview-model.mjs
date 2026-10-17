@@ -36,7 +36,7 @@ export default class RankPreviewModel extends BasePreviewModel {
       archetype: archetypeField({ initial: null, nullable: true }),
       class: classField({ initial: null, nullable: true }),
       kind: nullStringField({
-        choices: objectMap(TERIOCK.config.class.kind, v => v.label),
+        choices: objectMap(TERIOCK.CONFIG.class.kind, v => v.label),
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
     });

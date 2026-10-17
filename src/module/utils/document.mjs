@@ -73,7 +73,7 @@ export function getName(identifier) {
  */
 export function getIcon(identifier) {
   const parsed = parseIdentifier(identifier);
-  return getSystemClass(parsed?.type)?.metadata.icon ?? TERIOCK.display.icons.manifest.ui.document;
+  return getSystemClass(parsed?.type)?.metadata.icon ?? TERIOCK.DISPLAY.icons.manifest.ui.document;
 }
 
 /**

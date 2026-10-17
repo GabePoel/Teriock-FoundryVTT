@@ -1,4 +1,4 @@
-import { icons } from "../constants/display/_module.mjs";
+import { icons } from "../static/display/_module.mjs";
 import { createElement } from "./display.mjs";
 
 /**
@@ -67,7 +67,7 @@ export function getRollIcon(rollFormula) {
  */
 export function asInf(val) {
   if (["", Infinity, null, undefined].includes(val)) {
-    return makeIcon(TERIOCK.display.icons.manifest.ui.infinity, "text");
+    return makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.infinity, "text");
   }
   return val;
 }

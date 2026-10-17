@@ -1,6 +1,6 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import effectConfig from "../../../../constants/config/effect-config.mjs";
+import effectConfig from "../../../../static/config/effect-config.mjs";
 import { deleteProperties, mergeMetadata, mixClasses, objectMap, toId } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
@@ -162,7 +162,10 @@ export default class AddDocumentsAutomation
     ];
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<HTMLDivElement>}
+   */
   async getEditor(config) {
     const editor = await super.getEditor(config);
     const childEditorElements = await Promise.all(this.rootNodes.map(n => n.getEditor(config)));
@@ -171,7 +174,7 @@ export default class AddDocumentsAutomation
       formEditor: "",
       parentUuid: this.uuid,
     });
-    const container = foundry.utils.parseHTML(html);
+    const container = /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);
     container.querySelector(".construction-node-editor")?.replaceChildren(editor);
     const listItemElements = container.querySelectorAll(".construction-node-list-item");
     childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));

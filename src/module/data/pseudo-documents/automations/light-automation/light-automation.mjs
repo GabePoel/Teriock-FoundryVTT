@@ -53,7 +53,7 @@ export default class LightAutomation extends BaseAutomation {
     return this.actor?.system.settings.getSetting("autoLighting")
       ? [{
         key: "token.light",
-        phase: TERIOCK.config.change.defaultPhase,
+        phase: TERIOCK.CONFIG.change.defaultPhase,
         priority: Math.max(this.light.dim ?? 0, this.light.bright ?? 0),
         qualifier: "1",
         target: "Actor",

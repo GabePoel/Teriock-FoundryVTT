@@ -85,7 +85,7 @@ export default function ChatMessageConnectionMixin(Base) {
     #connectImageContextMenu() {
       this._createContextMenu(
         () => [{
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.image, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.image, "contextMenu"),
           label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
           onClick: async (_ev, target) => {
             await new ImagePopout({

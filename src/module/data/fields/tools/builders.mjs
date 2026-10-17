@@ -1,11 +1,11 @@
 import { FormulaField, IdentifierField } from "../_module.mjs";
-import attributeConfig from "../../../constants/config/attribute-config.mjs";
-import classConfig from "../../../constants/config/class-config.mjs";
-import competenceConfig from "../../../constants/config/competence-config.mjs";
-import dieConfig from "../../../constants/config/death-bag-config.mjs";
-import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
-import { thumbnails } from "../../../constants/display/_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
+import attributeConfig from "../../../static/config/attribute-config.mjs";
+import classConfig from "../../../static/config/class-config.mjs";
+import competenceConfig from "../../../static/config/competence-config.mjs";
+import dieConfig from "../../../static/config/death-bag-config.mjs";
+import tradecraftConfig from "../../../static/config/tradecraft-config.mjs";
+import { thumbnails } from "../../../static/display/_module.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../utils/_module.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
 
@@ -88,9 +88,9 @@ export function qualifiedChangeField() {
   return new SchemaField({
     key: new StringField({ initial: "", label: "EFFECT.FIELDS.changes.element.key.label" }),
     phase: new StringField({
-      choices: objectMap(TERIOCK.config.change.phase, (p) => p.label, { localize: true, filter: p => p.visible }),
+      choices: objectMap(TERIOCK.CONFIG.change.phase, (p) => p.label, { localize: true, filter: p => p.visible }),
       hint: "EFFECT.FIELDS.changes.element.phase.hint",
-      initial: TERIOCK.config.change.defaultPhase,
+      initial: TERIOCK.CONFIG.change.defaultPhase,
       label: "EFFECT.FIELDS.changes.element.phase.label",
       required: true,
     }),
@@ -102,7 +102,7 @@ export function qualifiedChangeField() {
       required: false,
     }),
     target: new StringField({
-      choices: objectMap(TERIOCK.config.change.parent.targets, (t) => t, { localize: true }),
+      choices: objectMap(TERIOCK.CONFIG.change.parent.targets, (t) => t, { localize: true }),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
@@ -386,7 +386,7 @@ export function defenseField(options = {}) {
 export function tradecraftField(options = {}) {
   return new IdentifierField({
     choices: getTradecraftChoices(),
-    initial: Object.keys(TERIOCK.config.tradecraft.tradecrafts)[0],
+    initial: Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts)[0],
     label: _sloc("TERIOCK.COMMON.Tradecraft"),
     nullable: false,
     type: "tradecraft",

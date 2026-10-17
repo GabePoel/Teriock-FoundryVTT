@@ -98,7 +98,7 @@ export default function BaseDocumentMixin(Base) {
           data,
           documentName: this.documentName,
           operation,
-        }, { timeout: TERIOCK.config.system.timeout.writeOperation });
+        }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
         if (!docs) { return data.map(_d => null); }
         return Promise.all(docs.map(d => fromUuid(d)));
       }
@@ -117,7 +117,7 @@ export default function BaseDocumentMixin(Base) {
           documentName: this.documentName,
           ids,
           operation,
-        }, { timeout: TERIOCK.config.system.timeout.writeOperation });
+        }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
         if (!docs) { return ids.map(_d => null); }
         return docs;
       }
@@ -142,7 +142,7 @@ export default function BaseDocumentMixin(Base) {
           documentName: this.documentName,
           operation,
           updates,
-        }, { timeout: TERIOCK.config.system.timeout.writeOperation });
+        }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
         if (!docs) { return updates.map(_d => null); }
         return Promise.all(docs.map(d => fromUuid(d)));
       }

@@ -40,7 +40,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
    * @returns {Promise<Teriock.Panels.PanelParts[]>}
    */
   async #preparePanelContext() {
-    if (!this.parent.isContentVisible) { return [TERIOCK.display.panels.common.unknown]; }
+    if (!this.parent.isContentVisible) { return [TERIOCK.DISPLAY.panels.common.unknown]; }
     const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
     return Promise.all(
       this.panels.contents.map(p => p?.prepareContext({ relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })),

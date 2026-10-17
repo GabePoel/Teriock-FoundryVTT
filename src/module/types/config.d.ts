@@ -1,5 +1,5 @@
-import changeConfig from "../constants/config/change-config.mjs";
-import tipConfig from "../constants/config/tip-config.mjs";
+import changeConfig from "../static/config/change-config.mjs";
+import tipConfig from "../static/config/tip-config.mjs";
 
 declare global {
   namespace Teriock.Config {

@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 
@@ -135,7 +135,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
     if (partId === "footer") {
       context.buttons = [{
         default: true,
-        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done),
         label: _loc("COMMON.Confirm"),
         type: "submit",
       }];

@@ -42,9 +42,9 @@ export default function ActorRestingPart(Base) {
           itemUpdates.push(itemUpdate);
         }
       }
-      if (options.conditions) { statuses.push(...Object.values(TERIOCK.statuses.conditions).map(s => s.id)); }
-      if (options.hacks) { statuses.push(...Object.values(TERIOCK.statuses.hacks).map(s => s.id)); }
-      if (options.cover) { statuses.push(...Object.values(TERIOCK.statuses.cover).map(s => s.id)); }
+      if (options.conditions) { statuses.push(...Object.values(TERIOCK.STATUSES.conditions).map(s => s.id)); }
+      if (options.hacks) { statuses.push(...Object.values(TERIOCK.STATUSES.hacks).map(s => s.id)); }
+      if (options.cover) { statuses.push(...Object.values(TERIOCK.STATUSES.cover).map(s => s.id)); }
       await this.parent.updateEmbeddedDocuments("Item", itemUpdates);
       await this.parent.update(actorUpdate);
       await this.parent.removeStatusEffects(statuses.filter(s => this.parent.statuses.has(s)));

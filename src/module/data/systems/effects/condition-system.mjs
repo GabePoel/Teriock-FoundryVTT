@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../mixins/_module.mjs";
 import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -50,7 +50,7 @@ export default class ConditionSystem
    * @returns {string}
    */
   get conditionKey() {
-    return foundry.utils.invertObject(objectMap(TERIOCK.statuses.conditions, (c) => c._id))[this.parent.id];
+    return foundry.utils.invertObject(objectMap(TERIOCK.STATUSES.conditions, (c) => c._id))[this.parent.id];
   }
 
   /** @inheritDoc */
@@ -69,7 +69,7 @@ export default class ConditionSystem
     if (yes === false) { return false; }
 
     // If this is a known condition, have it use the static ID.
-    if (data?.system?.identifier && Object.keys(TERIOCK.statuses.conditions).includes(data.system.identifier)) {
+    if (data?.system?.identifier && Object.keys(TERIOCK.STATUSES.conditions).includes(data.system.identifier)) {
       options.keepId = true;
     }
     if (data.disabled === true) { return false; }

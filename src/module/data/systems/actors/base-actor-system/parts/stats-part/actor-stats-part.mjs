@@ -1,5 +1,5 @@
 import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
-import statConfig from "../../../../../../constants/config/stat-config.mjs";
+import statConfig from "../../../../../../static/config/stat-config.mjs";
 import { pathSorterFactory } from "../../../../../../utils/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 

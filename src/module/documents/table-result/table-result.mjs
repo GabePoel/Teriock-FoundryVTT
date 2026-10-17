@@ -69,12 +69,12 @@ export default class TeriockTableResult extends mixClasses(TableResult, BaseDocu
   async getPanelParts() {
     /** @type {Teriock.Panels.PanelParts} */
     const parts = await super.getPanelParts();
-    parts.icon = TERIOCK.display.icons.manifest.document.tableResult;
+    parts.icon = TERIOCK.DISPLAY.icons.manifest.document.tableResult;
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
     parts.img = this.icon;
     parts.blocks.push({ text: this.description, title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label") });
     parts.bars.push({
-      icon: TERIOCK.display.icons.manifest.ui.info,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
       label: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.resultType"),
       wrappers: [this.type],
     });

@@ -1,36 +1,36 @@
-import type statConfig from "../constants/config/stat-config.mjs";
+import type statConfig from "../static/config/stat-config.mjs";
 
-import { config, display, statuses } from "../constants/_module.mjs";
+import { CONFIG, DISPLAY, STATUSES } from "../static/_module.mjs";
 
 declare global {
   namespace Teriock.Keys {
     // Tradecraft Keys
-    export type Field = keyof typeof config.tradecraft.fields;
-    export type Tradecraft = keyof typeof config.tradecraft.tradecrafts;
+    export type Field = keyof typeof CONFIG.tradecraft.fields;
+    export type Tradecraft = keyof typeof CONFIG.tradecraft.tradecrafts;
 
     // Ability Keys
-    export type Maneuver = keyof typeof config.ability.maneuver;
-    export type Interaction = keyof typeof config.ability.interaction;
-    export type Target = keyof typeof config.ability.targets;
-    export type Delivery = keyof typeof config.ability.delivery;
-    export type ActiveExecutionTime = keyof typeof config.ability.executionTime.active;
-    export type ReactiveExecutionTime = keyof typeof config.ability.executionTime.reactive;
-    export type PassiveExecutionTime = keyof typeof config.ability.executionTime.passive;
-    export type SlowExecutionTime = keyof typeof config.ability.executionTime.slow;
+    export type Maneuver = keyof typeof CONFIG.ability.maneuver;
+    export type Interaction = keyof typeof CONFIG.ability.interaction;
+    export type Target = keyof typeof CONFIG.ability.targets;
+    export type Delivery = keyof typeof CONFIG.ability.delivery;
+    export type ActiveExecutionTime = keyof typeof CONFIG.ability.executionTime.active;
+    export type ReactiveExecutionTime = keyof typeof CONFIG.ability.executionTime.reactive;
+    export type PassiveExecutionTime = keyof typeof CONFIG.ability.executionTime.passive;
+    export type SlowExecutionTime = keyof typeof CONFIG.ability.executionTime.slow;
     export type ExecutionTime =
       | Teriock.Keys.ActiveExecutionTime
       | Teriock.Keys.PassiveExecutionTime
       | Teriock.Keys.ReactiveExecutionTime
       | Teriock.Keys.SlowExecutionTime;
-    export type Expansion = keyof typeof config.ability.expansion;
-    export type Effect = keyof typeof config.wiki.index.effect;
+    export type Expansion = keyof typeof CONFIG.ability.expansion;
+    export type Effect = keyof typeof CONFIG.wiki.index.effect;
 
     // Tag Keys
-    export type Element = keyof typeof config.wiki.index.element;
-    export type Source = keyof typeof config.wiki.index.source;
+    export type Element = keyof typeof CONFIG.wiki.index.element;
+    export type Source = keyof typeof CONFIG.wiki.index.source;
 
     // Attribute Keys
-    export type Attribute = keyof typeof config.attribute;
+    export type Attribute = keyof typeof CONFIG.attribute;
 
     // Stat Keys
     export type Stat = keyof typeof statConfig;
@@ -40,73 +40,73 @@ declare global {
 
     // Impact Keys
     export type PayMode = "exact" | "greedy";
-    export type DeathBagStoneColor = keyof typeof config.deathBag.stones;
-    export type Impact = keyof typeof config.impact;
-    export type CommonCommand = keyof typeof config.command.common;
+    export type DeathBagStoneColor = keyof typeof CONFIG.deathBag.stones;
+    export type Impact = keyof typeof CONFIG.impact;
+    export type CommonCommand = keyof typeof CONFIG.command.common;
 
     // Armament Keys
-    export type Classification = keyof typeof config.wiki.index.classification;
-    export type Style = keyof typeof config.wiki.index.style;
-    export type EquipmentKind = keyof typeof config.equipment.kind;
+    export type Classification = keyof typeof CONFIG.wiki.index.classification;
+    export type Style = keyof typeof CONFIG.wiki.index.style;
+    export type EquipmentKind = keyof typeof CONFIG.equipment.kind;
     /** @deprecated Use {@link EquipmentKind} */
     export type PowerLevel = EquipmentKind;
 
     // Property Keys
-    export type Property = keyof typeof config.wiki.index.property;
+    export type Property = keyof typeof CONFIG.wiki.index.property;
 
     // Species Keys
-    export type Trait = keyof typeof config.wiki.index.trait;
+    export type Trait = keyof typeof CONFIG.wiki.index.trait;
 
     // Kind Keys
-    export type Kind = keyof typeof config.system.defaultKinds;
-    export type PowerKind = keyof typeof config.power.kind;
-    export type EffectKind = keyof typeof config.effect.kind;
-    export type AttunementKind = keyof typeof config.attunement.kind;
-    export type RankKind = keyof typeof config.class.kind;
+    export type Kind = keyof typeof CONFIG.system.defaultKinds;
+    export type PowerKind = keyof typeof CONFIG.power.kind;
+    export type EffectKind = keyof typeof CONFIG.effect.kind;
+    export type AttunementKind = keyof typeof CONFIG.attunement.kind;
+    export type RankKind = keyof typeof CONFIG.class.kind;
 
     // Effect Keys
-    export type ApplicationTarget = keyof typeof config.effect.applicationTargets;
-    export type IllusionLevel = keyof typeof config.illusion.level;
-    export type TransformationLevel = keyof typeof config.transformation.level;
+    export type ApplicationTarget = keyof typeof CONFIG.effect.applicationTargets;
+    export type IllusionLevel = keyof typeof CONFIG.illusion.level;
+    export type TransformationLevel = keyof typeof CONFIG.transformation.level;
 
     // Display Keys
-    export type Color = keyof typeof display.colors;
-    export type CardDisplaySize = keyof typeof config.display.sizes;
+    export type Color = keyof typeof DISPLAY.colors;
+    export type CardDisplaySize = keyof typeof CONFIG.display.sizes;
 
     // Status Keys
-    export type HackableBodyPart = keyof typeof config.hack;
-    export type Condition = keyof typeof statuses.conditions;
-    export type Cover = keyof typeof statuses.cover;
-    export type Hack = keyof typeof statuses.hacks;
+    export type HackableBodyPart = keyof typeof CONFIG.hack;
+    export type Condition = keyof typeof STATUSES.conditions;
+    export type Cover = keyof typeof STATUSES.cover;
+    export type Hack = keyof typeof STATUSES.hacks;
     export type Status = Condition | Cover | Hack;
 
     // Rank Keys
-    export type Archetype = keyof typeof config.class.archetypes;
-    export type Class = keyof typeof config.class.classes;
+    export type Archetype = keyof typeof CONFIG.class.archetypes;
+    export type Class = keyof typeof CONFIG.class.classes;
 
     // Cost Keys
-    export type Component = keyof typeof config.cost.components.keys;
+    export type Component = keyof typeof CONFIG.cost.components.keys;
     export type PrimaryCost = keyof typeof statConfig;
-    export type CostTweak = keyof typeof config.cost.tweaks;
+    export type CostTweak = keyof typeof CONFIG.cost.tweaks;
 
     // Affinity Keys
-    export type AffinityType = keyof typeof config.affinity.types;
+    export type AffinityType = keyof typeof CONFIG.affinity.types;
 
     // Category Keys
-    export type Category = keyof typeof config.category;
+    export type Category = keyof typeof CONFIG.category;
 
     // Character Keys
-    export type Currency = keyof typeof config.currency;
-    export type Movement = keyof typeof config.character.movement;
-    export type Sense = keyof typeof config.character.sense;
-    export type Speed = keyof typeof config.character.speed;
+    export type Currency = keyof typeof CONFIG.currency;
+    export type Movement = keyof typeof CONFIG.character.movement;
+    export type Sense = keyof typeof CONFIG.character.sense;
+    export type Speed = keyof typeof CONFIG.character.speed;
 
     // Math Keys
-    export type Comparison = keyof typeof config.math.comparisons;
+    export type Comparison = keyof typeof CONFIG.math.comparisons;
 
     // Combat Keys
-    export type CombatEvent = keyof typeof config.combat.event;
-    export type CombatRelation = keyof typeof config.combat.relation;
-    export type CombatTiming = keyof typeof config.combat.timing;
+    export type CombatEvent = keyof typeof CONFIG.combat.event;
+    export type CombatRelation = keyof typeof CONFIG.combat.relation;
+    export type CombatTiming = keyof typeof CONFIG.combat.timing;
   }
 }

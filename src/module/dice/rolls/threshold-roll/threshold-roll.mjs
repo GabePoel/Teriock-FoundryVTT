@@ -1,4 +1,4 @@
-import mathConfig from "../../../constants/config/math-config.mjs";
+import mathConfig from "../../../static/config/math-config.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
 class Threshold {
@@ -45,8 +45,8 @@ class Threshold {
    * @returns {string|undefined}
    */
   get icon() {
-    if (this.level <= -1) { return TERIOCK.display.icons.manifest.ui.disable; }
-    if (this.level >= 1) { return TERIOCK.display.icons.manifest.ui.enable; }
+    if (this.level <= -1) { return TERIOCK.DISPLAY.icons.manifest.ui.disable; }
+    if (this.level >= 1) { return TERIOCK.DISPLAY.icons.manifest.ui.enable; }
   }
 
   /**

@@ -17,7 +17,7 @@ export default class AttackRollExecution extends mixClasses(BaseExecution, Attac
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.interaction.attack;
+    return TERIOCK.DISPLAY.icons.manifest.interaction.attack;
   }
 
   /** @inheritDoc */

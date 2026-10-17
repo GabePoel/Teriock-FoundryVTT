@@ -17,7 +17,7 @@ export default class FeatAutomation extends mixClasses(ThresholdAutomation, Trig
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       attribute: new fields.StringField({
-        choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
+        choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, { localize: true }),
         initial: "int",
         label: "TERIOCK.COMMON.Attribute",
         required: true,

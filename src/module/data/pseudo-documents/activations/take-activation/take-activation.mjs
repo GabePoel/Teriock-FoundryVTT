@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
@@ -20,7 +20,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
    * @returns {Teriock.Config.ImpactEntry}
    */
   get #entry() {
-    return TERIOCK.config.impact[this.impact];
+    return TERIOCK.CONFIG.impact[this.impact];
   }
 
   /**

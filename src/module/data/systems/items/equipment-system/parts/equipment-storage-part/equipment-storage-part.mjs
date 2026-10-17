@@ -144,7 +144,7 @@ export default function EquipmentStoragePart(Base) {
       if (this.stashed) { return 0; }
       let total = this.weight * (this.consumable ? this.quantity.value : 1) * this.weightMultiplier;
       if (this.storage.enabled) { total += this.storage.weight.value; }
-      return total.toNearest(TERIOCK.config.system.unitPrecision);
+      return total.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
     /** @inheritDoc */
@@ -233,7 +233,7 @@ export default function EquipmentStoragePart(Base) {
       const entries = super.getEmbedContextMenuEntries(doc);
       entries.push(...[{
         group: "document",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.stack, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.stack, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
         onClick: async () => await this.groupStackDialog(),
         visible: () =>
@@ -243,7 +243,7 @@ export default function EquipmentStoragePart(Base) {
           && this.getNearestDocument().isOwner && this.getNearestDocument().checkAncestor(doc),
       }, {
         group: "document",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unstack, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.unstack, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         onClick: async () => await this.groupUnstackDialog(),
         visible: () =>
@@ -279,7 +279,7 @@ export default function EquipmentStoragePart(Base) {
       const chosen = await DocumentSelector.selectSingle(candidates, {
         auto: true,
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.hint"),
-        icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.stack, "title"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.stack, "title"),
         openable: true,
         textKey: "system.remainingString",
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
@@ -360,7 +360,7 @@ export default function EquipmentStoragePart(Base) {
           },
         },
         window: {
-          icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.unstack, "title"),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.unstack, "title"),
           title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         },
       });
@@ -385,7 +385,7 @@ export default function EquipmentStoragePart(Base) {
         value: {
           get: () =>
             stored().map(e => e.system?.totalWeight ?? 0).reduce((a, b) => a + b, 0).toNearest(
-              TERIOCK.config.system.unitPrecision,
+              TERIOCK.CONST.UNIT_PRECISION,
             ),
         },
       });
@@ -403,7 +403,7 @@ export default function EquipmentStoragePart(Base) {
     /** @inheritDoc */
     prepareSpecialData() {
       super.prepareSpecialData();
-      this.weight = this.weight.toNearest(TERIOCK.config.system.unitPrecision);
+      this.weight = this.weight.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
   }
 

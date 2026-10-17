@@ -1,4 +1,3 @@
-import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 
@@ -50,7 +49,7 @@ export default function ActorSensesPart(Base) {
           }),
         }),
         senses: new fields.SchemaField({
-          ...objectMap(config.character.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
+          ...objectMap(TERIOCK.CONFIG.character.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
         }),
       });
     }

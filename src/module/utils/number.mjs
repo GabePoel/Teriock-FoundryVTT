@@ -14,5 +14,5 @@ export function barClamp(bar, change) {
  * @returns {number}
  */
 export function safeInf(n) {
-  return n === Infinity ? TERIOCK.config.system.safeInf : n;
+  return n === Infinity ? TERIOCK.CONST.SAFE_INF : n;
 }

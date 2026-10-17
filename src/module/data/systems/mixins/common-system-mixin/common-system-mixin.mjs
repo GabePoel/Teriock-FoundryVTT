@@ -128,7 +128,7 @@ export default function CommonSystemMixin(Base) {
     _getPanelCardContextMenuEntry() {
       return {
         group: "share",
-        icon: makeIcon(TERIOCK.display.icons.manifest.ui.panel),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.panel),
         label: _loc("TERIOCK.SHEETS.Panel.OPEN"),
         onClick: async () => await this.getNearestDocument().openPanelSheet(),
         visible: () => game.settings.get("teriock", "openPanelContextMenuEntry") && this.getNearestDocument().isViewer,

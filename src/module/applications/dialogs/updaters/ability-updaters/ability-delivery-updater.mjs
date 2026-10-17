@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -22,7 +22,7 @@ export default class AbilityDeliveryUpdater extends BaseUpdater {
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["system.delivery"];
-    if (TERIOCK.config.ability.delivery[this._currentData.system.delivery]?.allowPiercing) {
+    if (TERIOCK.CONFIG.ability.delivery[this._currentData.system.delivery]?.allowPiercing) {
       paths.push("system.piercing.raw");
     }
     return paths;

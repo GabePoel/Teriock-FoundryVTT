@@ -13,19 +13,19 @@
         >
           <i
             {{#if (eq system.cover 0)}}
-              class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "solid"}}'
+              class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.ui.off "solid"}}'
               data-tooltip='{{localize "TERIOCK.STATUSES.Cover.noCover"}}'
             {{/if}}
             {{#if (eq system.cover 1)}}
-              class='{{makeIconClass TERIOCK.display.icons.manifest.cover.half "solid"}}'
+              class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.cover.half "solid"}}'
               data-tooltip='{{localize "TERIOCK.STATUSES.Cover.halfCover"}}'
             {{/if}}
             {{#if (eq system.cover 2)}}
-              class='{{makeIconClass TERIOCK.display.icons.manifest.cover.partial "solid"}}'
+              class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.cover.partial "solid"}}'
               data-tooltip='{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}'
             {{/if}}
             {{#if (eq system.cover 3)}}
-              class='{{makeIconClass TERIOCK.display.icons.manifest.cover.full "solid"}}'
+              class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.cover.full "solid"}}'
               data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
             {{/if}}
           ></i>
@@ -39,7 +39,7 @@
           class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.ac"}}'
           type="button"
           data-action="updatePaths"
-          data-icon="{{ TERIOCK.display.icons.manifest.armament.av }}"
+          data-icon="{{ TERIOCK.DISPLAY.icons.manifest.armament.av }}"
           data-paths="system.defense.ac"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'
         >
@@ -57,7 +57,7 @@
           class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.bv"}}'
           type="button"
           data-action="updatePaths"
-          data-icon="{{ TERIOCK.display.icons.manifest.armament.bv }}"
+          data-icon="{{ TERIOCK.DISPLAY.icons.manifest.armament.bv }}"
           data-paths="system.defense.bv"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'
         >
@@ -90,7 +90,7 @@
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollBlock"}}'
               data-disable="false"
             >
-              <i class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.block "light"}}'></i>
+              <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.interaction.block "light"}}'></i>
             </button>
             <button
               id="{{ @root/appId }}-block-interact"
@@ -102,7 +102,7 @@
               data-deal-impacts="false"
               data-disable="false"
             >
-              <i class='{{makeIconClass TERIOCK.display.icons.manifest.effect.interact "light"}}'></i>
+              <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.effect.interact "light"}}'></i>
             </button>
             <button
               id="{{ @root/appId }}-block-open"
@@ -112,7 +112,7 @@
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}'
               data-disable="false"
             >
-              <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}}'></i>
+              <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.ui.openWindow "light"}}'></i>
             </button>
           {{/if}}
         </div>
@@ -169,7 +169,7 @@
             data-action="toggleReaction"
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
           >
-            <i class='{{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen reactions "on" "off")) "light"}}'
+            <i class='{{makeIconClass (path TERIOCK.DISPLAY.icons.manifest.ui (ifThen reactions "on" "off")) "light"}}'
             ></i>
           </button>
         </div>
@@ -200,7 +200,7 @@
           class="actor-stat-value updatable"
           type="button"
           data-action="updatePaths"
-          data-icon="{{ TERIOCK.display.icons.manifest.piercing.ub }}"
+          data-icon="{{ TERIOCK.DISPLAY.icons.manifest.piercing.ub }}"
           data-paths="system.offense.piercing.raw"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.tooltip"}}'
         >
@@ -224,7 +224,7 @@
                 {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.av0.normal"}}
               {{/if}}
             {{else}}
-              <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.off "light"}}'></i>
+              <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.ui.off "light"}}'></i>
             {{/if}}
           {{/if}}
         </button>
@@ -240,7 +240,7 @@
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}'
         >
           <i
-            class='{{makeIconClass (path TERIOCK.display.icons.manifest.ui (ifThen system.offense.sb "on" "off")) "light"}}'
+            class='{{makeIconClass (path TERIOCK.DISPLAY.icons.manifest.ui (ifThen system.offense.sb "on" "off")) "light"}}'
           ></i>
         </button>
       </div>
@@ -259,7 +259,7 @@
             data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollAttack"}}'
             data-disable="false"
           >
-            <i class='{{makeIconClass TERIOCK.display.icons.manifest.interaction.attack "light"}}'></i>
+            <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.interaction.attack "light"}}'></i>
           </button>
           {{#if (exists system.wielding.attacker)}}
             <button
@@ -272,7 +272,7 @@
               data-deal-impacts="true"
               data-disable="false"
             >
-              <i class='{{makeIconClass TERIOCK.display.icons.manifest.effect.dealDamage "light"}}'></i>
+              <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.effect.dealDamage "light"}}'></i>
             </button>
             <button
               id="{{ @root/appId }}-attack-open"
@@ -282,7 +282,7 @@
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.open"}}'
               data-disable="false"
             >
-              <i class='{{makeIconClass TERIOCK.display.icons.manifest.ui.openWindow "light"}}'></i>
+              <i class='{{makeIconClass TERIOCK.DISPLAY.icons.manifest.ui.openWindow "light"}}'></i>
             </button>
           {{/if}}
         </div>

@@ -98,7 +98,7 @@ export default function PlayableActorSheetAvatarImagePart(Base) {
         displayedImgDocument: this.#imageToDisplay,
         displayedImgIcon: this.#imageToDisplay === "actor"
           ? teriock.data.systems.actors.PlayableCharacterSystem.metadata.icon
-          : TERIOCK.display.icons.manifest.document.token,
+          : TERIOCK.DISPLAY.icons.manifest.document.token,
         displayedImgPath: this.displayedImgPath,
         displayedImgRing: this.#imageToDisplay === "token" && this.imgToken.ring.enabled,
         displayedImgTooltip: this.displayedImgTooltip,

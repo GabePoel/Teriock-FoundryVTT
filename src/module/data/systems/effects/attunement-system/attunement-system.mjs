@@ -1,5 +1,5 @@
-import attunementConfig from "../../../../constants/config/attunement-config.mjs";
-import { icons } from "../../../../constants/display/_module.mjs";
+import attunementConfig from "../../../../static/config/attunement-config.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { dotJoin, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
@@ -51,7 +51,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get _embedIcons() {
     return [{
       action: "deattuneDoc",
-      icon: TERIOCK.display.icons.manifest.attunable.deattune,
+      icon: TERIOCK.DISPLAY.icons.manifest.attunable.deattune,
       tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
       visible: this.parent.isOwner,
       onClick: async () => await this.deattune(),
@@ -99,7 +99,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
     );
     return [...entries, {
       group: "attunement",
-      icon: makeIcon(TERIOCK.display.icons.manifest.attunable.deattune, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.attunable.deattune, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
       onClick: async () => await this.deattune(),
     }];
@@ -114,7 +114,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   async getPanelParts() {
     const parts = await super.getPanelParts();
     parts.bars = this._withKindBar([{
-      icon: TERIOCK.display.icons.manifest.attunable.tier,
+      icon: TERIOCK.DISPLAY.icons.manifest.attunable.tier,
       label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
       wrappers: [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier || 0 })],
     }]);

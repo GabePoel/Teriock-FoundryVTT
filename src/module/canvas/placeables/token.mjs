@@ -28,7 +28,7 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
     await super._drawEffects();
     const promises = [];
     if (this.document.hasStatusEffect("encumbered") && this.document?.actor?.system.encumbranceLevel > 0) {
-      promises.push(this._drawEffect(TERIOCK.statuses.conditions.encumbered.img));
+      promises.push(this._drawEffect(TERIOCK.STATUSES.conditions.encumbered.img));
     }
     let overlayImg;
     if (this.document.hasStatusEffect("down") || this.document.hasStatusEffect("unconscious")) {
@@ -47,7 +47,7 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
 
   /** @inheritDoc */
   _getBarColors(index, data) {
-    const colors = TERIOCK.display.colors[data.attribute];
+    const colors = TERIOCK.DISPLAY.colors[data.attribute];
     if (colors?.base && colors?.darkest) {
       return { empty: Color.fromString(colors.darkest), full: Color.fromString(colors.base) };
     }

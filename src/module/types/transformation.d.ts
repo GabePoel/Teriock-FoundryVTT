@@ -1,6 +1,6 @@
-import statConfig from "../constants/config/stat-config.mjs";
-import transformationConfig from "../constants/config/transformation-config.mjs";
 import { CompetenceModel } from "../data/models/_module.mjs";
+import statConfig from "../static/config/stat-config.mjs";
+import transformationConfig from "../static/config/transformation-config.mjs";
 
 declare global {
   namespace Teriock.Transformation {

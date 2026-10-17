@@ -26,5 +26,5 @@ export function wikiIndexToConfig(indexKey, localizationPrefix) {
  * @returns {Teriock.Fields.DynamicChoiceGroup|undefined}
  */
 export function getTriggerGroup(trigger) {
-  return Object.values(TERIOCK.config.trigger).find(g => g.choices?.[trigger]);
+  return Object.values(TERIOCK.CONFIG.trigger).find(g => g.choices?.[trigger]);
 }

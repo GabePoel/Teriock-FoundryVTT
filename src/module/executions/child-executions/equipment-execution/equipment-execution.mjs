@@ -58,7 +58,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         blocks: [],
         icon: this.source.system.metadata.icon,
         img: game.teriock.identifiers.getImg(this.source.system.equipmentType)
-          ?? TERIOCK.display.thumbnails.manifest.document.equipment,
+          ?? TERIOCK.DISPLAY.thumbnails.manifest.document.equipment,
         name: getName(this.source.system.equipmentType),
       };
     }

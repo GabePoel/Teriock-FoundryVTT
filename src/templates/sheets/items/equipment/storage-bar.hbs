@@ -3,16 +3,16 @@
     {{formUpdater
       document
       abbreviation="ITEMS"
-      color=(ifThen system.storage.count.over TERIOCK.display.colors.palette.red null)
+      color=(ifThen system.storage.count.over TERIOCK.DISPLAY.colors.palette.red null)
       data=(ifThen
         (isFinite system.storage.count.max)
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.count.value denominator=system.storage.count.max)
         system.storage.count.value)
-      icon=TERIOCK.display.icons.manifest.equipment.maxCount
+      icon=TERIOCK.DISPLAY.icons.manifest.equipment.maxCount
       label=(localize
         (concat "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.count.max." (ifThen system.storage.count.over "over" "under")))
       path="system.storage.count.max"
-      placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
+      placeholder=(makeIcon TERIOCK.DISPLAY.icons.manifest.ui.infinity)
       source=(ifThen
         (eq system._source.storage.count.max null)
         system.storage.count.value
@@ -21,16 +21,16 @@
     {{formUpdater
       document
       abbreviation="lb"
-      color=(ifThen system.storage.weight.over TERIOCK.display.colors.palette.red null)
+      color=(ifThen system.storage.weight.over TERIOCK.DISPLAY.colors.palette.red null)
       data=(ifThen
         (isFinite system.storage.weight.max)
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.weight.value denominator=system.storage.weight.max)
         system.storage.weight.value)
-      icon=TERIOCK.display.icons.manifest.equipment.maxWeight
+      icon=TERIOCK.DISPLAY.icons.manifest.equipment.maxWeight
       label=(localize
         (concat "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.weight.max." (ifThen system.storage.weight.over "over" "under")))
       path="system.storage.weight.max"
-      placeholder=(makeIcon TERIOCK.display.icons.manifest.ui.infinity)
+      placeholder=(makeIcon TERIOCK.DISPLAY.icons.manifest.ui.infinity)
       source=(ifThen
         (eq system._source.storage.weight.max null)
         system.storage.weight.value
@@ -38,7 +38,7 @@
     }}
     {{formUpdater
       document
-      icon=TERIOCK.display.icons.manifest.equipment.weightMultiplier
+      icon=TERIOCK.DISPLAY.icons.manifest.equipment.weightMultiplier
       path="system.storage.weight.multiplier"
       placeholder="1"
     }}

@@ -197,7 +197,7 @@ export default function AttackExecutionMixin(Base) {
       const generalRollOptions = Object.assign(this.rollOptions, { styles, targets: [] });
       generalRollOptions.thresholds.push(...ThresholdRoll.defaultOptions.thresholds);
       if (this.piercing.ub) {
-        generalRollOptions.styles.dice.icon = TERIOCK.display.icons.manifest.piercing.ub;
+        generalRollOptions.styles.dice.icon = TERIOCK.DISPLAY.icons.manifest.piercing.ub;
         generalRollOptions.styles.dice.classes.push("ub");
         generalRollOptions.styles.dice.tooltip = _loc("TERIOCK.TERMS.Properties.unblockable");
       }
@@ -211,8 +211,8 @@ export default function AttackExecutionMixin(Base) {
             threshold = target.actor.system.defense.ac;
             comparison = "gt";
           }
-          if (this.limb) { threshold += TERIOCK.config.system.target.limb; }
-          else if (this.vitals) { threshold += TERIOCK.config.system.target.vitals; }
+          if (this.limb) { threshold += TERIOCK.CONFIG.system.target.limb; }
+          else if (this.vitals) { threshold += TERIOCK.CONFIG.system.target.vitals; }
           rollOptions.thresholds = [...ThresholdRoll.defaultOptions.thresholds, {
             comparison,
             inverse: true,

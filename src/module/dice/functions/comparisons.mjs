@@ -1,4 +1,4 @@
-import mathConfig from "../../constants/config/math-config.mjs";
+import mathConfig from "../../static/config/math-config.mjs";
 import { objectMap } from "../../utils/_module.mjs";
 
 const comparisons = objectMap(mathConfig.comparisons, (c) => c.fn);

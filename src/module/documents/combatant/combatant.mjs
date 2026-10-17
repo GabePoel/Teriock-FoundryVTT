@@ -44,10 +44,10 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
    * @version 368
    */
   _getInitiativeFormula() {
-    const base = TERIOCK.config.character.defaults.initiative.base;
+    const base = TERIOCK.CONFIG.character.defaults.initiative.base;
     const competence = this.initiativeModel.competence.formula
-      ?? TERIOCK.config.character.defaults.initiative.competence;
-    const bonus = this.initiativeModel.bonus ?? TERIOCK.config.character.defaults.initiative.bonus;
+      ?? TERIOCK.CONFIG.character.defaults.initiative.competence;
+    const bonus = this.initiativeModel.bonus ?? TERIOCK.CONFIG.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
     return FormulaField.sum(base, competence, bonus);
   }

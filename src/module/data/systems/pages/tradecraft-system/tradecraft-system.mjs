@@ -1,4 +1,4 @@
-import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
+import tradecraftConfig from "../../../../static/config/tradecraft-config.mjs";
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { FluencySystem } from "../../effects/_module.mjs";
@@ -36,15 +36,15 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
 
   /** @inheritDoc */
   get _displayTags() {
-    return [...super._displayTags, TERIOCK.config.tradecraft.fields[this._source.field]?.label];
+    return [...super._displayTags, TERIOCK.CONFIG.tradecraft.fields[this._source.field]?.label];
   }
 
   /** @inheritDoc */
   get _panelBars() {
     return [{
-      icon: TERIOCK.config.tradecraft.fields[this._source.field]?.icon,
+      icon: TERIOCK.CONFIG.tradecraft.fields[this._source.field]?.icon,
       label: _loc("TERIOCK.COMMON.Field"),
-      wrappers: [TERIOCK.config.tradecraft.fields[this._source.field]?.label],
+      wrappers: [TERIOCK.CONFIG.tradecraft.fields[this._source.field]?.label],
     }];
   }
 }

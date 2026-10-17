@@ -165,12 +165,12 @@ export default class BaseUpdater extends DocumentDialog {
     if (partId === "footer") {
       context.buttons = [{
         default: true,
-        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done),
         label: _loc("COMMON.Confirm"),
         type: "submit",
       }, {
         action: "reset",
-        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.reset),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset),
         label: "SETTINGS.UI.ACTIONS.Reset",
         type: "button",
       }];
@@ -194,7 +194,7 @@ export default class BaseUpdater extends DocumentDialog {
       el.append(
         createElement("button", {
           className: `icon inline-control updater-toggle ${
-            makeIconClass(TERIOCK.display.icons.manifest.ui[locked ? "locked" : "unlocked"])
+            makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui[locked ? "locked" : "unlocked"])
           }`,
           dataset: {
             action: "toggleLockedPath",

@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import BaseCardSystem from "./base-card-system.mjs";
 
@@ -15,7 +15,7 @@ export default class StoneSystem extends BaseCardSystem {
     this.parent.updateSource(
       foundry.utils.mergeObject({
         back: {
-          img: TERIOCK.display.thumbnails.manifest.stone.unknown,
+          img: TERIOCK.DISPLAY.thumbnails.manifest.stone.unknown,
           name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.back"),
         },
       }, data),
@@ -23,7 +23,7 @@ export default class StoneSystem extends BaseCardSystem {
     if (!foundry.utils.hasProperty(copy, "faces") || Object.keys(copy.faces[0]).length === 0) {
       this.parent.updateSource({
         faces: [{
-          img: TERIOCK.display.thumbnails.manifest.stone.brown,
+          img: TERIOCK.DISPLAY.thumbnails.manifest.stone.brown,
           name: _loc("TERIOCK.SYSTEMS.Stone.DEFAULTS.faces"),
         }],
       });

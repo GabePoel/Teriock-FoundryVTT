@@ -1,4 +1,4 @@
-import classConfig from "../../../../constants/config/class-config.mjs";
+import classConfig from "../../../../static/config/class-config.mjs";
 import { getName, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { RankSystem } from "../../items/_module.mjs";
@@ -47,7 +47,7 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
   /** @inheritDoc */
   get _panelBars() {
     return [{
-      icon: TERIOCK.config.class.archetypes[this._source.archetype]?.icon,
+      icon: TERIOCK.CONFIG.class.archetypes[this._source.archetype]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
       wrappers: [getName(this.archetype)],
     }];

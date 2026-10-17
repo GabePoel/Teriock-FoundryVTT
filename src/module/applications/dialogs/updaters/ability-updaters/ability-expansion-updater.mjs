@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass, objectMap } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -35,7 +35,7 @@ export default class AbilityExpansionUpdater extends BaseUpdater {
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["system.expansion.type"];
-    if (TERIOCK.config.ability.expansion[this.#expansionType]?.needsSaveAttribute) {
+    if (TERIOCK.CONFIG.ability.expansion[this.#expansionType]?.needsSaveAttribute) {
       paths.push("system.expansion.featSaveAttribute");
     }
     return paths;
@@ -46,7 +46,7 @@ export default class AbilityExpansionUpdater extends BaseUpdater {
     if (path === "system.expansion.type") {
       return {
         "": _loc("TERIOCK.SCHEMA.Competence.choices.0"),
-        ...objectMap(TERIOCK.config.ability.expansion, v => v.label, { localize: true }),
+        ...objectMap(TERIOCK.CONFIG.ability.expansion, v => v.label, { localize: true }),
       };
     }
     return super._getChoicesForPath(path);

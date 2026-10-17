@@ -1,5 +1,5 @@
-import mathConfig from "../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
+import mathConfig from "../../../../static/config/math-config.mjs";
 import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";

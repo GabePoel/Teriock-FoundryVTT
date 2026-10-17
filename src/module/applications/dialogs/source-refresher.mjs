@@ -1,5 +1,5 @@
-import { icons } from "../../constants/display/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
+import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { DocumentDialog } from "../api/_module.mjs";
 

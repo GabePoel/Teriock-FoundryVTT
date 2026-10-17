@@ -35,7 +35,7 @@ export default function ActorConditionsPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         conditionInformation: new fields.SchemaField(
-          objectMap(TERIOCK.statuses.conditions, () => {
+          objectMap(TERIOCK.STATUSES.conditions, () => {
             return new fields.SchemaField({ trackers: new fields.SetField(new fields.DocumentUUIDField()) });
           }),
           { persisted: false },

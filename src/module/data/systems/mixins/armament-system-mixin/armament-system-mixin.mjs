@@ -64,10 +64,10 @@ export default function ArmamentSystemMixin(Base) {
           twoHanded: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
           types: new fields.SetField(new IdentifierField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
-        equipmentClasses: identifierSetField(TERIOCK.config.equipment.equipmentClasses),
+        equipmentClasses: identifierSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
         impacts: new fields.SetField(
           new fields.StringField({
-            choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
+            choices: objectMap(TERIOCK.CONFIG.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
           }),
           { initial: ["damage"] },
         ),
@@ -134,7 +134,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @returns {Teriock.Panels.PanelBar} */
     get _attackBar() {
       return {
-        icon: TERIOCK.display.icons.manifest.interaction.attack,
+        icon: TERIOCK.DISPLAY.icons.manifest.interaction.attack,
         label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.attack"),
         wrappers: [
           this.piercing.label,
@@ -163,7 +163,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @returns {Teriock.Panels.PanelBar} */
     get _defenseBar() {
       return {
-        icon: TERIOCK.display.icons.manifest.interaction.block,
+        icon: TERIOCK.DISPLAY.icons.manifest.interaction.block,
         label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
         wrappers: [
           this.av.value ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.av", { value: this.av.value }) : "",
@@ -219,7 +219,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @inheritDoc */
     get _displayFieldsContent() {
       return ["system.notes", ...super._displayFieldsContent, {
-        classes: [TERIOCK.display.panels.styles.derived],
+        classes: [TERIOCK.DISPLAY.panels.styles.derived],
         editable: false,
         label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(this.style) }),
         path: "system.styleDescription",
@@ -251,7 +251,7 @@ export default function ArmamentSystemMixin(Base) {
     get _equipmentClassesTags() {
       return Array.from(this.equipmentClasses).map(t => {
         return {
-          label: TERIOCK.config.equipment.equipmentClasses[t]?.label,
+          label: TERIOCK.CONFIG.equipment.equipmentClasses[t]?.label,
           tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
         };
       });
@@ -346,7 +346,7 @@ export default function ArmamentSystemMixin(Base) {
 
     /** @inheritDoc */
     get useIcon() {
-      return this.hasAttack ? TERIOCK.display.icons.manifest.ui.damage : super.useIcon;
+      return this.hasAttack ? TERIOCK.DISPLAY.icons.manifest.ui.damage : super.useIcon;
     }
 
     /**
@@ -366,7 +366,7 @@ export default function ArmamentSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       const entries = [{
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.twoHanded, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.twoHanded, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
         onClick: this.use.bind(this, { twoHanded: true }),
         visible: this.parent.isOwner && this.hasTwoHandedAttack,

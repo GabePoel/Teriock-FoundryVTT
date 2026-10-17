@@ -1,5 +1,5 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import AddDocumentsAutomation from "../automations/add-documents-automation/add-documents-automation.mjs";
 import ConstructionNode from "../construction-node/construction-node.mjs";

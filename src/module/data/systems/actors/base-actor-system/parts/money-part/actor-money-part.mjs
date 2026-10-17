@@ -1,4 +1,4 @@
-import currencyConfig from "../../../../../../constants/config/currency-config.mjs";
+import currencyConfig from "../../../../../../static/config/currency-config.mjs";
 import { objectMap } from "../../../../../../utils/_module.mjs";
 
 /**
@@ -64,16 +64,16 @@ export default function ActorMoneyPart(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      this.money.physical = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
+      this.money.physical = Object.keys(TERIOCK.CONFIG.currency).reduce((sum, key) => {
         this.money[key] = Math.max(0, this.money[key] || 0);
-        const value = this.money[key] * TERIOCK.config.currency[key].conversion;
+        const value = this.money[key] * TERIOCK.CONFIG.currency[key].conversion;
         return sum + value;
       }, 0).toNearest(0.01);
       this.money.total = (this.money.physical - this.money.debt).toNearest(0.01);
-      this.weight.money = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
-        const weight = (this.money[key] || 0) * TERIOCK.config.currency[key].weight;
+      this.weight.money = Object.keys(TERIOCK.CONFIG.currency).reduce((sum, key) => {
+        const weight = (this.money[key] || 0) * TERIOCK.CONFIG.currency[key].weight;
         return sum + weight;
-      }, 0).toNearest(TERIOCK.config.system.unitPrecision);
+      }, 0).toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
     /**
@@ -85,7 +85,7 @@ export default function ActorMoneyPart(Base) {
     async takePay(amount, mode = "exact") {
       await this.parent.fireTrigger("takePay", { amount, mode });
 
-      const currencies = Object.entries(TERIOCK.config.currency).map(([key, config]) => ({
+      const currencies = Object.entries(TERIOCK.CONFIG.currency).map(([key, config]) => ({
         held: Math.max(0, this.money[key] || 0),
         key,
         value: config.conversion,

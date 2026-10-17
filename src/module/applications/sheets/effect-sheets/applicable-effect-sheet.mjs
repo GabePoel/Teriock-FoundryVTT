@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass, mixClasses, omit } from "../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import { TeriockDragDrop } from "../../ux/_module.mjs";

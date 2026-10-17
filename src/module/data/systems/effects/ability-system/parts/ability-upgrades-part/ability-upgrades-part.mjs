@@ -63,7 +63,7 @@ export default function AbilityUpgradesPart(Base) {
       if (this.upgrades.score.attribute) {
         changes.push({
           key: `system.attributes.${this.upgrades.score.attribute}.score`,
-          phase: TERIOCK.config.change.defaultPhase,
+          phase: TERIOCK.CONFIG.change.defaultPhase,
           priority: 20,
           qualifier: "1",
           target: "Actor",
@@ -74,7 +74,7 @@ export default function AbilityUpgradesPart(Base) {
       if (this.upgrades.competence.attribute) {
         changes.push({
           key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
-          phase: TERIOCK.config.change.defaultPhase,
+          phase: TERIOCK.CONFIG.change.defaultPhase,
           priority: 20,
           qualifier: "1",
           target: "Actor",
@@ -100,8 +100,8 @@ export default function AbilityUpgradesPart(Base) {
       if (this.upgrades.competence.attribute) {
         const attribute = attributeLink(this.upgrades.competence.attribute);
         const amount = this.upgrades.competence.value;
-        const identifier = TERIOCK.config.competence.levels[amount].identifier;
-        const level = TERIOCK.config.competence.levels[amount].label;
+        const identifier = TERIOCK.CONFIG.competence.levels[amount].identifier;
+        const level = TERIOCK.CONFIG.competence.levels[amount].label;
         const upgrade = `@Identifier[${identifier}]{${level.toLocaleLowerCase(game.i18n.lang)}}`;
         const savesLabel = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves");
         const saves = `@Identifier[core:feat-interaction]{${savesLabel}}`;
@@ -123,8 +123,8 @@ export default function AbilityUpgradesPart(Base) {
  * @returns {string}
  */
 function attributeLink(attribute) {
-  if (!TERIOCK.config.attribute[attribute]) { return ""; }
-  const identifier = TERIOCK.config.attribute[attribute].identifier;
-  const label = TERIOCK.config.attribute[attribute].abbreviation;
+  if (!TERIOCK.CONFIG.attribute[attribute]) { return ""; }
+  const identifier = TERIOCK.CONFIG.attribute[attribute].identifier;
+  const label = TERIOCK.CONFIG.attribute[attribute].abbreviation;
   return `@Identifier[${identifier}]{${label}}`;
 }

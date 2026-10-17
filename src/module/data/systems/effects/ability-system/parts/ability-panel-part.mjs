@@ -14,23 +14,23 @@ export default function AbilityPanelPart(Base) {
     /** @inheritDoc */
     async getPanelParts() {
       const bars = this._withKindBar([{
-        icon: TERIOCK.display.icons.manifest.ability.execution,
+        icon: TERIOCK.DISPLAY.icons.manifest.ability.execution,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.execution"),
         wrappers: this._executionWrappers,
       }, {
-        icon: TERIOCK.display.icons.manifest.ability.target,
+        icon: TERIOCK.DISPLAY.icons.manifest.ability.target,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.targeting"),
         wrappers: this._targetingWrappers,
       }, {
-        icon: TERIOCK.display.icons.manifest.ability.expansion,
+        icon: TERIOCK.DISPLAY.icons.manifest.ability.expansion,
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label"),
         wrappers: this._expansionWrappers,
       }, {
-        icon: TERIOCK.display.icons.manifest.ability.cost,
+        icon: TERIOCK.DISPLAY.icons.manifest.ability.cost,
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.costs.label"),
         wrappers: Panel.simplifyTags(this._costTags),
       }, {
-        icon: TERIOCK.display.icons.manifest.ui.info,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
         label: "TERIOCK.SYSTEMS.Ability.PANELS.info",
         wrappers: Panel.simplifyTags(this._infoTags),
       }, this._metaphysicsBar]);

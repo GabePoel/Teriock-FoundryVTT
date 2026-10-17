@@ -1,4 +1,4 @@
-import statConfig from "../../../../constants/config/stat-config.mjs";
+import statConfig from "../../../../static/config/stat-config.mjs";
 import { consolidateWriteOperations, getSystemClass, makeIcon } from "../../../../utils/_module.mjs";
 import { migrateRename, migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
@@ -178,7 +178,7 @@ export default function TransformationSystemMixin(Base) {
      * @param {boolean} value
      */
     #addBatchToggle(collection, id, value) {
-      const toggle = TERIOCK.config.transformation.suppress[collection.get(id)?.type]?.path;
+      const toggle = TERIOCK.CONFIG.transformation.suppress[collection.get(id)?.type]?.path;
       if (!toggle) { return; }
       this.#addBatchUpdateDocument(collection, id, { [toggle]: value });
     }
@@ -246,7 +246,7 @@ export default function TransformationSystemMixin(Base) {
      */
     #enabledFilter(docs) {
       return docs.filter(d =>
-        !foundry.utils.getProperty(d, TERIOCK.config.transformation.suppress[d.type]?.path)
+        !foundry.utils.getProperty(d, TERIOCK.CONFIG.transformation.suppress[d.type]?.path)
         && d.dependee !== this.parent
       );
     }
@@ -441,7 +441,7 @@ export default function TransformationSystemMixin(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "usage",
-        icon: makeIcon(TERIOCK.display.icons.manifest.effect.transform, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.effect.transform, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         onClick: this.setPrimaryTransformation.bind(this),
         visible: this.isTransformation && !this.isPrimaryTransformation,
@@ -480,8 +480,8 @@ export default function TransformationSystemMixin(Base) {
         if (typeof this.transformation.ring === "boolean") {
           changes.push({
             key: "token.ring.enabled",
-            phase: TERIOCK.config.transformation.tokenChange.phase,
-            priority: TERIOCK.config.transformation.tokenChange.priority,
+            phase: TERIOCK.CONFIG.transformation.tokenChange.phase,
+            priority: TERIOCK.CONFIG.transformation.tokenChange.priority,
             type: "override",
             value: this.transformation.ring,
           });
@@ -489,8 +489,8 @@ export default function TransformationSystemMixin(Base) {
         if (this.transformation.img) {
           changes.push({
             key: "token.texture.src",
-            phase: TERIOCK.config.transformation.tokenChange.phase,
-            priority: TERIOCK.config.transformation.tokenChange.priority,
+            phase: TERIOCK.CONFIG.transformation.tokenChange.phase,
+            priority: TERIOCK.CONFIG.transformation.tokenChange.priority,
             type: "override",
             value: this.transformation.img,
           });
@@ -498,8 +498,8 @@ export default function TransformationSystemMixin(Base) {
         if (this.transformation.ringImg) {
           changes.push({
             key: "token.ring.subject.texture",
-            phase: TERIOCK.config.transformation.tokenChange.phase,
-            priority: TERIOCK.config.transformation.tokenChange.priority,
+            phase: TERIOCK.CONFIG.transformation.tokenChange.phase,
+            priority: TERIOCK.CONFIG.transformation.tokenChange.priority,
             type: "override",
             value: this.transformation.ringImg,
           });

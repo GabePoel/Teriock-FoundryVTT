@@ -77,7 +77,7 @@ export default function EmbeddableDataMixin(Base) {
       }
       entries.push(...[{
         group: "open",
-        icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.openWindow, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
         onClick: async () => {
           const resolved = await this.getMaster?.();
@@ -86,7 +86,7 @@ export default function EmbeddableDataMixin(Base) {
         visible: () => this.master?.isViewer && relative?.uuid !== this.master?.uuid,
       }, {
         group: "document",
-        icon: makeIcon(TERIOCK.display.icons.manifest.ui.delete, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.delete, "contextMenu"),
         label: _loc("COMMON.Delete"),
         onClick: async () => await this.deleteDialog({ modal: true }, { interactive: true }),
         visible: () =>

@@ -1,9 +1,9 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import statConfig from "../../../../constants/config/stat-config.mjs";
-import systemConfig from "../../../../constants/config/system-config.mjs";
-import { icons } from "../../../../constants/display/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
+import statConfig from "../../../../static/config/stat-config.mjs";
+import { INF } from "../../../../static/const.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf, toKebabCase } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
@@ -83,15 +83,15 @@ export default class SpeciesSystem
         max: new fields.NumberField({ placeholder: _loc("COMMON.None") }),
         min: new fields.NumberField({ placeholder: _loc("COMMON.None") }),
         value: new fields.NumberField({
-          initial: TERIOCK.config.system.baseValues.size,
+          initial: TERIOCK.CONFIG.system.baseValues.size,
           min: 0,
           nullable: false,
-          placeholder: `${TERIOCK.config.system.baseValues.size}`,
+          placeholder: `${TERIOCK.CONFIG.system.baseValues.size}`,
           validate: validateNonZero,
           validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
         }),
       }),
-      traits: identifierSetField(TERIOCK.config.species.traits),
+      traits: identifierSetField(TERIOCK.CONFIG.species.traits),
     });
   }
 
@@ -125,7 +125,7 @@ export default class SpeciesSystem
       modal: true,
       position: { width: 400 },
       window: {
-        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.confirm, "title"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.confirm, "title"),
         title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
       },
     });
@@ -159,7 +159,7 @@ export default class SpeciesSystem
    */
   get _traitTags() {
     return Array.from(this.traits).map(t => {
-      return { label: TERIOCK.config.species.traits[t]?.label, tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
+      return { label: TERIOCK.CONFIG.species.traits[t]?.label, tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
     });
   }
 
@@ -226,7 +226,7 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   prepareBaseData() {
-    if (this.size.enabled && !this.size.value) { this.size.value = TERIOCK.config.system.baseValues.size; }
+    if (this.size.enabled && !this.size.value) { this.size.value = TERIOCK.CONFIG.system.baseValues.size; }
     super.prepareBaseData();
   }
 
@@ -250,7 +250,7 @@ export default class SpeciesSystem
       },
       system: {
         _src: this.parent.uuid,
-        ...Object.fromEntries(POOL_STATS.map(k => [k, { value: systemConfig.inf }])),
+        ...Object.fromEntries(POOL_STATS.map(k => [k, { value: INF }])),
         size: { value: this.size.value },
       },
       type: "creature",

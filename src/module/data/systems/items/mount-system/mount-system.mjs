@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import {
   dotJoin,
   fromIdentifier,
@@ -44,7 +44,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
   get _embedIcons() {
     return [...super._embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")), {
       action: "toggleMountedDoc",
-      icon: this.mounted ? TERIOCK.display.icons.manifest.ui.enabled : TERIOCK.display.icons.manifest.ui.disabled,
+      icon: this.mounted ? TERIOCK.DISPLAY.icons.manifest.ui.enabled : TERIOCK.DISPLAY.icons.manifest.ui.disabled,
       tooltip: this.mounted
         ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
         : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
@@ -59,7 +59,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
   /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, {
-      icon: TERIOCK.display.icons.manifest.armament.load,
+      icon: TERIOCK.DISPLAY.icons.manifest.armament.load,
       label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
       wrappers: [...this._attunableWrappers, getName(this.mountType)],
     }];
@@ -102,13 +102,13 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
   getEmbedContextMenuEntries(doc) {
     return [...super.getEmbedContextMenuEntries(doc), {
       group: "control",
-      icon: makeIcon(TERIOCK.display.icons.manifest.ui.enable, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.enable, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
       onClick: this.mount.bind(this),
       visible: !this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
     }, {
       group: "control",
-      icon: makeIcon(TERIOCK.display.icons.manifest.ui.disable, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.disable, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
       onClick: this.unmount.bind(this),
       visible: this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),

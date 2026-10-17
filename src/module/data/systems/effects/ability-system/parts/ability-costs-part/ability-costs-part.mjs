@@ -1,6 +1,6 @@
-import costConfig from "../../../../../../constants/config/cost-config.mjs";
-import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
+import costConfig from "../../../../../../static/config/cost-config.mjs";
+import statConfig from "../../../../../../static/config/stat-config.mjs";
 import { mergeMetadata, objectMap } from "../../../../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 
@@ -80,7 +80,7 @@ export default function AbilityCostsPart(Base) {
      */
     get _costTagsComponents() {
       return [
-        ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) => this.costs.components[k].type ? v : "")
+        ...Object.entries(TERIOCK.CONFIG.cost.components.keys).map(([k, v]) => this.costs.components[k].type ? v : "")
           .filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.COMMON.Components") })),
       ];
     }
@@ -91,7 +91,7 @@ export default function AbilityCostsPart(Base) {
      */
     get _costTagsPrimary() {
       return [
-        ...Object.entries(TERIOCK.config.stat).map(([k, v]) =>
+        ...Object.entries(TERIOCK.CONFIG.stat).map(([k, v]) =>
           this.costs.primary[k].type === "formula"
             ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
               cost: v.abbreviation,
@@ -115,8 +115,8 @@ export default function AbilityCostsPart(Base) {
      */
     get _displayInputsCosts() {
       return [
-        ...Object.keys(TERIOCK.config.stat).map(k => `system.costs.primary.${k}.type`),
-        ...Object.keys(TERIOCK.config.cost.components.keys).map(k => `system.costs.components.${k}.type`),
+        ...Object.keys(TERIOCK.CONFIG.stat).map(k => `system.costs.primary.${k}.type`),
+        ...Object.keys(TERIOCK.CONFIG.cost.components.keys).map(k => `system.costs.components.${k}.type`),
       ];
     }
 

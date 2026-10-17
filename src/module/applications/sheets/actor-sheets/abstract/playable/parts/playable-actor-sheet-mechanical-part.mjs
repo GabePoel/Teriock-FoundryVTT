@@ -1,4 +1,4 @@
-import { icons } from "../../../../../../constants/display/_module.mjs";
+import { icons } from "../../../../../../static/display/_module.mjs";
 import {
   asInf,
   consolidateWriteOperations,
@@ -168,7 +168,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.senses = {};
-      for (const key of Object.keys(TERIOCK.config.character.sense)) {
+      for (const key of Object.keys(TERIOCK.CONFIG.character.sense)) {
         context.senses[key] = {
           source: toRangeHTML(this.document.system._source.senses[key]),
           value: toRangeHTML(this.document.system.senses[key]),
@@ -190,7 +190,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
         }),
       };
       context.conditions = {};
-      for (const key of Object.keys(TERIOCK.statuses.conditions)) {
+      for (const key of Object.keys(TERIOCK.STATUSES.conditions)) {
         const id = toId(key);
         context.conditions[key] = Boolean(this.document.effects.get(id)?.isStatus);
       }

@@ -60,8 +60,8 @@ export default function EquipmentWieldingPart(Base) {
         {
           action: "toggleGluedDoc",
           icon: this.glued
-            ? TERIOCK.display.icons.manifest.equipment.glue
-            : TERIOCK.display.icons.manifest.equipment.unglue,
+            ? TERIOCK.DISPLAY.icons.manifest.equipment.glue
+            : TERIOCK.DISPLAY.icons.manifest.equipment.unglue,
           tooltip: this.glued
             ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
             : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
@@ -74,7 +74,7 @@ export default function EquipmentWieldingPart(Base) {
         ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
         {
           action: "toggleEquippedDoc",
-          icon: this.equipped ? TERIOCK.display.icons.manifest.ui.enabled : TERIOCK.display.icons.manifest.ui.disabled,
+          icon: this.equipped ? TERIOCK.DISPLAY.icons.manifest.ui.enabled : TERIOCK.DISPLAY.icons.manifest.ui.disabled,
           tooltip: this.equipped
             ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
             : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
@@ -127,25 +127,25 @@ export default function EquipmentWieldingPart(Base) {
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.manifest.ui.enable, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.enable, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
         onClick: this.equip.bind(this),
         visible: this.canEquip && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.manifest.ui.disable, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.disable, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
         onClick: this.unequip.bind(this),
         visible: this.canUnequip && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.glue, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.glue, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
         onClick: this.glue.bind(this),
         visible: !this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
       }, {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.manifest.equipment.unglue, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.unglue, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
         onClick: this.unglue.bind(this),
         visible: this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),

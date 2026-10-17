@@ -21,19 +21,19 @@ export default function EquipmentPanelPart(Base) {
     async getPanelParts() {
       const bars = this._withKindBar([
         {
-          icon: TERIOCK.display.icons.manifest.equipment.equipmentType,
+          icon: TERIOCK.DISPLAY.icons.manifest.equipment.equipmentType,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
           wrappers: [getName(this.equipmentType), this.range.description, ...Panel.simplifyTags(this._armamentTags)],
         },
         this._attackBar,
         this._defenseBar,
         {
-          icon: TERIOCK.display.icons.manifest.equipment.equipmentClasses,
+          icon: TERIOCK.DISPLAY.icons.manifest.equipment.equipmentClasses,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
           wrappers: [...Panel.simplifyTags(this._equipmentClassesTags)],
         },
         {
-          icon: TERIOCK.display.icons.manifest.armament.load,
+          icon: TERIOCK.DISPLAY.icons.manifest.armament.load,
           label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.load"),
           wrappers: [
             ...Panel.simplifyTags(this._identificationTags),
@@ -46,7 +46,7 @@ export default function EquipmentPanelPart(Base) {
           ],
         },
         {
-          icon: TERIOCK.display.icons.manifest.equipment.storage,
+          icon: TERIOCK.DISPLAY.icons.manifest.equipment.storage,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.storage.enabled.label"),
           wrappers: this.storage.enabled
             ? [

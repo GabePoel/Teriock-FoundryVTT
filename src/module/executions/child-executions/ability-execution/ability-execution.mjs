@@ -1,12 +1,12 @@
 import { CostPayer } from "../../../applications/dialogs/_module.mjs";
-import impactConfig from "../../../constants/config/impact-config.mjs";
-import statConfig from "../../../constants/config/stat-config.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import impactConfig from "../../../static/config/impact-config.mjs";
+import statConfig from "../../../static/config/stat-config.mjs";
 import {
   formatDynamicSelectOptions,
   mixClasses,
@@ -46,8 +46,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         choices: () =>
           formatDynamicSelectOptions(
             objectMap(
-              TERIOCK.config.ability.executionTime,
-              (choices, m) => ({ choices, label: TERIOCK.config.ability.maneuver[m] }),
+              TERIOCK.CONFIG.ability.executionTime,
+              (choices, m) => ({ choices, label: TERIOCK.CONFIG.ability.maneuver[m] }),
             ),
             { localize: true },
           ),
@@ -76,7 +76,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   async #getDuration() {
     const durationFormula = this.source.system.duration.formula;
     const durationValue = await BaseRoll.getValue(durationFormula, this.getRollData());
-    return durationValue >= TERIOCK.config.system.inf / 10 ? undefined : durationValue;
+    return durationValue >= TERIOCK.CONST.INF / 10 ? undefined : durationValue;
   }
 
   /**
@@ -225,7 +225,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * @returns {Teriock.Keys.Maneuver}
    */
   get maneuver() {
-    const groups = TERIOCK.config.ability.executionTime;
+    const groups = TERIOCK.CONFIG.ability.executionTime;
     return Object.keys(groups).find(m => this.executionTime in groups[m]);
   }
 
@@ -286,8 +286,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       dice: { classes: [this.source.system.interaction] },
       total: { classes: [this.source.system.interaction] },
     };
-    if (this.isFeat) { styles.total.icon = TERIOCK.display.icons.manifest.interaction.feat; }
-    if (this.isBlock) { styles.total.icon = TERIOCK.display.icons.manifest.interaction.block; }
+    if (this.isFeat) { styles.total.icon = TERIOCK.DISPLAY.icons.manifest.interaction.feat; }
+    if (this.isBlock) { styles.total.icon = TERIOCK.DISPLAY.icons.manifest.interaction.block; }
     const formula = this.isManifest ? "0" : this.formula;
     this.rolls.push(
       new BaseRoll(formula, this.getRollData(), {
@@ -312,7 +312,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       const panelBlock = panel.blocks.find(b => b.title === _loc(labelKey));
       if (!panelBlock) { continue; }
       if (active) { delete panelBlock.classes; }
-      else { panelBlock.classes = [TERIOCK.display.panels.styles.faded]; }
+      else { panelBlock.classes = [TERIOCK.DISPLAY.panels.styles.faded]; }
     }
     return panel;
   }
@@ -326,7 +326,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       else { this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened })); }
     }
     if (this.executionTime !== this.source.system.executionTime.base) {
-      this.tags.push(TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime]);
+      this.tags.push(TERIOCK.CONFIG.ability.executionTime[this.maneuver][this.executionTime]);
     }
     for (const c of Object.keys(this.costs).filter(c => this.costs[c] > 0)) {
       this.tags.push(
@@ -341,7 +341,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    */
   _configure(options = {}) {
     super._configure(options);
-    this.costs = objectMap(TERIOCK.config.stat, () => 0);
+    this.costs = objectMap(TERIOCK.CONFIG.stat, () => 0);
     this.affinities = new ExecutionPseudoCollection("affinities", this, this.source.system.affinities.values(), {
       documentClass: BaseAffinity,
     });
@@ -480,8 +480,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     Object.assign(source, {
       autoPayCosts: settings.getSetting("autoPayCosts"),
       makeEffect: duration.unit !== "instant" && maneuver !== "passive",
-      targetsActor: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor),
-      targetsArmament: targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament),
+      targetsActor: targets.some((t) => TERIOCK.CONFIG.ability.targets[t]?.targetsActor),
+      targetsArmament: targets.some((t) => TERIOCK.CONFIG.ability.targets[t]?.targetsArmament),
     });
     return source;
   }

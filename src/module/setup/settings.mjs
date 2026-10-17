@@ -1,13 +1,13 @@
 import { CompendiumPriorityMenu, MenuFactory } from "../applications/menus/_module.mjs";
-import attributeConfig from "../constants/config/attribute-config.mjs";
-import dieConfig from "../constants/config/death-bag-config.mjs";
-import documentBehaviorConfig from "../constants/config/document-behavior-config.mjs";
-import tipConfig from "../constants/config/tip-config.mjs";
-import { icons } from "../constants/display/_module.mjs";
 import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import * as documents from "../documents/_module.mjs";
+import attributeConfig from "../static/config/attribute-config.mjs";
+import dieConfig from "../static/config/death-bag-config.mjs";
+import documentBehaviorConfig from "../static/config/document-behavior-config.mjs";
+import tipConfig from "../static/config/tip-config.mjs";
+import { icons } from "../static/display/_module.mjs";
 import { objectMap } from "../utils/_module.mjs";
 
 const { fields } = foundry.data;

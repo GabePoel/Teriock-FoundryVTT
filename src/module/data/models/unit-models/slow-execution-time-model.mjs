@@ -18,6 +18,6 @@ export default class SlowExecutionTimeModel extends TimeUnitModel {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.ability.execution;
+    return TERIOCK.DISPLAY.icons.manifest.ability.execution;
   }
 }

@@ -36,7 +36,7 @@ export default class ChoicesAutomation extends BaseAutomation {
         blank: true,
         initial: "",
         choices: () =>
-          objectMap(TERIOCK.config.category, c => c.label, { none: true, filter: c => c.suggestions !== "none" }),
+          objectMap(TERIOCK.CONFIG.category, c => c.label, { none: true, filter: c => c.suggestions !== "none" }),
       }),
     });
   }

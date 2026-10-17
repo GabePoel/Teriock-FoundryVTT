@@ -1,5 +1,5 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
-import statConfig from "../../../../../../constants/config/stat-config.mjs";
+import statConfig from "../../../../../../static/config/stat-config.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../utils/_module.mjs";
 import { migrateThumbnails } from "../../../../../fields/tools/migrations.mjs";
 import { speciesTransformationFields } from "../../../../../fields/tools/transformation-fields.mjs";
@@ -56,13 +56,13 @@ export default function SpeciesTransformationPart(Base) {
     get _color() {
       if (this.isTransformation) {
         if (this.transformationEffect.system.transformation.level === "minor") {
-          return TERIOCK.display.colors.palette.blue;
+          return TERIOCK.DISPLAY.colors.palette.blue;
         }
         if (this.transformationEffect.system.transformation.level === "full") {
-          return TERIOCK.display.colors.palette.green;
+          return TERIOCK.DISPLAY.colors.palette.green;
         }
         if (this.transformationEffect.system.transformation.level === "greater") {
-          return TERIOCK.display.colors.palette.purple;
+          return TERIOCK.DISPLAY.colors.palette.purple;
         }
       }
       return super._color;
@@ -86,7 +86,7 @@ export default function SpeciesTransformationPart(Base) {
       const tags = super._traitTags;
       if (this.transformationEffect?.system.transformation.level) {
         tags.push({
-          label: TERIOCK.config.transformation.level[this.transformationEffect.system.transformation.level],
+          label: TERIOCK.CONFIG.transformation.level[this.transformationEffect.system.transformation.level],
           tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
         });
       }
@@ -163,7 +163,7 @@ export default function SpeciesTransformationPart(Base) {
           modal: true,
           rejectClose: false,
           window: {
-            icon: makeIconClass(TERIOCK.display.icons.manifest.effect.transform, "title"),
+            icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.effect.transform, "title"),
             title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
           },
         }).then((p) => {
@@ -177,7 +177,7 @@ export default function SpeciesTransformationPart(Base) {
       const isPrimarySpecies = this.transformationEffect?.system.primarySpecies === this.parent;
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",
-        icon: makeIcon(TERIOCK.display.icons.manifest.effect.transform, "contextMenu"),
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.effect.transform, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
         onClick: this.setPrimaryTransformation.bind(this),
         visible: this.isTransformation && !(this.isPrimaryTransformation && isPrimarySpecies),

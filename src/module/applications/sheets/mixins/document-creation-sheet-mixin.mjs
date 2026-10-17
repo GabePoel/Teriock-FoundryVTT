@@ -88,7 +88,7 @@ export default function DocumentCreationSheetMixin(Base) {
      */
     async _onCreateFluency() {
       const tc = await selectDocument("tradecraft", {
-        globalIdentifiers: Object.keys(TERIOCK.config.tradecraft.tradecrafts).map(t => `tradecraft:${t}`),
+        globalIdentifiers: Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).map(t => `tradecraft:${t}`),
         globalTypes: [],
       });
       if (!tc) { return; }
@@ -106,7 +106,7 @@ export default function DocumentCreationSheetMixin(Base) {
      */
     async _onCreateRank() {
       const classDocument = await selectDocument("class", {
-        globalIdentifiers: Object.keys(TERIOCK.config.class.classes).map(c => `class:${c}`),
+        globalIdentifiers: Object.keys(TERIOCK.CONFIG.class.classes).map(c => `class:${c}`),
         globalTypes: [],
       });
       if (!classDocument) { return; }
@@ -158,7 +158,7 @@ async function resolveCreateObject(type) {
   const typeName = label.toLocaleLowerCase(game.i18n.lang);
   const decision = await TeriockDialog.prompt({
     buttons: [{
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.custom, "button"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.custom, "button"),
       label: _loc("CONTROLS.CommonCreate"),
       callback: () => "create",
     }],
@@ -166,12 +166,12 @@ async function resolveCreateObject(type) {
     modal: true,
     ok: {
       default: true,
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.import, "button"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.import, "button"),
       label: _loc("APPLICATION.ACTIONS.ImportDocument"),
       callback: () => "import",
     },
     window: {
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.add, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.add, "title"),
       title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: label }),
     },
   });

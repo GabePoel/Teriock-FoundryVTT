@@ -1,4 +1,4 @@
-import systemConfig from "../../constants/config/system-config.mjs";
+import { INF_CODE } from "../../static/const.mjs";
 
 const { NumberField } = foundry.data.fields;
 
@@ -14,7 +14,7 @@ export default class InfiniteNumberField extends NumberField {
       integer: false,
       min: 0,
       nullable: true,
-      placeholder: systemConfig.infCode,
+      placeholder: INF_CODE,
       required: true,
     });
   }

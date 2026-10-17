@@ -52,7 +52,7 @@ export default class CompetenceModel extends BaseDataModel {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.config.competence.levels[this.value].icon;
+    return TERIOCK.CONFIG.competence.levels[this.value].icon;
   }
 
   /**
@@ -60,12 +60,12 @@ export default class CompetenceModel extends BaseDataModel {
    * @returns {string}
    */
   get iconClass() {
-    return TERIOCK.config.competence.levels[this.value].simpleIconClass;
+    return TERIOCK.CONFIG.competence.levels[this.value].simpleIconClass;
   }
 
   /** @inheritDoc */
   get label() {
-    return TERIOCK.config.competence.levels[this.value].label;
+    return TERIOCK.CONFIG.competence.levels[this.value].label;
   }
 
   /**

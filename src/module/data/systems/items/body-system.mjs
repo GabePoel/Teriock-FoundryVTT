@@ -1,6 +1,6 @@
-import effectConfig from "../../../constants/config/effect-config.mjs";
-import systemConfig from "../../../constants/config/system-config.mjs";
-import { icons } from "../../../constants/display/_module.mjs";
+import effectConfig from "../../../static/config/effect-config.mjs";
+import systemConfig from "../../../static/config/system-config.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { Panel } from "../../pseudo-documents/_module.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -37,7 +37,7 @@ export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMix
     return {
       ...(await super.getPanelParts()),
       bars: this._withKindBar([this._attackBar, this._defenseBar, {
-        icon: TERIOCK.display.icons.manifest.equipment.equipmentClasses,
+        icon: TERIOCK.DISPLAY.icons.manifest.equipment.equipmentClasses,
         label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
         wrappers: [
           this.range.description,

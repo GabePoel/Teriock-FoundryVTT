@@ -31,7 +31,7 @@ export default function AbilityUsagePart(Base) {
       return Object.assign(super.defineSchema(), {
         delivery: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.config.ability.delivery, v => v.label, { localize: true }),
+          choices: objectMap(TERIOCK.CONFIG.ability.delivery, v => v.label, { localize: true }),
           initial: "weapon",
           nullable: false,
           required: true,
@@ -44,7 +44,7 @@ export default function AbilityUsagePart(Base) {
           cap: rollableFormulaField(),
           featSaveAttribute: new fields.StringField({
             blank: false,
-            choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
+            choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, { localize: true }),
             initial: "mov",
             required: true,
           }),
@@ -53,19 +53,19 @@ export default function AbilityUsagePart(Base) {
         }),
         featSaveAttribute: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
+          choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, { localize: true }),
           initial: "mov",
           required: true,
         }),
         interaction: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.config.ability.interaction, v => v.label, { localize: true }),
+          choices: objectMap(TERIOCK.CONFIG.ability.interaction, v => v.label, { localize: true }),
           initial: "attack",
           required: true,
         }),
         maneuver: new fields.StringField({
           blank: false,
-          choices: TERIOCK.config.ability.maneuver,
+          choices: TERIOCK.CONFIG.ability.maneuver,
           initial: "active",
           nullable: false,
           required: true,
@@ -73,7 +73,7 @@ export default function AbilityUsagePart(Base) {
         range: new fields.EmbeddedDataField(RangeModel),
         targets: new fields.SetField(
           new fields.StringField({
-            choices: objectMap(TERIOCK.config.ability.targets, v => v.label, { localize: true }),
+            choices: objectMap(TERIOCK.CONFIG.ability.targets, v => v.label, { localize: true }),
           }),
           { initial: ["creature"] },
         ),
@@ -87,14 +87,14 @@ export default function AbilityUsagePart(Base) {
     get _executionWrappers() {
       let time;
       if (this.maneuver !== "slow") {
-        time = TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime.base];
+        time = TERIOCK.CONFIG.ability.executionTime[this.maneuver][this.executionTime.base];
       } else { time = this.executionTime.slow.label; }
       return [
         time || "",
         this.piercing.label,
-        TERIOCK.config.ability.delivery[this.delivery]?.label || "",
-        this.interaction === "feat" ? TERIOCK.config.attribute[this.featSaveAttribute]?.label : "",
-        TERIOCK.config.ability.interaction[this.interaction]?.label || "",
+        TERIOCK.CONFIG.ability.delivery[this.delivery]?.label || "",
+        this.interaction === "feat" ? TERIOCK.CONFIG.attribute[this.featSaveAttribute]?.label : "",
+        TERIOCK.CONFIG.ability.interaction[this.interaction]?.label || "",
       ];
     }
 
@@ -106,9 +106,9 @@ export default function AbilityUsagePart(Base) {
       return this.expansion.type
         ? [
           ["detonate", "ripple"].includes(this.expansion.type)
-            ? TERIOCK.config.attribute[this.expansion.featSaveAttribute]?.label
+            ? TERIOCK.CONFIG.attribute[this.expansion.featSaveAttribute]?.label
             : "",
-          TERIOCK.config.ability.expansion[this.expansion.type]?.label || "",
+          TERIOCK.CONFIG.ability.expansion[this.expansion.type]?.label || "",
           this.expansion.range.abbreviation,
           FormulaField.exists(this.expansion.cap)
             ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
@@ -124,7 +124,7 @@ export default function AbilityUsagePart(Base) {
     get _targetingWrappers() {
       return [
         this.isRanged ? this.range.abbreviation : "",
-        ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target]?.label)),
+        ...Array.from(this.targets.map(target => TERIOCK.CONFIG.ability.targets[target]?.label)),
         this.duration.label || "",
       ];
     }
@@ -134,8 +134,8 @@ export default function AbilityUsagePart(Base) {
      * @returns {boolean}
      */
     get isAoe() {
-      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.aoe)
-        || Boolean(TERIOCK.config.ability.expansion[this.expansion.type]?.aoe);
+      return Boolean(TERIOCK.CONFIG.ability.delivery[this.delivery]?.aoe)
+        || Boolean(TERIOCK.CONFIG.ability.expansion[this.expansion.type]?.aoe);
     }
 
     /**
@@ -151,7 +151,7 @@ export default function AbilityUsagePart(Base) {
      * @returns {boolean}
      */
     get isContact() {
-      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.contact);
+      return Boolean(TERIOCK.CONFIG.ability.delivery[this.delivery]?.contact);
     }
 
     /**
@@ -159,7 +159,7 @@ export default function AbilityUsagePart(Base) {
      * @returns {boolean}
      */
     get isRanged() {
-      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.ranged);
+      return Boolean(TERIOCK.CONFIG.ability.delivery[this.delivery]?.ranged);
     }
 
     /**
@@ -191,7 +191,7 @@ export default function AbilityUsagePart(Base) {
      * @returns {boolean}
      */
     get needsItem() {
-      return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.needsItem);
+      return Boolean(TERIOCK.CONFIG.ability.delivery[this.delivery]?.needsItem);
     }
 
     /** @inheritDoc */
@@ -233,7 +233,7 @@ export default function AbilityUsagePart(Base) {
 
     /** @inheritDoc */
     prepareCleanupData() {
-      if (!TERIOCK.config.ability.delivery[this.delivery].allowPiercing) { this.piercing.raw = 0; }
+      if (!TERIOCK.CONFIG.ability.delivery[this.delivery].allowPiercing) { this.piercing.raw = 0; }
       super.prepareCleanupData();
     }
 

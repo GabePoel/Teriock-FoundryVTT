@@ -1,4 +1,3 @@
-import { config } from "../../constants/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import {
@@ -32,12 +31,12 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   static get #triggeredChatConfig() {
     return {
       expiration: {
-        icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
+        icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.expiration,
         panelKey: "TERIOCK.MESSAGE.Expiration.panel",
         titleKey: "TERIOCK.MESSAGE.Expiration.title",
       },
       trigger: {
-        icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
+        icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.automation,
         panelKey: "TERIOCK.MESSAGE.Trigger.panel",
         titleKey: "TERIOCK.MESSAGE.Trigger.title",
       },
@@ -91,8 +90,8 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    * @returns {Teriock.Config.SizeEntry}
    */
   static getSizeConfig(size) {
-    const minCategoryMaxSize = Math.min(...config.character.sizes.map(d => d.max).filter(m => m >= size));
-    return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
+    const minCategoryMaxSize = Math.min(...TERIOCK.CONFIG.character.sizes.map(d => d.max).filter(m => m >= size));
+    return foundry.utils.deepClone(TERIOCK.CONFIG.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
   /** @inheritDoc */
@@ -380,13 +379,13 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   /** @inheritDoc */
   applyActiveEffects(phase) {
     const apply = !this._completedActiveEffectPhases.has(phase);
-    if (TERIOCK.config.change.phase[phase]?.applyToChildren && apply) {
+    if (TERIOCK.CONFIG.change.phase[phase]?.applyToChildren && apply) {
       this._applyActiveEffectsToChildren(phase);
       this._completedActiveEffectPhases.add(phase);
     } else {
       super.applyActiveEffects(phase);
     }
-    if (TERIOCK.config.change.phase[phase]?.applyToItems && apply) { this._applyActiveEffectsToItems(phase); }
+    if (TERIOCK.CONFIG.change.phase[phase]?.applyToItems && apply) { this._applyActiveEffectsToItems(phase); }
   }
 
   /**
@@ -442,7 +441,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     this.system.prepareChildAutomations();
     this.prepareChangeData();
     this.applyActiveEffects("setup");
-    this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
+    this.applyActiveEffects(TERIOCK.CONFIG.change.defaultPhase);
     this.applyActiveEffects("children");
   }
 
@@ -468,7 +467,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     if (document) {
       associations.push({
         cards: [{ documentUuid: document.uuid, img: document.img, name: document.fullName || document.name }],
-        icon: document.typeIcon ?? TERIOCK.display.icons.manifest.ui.document,
+        icon: document.typeIcon ?? TERIOCK.DISPLAY.icons.manifest.ui.document,
         title: _loc(titleKey),
       });
     }
@@ -479,7 +478,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
         panels: [{
           associations,
           icon,
-          img: document?.img || TERIOCK.display.thumbnails.manifest.core.difficultyClass,
+          img: document?.img || TERIOCK.DISPLAY.thumbnails.manifest.core.difficultyClass,
           name: _loc(panelKey, { label }),
         }],
         source: document?.uuid ?? this.uuid,

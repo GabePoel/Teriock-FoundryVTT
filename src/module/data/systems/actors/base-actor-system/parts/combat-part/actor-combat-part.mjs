@@ -1,5 +1,5 @@
-import systemConfig from "../../../../../../constants/config/system-config.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
+import systemConfig from "../../../../../../static/config/system-config.mjs";
 import { LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../models/_module.mjs";

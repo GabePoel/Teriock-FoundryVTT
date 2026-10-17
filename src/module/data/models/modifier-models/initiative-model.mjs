@@ -1,4 +1,4 @@
-import characterConfig from "../../../constants/config/character-config.mjs";
+import characterConfig from "../../../static/config/character-config.mjs";
 import { omit } from "../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../fields/tools/builders.mjs";
 import { CompetenceModel } from "../scaling-models/_module.mjs";

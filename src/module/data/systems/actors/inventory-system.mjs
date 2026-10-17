@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
@@ -38,7 +38,7 @@ export default class InventorySystem extends BaseActorSystem {
       priority: 150,
       qualifier: "1",
       target: "Actor",
-      time: TERIOCK.config.change.defaultPhase,
+      time: TERIOCK.CONFIG.change.defaultPhase,
       type: "override",
       value: "0",
     };
@@ -83,7 +83,7 @@ export default class InventorySystem extends BaseActorSystem {
         },
         system: {
           settings: Object.fromEntries(
-            Object.keys(TERIOCK.config.documentBehavior.categories.actor.settings).map(k => [k, false]),
+            Object.keys(TERIOCK.CONFIG.documentBehavior.categories.actor.settings).map(k => [k, false]),
           ),
         },
       }, data),
@@ -94,7 +94,7 @@ export default class InventorySystem extends BaseActorSystem {
   async getPanelParts() {
     return Object.assign(await super.getPanelParts(), {
       bars: [{
-        icon: TERIOCK.display.icons.manifest.ui.info,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers: [this.containing],
       }],

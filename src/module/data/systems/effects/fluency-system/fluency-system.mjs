@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
@@ -55,9 +55,9 @@ export default class FluencySystem
   /** @inheritDoc */
   get _displayFieldsContent() {
     return [...super._displayFieldsContent, {
-      classes: [TERIOCK.display.panels.styles.derived],
+      classes: [TERIOCK.DISPLAY.panels.styles.derived],
       editable: false,
-      label: TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft]?.label,
+      label: TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.label,
       path: "system.tradecraftDescription",
     }];
   }
@@ -65,8 +65,8 @@ export default class FluencySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft]?.label;
-    parts.text = dotJoin([TERIOCK.config.tradecraft.fields[this._source.field].label, parts.text]);
+    parts.subtitle = TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.label;
+    parts.text = dotJoin([TERIOCK.CONFIG.tradecraft.fields[this._source.field].label, parts.text]);
     return parts;
   }
 
@@ -92,7 +92,7 @@ export default class FluencySystem
     if (yes === false) { return false; }
 
     if (!foundry.utils.hasProperty(data, "img")) {
-      this.parent.updateSource({ img: TERIOCK.display.thumbnails.manifest.tradecraft.artist });
+      this.parent.updateSource({ img: TERIOCK.DISPLAY.thumbnails.manifest.tradecraft.artist });
     }
   }
 
@@ -102,14 +102,14 @@ export default class FluencySystem
     if (yes === false) { return false; }
 
     if (
-      Object.values(TERIOCK.display.thumbnails.manifest.tradecraft).includes(this.parent.img)
+      Object.values(TERIOCK.DISPLAY.thumbnails.manifest.tradecraft).includes(this.parent.img)
       && !foundry.utils.hasProperty(changes, "img")
     ) {
       let tradecraft = this._source.tradecraft;
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
-      foundry.utils.setProperty(changes, "img", TERIOCK.config.tradecraft.tradecrafts[tradecraft]?.img);
+      foundry.utils.setProperty(changes, "img", TERIOCK.CONFIG.tradecraft.tradecrafts[tradecraft]?.img);
     }
   }
 
@@ -126,9 +126,9 @@ export default class FluencySystem
     return {
       ...(await super.getPanelParts()),
       bars: this._withKindBar([{
-        icon: TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft].icon,
+        icon: TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft].icon,
         label: _loc("TERIOCK.COMMON.Tradecraft"),
-        wrappers: [TERIOCK.config.tradecraft.fields[this._source.field].label, getName(this.tradecraft)],
+        wrappers: [TERIOCK.CONFIG.tradecraft.fields[this._source.field].label, getName(this.tradecraft)],
       }]),
     };
   }
@@ -137,7 +137,7 @@ export default class FluencySystem
   prepareBaseData() {
     super.prepareBaseData();
     // Enforce matching tradecraft/field
-    this.field = `field:${TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft]?.field ?? this._source.field}`;
+    this.field = `field:${TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.field ?? this._source.field}`;
   }
 
   /** @inheritDoc */

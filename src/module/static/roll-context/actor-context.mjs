@@ -1,0 +1,113 @@
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { toKebabCase } from "../../utils/_module.mjs";
+
+const actorContext = {
+  c: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.c.label",
+  f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
+  lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
+  p: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.p.label",
+
+  hp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
+  "hp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.max.label",
+  "hp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.min.label",
+  "hp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.morganti.label",
+  "hp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.temp.label",
+
+  mp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.value.label",
+  "mp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.max.label",
+  "mp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.min.label",
+  "mp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.morganti.label",
+  "mp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.temp.label",
+
+  lp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.value.label",
+
+  pres: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.max.label",
+  "pres.unused": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.unused.label",
+  "pres.used": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.used.label",
+  usp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.used.label",
+
+  size: "TERIOCK.SHEETS.Actor.TABS.Details.size.label",
+  speed: "TERIOCK.SYSTEMS.BaseActor.FIELDS.speed.label",
+  weight: "TERIOCK.SYSTEMS.BaseActor.FIELDS.weight.label",
+
+  "carry.factor": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.factor",
+  "carry.heavy": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavyCapacity",
+  "carry.heavy.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
+  "carry.light": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.lightCapacity",
+  "carry.light.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
+  "carry.max": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.maxCapacity",
+  "carry.max.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
+
+  ac: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.ac.label",
+  ap: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
+  av: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.value.label",
+  "av.base": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.base.label",
+  "av.nat": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.nat.label",
+  "av.worn": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.worn.label",
+  av0: "TERIOCK.TERMS.Properties.armorVoiding",
+  bv: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.bv.label",
+  cc: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.cc.label",
+  h: "TERIOCK.ROLL_CONTEXT.Execution.h",
+  hit: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+  sb: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
+  ub: "TERIOCK.TERMS.Properties.unblockable",
+  warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
+
+  "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
+
+  "detection.hiding": "TERIOCK.SYSTEMS.BaseActor.FIELDS.detection.hiding.label",
+  "detection.perceiving": "TERIOCK.SYSTEMS.BaseActor.FIELDS.detection.perceiving.label",
+
+  money: "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.total.label",
+  "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
+  "money.physical": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.physical.label",
+};
+
+export default actorContext;
+
+preLocalizeConfig("ROLL_CONTEXT.actor");
+
+Hooks.once("teriock.identifiersInit", () => {
+  Object.keys(CONFIG.Actor.dataModels).forEach((k) => {
+    actorContext[k] = _loc(`TYPES.Actor.${k}`);
+  });
+  Object.keys(TERIOCK.CONFIG.deathBag.stones).forEach((color) => {
+    actorContext[`db.stones.${color}`] = _loc("TERIOCK.TERMS.Stones.ofColor", {
+      color: _loc(`TERIOCK.TERMS.StoneColor.${color}`),
+    });
+  });
+  Object.entries(TERIOCK.CONFIG.attribute).forEach(([k, v]) => {
+    const name = v.abbreviation;
+    Object.assign(actorContext, {
+      [`${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
+      [`${k}.passive`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.passive", { name }),
+      [`${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
+      [`${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
+    });
+  });
+  Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach(([k, v]) => {
+    const name = v.label;
+    Object.assign(actorContext, {
+      [`tc.${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
+      [`tc.${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
+      [`tc.${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
+    });
+  });
+  Object.entries(TERIOCK.CONFIG.hack).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", { part: v.part }) });
+  });
+  Object.entries(TERIOCK.CONFIG.class.classes).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v.label }) });
+  });
+  Object.entries(TERIOCK.CONFIG.class.archetypes).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: v.label }) });
+  });
+  Object.entries(TERIOCK.CONFIG.character.movement).forEach(([k, v]) => {
+    Object.assign(actorContext, {
+      [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
+    });
+  });
+  Object.entries(TERIOCK.STATUSES.conditions).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`status.${toKebabCase(k)}`]: v.name });
+  });
+});

@@ -23,7 +23,7 @@ export default class VirtualCondition
   static metadata = mergeMetadata(super.metadata, { documentName: "VirtualCondition" });
 
   static get ALLOWED_STATUSES() {
-    if (!this.#ALLOWED_STATUSES) { this.#ALLOWED_STATUSES = new Set(Object.keys(TERIOCK.statuses.conditions)); }
+    if (!this.#ALLOWED_STATUSES) { this.#ALLOWED_STATUSES = new Set(Object.keys(TERIOCK.STATUSES.conditions)); }
     return this.#ALLOWED_STATUSES;
   }
 
@@ -57,10 +57,10 @@ export default class VirtualCondition
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       status: new fields.StringField({
-        initial: Object.keys(TERIOCK.statuses.conditions)[0],
+        initial: Object.keys(TERIOCK.STATUSES.conditions)[0],
         label: "TERIOCK.COMMON.Condition",
         required: true,
-        choices: () => objectMap(TERIOCK.statuses.conditions, c => c.name, { localize: true }),
+        choices: () => objectMap(TERIOCK.STATUSES.conditions, c => c.name, { localize: true }),
       }),
     });
   }
@@ -82,12 +82,12 @@ export default class VirtualCondition
     const icons = [];
     if (this.locked) {
       icons.push({
-        icon: TERIOCK.display.icons.manifest.ui.locked,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.locked,
         tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked"),
       });
     } else {
       icons.push({
-        icon: TERIOCK.display.icons.manifest.ui.unlocked,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.unlocked,
         tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Unlocked"),
       });
     }
@@ -99,7 +99,7 @@ export default class VirtualCondition
    * @returns {Color}
    */
   get color() {
-    return foundry.utils.Color.from(TERIOCK.display.colors.palette.red);
+    return foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.red);
   }
 
   /** @inheritDoc */
@@ -125,7 +125,7 @@ export default class VirtualCondition
    * @returns {Teriock.System.ImageString}
    */
   get img() {
-    return TERIOCK.statuses.conditions[this.status]?.img;
+    return TERIOCK.STATUSES.conditions[this.status]?.img;
   }
 
   /**
@@ -142,7 +142,7 @@ export default class VirtualCondition
    * @returns {string}
    */
   get name() {
-    return TERIOCK.statuses.conditions[this.status]?.name;
+    return TERIOCK.STATUSES.conditions[this.status]?.name;
   }
 
   /**
@@ -199,7 +199,7 @@ export default class VirtualCondition
   getEmbedContextMenuEntries(_relative) {
     return [{
       group: "open",
-      icon: makeIcon(TERIOCK.display.icons.manifest.ui.openWindow, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.openWindow, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
       onClick: async () => await this.openSource(),
       visible: () => this.#sourceDocuments.size > 0,
@@ -216,9 +216,9 @@ export default class VirtualCondition
         Panel.toAssociation(
           Array.from(this.#sourceDocuments),
           _loc("TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend"),
-          TERIOCK.display.icons.manifest.ui.document,
+          TERIOCK.DISPLAY.icons.manifest.ui.document,
         ),
-        Panel.toAssociation(trackers, undefined, TERIOCK.display.icons.manifest.ability.target),
+        Panel.toAssociation(trackers, undefined, TERIOCK.DISPLAY.icons.manifest.ability.target),
       ],
       color: this.color,
       icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,

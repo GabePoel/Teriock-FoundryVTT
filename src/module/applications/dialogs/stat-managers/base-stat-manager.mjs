@@ -110,7 +110,7 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
       context.buttons = [{
         action: "ok",
         default: true,
-        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
         label: "TERIOCK.COMMON.Done",
         type: "submit",
       }];

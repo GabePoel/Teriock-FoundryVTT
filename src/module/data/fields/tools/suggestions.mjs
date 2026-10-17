@@ -13,7 +13,7 @@ const CONFIG_SUGGESTIONS = {};
  * @returns {Record<Identifier, string>}
  */
 export function categorySuggestions(category) {
-  const path = TERIOCK.config.category[category]?.suggestions;
+  const path = TERIOCK.CONFIG.category[category]?.suggestions;
   if (!path || path === "none") { return {}; }
   if (path === "registry") { return game.teriock.identifiers.getNames(category, { permission: "LIMITED" }); }
   CONFIG_SUGGESTIONS[path] ??= objectMap(foundry.utils.getProperty(TERIOCK, path) || {}, e => e.label);

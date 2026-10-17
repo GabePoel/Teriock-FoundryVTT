@@ -1,5 +1,5 @@
-import hackConfig from "../../constants/config/hack-config.mjs";
-import statConfig from "../../constants/config/stat-config.mjs";
+import hackConfig from "../../static/config/hack-config.mjs";
+import statConfig from "../../static/config/stat-config.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";

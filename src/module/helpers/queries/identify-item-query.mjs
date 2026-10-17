@@ -22,7 +22,7 @@ export default async function identifyItemQuery(queryData) {
     content,
     modal: false,
     window: {
-      icon: makeIconClass(TERIOCK.display.icons.manifest.equipment.identify, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.identify, "title"),
       title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.title"),
     },
   });

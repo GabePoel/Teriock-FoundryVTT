@@ -43,10 +43,10 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
         required: true,
       }),
       status: new fields.StringField({
-        initial: Object.keys(TERIOCK.statuses.conditions)[0],
+        initial: Object.keys(TERIOCK.STATUSES.conditions)[0],
         label: "TERIOCK.COMMON.Condition",
         required: true,
-        choices: () => objectMap(TERIOCK.statuses.conditions, c => c.name, { localize: true }),
+        choices: () => objectMap(TERIOCK.STATUSES.conditions, c => c.name, { localize: true }),
       }),
       target: new fields.BooleanField(),
     });

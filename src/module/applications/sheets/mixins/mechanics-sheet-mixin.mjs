@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { makeIcon, makeIconClass, mixClasses, objectMap } from "../../../utils/_module.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
@@ -213,7 +213,7 @@ export default function MechanicsSheetMixin(Base) {
       await super._onRender(context, options);
       this._createContextMenu(
         () => [{
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.duplicate),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.duplicate),
           label: _loc("SIDEBAR.Duplicate"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;
@@ -223,7 +223,7 @@ export default function MechanicsSheetMixin(Base) {
           },
           visible: () => this.isEditable,
         }, {
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.delete),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.delete),
           label: _loc("COMMON.Delete"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;

@@ -84,7 +84,7 @@ export default class BasePreviewModel extends BaseDataModel {
       }),
       size: new fields.StringField({
         blank: false,
-        choices: TERIOCK.config.display.sizes,
+        choices: TERIOCK.CONFIG.display.sizes,
         hint: "TERIOCK.SCHEMA.BlockSize.hint",
         initial: "medium",
         label: "TERIOCK.SCHEMA.BlockSize.label",
@@ -305,7 +305,7 @@ export default class BasePreviewModel extends BaseDataModel {
     const results = element?.querySelector(`.teriock-block-results[data-preview-search-key="${this.id}"]`);
     if (!results) { return; }
     const rendered = this.renderedGroups;
-    const sizes = Object.keys(TERIOCK.config.display.sizes);
+    const sizes = Object.keys(TERIOCK.CONFIG.display.sizes);
     results.querySelectorAll(":scope .teriock-block-container").forEach((container, i) => {
       const group = rendered[i];
       if (!group) { return; }

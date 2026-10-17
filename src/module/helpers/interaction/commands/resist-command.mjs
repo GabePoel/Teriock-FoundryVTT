@@ -1,5 +1,5 @@
-import affinityConfig from "../../../constants/config/affinity-config.mjs";
-import { icons } from "../../../constants/display/_module.mjs";
+import affinityConfig from "../../../static/config/affinity-config.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { simpleCommandFunctionFactory, thresholdCommand } from "./abstract-command.mjs";
 
 /** @type {Teriock.Command.SimpleCommandFunction<Teriock.Command.ResistOptions>} */

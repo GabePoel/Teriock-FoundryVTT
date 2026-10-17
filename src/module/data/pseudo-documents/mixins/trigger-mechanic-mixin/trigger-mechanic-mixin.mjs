@@ -32,7 +32,7 @@ export default function TriggerMechanicMixin(Base) {
     static _getTriggerChoices(granted) {
       return formatDynamicSelectOptions(
         Object.fromEntries(
-          Object.entries(TERIOCK.config.trigger).filter(([_k, g]) => g.alwaysAvailable || (granted && g.granted)),
+          Object.entries(TERIOCK.CONFIG.trigger).filter(([_k, g]) => g.alwaysAvailable || (granted && g.granted)),
         ),
         { localize: true },
       );

@@ -1,6 +1,6 @@
-import impactConfig from "../../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
+import impactConfig from "../../../static/config/impact-config.mjs";
 import { makeIcon } from "../../../utils/_module.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
@@ -56,14 +56,14 @@ export default class ImpactsRoll extends BaseRoll {
   /** @inheritDoc */
   _getFormulaContextOptions(config = {}) {
     return [{
-      icon: makeIcon(TERIOCK.display.icons.manifest.roll.boost, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.roll.boost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
       onClick: async () => {
         const newRoll = await this.boost(this.options);
         await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
     }, {
-      icon: makeIcon(TERIOCK.display.icons.manifest.roll.deboost, "contextMenu"),
+      icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.roll.deboost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
       onClick: async () => {
         const newRoll = await this.deboost(this.options);

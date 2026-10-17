@@ -98,7 +98,7 @@ export default class BaseActorSystem
    * @returns {string[]}
    */
   get _attributeTags() {
-    return Object.entries(TERIOCK.config.attribute).map(([k, v]) => `${this.attributes[k].score} ${v.abbreviation}`);
+    return Object.entries(TERIOCK.CONFIG.attribute).map(([k, v]) => `${this.attributes[k].score} ${v.abbreviation}`);
   }
 
   /** @inheritDoc */
@@ -136,11 +136,11 @@ export default class BaseActorSystem
   async getPanelParts() {
     return Object.assign(await super.getPanelParts(), {
       bars: [{
-        icon: TERIOCK.display.icons.manifest.ui.info,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers: this._scalingTags,
       }, {
-        icon: TERIOCK.display.icons.manifest.interaction.feat,
+        icon: TERIOCK.DISPLAY.icons.manifest.interaction.feat,
         label: _loc("TERIOCK.COMMON.Attributes"),
         wrappers: this._attributeTags,
       }],

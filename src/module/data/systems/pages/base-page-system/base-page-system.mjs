@@ -51,7 +51,7 @@ export default class BasePageSystem
     if (yes === false) { return false; }
 
     this.parent.updateSource(
-      foundry.utils.mergeObject({ system: { img: TERIOCK.display.thumbnails.manifest.document[this.parent.type] } }),
+      foundry.utils.mergeObject({ system: { img: TERIOCK.DISPLAY.thumbnails.manifest.document[this.parent.type] } }),
       data,
     );
   }

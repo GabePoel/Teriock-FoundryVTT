@@ -102,7 +102,7 @@ export default class BaseMenu extends TeriockApplication {
     context.label = undefined;
     context.fieldset = false;
     context.buttons = [{
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.save, "button"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.save, "button"),
       label: "SETTINGS.Save",
       type: "submit",
     }];

@@ -20,7 +20,7 @@ export default class TeriockJournalEntryPage
    */
   get img() {
     return this.system?.img || this.getFlag("teriock", "journalImage")
-      || TERIOCK.display.thumbnails.manifest.power.learnedElderSorceries;
+      || TERIOCK.DISPLAY.thumbnails.manifest.power.learnedElderSorceries;
   }
 
   /**

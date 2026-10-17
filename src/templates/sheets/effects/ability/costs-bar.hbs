@@ -5,7 +5,7 @@
   (eq system.costs.primary.mp.type "formula"))
 }}
   <div class="teriock-sheet-bar">
-    {{#each TERIOCK.config.stat as |value key|}}
+    {{#each TERIOCK.CONFIG.stat as |value key|}}
       {{#if (path @root/system.costs.primary key "type")}}
         {{formUpdater
           @root/document
@@ -14,7 +14,7 @@
           data=(ifThen
             (eq (path @root/system.costs.primary key "type") "formula")
             (path @root/system.costs.primary key "formula")
-            @root/TERIOCK.config.cost.primary.types.description)
+            @root/TERIOCK.CONFIG.cost.primary.types.description)
           icon=value.icon
           label=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
           path=(concat "system.costs.primary." key ".formula")
@@ -22,7 +22,7 @@
           source=(ifThen
             (eq (path @root/system._source.costs.primary key "type") "formula")
             (path @root/system._source.costs.primary key "formula")
-            @root/TERIOCK.config.cost.primary.types.description)
+            @root/TERIOCK.CONFIG.cost.primary.types.description)
         }}
       {{/if}}
     {{/each}}

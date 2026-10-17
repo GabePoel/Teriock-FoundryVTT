@@ -1,5 +1,3 @@
-import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
-import { icons } from "../../../../../../constants/display/_module.mjs";
 import * as previews from "../../../../../../data/models/preview-models/_module.mjs";
 import { InventorySystem } from "../../../../../../data/systems/actors/_module.mjs";
 import {
@@ -9,6 +7,8 @@ import {
   ResourceSystem,
 } from "../../../../../../data/systems/effects/_module.mjs";
 import { PowerSystem, RankSystem } from "../../../../../../data/systems/items/_module.mjs";
+import affinityConfig from "../../../../../../static/config/affinity-config.mjs";
+import { icons } from "../../../../../../static/display/_module.mjs";
 
 /**
  * @import { ApplicationTabsConfiguration } from "@client/applications/_types.mjs";

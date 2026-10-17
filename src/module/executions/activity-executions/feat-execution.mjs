@@ -20,7 +20,7 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: game.teriock.identifiers.get(TERIOCK.config.attribute[this.attribute]?.identifier) },
+      system: { _src: game.teriock.identifiers.get(TERIOCK.CONFIG.attribute[this.attribute]?.identifier) },
     });
   }
 
@@ -39,17 +39,17 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.attribute[this.attribute];
+    return TERIOCK.DISPLAY.icons.manifest.attribute[this.attribute];
   }
 
   /** @inheritDoc */
   get journalEntryPageIdentifier() {
-    return TERIOCK.config.attribute[this.attribute]?.identifier;
+    return TERIOCK.CONFIG.attribute[this.attribute]?.identifier;
   }
 
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.config.attribute[this.attribute]?.label });
+    return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.CONFIG.attribute[this.attribute]?.label });
   }
 
   /** @inheritDoc */
@@ -66,7 +66,7 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   async _buildActivations() {
     if (await super._buildActivations() === false) { return false; }
 
-    const impact = TERIOCK.config.attribute[this.attribute]?.impact;
+    const impact = TERIOCK.CONFIG.attribute[this.attribute]?.impact;
     const amount = this.rolls[0]?.total;
     if (impact && Number.isFinite(amount)) {
       this.activations.push(new teriock.data.pseudoDocuments.activations.TakeActivation({ amount, impact }));

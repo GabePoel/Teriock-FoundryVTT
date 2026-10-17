@@ -1,4 +1,4 @@
-import affinityConfig from "../../../../constants/config/affinity-config.mjs";
+import affinityConfig from "../../../../static/config/affinity-config.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import BaseAffinity from "./base-affinity/base-affinity.mjs";
 import CompetentAffinity from "./competent-affinity.mjs";

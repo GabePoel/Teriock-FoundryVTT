@@ -147,13 +147,13 @@ export default class AbilitySheet extends ChildSheet {
  * @param {PiercingModel} piercing
  */
 function getDeliveryString(delivery, piercing) {
-  if (TERIOCK.config.ability.delivery[delivery]?.allowPiercing && piercing.raw) {
+  if (TERIOCK.CONFIG.ability.delivery[delivery]?.allowPiercing && piercing.raw) {
     return _loc("TERIOCK.SYSTEMS.Ability.FIELDS.delivery.full", {
-      delivery: TERIOCK.config.ability.delivery[delivery].label,
+      delivery: TERIOCK.CONFIG.ability.delivery[delivery].label,
       piercing: piercing.label,
     });
   }
-  return _loc(TERIOCK.config.ability.delivery[delivery]?.label);
+  return _loc(TERIOCK.CONFIG.ability.delivery[delivery]?.label);
 }
 
 /**
@@ -163,8 +163,8 @@ function getDeliveryString(delivery, piercing) {
  */
 function getExecutionTimeString(maneuver, base, slow) {
   if (maneuver === "slow") { return slow.label; }
-  if (maneuver === "passive") { return TERIOCK.config.ability.executionTime.passive.passive; }
-  return TERIOCK.config.ability.executionTime[maneuver]?.[base];
+  if (maneuver === "passive") { return TERIOCK.CONFIG.ability.executionTime.passive.passive; }
+  return TERIOCK.CONFIG.ability.executionTime[maneuver]?.[base];
 }
 
 /**

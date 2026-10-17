@@ -29,7 +29,7 @@ export default class TeriockRegionTab extends RegionTab {
       context.filters.push({
         action: "clearTargets",
         active: false,
-        cssClass: `${makeIconClass(TERIOCK.display.icons.manifest.ui.clearTargets)} tcenter`,
+        cssClass: `${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.clearTargets)} tcenter`,
         tooltip: "TERIOCK.DIALOGS.ClearTargets.title",
       });
     }

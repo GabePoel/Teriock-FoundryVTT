@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { fancifyFields, makeIconClass, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
@@ -286,7 +286,7 @@ export default function BaseSystemMixin(Base) {
      * @returns {Teriock.UI.Tip[]}
      */
     getVisibleTips(category) {
-      const settings = TERIOCK.config.tip.settings[category];
+      const settings = TERIOCK.CONFIG.tip.settings[category];
       return this.displayTips.filter(tip => !settings[tip.level] || game.settings.get("teriock", settings[tip.level]));
     }
   }

@@ -47,14 +47,14 @@ export default function PlayableActorSheetRollingPart(Base) {
       const context = await super._prepareContext(options);
       const index = game.packs.get("teriock.player").index;
       context.attributeMacros = Object.fromEntries(
-        Object.keys(TERIOCK.config.attribute).map(
+        Object.keys(TERIOCK.CONFIG.attribute).map(
           att => [att, index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid]
         ),
       );
       const competenceIconClass = level =>
-        TERIOCK.config.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
+        TERIOCK.CONFIG.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
       context.attributeDisplay = Object.fromEntries(
-        Object.keys(TERIOCK.config.attribute).map(key => {
+        Object.keys(TERIOCK.CONFIG.attribute).map(key => {
           const attribute = this.document.system.attributes[key];
           const source = this.document.system._source.attributes[key];
           return [key, {

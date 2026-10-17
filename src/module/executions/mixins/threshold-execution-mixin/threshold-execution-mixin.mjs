@@ -1,7 +1,7 @@
-import mathConfig from "../../../constants/config/math-config.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
+import mathConfig from "../../../static/config/math-config.mjs";
 import { objectMap } from "../../../utils/_module.mjs";
 
 /**

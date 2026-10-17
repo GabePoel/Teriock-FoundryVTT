@@ -47,7 +47,7 @@ export default function ActorTokenPart(Base) {
       ) {
         this._tokenChanges.push({
           key: "texture.tint",
-          phase: TERIOCK.config.change.tokenPhase,
+          phase: TERIOCK.CONFIG.change.tokenPhase,
           priority: 5,
           type: "override",
           value: "#ff0000",
@@ -64,7 +64,7 @@ export default function ActorTokenPart(Base) {
       let sightColor;
       let visionMode = "basic";
       for (const [k, v] of Object.entries(this.senses)) {
-        const senseVisionMode = TERIOCK.config.character.sense[k]?.visionMode;
+        const senseVisionMode = TERIOCK.CONFIG.character.sense[k]?.visionMode;
         if (senseVisionMode && v > maxRange) {
           maxRange = v;
           visionMode = senseVisionMode;
@@ -85,7 +85,7 @@ export default function ActorTokenPart(Base) {
       if (this.actor.system.settings.getSetting("autoVisionModes")) {
         this._tokenChanges.push({
           key: "sight.visionMode",
-          phase: TERIOCK.config.change.tokenPhase,
+          phase: TERIOCK.CONFIG.change.tokenPhase,
           priority: 5,
           type: "override",
           value: visionMode,
@@ -94,7 +94,7 @@ export default function ActorTokenPart(Base) {
       if (this.actor.system.settings.getSetting("autoVisionAngle")) {
         this._tokenChanges.push({
           key: "sight.angle",
-          phase: TERIOCK.config.change.tokenPhase,
+          phase: TERIOCK.CONFIG.change.tokenPhase,
           priority: 5,
           type: "override",
           value: angle,
@@ -103,7 +103,7 @@ export default function ActorTokenPart(Base) {
       if (sightColor && this.actor.system.settings.getSetting("autoVisionModes")) {
         this._tokenChanges.push({
           key: "sight.color",
-          phase: TERIOCK.config.change.tokenPhase,
+          phase: TERIOCK.CONFIG.change.tokenPhase,
           priority: 5,
           type: "override",
           value: sightColor,

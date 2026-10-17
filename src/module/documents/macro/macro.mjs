@@ -50,7 +50,7 @@ export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin, U
     await game.users.queryGM("teriock.createHotbarFolder", { id: game.user.id, name: game.user.name }, {
       failPrefix: "TERIOCK.SYSTEMS.Macro.QUERY.createHotbarFolder.failPrefix",
       localize: true,
-      timeout: TERIOCK.config.system.timeout.writeOperation,
+      timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT,
     });
     return this.hotbarFolder;
   }

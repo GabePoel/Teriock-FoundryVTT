@@ -1,6 +1,6 @@
-import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -47,7 +47,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
     if (this.triggerLabel) { wrappers.push(this.triggerLabel); }
     const panelData = {
       bars: [{
-        icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
+        icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.automation,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers,
       }],
@@ -58,7 +58,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
         }),
         title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
-      icon: TERIOCK.display.icons.manifest.pseudoDocument.automation,
+      icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.automation,
       img: consumable.img,
       label: _loc("TYPES.Automation.changeQuantity"),
       name: _loc("TYPES.Automation.changeQuantity"),

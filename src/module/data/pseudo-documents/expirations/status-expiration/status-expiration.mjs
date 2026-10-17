@@ -12,7 +12,7 @@ function conditionField() {
   return new IdentifierField({
     blank: false,
     nullable: false,
-    choices: () => objectMap(TERIOCK.statuses.conditions, c => c.name),
+    choices: () => objectMap(TERIOCK.STATUSES.conditions, c => c.name),
   });
 }
 

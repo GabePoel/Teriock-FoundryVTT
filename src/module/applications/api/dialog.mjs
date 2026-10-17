@@ -1,4 +1,4 @@
-import { icons } from "../../constants/display/_module.mjs";
+import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { BaseApplicationMixin } from "./mixins/_module.mjs";
 

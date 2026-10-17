@@ -1,20 +1,20 @@
 import { default as templates } from "../json/templates.json" with { type: "json" };
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
-import * as constants from "./constants/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as executions from "./executions/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 import * as setup from "./setup/_module.mjs";
+import * as TERIOCK from "./static/_module.mjs";
 import * as utils from "./utils/_module.mjs";
 
 // Register Global References
 // ==========================
 
 Object.assign(globalThis, {
-  TERIOCK: constants,
+  TERIOCK,
   teriock: {
     applications,
     canvas,
@@ -54,9 +54,9 @@ foundry.helpers.Hooks.once("init", function() {
   });
   for (const k of Object.keys(CONFIG.statusEffects)) { delete CONFIG.statusEffects[k]; }
   Object.assign(CONFIG.statusEffects, {
-    ...TERIOCK.statuses.conditions,
-    ...TERIOCK.statuses.cover,
-    ...TERIOCK.statuses.hacks,
+    ...TERIOCK.STATUSES.conditions,
+    ...TERIOCK.STATUSES.cover,
+    ...TERIOCK.STATUSES.hacks,
   });
 
   // Configure UI and UX Components
@@ -144,12 +144,12 @@ foundry.helpers.Hooks.once("init", function() {
     }
   };
 
-  CONFIG.ActiveEffect.changeTypes = constants.config.change.types;
+  CONFIG.ActiveEffect.changeTypes = TERIOCK.CONFIG.change.types;
   CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
   CONFIG.ActiveEffect.defaultType = "consequence";
   CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
   CONFIG.ActiveEffect.expiryAction = "delete";
-  CONFIG.ActiveEffect.phases = constants.config.change.phase;
+  CONFIG.ActiveEffect.phases = TERIOCK.CONFIG.change.phase;
   registerSubtypes(data.systems.effects);
 
   CONFIG.Actor.collection = documents.collections.TeriockActors;
@@ -287,7 +287,7 @@ foundry.helpers.Hooks.once("init", function() {
   // Configure Formula Editor
   // ========================
 
-  Object.entries(constants.rollContext).forEach(([k, v]) => {
+  Object.entries(TERIOCK.ROLL_CONTEXT).forEach(([k, v]) => {
     CONFIG.formulaEditor.contexts[k] = { labels: v };
   });
 
@@ -332,7 +332,7 @@ Hooks.once("i18nInit", () => {
 // ======================
 
 Hooks.once("teriock.identifiersInit", () => {
-  const rc = TERIOCK.rollContext;
+  const rc = TERIOCK.ROLL_CONTEXT;
   const effectLabels = {
     ...rc.ability,
     ...rc.attunement,

@@ -1,10 +1,10 @@
 <div class="teriock-block-display">
   {{infoIcon "core:price"}}
   <div class="money-panels tgrid g3">
-    {{#each TERIOCK.config.currency as |currency id|}}
+    {{#each TERIOCK.CONFIG.currency as |currency id|}}
       <label class="money-panel-container">
-        <div class="money-icon tcenter timage" data-src='{{path @root/TERIOCK.config.currency id "img"}}'>
-          <img src='{{path @root/TERIOCK.config.currency id "img"}}' data-openable="true" alt="" loading="lazy" />
+        <div class="money-icon tcenter timage" data-src='{{path @root/TERIOCK.CONFIG.currency id "img"}}'>
+          <img src='{{path @root/TERIOCK.CONFIG.currency id "img"}}' data-openable="true" alt="" loading="lazy" />
         </div>
         <div class="money-panel tgrid g4">
           {{formInput
@@ -31,7 +31,7 @@
     <label class="money-panel-container">
       <div class="money-icon tcenter timage" data-src="{{ currencyImages.debt }}">
         <img
-          src="{{ @root/TERIOCK.display.thumbnails.manifest.currency.debt }}"
+          src="{{ @root/TERIOCK.DISPLAY.thumbnails.manifest.currency.debt }}"
           data-openable="true"
           alt=""
           loading="lazy"
@@ -61,7 +61,7 @@
   {{!-- prettier-ignore --}}
   <output
     class="money-total{{#if (lt system.money.total 0)}} tred{{/if}}"
-    for='{{#each TERIOCK.config.currency as |currency id|}}{{concat concat @root/appId "-currency-" id " "}}{{/each}}{{concat @root/appId "-currency-debt"}}'
+    for='{{#each TERIOCK.CONFIG.currency as |currency id|}}{{concat concat @root/appId "-currency-" id " "}}{{/each}}{{concat @root/appId "-currency-debt"}}'
   >
     {{ system.money.total }}
     ₲&nbsp;&nbsp;&nbsp;&nbsp;

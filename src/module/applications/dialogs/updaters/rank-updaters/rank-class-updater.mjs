@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -26,7 +26,7 @@ export default class RankClassUpdater extends BaseUpdater {
     if (path === "system.class") {
       const archetype = this._currentData.system.archetype;
       const choices = {};
-      for (const [key, config] of Object.entries(TERIOCK.config.class.classes)) {
+      for (const [key, config] of Object.entries(TERIOCK.CONFIG.class.classes)) {
         if (config.archetype === archetype) { choices[key] = _loc(config.label); }
       }
       return choices;
@@ -37,9 +37,9 @@ export default class RankClassUpdater extends BaseUpdater {
   /** @inheritDoc */
   _normalizeCurrentData() {
     const archetype = this._currentData.system.archetype;
-    if (TERIOCK.config.class.classes[this._currentData.system.class]?.archetype !== archetype) {
-      this._currentData.system.class = Object.keys(TERIOCK.config.class.classes).find(k =>
-        TERIOCK.config.class.classes[k].archetype === archetype
+    if (TERIOCK.CONFIG.class.classes[this._currentData.system.class]?.archetype !== archetype) {
+      this._currentData.system.class = Object.keys(TERIOCK.CONFIG.class.classes).find(k =>
+        TERIOCK.CONFIG.class.classes[k].archetype === archetype
       );
     }
   }

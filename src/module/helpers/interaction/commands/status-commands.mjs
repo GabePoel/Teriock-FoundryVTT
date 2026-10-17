@@ -1,5 +1,5 @@
-import { icons } from "../../../constants/display/_module.mjs";
 import { validateTypedIdentifier } from "../../../data/fields/tools/validators.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 
 /**
  * Make a status command function.

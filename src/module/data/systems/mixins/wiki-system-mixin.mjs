@@ -32,7 +32,7 @@ export default function WikiSystemMixin(Base) {
      */
     get wikiPage() {
       const { identifier, type } = parseIdentifier(this.wikiIdentifier);
-      return TERIOCK.config.wiki.index[type]?.[identifier] ?? "";
+      return TERIOCK.CONFIG.wiki.index[type]?.[identifier] ?? "";
     }
 
     /**
@@ -42,7 +42,7 @@ export default function WikiSystemMixin(Base) {
       const title = this.wikiPage;
       if (this.isOnWiki) {
         ui.notifications.info("TERIOCK.SYSTEMS.Wiki.DIALOG.open.opening", { format: { value: title }, localize: true });
-        const pageUrl = `${TERIOCK.config.wiki.address}/${encodeURIComponent(title)}`;
+        const pageUrl = `${TERIOCK.CONST.WIKI_URL}/${encodeURIComponent(title)}`;
         window.open(pageUrl, "_blank");
       } else {
         ui.notifications.error("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", { format: { value: title }, localize: true });

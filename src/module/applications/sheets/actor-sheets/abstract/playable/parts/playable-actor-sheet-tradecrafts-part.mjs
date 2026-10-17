@@ -32,16 +32,16 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
        * @returns {object}
        */
       const buildField = fieldKey => {
-        const field = foundry.utils.deepClone(TERIOCK.config.tradecraft.fields[fieldKey]);
+        const field = foundry.utils.deepClone(TERIOCK.CONFIG.tradecraft.fields[fieldKey]);
         field.tradecrafts = Object.fromEntries(
-          Object.entries(TERIOCK.config.tradecraft.tradecrafts).filter(([_tcKey, tcData]) => tcData.field === fieldKey)
+          Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).filter(([_tcKey, tcData]) => tcData.field === fieldKey)
             .map(([tcKey, tcData]) => [tcKey, foundry.utils.deepClone(tcData)]),
         );
         return field;
       };
 
       const tcFields = {};
-      for (const fieldKey of Object.keys(TERIOCK.config.tradecraft.fields)) {
+      for (const fieldKey of Object.keys(TERIOCK.CONFIG.tradecraft.fields)) {
         if (fieldKey !== "prestige") { tcFields[fieldKey] = buildField(fieldKey); }
       }
       context.tradecraftFields = tcFields;
@@ -54,7 +54,7 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
 
       const index = game.packs.get("teriock.player").index;
       context.tradecraftMacros = Object.fromEntries(
-        Object.entries(TERIOCK.config.tradecraft.tradecrafts).map((
+        Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).map((
           [tc, v],
         ) => [tc, index.getName(`Make ${v.label} Check`)?.uuid]),
       );
@@ -62,9 +62,9 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
       const scoreLabel = score =>
         _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.levels.${Math.min(Math.max(score ?? 0, -2), 3)}`);
       const competenceIconClass = level =>
-        TERIOCK.config.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
+        TERIOCK.CONFIG.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
       context.tradecraftDisplay = Object.fromEntries(
-        Object.keys(TERIOCK.config.tradecraft.tradecrafts).map(key => {
+        Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).map(key => {
           const tradecraft = this.document.system.tradecrafts[key];
           const source = this.document.system._source.tradecrafts[key];
           return [key, {

@@ -1,4 +1,4 @@
-import { icons } from "../../../../constants/display/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 

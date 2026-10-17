@@ -34,12 +34,12 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.manifest.ui.dice,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.dice,
       label: "TERIOCK.EXPIRATIONS.Base.EXECUTION.roll",
       name: "roll",
     }, {
       action: "confirm",
-      icon: TERIOCK.display.icons.manifest.pseudoDocument.expiration,
+      icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.expiration,
       label: "TERIOCK.EXPIRATIONS.Base.EXECUTION.expire",
       name: "expire",
       callback: () => (this.autoExpire = true),
@@ -56,7 +56,7 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.pseudoDocument.expiration;
+    return TERIOCK.DISPLAY.icons.manifest.pseudoDocument.expiration;
   }
 
   /** @inheritDoc */

@@ -1,4 +1,4 @@
-import statConfig from "../../../../constants/config/stat-config.mjs";
+import statConfig from "../../../../static/config/stat-config.mjs";
 import { makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { StatPoolModel } from "../../../models/_module.mjs";
 
@@ -71,7 +71,7 @@ export default function StatGiverSystemMixin(Base) {
     /** @returns {Teriock.Panels.PanelBar} */
     get _statBar() {
       return {
-        icon: TERIOCK.display.icons.manifest.ui.dice,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.dice,
         label: _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.statDice"),
         wrappers: POOL_STATS.map(k =>
           this.statDice[k].hasDice
@@ -98,7 +98,7 @@ export default function StatGiverSystemMixin(Base) {
         const canToggle = this._canToggleStatDice(stat) && this.statDice[stat].hasDice;
         entries.push({
           group: "control",
-          icon: makeIcon(TERIOCK.display.icons.manifest.stat[`${stat}On`], "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.stat[`${stat}On`], "contextMenu"),
           label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.enable${stat.capitalize()}Dice`),
           onClick: async () => {
             await this.parent.update({ [`system.statDice.${stat}.disabled`]: false });
@@ -107,7 +107,7 @@ export default function StatGiverSystemMixin(Base) {
             this.statDice[stat].disabled && canToggle && this.parent._checkValidEditorDocument(doc, { self: false }),
         }, {
           group: "control",
-          icon: makeIcon(TERIOCK.display.icons.manifest.stat[`${stat}Off`], "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.stat[`${stat}Off`], "contextMenu"),
           label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.disable${stat.capitalize()}Dice`),
           onClick: async () => {
             await this.parent.update({ [`system.statDice.${stat}.disabled`]: true });

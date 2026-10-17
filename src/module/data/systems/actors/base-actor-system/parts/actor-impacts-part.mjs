@@ -48,7 +48,7 @@ export default function ActorImpactsPart(Base) {
      * @returns {Promise<boolean|"morganti">}
      */
     async impactDialog(impact, options = {}) {
-      const entry = TERIOCK.config.impact[impact];
+      const entry = TERIOCK.CONFIG.impact[impact];
       if (!entry) { return; }
       const initialAmount = options.amount ?? (entry.nullable ? null : 0);
       const amountField = new fields.NumberField({

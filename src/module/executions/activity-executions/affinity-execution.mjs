@@ -30,7 +30,7 @@ export default class AffinityExecution extends BaseExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.pseudoDocument.affinity;
+    return TERIOCK.DISPLAY.icons.manifest.pseudoDocument.affinity;
   }
 
   /**
@@ -38,17 +38,17 @@ export default class AffinityExecution extends BaseExecution {
    * @returns {Teriock.System.ImageString}
    */
   get img() {
-    return this.source?.img ?? TERIOCK.config.affinity.types[this.type]?.img;
+    return this.source?.img ?? TERIOCK.CONFIG.affinity.types[this.type]?.img;
   }
 
   /** @inheritDoc */
   get journalEntryPageIdentifier() {
-    return this.source?.typedIdentifier ?? TERIOCK.config.affinity.types[this.type]?.identifier;
+    return this.source?.typedIdentifier ?? TERIOCK.CONFIG.affinity.types[this.type]?.identifier;
   }
 
   /** @inheritDoc */
   get name() {
-    return _loc(TERIOCK.config.affinity.types[this.type]?.label ?? "");
+    return _loc(TERIOCK.CONFIG.affinity.types[this.type]?.label ?? "");
   }
 
   /** @inheritDoc */
@@ -58,7 +58,7 @@ export default class AffinityExecution extends BaseExecution {
       bars: [{ icon: this.icon, label: this.name, wrappers: this.wrappers }],
       blocks: [{ text: this.journalEntryPage?.text?.content, title: this.name }],
       collapsed: true,
-      color: this.source?.color ?? foundry.utils.Color.from(TERIOCK.config.affinity.types[this.type]?.color),
+      color: this.source?.color ?? foundry.utils.Color.from(TERIOCK.CONFIG.affinity.types[this.type]?.color),
       icon: this.icon,
       img: this.img,
       label: _loc("DOCUMENT.Affinity"),
@@ -77,7 +77,7 @@ export default class AffinityExecution extends BaseExecution {
     this.wrappers = options.wrappers
       ?? [this.source?.typeLabel, this.source?.categoryLabel, this.source?.name].filter(Boolean);
     this.wrappers.push(
-      TERIOCK.config.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
+      TERIOCK.CONFIG.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
     );
   }
 }

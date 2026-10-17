@@ -5,18 +5,18 @@
       action="updateExpansion"
       data=(concat
         (ifThen
-          (path TERIOCK.config.ability.expansion system.expansion.type "needsSaveAttribute")
-          (concat (path TERIOCK.config.attribute system.expansion.featSaveAttribute "abbreviation") " ")
+          (path TERIOCK.CONFIG.ability.expansion system.expansion.type "needsSaveAttribute")
+          (concat (path TERIOCK.CONFIG.attribute system.expansion.featSaveAttribute "abbreviation") " ")
           "")
-        (lookup (lookup TERIOCK.config.ability.expansion system.expansion.type) "label"))
-      icon=TERIOCK.display.icons.manifest.ability.expansion
+        (lookup (lookup TERIOCK.CONFIG.ability.expansion system.expansion.type) "label"))
+      icon=TERIOCK.DISPLAY.icons.manifest.ability.expansion
       label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label")
       source=(concat
         (ifThen
-          (path TERIOCK.config.ability.expansion system._source.expansion.type "needsSaveAttribute")
-          (concat (path TERIOCK.config.attribute system._source.expansion.featSaveAttribute "abbreviation") " ")
+          (path TERIOCK.CONFIG.ability.expansion system._source.expansion.type "needsSaveAttribute")
+          (concat (path TERIOCK.CONFIG.attribute system._source.expansion.featSaveAttribute "abbreviation") " ")
           "")
-        (path TERIOCK.config.ability.expansion system._source.expansion.type "label"))
+        (path TERIOCK.CONFIG.ability.expansion system._source.expansion.type "label"))
     }}
     {{formUpdater
       document
@@ -24,14 +24,14 @@
       action="updateUnit"
       data=expansionRange.data
       dataset=(object path="system.expansion.range")
-      icon=TERIOCK.display.icons.manifest.ability.expansionRange
+      icon=TERIOCK.DISPLAY.icons.manifest.ability.expansionRange
       label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label")
       source=expansionRange.source
     }}
     {{#if (exists system.expansion.cap)}}
       {{formUpdater
         document
-        icon=TERIOCK.display.icons.manifest.ability.expansionCap
+        icon=TERIOCK.DISPLAY.icons.manifest.ability.expansionCap
         path="system.expansion.cap"
       }}
     {{/if}}

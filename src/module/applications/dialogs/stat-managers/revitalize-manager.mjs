@@ -1,4 +1,4 @@
-import impactConfig from "../../../constants/config/impact-config.mjs";
+import impactConfig from "../../../static/config/impact-config.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseStatManager from "./base-stat-manager.mjs";
 

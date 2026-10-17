@@ -30,7 +30,7 @@ export default class FallExecution extends BaseExecution {
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.manifest.ui.dice,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.dice,
       label: "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.rollDamage",
       name: "rollDamage",
     }];
@@ -58,7 +58,7 @@ export default class FallExecution extends BaseExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.execution.fall;
+    return TERIOCK.DISPLAY.icons.manifest.execution.fall;
   }
 
   /** @returns {TypedIdentifier} */

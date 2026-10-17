@@ -19,6 +19,6 @@ export default class RangeModel extends LengthUnitModel {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.ability.range;
+    return TERIOCK.DISPLAY.icons.manifest.ability.range;
   }
 }

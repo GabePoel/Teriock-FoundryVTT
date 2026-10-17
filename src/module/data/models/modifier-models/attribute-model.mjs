@@ -21,7 +21,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   get name() {
-    return TERIOCK.config.attribute[this.key].label;
+    return TERIOCK.CONFIG.attribute[this.key].label;
   }
 
   /**

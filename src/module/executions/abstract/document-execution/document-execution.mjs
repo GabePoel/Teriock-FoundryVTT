@@ -17,7 +17,7 @@ export default class DocumentExecution extends BaseExecution {
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.manifest.ui.enable,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.enable,
       label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.use",
       name: "ok",
     }];

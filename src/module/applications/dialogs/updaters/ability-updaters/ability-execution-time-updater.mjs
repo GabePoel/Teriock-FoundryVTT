@@ -1,5 +1,5 @@
-import { icons } from "../../../../constants/display/_module.mjs";
 import { SlowExecutionTimeModel } from "../../../../data/models/unit-models/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -53,7 +53,7 @@ export default class AbilityExecutionTimeUpdater extends BaseUpdater {
   _getChoicesForPath(path) {
     if (path === "system.executionTime.base") {
       const maneuver = this._currentData.system.maneuver;
-      return TERIOCK.config.ability.executionTime[maneuver] ?? null;
+      return TERIOCK.CONFIG.ability.executionTime[maneuver] ?? null;
     }
     return super._getChoicesForPath(path);
   }
@@ -62,13 +62,13 @@ export default class AbilityExecutionTimeUpdater extends BaseUpdater {
   _normalizeCurrentData() {
     const maneuver = this._currentData.system.maneuver;
     if (
-      maneuver === "active" && !TERIOCK.config.ability.executionTime.active[this._currentData.system.executionTime.base]
+      maneuver === "active" && !TERIOCK.CONFIG.ability.executionTime.active[this._currentData.system.executionTime.base]
     ) {
       this._currentData.system.executionTime.base = "a1";
     }
     if (
       maneuver === "reactive"
-      && !TERIOCK.config.ability.executionTime.reactive[this._currentData.system.executionTime.base]
+      && !TERIOCK.CONFIG.ability.executionTime.reactive[this._currentData.system.executionTime.base]
     ) {
       this._currentData.system.executionTime.base = "r1";
     }

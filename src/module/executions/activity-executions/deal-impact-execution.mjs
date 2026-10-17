@@ -26,7 +26,7 @@ export default class DealImpactExecution extends mixClasses(BaseExecution, Impac
   /** @inheritDoc */
   get name() {
     if (this.impact) {
-      return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.config.impact[this.impact]?.label });
+      return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.CONFIG.impact[this.impact]?.label });
     }
     return _loc("TERIOCK.DIALOGS.Boost.title");
   }

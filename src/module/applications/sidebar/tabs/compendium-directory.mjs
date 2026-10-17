@@ -17,7 +17,7 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
    */
   static getPackIcon(pack) {
     return foundry.utils.getProperty(pack, "metadata.flags.teriock.icon") ?? CONFIG[pack.documentName]?.sidebarIcon
-      ?? TERIOCK.display.icons.manifest.ui.compendium;
+      ?? TERIOCK.DISPLAY.icons.manifest.ui.compendium;
   }
 
   /** @type {Promise<void>} */

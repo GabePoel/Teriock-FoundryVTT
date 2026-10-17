@@ -16,7 +16,7 @@
         </div>
         <div class="teriock-block-display-divider"></div>
         <div class="details-list">
-          {{#each TERIOCK.config.character.movement as |config key|}}
+          {{#each TERIOCK.CONFIG.character.movement as |config key|}}
             <div>
               {{{ config.label }}}
             </div>
@@ -37,10 +37,10 @@
               data-paths="system.speedAdjustments.{{ key }}"
             >
               <span class="unselected">
-                {{path @root/TERIOCK.config.character.speed (lookup @root/system.speedAdjustments key) "label"}}
+                {{path @root/TERIOCK.CONFIG.character.speed (lookup @root/system.speedAdjustments key) "label"}}
               </span>
               <span class="selected">
-                {{path @root/TERIOCK.config.character.speed (lookup @root/system._source.speedAdjustments key) "label"}}
+                {{path @root/TERIOCK.CONFIG.character.speed (lookup @root/system._source.speedAdjustments key) "label"}}
               </span>
             </button>
           {{/each}}
@@ -51,7 +51,7 @@
           <div class="details-list">
             <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
             <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
-            {{#each TERIOCK.config.character.sense as |config key|}}
+            {{#each TERIOCK.CONFIG.character.sense as |config key|}}
               {{#unless config.hidden}}
                 <div>
                   {{{ config.label }}}
@@ -98,7 +98,7 @@
                   document
                   classes="updatable"
                   action="updatePaths"
-                  icon=TERIOCK.display.icons.manifest.maneuver.passive
+                  icon=TERIOCK.DISPLAY.icons.manifest.maneuver.passive
                   path="system.rotators.max"
                   selected=(asInf system._source.rotators.max)
                   unselected=(asInf system.rotators.max)
@@ -127,7 +127,7 @@
                   document
                   classes="updatable"
                   action="updatePaths"
-                  icon=TERIOCK.display.icons.manifest.power.curse
+                  icon=TERIOCK.DISPLAY.icons.manifest.power.curse
                   path="system.curses.max"
                   selected=(asInf system._source.curses.max)
                   unselected=(asInf system.curses.max)
@@ -145,7 +145,7 @@
                 document
                 classes="actor-stat-value updatable"
                 action="updatePaths"
-                icon=TERIOCK.display.icons.manifest.attribute.snk
+                icon=TERIOCK.DISPLAY.icons.manifest.attribute.snk
                 path="system.detection.hiding"
                 selected=system._source.detection.hiding
                 unselected=system.detection.hiding
@@ -157,7 +157,7 @@
                 document
                 classes="actor-stat-value updatable"
                 action="updatePaths"
-                icon=TERIOCK.display.icons.manifest.attribute.per
+                icon=TERIOCK.DISPLAY.icons.manifest.attribute.per
                 path="system.detection.perceiving"
                 selected=system._source.detection.perceiving
                 unselected=system.detection.perceiving
@@ -181,7 +181,7 @@
               unselected=system.size.value
               action="updatePaths"
               path="system.size.value"
-              icon=TERIOCK.display.icons.manifest.species.size
+              icon=TERIOCK.DISPLAY.icons.manifest.species.size
             }}
           </div>
           <div class="actor-stat">
@@ -220,7 +220,7 @@
                 unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
               action="updatePaths"
               path="system.weight.self"
-              icon=TERIOCK.display.icons.manifest.equipment.weight
+              icon=TERIOCK.DISPLAY.icons.manifest.equipment.weight
             }}
           </div>
           <div class="actor-stat">

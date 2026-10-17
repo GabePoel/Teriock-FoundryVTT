@@ -1,4 +1,4 @@
-import { icons } from "../../constants/display/_module.mjs";
+import { icons } from "../../static/display/_module.mjs";
 import { fromIdentifierLocal, fromQualifier, makeIconClass, resolveDocuments } from "../../utils/_module.mjs";
 import ResolvableDialog from "../api/resolvable-dialog.mjs";
 
@@ -306,7 +306,7 @@ export default class DocumentSelector extends ResolvableDialog {
       buttons: [{
         action: "ok",
         default: !this.unchecked,
-        icon: makeIconClass(TERIOCK.display.icons.manifest.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }],

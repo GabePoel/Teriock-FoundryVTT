@@ -1,5 +1,5 @@
-import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
-import { icons } from "../../../../constants/display/_module.mjs";
+import equipmentConfig from "../../../../static/config/equipment-config.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import {
   dotJoin,
   fromIdentifier,
@@ -99,8 +99,8 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get _color() {
-    if (this.storage.count.over || this.storage.weight.over) { return TERIOCK.display.colors.palette.red; }
-    if (!this.identification.read) { return TERIOCK.display.colors.palette.grey; }
+    if (this.storage.count.over || this.storage.weight.over) { return TERIOCK.DISPLAY.colors.palette.red; }
+    if (!this.identification.read) { return TERIOCK.DISPLAY.colors.palette.grey; }
     return super._color;
   }
 

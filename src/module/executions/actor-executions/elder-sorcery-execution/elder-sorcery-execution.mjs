@@ -57,7 +57,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.execution.elderSorcery;
+    return TERIOCK.DISPLAY.icons.manifest.execution.elderSorcery;
   }
 
   /** @returns {TypedIdentifier} */

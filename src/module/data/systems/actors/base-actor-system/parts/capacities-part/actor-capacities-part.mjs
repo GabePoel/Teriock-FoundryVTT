@@ -82,9 +82,9 @@ export default function ActorCapacitiesPart(Base) {
       }
       this.weight.equipment = equipmentWeight;
       const carried = this.weight.equipment + this.weight.money;
-      this.weight.carried = carried.toNearest(TERIOCK.config.system.unitPrecision);
+      this.weight.carried = carried.toNearest(TERIOCK.CONST.UNIT_PRECISION);
       const value = this.weight.equipment + this.weight.money + this.weight.self;
-      this.weight.value = value.toNearest(TERIOCK.config.system.unitPrecision);
+      this.weight.value = value.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
     /** @inheritDoc */
@@ -119,7 +119,7 @@ export default function ActorCapacitiesPart(Base) {
       this.size.length = sizeDefinition.length;
       this.size.reach = sizeDefinition.reach;
       this.weight.self ??= this.weight.self = this.parent.constructor.getDefaultWeight(this.size.value);
-      this.weight.self = this.weight.self.toNearest(TERIOCK.config.system.unitPrecision);
+      this.weight.self = this.weight.self.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
     /** @inheritDoc */

@@ -31,7 +31,7 @@ export default function CommonDocumentMixin(Base) {
      */
     static getDefaultImageForType(type) {
       if (type && CONFIG[this.documentName].dataModels[type]) {
-        return TERIOCK.display.thumbnails.manifest.document[type];
+        return TERIOCK.DISPLAY.thumbnails.manifest.document[type];
       }
     }
 

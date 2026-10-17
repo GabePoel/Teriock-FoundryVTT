@@ -73,7 +73,7 @@ export default class BaseUnitModel extends BaseDataModel {
     const unitType = this.unitType;
     if (unitType === "zero") { return 0; }
     if (unitType === "infinite") { return Infinity; }
-    return value.toNearest(TERIOCK.config.system.unitPrecision);
+    return value.toNearest(TERIOCK.CONST.UNIT_PRECISION);
   }
 
   /**
@@ -114,7 +114,7 @@ export default class BaseUnitModel extends BaseDataModel {
   get formula() {
     const unitType = this.unitType;
     if (unitType === "zero") { return "0"; }
-    if (unitType === "infinite") { return TERIOCK.config.system.inf.toString(); }
+    if (unitType === "infinite") { return TERIOCK.CONST.INF.toString(); }
 
     const formula = this.raw || "0";
     const conversion = this.conversion;

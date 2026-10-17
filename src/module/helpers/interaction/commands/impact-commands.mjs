@@ -1,6 +1,6 @@
-import impactConfig from "../../../constants/config/impact-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { DealImpactExecution } from "../../../executions/activity-executions/_module.mjs";
+import impactConfig from "../../../static/config/impact-config.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -11,7 +11,7 @@ import { formulaCommand } from "./abstract-command.mjs";
 async function abstractImpactCommandOperation(actor, options) {
   const formula = options.formula || "0";
   const impact = options.impact || "damage";
-  const config = TERIOCK.config.impact[impact];
+  const config = TERIOCK.CONFIG.impact[impact];
   if (options.apply) {
     if (!game.actors.check(actor)) { return; }
     const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});

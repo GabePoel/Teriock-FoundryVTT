@@ -60,7 +60,7 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (TERIOCK.config.transformation.multiCheckboxPaths.includes(path)) {
+    if (TERIOCK.CONFIG.transformation.multiCheckboxPaths.includes(path)) {
       inputConfig.input = (field, ic) => {
         ic.choices = field.element.choices;
         foundry.data.fields.StringField._prepareChoiceConfig(ic);

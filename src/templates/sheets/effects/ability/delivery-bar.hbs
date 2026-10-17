@@ -6,15 +6,15 @@
     changed=executionTime.changed
     data=executionTime.data
     source=executionTime.source
-    dataset=(object maneuver=(lookup TERIOCK.config.ability.maneuver system.maneuver))
-    icon=TERIOCK.display.icons.manifest.ability.execution
+    dataset=(object maneuver=(lookup TERIOCK.CONFIG.ability.maneuver system.maneuver))
+    icon=TERIOCK.DISPLAY.icons.manifest.ability.execution
     label=(localize "TERIOCK.COMMON.ExecutionTime")
   }}
   {{formUpdater
     document
     action="updateDelivery"
     data=delivery.data
-    icon=TERIOCK.display.icons.manifest.ability.delivery
+    icon=TERIOCK.DISPLAY.icons.manifest.ability.delivery
     path="system.delivery"
     source=delivery.source
   }}
@@ -24,16 +24,16 @@
     data=(concat
       (ifThen
         (eq system.interaction "feat")
-        (concat (path TERIOCK.config.attribute system.featSaveAttribute "abbreviation") " ")
+        (concat (path TERIOCK.CONFIG.attribute system.featSaveAttribute "abbreviation") " ")
         "")
-      (path TERIOCK.config.ability.interaction system.interaction "label"))
-    icon=TERIOCK.display.icons.manifest.ability.interaction
+      (path TERIOCK.CONFIG.ability.interaction system.interaction "label"))
+    icon=TERIOCK.DISPLAY.icons.manifest.ability.interaction
     label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")
     source=(concat
       (ifThen
         (eq system._source.interaction "feat")
-        (concat (path TERIOCK.config.attribute system._source.featSaveAttribute "abbreviation") " ")
+        (concat (path TERIOCK.CONFIG.attribute system._source.featSaveAttribute "abbreviation") " ")
         "")
-      (path TERIOCK.config.ability.interaction system._source.interaction "label"))
+      (path TERIOCK.CONFIG.ability.interaction system._source.interaction "label"))
   }}
 </div>

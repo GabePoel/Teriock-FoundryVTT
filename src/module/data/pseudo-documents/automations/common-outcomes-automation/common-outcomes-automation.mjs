@@ -19,7 +19,7 @@ export default class CommonOutcomesAutomation extends mixClasses(BaseAutomation,
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      common: new fields.SetField(new fields.StringField({ choices: TERIOCK.config.command.common })),
+      common: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.command.common })),
     });
   }
 

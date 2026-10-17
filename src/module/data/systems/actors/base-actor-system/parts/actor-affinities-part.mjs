@@ -1,6 +1,6 @@
-import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
 import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
 import { AffinityExecution, ResistanceExecution } from "../../../../../executions/activity-executions/_module.mjs";
+import affinityConfig from "../../../../../static/config/affinity-config.mjs";
 import { toId } from "../../../../../utils/_module.mjs";
 import { BaseAffinity } from "../../../../pseudo-documents/affinities/abstract/_module.mjs";
 
@@ -63,8 +63,8 @@ export default function ActorAffinitiesPart(Base) {
      */
     _addVirtualConditionAffinity(status, type, category, value, data) {
       if (!this.parent.statuses.has(status)) { return; }
-      this._addVirtualAffinity(type, category, value, TERIOCK.statuses.conditions[status]?.name, {
-        img: TERIOCK.statuses.conditions[status]?.img,
+      this._addVirtualAffinity(type, category, value, TERIOCK.STATUSES.conditions[status]?.name, {
+        img: TERIOCK.STATUSES.conditions[status]?.img,
         ...data,
       });
     }

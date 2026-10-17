@@ -1,7 +1,7 @@
 import { LocalDocumentField, TernaryField } from "../_module.mjs";
-import statConfig from "../../../constants/config/stat-config.mjs";
-import transformationConfig from "../../../constants/config/transformation-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
+import statConfig from "../../../static/config/stat-config.mjs";
+import transformationConfig from "../../../static/config/transformation-config.mjs";
 import { objectMap } from "../../../utils/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
@@ -68,7 +68,7 @@ export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
     level: new fields.StringField({
       blank: true,
-      choices: localizeChoices(TERIOCK.config.transformation.level, { none: true }),
+      choices: localizeChoices(TERIOCK.CONFIG.transformation.level, { none: true }),
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: null,
       label: "TERIOCK.SCHEMA.Transformation.level.label",

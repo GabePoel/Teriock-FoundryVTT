@@ -1,4 +1,4 @@
-import effectConfig from "../../../../constants/config/effect-config.mjs";
+import effectConfig from "../../../../static/config/effect-config.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;

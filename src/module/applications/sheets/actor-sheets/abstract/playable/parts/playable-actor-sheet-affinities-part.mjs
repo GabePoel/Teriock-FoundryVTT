@@ -1,4 +1,4 @@
-import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
+import affinityConfig from "../../../../../../static/config/affinity-config.mjs";
 
 /**
  * @template {MixinBase} T

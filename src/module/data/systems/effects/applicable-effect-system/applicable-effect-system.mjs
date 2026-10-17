@@ -63,7 +63,7 @@ export default class ApplicableEffectSystem
    */
   get _durationBar() {
     return {
-      icon: TERIOCK.display.icons.manifest.ability.duration,
+      icon: TERIOCK.DISPLAY.icons.manifest.ability.duration,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.duration"),
       wrappers: [this.parent.remainingString],
     };

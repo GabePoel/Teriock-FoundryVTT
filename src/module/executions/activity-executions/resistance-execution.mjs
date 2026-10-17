@@ -31,6 +31,6 @@ export default class ResistanceExecution extends mixClasses(AffinityExecution, T
    */
   _configure(options = {}) {
     super._configure(options);
-    this.threshold ??= TERIOCK.config.system.resistanceThreshold;
+    this.threshold ??= TERIOCK.CONFIG.system.resistanceThreshold;
   }
 }

@@ -1,4 +1,4 @@
-import triggerConfig from "../../constants/config/trigger-config.mjs";
+import triggerConfig from "../../static/config/trigger-config.mjs";
 import { batchWrite } from "../../utils/_module.mjs";
 
 /**

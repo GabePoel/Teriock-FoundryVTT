@@ -1,7 +1,7 @@
 import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../_module.mjs";
-import impactConfig from "../../../../constants/config/impact-config.mjs";
-import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
+import impactConfig from "../../../../static/config/impact-config.mjs";
+import systemConfig from "../../../../static/config/system-config.mjs";
 import { makeIcon, mergeMetadata, mixClasses, objectMap, toKebabCase } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
@@ -85,7 +85,7 @@ export default function ChildSystemMixin(Base) {
         Object.entries(this._getTipErrors()).filter(([k, v]) =>
           game.settings.get("teriock", "errorMessages").has(k) && v()
         ).map(([k, _v]) => k),
-      ).map(k => TERIOCK.config.tip.error[k]);
+      ).map(k => TERIOCK.CONFIG.tip.error[k]);
     }
 
     /**
@@ -98,7 +98,7 @@ export default function ChildSystemMixin(Base) {
         Object.entries(this._getTipSuppressions()).filter(([k, v]) =>
           game.settings.get("teriock", "suppressionMessages").has(k) && v()
         ).map(([k, _v]) => k),
-      ).map(k => TERIOCK.config.tip.suppression[k]);
+      ).map(k => TERIOCK.CONFIG.tip.suppression[k]);
     }
 
     /** @inheritDoc */
@@ -115,15 +115,15 @@ export default function ChildSystemMixin(Base) {
     get _embedIcons() {
       return [...super._embedIcons, {
         action: "chatDoc",
-        icon: TERIOCK.display.icons.manifest.ui.chat,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.chat,
         tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
         visible: this.parent.isViewer,
         onClick: async () => await this.parent.toMessage(),
       }, {
         action: "toggleDisabledDoc",
         icon: this.parent.disabled
-          ? TERIOCK.display.icons.manifest.ui.disabled
-          : TERIOCK.display.icons.manifest.ui.enabled,
+          ? TERIOCK.DISPLAY.icons.manifest.ui.disabled
+          : TERIOCK.DISPLAY.icons.manifest.ui.enabled,
         tooltip: this.parent.disabled
           ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
           : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
@@ -288,7 +288,7 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "control",
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.enable, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.enable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
           visible: this.parent?.isOwner
             && this.parent.disabled
@@ -300,7 +300,7 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "control",
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.disable, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.disable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
           visible: this.parent?.isOwner
             && !this.parent.disabled
@@ -313,7 +313,7 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "open",
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.image, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.image, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
           onClick: async () => {
             await new ImagePopout({
@@ -325,20 +325,20 @@ export default function ChildSystemMixin(Base) {
         },
         {
           group: "share",
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.shareImage, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.shareImage, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
           onClick: async () => TeriockChatMessage.fromImg(this.parent.img, { actor: this.actor }),
         },
         {
           group: "share",
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.shareText, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.shareText, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
           onClick: this.parent.toMessage.bind(this.parent),
         },
         this._getPanelCardContextMenuEntry(),
         {
           group: "document",
-          icon: makeIcon(TERIOCK.display.icons.manifest.ui.duplicate, "contextMenu"),
+          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.duplicate, "contextMenu"),
           label: _loc("SIDEBAR.Duplicate"),
           onClick: async () => await this.parent.duplicate(),
           visible: () => this.parent._checkValidEditorDocument(doc, { self: false }),

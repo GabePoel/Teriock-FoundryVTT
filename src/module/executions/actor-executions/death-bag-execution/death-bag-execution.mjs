@@ -35,7 +35,7 @@ export default class DeathBagExecution extends DocumentExecution {
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.manifest.execution.deathBag,
+      icon: TERIOCK.DISPLAY.icons.manifest.execution.deathBag,
       label: "TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull",
       name: "makePull",
     }];
@@ -67,7 +67,7 @@ export default class DeathBagExecution extends DocumentExecution {
    * @returns {string}
    */
   get icon() {
-    return TERIOCK.display.icons.manifest.execution.deathBag;
+    return TERIOCK.DISPLAY.icons.manifest.execution.deathBag;
   }
 
   /** @returns {TypedIdentifier} */
@@ -112,8 +112,8 @@ export default class DeathBagExecution extends DocumentExecution {
         text: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText"),
         title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
       }, { text: outcome, title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome") }],
-      icon: TERIOCK.display.icons.manifest.execution.deathBag,
-      img: TERIOCK.display.thumbnails.manifest.misc.deathBag,
+      icon: TERIOCK.DISPLAY.icons.manifest.execution.deathBag,
+      img: TERIOCK.DISPLAY.thumbnails.manifest.misc.deathBag,
       name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
     };
     this.panels.push(resultPanel);
@@ -135,7 +135,7 @@ export default class DeathBagExecution extends DocumentExecution {
       startingStones[color] = Math.floor(Math.max(await BaseRoll.getValue(this.stones[color], rollData), 0));
       totalStonesCount += startingStones[color];
       pulledStones[color] = 0;
-      this.wrappers.push(`${startingStones[color]} ${TERIOCK.config.deathBag.stones[color]?.label}`);
+      this.wrappers.push(`${startingStones[color]} ${TERIOCK.CONFIG.deathBag.stones[color]?.label}`);
     }
     if (totalStonesCount > 99) {
       ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {
@@ -197,7 +197,7 @@ export default class DeathBagExecution extends DocumentExecution {
     const actor = this._resolveActor(options);
     data.pull ??= actor?.system.deathBag.pull ?? "10";
     data.stones ??= Object.fromEntries(
-      Object.keys(TERIOCK.config.deathBag.stones).map(color => [color, actor?.system.deathBag.stones[color] ?? "0"]),
+      Object.keys(TERIOCK.CONFIG.deathBag.stones).map(color => [color, actor?.system.deathBag.stones[color] ?? "0"]),
     );
     return super._initializeSource(data, options);
   }

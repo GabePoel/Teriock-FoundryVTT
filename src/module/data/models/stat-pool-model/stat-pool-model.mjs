@@ -1,6 +1,6 @@
-import impactConfig from "../../../constants/config/impact-config.mjs";
-import statConfig from "../../../constants/config/stat-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import impactConfig from "../../../static/config/impact-config.mjs";
+import statConfig from "../../../static/config/stat-config.mjs";
 import { toId } from "../../../utils/_module.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
@@ -112,12 +112,12 @@ export default class StatPoolModel extends BaseDataModel {
       panels.push({
         bars: [],
         blocks: [{
-          text: TERIOCK.statuses.conditions["critically-wounded"].description,
+          text: TERIOCK.STATUSES.conditions["critically-wounded"].description,
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
         icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,
-        img: TERIOCK.statuses.conditions["critically-wounded"].img,
-        name: TERIOCK.statuses.conditions["critically-wounded"].name,
+        img: TERIOCK.STATUSES.conditions["critically-wounded"].img,
+        name: TERIOCK.STATUSES.conditions["critically-wounded"].name,
       });
     } else if (this.stat === "hp" && this.actor?.statuses.has("unconscious")) {
       panels.push({
@@ -126,8 +126,8 @@ export default class StatPoolModel extends BaseDataModel {
           text: "@Embed[keyword:awaken text inline=true]",
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
-        icon: TERIOCK.display.icons.manifest.effect.awaken,
-        img: TERIOCK.display.thumbnails.manifest.effect.awakening,
+        icon: TERIOCK.DISPLAY.icons.manifest.effect.awaken,
+        img: TERIOCK.DISPLAY.thumbnails.manifest.effect.awakening,
         name: _loc("TERIOCK.EFFECTS.Common.awaken"),
       });
     }

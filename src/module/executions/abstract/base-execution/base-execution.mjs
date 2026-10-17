@@ -86,7 +86,7 @@ export default class BaseExecution extends BaseDataModel {
     return [{
       action: "confirm",
       default: true,
-      icon: TERIOCK.display.icons.manifest.ui.enable,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.enable,
       label: "COMMON.Confirm",
       name: "ok",
     }];
@@ -199,7 +199,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {string}
    */
   get icon() {
-    return TERIOCK.display.icons.manifest.ability.execution;
+    return TERIOCK.DISPLAY.icons.manifest.ability.execution;
   }
 
   /**

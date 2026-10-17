@@ -1,6 +1,6 @@
-import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import commands from "../../../../helpers/interaction/commands/_module.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { getRollIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import RollAutomation from "../../automations/roll-automation/roll-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
@@ -46,7 +46,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   /** @inheritDoc */
   get label() {
     return (this.display.label
-      || _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", { impact: TERIOCK.config.impact[this.impact]?.label })
+      || _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", { impact: TERIOCK.CONFIG.impact[this.impact]?.label })
       || super.label());
   }
 

@@ -21,8 +21,8 @@ export const hackCommand = {
   id: "hack",
   primary: takeHack,
   secondary: takeUnhack,
-  icon: options => TERIOCK.config.hack[options?.part || "arm"].icon,
-  label: options => TERIOCK.config.hack[options?.part || "arm"].label,
+  icon: options => TERIOCK.CONFIG.hack[options?.part || "arm"].icon,
+  label: options => TERIOCK.CONFIG.hack[options?.part || "arm"].label,
 };
 
 /**
@@ -34,6 +34,6 @@ export const unhackCommand = {
   id: "unhack",
   primary: takeUnhack,
   secondary: takeHack,
-  icon: options => TERIOCK.config.hack[options?.part || "arm"].icon,
-  label: options => TERIOCK.config.hack[options?.part || "arm"].remove,
+  icon: options => TERIOCK.CONFIG.hack[options?.part || "arm"].icon,
+  label: options => TERIOCK.CONFIG.hack[options?.part || "arm"].remove,
 };

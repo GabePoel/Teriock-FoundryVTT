@@ -1,5 +1,5 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 
 /**
  * @see {AttunableSystem.attune}

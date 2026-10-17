@@ -1,6 +1,6 @@
-import characterConfig from "../../constants/config/character-config.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import characterConfig from "../../static/config/character-config.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
@@ -43,7 +43,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.display.icons.manifest.roll.initiative;
+    return TERIOCK.DISPLAY.icons.manifest.roll.initiative;
   }
 
   /** @inheritDoc */
@@ -81,7 +81,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    */
   _initializeSource(data, options = {}) {
     foundry.utils.mergeObject(data, {
-      bonus: options.source?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,
+      bonus: options.source?.system?.initiative?.bonus ?? TERIOCK.CONFIG.character.defaults.initiative.bonus,
       ...ui.combat.defaultInitiativeExecutionData,
     }, { inplace: true, overwrite: false });
     ui.combat.defaultInitiativeExecutionData = {};

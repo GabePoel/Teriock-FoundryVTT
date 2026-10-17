@@ -13,9 +13,9 @@ const command = {
   id: "feat",
   primary: use,
   secondary: use,
-  icon: options => TERIOCK.config.attribute[options?.attribute]?.icon || "star",
-  label: options => TERIOCK.config.attribute[options?.attribute]?.abbreviation
-    ? _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.config.attribute[options?.attribute]?.abbreviation })
+  icon: options => TERIOCK.CONFIG.attribute[options?.attribute]?.icon || "star",
+  label: options => TERIOCK.CONFIG.attribute[options?.attribute]?.abbreviation
+    ? _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.CONFIG.attribute[options?.attribute]?.abbreviation })
     : _loc("TERIOCK.ROLLS.Feat.label"),
 };
 

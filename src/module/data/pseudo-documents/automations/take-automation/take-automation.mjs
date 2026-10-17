@@ -21,7 +21,7 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
     return Object.assign(super.defineSchema(), {
       amount: new fields.NumberField({ nullable: true, placeholder: _loc("COMMON.Default") }),
       impact: new fields.StringField({
-        choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
+        choices: objectMap(TERIOCK.CONFIG.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
         initial: "damage",
         nullable: false,
         required: true,
@@ -33,7 +33,7 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "amount"];
-    if (TERIOCK.config.impact[this.impact]?.morganti) { paths.push("morganti"); }
+    if (TERIOCK.CONFIG.impact[this.impact]?.morganti) { paths.push("morganti"); }
     paths.push("hr", ...this._triggerDisplayPaths);
     return paths;
   }

@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { WikiSystemMixin } from "../mixins/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";

@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { GrantedSystemMixin } from "../mixins/_module.mjs";
 import ApplicableEffectSystem from "./applicable-effect-system/applicable-effect-system.mjs";

@@ -33,17 +33,17 @@ export default function TradecraftExecutionMixin(Base) {
       if (typeof this.threshold === "number") {
         return _loc("TERIOCK.ROLLS.Tradecraft.thresholded", {
           threshold: this.threshold,
-          value: TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].label,
+          value: TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft].label,
         });
       }
       return _loc("TERIOCK.ROLLS.Tradecraft.name", {
-        value: TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].label,
+        value: TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft].label,
       });
     }
 
     /** @inheritDoc */
     get icon() {
-      return super.icon ?? TERIOCK.display.icons.manifest.tradecraft[this.tradecraft];
+      return super.icon ?? TERIOCK.DISPLAY.icons.manifest.tradecraft[this.tradecraft];
     }
 
     /** @inheritDoc */

@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseUpdater from "./base-updater.mjs";
 
@@ -26,7 +26,7 @@ export default class FluencyTradecraftUpdater extends BaseUpdater {
     if (path === "system.tradecraft") {
       const field = this._currentData.system.field;
       const choices = {};
-      for (const [key, config] of Object.entries(TERIOCK.config.tradecraft.tradecrafts)) {
+      for (const [key, config] of Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts)) {
         if (config.field === field) { choices[key] = _loc(config.label); }
       }
       return choices;
@@ -37,9 +37,9 @@ export default class FluencyTradecraftUpdater extends BaseUpdater {
   /** @inheritDoc */
   _normalizeCurrentData() {
     const field = this._currentData.system.field;
-    if (TERIOCK.config.tradecraft.tradecrafts[this._currentData.system.tradecraft]?.field !== field) {
-      this._currentData.system.tradecraft = Object.keys(TERIOCK.config.tradecraft.tradecrafts).find(k =>
-        TERIOCK.config.tradecraft.tradecrafts[k].field === field
+    if (TERIOCK.CONFIG.tradecraft.tradecrafts[this._currentData.system.tradecraft]?.field !== field) {
+      this._currentData.system.tradecraft = Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).find(k =>
+        TERIOCK.CONFIG.tradecraft.tradecrafts[k].field === field
       );
     }
   }

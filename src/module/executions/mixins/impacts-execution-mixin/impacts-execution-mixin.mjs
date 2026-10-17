@@ -32,7 +32,7 @@ export default function ImpactsExecutionMixin(Base) {
         formula: rollableFormulaField(),
         impacts: new fields.SetField(
           new fields.StringField({
-            choices: objectMap(TERIOCK.config.impact, i => i.deal, { filter: c => !c?.hidden }),
+            choices: objectMap(TERIOCK.CONFIG.impact, i => i.deal, { filter: c => !c?.hidden }),
           }),
           { initial: ["damage"] },
         ),
@@ -44,14 +44,14 @@ export default function ImpactsExecutionMixin(Base) {
       return [{
         action: "confirm",
         default: !this.crit,
-        icon: TERIOCK.display.icons.manifest.consequence.none,
+        icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
         label: "TERIOCK.DIALOGS.Boost.BUTTONS.ok",
         name: "ok",
         callback: () => this.updateSource({ crit: false }),
       }, {
         action: "confirm",
         default: this.crit,
-        icon: TERIOCK.display.icons.manifest.consequence.crit,
+        icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
         label: "TERIOCK.DIALOGS.Boost.BUTTONS.crit",
         name: "crit",
         type: "button",
@@ -81,7 +81,7 @@ export default function ImpactsExecutionMixin(Base) {
 
     /** @inheritDoc */
     get icon() {
-      return super.icon ?? TERIOCK.display.icons.manifest.ui.dice;
+      return super.icon ?? TERIOCK.DISPLAY.icons.manifest.ui.dice;
     }
 
     /**

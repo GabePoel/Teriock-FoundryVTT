@@ -14,9 +14,9 @@ const command = {
   id: "tradecraft",
   primary: use,
   secondary: use,
-  icon: options => `${TERIOCK.config.tradecraft.tradecrafts[options?.tradecraft || "artist"].icon}`,
-  label: options => TERIOCK.config.tradecraft.tradecrafts[options?.tradecraft]?.label
-    ? _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.config.tradecraft.tradecrafts[options?.tradecraft].label })
+  icon: options => `${TERIOCK.CONFIG.tradecraft.tradecrafts[options?.tradecraft || "artist"].icon}`,
+  label: options => TERIOCK.CONFIG.tradecraft.tradecrafts[options?.tradecraft]?.label
+    ? _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.CONFIG.tradecraft.tradecrafts[options?.tradecraft].label })
     : _loc("TERIOCK.ROLLS.Tradecraft.label"),
 };
 

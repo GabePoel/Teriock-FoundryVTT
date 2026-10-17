@@ -22,7 +22,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
     return Object.assign(super.defineSchema(), {
       formula: new FormulaField({ deterministic: false, nullable: true, placeholder: _loc("COMMON.None") }),
       impact: new fields.StringField({
-        choices: objectMap(TERIOCK.config.impact, i => i.deal, { localize: true }),
+        choices: objectMap(TERIOCK.CONFIG.impact, i => i.deal, { localize: true }),
         initial: "damage",
         nullable: false,
         required: true,

@@ -1,4 +1,3 @@
-import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../utils/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
@@ -29,7 +28,7 @@ export default function ActorMovementPart(Base) {
       return Object.assign(super.defineSchema(), {
         movementSpeed: initialNumber(30),
         speedAdjustments: new fields.SchemaField(
-          objectMap(config.character.movement, e => speedField(e.initial, e.label)),
+          objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
         ),
       });
     }
@@ -38,7 +37,7 @@ export default function ActorMovementPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       rollData.speed = this.movementSpeed;
-      for (const k of Object.keys(config.character.movement)) {
+      for (const k of Object.keys(TERIOCK.CONFIG.character.movement)) {
         rollData[`speed.${k}`] = this.speedAdjustments[k] || 0;
       }
       return rollData;
@@ -81,7 +80,7 @@ export default function ActorMovementPart(Base) {
  */
 function speedField(initial, label) {
   return new fields.NumberField({
-    choices: objectMap(config.character.speed, e => e.label, { localize: true }),
+    choices: objectMap(TERIOCK.CONFIG.character.speed, e => e.label, { localize: true }),
     initial,
     integer: true,
     label,

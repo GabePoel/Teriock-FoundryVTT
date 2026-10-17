@@ -1,4 +1,4 @@
-import type effectConfig from "../../../../constants/config/effect-config.mjs";
+import type effectConfig from "../../../../static/config/effect-config.mjs";
 
 import { ConstructionNode } from "../../_module.mjs";
 import { PseudoCollection } from "../../collections/_module.mjs";

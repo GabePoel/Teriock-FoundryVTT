@@ -45,7 +45,7 @@ export default class DurationAutomation extends BaseAutomation {
   /** @inheritDoc */
   async modifyExecutionEffectData(execution, data) {
     await super.modifyExecutionEffectData(execution, data);
-    const inf = TERIOCK.config.system.inf;
+    const inf = TERIOCK.CONST.INF;
     const base = foundry.utils.getProperty(data, "duration.seconds") ?? inf;
     const formula = BaseRoll.replaceFormulaData(this.substitution, { base, new: this.#seconds });
     const seconds = await BaseRoll.getValue(formula, execution.getRollData());

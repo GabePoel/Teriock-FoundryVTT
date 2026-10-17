@@ -15,18 +15,18 @@ export default class CombatExpiration extends BaseExpiration {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       event: new fields.StringField({
-        choices: localizeChoices(TERIOCK.config.combat.event),
+        choices: localizeChoices(TERIOCK.CONFIG.combat.event),
         initial: "turn",
         required: true,
       }),
       relation: new fields.StringField({
-        choices: localizeChoices(TERIOCK.config.combat.relation),
+        choices: localizeChoices(TERIOCK.CONFIG.combat.relation),
         initial: "target",
         required: true,
       }),
       skip: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       timing: new fields.StringField({
-        choices: localizeChoices(TERIOCK.config.combat.timing, { sort: false }),
+        choices: localizeChoices(TERIOCK.CONFIG.combat.timing, { sort: false }),
         initial: "start",
         required: true,
       }),

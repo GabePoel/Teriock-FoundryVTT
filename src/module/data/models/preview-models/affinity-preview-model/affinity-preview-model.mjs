@@ -1,5 +1,5 @@
-import affinityConfig from "../../../../constants/config/affinity-config.mjs";
-import categoryConfig from "../../../../constants/config/category-config.mjs";
+import affinityConfig from "../../../../static/config/affinity-config.mjs";
+import categoryConfig from "../../../../static/config/category-config.mjs";
 import { objectMap, pathSorterFactory } from "../../../../utils/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";

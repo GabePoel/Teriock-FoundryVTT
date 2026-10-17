@@ -20,7 +20,7 @@ export default class HacksAutomation extends mixClasses(BaseAutomation, TriggerA
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       hacks: new fields.SetField(
-        new fields.StringField({ choices: objectMap(TERIOCK.config.hack, h => h.part, { localize: true }) }),
+        new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.hack, h => h.part, { localize: true }) }),
         { label: "TERIOCK.COMMON.Hacks" },
       ),
       reverse: new fields.BooleanField(),

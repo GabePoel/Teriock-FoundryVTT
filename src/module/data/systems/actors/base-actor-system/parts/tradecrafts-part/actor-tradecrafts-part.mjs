@@ -30,7 +30,7 @@ export default function ActorTradecraftsPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       const tradecrafts = {};
-      Object.entries(TERIOCK.config.tradecraft.tradecrafts).forEach((
+      Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach((
         [key, value],
       ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModel, {
         initial: { competence: { raw: 0 }, score: 0 },

@@ -1,4 +1,4 @@
-import documentBehaviorConfig from "../../../constants/config/document-behavior-config.mjs";
+import documentBehaviorConfig from "../../../static/config/document-behavior-config.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 

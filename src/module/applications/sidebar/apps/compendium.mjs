@@ -30,7 +30,7 @@ export default class TeriockCompendium extends mixClasses(Compendium, DocumentDi
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [...super._getEntryContextOptions(), {
-      icon: makeIconClass(TERIOCK.display.icons.manifest.ui.duplicate, "contextMenu"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.duplicate, "contextMenu"),
       label: "TERIOCK.COMPENDIUM.DuplicateEntry",
       onClick: async (_ev, li) => {
         const document = await this.collection?.getDocument(li.dataset.entryId);

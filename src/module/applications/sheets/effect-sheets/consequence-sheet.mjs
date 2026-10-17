@@ -1,4 +1,4 @@
-import { icons } from "../../../constants/display/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentSelector } from "../../dialogs/_module.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
@@ -76,7 +76,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
           placeholder: this.document.system.transformation[p],
           value: this.document.system._source.transformation[p],
         };
-        if (TERIOCK.config.transformation.multiCheckboxPaths.includes(p)) {
+        if (TERIOCK.CONFIG.transformation.multiCheckboxPaths.includes(p)) {
           entry.input = (field, ic) => {
             ic.choices = field.element.choices;
             foundry.data.fields.StringField._prepareChoiceConfig(ic);

@@ -1,7 +1,7 @@
 import { fromIdentifier, fromIdentifierSync } from "./utils/_module.mjs";
 
 declare global {
-  const TERIOCK: typeof import("./constants/_module.mjs");
+  const TERIOCK: typeof import("./static/_module.mjs");
 
   const teriock: {
     applications: typeof import("./applications/_module.mjs");

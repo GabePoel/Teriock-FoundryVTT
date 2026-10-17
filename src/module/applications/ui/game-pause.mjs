@@ -1,5 +1,5 @@
-import { thumbnails } from "../../constants/display/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import { thumbnails } from "../../static/display/_module.mjs";
 
 const { GamePause } = foundry.applications.ui;
 

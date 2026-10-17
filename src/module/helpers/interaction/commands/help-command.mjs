@@ -1,5 +1,5 @@
-import { icons } from "../../../constants/display/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { icons } from "../../../static/display/_module.mjs";
 
 /**
  * Use the help command.

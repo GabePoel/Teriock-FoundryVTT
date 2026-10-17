@@ -1,5 +1,5 @@
-import powerConfig from "../../../../constants/config/power-config.mjs";
-import { icons } from "../../../../constants/display/_module.mjs";
+import powerConfig from "../../../../static/config/power-config.mjs";
+import { icons } from "../../../../static/display/_module.mjs";
 import { asInf, dotJoin, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import {
@@ -52,7 +52,7 @@ export default class PowerSystem
   /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, this._metaphysicsBar, {
-      icon: TERIOCK.display.icons.manifest.armament.av,
+      icon: TERIOCK.DISPLAY.icons.manifest.armament.av,
       label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.maxAv.label"),
       wrappers: [
         this.maxAv === 0
