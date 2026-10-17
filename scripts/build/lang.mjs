@@ -39,7 +39,7 @@ import { default as systems } from "../../src/en/systems.json" with { type: "jso
 import { default as terms } from "../../src/en/terms.json" with { type: "json" };
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
 import { default as index } from "../../src/json/wiki-index.json" with { type: "json" };
-import { toCamelCase } from "../../src/module/helpers/string.mjs";
+import { toCamelCase } from "../../src/module/utils/string.mjs";
 import { sortObject } from "../script-utils.mjs";
 
 /**
