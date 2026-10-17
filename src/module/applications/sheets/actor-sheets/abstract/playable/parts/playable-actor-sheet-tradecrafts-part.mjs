@@ -59,8 +59,9 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
         ) => [tc, index.getName(`Make ${v.label} Check`)?.uuid]),
       );
 
+      // Update score tooltips if more scores amounts defined.
       const scoreLabel = score =>
-        _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.levels.${Math.min(Math.max(score ?? 0, -2), 3)}`);
+        _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.levels.${Math.min(Math.max(score ?? 0, -3), 4)}`);
       const competenceIconClass = level =>
         TERIOCK.CONFIG.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
       context.tradecraftDisplay = Object.fromEntries(
