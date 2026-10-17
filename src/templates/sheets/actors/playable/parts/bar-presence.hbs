@@ -2,13 +2,15 @@
   class="
     actor-presence-container
     actor-bar-container
-    toutline
     {{#if system.presence.overflow}}
       overflow
     {{/if}}
   "
 >
-  <div class="actor-presence-bar" style="grid-template-columns: {{repeatStr system.presence.max ' 1fr'}}">
+  <div
+    class="actor-presence-bar actor-bar toutline"
+    style="grid-template-columns: {{repeatStr system.presence.max ' 1fr'}}"
+  >
     {{#if (gte system.presence.value 1)}}
       <div
         class="presence-indicator used"

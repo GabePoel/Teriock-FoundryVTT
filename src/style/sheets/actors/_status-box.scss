@@ -18,110 +18,77 @@
   position: relative;
 
   .actor-bar {
+    border: 2px solid var(--bar-color);
     border-radius: 6px;
     display: flex;
-    flex-direction: row;
     height: 3em;
     overflow: hidden;
 
-    &.actor-hit-bar {
-      border: 2px solid colors.$hp-red;
-
-      .actor-bar-left {
-        background-color: colors.$hp-red;
-      }
-
-      .actor-bar-temp {
-        background-image: repeating-linear-gradient(
-          135deg,
-          colors.$hp-red 0px,
-          colors.$hp-red 2px,
-          colors.$hp-red-dark 2px,
-          colors.$hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
-        );
-        border-right: 2px solid colors.$hp-red;
-      }
-
-      .actor-bar-lost {
-        background: linear-gradient(90deg, colors.$hp-red-faint, colors.$hp-red-darkest);
-      }
-
-      .actor-bar-morganti {
-        background: linear-gradient(90deg, black, colors.$hp-red-drawer);
-      }
-    }
-
-    &.actor-mana-bar {
-      border: 2px solid colors.$mp-blue;
-
-      .actor-bar-left {
-        background-color: colors.$mp-blue;
-      }
-
-      .actor-bar-temp {
-        background-image: repeating-linear-gradient(
-          135deg,
-          colors.$mp-blue 0px,
-          colors.$mp-blue 2px,
-          colors.$mp-blue-dark 2px,
-          colors.$mp-blue-dark 8px
-        );
-        border-right: 2px solid colors.$mp-blue;
-      }
-
-      .actor-bar-lost {
-        background: linear-gradient(90deg, colors.$mp-blue-faint, colors.$mp-blue-darkest);
-      }
-
-      .actor-bar-morganti {
-        background: linear-gradient(90deg, black, colors.$mp-blue-drawer);
-      }
-    }
-
-    &.actor-lifespan-bar {
-      border: 2px solid colors.$lp-grey;
-
-      .actor-bar-left {
-        background-color: colors.$lp-grey;
-      }
-
-      .actor-bar-temp {
-        background-image: repeating-linear-gradient(
-          135deg,
-          colors.$lp-grey 0px,
-          colors.$lp-grey 2px,
-          colors.$lp-grey-dark 2px,
-          colors.$lp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
-        );
-        border-right: 2px solid colors.$lp-grey;
-      }
-
-      .actor-bar-lost {
-        background: linear-gradient(90deg, colors.$lp-grey-faint, colors.$lp-grey-darkest);
-      }
-    }
-
-    .actor-bar-left,
-    .actor-bar-temp,
-    .actor-bar-lost {
+    > * {
       flex: none;
-      height: 3em;
     }
+  }
+
+  .actor-hit-bar {
+    --bar-color: #{colors.$hp-red};
+    --bar-color-dark: #{colors.$hp-red-dark};
+    --bar-color-darkest: #{colors.$hp-red-darkest};
+    --bar-color-drawer: #{colors.$hp-red-drawer};
+    --bar-color-faint: #{colors.$hp-red-faint};
+  }
+
+  .actor-mana-bar {
+    --bar-color: #{colors.$mp-blue};
+    --bar-color-dark: #{colors.$mp-blue-dark};
+    --bar-color-darkest: #{colors.$mp-blue-darkest};
+    --bar-color-drawer: #{colors.$mp-blue-drawer};
+    --bar-color-faint: #{colors.$mp-blue-faint};
+  }
+
+  .actor-lifespan-bar {
+    --bar-color: #{colors.$lp-grey};
+    --bar-color-dark: #{colors.$lp-grey-dark};
+    --bar-color-darkest: #{colors.$lp-grey-darkest};
+    --bar-color-faint: #{colors.$lp-grey-faint};
+  }
+
+  .actor-bar-left {
+    background-color: var(--bar-color);
+  }
+
+  .actor-bar-temp,
+  .presence-indicator.used {
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--bar-color) 0px,
+      var(--bar-color) 2px,
+      var(--bar-color-dark) 2px,
+      var(--bar-color-dark) 8px
+    );
+  }
+
+  .actor-bar-temp {
+    border-right: 2px solid var(--bar-color);
+  }
+
+  .actor-bar-lost {
+    background: linear-gradient(90deg, var(--bar-color-faint), var(--bar-color-darkest));
+  }
+
+  .actor-bar-morganti {
+    background: linear-gradient(90deg, black, var(--bar-color-drawer));
   }
 
   .actor-bar-overlay-text,
   .actor-bar-overlay-inputs {
     align-items: center;
-    bottom: 0;
     color: var(--color-light-2);
     display: flex;
     font-size: 1.5em;
     gap: 0.25em;
-    left: 0;
+    inset: 0 1.75em 0 0;
     padding-left: calc((2em - 1cap) / 2);
     position: absolute;
-    right: 1.75em;
-    top: 0;
     transition: opacity 0.15s ease-in-out;
   }
 
@@ -131,21 +98,17 @@
   }
 
   .actor-bar-overlay {
-    bottom: 0;
-    left: 0;
+    inset: 0;
     position: absolute;
-    right: 0;
-    top: 0;
 
     .take-harm-button {
       @include mixins.centralize;
-      bottom: 0;
       color: var(--color-light-2);
       height: 2.25em;
+      inset-block: 0;
       margin-block: auto;
       position: absolute;
       right: 0.375em;
-      top: 0;
       width: 2.25em;
     }
 
@@ -175,6 +138,53 @@
       .actor-bar-overlay-inputs {
         opacity: 1;
       }
+    }
+  }
+}
+
+.actor-presence-container {
+  --bar-color: #{colors.$pp-yellow};
+  --bar-color-dark: #{colors.$pp-yellow-dark};
+  --bar-color-darkest: #{colors.$pp-yellow-darkest};
+
+  &.overflow {
+    --bar-color: var(--color-level-error);
+    --bar-color-dark: var(--color-level-error-bg);
+    --bar-color-darkest: var(--color-level-error-border);
+  }
+
+  .actor-bar-overlay-text {
+    height: 1.5em;
+    margin-block: auto;
+    pointer-events: auto;
+    right: 0.25em;
+  }
+
+  .actor-presence-bar {
+    display: grid;
+  }
+
+  .presence-indicator {
+    background-color: black;
+
+    &:not(:first-child) {
+      border-left: 1px solid var(--bar-color);
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--bar-color);
+    }
+
+    &.used {
+      display: grid;
+    }
+
+    &.unused {
+      background-color: var(--bar-color-darkest);
+    }
+
+    &.empty {
+      background: transparent;
     }
   }
 }

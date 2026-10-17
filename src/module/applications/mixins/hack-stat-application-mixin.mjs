@@ -1,7 +1,5 @@
 import hackConfig from "../../constants/config/hack-config.mjs";
 import statConfig from "../../constants/config/stat-config.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
-import { BaseUpdater } from "../dialogs/updaters/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -25,7 +23,7 @@ export default function HackStatApplicationMixin(Base) {
       actions: {
         rollStatDie: { buttons: [0, 2], handler: this._onRollStatDie },
         takeHack: { buttons: [0, 2], handler: this._onTakeHack },
-        takeImpact: { buttons: [0, 2], handler: this._onTakeImpact },
+        takeImpact: this._onTakeImpact,
       },
     };
 
@@ -57,27 +55,14 @@ export default function HackStatApplicationMixin(Base) {
 
     /**
      * Prompt for taking some amount of something and applying it to the actor.
-     * Right-click opens a morganti updater when the impact supports it.
-     * @param {PointerEvent} event
+     * @param {PointerEvent} _event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
      * @this {HackStatApplication}
      */
-    static async _onTakeImpact(event, target) {
+    static async _onTakeImpact(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
-      const impact = target.dataset.impact;
-      if (event.button === 2) {
-        if (!TERIOCK.config.impact[impact]?.morganti) { return; }
-        const stat = Object.entries(TERIOCK.config.stat).find(([_k, v]) => v.impact === impact)?.[0];
-        if (!stat) { return; }
-        await BaseUpdater.create({
-          document: this.document,
-          paths: [`system.${stat}.morganti`],
-          window: { icon: makeIconClass(TERIOCK.config.impact[impact].icon, "title") },
-        });
-        return;
-      }
-      await this.document.system.impactDialog(impact);
+      await this.document.system.impactDialog(target.dataset.impact);
     }
 
     /**
