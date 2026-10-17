@@ -34,6 +34,7 @@ declare global {
       abbreviation: string;
       bar?: { class: string, initial: number, lockInputs?: boolean, max?: number, min?: number, temp?: boolean };
       color?: { base: string, dark: string, darkest: string, light: string };
+      costIdentifier: TypedIdentifier;
       /** DSN flavor key */
       die?: string;
       hacks?: boolean;

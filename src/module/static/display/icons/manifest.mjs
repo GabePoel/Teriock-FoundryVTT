@@ -80,6 +80,7 @@ export default {
   },
   document: {
     ability: "mdi-creation",
+    alternate: "ms-alt-route",
     archetype: "ms-stars",
     attunement: "ms-approval-delegation",
     body: "ms-rib-cage",

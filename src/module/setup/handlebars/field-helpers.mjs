@@ -1,4 +1,5 @@
 import { createElement, makeIconClass, makeIconElement, toKebabCase } from "../../utils/_module.mjs";
+import uiHelpers from "./ui-helpers.mjs";
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";
@@ -52,6 +53,7 @@ function formClasses(model, options = { hash: {} }) {
  * @property {string} color
  * @property {string} data
  * @property {string} icon
+ * @property {string} info
  * @property {string} label
  * @property {string} paths
  * @property {string} placeholder
@@ -67,7 +69,7 @@ function formClasses(model, options = { hash: {} }) {
  * @todo Simplify if possible.
  */
 function formUpdater(model, options = { hash: {} }) {
-  const { abbreviation, action = "updatePaths", changed, color, dataset = {}, icon, locked } = options.hash;
+  const { abbreviation, action = "updatePaths", changed, color, dataset = {}, icon, info, locked } = options.hash;
   let { data, isPlaceholder = false, label, paths, placeholder, source } = options.hash;
   const path = String(options.hash.path ?? "");
   label ||= model?.getFieldForProperty(path)?.label || "";
@@ -121,10 +123,13 @@ function formUpdater(model, options = { hash: {} }) {
     );
   }
   displayElement.append(valueElement);
-  if (abbreviation) {
-    displayElement.append(
-      createElement("span", { className: "teriock-updater-abbreviation", textContent: _loc(abbreviation) }),
-    );
+  if (abbreviation || info) {
+    const abbreviationElement = createElement("span", {
+      className: "teriock-updater-abbreviation",
+      textContent: abbreviation ? _loc(abbreviation) : "",
+    });
+    if (info) { abbreviationElement.insertAdjacentHTML("beforeend", uiHelpers.infoIcon(info).toString()); }
+    displayElement.append(abbreviationElement);
   }
   containerElement.append(displayElement);
   return new Handlebars.SafeString(containerElement.outerHTML);

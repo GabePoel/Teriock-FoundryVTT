@@ -8,6 +8,7 @@ export default {
     abbreviation: "TERIOCK.STATS.hp.abbreviation",
     bar: { class: "hit", initial: 1, lockInputs: true, temp: true },
     color: colors.hp,
+    costIdentifier: "core:hp-costs",
     die: "hit",
     hacks: true,
     icon: icons.manifest.stat.hp,
@@ -29,6 +30,7 @@ export default {
     abbreviation: "TERIOCK.STATS.mp.abbreviation",
     bar: { class: "mana", initial: 1, temp: true },
     color: colors.mp,
+    costIdentifier: "core:mp-costs",
     die: "mana",
     icon: icons.manifest.stat.mp,
     impact: "drain",
@@ -49,6 +51,7 @@ export default {
     abbreviation: "TERIOCK.STATS.lp.abbreviation",
     bar: { class: "lifespan", initial: 20, max: 100 },
     color: colors.lp,
+    costIdentifier: "core:costs",
     icon: icons.manifest.stat.lp,
     impact: "wither",
     label: "TERIOCK.COSTS.Primary.lp",
@@ -58,6 +61,7 @@ export default {
 
   gp: {
     abbreviation: "TERIOCK.STATS.gp.abbreviation",
+    costIdentifier: "core:costs",
     icon: icons.manifest.stat.gp,
     impact: "pay",
     label: "TERIOCK.COSTS.Primary.gp",

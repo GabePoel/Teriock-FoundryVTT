@@ -115,13 +115,13 @@
 
     .teriock-updater-icon {
       @include mixins.centralize;
+      aspect-ratio: 1;
       height: 100%;
       left: 0;
       opacity: 0.5;
       pointer-events: auto;
       position: absolute;
       top: 0;
-      width: 1.5em;
       z-index: 1;
 
       i {
@@ -136,12 +136,27 @@
 
     .teriock-updater-abbreviation {
       @include mixins.text-subtle;
-      height: 1em;
+      align-items: center;
+      display: flex;
+      height: 100%;
       position: absolute;
-      right: 0.25em;
+      right: 0;
       text-transform: none;
-      top: calc(50% - 0.625em);
+      top: 0;
       z-index: 1;
+
+      &::after {
+        aspect-ratio: 1 / 2;
+        content: "";
+        flex: none;
+        height: calc(100% - 1em);
+      }
+
+      .teriock-info-icon {
+        margin-left: 0.25em;
+        pointer-events: auto;
+        position: static;
+      }
     }
 
     .teriock-updater-value {
