@@ -3413,6 +3413,11 @@ items:
           competence:
             raw: 1
           costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
             primary:
               mp:
                 formula: "1"
@@ -3425,6 +3430,7 @@ items:
             - necromancy
           identifier: crown-of-fear
           interaction: manifest
+          invoked: true
           kind: special
           overview:
             base: >-
@@ -4144,9 +4150,7 @@ items:
           kind: special
           maneuver: reactive
           overview:
-            base: >-
-              <p>@Identifier[core:targets]{Target} @Identifier[keyword:conjured]{spell}
-              @Identifier[core:fizzles]{fizzles}.</p>
+            base: <p>@Identifier[core:targets]{Target} @Identifier[keyword:conjured]{spell} has no effect within range.</p>
             fluent: >-
               <p>You may now use [[lookup name]] @Identifier[core:fluency-bonus]{F} additional times as a
               @Identifier[core:reactive-maneuvers]{free reaction} before the start of your next turn. These additional
@@ -4166,7 +4170,7 @@ items:
           standard: true
           targets:
             - spell
-          trigger: <p>A @Identifier[keyword:conjured]{conjured spell} is used within range.</p>
+          trigger: <p>A @Identifier[keyword:conjured]{conjured spell} would have some effect within range.</p>
         type: ability
       - _id: WDtIKS8dYb2ZWtCs
         _key: "!actors.items.effects!fdec3f206b747460.QYwUrN8XCUUYETmu.WDtIKS8dYb2ZWtCs"
