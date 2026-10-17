@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 
 const { Token } = foundry.canvas.placeables;

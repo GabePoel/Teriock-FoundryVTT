@@ -1,7 +1,6 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { PanelDataMixin } from "../../data/mixins/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
-import { pathSorterFactory } from "../../helpers/sort.mjs";
+import { mixClasses, pathSorterFactory } from "../../utils/_module.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
 

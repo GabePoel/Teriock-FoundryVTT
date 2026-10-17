@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import ChangeMovementAutomation from "../../automations/change-movement-automation/change-movement-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 

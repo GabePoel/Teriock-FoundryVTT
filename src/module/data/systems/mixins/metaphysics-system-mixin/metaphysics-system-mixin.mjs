@@ -1,4 +1,4 @@
-import { toKebabCase } from "../../../../helpers/string.mjs";
+import { toKebabCase } from "../../../../utils/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";

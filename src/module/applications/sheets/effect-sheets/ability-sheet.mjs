@@ -1,4 +1,4 @@
-import { createElement, elementClass } from "../../../helpers/html.mjs";
+import { createElement } from "../../../utils/_module.mjs";
 import {
   AbilityDeliveryUpdater,
   AbilityExecutionTimeUpdater,
@@ -95,7 +95,7 @@ export default class AbilitySheet extends ChildSheet {
       mask?.remove();
       return;
     }
-    content.classList.add(elementClass(this.document.system.elements));
+    content.classList.add(this.document.system.elementClass);
     if (!mask) { content.prepend(createElement("div", { className: "es-mask-rotator" })); }
   }
 

@@ -1,4 +1,4 @@
-import { createElement } from "../../helpers/html.mjs";
+import { createElement } from "../../utils/_module.mjs";
 
 /**
  * @import { DataModel, TypeDataModel } from "@common/abstract/_module.mjs";

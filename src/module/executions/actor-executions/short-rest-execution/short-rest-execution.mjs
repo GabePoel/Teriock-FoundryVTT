@@ -1,5 +1,5 @@
 import { UseDocumentsAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
-import { toId, toKebabCase } from "../../../helpers/string.mjs";
+import { toId, toKebabCase } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;

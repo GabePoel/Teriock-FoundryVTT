@@ -1,4 +1,4 @@
-import { toId } from "../../helpers/string.mjs";
+import { toId } from "../../utils/_module.mjs";
 
 /**
  * @import { EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";

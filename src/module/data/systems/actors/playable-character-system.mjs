@@ -1,6 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../helpers/construction.mjs";
-import { fromIdentifier } from "../../../helpers/utils.mjs";
+import { fromIdentifier, mergeMetadata } from "../../../utils/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
 /**

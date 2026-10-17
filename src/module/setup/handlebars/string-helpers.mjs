@@ -1,5 +1,4 @@
-import { asInf } from "../../helpers/icon.mjs";
-import { toClass, toKebabCase } from "../../helpers/string.mjs";
+import { asInf, toClass, toKebabCase } from "../../utils/_module.mjs";
 
 /**
  * Show a string only if it's at least as long as some specified length.

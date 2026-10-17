@@ -1,5 +1,4 @@
-import { mergeMetadata } from "../../../helpers/construction.mjs";
-import { parseIdentifier } from "../../../helpers/utils.mjs";
+import { mergeMetadata, parseIdentifier } from "../../../utils/_module.mjs";
 /**
  * Mixin that makes it easy to access documents on the [wiki](https://wiki.teriock.com).
  * @template {MixinBase} T

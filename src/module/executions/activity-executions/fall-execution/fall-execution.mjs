@@ -1,8 +1,7 @@
-import { TypedIdentifierSetField } from "../../../data/fields/_module.mjs";
+import { FormulaField, TypedIdentifierSetField } from "../../../data/fields/_module.mjs";
 import { ChangeMovementAutomation, StatusAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { addFormulas, addTypesToFormula } from "../../../helpers/formula.mjs";
-import { parseIdentifier } from "../../../helpers/utils.mjs";
+import { parseIdentifier } from "../../../utils/_module.mjs";
 import { BaseExecution } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -125,9 +124,9 @@ export default class FallExecution extends BaseExecution {
     const increments = Math.floor((this.distance ?? 0) / 10);
     const d4 = this.water ? Math.clamp(increments - 2, 0, 2) : 0;
     const d6 = this.water ? Math.clamp(increments - 4, 0, 18) : Math.min(increments, 20);
-    const formula = addFormulas(d4 ? `${d4}d4` : "", d6 ? `${d6}d6` : "");
+    const formula = FormulaField.sum(d4 ? `${d4}d4` : "", d6 ? `${d6}d6` : "");
     const types = Array.from(this.damageTypes, t => parseIdentifier(t).identifier);
-    this.updateSource({ formula: addTypesToFormula(formula, types) });
+    this.updateSource({ formula: FormulaField.addTypes(formula, types) });
     await super._prepareFormula();
   }
 }

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../../utils/_module.mjs";
 import BaseActorSheet from "../base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 

@@ -1,7 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { formulaExists } from "../../../../helpers/formula.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
+import { makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -110,7 +108,7 @@ export default function AttunableSystemMixin(Base) {
      * @return {boolean}
      */
     get _shouldShowTierWrapper() {
-      return formulaExists(this.tier.raw);
+      return FormulaField.exists(this.tier.raw);
     }
 
     /**

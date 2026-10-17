@@ -2,10 +2,7 @@ import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from 
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
-import { toKebabCase } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { makeIcon, mergeMetadata, mixClasses, objectMap, toKebabCase } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
 import { UsableDataMixin } from "../../../mixins/_module.mjs";

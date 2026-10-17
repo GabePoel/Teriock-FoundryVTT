@@ -1,5 +1,5 @@
 import characterConfig from "../../../constants/config/character-config.mjs";
-import { omit } from "../../../helpers/utils.mjs";
+import { omit } from "../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../fields/tools/builders.mjs";
 import { CompetenceModel } from "../scaling-models/_module.mjs";
 import { BaseModifierModel } from "./_module.mjs";

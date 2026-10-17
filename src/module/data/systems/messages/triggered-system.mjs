@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../utils/_module.mjs";
 import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 
 /**

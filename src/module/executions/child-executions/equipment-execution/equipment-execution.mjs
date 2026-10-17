@@ -1,5 +1,5 @@
-import { addTypesToFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { getName, prefixObject } from "../../../helpers/utils.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
+import { getName, prefixObject } from "../../../utils/_module.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
 const { fields } = foundry.data;
@@ -138,8 +138,8 @@ export default class EquipmentExecution extends ArmamentExecution {
       const rawDamage = this.twoHanded
         ? this.source.system._source.damage.twoHanded
         : this.source.system._source.damage.base;
-      const rawTypedDamage = addTypesToFormula(rawDamage, this.source.system.damage.types);
-      const newTypedDamage = addTypesToFormula(rawTypedDamage, this.ammunition.system.damage.types);
+      const rawTypedDamage = FormulaField.addTypes(rawDamage, this.source.system.damage.types);
+      const newTypedDamage = FormulaField.addTypes(rawTypedDamage, this.ammunition.system.damage.types);
       return oldFormula.replace(rawTypedDamage, newTypedDamage);
     }
     return oldFormula;
@@ -159,7 +159,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     const diff = super.updateSource(changes, options);
     if (("inheritAmmunitionDamageTypes" in diff)) {
       const formula = this._readyUpdatedFormula();
-      Object.assign(diff, super.updateSource({ dealImpacts: formulaExists(formula), formula }, options));
+      Object.assign(diff, super.updateSource({ dealImpacts: FormulaField.exists(formula), formula }, options));
     }
     return diff;
   }

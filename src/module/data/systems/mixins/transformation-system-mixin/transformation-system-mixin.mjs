@@ -1,6 +1,5 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
-import { consolidateWriteOperations, getSystemClass } from "../../../../helpers/utils.mjs";
+import { consolidateWriteOperations, getSystemClass, makeIcon } from "../../../../utils/_module.mjs";
 import { migrateRename, migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 

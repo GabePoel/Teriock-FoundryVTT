@@ -1,8 +1,7 @@
 import costConfig from "../../../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../../../constants/config/stat-config.mjs";
-import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
-import { objectMap } from "../../../../../../helpers/utils.mjs";
+import { mergeMetadata, objectMap } from "../../../../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;

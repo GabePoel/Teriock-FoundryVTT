@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 const { fields, LightData } = foundry.data;

@@ -1,4 +1,4 @@
-import { isKebabCase } from "../../../helpers/string.mjs";
+import { isKebabCase } from "../../../utils/_module.mjs";
 
 /**
  * Validates that a string is a valid untyped identifier.

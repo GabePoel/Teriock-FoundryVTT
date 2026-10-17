@@ -8,7 +8,7 @@ import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_mo
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import * as documents from "../documents/_module.mjs";
-import { objectMap } from "../helpers/utils.mjs";
+import { objectMap } from "../utils/_module.mjs";
 
 const { fields } = foundry.data;
 

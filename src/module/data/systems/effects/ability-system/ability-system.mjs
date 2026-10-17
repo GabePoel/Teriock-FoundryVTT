@@ -2,7 +2,7 @@ import costConfig from "../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";

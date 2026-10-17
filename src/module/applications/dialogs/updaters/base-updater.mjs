@@ -1,5 +1,4 @@
-import { createElement } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { createElement, makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 
 const { FormDataExtended } = foundry.applications.ux;

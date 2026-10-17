@@ -1,7 +1,7 @@
 import { CombatExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;

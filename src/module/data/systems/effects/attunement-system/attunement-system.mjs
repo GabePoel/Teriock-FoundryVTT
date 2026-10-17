@@ -1,8 +1,6 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
-import { dotJoin } from "../../../../helpers/string.mjs";
+import { dotJoin, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 

@@ -1,8 +1,6 @@
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
-import { toKebabCase } from "../../helpers/string.mjs";
+import { makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
 
 /**
  * @import { Document } from "@common/abstract/_module.mjs";
@@ -164,7 +162,7 @@ export default function BaseDocumentMixin(Base) {
      * @returns {Identifier}
      */
     get defaultIdentifier() {
-      return teriock.helpers.string.toKebabCase(this.name);
+      return teriock.utils.toKebabCase(this.name);
     }
 
     /**

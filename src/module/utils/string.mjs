@@ -52,18 +52,6 @@ export function dotJoin(strings) {
 }
 
 /**
- * Join CSS classes into a className string.
- * @param {Iterable<string>|string|null|undefined} [classes]
- * @returns {string}
- */
-export function toClass(classes) {
-  if (classes == null || classes === "") { return ""; }
-  if (typeof classes === "string") { return classes; }
-  if (typeof classes?.[Symbol.iterator] === "function") { return Array.from(classes).filter(Boolean).join(" "); }
-  return "";
-}
-
-/**
  * Converts a string to an ID.
  * @param {string} str
  * @param {object} [options]
@@ -101,4 +89,13 @@ export function dedent(str) {
     return Math.min(min, match ? match[1].length : 0);
   }, Infinity);
   return lines.map(line => line.slice(minIndent)).join("\n");
+}
+
+/**
+ * Get a path relative to the Teriock system root.
+ * @param path
+ * @returns {string}
+ */
+export function systemPath(path) {
+  return `systems/teriock/src/${path}`;
 }

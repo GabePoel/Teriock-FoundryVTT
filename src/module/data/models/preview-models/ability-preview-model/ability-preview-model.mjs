@@ -1,4 +1,4 @@
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap } from "../../../../utils/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import MetaphysicsPreviewModel from "../metaphysics-preview-model/metaphysics-preview-model.mjs";

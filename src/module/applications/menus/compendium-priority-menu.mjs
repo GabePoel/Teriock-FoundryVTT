@@ -1,5 +1,5 @@
-import { getPackIcon } from "../../helpers/html.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
+import { TeriockCompendiumDirectory } from "../sidebar/tabs/_module.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 /**
@@ -81,7 +81,7 @@ export default class CompendiumPriorityMenu extends BaseMenu {
     for (const pack of packs) {
       rows.push({
         collection: pack.collection,
-        icon: makeIconClass(getPackIcon(pack), "solid"),
+        icon: makeIconClass(TeriockCompendiumDirectory.getPackIcon(pack), "solid"),
         label: _loc(pack.title),
       });
     }

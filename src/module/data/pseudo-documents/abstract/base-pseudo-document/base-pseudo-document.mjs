@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { PseudoControllerDataMixin } from "../../../mixins/_module.mjs";
 

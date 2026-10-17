@@ -1,7 +1,5 @@
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIconClass } from "../../../../helpers/icon.mjs";
-import { fancifyFields } from "../../../../helpers/utils.mjs";
+import { fancifyFields, makeIconClass, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;

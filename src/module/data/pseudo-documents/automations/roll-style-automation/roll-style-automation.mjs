@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { defaultJSONField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 

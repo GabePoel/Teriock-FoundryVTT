@@ -1,5 +1,5 @@
 import { migrateStatuses } from "../../data/fields/tools/migrations.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 

@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { formatDynamicSelectOptions, getTriggerGroup } from "../../../../helpers/utils.mjs";
+import { formatDynamicSelectOptions, getTriggerGroup } from "../../../../utils/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;

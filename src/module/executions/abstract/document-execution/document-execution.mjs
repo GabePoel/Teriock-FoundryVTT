@@ -1,4 +1,4 @@
-import { prefixObject } from "../../../helpers/utils.mjs";
+import { prefixObject } from "../../../utils/_module.mjs";
 import BaseExecution from "../base-execution/base-execution.mjs";
 
 const { fields } = foundry.data;

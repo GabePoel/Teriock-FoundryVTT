@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../../utils/_module.mjs";
 import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import MechanicPseudoDocument from "../../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";
 

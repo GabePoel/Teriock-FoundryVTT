@@ -1,7 +1,5 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../mixins/_module.mjs";
 
@@ -76,7 +74,9 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
    * @returns {Teriock.System.FormulaString}
    */
   _getStatDieRollFormula(formula) {
-    return formulaExists(this.state.substitution) ? substituteFormula(formula, this.state.substitution) : formula;
+    return FormulaField.exists(this.state.substitution)
+      ? FormulaField.substitute(formula, this.state.substitution)
+      : formula;
   }
 
   /** @inheritDoc */

@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { UseDocumentsActivation } from "../activations/_module.mjs";
 import {
   OverrideCompetencePseudoDocumentMixin,

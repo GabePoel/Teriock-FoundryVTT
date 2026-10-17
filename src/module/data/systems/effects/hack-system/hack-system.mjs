@@ -1,9 +1,7 @@
 import { ApplicableEffectSystem } from "../_module.mjs";
 import hackConfig from "../../../../constants/config/hack-config.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { dotJoin } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { dotJoin, mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
 

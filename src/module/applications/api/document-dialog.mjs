@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import TeriockDocumentSheet from "./document-sheet.mjs";
 import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 

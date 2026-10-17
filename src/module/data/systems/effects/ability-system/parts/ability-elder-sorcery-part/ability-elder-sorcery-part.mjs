@@ -34,6 +34,15 @@ export default function AbilityElderSorceryPart(Base) {
       return tags;
     }
 
+    /**
+     * CSS class for this ability's elements.
+     * @returns {string}
+     */
+    get elementClass() {
+      if (this.elements.size !== 1) { return "es-multi"; }
+      return `es-${this.elements.first()}`;
+    }
+
     /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), { es: Number(this.elderSorcery) });

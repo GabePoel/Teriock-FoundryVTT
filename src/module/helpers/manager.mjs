@@ -1,4 +1,4 @@
-import { IdentifiersRegistry } from "./registries/_module.mjs";
+import IdentifiersRegistry from "./identifiers-registry.mjs";
 
 /**
  * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";

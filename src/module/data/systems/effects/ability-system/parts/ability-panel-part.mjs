@@ -1,4 +1,3 @@
-import { elementClass } from "../../../../../helpers/html.mjs";
 import { Panel } from "../../../../pseudo-documents/_module.mjs";
 
 /**
@@ -38,7 +37,7 @@ export default function AbilityPanelPart(Base) {
       return {
         ...(await super.getPanelParts()),
         bars,
-        classes: this.elderSorcery ? ["elder-sorcery", elementClass(this.elements)] : [],
+        classes: this.elderSorcery ? ["elder-sorcery", this.elementClass] : [],
       };
     }
   }

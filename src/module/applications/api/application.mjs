@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseApplicationMixin } from "./mixins/_module.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;

@@ -1,4 +1,4 @@
-import { getName } from "../../helpers/utils.mjs";
+import { getName } from "../../utils/_module.mjs";
 
 /**
  * Read a nested property from an object using a dotted notation built from arguments.

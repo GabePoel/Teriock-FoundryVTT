@@ -1,6 +1,5 @@
-import { formulaExists } from "../../../../../../helpers/formula.mjs";
-import { toKebabCase } from "../../../../../../helpers/string.mjs";
-import { objectMap } from "../../../../../../helpers/utils.mjs";
+import { objectMap, toKebabCase } from "../../../../../../utils/_module.mjs";
+import { FormulaField } from "../../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 
@@ -111,7 +110,7 @@ export default function AbilityUsagePart(Base) {
             : "",
           TERIOCK.config.ability.expansion[this.expansion.type]?.label || "",
           this.expansion.range.abbreviation,
-          formulaExists(this.expansion.cap)
+          FormulaField.exists(this.expansion.cap)
             ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
             : "",
         ]

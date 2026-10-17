@@ -1,4 +1,4 @@
-import { getTypeLabel } from "../../helpers/utils.mjs";
+import { getTypeLabel } from "../../utils/_module.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
 /**

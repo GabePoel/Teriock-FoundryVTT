@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { toKebabCase } from "../../helpers/string.mjs";
+import { toKebabCase } from "../../utils/_module.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {

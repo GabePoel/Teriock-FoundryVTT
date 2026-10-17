@@ -1,7 +1,5 @@
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin } from "../../../../helpers/string.mjs";
-import { getName } from "../../../../helpers/utils.mjs";
+import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";

@@ -1,7 +1,7 @@
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 
-import { toCamelCase } from "../../src/module/helpers/string.mjs";
+import { toCamelCase } from "../../src/module/utils/string.mjs";
 import { BASIC_STATS, DOCUMENT_COLLECTION_KEYS, FOLDERS, PSEUDO_COLLECTION_KEYS, YAML } from "./constants.mjs";
 
 const MODULE_ROOT_DIR = process.cwd();

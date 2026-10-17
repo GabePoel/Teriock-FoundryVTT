@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../_module.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass } from "../../../utils/_module.mjs";
 
 /** @type {Teriock.Enrichment.EnricherConfig} */
 const packEnricher = {

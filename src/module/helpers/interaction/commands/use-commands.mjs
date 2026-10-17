@@ -1,7 +1,6 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { icons } from "../../../constants/display/_module.mjs";
-import { resolveDocuments } from "../../resolve.mjs";
-import { getIcon } from "../../utils.mjs";
+import { getIcon, resolveDocuments } from "../../../utils/_module.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 /**

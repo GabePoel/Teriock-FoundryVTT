@@ -1,7 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../mixins/_module.mjs";
 import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";

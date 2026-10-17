@@ -4,7 +4,7 @@ import { icons } from "../../constants/display/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 

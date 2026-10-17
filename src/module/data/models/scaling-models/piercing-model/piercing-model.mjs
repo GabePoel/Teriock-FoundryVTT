@@ -1,5 +1,5 @@
 import piercingConfig from "../../../../constants/config/piercing-config.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;

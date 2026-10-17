@@ -1,7 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { makeIcon, makeIconClass, mixClasses, objectMap } from "../../../utils/_module.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";

@@ -1,7 +1,6 @@
 import { icons } from "../../../constants/display/_module.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { createElement } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { createElement, makeIconClass } from "../../../utils/_module.mjs";
 
 const { CombatTracker } = foundry.applications.sidebar.tabs;
 

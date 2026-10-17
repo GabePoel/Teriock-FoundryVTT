@@ -1,4 +1,4 @@
-import { fancifyFields } from "../../../helpers/utils.mjs";
+import { fancifyFields } from "../../../utils/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;

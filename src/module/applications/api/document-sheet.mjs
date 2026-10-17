@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "./mixins/_module.mjs";
 
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;

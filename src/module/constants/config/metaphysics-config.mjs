@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { wikiIndexToConfig } from "../../helpers/utils.mjs";
+import { wikiIndexToConfig } from "../../utils/_module.mjs";
 
 export default {
   effectTypes: wikiIndexToConfig("effect", "TERIOCK.TERMS.EffectTypes"),

@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { movementActionField } from "../../../fields/tools/builders.mjs";
 import { ChangeMovementActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

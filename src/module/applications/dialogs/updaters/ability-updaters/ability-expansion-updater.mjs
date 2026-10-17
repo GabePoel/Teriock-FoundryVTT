@@ -1,6 +1,5 @@
 import { icons } from "../../../../constants/display/_module.mjs";
-import { makeIconClass } from "../../../../helpers/icon.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { makeIconClass, objectMap } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
 /**

@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentSelector } from "../../dialogs/_module.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 

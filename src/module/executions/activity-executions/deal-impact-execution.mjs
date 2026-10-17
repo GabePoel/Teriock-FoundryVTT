@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import BaseExecution from "../abstract/base-execution/base-execution.mjs";
 import { ImpactsExecutionMixin } from "../mixins/_module.mjs";
 

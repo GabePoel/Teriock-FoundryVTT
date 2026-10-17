@@ -1,8 +1,13 @@
 import { icons } from "../../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../../helpers/icon.mjs";
-import { dotJoin, toCamelCase, toKebabCase } from "../../../../../helpers/string.mjs";
-import { objectMap } from "../../../../../helpers/utils.mjs";
+import {
+  dotJoin,
+  makeIcon,
+  mergeMetadata,
+  mixClasses,
+  objectMap,
+  toCamelCase,
+  toKebabCase,
+} from "../../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../../fields/_module.mjs";
 import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import { categorySuggestions } from "../../../../fields/tools/suggestions.mjs";

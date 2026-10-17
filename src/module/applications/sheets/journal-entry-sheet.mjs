@@ -1,5 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { BaseApplicationMixin } from "../api/mixins/_module.mjs";
 
 const { JournalEntrySheet } = foundry.applications.sheets.journal;

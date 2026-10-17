@@ -1,6 +1,5 @@
 import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
-import { makeIconClass } from "../../../../../helpers/icon.mjs";
-import { barClamp } from "../../../../../helpers/utils.mjs";
+import { barClamp, makeIconClass } from "../../../../../utils/_module.mjs";
 
 /**
  * @import AbstractActorSystem from "../abstract-actor-system.mjs";

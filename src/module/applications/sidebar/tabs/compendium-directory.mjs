@@ -1,12 +1,25 @@
-import { getPackIcon } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass } from "../../../utils/_module.mjs";
 import { TeriockDragDrop } from "../../ux/_module.mjs";
 import { TeriockCompendium } from "../apps/_module.mjs";
 
 const { CompendiumDirectory } = foundry.applications.sidebar.tabs;
 
+/**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ */
+
 /** @inheritDoc */
 export default class TeriockCompendiumDirectory extends CompendiumDirectory {
+  /**
+   * Get the icon associated with some compendium pack.
+   * @param {CompendiumCollection} pack
+   * @returns {string}
+   */
+  static getPackIcon(pack) {
+    return foundry.utils.getProperty(pack, "metadata.flags.teriock.icon") ?? CONFIG[pack.documentName]?.sidebarIcon
+      ?? TERIOCK.display.icons.manifest.ui.compendium;
+  }
+
   /** @type {Promise<void>} */
   #deleting;
 
@@ -66,7 +79,9 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
   /** @inheritDoc */
   _preparePackContext(pack) {
     // Allow use of custom compendium icons
-    return Object.assign(super._preparePackContext(pack), { icon: makeIconClass(getPackIcon(pack), "solid") });
+    return Object.assign(super._preparePackContext(pack), {
+      icon: makeIconClass(TeriockCompendiumDirectory.getPackIcon(pack), "solid"),
+    });
   }
 
   /** @inheritDoc */

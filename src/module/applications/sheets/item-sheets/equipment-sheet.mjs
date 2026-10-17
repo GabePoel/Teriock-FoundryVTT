@@ -1,6 +1,6 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { formulaExists } from "../../../helpers/formula.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { secondaryFormat } from "../../../helpers/localization.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import { InventoryManagementSheetMixin } from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 
@@ -29,13 +29,13 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
         data: this.document.system.range.long.unitType === "finite"
           ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
             reverse: true,
-            secondFilter: formulaExists,
+            secondFilter: FormulaField.exists,
           })
           : this.document.system.range.long.label,
         source: sourceLong.unitType === "finite"
           ? secondaryFormat(sourceLong.raw, this.document.system._source.range.short.raw, {
             reverse: true,
-            secondFilter: formulaExists,
+            secondFilter: FormulaField.exists,
           })
           : sourceLong.label,
       },

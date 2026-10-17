@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { ThresholdDataMixin, UsableDataMixin } from "../../../mixins/_module.mjs";

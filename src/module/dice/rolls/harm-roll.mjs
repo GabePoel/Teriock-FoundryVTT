@@ -1,5 +1,5 @@
 import { listFormat } from "../../helpers/localization.mjs";
-import { fromIdentifier } from "../../helpers/utils.mjs";
+import { fromIdentifier } from "../../utils/_module.mjs";
 import ImpactsRoll from "./impacts-roll/impacts-roll.mjs";
 
 export default class HarmRoll extends ImpactsRoll {

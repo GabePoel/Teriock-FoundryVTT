@@ -1,4 +1,4 @@
-import { prefixObject } from "../../../../../../helpers/utils.mjs";
+import { prefixObject } from "../../../../../../utils/_module.mjs";
 import { TradecraftModel } from "../../../../../models/modifier-models/_module.mjs";
 
 /**

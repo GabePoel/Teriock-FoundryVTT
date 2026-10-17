@@ -1,5 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { FeatActivation } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";

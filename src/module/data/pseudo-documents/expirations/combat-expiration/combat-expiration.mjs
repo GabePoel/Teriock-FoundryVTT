@@ -1,5 +1,5 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { BaseExpiration } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;

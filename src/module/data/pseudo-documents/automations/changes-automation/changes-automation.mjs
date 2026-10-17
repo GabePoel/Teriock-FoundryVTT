@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { qualifiedChangeField } from "../../../fields/tools/builders.mjs";
 import { migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import { DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 

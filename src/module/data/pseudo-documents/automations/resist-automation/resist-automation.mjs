@@ -1,5 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { omit } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
 import { ResistActivation } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";

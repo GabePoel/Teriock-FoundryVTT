@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { TriggerMechanicMixin } from "../mixins/_module.mjs";
 import { BaseExpiration } from "./abstract/_module.mjs";
 

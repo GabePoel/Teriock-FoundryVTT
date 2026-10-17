@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { toKebabCase } from "../../helpers/string.mjs";
+import { toKebabCase } from "../../utils/_module.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 

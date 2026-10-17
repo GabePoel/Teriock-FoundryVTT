@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import * as activations from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";

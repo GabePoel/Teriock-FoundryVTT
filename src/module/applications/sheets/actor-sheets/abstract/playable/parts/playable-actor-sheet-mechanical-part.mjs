@@ -1,8 +1,12 @@
 import { icons } from "../../../../../../constants/display/_module.mjs";
-import { createElement } from "../../../../../../helpers/html.mjs";
-import { asInf, makeIconClass } from "../../../../../../helpers/icon.mjs";
-import { toId, toKebabCase } from "../../../../../../helpers/string.mjs";
-import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs";
+import {
+  asInf,
+  consolidateWriteOperations,
+  createElement,
+  makeIconClass,
+  toId,
+  toKebabCase,
+} from "../../../../../../utils/_module.mjs";
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
 
 /**

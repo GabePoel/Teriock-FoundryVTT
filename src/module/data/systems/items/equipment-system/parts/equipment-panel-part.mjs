@@ -1,4 +1,4 @@
-import { getName } from "../../../../../helpers/utils.mjs";
+import { getName } from "../../../../../utils/_module.mjs";
 import { Panel } from "../../../../pseudo-documents/_module.mjs";
 
 /**

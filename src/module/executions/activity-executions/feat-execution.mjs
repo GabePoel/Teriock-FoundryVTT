@@ -1,6 +1,6 @@
+import { FormulaField } from "../../data/fields/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
-import { addFormulas } from "../../helpers/formula.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseExecution } from "../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../mixins/_module.mjs";
 
@@ -85,7 +85,7 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   _configure(options = {}) {
     super._configure(options);
     if (this.actor) {
-      this._source.bonus = addFormulas(
+      this._source.bonus = FormulaField.sum(
         `2 * @${this.attribute}.score`,
         this.actor.system.attributes[this.attribute].bonus,
         this._source.bonus,

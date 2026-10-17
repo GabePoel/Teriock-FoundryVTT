@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../helpers/icon.mjs";
+import { makeIcon } from "../../../utils/_module.mjs";
 
 /**
  * @import { DocumentDirectory } from "@client/applications/sidebar/_module.mjs";

@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../../../fields/tools/builders.mjs";
 import { TriggerAutomationMixin } from "../../mixins/_module.mjs";
 import BaseAutomation from "../base-automation/base-automation.mjs";

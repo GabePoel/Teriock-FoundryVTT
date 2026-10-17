@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";

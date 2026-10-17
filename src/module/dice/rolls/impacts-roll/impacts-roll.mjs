@@ -1,7 +1,7 @@
 import impactConfig from "../../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
+import { makeIcon } from "../../../utils/_module.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
 export default class ImpactsRoll extends BaseRoll {

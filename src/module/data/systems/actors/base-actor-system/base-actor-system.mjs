@@ -1,5 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin } from "../../../../helpers/string.mjs";
+import { dotJoin, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";

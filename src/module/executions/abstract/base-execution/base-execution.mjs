@@ -1,5 +1,6 @@
 import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
 import { BaseDataModel } from "../../../data/abstract/_module.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
 import { AddDocumentsActivation } from "../../../data/pseudo-documents/activations/_module.mjs";
@@ -7,8 +8,7 @@ import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstr
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { prefixObject } from "../../../helpers/utils.mjs";
+import { prefixObject } from "../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -178,7 +178,7 @@ export default class BaseExecution extends BaseDataModel {
    * @return {boolean}
    */
   get competenceImprovesFormula() {
-    return formulaExists(this.formula);
+    return FormulaField.exists(this.formula);
   }
 
   /** @returns {string[]} */
@@ -356,7 +356,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _buildRolls() {
-    if (formulaExists(this.formula)) {
+    if (FormulaField.exists(this.formula)) {
       this.rolls.push(new this._RollClass(this.formula, this.getRollData(), this.rollOptions));
     }
   }
@@ -514,7 +514,7 @@ export default class BaseExecution extends BaseDataModel {
    */
   async _improveFormula() {
     if (this.competenceImprovesFormula) {
-      this.updateSource({ formula: addFormula(this.formula, this.competence.formula) });
+      this.updateSource({ formula: FormulaField.add(this.formula, this.competence.formula) });
     }
   }
 

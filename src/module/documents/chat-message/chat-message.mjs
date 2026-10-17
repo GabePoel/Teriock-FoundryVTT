@@ -1,5 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import { dedent } from "../../helpers/string.mjs";
+import { dedent, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;

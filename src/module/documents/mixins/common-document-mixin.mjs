@@ -1,7 +1,5 @@
 import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
-import { ensureChildren, ensureNoChildren } from "../../helpers/resolve.mjs";
-import { parseIdentifier } from "../../helpers/utils.mjs";
+import { ensureChildren, ensureNoChildren, mixClasses, parseIdentifier } from "../../utils/_module.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 
 /**

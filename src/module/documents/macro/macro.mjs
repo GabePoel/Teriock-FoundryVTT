@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;

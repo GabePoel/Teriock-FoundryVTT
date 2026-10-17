@@ -2,8 +2,14 @@ import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../../../applications/ux/_module.mjs";
 import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
-import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
-import { buildWriteOperation, fromIdentifier, getName, objectMap } from "../../../../../../helpers/utils.mjs";
+import {
+  buildWriteOperation,
+  fromIdentifier,
+  getName,
+  makeIcon,
+  makeIconClass,
+  objectMap,
+} from "../../../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
 

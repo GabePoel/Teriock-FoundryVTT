@@ -1,5 +1,5 @@
-import { mixClasses } from "../../helpers/construction.mjs";
 import { preLocalizeDataModel } from "../../helpers/localization.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../mixins/_module.mjs";
 
 const { DataModel } = foundry.abstract;

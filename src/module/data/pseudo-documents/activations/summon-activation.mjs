@@ -1,8 +1,6 @@
 import { icons } from "../../../constants/display/_module.mjs";
 import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { toId } from "../../../helpers/string.mjs";
-import { omit } from "../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, omit, toId } from "../../../utils/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 

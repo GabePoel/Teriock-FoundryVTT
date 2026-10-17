@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
 
 /**

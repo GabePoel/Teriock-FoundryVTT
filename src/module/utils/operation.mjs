@@ -1,41 +1,84 @@
+import { fromIdentifier } from "./document.mjs";
+
 /**
- * Ensure a document is not an index.
- * @template T
- * @param {Teriock.Hierarchy.Index<T> | UUID<T> | TypedIdentifier} syncDoc
- * @returns {Promise<T|null>}
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
  */
-export async function resolveDocument(syncDoc) {
-  let out = null;
-  if (!syncDoc) { return out; }
-  if (typeof syncDoc === "string") { out = await teriock.helpers.utils.fromKey(syncDoc); }
-  else if (syncDoc instanceof foundry.abstract.Document) { out = syncDoc; }
-  else { out = await foundry.utils.fromUuid(syncDoc.uuid); }
-  return out;
+
+/**
+ * Builds a single document write operation given its UUID and some document data. Best for simplifying create and
+ * delete operation construction.
+ * @param {DatabaseWriteOperation & { uuid?: UUID<TeriockDocument>, docData?: object}} operation
+ * @returns {Promise<DatabaseWriteOperation | null>}
+ */
+export async function buildWriteOperation(operation) {
+  if (operation.uuid && ["delete", "update"].includes(operation.action)) {
+    const document = await foundry.utils.fromUuid(operation.uuid);
+    if (!document) { return null; }
+    if (operation.docData) {
+      if (operation.action === "update") { operation.updates = [{ ...operation.docData, _id: document.id }]; }
+      delete operation.docData;
+    }
+    if (document) {
+      Object.assign(operation, {
+        documentName: document.documentName,
+        ids: [document.id],
+        pack: document.pack,
+        parent: document.parent,
+      });
+    }
+    delete operation.uuid;
+  }
+  return operation;
 }
 
 /**
- * Ensure all documents in an array are not indexes.
- * @template T
- * @param {Teriock.Hierarchy.Index<T>[] | UUID<T> | TypedIdentifier} syncDocs
- * @param {Teriock.System.ResolveDocumentsOptions} [options]
- * @returns {Promise<T[]>}
+ * Merge updates that target the same document.
+ * @param {object[]} updates
+ * @returns {object[]}
  */
-export async function resolveDocuments(syncDocs, options = {}) {
-  const fetched = await Promise.all(syncDocs.map(syncDoc => resolveDocument(syncDoc)));
-  let out = [...fetched.filter(d => d?.documentName !== "Folder")];
-  const folders = /** @type {TeriockFolder[]} */ fetched.filter(d => d?.documentName === "Folder");
-  if (options.expandFolders) {
-    const toAdd = await Promise.all(folders.map(d => d.getAllContents()));
-    for (const arr of toAdd) { out.push(...arr); }
-  } else { out.push(...folders); }
-  // Add rollable tables. This includes the tables that were in folders.
-  const tables = /** @type {TeriockRollTable[]} */ out.filter(d => d?.documentName === "RollTable");
-  out = out.filter(d => d?.documentName !== "RollTable");
-  if (options.expandTables) {
-    const toAdd = await Promise.all(tables.map(d => d.getAllContents()));
-    for (const arr of toAdd) { out.push(...arr); }
-  } else { out.push(...tables); }
-  return out.filter(Boolean);
+function mergeUpdates(updates) {
+  const merged = {};
+  for (const update of updates) { merged[update._id] = foundry.utils.mergeObject(merged[update._id] ?? {}, update); }
+  return Object.values(merged);
+}
+
+/**
+ * Consolidate operations so that they are more easily batched.
+ * @param {DatabaseWriteOperation[]} operations
+ * @returns {DatabaseWriteOperation[]}
+ */
+export function consolidateWriteOperations(operations) {
+  const exclusions = ["ids", "_id", "replacements", "data", "updates"];
+  /** @type {DatabaseWriteOperation[]} */
+  const consolidated = [];
+  for (const op of operations.filter(Boolean)) {
+    const opMini = { ...op };
+    for (const exclusion of exclusions) { delete opMini[exclusion]; }
+    const comOp = consolidated.find(co => {
+      const coMini = { ...co };
+      for (const exclusion of exclusions) { delete coMini[exclusion]; }
+      return foundry.utils.equals(opMini, coMini);
+    });
+    if (comOp) {
+      comOp.ids = [...(comOp.ids ?? []), ...(op?.ids ?? [])];
+      comOp.data = [...(comOp.data ?? []), ...(op?.data ?? [])];
+      comOp.updates = mergeUpdates([...(comOp.updates ?? []), ...(op?.updates ?? [])]);
+      comOp.replacements = Object.assign(comOp.replacements ?? {}, op?.replacements ?? {});
+    } else {
+      consolidated.push(op);
+    }
+  }
+  return consolidated;
+}
+
+/**
+ * Build, consolidate, and write a bunch of batched operations.
+ * @param {(DatabaseWriteOperation & { uuid?: UUID<TeriockDocument>, docData?: object })[]} operations
+ * @returns {Promise<void>}
+ */
+export async function batchWrite(operations) {
+  const built = await Promise.all(operations.map(op => buildWriteOperation(op)));
+  await foundry.documents.modifyBatch(consolidateWriteOperations(built));
 }
 
 /**
@@ -50,7 +93,7 @@ export async function ensureChildren(document, identifiers) {
   const candidates = await Promise.all(identifiers.map(async identifier => {
     if (!(teriock.data.fields.tools.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
     if (existing?.has(identifier)) { return; }
-    const doc = await teriock.helpers.utils.fromIdentifier(identifier);
+    const doc = await fromIdentifier(identifier);
     if (!doc) { return; }
     const obj = doc.toObject(true);
     foundry.utils.setProperty(obj, "_stats.compendiumSource", doc.uuid);

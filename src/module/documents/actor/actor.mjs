@@ -1,9 +1,13 @@
 import { config } from "../../constants/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../helpers/construction.mjs";
-import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
-import { findBestDocument, fromKey, getTriggerGroup } from "../../helpers/utils.mjs";
+import {
+  expandDocumentDataArray,
+  findBestDocument,
+  fromKey,
+  getTriggerGroup,
+  mixClasses,
+} from "../../utils/_module.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 import { BaseDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";

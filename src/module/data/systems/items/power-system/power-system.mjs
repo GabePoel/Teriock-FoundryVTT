@@ -1,8 +1,6 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { asInf } from "../../../../helpers/icon.mjs";
-import { dotJoin } from "../../../../helpers/string.mjs";
+import { asInf, dotJoin, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import {
   ArmorSuppressionSystemMixin,

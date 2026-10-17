@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";

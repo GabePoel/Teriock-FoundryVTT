@@ -1,5 +1,4 @@
-import { makeIconClass } from "../../../helpers/icon.mjs";
-import { getSystemClass, getTypeLabel } from "../../../helpers/utils.mjs";
+import { getSystemClass, getTypeLabel, makeIconClass } from "../../../utils/_module.mjs";
 import { TeriockDialog } from "../../api/_module.mjs";
 import { DocumentSelector, selectDocument } from "../../dialogs/_module.mjs";
 

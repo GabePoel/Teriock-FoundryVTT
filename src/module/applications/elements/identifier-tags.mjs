@@ -1,9 +1,6 @@
 import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
-import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
 import { listFormat } from "../../helpers/localization.mjs";
-import { isKebabCase } from "../../helpers/string.mjs";
-import { getTypeLabel, parseIdentifier } from "../../helpers/utils.mjs";
+import { createElement, getTypeLabel, isKebabCase, makeIconClass, parseIdentifier } from "../../utils/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 

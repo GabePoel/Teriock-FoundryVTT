@@ -1,7 +1,6 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
-import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
-import { safeInf } from "../../../../../../helpers/utils.mjs";
+import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
 

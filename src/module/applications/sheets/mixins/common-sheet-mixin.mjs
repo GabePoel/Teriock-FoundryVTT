@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 import DocumentCreationSheetMixin from "./document-creation-sheet-mixin.mjs";
 import DragDropSheetMixin from "./drag-drop-sheet-mixin.mjs";

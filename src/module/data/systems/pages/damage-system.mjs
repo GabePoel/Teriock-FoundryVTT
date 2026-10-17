@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../utils/_module.mjs";
 import HarmSystem from "./harm-system.mjs";
 
 export default class DamageSystem extends HarmSystem {

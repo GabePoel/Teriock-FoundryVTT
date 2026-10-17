@@ -1,5 +1,5 @@
 import { BasePreviewModel } from "../../../data/models/preview-models/_module.mjs";
-import { fromIdentifier, getSystemClass } from "../../../helpers/utils.mjs";
+import { fromIdentifier, getSystemClass } from "../../../utils/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";

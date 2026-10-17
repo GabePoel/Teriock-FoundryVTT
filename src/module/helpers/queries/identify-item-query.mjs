@@ -1,8 +1,7 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { makeIconClass } from "../icon.mjs";
-import { buildWriteOperation } from "../utils.mjs";
+import { buildWriteOperation, makeIconClass } from "../../utils/_module.mjs";
 
 /**
  * Query that asks the GM to identify the item.

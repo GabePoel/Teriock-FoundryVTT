@@ -1,7 +1,6 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { getPackIcon } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
 import { DocumentDirectoryMixin } from "../mixins/_module.mjs";
+import { TeriockCompendiumDirectory } from "../tabs/_module.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
 
@@ -64,7 +63,7 @@ export default class TeriockCompendium extends mixClasses(Compendium, DocumentDi
     await super._prepareHeaderContext(context, options);
     // Allow use of custom compendium icons. This has the added quirk of changing the journal entry icons and not just
     // the header. But maybe that's not a bad thing?
-    context.sidebarIcon = makeIconClass(getPackIcon(this.collection), "solid");
+    context.sidebarIcon = makeIconClass(TeriockCompendiumDirectory.getPackIcon(this.collection), "solid");
   }
 
   /** @inheritDoc */

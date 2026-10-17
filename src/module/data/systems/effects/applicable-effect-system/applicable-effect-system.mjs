@@ -1,6 +1,5 @@
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { dedent, toClass } from "../../../../helpers/string.mjs";
+import { dedent, mergeMetadata, mixClasses, toClass } from "../../../../utils/_module.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";

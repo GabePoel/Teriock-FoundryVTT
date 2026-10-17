@@ -1,7 +1,5 @@
 import { icons } from "../../constants/display/_module.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
-import { resolveDocuments } from "../../helpers/resolve.mjs";
-import { fromIdentifierLocal, fromQualifier } from "../../helpers/utils.mjs";
+import { fromIdentifierLocal, fromQualifier, makeIconClass, resolveDocuments } from "../../utils/_module.mjs";
 import ResolvableDialog from "../api/resolvable-dialog.mjs";
 
 const { SearchFilter } = foundry.applications.ux;

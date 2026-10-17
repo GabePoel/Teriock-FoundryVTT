@@ -1,4 +1,4 @@
-import { objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../utils/_module.mjs";
 
 /**
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";

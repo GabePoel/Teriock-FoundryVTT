@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

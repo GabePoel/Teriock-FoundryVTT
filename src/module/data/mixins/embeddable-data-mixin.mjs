@@ -1,5 +1,5 @@
 import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
+import { makeIcon } from "../../utils/_module.mjs";
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";

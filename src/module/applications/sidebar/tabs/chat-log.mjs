@@ -1,6 +1,5 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
 import { buildCommandOptions, commands } from "../../../helpers/interaction/_module.mjs";
+import { makeIcon, mixClasses } from "../../../utils/_module.mjs";
 import { ChatMessageConnectionMixin } from "../mixins/_module.mjs";
 
 const { ChatLog } = foundry.applications.sidebar.tabs;

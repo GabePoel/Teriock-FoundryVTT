@@ -1,8 +1,8 @@
 import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { formulaExists, multiplyFormula } from "../../../../helpers/formula.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -31,7 +31,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
    * @returns {Promise<void>}
    */
   async #changeQuantity(formula) {
-    if (!formulaExists(formula) || !this.consumable) { return; }
+    if (!FormulaField.exists(formula) || !this.consumable) { return; }
     const consumable = await fromUuid(this.consumable);
     if (!consumable?.system?.consumable) { return; }
     const rollData = consumable.getRollData?.() ?? this.actors[0]?.getRollData?.() ?? {};
@@ -87,6 +87,6 @@ export default class ChangeQuantityActivation extends BaseActivation {
 
   /** @inheritDoc */
   async secondaryAction() {
-    return this.#changeQuantity(multiplyFormula(this.formula, "-1"));
+    return this.#changeQuantity(FormulaField.multiply(this.formula, "-1"));
   }
 }

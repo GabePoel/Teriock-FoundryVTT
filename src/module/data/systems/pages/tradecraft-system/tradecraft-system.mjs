@@ -1,6 +1,5 @@
 import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { FluencySystem } from "../../effects/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";

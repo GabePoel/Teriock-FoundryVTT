@@ -1,7 +1,7 @@
 import affinityConfig from "../../../../../constants/config/affinity-config.mjs";
 import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
 import { AffinityExecution, ResistanceExecution } from "../../../../../executions/activity-executions/_module.mjs";
-import { toId } from "../../../../../helpers/string.mjs";
+import { toId } from "../../../../../utils/_module.mjs";
 import { BaseAffinity } from "../../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**

@@ -1,5 +1,4 @@
-import { createElement } from "../../helpers/html.mjs";
-import { makeIconElement } from "../../helpers/icon.mjs";
+import { createElement, makeIconElement } from "../../utils/_module.mjs";
 import { AbstractCycleButtonElement } from "./abstract/_module.mjs";
 
 /**

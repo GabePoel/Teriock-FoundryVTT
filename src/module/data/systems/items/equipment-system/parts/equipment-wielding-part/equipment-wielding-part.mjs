@@ -1,5 +1,4 @@
-import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../../../helpers/icon.mjs";
+import { makeIcon, mergeMetadata } from "../../../../../../utils/_module.mjs";
 import { equipmentTypeField } from "../../../../../fields/tools/builders.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
 

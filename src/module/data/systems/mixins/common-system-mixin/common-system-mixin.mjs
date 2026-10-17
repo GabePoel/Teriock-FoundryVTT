@@ -1,8 +1,12 @@
 import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
-import { pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { getSystemClass, prefixObject } from "../../../../helpers/utils.mjs";
+import {
+  getSystemClass,
+  makeIcon,
+  mergeMetadata,
+  mixClasses,
+  pathSorterFactory,
+  prefixObject,
+} from "../../../../utils/_module.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 

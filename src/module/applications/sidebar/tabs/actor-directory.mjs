@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import DocumentDirectoryMixin from "../mixins/document-directory-mixin.mjs";
 
 const { ActorDirectory } = foundry.applications.sidebar.tabs;

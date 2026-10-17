@@ -1,7 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
-import { omit } from "../../../helpers/utils.mjs";
+import { makeIconClass, mixClasses, omit } from "../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import { TeriockDragDrop } from "../../ux/_module.mjs";
 import {

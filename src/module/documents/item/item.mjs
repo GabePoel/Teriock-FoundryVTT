@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;

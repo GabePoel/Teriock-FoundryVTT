@@ -1,4 +1,4 @@
-import { toKebabCase } from "../../../helpers/string.mjs";
+import { toKebabCase } from "../../../utils/_module.mjs";
 
 /**
  * Status ids renamed to match their identifiers.

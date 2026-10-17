@@ -1,5 +1,9 @@
-import { mergeMetadata } from "../../../helpers/construction.mjs";
-import { consolidateWriteOperations, deleteProperties, fromIdentifier } from "../../../helpers/utils.mjs";
+import {
+  consolidateWriteOperations,
+  deleteProperties,
+  fromIdentifier,
+  mergeMetadata,
+} from "../../../utils/_module.mjs";
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";

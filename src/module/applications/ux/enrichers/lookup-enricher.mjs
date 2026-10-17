@@ -1,6 +1,5 @@
 import { TeriockTextEditor } from "../_module.mjs";
-import { createElement } from "../../../helpers/html.mjs";
-import { fromKey } from "../../../helpers/utils.mjs";
+import { createElement, fromKey } from "../../../utils/_module.mjs";
 
 /** @type {Teriock.Enrichment.EnricherConfig} */
 const lookupEnricher = {

@@ -1,5 +1,5 @@
 import TeriockCombatant from "../../../../documents/combatant/combatant.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;

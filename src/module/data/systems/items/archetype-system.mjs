@@ -1,7 +1,5 @@
 import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { dotJoin } from "../../../helpers/string.mjs";
-import { getName } from "../../../helpers/utils.mjs";
+import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { ArmorSuppressionSystemMixin, CompetenceDisplaySystemMixin } from "../mixins/_module.mjs";
 import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 

@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 import { DocumentDialog } from "../api/_module.mjs";
 
 const { BooleanField } = foundry.data.fields;

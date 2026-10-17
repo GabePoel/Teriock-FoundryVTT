@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import EtherealLightSourceMixin from "./ethereal-light-source-mixin.mjs";
 
 const { PointLightSource } = foundry.canvas.sources;

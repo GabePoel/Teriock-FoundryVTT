@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";

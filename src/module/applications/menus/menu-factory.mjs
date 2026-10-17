@@ -1,4 +1,4 @@
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 /**

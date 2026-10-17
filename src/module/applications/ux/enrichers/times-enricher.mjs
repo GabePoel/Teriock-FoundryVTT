@@ -1,4 +1,4 @@
-import { createElement } from "../../../helpers/html.mjs";
+import { createElement } from "../../../utils/_module.mjs";
 
 /** @type {Teriock.Enrichment.EnricherConfig} */
 const timesEnricher = {

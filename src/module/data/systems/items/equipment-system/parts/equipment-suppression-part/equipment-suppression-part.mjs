@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../../../../helpers/icon.mjs";
+import { makeIcon } from "../../../../../../utils/_module.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;

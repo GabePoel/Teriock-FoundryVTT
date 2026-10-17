@@ -1,7 +1,6 @@
 import mathConfig from "../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document/mechanic-pseudo-document.mjs";

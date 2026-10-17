@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../utils/_module.mjs";
 import PlayableCharacterSystem from "./playable-character-system.mjs";
 
 /**

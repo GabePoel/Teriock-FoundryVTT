@@ -1,8 +1,13 @@
 import equipmentConfig from "../../../../constants/config/equipment-config.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
+import {
+  dotJoin,
+  fromIdentifier,
+  getName,
+  mergeMetadata,
+  mixClasses,
+  toKebabCase,
+} from "../../../../utils/_module.mjs";
 import { equipmentTypeField } from "../../../fields/tools/builders.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import {

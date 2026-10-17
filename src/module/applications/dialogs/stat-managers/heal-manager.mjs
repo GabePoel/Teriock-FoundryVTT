@@ -1,5 +1,5 @@
 import impactConfig from "../../../constants/config/impact-config.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
+import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseStatManager from "./base-stat-manager.mjs";
 
 const { fields } = foundry.data;

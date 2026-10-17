@@ -1,8 +1,8 @@
 import mathConfig from "../../../constants/config/math-config.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../utils/_module.mjs";
 
 /**
  * @import BaseExecution from "../../abstract/base-execution/base-execution.mjs";
@@ -129,7 +129,9 @@ export default function ThresholdExecutionMixin(Base) {
     /** @inheritDoc */
     async _improveFormula() {
       await super._improveFormula();
-      if (formulaExists(this.bonus)) { this.updateSource({ formula: addFormula(this.formula, this.bonus) }); }
+      if (FormulaField.exists(this.bonus)) { this.updateSource({
+          formula: FormulaField.add(this.formula, this.bonus),
+        }); }
     }
 
     /**

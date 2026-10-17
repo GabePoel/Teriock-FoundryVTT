@@ -1,5 +1,5 @@
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 

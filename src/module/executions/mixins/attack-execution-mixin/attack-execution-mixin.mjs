@@ -1,10 +1,9 @@
 import { ThresholdExecutionMixin } from "../_module.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { PiercingModel } from "../../../data/models/_module.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { prefixObject } from "../../../helpers/utils.mjs";
+import { mixClasses, prefixObject } from "../../../utils/_module.mjs";
 
 /**
  * @import BaseExecution from "../../abstract/base-execution/base-execution.mjs";
@@ -305,8 +304,8 @@ export default function AttackExecutionMixin(Base) {
      */
     async _improveFormula() {
       if (this.isAttack) {
-        if (this.piercing.av0) { this.updateSource({ formula: addFormula(this.formula, "@av0") }); }
-        if (this.sb) { this.updateSource({ formula: addFormula(this.formula, "@sb") }); }
+        if (this.piercing.av0) { this.updateSource({ formula: FormulaField.add(this.formula, "@av0") }); }
+        if (this.sb) { this.updateSource({ formula: FormulaField.add(this.formula, "@sb") }); }
       }
       await super._improveFormula();
     }
@@ -369,7 +368,7 @@ export default function AttackExecutionMixin(Base) {
      * @returns {Promise<void>}
      */
     async _prepareAttackPenalty() {
-      if (this.isAttack && formulaExists(this.incurredAttackPenalty)) {
+      if (this.isAttack && FormulaField.exists(this.incurredAttackPenalty)) {
         this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.getRollData());
       } else { this.attackPenalty = 0; }
     }
@@ -377,7 +376,7 @@ export default function AttackExecutionMixin(Base) {
     /** @inheritDoc */
     async _prepareBaseFormula() {
       await super._prepareBaseFormula();
-      if (this.isAttack) { this.updateSource({ formula: addFormula(this.formula, "@ap") }); }
+      if (this.isAttack) { this.updateSource({ formula: FormulaField.add(this.formula, "@ap") }); }
     }
 
     /**
@@ -454,9 +453,9 @@ export default function AttackExecutionMixin(Base) {
       };
       if (this.isAttack && this.isContact) {
         const hitBonus = this.armament?.system.hitBonus;
-        changes.bonus = formulaExists(this.rootBonus)
-          ? (formulaExists(hitBonus) ? addFormula(this.rootBonus, hitBonus) : this.rootBonus)
-          : (formulaExists(hitBonus) ? hitBonus : "0");
+        changes.bonus = FormulaField.exists(this.rootBonus)
+          ? (FormulaField.exists(hitBonus) ? FormulaField.add(this.rootBonus, hitBonus) : this.rootBonus)
+          : (FormulaField.exists(hitBonus) ? hitBonus : "0");
       }
       this.updateSource(changes);
     }

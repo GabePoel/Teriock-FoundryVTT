@@ -1,8 +1,5 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { mergeMetadata } from "../../../helpers/construction.mjs";
-import { createElement } from "../../../helpers/html.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
-import { toId } from "../../../helpers/string.mjs";
+import { createElement, makeIcon, mergeMetadata, toId } from "../../../utils/_module.mjs";
 import { associationsField, blocksField, nullStringField } from "../../fields/tools/builders.mjs";
 import { migrateThumbnails } from "../../fields/tools/migrations.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";

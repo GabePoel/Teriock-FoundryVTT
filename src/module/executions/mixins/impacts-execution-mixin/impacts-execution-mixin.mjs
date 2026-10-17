@@ -1,7 +1,7 @@
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { formulaExists } from "../../../helpers/formula.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../utils/_module.mjs";
 
 /**
  * @import BaseExecution from "../../abstract/base-execution/base-execution.mjs";
@@ -103,7 +103,7 @@ export default function ImpactsExecutionMixin(Base) {
      * `boostDialog` confirmation callback.
      */
     _applyImpactModifiers() {
-      if (!formulaExists(this.formula)) { return; }
+      if (!FormulaField.exists(this.formula)) { return; }
       if (this.crit) {
         const roll = new this._RollClass(this.formula, this.getRollData());
         roll.alter(2, 0, { multiplyNumeric: false });

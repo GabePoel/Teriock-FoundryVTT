@@ -1,6 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { ensureChildren, ensureNoChildren } from "../../../../helpers/resolve.mjs";
+import { ensureChildren, ensureNoChildren, mergeMetadata } from "../../../../utils/_module.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

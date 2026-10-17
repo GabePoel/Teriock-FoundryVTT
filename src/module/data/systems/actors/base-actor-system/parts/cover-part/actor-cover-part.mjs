@@ -1,5 +1,5 @@
 import effectConfig from "../../../../../../constants/config/effect-config.mjs";
-import { addFormula } from "../../../../../../helpers/formula.mjs";
+import { FormulaField } from "../../../../../fields/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 /**
@@ -58,10 +58,10 @@ export default function ActorCoverPart(Base) {
       super.prepareDerivedData();
       if (this.cover === 1) {
         if (!this.lockedPaths.has("system.defense.ac")) { this.defense.ac += 2; }
-        this.attributes.mov.bonus = addFormula(this.attributes.mov.bonus, "2");
+        this.attributes.mov.bonus = FormulaField.add(this.attributes.mov.bonus, "2");
       } else if (this.cover >= 2) {
         if (!this.lockedPaths.has("system.defense.ac")) { this.defense.ac += 5; }
-        this.attributes.mov.bonus = addFormula(this.attributes.mov.bonus, "5");
+        this.attributes.mov.bonus = FormulaField.add(this.attributes.mov.bonus, "5");
       }
     }
   }

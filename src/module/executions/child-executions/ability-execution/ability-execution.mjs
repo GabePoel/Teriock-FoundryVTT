@@ -1,15 +1,20 @@
 import { CostPayer } from "../../../applications/dialogs/_module.mjs";
 import impactConfig from "../../../constants/config/impact-config.mjs";
 import statConfig from "../../../constants/config/stat-config.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { toKebabCase } from "../../../helpers/string.mjs";
-import { formatDynamicSelectOptions, objectMap, omit, prefixObject } from "../../../helpers/utils.mjs";
+import {
+  formatDynamicSelectOptions,
+  mixClasses,
+  objectMap,
+  omit,
+  prefixObject,
+  toKebabCase,
+} from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
 
@@ -456,7 +461,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   /** @inheritDoc */
   async _improveFormula() {
     if (this.competenceImprovesFormula && this.heightened > 0) {
-      this.updateSource({ formula: addFormula(this.formula, "@h") });
+      this.updateSource({ formula: FormulaField.add(this.formula, "@h") });
     }
     return super._improveFormula();
   }
@@ -511,7 +516,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   /** @inheritDoc */
   async _prepareFormula() {
     await super._prepareFormula();
-    if (formulaExists(this.overrideFormula)) { this.updateSource({ formula: this.overrideFormula }); }
+    if (FormulaField.exists(this.overrideFormula)) { this.updateSource({ formula: this.overrideFormula }); }
   }
 
   /** @inheritDoc */

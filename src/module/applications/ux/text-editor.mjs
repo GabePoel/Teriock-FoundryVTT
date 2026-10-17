@@ -1,4 +1,4 @@
-import { parseIdentifier } from "../../helpers/utils.mjs";
+import { parseIdentifier } from "../../utils/_module.mjs";
 
 const { TextEditor } = foundry.applications.ux;
 

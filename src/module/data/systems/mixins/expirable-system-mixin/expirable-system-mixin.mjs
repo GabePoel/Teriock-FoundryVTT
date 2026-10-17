@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 

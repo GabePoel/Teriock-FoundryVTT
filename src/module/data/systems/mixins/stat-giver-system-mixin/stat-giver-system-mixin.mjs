@@ -1,6 +1,5 @@
 import statConfig from "../../../../constants/config/stat-config.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
+import { makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { StatPoolModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;

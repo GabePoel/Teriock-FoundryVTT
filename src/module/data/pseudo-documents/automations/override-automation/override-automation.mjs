@@ -1,5 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin, OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -99,15 +98,15 @@ export default class OverrideAutomation
     ) {
       if (typeof this[k] === "boolean") { execution.updateSource({ [k]: this[k] }); }
     }
-    if (formulaExists(this.rollFormula)) { execution.updateSource({ overrideFormula: this.rollFormula }); }
+    if (FormulaField.exists(this.rollFormula)) { execution.updateSource({ overrideFormula: this.rollFormula }); }
   }
 
   /** @inheritDoc */
   async modifyExecutionConstruction(execution) {
-    if (!formulaExists(this.rollBonus)) { return; }
-    execution.updateSource({ bonus: addFormula(execution.bonus, this.rollBonus) });
+    if (!FormulaField.exists(this.rollBonus)) { return; }
+    execution.updateSource({ bonus: FormulaField.add(execution.bonus, this.rollBonus) });
     if (typeof execution.rootBonus === "string") {
-      execution.rootBonus = addFormula(execution.rootBonus, this.rollBonus);
+      execution.rootBonus = FormulaField.add(execution.rootBonus, this.rollBonus);
     }
   }
 

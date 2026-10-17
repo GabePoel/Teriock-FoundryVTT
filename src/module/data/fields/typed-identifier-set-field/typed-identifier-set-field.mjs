@@ -1,4 +1,4 @@
-import { omit } from "../../../helpers/utils.mjs";
+import { omit } from "../../../utils/_module.mjs";
 import TypedIdentifierField from "../typed-identifier-field/typed-identifier-field.mjs";
 
 const { SetField } = foundry.data.fields;

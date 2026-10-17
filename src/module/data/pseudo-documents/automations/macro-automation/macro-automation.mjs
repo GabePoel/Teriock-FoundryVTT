@@ -1,5 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { resolveDocument } from "../../../../helpers/resolve.mjs";
+import { mergeMetadata, mixClasses, resolveDocument } from "../../../../utils/_module.mjs";
 import { MacroActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";

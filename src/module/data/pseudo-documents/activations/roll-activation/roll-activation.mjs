@@ -1,8 +1,7 @@
 import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { getRollIcon } from "../../../../helpers/icon.mjs";
 import commands from "../../../../helpers/interaction/commands/_module.mjs";
+import { getRollIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import RollAutomation from "../../automations/roll-automation/roll-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 

@@ -1,5 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
+import { makeIcon, mixClasses } from "../../../utils/_module.mjs";
 import { BaseApplicationMixin, DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 import { TeriockContextMenu } from "../../ux/_module.mjs";
 

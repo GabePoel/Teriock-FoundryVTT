@@ -1,6 +1,6 @@
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
 import CleanedEffectSystem from "./cleaned-effect-system.mjs";
 

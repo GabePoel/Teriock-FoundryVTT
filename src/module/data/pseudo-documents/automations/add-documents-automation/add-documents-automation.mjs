@@ -1,9 +1,7 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import effectConfig from "../../../../constants/config/effect-config.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { toId } from "../../../../helpers/string.mjs";
-import { deleteProperties, objectMap } from "../../../../helpers/utils.mjs";
+import { deleteProperties, mergeMetadata, mixClasses, objectMap, toId } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import { ConstructNodesPseudoDocumentMixin } from "../../mixins/_module.mjs";

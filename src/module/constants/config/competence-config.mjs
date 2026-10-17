@@ -1,5 +1,5 @@
-import { makeIconClass } from "../../helpers/icon.mjs";
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 import { icons } from "../display/_module.mjs";
 
 export default {

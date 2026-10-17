@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { BaseApplicationMixin, DragDropApplicationMixin } from "../api/mixins/_module.mjs";
 
 const { RollTableSheet } = foundry.applications.sheets;

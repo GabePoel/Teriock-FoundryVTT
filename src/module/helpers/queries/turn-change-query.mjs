@@ -1,4 +1,4 @@
-import { batchWrite } from "../utils.mjs";
+import { batchWrite } from "../../utils/_module.mjs";
 
 /**
  * Query intended for the GM to handle all turn change operations in a single batched database write.

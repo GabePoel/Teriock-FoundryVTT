@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../utils/_module.mjs";
 import { BaseSystemMixin, CommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;

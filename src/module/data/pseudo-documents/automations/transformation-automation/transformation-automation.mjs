@@ -1,5 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { omit } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
 import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";

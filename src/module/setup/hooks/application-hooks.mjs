@@ -1,6 +1,6 @@
 import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";

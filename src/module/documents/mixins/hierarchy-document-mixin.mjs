@@ -1,4 +1,4 @@
-import { expandDocumentDataArray } from "../../helpers/resolve.mjs";
+import { expandDocumentDataArray } from "../../utils/_module.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
 const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty } = foundry.utils;

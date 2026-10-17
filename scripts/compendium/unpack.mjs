@@ -2,7 +2,7 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 
-import { isKebabCase, toKebabCase } from "../../src/module/helpers/string.mjs";
+import { isKebabCase, toKebabCase } from "../../src/module/utils/string.mjs";
 import { cleanDocument, loadDefaults } from "./clean-fields.mjs";
 import {
   DOCUMENT_COLLECTION_KEYS,

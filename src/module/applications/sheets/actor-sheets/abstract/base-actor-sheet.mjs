@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../mixins/_module.mjs";
 import { CommonSheetMixin, InventoryManagementSheetMixin } from "../../mixins/_module.mjs";

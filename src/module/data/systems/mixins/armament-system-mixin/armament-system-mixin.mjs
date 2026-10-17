@@ -1,10 +1,15 @@
 import { AttackSystemMixin } from "../_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
-import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { getName, objectMap } from "../../../../helpers/utils.mjs";
-import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
+import {
+  dotJoin,
+  getName,
+  makeIcon,
+  mergeMetadata,
+  mixClasses,
+  objectMap,
+  toCamelCase,
+  toKebabCase,
+} from "../../../../utils/_module.mjs";
+import { FormulaField, IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
@@ -134,7 +139,7 @@ export default function ArmamentSystemMixin(Base) {
         wrappers: [
           this.piercing.label,
           ...this._damageWrappers,
-          formulaExists(this.hitBonus)
+          FormulaField.exists(this.hitBonus)
             ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", { value: this.hitBonus })
             : "",
           this.attackPenalty
@@ -191,14 +196,17 @@ export default function ArmamentSystemMixin(Base) {
           update: { "system.bv.raw": "1" },
         });
       }
-      if ((formulaExists(this.damage.base) || formulaExists(this.damage.twoHanded)) && !formulaExists(this.hitBonus)) {
+      if (
+        (FormulaField.exists(this.damage.base) || FormulaField.exists(this.damage.twoHanded))
+        && !FormulaField.exists(this.hitBonus)
+      ) {
         buttons.push({
           button: "hit",
           label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
           update: { "system.hitBonus": "1" },
         });
       }
-      if (this.range.ranged && !formulaExists(this.range.long.raw)) {
+      if (this.range.ranged && !FormulaField.exists(this.range.long.raw)) {
         buttons.push({
           button: "range",
           label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
@@ -296,7 +304,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {boolean}
      */
     get hasAttack() {
-      return formulaExists(this.damage.base) || formulaExists(this.damage.twoHanded);
+      return FormulaField.exists(this.damage.base) || FormulaField.exists(this.damage.twoHanded);
     }
 
     /**
@@ -304,7 +312,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {boolean}
      */
     get hasTwoHandedAttack() {
-      return formulaExists(this.damage.twoHanded) && (this.damage.twoHanded !== this.damage.base);
+      return FormulaField.exists(this.damage.twoHanded) && (this.damage.twoHanded !== this.damage.base);
     }
 
     /** @inheritDoc */
@@ -396,7 +404,7 @@ export default function ArmamentSystemMixin(Base) {
       super.prepareBaseData();
 
       // Bring two-handed attacks up to parity with base
-      if (!formulaExists(this.damage.twoHanded)) { this.damage.twoHanded = this.damage.base; }
+      if (!FormulaField.exists(this.damage.twoHanded)) { this.damage.twoHanded = this.damage.base; }
 
       // Properties
       const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
@@ -409,8 +417,8 @@ export default function ArmamentSystemMixin(Base) {
         if (p.system.damageType) { this.damage.types.add(p.system._source.damageType); }
       }
       if (this.kind === "magic") { this.damage.types.add("magic"); }
-      this.damage.base = addTypesToFormula(this.damage.base, this.damage.types);
-      this.damage.twoHanded = addTypesToFormula(this.damage.twoHanded, this.damage.types);
+      this.damage.base = FormulaField.addTypes(this.damage.base, this.damage.types);
+      this.damage.twoHanded = FormulaField.addTypes(this.damage.twoHanded, this.damage.types);
 
       // Range
       if (this.range.long.unitType === "zero") { this.range.melee = true; }

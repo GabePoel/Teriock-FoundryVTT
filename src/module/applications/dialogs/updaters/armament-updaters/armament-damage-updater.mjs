@@ -1,6 +1,6 @@
 import { BaseUpdater } from "../_module.mjs";
 import { icons } from "../../../../constants/display/_module.mjs";
-import { makeIconClass } from "../../../../helpers/icon.mjs";
+import { makeIconClass } from "../../../../utils/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";

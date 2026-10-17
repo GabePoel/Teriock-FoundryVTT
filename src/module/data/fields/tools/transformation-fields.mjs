@@ -2,7 +2,7 @@ import { LocalDocumentField, TernaryField } from "../_module.mjs";
 import statConfig from "../../../constants/config/stat-config.mjs";
 import transformationConfig from "../../../constants/config/transformation-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../utils/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;

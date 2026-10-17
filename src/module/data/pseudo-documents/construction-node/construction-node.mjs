@@ -1,9 +1,7 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { formulaExists } from "../../../helpers/formula.mjs";
-import { toId } from "../../../helpers/string.mjs";
-import { omit } from "../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, omit, toId } from "../../../utils/_module.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 import { PseudoCollection } from "../collections/_module.mjs";
 import {
@@ -235,7 +233,7 @@ export default class ConstructionNode
       let name = _loc(this.constructor.typeLabel);
       if (
         this.globalIdentifiers.size + this.globalUuids.size + this.localIdentifiers.size + this.localUuids.size === 1
-        && !formulaExists(this.localQualifier)
+        && !FormulaField.exists(this.localQualifier)
       ) {
         if (this.globalIdentifiers.size) {
           name = teriock.fromIdentifierSync(this.globalIdentifiers.first())?.name ?? name;

@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { objectMap } from "../../helpers/utils.mjs";
+import { objectMap } from "../../utils/_module.mjs";
 import impactConfig from "./impact-config.mjs";
 
 const triggerConfig = {

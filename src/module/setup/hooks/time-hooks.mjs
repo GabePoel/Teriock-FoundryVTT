@@ -1,5 +1,5 @@
 import triggerConfig from "../../constants/config/trigger-config.mjs";
-import { batchWrite } from "../../helpers/utils.mjs";
+import { batchWrite } from "../../utils/_module.mjs";
 
 /**
  * Increase debt for all relevant actors.

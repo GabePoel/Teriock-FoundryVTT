@@ -1,6 +1,5 @@
 import { icons } from "../../constants/display/_module.mjs";
-import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { createElement, makeIconClass } from "../../utils/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
 const { setInputAttributes } = foundry.applications.fields;

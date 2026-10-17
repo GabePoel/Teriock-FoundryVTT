@@ -1,6 +1,4 @@
-import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass, makeIconElement } from "../../helpers/icon.mjs";
-import { toKebabCase } from "../../helpers/string.mjs";
+import { createElement, makeIconClass, makeIconElement, toKebabCase } from "../../utils/_module.mjs";
 
 /**
  * @import { FormInputConfig } from "@common/data/_types.mjs";

@@ -1,4 +1,5 @@
 import { icons } from "../constants/display/_module.mjs";
+import { createElement } from "./display.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome, Material Design, or Material Symbols classes.
@@ -18,7 +19,7 @@ export function makeIcon(icon, ...styles) {
  * @returns {HTMLElement}
  */
 export function makeIconElement(icon, ...styles) {
-  return teriock.helpers.html.createElement("i", { className: makeIconClass(icon, ...styles) });
+  return createElement("i", { className: makeIconClass(icon, ...styles) });
 }
 
 /**
@@ -44,7 +45,7 @@ export function makeIconClass(icon, ...styles) {
 /**
  * Determines the appropriate dice icon based on the roll formula.
  * @param {string} rollFormula - The dice roll formula to analyze.
- * @returns {string} The Font Awesome class for the appropriate dice icon.
+ * @returns {string} The CSS class for the appropriate dice icon.
  */
 export function getRollIcon(rollFormula) {
   const polyhedralDice = [4, 6, 8, 10, 12, 20];

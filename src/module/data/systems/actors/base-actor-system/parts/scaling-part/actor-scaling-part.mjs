@@ -1,5 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
-import { toKebabCase } from "../../../../../../helpers/string.mjs";
+import { toKebabCase } from "../../../../../../utils/_module.mjs";
 import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
 /**

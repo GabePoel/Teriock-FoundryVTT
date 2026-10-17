@@ -4,9 +4,7 @@
  */
 
 import { listFormat } from "../../helpers/localization.mjs";
-import { fieldSorterFactory } from "../../helpers/sort.mjs";
-import { toCamelCase, toKebabCase } from "../../helpers/string.mjs";
-import { fromKeySync, getName } from "../../helpers/utils.mjs";
+import { fieldSorterFactory, fromKeySync, getName, toCamelCase, toKebabCase } from "../../utils/_module.mjs";
 import { validateTypedIdentifier } from "../fields/tools/validators.mjs";
 
 const { fields } = foundry.data;

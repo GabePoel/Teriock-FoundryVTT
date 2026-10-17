@@ -1,4 +1,4 @@
-import { prefixObject } from "../../../../../../helpers/utils.mjs";
+import { prefixObject } from "../../../../../../utils/_module.mjs";
 import { AttributeModel } from "../../../../../models/_module.mjs";
 
 /**

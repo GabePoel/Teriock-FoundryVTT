@@ -1,6 +1,5 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
-import { formulaExists } from "../../../../helpers/formula.mjs";
-import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
+import { FormulaField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
@@ -72,7 +71,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
      * @returns {Promise<TeriockDocument|null>}
      */
     async #onlySelectableDocument(overrides) {
-      if (formulaExists(this.localQualifier)) { return null; }
+      if (FormulaField.exists(this.localQualifier)) { return null; }
       const sources = (this.globalUuids?.size ?? 0) + (this.globalIdentifiers?.size ?? 0)
         + (this.localUuids?.size ?? 0) + (this.localIdentifiers?.size ?? 0);
       if (sources !== 1) { return null; }
@@ -145,7 +144,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
      */
     get hasSelection() {
       return this.globalUuids?.size > 0 || this.globalIdentifiers?.size > 0 || this.localUuids?.size > 0
-        || this.localIdentifiers?.size > 0 || formulaExists(this.localQualifier);
+        || this.localIdentifiers?.size > 0 || FormulaField.exists(this.localQualifier);
     }
 
     /**

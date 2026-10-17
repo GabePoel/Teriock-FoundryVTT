@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { FormulaField, TernaryField } from "../../../fields/_module.mjs";
 import { AttackActivation } from "../../activations/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";

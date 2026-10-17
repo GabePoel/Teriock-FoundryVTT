@@ -1,6 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { movementActionField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { MoveActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

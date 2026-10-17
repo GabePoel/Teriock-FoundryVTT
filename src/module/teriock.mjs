@@ -8,6 +8,7 @@ import * as documents from "./documents/_module.mjs";
 import * as executions from "./executions/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 import * as setup from "./setup/_module.mjs";
+import * as utils from "./utils/_module.mjs";
 
 // Register Global References
 // ==========================
@@ -21,9 +22,10 @@ Object.assign(globalThis, {
     dice,
     documents,
     executions,
-    fromIdentifier: helpers.utils.fromIdentifier,
-    fromIdentifierSync: helpers.utils.fromIdentifierSync,
+    fromIdentifier: utils.fromIdentifier,
+    fromIdentifierSync: utils.fromIdentifierSync,
     helpers,
+    utils,
   },
 });
 
@@ -83,7 +85,7 @@ foundry.helpers.Hooks.once("init", function() {
   // Define Fonts
   // ------------
 
-  const fontPath = (s) => `${helpers.path.systemPath(`assets/fonts/${s}`)}`;
+  const fontPath = (s) => `${utils.systemPath(`assets/fonts/${s}`)}`;
 
   Object.assign(CONFIG.fontDefinitions, {
     "Alegreya SC": {

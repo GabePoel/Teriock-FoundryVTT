@@ -1,6 +1,6 @@
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../data/fields/tools/builders.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { addFormula } from "../../../helpers/formula.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -137,7 +137,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
       let value = await BaseRoll.getValue(raw || "0", rollData);
       if (["assistance", "effort"].includes(key)) { value = Math.min(value, 25); }
       this.modifier += value;
-      if (value) { formula = addFormula(formula, `${value}`); }
+      if (value) { formula = FormulaField.add(formula, `${value}`); }
     }
     this.updateSource({ formula });
     await super._prepareFormula();

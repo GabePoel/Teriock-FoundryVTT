@@ -1,7 +1,7 @@
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import DocumentExecution from "../../abstract/document-execution/document-execution.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 

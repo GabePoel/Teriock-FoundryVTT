@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../utils/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import BaseAffinity from "./base-affinity/base-affinity.mjs";
 

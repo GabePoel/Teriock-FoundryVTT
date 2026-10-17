@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import statConfig from "../../../../../../constants/config/stat-config.mjs";
-import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
+import { makeIcon, makeIconClass } from "../../../../../../utils/_module.mjs";
 import { migrateThumbnails } from "../../../../../fields/tools/migrations.mjs";
 import { speciesTransformationFields } from "../../../../../fields/tools/transformation-fields.mjs";
 

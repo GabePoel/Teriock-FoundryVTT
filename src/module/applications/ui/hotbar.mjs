@@ -1,6 +1,5 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
-import { makeIcon, makeIconClass } from "../../helpers/icon.mjs";
-import { findBestDocument } from "../../helpers/utils.mjs";
+import { findBestDocument, makeIcon, makeIconClass } from "../../utils/_module.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 

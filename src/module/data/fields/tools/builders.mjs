@@ -6,7 +6,7 @@ import dieConfig from "../../../constants/config/death-bag-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
 import { thumbnails } from "../../../constants/display/_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
-import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
+import { formatDynamicSelectOptions, objectMap } from "../../../utils/_module.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
 
 const {

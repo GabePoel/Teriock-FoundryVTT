@@ -1,7 +1,5 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
-import { mergeMetadata } from "../../../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../../../helpers/icon.mjs";
-import { fromIdentifier, getName } from "../../../../../../helpers/utils.mjs";
+import { fromIdentifier, getName, makeIcon, mergeMetadata } from "../../../../../../utils/_module.mjs";
 import { initialText } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;

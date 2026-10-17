@@ -1,5 +1,4 @@
-import { parseIdentifier } from "../utils.mjs";
-import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
+import { parseIdentifier } from "../utils/_module.mjs";
 
 /**
  * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
@@ -33,7 +32,13 @@ import BaseRegistryLifecycle from "./base-registry-lifecycle.mjs";
  * for establishing a single source of truth in regard to what identifiers refer to.
  * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
  */
-export default class IdentifiersRegistry extends BaseRegistryLifecycle {
+export default class IdentifiersRegistry {
+  constructor() {
+    this.#initializing = new Promise(resolve => {
+      this.#resolveInitialization = resolve;
+    });
+  }
+
   /**
    * The types of Documents which can be tracked even if they're embedded.
    * @type {Set<Teriock.Documents.DocumentName>}
@@ -54,6 +59,15 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   #identifiers = new Map();
 
   /**
+   * Whether this registry's initialization is complete.
+   * @type {boolean}
+   */
+  #initialized = false;
+
+  /** @type {Promise<void>} */
+  #initializing;
+
+  /**
    * The types of Documents which can support embedded Documents with indexed identifiers.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
@@ -64,6 +78,9 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @type {Set<Teriock.Documents.DocumentName>}
    */
   #primaryDocumentNames = new Set(["ActiveEffect", "Actor", "Item", "JournalEntryPage"]);
+
+  /** @type {(value?: PromiseLike<void> | void) => void} */
+  #resolveInitialization;
 
   /**
    * Pick the highest-priority tracked UUID from a group.
@@ -227,9 +244,30 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     return this.initialized ? this.#equipmentTypes : new Map();
   }
 
-  /** @inheritDoc */
+  /**
+   * Whether this registry's initialization is complete.
+   */
+  get initialized() {
+    return this.#initialized;
+  }
+
+  /**
+   * A promise that resolves when the registry is first initialized and ready.
+   * @returns {Promise<void>}
+   */
+  get initializing() {
+    return this.#initializing;
+  }
+
+  /**
+   * Populate the registry for the first time.
+   */
   _initialize() {
-    this.trackCompendiums().then(() => super._initialize());
+    this.trackCompendiums().then(() => {
+      if (!game._documentsReady || this.#initialized) { return; }
+      this.#resolveInitialization();
+      this.#initialized = true;
+    });
   }
 
   /**

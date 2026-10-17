@@ -1,6 +1,5 @@
 import { UnitUpdater } from "../../../../applications/dialogs/updaters/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { multiplyFormula } from "../../../../helpers/formula.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 
@@ -120,7 +119,7 @@ export default class BaseUnitModel extends BaseDataModel {
     const formula = this.raw || "0";
     const conversion = this.conversion;
     if (conversion === 1) { return formula; }
-    return multiplyFormula(formula, conversion.toString());
+    return FormulaField.multiply(formula, conversion.toString());
   }
 
   /**

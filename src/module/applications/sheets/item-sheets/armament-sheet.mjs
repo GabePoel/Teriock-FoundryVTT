@@ -1,4 +1,4 @@
-import { formulaExists } from "../../../helpers/formula.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { secondaryFormat } from "../../../helpers/localization.mjs";
 import { ArmamentDamageUpdater, ArmamentRangeUpdater } from "../../dialogs/updaters/armament-updaters/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
@@ -43,12 +43,12 @@ export default class ArmamentSheet extends ChildSheet {
     return Object.assign(await super._prepareContext(options), {
       damage: {
         data: secondaryFormat(this.document.system.damage.base || "0", this.document.system.damage.twoHanded, {
-          secondFilter: formulaExists,
+          secondFilter: FormulaField.exists,
         }),
         source: secondaryFormat(
           this.document.system._source.damage.base || "0",
           this.document.system._source.damage.twoHanded,
-          { secondFilter: formulaExists },
+          { secondFilter: FormulaField.exists },
         ),
       },
     });

@@ -1,5 +1,5 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import { addFormulas } from "../../helpers/formula.mjs";
+import { FormulaField } from "../../data/fields/_module.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { ThresholdExecutionMixin } from "./_module.mjs";
 
 /**
@@ -67,7 +67,7 @@ export default function TradecraftExecutionMixin(Base) {
     _configure(options = {}) {
       super._configure(options);
       if (this.actor) {
-        this._source.bonus = addFormulas(
+        this._source.bonus = FormulaField.sum(
           `@tc.${this.tradecraft}.score`,
           this.actor.system.tradecrafts[this.tradecraft].bonus,
           this._source.bonus,

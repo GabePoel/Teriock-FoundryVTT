@@ -1,6 +1,5 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { objectMap, omit } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, objectMap, omit } from "../../../../utils/_module.mjs";
 import { migrateStatuses } from "../../../fields/tools/migrations.mjs";
 import {
   ApplyStatusActivation,

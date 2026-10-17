@@ -1,5 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
-import { resolveDocuments } from "../../helpers/resolve.mjs";
+import { mixClasses, resolveDocuments } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;

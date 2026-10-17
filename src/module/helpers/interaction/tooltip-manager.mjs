@@ -1,4 +1,4 @@
-import { toClass } from "../string.mjs";
+import { toClass } from "../../utils/_module.mjs";
 
 const { TooltipManager } = foundry.helpers.interaction;
 

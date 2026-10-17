@@ -1,5 +1,5 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { tradecraftsField } from "../../../fields/tools/builders.mjs";
 import { TradecraftActivation } from "../../activations/command-activations.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";

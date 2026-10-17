@@ -1,4 +1,4 @@
-import { getName } from "../../../helpers/utils.mjs";
+import { getName } from "../../../utils/_module.mjs";
 import BaseModifierModel from "./base-modifier-model/base-modifier-model.mjs";
 
 const { fields } = foundry.data;

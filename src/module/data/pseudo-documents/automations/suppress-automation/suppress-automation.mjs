@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { TypedIdentifierField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 

@@ -1,6 +1,6 @@
 import { migrateThumbnails } from "../../../data/fields/tools/migrations.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
+import { makeIcon } from "../../../utils/_module.mjs";
 import Booster from "../../booster.mjs";
 import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "../../helpers.mjs";
 

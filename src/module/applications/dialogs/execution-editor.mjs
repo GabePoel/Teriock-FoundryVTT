@@ -1,5 +1,5 @@
 import { FormulaField } from "../../data/fields/_module.mjs";
-import { makeIconClass } from "../../helpers/icon.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import DocumentSelector from "./document-selector.mjs";
 

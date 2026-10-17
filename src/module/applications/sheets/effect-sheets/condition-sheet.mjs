@@ -1,4 +1,4 @@
-import { mixClasses } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;

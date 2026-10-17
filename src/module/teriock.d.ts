@@ -1,4 +1,4 @@
-import { fromIdentifier, fromIdentifierSync } from "./helpers/utils.mjs";
+import { fromIdentifier, fromIdentifierSync } from "./utils/_module.mjs";
 
 declare global {
   const TERIOCK: typeof import("./constants/_module.mjs");
@@ -13,6 +13,7 @@ declare global {
     fromIdentifier: typeof fromIdentifier;
     fromIdentifierSync: typeof fromIdentifierSync;
     helpers: typeof import("./helpers/_module.mjs");
+    utils: typeof import("./utils/_module.mjs");
   };
 
   const __brand: unique symbol;

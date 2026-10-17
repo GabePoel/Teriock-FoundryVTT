@@ -1,4 +1,4 @@
-import { toId } from "../../../helpers/string.mjs";
+import { toId } from "../../../utils/_module.mjs";
 import PseudoCollection from "./pseudo-collection.mjs";
 
 /**

@@ -1,7 +1,7 @@
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import systemConfig from "../../../constants/config/system-config.mjs";
 import { icons } from "../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { Panel } from "../../pseudo-documents/_module.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BaseItemSystem from "./base-item-system/base-item-system.mjs";

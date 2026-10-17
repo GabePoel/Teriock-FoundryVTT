@@ -1,8 +1,6 @@
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { asInf } from "../../../../helpers/icon.mjs";
-import { safeInf } from "../../../../helpers/utils.mjs";
+import { asInf, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 

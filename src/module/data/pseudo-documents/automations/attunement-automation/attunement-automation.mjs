@@ -1,6 +1,6 @@
 import { icons } from "../../../../constants/display/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

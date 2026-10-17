@@ -1,9 +1,6 @@
 import { Panel } from "../_module.mjs";
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../helpers/construction.mjs";
-import { makeIcon } from "../../../helpers/icon.mjs";
-import { dotJoin, toId } from "../../../helpers/string.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { dotJoin, makeIcon, mergeMetadata, mixClasses, objectMap, toId } from "../../../utils/_module.mjs";
 import { migrateStatuses } from "../../fields/tools/migrations.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../mixins/_module.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";

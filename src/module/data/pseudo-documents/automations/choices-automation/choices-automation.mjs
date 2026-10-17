@@ -1,8 +1,7 @@
 import { ChoiceSelector } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
 import { choicesWithNone } from "../../../../helpers/localization.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { categorySuggestions } from "../../../fields/tools/suggestions.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";

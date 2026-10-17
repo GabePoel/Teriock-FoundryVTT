@@ -1,8 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { toId } from "../../../../helpers/string.mjs";
-import { prefixObject } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, mixClasses, prefixObject, toId } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { competenceField, qualifierField } from "../../../fields/tools/builders.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";

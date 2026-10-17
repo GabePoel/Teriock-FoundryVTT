@@ -1,8 +1,8 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
-import { getRollIcon, makeIconClass } from "../../../helpers/icon.mjs";
+import { getRollIcon, makeIconClass } from "../../../utils/_module.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -123,7 +123,7 @@ export default class StatDie extends BasePseudoDocument {
     }
     if (proceed) {
       let formula = this.formula;
-      if (formulaExists(substitution)) { formula = substituteFormula(formula, substitution); }
+      if (FormulaField.exists(substitution)) { formula = FormulaField.substitute(formula, substitution); }
       const roll = new BaseRoll(formula, this.parent.getRollData(), {
         flavor: _loc("TERIOCK.ROLLS.Base.name", { value: this.parent.dieName }),
       });

@@ -1,6 +1,5 @@
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata } from "../../../../helpers/construction.mjs";
-import { omit } from "../../../../helpers/utils.mjs";
+import { mergeMetadata, omit } from "../../../../utils/_module.mjs";
 import AttackAutomation from "../../automations/attack-automation/attack-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 

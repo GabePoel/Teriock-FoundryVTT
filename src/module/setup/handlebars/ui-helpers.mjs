@@ -1,5 +1,5 @@
 import { icons } from "../../constants/display/_module.mjs";
-import { makeIcon, makeIconClass, makeIconElement } from "../../helpers/icon.mjs";
+import { makeIcon, makeIconClass, makeIconElement } from "../../utils/_module.mjs";
 
 /**
  * Render an info icon that shows a rules tooltip on hover.

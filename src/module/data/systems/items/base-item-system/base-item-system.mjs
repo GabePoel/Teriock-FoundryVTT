@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { nullIdField } from "../../../fields/tools/builders.mjs";
 import { BaseSystemMixin, ChildSystemMixin, InstructionsSystemMixin } from "../../mixins/_module.mjs";
 

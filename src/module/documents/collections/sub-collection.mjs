@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../helpers/construction.mjs";
+import { mergeMetadata } from "../../utils/_module.mjs";
 import TypeCollection from "./type-collection.mjs";
 
 /**

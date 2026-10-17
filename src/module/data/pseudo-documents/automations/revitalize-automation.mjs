@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../helpers/construction.mjs";
+import { mergeMetadata } from "../../../utils/_module.mjs";
 import { RevitalizeActivation } from "../activations/command-activations.mjs";
 import { StatAutomation } from "./abstract/_module.mjs";
 

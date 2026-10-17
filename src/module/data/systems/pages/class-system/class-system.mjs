@@ -1,6 +1,5 @@
 import classConfig from "../../../../constants/config/class-config.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { getName, objectMap } from "../../../../helpers/utils.mjs";
+import { getName, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { RankSystem } from "../../items/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";

@@ -1,7 +1,5 @@
-import { createElement } from "../../../../helpers/html.mjs";
 import { sortObjectEntries } from "../../../../helpers/localization.mjs";
-import { pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { getTypeLabel, objectMap } from "../../../../helpers/utils.mjs";
+import { createElement, getTypeLabel, objectMap, pathSorterFactory } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 

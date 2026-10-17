@@ -1,4 +1,4 @@
-import { mixClasses } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../utils/_module.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
 import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
 

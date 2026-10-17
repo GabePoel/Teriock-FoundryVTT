@@ -1,8 +1,13 @@
 import { icons } from "../../../../constants/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
-import { dotJoin, toKebabCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, getName } from "../../../../helpers/utils.mjs";
+import {
+  dotJoin,
+  fromIdentifier,
+  getName,
+  makeIcon,
+  mergeMetadata,
+  mixClasses,
+  toKebabCase,
+} from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { AttunableSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";

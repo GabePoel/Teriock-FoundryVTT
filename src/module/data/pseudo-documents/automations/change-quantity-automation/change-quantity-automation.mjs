@@ -1,8 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../helpers/construction.mjs";
-import { formulaExists } from "../../../../helpers/formula.mjs";
-import { fromIdentifierLocal } from "../../../../helpers/utils.mjs";
-import { TypedIdentifierField } from "../../../fields/_module.mjs";
+import { fromIdentifierLocal, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { FormulaField, TypedIdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { ChangeQuantityActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -94,7 +92,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   async _getActivations(options = {}) {
     const rollData = Object.assign(this.getRollData(), options?.rollData ?? {});
     const formula = BaseRoll.replaceFormulaData(this.#formula(options), rollData);
-    if (!formulaExists(formula)) { return []; }
+    if (!FormulaField.exists(formula)) { return []; }
     const consumable = await this.#findConsumable(options);
     if (!consumable) { return []; }
     if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula, rollData) <= 0) { return []; }

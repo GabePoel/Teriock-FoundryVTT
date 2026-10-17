@@ -1,6 +1,4 @@
-import { pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { toKebabCase } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap, pathSorterFactory, toKebabCase } from "../../../../utils/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";

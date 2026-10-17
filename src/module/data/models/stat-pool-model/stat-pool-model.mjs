@@ -1,8 +1,7 @@
 import impactConfig from "../../../constants/config/impact-config.mjs";
 import statConfig from "../../../constants/config/stat-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { formulaExists } from "../../../helpers/formula.mjs";
-import { toId } from "../../../helpers/string.mjs";
+import { toId } from "../../../utils/_module.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { StatDie } from "../../pseudo-documents/_module.mjs";
@@ -87,7 +86,7 @@ export default class StatPoolModel extends BaseDataModel {
    * @return {boolean}
    */
   get hasDice() {
-    return formulaExists(this.formula);
+    return FormulaField.exists(this.formula);
   }
 
   /**
@@ -146,7 +145,7 @@ export default class StatPoolModel extends BaseDataModel {
   /** @inheritDoc */
   prepareStatDice() {
     const dice = [];
-    if (!this.disabled && formulaExists(this.formula)) {
+    if (!this.disabled && FormulaField.exists(this.formula)) {
       const roll = new BaseRoll(this.formula, this.getRollData());
       roll.evaluateSync({ minimize: true });
       const terms = roll.dice;

@@ -1,4 +1,4 @@
-import { fromIdentifier, getName } from "../../../helpers/utils.mjs";
+import { fromIdentifier, getName } from "../../../utils/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 import BasePageSheet from "./base-page-sheet.mjs";
 

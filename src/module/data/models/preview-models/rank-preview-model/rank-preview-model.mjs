@@ -1,5 +1,4 @@
-import { pathSorterFactory } from "../../../../helpers/sort.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap, pathSorterFactory } from "../../../../utils/_module.mjs";
 import { archetypeField, classField, nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
