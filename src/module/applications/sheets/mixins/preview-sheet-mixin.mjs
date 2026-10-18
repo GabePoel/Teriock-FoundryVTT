@@ -108,12 +108,13 @@ export default function PreviewSheetMixin(Base) {
     }
 
     /** @inheritDoc */
-    _toggleCollapsed(collapsibleId, collapsed) {
-      collapsed = super._toggleCollapsed(collapsibleId, collapsed);
-      for (const tb of this.element.querySelectorAll(`toggle-button[data-collapsible-target=${collapsibleId}]`)) {
+    _toggleCollapsed(collapsibleId, collapsed, target) {
+      collapsed = super._toggleCollapsed(collapsibleId, collapsed, target);
+      for (const tb of this.element.querySelectorAll(`toggle-button[data-collapsible-target="${collapsibleId}"]`)) {
         if (tb.isConnected) { tb.value = !collapsed; }
         else { tb.setAttribute("value", String(!collapsed)); }
       }
+      return collapsed;
     }
   }
 
