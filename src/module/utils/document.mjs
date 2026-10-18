@@ -45,7 +45,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
 /**
  * Parse an identifier into its component parts.
  * @param {Identifier} identifier
- * @returns {Teriock.System.ResolvedIdentifier | null}
+ * @returns {Teriock.System.ResolvedIdentifier}
  */
 export function parseIdentifier(identifier) {
   let type = null;

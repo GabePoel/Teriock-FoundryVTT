@@ -34,7 +34,7 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
 
   /**
    * This document's dependee.
-   * @type {TeriockActiveEffect|null};
+   * @type {TeriockActiveEffect|null}
    */
   dependee;
 
@@ -116,13 +116,8 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
 
   /** @inheritDoc */
   prepareBaseData() {
-    if (this.system._dep?.length === 16) {
-      const dependee = this.actor?.effects.get(this.system._dep);
-      if (dependee) {
-        dependee.dependents.set(this.id, this);
-        this.dependee = dependee;
-      } else { this.dependee = null; }
-    }
+    this.dependee = this.actor?.effects.get(this.system._dep) ?? null;
+    this.dependee?.dependents.set(this.id, this);
     super.prepareBaseData();
   }
 

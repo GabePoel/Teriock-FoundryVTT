@@ -28,8 +28,9 @@ export default class HarmRoll extends ImpactsRoll {
     const harms = await this.getHarmArray();
     const harmMap = Object.fromEntries(harms.map(h => [h.system.identifier, h]));
     for (const die of this.dice) {
+      const types = die.flavor.split(" ");
       for (const [type, harm] of Object.entries(harmMap)) {
-        if (die.flavor.includes(type)) {
+        if (types.includes(type)) {
           const rollStyleAutomations = harm.system.automations.getTypeSync("rollStyle");
           if (!rollStyleAutomations.length) { continue; }
           for (const a of rollStyleAutomations) {

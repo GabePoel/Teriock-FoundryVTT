@@ -76,7 +76,7 @@ export default class TeriockHotbar extends Hotbar {
       },
       visible: li => {
         const macro = this.#getMacroForSlot(li);
-        return ["useGeneral", "useLinked"].includes(macro.getFlag("teriock", "macroType"));
+        return ["useGeneral", "useLinked"].includes(macro?.getFlag("teriock", "macroType"));
       },
     });
     return options;

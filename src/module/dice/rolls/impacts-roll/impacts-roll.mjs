@@ -62,6 +62,7 @@ export default class ImpactsRoll extends BaseRoll {
         const newRoll = await this.boost(this.options);
         await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
+      visible: () => this.dice.length > 0,
     }, {
       icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.roll.deboost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
@@ -69,6 +70,7 @@ export default class ImpactsRoll extends BaseRoll {
         const newRoll = await this.deboost(this.options);
         await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
+      visible: () => this.dice.length > 0,
     }, ...super._getFormulaContextOptions(config)];
   }
 

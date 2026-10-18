@@ -197,8 +197,9 @@ export default class BaseRoll extends Roll {
    */
   async _applyDiceStyles() {
     for (const die of this.dice) {
+      const types = die.flavor.split(" ");
       for (const [type, stat] of Object.entries(TERIOCK.CONFIG.stat)) {
-        if (stat?.style && die.flavor.includes(type)) { die.options.appearance = stat.style; }
+        if (stat?.style && types.includes(type)) { die.options.appearance = stat.style; }
       }
     }
   }

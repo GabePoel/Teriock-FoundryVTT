@@ -1,4 +1,4 @@
-import { parseIdentifier } from "../../utils/_module.mjs";
+import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 
 const { TextEditor } = foundry.applications.ux;
 
@@ -15,7 +15,9 @@ export default class TeriockTextEditor extends TextEditor {
   static async _embedContent(match, options = {}) {
     for (const part of match.groups.config.match(/(?:[^\s"]+|"[^"]*")+/g)) {
       const [key] = part.split("=");
-      if (key === "identifier" || parseIdentifier(part)) { await game.teriock.identifiers.initializing; }
+      if (key === "identifier" || validateTypedIdentifier(part, { strict: true })) {
+        await game.teriock.identifiers.initializing;
+      }
     }
     return super._embedContent(match, options);
   }
@@ -30,7 +32,7 @@ export default class TeriockTextEditor extends TextEditor {
     const config = super._parseEmbedConfig(raw, options);
     if (!config.uuid) {
       if (config.identifier) { config.uuid = game.teriock.identifiers.get(config.identifier); }
-      else if (config.values.length && parseIdentifier(config.values[0])) {
+      else if (validateTypedIdentifier(config.values[0], { strict: true })) {
         const uuid = game.teriock.identifiers.get(config.values[0]);
         if (uuid) { config.uuid = uuid; }
       }

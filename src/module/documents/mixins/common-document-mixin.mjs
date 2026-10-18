@@ -1,5 +1,6 @@
+import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
-import { ensureChildren, ensureNoChildren, mixClasses, parseIdentifier } from "../../utils/_module.mjs";
+import { ensureChildren, ensureNoChildren, mixClasses } from "../../utils/_module.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 
 /**
@@ -280,7 +281,7 @@ export default function CommonDocumentMixin(Base) {
      *  - undefined if no changes need to be made
      */
     async toggleChild(identifier, options = {}) {
-      if (!parseIdentifier(identifier)) { return; }
+      if (!validateTypedIdentifier(identifier, { strict: true })) { return; }
       const hasChild = this.children.identifiers.has(identifier);
       if (hasChild && options.active) { return true; }
       else if (hasChild && !options.active) {

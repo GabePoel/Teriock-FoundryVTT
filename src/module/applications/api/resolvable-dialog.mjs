@@ -70,8 +70,8 @@ export default class ResolvableDialog extends mixClasses(TeriockApplication, Tem
   }
 
   /** @inheritDoc */
-  _onClose() {
-    super._onClose();
+  _onClose(options) {
+    super._onClose(options);
     this._finish(this._fallbackFinishValue);
   }
 }

@@ -74,8 +74,11 @@ export default class TargetAutomation extends BaseAutomation {
     });
   }
 
-  /** @type {Set<string>} */
-  #targetIds = new Set();
+  /**
+   * Targets to restore once the execution completes. This is only set if this placed a targeting Region.
+   * @type {string[]|null}
+   */
+  #targetIds = null;
 
   /**
    * Get the numeric value of some region shape path.
@@ -194,8 +197,9 @@ export default class TargetAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   async interactOnExecutionCompletion() {
-    canvas.tokens.setTargets(this.#targetIds, { mode: "replace" });
-    this.#targetIds = new Set();
+    if (!this.#targetIds) { return; }
+    canvas.tokens?.setTargets(this.#targetIds, { mode: "replace" });
+    this.#targetIds = null;
   }
 
   /** @inheritDoc */

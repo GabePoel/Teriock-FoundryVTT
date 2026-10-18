@@ -58,7 +58,7 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
         n.state = "ready";
       }
     }
-    await TeriockActor.updateDocuments(toUpdate, { asGM: true });
+    if (toUpdate.length) { await TeriockActor.updateDocuments(toUpdate, { asGM: true }); }
   }
 
   /**
@@ -119,17 +119,14 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
    * @returns {Promise<void>}
    */
   async #import() {
-    const toCreate = [];
     const packNodes = this.#nodes.filter(n => n.state === "packed");
-    for (const n of packNodes) {
-      if (n.state === "packed") {
-        const data = foundry.utils.mergeObject(
-          game.actors.fromCompendium(n.actor, { clearFolder: true, clearOwnership: true }),
-          { flags: { teriock: { summonFor: n.actor.uuid } }, folder: this.#summonsFolderId },
-        );
-        toCreate.push(data);
-      }
-    }
+    if (!packNodes.length) { return; }
+    const toCreate = packNodes.map(n =>
+      foundry.utils.mergeObject(game.actors.fromCompendium(n.actor, { clearFolder: true, clearOwnership: true }), {
+        flags: { teriock: { summonFor: n.actor.uuid } },
+        folder: this.#summonsFolderId,
+      })
+    );
     const actors = await TeriockActor.createDocuments(toCreate, { asGM: true });
     for (let i = 0; i < packNodes.length; i++) {
       packNodes[i].actor = actors[i];
