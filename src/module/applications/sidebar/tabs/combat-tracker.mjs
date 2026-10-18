@@ -16,7 +16,9 @@ export default class TeriockCombatTracker extends CombatTracker {
     const combatant = this.viewed?.combatants.get(target.closest("[data-combatant-id]").dataset.combatantId);
     if (!combatant) { return; }
     const defaultCombatant = combatant?.system?.defaultCombatant ?? combatant;
-    await defaultCombatant.update({ "system.reactions": defaultCombatant.system.reactions ? 0 : 1 });
+    await defaultCombatant.update({
+      "system.reactions": defaultCombatant.system.reactions ? 0 : TERIOCK.CONFIG.combat.maxReactions,
+    });
   }
 
   /** @inheritDoc */

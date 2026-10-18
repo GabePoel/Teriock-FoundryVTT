@@ -16,7 +16,15 @@ export default async function turnChangeQuery(queryData) {
       parent: canvas.scene,
     },
     ...queryData.attackPenaltyUuids.map(uuid => ({ action: "update", docData: { "system.attackPenalty": 0 }, uuid })),
-    ...queryData.actionUuids.map(uuid => ({ action: "update", docData: { "system.actions": 3 }, uuid })),
-    ...queryData.reactionUuids.map(uuid => ({ action: "update", docData: { "system.reactions": 1 }, uuid })),
+    ...queryData.actionUuids.map(uuid => ({
+      action: "update",
+      docData: { "system.actions": TERIOCK.CONFIG.combat.maxActions },
+      uuid,
+    })),
+    ...queryData.reactionUuids.map(uuid => ({
+      action: "update",
+      docData: { "system.reactions": TERIOCK.CONFIG.combat.maxReactions },
+      uuid,
+    })),
   ]);
 }

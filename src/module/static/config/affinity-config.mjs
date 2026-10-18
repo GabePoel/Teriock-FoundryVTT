@@ -4,6 +4,19 @@ import { colors, thumbnails } from "../display/_module.mjs";
 // TODO: Migrate everything to registry.
 export default {
   // no sort
+  conditions: [
+    { category: "effect", status: "hollied", type: "resistance", value: "reanimation" },
+    { category: "effect", status: "terrored", type: "resistance", value: "healing" },
+    { category: "effect", status: "terrored", type: "resistance", value: "revival" },
+    { category: "condition", status: "frenzied", type: "resistance", value: "frightened" },
+    { category: "condition", status: "defying-death", type: "resistance", value: "dead" },
+    { category: "condition", status: "defying-death", type: "resistance", value: "unconscious" },
+    { category: "condition", status: "allured", type: "binding", value: "allured" },
+    { category: "other", status: "burned", type: "incapability", value: "TERIOCK.AFFINITIES.Condition.burned" },
+    { category: "other", status: "silenced", type: "incapability", value: "TERIOCK.AFFINITIES.Condition.silenced" },
+    { category: "other", status: "frenzied", type: "ineptitude", value: "TERIOCK.AFFINITIES.Condition.frenzied" },
+  ],
+  // no sort
   groups: {
     immunities: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.immunities", types: ["hexseal", "immunity"] },
     resistances: {

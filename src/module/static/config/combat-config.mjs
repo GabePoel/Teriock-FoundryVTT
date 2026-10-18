@@ -7,6 +7,8 @@ const combatConfig = {
     round: "TERIOCK.COMBAT.Event.round",
     turn: "TERIOCK.COMBAT.Event.turn",
   },
+  maxActions: 3,
+  maxReactions: 1,
   relation: {
     everyone: "TERIOCK.COMBAT.Relation.everyone",
     executor: "TERIOCK.COMBAT.Relation.executor",

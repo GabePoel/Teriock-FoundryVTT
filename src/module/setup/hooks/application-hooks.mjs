@@ -34,7 +34,6 @@ function addEmbedContextMenuEntriesToHeader(application, controls) {
       };
     }),
   );
-  sortControls(application, controls);
 }
 
 /**
@@ -153,11 +152,16 @@ function addWikiOpenToHeader(application, controls) {
 }
 
 /**
- * @param {DocumentSheetV2} _application
+ * Sort the header controls of Teriock applications and of sheets for Teriock documents. This runs on the last hook in
+ * the inheritance chain so that every added control is included.
+ * @param {ApplicationV2} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
  */
-function sortControls(_application, controls) {
+function sortControls(application, controls) {
+  const teriock = application.options.classes?.includes("teriock")
+    || typeof application.document?.getEmbedContextMenuEntries === "function";
+  if (!teriock) { return; }
   for (const c of controls) { c.label = _loc(c.label); }
   controls = game.i18n.sortObjects(controls, "label");
   controls.sort((a, b) => {
@@ -172,7 +176,7 @@ function sortControls(_application, controls) {
 }
 
 const applicationHookEntries = [
-  ["getHeaderControlsBaseApplication", sortControls],
+  ["getHeaderControlsApplicationV2", sortControls],
   ["getHeaderControlsDocumentSheetV2", addEmbedContextMenuEntriesToHeader],
   ["getHeaderControlsDocumentSheetV2", addWikiOpenToHeader],
   ["getHeaderControlsDocumentSheetV2", recolorCompendiumDocumentHeader],

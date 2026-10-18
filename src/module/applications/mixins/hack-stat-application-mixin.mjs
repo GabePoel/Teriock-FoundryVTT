@@ -41,7 +41,7 @@ export default function HackStatApplicationMixin(Base) {
     }
 
     /**
-     * Hacks a specific body part. Right-click hacks in the reverse direction.
+     * Hacks or unhacks a specific body part depending on {@link _hackForward}. Right-click goes the other way.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
@@ -49,8 +49,8 @@ export default function HackStatApplicationMixin(Base) {
      */
     static async _onTakeHack(event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
-      if (event.button === 2) { return onReverseHack(this, event, target); }
-      await onTakeHack(this.document, event, target);
+      const forward = this._hackForward !== (event.button === 2);
+      await (forward ? onTakeHack : onTakeUnhack)(this.document, event, target);
     }
 
     /**
@@ -63,19 +63,6 @@ export default function HackStatApplicationMixin(Base) {
     static async _onTakeImpact(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
       await this.document.system.impactDialog(target.dataset.impact);
-    }
-
-    /**
-     * Unhacks a specific body part. Right-click hacks in the reverse direction.
-     * @param {PointerEvent} event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     * @this {HackStatApplication}
-     */
-    static async _onTakeUnhack(event, target) {
-      if (!game.teriock.checkEditable(this)) { return; }
-      if (event.button === 2) { return onReverseHack(this, event, target); }
-      await onTakeUnhack(this.document, event, target);
     }
 
     /**
@@ -229,18 +216,6 @@ export default function HackStatApplicationMixin(Base) {
   }
 
   return HackStatApplication;
-}
-
-/**
- * Hack or unhack a specific body part, in the reverse of an application's hacking direction.
- * @param {HackStatApplication} application
- * @param {PointerEvent} event
- * @param {HTMLElement} target
- * @returns {Promise<void>}
- */
-async function onReverseHack(application, event, target) {
-  if (application._hackForward) { await onTakeUnhack(application.document, event, target); }
-  else { await onTakeHack(application.document, event, target); }
 }
 
 /**

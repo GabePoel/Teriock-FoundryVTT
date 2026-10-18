@@ -80,7 +80,9 @@ export default function PlayableActorSheetCombatPart(Base) {
     static async #onToggleReaction() {
       const combatant = this.document.defaultCombatant;
       if (!combatant || !game.teriock.checkEditable(this)) { return; }
-      await combatant.update({ "system.reactions": combatant.system.reactions ? 0 : 1 });
+      await combatant.update({
+        "system.reactions": combatant.system.reactions ? 0 : TERIOCK.CONFIG.combat.maxReactions,
+      });
     }
 
     /**

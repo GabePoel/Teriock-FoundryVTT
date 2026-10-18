@@ -12,7 +12,6 @@ const { fields } = foundry.data;
 export default class HealManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { takeHack: { buttons: [0, 2], handler: this._onTakeUnhack } },
     window: { icon: makeIconClass(impactConfig.healing.icon, "title"), title: "TERIOCK.DIALOGS.Heal.title" },
   };
 

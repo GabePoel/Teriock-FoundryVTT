@@ -21,10 +21,22 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      actions: new fields.NumberField({ initial: 3, integer: true, max: 3, min: 0, nullable: false }),
+      actions: new fields.NumberField({
+        initial: TERIOCK.CONFIG.combat.maxActions,
+        integer: true,
+        max: TERIOCK.CONFIG.combat.maxActions,
+        min: 0,
+        nullable: false,
+      }),
       attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
       initiative: new fields.EmbeddedDataField(InitiativeModel),
-      reactions: new fields.NumberField({ initial: 1, integer: true, max: 1, min: 0, nullable: false }),
+      reactions: new fields.NumberField({
+        initial: TERIOCK.CONFIG.combat.maxReactions,
+        integer: true,
+        max: TERIOCK.CONFIG.combat.maxReactions,
+        min: 0,
+        nullable: false,
+      }),
     });
   }
 

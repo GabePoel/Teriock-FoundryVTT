@@ -54,22 +54,6 @@ export default function ActorAffinitiesPart(Base) {
     }
 
     /**
-     * Add a virtual affinity for a condition.
-     * @param {Teriock.Keys.Condition} status
-     * @param {AffinityType} type
-     * @param {Teriock.Keys.Category} category
-     * @param {string} value
-     * @param {object} data
-     */
-    _addVirtualConditionAffinity(status, type, category, value, data) {
-      if (!this.parent.statuses.has(status)) { return; }
-      this._addVirtualAffinity(type, category, value, TERIOCK.STATUSES.conditions[status]?.name, {
-        img: TERIOCK.STATUSES.conditions[status]?.img,
-        ...data,
-      });
-    }
-
-    /**
      * Checks if there's some protection against something. Only affinities that stop or lessen something count.
      *
      * Relevant wiki pages:
@@ -86,26 +70,13 @@ export default function ActorAffinitiesPart(Base) {
     /** @inheritDoc */
     prepareVirtualEffects() {
       super.prepareVirtualEffects();
-      this._addVirtualConditionAffinity("hollied", "resistance", "effect", "reanimation");
-      this._addVirtualConditionAffinity("terrored", "resistance", "effect", "healing");
-      this._addVirtualConditionAffinity("terrored", "resistance", "effect", "revival");
-      this._addVirtualConditionAffinity("frenzied", "resistance", "condition", "frightened");
-      this._addVirtualConditionAffinity("defying-death", "resistance", "condition", "dead");
-      this._addVirtualConditionAffinity("defying-death", "resistance", "condition", "unconscious");
-      this._addVirtualConditionAffinity("allured", "binding", "condition", "allured");
-      this._addVirtualConditionAffinity("burned", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.burned"));
-      this._addVirtualConditionAffinity(
-        "silenced",
-        "incapability",
-        "other",
-        _loc("TERIOCK.AFFINITIES.Condition.silenced"),
-      );
-      this._addVirtualConditionAffinity(
-        "frenzied",
-        "ineptitude",
-        "other",
-        _loc("TERIOCK.AFFINITIES.Condition.frenzied"),
-      );
+      for (const { category, status, type, value } of affinityConfig.conditions) {
+        if (!this.parent.statuses.has(status)) { continue; }
+        const condition = TERIOCK.STATUSES.conditions[status];
+        this._addVirtualAffinity(type, category, category === "other" ? _loc(value) : value, condition?.name, {
+          img: condition?.img,
+        });
+      }
     }
 
     /**
