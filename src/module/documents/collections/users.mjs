@@ -27,13 +27,8 @@ export default class TeriockUsers extends Users {
     } = queryOptions;
     const { notifyFailure = true } = queryOptions;
     if (queryOptions.localize) {
-      if (queryOptions.format && Object.keys(queryOptions.format).length > 0) {
-        failPrefix = _loc(failPrefix, queryOptions.format);
-        failReason = _loc(failReason, queryOptions.format);
-      } else {
-        failPrefix = _loc(failPrefix);
-        failReason = _loc(failReason);
-      }
+      failPrefix = _loc(failPrefix, queryOptions.format);
+      failReason = _loc(failReason, queryOptions.format);
     }
     if (!failMessage) {
       failMessage = _loc("TERIOCK.SYSTEMS.User.QUERY.failFormat", { prefix: failPrefix, reason: failReason });
@@ -42,7 +37,7 @@ export default class TeriockUsers extends Users {
       ui.notifications.warn(failMessage, { format: queryOptions.format, localize: queryOptions.localize });
     }
     try {
-      return this.activeGM?.query(queryName, queryData, queryOptions);
+      return await this.activeGM?.query(queryName, queryData, queryOptions);
     } catch (e) {
       console.error(e, queryName, queryData, queryOptions);
       if (queryOptions.fallback) { return queryOptions.fallback; }

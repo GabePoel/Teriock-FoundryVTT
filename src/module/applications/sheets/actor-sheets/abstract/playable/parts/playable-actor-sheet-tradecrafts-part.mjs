@@ -54,9 +54,9 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
 
       const index = game.packs.get("teriock.player").index;
       context.tradecraftMacros = Object.fromEntries(
-        Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).map((
-          [tc, v],
-        ) => [tc, index.getName(`Make ${v.label} Check`)?.uuid]),
+        Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).map(
+          tc => [tc, index.getName(`Make ${tc.capitalize()} Check`)?.uuid]
+        ),
       );
 
       // Update score tooltips if more scores amounts defined.

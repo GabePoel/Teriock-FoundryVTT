@@ -135,11 +135,7 @@ export default class AbilitySystem
     }
     for (const [k, v] of Object.entries(TERIOCK.CONFIG.cost.tweaks)) {
       if (!this.costs.tweaks[k]) {
-        buttons.push({
-          button: `tweak${k.charAt(0).toUpperCase()}${k.slice(1)}`,
-          label: v.label,
-          update: { [`system.costs.tweaks.${k}`]: 1 },
-        });
+        buttons.push({ button: `tweak${k.capitalize()}`, label: v.label, update: { [`system.costs.tweaks.${k}`]: 1 } });
       }
     }
     return buttons;

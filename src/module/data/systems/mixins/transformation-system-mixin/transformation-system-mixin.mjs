@@ -27,7 +27,7 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
  * @returns {string}
  */
 function disabledStatDiceFlag(stat) {
-  return `disabled${stat[0].toUpperCase()}${stat.slice(1)}DiceItems`;
+  return `disabled${stat.capitalize()}DiceItems`;
 }
 
 /**
@@ -36,7 +36,7 @@ function disabledStatDiceFlag(stat) {
  * @returns {string}
  */
 function transformationStatFlag(stat) {
-  return `transformation${stat[0].toUpperCase()}${stat.slice(1)}`;
+  return `transformation${stat.capitalize()}`;
 }
 
 /**

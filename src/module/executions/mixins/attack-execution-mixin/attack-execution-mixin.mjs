@@ -452,10 +452,7 @@ export default function AttackExecutionMixin(Base) {
         warded: this._resolveWarded(options),
       };
       if (this.isAttack && this.isContact) {
-        const hitBonus = this.armament?.system.hitBonus;
-        changes.bonus = FormulaField.exists(this.rootBonus)
-          ? (FormulaField.exists(hitBonus) ? FormulaField.add(this.rootBonus, hitBonus) : this.rootBonus)
-          : (FormulaField.exists(hitBonus) ? hitBonus : "0");
+        changes.bonus = FormulaField.add(this.rootBonus ?? "", this.armament?.system.hitBonus ?? "") || "0";
       }
       this.updateSource(changes);
     }

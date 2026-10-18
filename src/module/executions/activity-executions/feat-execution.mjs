@@ -31,10 +31,11 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
 
   /** @inheritDoc */
   get flavor() {
+    const value = TERIOCK.CONFIG.attribute[this.attribute]?.abbreviation;
     if (["number", "string"].includes(typeof this.threshold)) {
-      return _loc("TERIOCK.ROLLS.Feat.thresholded", { threshold: this.threshold, value: this.attribute.toUpperCase() });
+      return _loc("TERIOCK.ROLLS.Feat.thresholded", { threshold: this.threshold, value });
     }
-    return _loc("TERIOCK.ROLLS.Feat.unthresholded", { value: this.attribute.toUpperCase() });
+    return _loc("TERIOCK.ROLLS.Feat.unthresholded", { value });
   }
 
   /** @inheritDoc */

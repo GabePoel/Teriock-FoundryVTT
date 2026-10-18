@@ -130,7 +130,9 @@ export default function DisplaySheetMixin(Base) {
      */
     _configureRenderOptions(options) {
       super._configureRenderOptions(options);
-      if (this._tab !== "overview") { this._removeFromArray(options.parts, "menu"); }
+      if (this._tab !== "overview" && options.parts.includes("menu")) {
+        options.parts.splice(options.parts.indexOf("menu"), 1);
+      }
     }
 
     /** @inheritDoc */
@@ -168,18 +170,6 @@ export default function DisplaySheetMixin(Base) {
       );
       context.displayTips = this.document.system.getVisibleTips("sheets");
       context.bars = this._tab === "overview" ? this.constructor.BARS : [];
-    }
-
-    /**
-     * Remove an element from an array.
-     * @param {string[]} arr
-     * @param {*} el
-     */
-    _removeFromArray(arr, el) {
-      const s = new Set(arr);
-      s.delete(el);
-      arr.length = 0;
-      arr.push(...Array.from(s));
     }
   }
 

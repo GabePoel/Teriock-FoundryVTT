@@ -66,7 +66,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * @returns {string[]}
    */
   get #paidCosts() {
-    return Object.keys(statConfig).filter(c => this.costs[c] > 0 && !this.options[`no${c.titleCase()}`]);
+    return Object.keys(statConfig).filter(c => this.costs[c] > 0 && !this.options[`no${c.capitalize()}`]);
   }
 
   /**

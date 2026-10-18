@@ -22,7 +22,6 @@ async function executeCommand(target, operation, event) {
   for (const [key, value] of Object.entries(target.dataset)) {
     if (!["action", "command"].includes(key)) {
       options[key] = interpretTerm(value);
-      if (value === "true") { options[key] = true; }
     }
   }
   let actor;

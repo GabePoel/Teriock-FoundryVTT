@@ -79,12 +79,6 @@ export default function BaseApplicationMixin(Base) {
     #contextMenus = new Map();
 
     /**
-     * Internal tracking of detached state.
-     * @type {boolean}
-     */
-    #detached = this.window?.windowId === this.id;
-
-    /**
      * Timeout ID of a click that is being held back in case it becomes a double click.
      * @type {number}
      */
@@ -161,7 +155,7 @@ export default function BaseApplicationMixin(Base) {
      * @returns {boolean}
      */
     get isDetached() {
-      return this.#detached;
+      return Boolean(this.window?.windowId);
     }
 
     /**
@@ -237,16 +231,8 @@ export default function BaseApplicationMixin(Base) {
     async _onRender(context, options = {}) {
       await super._onRender(context, options);
       this.element.querySelectorAll("[data-disable]").forEach(el => {
-        const state = el.dataset.disable;
-        if (state === "true") {
-          el.disabled = true;
-          if (el.tagName === "IMG") { el.classList.add("disabled"); }
-        }
-        if (state === "false") {
-          el.disabled = false;
-          if (el.tagName === "IMG") { el.classList.remove("disabled"); }
-        }
         el.disabled = el.dataset.disable === "true";
+        if (el.tagName === "IMG") { el.classList.toggle("disabled", el.disabled); }
       });
       this.element.querySelectorAll("[data-no-scroll]").forEach(el =>
         el.addEventListener("wheel", ev => ev.preventDefault())
@@ -338,18 +324,6 @@ export default function BaseApplicationMixin(Base) {
           ));
       this.#applyCollapsibleState(collapsibleId, collapsed, root);
       return collapsed;
-    }
-
-    /** @inheritDoc */
-    attachWindow(options = {}) {
-      this.#detached = false;
-      return super.attachWindow(options);
-    }
-
-    /** @inheritDoc */
-    detachWindow(options = {}) {
-      this.#detached = true;
-      return super.detachWindow(options);
     }
   }
 

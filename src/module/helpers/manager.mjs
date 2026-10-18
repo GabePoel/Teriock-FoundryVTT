@@ -11,14 +11,11 @@ export default class TeriockManager {
   /** @type {TeriockActiveEffect<"ability">[]} */
   #basicAbilities = [];
 
+  /** @type {IdentifiersRegistry} */
+  #identifiers = new IdentifiersRegistry();
+
   /** @type {ApplicationV2[]} */
   #minimizedApplications = [];
-
-  /**
-   * A private record of registries.
-   * @type {{identifiers: IdentifiersRegistry}}
-   */
-  #registries = { identifiers: new IdentifiersRegistry() };
 
   /**
    * Check if what's provided exists or is an empty array or set.
@@ -68,7 +65,7 @@ export default class TeriockManager {
    * @returns {IdentifiersRegistry}
    */
   get identifiers() {
-    return this.#registries.identifiers;
+    return this.#identifiers;
   }
 
   /**
@@ -115,8 +112,8 @@ export default class TeriockManager {
    * Initialize the identifiers registry.
    */
   initializeIdentifiers() {
-    this.#registries.identifiers._initialize();
-    this.#registries.identifiers.initializing.then(async () => {
+    this.#identifiers._initialize();
+    this.#identifiers.initializing.then(async () => {
       this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities"))?.children.documentsByType.ability
         ?? [];
       game.tables.forEach(t => t.prepareData());

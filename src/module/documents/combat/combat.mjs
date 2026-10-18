@@ -128,7 +128,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
         if (typeof total === "number") {
           options.formula = total.toString();
           options.messageOptions = execution.message.toObject();
-          foundry.utils.setProperty(options, "formula", total.toString());
           foundry.utils.setProperty(options, "messageOptions.flags.teriock.dontCreate", true);
         }
       } else { ids = []; }
