@@ -70,9 +70,11 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
 
   /** @inheritDoc */
   _prepareGroup() {
-    // Fix for core leaving the group even when it doesn't exist
+    // Fix for core leaving the group even when it doesn't exist.
     this.group = null;
     super._prepareGroup();
+    // Core only shares a CombatantGroup's initiative once it is set.
+    if (this.group) { this.initiative = this.group.initiative; }
   }
 
   /**

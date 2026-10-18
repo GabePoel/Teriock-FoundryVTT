@@ -50,7 +50,7 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
    * @returns {TeriockCombatant}
    */
   get defaultCombatant() {
-    return this.actor?.defaultCombatant ?? this.parent;
+    return (this.actor && this.parent.parent?.getCombatantsByActor(this.actor)[0]) || this.parent;
   }
 
   /** @inheritDoc */

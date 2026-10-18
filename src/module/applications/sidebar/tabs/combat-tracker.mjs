@@ -14,6 +14,16 @@ export default class TeriockCombatTracker
   extends mixClasses(CombatTracker, BaseApplicationMixin, DragDropApplicationMixin)
 {
   /**
+   * Toggle whether a CombatantGroup's members are shown.
+   * @param {MouseEvent} event
+   * @param {HTMLElement} target
+   */
+  static #onToggleGroup(event, target) {
+    if (event.target.closest("button, .member-count, .token-initiative")) { return; }
+    this._toggleCollapsed(this._getCollapsibleId(target), undefined, target);
+  }
+
+  /**
    * Toggle whether a Combatant still has a reaction.
    * @param {PointerEvent} _event
    * @param {HTMLElement} target
@@ -31,7 +41,11 @@ export default class TeriockCombatTracker
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     actions: { toggleReaction: this.#onToggleReaction },
-    teriock: { dragDrop: { selectors: { drag: ".combatant[data-combatant-id]", drop: ".combat-tracker" } } },
+    doubles: { toggleGroup: this.#onToggleGroup },
+    teriock: {
+      doubleClickDelay: 0,
+      dragDrop: { selectors: { drag: ".combatant[data-combatant-id]", drop: ".combat-tracker" } },
+    },
   };
 
   /** @inheritDoc */
@@ -216,7 +230,7 @@ export default class TeriockCombatTracker
         return this.#panToTokens(tokens);
       }
       case "toggleDefeated": {
-        const defeated = !group.defeated;
+        const defeated = !group.turnHolder.isDefeated;
         return Promise.all([
           this.viewed.updateEmbeddedDocuments("Combatant", members.map(m => ({ _id: m.id, defeated }))),
           ...members.map(m =>
@@ -338,7 +352,6 @@ export default class TeriockCombatTracker
     });
   }
 
-  /** @inheritDoc */
   /**
    * @inheritDoc
    * @version 369
@@ -388,11 +401,14 @@ export default class TeriockCombatTracker
         continue;
       }
       const face = holder.visible ? holder : holder.turnMembers.find(m => m.visible);
+      // A CombatantGroup is only defeated once its turn holder is
+      const defeated = holder.isDefeated;
       turns.push({
-        css: [i === combat.turn ? "active" : null, group.hidden ? "hide" : null, group.defeated ? "defeated" : null]
+        css: [i === combat.turn ? "active" : null, group.hidden ? "hide" : null, defeated ? "defeated" : null]
           .filterJoin(" "),
         group: {
-          defeated: group.defeated,
+          count: { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.members), value: members.length },
+          defeated,
           hidden: group.hidden,
           id: group.id,
           img: group.img || face.img,

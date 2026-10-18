@@ -6,7 +6,11 @@
         data-collapsible-id="group-{{ group.id }}"
         data-group-id="{{ group.id }}"
       >
-        <div class="combatant-group-header combatant-group-row {{ css }}" data-action="activateCombatant">
+        <div
+          class="combatant-group-header combatant-group-row {{ css }}"
+          data-action="activateCombatant"
+          data-double="toggleGroup"
+        >
           <div class="token-image">
             <img src="{{ group.img }}" alt="{{ group.name }}" loading="lazy" />
           </div>
@@ -55,6 +59,10 @@
                   data-tooltip
                 ></button>
               {{/if}}
+              <span class="member-count" data-action="toggleCollapse" data-tooltip="TERIOCK.COMBAT.Group.members">
+                <i class="{{ group.count.css }}"></i>
+                {{~ group.count.value ~}}
+              </span>
             </div>
           </div>
           {{> "teriock/sidebar/initiative"

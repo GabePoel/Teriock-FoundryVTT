@@ -145,11 +145,25 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if (this.started && game.user.isActiveGM) { this._onEndCombat(); }
+  }
+
+  /** @inheritDoc */
   _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
     this.#prepareGroups();
+    if (collection === "combatants" && ids.includes(prior?.id) && this.groups.get(prior.groupId)?.members.size) {
+      options.turnEvents = false;
+    }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
     this._onModifyGroups(collection, prior);
+    if (collection === "combatants" && game.user.isActiveGM) {
+      const { deletes, groupIds } = this.#leaveChanges(documents);
+      for (const id of ids) { delete groupIds[id]; }
+      if (deletes.length) { this.#modifyGroups({ deletes, groupIds }); }
+    }
   }
 
   /**
@@ -164,7 +178,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   async _onEndRound(context) {
     await super._onEndRound(context);
-    this.#refreshCombatExpirations(null, "round", "end");
+    if (context.round > 0) { this.#refreshCombatExpirations(null, "round", "end"); }
   }
 
   /** @inheritDoc */
@@ -187,6 +201,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       this.setupTurns();
       if (this.isView) { ui.combat.render(); }
     }
+    this._updateTurnMarkers();
     this.#keepTurn(prior);
   }
 
@@ -201,6 +216,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   async _onStartRound(context) {
     await super._onStartRound(context);
+    if (context.round === 1 && !this.previous.round) { this._onStartCombat(); }
     this.#refreshCombatExpirations(null, "round", "start");
   }
 
@@ -255,13 +271,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       deletes: [group.id],
       groupIds: Object.fromEntries([...group.members].map(m => [m.id, null])),
     });
-  }
-
-  /** @inheritDoc */
-  async endCombat() {
-    const out = await super.endCombat();
-    this._onEndCombat();
-    return out;
   }
 
   /**
@@ -405,12 +414,5 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
 
     // Return the array of prepared turns
     return this.turns = turns;
-  }
-
-  /** @inheritDoc */
-  async startCombat() {
-    const out = await super.startCombat();
-    this._onStartCombat();
-    return out;
   }
 }
