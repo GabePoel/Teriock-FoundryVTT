@@ -383,6 +383,7 @@ Hooks.once("ready", () => {
   );
   game.teriock.initializeIdentifiers();
   applications.ux.TeriockDragDrop.registerGlobalDragHandler();
+  applications.sidebar.tabs.TeriockCombatTracker.registerGroupTargeting();
 });
 
 // Register Hook Listeners and Handlebars Helpers

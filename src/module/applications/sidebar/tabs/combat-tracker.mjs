@@ -37,6 +37,17 @@ export default class TeriockCombatTracker
   /** @inheritDoc */
   static PARTS = { ...super.PARTS, tracker: { ...super.PARTS.tracker, template: "teriock/sidebar/combat-tracker" } };
 
+  /**
+   * Make the core target keybinding target every member of a hovered CombatantGroup.
+   */
+  static registerGroupTargeting() {
+    const action = game.keybindings.actions.get("core.target");
+    const { onDown } = action;
+    action.onDown = context =>
+      [ui.combat, ui.combat.popout].some(app => app?.targetHoveredGroup(!context.isShift)) || onDown(context);
+    game.keybindings.initialize();
+  }
+
   /** @type {Teriock.Command.ThresholdOptions} */
   #defaultInitiativeExecutionData;
 
@@ -426,5 +437,18 @@ export default class TeriockCombatTracker
       rollerId: combatant.isOwner && !locked ? combatant.id : null,
       uuid: combatant.uuid,
     });
+  }
+
+  /**
+   * Toggle targeting the tokens of the hovered CombatantGroup.
+   * @param {boolean} releaseOthers
+   * @returns {boolean} Whether there was a hovered CombatantGroup to target.
+   */
+  targetHoveredGroup(releaseOthers) {
+    const tokens = this.#highlightedGroup;
+    if (!tokens.length || !canvas.tokens?.active) { return false; }
+    const mode = tokens.every(t => t.isTargeted) ? "release" : releaseOthers ? "replace" : "acquire";
+    canvas.tokens.setTargets(tokens.map(t => t.id), { mode });
+    return true;
   }
 }
