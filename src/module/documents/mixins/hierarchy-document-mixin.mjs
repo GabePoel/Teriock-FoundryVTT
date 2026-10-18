@@ -164,13 +164,11 @@ export default function HierarchyDocumentMixin(Base) {
       const cleanedData = data.map(doc => doc instanceof foundry.abstract.Document ? doc.toObject(true) : doc);
       const resolvedData = await Promise.all(cleanedData.map(doc => this.resolveObject(doc)));
       const expandedData = expandDocumentDataArray(resolvedData, null, operation);
+      const knownSubs = operation.knownSubs ?? new Set();
       const filteredData = expandedData.filter(d => {
-        const knownSubs = operation.knownSubs ?? new Set();
-        // TODO: Monkey patch compendium collections to communicate this in their operation instead of hard coding batch
-        if (
-          data.length === 100 && getProperty(d, "system._sup") && !getProperty(d, "flags._teriock.keep")
-        ) { return false; }
-        return !(knownSubs.has(getProperty(d, "flags._teriock.ref")) && !getProperty(d, "flags._teriock.keep"));
+        if (getProperty(d, "flags._teriock.keep")) { return true; }
+        if (operation.dropSubs && getProperty(d, "system._sup")) { return false; }
+        return !knownSubs.has(getProperty(d, "flags._teriock.ref"));
       });
       return super.createDocuments(filteredData, operation);
     }

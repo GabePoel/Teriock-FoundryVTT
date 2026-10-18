@@ -30,6 +30,8 @@ declare global {
       cachedKeepId?: boolean;
       /** Skip rendering of sheets for documents with these IDs. */
       dontRenderSheets?: ID<TeriockDocument>[];
+      /** Drop subs that aren't created through their sup. This is for when documents get created in batches. */
+      dropSubs?: boolean;
       /** Keep competence instead of inheriting from elder. */
       keepCompetence?: boolean;
       /** Whether subs keep their `_id`. Defaults to `keepId`, and only applies when `keepId` is set. */
