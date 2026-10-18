@@ -1,4 +1,159 @@
-// Since we use colored imaged instead of svgs for effects, we need to remove the inversion filter
-.combat-sidebar .combat-tracker .token-effect {
-  filter: none;
+@use "../mixins" as mixins;
+
+.combat-sidebar .combat-tracker {
+  --active-layer: linear-gradient(var(--color-panel-header-active), var(--color-panel-header-active));
+  --color-panel-divider: var(--color-panel-edge);
+  --hover-layer: linear-gradient(var(--color-panel-header-hover), var(--color-panel-header-hover));
+  display: flex;
+  flex-direction: column;
+  gap: var(--element-spacing);
+  padding: var(--element-spacing);
+
+  // Since we use colored imaged instead of svgs for effects, we need to remove the inversion filter
+  .token-effect {
+    filter: none;
+  }
+
+  .token-image {
+    @include mixins.simple-two-layer-image(var(--sidebar-item-height), 4px, 0.3, 2px);
+  }
+
+  :is(.combatant, .combatant-group-row):is(.hide, .defeated) .token-image {
+    opacity: 0.3;
+
+    img {
+      opacity: 1;
+    }
+  }
+
+  .token-name .name i {
+    font-size: var(--font-size-12);
+    margin-right: 0.25em;
+  }
+
+  .combatant.active::before {
+    display: none;
+  }
+
+  > .combatant,
+  > .combatant-group {
+    @include mixins.inverse-roll-style;
+    flex-shrink: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  > .active {
+    background-image: var(--active-layer);
+  }
+
+  > .drop-target {
+    border-color: color-mix(in srgb, var(--color-warm-2), transparent 25%);
+  }
+
+  .combatant,
+  .combatant-group-row,
+  .combatant-group-toggle {
+    &:is(:hover, .hover) {
+      background-image: var(--hover-layer);
+    }
+
+    &:active {
+      background-image: var(--active-layer);
+    }
+  }
+
+  > .combatant.active {
+    &:is(:hover, .hover) {
+      background-image:
+        var(--hover-layer),
+        var(--active-layer);
+    }
+
+    &:active {
+      background-image:
+        var(--active-layer),
+        var(--active-layer);
+    }
+  }
+
+  .combatant-group {
+    background-color: color-mix(in srgb, var(--color-panel-background), transparent 50%);
+
+    .combatant {
+      background-color: transparent;
+      border-radius: 0;
+    }
+
+    .combatant-group-header {
+      @include mixins.pseudo-top-border;
+      background-color: var(--color-panel-background);
+
+      &::after {
+        top: 100%;
+      }
+    }
+
+    .combatant-group-row {
+      align-items: center;
+      color: var(--color-text-primary);
+      cursor: var(--cursor-pointer);
+      display: flex;
+      font-size: var(--font-size-14);
+      gap: var(--element-spacing);
+      padding: var(--element-spacing);
+
+      &:is(.hide, .defeated) {
+        color: var(--color-text-subtle);
+      }
+
+      &.defeated .name {
+        color: var(--color-warm-3);
+        text-decoration: line-through;
+      }
+    }
+
+    .combatant-group-members-container {
+      @include mixins.collapsible;
+      @include mixins.collapsible-open;
+    }
+
+    .combatant-group-members {
+      @include mixins.collapsible-content;
+
+      .combatant + .combatant {
+        @include mixins.pseudo-top-border(var(--element-spacing));
+      }
+    }
+
+    .combatant-group-toggle {
+      @include mixins.pseudo-top-border;
+      color: var(--color-text-subtle);
+      cursor: var(--cursor-pointer);
+      display: grid;
+      font-size: var(--font-size-12);
+      height: calc(1em + 2 * var(--element-spacing-half));
+      line-height: 1;
+      place-items: center;
+      transition: background-color 250ms;
+
+      i {
+        transition: 250ms;
+      }
+    }
+
+    &.collapsed {
+      .combatant-group-members-container {
+        @include mixins.collapsible-closed;
+      }
+
+      .combatant-group-toggle {
+        background-color: var(--color-panel-background);
+
+        i {
+          transform: scaleY(-1);
+        }
+      }
+    }
+  }
 }

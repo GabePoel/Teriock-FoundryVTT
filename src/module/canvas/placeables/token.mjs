@@ -2,6 +2,7 @@ import { mixClasses } from "../../utils/_module.mjs";
 import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 
 const { Token } = foundry.canvas.placeables;
+const { TokenTurnMarker } = foundry.canvas.placeables.tokens;
 
 /*
  * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
@@ -73,5 +74,33 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
    */
   _onChangePerceivingScore() {
     this.initializeVisionSource();
+  }
+
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  _refreshTurnMarker() {
+    // Should a Turn Marker be active?
+    const { turnMarker } = this.document;
+    const markersEnabled = CONFIG.Combat.settings.turnMarker.enabled
+      && (turnMarker.mode !== CONST.TOKEN_TURN_MARKER_MODES.DISABLED);
+    // Every member of a group without a commander gets a turn marker
+    const combatant = game.combat?.combatant;
+    const isTurn = combatant?.group && !combatant.group.system.commander
+      ? combatant.turnMembers.some(c => c.tokenId === this.id)
+      : combatant?.tokenId === this.id;
+    const markersActive = markersEnabled && isTurn;
+    // Activate a Turn Marker
+    if (markersActive) {
+      if (!this.turnMarker) { this.turnMarker = this.addChildAt(new TokenTurnMarker(this), 0); }
+      canvas.tokens.turnMarkers.add(this);
+      this.turnMarker.draw();
+    } // Remove a Turn Marker
+    else if (this.turnMarker) {
+      canvas.tokens.turnMarkers.delete(this);
+      this.turnMarker.destroy();
+      this.turnMarker = null;
+    }
   }
 }

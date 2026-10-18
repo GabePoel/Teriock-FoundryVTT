@@ -177,12 +177,6 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
     this.#addTrackers(data);
   }
 
-  /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    if (!this.getNearestDocument()?.system?.makesEffectData && this.relation === "include") { this.relation = "apply"; }
-  }
-
   /**
    * Select visible tokens to associate this status with.
    * @param {Teriock.Select.SelectDocumentsDialogOptions} options

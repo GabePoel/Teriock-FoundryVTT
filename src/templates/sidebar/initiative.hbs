@@ -1,0 +1,33 @@
+<div class="token-initiative">
+  {{#if initiative includeZero=true}}
+    {{#if @root.hasDecimals}}
+      <span>
+        {{ initiative }}
+      </span>
+    {{else}}
+      <input
+        class="initiative-input"
+        type="text"
+        value="{{ initiative }}"
+        aria-label="{{localize 'COMBATANT.FIELDS.initiative.label'}}"
+        inputmode="numeric"
+        pattern="^[+=\-]?\d*"
+        {{#if locked}}
+          disabled
+        {{else}}
+          {{#unless @root.user.isGM}}readonly{{/unless}}
+        {{/if}}
+      />
+    {{/if}}
+  {{else if rollerId}}
+    <button
+      class="combatant-control roll"
+      style="--initiative-icon: url('{{ @root.initiativeIcon.icon }}'); --initiative-icon-hover: url('{{ @root.initiativeIcon.hover }}');"
+      type="button"
+      aria-label="{{localize 'COMBAT.InitiativeRoll'}}"
+      data-action="rollInitiative"
+      data-combatant-id="{{ rollerId }}"
+      data-tooltip
+    ></button>
+  {{/if}}
+</div>

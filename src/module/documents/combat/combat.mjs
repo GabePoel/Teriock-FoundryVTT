@@ -22,7 +22,7 @@ function getResetUuids(combatants) {
  */
 export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin) {
   /**
-   * Reset the given combatants' actions, attack penalties, and reactions along with their default combatants'.
+   * Reset the given Combatants' actions, attack penalties, and reactions along with their default Combatants'.
    * @param {object} [options]
    * @param {TeriockCombatant[]} [options.actions] - Combatants whose actions reset.
    * @param {TeriockCombatant[]} [options.attackPenalties] - Combatants whose attack penalties reset.
@@ -38,12 +38,86 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
+   * Keep the turn on the Combatant or CombatantGroups that had it before the turn order changed.
+   * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
+   */
+  #keepTurn(prior) {
+    if (!prior || !this.started || !game.user.isActiveGM) { return; }
+    const turn = this.turns.findIndex(t => t.id === prior.id || (prior.groupId && t.group?.id === prior.groupId));
+    if (turn >= 0 && turn !== this.turn) { this.update({ turn }, { turnEvents: false }); }
+  }
+
+  /**
+   * Remove Combatants from their CombatantGroups and disband CombatantGroups without enough members.
+   * @param {TeriockCombatant[]} combatants
+   * @returns {{ deletes: ID<TeriockCombatantGroup>[], groupIds: Record<ID<TeriockCombatant>, ID|null> }}
+   */
+  #leaveChanges(combatants) {
+    const deletes = [];
+    const groupIds = Object.fromEntries(combatants.map(c => [c.id, null]));
+    for (const group of new Set(combatants.map(c => c.group).filter(Boolean))) {
+      const remaining = [...group.members].filter(m => !combatants.includes(m));
+      if (remaining.length >= 2) { continue; }
+      deletes.push(group.id);
+      for (const member of remaining) { groupIds[member.id] = null; }
+    }
+    return { deletes, groupIds };
+  }
+
+  /**
+   * Create CombatantGroups, move Combatants between CombatantGroups, and delete CombatantGroups in a single batch.
+   * @param {object} changes
+   * @param {object[]} [changes.create] - CombatantGroup data to create.
+   * @param {ID<TeriockCombatantGroup>[]} [changes.deletes] - CombatantGroups to delete.
+   * @param {Record<ID<TeriockCombatant>, ID|null>} [changes.groupIds] - New CombatantGroup of each Combatant.
+   * @returns {Promise<void>}
+   */
+  async #modifyGroups({ create = [], deletes = [], groupIds = {} }) {
+    const updates = Object.entries(groupIds).map(([_id, group]) => ({ _id, group }));
+    await foundry.documents.modifyBatch(
+      [
+        create.length && { action: "create", data: create, documentName: "CombatantGroup", keepId: true, parent: this },
+        updates.length && { action: "update", documentName: "Combatant", parent: this, updates },
+        deletes.length && { action: "delete", documentName: "CombatantGroup", ids: deletes, parent: this },
+      ].filter(Boolean),
+    );
+  }
+
+  /**
+   * Rebuild CombatantGroup membership.
+   */
+  #prepareGroups() {
+    for (const group of this.groups) { group.reset(); }
+    for (const combatant of this.combatants) { combatant.reset(); }
+  }
+
+  /**
    * @param {TeriockActor|null} actor
    * @param {Teriock.Keys.CombatEvent} event
    * @param {Teriock.Keys.CombatTiming} timing
    */
   #refreshCombatExpirations(actor, event, timing) {
     BaseExpiration.massExpire(this.actors, CombatExpiration.metadata.type, { actor, event, timing });
+  }
+
+  /**
+   * Hack to trigger token turn region events for skipped CombatantGroup members.
+   * @param {string} eventName
+   * @param {CombatTurnEventContext} context
+   * @param {TeriockCombatant} combatant
+   * @returns {Promise<void>}
+   * @version 369
+   */
+  async #triggerMemberRegionEvents(eventName, context, combatant) {
+    const promises = [];
+    for (const member of combatant.turnMembers) {
+      const token = member.token;
+      if (member === combatant || !token) { continue; }
+      for (const region of token.regions) {
+        promises.push(region._triggerEvent(eventName, { combat: this, combatant: member, token, ...context }));
+      }
+    }
+    await Promise.allSettled(promises);
   }
 
   /**
@@ -60,6 +134,22 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    */
   get actors() {
     return this.combatants.filter(c => c.actor).map(c => c.actor);
+  }
+
+  /** @inheritDoc */
+  _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
+    this.#prepareGroups();
+    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    this._onModifyGroups(collection, prior);
+  }
+
+  /** @inheritDoc */
+  _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
+    this.#prepareGroups();
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+    this._onModifyGroups(collection, prior);
   }
 
   /**
@@ -80,8 +170,24 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   async _onEndTurn(combatant, context) {
     await super._onEndTurn(combatant, context);
-    this.#refreshCombatExpirations(combatant.actor, "turn", "end");
-    combatant.actor?.fireTrigger("turnEnd");
+    for (const member of combatant.turnMembers) {
+      this.#refreshCombatExpirations(member.actor, "turn", "end");
+      member.actor?.fireTrigger("turnEnd");
+    }
+    await this.#triggerMemberRegionEvents(CONST.REGION_EVENTS.TOKEN_TURN_END, context, combatant);
+  }
+
+  /**
+   * Refresh turn order after modifying CombatantGroups.
+   * @param {string} collection
+   * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
+   */
+  _onModifyGroups(collection, prior) {
+    if (collection === "groups") {
+      this.setupTurns();
+      if (this.isView) { ui.combat.render(); }
+    }
+    this.#keepTurn(prior);
   }
 
   /**
@@ -101,11 +207,54 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   async _onStartTurn(combatant, context) {
     await super._onStartTurn(combatant, context);
-    const combatants = context.round === 1 && context.turn === 0 ? this.combatants.contents : [combatant];
+    const members = combatant.turnMembers;
+    const combatants = context.round === 1 && context.turn === 0 ? this.combatants.contents : members;
     this.#changeTurn({ actions: combatants, reactions: combatants });
-    this.#refreshCombatExpirations(combatant.actor, "turn", "start");
-    combatant.actor?.fireTrigger("turnStart");
-    this.#refreshCombatExpirations(combatant.actor, "action", "start");
+    for (const member of members) {
+      this.#refreshCombatExpirations(member.actor, "turn", "start");
+      member.actor?.fireTrigger("turnStart");
+      this.#refreshCombatExpirations(member.actor, "action", "start");
+    }
+    await this.#triggerMemberRegionEvents(CONST.REGION_EVENTS.TOKEN_TURN_START, context, combatant);
+  }
+
+  /** @inheritDoc */
+  _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
+    const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
+    this.#prepareGroups();
+    super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+    this._onModifyGroups(collection, prior);
+  }
+
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  _sortCombatants(a, b) {
+    const ia = Number.isNumeric(a.initiative) ? a.initiative : -Infinity;
+    const ib = Number.isNumeric(b.initiative) ? b.initiative : -Infinity;
+    return (ib - ia) || ((a.group?.id ?? a.id) > (b.group?.id ?? b.id) ? 1 : -1);
+  }
+
+  /** @inheritDoc */
+  _updateTurnMarkers() {
+    super._updateTurnMarkers();
+    if (!canvas.ready || !this.isView) { return; }
+    for (const member of this.combatant?.turnMembers ?? []) {
+      member.token?.object?.renderFlags.set({ refreshTurnMarker: true });
+    }
+  }
+
+  /**
+   * Disband a CombatantGroup.
+   * @param {TeriockCombatantGroup} group
+   * @returns {Promise<void>}
+   */
+  async disbandGroup(group) {
+    await this.#modifyGroups({
+      deletes: [group.id],
+      groupIds: Object.fromEntries([...group.members].map(m => [m.id, null])),
+    });
   }
 
   /** @inheritDoc */
@@ -115,6 +264,61 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     return out;
   }
 
+  /**
+   * Add a Combatant to the target's CombatantGroup.
+   * @param {TeriockCombatant} combatant
+   * @param {TeriockCombatant|TeriockCombatantGroup} target
+   * @param {object} [options]
+   * @param {"commanded"|"mob"} [options.type]
+   * @returns {Promise<void>}
+   */
+  async joinGroup(combatant, target, { type = "commanded" } = {}) {
+    const group = target.documentName === "CombatantGroup" ? target : target.group;
+    if (combatant === target || (group && combatant.group === group)) { return; }
+    const { deletes, groupIds } = this.#leaveChanges([combatant]);
+    const create = [];
+    let groupId = group?.id;
+    if (!groupId) {
+      groupId = foundry.utils.randomID();
+      create.push({
+        _id: groupId,
+        img: target.img,
+        initiative: target.initiative,
+        name: _loc("TERIOCK.COMBAT.Group.name", { name: target.name }),
+        system: type === "commanded" ? { commanderId: target.id } : {},
+        type,
+      });
+      groupIds[target.id] = groupId;
+    }
+    groupIds[combatant.id] = groupId;
+    await this.#modifyGroups({ create, deletes, groupIds });
+  }
+
+  /**
+   * Remove a Combatant from its CombatantGroup.
+   * @param {TeriockCombatant} combatant
+   * @returns {Promise<void>}
+   */
+  async leaveGroup(combatant) {
+    if (combatant.group) { await this.#modifyGroups(this.#leaveChanges([combatant])); }
+  }
+
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  async resetAll({ updateTurn = true } = {}) {
+    const currentId = this.combatant?.id;
+    for (const g of this.groups) { g.updateSource({ initiative: null }); }
+    for (const c of this.combatants) { c.updateSource({ initiative: null }); }
+    this.#prepareGroups();
+    this.setupTurns();
+    const update = { combatants: this.combatants.toObject(), groups: this.groups.toObject() };
+    if (updateTurn && currentId) { update.turn = this.turns.findIndex(t => t.id === currentId); }
+    await this.update(update, { diff: false, turnEvents: false });
+    return this;
+  }
+
   /** @inheritDoc */
   async rollAll(options = {}) {
     return super.rollAll(Object.assign(options, { noExecution: true }));
@@ -122,6 +326,13 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
 
   /** @inheritDoc */
   async rollInitiative(ids, options = {}) {
+    // CombatantGroups are rolled for by only one Combatant. Otherwise, there would be dialog spam.
+    const rollers = new Map();
+    for (const combatant of [ids].flat().map(id => this.combatants.get(id)).filter(Boolean)) {
+      const key = combatant.group?.id ?? combatant.id;
+      if (!rollers.has(key)) { rollers.set(key, combatant.group?.system.commander ?? combatant); }
+    }
+    ids = [...rollers.values()].map(c => c.id);
     if (ids.length === 1 && !options.noExecution) {
       const execution = await InitiativeExecution.create({}, { source: this.combatants.get(ids[0]) });
       if (execution?.message?.rolls?.length) {
@@ -133,12 +344,67 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
         }
       } else { ids = []; }
     }
-    return super.rollInitiative(ids, options);
+    const out = await super.rollInitiative(ids, options);
+    await Promise.all(
+      [...rollers.values()].filter(c => c.group && c.isOwner && ids.includes(c.id)).map(c =>
+        c.group.update({ initiative: c._source.initiative }, { asGM: true })
+      ),
+    );
+    return out;
   }
 
   /** @inheritDoc */
   async rollNPC(options = {}) {
     return super.rollNPC(Object.assign(options, { noExecution: true }));
+  }
+
+  /**
+   * Make a Combatant the commander of its CombatantGroup.
+   * @param {TeriockCombatant} combatant
+   * @returns {Promise<void>}
+   */
+  async setCommander(combatant) {
+    if (combatant.group?.type === "commanded") { await combatant.group.update({ "system.commanderId": combatant.id }); }
+  }
+
+  /** @inheritDoc */
+  async setInitiative(id, value) {
+    const group = this.combatants.get(id, { strict: true }).group;
+    if (group) { await group.update({ initiative: value }, { asGM: true }); }
+    else { await super.setInitiative(id, value); }
+  }
+
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  setupTurns() {
+    this.turns ||= [];
+
+    // Determine the turn order and the current turn
+    // A CombatantGroup's `turnHolder` holds the space in turn order for all its members
+    // Other Combatants in a CombatantGroup don't get their own turns
+    const turns = this.combatants.contents.filter(c => !c.group || c === c.group.turnHolder).sort(this._sortCombatants);
+    if (this.turn !== null) {
+      if (this.turn < 0) { this.turn = 0; }
+      else if (this.turn >= turns.length) {
+        this.turn = 0;
+        this.round++;
+      }
+      turns.forEach((c, i) => {
+        for (const member of c.turnMembers) { member.turnNumber = i; }
+      });
+    }
+
+    // Update state tracking
+    const c = turns[this.turn];
+    this.current = this._getCurrentState(c);
+
+    // One-time initialization of the previous state
+    if (!this.previous) { this.previous = { ...this.current }; }
+
+    // Return the array of prepared turns
+    return this.turns = turns;
   }
 
   /** @inheritDoc */

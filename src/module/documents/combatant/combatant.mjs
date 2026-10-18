@@ -40,6 +40,22 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
   }
 
   /**
+   * Whether this is the commander of its CombatantGroup.
+   * @returns {boolean}
+   */
+  get isCommander() {
+    return Boolean(this.group) && this.group.system.commander === this;
+  }
+
+  /**
+   * The Combatants that act on this Combatant's turn.
+   * @returns {TeriockCombatant[]}
+   */
+  get turnMembers() {
+    return this.group?.turnMembers ?? [this];
+  }
+
+  /**
    * @inheritDoc
    * @version 368
    */
@@ -50,6 +66,13 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
     const bonus = this.initiativeModel.bonus ?? TERIOCK.CONFIG.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
     return FormulaField.sum(base, competence, bonus);
+  }
+
+  /** @inheritDoc */
+  _prepareGroup() {
+    // Fix for core leaving the group even when it doesn't exist
+    this.group = null;
+    super._prepareGroup();
   }
 
   /**

@@ -428,6 +428,17 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     return super.getTokenDocument(data, options);
   }
 
+  /** @inheritDoc */
+  prepareData() {
+    const wasDefeated = this.statuses.has(CONFIG.specialStatusEffects.DEFEATED);
+    super.prepareData();
+    if (!game.ready || this.statuses.has(CONFIG.specialStatusEffects.DEFEATED) === wasDefeated) { return; }
+    // Let CombatantGroups pass their place in the turn order to a different member.
+    // The reason we have this is because of the setting to skip defeated combatants meaning all the members of a
+    // CombatantGroup can be accidentally skipped at the same time if this is marked defeated.
+    for (const combat of game.combats) { if (combat.getCombatantsByActor(this).length) { combat.debounceSetup(); } }
+  }
+
   /**
    * Data preparation that happens before `prepareEmbeddedDocuments()`. This initializes dependents collections before
    * other data is prepared.

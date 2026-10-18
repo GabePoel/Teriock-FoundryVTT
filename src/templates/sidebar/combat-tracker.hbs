@@ -1,0 +1,48 @@
+<ol class="combat-tracker plain">
+  {{#each turns}}
+    {{#if group}}
+      <li
+        class="combatant-group collapsible {{ css }}"
+        data-collapsible-id="group-{{ group.id }}"
+        data-group-id="{{ group.id }}"
+      >
+        {{#if header}}
+          <ol class="combatant-group-header plain">
+            {{> "teriock/sidebar/combatant"
+              header
+            }}
+          </ol>
+        {{else}}
+          <div class="combatant-group-header combatant-group-row {{ css }}" data-action="activateCombatant">
+            <div class="token-image">
+              <img src="{{ group.img }}" alt="{{ group.name }}" loading="lazy" />
+            </div>
+            <div class="token-name">
+              <strong class="name">{{ group.name }}</strong>
+            </div>
+            {{> "teriock/sidebar/initiative"
+              group
+            }}
+          </div>
+        {{/if}}
+        <div class="combatant-group-members-container">
+          <ol class="combatant-group-members plain">
+            {{#each members}}
+              {{> "teriock/sidebar/combatant"}}
+            {{/each}}
+          </ol>
+        </div>
+        <div
+          id="{{ @root/appId }}-{{ group.id }}-toggle"
+          class="combatant-group-toggle"
+          aria-label="{{localize 'TERIOCK.COMBAT.Group.toggle'}}"
+          data-action="toggleCollapse"
+        >
+          <i class="fa-solid fa-chevron-up"></i>
+        </div>
+      </li>
+    {{else}}
+      {{> "teriock/sidebar/combatant"}}
+    {{/if}}
+  {{/each}}
+</ol>

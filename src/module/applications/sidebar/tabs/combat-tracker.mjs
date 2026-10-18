@@ -1,11 +1,18 @@
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { icons } from "../../../static/display/_module.mjs";
-import { createElement, makeIconClass } from "../../../utils/_module.mjs";
+import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
+import { TeriockDialog } from "../../api/_module.mjs";
+import { BaseApplicationMixin, DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 
 const { CombatTracker } = foundry.applications.sidebar.tabs;
 
-/** @inheritDoc */
-export default class TeriockCombatTracker extends CombatTracker {
+/**
+ * @extends {CombatTracker}
+ * @mixes BaseApplication
+ * @mixes DragDropApplication
+ */
+export default class TeriockCombatTracker
+  extends mixClasses(CombatTracker, BaseApplicationMixin, DragDropApplicationMixin)
+{
   /**
    * Toggle whether a Combatant still has a reaction.
    * @param {PointerEvent} _event
@@ -22,10 +29,33 @@ export default class TeriockCombatTracker extends CombatTracker {
   }
 
   /** @inheritDoc */
-  static DEFAULT_OPTIONS = { actions: { toggleReaction: this.#onToggleReaction } };
+  static DEFAULT_OPTIONS = {
+    actions: { toggleReaction: this.#onToggleReaction },
+    teriock: { dragDrop: { selectors: { drag: ".combatant[data-combatant-id]", drop: ".combat-tracker" } } },
+  };
+
+  /** @inheritDoc */
+  static PARTS = { ...super.PARTS, tracker: { ...super.PARTS.tracker, template: "teriock/sidebar/combat-tracker" } };
 
   /** @type {Teriock.Command.ThresholdOptions} */
   #defaultInitiativeExecutionData;
+
+  /** @type {ID<TeriockCombatant>|null} */
+  #draggedId = null;
+
+  /** @type {TeriockToken[]} */
+  #highlightedGroup = [];
+
+  /**
+   * Mark the tracker entry that a dragged Combatant would join.
+   * @param {HTMLElement|null} entry
+   */
+  #markDropTarget(entry) {
+    for (const el of this.element.querySelectorAll(".combat-tracker > .drop-target")) {
+      if (el !== entry) { el.classList.remove("drop-target"); }
+    }
+    entry?.classList.add("drop-target");
+  }
 
   /**
    * Options for initiative rolls.
@@ -54,6 +84,79 @@ export default class TeriockCombatTracker extends CombatTracker {
   }
 
   /** @inheritDoc */
+  _canDragDrop() {
+    return game.user.isGM;
+  }
+
+  /** @inheritDoc */
+  _canDragStart(_selector) {
+    return game.user.isGM;
+  }
+
+  /** @inheritDoc */
+  _dropEffect(_event) {
+    return this.#draggedId ? "copy" : "none";
+  }
+
+  /** @inheritDoc */
+  _getEntryContextOptions() {
+    const getCombatant = li => this.viewed?.combatants.get(li.dataset.combatantId);
+    const options = super._getEntryContextOptions();
+    // Clearing initiative has to go through combat to clear group initiative
+    const clear = options.find(o => o.label === "COMBATANT.ACTIONS.Clear");
+    if (clear) { clear.onClick = (_event, li) => this.viewed?.setInitiative(li.dataset.combatantId, null); }
+    return [{
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "contextMenu"),
+      label: "TERIOCK.COMBAT.Group.ACTIONS.makeCommander",
+      onClick: (_event, li) => this.viewed?.setCommander(getCombatant(li)),
+      visible: li => {
+        const combatant = getCombatant(li);
+        return game.user.isGM && combatant?.group?.type === "commanded" && !combatant.isCommander;
+      },
+    }, {
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.leaveGroup, "contextMenu"),
+      label: "TERIOCK.COMBAT.Group.ACTIONS.leaveGroup",
+      onClick: (_event, li) => this.viewed?.leaveGroup(getCombatant(li)),
+      visible: li => game.user.isGM && Boolean(getCombatant(li)?.group),
+    }, {
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.disbandGroup, "contextMenu"),
+      label: "TERIOCK.COMBAT.Group.ACTIONS.disbandGroup",
+      onClick: (_event, li) => this.viewed?.disbandGroup(getCombatant(li).group),
+      visible: li => game.user.isGM && Boolean(getCombatant(li)?.group),
+    }, ...options];
+  }
+
+  /**
+   * Get context menu entries for CombatantGroups in the tracker.
+   * @returns {ContextMenuEntry[]}
+   */
+  _getGroupContextOptions() {
+    const getGroup = li => this.viewed?.groups.get(li.closest("[data-group-id]")?.dataset.groupId);
+    return [{
+      icon: "fa-solid fa-arrow-rotate-left",
+      label: "COMBATANT.ACTIONS.Clear",
+      onClick: (_event, li) => getGroup(li)?.update({ initiative: null }, { asGM: true }),
+      visible: li => game.user.isGM && Number.isFinite(getGroup(li)?.initiative),
+    }, {
+      icon: "fa-solid fa-dice-d20",
+      label: "COMBATANT.ACTIONS.Reroll",
+      onClick: (_event, li) => {
+        const holder = getGroup(li)?.turnHolder;
+        if (holder) { return this.viewed.rollInitiative([holder.id]); }
+      },
+      visible: () => game.user.isGM,
+    }, {
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.disbandGroup, "contextMenu"),
+      label: "TERIOCK.COMBAT.Group.ACTIONS.disbandGroup",
+      onClick: (_event, li) => {
+        const group = getGroup(li);
+        if (group) { return this.viewed.disbandGroup(group); }
+      },
+      visible: () => game.user.isGM,
+    }];
+  }
+
+  /** @inheritDoc */
   _onCombatantControl(event, target) {
     if (target.dataset.action === "rollInitiative") {
       this.defaultInitiativeExecutionData = ThresholdRoll.parseEvent(event);
@@ -62,22 +165,203 @@ export default class TeriockCombatTracker extends CombatTracker {
   }
 
   /** @inheritDoc */
-  _replaceHTML(result, content, options) {
-    for (const li of result.tracker?.querySelectorAll(".combatant") ?? []) {
-      const combatant = this.viewed?.combatants.get(li.dataset.combatantId);
-      if (!combatant || combatant.permission < CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER) { continue; }
-      const hasReaction = Boolean(combatant.system.reactions);
-      li.querySelector(".token-effects").before(
-        createElement("button", {
-          className: `inline-control combatant-control icon ${
-            makeIconClass(icons.manifest.ui[hasReaction ? "on" : "off"], "button")
-          }${hasReaction ? " active" : ""}`,
-          dataset: { action: "toggleReaction", tooltip: "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip" },
-          disabled: !combatant.isOwner,
-          type: "button",
-        }),
-      );
+  _onCombatantHoverIn(event) {
+    const row = event.target.closest(".combatant-group-row");
+    if (!row) { return super._onCombatantHoverIn(event); }
+    if (!canvas.ready) { return; }
+    // CombatantGroups highlight all members' tokens
+    const group = this.viewed?.groups.get(row.closest("[data-group-id]").dataset.groupId);
+    this.#highlightedGroup = [...(group?.members ?? [])].map(m => m.token?.object).filter(token =>
+      token?._canHover(game.user, event) && this._isTokenVisible(token)
+    );
+    this.#highlightedGroup.forEach((token, i) => token._onHoverIn(event, { hoverOutOthers: i === 0 }));
+  }
+
+  /** @inheritDoc */
+  _onCombatantHoverOut(event) {
+    super._onCombatantHoverOut(event);
+    for (const token of this.#highlightedGroup) { token._onHoverOut(event); }
+    this.#highlightedGroup = [];
+  }
+
+  /** @inheritDoc */
+  _onCombatantMouseDown(event, target) {
+    if (!target?.classList.contains("combatant-group-row")) { return super._onCombatantMouseDown(event, target); }
+    if (event.type === "dblclick" || event.target.closest("input, button")) { return; }
+    // CombatantGroups select all their members' tokens
+    const group = this.viewed?.groups.get(target.closest("[data-group-id]").dataset.groupId);
+    const controlled = [];
+    for (const token of [...(group?.members ?? [])].map(m => m.token?.object).filter(Boolean)) {
+      if (token.control({ releaseOthers: !controlled.length })) { controlled.push(token); }
     }
-    super._replaceHTML(result, content, options);
+    if (!controlled.length) { return; }
+    // Zoom out enough to see all the tokens
+    const center = foundry.utils.polygonCentroid(controlled.map(t => t.center));
+    const padding = canvas.grid.size;
+    const dx = Math.max(...controlled.map(t => Math.max(center.x - t.bounds.left, t.bounds.right - center.x)))
+      + padding;
+    const dy = Math.max(...controlled.map(t => Math.max(center.y - t.bounds.top, t.bounds.bottom - center.y)))
+      + padding;
+    const [width, height] = canvas.screenDimensions;
+    canvas.animatePan({ ...center, scale: Math.min(canvas.stage.scale.x, width / (2 * dx), height / (2 * dy)) });
+  }
+
+  /** @inheritDoc */
+  async _onDragEnd(event) {
+    await super._onDragEnd(event);
+    this.#draggedId = null;
+    this.#markDropTarget(null);
+  }
+
+  /** @inheritDoc */
+  async _onDragLeaveApplication(event) {
+    await super._onDragLeaveApplication(event);
+    this.#markDropTarget(null);
+  }
+
+  /** @inheritDoc */
+  async _onDragOver(event) {
+    await super._onDragOver(event);
+    const entry = event.target.closest(".combat-tracker > *");
+    const dragged = `.combatant[data-combatant-id="${this.#draggedId}"]`;
+    const isOwnEntry = entry?.matches(dragged) || entry?.querySelector(dragged);
+    this.#markDropTarget(this.#draggedId && !isOwnEntry ? entry : null);
+  }
+
+  /** @inheritDoc */
+  _onDragStart(event) {
+    super._onDragStart(event);
+    this.#draggedId = event.currentTarget.dataset.combatantId;
+  }
+
+  /** @inheritDoc */
+  async _onDrop(event) {
+    await super._onDrop(event);
+    this.#markDropTarget(null);
+    const combat = this.viewed;
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+    const combatant = data.type === "Combatant" ? await fromUuid(data.uuid) : null;
+    if (!combat || combatant?.parent !== combat) { return; }
+    const target = combat.combatants.get(event.target.closest("[data-combatant-id]")?.dataset.combatantId)
+      ?? combat.groups.get(event.target.closest("[data-group-id]")?.dataset.groupId);
+    if (!target) { return combat.leaveGroup(combatant); }
+    if (target.documentName === "CombatantGroup" || target.group) { return combat.joinGroup(combatant, target); }
+    if (target === combatant) { return; }
+    const type = await TeriockDialog.wait({
+      buttons: ["commanded", "mob"].map(type => ({
+        action: type,
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document[type]),
+        label: _loc(`TYPES.CombatantGroup.${type}`),
+      })),
+      content: `<p>${
+        _loc("TERIOCK.COMBAT.Group.CREATE.content", {
+          dragged: foundry.utils.escapeHTML(combatant.name),
+          target: foundry.utils.escapeHTML(target.name),
+        })
+      }</p>`,
+      window: {
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.mob, "title"),
+        title: _loc("TERIOCK.COMBAT.Group.CREATE.title"),
+      },
+    });
+    if (type) { await combat.joinGroup(combatant, target, { type }); }
+  }
+
+  /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    this._createContextMenu(this._getGroupContextOptions, ".combatant-group-row", {
+      fixed: true,
+      hookName: "getCombatantGroupContextOptions",
+      parentClassHooks: false,
+    });
+  }
+
+  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  _onUpdateInitiative(event) {
+    const combat = this.viewed;
+    const group = combat?.combatants.get(event.target.closest("[data-combatant-id]")?.dataset.combatantId)?.group
+      ?? combat?.groups.get(event.target.closest("[data-group-id]")?.dataset.groupId);
+    if (!group) { return super._onUpdateInitiative(event); }
+    const raw = event.target.value;
+    let initiative = raw ? Number(raw.replace(/^=/, "")) : null;
+    if (/^[+-]/.test(raw)) {
+      const delta = parseInt(raw);
+      if (isNaN(delta)) { return; }
+      initiative = group.initiative + delta;
+    }
+    return group.update({ initiative }, { asGM: true });
+  }
+
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  async _prepareTrackerContext(context, _options) {
+    const combat = this.viewed;
+    if (!combat) { return; }
+    const turns = context.turns = [];
+    const rows = [];
+    for (const [i, holder] of combat.turns.entries()) {
+      const group = holder.group;
+      const members = [];
+      for (const member of holder.turnMembers) {
+        if (member.visible) { members.push(await this._prepareTurnContext(combat, member, i)); }
+      }
+      rows.push(...members);
+      if (!group) {
+        turns.push(...members);
+        continue;
+      }
+      if (!members.length) { continue; }
+      const commander = group.system.commander;
+      const header = members[0].id === commander?.id ? members.shift() : null;
+      const roller = [...group.members].find(m => m.isOwner);
+      turns.push({
+        css: [i === combat.turn ? "active" : null, group.hidden ? "hide" : null, group.defeated ? "defeated" : null]
+          .filterJoin(" "),
+        group: {
+          id: group.id,
+          img: group.img || holder.img,
+          initiative: group.initiative,
+          name: group.name || holder.name,
+          rollerId: roller?.id ?? null,
+        },
+        header,
+        members,
+      });
+      if (!header) { rows.push(turns.at(-1).group); }
+    }
+    const hasDecimals = rows.some(t => Number.isFinite(t.initiative) && !Number.isInteger(t.initiative));
+    const precision = CONFIG.Combat.initiative.decimals;
+    for (const t of rows) {
+      if (Number.isFinite(t.initiative)) { t.initiative = t.initiative.toFixed(hasDecimals ? precision : 0); }
+    }
+    context.hasDecimals = hasDecimals;
+  }
+
+  /** @inheritDoc */
+  async _prepareTurnContext(combat, combatant, index) {
+    const turn = await super._prepareTurnContext(combat, combatant, index);
+    const hasReaction = Boolean(combatant.system.reactions);
+    const locked = Boolean(combatant.group) && !combatant.isCommander;
+    return Object.assign(turn, {
+      icon: combatant.isCommander ? makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander) : "",
+      locked,
+      reaction: combatant.permission >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
+        ? {
+          css: `${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui[hasReaction ? "on" : "off"], "button")}${
+            hasReaction ? " active" : ""
+          }`,
+          disabled: !combatant.isOwner,
+        }
+        : null,
+      rollerId: combatant.isOwner && !locked ? combatant.id : null,
+      uuid: combatant.uuid,
+    });
   }
 }
