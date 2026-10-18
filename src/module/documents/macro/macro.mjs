@@ -1,5 +1,5 @@
 import { mixClasses } from "../../utils/_module.mjs";
-import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
@@ -7,9 +7,9 @@ const { Macro } = foundry.documents;
  * The Teriock Macro implementation.
  * @extends {Macro}
  * @mixes BaseDocument
- * @mixes UsableDocument
+ * @implements {Teriock.Functionality.Usable}
  */
-export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin, UsableDocumentMixin) {
+export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin) {
   /**
    * Create a use macro from the given document.
    * @param {TeriockActiveEffect|TeriockItem} doc

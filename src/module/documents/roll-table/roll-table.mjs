@@ -2,7 +2,7 @@ import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses, pathSorterFactory } from "../../utils/_module.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
-import { BaseDocumentMixin, UsableDocumentMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { RollTable } = foundry.documents;
 
@@ -10,12 +10,10 @@ const { RollTable } = foundry.documents;
  * The Teriock RollTable implementation.
  * @extends {RollTable}
  * @mixes BaseDocument
- * @mixes UsableDocument
  * @mixes PanelData
+ * @implements {Teriock.Functionality.Usable}
  */
-export default class TeriockRollTable
-  extends mixClasses(RollTable, BaseDocumentMixin, UsableDocumentMixin, PanelDataMixin)
-{
+export default class TeriockRollTable extends mixClasses(RollTable, BaseDocumentMixin, PanelDataMixin) {
   /**
    * Format a roll table result range for display in associations.
    * @param {number[]} [range]

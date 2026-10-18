@@ -263,7 +263,6 @@ export default class DocumentSelector extends ResolvableDialog {
     this.openable = openable;
     if (options.title) { foundry.utils.setProperty(this.options, "window.title", options.title); }
     if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
-    this.config = foundry.utils.mergeObject(this.config ?? {}, this.options);
     this.unchecked = !Object.values(documents).some(d => d.checked);
     this.reportCancel = reportCancel;
   }

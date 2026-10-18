@@ -23,6 +23,11 @@ declare global {
       /** Prepare all the stat dice this has access to. */
       prepareStatDice(): void;
     }
+
+    export interface Usable {
+      /** Do whatever the default roll or execution for this document is. */
+      use(options?: Partial<Teriock.Command.UseOptions>): Promise<void>;
+    }
   }
 }
 

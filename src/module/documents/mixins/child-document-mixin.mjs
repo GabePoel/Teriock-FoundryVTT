@@ -1,5 +1,5 @@
 import { mixClasses } from "../../utils/_module.mjs";
-import { HierarchyDocumentMixin, UsableDocumentMixin } from "./_module.mjs";
+import { HierarchyDocumentMixin } from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -9,10 +9,10 @@ import { HierarchyDocumentMixin, UsableDocumentMixin } from "./_module.mjs";
 export default function ChildDocumentMixin(Base) {
   /**
    * @mixes HierarchyDocument
-   * @mixes UsableDocument
    * @mixin
+   * @implements {Teriock.Functionality.Usable}
    */
-  class ChildDocument extends mixClasses(Base, UsableDocumentMixin, HierarchyDocumentMixin) {
+  class ChildDocument extends mixClasses(Base, HierarchyDocumentMixin) {
     /** @inheritDoc */
     static get documentMetadata() {
       return Object.assign(super.documentMetadata, { child: true });

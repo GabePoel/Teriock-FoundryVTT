@@ -45,24 +45,6 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     }
 
     /**
-     * Take a dawn.
-     * @returns {Promise<void>}
-     */
-    static async #onTakeDawn() {
-      if (!this.isEditable) { return; }
-      await this.actor.system.takeDawn();
-    }
-
-    /**
-     * Take a dusk.
-     * @returns {Promise<void>}
-     */
-    static async #onTakeDusk() {
-      if (!this.isEditable) { return; }
-      await this.actor.system.takeDusk();
-    }
-
-    /**
      * Take a long rest.
      * @returns {Promise<void>}
      */
@@ -128,8 +110,6 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       actions: {
         deathBagPull: this.#onDeathBagPull,
         quickUse: { buttons: [0, 2], handler: this.#onQuickUse },
-        takeDawn: this.#onTakeDawn,
-        takeDusk: this.#onTakeDusk,
         takeLongRest: this.#onTakeLongRest,
         takeShortRest: this.#onTakeShortRest,
         toggleCondition: { buttons: [0, 2], handler: this.#onToggleCondition },

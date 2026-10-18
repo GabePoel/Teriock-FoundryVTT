@@ -45,57 +45,34 @@ export default function ActorStatsPart(Base) {
      */
     #prepareVirtualWounds() {
       if (!this.settings.getSetting("autoWound")) { return; }
-      const hpUncn = this.hp.value < 1 && this.hp.causes.unconscious && this.hp.causes.down;
-      const hpCrit = this.hp.value === (this.hp.min < 0 ? this.hp.min + 1 : 0) && this.hp.causes.criticallyWounded
-        && this.hp.causes.down;
-      const hpDead = this.hp.value === this.hp.min && this.hp.causes.dead && this.hp.causes.down;
-      const mpUncn = this.mp.value < 1 && this.mp.causes.unconscious && this.mp.causes.down;
-      const mpCrit = this.mp.value === (this.mp.min < 0 ? this.mp.min + 1 : 0) && this.mp.causes.criticallyWounded
-        && this.mp.causes.down;
-      const mpDead = this.mp.value === this.mp.min && this.mp.causes.dead && this.mp.causes.down;
+      const wounds = ["hp", "mp"].map(stat => {
+        const { causes, min, value } = this[stat];
+        return {
+          crit: value === (min < 0 ? min + 1 : 0) && causes.criticallyWounded && causes.down,
+          dead: value === min && causes.dead && causes.down,
+          stat,
+          uncn: value < 1 && causes.unconscious && causes.down,
+          value,
+        };
+      });
 
-      const statDead = hpDead || mpDead;
-      const statCrit = hpCrit || mpCrit;
-
-      const protUncn = this.isProtected("condition:unconscious");
-      const protCrit = this.isProtected("condition:critically-wounded");
-      const protDead = this.isProtected("condition:dead");
       const protDown = this.isProtected("condition:down");
+      const autoDead = wounds.some(w => w.dead) && !this.isProtected("condition:dead") && !protDown;
+      const autoCrit = wounds.some(w => w.crit) && !this.isProtected("condition:critically-wounded") && !protDown
+        && !autoDead;
+      const autoUncn = !this.isProtected("condition:unconscious") && !autoCrit && !autoDead && !protDown;
 
-      const autoDead = statDead && !protDead && !protDown;
-      const autoCrit = statCrit && !protCrit && !protDown && !autoDead;
-
-      if (hpDead && !protDead && !protDown) {
-        this._addVirtualConditions(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp");
-      }
-      if (mpDead && !protDead && !protDown) {
-        this._addVirtualConditions(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp");
-      }
-      if (hpCrit && !protCrit && !protDown && !autoDead) {
+      const add = (w, statuses, reason) =>
         this._addVirtualConditions(
-          ["critically-wounded", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeHp",
+          statuses,
+          `TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.${reason}${w.stat.capitalize()}`,
         );
+      for (const w of wounds.filter(w => w.dead && autoDead)) { add(w, ["dead", "down"], "negativeHalfMax"); }
+      for (const w of wounds.filter(w => w.crit && autoCrit)) {
+        add(w, ["critically-wounded", "down"], "criticallyNegative");
       }
-      if (mpCrit && !protCrit && !protDown && !autoDead) {
-        this._addVirtualConditions(
-          ["critically-wounded", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeMp",
-        );
-      }
-      if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
-        if (this.hp.value === 0) {
-          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp");
-        } else {
-          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp");
-        }
-      }
-      if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
-        if (this.mp.value === 0) {
-          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp");
-        } else {
-          this._addVirtualConditions(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp");
-        }
+      for (const w of wounds.filter(w => w.uncn && autoUncn)) {
+        add(w, ["unconscious", "down"], w.value === 0 ? "zero" : "negative");
       }
 
       if (this.parent.statuses.has("dead")) {

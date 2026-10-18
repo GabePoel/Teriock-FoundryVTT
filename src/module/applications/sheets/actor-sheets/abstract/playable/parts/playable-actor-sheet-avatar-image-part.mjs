@@ -43,17 +43,6 @@ export default function PlayableActorSheetAvatarImagePart(Base) {
     #imageToDisplay = "actor";
 
     /**
-     * Path to the current image on the actor.
-     * @returns {string}
-     */
-    get displayedImgPath() {
-      if (this.#imageToDisplay === "actor") { return "img"; }
-      return (this.imgToken.ring.enabled && this.imgToken.ring.subject.texture)
-        ? `${this.tokenPrefix}.ring.subject.texture`
-        : `${this.tokenPrefix}.texture.src`;
-    }
-
-    /**
      * Tooltip to display for the current image.
      * @returns {string}
      */
@@ -94,12 +83,12 @@ export default function PlayableActorSheetAvatarImagePart(Base) {
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       return Object.assign(await super._prepareContext(options), {
-        displayedImg: foundry.utils.getProperty(this.document, this.displayedImgPath),
+        displayedImg: foundry.utils.getProperty(this.document, this.editableImgPath)
+          || foundry.utils.getProperty(this.document, `${this.tokenPrefix}.texture.src`),
         displayedImgDocument: this.#imageToDisplay,
         displayedImgIcon: this.#imageToDisplay === "actor"
           ? teriock.data.systems.actors.PlayableCharacterSystem.metadata.icon
           : TERIOCK.DISPLAY.icons.manifest.document.token,
-        displayedImgPath: this.displayedImgPath,
         displayedImgRing: this.#imageToDisplay === "token" && this.imgToken.ring.enabled,
         displayedImgTooltip: this.displayedImgTooltip,
         editableImgPath: this.editableImgPath,

@@ -28,19 +28,13 @@ export default function PlayableActorSheetCombatPart(Base) {
     }
 
     /**
-     * Opens the primary attacker's sheet.
+     * Opens the sheet of some `data-wielding` armament.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
-    static async #onOpenPrimaryAttacker() {
-      await this.document.system.wielding.attacker?.sheet.render(true);
-    }
-
-    /**
-     * Opens the primary blocker's sheet.
-     * @returns {Promise<void>}
-     */
-    static async #onOpenPrimaryBlocker() {
-      await this.document.system.wielding.blocker?.sheet.render(true);
+    static async #onOpenWielder(_event, target) {
+      await this.document.system.wielding[target.dataset.wielding]?.sheet.render(true);
     }
 
     /**
@@ -54,49 +48,29 @@ export default function PlayableActorSheetCombatPart(Base) {
     }
 
     /**
-     * Select a primary attacker.
+     * Select some `data-wielding` armament.
      * @param {PointerEvent} event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      */
-    static async #onSelectAttacker(event) {
+    static async #onSelectWielder(event, target) {
+      const role = target.dataset.wielding;
+      const current = this.document.system.wielding[role];
       if (event.button === 2 || !this.isEditable) {
-        await this.document.system.wielding.attacker?.sheet.render(true);
+        await current?.sheet.render(true);
         return;
       }
-      const attacker = await DocumentSelector.selectSingle(
+      const selected = await DocumentSelector.selectSingle(
         [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
           .filter(a => a.active),
         {
-          checked: this.document.system.wielding.attacker?.uuid,
-          hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint"),
+          checked: current?.uuid,
+          hint: _loc(`TERIOCK.SHEETS.Actor.ACTIONS.Select${role.capitalize()}.hint`),
           openable: true,
-          textKey: "system.summarizedAttack",
+          textKey: role === "attacker" ? "system.summarizedAttack" : "system.summarizedBlock",
         },
       );
-      if (attacker) { await this.document.update({ "system.wielding.attacker": attacker.id }); }
-    }
-
-    /**
-     * Select a primary blocker.
-     * @param {PointerEvent} event
-     * @returns {Promise<void>}
-     */
-    static async #onSelectBlocker(event) {
-      if (event.button === 2 || !this.isEditable) {
-        await this.document.system.wielding.blocker?.sheet.render(true);
-        return;
-      }
-      const attacker = await DocumentSelector.selectSingle(
-        [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
-          .filter(a => a.active),
-        {
-          checked: this.document.system.wielding.blocker?.uuid,
-          hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint"),
-          openable: true,
-          textKey: "system.summarizedBlock",
-        },
-      );
-      if (attacker) { await this.document.update({ "system.wielding.blocker": attacker.id }); }
+      if (selected) { await this.document.update({ [`system.wielding.${role}`]: selected.id }); }
     }
 
     /**
@@ -132,11 +106,9 @@ export default function PlayableActorSheetCombatPart(Base) {
     static DEFAULT_OPTIONS = {
       actions: {
         increaseCover: { buttons: [0, 2], handler: this.#onIncreaseCover },
-        openPrimaryAttacker: this.#onOpenPrimaryAttacker,
-        openPrimaryBlocker: this.#onOpenPrimaryBlocker,
+        openWielder: this.#onOpenWielder,
         resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty },
-        selectAttacker: { buttons: [0, 2], handler: this.#onSelectAttacker },
-        selectBlocker: { buttons: [0, 2], handler: this.#onSelectBlocker },
+        selectWielder: { buttons: [0, 2], handler: this.#onSelectWielder },
         toggleReaction: this.#onToggleReaction,
         toggleSb: this.#onToggleSb,
         useAbility: { buttons: [0, 2], handler: this.#onUseAbility },

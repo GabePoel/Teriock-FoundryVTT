@@ -158,12 +158,7 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   static subtract(value, delta) {
-    const operator = delta.startsWith("-") ? "+" : "-";
-    const minus = operator === "-" ? "-" : "";
-    delta = delta.replace(/^[+-]/, "").trim();
-    if (!FormulaField.exists(value)) { return `${minus} ${delta}`.trim(); }
-    if (!FormulaField.exists(delta)) { return value; }
-    return `${value} ${operator} ${delta}`;
+    return FormulaField.add(value, delta.startsWith("-") ? delta.slice(1) : `-${delta.replace(/^\+/, "")}`);
   }
 
   /**
