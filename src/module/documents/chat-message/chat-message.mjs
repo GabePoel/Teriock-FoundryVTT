@@ -16,12 +16,13 @@ export default class TeriockChatMessage extends mixClasses(ChatMessage, BaseDocu
   /**
    * @inheritDoc
    * @param {object[]} [data]
-   * @param {Partial<DatabaseCreateOperation & { defaultMode: boolean}>} [operation]
+   * @param {Partial<DatabaseCreateOperation & { defaultMode: boolean, triggeredMode: boolean }>} [operation]
    */
   static async createDocuments(data = [], operation = {}) {
     for (const d of data) {
       if (d.speaker?.img) { foundry.utils.setProperty(d, "system.img", d.speaker.img); }
       if (operation.defaultMode) { this.applyMode(d, game.settings.get("core", "messageMode")); }
+      if (operation.triggeredMode) { this.applyMode(d, game.settings.get("teriock", "triggerMessageMode")); }
     }
     return super.createDocuments(data, operation);
   }

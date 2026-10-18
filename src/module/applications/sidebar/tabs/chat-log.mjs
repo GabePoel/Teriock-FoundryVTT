@@ -137,18 +137,21 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   /** @inheritDoc */
   updateTimestamps() {
     super.updateTimestamps();
+    const messages = new Set();
     for (
       const li of /** @type {NodeListOf<HTMLLIElement>} */ document.querySelectorAll(".chat-message[data-message-id]")
     ) {
       const message = game.messages.get(li.dataset.messageId);
-      if (message?.system?.collapsedByDefault) {
+      if (!message) { continue; }
+      messages.add(message);
+      if (message.system?.collapsedByDefault) {
         li.querySelectorAll("[data-collapsible-id]").forEach(el => {
           if (!this.noAutoCollapse.has(el.dataset.collapsibleId)) {
             this._toggleCollapsed(el.dataset.collapsibleId, true);
           }
         });
       }
-      message?.system?._onUpdateTimestamp?.();
     }
+    for (const message of messages) { message.system?._onUpdateTimestamp?.(); }
   }
 }

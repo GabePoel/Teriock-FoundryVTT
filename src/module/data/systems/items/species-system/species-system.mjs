@@ -192,8 +192,8 @@ export default class SpeciesSystem
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (
-      foundry.utils.hasProperty(changed, "system.size.value") && this.actor && options.interactive
-      && this.parent.master?.documentName === "Actor"
+      this.parent.checkEditor(userId) && foundry.utils.hasProperty(changed, "system.size.value") && this.actor
+      && options.interactive && this.parent.master?.documentName === "Actor"
     ) {
       this.#onChangeSize();
     }

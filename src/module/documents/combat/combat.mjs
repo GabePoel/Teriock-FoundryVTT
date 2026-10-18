@@ -37,15 +37,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
-   * Call a trigger on the provided actor.
-   * @param {TeriockActor} actor
-   * @param {Teriock.System.Trigger} trigger
-   */
-  #fireTrigger(actor, trigger) {
-    if (actor?.shouldFireTriggers) { actor.fireTrigger(trigger); }
-  }
-
-  /**
    * @param {TeriockActor|null} actor
    * @param {Teriock.Keys.CombatEvent} event
    * @param {Teriock.Keys.CombatTiming} timing
@@ -76,7 +67,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   _onEndCombat() {
     this.#refreshCombatExpirations(null, "combat", "end");
     this.#changeTurn({ attackPenalties: [] });
-    for (const actor of this.actors) { this.#fireTrigger(actor, "combatEnd"); }
+    for (const actor of this.actors) { actor.fireTrigger("combatEnd"); }
   }
 
   /** @inheritDoc */
@@ -89,7 +80,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   async _onEndTurn(combatant, context) {
     await super._onEndTurn(combatant, context);
     this.#refreshCombatExpirations(combatant.actor, "turn", "end");
-    if (combatant.actor) { this.#fireTrigger(combatant.actor, "turnEnd"); }
+    combatant.actor?.fireTrigger("turnEnd");
   }
 
   /**
@@ -97,7 +88,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    */
   _onStartCombat() {
     this.#refreshCombatExpirations(null, "combat", "start");
-    for (const actor of this.actors) { this.#fireTrigger(actor, "combatStart"); }
+    for (const actor of this.actors) { actor.fireTrigger("combatStart"); }
   }
 
   /** @inheritDoc */
@@ -112,7 +103,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     const combatants = context.round === 1 && context.turn === 0 ? this.combatants.contents : [combatant];
     this.#changeTurn({ actions: combatants, reactions: combatants });
     this.#refreshCombatExpirations(combatant.actor, "turn", "start");
-    if (combatant.actor) { this.#fireTrigger(combatant.actor, "turnStart"); }
+    combatant.actor?.fireTrigger("turnStart");
     this.#refreshCombatExpirations(combatant.actor, "action", "start");
   }
 

@@ -12,17 +12,15 @@ export default class TeriockActors extends Actors {
    */
   get default() {
     const speaker = TeriockChatMessage.getSpeaker();
-    const scene = game.scenes.get(speaker.scene);
-    const token = scene?.tokens.get(speaker.token);
-    let actor = token?.actor;
-    if (!actor) { actor = this.get(speaker.actor); }
-    if (!actor) { actor = game.user.character; }
-    if (!actor) { actor = game.canvas?.tokens?.controlled.find(t => t.actor)?.actor; }
-    if (!actor) { actor = ui?.activeWindow?.document?.actor; }
-    if (!actor) {
-      actor = foundry.applications.instances.values().find(app => app?.document instanceof TeriockActor)?.actor;
-    }
-    return actor ?? null;
+    const candidates = [
+      game.scenes.get(speaker.scene)?.tokens.get(speaker.token)?.actor,
+      this.get(speaker.actor),
+      game.user.character,
+      ...(game.canvas?.tokens?.controlled.map(t => t.actor) ?? []),
+      ui.activeWindow?.document?.actor,
+      ...foundry.applications.instances.values().map(app => app?.document).filter(d => d instanceof TeriockActor),
+    ];
+    return candidates.find(a => a?.isOwner) ?? null;
   }
 
   /**

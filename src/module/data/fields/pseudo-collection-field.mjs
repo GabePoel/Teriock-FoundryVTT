@@ -9,9 +9,10 @@ const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
 
 class PseudoTypedSchemaField extends TypedSchemaField {
   /** @inheritDoc */
-  _migrate(value, options, state) {
-    if (!options.partial && foundry.utils.isPlainObject(value)) { value.type ??= "base"; }
-    return super._migrate(value, options, state);
+  _cleanType(value, options, state) {
+    const types = Object.keys(this.types);
+    if (!options.partial && types.length === 1) { value.type ??= types[0]; }
+    return super._cleanType(value, options, state);
   }
 
   /** @inheritdoc */

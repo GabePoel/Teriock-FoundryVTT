@@ -100,17 +100,20 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
-  _onCreate(data, options, user) {
-    if (this.actor && Array.isArray(foundry.utils.getProperty(options, `dependents.${this.id}`))) {
-      this.createDependentDocuments("Item", options.dependents[this.id]);
+  _onCreate(data, options, userId) {
+    const dependents = foundry.utils.getProperty(options, `dependents.${this.id}`);
+    if (this.checkEditor(userId) && this.actor && dependents?.length) {
+      this.createDependentDocuments("Item", dependents);
     }
-    super._onCreate(data, options, user);
+    super._onCreate(data, options, userId);
   }
 
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if (this.actor?.isOwner) { this.actor.deleteEmbeddedDocuments("Item", this.dependents.map(d => d.id)); }
+    if (this.checkEditor(userId) && this.actor && this.dependents.size) {
+      this.actor.deleteEmbeddedDocuments("Item", this.dependents.map(d => d.id));
+    }
   }
 
   /** @inheritDoc */

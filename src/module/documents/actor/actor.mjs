@@ -218,14 +218,14 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Whether the current user should fire triggers and create triggered chat messages for this actor.
-   * @returns {boolean}
+   * The user that creates triggered chat messages for this actor.
+   * @returns {TeriockUser}
    */
-  get shouldFireTriggers() {
+  get triggerUser() {
     const fireScope = game.settings.get("teriock", "triggerFireScope");
-    if (fireScope === "gm") { return game.user.isGM; }
-    if (fireScope === "owners") { return this.isOwner; }
-    return this.defaultUser?.isSelf ?? game.user.isGM;
+    if (fireScope === "gm") { return game.users.activeGM ?? game.user; }
+    if (fireScope === "owners" && this.isOwner) { return game.user; }
+    return this.defaultUser ?? game.user;
   }
 
   /**
@@ -400,24 +400,26 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /**
    * Create a triggered chat message per source document collected during a {@link TeriockActor._dispatchTrigger}.
+   * The messages are created by {@link triggerUser} which might be a different User than the one that ran this.
    * @param {Teriock.System.TriggerScope} scope
-   * @returns {Promise<TeriockChatMessage[]>}
+   * @returns {Promise<void>}
    */
   async createTriggeredMessages(scope = {}) {
-    if (!this.shouldFireTriggers) { return []; }
-    const bySource = scope.chatDataBySource ?? {};
-    const allChatData = [];
-    for (const chatData of Object.values(bySource)) {
+    const data = [];
+    for (const chatData of Object.values(scope.chatDataBySource ?? {})) {
       if (foundry.utils.isEmpty(chatData.system?.activations)) { continue; }
       const panel = chatData.system.panels?.[0];
       if (panel?.associations?.[0] && !panel.associations[0].cards.length) { delete panel.associations; }
-      chatData.system.panels = (chatData.system.panels ?? []).filter(Boolean).map(p =>
-        new teriock.data.pseudoDocuments.Panel(p)
-      );
-      TeriockChatMessage.applyMode(chatData, game.settings.get("teriock", "triggerMessageMode"));
-      allChatData.push(chatData);
+      chatData.system.activations = chatData.system.activations.map(a => a.toObject());
+      chatData.system.panels = (chatData.system.panels ?? []).filter(Boolean);
+      data.push(chatData);
     }
-    return TeriockChatMessage.createDocuments(allChatData);
+    if (!data.length) { return; }
+    this.triggerUser.query("teriock.createDocuments", {
+      data,
+      documentName: "ChatMessage",
+      operation: { triggeredMode: true },
+    }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
   }
 
   /** @inheritDoc */
@@ -505,12 +507,11 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Fire a time-based trigger for this actor if the current user should handle it.
+   * Fire a time-based trigger for this actor.
    * @param {Teriock.System.TimeTrigger} trigger
    * @returns {Promise<void>}
    */
   async takeTimeTrigger(trigger) {
-    if (!this.shouldFireTriggers) { return; }
     await this.system[`take${trigger.capitalize()}`]?.();
   }
 
