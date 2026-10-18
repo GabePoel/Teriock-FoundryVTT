@@ -34,7 +34,6 @@ export default function TriggerMechanicMixin(Base) {
         Object.fromEntries(
           Object.entries(TERIOCK.CONFIG.trigger).filter(([_k, g]) => g.alwaysAvailable || (granted && g.granted)),
         ),
-        { localize: true },
       );
     }
 

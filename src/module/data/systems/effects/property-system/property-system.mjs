@@ -99,11 +99,6 @@ export default class PropertySystem
   }
 
   /** @inheritDoc */
-  get needsAttunement() {
-    return this.kind !== "intrinsic" && super.needsAttunement;
-  }
-
-  /** @inheritDoc */
   getLocalRollData() {
     const data = Object.assign(super.getLocalRollData(), { "dmg.extra": this.extraDamage || 0 });
     if (this._source.damageType) { data[`dmg.type.${this._source.damageType}`] = 1; }

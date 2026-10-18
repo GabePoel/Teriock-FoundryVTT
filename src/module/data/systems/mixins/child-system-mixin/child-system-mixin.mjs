@@ -65,7 +65,7 @@ export default function ChildSystemMixin(Base) {
           }),
           { persisted: false },
         ),
-        forceSuppressed: new initialBoolean(),
+        forceSuppressed: initialBoolean(),
         kind: new fields.StringField({
           blank: false,
           choices: objectMap(this.metadata.kinds, v => v.label, { localize: true }),
@@ -337,6 +337,7 @@ export default function ChildSystemMixin(Base) {
         },
         this._getPanelCardContextMenuEntry(),
         {
+          action: "duplicateDoc",
           group: "document",
           icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.duplicate, "contextMenu"),
           label: _loc("SIDEBAR.Duplicate"),

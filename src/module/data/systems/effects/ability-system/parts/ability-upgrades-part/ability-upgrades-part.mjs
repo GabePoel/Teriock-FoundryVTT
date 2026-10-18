@@ -58,31 +58,28 @@ export default function AbilityUpgradesPart(Base) {
     }
 
     /** @inheritDoc */
-    get qualifiedChanges() {
-      const changes = super.qualifiedChanges;
+    prepareChangeData() {
+      super.prepareChangeData();
       if (this.upgrades.score.attribute) {
-        changes.push({
+        this.changes.push({
           key: `system.attributes.${this.upgrades.score.attribute}.score`,
           phase: TERIOCK.CONFIG.change.defaultPhase,
           priority: 20,
-          qualifier: "1",
           target: "Actor",
           type: "upgrade",
           value: this.upgrades.score.value.toString(),
         });
       }
       if (this.upgrades.competence.attribute) {
-        changes.push({
+        this.changes.push({
           key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
           phase: TERIOCK.CONFIG.change.defaultPhase,
           priority: 20,
-          qualifier: "1",
           target: "Actor",
           type: "upgrade",
           value: this.upgrades.competence.value.toString(),
         });
       }
-      return changes;
     }
 
     /** @inheritDoc */

@@ -49,7 +49,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
           initial: "gte",
           required: true,
         }),
-        formula: new rollableFormulaField({ initial: "2d4kh1" }),
+        formula: rollableFormulaField({ initial: "2d4kh1" }),
         threshold: new FormulaField({ initial: "4", placeholder: "0" }),
       }),
     });

@@ -48,7 +48,7 @@ export default function ActorAttributesPart(Base) {
         (sum, a) => sum + a.system.tier,
         0,
       );
-      this.presence.overflow = this.presence.value > this.presence.max;
+      this.presence.over = this.presence.value > this.presence.max;
       this.presence.value = Math.min(this.presence.value, this.presence.max);
       this.attributes.unp.score = this.presence.max - this.presence.value;
     }

@@ -49,7 +49,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
 
   /**
    * Changes to apply to children.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   * @returns {Teriock.Changes.ChildChangeData[]}
    */
   get childChanges() {
     return this.automations.getTypeSync("childChange", { active: true, isPassive: true }).flatMap(a => a.getChanges());
@@ -67,10 +67,13 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
 
   /**
    * Changes to apply to the parent item.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   * @returns {Teriock.Changes.ChangeData[]}
    */
   get itemChanges() {
-    return this.qualifiedChanges.flat().filter(c => c.target === "Item");
+    if (this.isPassive === false) { return []; }
+    return this.automations.active.filter(a => a.metadata.tags.changes).flatMap(a => a.getChanges()).filter(c =>
+      c.target === "Item"
+    );
   }
 
   /**
@@ -81,15 +84,6 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     return (!this.applyIfDeattuned
       && this.parent.parent?.metadata?.tags?.attunable
       && Boolean(this.parent.parent?.system.needsAttunement));
-  }
-
-  /**
-   * Gets the changes this ability would provide.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
-   */
-  get qualifiedChanges() {
-    if (this.isPassive === false) { return []; }
-    return this.automations.active.filter(a => a.metadata.tags.changes).flatMap(a => a.getChanges());
   }
 
   /** @inheritDoc */
@@ -205,6 +199,11 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   /** @inheritDoc */
   prepareChangeData() {
     super.prepareChangeData();
-    this.changes.push(...this.qualifiedChanges.filter(c => c.target === "Actor"));
+    if (this.isPassive === false) { return; }
+    this.changes.push(
+      ...this.automations.active.filter(a => a.metadata.tags.changes).flatMap(a => a.getChanges()).filter(c =>
+        c.target === "Actor"
+      ),
+    );
   }
 }

@@ -35,10 +35,9 @@ export default class InventorySystem extends BaseActorSystem {
 
     const CONDITION_IMMUNITY = { category: "condition", type: "immunity" };
     const LIGHT_CHANGE = {
+      phase: TERIOCK.CONFIG.change.defaultPhase,
       priority: 150,
-      qualifier: "1",
       target: "Actor",
-      time: TERIOCK.CONFIG.change.defaultPhase,
       type: "override",
       value: "0",
     };

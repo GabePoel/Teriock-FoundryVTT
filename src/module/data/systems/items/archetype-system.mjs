@@ -35,11 +35,7 @@ export default class ArchetypeSystem
    * The identifiers for the classes that provide this.
    */
   get classIdentifiers() {
-    return new Set(
-      this.actor?.previewedTypes.rank.filter(r => r.system._source.archetype === this.identifier).map(r =>
-        r.system.class
-      ),
-    );
+    return new Set(this.ranks.map(r => r.system.class));
   }
 
   /**
@@ -91,10 +87,5 @@ export default class ArchetypeSystem
    */
   _isSuppressedInactiveRanks() {
     return Boolean(this.actor && this.ranks.filter(r => r.active).length === 0);
-  }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
   }
 }

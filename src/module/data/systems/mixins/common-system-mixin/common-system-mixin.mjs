@@ -127,6 +127,7 @@ export default function CommonSystemMixin(Base) {
      */
     _getPanelCardContextMenuEntry() {
       return {
+        action: "openPanelDoc",
         group: "share",
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.panel),
         label: _loc("TERIOCK.SHEETS.Panel.OPEN"),

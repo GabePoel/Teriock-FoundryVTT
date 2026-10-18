@@ -18,14 +18,12 @@ export async function buildWriteOperation(operation) {
       if (operation.action === "update") { operation.updates = [{ ...operation.docData, _id: document.id }]; }
       delete operation.docData;
     }
-    if (document) {
-      Object.assign(operation, {
-        documentName: document.documentName,
-        ids: [document.id],
-        pack: document.pack,
-        parent: document.parent,
-      });
-    }
+    Object.assign(operation, {
+      documentName: document.documentName,
+      ids: [document.id],
+      pack: document.pack,
+      parent: document.parent,
+    });
     delete operation.uuid;
   }
   return operation;
@@ -100,10 +98,10 @@ export async function ensureChildren(document, identifiers) {
     return { data: obj, documentName: doc.documentName };
   }));
   const filtered = candidates.filter(Boolean);
-  const documentNames = new Set(Object.values(filtered).map(v => v?.documentName));
+  const documentNames = new Set(filtered.map(v => v.documentName));
   const operations = [];
   for (const documentName of documentNames) {
-    const data = filtered.filter(d => d?.documentName === documentName).map(d => d?.data);
+    const data = filtered.filter(d => d.documentName === documentName).map(d => d.data);
     operations.push(document.getCreateChildDocumentsOperation(documentName, data));
   }
   const childArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));

@@ -25,7 +25,7 @@ export default function ActorHacksPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        hacks: new initialSchema(objectMap(hackConfig, conf => initialBar({ max: conf.max }))),
+        hacks: initialSchema(objectMap(hackConfig, conf => initialBar({ max: conf.max }))),
       });
     }
 

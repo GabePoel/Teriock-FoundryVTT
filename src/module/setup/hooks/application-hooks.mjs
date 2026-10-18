@@ -22,17 +22,8 @@ function addEmbedContextMenuEntriesToHeader(application, controls) {
   const entries = document.getEmbedContextMenuEntries(document);
   controls.push(
     ...entries.filter(e =>
-      e.label !== _loc("SIDEBAR.Duplicate")
-      && ((e.label !== _loc("TERIOCK.SHEETS.Panel.OPEN")) || !(application instanceof PanelSheet))
-    ).map(e => {
-      return {
-        group: e.group,
-        icon: e.icon?.split("class=\"")[1]?.split("\">")[0] ?? e.icon,
-        label: e.label,
-        onClick: e.onClick,
-        visible: e.visible,
-      };
-    }),
+      e.action !== "duplicateDoc" && (e.action !== "openPanelDoc" || !(application instanceof PanelSheet))
+    ),
   );
 }
 

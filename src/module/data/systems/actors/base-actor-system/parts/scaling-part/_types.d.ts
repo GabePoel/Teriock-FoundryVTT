@@ -4,7 +4,7 @@ declare global {
       /** <base> Presence */
       presence: Teriock.Fields.BarField & {
         /** <derived> Too much presence being used */
-        overflow: boolean;
+        over: boolean;
       };
       /** <base> Scaling bonuses */
       scaling: {

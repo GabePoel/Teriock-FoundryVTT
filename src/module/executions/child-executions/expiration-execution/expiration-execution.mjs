@@ -13,7 +13,7 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      formula: new rollableFormulaField({
+      formula: rollableFormulaField({
         deterministic: false,
         hint: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.hint",
         label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.label",

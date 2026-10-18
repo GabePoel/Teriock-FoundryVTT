@@ -72,19 +72,7 @@ export default class EquipmentExecution extends ArmamentExecution {
   _configure(options = {}) {
     super._configure(options);
     if (!this.source.system.ammunition.enabled) { return; }
-    if (options.ammunition?.system.consumable) {
-      this.ammunition = options.ammunition;
-      return;
-    }
-    this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
-      e.active && e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
-    );
-    // Fall back to inactive ammunition
-    if (!this.ammunition) {
-      this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
-        e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
-      );
-    }
+    this.ammunition = options.ammunition?.system.consumable ? options.ammunition : this.source.system.defaultAmmunition;
   }
 
   /**

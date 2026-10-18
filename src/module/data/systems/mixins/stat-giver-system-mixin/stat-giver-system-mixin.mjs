@@ -143,8 +143,8 @@ export default function StatGiverSystemMixin(Base) {
     /** @inheritDoc */
     prepareStatDice() {
       for (const stat of POOL_STATS) {
-        this.statDice[stat].prepareStatDice();
         if (!this._canToggleStatDice(stat)) { this.statDice[stat].disabled = true; }
+        this.statDice[stat].prepareStatDice();
       }
     }
   }

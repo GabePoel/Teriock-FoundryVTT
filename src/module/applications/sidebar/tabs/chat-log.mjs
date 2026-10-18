@@ -130,7 +130,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
     if (oldCard) { this._captureScrollPositions(oldCard); }
     await super.updateMessage(message, notify);
     const card = this.element?.querySelector(selector);
-    if (card) { this._reapplyCollapsibleSates(card); }
+    if (card) { this._reapplyCollapsibleStates(card); }
     this._dragDrop.bind(this.element);
   }
 

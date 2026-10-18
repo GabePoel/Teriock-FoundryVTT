@@ -4,6 +4,10 @@ import { mergeMetadata } from "../../../../utils/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * Relevant wiki pages:
+ * - [Improved](https://wiki.teriock.com/index.php/Keyword:Improved)
+ * - [Limited](https://wiki.teriock.com/index.php/Keyword:Limited)
+ *
  * @template {MixinBase} T
  * @param {T} Base
  */

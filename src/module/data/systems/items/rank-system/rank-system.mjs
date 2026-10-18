@@ -252,10 +252,4 @@ export default class RankSystem
     }`;
     if (this.parent.sup?.type === "species") { this.kind = "innate"; }
   }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    for (const pool of Object.values(this.statDice)) { if (this.innate) { pool.disabled = true; } }
-  }
 }

@@ -22,10 +22,8 @@ declare global {
 
     export type ChildTarget = keyof typeof changeConfig.child.targets;
 
-    export type QualifiedChangeData = EffectChangeData & {
-      phase: Phase;
-      qualifier: Teriock.System.FormulaString;
-      target: Target;
-    };
+    export type ChangeData = EffectChangeData & { phase: Phase, target: Target };
+
+    export type ChildChangeData = ChangeData & { qualifier: Teriock.System.FormulaString };
   }
 }

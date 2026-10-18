@@ -255,7 +255,7 @@ export default function BaseApplicationMixin(Base) {
      * Re-apply every tracked collapsible state.
      * @param {ParentNode} [element]
      */
-    _reapplyCollapsibleSates(element = this.element) {
+    _reapplyCollapsibleStates(element = this.element) {
       for (const [collapsibleId, collapsed] of this.#collapsibleStates) {
         this.#applyCollapsibleState(collapsibleId, collapsed, element);
       }
@@ -284,10 +284,10 @@ export default function BaseApplicationMixin(Base) {
       const roots = result instanceof Element
         ? [result]
         : Object.values(result ?? {}).filter(node => node instanceof Element);
-      for (const root of roots) { this._reapplyCollapsibleSates(root); }
+      for (const root of roots) { this._reapplyCollapsibleStates(root); }
       super._replaceHTML(result, content, options);
       this._assignScrollableIds(content);
-      this._reapplyCollapsibleSates(content);
+      this._reapplyCollapsibleStates(content);
     }
 
     /**

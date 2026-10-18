@@ -55,7 +55,6 @@ export default class LightAutomation extends BaseAutomation {
         key: "token.light",
         phase: TERIOCK.CONFIG.change.defaultPhase,
         priority: Math.max(this.light.dim ?? 0, this.light.bright ?? 0),
-        qualifier: "1",
         target: "Actor",
         type: "override",
         value: this.light,

@@ -158,15 +158,15 @@ export default class TypeCollection extends Collection {
   }
 
   /** @inheritDoc */
-  clear(key, value) {
-    if (#documentsByType in this) { this.#documentsByType = null; }
-    return super.clear(key, value);
+  clear() {
+    this.#documentsByType = null;
+    return super.clear();
   }
 
   /** @inheritDoc */
-  delete(key, value) {
-    if (#documentsByType in this) { this.#documentsByType = null; }
-    return super.delete(key, value);
+  delete(key) {
+    this.#documentsByType = null;
+    return super.delete(key);
   }
 
   /** @inheritDoc */
@@ -287,7 +287,7 @@ export default class TypeCollection extends Collection {
 
   /** @inheritDoc */
   set(key, value) {
-    if (#documentsByType in this) { this.#documentsByType = null; }
+    this.#documentsByType = null;
     return super.set(key, value);
   }
 

@@ -1,12 +1,9 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
-import statConfig from "../../../../../../static/config/stat-config.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../utils/_module.mjs";
 import { migrateThumbnails } from "../../../../../fields/tools/migrations.mjs";
 import { speciesTransformationFields } from "../../../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
-
-const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
  * @import { ActorTransformationPart } from "../../../../actors/base-actor-system/parts/transformation-part/actor-transformation-part.mjs";
@@ -217,9 +214,6 @@ export default function SpeciesTransformationPart(Base) {
       super.prepareDerivedData();
       for (const a of this.#minorAbilities) {
         foundry.utils.setProperty(a.overrides, "system.competence.raw", 0);
-      }
-      if (this._isInactiveTransformation) {
-        for (const stat of POOL_STATS) { this.statDice[stat].disabled = true; }
       }
     }
 

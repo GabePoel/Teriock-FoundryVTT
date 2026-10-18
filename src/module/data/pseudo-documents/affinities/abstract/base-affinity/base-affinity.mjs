@@ -308,9 +308,11 @@ export default class BaseAffinity
   prepareData() {
     super.prepareData();
     // Doing this before identifiers are initialized means name/img lookups can be broken.
-    game.teriock.identifiers.initializing.then(() => {
+    const prepareDefaults = () => {
       this.name ||= this._defaultName;
       this.img ||= this._defaultImg;
-    });
+    };
+    if (game.teriock.identifiers.initialized) { prepareDefaults(); }
+    else { game.teriock.identifiers.initializing.then(prepareDefaults); }
   }
 }

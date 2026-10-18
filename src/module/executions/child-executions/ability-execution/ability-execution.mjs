@@ -247,14 +247,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     );
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TeriockActiveEffect<"ability">}
-   */
-  get source() {
-    return super.source;
-  }
-
   /** @inheritDoc */
   async _buildActivations() {
     const acts = teriock.data.pseudoDocuments.activations;

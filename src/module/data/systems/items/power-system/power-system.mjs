@@ -69,17 +69,4 @@ export default class PowerSystem
     parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) { return false; }
-
-    if (
-      this.actor?.previewedTypes.power.some(p => p.system.identifier === this.identifier)
-      && ["mage", "semi", "warrior"].includes(this.identifier)
-    ) {
-      return false;
-    }
-  }
 }

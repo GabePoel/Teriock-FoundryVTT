@@ -255,17 +255,8 @@ export default function AttackExecutionMixin(Base) {
      * Logic to pick the ammunition this attacks with.
      */
     _determineDefaultAmmunition() {
-      if (!this.isContact || !this.armament?.system.ammunition?.enabled) { return; }
-      const type = this.armament.system.ammunition.type;
-      this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
-        e.active && e.system.consumable && (e.system.equipmentType === type)
-      );
-      // Fall back to inactive ammunition
-      if (!this.ammunition) {
-        this.ammunition = this.actor?.previewedTypes.equipment.find(e =>
-          e.system.consumable && (e.system.equipmentType === type)
-        );
-      }
+      if (!this.isContact) { return; }
+      this.ammunition = this.armament?.system.defaultAmmunition ?? null;
     }
 
     /**

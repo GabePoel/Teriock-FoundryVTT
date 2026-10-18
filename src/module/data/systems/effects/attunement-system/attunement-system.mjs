@@ -94,9 +94,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   getEmbedContextMenuEntries(doc) {
-    const entries = super.getEmbedContextMenuEntries(doc).filter(e =>
-      ![_loc("COMMON.Delete"), _loc("SIDEBAR.Duplicate")].includes(e.label)
-    );
+    const entries = super.getEmbedContextMenuEntries(doc).filter(e => e.action !== "duplicateDoc");
     return [...entries, {
       group: "attunement",
       icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.attunable.deattune, "contextMenu"),

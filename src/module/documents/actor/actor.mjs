@@ -235,7 +235,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    */
   _applyActiveEffectsToChildren(phase) {
     if (!game.settings.get("teriock", "nonHierarchicalChanges")) { return; }
-    /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
+    /** @type {Record<string, Teriock.Changes.ChildChangeData[]>} */
     const changeMap = { ability: [], armament: [] };
     for (const effect of this.appliedEffects) {
       for (const change of effect.system.childChanges) {
@@ -270,7 +270,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /**
    * Apply qualified changes to an array of documents.
-   * @param {Teriock.Changes.QualifiedChangeData[]} changes
+   * @param {Teriock.Changes.ChildChangeData[]} changes
    * @param {(TeriockActiveEffect|TeriockItem)[]} documents
    * @param {object} replacementData
    * @internal

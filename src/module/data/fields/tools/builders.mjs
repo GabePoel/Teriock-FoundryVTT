@@ -80,11 +80,11 @@ function changeTypeField(types = null) {
 }
 
 /**
- * Field that represents a qualified change.
+ * Field that represents a change.
  * @returns {SchemaField}
  * @todo Simplify this. It has a lot of leftover complexity from earlier versions still.
  */
-export function qualifiedChangeField() {
+export function changeField() {
   return new SchemaField({
     key: new StringField({ initial: "", label: "EFFECT.FIELDS.changes.element.key.label" }),
     phase: new StringField({
@@ -104,7 +104,7 @@ export function qualifiedChangeField() {
     target: new StringField({
       choices: objectMap(TERIOCK.CONFIG.change.parent.targets, (t) => t, { localize: true }),
       initial: "Actor",
-      label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
+      label: "TERIOCK.SCHEMA.Change.target.label",
       nullable: false,
       required: true,
     }),

@@ -20,7 +20,7 @@ export function initialNumber(initial = 0) {
  * @returns {BooleanField}
  */
 export function initialBoolean(initial = false) {
-  return new fields.BooleanField({ initial });
+  return new fields.BooleanField({ initial, persisted: false });
 }
 
 /**

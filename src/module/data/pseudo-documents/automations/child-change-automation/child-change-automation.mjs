@@ -103,7 +103,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
-  /** @returns {Teriock.Changes.QualifiedChangeData[]} */
+  /** @returns {Teriock.Changes.ChildChangeData[]} */
   getChanges() {
     return [{
       key: this.key,

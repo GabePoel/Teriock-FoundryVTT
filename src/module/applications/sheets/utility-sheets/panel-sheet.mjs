@@ -1,7 +1,6 @@
 import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
 import { DragDropApplicationMixin, TeriockDocumentSheet } from "../../api/_module.mjs";
-import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -60,7 +59,7 @@ export default class PanelSheet extends mixClasses(TeriockDocumentSheet, DragDro
   async _prepareContext(options) {
     return Object.assign(
       await super._prepareContext(options),
-      await TeriockTextEditor.enrichPanel(await this.document.getPanelParts(), {
+      await (await this.document.toPanel()).prepareContext({
         relativeTo: this.document,
         secrets: this.document.isOwner,
       }),

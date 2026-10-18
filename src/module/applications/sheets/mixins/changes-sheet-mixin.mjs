@@ -12,7 +12,7 @@ export default function ChangesSheetMixin(Base) {
   class ChangesSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
-      actions: { addQualifiedChange: this._onAddChange, deleteQualifiedChange: this._onDeleteChange },
+      actions: { addParentChange: this._onAddChange, deleteParentChange: this._onDeleteChange },
     };
 
     /**
@@ -34,7 +34,6 @@ export default function ChangesSheetMixin(Base) {
         key: "",
         phase: TERIOCK.CONFIG.change.defaultPhase,
         priority: null,
-        qualifier: "1",
         target: "Actor",
         type: "add",
         value: "",

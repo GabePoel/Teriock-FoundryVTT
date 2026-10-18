@@ -103,6 +103,18 @@ export default function EquipmentWieldingPart(Base) {
       return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && this.equipped;
     }
 
+    /**
+     * The ammunition this uses by default.
+     * @returns {TeriockItem<"equipment">|null}
+     */
+    get defaultAmmunition() {
+      if (!this.ammunition.enabled) { return null; }
+      const ammunition = this.actor?.previewedTypes.equipment.filter(e =>
+        e.system.consumable && (e.system.equipmentType === this.ammunition.type)
+      );
+      return ammunition?.find(e => e.active) ?? ammunition?.[0] ?? null;
+    }
+
     /** @inheritDoc */
     get embedParts() {
       return Object.assign(super.embedParts, { struck: !this.equipped });

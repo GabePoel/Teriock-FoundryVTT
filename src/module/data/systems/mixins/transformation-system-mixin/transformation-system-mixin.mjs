@@ -31,15 +31,6 @@ function disabledStatDiceFlag(stat) {
 }
 
 /**
- * Actor flag key storing a stat value when a transformation is disabled.
- * @param {Teriock.Keys.DieStat} stat
- * @returns {string}
- */
-function transformationStatFlag(stat) {
-  return `transformation${stat.capitalize()}`;
-}
-
-/**
  * Effect data model that handles transformation behavior.
  *
  * Relevant wiki pages:
@@ -414,22 +405,11 @@ export default function TransformationSystemMixin(Base) {
       if (yes === false) { return false; }
 
       if (!this.actor || !this.isTransformation) { return; }
-      if (foundry.utils.hasProperty(changes, "disabled")) {
-        const wasDisabled = changes.disabled === false;
-        if (wasDisabled) {
-          const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags(), {
-            inplace: false,
-          });
-          foundry.utils.setProperty(changes, "flags", flags);
-        } else {
-          for (const stat of POOL_STATS) {
-            foundry.utils.setProperty(
-              changes,
-              `flags.teriock.${transformationStatFlag(stat)}`,
-              this.actor.system[stat].value,
-            );
-          }
-        }
+      if (changes.disabled === false) {
+        const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags(), {
+          inplace: false,
+        });
+        foundry.utils.setProperty(changes, "flags", flags);
       }
     }
 

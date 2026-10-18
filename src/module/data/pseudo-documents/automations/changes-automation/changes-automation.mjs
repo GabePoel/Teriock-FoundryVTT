@@ -1,7 +1,7 @@
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
-import { qualifiedChangeField } from "../../../fields/tools/builders.mjs";
+import { changeField } from "../../../fields/tools/builders.mjs";
 import { migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -13,7 +13,7 @@ export default class ChangesAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { changes: new fields.ArrayField(qualifiedChangeField()) });
+    return Object.assign(super.defineSchema(), { changes: new fields.ArrayField(changeField()) });
   }
 
   /** @inheritDoc */
@@ -30,7 +30,10 @@ export default class ChangesAutomation extends BaseAutomation {
     }));
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<HTMLDivElement>}
+   */
   async getEditor(config = {}) {
     const html = await TeriockTextEditor.renderTemplate("teriock/sheets/shared/changes", {
       changesData: this._source.changes.map(c => ({
@@ -44,6 +47,6 @@ export default class ChangesAutomation extends BaseAutomation {
       types: TeriockActiveEffect.CHANGE_TYPES,
       valuePath: `_source.${this.localPath}.changes`,
     });
-    return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);
+    return foundry.utils.parseHTML(html);
   }
 }
