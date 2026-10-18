@@ -1,6 +1,6 @@
 /**
  * Check if a value is defined.
- * @param {*|undefined} val
+ * @param {*} val
  * @returns {boolean}
  */
 function defined(val) {

@@ -335,12 +335,12 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
-     * Check if the {@link TeriockUser} owns and uses this.
-     * @param  {TeriockUser | ID<TeriockUser>} user
-     * @returns {false|boolean|boolean|*}
+     * Check if the editing {@link TeriockUser} is the current one and owns this.
+     * @param  {TeriockUser | ID<TeriockUser>} editor
+     * @returns {boolean}
      */
-    checkEditor(user) {
-      return game.user.id === (user.id || user._id || user) && this.isOwner;
+    checkEditor(editor) {
+      return game.user.id === (editor.id || editor._id || editor) && this.isOwner;
     }
 
     /**
