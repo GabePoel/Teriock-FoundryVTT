@@ -19,7 +19,7 @@ export default class TeriockFolder extends mixClasses(Folder, BaseDocumentMixin)
    * @returns {Array}
    */
   static getAllEntries(node) {
-    const entries = node.entries;
+    const entries = [...node.entries];
     for (const child of node.children) { entries.push(...this.getAllEntries(child)); }
     return entries;
   }

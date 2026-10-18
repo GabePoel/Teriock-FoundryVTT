@@ -386,8 +386,11 @@ export default class IdentifiersRegistry {
   reset() {
     this.#equipmentTypes.clear();
     this.#identifiers.clear();
-    for (const documentName of [...this.#primaryDocumentNames, ...this.#parentDocumentNames]) {
-      game.collections.get(documentName)?.forEach(d => d.prepareData());
+    for (const documentName of this.documentNames) {
+      for (const d of game.collections.get(documentName) ?? []) {
+        this.trackDocument(d);
+        for (const p of d.pages ?? []) { this.trackDocument(p); }
+      }
     }
     this._initialize();
   }

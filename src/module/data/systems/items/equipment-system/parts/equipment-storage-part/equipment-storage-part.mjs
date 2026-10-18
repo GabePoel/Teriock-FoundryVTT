@@ -371,18 +371,22 @@ export default function EquipmentStoragePart(Base) {
       super.prepareBaseData();
       const stored = () => (this.storage.enabled ? this.parent.previewedTypes.equipment : []);
       Object.defineProperties(this.storage.count, {
-        over: { get: () => this.storage.count.value > this.storage.count.max },
+        over: { configurable: true, get: () => this.storage.count.value > this.storage.count.max },
         // Async stored equipment is assumed to have a quantity of 1
         value: {
+          configurable: true,
           get: () =>
-            stored().map(e => (e.system?.consumable ? (e.system?.quantity?.value ?? 1) : 1) || 1).reduce((a, b) =>
-              a + b, 0),
+            stored().map(e => (e.system?.consumable ? (e.system?.quantity?.value ?? 1) : 1) || 1).reduce(
+              (a, b) => a + b,
+              0,
+            ),
         },
       });
       Object.defineProperties(this.storage.weight, {
-        over: { get: () => this.storage.weight.value > this.storage.weight.max },
+        over: { configurable: true, get: () => this.storage.weight.value > this.storage.weight.max },
         // Async stored equipment is assumed to have a weight of 0
         value: {
+          configurable: true,
           get: () =>
             stored().map(e => e.system?.totalWeight ?? 0).reduce((a, b) => a + b, 0).toNearest(
               TERIOCK.CONST.UNIT_PRECISION,

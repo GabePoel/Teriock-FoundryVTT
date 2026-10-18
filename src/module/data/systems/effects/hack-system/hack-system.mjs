@@ -66,7 +66,7 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.escalation) {
+    if (this.escalation && this.part) {
       this.changes.push({
         key: `system.hacks.${this.part}.value`,
         phase: "initial",

@@ -82,23 +82,6 @@ export default function TransformationSystemMixin(Base) {
     #batchedOperations = [];
 
     /**
-     * @returns {FlagMap}
-     */
-    get #flagMap() {
-      const hasItem = id => this.actor.items.has(id);
-      const hasEffect = id => this.actor.effects.has(id);
-      return {
-        disabledEffects: (this.parent.getFlag("teriock", "disabledEffects") ?? []).filter(hasEffect),
-        disabledItems: (this.parent.getFlag("teriock", "disabledItems") ?? []).filter(hasItem),
-        disabledStatDiceItems: Object.fromEntries(
-          POOL_STATS.map(
-            stat => [stat, (this.parent.getFlag("teriock", disabledStatDiceFlag(stat)) ?? []).filter(hasItem)]
-          ),
-        ),
-      };
-    }
-
-    /**
      * Whether this needs to inherit an image.
      * @return {boolean}
      */
@@ -136,16 +119,13 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * Pull species data, configure it, and batch it to be added to the actor.
-     * @returns {Promise<void>}
+     * @returns {Promise<ID<TeriockItem>|null>} The ID of the primary species if one is created.
      */
     async #addBatchCreateTransformedSpecies() {
-      if (!this.isTransformation || !this.actor) { return; }
       const uuids = this.transformation.uuids;
-      const flags = this._buildTransformationFlags();
-      this.parent.updateSource({ flags });
       let species = /** @type {TeriockItem<"species">[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
       species = species.filter(s => s);
-      if (!species.length) { return; }
+      if (!species.length) { return null; }
       const itemData = /** @type {TeriockItem<"species">[]} */ species.map(s => s.toObject());
       itemData.forEach(s => {
         s._id = foundry.utils.randomID();
@@ -163,12 +143,7 @@ export default function TransformationSystemMixin(Base) {
         keepSubIds: false,
       });
       if (op) { this.#batchedOperations.push(op); }
-      this.#batchedOperations.push(
-        this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{
-          _id: this.parent.id,
-          "system.transformation.primary": itemData[0]._id,
-        }]),
-      );
+      return itemData[0]._id;
     }
 
     /**
@@ -185,11 +160,12 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * Batch many update toggles for documents embedded within the actor.
-     * @param value
+     * @param {boolean} value
+     * @param {object} [flags] - Teriock-scoped flags to read instead of this effect's own.
      */
-    #addBatchToggleDocuments(value) {
+    #addBatchToggleDocuments(value, flags) {
       if (!this.actor) { return; }
-      const fm = this.#flagMap;
+      const fm = this.#getFlagMap(flags);
       for (const id of fm.disabledItems) { this.#addBatchToggle(this.actor.items, id, value); }
       for (const id of fm.disabledEffects) { this.#addBatchToggle(this.actor.effects, id, value); }
       for (const stat of POOL_STATS) {
@@ -252,6 +228,22 @@ export default function TransformationSystemMixin(Base) {
     }
 
     /**
+     * @param {object} [flags] - Teriock-scoped flags to read instead of this effect's own.
+     * @returns {FlagMap}
+     */
+    #getFlagMap(flags = this.parent.flags.teriock ?? {}) {
+      const hasItem = id => this.actor.items.has(id);
+      const hasEffect = id => this.actor.effects.has(id);
+      return {
+        disabledEffects: (flags.disabledEffects ?? []).filter(hasEffect),
+        disabledItems: (flags.disabledItems ?? []).filter(hasItem),
+        disabledStatDiceItems: Object.fromEntries(
+          POOL_STATS.map(stat => [stat, (flags[disabledStatDiceFlag(stat)] ?? []).filter(hasItem)]),
+        ),
+      };
+    }
+
+    /**
      * Apply all batched operations.
      * @returns {Promise<void>}
      */
@@ -266,8 +258,12 @@ export default function TransformationSystemMixin(Base) {
      * @returns {Promise<void>}
      */
     async #modifyOnCreate() {
-      await this.#addBatchCreateTransformedSpecies();
-      this.#addBatchUpdatesApplyTransformation();
+      const flags = this._buildTransformationFlags();
+      const update = { _id: this.parent.id, flags };
+      const primary = await this.#addBatchCreateTransformedSpecies();
+      if (primary) { update["system.transformation.primary"] = primary; }
+      this.#batchedOperations.push(this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [update]));
+      this.#addBatchToggleDocuments(true, flags.teriock);
       this.#addBatchActorUpdate({
         "flags.teriock.lastTransformation": this.parent.id,
         "system.transformation.primary": this.parent.id,

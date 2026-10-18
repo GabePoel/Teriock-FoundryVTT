@@ -90,6 +90,13 @@ export default class TeriockTableResult extends mixClasses(TableResult, BaseDocu
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
+    this.prepareIdentifiersData();
+  }
+
+  /**
+   * Data preparation that depends on the identifiers registry.
+   */
+  prepareIdentifiersData() {
     if (this.documentIdentifier && !this.documentUuid) {
       this.documentUuid = game.teriock.identifiers.get(this.documentIdentifier);
     }

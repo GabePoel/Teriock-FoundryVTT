@@ -134,7 +134,7 @@ export default function ActorCapacitiesPart(Base) {
     prepareVirtualEffects() {
       super.prepareVirtualEffects();
       if (
-        this.encumbranceLevel > 0 && !this.settings.getSetting("autoEncumbrance")
+        this.encumbranceLevel > 0 && this.settings.getSetting("autoEncumbrance")
         && !this.isProtected("condition:encumbered")
       ) {
         if (this.encumbranceLevel >= 1) { this.movementSpeed = Math.max(this.movementSpeed - 10, 0); }
