@@ -11,7 +11,6 @@ const { User } = foundry.documents;
  * The Teriock User implementation.
  * @extends {User}
  * @mixes BaseDocument
- * @property {Readonly<Set<TeriockToken>>} targets
  */
 export default class TeriockUser extends mixClasses(User, BaseDocumentMixin) {
   /** @inheritDoc */
