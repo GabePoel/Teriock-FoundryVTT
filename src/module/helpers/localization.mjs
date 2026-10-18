@@ -7,10 +7,11 @@
 /**
  * Safely localize a string.
  * @param {string} s
+ * @param {object} [data]
  * @returns {string}
  */
-export function _sloc(s) {
-  if (typeof globalThis?._loc === "function") { return _loc(s); }
+export function _sloc(s, data) {
+  if (typeof globalThis?._loc === "function") { return _loc(s, data); }
   return s;
 }
 
