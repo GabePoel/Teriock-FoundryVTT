@@ -127,8 +127,8 @@ export default class ConstructionNode
    * @returns {Promise<object>}
    */
   async constructDocuments(scope = {}) {
-    const overrides = { relativeTo: scope.execution?.actor ?? this._selectionRelativeTo };
-    const data = (await this.selectDocuments(overrides)).map(d => d.toObject());
+    const relativeTo = scope.execution?.actor ?? this._selectionRelativeTo;
+    const data = (await this.selectDocuments({ relativeTo })).map(d => d.toObject());
     if (!data.length) { data.push({}); }
     const competence = this.getCompetence(scope);
     for (const d of data) {
@@ -137,7 +137,8 @@ export default class ConstructionNode
       d.children ??= [];
       if (competence !== undefined) { foundry.utils.setProperty(d, "system.competence.raw", competence); }
       for (const n of this.childNodes.contents) {
-        const children = await n.constructDocuments(overrides);
+        // Only carry the execution and not the data because that'd cause duplicate delete calls and errors and stuff.
+        const children = await n.constructDocuments({ execution: scope.execution });
         d.children.push(...children);
       }
     }
