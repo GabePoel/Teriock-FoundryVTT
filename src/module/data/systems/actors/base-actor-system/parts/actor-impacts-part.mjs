@@ -45,11 +45,11 @@ export default function ActorImpactsPart(Base) {
      * @param {object} [options]
      * @param {number|null} [options.amount]
      * @param {boolean} [options.morganti]
-     * @returns {Promise<boolean|"morganti">}
+     * @returns {Promise<{ amount: number|null, morganti: boolean }|null>} What was applied or null if dismissed.
      */
     async impactDialog(impact, options = {}) {
       const entry = TERIOCK.CONFIG.impact[impact];
-      if (!entry) { return; }
+      if (!entry) { return null; }
       const initialAmount = options.amount ?? (entry.nullable ? null : 0);
       const amountField = new fields.NumberField({
         initial: initialAmount,
@@ -75,12 +75,11 @@ export default function ActorImpactsPart(Base) {
         modal: true,
         ok: {
           callback: async (_event, button) => {
-            let morganti;
             const value = button.form.elements.namedItem("amount").value;
             const amount = typeof value === "string" && value.length > 0 ? Number(value) : null;
-            if (entry.morganti) { morganti = button.form.elements.namedItem("morganti")?.checked; }
+            const morganti = Boolean(entry.morganti && button.form.elements.namedItem("morganti")?.checked);
             await entry.apply(this.parent, amount, { morganti });
-            return morganti ? "morganti" : true;
+            return { amount, morganti };
           },
         },
         window: { icon: makeIconClass(entry.icon, "title"), title: entry.take },

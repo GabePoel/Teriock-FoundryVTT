@@ -90,7 +90,7 @@ export default class BaseAutomation extends MechanicPseudoDocument {
    * @returns {boolean}
    */
   get isCopiedToEffect() {
-    return Object.keys(teriock.data.systems.effects.ConsequenceSystem.automationTypes).includes(this.type);
+    return this.type in teriock.data.systems.effects.ConsequenceSystem.schema.getField("automations").element.types;
   }
 
   /** @inheritDoc */

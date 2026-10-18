@@ -37,15 +37,17 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
    * Notify that this was applied to or reversed for an actor.
    * @param {TeriockActor} actor
    * @param {"applied"|"reversed"} key
-   * @param {boolean} [morganti]
+   * @param {object} [options]
+   * @param {number|null} [options.amount]
+   * @param {boolean} [options.morganti]
    */
-  #notify(actor, key, morganti) {
+  #notify(actor, key, { amount = this.#amount, morganti = this.morganti } = {}) {
     const message = _loc(`TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.${key}`, {
       actor: actor.fullName,
-      amount: this.#amount,
+      amount,
       impact: this.label,
     });
-    if (morganti ?? this.morganti) { ui.notifications.morganti(message); }
+    if (morganti) { ui.notifications.morganti(message); }
     else { ui.notifications.success(message); }
   }
 
@@ -72,15 +74,16 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   async primaryAction() {
     if (!this.checkActors()) { return; }
     for (const actor of this.actors) {
+      let amount = this.#amount;
       let morganti = this.morganti && Boolean(this.#entry?.morganti);
       if (this.#showDialog) {
-        const result = await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti });
+        const result = await actor.system.impactDialog(this.impact, { amount, morganti });
         if (!result) { continue; }
-        morganti = result === "morganti";
+        ({ amount, morganti } = result);
       } else {
-        await this.#entry.apply(actor, this.#amount, { morganti });
+        await this.#entry.apply(actor, amount, { morganti });
       }
-      this.#notify(actor, "applied", morganti);
+      this.#notify(actor, "applied", { amount, morganti });
     }
   }
 
