@@ -71,14 +71,16 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   /** @inheritDoc */
   async primaryAction() {
     if (!this.checkActors()) { return; }
-    let notify = true;
     for (const actor of this.actors) {
+      let morganti = this.morganti && Boolean(this.#entry?.morganti);
       if (this.#showDialog) {
-        notify = await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
+        const result = await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti });
+        if (!result) { continue; }
+        morganti = result === "morganti";
       } else {
-        await this.#entry.apply(actor, this.#amount);
+        await this.#entry.apply(actor, this.#amount, { morganti });
       }
-      if (notify) { this.#notify(actor, "applied", notify === "morganti"); }
+      this.#notify(actor, "applied", morganti);
     }
   }
 
