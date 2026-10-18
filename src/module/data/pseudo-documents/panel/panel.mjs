@@ -189,7 +189,7 @@ export default class Panel extends BasePseudoDocument {
     if (!context._id || !keepId) {
       context._id = toId(`${this.documentUuid}-${this.name}-${this.img}-${this.icon}`, { hash: true });
     }
-    options.relativeTo ??= usePanelRelativeTo ? fromUuid(this.documentUuid) : null;
+    options.relativeTo ??= usePanelRelativeTo ? await fromUuid(this.documentUuid) : null;
     options.secrets ??= options.relativeTo?.isOwner;
     context.blocks = await Promise.all(
       context.blocks.filter(b => game.user.isGM || !b.gmOnly).map(async (b, i) => {

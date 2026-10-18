@@ -8,9 +8,6 @@ import { ImpactsExecutionMixin } from "../mixins/_module.mjs";
  * @mixes ImpactsExecution
  */
 export default class DealImpactExecution extends mixClasses(BaseExecution, ImpactsExecutionMixin) {
-  /** @type {TeriockActiveEffect|TeriockItem|null} */
-  _document;
-
   /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments ?? [];

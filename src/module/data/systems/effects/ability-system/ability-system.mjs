@@ -293,7 +293,7 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   get isUsable() {
-    return super.usable && !this.isVirtual;
+    return super.isUsable && !this.isVirtual;
   }
 
   /**
@@ -334,10 +334,7 @@ export default class AbilitySystem
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    Object.assign(rollData, { av0: 0, ub: 0, warded: 0 });
-    if (this.piercing === "av0") { Object.assign(rollData, { av0: 2 }); }
-    if (this.piercing === "ub") { Object.assign(rollData, { av0: 2, ub: 1 }); }
-    return rollData;
+    return Object.assign(rollData, { av0: Number(this.piercing.av0) * 2, ub: Number(this.piercing.ub), warded: 0 });
   }
 
   /** @inheritDoc */

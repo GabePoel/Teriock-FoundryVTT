@@ -33,6 +33,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       actionUuids: getResetUuids(actions),
       attackPenaltyUuids: getResetUuids(attackPenalties),
       reactionUuids: getResetUuids(reactions),
+      sceneUuid: this.scene?.uuid ?? null,
     }, { failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.turnChange.failPrefix", localize: true });
   }
 

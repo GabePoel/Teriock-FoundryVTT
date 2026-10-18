@@ -158,6 +158,9 @@ export default class FormulaField extends StringField {
    * @returns {Teriock.System.FormulaString}
    */
   static subtract(value, delta) {
+    delta = delta.trim();
+    const isCompound = new BaseRoll(delta.replace(/^[+-]/, ""), {}).terms.length > 1;
+    if (isCompound) { return FormulaField.add(value, `-(${delta})`); }
     return FormulaField.add(value, delta.startsWith("-") ? delta.slice(1) : `-${delta.replace(/^\+/, "")}`);
   }
 

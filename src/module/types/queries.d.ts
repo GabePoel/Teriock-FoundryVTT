@@ -6,7 +6,7 @@ import type {
 
 import type queries from "../helpers/queries/_module.mjs";
 
-import { TeriockUser } from "../documents/_module.mjs";
+import { TeriockScene, TeriockUser } from "../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Queries {
@@ -54,6 +54,7 @@ declare global {
       actionUuids: UUID<TeriockCombatant>[];
       attackPenaltyUuids: UUID<TeriockCombatant>[];
       reactionUuids: UUID<TeriockCombatant>[];
+      sceneUuid: UUID<TeriockScene> | null;
     };
 
     export type CreateHotbarFolderData = { id: ID<TeriockUser>, name: string };

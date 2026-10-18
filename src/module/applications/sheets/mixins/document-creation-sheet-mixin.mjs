@@ -121,7 +121,7 @@ export default function DocumentCreationSheetMixin(Base) {
       const referenceRank = selectedRanks[0];
       const toCreate = game.items.fromCompendium(referenceRank);
       toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
-        origin: this.document.documentName === "Actor" ? "learned" : "innate",
+        kind: this.document.documentName === "Actor" ? "learned" : "innate",
       });
       await this.document.createChildDocuments("Item", [toCreate], { interactive: true });
     }
