@@ -34,6 +34,11 @@ export default function ImageEditingSheetMixin(Base) {
       } else {
         const attr = target.dataset.edit;
         const current = foundry.utils.getProperty(this.document, attr);
+        // Split so that if the update affects a document other than the one on this sheet it can still be updated.
+        const [head, ...rest] = attr.split(".");
+        const [doc, path] = this.document[head] instanceof foundry.abstract.Document
+          ? [this.document[head], rest.join(".")]
+          : [this.document, attr];
         const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
         const options = {
           current,
@@ -41,7 +46,10 @@ export default function ImageEditingSheetMixin(Base) {
           redirectToRoot: defaultImg ? [defaultImg] : [],
           top: this.position.top + 40,
           type: "image",
-          callback: path => this.document.update({ [attr]: path }),
+          callback: async src => {
+            await doc.update({ [path]: src });
+            if (doc !== this.document) { await this.render(); }
+          },
         };
         await new foundry.applications.apps.FilePicker(options).browse();
       }

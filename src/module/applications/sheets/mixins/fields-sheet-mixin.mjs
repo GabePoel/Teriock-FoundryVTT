@@ -16,28 +16,6 @@ export default function FieldsSheetMixin(Base) {
    */
   class FieldsSheet extends Base {
     /**
-     * Increment forwards.
-     * @param {PointerEvent} event
-     * @param {HTMLElement} target
-     * @param {number} change
-     * @returns {Promise<void>}
-     * @this {FieldsSheet}
-     */
-    static async #onIncrement(event, target, change = 1) {
-      if (!game.teriock.checkEditable(this)) { return; }
-      if (event.button === 2) { change = change * -1; }
-      const { path } = target.dataset;
-      const value = foundry.utils.getProperty(this.document._source, path)
-        ?? foundry.utils.getProperty(this.document, path);
-      const schema = this.document.getFieldForProperty(path);
-      const min = schema?.min ?? 0;
-      const max = schema?.max ?? Infinity;
-      const delta = max - min + 1;
-      const adjusted = ((value + min + change + delta) % delta) - min;
-      await this.document.update({ [path]: adjusted });
-    }
-
-    /**
      * Edit this document's kind.
      * @returns {Promise<void>}
      * @this {FieldsSheet}
@@ -79,12 +57,7 @@ export default function FieldsSheetMixin(Base) {
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
-      actions: {
-        increment: { buttons: [0, 2], handler: this.#onIncrement },
-        updateKind: this.#onUpdateKind,
-        updatePaths: this.#onUpdatePaths,
-        updateUnit: this.#onUpdateUnit,
-      },
+      actions: { updateKind: this.#onUpdateKind, updatePaths: this.#onUpdatePaths, updateUnit: this.#onUpdateUnit },
     };
   }
 
