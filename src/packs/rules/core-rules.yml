@@ -38,7 +38,8 @@ pages:
         </td></tr><tr><td>@Identifier[core:hit-points-and-mana-points]{HP}</td><td>@Identifier[core:hit-points-and-mana-points]{Hit
         points}</td><td>No
         </td></tr><tr><td>@Identifier[core:intelligence]{INT}</td><td>@Identifier[core:intelligence]{Intelligence
-        attribute}</td><td>Yes
+        attribute}</td><td>Yes </td></tr><tr><td>@Identifier[core:aging]{LP}</td><td>@Identifier[core:aging]{Lifespan
+        percent}</td><td>Yes
         </td></tr><tr><td>@Identifier[core:leveling-up]{LVL}</td><td>@Identifier[core:leveling-up]{Total
         level}</td><td>Yes </td></tr><tr><td><a target="_blank" rel="nofollow noreferrer noopener" class="external text"
         href="https://fanwar.com">LARP</a></td><td><a target="_blank" rel="nofollow noreferrer noopener" class="external
@@ -5008,7 +5009,7 @@ pages:
     name: Classes
     system:
       identifier: classes
-      img: systems/teriock/src/assets/thumbnails/power/learned-elder-sorceries.webp
+      img: systems/teriock/src/assets/thumbnails/core/classes.webp
     text:
       content: >-
         <p>Each @Pack[teriock.classes]{class} has a style and a behavior that it brings out in people. If you're being a
@@ -5066,5 +5067,43 @@ pages:
         </td><td>@Identifier[equipment:half-plate]{3}
         </td></tr><tr><td><b>17</b></td><td>@Identifier[class:veteran]{Veteran}
         </td><td>@Identifier[equipment:full-plate]{4} </td></tr></tbody></table>
+    type: rule
+  - _id: aging00000000000
+    _key: "!journal.pages!core000000000000.aging00000000000"
+    name: Aging
+    system:
+      identifier: aging
+      img: systems/teriock/src/assets/thumbnails/core/aging.webp
+    text:
+      content: >-
+        <p>While adventurers tend to stay fit well into their later years, everyone eventually does grow old. When a
+        creature nears the end of the normal lifespan for their species they will have a harder time dealing with the
+        rigors of a life spent traveling and fighting.</p><p>Once a creature has reached 80% of their species' lifespan,
+        age starts to factor their health and @Wiki[Category:Revival effects]{revival} chances. They gain a
+        @Identifier[ability:thin-soul]{Thin Soul}. At 90% of their lifespan, they gain a
+        @Identifier[ability:frail-soul]{Frail Soul}. Once they reach their maximum lifespan, they automatically
+        @Identifier[core:death-bag]{PD} the next time they @Identifier[condition:dead]{die}. Additionally, they
+        @Identifier[condition:dead]{die} the next time that fall @Identifier[condition:asleep]{asleep} or
+        @Identifier[condition:unconscious]{unconscious}. If the creature would gain a
+        @Identifier[ability:thin-soul]{Thin Soul} but they already have one, they gain a
+        @Identifier[ability:frail-soul]{Frail Soul}. Every other escalation of the consequences of a long lifespan
+        increases a step accordingly. They increase by two steps if the creature already had a
+        @Identifier[ability:frail-soul]{Frail Soul}. This means that a creature that had a
+        @Identifier[ability:thin-soul]{Thin Soul} or @Identifier[ability:frail-soul]{Frail Soul} can suffer automatic
+        @Identifier[core:death-bag]{PD} effects even if they aren't yet at 100% of their natural lifespan.</p><p>The
+        percent of the way through a creature is in their lifespan is also referred to as their <b>LP</b> (lifespan
+        percent or lifespan points). Thus, creatures experience the consequences of age at 80 LP, 90 LP, and 100
+        LP.</p><table><tbody><tr><th>LP</th><th>Aging Effects
+        </th></tr><tr><td>80</td><td>@Identifier[ability:thin-soul]{Thin Soul}
+        </td></tr><tr><td>90</td><td>@Identifier[ability:frail-soul]{Frail Soul} </td></tr><tr><td>100</td><td>Automatic
+        @Identifier[core:death-bag]{PD} upon @Identifier[condition:dead]{death} and automatic
+        @Identifier[condition:dead]{death} upon falling @Identifier[condition:asleep]{asleep} or
+        @Identifier[condition:unconscious]{unconscious} </td></tr></tbody></table><p>Adventurers are typically assumed
+        to start at their <b>age of adulthood</b> which, unless otherwise specified, has them at 20 LP.</p><aside
+        class="notification info theme-dark"><p>Some creatures, such as
+        @UUID[Compendium.teriock.tables.RollTable.de1d9513b900de6e]{elves} and
+        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, have an
+        @Identifier[ability:infinite-lifespan]{Infinite Lifespan}. However, they can still suffer the consequences of
+        old age if they are sufficiently @Identifier[drain:wither]{withered}.</p></aside>
     type: rule
 sort: 0
