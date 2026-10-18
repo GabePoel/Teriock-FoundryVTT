@@ -1,11 +1,13 @@
 <div class="teriock-sheet-bar">
   {{> "teriock/sheets/shared/forms/kind-form"
+    kindUpdater="RankKindUpdater"
     kindValue=system.kind
   }}
   {{formUpdater
     document
-    action="updateClass"
+    action="openUpdater"
     data=(getName system.archetype)
+    dataset=(object updater="RankClassUpdater")
     icon=(path TERIOCK.CONFIG.class.archetypes system._source.archetype "icon")
     info=system.archetype
     label=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label")
@@ -14,8 +16,9 @@
   }}
   {{formUpdater
     document
-    action="updateClass"
+    action="openUpdater"
     data=(getName system.class)
+    dataset=(object updater="RankClassUpdater")
     icon=system.classIcon
     info=system.class
     label=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.class.label")

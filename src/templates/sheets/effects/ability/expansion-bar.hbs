@@ -2,13 +2,14 @@
   <div class="teriock-sheet-bar">
     {{formUpdater
       document
-      action="updateExpansion"
+      action="openUpdater"
       data=(concat
         (ifThen
           (path TERIOCK.CONFIG.ability.expansion system.expansion.type "needsSaveAttribute")
           (concat (path TERIOCK.CONFIG.attribute system.expansion.featSaveAttribute "abbreviation") " ")
           "")
         (lookup (lookup TERIOCK.CONFIG.ability.expansion system.expansion.type) "label"))
+      dataset=(object updater="AbilityExpansionUpdater")
       icon=TERIOCK.DISPLAY.icons.manifest.ability.expansion
       info=(path TERIOCK.CONFIG.ability.expansion system.expansion.type "identifier")
       label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label")

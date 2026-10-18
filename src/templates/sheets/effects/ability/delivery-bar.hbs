@@ -2,19 +2,20 @@
   {{formUpdater
     document
     path="system.executionTime.base"
-    action="updateExecutionTime"
+    action="openUpdater"
     changed=executionTime.changed
     data=executionTime.data
     source=executionTime.source
-    dataset=(object maneuver=(path TERIOCK.CONFIG.ability.maneuver system.maneuver "label"))
+    dataset=(object maneuver=(path TERIOCK.CONFIG.ability.maneuver system.maneuver "label") updater="AbilityExecutionTimeUpdater")
     icon=TERIOCK.DISPLAY.icons.manifest.ability.execution
     info=(path TERIOCK.CONFIG.ability.maneuver system.maneuver "identifier")
     label=(localize "TERIOCK.COMMON.ExecutionTime")
   }}
   {{formUpdater
     document
-    action="updateDelivery"
+    action="openUpdater"
     data=delivery.data
+    dataset=(object updater="AbilityDeliveryUpdater")
     icon=TERIOCK.DISPLAY.icons.manifest.ability.delivery
     info=(path TERIOCK.CONFIG.ability.delivery system.delivery "identifier")
     path="system.delivery"
@@ -22,13 +23,14 @@
   }}
   {{formUpdater
     document
-    action="updateInteraction"
+    action="openUpdater"
     data=(concat
       (ifThen
         (eq system.interaction "feat")
         (concat (path TERIOCK.CONFIG.attribute system.featSaveAttribute "abbreviation") " ")
         "")
       (path TERIOCK.CONFIG.ability.interaction system.interaction "label"))
+    dataset=(object updater="AbilityInteractionUpdater")
     icon=TERIOCK.DISPLAY.icons.manifest.ability.interaction
     info=(path TERIOCK.CONFIG.ability.interaction system.interaction "identifier")
     label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")

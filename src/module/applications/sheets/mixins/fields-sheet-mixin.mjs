@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../../utils/_module.mjs";
-import { BaseUpdater, KindUpdater } from "../../dialogs/_module.mjs";
+import * as updaters from "../../dialogs/updaters/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
@@ -16,13 +16,15 @@ export default function FieldsSheetMixin(Base) {
    */
   class FieldsSheet extends Base {
     /**
-     * Edit this document's kind.
+     * Open the updater named by `data-updater` for this document. This is a little hacky, but it's simple and it works.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
      * @returns {Promise<void>}
      * @this {FieldsSheet}
      */
-    static async #onUpdateKind() {
+    static async #onOpenUpdater(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
-      await KindUpdater.create({ document: this.document });
+      await updaters[target.dataset.updater]?.create({ document: this.document });
     }
 
     /**
@@ -36,7 +38,7 @@ export default function FieldsSheetMixin(Base) {
       if (!game.teriock.checkEditable(this)) { return; }
       const paths = target.dataset.paths?.split(/\s+/).filter(Boolean);
       if (!paths?.length) { return; }
-      await BaseUpdater.create({
+      await updaters.BaseUpdater.create({
         document: this.document,
         paths,
         window: { icon: makeIconClass(target.dataset.icon, "title"), title: target.dataset.title },
@@ -57,7 +59,7 @@ export default function FieldsSheetMixin(Base) {
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
-      actions: { updateKind: this.#onUpdateKind, updatePaths: this.#onUpdatePaths, updateUnit: this.#onUpdateUnit },
+      actions: { openUpdater: this.#onOpenUpdater, updatePaths: this.#onUpdatePaths, updateUnit: this.#onUpdateUnit },
     };
   }
 

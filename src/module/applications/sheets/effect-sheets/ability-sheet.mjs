@@ -1,10 +1,4 @@
 import { createElement } from "../../../utils/_module.mjs";
-import {
-  AbilityDeliveryUpdater,
-  AbilityExecutionTimeUpdater,
-  AbilityExpansionUpdater,
-  AbilityInteractionUpdater,
-} from "../../dialogs/updaters/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
@@ -16,42 +10,6 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
  * @property {TeriockActiveEffect<"ability">} document
  */
 export default class AbilitySheet extends ChildSheet {
-  /**
-   * Open the delivery updater.
-   * @returns {Promise<void>}
-   */
-  static async #onUpdateDelivery() {
-    if (!game.teriock.checkEditable(this)) { return; }
-    await AbilityDeliveryUpdater.create({ document: this.document });
-  }
-
-  /**
-   * Open the execution time updater.
-   * @returns {Promise<void>}
-   */
-  static async #onUpdateExecutionTime() {
-    if (!game.teriock.checkEditable(this)) { return; }
-    await AbilityExecutionTimeUpdater.create({ document: this.document });
-  }
-
-  /**
-   * Open the expansion configuration dialog.
-   * @returns {Promise<void>}
-   */
-  static async #onUpdateExpansion() {
-    if (!game.teriock.checkEditable(this)) { return; }
-    await AbilityExpansionUpdater.create({ document: this.document });
-  }
-
-  /**
-   * Open the interaction updater.
-   * @returns {Promise<void>}
-   */
-  static async #onUpdateInteraction() {
-    if (!game.teriock.checkEditable(this)) { return; }
-    await AbilityInteractionUpdater.create({ document: this.document });
-  }
-
   /** @type {string[]} */
   static BARS = [
     "teriock/sheets/effects/ability/status-bar",
@@ -64,15 +22,7 @@ export default class AbilitySheet extends ChildSheet {
   ];
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    actions: {
-      updateDelivery: this.#onUpdateDelivery,
-      updateExecutionTime: this.#onUpdateExecutionTime,
-      updateExpansion: this.#onUpdateExpansion,
-      updateInteraction: this.#onUpdateInteraction,
-    },
-    classes: ["ability"],
-  };
+  static DEFAULT_OPTIONS = { classes: ["ability"] };
 
   /**
    * Reset elder sorcery theme classes, scroll wrapper, and mask element.

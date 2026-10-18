@@ -91,7 +91,7 @@ function formUpdater(model, options = { hash: {} }) {
   const containerElement = createElement("button", {
     className: "teriock-updater-container",
     dataset: foundry.utils.mergeObject({ action: action ?? "updatePaths", icon, paths }, dataset),
-    id: options.hash.id ?? makeElementId(options, action, paths),
+    id: options.hash.id ?? makeElementId(options, action, dataset.updater, paths),
     type: "button",
   });
   const displayElement = createElement("span", { className: "teriock-updater-display" });
