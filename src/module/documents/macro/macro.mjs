@@ -77,7 +77,9 @@ export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin, U
    */
   static async getLinkedUseMacro(doc) {
     const macro = game.macros.find(m =>
-      m.getFlag("teriock", "macroType") === "useLinked" && m.getFlag("teriock", "macroUuid") === doc.uuid
+      m.getFlag("teriock", "user") === game.user.id
+      && m.getFlag("teriock", "macroType") === "useLinked"
+      && m.getFlag("teriock", "macroDocumentUuid") === doc.uuid
     );
     if (macro) { return macro; }
     return this.makeLinkedUseMacro(doc);
