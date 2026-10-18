@@ -359,7 +359,12 @@ export default class TeriockCombatTracker
     const hasReaction = Boolean(combatant.system.reactions);
     const locked = Boolean(combatant.group) && !combatant.isCommander;
     return Object.assign(turn, {
-      icon: combatant.isCommander ? makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander) : "",
+      icon: combatant.isCommander
+        ? {
+          css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander),
+          tooltip: "TERIOCK.SYSTEMS.CombatantGroup.FIELDS.commanderId.label",
+        }
+        : null,
       locked,
       reaction: combatant.permission >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
         ? {
