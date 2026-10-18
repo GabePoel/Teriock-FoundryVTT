@@ -1,6 +1,7 @@
 export * as actor from "./actor-sheets/_module.mjs";
 export { default as TeriockAmbientLightConfig } from "./ambient-light-config.mjs";
 export { default as TeriockCombatantConfig } from "./combatant-config.mjs";
+export { default as CombatantGroupConfig } from "./combatant-group-config.mjs";
 export * as effect from "./effect-sheets/_module.mjs";
 export * as item from "./item-sheets/_module.mjs";
 export { default as TeriockJournalEntrySheet } from "./journal-entry-sheet.mjs";

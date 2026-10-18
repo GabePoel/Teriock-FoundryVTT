@@ -133,6 +133,15 @@ export default class TeriockCombatTracker
   _getGroupContextOptions() {
     const getGroup = li => this.viewed?.groups.get(li.closest("[data-group-id]")?.dataset.groupId);
     return [{
+      icon: "fa-solid fa-edit",
+      label: "TERIOCK.COMBAT.Group.ACTIONS.update",
+      onClick: (_event, li) =>
+        getGroup(li)?.sheet.render({
+          force: true,
+          position: { left: window.innerWidth - 720, top: Math.min(li.offsetTop, window.innerHeight - 350) },
+        }),
+      visible: () => game.user.isGM,
+    }, {
       icon: "fa-solid fa-arrow-rotate-left",
       label: "COMBATANT.ACTIONS.Clear",
       onClick: (_event, li) => getGroup(li)?.update({ initiative: null }, { asGM: true }),
