@@ -78,6 +78,7 @@ export default function ActorCapacitiesPart(Base) {
     #prepareWeightCarried() {
       let equipmentWeight = 0;
       for (const e of this.parent.previewedTypes.equipment) {
+        if (e.elder?.type === "equipment") { continue; }
         equipmentWeight += e.system.totalWeight;
       }
       this.weight.equipment = equipmentWeight;
