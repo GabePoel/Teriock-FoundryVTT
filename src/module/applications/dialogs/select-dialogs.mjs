@@ -16,7 +16,7 @@ export async function selectCompendiumsDialog(checked = true) {
   });
   packDocs.sort((a, b) => a.name.localeCompare(b.name));
   const selected = await DocumentSelector.selectMulti(packDocs, {
-    checked: packDocs.map(p => p.uuid && checked),
+    checked: checked ? packDocs.map(p => p.uuid) : [],
     hint: _loc("TERIOCK.DIALOGS.Select.Compendiums.hint"),
     title: _loc("TERIOCK.DIALOGS.Select.Compendiums.title"),
     tooltip: false,
