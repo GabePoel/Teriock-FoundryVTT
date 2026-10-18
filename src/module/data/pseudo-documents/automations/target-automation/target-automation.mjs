@@ -159,7 +159,7 @@ export default class TargetAutomation extends BaseAutomation {
   get _tokenPaths() {
     const paths = ["attachToToken"];
     if (this.type === "target" || this.regionType !== "emanation") { paths.push("excludeToken"); }
-    if (this.regionType === "emanation") { paths.push("expandWithToken"); }
+    if (this.regionType !== "emanation") { paths.push("expandWithToken"); }
     return paths;
   }
 
