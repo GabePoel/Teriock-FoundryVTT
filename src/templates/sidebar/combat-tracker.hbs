@@ -6,25 +6,61 @@
         data-collapsible-id="group-{{ group.id }}"
         data-group-id="{{ group.id }}"
       >
-        {{#if header}}
-          <ol class="combatant-group-header plain">
-            {{> "teriock/sidebar/combatant"
-              header
-            }}
-          </ol>
-        {{else}}
-          <div class="combatant-group-header combatant-group-row {{ css }}" data-action="activateCombatant">
-            <div class="token-image">
-              <img src="{{ group.img }}" alt="{{ group.name }}" loading="lazy" />
-            </div>
-            <div class="token-name">
-              <strong class="name">{{ group.name }}</strong>
-            </div>
-            {{> "teriock/sidebar/initiative"
-              group
-            }}
+        <div class="combatant-group-header combatant-group-row {{ css }}" data-action="activateCombatant">
+          <div class="token-image">
+            <img src="{{ group.img }}" alt="{{ group.name }}" loading="lazy" />
           </div>
-        {{/if}}
+          <div class="token-name">
+            <strong class="name">{{ group.name }}</strong>
+            <div class="combatant-controls">
+              {{#if @root.user.isGM}}
+                <button
+                  class="
+                    inline-control
+                    combatant-control
+                    icon
+                    fa-solid
+                    fa-eye-slash
+                    {{#if group.hidden}}
+                      active
+                    {{/if}}
+                  "
+                  type="button"
+                  aria-label="{{localize (ifThen group.hidden 'COMBATANT.Show' 'COMBATANT.Hide')}}"
+                  data-action="toggleHidden"
+                  data-tooltip
+                ></button>
+                <button
+                  class="
+                    inline-control
+                    combatant-control
+                    icon
+                    fa-solid
+                    fa-skull
+                    {{#if group.defeated}}
+                      active
+                    {{/if}}
+                  "
+                  type="button"
+                  aria-label="{{localize (ifThen group.defeated 'COMBATANT.UnmarkDefeated' 'COMBATANT.MarkDefeated')}}"
+                  data-action="toggleDefeated"
+                  data-tooltip
+                ></button>
+              {{else}}
+                <button
+                  class="inline-control combatant-control icon fa-solid fa-arrows-to-eye"
+                  type="button"
+                  aria-label="{{localize 'TERIOCK.COMBAT.Group.panTo'}}"
+                  data-action="panToCombatant"
+                  data-tooltip
+                ></button>
+              {{/if}}
+            </div>
+          </div>
+          {{> "teriock/sidebar/initiative"
+            group
+          }}
+        </div>
         <div class="combatant-group-members-container">
           <ol class="combatant-group-members plain">
             {{#each members}}

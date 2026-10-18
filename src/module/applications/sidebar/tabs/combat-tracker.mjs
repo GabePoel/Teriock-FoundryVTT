@@ -58,6 +58,25 @@ export default class TeriockCombatTracker
   }
 
   /**
+   * Pan to the tokens and zoom out enough to see all of them.
+   * @param {TeriockToken[]} tokens
+   * @returns {Promise<boolean>}
+   */
+  #panToTokens(tokens) {
+    const padding = canvas.grid.size;
+    const left = Math.min(...tokens.map(t => t.bounds.left)) - padding;
+    const right = Math.max(...tokens.map(t => t.bounds.right)) + padding;
+    const top = Math.min(...tokens.map(t => t.bounds.top)) - padding;
+    const bottom = Math.max(...tokens.map(t => t.bounds.bottom)) + padding;
+    const [width, height] = canvas.screenDimensions;
+    return canvas.animatePan({
+      scale: Math.min(canvas.stage.scale.x, width / (right - left), height / (bottom - top)),
+      x: (left + right) / 2,
+      y: (top + bottom) / 2,
+    });
+  }
+
+  /**
    * Options for initiative rolls.
    * @returns {Teriock.Command.ThresholdOptions}
    */
@@ -170,7 +189,38 @@ export default class TeriockCombatTracker
     if (target.dataset.action === "rollInitiative") {
       this.defaultInitiativeExecutionData = ThresholdRoll.parseEvent(event);
     }
-    return super._onCombatantControl(event, target);
+    const group = target.closest(".combatant-group-row")
+      ? this.viewed?.groups.get(target.closest("[data-group-id]").dataset.groupId)
+      : null;
+    if (!group) { return super._onCombatantControl(event, target); }
+    // CombatantGroup controls apply to all their members
+    const members = [...group.members];
+    switch (target.dataset.action) {
+      case "panToCombatant": {
+        if (!canvas.ready) { return; }
+        const tokens = members.filter(m => m.visible).map(m => m.token?.object).filter(token =>
+          token && this._isTokenVisible(token)
+        );
+        if (!tokens.length) { return ui.notifications.warn("COMBATANT.WarnNonVisibleToken", { localize: true }); }
+        return this.#panToTokens(tokens);
+      }
+      case "toggleDefeated": {
+        const defeated = !group.defeated;
+        return Promise.all([
+          this.viewed.updateEmbeddedDocuments("Combatant", members.map(m => ({ _id: m.id, defeated }))),
+          ...members.map(m =>
+            m.actor?.toggleStatusEffect(CONFIG.specialStatusEffects.DEFEATED, { active: defeated, overlay: true })
+          ),
+        ]);
+      }
+      case "toggleHidden":
+        return this.viewed.updateEmbeddedDocuments(
+          "Combatant",
+          members.map(m => ({ _id: m.id, hidden: !group.hidden })),
+        );
+      default:
+        return super._onCombatantControl(event, target);
+    }
   }
 
   /** @inheritDoc */
@@ -180,8 +230,8 @@ export default class TeriockCombatTracker
     if (!canvas.ready) { return; }
     // CombatantGroups highlight all members' tokens
     const group = this.viewed?.groups.get(row.closest("[data-group-id]").dataset.groupId);
-    this.#highlightedGroup = [...(group?.members ?? [])].map(m => m.token?.object).filter(token =>
-      token?._canHover(game.user, event) && this._isTokenVisible(token)
+    this.#highlightedGroup = [...(group?.members ?? [])].filter(m => m.visible).map(m => m.token?.object).filter(
+      token => token?._canHover(game.user, event) && this._isTokenVisible(token)
     );
     this.#highlightedGroup.forEach((token, i) => token._onHoverIn(event, { hoverOutOthers: i === 0 }));
   }
@@ -203,16 +253,7 @@ export default class TeriockCombatTracker
     for (const token of [...(group?.members ?? [])].map(m => m.token?.object).filter(Boolean)) {
       if (token.control({ releaseOthers: !controlled.length })) { controlled.push(token); }
     }
-    if (!controlled.length) { return; }
-    // Zoom out enough to see all the tokens
-    const center = foundry.utils.polygonCentroid(controlled.map(t => t.center));
-    const padding = canvas.grid.size;
-    const dx = Math.max(...controlled.map(t => Math.max(center.x - t.bounds.left, t.bounds.right - center.x)))
-      + padding;
-    const dy = Math.max(...controlled.map(t => Math.max(center.y - t.bounds.top, t.bounds.bottom - center.y)))
-      + padding;
-    const [width, height] = canvas.screenDimensions;
-    canvas.animatePan({ ...center, scale: Math.min(canvas.stage.scale.x, width / (2 * dx), height / (2 * dy)) });
+    if (controlled.length) { this.#panToTokens(controlled); }
   }
 
   /** @inheritDoc */
@@ -327,23 +368,30 @@ export default class TeriockCombatTracker
         continue;
       }
       if (!members.length) { continue; }
-      const commander = group.system.commander;
-      const header = members[0].id === commander?.id ? members.shift() : null;
-      const roller = [...group.members].find(m => m.isOwner);
+      // Commanders always roll for their CombatantGroups
+      const roller = group.system.commander ?? [...group.members].find(m => m.isOwner);
+      const rollerId = roller?.isOwner ? roller.id : null;
+      // Players see a CombatantGroup with only one visible member as a standalone Combatant
+      if (members.length === 1 && !game.user.isGM) {
+        turns.push(Object.assign(members[0], { icon: null, locked: false, rollerId }));
+        continue;
+      }
+      const face = holder.visible ? holder : holder.turnMembers.find(m => m.visible);
       turns.push({
         css: [i === combat.turn ? "active" : null, group.hidden ? "hide" : null, group.defeated ? "defeated" : null]
           .filterJoin(" "),
         group: {
+          defeated: group.defeated,
+          hidden: group.hidden,
           id: group.id,
-          img: group.img || holder.img,
+          img: group.img || face.img,
           initiative: group.initiative,
-          name: group.name || holder.name,
-          rollerId: roller?.id ?? null,
+          name: group.name || face.name,
+          rollerId,
         },
-        header,
         members,
       });
-      if (!header) { rows.push(turns.at(-1).group); }
+      rows.push(turns.at(-1).group);
     }
     const hasDecimals = rows.some(t => Number.isFinite(t.initiative) && !Number.isInteger(t.initiative));
     const precision = CONFIG.Combat.initiative.decimals;
@@ -357,7 +405,8 @@ export default class TeriockCombatTracker
   async _prepareTurnContext(combat, combatant, index) {
     const turn = await super._prepareTurnContext(combat, combatant, index);
     const hasReaction = Boolean(combatant.system.reactions);
-    const locked = Boolean(combatant.group) && !combatant.isCommander;
+    // CombatantGroup initiative is handled by the group header
+    const locked = Boolean(combatant.group);
     return Object.assign(turn, {
       icon: combatant.isCommander
         ? {
