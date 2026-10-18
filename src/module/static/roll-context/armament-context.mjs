@@ -39,7 +39,7 @@ const armamentContext = {
   "storage.weight.max": "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.weight.max.label",
   "storage.weight.mult": "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.weight.multiplier.label",
   "storage.weight.over": "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.weight.max.over",
-  weight: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.value.label",
+  weight: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label",
 };
 
 export default armamentContext;

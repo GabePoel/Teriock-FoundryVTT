@@ -17,12 +17,6 @@ export default class TeriockTooltipManager extends TooltipManager {
   static RICH_TOOLTIP_WIDTH = 350;
 
   /**
-   * Internal cache of allowed document names.
-   * @type {Set<Teriock.Documents.DocumentName>}
-   */
-  #allowedDocumentNames;
-
-  /**
    * The HTML to display for a tooltip that's loading.
    * @type {string}
    */
@@ -113,13 +107,9 @@ export default class TeriockTooltipManager extends TooltipManager {
    */
   #validateUuid(uuid) {
     if (!uuid) { return false; }
-    if (!this.#allowedDocumentNames) {
-      this.#allowedDocumentNames = game.settings.get("teriock", "documentTooltips");
-      if (this.#allowedDocumentNames.has("ActiveEffect")) { this.#allowedDocumentNames.add("VirtualCondition"); }
-      if (this.#allowedDocumentNames.has("JournalEntryPage")) { this.#allowedDocumentNames.add("Affinity"); }
-    }
-    const documentName = foundry.utils.parseUuid(uuid)?.type;
-    return this.#allowedDocumentNames.has(documentName);
+    const type = foundry.utils.parseUuid(uuid)?.type;
+    const documentName = { Affinity: "JournalEntryPage", VirtualCondition: "ActiveEffect" }[type] ?? type;
+    return game.settings.get("teriock", "documentTooltips").has(documentName);
   }
 
   /** @inheritdoc */

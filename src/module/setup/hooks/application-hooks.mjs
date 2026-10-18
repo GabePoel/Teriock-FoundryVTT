@@ -22,7 +22,7 @@ function addEmbedContextMenuEntriesToHeader(application, controls) {
   const entries = document.getEmbedContextMenuEntries(document);
   controls.push(
     ...entries.filter(e =>
-      e.label !== _loc("SIDEBAR.DUPLICATE")
+      e.label !== _loc("SIDEBAR.Duplicate")
       && ((e.label !== _loc("TERIOCK.SHEETS.Panel.OPEN")) || !(application instanceof PanelSheet))
     ).map(e => {
       return {

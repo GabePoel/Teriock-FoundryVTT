@@ -16,7 +16,7 @@ const { fields } = foundry.data;
  */
 function getChoiceLabel(config, value) {
   const option = config.options.find((o) => o.value === value);
-  return _loc(option?.label ?? value.toString());
+  return _loc(option?.label ?? String(value ?? ""));
 }
 
 /**

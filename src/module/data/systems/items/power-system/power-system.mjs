@@ -53,7 +53,7 @@ export default class PowerSystem
   get _panelBars() {
     return [this._statBar, this._metaphysicsBar, {
       icon: TERIOCK.DISPLAY.icons.manifest.armament.av,
-      label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.maxAv.label"),
+      label: _loc(this.schema.fields.maxAv.label),
       wrappers: [
         this.maxAv === 0
           ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")

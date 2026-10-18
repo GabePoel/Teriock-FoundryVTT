@@ -63,7 +63,7 @@ export default function EquipmentIdentificationPart(Base) {
             classes: [TERIOCK.DISPLAY.panels.styles.faded],
             gmOnly: true,
             path: f.replace("system", "system.identification"),
-            visible: !this.identification[f.slice("system.")],
+            visible: !this.identification[f.slice("system.".length)],
           });
         }
         fields.push(f);

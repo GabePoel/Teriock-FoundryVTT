@@ -118,6 +118,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   prepareData() {
+    super.prepareData();
     const changeTypeChoices = Object.keys(this._changeTypeChoices);
     if (!changeTypeChoices.includes(this.changeType)) {
       this.changeType = /** @type {Teriock.Changes.Type} */ (changeTypeChoices[0]);

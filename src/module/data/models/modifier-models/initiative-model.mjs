@@ -22,7 +22,7 @@ export default class InitiativeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    const source = this.actor.token?.combatant;
+    const source = this.actor.defaultCombatant;
     if (!source) { return; }
     await super.use(Object.assign(options, { bonus: this.bonus, source }));
   }
