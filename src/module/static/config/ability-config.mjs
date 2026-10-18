@@ -1,18 +1,78 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
-  delivery: /** @enum {Teriock.Config.DeliveryEntry} */ {
-    armor: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.armor", needsItem: true },
-    aura: { aoe: true, label: "TERIOCK.TERMS.Delivery.aura", ranged: true, sizes: "radius", template: "circle" },
-    bite: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.bite" },
-    cone: { aoe: true, label: "TERIOCK.TERMS.Delivery.cone", ranged: true, sizes: "length", template: "cone" },
-    hand: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.hand" },
-    item: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.item", needsItem: true },
-    missile: { allowPiercing: true, label: "TERIOCK.TERMS.Delivery.missile", ranged: true },
-    self: { label: "TERIOCK.TERMS.Delivery.self" },
-    shield: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.shield", needsItem: true },
-    sight: { label: "TERIOCK.TERMS.Delivery.sight", ranged: true },
-    weapon: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.weapon", needsItem: true },
+  delivery: {
+    armor: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      contact: true,
+      identifier: "core:item-delivery",
+      label: "TERIOCK.TERMS.Delivery.armor",
+      needsItem: true,
+    },
+    aura: /** @type {Teriock.Config.DeliveryEntry} */ {
+      aoe: true,
+      identifier: "core:aura-delivery",
+      label: "TERIOCK.TERMS.Delivery.aura",
+      ranged: true,
+      sizes: "radius",
+      template: "circle",
+    },
+    bite: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      contact: true,
+      identifier: "core:bite-delivery",
+      label: "TERIOCK.TERMS.Delivery.bite",
+    },
+    cone: /** @type {Teriock.Config.DeliveryEntry} */ {
+      aoe: true,
+      identifier: "core:cone-delivery",
+      label: "TERIOCK.TERMS.Delivery.cone",
+      ranged: true,
+      sizes: "length",
+      template: "cone",
+    },
+    hand: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      contact: true,
+      identifier: "core:hand-delivery",
+      label: "TERIOCK.TERMS.Delivery.hand",
+    },
+    item: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      contact: true,
+      identifier: "core:item-delivery",
+      label: "TERIOCK.TERMS.Delivery.item",
+      needsItem: true,
+    },
+    missile: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      identifier: "core:missile-delivery",
+      label: "TERIOCK.TERMS.Delivery.missile",
+      ranged: true,
+    },
+    self: /** @type {Teriock.Config.DeliveryEntry} */ {
+      identifier: "core:self-delivery",
+      label: "TERIOCK.TERMS.Delivery.self",
+    },
+    shield: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      contact: true,
+      identifier: "core:item-delivery",
+      label: "TERIOCK.TERMS.Delivery.shield",
+      needsItem: true,
+    },
+    sight: /** @type {Teriock.Config.DeliveryEntry} */ {
+      identifier: "core:sight-delivery",
+      label: "TERIOCK.TERMS.Delivery.sight",
+      ranged: true,
+    },
+    weapon: /** @type {Teriock.Config.DeliveryEntry} */ {
+      allowPiercing: true,
+      contact: true,
+      identifier: "core:item-delivery",
+      label: "TERIOCK.TERMS.Delivery.weapon",
+      needsItem: true,
+    },
   },
   deliveryPackage: {
     ball: "TERIOCK.TERMS.DeliveryPackage.ball",
@@ -54,57 +114,83 @@ export default {
       custom: "TERIOCK.TERMS.ExecutionTime.slow.custom",
     },
   },
-  expansion: /** @enum {Teriock.Config.ExpansionEntry} */ {
-    cascade: { label: "TERIOCK.TERMS.Expansion.cascade", ranged: true },
-    detonate: {
+  expansion: {
+    cascade: /** @type {Teriock.Config.ExpansionEntry} */ {
+      identifier: "core:cascade-expansion",
+      label: "TERIOCK.TERMS.Expansion.cascade",
+      ranged: true,
+    },
+    detonate: /** @type {Teriock.Config.ExpansionEntry} */ {
       aoe: true,
+      identifier: "core:detonate-expansion",
       label: "TERIOCK.TERMS.Expansion.detonate",
       needsSaveAttribute: true,
       ranged: true,
       sizes: "radius",
     },
-    fork: { label: "TERIOCK.TERMS.Expansion.fork", ranged: true },
-    ripple: {
+    fork: /** @type {Teriock.Config.ExpansionEntry} */ {
+      identifier: "core:expansions",
+      label: "TERIOCK.TERMS.Expansion.fork",
+      ranged: true,
+    },
+    ripple: /** @type {Teriock.Config.ExpansionEntry} */ {
       aoe: true,
+      identifier: "core:expansions",
       label: "TERIOCK.TERMS.Expansion.ripple",
       needsSaveAttribute: true,
       ranged: true,
       sizes: "radius",
     },
   },
-  interaction: /** @enum {Teriock.Config.InteractionEntry} */ {
-    attack: {
+  interaction: {
+    attack: /** @type {Teriock.Config.InteractionEntry} */ {
+      identifier: "core:attack-interaction",
       label: "TERIOCK.TERMS.Interaction.attack",
       results: {
         hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
         miss: "TERIOCK.SYSTEMS.Ability.FIELDS.results.miss.label",
       },
     },
-    block: {
+    block: /** @type {Teriock.Config.InteractionEntry} */ {
+      identifier: "core:block-interaction",
       label: "TERIOCK.TERMS.Interaction.block",
       results: {
         fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
         save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
       },
     },
-    feat: {
+    feat: /** @type {Teriock.Config.InteractionEntry} */ {
+      identifier: "core:feat-interaction",
       label: "TERIOCK.TERMS.Interaction.feat",
       results: {
         fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
         save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
       },
     },
-    manifest: {
+    manifest: /** @type {Teriock.Config.InteractionEntry} */ {
+      identifier: "core:manifest-interaction",
       label: "TERIOCK.TERMS.Interaction.manifest",
       results: { use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label" },
     },
   },
   // no sort
   maneuver: {
-    active: "TERIOCK.TERMS.Maneuver.active",
-    reactive: "TERIOCK.TERMS.Maneuver.reactive",
-    passive: "TERIOCK.TERMS.Maneuver.passive",
-    slow: "TERIOCK.TERMS.Maneuver.slow",
+    active: /** @type {Teriock.Config.ManeuverEntry} */ {
+      identifier: "core:active-maneuvers",
+      label: "TERIOCK.TERMS.Maneuver.active",
+    },
+    reactive: /** @type {Teriock.Config.ManeuverEntry} */ {
+      identifier: "core:reactive-maneuvers",
+      label: "TERIOCK.TERMS.Maneuver.reactive",
+    },
+    passive: /** @type {Teriock.Config.ManeuverEntry} */ {
+      identifier: "core:passive-maneuvers",
+      label: "TERIOCK.TERMS.Maneuver.passive",
+    },
+    slow: /** @type {Teriock.Config.ManeuverEntry} */ {
+      identifier: "core:slow-maneuvers",
+      label: "TERIOCK.TERMS.Maneuver.slow",
+    },
   },
   targetParent: { ability: "TERIOCK.TERMS.TargetParent.ability", item: "TERIOCK.TERMS.TargetParent.item" },
   // no sort
@@ -142,6 +228,6 @@ preLocalizeConfig("CONFIG.ability.interaction.attack.results");
 preLocalizeConfig("CONFIG.ability.interaction.block.results");
 preLocalizeConfig("CONFIG.ability.interaction.feat.results");
 preLocalizeConfig("CONFIG.ability.interaction.manifest.results");
-preLocalizeConfig("CONFIG.ability.maneuver");
+preLocalizeConfig("CONFIG.ability.maneuver", { keys: ["label"] });
 preLocalizeConfig("CONFIG.ability.targetParent");
 preLocalizeConfig("CONFIG.ability.targets", { keys: ["label"] });

@@ -6,9 +6,9 @@
     changed=executionTime.changed
     data=executionTime.data
     source=executionTime.source
-    dataset=(object maneuver=(lookup TERIOCK.CONFIG.ability.maneuver system.maneuver))
+    dataset=(object maneuver=(path TERIOCK.CONFIG.ability.maneuver system.maneuver "label"))
     icon=TERIOCK.DISPLAY.icons.manifest.ability.execution
-    info=(concat "core:" system.maneuver "-maneuvers")
+    info=(path TERIOCK.CONFIG.ability.maneuver system.maneuver "identifier")
     label=(localize "TERIOCK.COMMON.ExecutionTime")
   }}
   {{formUpdater
@@ -16,7 +16,7 @@
     action="updateDelivery"
     data=delivery.data
     icon=TERIOCK.DISPLAY.icons.manifest.ability.delivery
-    info="core:deliveries"
+    info=(path TERIOCK.CONFIG.ability.delivery system.delivery "identifier")
     path="system.delivery"
     source=delivery.source
   }}
@@ -30,7 +30,7 @@
         "")
       (path TERIOCK.CONFIG.ability.interaction system.interaction "label"))
     icon=TERIOCK.DISPLAY.icons.manifest.ability.interaction
-    info=(concat "core:" system.interaction "-interaction")
+    info=(path TERIOCK.CONFIG.ability.interaction system.interaction "identifier")
     label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")
     source=(concat
       (ifThen

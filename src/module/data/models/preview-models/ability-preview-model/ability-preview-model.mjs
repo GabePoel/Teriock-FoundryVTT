@@ -37,7 +37,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       }),
       invoked: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label" }),
       maneuver: nullStringField({
-        choices: TERIOCK.CONFIG.ability.maneuver,
+        choices: objectMap(TERIOCK.CONFIG.ability.maneuver, v => v.label),
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
       }),
       ritual: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label" }),

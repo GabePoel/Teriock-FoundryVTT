@@ -94,12 +94,15 @@ declare global {
 
     export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };
 
-    export type InteractionEntry = { label: string, results: Record<string, string> };
+    export type InteractionEntry = { identifier: TypedIdentifier, label: string, results: Record<string, string> };
+
+    export type ManeuverEntry = { identifier: TypedIdentifier, label: string };
 
     export type DeliveryEntry = {
       allowPiercing?: boolean;
       aoe?: boolean;
       contact?: boolean;
+      identifier: TypedIdentifier;
       label: string;
       needsItem?: boolean;
       ranged?: boolean;

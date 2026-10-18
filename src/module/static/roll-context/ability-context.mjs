@@ -41,7 +41,7 @@ export default abilityContext;
 preLocalizeConfig("ROLL_CONTEXT.ability");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.ability.maneuver).forEach(([k, v]) => {
-    abilityContext[`maneuver.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.maneuver", { name: v });
+    abilityContext[`maneuver.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.maneuver", { name: v.label });
   });
   Object.entries(TERIOCK.CONFIG.ability.interaction).forEach(([k, v]) => {
     abilityContext[`interaction.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.interaction", { name: v.label });

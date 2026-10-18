@@ -65,7 +65,7 @@ export default function AbilityUsagePart(Base) {
         }),
         maneuver: new fields.StringField({
           blank: false,
-          choices: TERIOCK.CONFIG.ability.maneuver,
+          choices: objectMap(TERIOCK.CONFIG.ability.maneuver, v => v.label, { localize: true }),
           initial: "active",
           nullable: false,
           required: true,

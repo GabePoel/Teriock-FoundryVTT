@@ -47,7 +47,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
           formatDynamicSelectOptions(
             objectMap(
               TERIOCK.CONFIG.ability.executionTime,
-              (choices, m) => ({ choices, label: TERIOCK.CONFIG.ability.maneuver[m] }),
+              (choices, m) => ({ choices, label: TERIOCK.CONFIG.ability.maneuver[m].label }),
             ),
             { localize: true },
           ),
