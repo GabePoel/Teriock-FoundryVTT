@@ -162,6 +162,9 @@ export default function HierarchyDocumentMixin(Base) {
         delete operation.cachedKeepId;
       }
       const cleanedData = data.map(doc => doc instanceof foundry.abstract.Document ? doc.toObject(true) : doc);
+      if (operation.asGM && !game.user.isGM && !operation.dryRun) {
+        return super.createDocuments(cleanedData, operation);
+      }
       const resolvedData = await Promise.all(cleanedData.map(doc => this.resolveObject(doc)));
       const expandedData = expandDocumentDataArray(resolvedData, null, operation);
       const knownSubs = operation.knownSubs ?? new Set();

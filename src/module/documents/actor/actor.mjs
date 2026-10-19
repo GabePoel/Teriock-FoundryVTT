@@ -45,6 +45,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /** @inheritDoc */
   static async createDocuments(data = [], operation = {}) {
+    if (operation.asGM && !game.user.isGM && !operation.dryRun) { return super.createDocuments(data, operation); }
     for (const d of data) {
       for (const c of ["effects", "items"]) {
         if (Array.isArray(d[c])) {

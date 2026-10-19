@@ -140,7 +140,7 @@ export default function BaseDocumentMixin(Base) {
      * @inheritDoc
      */
     static async createDocuments(data = [], operation = {}) {
-      if (operation.asGM && !game.user.isGM) {
+      if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         this._cleanGMOperation(operation);
         const docs = await game.users.queryGM("teriock.createDocuments", {
           data,
@@ -159,7 +159,7 @@ export default function BaseDocumentMixin(Base) {
      * @inheritDoc
      */
     static async deleteDocuments(ids = [], operation = {}) {
-      if (operation.asGM && !game.user.isGM) {
+      if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         this._cleanGMOperation(operation);
         const docs = await game.users.queryGM("teriock.deleteDocuments", {
           documentName: this.documentName,
@@ -184,7 +184,7 @@ export default function BaseDocumentMixin(Base) {
      * @inheritDoc
      */
     static async updateDocuments(updates = [], operation = {}) {
-      if (operation.asGM && !game.user.isGM) {
+      if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         this._cleanGMOperation(operation);
         const docs = await game.users.queryGM("teriock.updateDocuments", {
           documentName: this.documentName,
