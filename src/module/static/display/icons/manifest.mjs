@@ -92,6 +92,7 @@ export default {
     core: "ms-book-2",
     creature: "ms-owl",
     effect: "ms-microbiology",
+    environment: "ms-thunderstorm",
     equipment: "ms-package-2",
     fluency: "mdi-ruler-square-compass",
     imbuement: "ms-graph-3",

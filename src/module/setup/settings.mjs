@@ -1,4 +1,5 @@
 import { CompendiumPriorityMenu, MenuFactory } from "../applications/menus/_module.mjs";
+import { PlayableActorSheet } from "../applications/sheets/actor-sheets/_module.mjs";
 import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
@@ -114,6 +115,17 @@ export const menus = {
       sheets: {
         icon: icons.manifest.ui.sheet,
         settings: {
+          defaultActorTab: {
+            default: "tradecrafts",
+            scope: "client",
+            type: new fields.StringField({
+              blank: false,
+              initial: "tradecrafts",
+              nullable: false,
+              required: true,
+              choices: () => Object.fromEntries(PlayableActorSheet.SECTIONS.map(({ id, label }) => [id, label])),
+            }),
+          },
           floatingActorTabs: {
             default: true,
             scope: "client",

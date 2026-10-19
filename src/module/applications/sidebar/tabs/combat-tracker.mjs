@@ -407,6 +407,7 @@ export default class TeriockCombatTracker
         css: [i === combat.turn ? "active" : null, group.hidden ? "hide" : null, defeated ? "defeated" : null]
           .filterJoin(" "),
         group: {
+          color: face.token?.object?.getDispositionColor(),
           count: { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.members), value: members.length },
           defeated,
           hidden: group.hidden,
@@ -435,6 +436,7 @@ export default class TeriockCombatTracker
     // CombatantGroup initiative is handled by the group header
     const locked = Boolean(combatant.group);
     return Object.assign(turn, {
+      color: combatant.token?.object?.getDispositionColor(),
       icon: combatant.isCommander
         ? {
           css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander),

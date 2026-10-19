@@ -143,7 +143,7 @@ export default class BaseActorSystem
         icon: TERIOCK.DISPLAY.icons.manifest.interaction.feat,
         label: _loc("TERIOCK.COMMON.Attributes"),
         wrappers: this._attributeTags,
-      }],
+      }].filter(bar => bar.wrappers.length),
       blocks: [{ text: this.notes, title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes") }],
     });
   }

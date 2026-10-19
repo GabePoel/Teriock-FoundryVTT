@@ -1,5 +1,6 @@
 import {
   CreatureSystem,
+  EnvironmentSystem,
   InventorySystem,
   NonPlayerCharacterSystem,
   PlayableCharacterSystem,
@@ -49,6 +50,7 @@ declare global {
 
   export interface ActorSystemMap {
     creature: CreatureSystem;
+    environment: EnvironmentSystem;
     inventory: InventorySystem;
     npc: NonPlayerCharacterSystem;
     pc: PlayableCharacterSystem;

@@ -7,6 +7,11 @@ import { TeriockDragDrop } from "../../../../../ux/_module.mjs";
 export default function PlayableActorSheetTabsPart(Base) {
   /** @mixin */
   class PlayableActorSheetTabsPart extends Base {
+    constructor(...args) {
+      super(...args);
+      this.tabGroups.primary = null;
+    }
+
     /** @returns {"LEFT"|"RIGHT"} */
     get #tabTooltipDirection() {
       return this.isDetached ? "LEFT" : "RIGHT";
@@ -20,12 +25,25 @@ export default function PlayableActorSheetTabsPart(Base) {
     }
 
     /** @inheritDoc */
+    _getTabsConfig(group) {
+      const config = super._getTabsConfig(group);
+      if (group !== "primary") { return config; }
+      const { childTypes } = this.document.metadata;
+      const tabs = config.tabs.filter(tab => {
+        const { dragTypes } = this.constructor.SECTIONS.find(section => section.id === tab.id);
+        return !dragTypes || dragTypes.some(type => childTypes.includes(type));
+      });
+      const initial = game.settings.get("teriock", "defaultActorTab");
+      return { ...config, initial: tabs.some(tab => tab.id === initial) ? initial : tabs[0].id, tabs };
+    }
+
+    /** @inheritDoc */
     async _onDragOver(event) {
       await super._onDragOver(event);
       if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
       const droppedType = TeriockDragDrop.payload?.document?.type;
       const tabId = this.constructor.SECTIONS.find(section => (section.dragTypes ?? []).includes(droppedType))?.id;
-      if (tabId) { this._revealDragTab(tabId, "primary"); }
+      if (tabId && this.document.metadata.childTypes.includes(droppedType)) { this._revealDragTab(tabId, "primary"); }
     }
 
     /** @inheritDoc */

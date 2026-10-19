@@ -126,6 +126,23 @@ foundry.helpers.Hooks.once("init", function() {
   Object.assign(CONFIG.Canvas, {
     darknessSourceClass: canvas.sources.TeriockPointDarknessSource,
     detectionModes: { ...CONFIG.Canvas.detectionModes, ...canvas.perception.detectionModes },
+    // Disposition colors match FanWar LARP jersey colors (mostly).
+    dispositionColors: {
+      // Yellow just looks like the most "selected" color IMO
+      CONTROLLED: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.yellow),
+      // Matches NPC jersey
+      FRIENDLY: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.orange),
+      // Matches baddie jersey
+      HOSTILE: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.purple),
+      // Brown feels inactive
+      INACTIVE: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.brown),
+      // Matches weather jersey
+      NEUTRAL: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.blue),
+      // Goodies don't have jerseys
+      PARTY: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.green),
+      // Matches unidentified items
+      SECRET: foundry.utils.Color.from(TERIOCK.DISPLAY.colors.palette.grey),
+    },
     lightSourceClass: canvas.sources.TeriockPointLightSource,
     visionModes: { ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes },
   });
@@ -242,7 +259,7 @@ foundry.helpers.Hooks.once("init", function() {
   rs(d.TeriockActiveEffect, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActiveEffect.TYPES });
 
   rs(d.TeriockActor, sa.InventorySheet, "Inventory", { types: ["inventory"] });
-  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["creature", "npc", "pc"] });
+  rs(d.TeriockActor, sa.PlayableActorSheet, "Playable", { types: ["creature", "environment", "npc", "pc"] });
   rs(d.TeriockActor, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockActor.TYPES });
 
   rs(d.TeriockAmbientLightDocument, s.TeriockAmbientLightConfig, "AmbientLight");

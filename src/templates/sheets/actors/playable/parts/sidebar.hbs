@@ -102,15 +102,17 @@
             </span>
           </span>
         {{/if}}
-        <span
-          class="actor-shortbox actor-rank-box"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
-        >
-          <span class="actor-shortbox-value">{{ system.scaling.rank }}</span>
-          <span class="actor-class-label actor-shortbox-label">
-            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.rank"}}
+        {{#unless environment}}
+          <span
+            class="actor-shortbox actor-rank-box"
+            data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
+          >
+            <span class="actor-shortbox-value">{{ system.scaling.rank }}</span>
+            <span class="actor-class-label actor-shortbox-label">
+              {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.rank"}}
+            </span>
           </span>
-        </span>
+        {{/unless}}
         <span
           class="actor-shortbox actor-proficiency-box"
           {{#if system.scaling.brScale}}
@@ -139,9 +141,13 @@
         </span>
       </div>
     </div>
-    {{> "teriock/sheets/actors/playable/parts/status-box"}}
+    {{#unless environment}}
+      {{> "teriock/sheets/actors/playable/parts/status-box"}}
+    {{/unless}}
     {{> "teriock/sheets/actors/playable/parts/battle-box"}}
-    {{> "teriock/sheets/actors/playable/parts/attribute-box"}}
+    {{#unless environment}}
+      {{> "teriock/sheets/actors/playable/parts/attribute-box"}}
+    {{/unless}}
     {{> "teriock/sheets/actors/playable/parts/initiative-box"}}
   </div>
 </div>
