@@ -83,7 +83,7 @@ export function markBoostedDie(roll, die) {
  * @param {BaseRoll} roll
  * @returns {DiceTerm[]}
  */
-export function maxFaceDice(roll) {
+function maxFaceDice(roll) {
   const diceTerms = diceTermsOf(roll);
   const maxFaces = Math.max(...diceTerms.map(term => term.faces));
   return diceTerms.filter(term => term.faces === maxFaces);

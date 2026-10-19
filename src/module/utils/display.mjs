@@ -58,7 +58,7 @@ export function fancifyFields(displayFields) {
 
 /**
  * Pre-process grouped choices into something that {@link SelectInputConfig} can read.
- * @param {Teriock.Fields.DynamicChoices|Teriock.Fields.DynamicChoices[]} choices
+ * @param {Teriock.Fields.DynamicChoices} choices
  * @param {object} [options]
  * @param {boolean} [options.localize]
  * @param {boolean} [options.none] - Prepend a blank "None" choice.
@@ -66,23 +66,11 @@ export function fancifyFields(displayFields) {
  */
 export function formatDynamicSelectOptions(choices = {}, options = {}) {
   const out = {};
-  const choiceArray = [];
-  if (Array.isArray(choices)) { choiceArray.push(...choices); }
-  else {
-    for (const group of Object.values(choices)) {
-      const groupLabel = options.localize ? _loc(group.label) : group.label;
-      for (const [choiceValue, choiceLabel] of Object.entries(group.choices)) {
-        choiceArray.push({
-          group: groupLabel,
-          label: options.localize ? _loc(choiceLabel) : choiceLabel,
-          value: choiceValue,
-        });
-      }
+  for (const group of Object.values(choices)) {
+    const groupLabel = options.localize ? _loc(group.label) : group.label;
+    for (const [choiceValue, choiceLabel] of Object.entries(group.choices)) {
+      out[choiceValue] = { group: groupLabel, label: options.localize ? _loc(choiceLabel) : choiceLabel };
     }
-  }
-  for (const choice of choiceArray) {
-    out[choice.value] = choice;
-    delete out[choice.value].value;
   }
   return options.none ? teriock.helpers.localization.choicesWithNone(out) : out;
 }

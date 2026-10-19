@@ -16,7 +16,6 @@ declare module "./base-execution.mjs" {
     _boosts: Record<Teriock.Keys.Impact, Teriock.System.FormulaString>;
     _messageMode: Teriock.Messages.Mode;
     _rollData: object;
-    _rollOptions: object;
     _showDialog: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Foundry's source data is untyped.
     _source: Record<string, any>;

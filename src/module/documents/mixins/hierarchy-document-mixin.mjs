@@ -142,9 +142,9 @@ export default function HierarchyDocumentMixin(Base) {
      * Check if there is a circular dependencies between a sup and sub.
      * @param {HierarchyDocument} sup
      * @param {HierarchyDocument} sub
-     * @todo Make a synchronous version of this so it can run during drag and drop.
+     * @returns {boolean}
      */
-    static async checkIfCyclic(sup, sub) {
+    static checkIfCyclic(sup, sub) {
       if (sup?.documentName !== sub?.documentName) { return false; }
       if (sup?.id === sub?.id) { return true; }
       return sup?.allSups?.has?.(sub.id) ?? false;
@@ -197,7 +197,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @returns {Promise<boolean>}
      */
     static async validateRelationship(sup, sub, operation) {
-      const out = !(await this.checkIfCyclic(sup, sub));
+      const out = !this.checkIfCyclic(sup, sub);
       if (out === false && operation.notifyOnFailure) {
         ui.notifications.error("TERIOCK.OPERATIONS.cyclic", {
           format: { sub: sub.name, sup: sup.name },
@@ -390,29 +390,7 @@ export default function HierarchyDocumentMixin(Base) {
      */
     checkAncestor(doc) {
       if (doc?.uuid === this.uuid) { return true; }
-      return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false;
-    }
-
-    /**
-     * Create multiple sub Document instances in a sup Document's collection using provided input data.
-     * @param {object[]} [data]
-     * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} [operation]
-     * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
-     */
-    async createSubDocuments(data = [], operation = {}) {
-      const out = await foundry.documents.modifyBatch([this.getCreateSubDocumentsOperation(data, operation)]);
-      return out[0];
-    }
-
-    /**
-     * Delete multiple sub Document instances in a sup Document's collection using provided string ids.
-     * @param {ID<TeriockActiveEffect|TeriockActor|TeriockItem>[]} [ids]
-     * @param {DatabaseDeleteOperation} [operation]
-     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
-     */
-    async deleteSubDocuments(ids = [], operation = {}) {
-      const out = await foundry.documents.modifyBatch([this.getDeleteSubDocumentsOperation(ids, operation)]);
-      return out[0];
+      return this.elder?.checkAncestor?.(doc) ?? false;
     }
 
     /** @inheritDoc */
@@ -545,17 +523,6 @@ export default function HierarchyDocumentMixin(Base) {
         return s.uuid;
       }).filter(Boolean);
       return out;
-    }
-
-    /**
-     * Update multiple sub Document instances in a sup Document's collection using provided differential data.
-     * @param {object[]} [updates]
-     * @param {DatabaseUpdateOperation} [operation]
-     * @returns {Promise<(TeriockActiveEffect|TeriockActor|TeriockItem)[]>}
-     */
-    async updateSubDocuments(updates = [], operation = {}) {
-      const out = await foundry.documents.modifyBatch([this.getUpdateSubDocumentsOperation(updates, operation)]);
-      return out[0];
     }
   }
 

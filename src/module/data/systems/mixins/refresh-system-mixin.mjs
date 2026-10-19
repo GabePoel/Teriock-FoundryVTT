@@ -17,7 +17,7 @@ import {
  */
 
 /** @type {string[]} */
-export const DEFAULT_PRESERVE_ON_REFRESH = [
+const DEFAULT_PRESERVE_ON_REFRESH = [
   "_id",
   "_stats",
   "flags",

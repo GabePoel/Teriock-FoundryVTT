@@ -166,7 +166,6 @@ export default function DragDropSheetMixin(Base) {
      * Validates a drop.
      * @param {Teriock.Application.DropValidationOptions} [options]
      * @returns {boolean}
-     * @todo Add cyclic document validation. Not urgent because it's still stopped in `_preCreate`.
      * @todo Make this into a config object like suppression/error tips to simplify calls.
      * @todo Move to {@link DragDropApplicationMixin}.
      */
@@ -190,8 +189,19 @@ export default function DragDropSheetMixin(Base) {
       if (!this._validateDropChildType(options)) { return false; }
       if (!this._validateDropChildViewer(options)) { return false; }
       if (!this._validateDropChildMove(options)) { return false; }
+      if (!this._validateDropChildCyclic(options)) { return false; }
       if (document.parent === this.document) { return this.#isSubMove(document, dropEffect); }
       return true;
+    }
+
+    /**
+     * Validates that a sub move doesn't make a document its own sup.
+     * @param {Teriock.Application.DropValidationOptions} options
+     * @returns {boolean}
+     */
+    _validateDropChildCyclic({ document, dropEffect, notify }) {
+      return !this.#isSubMove(document, dropEffect) || !document.constructor.checkIfCyclic(this.document, document)
+        || this._rejectDrop(notify, "TERIOCK.OPERATIONS.cyclic", { sub: document.name, sup: this.document.name });
     }
 
     /**

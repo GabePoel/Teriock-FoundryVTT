@@ -124,7 +124,7 @@ export function performPreLocalization(config) {
  * @param {object} [options]
  * @param {string[]} [options.keys] - List of inner keys that should be localized if this is an object.
  */
-export function localizeObject(obj, { keys } = {}) {
+function localizeObject(obj, { keys } = {}) {
   for (const [k, v] of Object.entries(obj)) {
     const type = typeof v;
     if (type === "string") {

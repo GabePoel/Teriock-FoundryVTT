@@ -129,7 +129,7 @@ export default class TeriockManager {
    */
   async minimizeEnd() {
     if (!this.#minimizedApplications.length) { return; }
-    await Promise.all((this.#minimizedApplications || []).map(s => s?.maximize()));
+    await Promise.all(this.#minimizedApplications.map(s => s?.maximize()));
     this.#minimizedApplications = [];
   }
 
@@ -141,7 +141,7 @@ export default class TeriockManager {
     this.#minimizedApplications = Array.from(foundry.applications.instances.values()).filter(a =>
       a.hasFrame && !a.minimized
     );
-    await Promise.all((this.#minimizedApplications || []).map(s => s?.minimize()));
+    await Promise.all(this.#minimizedApplications.map(s => s?.minimize()));
   }
 
   /**

@@ -100,7 +100,6 @@ export default function TransformationSystemMixin(Base) {
       this.#batchedOperations.push({
         action: "update",
         documentName: "Actor",
-        ids: [this.actor.id],
         pack: this.actor.pack,
         parent: this.actor.parent,
         teriock: { dontDisplayStatChange: true },

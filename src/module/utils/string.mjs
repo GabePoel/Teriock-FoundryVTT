@@ -56,13 +56,10 @@ export function dotJoin(strings) {
  * @param {string} str
  * @param {object} [options]
  * @param {boolean} [options.hash]
- * @param {number} [options.length]
- * @param {string} [options.background]
  * @returns {ID<*>}
  */
 export function toId(str, options = {}) {
-  const { background = "0000000000000000", hash = false, length = 16 } = options;
-  if (hash) {
+  if (options.hash) {
     const FNV_OFFSET_64 = 0xcbf29ce484222325n;
     const FNV_PRIME_64 = 0x100000001b3n;
     const MASK_64 = (1n << 64n) - 1n;
@@ -74,7 +71,7 @@ export function toId(str, options = {}) {
     return val.toString(16).padStart(16, "0");
   }
   const camel = toCamelCase(str);
-  return camel.slice(0, length) + background.slice(camel.length);
+  return camel.slice(0, 16).padEnd(16, "0");
 }
 
 /**

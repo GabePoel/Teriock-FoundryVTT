@@ -63,9 +63,6 @@ export default class TeriockCombatTracker
     game.keybindings.initialize();
   }
 
-  /** @type {Teriock.Command.ThresholdOptions} */
-  #defaultInitiativeExecutionData;
-
   /** @type {UUID<TeriockCombatant|TeriockCombatantGroup>|null} */
   #draggedUuid = null;
 
@@ -104,15 +101,9 @@ export default class TeriockCombatTracker
 
   /**
    * Options for initiative rolls.
-   * @returns {Teriock.Command.ThresholdOptions}
+   * @type {Teriock.Command.ThresholdOptions}
    */
-  get defaultInitiativeExecutionData() {
-    return this.#defaultInitiativeExecutionData ?? {};
-  }
-
-  set defaultInitiativeExecutionData(options) {
-    this.#defaultInitiativeExecutionData = options;
-  }
+  defaultInitiativeExecutionData = {};
 
   /** @inheritDoc */
   get viewed() {

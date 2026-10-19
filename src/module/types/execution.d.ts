@@ -15,7 +15,6 @@ declare global {
       event?: PointerEvent;
       messageMode?: Teriock.Messages.Mode;
       rollData?: object;
-      rollOptions?: object;
       showDialog?: boolean;
       source?:
         | AttributeModel

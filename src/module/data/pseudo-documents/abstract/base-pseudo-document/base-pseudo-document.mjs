@@ -82,12 +82,11 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   /**
    * Create a Pseudo-Document within some parent Document or Pseudo-Document.
    * @param {object} data
-   * @param {TeriockDocument|BasePseudoDocument} parent
    * @param {DatabaseCreateOperation} operation
    * @returns {Promise<BasePseudoDocument>}
    */
-  static async create(data = {}, { parent, ...operation } = {}) {
-    return (await this.createDocuments([data], { parent, ...operation }))?.shift();
+  static async create(data = {}, operation = {}) {
+    return (await this.createDocuments([data], operation))?.shift();
   }
 
   /**

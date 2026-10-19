@@ -230,7 +230,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {object}
    */
   get rollOptions() {
-    return foundry.utils.mergeObject({ flavor: this.flavor }, this._rollOptions);
+    return { flavor: this.flavor };
   }
 
   /**
@@ -400,7 +400,6 @@ export default class BaseExecution extends BaseDataModel {
       ?? this.actor?.defaultToken ?? null;
     this._boosts = options.boosts ?? {};
     this._rollData = options.rollData ?? {};
-    this._rollOptions = options.rollOptions ?? {};
     this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
     this.automations = new ExecutionPseudoCollection("automations", this, [], { documentClass: BaseAutomation });
   }
@@ -612,7 +611,6 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _showInputDialog() {
-    if (!this.showDialog) { return; }
     const result = await ExecutionEditor.prompt(this);
     if (result === null) { return false; }
   }
