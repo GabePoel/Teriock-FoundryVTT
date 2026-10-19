@@ -112,7 +112,7 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
    * @param {BaseRoll} [options.roll]
    * @param {Partial<Teriock.Data.ChatMessageData>} [options.messageData]
    * @param {object} messageOptions
-   * @version 368
+   * @version 369
    */
   async toMessage(results, { messageData = {}, messageOptions = {}, roll }) {
     messageOptions.messageMode ??= game.settings.get("core", "messageMode");

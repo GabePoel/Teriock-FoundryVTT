@@ -57,7 +57,7 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
 
   /**
    * @inheritDoc
-   * @version 368
+   * @version 369
    */
   _getInitiativeFormula() {
     const base = TERIOCK.CONFIG.character.defaults.initiative.base;
@@ -79,7 +79,7 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
 
   /**
    * @inheritDoc
-   * @version 368
+   * @version 369
    */
   getInitiativeRoll(formula) {
     formula ||= this._getInitiativeFormula();
