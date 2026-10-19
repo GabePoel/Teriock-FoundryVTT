@@ -55,18 +55,12 @@ export default class UseDocumentsAutomation
     const selection = this.#selection
       ?? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
     if (!selection) { return []; }
-    const useOptions = {
-      ...this.getUseOptions(),
-      competence: this.getCompetence(options),
-      edge: options.execution?.edge,
-      event: options.execution?.options?.event,
-    };
     const display = {};
     if (selection.document) {
       display.icon = selection.document.system?.metadata?.icon;
       display.label = selection.document.name;
     }
-    return [new UseDocumentsActivation({ ...selection.config, display, options: useOptions })];
+    return [new UseDocumentsActivation({ ...selection.config, display, options: this.getUseOptions(options) })];
   }
 
   /** @inheritDoc */
@@ -76,23 +70,22 @@ export default class UseDocumentsAutomation
 
   /**
    * Get use options.
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {object}
    */
-  getUseOptions() {
-    const options = { competence: this.getCompetence() };
-    if (this.overrideData) { Object.assign(options, this.data); }
-    return options;
+  getUseOptions(scope = {}) {
+    return {
+      ...(this.overrideData ? this.data : {}),
+      competence: this.getCompetence(scope),
+      edge: scope.execution?.edge,
+      event: scope.execution?.options?.event,
+    };
   }
 
   /** @inheritDoc */
   async interactOnExecutionCompletion(execution) {
     if (!this.useInExecution) { return; }
-    const useOptions = {
-      ...this.getUseOptions(),
-      competence: this.getCompetence({ execution }),
-      edge: execution.edge,
-      event: execution.options?.event,
-    };
+    const useOptions = this.getUseOptions({ execution });
     const uuids = this.#selection?.config.globalUuids ?? [];
     const documents = await Promise.all(uuids.map(uuid => fromUuid(uuid)));
     for (const document of documents.filter(Boolean)) {

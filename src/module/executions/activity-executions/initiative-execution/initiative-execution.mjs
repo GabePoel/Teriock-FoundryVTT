@@ -6,19 +6,25 @@ import { DocumentExecution } from "../../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 
 /**
+ * @import { InitiativeModel } from "../../../data/models/modifier-models/_module.mjs";
+ */
+
+/**
  * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
 export default class InitiativeExecution extends mixClasses(DocumentExecution, ThresholdExecutionMixin) {
   /**
-   * The default initiative formula.
-   * @type {Teriock.System.FormulaString}
+   * Get the default initiative formula or one derived from an InitiativeModel.
+   * @param {InitiativeModel} [model]
+   * @returns {Teriock.System.FormulaString}
    */
-  static get DEFAULT_FORMULA() {
+  static getFormula(model) {
+    const defaults = characterConfig.defaults.initiative;
     return FormulaField.sum(
-      characterConfig.defaults.initiative.base,
-      characterConfig.defaults.initiative.competence,
-      characterConfig.defaults.initiative.bonus,
+      defaults.base,
+      model?.competence.formula ?? defaults.competence,
+      model?.bonus ?? defaults.bonus,
     );
   }
 
@@ -91,7 +97,6 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.InitiativeExecutionOptions>} [options]
    */
   _configure(options = {}) {
-    this.roller = options.roller ?? options.source?.turnHolder ?? options.source;
     super._configure(options);
     if (!options.messageMode && this.roller?.hidden) { this._messageMode = "gm"; }
   }
@@ -108,6 +113,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    * @returns {Record<string, any>}
    */
   _initializeSource(data, options = {}) {
+    this.roller = options.roller ?? options.source?.turnHolder ?? options.source;
     foundry.utils.mergeObject(data, {
       bonus: this.roller?.initiativeModel?.bonus ?? TERIOCK.CONFIG.character.defaults.initiative.bonus,
       ...ui.combat.defaultInitiativeExecutionData,

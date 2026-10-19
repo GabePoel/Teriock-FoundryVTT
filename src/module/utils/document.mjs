@@ -144,8 +144,7 @@ export async function fromQualifier(document, qualifier) {
   for (const child of children) {
     const rollData = child.system?.getLocalRollData?.();
     if (rollData === undefined) { continue; }
-    const value = teriock.dice.rolls.BaseRoll.minValue(qualifier, rollData, {});
-    if (value) { matched.push(child); }
+    if (teriock.dice.rolls.BaseRoll.qualify(qualifier, rollData)) { matched.push(child); }
   }
   return matched;
 }

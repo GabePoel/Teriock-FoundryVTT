@@ -278,18 +278,9 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   _applyChangesToDocuments(changes, documents, replacementData) {
     for (const d of documents) {
       const overrides = {};
-      let qualifierDataComputed = false;
-      let qualifierData = {};
+      let qualifierData;
       for (const c of changes) {
-        let shouldApply = c.qualifier === "1";
-        if (!shouldApply) {
-          if (!qualifierDataComputed) {
-            qualifierData = d.system.getLocalRollData();
-            qualifierDataComputed = true;
-          }
-          shouldApply = Boolean(BaseRoll.minValue(c.qualifier, qualifierData));
-        }
-        if (shouldApply) {
+        if (BaseRoll.qualify(c.qualifier, () => (qualifierData ??= d.system.getLocalRollData()))) {
           const result = ActiveEffect.applyChange(d, c, { replacementData });
           if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
         }

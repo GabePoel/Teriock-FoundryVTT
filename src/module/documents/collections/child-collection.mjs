@@ -14,7 +14,7 @@ export default class ChildCollection extends TypeCollection {
    * @inheritDoc
    */
   _toEntry(document) {
-    return [toId(document?.uuid ?? document?._id, { hash: true }) ?? document?._id, document];
+    return [toId(document?.uuid ?? document?._id, { hash: true }), document];
   }
 
   /** @inheritDoc */
