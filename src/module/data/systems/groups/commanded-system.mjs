@@ -20,7 +20,7 @@ export default class CommandedSystem extends BaseGroupSystem {
 
   /** @inheritDoc */
   static defaultName({ commander }) {
-    return commander ? _loc("TERIOCK.COMBAT.Group.name", { name: commander?.name }) : null;
+    return commander ? _loc("TERIOCK.COMBAT.Group.commanded", { name: commander?.name }) : null;
   }
 
   /** @inheritDoc */

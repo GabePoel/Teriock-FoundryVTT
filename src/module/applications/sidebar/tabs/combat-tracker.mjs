@@ -407,7 +407,11 @@ export default class TeriockCombatTracker
           .filterJoin(" "),
         group: {
           color: face.token?.color,
-          count: { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.members), value: members.length },
+          count: {
+            css: makeIconClass(group.typeIcon),
+            tooltip: _loc("TERIOCK.COMBAT.Group.members", { type: group.typeLabel }),
+            value: members.length,
+          },
           defeated,
           hidden: group.hidden,
           id: group.id,

@@ -1,7 +1,18 @@
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
+
+/**
+ * Get the words shared by several names.
+ * @param {string[][]} lists
+ * @returns {string[]}
+ */
+function getSharedWords(lists) {
+  const end = lists[0].findIndex((word, i) => lists.some(l => l[i] !== word));
+  return lists[0].slice(0, end < 0 ? undefined : end);
+}
 
 /**
  * Base CombatantGroup data model.
@@ -14,7 +25,12 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.CombatantGroup"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { documentName: "CombatantGroup" });
+  static metadata = mergeMetadata(super.metadata, {
+    documentName: "CombatantGroup",
+    icon: icons.manifest.document.group,
+    img: thumbnails.manifest.document.group,
+    type: "base",
+  });
 
   /**
    * Gets the default name for a new CombatantGroup of this type.
@@ -26,8 +42,18 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
    * @param {TeriockCombatant[]} [_context.members] - Combatants forming the CombatantGroup
    * @returns {string|null}
    */
-  static defaultName(_context) {
-    return null;
+  static defaultName({ members = [] }) {
+    if (!members.length) { return null; }
+    // Ignore the automatic incrementing numbers that Foundry can be configured to add to tokens
+    const words = members.map(m => m.name.trim().split(/\s+/).filter(w => !/^\(?\d+\)?$/.test(w)));
+    const shared = getSharedWords(words).join(" ")
+      || getSharedWords(words.map(w => w.toReversed())).toReversed().join(" ");
+    return shared
+      ? _loc("TERIOCK.COMBAT.Group.name", {
+        name: shared,
+        type: _loc(CONFIG.CombatantGroup.typeLabels[this.metadata.type]),
+      })
+      : null;
   }
 
   /**
