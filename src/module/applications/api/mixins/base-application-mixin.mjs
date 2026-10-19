@@ -175,6 +175,9 @@ export default function BaseApplicationMixin(Base) {
       this.element.addEventListener("dblclick", this.#onDoubleClick.bind(this));
       this.element.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
       this.element.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
+      this.element.addEventListener("wheel", event => {
+        if (event.target.closest?.("[data-no-scroll]")) { event.preventDefault(); }
+      }, { passive: false });
     }
 
     /**
@@ -234,9 +237,6 @@ export default function BaseApplicationMixin(Base) {
         el.disabled = el.dataset.disable === "true";
         if (el.tagName === "IMG") { el.classList.toggle("disabled", el.disabled); }
       });
-      this.element.querySelectorAll("[data-no-scroll]").forEach(el =>
-        el.addEventListener("wheel", ev => ev.preventDefault())
-      );
       this._syncSpinnerAnimations();
     }
 

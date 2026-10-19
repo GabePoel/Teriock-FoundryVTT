@@ -406,10 +406,7 @@ export default function TransformationSystemMixin(Base) {
 
       if (!this.actor || !this.isTransformation) { return; }
       if (changes.disabled === false) {
-        const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags(), {
-          inplace: false,
-        });
-        foundry.utils.setProperty(changes, "flags", flags);
+        changes.flags = foundry.utils.mergeObject(changes.flags ?? {}, this._buildTransformationFlags());
       }
     }
 

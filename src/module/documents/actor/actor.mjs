@@ -320,7 +320,8 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   async _getStagedCreateOperation() {
     if (!this._staged.itemCreations.size) { return null; }
     const items = await Promise.all(this._staged.itemCreations.map(uuid => fromKey(uuid)));
-    const data = items.map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
+    const data = items.filter(Boolean).map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
+    if (!data.length) { return null; }
     return { action: "create", data, documentName: "Item", pack: this.pack, parent: this };
   }
 
