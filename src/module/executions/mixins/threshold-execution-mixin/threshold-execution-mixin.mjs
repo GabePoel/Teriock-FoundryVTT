@@ -38,6 +38,7 @@ export default function ThresholdExecutionMixin(Base) {
           required: true,
         }),
         edge: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
+        participants: new fields.NumberField({ initial: 1, integer: true, min: 1, nullable: false }),
       });
     }
 
@@ -75,12 +76,21 @@ export default function ThresholdExecutionMixin(Base) {
       const paths = [];
       if (this.requiresCompetence) { paths.push("competence.raw"); }
       if (this.hasBonus) { paths.push("bonus"); }
+      if (this.canShareRoll) { paths.push("participants"); }
       return [...paths, ...super._formPaths];
     }
 
     /** @inheritDoc */
     get _RollClass() {
       return ThresholdRoll;
+    }
+
+    /**
+     * Whether a mob can share this roll.
+     * @returns {boolean}
+     */
+    get canShareRoll() {
+      return this.isRoll && this.combatant?.group?.type === "mob";
     }
 
     /**
@@ -126,12 +136,41 @@ export default function ThresholdExecutionMixin(Base) {
       this.threshold = options.threshold;
     }
 
+    /**
+     * Relevant wiki pages:
+     * - [Mobs](https://wiki.teriock.com/index.php?title=Core:Mobs)
+     *
+     * @inheritDoc
+     */
+    async _evaluateRolls() {
+      if ((await super._evaluateRolls()) === false) { return false; }
+      if (this.participants < 2) { return; }
+      const { NumericTerm, OperatorTerm } = foundry.dice.terms;
+      const rolls = [];
+      for (const roll of this.rolls) {
+        rolls.push(roll);
+        for (let i = 1; i < this.participants; i++) {
+          rolls.push(
+            roll.constructor.fromTerms([
+              ...roll.clone({ evaluated: true }).terms,
+              new OperatorTerm({ operator: "-" }),
+              NumericTerm.fromData({ class: "NumericTerm", evaluated: true, number: 2 * i }),
+            ], foundry.utils.deepClone(roll.options)),
+          );
+        }
+      }
+      this.rolls = rolls;
+    }
+
     /** @inheritDoc */
     async _improveFormula() {
       await super._improveFormula();
       if (FormulaField.exists(this.bonus)) { this.updateSource({
           formula: FormulaField.add(this.formula, this.bonus),
         }); }
+      if (this.participants > 1) {
+        this.updateSource({ formula: FormulaField.add(this.formula, String(this.participants - 1)) });
+      }
     }
 
     /**

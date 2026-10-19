@@ -156,6 +156,11 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /** @inheritDoc */
+  get canShareRoll() {
+    return super.canShareRoll && this.isAttack;
+  }
+
+  /** @inheritDoc */
   get competenceImprovesFormula() {
     return this.isAttack || this.isFeat;
   }

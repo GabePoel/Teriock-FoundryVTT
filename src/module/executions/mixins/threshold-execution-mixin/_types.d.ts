@@ -4,6 +4,7 @@ declare global {
       bonus: Teriock.System.FormulaString;
       comparison: Teriock.Keys.Comparison;
       edge: number;
+      participants: number;
 
       threshold: number | undefined;
     }

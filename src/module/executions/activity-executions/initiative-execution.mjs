@@ -24,6 +24,11 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
   }
 
   /** @inheritDoc */
+  get canShareRoll() {
+    return false;
+  }
+
+  /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
       "core.initiativeRoll": true,
