@@ -356,26 +356,27 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   async rollInitiative(ids, options = {}) {
     // CombatantGroups are rolled for by only one Combatant. Otherwise, there would be dialog spam.
-    const rollers = new Map();
+    const sources = new Map();
     for (const combatant of [ids].flat().map(id => this.combatants.get(id)).filter(Boolean)) {
       const key = combatant.group?.id ?? combatant.id;
-      if (!rollers.has(key)) { rollers.set(key, combatant.group?.system.commander ?? combatant); }
+      if (!sources.has(key)) { sources.set(key, combatant.group ?? combatant); }
     }
-    ids = [...rollers.values()].map(c => c.id);
-    if (ids.length === 1 && !options.noExecution) {
-      const execution = await InitiativeExecution.create({}, { source: this.combatants.get(ids[0]) });
+    let rollers = [...sources.values()].map(s => s.turnHolder ?? s);
+    if (sources.size === 1 && !options.noExecution) {
+      const execution = await InitiativeExecution.create({}, { source: [...sources.values()][0] });
       if (execution?.message?.rolls?.length) {
+        rollers = [execution.roller];
         const total = execution.message.rolls[0]?.total;
         if (typeof total === "number") {
           options.formula = total.toString();
           options.messageOptions = execution.message.toObject();
           foundry.utils.setProperty(options, "messageOptions.flags.teriock.dontCreate", true);
         }
-      } else { ids = []; }
+      } else { rollers = []; }
     }
-    const out = await super.rollInitiative(ids, options);
+    const out = await super.rollInitiative(rollers.map(c => c.id), options);
     await Promise.all(
-      [...rollers.values()].filter(c => c.group && c.isOwner && ids.includes(c.id)).map(c =>
+      rollers.filter(c => c.group && c.isOwner).map(c =>
         c.group.update({ initiative: c._source.initiative }, { asGM: true })
       ),
     );

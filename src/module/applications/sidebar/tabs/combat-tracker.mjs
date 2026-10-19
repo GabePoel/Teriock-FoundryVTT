@@ -271,13 +271,16 @@ export default class TeriockCombatTracker
 
   /** @inheritDoc */
   _onCombatantMouseDown(event, target) {
-    if (!target?.classList.contains("combatant-group-row")) { return super._onCombatantMouseDown(event, target); }
-    if (event.type === "dblclick" || event.target.closest("input, button")) { return; }
+    if (event.type === "dblclick" || event.target.closest("input, button")) {
+      return super._onCombatantMouseDown(event, target);
+    }
     // CombatantGroups select all their members' tokens
-    const group = this.viewed?.groups.get(target.closest("[data-group-id]").dataset.groupId);
+    const combatants = target?.classList.contains("combatant-group-row")
+      ? this.viewed?.groups.get(target.closest("[data-group-id]").dataset.groupId)?.members
+      : [this.viewed?.combatants.get(target?.dataset.combatantId)];
     const controlled = [];
-    for (const token of [...(group?.members ?? [])].map(m => m.token?.object).filter(Boolean)) {
-      if (token.control({ releaseOthers: !controlled.length })) { controlled.push(token); }
+    for (const token of [...(combatants ?? [])].map(c => c?.token?.object).filter(Boolean)) {
+      if (token.control({ releaseOthers: !event.shiftKey && !controlled.length })) { controlled.push(token); }
     }
     if (controlled.length) { this.#panToTokens(controlled); }
   }

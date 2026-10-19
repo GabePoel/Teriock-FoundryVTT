@@ -17,7 +17,13 @@ declare global {
       rollData?: object;
       rollOptions?: object;
       showDialog?: boolean;
-      source?: AttributeModel | TeriockActiveEffect | TeriockItem | TradecraftModel;
+      source?:
+        | AttributeModel
+        | TeriockActiveEffect
+        | TeriockCombatant
+        | TeriockCombatantGroup
+        | TeriockItem
+        | TradecraftModel;
     };
 
     /**
@@ -30,6 +36,8 @@ declare global {
       bonus?: Teriock.System.FormulaString;
       threshold?: number;
     };
+
+    export type InitiativeExecutionOptions = ThresholdExecutionOptions & { roller?: TeriockCombatant };
 
     export type AttackExecutionOptions = ExecutionOptions & ThresholdExecutionOptions & {
       armament?: TeriockItem<"body" | "equipment">;
@@ -78,14 +86,16 @@ declare global {
     };
 
     export type ExecutionDialogDocumentEntry = {
-      document: TeriockActiveEffect | TeriockItem | null | undefined;
+      document: TeriockActiveEffect | TeriockCombatant | TeriockItem | null | undefined;
       editable?: boolean;
       label?: string;
       openable?: boolean;
       selectHint?: string;
       selectTitle?: string;
-      getChoices?: () => (TeriockActiveEffect | TeriockItem)[] | Promise<(TeriockActiveEffect | TeriockItem)[]>;
-      update?: (document: TeriockActiveEffect | TeriockItem | null) => Promise<void> | void;
+      getChoices?: () =>
+        | (TeriockActiveEffect | TeriockCombatant | TeriockItem)[]
+        | Promise<(TeriockActiveEffect | TeriockCombatant | TeriockItem)[]>;
+      update?: (document: TeriockActiveEffect | TeriockCombatant | TeriockItem | null) => Promise<void> | void;
     };
   }
 }

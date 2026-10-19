@@ -2,6 +2,7 @@ import { TeriockCombat, TeriockCombatant, TeriockCombatantGroup as CombatantGrou
 import { BaseGroupSystem } from "../../data/systems/groups/_module.mjs";
 
 declare module "./combatant-group.mjs" {
+  // @ts-expect-error Foundry changes Set and that makes this break I guess
   export default interface TeriockCombatantGroup {
     _id: Readonly<ID<TeriockCombatantGroup>>;
     system: BaseGroupSystem;
