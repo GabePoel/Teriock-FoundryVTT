@@ -1,7 +1,7 @@
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { WikiSystemMixin } from "../../mixins/_module.mjs";
-import BasePageSystem from "../base-page-system/base-page-system.mjs";
+import { icons, thumbnails } from "../../../static/display/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
+import { WikiSystemMixin } from "../mixins/_module.mjs";
+import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
  * Rules text for a weapon fighting style.
