@@ -76,12 +76,6 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
     this.initializeVisionSource();
   }
 
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if (this.inCombat && "disposition" in changed) { game.combat.debounceSetup(); }
-  }
-
   /**
    * @inheritDoc
    * @version 369
@@ -108,5 +102,10 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
       this.turnMarker.destroy();
       this.turnMarker = null;
     }
+  }
+
+  /** @inheritDoc */
+  getDispositionColor() {
+    return this.document.color;
   }
 }

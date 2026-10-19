@@ -21,6 +21,18 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
+   * The color that represents this token's disposition.
+   * @version 369
+   * @returns {Color}
+   */
+  get color() {
+    const colors = CONFIG.Canvas.dispositionColors;
+    const key = Object.keys(CONST.TOKEN_DISPOSITIONS).find(k => CONST.TOKEN_DISPOSITIONS[k] === this.disposition);
+    if (key === "FRIENDLY" && this.actor?.type === "pc" && this.actor?.hasPlayerOwner) { return colors.PARTY; }
+    return colors[key] ?? colors.INACTIVE;
+  }
+
+  /**
    * The image that should be used to represent this token.
    * @returns {string}
    */
@@ -50,6 +62,12 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     if (this.ring.subject.texture) { return this.ring.subject.texture; }
     // Fall back to default.
     return CONST.DEFAULT_TOKEN;
+  }
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if (this.inCombat && "disposition" in changed) { game.combat.debounceSetup(); }
   }
 
   /**
