@@ -141,6 +141,12 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
     this.#prepareGroups();
     super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    // Expand newly created CombatantGroups in the tracker
+    if (collection === "groups") {
+      for (const app of [ui.combat, ui.combat.popout].filter(a => a?.rendered)) {
+        for (const group of documents) { app._toggleCollapsed(`group-${group.id}`, false); }
+      }
+    }
     this._onModifyGroups(collection, prior);
   }
 
@@ -274,32 +280,46 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
-   * Add a Combatant to the target's CombatantGroup.
-   * @param {TeriockCombatant} combatant
+   * Add a Combatant or every member of a CombatantGroup to the target's CombatantGroup. If the target doesn't already
+   * have a CombatantGroup, this will open a prompt to make one.
+   * @param {TeriockCombatant|TeriockCombatantGroup} source
    * @param {TeriockCombatant|TeriockCombatantGroup} target
    * @param {object} [options]
-   * @param {"commanded"|"mob"} [options.type]
+   * @param {string} [options.name]
+   * @param {CombatantGroupType} [options.type]
+   * @param {Partial<ApplicationPosition>} [options.position] - Position of the creation dialog
    * @returns {Promise<void>}
    */
-  async joinGroup(combatant, target, { type = "commanded" } = {}) {
+  async joinGroup(source, target, { name, position, type } = {}) {
     const group = target.documentName === "CombatantGroup" ? target : target.group;
-    if (combatant === target || (group && combatant.group === group)) { return; }
-    const { deletes, groupIds } = this.#leaveChanges([combatant]);
+    const joiners = source.documentName === "CombatantGroup" ? [...source.members] : [source];
+    if (joiners.includes(target) || (group && joiners.every(c => c.group === group))) { return; }
     const create = [];
     let groupId = group?.id;
     if (!groupId) {
+      const members = [target, ...joiners];
+      if (!name || !type) {
+        ({ name, type } =
+          await CombatantGroup.implementation.createDialog({ name, type }, { parent: this }, {
+            getData: true,
+            nameContext: { commander: target, members },
+            position,
+          }) ?? {});
+        if (!type) { return; }
+      }
       groupId = foundry.utils.randomID();
       create.push({
         _id: groupId,
-        img: target.img,
+        ...(members.every(m => m.img === target.img) && { img: target.img }),
         initiative: target.initiative,
-        name: _loc("TERIOCK.COMBAT.Group.name", { name: target.name }),
+        name,
         system: type === "commanded" ? { commanderId: target.id } : {},
         type,
       });
-      groupIds[target.id] = groupId;
     }
-    groupIds[combatant.id] = groupId;
+    const { deletes, groupIds } = this.#leaveChanges(joiners);
+    if (create.length) { groupIds[target.id] = groupId; }
+    for (const joiner of joiners) { groupIds[joiner.id] = groupId; }
     await this.#modifyGroups({ create, deletes, groupIds });
   }
 

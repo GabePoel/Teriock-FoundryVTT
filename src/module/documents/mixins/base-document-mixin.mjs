@@ -87,6 +87,54 @@ export default function BaseDocumentMixin(Base) {
     static async _onWriteOperation(_documents, _operation, _user) {}
 
     /**
+     * @inheritDoc
+     * @param {object} [data]
+     * @param {DatabaseCreateOperation} [createOptions]
+     * @param {object} [options]
+     * @param {boolean} [options.getData=false] - Return the submitted data instead of creating the Document
+     * @param {object} [options.nameContext] - Additional context for the default name
+     * @param {ApplicationRenderOptions} [renderOptions]
+     */
+    static async createDialog(
+      data = {},
+      createOptions = {},
+      { getData = false, nameContext = {}, ...options } = {},
+      renderOptions = {},
+    ) {
+      const config = CONFIG[this.documentName];
+      const defaultName = type =>
+        this.defaultName({ ...nameContext, pack: createOptions.pack, parent: createOptions.parent, type });
+      const typeIcon = type => config.typeIcons?.[type] ?? config.sidebarIcon;
+      return super.createDialog(data, createOptions, {
+        // Replace the default change type listener so that we can have custom default names and also icons
+        render: (_event, dialog) => {
+          const select = dialog.element.querySelector("[name=type]");
+          if (!select) { return; }
+          const onChange = () => {
+            const type = select.value;
+            dialog.element.querySelector("[name=name]").placeholder = defaultName(type);
+            dialog.element.querySelector(".hint").textContent = _loc(config.typeHints?.[type]);
+            dialog.window.icon.className = `window-icon ${typeIcon(type)}`;
+          };
+          onChange();
+          select.addEventListener("change", onChange);
+        },
+        ...(getData && {
+          ok: {
+            callback: (_event, button) => {
+              const submitted = new foundry.applications.ux.FormDataExtended(button.form).object;
+              const result = foundry.utils.mergeObject(data, submitted, { inplace: false });
+              result.name = result.name?.trim() || defaultName(result.type);
+              return result;
+            },
+          },
+        }),
+        ...options,
+        window: { icon: typeIcon(data.type || config.defaultType), ...options.window },
+      }, renderOptions);
+    }
+
+    /**
      * @param {object[]} data
      * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
      * @inheritDoc

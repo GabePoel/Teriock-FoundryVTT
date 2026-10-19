@@ -1,6 +1,5 @@
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
-import { TeriockDialog } from "../../api/_module.mjs";
 import { BaseApplicationMixin, DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 
 const { CombatTracker } = foundry.applications.sidebar.tabs;
@@ -44,7 +43,9 @@ export default class TeriockCombatTracker
     doubles: { toggleGroup: this.#onToggleGroup },
     teriock: {
       doubleClickDelay: 0,
-      dragDrop: { selectors: { drag: ".combatant[data-combatant-id]", drop: ".combat-tracker" } },
+      dragDrop: {
+        selectors: { drag: ".combatant[data-combatant-id], .combatant-group-header", drop: ".combat-tracker" },
+      },
     },
   };
 
@@ -65,14 +66,14 @@ export default class TeriockCombatTracker
   /** @type {Teriock.Command.ThresholdOptions} */
   #defaultInitiativeExecutionData;
 
-  /** @type {ID<TeriockCombatant>|null} */
-  #draggedId = null;
+  /** @type {UUID<TeriockCombatant|TeriockCombatantGroup>|null} */
+  #draggedUuid = null;
 
   /** @type {TeriockToken[]} */
   #highlightedGroup = [];
 
   /**
-   * Mark the tracker entry that a dragged Combatant would join.
+   * Mark the tracker entry that a dragged Combatant or CombatantGroup would join.
    * @param {HTMLElement|null} entry
    */
   #markDropTarget(entry) {
@@ -139,7 +140,7 @@ export default class TeriockCombatTracker
 
   /** @inheritDoc */
   _dropEffect(_event) {
-    return this.#draggedId ? "copy" : "none";
+    return this.#draggedUuid ? "copy" : "none";
   }
 
   /** @inheritDoc */
@@ -284,7 +285,7 @@ export default class TeriockCombatTracker
   /** @inheritDoc */
   async _onDragEnd(event) {
     await super._onDragEnd(event);
-    this.#draggedId = null;
+    this.#draggedUuid = null;
     this.#markDropTarget(null);
   }
 
@@ -298,15 +299,15 @@ export default class TeriockCombatTracker
   async _onDragOver(event) {
     await super._onDragOver(event);
     const entry = event.target.closest(".combat-tracker > *");
-    const dragged = `.combatant[data-combatant-id="${this.#draggedId}"]`;
+    const dragged = `[data-uuid="${this.#draggedUuid}"]`;
     const isOwnEntry = entry?.matches(dragged) || entry?.querySelector(dragged);
-    this.#markDropTarget(this.#draggedId && !isOwnEntry ? entry : null);
+    this.#markDropTarget(this.#draggedUuid && !isOwnEntry ? entry : null);
   }
 
   /** @inheritDoc */
   _onDragStart(event) {
     super._onDragStart(event);
-    this.#draggedId = event.currentTarget.dataset.combatantId;
+    this.#draggedUuid = event.currentTarget.dataset.uuid;
   }
 
   /** @inheritDoc */
@@ -315,31 +316,13 @@ export default class TeriockCombatTracker
     this.#markDropTarget(null);
     const combat = this.viewed;
     const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
-    const combatant = data.type === "Combatant" ? await fromUuid(data.uuid) : null;
-    if (!combat || combatant?.parent !== combat) { return; }
+    const source = ["Combatant", "CombatantGroup"].includes(data.type) ? await fromUuid(data.uuid) : null;
+    if (!combat || source?.parent !== combat) { return; }
     const target = combat.combatants.get(event.target.closest("[data-combatant-id]")?.dataset.combatantId)
       ?? combat.groups.get(event.target.closest("[data-group-id]")?.dataset.groupId);
-    if (!target) { return combat.leaveGroup(combatant); }
-    if (target.documentName === "CombatantGroup" || target.group) { return combat.joinGroup(combatant, target); }
-    if (target === combatant) { return; }
-    const type = await TeriockDialog.wait({
-      buttons: ["commanded", "mob"].map(type => ({
-        action: type,
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document[type]),
-        label: _loc(`TYPES.CombatantGroup.${type}`),
-      })),
-      content: `<p>${
-        _loc("TERIOCK.COMBAT.Group.CREATE.content", {
-          dragged: foundry.utils.escapeHTML(combatant.name),
-          target: foundry.utils.escapeHTML(target.name),
-        })
-      }</p>`,
-      window: {
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.mob, "title"),
-        title: _loc("TERIOCK.COMBAT.Group.CREATE.title"),
-      },
-    });
-    if (type) { await combat.joinGroup(combatant, target, { type }); }
+    if (!target) { return source.documentName === "Combatant" ? combat.leaveGroup(source) : undefined; }
+    const { left, top } = event.target.closest(".combat-tracker > *").getBoundingClientRect();
+    await combat.joinGroup(source, target, { position: { left: left - 330, top, width: 320 } });
   }
 
   /** @inheritDoc */
@@ -369,6 +352,19 @@ export default class TeriockCombatTracker
       initiative = group.initiative + delta;
     }
     return group.update({ initiative }, { asGM: true });
+  }
+
+  /** @inheritDoc */
+  async _prepareCombatContext(context, options) {
+    await super._prepareCombatContext(context, options);
+    // Players can change the turn as long as they own any turn member
+    const combat = this.viewed;
+    if (context.control || !combat?.combatant?.group) { return; }
+    const isPlayerTurn = combat.combatant.turnMembers.some(m => m.players.includes(game.user));
+    const canControl = combat.turn && combat.turn.between(1, combat.turns.length - 2)
+      ? combat.canUserModify(game.user, "update", { turn: 0 })
+      : combat.canUserModify(game.user, "update", { round: 0 });
+    context.control = isPlayerTurn && canControl;
   }
 
   /**
@@ -416,6 +412,7 @@ export default class TeriockCombatTracker
           initiative: group.initiative,
           name: group.name || face.name,
           rollerId,
+          uuid: group.uuid,
         },
         members,
       });

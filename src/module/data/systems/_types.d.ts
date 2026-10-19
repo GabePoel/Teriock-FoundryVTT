@@ -20,7 +20,7 @@ import {
   PropertySystem,
   ResourceSystem,
 } from "./effects/_module.mjs";
-import { BaseGroupSystem } from "./groups/_module.mjs";
+import { CommandedSystem, MobSystem } from "./groups/_module.mjs";
 import {
   ArchetypeSystem,
   BodySystem,
@@ -73,7 +73,8 @@ declare global {
   }
 
   export interface CombatantGroupSystemMap {
-    base: BaseGroupSystem;
+    commanded: CommandedSystem;
+    mob: MobSystem;
   }
 
   export interface ItemSystemMap {

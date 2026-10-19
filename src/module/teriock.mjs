@@ -180,6 +180,8 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Card.documentClass = documents.TeriockCard;
   registerSubtypes(data.systems.cards);
 
+  CONFIG.Cards.documentClass = documents.TeriockCards;
+
   CONFIG.ChatMessage.defaultType = "interactive";
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.ChatMessage.popoutClass = applications.sidebar.apps.TeriockChatPopout;
@@ -193,6 +195,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
   registerSubtypes(data.systems.combatants);
 
+  CONFIG.CombatantGroup.defaultType = "mob";
   CONFIG.CombatantGroup.documentClass = documents.TeriockCombatantGroup;
   registerSubtypes(data.systems.groups);
 

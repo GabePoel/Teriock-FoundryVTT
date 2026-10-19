@@ -2,7 +2,7 @@
   {{#each turns}}
     {{#if group}}
       <li
-        class="combatant-group collapsible {{ css }}"
+        class="combatant-group collapsible collapsed {{ css }}"
         data-collapsible-id="group-{{ group.id }}"
         data-group-id="{{ group.id }}"
       >
@@ -10,6 +10,7 @@
           class="combatant-group-header combatant-group-row {{ css }}"
           data-action="activateCombatant"
           data-double="toggleGroup"
+          data-uuid="{{ group.uuid }}"
         >
           <div class="token-image" style="outline-color:{{ group.color.css }}">
             <img src="{{ group.img }}" alt="{{ group.name }}" loading="lazy" />
