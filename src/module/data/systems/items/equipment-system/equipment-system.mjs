@@ -1,5 +1,5 @@
 import equipmentConfig from "../../../../static/config/equipment-config.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import {
   dotJoin,
   fromIdentifier,
@@ -65,6 +65,7 @@ export default class EquipmentSystem
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["equipment", ...super.metadata.childTypes],
     icon: icons.manifest.document.equipment,
+    img: thumbnails.manifest.document.equipment,
     importDialog: true,
     initialKind: "mundane",
     kinds: _replace(equipmentConfig.kind),

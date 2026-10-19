@@ -28,12 +28,10 @@ export default function CommonDocumentMixin(Base) {
     /**
      * Get the default image for some type of this document.
      * @param {string} type
-     * @returns {string}
+     * @returns {string|null}
      */
     static getDefaultImageForType(type) {
-      if (type && CONFIG[this.documentName].dataModels[type]) {
-        return TERIOCK.DISPLAY.thumbnails.manifest.document[type];
-      }
+      return CONFIG[this.documentName].dataModels[type]?.metadata.img ?? null;
     }
 
     /**

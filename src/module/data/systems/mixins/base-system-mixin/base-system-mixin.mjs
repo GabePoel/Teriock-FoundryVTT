@@ -1,4 +1,4 @@
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { fancifyFields, makeIconClass, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
@@ -40,6 +40,7 @@ export default function BaseSystemMixin(Base) {
       disabledPath: null,
       documentName: "",
       icon: icons.manifest.ui.document,
+      img: thumbnails.common.unknown,
       importDialog: false,
       preserveOnRefresh: [],
       sortPaths: ["name", "_stats.createdTime"],

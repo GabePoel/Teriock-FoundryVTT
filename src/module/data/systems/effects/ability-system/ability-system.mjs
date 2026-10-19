@@ -1,7 +1,7 @@
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
 import costConfig from "../../../../static/config/cost-config.mjs";
 import statConfig from "../../../../static/config/stat-config.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
@@ -75,6 +75,7 @@ export default class AbilitySystem
     childTypes: ["ability", "fluency", "resource"],
     crit: { enabled: true, where: "effectData" },
     icon: icons.manifest.document.ability,
+    img: thumbnails.manifest.document.ability,
     importDialog: true,
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },

@@ -1,4 +1,4 @@
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -47,6 +47,7 @@ export default class PropertySystem
     childTypes: ["property"],
     crit: { enabled: true, where: "chatData" },
     icon: icons.manifest.document.property,
+    img: thumbnails.manifest.document.property,
     importDialog: true,
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },

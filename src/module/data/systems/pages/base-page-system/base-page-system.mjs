@@ -50,12 +50,7 @@ export default class BasePageSystem
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    this.parent.updateSource(
-      foundry.utils.mergeObject(
-        { system: { img: TERIOCK.DISPLAY.thumbnails.manifest.document[this.parent.type] } },
-        data,
-      ),
-    );
+    this.parent.updateSource(foundry.utils.mergeObject({ system: { img: this.metadata.img } }, data));
   }
 
   /** @inheritDoc */

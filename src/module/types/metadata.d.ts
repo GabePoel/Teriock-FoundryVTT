@@ -46,6 +46,7 @@ declare global {
       crit: SystemCritMetadata;
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
+      img: string;
       importDialog: boolean;
       preserveOnRefresh: string[];
       sortPaths: string[];

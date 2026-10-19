@@ -1,4 +1,5 @@
 import classConfig from "../../../../static/config/class-config.mjs";
+import { thumbnails } from "../../../../static/display/_module.mjs";
 import { getName, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { RankSystem } from "../../items/_module.mjs";
@@ -14,7 +15,11 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rank"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: RankSystem.metadata.icon, type: "class" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: RankSystem.metadata.icon,
+    img: thumbnails.manifest.document.class,
+    type: "class",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

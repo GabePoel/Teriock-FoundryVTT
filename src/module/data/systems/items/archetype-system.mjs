@@ -1,4 +1,4 @@
-import { icons } from "../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { ArmorSuppressionSystemMixin, CompetenceDisplaySystemMixin } from "../mixins/_module.mjs";
 import BaseItemSystem from "./base-item-system/base-item-system.mjs";
@@ -18,6 +18,7 @@ export default class ArchetypeSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: icons.manifest.document.archetype,
+    img: thumbnails.manifest.document.archetype,
     initialCompetence: 1,
     type: "archetype",
   });

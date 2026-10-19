@@ -1,4 +1,4 @@
-import { icons } from "../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { WikiSystemMixin } from "../mixins/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
@@ -15,7 +15,11 @@ import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
  */
 export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSystemMixin) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.creature, type: "creature" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.document.creature,
+    img: thumbnails.manifest.document.creature,
+    type: "creature",
+  });
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {

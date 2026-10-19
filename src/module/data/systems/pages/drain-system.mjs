@@ -1,10 +1,14 @@
-import { icons } from "../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import HarmSystem from "./harm-system.mjs";
 
 export default class DrainSystem extends HarmSystem {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.effect.drain, type: "drain" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.effect.drain,
+    img: thumbnails.manifest.document.drain,
+    type: "drain",
+  });
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {

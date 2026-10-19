@@ -1,6 +1,6 @@
 import { ApplicableEffectSystem } from "../_module.mjs";
 import hackConfig from "../../../../static/config/hack-config.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { dotJoin, mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
@@ -10,7 +10,12 @@ export default class HackSystem extends ApplicableEffectSystem {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Hack"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.ui.hack, initialKind: "flaw", type: "hack" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: icons.manifest.ui.hack,
+    img: thumbnails.manifest.document.hack,
+    initialKind: "flaw",
+    type: "hack",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

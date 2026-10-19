@@ -1,5 +1,5 @@
 import attunementConfig from "../../../../static/config/attunement-config.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { dotJoin, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
@@ -19,6 +19,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: icons.manifest.document.attunement,
+    img: thumbnails.manifest.document.attunement,
     initialKind: "other",
     kinds: _replace(attunementConfig.kind),
     tags: { usable: true },

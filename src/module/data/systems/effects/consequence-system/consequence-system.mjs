@@ -1,4 +1,4 @@
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { associationsField } from "../../../fields/tools/builders.mjs";
 import { TransformationSystemMixin } from "../../mixins/_module.mjs";
@@ -17,6 +17,7 @@ export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
     icon: icons.manifest.document.consequence,
+    img: thumbnails.manifest.document.consequence,
     initialKind: "other",
     type: "consequence",
     visibleTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],

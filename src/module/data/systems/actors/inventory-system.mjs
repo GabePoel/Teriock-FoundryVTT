@@ -1,4 +1,4 @@
-import { icons } from "../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
@@ -7,6 +7,7 @@ export default class InventorySystem extends BaseActorSystem {
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["base", "consequence", "equipment"],
     icon: icons.manifest.document.inventory,
+    img: thumbnails.manifest.document.inventory,
     type: "inventory",
     visibleTypes: ["equipment"],
   });

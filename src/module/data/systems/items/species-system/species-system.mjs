@@ -3,7 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import statConfig from "../../../../static/config/stat-config.mjs";
 import { INF } from "../../../../static/const.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf, toKebabCase } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
@@ -53,6 +53,7 @@ export default class SpeciesSystem
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
     icon: icons.manifest.document.species,
+    img: thumbnails.manifest.document.species,
     importDialog: true,
     initialCompetence: 1,
     type: "species",
