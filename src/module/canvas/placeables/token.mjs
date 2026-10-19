@@ -10,6 +10,9 @@ const { TokenTurnMarker } = foundry.canvas.placeables.tokens;
  */
 const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
 
+const MINION_TURN_MARKER_FILTER = new PIXI.ColorMatrixFilter();
+MINION_TURN_MARKER_FILTER.hue(180, false);
+
 /**
  * @extends {Token}
  * @mixes EtherealLightPlaceable
@@ -85,17 +88,16 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
     const { turnMarker } = this.document;
     const markersEnabled = CONFIG.Combat.settings.turnMarker.enabled
       && (turnMarker.mode !== CONST.TOKEN_TURN_MARKER_MODES.DISABLED);
-    // Every member of a group without a commander gets a turn marker
-    const combatant = game.combat?.combatant;
-    const isTurn = combatant?.group && !combatant.group.system.commander
-      ? combatant.turnMembers.some(c => c.tokenId === this.id)
-      : combatant?.tokenId === this.id;
-    const markersActive = markersEnabled && isTurn;
+    // Every Combatant that shares a turn gets a marker.
+    const member = game.combat?.combatant?.turnMembers.find(c => c.tokenId === this.id);
+    const markersActive = markersEnabled && Boolean(member);
     // Activate a Turn Marker
     if (markersActive) {
       if (!this.turnMarker) { this.turnMarker = this.addChildAt(new TokenTurnMarker(this), 0); }
       canvas.tokens.turnMarkers.add(this);
       this.turnMarker.draw();
+      const commander = member.group?.system.commander;
+      this.turnMarker.filters = commander && (member !== commander) ? [MINION_TURN_MARKER_FILTER] : null;
     } // Remove a Turn Marker
     else if (this.turnMarker) {
       canvas.tokens.turnMarkers.delete(this);
