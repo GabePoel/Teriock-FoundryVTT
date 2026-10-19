@@ -1,8 +1,8 @@
-import TeriockCombatant from "../../../documents/combatant/combatant.mjs";
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
-import { mergeMetadata } from "../../../utils/_module.mjs";
-import { LocalDocumentField } from "../../fields/_module.mjs";
-import BaseGroupSystem from "./base-group-system/base-group-system.mjs";
+import TeriockCombatant from "../../../../documents/combatant/combatant.mjs";
+import { icons, thumbnails } from "../../../../static/display/_module.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import { LocalDocumentField } from "../../../fields/_module.mjs";
+import BaseGroupSystem from "../base-group-system/base-group-system.mjs";
 
 /**
  * A bunch of minions that act on their commander's turn.
