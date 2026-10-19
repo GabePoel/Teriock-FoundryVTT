@@ -141,8 +141,10 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
   async #placeTokens() {
     const actors = await this.#prepareActors();
     const tokenDocuments = await Promise.all(actors.map(a => a.getTokenDocument()));
+    const summoner = this.actor?.token ?? this.actor?.prototypeToken;
     const tokenData = tokenDocuments.map(t =>
       foundry.utils.mergeObject(t?.toObject(), {
+        disposition: summoner?.disposition ?? t?.disposition,
         flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
       })
