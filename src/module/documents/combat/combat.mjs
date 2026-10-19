@@ -389,7 +389,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    */
   setupTurns() {
     this.turns ||= [];
-
     // Determine the turn order and the current turn
     // A CombatantGroup's `turnHolder` holds the space in turn order for all its members
     // Other Combatants in a CombatantGroup don't get their own turns
@@ -404,14 +403,11 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
         for (const member of c.turnMembers) { member.turnNumber = i; }
       });
     }
-
     // Update state tracking
     const c = turns[this.turn];
     this.current = this._getCurrentState(c);
-
     // One-time initialization of the previous state
     if (!this.previous) { this.previous = { ...this.current }; }
-
     // Return the array of prepared turns
     return this.turns = turns;
   }

@@ -5,13 +5,13 @@ const { GamePause } = foundry.applications.ui;
 /** @inheritDoc */
 export default class TeriockGamePause extends GamePause {
   /** @type {string[]} */
-  static HOLD_IMAGES = Object.values(thumbnails.manifest.hold);
+  static HOLD_THUMBNAILS = Object.values(thumbnails.manifest.hold);
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const images = this.constructor.HOLD_IMAGES;
+    const thumbnails = this.constructor.HOLD_THUMBNAILS;
     return Object.assign(await super._prepareContext(options), {
-      icon: images[Math.floor(Math.random() * images.length)],
+      icon: thumbnails[Math.floor(Math.random() * thumbnails.length)],
     });
   }
 

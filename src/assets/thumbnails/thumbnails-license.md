@@ -2,14 +2,14 @@ The webp thumbnails in this directory and its subdirectories are licensed from [
 [Wenrexa](https://www.wenrexa.com/),
 [Poneti](https://poneti.artstation.com/), and Rexard.
 
-The thumbnails in [`./document`]() and [`./hold`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).
+The thumbnails in [`./document`](./document) and [`./hold`](./hold) are from [game-icons.net](https://game-icons.net/) ([License](https://creativecommons.org/licenses/by/3.0/)).
 Links to the original pages with the authors can be found below.
 
 - [`./document/ability.svg`](https://game-icons.net/1x1/delapouite/sparkles.html)
 - [`./document/archetype.svg`](https://game-icons.net/1x1/delapouite/star-altar.html)
 - [`./document/attunement.svg`](https://game-icons.net/1x1/lorc/high-five.html)
 - [`./document/body.svg`](https://game-icons.net/1x1/lorc/ribcage.html)
-- [`./document/chest.svg`](https://game-icons.net/1x1/delapouite/chest.html)
+- [`./document/character.svg`](https://game-icons.net/1x1/lorc/cowled.html) (modified)
 - [`./document/class.svg`](https://game-icons.net/1x1/delapouite/skills.html)
 - [`./document/condition.svg`](https://game-icons.net/1x1/lorc/fleshy-mass.html)
 - [`./document/consequence.svg`](https://game-icons.net/1x1/lorc/ball-glow.html)
@@ -35,10 +35,22 @@ Links to the original pages with the authors can be found below.
 - [`./document/tradecraft.svg`](https://game-icons.net/1x1/delapouite/swiss-army-knife.html)
 - [`./document/uncertainty.svg`](https://game-icons.net/1x1/lorc/uncertainty.html)
 - [`./hold/anchor.svg`](https://game-icons.net/1x1/lorc/anchor.html)
+- [`./hold/broom.svg`](https://game-icons.net/1x1/delapouite/broom.html)
+- [`./hold/centaur.svg`](https://game-icons.net/1x1/delapouite/centaur.html)
 - [`./hold/compass.svg`](https://game-icons.net/1x1/lorc/compass.html)
 - [`./hold/crab.svg`](https://game-icons.net/1x1/lorc/crab.html)
+- [`./hold/crab-claw.svg`](https://game-icons.net/1x1/lorc/crab-claw.html)
 - [`./hold/crown-coin.svg`](https://game-icons.net/1x1/lorc/crown-coin.html)
+- [`./hold/deathcab.svg`](https://game-icons.net/1x1/lorc/deathcab.html)
+- [`./hold/desert-skull.svg`](https://game-icons.net/1x1/lorc/desert-skull.html)
+- [`./hold/locked-chest.svg`](https://game-icons.net/1x1/lorc/locked-chest.html)
+- [`./hold/oyster-pearl.svg`](https://game-icons.net/1x1/delapouite/oyster-pearl.html)
+- [`./hold/pirate-flag.svg`](https://game-icons.net/1x1/delapouite/pirate-flag.html)
+- [`./hold/pirate-hat.svg`](https://game-icons.net/1x1/delapouite/pirate-hat.html)
+- [`./hold/sand-snake.svg`](https://game-icons.net/1x1/delapouite/sand-snake.html)
+- [`./hold/scales.svg`](https://game-icons.net/1x1/lorc/scales.html)
 - [`./hold/ship-wheel.svg`](https://game-icons.net/1x1/delapouite/ship-wheel.html)
 - [`./hold/shooner-sailboat.svg`](https://game-icons.net/1x1/pierre-leducq/shooner-sailboat.html)
 - [`./hold/spider-alt.svg`](https://game-icons.net/1x1/carl-olsen/spider-alt.html)
 - [`./hold/treasure-map.svg`](https://game-icons.net/1x1/lorc/treasure-map.html)
+- [`./hold/wyvern.svg`](https://game-icons.net/1x1/lorc/wyvern.html)
