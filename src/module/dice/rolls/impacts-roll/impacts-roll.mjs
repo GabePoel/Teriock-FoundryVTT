@@ -1,6 +1,5 @@
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
-import impactConfig from "../../../static/config/impact-config.mjs";
 import { makeIcon } from "../../../utils/_module.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
@@ -31,7 +30,7 @@ export default class ImpactsRoll extends BaseRoll {
     if (!this.options.autoFlavor) { return; }
     if (!this.impacts.length) { delete this.options.flavor; }
     else {
-      const impactLabels = this.impacts.map(i => impactConfig[i]?.label);
+      const impactLabels = this.impacts.map(i => TERIOCK.CONFIG.impact[i]?.label);
       this.options.flavor = _loc("TERIOCK.ROLLS.Base.name", { value: listFormat(impactLabels, { style: "short" }) });
     }
   }
@@ -77,7 +76,7 @@ export default class ImpactsRoll extends BaseRoll {
   /** @inheritDoc */
   _getTotalContextOptions(_config = {}) {
     return [
-      ...Object.entries(impactConfig).filter(([_k, v]) => !v?.hidden).map(([k, v]) => {
+      ...Object.entries(TERIOCK.CONFIG.impact).filter(([_k, v]) => !v?.hidden).map(([k, v]) => {
         return {
           icon: makeIcon(v.icon, "contextMenu"),
           label: v.take,

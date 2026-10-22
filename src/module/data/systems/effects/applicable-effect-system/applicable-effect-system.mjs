@@ -31,15 +31,11 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    automationTags: { passive: true, triggered: true },
     childTypes: ["ability", "fluency", "property", "resource"],
     tags: { usable: true },
     visibleTypes: ["ability", "fluency", "property", "resource"],
   });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [...super._automationTypes, ...this._activationAutomationTypes, ...this._passiveAutomationTypes];
-  }
 
   /** @inheritDoc */
   static get Execution() {

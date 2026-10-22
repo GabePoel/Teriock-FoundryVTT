@@ -1,4 +1,3 @@
-import affinityConfig from "../../../../static/config/affinity-config.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import BaseAffinity from "./base-affinity/base-affinity.mjs";
 import CompetentAffinity from "./competent-affinity.mjs";
@@ -22,8 +21,8 @@ function getRootAffinity(config) {
  */
 export default function AffinityFactory(type) {
   const name = type.capitalize();
-  const config = affinityConfig.types[type];
-  class Affinity extends getRootAffinity(affinityConfig.types[type]) {
+  const config = TERIOCK.CONFIG.affinity.types[type];
+  class Affinity extends getRootAffinity(TERIOCK.CONFIG.affinity.types[type]) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, `TERIOCK.AFFINITIES.${name}`];
 

@@ -1,4 +1,3 @@
-import { icons } from "../../static/display/_module.mjs";
 import { fromIdentifierLocal, fromQualifier, makeIconClass, resolveDocuments } from "../../utils/_module.mjs";
 import ResolvableDialog from "../api/resolvable-dialog.mjs";
 
@@ -40,7 +39,10 @@ export default class DocumentSelector extends ResolvableDialog {
     actions: { ok: this._onGetSelected },
     classes: ["dynamic-select"],
     position: { width: 450 },
-    window: { icon: makeIconClass(icons.manifest.ui.select, "title"), title: "TERIOCK.DIALOGS.Select.Document.title" },
+    window: {
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.select, "title"),
+      title: "TERIOCK.DIALOGS.Select.Document.title",
+    },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */

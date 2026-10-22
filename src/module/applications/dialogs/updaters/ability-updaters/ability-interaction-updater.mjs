@@ -1,4 +1,3 @@
-import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -12,7 +11,9 @@ import BaseUpdater from "../base-updater.mjs";
  */
 export default class AbilityInteractionUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ability.interaction, "title") } };
+  static DEFAULT_OPTIONS = {
+    window: { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ability.interaction, "title") },
+  };
 
   /** @inheritDoc */
   get _dataPaths() {

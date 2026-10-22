@@ -1,4 +1,3 @@
-import statConfig from "../../../../static/config/stat-config.mjs";
 import { consolidateWriteOperations, getSystemClass, makeIcon } from "../../../../utils/_module.mjs";
 import { migrateRename, migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
@@ -19,7 +18,7 @@ const { fields } = foundry.data;
  * @property {ID<TeriockItem>[]} disabledStatDiceItems
  */
 
-const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
+const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].pool?.enabled);
 
 /**
  * Actor flag key storing item ids whose stat dice were disabled for a pool stat.
@@ -87,7 +86,7 @@ export default function TransformationSystemMixin(Base) {
     get #resetUpdateData() {
       const updateData = {};
       for (const r of this.transformation.resets) {
-        Object.assign(updateData, statConfig[r].transformationReset.update);
+        Object.assign(updateData, TERIOCK.CONFIG.stat[r].transformationReset.update);
       }
       return updateData;
     }
@@ -345,7 +344,7 @@ export default function TransformationSystemMixin(Base) {
       }
       const preTransform = {};
       for (const r of this.transformation.resets) {
-        const update = statConfig[r].transformationReset.update;
+        const update = TERIOCK.CONFIG.stat[r].transformationReset.update;
         for (const k of Object.keys(update)) { preTransform[k] = foundry.utils.getProperty(this.actor, k); }
       }
       return {

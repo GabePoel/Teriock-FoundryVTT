@@ -1,4 +1,3 @@
-import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -25,7 +24,7 @@ export default class ChoiceSelector extends ResolvableDialog {
     tag: "form",
     window: {
       contentClasses: ["standard-form"],
-      icon: makeIconClass(icons.manifest.ui.select, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.select, "title"),
       resizable: false,
     },
   };
@@ -64,7 +63,7 @@ export default class ChoiceSelector extends ResolvableDialog {
     const app = new this({
       choices,
       hint: _loc("TERIOCK.DIALOGS.Select.defaults.hint"),
-      icon: icons.manifest.ui.select,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.select,
       label: _loc("CONTROLS.CommonSelect"),
       other: false,
       title: _loc("CONTROLS.CommonSelect"),
@@ -102,14 +101,14 @@ export default class ChoiceSelector extends ResolvableDialog {
       const buttons = [{
         action: "confirm",
         default: true,
-        icon: makeIconClass(icons.manifest.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }];
       if (this.other) {
         buttons.push({
           action: "other",
-          icon: makeIconClass(icons.manifest.ui.custom, "button"),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.custom, "button"),
           label: _loc("TERIOCK.COMMON.Other"),
         });
       }

@@ -1,4 +1,3 @@
-import impactConfig from "../../../static/config/impact-config.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseStatManager from "./base-stat-manager.mjs";
 
@@ -12,7 +11,7 @@ const { fields } = foundry.data;
 export default class HealManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(impactConfig.healing.icon, "title"), title: "TERIOCK.DIALOGS.Heal.title" },
+    window: { icon: makeIconClass(TERIOCK.CONFIG.impact.healing.icon, "title"), title: "TERIOCK.DIALOGS.Heal.title" },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */

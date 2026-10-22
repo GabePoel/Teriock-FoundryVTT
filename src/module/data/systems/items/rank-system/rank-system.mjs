@@ -1,6 +1,4 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
-import classConfig from "../../../../static/config/class-config.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { getName, mergeMetadata, mixClasses, resolveDocuments, safeInf } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
@@ -40,11 +38,11 @@ export default class RankSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.rank,
-    img: thumbnails.manifest.document.rank,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.rank,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.rank,
     initialCompetence: 1,
     initialKind: "learned",
-    kinds: _replace(classConfig.kind),
+    kinds: _replace(TERIOCK.CONFIG.class.kind),
     sortPaths: ["system.innate", "system.archetype", "system.class", "system.number", "name", "_stats.createdTime"],
     type: "rank",
   });
@@ -55,7 +53,7 @@ export default class RankSystem
       archetype: archetypeField({ blank: false, initial: "everyman", required: true }),
       class: classField({ blank: false, initial: "journeyman", required: true }),
       description: new fields.HTMLField(),
-      maxAv: new InfiniteNumberField({ initial: classConfig.defaults.maxAv, integer: true }),
+      maxAv: new InfiniteNumberField({ initial: TERIOCK.CONFIG.class.defaults.maxAv, integer: true }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });
   }

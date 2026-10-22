@@ -1,11 +1,5 @@
 import { FormulaField, IdentifierField } from "../_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
-import attributeConfig from "../../../static/config/attribute-config.mjs";
-import classConfig from "../../../static/config/class-config.mjs";
-import competenceConfig from "../../../static/config/competence-config.mjs";
-import dieConfig from "../../../static/config/death-bag-config.mjs";
-import tradecraftConfig from "../../../static/config/tradecraft-config.mjs";
-import { thumbnails } from "../../../static/display/_module.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../utils/_module.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
 
@@ -36,10 +30,13 @@ const {
  */
 function getTradecraftChoices() {
   const RAW_TRADECRAFT_CHOICES = {};
-  for (const [k, v] of Object.entries(tradecraftConfig.tradecrafts)) {
+  for (const [k, v] of Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts)) {
     const fieldKey = v.field;
     if (!RAW_TRADECRAFT_CHOICES[fieldKey]) {
-      RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: _sloc(tradecraftConfig.fields[fieldKey].label) };
+      RAW_TRADECRAFT_CHOICES[fieldKey] = {
+        choices: {},
+        label: _sloc(TERIOCK.CONFIG.tradecraft.fields[fieldKey].label),
+      };
     }
     RAW_TRADECRAFT_CHOICES[fieldKey].choices[k] = _sloc(v.label);
   }
@@ -52,10 +49,13 @@ function getTradecraftChoices() {
  */
 function getClassChoices() {
   const RAW_CLASS_CHOICES = {};
-  for (const [k, v] of Object.entries(classConfig.classes)) {
+  for (const [k, v] of Object.entries(TERIOCK.CONFIG.class.classes)) {
     const archetypeKey = v.archetype;
     if (!RAW_CLASS_CHOICES[archetypeKey]) {
-      RAW_CLASS_CHOICES[archetypeKey] = { choices: {}, label: _sloc(classConfig.archetypes[archetypeKey].label) };
+      RAW_CLASS_CHOICES[archetypeKey] = {
+        choices: {},
+        label: _sloc(TERIOCK.CONFIG.class.archetypes[archetypeKey].label),
+      };
     }
     RAW_CLASS_CHOICES[archetypeKey].choices[k] = _sloc(v.label);
   }
@@ -126,7 +126,7 @@ export function associationsField(options = {}) {
           badge: new StringField(),
           color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
           documentUuid: new DocumentUUIDField(),
-          img: new FilePathField({ categories: ["IMAGE"], initial: thumbnails.common.unknown }),
+          img: new FilePathField({ categories: ["IMAGE"], initial: TERIOCK.DISPLAY.thumbnails.common.unknown }),
           name: new StringField(),
         }),
         { initial: [], required: false },
@@ -196,7 +196,7 @@ export function defaultJSONField(options = {}) {
  */
 export function competenceField(options = {}) {
   return new NumberField({
-    choices: objectMap(competenceConfig.levels, l => l.label, { localize: true, sort: false }),
+    choices: objectMap(TERIOCK.CONFIG.competence.levels, l => l.label, { localize: true, sort: false }),
     hint: _sloc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: _sloc("TERIOCK.COMMON.Competence"),
@@ -227,7 +227,7 @@ export function attributeField(options = { nullable: true, unp: false }) {
   return new StringField({
     ...fieldOptions,
     blank: allowBlank,
-    choices: objectMap(attributeConfig, (v) => v.label, {
+    choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, {
       localize: true,
       none: allowBlank,
       filter: (v) => unp || !v?.notImprovable,
@@ -318,7 +318,9 @@ export function deathBagSchema(options = {}) {
     }),
     stones: new SchemaField(
       Object.fromEntries(
-        Object.entries(dieConfig.stones).map(([color, c]) => [color, deathBagStoneField(color, c.number)]),
+        Object.entries(TERIOCK.CONFIG.deathBag.stones).map((
+          [color, c],
+        ) => [color, deathBagStoneField(color, c.number)]),
       ),
     ),
   };
@@ -420,8 +422,8 @@ export function identifierSetField(table, options = {}) {
  */
 export function fieldField(options = {}) {
   return new IdentifierField({
-    choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
-    initial: Object.keys(tradecraftConfig.fields)[0],
+    choices: objectMap(TERIOCK.CONFIG.tradecraft.fields, f => f.label, { localize: true }),
+    initial: Object.keys(TERIOCK.CONFIG.tradecraft.fields)[0],
     label: _sloc("TERIOCK.COMMON.Field"),
     nullable: false,
     type: "field",
@@ -437,7 +439,7 @@ export function fieldField(options = {}) {
 export function classField(options = {}) {
   return new IdentifierField({
     choices: getClassChoices(),
-    initial: Object.keys(classConfig.classes)[0],
+    initial: Object.keys(TERIOCK.CONFIG.class.classes)[0],
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
     nullable: false,
     type: "class",
@@ -470,8 +472,8 @@ export function equipmentTypeField(options = {}) {
  */
 export function archetypeField(options = {}) {
   return new IdentifierField({
-    choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
-    initial: Object.keys(classConfig.archetypes)[0],
+    choices: objectMap(TERIOCK.CONFIG.class.archetypes, a => a.label, { localize: true }),
+    initial: Object.keys(TERIOCK.CONFIG.class.archetypes)[0],
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
     nullable: false,
     type: "archetype",

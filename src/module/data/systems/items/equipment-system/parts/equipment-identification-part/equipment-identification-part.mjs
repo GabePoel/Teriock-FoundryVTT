@@ -1,7 +1,6 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../../../../applications/ux/_module.mjs";
-import equipmentConfig from "../../../../../../static/config/equipment-config.mjs";
 import {
   buildWriteOperation,
   fromIdentifier,
@@ -41,7 +40,7 @@ export default function EquipmentIdentificationPart(Base) {
           identified: new fields.BooleanField({ initial: true }),
           kind: new fields.StringField({
             blank: false,
-            choices: objectMap(equipmentConfig.kind, e => e.label),
+            choices: objectMap(TERIOCK.CONFIG.equipment.kind, e => e.label),
             initial: "mundane",
             nullable: false,
             required: true,

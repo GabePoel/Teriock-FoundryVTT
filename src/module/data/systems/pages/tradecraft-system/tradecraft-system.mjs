@@ -1,5 +1,3 @@
-import tradecraftConfig from "../../../../static/config/tradecraft-config.mjs";
-import { thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { FluencySystem } from "../../effects/_module.mjs";
@@ -17,7 +15,7 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: FluencySystem.metadata.icon,
-    img: thumbnails.manifest.document.tradecraft,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.tradecraft,
     type: "tradecraft",
   });
 
@@ -25,7 +23,7 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       field: new IdentifierField({
-        choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
+        choices: objectMap(TERIOCK.CONFIG.tradecraft.fields, f => f.label, { localize: true }),
         initial: "artisan",
         nullable: false,
         required: true,

@@ -1,4 +1,3 @@
-import effectConfig from "../../../../static/config/effect-config.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
@@ -22,7 +21,7 @@ export default function AdjustableSystemMixin(Base) {
 
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
-      kinds: _replace(effectConfig.kind),
+      kinds: _replace(TERIOCK.CONFIG.effect.kind),
       preserveOnRefresh: ["system.badge", ...this._adjustableTextFields, ...super.metadata.preserveOnRefresh],
     });
 

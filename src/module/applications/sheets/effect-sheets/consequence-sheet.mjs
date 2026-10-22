@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentSelector } from "../../dialogs/_module.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
@@ -50,7 +49,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
       tabs: [...super.TABS.sheet.tabs, {
-        icon: makeIconClass(icons.manifest.effect.transform, "solid"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.effect.transform, "solid"),
         id: "transformation",
       }],
     },

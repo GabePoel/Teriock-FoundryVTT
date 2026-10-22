@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass, mixClasses, omit } from "../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import { TeriockDragDrop } from "../../ux/_module.mjs";
@@ -70,10 +69,10 @@ export default class ApplicableEffectSheet
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
-      tabs: [...super.TABS.sheet.tabs, { icon: makeIconClass(icons.manifest.ui.document, "solid"), id: "children" }, {
-        icon: makeIconClass(icons.manifest.pseudoDocument.mechanic, "solid"),
-        id: "mechanics",
-      }],
+      tabs: [...super.TABS.sheet.tabs, {
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.document, "solid"),
+        id: "children",
+      }, { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.pseudoDocument.mechanic, "solid"), id: "mechanics" }],
     },
   };
 

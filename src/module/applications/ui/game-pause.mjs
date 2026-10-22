@@ -1,11 +1,9 @@
-import { thumbnails } from "../../static/display/_module.mjs";
-
 const { GamePause } = foundry.applications.ui;
 
 /** @inheritDoc */
 export default class TeriockGamePause extends GamePause {
   /** @type {string[]} */
-  static HOLD_THUMBNAILS = Object.values(thumbnails.manifest.hold);
+  static HOLD_THUMBNAILS = Object.values(TERIOCK.DISPLAY.thumbnails.manifest.hold);
 
   /** @inheritDoc */
   async _prepareContext(options) {

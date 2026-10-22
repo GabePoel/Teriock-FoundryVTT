@@ -1,5 +1,3 @@
-import classConfig from "../../../../static/config/class-config.mjs";
-import { thumbnails } from "../../../../static/display/_module.mjs";
 import { getName, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { RankSystem } from "../../items/_module.mjs";
@@ -17,7 +15,7 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: RankSystem.metadata.icon,
-    img: thumbnails.manifest.document.class,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.class,
     type: "class",
   });
 
@@ -25,7 +23,7 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       archetype: new IdentifierField({
-        choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
+        choices: objectMap(TERIOCK.CONFIG.class.archetypes, a => a.label, { localize: true }),
         initial: "everyman",
         nullable: false,
         required: true,

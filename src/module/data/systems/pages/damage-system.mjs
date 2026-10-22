@@ -1,12 +1,11 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import HarmSystem from "./harm-system.mjs";
 
 export default class DamageSystem extends HarmSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.effect.damage,
-    img: thumbnails.manifest.document.damage,
+    icon: TERIOCK.DISPLAY.icons.manifest.effect.damage,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.damage,
     type: "damage",
   });
 

@@ -1,4 +1,3 @@
-import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
@@ -11,7 +10,10 @@ const { fields } = foundry.data;
  */
 export default class UseDocumentsActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.ui.document, type: "useDocuments" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
+    type: "useDocuments",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

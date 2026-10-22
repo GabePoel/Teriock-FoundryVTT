@@ -1,5 +1,4 @@
 import { validateTypedIdentifier } from "../../../data/fields/tools/validators.mjs";
-import { icons } from "../../../static/display/_module.mjs";
 
 /**
  * Make a status command function.
@@ -30,7 +29,7 @@ const toggle = fnFactory((a, s) =>
  */
 export const applyStatusCommand = {
   args: ["status"],
-  icon: icons.manifest.ui.apply,
+  icon: TERIOCK.DISPLAY.icons.manifest.ui.apply,
   id: "apply",
   primary: apply,
   secondary: remove,
@@ -45,7 +44,7 @@ export const applyStatusCommand = {
  */
 export const removeStatusCommand = {
   args: ["status"],
-  icon: icons.manifest.ui.undo,
+  icon: TERIOCK.DISPLAY.icons.manifest.ui.undo,
   id: "remove",
   primary: remove,
   secondary: apply,
@@ -60,7 +59,7 @@ export const removeStatusCommand = {
  */
 export const toggleStatusCommand = {
   args: ["status"],
-  icon: icons.manifest.ui.toggle,
+  icon: TERIOCK.DISPLAY.icons.manifest.ui.toggle,
   id: "toggle",
   primary: toggle,
   label: options => options?.status

@@ -8,11 +8,6 @@ export default class BaseActivation extends BasePseudoDocument {
   static metadata = mergeMetadata(super.metadata, { documentName: "Activation", typed: true });
 
   /** @inheritDoc */
-  static get TYPE_MODELS() {
-    return this.getTypeModels(teriock.data.pseudoDocuments.activations);
-  }
-
-  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       display: new fields.SchemaField({

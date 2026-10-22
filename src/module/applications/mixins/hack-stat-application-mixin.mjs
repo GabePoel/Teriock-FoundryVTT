@@ -1,11 +1,8 @@
-import hackConfig from "../../static/config/hack-config.mjs";
-import statConfig from "../../static/config/stat-config.mjs";
-
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  */
 
-const BAR_STATS = Object.keys(statConfig).filter(k => statConfig[k].bar);
+const BAR_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].bar);
 
 /**
  * Mixin allowing hacks, impacts, and spending dice stats.
@@ -90,7 +87,7 @@ export default function HackStatApplicationMixin(Base) {
      * @param {object} system
      */
     _prepareBar(key, system) {
-      const config = statConfig[key];
+      const config = TERIOCK.CONFIG.stat[key];
       const data = system[key] ?? { max: 0, morganti: 0, temp: 0, value: 0 };
       const morganti = data.morganti ?? 0;
       let text = `${data.value} / ${data.max + morganti}`;
@@ -123,7 +120,7 @@ export default function HackStatApplicationMixin(Base) {
         hackFills: Object.fromEntries(
           Object.entries(system.hacks ?? {}).map(([part, bar]) => [part, this._prepareHackFill(bar)]),
         ),
-        hackParts: Object.entries(hackConfig).map(([part, options]) => ({
+        hackParts: Object.entries(TERIOCK.CONFIG.hack).map(([part, options]) => ({
           fill: this._prepareHackFill(system.hacks?.[part]),
           icon: options.icon,
           label: options.label,
@@ -228,8 +225,8 @@ export default function HackStatApplicationMixin(Base) {
 async function onTakeHack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value < hackConfig[part].max) { await actor.system.takeHack(part); }
-  else { await actor.system.takeUnhack(part, hackConfig[part].max); }
+  if (actor.system.hacks[part].value < TERIOCK.CONFIG.hack[part].max) { await actor.system.takeHack(part); }
+  else { await actor.system.takeUnhack(part, TERIOCK.CONFIG.hack[part].max); }
 }
 
 /**
@@ -243,5 +240,5 @@ async function onTakeUnhack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
   if (actor.system.hacks[part].value > 0) { await actor.system.takeUnhack(part); }
-  else { await actor.system.takeHack(part, hackConfig[part].max); }
+  else { await actor.system.takeHack(part, TERIOCK.CONFIG.hack[part].max); }
 }

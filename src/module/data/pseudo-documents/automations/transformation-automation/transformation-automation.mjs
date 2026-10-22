@@ -13,7 +13,7 @@ export default class TransformationAutomation
   extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, OverrideCompetencePseudoDocumentMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "transformation" });
+  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "transformation" });
 
   /** @inheritDoc */
   static defineSchema() {

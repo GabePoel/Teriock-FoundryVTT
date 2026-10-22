@@ -1,6 +1,4 @@
 import { ApplicableEffectSystem } from "../_module.mjs";
-import hackConfig from "../../../../static/config/hack-config.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { dotJoin, mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
@@ -11,8 +9,8 @@ export default class HackSystem extends ApplicableEffectSystem {
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.ui.hack,
-    img: thumbnails.manifest.document.hack,
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.hack,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.hack,
     initialKind: "flaw",
     type: "hack",
   });
@@ -23,7 +21,7 @@ export default class HackSystem extends ApplicableEffectSystem {
       escalation: new fields.NumberField({ initial: 1, integer: true, min: 0, required: true }),
       part: new fields.StringField({
         blank: true,
-        choices: objectMap(hackConfig, c => c.part, { localize: true, none: true }),
+        choices: objectMap(TERIOCK.CONFIG.hack, c => c.part, { localize: true, none: true }),
         initial: null,
         nullable: true,
       }),
@@ -46,14 +44,14 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   get _statusBar() {
     const bar = super._statusBar;
-    bar.wrappers.push(hackConfig[this.part]?.part || "");
+    bar.wrappers.push(TERIOCK.CONFIG.hack[this.part]?.part || "");
     return bar;
   }
 
   /** @inheritDoc */
   get embedParts() {
     const textParts = [];
-    if (this.part) { textParts.push(hackConfig[this.part]?.part); }
+    if (this.part) { textParts.push(TERIOCK.CONFIG.hack[this.part]?.part); }
     if (this.permanent) { textParts.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label")); }
     return Object.assign(super.embedParts, { text: dotJoin(textParts) });
   }

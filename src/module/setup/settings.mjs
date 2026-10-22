@@ -4,11 +4,6 @@ import { InfiniteNumberField, TypedIdentifierSetField } from "../data/fields/_mo
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import * as documents from "../documents/_module.mjs";
-import attributeConfig from "../static/config/attribute-config.mjs";
-import dieConfig from "../static/config/death-bag-config.mjs";
-import documentBehaviorConfig from "../static/config/document-behavior-config.mjs";
-import tipConfig from "../static/config/tip-config.mjs";
-import { icons } from "../static/display/_module.mjs";
 import { objectMap } from "../utils/_module.mjs";
 
 const { fields } = foundry.data;
@@ -21,25 +16,25 @@ export const menus = {
   alternateRules: {
     groups: {
       armor: {
-        icon: icons.manifest.target.armor,
+        icon: TERIOCK.DISPLAY.icons.manifest.target.armor,
         settings: {
           armorSuppressesRanks: { default: false, scope: "world", type: Boolean },
           armorWeakensRanks: { default: false, scope: "world", type: Boolean },
         },
       },
       cone: {
-        icon: icons.manifest.delivery.cone,
+        icon: TERIOCK.DISPLAY.icons.manifest.delivery.cone,
         settings: {
           defaultConeAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
           defaultDragonBreathAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
         },
       },
       keyword: {
-        icon: icons.manifest.document.keyword,
+        icon: TERIOCK.DISPLAY.icons.manifest.document.keyword,
         settings: { randomBoostedTypes: { default: false, scope: "world", type: Boolean } },
       },
     },
-    icon: icons.manifest.settings.alternateRules,
+    icon: TERIOCK.DISPLAY.icons.manifest.settings.alternateRules,
   },
   compendiumPriority: {
     application: CompendiumPriorityMenu,
@@ -69,7 +64,7 @@ export const menus = {
         template: "teriock/menus/compendium-priority-menu",
       },
     },
-    icon: icons.manifest.ui.compendium,
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.compendium,
   },
   dialog: {
     groups: {
@@ -80,13 +75,13 @@ export const menus = {
         },
       },
     },
-    icon: icons.manifest.settings.dialog,
+    icon: TERIOCK.DISPLAY.icons.manifest.settings.dialog,
   },
   display: {
     format: "tabs",
     groups: {
       chat: {
-        icon: icons.manifest.ui.chat,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.chat,
         settings: {
           autoPanelCollapseTime: { default: 5, scope: "client", type: new InfiniteNumberField() },
           autoTriggerDeleteTime: { default: 5, scope: "client", type: new InfiniteNumberField() },
@@ -106,14 +101,14 @@ export const menus = {
         },
       },
       dragDrop: {
-        icon: icons.manifest.ui.dragDrop,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.dragDrop,
         settings: {
           maximizeApplicationsOnDragEnter: { default: true, scope: "client", type: Boolean },
           minimizeApplicationsOnDragStart: { default: true, scope: "client", type: Boolean },
         },
       },
       sheets: {
-        icon: icons.manifest.ui.sheet,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.sheet,
         settings: {
           defaultActorTab: {
             default: "tradecrafts",
@@ -149,7 +144,7 @@ export const menus = {
         },
       },
       tooltip: {
-        icon: icons.manifest.ui.tooltip,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.tooltip,
         settings: {
           compendiumTooltips: {
             default: true,
@@ -188,12 +183,12 @@ export const menus = {
         },
       },
     },
-    icon: icons.manifest.settings.display,
+    icon: TERIOCK.DISPLAY.icons.manifest.settings.display,
   },
   documentBehavior: {
     format: "tabs",
     groups: Object.fromEntries(
-      Object.entries(documentBehaviorConfig.categories).map((
+      Object.entries(TERIOCK.CONFIG.documentBehavior.categories).map((
         [category, { icon, settings }],
       ) => [category, {
         icon,
@@ -202,18 +197,20 @@ export const menus = {
         },
       }]),
     ),
-    icon: icons.manifest.ui.document,
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
   },
   gameMasterControls: {
     format: "tabs",
     groups: {
       general: {
-        icon: icons.manifest.ui.settings,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.settings,
         settings: {
           deathBagStoneColors: {
-            default: Object.keys(dieConfig.stones).filter(k => dieConfig.stones[k].initial),
+            default: Object.keys(TERIOCK.CONFIG.deathBag.stones).filter(k => TERIOCK.CONFIG.deathBag.stones[k].initial),
             scope: "world",
-            type: new fields.SetField(new fields.StringField({ choices: objectMap(dieConfig.stones, (c) => c.label) })),
+            type: new fields.SetField(
+              new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.deathBag.stones, (c) => c.label) }),
+            ),
           },
           playerMacrosFolderName: { default: "Player Macros", scope: "world", type: String },
           preserveTargetRegions: {
@@ -245,14 +242,14 @@ export const menus = {
         },
       },
       permissions: {
-        icon: icons.manifest.ui.permissions,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.permissions,
         settings: {
           openChatDocuments: { default: false, scope: "world", type: Boolean },
           openChatImages: { default: true, scope: "world", type: Boolean },
         },
       },
       secrets: {
-        icon: icons.manifest.ui.secret,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.secret,
         settings: {
           deathBagMessageMode: {
             default: null,
@@ -267,7 +264,9 @@ export const menus = {
           secretAttributes: {
             default: [],
             scope: "world",
-            type: new fields.SetField(new fields.StringField({ choices: objectMap(attributeConfig, (c) => c.label) })),
+            type: new fields.SetField(
+              new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.attribute, (c) => c.label) }),
+            ),
           },
           secretDocuments: { default: [], scope: "world", type: new TypedIdentifierSetField() },
           secretTradecrafts: { default: [], scope: "world", type: tradecraftsField() },
@@ -275,7 +274,7 @@ export const menus = {
         },
       },
       system: {
-        icon: icons.manifest.ui.system,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.system,
         settings: {
           nonHierarchicalChanges: { default: true, requiresReload: true, scope: "world", type: Boolean },
           trackSustainedConsequences: { default: true, scope: "world", type: Boolean },
@@ -283,27 +282,27 @@ export const menus = {
       },
 
       developer: {
-        icon: icons.manifest.ui.developer,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.developer,
         settings: {
           developerMode: { default: false, scope: "world", type: Boolean },
           dontDropUuidsInTables: { default: false, scope: "world", type: Boolean },
         },
       },
     },
-    icon: icons.manifest.settings.gameMasterControls,
+    icon: TERIOCK.DISPLAY.icons.manifest.settings.gameMasterControls,
   },
   tips: {
     format: "tabs",
     groups: {
       error: {
-        icon: icons.manifest.ui.error,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.error,
         settings: {
           errorMessages: {
-            default: Object.keys(tipConfig.error),
+            default: Object.keys(TERIOCK.CONFIG.tip.error),
             scope: "client",
             stacked: true,
-            type: new fields.SetField(new fields.StringField({ choices: tipConfig.error }), {
-              initial: Object.keys(tipConfig.error),
+            type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.tip.error }), {
+              initial: Object.keys(TERIOCK.CONFIG.tip.error),
             }),
             onChange: () => game.teriock.render({ applications: true, tooltips: true }),
           },
@@ -322,7 +321,7 @@ export const menus = {
         },
       },
       suppression: {
-        icon: icons.manifest.ui.suppression,
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.suppression,
         settings: {
           showSuppressionTipsOnSheets: {
             default: true,
@@ -337,11 +336,11 @@ export const menus = {
             onChange: () => game.teriock.render({ tooltips: true }),
           },
           suppressionMessages: {
-            default: Object.keys(tipConfig.suppression),
+            default: Object.keys(TERIOCK.CONFIG.tip.suppression),
             scope: "client",
             stacked: true,
-            type: new fields.SetField(new fields.StringField({ choices: tipConfig.suppression }), {
-              initial: Object.keys(tipConfig.suppression),
+            type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.tip.suppression }), {
+              initial: Object.keys(TERIOCK.CONFIG.tip.suppression),
             }),
             onChange: () => game.teriock.render({ applications: true }),
           },
@@ -356,7 +355,7 @@ export const menus = {
         },
       },
     },
-    icon: icons.manifest.settings.tips,
+    icon: TERIOCK.DISPLAY.icons.manifest.settings.tips,
   },
 };
 

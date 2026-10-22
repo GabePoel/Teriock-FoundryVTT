@@ -1,5 +1,4 @@
 import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
-import statConfig from "../../../../../../static/config/stat-config.mjs";
 import { pathSorterFactory } from "../../../../../../utils/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
@@ -9,7 +8,7 @@ import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 
-const BAR_STATS = Object.entries(statConfig).filter(([_k, v]) => v.bar).map(([k, _v]) => k);
+const BAR_STATS = Object.entries(TERIOCK.CONFIG.stat).filter(([_k, v]) => v.bar).map(([k, _v]) => k);
 
 /**
  * Actor data model that handles stats.
@@ -34,7 +33,7 @@ export default function ActorStatsPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       const schema = Object.assign(super.defineSchema(), { presence: statField({ initial: 0, max: 1 }) });
-      for (const [k, v] of Object.entries(statConfig)) {
+      for (const [k, v] of Object.entries(TERIOCK.CONFIG.stat)) {
         if (v?.bar) { schema[k] = statField({ ...v.bar, morganti: v.morganti }); }
       }
       return schema;
@@ -105,7 +104,7 @@ export default function ActorStatsPart(Base) {
         for (const stat of BAR_STATS) {
           const change = foundry.utils.getProperty(options, `teriock.${stat}Change`) ?? 0;
           if (change) {
-            const colors = statConfig[stat].color;
+            const colors = TERIOCK.CONFIG.stat[stat].color;
             this.animateStatChangeEffect(change, change > 0 ? colors.light : colors.dark);
           }
         }

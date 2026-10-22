@@ -1,5 +1,4 @@
 import { BaseUpdater } from "../_module.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 
 /**
@@ -14,7 +13,7 @@ export default class ArmamentDamageUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: {
-      icon: makeIconClass(icons.manifest.ui.damage, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.damage, "title"),
       title: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
     },
   };

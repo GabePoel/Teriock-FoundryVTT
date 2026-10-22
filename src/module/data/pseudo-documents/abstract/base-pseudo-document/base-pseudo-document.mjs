@@ -1,6 +1,5 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { createElement, makeIconClass, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 import { PseudoControllerDataMixin } from "../../../mixins/_module.mjs";
 
@@ -25,7 +24,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    */
   static metadata = mergeMetadata(super.metadata, {
     documentName: "",
-    icon: icons.manifest.ui.document,
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
     tags: { embed: false, mechanic: false, panel: false, triggered: false },
     type: "base",
     typed: false,
@@ -44,7 +43,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {Record<string, BasePseudoDocument>}
    */
   static get TYPE_MODELS() {
-    return { [this.metadata.type]: this };
+    return this.metadata.typed ? TERIOCK.CONFIG[this.documentName].dataModels : { [this.metadata.type]: this };
   }
 
   /**
@@ -61,7 +60,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    * @returns {string[]}
    */
   static get TYPES() {
-    return [this.metadata.type];
+    return Object.keys(this.TYPE_MODELS);
   }
 
   /**
@@ -87,6 +86,65 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
    */
   static async create(data = {}, operation = {}) {
     return (await this.createDocuments([data], operation))?.shift();
+  }
+
+  /**
+   * Present a Dialog to create a new Pseudo-Document of this type.
+   * Designed to mirror {@link CliantDocument.createDialog}.
+   * @param {object} [data] - Pseudo-Document creation data.
+   * @param {Partial<DatabaseCreateOperation>} [createOptions] - Pseudo-Document creation options.
+   * @param {object} [options] - Options forwarded to DialogV2.prompt.
+   * @param {string[]} [options.types] - A restriction of the selectable subtypes of the Dialog.
+   * @returns {Promise<BasePseudoDocument|null>}
+   * @version 369
+   */
+  static async createDialog(data = {}, createOptions = {}, { types, ...dialogOptions } = {}) {
+    // Identify allowed types
+    const allowed = this.TYPES.filter(t => !types || types.includes(t));
+    if (!allowed.length) { throw new Error("No pseudo-document types were permitted to be created"); }
+    if (allowed.length === 1) { return this.create({ ...data, type: allowed[0] }, createOptions); }
+    const config = TERIOCK.CONFIG[this.documentName];
+
+    // Sort alphabetically
+    const documentTypes = allowed.map(value => ({ label: _loc(config.typeLabels[value]), value })).sort((a, b) =>
+      a.label.localeCompare(b.label, game.i18n.lang)
+    );
+    const type = documentTypes.some(t => t.value === data.type) ? data.type : documentTypes[0].value;
+
+    // Render the document creation form
+    const content = createElement("div", {
+      innerHTML: await foundry.applications.handlebars.renderTemplate("templates/sidebar/document-create.html", {
+        hasTypes: this.metadata.typed,
+        type,
+        typeHint: _loc(config.typeHints[type]),
+        types: documentTypes,
+      }),
+    });
+    content.querySelector("[name=\"name\"]").closest(".form-group").remove();
+    const title = _loc("DOCUMENT.Create", { type: _loc(`DOCUMENT.${this.documentName}`) });
+
+    // Render the confirmation dialog window
+    return TeriockDialog.prompt(
+      foundry.utils.mergeObject({
+        content,
+        ok: {
+          label: title,
+          callback: (_event, button) =>
+            this.create(
+              { ...data, ...new foundry.applications.ux.FormDataExtended(button.form).object },
+              createOptions,
+            ),
+        },
+        position: { width: 360 },
+        window: { title },
+        render: (_event, dialog) => {
+          const select = dialog.element.querySelector("[name=\"type\"]");
+          select.addEventListener("change", () => {
+            select.closest(".form-group").querySelector(".hint").textContent = _loc(config.typeHints[select.value]);
+          });
+        },
+      }, dialogOptions),
+    );
   }
 
   /**
@@ -151,14 +209,19 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * The parts of a module that are subtypes of this.
-   * @param {object} module
-   * @returns {Record<string, typeof BasePseudoDocument>}
+   * Register this data model in `TERIOCK.CONFIG`.
    */
-  static getTypeModels(module) {
-    return Object.fromEntries(
-      Object.values(module).filter(v => foundry.utils.isSubclass(v, BasePseudoDocument)).map(v => [v.metadata.type, v]),
-    );
+  static registerModel() {
+    const documentName = this.metadata.documentName;
+    const type = this.metadata.type;
+    if (!documentName) { return; }
+    const config = TERIOCK.CONFIG[documentName];
+    if (config && type) {
+      config.dataModels[type] = this;
+      config.typeHints[type] = `TERIOCK.DOCUMENTS.${documentName}.${type}.hint`;
+      config.typeIcons[type] = makeIconClass(this.metadata.icon);
+      config.typeLabels[type] = this.typeLabel;
+    }
   }
 
   /**

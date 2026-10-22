@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
@@ -32,8 +31,8 @@ export default class FluencySystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.fluency,
-    img: thumbnails.manifest.document.fluency,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.fluency,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.fluency,
     initialCompetence: 2,
     tags: { usable: true },
     type: "fluency",

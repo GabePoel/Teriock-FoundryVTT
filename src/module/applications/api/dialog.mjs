@@ -1,4 +1,3 @@
-import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { BaseApplicationMixin } from "./mixins/_module.mjs";
 
@@ -14,5 +13,5 @@ const { DialogV2 } = foundry.applications.api;
  */
 export default class TeriockDialog extends mixClasses(DialogV2, BaseApplicationMixin) {
   /** @type {Partial<ApplicationConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.manifest.ui.edit, "title") } };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.edit, "title") } };
 }

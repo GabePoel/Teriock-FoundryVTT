@@ -1,6 +1,3 @@
-import effectConfig from "../../../static/config/effect-config.mjs";
-import systemConfig from "../../../static/config/system-config.mjs";
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { Panel } from "../../pseudo-documents/_module.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -19,11 +16,11 @@ import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMixin, ArmamentSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.body,
-    img: thumbnails.manifest.document.body,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.body,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.body,
     importDialog: true,
     initialKind: "intrinsic",
-    kinds: _replace({ intrinsic: effectConfig.kind.intrinsic, ...systemConfig.defaultKinds }),
+    kinds: _replace({ intrinsic: TERIOCK.CONFIG.effect.kind.intrinsic, ...TERIOCK.CONFIG.system.defaultKinds }),
     tags: { usable: true },
     type: "body",
   });

@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
@@ -6,7 +5,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  * @type {Teriock.Command.CommandEntry}
  */
 const command = {
-  icon: icons.manifest.effect.revitalize,
+  icon: TERIOCK.DISPLAY.icons.manifest.effect.revitalize,
   id: "revitalize",
   label: "TERIOCK.EFFECTS.Common.revitalize",
   primary: simpleCommandFunctionFactory((a, o) => a.system.takeRevitalize(o)),

@@ -16,7 +16,7 @@ export default class ChoicesAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Choices"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "choices" });
+  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "choices" });
 
   /** @inheritDoc */
   static defineSchema() {

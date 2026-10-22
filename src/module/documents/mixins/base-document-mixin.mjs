@@ -112,8 +112,10 @@ export default function BaseDocumentMixin(Base) {
           if (!select) { return; }
           const onChange = () => {
             const type = select.value;
-            dialog.element.querySelector("[name=name]").placeholder = defaultName(type);
-            dialog.element.querySelector(".hint").textContent = _loc(config.typeHints?.[type]);
+            const nameElement = dialog.element.querySelector("[name=name]");
+            if (nameElement) { dialog.element.querySelector("[name=name]").placeholder = defaultName(type); }
+            const hintElement = dialog.element.querySelector(".hint");
+            if (hintElement) { hintElement.textContent = _loc(config.typeHints?.[type]); }
             dialog.window.icon.className = `window-icon ${typeIcon(type)}`;
           };
           onChange();
@@ -337,7 +339,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * Check whether it's valid for this document to be edited from another one. This is mainly intended for use
-     * in {@link EmbedCardDocument.getEmbedContextMenuEntries}. If this document appears as an embedded card (via
+     * in {@link EmbeddableData.getEmbedContextMenuEntries}. If this document appears as an embedded card (via
      * `@EMBED`) or otherwise has its context menu entries shown in a sheet for some document, only some of them
      * should be visible.
      * @param {TeriockDocument} doc

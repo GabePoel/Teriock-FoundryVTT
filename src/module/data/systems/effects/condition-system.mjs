@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../mixins/_module.mjs";
 import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
@@ -24,8 +23,8 @@ export default class ConditionSystem
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.condition,
-    img: thumbnails.manifest.document.condition,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.condition,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.condition,
     initialKind: "flaw",
     type: "condition",
   });

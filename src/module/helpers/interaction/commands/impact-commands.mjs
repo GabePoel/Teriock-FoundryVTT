@@ -1,6 +1,5 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { DealImpactExecution } from "../../../executions/activity-executions/_module.mjs";
-import impactConfig from "../../../static/config/impact-config.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -51,7 +50,7 @@ function impactCommandFunctionFactory(impact, operation) {
   };
 }
 
-const impactCommands = Object.entries(impactConfig).map(([impact, config]) => {
+const impactCommands = Object.entries(TERIOCK.CONFIG.impact).map(([impact, config]) => {
   return {
     ...formulaCommand,
     aliases: config?.aliases || [],

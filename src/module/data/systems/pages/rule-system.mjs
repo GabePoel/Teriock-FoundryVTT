@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
@@ -10,8 +9,8 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
 export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.core,
-    img: thumbnails.manifest.document.rule,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.core,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.rule,
     type: "rule",
   });
 

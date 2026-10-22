@@ -5,8 +5,6 @@ import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import impactConfig from "../../../static/config/impact-config.mjs";
-import statConfig from "../../../static/config/stat-config.mjs";
 import {
   formatDynamicSelectOptions,
   mixClasses,
@@ -66,7 +64,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * @returns {string[]}
    */
   get #paidCosts() {
-    return Object.keys(statConfig).filter(c => this.costs[c] > 0 && !this.options[`no${c.capitalize()}`]);
+    return Object.keys(TERIOCK.CONFIG.stat).filter(c => this.costs[c] > 0 && !this.options[`no${c.capitalize()}`]);
   }
 
   /**
@@ -327,7 +325,10 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     }
     for (const c of Object.keys(this.costs).filter(c => this.costs[c] > 0)) {
       this.tags.push(
-        _loc("TERIOCK.SYSTEMS.Applicable.PANELS.spent", { amount: this.costs[c], label: statConfig[c]?.abbreviation }),
+        _loc("TERIOCK.SYSTEMS.Applicable.PANELS.spent", {
+          amount: this.costs[c],
+          label: TERIOCK.CONFIG.stat[c]?.abbreviation,
+        }),
       );
     }
   }
@@ -490,8 +491,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
     if (this.actor) {
       for (const c of this.#paidCosts) {
-        const config = statConfig[c];
-        if (!config?.bar) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }
+        const config = TERIOCK.CONFIG.stat[c];
+        if (!config?.bar) { await TERIOCK.CONFIG.impact[config?.impact]?.apply(this.actor, this.costs[c]); }
       }
     }
   }
@@ -532,7 +533,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         }
       }
       for (const c of this.#paidCosts) {
-        const config = statConfig[c];
+        const config = TERIOCK.CONFIG.stat[c];
         if (config?.bar) {
           this.actorUpdates[`system.${c}.value`] = Math.max(
             this.actor.system[c].value + (config?.multiplier ?? 1) * this.costs[c],

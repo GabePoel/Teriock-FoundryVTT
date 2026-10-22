@@ -1,4 +1,3 @@
-import hackConfig from "../../../../../../static/config/hack-config.mjs";
 import { objectMap } from "../../../../../../utils/_module.mjs";
 import { initialBar, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
@@ -25,7 +24,7 @@ export default function ActorHacksPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        hacks: initialSchema(objectMap(hackConfig, conf => initialBar({ max: conf.max }))),
+        hacks: initialSchema(objectMap(TERIOCK.CONFIG.hack, conf => initialBar({ max: conf.max }))),
       });
     }
 
@@ -49,10 +48,10 @@ export default function ActorHacksPart(Base) {
     async takeHack(part, amount = 1) {
       await this.parent.fireTrigger("takeHack", { amount, part });
       const value = this.parent.system.hacks[part].value;
-      const max = Math.min(value + amount, hackConfig[part].max);
+      const max = Math.min(value + amount, TERIOCK.CONFIG.hack[part].max);
       const ids = [];
       for (let i = value; i < max; i++) {
-        const id = (hackConfig[part]?.statuses ?? [])[i];
+        const id = (TERIOCK.CONFIG.hack[part]?.statuses ?? [])[i];
         if (id) { ids.push(id); }
       }
       await this.parent.applyStatusEffects(ids);

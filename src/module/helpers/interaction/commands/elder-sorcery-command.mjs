@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
@@ -7,7 +6,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  */
 const command = {
   aliases: ["es"],
-  icon: icons.manifest.execution.elderSorcery,
+  icon: TERIOCK.DISPLAY.icons.manifest.execution.elderSorcery,
   id: "elderSorcery",
   label: "TERIOCK.EFFECTS.Common.elderSorcery",
   primary: simpleCommandFunctionFactory(a => a.system.createElderSorcery()),

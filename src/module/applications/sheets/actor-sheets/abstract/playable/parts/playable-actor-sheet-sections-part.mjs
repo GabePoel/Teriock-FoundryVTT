@@ -7,15 +7,13 @@ import {
   ResourceSystem,
 } from "../../../../../../data/systems/effects/_module.mjs";
 import { PowerSystem, RankSystem } from "../../../../../../data/systems/items/_module.mjs";
-import affinityConfig from "../../../../../../static/config/affinity-config.mjs";
-import { icons } from "../../../../../../static/display/_module.mjs";
 
 /**
  * @import { ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
  */
 
 /** @type {{ label: string, types: AffinityType[] }[]} */
-const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
+const AFFINITY_GROUPS = Object.values(TERIOCK.CONFIG.affinity.groups);
 
 /**
  * @typedef {object} PlayableSection
@@ -231,7 +229,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
         groups: this.#previewGroupConsequence,
       },
     }, {
-      icon: icons.manifest.pseudoDocument.affinity,
+      icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.affinity,
       id: "affinities",
       label: "TERIOCK.SHEETS.Actor.TABS.Affinities.title",
       preview: {
@@ -239,7 +237,11 @@ export default function PlayableActorSheetSectionsPart(Base) {
         groups: this.#previewGroupAffinity,
         model: previews.AffinityPreviewModel,
       },
-    }, { icon: icons.manifest.ui.details, id: "details", label: "TERIOCK.SHEETS.Actor.TABS.Details.title" }];
+    }, {
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.details,
+      id: "details",
+      label: "TERIOCK.SHEETS.Actor.TABS.Details.title",
+    }];
 
     /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
     static PREVIEWS = Object.fromEntries(

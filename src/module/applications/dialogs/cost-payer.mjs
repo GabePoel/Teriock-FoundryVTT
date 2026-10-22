@@ -1,9 +1,6 @@
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import costConfig from "../../static/config/cost-config.mjs";
-import statConfig from "../../static/config/stat-config.mjs";
-import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -27,14 +24,14 @@ class CostPayerOptions extends BaseDataModel {
       }),
       primary: new fields.SchemaField(
         Object.fromEntries(
-          Object.entries(statConfig).map((
+          Object.entries(TERIOCK.CONFIG.stat).map((
             [k, v],
           ) => [k, new FormulaField({ initial: "", label: v.label, placeholder: "0" })]),
         ),
       ),
       tweaks: new fields.SchemaField(
         Object.fromEntries(
-          Object.entries(costConfig.tweaks).map((
+          Object.entries(TERIOCK.CONFIG.cost.tweaks).map((
             [k, v],
           ) => [k, new fields.NumberField({ integer: true, label: v.label, min: 0, placeholder: "0" })]),
         ),
@@ -53,7 +50,10 @@ export default class CostPayer extends ResolvableDialog {
     form: { closeOnSubmit: false, submitOnChange: false },
     position: { width: 450 },
     tag: "form",
-    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.manifest.ability.cost, "title") },
+    window: {
+      contentClasses: ["standard-form"],
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ability.cost, "title"),
+    },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
@@ -132,7 +132,7 @@ export default class CostPayer extends ResolvableDialog {
    * @returns {string[]}
    */
   #includedTweaks() {
-    return Object.entries(costConfig.tweaks).filter(([_k, v]) =>
+    return Object.entries(TERIOCK.CONFIG.cost.tweaks).filter(([_k, v]) =>
       this.#costs.has(v.primary) || (this.#execution.canHeighten && v.primary === "mp")
     ).map(([k, _v]) => k);
   }
@@ -144,7 +144,7 @@ export default class CostPayer extends ResolvableDialog {
   async #prepareHints() {
     if (this.#hintsPrepared) { return; }
     this.#hintsPrepared = true;
-    for (const k of Object.keys(statConfig)) {
+    for (const k of Object.keys(TERIOCK.CONFIG.stat)) {
       const description = this.#ability.system.costs.primary[k].description;
       if (description) {
         this.#hints[k] = await TeriockTextEditor.enrichHTML(description, { relativeTo: this.#ability });
@@ -176,13 +176,13 @@ export default class CostPayer extends ResolvableDialog {
     const heightened = Number(this.state.costOptions.heightened) || 0;
     const rollData = Object.assign(this.#execution.getRollData(), { h: heightened });
     /** @type {Record<string, number>} */
-    const costs = Object.fromEntries(Object.keys(statConfig).map(k => [k, 0]));
+    const costs = Object.fromEntries(Object.keys(TERIOCK.CONFIG.stat).map(k => [k, 0]));
     for (const k of this.#costs) {
       costs[k] = await BaseRoll.getValue(this.state.costOptions.primary[k] || "0", rollData) || 0;
     }
     costs.mp += heightened;
     for (const k of this.#includedTweaks()) {
-      const { multiplier, primary } = costConfig.tweaks[k];
+      const { multiplier, primary } = TERIOCK.CONFIG.cost.tweaks[k];
       costs[primary] += multiplier * (Number(this.state.costOptions.tweaks[k]) || 0);
     }
     return { costs, heightened };
@@ -250,7 +250,7 @@ export default class CostPayer extends ResolvableDialog {
       context.buttons = [{
         action: "ok",
         default: true,
-        icon: makeIconClass(icons.manifest.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }];

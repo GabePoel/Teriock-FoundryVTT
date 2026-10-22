@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { fancifyFields, makeIconClass, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
 
@@ -39,8 +38,8 @@ export default function BaseSystemMixin(Base) {
       descriptionPath: null,
       disabledPath: null,
       documentName: "",
-      icon: icons.manifest.ui.document,
-      img: thumbnails.common.unknown,
+      icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
+      img: TERIOCK.DISPLAY.thumbnails.common.unknown,
       importDialog: false,
       preserveOnRefresh: [],
       sortPaths: ["name", "_stats.createdTime"],
@@ -64,6 +63,15 @@ export default function BaseSystemMixin(Base) {
       type: "",
     });
 
+    /**
+     * Localization key for this system class' type label.
+     * @returns {string}
+     */
+    static get typeLabel() {
+      if (!this.metadata.documentName) { return ""; }
+      return `TYPES.${this.metadata.documentName}.${this.metadata.type}`;
+    }
+
     /** @inheritDoc */
     static defineSchema() {
       return { _src: new fields.DocumentUUIDField({ initial: null, nullable: true }) };
@@ -75,11 +83,13 @@ export default function BaseSystemMixin(Base) {
     static registerModel() {
       const documentName = this.metadata.documentName;
       const type = this.metadata.type;
-      if (documentName && type) {
+      if (!documentName) { return; }
+      const config = CONFIG[documentName];
+      if (config && type) {
         CONFIG[documentName].dataModels[type] = this;
         CONFIG[documentName].typeHints[type] = `TERIOCK.DOCUMENTS.${documentName}.${type}.hint`;
         CONFIG[documentName].typeIcons[type] = makeIconClass(this.metadata.icon, "title");
-        CONFIG[documentName].typeLabels[type] = `TYPES.${documentName}.${type}`;
+        CONFIG[documentName].typeLabels[type] = this.typeLabel;
       }
     }
 

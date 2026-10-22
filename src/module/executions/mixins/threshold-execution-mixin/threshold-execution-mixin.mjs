@@ -1,7 +1,6 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import mathConfig from "../../../static/config/math-config.mjs";
 import { objectMap } from "../../../utils/_module.mjs";
 
 /**
@@ -32,7 +31,7 @@ export default function ThresholdExecutionMixin(Base) {
         bonus: rollableFormulaField(),
         comparison: new fields.StringField({
           blank: false,
-          choices: objectMap(mathConfig.comparisons, (c) => c.label, { localize: true }),
+          choices: objectMap(TERIOCK.CONFIG.math.comparisons, (c) => c.label, { localize: true }),
           initial: "gte",
           label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.comparison.label",
           required: true,

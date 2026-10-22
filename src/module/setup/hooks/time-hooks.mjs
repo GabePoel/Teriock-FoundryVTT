@@ -1,4 +1,3 @@
-import triggerConfig from "../../static/config/trigger-config.mjs";
 import { batchWrite } from "../../utils/_module.mjs";
 
 /**
@@ -39,7 +38,9 @@ function fireTimeTriggerFactory(trigger) {
 
 const timeHookEntries = [
   ["updateWorldTime", increaseDebt],
-  ...Object.keys(triggerConfig.time.choices).map(t => [`teriock.force${t.capitalize()}`, fireTimeTriggerFactory(t)]),
+  ...Object.keys(TERIOCK.CONFIG.trigger.time.choices).map(
+    t => [`teriock.force${t.capitalize()}`, fireTimeTriggerFactory(t)]
+  ),
 ];
 
 export default timeHookEntries;

@@ -113,6 +113,13 @@ declare global {
     export type ExpansionEntry = DeliveryEntry & { needsSaveAttribute?: boolean };
 
     export type KindEntry = { color: string, icon: string, label: string };
+
+    export type PseudoDocumentEntry<TPseudo> = {
+      dataModels: Record<string, TPseudo>;
+      typeHints: Record<string, string>;
+      typeIcons: Record<string, string>;
+      typeLabels: Record<string, string>;
+    };
   }
 }
 

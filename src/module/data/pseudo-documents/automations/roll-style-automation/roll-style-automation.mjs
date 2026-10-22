@@ -7,7 +7,7 @@ export default class RollStyleAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.RollStyle"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "rollStyle" });
+  static metadata = mergeMetadata(super.metadata, { tags: { harm: true }, type: "rollStyle" });
 
   /** @inheritDoc */
   static defineSchema() {

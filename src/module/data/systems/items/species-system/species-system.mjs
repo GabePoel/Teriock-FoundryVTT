@@ -1,16 +1,12 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import statConfig from "../../../../static/config/stat-config.mjs";
-import { INF } from "../../../../static/const.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf, toKebabCase } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { CompetenceDisplaySystemMixin, StatGiverSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import { SpeciesPanelPart, SpeciesTransformationPart } from "./parts/_module.mjs";
@@ -21,7 +17,7 @@ const { fields } = foundry.data;
  * @import { ActorData } from "@common/documents/_types.mjs";
  */
 
-const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
+const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].pool?.enabled);
 
 /**
  * Species-specific item data model.
@@ -51,19 +47,15 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    automationTags: { species: true },
     childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
-    icon: icons.manifest.document.species,
-    img: thumbnails.manifest.document.species,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.species,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.species,
     importDialog: true,
     initialCompetence: 1,
     type: "species",
     visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
   });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [...super._automationTypes, automations.ToggleChildrenAutomation];
-  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -251,7 +243,7 @@ export default class SpeciesSystem
       },
       system: {
         _src: this.parent.uuid,
-        ...Object.fromEntries(POOL_STATS.map(k => [k, { value: INF }])),
+        ...Object.fromEntries(POOL_STATS.map(k => [k, { value: TERIOCK.CONST.INF }])),
         size: { value: this.size.value },
       },
       type: "creature",

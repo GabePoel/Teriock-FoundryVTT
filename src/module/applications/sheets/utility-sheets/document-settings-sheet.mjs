@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 
@@ -15,7 +14,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
     position: { width: 650 },
     window: {
       contentClasses: ["standard-form", "teriock-settings"],
-      icon: makeIconClass(icons.manifest.ui.configure, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.configure, "title"),
       resizable: true,
     },
   };

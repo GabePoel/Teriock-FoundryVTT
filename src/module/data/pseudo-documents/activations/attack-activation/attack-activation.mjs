@@ -1,4 +1,3 @@
-import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, omit } from "../../../../utils/_module.mjs";
 import AttackAutomation from "../../automations/attack-automation/attack-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
@@ -12,7 +11,7 @@ const { fields } = foundry.data;
  */
 export default class AttackActivation extends AutomationActivationFactory(AttackAutomation) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.interaction.attack });
+  static metadata = mergeMetadata(super.metadata, { icon: TERIOCK.DISPLAY.icons.manifest.interaction.attack });
 
   /** @inheritDoc */
   static defineSchema() {

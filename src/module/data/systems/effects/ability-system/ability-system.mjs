@@ -1,11 +1,7 @@
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
-import costConfig from "../../../../static/config/cost-config.mjs";
-import statConfig from "../../../../static/config/stat-config.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -72,30 +68,17 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    automationTags: { ability: true, passive: true, triggered: true },
     childTypes: ["ability", "fluency", "resource"],
     crit: { enabled: true, where: "effectData" },
-    icon: icons.manifest.document.ability,
-    img: thumbnails.manifest.document.ability,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.ability,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.ability,
     importDialog: true,
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "ability",
     visibleTypes: ["ability", "fluency", "resource"],
   });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [
-      ...super._automationTypes,
-      ...this._activationAutomationTypes,
-      ...this._passiveAutomationTypes,
-      automations.ChoicesAutomation,
-      automations.DurationAutomation,
-      automations.OverrideAutomation,
-      automations.TargetAutomation,
-      automations.TransformationAutomation,
-    ];
-  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -152,10 +135,10 @@ export default class AbilitySystem
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
       },
-      ...Object.keys(statConfig).map(k => {
+      ...Object.keys(TERIOCK.CONFIG.stat).map(k => {
         return { path: `system.costs.primary.${k}.description`, visible: this.costs.primary[k].type === "description" };
       }),
-      ...Object.keys(costConfig.components.keys).map(k => {
+      ...Object.keys(TERIOCK.CONFIG.cost.components.keys).map(k => {
         return {
           path: `system.costs.components.${k}.description`,
           visible: this.costs.components[k].type === "description",

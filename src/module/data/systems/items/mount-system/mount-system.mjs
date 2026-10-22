@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import {
   dotJoin,
   fromIdentifier,
@@ -26,8 +25,8 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.mount,
-    img: thumbnails.manifest.document.mount,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.mount,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.mount,
     type: "mount",
   });
 

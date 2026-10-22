@@ -66,6 +66,35 @@ const config = {
   transformation: transformationConfig,
   trigger: triggerConfig,
   wiki: wikiConfig,
+
+  Activation:
+    /** @type {Teriock.Config.PseudoDocumentEntry<typeof BaseActivation>} */ ({
+      dataModels: {},
+      typeHints: {},
+      typeIcons: {},
+      typeLabels: {},
+    }),
+  Affinity:
+    /** @type {Teriock.Config.PseudoDocumentEntry<typeof BaseAffinity>} */ ({
+      dataModels: {},
+      typeHints: {},
+      typeIcons: {},
+      typeLabels: {},
+    }),
+  Automation:
+    /** @type {Teriock.Config.PseudoDocumentEntry<typeof BaseAutomation>} */ ({
+      dataModels: {},
+      typeHints: {},
+      typeIcons: {},
+      typeLabels: {},
+    }),
+  Expiration:
+    /** @type {Teriock.Config.PseudoDocumentEntry<typeof BaseExpiration>} */ ({
+      dataModels: {},
+      typeHints: {},
+      typeIcons: {},
+      typeLabels: {},
+    }),
 };
 
 export default config;

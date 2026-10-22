@@ -1,5 +1,3 @@
-import effectConfig from "../../../static/config/effect-config.mjs";
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
 import CleanedEffectSystem from "./cleaned-effect-system.mjs";
@@ -15,17 +13,13 @@ export default class ResourceSystem
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.resource,
-    img: thumbnails.manifest.document.resource,
-    kinds: _replace(effectConfig.kind),
+    automationTags: { triggered: true },
+    icon: TERIOCK.DISPLAY.icons.manifest.document.resource,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.resource,
+    kinds: _replace(TERIOCK.CONFIG.effect.kind),
     tags: { usable: true },
     type: "resource",
   });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [...super._automationTypes, ...this._activationAutomationTypes];
-  }
 
   /** @inheritDoc */
   get isPassive() {

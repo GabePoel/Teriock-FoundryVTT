@@ -1,4 +1,3 @@
-import { icons } from "../../static/display/_module.mjs";
 import { createElement, makeIconClass } from "../../utils/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
@@ -78,7 +77,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
     if (this.reset) {
       this.#resetButton = createElement("button", {
         ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
-        className: `icon ${makeIconClass(icons.manifest.ui.reset, "button")}`,
+        className: `icon ${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button")}`,
         dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
         type: "button",
       });

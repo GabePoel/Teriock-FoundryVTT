@@ -1,4 +1,3 @@
-import documentBehaviorConfig from "../../../static/config/document-behavior-config.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 
@@ -26,12 +25,12 @@ function settingsPath(category, key, field) {
  */
 function settingsSchema(category, FieldClass, options = {}) {
   return Object.fromEntries(
-    Object.keys(documentBehaviorConfig.categories[category].settings).map(
+    Object.keys(TERIOCK.CONFIG.documentBehavior.categories[category].settings).map(
       key => [
         key,
         new FieldClass({
           hint: settingsPath(category, key, "hint"),
-          initial: documentBehaviorConfig.categories[category].settings[key],
+          initial: TERIOCK.CONFIG.documentBehavior.categories[category].settings[key],
           label: settingsPath(category, key, "name"),
           ...options,
         }),
@@ -68,14 +67,14 @@ export class CommonDocumentSettingsModel extends BaseDataModel {
  * @returns {Teriock.Models.DocumentSettingsModelConstructor<C>}
  */
 export function DocumentSettingsModelFactory(category) {
-  const groups = documentBehaviorConfig.compositions[category];
+  const groups = TERIOCK.CONFIG.documentBehavior.compositions[category];
   class DocumentSettingsModel extends CommonDocumentSettingsModel {
     /** @type {Teriock.Behavior.DocumentSettingsCategory} */
     static CATEGORY = category;
 
     /** @inheritDoc */
     static KEY_GROUPS = Object.fromEntries(
-      groups.flatMap(g => Object.keys(documentBehaviorConfig.categories[g].settings).map(k => [k, g])),
+      groups.flatMap(g => Object.keys(TERIOCK.CONFIG.documentBehavior.categories[g].settings).map(k => [k, g])),
     );
 
     /** @inheritDoc */

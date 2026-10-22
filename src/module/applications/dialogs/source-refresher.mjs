@@ -1,5 +1,4 @@
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
-import { icons } from "../../static/display/_module.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { DocumentDialog } from "../api/_module.mjs";
 
@@ -39,7 +38,7 @@ export default class SourceRefresher extends DocumentDialog {
     position: { width: 450 },
     window: {
       contentClasses: ["standard-form"],
-      icon: makeIconClass(icons.manifest.ui.compendium, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.compendium, "title"),
       resizable: false,
     },
   };
@@ -82,7 +81,7 @@ export default class SourceRefresher extends DocumentDialog {
     return Object.assign(await super._prepareContext(options), {
       buttons: [{
         action: "ok",
-        icon: makeIconClass(icons.manifest.ui.done, "button"),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
       }],

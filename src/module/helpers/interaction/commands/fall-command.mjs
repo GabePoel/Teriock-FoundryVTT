@@ -1,12 +1,10 @@
-import { icons } from "../../../static/display/_module.mjs";
-
 /**
  * Fall command
  * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   args: ["distance"],
-  icon: icons.manifest.execution.fall,
+  icon: TERIOCK.DISPLAY.icons.manifest.execution.fall,
   id: "fall",
   label: "TERIOCK.EFFECTS.Common.fall",
   noActor: true,

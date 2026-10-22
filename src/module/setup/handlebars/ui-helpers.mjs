@@ -1,4 +1,3 @@
-import { icons } from "../../static/display/_module.mjs";
 import { makeIcon, makeIconClass, makeIconElement } from "../../utils/_module.mjs";
 
 /**
@@ -10,7 +9,7 @@ import { makeIcon, makeIconClass, makeIconElement } from "../../utils/_module.mj
  */
 function infoIcon(identifier, options = { hash: {} }) {
   const { dataset = {}, noTables } = options.hash;
-  const element = makeIconElement(icons.manifest.ui.info, "light");
+  const element = makeIconElement(TERIOCK.DISPLAY.icons.manifest.ui.info, "light");
   element.classList.add("teriock-info-icon");
   Object.assign(
     element.dataset,

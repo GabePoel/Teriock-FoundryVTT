@@ -1,5 +1,4 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
-import { icons } from "../../../static/display/_module.mjs";
 
 /**
  * @see {AttunableSystem.attune}
@@ -38,7 +37,7 @@ async function takeDeattune(actor) {
  * @type {Teriock.Command.CommandEntry}
  */
 export const attuneCommand = {
-  icon: icons.manifest.attunable.attune,
+  icon: TERIOCK.DISPLAY.icons.manifest.attunable.attune,
   id: "attune",
   label: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
   primary: takeAttune,
@@ -50,7 +49,7 @@ export const attuneCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const deattuneCommand = {
-  icon: icons.manifest.attunable.deattune,
+  icon: TERIOCK.DISPLAY.icons.manifest.attunable.deattune,
   id: "deattune",
   label: "TERIOCK.SYSTEMS.Attunable.MENU.deattune",
   primary: takeDeattune,

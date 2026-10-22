@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata, toId } from "../../../utils/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
@@ -6,8 +5,8 @@ export default class EnvironmentSystem extends BaseActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: super.metadata.childTypes.filter(t => !["archetype", "fluency", "rank"].includes(t)),
-    icon: icons.manifest.document.environment,
-    img: thumbnails.manifest.document.environment,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.environment,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.environment,
     type: "environment",
   });
 

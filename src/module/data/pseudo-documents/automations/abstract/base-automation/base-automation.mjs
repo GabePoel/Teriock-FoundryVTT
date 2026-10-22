@@ -18,14 +18,17 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   static metadata = mergeMetadata(super.metadata, {
     documentName: "Automation",
     requires: {},
-    tags: { changes: false, interactInExecution: false, passive: false, useInExecution: false },
+    tags: {
+      ability: false,
+      changes: false,
+      harm: false,
+      interactInExecution: false,
+      passive: false,
+      species: false,
+      useInExecution: false,
+    },
     typed: true,
   });
-
-  /** @inheritDoc */
-  static get TYPE_MODELS() {
-    return this.getTypeModels(teriock.data.pseudoDocuments.automations);
-  }
 
   /** @inheritDoc */
   static defineSchema() {

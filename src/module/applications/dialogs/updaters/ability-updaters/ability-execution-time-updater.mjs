@@ -1,5 +1,4 @@
 import { SlowExecutionTimeModel } from "../../../../data/models/unit-models/_module.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -14,7 +13,10 @@ import BaseUpdater from "../base-updater.mjs";
 export default class AbilityExecutionTimeUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(icons.manifest.ability.execution, "title"), title: "TERIOCK.COMMON.ExecutionTime" },
+    window: {
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ability.execution, "title"),
+      title: "TERIOCK.COMMON.ExecutionTime",
+    },
   };
 
   /**

@@ -1,4 +1,3 @@
-import { icons } from "../../../../static/display/_module.mjs";
 import { makeIconClass, objectMap } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -14,7 +13,7 @@ export default class AbilityExpansionUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: {
-      icon: makeIconClass(icons.manifest.ability.expansion, "title"),
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ability.expansion, "title"),
       title: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
     },
   };

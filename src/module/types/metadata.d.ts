@@ -13,9 +13,12 @@ declare global {
     export type PseudoDocumentMetadata = TypeMetadata & { tags: PseudoDocumentTags, typed: boolean };
 
     type AutomationTags = PseudoDocumentTags & {
+      ability: boolean;
       changes: boolean;
+      harm: boolean;
       interactInExecution: boolean;
       passive: boolean;
+      species: boolean;
       useInExecution: boolean;
     };
 
@@ -43,6 +46,7 @@ declare global {
     export type SystemCritMetadata = { enabled: boolean, where: "chatData" | "effectData" };
 
     export type SystemMetadata = TypeMetadata & {
+      automationTags: Partial<AutomationTags>;
       crit: SystemCritMetadata;
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;

@@ -1,4 +1,3 @@
-import impactConfig from "../../../static/config/impact-config.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseStatManager from "./base-stat-manager.mjs";
 
@@ -12,7 +11,10 @@ const { fields } = foundry.data;
 export default class RevitalizeManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(impactConfig.revitalizing.icon, "title"), title: "TERIOCK.DIALOGS.Revitalize.title" },
+    window: {
+      icon: makeIconClass(TERIOCK.CONFIG.impact.revitalizing.icon, "title"),
+      title: "TERIOCK.DIALOGS.Revitalize.title",
+    },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */

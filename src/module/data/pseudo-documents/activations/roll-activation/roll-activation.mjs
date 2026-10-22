@@ -1,6 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import commands from "../../../../helpers/interaction/commands/_module.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
 import { getRollIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import RollAutomation from "../../automations/roll-automation/roll-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
@@ -9,7 +8,7 @@ const { fields } = foundry.data;
 
 export default class RollActivation extends AutomationActivationFactory(RollAutomation) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.ui.dice });
+  static metadata = mergeMetadata(super.metadata, { icon: TERIOCK.DISPLAY.icons.manifest.ui.dice });
 
   /** @inheritDoc */
   static defineSchema() {

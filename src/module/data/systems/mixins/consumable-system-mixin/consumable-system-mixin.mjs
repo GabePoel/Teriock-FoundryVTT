@@ -1,5 +1,4 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { INF_CODE } from "../../../../static/const.mjs";
 import { asInf, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
@@ -32,7 +31,7 @@ export default function ConsumableSystemMixin(Base) {
         consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
         quantity: new fields.SchemaField({
           max: new InfiniteNumberField({ persisted: false }),
-          maxFormula: new FormulaField({ deterministic: true, placeholder: INF_CODE }),
+          maxFormula: new FormulaField({ deterministic: true, placeholder: TERIOCK.CONST.INF_CODE }),
           min: new fields.NumberField({ initial: 0, integer: true, persisted: false }),
           value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "0" }),
         }),

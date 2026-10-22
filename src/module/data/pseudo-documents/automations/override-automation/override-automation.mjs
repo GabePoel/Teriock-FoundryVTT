@@ -17,7 +17,7 @@ export default class OverrideAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Override"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "override" });
+  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "override" });
 
   /** @inheritDoc */
   static get _setCompetenceInitial() {

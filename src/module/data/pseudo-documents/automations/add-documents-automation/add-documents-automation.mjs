@@ -1,6 +1,5 @@
 import { ConstructionNode } from "../../_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import effectConfig from "../../../../static/config/effect-config.mjs";
 import { deleteProperties, mergeMetadata, mixClasses, objectMap, toId } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
@@ -41,7 +40,7 @@ export default class AddDocumentsAutomation
       multi: new fields.BooleanField({ initial: false }),
       target: new fields.StringField({
         blank: false,
-        choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
+        choices: objectMap(TERIOCK.CONFIG.effect.applicationTargets, e => e.label, { localize: true }),
         initial: "actor",
         nullable: false,
         required: true,

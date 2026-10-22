@@ -1,5 +1,4 @@
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
-import mathConfig from "../../../../static/config/math-config.mjs";
 import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -26,11 +25,6 @@ export default class BaseExpiration extends MechanicPseudoDocument {
   static metadata = mergeMetadata(super.metadata, { documentName: "Expiration", typed: true });
 
   /** @inheritDoc */
-  static get TYPE_MODELS() {
-    return this.getTypeModels(teriock.data.pseudoDocuments.expirations);
-  }
-
-  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       method: new fields.StringField({
@@ -45,7 +39,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
       roll: new fields.SchemaField({
         comparison: new fields.StringField({
           blank: false,
-          choices: objectMap(mathConfig.comparisons, (c) => c.label, { localize: true }),
+          choices: objectMap(TERIOCK.CONFIG.math.comparisons, (c) => c.label, { localize: true }),
           initial: "gte",
           required: true,
         }),

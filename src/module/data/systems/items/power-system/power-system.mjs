@@ -1,5 +1,3 @@
-import powerConfig from "../../../../static/config/power-config.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { asInf, dotJoin, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import {
@@ -32,11 +30,11 @@ export default class PowerSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.power,
-    img: thumbnails.manifest.document.power,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.power,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.power,
     initialCompetence: 1,
     initialKind: "other",
-    kinds: _replace(powerConfig.kind),
+    kinds: _replace(TERIOCK.CONFIG.power.kind),
     type: "power",
   });
 

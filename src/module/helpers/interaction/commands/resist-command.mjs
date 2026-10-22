@@ -1,5 +1,3 @@
-import affinityConfig from "../../../static/config/affinity-config.mjs";
-import { icons } from "../../../static/display/_module.mjs";
 import { simpleCommandFunctionFactory, thresholdCommand } from "./abstract-command.mjs";
 
 /** @type {Teriock.Command.SimpleCommandFunction<Teriock.Command.ResistOptions>} */
@@ -11,11 +9,11 @@ const use = simpleCommandFunctionFactory((a, o) => a.system.rollAffinity(o?.type
  */
 const command = {
   ...thresholdCommand,
-  icon: icons.manifest.effect.resist,
+  icon: TERIOCK.DISPLAY.icons.manifest.effect.resist,
   id: "resist",
   primary: use,
   secondary: use,
-  label: options => _loc(affinityConfig.types[options?.type ?? "resistance"].button),
+  label: options => _loc(TERIOCK.CONFIG.affinity.types[options?.type ?? "resistance"].button),
 };
 
 export default command;

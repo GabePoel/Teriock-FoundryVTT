@@ -1,4 +1,3 @@
-import { icons } from "../../../../../../static/display/_module.mjs";
 import {
   asInf,
   consolidateWriteOperations,
@@ -118,7 +117,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       window: {
         controls: [{
           action: "deathBagPull",
-          icon: makeIconClass(icons.manifest.execution.deathBag, "contextMenu"),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.execution.deathBag, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.DeathBagPull.label",
           ownership: "OWNER",
           visible() {
@@ -126,7 +125,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           },
         }, {
           action: "takeLongRest",
-          icon: makeIconClass(icons.manifest.execution.longRest, "contextMenu"),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.execution.longRest, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
           ownership: "OWNER",
           visible() {
@@ -134,7 +133,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           },
         }, {
           action: "takeShortRest",
-          icon: makeIconClass(icons.manifest.execution.shortRest, "contextMenu"),
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.execution.shortRest, "contextMenu"),
           label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
           ownership: "OWNER",
           visible() {

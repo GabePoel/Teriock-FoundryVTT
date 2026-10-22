@@ -1,5 +1,4 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { AddDocumentsActivation } from "../../activations/_module.mjs";
@@ -45,7 +44,7 @@ export default class AttunementAutomation extends mixClasses(BaseAutomation, Tri
           overrideData: true,
         }],
         display: {
-          icon: icons.manifest.attunable.attune,
+          icon: TERIOCK.DISPLAY.icons.manifest.attunable.attune,
           label: _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: _loc("TYPES.ActiveEffect.attunement") }),
         },
       }),

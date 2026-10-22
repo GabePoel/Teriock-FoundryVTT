@@ -1,6 +1,5 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
-import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
 /** Selection sources that mean a region carries documents to apply. */
@@ -15,15 +14,6 @@ const RENAMED_AUTOMATION_TYPES = {
 };
 
 /**
- * Automation types with a given metadata tag.
- * @param {string} tag
- * @returns {(typeof Automation)[]}
- */
-function getTaggedAutomationTypes(tag) {
-  return Object.values(automations).filter(a => foundry.utils.isSubclass(a, BaseAutomation) && a.metadata.tags[tag]);
-}
-
-/**
  * @template {MixinBase} T
  * @param {T} Base
  */
@@ -34,39 +24,19 @@ export default function AutomatableSystemMixin(Base) {
    */
   class AutomatableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.AutomatableSystemData>} */ (Base) {
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { pseudos: { Automation: "system.automations" } });
-
-    /**
-     * Automation types that make activations.
-     * @returns {(typeof Automation)[]}
-     */
-    static get _activationAutomationTypes() {
-      return getTaggedAutomationTypes("triggered");
-    }
-
-    /**
-     * Array of the types of automations that this system can have.
-     * @returns {(typeof Automation)[]}
-     */
-    static get _automationTypes() {
-      return [];
-    }
-
-    /**
-     * Automation types that apply while their document is active.
-     * @returns {(typeof Automation)[]}
-     */
-    static get _passiveAutomationTypes() {
-      return getTaggedAutomationTypes("passive");
-    }
+    static metadata = mergeMetadata(super.metadata, {
+      automationTags: {},
+      pseudos: { Automation: "system.automations" },
+    });
 
     /**
      * The types of automations that this system can have.
      * @returns {Record<string, Automation>}
      */
     static get automationTypes() {
-      const allowed = this._automationTypes.filter(a =>
-        Object.entries(a.metadata.requires).every(([k, v]) => this.metadata.tags[k] === v)
+      const allowed = Object.values(TERIOCK.CONFIG.Automation.dataModels).filter(a =>
+        Object.entries(a.metadata.tags).some(([k, v]) => v && this.metadata.automationTags[k])
+        && Object.entries(a.metadata.requires).every(([k, v]) => this.metadata.tags[k] === v)
       );
       return Object.fromEntries(
         allowed.map(a => [a.metadata.type, a]).sort((a, b) => _loc(a[1].typeLabel).localeCompare(_loc(b[1].typeLabel))),
@@ -93,7 +63,7 @@ export default function AutomatableSystemMixin(Base) {
         && automation.targeting !== false
         && !automation.overrideData
         && !SELECTION_SOURCES.some(k => automation[k]?.length)
-        && this._automationTypes.some(a => a.metadata.type === "target");
+        && "target" in this.automationTypes;
       if (isTargeting) { automation.type = "target"; }
     }
 

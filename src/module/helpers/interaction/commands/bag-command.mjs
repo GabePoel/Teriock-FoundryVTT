@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
@@ -6,7 +5,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  * @type {Teriock.Command.CommandEntry}
  */
 const command = {
-  icon: icons.manifest.execution.deathBag,
+  icon: TERIOCK.DISPLAY.icons.manifest.execution.deathBag,
   id: "bag",
   label: "TERIOCK.EFFECTS.Common.bag",
   primary: simpleCommandFunctionFactory(a => a.system.deathBagPull()),

@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
@@ -27,8 +26,8 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     documentName: "CombatantGroup",
-    icon: icons.manifest.document.group,
-    img: thumbnails.manifest.document.group,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.group,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.group,
     type: "base",
   });
 

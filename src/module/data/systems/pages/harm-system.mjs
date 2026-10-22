@@ -1,5 +1,4 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
-import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
@@ -13,12 +12,10 @@ export default class HarmSystem
   extends mixClasses(BasePageSystem, AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { crit: { enabled: true, where: "chatData" } });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [...super._automationTypes, ...this._activationAutomationTypes, automations.RollStyleAutomation];
-  }
+  static metadata = mergeMetadata(super.metadata, {
+    automationTags: { harm: true, triggered: true },
+    crit: { enabled: true, where: "chatData" },
+  });
 
   /** @inheritDoc */
   get _panelBars() {

@@ -1,6 +1,4 @@
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
-import costConfig from "../../../../../../static/config/cost-config.mjs";
-import statConfig from "../../../../../../static/config/stat-config.mjs";
 import { mergeMetadata, objectMap } from "../../../../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 
@@ -31,27 +29,27 @@ export default function AbilityCostsPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         costs: new fields.SchemaField({
-          components: new fields.SchemaField(objectMap(costConfig.components.keys, v => {
+          components: new fields.SchemaField(objectMap(TERIOCK.CONFIG.cost.components.keys, v => {
             const label = _loc("TERIOCK.COSTS.Long.component", { key: _loc(v) });
             return new fields.SchemaField({
               description: new fields.HTMLField({ label }),
               type: new fields.StringField({
                 blank: true,
-                choices: localizeChoices(costConfig.components.types, { none: true }),
+                choices: localizeChoices(TERIOCK.CONFIG.cost.components.types, { none: true }),
                 initial: null,
                 label,
                 nullable: true,
               }),
             }, { label });
           })),
-          primary: new fields.SchemaField(objectMap(statConfig, v => {
+          primary: new fields.SchemaField(objectMap(TERIOCK.CONFIG.stat, v => {
             const label = _loc("TERIOCK.COSTS.Long.primary", { key: _loc(v.label) });
             return new fields.SchemaField({
               description: new fields.HTMLField({ label }),
               formula: rollableFormulaField({ label }),
               type: new fields.StringField({
                 blank: true,
-                choices: localizeChoices(costConfig.primary.types, { none: true }),
+                choices: localizeChoices(TERIOCK.CONFIG.cost.primary.types, { none: true }),
                 initial: null,
                 label,
                 nullable: true,
@@ -59,7 +57,7 @@ export default function AbilityCostsPart(Base) {
             }, { label });
           })),
           tweaks: new fields.SchemaField(
-            objectMap(costConfig.tweaks, v =>
+            objectMap(TERIOCK.CONFIG.cost.tweaks, v =>
               new fields.NumberField({ initial: 0, integer: true, label: v.label, min: 0, nullable: false })),
           ),
         }),

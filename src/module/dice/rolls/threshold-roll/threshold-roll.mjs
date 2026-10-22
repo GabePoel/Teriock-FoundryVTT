@@ -1,4 +1,3 @@
-import mathConfig from "../../../static/config/math-config.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
 class Threshold {
@@ -121,7 +120,7 @@ export default class ThresholdRoll extends BaseRoll {
         parsed.push(
           new Threshold({
             ...data,
-            comparison: mathConfig.comparisons[data.comparison].inverse,
+            comparison: TERIOCK.CONFIG.math.comparisons[data.comparison].inverse,
             label: "",
             level: -data.level,
           }),

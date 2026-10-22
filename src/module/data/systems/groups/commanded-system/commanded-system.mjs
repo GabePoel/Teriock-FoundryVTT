@@ -1,5 +1,4 @@
 import TeriockCombatant from "../../../../documents/combatant/combatant.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
 import BaseGroupSystem from "../base-group-system/base-group-system.mjs";
@@ -13,8 +12,8 @@ import BaseGroupSystem from "../base-group-system/base-group-system.mjs";
 export default class CommandedSystem extends BaseGroupSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.document.commanded,
-    img: thumbnails.manifest.document.commanded,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.commanded,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.commanded,
     type: "commanded",
   });
 

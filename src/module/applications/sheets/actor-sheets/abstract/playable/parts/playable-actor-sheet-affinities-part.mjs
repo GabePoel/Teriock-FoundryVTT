@@ -1,5 +1,3 @@
-import affinityConfig from "../../../../../../static/config/affinity-config.mjs";
-
 /**
  * @template {MixinBase} T
  * @param {T} Base
@@ -12,7 +10,7 @@ export default function PlayableActorSheetAffinitiesPart(Base) {
      * @param {object} context
      */
     _prepareAffinityButtonContext(context) {
-      context.affinityButtons = Object.entries(affinityConfig.types).filter(([, type]) => type.button).map(
+      context.affinityButtons = Object.entries(TERIOCK.CONFIG.affinity.types).filter(([, type]) => type.button).map(
         ([key, type]) => {
           return { affinityType: key, img: type.img, label: type.label, tooltip: type?.button };
         },

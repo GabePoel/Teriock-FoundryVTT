@@ -1,4 +1,3 @@
-import piercingConfig from "../../../../static/config/piercing-config.mjs";
 import { objectMap } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 
@@ -16,7 +15,7 @@ export default class PiercingModel extends BaseDataModel {
   static defineSchema() {
     return {
       raw: new fields.NumberField({
-        choices: objectMap(piercingConfig.levels, (v) => v.label, { localize: true, sort: false }),
+        choices: objectMap(TERIOCK.CONFIG.piercing.levels, (v) => v.label, { localize: true, sort: false }),
         initial: 0,
         max: 2,
         min: 0,
@@ -36,12 +35,12 @@ export default class PiercingModel extends BaseDataModel {
 
   /** @inheritDoc */
   get icon() {
-    return piercingConfig.levels[this.value].icon;
+    return TERIOCK.CONFIG.piercing.levels[this.value].icon;
   }
 
   /** @inheritDoc */
   get label() {
-    return this.value >= 1 ? piercingConfig.levels[this.value].label : "";
+    return this.value >= 1 ? TERIOCK.CONFIG.piercing.levels[this.value].label : "";
   }
 
   /**

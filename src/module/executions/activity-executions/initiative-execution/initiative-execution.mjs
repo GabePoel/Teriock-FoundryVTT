@@ -1,6 +1,5 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import characterConfig from "../../../static/config/character-config.mjs";
 import { mixClasses } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
@@ -20,7 +19,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    * @returns {Teriock.System.FormulaString}
    */
   static getFormula(model) {
-    const defaults = characterConfig.defaults.initiative;
+    const defaults = TERIOCK.CONFIG.character.defaults.initiative;
     return FormulaField.sum(
       defaults.base,
       model?.competence.formula ?? defaults.competence,

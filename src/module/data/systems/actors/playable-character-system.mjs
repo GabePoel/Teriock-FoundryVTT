@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { fromIdentifier, mergeMetadata } from "../../../utils/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
@@ -17,8 +16,8 @@ export default class PlayableCharacterSystem extends BaseActorSystem {
    */
   static metadata = mergeMetadata(super.metadata, {
     defaultChildIdentifiers: ["rank:journeyman", "resource:agency-spark"],
-    icon: icons.manifest.document.character,
-    img: thumbnails.manifest.document.character,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.character,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.character,
     type: "pc",
   });
 

@@ -1,5 +1,4 @@
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { icons } from "../../../static/display/_module.mjs";
 
 /**
  * Use the help command.
@@ -24,5 +23,5 @@ async function use() {
   await TeriockChatMessage.create(chatData);
 }
 
-const helpCommand = { icon: icons.manifest.ui.info, id: "help", primary: use, secondary: use };
+const helpCommand = { icon: TERIOCK.DISPLAY.icons.manifest.ui.info, id: "help", primary: use, secondary: use };
 export default helpCommand;

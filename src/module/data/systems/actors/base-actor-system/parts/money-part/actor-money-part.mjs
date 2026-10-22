@@ -1,4 +1,3 @@
-import currencyConfig from "../../../../../../static/config/currency-config.mjs";
 import { objectMap } from "../../../../../../utils/_module.mjs";
 
 /**
@@ -25,7 +24,7 @@ export default function ActorMoneyPart(Base) {
       return Object.assign(super.defineSchema(), {
         interestRate: new fields.NumberField({ initial: 1, integer: false }),
         money: new fields.SchemaField({
-          ...objectMap(currencyConfig, e => currencyField({ label: e.label })),
+          ...objectMap(TERIOCK.CONFIG.currency, e => currencyField({ label: e.label })),
           debt: currencyField({ integer: false, placeholder: true }),
           physical: currencyField({ integer: false, placeholder: true }),
           total: currencyField({ integer: false, placeholder: true }),
@@ -52,7 +51,7 @@ export default function ActorMoneyPart(Base) {
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
-      for (const k of Object.keys(currencyConfig)) {
+      for (const k of Object.keys(TERIOCK.CONFIG.currency)) {
         rollData[`money.${k}`] = this.money[k];
       }
       rollData["money.debt"] = this.money.debt;

@@ -1,4 +1,3 @@
-import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
@@ -13,7 +12,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     documentName: "ChatMessage",
-    icon: icons.manifest.ui.chat,
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.chat,
     type: "base",
   });
 

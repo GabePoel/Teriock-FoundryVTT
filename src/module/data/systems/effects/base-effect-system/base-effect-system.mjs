@@ -1,4 +1,3 @@
-import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses, toKebabCase } from "../../../../utils/_module.mjs";
 import { BaseSystemMixin, ChildSystemMixin } from "../../mixins/_module.mjs";
 
@@ -19,7 +18,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     descriptionPath: "description",
     disabledPath: "disabled",
     documentName: "ActiveEffect",
-    icon: icons.manifest.ability.effectType,
+    icon: TERIOCK.DISPLAY.icons.manifest.ability.effectType,
     preserveOnRefresh: ["disabled", "duration", "tint", "transfer", ...super.metadata.preserveOnRefresh],
     type: "base",
   });

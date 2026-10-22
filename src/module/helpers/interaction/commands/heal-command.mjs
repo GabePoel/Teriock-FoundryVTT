@@ -1,4 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
@@ -6,7 +5,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
  * @type {Teriock.Command.CommandEntry}
  */
 const command = {
-  icon: icons.manifest.effect.heal,
+  icon: TERIOCK.DISPLAY.icons.manifest.effect.heal,
   id: "heal",
   label: "TERIOCK.EFFECTS.Common.heal",
   primary: simpleCommandFunctionFactory((a, o) => a.system.takeHeal(o)),

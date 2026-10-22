@@ -1,5 +1,3 @@
-import { INF_CODE } from "../../static/const.mjs";
-
 const { NumberField } = foundry.data.fields;
 
 /**
@@ -14,7 +12,7 @@ export default class InfiniteNumberField extends NumberField {
       integer: false,
       min: 0,
       nullable: true,
-      placeholder: INF_CODE,
+      placeholder: TERIOCK.CONST.INF_CODE,
       required: true,
     });
   }

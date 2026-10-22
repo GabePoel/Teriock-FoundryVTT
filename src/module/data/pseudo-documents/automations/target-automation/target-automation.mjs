@@ -23,7 +23,7 @@ export default class TargetAutomation extends BaseAutomation {
   ];
 
   /** @inheritdoc */
-  static metadata = mergeMetadata(super.metadata, { type: "target" });
+  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "target" });
 
   /**
    * Make a field with a range placeholder.

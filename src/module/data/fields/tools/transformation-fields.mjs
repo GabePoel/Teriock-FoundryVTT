@@ -1,7 +1,5 @@
 import { LocalDocumentField, TernaryField } from "../_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import statConfig from "../../../static/config/stat-config.mjs";
-import transformationConfig from "../../../static/config/transformation-config.mjs";
 import { objectMap } from "../../../utils/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
@@ -11,7 +9,7 @@ const { fields } = foundry.data;
  * @import { BooleanField, EmbeddedDataField, FilePathField, SetField, StringField } from "@common/data/fields.mjs";
  */
 
-const RESET_STATS = objectMap(statConfig, undefined, { filter: v => v.transformationReset });
+const RESET_STATS = objectMap(TERIOCK.CONFIG.stat, undefined, { filter: v => v.transformationReset });
 
 /**
  * Species transformation fields.
@@ -77,11 +75,13 @@ export function automationTransformationFields() {
     }),
     override: new fields.SetField(
       new fields.StringField({
-        choices: () => objectMap(transformationConfig.override, v => v.label, { localize: true }),
+        choices: () => objectMap(TERIOCK.CONFIG.transformation.override, v => v.label, { localize: true }),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.override.hint",
-        initial: Object.keys(transformationConfig.override).filter(k => transformationConfig.override[k].initial),
+        initial: Object.keys(TERIOCK.CONFIG.transformation.override).filter(k =>
+          TERIOCK.CONFIG.transformation.override[k].initial
+        ),
         label: "TERIOCK.COMMON.Override",
       },
     ),
@@ -95,11 +95,13 @@ export function automationTransformationFields() {
     ),
     suppress: new fields.SetField(
       new fields.StringField({
-        choices: () => objectMap(transformationConfig.suppress, v => v?.label, { localize: true }),
+        choices: () => objectMap(TERIOCK.CONFIG.transformation.suppress, v => v?.label, { localize: true }),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
-        initial: Object.keys(transformationConfig.suppress).filter(k => transformationConfig.suppress[k].initial),
+        initial: Object.keys(TERIOCK.CONFIG.transformation.suppress).filter(k =>
+          TERIOCK.CONFIG.transformation.suppress[k].initial
+        ),
         label: "TERIOCK.SCHEMA.Transformation.suppress.label",
       },
     ),

@@ -1,6 +1,4 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import impactConfig from "../../../static/config/impact-config.mjs";
-import statConfig from "../../../static/config/stat-config.mjs";
 import { toId } from "../../../utils/_module.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
@@ -37,7 +35,7 @@ export default class StatPoolModel extends BaseDataModel {
    * @returns {Teriock.Config.StatEntry}
    */
   get #config() {
-    return statConfig[this.stat];
+    return TERIOCK.CONFIG.stat[this.stat];
   }
 
   /**
@@ -56,7 +54,7 @@ export default class StatPoolModel extends BaseDataModel {
    * @returns {(amount: number) => Promise<void>}
    */
   get callback() {
-    const reverse = impactConfig[this.#config?.impact]?.reverse;
+    const reverse = TERIOCK.CONFIG.impact[this.#config?.impact]?.reverse;
     return async amount => {
       await reverse?.(this.actor, amount);
       if (this.stat === "hp" && !this.actor?.statuses.has("critically-wounded")) {

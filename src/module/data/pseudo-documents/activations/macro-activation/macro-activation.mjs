@@ -1,5 +1,4 @@
 import TeriockChatMessage from "../../../../documents/chat-message/chat-message.mjs";
-import { icons } from "../../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -7,7 +6,10 @@ const { fields } = foundry.data;
 
 export default class MacroActivation extends BaseActivation {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.macro, type: "macro" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: TERIOCK.DISPLAY.icons.manifest.document.macro,
+    type: "macro",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

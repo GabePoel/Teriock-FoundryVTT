@@ -9,7 +9,7 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ToggleChildren"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "toggleChildren" });
+  static metadata = mergeMetadata(super.metadata, { tags: { species: true }, type: "toggleChildren" });
 
   /** @inheritDoc */
   static defineSchema() {

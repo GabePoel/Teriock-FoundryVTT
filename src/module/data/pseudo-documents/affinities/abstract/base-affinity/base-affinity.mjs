@@ -1,4 +1,3 @@
-import { icons } from "../../../../../static/display/_module.mjs";
 import {
   dotJoin,
   makeIcon,
@@ -57,18 +56,13 @@ export default class BaseAffinity
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     documentName: "Affinity",
-    icon: icons.manifest.pseudoDocument.affinity,
+    icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.affinity,
     typed: true,
   });
 
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.activity.AffinityExecution;
-  }
-
-  /** @inheritDoc */
-  static get TYPE_MODELS() {
-    return this.getTypeModels(teriock.data.pseudoDocuments.affinities);
   }
 
   /** @inheritDoc */

@@ -1,5 +1,4 @@
 import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
-import { icons } from "../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses, omit, toId } from "../../../utils/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
@@ -20,7 +19,10 @@ import { BaseActivation } from "./abstract/_module.mjs";
  */
 export default class SummonActivation extends mixClasses(BaseActivation, SelectionPseudoDocumentMixin) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: icons.manifest.document.token, type: "summon" });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: TERIOCK.DISPLAY.icons.manifest.document.token,
+    type: "summon",
+  });
 
   /** @inheritDoc */
   static defineSchema() {

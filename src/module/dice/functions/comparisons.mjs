@@ -1,6 +1,5 @@
-import mathConfig from "../../static/config/math-config.mjs";
 import { objectMap } from "../../utils/_module.mjs";
 
-const comparisons = objectMap(mathConfig.comparisons, (c) => c.fn);
+const comparisons = objectMap(TERIOCK.CONFIG.math.comparisons, (c) => c.fn);
 
 export default comparisons;

@@ -1,10 +1,9 @@
-import statConfig from "../../../../static/config/stat-config.mjs";
 import { makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { StatPoolModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
-const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
+const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].pool?.enabled);
 
 /**
  * @template {MixinBase} T

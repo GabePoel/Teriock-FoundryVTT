@@ -1,12 +1,11 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 
 export default class CoverSystem extends BaseEffectSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    icon: icons.manifest.cover.full,
-    img: thumbnails.manifest.document.cover,
+    icon: TERIOCK.DISPLAY.icons.manifest.cover.full,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.cover,
     type: "cover",
   });
 }

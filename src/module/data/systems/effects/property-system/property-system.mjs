@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -44,21 +43,17 @@ export default class PropertySystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    automationTags: { passive: true, triggered: true },
     childTypes: ["property"],
     crit: { enabled: true, where: "chatData" },
-    icon: icons.manifest.document.property,
-    img: thumbnails.manifest.document.property,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.property,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.property,
     importDialog: true,
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "property",
     visibleTypes: ["property"],
   });
-
-  /** @inheritDoc */
-  static get _automationTypes() {
-    return [...super._automationTypes, ...this._activationAutomationTypes, ...this._passiveAutomationTypes];
-  }
 
   /** @inheritDoc */
   static defineSchema() {

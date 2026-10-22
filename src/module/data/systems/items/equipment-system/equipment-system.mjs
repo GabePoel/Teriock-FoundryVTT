@@ -1,5 +1,3 @@
-import equipmentConfig from "../../../../static/config/equipment-config.mjs";
-import { icons, thumbnails } from "../../../../static/display/_module.mjs";
 import {
   dotJoin,
   fromIdentifier,
@@ -64,11 +62,11 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["equipment", ...super.metadata.childTypes],
-    icon: icons.manifest.document.equipment,
-    img: thumbnails.manifest.document.equipment,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.equipment,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.equipment,
     importDialog: true,
     initialKind: "mundane",
-    kinds: _replace(equipmentConfig.kind),
+    kinds: _replace(TERIOCK.CONFIG.equipment.kind),
     preserveOnRefresh: [
       "img",
       "name",

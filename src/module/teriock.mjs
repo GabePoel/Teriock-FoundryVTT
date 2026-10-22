@@ -1,3 +1,7 @@
+// This defines the `TERIOCK` global so it must be imported before any other module. Keep everything else sorted.
+/* eslint-disable perfectionist/sort-imports */
+import * as TERIOCK from "./static/_module.mjs";
+
 import { default as templates } from "../json/templates.json" with { type: "json" };
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
@@ -7,14 +11,12 @@ import * as documents from "./documents/_module.mjs";
 import * as executions from "./executions/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 import * as setup from "./setup/_module.mjs";
-import * as TERIOCK from "./static/_module.mjs";
 import * as utils from "./utils/_module.mjs";
 
 // Register Global References
 // ==========================
 
 Object.assign(globalThis, {
-  TERIOCK,
   teriock: {
     applications,
     canvas,
@@ -155,11 +157,17 @@ foundry.helpers.Hooks.once("init", function() {
   // Assign Document and Collection Classes
   // --------------------------------------
 
-  const registerSubtypes = (module) => {
+  const registerSubtypes = (module, Base) => {
     for (const model of Object.values(module)) {
-      if (foundry.utils.isSubclass(model, foundry.abstract.TypeDataModel)) { model.registerModel?.(); }
+      if (foundry.utils.isSubclass(model, Base)) { model.registerModel?.(); }
     }
   };
+
+  const pd = data.pseudoDocuments;
+  registerSubtypes(pd.activations, pd.activations.abstract.BaseActivation);
+  registerSubtypes(pd.affinities, pd.affinities.abstract.BaseAffinity);
+  registerSubtypes(pd.automations, pd.automations.abstract.BaseAutomation);
+  registerSubtypes(pd.expirations, pd.expirations.abstract.BaseExpiration);
 
   CONFIG.ActiveEffect.changeTypes = TERIOCK.CONFIG.change.types;
   CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
@@ -167,18 +175,18 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
   CONFIG.ActiveEffect.expiryAction = "delete";
   CONFIG.ActiveEffect.phases = TERIOCK.CONFIG.change.phase;
-  registerSubtypes(data.systems.effects);
+  registerSubtypes(data.systems.effects, foundry.abstract.TypeDataModel);
 
   CONFIG.Actor.collection = documents.collections.TeriockActors;
   CONFIG.Actor.defaultType = "pc";
   CONFIG.Actor.documentClass = documents.TeriockActor;
-  registerSubtypes(data.systems.actors);
+  registerSubtypes(data.systems.actors, foundry.abstract.TypeDataModel);
 
   CONFIG.AmbientLight.documentClass = documents.TeriockAmbientLightDocument;
   CONFIG.AmbientLight.objectClass = canvas.placeables.TeriockAmbientLight;
 
   CONFIG.Card.documentClass = documents.TeriockCard;
-  registerSubtypes(data.systems.cards);
+  registerSubtypes(data.systems.cards, foundry.abstract.TypeDataModel);
 
   CONFIG.Cards.documentClass = documents.TeriockCards;
 
@@ -186,32 +194,32 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.ChatMessage.popoutClass = applications.sidebar.apps.TeriockChatPopout;
   CONFIG.ChatMessage.template = "teriock/ui/chat-message";
-  registerSubtypes(data.systems.messages);
+  registerSubtypes(data.systems.messages, foundry.abstract.TypeDataModel);
 
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Combat.initiative.decimals = 2;
   CONFIG.Combat.initiative.formula = teriock.executions.activity.InitiativeExecution.getFormula();
 
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
-  registerSubtypes(data.systems.combatants);
+  registerSubtypes(data.systems.combatants, foundry.abstract.TypeDataModel);
 
   CONFIG.CombatantGroup.defaultType = "mob";
   CONFIG.CombatantGroup.documentClass = documents.TeriockCombatantGroup;
-  registerSubtypes(data.systems.groups);
+  registerSubtypes(data.systems.groups, foundry.abstract.TypeDataModel);
 
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 
   CONFIG.Item.compendiumIndexFields = ["system._sup"];
   CONFIG.Item.defaultType = "power";
   CONFIG.Item.documentClass = documents.TeriockItem;
-  registerSubtypes(data.systems.items);
+  registerSubtypes(data.systems.items, foundry.abstract.TypeDataModel);
 
   CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
 
   CONFIG.JournalEntryCategory.documentClass = documents.TeriockJournalEntryCategory;
 
   CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
-  registerSubtypes(data.systems.pages);
+  registerSubtypes(data.systems.pages, foundry.abstract.TypeDataModel);
 
   CONFIG.Macro.defaultType = "script";
   CONFIG.Macro.documentClass = documents.TeriockMacro;

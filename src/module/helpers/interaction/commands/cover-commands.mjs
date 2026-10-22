@@ -1,5 +1,3 @@
-import { icons } from "../../../static/display/_module.mjs";
-
 /**
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
@@ -21,7 +19,7 @@ async function takeUncover(actor) {
  * @type {Teriock.Command.CommandEntry}
  */
 export const coverCommand = {
-  icon: icons.manifest.cover.full,
+  icon: TERIOCK.DISPLAY.icons.manifest.cover.full,
   id: "cover",
   label: "TERIOCK.COMMANDS.Cover.label",
   primary: takeCover,
@@ -33,7 +31,7 @@ export const coverCommand = {
  * @type {Teriock.Command.CommandEntry}
  */
 export const uncoverCommand = {
-  icon: icons.manifest.cover.half,
+  icon: TERIOCK.DISPLAY.icons.manifest.cover.half,
   id: "uncover",
   label: "TERIOCK.COMMANDS.Uncover.label",
   primary: takeUncover,

@@ -1,7 +1,5 @@
 import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import impactConfig from "../../../../static/config/impact-config.mjs";
-import systemConfig from "../../../../static/config/system-config.mjs";
 import { makeIcon, mergeMetadata, mixClasses, objectMap, toKebabCase } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
@@ -46,7 +44,7 @@ export default function ChildSystemMixin(Base) {
      */
     static metadata = mergeMetadata(super.metadata, {
       initialKind: "normal",
-      kinds: systemConfig.defaultKinds,
+      kinds: TERIOCK.CONFIG.system.defaultKinds,
       preserveOnRefresh: ["system.competence", ...super.metadata.preserveOnRefresh],
       tags: { triggerable: true },
     });
@@ -60,9 +58,11 @@ export default function ChildSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         boosts: new fields.SchemaField(
-          objectMap(impactConfig, e => new FormulaField({ deterministic: false, initial: "", label: e.label }), {
-            filter: e => !e?.hidden,
-          }),
+          objectMap(
+            TERIOCK.CONFIG.impact,
+            e => new FormulaField({ deterministic: false, initial: "", label: e.label }),
+            { filter: e => !e?.hidden },
+          ),
           { persisted: false },
         ),
         forceSuppressed: initialBoolean(),

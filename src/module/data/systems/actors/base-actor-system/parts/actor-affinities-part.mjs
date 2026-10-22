@@ -1,10 +1,9 @@
 import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
 import { AffinityExecution, ResistanceExecution } from "../../../../../executions/activity-executions/_module.mjs";
-import affinityConfig from "../../../../../static/config/affinity-config.mjs";
 import { toId } from "../../../../../utils/_module.mjs";
-import { BaseAffinity } from "../../../../pseudo-documents/affinities/abstract/_module.mjs";
 
 /**
+ * @import { BaseAffinity } from "../../../../pseudo-documents/affinities/abstract/_module.mjs";
  * @import AbstractActorSystem from "../abstract-actor-system.mjs";
  */
 
@@ -12,14 +11,7 @@ import { BaseAffinity } from "../../../../pseudo-documents/affinities/abstract/_
  * Cache of the Affinity types that are "no effect" protections in the [FanWar](https://fanwar.com) context.
  * @type {AffinityType[]}
  */
-const PROTECTION_TYPES = Object.entries(affinityConfig.types).filter(([, t]) => t.protection).map(([k]) => k);
-
-/**
- * Cached record of Affinity types.
- * @type {AffinityTypeMap}
- * @todo Remove this when Pseudo-Documents get moved to `CONFIG`-style structure.
- */
-const AFFINITY_TYPES = {};
+const PROTECTION_TYPES = Object.entries(TERIOCK.CONFIG.affinity.types).filter(([, t]) => t.protection).map(([k]) => k);
 
 /**
  * Actor data model that handles affinities.
@@ -42,13 +34,9 @@ export default function ActorAffinitiesPart(Base) {
      */
     _addVirtualAffinity(type, category, value, source, data) {
       const id = toId(`${type}${category}${value}${source}`, { hash: true });
-      if (!AFFINITY_TYPES[type]) {
-        AFFINITY_TYPES[type] = Object.values(teriock.data.pseudoDocuments.affinities).filter(a =>
-          foundry.utils.isSubclass(a, BaseAffinity)
-        ).find(a => a.metadata.type === type);
-      }
       const keyed = category === "other" ? { name: value } : { identifier: value };
-      const affinity = new AFFINITY_TYPES[type]({ _id: id, category, type, ...keyed, ...data }, { parent: this });
+      const Affinity = TERIOCK.CONFIG.Affinity.dataModels[type];
+      const affinity = new Affinity({ _id: id, category, type, ...keyed, ...data }, { parent: this });
       affinity.sourceName = source;
       this.affinities.set(affinity.id, affinity);
     }
@@ -70,7 +58,7 @@ export default function ActorAffinitiesPart(Base) {
     /** @inheritDoc */
     prepareVirtualEffects() {
       super.prepareVirtualEffects();
-      for (const { category, status, type, value } of affinityConfig.conditions) {
+      for (const { category, status, type, value } of TERIOCK.CONFIG.affinity.conditions) {
         if (!this.parent.statuses.has(status)) { continue; }
         const condition = TERIOCK.STATUSES.conditions[status];
         this._addVirtualAffinity(type, category, category === "other" ? _loc(value) : value, condition?.name, {
@@ -92,7 +80,7 @@ export default function ActorAffinitiesPart(Base) {
      * @todo Rework to work with {@link BaseAffinity}.
      */
     async rollAffinity(type, options = {}) {
-      const config = affinityConfig.types[type];
+      const config = TERIOCK.CONFIG.affinity.types[type];
       if (!config) { return; }
       if (options.event) { Object.assign(options, ThresholdRoll.parseEvent(options.event)); }
       if (config.hook) { await this.parent.fireTrigger(config.hook); }

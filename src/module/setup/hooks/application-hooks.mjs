@@ -10,7 +10,7 @@ import { makeIconClass } from "../../utils/_module.mjs";
  */
 
 /**
- * Add the entries from {@link EmbedCardDocument.getEmbedContextMenuEntries} to sheet header.
+ * Add the entries from {@link EmbeddableData.getEmbedContextMenuEntries} to sheet header.
  * @param {DocumentSheetV2 & { document: TeriockDocument }} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}

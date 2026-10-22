@@ -1,4 +1,3 @@
-import documentBehaviorConfig from "../../../static/config/document-behavior-config.mjs";
 import {
   CommonDocumentSettingsModel,
   DocumentSettingsModelFactory,
@@ -7,8 +6,8 @@ import {
 
 export { CommonDocumentSettingsModel };
 export const userSettingsModels = Object.fromEntries(
-  Object.keys(documentBehaviorConfig.categories).map((k) => [k, UserSettingsModelFactory(k)]),
+  Object.keys(TERIOCK.CONFIG.documentBehavior.categories).map((k) => [k, UserSettingsModelFactory(k)]),
 );
 export const documentSettingsModels = Object.fromEntries(
-  Object.keys(documentBehaviorConfig.compositions).map((k) => [k, DocumentSettingsModelFactory(k)]),
+  Object.keys(TERIOCK.CONFIG.documentBehavior.compositions).map((k) => [k, DocumentSettingsModelFactory(k)]),
 );

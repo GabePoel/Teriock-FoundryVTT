@@ -1,4 +1,3 @@
-import { icons, thumbnails } from "../../../static/display/_module.mjs";
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
 
@@ -6,8 +5,8 @@ export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["base", "consequence", "equipment"],
-    icon: icons.manifest.document.inventory,
-    img: thumbnails.manifest.document.inventory,
+    icon: TERIOCK.DISPLAY.icons.manifest.document.inventory,
+    img: TERIOCK.DISPLAY.thumbnails.manifest.document.inventory,
     type: "inventory",
     visibleTypes: ["equipment"],
   });

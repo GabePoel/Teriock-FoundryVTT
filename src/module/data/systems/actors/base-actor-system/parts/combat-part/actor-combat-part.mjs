@@ -1,5 +1,4 @@
 import { BaseRoll, ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
-import systemConfig from "../../../../../../static/config/system-config.mjs";
 import { LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../models/_module.mjs";
@@ -48,7 +47,7 @@ export default function ActorCombatPart(Base) {
             worn: initialNumber(),
           }),
           bv: new fields.NumberField({ initial: null, integer: true, nullable: true }),
-          cc: initialNumber(systemConfig.baseValues.ac),
+          cc: initialNumber(TERIOCK.CONFIG.system.baseValues.ac),
         }),
         initiative: new fields.EmbeddedDataField(InitiativeModel),
         offense: new fields.SchemaField({
@@ -114,7 +113,7 @@ export default function ActorCombatPart(Base) {
         e.system.equipped && e.system.equipmentClasses.has("armor")
       );
       this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
-      this.defense.ac ??= systemConfig.baseValues.ac;
+      this.defense.ac ??= TERIOCK.CONFIG.system.baseValues.ac;
       this.defense.bv ??= 0;
     }
 

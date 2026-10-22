@@ -1,6 +1,4 @@
-import { icons } from "../../../static/display/_module.mjs";
-import { makeIcon, makeIconClass, mixClasses, objectMap } from "../../../utils/_module.mjs";
-import { ChoiceSelector } from "../../dialogs/_module.mjs";
+import { makeIcon, makeIconClass, mixClasses } from "../../../utils/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 import ChoicesSheetMixin from "./choices-sheet-mixin.mjs";
@@ -55,10 +53,11 @@ export default function MechanicsSheetMixin(Base) {
       mechanics: {
         initial: "automations",
         labelPrefix: "EFFECT.TABS",
-        tabs: [{ icon: makeIconClass(icons.manifest.pseudoDocument.automation, "solid"), id: "automations" }, {
-          icon: makeIconClass(icons.manifest.pseudoDocument.affinity, "solid"),
-          id: "affinities",
-        }, { icon: makeIconClass(icons.manifest.pseudoDocument.expiration, "solid"), id: "expirations" }],
+        tabs: [
+          { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.pseudoDocument.automation, "solid"), id: "automations" },
+          { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.pseudoDocument.affinity, "solid"), id: "affinities" },
+          { icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.pseudoDocument.expiration, "solid"), id: "expirations" },
+        ],
       },
     };
 
@@ -72,20 +71,12 @@ export default function MechanicsSheetMixin(Base) {
     static async _onCreateMechanic(_event, target) {
       const config = this._mechanicCollections[target.dataset.collection];
       if (!config) { return; }
-      const choices = objectMap(config.types, p => p.typeLabel, { localize: true });
-      if (Object.keys(choices).length === 0) { return; }
-      let choice;
-      if (Object.keys(choices).length === 1) { choice = Object.keys(choices)[0]; }
-      else {
-        choice = await ChoiceSelector.prompt(choices, {
-          hint: config.hint,
-          icon: config.icon,
-          required: true,
-          title: config.title,
-        });
-      }
-      if (!choice) { return; }
-      await this.document.createPseudoDocuments(config.baseClass.documentName, [{ type: choice }]);
+      const types = Object.keys(config.types);
+      if (!types.length) { return; }
+      await config.baseClass.createDialog({}, { parent: this.document }, {
+        types,
+        window: { icon: makeIconClass(config.icon, "title") },
+      });
     }
 
     /**
@@ -147,10 +138,9 @@ export default function MechanicsSheetMixin(Base) {
             addLabel: _loc("TERIOCK.SHEETS.Common.ACTIONS.addChild", { name }),
             baseClass: collection.documentClass,
             collection,
-            hint: _loc("TERIOCK.DIALOGS.Select.AddType.hint", { name }),
-            icon: icons.manifest.pseudoDocument[documentName.toLowerCase()] ?? icons.manifest.pseudoDocument.mechanic,
+            icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument[documentName.toLowerCase()]
+              ?? TERIOCK.DISPLAY.icons.manifest.pseudoDocument.mechanic,
             id: collection.name,
-            title: _loc("TERIOCK.DIALOGS.Select.AddType.title", { name }),
             types: this.document.getFieldForProperty(this.document.metadata.pseudos[documentName])?.options?.types
               ?? {},
           }];

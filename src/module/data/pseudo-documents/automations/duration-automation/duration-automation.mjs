@@ -11,7 +11,7 @@ export default class DurationAutomation extends BaseAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Duration"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { type: "duration" });
+  static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "duration" });
 
   /** @inheritDoc */
   static defineSchema() {

@@ -7,10 +7,8 @@ declare global {
       addLabel: string;
       baseClass: typeof MechanicPseudoDocument;
       collection: PseudoCollection<MechanicPseudoDocument>;
-      hint: string;
       icon: string;
       id: string;
-      title: string;
       types: Record<string, typeof MechanicPseudoDocument>;
     };
 
