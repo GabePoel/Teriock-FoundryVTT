@@ -299,10 +299,18 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     if (!groupId) {
       const members = [target, ...joiners];
       if (!name || !type) {
+        const nameContext = { commander: target, members };
         ({ name, type } =
           await CombatantGroup.implementation.createDialog({ name, type }, { parent: this }, {
-            getData: true,
-            nameContext: { commander: target, members },
+            nameContext,
+            ok: {
+              callback: (_event, button) => {
+                const data = new foundry.applications.ux.FormDataExtended(button.form).object;
+                data.name = data.name?.trim()
+                  || CombatantGroup.implementation.defaultName({ ...nameContext, parent: this, type: data.type });
+                return data;
+              },
+            },
             position,
           }) ?? {});
         if (!type) { return; }
