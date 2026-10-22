@@ -1,4 +1,4 @@
-import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
+import { DocumentSelector, selectDocument } from "../../../../applications/dialogs/_module.mjs";
 import { getName, mergeMetadata, mixClasses, resolveDocuments, safeInf } from "../../../../utils/_module.mjs";
 import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
@@ -40,6 +40,7 @@ export default class RankSystem
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.rank,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.rank,
+    importable: true,
     initialCompetence: 1,
     initialKind: "learned",
     kinds: _replace(TERIOCK.CONFIG.class.kind),
@@ -56,6 +57,34 @@ export default class RankSystem
       maxAv: new InfiniteNumberField({ initial: TERIOCK.CONFIG.class.defaults.maxAv, integer: true }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });
+  }
+
+  /** @inheritDoc */
+  static async importDocument(createOptions = {}, options = {}) {
+    const classDocument = await selectDocument("class", {
+      globalIdentifiers: Object.keys(TERIOCK.CONFIG.class.classes).map(c => `class:${c}`),
+      globalTypes: [],
+    }, options);
+    if (!classDocument) { return null; }
+    const selectedRanks = await DocumentSelector.selectFromConfig({
+      globalIdentifiers: Array.from(classDocument.system.ranks ?? []),
+    }, {
+      ...options,
+      hint: _loc("TERIOCK.DIALOGS.Select.Name.hint", {
+        name: _loc("TYPES.Item.rank").toLocaleLowerCase(game.i18n.lang),
+      }),
+      title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: _loc("TYPES.Item.rank") }),
+    });
+    if (!selectedRanks?.length) { return null; }
+    const rank = game.items.fromCompendium(selectedRanks[0]);
+    if (createOptions.parent) {
+      foundry.utils.setProperty(
+        rank,
+        "system.kind",
+        createOptions.parent.documentName === "Actor" ? "learned" : "innate",
+      );
+    }
+    return rank;
   }
 
   /**

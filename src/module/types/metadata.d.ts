@@ -51,7 +51,6 @@ declare global {
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       img: string;
-      importDialog: boolean;
       preserveOnRefresh: string[];
       sortPaths: string[];
       tags: SystemMetadataTags;
@@ -59,6 +58,7 @@ declare global {
 
     export type CommonSystemMetadata = SystemMetadata & {
       childTypes: Teriock.Documents.ChildType[];
+      importable: boolean;
       visibleTypes: Teriock.Documents.ChildType[];
     };
 

@@ -1,6 +1,13 @@
 import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 import { listFormat } from "../../helpers/localization.mjs";
-import { createElement, getTypeLabel, isKebabCase, makeIconClass, parseIdentifier } from "../../utils/_module.mjs";
+import {
+  createElement,
+  getTypeLabel,
+  isKebabCase,
+  makeIconClass,
+  parseIdentifier,
+  toKebabCase,
+} from "../../utils/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
@@ -206,7 +213,7 @@ export default class HTMLIdentifierTagsElement extends AbstractAutocompleteSugge
    * @throws {Error}
    */
   #validateIdentifier(identifier) {
-    identifier = identifier.trim();
+    identifier = identifier.split(":").map(part => toKebabCase(part)).join(":");
     if (!identifier) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank")); }
     const types = this.types;
     if (!validateTypedIdentifier(identifier, { types })) {
@@ -296,6 +303,16 @@ export default class HTMLIdentifierTagsElement extends AbstractAutocompleteSugge
     const group = createElement("div", { className: "input-group" });
     group.append(this.#input, this.#button);
     return [this.#tags, group];
+  }
+
+  /** @inheritDoc */
+  _formatInput(value) {
+    // Keep the colon and hyphen at the end of the text.
+    const [type, ...rest] = value.split(":");
+    const identifier = rest.length ? rest.join("-") : type;
+    const kebab = toKebabCase(identifier);
+    const formatted = kebab && /[^a-z0-9']$/i.test(identifier) ? `${kebab}-` : kebab;
+    return rest.length ? `${toKebabCase(type)}:${formatted}` : formatted;
   }
 
   /** @inheritDoc */

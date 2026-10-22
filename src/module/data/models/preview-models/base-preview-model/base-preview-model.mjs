@@ -25,15 +25,17 @@ export default class BasePreviewModel extends BaseDataModel {
   static #resolveAddButton(add, app) {
     if (!add) { return null; }
     const resolved = typeof add.types === "function" ? add.types(app) : add.types;
-    const types = (resolved ?? (add.type ? [add.type] : []))?.filter(Boolean) ?? [];
+    const { childTypes } = app.document.metadata;
+    const types = (resolved ?? (add.type ? [add.type] : []))?.filter(t => t && (!childTypes || childTypes.includes(t)))
+      ?? [];
     if (!types.length) { return null; }
-    const dataType = add.type ?? (types.length === 1 ? types[0] : null);
+    const dataType = types.includes(add.type) ? add.type : (types.length === 1 ? types[0] : null);
     const tooltip = add.label
       ? _loc(add.label)
       : dataType
       ? _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: getTypeLabel(dataType) ?? dataType })
       : _loc("TERIOCK.SHEETS.Common.PREVIEW.addChildDocument");
-    return { dataType, dataTypes: types.length > 1 ? types.join(",") : null, tooltip, types };
+    return { dataType, dataTypes: types.join(","), tooltip };
   }
 
   /**

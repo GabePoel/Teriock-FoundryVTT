@@ -11,25 +11,6 @@ const { CombatantGroup } = foundry.documents;
  */
 export default class TeriockCombatantGroup extends mixClasses(CombatantGroup, BaseDocumentMixin, EmbeddableDataMixin) {
   /**
-   * @inheritDoc
-   * @param {object} [context]
-   * @param {string} [context.type]
-   * @param {TeriockCombat|null} [context.parent]
-   * @param {string|null} [context.pack]
-   * @param {TeriockCombatant|null} [context.commander] - Commander of the CombatantGroup
-   * @param {TeriockCombatant[]} [context.members] - Combatants forming the CombatantGroup
-   */
-  static defaultName(context = {}) {
-    const baseName = context.type ? CONFIG.CombatantGroup.dataModels[context.type]?.defaultName?.(context) : null;
-    if (!baseName) { return super.defaultName(context); }
-    const takenNames = new Set(context.parent?.groups.map(g => g.name));
-    let name = baseName;
-    let index = 1;
-    while (takenNames.has(name)) { name = `${baseName} (${++index})`; }
-    return name;
-  }
-
-  /**
    * The member that holds this CombatantGroup's place in the turn order.
    * @returns {TeriockCombatant|null}
    */

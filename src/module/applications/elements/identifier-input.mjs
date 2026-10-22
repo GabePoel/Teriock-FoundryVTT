@@ -1,4 +1,4 @@
-import { createElement, makeIconClass } from "../../utils/_module.mjs";
+import { createElement, makeIconClass, toKebabCase } from "../../utils/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
 const { setInputAttributes } = foundry.applications.fields;
@@ -64,6 +64,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
     this.#resetButton?.addEventListener("click", this.#onReset.bind(this));
     this._primaryInput.addEventListener("change", event => {
       event.stopPropagation();
+      this._primaryInput.value = toKebabCase(this._primaryInput.value);
       this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
     });
   }
@@ -87,8 +88,15 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
   }
 
   /** @inheritDoc */
+  _formatInput(value) {
+    // Keep hyphens at the end of the text so typing isn't confusing.
+    const kebab = toKebabCase(value);
+    return kebab && /[^a-z0-9']$/i.test(value) ? `${kebab}-` : kebab;
+  }
+
+  /** @inheritDoc */
   _getValue() {
-    return this._primaryInput?.value.trim() || null;
+    return toKebabCase(this._primaryInput?.value ?? "") || null;
   }
 
   /** @inheritDoc */

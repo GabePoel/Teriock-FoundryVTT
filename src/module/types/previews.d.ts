@@ -41,22 +41,20 @@ declare global {
     export type PreviewAddButton = {
       /** A localization key overriding the button's default tooltip. */
       label?: string;
-      /** The child type created on left-click. Omit to make left-click open the menu instead. */
+      /** The child type selected by default. Defaults to the first of `types`. */
       type?: Teriock.Documents.ChildType;
-      /** The child types offered by the context menu, or a resolver called with the app instance. */
+      /** The child types offered by the create dialog, or a resolver called with the app instance. */
       types?: ((app: TeriockDocumentSheet) => Teriock.Documents.ChildType[]) | Teriock.Documents.ChildType[];
     };
 
     /** The add button state resolved for a render, attached to the preview model and consumed by the template. */
     export type PreviewAddButtonContext = {
-      /** The child type created directly on left-click */
+      /** The child type selected by default */
       dataType: Teriock.Documents.ChildType | null;
-      /** The comma-separated menu child types */
-      dataTypes: string | null;
+      /** The comma-separated child types */
+      dataTypes: string;
       /** The localized tooltip */
       tooltip: string;
-      /** The resolved child types */
-      types: Teriock.Documents.ChildType[];
     };
 
     /** Configuration for a single preview on a sheet: a map entry of preview id to `{ model?, data?, groups, addButton? }`. */

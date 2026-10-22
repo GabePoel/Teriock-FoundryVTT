@@ -4,6 +4,7 @@ import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs"
 const { fields } = foundry.data;
 
 /**
+ * @import { DialogV2 } from "@client/applications/api/_module.mjs";
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
  * @import { ColorSource } from "@common/_types.mjs";
  */
@@ -40,7 +41,6 @@ export default function BaseSystemMixin(Base) {
       documentName: "",
       icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
       img: TERIOCK.DISPLAY.thumbnails.common.unknown,
-      importDialog: false,
       preserveOnRefresh: [],
       sortPaths: ["name", "_stats.createdTime"],
       tags: {
@@ -71,6 +71,13 @@ export default function BaseSystemMixin(Base) {
       if (!this.metadata.documentName) { return ""; }
       return `TYPES.${this.metadata.documentName}.${this.metadata.type}`;
     }
+
+    /**
+     * Update a {@link BaseDocument.createDialog} whenever its form changes while this type is selected. Elements added
+     * to the form should have a `data-system-field` attribute so they're removed when the type changes.
+     * @param {DialogV2} _dialog
+     */
+    static _onChangeCreateDialog(_dialog) {}
 
     /** @inheritDoc */
     static defineSchema() {

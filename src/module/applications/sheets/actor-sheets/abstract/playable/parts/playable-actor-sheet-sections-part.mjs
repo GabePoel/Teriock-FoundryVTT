@@ -69,6 +69,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
       }, {
         docs: this.document.previewed.getTypeSync("attunement"),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.attunement.plural").toLocaleLowerCase(game.i18n.lang),
+        optional: !this.document.metadata.childTypes.includes("attunement"),
       }, {
         docs: this.document.effects.filter(e => ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.effect.plural").toLocaleLowerCase(game.i18n.lang),
@@ -90,9 +91,11 @@ export default function PlayableActorSheetSectionsPart(Base) {
       }, {
         docs: this.document.previewed.getTypeSync("body"),
         empty: _loc("TERIOCK.DOCUMENTS.Item.body.plural").toLocaleLowerCase(game.i18n.lang),
+        optional: !this.document.metadata.childTypes.includes("body"),
       }, {
         docs: this.document.previewed.getTypeSync("mount"),
         empty: _loc("TERIOCK.DOCUMENTS.Item.mount.plural").toLocaleLowerCase(game.i18n.lang),
+        optional: !this.document.metadata.childTypes.includes("mount"),
       }];
     }
 
@@ -115,6 +118,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
       return [{
         docs: this.document.previewed.getTypeSync("species"),
         empty: _loc("TERIOCK.DOCUMENTS.Item.species.plural").toLocaleLowerCase(game.i18n.lang),
+        optional: !this.document.metadata.childTypes.includes("species"),
       }, {
         docs: this.document.previewed.getTypeSync("power"),
         empty: _loc("TERIOCK.DOCUMENTS.Item.power.plural").toLocaleLowerCase(game.i18n.lang),

@@ -17,6 +17,7 @@ export default class CreatureSystem extends mixClasses(BaseActorSystem, WikiSyst
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.creature,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.creature,
+    importable: true,
     type: "creature",
   });
 

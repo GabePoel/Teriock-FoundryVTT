@@ -1,4 +1,5 @@
 import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
+import { selectDocument } from "../../../../applications/dialogs/_module.mjs";
 import {
   getSystemClass,
   makeIcon,
@@ -15,6 +16,7 @@ const { fields } = foundry.data;
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
+ * @import { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
  */
 
 /**
@@ -46,13 +48,34 @@ export default function CommonSystemMixin(Base) {
      */
     static metadata = mergeMetadata(super.metadata, {
       childTypes: [],
+      importable: false,
       preserveOnRefresh: ["system.identifier", ...super.metadata.preserveOnRefresh],
       visibleTypes: [],
     });
 
     /** @inheritDoc */
+    static _onChangeCreateDialog(dialog) {
+      super._onChangeCreateDialog(dialog);
+      dialog.element.querySelector("[data-action=import]")?.classList.toggle("hidden", !this.metadata.importable);
+    }
+
+    /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { lockedPaths: new fields.SetField(new fields.StringField()) });
+    }
+
+    /**
+     * Select an existing document of this type and get the data to create a copy of it.
+     * @param {DatabaseCreateOperation} [_createOptions]
+     * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
+     * @param {Teriock.Select.DocumentSelectionConfig} [config] - Config for the document selector.
+     * @returns {Promise<object|null>}
+     */
+    static async importDocument(_createOptions = {}, options = {}, config = {}) {
+      const selected = await selectDocument(this.metadata.type, config, options);
+      if (!selected) { return null; }
+      return game.collections.get(selected.documentName)?.fromCompendium(selected)
+        ?? foundry.utils.mergeObject(selected.toObject(), { _stats: { compendiumSource: selected.uuid } });
     }
 
     /**

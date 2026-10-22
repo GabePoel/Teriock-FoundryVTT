@@ -51,7 +51,7 @@ export default class SpeciesSystem
     childTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
     icon: TERIOCK.DISPLAY.icons.manifest.document.species,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.species,
-    importDialog: true,
+    importable: true,
     initialCompetence: 1,
     type: "species",
     visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],

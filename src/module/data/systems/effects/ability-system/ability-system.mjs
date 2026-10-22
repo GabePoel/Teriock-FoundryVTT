@@ -73,7 +73,7 @@ export default class AbilitySystem
     crit: { enabled: true, where: "effectData" },
     icon: TERIOCK.DISPLAY.icons.manifest.document.ability,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.ability,
-    importDialog: true,
+    importable: true,
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "ability",

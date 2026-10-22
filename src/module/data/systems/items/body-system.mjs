@@ -18,7 +18,7 @@ export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMix
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.body,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.body,
-    importDialog: true,
+    importable: true,
     initialKind: "intrinsic",
     kinds: _replace({ intrinsic: TERIOCK.CONFIG.effect.kind.intrinsic, ...TERIOCK.CONFIG.system.defaultKinds }),
     tags: { usable: true },

@@ -80,6 +80,14 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
 
   /** @inheritDoc */
   _activateListeners() {
+    this._primaryInput.addEventListener("input", () => {
+      const input = this._primaryInput;
+      const value = this._formatInput(input.value);
+      if (value === input.value) { return; }
+      const caret = this._formatInput(input.value.slice(0, input.selectionStart)).length;
+      input.value = value;
+      input.setSelectionRange(caret, caret);
+    });
     if (!this.#suggestions.length) { return; }
     this.#autocomplete = new Autocomplete.implementation({ onSelect: this._onSelectSuggestion.bind(this) });
     const refresh = this.#refreshSuggestions.bind(this);
@@ -104,6 +112,15 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
   }
 
   /**
+   * Format the primary input's text as it's typed.
+   * @param {string} value
+   * @returns {string}
+   */
+  _formatInput(value) {
+    return value;
+  }
+
+  /**
    * Handle selection of a suggestion.
    * @param {string} value
    */
@@ -122,7 +139,7 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
     this.#suggestions = [...this.querySelectorAll("option")].map(o => ({
       identifier: o.value,
       label: o.textContent,
-      search: AbstractAutocompleteSuggestionsElement.#normalize(o.textContent),
+      search: AbstractAutocompleteSuggestionsElement.#normalize(`${o.textContent} ${o.value}`),
     }));
     super.connectedCallback();
   }

@@ -1,3 +1,4 @@
+import { selectDocument } from "../../../../applications/dialogs/_module.mjs";
 import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
@@ -33,6 +34,7 @@ export default class FluencySystem
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.fluency,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.fluency,
+    importable: true,
     initialCompetence: 2,
     tags: { usable: true },
     type: "fluency",
@@ -43,6 +45,15 @@ export default class FluencySystem
     return teriock.executions.child.FluencyExecution;
   }
 
+  /**
+   * @param {object} [context]
+   * @param {string} [context.tradecraft]
+   * @returns {string|null}
+   */
+  static defaultName({ tradecraft }) {
+    return tradecraft ? _loc("TERIOCK.SYSTEMS.Fluency.name", { tradecraft }) : null;
+  }
+
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
@@ -50,6 +61,26 @@ export default class FluencySystem
       tradecraft: tradecraftField({ required: true }),
       tradecraftDescription: initialText({ label: "TERIOCK.COMMON.Tradecraft" }),
     });
+  }
+
+  /** @inheritDoc */
+  static async importDocument(createOptions = {}, options = {}) {
+    const tc = await selectDocument("tradecraft", {
+      globalIdentifiers: Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).map(t => `tradecraft:${t}`),
+      globalTypes: [],
+    }, options);
+    if (!tc) { return null; }
+    return {
+      img: tc.img,
+      name: foundry.utils.getDocumentClass("ActiveEffect").defaultName({
+        pack: createOptions.pack,
+        parent: createOptions.parent,
+        tradecraft: tc.name,
+        type: "fluency",
+      }),
+      system: { field: tc.system._source.field, tradecraft: tc.system.identifier },
+      type: "fluency",
+    };
   }
 
   /** @inheritDoc */

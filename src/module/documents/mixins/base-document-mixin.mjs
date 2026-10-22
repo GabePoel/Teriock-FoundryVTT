@@ -1,8 +1,10 @@
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
-import { makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
+import { createElement, makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
 
 /**
+ * @import { ApplicationRenderOptions } from "@client/applications/_types.mjs";
+ * @import { DialogV2RenderCallback } from "@client/applications/api/dialog.mjs";
  * @import { Document } from "@common/abstract/_module.mjs";
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
  * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
@@ -92,36 +94,49 @@ export default function BaseDocumentMixin(Base) {
      * @param {DatabaseCreateOperation} [createOptions]
      * @param {object} [options]
      * @param {object} [options.nameContext] - Additional context for the default name
+     * @param {DialogV2RenderCallback} [options.render]
      * @param {ApplicationRenderOptions} [renderOptions]
+     * @returns {Promise<Document|null>}
+     * @version 369
      */
     static async createDialog(
       data = {},
       createOptions = {},
-      { nameContext = {}, ...options } = {},
+      { nameContext = {}, render, ...options } = {},
       renderOptions = {},
     ) {
-      const config = CONFIG[this.documentName];
-      const defaultName = type =>
-        this.defaultName({ ...nameContext, pack: createOptions.pack, parent: createOptions.parent, type });
-      const typeIcon = type => config.typeIcons?.[type] ?? config.sidebarIcon;
+      const { pack, parent } = createOptions;
+      const typeConfig = type => CONFIG[(type ? this.getTypeClass(type) : this).documentName];
+      const defaultName = type => this.getTypeClass(type).defaultName({ ...nameContext, pack, parent, type });
+      const typeIcon = type => typeConfig(type).typeIcons?.[type] ?? typeConfig(type).sidebarIcon;
       return super.createDialog(data, createOptions, {
-        // Replace the default change type listener so that we can have custom default names and also icons
-        render: (_event, dialog) => {
-          const select = dialog.element.querySelector("[name=type]");
-          if (!select) { return; }
+        // Replace the default change type listener so that we can have custom default names and icons and have the
+        // selected type's system update the dialog.
+        render: (event, dialog) => {
+          render?.(event, dialog);
+          const form = dialog.element.querySelector("form");
+          let previousType;
           const onChange = () => {
-            const type = select.value;
-            const nameElement = dialog.element.querySelector("[name=name]");
-            if (nameElement) { dialog.element.querySelector("[name=name]").placeholder = defaultName(type); }
-            const hintElement = dialog.element.querySelector(".hint");
-            if (hintElement) { hintElement.textContent = _loc(config.typeHints?.[type]); }
-            dialog.window.icon.className = `window-icon ${typeIcon(type)}`;
+            const type = form.elements.type?.value || data.type || typeConfig().defaultType;
+            if (type !== previousType) {
+              previousType = type;
+              for (const element of form.querySelectorAll("[data-system-field]")) { element.remove(); }
+              if (form.elements.name) { form.elements.name.placeholder = defaultName(type); }
+              const typeGroup = form.elements.type?.closest(".form-group");
+              if (typeGroup) {
+                const hintElement = typeGroup.querySelector(".hint")
+                  ?? typeGroup.appendChild(createElement("p", { className: "hint" }));
+                hintElement.textContent = _loc(typeConfig(type).typeHints?.[type]);
+              }
+              dialog.window.icon.className = `window-icon ${typeIcon(type)}`;
+            }
+            typeConfig(type).dataModels?.[type]?._onChangeCreateDialog?.(dialog);
           };
           onChange();
-          select.addEventListener("change", onChange);
+          form.addEventListener("input", onChange);
         },
         ...options,
-        window: { icon: typeIcon(data.type || config.defaultType), ...options.window },
+        window: { icon: typeIcon(data.type || typeConfig().defaultType), ...options.window },
       }, renderOptions);
     }
 
@@ -145,6 +160,32 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * @inheritDoc
+     * @param {object} [context]
+     * @param {string} [context.type]
+     * @param {Document|null} [context.parent]
+     * @param {string|null} [context.pack]
+     * @param {Set<string>} [context.takenNames]
+     */
+    static defaultName({ takenNames, ...context } = {}) {
+      const { pack, parent, type } = context;
+      let baseName = CONFIG[this.documentName].dataModels?.[type]?.defaultName?.(context);
+      if (!baseName && !takenNames) { return super.defaultName(context); }
+      baseName ||= _loc(CONFIG[this.documentName].typeLabels?.[type] ?? this.metadata.label);
+      takenNames ??= new Set(
+        (parent
+          ? parent.getEmbeddedCollection(this.documentName)
+          : pack
+          ? game.packs.get(pack).index
+          : game.collections.get(this.documentName))?.map(d => d.name),
+      );
+      let name = baseName;
+      let index = 1;
+      while (takenNames.has(name)) { name = `${baseName} (${++index})`; }
+      return name;
+    }
+
+    /**
      * @param {string[]} ids
      * @param {Partial<Omit<DatabaseDeleteOperation, "ids"> & Teriock.System._Operation>} operation
      * @inheritDoc
@@ -161,6 +202,15 @@ export default function BaseDocumentMixin(Base) {
         return docs;
       }
       return super.deleteDocuments(ids, operation);
+    }
+
+    /**
+     * The document class that creates documents of the given type.
+     * @param {string} _type
+     * @returns {typeof BaseDocument}
+     */
+    static getTypeClass(_type) {
+      return this;
     }
 
     /** @inheritDoc */

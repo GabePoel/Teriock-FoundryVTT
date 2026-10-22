@@ -176,6 +176,14 @@ export default function HierarchyDocumentMixin(Base) {
       return super.createDocuments(filteredData, operation);
     }
 
+    /** @inheritDoc */
+    static defaultName({ parent, ...context } = {}) {
+      const takenNames = parent && !(this.documentName in parent.constructor.metadata.embedded)
+        ? new Set(parent.children.map(c => c.name))
+        : undefined;
+      return super.defaultName({ ...context, parent, takenNames });
+    }
+
     /**
      * Resolve a `toObject` call.
      * @param {UUID|object} obj

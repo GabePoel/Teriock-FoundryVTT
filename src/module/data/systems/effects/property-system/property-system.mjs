@@ -48,7 +48,7 @@ export default class PropertySystem
     crit: { enabled: true, where: "chatData" },
     icon: TERIOCK.DISPLAY.icons.manifest.document.property,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.property,
-    importDialog: true,
+    importable: true,
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "property",

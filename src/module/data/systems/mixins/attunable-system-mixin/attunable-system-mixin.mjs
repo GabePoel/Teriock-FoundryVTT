@@ -87,7 +87,7 @@ export default function AttunableSystemMixin(Base) {
         tooltip: this.isAttuned
           ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
           : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-        visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
+        visible: this.parent.isOwner && Boolean(this.actor?.metadata.childTypes.includes("attunement")),
         onClick: async () => {
           if (this.isAttuned) { await this.deattune(); }
           else { await this.attune(); }
@@ -154,7 +154,7 @@ export default function AttunableSystemMixin(Base) {
         system: { inheritTier: true, origin: this.parent.type, target: this.parent._id, tier: this.tier.value },
         type: "attunement",
       };
-      if (!this.parent.actor) { return null; }
+      if (!this.parent.actor?.metadata.childTypes.includes("attunement")) { return null; }
       const enoughPresence = await this.canAttune();
       [attunement] = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
       const options = { format: { name: this.parent.fullName }, localize: true };

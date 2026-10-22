@@ -1,10 +1,12 @@
 import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
-import { ensureChildren, ensureNoChildren, mixClasses } from "../../utils/_module.mjs";
+import { ensureChildren, ensureNoChildren, getSystemClass, makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ * @import { ApplicationRenderOptions } from "@client/applications/_types.mjs";
+ * @import { DialogV2RenderCallback } from "@client/applications/api/dialog.mjs";
  * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
  */
 
@@ -26,12 +28,110 @@ export default function CommonDocumentMixin(Base) {
    */
   class CommonDocument extends mixClasses(Base, PropagationDataMixin, EmbeddableDataMixin, PanelDataMixin) {
     /**
+     * @inheritDoc
+     * @param {object} [data]
+     * @param {DatabaseCreateOperation} [createOptions]
+     * @param {object} [options]
+     * @param {DialogV2RenderCallback} [options.render]
+     * @param {Teriock.Documents.ChildType[]} [options.types] - The types of other common Documents can be included.
+     * @param {ApplicationRenderOptions} [renderOptions]
+     * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
+     */
+    static async createDialog(data = {}, createOptions = {}, { render, types, ...options } = {}, renderOptions = {}) {
+      const { pack, parent, ...operation } = { renderSheet: true, ...createOptions };
+
+      // Special handling so that types of more than one class of Document can be created
+      const combined = types?.some(type => !this.TYPES.includes(type));
+      const label = _loc(combined ? "DOCUMENT.Document" : this.metadata.label);
+      const title = _loc("DOCUMENT.Create", { type: label });
+
+      // Special handling to allow for subs and other child Document relations to be created and also right clicks
+      const create = async (createData, renderSheet) => {
+        const cls = this.getTypeClass(createData.type);
+        const op = renderSheet ? operation : { ...operation, renderSheet: false };
+        return parent
+          ? (await parent.createChildDocuments(cls.documentName, [createData], op))?.[0]
+          : cls.create(createData, { ...op, pack });
+      };
+
+      // Add import button and put types under their Document class if there's types not from this Document class
+      const dialogOptions = {
+        buttons: [{
+          action: "import",
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.import, "button"),
+          label: _loc("TERIOCK.DIALOGS.ImportDocument", { type: label }),
+          callback: async (event, button) => {
+            let renderSheet = event.type !== "contextmenu";
+            const onConfirm = confirmEvent => {
+              if (confirmEvent.type === "contextmenu") { renderSheet = false; }
+            };
+            const importData = await getSystemClass(button.form.elements.type.value).importDocument(createOptions, {
+              onConfirm,
+            });
+            if (!importData) { return null; }
+            const formData = new foundry.applications.ux.FormDataExtended(button.form).object;
+            const filled = Object.fromEntries(
+              Object.entries(formData).filter(([, v]) => v),
+            );
+            return create(foundry.utils.mergeObject({ ...importData, folder: null }, filled), renderSheet);
+          },
+        }],
+        context: combined
+          ? {
+            types: types.map(type => {
+              const cls = this.getTypeClass(type);
+              return {
+                group: _loc(cls.metadata.labelPlural),
+                label: _loc(CONFIG[cls.documentName].typeLabels[type]),
+                value: type,
+              };
+            }).sort((a, b) => a.group.localeCompare(b.group) || a.label.localeCompare(b.label, game.i18n.lang)),
+          }
+          : {},
+        ok: {
+          label: title,
+          callback: async (event, button) => {
+            // Reimplement using the child operation create data
+            const createData = foundry.utils.mergeObject(
+              data,
+              new foundry.applications.ux.FormDataExtended(button.form, { disabled: true }).object,
+              { inplace: false },
+            );
+            const type = createData.type;
+            if (!createData.folder) { delete createData.folder; }
+            createData.name = createData.name?.trim() || this.getTypeClass(type).defaultName({ pack, parent, type });
+            return create(createData, event.type !== "contextmenu");
+          },
+        },
+        types: types?.filter(type => this.TYPES.includes(type)),
+        window: { title },
+        render: (event, dialog) => {
+          render?.(event, dialog);
+          const select = dialog.element.querySelector("[name=type]");
+          select.disabled = select.options.length === 1;
+          for (const action of Object.keys(dialog.options.buttons)) {
+            const button = dialog.element.querySelector(`button[data-action="${action}"]`);
+            button.addEventListener("contextmenu", event => dialog._onSubmit(button, event));
+          }
+        },
+      };
+      return super.createDialog(data, createOptions, { ...dialogOptions, ...options }, renderOptions);
+    }
+
+    /**
      * Get the default image for some type of this document.
      * @param {string} type
      * @returns {string|null}
      */
     static getDefaultImageForType(type) {
       return CONFIG[this.documentName].dataModels[type]?.metadata.img ?? null;
+    }
+
+    /** @inheritDoc */
+    static getTypeClass(type) {
+      if (this.TYPES.includes(type)) { return this; }
+      const documentName = getSystemClass(type)?.metadata.documentName;
+      return documentName ? foundry.utils.getDocumentClass(documentName) : this;
     }
 
     /**

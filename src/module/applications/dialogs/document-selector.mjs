@@ -92,6 +92,7 @@ export default class DocumentSelector extends ResolvableDialog {
    */
   static async _onGetSelected(event) {
     event?.preventDefault();
+    if (event) { this.onConfirm?.(event); }
     const root = this.element;
     let ids = [];
     if (this.multi) { ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name); }
@@ -263,6 +264,7 @@ export default class DocumentSelector extends ResolvableDialog {
     this.hint = hint;
     this.tooltip = tooltip;
     this.openable = openable;
+    this.onConfirm = options.onConfirm;
     if (options.title) { foundry.utils.setProperty(this.options, "window.title", options.title); }
     if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
     this.unchecked = !Object.values(documents).some(d => d.checked);
@@ -299,6 +301,10 @@ export default class DocumentSelector extends ResolvableDialog {
   async _onRender(context, options = {}) {
     await super._onRender(context, options);
     this._initSearchFilter();
+    this.element.querySelector("[data-action=ok]")?.addEventListener(
+      "contextmenu",
+      event => DocumentSelector._onGetSelected.call(this, event),
+    );
   }
 
   /** @inheritDoc */

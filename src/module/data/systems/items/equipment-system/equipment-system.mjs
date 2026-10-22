@@ -64,7 +64,7 @@ export default class EquipmentSystem
     childTypes: ["equipment", ...super.metadata.childTypes],
     icon: TERIOCK.DISPLAY.icons.manifest.document.equipment,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.equipment,
-    importDialog: true,
+    importable: true,
     initialKind: "mundane",
     kinds: _replace(TERIOCK.CONFIG.equipment.kind),
     preserveOnRefresh: [
@@ -93,6 +93,14 @@ export default class EquipmentSystem
       consumable: new fields.BooleanField({ initial: false }),
       equipmentType: equipmentTypeField({ blank: true, initial: "", required: false }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
+    });
+  }
+
+  /** @inheritDoc */
+  static async importDocument(createOptions = {}, options = {}) {
+    return super.importDocument(createOptions, options, {
+      globalIdentifiers: Array.from(game.teriock.identifiers.equipmentTypes.keys(), e => `equipment:${e}`),
+      globalTypes: [],
     });
   }
 

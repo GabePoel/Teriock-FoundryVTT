@@ -34,6 +34,8 @@ declare global {
       title?: string;
       /** Whether a tooltip should be displayed for each document option */
       tooltip?: boolean;
+      /** Called with the event that confirmed the selection */
+      onConfirm?: (event: Event) => void;
     };
 
     export type SelectDocumentDialogOptions = _BaseDocumentSelectDialogOptions & {
