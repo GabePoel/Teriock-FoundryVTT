@@ -90,38 +90,47 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
 
   /**
    * Present a Dialog to create a new Pseudo-Document of this type.
-   * Designed to mirror {@link CliantDocument.createDialog}.
+   * Designed to mirror {@link ClientDocument.createDialog}.
    * @param {object} [data] - Pseudo-Document creation data.
    * @param {Partial<DatabaseCreateOperation>} [createOptions] - Pseudo-Document creation options.
    * @param {object} [options] - Options forwarded to DialogV2.prompt.
    * @param {string[]} [options.types] - A restriction of the selectable subtypes of the Dialog.
+   * @param {string} [options.template] - A template to use for the dialog contents instead of the default.
+   * @param {object} [options.context] - Additional render context to provide to the template.
    * @returns {Promise<BasePseudoDocument|null>}
    * @version 369
    */
-  static async createDialog(data = {}, createOptions = {}, { types, ...dialogOptions } = {}) {
+  static async createDialog(data = {}, createOptions = {}, { context, template, types, ...dialogOptions } = {}) {
     // Identify allowed types
-    const allowed = this.TYPES.filter(t => !types || types.includes(t));
-    if (!allowed.length) { throw new Error("No pseudo-document types were permitted to be created"); }
-    if (allowed.length === 1) { return this.create({ ...data, type: allowed[0] }, createOptions); }
     const config = TERIOCK.CONFIG[this.documentName];
+    if (types?.length === 0) { throw new Error("The array of sub-types to restrict to must not be empty"); }
+    const documentTypes = this.TYPES.filter(t => !types || types.includes(t)).map(value => ({
+      label: _loc(config.typeLabels[value]),
+      value,
+    }));
+    if (!documentTypes.length) { throw new Error("No pseudo-document types were permitted to be created"); }
+    const hasTypes = documentTypes.length > 1;
+    const type = documentTypes.some(t => t.value === data.type) ? data.type : documentTypes[0].value;
+    if (!hasTypes && !template) { return this.create({ ...data, type }, createOptions); }
 
     // Sort alphabetically
-    const documentTypes = allowed.map(value => ({ label: _loc(config.typeLabels[value]), value })).sort((a, b) =>
-      a.label.localeCompare(b.label, game.i18n.lang)
-    );
-    const type = documentTypes.some(t => t.value === data.type) ? data.type : documentTypes[0].value;
+    documentTypes.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+
+    // Collect data
+    const title = _loc("DOCUMENT.Create", { type: _loc(`DOCUMENT.${this.documentName}`) });
 
     // Render the document creation form
+    template ??= "templates/sidebar/document-create.html";
     const content = createElement("div", {
-      innerHTML: await foundry.applications.handlebars.renderTemplate("templates/sidebar/document-create.html", {
-        hasTypes: this.metadata.typed,
+      innerHTML: await foundry.applications.handlebars.renderTemplate(template, {
+        hasTypes,
         type,
         typeHint: _loc(config.typeHints[type]),
         types: documentTypes,
+        ...context,
       }),
     });
-    content.querySelector("[name=\"name\"]").closest(".form-group").remove();
-    const title = _loc("DOCUMENT.Create", { type: _loc(`DOCUMENT.${this.documentName}`) });
+    content.querySelector("[name=\"name\"]")?.closest(".form-group")?.remove();
 
     // Render the confirmation dialog window
     return TeriockDialog.prompt(
@@ -131,16 +140,18 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
           label: title,
           callback: (_event, button) =>
             this.create(
-              { ...data, ...new foundry.applications.ux.FormDataExtended(button.form).object },
+              { ...data, type, ...new foundry.applications.ux.FormDataExtended(button.form).object },
               createOptions,
             ),
         },
         position: { width: 360 },
         window: { title },
         render: (_event, dialog) => {
+          if (!hasTypes) { return; }
           const select = dialog.element.querySelector("[name=\"type\"]");
-          select.addEventListener("change", () => {
-            select.closest(".form-group").querySelector(".hint").textContent = _loc(config.typeHints[select.value]);
+          select?.addEventListener("change", () => {
+            const hint = select.closest(".form-group").querySelector(".hint");
+            if (hint) { hint.textContent = _loc(config.typeHints[select.value]); }
           });
         },
       }, dialogOptions),
