@@ -1,11 +1,18 @@
-<li class="combatant {{ css }}" data-action="activateCombatant" data-combatant-id="{{ id }}" data-uuid="{{ uuid }}">
+<li
+  class="combatant {{ css }}"
+  data-action="activateCombatant"
+  data-combatant-id="{{ id }}"
+  data-uuid="{{ uuid }}"
+  data-tooltip-uuid="{{ uuid }}"
+  data-tooltip-direction="LEFT"
+>
   <div class="token-image" style="outline-color:{{ color.css }}">
     <img src="{{ img }}" alt="{{ name }}" loading="lazy" />
   </div>
   <div class="token-name">
     <strong class="name">
       {{#if icon}}
-        <i class="{{ icon.css }}" data-tooltip="{{ icon.tooltip }}"></i>
+        <i class="{{ icon.css }}" data-tooltip="{{ icon.tooltip }}" data-tooltip-class="" data-tooltip-direction=""></i>
       {{/if}}
       {{ name }}
     </strong>
@@ -26,6 +33,8 @@
           aria-label="{{localize (ifThen hidden 'COMBATANT.Show' 'COMBATANT.Hide')}}"
           data-action="toggleHidden"
           data-tooltip
+          data-tooltip-class=""
+          data-tooltip-direction=""
         ></button>
         <button
           class="
@@ -42,6 +51,8 @@
           aria-label="{{localize (ifThen isDefeated 'COMBATANT.UnmarkDefeated' 'COMBATANT.MarkDefeated')}}"
           data-action="toggleDefeated"
           data-tooltip
+          data-tooltip-class=""
+          data-tooltip-direction=""
         ></button>
       {{/if}}
       {{#if canPing}}
@@ -51,6 +62,8 @@
           aria-label="{{localize 'COMBATANT.Ping'}}"
           data-action="pingCombatant"
           data-tooltip
+          data-tooltip-class=""
+          data-tooltip-direction=""
         ></button>
       {{/if}}
       {{#unless @root.user.isGM}}
@@ -60,6 +73,8 @@
           aria-label="{{localize 'COMBATANT.PanTo'}}"
           data-action="panToCombatant"
           data-tooltip
+          data-tooltip-class=""
+          data-tooltip-direction=""
         ></button>
       {{/unless}}
       {{#if reaction}}
@@ -68,10 +83,17 @@
           type="button"
           data-action="toggleReaction"
           data-tooltip="TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"
+          data-tooltip-class=""
+          data-tooltip-direction=""
           {{disabled reaction.disabled}}
         ></button>
       {{/if}}
-      <div class="token-effects" data-tooltip-html="{{ effects.tooltip }}">
+      <div
+        class="token-effects"
+        data-tooltip-html="{{ effects.tooltip }}"
+        data-tooltip-class=""
+        data-tooltip-direction=""
+      >
         {{#each effects.icons}}
           <img class="token-effect" src="{{ img }}" alt="{{ name }}" />
         {{/each}}

@@ -126,6 +126,11 @@ export function associationsField(options = {}) {
           badge: new StringField(),
           color: new ColorField({ blank: true, initial: null, nullable: true, required: false }),
           documentUuid: new DocumentUUIDField(),
+          icon: new SchemaField({ icon: new StringField(), tooltip: new StringField() }, {
+            initial: null,
+            nullable: true,
+            required: false,
+          }),
           img: new FilePathField({ categories: ["IMAGE"], initial: TERIOCK.DISPLAY.thumbnails.common.unknown }),
           name: new StringField(),
         }),

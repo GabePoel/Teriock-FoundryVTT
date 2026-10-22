@@ -1,5 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { InitiativeModel } from "../../../models/modifier-models/_module.mjs";
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
@@ -16,7 +17,11 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Combatant"];
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { documentName: "Combatant", type: "base" });
+  static metadata = mergeMetadata(super.metadata, {
+    documentName: "Combatant",
+    icon: TERIOCK.DISPLAY.icons.manifest.document.combatant,
+    type: "base",
+  });
 
   /** @inheritDoc */
   static defineSchema() {
@@ -41,6 +46,11 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   }
 
   /** @inheritDoc */
+  get _color() {
+    return this.parent.token?.color ?? null;
+  }
+
+  /** @inheritDoc */
   get actor() {
     return this.parent.actor;
   }
@@ -51,6 +61,22 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
    */
   get defaultCombatant() {
     return (this.actor && this.parent.parent?.getCombatantsByActor(this.actor)[0]) || this.parent;
+  }
+
+  /**
+   * A single icon which denotes this Combatant's role in its CombatantGroup.
+   * @returns {Teriock.Embeds.EmbedIcon|null}
+   */
+  get tagIcon() {
+    const combatant = this.parent;
+    const icons = TERIOCK.DISPLAY.icons.manifest.combat;
+    if (combatant.isCommander) {
+      return { icon: icons.commander, tooltip: _loc("TERIOCK.SYSTEMS.CombatantGroup.FIELDS.commanderId.label") };
+    }
+    if (combatant.group?.system.minions.includes(combatant)) {
+      return { icon: icons.minion, tooltip: _loc("TERIOCK.SYSTEMS.Combatant.EMBED.minion") };
+    }
+    return null;
   }
 
   /** @inheritDoc */
@@ -69,6 +95,32 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if ("system" in changed) { this.actor?.render(); }
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const { actor, initiative } = this.parent;
+    const { pluralRules } = game.i18n;
+    return Object.assign(await super.getPanelParts(), {
+      associations: actor?.isViewer ? [Panel.toAssociation([actor], "DOCUMENT.Actor", actor.typeIcon)] : [],
+      bars: [{
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [this.tagIcon?.tooltip ?? ""],
+      }, {
+        icon: TERIOCK.DISPLAY.icons.manifest.interaction.attack,
+        label: _loc("TERIOCK.COMBAT.Event.combat"),
+        wrappers: [
+          _loc(`TERIOCK.SYSTEMS.Combatant.PANELS.actions.${pluralRules.select(this.actions)}`, { value: this.actions }),
+          _loc(`TERIOCK.SYSTEMS.Combatant.PANELS.reactions.${pluralRules.select(this.reactions)}`, {
+            value: this.reactions,
+          }),
+          _loc("TERIOCK.SYSTEMS.Combatant.PANELS.attackPenalty", { value: this.attackPenalty }),
+          Number.isFinite(initiative) ? _loc("TERIOCK.SYSTEMS.Combatant.PANELS.initiative", { value: initiative }) : "",
+        ],
+      }],
+      color: this.color,
+    });
   }
 
   /** @inheritDoc */

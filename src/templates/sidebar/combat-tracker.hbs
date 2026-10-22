@@ -11,12 +11,22 @@
           data-action="activateCombatant"
           data-double="toggleGroup"
           data-uuid="{{ group.uuid }}"
+          data-tooltip-uuid="{{ group.uuid }}"
+          data-tooltip-direction="LEFT"
         >
           <div class="token-image" style="outline-color:{{ group.color.css }}">
             <img src="{{ group.img }}" alt="{{ group.name }}" loading="lazy" />
           </div>
           <div class="token-name">
-            <strong class="name">{{ group.name }}</strong>
+            <strong class="name">
+              <i
+                class="{{ group.icon.css }}"
+                data-tooltip="{{ group.icon.tooltip }}"
+                data-tooltip-class=""
+                data-tooltip-direction=""
+              ></i>
+              {{ group.name }}
+            </strong>
             <div class="combatant-controls">
               {{#if @root.user.isGM}}
                 <button
@@ -34,6 +44,8 @@
                   aria-label="{{localize (ifThen group.hidden 'COMBATANT.Show' 'COMBATANT.Hide')}}"
                   data-action="toggleHidden"
                   data-tooltip
+                  data-tooltip-class=""
+                  data-tooltip-direction=""
                 ></button>
                 <button
                   class="
@@ -50,6 +62,8 @@
                   aria-label="{{localize (ifThen group.defeated 'COMBATANT.UnmarkDefeated' 'COMBATANT.MarkDefeated')}}"
                   data-action="toggleDefeated"
                   data-tooltip
+                  data-tooltip-class=""
+                  data-tooltip-direction=""
                 ></button>
               {{else}}
                 <button
@@ -58,12 +72,10 @@
                   aria-label="{{localize 'TERIOCK.COMBAT.Group.panTo'}}"
                   data-action="panToCombatant"
                   data-tooltip
+                  data-tooltip-class=""
+                  data-tooltip-direction=""
                 ></button>
               {{/if}}
-              <span class="member-count" data-action="toggleCollapse" data-tooltip="{{ group.count.tooltip }}">
-                <i class="{{ group.count.css }}"></i>
-                {{~ group.count.value ~}}
-              </span>
             </div>
           </div>
           {{> "teriock/sidebar/initiative"

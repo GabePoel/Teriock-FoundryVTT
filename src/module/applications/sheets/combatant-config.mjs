@@ -1,7 +1,13 @@
+import { mixClasses } from "../../utils/_module.mjs";
+import { BaseDocumentSheetMixin } from "../api/_module.mjs";
+
 const { CombatantConfig } = foundry.applications.sheets;
 
-/** @inheritDoc */
-export default class TeriockCombatantConfig extends CombatantConfig {
+/**
+ * @extends {CombatantConfig}
+ * @mixes BaseDocumentSheet
+ */
+export default class TeriockCombatantConfig extends mixClasses(CombatantConfig, BaseDocumentSheetMixin) {
   /** @inheritDoc */
   _replaceHTML(result, content, options) {
     const initiativeGroup = result.body?.querySelector(".form-group:has(input[name='initiative'])");

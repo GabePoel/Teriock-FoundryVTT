@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
@@ -55,6 +56,11 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
       : null;
   }
 
+  /** @inheritDoc */
+  get _color() {
+    return this.parent.face?.token?.color ?? null;
+  }
+
   /**
    * The commander of this group.
    * @returns {TeriockCombatant|null}
@@ -77,5 +83,40 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
     if (yes === false) { return false; }
 
     this.parent.updateSource(foundry.utils.mergeObject({ img: this.metadata.img }, data));
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    const members = this.parent.turnMembers.filter(m => m.visible);
+    return Object.assign(await super.getPanelParts(), {
+      associations: [{
+        cards: members.map(m => ({
+          ...Panel.toAssociationCard(m),
+          badge: _loc("TERIOCK.SYSTEMS.Combatant.PANELS.attackPenalty", { value: m.system.attackPenalty }),
+        })),
+        icon: TERIOCK.DISPLAY.icons.manifest.document.combatant,
+        title: _loc("TERIOCK.COMBAT.Group.members"),
+      }],
+      bars: [{
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [
+          this.parent.typeLabel,
+          _loc(`TERIOCK.SYSTEMS.CombatantGroup.PANELS.members.${game.i18n.pluralRules.select(members.length)}`, {
+            value: members.length,
+          }),
+        ],
+      }, {
+        icon: TERIOCK.DISPLAY.icons.manifest.interaction.attack,
+        label: _loc("TERIOCK.COMBAT.Event.combat"),
+        wrappers: [
+          Number.isFinite(this.parent.initiative)
+            ? _loc("TERIOCK.SYSTEMS.Combatant.PANELS.initiative", { value: this.parent.initiative })
+            : "",
+        ],
+      }],
+      color: this.color,
+      name: this.parent.name || this.parent.face?.name,
+    });
   }
 }

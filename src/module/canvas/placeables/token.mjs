@@ -11,7 +11,7 @@ const { TokenTurnMarker } = foundry.canvas.placeables.tokens;
 const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
 
 const MINION_TURN_MARKER_FILTER = new PIXI.ColorMatrixFilter();
-MINION_TURN_MARKER_FILTER.hue(180, false);
+MINION_TURN_MARKER_FILTER.saturate(-1, false);
 
 /**
  * @extends {Token}

@@ -34,7 +34,7 @@ export default function RulesSystemMixin(Base) {
       }
       const identifier = form.elements["system.identifier"];
       identifier.setAttribute("reset", defaultIdentifier);
-      identifier.querySelector("input").placeholder = defaultIdentifier;
+      (identifier.querySelector("input") ?? identifier).placeholder = defaultIdentifier;
     }
 
     /** @inheritDoc */

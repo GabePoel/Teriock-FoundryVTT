@@ -1,7 +1,7 @@
-import { EmbeddableDataMixin } from "../../data/mixins/_module.mjs";
+import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
-import { dotJoin, mixClasses } from "../../utils/_module.mjs";
+import { dotJoin, makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 /**
@@ -14,8 +14,11 @@ const { Combatant } = foundry.documents;
  * The Teriock Combatant implementation.
  * @extends {Combatant}
  * @mixes BaseDocument
+ * @mixes PanelData
  */
-export default class TeriockCombatant extends mixClasses(Combatant, BaseDocumentMixin, EmbeddableDataMixin) {
+export default class TeriockCombatant
+  extends mixClasses(Combatant, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin)
+{
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
@@ -53,6 +56,12 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
    */
   get turnMembers() {
     return this.group?.turnMembers ?? [this];
+  }
+
+  /** @inheritDoc */
+  get typeIcon() {
+    const tagIcon = this.system.tagIcon;
+    return tagIcon ? makeIconClass(tagIcon.icon, "title") : super.typeIcon;
   }
 
   /**

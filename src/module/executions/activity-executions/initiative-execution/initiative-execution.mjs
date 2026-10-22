@@ -91,6 +91,11 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
     this.rolls.push(this.roller.getInitiativeRoll(this.formula));
   }
 
+  /** @inheritDoc */
+  async _buildSourcePanel() {
+    return false;
+  }
+
   /**
    * @inheritDoc
    * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.InitiativeExecutionOptions>} [options]

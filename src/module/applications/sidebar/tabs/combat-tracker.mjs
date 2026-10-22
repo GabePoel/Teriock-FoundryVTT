@@ -18,7 +18,7 @@ export default class TeriockCombatTracker
    * @param {HTMLElement} target
    */
   static #onToggleGroup(event, target) {
-    if (event.target.closest("button, .member-count, .token-initiative")) { return; }
+    if (event.target.closest("button, .token-initiative")) { return; }
     this._toggleCollapsed(this._getCollapsibleId(target), undefined, target);
   }
 
@@ -390,7 +390,7 @@ export default class TeriockCombatTracker
         turns.push(Object.assign(members[0], { icon: null, locked: false, rollerId }));
         continue;
       }
-      const face = holder.visible ? holder : holder.turnMembers.find(m => m.visible);
+      const face = group.face;
       // A CombatantGroup is only defeated once its turn holder is
       const defeated = holder.isDefeated;
       turns.push({
@@ -398,13 +398,9 @@ export default class TeriockCombatTracker
           .filterJoin(" "),
         group: {
           color: face.token?.color,
-          count: {
-            css: makeIconClass(group.typeIcon),
-            tooltip: _loc("TERIOCK.COMBAT.Group.members", { type: group.typeLabel }),
-            value: members.length,
-          },
           defeated,
           hidden: group.hidden,
+          icon: { css: makeIconClass(group.system.metadata.icon, "text"), tooltip: group.typeLabel },
           id: group.id,
           img: group.img || face.img,
           initiative: group.initiative,
@@ -428,16 +424,12 @@ export default class TeriockCombatTracker
   async _prepareTurnContext(combat, combatant, index) {
     const turn = await super._prepareTurnContext(combat, combatant, index);
     const hasReaction = Boolean(combatant.system.reactions);
+    const tagIcon = combatant.isCommander ? combatant.system.tagIcon : null;
     // CombatantGroup initiative is handled by the group header
     const locked = Boolean(combatant.group);
     return Object.assign(turn, {
       color: combatant.token?.color,
-      icon: combatant.isCommander
-        ? {
-          css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander),
-          tooltip: "TERIOCK.SYSTEMS.CombatantGroup.FIELDS.commanderId.label",
-        }
-        : null,
+      icon: tagIcon ? { css: makeIconClass(tagIcon.icon, "text"), tooltip: tagIcon.tooltip } : null,
       locked,
       reaction: combatant.permission >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
         ? {
