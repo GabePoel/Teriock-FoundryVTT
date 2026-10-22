@@ -202,7 +202,7 @@ export default class TeriockCombatTracker
   }
 
   /** @inheritDoc */
-  _onCombatantControl(event, target) {
+  async _onCombatantControl(event, target) {
     if (target.dataset.action === "rollInitiative") {
       this.defaultInitiativeExecutionData = ThresholdRoll.parseEvent(event);
     }
@@ -223,11 +223,21 @@ export default class TeriockCombatTracker
       }
       case "toggleDefeated": {
         const defeated = !group.turnHolder.isDefeated;
-        return Promise.all([
-          this.viewed.updateEmbeddedDocuments("Combatant", members.map(m => ({ _id: m.id, defeated }))),
-          ...members.map(m =>
-            m.actor?.toggleStatusEffect(CONFIG.specialStatusEffects.DEFEATED, { active: defeated, overlay: true })
-          ),
+        const statusId = CONFIG.specialStatusEffects.DEFEATED;
+        const { _id } = CONFIG.statusEffects[statusId];
+        const actors = new Set(members.map(m => m.actor).filter(a => a && a.effects.has(_id) !== defeated));
+        const effect = defeated ? (await ActiveEffect.fromStatusEffect(statusId)).toObject() : null;
+        if (effect) { foundry.utils.setProperty(effect, "flags.core.overlay", true); }
+        return foundry.documents.modifyBatch([
+          {
+            action: "update",
+            documentName: "Combatant",
+            parent: this.viewed,
+            updates: members.map(m => ({ _id: m.id, defeated })),
+          },
+          ...Array.from(actors, actor => defeated
+            ? { action: "create", data: [effect], documentName: "ActiveEffect", keepId: true, parent: actor }
+            : { action: "delete", documentName: "ActiveEffect", ids: [_id], parent: actor }),
         ]);
       }
       case "toggleHidden":
