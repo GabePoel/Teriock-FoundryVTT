@@ -28,7 +28,7 @@ export default class CombatantGroupConfig extends TeriockDocumentSheet {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const { fields, source } = context;
-    const holder = this.document.turnHolder;
+    const turnHolder = this.document.system.turnHolder;
     return Object.assign(context, {
       buttons: [{
         icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.save),
@@ -40,7 +40,7 @@ export default class CombatantGroupConfig extends TeriockDocumentSheet {
         label: `COMBATANT.FIELDS.${key}.label`,
         localize: true,
         name: key,
-        placeholder: key === "initiative" ? undefined : holder?.[key],
+        placeholder: key === "initiative" ? undefined : turnHolder?.[key],
         value: source[key],
       })),
     });

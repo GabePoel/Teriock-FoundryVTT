@@ -36,8 +36,9 @@ export default class CommandedSystem extends BaseGroupSystem {
   }
 
   /** @inheritDoc */
-  get minions() {
-    return [...this.parent.members].filter(c => c.id !== this.commanderId);
+  get turnMembers() {
+    const commander = this.commander;
+    return super.turnMembers.sort((a, b) => Number(b === commander) - Number(a === commander));
   }
 
   /** @inheritDoc */
@@ -52,7 +53,7 @@ export default class CommandedSystem extends BaseGroupSystem {
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    const cards = parts.associations[0].cards.map(c => ({ ...c, icon: null }));
+    const cards = parts.associations[0].cards;
     const isCommander = card => card.documentUuid === this.commander?.uuid;
     parts.associations = [{
       cards: cards.filter(isCommander),

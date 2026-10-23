@@ -369,7 +369,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       const key = combatant.group?.id ?? combatant.id;
       if (!sources.has(key)) { sources.set(key, combatant.group ?? combatant); }
     }
-    let rollers = [...sources.values()].map(s => s.turnHolder ?? s);
+    let rollers = [...sources.values()].map(s => s.system.turnHolder ?? s);
     if (sources.size === 1 && !options.noExecution) {
       const execution = await InitiativeExecution.create({}, { source: [...sources.values()][0] });
       if (execution?.message?.rolls?.length) {
@@ -421,7 +421,9 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     // Determine the turn order and the current turn
     // A CombatantGroup's `turnHolder` holds the space in turn order for all its members
     // Other Combatants in a CombatantGroup don't get their own turns
-    const turns = this.combatants.contents.filter(c => !c.group || c === c.group.turnHolder).sort(this._sortCombatants);
+    const turns = this.combatants.contents.filter(c => !c.group || c === c.group.system.turnHolder).sort(
+      this._sortCombatants,
+    );
     if (this.turn !== null) {
       if (this.turn < 0) { this.turn = 0; }
       else if (this.turn >= turns.length) {

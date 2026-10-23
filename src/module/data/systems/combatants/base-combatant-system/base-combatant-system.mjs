@@ -63,22 +63,6 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
     return (this.actor && this.parent.parent?.getCombatantsByActor(this.actor)[0]) || this.parent;
   }
 
-  /**
-   * A single icon which denotes this Combatant's role in its CombatantGroup.
-   * @returns {Teriock.Embeds.EmbedIcon|null}
-   */
-  get tagIcon() {
-    const combatant = this.parent;
-    const icons = TERIOCK.DISPLAY.icons.manifest.combat;
-    if (combatant.isCommander) {
-      return { icon: icons.commander, tooltip: _loc("TERIOCK.SYSTEMS.CombatantGroup.FIELDS.commanderId.label") };
-    }
-    if (combatant.group?.system.minions.includes(combatant)) {
-      return { icon: icons.minion, tooltip: _loc("TERIOCK.SYSTEMS.Combatant.EMBED.minion") };
-    }
-    return null;
-  }
-
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
@@ -106,7 +90,7 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
       bars: [{
         icon: TERIOCK.DISPLAY.icons.manifest.ui.info,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-        wrappers: [this.tagIcon?.tooltip ?? ""],
+        wrappers: [this.parent.typeLabel],
       }, {
         icon: TERIOCK.DISPLAY.icons.manifest.interaction.attack,
         label: _loc("TERIOCK.COMBAT.Event.combat"),

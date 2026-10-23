@@ -117,7 +117,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    * @returns {Record<string, any>}
    */
   _initializeSource(data, options = {}) {
-    this.roller = options.roller ?? options.source?.turnHolder ?? options.source;
+    this.roller = options.roller ?? options.source?.system.turnHolder ?? options.source;
     foundry.utils.mergeObject(data, {
       bonus: this.roller?.initiativeModel?.bonus ?? TERIOCK.CONFIG.character.defaults.initiative.bonus,
       ...ui.combat.defaultInitiativeExecutionData,

@@ -47,7 +47,15 @@ export default class TeriockCombatant
    * @returns {boolean}
    */
   get isCommander() {
-    return Boolean(this.group) && this.group.system.commander === this;
+    return this.group?.type === "commanded" && this.group.system.commander === this;
+  }
+
+  /**
+   * Whether this is a minion of its CombatantGroup's commander.
+   * @returns {boolean}
+   */
+  get isMinion() {
+    return this.group?.type === "commanded" && this.group.system.commander !== this;
   }
 
   /**
@@ -55,13 +63,21 @@ export default class TeriockCombatant
    * @returns {TeriockCombatant[]}
    */
   get turnMembers() {
-    return this.group?.turnMembers ?? [this];
+    return this.group?.system.turnMembers ?? [this];
   }
 
   /** @inheritDoc */
   get typeIcon() {
-    const tagIcon = this.system.tagIcon;
-    return tagIcon ? makeIconClass(tagIcon.icon, "title") : super.typeIcon;
+    if (this.isCommander) { return makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "title"); }
+    if (this.isMinion) { return makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.minion, "title"); }
+    return super.typeIcon;
+  }
+
+  /** @inheritDoc */
+  get typeLabel() {
+    if (this.isCommander) { return _loc("TERIOCK.SYSTEMS.CombatantGroup.FIELDS.commanderId.label"); }
+    if (this.isMinion) { return _loc("TERIOCK.SYSTEMS.Combatant.EMBED.minion"); }
+    return super.typeLabel;
   }
 
   /**

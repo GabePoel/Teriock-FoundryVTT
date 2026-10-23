@@ -16,7 +16,14 @@ export default class TeriockCombatantConfig extends mixClasses(CombatantConfig, 
     const actor = this.document.actor;
     const hasActor = Boolean(actor);
     if (initiativeGroup) {
-      const { system } = this.document;
+      const { group, system } = this.document;
+      if (group) {
+        const input = initiativeGroup.querySelector("input");
+        if (input) {
+          input.disabled = true;
+          input.value = group.initiative ?? "";
+        }
+      }
       const actorFields = ["initiative.competence.raw", "initiative.bonus"];
       const defaultCombatantFields = ["attackPenalty", "actions", "reactions"];
       initiativeGroup.after(...[...actorFields, ...defaultCombatantFields].map(key => {

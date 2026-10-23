@@ -38,7 +38,6 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
    * @param {string} [_context.type] - The subtype of the document
    * @param {TeriockCombat|null} [_context.parent] - A parent document within which the created Document should belong
    * @param {string|null} [_context.pack] - A compendium pack within which the Document should be created
-   * @param {TeriockCombatant} [_context.commander] - Commander of the CombatantGroup
    * @param {TeriockCombatant[]} [_context.members] - Combatants forming the CombatantGroup
    * @returns {string|null}
    */
@@ -58,23 +57,33 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
 
   /** @inheritDoc */
   get _color() {
-    return this.parent.face?.token?.color ?? null;
+    return this.face?.token?.color ?? null;
   }
 
   /**
-   * The commander of this group.
+   * The member that represents this CombatantGroup to the current user.
    * @returns {TeriockCombatant|null}
    */
-  get commander() {
-    return null;
+  get face() {
+    const holder = this.turnHolder;
+    return holder?.visible ? holder : (this.turnMembers.find(m => m.visible) ?? null);
   }
 
   /**
-   * The minions under the commander's command.
+   * The member that holds this CombatantGroup's place in the turn order.
+   * @returns {TeriockCombatant|null}
+   */
+  get turnHolder() {
+    const members = this.turnMembers;
+    return members.find(m => !m.isDefeated) ?? members[0] ?? null;
+  }
+
+  /**
+   * The members that act on this CombatantGroup's turn.
    * @returns {TeriockCombatant[]}
    */
-  get minions() {
-    return [];
+  get turnMembers() {
+    return [...this.parent.members].sort((a, b) => a.name.localeCompare(b.name));
   }
 
   /** @inheritDoc */
@@ -87,7 +96,7 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
 
   /** @inheritDoc */
   async getPanelParts() {
-    const members = this.parent.turnMembers.filter(m => m.visible);
+    const members = this.turnMembers.filter(m => m.visible);
     return Object.assign(await super.getPanelParts(), {
       associations: [{
         cards: members.map(m => ({
@@ -116,7 +125,7 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
         ],
       }],
       color: this.color,
-      name: this.parent.name || this.parent.face?.name,
+      name: this.parent.name || this.face?.name,
     });
   }
 }

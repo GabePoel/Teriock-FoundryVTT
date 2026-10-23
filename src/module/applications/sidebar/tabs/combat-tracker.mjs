@@ -186,7 +186,7 @@ export default class TeriockCombatTracker
       icon: "fa-solid fa-dice-d20",
       label: "COMBATANT.ACTIONS.Reroll",
       onClick: (_event, li) => {
-        const holder = getGroup(li)?.turnHolder;
+        const holder = getGroup(li)?.system.turnHolder;
         if (holder) { return this.viewed.rollInitiative([holder.id]); }
       },
       visible: () => game.user.isGM,
@@ -222,7 +222,7 @@ export default class TeriockCombatTracker
         return this.#panToTokens(tokens);
       }
       case "toggleDefeated": {
-        const defeated = !group.turnHolder.isDefeated;
+        const defeated = !group.system.turnHolder.isDefeated;
         const statusId = CONFIG.specialStatusEffects.DEFEATED;
         const { _id } = CONFIG.statusEffects[statusId];
         const actors = new Set(members.map(m => m.actor).filter(a => a && a.effects.has(_id) !== defeated));
@@ -235,9 +235,10 @@ export default class TeriockCombatTracker
             parent: this.viewed,
             updates: members.map(m => ({ _id: m.id, defeated })),
           },
-          ...Array.from(actors, actor => defeated
-            ? { action: "create", data: [effect], documentName: "ActiveEffect", keepId: true, parent: actor }
-            : { action: "delete", documentName: "ActiveEffect", ids: [_id], parent: actor }),
+          ...Array.from(actors, actor =>
+            defeated
+              ? { action: "create", data: [effect], documentName: "ActiveEffect", keepId: true, parent: actor }
+              : { action: "delete", documentName: "ActiveEffect", ids: [_id], parent: actor }),
         ]);
       }
       case "toggleHidden":
@@ -393,14 +394,14 @@ export default class TeriockCombatTracker
       }
       if (!members.length) { continue; }
       // Commanders always roll for their CombatantGroups
-      const roller = group.system.commander ?? [...group.members].find(m => m.isOwner);
+      const roller = (group.type === "commanded" && group.system.commander) || [...group.members].find(m => m.isOwner);
       const rollerId = roller?.isOwner ? roller.id : null;
       // Players see a CombatantGroup with only one visible member as a standalone Combatant
       if (members.length === 1 && !game.user.isGM) {
         turns.push(Object.assign(members[0], { icon: null, locked: false, rollerId }));
         continue;
       }
-      const face = group.face;
+      const face = group.system.face;
       // A CombatantGroup is only defeated once its turn holder is
       const defeated = holder.isDefeated;
       turns.push({
@@ -434,12 +435,13 @@ export default class TeriockCombatTracker
   async _prepareTurnContext(combat, combatant, index) {
     const turn = await super._prepareTurnContext(combat, combatant, index);
     const hasReaction = Boolean(combatant.system.reactions);
-    const tagIcon = combatant.isCommander ? combatant.system.tagIcon : null;
     // CombatantGroup initiative is handled by the group header
     const locked = Boolean(combatant.group);
     return Object.assign(turn, {
       color: combatant.token?.color,
-      icon: tagIcon ? { css: makeIconClass(tagIcon.icon, "text"), tooltip: tagIcon.tooltip } : null,
+      icon: combatant.isCommander
+        ? { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "text"), tooltip: combatant.typeLabel }
+        : null,
       locked,
       reaction: combatant.permission >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
         ? {
