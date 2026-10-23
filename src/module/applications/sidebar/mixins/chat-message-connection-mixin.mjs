@@ -140,7 +140,7 @@ export default function ChatMessageConnectionMixin(Base) {
       const message = game.messages.get(target.closest("[data-message-id]")?.dataset.messageId);
       if (!message?.isContentVisible) { return null; }
       const roll = message.rolls.find(roll => roll.id === target.dataset.id);
-      return roll ? { config: { message }, roll } : null;
+      return roll ? { config: { message, messageData: { type: message.type } }, roll } : null;
     }
   }
 

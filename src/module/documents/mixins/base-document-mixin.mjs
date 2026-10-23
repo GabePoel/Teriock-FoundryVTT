@@ -361,11 +361,8 @@ export default function BaseDocumentMixin(Base) {
      * @return {string|null}
      */
     get typeIcon() {
-      const typeIcons = CONFIG[this.documentName]?.typeIcons;
-      const typeIcon = typeIcons ? typeIcons[this.type] : null;
-      const sidebarIcon = CONFIG[this.documentName]?.sidebarIcon;
-      const icon = typeIcon ?? sidebarIcon;
-      return icon ?? null;
+      const config = CONFIG[this.documentName];
+      return this.system?.metadata?.icon ?? config?.typeIcons?.[this.type] ?? config?.sidebarIcon ?? null;
     }
 
     /**

@@ -62,7 +62,7 @@ export default {
   gainTempHp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["gth"],
     deal: "TERIOCK.EFFECTS.Impacts.gainTempHp.deal",
-    icon: icons.manifest.stat.hp,
+    icon: icons.manifest.impact.tempHp,
     integer: true,
     label: "TERIOCK.EFFECTS.Impacts.gainTempHp.label",
     take: "TERIOCK.EFFECTS.Impacts.gainTempHp.take",
@@ -72,7 +72,7 @@ export default {
   gainTempMp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["gtm"],
     deal: "TERIOCK.EFFECTS.Impacts.gainTempMp.deal",
-    icon: icons.manifest.stat.mp,
+    icon: icons.manifest.impact.tempMp,
     integer: true,
     label: "TERIOCK.EFFECTS.Impacts.gainTempMp.label",
     take: "TERIOCK.EFFECTS.Impacts.gainTempMp.take",
@@ -82,7 +82,7 @@ export default {
   setTempHp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["sth"],
     deal: "TERIOCK.EFFECTS.Impacts.setTempHp.deal",
-    icon: icons.manifest.stat.hp,
+    icon: icons.manifest.impact.tempHp,
     integer: true,
     label: "TERIOCK.EFFECTS.Impacts.setTempHp.label",
     min: 0,
@@ -93,7 +93,7 @@ export default {
   setTempMp: /** @type {Teriock.Config.ImpactEntry} */ {
     aliases: ["stm"],
     deal: "TERIOCK.EFFECTS.Impacts.setTempMp.deal",
-    icon: icons.manifest.stat.mp,
+    icon: icons.manifest.impact.tempMp,
     integer: true,
     label: "TERIOCK.EFFECTS.Impacts.setTempMp.label",
     min: 0,

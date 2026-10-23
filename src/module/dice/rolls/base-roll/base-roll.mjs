@@ -2,13 +2,12 @@ import { migrateThumbnails } from "../../../data/fields/tools/migrations.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { makeIcon } from "../../../utils/_module.mjs";
 import Booster from "../../booster.mjs";
-import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "../../helpers.mjs";
 
 const { Roll } = foundry.dice;
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
- * @import { RollTerm } from "@client/dice/terms/_module.mjs";
+ * @import { NumericTerm, RollTerm } from "@client/dice/terms/_module.mjs";
  */
 
 /** @inheritDoc */
@@ -193,6 +192,14 @@ export default class BaseRoll extends Roll {
   }
 
   /**
+   * The numeric terms of this roll. This includes those of any formula it boosts or deboosts.
+   * @returns {NumericTerm[]}
+   */
+  get numbers() {
+    return this.terms.flatMap(t => t instanceof foundry.dice.terms.NumericTerm ? [t] : (t.numbers ?? []));
+  }
+
+  /**
    * Apply additional options based on the damage type. This allows for styled Dice So Nice integration.
    */
   async _applyDiceStyles() {
@@ -216,7 +223,7 @@ export default class BaseRoll extends Roll {
       onClick: async () => {
         const newRoll = this.clone();
         await newRoll.evaluate();
-        await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
+        await newRoll.toMessage({ speaker: TeriockChatMessage.getSpeaker(), ...config.messageData });
       },
     }];
   }
@@ -251,18 +258,13 @@ export default class BaseRoll extends Roll {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
     if (!clone._evaluated) { await clone.evaluate(); }
-    const combined = addCombinedMaxFaceDie(clone);
-    const die = combined ?? selectWeightedMaxFaceDie(clone);
-    if (!combined) {
-      die._number = (die.number ?? 0) + 1;
-      markBoostedDie(clone, die);
-    }
-    if (die._evaluated) {
+    clone.collapseNumbers();
+    const die = Booster._boost(clone);
+    if (!die._evaluated) { await die.evaluate(); }
+    else if (die.results) {
       const dieRoll = new BaseRoll(die.formula);
       await dieRoll.evaluate();
       die.results.push(dieRoll.dice[0].results.at(-1));
-    } else {
-      await die.evaluate();
     }
     BaseRoll.resetFormulas(clone);
     return this.constructor.fromTerms(
@@ -284,6 +286,38 @@ export default class BaseRoll extends Roll {
   }
 
   /**
+   * Combine each deterministic part of this roll and the formulas it boosts into a single number. Formulas are handled
+   * like `@p * 2` becoming `(@p * 2)d1`. This only does anything if `numericalBoostsAndDeboosts` is enabled.
+   */
+  collapseNumbers() {
+    if (!game.settings.get("teriock", "numericalBoostsAndDeboosts")) { return; }
+    const { NumericTerm, OperatorTerm } = foundry.dice.terms;
+    const terms = [];
+    let part = [];
+    const collapse = () => {
+      const single = part.length === 1 && part[0] instanceof NumericTerm;
+      if (part.length && !single && part.every(t => t.isDeterministic)) {
+        for (const t of part) { if (!t._evaluated) { t.evaluate(); } }
+        const flavor = Array.from(new Set(part.flatMap(t => t.flavor.split(" ")).filter(Boolean))).join(" ");
+        part = [new NumericTerm({ number: Roll.safeEval(part.map(t => t.total).join(" ")), options: { flavor } })];
+        part[0].evaluate();
+      }
+      terms.push(...part);
+      part = [];
+    };
+    for (const term of this.terms) {
+      if (term instanceof OperatorTerm && ["-", "+"].includes(term.operator)) {
+        collapse();
+        terms.push(term);
+      } else { part.push(term); }
+    }
+    collapse();
+    this.terms = terms;
+    for (const term of terms) { if (term.isBooster) { term.rolls[0]?.collapseNumbers(); } }
+    this.resetFormula();
+  }
+
+  /**
    * Deboost this roll in place.
    * @param {object} [options]
    * @returns {Promise<BaseRoll>}
@@ -292,9 +326,8 @@ export default class BaseRoll extends Roll {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
     if (!clone._evaluated) { await clone.evaluate(); }
-    const die = selectDeboostDie(clone);
-    die._number = Math.max(0, (die.number ?? 0) - 1);
-    die.results.pop();
+    clone.collapseNumbers();
+    Booster._deboost(clone)?.results?.pop();
     this.constructor.resetFormulas(clone);
     return this.constructor.fromTerms([
       new Booster({ fn: "db", result: clone.total, rolls: [clone], terms: [formula] }),

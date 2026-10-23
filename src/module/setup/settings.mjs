@@ -31,7 +31,10 @@ export const menus = {
       },
       keyword: {
         icon: TERIOCK.DISPLAY.icons.manifest.document.keyword,
-        settings: { randomBoostedTypes: { default: false, scope: "world", type: Boolean } },
+        settings: {
+          numericalBoostsAndDeboosts: { default: false, scope: "world", type: Boolean },
+          randomBoostedTypes: { default: false, scope: "world", type: Boolean },
+        },
       },
     },
     icon: TERIOCK.DISPLAY.icons.manifest.settings.alternateRules,

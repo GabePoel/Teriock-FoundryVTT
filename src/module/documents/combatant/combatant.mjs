@@ -1,7 +1,7 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
-import { dotJoin, makeIconClass, mixClasses } from "../../utils/_module.mjs";
+import { dotJoin, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 /**
@@ -68,8 +68,8 @@ export default class TeriockCombatant
 
   /** @inheritDoc */
   get typeIcon() {
-    if (this.isCommander) { return makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "title"); }
-    if (this.isMinion) { return makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.minion, "title"); }
+    if (this.isCommander) { return TERIOCK.DISPLAY.icons.manifest.combat.commander; }
+    if (this.isMinion) { return TERIOCK.DISPLAY.icons.manifest.combat.minion; }
     return super.typeIcon;
   }
 

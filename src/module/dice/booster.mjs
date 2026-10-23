@@ -1,5 +1,10 @@
 import { addCombinedMaxFaceDie, markBoostedDie, selectDeboostDie, selectWeightedMaxFaceDie } from "./helpers.mjs";
 
+/**
+ * @import { Roll } from "@client/dice/_module.mjs";
+ * @import { DiceTerm, NumericTerm } from "@client/dice/terms/_module.mjs";
+ */
+
 const { FunctionTerm } = foundry.dice.terms;
 
 /**
@@ -22,64 +27,66 @@ class BoosterTerm extends FunctionTerm {
     setboost: "setboost",
   };
 
-  static get BOOST_FUNCTIONS() {
-    return { boost: this._boost, deboost: this._deboost, setboost: this._setboost };
-  }
-
   /**
    * Boost the roll.
    * @param {BaseRoll} roll
-   * @param {object} [options]
-   * @returns {Promise<void>}
+   * @returns {DiceTerm|NumericTerm|undefined} The boosted term.
    */
-  static async _boost(roll, options = {}) {
-    if (!addCombinedMaxFaceDie(roll)) {
-      const die = selectWeightedMaxFaceDie(roll);
+  static _boost(roll) {
+    let die = addCombinedMaxFaceDie(roll);
+    if (!die) {
+      die = selectWeightedMaxFaceDie(roll);
       if (die) {
-        if (typeof die._number === "number") { die._number += 1; }
-        else if (typeof die.number === "number") { die._number = die.number + 1; }
-        else {
-          await die._evaluateAsync(options);
-          if (typeof die.number === "number") { die._number = die.number + 1; }
-        }
+        die.number += 1;
         markBoostedDie(roll, die);
       }
     }
     roll.resetFormula();
+    return die;
   }
 
   /**
    * Deboost the roll.
    * @param {BaseRoll} roll
-   * @param {object} [options]
-   * @returns {Promise<void>}
+   * @returns {DiceTerm|NumericTerm|undefined} The deboosted term.
    */
-  static async _deboost(roll, options = {}) {
+  static _deboost(roll) {
     const die = selectDeboostDie(roll);
-    if (die) {
-      if (typeof die._number === "number") { die._number = Math.max(0, die._number - 1); }
-      else if (typeof die.number === "number") { die._number = Math.max(0, die.number - 1); }
-      else {
-        await die._evaluateAsync(options);
-        if (typeof die.number === "number") { die._number = Math.max(0, die.number - 1); }
-      }
-    }
+    if (die) { die.number = Math.max(0, die.number - 1); }
     roll.resetFormula();
+    return die;
   }
 
   /**
    * Apply some number of boosts or deboosts. Positive for boosts. Negative for deboosts.
    * @param {BaseRoll} roll
    * @param {number} number
-   * @param {object} [options]
-   * @returns {Promise<void>}
    */
-  static async _setboost(roll, number, options = {}) {
-    if (number > 0) {
-      for (let i = 0; i < number; i++) { await this._boost(roll, options); }
-    } else if (number < 0) {
-      for (let i = 0; i < Math.abs(number); i++) { await this._deboost(roll, options); }
+  static _setboost(roll, number) {
+    for (let i = 0; i < Math.abs(number); i++) {
+      if (number > 0) { this._boost(roll); }
+      else { this._deboost(roll); }
     }
+  }
+
+  /**
+   * The boost counts and the number and faces of the boosted dice. These are the unevaluated rolls this term and the
+   * boosters within it need before their boosts can apply.
+   * @returns {Roll[]}
+   */
+  get _boostInputs() {
+    if (!this.isBooster || !this.rolls[0]) { return []; }
+    const rolls = new Set([
+      ...this.rolls.slice(1),
+      ...this.rolls[0].dice.flatMap(d => [d._number, d._faces]),
+      ...this.rolls[0].terms.flatMap(t => t._boostInputs ?? []),
+    ]);
+    return Array.from(rolls).filter(r => r instanceof foundry.dice.Roll && !r._evaluated);
+  }
+
+  /** @inheritDoc */
+  get dice() {
+    return this.isBooster ? (this.rolls[0]?.dice ?? []) : super.dice;
   }
 
   /** @inheritDoc */
@@ -98,28 +105,67 @@ class BoosterTerm extends FunctionTerm {
     return this.isBooster ? false : super.isDeterministic;
   }
 
+  /**
+   * The numeric terms of the boosted formula.
+   * @returns {NumericTerm[]}
+   */
+  get numbers() {
+    return this.isBooster ? (this.rolls[0]?.numbers ?? []) : [];
+  }
+
+  /**
+   * Apply the boosts of this term once. Boosts nested within the boosted formula apply first. The rolls from
+   * {@link _boostInputs} must already be evaluated.
+   */
+  _applyBoosts() {
+    if (this._boostsApplied || !this.rolls[0]) { return; }
+    this._boostsApplied = true;
+    // Dice evaluate their own number and faces. Evaluated rolls are switcherood for their totals.
+    for (const die of this.rolls[0].dice) {
+      if (die._number instanceof foundry.dice.Roll) { die._number = die._number.total; }
+      if (die._faces instanceof foundry.dice.Roll) { die._faces = die._faces.total; }
+    }
+    for (const term of this.rolls[0].terms) { if (term.isBooster) { term._applyBoosts(); } }
+    this.rolls[0].collapseNumbers();
+    const number = { boost: 1, deboost: -1 }[this.constructor.BOOST_ALIASES[this.fn]] ?? this.rolls[1]?.total ?? 0;
+    this.constructor._setboost(this.rolls[0], number);
+  }
+
   /** @inheritDoc */
   async _evaluateAsync(options = {}) {
-    let removedRoll;
-    if (this.isBooster) {
-      const boostFunction = this.constructor.BOOST_ALIASES[this.fn];
-      if (boostFunction === "setboost") {
-        await this.rolls[1].evaluate();
-        const number = this.rolls[1].total;
-        removedRoll = this.rolls.splice(1, 1)[0];
-        await this.constructor._setboost(this.rolls[0], number, options);
-      } else {
-        await this.constructor.BOOST_FUNCTIONS[boostFunction]?.(this.rolls[0], options);
-      }
-    }
+    if (!this.isBooster) { return super._evaluateAsync(options); }
+    await Promise.all(this._boostInputs.map(r => r.evaluate(options)));
+    this._applyBoosts();
+    const counts = this.rolls.splice(1);
     const result = await super._evaluateAsync(options);
-    if (removedRoll) { this.rolls.splice(1, 0, removedRoll); }
+    this.rolls.push(...counts);
+    return result;
+  }
+
+  /** @inheritDoc */
+  _evaluateSync(options = {}) {
+    if (!this.isBooster) { return super._evaluateSync(options); }
+    for (const roll of this._boostInputs) { roll.evaluateSync(options); }
+    this._applyBoosts();
+    const counts = this.rolls.splice(1);
+    const result = super._evaluateSync(options);
+    this.rolls.push(...counts);
     return result;
   }
 }
 
-const members = ["function", "isDeterministic", "_evaluateAsync", "isBooster"];
-const staticMembers = ["BOOST_ALIASES", "BOOST_FUNCTIONS", "_boost", "_deboost", "_setboost"];
+const members = [
+  "_applyBoosts",
+  "_boostInputs",
+  "_evaluateAsync",
+  "_evaluateSync",
+  "dice",
+  "function",
+  "isBooster",
+  "isDeterministic",
+  "numbers",
+];
+const staticMembers = ["BOOST_ALIASES", "_boost", "_deboost", "_setboost"];
 
 // Monkey patch BoosterTerm stuff onto FunctionTerm.
 /** @param {PropertyDescriptor} d */

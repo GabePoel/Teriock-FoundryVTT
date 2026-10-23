@@ -1,17 +1,7 @@
 /**
  * @import { BaseRoll } from "./rolls/_module.mjs";
- * @import { DiceTerm } from "@client/dice/terms/_module.mjs";
+ * @import { DiceTerm, NumericTerm } from "@client/dice/terms/_module.mjs";
  */
-
-/**
- * The dice terms of a roll.
- * @param {BaseRoll} roll
- * @returns {DiceTerm[]}
- */
-function diceTermsOf(roll) {
-  const diceTerms = roll.terms.filter(t => t instanceof foundry.dice.terms.DiceTerm);
-  return diceTerms.length ? diceTerms : [...roll.dice];
-}
 
 /**
  * The boost priority to give the next die a boost adds to. Boosts are prioritized from the highest priority down.
@@ -19,7 +9,9 @@ function diceTermsOf(roll) {
  * @returns {number}
  */
 function nextBoostPriority(roll) {
-  const priorities = diceTermsOf(roll).map(term => term.options.boostPriority).filter(p => typeof p === "number");
+  const priorities = [...roll.dice, ...roll.numbers].map(term => term.options.boostPriority).filter(p =>
+    typeof p === "number"
+  );
   return priorities.length ? Math.max(...priorities) + 1 : 0;
 }
 
@@ -40,7 +32,7 @@ function selectWeightedDie(terms) {
 }
 
 /**
- * Add a single die of the largest size with the types/flavor of l the types.
+ * Add a single die of the largest size with the types of all the tied dice.
  *
  * Relevant wiki pages:
  * - [Boosted](https://wiki.teriock.com/index.php?title=Keyword:Boosted)
@@ -52,19 +44,18 @@ export function addCombinedMaxFaceDie(roll) {
   if (game.settings.get("teriock", "randomBoostedTypes")) { return null; }
   const terms = maxFaceDice(roll);
   if (terms.length < 2) { return null; }
-  const types = new Set(terms.flatMap(term => (term.flavor ?? "").split(" ")).filter(Boolean));
+  const types = new Set(terms.flatMap(term => term.flavor.split(" ")).filter(Boolean));
   const flavor = Array.from(types).join(" ");
   const existing = terms.find(term => term.flavor === flavor);
   if (existing) {
-    existing._number = (existing.number ?? 0) + 1;
+    existing.number += 1;
     markBoostedDie(roll, existing);
     return existing;
   }
-  const die = new foundry.dice.terms.Die({
-    faces: terms[0].faces,
-    number: 1,
-    options: { boostPriority: nextBoostPriority(roll), flavor },
-  });
+  const options = { boostPriority: nextBoostPriority(roll), flavor };
+  const die = terms[0] instanceof foundry.dice.terms.NumericTerm
+    ? new foundry.dice.terms.NumericTerm({ number: 1, options })
+    : new foundry.dice.terms.Die({ faces: terms[0].faces, number: 1, options });
   roll.terms.push(new foundry.dice.terms.OperatorTerm({ operator: "+" }), die);
   return die;
 }
@@ -79,14 +70,18 @@ export function markBoostedDie(roll, die) {
 }
 
 /**
- * The dice terms tied for the highest number of faces.
+ * The nonzero dice terms tied for the highest number of faces. Numerical boosts and deboosts can be treated as d1s if
+ * the settings are set appropriately.
  * @param {BaseRoll} roll
- * @returns {DiceTerm[]}
+ * @returns {(DiceTerm|NumericTerm)[]}
  */
 function maxFaceDice(roll) {
-  const diceTerms = diceTermsOf(roll);
-  const maxFaces = Math.max(...diceTerms.map(term => term.faces));
-  return diceTerms.filter(term => term.faces === maxFaces);
+  const dice = roll.dice.filter(d => d.number !== 0);
+  if (!dice.length && game.settings.get("teriock", "numericalBoostsAndDeboosts")) {
+    return roll.numbers.filter(t => t.number !== 0);
+  }
+  const maxFaces = Math.max(...dice.map(d => d.faces));
+  return dice.filter(d => d.faces === maxFaces);
 }
 
 /**
@@ -109,11 +104,12 @@ export function selectDeboostDie(roll) {
 }
 
 /**
- * Select one of the dice terms with the highest number of faces weighted based on number.
+ * Select one of the dice terms with the highest number of faces weighted based on number. When everything has been
+ * deboosted away, this falls back on the largest die, or on a number with numerical boosts and deboosts.
  * @param {BaseRoll} roll
- * @returns {DiceTerm}
+ * @returns {DiceTerm|NumericTerm|undefined}
  */
 export function selectWeightedMaxFaceDie(roll) {
-  const diceTerms = diceTermsOf(roll);
-  return selectWeightedDie(maxFaceDice(roll)) ?? diceTerms[diceTerms.length - 1];
+  return selectWeightedDie(maxFaceDice(roll)) ?? roll.dice.toSorted((a, b) => b.faces - a.faces)[0]
+    ?? (game.settings.get("teriock", "numericalBoostsAndDeboosts") ? roll.numbers.at(-1) : undefined);
 }
