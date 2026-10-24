@@ -230,7 +230,8 @@ export default class ConstructionNode
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.name) {
+    const prepareName = () => {
+      if (this.name) { return; }
       let name = _loc(this.constructor.typeLabel);
       if (
         this.globalIdentifiers.size + this.globalUuids.size + this.localIdentifiers.size + this.localUuids.size === 1
@@ -246,7 +247,9 @@ export default class ConstructionNode
         // TODO: Think of something for `localIdentifiers`.
       }
       this.name = this.data.name ? BaseRoll.replaceFormulaData(this.data.name, { base: name }) : name;
-    }
+    };
+    if (game.teriock.identifiers.initialized) { prepareName(); }
+    else { game.teriock.identifiers.initializing.then(prepareName); }
     this.img = this.data.img ?? TERIOCK.DISPLAY.thumbnails.common.unknown;
   }
 }
