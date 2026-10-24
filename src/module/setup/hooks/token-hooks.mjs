@@ -4,6 +4,17 @@
  */
 
 /**
+ * @param {TeriockToken} token
+ * @param {boolean} controlled
+ * @see {controlToken}
+ */
+function markCombatantsControlled(token, controlled) {
+  for (const combatant of ui.combat?.viewed?.getCombatantsByToken(token.document) ?? []) {
+    ui.combat.markCombatantControlled(combatant, controlled);
+  }
+}
+
+/**
  * @param {TeriockTokenDocument} document
  * @param {TokenMovementOperation} _movement
  * @param {Partial<DatabaseUpdateOperation>} _operation
@@ -15,6 +26,6 @@ async function fireMovementTrigger(document, _movement, _operation, user) {
   if (document.checkEditor(user) && document.actor) { await document.actor.fireTrigger("movement"); }
 }
 
-const tokenHookEntries = [["moveToken", fireMovementTrigger]];
+const tokenHookEntries = [["controlToken", markCombatantsControlled], ["moveToken", fireMovementTrigger]];
 
 export default tokenHookEntries;

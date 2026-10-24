@@ -18,6 +18,16 @@
     @include mixins.simple-two-layer-image(var(--sidebar-item-height), 4px, 0.3, 2px);
   }
 
+  :is(.combatant, .combatant-group-row).controlled > .token-image {
+    box-shadow: 0 0 0 2px var(--color-warm-3);
+    outline: 2px solid var(--color-warm-1) !important;
+  }
+
+  .combatant-group-row.partially-controlled > .token-image {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-warm-3), transparent 25%);
+    outline: 2px dashed var(--color-warm-1) !important;
+  }
+
   :is(.combatant, .combatant-group-row):is(.hide, .defeated) .token-image {
     opacity: 0.3;
 

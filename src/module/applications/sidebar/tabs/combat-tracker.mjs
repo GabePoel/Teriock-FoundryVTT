@@ -67,6 +67,18 @@ export default class TeriockCombatTracker
   #draggedUuid = null;
 
   /**
+   * Whether all or only some of a CombatantGroup's tokens are controlled.
+   * @param {TeriockCombatantGroup} group
+   * @returns {"controlled"|"partially-controlled"|null}
+   */
+  #groupControlClass(group) {
+    const tokens = [...group.members].filter(m => m.visible).map(m => m.token?.object).filter(Boolean);
+    const count = tokens.filter(t => t.controlled).length;
+    if (!count) { return null; }
+    return count === tokens.length ? "controlled" : "partially-controlled";
+  }
+
+  /**
    * Mark the tracker entry that a dragged Combatant or CombatantGroup would join.
    * @param {HTMLElement|null} entry
    */
@@ -269,8 +281,14 @@ export default class TeriockCombatTracker
     const combatants = target?.classList.contains("combatant-group-row")
       ? this.viewed?.groups.get(target.closest("[data-group-id]").dataset.groupId)?.members
       : [this.viewed?.combatants.get(target?.dataset.combatantId)];
+    const tokens = [...(combatants ?? [])].map(c => c?.token?.object).filter(Boolean);
+    // Shift clicking an entry whose tokens are all controlled releases them
+    if (event.shiftKey && tokens.length && tokens.every(t => t.controlled)) {
+      for (const token of tokens) { token.release(); }
+      return;
+    }
     const controlled = [];
-    for (const token of [...(combatants ?? [])].map(c => c?.token?.object).filter(Boolean)) {
+    for (const token of tokens) {
       if (token.control({ releaseOthers: !event.shiftKey && !controlled.length })) { controlled.push(token); }
     }
     if (controlled.length) { this.#panToTokens(controlled); }
@@ -394,8 +412,12 @@ export default class TeriockCombatTracker
       // A CombatantGroup is only defeated once its turn holder is
       const defeated = holder.isDefeated;
       turns.push({
-        css: [i === combat.turn ? "active" : null, group.hidden ? "hide" : null, defeated ? "defeated" : null]
-          .filterJoin(" "),
+        css: [
+          i === combat.turn ? "active" : null,
+          group.hidden ? "hide" : null,
+          defeated ? "defeated" : null,
+          this.#groupControlClass(group),
+        ].filterJoin(" "),
         group: {
           color: face.token?.color,
           defeated,
@@ -428,6 +450,7 @@ export default class TeriockCombatTracker
     const locked = Boolean(combatant.group);
     return Object.assign(turn, {
       color: combatant.token?.color,
+      css: [turn.css, combatant.token?.object?.controlled ? "controlled" : null].filterJoin(" "),
       icon: combatant.isCommander
         ? { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "text"), tooltip: combatant.typeLabel }
         : null,
@@ -443,6 +466,26 @@ export default class TeriockCombatTracker
       rollerId: combatant.isOwner && !locked ? combatant.id : null,
       uuid: combatant.uuid,
     });
+  }
+
+  /**
+   * Mark a controlled/uncontrolled Combatant and its CombatantGroup.
+   * @param {TeriockCombatant} combatant
+   * @param {boolean} controlled
+   */
+  markCombatantControlled(combatant, controlled) {
+    const group = combatant.group;
+    const groupClass = group ? this.#groupControlClass(group) : null;
+    const groupSelector = `[data-group-id="${group?.id}"]`;
+    for (const tracker of [this.element, this.popout?.rendered ? this.popout.element : null].filter(Boolean)) {
+      const row = tracker.querySelector(`.combatant[data-combatant-id="${combatant.id}"]`);
+      row?.classList.toggle("controlled", controlled);
+      if (!group) { continue; }
+      for (const el of tracker.querySelectorAll(`${groupSelector}, ${groupSelector} > .combatant-group-row`)) {
+        el.classList.remove("controlled", "partially-controlled");
+        if (groupClass) { el.classList.add(groupClass); }
+      }
+    }
   }
 
   /**
