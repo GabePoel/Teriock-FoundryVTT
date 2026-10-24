@@ -33,6 +33,7 @@ declare global {
 
     export type ThresholdExecutionOptions = ExecutionOptions & {
       bonus?: Teriock.System.FormulaString;
+      mobMembers?: TeriockCombatant[];
       threshold?: number;
     };
 
@@ -85,16 +86,30 @@ declare global {
     };
 
     export type ExecutionDialogDocumentEntry = {
-      document: TeriockActiveEffect | TeriockCombatant | TeriockItem | null | undefined;
+      /** Initial document to display. */
+      document: TeriockDocument | null | undefined;
+      /** Whether the selected document can be changed. */
       editable?: boolean;
+      /** Label to display under the document. */
       label?: string;
+      /** Choices that can't be toggled. */
+      locked?: TeriockDocument[];
+      /** Whether `update` receives an array of the `selected` documents. */
+      multi?: boolean;
+      /** Whether the documents in the document selector popup can be opened. */
       openable?: boolean;
+      /** Entries display from highest to lowest priority. Defaults to 0. */
+      priority?: number;
+      /** Initially selected documents in the document selector popup. */
+      selected?: TeriockDocument[];
+      /** Hint for the document selector popup. */
       selectHint?: string;
+      /** Title of the document selector popup. */
       selectTitle?: string;
-      getChoices?: () =>
-        | (TeriockActiveEffect | TeriockCombatant | TeriockItem)[]
-        | Promise<(TeriockActiveEffect | TeriockCombatant | TeriockItem)[]>;
-      update?: (document: TeriockActiveEffect | TeriockCombatant | TeriockItem | null) => Promise<void> | void;
+      /** Documents that can be selected from. */
+      getChoices?: () => Promise<TeriockDocument[]> | TeriockDocument[];
+      /** Updates to apply after the selection is changed. */
+      update?: (document: TeriockDocument | TeriockDocument[] | null) => Promise<void> | void;
     };
   }
 }

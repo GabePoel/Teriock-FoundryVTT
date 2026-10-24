@@ -96,7 +96,13 @@ declare global {
 
     export type InteractionEntry = { identifier: TypedIdentifier, label: string, results: Record<string, string> };
 
-    export type ManeuverEntry = { identifier: TypedIdentifier, label: string };
+    export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number };
+
+    export type ManeuverEntry = {
+      executionTimes: Record<string, ExecutionTimeEntry>;
+      identifier: TypedIdentifier;
+      label: string;
+    };
 
     export type DeliveryEntry = {
       allowPiercing?: boolean;

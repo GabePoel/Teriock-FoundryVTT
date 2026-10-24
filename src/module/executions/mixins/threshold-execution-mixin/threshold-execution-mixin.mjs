@@ -71,6 +71,30 @@ export default function ThresholdExecutionMixin(Base) {
     }
 
     /** @inheritDoc */
+    get _dialogDocuments() {
+      const docs = super._dialogDocuments;
+      if (this.canShareRoll) {
+        docs.push({
+          document: this.combatant.group,
+          editable: true,
+          label: _loc("TERIOCK.EXECUTIONS.Threshold.FIELDS.participants.label"),
+          locked: [this.combatant],
+          multi: true,
+          priority: -1,
+          selected: this.mobMembers,
+          selectHint: "TERIOCK.DIALOGS.Select.MobMembers.hint",
+          selectTitle: "TERIOCK.DIALOGS.Select.MobMembers.title",
+          getChoices: () => [...this.combatant.group.members],
+          update: members => {
+            this.mobMembers = members;
+            this.updateSource({ participants: this.mobMembers.length });
+          },
+        });
+      }
+      return docs;
+    }
+
+    /** @inheritDoc */
     get _formPaths() {
       const paths = [];
       if (this.requiresCompetence) { paths.push("competence.raw"); }
@@ -90,6 +114,12 @@ export default function ThresholdExecutionMixin(Base) {
      */
     get canShareRoll() {
       return this.isRoll && this.combatant?.group?.type === "mob";
+    }
+
+    /** @inheritDoc */
+    get combatants() {
+      if (!this.canShareRoll) { return super.combatants; }
+      return [...new Set(this.mobMembers.map(m => m.system.defaultCombatant))];
     }
 
     /**
@@ -170,6 +200,20 @@ export default function ThresholdExecutionMixin(Base) {
       if (this.participants > 1) {
         this.updateSource({ formula: FormulaField.add(this.formula, String(this.participants - 1)) });
       }
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ThresholdExecutionOptions>} [options]
+     */
+    _initialize(options = {}) {
+      super._initialize(options);
+      if (!("strict" in options)) { return; }
+      this.mobMembers = [];
+      if (!this.canShareRoll) { return; }
+      this.mobMembers = options.mobMembers
+        ?? [...this.combatant.group.members].filter(m => m === this.combatant || m.token?.object?.controlled);
+      this.updateSource({ participants: this.mobMembers.length });
     }
 
     /**

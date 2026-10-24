@@ -98,22 +98,6 @@ export default {
     },
   },
   // no sort
-  executionTime: {
-    active: {
-      a0: "TERIOCK.TERMS.ExecutionTime.active.0",
-      a1: "TERIOCK.TERMS.ExecutionTime.active.1",
-      a2: "TERIOCK.TERMS.ExecutionTime.active.2",
-      a3: "TERIOCK.TERMS.ExecutionTime.active.3",
-    },
-    reactive: { r0: "TERIOCK.TERMS.ExecutionTime.reactive.0", r1: "TERIOCK.TERMS.ExecutionTime.reactive.1" },
-    passive: { passive: "TERIOCK.TERMS.Maneuver.passive" },
-    // no sort
-    slow: {
-      longRest: "TERIOCK.TERMS.ExecutionTime.slow.longRest",
-      shortRest: "TERIOCK.TERMS.ExecutionTime.slow.shortRest",
-      custom: "TERIOCK.TERMS.ExecutionTime.slow.custom",
-    },
-  },
   expansion: {
     cascade: /** @type {Teriock.Config.ExpansionEntry} */ {
       identifier: "core:cascade-expansion",
@@ -176,18 +160,35 @@ export default {
   // no sort
   maneuver: {
     active: /** @type {Teriock.Config.ManeuverEntry} */ {
+      executionTimes: {
+        a0: { label: "TERIOCK.TERMS.ExecutionTime.active.0" },
+        a1: { actions: 1, label: "TERIOCK.TERMS.ExecutionTime.active.1" },
+        a2: { actions: 2, label: "TERIOCK.TERMS.ExecutionTime.active.2" },
+        a3: { actions: 3, label: "TERIOCK.TERMS.ExecutionTime.active.3" },
+      },
       identifier: "core:active-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.active",
     },
     reactive: /** @type {Teriock.Config.ManeuverEntry} */ {
+      executionTimes: {
+        r0: { label: "TERIOCK.TERMS.ExecutionTime.reactive.0" },
+        r1: { label: "TERIOCK.TERMS.ExecutionTime.reactive.1", reactions: 1 },
+      },
       identifier: "core:reactive-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.reactive",
     },
     passive: /** @type {Teriock.Config.ManeuverEntry} */ {
+      executionTimes: { passive: { label: "TERIOCK.TERMS.Maneuver.passive" } },
       identifier: "core:passive-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.passive",
     },
     slow: /** @type {Teriock.Config.ManeuverEntry} */ {
+      // no sort
+      executionTimes: {
+        longRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.longRest" },
+        shortRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.shortRest" },
+        custom: { label: "TERIOCK.TERMS.ExecutionTime.slow.custom" },
+      },
       identifier: "core:slow-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.slow",
     },
@@ -217,10 +218,6 @@ preLocalizeConfig("CONFIG.ability.delivery", { keys: ["label"] });
 preLocalizeConfig("CONFIG.ability.deliveryPackage");
 preLocalizeConfig("CONFIG.ability.deliveryParent");
 preLocalizeConfig("CONFIG.ability.duration.unit");
-preLocalizeConfig("CONFIG.ability.executionTime.active");
-preLocalizeConfig("CONFIG.ability.executionTime.passive");
-preLocalizeConfig("CONFIG.ability.executionTime.reactive");
-preLocalizeConfig("CONFIG.ability.executionTime.slow");
 preLocalizeConfig("CONFIG.ability.expansion", { keys: ["label"] });
 preLocalizeConfig("CONFIG.ability.featSaveImprovementAmount");
 preLocalizeConfig("CONFIG.ability.interaction", { keys: ["label"] });
@@ -229,5 +226,9 @@ preLocalizeConfig("CONFIG.ability.interaction.block.results");
 preLocalizeConfig("CONFIG.ability.interaction.feat.results");
 preLocalizeConfig("CONFIG.ability.interaction.manifest.results");
 preLocalizeConfig("CONFIG.ability.maneuver", { keys: ["label"] });
+preLocalizeConfig("CONFIG.ability.maneuver.active.executionTimes", { keys: ["label"] });
+preLocalizeConfig("CONFIG.ability.maneuver.passive.executionTimes", { keys: ["label"] });
+preLocalizeConfig("CONFIG.ability.maneuver.reactive.executionTimes", { keys: ["label"] });
+preLocalizeConfig("CONFIG.ability.maneuver.slow.executionTimes", { keys: ["label"] });
 preLocalizeConfig("CONFIG.ability.targetParent");
 preLocalizeConfig("CONFIG.ability.targets", { keys: ["label"] });

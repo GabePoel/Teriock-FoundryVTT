@@ -5,6 +5,8 @@ declare global {
       checked?: boolean;
       /** Image path */
       img: string;
+      /** Whether this can't be toggled */
+      locked?: boolean;
       /** Name to display */
       name: string;
       /** Text to display */
@@ -43,11 +45,15 @@ declare global {
       auto?: boolean;
       /** Which document is checked? */
       checked?: string;
+      /** Which document can't be toggled? */
+      locked?: string;
     };
 
     export type SelectDocumentsDialogOptions = _BaseDocumentSelectDialogOptions & {
       /** Which documents are checked? */
       checked?: string[];
+      /** Which documents can't be toggled? */
+      locked?: string[];
       /** Whether multiple documents can be selected */
       multi?: boolean;
       /** A custom message to show if there's no documents to select from. */

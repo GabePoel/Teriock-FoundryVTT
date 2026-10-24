@@ -87,7 +87,7 @@ export default function AbilityUsagePart(Base) {
     get _executionWrappers() {
       let time;
       if (this.maneuver !== "slow") {
-        time = TERIOCK.CONFIG.ability.executionTime[this.maneuver][this.executionTime.base];
+        time = TERIOCK.CONFIG.ability.maneuver[this.maneuver].executionTimes[this.executionTime.base]?.label;
       } else { time = this.executionTime.slow.label; }
       return [
         time || "",

@@ -13,6 +13,7 @@ const DEFAULT_SELECT_OPTIONS = {
   checked: [],
   hint: "",
   imgKey: "img",
+  locked: [],
   multi: true,
   noDocumentsMessage: "TERIOCK.DIALOGS.SelectDocument.noOptions",
   openable: false,
@@ -129,6 +130,7 @@ export default class DocumentSelector extends ResolvableDialog {
       entries[id] = {
         checked: options.checked.includes(id),
         img: foundry.utils.getProperty(doc, options.imgKey),
+        locked: options.locked.includes(id),
         name: getName(doc),
         text: options.textKey ? foundry.utils.getProperty(doc, options.textKey) || "" : "",
         uuid: doc.uuid,
@@ -245,6 +247,7 @@ export default class DocumentSelector extends ResolvableDialog {
     const selected = await this.selectMulti(documents, {
       ...options,
       checked: options.checked ? [options.checked] : [],
+      locked: options.locked ? [options.locked] : [],
       multi: false,
     });
     if (selected === false) { return false; }

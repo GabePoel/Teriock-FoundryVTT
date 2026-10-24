@@ -54,9 +54,9 @@ Hooks.once("teriock.identifiersInit", () => {
       name: TERIOCK.CONFIG.ability.targets[k].label,
     });
   });
-  Object.entries(TERIOCK.CONFIG.ability.executionTime).forEach(([_group, values]) => {
-    Object.entries(values).forEach(([k, v]) => {
-      abilityContext[`time.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", { name: v });
+  Object.values(TERIOCK.CONFIG.ability.maneuver).forEach(m => {
+    Object.entries(m.executionTimes).forEach(([k, v]) => {
+      abilityContext[`time.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", { name: v.label });
     });
   });
   Object.entries(TERIOCK.CONFIG.ability.expansion).forEach(([k, v]) => {

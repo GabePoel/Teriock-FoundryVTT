@@ -51,12 +51,10 @@ export default class ExecutionEditor extends ResolvableDialog {
     event?.preventDefault();
     const control = /** @type {HTMLElement} */ target?.closest("[data-document-index]");
     const index = Number(control?.dataset.documentIndex);
-    const entry = this.#execution._dialogDocuments[index];
+    const entry = this.#documents[index];
     if (!entry?.editable || typeof entry.getChoices !== "function") { return; }
     const choices = await entry.getChoices();
-    const selected = await DocumentSelector.selectSingle(choices, {
-      auto: false,
-      checked: entry.document?.uuid,
+    const options = {
       hint: _loc(entry.selectHint ?? "TERIOCK.DIALOGS.Select.Armament.hint"),
       openable: true,
       textKey: this.#execution?.source?.system?.interaction === "attack"
@@ -65,8 +63,16 @@ export default class ExecutionEditor extends ResolvableDialog {
         ? "system.summarizedBlock"
         : null,
       title: _loc(entry.selectTitle ?? "TERIOCK.DIALOGS.Select.Armament.title"),
-    });
-    if (selected === null) { return; }
+    };
+    const selected = entry.multi
+      ? await DocumentSelector.selectMulti(choices, {
+        ...options,
+        checked: (entry.selected ?? []).map(d => d.uuid),
+        locked: (entry.locked ?? []).map(d => d.uuid),
+        reportCancel: true,
+      })
+      : await DocumentSelector.selectSingle(choices, { ...options, auto: false, checked: entry.document?.uuid });
+    if (selected === null || selected === false) { return; }
     if (typeof entry.update === "function") { await entry.update(selected); }
     await this.render();
   }
@@ -106,6 +112,14 @@ export default class ExecutionEditor extends ResolvableDialog {
 
   /** @type {BaseExecution} */
   #execution;
+
+  /**
+   * The execution's dialog documents from highest to lowest priority.
+   * @returns {Teriock.Execution.ExecutionDialogDocumentEntry[]}
+   */
+  get #documents() {
+    return this.#execution._dialogDocuments.sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
+  }
 
   /**
    * Expand a form path into the paths of the inputs it renders. {@link SchemaField} renders sub-paths ina fieldset.
@@ -200,8 +214,9 @@ export default class ExecutionEditor extends ResolvableDialog {
       sections.at(-1).fields.push(fieldContext);
     }
     smallFields.sort((a, b) => _loc(a.field.label).localeCompare(_loc(b.field.label)));
-    const multipleDocuments = this.#execution._dialogDocuments.length > 1;
-    const documents = this.#execution._dialogDocuments.map((entry, index) => {
+    const dialogDocuments = this.#documents;
+    const multipleDocuments = dialogDocuments.length > 1;
+    const documents = dialogDocuments.map((entry, index) => {
       return {
         document: entry.document,
         editable: entry.editable,

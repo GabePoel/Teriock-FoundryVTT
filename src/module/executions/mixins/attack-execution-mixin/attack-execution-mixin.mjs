@@ -281,6 +281,13 @@ export default function AttackExecutionMixin(Base) {
       return raw;
     }
 
+    /** @inheritDoc */
+    _getCombatantUpdates(combatant) {
+      const updates = super._getCombatantUpdates(combatant);
+      if (this.isAttack) { updates["system.attackPenalty"] = combatant.system.attackPenalty + this.attackPenalty; }
+      return updates;
+    }
+
     /**
      * Determine targets.
      * @returns {Promise<void>}
@@ -377,9 +384,6 @@ export default function AttackExecutionMixin(Base) {
     async _prepareUpdates() {
       await this._prepareAttackPenalty();
       this._prepareAmmunitionConsumption();
-      if (this.combatant && this.isAttack) {
-        this.combatantUpdates["system.attackPenalty"] = this.combatant.system.attackPenalty + this.attackPenalty;
-      }
       return super._prepareUpdates();
     }
 

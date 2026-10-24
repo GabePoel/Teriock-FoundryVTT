@@ -6,6 +6,7 @@ declare global {
       edge: number;
       participants: number;
 
+      mobMembers: TeriockCombatant[];
       threshold: number | undefined;
     }
   }

@@ -43,10 +43,10 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         required: true,
         choices: () =>
           formatDynamicSelectOptions(
-            objectMap(
-              TERIOCK.CONFIG.ability.executionTime,
-              (choices, m) => ({ choices, label: TERIOCK.CONFIG.ability.maneuver[m].label }),
-            ),
+            objectMap(TERIOCK.CONFIG.ability.maneuver, m => ({
+              choices: objectMap(m.executionTimes, t => t.label),
+              label: m.label,
+            })),
             { localize: true },
           ),
       }),
@@ -228,8 +228,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * @returns {Teriock.Keys.Maneuver}
    */
   get maneuver() {
-    const groups = TERIOCK.CONFIG.ability.executionTime;
-    return Object.keys(groups).find(m => this.executionTime in groups[m]);
+    const maneuvers = TERIOCK.CONFIG.ability.maneuver;
+    return Object.keys(maneuvers).find(m => this.executionTime in maneuvers[m].executionTimes);
   }
 
   /** @inheritDoc */
@@ -321,7 +321,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       else { this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened })); }
     }
     if (this.executionTime !== this.source.system.executionTime.base) {
-      this.tags.push(TERIOCK.CONFIG.ability.executionTime[this.maneuver][this.executionTime]);
+      this.tags.push(TERIOCK.CONFIG.ability.maneuver[this.maneuver].executionTimes[this.executionTime].label);
     }
     for (const c of Object.keys(this.costs).filter(c => this.costs[c] > 0)) {
       this.tags.push(
@@ -357,7 +357,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     let armament;
     if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
     if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
-    armament = this._reselectArmamentForProperties(armament, "weapon", ["weapon"]);
+    const weaponPropertyIdentifiers = ["weapon"];
+    if (this.source.system.identifier === "basic-attack") { weaponPropertyIdentifiers.push("bashing"); }
+    armament = this._reselectArmamentForProperties(armament, "weapon", weaponPropertyIdentifiers);
     armament = this._reselectArmamentForProperties(armament, "bite", ["biting"]);
     const handPropertyIdentifiers = ["handy"];
     if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.identifier === "staff-touch")) {
@@ -367,6 +369,15 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     armament = this._reselectArmamentForEquipmentClass(armament, "armor", "armor");
     armament = this._reselectArmamentForEquipmentClass(armament, "shield", "shields");
     return armament;
+  }
+
+  /** @inheritDoc */
+  _getCombatantUpdates(combatant) {
+    const updates = super._getCombatantUpdates(combatant);
+    const { actions, reactions } = TERIOCK.CONFIG.ability.maneuver[this.maneuver].executionTimes[this.executionTime];
+    if (actions) { updates["system.actions"] = Math.max(0, combatant.system.actions - actions); }
+    if (reactions) { updates["system.reactions"] = Math.max(0, combatant.system.reactions - reactions); }
+    return updates;
   }
 
   /**
@@ -521,17 +532,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   async _prepareUpdates() {
     this.#prepareEquipmentConsumption();
     if (this.actor) {
-      const combatant = this.combatant;
-      if (combatant) {
-        if (this.executionTime === "r1") {
-          this.combatantUpdates["system.reactions"] = Math.max(0, combatant.system.reactions - 1);
-        } else if (this.executionTime.length === 2 && this.executionTime.startsWith("a")) {
-          this.combatantUpdates["system.actions"] = Math.max(
-            0,
-            combatant.system.actions - Number(this.executionTime[1]),
-          );
-        }
-      }
       for (const c of this.#paidCosts) {
         const config = TERIOCK.CONFIG.stat[c];
         if (config?.bar) {

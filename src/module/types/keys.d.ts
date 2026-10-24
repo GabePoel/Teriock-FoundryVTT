@@ -13,10 +13,10 @@ declare global {
     export type Interaction = keyof typeof CONFIG.ability.interaction;
     export type Target = keyof typeof CONFIG.ability.targets;
     export type Delivery = keyof typeof CONFIG.ability.delivery;
-    export type ActiveExecutionTime = keyof typeof CONFIG.ability.executionTime.active;
-    export type ReactiveExecutionTime = keyof typeof CONFIG.ability.executionTime.reactive;
-    export type PassiveExecutionTime = keyof typeof CONFIG.ability.executionTime.passive;
-    export type SlowExecutionTime = keyof typeof CONFIG.ability.executionTime.slow;
+    export type ActiveExecutionTime = keyof typeof CONFIG.ability.maneuver.active.executionTimes;
+    export type ReactiveExecutionTime = keyof typeof CONFIG.ability.maneuver.reactive.executionTimes;
+    export type PassiveExecutionTime = keyof typeof CONFIG.ability.maneuver.passive.executionTimes;
+    export type SlowExecutionTime = keyof typeof CONFIG.ability.maneuver.slow.executionTimes;
     export type ExecutionTime =
       | Teriock.Keys.ActiveExecutionTime
       | Teriock.Keys.PassiveExecutionTime

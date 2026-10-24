@@ -113,8 +113,8 @@ function getDeliveryString(delivery, piercing) {
  */
 function getExecutionTimeString(maneuver, base, slow) {
   if (maneuver === "slow") { return slow.label; }
-  if (maneuver === "passive") { return TERIOCK.CONFIG.ability.executionTime.passive.passive; }
-  return TERIOCK.CONFIG.ability.executionTime[maneuver]?.[base];
+  if (maneuver === "passive") { return TERIOCK.CONFIG.ability.maneuver.passive.executionTimes.passive.label; }
+  return TERIOCK.CONFIG.ability.maneuver[maneuver]?.executionTimes[base]?.label;
 }
 
 /**
