@@ -29,6 +29,12 @@ export default class ElderSorceryExecution extends DocumentExecution {
    */
   modifier = 0;
 
+  /**
+   * Evaluated bonus and penalty values.
+   * @type {{ bonuses: Record<string, number>, penalties: Record<string, number> }}
+   */
+  values = { bonuses: {}, penalties: {} };
+
   /** @inheritDoc */
   get _dialogButtons() {
     return [{
@@ -90,10 +96,22 @@ export default class ElderSorceryExecution extends DocumentExecution {
         flavor: _loc("TERIOCK.DIALOGS.ElderSorcery.flavor", {
           category: _loc(this.schema.getField(`ratings.${category}`).label),
           dc,
+          rating,
         }),
         thresholds: this._getThresholds(dc),
       });
       this.rolls.push(roll);
+    }
+  }
+
+  /** @inheritDoc */
+  async _buildTags() {
+    await super._buildTags();
+    if (this.level) { this.tags.push(`${_loc(this.schema.getField("level").label)} ${this.level}`); }
+    for (const [group, values] of Object.entries(this.values)) {
+      for (const [key, value] of Object.entries(values)) {
+        if (value) { this.tags.push(`${value.signedString()} ${_loc(this.schema.getField(`${group}.${key}`).label)}`); }
+      }
     }
   }
 
@@ -133,11 +151,15 @@ export default class ElderSorceryExecution extends DocumentExecution {
     const rollData = this.getRollData();
     let formula = "1d100";
     this.modifier = 0;
-    for (const [key, raw] of [...Object.entries(this.bonuses), ...Object.entries(this.penalties)]) {
-      let value = await BaseRoll.getValue(raw || "0", rollData);
-      if (["assistance", "effort"].includes(key)) { value = Math.min(value, 25); }
-      this.modifier += value;
-      if (value) { formula = FormulaField.add(formula, `${value}`); }
+    for (const group of ["bonuses", "penalties"]) {
+      this.values[group] = {};
+      for (const [key, raw] of Object.entries(this[group])) {
+        let value = await BaseRoll.getValue(raw || "0", rollData);
+        if (["assistance", "effort"].includes(key)) { value = Math.min(value, 25); }
+        this.values[group][key] = value;
+        this.modifier += value;
+        if (value) { formula = FormulaField.add(formula, `${value}`); }
+      }
     }
     this.updateSource({ formula });
     await super._prepareFormula();

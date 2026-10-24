@@ -2,6 +2,7 @@ import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { toKebabCase } from "../../utils/_module.mjs";
 
 const actorContext = {
+  br: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.label",
   c: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.c.label",
   f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
   lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
