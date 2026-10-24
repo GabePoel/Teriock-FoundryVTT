@@ -108,6 +108,13 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   }
 
   /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    const notifications = document.getElementById("chat-notifications");
+    if (!this.isPopout && notifications) { this._attachRootListeners(notifications); }
+  }
+
+  /** @inheritDoc */
   async postOne(message, options = {}) {
     const result = await super.postOne(message, options);
     this._dragDrop.bind(this.element);

@@ -62,7 +62,7 @@ export default function ChatMessageConnectionMixin(Base) {
      */
     static async #selectTarget(event, target) {
       /** @type {TeriockToken} */
-      const token = fromUuidSync(target.dataset.tokenUuid)?.object;
+      const token = fromUuidSync(target.dataset.uuid)?.object;
       if (!token) { return; }
       if (event.button === 0 && token.isOwner) {
         if (token.controlled) { token.release(); }
@@ -81,38 +81,36 @@ export default function ChatMessageConnectionMixin(Base) {
 
     /**
      * Connect the context menu that opens openable chat message images.
+     * @param {HTMLElement} root
      */
-    #connectImageContextMenu() {
-      this._createContextMenu(
-        () => [{
-          icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.image, "contextMenu"),
-          label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
-          onClick: async (_ev, target) => {
-            await new ImagePopout({
-              src: target.getAttribute("src"),
-              window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
-            }).render(true);
-          },
-          visible: target => {
-            const src = target.getAttribute("src");
-            return src
-              && src.length
-              && target.getAttribute("data-openable")
-              && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
-          },
-        }],
-        "img",
-        { eventName: "contextmenu", fixed: true },
-      );
+    #connectImageContextMenu(root) {
+      new TeriockContextMenu(root, "img", [{
+        icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.image, "contextMenu"),
+        label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
+        onClick: async (_ev, target) => {
+          await new ImagePopout({
+            src: target.getAttribute("src"),
+            window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
+          }).render(true);
+        },
+        visible: target => {
+          const src = target.getAttribute("src");
+          return src
+            && src.length
+            && target.getAttribute("data-openable")
+            && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
+        },
+      }], { fixed: true, jQuery: false });
     }
 
     /**
      * Connect the context menus for roll formulas and totals.
+     * @param {HTMLElement} root
      */
-    #connectRollContextMenus() {
+    #connectRollContextMenus(root) {
       const resolve = this._resolveRoll.bind(this);
       const connect = (selector, getEntries) =>
-        new TeriockContextMenu(this.element, selector, [], {
+        new TeriockContextMenu(root, selector, [], {
           fixed: true,
           jQuery: false,
           onOpen(target) {
@@ -125,10 +123,10 @@ export default function ChatMessageConnectionMixin(Base) {
     }
 
     /** @inheritDoc */
-    _attachFrameListeners() {
-      super._attachFrameListeners();
-      this.#connectImageContextMenu();
-      this.#connectRollContextMenus();
+    _attachRootListeners(root) {
+      super._attachRootListeners(root);
+      this.#connectImageContextMenu(root);
+      this.#connectRollContextMenus(root);
     }
 
     /**

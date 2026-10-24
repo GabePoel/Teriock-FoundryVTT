@@ -27,26 +27,10 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
   /**
    * Perform subtype-specific alterations to the final chat message HTML.
    * @param {object} _context
-   * @param {object} options
-   * @param {HTMLLIElement} [options.element]
+   * @param {object} _options
+   * @param {HTMLLIElement} [_options.element]
    */
-  async _onRender(_context, options) {
-    if (!options.element) { return; }
-
-    // Connect target interactions
-    options.element.querySelectorAll("[data-action='selectTarget']").forEach((el) => {
-      el.addEventListener("pointerover", (ev) => {
-        /** @type {TeriockToken} */
-        const token = fromUuidSync(ev.currentTarget.dataset.tokenUuid)?.object;
-        if (token && token?.isVisible) { token._onHoverIn(ev); }
-      });
-      el.addEventListener("pointerout", (ev) => {
-        /** @type {TeriockToken} */
-        const token = fromUuidSync(ev.currentTarget.dataset.tokenUuid)?.object;
-        if (token && token?.isVisible) { token._onHoverOut(ev); }
-      });
-    });
-  }
+  async _onRender(_context, _options) {}
 
   /**
    * Stuff that happens when timestamp is updated.

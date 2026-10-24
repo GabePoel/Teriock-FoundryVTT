@@ -66,9 +66,6 @@ export default class TeriockCombatTracker
   /** @type {UUID<TeriockCombatant|TeriockCombatantGroup>|null} */
   #draggedUuid = null;
 
-  /** @type {TeriockToken[]} */
-  #highlightedGroup = [];
-
   /**
    * Mark the tracker entry that a dragged Combatant or CombatantGroup would join.
    * @param {HTMLElement|null} entry
@@ -251,25 +248,17 @@ export default class TeriockCombatTracker
     }
   }
 
-  /** @inheritDoc */
-  _onCombatantHoverIn(event) {
-    const row = event.target.closest(".combatant-group-row");
-    if (!row) { return super._onCombatantHoverIn(event); }
-    if (!canvas.ready) { return; }
-    // CombatantGroups highlight all members' tokens
-    const group = this.viewed?.groups.get(row.closest("[data-group-id]").dataset.groupId);
-    this.#highlightedGroup = [...(group?.members ?? [])].filter(m => m.visible).map(m => m.token?.object).filter(
-      token => token?._canHover(game.user, event) && this._isTokenVisible(token)
-    );
-    this.#highlightedGroup.forEach((token, i) => token._onHoverIn(event, { hoverOutOthers: i === 0 }));
-  }
+  /**
+   * Remove default hover handling.
+   * @inheritdoc
+   */
+  _onCombatantHoverIn() {}
 
-  /** @inheritDoc */
-  _onCombatantHoverOut(event) {
-    super._onCombatantHoverOut(event);
-    for (const token of this.#highlightedGroup) { token._onHoverOut(event); }
-    this.#highlightedGroup = [];
-  }
+  /**
+   * Remove default hover handling.
+   * @inheritdoc
+   */
+  _onCombatantHoverOut() {}
 
   /** @inheritDoc */
   _onCombatantMouseDown(event, target) {
@@ -462,7 +451,7 @@ export default class TeriockCombatTracker
    * @returns {boolean} Whether there was a hovered CombatantGroup to target.
    */
   targetHoveredGroup(releaseOthers) {
-    const tokens = this.#highlightedGroup;
+    const tokens = this.hoveredTokens;
     if (!tokens.length || !canvas.tokens?.active) { return false; }
     const mode = tokens.every(t => t.isTargeted) ? "release" : releaseOthers ? "replace" : "acquire";
     canvas.tokens.setTargets(tokens.map(t => t.id), { mode });

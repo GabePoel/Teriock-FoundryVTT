@@ -79,6 +79,12 @@ export default function BaseApplicationMixin(Base) {
     #contextMenus = new Map();
 
     /**
+     * Tokens hovered through an element's `data-uuid`.
+     * @type {TeriockToken[]}
+     */
+    #hoveredTokens = [];
+
+    /**
      * Timeout ID of a click that is being held back in case it becomes a double click.
      * @type {number}
      */
@@ -151,6 +157,14 @@ export default function BaseApplicationMixin(Base) {
     }
 
     /**
+     * Tokens hovered through an element's `data-uuid`.
+     * @returns {TeriockToken[]}
+     */
+    get hoveredTokens() {
+      return this.#hoveredTokens;
+    }
+
+    /**
      * Whether this application is detached.
      * @returns {boolean}
      */
@@ -171,11 +185,21 @@ export default function BaseApplicationMixin(Base) {
     /** @inheritDoc */
     _attachFrameListeners() {
       super._attachFrameListeners();
-      this.element.addEventListener("keydown", this._onPressKey.bind(this));
-      this.element.addEventListener("dblclick", this.#onDoubleClick.bind(this));
-      this.element.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
-      this.element.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
-      this.element.addEventListener("wheel", event => {
+      this._attachRootListeners(this.element);
+    }
+
+    /**
+     * Attach listeners to a root element.
+     * @param {HTMLElement} root
+     */
+    _attachRootListeners(root) {
+      root.addEventListener("keydown", this._onPressKey.bind(this));
+      root.addEventListener("dblclick", this.#onDoubleClick.bind(this));
+      root.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
+      root.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
+      root.addEventListener("pointerover", this._onUuidHoverIn.bind(this), { passive: true });
+      root.addEventListener("pointerout", this._onUuidHoverOut.bind(this), { passive: true });
+      root.addEventListener("wheel", event => {
         if (event.target.closest?.("[data-no-scroll]")) { event.preventDefault(); }
       }, { passive: false });
     }
@@ -238,6 +262,30 @@ export default function BaseApplicationMixin(Base) {
         if (el.tagName === "IMG") { el.classList.toggle("disabled", el.disabled); }
       });
       this._syncSpinnerAnimations();
+    }
+
+    /**
+     * Hover the tokens of an element whose `data-uuid` is a Token, Combatant, or CombatantGroup as if on the canvas.
+     * @param {PointerEvent} event
+     */
+    _onUuidHoverIn(event) {
+      const uuid = event.target.closest?.("[data-uuid]")?.dataset.uuid;
+      const type = foundry.utils.parseUuid(uuid)?.type;
+      if (!canvas.ready || !["Combatant", "CombatantGroup", "Token"].includes(type)) { return; }
+      const doc = fromUuidSync(uuid, { strict: false });
+      const combatants = type === "CombatantGroup" ? [...(doc?.members ?? [])] : [doc];
+      const tokens = type === "Token" ? [doc] : combatants.filter(c => c?.visible).map(c => c.token);
+      this.#hoveredTokens = tokens.map(t => t?.object).filter(t => t?.visible && t._canHover(game.user, event));
+      this.#hoveredTokens.forEach((token, i) => token._onHoverIn(event, { hoverOutOthers: i === 0 }));
+    }
+
+    /**
+     * Release the tokens hovered through an element's `data-uuid`.
+     * @param {PointerEvent} event
+     */
+    _onUuidHoverOut(event) {
+      for (const token of this.#hoveredTokens) { token._onHoverOut(event); }
+      this.#hoveredTokens = [];
     }
 
     /** @inheritDoc */
