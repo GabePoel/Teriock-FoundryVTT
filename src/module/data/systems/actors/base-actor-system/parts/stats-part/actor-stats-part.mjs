@@ -1,4 +1,3 @@
-import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
 import { pathSorterFactory } from "../../../../../../utils/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
@@ -247,64 +246,6 @@ export default function ActorStatsPart(Base) {
     prepareVirtualEffects() {
       this.#prepareVirtualWounds();
       super.prepareVirtualEffects();
-    }
-
-    /**
-     * Awakens the actor from sleep.
-     *
-     * Relevant wiki pages:
-     * - [Awaken](https://wiki.teriock.com/index.php/Keyword:Awaken)
-     *
-     * @returns {Promise<void>}
-     */
-    async takeAwaken() {
-      await this.parent.fireTrigger("takeAwaken");
-      if (this.parent.statuses.has("unconscious") && !this.parent.statuses.has("dead")) {
-        if (this.hp.value <= 0) { await this.parent.update({ "system.hp.value": 1 }); }
-        if (this.parent.statuses.has("asleep")) { await this.parent.toggleStatusEffect("asleep", { active: false }); }
-        if (this.parent.statuses.has("unconscious")) {
-          await this.parent.toggleStatusEffect("unconscious", { active: false });
-        }
-      }
-    }
-
-    /**
-     * Heal normally.
-     * @param {Teriock.Dialog.HealDialogOptions} [options]
-     * @returns {Promise<void>}
-     */
-    async takeHeal(options = {}) {
-      await this.parent.fireTrigger("takeHeal");
-      await HealManager.create(this.actor, options);
-    }
-
-    /**
-     * Revitalize normally.
-     * @param {Teriock.Dialog.StatDialogOptions} [options]
-     * @returns {Promise<void>}
-     */
-    async takeRevitalize(options = {}) {
-      await this.parent.fireTrigger("takeRevitalize");
-      await RevitalizeManager.create(this.actor, options);
-    }
-
-    /**
-     * Revives the actor from death.
-     *
-     * Relevant wiki pages:
-     * - [Revival Effects](https://wiki.teriock.com/index.php/Category:Revival_effects)
-     *
-     * @returns {Promise<void>}
-     */
-    async takeRevive() {
-      await this.parent.fireTrigger("takeRevive");
-      if (this.parent.statuses.has("dead")) {
-        if (this.hp.value <= 0) { await this.takeHealing(1 - this.hp.value); }
-        if (this.mp.value <= 0) { await this.takeRevitalizing(1 - this.mp.value); }
-        await this.parent.toggleStatusEffect("dead", { active: false });
-        const toDelete = this.parent.applicables.filter(c => c.statuses.has("dead")).map(c => c.id);
-        await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-      }
     }
   }
 

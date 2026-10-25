@@ -20,8 +20,8 @@ declare global {
       equipmentClasses: Set<Teriock.Keys.Classification>;
       /** <schema> Flaws */
       flaws: string;
-      /** <schema> The impacts this deals */
-      impacts: Set<Teriock.Keys.Impact>;
+      /** <schema> The commands this deals */
+      commands: Set<Teriock.Keys.Command>;
       /** <schema> Notes */
       notes: string;
       /** <base> Local property keys that can be modified by changes */

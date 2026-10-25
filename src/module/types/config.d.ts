@@ -1,3 +1,5 @@
+import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+
 import changeConfig from "../static/config/change-config.mjs";
 import tipConfig from "../static/config/tip-config.mjs";
 
@@ -39,7 +41,7 @@ declare global {
       die?: string;
       hacks?: boolean;
       icon: string;
-      impact: Teriock.Keys.Impact;
+      command: Teriock.Keys.Command;
       label: string;
       morganti?: boolean;
       multiplier: number;
@@ -57,19 +59,53 @@ declare global {
 
     export type SimpleEntry = { img?: string, label: string };
 
-    export type ImpactEntry = {
-      aliases?: string[];
+    type CommandOperation = (
+      actor: TeriockActor,
+      options: object,
+    ) => DatabaseWriteOperation[] | Promise<DatabaseWriteOperation[]>;
+
+    export type CommandNumericEntry = {
+      /** Localization string for dealing this */
       deal: string;
-      harm?: boolean;
-      icon: string;
+      /** Whether to hide this from lists of numeric commands */
+      hidden?: boolean;
+      /** Whether this is an integer */
       integer?: boolean;
-      label: string;
+      /** A minimum value allowed for this */
       min?: number;
+      /** Whether to show a morganti checkbox */
       morganti?: boolean;
+      /** Whether a blank amount should default to `null` instead of `0` */
       nullable?: boolean;
+      /** Localization string for taking this */
       take: string;
-      apply: (actor: TeriockActor, amt: number) => Promise<void>;
-      reverse: (actor: TeriockActor, amt: number, options: object) => Promise<void>;
+      /** Localization string for taking a specific `{amount}` of this or a function of the options */
+      tooltip: ((options: { amount: number }) => string) | string;
+    };
+
+    export type CommandEntry = {
+      /** Alternate strings that can be used to invoke this command */
+      aliases?: string[];
+      /** Explicit arguments that are always assumed to be passed along when this is run in chat (order matters) */
+      args?: string[];
+      /** Whether this should be bunched with other common commands in one Automation */
+      common?: boolean;
+      /** Icon that represents this command */
+      icon: ((options: object) => string) | string;
+      /** Localization string handling for the label of this command */
+      label: ((options: object) => string) | string;
+      /** Whether this command can run without an Actor */
+      noActor?: boolean;
+      /** Takes an amount from a formula and deals it from a roll unless applied */
+      numeric?: CommandNumericEntry;
+      /** The command to take instead or the operations that reverse this one */
+      reverse?: CommandOperation | string;
+      /** Fire a trigger named after this command before taking it */
+      trigger?: boolean;
+      /** Run on all Actors at once instead of batching operations */
+      execute?: (actors: TeriockActor[], options: object) => Promise<false | void>;
+      /** Write operations for one Actor */
+      operations?: CommandOperation;
     };
 
     export type HackEntry = {

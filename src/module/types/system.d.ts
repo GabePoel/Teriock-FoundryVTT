@@ -45,7 +45,7 @@ declare global {
     export type CombatTrigger = keyof typeof tc.combat.choices;
     export type ConsequenceTrigger = keyof typeof tc.consequence.choices;
     export type EquipmentTrigger = keyof typeof tc.equipment.choices;
-    export type ImpactTrigger = keyof typeof tc.impact.choices;
+    export type CommandTrigger = keyof typeof tc.command.choices;
     export type MountTrigger = keyof typeof tc.mount.choices;
     export type ProtectionTrigger = keyof typeof tc.protection.choices;
     export type TimeTrigger = keyof typeof tc.time.choices;
@@ -55,7 +55,7 @@ declare global {
       | CombatTrigger
       | ConsequenceTrigger
       | EquipmentTrigger
-      | ImpactTrigger
+      | CommandTrigger
       | MountTrigger
       | ProtectionTrigger
       | TimeTrigger;
@@ -65,7 +65,7 @@ declare global {
       ability?: TeriockActiveEffect<"ability">;
       /** The execution's actor or the source's actor. */
       actor?: TeriockActor;
-      /** The amount of an impact or hack or payment. */
+      /** The amount of a command or hack or payment. */
       amount?: number;
       /** Set by attack and armament executions. */
       armament?: TeriockItem<"body" | "equipment">;

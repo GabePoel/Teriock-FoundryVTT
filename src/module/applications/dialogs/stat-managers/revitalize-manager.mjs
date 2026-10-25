@@ -12,7 +12,7 @@ export default class RevitalizeManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: {
-      icon: makeIconClass(TERIOCK.CONFIG.impact.revitalizing.icon, "title"),
+      icon: makeIconClass(TERIOCK.CONFIG.command.revitalizing.icon, "title"),
       title: "TERIOCK.DIALOGS.Revitalize.title",
     },
   };
@@ -45,7 +45,7 @@ export default class RevitalizeManager extends BaseStatManager {
 
   /** @inheritDoc */
   get _harmRoll() {
-    return { from: "mp", impact: "drain", to: "mana" };
+    return { command: "drain", from: "mp", to: "mana" };
   }
 
   /** @inheritDoc */

@@ -1,5 +1,5 @@
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import * as activations from "../../activations/command-activations.mjs";
+import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -19,7 +19,14 @@ export default class CommonOutcomesAutomation extends mixClasses(BaseAutomation,
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      common: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.command.common })),
+      common: new fields.SetField(
+        new fields.StringField({
+          choices: objectMap(TERIOCK.CONFIG.command, e => e.label, {
+            localize: true,
+            filter: e => e.common,
+          }),
+        }),
+      ),
     });
   }
 
@@ -44,10 +51,8 @@ export default class CommonOutcomesAutomation extends mixClasses(BaseAutomation,
         foundry.utils.setProperty(activationOptions, "options.ammunition", ammunitionUuid);
       }
     }
-    const activationClasses = Object.values(activations);
-    return Array.from(this.common).filter(Boolean).map(c => {
-      const Act = activationClasses.find(A => A.metadata.type === c);
-      if (Act) { return new Act(foundry.utils.deepClone(activationOptions)); }
-    }).filter(Boolean);
+    return Array.from(this.common).filter(c => commandActivations[c]).map(c =>
+      new commandActivations[c](foundry.utils.deepClone(activationOptions))
+    );
   }
 }

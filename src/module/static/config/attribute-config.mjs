@@ -18,18 +18,18 @@ export default {
   },
   per: {
     abbreviation: "TERIOCK.TERMS.Attributes.per.abbreviation",
+    command: "perceive",
     icon: icons.manifest.attribute.per,
     identifier: "core:perception",
     img: thumbnails.manifest.attribute.perception,
-    impact: "perceive",
     label: "TERIOCK.TERMS.Attributes.per.label",
   },
   snk: {
     abbreviation: "TERIOCK.TERMS.Attributes.snk.abbreviation",
+    command: "hide",
     icon: icons.manifest.attribute.snk,
     identifier: "core:sneak",
     img: thumbnails.manifest.attribute.sneak,
-    impact: "hide",
     label: "TERIOCK.TERMS.Attributes.snk.label",
   },
   str: {

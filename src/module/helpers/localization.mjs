@@ -143,7 +143,7 @@ function localizeObject(obj, { keys } = {}) {
     }
     for (const key of keys) {
       const value = foundry.utils.getProperty(v, key);
-      if (!value) { continue; }
+      if (typeof value !== "string") { continue; }
       foundry.utils.setProperty(v, key, _loc(value));
     }
   }

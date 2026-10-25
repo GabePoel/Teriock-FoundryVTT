@@ -116,9 +116,7 @@ export default class ShortRestExecution extends DocumentExecution {
 
   /** @inheritDoc */
   async _postInput() {
-    const yes = await super._postInput();
-    if (yes === false) { return false; }
-
     if (!this.useAbilities) { this.automations.clear(); }
+    return super._postInput();
   }
 }

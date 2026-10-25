@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
+import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { TakeActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -20,8 +21,11 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       amount: new fields.NumberField({ nullable: true, placeholder: _loc("COMMON.Default") }),
-      impact: new fields.StringField({
-        choices: objectMap(TERIOCK.CONFIG.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
+      command: new fields.StringField({
+        choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.take, {
+          localize: true,
+          filter: c => c.numeric && !c.numeric.hidden,
+        }),
         initial: "damage",
         nullable: false,
         required: true,
@@ -31,17 +35,23 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
   }
 
   /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateRename(source, "impact", "command");
+    return super.migrateData(source, options);
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
-    const paths = ["impact", "amount"];
-    if (TERIOCK.CONFIG.impact[this.impact]?.morganti) { paths.push("morganti"); }
+    const paths = ["command", "amount"];
+    if (TERIOCK.CONFIG.command[this.command]?.numeric?.morganti) { paths.push("morganti"); }
     paths.push("hr", ...this._triggerDisplayPaths);
     return paths;
   }
 
   /** @inheritDoc */
   async _getActivations() {
-    if (this.impact && this.impact !== "other") {
-      return [new TakeActivation({ amount: this.amount, impact: this.impact, morganti: this.morganti })];
+    if (this.command && this.command !== "other") {
+      return [new TakeActivation({ amount: this.amount, command: this.command, morganti: this.morganti })];
     }
     return [];
   }

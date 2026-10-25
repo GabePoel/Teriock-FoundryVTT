@@ -1,3 +1,4 @@
+import { listFormat } from "../../../../helpers/localization.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
@@ -11,15 +12,8 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
    * @returns {number|null}
    */
   get #amount() {
-    return this.amount ?? this.getNearestDocument()?.rolls?.find(r => r.impacts?.includes(this.impact))?.total ?? null;
-  }
-
-  /**
-   * The config entry for this activation's impact.
-   * @returns {Teriock.Config.ImpactEntry}
-   */
-  get #entry() {
-    return TERIOCK.CONFIG.impact[this.impact];
+    return this.amount ?? this.getNearestDocument()?.rolls?.find(r => r.commands?.includes(this.command))?.total
+      ?? null;
   }
 
   /**
@@ -33,65 +27,55 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   }
 
   /**
-   * Notify that this was applied to or reversed for an actor.
-   * @param {TeriockActor} actor
+   * Notify that this was applied to or reversed for some actors.
+   * @param {{ actors: TeriockActor[], amount?: number|null, morganti?: boolean }|null} result
    * @param {"applied"|"reversed"} key
-   * @param {object} [options]
-   * @param {number|null} [options.amount]
-   * @param {boolean} [options.morganti]
    */
-  #notify(actor, key, { amount = this.#amount, morganti = this.morganti } = {}) {
+  #notify(result, key) {
+    if (!result) { return; }
     const message = _loc(`TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.${key}`, {
-      actor: actor.fullName,
-      amount,
-      impact: this.label,
+      actor: listFormat(result.actors.map(a => a.fullName)),
+      amount: result.amount,
+      command: this.label,
     });
-    if (morganti) { ui.notifications.morganti(message); }
+    if (result.morganti) { ui.notifications.morganti(message); }
     else { ui.notifications.success(message); }
   }
 
   /** @inheritDoc */
   get classes() {
-    return [super.classes, `${this.impact}-button`].join(" ");
+    return [super.classes, `${this.command}-button`].join(" ");
   }
 
   /** @inheritDoc */
   get label() {
-    return this.display.label || this.#entry?.take || _loc(this.constructor.typeLabel);
+    return this.display.label || TERIOCK.CONFIG.command[this.command]?.numeric?.take
+      || _loc(this.constructor.typeLabel);
   }
 
   get tooltip() {
-    return typeof this.#amount === "number" ? this.#amount.toString() : "";
+    const tooltip = TERIOCK.CONFIG.command[this.command]?.numeric?.tooltip;
+    if (typeof this.#amount !== "number" || !tooltip) { return ""; }
+    return typeof tooltip === "function" ? tooltip({ amount: this.#amount }) : _loc(tooltip, { amount: this.#amount });
   }
 
   /** @inheritDoc */
   get typeIcon() {
-    return this.display.icon || this.#entry?.icon || this.metadata.icon;
+    return this.display.icon || game.teriock.commands.getValue(this.command, "icon") || this.metadata.icon;
   }
 
   /** @inheritDoc */
   async primaryAction() {
-    if (!this.checkActors()) { return; }
-    for (const actor of this.actors) {
-      let amount = this.#amount;
-      let morganti = this.morganti && Boolean(this.#entry?.morganti);
-      if (this.#showDialog) {
-        const result = await actor.system.impactDialog(this.impact, { amount, morganti });
-        if (!result) { continue; }
-        ({ amount, morganti } = result);
-      } else {
-        await this.#entry.apply(actor, amount, { morganti });
-      }
-      this.#notify(actor, "applied", { amount, morganti });
-    }
+    const result = await game.teriock.commands.take(this.command, this.actors, {
+      amount: this.#amount,
+      morganti: this.morganti,
+      showDialog: this.#showDialog,
+    });
+    this.#notify(result, "applied");
   }
 
   /** @inheritDoc */
   async secondaryAction() {
-    if (!this.checkActors()) { return; }
-    for (const actor of this.actors) {
-      await this.#entry?.reverse(actor, this.#amount);
-      this.#notify(actor, "reversed");
-    }
+    this.#notify(await game.teriock.commands.reverse(this.command, this.actors, { amount: this.#amount }), "reversed");
   }
 }

@@ -1,6 +1,6 @@
 declare module "./take-automation.mjs" {
   export default interface TakeAutomation {
-    impact: Teriock.Keys.Impact;
+    command: Teriock.Keys.Command;
     morganti: boolean;
     showDialog: boolean;
     amount: number | null;

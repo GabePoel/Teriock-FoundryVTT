@@ -1,4 +1,5 @@
 import IdentifiersRegistry from "./identifiers-registry.mjs";
+import { CommandManager } from "./interaction/_module.mjs";
 
 /**
  * @import { ApplicationV2 } from "@client/applications/api/_module.mjs";
@@ -10,6 +11,9 @@ import IdentifiersRegistry from "./identifiers-registry.mjs";
 export default class TeriockManager {
   /** @type {TeriockActiveEffect<"ability">[]} */
   #basicAbilities = [];
+
+  /** @type {CommandManager} */
+  #commands = new CommandManager();
 
   /** @type {IdentifiersRegistry} */
   #identifiers = new IdentifiersRegistry();
@@ -58,6 +62,14 @@ export default class TeriockManager {
    */
   get basicAbilities() {
     return this.#basicAbilities;
+  }
+
+  /**
+   * The singleton command manager.
+   * @returns {CommandManager}
+   */
+  get commands() {
+    return this.#commands;
   }
 
   /**

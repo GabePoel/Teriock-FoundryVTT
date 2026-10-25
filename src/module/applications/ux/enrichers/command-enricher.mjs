@@ -1,27 +1,23 @@
 import { TeriockTextEditor } from "../_module.mjs";
-import { buildCommandOptions, commands, getCommandEntryValue } from "../../../helpers/interaction/_module.mjs";
 import { makeIconClass, objectMap } from "../../../utils/_module.mjs";
 import { interpretTerm } from "../enrichment-helpers.mjs";
 
 /**
- * Execute some command.
+ * Take or reverse some command.
  * @param {HTMLElement} target
- * @param {"primary" | "secondary"} operation
+ * @param {"take" | "reverse"} operation
  * @param {PointerEvent} event
  * @returns {Promise<void>}
  */
 async function executeCommand(target, operation, event) {
   event.preventDefault();
   event.stopPropagation();
-  const command = commands[target.dataset.command];
-  if (!command || !command[operation]) { return; }
-  const options = {};
-  for (const mod of ["alt", "ctrl", "shift"]) {
-    if (command[mod] && event[`${mod}Key`]) { options[command[mod]] = true; }
-  }
-  for (const [key, value] of Object.entries(target.dataset)) {
-    if (!["action", "command"].includes(key)) {
-      options[key] = interpretTerm(value);
+  const key = target.dataset.command;
+  if (!TERIOCK.CONFIG.command[key]) { return; }
+  const options = { event };
+  for (const [k, value] of Object.entries(target.dataset)) {
+    if (!["action", "command"].includes(k)) {
+      options[k] = interpretTerm(value);
     }
   }
   let actor;
@@ -30,40 +26,48 @@ async function executeCommand(target, operation, event) {
     actor = doc?.actor;
   }
   if (!actor) { actor = game.actors.default; }
-  await command[operation](actor, options);
+  await game.teriock.commands[operation](key, actor ? [actor] : [], options);
 }
 
 /** @type {Teriock.Enrichment.EnricherConfig} */
 const commandEnricher = {
-  format: { aliases: Object.keys(commands), hasConfig: true, hasMultipleArguments: false, type: "roll" },
+  format: {
+    aliases: Object.entries(TERIOCK.CONFIG.command).flatMap(([k, v]) => [k, ...(v.aliases ?? [])]),
+    hasConfig: false,
+    hasMultipleArguments: false,
+    type: "roll",
+  },
   id: "executeCommand",
   onRender: el => {
     if (el.dataset.enriched) { return; }
     el.dataset.enriched = "true";
     const target = el.firstElementChild;
     el.addEventListener("click", async ev => {
-      await executeCommand(target, "primary", ev);
+      await executeCommand(target, "take", ev);
     });
     el.addEventListener("contextmenu", async ev => {
-      await executeCommand(target, "secondary", ev);
+      await executeCommand(target, "reverse", ev);
     });
   },
   process: async (parsed, options) => {
-    const command = commands[parsed.alias];
+    const commands = game.teriock.commands;
+    const key = commands.resolve(parsed.alias);
+    const entry = TERIOCK.CONFIG.command[key];
     const payload = parsed.arguments.length ? parsed.arguments[0] : "";
-    const commandOptions = { ...parsed.config, ...buildCommandOptions(payload, command) };
+    const commandOptions = commands.buildOptions(payload, key);
     await game.teriock.identifiers.initializing;
     return TeriockTextEditor.createAnchor({
       classes: ["teriock-inline-command"],
       dataset: {
         action: "executeCommand",
-        command: command.id,
+        command: key,
         relativeTo: options?.relativeTo?.uuid,
-        tooltip: getCommandEntryValue(command, "tooltip", commandOptions),
+        tooltip: commandOptions.apply ? entry.numeric?.take : entry.numeric?.deal,
         ...objectMap(commandOptions, v => v.toString()),
       },
-      icon: makeIconClass(getCommandEntryValue(command, "icon", commandOptions), "inline"),
-      name: parsed.label ?? _loc(getCommandEntryValue(command, "label", commandOptions)),
+      icon: makeIconClass(commands.getValue(key, "icon", commandOptions), "inline"),
+      name: parsed.label
+        ?? (entry.numeric ? commandOptions.formula : _loc(commands.getValue(key, "label", commandOptions))),
     });
   },
 };

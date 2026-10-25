@@ -1,5 +1,3 @@
-import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
-import { AffinityExecution, ResistanceExecution } from "../../../../../executions/activity-executions/_module.mjs";
 import { toId } from "../../../../../utils/_module.mjs";
 
 /**
@@ -65,27 +63,6 @@ export default function ActorAffinitiesPart(Base) {
           img: condition?.img,
         });
       }
-    }
-
-    /**
-     * Rolls one of this actor's affinities. Affinities that are rolled against a threshold go through a
-     * {@link ResistanceExecution}.
-     *
-     * Relevant wiki pages:
-     * - [Affinity keywords](https://wiki.teriock.com/index.php?title=Category:Affinity_keywords)
-     *
-     * @param {AffinityType} type - The type of affinity to roll.
-     * @param {Partial<Teriock.Execution.AffinityExecutionOptions>} [options] - Options for the roll.
-     * @returns {Promise<void>}
-     * @todo Rework to work with {@link BaseAffinity}.
-     */
-    async rollAffinity(type, options = {}) {
-      const config = TERIOCK.CONFIG.affinity.types[type];
-      if (!config) { return; }
-      if (options.event) { Object.assign(options, ThresholdRoll.parseEvent(options.event)); }
-      if (config.hook) { await this.parent.fireTrigger(config.hook); }
-      const Execution = config.threshold ? ResistanceExecution : AffinityExecution;
-      await Execution.create({}, Object.assign(options, { actor: this.parent, type }));
     }
   }
 

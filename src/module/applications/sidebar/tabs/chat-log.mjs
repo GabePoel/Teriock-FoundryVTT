@@ -1,4 +1,3 @@
-import { buildCommandOptions, commands } from "../../../helpers/interaction/_module.mjs";
 import { makeIcon, mixClasses } from "../../../utils/_module.mjs";
 import { ChatMessageConnectionMixin } from "../mixins/_module.mjs";
 
@@ -16,21 +15,18 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   /** @inheritDoc */
   static CHAT_COMMANDS = (() => {
     const registry = { ...super.CHAT_COMMANDS };
-    for (const [id, command] of Object.entries(commands)) {
-      registry[id] = {
-        rgx: new RegExp(`^(/${id}(?:\\s+)?)([^]*)`, "i"),
-        fn(_commandString, match) {
-          const payload = match[2] ? match[2].trim() : "";
-          const commandOptions = buildCommandOptions(payload, command);
-          if (command.noActor) { command.primary(null, commandOptions); }
-          else {
-            const actors = game.actors.selected;
-            if (!actors.length) { actors.push(null); }
-            actors.forEach(actor => command.primary(actor, commandOptions));
-          }
-          return false;
-        },
-      };
+    for (const [key, entry] of Object.entries(TERIOCK.CONFIG.command)) {
+      for (const id of [key, ...(entry.aliases ?? [])]) {
+        registry[id] = {
+          rgx: new RegExp(`^(/${id}(?:\\s+|$))([^]*)`, "i"),
+          fn(_commandString, match) {
+            const payload = match[2] ? match[2].trim() : "";
+            const commands = game.teriock.commands;
+            commands.take(key, game.actors.selected, commands.buildOptions(payload, key));
+            return false;
+          },
+        };
+      }
     }
     return registry;
   })();

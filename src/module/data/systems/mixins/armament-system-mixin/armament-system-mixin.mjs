@@ -12,7 +12,7 @@ import {
 import { FormulaField, IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
-import { migrateIterables } from "../../../fields/tools/migrations.mjs";
+import { migrateIterables, migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -55,18 +55,21 @@ export default function ArmamentSystemMixin(Base) {
       return Object.assign(super.defineSchema(), {
         av: defenseField(),
         bv: defenseField(),
+        commands: new fields.SetField(
+          new fields.StringField({
+            choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.take, {
+              localize: true,
+              filter: c => c.numeric && !c.numeric.hidden,
+            }),
+          }),
+          { initial: ["damage"] },
+        ),
         damage: new MultiChangeField({
           base: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
           twoHanded: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
           types: new fields.SetField(new IdentifierField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
         equipmentClasses: identifierSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
-        impacts: new fields.SetField(
-          new fields.StringField({
-            choices: objectMap(TERIOCK.CONFIG.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
-          }),
-          { initial: ["damage"] },
-        ),
         notes: new fields.HTMLField(),
         range: new MultiChangeField({
           long: new fields.EmbeddedDataField(RangeModel),
@@ -99,6 +102,7 @@ export default function ArmamentSystemMixin(Base) {
         delete source.fightingStyle;
       }
       migrateIterables(source, "equipmentClasses");
+      migrateRename(source, "impacts", "commands");
       return super.migrateData(source, options);
     }
 
@@ -354,7 +358,7 @@ export default function ArmamentSystemMixin(Base) {
       if (this.settings.getSetting("rollAttackOnUse")) {
         await this.actor?.useDocument("basic-attack", { type: "ability" });
       }
-      data.impacts ??= this.impacts;
+      data.commands ??= this.commands;
       await super._use(data, options);
     }
 
@@ -390,7 +394,7 @@ export default function ArmamentSystemMixin(Base) {
       if (this._source.style) { data[`style.${this._source.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
       for (const p of this.props || new Set()) { data[`prop.${toKebabCase(p)}`] = 1; }
-      for (const impact of this.impacts) { data[`impact.${toKebabCase(impact)}`] = 1; }
+      for (const command of this.commands) { data[`command.${toKebabCase(command)}`] = 1; }
       for (const equipmentClass of this.equipmentClasses) { data[`class.${toKebabCase(equipmentClass)}`] = 1; }
       return data;
     }

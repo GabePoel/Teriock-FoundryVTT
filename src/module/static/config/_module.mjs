@@ -18,7 +18,6 @@ import effectConfig from "./effect-config.mjs";
 import equipmentConfig from "./equipment-config.mjs";
 import hackConfig from "./hack-config.mjs";
 import illusionConfig from "./illusion-config.mjs";
-import impactConfig from "./impact-config.mjs";
 import mathConfig from "./math-config.mjs";
 import metaphysicsConfig from "./metaphysics-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
@@ -53,7 +52,6 @@ const config = {
   equipment: equipmentConfig,
   hack: hackConfig,
   illusion: illusionConfig,
-  impact: impactConfig,
   math: mathConfig,
   metaphysics: metaphysicsConfig,
   piercing: piercingConfig,

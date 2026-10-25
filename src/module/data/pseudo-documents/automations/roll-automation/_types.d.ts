@@ -1,6 +1,6 @@
 declare module "./roll-automation.mjs" {
   export default interface RollAutomation {
-    impact: Teriock.Keys.Impact;
+    command: Teriock.Keys.Command;
     formula: Teriock.System.FormulaString;
   }
 }

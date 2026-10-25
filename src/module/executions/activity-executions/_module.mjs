@@ -1,6 +1,6 @@
 export { default as AffinityExecution } from "./affinity-execution.mjs";
 export { default as AttackRollExecution } from "./attack-roll-execution.mjs";
-export { default as DealImpactExecution } from "./deal-impact-execution.mjs";
+export { default as DealCommandExecution } from "./deal-command-execution.mjs";
 export { default as FallExecution } from "./fall-execution/fall-execution.mjs";
 export { default as FeatExecution } from "./feat-execution.mjs";
 export { default as InitiativeExecution } from "./initiative-execution/initiative-execution.mjs";

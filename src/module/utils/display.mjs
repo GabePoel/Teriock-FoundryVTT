@@ -76,6 +76,17 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
 }
 
 /**
+ * Format an amount of gold pieces like `₲10` or `-₲10`.
+ * @param {number|string} amount
+ * @returns {string}
+ */
+export function formatGp(amount) {
+  const value = String(amount);
+  if (value.startsWith("-")) { return `-${_loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: value.slice(1) })}`; }
+  return _loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value });
+}
+
+/**
  * Iterate through an array with a progress bar using batched processing.
  * @param {Array} arr
  * @param {string} message

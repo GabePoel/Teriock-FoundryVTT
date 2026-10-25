@@ -67,10 +67,10 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   async _buildActivations() {
     if (await super._buildActivations() === false) { return false; }
 
-    const impact = TERIOCK.CONFIG.attribute[this.attribute]?.impact;
+    const command = TERIOCK.CONFIG.attribute[this.attribute]?.command;
     const amount = this.rolls[0]?.total;
-    if (impact && Number.isFinite(amount)) {
-      this.activations.push(new teriock.data.pseudoDocuments.activations.TakeActivation({ amount, impact }));
+    if (command && Number.isFinite(amount)) {
+      this.activations.push(new teriock.data.pseudoDocuments.activations.TakeActivation({ amount, command }));
     }
   }
 

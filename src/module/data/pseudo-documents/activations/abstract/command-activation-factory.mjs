@@ -1,63 +1,58 @@
-import { getCommandEntryValue } from "../../../../helpers/interaction/command-helpers.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import BaseActivation from "./base-activation/base-activation.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * A factory function to build a simple activation from a command entry.
- * @param {Teriock.Command.CommandEntry} entry
+ * A factory function to build a simple activation from a command.
+ * @param {Teriock.Keys.Command} key
  * @returns {typeof BaseActivation}
  */
-export default function CommandActivationFactory(entry) {
+export default function CommandActivationFactory(key) {
   /**
    * @property {object} options
    */
   class CommandActivation extends BaseActivation {
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { type: entry.id });
+    static metadata = mergeMetadata(super.metadata, { type: key });
 
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { options: new fields.ObjectField() });
     }
 
+    /**
+     * Take or reverse this activation's command for all its actors.
+     * @param {"take"|"reverse"} action
+     * @returns {Promise<void>}
+     */
+    async #act(action) {
+      const result = await game.teriock.commands[action](key, this.actors, { event: this.event, ...this.options });
+      if (!result) { return; }
+      ui.notifications.success(
+        `TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.${action === "take" ? "executed" : "reversed"}`,
+        { format: { command: _loc(this.label) }, localize: true },
+      );
+    }
+
     /** @inheritDoc */
     get label() {
-      return this.display.label || getCommandEntryValue(entry, "label", this.options);
+      return this.display.label || game.teriock.commands.getValue(key, "label", this.options);
     }
 
     /** @inheritDoc */
     get typeIcon() {
-      return this.display.icon || getCommandEntryValue(entry, "icon", this.options) || this.metadata.icon;
+      return this.display.icon || game.teriock.commands.getValue(key, "icon", this.options) || this.metadata.icon;
     }
 
     /** @inheritDoc */
     async primaryAction() {
-      if (typeof entry.primary !== "function") { return; }
-      if (entry.noActor) { await entry.primary(null, Object.assign({ event: this.event }, this.options)); }
-      else {
-        if (!this.checkActors()) { return; }
-        await Promise.all(this.actors.map(a => entry.primary(a, Object.assign({ event: this.event }, this.options))));
-      }
-      ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.executed", {
-        format: { command: _loc(this.label) },
-        localize: true,
-      });
+      await this.#act("take");
     }
 
     /** @inheritDoc */
     async secondaryAction() {
-      if (typeof entry.secondary !== "function") { return; }
-      if (entry.noActor) { await entry.secondary(null, Object.assign({ event: this.event }, this.options)); }
-      else {
-        if (!this.checkActors()) { return; }
-        await Promise.all(this.actors.map(a => entry.secondary(a, Object.assign({ event: this.event }, this.options))));
-      }
-      ui.notifications.success("TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.reversed", {
-        format: { command: _loc(this.label) },
-        localize: true,
-      });
+      if (TERIOCK.CONFIG.command[key].reverse) { await this.#act("reverse"); }
     }
   }
 

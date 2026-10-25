@@ -13,7 +13,7 @@ declare module "./base-execution.mjs" {
     targetsArmament: boolean;
 
     _actor: TeriockActor | null;
-    _boosts: Record<Teriock.Keys.Impact, Teriock.System.FormulaString>;
+    _boosts: Record<Teriock.Keys.Command, Teriock.System.FormulaString>;
     _messageMode: Teriock.Messages.Mode;
     _rollData: object;
     _showDialog: boolean;

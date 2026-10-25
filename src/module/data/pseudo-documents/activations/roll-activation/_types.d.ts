@@ -1,6 +1,6 @@
 declare module "./roll-activation.mjs" {
   export default interface RollActivation {
-    impact: Teriock.Keys.Impact;
+    command: Teriock.Keys.Command;
     formula: Teriock.System.FormulaString;
     boosts: number;
   }

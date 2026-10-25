@@ -18,7 +18,10 @@ export default class ChangesAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static migrateData(source, options) {
-    for (const change of source.changes ?? []) { migrateThumbnails(change, "value"); }
+    for (const change of source.changes ?? []) {
+      migrateThumbnails(change, "value");
+      if (change.key === "system.impacts") { change.key = "system.commands"; }
+    }
     return super.migrateData(source, options);
   }
 

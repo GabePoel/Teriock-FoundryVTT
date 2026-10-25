@@ -87,7 +87,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
       if (!groups[v.group]) { groups[v.group] = { choices: {}, label: TERIOCK.CONFIG.change.child.groups[v.group] }; }
       groups[v.group].choices[k] = v.label;
       if (v.group === "boosts") {
-        groups[v.group].choices[k] = _loc("TERIOCK.AUTOMATIONS.ChildChange.CHOICES.impact", { impact: v.label });
+        groups[v.group].choices[k] = _loc("TERIOCK.AUTOMATIONS.ChildChange.CHOICES.command", { command: v.label });
       }
     }
     return formatDynamicSelectOptions(groups);

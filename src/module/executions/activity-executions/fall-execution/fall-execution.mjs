@@ -82,7 +82,7 @@ export default class FallExecution extends BaseExecution {
 
   /** @inheritDoc */
   get rollOptions() {
-    return Object.assign(super.rollOptions, { impacts: ["damage"] });
+    return Object.assign(super.rollOptions, { commands: ["damage"] });
   }
 
   /**

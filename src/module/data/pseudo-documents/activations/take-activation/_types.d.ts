@@ -1,6 +1,6 @@
 declare module "./take-activation.mjs" {
   export default interface TakeActivation {
-    impact: Teriock.Keys.Impact;
+    command: Teriock.Keys.Command;
     amount: number;
   }
 }

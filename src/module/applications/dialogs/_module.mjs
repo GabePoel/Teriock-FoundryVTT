@@ -4,4 +4,5 @@ export { default as DocumentSelector } from "./document-selector.mjs";
 export { default as ExecutionEditor } from "./execution-editor.mjs";
 export * from "./select-dialogs.mjs";
 export { default as SourceRefresher } from "./source-refresher.mjs";
+export * from "./stat-managers/_module.mjs";
 export * from "./updaters/_module.mjs";

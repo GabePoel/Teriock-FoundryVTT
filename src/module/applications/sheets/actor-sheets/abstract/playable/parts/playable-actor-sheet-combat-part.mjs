@@ -19,11 +19,11 @@ export default function PlayableActorSheetCombatPart(Base) {
     static async #onIncreaseCover(event) {
       if (!game.teriock.checkEditable(this)) { return; }
       if (event.button === 0) {
-        if (this.document.system.cover < 3) { await this.document.system.increaseCover(); }
-        else { await this.document.system.decreaseCover(3); }
+        if (this.document.system.cover < 3) { await this.document.take("cover"); }
+        else { await this.document.take("uncover", { amount: 3 }); }
       } else if (event.button === 2) {
-        if (this.document.system.cover > 0) { await this.document.system.decreaseCover(); }
-        else { await this.document.system.increaseCover(3); }
+        if (this.document.system.cover > 0) { await this.document.take("uncover"); }
+        else { await this.document.take("cover", { amount: 3 }); }
       }
     }
 

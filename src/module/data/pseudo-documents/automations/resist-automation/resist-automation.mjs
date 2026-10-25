@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
-import { ResistActivation } from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -31,6 +31,8 @@ export default class ResistAutomation extends mixClasses(ThresholdAutomation, Tr
 
   /** @inheritDoc */
   async _getActivations() {
-    return [new ResistActivation({ options: { bonus: this.bonus, type: this.hex ? "hexproof" : "resistance" } })];
+    return [
+      new commandActivations.resist({ options: { bonus: this.bonus, type: this.hex ? "hexproof" : "resistance" } }),
+    ];
   }
 }

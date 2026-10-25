@@ -258,12 +258,12 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.isFeat && !this.preventFeat) {
       const featOptions = { attribute: this.source.system.featSaveAttribute };
       if (!this.preventThreshold) { featOptions.threshold = this.rolls[0].total; }
-      this.activations.push(new acts.FeatActivation({ options: featOptions }));
+      this.activations.push(new acts.commandActivations.feat({ options: featOptions }));
     }
 
     // Add block cone activation
     if (this.source.system.delivery === "cone" && !this.preventBlockCone) {
-      this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
+      this.activations.push(new acts.commandActivations.use({ options: { key: "ability:block-cone" } }));
     }
 
     // Add all pre-defined activations
@@ -503,7 +503,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.actor) {
       for (const c of this.#paidCosts) {
         const config = TERIOCK.CONFIG.stat[c];
-        if (!config?.bar) { await TERIOCK.CONFIG.impact[config?.impact]?.apply(this.actor, this.costs[c]); }
+        if (config?.command && !config.bar) { await this.actor.take(config.command, { amount: this.costs[c] }); }
       }
     }
   }

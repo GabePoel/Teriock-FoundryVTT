@@ -48,7 +48,7 @@ export default class BaseExecution extends BaseDataModel {
   /** @type {TeriockJournalEntryPage} */
   #journalEntryPage;
 
-  /** @type {Record<Teriock.Keys.Impact, number>} */
+  /** @type {Record<Teriock.Keys.Command, number>} */
   _boostsResolved = {};
 
   /** @type {Activation[]} */
@@ -279,7 +279,7 @@ export default class BaseExecution extends BaseDataModel {
     );
     this.activations.push(...fetched.flat());
     for (const a of this.activations) {
-      const boosts = this._boostsResolved[a?.impact];
+      const boosts = this._boostsResolved[a?.command];
       if (a?.type === "roll" && boosts) {
         a.updateSource({ boosts });
       }
@@ -372,9 +372,9 @@ export default class BaseExecution extends BaseDataModel {
   async _buildTags() {
     if (this.competence.proficient) { this.tags.push(this.competence.label); }
     for (const [k, v] of Object.entries(this._boostsResolved)) {
-      if (this._hasBoostForImpact(k)) {
+      if (this._hasBoostForCommand(k)) {
         this.tags.push(
-          _loc(`TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`, { formula: v, impact: k }),
+          _loc(`TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`, { command: k, formula: v }),
         );
       }
     }
@@ -512,12 +512,12 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
-   * Whether this has boosts for a given impact.
-   * @param {Teriock.Keys.Impact} impact
+   * Whether this has boosts for a given command.
+   * @param {Teriock.Keys.Command} command
    * @returns {boolean}
    */
-  _hasBoostForImpact(impact) {
-    return this._boostsResolved[impact] && this.activations.some(a => a.type === "roll" && a.impact === impact);
+  _hasBoostForCommand(command) {
+    return this._boostsResolved[command] && this.activations.some(a => a.type === "roll" && a.command === command);
   }
 
   /**

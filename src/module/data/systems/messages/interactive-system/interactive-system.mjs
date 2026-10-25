@@ -35,6 +35,23 @@ export default class InteractiveSystem extends BaseMessageSystem {
     });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    const activations = Array.isArray(source.activations)
+      ? source.activations
+      : Object.values(source.activations ?? {});
+    for (const activation of activations) {
+      if (!["useExternal", "useLocal"].includes(activation?.type)) { continue; }
+      activation.type = "use";
+      if (activation.options) {
+        activation.options.key ??= activation.options.lookup ?? activation.options.uuid;
+        delete activation.options.lookup;
+        delete activation.options.uuid;
+      }
+    }
+    return super.migrateData(source, options);
+  }
+
   /**
    * Enriched panel context.
    * @returns {Promise<Teriock.Panels.PanelParts[]>}

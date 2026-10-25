@@ -1,5 +1,5 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import { RevitalizeActivation } from "../activations/command-activations.mjs";
+import { commandActivations } from "../activations/command-activations.mjs";
 import { StatAutomation } from "./abstract/_module.mjs";
 
 export default class RevitalizeAutomation extends StatAutomation {
@@ -12,7 +12,7 @@ export default class RevitalizeAutomation extends StatAutomation {
   /** @inheritDoc */
   async _getActivations() {
     return [
-      new RevitalizeActivation({
+      new commandActivations.revitalize({
         options: { consumeStatDice: this.consumeStatDice, forHarm: this.forHarm, substitution: this.substitution },
       }),
     ];

@@ -5,7 +5,7 @@
 const BAR_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].bar);
 
 /**
- * Mixin allowing hacks, impacts, and spending dice stats.
+ * Mixin allowing hacks, commands, and spending dice stats.
  * @template {MixinBase} T
  * @param {T} Base
  */
@@ -19,8 +19,8 @@ export default function HackStatApplicationMixin(Base) {
     static DEFAULT_OPTIONS = {
       actions: {
         rollStatDie: { buttons: [0, 2], handler: this._onRollStatDie },
+        takeCommand: this._onTakeCommand,
         takeHack: { buttons: [0, 2], handler: this._onTakeHack },
-        takeImpact: this._onTakeImpact,
       },
     };
 
@@ -38,6 +38,18 @@ export default function HackStatApplicationMixin(Base) {
     }
 
     /**
+     * Prompt for taking some amount of something and applying it to the actor.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @this {HackStatApplication}
+     */
+    static async _onTakeCommand(_event, target) {
+      if (!game.teriock.checkEditable(this)) { return; }
+      await this.document.take(target.dataset.command, { showDialog: true });
+    }
+
+    /**
      * Hacks or unhacks a specific body part depending on {@link _hackForward}. Right-click goes the other way.
      * @param {PointerEvent} event
      * @param {HTMLElement} target
@@ -48,18 +60,6 @@ export default function HackStatApplicationMixin(Base) {
       if (!game.teriock.checkEditable(this)) { return; }
       const forward = this._hackForward !== (event.button === 2);
       await (forward ? onTakeHack : onTakeUnhack)(this.document, event, target);
-    }
-
-    /**
-     * Prompt for taking some amount of something and applying it to the actor.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     * @this {HackStatApplication}
-     */
-    static async _onTakeImpact(_event, target) {
-      if (!game.teriock.checkEditable(this)) { return; }
-      await this.document.system.impactDialog(target.dataset.impact);
     }
 
     /**
@@ -95,9 +95,9 @@ export default function HackStatApplicationMixin(Base) {
       if (morganti) { text += ` - ${morganti}`; }
       return {
         ...this._prepareStatContext(data),
+        command: config.command,
         config,
         data,
-        impact: config.impact,
         key,
         labels: {
           current: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.current`,
@@ -181,7 +181,7 @@ export default function HackStatApplicationMixin(Base) {
     async _rollStatDie(_event, statDie) {
       const criticallyWounded = this.document.statuses.has("critically-wounded");
       await statDie.use(this.state?.consumeStatDice ?? true, { substitution: this.state?.substitution });
-      if (!criticallyWounded) { await this.document.system.takeAwaken(); }
+      if (!criticallyWounded) { await this.document.take("awaken"); }
     }
 
     /** @inheritDoc */
@@ -225,8 +225,8 @@ export default function HackStatApplicationMixin(Base) {
 async function onTakeHack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value < TERIOCK.CONFIG.hack[part].max) { await actor.system.takeHack(part); }
-  else { await actor.system.takeUnhack(part, TERIOCK.CONFIG.hack[part].max); }
+  if (actor.system.hacks[part].value < TERIOCK.CONFIG.hack[part].max) { await actor.take("hack", { part }); }
+  else { await actor.take("unhack", { amount: TERIOCK.CONFIG.hack[part].max, part }); }
 }
 
 /**
@@ -239,6 +239,6 @@ async function onTakeHack(actor, event, target) {
 async function onTakeUnhack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value > 0) { await actor.system.takeUnhack(part); }
-  else { await actor.system.takeHack(part, TERIOCK.CONFIG.hack[part].max); }
+  if (actor.system.hacks[part].value > 0) { await actor.take("unhack", { part }); }
+  else { await actor.take("hack", { amount: TERIOCK.CONFIG.hack[part].max, part }); }
 }

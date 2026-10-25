@@ -1,4 +1,5 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
+import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import BaseActivation from "./base-activation/base-activation.mjs";
 
 /**
@@ -21,6 +22,12 @@ export default function AutomationActivationFactory(Automation) {
       delete automationSchema.heighten;
       delete automationSchema.display;
       return Object.assign(super.defineSchema(), automationSchema);
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateRename(source, "impact", "command");
+      return super.migrateData(source, options);
     }
   }
 

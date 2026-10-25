@@ -1,7 +1,7 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { tradecraftsField } from "../../../fields/tools/builders.mjs";
-import { TradecraftActivation } from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -87,7 +87,7 @@ export default class TradecraftAutomation
     const rollData = options.rollData ?? options.execution?.getRollData?.() ?? {};
     const threshold = await this.getThreshold(rollData);
     return selected.map(tradecraft =>
-      new TradecraftActivation({
+      new commandActivations.tradecraft({
         display: this.getDisplayData(threshold),
         options: { bonus: this.bonus, competence: this.getCompetence(options), threshold, tradecraft },
       })

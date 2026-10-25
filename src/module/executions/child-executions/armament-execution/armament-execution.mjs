@@ -2,23 +2,23 @@ import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { mixClasses, prefixObject } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
-import { ImpactsExecutionMixin } from "../../mixins/_module.mjs";
+import { CommandsExecutionMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @extends {DocumentExecution}
- * @mixes ImpactsExecution
+ * @mixes CommandsExecution
  * @param {HarmRoll[]} rolls
  */
-export default class ArmamentExecution extends mixClasses(DocumentExecution, ImpactsExecutionMixin) {
+export default class ArmamentExecution extends mixClasses(DocumentExecution, CommandsExecutionMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Armament"];
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      dealImpacts: new fields.BooleanField(),
+      dealCommands: new fields.BooleanField(),
       secret: new fields.BooleanField({
         hint: "TERIOCK.SETTINGS.armament.rollSecretly.hint",
         label: "TERIOCK.SETTINGS.armament.rollSecretly.name",
@@ -35,7 +35,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
   get _formPaths() {
     const paths = [...super._formPaths, "secret"];
     if (this.hasFormula && this.source.system.hasTwoHandedAttack) { paths.push("twoHanded"); }
-    paths.push("dealImpacts");
+    paths.push("dealCommands");
     if (this.source.system.onUseAbilities.length > 0) { paths.push("useAbilities"); }
     return paths;
   }
@@ -47,7 +47,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
 
   /** @inheritDoc */
   get hasFormula() {
-    return this.dealImpacts;
+    return this.dealCommands;
   }
 
   /** @inheritDoc */
@@ -79,8 +79,8 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
   async _getInput() {
     if (this.showDialog) {
       let boosts = this.boosts;
-      for (const impact of this.impacts) {
-        if (this._hasBoostForImpact(impact)) { boosts = Math.max(boosts, this._boostsResolved[impact]); }
+      for (const command of this.commands) {
+        if (this._hasBoostForCommand(command)) { boosts = Math.max(boosts, this._boostsResolved[command]); }
       }
       if (boosts !== this.boosts) { this.updateSource({ boosts }); }
     }
@@ -88,9 +88,9 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
   }
 
   /** @inheritDoc */
-  _hasBoostForImpact(impact) {
-    return (super._hasBoostForImpact(impact)
-      || (this._boostsResolved[impact] && this.impacts.has(impact) && FormulaField.exists(this.formula)));
+  _hasBoostForCommand(command) {
+    return (super._hasBoostForCommand(command)
+      || (this._boostsResolved[command] && this.commands.has(command) && FormulaField.exists(this.formula)));
   }
 
   /**
@@ -104,8 +104,8 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     data.secret ??= sys.settings.getSetting("rollSecretly");
     data.twoHanded = sys.hasTwoHandedAttack && (data.twoHanded ?? sys.settings.getSetting("rollTwoHanded"));
     data.formula ??= data.twoHanded ? sys.damage.twoHanded : sys.damage.base;
-    data.dealImpacts ??= FormulaField.exists(data.formula);
-    data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
+    data.dealCommands ??= FormulaField.exists(data.formula);
+    data.commands ??= Array.from(sys.commands ?? ["damage"]);
     return super._initializeSource(data, options);
   }
 
@@ -124,8 +124,8 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
 
   /** @inheritDoc */
   async _prepareFormula() {
-    if (!this.dealImpacts) { this.updateSource({ formula: "" }); }
-    this._applyImpactModifiers();
+    if (!this.dealCommands) { this.updateSource({ formula: "" }); }
+    this._applyCommandModifiers();
     if (FormulaField.exists(this.bonus)) { this.updateSource({ formula: FormulaField.add(this.formula, this.bonus) }); }
   }
 
@@ -152,7 +152,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Imp
     const diff = super.updateSource(changes, options);
     if (("twoHanded" in diff)) {
       const formula = this._readyUpdatedFormula();
-      Object.assign(diff, super.updateSource({ dealImpacts: FormulaField.exists(formula), formula }, options));
+      Object.assign(diff, super.updateSource({ dealCommands: FormulaField.exists(formula), formula }, options));
     }
     return diff;
   }

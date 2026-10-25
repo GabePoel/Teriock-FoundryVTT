@@ -39,7 +39,7 @@ export default class LongRestExecution extends ShortRestExecution {
     const yes = await super._performUpdates();
     if (yes === false) { return false; }
 
-    await this.actor.system.partialReset({
+    await this.actor.take("reset", {
       hp: this.restoreHp,
       hpDice: this.restoreHpDice,
       mp: this.restoreMp,

@@ -26,13 +26,13 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
 }
 
 /**
- * Generate a trigger fire function.
+ * Generate a function that takes a time command for all relevant actors.
  * @param {Teriock.System.TimeTrigger} trigger
  * @returns {(function(): void)}
  */
 function fireTimeTriggerFactory(trigger) {
   return function fireTrigger() {
-    for (const actor of game.actors.relevant) { actor.takeTimeTrigger(trigger); }
+    if (game.actors.relevant.length) { game.teriock.commands.take(trigger, game.actors.relevant); }
   };
 }
 

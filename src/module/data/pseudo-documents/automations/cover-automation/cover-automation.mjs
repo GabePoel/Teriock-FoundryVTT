@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { TakeCoverActivation, TakeUncoverActivation } from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -28,7 +28,7 @@ export default class CoverAutomation extends mixClasses(BaseAutomation, TriggerA
 
   /** @inheritDoc */
   async _getActivations() {
-    if (this.reverse) { return [new TakeUncoverActivation()]; }
-    return [new TakeCoverActivation()];
+    if (this.reverse) { return [new commandActivations.uncover()]; }
+    return [new commandActivations.cover()];
   }
 }

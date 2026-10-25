@@ -16,7 +16,7 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
      * @returns {Promise<void>}
      */
     static async #onRollTradecraft(event, target) {
-      await this.actor.system.rollTradecraft(target.dataset.tradecraft, { event });
+      await this.actor.take("tradecraft", { event, tradecraft: target.dataset.tradecraft });
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

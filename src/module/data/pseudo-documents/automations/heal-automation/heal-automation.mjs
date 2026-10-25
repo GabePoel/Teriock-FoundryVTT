@@ -1,5 +1,5 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
-import { HealActivation } from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { StatAutomation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -28,7 +28,7 @@ export default class HealAutomation extends StatAutomation {
   /** @inheritDoc */
   async _getActivations() {
     return [
-      new HealActivation({
+      new commandActivations.heal({
         options: {
           consumeStatDice: this.consumeStatDice,
           forHarm: this.forHarm,

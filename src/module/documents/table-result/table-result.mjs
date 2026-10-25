@@ -47,7 +47,7 @@ export default class TeriockTableResult extends mixClasses(TableResult, BaseDocu
       const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name });
       const icon = doc.system?.metadata?.icon;
       activations.push(
-        new acts.UseExternalActivation({ display: { icon, label }, options: { icon, label, uuid: this.documentUuid } }),
+        new acts.commandActivations.use({ display: { icon, label }, options: { icon, key: this.documentUuid, label } }),
       );
     }
     if (["ActiveEffect", "Item"].includes(doc.documentName) && doc.type !== "ability") {

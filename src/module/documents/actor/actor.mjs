@@ -382,16 +382,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Add multiple status effects to the actor.
-   * @param {string[]} statusIds
-   * @returns {Promise<void>}
-   */
-  async applyStatusEffects(statusIds) {
-    const effects = await Promise.all(statusIds.map(async id => ActiveEffect.fromStatusEffect(id)));
-    await this.createEmbeddedDocuments("ActiveEffect", effects, { keepId: true });
-  }
-
-  /**
    * Create a triggered chat message per source document collected during a {@link TeriockActor._dispatchTrigger}.
    * The messages are created by {@link triggerUser} which might be a different User than the one that ran this.
    * @param {Teriock.System.TriggerScope} scope
@@ -493,17 +483,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     };
   }
 
-  /**
-   * Remove multiple status effects from the actor.
-   * @param {string[]} statusIds
-   * @returns {Promise<void>}
-   */
-  async removeStatusEffects(statusIds) {
-    const candidates = statusIds.map(id => CONFIG.statusEffects[id]).filter(Boolean);
-    const toRemove = candidates.filter(e => this.effects.get(e?._id)).map(e => e?._id);
-    await this.deleteEmbeddedDocuments("ActiveEffect", toRemove);
-  }
-
   /** @inheritDoc */
   resetChildMaps() {
     super.resetChildMaps();
@@ -511,12 +490,13 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Fire a time-based trigger for this actor.
-   * @param {Teriock.System.TimeTrigger} trigger
-   * @returns {Promise<void>}
+   * Take a command.
+   * @param {Teriock.Keys.Command} key
+   * @param {object} [options]
+   * @returns {Promise<{ actors: TeriockActor[], amount?: number|null, morganti?: boolean }|null>}
    */
-  async takeTimeTrigger(trigger) {
-    await this.system[`take${trigger.capitalize()}`]?.();
+  async take(key, options = {}) {
+    return game.teriock.commands.take(key, [this], options);
   }
 
   /**

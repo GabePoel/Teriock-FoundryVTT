@@ -1,11 +1,7 @@
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { mergeMetadata, mixClasses, objectMap, omit } from "../../../../utils/_module.mjs";
 import { migrateStatuses } from "../../../fields/tools/migrations.mjs";
-import {
-  ApplyStatusActivation,
-  RemoveStatusActivation,
-  ToggleStatusActivation,
-} from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -142,9 +138,12 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
 
   /** @inheritDoc */
   async _getActivations() {
-    if (this.relation === "apply") { return [new ApplyStatusActivation({ options: { status: this.status } })]; }
-    else if (this.relation === "remove") { return [new RemoveStatusActivation({ options: { status: this.status } })]; }
-    else if (this.relation === "toggle") { return [new ToggleStatusActivation({ options: { status: this.status } })]; }
+    if (this.relation === "apply") { return [new commandActivations.apply({ options: { status: this.status } })]; }
+    else if (this.relation === "remove") { return [
+        new commandActivations.remove({ options: { status: this.status } }),
+      ]; } else if (this.relation === "toggle") {
+      return [new commandActivations.toggle({ options: { status: this.status } })];
+    }
     return [];
   }
 

@@ -10,16 +10,18 @@ import { objectMap } from "../../../utils/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * Mixin for executions that deal an impact and can be modified with boosts, deboosts, and critical hits.
+ * Mixin for executions that deal a command and can be modified with boosts, deboosts, and critical hits.
  * @template {MixinBase<typeof BaseExecution>} T
  * @param {T} Base
  */
-export default function ImpactsExecutionMixin(Base) {
+export default function CommandsExecutionMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.Execution.ImpactsExecutionData}
+   * @implements {Teriock.Execution.CommandsExecutionData}
    */
-  class ImpactsExecution extends /** @type {InitializedDataModel<T, Teriock.Execution.ImpactsExecutionData>} */ (Base) {
+  class CommandsExecution
+    extends /** @type {InitializedDataModel<T, Teriock.Execution.CommandsExecutionData>} */ (Base)
+  {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Boost"];
 
@@ -27,15 +29,17 @@ export default function ImpactsExecutionMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         boosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
-        crit: new fields.BooleanField(),
-        deboosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
-        formula: rollableFormulaField(),
-        impacts: new fields.SetField(
+        commands: new fields.SetField(
           new fields.StringField({
-            choices: objectMap(TERIOCK.CONFIG.impact, i => i.deal, { filter: c => !c?.hidden }),
+            choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.deal, {
+              filter: c => c.numeric && !c.numeric.hidden,
+            }),
           }),
           { initial: ["damage"] },
         ),
+        crit: new fields.BooleanField(),
+        deboosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
+        formula: rollableFormulaField(),
       });
     }
 
@@ -62,13 +66,22 @@ export default function ImpactsExecutionMixin(Base) {
     /** @inheritDoc */
     get _formPaths() {
       const paths = [];
-      if (this.hasFormula) { paths.push("impacts", "formula", "boosts", "deboosts"); }
+      if (this.hasFormula) { paths.push("commands", "formula", "boosts", "deboosts"); }
       return [...paths, ...super._formPaths];
     }
 
     /** @inheritDoc */
     get _RollClass() {
       return HarmRoll;
+    }
+
+    /**
+     * The single command this deals, if it only deals one. Used for the input dialog title and base roll options.
+     * @returns {Teriock.Keys.Command|null}
+     */
+    get command() {
+      if (this.commands.size === 1) { return this.commands.first(); }
+      return null;
     }
 
     /**
@@ -84,25 +97,16 @@ export default function ImpactsExecutionMixin(Base) {
       return super.icon ?? TERIOCK.DISPLAY.icons.manifest.ui.dice;
     }
 
-    /**
-     * The single impact this deals, if it only deals one. Used for the input dialog title and base roll options.
-     * @returns {Teriock.Keys.Impact|null}
-     */
-    get impact() {
-      if (this.impacts.size === 1) { return this.impacts.first(); }
-      return null;
-    }
-
     /** @inheritDoc */
     get rollOptions() {
-      return Object.assign(super.rollOptions, { impacts: Array.from(this.impacts) });
+      return Object.assign(super.rollOptions, { commands: Array.from(this.commands) });
     }
 
     /**
      * Apply boosts, deboosts, and critical modifiers to the formula. This mirrors the logic that used to live in the
      * `boostDialog` confirmation callback.
      */
-    _applyImpactModifiers() {
+    _applyCommandModifiers() {
       if (!FormulaField.exists(this.formula)) { return; }
       if (this.crit) {
         const roll = new this._RollClass(this.formula, this.getRollData());
@@ -152,7 +156,7 @@ export default function ImpactsExecutionMixin(Base) {
     async _postInput() {
       this._dropCritMismatches();
       const boosts = Math.max(0, this.boosts - this.deboosts);
-      for (const impact of this.impacts) { this._boostsResolved[impact] = boosts; }
+      for (const command of this.commands) { this._boostsResolved[command] = boosts; }
       return super._postInput();
     }
 
@@ -162,9 +166,9 @@ export default function ImpactsExecutionMixin(Base) {
      */
     async _prepareFormula() {
       await super._prepareFormula();
-      this._applyImpactModifiers();
+      this._applyCommandModifiers();
     }
   }
 
-  return ImpactsExecution;
+  return CommandsExecution;
 }

@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
-import { TakeHackActivation, TakeUnhackActivation } from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -39,7 +39,9 @@ export default class HacksAutomation extends mixClasses(BaseAutomation, TriggerA
 
   /** @inheritDoc */
   async _getActivations() {
-    if (this.reverse) { return Array.from(this.hacks).map(h => new TakeUnhackActivation({ options: { part: h } })); }
-    return Array.from(this.hacks).map(h => new TakeHackActivation({ options: { part: h } }));
+    if (this.reverse) { return Array.from(this.hacks).map(h =>
+        new commandActivations.unhack({ options: { part: h } })
+      ); }
+    return Array.from(this.hacks).map(h => new commandActivations.hack({ options: { part: h } }));
   }
 }

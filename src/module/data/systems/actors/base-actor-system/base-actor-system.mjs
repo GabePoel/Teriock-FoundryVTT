@@ -18,12 +18,10 @@ const { fields } = foundry.data;
  * @mixes ActorCoverPart
  * @mixes ActorDeathBagPart
  * @mixes ActorHacksPart
- * @mixes ActorImpactsPart
  * @mixes ActorInformationPart
  * @mixes ActorMagicPart
  * @mixes ActorMoneyPart
  * @mixes ActorMovementPart
- * @mixes ActorRestingPart
  * @mixes ActorScalingPart
  * @mixes ActorSensesPart
  * @mixes ActorStatsPart
@@ -42,7 +40,6 @@ export default class BaseActorSystem
     parts.ActorHacksPart,
     parts.ActorCombatPart,
     parts.ActorCoverPart,
-    parts.ActorImpactsPart,
     parts.ActorTradecraftsPart,
     parts.ActorAttributesPart,
     parts.ActorCapacitiesPart,
@@ -54,7 +51,6 @@ export default class BaseActorSystem
     parts.ActorMovementPart,
     parts.ActorSensesPart,
     parts.ActorAffinitiesPart,
-    parts.ActorRestingPart,
     parts.ActorTokenPart,
     parts.ActorPseudoDocumentsPart,
   )

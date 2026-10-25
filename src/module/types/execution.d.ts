@@ -10,7 +10,7 @@ declare global {
      */
     export type ExecutionOptions = {
       actor?: TeriockActor;
-      boosts?: Record<Teriock.Keys.Impact, Teriock.System.FormulaString>;
+      boosts?: Record<Teriock.Keys.Command, Teriock.System.FormulaString>;
       competence?: Teriock.System.CompetenceLevel;
       event?: PointerEvent;
       messageMode?: Teriock.Messages.Mode;
@@ -50,7 +50,7 @@ declare global {
       warded?: boolean;
     };
 
-    export type ImpactsExecutionOptions = ExecutionOptions & { document?: TeriockActiveEffect | TeriockItem };
+    export type CommandsExecutionOptions = ExecutionOptions & { document?: TeriockActiveEffect | TeriockItem };
 
     export type AffinityExecutionOptions = ExecutionOptions & { type?: AffinityType, wrappers?: string[] };
 

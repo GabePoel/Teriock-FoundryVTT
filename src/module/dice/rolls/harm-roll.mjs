@@ -1,8 +1,8 @@
 import { listFormat } from "../../helpers/localization.mjs";
 import { fromIdentifier } from "../../utils/_module.mjs";
-import ImpactsRoll from "./impacts-roll/impacts-roll.mjs";
+import CommandsRoll from "./commands-roll/commands-roll.mjs";
 
-export default class HarmRoll extends ImpactsRoll {
+export default class HarmRoll extends CommandsRoll {
   /**
    * Cached array of harms to reduce async calls.
    * @type {TeriockJournalEntryPage<"damage" | "drain">[]}
@@ -54,8 +54,8 @@ export default class HarmRoll extends ImpactsRoll {
    */
   async getHarmArray() {
     if (this._harms) { return this._harms; }
-    const impacts = this.impacts.filter(i => ["damage", "drain"].includes(i));
-    const identifiers = impacts.flatMap(impact => this.harmIdentifiers.map(i => `${impact}:${i}`));
+    const commands = this.commands.filter(i => ["damage", "drain"].includes(i));
+    const identifiers = commands.flatMap(command => this.harmIdentifiers.map(i => `${command}:${i}`));
     const harms = await Promise.all(identifiers.map(i => fromIdentifier(i)));
     this._harms = harms.filter(Boolean);
     return this._harms;
@@ -70,16 +70,16 @@ export default class HarmRoll extends ImpactsRoll {
   /** @inheritDoc */
   getTooltipParts() {
     const parts = super.getTooltipParts();
-    if (!this.impacts.includes("damage") && !this.impacts.includes("drain")) { return parts; }
+    if (!this.commands.includes("damage") && !this.commands.includes("drain")) { return parts; }
     for (const p of parts) {
       if (p.flavor) {
         p.flavor = listFormat(
           p.flavor.split(" ").map(i => {
             let flavor;
-            if (this.impacts.includes("damage") && !flavor) {
+            if (this.commands.includes("damage") && !flavor) {
               flavor = game.teriock.identifiers.getName(`damage:${i}`);
             }
-            if (this.impacts.includes("drain") && !flavor) {
+            if (this.commands.includes("drain") && !flavor) {
               flavor = game.teriock.identifiers.getName(`drain:${i}`);
             }
             return flavor ? flavor : p.flavor;

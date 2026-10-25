@@ -1,6 +1,12 @@
 import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
-import { ensureChildren, ensureNoChildren, getSystemClass, makeIconClass, mixClasses } from "../../utils/_module.mjs";
+import {
+  getEnsureChildrenOperations,
+  getEnsureNoChildrenOperations,
+  getSystemClass,
+  makeIconClass,
+  mixClasses,
+} from "../../utils/_module.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
 
 /**
@@ -385,11 +391,11 @@ export default function CommonDocumentMixin(Base) {
       const hasChild = this.children.identifiers.has(identifier);
       if (hasChild && options.active) { return true; }
       else if (hasChild && !options.active) {
-        await ensureNoChildren(this, [identifier]);
+        await foundry.documents.modifyBatch(await getEnsureNoChildrenOperations(this, [identifier]));
         return false;
       } else if (!hasChild && (options.active === true || typeof options.active !== "boolean")) {
-        const out = await ensureChildren(this, [identifier]);
-        return out[0];
+        const out = await foundry.documents.modifyBatch(await getEnsureChildrenOperations(this, [identifier]));
+        return out[0]?.[0];
       }
     }
 

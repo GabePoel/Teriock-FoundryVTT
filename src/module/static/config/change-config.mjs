@@ -1,5 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import impactConfig from "./impact-config.mjs";
+import commandConfig from "./command-config.mjs";
 
 const booleanTypes = ["upgrade", "downgrade", "override"];
 const simpleTypes = ["add", "subtract", ...booleanTypes];
@@ -118,7 +118,7 @@ const paths = {
     types: typeSubsets.boolean,
   },
   ...Object.fromEntries(
-    Object.entries(impactConfig).filter(([_k, v]) => !v.hidden).map(([k, v]) => {
+    Object.entries(commandConfig).filter(([_k, v]) => v.numeric && !v.numeric.hidden).map(([k, v]) => {
       return [`system.boosts.${k}`, {
         forExecution: true,
         group: "boosts",

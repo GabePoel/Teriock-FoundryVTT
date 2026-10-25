@@ -59,9 +59,9 @@ export default function ChildSystemMixin(Base) {
       return Object.assign(super.defineSchema(), {
         boosts: new fields.SchemaField(
           objectMap(
-            TERIOCK.CONFIG.impact,
+            TERIOCK.CONFIG.command,
             e => new FormulaField({ deterministic: false, initial: "", label: e.label }),
-            { filter: e => !e?.hidden },
+            { filter: e => e.numeric && !e.numeric.hidden },
           ),
           { persisted: false },
         ),

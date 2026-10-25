@@ -25,7 +25,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onDeathBagPull() {
       if (!this.isEditable) { return; }
-      await this.actor.system.deathBagPull();
+      await this.actor.take("bag");
     }
 
     /**
@@ -38,8 +38,8 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       const id = target.dataset.id;
       const item = this.document.items.get(id);
       const options = { event };
-      if (target.dataset.dealImpacts === "false") { options.dealImpacts = false; }
-      if (target.dataset.dealImpacts === "true") { options.dealImpacts = true; }
+      if (target.dataset.dealCommands === "false") { options.dealCommands = false; }
+      if (target.dataset.dealCommands === "true") { options.dealCommands = true; }
       if (item) { await item.use(options); }
     }
 
@@ -49,7 +49,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onTakeLongRest() {
       if (!this.isEditable) { return; }
-      await this.actor.system.takeLongRest();
+      await this.actor.take("longRest");
     }
 
     /**
@@ -58,7 +58,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onTakeShortRest() {
       if (!this.isEditable) { return; }
-      await this.actor.system.takeShortRest();
+      await this.actor.take("shortRest");
     }
 
     /**

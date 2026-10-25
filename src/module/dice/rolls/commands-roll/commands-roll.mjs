@@ -3,53 +3,53 @@ import { listFormat } from "../../../helpers/localization.mjs";
 import { makeIcon } from "../../../utils/_module.mjs";
 import BaseRoll from "../base-roll/base-roll.mjs";
 
-export default class ImpactsRoll extends BaseRoll {
+export default class CommandsRoll extends BaseRoll {
   /**
    * @inheritDoc
-   * @returns {Teriock.Dice.ImpactsRollOptions}
+   * @returns {Teriock.Dice.CommandsRollOptions}
    */
   static get defaultOptions() {
-    return Object.assign(super.defaultOptions, { impacts: [] });
+    return Object.assign(super.defaultOptions, { commands: [] });
   }
 
   /**
    * @param {Teriock.System.FormulaString} formula
    * @param {object} data
-   * @param {Partial<Teriock.Dice.ImpactsRollOptions>} options
+   * @param {Partial<Teriock.Dice.CommandsRollOptions>} options
    */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
-    this.#setImpactFlavor();
+    this.#setCommandFlavor();
   }
 
   /**
    * Set the flavor if there's not one already defined.
    */
-  #setImpactFlavor() {
+  #setCommandFlavor() {
     if (!this.options.flavor) { this.options.autoFlavor = true; }
     if (!this.options.autoFlavor) { return; }
-    if (!this.impacts.length) { delete this.options.flavor; }
+    if (!this.commands.length) { delete this.options.flavor; }
     else {
-      const impactLabels = this.impacts.map(i => TERIOCK.CONFIG.impact[i]?.label);
-      this.options.flavor = _loc("TERIOCK.ROLLS.Base.name", { value: listFormat(impactLabels, { style: "short" }) });
+      const commandLabels = this.commands.map(i => TERIOCK.CONFIG.command[i]?.label);
+      this.options.flavor = _loc("TERIOCK.ROLLS.Base.name", { value: listFormat(commandLabels, { style: "short" }) });
     }
   }
 
   /**
-   * The impacts associated with this roll, excluding the placeholder one.
-   * @returns {Teriock.Keys.Impact[]}
+   * The commands associated with this roll, excluding the placeholder one.
+   * @returns {Teriock.Keys.Command[]}
    */
-  get impacts() {
-    return this.options.impacts.filter(i => i !== "other");
+  get commands() {
+    return this.options.commands.filter(i => i !== "other");
   }
 
   /**
-   * The impacts associated with this roll.
-   * @param {Iterable<Teriock.Keys.Impact>} impacts
+   * The commands associated with this roll.
+   * @param {Iterable<Teriock.Keys.Command>} commands
    */
-  set impacts(impacts) {
-    this.options.impacts = Array.from(impacts);
-    this.#setImpactFlavor();
+  set commands(commands) {
+    this.options.commands = Array.from(commands);
+    this.#setCommandFlavor();
   }
 
   /** @inheritDoc */
@@ -77,12 +77,12 @@ export default class ImpactsRoll extends BaseRoll {
   /** @inheritDoc */
   _getTotalContextOptions(_config = {}) {
     return [
-      ...Object.entries(TERIOCK.CONFIG.impact).filter(([_k, v]) => !v?.hidden).map(([k, v]) => {
+      ...Object.entries(TERIOCK.CONFIG.command).filter(([_k, v]) => v.numeric && !v.numeric.hidden).map(([k, v]) => {
         return {
           icon: makeIcon(v.icon, "contextMenu"),
-          label: v.take,
+          label: v.numeric.take,
           onClick: async () =>
-            await new teriock.data.pseudoDocuments.activations.TakeActivation({ amount: this.total, impact: k })
+            await new teriock.data.pseudoDocuments.activations.TakeActivation({ amount: this.total, command: k })
               .primaryAction(),
         };
       }),
@@ -92,8 +92,8 @@ export default class ImpactsRoll extends BaseRoll {
 
   /** @inheritDoc */
   async getAutomations() {
-    return this.impacts.map(impact =>
-      new teriock.data.pseudoDocuments.automations.TakeAutomation({ amount: this.total, impact, type: "take" })
+    return this.commands.map(command =>
+      new teriock.data.pseudoDocuments.automations.TakeAutomation({ amount: this.total, command, type: "take" })
     );
   }
 }

@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
-import { FeatActivation } from "../../activations/command-activations.mjs";
+import { commandActivations } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -34,7 +34,7 @@ export default class FeatAutomation extends mixClasses(ThresholdAutomation, Trig
   async _getActivations(options) {
     const threshold = await this.getThreshold(options?.rollData ?? {});
     return [
-      new FeatActivation({
+      new commandActivations.feat({
         display: this.getDisplayData(threshold),
         options: { attribute: this.attribute, bonus: this.bonus, threshold },
       }),

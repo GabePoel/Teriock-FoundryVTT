@@ -1,13 +1,13 @@
 import { mixClasses } from "../../utils/_module.mjs";
 import BaseExecution from "../abstract/base-execution/base-execution.mjs";
-import { ImpactsExecutionMixin } from "../mixins/_module.mjs";
+import { CommandsExecutionMixin } from "../mixins/_module.mjs";
 
 /**
- * Execution that rolls one or more impacts.
+ * Execution that rolls one or more commands.
  * @extends {BaseExecution}
- * @mixes ImpactsExecution
+ * @mixes CommandsExecution
  */
-export default class DealImpactExecution extends mixClasses(BaseExecution, ImpactsExecutionMixin) {
+export default class DealCommandExecution extends mixClasses(BaseExecution, CommandsExecutionMixin) {
   /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments ?? [];
@@ -22,15 +22,15 @@ export default class DealImpactExecution extends mixClasses(BaseExecution, Impac
 
   /** @inheritDoc */
   get name() {
-    if (this.impact) {
-      return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.CONFIG.impact[this.impact]?.label });
+    if (this.command) {
+      return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.CONFIG.command[this.command]?.label });
     }
     return _loc("TERIOCK.DIALOGS.Boost.title");
   }
 
   /**
    * @inheritDoc
-   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ImpactsExecutionOptions>} [options]
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.CommandsExecutionOptions>} [options]
    */
   _configure(options = {}) {
     super._configure(options);
@@ -41,7 +41,7 @@ export default class DealImpactExecution extends mixClasses(BaseExecution, Impac
   /**
    * @inheritDoc
    * @param {Record<string, any>} data
-   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ImpactsExecutionOptions>} [options]
+   * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.CommandsExecutionOptions>} [options]
    * @returns {Record<string, any>}
    */
   _initializeSource(data, options = {}) {

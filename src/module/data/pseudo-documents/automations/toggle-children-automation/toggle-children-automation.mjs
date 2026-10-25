@@ -1,5 +1,9 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { ensureChildren, ensureNoChildren, mergeMetadata } from "../../../../utils/_module.mjs";
+import {
+  getEnsureChildrenOperations,
+  getEnsureNoChildrenOperations,
+  mergeMetadata,
+} from "../../../../utils/_module.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -44,7 +48,10 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
     await super._onUpdateDocument();
     if (!this.active || !this.getNearestDocument()) { return; }
     if (!BaseRoll.qualify(this.qualifier, () => this.getRollData())) { return; }
-    await ensureChildren(this.getNearestDocument(), Array.from(this.add));
-    await ensureNoChildren(this.getNearestDocument(), Array.from(this.remove));
+    const document = this.getNearestDocument();
+    await foundry.documents.modifyBatch([
+      ...(await getEnsureChildrenOperations(document, Array.from(this.add))),
+      ...(await getEnsureNoChildrenOperations(document, Array.from(this.remove))),
+    ]);
   }
 }

@@ -80,12 +80,12 @@ export async function batchWrite(operations) {
 }
 
 /**
- * Ensure a document has all the predefined documents named.
+ * Get the operations that ensure a document has all the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
  * @param {TypedIdentifier[]} identifiers
- * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
+ * @returns {Promise<DatabaseWriteOperation[]>}
  */
-export async function ensureChildren(document, identifiers) {
+export async function getEnsureChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
   const existing = document.children.identifiers;
   const candidates = await Promise.all(identifiers.map(async identifier => {
@@ -104,32 +104,25 @@ export async function ensureChildren(document, identifiers) {
     const data = filtered.filter(d => d.documentName === documentName).map(d => d.data);
     operations.push(document.getCreateChildDocumentsOperation(documentName, data));
   }
-  const childArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));
-  const children = [];
-  for (const childArray of childArrays) { children.push(...childArray.filter(Boolean)); }
-  return children;
+  return operations.filter(Boolean);
 }
 
 /**
- * Ensure a document has none of the predefined documents named.
+ * Get the operations that ensure a document has none of the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
  * @param {TypedIdentifier[]} identifiers
- * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
+ * @returns {Promise<DatabaseWriteOperation[]>}
  */
-export async function ensureNoChildren(document, identifiers) {
+export async function getEnsureNoChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
   const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.typedIdentifier));
-  if (toDelete.length === 0) { return []; }
   const documentNames = new Set(toDelete.map(c => c?.documentName));
   const operations = [];
   for (const documentName of documentNames) {
     const ids = toDelete.filter(c => c?.documentName === documentName).map(c => c.id);
     operations.push(document.getDeleteChildDocumentsOperation(documentName, ids));
   }
-  const deletedArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));
-  const deletedDocs = [];
-  for (const deletedArray of deletedArrays) { deletedDocs.push(...deletedArray.filter(Boolean)); }
-  return deletedDocs;
+  return operations.filter(Boolean);
 }
 
 /**

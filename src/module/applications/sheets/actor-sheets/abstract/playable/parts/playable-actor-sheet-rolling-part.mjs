@@ -21,7 +21,7 @@ export default function PlayableActorSheetRollingPart(Base) {
       const affinity = await fromUuid(target.closest(".teriock-block")?.dataset.uuid);
       const type = affinity?.type ?? target.closest("[data-affinity-type]")?.dataset.affinityType;
       if (!type) { return; }
-      await this.actor.system.rollAffinity(type, { affinity, event });
+      await this.actor.take("resist", { affinity, event, type });
     }
 
     /**
@@ -31,7 +31,7 @@ export default function PlayableActorSheetRollingPart(Base) {
      * @returns {Promise<void>}
      */
     static async #onRollFeatSave(event, target) {
-      await this.actor.system.rollFeatSave(target.dataset.attribute, { event });
+      await this.actor.take("feat", { attribute: target.dataset.attribute, event });
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

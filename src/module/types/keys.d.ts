@@ -38,11 +38,10 @@ declare global {
       [K in keyof typeof statConfig]: typeof statConfig[K] extends { pool: object } ? K : never;
     }[keyof typeof statConfig];
 
-    // Impact Keys
+    // Command Keys
     export type PayMode = "exact" | "greedy";
     export type DeathBagStoneColor = keyof typeof CONFIG.deathBag.stones;
-    export type Impact = keyof typeof CONFIG.impact;
-    export type CommonCommand = keyof typeof CONFIG.command.common;
+    export type Command = keyof typeof CONFIG.command;
 
     // Armament Keys
     export type Classification = keyof typeof CONFIG.wiki.index.classification;

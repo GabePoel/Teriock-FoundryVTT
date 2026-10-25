@@ -55,8 +55,8 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(game.teriock.identifiers.getNames("property", { permission: "LIMITED" })).forEach(([k, name]) => {
     armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
   });
-  Object.entries(TERIOCK.CONFIG.impact).forEach(([k, v]) => {
-    armamentContext[`impact.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: v.label });
+  Object.entries(TERIOCK.CONFIG.command).filter(([_k, v]) => v.numeric).forEach(([k, v]) => {
+    armamentContext[`command.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", { name: v.label });
   });
   Object.entries(TERIOCK.CONFIG.equipment.equipmentClasses).forEach(([k, v]) => {
     armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: v.label });

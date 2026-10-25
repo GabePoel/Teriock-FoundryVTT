@@ -1,13 +1,14 @@
-// This defines the `TERIOCK` global so it must be imported before any other module. Keep everything else sorted.
+// This defines the `TERIOCK` global so it must be imported before any other module. Documents come next since the
+// data barrels import each other in a cycle that only resolves when documents load first. Keep everything else sorted.
 /* eslint-disable perfectionist/sort-imports */
 import * as TERIOCK from "./static/_module.mjs";
+import * as documents from "./documents/_module.mjs";
 
 import { default as templates } from "../json/templates.json" with { type: "json" };
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
-import * as documents from "./documents/_module.mjs";
 import * as executions from "./executions/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 import * as setup from "./setup/_module.mjs";
@@ -165,6 +166,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   const pd = data.pseudoDocuments;
   registerSubtypes(pd.activations, pd.activations.abstract.BaseActivation);
+  registerSubtypes(pd.activations.commandActivations, pd.activations.abstract.BaseActivation);
   registerSubtypes(pd.affinities, pd.affinities.abstract.BaseAffinity);
   registerSubtypes(pd.automations, pd.automations.abstract.BaseAutomation);
   registerSubtypes(pd.expirations, pd.expirations.abstract.BaseExpiration);
@@ -305,7 +307,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(...[
     dice.rolls.BaseRoll,
     dice.rolls.ThresholdRoll,
-    dice.rolls.ImpactsRoll,
+    dice.rolls.CommandsRoll,
     dice.rolls.HarmRoll,
   ]);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;

@@ -116,18 +116,6 @@ export default function ActorConditionsPart(Base) {
       this.#addAppliedVirtualConditions();
       super.prepareVirtualEffects();
     }
-
-    /**
-     * Remove the status and all consequences that provide it. This is intended to be used with conditions, but all
-     * statuses work.
-     * @param {Teriock.Keys.Status} status
-     * @returns {Promise<void>}
-     */
-    async removeCondition(status) {
-      await this.parent.toggleStatusEffect(status, { active: false });
-      const toDelete = this.parent.applicables.filter(c => c.statuses.has(status)).map(c => c.id);
-      await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-    }
   }
 
   return ActorConditionsPart;

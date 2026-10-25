@@ -21,7 +21,7 @@ export default class ResistanceExecution extends mixClasses(AffinityExecution, T
     if (await super._buildActivations() === false) { return false; }
 
     this.activations.push(
-      new teriock.data.pseudoDocuments.activations.UseLocalActivation({ options: { lookup: "ability:resist" } }),
+      new teriock.data.pseudoDocuments.activations.commandActivations.use({ options: { key: "ability:resist" } }),
     );
   }
 

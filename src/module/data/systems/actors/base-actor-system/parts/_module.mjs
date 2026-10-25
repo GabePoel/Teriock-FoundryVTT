@@ -1,7 +1,5 @@
 export { default as ActorAffinitiesPart } from "./actor-affinities-part.mjs";
 export { default as ActorAutomationPart } from "./actor-automation-part.mjs";
-export { default as ActorImpactsPart } from "./actor-impacts-part.mjs";
-export { default as ActorRestingPart } from "./actor-resting-part.mjs";
 export { default as ActorTokenPart } from "./actor-token-part.mjs";
 export { default as ActorAttributesPart } from "./attributes-part/actor-attributes-part.mjs";
 export { default as ActorCapacitiesPart } from "./capacities-part/actor-capacities-part.mjs";

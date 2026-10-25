@@ -1,6 +1,6 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { objectMap } from "../../utils/_module.mjs";
-import impactConfig from "./impact-config.mjs";
+import commandConfig from "./command-config.mjs";
 
 const triggerConfig = {
   activity: {
@@ -37,6 +37,11 @@ const triggerConfig = {
     },
     label: "TERIOCK.TRIGGERS.Combat.label",
   },
+  command: {
+    alwaysAvailable: true,
+    choices: objectMap(commandConfig, c => c.numeric?.take, { filter: c => c.numeric && !c.numeric.hidden }),
+    label: "TERIOCK.TRIGGERS.Command.label",
+  },
   consequence: {
     alwaysAvailable: true,
     choices: {
@@ -62,11 +67,6 @@ const triggerConfig = {
     granted: true,
     label: "TYPES.Item.equipment",
     self: true,
-  },
-  impact: {
-    alwaysAvailable: true,
-    choices: objectMap(impactConfig, c => c.take, { filter: c => !c?.hidden }),
-    label: "TERIOCK.TRIGGERS.Impact.label",
   },
   mount: {
     choices: { mount: "TERIOCK.SYSTEMS.Mount.MENU.mount", unmount: "TERIOCK.SYSTEMS.Mount.MENU.unmount" },
@@ -103,7 +103,7 @@ preLocalizeConfig("CONFIG.trigger.attunable.choices");
 preLocalizeConfig("CONFIG.trigger.combat.choices");
 preLocalizeConfig("CONFIG.trigger.consequence.choices");
 preLocalizeConfig("CONFIG.trigger.equipment.choices");
-preLocalizeConfig("CONFIG.trigger.impact.choices");
+preLocalizeConfig("CONFIG.trigger.command.choices");
 preLocalizeConfig("CONFIG.trigger.mount.choices");
 preLocalizeConfig("CONFIG.trigger.protection.choices");
 preLocalizeConfig("CONFIG.trigger.time.choices");

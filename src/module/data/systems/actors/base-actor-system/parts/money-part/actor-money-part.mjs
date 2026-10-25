@@ -48,42 +48,13 @@ export default function ActorMoneyPart(Base) {
       }
     }
 
-    /** @inheritDoc */
-    getRollData() {
-      const rollData = super.getRollData();
-      for (const k of Object.keys(TERIOCK.CONFIG.currency)) {
-        rollData[`money.${k}`] = this.money[k];
-      }
-      rollData["money.debt"] = this.money.debt;
-      rollData["money.physical"] = this.money.physical;
-      rollData.money = this.money.total;
-      return rollData;
-    }
-
-    /** @inheritDoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
-      this.money.physical = Object.keys(TERIOCK.CONFIG.currency).reduce((sum, key) => {
-        this.money[key] = Math.max(0, this.money[key] || 0);
-        const value = this.money[key] * TERIOCK.CONFIG.currency[key].conversion;
-        return sum + value;
-      }, 0).toNearest(0.01);
-      this.money.total = (this.money.physical - this.money.debt).toNearest(0.01);
-      this.weight.money = Object.keys(TERIOCK.CONFIG.currency).reduce((sum, key) => {
-        const weight = (this.money[key] || 0) * TERIOCK.CONFIG.currency[key].weight;
-        return sum + weight;
-      }, 0).toNearest(TERIOCK.CONST.UNIT_PRECISION);
-    }
-
     /**
-     * Actor pays money. A negative amount is money gained.
+     * Update data for paying money. A negative amount is money gained.
      * @param {number} amount
      * @param {Teriock.Keys.PayMode} [mode]
-     * @returns {Promise<void>}
+     * @returns {object}
      */
-    async takePay(amount, mode = "exact") {
-      await this.parent.fireTrigger("takePay", { amount, mode });
-
+    getPayUpdate(amount, mode = "exact") {
       const currencies = Object.entries(TERIOCK.CONFIG.currency).map(([key, config]) => ({
         held: Math.max(0, this.money[key] || 0),
         key,
@@ -123,7 +94,34 @@ export default function ActorMoneyPart(Base) {
         debt = (debt + owed).toNearest(precision);
       }
 
-      await this.parent.update({ "system.money": { ...wallet, debt } });
+      return { "system.money": { ...wallet, debt } };
+    }
+
+    /** @inheritDoc */
+    getRollData() {
+      const rollData = super.getRollData();
+      for (const k of Object.keys(TERIOCK.CONFIG.currency)) {
+        rollData[`money.${k}`] = this.money[k];
+      }
+      rollData["money.debt"] = this.money.debt;
+      rollData["money.physical"] = this.money.physical;
+      rollData.money = this.money.total;
+      return rollData;
+    }
+
+    /** @inheritDoc */
+    prepareDerivedData() {
+      super.prepareDerivedData();
+      this.money.physical = Object.keys(TERIOCK.CONFIG.currency).reduce((sum, key) => {
+        this.money[key] = Math.max(0, this.money[key] || 0);
+        const value = this.money[key] * TERIOCK.CONFIG.currency[key].conversion;
+        return sum + value;
+      }, 0).toNearest(0.01);
+      this.money.total = (this.money.physical - this.money.debt).toNearest(0.01);
+      this.weight.money = Object.keys(TERIOCK.CONFIG.currency).reduce((sum, key) => {
+        const weight = (this.money[key] || 0) * TERIOCK.CONFIG.currency[key].weight;
+        return sum + weight;
+      }, 0).toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
   }
 

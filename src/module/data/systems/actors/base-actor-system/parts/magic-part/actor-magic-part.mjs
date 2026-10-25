@@ -1,4 +1,3 @@
-import { ElderSorceryExecution } from "../../../../../../executions/actor-executions/_module.mjs";
 import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
@@ -61,15 +60,6 @@ export default function ActorMagicPart(Base) {
       return this.parent.previewedTypes.ability.filter(a =>
         a.system.rotator && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type))
       );
-    }
-
-    /**
-     * Make the creation rolls for a new Elder Sorcery spell.
-     * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
-     * @returns {Promise<void>}
-     */
-    async createElderSorcery(options = {}) {
-      await ElderSorceryExecution.create({}, Object.assign(options, { actor: this.parent, source: this.parent }));
     }
 
     /** @inheritDoc */

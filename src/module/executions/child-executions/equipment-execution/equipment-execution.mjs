@@ -39,7 +39,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     const paths = super._formPaths;
     if (this.source.system.ammunition.enabled && this.ammunition) {
       paths.push("consumeAmmunition");
-      if (this.dealImpacts) { paths.push("inheritAmmunitionDamageTypes"); }
+      if (this.dealCommands) { paths.push("inheritAmmunitionDamageTypes"); }
     }
     return paths;
   }
@@ -147,7 +147,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     const diff = super.updateSource(changes, options);
     if (("inheritAmmunitionDamageTypes" in diff)) {
       const formula = this._readyUpdatedFormula();
-      Object.assign(diff, super.updateSource({ dealImpacts: FormulaField.exists(formula), formula }, options));
+      Object.assign(diff, super.updateSource({ dealCommands: FormulaField.exists(formula), formula }, options));
     }
     return diff;
   }

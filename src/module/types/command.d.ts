@@ -1,21 +1,5 @@
 declare global {
   namespace Teriock.Command {
-    export type CommandEntry = {
-      aliases?: string[];
-      alt?: string;
-      args?: string[];
-      ctrl?: string;
-      formula?: boolean;
-      icon: ((options: object) => string) | string;
-      id: string;
-      label: ((options: object) => string) | string;
-      noActor?: boolean;
-      shift?: string;
-      tooltip?: ((options: object) => string) | string;
-      primary: (actor: TeriockActor, options?: object) => Promise<void>;
-      secondary?: (actor: TeriockActor, options?: object) => Promise<void>;
-    };
-
     export type UseOptions = { event?: PointerEvent };
 
     /**
@@ -38,8 +22,6 @@ declare global {
       threshold?: number;
     };
 
-    export type SimpleCommandFunction<O> = (actor: TeriockActor, options: O) => Promise<void>;
-
     export type TradecraftOptions = ThresholdOptions & { tradecraft?: Teriock.Keys.Tradecraft };
 
     export type FeatOptions = ThresholdOptions & { attribute?: Teriock.Keys.Attribute };
@@ -48,13 +30,13 @@ declare global {
 
     export type FormulaOptions = UseOptions & { formula?: string };
 
-    export type ImpactOptions = FormulaOptions & {
+    export type DealOptions = FormulaOptions & {
       apply?: boolean;
       boost?: boolean;
       boosts?: number;
       crit?: boolean;
       document?: TeriockActiveEffect | TeriockItem;
-      impact?: Teriock.Keys.Impact;
+      command?: Teriock.Keys.Command;
       reverse?: boolean;
       rollData?: object;
     };
@@ -76,15 +58,9 @@ declare global {
       noHeighten?: boolean;
     };
 
-    export type UseLocalOptions = DocumentUseOptions & { lookup?: string, type?: Teriock.Documents.ChildType };
-
-    export type UseExternalOptions = DocumentUseOptions & Teriock.System.ResolveDocumentsOptions & {
-      uuid?: UUID<TeriockDocument>;
-    };
-
-    export type TakeHarmOptions = {
-      /** Make the non-temporary impact morganti */
-      morganti?: boolean;
+    export type UseDocumentOptions = DocumentUseOptions & Teriock.System.ResolveDocumentsOptions & {
+      /** An identifier, name or UUID */
+      key?: string;
     };
   }
 }

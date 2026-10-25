@@ -105,6 +105,22 @@ export default class TeriockChatMessage extends mixClasses(ChatMessage, BaseDocu
     return Object.assign(super.getSpeaker(options), { img: this.getImg(options) });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (Array.isArray(source.rolls)) {
+      source.rolls = source.rolls.map(r => {
+        const roll = typeof r === "string" ? JSON.parse(r) : r;
+        if (roll?.class === "ImpactsRoll") { roll.class = "CommandsRoll"; }
+        if (roll?.options && "impacts" in roll.options) {
+          roll.options.commands ??= roll.options.impacts;
+          delete roll.options.impacts;
+        }
+        return typeof r === "string" ? JSON.stringify(roll) : roll;
+      });
+    }
+    return super.migrateData(source, options);
+  }
+
   /**
    * An image representing the speaker of this message.
    * @returns {string}

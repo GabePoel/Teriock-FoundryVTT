@@ -62,10 +62,10 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
 
   /**
    * How a stat die rolls for harm.
-   * @returns {{ from: string, impact: Teriock.Keys.Impact, to: string }}
+   * @returns {{ from: string, command: Teriock.Keys.Command, to: string }}
    */
   get _harmRoll() {
-    return { from: "hp", impact: "damage", to: "holy" };
+    return { command: "damage", from: "hp", to: "holy" };
   }
 
   /**
@@ -121,10 +121,10 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
   /** @inheritDoc */
   async _rollStatDie(event, statDie) {
     if (!this.state.forHarm) { return super._rollStatDie(event, statDie); }
-    const { from, impact, to } = this._harmRoll;
+    const { command, from, to } = this._harmRoll;
     const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
+      command,
       formula: this._getStatDieRollFormula(statDie.formula.replace(from, to)),
-      impact,
     });
     rollActivation.event = event;
     await rollActivation.primaryAction();
