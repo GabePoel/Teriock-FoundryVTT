@@ -1,15 +1,8 @@
 _id: 8bf954ad2814eda0
 _key: "!macros!8bf954ad2814eda0"
-command: |-
-  if (actor) {
-    // Set HP and MP to max.
-    await actor.take("reset", { hp: true, hpDice: true, mp: true, mpDice: true, hacks: true });
-    ui.notifications.success("TERIOCK.MACROS.FullHeal.success", { localize: true, format: { name: actor.name } });
-  } else {
-    ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", { localize: true });
-  }
+command: /reset hp=true hp-dice=true mp=true mp-dice=true hacks=true
 folder: 6ac670086eb137c6
 img: systems/teriock/src/assets/thumbnails/ability/auto-rebirth.webp
 name: Full Heal and Revitalize
 scope: global
-type: script
+type: chat

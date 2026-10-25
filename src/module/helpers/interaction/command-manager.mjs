@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { interpretTerm, parsePayload } from "../../applications/ux/enrichment-helpers.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { DealCommandExecution } from "../../executions/activity-executions/_module.mjs";
-import { batchWrite, makeIconClass } from "../../utils/_module.mjs";
+import { batchWrite, makeIconClass, toCamelCase } from "../../utils/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -123,9 +123,14 @@ export default class CommandManager {
    */
   buildOptions(payload, key) {
     const entry = TERIOCK.CONFIG.command[key];
-    if (entry.numeric) { return { formula: payload }; }
+    if (entry.numeric) {
+      // Special handling for starting with a "take" argument
+      const formula = payload.replace(/^take\b\s*/i, "");
+      if (formula === payload) { return { formula }; }
+      return formula ? { apply: true, formula } : { apply: true, showDialog: true };
+    }
     const input = parsePayload(payload, { hasConfig: true, hasMultipleArguments: true });
-    const options = { ...input.config };
+    const options = Object.fromEntries(Object.entries(input.config).map(([k, v]) => [toCamelCase(k), v]));
     (entry.args ?? []).slice(0, input.arguments.length).forEach((arg, i) => {
       options[arg] = interpretTerm(input.arguments[i]);
     });

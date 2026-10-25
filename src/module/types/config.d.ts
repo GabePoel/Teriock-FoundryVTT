@@ -98,14 +98,14 @@ declare global {
       noActor?: boolean;
       /** Takes an amount from a formula and deals it from a roll unless applied */
       numeric?: CommandNumericEntry;
+      /** Write operations for one Actor */
+      operations?: CommandOperation;
       /** The command to take instead or the operations that reverse this one */
-      reverse?: CommandOperation | string;
+      reverse?: string | CommandOperation;
       /** Fire a trigger named after this command before taking it */
       trigger?: boolean;
       /** Run on all Actors at once instead of batching operations */
       execute?: (actors: TeriockActor[], options: object) => Promise<false | void>;
-      /** Write operations for one Actor */
-      operations?: CommandOperation;
     };
 
     export type HackEntry = {
