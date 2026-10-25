@@ -1,4 +1,4 @@
-import { makeIcon, mergeMetadata } from "../../../../../../utils/_module.mjs";
+import { getEnsureNoChildrenOperations, makeIcon, mergeMetadata } from "../../../../../../utils/_module.mjs";
 import { equipmentTypeField } from "../../../../../fields/tools/builders.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
 
@@ -213,7 +213,9 @@ export default function EquipmentWieldingPart(Base) {
      */
     async unglue() {
       await this.parent.fireTrigger("unglue");
-      await this.parent.toggleChild("property:glued", { active: false });
+      await foundry.documents.modifyBatch(
+        await getEnsureNoChildrenOperations(this.parent, ["property:glued", "imbuement:glue-effect"]),
+      );
     }
   }
 
