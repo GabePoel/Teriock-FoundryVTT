@@ -1,4 +1,22 @@
+# AI Policy
+
+Not a fan TBH. Every time it's been tried on this codebase it's resulted in really complicated over-engineered solutions and has had to be removed and redone. So now the policy is no AI. This applies to any [code](./src/module/), [assets](./src/assets/), etc.
+
 # Code
+
+## Introduction
+
+This is become a very large and interconnected codebase that touches on a lot of parts of the Foundry API. Efforts have been made to try and label things, use consistent conventions, and keep stuff organized. But this work is inevitably imperfect and there will always be bugs.
+
+## Organization and Basic Concepts
+
+By-and-large, folders and the API are organized so that they match the normal Foundry folder structure and API conventions. Data models have `_types.d.ts` files which overlay the types corresponding to their schema. And mixins are used _heavily_ throughout the codebase. Types are typically namespaced and stuff should be defined in `TERIOCK.CONFIG` and `TERIOCK.CONST` instead of hard-coded where possible.
+
+Beyond that, there are a few new code concepts that Foundry doesn't use. For one, we have "pseudo-documents" serving all sorts of purposes. These are data models that are designed to mirror the functionality and ergonomics of normal documents. There are a bunch of types of these with the main ones being `Automation`, and `Activation` pseudo-documents. These implement automated functionality on other document types and provide handling for buttons in chat messages respectively.
+
+There are also some data models that are never persisted to the database and are mainly used so we can take advantage of a bunch of Foundry's existing data model helpers. These are `Execution` data models and `Preview` data models. The `Execution` ones provide a consistent UI and pipeline for a user to execute some activity in the game. It could be using an [ability](https://wiki.teriock.com/index.php?title=Core:Abilities), pulling from the [Death Bag](https://wiki.teriock.com/index.php?title=Core:Death_Bag), or anything else. The `Preview` models are used to display arrays of documents or pseudo-documents and are always attached to some `ApplicationV2` that they live in.
+
+Obviously, there is _way more_ to the codebase than what's written up here. But hopefully these document the actually added-on things rather than just _how_ stuff is done? Maybe?
 
 ## Category Tags
 
