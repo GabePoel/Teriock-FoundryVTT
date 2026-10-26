@@ -16,7 +16,10 @@ export default function RevelationSystemMixin(Base) {
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Revelation"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { revealable: true } });
+    static metadata = mergeMetadata(super.metadata, {
+      preserveOnRefresh: ["system.revealed", ...super.metadata.preserveOnRefresh],
+      tags: { revealable: true },
+    });
 
     /** @inheritDoc */
     static defineSchema() {

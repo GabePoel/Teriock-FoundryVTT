@@ -94,7 +94,7 @@ export default function RefreshSystemMixin(Base) {
           ),
         );
       }
-      if (this.parent.typedIdentifier) {
+      if (this.parent.typedIdentifier && !this.parent.isSecret) {
         promises.push(
           this._formatRefreshPromise(
             fromIdentifier(this.parent.typedIdentifier),
