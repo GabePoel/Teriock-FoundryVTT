@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
 const rankContext = {
@@ -11,7 +11,7 @@ const rankContext = {
 
 export default rankContext;
 
-preLocalizeConfig("ROLL_CONTEXT.rank");
+preLocalizeObject("ROLL_CONTEXT.rank");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.class.classes).forEach(([k, v]) => {
     rankContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: v.label });

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 export default {
   // no sort
@@ -10,4 +10,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.display.sizes");
+preLocalizeObject("CONFIG.display.sizes");

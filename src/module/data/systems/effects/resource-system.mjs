@@ -1,15 +1,16 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
-import { ConsumableSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
+import { ConsumableSystemMixin, MetaphysicsSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
 import CleanedEffectSystem from "./cleaned-effect-system.mjs";
 
 /**
  * Resource-specific effect data model.
  * @extends {CleanedEffectSystem}
  * @mixes ConsumableSystem
+ * @mixes MetaphysicsSystem
  * @mixes RevelationSystem
  */
 export default class ResourceSystem
-  extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, RevelationSystemMixin)
+  extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, MetaphysicsSystemMixin, RevelationSystemMixin)
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
@@ -22,14 +23,12 @@ export default class ResourceSystem
   });
 
   /** @inheritDoc */
-  get isPassive() {
-    return false;
+  get _panelBars() {
+    return [this._metaphysicsBar, this._consumableBar];
   }
 
   /** @inheritDoc */
-  async getPanelParts() {
-    const parts = await super.getPanelParts();
-    parts.bars.push(this._consumableBar);
-    return parts;
+  get isPassive() {
+    return false;
   }
 }

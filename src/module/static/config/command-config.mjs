@@ -1,5 +1,5 @@
 import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import {
   barClamp,
   findBestDocument,
@@ -825,6 +825,6 @@ for (const [key, entry] of Object.entries(commandConfig)) {
   if (kebab !== key) { entry.aliases = [kebab, ...(entry.aliases ?? [])]; }
 }
 
-preLocalizeConfig("CONFIG.command", { keys: ["label", "numeric.deal", "numeric.take"] });
+preLocalizeObject("CONFIG.command", { keys: ["label", "numeric.deal", "numeric.take"] });
 
 export default commandConfig;

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
 const speciesContext = {
@@ -21,7 +21,7 @@ const speciesContext = {
 
 export default speciesContext;
 
-preLocalizeConfig("ROLL_CONTEXT.species");
+preLocalizeObject("ROLL_CONTEXT.species");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.transformation.level).forEach(([k, v]) => {
     speciesContext[`transformation.level.${k}`] = v;

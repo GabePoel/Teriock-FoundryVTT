@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { toKebabCase } from "../../utils/_module.mjs";
 import usableContext from "./usable-context.mjs";
 
@@ -44,7 +44,7 @@ const armamentContext = {
 
 export default armamentContext;
 
-preLocalizeConfig("ROLL_CONTEXT.armament");
+preLocalizeObject("ROLL_CONTEXT.armament");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(game.teriock.identifiers.getNames("style", { permission: "LIMITED" })).forEach(([k, name]) => {
     armamentContext[`style.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name });

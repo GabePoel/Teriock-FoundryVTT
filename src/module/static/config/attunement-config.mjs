@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 import colors from "../display/colors.mjs";
 import systemConfig from "./system-config.mjs";
@@ -16,4 +16,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.attunement.kind", { keys: ["label"] });
+preLocalizeObject("CONFIG.attunement.kind", { keys: ["label"] });

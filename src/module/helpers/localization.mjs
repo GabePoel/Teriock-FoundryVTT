@@ -78,17 +78,17 @@ const _preLocalizationConfigRegistrations = {};
 const _preLocalizationDataModelRegistrations = [];
 
 /**
- * Mark the provided config key to be localized.
- * @param {string} configKeyPath - Key path within `TERIOCK` to localize.
+ * Mark the provided key to be localized.
+ * @param {string} keyPath - Key path within `TERIOCK` to localize.
  * @param {object} [options={}]
  * @param {string} [options.key] - If each entry in the config enum is an object, localize and sort using this property.
  * @param {string[]} [options.keys=[]]- Array of localization keys. The first key listed will be used for sorting if
  * multiple is provided.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
-export function preLocalizeConfig(configKeyPath, { key, keys = [], sort = false } = {}) {
+export function preLocalizeObject(keyPath, { key, keys = [], sort = false } = {}) {
   if (key) { keys.unshift(key); }
-  _preLocalizationConfigRegistrations[configKeyPath] = { keys, sort };
+  _preLocalizationConfigRegistrations[keyPath] = { keys, sort };
 }
 
 /**

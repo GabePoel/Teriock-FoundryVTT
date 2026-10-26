@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { wikiIndexToConfig } from "../../utils/_module.mjs";
 import { colors, icons } from "../display/_module.mjs";
 import systemConfig from "./system-config.mjs";
@@ -27,5 +27,5 @@ export default {
   unidentifiedProperties: ["cumbersome", "destroyed", "glowing", "master-crafted", "morganti", "shattered", "small"],
 };
 
-preLocalizeConfig("CONFIG.equipment.equipmentClasses", { key: "label" });
-preLocalizeConfig("CONFIG.equipment.kind", { keys: ["label"] });
+preLocalizeObject("CONFIG.equipment.equipmentClasses", { key: "label" });
+preLocalizeObject("CONFIG.equipment.kind", { keys: ["label"] });

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { colors, icons } from "../display/_module.mjs";
 import systemConfig from "./system-config.mjs";
 
@@ -47,4 +47,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.power.kind", { keys: ["label"] });
+preLocalizeObject("CONFIG.power.kind", { keys: ["label"] });

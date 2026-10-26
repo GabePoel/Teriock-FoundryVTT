@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { INF } from "../const.mjs";
 import { colors, icons, thumbnails } from "../display/_module.mjs";
 import currencyConfig from "./currency-config.mjs";
@@ -76,4 +76,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.stat", { keys: ["abbreviation", "label"] });
+preLocalizeObject("CONFIG.stat", { keys: ["abbreviation", "label"] });

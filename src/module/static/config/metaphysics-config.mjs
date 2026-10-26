@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { wikiIndexToConfig } from "../../utils/_module.mjs";
 
 export default {
@@ -7,6 +7,6 @@ export default {
   powerSources: wikiIndexToConfig("source", "TERIOCK.TERMS.PowerSources"),
 };
 
-preLocalizeConfig("CONFIG.metaphysics.effectTypes", { key: "label" });
-preLocalizeConfig("CONFIG.metaphysics.elements", { key: "label" });
-preLocalizeConfig("CONFIG.metaphysics.powerSources", { key: "label" });
+preLocalizeObject("CONFIG.metaphysics.effectTypes", { key: "label" });
+preLocalizeObject("CONFIG.metaphysics.elements", { key: "label" });
+preLocalizeObject("CONFIG.metaphysics.powerSources", { key: "label" });

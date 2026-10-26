@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 const combatConfig = {
   event: {
@@ -18,8 +18,8 @@ const combatConfig = {
   timing: { start: "TERIOCK.COMBAT.Timing.start", end: "TERIOCK.COMBAT.Timing.end" },
 };
 
-preLocalizeConfig("CONFIG.combat.event");
-preLocalizeConfig("CONFIG.combat.relation");
-preLocalizeConfig("CONFIG.combat.timing");
+preLocalizeObject("CONFIG.combat.event");
+preLocalizeObject("CONFIG.combat.relation");
+preLocalizeObject("CONFIG.combat.timing");
 
 export default combatConfig;

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { colors, thumbnails } from "../display/_module.mjs";
 
 // TODO: Migrate everything to registry.
@@ -128,4 +128,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.affinity.types", { key: "label", keys: ["label", "button"], sort: true });
+preLocalizeObject("CONFIG.affinity.types", { key: "label", keys: ["label", "button"], sort: true });

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 /** @category Transformation */
 const config = {
@@ -29,6 +29,6 @@ const config = {
 
 export default config;
 
-preLocalizeConfig("CONFIG.transformation.level");
-preLocalizeConfig("CONFIG.transformation.override", { key: "label" });
-preLocalizeConfig("CONFIG.transformation.suppress", { key: "label" });
+preLocalizeObject("CONFIG.transformation.level");
+preLocalizeObject("CONFIG.transformation.override", { key: "label" });
+preLocalizeObject("CONFIG.transformation.suppress", { key: "label" });

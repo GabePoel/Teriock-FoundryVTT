@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 
 export default {
@@ -126,7 +126,7 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.character.movement", { key: "label" });
-preLocalizeConfig("CONFIG.character.sense", { key: "label" });
-preLocalizeConfig("CONFIG.character.sizes", { keys: ["category"] });
-preLocalizeConfig("CONFIG.character.speed", { keys: ["label"] });
+preLocalizeObject("CONFIG.character.movement", { key: "label" });
+preLocalizeObject("CONFIG.character.sense", { key: "label" });
+preLocalizeObject("CONFIG.character.sizes", { keys: ["category"] });
+preLocalizeObject("CONFIG.character.speed", { keys: ["label"] });

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 
 export default {
@@ -17,4 +17,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.piercing.levels", { keys: ["label"] });
+preLocalizeObject("CONFIG.piercing.levels", { keys: ["label"] });

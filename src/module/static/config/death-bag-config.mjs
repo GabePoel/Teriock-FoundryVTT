@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 export default {
   stones: {
@@ -10,4 +10,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.deathBag.stones", { key: "label" });
+preLocalizeObject("CONFIG.deathBag.stones", { key: "label" });

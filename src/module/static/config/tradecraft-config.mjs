@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons, thumbnails } from "../display/_module.mjs";
 
 export default {
@@ -213,5 +213,5 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.tradecraft.fields", { keys: ["label"] });
-preLocalizeConfig("CONFIG.tradecraft.tradecrafts", { keys: ["label"] });
+preLocalizeObject("CONFIG.tradecraft.fields", { keys: ["label"] });
+preLocalizeObject("CONFIG.tradecraft.tradecrafts", { keys: ["label"] });

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { toKebabCase } from "../../utils/_module.mjs";
 
 const actorContext = {
@@ -66,7 +66,7 @@ const actorContext = {
 
 export default actorContext;
 
-preLocalizeConfig("ROLL_CONTEXT.actor");
+preLocalizeObject("ROLL_CONTEXT.actor");
 
 Hooks.once("teriock.identifiersInit", () => {
   Object.keys(CONFIG.Actor.dataModels).forEach((k) => {

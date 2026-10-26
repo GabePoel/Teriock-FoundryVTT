@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons, thumbnails } from "../display/_module.mjs";
 
 export default {
@@ -49,4 +49,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.attribute", { keys: ["label", "abbreviation"], sort: true });
+preLocalizeObject("CONFIG.attribute", { keys: ["label", "abbreviation"], sort: true });

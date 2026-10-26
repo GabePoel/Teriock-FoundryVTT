@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 const usableContext = {
   c: "TERIOCK.ROLL_CONTEXT.Common.c",
@@ -8,4 +8,4 @@ const usableContext = {
 
 export default usableContext;
 
-preLocalizeConfig("ROLL_CONTEXT.usable");
+preLocalizeObject("ROLL_CONTEXT.usable");

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 /** @enum {Teriock.Config.CategoryEntry} */
 const categoryConfig = {
@@ -32,4 +32,4 @@ const categoryConfig = {
 
 export default categoryConfig;
 
-preLocalizeConfig("CONFIG.category", { keys: ["label"] });
+preLocalizeObject("CONFIG.category", { keys: ["label"] });

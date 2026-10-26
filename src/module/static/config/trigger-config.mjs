@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { objectMap } from "../../utils/_module.mjs";
 import commandConfig from "./command-config.mjs";
 
@@ -98,15 +98,15 @@ const triggerConfig = {
   },
 };
 
-preLocalizeConfig("CONFIG.trigger", { keys: ["label"] });
-preLocalizeConfig("CONFIG.trigger.activity.choices");
-preLocalizeConfig("CONFIG.trigger.attunable.choices");
-preLocalizeConfig("CONFIG.trigger.combat.choices");
-preLocalizeConfig("CONFIG.trigger.consequence.choices");
-preLocalizeConfig("CONFIG.trigger.equipment.choices");
-preLocalizeConfig("CONFIG.trigger.command.choices");
-preLocalizeConfig("CONFIG.trigger.mount.choices");
-preLocalizeConfig("CONFIG.trigger.protection.choices");
-preLocalizeConfig("CONFIG.trigger.time.choices");
+preLocalizeObject("CONFIG.trigger", { keys: ["label"] });
+preLocalizeObject("CONFIG.trigger.activity.choices");
+preLocalizeObject("CONFIG.trigger.attunable.choices");
+preLocalizeObject("CONFIG.trigger.combat.choices");
+preLocalizeObject("CONFIG.trigger.consequence.choices");
+preLocalizeObject("CONFIG.trigger.equipment.choices");
+preLocalizeObject("CONFIG.trigger.command.choices");
+preLocalizeObject("CONFIG.trigger.mount.choices");
+preLocalizeObject("CONFIG.trigger.protection.choices");
+preLocalizeObject("CONFIG.trigger.time.choices");
 
 export default triggerConfig;

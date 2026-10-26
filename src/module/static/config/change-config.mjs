@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import commandConfig from "./command-config.mjs";
 
 const booleanTypes = ["upgrade", "downgrade", "override"];
@@ -172,8 +172,8 @@ const tokenPhase = "initial";
 
 export default { child, defaultPhase, parent, phase, tokenPhase, types };
 
-preLocalizeConfig("CONFIG.change.child.groups");
-preLocalizeConfig("CONFIG.change.child.paths", { key: "label", sort: true });
-preLocalizeConfig("CONFIG.change.parent.target");
-preLocalizeConfig("CONFIG.change.phase", { keys: ["hint", "label"] });
-preLocalizeConfig("CONFIG.change.types", { keys: ["label"] });
+preLocalizeObject("CONFIG.change.child.groups");
+preLocalizeObject("CONFIG.change.child.paths", { key: "label", sort: true });
+preLocalizeObject("CONFIG.change.parent.target");
+preLocalizeObject("CONFIG.change.phase", { keys: ["hint", "label"] });
+preLocalizeObject("CONFIG.change.types", { keys: ["label"] });

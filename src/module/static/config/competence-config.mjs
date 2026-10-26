@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 import { icons } from "../display/_module.mjs";
 
@@ -25,4 +25,4 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.competence.levels", { keys: ["label"], sort: false });
+preLocalizeObject("CONFIG.competence.levels", { keys: ["label"], sort: false });

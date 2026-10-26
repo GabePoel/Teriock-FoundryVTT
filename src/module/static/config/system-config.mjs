@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { colors, icons } from "../display/_module.mjs";
 
 const childKinds = /** @enum {Teriock.Config.KindEntry} */ {
@@ -18,5 +18,5 @@ export default {
   target: { limb: 2, vitals: 3 },
 };
 
-preLocalizeConfig("CONFIG.system.childKinds", { keys: ["label"] });
-preLocalizeConfig("CONFIG.system.defaultKinds", { keys: ["label"] });
+preLocalizeObject("CONFIG.system.childKinds", { keys: ["label"] });
+preLocalizeObject("CONFIG.system.defaultKinds", { keys: ["label"] });

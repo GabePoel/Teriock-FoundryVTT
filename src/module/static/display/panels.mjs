@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import * as icons from "./icons/_module.mjs";
 import * as thumbnails from "./thumbnails/_module.mjs";
 
@@ -25,4 +25,4 @@ export default {
   },
 };
 
-preLocalizeConfig("DISPLAY.panels.common", { keys: ["name"] });
+preLocalizeObject("DISPLAY.panels.common", { keys: ["name"] });

@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 /** Filled in with actor data and execution namespaces once identifiers are initialized. */
 const executionContext = {
@@ -10,4 +10,4 @@ const executionContext = {
 
 export default executionContext;
 
-preLocalizeConfig("ROLL_CONTEXT.execution");
+preLocalizeObject("ROLL_CONTEXT.execution");

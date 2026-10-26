@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { colors, icons, thumbnails } from "../display/_module.mjs";
 import systemConfig from "./system-config.mjs";
 
@@ -146,6 +146,6 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.class.archetypes", { keys: ["label"] });
-preLocalizeConfig("CONFIG.class.classes", { keys: ["label"] });
-preLocalizeConfig("CONFIG.class.kind", { keys: ["label"] });
+preLocalizeObject("CONFIG.class.archetypes", { keys: ["label"] });
+preLocalizeObject("CONFIG.class.classes", { keys: ["label"] });
+preLocalizeObject("CONFIG.class.kind", { keys: ["label"] });

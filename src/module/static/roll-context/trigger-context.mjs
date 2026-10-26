@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 /** Filled in with document data once identifiers are initialized. */
 const triggerContext = {
@@ -16,7 +16,7 @@ const triggerContext = {
 
 export default triggerContext;
 
-preLocalizeConfig("ROLL_CONTEXT.trigger");
+preLocalizeObject("ROLL_CONTEXT.trigger");
 Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.attribute).forEach(([k, v]) => {
     triggerContext[`attribute.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Trigger.attribute", { name: v.abbreviation });

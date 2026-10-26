@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.cost.primary.types");
-preLocalizeConfig("CONFIG.cost.components.keys");
-preLocalizeConfig("CONFIG.cost.components.types");
-preLocalizeConfig("CONFIG.cost.tweaks", { key: "label" });
+preLocalizeObject("CONFIG.cost.primary.types");
+preLocalizeObject("CONFIG.cost.components.keys");
+preLocalizeObject("CONFIG.cost.components.types");
+preLocalizeObject("CONFIG.cost.tweaks", { key: "label" });

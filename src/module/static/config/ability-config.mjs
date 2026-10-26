@@ -1,4 +1,4 @@
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 export default {
   delivery: {
@@ -214,21 +214,21 @@ export default {
   },
 };
 
-preLocalizeConfig("CONFIG.ability.delivery", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.deliveryPackage");
-preLocalizeConfig("CONFIG.ability.deliveryParent");
-preLocalizeConfig("CONFIG.ability.duration.unit");
-preLocalizeConfig("CONFIG.ability.expansion", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.featSaveImprovementAmount");
-preLocalizeConfig("CONFIG.ability.interaction", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.interaction.attack.results");
-preLocalizeConfig("CONFIG.ability.interaction.block.results");
-preLocalizeConfig("CONFIG.ability.interaction.feat.results");
-preLocalizeConfig("CONFIG.ability.interaction.manifest.results");
-preLocalizeConfig("CONFIG.ability.maneuver", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.maneuver.active.executionTimes", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.maneuver.passive.executionTimes", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.maneuver.reactive.executionTimes", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.maneuver.slow.executionTimes", { keys: ["label"] });
-preLocalizeConfig("CONFIG.ability.targetParent");
-preLocalizeConfig("CONFIG.ability.targets", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.delivery", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.deliveryPackage");
+preLocalizeObject("CONFIG.ability.deliveryParent");
+preLocalizeObject("CONFIG.ability.duration.unit");
+preLocalizeObject("CONFIG.ability.expansion", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.featSaveImprovementAmount");
+preLocalizeObject("CONFIG.ability.interaction", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.interaction.attack.results");
+preLocalizeObject("CONFIG.ability.interaction.block.results");
+preLocalizeObject("CONFIG.ability.interaction.feat.results");
+preLocalizeObject("CONFIG.ability.interaction.manifest.results");
+preLocalizeObject("CONFIG.ability.maneuver", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.maneuver.active.executionTimes", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.maneuver.passive.executionTimes", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.maneuver.reactive.executionTimes", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.maneuver.slow.executionTimes", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.targetParent");
+preLocalizeObject("CONFIG.ability.targets", { keys: ["label"] });
