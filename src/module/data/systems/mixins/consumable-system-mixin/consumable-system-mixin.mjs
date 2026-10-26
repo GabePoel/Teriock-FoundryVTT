@@ -1,6 +1,7 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { asInf, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
+import { asInf, mergeMetadata, objectMap, safeInf } from "../../../../utils/_module.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
+import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -28,7 +29,12 @@ export default function ConsumableSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         consumable: new fields.BooleanField({ initial: true }),
-        consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
+        consumption: new fields.SchemaField({
+          amount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
+          stats: new fields.SetField(
+            new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.stat, v => v.label, { localize: true }) }),
+          ),
+        }),
         quantity: new fields.SchemaField({
           max: new InfiniteNumberField({ persisted: false }),
           maxFormula: new FormulaField({ deterministic: true, placeholder: TERIOCK.CONST.INF_CODE }),
@@ -39,6 +45,12 @@ export default function ConsumableSystemMixin(Base) {
       });
     }
 
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateRename(source, "consumptionAmount", "consumption.amount");
+      return super.migrateData(source, options);
+    }
+
     /** @returns {Teriock.Panels.PanelBar} */
     get _consumableBar() {
       return {
@@ -47,9 +59,14 @@ export default function ConsumableSystemMixin(Base) {
         wrappers: [
           _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity.value }),
           _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", { value: asInf(this.quantity.max) }),
-          _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", { value: this.consumptionAmount }),
+          _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", { value: this.consumption.amount }),
         ],
       };
+    }
+
+    /** @inheritDoc */
+    get _displayInputs() {
+      return this.consumable ? [...super._displayInputs, "system.consumption.stats"] : super._displayInputs;
     }
 
     /** @inheritDoc */
@@ -125,6 +142,7 @@ export default function ConsumableSystemMixin(Base) {
           : Infinity;
         this.quantity.value = Math.clamp(this.quantity.value, this.quantity.min, this.quantity.max);
       } else {
+        this.consumption.stats = new Set();
         this.quantity.max = 1;
         this.quantity.value = 1;
       }
@@ -136,7 +154,7 @@ export default function ConsumableSystemMixin(Base) {
      * @returns {Promise<void>}
      */
     async useOne() {
-      if (this.consumable && this.consumptionAmount) {
+      if (this.consumable && this.consumption.amount) {
         await this.parent.update({ "system.quantity.value": Math.max(0, this.quantity.value - 1) });
       }
     }

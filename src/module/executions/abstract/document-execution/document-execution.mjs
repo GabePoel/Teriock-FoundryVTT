@@ -120,7 +120,7 @@ export default class DocumentExecution extends BaseExecution {
         updates: [{
           _id: this.source.id,
           system: {
-            quantity: { value: Math.max(0, this.source.system.quantity.value - this.source.system.consumptionAmount) },
+            quantity: { value: Math.max(0, this.source.system.quantity.value - this.source.system.consumption.amount) },
           },
         }],
       });

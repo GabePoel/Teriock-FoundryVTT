@@ -1,7 +1,7 @@
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { makeIconClass } from "../../utils/_module.mjs";
+import { dotJoin, makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
@@ -78,7 +78,7 @@ export default class CostPayer extends ResolvableDialog {
    * Open and use the cost payer.
    * @param {AbilityExecution} execution
    * @param {Partial<ApplicationConfiguration> & { autoPay?: boolean }} [options]
-   * @returns {Promise<{ costs: Record<string, number>, heightened: number }|false>}
+   * @returns {Promise<{ costs: Record<string, number>, heightened: number, sources: Record<string, (TeriockActiveEffect|TeriockItem)[]> }|false>}
    */
   static async prompt(execution, options = {}) {
     const { autoPay, ...appOptions } = options;
@@ -97,6 +97,7 @@ export default class CostPayer extends ResolvableDialog {
     this.#execution = options.execution;
     Object.assign(this.state.costOptions.primary, options.execution.costs);
     Object.assign(this.state.costOptions.tweaks, this.#ability.system.costs.tweaks);
+    this.state.sources = {};
     this.#costs = new Set(
       Object.entries(this.#ability.system.costs.primary).filter(([_k, v]) => v.type).map(([k, _v]) => k),
     );
@@ -104,6 +105,9 @@ export default class CostPayer extends ResolvableDialog {
       if (this.#ability.system.costs.primary[k].type === "formula") {
         this.state.costOptions.primary[k] = this.#ability.system.costs.primary[k].formula;
       }
+      this.#sources[k] = this.#execution.actor?.previewed.filter(d =>
+        d !== this.#ability && d.active && d.system.consumable && d.system.consumption?.stats.has(k)
+      ) ?? [];
     }
   }
 
@@ -118,6 +122,9 @@ export default class CostPayer extends ResolvableDialog {
 
   /** @type {boolean} */
   #hintsPrepared = false;
+
+  /** @type {Record<string, (TeriockActiveEffect|TeriockItem)[]>} */
+  #sources = {};
 
   /**
    * The ability this is paying costs for.
@@ -170,22 +177,24 @@ export default class CostPayer extends ResolvableDialog {
 
   /**
    * Evaluate primary formulas, apply heightening and tweaks, and return numerical costs.
-   * @returns {Promise<{ costs: Record<Teriock.Keys.PrimaryCost, number>, heightened: number }>}
+   * @returns {Promise<{ costs: Record<Teriock.Keys.PrimaryCost, number>, heightened: number, sources: Record<Teriock.Keys.PrimaryCost, (TeriockActiveEffect|TeriockItem)[]> }>}
    */
   async #resolveCosts() {
     const heightened = Number(this.state.costOptions.heightened) || 0;
     const rollData = Object.assign(this.#execution.getRollData(), { h: heightened });
     /** @type {Record<string, number>} */
     const costs = Object.fromEntries(Object.keys(TERIOCK.CONFIG.stat).map(k => [k, 0]));
+    const sources = {};
     for (const k of this.#costs) {
       costs[k] = await BaseRoll.getValue(this.state.costOptions.primary[k] || "0", rollData) || 0;
+      sources[k] = this.#sources[k].filter((_d, i) => this.state.sources[k]?.[i]);
     }
     costs.mp += heightened;
     for (const k of this.#includedTweaks()) {
       const { multiplier, primary } = TERIOCK.CONFIG.cost.tweaks[k];
       costs[primary] += multiplier * (Number(this.state.costOptions.tweaks[k]) || 0);
     }
-    return { costs, heightened };
+    return { costs, heightened, sources };
   }
 
   /** @inheritDoc */
@@ -234,6 +243,19 @@ export default class CostPayer extends ResolvableDialog {
           key: k,
           name: `state.costOptions.primary.${k}`,
           placeholder: "0",
+          sources: Object.fromEntries(
+            this.#sources[k].map((
+              d,
+              i,
+            ) => [`state.sources.${k}.${i}`, {
+              checked: this.state.sources[k]?.[i],
+              img: d.img,
+              name: d.name,
+              text: dotJoin([d.system.remainingString, d.master !== this.#execution.actor && d.master?.name]),
+              uuid: d.uuid,
+            }]),
+          ),
+          sourcesHint: _loc("TERIOCK.DIALOGS.CostPayer.sources", { key: _loc(TERIOCK.CONFIG.stat[k].label) }),
           units: _loc(`TERIOCK.TERMS.Formula.${field.deterministic ? "deterministic" : "rollable"}`),
           value: this.state.costOptions.primary[k],
         };

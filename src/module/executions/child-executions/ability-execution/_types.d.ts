@@ -16,6 +16,7 @@ declare module "./ability-execution.mjs" {
 
     affinities: ExecutionPseudoCollection<BaseAffinity>;
     costs: Record<Teriock.Keys.PrimaryCost, number>;
+    costSources: Partial<Record<Teriock.Keys.PrimaryCost, (TeriockActiveEffect | TeriockItem)[]>>;
     expirations: ExecutionPseudoCollection<BaseExpiration>;
   }
 }

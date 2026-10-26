@@ -3,8 +3,12 @@ declare global {
     export interface ConsumableSystemData {
       /** <schema> Whether this document is consumable */
       consumable: boolean;
-      /** <schema> The amount of the document to consumer per use */
-      consumptionAmount: number;
+      consumption: {
+        /** <schema> The amount of the document to consume per use */
+        amount: number;
+        /** <schema> Stats whose costs can be paid by consuming this document */
+        stats: Set<Teriock.Keys.Stat>;
+      };
       /** <schema> Current quantity of the document */
       quantity: {
         /** <derived> Maximum quantity */

@@ -60,6 +60,12 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /**
+   * Costs left for the actor to pay after cost sources are consumed.
+   * @type {Record<string, number>}
+   */
+  #actorCosts = {};
+
+  /**
    * Costs that are being paid.
    * @returns {string[]}
    */
@@ -78,6 +84,31 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /**
+   * Prepare cost sources to be consumed in order and leave any remaining costs for the Actor.
+   */
+  #prepareCostSourceConsumption() {
+    const quantities = new Map();
+    for (const c of this.#paidCosts) {
+      this.#actorCosts[c] = this.costs[c];
+      for (const source of this.costSources[c] ?? []) {
+        const quantity = quantities.get(source) ?? source.system.quantity.value;
+        const spent = Math.min(quantity, this.#actorCosts[c]);
+        quantities.set(source, quantity - spent);
+        this.#actorCosts[c] -= spent;
+      }
+    }
+    for (const [source, quantity] of quantities) {
+      if (quantity === source.system.quantity.value) { continue; }
+      this.operations.push({
+        action: "update",
+        documentName: source.documentName,
+        parent: source.parent,
+        updates: [{ _id: source.id, system: { quantity: { value: quantity } } }],
+      });
+    }
+  }
+
+  /**
    * Prepare equipment to be consumed.
    */
   #prepareEquipmentConsumption() {
@@ -90,7 +121,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
           _id: this.armament.id,
           system: {
             quantity: {
-              value: Math.max(0, this.armament.system.quantity.value - this.armament.system.consumptionAmount),
+              value: Math.max(0, this.armament.system.quantity.value - this.armament.system.consumption.amount),
             },
           },
         }],
@@ -340,6 +371,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   _configure(options = {}) {
     super._configure(options);
     this.costs = objectMap(TERIOCK.CONFIG.stat, () => 0);
+    this.costSources = {};
     this.affinities = new ExecutionPseudoCollection("affinities", this, this.source.system.affinities.values(), {
       documentClass: BaseAffinity,
     });
@@ -388,6 +420,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     const result = await CostPayer.prompt(this, { autoPay: this.autoPayCosts });
     if (result) {
       Object.assign(this.costs, result.costs);
+      this.costSources = result.sources;
       this.heightened = result.heightened;
     }
     return result;
@@ -501,9 +534,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (yes === false) { return false; }
 
     if (this.actor) {
-      for (const c of this.#paidCosts) {
+      for (const c of this.#paidCosts.filter(c => this.#actorCosts[c] > 0)) {
         const config = TERIOCK.CONFIG.stat[c];
-        if (config?.command && !config.bar) { await this.actor.take(config.command, { amount: this.costs[c] }); }
+        if (config?.command && !config.bar) { await this.actor.take(config.command, { amount: this.#actorCosts[c] }); }
       }
     }
   }
@@ -531,12 +564,13 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   /** @inheritDoc */
   async _prepareUpdates() {
     this.#prepareEquipmentConsumption();
+    this.#prepareCostSourceConsumption();
     if (this.actor) {
-      for (const c of this.#paidCosts) {
+      for (const c of this.#paidCosts.filter(c => this.#actorCosts[c] > 0)) {
         const config = TERIOCK.CONFIG.stat[c];
         if (config?.bar) {
           this.actorUpdates[`system.${c}.value`] = Math.max(
-            this.actor.system[c].value + (config?.multiplier ?? 1) * this.costs[c],
+            this.actor.system[c].value + (config?.multiplier ?? 1) * this.#actorCosts[c],
             this.actor.system[c].min ?? 0,
           );
         }
