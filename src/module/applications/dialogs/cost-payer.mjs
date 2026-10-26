@@ -101,6 +101,7 @@ export default class CostPayer extends ResolvableDialog {
     this.#costs = new Set(
       Object.entries(this.#ability.system.costs.primary).filter(([_k, v]) => v.type).map(([k, _v]) => k),
     );
+    if (this.#execution.canHeighten) { this.#costs.add("mp"); }
     for (const k of this.#costs) {
       if (this.#ability.system.costs.primary[k].type === "formula") {
         this.state.costOptions.primary[k] = this.#ability.system.costs.primary[k].formula;
@@ -139,9 +140,9 @@ export default class CostPayer extends ResolvableDialog {
    * @returns {string[]}
    */
   #includedTweaks() {
-    return Object.entries(TERIOCK.CONFIG.cost.tweaks).filter(([_k, v]) =>
-      this.#costs.has(v.primary) || (this.#execution.canHeighten && v.primary === "mp")
-    ).map(([k, _v]) => k);
+    return Object.entries(TERIOCK.CONFIG.cost.tweaks).filter(([_k, v]) => this.#costs.has(v.primary)).map(([k, _v]) =>
+      k
+    );
   }
 
   /**
@@ -210,7 +211,7 @@ export default class CostPayer extends ResolvableDialog {
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
-    this.render();
+    if (!event.target.name?.startsWith("state.sources")) { this.render(); }
   }
 
   /** @inheritDoc */
@@ -255,7 +256,9 @@ export default class CostPayer extends ResolvableDialog {
               uuid: d.uuid,
             }]),
           ),
-          sourcesHint: _loc("TERIOCK.DIALOGS.CostPayer.sources", { key: _loc(TERIOCK.CONFIG.stat[k].label) }),
+          sourcesHint: _loc("TERIOCK.DIALOGS.CostPayer.sources", {
+            key: TERIOCK.CONFIG.stat[k].label.toLocaleLowerCase(game.i18n.lang),
+          }),
           units: _loc(`TERIOCK.TERMS.Formula.${field.deterministic ? "deterministic" : "rollable"}`),
           value: this.state.costOptions.primary[k],
         };
