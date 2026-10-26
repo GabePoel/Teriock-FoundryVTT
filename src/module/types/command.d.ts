@@ -41,6 +41,17 @@ declare global {
       rollData?: object;
     };
 
+    export type MoneyExchangeOptions = {
+      /** Keys, identifiers or symbols of specific currencies to use */
+      currencies?: string[] | null;
+      /** Whether debt is paid off and taken on */
+      debt?: boolean;
+      /** Equipment types of currencies to use */
+      equipmentTypes?: Identifier[] | null;
+      /** Exact change or greedily round upwards (keep the change) */
+      mode?: Teriock.Keys.PayMode;
+    };
+
     export type StatusOptions = UseOptions & { status?: Teriock.Keys.Condition };
 
     export type StandardDamageOptions = UseOptions & {

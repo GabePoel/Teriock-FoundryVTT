@@ -14,13 +14,19 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
     return Object.assign(super.defineSchema(), { boosts: new fields.NumberField() });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (source.command === "other") { source.command = null; }
+    return super.migrateData(source, options);
+  }
+
   /**
    * Roll this activation's formula.
    * @param {"take"|"reverse"} action
    * @returns {Promise<void>}
    */
   async #act(action) {
-    if (this.command === "other") {
+    if (!this.command) {
       const roll = new BaseRoll(this.formula, this.actors[0]?.getRollData() ?? {});
       await roll.evaluate();
       await roll.toMessage({ messageMode: game.settings.get("core", "messageMode") });
@@ -36,9 +42,9 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   get label() {
-    return (this.display.label
-      || _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", { command: TERIOCK.CONFIG.command[this.command]?.label })
-      || super.label());
+    const command = TERIOCK.CONFIG.command[this.command]?.label;
+    if (this.display.label || !command) { return super.label; }
+    return _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", { command });
   }
 
   /** @inheritDoc */

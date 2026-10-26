@@ -59,7 +59,7 @@ export default function ArmamentSystemMixin(Base) {
           new fields.StringField({
             choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.take, {
               localize: true,
-              filter: c => c.numeric && !c.numeric.hidden,
+              filter: c => c.numeric,
             }),
           }),
           { initial: ["damage"] },

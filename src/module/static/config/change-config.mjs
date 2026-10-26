@@ -118,7 +118,7 @@ const paths = {
     types: typeSubsets.boolean,
   },
   ...Object.fromEntries(
-    Object.entries(commandConfig).filter(([_k, v]) => v.numeric && !v.numeric.hidden).map(([k, v]) => {
+    Object.entries(commandConfig).filter(([_k, v]) => v.numeric).map(([k, v]) => {
       return [`system.boosts.${k}`, {
         forExecution: true,
         group: "boosts",

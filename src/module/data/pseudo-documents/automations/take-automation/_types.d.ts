@@ -4,6 +4,7 @@ declare module "./take-automation.mjs" {
     morganti: boolean;
     showDialog: boolean;
     amount: number | null;
+    options: object;
   }
 }
 

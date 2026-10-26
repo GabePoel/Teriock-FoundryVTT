@@ -22,15 +22,13 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
     return Object.assign(super.defineSchema(), {
       amount: new fields.NumberField({ nullable: true, placeholder: _loc("COMMON.Default") }),
       command: new fields.StringField({
-        choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.take, {
-          localize: true,
-          filter: c => c.numeric && !c.numeric.hidden,
-        }),
+        choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.take, { localize: true, filter: c => c.numeric }),
         initial: "damage",
         nullable: false,
         required: true,
       }),
       morganti: new fields.BooleanField(),
+      options: new fields.ObjectField(),
     });
   }
 
@@ -50,8 +48,15 @@ export default class TakeAutomation extends mixClasses(BaseAutomation, TriggerAu
 
   /** @inheritDoc */
   async _getActivations() {
-    if (this.command && this.command !== "other") {
-      return [new TakeActivation({ amount: this.amount, command: this.command, morganti: this.morganti })];
+    if (this.command) {
+      return [
+        new TakeActivation({
+          amount: this.amount,
+          command: this.command,
+          morganti: this.morganti,
+          options: this.options,
+        }),
+      ];
     }
     return [];
   }

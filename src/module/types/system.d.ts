@@ -60,7 +60,7 @@ declare global {
       | ProtectionTrigger
       | TimeTrigger;
 
-    export type TriggerScope = {
+    export type TriggerScope = Teriock.Command.MoneyExchangeOptions & {
       /** Set by ability executions. */
       ability?: TeriockActiveEffect<"ability">;
       /** The execution's actor or the source's actor. */
@@ -81,8 +81,6 @@ declare global {
       execution?: AbilityExecution | ArmamentExecution | BaseExecution;
       /** The source or its nearest ancestor item. */
       item?: TeriockItem;
-      /** The mode of a payment. */
-      mode?: Teriock.Keys.PayMode;
       /** The body part of a hack or unhack. */
       part?: Teriock.Keys.HackableBodyPart;
       /** The document the trigger originated from. */

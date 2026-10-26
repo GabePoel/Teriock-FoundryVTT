@@ -61,7 +61,7 @@ export default function ChildSystemMixin(Base) {
           objectMap(
             TERIOCK.CONFIG.command,
             e => new FormulaField({ deterministic: false, initial: "", label: e.label }),
-            { filter: e => e.numeric && !e.numeric.hidden },
+            { filter: e => e.numeric },
           ),
           { persisted: false },
         ),

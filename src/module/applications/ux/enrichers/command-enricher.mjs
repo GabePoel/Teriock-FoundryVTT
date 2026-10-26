@@ -63,7 +63,7 @@ const commandEnricher = {
         command: key,
         relativeTo: options?.relativeTo?.uuid,
         tooltip: commandOptions.apply ? entry.numeric?.take : entry.numeric?.deal,
-        ...objectMap(commandOptions, v => v.toString()),
+        ...objectMap(commandOptions, v => typeof v === "string" ? v : JSON.stringify(v)),
       },
       icon: makeIconClass(commands.getValue(key, "icon", commandOptions), "inline"),
       name: parsed.label

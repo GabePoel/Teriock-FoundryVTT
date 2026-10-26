@@ -25,9 +25,11 @@ export default class CommandManager {
    * @returns {Promise<{ actors: TeriockActor[] }>}
    */
   async #deal(key, actors, options, showDialog) {
+    const entry = TERIOCK.CONFIG.command[key];
     const netBoosts = options.boosts ?? 0;
     await DealCommandExecution.create({
       boosts: Math.max(netBoosts, 0),
+      commandOptions: Object.fromEntries((entry.numeric.options ?? []).map(o => [o, options[o]])),
       commands: [key],
       crit: options.crit,
       deboosts: Math.max(-netBoosts, 0),
@@ -124,10 +126,17 @@ export default class CommandManager {
   buildOptions(payload, key) {
     const entry = TERIOCK.CONFIG.command[key];
     if (entry.numeric) {
+      // Pull out named options before treating the rest as a formula
+      const options = {};
+      const remaining = payload.replace(/(?:^|\s+)([a-z][\w-]*)=(\S+)/gi, (match, k, value) => {
+        if (!entry.numeric.options?.includes(toCamelCase(k))) { return match; }
+        options[toCamelCase(k)] = interpretTerm(value);
+        return "";
+      }).trim();
       // Special handling for starting with a "take" argument
-      const formula = payload.replace(/^take\b\s*/i, "");
-      if (formula === payload) { return { formula }; }
-      return formula ? { apply: true, formula } : { apply: true, showDialog: true };
+      const formula = remaining.replace(/^take\b\s*/i, "");
+      if (formula === remaining) { return { ...options, formula }; }
+      return { ...options, apply: true, ...(formula ? { formula } : { showDialog: true }) };
     }
     const input = parsePayload(payload, { hasConfig: true, hasMultipleArguments: true });
     const options = Object.fromEntries(Object.entries(input.config).map(([k, v]) => [toCamelCase(k), v]));
@@ -204,7 +213,9 @@ export default class CommandManager {
         actors.map((a, i) =>
           a.fireTrigger(key, {
             amount: resolved[i].amount,
-            ...Object.fromEntries((entry.args ?? []).map(arg => [arg, options[arg]])),
+            ...Object.fromEntries(
+              [...(entry.args ?? []), ...(entry.numeric?.options ?? [])].map(arg => [arg, options[arg]]),
+            ),
           })
         ),
       );

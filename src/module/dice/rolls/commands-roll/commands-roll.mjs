@@ -9,7 +9,7 @@ export default class CommandsRoll extends BaseRoll {
    * @returns {Teriock.Dice.CommandsRollOptions}
    */
   static get defaultOptions() {
-    return Object.assign(super.defaultOptions, { commands: [] });
+    return Object.assign(super.defaultOptions, { commandOptions: {}, commands: [] });
   }
 
   /**
@@ -36,11 +36,11 @@ export default class CommandsRoll extends BaseRoll {
   }
 
   /**
-   * The commands associated with this roll, excluding the placeholder one.
+   * The configured commands associated with this roll.
    * @returns {Teriock.Keys.Command[]}
    */
   get commands() {
-    return this.options.commands.filter(i => i !== "other");
+    return this.options.commands.filter(c => c in TERIOCK.CONFIG.command);
   }
 
   /**
@@ -77,7 +77,7 @@ export default class CommandsRoll extends BaseRoll {
   /** @inheritDoc */
   _getTotalContextOptions(_config = {}) {
     return [
-      ...Object.entries(TERIOCK.CONFIG.command).filter(([_k, v]) => v.numeric && !v.numeric.hidden).map(([k, v]) => {
+      ...Object.entries(TERIOCK.CONFIG.command).filter(([_k, v]) => v.numeric).map(([k, v]) => {
         return {
           icon: makeIcon(v.icon, "contextMenu"),
           label: v.numeric.take,
@@ -93,7 +93,12 @@ export default class CommandsRoll extends BaseRoll {
   /** @inheritDoc */
   async getAutomations() {
     return this.commands.map(command =>
-      new teriock.data.pseudoDocuments.automations.TakeAutomation({ amount: this.total, command, type: "take" })
+      new teriock.data.pseudoDocuments.automations.TakeAutomation({
+        amount: this.total,
+        command,
+        options: this.options.commandOptions,
+        type: "take",
+      })
     );
   }
 }

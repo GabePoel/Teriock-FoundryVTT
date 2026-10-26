@@ -9,6 +9,10 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles money.
+ *
+ * Relevant wiki pages:
+ * - [Price](https://wiki.teriock.com/index.php?title=Core:Price)
+ *
  * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
  */
@@ -51,25 +55,31 @@ export default function ActorMoneyPart(Base) {
     /**
      * Update data for paying money. A negative amount is money gained.
      * @param {number} amount
-     * @param {Teriock.Keys.PayMode} [mode]
+     * @param {Teriock.Command.MoneyExchangeOptions} [options]
      * @returns {object}
      */
-    getPayUpdate(amount, mode = "exact") {
-      const currencies = Object.entries(TERIOCK.CONFIG.currency).map(([key, config]) => ({
-        held: Math.max(0, this.money[key] || 0),
-        key,
-        value: config.conversion,
-      })).sort((a, b) => b.value - a.value);
+    getMoneyExchangeUpdate(
+      amount,
+      { currencies: currencyKeys = null, debt = true, equipmentTypes = null, mode = "exact" } = {},
+    ) {
+      const currencies = Object.entries(TERIOCK.CONFIG.currency).filter(([key, config]) =>
+        (!currencyKeys || currencyKeys.some(c => [config.identifier, config.symbol, key].includes(c)))
+        && (!equipmentTypes || equipmentTypes.includes(config.equipmentType))
+      ).map(([key, config]) => ({ held: Math.max(0, this.money[key] || 0), key, value: config.conversion })).sort((
+        a,
+        b,
+      ) => b.value - a.value);
+      if (!currencies.length) { return {}; }
       const wallet = Object.fromEntries(currencies.map(c => [c.key, c.held]));
       const precision = currencies.at(-1).value;
 
       let owed = (amount || 0).toNearest(precision);
-      let debt = this.money.debt.toNearest(precision);
+      let owedDebt = this.money.debt.toNearest(precision);
 
       if (owed < 0) {
         // Step 0: Pays off any outstanding debt first
-        const debtPaid = Math.min(debt, -owed);
-        debt = (debt - debtPaid).toNearest(precision);
+        const debtPaid = debt ? Math.min(owedDebt, -owed) : 0;
+        owedDebt = (owedDebt - debtPaid).toNearest(precision);
         this.#addToWallet(wallet, currencies, (-owed - debtPaid).toNearest(precision));
       } else {
         // Step 1: Spend highest denomination to smallest
@@ -91,10 +101,10 @@ export default function ActorMoneyPart(Base) {
         }
 
         // Step 3: Anything that still can't be paid for is taken on as debt
-        debt = (debt + owed).toNearest(precision);
+        if (debt) { owedDebt = (owedDebt + owed).toNearest(precision); }
       }
 
-      return { "system.money": { ...wallet, debt } };
+      return { "system.money": { ...wallet, debt: owedDebt } };
     }
 
     /** @inheritDoc */

@@ -31,9 +31,7 @@ export default function CommandsExecutionMixin(Base) {
         boosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
         commands: new fields.SetField(
           new fields.StringField({
-            choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.deal, {
-              filter: c => c.numeric && !c.numeric.hidden,
-            }),
+            choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.deal, { filter: c => c.numeric }),
           }),
           { initial: ["damage"] },
         ),

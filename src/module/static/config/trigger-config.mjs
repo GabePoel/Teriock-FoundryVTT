@@ -40,7 +40,7 @@ const triggerConfig = {
   },
   command: {
     alwaysAvailable: true,
-    choices: objectMap(commandConfig, c => c.numeric?.take, { filter: c => c.numeric && !c.numeric.hidden }),
+    choices: objectMap(commandConfig, c => c.numeric?.take, { filter: c => c.numeric }),
     label: "TERIOCK.TRIGGERS.Command.label",
   },
   consequence: {

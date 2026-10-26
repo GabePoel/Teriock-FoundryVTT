@@ -22,10 +22,14 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       command: new fields.StringField({
-        choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.deal, { localize: true, filter: c => c.numeric }),
+        blank: true,
+        choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.deal, {
+          localize: true,
+          none: true,
+          filter: c => c.numeric,
+        }),
         initial: "damage",
-        nullable: false,
-        required: true,
+        nullable: true,
       }),
       formula: new FormulaField({ deterministic: false, nullable: true, placeholder: _loc("COMMON.None") }),
     });
@@ -34,6 +38,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateRename(source, "impact", "command");
+    if (source.command === "other") { source.command = null; }
     return super.migrateData(source, options);
   }
 
@@ -45,7 +50,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
   /** @inheritDoc */
   async _getActivations(options = {}) {
     const formula = options?.execution?._resolveString(this.formula) ?? this.formula;
-    if (formula && this.command) {
+    if (formula) {
       return [new RollActivation({ command: this.command, formula })];
     }
     return [];

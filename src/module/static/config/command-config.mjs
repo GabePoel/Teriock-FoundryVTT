@@ -326,12 +326,21 @@ const commandConfig = {
     label: "TERIOCK.COMMANDS.Earn.label",
     numeric: {
       deal: "TERIOCK.COMMANDS.Earn.deal",
+      options: ["currencies", "debt", "equipmentTypes", "mode"],
       take: "TERIOCK.COMMANDS.Earn.take",
       tooltip: ({ amount }) => _loc("TERIOCK.COMMANDS.Earn.tooltip", { amount: formatGp(amount) }),
     },
     reverse: "pay",
     trigger: true,
-    operations: (actor, { amount, mode }) => [buildUpdateOperation(actor, actor.system.getPayUpdate(-amount, mode))],
+    operations: (
+      actor,
+      { amount, currencies, debt, equipmentTypes, mode },
+    ) => [
+      buildUpdateOperation(
+        actor,
+        actor.system.getMoneyExchangeUpdate(-amount, { currencies, debt, equipmentTypes, mode }),
+      ),
+    ],
   },
   kill: {
     icon: icons.manifest.effect.kill,
@@ -352,12 +361,21 @@ const commandConfig = {
     label: "TERIOCK.COMMANDS.Pay.label",
     numeric: {
       deal: "TERIOCK.COMMANDS.Pay.deal",
+      options: ["currencies", "debt", "equipmentTypes", "mode"],
       take: "TERIOCK.COMMANDS.Pay.take",
       tooltip: ({ amount }) => _loc("TERIOCK.COMMANDS.Pay.tooltip", { amount: formatGp(amount) }),
     },
     reverse: "earn",
     trigger: true,
-    operations: (actor, { amount, mode }) => [buildUpdateOperation(actor, actor.system.getPayUpdate(amount, mode))],
+    operations: (
+      actor,
+      { amount, currencies, debt, equipmentTypes, mode },
+    ) => [
+      buildUpdateOperation(
+        actor,
+        actor.system.getMoneyExchangeUpdate(amount, { currencies, debt, equipmentTypes, mode }),
+      ),
+    ],
   },
   sleep: {
     icon: icons.manifest.effect.sleep,
@@ -797,17 +815,6 @@ const commandConfig = {
       return name
         ? _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name })
         : _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed");
-    },
-  },
-
-  other: {
-    icon: icons.manifest.ui.dice,
-    label: "TERIOCK.COMMANDS.Other.label",
-    numeric: {
-      deal: "TERIOCK.COMMANDS.Other.label",
-      hidden: true,
-      take: "TERIOCK.COMMANDS.Other.label",
-      tooltip: "TERIOCK.COMMANDS.Other.tooltip",
     },
   },
 };

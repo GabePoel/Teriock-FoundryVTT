@@ -2,12 +2,20 @@ import { mixClasses } from "../../utils/_module.mjs";
 import BaseExecution from "../abstract/base-execution/base-execution.mjs";
 import { CommandsExecutionMixin } from "../mixins/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * Execution that rolls one or more commands.
  * @extends {BaseExecution}
  * @mixes CommandsExecution
+ * @property {object} commandOptions
  */
 export default class DealCommandExecution extends mixClasses(BaseExecution, CommandsExecutionMixin) {
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), { commandOptions: new fields.ObjectField() });
+  }
+
   /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments ?? [];
@@ -26,6 +34,11 @@ export default class DealCommandExecution extends mixClasses(BaseExecution, Comm
       return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.CONFIG.command[this.command]?.label });
     }
     return _loc("TERIOCK.DIALOGS.Boost.title");
+  }
+
+  /** @inheritDoc */
+  get rollOptions() {
+    return Object.assign(super.rollOptions, { commandOptions: this.commandOptions });
   }
 
   /**

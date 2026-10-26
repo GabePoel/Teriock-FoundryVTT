@@ -30,7 +30,14 @@ declare global {
       suggestions: string | "none" | "registry";
     };
 
-    export type CurrencyEntry = { conversion: number, label: string, weight: number };
+    export type CurrencyEntry = {
+      conversion: number;
+      equipmentType: Identifier;
+      identifier: Identifier;
+      label: string;
+      symbol: string;
+      weight: number;
+    };
 
     export type StatEntry = {
       abbreviation: string;
@@ -67,8 +74,6 @@ declare global {
     export type CommandNumericEntry = {
       /** Localization string for dealing this */
       deal: string;
-      /** Whether to hide this from lists of numeric commands */
-      hidden?: boolean;
       /** Whether this is an integer */
       integer?: boolean;
       /** A minimum value allowed for this */
@@ -77,6 +82,8 @@ declare global {
       morganti?: boolean;
       /** Whether a blank amount should default to `null` instead of `0` */
       nullable?: boolean;
+      /** Named options that can be passed along with the formula */
+      options?: string[];
       /** Localization string for taking this */
       take: string;
       /** Localization string for taking a specific `{amount}` of this or a function of the options */

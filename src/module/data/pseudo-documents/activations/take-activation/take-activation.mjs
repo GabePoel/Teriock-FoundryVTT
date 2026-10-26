@@ -67,6 +67,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   /** @inheritDoc */
   async primaryAction() {
     const result = await game.teriock.commands.take(this.command, this.actors, {
+      ...this.options,
       amount: this.#amount,
       morganti: this.morganti,
       showDialog: this.#showDialog,
@@ -76,6 +77,9 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   async secondaryAction() {
-    this.#notify(await game.teriock.commands.reverse(this.command, this.actors, { amount: this.#amount }), "reversed");
+    this.#notify(
+      await game.teriock.commands.reverse(this.command, this.actors, { ...this.options, amount: this.#amount }),
+      "reversed",
+    );
   }
 }

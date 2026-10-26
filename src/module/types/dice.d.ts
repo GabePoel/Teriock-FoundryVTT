@@ -26,7 +26,7 @@ declare global {
       targets: DieTarget[];
     };
 
-    export type CommandsRollOptions = BaseRollOptions & { commands: Teriock.Keys.Command[] };
+    export type CommandsRollOptions = BaseRollOptions & { commandOptions: object, commands: Teriock.Keys.Command[] };
 
     export type ThresholdTarget = number | "max" | "min";
 
