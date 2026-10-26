@@ -28,7 +28,7 @@ export default class RollAutomation extends mixClasses(BaseAutomation, TriggerAu
           none: true,
           filter: c => c.numeric,
         }),
-        initial: "damage",
+        initial: null,
         nullable: true,
       }),
       formula: new FormulaField({ deterministic: false, nullable: true, placeholder: _loc("COMMON.None") }),
