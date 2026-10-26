@@ -5,6 +5,7 @@
 /**
  * @template {MixinBase<typeof PlaceableObject>} T
  * @param {T} Base
+ * @category Ethereal
  */
 export default function EtherealLightPlaceableMixin(Base) {
   /** @mixin */

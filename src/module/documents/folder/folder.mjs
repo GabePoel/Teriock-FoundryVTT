@@ -55,7 +55,10 @@ export default class TeriockFolder extends mixClasses(Folder, BaseDocumentMixin)
     return contents;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Hierarchy
+   */
   get contents() {
     return super.contents.filter(d => !d.system?._sup);
   }

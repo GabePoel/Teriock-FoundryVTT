@@ -1,6 +1,7 @@
 import documentBehaviorConfig from "../static/config/document-behavior-config.mjs";
 
 declare global {
+  /** @category Behavior */
   namespace Teriock.Behavior {
     export type SettingsConfig = typeof documentBehaviorConfig;
 

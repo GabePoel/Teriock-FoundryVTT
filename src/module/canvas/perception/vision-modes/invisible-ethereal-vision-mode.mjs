@@ -11,6 +11,7 @@ const { VisionMode } = foundry.canvas.perception;
  * - [Morganti](https://wiki.teriock.com/index.php/Property:Morganti)
  *
  * @returns {VisionMode}
+ * @category Ethereal
  */
 export default function invisibleEtherealVisionMode() {
   return new VisionMode({

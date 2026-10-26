@@ -39,6 +39,7 @@ function settingsSchema(category, FieldClass, options = {}) {
   );
 }
 
+/** @category Behavior */
 export class CommonDocumentSettingsModel extends BaseDataModel {
   /** @type {Teriock.Behavior.DocumentSettingsCategory} */
   static CATEGORY;
@@ -65,6 +66,7 @@ export class CommonDocumentSettingsModel extends BaseDataModel {
  * @template {Teriock.Behavior.DocumentSettingsCategory} C
  * @param {C} category
  * @returns {Teriock.Models.DocumentSettingsModelConstructor<C>}
+ * @category Behavior
  */
 export function DocumentSettingsModelFactory(category) {
   const groups = TERIOCK.CONFIG.documentBehavior.compositions[category];
@@ -90,6 +92,7 @@ export function DocumentSettingsModelFactory(category) {
  * @template {Teriock.Behavior.SettingsCategory} Category
  * @param {Category} category
  * @returns {Teriock.Models.UserSettingsModelConstructor<Category>}
+ * @category Behavior
  */
 export function UserSettingsModelFactory(category) {
   class UserSettingsModel extends BaseDataModel {

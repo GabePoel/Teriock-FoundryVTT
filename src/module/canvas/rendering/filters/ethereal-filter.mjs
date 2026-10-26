@@ -5,6 +5,7 @@ const { AbstractBaseFilter } = foundry.canvas.rendering.filters;
  *
  * Relevant wiki pages:
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
+ * @category Ethereal
  */
 export default class EtherealFilter extends AbstractBaseFilter {
   /** @inheritDoc */

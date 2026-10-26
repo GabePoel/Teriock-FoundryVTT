@@ -172,6 +172,7 @@ foundry.helpers.Hooks.once("init", function() {
   registerSubtypes(pd.expirations, pd.expirations.abstract.BaseExpiration);
 
   CONFIG.ActiveEffect.changeTypes = TERIOCK.CONFIG.change.types;
+  /** @category Hierarchy */
   CONFIG.ActiveEffect.compendiumIndexFields = ["system._sup"];
   CONFIG.ActiveEffect.defaultType = "consequence";
   CONFIG.ActiveEffect.documentClass = documents.TeriockActiveEffect;
@@ -211,6 +212,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Folder.documentClass = documents.TeriockFolder;
 
+  /** @category Hierarchy */
   CONFIG.Item.compendiumIndexFields = ["system._sup"];
   CONFIG.Item.defaultType = "power";
   CONFIG.Item.documentClass = documents.TeriockItem;

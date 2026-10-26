@@ -149,6 +149,7 @@ function inferChildDocumentName(data) {
  * @param {boolean} [options.inplace] Write `system._sup` directly instead of deferring to `_preCreateOperation`.
  * @param {boolean} [options.keepId] Top-level documents keep their `_id`. Used for embedded arrays.
  * @returns {object[]}
+ * @category Hierarchy
  */
 export function expandDocumentDataArray(data = [], supId = null, operation = {}, options = {}) {
   operation.knownSubs ??= new Set();

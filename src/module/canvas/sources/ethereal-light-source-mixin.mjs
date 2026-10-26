@@ -1,6 +1,7 @@
 /**
  * @template {MixinBase<typeof foundry.canvas.sources.BaseLightSource>} T
  * @param {T} Base
+ * @category Ethereal
  */
 export default function EtherealLightSourceMixin(Base) {
   /** @mixin */

@@ -9,7 +9,10 @@ const { AmbientLight } = foundry.canvas.placeables;
  * @inheritDoc
  */
 export default class TeriockAmbientLight extends mixClasses(AmbientLight, EtherealLightPlaceableMixin) {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Ethereal
+   */
   get isEthereal() {
     return this.document?.getFlag("teriock", "isEthereal");
   }

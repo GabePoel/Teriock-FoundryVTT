@@ -8,6 +8,7 @@ import LightDetectionMode from "./light-detection-mode.mjs";
  * - [Cat Sense](https://wiki.teriock.com/index.php/Ability:Cat_Sense)
  * - [Ethereal Senses](https://wiki.teriock.com/index.php/Ability:Ethereal_Senses)
  * - [Spirit Guide](https://wiki.teriock.com/index.php/Ability:Spirit_Guide)
+ * @category Ethereal
  */
 export default class EtherealDetectionMode extends LightDetectionMode {
   /** @inheritDoc */

@@ -92,6 +92,7 @@ export default class BaseDetectionMode extends DetectionMode {
    * @param {TeriockToken} sourceToken
    * @param {TeriockToken} [targetToken]
    * @returns {boolean}
+   * @category Ethereal
    */
   _testEthereal(sourceToken, targetToken) {
     if (targetToken && typeof targetToken?.isEthereal === "boolean") {

@@ -52,7 +52,6 @@ export default class BaseDataModel extends mixClasses(DataModel, AbstractDataMix
   /**
    * Safely prepare data
    * @internal
-   * @category Document
    */
   _safePrepareData() {
     try {

@@ -2,6 +2,7 @@ import { icons } from "../display/_module.mjs";
 
 /**
  * Default values and display data for inheritable document settings.
+ * @category Behavior
  */
 export default {
   categories: {

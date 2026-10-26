@@ -35,6 +35,7 @@ export default function DragDropSheetMixin(Base) {
      * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @param {Teriock.Application.DropEffect} dropEffect
      * @returns {boolean}
+     * @category Hierarchy
      */
     #isSubMove(droppedDocument, dropEffect) {
       if (dropEffect !== "move" || !droppedDocument.documentMetadata?.hierarchy) { return false; }
@@ -50,6 +51,7 @@ export default function DragDropSheetMixin(Base) {
      * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @param {boolean} interactive
      * @returns {Promise<void>}
+     * @category Hierarchy
      */
     async #onMoveSub(droppedDocument, interactive) {
       await foundry.documents.modifyBatch([{
@@ -67,6 +69,7 @@ export default function DragDropSheetMixin(Base) {
      * The sup a dropped document would be given by a sub move.
      * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @returns {ID<TeriockActiveEffect|TeriockActor|TeriockItem>|null}
+     * @category Hierarchy
      */
     #subMoveTarget(droppedDocument) {
       return droppedDocument.documentName === this.document.documentName ? this.document.id : null;
@@ -198,6 +201,7 @@ export default function DragDropSheetMixin(Base) {
      * Validates that a sub move doesn't make a document its own sup.
      * @param {Teriock.Application.DropValidationOptions} options
      * @returns {boolean}
+     * @category Hierarchy
      */
     _validateDropChildCyclic({ document, dropEffect, notify }) {
       return !this.#isSubMove(document, dropEffect) || !document.constructor.checkIfCyclic(this.document, document)

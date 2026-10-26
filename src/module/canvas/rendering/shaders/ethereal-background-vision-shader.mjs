@@ -2,6 +2,7 @@ const { BackgroundVisionShader } = foundry.canvas.rendering.shaders;
 
 /**
  * Simple spooky background vision shader
+ * @category Ethereal
  */
 export default class EtherealBackgroundVisionShader extends BackgroundVisionShader {
   /** @inheritdoc */

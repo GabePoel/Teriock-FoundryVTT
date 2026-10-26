@@ -3,7 +3,10 @@ const { BooleanField } = foundry.data.fields;
 
 /** @inheritDoc */
 export default class TeriockAmbientLightConfig extends AmbientLightConfig {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Ethereal
+   */
   _replaceHTML(result, content, options) {
     const wallsGroup = result.basic?.querySelector(".form-group:has(.form-fields input[name='walls'])");
     if (wallsGroup) {

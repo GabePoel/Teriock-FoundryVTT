@@ -1,6 +1,7 @@
 import { TeriockFolder } from "../documents/_module.mjs";
 
 declare global {
+  /** @category Hierarchy */
   namespace Teriock.Hierarchy {
     /** Index representing a subset of document data. */
     export type Index<Doc> = {

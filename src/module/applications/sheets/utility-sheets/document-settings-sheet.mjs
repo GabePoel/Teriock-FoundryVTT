@@ -54,6 +54,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
    * @param {DataField} schemaField
    * @param {string} [parentPath]
    * @returns {{field: DataField, value: *, localize: boolean, name: string}}
+   * @category Behavior
    */
   #settingsField(schemaField, parentPath = "") {
     const settingsRoot = this.document.system.settings.schema.fieldPath;
@@ -72,6 +73,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
   /**
    * Legend for this document's settings fieldset.
    * @returns {string|undefined}
+   * @category Behavior
    */
   #settingsLegend() {
     const category = this.document.system.settings?.constructor?.CATEGORY;

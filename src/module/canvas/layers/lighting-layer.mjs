@@ -5,6 +5,7 @@ export default class TeriockLightingLayer extends LightingLayer {
   /**
    * Whether the Ethereal is currently visible.
    * @return {boolean}
+   * @category Ethereal
    */
   get isEtherealVisible() {
     const visionSources = game.canvas.effects.visionSources;

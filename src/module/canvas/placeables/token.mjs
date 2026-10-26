@@ -22,7 +22,10 @@ MINION_TURN_MARKER_FILTER.saturate(-1, false);
  * @property {TeriockTokenDocument} document
  */
 export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceableMixin) {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Ethereal
+   */
   get isEthereal() {
     return this.document?.hasStatusEffect("ethereal");
   }

@@ -12,6 +12,7 @@ const DESATURATION = { postProcessingModes: ["SATURATION"], uniforms: { saturati
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  *
  * @returns {VisionMode}
+ * @category Ethereal
  */
 export default function etherealVisionMode() {
   return new VisionMode({

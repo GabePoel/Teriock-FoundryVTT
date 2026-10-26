@@ -2,6 +2,7 @@ const { ColorationVisionShader } = foundry.canvas.rendering.shaders;
 
 /**
  * Simple spooky coloration vision shader
+ * @category Ethereal
  */
 export default class EtherealColorationVisionShader extends ColorationVisionShader {
   /** @inheritdoc */

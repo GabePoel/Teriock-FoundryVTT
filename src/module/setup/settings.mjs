@@ -188,6 +188,7 @@ export const menus = {
     },
     icon: TERIOCK.DISPLAY.icons.manifest.settings.display,
   },
+  /** @category Behavior */
   documentBehavior: {
     format: "tabs",
     groups: Object.fromEntries(
