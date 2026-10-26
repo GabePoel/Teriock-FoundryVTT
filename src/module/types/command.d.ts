@@ -34,9 +34,9 @@ declare global {
       apply?: boolean;
       boost?: boolean;
       boosts?: number;
+      command?: Teriock.Keys.Command;
       crit?: boolean;
       document?: TeriockActiveEffect | TeriockItem;
-      command?: Teriock.Keys.Command;
       reverse?: boolean;
       rollData?: object;
     };

@@ -53,9 +53,9 @@ declare global {
       | ActivityTrigger
       | AttunableTrigger
       | CombatTrigger
+      | CommandTrigger
       | ConsequenceTrigger
       | EquipmentTrigger
-      | CommandTrigger
       | MountTrigger
       | ProtectionTrigger
       | TimeTrigger;

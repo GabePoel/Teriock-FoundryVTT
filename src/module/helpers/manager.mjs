@@ -9,14 +9,15 @@ import { CommandManager } from "./interaction/_module.mjs";
  * Singleton class that manages Teriock-specific states and functionality.
  */
 export default class TeriockManager {
+  constructor() {
+    Object.defineProperties(this, {
+      commands: { configurable: false, value: new CommandManager(), writable: false },
+      identifiers: { configurable: false, value: new IdentifiersRegistry(), writable: false },
+    });
+  }
+
   /** @type {TeriockActiveEffect<"ability">[]} */
   #basicAbilities = [];
-
-  /** @type {CommandManager} */
-  #commands = new CommandManager();
-
-  /** @type {IdentifiersRegistry} */
-  #identifiers = new IdentifiersRegistry();
 
   /** @type {ApplicationV2[]} */
   #minimizedApplications = [];
@@ -45,10 +46,22 @@ export default class TeriockManager {
   actorsNeedingBasicAbilities = new Set();
 
   /**
+   * The singleton command manager.
+   * @type {CommandManager}
+   */
+  commands;
+
+  /**
    * Whether i18n localization is ready.
    * @type {boolean}
    */
   i18nReady = false;
+
+  /**
+   * The singleton identifiers registry.
+   * @type {IdentifiersRegistry}
+   */
+  identifiers;
 
   /**
    * Resolves when all Handlebars template aliases from `templates.json` are registered.
@@ -62,22 +75,6 @@ export default class TeriockManager {
    */
   get basicAbilities() {
     return this.#basicAbilities;
-  }
-
-  /**
-   * The singleton command manager.
-   * @returns {CommandManager}
-   */
-  get commands() {
-    return this.#commands;
-  }
-
-  /**
-   * The singleton identifiers registry.
-   * @returns {IdentifiersRegistry}
-   */
-  get identifiers() {
-    return this.#identifiers;
   }
 
   /**
@@ -124,8 +121,8 @@ export default class TeriockManager {
    * Initialize the identifiers registry.
    */
   initializeIdentifiers() {
-    this.#identifiers._initialize();
-    this.#identifiers.initializing.then(async () => {
+    this.identifiers._initialize();
+    this.identifiers.initializing.then(async () => {
       this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities"))?.children.documentsByType.ability
         ?? [];
       for (const t of game.tables) { t.results.forEach(r => r.prepareIdentifiersData()); }

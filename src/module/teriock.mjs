@@ -36,7 +36,7 @@ foundry.helpers.Hooks.once("init", function() {
   // Register Game Shortcuts
   // =======================
 
-  game.teriock = new helpers.TeriockManager();
+  Object.defineProperty(game, "teriock", { enumerable: true, value: new helpers.TeriockManager() });
 
   // Configure Time Constants
   // ========================

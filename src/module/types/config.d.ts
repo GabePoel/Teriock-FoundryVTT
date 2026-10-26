@@ -36,12 +36,12 @@ declare global {
       abbreviation: string;
       bar?: { class: string, initial: number, lockInputs?: boolean, max?: number, min?: number, temp?: boolean };
       color?: { base: string, dark: string, darkest: string, light: string };
+      command: Teriock.Keys.Command;
       costIdentifier: TypedIdentifier;
       /** DSN flavor key */
       die?: string;
       hacks?: boolean;
       icon: string;
-      command: Teriock.Keys.Command;
       label: string;
       morganti?: boolean;
       multiplier: number;

@@ -77,10 +77,11 @@ declare global {
     packs: Collection<string, CompendiumCollection<TeriockDocument>>;
     scenes: WorldCollection<TeriockScene> & Scenes;
     tables: WorldCollection<TeriockRollTable> & RollTables;
-    teriock: TeriockManager;
     tooltip: TeriockTooltipManager;
     user: TeriockUser;
     users: TeriockUsers;
+
+    readonly teriock: TeriockManager;
   }
 
   // @ts-expect-error Redeclare blocked scope

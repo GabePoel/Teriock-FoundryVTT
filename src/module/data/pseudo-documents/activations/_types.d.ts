@@ -1,3 +1,4 @@
+import commandConfig from "../../../static/config/command-config.mjs";
 import {
   AddDocumentsActivation,
   AttackActivation,
@@ -11,7 +12,6 @@ import {
   TakeActivation,
   UseDocumentsActivation,
 } from "./_module.mjs";
-import commandConfig from "../../../static/config/command-config.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
 type CommandActivationKey = {
