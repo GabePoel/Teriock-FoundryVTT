@@ -150,6 +150,7 @@ function inferChildDocumentName(data) {
  * @param {boolean} [options.keepId] Top-level documents keep their `_id`. Used for embedded arrays.
  * @returns {object[]}
  * @category Hierarchy
+ * @category Dependents
  */
 export function expandDocumentDataArray(data = [], supId = null, operation = {}, options = {}) {
   operation.knownSubs ??= new Set();

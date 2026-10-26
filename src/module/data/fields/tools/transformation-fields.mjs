@@ -14,6 +14,7 @@ const RESET_STATS = objectMap(TERIOCK.CONFIG.stat, undefined, { filter: v => v.t
 /**
  * Species transformation fields.
  * @returns {{img: FilePathField, ring: BooleanField}}
+ * @category Transformation
  */
 export function speciesTransformationFields() {
   return {
@@ -49,6 +50,7 @@ export function speciesTransformationFields() {
 /**
  * Actor transformation fields.
  * @returns {{img: FilePathField, ring: BooleanField} & {primary: LocalDocumentField}}
+ * @category Transformation
  */
 export function actorTransformationConfig() {
   return Object.assign(speciesTransformationFields(), {
@@ -61,6 +63,7 @@ export function actorTransformationConfig() {
 /**
  * Automation transformation fields.
  * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, resets: SetField, suppress: SetField}}
+ * @category Transformation
  */
 export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {

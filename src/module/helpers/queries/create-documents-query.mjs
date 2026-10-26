@@ -3,6 +3,7 @@
  * created documents instead of the documents themselves.
  * @param {Teriock.Queries.CreateDocumentsData} queryData
  * @returns {Promise<UUID<Document>[]>}
+ * @category Delegation
  */
 export default async function createDocumentsQuery(queryData) {
   const Cls = foundry.utils.getDocumentClass(queryData.documentName);

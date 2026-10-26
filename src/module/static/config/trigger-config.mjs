@@ -2,6 +2,7 @@ import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { objectMap } from "../../utils/_module.mjs";
 import commandConfig from "./command-config.mjs";
 
+/** @category Triggers */
 const triggerConfig = {
   activity: {
     alwaysAvailable: true,

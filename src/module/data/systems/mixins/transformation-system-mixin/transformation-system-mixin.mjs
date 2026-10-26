@@ -39,6 +39,7 @@ function disabledStatDiceFlag(stat) {
  * @param {T} Base
  * @see {ActorTransformationPart}
  * @see {SpeciesTransformationPart}
+ * @category Transformation
  */
 export default function TransformationSystemMixin(Base) {
   /**

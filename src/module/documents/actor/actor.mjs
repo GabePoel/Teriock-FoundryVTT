@@ -43,7 +43,10 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     };
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Delegation
+   */
   static async createDocuments(data = [], operation = {}) {
     if (operation.asGM && !game.user.isGM && !operation.dryRun) { return super.createDocuments(data, operation); }
     for (const d of data) {
@@ -296,6 +299,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    * @param {Teriock.System.TriggerScope} scope
    * @returns {Promise<void>}
    * @internal
+   * @category Triggers
    */
   async _dispatchTrigger(trigger, scope) {
     scope.chatDataBySource ??= {};
@@ -386,6 +390,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    * The messages are created by {@link triggerUser} which might be a different User than the one that ran this.
    * @param {Teriock.System.TriggerScope} scope
    * @returns {Promise<void>}
+   * @category Triggers
    */
   async createTriggeredMessages(scope = {}) {
     const data = [];
@@ -411,7 +416,10 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     return super.getTokenDocument(data, options);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Groups
+   */
   prepareData() {
     const wasDefeated = this.statuses.has(CONFIG.specialStatusEffects.DEFEATED);
     super.prepareData();
@@ -425,6 +433,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   /**
    * Data preparation that happens before `prepareEmbeddedDocuments()`. This initializes dependents collections before
    * other data is prepared.
+   * @category Dependents
    */
   prepareDependeeDocuments() {
     for (const e of this.allApplicableEffects()) { e.dependents.clear(); }

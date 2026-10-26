@@ -19,6 +19,7 @@ function getSharedWords(lists) {
  * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes UncommonSystem
+ * @category Groups
  */
 export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin) {
   /** @inheritDoc */

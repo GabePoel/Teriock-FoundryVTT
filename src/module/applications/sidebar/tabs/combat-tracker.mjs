@@ -16,6 +16,7 @@ export default class TeriockCombatTracker
    * Toggle whether a CombatantGroup's members are shown.
    * @param {MouseEvent} event
    * @param {HTMLElement} target
+   * @category Groups
    */
   static #onToggleGroup(event, target) {
     if (event.target.closest("button, .token-initiative")) { return; }
@@ -54,6 +55,7 @@ export default class TeriockCombatTracker
 
   /**
    * Make the core target keybinding target every member of a hovered CombatantGroup.
+   * @category Groups
    */
   static registerGroupTargeting() {
     const action = game.keybindings.actions.get("core.target");
@@ -174,6 +176,7 @@ export default class TeriockCombatTracker
   /**
    * Get context menu entries for CombatantGroups in the tracker.
    * @returns {ContextMenuEntry[]}
+   * @category Groups
    */
   _getGroupContextOptions() {
     const getGroup = li => this.viewed?.groups.get(li.closest("[data-group-id]")?.dataset.groupId);
@@ -472,6 +475,7 @@ export default class TeriockCombatTracker
    * Mark a controlled/uncontrolled Combatant and its CombatantGroup.
    * @param {TeriockCombatant} combatant
    * @param {boolean} controlled
+   * @category Groups
    */
   markCombatantControlled(combatant, controlled) {
     const group = combatant.group;
@@ -492,6 +496,7 @@ export default class TeriockCombatTracker
    * Toggle targeting the tokens of the hovered CombatantGroup.
    * @param {boolean} releaseOthers
    * @returns {boolean} Whether there was a hovered CombatantGroup to target.
+   * @category Groups
    */
   targetHoveredGroup(releaseOthers) {
     const tokens = this.hoveredTokens;

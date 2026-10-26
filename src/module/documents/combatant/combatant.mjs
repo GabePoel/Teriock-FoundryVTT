@@ -45,6 +45,7 @@ export default class TeriockCombatant
   /**
    * Whether this is the commander of its CombatantGroup.
    * @returns {boolean}
+   * @category Groups
    */
   get isCommander() {
     return this.group?.type === "commanded" && this.group.system.commander === this;
@@ -53,6 +54,7 @@ export default class TeriockCombatant
   /**
    * Whether this is a minion of its CombatantGroup's commander.
    * @returns {boolean}
+   * @category Groups
    */
   get isMinion() {
     return this.group?.type === "commanded" && this.group.system.commander !== this;
@@ -61,6 +63,7 @@ export default class TeriockCombatant
   /**
    * The Combatants that act on this Combatant's turn.
    * @returns {TeriockCombatant[]}
+   * @category Groups
    */
   get turnMembers() {
     return this.group?.system.turnMembers ?? [this];
@@ -88,7 +91,10 @@ export default class TeriockCombatant
     return InitiativeExecution.getFormula(this.initiativeModel);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Groups
+   */
   _prepareGroup() {
     // Fix for core leaving the group even when it doesn't exist.
     this.group = null;

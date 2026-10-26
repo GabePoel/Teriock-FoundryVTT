@@ -125,6 +125,7 @@ export default class BaseDetectionMode extends DetectionMode {
    * @param {TeriockTokenDocument} sourceDocument
    * @param {TeriockTokenDocument} [targetDocument]
    * @returns {boolean}
+   * @category Perception
    */
   _testStatuses(type, sourceDocument, targetDocument) {
     const blockers = this.constructor.BLOCKING_STATUSES;

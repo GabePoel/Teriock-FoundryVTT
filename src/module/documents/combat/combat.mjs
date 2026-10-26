@@ -71,6 +71,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @param {ID<TeriockCombatantGroup>[]} [changes.deletes] - CombatantGroups to delete.
    * @param {Record<ID<TeriockCombatant>, ID|null>} [changes.groupIds] - New CombatantGroup of each Combatant.
    * @returns {Promise<void>}
+   * @category Groups
    */
   async #modifyGroups({ create = [], deletes = [], groupIds = {} }) {
     const updates = Object.entries(groupIds).map(([_id, group]) => ({ _id, group }));
@@ -85,6 +86,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
 
   /**
    * Rebuild CombatantGroup membership.
+   * @category Groups
    */
   #prepareGroups() {
     for (const group of this.groups) { group.reset(); }
@@ -107,6 +109,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @param {TeriockCombatant} combatant
    * @returns {Promise<void>}
    * @version 369
+   * @category Groups
    */
   async #triggerMemberRegionEvents(eventName, context, combatant) {
     const promises = [];
@@ -201,6 +204,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * Refresh turn order after modifying CombatantGroups.
    * @param {string} collection
    * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
+   * @category Groups
    */
   _onModifyGroups(collection, prior) {
     if (collection === "groups") {
@@ -271,6 +275,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * Disband a CombatantGroup.
    * @param {TeriockCombatantGroup} group
    * @returns {Promise<void>}
+   * @category Groups
    */
   async disbandGroup(group) {
     await this.#modifyGroups({
@@ -289,6 +294,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @param {CombatantGroupType} [options.type]
    * @param {Partial<ApplicationPosition>} [options.position] - Position of the creation dialog
    * @returns {Promise<void>}
+   * @category Groups
    */
   async joinGroup(source, target, { name, position, type } = {}) {
     const group = target.documentName === "CombatantGroup" ? target : target.group;
@@ -335,6 +341,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * Remove a Combatant from its CombatantGroup.
    * @param {TeriockCombatant} combatant
    * @returns {Promise<void>}
+   * @category Groups
    */
   async leaveGroup(combatant) {
     if (combatant.group) { await this.#modifyGroups(this.#leaveChanges([combatant])); }
@@ -400,6 +407,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * Make a Combatant the commander of its CombatantGroup.
    * @param {TeriockCombatant} combatant
    * @returns {Promise<void>}
+   * @category Groups
    */
   async setCommander(combatant) {
     if (combatant.group?.type === "commanded") { await combatant.group.update({ "system.commanderId": combatant.id }); }
@@ -415,6 +423,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /**
    * @inheritDoc
    * @version 369
+   * @category Groups
    */
   setupTurns() {
     this.turns ||= [];

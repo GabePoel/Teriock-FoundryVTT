@@ -27,7 +27,10 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
     );
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Groups
+   */
   get _dialogDocuments() {
     const docs = super._dialogDocuments;
     if (this.source.documentName === "CombatantGroup") {
@@ -115,6 +118,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    * @param {Record<string, any>} data
    * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.InitiativeExecutionOptions>} [options]
    * @returns {Record<string, any>}
+   * @category Groups
    */
   _initializeSource(data, options = {}) {
     this.roller = options.roller ?? options.source?.system.turnHolder ?? options.source;

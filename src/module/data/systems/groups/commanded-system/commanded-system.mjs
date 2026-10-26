@@ -8,6 +8,7 @@ import BaseGroupSystem from "../base-group-system/base-group-system.mjs";
  *
  * Relevant wiki pages:
  * - [Minions](https://wiki.teriock.com/index.php?title=Core:Minions)
+ * @category Groups
  */
 export default class CommandedSystem extends BaseGroupSystem {
   /** @inheritDoc */

@@ -658,6 +658,7 @@ export default class BaseExecution extends BaseDataModel {
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {Promise<boolean|undefined>}
+   * @category Triggers
    */
   async fireTrigger(trigger, scope = {}) {
     return this.actor?.fireTrigger(trigger, this.getScope(scope));

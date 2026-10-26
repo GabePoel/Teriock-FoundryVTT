@@ -1,5 +1,6 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
+/** @category Transformation */
 const config = {
   // no sort
   level: {

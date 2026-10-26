@@ -308,6 +308,7 @@ export default function CommonDocumentMixin(Base) {
      * @param {Teriock.System.Trigger} trigger
      * @param {Partial<Teriock.System.TriggerScope>} [scope] - Explicit scope that wins over the generated one.
      * @returns {Promise<boolean>}
+     * @category Triggers
      */
     async fireTrigger(trigger, scope = {}) {
       const fullScope = { ...this.getScope(), source: this, ...scope, trigger };

@@ -16,6 +16,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
   /**
    * Select the primary transformation species for this consequence.
    * @returns {Promise<void>}
+   * @category Transformation
    */
   static async #onSelectPrimarySpecies() {
     if (!this.isEditable || !this.document.system.isTransformation) { return; }
@@ -55,7 +56,10 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
     },
   };
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Transformation
+   */
   async _prepareContext(options = {}) {
     const transformationPaths = ["enabled"];
     const showPrimarySpecies = this.document.system.transformation.enabled;

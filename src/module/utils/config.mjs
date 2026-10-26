@@ -24,6 +24,7 @@ export function wikiIndexToConfig(indexKey, localizationPrefix) {
  * Get the trigger config group that a trigger belongs to.
  * @param {Teriock.System.Trigger} trigger
  * @returns {Teriock.Fields.DynamicChoiceGroup|undefined}
+ * @category Triggers
  */
 export function getTriggerGroup(trigger) {
   return Object.values(TERIOCK.CONFIG.trigger).find(g => g.choices?.[trigger]);

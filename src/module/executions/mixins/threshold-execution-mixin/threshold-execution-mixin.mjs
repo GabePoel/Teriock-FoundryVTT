@@ -111,6 +111,7 @@ export default function ThresholdExecutionMixin(Base) {
     /**
      * Whether a mob can share this roll.
      * @returns {boolean}
+     * @category Groups
      */
     get canShareRoll() {
       return this.isRoll && this.combatant?.group?.type === "mob";

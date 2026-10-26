@@ -57,6 +57,7 @@ export default function ActorTokenPart(Base) {
 
     /**
      * Prepare token vision changes.
+     * @category Perception
      */
     _prepareTokenVision() {
       const angle = 360;

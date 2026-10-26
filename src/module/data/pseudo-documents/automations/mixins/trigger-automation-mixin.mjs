@@ -5,6 +5,7 @@ import { TriggerMechanicMixin } from "../../mixins/_module.mjs";
  * Automation that hooks this into triggers.
  * @template {MixinBase} T
  * @param {T} Base
+ * @category Triggers
  */
 export default function TriggerAutomationMixin(Base) {
   /**

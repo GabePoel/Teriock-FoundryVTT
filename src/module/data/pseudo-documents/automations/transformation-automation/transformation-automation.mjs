@@ -8,6 +8,7 @@ import { BaseAutomation } from "../abstract/_module.mjs";
  * @extends {BaseAutomation}
  * @mixes SelectionPseudoDocument
  * @mixes OverrideCompetenceMechanic
+ * @category Transformation
  */
 export default class TransformationAutomation
   extends mixClasses(BaseAutomation, SelectionPseudoDocumentMixin, OverrideCompetencePseudoDocumentMixin)

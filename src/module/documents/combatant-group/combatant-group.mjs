@@ -9,6 +9,7 @@ const { CombatantGroup } = foundry.documents;
  * @extends {CombatantGroup}
  * @mixes BaseDocument
  * @mixes PanelData
+ * @category Groups
  */
 export default class TeriockCombatantGroup
   extends mixClasses(CombatantGroup, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin)

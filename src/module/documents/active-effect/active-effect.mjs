@@ -84,7 +84,10 @@ export default class TeriockActiveEffect
       : _loc("TERIOCK.SYSTEMS.BaseEffect.PANELS.noTimeLimit");
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   _configure(options = {}) {
     Object.defineProperties(this, {
       /**
@@ -99,7 +102,10 @@ export default class TeriockActiveEffect
     super._configure(options);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   _onCreate(data, options, userId) {
     const dependents = foundry.utils.getProperty(options, `dependents.${this.id}`);
     if (this.checkEditor(userId) && this.actor && dependents?.length) {
@@ -108,7 +114,10 @@ export default class TeriockActiveEffect
     super._onCreate(data, options, userId);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if (this.checkEditor(userId) && this.actor && this.dependents.size) {
@@ -116,7 +125,10 @@ export default class TeriockActiveEffect
     }
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
@@ -140,7 +152,10 @@ export default class TeriockActiveEffect
     return out[0];
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
     if (embeddedName === "Item") { return this.getCreateDependentDocumentsOperation(embeddedName, data, operation); }
     return super.getCreateChildDocumentsOperation(embeddedName, data, operation);
@@ -153,6 +168,7 @@ export default class TeriockActiveEffect
    * @param {object[]} data
    * @param {Partial<DatabaseCreateOperation>} operation
    * @returns {Partial<DatabaseCreateOperation>|null}
+   * @category Dependents
    */
   getCreateDependentDocumentsOperation(embeddedName, data = [], operation = {}) {
     if (!this.actor) { return null; }
@@ -226,7 +242,10 @@ export default class TeriockActiveEffect
     delete this._cache.isReference;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   toObject(source = true) {
     return Object.assign(super.toObject(source), { dependents: this.dependents.map(d => d.toObject(source)) });
   }

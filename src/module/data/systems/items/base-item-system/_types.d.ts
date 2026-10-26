@@ -8,7 +8,10 @@ declare module "./base-item-system.mjs" {
     disabled: boolean;
     /** <schema> Text description of flaws */
     flaws: string;
-    /** <schema> ID of the effect this depends on */
+    /**
+     * <schema> ID of the effect this depends on
+     * @category Dependents
+     */
     _dep: ID<TeriockActiveEffect> | null;
 
     readonly parent: TeriockItem;

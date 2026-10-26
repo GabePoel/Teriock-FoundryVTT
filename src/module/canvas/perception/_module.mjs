@@ -10,6 +10,7 @@ import * as vision from "./vision-modes/_module.mjs";
  * Detection modes
  *
  * @type {Record<string, BaseDetectionMode>}
+ * @category Perception
  */
 export const detectionModes = {
   /** Overwrite default basic sight */
@@ -101,6 +102,7 @@ export const detectionModes = {
  * Vision modes
  *
  * @type {Record<string, VisionMode>}
+ * @category Perception
  */
 export const visionModes = {
   /** Dead vision mode - everything turns intensely red */

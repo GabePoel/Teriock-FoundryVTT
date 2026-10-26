@@ -33,6 +33,7 @@ export default function BaseDocumentMixin(Base) {
     /**
      * Mutate an operation that's being conducted as the GM.
      * @param {DatabaseWriteOperation & Teriock.System._Operation} operation
+     * @category Delegation
      */
     static _cleanGMOperation(operation) {
       delete operation.asGM;
@@ -144,6 +145,7 @@ export default function BaseDocumentMixin(Base) {
      * @param {object[]} data
      * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
      * @inheritDoc
+     * @category Delegation
      */
     static async createDocuments(data = [], operation = {}) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {
@@ -189,6 +191,7 @@ export default function BaseDocumentMixin(Base) {
      * @param {string[]} ids
      * @param {Partial<Omit<DatabaseDeleteOperation, "ids"> & Teriock.System._Operation>} operation
      * @inheritDoc
+     * @category Delegation
      */
     static async deleteDocuments(ids = [], operation = {}) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {
@@ -223,6 +226,7 @@ export default function BaseDocumentMixin(Base) {
      * @param {object[]} updates
      * @param {Partial<Omit<DatabaseUpdateOperation, "updates"> & Teriock.System._Operation>} operation
      * @inheritDoc
+     * @category Delegation
      */
     static async updateDocuments(updates = [], operation = {}) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {

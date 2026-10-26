@@ -4,12 +4,14 @@ import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 const { Token } = foundry.canvas.placeables;
 const { TokenTurnMarker } = foundry.canvas.placeables.tokens;
 
-/*
+/**
  * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
  * @type {{global: Set<Teriock.Keys.Condition>, local: Set<Teriock.Keys.Condition>}}
+ * @category Perception
  */
 const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
 
+/** @category Groups */
 const MINION_TURN_MARKER_FILTER = new PIXI.ColorMatrixFilter();
 MINION_TURN_MARKER_FILTER.saturate(-1, false);
 
@@ -61,7 +63,10 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
     return super._getBarColors(index, data);
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Perception
+   */
   _onApplyStatusEffect(statusId, active) {
     if (DETECTION_STATUSES.local.has(statusId)) { this.initializeVisionSource(); }
     if (DETECTION_STATUSES.global.has(statusId)) { canvas.perception.update({ refreshVision: true }); }
@@ -85,6 +90,7 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
   /**
    * @inheritDoc
    * @version 369
+   * @category Groups
    */
   _refreshTurnMarker() {
     // Should a Turn Marker be active?

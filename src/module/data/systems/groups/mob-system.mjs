@@ -3,6 +3,7 @@ import BaseGroupSystem from "./base-group-system/base-group-system.mjs";
 
 /**
  * A bunch of guys that share the same turn.
+ * @category Groups
  */
 export default class MobSystem extends BaseGroupSystem {
   /** @inheritDoc */

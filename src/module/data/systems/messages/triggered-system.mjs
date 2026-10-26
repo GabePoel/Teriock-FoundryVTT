@@ -3,6 +3,7 @@ import InteractiveSystem from "./interactive-system/interactive-system.mjs";
 
 /**
  * Chat message data model for triggered automation prompts.
+ * @category Triggers
  */
 export default class TriggeredSystem extends InteractiveSystem {
   /** @inheritDoc */

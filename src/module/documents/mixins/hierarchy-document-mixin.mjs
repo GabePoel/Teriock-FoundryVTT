@@ -155,6 +155,7 @@ export default function HierarchyDocumentMixin(Base) {
      * @param {object|HierarchyDocument[]} data
      * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
      * @returns {Promise<HierarchyDocument[]>}
+     * @category Delegation
      */
     static async createDocuments(data = [], operation = {}) {
       if (typeof operation.cachedKeepId === "boolean") {

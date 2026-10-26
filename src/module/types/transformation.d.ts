@@ -3,6 +3,7 @@ import statConfig from "../static/config/stat-config.mjs";
 import transformationConfig from "../static/config/transformation-config.mjs";
 
 declare global {
+  /** @category Transformation */
   namespace Teriock.Transformation {
     export type SpeciesTransformationConfig = {
       /** <schema> Overriding image to apply */

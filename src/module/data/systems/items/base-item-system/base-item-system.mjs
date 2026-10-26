@@ -37,7 +37,10 @@ export default class BaseItemSystem
     });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   static migrateData(source, options) {
     if (source._dep && source._dep.length !== 16) { delete source._dep; }
     return super.migrateData(source, options);
@@ -61,6 +64,7 @@ export default class BaseItemSystem
   /**
    * If this is suppressed due to its dependee being inactive.
    * @returns {boolean}
+   * @category Dependents
    */
   _isSuppressedDependee() {
     return this.parent.dependee?.active === false;

@@ -3,6 +3,7 @@
  * updated documents instead of the documents themselves.
  * @param {Teriock.Queries.UpdateDocumentsData} queryData
  * @returns {Promise<UUID<Document>[]>}
+ * @category Delegation
  */
 export default async function updateDocumentsQuery(queryData) {
   const Cls = foundry.utils.getDocumentClass(queryData.documentName);

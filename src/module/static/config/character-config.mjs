@@ -60,6 +60,7 @@ export default {
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
     },
   },
+  /** @category Perception */
   sense: {
     blind: {
       detectionMode: "blindFighting",

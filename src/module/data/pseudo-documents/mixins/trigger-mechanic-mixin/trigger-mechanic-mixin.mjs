@@ -12,6 +12,7 @@ const { fields } = foundry.data;
  * Adds the trigger events a {@link MechanicPseudoDocument} responds to.
  * @template {MixinBase} T
  * @param {T} Base
+ * @category Triggers
  */
 export default function TriggerMechanicMixin(Base) {
   /**

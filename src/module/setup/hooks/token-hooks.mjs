@@ -7,6 +7,7 @@
  * @param {TeriockToken} token
  * @param {boolean} controlled
  * @see {controlToken}
+ * @category Groups
  */
 function markCombatantsControlled(token, controlled) {
   for (const combatant of ui.combat?.viewed?.getCombatantsByToken(token.document) ?? []) {

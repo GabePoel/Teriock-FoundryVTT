@@ -18,6 +18,7 @@ const { fields } = foundry.data;
  * @param {T} Base
  * @see {SpeciesTransformationPart}
  * @see {TransformationSystemMixin}
+ * @category Transformation
  */
 export default function ActorTransformationPart(Base) {
   /**

@@ -19,6 +19,7 @@ const { fields } = foundry.data;
  *
  * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
+ * @category Perception
  */
 export default function ActorSensesPart(Base) {
   /**

@@ -122,6 +122,7 @@ foundry.helpers.Hooks.once("init", function() {
   // Configure Canvas
   // ================
 
+  /** @category Perception */
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     const id = CONFIG.Canvas.detectionModes[key]?.id;
     if (!["basicSight", "lightPerception"].includes(id)) { delete CONFIG.Canvas.detectionModes[key]; }
@@ -327,6 +328,7 @@ foundry.helpers.Hooks.once("init", function() {
   // Configure Queries
   // =================
 
+  /** @category Delegation */
   Object.assign(CONFIG.queries, helpers.queries);
 
   // Register Settings
@@ -415,6 +417,7 @@ Hooks.once("ready", () => {
   );
   game.teriock.initializeIdentifiers();
   applications.ux.TeriockDragDrop.registerGlobalDragHandler();
+  /** @category Groups */
   applications.sidebar.tabs.TeriockCombatTracker.registerGroupTargeting();
 });
 

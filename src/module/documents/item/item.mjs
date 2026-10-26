@@ -35,6 +35,7 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   /**
    * This document's dependee.
    * @type {TeriockActiveEffect|null}
+   * @category Dependents
    */
   dependee;
 
@@ -64,7 +65,10 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
     return this.system.disabled;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   get master() {
     return this.dependee || super.master;
   }
@@ -114,7 +118,10 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
     foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
   prepareBaseData() {
     this.dependee = this.actor?.effects.get(this.system._dep) ?? null;
     this.dependee?.dependents.set(this.id, this);

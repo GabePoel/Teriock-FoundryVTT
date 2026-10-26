@@ -9,6 +9,7 @@ import { TeriockDocumentSheet } from "../api/_module.mjs";
 /**
  * The CombatantGroup configuration application.
  * @property {TeriockCombatantGroup} document
+ * @category Groups
  */
 export default class CombatantGroupConfig extends TeriockDocumentSheet {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
