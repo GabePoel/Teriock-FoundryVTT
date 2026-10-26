@@ -5,6 +5,7 @@
       data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.tooltip"}}'
     >
       {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.competence.label"}}
+      {{infoIcon "core:competence"}}
     </div>
     <div class="tradecraft-panel-name field-panel-header gi3">
       <span data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.name.tooltip"}}'>{{ field.label }}</span>
@@ -24,7 +25,7 @@
     {{#each field.tradecrafts as |tradecraft name|}}
       <div
         class="tradecraft-container tgrid gi6"
-        data-tooltip-class="teriock-no-tables"
+        data-tooltip-class="teriock-no-table"
         {{#if (and (not (eq ../index "artisan")) (not (eq ../index "scholar")) (not (eq ../index "p1")))}}
           data-tooltip-direction="RIGHT"
         {{else}}

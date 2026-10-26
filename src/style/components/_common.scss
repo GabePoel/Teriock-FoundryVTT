@@ -65,6 +65,7 @@ table {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   flex-direction: column;
   padding: 0.5em;
+  position: relative;
 }
 
 .toutline {
@@ -126,13 +127,18 @@ table {
 
 .teriock-info-icon {
   color: var(--color-text-subtle);
-  font-size: 0.875em;
+  cursor: pointer;
+  font-size: var(--font-size-12);
   position: absolute;
   right: 0.25em;
   top: 0.25em;
 
   &:hover {
     color: var(--color-text-primary);
+  }
+
+  &:active {
+    color: var(--color-text-subtle);
   }
 
   .actor-stats > & {
@@ -144,4 +150,17 @@ table {
 .teriock-block-display:has(> .teriock-info-icon),
 .actor-stats:has(> .teriock-info-icon) {
   position: relative;
+}
+
+.tsubtle:has(> .teriock-info-icon),
+.tradecraft-panel-symbol:has(> .teriock-info-icon) {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  > .teriock-info-icon {
+    margin-left: 0.25em;
+    position: static;
+  }
 }

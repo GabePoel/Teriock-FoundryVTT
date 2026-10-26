@@ -2,7 +2,7 @@
   <div class="defense-box">
     <div class="actor-stats defense-box-main">
       <div class="actor-stat">
-        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}}</div>
+        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.CoverBox.label"}} {{infoIcon "core:cover"}}</div>
         <button
           id="{{ @root/appId }}-cover"
           class="actor-stat-value updatable"
@@ -33,7 +33,10 @@
       </div>
 
       <div class="actor-stat">
-        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}</div>
+        <div class="tsubtle">
+          {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}
+          {{infoIcon "core:armor-class"}}
+        </div>
         <button
           id="{{ @root/appId }}-ac"
           class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.ac"}}'
@@ -51,7 +54,13 @@
       </div>
 
       <div class="actor-stat">
-        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.label"}}</div>
+        <div class="tsubtle">
+          {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.label"}}
+          {{infoIcon
+            "core:block-interaction"
+            noImg=true
+          }}
+        </div>
         <button
           id="{{ @root/appId }}-bv"
           class='actor-stat-value affix updatable {{formClasses @root/document path="system.defense.bv"}}'
@@ -150,7 +159,10 @@
     <div class="defense-box">
       <div class="actor-stats">
         <div class="actor-stat">
-          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}</div>
+          <div class="tsubtle">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ActionBox.label"}}
+            {{infoIcon "core:active-maneuvers"}}
+          </div>
           {{numberInput
             actions
             classes="actor-combatant-input actor-stat-value updatable"
@@ -163,7 +175,10 @@
           }}
         </div>
         <div class="actor-stat">
-          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
+          <div class="tsubtle">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}
+            {{infoIcon "core:reactive-maneuvers"}}
+          </div>
           <button
             id="{{ @root/appId }}-reaction"
             class="actor-stat-value updatable"
@@ -176,7 +191,10 @@
           </button>
         </div>
         <div class="actor-stat">
-          <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
+          <div class="tsubtle">
+            {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}
+            {{infoIcon "core:multiple-attacks"}}
+          </div>
           {{formInput
             combatantFields.attackPenalty
             value=attackPenalty
@@ -196,7 +214,17 @@
   <div class="attack-box">
     <div class="actor-stats attack-box-main">
       <div class="actor-stat">
-        <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.label"}}</div>
+        <div class="tsubtle">
+          {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.label"}}
+          {{#if (or
+            system.offense.piercing.ub
+            system.wielding.attacker.system.piercing.ub)
+          }}
+            {{infoIcon "keyword:unblockable"}}
+          {{else}}
+            {{infoIcon "keyword:armor-voiding"}}
+          {{/if}}
+        </div>
         <button
           id="{{ @root/appId }}-piercing"
           class="actor-stat-value updatable"
@@ -233,7 +261,13 @@
       </div>
 
       <div class="actor-stat">
-        <div class="tsubtle">{{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label"}}</div>
+        <div class="tsubtle">
+          {{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label"}}
+          {{infoIcon
+            "core:style-bonus"
+            noTable=true
+          }}
+        </div>
         <button
           id="{{ @root/appId }}-sb"
           class="actor-stat-value updatable"

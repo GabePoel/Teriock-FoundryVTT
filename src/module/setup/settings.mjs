@@ -143,6 +143,12 @@ export const menus = {
             onChange: () => game.teriock.render({ applications: true }),
           },
           openConditionsAsJournalEntryPages: { default: true, scope: "user", type: Boolean },
+          showInfoIcons: {
+            default: true,
+            scope: "client",
+            type: Boolean,
+            onChange: () => game.teriock.render({ applications: true }),
+          },
           unlockSheetsByDefault: { default: false, scope: "user", type: Boolean },
         },
       },

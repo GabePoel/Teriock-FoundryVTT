@@ -14,14 +14,16 @@
 }
 
 .actor-bar-container {
+  border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   position: relative;
 
   .actor-bar {
-    border: 2px solid var(--bar-color);
+    border: 3px solid var(--bar-color);
     border-radius: 6px;
     display: flex;
     height: 3em;
+    outline-offset: -1px;
     overflow: hidden;
 
     > * {
@@ -105,11 +107,15 @@
       @include mixins.centralize;
       color: var(--color-light-2);
       height: 2.25em;
-      inset-block: 0;
-      margin-block: auto;
-      position: absolute;
-      right: 0.375em;
       width: 2.25em;
+
+      &:hover {
+        color: white !important;
+      }
+
+      &:active {
+        color: var(--color-light-2) !important;
+      }
     }
 
     .actor-bar-overlay-inputs {
@@ -124,6 +130,7 @@
         font-size: inherit;
         height: 1.5em;
         min-width: 0;
+        padding: 0;
         text-align: center;
       }
     }
@@ -139,6 +146,37 @@
         opacity: 1;
       }
     }
+  }
+
+  .actor-bar-actions {
+    align-items: center;
+    display: flex;
+    inset-block: 0;
+    position: absolute;
+    right: 0.375em;
+
+    > .teriock-info-icon {
+      color: var(--color-light-2);
+      opacity: 0.6;
+      position: static;
+
+      &:hover {
+        color: var(--color-light-2);
+        opacity: 1;
+      }
+    }
+  }
+
+  .actor-bar-overlay:has(.teriock-info-icon) {
+    .actor-bar-overlay-text,
+    .actor-bar-overlay-inputs {
+      right: calc(1.75em + 1.25 * var(--font-size-12));
+    }
+  }
+
+  &.actor-presence-container .actor-bar-actions {
+    justify-content: center;
+    width: 2.25em;
   }
 }
 

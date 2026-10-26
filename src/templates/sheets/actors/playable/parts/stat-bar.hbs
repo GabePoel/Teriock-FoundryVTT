@@ -53,17 +53,22 @@
           }}
         {{/if}}
       </div>
-      {{!-- prettier-ignore --}}
-      <button
-        class="tbutton take-harm-button thover"
-        data-action="takeCommand"
-        data-command="{{ bar.command }}"
-        data-tooltip="{{ bar.labels.take }}"
-        id="{{ @root/appId }}-take-{{ bar.key }}"
-        type="button"
-      >
-        {{makeIcon (path @root/TERIOCK.CONFIG.command bar.command "icon") "light"}}
-      </button>
+      <div class="actor-bar-actions">
+        {{#if bar.config.identifier}}
+          {{infoIcon bar.config.identifier}}
+        {{/if}}
+        {{!-- prettier-ignore --}}
+        <button
+          class="tbutton take-harm-button thover"
+          data-action="takeCommand"
+          data-command="{{ bar.command }}"
+          data-tooltip="{{ bar.labels.take }}"
+          id="{{ @root/appId }}-take-{{ bar.key }}"
+          type="button"
+        >
+          {{makeIcon (path @root/TERIOCK.CONFIG.command bar.command "icon") "light"}}
+        </button>
+      </div>
     </div>
   </div>
 {{/with}}

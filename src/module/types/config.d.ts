@@ -49,6 +49,7 @@ declare global {
       die?: string;
       hacks?: boolean;
       icon: string;
+      identifier?: TypedIdentifier;
       label: string;
       morganti?: boolean;
       multiplier: number;

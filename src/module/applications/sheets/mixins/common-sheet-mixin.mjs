@@ -44,8 +44,27 @@ export default function CommonSheetMixin(Base) {
       SourceRefreshButtonSheetMixin,
     )
   {
+    /**
+     * Open the document corresponding to an info icon.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @this {CommonSheet}
+     */
+    static async #onOpenInfo(_event, target) {
+      const uuid = game.teriock.identifiers.get(target.dataset.tooltipIdentifier);
+      if (!uuid) { return; }
+      const doc = await (this.document.fetchFromUuid?.(uuid) ?? fromUuid(uuid));
+      if (doc?.documentName === "JournalEntryPage") {
+        await doc.parent.sheet?.render({ force: true, pageId: doc.id });
+      } else {
+        await doc?.sheet?.render({ force: true });
+      }
+    }
+
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
+      actions: { openInfo: this.#onOpenInfo },
       classes: ["common"],
       form: { closeOnSubmit: false, submitOnChange: true },
       position: { height: 600, width: 580 },

@@ -1,20 +1,22 @@
-import { makeIcon, makeIconClass, makeIconElement } from "../../utils/_module.mjs";
+import { makeIcon, makeIconClass, makeIconElement, toClass } from "../../utils/_module.mjs";
 
 /**
  * Render an info icon that shows a rules tooltip on hover.
  * @param {string} identifier
  * @param {object} [options]
- * @param {{ dataset?: object, noTables?: boolean }} [options.hash]
+ * @param {{ dataset?: object, noImg?: boolean, noTable?: boolean }} [options.hash]
  * @returns {Handlebars.SafeString}
  */
 function infoIcon(identifier, options = { hash: {} }) {
-  const { dataset = {}, noTables } = options.hash;
+  if (!game.settings.get("teriock", "showInfoIcons")) { return new Handlebars.SafeString(""); }
+  const { dataset = {}, noImg, noTable } = options.hash;
+  const tooltipClass = toClass([noImg && "teriock-no-img", noTable && "teriock-no-table"]);
   const element = makeIconElement(TERIOCK.DISPLAY.icons.manifest.ui.info, "light");
   element.classList.add("teriock-info-icon");
   Object.assign(
     element.dataset,
-    { tooltipDirection: "RIGHT", tooltipIdentifier: String(identifier) },
-    noTables && { tooltipClass: "teriock-no-tables" },
+    { action: "openInfo", tooltipDirection: "RIGHT", tooltipIdentifier: String(identifier) },
+    tooltipClass && { tooltipClass },
     dataset,
   );
   return new Handlebars.SafeString(element.outerHTML);
