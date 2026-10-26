@@ -39,7 +39,7 @@ export default function ConsumableSystemMixin(Base) {
           max: new InfiniteNumberField({ persisted: false }),
           maxFormula: new FormulaField({ deterministic: true, placeholder: TERIOCK.CONST.INF_CODE }),
           min: new fields.NumberField({ initial: 0, integer: true, persisted: false }),
-          value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "0" }),
+          value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
         }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.consumable),
       });
