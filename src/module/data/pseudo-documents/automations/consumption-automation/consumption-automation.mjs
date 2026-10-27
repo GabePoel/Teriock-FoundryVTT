@@ -50,7 +50,7 @@ export default class ConsumptionAutomation extends BaseAutomation {
    */
   canPay(ability, stat) {
     const document = this.getNearestDocument();
-    return this.stats.has(stat) && document !== ability && document?.system.consumption.enabled
+    return this.stats.has(stat) && document !== ability && document?.system.consumption?.enabled
       && BaseRoll.qualify(this.qualifier, () => ability.system.getLocalRollData());
   }
 }

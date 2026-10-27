@@ -352,7 +352,7 @@ export default function AttackExecutionMixin(Base) {
                 value: Math.max(
                   0,
                   this.ammunition.system.quantity.value
-                    - (this.armament?.system.ammunition.consumptionAmount ?? this.ammunition.system.consumption.amount),
+                    - (this.armament?.system.ammunition?.consumptionAmount ?? this.ammunition.system.consumption.amount),
                 ),
               },
             },

@@ -49,7 +49,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
       if (!actor) { return null; }
       consumable = await fromIdentifierLocal(this.identifier, actor);
     }
-    return consumable ?? null;
+    return consumable?.system?.consumption?.enabled ? consumable : null;
   }
 
   /**

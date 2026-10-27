@@ -72,7 +72,7 @@ export default class EquipmentExecution extends ArmamentExecution {
   _configure(options = {}) {
     super._configure(options);
     if (!this.source.system.ammunition.enabled) { return; }
-    this.ammunition = options.ammunition?.system.consumption.enabled
+    this.ammunition = options.ammunition?.system?.consumption?.enabled
       ? options.ammunition
       : this.source.system.defaultAmmunition;
   }
