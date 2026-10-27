@@ -1,7 +1,7 @@
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { mergeMetadata, mixClasses, objectMap, omit } from "../../../../utils/_module.mjs";
 import { migrateStatuses } from "../../../fields/tools/migrations.mjs";
-import { commandActivations } from "../../activations/command-activations.mjs";
+import commandActivations from "../../activations/command-activations.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 

@@ -1,5 +1,5 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import { commandActivations } from "../activations/command-activations.mjs";
+import commandActivations from "../activations/command-activations.mjs";
 import { StatAutomation } from "./abstract/_module.mjs";
 
 export default class RevitalizeAutomation extends StatAutomation {

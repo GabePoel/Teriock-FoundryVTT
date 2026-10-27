@@ -167,7 +167,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   const pd = data.pseudoDocuments;
   registerSubtypes(pd.activations, pd.activations.abstract.BaseActivation);
-  registerSubtypes(pd.activations.commandActivations, pd.activations.abstract.BaseActivation);
+  registerSubtypes(pd.activations.commands, pd.activations.abstract.BaseActivation);
   registerSubtypes(pd.affinities, pd.affinities.abstract.BaseAffinity);
   registerSubtypes(pd.automations, pd.automations.abstract.BaseAutomation);
   registerSubtypes(pd.expirations, pd.expirations.abstract.BaseExpiration);

@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
-import { commandActivations } from "../../activations/command-activations.mjs";
+import commandActivations from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 

@@ -289,12 +289,12 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.isFeat && !this.preventFeat) {
       const featOptions = { attribute: this.source.system.featSaveAttribute };
       if (!this.preventThreshold) { featOptions.threshold = this.rolls[0].total; }
-      this.activations.push(new acts.commandActivations.feat({ options: featOptions }));
+      this.activations.push(new acts.commands.feat({ options: featOptions }));
     }
 
     // Add block cone activation
     if (this.source.system.delivery === "cone" && !this.preventBlockCone) {
-      this.activations.push(new acts.commandActivations.use({ options: { key: "ability:block-cone" } }));
+      this.activations.push(new acts.commands.use({ options: { key: "ability:block-cone" } }));
     }
 
     // Add all pre-defined activations
