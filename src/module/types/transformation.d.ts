@@ -1,5 +1,4 @@
 import { CompetenceModel } from "../data/models/_module.mjs";
-import statConfig from "../static/config/stat-config.mjs";
 import transformationConfig from "../static/config/transformation-config.mjs";
 
 declare global {
@@ -20,16 +19,14 @@ declare global {
     };
 
     export type AutomationTransformationConfig = SpeciesTransformationConfig & {
+      /** <schema> Attributes this transformation should change */
+      attributes: Set<Teriock.Keys.Attribute>;
       /** <schema> Level of transformation */
       level: Teriock.Keys.TransformationLevel | null;
       /** <schema> Additional parameters this transformation should override */
       override: Set<keyof typeof transformationConfig.override>;
       /** <schema> Stats this transformation should reset */
-      resets: Set<
-        {
-          [K in keyof typeof statConfig]: typeof statConfig[K] extends { transformationReset: object } ? K : never;
-        }[keyof typeof statConfig]
-      >;
+      resets: Set<Teriock.Keys.Stat>;
       /** <schema> Types of documents this transformation should turn off */
       suppress: Set<keyof typeof transformationConfig.suppress>;
     };

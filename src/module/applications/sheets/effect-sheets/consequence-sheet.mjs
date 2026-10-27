@@ -64,7 +64,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
     const transformationPaths = ["enabled"];
     const showPrimarySpecies = this.document.system.transformation.enabled;
     if (showPrimarySpecies) {
-      transformationPaths.push(...["level", "override"]);
+      transformationPaths.push(...["level", "attributes", "override"]);
       if (this.document.system.transformation.override.has("art")) {
         transformationPaths.push(...["ring", "img", "ringImg"]);
       }

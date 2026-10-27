@@ -44,6 +44,7 @@ export default class TransformationAutomation
       ...this._competencePaths,
       "hr",
       "level",
+      "attributes",
       "resets",
       "suppress",
       "override",
@@ -92,6 +93,7 @@ export default class TransformationAutomation
     const transformation = foundry.utils.getProperty(data, "system.transformation") ?? {};
     if (!transformation.enabled) {
       Object.assign(transformation, {
+        attributes: Array.from(this.attributes),
         competence: { raw: this.getCompetence({ execution }) },
         enabled: true,
         img: this.img,

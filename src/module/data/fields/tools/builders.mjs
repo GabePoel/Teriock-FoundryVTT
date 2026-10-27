@@ -135,12 +135,12 @@ export function associationsField(options = {}) {
           img: new FilePathField({ categories: ["IMAGE"], initial: TERIOCK.DISPLAY.thumbnails.common.unknown }),
           name: new StringField(),
         }),
-        { initial: [], required: false },
+        { required: false, initial: () => [] },
       ),
       icon: new StringField({ initial: null, nullable: true, required: false }),
       title: new StringField({ initial: "Associations", required: false }),
     }),
-    { initial: [], required: false, ...options },
+    { required: false, initial: () => [], ...options },
   );
 }
 
@@ -152,12 +152,12 @@ export function associationsField(options = {}) {
 export function blocksField(options) {
   return new ArrayField(
     new SchemaField({
-      classes: new ArrayField(new StringField(), { initial: [] }),
+      classes: new ArrayField(new StringField(), { initial: () => [] }),
       gmOnly: new BooleanField(),
       text: new HTMLField({ blank: true, nullable: true }),
       title: new StringField(),
     }),
-    { initial: [], required: false, ...options },
+    { required: false, initial: () => [], ...options },
   );
 }
 

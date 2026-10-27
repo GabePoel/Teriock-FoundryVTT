@@ -75,7 +75,7 @@ export default function AbilityUsagePart(Base) {
           new fields.StringField({
             choices: objectMap(TERIOCK.CONFIG.ability.targets, v => v.label, { localize: true }),
           }),
-          { initial: ["creature"] },
+          { initial: () => ["creature"] },
         ),
       });
     }

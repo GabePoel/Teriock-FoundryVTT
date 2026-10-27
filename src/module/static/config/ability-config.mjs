@@ -1,6 +1,12 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 export default {
+  attributeChange: {
+    priority: 20,
+    get phase() {
+      return TERIOCK.CONFIG.change.defaultPhase;
+    },
+  },
   delivery: {
     armor: /** @type {Teriock.Config.DeliveryEntry} */ {
       allowPiercing: true,

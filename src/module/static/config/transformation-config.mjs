@@ -2,13 +2,21 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 /** @category Transformation */
 const config = {
+  attributeChange: {
+    get phase() {
+      return TERIOCK.CONFIG.ability.attributeChange.phase;
+    },
+    get priority() {
+      return TERIOCK.CONFIG.ability.attributeChange.priority + 1;
+    },
+  },
   // no sort
   level: {
     minor: "TERIOCK.EFFECTS.TransformationLevel.minor",
     full: "TERIOCK.EFFECTS.TransformationLevel.full",
     greater: "TERIOCK.EFFECTS.TransformationLevel.greater",
   },
-  multiCheckboxPaths: ["override", "resets", "suppress"],
+  multiCheckboxPaths: ["attributes", "override", "resets", "suppress"],
   override: {
     art: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.art" },
     size: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.size" },

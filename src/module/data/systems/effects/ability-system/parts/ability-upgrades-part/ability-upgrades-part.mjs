@@ -63,8 +63,8 @@ export default function AbilityUpgradesPart(Base) {
       if (this.upgrades.score.attribute) {
         this.changes.push({
           key: `system.attributes.${this.upgrades.score.attribute}.score`,
-          phase: TERIOCK.CONFIG.change.defaultPhase,
-          priority: 20,
+          phase: TERIOCK.CONFIG.ability.attributeChange.phase,
+          priority: TERIOCK.CONFIG.ability.attributeChange.priority,
           target: "Actor",
           type: "upgrade",
           value: this.upgrades.score.value.toString(),
@@ -73,8 +73,8 @@ export default function AbilityUpgradesPart(Base) {
       if (this.upgrades.competence.attribute) {
         this.changes.push({
           key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
-          phase: TERIOCK.CONFIG.change.defaultPhase,
-          priority: 20,
+          phase: TERIOCK.CONFIG.ability.attributeChange.phase,
+          priority: TERIOCK.CONFIG.ability.attributeChange.priority,
           target: "Actor",
           type: "upgrade",
           value: this.upgrades.competence.value.toString(),

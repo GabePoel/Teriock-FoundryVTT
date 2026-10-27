@@ -39,7 +39,7 @@ export default function StatGiverSystemMixin(Base) {
               k => [
                 k,
                 new fields.EmbeddedDataField(StatPoolModel, {
-                  initial: { disabled: false, formula: this._initialStatPoolFormula, spent: [] },
+                  initial: () => ({ disabled: false, formula: this._initialStatPoolFormula, spent: [] }),
                 }),
               ]
             ),

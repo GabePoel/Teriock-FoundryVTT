@@ -201,7 +201,7 @@ export default function TransformationSystemMixin(Base) {
       if (!this.actor) { return; }
       this.#addBatchToggleDocuments(false);
       if (this.transformation.resets.size) {
-        this.#addBatchActorUpdate(this.parent.getFlag("teriock", "preTransform") ?? {});
+        this.#addBatchActorUpdate({ system: this.parent.getFlag("teriock", "preTransform.system") ?? {} });
       }
     }
 
@@ -343,7 +343,7 @@ export default function TransformationSystemMixin(Base) {
           disabledStatDiceItems[stat].push(...statItems.filter(i => !i.system.statDice[stat].disabled));
         }
       }
-      const preTransform = {};
+      const preTransform = { attributes: this.actor.system.toObject(false).attributes };
       for (const r of this.transformation.resets) {
         const update = TERIOCK.CONFIG.stat[r].transformationReset.update;
         for (const k of Object.keys(update)) { preTransform[k] = foundry.utils.getProperty(this.actor, k); }
@@ -404,7 +404,7 @@ export default function TransformationSystemMixin(Base) {
       if (yes === false) { return false; }
 
       if (!this.actor || !this.isTransformation) { return; }
-      if (changes.disabled === false) {
+      if (changes.disabled === false && this.parent._source.disabled) {
         changes.flags = foundry.utils.mergeObject(changes.flags ?? {}, this._buildTransformationFlags());
       }
     }
@@ -444,6 +444,22 @@ export default function TransformationSystemMixin(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
+      if (this.isPrimaryTransformation) {
+        for (const a of Object.keys(TERIOCK.CONFIG.attribute)) {
+          if (!this.transformation.attributes.has(a)) {
+            const value = foundry.utils.getProperty(this.parent, `flags.teriock.preTransform.attributes.${a}`);
+            if (value) {
+              this.changes.push({
+                key: `system.attributes.${a}`,
+                phase: TERIOCK.CONFIG.transformation.attributeChange.phase,
+                priority: TERIOCK.CONFIG.transformation.attributeChange.priority,
+                type: "override",
+                value,
+              });
+            }
+          }
+        }
+      }
       if (
         this.isPrimaryTransformation && this.transformation.override.has("art")
         && this.actor?.system.settings.getSetting("autoTransformation")

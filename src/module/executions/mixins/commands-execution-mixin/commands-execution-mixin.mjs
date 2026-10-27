@@ -33,7 +33,7 @@ export default function CommandsExecutionMixin(Base) {
           new fields.StringField({
             choices: objectMap(TERIOCK.CONFIG.command, i => i.numeric?.deal, { filter: c => c.numeric }),
           }),
-          { initial: ["damage"] },
+          { initial: () => ["damage"] },
         ),
         crit: new fields.BooleanField(),
         deboosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),

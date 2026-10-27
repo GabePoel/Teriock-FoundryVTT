@@ -62,7 +62,7 @@ export default function ArmamentSystemMixin(Base) {
               filter: c => c.numeric,
             }),
           }),
-          { initial: ["damage"] },
+          { initial: () => ["damage"] },
         ),
         damage: new MultiChangeField({
           base: rollableFormulaField({ placeholder: _loc("COMMON.None") }),

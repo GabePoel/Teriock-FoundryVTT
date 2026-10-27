@@ -1,6 +1,5 @@
 import { LocalDocumentField, TernaryField } from "../_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { objectMap } from "../../../utils/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -8,8 +7,6 @@ const { fields } = foundry.data;
 /**
  * @import { BooleanField, EmbeddedDataField, FilePathField, SetField, StringField } from "@common/data/fields.mjs";
  */
-
-const RESET_STATS = objectMap(TERIOCK.CONFIG.stat, undefined, { filter: v => v.transformationReset });
 
 /**
  * Species transformation fields.
@@ -67,6 +64,11 @@ export function actorTransformationConfig() {
  */
 export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
+    attributes: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.attribute }), {
+      hint: "TERIOCK.SCHEMA.Transformation.attributes.hint",
+      label: "TERIOCK.SCHEMA.Transformation.attributes.label",
+      initial: () => Object.keys(TERIOCK.CONFIG.attribute),
+    }),
     level: new fields.StringField({
       blank: true,
       choices: localizeChoices(TERIOCK.CONFIG.transformation.level, { none: true }),
@@ -76,38 +78,27 @@ export function automationTransformationFields() {
       nullable: true,
       required: false,
     }),
-    override: new fields.SetField(
-      new fields.StringField({
-        choices: () => objectMap(TERIOCK.CONFIG.transformation.override, v => v.label, { localize: true }),
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.override.hint",
-        initial: Object.keys(TERIOCK.CONFIG.transformation.override).filter(k =>
+    override: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.transformation.override }), {
+      hint: "TERIOCK.SCHEMA.Transformation.override.hint",
+      label: "TERIOCK.SCHEMA.Transformation.override.label",
+      initial: () =>
+        Object.keys(TERIOCK.CONFIG.transformation.override).filter(k =>
           TERIOCK.CONFIG.transformation.override[k].initial
         ),
-        label: "TERIOCK.COMMON.Override",
-      },
-    ),
-    resets: new fields.SetField(
-      new fields.StringField({ choices: () => objectMap(RESET_STATS, v => v.label, { localize: true }) }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.resets.hint",
-        initial: Object.keys(RESET_STATS).filter(k => RESET_STATS[k].transformationReset.initial),
-        label: "SETTINGS.UI.ACTIONS.Reset",
-      },
-    ),
-    suppress: new fields.SetField(
-      new fields.StringField({
-        choices: () => objectMap(TERIOCK.CONFIG.transformation.suppress, v => v?.label, { localize: true }),
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
-        initial: Object.keys(TERIOCK.CONFIG.transformation.suppress).filter(k =>
+    }),
+    resets: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.stat }), {
+      hint: "TERIOCK.SCHEMA.Transformation.resets.hint",
+      label: "TERIOCK.SCHEMA.Transformation.resets.label",
+      initial: () => Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].transformationReset.initial),
+    }),
+    suppress: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.transformation.suppress }), {
+      hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
+      label: "TERIOCK.SCHEMA.Transformation.suppress.label",
+      initial: () =>
+        Object.keys(TERIOCK.CONFIG.transformation.suppress).filter(k =>
           TERIOCK.CONFIG.transformation.suppress[k].initial
         ),
-        label: "TERIOCK.SCHEMA.Transformation.suppress.label",
-      },
-    ),
+    }),
   });
 }
 
@@ -138,10 +129,10 @@ export function effectTransformationFields() {
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.uuids.hint",
-        initial: [],
         label: "TERIOCK.SCHEMA.Transformation.uuids.label",
         nullable: false,
         required: false,
+        initial: () => [],
       },
     ),
   });
