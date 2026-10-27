@@ -34,7 +34,7 @@ export default class DocumentExecution extends BaseExecution {
   /** @inheritDoc */
   get _formPaths() {
     const paths = super._formPaths;
-    if (this.source?.system.consumable) { paths.push("consumeUses"); }
+    if (this.source?.system.consumption?.enabled) { paths.push("consumeUses"); }
     return paths;
   }
 
@@ -112,7 +112,7 @@ export default class DocumentExecution extends BaseExecution {
     const yes = await super._prepareUpdates();
     if (yes === false) { return false; }
 
-    if (this.source.system?.consumable && this.consumeUses) {
+    if (this.source.system?.consumption?.enabled && this.consumeUses) {
       this.operations.push({
         action: "update",
         documentName: this.source.documentName,

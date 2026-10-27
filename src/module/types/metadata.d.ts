@@ -51,6 +51,7 @@ declare global {
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       img: string;
+      initialConsumable: boolean;
       preserveOnRefresh: string[];
       sortPaths: string[];
       tags: SystemMetadataTags;

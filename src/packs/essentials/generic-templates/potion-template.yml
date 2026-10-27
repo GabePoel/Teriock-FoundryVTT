@@ -6,14 +6,32 @@ effects:
     description: >-
       <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
       @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it is
-      the @Wiki[Category:Item target abilities]{target of an ability} that deals it @Wiki[Category:Damaging
-      effects]{damage}. If it would become @Identifier[property:shattered]{shattered} through some other means, it is
-      instead @Identifier[property:destroyed]{destroyed}.</p>
+      the @Identifier[core:item-target]{target of an ability} that deals it @Identifier[core:damage]{damage}. If it
+      would become @Identifier[property:shattered]{shattered} through some other means, it is instead
+      @Identifier[property:destroyed]{destroyed}.</p>
     img: systems/teriock/src/assets/thumbnails/property/fragile.webp
     name: Fragile
     system:
       applyIfDampened: true
       applyIfDeattuned: true
+      automations:
+        - _id: XPChViJ1wli48yom
+          activeQualifier: >-
+            not(or(@this.item.type.arrow, @this.item.type.basket, @this.item.type.blowgun-dart, @this.item.type.bottle,
+            @this.item.type.chimes, @this.item.type.circlet, @this.item.type.compass, @this.item.type.conch,
+            @this.item.type.drum, @this.item.type.fan, @this.item.type.flag, @this.item.type.flute,
+            @this.item.type.hand-mirror, @this.item.type.hand-net, @this.item.type.harp, @this.item.type.hourglass,
+            @this.item.type.lantern, @this.item.type.lute, @this.item.type.maraca, @this.item.type.musket,
+            @this.item.type.orb, @this.item.type.pistol, @this.item.type.sail, @this.item.type.seashell,
+            @this.item.type.spectacles, @this.item.type.syringe))
+          changes:
+            - key: system.price
+              phase: derived
+              priority: 10
+              target: Item
+              type: multiply
+              value: "0.5"
+          type: changes
       identifier: fragile
       kind: flaw
     type: property
@@ -47,7 +65,8 @@ folder: tYFOyA8JVqZ9YaDF
 img: systems/teriock/src/assets/thumbnails/equipment/bottle.webp
 name: Potion Template
 system:
-  consumable: true
+  consumption:
+    enabled: true
   equipmentClasses:
     - containers
     - knickknacks

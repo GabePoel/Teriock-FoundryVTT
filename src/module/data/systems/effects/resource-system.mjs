@@ -17,6 +17,7 @@ export default class ResourceSystem
     automationTags: { triggered: true },
     icon: TERIOCK.DISPLAY.icons.manifest.document.resource,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.resource,
+    initialConsumable: true,
     kinds: _replace(TERIOCK.CONFIG.effect.kind),
     tags: { usable: true },
     type: "resource",

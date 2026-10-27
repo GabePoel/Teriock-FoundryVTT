@@ -32,7 +32,7 @@ export default class ChangeQuantityActivation extends BaseActivation {
   async #changeQuantity(formula) {
     if (!FormulaField.exists(formula) || !this.consumable) { return; }
     const consumable = await fromUuid(this.consumable);
-    if (!consumable?.system?.consumable) { return; }
+    if (!consumable?.system?.consumption?.enabled) { return; }
     const rollData = consumable.getRollData?.() ?? this.actors[0]?.getRollData?.() ?? {};
     if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(formula, rollData) <= 0) { return; }
     if (

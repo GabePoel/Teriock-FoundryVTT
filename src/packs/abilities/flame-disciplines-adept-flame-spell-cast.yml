@@ -15,14 +15,16 @@ system:
       triggers:
         - longRest
       type: changeQuantity
+    - _id: consumptionStats
+      qualifier: and(@ability, @spell, @el.flame)
+      stats:
+        - mp
+      type: consumption
     - _id: ZOHIECMcEBWcCAXb
       display:
         label: Cast Flame Spell
       localQualifier: and(@ability, @spell, @el.flame)
       type: useDocuments
-  consumption:
-    stats:
-      - mp
   elements:
     - flame
   identifier: adept-flame-spell-cast

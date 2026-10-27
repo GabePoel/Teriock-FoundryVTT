@@ -221,7 +221,7 @@ export default class AbilitySystem
       "system.sustained",
       "system.invoked",
       "system.elderSorcery",
-      "system.consumable",
+      "system.consumption.enabled",
       "system.consumeSource",
       "system.grantOnly",
       "system.grantUse",
@@ -263,7 +263,7 @@ export default class AbilitySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) {
+    if (!this.consumption.enabled) {
       parts.subtitle = TERIOCK.CONFIG.ability.maneuver[this.maneuver]?.executionTimes[this.executionTime.base]?.label
         ?? this.executionTime.slow?.label;
     }

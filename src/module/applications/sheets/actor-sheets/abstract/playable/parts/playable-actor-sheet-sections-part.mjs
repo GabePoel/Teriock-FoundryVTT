@@ -150,12 +150,12 @@ export default function PlayableActorSheetSectionsPart(Base) {
         docs: this.document.previewed.getTypeSync("resource"),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.resource.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
-        docs: this.document.previewed.getTypeSync("ability").filter(a => a.system.consumable),
+        docs: this.document.previewed.getTypeSync("ability").filter(a => a.system.consumption.enabled),
         empty: _loc(consumable, {
           value: _loc("TERIOCK.DOCUMENTS.ActiveEffect.ability.plural").toLocaleLowerCase(game.i18n.lang),
         }),
       }, {
-        docs: this.document.previewed.getTypeSync("property").filter(p => p.system.consumable),
+        docs: this.document.previewed.getTypeSync("property").filter(p => p.system.consumption.enabled),
         empty: _loc(consumable, {
           value: _loc("TERIOCK.DOCUMENTS.ActiveEffect.property.plural").toLocaleLowerCase(game.i18n.lang),
         }),

@@ -102,12 +102,14 @@ export default class CostPayer extends ResolvableDialog {
       Object.entries(this.#ability.system.costs.primary).filter(([_k, v]) => v.type).map(([k, _v]) => k),
     );
     if (this.#execution.canHeighten) { this.#costs.add("mp"); }
+    const actor = this.#execution.actor;
+    const consumptions = actor?.system.automations.getTypeSync("consumption", { active: true }) ?? [];
     for (const k of this.#costs) {
       if (this.#ability.system.costs.primary[k].type === "formula") {
         this.state.costOptions.primary[k] = this.#ability.system.costs.primary[k].formula;
       }
-      this.#sources[k] = this.#execution.actor?.previewed.filter(d =>
-        d !== this.#ability && d.active && d.system.consumable && d.system.consumption?.stats.has(k)
+      this.#sources[k] = actor?.previewed.filter(d =>
+        consumptions.some(a => a.getNearestDocument() === d && a.canPay(this.#ability, k))
       ) ?? [];
     }
   }

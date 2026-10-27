@@ -15,14 +15,16 @@ system:
       triggers:
         - longRest
       type: changeQuantity
+    - _id: consumptionStats
+      qualifier: and(@ability, @spell, @el.nature)
+      stats:
+        - mp
+      type: consumption
     - _id: U6Sgg4XOIERmShjR
       display:
         label: Cast Nature Spell
       localQualifier: and(@ability, @spell, @el.nature)
       type: useDocuments
-  consumption:
-    stats:
-      - mp
   elements:
     - nature
   identifier: adept-nature-spell-cast

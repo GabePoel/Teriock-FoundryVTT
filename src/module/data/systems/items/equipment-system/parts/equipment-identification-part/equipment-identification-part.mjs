@@ -97,6 +97,11 @@ export default function EquipmentIdentificationPart(Base) {
     }
 
     /** @inheritDoc */
+    get _refreshRecursively() {
+      return this.identification.identified && super._refreshRecursively;
+    }
+
+    /** @inheritDoc */
     get isSecret() {
       return (!this.identification.identified && !game.user.isGM) || super.isSecret;
     }
@@ -163,15 +168,6 @@ export default function EquipmentIdentificationPart(Base) {
         format: { name: this.parent.fullName },
         localize: true,
       });
-    }
-
-    /** @inheritDoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
-      if (!this.identification.identified) {
-        this.parent._stats.compendiumSource = null;
-        this.parent._stats.duplicateSource = null;
-      }
     }
 
     /**

@@ -78,6 +78,7 @@ export default function RefreshSystemMixin(Base) {
      */
     get _refreshPromises() {
       const promises = [];
+      if (this.parent.isSecret) { return promises; }
       if (this.parent._stats.compendiumSource) {
         promises.push(
           this._formatRefreshPromise(
@@ -94,7 +95,7 @@ export default function RefreshSystemMixin(Base) {
           ),
         );
       }
-      if (this.parent.typedIdentifier && !this.parent.isSecret) {
+      if (this.parent.typedIdentifier) {
         promises.push(
           this._formatRefreshPromise(
             fromIdentifier(this.parent.typedIdentifier),
@@ -103,6 +104,14 @@ export default function RefreshSystemMixin(Base) {
         );
       }
       return promises;
+    }
+
+    /**
+     * Whether this refreshes as a child of a recursive refresh.
+     * @returns {boolean}
+     */
+    get _refreshRecursively() {
+      return true;
     }
 
     /**
@@ -177,8 +186,9 @@ export default function RefreshSystemMixin(Base) {
         // Children queued for creation are skipped.
         const children = await this.#refreshChildren(this.parent, fullOverride && this.metadata.tags.hierarchy);
         for (const child of children) {
-          if (deletedIds.has(child.id)) { continue; }
-          const childSource = await fromUuid(child._stats.compendiumSource);
+          if (deletedIds.has(child.id) || !child.system._refreshRecursively) { continue; }
+          const childSource = await fromUuid(child._stats.compendiumSource)
+            ?? await fromIdentifier(child.typedIdentifier);
           operations.push(
             ...await child.system._refreshOperations(childSource, {
               createChildren: recursive && createChildren,

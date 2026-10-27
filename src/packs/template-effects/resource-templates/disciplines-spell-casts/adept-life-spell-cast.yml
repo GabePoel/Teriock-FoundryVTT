@@ -11,15 +11,19 @@ system:
     - _id: XQJLVWyVRpuO5on4
       formula: "1"
       trigger: longRest
+      triggers:
+        - longRest
       type: changeQuantity
+    - _id: consumptionStats
+      qualifier: and(@ability, @spell, @el.life)
+      stats:
+        - mp
+      type: consumption
     - _id: beccxuReL7aZdvkN
       display:
         label: Cast Life Spell
       localQualifier: and(@ability, @spell, @el.life)
       type: useDocuments
-  consumption:
-    stats:
-      - mp
   elements:
     - life
   identifier: adept-life-spell-cast

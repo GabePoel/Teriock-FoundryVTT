@@ -15,14 +15,16 @@ system:
       triggers:
         - longRest
       type: changeQuantity
+    - _id: consumptionStats
+      qualifier: and(@ability, @spell, @el.necromancy)
+      stats:
+        - mp
+      type: consumption
     - _id: PQQ9ijKDakNiYpl1
       display:
         label: Cast Necromancy Spell
       localQualifier: and(@ability, @spell, @el.necromancy)
       type: useDocuments
-  consumption:
-    stats:
-      - mp
   elements:
     - necromancy
   identifier: adept-necromancy-spell-cast

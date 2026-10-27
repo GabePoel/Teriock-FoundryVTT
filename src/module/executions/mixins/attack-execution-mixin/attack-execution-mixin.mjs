@@ -112,7 +112,7 @@ export default function AttackExecutionMixin(Base) {
             document: this.ammunition,
             editable: true,
             label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-            getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumable) ?? [],
+            getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
             update: ammunition => this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition),
           });
         }
@@ -340,7 +340,7 @@ export default function AttackExecutionMixin(Base) {
      * Prepare ammunition to be consumed.
      */
     _prepareAmmunitionConsumption() {
-      if (this.isContact && this.consumeAmmunition && this.ammunition?.system.consumable) {
+      if (this.isContact && this.consumeAmmunition && this.ammunition?.system.consumption.enabled) {
         this.operations.push({
           action: "update",
           documentName: "Item",

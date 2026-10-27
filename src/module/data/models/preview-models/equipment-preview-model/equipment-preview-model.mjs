@@ -37,7 +37,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
       attuned: new TernaryField({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }),
-      consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label" }),
+      consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumption.enabled.label" }),
       equipmentClasses: nullStringField({
         choices: TERIOCK.CONFIG.equipment.equipmentClasses,
         label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
@@ -105,7 +105,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         && this._checkTernaryFilter(f.equipped, system?.equipped)
         && this._checkTernaryFilter(f.attuned, system?.isAttuned)
         && this._checkTernaryFilter(f.identified, system?.identification?.identified)
-        && this._checkTernaryFilter(f.consumable, system?.consumable)
+        && this._checkTernaryFilter(f.consumable, system?.consumption?.enabled)
         && (!f.kind || system?.kind === f.kind)
         && (!f.equipmentClasses || (system?.equipmentClasses || new Set()).has(f.equipmentClasses))
         && (!f.style || system?._source?.style === f.style)

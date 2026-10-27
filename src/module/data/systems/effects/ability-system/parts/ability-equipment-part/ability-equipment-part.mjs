@@ -154,7 +154,7 @@ export default function AbilityEquipmentPart(Base) {
         }),
         system: {
           _src: this.parent.uuid,
-          consumable: true,
+          consumption: { enabled: true },
           description: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.description", { id: effects[0]._id }),
           identifier: `${equipmentType}-of-${this.parent.forcedIdentifier}`,
           kind: "enchanted",

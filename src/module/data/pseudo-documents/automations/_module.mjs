@@ -9,6 +9,7 @@ export { default as ChangesAutomation } from "./changes-automation/changes-autom
 export { default as ChildChangeAutomation } from "./child-change-automation/child-change-automation.mjs";
 export { default as ChoicesAutomation } from "./choices-automation/choices-automation.mjs";
 export { default as CommonOutcomesAutomation } from "./common-outcomes-automation/common-outcomes-automation.mjs";
+export { default as ConsumptionAutomation } from "./consumption-automation/consumption-automation.mjs";
 export { default as CoverAutomation } from "./cover-automation/cover-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation/duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation/feat-automation.mjs";

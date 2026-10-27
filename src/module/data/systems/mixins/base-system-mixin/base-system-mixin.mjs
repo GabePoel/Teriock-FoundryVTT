@@ -41,6 +41,7 @@ export default function BaseSystemMixin(Base) {
       documentName: "",
       icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
       img: TERIOCK.DISPLAY.thumbnails.common.unknown,
+      initialConsumable: false,
       preserveOnRefresh: [],
       sortPaths: ["name", "_stats.createdTime"],
       tags: {

@@ -104,9 +104,9 @@ function stripPseudoDefaults(doc) {
  * @param {AnyCommonDocument} doc
  */
 function cleanCommon(doc) {
-  if (doc.system.consumable === false) {
+  if (doc.system.consumption?.enabled === false) {
     delete doc.system.quantity;
-    delete doc.system.consumption;
+    doc.system.consumption = { enabled: false };
   }
   if (Array.isArray(doc.system.effectTypes) && Array.isArray(doc.system.powerSources)) {
     doc.system.effectTypes = doc.system.effectTypes.filter(t => !doc.system.powerSources.includes(t));

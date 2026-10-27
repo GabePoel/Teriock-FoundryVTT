@@ -35,12 +35,12 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
    */
   async #findConsumable(options = {}) {
     let doc = this.getNearestDocument();
-    if (this.targetParent) { return doc?.system?.consumable ? doc : null; }
+    if (this.targetParent) { return doc?.system?.consumption?.enabled ? doc : null; }
     if (!this.identifier) { return null; }
     let consumable;
     while (doc && !consumable) {
       const candidate = await fromIdentifierLocal(this.identifier, doc);
-      if (candidate?.system?.consumable) { consumable = candidate; }
+      if (candidate?.system?.consumption?.enabled) { consumable = candidate; }
       if (typeof doc.getMaster === "function") { doc = await doc.getMaster(); }
       else { doc = null; }
     }
@@ -77,7 +77,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   /** @inheritDoc */
   get formTips() {
     const tips = super.formTips;
-    if (this.targetParent && !this.getNearestDocument()?.system?.consumable) {
+    if (this.targetParent && !this.getNearestDocument()?.system?.consumption?.enabled) {
       tips.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable" });
     }
     return tips;
@@ -114,7 +114,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
     if (path === "identifier") {
-      inputConfig.suggestions = this.actor?.previewed.getNames({ filter: d => d.system?.consumable });
+      inputConfig.suggestions = this.actor?.previewed.getNames({ filter: d => d.system?.consumption?.enabled });
     }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }

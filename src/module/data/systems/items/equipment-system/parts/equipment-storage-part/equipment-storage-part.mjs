@@ -60,13 +60,13 @@ export default function EquipmentStoragePart(Base) {
      * @returns {Promise<TeriockItem<"equipment">|null>}
      */
     async #findStackTarget(elder) {
-      if (!elder || !this.consumable || !this._source.quantity?.value) { return null; }
+      if (!elder || !this.consumption.enabled || !this._source.quantity?.value) { return null; }
       const stackCandidates = (await elder.children.getType("equipment")).filter(e =>
         e.master?.uuid === elder.uuid
         && e.uuid !== this.parent.uuid
         && e.name === this.parent.name
         && e.system.identifier === this._source.identifier
-        && e.system.consumable
+        && e.system.consumption.enabled
         && e.system.quantity.value < e.system.quantity.max
       );
       if (stackCandidates.length === 0) { return null; }
@@ -131,7 +131,7 @@ export default function EquipmentStoragePart(Base) {
         && e.typedIdentifier === this.parent.typedIdentifier
         && e.elder?.uuid === this.parent.elder?.uuid
         && e.uuid !== this.parent.uuid
-        && e.system.consumable === this.consumable
+        && e.system.consumption.enabled === this.consumption.enabled
         && e.system.quantity.value + this.quantity.value <= e.system.quantity.max
       );
     }
@@ -142,7 +142,7 @@ export default function EquipmentStoragePart(Base) {
      */
     get totalWeight() {
       if (this.stashed) { return 0; }
-      let total = this.weight * (this.consumable ? this.quantity.value : 1) * this.weightMultiplier;
+      let total = this.weight * (this.consumption.enabled ? this.quantity.value : 1) * this.weightMultiplier;
       if (this.storage.enabled) { total += this.storage.weight.value; }
       return total.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
@@ -237,7 +237,7 @@ export default function EquipmentStoragePart(Base) {
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
         onClick: async () => await this.groupStackDialog(),
         visible: () =>
-          this.consumable
+          this.consumption.enabled
           && this.quantity.value < this.quantity.max
           && this._stackingCandidates.length
           && this.getNearestDocument().isOwner && this.getNearestDocument().checkAncestor(doc),
@@ -247,7 +247,7 @@ export default function EquipmentStoragePart(Base) {
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         onClick: async () => await this.groupUnstackDialog(),
         visible: () =>
-          this.consumable && this.quantity.value > 1 && this.getNearestDocument().isOwner
+          this.consumption.enabled && this.quantity.value > 1 && this.getNearestDocument().isOwner
           && this.getNearestDocument().checkAncestor(doc),
       }]);
       return entries;
@@ -273,7 +273,7 @@ export default function EquipmentStoragePart(Base) {
      * @returns {Promise<void>}
      */
     async groupStackDialog() {
-      if (!this.consumable) { return; }
+      if (!this.consumption.enabled) { return; }
       const candidates = this._stackingCandidates;
       if (!candidates.length) { return; }
       const chosen = await DocumentSelector.selectSingle(candidates, {
@@ -311,7 +311,7 @@ export default function EquipmentStoragePart(Base) {
      * @returns {Promise<void>}
      */
     async groupUnstack(amount = 0) {
-      if (!this.consumable || !amount || amount >= this.quantity.value) { return; }
+      if (!this.consumption.enabled || !amount || amount >= this.quantity.value) { return; }
       const operations = [{
         action: "create",
         data: [
@@ -339,7 +339,7 @@ export default function EquipmentStoragePart(Base) {
      * @returns {Promise<void>}
      */
     async groupUnstackDialog() {
-      if (!this.consumable || !this.quantity.value) { return; }
+      if (!this.consumption.enabled || !this.quantity.value) { return; }
       const content = document.createElement("div");
       const amountField = new fields.NumberField({
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.hint"),
@@ -376,7 +376,7 @@ export default function EquipmentStoragePart(Base) {
         value: {
           configurable: true,
           get: () =>
-            stored().map(e => (e.system?.consumable ? (e.system?.quantity?.value ?? 1) : 1) || 1).reduce(
+            stored().map(e => (e.system?.consumption?.enabled ? (e.system?.quantity?.value ?? 1) : 1) || 1).reduce(
               (a, b) => a + b,
               0,
             ),

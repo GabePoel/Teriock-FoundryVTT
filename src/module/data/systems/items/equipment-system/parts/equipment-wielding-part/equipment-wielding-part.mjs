@@ -92,7 +92,7 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {boolean}
      */
     get canEquip() {
-      return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && !this.equipped;
+      return (!this.consumption.enabled || this.quantity.value >= 1) && this.actor && !this.equipped;
     }
 
     /**
@@ -100,7 +100,7 @@ export default function EquipmentWieldingPart(Base) {
      * @returns {boolean}
      */
     get canUnequip() {
-      return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && this.equipped;
+      return (!this.consumption.enabled || this.quantity.value >= 1) && this.actor && this.equipped;
     }
 
     /**
@@ -110,7 +110,7 @@ export default function EquipmentWieldingPart(Base) {
     get defaultAmmunition() {
       if (!this.ammunition.enabled) { return null; }
       const ammunition = this.actor?.previewedTypes.equipment.filter(e =>
-        e.system.consumable && (e.system.equipmentType === this.ammunition.type)
+        e.system.consumption.enabled && (e.system.equipmentType === this.ammunition.type)
       );
       return ammunition?.find(e => e.active) ?? ammunition?.[0] ?? null;
     }
@@ -195,7 +195,7 @@ export default function EquipmentWieldingPart(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      if (this.consumable && this.quantity.value === 0) { this.equipped = false; }
+      if (this.consumption.enabled && this.quantity.value === 0) { this.equipped = false; }
     }
 
     /**

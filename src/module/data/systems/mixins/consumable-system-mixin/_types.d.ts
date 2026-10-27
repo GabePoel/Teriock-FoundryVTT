@@ -1,13 +1,11 @@
 declare global {
   namespace Teriock.Models {
     export interface ConsumableSystemData {
-      /** <schema> Whether this document is consumable */
-      consumable: boolean;
       consumption: {
         /** <schema> The amount of the document to consume per use */
         amount: number;
-        /** <schema> Stats whose costs can be paid by consuming this document */
-        stats: Set<Teriock.Keys.Stat>;
+        /** <schema> Whether this document is consumable */
+        enabled: boolean;
       };
       /** <schema> Current quantity of the document */
       quantity: {

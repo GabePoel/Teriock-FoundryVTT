@@ -75,7 +75,7 @@ export default class EquipmentSystem
       "system.identification",
       "system.notes",
       "system.kind",
-      "system.consumable.maxFormula",
+      "system.quantity.maxFormula",
       ...super.metadata.preserveOnRefresh,
     ],
     tags: { usable: true },
@@ -91,7 +91,6 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      consumable: new fields.BooleanField({ initial: false }),
       equipmentType: equipmentTypeField({ blank: true, initial: "", required: false }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
@@ -124,7 +123,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get _displayToggles() {
-    return ["system.consumable", ...super._displayToggles];
+    return ["system.consumption.enabled", ...super._displayToggles];
   }
 
   /** @inheritDoc */
@@ -145,7 +144,7 @@ export default class EquipmentSystem
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: !this.consumable ? getName(this.equipmentType) : parts.subtitle,
+      subtitle: !this.consumption.enabled ? getName(this.equipmentType) : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
         _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.totalWeight }),

@@ -3,8 +3,6 @@ declare global {
     export interface AbilityFlagsPartData {
       /** <schema> If this is a basic ability */
       basic: boolean;
-      /** <schema> If this ability is consumable */
-      consumable: boolean;
       /** <schema> If this ability is a guildmaster ability */
       guildmaster: boolean;
       /** <schema> If this ability is invoked */

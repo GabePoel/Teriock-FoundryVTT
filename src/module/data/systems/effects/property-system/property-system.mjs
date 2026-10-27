@@ -11,8 +11,6 @@ import {
 } from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
-const { fields } = foundry.data;
-
 /**
  * Property-specific effect data model.
  *
@@ -58,7 +56,6 @@ export default class PropertySystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      consumable: new fields.BooleanField({ initial: false }),
       damageType: new IdentifierField({ suggestions: true, type: "damage" }),
       extraDamage: rollableFormulaField(),
     });
@@ -77,7 +74,7 @@ export default class PropertySystem
       "system.applyIfDestroyed",
       "system.applyIfShattered",
       "system.applyIfUnequipped",
-      "system.consumable",
+      "system.consumption.enabled",
       ...super._displayToggles,
     ];
   }
@@ -90,7 +87,7 @@ export default class PropertySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) { parts.subtitle = _loc(this._kindEntry.label); }
+    if (!this.consumption.enabled) { parts.subtitle = _loc(this._kindEntry.label); }
     return parts;
   }
 

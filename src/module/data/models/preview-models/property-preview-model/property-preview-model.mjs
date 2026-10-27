@@ -13,7 +13,7 @@ export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
       applyIfDeattuned: new TernaryField({ label: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.applyIfDeattuned.label" }),
       applyIfShattered: new TernaryField({ label: "TERIOCK.SYSTEMS.Granted.FIELDS.applyIfShattered.label" }),
       applyIfUnequipped: new TernaryField({ label: "TERIOCK.SYSTEMS.Granted.FIELDS.applyIfUnequipped.label" }),
-      consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label" }),
+      consumable: new TernaryField({ label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumption.enabled.label" }),
     });
   }
 
@@ -43,7 +43,7 @@ export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
         && this._checkTernaryFilter(f.applyIfDeattuned, s?.applyIfDeattuned)
         && this._checkTernaryFilter(f.applyIfShattered, s?.applyIfShattered)
         && this._checkTernaryFilter(f.applyIfUnequipped, s?.applyIfUnequipped)
-        && this._checkTernaryFilter(f.consumable, s?.consumable)
+        && this._checkTernaryFilter(f.consumable, s?.consumption?.enabled)
       ) { yield document; }
     }
   }

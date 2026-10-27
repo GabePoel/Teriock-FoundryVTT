@@ -112,7 +112,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * Prepare equipment to be consumed.
    */
   #prepareEquipmentConsumption() {
-    if (this.isContact && this.consumeEquipment && this.armament?.system.consumable) {
+    if (this.isContact && this.consumeEquipment && this.armament?.system.consumption.enabled) {
       this.operations.push({
         action: "update",
         documentName: "Item",
@@ -166,7 +166,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   /** @inheritDoc */
   get _postAttackFormPaths() {
     const paths = super._postAttackFormPaths;
-    if (this.isContact && this.armament?.system.consumable) { paths.push("consumeEquipment"); }
+    if (this.isContact && this.armament?.system.consumption.enabled) { paths.push("consumeEquipment"); }
     paths.push("executionTime", "autoPayCosts");
     return paths;
   }

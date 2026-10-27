@@ -9,6 +9,7 @@ import {
   ChildChangeAutomation,
   ChoicesAutomation,
   CommonOutcomesAutomation,
+  ConsumptionAutomation,
   CoverAutomation,
   DurationAutomation,
   FeatAutomation,
@@ -47,6 +48,7 @@ declare global {
     childChange: ChildChangeAutomation;
     choices: ChoicesAutomation;
     common: CommonOutcomesAutomation;
+    consumption: ConsumptionAutomation;
     cover: CoverAutomation;
     duration: DurationAutomation;
     feat: FeatAutomation;

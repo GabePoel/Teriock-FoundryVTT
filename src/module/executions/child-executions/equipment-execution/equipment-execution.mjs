@@ -24,7 +24,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         document: this.ammunition,
         editable: true,
         label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-        getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumable) ?? [],
+        getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
         update: ammunition => {
           this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition);
           this.updateSource({ formula: this._readyUpdatedFormula() });
@@ -72,7 +72,9 @@ export default class EquipmentExecution extends ArmamentExecution {
   _configure(options = {}) {
     super._configure(options);
     if (!this.source.system.ammunition.enabled) { return; }
-    this.ammunition = options.ammunition?.system.consumable ? options.ammunition : this.source.system.defaultAmmunition;
+    this.ammunition = options.ammunition?.system.consumption.enabled
+      ? options.ammunition
+      : this.source.system.defaultAmmunition;
   }
 
   /**
@@ -101,7 +103,9 @@ export default class EquipmentExecution extends ArmamentExecution {
    * @returns {Promise<false|void>}
    */
   async _prepareUpdates() {
-    if (this.consumeAmmunition && this.source.system.ammunition.enabled && this.ammunition?.system.consumable) {
+    if (
+      this.consumeAmmunition && this.source.system.ammunition.enabled && this.ammunition?.system.consumption.enabled
+    ) {
       const amount = this.source.system.ammunition.consumptionAmount ?? this.ammunition.system.consumption.amount;
       this.operations.push({
         action: "update",
