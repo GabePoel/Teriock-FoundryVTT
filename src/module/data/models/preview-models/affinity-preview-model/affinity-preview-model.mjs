@@ -1,4 +1,4 @@
-import { objectMap, pathSorterFactory } from "../../../../utils/_module.mjs";
+import { pathSorterFactory } from "../../../../utils/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
@@ -28,12 +28,12 @@ export default class AffinityPreviewModel extends BasePreviewModel {
   static defineFilters() {
     return {
       category: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.category, c => c.label, { localize: true }),
+        choices: TERIOCK.CONFIG.category,
         label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
       }),
       protection: new TernaryField({ label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.protection.label" }),
       type: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.affinity.types, t => t.label, { localize: true, sort: false }),
+        choices: TERIOCK.CONFIG.affinity.types,
         label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label",
       }),
       weakness: new TernaryField({ label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.weakness.label" }),

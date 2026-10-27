@@ -5,12 +5,12 @@ import { CompetenceModel } from "../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @import { BooleanField, EmbeddedDataField, FilePathField, SetField, StringField } from "@common/data/fields.mjs";
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
  */
 
 /**
  * Species transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField}}
+ * @returns {DataSchema}
  * @category Transformation
  */
 export function speciesTransformationFields() {
@@ -46,7 +46,7 @@ export function speciesTransformationFields() {
 
 /**
  * Actor transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField} & {primary: LocalDocumentField}}
+ * @returns {DataSchema}
  * @category Transformation
  */
 export function actorTransformationConfig() {
@@ -59,7 +59,7 @@ export function actorTransformationConfig() {
 
 /**
  * Automation transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, resets: SetField, suppress: SetField}}
+ * @returns {DataSchema}
  * @category Transformation
  */
 export function automationTransformationFields() {
@@ -104,7 +104,8 @@ export function automationTransformationFields() {
 
 /**
  * Effect transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, resets: SetField, suppress: SetField} & {competence: EmbeddedDataField, enabled: BooleanField, primary: LocalDocumentField, uuids: SetField}}
+ * @returns {DataSchema}
+ * @category Transformation
  */
 export function effectTransformationFields() {
   return Object.assign(automationTransformationFields(), {

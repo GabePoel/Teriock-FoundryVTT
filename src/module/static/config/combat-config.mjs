@@ -18,8 +18,8 @@ const combatConfig = {
   timing: { start: "TERIOCK.COMBAT.Timing.start", end: "TERIOCK.COMBAT.Timing.end" },
 };
 
-preLocalizeObject("CONFIG.combat.event");
-preLocalizeObject("CONFIG.combat.relation");
+preLocalizeObject("CONFIG.combat.event", { sort: true });
+preLocalizeObject("CONFIG.combat.relation", { sort: true });
 preLocalizeObject("CONFIG.combat.timing");
 
 export default combatConfig;

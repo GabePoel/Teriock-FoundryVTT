@@ -1,4 +1,3 @@
-import { objectMap } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -15,7 +14,7 @@ export default class PiercingModel extends BaseDataModel {
   static defineSchema() {
     return {
       raw: new fields.NumberField({
-        choices: objectMap(TERIOCK.CONFIG.piercing.levels, (v) => v.label, { localize: true, sort: false }),
+        choices: TERIOCK.CONFIG.piercing.levels,
         initial: 0,
         max: 2,
         min: 0,

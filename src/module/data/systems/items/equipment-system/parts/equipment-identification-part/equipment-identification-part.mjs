@@ -7,7 +7,6 @@ import {
   getName,
   makeIcon,
   makeIconClass,
-  objectMap,
 } from "../../../../../../utils/_module.mjs";
 
 const { fields } = foundry.data;
@@ -40,7 +39,7 @@ export default function EquipmentIdentificationPart(Base) {
           identified: new fields.BooleanField({ initial: true }),
           kind: new fields.StringField({
             blank: false,
-            choices: objectMap(TERIOCK.CONFIG.equipment.kind, e => e.label),
+            choices: TERIOCK.CONFIG.equipment.kind,
             initial: "mundane",
             nullable: false,
             required: true,

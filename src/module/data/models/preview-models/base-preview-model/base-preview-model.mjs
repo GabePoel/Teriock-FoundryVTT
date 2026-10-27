@@ -8,7 +8,7 @@ const { SearchFilter } = foundry.applications.ux;
 
 /**
  * @import { AbstractFormInputElement } from "@client/applications/elements/_module.mjs";
- * @import { DataField } from "@common/data/fields.mjs";
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
  */
 
 /**
@@ -75,7 +75,7 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /**
    * The display fields.
-   * @returns {Record<string, DataField>}
+   * @returns {DataSchema}
    */
   static defineDisplay() {
     return {
@@ -98,7 +98,7 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /**
    * The filter fields.
-   * @returns {Record<string, DataField>}
+   * @returns {DataSchema}
    */
   static defineFilters() {
     return {

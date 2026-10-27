@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -16,9 +16,7 @@ export default class ConsumptionAutomation extends BaseAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       qualifier: qualifierField({ initial: "1" }),
-      stats: new fields.SetField(
-        new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.stat, v => v.label, { localize: true }) }),
-      ),
+      stats: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.stat })),
     });
   }
 

@@ -202,7 +202,7 @@ export function defaultJSONField(options = {}) {
  */
 export function competenceField(options = {}) {
   return new NumberField({
-    choices: objectMap(TERIOCK.CONFIG.competence.levels, l => l.label, { localize: true, sort: false }),
+    choices: TERIOCK.CONFIG.competence.levels,
     hint: _sloc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: _sloc("TERIOCK.COMMON.Competence"),
@@ -428,8 +428,8 @@ export function identifierSetField(table, options = {}) {
  */
 export function fieldField(options = {}) {
   return new IdentifierField({
-    choices: objectMap(TERIOCK.CONFIG.tradecraft.fields, f => f.label, { localize: true }),
-    initial: Object.keys(TERIOCK.CONFIG.tradecraft.fields)[0],
+    choices: TERIOCK.CONFIG.tradecraft.fields,
+    initial: Object.keys(TERIOCK.CONFIG.tradecraft.fields).find(k => TERIOCK.CONFIG.tradecraft.fields[k].initial),
     label: _sloc("TERIOCK.COMMON.Field"),
     nullable: false,
     type: "field",
@@ -478,8 +478,8 @@ export function equipmentTypeField(options = {}) {
  */
 export function archetypeField(options = {}) {
   return new IdentifierField({
-    choices: objectMap(TERIOCK.CONFIG.class.archetypes, a => a.label, { localize: true }),
-    initial: Object.keys(TERIOCK.CONFIG.class.archetypes)[0],
+    choices: TERIOCK.CONFIG.class.archetypes,
+    initial: Object.keys(TERIOCK.CONFIG.class.archetypes).find(k => TERIOCK.CONFIG.class.archetypes[k].initial),
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
     nullable: false,
     type: "archetype",

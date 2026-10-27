@@ -10,6 +10,7 @@ declare global {
     export type ErrorMessageKey = keyof typeof tipConfig.error;
 
     export type ChildChangeTargetEntry = {
+      initial?: boolean;
       label: string;
       /** The child document subtypes that this applies to. */
       types: Teriock.Documents.ChildType[];
@@ -18,6 +19,7 @@ declare global {
     export type ChildChangePathEntry = {
       forExecution?: boolean;
       group: keyof typeof changeConfig.child.groups;
+      initial?: boolean;
       label: string;
       targets: (keyof typeof changeConfig.child.targets)[];
       types?: string[];
@@ -138,7 +140,7 @@ declare global {
 
     export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };
 
-    export type InteractionEntry = { identifier: TypedIdentifier, label: string, results: Record<string, string> };
+    export type InteractionEntry = { identifier: TypedIdentifier, label: string };
 
     export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number };
 

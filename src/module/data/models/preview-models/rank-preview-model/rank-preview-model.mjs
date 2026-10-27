@@ -1,4 +1,4 @@
-import { objectMap, pathSorterFactory } from "../../../../utils/_module.mjs";
+import { pathSorterFactory } from "../../../../utils/_module.mjs";
 import { archetypeField, classField, nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
@@ -35,10 +35,7 @@ export default class RankPreviewModel extends BasePreviewModel {
     return Object.assign(super.defineFilters(), {
       archetype: archetypeField({ initial: null, nullable: true }),
       class: classField({ initial: null, nullable: true }),
-      kind: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.class.kind, v => v.label),
-        label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
-      }),
+      kind: nullStringField({ choices: TERIOCK.CONFIG.class.kind, label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label" }),
     });
   }
 

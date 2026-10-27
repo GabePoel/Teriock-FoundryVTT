@@ -1,4 +1,4 @@
-import { objectMap, toKebabCase } from "../../../../../../utils/_module.mjs";
+import { toKebabCase } from "../../../../../../utils/_module.mjs";
 import { FormulaField } from "../../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
@@ -31,7 +31,7 @@ export default function AbilityUsagePart(Base) {
       return Object.assign(super.defineSchema(), {
         delivery: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.CONFIG.ability.delivery, v => v.label, { localize: true }),
+          choices: TERIOCK.CONFIG.ability.delivery,
           initial: "weapon",
           nullable: false,
           required: true,
@@ -44,7 +44,7 @@ export default function AbilityUsagePart(Base) {
           cap: rollableFormulaField(),
           featSaveAttribute: new fields.StringField({
             blank: false,
-            choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, { localize: true }),
+            choices: TERIOCK.CONFIG.attribute,
             initial: "mov",
             required: true,
           }),
@@ -53,30 +53,27 @@ export default function AbilityUsagePart(Base) {
         }),
         featSaveAttribute: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, { localize: true }),
+          choices: TERIOCK.CONFIG.attribute,
           initial: "mov",
           required: true,
         }),
         interaction: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.CONFIG.ability.interaction, v => v.label, { localize: true }),
+          choices: TERIOCK.CONFIG.ability.interaction,
           initial: "attack",
           required: true,
         }),
         maneuver: new fields.StringField({
           blank: false,
-          choices: objectMap(TERIOCK.CONFIG.ability.maneuver, v => v.label, { localize: true }),
+          choices: TERIOCK.CONFIG.ability.maneuver,
           initial: "active",
           nullable: false,
           required: true,
         }),
         range: new fields.EmbeddedDataField(RangeModel),
-        targets: new fields.SetField(
-          new fields.StringField({
-            choices: objectMap(TERIOCK.CONFIG.ability.targets, v => v.label, { localize: true }),
-          }),
-          { initial: () => ["creature"] },
-        ),
+        targets: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.ability.targets }), {
+          initial: () => ["creature"],
+        }),
       });
     }
 

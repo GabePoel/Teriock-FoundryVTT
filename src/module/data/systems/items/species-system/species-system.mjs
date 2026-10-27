@@ -136,6 +136,11 @@ export default class SpeciesSystem
     ];
   }
 
+  /** @inheritdoc */
+  get _displayInputs() {
+    return [...super._displayInputs, "system.traits"];
+  }
+
   /** @inheritDoc */
   get _displayTags() {
     return [...super._displayTags, ...this._traitTags];

@@ -1,4 +1,3 @@
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { BaseExpiration } from "../abstract/_module.mjs";
 
@@ -14,22 +13,10 @@ export default class CombatExpiration extends BaseExpiration {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      event: new fields.StringField({
-        choices: localizeChoices(TERIOCK.CONFIG.combat.event),
-        initial: "turn",
-        required: true,
-      }),
-      relation: new fields.StringField({
-        choices: localizeChoices(TERIOCK.CONFIG.combat.relation),
-        initial: "target",
-        required: true,
-      }),
+      event: new fields.StringField({ choices: TERIOCK.CONFIG.combat.event, initial: "turn", required: true }),
+      relation: new fields.StringField({ choices: TERIOCK.CONFIG.combat.relation, initial: "target", required: true }),
       skip: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
-      timing: new fields.StringField({
-        choices: localizeChoices(TERIOCK.CONFIG.combat.timing, { sort: false }),
-        initial: "start",
-        required: true,
-      }),
+      timing: new fields.StringField({ choices: TERIOCK.CONFIG.combat.timing, initial: "start", required: true }),
     });
   }
 

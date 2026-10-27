@@ -85,10 +85,12 @@ const _preLocalizationDataModelRegistrations = [];
  * @param {string[]} [options.keys=[]]- Array of localization keys. The first key listed will be used for sorting if
  * multiple is provided.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
+ * @param {string} [options.first] - Entry to keep first when sorting.
+ * @param {string} [options.last] - Entry to keep last when sorting.
  */
-export function preLocalizeObject(keyPath, { key, keys = [], sort = false } = {}) {
+export function preLocalizeObject(keyPath, { first, key, keys = [], last, sort = false } = {}) {
   if (key) { keys.unshift(key); }
-  _preLocalizationConfigRegistrations[keyPath] = { keys, sort };
+  _preLocalizationConfigRegistrations[keyPath] = { first, keys, last, sort };
 }
 
 /**
@@ -108,7 +110,16 @@ export function performPreLocalization(config) {
     const target = foundry.utils.getProperty(config, keyPath);
     if (!target) { continue; }
     localizeObject(target, settings);
-    if (settings.sort) { foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0])); }
+    if (settings.sort) {
+      const { first, last } = settings;
+      let sorted = sortObjectEntries(target, settings.keys[0]);
+      if (first && first in sorted) { sorted = { [first]: sorted[first], ...sorted }; }
+      if (last && last in sorted) {
+        const { [last]: value, ...rest } = sorted;
+        sorted = { ...rest, [last]: value };
+      }
+      foundry.utils.setProperty(config, keyPath, sorted);
+    }
   }
   Object.values(CONFIG.statusEffects).forEach(e => {
     e.name = _loc(e.name);

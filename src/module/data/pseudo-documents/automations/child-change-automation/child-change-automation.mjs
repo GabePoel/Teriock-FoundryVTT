@@ -18,23 +18,17 @@ export default class ChildChangeAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    const initialTarget = Object.keys(TERIOCK.CONFIG.change.child.targets)[0];
-    const pathEntries = Object.entries(TERIOCK.CONFIG.change.child.paths);
-    const initialPathEntry = pathEntries.find(([_k, v]) => v.targets.includes(initialTarget));
-    const initialKey = initialPathEntry[0];
-    const changeTypes = TERIOCK.CONFIG.change.child.paths[initialKey].types ?? ["override"];
-    const initialChangeType = changeTypes[0];
+    const { paths, targets } = TERIOCK.CONFIG.change.child;
+    const initialTarget = Object.keys(targets).find(k => targets[k].initial);
+    const initialKey = Object.keys(paths).find(k => paths[k].initial);
+    const initialChangeType = paths[initialKey].types?.[0] ?? "override";
     return Object.assign(super.defineSchema(), {
       changeType: new fields.StringField({
         choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true }),
         initial: initialChangeType,
         required: true,
       }),
-      key: new fields.StringField({
-        choices: objectMap(TERIOCK.CONFIG.change.child.paths, e => e.label, { localize: true }),
-        initial: initialKey,
-        required: true,
-      }),
+      key: new fields.StringField({ choices: TERIOCK.CONFIG.change.child.paths, initial: initialKey, required: true }),
       priority: new fields.NumberField(),
       qualifier: qualifierField(),
       target: new fields.StringField({

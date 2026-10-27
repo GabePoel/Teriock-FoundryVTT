@@ -5,7 +5,7 @@ import { AbstractDataMixin, AccessDataMixin } from "../mixins/_module.mjs";
 const { DataModel } = foundry.abstract;
 
 /**
- * @import { DataField } from "@common/data/fields.mjs";
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
  */
 
 /**
@@ -19,7 +19,7 @@ export default class BaseDataModel extends mixClasses(DataModel, AbstractDataMix
 
   /**
    * @inheritDoc
-   * @returns {Record<string, DataField>}
+   * @returns {DataSchema}
    */
   static defineSchema() {
     return {};

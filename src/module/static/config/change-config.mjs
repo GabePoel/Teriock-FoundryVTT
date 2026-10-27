@@ -18,7 +18,7 @@ const typeSubsets = {
 
 /** @enum {Teriock.Config.ChildChangeTargetEntry} */
 const childTargets = {
-  ability: { label: "TERIOCK.DOCUMENTS.ActiveEffect.ability.plural", types: ["ability"] },
+  ability: { initial: true, label: "TERIOCK.DOCUMENTS.ActiveEffect.ability.plural", types: ["ability"] },
   armament: { label: "TERIOCK.DOCUMENTS.Item.armament.plural", types: ["body", "equipment"] },
 };
 
@@ -35,6 +35,7 @@ const paths = {
   "system.attackPenalty": {
     forExecution: true,
     group: "offense",
+    initial: true,
     label: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
     targets: ["ability", "armament"],
     types: typeSubsets.formula,

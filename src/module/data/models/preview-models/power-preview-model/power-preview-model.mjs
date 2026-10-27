@@ -1,4 +1,3 @@
-import { objectMap } from "../../../../utils/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
 
@@ -10,10 +9,7 @@ export default class PowerPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      kind: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.power.kind, v => v.label),
-        label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
-      }),
+      kind: nullStringField({ choices: TERIOCK.CONFIG.power.kind, label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label" }),
     });
   }
 

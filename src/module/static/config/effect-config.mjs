@@ -28,5 +28,5 @@ export default {
   },
 };
 
-preLocalizeObject("CONFIG.effect.applicationTargets", { key: "label" });
+preLocalizeObject("CONFIG.effect.applicationTargets", { key: "label", sort: true });
 preLocalizeObject("CONFIG.effect.kind", { key: "label" });

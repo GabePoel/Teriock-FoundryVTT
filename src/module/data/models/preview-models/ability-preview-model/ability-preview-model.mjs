@@ -23,21 +23,21 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
           new TernaryField({ label: c.label }))),
       }),
       delivery: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.ability.delivery, v => v.label),
+        choices: TERIOCK.CONFIG.ability.delivery,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
       }),
       expansion: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.ability.expansion, v => v.label),
+        choices: TERIOCK.CONFIG.ability.expansion,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
       }),
       heightened: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label" }),
       interaction: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.ability.interaction, v => v.label),
+        choices: TERIOCK.CONFIG.ability.interaction,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
       }),
       invoked: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label" }),
       maneuver: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.ability.maneuver, v => v.label),
+        choices: TERIOCK.CONFIG.ability.maneuver,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
       }),
       ritual: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label" }),
@@ -47,7 +47,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       standard: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.standard.label" }),
       sustained: new TernaryField({ label: "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label" }),
       target: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.ability.targets, v => v.label),
+        choices: TERIOCK.CONFIG.ability.targets,
         label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
       }),
     });

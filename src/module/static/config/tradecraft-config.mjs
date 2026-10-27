@@ -6,6 +6,7 @@ export default {
     artisan: {
       icon: icons.manifest.field.artisan,
       img: thumbnails.manifest.field.artisan,
+      initial: true,
       label: "TERIOCK.TERMS.Fields.artisan",
     },
     mediator: {
@@ -213,5 +214,5 @@ export default {
   },
 };
 
-preLocalizeObject("CONFIG.tradecraft.fields", { keys: ["label"] });
+preLocalizeObject("CONFIG.tradecraft.fields", { keys: ["label"], sort: true });
 preLocalizeObject("CONFIG.tradecraft.tradecrafts", { keys: ["label"] });

@@ -103,7 +103,6 @@ export default {
       untilDawn: "TERIOCK.TERMS.Duration.unit.untilDawn",
     },
   },
-  // no sort
   expansion: {
     cascade: /** @type {Teriock.Config.ExpansionEntry} */ {
       identifier: "core:cascade-expansion",
@@ -136,31 +135,18 @@ export default {
     attack: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:attack-interaction",
       label: "TERIOCK.TERMS.Interaction.attack",
-      results: {
-        hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
-        miss: "TERIOCK.SYSTEMS.Ability.FIELDS.results.miss.label",
-      },
     },
     block: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:block-interaction",
       label: "TERIOCK.TERMS.Interaction.block",
-      results: {
-        fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
-        save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
-      },
     },
     feat: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:feat-interaction",
       label: "TERIOCK.TERMS.Interaction.feat",
-      results: {
-        fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
-        save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
-      },
     },
     manifest: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:manifest-interaction",
       label: "TERIOCK.TERMS.Interaction.manifest",
-      results: { use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label" },
     },
   },
   // no sort
@@ -189,10 +175,10 @@ export default {
       label: "TERIOCK.TERMS.Maneuver.passive",
     },
     slow: /** @type {Teriock.Config.ManeuverEntry} */ {
-      // no sort
       executionTimes: {
         longRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.longRest" },
         shortRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.shortRest" },
+
         custom: { label: "TERIOCK.TERMS.ExecutionTime.slow.custom" },
       },
       identifier: "core:slow-maneuvers",
@@ -200,7 +186,6 @@ export default {
     },
   },
   targetParent: { ability: "TERIOCK.TERMS.TargetParent.ability", item: "TERIOCK.TERMS.TargetParent.item" },
-  // no sort
   targets: /** @enum {Teriock.Config.TargetEntry} */ {
     ability: { label: "TERIOCK.TERMS.Targets.ability" },
     area: { label: "TERIOCK.TERMS.Targets.area" },
@@ -210,31 +195,28 @@ export default {
     creature: { label: "TERIOCK.TERMS.Targets.creature", targetsActor: true },
     item: { label: "TERIOCK.TERMS.Targets.item", targetsArmament: true },
     leg: { label: "TERIOCK.TERMS.Targets.leg", targetsActor: true },
-    other: { label: "TERIOCK.TERMS.Targets.other" },
     self: { label: "TERIOCK.TERMS.Targets.self", targetsActor: true },
     ship: { label: "TERIOCK.TERMS.Targets.ship" },
     skill: { label: "TERIOCK.TERMS.Targets.skill" },
     spell: { label: "TERIOCK.TERMS.Targets.spell" },
     vitals: { label: "TERIOCK.TERMS.Targets.vitals", targetsActor: true },
     weapon: { label: "TERIOCK.TERMS.Targets.weapon", targetsArmament: true },
+
+    other: { label: "TERIOCK.TERMS.Targets.other" },
   },
 };
 
-preLocalizeObject("CONFIG.ability.delivery", { keys: ["label"] });
-preLocalizeObject("CONFIG.ability.deliveryPackage");
-preLocalizeObject("CONFIG.ability.deliveryParent");
+preLocalizeObject("CONFIG.ability.delivery", { keys: ["label"], sort: true });
+preLocalizeObject("CONFIG.ability.deliveryPackage", { sort: true });
+preLocalizeObject("CONFIG.ability.deliveryParent", { sort: true });
 preLocalizeObject("CONFIG.ability.duration.unit");
-preLocalizeObject("CONFIG.ability.expansion", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.expansion", { keys: ["label"], sort: true });
 preLocalizeObject("CONFIG.ability.featSaveImprovementAmount");
-preLocalizeObject("CONFIG.ability.interaction", { keys: ["label"] });
-preLocalizeObject("CONFIG.ability.interaction.attack.results");
-preLocalizeObject("CONFIG.ability.interaction.block.results");
-preLocalizeObject("CONFIG.ability.interaction.feat.results");
-preLocalizeObject("CONFIG.ability.interaction.manifest.results");
+preLocalizeObject("CONFIG.ability.interaction", { keys: ["label"], sort: true });
 preLocalizeObject("CONFIG.ability.maneuver", { keys: ["label"] });
 preLocalizeObject("CONFIG.ability.maneuver.active.executionTimes", { keys: ["label"] });
 preLocalizeObject("CONFIG.ability.maneuver.passive.executionTimes", { keys: ["label"] });
 preLocalizeObject("CONFIG.ability.maneuver.reactive.executionTimes", { keys: ["label"] });
-preLocalizeObject("CONFIG.ability.maneuver.slow.executionTimes", { keys: ["label"] });
-preLocalizeObject("CONFIG.ability.targetParent");
-preLocalizeObject("CONFIG.ability.targets", { keys: ["label"] });
+preLocalizeObject("CONFIG.ability.maneuver.slow.executionTimes", { keys: ["label"], last: "custom", sort: true });
+preLocalizeObject("CONFIG.ability.targetParent", { sort: true });
+preLocalizeObject("CONFIG.ability.targets", { keys: ["label"], last: "other", sort: true });

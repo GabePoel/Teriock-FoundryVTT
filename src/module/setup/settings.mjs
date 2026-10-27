@@ -218,9 +218,7 @@ export const menus = {
           deathBagStoneColors: {
             default: Object.keys(TERIOCK.CONFIG.deathBag.stones).filter(k => TERIOCK.CONFIG.deathBag.stones[k].initial),
             scope: "world",
-            type: new fields.SetField(
-              new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.deathBag.stones, (c) => c.label) }),
-            ),
+            type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.deathBag.stones })),
           },
           playerMacrosFolderName: { default: "Player Macros", scope: "world", type: String },
           preserveTargetRegions: {
@@ -243,11 +241,7 @@ export const menus = {
           triggerMessageMode: {
             default: "self",
             scope: "world",
-            type: new fields.StringField({
-              choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label),
-              initial: "self",
-              nullable: false,
-            }),
+            type: new fields.StringField({ choices: CONFIG.ChatMessage.modes, initial: "self", nullable: false }),
           },
         },
       },
@@ -274,9 +268,7 @@ export const menus = {
           secretAttributes: {
             default: [],
             scope: "world",
-            type: new fields.SetField(
-              new fields.StringField({ choices: objectMap(TERIOCK.CONFIG.attribute, (c) => c.label) }),
-            ),
+            type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.attribute })),
           },
           secretDocuments: { default: [], scope: "world", type: new TypedIdentifierSetField() },
           secretTradecrafts: { default: [], scope: "world", type: tradecraftsField() },

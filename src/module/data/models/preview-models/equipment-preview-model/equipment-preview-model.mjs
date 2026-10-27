@@ -1,4 +1,4 @@
-import { objectMap, pathSorterFactory, toKebabCase } from "../../../../utils/_module.mjs";
+import { pathSorterFactory, toKebabCase } from "../../../../utils/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
@@ -45,7 +45,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       equipped: new TernaryField({ label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label" }),
       identified: new TernaryField({ label: "TERIOCK.SYSTEMS.Equipment.FIELDS.identification.identified.label" }),
       kind: nullStringField({
-        choices: objectMap(TERIOCK.CONFIG.equipment.kind, e => e.label),
+        choices: TERIOCK.CONFIG.equipment.kind,
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
       properties: nullStringField({

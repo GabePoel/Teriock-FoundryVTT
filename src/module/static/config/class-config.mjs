@@ -8,6 +8,7 @@ export default {
       dontStage: true,
       icon: icons.manifest.archetype.everyman,
       img: thumbnails.manifest.archetype.everyman,
+      initial: true,
       label: "TERIOCK.TERMS.Archetypes.everyman",
       stats: { hp: 10, mp: 10 },
     },
@@ -146,6 +147,6 @@ export default {
   },
 };
 
-preLocalizeObject("CONFIG.class.archetypes", { keys: ["label"] });
+preLocalizeObject("CONFIG.class.archetypes", { keys: ["label"], sort: true });
 preLocalizeObject("CONFIG.class.classes", { keys: ["label"] });
 preLocalizeObject("CONFIG.class.kind", { keys: ["label"] });

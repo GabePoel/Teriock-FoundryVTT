@@ -80,7 +80,7 @@ export default function ActorMovementPart(Base) {
  */
 function speedField(initial, label) {
   return new fields.NumberField({
-    choices: objectMap(TERIOCK.CONFIG.character.speed, e => e.label, { localize: true }),
+    choices: TERIOCK.CONFIG.character.speed,
     initial,
     integer: true,
     label,

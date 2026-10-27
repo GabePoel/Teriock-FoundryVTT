@@ -1,4 +1,4 @@
-import { getName, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
+import { getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { RankSystem } from "../../items/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
@@ -23,7 +23,7 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       archetype: new IdentifierField({
-        choices: objectMap(TERIOCK.CONFIG.class.archetypes, a => a.label, { localize: true }),
+        choices: TERIOCK.CONFIG.class.archetypes,
         initial: "everyman",
         nullable: false,
         required: true,

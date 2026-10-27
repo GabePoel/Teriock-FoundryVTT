@@ -3,7 +3,6 @@ import {
   makeIcon,
   mergeMetadata,
   mixClasses,
-  objectMap,
   toCamelCase,
   toKebabCase,
 } from "../../../../../utils/_module.mjs";
@@ -68,11 +67,7 @@ export default class BaseAffinity
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      category: new fields.StringField({
-        initial: "ability",
-        required: true,
-        choices: () => objectMap(TERIOCK.CONFIG.category, c => c.label),
-      }),
+      category: new fields.StringField({ choices: TERIOCK.CONFIG.category, initial: "ability", required: true }),
       identifier: new IdentifierField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
       name: new fields.StringField(),

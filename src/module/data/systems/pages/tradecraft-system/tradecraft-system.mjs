@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { FluencySystem } from "../../effects/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
@@ -23,7 +23,7 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       field: new IdentifierField({
-        choices: objectMap(TERIOCK.CONFIG.tradecraft.fields, f => f.label, { localize: true }),
+        choices: TERIOCK.CONFIG.tradecraft.fields,
         initial: "artisan",
         nullable: false,
         required: true,

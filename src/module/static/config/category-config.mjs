@@ -32,4 +32,4 @@ const categoryConfig = {
 
 export default categoryConfig;
 
-preLocalizeObject("CONFIG.category", { keys: ["label"] });
+preLocalizeObject("CONFIG.category", { keys: ["label"], last: "other", sort: true });

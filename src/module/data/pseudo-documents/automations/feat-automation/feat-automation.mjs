@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { commandActivations } from "../../activations/command-activations.mjs";
 import { ThresholdAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -17,7 +17,7 @@ export default class FeatAutomation extends mixClasses(ThresholdAutomation, Trig
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       attribute: new fields.StringField({
-        choices: objectMap(TERIOCK.CONFIG.attribute, (v) => v.label, { localize: true }),
+        choices: TERIOCK.CONFIG.attribute,
         initial: "int",
         label: "TERIOCK.COMMON.Attribute",
         required: true,

@@ -26,4 +26,4 @@ export default {
 preLocalizeObject("CONFIG.cost.primary.types");
 preLocalizeObject("CONFIG.cost.components.keys");
 preLocalizeObject("CONFIG.cost.components.types");
-preLocalizeObject("CONFIG.cost.tweaks", { key: "label" });
+preLocalizeObject("CONFIG.cost.tweaks", { key: "label", sort: true });

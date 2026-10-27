@@ -7,7 +7,7 @@ import BaseMessageSystem from "../base-message-system/base-message-system.mjs";
 const { fields } = foundry.data;
 
 /**
- * @import { DataField } from "@common/data/fields.mjs";
+ * @import { DataSchema } from "@common/abstract/_types.mjs";
  */
 
 /**
@@ -22,7 +22,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
 
   /**
    * @inheritDoc
-   * @returns {Record<string, DataField>}
+   * @returns {DataSchema}
    */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {

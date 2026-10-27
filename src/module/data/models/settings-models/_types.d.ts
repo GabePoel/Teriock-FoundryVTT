@@ -1,4 +1,4 @@
-import { DataField } from "@common/data/fields.mjs";
+import { DataSchema } from "@common/abstract/_types.mjs";
 
 import { BaseDataModel } from "../../abstract/_module.mjs";
 
@@ -34,13 +34,13 @@ declare global {
       new(...args: object[]): DocumentSettingsModelInstance<Category>;
       CATEGORY: Category;
       KEY_GROUPS: Record<string, Teriock.Behavior.SettingsCategory>;
-      defineSchema(): Record<string, DataField>;
+      defineSchema(): DataSchema;
     }
 
     export interface UserSettingsModelConstructor<Category extends Teriock.Behavior.SettingsCategory> {
       new(...args: object[]): UserSettingsModelInstance<Category>;
       CATEGORY: Category;
-      defineSchema(): Record<string, DataField>;
+      defineSchema(): DataSchema;
     }
   }
 }
