@@ -106,7 +106,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     if (
       this.consumeAmmunition && this.source.system.ammunition.enabled && this.ammunition?.system.consumption.enabled
     ) {
-      const amount = this.source.system.ammunition.consumptionAmount ?? this.ammunition.system.consumption.amount;
+      const amount = this.source.system.ammunition.amount ?? this.ammunition.system.consumption.amount;
       this.operations.push({
         action: "update",
         documentName: "Item",

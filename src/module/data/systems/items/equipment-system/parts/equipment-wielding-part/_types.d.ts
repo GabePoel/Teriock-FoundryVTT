@@ -4,7 +4,7 @@ declare global {
       /** <schema> Ammunition */
       ammunition: {
         /** <schema> The amount of ammunition this consumes */
-        consumptionAmount: number;
+        amount: number;
         /** <base> Whether this uses ammunition */
         enabled: boolean;
         /** <schema> The type of ammunition this uses */
