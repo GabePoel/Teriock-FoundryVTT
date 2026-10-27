@@ -1,7 +1,7 @@
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { dotJoin, makeIconClass } from "../../utils/_module.mjs";
+import { makeIconClass } from "../../utils/_module.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
@@ -254,7 +254,8 @@ export default class CostPayer extends ResolvableDialog {
               checked: this.state.sources[k]?.[i],
               img: d.img,
               name: d.name,
-              text: dotJoin([d.system.remainingString, d.master !== this.#execution.actor && d.master?.name]),
+              subtitle: d.system.remainingString,
+              text: d.master !== this.#execution.actor && d.master?.name,
               uuid: d.uuid,
             }]),
           ),

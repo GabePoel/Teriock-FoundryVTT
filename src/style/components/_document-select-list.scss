@@ -68,20 +68,31 @@
       }
     }
 
-    .doc-name-container {
-      align-items: center;
+    .doc-label-container {
       display: flex;
-      flex-direction: row;
+      flex: 1;
+      flex-direction: column;
+      min-width: 0;
+      padding-block: 4px;
+    }
+
+    .doc-name-container {
+      @include mixins.text-cutoff;
       font-family:
         var(--font-h1), serif;
-      font-size: large;
-      height: 28px;
+      font-size: var(--teriock-block-title-font-size);
+    }
+
+    .doc-subtitle-container {
+      @include mixins.text-cutoff;
+      @include mixins.text-subtle;
     }
 
     .doc-text-container {
+      @include mixins.text-cutoff;
       @include mixins.text-subtle;
-      margin-left: auto;
       margin-right: 14px;
+      max-width: 50%;
     }
   }
 }

@@ -51,8 +51,15 @@
         <span class="doc-image-container">
           <img alt="" loading="lazy" src="{{ doc.img }}" />
         </span>
-        <span class="doc-name-container">{{ doc.name }}</span>
-        <span class="doc-text-container">{{ doc.text }}</span>
+        <span class="doc-label-container">
+          <span class="doc-name-container">{{ doc.name }}</span>
+          {{#if doc.subtitle}}
+            <span class="doc-subtitle-container">{{ doc.subtitle }}</span>
+          {{/if}}
+        </span>
+        {{#if doc.text}}
+          <span class="doc-text-container">{{ doc.text }}</span>
+        {{/if}}
       </label>
     </li>
   {{/each}}
