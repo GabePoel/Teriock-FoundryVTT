@@ -1,3 +1,4 @@
+import { migratePowerKinds } from "../../data/fields/tools/migrations.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
@@ -30,6 +31,12 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   static getDefaultArtwork(itemData) {
     const img = itemData?.img ?? this.getDefaultImageForType(itemData?.type);
     return { img };
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migratePowerKinds(source);
+    return super.migrateData(source, options);
   }
 
   /**

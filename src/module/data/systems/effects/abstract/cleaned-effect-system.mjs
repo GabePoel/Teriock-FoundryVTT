@@ -1,5 +1,5 @@
-import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
-import { InstructionsSystemMixin } from "../mixins/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { InstructionsSystemMixin } from "../../mixins/_module.mjs";
 import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 
 /**

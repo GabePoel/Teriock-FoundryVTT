@@ -10,16 +10,22 @@ import { parseIdentifier } from "../utils/_module.mjs";
  */
 
 /**
- * @typedef {{ img?: string, name?: string, pack?: string, priority: number, isEquipmentType?: boolean }} TrackedUuid
+ * @typedef {{ img?: string, name?: string, pack?: string, priority: number, isType?: boolean }} TrackedUuid
  */
 
 /**
  * @typedef IdentifierEntry
  * @property {UUID<IdentifiableDocument>} uuid
- * @property {boolean} isEquipmentType
+ * @property {boolean} isType
  * @property {string} [img]
  * @property {string} [name]
  */
+
+/**
+ * Item types that can be used as templates for other documents.
+ * @type {Record<string, string>}
+ */
+const TYPE_FIELDS = { equipment: "equipmentType", mount: "mountType" };
 
 /**
  * @typedef CanonicalLookupOptions
@@ -44,12 +50,6 @@ export default class IdentifiersRegistry {
    * @type {Set<Teriock.Documents.DocumentName>}
    */
   #embeddedDocumentNames = new Set(["JournalEntryPage"]);
-
-  /**
-   * Registration of equipment types.
-   * @type {Map<Identifier, IdentifierEntry>}
-   */
-  #equipmentTypes = new Map();
 
   /**
    * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
@@ -81,6 +81,12 @@ export default class IdentifiersRegistry {
 
   /** @type {(value?: PromiseLike<void> | void) => void} */
   #resolveInitialization;
+
+  /**
+   * Registration of the Documents that define types, keyed by Item type.
+   * @type {Map<string, Map<Identifier, IdentifierEntry>>}
+   */
+  #types = new Map(Object.keys(TYPE_FIELDS).map(t => [t, new Map()]));
 
   /**
    * Pick the highest-priority tracked UUID from a group.
@@ -162,17 +168,20 @@ export default class IdentifiersRegistry {
   }
 
   /**
-   * Refresh the cached equipment type entry for an identifier.
+   * Refresh the cached type entry for an identifier.
+   * @param {string} type
    * @param {Identifier} identifier
    */
-  #refreshEquipmentType(identifier) {
-    const group = this.#identifiers.get("equipment")?.get(identifier);
+  #refreshType(type, identifier) {
+    const types = this.#types.get(type);
+    if (!types) { return; }
+    const group = this.#identifiers.get(type)?.get(identifier);
     const canonical = group && this.#getCanonical(group);
-    if (canonical?.entry.isEquipmentType) {
+    if (canonical?.entry.isType) {
       const { img, name } = canonical.entry;
-      this.#equipmentTypes.set(identifier, { img, isEquipmentType: true, name, uuid: canonical.uuid });
+      types.set(identifier, { img, isType: true, name, uuid: canonical.uuid });
     } else {
-      this.#equipmentTypes.delete(identifier);
+      types.delete(identifier);
     }
   }
 
@@ -192,7 +201,7 @@ export default class IdentifiersRegistry {
    * Internally associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
-   * @param {{ img?: string, name?: string, isEquipmentType?: boolean }} [data]
+   * @param {{ img?: string, name?: string, isType?: boolean }} [data]
    */
   #track(identifier, uuid, data = {}) {
     const parsed = foundry.utils.parseUuid(uuid);
@@ -206,13 +215,13 @@ export default class IdentifiersRegistry {
     const existing = group.get(uuid);
     group.set(uuid, {
       img: data.img ?? existing?.img,
-      isEquipmentType: data.isEquipmentType ?? existing?.isEquipmentType ?? false,
+      isType: data.isType ?? existing?.isType ?? false,
       name: data.name ?? existing?.name,
       // World UUIDs parse to a collection so the prefix is what distinguishes a pack
       pack: uuid.startsWith("Compendium") ? parsed.collection?.collection : undefined,
       priority,
     });
-    if (type === "equipment") { this.#refreshEquipmentType(id); }
+    this.#refreshType(type, id);
   }
 
   /**
@@ -241,7 +250,7 @@ export default class IdentifiersRegistry {
    * @returns {ReadonlyMap<Identifier, IdentifierEntry>}
    */
   get equipmentTypes() {
-    return this.initialized ? this.#equipmentTypes : new Map();
+    return this.initialized ? this.#types.get("equipment") : new Map();
   }
 
   /**
@@ -257,6 +266,14 @@ export default class IdentifiersRegistry {
    */
   get initializing() {
     return this.#initializing;
+  }
+
+  /**
+   * Canonical entries of all mount types.
+   * @returns {ReadonlyMap<Identifier, IdentifierEntry>}
+   */
+  get mountTypes() {
+    return this.initialized ? this.#types.get("mount") : new Map();
   }
 
   /**
@@ -321,7 +338,7 @@ export default class IdentifiersRegistry {
       if (!canonical?.entry.name) { continue; }
       entries[identifier] = {
         img: canonical.entry.img,
-        isEquipmentType: canonical.entry.isEquipmentType,
+        isType: canonical.entry.isType,
         name: canonical.entry.name,
         uuid: canonical.uuid,
       };
@@ -384,7 +401,7 @@ export default class IdentifiersRegistry {
    * Re-initialize the registry.
    */
   reset() {
-    this.#equipmentTypes.clear();
+    for (const types of this.#types.values()) { types.clear(); }
     this.#identifiers.clear();
     for (const documentName of this.documentNames) {
       for (const d of game.collections.get(documentName) ?? []) {
@@ -399,7 +416,7 @@ export default class IdentifiersRegistry {
    * Associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
-   * @param {{ img?: string, name?: string, isEquipmentType?: boolean }} [data]
+   * @param {{ img?: string, name?: string, isType?: boolean }} [data]
    */
   track(identifier, uuid, data = {}) {
     this.#track(identifier, uuid, data);
@@ -413,7 +430,7 @@ export default class IdentifiersRegistry {
   async trackCompendium(pack) {
     if (this.documentNames.has(pack.documentName)) {
       const fields = ["name", "system.identifier", "system._sup"];
-      if (pack.documentName === "Item") { fields.push("system.equipmentType"); }
+      if (pack.documentName === "Item") { fields.push(...Object.values(TYPE_FIELDS).map(f => `system.${f}`)); }
       const index = await pack.getIndex({ fields });
       if (pack.documentName === "JournalEntry") {
         const promises = index.contents.map(d => this.#trackJournalEntry(d.uuid));
@@ -424,9 +441,9 @@ export default class IdentifiersRegistry {
           const identifier = d.system?.identifier;
           const uuid = d.uuid;
           if (!type || !identifier || !uuid || d.system?._sup) { continue; }
-          const isEquipmentType = type === "equipment" && d.system?.equipmentType === identifier;
+          const isType = Boolean(TYPE_FIELDS[type]) && d.system?.[TYPE_FIELDS[type]] === identifier;
           const typedIdentifier = `${type}:${identifier}`;
-          this.#track(typedIdentifier, uuid, { img: d.img, isEquipmentType, name: d.name });
+          this.#track(typedIdentifier, uuid, { img: d.img, isType, name: d.name });
         }
       }
     }
@@ -449,8 +466,9 @@ export default class IdentifiersRegistry {
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
-    const isEquipmentType = identifier?.startsWith("equipment:") && document.system?.equipmentType === identifier;
-    this.track(identifier, uuid, { img: document.img, isEquipmentType, name: document.name });
+    const field = TYPE_FIELDS[document.type];
+    const isType = Boolean(field) && document.system?.[field] === identifier;
+    this.track(identifier, uuid, { img: document.img, isType, name: document.name });
   }
 
   /**
@@ -469,7 +487,7 @@ export default class IdentifiersRegistry {
       typeMap.delete(id);
       if (typeMap.size === 0) { this.#identifiers.delete(type); }
     }
-    if (type === "equipment") { this.#refreshEquipmentType(id); }
+    this.#refreshType(type, id);
   }
 
   /**

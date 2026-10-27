@@ -472,6 +472,24 @@ export function equipmentTypeField(options = {}) {
 }
 
 /**
+ * Field for a mount type with reference-based suggestions.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function mountTypeField(options = {}) {
+  return new IdentifierField({
+    type: "mount",
+    suggestions: () =>
+      Object.fromEntries(
+        game.teriock.identifiers.mountTypes.entries().filter(([, e]) => e.name).map((
+          [identifier, e],
+        ) => [identifier, e.name]),
+      ),
+    ...options,
+  });
+}
+
+/**
  * Field for selecting an archetype.
  * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
  * @returns {IdentifierField}

@@ -1,5 +1,5 @@
-import { mergeMetadata, mixClasses, toKebabCase } from "../../../../utils/_module.mjs";
-import { BaseSystemMixin, ChildSystemMixin } from "../../mixins/_module.mjs";
+import { mergeMetadata, mixClasses, toKebabCase } from "../../../../../utils/_module.mjs";
+import { BaseSystemMixin, ChildSystemMixin } from "../../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
 

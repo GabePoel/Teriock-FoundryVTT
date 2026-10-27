@@ -1,6 +1,19 @@
 import { toKebabCase } from "../../../utils/_module.mjs";
 
 /**
+ * Power kinds that became their own item types.
+ * @type {Record<string, ItemType>}
+ */
+const POWER_KIND_TYPES = {
+  backstory: "backstory",
+  blessing: "blessing",
+  curse: "curse",
+  deathScar: "scar",
+  familiar: "familiar",
+  pact: "pact",
+};
+
+/**
  * Status ids renamed to match their identifiers.
  * @type {Record<string, string>}
  */
@@ -62,6 +75,17 @@ export function migrateIterables(source, ...fields) {
     const values = foundry.utils.getProperty(source, field);
     if (Array.isArray(values)) { foundry.utils.setProperty(source, field, values.map((v) => toKebabCase(v))); }
   }
+}
+
+/**
+ * Migrate powers whose kinds are now their own Item types.
+ * @param {object} source
+ */
+export function migratePowerKinds(source) {
+  const type = POWER_KIND_TYPES[source.system?.kind];
+  if (source.type !== "power" || !type) { return; }
+  source.type = type;
+  source.system.kind = CONFIG.Item.dataModels[type].metadata.initialKind;
 }
 
 /**

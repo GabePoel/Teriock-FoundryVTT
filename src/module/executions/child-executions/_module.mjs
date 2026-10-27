@@ -3,4 +3,5 @@ export { default as ArmamentExecution } from "./armament-execution/armament-exec
 export { default as AttunementExecution } from "./attunement-execution.mjs";
 export { default as EquipmentExecution } from "./equipment-execution/equipment-execution.mjs";
 export { default as ExpirationExecution } from "./expiration-execution/expiration-execution.mjs";
+export { default as FamiliarExecution } from "./familiar-execution.mjs";
 export { default as FluencyExecution } from "./fluency-execution.mjs";

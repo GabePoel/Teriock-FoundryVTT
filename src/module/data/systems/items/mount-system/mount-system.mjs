@@ -7,9 +7,9 @@ import {
   mixClasses,
   toKebabCase,
 } from "../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { mountTypeField } from "../../../fields/tools/builders.mjs";
 import { AttunableSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
-import BaseItemSystem from "../base-item-system/base-item-system.mjs";
+import { BaseItemSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -34,7 +34,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       mounted: new fields.BooleanField({ initial: false, required: false }),
-      mountType: new IdentifierField({ type: "mount" }),
+      mountType: mountTypeField(),
     });
   }
 

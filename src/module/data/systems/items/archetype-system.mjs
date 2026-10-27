@@ -1,6 +1,6 @@
-import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
+import { dotJoin, getName, mergeMetadata, mixClasses, omit } from "../../../utils/_module.mjs";
 import { ArmorSuppressionSystemMixin, CompetenceDisplaySystemMixin } from "../mixins/_module.mjs";
-import BaseItemSystem from "./base-item-system/base-item-system.mjs";
+import { BaseItemSystem } from "./abstract/_module.mjs";
 
 /**
  * Archetype-specific item data model.
@@ -21,6 +21,11 @@ export default class ArchetypeSystem
     initialCompetence: 1,
     type: "archetype",
   });
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return omit(super.defineSchema(), ["maxAv"]);
+  }
 
   /** @inheritDoc */
   get _panelBars() {

@@ -1,6 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { ConsumableSystemMixin, MetaphysicsSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
-import CleanedEffectSystem from "./cleaned-effect-system.mjs";
+import { CleanedEffectSystem } from "./abstract/_module.mjs";
 
 /**
  * Resource-specific effect data model.

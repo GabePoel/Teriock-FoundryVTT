@@ -4,7 +4,7 @@ import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs"
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { CompetenceDisplaySystemMixin, RevelationSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
-import CleanedEffectSystem from "../cleaned-effect-system.mjs";
+import { CleanedEffectSystem } from "../abstract/_module.mjs";
 
 /**
  * Fluency-specific effect data model.

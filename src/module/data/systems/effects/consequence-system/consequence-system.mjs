@@ -1,7 +1,7 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { associationsField } from "../../../fields/tools/builders.mjs";
 import { TransformationSystemMixin } from "../../mixins/_module.mjs";
-import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
+import { ApplicableEffectSystem } from "../abstract/_module.mjs";
 
 /**
  * Effect-specific effect data model.
@@ -14,12 +14,42 @@ export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    childTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
+    childTypes: [
+      "ability",
+      "backstory",
+      "blessing",
+      "body",
+      "curse",
+      "equipment",
+      "familiar",
+      "fluency",
+      "pact",
+      "power",
+      "rank",
+      "resource",
+      "scar",
+      "species",
+    ],
     icon: TERIOCK.DISPLAY.icons.manifest.document.consequence,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.consequence,
     initialKind: "other",
     type: "consequence",
-    visibleTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
+    visibleTypes: [
+      "ability",
+      "backstory",
+      "blessing",
+      "body",
+      "curse",
+      "equipment",
+      "familiar",
+      "fluency",
+      "pact",
+      "power",
+      "rank",
+      "resource",
+      "scar",
+      "species",
+    ],
   });
 
   /** @inheritDoc */

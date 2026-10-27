@@ -1,3 +1,6 @@
+import { asInf } from "../../../../utils/_module.mjs";
+import { InfiniteNumberField } from "../../../fields/_module.mjs";
+
 /**
  * Mixin that enables suppression due to maximum armor value.
  *
@@ -8,13 +11,44 @@
  * @param {T} Base
  */
 export default function ArmorSuppressionSystemMixin(Base) {
-  /** @mixin */
-  class ArmorSuppressionSystem extends Base {
+  /**
+   * @mixin
+   * @implements {Teriock.Models.ArmorSuppressionSystemData}
+   */
+  class ArmorSuppressionSystem
+    extends /** @type {InitializedDataModel<T, Teriock.Models.ArmorSuppressionSystemData>} */ (Base)
+  {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), { maxAv: new InfiniteNumberField({ integer: true }) });
+    }
+
     /**
      * Documents whose competence was weakened by armor during this preparation.
      * @type {(TeriockActiveEffect|TeriockItem)[]}
      */
     #weakened = [];
+
+    /**
+     * Maximum armor value panel bar.
+     * @returns {Teriock.Panels.PanelBar}
+     */
+    get _maxAvBar() {
+      return {
+        icon: TERIOCK.DISPLAY.icons.manifest.armament.av,
+        label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label"),
+        wrappers: [
+          this.maxAv === 0
+            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: asInf(this.maxAv) }),
+        ],
+      };
+    }
+
+    /** @inheritDoc */
+    get _panelBars() {
+      return [...super._panelBars, this._maxAvBar];
+    }
 
     /** @inheritDoc */
     _getTipSuppressions() {

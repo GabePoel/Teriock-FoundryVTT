@@ -285,9 +285,11 @@ foundry.helpers.Hooks.once("init", function() {
 
   rs(d.TeriockItem, si.ArmamentSheet, "Armament", { types: ["body"] });
   rs(d.TeriockItem, si.EquipmentSheet, "Equipment", { types: ["equipment"] });
+  rs(d.TeriockItem, si.FamiliarSheet, "Familiar", { types: ["familiar"] });
   rs(d.TeriockItem, si.MountSheet, "Mount", { types: ["mount"] });
-  rs(d.TeriockItem, si.PowerSheet, "Power", { types: ["power"] });
+  rs(d.TeriockItem, si.PowerSheet, "Power", { types: ["backstory", "blessing", "pact", "power"] });
   rs(d.TeriockItem, si.RankSheet, "Rank", { types: ["rank"] });
+  rs(d.TeriockItem, si.SimpleItemSheet, "SimpleItem", { types: ["curse", "scar"] });
   rs(d.TeriockItem, si.SpeciesSheet, "Species", { types: ["species"] });
   rs(d.TeriockItem, su.ChildSheet, "Child", { types: ["archetype"] });
   rs(d.TeriockItem, su.PanelSheet, "Panel", { makeDefault: false, types: d.TeriockItem.TYPES });

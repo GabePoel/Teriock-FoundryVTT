@@ -1,7 +1,7 @@
 export { default as AdjustableSystemMixin } from "./adjustable-system-mixin/adjustable-system-mixin.mjs";
 export { default as AffinableSystemMixin } from "./affinable-system-mixin/affinable-system-mixin.mjs";
 export { default as ArmamentSystemMixin } from "./armament-system-mixin/armament-system-mixin.mjs";
-export { default as ArmorSuppressionSystemMixin } from "./armor-suppression-system-mixin.mjs";
+export { default as ArmorSuppressionSystemMixin } from "./armor-suppression-system-mixin/armor-suppression-system-mixin.mjs";
 export { default as AttackSystemMixin } from "./attack-system-mixin/attack-system-mixin.mjs";
 export { default as AttunableSystemMixin } from "./attunable-system-mixin/attunable-system-mixin.mjs";
 export { default as AutomatableSystemMixin } from "./automatable-system-mixin/automatable-system-mixin.mjs";

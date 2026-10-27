@@ -23,11 +23,17 @@ import {
 import { BaseGroupSystem, CommandedSystem, MobSystem } from "./groups/_module.mjs";
 import {
   ArchetypeSystem,
+  BackstorySystem,
+  BlessingSystem,
   BodySystem,
+  CurseSystem,
   EquipmentSystem,
+  FamiliarSystem,
   MountSystem,
+  PactSystem,
   PowerSystem,
   RankSystem,
+  ScarSystem,
   SpeciesSystem,
 } from "./items/_module.mjs";
 import { BaseMessageSystem, InteractiveSystem, SharedSystem, TriggeredSystem } from "./messages/_module.mjs";
@@ -80,11 +86,17 @@ declare global {
 
   export interface ItemSystemMap {
     archetype: ArchetypeSystem;
+    backstory: BackstorySystem;
+    blessing: BlessingSystem;
     body: BodySystem;
+    curse: CurseSystem;
     equipment: EquipmentSystem;
+    familiar: FamiliarSystem;
     mount: MountSystem;
+    pact: PactSystem;
     power: PowerSystem;
     rank: RankSystem;
+    scar: ScarSystem;
     species: SpeciesSystem;
   }
 

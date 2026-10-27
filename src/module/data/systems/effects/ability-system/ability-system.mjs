@@ -3,7 +3,7 @@ import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
-import CleanedEffectSystem from "../cleaned-effect-system.mjs";
+import { CleanedEffectSystem } from "../abstract/_module.mjs";
 import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;

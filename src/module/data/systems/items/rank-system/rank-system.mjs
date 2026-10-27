@@ -8,7 +8,7 @@ import {
   StatGiverSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
-import BaseItemSystem from "../base-item-system/base-item-system.mjs";
+import { BaseItemSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -177,15 +177,7 @@ export default class RankSystem
         ],
       },
       this._statBar,
-      {
-        icon: TERIOCK.DISPLAY.icons.manifest.armament.av,
-        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details"),
-        wrappers: [
-          this.maxAv === 0
-            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
-        ],
-      },
+      { ...this._maxAvBar, label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details") },
     ];
   }
 

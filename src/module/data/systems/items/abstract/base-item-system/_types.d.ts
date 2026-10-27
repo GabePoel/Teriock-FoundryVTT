@@ -1,4 +1,4 @@
-import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
+import { TeriockActiveEffect } from "../../../../../documents/_module.mjs";
 
 declare module "./base-item-system.mjs" {
   export default interface BaseItemSystem {

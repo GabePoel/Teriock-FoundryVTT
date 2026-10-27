@@ -14,7 +14,7 @@ import {
   ConsumableSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
-import BaseItemSystem from "../base-item-system/base-item-system.mjs";
+import { BaseItemSystem } from "../abstract/_module.mjs";
 import {
   EquipmentIdentificationPart,
   EquipmentPanelPart,

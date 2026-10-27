@@ -1,6 +1,6 @@
 import { dotJoin, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
-import CleanedEffectSystem from "../cleaned-effect-system.mjs";
+import { CleanedEffectSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 

@@ -54,6 +54,7 @@ export default function BaseSystemMixin(Base) {
         hierarchy: false,
         panel: false,
         revealable: false,
+        simple: false,
         statGiver: false,
         text: false,
         triggerable: false,

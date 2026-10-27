@@ -9,7 +9,7 @@ import {
   RevelationSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
-import CleanedEffectSystem from "../cleaned-effect-system.mjs";
+import { CleanedEffectSystem } from "../abstract/_module.mjs";
 
 /**
  * Property-specific effect data model.

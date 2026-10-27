@@ -8,7 +8,7 @@ import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { CompetenceDisplaySystemMixin, StatGiverSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
-import BaseItemSystem from "../base-item-system/base-item-system.mjs";
+import { BaseItemSystem } from "../abstract/_module.mjs";
 import { SpeciesPanelPart, SpeciesTransformationPart } from "./parts/_module.mjs";
 
 const { fields } = foundry.data;

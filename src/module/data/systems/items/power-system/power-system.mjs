@@ -1,30 +1,13 @@
-import { asInf, dotJoin, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { InfiniteNumberField } from "../../../fields/_module.mjs";
-import {
-  ArmorSuppressionSystemMixin,
-  CompetenceDisplaySystemMixin,
-  MetaphysicsSystemMixin,
-  StatGiverSystemMixin,
-} from "../../mixins/_module.mjs";
-import BaseItemSystem from "../base-item-system/base-item-system.mjs";
+import { dotJoin, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { ArmorSuppressionSystemMixin } from "../../mixins/_module.mjs";
+import { SimpleItemSystem } from "../abstract/_module.mjs";
 
 /**
  * Power-specific item data model.
- * @extends {BaseItemSystem}
+ * @extends {SimpleItemSystem}
  * @mixes ArmorSuppressionSystem
- * @mixes CompetenceDisplaySystem
- * @mixes MetaphysicsSystem
- * @mixes StatGiverSystem
  */
-export default class PowerSystem
-  extends mixClasses(
-    BaseItemSystem,
-    ArmorSuppressionSystemMixin,
-    CompetenceDisplaySystemMixin,
-    MetaphysicsSystemMixin,
-    StatGiverSystemMixin,
-  )
-{
+export default class PowerSystem extends mixClasses(SimpleItemSystem, ArmorSuppressionSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Power"];
 
@@ -39,33 +22,9 @@ export default class PowerSystem
   });
 
   /** @inheritDoc */
-  static get _initialStatPoolFormula() {
-    return "";
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), { maxAv: new InfiniteNumberField({ integer: true }) });
-  }
-
-  /** @inheritDoc */
-  get _panelBars() {
-    return [this._statBar, this._metaphysicsBar, {
-      icon: TERIOCK.DISPLAY.icons.manifest.armament.av,
-      label: _loc(this.schema.fields.maxAv.label),
-      wrappers: [
-        this.maxAv === 0
-          ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-          : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: asInf(this.maxAv) }),
-      ],
-    }];
-  }
-
-  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.text = dotJoin([_loc(this._kindEntry.label), parts.text]);
-    parts.subtitle = _loc("TYPES.Item.power");
     return parts;
   }
 }

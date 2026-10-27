@@ -46,10 +46,10 @@ export default function ActorMagicPart(Base) {
 
     /**
      * The curses that count towards the maximum value.
-     * @returns {TeriockItem<"power">[]}
+     * @returns {TeriockItem<"curse">[]}
      */
     get curseDocuments() {
-      return this.parent.previewedTypes.power.filter(p => p.system.kind === "curse");
+      return this.parent.previewedTypes.curse;
     }
 
     /**
@@ -58,7 +58,7 @@ export default function ActorMagicPart(Base) {
      */
     get rotatorDocuments() {
       return this.parent.previewedTypes.ability.filter(a =>
-        a.system.rotator && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type))
+        a.system.rotator && !a.isReference && (!a.parent || a.parent.type === "rank" || a.parent.metadata.tags.simple)
       );
     }
 

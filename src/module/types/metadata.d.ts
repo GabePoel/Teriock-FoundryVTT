@@ -35,6 +35,7 @@ declare global {
       granted: boolean;
       hierarchy: boolean;
       revealable: boolean;
+      simple: boolean;
       statGiver: boolean;
       text: boolean;
       triggerable: boolean;

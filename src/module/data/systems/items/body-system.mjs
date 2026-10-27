@@ -1,7 +1,7 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { Panel } from "../../pseudo-documents/_module.mjs";
 import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
-import BaseItemSystem from "./base-item-system/base-item-system.mjs";
+import { BaseItemSystem } from "./abstract/_module.mjs";
 
 /**
  * Body part-specific item data model.

@@ -5,7 +5,8 @@ export default class EnvironmentSystem extends BaseActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: super.metadata.childTypes.filter(t =>
-      !["archetype", "attunement", "body", "fluency", "mount", "rank", "species"].includes(t)
+      !["archetype", "attunement", "backstory", "body", "familiar", "fluency", "mount", "rank", "scar", "species"]
+        .includes(t)
     ),
     icon: TERIOCK.DISPLAY.icons.manifest.document.environment,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.environment,

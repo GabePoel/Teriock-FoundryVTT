@@ -7,6 +7,7 @@ import {
   ResourceSystem,
 } from "../../../../../../data/systems/effects/_module.mjs";
 import { PowerSystem, RankSystem } from "../../../../../../data/systems/items/_module.mjs";
+import { getSystemClass } from "../../../../../../utils/_module.mjs";
 
 /**
  * @import { ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
@@ -115,14 +116,22 @@ export default function PlayableActorSheetSectionsPart(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupPower() {
-      return [{
-        docs: this.document.previewed.getTypeSync("species"),
-        empty: _loc("TERIOCK.DOCUMENTS.Item.species.plural").toLocaleLowerCase(game.i18n.lang),
-        optional: !this.document.metadata.childTypes.includes("species"),
-      }, {
-        docs: this.document.previewed.getTypeSync("power"),
-        empty: _loc("TERIOCK.DOCUMENTS.Item.power.plural").toLocaleLowerCase(game.i18n.lang),
-      }];
+      return [
+        {
+          docs: this.document.previewed.getTypeSync("species"),
+          empty: _loc("TERIOCK.DOCUMENTS.Item.species.plural").toLocaleLowerCase(game.i18n.lang),
+          optional: !this.document.metadata.childTypes.includes("species"),
+        },
+        {
+          docs: this.document.previewed.getTypeSync("power"),
+          empty: _loc("TERIOCK.DOCUMENTS.Item.power.plural").toLocaleLowerCase(game.i18n.lang),
+        },
+        ...Item.implementation.TYPES.filter(t => t !== "power" && getSystemClass(t)?.metadata.tags.simple).map(t => ({
+          docs: this.document.previewed.getTypeSync(t),
+          empty: _loc(`TERIOCK.DOCUMENTS.Item.${t}.plural`).toLocaleLowerCase(game.i18n.lang),
+          optional: true,
+        })),
+      ];
     }
 
     /**
@@ -203,12 +212,15 @@ export default function PlayableActorSheetSectionsPart(Base) {
       label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
       preview: { addButton: { type: "rank" }, groups: this.#previewGroupRank, model: previews.RankPreviewModel },
     }, {
-      dragTypes: ["power", "species"],
+      dragTypes: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar"],
       icon: PowerSystem.metadata.icon,
       id: "powers",
       label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
       preview: {
-        addButton: { type: "power", types: ["power", "species"] },
+        addButton: {
+          type: "power",
+          types: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar"],
+        },
         groups: this.#previewGroupPower,
         model: previews.PowerPreviewModel,
       },

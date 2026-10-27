@@ -3,7 +3,13 @@ import usableContext from "./usable-context.mjs";
 
 const powerContext = {
   ...usableContext,
+  backstory: "TYPES.Item.backstory",
+  blessing: "TYPES.Item.blessing",
+  curse: "TYPES.Item.curse",
+  familiar: "TYPES.Item.familiar",
+  pact: "TYPES.Item.pact",
   power: "TYPES.Item.power",
+  scar: "TYPES.Item.scar",
 
   av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",

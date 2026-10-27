@@ -1,6 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { GrantedSystemMixin } from "../mixins/_module.mjs";
-import ApplicableEffectSystem from "./applicable-effect-system/applicable-effect-system.mjs";
+import { ApplicableEffectSystem } from "./abstract/_module.mjs";
 
 /**
  * Effect-specific effect data model.

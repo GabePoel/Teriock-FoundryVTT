@@ -1,6 +1,6 @@
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { nullIdField } from "../../../fields/tools/builders.mjs";
-import { BaseSystemMixin, ChildSystemMixin, InstructionsSystemMixin } from "../../mixins/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../../utils/_module.mjs";
+import { nullIdField } from "../../../../fields/tools/builders.mjs";
+import { BaseSystemMixin, ChildSystemMixin, InstructionsSystemMixin } from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;

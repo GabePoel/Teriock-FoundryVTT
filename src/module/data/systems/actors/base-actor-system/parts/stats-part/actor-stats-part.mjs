@@ -234,7 +234,7 @@ export default function ActorStatsPart(Base) {
       const items = [
         ...this.parent.previewedTypes.species.sort(pathSorterFactory("name")),
         ...this.parent.previewedTypes.rank.sort(pathSorterFactory("_stats.createdTime")),
-        ...this.parent.previewedTypes.power.sort(pathSorterFactory("name")),
+        ...this.parent.previewed.contents.filter(d => d.metadata.tags.simple).sort(pathSorterFactory("name")),
         ...this.parent.previewedTypes.mount.sort(pathSorterFactory("name")),
       ];
       for (const item of items) { item.system.prepareStatDice(); }

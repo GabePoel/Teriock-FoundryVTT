@@ -1,7 +1,7 @@
 import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../utils/_module.mjs";
 import { ThresholdDataMixin } from "../../mixins/_module.mjs";
 import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
-import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
+import { BaseEffectSystem } from "./abstract/_module.mjs";
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
