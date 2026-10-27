@@ -41,9 +41,11 @@ export default {
   attunable: { attune: "ms-approval-delegation", deattune: "ms-approval-delegation-off", tier: "ms-trophy" },
   break: { destroy: "ms-destruction", reforge: "ms-hardware", repair: "ms-local-bar", shatter: "ms-no-drinks" },
   change: {
+    applyIfSuppressed: "ms-play-arrow",
     key: "ms-search",
     phase: "ms-nest-clock-farsight-analog",
     priority: "ms-low-priority",
+    skipIfSuppressed: "ms-play-disabled",
     target: "ms-recenter",
     type: "ms-calculate",
     value: "ms-subdirectory-arrow-right",

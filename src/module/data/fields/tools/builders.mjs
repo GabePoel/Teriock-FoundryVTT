@@ -86,6 +86,7 @@ function changeTypeField(types = null) {
  */
 export function changeField() {
   return new SchemaField({
+    applyIfSuppressed: new BooleanField({ label: "TERIOCK.SCHEMA.Change.applyIfSuppressed.label" }),
     key: new StringField({ initial: "", label: "EFFECT.FIELDS.changes.element.key.label" }),
     phase: new StringField({
       choices: objectMap(TERIOCK.CONFIG.change.phase, (p) => p.label, { localize: true, filter: p => p.visible }),

@@ -12,7 +12,11 @@ export default function ChangesSheetMixin(Base) {
   class ChangesSheet extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
-      actions: { addParentChange: this._onAddChange, deleteParentChange: this._onDeleteChange },
+      actions: {
+        addParentChange: this._onAddChange,
+        deleteParentChange: this._onDeleteChange,
+        toggleParentChangeSuppress: this._onToggleChangeSuppress,
+      },
     };
 
     /**
@@ -67,6 +71,20 @@ export default function ChangesSheetMixin(Base) {
         changes.splice(index, 1);
         await this.document.update({ [path]: changes });
       }
+    }
+
+    /**
+     * Toggles whether a change at any specified path applies while its effect is suppressed.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     */
+    static async _onToggleChangeSuppress(_event, target) {
+      const path = target.dataset.path;
+      const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document._source, path));
+      const change = changes[Number(target.dataset.index)];
+      change.applyIfSuppressed = !change.applyIfSuppressed;
+      await this.document.update({ [path]: changes });
     }
 
     /** @inheritDoc */

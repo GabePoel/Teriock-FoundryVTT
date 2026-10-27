@@ -27,7 +27,8 @@ effects:
             @this.item.type.orb, @this.item.type.pistol, @this.item.type.sail, @this.item.type.seashell,
             @this.item.type.spectacles, @this.item.type.syringe))
           changes:
-            - key: system.price
+            - applyIfSuppressed: true
+              key: system.price
               phase: derived
               priority: 10
               target: Item
@@ -51,7 +52,8 @@ effects:
         - _id: gp0ZMcHc8kdMAYs1
           activeQualifier: not(@this.item.class.magelore-equipment)
           changes:
-            - key: system.price
+            - applyIfSuppressed: true
+              key: system.price
               phase: derived
               priority: 10
               target: Item

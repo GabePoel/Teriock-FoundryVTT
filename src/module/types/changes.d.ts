@@ -22,7 +22,7 @@ declare global {
 
     export type ChildTarget = keyof typeof changeConfig.child.targets;
 
-    export type ChangeData = EffectChangeData & { phase: Phase, target: Target };
+    export type ChangeData = EffectChangeData & { applyIfSuppressed?: boolean, phase: Phase, target: Target };
 
     export type ChildChangeData = ChangeData & { qualifier: Teriock.System.FormulaString };
   }

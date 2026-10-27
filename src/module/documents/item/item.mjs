@@ -100,9 +100,9 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
     /** @type {ActiveEffectChangeData[]} */
     const changes = [];
     for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) { continue; }
+      if (effect.disabled) { continue; }
       for (const change of effect.system.itemChanges) {
-        if (change.key === "" || change.phase !== phase) { continue; }
+        if (change.key === "" || change.phase !== phase || !(effect.active || change.applyIfSuppressed)) { continue; }
         const copy = foundry.utils.deepClone(change);
         copy.effect = effect;
         changes.push(copy);

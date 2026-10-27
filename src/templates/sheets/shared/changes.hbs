@@ -97,6 +97,7 @@
           <button
             class="change-delete"
             type="button"
+            id='{{concat @root/rootId ../../changesPath "." i ".delete"}}'
             data-action="deleteParentChange"
             data-tooltip='{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}'
             data-index="{{ i }}"
@@ -107,6 +108,22 @@
           >
             {{makeIcon @root/TERIOCK.DISPLAY.icons.manifest.ui.delete "button"}}
           </button>
+          {{#if (and changeFields.applyIfSuppressed (eq change.target "Item"))}}
+            <button
+              id='{{concat @root/rootId ../../changesPath "." i ".applyIfSuppressed"}}'
+              class="change-suppress"
+              type="button"
+              aria-pressed='{{ifThen change.applyIfSuppressed "true" "false"}}'
+              data-action="toggleParentChangeSuppress"
+              data-tooltip='{{localize (concat "TERIOCK.SCHEMA.Change.applyIfSuppressed." (ifThen change.applyIfSuppressed "true" "false"))}}'
+              data-index="{{ i }}"
+              data-path="{{ ../../changesPath }}"
+            >
+              {{makeIcon (ifThen change.applyIfSuppressed
+                  @root/TERIOCK.DISPLAY.icons.manifest.change.applyIfSuppressed
+                  @root/TERIOCK.DISPLAY.icons.manifest.change.skipIfSuppressed) "button"}}
+            </button>
+          {{/if}}
         </div>
       </li>
     {{/with}}
@@ -115,6 +132,7 @@
   <button
     class="add-change-button"
     type="button"
+    id='{{concat @root/rootId changesPath ".add"}}'
     data-action="addParentChange"
     data-path="{{ changesPath }}"
     data-value-path="{{ valuePath }}"
