@@ -25,12 +25,9 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
       if (!game.user.isGM) { throw new Error(_loc("COMBAT.NoneActive")); }
       combat = await Combat.implementation.create({ active: true }, { render: false });
     }
-    const summons = [...new Set(tokens.flatMap(t => t.summons))].filter(s =>
-      s.getFlag("teriock", "addToCombat") === true
-      && s.isOwner
-      && (!s.hidden || game.user.isGM)
-      && !tokens.includes(s)
-      && !combat.getCombatantsByToken(s).length
+    const addToCombat = t => t.getFlag("teriock", "addToCombat") === true;
+    const summons = [...new Set(tokens.flatMap(t => t.getAllSummons(addToCombat)))].filter(s =>
+      s.isOwner && (!s.hidden || game.user.isGM) && !tokens.includes(s) && !combat.getCombatantsByToken(s).length
     );
     if (summons.length) {
       const selected = game.settings.get("teriock", "confirmSummonsAddToCombat")
@@ -119,10 +116,11 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    */
   get summoner() {
     const tokens = this.parent?.tokens;
+    const token = tokens?.get(this.getFlag("teriock", "summonerTokenId"));
+    if (token && token !== this) { return token; }
     const actorId = this.getFlag("teriock", "summonerActorId");
-    return tokens?.get(this.getFlag("teriock", "summonerTokenId"))
-      ?? (typeof actorId === "string" ? tokens?.find(t => t.actorLink && t.actorId === actorId && t !== this) : null)
-      ?? null;
+    if (typeof actorId !== "string") { return null; }
+    return tokens?.find(t => t !== this && t.actorLink && t.actorId === actorId) ?? null;
   }
 
   /**
@@ -163,6 +161,23 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
       }
     }
     if (this.detectionModes.basicSight) { this.detectionModes.basicSight.enabled = false; }
+  }
+
+  /**
+   * Tokens summoned by this one or by its summons. Chains only continue through summons that pass the filter.
+   * @param {(token: TeriockTokenDocument) => boolean} [filter]
+   * @returns {TeriockTokenDocument[]}
+   */
+  getAllSummons(filter = () => true) {
+    const allTokens = new Set();
+    let remainingTokens = [this];
+    while (remainingTokens.length) {
+      remainingTokens = remainingTokens.flatMap(t => t.summons).filter(s =>
+        s !== this && !allTokens.has(s) && filter(s)
+      );
+      for (const summon of remainingTokens) { allTokens.add(summon); }
+    }
+    return [...allTokens];
   }
 
   /**

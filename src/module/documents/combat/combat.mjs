@@ -102,25 +102,24 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @category Groups
    */
   #joinChanges(entries) {
-    const joins = [];
+    const create = [];
+    const joined = new Map();
     for (const { joiners, name, target, type } of entries) {
       if (joiners.includes(target)) { continue; }
-      const group = target.documentName === "CombatantGroup" ? target : target.group;
-      const moving = joiners.filter(c => !group || c.group !== group);
-      if (moving.length && (group || type)) { joins.push({ group, moving, name, target, type }); }
-    }
-    if (!joins.length) { return null; }
-    const create = [];
-    const { deletes, groupIds } = this.#leaveChanges(joins.flatMap(j => j.moving));
-    for (const { group, moving, name, target, type } of joins) {
-      let groupId = group?.id;
+      let groupId = target.documentName === "CombatantGroup" ? target.id : target.group?.id;
+      const moving = joiners.filter(c => !groupId || c.group?.id !== groupId);
+      if (!moving.length || (!groupId && !type)) { continue; }
       if (!groupId) {
         groupId = foundry.utils.randomID();
         create.push({ _id: groupId, initiative: target.initiative, name, system: { commanderId: target.id }, type });
-        groupIds[target.id] = groupId;
+        joined.set(target, groupId);
       }
-      for (const joiner of moving) { groupIds[joiner.id] = groupId; }
+      for (const joiner of moving) { joined.set(joiner, groupId); }
     }
+    const movers = [...joined].filter(([c, groupId]) => c.group?.id !== groupId).map(([c]) => c);
+    if (!movers.length) { return null; }
+    const { deletes, groupIds } = this.#leaveChanges(movers);
+    for (const mover of movers) { groupIds[mover.id] = joined.get(mover); }
     return { create, deletes, groupIds };
   }
 
@@ -183,15 +182,18 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    */
   async #summonChanges(combatants) {
     const candidates = [...new Set([...this.combatants, ...combatants])];
+    const byToken = new Map(candidates.filter(c => c.token).map(c => [c.token, c]));
+    const addToGroup = t => Boolean(t.getFlag("teriock", "addToGroup"));
+    const chains = new Map(
+      candidates.map(c => [c, (c.token?.getAllSummons(addToGroup) ?? []).map(t => byToken.get(t)).filter(Boolean)]),
+    );
+    // Only the summoner at the top of a chain gathers a CombatantGroup
+    const nested = new Set([...chains.values()].flat());
     const summons = new Map();
-    for (const combatant of candidates) {
-      const type = combatant.token?.getFlag("teriock", "addToGroup");
-      const summonerId = type && combatant.token.summoner?.id;
-      const summoner = summonerId ? candidates.find(c => c.tokenId === summonerId) : null;
-      if (!summoner || !(combatants.includes(combatant) || combatants.includes(summoner))) { continue; }
-      if (summoner.group && combatant.group === summoner.group) { continue; }
-      if (!summons.has(summoner)) { summons.set(summoner, { joiners: [], type }); }
-      summons.get(summoner).joiners.push(combatant);
+    for (const [root, chain] of chains) {
+      if (nested.has(root) || ![root, ...chain].some(c => combatants.includes(c))) { continue; }
+      const joiners = chain.filter(c => !root.group || c.group !== root.group);
+      if (joiners.length) { summons.set(root, { joiners, type: chain[0].token.getFlag("teriock", "addToGroup") }); }
     }
     if (!summons.size) { return null; }
     if (game.settings.get("teriock", "confirmSummonsAddToGroup")) {
