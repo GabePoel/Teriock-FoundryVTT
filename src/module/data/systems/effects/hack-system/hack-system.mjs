@@ -74,16 +74,16 @@ export default class HackSystem extends ApplicableEffectSystem {
         key: `system.hacks.${this.part}.value`,
         phase: "initial",
         priority: 5,
-        type: "add",
-        value: "1",
+        type: "upgrade",
+        value: String(this.escalation),
       });
       if (this.permanent) {
         this.changes.push({
           key: `system.hacks.${this.part}.min`,
           phase: "initial",
           priority: 5,
-          type: "add",
-          value: "1",
+          type: "upgrade",
+          value: String(this.escalation),
         });
       }
     }

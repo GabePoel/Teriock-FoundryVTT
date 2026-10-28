@@ -67,23 +67,22 @@ function buildHarmOperations(actor, stat, { amount, morganti }) {
 }
 
 /**
- * Operations that add or remove status effects. Statuses are toggled if `active` isn't a boolean.
+ * Operations that create and delete status effects. Statuses in both lists are kept.
  * @param {TeriockActor} actor
- * @param {Teriock.Keys.Status[]} statuses
- * @param {boolean} [active]
- * @param {object} [options]
- * @param {boolean} [options.full] - Removing also deletes consequences that provide the statuses.
+ * @param {object} options
+ * @param {Teriock.Keys.Status[]} [options.create]
+ * @param {Teriock.Keys.Status[]} [options.delete]
+ * @param {boolean} [options.full] - Deleting also deletes consequences that provide the statuses.
  * @param {boolean} [options.overlay]
  * @returns {Promise<DatabaseWriteOperation[]>}
  */
-async function buildStatusOperations(actor, statuses, active, { full = false, overlay = false } = {}) {
-  const valid = statuses.filter(s => CONFIG.statusEffects[s]);
-  const existing = valid.filter(s => actor.effects.has(CONFIG.statusEffects[s]._id));
-  const toDelete = new Set(active === true ? [] : existing.map(s => CONFIG.statusEffects[s]._id));
-  if (full && active === false) {
-    for (const c of actor.applicables) { if (statuses.some(s => c.statuses.has(s))) { toDelete.add(c.id); } }
+async function buildStatusOperations(actor, { create = [], delete: del = [], full = false, overlay = false }) {
+  const has = s => actor.effects.has(CONFIG.statusEffects[s]?._id);
+  const toDelete = new Set(del.filter(s => has(s) && !create.includes(s)).map(s => CONFIG.statusEffects[s]._id));
+  if (full) {
+    for (const c of actor.applicables) { if (del.some(s => c.statuses.has(s))) { toDelete.add(c.id); } }
   }
-  const toCreate = active === false ? [] : valid.filter(s => !existing.includes(s));
+  const toCreate = create.filter(s => CONFIG.statusEffects[s] && !has(s));
   const data = await Promise.all(toCreate.map(async s => {
     const effect = (await ActiveEffect.implementation.fromStatusEffect(s, { parent: actor })).toObject();
     if (overlay) { foundry.utils.setProperty(effect, "flags.core.overlay", true); }
@@ -353,8 +352,8 @@ const commandConfig = {
     },
     trigger: true,
     operations: async (actor, { amount }) =>
-      actor.system.hp.value <= amount ? buildStatusOperations(actor, ["dead"], true, { overlay: true }) : [],
-    reverse: actor => buildStatusOperations(actor, ["dead"], false),
+      actor.system.hp.value <= amount ? buildStatusOperations(actor, { create: ["dead"], overlay: true }) : [],
+    reverse: actor => buildStatusOperations(actor, { delete: ["dead"] }),
   },
   pay: {
     icon: icons.manifest.stat.gp,
@@ -388,8 +387,8 @@ const commandConfig = {
     },
     trigger: true,
     operations: async (actor, { amount }) =>
-      actor.system.hp.value <= amount ? buildStatusOperations(actor, ["asleep"], true, { overlay: true }) : [],
-    reverse: actor => buildStatusOperations(actor, ["asleep"], false),
+      actor.system.hp.value <= amount ? buildStatusOperations(actor, { create: ["asleep"], overlay: true }) : [],
+    reverse: actor => buildStatusOperations(actor, { delete: ["asleep"] }),
   },
 
   apply: {
@@ -403,7 +402,7 @@ const commandConfig = {
       if (!status) { return []; }
       return validateTypedIdentifier(status, { strict: true })
         ? getEnsureChildrenOperations(actor, [status])
-        : buildStatusOperations(actor, [status], true);
+        : buildStatusOperations(actor, { create: [status] });
     },
   },
   attack: {
@@ -429,7 +428,7 @@ const commandConfig = {
     trigger: true,
     operations: async actor => {
       if (!actor.statuses.has("unconscious") || actor.statuses.has("dead")) { return []; }
-      const operations = await buildStatusOperations(actor, ["asleep", "unconscious"], false);
+      const operations = await buildStatusOperations(actor, { delete: ["asleep", "unconscious"] });
       if (actor.system.hp.value <= 0) { operations.push(buildUpdateOperation(actor, { "system.hp.value": 1 })); }
       return operations;
     },
@@ -448,8 +447,8 @@ const commandConfig = {
     label: "TERIOCK.COMMANDS.Cover.label",
     reverse: "uncover",
     operations: (actor, { amount = 1 }) => {
-      const value = actor.system.cover;
-      return buildStatusOperations(actor, effectConfig.cover.slice(value, Math.min(3, value + amount)), true);
+      const level = Math.min(3, actor.system.cover + amount);
+      return buildStatusOperations(actor, { create: [effectConfig.cover[level - 1]], delete: effectConfig.cover });
     },
   },
   dampen: {
@@ -523,8 +522,12 @@ const commandConfig = {
     operations: (actor, { amount = 1, part }) => {
       const config = hackConfig[part];
       if (!config) { return []; }
-      const value = actor.system.hacks[part].value;
-      return buildStatusOperations(actor, config.statuses.slice(value, Math.min(value + amount, config.max)), true);
+      const { min, value } = actor.system.hacks[part];
+      const level = Math.min(value + amount, config.max);
+      return buildStatusOperations(actor, {
+        create: level > min ? [config.statuses[level - 1]] : [],
+        delete: config.statuses,
+      });
     },
   },
   heal: {
@@ -594,7 +597,7 @@ const commandConfig = {
       if (!status) { return []; }
       return validateTypedIdentifier(status, { strict: true })
         ? getEnsureNoChildrenOperations(actor, [status])
-        : buildStatusOperations(actor, [status], false, { full: true });
+        : buildStatusOperations(actor, { delete: [status], full: true });
     },
   },
   repair: {
@@ -624,7 +627,7 @@ const commandConfig = {
       const statuses = ["conditions", "hacks", "cover"].filter(k => options[k]).flatMap(k =>
         Object.values(STATUSES[k]).map(s => s.id)
       );
-      operations.push(...(await buildStatusOperations(actor, statuses, false)));
+      operations.push(...(await buildStatusOperations(actor, { delete: statuses })));
       return operations;
     },
   },
@@ -661,7 +664,7 @@ const commandConfig = {
       return [
         ...(hp.value <= 0 ? buildBarOperations(actor, "hp", 1 - hp.value) : []),
         ...(mp.value <= 0 ? buildBarOperations(actor, "mp", 1 - mp.value) : []),
-        ...(await buildStatusOperations(actor, ["dead"], false, { full: true })),
+        ...(await buildStatusOperations(actor, { delete: ["dead"], full: true })),
       ];
     },
   },
@@ -724,7 +727,10 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      if (!validateTypedIdentifier(status, { strict: true })) { return buildStatusOperations(actor, [status]); }
+      if (!validateTypedIdentifier(status, { strict: true })) {
+        const key = actor.effects.has(CONFIG.statusEffects[status]?._id) ? "delete" : "create";
+        return buildStatusOperations(actor, { [key]: [status] });
+      }
       return actor.children.identifiers.has(status)
         ? getEnsureNoChildrenOperations(actor, [status])
         : getEnsureChildrenOperations(actor, [status]);
@@ -748,8 +754,8 @@ const commandConfig = {
     label: "TERIOCK.COMMANDS.Uncover.label",
     reverse: "cover",
     operations: (actor, { amount = 1 }) => {
-      const value = actor.system.cover;
-      return buildStatusOperations(actor, effectConfig.cover.slice(Math.max(0, value - amount), value), false);
+      const level = Math.max(0, actor.system.cover - amount);
+      return buildStatusOperations(actor, { create: [effectConfig.cover[level - 1]], delete: effectConfig.cover });
     },
   },
   undampen: {
@@ -773,9 +779,14 @@ const commandConfig = {
     icon: options => hackConfig[options?.part || "arm"].icon,
     label: options => hackConfig[options?.part || "arm"].remove,
     operations: (actor, { amount = 1, part }) => {
-      const ids = actor.effects.contents.filter(e => e.type === "hack" && e.system.part === part && !e.system.permanent)
-        .sort((a, b) => b.system.escalation - a.system.escalation).slice(0, amount).map(e => e.id);
-      return ids.length ? [actor.getDeleteChildDocumentsOperation("ActiveEffect", ids)] : [];
+      const config = hackConfig[part];
+      if (!config) { return []; }
+      const { min, value } = actor.system.hacks[part];
+      const level = Math.max(0, value - amount);
+      return buildStatusOperations(actor, {
+        create: level > min ? [config.statuses[level - 1]] : [],
+        delete: config.statuses,
+      });
     },
   },
   use: {
