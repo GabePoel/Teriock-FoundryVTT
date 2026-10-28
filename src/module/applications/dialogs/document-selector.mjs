@@ -37,7 +37,7 @@ export default class DocumentSelector extends ResolvableDialog {
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { ok: this._onGetSelected },
+    actions: { ok: { buttons: [0, 2], handler: this._onGetSelected } },
     classes: ["dynamic-select"],
     position: { width: 450 },
     window: {
@@ -123,7 +123,7 @@ export default class DocumentSelector extends ResolvableDialog {
     const entries = {};
     const getName = (doc) => doc.fullName || doc.name;
     documents.sort((a, b) => getName(a).localeCompare(getName(b)));
-    if (!options.multi && options.checked?.length > 0) { options.checked.length = 1; }
+    if (!options.multi) { options.checked = options.checked.slice(0, 1); }
     for (const doc of documents) {
       const id = doc.uuid;
       idToDoc.set(id, doc);
@@ -304,10 +304,6 @@ export default class DocumentSelector extends ResolvableDialog {
   async _onRender(context, options = {}) {
     await super._onRender(context, options);
     this._initSearchFilter();
-    this.element.querySelector("[data-action=ok]")?.addEventListener(
-      "contextmenu",
-      event => DocumentSelector._onGetSelected.call(this, event),
-    );
   }
 
   /** @inheritDoc */

@@ -132,13 +132,14 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
       type: "interactive",
     }, messageData);
     if (this.displayRoll && roll) { messageData.rolls.push(roll); }
-    const text = await TeriockTextEditor.enrichHTML(this.description, { relativeTo: this });
-    messageData.system.panels.forEach(panel => {
-      panel.blocks.push({ classes: [TERIOCK.DISPLAY.panels.styles.derived], text, title: this.name });
-    });
-    messageData.system.panels = messageData.system.panels.filter(Boolean).map(p =>
-      new teriock.data.pseudoDocuments.Panel(p)
-    );
+    const panels = messageData.system.panels.filter(Boolean);
+    if (this.description) {
+      const text = await TeriockTextEditor.enrichHTML(this.description, { relativeTo: this });
+      for (const panel of panels) {
+        panel.blocks.push({ classes: [TERIOCK.DISPLAY.panels.styles.derived], text, title: this.name });
+      }
+    }
+    messageData.system.panels = panels.map(p => new teriock.data.pseudoDocuments.Panel(p));
     return TeriockChatMessage.create(messageData, messageOptions);
   }
 

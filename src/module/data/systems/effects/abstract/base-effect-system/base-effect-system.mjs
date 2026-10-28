@@ -90,7 +90,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     return Object.assign(super._getTipSuppressions(), {
       dampened: this._isSuppressedDampened.bind(this),
       deattuned: this._isSuppressedDeattuned.bind(this),
-      destroyed: this._isSuppressedDestroyed.bind(this),
+      parentDestroyed: this._isSuppressedDestroyed.bind(this),
       parentStashed: this._isSuppressedStashed.bind(this),
       parentUnequipped: this._isSuppressedUnequipped.bind(this),
       shattered: this._isSuppressedShattered.bind(this),

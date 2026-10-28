@@ -69,7 +69,7 @@ export default function CommonDocumentMixin(Base) {
           callback: async (event, button) => {
             let renderSheet = event.type !== "contextmenu";
             const onConfirm = confirmEvent => {
-              if (confirmEvent.type === "contextmenu") { renderSheet = false; }
+              if (confirmEvent.button === 2) { renderSheet = false; }
             };
             const importData = await getSystemClass(button.form.elements.type.value).importDocument(createOptions, {
               onConfirm,

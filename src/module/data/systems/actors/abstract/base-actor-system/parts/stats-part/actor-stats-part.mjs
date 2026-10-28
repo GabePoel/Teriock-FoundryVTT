@@ -134,7 +134,7 @@ export default function ActorStatsPart(Base) {
       statData.dice = new Collection(dice.map(d => [d.id, d]));
       statData.max = Math.max(1, statData.base);
       statData.min = -Math.floor(statData.max / 2);
-      statData.max -= statData.morganti;
+      statData.max = Math.max(statData.min, statData.max - statData.morganti);
       statData.value = Math.clamp(statData.value, statData.min, statData.max);
       statData.temp = Math.max(0, statData.temp);
     }

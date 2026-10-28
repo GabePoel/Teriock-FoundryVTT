@@ -20,12 +20,6 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
       ?? TERIOCK.DISPLAY.icons.manifest.ui.compendium;
   }
 
-  /** @type {Promise<void>} */
-  #deleting;
-
-  /** @type {(value?: PromiseLike<void> | void) => void} */
-  #resolveDeleting;
-
   /** @inheritDoc */
   async _onCreateEntry(event, target) {
     await super._onCreateEntry(event, target);
@@ -39,18 +33,6 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
         pack.apps.push(new pack.applicationClass({ collection: pack }));
       }
     }
-  }
-
-  /** @inheritDoc */
-  async _onDeleteCompendium(li) {
-    const documentName = game.packs.get(li.dataset.pack)?.documentName;
-    // The promise from deleting compendiums isn't returned. Otherwise, the identifiers registry re-initializes before
-    // `game.packs` has the pack deleted, and we get errors. Since this re-renders after packs are deleted, hijack that
-    // to resolve this promise.
-    this.#deleting = new Promise(resolve => this.#resolveDeleting = resolve);
-    await super._onDeleteCompendium(li);
-    await this.#deleting;
-    if (game.teriock.identifiers.documentNames.has(documentName)) { game.teriock.identifiers.reset(); }
   }
 
   /** @inheritDoc */
@@ -82,12 +64,5 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
     return Object.assign(super._preparePackContext(pack), {
       icon: makeIconClass(TeriockCompendiumDirectory.getPackIcon(pack), "solid"),
     });
-  }
-
-  /** @inheritDoc */
-  async render(force = false, options = {}) {
-    const out = await super.render(force, options);
-    this.#resolveDeleting?.();
-    return out;
   }
 }

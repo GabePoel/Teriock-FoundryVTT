@@ -117,7 +117,7 @@ export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin) {
    */
   static async useDocumentGeneral(lookup, options) {
     const { actor, event } = options;
-    const tokens = /** @type {TeriockToken[]} */ game.canvas?.tokens.controlled ?? [];
+    const tokens = /** @type {TeriockToken[]} */ game.canvas?.tokens?.controlled ?? [];
     const actors = tokens.map(t => t.actor).filter(Boolean);
     if (actors.length === 0 && options.actor) { actors.push(actor); }
     game.actors.check(actors);

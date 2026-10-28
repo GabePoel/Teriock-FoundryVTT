@@ -28,7 +28,7 @@
         </div>
       </label>
     {{/each}}
-    <label class="money-panel-container">
+    <div class="money-panel-container">
       <div class="money-icon tcenter timage" data-src="{{ currencyImages.debt }}">
         <img
           src="{{ @root/TERIOCK.DISPLAY.thumbnails.manifest.currency.debt }}"
@@ -38,14 +38,17 @@
         />
       </div>
       <div class="money-panel tgrid g4">
-        {{formInput
-          systemFields.money.fields.debt
-          id=(concat @root/appId "-currency-debt")
-          classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
-          dataset=(object tooltip=(minLen system.money.debt 4) noScroll="true")
-          placeholder="0"
-          value=system.money.debt
-        }}
+        <button
+          id="{{ @root/appId }}-currency-debt"
+          class="tgrid-item gi1 money-panel-input tcenter updatable"
+          type="button"
+          data-action="updatePaths"
+          data-icon="{{ TERIOCK.DISPLAY.icons.manifest.ui.interest }}"
+          data-paths="system.money.debt system.interestRate"
+          data-tooltip="{{minLen system.money.debt 4}}"
+        >
+          {{ system.money.debt }}
+        </button>
         <div class="money-info tsubtle tcenter gi3">
           <div class="money-name">{{localize "TERIOCK.TERMS.Currency.debt"}}</div>
           <div class="money-value">
@@ -56,7 +59,7 @@
           </div>
         </div>
       </div>
-    </label>
+    </div>
   </div>
   {{!-- prettier-ignore --}}
   <output

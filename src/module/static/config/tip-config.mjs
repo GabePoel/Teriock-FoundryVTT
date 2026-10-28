@@ -18,7 +18,7 @@ const suppression = {
   parentUnequipped: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.unequipped",
   shattered: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.shattered",
   stashed: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.stashed",
-  unequipped: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.unequipped",
+  unequipped: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.unequipped",
   unmounted: "TERIOCK.SYSTEMS.Mount.MESSAGES.suppression.unmounted",
   unsustained: "TERIOCK.SYSTEMS.Applicable.MESSAGES.suppression.unsustained",
 };

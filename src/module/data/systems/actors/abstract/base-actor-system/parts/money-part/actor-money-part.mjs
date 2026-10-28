@@ -26,7 +26,7 @@ export default function ActorMoneyPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        interestRate: new fields.NumberField({ initial: 1, integer: false }),
+        interestRate: new fields.NumberField({ initial: 1, integer: false, min: 0, nullable: false }),
         money: new fields.SchemaField({
           ...objectMap(TERIOCK.CONFIG.currency, e => currencyField({ label: e.label })),
           debt: currencyField({ integer: false, placeholder: true }),
@@ -50,6 +50,18 @@ export default function ActorMoneyPart(Base) {
         wallet[currency.key] += count;
         amount = (amount - count * currency.value).toNearest(precision);
       }
+    }
+
+    /** @inheritDoc */
+    async _preCreate(data, options, user) {
+      const yes = await super._preCreate(data, options, user);
+      if (yes === false) { return false; }
+
+      const lockedPaths = [
+        ...[...Object.keys(TERIOCK.CONFIG.currency), "debt"].map(k => `system.money.${k}`),
+        "system.interestRate",
+      ];
+      this.parent.updateSource(foundry.utils.mergeObject({ system: { lockedPaths } }, data));
     }
 
     /**

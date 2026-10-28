@@ -94,7 +94,7 @@ export default class BaseActivation extends BasePseudoDocument {
    * @returns {TeriockToken[]}
    */
   get selectedTokens() {
-    return game.canvas?.tokens.controlled ?? [];
+    return game.canvas?.tokens?.controlled ?? [];
   }
 
   /**

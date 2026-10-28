@@ -401,7 +401,7 @@ export default class BaseExecution extends BaseDataModel {
     this._sourceDocument = options.source;
     this._showDialog = options.showDialog ?? game.settings.get("teriock", "showRollDialogs");
     this._actor = this._resolveActor(options);
-    this.executor = (game.canvas?.tokens.controlled ?? []).find(t => t.actor?.uuid === this.actor?.uuid)
+    this.executor = (game.canvas?.tokens?.controlled ?? []).find(t => t.actor?.uuid === this.actor?.uuid)
       ?? this.actor?.defaultToken ?? null;
     this._boosts = options.boosts ?? {};
     this._rollData = options.rollData ?? {};

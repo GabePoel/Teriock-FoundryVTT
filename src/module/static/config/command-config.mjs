@@ -233,11 +233,11 @@ const commandConfig = {
     trigger: true,
     operations: (
       actor,
-      { amount },
+      { amount = 0 },
     ) => [buildUpdateOperation(actor, { "system.hp.temp": Math.max(actor.system.hp.temp + amount, 0) })],
     reverse: (
       actor,
-      { amount },
+      { amount = 0 },
     ) => [buildUpdateOperation(actor, { "system.hp.temp": Math.max(actor.system.hp.temp - amount, 0) })],
   },
   gainTempMp: {
@@ -253,11 +253,11 @@ const commandConfig = {
     trigger: true,
     operations: (
       actor,
-      { amount },
+      { amount = 0 },
     ) => [buildUpdateOperation(actor, { "system.mp.temp": Math.max(actor.system.mp.temp + amount, 0) })],
     reverse: (
       actor,
-      { amount },
+      { amount = 0 },
     ) => [buildUpdateOperation(actor, { "system.mp.temp": Math.max(actor.system.mp.temp - amount, 0) })],
   },
   setTempHp: {
@@ -333,7 +333,7 @@ const commandConfig = {
     trigger: true,
     operations: (
       actor,
-      { amount, currencies, debt, equipmentTypes, mode },
+      { amount = 0, currencies, debt, equipmentTypes, mode },
     ) => [
       buildUpdateOperation(
         actor,
@@ -368,7 +368,7 @@ const commandConfig = {
     trigger: true,
     operations: (
       actor,
-      { amount, currencies, debt, equipmentTypes, mode },
+      { amount = 0, currencies, debt, equipmentTypes, mode },
     ) => [
       buildUpdateOperation(
         actor,

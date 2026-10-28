@@ -375,6 +375,7 @@ export default {
     import: "ms-download",
     infinity: "mdi-infinity",
     info: "ms-info",
+    interest: "ms-percent",
     level: "ms-stairs",
     linked: "ms-link",
     loading: "ms-progress-activity",
