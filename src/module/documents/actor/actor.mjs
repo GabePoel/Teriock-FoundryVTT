@@ -403,10 +403,8 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
       data.push(chatData);
     }
     if (!data.length) { return; }
-    this.triggerUser.query("teriock.createDocuments", {
-      data,
-      documentName: "ChatMessage",
-      operation: { triggeredMode: true },
+    this.triggerUser.query("teriock.modifyBatch", {
+      operations: [{ action: "create", data, documentName: "ChatMessage", triggeredMode: true }],
     }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
   }
 

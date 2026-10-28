@@ -150,13 +150,12 @@ export default function BaseDocumentMixin(Base) {
     static async createDocuments(data = [], operation = {}) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         this._cleanGMOperation(operation);
-        const docs = await game.users.queryGM("teriock.createDocuments", {
-          data,
-          documentName: this.documentName,
-          operation,
-        }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
-        if (!docs) { return data.map(_d => null); }
-        return Promise.all(docs.map(d => fromUuid(d)));
+        const [uuids] =
+          await game.users.queryGM("teriock.modifyBatch", {
+            operations: [{ ...operation, action: "create", data, documentName: this.documentName }],
+          }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT }) ?? [];
+        if (!uuids) { return data.map(_d => null); }
+        return Promise.all(uuids.map(u => fromUuid(u)));
       }
       return super.createDocuments(data, operation);
     }
@@ -196,13 +195,10 @@ export default function BaseDocumentMixin(Base) {
     static async deleteDocuments(ids = [], operation = {}) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         this._cleanGMOperation(operation);
-        const docs = await game.users.queryGM("teriock.deleteDocuments", {
-          documentName: this.documentName,
-          ids,
-          operation,
+        await game.users.queryGM("teriock.modifyBatch", {
+          operations: [{ ...operation, action: "delete", documentName: this.documentName, ids }],
         }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
-        if (!docs) { return ids.map(_d => null); }
-        return docs;
+        return ids.map(_d => null);
       }
       return super.deleteDocuments(ids, operation);
     }
@@ -231,13 +227,12 @@ export default function BaseDocumentMixin(Base) {
     static async updateDocuments(updates = [], operation = {}) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         this._cleanGMOperation(operation);
-        const docs = await game.users.queryGM("teriock.updateDocuments", {
-          documentName: this.documentName,
-          operation,
-          updates,
-        }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
-        if (!docs) { return updates.map(_d => null); }
-        return Promise.all(docs.map(d => fromUuid(d)));
+        const [uuids] =
+          await game.users.queryGM("teriock.modifyBatch", {
+            operations: [{ ...operation, action: "update", documentName: this.documentName, updates }],
+          }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT }) ?? [];
+        if (!uuids) { return updates.map(_d => null); }
+        return Promise.all(uuids.map(u => fromUuid(u)));
       }
       return super.updateDocuments(updates, operation);
     }

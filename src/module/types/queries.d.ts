@@ -1,9 +1,4 @@
-import type {
-  DatabaseCreateOperation,
-  DatabaseDeleteOperation,
-  DatabaseUpdateOperation,
-  DatabaseWriteOperation,
-} from "@common/abstract/_types.mjs";
+import type { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
 
 import type queries from "../helpers/queries/_module.mjs";
 
@@ -23,24 +18,6 @@ declare global {
       format?: Record<string, string>;
       localize?: boolean;
       notifyFailure?: boolean;
-    };
-
-    export type CreateDocumentsData = {
-      data: object;
-      documentName: string;
-      operation: Partial<Omit<DatabaseCreateOperation, "data">>;
-    };
-
-    export type UpdateDocumentsData = {
-      documentName: string;
-      operation: Partial<Omit<DatabaseUpdateOperation, "updates">>;
-      updates: object[];
-    };
-
-    export type DeleteDocumentsData = {
-      documentName: string;
-      ids: string[];
-      operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
 
     export type FireTriggerData = {
