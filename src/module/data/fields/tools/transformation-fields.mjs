@@ -67,7 +67,8 @@ export function automationTransformationFields() {
     attributes: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.attribute }), {
       hint: "TERIOCK.SCHEMA.Transformation.attributes.hint",
       label: "TERIOCK.SCHEMA.Transformation.attributes.label",
-      initial: () => Object.keys(TERIOCK.CONFIG.attribute),
+      initial: () =>
+        Object.keys(TERIOCK.CONFIG.attribute).filter(k => TERIOCK.CONFIG.attribute[k].transformationReset.initial),
     }),
     level: new fields.StringField({
       blank: true,

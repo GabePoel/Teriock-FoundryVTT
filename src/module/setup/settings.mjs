@@ -173,6 +173,7 @@ export const menus = {
             default: Object.values(documents).filter((d) =>
               foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.tooltip
             ).map(d => d.documentName),
+            inputType: "checkboxes",
             scope: "client",
             type: new fields.SetField(
               new fields.StringField({
@@ -219,6 +220,7 @@ export const menus = {
         settings: {
           deathBagStoneColors: {
             default: Object.keys(TERIOCK.CONFIG.deathBag.stones).filter(k => TERIOCK.CONFIG.deathBag.stones[k].initial),
+            inputType: "checkboxes",
             scope: "world",
             type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.deathBag.stones })),
           },
@@ -269,6 +271,7 @@ export const menus = {
           },
           secretAttributes: {
             default: [],
+            inputType: "checkboxes",
             scope: "world",
             type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.attribute })),
           },
@@ -303,6 +306,7 @@ export const menus = {
         settings: {
           errorMessages: {
             default: Object.keys(TERIOCK.CONFIG.tip.error),
+            inputType: "checkboxes",
             scope: "client",
             stacked: true,
             type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.tip.error }), {
@@ -341,6 +345,7 @@ export const menus = {
           },
           suppressionMessages: {
             default: Object.keys(TERIOCK.CONFIG.tip.suppression),
+            inputType: "checkboxes",
             scope: "client",
             stacked: true,
             type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.tip.suppression }), {
@@ -349,6 +354,7 @@ export const menus = {
             onChange: () => game.teriock.render({ applications: true }),
           },
           suppressionMessageTypes: {
+            inputType: "checkboxes",
             scope: "client",
             stacked: true,
             type: new fields.SetField(new fields.StringField({ choices: childTypeChoices }), {

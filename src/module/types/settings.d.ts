@@ -6,6 +6,7 @@ declare global {
   namespace Teriock.Settings {
     export type SettingEntry = Partial<SettingConfig> & {
       classes?: string[];
+      inputType?: "autocomplete" | "checkboxes";
       requiresReload?: boolean;
       stacked?: boolean;
     };

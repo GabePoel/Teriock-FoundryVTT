@@ -55,4 +55,9 @@ export default {
   },
 };
 
-preLocalizeObject("CONFIG.attribute", { keys: ["label", "abbreviation"], sort: true });
+preLocalizeObject("CONFIG.attribute", {
+  key: "abbreviation",
+  keys: ["label", "abbreviation"],
+  last: "unp",
+  sort: true,
+});

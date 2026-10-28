@@ -286,6 +286,13 @@ items:
         system:
           automations:
             - _id: jtjswsSL2kJ0MmuB
+              attributes:
+                - int
+                - mov
+                - per
+                - snk
+                - str
+                - unp
               globalIdentifiers:
                 - species:zombie
               override:
@@ -333,7 +340,8 @@ items:
           automations:
             - _id: e789ed5e109ebd1a
               changes:
-                - key: system.senses.ethereal
+                - applyIfSuppressed: false
+                  key: system.senses.ethereal
                   phase: derived
                   priority: 10
                   target: Actor
@@ -616,7 +624,8 @@ items:
           automations:
             - _id: parameterChanges
               changes:
-                - key: system.piercing.raw
+                - applyIfSuppressed: false
+                  key: system.piercing.raw
                   phase: derived
                   priority: 10
                   target: Item

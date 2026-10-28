@@ -109,13 +109,15 @@ items:
           automations:
             - _id: iSxkhemk7psQTxpR
               changes:
-                - key: system.hp.max
+                - applyIfSuppressed: false
+                  key: system.hp.max
                   phase: special
                   priority: 50
                   target: Actor
                   type: multiply
                   value: "0.5"
-                - key: system.mp.max
+                - applyIfSuppressed: false
+                  key: system.mp.max
                   phase: special
                   priority: 50
                   target: Actor
@@ -363,7 +365,8 @@ items:
           automations:
             - _id: e789ed5e109ebd1a
               changes:
-                - key: system.weight.self
+                - applyIfSuppressed: false
+                  key: system.weight.self
                   phase: derived
                   priority: 10
                   target: Actor
@@ -528,6 +531,13 @@ items:
                 unit: hour
               type: duration
             - _id: ngQVntiCQ8Ruot8n
+              attributes:
+                - int
+                - mov
+                - per
+                - snk
+                - str
+                - unp
               globalIdentifiers:
                 - species:zombie
               override:
@@ -537,8 +547,12 @@ items:
                 - mp
               setCompetence: override
               suppress:
+                - backstory
+                - blessing
                 - body
+                - familiar
                 - fluency
+                - pact
                 - rank
                 - species
               type: transformation
@@ -597,7 +611,8 @@ items:
           automations:
             - _id: e789ed5e109ebd1a
               changes:
-                - key: system.senses.ethereal
+                - applyIfSuppressed: false
+                  key: system.senses.ethereal
                   phase: derived
                   priority: 10
                   target: Actor

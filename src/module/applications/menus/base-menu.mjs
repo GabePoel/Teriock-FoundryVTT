@@ -130,6 +130,7 @@ export default class BaseMenu extends TeriockApplication {
       localize: true,
       name,
       stacked: setting.stacked,
+      type: setting.inputType,
       value: game.settings.get("teriock", name),
     };
     if (setting.choices) {
