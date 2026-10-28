@@ -64,7 +64,7 @@ declare global {
       visibleTypes: Teriock.Documents.ChildType[];
     };
 
-    export type PlayableCharacterSystemMetadata = CommonSystemMetadata & { defaultChildIdentifiers: TypedIdentifier[] };
+    export type CharacterActorSystemMetadata = CommonSystemMetadata & { defaultChildIdentifiers: TypedIdentifier[] };
 
     export type ChildSystemMetadata = CommonSystemMetadata & {
       initialKind: string;

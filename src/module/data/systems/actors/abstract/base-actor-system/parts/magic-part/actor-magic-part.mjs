@@ -1,0 +1,74 @@
+import { InfiniteNumberField } from "../../../../../../fields/_module.mjs";
+import { elderSorceryCreationSchema } from "../../../../../../fields/tools/builders.mjs";
+import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
+
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
+const { fields } = foundry.data;
+
+/**
+ * Actor data model that handles magic stuff.
+ *
+ * Relevant wiki pages:
+ * - [Curse](https://wiki.teriock.com/index.php/Keyword:Curse)
+ * - [Elder Sorcery](https://wiki.teriock.com/index.php/Core:Elder_Sorcery)
+ * - [Rotator Fluency](https://wiki.teriock.com/index.php/Ability:Rotator_Fluency)
+ * - [Rotators](https://wiki.teriock.com/index.php/Ability:Rotators)
+ *
+ * @template {MixinBase<typeof AbstractActorSystem>} T
+ * @param {T} Base
+ */
+export default function ActorMagicPart(Base) {
+  /**
+   * @mixin
+   * @implements {Teriock.Models.ActorMagicPartData}
+   * @property {TeriockActor} parent
+   */
+  class ActorMagicPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorMagicPartData>} */ (Base) {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        curses: new fields.SchemaField({
+          max: new InfiniteNumberField({ initial: TERIOCK.CONFIG.system.baseValues.maxCurses, integer: true }),
+          min: initialNumber(),
+          value: initialNumber(),
+        }),
+        elderSorceryCreation: new fields.SchemaField(elderSorceryCreationSchema()),
+        rotators: new fields.SchemaField({
+          max: new InfiniteNumberField({ initial: 0, integer: true }),
+          min: initialNumber(),
+          value: initialNumber(),
+        }),
+      });
+    }
+
+    /**
+     * The curses that count towards the maximum value.
+     * @returns {TeriockItem<"curse">[]}
+     */
+    get curseDocuments() {
+      return this.parent.previewedTypes.curse;
+    }
+
+    /**
+     * The rotators that count towards the maximum value.
+     * @returns {TeriockActiveEffect<"ability">[]}
+     */
+    get rotatorDocuments() {
+      return this.parent.previewedTypes.ability.filter(a =>
+        a.system.rotator && !a.isReference && (!a.parent || a.parent.type === "rank" || a.parent.metadata.tags.simple)
+      );
+    }
+
+    /** @inheritDoc */
+    prepareCleanupData() {
+      super.prepareCleanupData();
+      this.curses.value = this.curseDocuments.filter(c => c.active).length;
+      this.rotators.value = this.rotatorDocuments.filter(r => r.active).length;
+    }
+  }
+
+  return ActorMagicPart;
+}

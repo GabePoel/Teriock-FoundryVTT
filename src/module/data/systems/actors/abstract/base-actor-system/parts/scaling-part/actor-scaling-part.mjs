@@ -1,0 +1,117 @@
+import { toKebabCase } from "../../../../../../../utils/_module.mjs";
+import { initialBoolean, initialNumber, initialSchema } from "../../../../../../fields/tools/initializers.mjs";
+
+/**
+ * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
+ */
+
+const { fields } = foundry.data;
+
+/**
+ * Actor data model that handles scaling.
+ *
+ * Relevant wiki pages:
+ * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
+ * - [Battle Rating](https://wiki.teriock.com/index.php/Core:Battle_Rating)
+ *
+ * @template {MixinBase<typeof AbstractActorSystem>} T
+ * @param {T} Base
+ */
+export default function ActorScalingPart(Base) {
+  /**
+   * @mixin
+   * @implements {Teriock.Models.ActorScalingPartData}
+   * @property {TeriockActor} parent
+   */
+  class ActorScalingPart extends /** @type {InitializedDataModel<T, Teriock.Models.ActorScalingPartData>} */ (Base) {
+    /** @inheritDoc */
+    static defineSchema() {
+      return Object.assign(super.defineSchema(), {
+        presence: initialSchema({
+          max: initialNumber(TERIOCK.CONFIG.character.defaults.maxPresence),
+          min: initialNumber(),
+          over: initialBoolean(),
+          value: initialNumber(),
+        }),
+        scaling: new fields.SchemaField({
+          br: new fields.NumberField({ initial: null, nullable: true }),
+          brScale: new fields.BooleanField({ initial: false }),
+          f: initialNumber(),
+          lvl: new fields.NumberField({ initial: 1, integer: true, min: 1 }),
+          p: initialNumber(),
+          rank: initialNumber(),
+          scale: initialNumber(),
+        }),
+      });
+    }
+
+    /**
+     * Get rank roll data.
+     * @returns {object}
+     */
+    #getRankRollData() {
+      const data = {};
+      const ranks = this.parent.previewedTypes.rank;
+      for (const c of Object.keys(TERIOCK.CONFIG.class.classes)) {
+        data[`rank.${toKebabCase(c)}`] = ranks.filter(r => r.system._source.class === c).length;
+      }
+      for (const a of Object.keys(TERIOCK.CONFIG.class.archetypes)) {
+        data[`rank.${a}`] = ranks.filter(r => r.system._source.archetype === a).length;
+      }
+      return data;
+    }
+
+    /**
+     * Get species roll data.
+     * @returns {object}
+     */
+    #getSpeciesRollData() {
+      const data = {};
+      for (
+        const s of this.parent.previewedTypes.species.filter(s => s.active && s.system.identifier)
+      ) { data[`species.${s.system.identifier}`] = 1; }
+      return data;
+    }
+
+    /** @inheritDoc */
+    getRollData() {
+      const rollData = super.getRollData();
+      Object.assign(rollData, {
+        ...this.getScalingRollData(),
+        ...this.#getRankRollData(),
+        ...this.#getSpeciesRollData(),
+      });
+      return rollData;
+    }
+
+    /**
+     * Get base roll data.
+     * @returns {object}
+     */
+    getScalingRollData() {
+      return { br: this.scaling.br, f: this.scaling.f, lvl: this.scaling.lvl, p: this.scaling.p };
+    }
+
+    /** @inheritDoc */
+    prepareBaseData() {
+      this.presence.max = Math.max(
+        TERIOCK.CONFIG.character.defaults.maxPresence,
+        Math.floor(1 + (this.scaling.lvl + 1) / 5),
+      );
+      this.scaling.br ??= Math.max(0, ...this.parent.previewedTypes.species.map(s => s.system.br));
+      this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
+      this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
+      this.scaling.p = Math.max(
+        TERIOCK.CONFIG.system.baseValues.p,
+        Math.floor(TERIOCK.CONFIG.system.baseValues.p + 1 + (this.scaling.scale - 7) / 10),
+      );
+      this.scaling.f = Math.max(
+        TERIOCK.CONFIG.system.baseValues.f,
+        Math.floor(TERIOCK.CONFIG.system.baseValues.f + (this.scaling.scale - 2) / 5),
+      );
+      super.prepareBaseData();
+    }
+  }
+
+  return ActorScalingPart;
+}

@@ -48,7 +48,7 @@ export default class BaseRoll extends Roll {
     }
     return {
       actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || TERIOCK.DISPLAY.thumbnails.manifest.document.character,
+      img: img || target?.img || TERIOCK.DISPLAY.thumbnails.manifest.document.pc,
       name: name || target?.name,
       tokenUuid: token?.uuid || target.tokenUuid,
     };

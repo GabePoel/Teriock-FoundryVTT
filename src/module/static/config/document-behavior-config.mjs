@@ -11,7 +11,7 @@ export default {
       settings: { autoPayCosts: true, consumeAmmunition: true, consumeEquipment: false },
     },
     actor: {
-      icon: icons.manifest.document.character,
+      icon: icons.manifest.document.pc,
       settings: {
         autoColoration: true,
         autoDetectionModes: true,

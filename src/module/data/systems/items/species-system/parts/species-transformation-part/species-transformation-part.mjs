@@ -6,7 +6,7 @@ import { speciesTransformationFields } from "../../../../../fields/tools/transfo
 const { fields } = foundry.data;
 
 /**
- * @import { ActorTransformationPart } from "../../../../actors/base-actor-system/parts/transformation-part/actor-transformation-part.mjs";
+ * @import { ActorTransformationPart } from "../../../../actors/abstract/base-actor-system/parts/transformation-part/actor-transformation-part.mjs";
  * @import { TransformationSystemMixin } from "../../../../mixins/transformation-system-mixin/transformation-system-mixin.mjs";
  */
 

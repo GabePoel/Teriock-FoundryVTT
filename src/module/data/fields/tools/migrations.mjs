@@ -1,4 +1,4 @@
-import { toKebabCase } from "../../../utils/_module.mjs";
+import { systemPath, toKebabCase } from "../../../utils/_module.mjs";
 
 /**
  * Power kinds that became their own item types.
@@ -122,12 +122,16 @@ export function migrateStatuses(source, ...fields) {
 export function migrateThumbnails(source, ...fields) {
   for (const field of fields) {
     let value = foundry.utils.getProperty(source, field);
-    if (typeof value === "string" && value.startsWith("systems/teriock/src/icons/")) {
-      value = value.replace("systems/teriock/src/icons/", "");
+    if (typeof value !== "string") { continue; }
+    if (value.startsWith(systemPath("icons/"))) {
+      value = value.replace(systemPath("icons/"), "");
       const parts = value.split("/");
       if (parts.length && RENAMED_THUMBNAIL_FOLDERS[parts[0]]) { parts[0] = RENAMED_THUMBNAIL_FOLDERS[parts[0]]; }
-      value = `systems/teriock/src/assets/thumbnails/${parts.join("/")}`;
-      foundry.utils.setProperty(source, field, value);
+      value = systemPath(`assets/thumbnails/${parts.join("/")}`);
     }
+    if (value === systemPath("assets/thumbnails/document/character.svg")) {
+      value = systemPath("assets/thumbnails/document/pc.svg");
+    }
+    foundry.utils.setProperty(source, field, value);
   }
 }

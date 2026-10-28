@@ -3,7 +3,7 @@ import {
   EnvironmentSystem,
   InventorySystem,
   NonPlayerCharacterSystem,
-  PlayableCharacterSystem,
+  PlayerCharacterSystem,
 } from "./actors/_module.mjs";
 import { BaseCardSystem, StoneSystem } from "./cards/_module.mjs";
 import { BaseCombatantSystem } from "./combatants/_module.mjs";
@@ -59,7 +59,7 @@ declare global {
     environment: EnvironmentSystem;
     inventory: InventorySystem;
     npc: NonPlayerCharacterSystem;
-    pc: PlayableCharacterSystem;
+    pc: PlayerCharacterSystem;
   }
 
   export interface CardSystemMap {

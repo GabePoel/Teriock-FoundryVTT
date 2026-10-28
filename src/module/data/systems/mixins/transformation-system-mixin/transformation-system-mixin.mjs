@@ -7,7 +7,7 @@ const { fields } = foundry.data;
 /**
  * @import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
  * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
- * @import { ActorTransformationPart } from "../../actors/base-actor-system/parts/transformation-part/actor-transformation-part.mjs";
+ * @import { ActorTransformationPart } from "../../actors/abstract/base-actor-system/parts/transformation-part/actor-transformation-part.mjs";
  * @import { SpeciesTransformationPart } from "../../items/species-system/parts/species-transformation-part/species-transformation-part.mjs";
  */
 

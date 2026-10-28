@@ -1,5 +1,5 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import BaseActorSystem from "./base-actor-system/base-actor-system.mjs";
+import { BaseActorSystem } from "./abstract/_module.mjs";
 
 export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
