@@ -28,12 +28,6 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
   }
 
   /** @inheritDoc */
-  static getDefaultArtwork(itemData) {
-    const img = itemData?.img ?? this.getDefaultImageForType(itemData?.type);
-    return { img };
-  }
-
-  /** @inheritDoc */
   static migrateData(source, options) {
     migratePowerKinds(source);
     return super.migrateData(source, options);

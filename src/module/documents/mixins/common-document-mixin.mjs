@@ -125,6 +125,15 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
+     * Determine default artwork based on the provided source data.
+     * @param {object} data
+     * @returns {{img: string}}
+     */
+    static getDefaultArtwork(data) {
+      return { img: this.getDefaultImageForType(data?.type) ?? this.DEFAULT_ICON };
+    }
+
+    /**
      * Get the default image for some type of this document.
      * @param {string} type
      * @returns {string|null}

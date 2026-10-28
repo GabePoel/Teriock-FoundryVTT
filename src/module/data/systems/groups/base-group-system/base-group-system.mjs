@@ -58,16 +58,10 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
 
   /** @inheritDoc */
   get _color() {
-    return this.face?.token?.color ?? null;
-  }
-
-  /**
-   * The member that represents this CombatantGroup to the current user.
-   * @returns {TeriockCombatant|null}
-   */
-  get face() {
-    const holder = this.turnHolder;
-    return holder?.visible ? holder : (this.turnMembers.find(m => m.visible) ?? null);
+    const colors = new Set(
+      [...this.parent.members].filter(m => m.visible).map(m => m.system._color?.valueOf() ?? null),
+    );
+    return colors.size === 1 ? colors.first() : null;
   }
 
   /**
@@ -85,14 +79,6 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
    */
   get turnMembers() {
     return [...this.parent.members].sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) { return false; }
-
-    this.parent.updateSource(foundry.utils.mergeObject({ img: this.metadata.img }, data));
   }
 
   /** @inheritDoc */
@@ -126,7 +112,22 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
         ],
       }],
       color: this.color,
-      name: this.parent.name || this.face?.name,
     });
+  }
+
+  /**
+   * Prepare data derived from members that should be displayed to the current user. The parent Combat calls this once
+   * all of its Combatants are prepared.
+   * @remarks This should ONLY be used for data that is safe to display differently to different users.
+   */
+  prepareDisplayData() {
+    const visible = [...this.parent.members].filter(m => m.visible);
+    if (!this.parent._source.img) {
+      const thumbnails = new Set(visible.map(m => m.img));
+      this.parent.img = (thumbnails.size === 1 && thumbnails.first()) || this.metadata.img;
+    }
+    if (!this.parent._source.name) {
+      this.parent.name = this.constructor.defaultName({ members: visible }) || this.parent.typeLabel;
+    }
   }
 }

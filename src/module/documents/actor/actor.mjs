@@ -64,7 +64,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /** @inheritDoc */
   static getDefaultArtwork(actorData) {
-    const img = actorData?.img ?? this.getDefaultImageForType(actorData?.type);
+    const { img } = super.getDefaultArtwork(actorData);
     return { img, texture: { src: img } };
   }
 

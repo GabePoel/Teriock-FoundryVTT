@@ -39,7 +39,7 @@ export default function ImageEditingSheetMixin(Base) {
         const [doc, path] = this.document[head] instanceof foundry.abstract.Document
           ? [this.document[head], rest.join(".")]
           : [this.document, attr];
-        const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
+        const defaultImg = foundry.utils.getProperty(doc.constructor.getDefaultArtwork?.(doc._source) ?? {}, path);
         const options = {
           current,
           left: this.position.left + 10,

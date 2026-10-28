@@ -31,6 +31,12 @@ export default class CommandedSystem extends BaseGroupSystem {
   }
 
   /** @inheritDoc */
+  get _color() {
+    const commander = this.commander;
+    return commander?.visible ? commander.system._color : super._color;
+  }
+
+  /** @inheritDoc */
   get commander() {
     const commander = this.parent.parent?.combatants.get(this.commanderId);
     return commander?.group === this.parent ? commander : null;
@@ -40,15 +46,6 @@ export default class CommandedSystem extends BaseGroupSystem {
   get turnMembers() {
     const commander = this.commander;
     return super.turnMembers.sort((a, b) => Number(b === commander) - Number(a === commander));
-  }
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) { return false; }
-
-    const img = this.parent.parent?.combatants.get(this.commanderId)?.img;
-    if (!data.img && img) { this.parent.updateSource({ img }); }
   }
 
   /** @inheritDoc */
@@ -66,5 +63,14 @@ export default class CommandedSystem extends BaseGroupSystem {
       title: _loc("TERIOCK.COMBAT.Group.minions"),
     }].filter(a => a.cards.length);
     return parts;
+  }
+
+  /** @inheritDoc */
+  prepareDisplayData() {
+    super.prepareDisplayData();
+    const commander = this.commander;
+    if (!commander?.visible) { return; }
+    if (!this.parent._source.img && commander.img) { this.parent.img = commander.img; }
+    if (!this.parent._source.name) { this.parent.name = this.constructor.defaultName({ commander }); }
   }
 }

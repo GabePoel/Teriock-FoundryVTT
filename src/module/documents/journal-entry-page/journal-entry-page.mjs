@@ -15,6 +15,15 @@ export default class TeriockJournalEntryPage
   extends mixClasses(JournalEntryPage, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin)
 {
   /**
+   * Determine default artwork based on the provided source data.
+   * @param {object} data
+   * @returns {{system: {img: string|undefined}}}
+   */
+  static getDefaultArtwork(data) {
+    return { system: { img: CONFIG.JournalEntryPage.dataModels[data?.type]?.metadata?.img } };
+  }
+
+  /**
    * An image that represents this.
    * @return {string}
    */

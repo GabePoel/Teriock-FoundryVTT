@@ -411,7 +411,6 @@ export default class TeriockCombatTracker
         turns.push(Object.assign(members[0], { icon: null, locked: false, rollerId }));
         continue;
       }
-      const face = group.system.face;
       // A CombatantGroup is only defeated once its turn holder is
       const defeated = holder.isDefeated;
       turns.push({
@@ -422,14 +421,14 @@ export default class TeriockCombatTracker
           this.#groupControlClass(group),
         ].filterJoin(" "),
         group: {
-          color: face.token?.color,
+          color: group.system.color,
           defeated,
           hidden: group.hidden,
           icon: { css: makeIconClass(group.system.metadata.icon, "text"), tooltip: group.typeLabel },
           id: group.id,
-          img: group.img || face.img,
+          img: group.img,
           initiative: group.initiative,
-          name: group.name || face.name,
+          name: group.name,
           rollerId,
           uuid: group.uuid,
         },

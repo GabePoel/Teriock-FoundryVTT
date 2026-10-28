@@ -85,15 +85,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
-   * Rebuild CombatantGroup membership.
-   * @category Groups
-   */
-  #prepareGroups() {
-    for (const group of this.groups) { group.reset(); }
-    for (const combatant of this.combatants) { combatant.reset(); }
-  }
-
-  /**
    * @param {TeriockActor|null} actor
    * @param {Teriock.Keys.CombatEvent} event
    * @param {Teriock.Keys.CombatTiming} timing
@@ -142,7 +133,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
-    this.#prepareGroups();
     super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
     // Expand newly created CombatantGroups in the tracker
     if (collection === "groups") {
@@ -162,7 +152,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
-    this.#prepareGroups();
     if (collection === "combatants" && ids.includes(prior?.id) && this.groups.get(prior.groupId)?.members.size) {
       options.turnEvents = false;
     }
@@ -247,7 +236,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   /** @inheritDoc */
   _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
-    this.#prepareGroups();
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
     this._onModifyGroups(collection, prior);
   }
@@ -312,8 +300,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
             ok: {
               callback: (_event, button) => {
                 const data = new foundry.applications.ux.FormDataExtended(button.form).object;
-                data.name = data.name?.trim()
-                  || CombatantGroup.implementation.defaultName({ ...nameContext, parent: this, type: data.type });
+                data.name = data.name?.trim();
                 return data;
               },
             },
@@ -324,7 +311,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       groupId = foundry.utils.randomID();
       create.push({
         _id: groupId,
-        ...(members.every(m => m.img === target.img) && { img: target.img }),
         initiative: target.initiative,
         name,
         system: type === "commanded" ? { commanderId: target.id } : {},
@@ -347,6 +333,12 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     if (combatant.group) { await this.#modifyGroups(this.#leaveChanges([combatant])); }
   }
 
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    for (const group of this.groups) { group.system.prepareDisplayData(); }
+  }
+
   /**
    * @inheritDoc
    * @version 369
@@ -355,7 +347,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     const currentId = this.combatant?.id;
     for (const g of this.groups) { g.updateSource({ initiative: null }); }
     for (const c of this.combatants) { c.updateSource({ initiative: null }); }
-    this.#prepareGroups();
+    this.reset();
     this.setupTurns();
     const update = { combatants: this.combatants.toObject(), groups: this.groups.toObject() };
     if (updateTurn && currentId) { update.turn = this.turns.findIndex(t => t.id === currentId); }
