@@ -85,6 +85,21 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
+   * Refresh turn order after modifying CombatantGroups.
+   * @param {string} collection
+   * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
+   * @category Groups
+   */
+  #onModifyGroups(collection, prior) {
+    if (collection === "groups") {
+      this.setupTurns();
+      if (this.isView) { ui.combat.render(); }
+    }
+    this._updateTurnMarkers();
+    this.#keepTurn(prior);
+  }
+
+  /**
    * @param {TeriockActor|null} actor
    * @param {Teriock.Keys.CombatEvent} event
    * @param {Teriock.Keys.CombatTiming} timing
@@ -119,7 +134,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @returns {TeriockActor|null}
    */
   get actor() {
-    return this.combatant ? this.combatant.actor || null : null;
+    return this.combatant?.actor ?? null;
   }
 
   /**
@@ -127,7 +142,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @returns {TeriockActor[]}
    */
   get actors() {
-    return this.combatants.filter(c => c.actor).map(c => c.actor);
+    return [...new Set(this.combatants.map(c => c.actor).filter(Boolean))];
   }
 
   /** @inheritDoc */
@@ -140,7 +155,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
         for (const group of documents) { app._toggleCollapsed(`group-${group.id}`, false); }
       }
     }
-    this._onModifyGroups(collection, prior);
+    this.#onModifyGroups(collection, prior);
   }
 
   /** @inheritDoc */
@@ -156,7 +171,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       options.turnEvents = false;
     }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
-    this._onModifyGroups(collection, prior);
+    this.#onModifyGroups(collection, prior);
     if (collection === "combatants" && game.user.isActiveGM) {
       const { deletes, groupIds } = this.#leaveChanges(documents);
       for (const id of ids) { delete groupIds[id]; }
@@ -187,21 +202,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       member.actor?.fireTrigger("turnEnd");
     }
     await this.#triggerMemberRegionEvents(CONST.REGION_EVENTS.TOKEN_TURN_END, context, combatant);
-  }
-
-  /**
-   * Refresh turn order after modifying CombatantGroups.
-   * @param {string} collection
-   * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
-   * @category Groups
-   */
-  _onModifyGroups(collection, prior) {
-    if (collection === "groups") {
-      this.setupTurns();
-      if (this.isView) { ui.combat.render(); }
-    }
-    this._updateTurnMarkers();
-    this.#keepTurn(prior);
   }
 
   /**
@@ -237,7 +237,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
     const prior = this.combatant ? { groupId: this.combatant._source.group, id: this.combatant.id } : null;
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
-    this._onModifyGroups(collection, prior);
+    this.#onModifyGroups(collection, prior);
   }
 
   /**

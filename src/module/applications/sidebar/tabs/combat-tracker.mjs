@@ -451,7 +451,7 @@ export default class TeriockCombatTracker
     // CombatantGroup initiative is handled by the group header
     const locked = Boolean(combatant.group);
     return Object.assign(turn, {
-      color: combatant.token?.color,
+      color: combatant.system.color,
       css: [turn.css, combatant.token?.object?.controlled ? "controlled" : null].filterJoin(" "),
       icon: combatant.isCommander
         ? { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "text"), tooltip: combatant.typeLabel }
