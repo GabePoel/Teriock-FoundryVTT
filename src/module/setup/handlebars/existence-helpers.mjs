@@ -1,13 +1,4 @@
 /**
- * Check if a value is defined.
- * @param {*} val
- * @returns {boolean}
- */
-function defined(val) {
-  return typeof val !== "undefined";
-}
-
-/**
  * Flexible helper to check if something exists.
  * @param {*} value
  * @returns {boolean}
@@ -50,4 +41,4 @@ function merge(a, b) {
   return foundry.utils.mergeObject(a ?? {}, b ?? {}, { inplace: false });
 }
 
-export default { defined, exists, merge, repeat, repeatStr };
+export default { exists, merge, repeat, repeatStr };

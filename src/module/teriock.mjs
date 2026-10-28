@@ -239,7 +239,12 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
   CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;
+  CONFIG.Token.movement.defaultSpeed = 6;
   CONFIG.Token.objectClass = canvas.placeables.TeriockToken;
+  CONFIG.Token.rulerClass = canvas.placeables.TeriockTokenRuler;
+  for (const [action, config] of Object.entries(CONFIG.Token.movement.actions)) {
+    config.getCostFunction = token => token.actor?.system.getMovementCostFunction(action) ?? (cost => cost);
+  }
 
   CONFIG.User.collection = documents.collections.TeriockUsers;
   CONFIG.User.documentClass = documents.TeriockUser;

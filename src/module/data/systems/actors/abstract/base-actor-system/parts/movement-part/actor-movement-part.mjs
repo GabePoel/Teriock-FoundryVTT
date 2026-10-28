@@ -33,6 +33,34 @@ export default function ActorMovementPart(Base) {
       });
     }
 
+    /**
+     * Create a Token movement cost function for a movement action. Costs are in feet of movement.
+     *
+     * Relevant wiki pages:
+     * - [Movement Speed](https://wiki.teriock.com/index.php/Core:Movement_Speed)
+     *
+     * @param {string} action
+     * @returns {TokenMovementActionCostFunction}
+     */
+    getMovementCostFunction(action) {
+      const multipliers = { horizontal: 1, vertical: 1 };
+      for (const [key, entry] of Object.entries(TERIOCK.CONFIG.character.movement)) {
+        if (entry.movementAction !== action && !this.parent.statuses.has(entry.status)) { continue; }
+        for (const d of entry.direction ? [entry.direction] : ["horizontal", "vertical"]) {
+          multipliers[d] *= TERIOCK.CONFIG.character.speed[this.speedAdjustments[key]].multiplier;
+        }
+      }
+      const difficult = TERIOCK.CONFIG.character.speed[this.speedAdjustments.difficultTerrain].multiplier;
+      return (baseCost, from, to, distance) => {
+        if (!distance) { return baseCost; }
+        const difficulty = baseCost / distance;
+        const terrain = difficulty > 1 && difficulty < Infinity ? 1 / difficult : difficulty;
+        const h = from.i !== to.i || from.j !== to.j ? multipliers.horizontal : Infinity;
+        const v = from.k !== to.k ? multipliers.vertical : Infinity;
+        return distance * terrain / Math.min(h, v);
+      };
+    }
+
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
