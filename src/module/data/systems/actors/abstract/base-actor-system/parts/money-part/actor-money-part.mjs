@@ -57,10 +57,7 @@ export default function ActorMoneyPart(Base) {
       const yes = await super._preCreate(data, options, user);
       if (yes === false) { return false; }
 
-      const lockedPaths = [
-        ...[...Object.keys(TERIOCK.CONFIG.currency), "debt"].map(k => `system.money.${k}`),
-        "system.interestRate",
-      ];
+      const lockedPaths = [...Object.keys(TERIOCK.CONFIG.currency), "debt"].map(k => `system.money.${k}`);
       this.parent.updateSource(foundry.utils.mergeObject({ system: { lockedPaths } }, data));
     }
 
