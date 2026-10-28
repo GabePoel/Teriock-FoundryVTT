@@ -3,7 +3,7 @@ import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../utils/_module.mjs";
 
 /**
- * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry } from "@client/applications/_types.mjs";
+ * @import { ApplicationConfiguration, ApplicationHeaderControlsEntry, ApplicationRenderOptions } from "@client/applications/_types.mjs";
  * @import { ApplicationV2, DocumentSheetV2 } from "@client/applications/api/_module.mjs";
  * @import { ImagePopout } from "@client/applications/apps/_module.mjs";
  * @import { ImagePopoutConfiguration } from "@client/applications/apps/image-popout.mjs";
@@ -30,32 +30,37 @@ function addEmbedContextMenuEntriesToHeader(application, controls) {
 /**
  * Adds a right-click option to the close button in all applications.
  * @param {ApplicationV2|DocumentSheetV2|ExecutionEditor} application
+ * @param {HTMLElement} _element
+ * @param {object} _context
+ * @param {ApplicationRenderOptions} options
  * @see {renderApplicationV2}
  */
-function addDeveloperModeLoggingListener(application) {
+function addDeveloperModeLoggingListener(application, _element, _context, options) {
   if (!game.settings.get("teriock", "developerMode") || !application.window.header) { return; }
-  application.window.header.querySelectorAll("[data-action=close]").forEach(el => {
-    el.addEventListener("contextmenu", async e => {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      console.warn("Debug Application:");
-      console.log("Application", application);
-      if (application.execution) {
-        console.log("Execution", application.execution);
-      }
-      if (application.document) {
-        console.log("Document", application.document);
-        if (typeof application.document.getRollData === "function") {
-          console.log("Roll Data", application.document.getRollData());
+  if (options.isFirstRender) {
+    application.window.header.querySelectorAll("[data-action=close]").forEach(el => {
+      el.addEventListener("contextmenu", async e => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        console.warn("Debug Application:");
+        console.log("Application", application);
+        if (application.execution) {
+          console.log("Execution", application.execution);
         }
-      }
-      if (typeof application._prepareContext === "function") {
-        const context = await application._prepareContext({ force: false, isFirstRender: false });
-        console.log("Context", context);
-      }
+        if (application.document) {
+          console.log("Document", application.document);
+          if (typeof application.document.getRollData === "function") {
+            console.log("Roll Data", application.document.getRollData());
+          }
+        }
+        if (typeof application._prepareContext === "function") {
+          const context = await application._prepareContext({ force: false, isFirstRender: false });
+          console.log("Context", context);
+        }
+      });
     });
-  });
+  }
   application.element.querySelectorAll("[data-action=deleteMechanic]").forEach(el => {
     el.addEventListener("contextmenu", async e => {
       e.preventDefault();
@@ -71,10 +76,13 @@ function addDeveloperModeLoggingListener(application) {
 /**
  * Adds a middle click option to the copy UUID button in sheet headers.
  * @param {DocumentSheetV2} application
+ * @param {HTMLElement} _element
+ * @param {object} _context
+ * @param {ApplicationRenderOptions} options
  * @see {renderApplicationV2}
  */
-function addIdentifierClipboardListener(application) {
-  if (!application.window.header) { return; }
+function addIdentifierClipboardListener(application, _element, _context, options) {
+  if (!options.isFirstRender || !application.window.header) { return; }
   const type = _loc("TERIOCK.COMMON.Identifier").toLocaleLowerCase(game.i18n.lang);
   const label = _loc(application.document.constructor.metadata.label);
   application.window.header.querySelectorAll("[data-action=copyUuid]").forEach(el =>

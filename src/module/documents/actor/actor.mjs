@@ -285,7 +285,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
       let qualifierData;
       for (const c of changes) {
         if (BaseRoll.qualify(c.qualifier, () => (qualifierData ??= d.system.getLocalRollData()))) {
-          const result = ActiveEffect.applyChange(d, c, { replacementData });
+          const result = ActiveEffect.implementation.applyChange(d, c, { replacementData });
           if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
         }
       }
@@ -405,7 +405,9 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     if (!data.length) { return; }
     this.triggerUser.query("teriock.modifyBatch", {
       operations: [{ action: "create", data, documentName: "ChatMessage", triggeredMode: true }],
-    }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT });
+    }, { timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT }).catch(err =>
+      console.error(`Failed to create triggered messages for ${this.uuid}.`, err)
+    );
   }
 
   /** @inheritDoc */
@@ -509,8 +511,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   /**
    * Use a specified document.
    * @param {string} lookup - The identifier or name of the document to use. Identifiers are preferred.
-   * @param {Teriock.Execution.ExecutionOptions & { type?: Teriock.Documents.ChildType }} [options] - Options
-   * for finding and using the document.
+   * @param {Teriock.Execution.ExecutionOptions} [options] - Options for using the document.
    * @return {Promise<void>}
    */
   async useDocument(lookup, options = {}) {

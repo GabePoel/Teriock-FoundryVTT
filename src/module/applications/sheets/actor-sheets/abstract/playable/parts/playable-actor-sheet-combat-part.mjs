@@ -101,7 +101,7 @@ export default function PlayableActorSheetCombatPart(Base) {
      * @returns {Promise<void>}
      */
     static async #onUseAbility(event, target) {
-      await this.document.useDocument(target.dataset.ability, { event, type: "ability" });
+      await this.document.useDocument(target.dataset.ability, { event });
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

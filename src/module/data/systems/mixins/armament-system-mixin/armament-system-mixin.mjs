@@ -356,7 +356,7 @@ export default function ArmamentSystemMixin(Base) {
      */
     async _use(data = {}, options = {}) {
       if (this.settings.getSetting("rollAttackOnUse")) {
-        await this.actor?.useDocument("basic-attack", { type: "ability" });
+        await this.actor?.useDocument("ability:basic-attack");
       }
       data.commands ??= this.commands;
       await super._use(data, options);

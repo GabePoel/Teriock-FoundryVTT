@@ -192,7 +192,7 @@ export default class DocumentSelector extends ResolvableDialog {
       const pack = game.packs.get(packId);
       if (!pack) { continue; }
       const index = await pack.getIndex();
-      documents.push(...index.contents.filter(i => !i.system._sup && !knownUuids.has(i.uuid)));
+      documents.push(...index.contents.filter(i => !i.system?._sup && !knownUuids.has(i.uuid)));
     }
     return Array.from(new Set(documents)).filter(filter);
   }

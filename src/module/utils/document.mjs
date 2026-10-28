@@ -114,7 +114,7 @@ export async function findBestDocument(lookup, relativeTo, options = {}) {
   const doc = await fromIdentifier(lookup, { relativeOnly: Boolean(options.relativeOnly), relativeTo });
   if (doc) { return doc; }
   const children = (await relativeTo?.previewed?.getContents()) ?? [];
-  return children.find(c => c.lookupKey === lookup) ?? null;
+  return children.find(c => c.lookupKey === lookup) ?? children.find(c => c.name === lookup) ?? null;
 }
 
 /**

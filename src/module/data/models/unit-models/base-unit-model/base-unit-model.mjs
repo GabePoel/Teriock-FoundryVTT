@@ -184,7 +184,7 @@ export default class BaseUnitModel extends BaseDataModel {
   convertTo(unit) {
     const unitType = this.unitType;
     if (unitType !== "finite") { return this.value; }
-    return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.value;
+    return this.value / (this.constructor.finiteChoiceEntries.find(e => e.id === unit)?.conversion || 1);
   }
 
   /**

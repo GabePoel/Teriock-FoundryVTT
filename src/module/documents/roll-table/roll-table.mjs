@@ -114,7 +114,7 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
    * @param {object} messageOptions
    * @version 369
    */
-  async toMessage(results, { messageData = {}, messageOptions = {}, roll }) {
+  async toMessage(results, { messageData = {}, messageOptions = {}, roll } = {}) {
     messageOptions.messageMode ??= game.settings.get("core", "messageMode");
     const flavorKey = `TABLE.DrawFlavor${results.length > 1 ? "Plural" : ""}`;
     messageData = foundry.utils.mergeObject({

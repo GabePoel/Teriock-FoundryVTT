@@ -311,7 +311,7 @@ export default function EquipmentStoragePart(Base) {
      * @returns {Promise<void>}
      */
     async groupUnstack(amount = 0) {
-      if (!this.consumption.enabled || !amount || amount >= this.quantity.value) { return; }
+      if (!this.consumption.enabled || !(amount > 0) || amount >= this.quantity.value) { return; }
       const operations = [{
         action: "create",
         data: [
@@ -355,7 +355,7 @@ export default function EquipmentStoragePart(Base) {
         content,
         ok: {
           callback: async (_event, button) => {
-            const amount = button.form.elements.amount.value ?? 0;
+            const amount = button.form.elements.amount.valueAsNumber || 0;
             await this.groupUnstack(amount);
           },
         },

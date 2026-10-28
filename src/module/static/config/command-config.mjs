@@ -406,7 +406,7 @@ const commandConfig = {
     },
   },
   attack: {
-    execute: each((a, o) => a.useDocument("basic-attack", { ...o, type: "ability" })),
+    execute: each((a, o) => a.useDocument("ability:basic-attack", o)),
     label: "TERIOCK.COMMANDS.Attack.label",
     reverse: "attack",
     icon: () => teriock.data.systems.effects.AbilitySystem.metadata.icon,
