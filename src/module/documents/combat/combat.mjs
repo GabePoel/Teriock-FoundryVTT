@@ -309,13 +309,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
         if (!type) { return; }
       }
       groupId = foundry.utils.randomID();
-      create.push({
-        _id: groupId,
-        initiative: target.initiative,
-        name,
-        system: type === "commanded" ? { commanderId: target.id } : {},
-        type,
-      });
+      create.push({ _id: groupId, initiative: target.initiative, name, system: { commanderId: target.id }, type });
     }
     const { deletes, groupIds } = this.#leaveChanges(joiners);
     if (create.length) { groupIds[target.id] = groupId; }
@@ -402,7 +396,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @category Groups
    */
   async setCommander(combatant) {
-    if (combatant.group?.type === "commanded") { await combatant.group.update({ "system.commanderId": combatant.id }); }
+    if (combatant.isMinion) { await combatant.group.update({ "system.commanderId": combatant.id }); }
   }
 
   /** @inheritDoc */

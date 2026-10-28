@@ -156,10 +156,7 @@ export default class TeriockCombatTracker
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "contextMenu"),
       label: "TERIOCK.COMBAT.Group.ACTIONS.makeCommander",
       onClick: (_event, li) => this.viewed?.setCommander(getCombatant(li)),
-      visible: li => {
-        const combatant = getCombatant(li);
-        return game.user.isGM && combatant?.group?.type === "commanded" && !combatant.isCommander;
-      },
+      visible: li => game.user.isGM && Boolean(getCombatant(li)?.isMinion),
     }, {
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.leaveGroup, "contextMenu"),
       label: "TERIOCK.COMBAT.Group.ACTIONS.leaveGroup",

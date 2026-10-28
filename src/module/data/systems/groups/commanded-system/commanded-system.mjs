@@ -49,6 +49,11 @@ export default class CommandedSystem extends BaseGroupSystem {
   }
 
   /** @inheritDoc */
+  checkIfMinion(combatant) {
+    return combatant !== this.commander;
+  }
+
+  /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
     const cards = parts.associations[0].cards;
@@ -63,6 +68,11 @@ export default class CommandedSystem extends BaseGroupSystem {
       title: _loc("TERIOCK.COMBAT.Group.minions"),
     }].filter(a => a.cards.length);
     return parts;
+  }
+
+  /** @inheritDoc */
+  getUserLevel(user) {
+    return this.commander?.getUserLevel(user) ?? CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE;
   }
 
   /** @inheritDoc */

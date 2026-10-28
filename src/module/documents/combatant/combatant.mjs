@@ -48,7 +48,7 @@ export default class TeriockCombatant
    * @category Groups
    */
   get isCommander() {
-    return this.group?.type === "commanded" && this.group.system.commander === this;
+    return this.group?.system.commander === this;
   }
 
   /**
@@ -57,7 +57,7 @@ export default class TeriockCombatant
    * @category Groups
    */
   get isMinion() {
-    return this.group?.type === "commanded" && this.group.system.commander !== this;
+    return this.group?.system.checkIfMinion(this) ?? false;
   }
 
   /**

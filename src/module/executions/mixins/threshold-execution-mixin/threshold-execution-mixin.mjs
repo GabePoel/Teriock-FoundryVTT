@@ -73,7 +73,7 @@ export default function ThresholdExecutionMixin(Base) {
     /** @inheritDoc */
     get _dialogDocuments() {
       const docs = super._dialogDocuments;
-      if (this.canShareRoll) {
+      if (this.canShareRolls) {
         docs.push({
           document: this.combatant.group,
           editable: true,
@@ -99,7 +99,7 @@ export default function ThresholdExecutionMixin(Base) {
       const paths = [];
       if (this.requiresCompetence) { paths.push("competence.raw"); }
       if (this.hasBonus) { paths.push("bonus"); }
-      if (this.canShareRoll) { paths.push("participants"); }
+      if (this.canShareRolls) { paths.push("participants"); }
       return [...paths, ...super._formPaths];
     }
 
@@ -109,17 +109,17 @@ export default function ThresholdExecutionMixin(Base) {
     }
 
     /**
-     * Whether a mob can share this roll.
+     * Whether a group can share this roll.
      * @returns {boolean}
      * @category Groups
      */
-    get canShareRoll() {
-      return this.isRoll && this.combatant?.group?.type === "mob";
+    get canShareRolls() {
+      return this.isRoll && Boolean(this.combatant?.group?.system.canShareRolls);
     }
 
     /** @inheritDoc */
     get combatants() {
-      if (!this.canShareRoll) { return super.combatants; }
+      if (!this.canShareRolls) { return super.combatants; }
       return [...new Set(this.mobMembers.map(m => m.system.defaultCombatant))];
     }
 
@@ -211,7 +211,7 @@ export default function ThresholdExecutionMixin(Base) {
       super._initialize(options);
       if (!("strict" in options)) { return; }
       this.mobMembers = [];
-      if (!this.canShareRoll) { return; }
+      if (!this.canShareRolls) { return; }
       this.mobMembers = options.mobMembers
         ?? [...this.combatant.group.members].filter(m => m === this.combatant || m.token?.object?.controlled);
       this.updateSource({ participants: this.mobMembers.length });

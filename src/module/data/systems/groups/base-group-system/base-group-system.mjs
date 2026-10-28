@@ -65,6 +65,22 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
   }
 
   /**
+   * Whether members of this CombatantGroup can share rolls.
+   * @returns {boolean}
+   */
+  get canShareRolls() {
+    return false;
+  }
+
+  /**
+   * The member that commands this CombatantGroup.
+   * @returns {TeriockCombatant|null}
+   */
+  get commander() {
+    return null;
+  }
+
+  /**
    * The member that holds this CombatantGroup's place in the turn order.
    * @returns {TeriockCombatant|null}
    */
@@ -79,6 +95,15 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
    */
   get turnMembers() {
     return [...this.parent.members].sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  /**
+   * Check whether a Combatant is a minion in this CombatantGroup..
+   * @param {TeriockCombatant} _combatant
+   * @returns {boolean}
+   */
+  checkIfMinion(_combatant) {
+    return false;
   }
 
   /** @inheritDoc */
@@ -113,6 +138,15 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
       }],
       color: this.color,
     });
+  }
+
+  /**
+   * Get the ownership level a user has over this CombatantGroup through its members.
+   * @param {TeriockUser} user
+   * @returns {DocumentOwnershipNumber}
+   */
+  getUserLevel(user) {
+    return Math.max(CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, ...[...this.parent.members].map(m => m.getUserLevel(user)));
   }
 
   /**

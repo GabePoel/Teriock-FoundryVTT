@@ -56,7 +56,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
   }
 
   /** @inheritDoc */
-  get canShareRoll() {
+  get canShareRolls() {
     return false;
   }
 

@@ -12,4 +12,9 @@ export default class MobSystem extends BaseGroupSystem {
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.mob,
     type: "mob",
   });
+
+  /** @inheritDoc */
+  get canShareRolls() {
+    return true;
+  }
 }

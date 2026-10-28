@@ -23,8 +23,6 @@ export default class TeriockCombatantGroup
   /** @inheritDoc */
   getUserLevel(user) {
     user ||= game.user;
-    const commander = this.type === "commanded" && this.system.commander;
-    const members = commander ? [commander] : [...(this.members ?? [])];
-    return Math.max(super.getUserLevel(user), ...members.map(m => m.getUserLevel(user)));
+    return Math.max(super.getUserLevel(user), this.system.getUserLevel(user));
   }
 }
