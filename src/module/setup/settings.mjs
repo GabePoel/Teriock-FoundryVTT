@@ -9,6 +9,25 @@ import { objectMap } from "../utils/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { StringFieldOptions } from "@common/data/_types.mjs";
+ */
+
+/**
+ * A field to select a message mode.
+ * @param {StringFieldOptions} [options]
+ * @returns {StringField}
+ */
+function messageModeField(options = {}) {
+  return new fields.StringField({
+    blank: true,
+    choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label, { none: true }),
+    initial: null,
+    nullable: true,
+    ...options,
+  });
+}
+
+/**
  * Every system setting.
  * @type {Record<string, Teriock.Settings.MenuEntry>}
  */
@@ -25,8 +44,8 @@ export const menus = {
       cone: {
         icon: TERIOCK.DISPLAY.icons.manifest.delivery.cone,
         settings: {
-          defaultConeAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
-          defaultDragonBreathAngle: { default: 60, scope: "world", type: new fields.NumberField({ max: 360, min: 0 }) },
+          defaultConeAngle: { scope: "world", type: new fields.NumberField({ initial: 60, max: 360, min: 0 }) },
+          defaultDragonBreathAngle: { scope: "world", type: new fields.NumberField({ initial: 60, max: 360, min: 0 }) },
         },
       },
       keyword: {
@@ -45,23 +64,25 @@ export const menus = {
       identifierSources: {
         settings: {
           identifierSourcePriority: {
-            default: {
-              "teriock.abilities": 11,
-              "teriock.bodyParts": 9,
-              "teriock.classes": 7,
-              "teriock.creatures": 5,
-              "teriock.equipment": 8,
-              "teriock.essentials": 3,
-              "teriock.magicItems": 1,
-              "teriock.powers": 2,
-              "teriock.properties": 10,
-              "teriock.rules": 12,
-              "teriock.species": 6,
-              "teriock.templateEffects": 4,
-            },
             requiresReload: true,
             scope: "world",
-            type: new fields.TypedObjectField(new fields.NumberField(), { expandKeys: false }),
+            type: new fields.TypedObjectField(new fields.NumberField(), {
+              expandKeys: false,
+              initial: {
+                "teriock.abilities": 11,
+                "teriock.bodyParts": 9,
+                "teriock.classes": 7,
+                "teriock.creatures": 5,
+                "teriock.equipment": 8,
+                "teriock.essentials": 3,
+                "teriock.magicItems": 1,
+                "teriock.powers": 2,
+                "teriock.properties": 10,
+                "teriock.rules": 12,
+                "teriock.species": 6,
+                "teriock.templateEffects": 4,
+              },
+            }),
           },
         },
         template: "teriock/menus/compendium-priority-menu",
@@ -88,8 +109,8 @@ export const menus = {
       chat: {
         icon: TERIOCK.DISPLAY.icons.manifest.ui.chat,
         settings: {
-          autoPanelCollapseTime: { default: 5, scope: "client", type: new InfiniteNumberField() },
-          autoTriggerDeleteTime: { default: 5, scope: "client", type: new InfiniteNumberField() },
+          autoPanelCollapseTime: { scope: "client", type: new InfiniteNumberField({ initial: 5 }) },
+          autoTriggerDeleteTime: { scope: "client", type: new InfiniteNumberField({ initial: 5 }) },
           defaultPanelCollapseState: {
             choices: {
               auto: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.auto",
@@ -116,7 +137,6 @@ export const menus = {
         icon: TERIOCK.DISPLAY.icons.manifest.ui.sheet,
         settings: {
           defaultActorTab: {
-            default: "tradecrafts",
             scope: "client",
             type: new fields.StringField({
               blank: false,
@@ -170,9 +190,6 @@ export const menus = {
             onChange: () => game.teriock.render({ applications: true, tooltips: true }),
           },
           documentTooltips: {
-            default: Object.values(documents).filter((d) =>
-              foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.tooltip
-            ).map(d => d.documentName),
             inputType: "checkboxes",
             scope: "client",
             type: new fields.SetField(
@@ -183,6 +200,11 @@ export const menus = {
                   ).map(d => d.documentName).map(n => [n, `DOCUMENT.${n}`]),
                 ),
               }),
+              {
+                initial: Object.values(documents).filter((d) =>
+                  foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.tooltip
+                ).map(d => d.documentName),
+              },
             ),
             onChange: () => game.teriock.render({ applications: true, tooltips: true }),
           },
@@ -219,10 +241,13 @@ export const menus = {
         icon: TERIOCK.DISPLAY.icons.manifest.ui.settings,
         settings: {
           deathBagStoneColors: {
-            default: Object.keys(TERIOCK.CONFIG.deathBag.stones).filter(k => TERIOCK.CONFIG.deathBag.stones[k].initial),
             inputType: "checkboxes",
             scope: "world",
-            type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.deathBag.stones })),
+            type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.deathBag.stones }), {
+              initial: Object.keys(TERIOCK.CONFIG.deathBag.stones).filter(k =>
+                TERIOCK.CONFIG.deathBag.stones[k].initial
+              ),
+            }),
           },
           playerMacrosFolderName: { default: "Player Macros", scope: "world", type: String },
           preserveTargetRegions: {
@@ -242,11 +267,7 @@ export const menus = {
             scope: "world",
             type: String,
           },
-          triggerMessageMode: {
-            default: "self",
-            scope: "world",
-            type: new fields.StringField({ choices: CONFIG.ChatMessage.modes, initial: "self", nullable: false }),
-          },
+          triggerMessageMode: { scope: "world", type: messageModeField({ initial: "self" }) },
         },
       },
       permissions: {
@@ -259,24 +280,14 @@ export const menus = {
       secrets: {
         icon: TERIOCK.DISPLAY.icons.manifest.ui.secret,
         settings: {
-          deathBagMessageMode: {
-            default: null,
-            scope: "world",
-            type: new fields.StringField({
-              blank: true,
-              choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label, { none: true }),
-              initial: null,
-              nullable: true,
-            }),
-          },
+          deathBagMessageMode: { scope: "world", type: messageModeField() },
           secretAttributes: {
-            default: [],
             inputType: "checkboxes",
             scope: "world",
             type: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.attribute })),
           },
-          secretDocuments: { default: [], scope: "world", type: new TypedIdentifierSetField() },
-          secretTradecrafts: { default: [], scope: "world", type: tradecraftsField() },
+          secretDocuments: { scope: "world", type: new TypedIdentifierSetField() },
+          secretTradecrafts: { inputType: "checkboxes", scope: "world", stacked: true, type: tradecraftsField() },
           showPrivateTradecraftDiceRolls: { default: true, scope: "world", type: Boolean },
         },
       },
@@ -305,7 +316,6 @@ export const menus = {
         icon: TERIOCK.DISPLAY.icons.manifest.ui.error,
         settings: {
           errorMessages: {
-            default: Object.keys(TERIOCK.CONFIG.tip.error),
             inputType: "checkboxes",
             scope: "client",
             stacked: true,
@@ -344,7 +354,6 @@ export const menus = {
             onChange: () => game.teriock.render({ tooltips: true }),
           },
           suppressionMessages: {
-            default: Object.keys(TERIOCK.CONFIG.tip.suppression),
             inputType: "checkboxes",
             scope: "client",
             stacked: true,
