@@ -35,7 +35,11 @@ export default class BasePageSystem
   /** @inheritDoc */
   get _displayInputs() {
     return [...super._displayInputs, {
-      choices: this.parent ? Object.fromEntries(this.parent.parent?.categories.contents.map(c => [c.id, c.name])) : {},
+      choices: this.parent
+        ? Object.fromEntries(
+          this.parent.parent?.categories.contents.sort((a, b) => a.sort - b.sort).map(c => [c.id, c.name]),
+        )
+        : {},
       path: "category",
     }];
   }

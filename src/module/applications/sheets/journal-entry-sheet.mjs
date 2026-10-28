@@ -32,6 +32,6 @@ export default class TeriockJournalEntrySheet extends mixClasses(JournalEntryShe
 
   /** @inheritDoc */
   isPageVisible(page) {
-    return super.isPageVisible(page) && !page.getFlag("teriock", "hiddenSubpage");
+    return super.isPageVisible(page) && !page.isHidden;
   }
 }

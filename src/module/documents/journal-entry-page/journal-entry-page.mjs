@@ -24,12 +24,27 @@ export default class TeriockJournalEntryPage
   }
 
   /**
+   * Whether to temporarily override the `hiddenSubpage` flag.
+   * @type {boolean}
+   */
+  revealedSubpage = false;
+
+  /**
    * An image that represents this.
    * @return {string}
    */
   get img() {
     return this.system?.img || this.getFlag("teriock", "journalImage")
       || TERIOCK.DISPLAY.thumbnails.manifest.power.learnedElderSorceries;
+  }
+
+  /**
+   * Whether this should be hidden from the journal entry sheet table of contents. This is used when we have pages that
+   * exist to make nice tooltips but are mainly just embedded in other pages.
+   * @returns {boolean}
+   */
+  get isHidden() {
+    return !this.revealedSubpage && this.getFlag("teriock", "hiddenSubpage");
   }
 
   /**
@@ -54,6 +69,14 @@ export default class TeriockJournalEntryPage
       return this._embedTextPage(config, options);
     }
     return embed;
+  }
+
+  /** @inheritDoc */
+  _onClickDocumentLink(event) {
+    this.revealedSubpage = true;
+    const out = super._onClickDocumentLink(event);
+    this.revealedSubpage = false;
+    return out;
   }
 
   /** @inheritDoc */

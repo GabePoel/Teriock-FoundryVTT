@@ -44,7 +44,7 @@ export function cleanDocument(doc) {
   }
   if (doc.flags) {
     for (const k of Object.keys(doc.flags)) {
-      if (k !== "teriock") { delete doc.flags[k]; }
+      if (!["core", "teriock"].includes(k)) { delete doc.flags[k]; }
     }
     delete doc.flags.teriock?.dontConsume;
   }
