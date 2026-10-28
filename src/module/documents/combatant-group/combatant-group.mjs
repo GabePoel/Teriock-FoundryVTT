@@ -13,4 +13,18 @@ const { CombatantGroup } = foundry.documents;
  */
 export default class TeriockCombatantGroup
   extends mixClasses(CombatantGroup, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin)
-{}
+{
+  /** @inheritDoc */
+  get permission() {
+    if (game.user.isGM) { return CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER; }
+    return this.getUserLevel(game.user);
+  }
+
+  /** @inheritDoc */
+  getUserLevel(user) {
+    user ||= game.user;
+    const commander = this.type === "commanded" && this.system.commander;
+    const members = commander ? [commander] : [...(this.members ?? [])];
+    return Math.max(super.getUserLevel(user), ...members.map(m => m.getUserLevel(user)));
+  }
+}

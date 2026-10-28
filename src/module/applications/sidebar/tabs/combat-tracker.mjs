@@ -372,10 +372,10 @@ export default class TeriockCombatTracker
   /** @inheritDoc */
   async _prepareCombatContext(context, options) {
     await super._prepareCombatContext(context, options);
-    // Players can change the turn as long as they own any turn member
+    // Players can change the turn as long as they own its CombatantGroup
     const combat = this.viewed;
     if (context.control || !combat?.combatant?.group) { return; }
-    const isPlayerTurn = combat.combatant.turnMembers.some(m => m.players.includes(game.user));
+    const isPlayerTurn = combat.combatant.group.isOwner;
     const canControl = combat.turn && combat.turn.between(1, combat.turns.length - 2)
       ? combat.canUserModify(game.user, "update", { turn: 0 })
       : combat.canUserModify(game.user, "update", { round: 0 });
@@ -403,9 +403,7 @@ export default class TeriockCombatTracker
         continue;
       }
       if (!members.length) { continue; }
-      // Commanders always roll for their CombatantGroups
-      const roller = (group.type === "commanded" && group.system.commander) || [...group.members].find(m => m.isOwner);
-      const rollerId = roller?.isOwner ? roller.id : null;
+      const rollerId = group.isOwner ? group.system.turnHolder?.id : null;
       // Players see a CombatantGroup with only one visible member as a standalone Combatant
       if (members.length === 1 && !game.user.isGM) {
         turns.push(Object.assign(members[0], { icon: null, locked: false, rollerId }));
