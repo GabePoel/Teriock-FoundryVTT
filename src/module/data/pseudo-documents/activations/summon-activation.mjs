@@ -1,7 +1,9 @@
-import { TeriockActor, TeriockFolder } from "../../../documents/_module.mjs";
+import { TeriockActor, TeriockFolder, TeriockTokenDocument } from "../../../documents/_module.mjs";
 import { mergeMetadata, mixClasses, omit, toId } from "../../../utils/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * @typedef {"unknown" | "ready" | "unowned" | "packed"} ActorState
@@ -26,13 +28,14 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
 
   /** @inheritDoc */
   static defineSchema() {
-    return omit(super.defineSchema(), [
-      "expandFolders",
-      "expandTables",
-      "localIdentifiers",
-      "localQualifier",
-      "localUuids",
-    ]);
+    return Object.assign(
+      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
+      {
+        addToCombat: new fields.BooleanField(),
+        addToGroup: new fields.StringField({ initial: null, nullable: true }),
+        data: new fields.ObjectField(),
+      },
+    );
   }
 
   /** @type {SummonNode[]} */
@@ -143,13 +146,27 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
   async #placeTokens() {
     const actors = await this.#prepareActors();
     const tokenDocuments = await Promise.all(actors.map(a => a.getTokenDocument()));
-    const summoner = this.actor?.token ?? this.actor?.prototypeToken;
+    const summoner = this.token;
     const tokenData = tokenDocuments.map(t =>
-      foundry.utils.mergeObject(t?.toObject(), {
-        disposition: summoner?.disposition ?? t?.disposition,
-        flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
-        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
-      })
+      foundry.utils.mergeObject(
+        foundry.utils.mergeObject(t?.toObject(), {
+          disposition: (summoner ?? this.actor?.prototypeToken)?.disposition ?? t?.disposition,
+          ...this.data,
+        }),
+        {
+          flags: {
+            teriock: {
+              addToCombat: this.addToCombat,
+              addToGroup: this.addToGroup,
+              createdBy: this.uuid,
+              placedBy: game.user.id,
+              summonerActorId: this.actor?.id ?? null,
+              summonerTokenId: summoner?.id ?? null,
+            },
+          },
+          ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
+        },
+      )
     );
     return canvas.tokens.placeTokens(tokenData, { createOptions: { asGM: true } });
   }
@@ -198,6 +215,9 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
     if (!game.teriock.checkScene()) { return []; }
     await game.teriock.minimizeStart();
     const tokens = await this.#placeTokens();
+    if (this.addToCombat && this.actor?.inCombat) {
+      await TeriockTokenDocument.createCombatants(tokens, { combat: this.actor.defaultCombatant.combat });
+    }
     await game.teriock.minimizeEnd();
     return tokens;
   }

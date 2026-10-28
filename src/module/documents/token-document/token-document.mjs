@@ -1,3 +1,4 @@
+import DocumentSelector from "../../applications/dialogs/document-selector.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
@@ -14,6 +15,54 @@ const { TokenDocument } = foundry.documents;
  * @mixes BaseDocument
  */
 export default class TeriockTokenDocument extends mixClasses(TokenDocument, BaseDocumentMixin) {
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  static async createCombatants(tokens, { combat } = {}) {
+    combat ??= game.combats.viewed;
+    if (!combat) {
+      if (!game.user.isGM) { throw new Error(_loc("COMBAT.NoneActive")); }
+      combat = await Combat.implementation.create({ active: true }, { render: false });
+    }
+    const summons = [...new Set(tokens.flatMap(t => t.summons))].filter(s =>
+      s.getFlag("teriock", "addToCombat") === true
+      && s.isOwner
+      && (!s.hidden || game.user.isGM)
+      && !tokens.includes(s)
+      && !combat.getCombatantsByToken(s).length
+    );
+    if (summons.length) {
+      const selected = game.settings.get("teriock", "confirmSummonsAddToCombat")
+        ? await DocumentSelector.selectMulti(summons, {
+          checked: summons.map(s => s.uuid),
+          hint: _loc("TERIOCK.DIALOGS.AddSummons.hint"),
+          textKey: "summoner.name",
+          title: _loc("TERIOCK.DIALOGS.AddSummons.title"),
+        })
+        : summons;
+      tokens = [...tokens, ...selected];
+    }
+    return combat.addCombatants(
+      [...new Set(tokens)].filter(t => !combat.getCombatantsByToken(t).length).map(t => ({
+        actorId: t.actorId,
+        hidden: t.hidden,
+        sceneId: t.parent.id,
+        tokenId: t.id,
+      })),
+    );
+  }
+
+  /**
+   * @inheritDoc
+   * @version 369
+   */
+  static async deleteCombatants(tokens, { combat } = {}) {
+    combat ??= game.combats.viewed;
+    const tokenIds = new Set(tokens.map(t => t.id));
+    return combat.removeCombatants(combat.combatants.filter(c => tokenIds.has(c.tokenId)));
+  }
+
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateThumbnails(source, "texture.src", "ring.subject.texture");
@@ -62,6 +111,26 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     if (this.ring.subject.texture) { return this.ring.subject.texture; }
     // Fall back to default.
     return CONST.DEFAULT_TOKEN;
+  }
+
+  /**
+   * The token that summoned this one.
+   * @returns {TeriockTokenDocument|null}
+   */
+  get summoner() {
+    const tokens = this.parent?.tokens;
+    const actorId = this.getFlag("teriock", "summonerActorId");
+    return tokens?.get(this.getFlag("teriock", "summonerTokenId"))
+      ?? (typeof actorId === "string" ? tokens?.find(t => t.actorLink && t.actorId === actorId && t !== this) : null)
+      ?? null;
+  }
+
+  /**
+   * Other tokens that were summoned by this one.
+   * @returns {TeriockTokenDocument[]}
+   */
+  get summons() {
+    return this.parent?.tokens.filter(t => t.summoner === this) ?? [];
   }
 
   /** @inheritDoc */

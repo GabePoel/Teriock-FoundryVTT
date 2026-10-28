@@ -1,10 +1,15 @@
+import DocumentSelector from "../../applications/dialogs/document-selector.mjs";
 import { CombatExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
-import { mixClasses } from "../../utils/_module.mjs";
+import { batchWrite, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
+
+/**
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
 
 /**
  * Get the UUIDs of combatants and their default combatants.
@@ -38,6 +43,88 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
+   * Operations that create or delete Combatants and apply CombatantGroup changes.
+   * @param {object} [changes]
+   * @param {object[]} [changes.create] - CombatantGroup data to create.
+   * @param {ID<TeriockCombatantGroup>[]} [changes.deletes] - CombatantGroups to delete.
+   * @param {Record<ID<TeriockCombatant>, ID|null>} [changes.groupIds] - New CombatantGroup of each Combatant.
+   * @param {object} [combatants]
+   * @param {TeriockCombatant[]} [combatants.pending] - Combatants to create.
+   * @param {TeriockCombatant[]} [combatants.removed] - Combatants to delete.
+   * @returns {DatabaseWriteOperation[]}
+   * @category Groups
+   */
+  #groupOperations({ create = [], deletes = [], groupIds = {} } = {}, { pending = [], removed = [] } = {}) {
+    const pendingIds = new Set(pending.map(c => c.id));
+    const updates = Object.entries(groupIds).filter(([id]) => !pendingIds.has(id)).map(([_id, group]) => ({
+      _id,
+      group,
+    }));
+    return [
+      removed.length && {
+        action: "delete",
+        documentName: "Combatant",
+        groupsUpdated: true,
+        ids: removed.map(c => c.id),
+        parent: this,
+      },
+      create.length && { action: "create", data: create, documentName: "CombatantGroup", keepId: true, parent: this },
+      pending.length
+      && {
+        action: "create",
+        data: pending.map(c => ({ ...c.toObject(), group: groupIds[c.id] ?? null })),
+        documentName: "Combatant",
+        keepId: true,
+        parent: this,
+        summonsGrouped: true,
+      },
+      updates.length && { action: "update", documentName: "Combatant", parent: this, updates },
+      deletes.length && { action: "delete", documentName: "CombatantGroup", ids: deletes, parent: this },
+    ].filter(Boolean);
+  }
+
+  /**
+   * Group new summoned Combatants with their summoner and new summoners with their summoned Combatants.
+   * @param {TeriockCombatant[]} combatants - Newly created Combatants.
+   * @returns {Promise<void>}
+   * @category Groups
+   */
+  async #groupSummons(combatants) {
+    const changes = await this.#summonChanges(combatants);
+    if (changes) { await batchWrite(this.#groupOperations(changes), { asGM: true }); }
+  }
+
+  /**
+   * Changes that add Combatants to their targets' CombatantGroups. A target without a CombatantGroup gets a new one of
+   * the given type with the target as its commander.
+   * @param {{ joiners: TeriockCombatant[], name?: string, target: TeriockCombatant|TeriockCombatantGroup, type?: CombatantGroupType }[]} entries
+   * @returns {{ create: object[], deletes: ID<TeriockCombatantGroup>[], groupIds: Record<ID<TeriockCombatant>, ID|null> }|null}
+   * @category Groups
+   */
+  #joinChanges(entries) {
+    const joins = [];
+    for (const { joiners, name, target, type } of entries) {
+      if (joiners.includes(target)) { continue; }
+      const group = target.documentName === "CombatantGroup" ? target : target.group;
+      const moving = joiners.filter(c => !group || c.group !== group);
+      if (moving.length && (group || type)) { joins.push({ group, moving, name, target, type }); }
+    }
+    if (!joins.length) { return null; }
+    const create = [];
+    const { deletes, groupIds } = this.#leaveChanges(joins.flatMap(j => j.moving));
+    for (const { group, moving, name, target, type } of joins) {
+      let groupId = group?.id;
+      if (!groupId) {
+        groupId = foundry.utils.randomID();
+        create.push({ _id: groupId, initiative: target.initiative, name, system: { commanderId: target.id }, type });
+        groupIds[target.id] = groupId;
+      }
+      for (const joiner of moving) { groupIds[joiner.id] = groupId; }
+    }
+    return { create, deletes, groupIds };
+  }
+
+  /**
    * Keep the turn on the Combatant or CombatantGroups that had it before the turn order changed.
    * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
    */
@@ -65,26 +152,6 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
-   * Create CombatantGroups, move Combatants between CombatantGroups, and delete CombatantGroups in a single batch.
-   * @param {object} changes
-   * @param {object[]} [changes.create] - CombatantGroup data to create.
-   * @param {ID<TeriockCombatantGroup>[]} [changes.deletes] - CombatantGroups to delete.
-   * @param {Record<ID<TeriockCombatant>, ID|null>} [changes.groupIds] - New CombatantGroup of each Combatant.
-   * @returns {Promise<void>}
-   * @category Groups
-   */
-  async #modifyGroups({ create = [], deletes = [], groupIds = {} }) {
-    const updates = Object.entries(groupIds).map(([_id, group]) => ({ _id, group }));
-    await foundry.documents.modifyBatch(
-      [
-        create.length && { action: "create", data: create, documentName: "CombatantGroup", keepId: true, parent: this },
-        updates.length && { action: "update", documentName: "Combatant", parent: this, updates },
-        deletes.length && { action: "delete", documentName: "CombatantGroup", ids: deletes, parent: this },
-      ].filter(Boolean),
-    );
-  }
-
-  /**
    * Refresh turn order after modifying CombatantGroups.
    * @param {string} collection
    * @param {{ id: ID<TeriockCombatant>, groupId: ID<TeriockCombatantGroup>|null }|null} prior
@@ -106,6 +173,39 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    */
   #refreshCombatExpirations(actor, event, timing) {
     BaseExpiration.massExpire(this.actors, CombatExpiration.metadata.type, { actor, event, timing });
+  }
+
+  /**
+   * Changes that group summoned Combatants with their summoners where either is one of the given Combatants.
+   * @param {TeriockCombatant[]} combatants - Combatants being added, which may not be created yet.
+   * @returns {Promise<{ create: object[], deletes: ID<TeriockCombatantGroup>[], groupIds: Record<ID<TeriockCombatant>, ID|null> }|null>}
+   * @category Groups
+   */
+  async #summonChanges(combatants) {
+    const candidates = [...new Set([...this.combatants, ...combatants])];
+    const summons = new Map();
+    for (const combatant of candidates) {
+      const type = combatant.token?.getFlag("teriock", "addToGroup");
+      const summonerId = type && combatant.token.summoner?.id;
+      const summoner = summonerId ? candidates.find(c => c.tokenId === summonerId) : null;
+      if (!summoner || !(combatants.includes(combatant) || combatants.includes(summoner))) { continue; }
+      if (summoner.group && combatant.group === summoner.group) { continue; }
+      if (!summons.has(summoner)) { summons.set(summoner, { joiners: [], type }); }
+      summons.get(summoner).joiners.push(combatant);
+    }
+    if (!summons.size) { return null; }
+    if (game.settings.get("teriock", "confirmSummonsAddToGroup")) {
+      // Select Tokens because the Combatants don't actually exist yet
+      const tokens = [...summons.values()].flatMap(s => s.joiners.map(c => c.token));
+      const selected = await DocumentSelector.selectMulti(tokens, {
+        checked: tokens.map(t => t.uuid),
+        hint: _loc("TERIOCK.DIALOGS.GroupSummons.hint"),
+        textKey: "summoner.name",
+        title: _loc("TERIOCK.DIALOGS.GroupSummons.title"),
+      });
+      for (const s of summons.values()) { s.joiners = s.joiners.filter(c => selected.includes(c.token)); }
+    }
+    return this.#joinChanges([...summons].map(([target, { joiners, type }]) => ({ joiners, target, type })));
   }
 
   /**
@@ -156,6 +256,9 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
       }
     }
     this.#onModifyGroups(collection, prior);
+    if (collection === "combatants" && game.user.id === userId && game.users.activeGM && !options.summonsGrouped) {
+      this.#groupSummons(documents);
+    }
   }
 
   /** @inheritDoc */
@@ -172,10 +275,10 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
     this.#onModifyGroups(collection, prior);
-    if (collection === "combatants" && game.user.isActiveGM) {
+    if (collection === "combatants" && game.user.isActiveGM && !options.groupsUpdated) {
       const { deletes, groupIds } = this.#leaveChanges(documents);
       for (const id of ids) { delete groupIds[id]; }
-      if (deletes.length) { this.#modifyGroups({ deletes, groupIds }); }
+      if (deletes.length) { batchWrite(this.#groupOperations({ deletes, groupIds })); }
     }
   }
 
@@ -260,16 +363,51 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
   }
 
   /**
+   * Add Combatants and group summoned Combatants with their summoners in a single batch.
+   * @param {object[]} data - Combatant data to create.
+   * @returns {Promise<TeriockCombatant[]>}
+   * @category Groups
+   */
+  async addCombatants(data) {
+    const pending = data.map(d =>
+      new Combatant.implementation({ ...d, _id: foundry.utils.randomID() }, { parent: this })
+    );
+    const changes = game.users.activeGM ? await this.#summonChanges(pending) : null;
+    await batchWrite(this.#groupOperations(changes ?? {}, { pending }), { asGM: Boolean(changes) });
+    return pending.map(c => this.combatants.get(c.id)).filter(Boolean);
+  }
+
+  /**
    * Disband a CombatantGroup.
    * @param {TeriockCombatantGroup} group
    * @returns {Promise<void>}
    * @category Groups
    */
   async disbandGroup(group) {
-    await this.#modifyGroups({
-      deletes: [group.id],
-      groupIds: Object.fromEntries([...group.members].map(m => [m.id, null])),
-    });
+    await batchWrite(
+      this.#groupOperations({
+        deletes: [group.id],
+        groupIds: Object.fromEntries([...group.members].map(m => [m.id, null])),
+      }),
+    );
+  }
+
+  /**
+   * Add Combatants or every member of a CombatantGroup to the target's CombatantGroup. If the target doesn't already
+   * have a CombatantGroup, one of the given type is made with the target as its commander.
+   * @param {TeriockCombatant|TeriockCombatant[]|TeriockCombatantGroup} source
+   * @param {TeriockCombatant|TeriockCombatantGroup} target
+   * @param {object} [options]
+   * @param {boolean} [options.asGM]
+   * @param {string} [options.name]
+   * @param {CombatantGroupType} [options.type]
+   * @returns {Promise<void>}
+   * @category Groups
+   */
+  async joinGroup(source, target, { asGM, name, type } = {}) {
+    const joiners = source.documentName === "CombatantGroup" ? [...source.members] : [source].flat();
+    const changes = this.#joinChanges([{ joiners, name, target, type }]);
+    if (changes) { await batchWrite(this.#groupOperations(changes), { asGM }); }
   }
 
   /**
@@ -278,59 +416,66 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
    * @param {TeriockCombatant|TeriockCombatantGroup} source
    * @param {TeriockCombatant|TeriockCombatantGroup} target
    * @param {object} [options]
+   * @param {boolean} [options.asGM] - Have the GM make the changes.
    * @param {string} [options.name]
+   * @param {Partial<ApplicationPosition>} [options.position]
    * @param {CombatantGroupType} [options.type]
-   * @param {Partial<ApplicationPosition>} [options.position] - Position of the creation dialog
    * @returns {Promise<void>}
    * @category Groups
    */
-  async joinGroup(source, target, { name, position, type } = {}) {
-    const group = target.documentName === "CombatantGroup" ? target : target.group;
+  async joinGroupDialog(source, target, { asGM, name, position, type } = {}) {
     const joiners = source.documentName === "CombatantGroup" ? [...source.members] : [source];
-    if (joiners.includes(target) || (group && joiners.every(c => c.group === group))) { return; }
-    const create = [];
-    let groupId = group?.id;
-    if (!groupId) {
-      const members = [target, ...joiners];
-      if (!name || !type) {
-        const nameContext = { commander: target, members };
-        ({ name, type } =
-          await CombatantGroup.implementation.createDialog({ name, type }, { parent: this }, {
-            nameContext,
-            ok: {
-              callback: (_event, button) => {
-                const data = new foundry.applications.ux.FormDataExtended(button.form).object;
-                data.name = data.name?.trim();
-                return data;
-              },
+    const hasGroup = target.documentName === "CombatantGroup" || target.group;
+    if (!hasGroup && !joiners.includes(target)) {
+      const nameContext = { commander: target, members: [target, ...joiners] };
+      ({ name, type } =
+        await CombatantGroup.implementation.createDialog({ name, type }, { parent: this }, {
+          nameContext,
+          ok: {
+            callback: (_event, button) => {
+              const data = new foundry.applications.ux.FormDataExtended(button.form).object;
+              data.name = data.name?.trim();
+              return data;
             },
-            position,
-          }) ?? {});
-        if (!type) { return; }
-      }
-      groupId = foundry.utils.randomID();
-      create.push({ _id: groupId, initiative: target.initiative, name, system: { commanderId: target.id }, type });
+          },
+          position,
+        }) ?? {});
     }
-    const { deletes, groupIds } = this.#leaveChanges(joiners);
-    if (create.length) { groupIds[target.id] = groupId; }
-    for (const joiner of joiners) { groupIds[joiner.id] = groupId; }
-    await this.#modifyGroups({ create, deletes, groupIds });
+    await this.joinGroup(source, target, { asGM, name, type });
   }
 
   /**
    * Remove a Combatant from its CombatantGroup.
    * @param {TeriockCombatant} combatant
+   * @param {object} [options]
+   * @param {boolean} [options.asGM] - Have the GM make the changes.
    * @returns {Promise<void>}
    * @category Groups
    */
-  async leaveGroup(combatant) {
-    if (combatant.group) { await this.#modifyGroups(this.#leaveChanges([combatant])); }
+  async leaveGroup(combatant, { asGM } = {}) {
+    if (combatant.group) { await batchWrite(this.#groupOperations(this.#leaveChanges([combatant])), { asGM }); }
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     for (const group of this.groups) { group.system.prepareDisplayData(); }
+  }
+
+  /**
+   * Remove Combatants and disband CombatantGroups left without enough members in a single batch.
+   * @param {TeriockCombatant[]} combatants
+   * @returns {Promise<TeriockCombatant[]>}
+   * @category Groups
+   */
+  async removeCombatants(combatants) {
+    // Without a GM, players can still remove Combatants but can't disband CombatantGroups
+    const { deletes, groupIds } = game.users.activeGM ? this.#leaveChanges(combatants) : { deletes: [], groupIds: {} };
+    for (const combatant of combatants) { delete groupIds[combatant.id]; }
+    await batchWrite(this.#groupOperations({ deletes, groupIds }, { removed: combatants }), {
+      asGM: deletes.length > 0,
+    });
+    return combatants;
   }
 
   /**

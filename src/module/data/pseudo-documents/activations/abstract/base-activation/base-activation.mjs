@@ -114,6 +114,14 @@ export default class BaseActivation extends BasePseudoDocument {
   }
 
   /**
+   * The token that used this.
+   * @returns {TeriockTokenDocument|null}
+   */
+  get token() {
+    return this.getNearestDocument()?.speakerToken ?? this.actor?.defaultToken?.document ?? null;
+  }
+
+  /**
    * Token documents to affect when this button is activated.
    * @returns {TeriockTokenDocument[]}
    */
@@ -184,13 +192,13 @@ export default class BaseActivation extends BasePseudoDocument {
 
   /**
    * Code that runs when this button is left-clicked.
-   * @returns {Promise<void>}
+   * @returns {Promise<*>}
    */
   async primaryAction() {}
 
   /**
    * Code that runs when this button is right-clicked.
-   * @returns {Promise<void>}
+   * @returns {Promise<*>}
    */
   async secondaryAction() {}
 }

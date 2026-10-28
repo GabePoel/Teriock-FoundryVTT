@@ -72,11 +72,20 @@ export function consolidateWriteOperations(operations) {
 /**
  * Build, consolidate, and write a bunch of batched operations.
  * @param {(DatabaseWriteOperation & { uuid?: UUID<TeriockDocument>, docData?: object })[]} operations
+ * @param {object} [options]
+ * @param {boolean} [options.asGM] - Have the GM make the changes.
  * @returns {Promise<void>}
  */
-export async function batchWrite(operations) {
+export async function batchWrite(operations, { asGM = false } = {}) {
   const built = await Promise.all(operations.map(op => buildWriteOperation(op)));
-  await foundry.documents.modifyBatch(consolidateWriteOperations(built));
+  const consolidated = consolidateWriteOperations(built);
+  if (!consolidated.length) { return; }
+  if (asGM && !game.user.isGM) {
+    const relayed = consolidated.map(({ parent, ...op }) => (parent ? { ...op, parentUuid: parent.uuid } : op));
+    await game.users.queryGM("teriock.modifyBatch", { operations: relayed }, {
+      timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT,
+    });
+  } else { await foundry.documents.modifyBatch(consolidated); }
 }
 
 /**

@@ -2,6 +2,7 @@ import type {
   DatabaseCreateOperation,
   DatabaseDeleteOperation,
   DatabaseUpdateOperation,
+  DatabaseWriteOperation,
 } from "@common/abstract/_types.mjs";
 
 import type queries from "../helpers/queries/_module.mjs";
@@ -47,6 +48,8 @@ declare global {
       trigger: Teriock.System.Trigger;
       uuid: UUID<TeriockActiveEffect | TeriockActor | TeriockItem>;
     };
+
+    export type ModifyBatchData = { operations: DatabaseWriteOperation[] };
 
     export type IdentifyItemData = { itemUuid: UUID<TeriockItem<"equipment">>, userUuid: UUID<TeriockUser> };
 

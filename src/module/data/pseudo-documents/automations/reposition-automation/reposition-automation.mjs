@@ -70,8 +70,8 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
         distance,
         movementAction: this.movementAction || null,
         originBarrier: this.originBarrier,
+        originUuid: originToken?.uuid,
         randomDirection: this.randomDirection,
-        token: originToken?.uuid,
       }),
     ];
   }

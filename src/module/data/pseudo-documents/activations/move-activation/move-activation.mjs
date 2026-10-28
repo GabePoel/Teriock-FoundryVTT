@@ -1,5 +1,6 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { movementActionField } from "../../../fields/tools/builders.mjs";
+import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -19,11 +20,17 @@ export default class MoveActivation extends BaseActivation {
       distance: new fields.NumberField(),
       movementAction: movementActionField({ blank: true, initial: null, nullable: true, required: false }),
       originBarrier: new fields.BooleanField(),
+      originUuid: new fields.DocumentUUIDField({ initial: null, nullable: true, type: "Token" }),
       randomDirection: new fields.BooleanField(),
-      token: new fields.DocumentUUIDField({ initial: null, nullable: true, type: "Token" }),
       x: new fields.NumberField({ initial: null, nullable: true }),
       y: new fields.NumberField({ initial: null, nullable: true }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateRename(source, "token", "originUuid");
+    return super.migrateData(source, options);
   }
 
   /**
@@ -81,12 +88,10 @@ export default class MoveActivation extends BaseActivation {
   get origin() {
     let x = null;
     let y = null;
-    if (this.token) {
-      const token = this.tokenDocument;
-      if (token) {
-        x = token.x;
-        y = token.y;
-      }
+    const token = this.originToken;
+    if (token) {
+      x = token.x;
+      y = token.y;
     }
     if (typeof this.x === "number") { x = this.x; }
     if (typeof this.y === "number") { y = this.y; }
@@ -95,21 +100,19 @@ export default class MoveActivation extends BaseActivation {
   }
 
   /**
+   * The token the movement is relative to.
+   * @returns {TeriockTokenDocument|null}
+   */
+  get originToken() {
+    return fromUuidSync(this.originUuid);
+  }
+
+  /**
    * The scene this operation happens in.
    * @returns {TeriockScene|null}
    */
   get scene() {
-    const tokenDocument = this.tokenDocument;
-    if (tokenDocument) { return tokenDocument.scene; }
-    return canvas.scene;
-  }
-
-  /**
-   * The token document this is based on.
-   * @returns {TeriockTokenDocument|null}
-   */
-  get tokenDocument() {
-    return fromUuidSync(this.token);
+    return this.originToken?.scene ?? canvas.scene;
   }
 
   /** @inheritDoc */

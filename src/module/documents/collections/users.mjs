@@ -17,7 +17,7 @@ export default class TeriockUsers extends Users {
    * @param {Teriock.Queries.QueryName} queryName
    * @param {object} queryData
    * @param {Partial<Teriock.Queries.QueryGMOptions>} [queryOptions]
-   * @returns {Promise<any>}
+   * @returns {Promise<*>}
    */
   async queryGM(queryName, queryData, queryOptions = {}) {
     let {

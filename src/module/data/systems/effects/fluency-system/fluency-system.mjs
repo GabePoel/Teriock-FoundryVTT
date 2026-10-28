@@ -72,7 +72,7 @@ export default class FluencySystem
     if (!tc) { return null; }
     return {
       img: tc.img,
-      name: foundry.utils.getDocumentClass("ActiveEffect").defaultName({
+      name: ActiveEffect.implementation.defaultName({
         pack: createOptions.pack,
         parent: createOptions.parent,
         tradecraft: tc.name,
