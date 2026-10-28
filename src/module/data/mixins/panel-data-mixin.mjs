@@ -24,6 +24,7 @@ export default function PanelDataMixin(Base) {
     async _buildEmbedHTML(config, options = {}) {
       if (config.values.includes("panel")) {
         const panelOptions = {
+          _embedDepth: options._embedDepth,
           collapsed: config.values.includes("collapsed"),
           noAssociations: config.values.includes("noAssociations"),
           noBars: config.values.includes("noBars"),

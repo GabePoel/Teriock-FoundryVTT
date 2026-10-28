@@ -64,7 +64,7 @@ export default class AddDocumentsAutomation
       "separate",
       "setCompetence",
     ];
-    if (!source.constructionNodes || oldProperties.some(p => p in source)) {
+    if (!options.partial && oldProperties.some(p => p in source)) {
       const baseIdKey = `${source._id}-addDocuments`;
       const rootId = toId(`${baseIdKey}-root`, { hash: true });
       const nodes = {

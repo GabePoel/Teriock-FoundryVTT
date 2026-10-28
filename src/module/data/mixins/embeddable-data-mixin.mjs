@@ -53,6 +53,7 @@ export default function EmbeddableDataMixin(Base) {
         const field = this.getFieldForProperty(config.path);
         if (field instanceof foundry.data.fields.HTMLField) {
           const html = await TeriockTextEditor.enrichHTML(foundry.utils.getProperty(this, config.path), {
+            ...options,
             relativeTo: this,
           });
           return foundry.utils.parseHTML(html);
