@@ -10,9 +10,6 @@ import { ApplicableEffectSystem } from "../abstract/_module.mjs";
  */
 export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem, TransformationSystemMixin) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consequence"];
-
-  /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: [
       "ability",

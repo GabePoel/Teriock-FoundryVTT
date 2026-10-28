@@ -28,7 +28,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), "useArmament"), {
+    return Object.assign(omit(super.defineSchema(), ["useArmament"]), {
       autoPayCosts: new fields.BooleanField(),
       bv: new fields.NumberField({
         initial: 0,
@@ -516,6 +516,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    */
   _initializeSource(data, options = {}) {
     data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
+    data.consumeEquipment ??= options.source?.system.settings.getSetting("consumeEquipment");
     data.executionTime ??= options.source?.system.executionTime.base;
     const source = super._initializeSource(data, options);
     const { duration, maneuver, settings, targets } = options.source.system;
