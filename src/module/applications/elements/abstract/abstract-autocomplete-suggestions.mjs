@@ -1,6 +1,6 @@
 import { createElement } from "../../../utils/_module.mjs";
+import AbstractTagsElement from "./abstract-tags.mjs";
 
-const { AbstractFormInputElement } = foundry.applications.elements;
 const { Autocomplete } = foundry.applications.ux;
 
 /**
@@ -17,7 +17,7 @@ const { Autocomplete } = foundry.applications.ux;
  * Abstract form element whose primary input offers an Autocomplete menu of suggestions declared as `<option>`
  * children. The big idea is this allows for "choices"-like set of options without strictly requiring them.
  */
-export default class AbstractAutocompleteSuggestionsElement extends AbstractFormInputElement {
+export default class AbstractAutocompleteSuggestionsElement extends AbstractTagsElement {
   /**
    * Standardize text for matching.
    * @param {string} text
@@ -46,16 +46,16 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
 
   /**
    * The current suggestions.
-   * @type {(AutocompleteEntry & { search: string })[]}
+   * @type {(AutocompleteEntry & { hint?: string, search: string })[]}
    */
   #suggestions = [];
 
   /**
-   * Dismiss Autocomplete menu when clicking outside input or menu.
+   * Dismiss Autocomplete menu when clicking outside this element or menu.
    * @param {PointerEvent} event
    */
   #onClickAway(event) {
-    if (event.target === this._primaryInput || this.#autocomplete.element?.contains(event.target)) { return; }
+    if (this.contains(event.target) || this.#autocomplete.element?.contains(event.target)) { return; }
     this._dismissSuggestions();
   }
 
@@ -74,7 +74,10 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
     if (!this.editable) { return this._dismissSuggestions(); }
     const query = AbstractAutocompleteSuggestionsElement.#normalize(this._primaryInput.value);
     const entries = this.#suggestions.filter(s => s.search.includes(query));
-    if (entries.length) { this.#autocomplete.activate(this._primaryInput, entries); }
+    if (entries.length) {
+      const { width } = this._primaryInput.getBoundingClientRect();
+      this.#autocomplete.activate(this._primaryInput, entries, { position: { width } });
+    }
     else { this._dismissSuggestions(); }
   }
 
@@ -121,6 +124,15 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
   }
 
   /**
+   * The label of the suggestion matching a value.
+   * @param {string|null} value
+   * @returns {string|undefined}
+   */
+  _getSuggestionLabel(value) {
+    return this.#suggestions.find(s => s.identifier === value)?.label;
+  }
+
+  /**
    * Handle selection of a suggestion.
    * @param {string} value
    */
@@ -130,6 +142,7 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
 
   /** @inheritDoc */
   _toggleDisabled(disabled) {
+    super._toggleDisabled(disabled);
     if (disabled) { this._dismissSuggestions(); }
   }
 
@@ -137,6 +150,7 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractForm
   connectedCallback() {
     // Read suggestions before base class replaces children.
     this.#suggestions = [...this.querySelectorAll("option")].map(o => ({
+      hint: o.value === o.textContent ? undefined : o.value,
       identifier: o.value,
       label: o.textContent,
       search: AbstractAutocompleteSuggestionsElement.#normalize(`${o.textContent} ${o.value}`),

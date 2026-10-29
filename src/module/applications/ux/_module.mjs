@@ -1,3 +1,4 @@
+export { default as TeriockAutocomplete } from "./autocomplete.mjs";
 export { default as TeriockContextMenu } from "./context-menu.mjs";
 export { default as TeriockDragDrop } from "./drag-drop.mjs";
 export * as enrichment from "./enrichers/_module.mjs";

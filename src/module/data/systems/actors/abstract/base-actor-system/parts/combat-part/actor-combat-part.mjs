@@ -11,12 +11,12 @@ import InitiativeModel from "../../../../../../models/modifier-models/initiative
 const { fields } = foundry.data;
 
 /**
- * Determine if a wielded document should be null.
+ * Determine if a wielded document is valid.
  * @param {TeriockItem<"body"|"equipment">} doc
  */
-function nullifyWielded(doc) {
-  if (!["body", "equipment"].includes(doc.type) || !doc.active) { return true; }
-  return doc.type === "equipment" && !doc.system.equipped;
+function filterWielded(doc) {
+  if (!["body", "equipment"].includes(doc.type) || !doc.active) { return false; }
+  return doc.type !== "equipment" || doc.system.equipped;
 }
 
 /**
@@ -56,8 +56,8 @@ export default function ActorCombatPart(Base) {
           warded: new fields.BooleanField({ initial: false }),
         }),
         wielding: new fields.SchemaField({
-          attacker: new LocalDocumentField(foundry.documents.BaseItem, { nullify: nullifyWielded }),
-          blocker: new LocalDocumentField(foundry.documents.BaseItem, { nullify: nullifyWielded }),
+          attacker: new LocalDocumentField(foundry.documents.BaseItem, { filter: filterWielded }),
+          blocker: new LocalDocumentField(foundry.documents.BaseItem, { filter: filterWielded }),
         }),
       });
     }

@@ -1,3 +1,5 @@
+import { HTMLLocalDocumentElement } from "../../../applications/elements/_module.mjs";
+
 const { DocumentIdField } = foundry.data.fields;
 
 /**
@@ -17,6 +19,7 @@ export default class LocalDocumentField extends DocumentIdField {
       idOnly: false,
       nullable: true,
       readonly: false,
+      filter: () => true,
     });
   }
 
@@ -62,25 +65,33 @@ export default class LocalDocumentField extends DocumentIdField {
   }
 
   /** @inheritDoc */
+  _toInput(config) {
+    if (!config.model) { return super._toInput(config); }
+    const collection = this._findCollection(config.model, this.model.metadata.collection);
+    config.uuids ??= collection?.filter(d => this.filter(d, config.model)).map(d => d.uuid);
+    return HTMLLocalDocumentElement.create(config);
+  }
+
+  /** @inheritDoc */
   _validateType(value) {
-    if (!this.options?.fallback) { super._validateType(value); }
+    if (!this.fallback) { super._validateType(value); }
   }
 
   /** @inheritDoc */
   initialize(value, model, _options = {}) {
-    if (this.idOnly) { return this.options?.fallback || foundry.data.validators.isValidId(value) ? value : null; }
+    if (this.idOnly) { return this.fallback || foundry.data.validators.isValidId(value) ? value : null; }
     const collection = this._findCollection(model, this.model.metadata.collection);
     return () => {
       const document = collection?.get(value);
-      if (!document) { return this.options?.fallback ? value : null; }
-      if (this.options?.fallback) {
+      if (!document) { return this.fallback ? value : null; }
+      if (this.fallback) {
         Object.defineProperty(document, "toString", {
           configurable: true,
           enumerable: false,
           value: () => document.name,
         });
       }
-      if (this.options?.nullify && this.options.nullify(document)) { return null; }
+      if (!this.filter(document, model)) { return this.getInitialValue(); }
       return document;
     };
   }

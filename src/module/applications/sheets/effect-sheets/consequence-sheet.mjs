@@ -1,5 +1,4 @@
 import { makeIconClass } from "../../../utils/_module.mjs";
-import { DocumentSelector } from "../../dialogs/_module.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 
 /**
@@ -13,29 +12,8 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  * @mixes MechanicsSheet
  */
 export default class ConsequenceSheet extends ApplicableEffectSheet {
-  /**
-   * Select the primary transformation species for this consequence.
-   * @returns {Promise<void>}
-   * @category Transformation
-   */
-  static async #onSelectPrimarySpecies() {
-    if (!this.isEditable || !this.document.system.isTransformation) { return; }
-    const selected = await DocumentSelector.selectSingle(this.document.previewedTypes.species, {
-      auto: false,
-      checked: this.document.system.primarySpecies?.uuid,
-      hint: _loc("TERIOCK.SHEETS.Consequence.ACTIONS.SelectPrimarySpecies.hint"),
-      openable: true,
-      title: _loc("TERIOCK.SHEETS.Consequence.ACTIONS.SelectPrimarySpecies.title"),
-    });
-    if (!selected) { return; }
-    await this.document.update({ "system.transformation.primary": selected.id });
-  }
-
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    actions: { selectPrimarySpecies: this.#onSelectPrimarySpecies },
-    position: { width: 600 },
-  };
+  static DEFAULT_OPTIONS = { position: { width: 600 } };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
@@ -62,21 +40,20 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
    */
   async _prepareContext(options = {}) {
     const transformationPaths = ["enabled"];
-    const showPrimarySpecies = this.document.system.transformation.enabled;
-    if (showPrimarySpecies) {
+    if (this.document.system.transformation.enabled) {
       transformationPaths.push(...["level", "attributes", "override"]);
       if (this.document.system.transformation.override.has("art")) {
         transformationPaths.push(...["ring", "img", "ringImg"]);
       }
+      transformationPaths.push("primary");
     }
     return Object.assign(await super._prepareContext(options), {
-      primarySpecies: showPrimarySpecies ? this.document.system.primarySpecies : null,
-      showPrimarySpecies,
       transformation: transformationPaths.map(p => {
         const entry = {
           field: this.document.system.schema.getField(`transformation.${p}`),
           localize: true,
-          placeholder: this.document.system.transformation[p],
+          model: this.document.system,
+          placeholder: p === "primary" ? undefined : this.document.system.transformation[p],
           value: this.document.system._source.transformation[p],
         };
         if (TERIOCK.CONFIG.transformation.multiCheckboxPaths.includes(p)) {

@@ -51,6 +51,16 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
   }
 
   /**
+   * Label the current identifier with its suggestion's name.
+   */
+  #refreshTag() {
+    if (!this._tags) { return; }
+    const value = this._getValue();
+    const label = this._getSuggestionLabel(value);
+    this._tags.replaceChildren(...label ? [this.constructor.renderTag(value, label, false)] : []);
+  }
+
+  /**
    * The identifier applied when the reset button is clicked.
    * @return {Identifier|null}
    */
@@ -67,14 +77,13 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
       this._primaryInput.value = toKebabCase(this._primaryInput.value);
       this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
     });
+    this.addEventListener("change", this.#refreshTag.bind(this), { signal: this.abortSignal });
   }
 
   /** @inheritDoc */
   _buildElements() {
-    this._primaryInput = createElement("input", { placeholder: this.getAttribute("placeholder"), type: "text" });
+    const [tags, group] = super._buildElements();
     this._applyInputAttributes(this._primaryInput);
-    const group = createElement("div", { className: "input-group" });
-    group.append(this._primaryInput);
     if (this.reset) {
       this.#resetButton = createElement("button", {
         ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
@@ -84,7 +93,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
       });
       group.append(this.#resetButton);
     }
-    return [group];
+    return [tags, group];
   }
 
   /** @inheritDoc */
@@ -105,17 +114,12 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
     const initial = this.getAttribute("value");
     if (initial != null) { this._primaryInput.value = initial; }
     this.removeAttribute("value");
+    this.#refreshTag();
   }
 
   /** @inheritDoc */
   _setValue(value) {
     if (this._primaryInput) { this._primaryInput.value = value ?? ""; }
-  }
-
-  /** @inheritDoc */
-  _toggleDisabled(disabled) {
-    super._toggleDisabled(disabled);
-    this._primaryInput.disabled = disabled;
-    if (this.#resetButton) { this.#resetButton.disabled = disabled; }
+    this.#refreshTag();
   }
 }

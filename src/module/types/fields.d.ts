@@ -1,3 +1,5 @@
+import { DataModel } from "@common/abstract/_module.mjs";
+
 declare global {
   namespace Teriock.Fields {
     export type _FormulaFieldOptions = {
@@ -15,8 +17,8 @@ declare global {
       fallback?: boolean;
       /** Only display the ID and not the full document */
       idOnly?: boolean;
-      /** Force to null if the specified condition is met */
-      nullify?: (doc: TeriockDocument) => boolean;
+      /** Reset to the initial value if the document fails this test */
+      filter?: (doc: TeriockDocument, model: DataModel) => boolean;
     };
 
     /** Suggestions for an identifier input. `true` pulls names from {@link IdentifiersRegistry}. */
@@ -34,8 +36,11 @@ declare global {
     };
 
     export type _TypedIdentifierFieldOptions = {
+      /** When true, only one identifier may be attached. */
       single?: boolean;
+      /** Optional suggestions to offer in the input. */
       suggestions?: IdentifierSuggestions | null;
+      /** Allowed document type prefixes. */
       types?: string[];
     };
 

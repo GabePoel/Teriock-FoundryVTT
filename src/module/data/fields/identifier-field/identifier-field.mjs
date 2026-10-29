@@ -5,7 +5,7 @@ import { validateIdentifier } from "../tools/validators.mjs";
 const { StringField } = foundry.data.fields;
 
 /**
- * @import { DataFieldContext, FormInputConfig, StringFieldInputConfig, StringFieldOptions } from "@common/data/_types.mjs";
+ * @import { FormInputConfig, StringFieldInputConfig, StringFieldOptions } from "@common/data/_types.mjs";
  */
 
 /**
@@ -22,14 +22,6 @@ export default class IdentifierField extends StringField {
       type: null,
       validateChoices: true,
     });
-  }
-
-  /**
-   * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
-   * @param {DataFieldContext} [context]
-   */
-  constructor(options = {}, context = {}) {
-    super(options, context);
   }
 
   /** @inheritDoc */
@@ -70,7 +62,7 @@ export default class IdentifierField extends StringField {
   /** @inheritDoc */
   initialize(value, model, options = {}) {
     const out = super.initialize(value, model, options);
-    if (typeof out === "string" && this.options?.type) { return `${this.options?.type}:${out}`; }
+    if (typeof out === "string" && this.type) { return `${this.type}:${out}`; }
     return out;
   }
 }

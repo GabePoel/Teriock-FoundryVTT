@@ -93,6 +93,7 @@ export default function DisplaySheetMixin(Base) {
             choices: f.choices || schema?.choices,
             editable: f.editable === false ? false : (f?.value ?? value) === sourceValue,
             label: f?.label || _loc(schema?.label),
+            model: this.document.system,
             schema,
             value: sourceValue || value,
           },

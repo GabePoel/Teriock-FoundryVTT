@@ -52,7 +52,7 @@ export function speciesTransformationFields() {
 export function actorTransformationConfig() {
   return Object.assign(speciesTransformationFields(), {
     primary: new LocalDocumentField(foundry.documents.BaseActiveEffect, {
-      nullify: d => !["condition", "consequence"].includes(d.type) || !d.system.transformation.enabled,
+      filter: d => ["condition", "consequence"].includes(d.type) && d.system.transformation.enabled,
     }),
   });
 }
@@ -121,7 +121,7 @@ export function effectTransformationFields() {
     primary: new LocalDocumentField(foundry.documents.BaseItem, {
       hint: "TERIOCK.SCHEMA.Transformation.primary.hint",
       label: "TERIOCK.SCHEMA.Transformation.primary.label",
-      nullify: d => d.type !== "species",
+      filter: (d, m) => d.type === "species" && d.dependee === m.getNearestDocument(),
     }),
     uuids: new fields.SetField(
       new fields.DocumentUUIDField({

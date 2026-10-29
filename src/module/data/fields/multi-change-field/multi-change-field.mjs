@@ -2,31 +2,18 @@ const { SchemaField } = foundry.data.fields;
 const { getProperty, setProperty } = foundry.utils;
 
 /**
- * @import { DataSchema } from "@common/abstract/_types.mjs";
- * @import { DataFieldContext, DataFieldOptions } from "@common/data/_types.mjs";
- */
-
-/**
  * A special class of {@link SchemaField} which applies its changes to multiple paths in its data schema.
  */
 export default class MultiChangeField extends SchemaField {
-  /**
-   * @param {DataSchema} fields
-   * @param {DataFieldOptions & Teriock.Fields._MultiChangeFieldOptions} [options]
-   * @param {DataFieldContext} [context]
-   */
-  constructor(fields, options, context = {}) {
-    super(fields, options, context);
-    this.#multiChangePaths = options.multiChangePaths;
+  /** @inheritDoc */
+  static get _defaults() {
+    return Object.assign(super._defaults, { multiChangePaths: null });
   }
-
-  /** @type {string[] | undefined} */
-  #multiChangePaths;
 
   /** @inheritDoc */
   applyChange(value, model, change, options = { replacementData: {} }) {
-    const entries = this.#multiChangePaths
-      ? this.#multiChangePaths.map(p => [p, this.getField(p)])
+    const entries = this.multiChangePaths
+      ? this.multiChangePaths.map(p => [p, this.getField(p)])
       : Object.entries(this.fields);
     for (const [path, field] of entries) {
       if (!field) { continue; }

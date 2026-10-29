@@ -1,0 +1,15 @@
+#autocomplete li[data-hint] {
+  display: flex;
+  gap: 1em;
+
+  &::after {
+    color: var(--color-text-subtle);
+    content: attr(data-hint);
+    margin-left: auto;
+    text-align: end;
+  }
+
+  &.active::after {
+    color: inherit;
+  }
+}

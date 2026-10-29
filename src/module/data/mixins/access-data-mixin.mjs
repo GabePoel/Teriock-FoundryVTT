@@ -83,6 +83,7 @@ export default function AccessDataMixin(Base) {
       const gc = { localize: true, rootId: [config.rootId, this.localPath].filterJoin("-") };
       const ic = {
         context: this._inputContextKey,
+        model: this,
         name: `${this.localPath}.${path}`,
         value: foundry.utils.getProperty(this, `_source.${path}`),
       };

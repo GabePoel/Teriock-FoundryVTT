@@ -33,9 +33,20 @@ export default class AttunementSystem extends CleanedEffectSystem {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       inheritTier: new fields.BooleanField({ initial: true }),
-      target: new LocalDocumentField(foundry.documents.BaseItem),
+      target: new LocalDocumentField(foundry.documents.BaseItem, {
+        filter: (d, m) => {
+          if (!d.metadata?.tags.attunable) { return false; }
+          const first = d.actor?.previewedTypes.attunement.find(a => a.system._source.target === d.id);
+          return !first || first === m.getNearestDocument();
+        },
+      }),
       tier: new fields.NumberField({ initial: 0 }),
     });
+  }
+
+  /** @inheritDoc */
+  get _displayInputs() {
+    return ["system.target", ...super._displayInputs];
   }
 
   /** @inheritDoc */

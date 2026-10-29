@@ -1,7 +1,8 @@
 // Designed to resemble Foundry's document-tags and string-tags elements
 
 identifier-tags,
-identifier-input {
+identifier-input,
+local-document {
   --input-background-color: var(--color-cool-4);
   --input-border-color: transparent;
   --input-box-shadow: none;
@@ -64,7 +65,7 @@ identifier-input {
   }
 }
 
-.theme-light :is(identifier-tags, identifier-input) {
+.theme-light :is(identifier-tags, identifier-input, local-document) {
   --input-background-color: rgba(0, 0, 0, 0.1);
   --input-border-color: var(--color-dark-6);
   --input-box-shadow: inset 0 0 6px var(--input-background-color);
@@ -82,7 +83,7 @@ identifier-input {
 
 .tags.input-element-tags {
   .tag {
-    :is(identifier-tags):is(:disabled, [readonly]) & .remove {
+    :is(identifier-tags, local-document):is(:disabled, [readonly]) & .remove {
       display: none;
     }
   }

@@ -77,6 +77,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
 
+  CONFIG.ux.Autocomplete = applications.ux.TeriockAutocomplete;
   CONFIG.ux.ContextMenu = applications.ux.TeriockContextMenu;
   CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
   CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;
