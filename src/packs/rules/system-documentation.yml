@@ -49,12 +49,17 @@ pages:
         ]]</p></td></tr><tr><td data-colwidth="127"><p>Example Result</p></td><td><p>[[code /dmg 1d10[fire
         magic]]]</p></td></tr></tbody></table><p></p><h2>Embed Enrichers</h2><p>Foundry normally allows [[code
         @Embed​[uuid options]]] to be used to display a document within a block of text. We expand this functionality so
-        identifiers can be used in place of UUIDs. For instance, [[code @Embed​[body:claw inline=true]]] will display
-        the following.</p><p>@Embed[body:claw inline=true]</p><p>In addition to the normal Foundry embed options, we
-        allow the use of [[code panel]] to documents in a panel like it would appear in tooltips or chat messages. This
-        means the text [[code @Embed​[body:claw panel inline=true]]] produces the following.</p><p>@Embed[body:claw
-        panel inline=true]</p><p>The panel format can be used regardless of whether an identifier or UUID is used to
-        invoke the embed enricher.</p>
+        identifiers can be used in place of UUIDs and add a few ways to display a document.</p><ul><li><p>[[code panel]]
+        shows the document in a panel like it would appear in tooltips or chat messages. This is the default for most
+        documents.</p></li><li><p>[[code description]] shows only the document's description. This is the default for
+        rules pages.</p></li><li><p>[[code path=&lt;path&gt;]] shows a specific text field of the document such as
+        [[code path=system.notes]].</p></li><li><p>[[code block]] shows the document as a small card like it would
+        appear on a sheet.</p></li></ul><p>For instance [[code @Embed​[body:claw inline]]] produces the
+        following.</p><p>@Embed[body:claw inline]</p><p>The text [[code @Embed​[body:claw block inline]]] produces the
+        following.</p><p>@Embed[body:claw block inline]</p><p>Panels can hide parts of themselves with [[code
+        associations=false]], [[code bars=false]], and [[code blocks=false]]. They can also start collapsed with [[code
+        collapsed]]. Any of these formats can be used regardless of whether an identifier or UUID is used to invoke the
+        embed enricher.</p>
     type: text
   - _id: wQnmIwHqgTnNI3Yl
     _key: "!journal.pages!pIYm1KYBRZQdHajT.wQnmIwHqgTnNI3Yl"
