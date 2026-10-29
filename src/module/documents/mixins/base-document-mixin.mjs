@@ -1,3 +1,4 @@
+import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
 import { createElement, makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
@@ -8,6 +9,7 @@ import { createElement, makeIconClass, mixClasses, toKebabCase } from "../../uti
  * @import { Document } from "@common/abstract/_module.mjs";
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
  * @import { TeriockActiveEffect, TeriockActor, TeriockItem } from "../_module.mjs";
+ * @import { DocumentHTMLEmbedConfig, EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
  */
 
 /**
@@ -246,6 +248,15 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * We define a number of new ways that documents can be embedded but also want to allow for Foundry's default
+     * handling in some cases. If this evaluates to a string it will try and build the embed of that type.
+     * @returns {Teriock.Keys.EmbedType|null}
+     */
+    get _defaultEmbedType() {
+      return this.system?._defaultEmbedType ?? null;
+    }
+
+    /**
      * The default identifier for this document.
      * @returns {Identifier}
      */
@@ -372,6 +383,19 @@ export default function BaseDocumentMixin(Base) {
       return _loc(CONFIG[this.documentName]?.typeLabels?.[this.type] ?? `DOCUMENT.${this.documentName}`);
     }
 
+    /** @inheritDoc */
+    async _buildEmbedHTML(config, options = {}) {
+      if (config.type === "description") {
+        const out = await this._embedDescription(config, options);
+        if (out) { return out; }
+      }
+      if (config.type === "path") {
+        const out = await this._embedPath(config, options);
+        if (out) { return out; }
+      }
+      return super._buildEmbedHTML(config, options);
+    }
+
     /**
      * Check whether it's valid for this document to be edited from another one. This is mainly intended for use
      * in {@link EmbeddableData.getEmbedContextMenuEntries}. If this document appears as an embedded card (via
@@ -390,6 +414,41 @@ export default function BaseDocumentMixin(Base) {
       return (this.isOwner
         && (this.checkAncestor(doc) || this.master === doc || this === doc)
         && (doc?.sheet?.isEditable || !editable || ["consequence", "imbuement"].includes(this.type)));
+    }
+
+    /**
+     * Embed the description of this document.
+     * @param {DocumentHTMLEmbedConfig & EnrichmentOptions} config
+     * @param {EnrichmentOptions} [options]
+     * @returns {Promise<HTMLElement|HTMLCollection|null>}
+     */
+    async _embedDescription(config, options = {}) {
+      return this._embedPath({ ...config, path: this.system?.metadata?.descriptionPath }, options);
+    }
+
+    /**
+     * Embed a specific HTML field of this document.
+     * @param {DocumentHTMLEmbedConfig & EnrichmentOptions} config
+     * @param {EnrichmentOptions} [options]
+     * @returns {Promise<HTMLElement|HTMLCollection|null>}
+     */
+    async _embedPath(config, options = {}) {
+      if (typeof config.path !== "string") { return null; }
+      const field = this.getFieldForProperty(config.path);
+      if (!(field instanceof foundry.data.fields.HTMLField)) { return null; }
+      if (field.options.gm && !game.user.isGM) { return new foundry.applications.elements.HTMLDocumentEmbedElement(); }
+      const raw = foundry.utils.getProperty(this, config.path);
+      if (typeof raw !== "string") { return null; }
+      options = { ...options, relativeTo: this };
+      const {
+        documents = options.documents,
+        embeds = options.embeds,
+        links = options.links,
+        rolls = options.rolls,
+        secrets = options.secrets ?? this.isOwner,
+      } = config;
+      foundry.utils.mergeObject(options, { documents, embeds, links, rolls, secrets });
+      return foundry.utils.parseHTML(await TeriockTextEditor.enrichHTML(raw, options));
     }
 
     /** @inheritDoc */
@@ -506,6 +565,15 @@ export default function BaseDocumentMixin(Base) {
     /** @inheritDoc */
     toDragData() {
       return Object.assign(super.toDragData(), { identifier: this.typedIdentifier, systemType: this.type });
+    }
+
+    /** @inheritDoc */
+    async toEmbed(config, options = {}) {
+      config.type ??=
+        TERIOCK.CONST.EMBED_TYPES.find(t =>
+          config.values.includes(t) || (t === "path" && typeof config.path === "string")
+        ) ?? this._defaultEmbedType;
+      return super.toEmbed(config, options);
     }
   }
 

@@ -17,7 +17,7 @@ declare global {
       /** Additional CSS classes to add */
       classes?: string[];
       /** Whether only GMs should be able to see this. */
-      gmOnly?: boolean;
+      gm?: boolean;
       /** The main text content of the message block. */
       text?: string;
       /** The title of the message block. */
@@ -73,12 +73,12 @@ declare global {
     };
 
     export type EnrichmentOptions = {
+      associations?: boolean;
+      bars?: boolean;
+      blocks?: boolean;
       collapsed?: boolean;
       collapseTables?: boolean;
       keepId?: boolean;
-      noAssociations?: boolean;
-      noBars?: boolean;
-      noBlocks?: boolean;
       usePanelRelativeTo?: boolean;
     };
   }

@@ -67,13 +67,7 @@ export default function AccessDataMixin(Base) {
      */
     _getEditorFormsSync(config = {}) {
       const group = createElement("div", { className: "teriock-form-container standard-form" });
-      const rawPaths = this._formPaths;
-      const cleanedPaths = rawPaths.filter((item, i) => item !== "hr" || rawPaths[i - 1] !== "hr").filter((
-        item,
-        i,
-        arr,
-      ) => item !== "hr" || (i > 0 && i < arr.length - 1));
-      this._makeFormGroups(cleanedPaths, config).forEach(fg => group.append(fg));
+      this._makeFormGroups(this._formPaths, config).forEach(fg => group.append(fg));
       return group;
     }
 
@@ -102,7 +96,15 @@ export default function AccessDataMixin(Base) {
      * @returns {HTMLElement[]}
      */
     _makeFormGroups(paths, config = {}) {
-      return paths.map(p => (p === "hr" ? document.createElement("hr") : this._makeFormGroup(p, {}, {}, config)));
+      const visiblePaths = paths.filter(p => p === "hr" || game.user.isGM || !this.getFieldForProperty(p)?.options.gm);
+      const cleanedPaths = visiblePaths.filter((p, i) => p !== "hr" || visiblePaths[i - 1] !== "hr").filter((
+        p,
+        i,
+        arr,
+      ) => p !== "hr" || (i > 0 && i < arr.length - 1));
+      return cleanedPaths.map(
+        p => (p === "hr" ? document.createElement("hr") : this._makeFormGroup(p, {}, {}, config))
+      );
     }
 
     /**

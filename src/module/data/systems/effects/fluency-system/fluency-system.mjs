@@ -174,6 +174,6 @@ export default class FluencySystem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.tradecraftDescription = `<p>@Embed[${this.tradecraft} text inline=true]</p>`;
+    this.tradecraftDescription = `<p>@Embed[${this.tradecraft} description inline]</p>`;
   }
 }

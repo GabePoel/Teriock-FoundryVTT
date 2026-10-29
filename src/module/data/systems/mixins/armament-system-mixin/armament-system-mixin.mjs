@@ -433,7 +433,7 @@ export default function ArmamentSystemMixin(Base) {
       this.range.short.unit = this.range.long.unit;
 
       // Fighting Style
-      if (this.style) { this.styleDescription = `<p>@Embed[${this.style} text inline=true]</p>`; }
+      if (this.style) { this.styleDescription = `<p>@Embed[${this.style} description inline]</p>`; }
     }
   }
 

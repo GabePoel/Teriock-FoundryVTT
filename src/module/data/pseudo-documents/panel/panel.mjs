@@ -95,6 +95,12 @@ export default class Panel extends BasePseudoDocument {
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateThumbnails(source, "img");
+    for (const b of source?.blocks ?? []) {
+      if ("gmOnly" in b) {
+        b.gm ??= b.gmOnly;
+        delete b.gmOnly;
+      }
+    }
     for (const a of source?.associations ?? []) {
       for (const c of a?.cards ?? []) {
         migrateThumbnails(c, "img");
@@ -162,9 +168,9 @@ export default class Panel extends BasePseudoDocument {
       color: this.color,
     });
     const { collapseTables = true, keepId = true, usePanelRelativeTo = true } = options;
-    if (options.noAssociations) { context.associations = []; }
-    if (options.noBars) { context.bars = []; }
-    if (options.noBlocks) { context.blocks = []; }
+    if (options.associations === false) { context.associations = []; }
+    if (options.bars === false) { context.bars = []; }
+    if (options.blocks === false) { context.blocks = []; }
     const bars = [];
     for (const bar of context.bars) {
       const wrappers = (bar?.wrappers || []).filter(Boolean);
@@ -192,7 +198,7 @@ export default class Panel extends BasePseudoDocument {
     options.relativeTo ??= usePanelRelativeTo ? await fromUuid(this.documentUuid) : null;
     options.secrets ??= options.relativeTo?.isOwner;
     context.blocks = await Promise.all(
-      context.blocks.filter(b => game.user.isGM || !b.gmOnly).map(async (b, i) => {
+      context.blocks.filter(b => game.user.isGM || !b.gm).map(async (b, i) => {
         b.text = await TeriockTextEditor.enrichHTML(b.text, options);
         b.text = Panel.#wrapPanelTables(b.text, `panel-${context._id}-block-${i}`, { collapsed: collapseTables });
         return b;

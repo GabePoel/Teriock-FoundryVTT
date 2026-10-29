@@ -29,7 +29,7 @@ export default function InstructionsSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        gmNotes: new fields.HTMLField(),
+        gmNotes: new fields.HTMLField({ gm: true }),
         instructions: new fields.HTMLField(),
       });
     }
@@ -38,7 +38,6 @@ export default function InstructionsSystemMixin(Base) {
     get _displayFieldsImportant() {
       return [{ classes: [TERIOCK.DISPLAY.panels.styles.instructions, "theme-dark"], path: "system.instructions" }, {
         classes: [TERIOCK.DISPLAY.panels.styles.gmNotes],
-        gmOnly: true,
         path: "system.gmNotes",
       }, ...super._displayFieldsImportant];
     }

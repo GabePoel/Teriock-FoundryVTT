@@ -33,6 +33,11 @@ export default class BasePageSystem
   }
 
   /** @inheritDoc */
+  get _defaultEmbedType() {
+    return "description";
+  }
+
+  /** @inheritDoc */
   get _displayInputs() {
     return [...super._displayInputs, {
       choices: this.parent

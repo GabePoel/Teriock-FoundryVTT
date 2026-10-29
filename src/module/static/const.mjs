@@ -1,3 +1,4 @@
+export const EMBED_TYPES = /** @type {const} */ (["panel", "description", "path", "block"]);
 export const INF = 999999999999999;
 export const INF_CODE = " \u{F06E4}";
 export const SAFE_INF = 999999;

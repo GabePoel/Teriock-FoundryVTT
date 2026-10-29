@@ -80,9 +80,13 @@ export default function AbstractDataMixin(Base) {
       const type = ["disjunction", "unit"].includes(options.list) ? options.list : "conjunction";
 
       if (field) {
+        if ((field.options?.gm) && !game.user.isGM) {
+          // Exclude any fields that only the GM should be able to see
+          return "";
+        }
         if (field instanceof fields.HTMLField) {
           // Exclude any `HTMLField` so we don't have recursive lookups or unsafe strings
-          fetched = true;
+          return "";
         }
         if (field instanceof fields.BooleanField && field.label) {
           // Just display the label or its inversion for a `BooleanField`

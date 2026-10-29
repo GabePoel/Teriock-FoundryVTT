@@ -111,6 +111,14 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
+     * System-specific handling of the default embed type.
+     * @returns {Teriock.Keys.EmbedType|null}
+     */
+    get _defaultEmbedType() {
+      return null;
+    }
+
+    /**
      * Custom buttons to activate things from sheet menus. Should not toggle HTML fields.
      * @returns {Teriock.Display.DisplayButton[]}
      */
@@ -211,9 +219,9 @@ export default function BaseSystemMixin(Base) {
         if (!value) { value = foundry.utils.getProperty(this.parent, f.path); }
         if (!value) { return; }
         const text = this.metadata.tags.embedPanelBlocks
-          ? `@Embed[${this.parent.uuid} path=${f.path} inline=true]`
+          ? `@Embed[${this.parent.uuid} path=${f.path} inline]`
           : value;
-        return { classes: f.classes, gmOnly: f.gmOnly ?? false, text, title: f.label || schema.label };
+        return { classes: f.classes, gm: Boolean(schema?.options.gm), text, title: f.label || schema.label };
       }).filter(f => f);
     }
 

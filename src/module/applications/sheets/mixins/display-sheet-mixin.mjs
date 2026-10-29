@@ -83,21 +83,21 @@ export default function DisplaySheetMixin(Base) {
      */
     #expandFields(fields) {
       return fancifyFields(fields).map(f => {
+        const schema = this.document?.getFieldForProperty(f.path);
         const sourceValue = foundry.utils.getProperty(this.document._source, f.path);
         const value = foundry.utils.getProperty(this.document, f.path);
         return {
           ...f,
           ...{
             button: f?.button,
-            choices: f.choices || this.document?.getFieldForProperty(f.path)?.choices,
+            choices: f.choices || schema?.choices,
             editable: f.editable === false ? false : (f?.value ?? value) === sourceValue,
-            gmOnly: f?.gmOnly ?? false,
-            label: f?.label || _loc(this.document?.getFieldForProperty(f.path)?.label),
-            schema: this.document?.getFieldForProperty(f.path),
+            label: f?.label || _loc(schema?.label),
+            schema,
             value: sourceValue || value,
           },
         };
-      }).filter(f => game.user.isGM || !f.gmOnly);
+      }).filter(f => game.user.isGM || !f.schema?.options.gm);
     }
 
     /**

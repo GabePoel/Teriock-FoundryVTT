@@ -35,18 +35,19 @@ export default function EquipmentIdentificationPart(Base) {
       return {
         ...super.defineSchema(),
         identification: new fields.SchemaField({
-          flaws: new fields.HTMLField(),
-          identified: new fields.BooleanField({ initial: true }),
+          flaws: new fields.HTMLField({ gm: true }),
+          identified: new fields.BooleanField({ gm: true, initial: true }),
           kind: new fields.StringField({
             blank: false,
             choices: TERIOCK.CONFIG.equipment.kind,
+            gm: true,
             initial: "mundane",
             nullable: false,
             required: true,
           }),
-          name: new fields.StringField(),
-          notes: new fields.HTMLField(),
-          read: new fields.BooleanField({ initial: true }),
+          name: new fields.StringField({ gm: true }),
+          notes: new fields.HTMLField({ gm: true }),
+          read: new fields.BooleanField({ gm: true, initial: true }),
         }),
       };
     }
@@ -59,7 +60,6 @@ export default function EquipmentIdentificationPart(Base) {
         if (identifiedFields.includes(f)) {
           fields.push({
             classes: [TERIOCK.DISPLAY.panels.styles.faded],
-            gmOnly: true,
             path: f.replace("system", "system.identification"),
             visible: !this.identification[f.slice("system.".length)],
           });

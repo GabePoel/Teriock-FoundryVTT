@@ -53,6 +53,14 @@ export default class ApplicableEffectSystem
     });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    for (const b of source?.blocks ?? []) {
+      if ("gmOnly" in b) { b.gm ??= b.gmOnly; }
+    }
+    return super.migrateData(source, options);
+  }
+
   /**
    * A message bar with duration information.
    * @returns {Teriock.Panels.PanelBar}

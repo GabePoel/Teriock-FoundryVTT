@@ -88,6 +88,11 @@ export default function CommonSystemMixin(Base) {
       return true;
     }
 
+    /** @inheritDoc */
+    get _defaultEmbedType() {
+      return "panel";
+    }
+
     /** @returns {Record<string, Teriock.Embeds.EmbedAction>} */
     get _embedActions() {
       return {};

@@ -63,15 +63,6 @@ export default class TeriockJournalEntryPage
   }
 
   /** @inheritDoc */
-  async _buildEmbedHTML(config, options = {}) {
-    const embed = await super._buildEmbedHTML(config, options);
-    if ((!embed || config.values.includes("text")) && this.system?.metadata?.tags?.text) {
-      return this._embedTextPage(config, options);
-    }
-    return embed;
-  }
-
-  /** @inheritDoc */
   _onClickDocumentLink(event) {
     this.revealedSubpage = true;
     const out = super._onClickDocumentLink(event);
@@ -86,7 +77,7 @@ export default class TeriockJournalEntryPage
     return {
       ...parts,
       blocks: [{
-        text: `@Embed[${this.uuid} text inline=true]`,
+        text: `@Embed[${this.uuid} description inline]`,
         title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
     };

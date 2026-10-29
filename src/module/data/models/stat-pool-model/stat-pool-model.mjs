@@ -119,7 +119,7 @@ export default class StatPoolModel extends BaseDataModel {
       panels.push({
         bars: [],
         blocks: [{
-          text: "@Embed[keyword:awaken text inline=true]",
+          text: "@Embed[keyword:awaken description inline]",
           title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
         }],
         icon: TERIOCK.DISPLAY.icons.manifest.effect.awaken,

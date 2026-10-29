@@ -16,8 +16,8 @@ export default class ClassSheet extends BasePageSheet {
     if (archetype) {
       const archetypePanel = await archetype?.toPanel();
       context.archetypePanel = await archetypePanel.prepareContext({
+        bars: false,
         keepId: false,
-        noBars: true,
         relativeTo: this.document,
         secrets: this.document.isOwner ?? game.user.isGM,
       });
@@ -30,8 +30,8 @@ export default class ClassSheet extends BasePageSheet {
       context.rankPanels = await Promise.all(ranks.map(async r => {
         const panel = await r?.toPanel();
         return panel.prepareContext({
+          blocks: false,
           keepId: false,
-          noBlocks: true,
           relativeTo: this.document,
           secrets: this.document.isOwner ?? game.user.isGM,
         });

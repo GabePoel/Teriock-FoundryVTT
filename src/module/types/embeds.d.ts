@@ -73,14 +73,14 @@ declare global {
       get embedParts(): Partial<Teriock.Embeds.EmbedParts>;
 
       /**
+       * Connect listeners to the embedded card when it is rendered on a sheet.
+       */
+      attachEmbedListeners(element: HTMLElement): void;
+
+      /**
        * Context menu entries for right-clicking on the embedded card.
        */
       getEmbedContextMenuEntries(relative?: TeriockDocument): ContextMenuEntry[];
-
-      /**
-       * Connect listeners to the embedded card.
-       */
-      onEmbed(element: HTMLElement): void;
 
       /** A name used for searching and sorting. */
       name: string;

@@ -1,6 +1,6 @@
 import type statConfig from "../static/config/stat-config.mjs";
 
-import { CONFIG, DISPLAY, STATUSES } from "../static/_module.mjs";
+import { CONFIG, CONST, DISPLAY, STATUSES } from "../static/_module.mjs";
 
 declare global {
   namespace Teriock.Keys {
@@ -71,6 +71,7 @@ declare global {
     // Display Keys
     export type Color = keyof typeof DISPLAY.colors;
     export type CardDisplaySize = keyof typeof CONFIG.display.sizes;
+    export type EmbedType = typeof CONST.EMBED_TYPES[number];
 
     // Status Keys
     export type HackableBodyPart = keyof typeof CONFIG.hack;

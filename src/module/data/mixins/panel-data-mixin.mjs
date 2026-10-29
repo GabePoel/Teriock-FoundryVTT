@@ -1,13 +1,12 @@
 import { toId } from "../../utils/_module.mjs";
 
 /**
- * @import { EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
+ * @import { DocumentHTMLEmbedConfig, EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
  */
 
 /**
  * @template {MixinBase} T
  * @param {T} Base
- * @todo Make this into a data mixin and remove virtual affinities.
  */
 export default function PanelDataMixin(Base) {
   /** @mixin */
@@ -17,30 +16,51 @@ export default function PanelDataMixin(Base) {
       return Object.assign(super.documentMetadata, { tooltip: true });
     }
 
-    /**
-     * @inheritDoc
-     * @protected
-     */
+    /** @inheritDoc */
     async _buildEmbedHTML(config, options = {}) {
-      if (config.values.includes("panel")) {
-        const panelOptions = {
-          _embedDepth: options._embedDepth,
-          collapsed: config.values.includes("collapsed"),
-          noAssociations: config.values.includes("noAssociations"),
-          noBars: config.values.includes("noBars"),
-          noBlocks: config.values.includes("noBlocks"),
-          relativeTo: this,
-          secrets: this.isOwner,
-        };
-        const panel = await this.toPanel({
-          _id: toId(
-            [options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filter(Boolean).join("-"),
-            { hash: true },
-          ),
-        });
-        return panel.renderElement(panelOptions);
+      if (config.type === "panel") {
+        const out = await this._embedPanel(config, options);
+        if (out) { return out; }
       }
       return super._buildEmbedHTML(config, options);
+    }
+
+    /**
+     * Embed this as a panel.
+     * @param {DocumentHTMLEmbedConfig & EnrichmentOptions} config
+     * @param {EnrichmentOptions} [options]
+     * @returns {Promise<HTMLElement|HTMLCollection|null>}
+     */
+    async _embedPanel(config, options = {}) {
+      const panel = await this.toPanel({
+        _id: toId([options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filter(Boolean).join("-"), {
+          hash: true,
+        }),
+      });
+      options = { ...options, relativeTo: this };
+      const {
+        associations = true,
+        bars = true,
+        blocks = true,
+        collapsed = config.values.includes("collapsed"),
+        documents = options.documents,
+        embeds = options.embeds,
+        links = options.links,
+        rolls = options.rolls,
+        secrets = options.secrets ?? this.isOwner,
+      } = config;
+      foundry.utils.mergeObject(options, {
+        associations,
+        bars,
+        blocks,
+        collapsed,
+        documents,
+        embeds,
+        links,
+        rolls,
+        secrets,
+      });
+      return panel.renderElement(options);
     }
 
     /**
