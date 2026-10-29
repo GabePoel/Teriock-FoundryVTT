@@ -150,7 +150,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
     /**
      * Selection configs for the activations this creates and possible paired document.
      * @param {Teriock.Select.DocumentSelectionConfig} [overrides]
-     * @returns {Promise<{ config: object, document: TeriockDocument|null }|null>}
+     * @returns {Promise<{ config: object, document: TeriockDocument|null }|null|false>}
      */
     async _getSelection(overrides = {}) {
       if (!this.hasSelection) { return null; }
@@ -158,7 +158,8 @@ export default function SelectionPseudoDocumentMixin(Base) {
         return { config: this.#selectionData, document: await this.#onlySelectableDocument(overrides) };
       }
       const documents = await this.selectDocuments(overrides);
-      if (!documents.length) { return null; }
+      if (documents === false) { return false; }
+      if (!documents?.length) { return null; }
       return { config: this.#resolvedData(documents), document: null };
     }
 
@@ -192,15 +193,12 @@ export default function SelectionPseudoDocumentMixin(Base) {
     /**
      * Prompt for the documents this selects when there's a choice to be made.
      * @param {Teriock.Select.DocumentSelectionConfig} [overrides]
-     * @returns {Promise<TeriockDocument[]>}
+     * @returns {Promise<TeriockDocument[]|null|false>}
      */
     async selectDocuments(overrides = {}) {
       const documents = await this.getSelectableDocuments(overrides);
-      return DocumentSelector.selectFromConfig({
-        ...this.#selectionConfig,
-        ...overrides,
-        ...this.#sourcesFor(documents),
-      }, { title: this._selectionTitle });
+      const config = { ...this.#selectionConfig, ...overrides, ...this.#sourcesFor(documents) };
+      return DocumentSelector.selectFromConfig(config, { nullable: !config.multi, title: this._selectionTitle });
     }
   }
 

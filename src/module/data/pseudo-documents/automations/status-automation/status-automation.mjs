@@ -156,7 +156,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   /** @inheritDoc */
   async interactOnExecutionEffectData(execution) {
     this.#trackedUuids = [];
-    if (this.target) { this.#trackedUuids.push(...(await this.selectVisibleTokens()).map(t => t.uuid)); }
+    if (this.target) { this.#trackedUuids.push(...((await this.selectVisibleTokens()) || []).map(t => t.uuid)); }
     if (this.executor) {
       const uuid = execution.actor?.defaultToken?.document?.uuid || execution.actor?.uuid;
       if (uuid) { this.#trackedUuids.push(uuid); }
@@ -179,7 +179,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
   /**
    * Select visible tokens to associate this status with.
    * @param {Teriock.Select.SelectDocumentsDialogOptions} options
-   * @returns {Promise<TeriockTokenDocument[]>}
+   * @returns {Promise<TeriockTokenDocument[]|null|false>}
    */
   async selectVisibleTokens(options = {}) {
     return game.canvas.tokens.selectVisible({
@@ -189,6 +189,7 @@ export default class StatusAutomation extends mixClasses(BaseAutomation, Trigger
         status: CONFIG.statusEffects[this.status]?.name,
       }),
       multi: this.multi,
+      nullable: !this.multi,
       ...options,
     });
   }

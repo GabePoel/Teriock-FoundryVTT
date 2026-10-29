@@ -637,20 +637,24 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async execute() {
-    if ((await this._fetchData()) === false) { return false; }
-    if ((await this._evaluateBoosts()) === false) { return false; }
-    if ((await this._getInput()) === false) { return false; }
-    if ((await this._postInput()) === false) { return false; }
-    if ((await this._prepareFormula()) === false) { return false; }
-    if ((await this._buildRolls()) === false) { return false; }
-    if ((await this._evaluateRolls()) === false) { return false; }
-    if ((await this._buildPanels()) === false) { return false; }
-    if ((await this._buildActivations()) === false) { return false; }
-    if ((await this._buildTags()) === false) { return false; }
-    if ((await this._createChatMessage()) === false) { return false; }
-    if ((await this._prepareUpdates()) === false) { return false; }
-    if ((await this._performUpdates()) === false) { return false; }
-    if ((await this._postExecute()) === false) { return false; }
+    try {
+      if ((await this._fetchData()) === false) { return false; }
+      if ((await this._evaluateBoosts()) === false) { return false; }
+      if ((await this._getInput()) === false) { return false; }
+      if ((await this._postInput()) === false) { return false; }
+      if ((await this._prepareFormula()) === false) { return false; }
+      if ((await this._buildRolls()) === false) { return false; }
+      if ((await this._evaluateRolls()) === false) { return false; }
+      if ((await this._buildPanels()) === false) { return false; }
+      if ((await this._buildActivations()) === false) { return false; }
+      if ((await this._buildTags()) === false) { return false; }
+      if ((await this._createChatMessage()) === false) { return false; }
+      if ((await this._prepareUpdates()) === false) { return false; }
+      if ((await this._performUpdates()) === false) { return false; }
+      if ((await this._postExecute()) === false) { return false; }
+    } finally {
+      await this._callAutomations(a => a.cleanupExecution(this));
+    }
   }
 
   /**

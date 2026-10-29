@@ -84,7 +84,7 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   async interactOnExecutionEffectData(execution) {
-    this.#selectedUuids = (await this.selectDocuments({ relativeTo: execution.actor })).map(d => d.uuid);
+    this.#selectedUuids = ((await this.selectDocuments({ relativeTo: execution.actor })) || []).map(d => d.uuid);
   }
 
   /** @inheritDoc */

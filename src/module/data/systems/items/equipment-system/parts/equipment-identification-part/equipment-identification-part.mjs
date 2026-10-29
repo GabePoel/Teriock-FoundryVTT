@@ -247,6 +247,7 @@ export default function EquipmentIdentificationPart(Base) {
           noDocumentsMessage: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.noDocumentsMessage"),
           silent: true,
         });
+        if (!toReveal) { return; }
         const revealOperation = this.parent.getUpdateChildDocumentsOperation(
           "ActiveEffect",
           toReveal.map(e => {

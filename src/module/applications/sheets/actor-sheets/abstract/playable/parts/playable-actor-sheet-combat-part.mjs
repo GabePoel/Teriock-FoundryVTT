@@ -64,13 +64,15 @@ export default function PlayableActorSheetCombatPart(Base) {
         [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
           .filter(a => a.active),
         {
+          auto: false,
           checked: current?.uuid,
           hint: _loc(`TERIOCK.SHEETS.Actor.ACTIONS.Select${role.capitalize()}.hint`),
+          nullable: true,
           openable: true,
           textKey: role === "attacker" ? "system.summarizedAttack" : "system.summarizedBlock",
         },
       );
-      if (selected) { await this.document.update({ [`system.wielding.${role}`]: selected.id }); }
+      if (selected !== false) { await this.document.update({ [`system.wielding.${role}`]: selected }); }
     }
 
     /**

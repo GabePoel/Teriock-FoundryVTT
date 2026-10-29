@@ -35,7 +35,7 @@ export default class AddDocumentsActivation
   async primaryAction() {
     if (!this.checkActors()) { return; }
     const nodes = await this.getNodes();
-    if (!nodes.length) { return; }
+    if (!nodes?.length) { return; }
     const operations = [];
     for (const actor of this.actors) {
       let targets = [actor];
@@ -43,6 +43,7 @@ export default class AddDocumentsActivation
       if (this.target === "item") {
         targets = await DocumentSelector.selectMulti(actor.previewed.filter(c => c.documentName === "Item"));
       }
+      if (!targets) { return; }
       if (!targets.length) { continue; }
       for (const node of nodes) {
         const ops = await node.getAddChildrenOperations(targets, {

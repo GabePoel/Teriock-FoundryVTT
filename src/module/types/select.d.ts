@@ -22,13 +22,13 @@ declare global {
       icon?: string;
       /** Path to an image to display for each document */
       imgKey?: string;
+      /** Whether to include a "None" button that resolves with `null` in single mode or `[]` if multi */
+      nullable?: boolean;
       /** Whether document sheets can be opened on double click */
       openable?: boolean;
-      /** Whether to report cancelling the dialog as `false` instead of an empty selection */
-      reportCancel?: boolean;
       /** Whether to ensure selected documents are resolved to actual documents */
       resolve?: boolean;
-      /** Whether to suppress warnings if there's no documents to select from. */
+      /** Whether to suppress warnings if there's no documents to select from */
       silent?: boolean;
       /** Path to some extra text to display for each document */
       textKey?: string;

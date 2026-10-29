@@ -38,6 +38,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
           title: _loc("TERIOCK.DIALOGS.AddSummons.title"),
         })
         : summons;
+      if (!selected) { return []; }
       tokens = [...tokens, ...selected];
     }
     return combat.addCombatants(

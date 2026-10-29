@@ -46,8 +46,11 @@ export default class SummonAutomation
     );
   }
 
-  /** @type {{ config: object, document: TeriockDocument|null }|null} */
-  #selection = null;
+  /**
+   * The selection made during an execution. `undefined` if none has been made.
+   * @type {{ config: object, document: TeriockDocument|null }|null|undefined}
+   */
+  #selection;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -65,8 +68,9 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selection = this.#selection
-      ?? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor });
+    const selection = this.#selection === undefined
+      ? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor })
+      : this.#selection;
     if (!selection) { return []; }
     const display = {};
     if (selection.document) {
@@ -91,7 +95,14 @@ export default class SummonAutomation
   }
 
   /** @inheritDoc */
+  async cleanupExecution() {
+    this.#selection = undefined;
+  }
+
+  /** @inheritDoc */
   async interactOnExecutionInput(execution) {
-    this.#selection = this.interactInExecution ? await this._getSelection({ relativeTo: execution.actor }) : null;
+    const selection = this.interactInExecution ? await this._getSelection({ relativeTo: execution.actor }) : undefined;
+    if (selection === false) { return false; }
+    this.#selection = selection;
   }
 }

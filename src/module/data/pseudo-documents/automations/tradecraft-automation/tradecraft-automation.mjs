@@ -68,7 +68,7 @@ export default class TradecraftAutomation
 
   /**
    * Select one or more configured tradecrafts.
-   * @returns {Promise<Teriock.Keys.Tradecraft[]>}
+   * @returns {Promise<Teriock.Keys.Tradecraft[]|false>}
    */
   async _choose() {
     const choices = Array.from(this.tradecrafts).filter(Boolean);
@@ -76,8 +76,12 @@ export default class TradecraftAutomation
       auto: this.automatic,
       globalIdentifiers: choices.map(c => `tradecraft:${c}`),
       multi: this.multi,
-    }, { title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: _loc("TYPES.JournalEntryPage.tradecraft") }) });
-    return documents.map(d => d.system.identifier);
+    }, {
+      nullable: !this.multi,
+      title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: _loc("TYPES.JournalEntryPage.tradecraft") }),
+    });
+    if (documents === false) { return false; }
+    return (documents ?? []).map(d => d.system.identifier);
   }
 
   /** @inheritDoc */
@@ -95,7 +99,14 @@ export default class TradecraftAutomation
   }
 
   /** @inheritDoc */
+  async cleanupExecution() {
+    this.#chosen = null;
+  }
+
+  /** @inheritDoc */
   async interactOnExecutionInput() {
-    this.#chosen = this.interactInExecution ? await this._choose() : null;
+    const chosen = this.interactInExecution ? await this._choose() : null;
+    if (chosen === false) { return false; }
+    this.#chosen = chosen;
   }
 }

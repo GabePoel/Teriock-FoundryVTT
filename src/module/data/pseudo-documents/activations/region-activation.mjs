@@ -43,7 +43,9 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
       flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
     }, { inplace: false });
-    const uuids = (await this.selectDocuments()).map(d => d.uuid);
+    const documents = await this.selectDocuments();
+    if (documents === false) { return null; }
+    const uuids = (documents ?? []).map(d => d.uuid);
     if (uuids.length) {
       data.behaviors ??= [];
       data.behaviors.push({

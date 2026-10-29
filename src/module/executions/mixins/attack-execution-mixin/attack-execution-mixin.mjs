@@ -104,6 +104,7 @@ export default function AttackExecutionMixin(Base) {
           document: this.armament,
           editable: true,
           label: _loc("TYPES.Item.armament"),
+          nullable: true,
           getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
           update: armament => this._updateArmament(armament),
         });
@@ -112,6 +113,7 @@ export default function AttackExecutionMixin(Base) {
             document: this.ammunition,
             editable: true,
             label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
+            nullable: true,
             getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
             update: ammunition => this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition),
           });

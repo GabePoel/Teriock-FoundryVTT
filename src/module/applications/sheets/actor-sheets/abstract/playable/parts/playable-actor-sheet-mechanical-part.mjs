@@ -89,7 +89,6 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       const docs = foundry.utils.getProperty(this.document, target.dataset.path) ?? [];
       const enabled = await DocumentSelector.selectMulti(docs, {
         checked: docs.filter(d => !d.disabled).map(r => r.uuid),
-        reportCancel: true,
       });
       if (!enabled) { return; }
       const freeOps = docs.filter(d => d.metadata.disabledPath).map(d => {

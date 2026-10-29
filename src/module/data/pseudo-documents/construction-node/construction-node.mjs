@@ -128,7 +128,7 @@ export default class ConstructionNode
    */
   async constructDocuments(scope = {}) {
     const relativeTo = scope.execution?.actor ?? this._selectionRelativeTo;
-    const data = (await this.selectDocuments({ relativeTo })).map(d => d.toObject());
+    const data = ((await this.selectDocuments({ relativeTo })) || []).map(d => d.toObject());
     if (!data.length) { data.push({}); }
     const competence = this.getCompetence(scope);
     for (const d of data) {
@@ -174,9 +174,9 @@ export default class ConstructionNode
    * @returns {Promise<ConstructionNode>}
    */
   async getDeterministicCopy(scope = {}) {
-    const documents = await this.selectDocuments({
-      relativeTo: scope.execution?.actor ?? scope.actor ?? this._selectionRelativeTo,
-    });
+    const documents =
+      (await this.selectDocuments({ relativeTo: scope.execution?.actor ?? scope.actor ?? this._selectionRelativeTo }))
+      || [];
     return this.clone({
       all: true,
       auto: true,

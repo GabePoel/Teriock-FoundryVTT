@@ -7,7 +7,7 @@ export default class TeriockTokenLayer extends TokenLayer {
   /**
    * Select targeted token documents.
    * @param {Teriock.Select.SelectDocumentsDialogOptions & { user?: TeriockUser }} options
-   * @returns {Promise<TeriockTokenDocument[]>}
+   * @returns {Promise<TeriockTokenDocument[]|null|false>}
    */
   async selectTargeted(options = {}) {
     const user = options.user ?? game.user;
@@ -24,7 +24,7 @@ export default class TeriockTokenLayer extends TokenLayer {
   /**
    * Select visible token documents.
    * @param {Teriock.Select.SelectDocumentsDialogOptions} options
-   * @returns {Promise<TeriockTokenDocument[]>}
+   * @returns {Promise<TeriockTokenDocument[]|null|false>}
    */
   async selectVisible(options = {}) {
     const key = (options.multi ?? true) ? "SelectVisibleTokens" : "SelectVisibleToken";

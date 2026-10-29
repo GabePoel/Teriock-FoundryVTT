@@ -34,6 +34,7 @@ export default class UseDocumentsActivation extends mixClasses(BaseActivation, S
   async primaryAction() {
     if (!this.checkActors()) { return; }
     const documents = await this.selectDocuments();
+    if (!documents) { return; }
     for (const actor of this.actors) {
       await Promise.all(documents.map(d => d.use({ ...this.options, actor, event: this.event })));
     }

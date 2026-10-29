@@ -96,6 +96,8 @@ declare global {
       locked?: TeriockDocument[];
       /** Whether `update` receives an array of the `selected` documents. */
       multi?: boolean;
+      /** Whether a single selection can be cleared to `null`. */
+      nullable?: boolean;
       /** Whether the documents in the document selector popup can be opened. */
       openable?: boolean;
       /** Entries display from highest to lowest priority. Defaults to 0. */

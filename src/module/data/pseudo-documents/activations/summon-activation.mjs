@@ -177,8 +177,9 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
    */
   async #prepareActors() {
     this.#nodes = [];
-    const srcActors = (await this.selectDocuments()).map(a => (a.inCompendium ? this.#findBestSummon(a.uuid) ?? a : a))
-      .filter(Boolean);
+    const srcActors = ((await this.selectDocuments()) || []).map(
+      a => (a.inCompendium ? this.#findBestSummon(a.uuid) ?? a : a)
+    ).filter(Boolean);
     const needsSummonFolder = srcActors.some(a => a?.inCompendium) && !this.#summonsFolder;
     if (needsSummonFolder) { await this.#createSummonsFolder(); }
     this.#nodes = srcActors.map(a => {

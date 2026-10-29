@@ -123,6 +123,7 @@ function select(method, filter, title, types = ["equipment"]) {
         title: _loc(title),
       },
     );
+    if (!chosen) { return; }
     await Promise.all(chosen.map(d => d.system[method]()));
   });
 }
@@ -705,6 +706,7 @@ const commandConfig = {
           actor.armaments.filter(a => a.active),
           selOpts,
         );
+        if (attacker === false) { return; }
       }
       if (!attacker) {
         ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {
@@ -814,6 +816,7 @@ const commandConfig = {
         const chosen = documents.length > 1
           ? await teriock.applications.dialogs.DocumentSelector.selectMulti(documents)
           : documents;
+        if (!chosen) { return; }
         await Promise.all(chosen.map(d => d.use({ ...options, actor })));
       }));
     },

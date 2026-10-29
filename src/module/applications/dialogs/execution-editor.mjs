@@ -69,10 +69,14 @@ export default class ExecutionEditor extends ResolvableDialog {
         ...options,
         checked: (entry.selected ?? []).map(d => d.uuid),
         locked: (entry.locked ?? []).map(d => d.uuid),
-        reportCancel: true,
       })
-      : await DocumentSelector.selectSingle(choices, { ...options, auto: false, checked: entry.document?.uuid });
-    if (selected === null || selected === false) { return; }
+      : await DocumentSelector.selectSingle(choices, {
+        ...options,
+        auto: false,
+        checked: entry.document?.uuid,
+        nullable: entry.nullable,
+      });
+    if (selected === false || (selected === null && !entry.nullable)) { return; }
     if (typeof entry.update === "function") { await entry.update(selected); }
     await this.render();
   }
@@ -218,8 +222,8 @@ export default class ExecutionEditor extends ResolvableDialog {
     const multipleDocuments = dialogDocuments.length > 1;
     const documents = dialogDocuments.map((entry, index) => {
       return {
-        document: entry.document,
         editable: entry.editable,
+        embedParts: entry.document?.embedParts ?? { title: _loc("TERIOCK.COMMON.None") },
         index,
         label: entry.label,
         openable: entry.openable ?? true,

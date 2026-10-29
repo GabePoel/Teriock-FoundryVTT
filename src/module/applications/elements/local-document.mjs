@@ -59,9 +59,11 @@ export default class HTMLLocalDocumentElement extends TagSetMixin(AbstractTagsEl
     const selected = await teriock.applications.dialogs.DocumentSelector.selectSingle(documents, {
       auto: false,
       checked: documents.find(d => d.id === this._getValue())?.uuid,
+      nullable: true,
       openable: true,
     });
-    if (selected) { this._tryAdd(selected.id); }
+    if (selected === null) { this.value = null; }
+    else if (selected) { this._tryAdd(selected.id); }
   }
 
   /** @inheritDoc */

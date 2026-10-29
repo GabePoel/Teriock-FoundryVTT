@@ -24,6 +24,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         document: this.ammunition,
         editable: true,
         label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
+        nullable: true,
         getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
         update: ammunition => {
           this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition);

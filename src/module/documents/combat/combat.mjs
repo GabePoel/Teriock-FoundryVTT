@@ -205,6 +205,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
         textKey: "summoner.name",
         title: _loc("TERIOCK.DIALOGS.GroupSummons.title"),
       });
+      if (!selected) { return null; }
       for (const s of summons.values()) { s.joiners = s.joiners.filter(c => selected.includes(c.token)); }
     }
     return this.#joinChanges([...summons].map(([target, { joiners, type }]) => ({ joiners, target, type })));

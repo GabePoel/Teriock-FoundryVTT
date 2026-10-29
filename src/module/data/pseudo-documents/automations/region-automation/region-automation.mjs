@@ -41,8 +41,11 @@ export default class RegionAutomation
     });
   }
 
-  /** @type {{ config: object, document: TeriockDocument|null }|null} */
-  #selection = null;
+  /**
+   * The selection made during an execution. This is `undefined` if no selection has been made.
+   * @type {{ config: object, document: TeriockDocument|null }|null|undefined}
+   */
+  #selection;
 
   /** @inheritdoc */
   get _formPaths() {
@@ -73,11 +76,19 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async _getActivations(options = { rollData: {} }) {
-    const selection = this.hasSelection
-      ? this.#selection ?? await this._getSelection({ relativeTo: options.execution?.actor ?? this.actor })
-      : { config: {} };
+    let selection = { config: {} };
+    if (this.hasSelection) {
+      selection = this.#selection === undefined
+        ? await this._getSelection({ relativeTo: options.execution?.actor ?? this.actor })
+        : this.#selection;
+    }
     if (!selection) { return []; }
     return [await this._buildRegionActivation(options, selection.config)];
+  }
+
+  /** @inheritDoc */
+  async cleanupExecution() {
+    this.#selection = undefined;
   }
 
   /** @inheritDoc */
@@ -95,8 +106,10 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async interactOnExecutionInput(execution) {
-    this.#selection = this.interactInExecution && this.hasSelection
+    const selection = this.interactInExecution && this.hasSelection
       ? await this._getSelection({ relativeTo: execution.actor })
-      : null;
+      : undefined;
+    if (selection === false) { return false; }
+    this.#selection = selection;
   }
 }

@@ -22,13 +22,19 @@ export default function ConstructNodesPseudoDocumentMixin(Base) {
     /**
      * Get the construction nodes to build with.
      * @param {Teriock.Select.SelectDocumentsDialogOptions} options
-     * @returns {Promise<ConstructionNode[]>}
+     * @returns {Promise<ConstructionNode[]|null|false>}
      */
     async getNodes(options) {
       // TODO: This length/all handling can probably be moved into `DocumentSelector` directly.
       const nodes = this.rootNodes;
       if (nodes.length <= 1 || this.all) { return nodes; }
-      return DocumentSelector.selectMulti(nodes, { auto: this.auto, multi: this.multi, silent: true, ...options });
+      return DocumentSelector.selectMulti(nodes, {
+        auto: this.auto,
+        multi: this.multi,
+        nullable: !this.multi,
+        silent: true,
+        ...options,
+      });
     }
   }
 

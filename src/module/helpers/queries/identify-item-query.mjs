@@ -34,6 +34,7 @@ export default async function identifyItemQuery(queryData) {
       noDocumentsMessage: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.noDocumentsMessage"),
       silent: true,
     });
+    if (!toReveal) { return false; }
     const revealOperation = item.getUpdateChildDocumentsOperation(
       "ActiveEffect",
       toReveal.map(e => {

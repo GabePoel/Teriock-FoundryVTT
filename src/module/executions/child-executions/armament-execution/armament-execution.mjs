@@ -117,7 +117,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Com
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", { name: this.source.name }),
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
       });
-      for (const ability of usedAbilities) { await ability.use({ ...this.options, armament: this.source }); }
+      for (const ability of usedAbilities || []) { await ability.use({ ...this.options, armament: this.source }); }
     }
     await super._postExecute();
   }

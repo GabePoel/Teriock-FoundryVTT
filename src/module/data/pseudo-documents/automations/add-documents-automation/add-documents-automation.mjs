@@ -146,6 +146,7 @@ export default class AddDocumentsAutomation
   async _getActivations(options = {}) {
     if (this.attachesToEffect) { return []; }
     const roots = this.interactInExecution ? await this.getNodes() : this.rootNodes;
+    if (!roots) { return []; }
     let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
     if (this.interactInExecution) {
       nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(options)));
@@ -186,6 +187,7 @@ export default class AddDocumentsAutomation
     if (!this.attachesToEffect) { return; }
     const scope = { actor: execution.actor, execution };
     const roots = await this.getNodes(scope);
+    if (!roots) { return; }
     const rootIds = new Set(roots.map(n => n._id));
     let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
     if (this.interactInExecution) { nodes = await Promise.all(nodes.map(n => n.getDeterministicCopy(scope))); }

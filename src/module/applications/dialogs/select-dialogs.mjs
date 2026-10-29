@@ -21,7 +21,7 @@ export async function selectCompendiumsDialog(checked = true) {
     title: _loc("TERIOCK.DIALOGS.Select.Compendiums.title"),
     tooltip: false,
   });
-  return selected.map(c => game.packs.get(c.uuid));
+  return (selected || []).map(c => game.packs.get(c.uuid));
 }
 
 /**
