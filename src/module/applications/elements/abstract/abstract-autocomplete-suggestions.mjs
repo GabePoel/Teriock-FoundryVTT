@@ -77,8 +77,7 @@ export default class AbstractAutocompleteSuggestionsElement extends AbstractTags
     if (entries.length) {
       const { width } = this._primaryInput.getBoundingClientRect();
       this.#autocomplete.activate(this._primaryInput, entries, { position: { width } });
-    }
-    else { this._dismissSuggestions(); }
+    } else { this._dismissSuggestions(); }
   }
 
   /** @inheritDoc */
