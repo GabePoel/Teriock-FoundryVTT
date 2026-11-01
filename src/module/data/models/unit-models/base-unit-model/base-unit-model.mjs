@@ -124,7 +124,7 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Get the source data for a value in the base unit. This uses the largest 
+   * Get the source data for a value in the base unit. This uses the largest
    * finite unit that represents the given value as a whole number.
    * @param {number} value
    * @returns {{ raw: string, unit: string }}

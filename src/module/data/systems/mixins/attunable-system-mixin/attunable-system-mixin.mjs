@@ -23,15 +23,35 @@ export default function AttunableSystemMixin(Base) {
       tags: { attunable: true },
     });
 
+    /**
+     * Whether this type needs attunement by default.
+     * @returns {boolean}
+     */
+    static get _initialNeedsAttunement() {
+      return true;
+    }
+
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        needsAttunement: new fields.BooleanField({ initial: true }),
+        needsAttunement: new fields.BooleanField({ initial: this._initialNeedsAttunement }),
         tier: new fields.SchemaField({
           raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),
           value: new fields.NumberField({ integer: true, min: 0, persisted: false, placeholder: "0" }),
         }),
       });
+    }
+
+    /**
+     * Attunable panel bar.
+     * @returns {Teriock.Panels.PanelBar}
+     */
+    get _attunableBar() {
+      return {
+        icon: TERIOCK.DISPLAY.icons.manifest.attunable.tier,
+        label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
+        wrappers: this._attunableWrappers,
+      };
     }
 
     /**
@@ -130,7 +150,7 @@ export default function AttunableSystemMixin(Base) {
         changes: [{ key: "system.attunements", phase: "initial", priority: 10, type: "add", value: this.parent._id }],
         img: this.parent.img,
         name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.parent.name }),
-        system: { inheritTier: true, origin: this.parent.type, target: this.parent._id, tier: this.tier.value },
+        system: { inheritTier: true, kind: this.parent.type, target: this.parent._id, tier: this.tier.value },
         type: "attunement",
       };
       if (!this.parent.actor?.metadata.childTypes.includes("attunement")) { return null; }

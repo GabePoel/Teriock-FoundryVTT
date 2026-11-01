@@ -1,16 +1,14 @@
-import { getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { getName, mergeMetadata } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
-import { ArmorSuppressionSystemMixin } from "../../mixins/_module.mjs";
-import { SimpleItemSystem } from "../abstract/_module.mjs";
+import { ContractItemSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Familiar-specific item data model.
- * @extends {SimpleItemSystem}
- * @mixes ArmorSuppressionSystem
+ * @extends {ContractItemSystem}
  */
-export default class FamiliarSystem extends mixClasses(SimpleItemSystem, ArmorSuppressionSystemMixin) {
+export default class FamiliarSystem extends ContractItemSystem {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Familiar"];
 
@@ -48,12 +46,7 @@ export default class FamiliarSystem extends mixClasses(SimpleItemSystem, ArmorSu
 
     this.parent.updateSource(
       foundry.utils.mergeObject({
-        system: {
-          effectTypes: ["contract"],
-          elements: ["nature"],
-          maxAv: 0,
-          powerSources: ["magical", "primal", "spiritual"],
-        },
+        system: { elements: ["nature"], maxAv: 0, powerSources: ["magical", "primal", "spiritual"] },
       }, data),
     );
   }

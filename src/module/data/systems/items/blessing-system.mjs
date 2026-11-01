@@ -1,13 +1,11 @@
-import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
-import { ArmorSuppressionSystemMixin } from "../mixins/_module.mjs";
-import { SimpleItemSystem } from "./abstract/_module.mjs";
+import { mergeMetadata } from "../../../utils/_module.mjs";
+import { ContractItemSystem } from "./abstract/_module.mjs";
 
 /**
  * Blessing-specific item data model.
- * @extends {SimpleItemSystem}
- * @mixes ArmorSuppressionSystem
+ * @extends {ContractItemSystem}
  */
-export default class BlessingSystem extends mixClasses(SimpleItemSystem, ArmorSuppressionSystemMixin) {
+export default class BlessingSystem extends ContractItemSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.blessing,
@@ -22,8 +20,6 @@ export default class BlessingSystem extends mixClasses(SimpleItemSystem, ArmorSu
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    this.parent.updateSource(
-      foundry.utils.mergeObject({ system: { effectTypes: ["contract"], powerSources: ["divine"] } }, data),
-    );
+    this.parent.updateSource(foundry.utils.mergeObject({ system: { powerSources: ["divine"] } }, data));
   }
 }
