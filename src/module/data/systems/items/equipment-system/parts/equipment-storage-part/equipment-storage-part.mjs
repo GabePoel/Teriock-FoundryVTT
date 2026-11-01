@@ -369,6 +369,7 @@ export default function EquipmentStoragePart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
+      if (this.storage.enabled) { this.consumption.enabled = false; }
       const stored = () => (this.storage.enabled ? this.parent.previewedTypes.equipment : []);
       Object.defineProperties(this.storage.count, {
         over: { configurable: true, get: () => this.storage.count.value > this.storage.count.max },

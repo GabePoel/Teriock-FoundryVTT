@@ -123,7 +123,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get _displayToggles() {
-    return ["system.consumption.enabled", ...super._displayToggles];
+    return [{ path: "system.consumption.enabled", visible: !this.storage.enabled }, ...super._displayToggles];
   }
 
   /** @inheritDoc */

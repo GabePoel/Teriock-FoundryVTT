@@ -19,6 +19,7 @@ function makeElementId(options, ...parts) {
 /**
  * @typedef FormClassesHash
  * @property {boolean} changed
+ * @property {string} classes
  * @property {boolean} isPlaceholder
  * @property {boolean} locked
  * @property {string} path
@@ -32,9 +33,9 @@ function makeElementId(options, ...parts) {
  * @returns {string}
  */
 function formClasses(model, options = { hash: {} }) {
-  const { changed, isPlaceholder, locked } = options.hash;
+  const { changed, classes, isPlaceholder, locked } = options.hash;
   const path = String(options.hash.path ?? "");
-  let cssClass = "teriock-form-value";
+  let cssClass = classes ? `${classes} teriock-form-value` : "teriock-form-value";
   if (
     (changed ?? foundry.utils.hasProperty(model?.overrides, path))
     && game.settings.get("teriock", "highlightModifiedValues")

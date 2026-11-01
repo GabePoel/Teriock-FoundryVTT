@@ -31,23 +31,26 @@ export default function AbilityDurationPart(Base) {
 
       // Clean passive durations
       if (this.maneuver === "passive") { this.duration.unit = "passive"; }
+    }
 
-      // Gifted modifications
-      if (this.costs.tweaks.gifted) {
-        const forced = { "system.kind": "gifted" };
-        if (this.maneuver === "passive") {
-          Object.assign(forced, {
-            "system.duration.raw": "1",
-            "system.duration.unit": "minute",
-            "system.executionTime.base": "a1",
-            "system.maneuver": "active",
-          });
-        }
-        for (const [path, value] of Object.entries(forced)) {
-          if (this.lockedPaths.has(path)) { continue; }
-          foundry.utils.setProperty(this.parent, path, value);
-          foundry.utils.setProperty(this.parent.overrides, path, value);
-        }
+    /** @inheritDoc */
+    prepareSpecialData() {
+      super.prepareSpecialData();
+
+      // Gifted and inept modifications
+      const forced = this.costs.tweaks.gifted ? { "system.kind": "gifted" } : {};
+      if ((this.costs.tweaks.gifted || this.costs.tweaks.inept) && this.maneuver === "passive") {
+        Object.assign(forced, {
+          "system.duration.raw": "1",
+          "system.duration.unit": "minute",
+          "system.executionTime.base": "a1",
+          "system.maneuver": "active",
+        });
+      }
+      for (const [path, value] of Object.entries(forced)) {
+        if (this.lockedPaths.has(path)) { continue; }
+        foundry.utils.setProperty(this.parent, path, value);
+        foundry.utils.setProperty(this.parent.overrides, path, value);
       }
     }
   }
