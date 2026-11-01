@@ -112,10 +112,11 @@ export default class DocumentExecution extends BaseExecution {
     const yes = await super._prepareUpdates();
     if (yes === false) { return false; }
 
-    if (this.source.system?.consumption?.enabled && this.consumeUses) {
+    if (this.source.system?.consumption?.enabled && this.consumeUses && this.source.isEditable) {
       this.operations.push({
         action: "update",
         documentName: this.source.documentName,
+        pack: this.source.pack,
         parent: this.source.parent,
         updates: [{
           _id: this.source.id,

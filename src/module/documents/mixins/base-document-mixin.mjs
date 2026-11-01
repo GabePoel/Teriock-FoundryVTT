@@ -301,6 +301,14 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
+     * Whether this is editable by the current user in its current state.
+     * @returns {boolean}
+     */
+    get isEditable() {
+      return this.isOwner && !this.compendium?.locked;
+    }
+
+    /**
      * Whether this document shouldn't have its basic information like compendium source and identifier visible.
      * @return {boolean}
      */

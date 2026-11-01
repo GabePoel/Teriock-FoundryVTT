@@ -51,7 +51,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
       tooltip: this.mounted
         ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
         : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
-      visible: this.parent.isOwner,
+      visible: this.parent.isEditable,
       onClick: async () => {
         if (this.mounted) { await this.unmount(); }
         else { await this.mount(); }

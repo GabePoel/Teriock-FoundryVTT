@@ -106,6 +106,7 @@ export default class EquipmentExecution extends ArmamentExecution {
   async _prepareUpdates() {
     if (
       this.consumeAmmunition && this.source.system.ammunition.enabled && this.ammunition?.system.consumption.enabled
+      && this.ammunition.isEditable
     ) {
       const amount = this.source.system.ammunition.amount ?? this.ammunition.system.consumption.amount;
       this.operations.push({

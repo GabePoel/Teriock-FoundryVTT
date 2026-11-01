@@ -90,7 +90,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     const quantities = new Map();
     for (const c of this.#paidCosts) {
       this.#actorCosts[c] = this.costs[c];
-      for (const source of this.costSources[c] ?? []) {
+      for (const source of (this.costSources[c] ?? []).filter(s => s.isEditable)) {
         const quantity = quantities.get(source) ?? source.system.quantity.value;
         const spent = Math.min(quantity, this.#actorCosts[c]);
         quantities.set(source, quantity - spent);
@@ -112,7 +112,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    * Prepare equipment to be consumed.
    */
   #prepareEquipmentConsumption() {
-    if (this.isContact && this.consumeEquipment && this.armament?.system.consumption?.enabled) {
+    if (
+      this.isContact && this.consumeEquipment && this.armament?.system.consumption?.enabled && this.armament.isEditable
+    ) {
       this.operations.push({
         action: "update",
         documentName: "Item",
@@ -534,7 +536,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     const yes = await super._performUpdates();
     if (yes === false) { return false; }
 
-    if (this.actor) {
+    if (this.actor?.isEditable) {
       for (const c of this.#paidCosts.filter(c => this.#actorCosts[c] > 0)) {
         const config = TERIOCK.CONFIG.stat[c];
         if (config?.command && !config.bar) { await this.actor.take(config.command, { amount: this.#actorCosts[c] }); }

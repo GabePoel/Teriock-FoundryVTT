@@ -112,19 +112,19 @@ export default function EquipmentIdentificationPart(Base) {
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.identify, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
         onClick: this.identify.bind(this),
-        visible: this.parent.isOwner && !this.identification.identified,
+        visible: this.parent.isEditable && !this.identification.identified,
       }, {
         group: "usage",
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
         onClick: this.readMagic.bind(this),
-        visible: this.parent.isOwner && !this.identification.identified && !this.identification.read,
+        visible: this.parent.isEditable && !this.identification.identified && !this.identification.read,
       }, {
         group: "usage",
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.unidentify, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
         onClick: this.unidentify.bind(this),
-        visible: this.parent.isOwner && this.identification.identified && game.user.isGM,
+        visible: this.parent.isEditable && this.identification.identified && game.user.isGM,
       }];
     }
 

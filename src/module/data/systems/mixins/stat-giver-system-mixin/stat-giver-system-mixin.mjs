@@ -60,7 +60,7 @@ export default function StatGiverSystemMixin(Base) {
             onClick: async () => {
               await this.parent.update({ [`system.statDice.${stat}.disabled`]: !disabled });
             },
-            visible: () => this.parent.isOwner && this._canToggleStatDice(stat) && this.statDice[stat].hasDice,
+            visible: () => this.parent.isEditable && this._canToggleStatDice(stat) && this.statDice[stat].hasDice,
           };
         }),
         ...super._embedIcons,

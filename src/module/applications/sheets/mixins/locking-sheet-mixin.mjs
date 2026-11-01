@@ -51,7 +51,7 @@ export default function LockingSheetMixin(Base) {
       toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
       toggleButton.classList.add(this.#lockIcon);
       toggleButton.ariaLabel = _loc(this.#lockLabel);
-      toggleButton.disabled = !this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked);
+      toggleButton.disabled = !this.document.isEditable;
     }
 
     /** @inheritDoc */

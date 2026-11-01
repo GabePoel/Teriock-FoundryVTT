@@ -72,7 +72,7 @@ export default function EquipmentWieldingPart(Base) {
           tooltip: this.glued
             ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
             : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-          visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
+          visible: this.parent.isEditable && this.actor && this.actor.type !== "inventory",
           onClick: async () => {
             if (this.glued) {await this.unglue();}
             else { await this.glue(); }
@@ -85,7 +85,7 @@ export default function EquipmentWieldingPart(Base) {
           tooltip: this.equipped
             ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
             : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
-          visible: this.parent.isOwner,
+          visible: this.parent.isEditable,
           onClick: async () => {
             if (this.equipped) { await this.unequip(); }
             else { await this.equip(); }

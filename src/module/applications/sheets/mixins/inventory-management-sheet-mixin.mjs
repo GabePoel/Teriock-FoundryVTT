@@ -15,7 +15,7 @@ export default function InventoryManagementSheetMixin(Base) {
     _payloadDropEffect() {
       const document = TeriockDragDrop.payload?.document;
       if (
-        document?.type === "equipment" && document.actor && document.isOwner
+        document?.type === "equipment" && document.actor && document.isEditable
         && (document.actor === this.document.actor || !document.inCompendium)
       ) {
         return "move";

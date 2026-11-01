@@ -63,7 +63,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
       action: "deattuneDoc",
       icon: TERIOCK.DISPLAY.icons.manifest.attunable.deattune,
       tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-      visible: this.parent.isOwner,
+      visible: this.parent.isEditable,
       onClick: async () => await this.deattune(),
     }, ...super._embedIcons];
   }

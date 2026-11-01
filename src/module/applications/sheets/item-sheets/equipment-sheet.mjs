@@ -44,7 +44,7 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
 
   /** @inheritDoc */
   _validateDropEditable(options) {
-    return (this.document.system.storage.enabled && this.document.isOwner && options.document?.type === "equipment")
+    return (this.document.system.storage.enabled && this.document.isEditable && options.document?.type === "equipment")
       || super._validateDropEditable(options);
   }
 }

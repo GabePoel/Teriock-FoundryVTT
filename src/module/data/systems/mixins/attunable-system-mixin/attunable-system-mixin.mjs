@@ -87,7 +87,7 @@ export default function AttunableSystemMixin(Base) {
         tooltip: this.isAttuned
           ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
           : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-        visible: this.parent.isOwner && Boolean(this.actor?.metadata.childTypes.includes("attunement")),
+        visible: this.parent.isEditable && Boolean(this.actor?.metadata.childTypes.includes("attunement")),
         onClick: async () => {
           if (this.isAttuned) { await this.deattune(); }
           else { await this.attune(); }

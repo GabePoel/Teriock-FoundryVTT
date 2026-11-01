@@ -43,7 +43,7 @@ export default function EquipmentSuppressionPart(Base) {
         tooltip: this.dampened
           ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
           : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
-        visible: this.parent.isOwner,
+        visible: this.parent.isEditable,
         onClick: async () => {
           if (this.dampened) { await this.undampen(); }
           else { await this.dampen(); }
@@ -56,7 +56,7 @@ export default function EquipmentSuppressionPart(Base) {
         tooltip: this.shattered
           ? _loc("TERIOCK.TERMS.Properties.shattered")
           : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
-        visible: this.parent.isOwner,
+        visible: this.parent.isEditable,
         onClick: async () => {
           if (this.shattered) { await this.repair(); }
           else { await this.shatter(); }

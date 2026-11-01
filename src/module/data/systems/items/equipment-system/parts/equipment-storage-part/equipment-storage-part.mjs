@@ -240,14 +240,14 @@ export default function EquipmentStoragePart(Base) {
           this.consumption.enabled
           && this.quantity.value < this.quantity.max
           && this._stackingCandidates.length
-          && this.getNearestDocument().isOwner && this.getNearestDocument().checkAncestor(doc),
+          && this.getNearestDocument().isEditable && this.getNearestDocument().checkAncestor(doc),
       }, {
         group: "document",
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.equipment.unstack, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
         onClick: async () => await this.groupUnstackDialog(),
         visible: () =>
-          this.consumption.enabled && this.quantity.value > 1 && this.getNearestDocument().isOwner
+          this.consumption.enabled && this.quantity.value > 1 && this.getNearestDocument().isEditable
           && this.getNearestDocument().checkAncestor(doc),
       }]);
       return entries;

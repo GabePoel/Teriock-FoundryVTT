@@ -342,7 +342,10 @@ export default function AttackExecutionMixin(Base) {
      * Prepare ammunition to be consumed.
      */
     _prepareAmmunitionConsumption() {
-      if (this.isContact && this.consumeAmmunition && this.ammunition?.system.consumption.enabled) {
+      if (
+        this.isContact && this.consumeAmmunition && this.ammunition?.system.consumption.enabled
+        && this.ammunition.isEditable
+      ) {
         this.operations.push({
           action: "update",
           documentName: "Item",

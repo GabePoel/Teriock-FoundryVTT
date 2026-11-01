@@ -127,7 +127,7 @@ export default function ChildSystemMixin(Base) {
         tooltip: this.parent.disabled
           ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
           : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-        visible: this.parent.isOwner && Boolean(this.metadata.disabledPath),
+        visible: this.parent.isEditable && Boolean(this.metadata.disabledPath),
         onClick: () => this.parent.update({ [this.metadata.disabledPath]: !this.parent.disabled }),
       }];
     }
@@ -290,7 +290,7 @@ export default function ChildSystemMixin(Base) {
           group: "control",
           icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.enable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
-          visible: this.parent?.isOwner
+          visible: this.parent?.isEditable
             && this.parent.disabled
             && Boolean(this.metadata.disabledPath)
             && this.parent.type !== "equipment"
@@ -302,7 +302,7 @@ export default function ChildSystemMixin(Base) {
           group: "control",
           icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.disable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
-          visible: this.parent?.isOwner
+          visible: this.parent?.isEditable
             && !this.parent.disabled
             && Boolean(this.metadata.disabledPath)
             && this.parent.type !== "equipment"
