@@ -7,8 +7,15 @@
 }}
 {{formUpdater
   document
-  abbreviation=(localize "TERIOCK.COMMON.GP")
+  abbreviation=(ifThen (eq system.price.unitType "finite") (localize system.price.symbol) "")
+  abbreviationTooltip=(ifThen (eq system.price.unitType "finite") system.price.unitName "")
+  action="updateUnit"
+  data=price.data
+  dataset=(object path="system.price")
   icon=TERIOCK.DISPLAY.icons.manifest.stat.gp
   info="core:price"
+  label=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.price.label")
+  locked=price.locked
   path="system.price"
+  source=price.source
 }}

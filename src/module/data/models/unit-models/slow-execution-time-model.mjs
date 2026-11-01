@@ -9,6 +9,11 @@ export default class SlowExecutionTimeModel extends TimeUnitModel {
   ];
 
   /** @inheritDoc */
+  static get groupLabels() {
+    return { ...super.groupLabels, infinite: "TERIOCK.MODELS.SlowExecutionTime.GROUPS.infinite" };
+  }
+
+  /** @inheritDoc */
   static get infiniteChoiceEntries() {
     return [{ id: "shortRest", label: "TERIOCK.TERMS.ExecutionTime.slow.shortRest" }, {
       id: "longRest",

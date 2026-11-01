@@ -11,6 +11,7 @@ import { default as commands } from "../../src/en/commands.json" with { type: "j
 import { default as common } from "../../src/en/common.json" with { type: "json" };
 import { default as compendium } from "../../src/en/compendium.json" with { type: "json" };
 import { default as costs } from "../../src/en/costs.json" with { type: "json" };
+import { default as currency } from "../../src/en/currency.json" with { type: "json" };
 import { default as dialogs } from "../../src/en/dialogs.json" with { type: "json" };
 import { default as documents } from "../../src/en/documents.json" with { type: "json" };
 import { default as effects } from "../../src/en/effects.json" with { type: "json" };
@@ -20,6 +21,7 @@ import { default as expirations } from "../../src/en/expirations.json" with { ty
 import { default as fields } from "../../src/en/fields.json" with { type: "json" };
 import { default as format } from "../../src/en/format.json" with { type: "json" };
 import { default as hotbar } from "../../src/en/hotbar.json" with { type: "json" };
+import { default as length } from "../../src/en/length.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
 import { default as mechanics } from "../../src/en/mechanics.json" with { type: "json" };
 import { default as menus } from "../../src/en/menus.json" with { type: "json" };
@@ -38,7 +40,9 @@ import { default as stats } from "../../src/en/stats.json" with { type: "json" }
 import { default as statuses } from "../../src/en/statuses.json" with { type: "json" };
 import { default as systems } from "../../src/en/systems.json" with { type: "json" };
 import { default as terms } from "../../src/en/terms.json" with { type: "json" };
+import { default as time } from "../../src/en/time.json" with { type: "json" };
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
+import { default as weight } from "../../src/en/weight.json" with { type: "json" };
 import { default as index } from "../../src/json/wiki-index.json" with { type: "json" };
 import { toCamelCase } from "../../src/module/utils/string.mjs";
 import { sortObject } from "../script-utils.mjs";
@@ -137,6 +141,7 @@ mergeObjects(
   common,
   compendium,
   costs,
+  currency,
   dialogs,
   documents,
   effects,
@@ -146,6 +151,7 @@ mergeObjects(
   fields,
   format,
   hotbar,
+  length,
   macros,
   mechanics,
   menus,
@@ -164,7 +170,9 @@ mergeObjects(
   statuses,
   systems,
   terms,
+  time,
   triggers,
+  weight,
 );
 
 // Write then rename so Foundry's hot reload never reads a partially written file.

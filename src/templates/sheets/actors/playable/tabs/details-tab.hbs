@@ -211,17 +211,10 @@
               {{formHover
                 document
                 classes="actor-stat-value updatable"
-                selected=system._source.weight.self
-                unselected=system.weight.self
-                selectedFormat=(localize
-                  "TERIOCK.MODELS.BaseUnit.FORMAT"
-                  number=system._source.weight.self
-                  unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
-                unselectedFormat=(localize
-                  "TERIOCK.MODELS.BaseUnit.FORMAT"
-                  number=system.weight.self
-                  unit=(localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"))
-                action="updatePaths"
+                selected=weight.source
+                unselected=weight.data
+                action="updateUnit"
+                dataset=(object path="system.weight.self")
                 path="system.weight.self"
                 icon=TERIOCK.DISPLAY.icons.manifest.equipment.weight
               }}

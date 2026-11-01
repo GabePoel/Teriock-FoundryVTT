@@ -6,11 +6,31 @@ import FormulaField from "../../../fields/formula-field/formula-field.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
+ */
+
+/**
  * Model for a formula paired with a unit of measurement.
  */
 export default class BaseUnitModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseUnit"];
+
+  /**
+   * The unit new values start with.
+   * @returns {string}
+   */
+  static get _initialUnit() {
+    return this.choiceEntries[0].id;
+  }
+
+  /**
+   * Whether the raw formula is deterministic.
+   * @return {boolean}
+   */
+  static get _rawDeterministic() {
+    return false;
+  }
 
   /**
    * The placeholder for the raw formula.
@@ -27,15 +47,37 @@ export default class BaseUnitModel extends BaseDataModel {
 
   /**
    * Valid unit choices.
-   * @returns {Record<string, string>}
+   * @returns {Record<string, FormSelectOption>}
    */
   static get choices() {
-    return Object.fromEntries(this.choiceEntries.map(e => [e.id, _loc(e.label)]));
+    const groupLabels = this.groupLabels;
+    const types = [["zero", this.zeroChoiceEntries], ["finite", this.finiteChoiceEntries], [
+      "infinite",
+      this.infiniteChoiceEntries,
+    ]].filter(([_type, entries]) => entries.length);
+    const choices = {};
+    for (const [type, entries] of types) {
+      const group = types.length > 1 ? _loc(groupLabels[type]) : undefined;
+      for (const e of entries) { choices[e.id] = { group, label: _loc(e.label) }; }
+    }
+    return choices;
   }
 
   /** @returns {Teriock.Units.UnitEntry[]} */
   static get finiteChoiceEntries() {
     return [];
+  }
+
+  /**
+   * Labels for the groups of unit choices of each type.
+   * @returns {Record<"finite" | "infinite" | "zero", string>}
+   */
+  static get groupLabels() {
+    return {
+      finite: "TERIOCK.MODELS.BaseUnit.GROUPS.finite",
+      infinite: "TERIOCK.MODELS.BaseUnit.GROUPS.infinite",
+      zero: "TERIOCK.MODELS.BaseUnit.GROUPS.zero",
+    };
   }
 
   /**
@@ -51,17 +93,51 @@ export default class BaseUnitModel extends BaseDataModel {
     return [];
   }
 
+  /**
+   * Get entries from a unit config.
+   * @param {Record<string, Teriock.Config.UnitEntry>} config
+   * @returns {Teriock.Units.UnitEntry[]}
+   */
+  static _getEntriesFromConfig(config) {
+    return Object.entries(config).map(([id, { conversion, label, plural, scale, symbol, system }]) => ({
+      conversion,
+      id,
+      label,
+      plural,
+      scale,
+      symbol,
+      system,
+    }));
+  }
+
   /** @inheritDoc */
   static defineSchema() {
     return {
-      raw: new FormulaField({ placeholder: this._rawPlaceholder }),
+      raw: new FormulaField({ deterministic: this._rawDeterministic, placeholder: this._rawPlaceholder }),
       unit: new fields.StringField({
         choices: this.choices,
-        initial: this.choiceEntries[0].id,
+        initial: this._initialUnit,
         nullable: false,
         required: true,
       }),
     };
+  }
+
+  /**
+   * Get the source data for a value in the base unit. This uses the largest 
+   * finite unit that represents the given value as a whole number.
+   * @param {number} value
+   * @returns {{ raw: string, unit: string }}
+   */
+  static getSourceFromValue(value) {
+    const entries = this.finiteChoiceEntries.toSorted((a, b) => (b.conversion || 1) - (a.conversion || 1));
+    const base = entries.find(e => (e.conversion || 1) === 1) ?? entries.at(-1);
+    if (value === 0) { return { raw: "0", unit: base.id }; }
+    for (const { conversion = 1, id } of entries) {
+      const count = value / conversion;
+      if (Math.abs(count - Math.round(count)) < 1e-9) { return { raw: String(Math.round(count)), unit: id }; }
+    }
+    return { raw: String(value), unit: base.id };
   }
 
   /**
@@ -139,7 +215,7 @@ export default class BaseUnitModel extends BaseDataModel {
       const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
       return `${this.raw || "0"} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
     }
-    return this.constructor.choices[this.unit];
+    return this.constructor.choices[this.unit]?.label;
   }
 
   /**
@@ -159,6 +235,16 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
+   * The name of the chosen unit with appropriate pluralization applied.
+   * @returns {string}
+   */
+  get unitName() {
+    if (this.unitType !== "finite") { return this.label; }
+    const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
+    return _loc(this.unitValue === 1 ? entry.label : entry.plural);
+  }
+
+  /**
    * What type of unit this is.
    * @returns {"zero" | "finite" | "infinite"}
    */
@@ -169,11 +255,31 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Value as derived from current roll data.
+   * Value derived from current roll data in chosen unit.
+   * @returns {number}
+   */
+  get unitValue() {
+    if (this.unitType !== "finite") { return this.value; }
+    return this.convertTo(this.unit).toNearest(TERIOCK.CONST.UNIT_PRECISION);
+  }
+
+  /**
+   * Value derived from current roll data in base unit.
    * @returns {number}
    */
   get value() {
     return this.#convert(this.#evaluate(this.getRollData()));
+  }
+
+  /**
+   * Text abbreviation of evaluated value in the chosen unit.
+   * @returns {string}
+   */
+  get valueAbbreviation() {
+    if (this.unitType === "finite") {
+      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.unitValue, unit: _loc(this.symbol) });
+    }
+    return this.label;
   }
 
   /**

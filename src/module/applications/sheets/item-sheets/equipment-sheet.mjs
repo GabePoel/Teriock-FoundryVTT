@@ -25,6 +25,11 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
   async _prepareContext(options) {
     const sourceLong = this.document.system.range.long.clone();
     return Object.assign(await super._prepareContext(options), {
+      price: {
+        data: getUnitValueString(this.document.system.price),
+        locked: this.document.system.schema.getField("price").isLocked(this.document),
+        source: getUnitValueString(this.document.system.price.clone()),
+      },
       range: {
         data: this.document.system.range.long.unitType === "finite"
           ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
@@ -39,6 +44,11 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
           })
           : sourceLong.label,
       },
+      weight: {
+        data: getUnitValueString(this.document.system.weight),
+        locked: this.document.system.schema.getField("weight").isLocked(this.document),
+        source: getUnitValueString(this.document.system.weight.clone()),
+      },
     });
   }
 
@@ -47,4 +57,13 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
     return (this.document.system.storage.enabled && this.document.isEditable && options.document?.type === "equipment")
       || super._validateDropEditable(options);
   }
+}
+
+/**
+ * Get the display string for a unit value, evaluated in its own unit.
+ * @param {BaseUnitModel} unitModel
+ * @returns {string}
+ */
+function getUnitValueString(unitModel) {
+  return unitModel.unitType === "finite" ? String(unitModel.unitValue) : unitModel.label;
 }

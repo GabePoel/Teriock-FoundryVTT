@@ -12,6 +12,7 @@ import {
   ArmamentSystemMixin,
   AttunableSystemMixin,
   ConsumableSystemMixin,
+  PriceSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
@@ -35,6 +36,7 @@ const { fields } = foundry.data;
  * @mixes ArmamentSystem
  * @mixes AttunableSystem
  * @mixes ConsumableSystem
+ * @mixes PriceSystem
  * @mixes WikiSystem
  * @mixes EquipmentIdentificationPart
  * @mixes EquipmentPanelPart
@@ -48,6 +50,7 @@ export default class EquipmentSystem
     ArmamentSystemMixin,
     AttunableSystemMixin,
     ConsumableSystemMixin,
+    PriceSystemMixin,
     WikiSystemMixin,
     EquipmentIdentificationPart,
     EquipmentPanelPart,
@@ -147,6 +150,7 @@ export default class EquipmentSystem
       subtitle: !this.consumption.enabled ? getName(this.equipmentType) : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
+        ...this._priceWrappers,
         _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.totalWeight }),
         parts.text,
       ]),
@@ -171,9 +175,6 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), {
-      [`type.${toKebabCase(this._source.equipmentType)}`]: 1,
-      price: this.price,
-    });
+    return Object.assign(super.getLocalRollData(), { [`type.${toKebabCase(this._source.equipmentType)}`]: 1 });
   }
 }

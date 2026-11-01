@@ -50,6 +50,7 @@ function formClasses(model, options = { hash: {} }) {
  * @typedef {FormClassesHash} FormUpdaterHash
  * @property {Record<string, string>} dataset
  * @property {string} abbreviation
+ * @property {string} abbreviationTooltip
  * @property {string} action
  * @property {string} color
  * @property {string} data
@@ -70,7 +71,17 @@ function formClasses(model, options = { hash: {} }) {
  * @todo Simplify if possible.
  */
 function formUpdater(model, options = { hash: {} }) {
-  const { abbreviation, action = "updatePaths", changed, color, dataset = {}, icon, info, locked } = options.hash;
+  const {
+    abbreviation,
+    abbreviationTooltip,
+    action = "updatePaths",
+    changed,
+    color,
+    dataset = {},
+    icon,
+    info,
+    locked,
+  } = options.hash;
   let { data, isPlaceholder = false, label, paths, placeholder, source } = options.hash;
   const path = String(options.hash.path ?? "");
   label ||= model?.getFieldForProperty(path)?.label || "";
@@ -125,10 +136,18 @@ function formUpdater(model, options = { hash: {} }) {
   }
   displayElement.append(valueElement);
   if (abbreviation || info) {
-    const abbreviationElement = createElement("span", {
-      className: "teriock-updater-abbreviation",
-      textContent: abbreviation ? _loc(abbreviation) : "",
-    });
+    const abbreviationElement = createElement("span", { className: "teriock-updater-abbreviation" });
+    if (abbreviation && abbreviationTooltip) {
+      abbreviationElement.append(
+        createElement("span", {
+          className: "teriock-updater-abbreviation-text",
+          dataset: { tooltip: _loc(abbreviationTooltip) },
+          textContent: _loc(abbreviation),
+        }),
+      );
+    } else if (abbreviation) {
+      abbreviationElement.textContent = _loc(abbreviation);
+    }
     if (info) { abbreviationElement.insertAdjacentHTML("beforeend", uiHelpers.infoIcon(info).toString()); }
     displayElement.append(abbreviationElement);
   }

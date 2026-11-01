@@ -15,11 +15,14 @@ export default class MultiChangeField extends SchemaField {
     const entries = this.multiChangePaths
       ? this.multiChangePaths.map(p => [p, this.getField(p)])
       : Object.entries(this.fields);
+    let applied = false;
     for (const [path, field] of entries) {
       if (!field) { continue; }
       const changed = field.applyChange(getProperty(value, path), model, change, options);
+      if (changed === undefined) { continue; }
       setProperty(value, path, changed);
+      applied = true;
     }
-    return value;
+    return applied ? value : undefined;
   }
 }

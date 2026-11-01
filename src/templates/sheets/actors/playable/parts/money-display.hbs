@@ -51,7 +51,7 @@
           {{ system.money.debt }}
         </button>
         <div class="money-info tsubtle tcenter gi3">
-          <div class="money-name">{{localize "TERIOCK.TERMS.Currency.debt"}}</div>
+          <div class="money-name">{{localize "TERIOCK.CURRENCY.debt.label"}}</div>
           <div class="money-value">
             {{localize
               "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily"
@@ -67,8 +67,7 @@
     class="money-total{{#if (lt system.money.total 0)}} tred{{/if}}"
     for='{{#each TERIOCK.CONFIG.currency as |currency id|}}{{concat concat @root/appId "-currency-" id " "}}{{/each}}{{concat @root/appId "-currency-debt"}}'
   >
-    {{ system.money.total }}
-    ₲&nbsp;&nbsp;&nbsp;&nbsp;
+    {{formatGp system.money.total}}&nbsp;&nbsp;&nbsp;&nbsp;
     {{ system.weight.money }}
     lb
   </output>

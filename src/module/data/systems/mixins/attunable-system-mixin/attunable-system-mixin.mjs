@@ -19,7 +19,7 @@ export default function AttunableSystemMixin(Base) {
 
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
-      preserveOnRefresh: ["system.needsAttunement", "system.tier", "system.price", ...super.metadata.preserveOnRefresh],
+      preserveOnRefresh: ["system.needsAttunement", "system.tier", ...super.metadata.preserveOnRefresh],
       tags: { attunable: true },
     });
 
@@ -27,16 +27,6 @@ export default function AttunableSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         needsAttunement: new fields.BooleanField({ initial: true }),
-        price: new fields.NumberField({
-          blank: true,
-          initial: null,
-          integer: false,
-          min: 0,
-          nullable: true,
-          placeholder: _loc("COMMON.None"),
-          required: true,
-          step: 0.01,
-        }),
         tier: new fields.SchemaField({
           raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),
           value: new fields.NumberField({ integer: true, min: 0, persisted: false, placeholder: "0" }),
@@ -66,9 +56,6 @@ export default function AttunableSystemMixin(Base) {
       if (this._shouldShowTierWrapper) {
         wrappers.push(_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw }));
       }
-      if (this._shouldShowPriceWrapper) {
-        wrappers.push(_loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: this.price.toNearest(0.01) }));
-      }
       return wrappers;
     }
 
@@ -93,14 +80,6 @@ export default function AttunableSystemMixin(Base) {
           else { await this.attune(); }
         },
       }, ...super._embedIcons];
-    }
-
-    /**
-     * Whether to show the price wrapper.
-     * @return {boolean}
-     */
-    get _shouldShowPriceWrapper() {
-      return typeof this.price === "number" && this.parent.parent?.type === "inventory";
     }
 
     /**

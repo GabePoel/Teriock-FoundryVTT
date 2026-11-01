@@ -1,3 +1,5 @@
+import { ActorWeightModel } from "../../../../../../models/_module.mjs";
+
 declare global {
   namespace Teriock.Models {
     export interface ActorCapacitiesPartData {
@@ -24,7 +26,7 @@ declare global {
         /** <derived> Weight of the actor's money */
         money: number;
         /** <schema> Weight of the actor */
-        self: number;
+        self: ActorWeightModel;
         /** <derived> Total weight of actor and everything they carry (self + carried) */
         value: number;
       };

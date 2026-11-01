@@ -25,6 +25,15 @@ declare global {
       types?: string[];
     };
 
+    export type UnitEntry = {
+      conversion: number;
+      label: string;
+      plural: string;
+      scale?: number;
+      symbol: string;
+      system?: string;
+    };
+
     export type CategoryEntry = {
       format?: string;
       imgCategory?: string;
@@ -33,10 +42,12 @@ declare global {
     };
 
     export type CurrencyEntry = {
+      code: string;
       conversion: number;
       equipmentType: Identifier;
       identifier: Identifier;
       label: string;
+      plural: string;
       symbol: string;
       weight: number;
     };

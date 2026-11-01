@@ -1,8 +1,9 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
-import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
-import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
+import { InfiniteNumberField, UnitField } from "../../../../../fields/_module.mjs";
+import { migrateRename, migrateUnitNumber } from "../../../../../fields/tools/migrations.mjs";
+import { WeightUnitModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -42,7 +43,7 @@ export default function EquipmentStoragePart(Base) {
             }),
           }),
         }),
-        weight: new fields.NumberField({ initial: 0, nullable: false, placeholder: "0", required: true }),
+        weight: new UnitField(WeightUnitModel),
       };
     }
 
@@ -51,6 +52,7 @@ export default function EquipmentStoragePart(Base) {
       migrateRename(source, "storage.maxCount", "storage.count.max");
       migrateRename(source, "storage.maxWeight", "storage.weight.max");
       migrateRename(source, "storage.weightMultiplier", "storage.weight.multiplier");
+      migrateUnitNumber(source, "weight", WeightUnitModel);
       return super.migrateData(source, options);
     }
 
@@ -141,8 +143,8 @@ export default function EquipmentStoragePart(Base) {
      * @returns {number}
      */
     get totalWeight() {
-      if (this.stashed) { return 0; }
-      let total = this.weight * (this.consumption.enabled ? this.quantity.value : 1) * this.weightMultiplier;
+      if (this.stashed || this.parent.elder?.type === "species") { return 0; }
+      let total = this.weight.rollValue * (this.consumption.enabled ? this.quantity.value : 1) * this.weightMultiplier;
       if (this.storage.enabled) { total += this.storage.weight.value; }
       return total.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
@@ -399,16 +401,7 @@ export default function EquipmentStoragePart(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      if (this.stashed || this.parent.elder?.type === "species") {
-        this.weight = 0;
-        this.storage.weight.multiplier = 0;
-      }
-    }
-
-    /** @inheritDoc */
-    prepareSpecialData() {
-      super.prepareSpecialData();
-      this.weight = this.weight.toNearest(TERIOCK.CONST.UNIT_PRECISION);
+      if (this.stashed || this.parent.elder?.type === "species") { this.storage.weight.multiplier = 0; }
     }
   }
 

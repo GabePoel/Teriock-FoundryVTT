@@ -8,7 +8,7 @@ import {
   toKebabCase,
 } from "../../../../utils/_module.mjs";
 import { mountTypeField } from "../../../fields/tools/builders.mjs";
-import { AttunableSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
+import { AttunableSystemMixin, PriceSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -17,9 +17,12 @@ const { fields } = foundry.data;
  * Mount-specific item data model.
  * @extends {BaseItemSystem}
  * @mixes AttunableSystem
+ * @mixes PriceSystem
  * @mixes StatGiverSystem
  */
-export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSystemMixin, StatGiverSystemMixin) {
+export default class MountSystem
+  extends mixClasses(BaseItemSystem, AttunableSystemMixin, PriceSystemMixin, StatGiverSystemMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];
 
@@ -64,7 +67,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
     return [this._statBar, {
       icon: TERIOCK.DISPLAY.icons.manifest.armament.load,
       label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
-      wrappers: [...this._attunableWrappers, getName(this.mountType)],
+      wrappers: [...this._attunableWrappers, ...this._priceWrappers, getName(this.mountType)],
     }];
   }
 
@@ -84,7 +87,7 @@ export default class MountSystem extends mixClasses(BaseItemSystem, AttunableSys
     const parts = super.embedParts;
     return Object.assign(parts, {
       subtitle: getName(this.mountType),
-      text: dotJoin([...this._attunableWrappers, parts.text]),
+      text: dotJoin([...this._attunableWrappers, ...this._priceWrappers, parts.text]),
     });
   }
 

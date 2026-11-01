@@ -3,8 +3,6 @@ declare global {
     export interface AttunableSystemData {
       /** <schema> If this requires attunement */
       needsAttunement: boolean;
-      /** <schema> Price */
-      price: number;
       /** <schema> Presence tier */
       tier: {
         /** <schema> Formula for presence cost */

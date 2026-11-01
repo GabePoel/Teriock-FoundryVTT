@@ -1,5 +1,5 @@
 import { toKebabCase } from "../../../../../../utils/_module.mjs";
-import { FormulaField } from "../../../../../fields/_module.mjs";
+import { FormulaField, UnitField } from "../../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 
@@ -38,7 +38,7 @@ export default function AbilityUsagePart(Base) {
         }),
         executionTime: new fields.SchemaField({
           base: new fields.StringField({ blank: false, initial: "a1", required: true }),
-          slow: new fields.EmbeddedDataField(SlowExecutionTimeModel),
+          slow: new UnitField(SlowExecutionTimeModel),
         }),
         expansion: new fields.SchemaField({
           cap: rollableFormulaField(),
@@ -48,7 +48,7 @@ export default function AbilityUsagePart(Base) {
             initial: "mov",
             required: true,
           }),
-          range: new fields.EmbeddedDataField(RangeModel),
+          range: new UnitField(RangeModel),
           type: new fields.StringField({ initial: null, nullable: true }),
         }),
         featSaveAttribute: new fields.StringField({
@@ -70,7 +70,7 @@ export default function AbilityUsagePart(Base) {
           nullable: false,
           required: true,
         }),
-        range: new fields.EmbeddedDataField(RangeModel),
+        range: new UnitField(RangeModel),
         targets: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.ability.targets }), {
           initial: () => ["creature"],
         }),
