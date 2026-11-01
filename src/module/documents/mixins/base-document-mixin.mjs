@@ -66,6 +66,18 @@ export default function BaseDocumentMixin(Base) {
      */
     static async _onDeleteOperation(documents, operation, user) {
       await this._onWriteOperation(documents, operation, user);
+      // Delete macros created by hotbar drops for this document
+      if (game.user.isActiveGM) {
+        const uuids = new Set();
+        for (const doc of documents) {
+          uuids.add(doc.uuid);
+          for (const c of Object.values(doc.collections)) {
+            for (const d of c) { uuids.add(d.uuid); }
+          }
+        }
+        const ids = game.macros.filter(m => uuids.has(m.getFlag("teriock", "macroDocumentUuid"))).map(m => m.id);
+        if (ids.length) { await foundry.utils.getDocumentClass("Macro").deleteDocuments(ids); }
+      }
       return super._onDeleteOperation(documents, operation, user);
     }
 

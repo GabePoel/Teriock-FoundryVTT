@@ -10,139 +10,31 @@ const { Macro } = foundry.documents;
  * @implements {Teriock.Functionality.Usable}
  */
 export default class TeriockMacro extends mixClasses(Macro, BaseDocumentMixin) {
-  /**
-   * Create a use macro from the given document.
-   * @param {TeriockActiveEffect|TeriockItem} doc
-   * @param {string} command
-   * @param {object} flags - Teriock-scoped flags specific to the macro type.
-   * @returns {Promise<TeriockMacro>}
-   */
-  static async #makeUseMacro(doc, command, flags) {
-    return this.create({
-      command,
-      flags: { teriock: { ...flags, user: game.user.id } },
-      folder: (await this.ensureHotbarFolder())?.id,
-      img: doc.img,
-      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: doc.name }),
-      type: "script",
-    });
-  }
-
-  /**
-   * Hotbar folder for the current user.
-   * @returns {TeriockFolder|null}
-   */
-  static get hotbarFolder() {
-    if (!game.settings.get("teriock", "sortNewPlayerMacros")) { return null; }
-    return game.folders.find(f =>
-      f.getFlag("teriock", "user") === game.user.id && f.getFlag("teriock", "hotbarFolder") && f.type === "Macro"
-    ) ?? null;
-  }
-
-  /**
-   * Get the hotbar folder for the current user.
-   * @returns {Promise<TeriockFolder>|null}
-   */
-  static async ensureHotbarFolder() {
-    if (!game.settings.get("teriock", "sortNewPlayerMacros")) { return null; }
-    const hotbarFolder = this.hotbarFolder;
-    if (hotbarFolder) { return hotbarFolder; }
-    await game.users.queryGM("teriock.createHotbarFolder", { id: game.user.id, name: game.user.name }, {
-      failPrefix: "TERIOCK.SYSTEMS.Macro.QUERY.createHotbarFolder.failPrefix",
-      localize: true,
-      timeout: TERIOCK.CONST.WRITE_OPERATION_TIMEOUT,
-    });
-    return this.hotbarFolder;
-  }
-
-  /**
-   * Create a general use macro from the given document.
-   * @param {TeriockActiveEffect|TeriockItem} doc
-   * @returns {Promise<TeriockMacro>}
-   */
-  static async getGeneralUseMacro(doc) {
-    const macro = game.macros.find(m =>
-      m.getFlag("teriock", "user") === game.user.id
-      && m.getFlag("teriock", "macroType") === "useGeneral"
-      && m.getFlag("teriock", "macroLookupKey") === doc.lookupKey
-    );
-    if (macro) { return macro; }
-    return this.makeGeneralUseMacro(doc);
-  }
-
-  /**
-   * Create a linked use macro from the given document.
-   * @param {TeriockActiveEffect|TeriockItem} doc
-   * @returns {Promise<TeriockMacro>}
-   */
-  static async getLinkedUseMacro(doc) {
-    const macro = game.macros.find(m =>
-      m.getFlag("teriock", "user") === game.user.id
-      && m.getFlag("teriock", "macroType") === "useLinked"
-      && m.getFlag("teriock", "macroDocumentUuid") === doc.uuid
-    );
-    if (macro) { return macro; }
-    return this.makeLinkedUseMacro(doc);
-  }
-
-  /**
-   * Create a general use macro from the given document.
-   * @param {TeriockActiveEffect|TeriockItem} doc
-   * @returns {Promise<TeriockMacro>}
-   */
-  static async makeGeneralUseMacro(doc) {
-    const lookup = doc.lookupKey;
-    const command = `await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`;
-    return this.#makeUseMacro(doc, command, { macroLookupKey: lookup, macroType: "useGeneral" });
-  }
-
-  /**
-   * Create a linked use macro from the given document.
-   * @param {TeriockActiveEffect|TeriockItem} doc
-   * @returns {Promise<TeriockMacro>}
-   */
-  static async makeLinkedUseMacro(doc) {
-    const command = `await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`;
-    return this.#makeUseMacro(doc, command, { macroDocumentUuid: doc.uuid, macroType: "useLinked" });
-  }
-
-  /**
-   * Get a document on an actor and use it.
-   * @param {string} lookup
-   * @param {object} [options]
-   * @param {TeriockActor} [options.actor]
-   * @param {Teriock.Documents.ChildType} [options.type]
-   * @param {PointerEvent} [options.event]
-   * @returns {Promise<void>}
-   */
-  static async useDocumentGeneral(lookup, options) {
-    const { actor, event } = options;
-    const tokens = /** @type {TeriockToken[]} */ game.canvas?.tokens?.controlled ?? [];
-    const actors = tokens.map(t => t.actor).filter(Boolean);
-    if (actors.length === 0 && options.actor) { actors.push(actor); }
-    game.actors.check(actors);
-    for (const a of actors) { await a.useDocument(lookup, { event }); }
-  }
-
-  /**
-   * Get a document from its UUID and use it.
-   * @param {UUID<TeriockActiveEffect|TeriockItem>} uuid
-   * @param {Teriock.Command.UseOptions} [options]
-   * @returns {Promise<void>}
-   */
-  static async useDocumentLinked(uuid, options = {}) {
-    const doc = await fromUuid(uuid);
-    if (doc) { await doc.system.use(Object.assign(options, { actor: doc.actor })); }
-  }
-
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    if (game.settings.get("teriock", "sortNewPlayerMacros") && !this.folder) {
-      if ((!game.user.isGM && this.constructor.hotbarFolder) || game.users.activeGM) {
-        this.updateSource({ folder: (await this.constructor.ensureHotbarFolder())?.id });
+    const flags = ui.hotbar?.creatingMacroFlags;
+    if (flags) {
+      ui.hotbar.creatingMacroFlags = null;
+      this.updateSource({ flags: { teriock: flags } });
+      if (game.settings.get("teriock", "sortNewPlayerMacros") && !this.folder) {
+        if ((!game.user.isGM && ui.hotbar.hotbarFolder) || game.users.activeGM) {
+          this.updateSource({ folder: (await ui.hotbar.ensureHotbarFolder())?.id });
+        }
+      }
+    }
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) { return false; }
+
+    for (const key of ["macroDocumentUuid", "macroHash"]) {
+      if (this.getFlag("teriock", key) && !foundry.utils.hasProperty(changes, `flags.teriock.${key}`)) {
+        foundry.utils.setProperty(changes, `flags.teriock.${key}`, _del);
       }
     }
   }

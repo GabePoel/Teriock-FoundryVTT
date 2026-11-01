@@ -19,6 +19,7 @@ import { default as executions } from "../../src/en/executions.json" with { type
 import { default as expirations } from "../../src/en/expirations.json" with { type: "json" };
 import { default as fields } from "../../src/en/fields.json" with { type: "json" };
 import { default as format } from "../../src/en/format.json" with { type: "json" };
+import { default as hotbar } from "../../src/en/hotbar.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
 import { default as mechanics } from "../../src/en/mechanics.json" with { type: "json" };
 import { default as menus } from "../../src/en/menus.json" with { type: "json" };
@@ -144,6 +145,7 @@ mergeObjects(
   expirations,
   fields,
   format,
+  hotbar,
   macros,
   mechanics,
   menus,
@@ -165,4 +167,6 @@ mergeObjects(
   triggers,
 );
 
-await fs.promises.writeFile(DST, JSON.stringify(sortObject(LANG), null, 2), "utf-8");
+// Write then rename so Foundry's hot reload never reads a partially written file.
+await fs.promises.writeFile(`${DST}.tmp`, JSON.stringify(sortObject(LANG), null, 2), "utf-8");
+await fs.promises.rename(`${DST}.tmp`, DST);

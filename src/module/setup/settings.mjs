@@ -97,6 +97,7 @@ export const menus = {
           confirmStatDiceRerolls: { default: true, scope: "user", type: Boolean },
           confirmSummonsAddToCombat: { default: true, scope: "user", type: Boolean },
           confirmSummonsAddToGroup: { default: true, scope: "user", type: Boolean },
+          showHotbarDropDialog: { default: true, scope: "user", type: Boolean },
           showRollDialogs: { default: true, scope: "user", type: Boolean },
         },
       },

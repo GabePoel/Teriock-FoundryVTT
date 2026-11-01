@@ -395,6 +395,7 @@ export default {
     remove: "ms-close",
     reset: "ms-replay",
     save: "ms-save",
+    search: "ms-search",
     secret: "ms-disabled-visible",
     select: "ms-check-circle",
     settings: "ms-settings",
