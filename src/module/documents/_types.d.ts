@@ -37,6 +37,8 @@ declare global {
      * Store of lazily-computed values cached on an actor.
      */
     export type ActorCache = DocumentCache & {
+      /** Whether the actor's token was last in difficult terrain. */
+      difficultTerrain?: boolean;
       /** Hiding score the actor's tokens were last refreshed with. */
       hiding?: number;
       /** Perceiving score the actor's tokens were last refreshed with. */

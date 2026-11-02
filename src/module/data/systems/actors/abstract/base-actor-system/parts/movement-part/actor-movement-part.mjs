@@ -1,6 +1,6 @@
 import { objectMap } from "../../../../../../../utils/_module.mjs";
 import { terrainsField } from "../../../../../../fields/tools/builders.mjs";
-import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
+import { initialBoolean, initialNumber } from "../../../../../../fields/tools/initializers.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -27,6 +27,7 @@ export default function ActorMovementPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
+        difficultTerrain: initialBoolean(),
         movementSpeed: initialNumber(30),
         speedAdjustments: new fields.SchemaField(
           objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
@@ -36,14 +37,42 @@ export default function ActorMovementPart(Base) {
     }
 
     /**
+     * This actor's active tokens.
+     * @returns {TeriockTokenDocument[]}
+     */
+    #getTokens() {
+      return this.parent.token ? [this.parent.token] : this.parent.getActiveTokens(true, true);
+    }
+
+    /**
      * The types of terrain this actor's tokens are in.
-     * @returns {Set<Teriock.Keys.Terrain>}
+     * @returns {{ difficultTerrain: boolean, terrains: Set<Teriock.Keys.Terrain> }}
      * @remarks This might differ from the actor's terrains because changes could modify it.
      * @category Terrain
      */
     #getTokenTerrains() {
-      const tokens = this.parent.token ? [this.parent.token] : this.parent.getActiveTokens(true, true);
-      return new Set(tokens.flatMap(t => Array.from(t.terrains)));
+      const tokens = this.#getTokens();
+      return {
+        difficultTerrain: tokens.some(t => t.difficultTerrain),
+        terrains: new Set(tokens.flatMap(t => Array.from(t.terrains))),
+      };
+    }
+
+    /**
+     * Speed adjustments that currently apply.
+     * @returns {Set<Teriock.Keys.Movement>}
+     */
+    get activeSpeedAdjustments() {
+      const tokens = this.#getTokens();
+      const actions = new Set(
+        tokens.length ? tokens.map(t => t.movementAction) : [CONFIG.Token.movement.defaultAction],
+      );
+      return new Set(
+        Object.entries(TERIOCK.CONFIG.character.movement).filter(([key, entry]) =>
+          actions.has(entry.movementAction) || this.parent.statuses.has(entry.status)
+          || (key === "difficultTerrain" && this.difficultTerrain)
+        ).map(([key]) => key),
+      );
     }
 
     /**
@@ -51,7 +80,13 @@ export default function ActorMovementPart(Base) {
      * @category Terrain
      */
     checkTerrains() {
-      if (this.#getTokenTerrains().equals(this.parent._cache.terrains ?? new Set())) { return; }
+      const { difficultTerrain, terrains } = this.#getTokenTerrains();
+      if (
+        difficultTerrain === Boolean(this.parent._cache.difficultTerrain)
+        && terrains.equals(this.parent._cache.terrains ?? new Set())
+      ) {
+        return;
+      }
       this.parent.reset();
       this.parent.render();
     }
@@ -98,8 +133,10 @@ export default function ActorMovementPart(Base) {
     prepareBaseData() {
       super.prepareBaseData();
       this.movementSpeed = 30 + 10 * this.attributes.mov.score;
-      this.parent._cache.terrains = this.#getTokenTerrains();
-      for (const t of this.parent._cache.terrains) { this.terrains.add(t); }
+      const { difficultTerrain, terrains } = this.#getTokenTerrains();
+      Object.assign(this.parent._cache, { difficultTerrain, terrains });
+      this.difficultTerrain = difficultTerrain;
+      for (const t of terrains) { this.terrains.add(t); }
     }
 
     /** @inheritDoc */

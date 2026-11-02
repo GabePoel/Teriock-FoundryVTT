@@ -18,9 +18,19 @@
           <div class="teriock-block-display-divider"></div>
           <div class="details-list">
             {{#each TERIOCK.CONFIG.character.movement as |config key|}}
-              <div>
-                {{{ config.label }}}
-              </div>
+              {{#if (lookup @root/activeSpeedAdjustments key)}}
+                <div
+                  class="details-active"
+                  data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.active"}}'
+                  data-tooltip-direction="LEFT"
+                >
+                  {{{ config.label }}}
+                </div>
+              {{else}}
+                <div>
+                  {{{ config.label }}}
+                </div>
+              {{/if}}
               <button
                 id="{{ @root/appId }}-speed-{{ key }}"
                 class='

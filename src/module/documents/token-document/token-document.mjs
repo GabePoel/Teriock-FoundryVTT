@@ -80,6 +80,17 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /**
+   * Whether this is in difficult terrain.
+   * @returns {boolean}
+   * @category Terrain
+   */
+  get difficultTerrain() {
+    return Array.from(this.regions ?? []).some(r =>
+      r.behaviors.some(b => b.type === "terrain" && b.active && b.system.difficultTerrain)
+    );
+  }
+
+  /**
    * The image that should be used to represent this token.
    * @returns {string}
    */
@@ -144,9 +155,8 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     ]);
     const added = new Set();
     for (const region of this.regions ?? []) {
-      if (region.hidden || !this.parent.regions.has(region.id)) { continue; }
       for (const behavior of region.behaviors) {
-        if (behavior.type === "terrain" && !behavior.disabled) {
+        if (behavior.type === "terrain" && behavior.active) {
           behavior.system.removedTerrains.forEach(t => terrains.delete(t));
           behavior.system.terrains.forEach(t => added.add(t));
         }
@@ -177,6 +187,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (this.inCombat && "disposition" in changed) { game.combat.debounceSetup(); }
+    if ("movementAction" in changed) { this.actor?.render(); }
     if (["actorId", "actorLink", "level"].some(k => k in changed)) {
       for (const actor of new Set([game.actors.get(options.previousActorId), this.actor, this.baseActor])) {
         actor?.system.checkTerrains?.();
