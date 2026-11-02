@@ -119,7 +119,8 @@ effects:
           type: changeMovement
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.fly
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.fly
               phase: derived
               priority: 10
               target: Actor
@@ -128,7 +129,8 @@ effects:
           type: changes
         - _id: f025905e157ac261
           changes:
-            - key: system.speedAdjustments.fly
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.fly
               phase: derived
               priority: 10
               target: Actor
@@ -332,7 +334,6 @@ folder: 49f8908883a7d43d
 img: systems/teriock/src/assets/thumbnails/creature/red-khepra-phraint.webp
 name: Red Khepra Phraint
 system:
-  adult: 12
   appearance: >-
     <p>Red khepra phraints look like their @Identifier[creature:green-khepra-phraint]{green kin}, but are smaller and
     have more pronounced wings. Khepra phraints look like sexless insectoid people. They are like scarab beetles, but
@@ -348,7 +349,10 @@ system:
     phraints have become much less common since the loss of their queen during the Second Folding and may even be
     extinct.</p>
   identifier: red-khepra-phraint
-  lifespan: 80
+  lifespan:
+    adulthood: 12
+    enabled: true
+    max: 80
   size:
     value: 2
   transformation:

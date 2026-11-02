@@ -15,12 +15,13 @@ export default class StorageMaxWeightUnitModel extends WeightUnitModel {
   /** @inheritDoc */
   prepareUpdaterContext() {
     const carried = this.parent.storage.weight.value;
-    const format = max => max.unitType === "finite"
-      ? _loc("TERIOCK.FORMAT.outOf", {
-        denominator: max.converted,
-        numerator: (carried / max.conversion).toNearest(TERIOCK.CONST.UNIT_PRECISION),
-      })
-      : String(carried);
+    const format = max =>
+      max.unitType === "finite"
+        ? _loc("TERIOCK.FORMAT.outOf", {
+          denominator: max.converted,
+          numerator: (carried / max.conversion).toNearest(TERIOCK.CONST.UNIT_PRECISION),
+        })
+        : String(carried);
     const context = { ...super.prepareUpdaterContext(), data: format(this), source: format(this.clone()) };
     // Weight carried without a maximum is in pounds
     if (this.unitType !== "finite") {

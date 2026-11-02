@@ -91,13 +91,15 @@ effects:
         - _id: e789ed5e109ebd1a
           activeQualifier: not(@status.down)
           changes:
-            - key: flags.rollData.braceDieSize
+            - applyIfSuppressed: false
+              key: flags.rollData.braceDieSize
               phase: derived
               priority: 10
               target: Actor
               type: override
               value: "10"
-            - key: flags.rollData.improvedBrace
+            - applyIfSuppressed: false
+              key: flags.rollData.improvedBrace
               phase: derived
               priority: 10
               target: Actor
@@ -311,7 +313,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.tradecrafts.blacksmith.score
+            - applyIfSuppressed: false
+              key: system.tradecrafts.blacksmith.score
               phase: derived
               priority: 10
               target: Actor

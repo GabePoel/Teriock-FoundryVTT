@@ -38,7 +38,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -62,12 +63,18 @@ system:
   equipmentType: chest
   identifier: chest
   minStr: 1
-  price: 2
+  price:
+    raw: 2
+    unit: gold
   range:
     long:
       unit: melee
   storage:
     enabled: true
-    maxWeight: 300
-  weight: 70
+    weight:
+      max:
+        raw: 300
+        unit: lb
+  weight:
+    raw: 70
 type: equipment

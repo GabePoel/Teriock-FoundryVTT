@@ -18,13 +18,15 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: setup
               priority: 10
               target: Item
               type: override
               value: "true"
-            - key: system.ammunition.enabled
+            - applyIfSuppressed: false
+              key: system.ammunition.enabled
               phase: setup
               priority: 10
               target: Item
@@ -56,7 +58,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -158,7 +161,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.melee
+            - applyIfSuppressed: false
+              key: system.range.melee
               phase: derived
               priority: 10
               target: Item
@@ -222,7 +226,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -246,12 +251,15 @@ system:
   equipmentType: musket
   identifier: musket
   minStr: -1
-  price: 40
+  price:
+    raw: 40
+    unit: gold
   range:
     long:
       raw: "120"
       unit: ft
     short:
       raw: "40"
-  weight: 10
+  weight:
+    raw: 10
 type: equipment

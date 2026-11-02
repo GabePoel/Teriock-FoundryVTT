@@ -18,13 +18,15 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: setup
               priority: 10
               target: Item
               type: override
               value: "true"
-            - key: system.ammunition.enabled
+            - applyIfSuppressed: false
+              key: system.ammunition.enabled
               phase: setup
               priority: 10
               target: Item
@@ -65,7 +67,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.melee
+            - applyIfSuppressed: false
+              key: system.range.melee
               phase: derived
               priority: 10
               target: Item
@@ -129,7 +132,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -152,7 +156,9 @@ system:
   equipmentType: longbow
   identifier: longbow
   minStr: -1
-  price: 5
+  price:
+    raw: 5
+    unit: gold
   range:
     long:
       raw: "600"
@@ -160,5 +166,6 @@ system:
     short:
       raw: "150"
   style: sniper
-  weight: 2
+  weight:
+    raw: 2
 type: equipment

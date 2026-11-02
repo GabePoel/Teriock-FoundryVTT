@@ -11,19 +11,22 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: token.texture.src
+            - applyIfSuppressed: false
+              key: token.texture.src
               phase: derived
               priority: 30
               target: Actor
               type: override
               value: systems/teriock/src/assets/thumbnails/creature/skeleton.webp
-            - key: token.ring.enabled
+            - applyIfSuppressed: false
+              key: token.ring.enabled
               phase: derived
               priority: 30
               target: Actor
               type: override
               value: "true"
-            - key: token.ring.subject.texture
+            - applyIfSuppressed: false
+              key: token.ring.subject.texture
               phase: derived
               priority: 30
               target: Actor
@@ -130,19 +133,22 @@ effects:
       automations:
         - _id: GcMGu7L9Xwau2FVz
           changes:
-            - key: token.texture.src
+            - applyIfSuppressed: false
+              key: token.texture.src
               phase: derived
               priority: 30
               target: Actor
               type: override
               value: systems/teriock/src/assets/thumbnails/creature/skeleton.webp
-            - key: token.ring.enabled
+            - applyIfSuppressed: false
+              key: token.ring.enabled
               phase: derived
               priority: 30
               target: Actor
               type: override
               value: "true"
-            - key: token.ring.subject.texture
+            - applyIfSuppressed: false
+              key: token.ring.subject.texture
               phase: derived
               priority: 30
               target: Actor
@@ -209,12 +215,15 @@ system:
   identifier: potion-of-bones
   kind: enchanted
   lockedPaths:
-    - system.price
+    - system.price.raw
   needsAttunement: false
   notes: <p>@Embed[equipment:potion-template path=system.notes inline]</p>
-  price: 100
+  price:
+    raw: 100
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 1
+  weight:
+    raw: 1
 type: equipment

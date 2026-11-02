@@ -14,7 +14,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -62,7 +63,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -86,7 +88,9 @@ system:
   equipmentType: javelin
   identifier: javelin
   minStr: -2
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       raw: "60"
@@ -94,5 +98,6 @@ system:
     short:
       raw: "20"
   style: javelinier
-  weight: 2
+  weight:
+    raw: 2
 type: equipment

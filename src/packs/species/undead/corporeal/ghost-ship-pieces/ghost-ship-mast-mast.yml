@@ -16,7 +16,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.piercing.raw
+            - applyIfSuppressed: false
+              key: system.piercing.raw
               phase: derived
               priority: 10
               target: Item
@@ -48,7 +49,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -71,7 +73,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -97,5 +100,6 @@ system:
   range:
     long:
       unit: melee
-  weight: 500
+  weight:
+    raw: 500
 type: equipment

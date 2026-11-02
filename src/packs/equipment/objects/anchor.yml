@@ -23,7 +23,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -46,7 +47,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.piercing.raw
+            - applyIfSuppressed: false
+              key: system.piercing.raw
               phase: derived
               priority: 10
               target: Item
@@ -70,9 +72,12 @@ system:
   equipmentType: anchor
   identifier: anchor
   minStr: 4
-  price: 20
+  price:
+    raw: 20
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 1500
+  weight:
+    raw: 1500
 type: equipment

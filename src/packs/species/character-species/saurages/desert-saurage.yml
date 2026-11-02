@@ -249,7 +249,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.tradecrafts.hunter.score
+            - applyIfSuppressed: false
+              key: system.tradecrafts.hunter.score
               phase: derived
               priority: 10
               target: Actor
@@ -286,7 +287,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.tradecrafts.tracker.score
+            - applyIfSuppressed: false
+              key: system.tradecrafts.tracker.score
               phase: derived
               priority: 10
               target: Actor
@@ -324,7 +326,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.difficultTerrain
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.difficultTerrain
               phase: derived
               priority: 10
               target: Actor
@@ -384,7 +387,6 @@ folder: c8c8729e59b04e1a
 img: systems/teriock/src/assets/thumbnails/creature/desert-saurage.webp
 name: Desert Saurage
 system:
-  adult: 12
   appearance: >-
     <p>Saurages look like humanoid lizard men and are native to the southern deserts in mainland Teriock. Desert
     saurages are about human sized and covered in scales, but have no tails.</p>
@@ -393,7 +395,10 @@ system:
     have trouble adjusting to cities and guilds.</p><p>@Embed[Compendium.teriock.tables.RollTable.5cabb085721fa30c
     rollable]</p>
   identifier: desert-saurage
-  lifespan: 75
+  lifespan:
+    adulthood: 12
+    enabled: true
+    max: 75
   traits:
     - humanoid
   transformation:

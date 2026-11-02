@@ -23,7 +23,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -44,9 +45,12 @@ system:
   equipmentType: wheelbarrow
   identifier: wheelbarrow
   minStr: 0
-  price: 2
+  price:
+    raw: 2
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 70
+  weight:
+    raw: 70
 type: equipment

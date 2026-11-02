@@ -29,7 +29,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -77,7 +78,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -101,7 +103,9 @@ system:
     - swords
   equipmentType: dagger
   identifier: dagger
-  price: 4
+  price:
+    raw: 4
+    unit: gold
   range:
     long:
       raw: "60"
@@ -109,5 +113,6 @@ system:
     short:
       raw: "20"
   style: knife
-  weight: 2
+  weight:
+    raw: 2
 type: equipment

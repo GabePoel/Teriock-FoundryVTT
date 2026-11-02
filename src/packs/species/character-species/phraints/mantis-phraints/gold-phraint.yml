@@ -11,7 +11,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.swim
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.swim
               phase: derived
               priority: 20
               target: Actor
@@ -82,13 +83,15 @@ effects:
           type: changeMovement
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.leapVertical
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapVertical
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
               value: "1"
-            - key: system.speedAdjustments.leapHorizontal
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapHorizontal
               phase: derived
               priority: 10
               target: Actor
@@ -97,13 +100,15 @@ effects:
           type: changes
         - _id: f025905e157ac261
           changes:
-            - key: system.speedAdjustments.leapVertical
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapVertical
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
               value: "2"
-            - key: system.speedAdjustments.leapHorizontal
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapHorizontal
               phase: derived
               priority: 10
               target: Actor
@@ -280,7 +285,6 @@ folder: 08634b691f84308c
 img: systems/teriock/src/assets/thumbnails/creature/gold-phraint.webp
 name: Gold Phraint
 system:
-  adult: 12
   appearance: >-
     <p>Phraints look like sexless insectoid people. They are like praying mantises, but with only two arms and two
     legs.</p>
@@ -291,7 +295,10 @@ system:
     @Identifier[creature:red-phraint]{red phraints} which must go mage and only resist fear. Phraint Queen's are gold
     and extremely rare and the only type that can show emotion (no fear protection).</p>
   identifier: gold-phraint
-  lifespan: 100
+  lifespan:
+    adulthood: 12
+    enabled: true
+    max: 100
   transformation:
     img: systems/teriock/src/assets/thumbnails/creature/gold-phraint.webp
     ring: true

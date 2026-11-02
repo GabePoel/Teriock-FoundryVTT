@@ -14,7 +14,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -37,7 +38,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -101,7 +103,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -125,7 +128,9 @@ system:
   equipmentType: spear
   identifier: spear
   minStr: 0
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       raw: "60"
@@ -133,5 +138,6 @@ system:
     short:
       raw: "20"
   style: phalanx
-  weight: 3
+  weight:
+    raw: 3
 type: equipment

@@ -29,7 +29,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -93,7 +94,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -117,7 +119,9 @@ system:
     - impact-weapons
   equipmentType: throwing-axe
   identifier: throwing-axe
-  price: 4
+  price:
+    raw: 4
+    unit: gold
   range:
     long:
       raw: "60"
@@ -125,5 +129,6 @@ system:
     short:
       raw: "20"
   style: gladiator
-  weight: 2
+  weight:
+    raw: 2
 type: equipment

@@ -23,7 +23,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -48,7 +49,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.melee
+            - applyIfSuppressed: false
+              key: system.range.melee
               phase: derived
               priority: 10
               target: Item
@@ -71,7 +73,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -94,7 +97,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.piercing.raw
+            - applyIfSuppressed: false
+              key: system.piercing.raw
               phase: derived
               priority: 10
               target: Item
@@ -142,7 +146,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -168,7 +173,8 @@ system:
   equipmentType: boulder
   identifier: boulder
   minStr: 3
-  price: 0
+  price:
+    unit: gold
   range:
     long:
       raw: "@str * 15"
@@ -176,5 +182,6 @@ system:
     short:
       raw: "@str * 5"
   style: gladiator
-  weight: 75
+  weight:
+    raw: 75
 type: equipment

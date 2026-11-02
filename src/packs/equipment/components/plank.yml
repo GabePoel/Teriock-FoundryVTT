@@ -29,7 +29,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -50,9 +51,12 @@ system:
   equipmentType: plank
   identifier: plank
   minStr: -1
-  price: 0.5
+  price:
+    raw: 5
+    unit: silver
   range:
     long:
       unit: melee
-  weight: 7
+  weight:
+    raw: 7
 type: equipment

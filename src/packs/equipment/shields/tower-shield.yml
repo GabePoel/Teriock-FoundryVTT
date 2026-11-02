@@ -53,7 +53,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -93,9 +94,12 @@ system:
   equipmentType: tower-shield
   identifier: tower-shield
   minStr: -1
-  price: 6
+  price:
+    raw: 6
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 20
+  weight:
+    raw: 20
 type: equipment

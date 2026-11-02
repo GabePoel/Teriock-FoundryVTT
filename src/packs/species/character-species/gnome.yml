@@ -175,7 +175,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.deathBag.pull
+            - applyIfSuppressed: false
+              key: system.deathBag.pull
               phase: derived
               priority: 5
               target: Actor
@@ -235,12 +236,14 @@ folder: 2703b16cbd907cde
 img: systems/teriock/src/assets/thumbnails/creature/gnome.webp
 name: Gnome
 system:
-  adult: 100
   appearance: <p>Often resemble tiny @Identifier[creature:dwarf]{dwarves}.</p>
   description: >-
     <p>[[lookup name]]s are very paranoid and avoid most other @Pack[teriock.creatures]{species}. They are considered to
     be incredibly greedy.</p>
   identifier: gnome
+  lifespan:
+    adulthood: 100
+    enabled: true
   size:
     value: 0.5
   statDice:

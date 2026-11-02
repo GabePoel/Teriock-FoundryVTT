@@ -38,7 +38,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -61,12 +62,18 @@ system:
   equipmentType: cauldron
   identifier: cauldron
   minStr: 3
-  price: 20
+  price:
+    raw: 20
+    unit: gold
   range:
     long:
       unit: melee
   storage:
     enabled: true
-    maxWeight: 500
-  weight: 500
+    weight:
+      max:
+        raw: 500
+        unit: lb
+  weight:
+    raw: 500
 type: equipment

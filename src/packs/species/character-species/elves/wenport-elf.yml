@@ -14,7 +14,8 @@ effects:
           type: changeMovement
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.climb
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.climb
               phase: derived
               priority: 10
               target: Actor
@@ -23,7 +24,8 @@ effects:
           type: changes
         - _id: f025905e157ac261
           changes:
-            - key: system.speedAdjustments.climb
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.climb
               phase: derived
               priority: 10
               target: Actor
@@ -353,7 +355,8 @@ effects:
           type: changeMovement
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.swim
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.swim
               phase: derived
               priority: 10
               target: Actor
@@ -391,7 +394,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.deathBag.pull
+            - applyIfSuppressed: false
+              key: system.deathBag.pull
               phase: derived
               priority: 5
               target: Actor
@@ -422,7 +426,6 @@ folder: de1d9513b900de6e
 img: systems/teriock/src/assets/thumbnails/creature/wenport-elf.webp
 name: Wenport Elf
 system:
-  adult: 100
   appearance: >-
     <p>Small @UUID[Compendium.teriock.tables.RollTable.de1d9513b900de6e]{elves} the size of
     @Identifier[creature:halfling]{halflings}.</p>
@@ -432,6 +435,9 @@ system:
     are also known for their culture's fine cuisine. Wenport elves also gain either
     @Identifier[ability:talented-mariner]{Talented Mariner} or @Identifier[ability:talented-chef]{Talented Chef}.</p>
   identifier: wenport-elf
+  lifespan:
+    adulthood: 100
+    enabled: true
   size:
     value: 1
   traits:

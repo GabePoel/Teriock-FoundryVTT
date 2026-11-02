@@ -409,7 +409,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.tradecrafts.tracker.score
+            - applyIfSuppressed: false
+              key: system.tradecrafts.tracker.score
               phase: derived
               priority: 10
               target: Actor
@@ -460,7 +461,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.difficultTerrain
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.difficultTerrain
               phase: derived
               priority: 10
               target: Actor
@@ -492,7 +494,6 @@ folder: 10c541c05a2efaea
 img: systems/teriock/src/assets/thumbnails/creature/gold-joro.webp
 name: Gold Joro
 system:
-  adult: 12
   appearance: >-
     <p>Like @Identifier[creature:common-ork]{common orks} with more @Identifier[creature:human]{human} features, Gold
     skin, and Gold eyes.</p>
@@ -503,7 +504,10 @@ system:
     Joro typically become connected to some totem animal during their childhood and, upon reaching adulthood, are able
     to tap into the powers of this animal.</p>
   identifier: gold-joro
-  lifespan: 60
+  lifespan:
+    adulthood: 12
+    enabled: true
+    max: 60
   traits:
     - humanoid
   transformation:

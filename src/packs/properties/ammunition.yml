@@ -13,13 +13,15 @@ system:
   automations:
     - _id: parameterChanges
       changes:
-        - key: system.range.ranged
+        - applyIfSuppressed: false
+          key: system.range.ranged
           phase: setup
           priority: 10
           target: Item
           type: override
           value: "true"
-        - key: system.ammunition.enabled
+        - applyIfSuppressed: false
+          key: system.ammunition.enabled
           phase: setup
           priority: 10
           target: Item

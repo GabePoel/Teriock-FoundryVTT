@@ -211,7 +211,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.deathBag.pull
+            - applyIfSuppressed: false
+              key: system.deathBag.pull
               phase: derived
               priority: 5
               target: Actor
@@ -242,9 +243,11 @@ folder: de1d9513b900de6e
 img: systems/teriock/src/assets/thumbnails/creature/elf.webp
 name: Elf
 system:
-  adult: 100
   appearance: <p>Lithe or willowy build with pointed ears and four fingers and toes.</p>
   identifier: elf
+  lifespan:
+    adulthood: 100
+    enabled: true
   traits:
     - humanoid
   transformation:

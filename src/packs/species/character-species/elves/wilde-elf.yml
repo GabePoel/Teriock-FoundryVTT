@@ -289,7 +289,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.deathBag.pull
+            - applyIfSuppressed: false
+              key: system.deathBag.pull
               phase: derived
               priority: 5
               target: Actor
@@ -320,7 +321,6 @@ folder: de1d9513b900de6e
 img: systems/teriock/src/assets/thumbnails/creature/wilde-elf.webp
 name: Wilde Elf
 system:
-  adult: 100
   appearance: <p>Tall @UUID[Compendium.teriock.tables.RollTable.de1d9513b900de6e]{elves} with a greenish tint to their skin.</p>
   br: 11
   description: >-
@@ -329,6 +329,9 @@ system:
     worship nature in some form.</p>
   identifier: wilde-elf
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:nature-mage]{Nature Mage}.</p>
+  lifespan:
+    adulthood: 100
+    enabled: true
   size:
     value: 4
   traits:

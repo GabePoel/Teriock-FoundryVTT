@@ -38,7 +38,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -61,12 +62,18 @@ system:
   equipmentType: crate
   identifier: crate
   minStr: 2
-  price: 2
+  price:
+    raw: 2
+    unit: gold
   range:
     long:
       unit: melee
   storage:
     enabled: true
-    maxWeight: 1000
-  weight: 150
+    weight:
+      max:
+        raw: 1000
+        unit: lb
+  weight:
+    raw: 150
 type: equipment

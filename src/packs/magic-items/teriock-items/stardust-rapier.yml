@@ -98,19 +98,22 @@ effects:
       automations:
         - _id: XAxhYA656zk0o2Hu
           changes:
-            - key: system.av.bonus
+            - applyIfSuppressed: false
+              key: system.av.bonus
               phase: derived
               priority: 10
               target: Item
               type: upgrade
               value: "1"
-            - key: system.damage.types
+            - applyIfSuppressed: false
+              key: system.damage.types
               phase: derived
               priority: 10
               target: Item
               type: subtract
               value: silver
-            - key: system.damage
+            - applyIfSuppressed: false
+              key: system.damage
               phase: derived
               priority: 10
               target: Item
@@ -287,19 +290,22 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.av.bonus
+            - applyIfSuppressed: false
+              key: system.av.bonus
               phase: derived
               priority: 10
               target: Item
               type: upgrade
               value: "1"
-            - key: system.weight
+            - applyIfSuppressed: false
+              key: system.weight
               phase: derived
               priority: 10
               target: Item
               type: multiply
               value: "0.5"
-            - key: system.minStr
+            - applyIfSuppressed: false
+              key: system.minStr
               phase: derived
               priority: 10
               target: Item
@@ -369,7 +375,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.av.bonus
+            - applyIfSuppressed: false
+              key: system.av.bonus
               phase: derived
               priority: 10
               target: Item
@@ -397,7 +404,7 @@ system:
   identifier: stardust-rapier
   kind: magic
   lockedPaths:
-    - system.price
+    - system.price.raw
   minStr: -2
   range:
     long:
@@ -405,5 +412,6 @@ system:
   style: swordsman
   tier:
     raw: "3"
-  weight: 3
+  weight:
+    raw: 3
 type: equipment

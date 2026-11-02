@@ -23,7 +23,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -45,9 +46,12 @@ system:
   equipmentType: rudder
   identifier: rudder
   minStr: 2
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 80
+  weight:
+    raw: 80
 type: equipment

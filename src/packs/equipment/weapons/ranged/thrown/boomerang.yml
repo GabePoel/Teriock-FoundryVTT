@@ -16,7 +16,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.melee
+            - applyIfSuppressed: false
+              key: system.range.melee
               phase: derived
               priority: 10
               target: Item
@@ -68,7 +69,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -116,7 +118,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -137,7 +140,9 @@ system:
     - specialty-weapons
   equipmentType: boomerang
   identifier: boomerang
-  price: 5
+  price:
+    raw: 5
+    unit: gold
   range:
     long:
       raw: "60"
@@ -145,5 +150,6 @@ system:
     short:
       raw: "20"
   style: savage
-  weight: 2
+  weight:
+    raw: 2
 type: equipment

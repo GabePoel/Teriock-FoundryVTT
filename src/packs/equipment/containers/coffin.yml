@@ -38,7 +38,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -60,11 +61,14 @@ system:
   equipmentType: coffin
   identifier: coffin
   minStr: 1
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       unit: melee
   storage:
     enabled: true
-  weight: 50
+  weight:
+    raw: 50
 type: equipment

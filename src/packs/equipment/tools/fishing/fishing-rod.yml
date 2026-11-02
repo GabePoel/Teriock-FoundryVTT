@@ -14,7 +14,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -32,9 +33,12 @@ system:
     - tools
   equipmentType: fishing-rod
   identifier: fishing-rod
-  price: 1
+  price:
+    raw: 1
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 1
+  weight:
+    raw: 1
 type: equipment

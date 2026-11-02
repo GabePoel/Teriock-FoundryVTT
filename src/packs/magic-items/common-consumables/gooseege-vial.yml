@@ -11,7 +11,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.size.value
+            - applyIfSuppressed: false
+              key: system.size.value
               phase: derived
               priority: 10
               target: Actor
@@ -87,7 +88,8 @@ effects:
       automations:
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.size.value
+            - applyIfSuppressed: false
+              key: system.size.value
               phase: derived
               priority: 10
               target: Actor
@@ -159,12 +161,15 @@ system:
   identifier: gooseege-vial
   kind: enchanted
   lockedPaths:
-    - system.price
+    - system.price.raw
   needsAttunement: false
   notes: <p>@Embed[equipment:potion-template path=system.notes inline]</p>
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 1
+  weight:
+    raw: 1
 type: equipment

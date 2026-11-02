@@ -18,13 +18,15 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: setup
               priority: 10
               target: Item
               type: override
               value: "true"
-            - key: system.ammunition.enabled
+            - applyIfSuppressed: false
+              key: system.ammunition.enabled
               phase: setup
               priority: 10
               target: Item
@@ -80,7 +82,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.melee
+            - applyIfSuppressed: false
+              key: system.range.melee
               phase: derived
               priority: 10
               target: Item
@@ -161,7 +164,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -187,12 +191,15 @@ system:
   equipmentType: bowshield
   identifier: bowshield
   minStr: -1
-  price: 30
+  price:
+    raw: 30
+    unit: gold
   range:
     long:
       raw: "400"
       unit: ft
     short:
       raw: "100"
-  weight: 14
+  weight:
+    raw: 14
 type: equipment

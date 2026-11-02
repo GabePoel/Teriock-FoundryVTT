@@ -38,7 +38,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -61,7 +62,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -116,10 +118,13 @@ system:
   equipmentType: claymore
   identifier: claymore
   minStr: 1
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       unit: melee
   style: great-swordsman
-  weight: 6
+  weight:
+    raw: 6
 type: equipment

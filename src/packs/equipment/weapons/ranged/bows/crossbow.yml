@@ -18,13 +18,15 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: setup
               priority: 10
               target: Item
               type: override
               value: "true"
-            - key: system.ammunition.enabled
+            - applyIfSuppressed: false
+              key: system.ammunition.enabled
               phase: setup
               priority: 10
               target: Item
@@ -65,7 +67,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.melee
+            - applyIfSuppressed: false
+              key: system.range.melee
               phase: derived
               priority: 10
               target: Item
@@ -129,7 +132,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -152,7 +156,9 @@ system:
   equipmentType: crossbow
   identifier: crossbow
   minStr: -2
-  price: 8
+  price:
+    raw: 8
+    unit: gold
   range:
     long:
       raw: "320"
@@ -160,5 +166,6 @@ system:
     short:
       raw: "80"
   style: sniper
-  weight: 5
+  weight:
+    raw: 5
 type: equipment

@@ -40,7 +40,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -96,10 +97,13 @@ system:
   equipmentType: battle-staff
   identifier: battle-staff
   minStr: 0
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       unit: melee
   style: blunt-force
-  weight: 4
+  weight:
+    raw: 4
 type: equipment

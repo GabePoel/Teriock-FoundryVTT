@@ -23,7 +23,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -47,9 +48,12 @@ system:
   equipmentType: anvil
   identifier: anvil
   minStr: 3
-  price: 40
+  price:
+    raw: 40
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 200
+  weight:
+    raw: 200
 type: equipment

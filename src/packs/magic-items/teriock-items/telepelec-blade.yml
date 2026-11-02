@@ -169,7 +169,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -217,7 +218,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -244,7 +246,7 @@ system:
   identifier: telepelec-blade
   kind: magic
   lockedPaths:
-    - system.price
+    - system.price.raw
   notes: >-
     <p>Made only in the Far East by a band of nomadic halflings, these [[lookup system.equipmentType style=lc]]s are
     quite popular throughout Teriock due to their lack of flaws! How the halflings made these is a lost art and thus
@@ -258,5 +260,6 @@ system:
   style: knife
   tier:
     raw: "2"
-  weight: 2
+  weight:
+    raw: 2
 type: equipment

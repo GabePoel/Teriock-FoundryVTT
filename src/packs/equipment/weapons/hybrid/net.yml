@@ -14,7 +14,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.piercing.raw
+            - applyIfSuppressed: false
+              key: system.piercing.raw
               phase: derived
               priority: 10
               target: Item
@@ -60,7 +61,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -108,7 +110,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.ranged
+            - applyIfSuppressed: false
+              key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
@@ -131,7 +134,9 @@ system:
     - supplies
   equipmentType: net
   identifier: net
-  price: 1
+  price:
+    raw: 1
+    unit: gold
   range:
     long:
       raw: "60"
@@ -139,5 +144,6 @@ system:
     short:
       raw: "20"
   style: wraparound
-  weight: 3
+  weight:
+    raw: 3
 type: equipment

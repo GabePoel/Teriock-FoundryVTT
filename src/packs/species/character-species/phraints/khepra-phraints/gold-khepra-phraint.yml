@@ -114,7 +114,8 @@ effects:
           type: changeMovement
         - _id: e789ed5e109ebd1a
           changes:
-            - key: system.speedAdjustments.fly
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.fly
               phase: derived
               priority: 10
               target: Actor
@@ -123,7 +124,8 @@ effects:
           type: changes
         - _id: f025905e157ac261
           changes:
-            - key: system.speedAdjustments.fly
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.fly
               phase: derived
               priority: 10
               target: Actor
@@ -325,7 +327,6 @@ folder: 49f8908883a7d43d
 img: systems/teriock/src/assets/thumbnails/creature/gold-khepra-phraint.webp
 name: Gold Khepra Phraint
 system:
-  adult: 12
   appearance: >-
     <p>Gold khepra phraints look like their @Identifier[creature:red-khepra-phraint]{red kin}, but are smaller. Khepra
     phraints look like sexless insectoid people. They are like scarab beetles, but with only two arms and two legs. They
@@ -338,7 +339,10 @@ system:
     mage. Phraint Queen's are gold and extremely rare and the only type that can show emotion. Khepra phraints have
     become much less common since the loss of their queen during the Second Folding and may even be extinct.</p>
   identifier: gold-khepra-phraint
-  lifespan: 80
+  lifespan:
+    adulthood: 12
+    enabled: true
+    max: 80
   size:
     value: 2
   transformation:

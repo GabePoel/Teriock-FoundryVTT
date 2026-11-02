@@ -23,7 +23,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.encumbranceLevel
+            - applyIfSuppressed: false
+              key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
@@ -79,10 +80,13 @@ system:
     - supplies
   equipmentType: sail
   identifier: sail
-  price: 10
+  price:
+    raw: 10
+    unit: gold
   range:
     long:
       unit: melee
   style: wraparound
-  weight: 30
+  weight:
+    raw: 30
 type: equipment

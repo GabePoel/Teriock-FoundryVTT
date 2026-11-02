@@ -29,7 +29,8 @@ effects:
       automations:
         - _id: parameterChanges
           changes:
-            - key: system.range.long.raw
+            - applyIfSuppressed: false
+              key: system.range.long.raw
               phase: derived
               priority: 10
               target: Item
@@ -50,9 +51,12 @@ system:
   equipmentType: oar
   identifier: oar
   minStr: -1
-  price: 1
+  price:
+    raw: 1
+    unit: gold
   range:
     long:
       unit: melee
-  weight: 10
+  weight:
+    raw: 10
 type: equipment
