@@ -19,7 +19,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.PSEUDOS.Base"];
 
   /**
-   * @inheritDoc.
+   * @inheritDoc
    * @type {Teriock.Metadata.PseudoDocumentMetadata}
    */
   static metadata = mergeMetadata(super.metadata, {
@@ -316,7 +316,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   }
 
   /**
-   * Metadata.
+   * @inheritDoc
    * @returns {Teriock.Metadata.PseudoDocumentMetadata}
    */
   get metadata() {

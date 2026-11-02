@@ -289,7 +289,10 @@ export default function BaseSystemMixin(Base) {
       return false;
     }
 
-    /** @returns {Teriock.Metadata.SystemMetadata} */
+    /**
+     * @inheritDoc
+     * @returns {Teriock.Metadata.SystemMetadata}
+     */
     get metadata() {
       return this.constructor.metadata;
     }

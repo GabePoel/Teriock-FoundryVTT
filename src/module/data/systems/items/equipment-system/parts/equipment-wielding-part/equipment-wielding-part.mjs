@@ -142,7 +142,7 @@ export default function EquipmentWieldingPart(Base) {
       await this.parent.update({ "system.equipped": true });
     }
 
-    /** @inheritdoc */
+    /** @inheritDoc */
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",

@@ -135,7 +135,7 @@ export default function EquipmentSuppressionPart(Base) {
       await this.parent.toggleChild("property:destroyed", { active: true });
     }
 
-    /** @inheritdoc */
+    /** @inheritDoc */
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "control",

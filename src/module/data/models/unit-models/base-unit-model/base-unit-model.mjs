@@ -19,7 +19,7 @@ export default class BaseUnitModel extends BaseDataModel {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseUnit"];
 
   /**
-   * Data model metadata.
+   * @inheritDoc
    * @type {Teriock.Metadata.UnitMetadata}
    */
   static metadata = mergeMetadata(super.metadata, {
@@ -206,7 +206,7 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Data model metadata.
+   * @inheritDoc
    * @returns {Teriock.Metadata.UnitMetadata}
    */
   get metadata() {

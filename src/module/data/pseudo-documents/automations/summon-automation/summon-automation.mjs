@@ -23,7 +23,7 @@ export default class SummonAutomation
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { tags: { interactInExecution: true }, type: "summon" });
 
   /** @inheritDoc */

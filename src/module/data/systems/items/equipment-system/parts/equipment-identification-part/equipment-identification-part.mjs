@@ -154,7 +154,7 @@ export default function EquipmentIdentificationPart(Base) {
       return super.attune();
     }
 
-    /** @inheritdoc */
+    /** @inheritDoc */
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "usage",

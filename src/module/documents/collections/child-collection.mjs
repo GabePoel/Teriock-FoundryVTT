@@ -5,7 +5,7 @@ import TypeCollection from "./type-collection.mjs";
  * A subclass of TypeCollection designed to handle multiple document classes at the same time.
  */
 export default class ChildCollection extends TypeCollection {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { validate: true });
 
   /**

@@ -22,7 +22,7 @@ export default class TargetAutomation extends BaseAutomation {
     "REGION",
   ];
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { tags: { ability: true }, type: "target" });
 
   /**

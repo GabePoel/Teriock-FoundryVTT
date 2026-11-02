@@ -7,7 +7,7 @@ import TypeCollection from "./type-collection.mjs";
  * @category Hierarchy
  */
 export default class SubCollection extends TypeCollection {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { validate: true });
 
   /** @inheritDoc */
