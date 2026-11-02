@@ -4,6 +4,8 @@ img: systems/teriock/src/assets/thumbnails/ability/tangle-zone.webp
 name: Tangle Zone
 system:
   automations:
+    - _id: HrsTSy1REh3dsvIo
+      type: cover
     - _id: 72ce567009179bea
       duration:
         raw: "@h"
@@ -11,27 +13,20 @@ system:
       heighten:
         - 1
       type: duration
-    - _id: GQPhZDxecpLrpjrD
-      attribute: str
-      bonus: "0"
-      threshold: 10 + @c + @h
-      type: feat
     - _id: kIuEh8irSpHGyM6y
+      applyDocuments: true
       attachToToken: false
       deleteOnTurnChange: false
       expandWithToken: false
+      globalIdentifiers:
+        - consequence:tangle-zone-area-effect
       radius: "30"
       restriction:
         enabled: true
+      setTerrain: true
+      terrain:
+        difficultTerrain: true
       type: region
-    - _id: 29b275994cf9f5b1
-      command: damage
-      formula: 1d4[vine]
-      type: roll
-    - _id: bda27199d76e509a
-      relation: apply
-      status: snared
-      type: status
   costs:
     primary:
       mp:
@@ -48,10 +43,6 @@ system:
     slow:
       raw: "10"
       unit: minute
-  expirations:
-    - _id: 66672059c7a29a30
-      method: roll
-      type: combat
   heightened: >-
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
     @Identifier[core:duration]{duration} of this effect increases by 24 hours.</p>

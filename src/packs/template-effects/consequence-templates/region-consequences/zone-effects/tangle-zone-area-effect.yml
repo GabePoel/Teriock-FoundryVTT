@@ -4,13 +4,37 @@ description: <p>@Embed[ability:tangle-zone path=system.overview.base inline]</p>
 folder: UygwjuBE3MKG5S6W
 img: systems/teriock/src/assets/thumbnails/ability/tangle-zone.webp
 name: Tangle Zone Area Effect
-showIcon: 0
 system:
+  automations:
+    - _id: cUjhFjD2GzX4Dh9A
+      constructionNodes:
+        FB68J6HoGwfPaMKJ:
+          _id: FB68J6HoGwfPaMKJ
+          all: false
+          auto: true
+          competence:
+            raw: 0
+          globalIdentifiers:
+            - consequence:tangle-zone-snare-effect
+          multi: false
+          overrideData: false
+          type: base
+      triggers:
+        - movement
+      type: addDocuments
+    - _id: 0csuZKENAmxQs1UG
+      attribute: str
+      triggers:
+        - movement
+      type: feat
+    - _id: PzpiSgs5AwcNZLKl
+      command: damage
+      formula: 1d4[vine]
+      triggers:
+        - movement
+      type: roll
   elements:
     - nature
-  expirations:
-    - _id: 9b537607de794f5d
-      type: combat
   identifier: tangle-zone-area-effect
   powerSources:
     - magical

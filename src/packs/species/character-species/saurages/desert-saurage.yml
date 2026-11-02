@@ -9,22 +9,26 @@ effects:
     name: Desert Active
     system:
       automations:
-        - _id: Pj8g5QPHAl37tEBm
-          attachToEffect: false
-          constructionNodes:
-            bf8fc7d119f4c692:
-              _id: bf8fc7d119f4c692
-              all: false
-              auto: true
-              competence:
-                raw: 0
-              globalIdentifiers:
-                - consequence:active
-                - consequence:inactive
-              multi: true
-              overrideData: false
-              type: base
-          type: addDocuments
+        - _id: q2cvAnxqjuuwd0Fz
+          activeQualifier: "@terrain.desert"
+          changes:
+            - applyIfSuppressed: false
+              key: system.attributes.mov.score
+              phase: derived
+              target: Actor
+              type: add
+              value: "1"
+          type: changes
+        - _id: 3Z7dxl0vKGCzRAqq
+          activeQualifier: not(@terrain.desert)
+          changes:
+            - applyIfSuppressed: false
+              key: system.attributes.mov.score
+              phase: derived
+              target: Actor
+              type: subtract
+              value: "1"
+          type: changes
       competence:
         raw: 1
       delivery: self
@@ -51,7 +55,7 @@ effects:
     _key: "!items.effects!3d379e3b04d64b7a.2HnOS1Zzx1duqZU7"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.afb836aee9c366cf
-    img: systems/teriock/src/assets/thumbnails/ability/desert-native.webp
+    img: icons/environment/wilderness/terrain-rocks-brown.webp
     name: Desert Native
     system:
       competence:
@@ -66,8 +70,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @Identifier[ability:desert-resilience]{Desert Resilience} and
-          @Identifier[keyword:limited]{Limited} @Identifier[ability:agile]{Agile}.</p>
+          <p>You gain @Identifier[ability:desert-resilience]{Desert Resilience}. You also move through difficult desert
+          terrain at @Identifier[core:movement-speed]{normal speed}.</p>
       powerSources:
         - martial
       range:
@@ -308,47 +312,6 @@ effects:
       maneuver: passive
       overview:
         base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:tracker]{tracker}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: 3fiAf7BnTNcjcr4P
-    _key: "!items.effects!3d379e3b04d64b7a.3fiAf7BnTNcjcr4P"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-    img: systems/teriock/src/assets/thumbnails/ability/agile.webp
-    name: Agile
-    system:
-      _sup: 2HnOS1Zzx1duqZU7
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - applyIfSuppressed: false
-              key: system.speedAdjustments.difficultTerrain
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "3"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-      identifier: agile
-      interaction: manifest
-      limitation: <p>Desert terrain only.</p>
-      maneuver: passive
-      overview:
-        base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
       powerSources:
         - martial
       range:

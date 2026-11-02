@@ -4,22 +4,26 @@ img: systems/teriock/src/assets/thumbnails/ability/swamp-active.webp
 name: Swamp Active
 system:
   automations:
-    - _id: V19G5gnXi3mShNEw
-      attachToEffect: false
-      constructionNodes:
-        5ab36f8c606c903b:
-          _id: 5ab36f8c606c903b
-          all: false
-          auto: true
-          competence:
-            raw: 0
-          globalIdentifiers:
-            - consequence:active
-            - consequence:inactive
-          multi: true
-          overrideData: false
-          type: base
-      type: addDocuments
+    - _id: mDPmuEul74FQxD1D
+      activeQualifier: "@terrain.swamp"
+      changes:
+        - applyIfSuppressed: false
+          key: system.attributes.mov.score
+          phase: derived
+          target: Actor
+          type: add
+          value: "1"
+      type: changes
+    - _id: 9KeE1dTy0zgk1v0L
+      activeQualifier: not(@terrain.swamp)
+      changes:
+        - applyIfSuppressed: false
+          key: system.attributes.mov.score
+          phase: derived
+          target: Actor
+          type: subtract
+          value: "1"
+      type: changes
   delivery: self
   duration:
     unit: unlimited

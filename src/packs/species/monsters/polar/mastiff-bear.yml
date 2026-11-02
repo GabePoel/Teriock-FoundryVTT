@@ -443,8 +443,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @Identifier[ability:arctic-resilience]{Arctic Resilience} and
-          @Identifier[keyword:limited]{Limited} @Identifier[ability:agile]{Agile}.</p>
+          <p>You gain @Identifier[ability:frozen-resilience]{Frozen Resilience}. You also move through difficult frozen
+          terrain at @Identifier[core:movement-speed]{normal speed}.</p>
       powerSources:
         - martial
       range:
@@ -491,47 +491,6 @@ effects:
         unit: self
       skill: true
       standard: true
-      targets:
-        - self
-    type: ability
-  - _id: 2gyl6Dnkuy4Xxfc9
-    _key: "!items.effects!bbd69df11325f89b.2gyl6Dnkuy4Xxfc9"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
-    img: systems/teriock/src/assets/thumbnails/ability/agile.webp
-    name: Agile
-    system:
-      _sup: XpYeBmtuMNu3FWOD
-      automations:
-        - _id: e789ed5e109ebd1a
-          changes:
-            - applyIfSuppressed: false
-              key: system.speedAdjustments.difficultTerrain
-              phase: derived
-              priority: 10
-              target: Actor
-              type: upgrade
-              value: "3"
-          type: changes
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - movement
-      executionTime:
-        base: passive
-      identifier: agile
-      interaction: manifest
-      limitation: <p>Arctic terrain only.</p>
-      maneuver: passive
-      overview:
-        base: <p>You walk through difficult terrain at @Identifier[core:movement-speed]{normal speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
       targets:
         - self
     type: ability
@@ -686,38 +645,6 @@ effects:
         proficient: <p>The OP of words you know is 1 + (3 × @Identifier[core:proficiency-bonus]{P}).</p>
       powerSources:
         - magical
-      range:
-        unit: self
-      targets:
-        - self
-    type: ability
-  - _id: An92YGeE5ng5zguv
-    _key: "!items.effects!bbd69df11325f89b.An92YGeE5ng5zguv"
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.234b842af537988e
-    img: systems/teriock/src/assets/thumbnails/ability/arctic-resilience.webp
-    name: Arctic Resilience
-    system:
-      _sup: XpYeBmtuMNu3FWOD
-      affinities:
-        - _id: 2bRuEBCnQpoZNOfa
-          category: other
-          name: Arctic Weather
-          type: takeDeboost
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: unlimited
-      executionTime:
-        base: passive
-      identifier: arctic-resilience
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You @Identifier[keyword:deboosted]{deboost} @Identifier[core:damage]{damage} caused by arctic weather.</p>
-      powerSources:
-        - martial
       range:
         unit: self
       targets:
@@ -946,6 +873,39 @@ effects:
         - magical
       ritual: true
       skill: true
+      targets:
+        - self
+    type: ability
+  - _id: BPNLHAZIOeTAjROU
+    _key: "!items.effects!bbd69df11325f89b.BPNLHAZIOeTAjROU"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.266e242a4e6e28b8
+    img: systems/teriock/src/assets/thumbnails/ability/frozen-resilience.webp
+    name: Frozen Resilience
+    showIcon: 0
+    system:
+      _sup: XpYeBmtuMNu3FWOD
+      affinities:
+        - _id: 2Ra8Iu9wB0O7MvU6
+          category: other
+          name: Frozen Weather
+          type: takeDeboost
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: frozen-resilience
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @Identifier[keyword:deboosted]{deboost} @Identifier[core:damage]{damage} caused by frozen weather.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
       targets:
         - self
     type: ability

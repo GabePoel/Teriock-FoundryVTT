@@ -4,22 +4,26 @@ img: systems/teriock/src/assets/thumbnails/ability/desert-active.webp
 name: Desert Active
 system:
   automations:
-    - _id: Pj8g5QPHAl37tEBm
-      attachToEffect: false
-      constructionNodes:
-        bf8fc7d119f4c692:
-          _id: bf8fc7d119f4c692
-          all: false
-          auto: true
-          competence:
-            raw: 0
-          globalIdentifiers:
-            - consequence:active
-            - consequence:inactive
-          multi: true
-          overrideData: false
-          type: base
-      type: addDocuments
+    - _id: q2cvAnxqjuuwd0Fz
+      activeQualifier: "@terrain.desert"
+      changes:
+        - applyIfSuppressed: false
+          key: system.attributes.mov.score
+          phase: derived
+          target: Actor
+          type: add
+          value: "1"
+      type: changes
+    - _id: 3Z7dxl0vKGCzRAqq
+      activeQualifier: not(@terrain.desert)
+      changes:
+        - applyIfSuppressed: false
+          key: system.attributes.mov.score
+          phase: derived
+          target: Actor
+          type: subtract
+          value: "1"
+      type: changes
   delivery: self
   duration:
     unit: unlimited
