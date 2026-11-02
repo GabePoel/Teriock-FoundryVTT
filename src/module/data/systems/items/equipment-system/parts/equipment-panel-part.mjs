@@ -14,7 +14,7 @@ export default function EquipmentPanelPart(Base) {
   class EquipmentPanelPart extends Base {
     /** @inheritDoc */
     get _shouldShowTierWrapper() {
-      return (this.identification.identified || this.isAttuned) && super._shouldShowTierWrapper;
+      return !this.isTierSecret && super._shouldShowTierWrapper;
     }
 
     /** @inheritDoc */

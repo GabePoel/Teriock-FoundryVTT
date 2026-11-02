@@ -153,27 +153,14 @@ export default function AttunableSystemMixin(Base) {
         system: { inheritTier: true, kind: this.parent.type, target: this.parent._id, tier: this.tier.value },
         type: "attunement",
       };
-      if (!this.parent.actor?.metadata.childTypes.includes("attunement")) { return null; }
-      const enoughPresence = await this.canAttune();
-      [attunement] = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
+      if (!this.actor?.metadata.childTypes.includes("attunement")) { return null; }
+      const enoughPresence = this.tier.value <= this.actor.system.presence.max - this.actor.system.presence.value;
+      [attunement] = await this.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
       const options = { format: { name: this.parent.fullName }, localize: true };
       if (enoughPresence) { ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", options); }
       else { ui.notifications.warn("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", options); }
       await this.parent.render();
       return attunement;
-    }
-
-    /**
-     * Checks if the character can attune to the item based on available presence.
-     * Considers reference item tier if the item is not identified.
-     * @returns {Promise<boolean>} Promise that resolves to true if attunement is possible, false otherwise.
-     */
-    async canAttune() {
-      if (this.parent.actor) {
-        const unp = this.parent.actor.system.presence.max - this.parent.actor.system.presence.value;
-        return this.tier.value <= unp;
-      }
-      return false;
     }
 
     /**

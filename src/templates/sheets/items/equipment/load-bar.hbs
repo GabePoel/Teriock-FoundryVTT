@@ -1,7 +1,11 @@
 <div class="teriock-sheet-bar">
-  {{#if (or system.identification.identified system.isAttuned)}}
-    {{> "teriock/sheets/shared/forms/attunable-forms"}}
-  {{/if}}
+  {{> "teriock/sheets/shared/forms/tier-form"
+    unknown=system.isTierSecret
+  }}
+  {{> "teriock/sheets/shared/forms/price-form"
+    pricePath=(ifThen (and isGM (not system.identification.identified)) "system.identification.price" "system.price")
+    unknown=system.isSecret
+  }}
   {{formUpdater
     document
     icon=TERIOCK.DISPLAY.icons.manifest.equipment.weight

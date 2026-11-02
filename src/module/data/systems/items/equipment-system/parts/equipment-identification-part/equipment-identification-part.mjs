@@ -8,6 +8,8 @@ import {
   makeIcon,
   makeIconClass,
 } from "../../../../../../utils/_module.mjs";
+import { UnitField } from "../../../../../fields/_module.mjs";
+import { CurrencyUnitModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -47,9 +49,17 @@ export default function EquipmentIdentificationPart(Base) {
           }),
           name: new fields.StringField({ gm: true }),
           notes: new fields.HTMLField({ gm: true }),
+          price: new UnitField(CurrencyUnitModel, { gm: true }),
           read: new fields.BooleanField({ gm: true, initial: true }),
         }),
       };
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      // Unidentified equipment from before price was stashed keeps its true price
+      if (source.identification && !source.identification.identified) { source.identification.price ??= source.price; }
+      return super.migrateData(source, options);
     }
 
     /** @inheritDoc */
@@ -105,6 +115,45 @@ export default function EquipmentIdentificationPart(Base) {
       return (!this.identification.identified && !game.user.isGM) || super.isSecret;
     }
 
+    /**
+     * Whether this equipment's tier is secret. Attunement reveals the tier.
+     * @returns {boolean}
+     */
+    get isTierSecret() {
+      return this.isSecret && !this.isAttuned;
+    }
+
+    /** @inheritDoc */
+    async attune() {
+      // Unidentified equipment needs GM approval before it can be attuned
+      if (this.isSecret && !this.attunement) {
+        const format = { name: this.parent.fullName };
+        if (game.users.activeGM) {
+          ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.ask", { format, localize: true });
+        }
+        const content = await TeriockTextEditor.enrichHTML(
+          _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.question", {
+            item: `@UUID[${this.parent.uuid}]{${this.identification.name}}`,
+            user: game.user.link,
+          }),
+        );
+        const doAttune = game.users.activeGM
+          && await TeriockDialog.query(game.users.activeGM, "confirm", {
+            content,
+            modal: false,
+            window: {
+              icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.attunable.attune, "title"),
+              title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.title"),
+            },
+          });
+        if (!doAttune) {
+          ui.notifications.error("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.failure", { format, localize: true });
+          return null;
+        }
+      }
+      return super.attune();
+    }
+
     /** @inheritdoc */
     getEmbedContextMenuEntries(doc) {
       return [...super.getEmbedContextMenuEntries(doc), {
@@ -146,7 +195,7 @@ export default function EquipmentIdentificationPart(Base) {
      */
     async identify() {
       await this.parent.fireTrigger("identify");
-      if (!this.identification.identified) {
+      if (!this.identification.identified && game.users.activeGM) {
         ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.ask", {
           format: { name: this.parent.fullName },
           localize: true,
@@ -181,29 +230,32 @@ export default function EquipmentIdentificationPart(Base) {
     async readMagic() {
       await this.parent.fireTrigger("readMagic");
       if (!this.identification.identified && !this.identification.read) {
-        const activeGM = game.users.activeGM;
-        ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.ask", {
-          format: { name: this.parent.fullName },
-          localize: true,
-        });
+        if (game.users.activeGM) {
+          ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.ask", {
+            format: { name: this.parent.fullName },
+            localize: true,
+          });
+        }
         const content = await TeriockTextEditor.enrichHTML(
           _loc("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.question", {
             item: `@UUID[${this.parent.uuid}]{${this.identification.name}}`,
             user: game.user.link,
           }),
         );
-        const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
-          content,
-          modal: false,
-          window: {
-            icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "title"),
-            title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.title"),
-          },
-        });
-        if (doReadMagic) {
-          await this.parent.update({ "system.identification.read": true, "system.kind": this.identification.kind }, {
-            asGM: true,
+        const doReadMagic = game.users.activeGM
+          && await TeriockDialog.query(game.users.activeGM, "confirm", {
+            content,
+            modal: false,
+            window: {
+              icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "title"),
+              title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.title"),
+            },
           });
+        if (doReadMagic) {
+          await this.parent.update({
+            "system.identification.read": true,
+            "system.kind": this._source.identification.kind,
+          }, { asGM: true });
           ui.notifications.success("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.success", {
             format: { name: this.parent.fullName },
             localize: true,
@@ -259,14 +311,16 @@ export default function EquipmentIdentificationPart(Base) {
           docData: {
             name: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.name", { type: getName(this.equipmentType) }),
             "system.flaws": "",
-            "system.identification.flaws": this.flaws,
+            "system.identification.flaws": this._source.flaws,
             "system.identification.identified": false,
-            "system.identification.kind": this.kind,
-            "system.identification.name": this.parent.name,
-            "system.identification.notes": this.notes,
+            "system.identification.kind": this._source.kind,
+            "system.identification.name": this.parent._source.name,
+            "system.identification.notes": this._source.notes,
+            "system.identification.price": this._source.price,
             "system.identification.read": false,
             "system.kind": "unknown",
             "system.notes": "",
+            "system.price": reference?.system._source.price ?? this.schema.fields.price.getInitialValue(),
           },
           uuid: this.parent.uuid,
         });

@@ -1,3 +1,5 @@
+import { CurrencyUnitModel } from "../../../../../models/_module.mjs";
+
 declare global {
   namespace Teriock.Models {
     export type EquipmentIdentificationPartData = {
@@ -13,6 +15,8 @@ declare global {
         name: string;
         /** <schema> Secret notes for when this is identified */
         notes: string;
+        /** <schema> Secret price for when this is identified */
+        price: CurrencyUnitModel;
         /** <schema> Whether magic has been read on this */
         read: boolean;
       };
