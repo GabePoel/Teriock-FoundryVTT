@@ -108,6 +108,9 @@ Hooks.once("teriock.identifiersInit", () => {
       [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
     });
   });
+  Object.entries(TERIOCK.CONFIG.terrain).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`terrain.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.terrain", { name: v.label }) });
+  });
   Object.entries(TERIOCK.STATUSES.conditions).forEach(([k, v]) => {
     Object.assign(actorContext, { [`status.${toKebabCase(k)}`]: v.name });
   });
