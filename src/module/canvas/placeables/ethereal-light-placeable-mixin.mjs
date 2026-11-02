@@ -12,7 +12,7 @@ export default function EtherealLightPlaceableMixin(Base) {
   class EtherealLightPlaceable extends Base {
     /**
      * Whether this is considered Ethereal.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get isEthereal() {
       return true;

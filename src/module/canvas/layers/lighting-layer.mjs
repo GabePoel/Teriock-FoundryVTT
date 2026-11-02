@@ -4,7 +4,7 @@ const { LightingLayer } = foundry.canvas.layers;
 export default class TeriockLightingLayer extends LightingLayer {
   /**
    * Whether the Ethereal is currently visible.
-   * @return {boolean}
+   * @returns {boolean}
    * @category Ethereal
    */
   get isEtherealVisible() {

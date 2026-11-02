@@ -179,7 +179,7 @@ export default class BaseExecution extends BaseDataModel {
 
   /**
    * Whether competence improves the formula.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get competenceImprovesFormula() {
     return FormulaField.exists(this.formula);

@@ -79,7 +79,7 @@ export default class StatPoolModel extends BaseDataModel {
 
   /**
    * Whether this has dice.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get hasDice() {
     return FormulaField.exists(this.formula);
@@ -132,7 +132,7 @@ export default class StatPoolModel extends BaseDataModel {
 
   /**
    * The stat this corresponds to.
-   * @return {Teriock.Keys.DieStat}
+   * @returns {Teriock.Keys.DieStat}
    */
   get stat() {
     return this.schema.name;

@@ -145,7 +145,7 @@ export default class TeriockActiveEffect
    * @param {"Item"} embeddedName
    * @param {object[]} data
    * @param {Partial<DatabaseCreateOperation>} operation
-   * @return {Promise<(TeriockActiveEffect|TeriockItem)[]>}
+   * @returns {Promise<(TeriockActiveEffect|TeriockItem)[]>}
    */
   async createDependentDocuments(embeddedName, data = [], operation = {}) {
     const op = this.getCreateDependentDocumentsOperation(embeddedName, data, operation);

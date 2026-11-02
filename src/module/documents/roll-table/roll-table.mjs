@@ -51,7 +51,7 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
 
   /**
    * All the documents in the results of this table.
-   * @return {Promise<TeriockDocument[]>}
+   * @returns {Promise<TeriockDocument[]>}
    */
   async getAllContents() {
     const out = await this.getContents();
@@ -67,7 +67,7 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
 
   /**
    * The documents in the results of this table.
-   * @return {Promise<TeriockDocument[]>}
+   * @returns {Promise<TeriockDocument[]>}
    */
   async getContents() {
     const out = await Promise.all(

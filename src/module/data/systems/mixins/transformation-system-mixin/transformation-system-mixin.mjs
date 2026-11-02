@@ -74,7 +74,7 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * Whether this needs to inherit an image.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get #inheritImg() {
       return this.actor && (!this.transformation.img || this.transformation.ring && !this.transformation.ringImg);
@@ -208,7 +208,7 @@ export default function TransformationSystemMixin(Base) {
     /**
      * Filter an array of documents to include only the ones that aren't disabled.
      * @param {(TeriockActiveEffect|TeriockItem)[]} docs
-     * @return {(TeriockActiveEffect|TeriockItem)[]}
+     * @returns {(TeriockActiveEffect|TeriockItem)[]}
      */
     #enabledFilter(docs) {
       return docs.filter(d =>
@@ -287,7 +287,7 @@ export default function TransformationSystemMixin(Base) {
     /**
      * Map an array of documents to their ids.
      * @param {(TeriockActiveEffect|TeriockItem)[]} docs
-     * @return {ID<TeriockActiveEffect|TeriockItem>[]}
+     * @returns {ID<TeriockActiveEffect|TeriockItem>[]}
      */
     #toIds(docs) {
       return docs.map(d => d.id);
@@ -312,7 +312,7 @@ export default function TransformationSystemMixin(Base) {
 
     /**
      * The primary species this transforms the actor into.
-     * @return {TeriockItem<"species"> | null}
+     * @returns {TeriockItem<"species"> | null}
      */
     get primarySpecies() {
       if (!this.isTransformation) { return null; }

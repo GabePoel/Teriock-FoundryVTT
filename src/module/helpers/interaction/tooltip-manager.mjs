@@ -145,7 +145,7 @@ export default class TeriockTooltipManager extends TooltipManager {
 
   /**
    * Initialize the loading tooltip.
-   * @return {Promise<void>}
+   * @returns {Promise<void>}
    */
   async initializeLoadingTooltip() {
     await game.teriock.templatesReady;

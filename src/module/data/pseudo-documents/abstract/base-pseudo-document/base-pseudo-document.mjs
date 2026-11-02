@@ -66,7 +66,6 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   /**
    * @param {DatabaseWriteOperation} operation
    * @returns {Promise<{collectionKey: string, document: TeriockDocument, fieldPath: string, parent: TeriockDocument|BasePseudoDocument}>}
-   * @private
    */
   static async _resolveParent(operation) {
     let parent = operation.parent;

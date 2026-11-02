@@ -211,7 +211,7 @@ export default class DocumentSelector extends ResolvableDialog {
    * Select documents from a config instead of a provided group of documents. No dialog if no choices.
    * @param {Teriock.Select.DocumentSelectionConfig} [config]
    * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
-   * @return {Promise<TeriockDocument[]|null|false>} `false` if canceled and `null` if none was chosen in single mode
+   * @returns {Promise<TeriockDocument[]|null|false>} `false` if canceled and `null` if none was chosen in single mode
    */
   static async selectFromConfig(config = {}, options = {}) {
     const { all = false, auto = true, multi = false } = config;

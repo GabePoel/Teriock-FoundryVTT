@@ -125,7 +125,7 @@ export default function ThresholdExecutionMixin(Base) {
 
     /**
      * Whether this can have a bonus applied.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get hasBonus() {
       return this.isRoll;
@@ -133,7 +133,7 @@ export default function ThresholdExecutionMixin(Base) {
 
     /**
      * If this is a roll.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get isRoll() {
       return true;
@@ -141,7 +141,7 @@ export default function ThresholdExecutionMixin(Base) {
 
     /**
      * Whether this execution requires competence.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get requiresCompetence() {
       return this.isRoll;

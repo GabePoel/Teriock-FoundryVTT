@@ -40,7 +40,6 @@ export default function ChildDocumentMixin(Base) {
 
     /**
      * Clear or replace properties not automatically reset by upstream initialization.
-     * @protected
      */
     _clearData() {
       this.overrides = {};

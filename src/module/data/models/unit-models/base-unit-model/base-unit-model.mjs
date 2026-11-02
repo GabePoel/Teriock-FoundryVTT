@@ -195,10 +195,7 @@ export default class BaseUnitModel extends BaseDataModel {
     return this.constructor.metadata.icon;
   }
 
-  /**
-   * Text that represents this unit value with the full unit name.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get label() {
     const entry = this.entry;
     if (entry?.type !== "finite") { return entry ? _loc(entry.label) : ""; }

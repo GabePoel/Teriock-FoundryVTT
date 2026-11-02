@@ -239,7 +239,7 @@ export default class IdentifiersRegistry {
 
   /**
    * The types of Documents which need to be tracked for having identifiers.
-   * @return {Set<Teriock.Documents.DocumentName>}
+   * @returns {Set<Teriock.Documents.DocumentName>}
    */
   get documentNames() {
     return new Set([...this.#primaryDocumentNames, ...this.#parentDocumentNames]);

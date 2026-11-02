@@ -78,7 +78,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
 
   /**
    * Show activations.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get showActivations() {
     return this.activations.contents.some(a => a?.visible) && this.parent.isContentVisible;
@@ -86,7 +86,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
 
   /**
    * Show panels.
-   * @return {0|boolean}
+   * @returns {0|boolean}
    */
   get showPanels() {
     return this.panels.size && (this.parent.isAuthor || this.parent.isContentVisible);
@@ -94,7 +94,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
 
   /**
    * Show tags.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get showTags() {
     return this.tags.length && this.parent.isContentVisible;

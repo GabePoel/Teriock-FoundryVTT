@@ -7,7 +7,7 @@ const { AbstractFormInputElement } = foundry.applications.elements;
 export default class AbstractCycleButtonElement extends AbstractFormInputElement {
   /**
    * Cycle order for left-click.
-   * @type {Array<boolean|null>}
+   * @type {(boolean|null)[]}
    */
   static ORDER = [];
 

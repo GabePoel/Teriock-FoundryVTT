@@ -11,12 +11,12 @@ const { BooleanField } = foundry.data.fields;
  * Uses {@link HTMLTernaryButtonElement} for form input.
  */
 export default class TernaryField extends BooleanField {
-  /** @override */
+  /** @inheritDoc */
   static get _defaults() {
     return Object.assign(super._defaults, { initial: null, nullable: true });
   }
 
-  /** @override */
+  /** @inheritdoc */
   _cast(value) {
     if (String(value) === "false") { return false; }
     if (String(value) === "true") { return true; }
@@ -24,8 +24,7 @@ export default class TernaryField extends BooleanField {
   }
 
   /**
-   * @override
-   * @param {FormInputConfig} config
+   * @inheritDoc
    * @returns {HTMLTernaryButtonElement}
    */
   _toInput(config) {

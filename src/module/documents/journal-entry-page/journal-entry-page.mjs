@@ -31,7 +31,7 @@ export default class TeriockJournalEntryPage
 
   /**
    * An image that represents this.
-   * @return {string}
+   * @returns {string}
    */
   get img() {
     return this.system?.img || this.getFlag("teriock", "journalImage")

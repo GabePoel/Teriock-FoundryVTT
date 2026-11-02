@@ -38,7 +38,7 @@ export default class StatDie extends BasePseudoDocument {
 
   /**
    * An icon that represents this.
-   * @return {string}
+   * @returns {string}
    */
   get icon() {
     return getRollIcon(this.formula);
@@ -70,7 +70,7 @@ export default class StatDie extends BasePseudoDocument {
 
   /**
    * Whether this stat die is spent.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get spent() {
     return this.parent.spent.has(this.index);

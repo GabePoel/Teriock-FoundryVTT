@@ -512,7 +512,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    * Use a specified document.
    * @param {string} lookup - The identifier or name of the document to use. Identifiers are preferred.
    * @param {Teriock.Execution.ExecutionOptions} [options] - Options for using the document.
-   * @return {Promise<void>}
+   * @returns {Promise<void>}
    */
   async useDocument(lookup, options = {}) {
     const doc = await findBestDocument(lookup, this);

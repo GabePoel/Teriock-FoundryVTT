@@ -62,7 +62,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
 
   /**
    * The identifier applied when the reset button is clicked.
-   * @return {Identifier|null}
+   * @returns {Identifier|null}
    */
   get reset() {
     return this.getAttribute("reset");

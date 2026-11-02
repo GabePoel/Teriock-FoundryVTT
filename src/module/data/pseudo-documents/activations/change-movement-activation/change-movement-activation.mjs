@@ -8,7 +8,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /**
    * @param {string} movementAction
-   * @return {string}
+   * @returns {string}
    */
   static getLabel(movementAction) {
     return _loc(CONFIG.Token.movement.actions[movementAction].label);

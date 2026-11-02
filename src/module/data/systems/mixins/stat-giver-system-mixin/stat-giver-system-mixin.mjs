@@ -24,7 +24,7 @@ export default function StatGiverSystemMixin(Base) {
 
     /**
      * The initial stat pool formula to use.
-     * @return {Teriock.System.FormulaString}
+     * @returns {Teriock.System.FormulaString}
      */
     static get _initialStatPoolFormula() {
       return "1d10";

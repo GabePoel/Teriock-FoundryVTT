@@ -66,14 +66,12 @@ export function sortObjectEntries(obj, sortKey) {
 /**
  * Storage for pre-localization config registration.
  * @type {object}
- * @private
  */
 const _preLocalizationConfigRegistrations = {};
 
 /**
  * Storage for pre-localization data model registration.
  * @type {(typeof BaseDataModel)[]}
- * @private
  */
 const _preLocalizationDataModelRegistrations = [];
 

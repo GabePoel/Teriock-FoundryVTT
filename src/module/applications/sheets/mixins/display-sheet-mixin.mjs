@@ -20,7 +20,7 @@ export default function DisplaySheetMixin(Base) {
   class DisplaySheet extends Base {
     /**
      * Open the image for this document.
-     * @return {Promise<void>}
+     * @returns {Promise<void>}
      */
     static async #onOpenImage() {
       await new ImagePopout({ src: this.document.img, window: { title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview" } })

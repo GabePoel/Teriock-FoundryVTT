@@ -33,7 +33,7 @@ export function validateTypedIdentifier(identifier, options = {}) {
 /**
  * Validate that a number is not zero.
  * @param {number} value
- * @return {boolean}
+ * @returns {boolean}
  */
 export function validateNonZero(value) {
   return value !== 0;

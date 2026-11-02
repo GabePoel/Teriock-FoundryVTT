@@ -226,7 +226,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /**
    * If this is a block interaction.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get isBlock() {
     return this.source?.system.interaction === "block";
@@ -234,7 +234,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /**
    * Does this require physical contact with the target?
-   * @return {boolean}
+   * @returns {boolean}
    */
   get isContact() {
     return this.source.system.isContact;
@@ -242,7 +242,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /**
    * If this is a feat interaction.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get isFeat() {
     return this.source?.system.interaction === "feat";
@@ -250,7 +250,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
 
   /**
    * If this is a manifest interaction.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get isManifest() {
     return this.source?.system.interaction === "manifest";

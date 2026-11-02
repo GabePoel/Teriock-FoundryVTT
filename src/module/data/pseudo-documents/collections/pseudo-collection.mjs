@@ -49,7 +49,7 @@ export default class PseudoCollection extends TypeCollection {
 
   /**
    * Get all Pseudo-Documents of a given type matching criteria.
-   * @template {TPseudo['type']} T
+   * @template {TPseudo["type"]} T
    * @param {T} type
    * @param {object} [options]
    * @param {boolean} [options.active]

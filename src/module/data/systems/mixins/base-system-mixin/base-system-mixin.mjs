@@ -267,7 +267,7 @@ export default function BaseSystemMixin(Base) {
 
     /**
      * Whether this document shouldn't have basic information about where it came from visible.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get isSecret() {
       return false;

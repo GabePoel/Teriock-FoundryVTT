@@ -51,7 +51,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
 
   /**
    * Restrict identifiers to only certain type prefixes.
-   * @return {string[]}
+   * @returns {string[]}
    */
   get types() {
     const attr = this.getAttribute("types");

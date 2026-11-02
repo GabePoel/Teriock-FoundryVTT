@@ -310,7 +310,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * Whether this document shouldn't have its basic information like compendium source and identifier visible.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get isSecret() {
       if (this.system) { return this.system.isSecret; }
@@ -345,7 +345,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * That document that has the most control over this one.
-     * @return {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
+     * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
      */
     get master() {
       return this.parent;
@@ -361,7 +361,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * The top document of this chain.
-     * @return {TeriockDocument}
+     * @returns {TeriockDocument}
      */
     get top() {
       if (this.isTop) { return this; }
@@ -388,7 +388,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * An icon for this document type.
-     * @return {string|null}
+     * @returns {string|null}
      */
     get typeIcon() {
       const config = CONFIG[this.documentName];

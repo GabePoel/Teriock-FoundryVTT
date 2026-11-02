@@ -75,13 +75,13 @@ export default class TypeCollection extends Collection {
 
   /**
    * The types of documents in this collection.
-   * @type {TDocument['type'][]}
+   * @type {TDocument["type"][]}
    */
   types = [];
 
   /**
    * This collection's contents grouped by subtype.
-   * @returns {{ [K in TDocument['type']]: Extract<TDocument, { type: K }>[] }}
+   * @returns {{ [K in TDocument["type"]]: Extract<TDocument, { type: K }>[] }}
    */
   get documentsByType() {
     if (!this.#documentsByType) {
@@ -223,7 +223,7 @@ export default class TypeCollection extends Collection {
 
   /**
    * Asynchronously fetch all Documents of a given type.
-   * @template {TDocument['type']} T
+   * @template {TDocument["type"]} T
    * @param {T} type
    * @returns {Promise<Extract<TDocument, { type: T }>[]>}
    */
@@ -233,7 +233,7 @@ export default class TypeCollection extends Collection {
 
   /**
    * Synchronously get all Documents of a given type.
-   * @template {TDocument['type']} T
+   * @template {TDocument["type"]} T
    * @param {T} type
    * @returns {Extract<TDocument, { type: T }>[]}
    */

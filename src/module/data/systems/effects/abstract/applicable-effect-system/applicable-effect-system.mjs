@@ -140,7 +140,7 @@ export default class ApplicableEffectSystem
 
   /**
    * The document that this is sustained by.
-   * @return {TeriockDocument|null}
+   * @returns {TeriockDocument|null}
    */
   get sustainedBy() {
     if (this.sustained && this.parent.origin) { return this.parent.fetchFromUuidSync(this.parent.origin); }
@@ -159,7 +159,7 @@ export default class ApplicableEffectSystem
 
   /**
    * If this is suppressed due to its sustainedBy being inactive.
-   * @return {boolean}
+   * @returns {boolean}
    */
   _isSuppressedUnsustained() {
     if (!game.settings.get("teriock", "trackSustainedConsequences")) { return false; }

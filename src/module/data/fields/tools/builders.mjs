@@ -277,7 +277,7 @@ export function rollableFormulaField(options = {}) {
 /**
  * Field for a qualifier formula.
  * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]
- * @return {FormulaField}
+ * @returns {FormulaField}
  */
 export function qualifierField(options = {}) {
   return new FormulaField({

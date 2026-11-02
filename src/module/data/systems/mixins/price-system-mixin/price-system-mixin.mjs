@@ -36,7 +36,7 @@ export default function PriceSystemMixin(Base) {
 
     /**
      * Whether to show the price wrapper.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get _shouldShowPriceWrapper() {
       return this.price.unitType === "finite" && this.parent.parent?.type === "inventory";

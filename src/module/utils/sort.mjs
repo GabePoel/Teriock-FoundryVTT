@@ -9,7 +9,7 @@
  * @param {*} bVal
  * @param {DataField} [aField]
  * @param {DataField} [bField]
- * @return {number}
+ * @returns {number}
  */
 function compare(aVal, bVal, aField, bField) {
   const aType = foundry.utils.getType(aVal);
@@ -38,7 +38,7 @@ function compare(aVal, bVal, aField, bField) {
  * Build a sorter from one or more property paths. Later paths are used as tie-breakers. Handles formulas, numbers,
  * strings, booleans, arrays, and sets.
  * @param {...string} paths
- * @return {Teriock.Sort.DocumentSorter}
+ * @returns {Teriock.Sort.DocumentSorter}
  */
 export function pathSorterFactory(...paths) {
   const activePaths = paths.length === 1 ? [paths[0], "name", "_stats.createdTime"] : paths;
@@ -58,7 +58,7 @@ export function pathSorterFactory(...paths) {
 /**
  * Build a field sorter.
  * @param {DataModel | Document | TypeDataModel} model
- * @return {Teriock.Sort.FieldSorter}
+ * @returns {Teriock.Sort.FieldSorter}
  */
 export function fieldSorterFactory(model) {
   return function fieldSorter(a, b) {

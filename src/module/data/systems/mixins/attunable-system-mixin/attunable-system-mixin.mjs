@@ -104,7 +104,7 @@ export default function AttunableSystemMixin(Base) {
 
     /**
      * Whether to show the tier wrapper.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get _shouldShowTierWrapper() {
       return FormulaField.exists(this.tier.raw);

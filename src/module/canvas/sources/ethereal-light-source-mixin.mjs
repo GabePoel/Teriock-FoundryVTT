@@ -18,7 +18,7 @@ export default function EtherealLightSourceMixin(Base) {
 
     /**
      * Whether this is visible from viewpoint's plane. Ethereal is only visible from the Ethereal.
-     * @return {boolean}
+     * @returns {boolean}
      */
     get isOnVisiblePlane() {
       return !this.object?.isEthereal || game.canvas.lighting.isEtherealVisible;

@@ -63,7 +63,7 @@ export function getRollIcon(rollFormula) {
 /**
  * Format a string to an infinity icon if it's null.
  * @param {string|number|null} val
- * @return {string}
+ * @returns {string}
  */
 export function asInf(val) {
   if (["", Infinity, null, undefined].includes(val)) {

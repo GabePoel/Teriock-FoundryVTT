@@ -18,7 +18,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
 
   /**
    * Whether this message is visible.
-   * @return {boolean}
+   * @returns {boolean}
    */
   get visible() {
     return true;

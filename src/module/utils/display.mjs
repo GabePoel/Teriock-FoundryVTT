@@ -89,7 +89,7 @@ export function formatGp(amount) {
  * Iterate through an array with a progress bar using batched processing.
  * @param {Array} arr
  * @param {string} message
- * @param {function} callback
+ * @param {(item: any) => Promise<void>|void} callback
  * @param {object} [options]
  * @param {number} [options.batch=1]
  * @param {"info"|"success"|"warn"|"error"|"morganti"} [options.style="info"]

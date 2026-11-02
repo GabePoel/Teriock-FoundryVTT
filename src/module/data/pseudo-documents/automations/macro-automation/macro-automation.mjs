@@ -69,7 +69,7 @@ export default class MacroAutomation extends mixClasses(BaseAutomation, TriggerA
   /**
    * Execute the primary macro.
    * @param {Teriock.System.TriggerScope} scope
-   * @return {Promise<void>}
+   * @returns {Promise<void>}
    */
   async executeMacro(scope = {}) {
     if (!this.hasMacro) { return; }

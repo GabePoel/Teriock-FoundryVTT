@@ -65,7 +65,7 @@ export default class TeriockFolder extends mixClasses(Folder, BaseDocumentMixin)
 
   /**
    * The contents of this folder and its descendants.
-   * @return {Promise<TeriockDocument[]>}
+   * @returns {Promise<TeriockDocument[]>}
    */
   async getAllContents() {
     return resolveDocuments(this.allContents);
@@ -73,7 +73,7 @@ export default class TeriockFolder extends mixClasses(Folder, BaseDocumentMixin)
 
   /**
    * The contents of this folder.
-   * @return {Promise<TeriockDocument[]>}
+   * @returns {Promise<TeriockDocument[]>}
    */
   async getContents() {
     return resolveDocuments(this.contents);
