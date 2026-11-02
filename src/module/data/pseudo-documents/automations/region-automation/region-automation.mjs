@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
+import { terrainSchema } from "../../../fields/tools/builders.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
@@ -31,6 +32,7 @@ export default class RegionAutomation
   static defineSchema() {
     return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      terrain: new fields.SchemaField(terrainSchema()),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
           Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
@@ -53,6 +55,10 @@ export default class RegionAutomation
       ...super._formPaths,
       "visibility",
       "deleteOnTurnChange",
+      "hr",
+      "terrain.difficultTerrain",
+      "terrain.terrains",
+      "terrain.removedTerrains",
       "hr",
       ...this._selectionPaths,
       "hr",
@@ -93,7 +99,7 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async getRegionData(options = { execution: null, rollData: {} }) {
-    return foundry.utils.mergeObject(await super.getRegionData(options), {
+    const data = foundry.utils.mergeObject(await super.getRegionData(options), {
       displayMeasurements: false,
       flags: { teriock: { targetRegion: false } },
       highlightMode: "shapes",
@@ -102,6 +108,16 @@ export default class RegionAutomation
       }),
       ...this.data,
     });
+    const { difficultTerrain, removedTerrains, terrains } = this.terrain;
+    if (difficultTerrain || removedTerrains.size || terrains.size) {
+      data.behaviors ??= [];
+      data.behaviors.push({
+        name: _loc("TYPES.RegionBehavior.terrain"),
+        system: { difficultTerrain, removedTerrains: Array.from(removedTerrains), terrains: Array.from(terrains) },
+        type: "terrain",
+      });
+    }
+    return data;
   }
 
   /** @inheritDoc */

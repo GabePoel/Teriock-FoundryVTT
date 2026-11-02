@@ -1,8 +1,8 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
+import { terrainSchema } from "../../../fields/tools/builders.mjs";
 import BaseBehaviorSystem from "../base-behavior-system.mjs";
 
-const { fields } = foundry.data;
-
+/** @category Terrain */
 export default class TerrainSystem extends BaseBehaviorSystem {
   /**
    * Recalculate movement paths when the terrain data gets changed.
@@ -32,9 +32,6 @@ export default class TerrainSystem extends BaseBehaviorSystem {
   };
 
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Terrain"];
-
-  /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.movement.difficultTerrain,
     type: "terrain",
@@ -42,10 +39,7 @@ export default class TerrainSystem extends BaseBehaviorSystem {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      difficultTerrain: new fields.BooleanField(),
-      terrains: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.terrain })),
-    });
+    return Object.assign(super.defineSchema(), terrainSchema());
   }
 
   /**

@@ -13,6 +13,7 @@ export { default as TeriockItem } from "./item/item.mjs";
 export { default as TeriockJournalEntryCategory } from "./journal-entry-category/journal-entry-category.mjs";
 export { default as TeriockJournalEntryPage } from "./journal-entry-page/journal-entry-page.mjs";
 export { default as TeriockJournalEntry } from "./journal-entry/journal-entry.mjs";
+export { default as TeriockLevel } from "./level/level.mjs";
 export { default as TeriockMacro } from "./macro/macro.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as TeriockRegionDocument } from "./region-document/region-document.mjs";

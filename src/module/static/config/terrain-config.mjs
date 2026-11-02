@@ -1,7 +1,10 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { thumbnails } from "../display/_module.mjs";
 
-/** @enum {Teriock.Config.TerrainEntry} */
+/**
+ * @enum {Teriock.Config.TerrainEntry}
+ * @category Terrain
+ */
 // no sort
 const terrainConfig = {
   aquatic: { img: thumbnails.manifest.ability.waterNative, label: "TERIOCK.TERRAIN.aquatic" },

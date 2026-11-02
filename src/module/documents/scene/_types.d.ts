@@ -1,11 +1,12 @@
 import { Document } from "@common/abstract/_module.mjs";
 import { EmbeddedCollection } from "@common/abstract/_module.mjs";
 
-import { TeriockAmbientLightDocument, TeriockRegionDocument, TeriockTokenDocument } from "../_module.mjs";
+import { TeriockAmbientLightDocument, TeriockLevel, TeriockRegionDocument, TeriockTokenDocument } from "../_module.mjs";
 
 declare module "./scene.mjs" {
   export default interface TeriockScene {
     _id: Readonly<ID<TeriockScene>>;
+    levels: EmbeddedCollection<TeriockLevel>;
     lights: EmbeddedCollection<TeriockAmbientLightDocument>;
     regions: EmbeddedCollection<TeriockRegionDocument>;
     tokens: EmbeddedCollection<TeriockTokenDocument>;

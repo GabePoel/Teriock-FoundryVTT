@@ -227,6 +227,8 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
   registerSubtypes(data.systems.pages, foundry.abstract.TypeDataModel);
 
+  CONFIG.Level.documentClass = documents.TeriockLevel;
+
   CONFIG.Macro.defaultType = "script";
   CONFIG.Macro.documentClass = documents.TeriockMacro;
 
@@ -310,7 +312,11 @@ foundry.helpers.Hooks.once("init", function() {
   });
   rs(d.TeriockJournalEntryPage, sp.ClassSheet, "Class", { types: ["class"] });
 
+  rs(d.TeriockLevel, s.TeriockLevelConfig, "Level");
+
   rs(d.TeriockRollTable, s.TeriockRollTableSheet, "RollTable");
+
+  rs(d.TeriockScene, s.TeriockSceneConfig, "Scene");
 
   rs(d.TeriockTableResult, s.TeriockTableResultConfig, "TableResult");
 

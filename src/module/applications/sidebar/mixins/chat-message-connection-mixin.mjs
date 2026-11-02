@@ -39,7 +39,9 @@ export default function ChatMessageConnectionMixin(Base) {
       if (event.button === 2) { await activation.secondaryAction(); }
       else { await activation.primaryAction(); }
       const deleteMessage = game.settings.get("teriock", "deleteTriggerOnActivation") !== event.ctrlKey;
-      if (deleteMessage && message?.type === "triggered" && message.isOwner) { await message.delete(); }
+      if (deleteMessage && message?.type === "triggered" && message.isOwner && message.system.activations.size === 1) {
+        await message.delete();
+      }
     }
 
     /**

@@ -30,6 +30,7 @@ async function fireMovementTrigger(document, _movement, _operation, user) {
 /**
  * Make sure linked actors have the correct terrains when the scene changes or the canvas loads.
  * @see {canvasReady}
+ * @category Terrain
  */
 function checkSceneTerrains() {
   const actors = new Set(game.actors.filter(a => a._cache.terrains?.size));

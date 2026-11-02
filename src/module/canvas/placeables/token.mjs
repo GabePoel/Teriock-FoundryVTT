@@ -72,7 +72,12 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
    */
   _onApplyStatusEffect(statusId, active) {
     if (DETECTION_STATUSES.local.has(statusId)) { this.initializeVisionSource(); }
-    if (DETECTION_STATUSES.global.has(statusId)) { canvas.perception.update({ refreshVision: true }); }
+    if (DETECTION_STATUSES.global.has(statusId)) {
+      canvas.perception.update({
+        refreshLighting: statusId === CONFIG.specialStatusEffects.ETHEREAL,
+        refreshVision: true,
+      });
+    }
     super._onApplyStatusEffect(statusId, active);
   }
 

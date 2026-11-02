@@ -135,24 +135,53 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   /**
    * The types of terrain this is in.
    * @returns {Set<Teriock.Keys.Terrain>}
+   * @category Terrain
    */
   get terrains() {
-    const terrains = new Set();
+    const terrains = new Set([
+      ...(this.parent?.terrains ?? []),
+      ...(this.parent?.levels.get(this.level)?.terrains ?? []),
+    ]);
+    const added = new Set();
     for (const region of this.regions ?? []) {
-      if (region.hidden) { continue; }
+      if (region.hidden || !this.parent.regions.has(region.id)) { continue; }
       for (const behavior of region.behaviors) {
         if (behavior.type === "terrain" && !behavior.disabled) {
-          behavior.system.terrains.forEach(t => terrains.add(t));
+          behavior.system.removedTerrains.forEach(t => terrains.delete(t));
+          behavior.system.terrains.forEach(t => added.add(t));
         }
       }
     }
-    return terrains;
+    return terrains.union(added);
+  }
+
+  /**
+   * @inheritDoc
+   * @category Terrain
+   */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    this.actor?.system.checkTerrains?.();
+  }
+
+  /**
+   * @inheritDoc
+   * @category Terrain
+   */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if (this.actorLink) { this.actor?.system.checkTerrains?.(); }
   }
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (this.inCombat && "disposition" in changed) { game.combat.debounceSetup(); }
+    if (["actorId", "actorLink", "level"].some(k => k in changed)) {
+      for (const actor of new Set([game.actors.get(options.previousActorId), this.actor, this.baseActor])) {
+        actor?.system.checkTerrains?.();
+      }
+    }
   }
 
   /**

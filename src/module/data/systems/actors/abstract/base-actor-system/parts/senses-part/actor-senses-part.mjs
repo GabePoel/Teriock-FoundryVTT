@@ -55,12 +55,6 @@ export default function ActorSensesPart(Base) {
       });
     }
 
-    /** @type {number} */
-    #cachedHidingScore;
-
-    /** @type {number} */
-    #cachedPerceivingScore;
-
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
@@ -75,8 +69,9 @@ export default function ActorSensesPart(Base) {
     prepareCleanupData() {
       this.detection.hiding ??= this.attributes.snk.passive;
       this.detection.perceiving ??= this.attributes.per.passive;
-      const hidingChange = this.#cachedHidingScore !== this.detection.hiding;
-      const perceivingChange = this.#cachedPerceivingScore !== this.detection.perceiving;
+      const cache = this.parent._cache;
+      const hidingChange = cache.hiding !== this.detection.hiding;
+      const perceivingChange = cache.perceiving !== this.detection.perceiving;
       if (hidingChange || perceivingChange) {
         /** @type {TeriockToken[]} */
         const tokens = this.actor.getDependentTokens({ scenes: canvas.scene }).filter(t => t.rendered).map(t =>
@@ -88,8 +83,8 @@ export default function ActorSensesPart(Base) {
         }
       }
       super.prepareCleanupData();
-      this.#cachedHidingScore = this.detection.hiding;
-      this.#cachedPerceivingScore = this.detection.perceiving;
+      cache.hiding = this.detection.hiding;
+      cache.perceiving = this.detection.perceiving;
     }
   }
 

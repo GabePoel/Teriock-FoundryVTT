@@ -54,6 +54,10 @@ We use `@category Perception` for anything relating broadly to token vision.
 
 Anything relating to the specific process by which `Actor` documents can have their species' changed by `ActiveEffect` documents is given the `@category Transformation` tag.
 
+### Terrain
+
+Anything relating to the terrain that `Actor` and `TokenDocument` documents are in.
+
 ### Triggers
 
 The trigger pipeline is _kind of_ like a local version of Foundry's hooks and is used to handle stuff that occurs automatically and triggers off of other events within an `Actor`. These aren't _fully_ automatic because that would cause friction and confusion and instead make chat messages whenever something happens. This functionality is given the `@category Triggers` tag.

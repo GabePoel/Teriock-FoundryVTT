@@ -412,6 +412,39 @@ export function tradecraftsField(options = {}) {
 }
 
 /**
+ * Field for selecting terrains.
+ * @param {ArrayFieldOptions} [options]
+ * @returns {SetField}
+ * @category Terrain
+ */
+export function terrainsField(options = {}) {
+  return new SetField(new StringField({ choices: TERIOCK.CONFIG.terrain }), {
+    hint: _sloc("TERIOCK.SCHEMA.Terrains.hint"),
+    label: _sloc("TERIOCK.SCHEMA.Terrains.label"),
+    ...options,
+  });
+}
+
+/**
+ * Schema fields for adding and removing terrains.
+ * @returns {Record<"difficultTerrain" | "removedTerrains" | "terrains", BooleanField | SetField>}
+ * @category Terrain
+ */
+export function terrainSchema() {
+  return {
+    difficultTerrain: new BooleanField({
+      hint: _sloc("TERIOCK.SCHEMA.DifficultTerrain.hint"),
+      label: _sloc("TERIOCK.SCHEMA.DifficultTerrain.label"),
+    }),
+    removedTerrains: terrainsField({
+      hint: _sloc("TERIOCK.SCHEMA.RemovedTerrains.hint"),
+      label: _sloc("TERIOCK.SCHEMA.RemovedTerrains.label"),
+    }),
+    terrains: terrainsField(),
+  };
+}
+
+/**
  * Field for selecting identifiers from a config table.
  * @param {Record<Identifier, { label: string }>} table
  * @param {ArrayFieldOptions} [options]

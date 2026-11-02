@@ -1,4 +1,5 @@
 import { objectMap } from "../../../../../../../utils/_module.mjs";
+import { terrainsField } from "../../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
 
 /**
@@ -30,9 +31,7 @@ export default function ActorMovementPart(Base) {
         speedAdjustments: new fields.SchemaField(
           objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
         ),
-        terrains: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.terrain }), {
-          persisted: false,
-        }),
+        terrains: terrainsField({ persisted: false }),
       });
     }
 
@@ -40,6 +39,7 @@ export default function ActorMovementPart(Base) {
      * The types of terrain this actor's tokens are in.
      * @returns {Set<Teriock.Keys.Terrain>}
      * @remarks This might differ from the actor's terrains because changes could modify it.
+     * @category Terrain
      */
     #getTokenTerrains() {
       const tokens = this.parent.token ? [this.parent.token] : this.parent.getActiveTokens(true, true);
@@ -48,6 +48,7 @@ export default function ActorMovementPart(Base) {
 
     /**
      * Check if token terrains have changed and reset if needed.
+     * @category Terrain
      */
     checkTerrains() {
       if (this.#getTokenTerrains().equals(this.parent._cache.terrains ?? new Set())) { return; }

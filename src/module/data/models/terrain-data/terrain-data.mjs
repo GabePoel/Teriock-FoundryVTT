@@ -3,6 +3,7 @@ const { TerrainData } = foundry.data;
 
 /**
  * Extended to allow for difficult terrain and terrain types.
+ * @category Terrain
  */
 export default class TeriockTerrainData extends TerrainData {
   /** @inheritDoc */

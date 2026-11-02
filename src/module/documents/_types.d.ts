@@ -37,6 +37,10 @@ declare global {
      * Store of lazily-computed values cached on an actor.
      */
     export type ActorCache = DocumentCache & {
+      /** Hiding score the actor's tokens were last refreshed with. */
+      hiding?: number;
+      /** Perceiving score the actor's tokens were last refreshed with. */
+      perceiving?: number;
       /** Previously-prepared statuses. This is retained so status expirations can find what changed. */
       statuses?: Set<Teriock.Keys.Condition>;
       /** Previously-prepared token terrains. This is retained so terrain regions can find what changed. */
