@@ -28,12 +28,8 @@ export default class ActorWeightModel extends WeightUnitModel {
   }
 
   /** @inheritDoc */
-  get rollValue() {
-    return this.isDefault ? this.defaultValue : super.rollValue;
-  }
-
-  /** @inheritDoc */
-  get value() {
-    return this.isDefault ? this.defaultValue : super.value;
+  evaluate(rollData = {}) {
+    if (this.isDefault) { this.value = this.defaultValue; }
+    else { super.evaluate(rollData); }
   }
 }

@@ -192,13 +192,21 @@ export default function AbilityUsagePart(Base) {
     }
 
     /** @inheritDoc */
+    evaluateUnits(rollData = {}) {
+      super.evaluateUnits(rollData);
+      this.executionTime.slow.evaluate(rollData);
+      this.expansion.range.evaluate(rollData);
+      this.range.evaluate(rollData);
+    }
+
+    /** @inheritDoc */
     getLocalRollData() {
       const data = super.getLocalRollData();
       Object.assign(data, {
         [`interaction.${this.interaction}`]: 1,
         [`maneuver.${this.maneuver}`]: 1,
         [`time.${toKebabCase(this.executionTime.base)}`]: 1,
-        range: this.range.rollValue,
+        range: this.range.value,
       });
       // Add deliveries
       if (this.delivery) { data[`delivery.${this.delivery}`] = 1; }
@@ -214,7 +222,7 @@ export default function AbilityUsagePart(Base) {
         Object.assign(data, {
           [`expansion.${this.expansion.type}`]: 1,
           [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
-          ["expansion.range"]: this.expansion.range.rollValue,
+          ["expansion.range"]: this.expansion.range.value,
         });
       }
       // Add targets

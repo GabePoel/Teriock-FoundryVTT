@@ -151,7 +151,7 @@ export default class EquipmentSystem
       text: dotJoin([
         ...this._attunableWrappers,
         ...this._priceWrappers,
-        _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.totalWeight }),
+        _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.weight.total }),
         parts.text,
       ]),
     });

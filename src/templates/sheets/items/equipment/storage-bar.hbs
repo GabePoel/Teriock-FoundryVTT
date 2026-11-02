@@ -20,21 +20,15 @@
     }}
     {{formUpdater
       document
-      abbreviation="lb"
+      abbreviation=storageWeight.abbreviation
+      abbreviationTooltip=storageWeight.abbreviationTooltip
       color=(ifThen system.storage.weight.over TERIOCK.DISPLAY.colors.palette.red null)
-      data=(ifThen
-        (isFinite system.storage.weight.max)
-        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.weight.value denominator=system.storage.weight.max)
-        system.storage.weight.value)
+      data=storageWeight.data
       icon=TERIOCK.DISPLAY.icons.manifest.equipment.maxWeight
       label=(localize
         (concat "TERIOCK.SYSTEMS.Equipment.FIELDS.storage.weight.max." (ifThen system.storage.weight.over "over" "under")))
       path="system.storage.weight.max"
-      placeholder=(makeIcon TERIOCK.DISPLAY.icons.manifest.ui.infinity)
-      source=(ifThen
-        (eq system._source.storage.weight.max null)
-        system.storage.weight.value
-        (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.weight.value denominator=system._source.storage.weight.max))
+      source=storageWeight.source
     }}
     {{formUpdater
       document

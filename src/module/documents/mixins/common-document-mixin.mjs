@@ -371,6 +371,7 @@ export default function CommonDocumentMixin(Base) {
       this.resetChildMaps();
       super.prepareData();
       if (this.isTop) {
+        this.evaluateUnits(this.getRollData());
         this.prepareSpecialData();
         this.prepareCleanupData();
       }

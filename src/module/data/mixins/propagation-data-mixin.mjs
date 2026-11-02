@@ -53,6 +53,14 @@ export default function PropagationDataMixin(Base) {
     }
 
     /**
+     * Evaluate all units.
+     * @param {object} [rollData]
+     */
+    evaluateUnits(rollData = {}) {
+      this._propagateOperation("evaluateUnits", false, [rollData]);
+    }
+
+    /**
      * A scope built from this and its ancestors. Explicit keys win over this which wins over ancestors.
      * @param {Partial<Teriock.System.TriggerScope>} [scope]
      * @returns {Teriock.System.TriggerScope}

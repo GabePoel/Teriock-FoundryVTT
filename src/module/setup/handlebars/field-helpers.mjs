@@ -1,3 +1,4 @@
+import { BaseUnitModel } from "../../data/models/_module.mjs";
 import { createElement, makeIconClass, makeIconElement, toKebabCase } from "../../utils/_module.mjs";
 import uiHelpers from "./ui-helpers.mjs";
 
@@ -47,6 +48,15 @@ function formClasses(model, options = { hash: {} }) {
 }
 
 /**
+ * Get the display string for a unit value in its chosen unit.
+ * @param {BaseUnitModel} unitModel
+ * @returns {string}
+ */
+function getUnitValueString(unitModel) {
+  return unitModel.unitType === "finite" ? String(unitModel.unitValue) : unitModel.label;
+}
+
+/**
  * @typedef {FormClassesHash} FormUpdaterHash
  * @property {Record<string, string>} dataset
  * @property {string} abbreviation
@@ -71,19 +81,33 @@ function formClasses(model, options = { hash: {} }) {
  * @todo Simplify if possible.
  */
 function formUpdater(model, options = { hash: {} }) {
-  const {
+  const { changed, color, icon, info } = options.hash;
+  let {
     abbreviation,
     abbreviationTooltip,
-    action = "updatePaths",
-    changed,
-    color,
+    action,
+    data,
     dataset = {},
-    icon,
-    info,
+    isPlaceholder = false,
+    label,
     locked,
+    paths,
+    placeholder,
+    source,
   } = options.hash;
-  let { data, isPlaceholder = false, label, paths, placeholder, source } = options.hash;
   const path = String(options.hash.path ?? "");
+  const unitModel = foundry.utils.getProperty(model ?? {}, path);
+  if (unitModel instanceof BaseUnitModel) {
+    const finite = unitModel.unitType === "finite";
+    action ??= "updateUnit";
+    dataset = { path, ...dataset };
+    abbreviation ??= finite ? _loc(unitModel.symbol) : "";
+    abbreviationTooltip ??= finite ? unitModel.unitName : "";
+    data ??= getUnitValueString(unitModel);
+    source ??= getUnitValueString(unitModel.evaluatedClone(unitModel.getRollData()));
+    locked ??= unitModel.schema.isLocked(model);
+  }
+  action ??= "updatePaths";
   label ||= model?.getFieldForProperty(path)?.label || "";
   placeholder = _loc(String(placeholder || model?.getFieldForProperty(path)?.placeholder || ""));
   paths ??= path;

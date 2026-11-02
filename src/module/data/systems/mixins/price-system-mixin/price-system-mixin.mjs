@@ -50,8 +50,14 @@ export default function PriceSystemMixin(Base) {
     }
 
     /** @inheritDoc */
+    evaluateUnits(rollData = {}) {
+      super.evaluateUnits(rollData);
+      this.price.evaluate(rollData);
+    }
+
+    /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { price: this.price.rollValue });
+      return Object.assign(super.getLocalRollData(), { price: this.price.value });
     }
   }
 

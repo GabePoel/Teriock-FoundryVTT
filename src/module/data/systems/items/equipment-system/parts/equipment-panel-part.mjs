@@ -57,10 +57,10 @@ export default function EquipmentPanelPart(Base) {
                   value: this.storage.count.value,
                 },
               ),
-              this.storage.weight.max === Infinity
+              this.storage.weight.max.unitType !== "finite"
                 ? _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeightNoMax", { value: this.storage.weight.value })
                 : _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight", {
-                  max: this.storage.weight.max.toString(),
+                  max: this.storage.weight.max.value.toString(),
                   value: this.storage.weight.value,
                 }),
               _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", { value: this.storage.weight.multiplier }),

@@ -24,12 +24,9 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
   /** @inheritDoc */
   async _prepareContext(options) {
     const sourceLong = this.document.system.range.long.clone();
+    const storageWeight = this.document.system.storage.weight;
+    const unlimitedStorageWeight = storageWeight.max.unitType !== "finite";
     return Object.assign(await super._prepareContext(options), {
-      price: {
-        data: getUnitValueString(this.document.system.price),
-        locked: this.document.system.schema.getField("price").isLocked(this.document),
-        source: getUnitValueString(this.document.system.price.clone()),
-      },
       range: {
         data: this.document.system.range.long.unitType === "finite"
           ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
@@ -44,10 +41,15 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
           })
           : sourceLong.label,
       },
-      weight: {
-        data: getUnitValueString(this.document.system.weight),
-        locked: this.document.system.schema.getField("weight").isLocked(this.document),
-        source: getUnitValueString(this.document.system.weight.clone()),
+      // Weight carried without a maximum is in pounds
+      storageWeight: {
+        abbreviation: unlimitedStorageWeight ? _loc("TERIOCK.WEIGHT.lb.symbol") : undefined,
+        abbreviationTooltip: unlimitedStorageWeight ? _loc("TERIOCK.WEIGHT.lb.plural") : undefined,
+        data: getStorageWeightString(storageWeight.value, storageWeight.max),
+        source: getStorageWeightString(
+          storageWeight.value,
+          storageWeight.max.evaluatedClone(this.document.getRollData()),
+        ),
       },
     });
   }
@@ -60,10 +62,15 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
 }
 
 /**
- * Get the display string for a unit value, evaluated in its own unit.
- * @param {BaseUnitModel} unitModel
+ * Get the display string for the weight carried by storage.
+ * @param {number} value - Weight carried in lb
+ * @param {StorageMaxWeightModel} max
  * @returns {string}
  */
-function getUnitValueString(unitModel) {
-  return unitModel.unitType === "finite" ? String(unitModel.unitValue) : unitModel.label;
+function getStorageWeightString(value, max) {
+  if (max.unitType !== "finite") { return String(value); }
+  return _loc("TERIOCK.FORMAT.outOf", {
+    denominator: max.unitValue,
+    numerator: (value / max.conversion).toNearest(TERIOCK.CONST.UNIT_PRECISION),
+  });
 }

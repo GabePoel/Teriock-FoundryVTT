@@ -3,7 +3,7 @@ import { DocumentSelector } from "../../../../../../applications/dialogs/_module
 import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
 import { InfiniteNumberField, UnitField } from "../../../../../fields/_module.mjs";
 import { migrateRename, migrateUnitNumber } from "../../../../../fields/tools/migrations.mjs";
-import { WeightUnitModel } from "../../../../../models/_module.mjs";
+import { EquipmentWeightModel, StorageMaxWeightModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -33,7 +33,7 @@ export default function EquipmentStoragePart(Base) {
           count: new fields.SchemaField({ max: new InfiniteNumberField() }),
           enabled: new fields.BooleanField({ initial: false, required: false }),
           weight: new fields.SchemaField({
-            max: new InfiniteNumberField(),
+            max: new UnitField(StorageMaxWeightModel),
             multiplier: new fields.NumberField({
               initial: 1,
               min: 0,
@@ -43,7 +43,7 @@ export default function EquipmentStoragePart(Base) {
             }),
           }),
         }),
-        weight: new UnitField(WeightUnitModel),
+        weight: new UnitField(EquipmentWeightModel),
       };
     }
 
@@ -52,7 +52,8 @@ export default function EquipmentStoragePart(Base) {
       migrateRename(source, "storage.maxCount", "storage.count.max");
       migrateRename(source, "storage.maxWeight", "storage.weight.max");
       migrateRename(source, "storage.weightMultiplier", "storage.weight.multiplier");
-      migrateUnitNumber(source, "weight", WeightUnitModel);
+      migrateUnitNumber(source, "storage.weight.max", StorageMaxWeightModel, { unit: "unlimited" });
+      migrateUnitNumber(source, "weight", EquipmentWeightModel);
       return super.migrateData(source, options);
     }
 
@@ -138,30 +139,9 @@ export default function EquipmentStoragePart(Base) {
       );
     }
 
-    /**
-     * The total weight of this equipment and everything it carries.
-     * @returns {number}
-     */
-    get totalWeight() {
-      if (this.stashed || this.parent.elder?.type === "species") { return 0; }
-      let total = this.weight.rollValue * (this.consumption.enabled ? this.quantity.value : 1) * this.weightMultiplier;
-      if (this.storage.enabled) { total += this.storage.weight.value; }
-      return total.toNearest(TERIOCK.CONST.UNIT_PRECISION);
-    }
-
     /** @inheritDoc */
     get visibleTypes() {
       return this.storage.enabled ? super.visibleTypes : super.visibleTypes.filter(t => t !== "equipment");
-    }
-
-    /**
-     * How much to adjust the weight of each individual instance of this equipment by.
-     * @returns {number}
-     */
-    get weightMultiplier() {
-      if (this.parent.elder?.type === "equipment") { return this.parent.elder?.system?.storage?.weight?.multiplier
-          ?? 1; }
-      return 1;
     }
 
     /** @inheritDoc */
@@ -231,6 +211,13 @@ export default function EquipmentStoragePart(Base) {
     }
 
     /** @inheritDoc */
+    evaluateUnits(rollData = {}) {
+      super.evaluateUnits(rollData);
+      this.storage.weight.max.evaluate(rollData);
+      this.weight.evaluate(rollData);
+    }
+
+    /** @inheritDoc */
     getEmbedContextMenuEntries(doc) {
       const entries = super.getEmbedContextMenuEntries(doc);
       entries.push(...[{
@@ -263,10 +250,10 @@ export default function EquipmentStoragePart(Base) {
         "storage.count.max": safeInf(this.storage.count.max),
         "storage.count.over": Number(this.storage.count.over),
         "storage.weight": this.storage.weight.value,
-        "storage.weight.max": safeInf(this.storage.weight.max),
+        "storage.weight.max": safeInf(this.storage.weight.max.value),
         "storage.weight.mult": this.storage.weight.multiplier,
         "storage.weight.over": Number(this.storage.weight.over),
-        weight: this.totalWeight,
+        weight: this.weight.total,
       });
     }
 
@@ -386,12 +373,12 @@ export default function EquipmentStoragePart(Base) {
         },
       });
       Object.defineProperties(this.storage.weight, {
-        over: { configurable: true, get: () => this.storage.weight.value > this.storage.weight.max },
+        over: { configurable: true, get: () => this.storage.weight.value > this.storage.weight.max.value },
         // Async stored equipment is assumed to have a weight of 0
         value: {
           configurable: true,
           get: () =>
-            stored().map(e => e.system?.totalWeight ?? 0).reduce((a, b) => a + b, 0).toNearest(
+            stored().map(e => e.system?.weight?.total ?? 0).reduce((a, b) => a + b, 0).toNearest(
               TERIOCK.CONST.UNIT_PRECISION,
             ),
         },

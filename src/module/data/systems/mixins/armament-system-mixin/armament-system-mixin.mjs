@@ -363,6 +363,13 @@ export default function ArmamentSystemMixin(Base) {
     }
 
     /** @inheritDoc */
+    evaluateUnits(rollData = {}) {
+      super.evaluateUnits(rollData);
+      this.range.long.evaluate(rollData);
+      this.range.short.evaluate(rollData);
+    }
+
+    /** @inheritDoc */
     getEmbedContextMenuEntries(doc) {
       const entries = [{
         group: "usage",
@@ -383,11 +390,11 @@ export default function ArmamentSystemMixin(Base) {
         bv: this.bv.value,
         dmg: this.damage.base || 0,
         "dmg.2h": this.damage.twoHanded || 0,
-        range: this.range.long.rollValue,
-        "range.long": this.range.long.rollValue,
+        range: this.range.long.value,
+        "range.long": this.range.long.value,
         "range.melee": Number(this.range.melee),
         "range.ranged": Number(this.range.ranged),
-        "range.short": this.range.short.rollValue,
+        "range.short": this.range.short.value,
         spellTurning: Number(this.spellTurning),
         vitals: Number(this.vitals),
       });

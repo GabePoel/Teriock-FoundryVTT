@@ -88,13 +88,19 @@ export default function ActorCapacitiesPart(Base) {
       let equipmentWeight = 0;
       for (const e of this.parent.previewedTypes.equipment) {
         if (e.elder?.type === "equipment") { continue; }
-        equipmentWeight += e.system.totalWeight;
+        equipmentWeight += e.system.weight.total;
       }
       this.weight.equipment = equipmentWeight;
       const carried = this.weight.equipment + this.weight.money;
       this.weight.carried = carried.toNearest(TERIOCK.CONST.UNIT_PRECISION);
-      const value = this.weight.equipment + this.weight.money + this.weight.self.rollValue;
+      const value = this.weight.equipment + this.weight.money + this.weight.self.value;
       this.weight.value = value.toNearest(TERIOCK.CONST.UNIT_PRECISION);
+    }
+
+    /** @inheritDoc */
+    evaluateUnits(rollData = {}) {
+      super.evaluateUnits(rollData);
+      this.weight.self.evaluate(rollData);
     }
 
     /** @inheritDoc */
@@ -110,7 +116,7 @@ export default function ActorCapacitiesPart(Base) {
         "carry.max": this.carryingCapacity.max,
         "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
         size: this.size.value,
-        weight: this.weight.self.rollValue,
+        weight: this.weight.self.value,
       });
       return rollData;
     }

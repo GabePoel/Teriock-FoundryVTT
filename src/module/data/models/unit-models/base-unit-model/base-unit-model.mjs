@@ -127,10 +127,11 @@ export default class BaseUnitModel extends BaseDataModel {
    * Get the source data for a value in the base unit. This uses the largest
    * finite unit that represents the given value as a whole number.
    * @param {number} value
+   * @param {Teriock.Units.UnitEntry[]} [choiceEntries] - Units to choose from.
    * @returns {{ raw: string, unit: string }}
    */
-  static getSourceFromValue(value) {
-    const entries = this.finiteChoiceEntries.toSorted((a, b) => (b.conversion || 1) - (a.conversion || 1));
+  static getSourceFromValue(value, choiceEntries = this.finiteChoiceEntries) {
+    const entries = choiceEntries.toSorted((a, b) => (b.conversion || 1) - (a.conversion || 1));
     const base = entries.find(e => (e.conversion || 1) === 1) ?? entries.at(-1);
     if (value === 0) { return { raw: "0", unit: base.id }; }
     for (const { conversion = 1, id } of entries) {
@@ -138,27 +139,6 @@ export default class BaseUnitModel extends BaseDataModel {
       if (Math.abs(count - Math.round(count)) < 1e-9) { return { raw: String(Math.round(count)), unit: id }; }
     }
     return { raw: String(value), unit: base.id };
-  }
-
-  /**
-   * Convert to the base numerical unit.
-   * @param {number} value
-   * @returns {number}
-   */
-  #convert(value) {
-    const unitType = this.unitType;
-    if (unitType === "zero") { return 0; }
-    if (unitType === "infinite") { return Infinity; }
-    return value.toNearest(TERIOCK.CONST.UNIT_PRECISION);
-  }
-
-  /**
-   * Derive the value of the formula.
-   * @param {object} [rollData]
-   * @returns {number}
-   */
-  #evaluate(rollData = {}) {
-    return BaseRoll.minValue(this.formula, rollData);
   }
 
   /**
@@ -219,14 +199,6 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Evaluated value that's safe to use in roll data.
-   * @returns {number}
-   */
-  get rollValue() {
-    return this.#convert(this.#evaluate());
-  }
-
-  /**
    * An abbreviation for the unit.
    * @returns {string}
    */
@@ -255,20 +227,12 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Value derived from current roll data in chosen unit.
+   * Evaluated value in chosen unit.
    * @returns {number}
    */
   get unitValue() {
     if (this.unitType !== "finite") { return this.value; }
     return this.convertTo(this.unit).toNearest(TERIOCK.CONST.UNIT_PRECISION);
-  }
-
-  /**
-   * Value derived from current roll data in base unit.
-   * @returns {number}
-   */
-  get value() {
-    return this.#convert(this.#evaluate(this.getRollData()));
   }
 
   /**
@@ -291,6 +255,34 @@ export default class BaseUnitModel extends BaseDataModel {
     const unitType = this.unitType;
     if (unitType !== "finite") { return this.value; }
     return this.value / (this.constructor.finiteChoiceEntries.find(e => e.id === unit)?.conversion || 1);
+  }
+
+  /**
+   * Evaluate and set the value.
+   * @param {object} [rollData]
+   */
+  evaluate(rollData = {}) {
+    const unitType = this.unitType;
+    if (unitType === "zero") { this.value = 0; }
+    else if (unitType === "infinite") { this.value = Infinity; }
+    else { this.value = BaseRoll.minValue(this.formula, rollData).toNearest(TERIOCK.CONST.UNIT_PRECISION); }
+  }
+
+  /**
+   * Make a clone evaluated with some given roll data.
+   * @param {object} [rollData]
+   * @returns {this}
+   */
+  evaluatedClone(rollData = {}) {
+    const clone = this.clone();
+    clone.evaluate(rollData);
+    return clone;
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.evaluate();
   }
 
   /**

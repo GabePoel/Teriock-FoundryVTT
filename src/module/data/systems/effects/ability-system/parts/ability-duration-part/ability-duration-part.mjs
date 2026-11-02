@@ -25,6 +25,12 @@ export default function AbilityDurationPart(Base) {
     }
 
     /** @inheritDoc */
+    evaluateUnits(rollData = {}) {
+      super.evaluateUnits(rollData);
+      this.duration.evaluate(rollData);
+    }
+
+    /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
 

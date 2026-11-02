@@ -167,7 +167,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           unit: _loc("TERIOCK.LENGTH.ft.symbol"),
         }),
       };
-      const sourceWeight = weight.self.clone();
+      const sourceWeight = weight.self.evaluatedClone(this.document.getRollData());
       context.weight = {
         data: weight.self.valueAbbreviation,
         source: sourceWeight.isDefault ? null : sourceWeight.valueAbbreviation,

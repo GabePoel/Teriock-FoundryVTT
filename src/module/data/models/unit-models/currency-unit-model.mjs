@@ -30,6 +30,15 @@ export default class CurrencyUnitModel extends BaseUnitModel {
     return [{ id: "none", label: "TERIOCK.MODELS.CurrencyUnit.UNITS.none.label" }];
   }
 
+  /**
+   * Only coins are chosen from.
+   * @inheritDoc
+   */
+  static getSourceFromValue(value, choiceEntries = this.finiteChoiceEntries) {
+    const coins = choiceEntries.filter(e => TERIOCK.CONFIG.currency[e.id]?.equipmentType === "coin");
+    return super.getSourceFromValue(value, coins);
+  }
+
   /** @inheritDoc */
   get icon() {
     return TERIOCK.DISPLAY.icons.manifest.stat.gp;
