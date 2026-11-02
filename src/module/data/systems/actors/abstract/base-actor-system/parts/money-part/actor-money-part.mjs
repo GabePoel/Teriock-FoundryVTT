@@ -72,7 +72,7 @@ export default function ActorMoneyPart(Base) {
       { currencies: currencyKeys = null, debt = true, equipmentTypes = null, mode = "exact" } = {},
     ) {
       const currencies = Object.entries(TERIOCK.CONFIG.currency).filter(([key, config]) =>
-        (!currencyKeys || currencyKeys.some(c => [config.code, config.identifier, key].includes(c)))
+        (!currencyKeys || currencyKeys.some(c => [config.identifier, config.symbol, key].includes(c)))
         && (!equipmentTypes || equipmentTypes.includes(config.equipmentType))
       ).map(([key, config]) => ({ held: Math.max(0, this.money[key] || 0), key, value: config.conversion })).sort((
         a,

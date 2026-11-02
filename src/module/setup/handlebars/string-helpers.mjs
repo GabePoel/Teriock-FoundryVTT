@@ -1,4 +1,4 @@
-import { asInf, formatGp, toClass, toKebabCase } from "../../utils/_module.mjs";
+import { asInf, toClass, toKebabCase } from "../../utils/_module.mjs";
 
 /**
  * Show a string only if it's at least as long as some specified length.
@@ -10,4 +10,4 @@ function minLen(value, length) {
   return value.length >= length ? value : "";
 }
 
-export default { asInf, formatGp, minLen, toClass, toKebabCase };
+export default { asInf, minLen, toClass, toKebabCase };

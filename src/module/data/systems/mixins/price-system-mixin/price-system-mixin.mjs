@@ -1,7 +1,6 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
-import { UnitField } from "../../../fields/_module.mjs";
-import { migrateUnitNumber } from "../../../fields/tools/migrations.mjs";
-import { CurrencyUnitModel } from "../../../models/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Relevant wiki pages:
@@ -23,13 +22,18 @@ export default function PriceSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { price: new UnitField(CurrencyUnitModel) });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateUnitNumber(source, "price", CurrencyUnitModel, { unit: "none" });
-      return super.migrateData(source, options);
+      return Object.assign(super.defineSchema(), {
+        price: new fields.NumberField({
+          blank: true,
+          initial: null,
+          integer: false,
+          min: 0,
+          nullable: true,
+          placeholder: _loc("COMMON.None"),
+          required: true,
+          step: 0.01,
+        }),
+      });
     }
 
     /**
@@ -38,7 +42,7 @@ export default function PriceSystemMixin(Base) {
      */
     get _priceWrappers() {
       if (!this._shouldShowPriceWrapper) { return []; }
-      return [this.price.valueAbbreviation];
+      return [_loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: this.price.toNearest(0.01) })];
     }
 
     /**
@@ -46,12 +50,12 @@ export default function PriceSystemMixin(Base) {
      * @return {boolean}
      */
     get _shouldShowPriceWrapper() {
-      return this.price.unitType === "finite" && this.parent.parent?.type === "inventory";
+      return typeof this.price === "number" && this.parent.parent?.type === "inventory";
     }
 
     /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { price: this.price.rollValue });
+      return Object.assign(super.getLocalRollData(), { price: this.price });
     }
   }
 

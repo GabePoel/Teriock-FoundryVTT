@@ -164,13 +164,8 @@ export default function PlayableActorSheetMechanicalPart(Base) {
         reach: toRangeHTML(size.reach),
         space: _loc("TERIOCK.SHEETS.Actor.TABS.Details.size.spaceFormat", {
           length: size.length * game.system.grid.distance,
-          unit: _loc("TERIOCK.LENGTH.ft.symbol"),
+          unit: _loc("TERIOCK.MODELS.LengthUnit.UNITS.ft.symbol"),
         }),
-      };
-      const sourceWeight = weight.self.clone();
-      context.weight = {
-        data: weight.self.valueAbbreviation,
-        source: sourceWeight.isDefault ? null : sourceWeight.valueAbbreviation,
       };
       context.conditions = {};
       for (const key of Object.keys(TERIOCK.STATUSES.conditions)) {
@@ -191,6 +186,9 @@ export default function PlayableActorSheetMechanicalPart(Base) {
 function toRangeHTML(range) {
   if ([Infinity, null].includes(range)) { return asInf(range); }
   return createElement("span", {
-    innerText: _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: range, unit: _loc("TERIOCK.LENGTH.ft.symbol") }),
+    innerText: _loc("TERIOCK.MODELS.BaseUnit.FORMAT", {
+      number: range,
+      unit: _loc("TERIOCK.MODELS.LengthUnit.UNITS.ft.symbol"),
+    }),
   }).outerHTML;
 }

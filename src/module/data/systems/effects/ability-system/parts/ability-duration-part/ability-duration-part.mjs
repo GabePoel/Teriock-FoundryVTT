@@ -1,5 +1,6 @@
-import { UnitField } from "../../../../../fields/_module.mjs";
 import { DurationModel } from "../../../../../models/unit-models/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Ability duration part.
@@ -21,7 +22,7 @@ export default function AbilityDurationPart(Base) {
   {
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { duration: new UnitField(DurationModel) });
+      return Object.assign(super.defineSchema(), { duration: new fields.EmbeddedDataField(DurationModel) });
     }
 
     /** @inheritDoc */

@@ -1,8 +1,10 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
-import { FormulaField, UnitField } from "../../../fields/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
+
+const { fields } = foundry.data;
 
 export default class DurationAutomation extends BaseAutomation {
   /** @inheritDoc */
@@ -14,7 +16,7 @@ export default class DurationAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      duration: new UnitField(TimeUnitModel),
+      duration: new fields.EmbeddedDataField(TimeUnitModel),
       substitution: new FormulaField({ initial: "@base + @new" }),
     });
   }

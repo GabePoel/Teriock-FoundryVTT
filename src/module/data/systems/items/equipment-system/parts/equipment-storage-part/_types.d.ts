@@ -1,5 +1,3 @@
-import { WeightUnitModel } from "../../../../../models/_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export interface EquipmentStoragePartData {
@@ -28,8 +26,8 @@ declare global {
           readonly value: number;
         };
       };
-      /** <schema> Weight */
-      weight: WeightUnitModel;
+      /** <schema> Weight (lb) */
+      weight: number;
     }
   }
 }

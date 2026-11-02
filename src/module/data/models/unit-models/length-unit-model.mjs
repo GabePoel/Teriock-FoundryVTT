@@ -14,7 +14,30 @@ export default class LengthUnitModel extends BaseUnitModel {
    * @returns {Teriock.Units.UnitEntry[]}
    */
   static get finiteChoiceEntries() {
-    return this._getEntriesFromConfig(TERIOCK.CONFIG.length);
+    return [{
+      conversion: 1 / 12,
+      id: "in",
+      label: "TERIOCK.MODELS.LengthUnit.UNITS.in.label",
+      plural: "TERIOCK.MODELS.LengthUnit.UNITS.in.plural",
+      scale: 0,
+      system: "imperial",
+    }, {
+      conversion: 1,
+      id: "ft",
+      label: "TERIOCK.MODELS.LengthUnit.UNITS.ft.label",
+      plural: "TERIOCK.MODELS.LengthUnit.UNITS.ft.plural",
+      scale: 1,
+      symbol: "TERIOCK.MODELS.LengthUnit.UNITS.ft.symbol",
+      system: "imperial",
+    }, {
+      conversion: 5280,
+      id: "mile",
+      label: "TERIOCK.MODELS.LengthUnit.UNITS.mile.label",
+      plural: "TERIOCK.MODELS.LengthUnit.UNITS.mile.plural",
+      scale: 2,
+      symbol: "mi",
+      system: "imperial",
+    }];
   }
 
   /** @inheritDoc */

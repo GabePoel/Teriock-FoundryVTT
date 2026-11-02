@@ -1,7 +1,4 @@
-import { UnitField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialString } from "../../../../../../fields/tools/initializers.mjs";
-import { migrateUnitNumber } from "../../../../../../fields/tools/migrations.mjs";
-import { ActorWeightModel } from "../../../../../../models/_module.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -50,16 +47,10 @@ export default function ActorCapacitiesPart(Base) {
           carried: initialNumber(),
           equipment: initialNumber(),
           money: initialNumber(),
-          self: new UnitField(ActorWeightModel),
+          self: new fields.NumberField({ initial: null, min: 0, nullable: true, placeholder: _loc("COMMON.Default") }),
           value: initialNumber(),
         }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateUnitNumber(source, "weight.self", ActorWeightModel, { raw: "", unit: "lb" });
-      return super.migrateData(source, options);
     }
 
     /**
@@ -93,7 +84,7 @@ export default function ActorCapacitiesPart(Base) {
       this.weight.equipment = equipmentWeight;
       const carried = this.weight.equipment + this.weight.money;
       this.weight.carried = carried.toNearest(TERIOCK.CONST.UNIT_PRECISION);
-      const value = this.weight.equipment + this.weight.money + this.weight.self.rollValue;
+      const value = this.weight.equipment + this.weight.money + this.weight.self;
       this.weight.value = value.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
@@ -110,7 +101,7 @@ export default function ActorCapacitiesPart(Base) {
         "carry.max": this.carryingCapacity.max,
         "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
         size: this.size.value,
-        weight: this.weight.self.rollValue,
+        weight: this.weight.self,
       });
       return rollData;
     }
@@ -128,6 +119,8 @@ export default function ActorCapacitiesPart(Base) {
       this.size.category = sizeDefinition.category;
       this.size.length = sizeDefinition.length;
       this.size.reach = sizeDefinition.reach;
+      this.weight.self ??= this.parent.constructor.getDefaultWeight(this.size.value);
+      this.weight.self = this.weight.self.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
     /** @inheritDoc */
