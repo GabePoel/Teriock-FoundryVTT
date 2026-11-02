@@ -169,8 +169,8 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       };
       const sourceWeight = weight.self.clone();
       context.weight = {
-        data: weight.self.valueAbbreviation,
-        source: sourceWeight.isDefault ? null : sourceWeight.valueAbbreviation,
+        data: weight.self.tag,
+        source: sourceWeight.isDefault ? null : sourceWeight.tag,
       };
       context.conditions = {};
       for (const key of Object.keys(TERIOCK.STATUSES.conditions)) {

@@ -1,6 +1,6 @@
 import { TeriockToken } from "../../../canvas/placeables/_module.mjs";
+import CompetenceModel from "../../../data/models/competence-model/competence-model.mjs";
 import { BaseModifierModel } from "../../../data/models/modifier-models/_module.mjs";
-import CompetenceModel from "../../../data/models/scaling-models/competence-model/competence-model.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 
 declare module "./base-execution.mjs" {

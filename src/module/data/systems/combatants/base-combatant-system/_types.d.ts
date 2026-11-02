@@ -1,4 +1,4 @@
-import { InitiativeModel } from "../../../models/modifier-models/_module.mjs";
+import { InitiativeModifierModel } from "../../../models/modifier-models/_module.mjs";
 
 declare module "./base-combatant-system.mjs" {
   export default interface BaseCombatantSystem {
@@ -9,7 +9,7 @@ declare module "./base-combatant-system.mjs" {
     /** <schema> Reactions remaining this round */
     reactions: number;
     /** <schema> Fallback initiative if no actor is present */
-    initiative: InitiativeModel;
+    initiative: InitiativeModifierModel;
 
     readonly parent: TeriockCombatant;
   }

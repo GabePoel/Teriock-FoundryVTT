@@ -1,9 +1,9 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
 import LengthUnitModel from "./length-unit-model.mjs";
 
-export default class RangeModel extends LengthUnitModel {
+export default class RangeUnitModel extends LengthUnitModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { rawOptions: { placeholder: "COMMON.None" } });
+  static metadata = mergeMetadata(super.metadata, { formula: true, rawOptions: { placeholder: "COMMON.None" } });
 
   /**
    * @inheritDoc
@@ -14,10 +14,5 @@ export default class RangeModel extends LengthUnitModel {
       id: "melee",
       label: "TERIOCK.MODELS.Range.UNITS.melee.label",
     }, { id: "self", label: "TERIOCK.MODELS.Range.UNITS.self.label" }];
-  }
-
-  /** @inheritDoc */
-  get icon() {
-    return TERIOCK.DISPLAY.icons.manifest.ability.range;
   }
 }

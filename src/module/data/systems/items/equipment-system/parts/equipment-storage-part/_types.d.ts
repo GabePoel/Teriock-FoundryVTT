@@ -1,4 +1,4 @@
-import { EquipmentWeightModel, StorageMaxWeightModel } from "../../../../../models/_module.mjs";
+import { EquipmentWeightUnitModel, StorageMaxWeightUnitModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -19,7 +19,7 @@ declare global {
         /** <schema> Weight of items in container */
         weight: {
           /** <schema> Maximum weight that can go in container */
-          max: StorageMaxWeightModel;
+          max: StorageMaxWeightUnitModel;
           /** <schema> Amount to multiply weight of each item in container by */
           multiplier: number;
           /** Whether this is over its maximum weight */
@@ -29,7 +29,7 @@ declare global {
         };
       };
       /** <schema> Weight */
-      weight: EquipmentWeightModel;
+      weight: EquipmentWeightUnitModel;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { prefixObject } from "../../../../../../../utils/_module.mjs";
-import { AttributeModel } from "../../../../../../models/_module.mjs";
+import { AttributeModifierModel } from "../../../../../../models/_module.mjs";
 
 /**
  * @import { FeatExecution } from "../../../../../../../executions/activity-executions/feat-execution.mjs";
@@ -16,7 +16,7 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
  *
  * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @see {AttributeModel}
+ * @see {AttributeModifierModel}
  * @see {FeatExecution}
  */
 export default function ActorAttributesPart(Base) {
@@ -33,7 +33,7 @@ export default function ActorAttributesPart(Base) {
       const attributes = {};
       Object.entries(TERIOCK.CONFIG.attribute).forEach((
         [key, value],
-      ) => (attributes[key] = new EmbeddedDataField(AttributeModel, {
+      ) => (attributes[key] = new EmbeddedDataField(AttributeModifierModel, {
         label: value.label,
         initial: () => ({ competence: { raw: 0 }, score: -3 }),
       })));

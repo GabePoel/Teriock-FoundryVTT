@@ -1,4 +1,4 @@
-import { InitiativeModel, PiercingModel } from "../../../../../../models/_module.mjs";
+import { InitiativeModifierModel, PiercingModel } from "../../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -24,7 +24,7 @@ declare global {
         cc: number;
       };
       /** <schema> Initiative */
-      initiative: InitiativeModel;
+      initiative: InitiativeModifierModel;
       /** <schema> Offense */
       offense: {
         /** <schema> Piercing type */

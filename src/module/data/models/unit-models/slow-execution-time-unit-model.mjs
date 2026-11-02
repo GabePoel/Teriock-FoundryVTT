@@ -1,7 +1,7 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import { TimeUnitModel } from "./_module.mjs";
+import TimeUnitModel from "./time-unit-model.mjs";
 
-export default class SlowExecutionTimeModel extends TimeUnitModel {
+export default class SlowExecutionTimeUnitModel extends TimeUnitModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
@@ -12,6 +12,7 @@ export default class SlowExecutionTimeModel extends TimeUnitModel {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     groupLabels: { infinite: "TERIOCK.MODELS.SlowExecutionTime.GROUPS.infinite" },
+    icon: TERIOCK.DISPLAY.icons.manifest.ability.execution,
   });
 
   /** @inheritDoc */
@@ -20,10 +21,5 @@ export default class SlowExecutionTimeModel extends TimeUnitModel {
       id: "longRest",
       label: "TERIOCK.TERMS.ExecutionTime.slow.longRest",
     }];
-  }
-
-  /** @inheritDoc */
-  get icon() {
-    return TERIOCK.DISPLAY.icons.manifest.ability.execution;
   }
 }

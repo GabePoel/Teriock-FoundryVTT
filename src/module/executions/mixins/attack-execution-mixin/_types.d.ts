@@ -1,5 +1,5 @@
 import { TeriockToken } from "../../../canvas/placeables/_module.mjs";
-import PiercingModel from "../../../data/models/scaling-models/piercing-model/piercing-model.mjs";
+import PiercingModel from "../../../data/models/piercing-model/piercing-model.mjs";
 
 declare global {
   namespace Teriock.Execution {

@@ -163,4 +163,17 @@ export default class StatPoolModel extends BaseDataModel {
     this.dice = new Collection(dice.map(d => [d.id, d]));
     this.value = dice.reduce((total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total, 0);
   }
+
+  /** @inheritDoc */
+  prepareUpdaterContext() {
+    const data = _loc("TERIOCK.MODELS.BaseStatPool.PANELS.summary", { formula: this.formula, value: this.value });
+    return {
+      abbreviation: this.#config.abbreviation,
+      action: "updateStatDice",
+      data,
+      dataset: { stat: this.stat },
+      icon: this.icon,
+      source: this.formula === this._source.formula ? data : this._source.formula,
+    };
+  }
 }

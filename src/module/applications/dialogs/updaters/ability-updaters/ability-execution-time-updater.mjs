@@ -1,4 +1,4 @@
-import { SlowExecutionTimeModel } from "../../../../data/models/unit-models/_module.mjs";
+import { SlowExecutionTimeUnitModel } from "../../../../data/models/unit-models/_module.mjs";
 import { makeIconClass, objectMap } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -25,7 +25,7 @@ export default class AbilityExecutionTimeUpdater extends BaseUpdater {
    */
   get #isSlowFiniteUnit() {
     const unit = this._currentData.system.executionTime.slow.unit;
-    return SlowExecutionTimeModel.finiteChoiceEntries.some(e => e.id === unit);
+    return SlowExecutionTimeUnitModel.finiteChoiceEntries.some(e => e.id === unit);
   }
 
   /** @inheritDoc */

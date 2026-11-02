@@ -1,9 +1,9 @@
-import { TradecraftModel } from "../../../../../../models/_module.mjs";
+import { TradecraftModifierModel } from "../../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
     export interface ActorTradecraftsPartData {
-      tradecrafts: Record<Teriock.Keys.Tradecraft, TradecraftModel>;
+      tradecrafts: Record<Teriock.Keys.Tradecraft, TradecraftModifierModel>;
     }
   }
 }

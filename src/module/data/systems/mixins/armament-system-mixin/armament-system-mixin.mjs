@@ -13,7 +13,7 @@ import { FormulaField, IdentifierField, MultiChangeField, UnitField } from "../.
 import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { migrateIterables, migrateRename } from "../../../fields/tools/migrations.mjs";
-import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs";
+import { documentSettingsModels, RangeUnitModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -72,10 +72,10 @@ export default function ArmamentSystemMixin(Base) {
         equipmentClasses: identifierSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
         notes: new fields.HTMLField(),
         range: new MultiChangeField({
-          long: new UnitField(RangeModel),
+          long: new UnitField(RangeUnitModel),
           melee: new fields.BooleanField({ initial: true }),
           ranged: new fields.BooleanField({ initial: false }),
-          short: new UnitField(RangeModel),
+          short: new UnitField(RangeUnitModel),
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
         spellTurning: new fields.BooleanField(),

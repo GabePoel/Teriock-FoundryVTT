@@ -1,6 +1,6 @@
 import { UnitField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialString } from "../../../../../../fields/tools/initializers.mjs";
-import { ActorWeightModel } from "../../../../../../models/_module.mjs";
+import { ActorWeightUnitModel } from "../../../../../../models/_module.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -49,7 +49,7 @@ export default function ActorCapacitiesPart(Base) {
           carried: initialNumber(),
           equipment: initialNumber(),
           money: initialNumber(),
-          self: new UnitField(ActorWeightModel),
+          self: new UnitField(ActorWeightUnitModel),
           value: initialNumber(),
         }),
       });

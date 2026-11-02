@@ -6,7 +6,7 @@ const { fields } = foundry.data;
  * A {@link BaseModifierModel} for attribute modifiers.
  * @see {FeatExecution}
  */
-export default class AttributeModel extends BaseModifierModel {
+export default class AttributeModifierModel extends BaseModifierModel {
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.activity.FeatExecution;

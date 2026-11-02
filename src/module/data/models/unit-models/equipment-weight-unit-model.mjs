@@ -4,7 +4,7 @@ import WeightUnitModel from "./weight-unit-model.mjs";
  * Weight of a piece of equipment.
  * @property {EquipmentSystem} parent
  */
-export default class EquipmentWeightModel extends WeightUnitModel {
+export default class EquipmentWeightUnitModel extends WeightUnitModel {
   /**
    * How much to adjust the weight of this by.
    * @returns {number}

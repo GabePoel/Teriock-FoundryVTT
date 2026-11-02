@@ -2,23 +2,8 @@
   {{#if config.pool.enabled}}
     {{formUpdater
       @root/document
-      abbreviation=(localize config.abbreviation)
-      action="updateStatDice"
-      data=(localize
-        "TERIOCK.MODELS.BaseStatPool.PANELS.summary"
-        formula=(path @root/system.statDice key "formula")
-        value=(path @root/system.statDice key "value"))
-      dataset=(object stat=key)
-      icon=(path @root/system.statDice key "icon")
       info="core:hit-points-and-mana-points"
-      source=(ifThen
-        (eq (path @root/system.statDice key "formula") (path @root/system._source.statDice key "formula"))
-        (localize
-          "TERIOCK.MODELS.BaseStatPool.PANELS.summary"
-          formula=(path @root/system.statDice key "formula")
-          value=(path @root/system.statDice key "value"))
-        (path @root/system._source.statDice key "formula"))
-      label=(localize (concat "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice." key ".label"))
+      path=(concat "system.statDice." key)
     }}
   {{/if}}
 {{/each}}

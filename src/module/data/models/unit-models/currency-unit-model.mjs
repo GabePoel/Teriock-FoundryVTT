@@ -3,7 +3,11 @@ import BaseUnitModel from "./base-unit-model/base-unit-model.mjs";
 
 export default class CurrencyUnitModel extends BaseUnitModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { unitConfig: "currency", unlimited: false });
+  static metadata = mergeMetadata(super.metadata, {
+    icon: TERIOCK.DISPLAY.icons.manifest.stat.gp,
+    unitConfig: "currency",
+    unlimited: false,
+  });
 
   /**
    * @inheritDoc
@@ -23,10 +27,5 @@ export default class CurrencyUnitModel extends BaseUnitModel {
       if (Number.isInteger(count)) { return { raw: count, unit }; }
     }
     return super.migrateNumberToUnit(value);
-  }
-
-  /** @inheritDoc */
-  get icon() {
-    return TERIOCK.DISPLAY.icons.manifest.stat.gp;
   }
 }

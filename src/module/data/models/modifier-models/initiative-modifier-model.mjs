@@ -2,7 +2,7 @@ import { mergeMetadata, omit } from "../../../utils/_module.mjs";
 import { rollableFormulaField } from "../../fields/tools/builders.mjs";
 import { BaseModifierModel } from "./_module.mjs";
 
-export default class InitiativeModel extends BaseModifierModel {
+export default class InitiativeModifierModel extends BaseModifierModel {
   /**
    * @inheritDoc
    * @type {Teriock.Metadata.ModelMetadata}

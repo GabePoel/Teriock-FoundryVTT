@@ -3,7 +3,7 @@ import { DocumentSelector } from "../../../../../../applications/dialogs/_module
 import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
 import { InfiniteNumberField, UnitField } from "../../../../../fields/_module.mjs";
 import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
-import { EquipmentWeightModel, StorageMaxWeightModel } from "../../../../../models/_module.mjs";
+import { EquipmentWeightUnitModel, StorageMaxWeightUnitModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -33,7 +33,7 @@ export default function EquipmentStoragePart(Base) {
           count: new fields.SchemaField({ max: new InfiniteNumberField() }),
           enabled: new fields.BooleanField({ initial: false, required: false }),
           weight: new fields.SchemaField({
-            max: new UnitField(StorageMaxWeightModel),
+            max: new UnitField(StorageMaxWeightUnitModel),
             multiplier: new fields.NumberField({
               initial: 1,
               min: 0,
@@ -43,7 +43,7 @@ export default function EquipmentStoragePart(Base) {
             }),
           }),
         }),
-        weight: new UnitField(EquipmentWeightModel),
+        weight: new UnitField(EquipmentWeightUnitModel),
       };
     }
 

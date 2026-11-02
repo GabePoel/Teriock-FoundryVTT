@@ -5,7 +5,7 @@ import WeightUnitModel from "./weight-unit-model.mjs";
  * A weight model with some special handling for default values calculated
  * from an Actor's size.
  */
-export default class ActorWeightModel extends WeightUnitModel {
+export default class ActorWeightUnitModel extends WeightUnitModel {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     rawOptions: { initial: null, nullable: true, placeholder: "COMMON.Default" },

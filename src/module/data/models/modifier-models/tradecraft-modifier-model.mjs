@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * A {@link BaseModifierModel} for tradecraft modifiers.
  * @see {TradecraftCheckExecution}
  */
-export default class TradecraftModel extends BaseModifierModel {
+export default class TradecraftModifierModel extends BaseModifierModel {
   /** @inheritDoc */
   static get Execution() {
     return teriock.executions.activity.TradecraftCheckExecution;

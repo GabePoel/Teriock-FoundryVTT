@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { InitiativeModel } from "../../../models/modifier-models/_module.mjs";
+import { InitiativeModifierModel } from "../../../models/modifier-models/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../../mixins/_module.mjs";
 
@@ -34,7 +34,7 @@ export default class BaseCombatantSystem extends mixClasses(TypeDataModel, BaseS
         nullable: false,
       }),
       attackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
-      initiative: new fields.EmbeddedDataField(InitiativeModel),
+      initiative: new fields.EmbeddedDataField(InitiativeModifierModel),
       reactions: new fields.NumberField({
         initial: TERIOCK.CONFIG.combat.maxReactions,
         integer: true,

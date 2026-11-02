@@ -1,7 +1,7 @@
 import { toKebabCase } from "../../../../../../utils/_module.mjs";
 import { FormulaField, UnitField } from "../../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
-import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
+import { RangeUnitModel, SlowExecutionTimeUnitModel } from "../../../../../models/unit-models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -38,7 +38,7 @@ export default function AbilityUsagePart(Base) {
         }),
         executionTime: new fields.SchemaField({
           base: new fields.StringField({ blank: false, initial: "a1", required: true }),
-          slow: new UnitField(SlowExecutionTimeModel),
+          slow: new UnitField(SlowExecutionTimeUnitModel),
         }),
         expansion: new fields.SchemaField({
           cap: rollableFormulaField(),
@@ -48,7 +48,7 @@ export default function AbilityUsagePart(Base) {
             initial: "mov",
             required: true,
           }),
-          range: new UnitField(RangeModel),
+          range: new UnitField(RangeUnitModel),
           type: new fields.StringField({ initial: null, nullable: true }),
         }),
         featSaveAttribute: new fields.StringField({
@@ -70,7 +70,7 @@ export default function AbilityUsagePart(Base) {
           nullable: false,
           required: true,
         }),
-        range: new UnitField(RangeModel),
+        range: new UnitField(RangeUnitModel),
         targets: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.ability.targets }), {
           initial: () => ["creature"],
         }),
@@ -85,7 +85,7 @@ export default function AbilityUsagePart(Base) {
       let time;
       if (this.maneuver !== "slow") {
         time = TERIOCK.CONFIG.ability.maneuver[this.maneuver].executionTimes[this.executionTime.base]?.label;
-      } else { time = this.executionTime.slow.label; }
+      } else { time = this.executionTime.slow.tag; }
       return [
         time || "",
         this.piercing.label,
@@ -106,7 +106,7 @@ export default function AbilityUsagePart(Base) {
             ? TERIOCK.CONFIG.attribute[this.expansion.featSaveAttribute]?.label
             : "",
           TERIOCK.CONFIG.ability.expansion[this.expansion.type]?.label || "",
-          this.expansion.range.abbreviation,
+          this.expansion.range.tag,
           FormulaField.exists(this.expansion.cap)
             ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
             : "",
@@ -120,9 +120,9 @@ export default function AbilityUsagePart(Base) {
      */
     get _targetingWrappers() {
       return [
-        this.isRanged ? this.range.abbreviation : "",
+        this.isRanged ? this.range.tag : "",
         ...Array.from(this.targets.map(target => TERIOCK.CONFIG.ability.targets[target]?.label)),
-        this.duration.label || "",
+        this.duration.tag || "",
       ];
     }
 

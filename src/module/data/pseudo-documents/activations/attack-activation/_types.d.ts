@@ -1,4 +1,4 @@
-import { CompetenceModel } from "../../../models/scaling-models/_module.mjs";
+import { CompetenceModel } from "../../../models/_module.mjs";
 
 declare module "./attack-activation.mjs" {
   export default interface AttackActivation {

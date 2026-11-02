@@ -1,4 +1,4 @@
-import { BaseUnitModel } from "../../data/models/_module.mjs";
+import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { createElement, makeIconClass, makeIconElement, toKebabCase } from "../../utils/_module.mjs";
 import uiHelpers from "./ui-helpers.mjs";
 
@@ -72,32 +72,14 @@ function formClasses(model, options = { hash: {} }) {
  * @todo Simplify if possible.
  */
 function formUpdater(model, options = { hash: {} }) {
-  const { changed, color, icon, info } = options.hash;
-  let {
-    abbreviation,
-    abbreviationTooltip,
-    action,
-    data,
-    dataset = {},
-    isPlaceholder = false,
-    label,
-    locked,
-    paths,
-    placeholder,
-    source,
-  } = options.hash;
   const path = String(options.hash.path ?? "");
-  const unitModel = foundry.utils.getProperty(model ?? {}, path);
-  if (unitModel instanceof BaseUnitModel) {
-    const finite = unitModel.unitType === "finite";
-    action ??= "updateUnit";
-    dataset = { path, ...dataset };
-    abbreviation ??= finite ? _loc(unitModel.symbol) : "";
-    abbreviationTooltip ??= finite ? unitModel.unitName : "";
-    data ??= unitModel.valueString;
-    source ??= unitModel.clone().valueString;
-    locked ??= unitModel.schema.isLocked(model);
+  const hash = { ...options.hash };
+  const dataModel = foundry.utils.getProperty(model ?? {}, path);
+  if (dataModel instanceof BaseDataModel) {
+    for (const [key, value] of Object.entries(dataModel.prepareUpdaterContext())) { hash[key] ??= value; }
   }
+  const { abbreviation, abbreviationTooltip, changed, color, dataset = {}, icon, info, locked } = hash;
+  let { action, data, isPlaceholder = false, label, paths, placeholder, source } = hash;
   action ??= "updatePaths";
   label ||= model?.getFieldForProperty(path)?.label || "";
   placeholder = _loc(String(placeholder || model?.getFieldForProperty(path)?.placeholder || ""));

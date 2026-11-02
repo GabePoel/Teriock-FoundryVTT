@@ -5,7 +5,7 @@ import { dotJoin, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 /**
- * @import { InitiativeModel } from "../../data/models/modifier-models/_module.mjs";
+ * @import { InitiativeModifierModel } from "../../data/models/modifier-models/_module.mjs";
  */
 
 const { Combatant } = foundry.documents;
@@ -36,7 +36,7 @@ export default class TeriockCombatant
 
   /**
    * The initiative model to use.
-   * @returns {InitiativeModel}
+   * @returns {InitiativeModifierModel}
    */
   get initiativeModel() {
     return this.actor?.system?.initiative ?? this.system.initiative;

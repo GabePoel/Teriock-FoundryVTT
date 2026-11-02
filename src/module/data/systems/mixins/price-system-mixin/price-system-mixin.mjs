@@ -31,7 +31,7 @@ export default function PriceSystemMixin(Base) {
      */
     get _priceWrappers() {
       if (!this._shouldShowPriceWrapper) { return []; }
-      return [this.price.valueAbbreviation];
+      return [this.price.tag];
     }
 
     /**

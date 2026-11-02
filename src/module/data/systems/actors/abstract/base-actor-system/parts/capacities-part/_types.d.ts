@@ -1,4 +1,4 @@
-import { ActorWeightModel } from "../../../../../../models/_module.mjs";
+import { ActorWeightUnitModel } from "../../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -26,7 +26,7 @@ declare global {
         /** <derived> Weight of the actor's money */
         money: number;
         /** <schema> Weight of the actor */
-        self: ActorWeightModel;
+        self: ActorWeightUnitModel;
         /** <derived> Total weight of actor and everything they carry (self + carried) */
         value: number;
       };

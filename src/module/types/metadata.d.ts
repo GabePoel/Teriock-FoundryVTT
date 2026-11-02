@@ -7,6 +7,7 @@ declare global {
     export type UnitMetadata = ModelMetadata & {
       formula: boolean;
       groupLabels: Record<"finite" | "infinite" | "zero", string>;
+      icon: string;
       initialUnit: string | null;
       rawOptions: { placeholder?: string } & Record<string, unknown>;
       unitConfig: string | null;

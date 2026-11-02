@@ -15,7 +15,7 @@ const { fields } = foundry.data;
  * @mixes ExpirableSystem
  * @mixes MetaphysicsSystem
  * @mixes ThresholdData
- * @see {DurationModel}
+ * @see {DurationUnitModel}
  */
 export default class ApplicableEffectSystem
   extends mixClasses(

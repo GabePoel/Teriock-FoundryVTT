@@ -2,7 +2,7 @@ import { BaseRoll, ThresholdRoll } from "../../../../../../../dice/rolls/_module
 import { LocalDocumentField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../../models/_module.mjs";
-import InitiativeModel from "../../../../../../models/modifier-models/initiative-model.mjs";
+import InitiativeModifierModel from "../../../../../../models/modifier-models/initiative-modifier-model.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -49,7 +49,7 @@ export default function ActorCombatPart(Base) {
           bv: new fields.NumberField({ initial: null, integer: true, nullable: true }),
           cc: initialNumber(TERIOCK.CONFIG.system.baseValues.ac),
         }),
-        initiative: new fields.EmbeddedDataField(InitiativeModel),
+        initiative: new fields.EmbeddedDataField(InitiativeModifierModel),
         offense: new fields.SchemaField({
           piercing: new fields.EmbeddedDataField(PiercingModel),
           sb: new fields.BooleanField({ initial: false }),

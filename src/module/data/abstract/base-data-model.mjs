@@ -6,6 +6,7 @@ const { DataModel } = foundry.abstract;
 
 /**
  * @import { DataSchema } from "@common/abstract/_types.mjs";
+ * @import { FormUpdaterHash } from "../../setup/handlebars/field-helpers.mjs";
  */
 
 /**
@@ -66,4 +67,12 @@ export default class BaseDataModel extends mixClasses(DataModel, AbstractDataMix
    * @category Document
    */
   prepareData() {}
+
+  /**
+   * Context for a form updater that displays and updates this.
+   * @returns {Partial<FormUpdaterHash>}
+   */
+  prepareUpdaterContext() {
+    return {};
+  }
 }

@@ -5,7 +5,7 @@ import { DocumentExecution } from "../../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 
 /**
- * @import { InitiativeModel } from "../../../data/models/modifier-models/_module.mjs";
+ * @import { InitiativeModifierModel } from "../../../data/models/modifier-models/_module.mjs";
  */
 
 /**
@@ -14,8 +14,8 @@ import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
  */
 export default class InitiativeExecution extends mixClasses(DocumentExecution, ThresholdExecutionMixin) {
   /**
-   * Get the default initiative formula or one derived from an InitiativeModel.
-   * @param {InitiativeModel} [model]
+   * Get the default initiative formula or one derived from an InitiativeModifierModel.
+   * @param {InitiativeModifierModel} [model]
    * @returns {Teriock.System.FormulaString}
    */
   static getFormula(model) {

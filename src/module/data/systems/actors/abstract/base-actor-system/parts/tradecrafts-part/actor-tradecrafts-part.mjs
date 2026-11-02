@@ -1,5 +1,5 @@
 import { prefixObject } from "../../../../../../../utils/_module.mjs";
-import { TradecraftModel } from "../../../../../../models/modifier-models/_module.mjs";
+import { TradecraftModifierModel } from "../../../../../../models/modifier-models/_module.mjs";
 
 /**
  * @import { TradecraftExecutionMixin } from "../../../../../../../executions/mixins/tradecraft-execution-mixin.mjs";
@@ -15,7 +15,7 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
  *
  * @template {MixinBase<typeof AbstractActorSystem>} T
  * @param {T} Base
- * @see {TradecraftModel}
+ * @see {TradecraftModifierModel}
  * @see {TradecraftExecutionMixin}
  */
 export default function ActorTradecraftsPart(Base) {
@@ -32,7 +32,7 @@ export default function ActorTradecraftsPart(Base) {
       const tradecrafts = {};
       Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach((
         [key, value],
-      ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModel, {
+      ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModifierModel, {
         label: value.label,
         initial: () => ({ competence: { raw: 0 }, score: 0 }),
       })));

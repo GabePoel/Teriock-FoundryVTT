@@ -56,7 +56,6 @@ export default class AbilitySheet extends ChildSheet {
         data: getDeliveryString(this.document.system.delivery, this.document.system.piercing),
         source: getDeliveryString(this.document.system._source.delivery, this.document.system.piercing.clone()),
       },
-      duration: { data: this.document.system.duration.label, source: this.document.system.duration.clone().label },
       executionTime: {
         changed: ["system.maneuver", "system.executionTime"].some(p =>
           foundry.utils.hasProperty(this.document.overrides, p)
@@ -101,7 +100,7 @@ function getDeliveryString(delivery, piercing) {
 /**
  * @param {Teriock.Keys.Maneuver} maneuver
  * @param {string} base
- * @param {SlowExecutionTimeModel} slow
+ * @param {SlowExecutionTimeUnitModel} slow
  */
 function getExecutionTimeString(maneuver, base, slow) {
   if (maneuver === "slow") { return slow.label; }

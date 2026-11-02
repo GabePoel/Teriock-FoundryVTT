@@ -1,8 +1,8 @@
-import { BaseDataModel } from "../../../abstract/_module.mjs";
-import { competenceField } from "../../../fields/tools/builders.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
+import { competenceField } from "../../fields/tools/builders.mjs";
 
 /**
- * Model for common implementation of piercing settings.
+ * Model for a common implementation of competence settings.
  * @implements {Teriock.Functionality.ScalingModel}
  */
 export default class CompetenceModel extends BaseDataModel {

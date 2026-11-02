@@ -12,6 +12,7 @@ const { fields } = foundry.data;
 
 /**
  * Model for a formula paired with a unit of measurement.
+ * @implements {Teriock.Functionality.ScalingModel}
  */
 export default class BaseUnitModel extends BaseDataModel {
   /** @inheritDoc */
@@ -28,6 +29,7 @@ export default class BaseUnitModel extends BaseDataModel {
       infinite: "TERIOCK.MODELS.BaseUnit.GROUPS.infinite",
       zero: "TERIOCK.MODELS.BaseUnit.GROUPS.zero",
     },
+    icon: TERIOCK.DISPLAY.icons.manifest.ui.edit,
     initialUnit: null,
     rawOptions: { placeholder: "0" },
     unitConfig: null,
@@ -144,17 +146,6 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * A text abbreviation of this.
-   * @returns {string}
-   */
-  get abbreviation() {
-    if (this.unitType === "finite") {
-      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.raw || 0, unit: _loc(this.symbol) });
-    }
-    return this.label;
-  }
-
-  /**
    * The conversion factor for the chosen unit.
    * @returns {number}
    */
@@ -163,6 +154,16 @@ export default class BaseUnitModel extends BaseDataModel {
     if (unitType === "zero") { return 0; }
     if (unitType === "infinite") { return Infinity; }
     return this.entry.conversion || 1;
+  }
+
+  /**
+   * Formula value in the chosen unit.
+   * @returns {string}
+   */
+  get converted() {
+    if (this.unitType !== "finite") { return String(this.value); }
+    if (this.metadata.formula) { return this.raw || "0"; }
+    return String((this.value / this.conversion).toNearest(TERIOCK.CONST.UNIT_PRECISION));
   }
 
   /**
@@ -189,24 +190,19 @@ export default class BaseUnitModel extends BaseDataModel {
     return FormulaField.multiply(formula, conversion.toString());
   }
 
-  /**
-   * An icon for this unit model.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get icon() {
-    return "pen-to-square";
+    return this.constructor.metadata.icon;
   }
 
   /**
-   * Text that represents this unit value.
+   * Text that represents this unit value with the full unit name.
    * @returns {string}
    */
   get label() {
     const entry = this.entry;
-    if (entry?.type === "finite") {
-      return `${this.raw || "0"} ${Number(this.raw) === 1 ? _loc(entry.label) : _loc(entry.plural)}`;
-    }
-    return entry ? _loc(entry.label) : undefined;
+    if (entry?.type !== "finite") { return entry ? _loc(entry.label) : ""; }
+    return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.converted, unit: this.unitLabel });
   }
 
   /**
@@ -234,13 +230,22 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * The name of the chosen unit with appropriate pluralization applied.
+   * Text that represents this in its chosen unit with the symbol.
    * @returns {string}
    */
-  get unitName() {
+  get tag() {
+    if (this.unitType !== "finite") { return this.label; }
+    return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.converted, unit: _loc(this.symbol) });
+  }
+
+  /**
+   * Slightly longer form of {@link tag}.
+   * @returns {string}
+   */
+  get unitLabel() {
     const entry = this.entry;
     if (entry?.type !== "finite") { return this.label; }
-    return _loc(this.unitValue === 1 ? entry.label : entry.plural);
+    return _loc(Number(this.converted) === 1 ? entry.label : entry.plural);
   }
 
   /**
@@ -252,15 +257,6 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Value derived from current roll data in chosen unit.
-   * @returns {number}
-   */
-  get unitValue() {
-    if (this.unitType !== "finite") { return this.value; }
-    return (this.value / this.conversion).toNearest(TERIOCK.CONST.UNIT_PRECISION);
-  }
-
-  /**
    * Value derived from current roll data in base unit.
    * @returns {number}
    */
@@ -268,23 +264,19 @@ export default class BaseUnitModel extends BaseDataModel {
     return this.#evaluate(this.metadata.formula ? this.getRollData() : {});
   }
 
-  /**
-   * Text abbreviation of evaluated value in the chosen unit.
-   * @returns {string}
-   */
-  get valueAbbreviation() {
-    if (this.unitType === "finite") {
-      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.unitValue, unit: _loc(this.symbol) });
-    }
-    return this.label;
-  }
-
-  /**
-   * Display string for the raw value in the chosen unit.
-   * @returns {string}
-   */
-  get valueString() {
-    return this.unitType === "finite" ? String(this.raw ?? "") : this.label;
+  /** @inheritDoc */
+  prepareUpdaterContext() {
+    const finite = this.unitType === "finite";
+    const source = this.clone();
+    return {
+      abbreviation: finite ? _loc(this.symbol) : "",
+      abbreviationTooltip: finite ? this.unitLabel : "",
+      action: "updateUnit",
+      data: finite ? String(this.raw ?? "") : this.label,
+      dataset: { path: this.schema.fieldPath },
+      locked: this.schema.isLocked(this.getNearestDocument()),
+      source: source.unitType === "finite" ? String(source.raw ?? "") : source.label,
+    };
   }
 
   /**

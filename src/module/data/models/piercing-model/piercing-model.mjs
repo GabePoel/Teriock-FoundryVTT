@@ -1,4 +1,4 @@
-import { BaseDataModel } from "../../../abstract/_module.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
