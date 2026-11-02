@@ -112,7 +112,7 @@ export default class TeriockTooltipManager extends TooltipManager {
     return game.settings.get("teriock", "documentTooltips").has(documentName);
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _setAnchor(direction) {
     const DIRECTIONS = TeriockTooltipManager.TOOLTIP_DIRECTIONS;
     if ((this.element.dataset.tooltipClass ?? "").includes(TeriockTooltipManager.RICH_TOOLTIP_CLASS)) {

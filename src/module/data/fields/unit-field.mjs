@@ -19,7 +19,7 @@ const BASE_UNIT_CHANGE_TYPES = new Set(["add", "downgrade", "override", "subtrac
  * Special case {@link EmbeddedDataField} for a {@link BaseUnitModel}.
  */
 export default class UnitField extends EmbeddedDataField {
-  /** @inheritdoc */
+  /** @inheritDoc */
   _migrate(value, options, _state) {
     if (typeof value === "number") { value = this.model.migrateNumberToUnit(value); }
     else if (value === null) { value = {}; }

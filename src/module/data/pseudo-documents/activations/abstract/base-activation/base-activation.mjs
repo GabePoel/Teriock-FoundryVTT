@@ -29,7 +29,7 @@ export default class BaseActivation extends BasePseudoDocument {
   #tokens;
 
   /**
-   * @inheritdoc
+   * @inheritDoc
    * @returns {TeriockActor|null}
    */
   get actor() {

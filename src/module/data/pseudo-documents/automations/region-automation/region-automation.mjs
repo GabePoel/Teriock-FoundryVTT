@@ -47,7 +47,7 @@ export default class RegionAutomation
    */
   #selection;
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get _formPaths() {
     return [
       ...super._formPaths,

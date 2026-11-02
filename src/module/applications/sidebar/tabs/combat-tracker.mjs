@@ -283,13 +283,13 @@ export default class TeriockCombatTracker
 
   /**
    * Remove default hover handling.
-   * @inheritdoc
+   * @inheritDoc
    */
   _onCombatantHoverIn() {}
 
   /**
    * Remove default hover handling.
-   * @inheritdoc
+   * @inheritDoc
    */
   _onCombatantHoverOut() {}
 

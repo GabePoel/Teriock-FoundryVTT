@@ -126,7 +126,7 @@ export default class TargetAutomation extends BaseAutomation {
     return [data];
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get _formPaths() {
     return ["regionType", ...this._regionTypePaths, ...this._tokenPaths, "hr", ...this._restrictionPaths];
   }

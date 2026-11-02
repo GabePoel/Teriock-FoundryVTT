@@ -15,7 +15,7 @@ class PseudoTypedSchemaField extends TypedSchemaField {
     return super._cleanType(value, options, state);
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _validateSpecial(value) {
     if (!value?.type || value.type in this.types) { return super._validateSpecial(value); }
     return true;

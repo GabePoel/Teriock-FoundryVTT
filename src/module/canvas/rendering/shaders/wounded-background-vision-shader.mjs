@@ -4,7 +4,7 @@ const { BackgroundVisionShader } = foundry.canvas.rendering.shaders;
  * Wounded vision shader - creates red vignette effect for a down/dead {@link TeriockTokenDocument}
  */
 export default class WoundedBackgroundVisionShader extends BackgroundVisionShader {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultUniforms() {
     return { ...super.defaultUniforms, colorTint: [1.0, 1.0, 1.0] };
   }
@@ -31,7 +31,7 @@ export default class WoundedBackgroundVisionShader extends BackgroundVisionShade
     }`;
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get isRequired() {
     return true;
   }

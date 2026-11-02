@@ -5,7 +5,7 @@ const { ColorationVisionShader } = foundry.canvas.rendering.shaders;
  * @category Ethereal
  */
 export default class EtherealColorationVisionShader extends ColorationVisionShader {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultUniforms() {
     return { ...super.defaultUniforms, colorEffect: [0.4, 0.5, 0.8] };
   }
@@ -35,7 +35,7 @@ export default class EtherealColorationVisionShader extends ColorationVisionShad
     }`;
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get isRequired() {
     return true;
   }

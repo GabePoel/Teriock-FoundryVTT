@@ -17,7 +17,7 @@ export default class CurrencyUnitModel extends BaseUnitModel {
     return [{ id: "none", label: "TERIOCK.MODELS.CurrencyUnit.UNITS.none.label" }];
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static migrateNumberToUnit(value) {
     const coins = Object.entries(TERIOCK.CONFIG.currency).filter(([_id, c]) => c.equipmentType === "coin").sort((
       [_a, a],

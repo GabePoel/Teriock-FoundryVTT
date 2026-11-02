@@ -30,7 +30,7 @@ export default class FormulaField extends StringField {
     return roll.formula;
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get _defaults() {
     return Object.assign(super._defaults, { deterministic: false, required: false });
   }
@@ -304,7 +304,7 @@ export default class FormulaField extends StringField {
     return foundry.applications.elements.HTMLFormulaInputElement.create(config);
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _validateType(value) {
     if (this.deterministic) {
       const roll = new BaseRoll(value, {});

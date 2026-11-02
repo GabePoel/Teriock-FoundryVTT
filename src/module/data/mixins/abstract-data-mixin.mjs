@@ -42,7 +42,7 @@ export default function AbstractDataMixin(Base) {
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      * @param {string} [documentName]
      * @returns {TeriockDocument|null}
      */

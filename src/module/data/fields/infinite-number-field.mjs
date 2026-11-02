@@ -5,7 +5,7 @@ const { NumberField } = foundry.data.fields;
  * @inheritDoc
  */
 export default class InfiniteNumberField extends NumberField {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get _defaults() {
     return Object.assign(super._defaults, {
       initial: null,

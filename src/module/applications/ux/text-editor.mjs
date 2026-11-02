@@ -40,7 +40,7 @@ export default class TeriockTextEditor extends TextEditor {
     return config;
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static createAnchor({ attrs = {}, classes = [], dataset = {}, icon, name } = {}) {
     if (dataset.uuid && game.settings.get("teriock", "contentLinkTooltips")) { dataset.tooltipUuid = dataset.uuid; }
     return super.createAnchor({ attrs, classes, dataset, icon, name });

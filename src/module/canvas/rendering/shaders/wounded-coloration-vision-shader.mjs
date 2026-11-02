@@ -4,7 +4,7 @@ const { ColorationVisionShader } = foundry.canvas.rendering.shaders;
  * Wounded coloration vision shader - adds red overlay at edges
  */
 export default class WoundedColorationVisionShader extends ColorationVisionShader {
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultUniforms() {
     return {
       ...super.defaultUniforms,
@@ -33,7 +33,7 @@ export default class WoundedColorationVisionShader extends ColorationVisionShade
     }`;
   }
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get isRequired() {
     return true;
   }

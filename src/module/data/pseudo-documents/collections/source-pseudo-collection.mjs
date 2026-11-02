@@ -24,8 +24,8 @@ export default class SourcePseudoCollection extends PseudoCollection {
   _source;
 
   /**
-   * @inheritdoc
    * Existing entries are retained, but new source data is used.
+   * @inheritDoc
    * @param {DataModel} model - The parent data model that holds this collection.
    * @param {object} [options]
    */
