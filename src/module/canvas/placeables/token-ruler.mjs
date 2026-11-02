@@ -1,3 +1,5 @@
+import { makeIconClass } from "../../utils/_module.mjs";
+
 const { TokenRuler } = foundry.canvas.placeables.tokens;
 
 /** @inheritDoc */
@@ -35,7 +37,12 @@ export default class TeriockTokenRuler extends TokenRuler {
   /** @inheritDoc */
   _getWaypointLabelContext(waypoint, state) {
     const context = super._getWaypointLabelContext(waypoint, state);
-    if (context) { context.speed = this.token.actor?.system.movementSpeed; }
+    if (context) {
+      context.speed = this.token.actor?.system.movementSpeed;
+      if (waypoint.terrain?.difficultTerrain) {
+        context.difficultTerrain = makeIconClass(TERIOCK.CONFIG.character.movement.difficultTerrain.icon);
+      }
+    }
     return context;
   }
 
