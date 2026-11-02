@@ -72,14 +72,6 @@ export default class AbilitySheet extends ChildSheet {
           this.document.system.executionTime.slow.clone(),
         ),
       },
-      expansionRange: {
-        data: getUnitString(this.document.system.expansion.range),
-        source: getUnitString(this.document.system.expansion.range.clone()),
-      },
-      range: {
-        data: getUnitString(this.document.system.range),
-        source: getUnitString(this.document.system.range.clone()),
-      },
     });
   }
 
@@ -115,11 +107,4 @@ function getExecutionTimeString(maneuver, base, slow) {
   if (maneuver === "slow") { return slow.label; }
   if (maneuver === "passive") { return TERIOCK.CONFIG.ability.maneuver.passive.executionTimes.passive.label; }
   return TERIOCK.CONFIG.ability.maneuver[maneuver]?.executionTimes[base]?.label;
-}
-
-/**
- * @param {BaseUnitModel} unit
- */
-function getUnitString(unit) {
-  return unit.unitType === "finite" ? unit.formula : unit.label;
 }

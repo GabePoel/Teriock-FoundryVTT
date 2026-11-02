@@ -1,3 +1,4 @@
+import { mergeMetadata } from "../../../utils/_module.mjs";
 import { TimeUnitModel } from "./_module.mjs";
 
 export default class SlowExecutionTimeModel extends TimeUnitModel {
@@ -7,6 +8,11 @@ export default class SlowExecutionTimeModel extends TimeUnitModel {
     "TERIOCK.MODELS.Duration",
     "TERIOCK.MODELS.SlowExecutionTime",
   ];
+
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, {
+    groupLabels: { infinite: "TERIOCK.MODELS.SlowExecutionTime.GROUPS.infinite" },
+  });
 
   /** @inheritDoc */
   static get infiniteChoiceEntries() {

@@ -1,3 +1,5 @@
+import { EquipmentWeightModel, StorageMaxWeightModel } from "../../../../../models/_module.mjs";
+
 declare global {
   namespace Teriock.Models {
     export interface EquipmentStoragePartData {
@@ -16,8 +18,8 @@ declare global {
         enabled: boolean;
         /** <schema> Weight of items in container */
         weight: {
-          /** <schema> Maximum weight that can go in container (`null` = unlimited) */
-          max: number;
+          /** <schema> Maximum weight that can go in container */
+          max: StorageMaxWeightModel;
           /** <schema> Amount to multiply weight of each item in container by */
           multiplier: number;
           /** Whether this is over its maximum weight */
@@ -26,8 +28,8 @@ declare global {
           readonly value: number;
         };
       };
-      /** <schema> Weight (lb) */
-      weight: number;
+      /** <schema> Weight */
+      weight: EquipmentWeightModel;
     }
   }
 }

@@ -4,6 +4,15 @@ declare global {
 
     export type ModelMetadata = { initialCompetence: Teriock.System.CompetenceLevel, pseudos: Record<string, string> };
 
+    export type UnitMetadata = ModelMetadata & {
+      formula: boolean;
+      groupLabels: Record<"finite" | "infinite" | "zero", string>;
+      initialUnit: string | null;
+      rawOptions: { placeholder?: string } & Record<string, unknown>;
+      unitConfig: string | null;
+      unlimited: boolean;
+    };
+
     type TypeTags = { embed: boolean, panel: boolean };
 
     export type TypeMetadata = ModelMetadata & { documentName: string, icon: string, tags: TypeTags, type: string };

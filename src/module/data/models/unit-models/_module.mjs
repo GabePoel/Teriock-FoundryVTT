@@ -1,6 +1,11 @@
+export { default as ActorWeightModel } from "./actor-weight-model.mjs";
 export { default as BaseUnitModel } from "./base-unit-model/base-unit-model.mjs";
+export { default as CurrencyUnitModel } from "./currency-unit-model.mjs";
 export { default as DurationModel } from "./duration-model.mjs";
+export { default as EquipmentWeightModel } from "./equipment-weight-model.mjs";
 export { default as LengthUnitModel } from "./length-unit-model.mjs";
 export { default as RangeModel } from "./range-model.mjs";
 export { default as SlowExecutionTimeModel } from "./slow-execution-time-model.mjs";
+export { default as StorageMaxWeightModel } from "./storage-max-weight-model.mjs";
 export { default as TimeUnitModel } from "./time-unit-model.mjs";
+export { default as WeightUnitModel } from "./weight-unit-model.mjs";

@@ -1,4 +1,7 @@
+import { UnitField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialString } from "../../../../../../fields/tools/initializers.mjs";
+import { migrateUnitNumber } from "../../../../../../fields/tools/migrations.mjs";
+import { ActorWeightModel } from "../../../../../../models/_module.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -47,10 +50,16 @@ export default function ActorCapacitiesPart(Base) {
           carried: initialNumber(),
           equipment: initialNumber(),
           money: initialNumber(),
-          self: new fields.NumberField({ initial: null, min: 0, nullable: true, placeholder: _loc("COMMON.Default") }),
+          self: new UnitField(ActorWeightModel),
           value: initialNumber(),
         }),
       });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      migrateUnitNumber(source, "weight.self", ActorWeightModel, { raw: null, unit: "lb" });
+      return super.migrateData(source, options);
     }
 
     /**
@@ -79,12 +88,12 @@ export default function ActorCapacitiesPart(Base) {
       let equipmentWeight = 0;
       for (const e of this.parent.previewedTypes.equipment) {
         if (e.elder?.type === "equipment") { continue; }
-        equipmentWeight += e.system.totalWeight;
+        equipmentWeight += e.system.weight.total;
       }
       this.weight.equipment = equipmentWeight;
       const carried = this.weight.equipment + this.weight.money;
       this.weight.carried = carried.toNearest(TERIOCK.CONST.UNIT_PRECISION);
-      const value = this.weight.equipment + this.weight.money + this.weight.self;
+      const value = this.weight.equipment + this.weight.money + this.weight.self.rollValue;
       this.weight.value = value.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
@@ -101,7 +110,7 @@ export default function ActorCapacitiesPart(Base) {
         "carry.max": this.carryingCapacity.max,
         "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
         size: this.size.value,
-        weight: this.weight.self,
+        weight: this.weight.self.rollValue,
       });
       return rollData;
     }
@@ -119,8 +128,6 @@ export default function ActorCapacitiesPart(Base) {
       this.size.category = sizeDefinition.category;
       this.size.length = sizeDefinition.length;
       this.size.reach = sizeDefinition.reach;
-      this.weight.self ??= this.parent.constructor.getDefaultWeight(this.size.value);
-      this.weight.self = this.weight.self.toNearest(TERIOCK.CONST.UNIT_PRECISION);
     }
 
     /** @inheritDoc */

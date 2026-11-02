@@ -1,3 +1,4 @@
+import { BaseUnitModel } from "../../data/models/_module.mjs";
 import { createElement, makeIconClass, makeIconElement, toKebabCase } from "../../utils/_module.mjs";
 import uiHelpers from "./ui-helpers.mjs";
 
@@ -50,6 +51,7 @@ function formClasses(model, options = { hash: {} }) {
  * @typedef {FormClassesHash} FormUpdaterHash
  * @property {Record<string, string>} dataset
  * @property {string} abbreviation
+ * @property {string} abbreviationTooltip
  * @property {string} action
  * @property {string} color
  * @property {string} data
@@ -70,9 +72,33 @@ function formClasses(model, options = { hash: {} }) {
  * @todo Simplify if possible.
  */
 function formUpdater(model, options = { hash: {} }) {
-  const { abbreviation, action = "updatePaths", changed, color, dataset = {}, icon, info, locked } = options.hash;
-  let { data, isPlaceholder = false, label, paths, placeholder, source } = options.hash;
+  const { changed, color, icon, info } = options.hash;
+  let {
+    abbreviation,
+    abbreviationTooltip,
+    action,
+    data,
+    dataset = {},
+    isPlaceholder = false,
+    label,
+    locked,
+    paths,
+    placeholder,
+    source,
+  } = options.hash;
   const path = String(options.hash.path ?? "");
+  const unitModel = foundry.utils.getProperty(model ?? {}, path);
+  if (unitModel instanceof BaseUnitModel) {
+    const finite = unitModel.unitType === "finite";
+    action ??= "updateUnit";
+    dataset = { path, ...dataset };
+    abbreviation ??= finite ? _loc(unitModel.symbol) : "";
+    abbreviationTooltip ??= finite ? unitModel.unitName : "";
+    data ??= unitModel.valueString;
+    source ??= unitModel.clone().valueString;
+    locked ??= unitModel.schema.isLocked(model);
+  }
+  action ??= "updatePaths";
   label ||= model?.getFieldForProperty(path)?.label || "";
   placeholder = _loc(String(placeholder || model?.getFieldForProperty(path)?.placeholder || ""));
   paths ??= path;
@@ -125,10 +151,18 @@ function formUpdater(model, options = { hash: {} }) {
   }
   displayElement.append(valueElement);
   if (abbreviation || info) {
-    const abbreviationElement = createElement("span", {
-      className: "teriock-updater-abbreviation",
-      textContent: abbreviation ? _loc(abbreviation) : "",
-    });
+    const abbreviationElement = createElement("span", { className: "teriock-updater-abbreviation" });
+    if (abbreviation && abbreviationTooltip) {
+      abbreviationElement.append(
+        createElement("span", {
+          className: "teriock-updater-abbreviation-text",
+          dataset: { tooltip: _loc(abbreviationTooltip) },
+          textContent: _loc(abbreviation),
+        }),
+      );
+    } else if (abbreviation) {
+      abbreviationElement.textContent = _loc(abbreviation);
+    }
     if (info) { abbreviationElement.insertAdjacentHTML("beforeend", uiHelpers.infoIcon(info).toString()); }
     displayElement.append(abbreviationElement);
   }

@@ -25,7 +25,9 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   static applyChange(targetDoc, change, options = {}) {
     if (foundry.utils.getProperty(targetDoc, "system.lockedPaths")?.has(change.key)) { return {}; }
-    return super.applyChange(targetDoc, change, options);
+    const changed = super.applyChange(targetDoc, change, options);
+    if (changed[change.key] === undefined) { return {}; }
+    return changed;
   }
 
   /** @inheritDoc */

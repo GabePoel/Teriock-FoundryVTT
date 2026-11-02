@@ -8,6 +8,7 @@ declare global {
       scale?: number;
       symbol?: string;
       system?: string;
+      type?: "finite" | "infinite" | "zero";
     };
   }
 }

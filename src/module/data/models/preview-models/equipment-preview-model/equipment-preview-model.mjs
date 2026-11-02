@@ -28,7 +28,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
       },
       weight: {
         label: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label",
-        sorter: pathSorterFactory("system.totalWeight"),
+        sorter: pathSorterFactory("system.weight.total"),
       },
     });
   }

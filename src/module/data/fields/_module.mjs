@@ -8,3 +8,4 @@ export { default as TernaryField } from "./ternary-field.mjs";
 export * as tools from "./tools/_module.mjs";
 export { default as TypedIdentifierField } from "./typed-identifier-field/typed-identifier-field.mjs";
 export { default as TypedIdentifierSetField } from "./typed-identifier-set-field/typed-identifier-set-field.mjs";
+export { default as UnitField } from "./unit-field.mjs";
