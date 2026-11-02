@@ -21,9 +21,9 @@ declare global {
     export type DocumentCache = {
       /** If the document is active. */
       active?: boolean;
-      /** Previously-tracked dependency id, retained so it can be untracked when it changes. */
+      /** Previously-tracked dependency id. This is retained so it can be untracked when it changes. */
       dep?: string;
-      /** Previously-tracked typed identifier, retained so it can be untracked when it changes. */
+      /** Previously-tracked typed identifier. This is retained so it can be untracked when it changes. */
       identifier?: TypedIdentifier;
       /** Whether this document is a reference and not "real". */
       isReference?: boolean;
@@ -31,6 +31,16 @@ declare global {
       isStatus?: boolean;
       /** Previously-tracked sup id, retained so a moved sub can reset its old sup. */
       supId?: ID<TeriockActiveEffect | TeriockActor | TeriockItem> | null;
+    };
+
+    /**
+     * Store of lazily-computed values cached on an actor.
+     */
+    export type ActorCache = DocumentCache & {
+      /** Previously-prepared statuses. This is retained so status expirations can find what changed. */
+      statuses?: Set<Teriock.Keys.Condition>;
+      /** Previously-prepared token terrains. This is retained so terrain regions can find what changed. */
+      terrains?: Set<Teriock.Keys.Terrain>;
     };
 
     export type DocumentMetadata = { child: boolean, hierarchy: boolean, tooltip: boolean };

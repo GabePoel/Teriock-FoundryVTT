@@ -4,70 +4,70 @@ import { icons } from "../display/_module.mjs";
 export default {
   defaults: { initiative: { base: "1d20", bonus: "@mov.score", competence: "@p" }, maxPresence: 1 },
   movement: {
-    climb: {
+    climb: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.climb,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb",
       movementAction: "climb",
     },
-    crawl: {
+    crawl: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.crawl,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl",
       movementAction: "crawl",
     },
-    difficultTerrain: {
+    difficultTerrain: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.difficultTerrain,
       initial: 2,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain",
     },
-    dig: {
+    dig: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.dig,
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig",
       movementAction: "burrow",
     },
-    dive: {
+    dive: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "vertical",
       icon: icons.manifest.movement.dive,
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive",
       movementAction: "swim",
     },
-    fly: {
+    fly: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.fly,
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly",
       movementAction: "fly",
     },
-    hidden: {
+    hidden: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.hidden,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden",
       status: "hidden",
     },
-    leapHorizontal: {
+    leapHorizontal: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "horizontal",
       icon: icons.manifest.movement.leapHorizontal,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal",
       movementAction: "jump",
     },
-    leapVertical: {
+    leapVertical: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "vertical",
       icon: icons.manifest.movement.leapVertical,
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical",
       movementAction: "jump",
     },
-    swim: {
+    swim: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "horizontal",
       icon: icons.manifest.movement.swim,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
       movementAction: "swim",
     },
-    walk: {
+    walk: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.walk,
       initial: 3,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
@@ -76,45 +76,49 @@ export default {
   },
   /** @category Perception */
   sense: {
-    blind: {
+    blind: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "blindFighting",
       grantsSight: false,
       icon: icons.manifest.sense.blind,
       label: "TERIOCK.TERMS.Senses.blind",
     },
-    dark: {
+    dark: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "darkVision",
       grantsSight: true,
       icon: icons.manifest.sense.dark,
       label: "TERIOCK.TERMS.Senses.dark",
       visionMode: "darkvision",
     },
-    ethereal: {
+    ethereal: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "seeEthereal",
       grantsSight: false,
       icon: icons.manifest.sense.ethereal,
       label: "TERIOCK.TERMS.Senses.ethereal",
     },
-    hearing: {
+    hearing: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "soundPerception",
       grantsSight: false,
       icon: icons.manifest.sense.hearing,
       label: "TERIOCK.TERMS.Senses.hearing",
     },
-    invisible: {
+    invisible: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "seeInvisible",
       grantsSight: false,
       icon: icons.manifest.sense.invisible,
       label: "TERIOCK.TERMS.Senses.invisible",
     },
-    sight: { grantsSight: false, icon: icons.manifest.sense.sight, label: "TERIOCK.TERMS.Senses.sight" },
-    smell: {
+    sight: /** @type {Teriock.Config.SenseEntry} */ {
+      grantsSight: false,
+      icon: icons.manifest.sense.sight,
+      label: "TERIOCK.TERMS.Senses.sight",
+    },
+    smell: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "scentPerception",
       grantsSight: false,
       icon: icons.manifest.sense.smell,
       label: "TERIOCK.TERMS.Senses.smell",
     },
-    truth: {
+    truth: /** @type {Teriock.Config.SenseEntry} */ {
       detectionMode: "trueSight",
       grantsSight: false,
       icon: icons.manifest.sense.truth,

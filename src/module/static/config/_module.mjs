@@ -26,6 +26,7 @@ import powerConfig from "./power-config.mjs";
 import speciesConfig from "./species-config.mjs";
 import statConfig from "./stat-config.mjs";
 import systemConfig from "./system-config.mjs";
+import terrainConfig from "./terrain-config.mjs";
 import timeConfig from "./time-config.mjs";
 import tipConfig from "./tip-config.mjs";
 import tradecraftConfig from "./tradecraft-config.mjs";
@@ -63,6 +64,7 @@ const config = {
   species: speciesConfig,
   stat: statConfig,
   system: systemConfig,
+  terrain: terrainConfig,
   time: timeConfig,
   tip: tipConfig,
   tradecraft: tradecraftConfig,

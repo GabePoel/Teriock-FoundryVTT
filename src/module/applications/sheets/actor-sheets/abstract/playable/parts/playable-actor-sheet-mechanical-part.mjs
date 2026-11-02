@@ -167,6 +167,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           unit: _loc("TERIOCK.LENGTH.ft.symbol"),
         }),
       };
+      context.terrains = Array.from(this.document.system.terrains, t => TERIOCK.CONFIG.terrain[t]);
       const sourceWeight = weight.self.clone();
       context.weight = { data: weight.self.tag, source: sourceWeight.isDefault ? null : sourceWeight.tag };
       context.conditions = {};

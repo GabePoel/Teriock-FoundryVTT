@@ -60,13 +60,39 @@
     color: var(--color-text-subtle);
   }
 
-  .details-movement > .actor-stat {
-    flex: 1;
-    justify-content: center;
+  .details-movement {
+    height: 0;
+    min-height: 100%;
 
-    .actor-stat-value {
-      font-size: 1.5em;
+    > .actor-stat {
+      flex: 1;
+      justify-content: center;
+      padding-top: 0.25em;
+
+      .actor-stat-value {
+        font-size: 1.5em;
+      }
     }
+
+    .details-list {
+      grid-auto-rows: minmax(auto, 1.75em);
+      min-height: 0;
+
+      .affix {
+        height: 100%;
+      }
+    }
+  }
+
+  .details-terrains {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    width: 100%;
+  }
+
+  .details-terrain {
+    @include mixins.tag-style;
   }
 
   .details-fraction {

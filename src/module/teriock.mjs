@@ -232,6 +232,8 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Region.documentClass = documents.TeriockRegionDocument;
 
+  registerSubtypes(data.systems.behaviors, foundry.abstract.TypeDataModel);
+
   CONFIG.RollTable.documentClass = documents.TeriockRollTable;
 
   CONFIG.Scene.documentClass = documents.TeriockScene;
@@ -241,6 +243,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
   CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;
   CONFIG.Token.movement.defaultSpeed = 6;
+  CONFIG.Token.movement.TerrainData = data.models.TeriockTerrainData;
   CONFIG.Token.objectClass = canvas.placeables.TeriockToken;
   CONFIG.Token.rulerClass = canvas.placeables.TeriockTokenRuler;
   for (const [action, config] of Object.entries(CONFIG.Token.movement.actions)) {

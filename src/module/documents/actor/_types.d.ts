@@ -17,6 +17,7 @@ declare module "./actor.mjs" {
 
     readonly parent: TeriockTokenDocument | null;
     readonly token: TeriockTokenDocument | null;
+    get _cache(): Teriock.Documents.ActorCache;
     get appliedEffects(): ActiveEffectClass[];
     get documentName(): "Actor";
     get id(): ID<TeriockActor>;

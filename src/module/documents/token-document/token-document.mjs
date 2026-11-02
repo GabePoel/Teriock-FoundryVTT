@@ -132,6 +132,23 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     return this.parent?.tokens.filter(t => t.summoner === this) ?? [];
   }
 
+  /**
+   * The types of terrain this is in.
+   * @returns {Set<Teriock.Keys.Terrain>}
+   */
+  get terrains() {
+    const terrains = new Set();
+    for (const region of this.regions ?? []) {
+      if (region.hidden) { continue; }
+      for (const behavior of region.behaviors) {
+        if (behavior.type === "terrain" && !behavior.disabled) {
+          behavior.system.terrains.forEach(t => terrains.add(t));
+        }
+      }
+    }
+    return terrains;
+  }
+
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);

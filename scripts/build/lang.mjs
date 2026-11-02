@@ -40,6 +40,7 @@ import { default as stats } from "../../src/en/stats.json" with { type: "json" }
 import { default as statuses } from "../../src/en/statuses.json" with { type: "json" };
 import { default as systems } from "../../src/en/systems.json" with { type: "json" };
 import { default as terms } from "../../src/en/terms.json" with { type: "json" };
+import { default as terrain } from "../../src/en/terrain.json" with { type: "json" };
 import { default as time } from "../../src/en/time.json" with { type: "json" };
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
 import { default as weight } from "../../src/en/weight.json" with { type: "json" };
@@ -170,6 +171,7 @@ mergeObjects(
   statuses,
   systems,
   terms,
+  terrain,
   time,
   triggers,
   weight,

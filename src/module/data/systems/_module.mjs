@@ -1,4 +1,5 @@
 export * as actors from "./actors/_module.mjs";
+export * as behaviors from "./behaviors/_module.mjs";
 export * as cards from "./cards/_module.mjs";
 export * as combatants from "./combatants/_module.mjs";
 export * as effects from "./effects/_module.mjs";

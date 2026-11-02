@@ -30,7 +30,29 @@ export default function ActorMovementPart(Base) {
         speedAdjustments: new fields.SchemaField(
           objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
         ),
+        terrains: new fields.SetField(new fields.StringField({ choices: TERIOCK.CONFIG.terrain }), {
+          persisted: false,
+        }),
       });
+    }
+
+    /**
+     * The types of terrain this actor's tokens are in.
+     * @returns {Set<Teriock.Keys.Terrain>}
+     * @remarks This might differ from the actor's terrains because changes could modify it.
+     */
+    #getTokenTerrains() {
+      const tokens = this.parent.token ? [this.parent.token] : this.parent.getActiveTokens(true, true);
+      return new Set(tokens.flatMap(t => Array.from(t.terrains)));
+    }
+
+    /**
+     * Check if token terrains have changed and reset if needed.
+     */
+    checkTerrains() {
+      if (this.#getTokenTerrains().equals(this.parent._cache.terrains ?? new Set())) { return; }
+      this.parent.reset();
+      this.parent.render();
     }
 
     /**
@@ -51,13 +73,12 @@ export default function ActorMovementPart(Base) {
         }
       }
       const difficult = TERIOCK.CONFIG.character.speed[this.speedAdjustments.difficultTerrain].multiplier;
-      return (baseCost, from, to, distance) => {
+      return (baseCost, from, to, distance, segment) => {
         if (!distance) { return baseCost; }
-        const difficulty = baseCost / distance;
-        const terrain = difficulty > 1 && difficulty < Infinity ? 1 / difficult : difficulty;
+        const terrain = segment.terrain?.difficultTerrain ? difficult : 1;
         const h = from.i !== to.i || from.j !== to.j ? multipliers.horizontal : Infinity;
         const v = from.k !== to.k ? multipliers.vertical : Infinity;
-        return distance * terrain / Math.min(h, v);
+        return baseCost / (terrain * Math.min(h, v));
       };
     }
 
@@ -68,6 +89,7 @@ export default function ActorMovementPart(Base) {
       for (const k of Object.keys(TERIOCK.CONFIG.character.movement)) {
         rollData[`speed.${k}`] = this.speedAdjustments[k] || 0;
       }
+      for (const terrain of this.terrains) { rollData[`terrain.${terrain}`] = 1; }
       return rollData;
     }
 
@@ -75,6 +97,8 @@ export default function ActorMovementPart(Base) {
     prepareBaseData() {
       super.prepareBaseData();
       this.movementSpeed = 30 + 10 * this.attributes.mov.score;
+      this.parent._cache.terrains = this.#getTokenTerrains();
+      for (const t of this.parent._cache.terrains) { this.terrains.add(t); }
     }
 
     /** @inheritDoc */

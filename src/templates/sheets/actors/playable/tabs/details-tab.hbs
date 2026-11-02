@@ -46,6 +46,19 @@
               </button>
             {{/each}}
           </div>
+          {{#if terrains.length}}
+            <div class="teriock-block-display-divider"></div>
+            <div
+              class="details-terrains"
+              data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.terrains.tooltip"}}'
+            >
+              {{#each terrains as |terrain|}}
+                <span class="details-terrain">
+                  {{ terrain.label }}
+                </span>
+              {{/each}}
+            </div>
+          {{/if}}
         </div>
         <div class="details-right-column">
           <div class="teriock-block-display details-senses">

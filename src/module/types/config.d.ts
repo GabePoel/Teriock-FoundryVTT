@@ -52,6 +52,23 @@ declare global {
       weight: number;
     };
 
+    export type MovementEntry = {
+      direction?: "horizontal" | "vertical";
+      icon: string;
+      initial: number;
+      label: string;
+      movementAction?: string;
+      status?: Teriock.Keys.Status;
+    };
+
+    export type SenseEntry = {
+      detectionMode?: string;
+      grantsSight: boolean;
+      icon: string;
+      label: string;
+      visionMode?: string;
+    };
+
     export type StatEntry = {
       abbreviation: string;
       bar?: { class: string, initial: number, lockInputs?: boolean, max?: number, min?: number, temp?: boolean };
@@ -152,6 +169,8 @@ declare global {
     export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };
 
     export type InteractionEntry = { identifier: TypedIdentifier, label: string };
+
+    export type TerrainEntry = { img: string, label: string };
 
     export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number };
 

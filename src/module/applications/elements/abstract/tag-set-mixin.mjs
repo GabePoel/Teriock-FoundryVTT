@@ -164,10 +164,10 @@ export default function TagSetMixin(Base) {
 
     /**
      * Handle data dropped onto the form element.
-     * @param {object} data
+     * @param {object} _data
      * @abstract
      */
-    _onDropData(data) {}
+    _onDropData(_data) {}
 
     /** @inheritDoc */
     _refresh() {

@@ -5,6 +5,8 @@ declare global {
       movementSpeed: number;
       /** <base> Speed adjustments */
       speedAdjustments: Record<Teriock.Keys.Movement, Teriock.Keys.Speed>;
+      /** <base> The types of terrain this is in */
+      terrains: Set<Teriock.Keys.Terrain>;
     }
   }
 }
