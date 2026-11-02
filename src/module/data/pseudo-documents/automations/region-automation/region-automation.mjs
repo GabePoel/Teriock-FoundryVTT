@@ -31,7 +31,9 @@ export default class RegionAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
+      applyDocuments: new fields.BooleanField({ initial: false }),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
+      setTerrain: new fields.BooleanField({ initial: false }),
       terrain: new fields.SchemaField(terrainSchema()),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
@@ -41,6 +43,16 @@ export default class RegionAutomation
         required: true,
       }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (!options.partial && !("applyDocuments" in source)) {
+      source.applyDocuments = ["globalIdentifiers", "globalUuids", "localIdentifiers", "localUuids"].some(k =>
+        source[k]?.length
+      ) || Boolean(source.localQualifier);
+    }
+    return super.migrateData(source, options);
   }
 
   /**
@@ -56,14 +68,19 @@ export default class RegionAutomation
       "visibility",
       "deleteOnTurnChange",
       "hr",
-      "terrain.difficultTerrain",
-      "terrain.terrains",
-      "terrain.removedTerrains",
+      "setTerrain",
+      ...(this.setTerrain ? ["terrain.difficultTerrain", "terrain.terrains", "terrain.removedTerrains"] : []),
       "hr",
-      ...this._selectionPaths,
+      "applyDocuments",
+      ...(this.applyDocuments ? this._selectionPaths : []),
       "hr",
       ...this._overrideDataPaths,
     ];
+  }
+
+  /** @inheritDoc */
+  get hasSelection() {
+    return this.applyDocuments && super.hasSelection;
   }
 
   /**
@@ -108,8 +125,8 @@ export default class RegionAutomation
       }),
       ...this.data,
     });
-    const { difficultTerrain, removedTerrains, terrains } = this.terrain;
-    if (difficultTerrain || removedTerrains.size || terrains.size) {
+    if (this.setTerrain) {
+      const { difficultTerrain, removedTerrains, terrains } = this.terrain;
       data.behaviors ??= [];
       data.behaviors.push({
         name: _loc("TYPES.RegionBehavior.terrain"),
