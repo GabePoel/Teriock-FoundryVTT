@@ -1,6 +1,5 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { UnitField } from "../../../fields/_module.mjs";
-import { migrateUnitNumber } from "../../../fields/tools/migrations.mjs";
 import { CurrencyUnitModel } from "../../../models/_module.mjs";
 
 /**
@@ -24,12 +23,6 @@ export default function PriceSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), { price: new UnitField(CurrencyUnitModel) });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateUnitNumber(source, "price", CurrencyUnitModel, { unit: "none" });
-      return super.migrateData(source, options);
     }
 
     /**

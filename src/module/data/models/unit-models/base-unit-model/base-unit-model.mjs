@@ -103,11 +103,11 @@ export default class BaseUnitModel extends BaseDataModel {
   }
 
   /**
-   * Get the source data for a value in the base unit.
+   * Migrate a numerical value to a unit data object.
    * @param {number} value
    * @returns {{ raw: Teriock.System.FormulaString | number, unit: string }}
    */
-  static getSourceFromValue(value) {
+  static migrateNumberToUnit(value) {
     const entries = this.finiteChoiceEntries;
     const unit = (entries.find(e => (e.conversion ?? 1) === 1) ?? entries[0]).id;
     return { raw: this.metadata.formula ? String(value) : value, unit };

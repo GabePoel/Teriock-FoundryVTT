@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
 import { InfiniteNumberField, UnitField } from "../../../../../fields/_module.mjs";
-import { migrateRename, migrateUnitNumber } from "../../../../../fields/tools/migrations.mjs";
+import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
 import { EquipmentWeightModel, StorageMaxWeightModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -52,8 +52,6 @@ export default function EquipmentStoragePart(Base) {
       migrateRename(source, "storage.maxCount", "storage.count.max");
       migrateRename(source, "storage.maxWeight", "storage.weight.max");
       migrateRename(source, "storage.weightMultiplier", "storage.weight.multiplier");
-      migrateUnitNumber(source, "storage.weight.max", StorageMaxWeightModel, { unit: "unlimited" });
-      migrateUnitNumber(source, "weight", EquipmentWeightModel);
       return super.migrateData(source, options);
     }
 

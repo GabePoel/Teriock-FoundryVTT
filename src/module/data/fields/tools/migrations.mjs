@@ -1,10 +1,6 @@
 import { systemPath, toKebabCase } from "../../../utils/_module.mjs";
 
 /**
- * @import BaseUnitModel from "../../models/unit-models/base-unit-model/base-unit-model.mjs";
- */
-
-/**
  * Power kinds that became their own item types.
  * @type {Record<string, ItemType>}
  */
@@ -103,24 +99,6 @@ export function migrateRename(source, oldPath, newPath) {
     foundry.utils.setProperty(source, newPath, foundry.utils.getProperty(source, oldPath));
   }
   foundry.utils.deleteProperty(source, oldPath);
-}
-
-/**
- * Migrate a unit number to a unit model.
- * @param {object} source
- * @param {string} path
- * @param {typeof BaseUnitModel} model
- * @param {object} [nullSource] - Data to use if source value is `null`.
- */
-export function migrateUnitNumber(source, path, model, nullSource) {
-  const value = foundry.utils.getProperty(source, path);
-  if (typeof value === "number") { foundry.utils.setProperty(source, path, model.getSourceFromValue(value)); }
-  else if (value === null && nullSource) { foundry.utils.setProperty(source, path, nullSource); }
-  else { return; }
-  const lockedPath = `system.${path}`;
-  if (Array.isArray(source.lockedPaths)) {
-    source.lockedPaths = source.lockedPaths.map(p => p === lockedPath ? `${lockedPath}.raw` : p);
-  }
 }
 
 /**

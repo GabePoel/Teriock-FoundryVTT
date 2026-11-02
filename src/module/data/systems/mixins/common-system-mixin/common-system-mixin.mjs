@@ -8,6 +8,7 @@ import {
   pathSorterFactory,
   prefixObject,
 } from "../../../../utils/_module.mjs";
+import { UnitField } from "../../../fields/_module.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
@@ -76,6 +77,17 @@ export default function CommonSystemMixin(Base) {
       if (!selected) { return null; }
       return game.collections.get(selected.documentName)?.fromCompendium(selected)
         ?? foundry.utils.mergeObject(selected.toObject(), { _stats: { compendiumSource: selected.uuid } });
+    }
+
+    /** @inheritDoc */
+    static migrateData(source, options) {
+      // Unit fields are locked by their raw value
+      if (Array.isArray(source.lockedPaths)) {
+        source.lockedPaths = source.lockedPaths.map(p =>
+          this.schema.getField(p.replace(/^system\./, "")) instanceof UnitField ? `${p}.raw` : p
+        );
+      }
+      return super.migrateData(source, options);
     }
 
     /**

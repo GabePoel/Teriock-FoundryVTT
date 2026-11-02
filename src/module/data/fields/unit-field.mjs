@@ -1,3 +1,4 @@
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import FormulaField from "./formula-field/formula-field.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
@@ -18,6 +19,17 @@ const BASE_UNIT_CHANGE_TYPES = new Set(["add", "downgrade", "override", "subtrac
  * Special case {@link EmbeddedDataField} for a {@link BaseUnitModel}.
  */
 export default class UnitField extends EmbeddedDataField {
+  /** @inheritdoc */
+  _migrate(value, options, _state) {
+    if (typeof value === "number") { value = this.model.migrateNumberToUnit(value); }
+    else if (value === null) { value = {}; }
+    // Make sure raw values are formulas or numbers as the model demands
+    else if (!this.model.metadata.formula && typeof value?.raw === "string") {
+      value = { ...value, raw: migrateFormulaToNumber(value.raw) };
+    }
+    return super._migrate(value, options, _state);
+  }
+
   /**
    * Changes are applied directly to the raw value.
    * @inheritDoc
@@ -58,5 +70,22 @@ export default class UnitField extends EmbeddedDataField {
   isLocked(model) {
     const lockedPaths = model.system?.lockedPaths;
     return Boolean(lockedPaths?.has(`${this.fieldPath}.raw`) || lockedPaths?.has(`${this.fieldPath}.unit`));
+  }
+}
+
+/**
+ * Convert a formula string to a number.
+ * @param {string} raw
+ * @returns {number|undefined}
+ */
+function migrateFormulaToNumber(raw) {
+  if (!raw.trim()) { return undefined; }
+  const number = Number(raw);
+  if (Number.isFinite(number)) { return number; }
+  try {
+    const value = BaseRoll.minValue(raw);
+    return Number.isFinite(value) ? value : undefined;
+  } catch {
+    return undefined;
   }
 }

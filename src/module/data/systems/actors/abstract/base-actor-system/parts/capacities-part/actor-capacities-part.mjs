@@ -1,6 +1,5 @@
 import { UnitField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialString } from "../../../../../../fields/tools/initializers.mjs";
-import { migrateUnitNumber } from "../../../../../../fields/tools/migrations.mjs";
 import { ActorWeightModel } from "../../../../../../models/_module.mjs";
 
 /**
@@ -54,12 +53,6 @@ export default function ActorCapacitiesPart(Base) {
           value: initialNumber(),
         }),
       });
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      migrateUnitNumber(source, "weight.self", ActorWeightModel, { raw: null, unit: "lb" });
-      return super.migrateData(source, options);
     }
 
     /**
