@@ -1,0 +1,57 @@
+_id: dad809739b4e3535
+_key: "!effects!dad809739b4e3535"
+img: icons/environment/creatures/crustacean-crab-yellow.webp
+name: Crabalanche
+showIcon: 0
+system:
+  automations:
+    - _id: 0hvSZOix5G8YriCc
+      hacks:
+        - arm
+        - leg
+      type: hacks
+    - _id: WugBGjJCtXVCEEoU
+      rollFormula: "@m * 3"
+      type: override
+    - _id: ApYH3606Alhqe0AK
+      status: snared
+      type: status
+  delivery: self
+  duration:
+    raw: "1"
+    unit: minute
+  effectTypes:
+    - damaging
+    - movement
+  endCondition: >-
+    <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
+  expirations:
+    - _id: 1xDbCP6Ffoi8uVV8
+      method: roll
+      type: combat
+  featSaveAttribute: str
+  identifier: crabalanche
+  interaction: feat
+  overview:
+    base: >-
+      <p>You move a distance up to your @Identifier[core:movement-speed]{movement speed}. You may do this even if
+      creatures with a @Identifier[core:size]{size} less than the participants in this @Identifier[core:mobs]{mob} are
+      in the way so long as there is any physical space available for you to pass over them. Any creatures that you pass
+      over in this process make a @Identifier[core:strength]{strength} @Identifier[core:feat-interaction]{feat save}
+      with a @Identifier[core:difficulty-class]{DC} equal to 3 × @Identifier[core:mobs]{M} where
+      @Identifier[core:mobs]{M} is the number of @Identifier[core:executor]{executors} of [[lookup name]]. This is used
+      collectively by all participants of the @Identifier[core:mobs]{mob}, not once per member.</p>
+  powerSources:
+    - martial
+  range:
+    unit: self
+  requirements: <p>You are in a @Identifier[core:mobs]{mob} of @Wiki[Category:Crabs]{crabs}.</p>
+  results:
+    fail: >-
+      <p>Target takes @Identifier[core:mobs]{M} @Identifier[condition:hacked]{arm or leg hacks} on limbs of their choice
+      and is @Identifier[condition:snared]{snared}.</p>
+    save: >-
+      <p>Target takes @Identifier[core:mobs]{M} / 2 @Identifier[condition:hacked]{arm or leg hacks} on limbs of their
+      choice.</p>
+type: ability

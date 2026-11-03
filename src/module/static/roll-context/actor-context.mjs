@@ -50,6 +50,7 @@ const actorContext = {
   cc: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.cc.label",
   h: "TERIOCK.ROLL_CONTEXT.Execution.h",
   hit: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+  m: "TERIOCK.ROLL_CONTEXT.Execution.m",
   sb: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
   ub: "TERIOCK.TERMS.Properties.unblockable",
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",

@@ -6,6 +6,7 @@ const executionContext = {
   "angle.normal": "TERIOCK.ROLL_CONTEXT.Execution.angleNormal",
   c: "TERIOCK.ROLL_CONTEXT.Common.c",
   h: "TERIOCK.ROLL_CONTEXT.Execution.h",
+  m: "TERIOCK.ROLL_CONTEXT.Execution.m",
 };
 
 export default executionContext;
