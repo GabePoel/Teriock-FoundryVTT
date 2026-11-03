@@ -242,7 +242,7 @@ export default class IdentifiersRegistry {
    * @returns {Set<Teriock.Documents.DocumentName>}
    */
   get documentNames() {
-    return new Set([...this.#primaryDocumentNames, ...this.#parentDocumentNames]);
+    return this.#primaryDocumentNames.union(this.#parentDocumentNames);
   }
 
   /**

@@ -136,7 +136,7 @@ export default function ActorMovementPart(Base) {
       const { difficultTerrain, terrains } = this.#getTokenTerrains();
       Object.assign(this.parent._cache, { difficultTerrain, terrains });
       this.difficultTerrain = difficultTerrain;
-      for (const t of terrains) { this.terrains.add(t); }
+      this.terrains = this.terrains.union(terrains);
     }
 
     /** @inheritDoc */

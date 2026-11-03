@@ -60,8 +60,7 @@ export default function ActorConditionsPart(Base) {
     #consumeChangedStatuses() {
       const statuses = this.parent.statuses;
       const cached = this.parent._cache.statuses ?? new Set();
-      const changed = new Set([...statuses].filter(s => !cached.has(s)));
-      for (const s of cached) { if (!statuses.has(s)) { changed.add(s); } }
+      const changed = statuses.symmetricDifference(cached);
       this.parent._cache.statuses = new Set(statuses);
       return changed;
     }
