@@ -30,7 +30,7 @@ https://github.com/GabePoel/Teriock-FoundryVTT/releases/latest/download/manifest
 ### Deep Ability Integration
 
 ![ability-automation.webp](src/assets/screenshots/ability-automation.webp)
-![using-an-ability.webm](src/assets/screenshots/using-an-ability.gif)
+![using-an-ability.avif](src/assets/screenshots/using-an-ability.avif)
 
 ### Easy Tooltips and Menus
 
