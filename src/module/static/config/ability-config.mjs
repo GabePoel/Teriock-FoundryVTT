@@ -135,18 +135,22 @@ export default {
     attack: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:attack-interaction",
       label: "TERIOCK.TERMS.Interaction.attack",
+      results: { alt: "miss", altCrit: "critMiss", base: "hit", baseCrit: "critHit" },
     },
     block: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:block-interaction",
       label: "TERIOCK.TERMS.Interaction.block",
+      results: { alt: "fail", base: "success" },
     },
     feat: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:feat-interaction",
       label: "TERIOCK.TERMS.Interaction.feat",
+      results: { alt: "save", altCrit: "critSave", base: "fail", baseCrit: "critFail" },
     },
     manifest: /** @type {Teriock.Config.InteractionEntry} */ {
       identifier: "core:manifest-interaction",
       label: "TERIOCK.TERMS.Interaction.manifest",
+      results: { alt: "fail", base: "success" },
     },
   },
   // no sort

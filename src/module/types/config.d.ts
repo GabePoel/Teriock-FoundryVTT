@@ -168,7 +168,11 @@ declare global {
 
     export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };
 
-    export type InteractionEntry = { identifier: TypedIdentifier, label: string };
+    export type InteractionEntry = {
+      identifier: TypedIdentifier;
+      label: string;
+      results: { alt: string, altCrit?: string, base: string, baseCrit?: string };
+    };
 
     export type TerrainEntry = { img: string, label: string };
 
