@@ -332,8 +332,8 @@ export default class AbilitySystem
     /** @type {Teriock.Mechanics.MechanicToggleEntry} */
     const altCritToggle = {
       group: "results",
-      icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
-      id: "resultsAlt",
+      icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
+      id: "resultsAltCrit",
       name: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.name",
       off: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.on",
@@ -348,7 +348,7 @@ export default class AbilitySystem
           off: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.off",
           on: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.on",
         });
-        resultToggles.push(baseToggle);
+        resultToggles.push(baseCritToggle);
       }
       if (this.results.hit && this.results.miss) {
         Object.assign(baseToggle, {
@@ -367,7 +367,7 @@ export default class AbilitySystem
         resultToggles.push(altToggle);
       }
       if (this.results.critMiss) {
-        Object.assign(altToggle, {
+        Object.assign(altCritToggle, {
           name: "TERIOCK.MECHANIC_TOGGLES.Results.critMiss.name",
           off: "TERIOCK.MECHANIC_TOGGLES.Results.critMiss.off",
           on: "TERIOCK.MECHANIC_TOGGLES.Results.critMiss.on",
@@ -381,7 +381,7 @@ export default class AbilitySystem
           off: "TERIOCK.MECHANIC_TOGGLES.Results.critFail.off",
           on: "TERIOCK.MECHANIC_TOGGLES.Results.critFail.on",
         });
-        resultToggles.push(baseToggle);
+        resultToggles.push(baseCritToggle);
       }
       if (this.results.fail && this.results.save) {
         Object.assign(baseToggle, {
@@ -400,7 +400,7 @@ export default class AbilitySystem
         resultToggles.push(altToggle);
       }
       if (this.results.critSave) {
-        Object.assign(altToggle, {
+        Object.assign(altCritToggle, {
           name: "TERIOCK.MECHANIC_TOGGLES.Results.critSave.name",
           off: "TERIOCK.MECHANIC_TOGGLES.Results.critSave.off",
           on: "TERIOCK.MECHANIC_TOGGLES.Results.critSave.on",

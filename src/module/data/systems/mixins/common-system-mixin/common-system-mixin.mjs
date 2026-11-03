@@ -140,8 +140,8 @@ export default function CommonSystemMixin(Base) {
         group: "results",
         icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
         id: "resultsBase",
-        off: "TERIOCK.MECHANIC_TOGGLES.Results.crit.off",
-        on: "TERIOCK.MECHANIC_TOGGLES.Results.crit.on",
+        off: "TERIOCK.MECHANIC_TOGGLES.Results.hit.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Results.hit.on",
       }];
     }
 
