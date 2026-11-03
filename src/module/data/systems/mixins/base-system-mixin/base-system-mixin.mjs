@@ -220,7 +220,7 @@ export default function BaseSystemMixin(Base) {
         if (!value) { return; }
         const text = this.metadata.tags.embedPanelBlocks ? `@Embed[${this.parent.uuid} path=${f.path} inline]` : value;
         return { classes: f.classes, gm: Boolean(schema?.options.gm), text, title: f.label || schema.label };
-      }).filter(f => f);
+      }).filter(Boolean);
     }
 
     /**

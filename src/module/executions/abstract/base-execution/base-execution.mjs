@@ -582,7 +582,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _prepareUpdates() {
-    if (this.actor && Object.keys(this.actorUpdates).length && this.actor.isOwner && !this.actor.inCompendium) {
+    if (this.actor && !foundry.utils.isEmpty(this.actorUpdates) && this.actor.isOwner && !this.actor.inCompendium) {
       this.operations.push({
         action: "update",
         documentName: "Actor",

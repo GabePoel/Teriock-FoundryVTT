@@ -447,7 +447,7 @@ export default class TeriockCombatTracker
           id: group.id,
           img: group.img,
           initiative: group.initiative,
-          isOwner: [...group.members].every(m => m.isOwner),
+          isOwner: group.members.every(m => m.isOwner),
           name: group.name,
           rollerId,
           uuid: group.uuid,

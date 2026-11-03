@@ -97,7 +97,7 @@ class BoosterTerm extends FunctionTerm {
 
   /** @inheritDoc */
   get isBooster() {
-    return Object.prototype.hasOwnProperty.call(this.constructor.BOOST_ALIASES, this.fn);
+    return Object.hasOwn(this.constructor.BOOST_ALIASES, this.fn);
   }
 
   /** @inheritDoc */

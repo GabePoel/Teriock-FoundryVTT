@@ -48,7 +48,7 @@ export function toKebabCase(str) {
  * @returns {string}
  */
 export function dotJoin(strings) {
-  return strings.filter(s => s).join(" · ");
+  return strings.filterJoin(" · ");
 }
 
 /**

@@ -52,7 +52,7 @@ export default function PlayableActorSheetRollingPart(Base) {
         ),
       );
       const competenceIconClass = level =>
-        TERIOCK.CONFIG.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
+        TERIOCK.CONFIG.competence.levels[Math.clamp(level ?? 0, 0, 2)].simpleIconClass;
       context.attributeDisplay = Object.fromEntries(
         Object.keys(TERIOCK.CONFIG.attribute).map(key => {
           const attribute = this.document.system.attributes[key];

@@ -28,7 +28,7 @@ function selectWeightedDie(terms) {
     if (r < term.number) { return term; }
     r -= term.number;
   }
-  return terms[terms.length - 1];
+  return terms.at(-1);
 }
 
 /**

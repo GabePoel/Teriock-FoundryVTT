@@ -114,7 +114,7 @@ export default function TransformationSystemMixin(Base) {
     async #addBatchCreateTransformedSpecies() {
       const uuids = this.transformation.uuids;
       let species = /** @type {TeriockItem<"species">[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
-      species = species.filter(s => s);
+      species = species.filter(Boolean);
       if (!species.length) { return null; }
       const itemData = /** @type {TeriockItem<"species">[]} */ species.map(s => s.toObject());
       itemData.forEach(s => {

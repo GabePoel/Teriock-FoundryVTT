@@ -61,9 +61,9 @@ export default function PlayableActorSheetTradecraftsPart(Base) {
 
       // Update score tooltips if more scores amounts defined.
       const scoreLabel = score =>
-        _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.levels.${Math.min(Math.max(score ?? 0, -3), 4)}`);
+        _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.levels.${Math.clamp(score ?? 0, -3, 4)}`);
       const competenceIconClass = level =>
-        TERIOCK.CONFIG.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
+        TERIOCK.CONFIG.competence.levels[Math.clamp(level ?? 0, 0, 2)].simpleIconClass;
       context.tradecraftDisplay = Object.fromEntries(
         Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts).map(key => {
           const tradecraft = this.document.system.tradecrafts[key];

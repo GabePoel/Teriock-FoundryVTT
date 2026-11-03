@@ -22,7 +22,7 @@ export default class StoneSystem extends BaseCardSystem {
         },
       }, data),
     );
-    if (!foundry.utils.hasProperty(copy, "faces") || Object.keys(copy.faces[0]).length === 0) {
+    if (!foundry.utils.hasProperty(copy, "faces") || foundry.utils.isEmpty(copy.faces[0])) {
       this.parent.updateSource({
         faces: [{
           img: TERIOCK.DISPLAY.thumbnails.manifest.stone.brown,

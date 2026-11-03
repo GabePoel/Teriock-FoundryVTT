@@ -193,7 +193,7 @@ export default function CommonSystemMixin(Base) {
         [this.parent.type]: 1,
       };
       if (this.metadata.tags.armament) { rollData.armament = 1; }
-      if (Object.keys(this.parent.flags.rollData ?? {}).length) {
+      if (!foundry.utils.isEmpty(this.parent.flags.rollData)) {
         Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));
       }
       if (this.parent.parent?.type) { rollData[`parent.${this.parent.parent.type}`] = 1; }
@@ -210,11 +210,10 @@ export default function CommonSystemMixin(Base) {
         label: this.parent.typeLabel,
       });
       parts.associations ??= [];
-      const typeMap = {};
       const children = this.parent.documentName === "Actor"
         ? (await this.parent.children.getContents())
         : await this.parent.previewed.getContents();
-      for (const c of children) { (typeMap[c.type] ??= []).push(c); }
+      const typeMap = Object.groupBy(children, c => c.type);
       for (const type of this.metadata.visibleTypes) {
         if (typeMap[type]) {
           const model = getSystemClass(type);

@@ -91,6 +91,6 @@ export default class ArchetypeSystem
    * @returns {boolean}
    */
   _isSuppressedInactiveRanks() {
-    return Boolean(this.actor && this.ranks.filter(r => r.active).length === 0);
+    return Boolean(this.actor && !this.ranks.some(r => r.active));
   }
 }

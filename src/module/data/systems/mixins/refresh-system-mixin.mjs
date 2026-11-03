@@ -42,17 +42,6 @@ export default function RefreshSystemMixin(Base) {
     static metadata = mergeMetadata(super.metadata, { preserveOnRefresh: [...DEFAULT_PRESERVE_ON_REFRESH] });
 
     /**
-     * Group documents by their document name.
-     * @param {(TeriockActiveEffect|TeriockItem)[]} documents
-     * @returns {{ ActiveEffect: TeriockActiveEffect[], Item: TeriockItem[] }}
-     */
-    #groupByDocumentName(documents) {
-      const map = {};
-      for (const doc of documents) { (map[doc.documentName] ??= []).push(doc); }
-      return map;
-    }
-
-    /**
      * The children considered when computing refresh deltas. With `fullOverride`, embedded children are replaced
      * by the refresh update itself, so only same-collection subs are considered.
      * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
@@ -166,7 +155,7 @@ export default function RefreshSystemMixin(Base) {
         const srcKeys = new Set(srcChildren.map(c => c.lookupKey));
         const dstKeys = new Set(dstChildren.map(c => c.lookupKey));
         if (createChildren && this._refreshCanCreateChildren) {
-          const createMap = this.#groupByDocumentName(srcChildren.filter(c => !dstKeys.has(c.lookupKey)));
+          const createMap = Object.groupBy(srcChildren.filter(c => !dstKeys.has(c.lookupKey)), c => c.documentName);
           for (const [documentName, docs] of Object.entries(createMap)) {
             operations.push(
               this.parent.getCreateChildDocumentsOperation(documentName, docs.map(d => d.toObject(true))),
@@ -176,7 +165,7 @@ export default function RefreshSystemMixin(Base) {
         if (deleteChildren) {
           const toDelete = dstChildren.filter(c => !srcKeys.has(c.lookupKey));
           for (const doc of toDelete) { deletedIds.add(doc.id); }
-          const deleteMap = this.#groupByDocumentName(toDelete);
+          const deleteMap = Object.groupBy(toDelete, c => c.documentName);
           for (const [documentName, docs] of Object.entries(deleteMap)) {
             operations.push(this.parent.getDeleteChildDocumentsOperation(documentName, docs.map(d => d.id)));
           }

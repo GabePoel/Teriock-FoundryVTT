@@ -56,14 +56,13 @@ export default class CommandedSystem extends BaseGroupSystem {
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    const cards = parts.associations[0].cards;
-    const isCommander = card => card.documentUuid === this.commander?.uuid;
+    const [minions, commanders] = parts.associations[0].cards.partition(c => c.documentUuid === this.commander?.uuid);
     parts.associations = [{
-      cards: cards.filter(isCommander),
+      cards: commanders,
       icon: TERIOCK.DISPLAY.icons.manifest.combat.commander,
       title: _loc("TERIOCK.SYSTEMS.CombatantGroup.FIELDS.commanderId.label"),
     }, {
-      cards: cards.filter(c => !isCommander(c)),
+      cards: minions,
       icon: TERIOCK.DISPLAY.icons.manifest.combat.minion,
       title: _loc("TERIOCK.COMBAT.Group.minions"),
     }].filter(a => a.cards.length);

@@ -68,7 +68,7 @@ export default class MoveActivation extends BaseActivation {
         unsetMovementActionData.push({ _id: t.id, movementAction: t.movementAction });
       }
     }
-    if (!Object.keys(instructions).length) { return; }
+    if (foundry.utils.isEmpty(instructions)) { return; }
     if (this.movementAction) { await scene.updateEmbeddedDocuments("Token", setMovementActionData); }
     await scene.moveTokens(instructions);
     if (this.movementAction) { await scene.updateEmbeddedDocuments("Token", unsetMovementActionData); }

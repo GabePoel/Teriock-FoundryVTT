@@ -17,7 +17,7 @@ const { Combat } = foundry.documents;
  * @returns {UUID<TeriockCombatant>[]}
  */
 function getResetUuids(combatants) {
-  return [...new Set(combatants.flatMap(c => [c, c.system.defaultCombatant]).filter(c => c).map(c => c.uuid))];
+  return [...new Set(combatants.flatMap(c => [c, c.system.defaultCombatant]).filter(Boolean).map(c => c.uuid))];
 }
 
 /**

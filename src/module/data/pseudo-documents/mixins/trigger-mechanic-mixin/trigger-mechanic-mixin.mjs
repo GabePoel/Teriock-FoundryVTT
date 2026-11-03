@@ -82,7 +82,7 @@ export default function TriggerMechanicMixin(Base) {
     get activeTriggers() {
       if (!this.canHaveTriggers) { return new Set(); }
       const choices = this._triggerChoices;
-      return new Set([...this.triggers].filter(t => t in choices));
+      return this.triggers.filter(t => t in choices);
     }
 
     /**

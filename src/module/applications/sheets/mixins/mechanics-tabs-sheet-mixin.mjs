@@ -37,7 +37,7 @@ export default function MechanicsTabsSheetMixin(Base) {
     constructor(...args) {
       super(...args);
       this._tab = "overview";
-      this.#canHaveMechanics = Boolean(Object.keys(this._mechanicCollections).length);
+      this.#canHaveMechanics = !foundry.utils.isEmpty(this._mechanicCollections);
     }
 
     /** @type {boolean} */
