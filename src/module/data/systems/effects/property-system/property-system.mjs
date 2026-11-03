@@ -91,6 +91,14 @@ export default class PropertySystem
     return parts;
   }
 
+  /**
+   * @inheritDoc
+   * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+   */
+  get mechanicToggles() {
+    return [...this._mechanicTogglesHit, ...super.mechanicToggles];
+  }
+
   /** @inheritDoc */
   getLocalRollData() {
     const data = Object.assign(super.getLocalRollData(), { "dmg.extra": this.extraDamage || 0 });

@@ -42,6 +42,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
         }),
         { initial: () => [0, 1] },
       ),
+      disabledToggles: new fields.SetField(new fields.StringField()),
       heighten: new fields.SetField(
         new fields.NumberField({
           choices: localizeChoices({
@@ -156,6 +157,23 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    */
   get modifiesEffectData() {
     return Boolean(this.getNearestDocument()?.system?.makesEffectData) && this.makesEffectData;
+  }
+
+  /**
+   * The toggles that will be displayed on this.
+   * @returns {Teriock.Mechanics.MechanicToggleState[]}
+   */
+  get toggles() {
+    const doc = this.getNearestDocument();
+    if (!doc) { return []; }
+    /** @type {Teriock.Mechanics.MechanicToggleEntry[]} */
+    const toggleEntries = doc.system?.mechanicToggles ?? [];
+    /** @type {Teriock.Mechanics.MechanicToggleState[]} */
+    const toggleStates = [];
+    for (const t of toggleEntries) {
+      toggleStates.push({ ...t, active: !this.disabledToggles.has(t.id) });
+    }
+    return toggleStates;
   }
 
   /**

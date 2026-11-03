@@ -294,6 +294,144 @@ export default class AbilitySystem
     return !this.isPassive;
   }
 
+  /**
+   * @inheritDoc
+   * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+   */
+  get mechanicToggles() {
+    /** @type {Teriock.Mechanics.MechanicToggleEntry} */
+    const baseToggle = {
+      group: "results",
+      icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+      id: "resultsBase",
+      name: "TERIOCK.MECHANIC_TOGGLES.Results.base.name",
+      off: "TERIOCK.MECHANIC_TOGGLES.Results.base.off",
+      on: "TERIOCK.MECHANIC_TOGGLES.Results.base.on",
+      variant: true,
+    };
+    /** @type {Teriock.Mechanics.MechanicToggleEntry} */
+    const baseCritToggle = {
+      group: "results",
+      icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
+      id: "resultsBaseCrit",
+      name: "TERIOCK.MECHANIC_TOGGLES.Results.baseCrit.name",
+      off: "TERIOCK.MECHANIC_TOGGLES.Results.baseCrit.off",
+      on: "TERIOCK.MECHANIC_TOGGLES.Results.baseCrit.on",
+      variant: true,
+    };
+    /** @type {Teriock.Mechanics.MechanicToggleEntry} */
+    const altToggle = {
+      group: "results",
+      icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+      id: "resultsAlt",
+      name: "TERIOCK.MECHANIC_TOGGLES.Results.alt.name",
+      off: "TERIOCK.MECHANIC_TOGGLES.Results.alt.off",
+      on: "TERIOCK.MECHANIC_TOGGLES.Results.alt.on",
+      variant: true,
+    };
+    /** @type {Teriock.Mechanics.MechanicToggleEntry} */
+    const altCritToggle = {
+      group: "results",
+      icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+      id: "resultsAlt",
+      name: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.name",
+      off: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.off",
+      on: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.on",
+      variant: true,
+    };
+    /** @type {Teriock.Mechanics.MechanicToggleEntry[]} */
+    const resultToggles = [];
+    if (this.interaction === "attack") {
+      if (this.results.critHit) {
+        Object.assign(baseCritToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.on",
+        });
+        resultToggles.push(baseToggle);
+      }
+      if (this.results.hit && this.results.miss) {
+        Object.assign(baseToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.hit.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.hit.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.hit.on",
+        });
+      }
+      resultToggles.push(baseToggle);
+      if (this.results.miss) {
+        Object.assign(altToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.miss.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.miss.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.miss.on",
+        });
+        resultToggles.push(altToggle);
+      }
+      if (this.results.critMiss) {
+        Object.assign(altToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.critMiss.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.critMiss.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.critMiss.on",
+        });
+        resultToggles.push(altCritToggle);
+      }
+    } else if (this.interaction === "feat") {
+      if (this.results.critFail) {
+        Object.assign(baseCritToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.critFail.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.critFail.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.critFail.on",
+        });
+        resultToggles.push(baseToggle);
+      }
+      if (this.results.fail && this.results.save) {
+        Object.assign(baseToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.fail.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.fail.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.fail.on",
+        });
+      }
+      resultToggles.push(baseToggle);
+      if (this.results.save) {
+        Object.assign(altToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.save.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.save.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.save.on",
+        });
+        resultToggles.push(altToggle);
+      }
+      if (this.results.critSave) {
+        Object.assign(altToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.critSave.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.critSave.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.critSave.on",
+        });
+        resultToggles.push(altCritToggle);
+      }
+    } else {
+      resultToggles.push(baseToggle);
+      if (this.results.fail) {
+        Object.assign(baseToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.success.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.success.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.success.on",
+        });
+        Object.assign(altToggle, {
+          name: "TERIOCK.MECHANIC_TOGGLES.Results.fail.name",
+          off: "TERIOCK.MECHANIC_TOGGLES.Results.fail.off",
+          on: "TERIOCK.MECHANIC_TOGGLES.Results.fail.on",
+        });
+        resultToggles.push(altToggle);
+      }
+    }
+    return [...resultToggles, {
+      group: "heightening",
+      icon: TERIOCK.DISPLAY.icons.manifest.ability.heightened,
+      id: "heightened",
+      off: "TERIOCK.MECHANIC_TOGGLES.Heightening.heightened.off",
+      on: "TERIOCK.MECHANIC_TOGGLES.Heightening.heightened.on",
+    }, ...super.mechanicToggles];
+  }
+
   /** @inheritDoc */
   get useIcon() {
     return TERIOCK.DISPLAY.icons.manifest.interaction[this.interaction];

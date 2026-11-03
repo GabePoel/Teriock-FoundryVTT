@@ -321,6 +321,14 @@ export default function ArmamentSystemMixin(Base) {
     }
 
     /**
+     * @inheritDoc
+     * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+     */
+    get mechanicToggles() {
+      return [...this._mechanicTogglesHit, ...super.mechanicToggles];
+    }
+
+    /**
      * The abilities that activate on use.
      * @returns {TeriockActiveEffect<"ability">[]}
      */

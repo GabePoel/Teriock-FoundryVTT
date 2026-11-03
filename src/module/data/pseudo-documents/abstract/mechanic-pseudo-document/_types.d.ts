@@ -10,6 +10,7 @@ declare global {
       activeQualifier: Teriock.System.FormulaString;
       competencies: Set<number>;
       crit: Set<number>;
+      disabledToggles: Set<string>;
       heighten: Set<number>;
     };
   }

@@ -125,6 +125,26 @@ export default function CommonSystemMixin(Base) {
       return this.parent.master?.fullName || this.parent.master?.name || "";
     }
 
+    /**
+     * Mechanic toggles to display on things that hit other things.
+     * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+     */
+    get _mechanicTogglesHit() {
+      return [{
+        group: "results",
+        icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
+        id: "resultsBaseCrit",
+        off: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.on",
+      }, {
+        group: "results",
+        icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+        id: "resultsBase",
+        off: "TERIOCK.MECHANIC_TOGGLES.Results.crit.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Results.crit.on",
+      }];
+    }
+
     /** @returns {Partial<Teriock.Embeds.EmbedParts>} */
     get embedParts() {
       return {
@@ -143,6 +163,32 @@ export default function CommonSystemMixin(Base) {
         title: this.parent.fullName,
         uuid: this.parent.uuid,
       };
+    }
+
+    /**
+     * The toggles that will be displayed on mechanic pseudo-documents.
+     * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+     */
+    get mechanicToggles() {
+      return [{
+        group: "competence",
+        icon: TERIOCK.DISPLAY.icons.manifest.competence.none,
+        id: "competenceNone",
+        off: "TERIOCK.MECHANIC_TOGGLES.Competence.none.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Competence.none.on",
+      }, {
+        group: "competence",
+        icon: TERIOCK.DISPLAY.icons.manifest.competence.proficient,
+        id: "competenceProficient",
+        off: "TERIOCK.MECHANIC_TOGGLES.Competence.proficient.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Competence.proficient.on",
+      }, {
+        group: "competence",
+        icon: TERIOCK.DISPLAY.icons.manifest.competence.fluent,
+        id: "competenceFluent",
+        off: "TERIOCK.MECHANIC_TOGGLES.Competence.fluent.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Competence.fluent.on",
+      }];
     }
 
     /**
