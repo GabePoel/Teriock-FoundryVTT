@@ -114,7 +114,7 @@ export default function ThresholdExecutionMixin(Base) {
      * @category Groups
      */
     get canShareRolls() {
-      return this.isRoll && Boolean(this.combatant?.group?.system.canShareRolls);
+      return Boolean(this.combatant?.group?.system.canShareRolls);
     }
 
     /** @inheritDoc */
@@ -174,7 +174,7 @@ export default function ThresholdExecutionMixin(Base) {
      */
     async _evaluateRolls() {
       if ((await super._evaluateRolls()) === false) { return false; }
-      if (this.participants < 2) { return; }
+      if (!this.isRoll || this.participants < 2) { return; }
       const { NumericTerm, OperatorTerm } = foundry.dice.terms;
       const rolls = [];
       for (const roll of this.rolls) {
@@ -198,7 +198,7 @@ export default function ThresholdExecutionMixin(Base) {
       if (FormulaField.exists(this.bonus)) { this.updateSource({
           formula: FormulaField.add(this.formula, this.bonus),
         }); }
-      if (this.participants > 1) {
+      if (this.isRoll && this.participants > 1) {
         this.updateSource({ formula: FormulaField.add(this.formula, String(this.participants - 1)) });
       }
     }
@@ -234,6 +234,11 @@ export default function ThresholdExecutionMixin(Base) {
     async _prepareFormula() {
       await this._prepareBaseFormula();
       await super._prepareFormula();
+    }
+
+    /** @inheritDoc */
+    getRollData() {
+      return Object.assign(super.getRollData(), { m: this.participants });
     }
   }
 
