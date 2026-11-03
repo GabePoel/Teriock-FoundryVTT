@@ -110,6 +110,14 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
+   * Whether this has an active qualifier set.
+   * @returns {boolean}
+   */
+  get hasActiveQualifierSet() {
+    return this.activeQualifier !== "1";
+  }
+
+  /**
    * Whether this applies passively rather than only when its document is used.
    * @returns {boolean}
    */
@@ -182,6 +190,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    * @returns {boolean}
    */
   checkIfQualified(rollData) {
+    if (!this.hasActiveQualifierSet) { return true; }
     if (!rollData) { return BaseRoll.qualify(this.activeQualifier, () => this.getRollData()); }
     return BaseRoll.qualify(
       this.activeQualifier,

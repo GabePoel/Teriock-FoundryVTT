@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
+import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 import { OverrideCompetencePseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
@@ -20,7 +21,12 @@ export default class TransformationAutomation
   static defineSchema() {
     return Object.assign(
       omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
-      automationTransformationFields(),
+      {
+        ...automationTransformationFields(),
+        globalIdentifiers: new TypedIdentifierSetField({
+          types: [...Actor.implementation.TYPES.filter(t => t !== "base"), "species"],
+        }),
+      },
     );
   }
 

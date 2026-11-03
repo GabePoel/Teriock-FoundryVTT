@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses, objectMap, omit } from "../../../../utils/_module.mjs";
+import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { SummonActivation } from "../../activations/_module.mjs";
 import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -42,6 +43,7 @@ export default class SummonAutomation
               none: true,
             }),
         }),
+        globalIdentifiers: new TypedIdentifierSetField({ types: Actor.implementation.TYPES.filter(a => a !== "base") }),
       },
     );
   }
