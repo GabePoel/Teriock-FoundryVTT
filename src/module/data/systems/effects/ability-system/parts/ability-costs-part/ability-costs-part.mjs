@@ -139,8 +139,8 @@ export default function AbilityCostsPart(Base) {
 
       // Enforce invoked costs
       if (this.invoked) {
-        if (!this.costs.components.somatic.type) { this.costs.components.somatic.type = "tag"; }
-        if (!this.costs.components.verbal.type) { this.costs.components.verbal.type = "tag"; }
+        this.costs.components.somatic.type ||= "tag";
+        this.costs.components.verbal.type ||= "tag";
       }
     }
   }

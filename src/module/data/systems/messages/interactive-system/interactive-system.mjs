@@ -60,7 +60,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
     if (!this.parent.isContentVisible) { return [TERIOCK.DISPLAY.panels.common.unknown]; }
     const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
     return Promise.all(
-      this.panels.contents.map(p => p?.prepareContext({ relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })),
+      this.panels.map(p => p?.prepareContext({ relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })),
     );
   }
 
@@ -81,7 +81,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
    * @returns {boolean}
    */
   get showActivations() {
-    return this.activations.contents.some(a => a?.visible) && this.parent.isContentVisible;
+    return this.activations.some(a => a?.visible) && this.parent.isContentVisible;
   }
 
   /**
@@ -131,7 +131,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
   async _prepareContext(options = {}) {
     await game.teriock.identifiers.initializing;
     return Object.assign(await super._prepareContext(options), {
-      activations: this.activations.contents.filter(a => a?.visible),
+      activations: this.activations.filter(a => a?.visible),
       hideContent: !this.parent.isContentVisible && !this.parent.rolls.length,
       panels: await this.#preparePanelContext(),
       showActivations: this.showActivations,

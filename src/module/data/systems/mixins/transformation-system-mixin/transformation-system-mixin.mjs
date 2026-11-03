@@ -337,7 +337,7 @@ export default function TransformationSystemMixin(Base) {
           disabledItems.push(...this.#enabledFilter(typeMap[t] || []));
         }
       }
-      const statItems = this.actor.items.contents.filter(i => i.system.metadata.tags.statGiver);
+      const statItems = this.actor.items.filter(i => i.system.metadata.tags.statGiver);
       for (const stat of POOL_STATS) {
         if (this.transformation.resets.has(stat)) {
           disabledStatDiceItems[stat].push(...statItems.filter(i => !i.system.statDice[stat].disabled));

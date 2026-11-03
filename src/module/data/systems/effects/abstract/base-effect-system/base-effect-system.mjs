@@ -59,9 +59,8 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
    * @returns {boolean}
    */
   get isReference() {
-    const sups = /** @type {TeriockActiveEffect<"ability">[]} */ this.parent.allSups.contents;
-    for (const sup of sups) { if (sup.type === "ability" && sup.system?.maneuver !== "passive") { return true; } }
-    return super.isReference;
+    return this.parent.allSups.some(sup => sup.type === "ability" && sup.system?.maneuver !== "passive")
+      || super.isReference;
   }
 
   /**

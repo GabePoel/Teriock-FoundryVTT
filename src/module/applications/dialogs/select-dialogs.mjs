@@ -11,7 +11,7 @@ import DocumentSelector from "./document-selector.mjs";
  * @returns {Promise<CompendiumCollection<TeriockDocument>[]>}
  */
 export async function selectCompendiumsDialog(checked = true) {
-  const packDocs = game.packs.contents.filter(p => !p.locked).map(p => {
+  const packDocs = game.packs.filter(p => !p.locked).map(p => {
     return { img: p.banner || "icons/svg/book.svg", name: _loc(p.title), uuid: p.collection };
   });
   packDocs.sort((a, b) => a.name.localeCompare(b.name));

@@ -28,7 +28,7 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
   get #options() {
     /** @type {Partial<Teriock.Execution.AttackExecutionOptions>} */
     const options = {
-      attackPenalty: this.attackPenalty ? this.attackPenalty : undefined,
+      attackPenalty: this.attackPenalty || undefined,
       bonus: this.bonus,
       competence: this.competence.value,
       event: this.event,

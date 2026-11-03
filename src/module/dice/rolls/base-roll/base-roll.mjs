@@ -166,7 +166,7 @@ export default class BaseRoll extends Roll {
    * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    */
   constructor(formula, data, options = {}) {
-    if (!formula) { formula = "0"; }
+    formula ||= "0";
     options = foundry.utils.mergeObject(new.target.defaultOptions, options);
     options.targets = options.targets.map(t => BaseRoll.#parseTarget(t));
     super(formula, data, options);

@@ -24,10 +24,8 @@ export function isKebabCase(str) {
 export function toCamelCase(str) {
   return isCamelCase(str)
     ? str
-    : str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/'/g, "").toLowerCase().replace(
-      /[^a-z0-9]+(.)/gi,
-      (_, c) => c.toUpperCase(),
-    ).replace(/[^a-z0-9]/gi, "").replace(/^[A-Z]/, c => c.toLowerCase());
+    : str.stripDiacritics().replaceAll("'", "").toLowerCase().replace(/[^a-z0-9]+(.)/gi, (_, c) => c.toUpperCase())
+      .replace(/[^a-z0-9]/gi, "").replace(/^[A-Z]/, c => c.toLowerCase());
 }
 
 /**
@@ -38,8 +36,8 @@ export function toCamelCase(str) {
 export function toKebabCase(str) {
   return isKebabCase(str)
     ? str
-    : str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/'/g, "").replace(/([a-z])([A-Z])/g, "$1-$2")
-      .replace(/[^a-z0-9]+/gi, "-").toLowerCase().replace(/^-+|-+$/g, "");
+    : str.stripDiacritics().replaceAll("'", "").replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[^a-z0-9]+/gi, "-")
+      .toLowerCase().replace(/^-+|-+$/g, "");
 }
 
 /**

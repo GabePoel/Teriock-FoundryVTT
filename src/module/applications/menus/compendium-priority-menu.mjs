@@ -77,7 +77,7 @@ export default class CompendiumPriorityMenu extends BaseMenu {
    */
   #prepareIdentifierSourceRowContext(sourcePriorities = {}) {
     const rows = [];
-    const packs = game.packs.contents.filter(p => this.#collectionDocumentNames.has(p.documentName));
+    const packs = game.packs.filter(p => this.#collectionDocumentNames.has(p.documentName));
     for (const pack of packs) {
       rows.push({
         collection: pack.collection,

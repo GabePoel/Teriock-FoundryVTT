@@ -55,10 +55,5 @@ export function omit(obj, keys) {
  * @returns {boolean} Were all the properties deleted?
  */
 export function deleteProperties(object, ...keys) {
-  let allDeleted = true;
-  for (const key of keys) {
-    const success = foundry.utils.deleteProperty(object, key);
-    if (!success) { allDeleted = false; }
-  }
-  return allDeleted;
+  return keys.map(key => foundry.utils.deleteProperty(object, key)).every(Boolean);
 }

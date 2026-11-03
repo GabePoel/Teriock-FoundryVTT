@@ -257,7 +257,7 @@ export default function MechanicsSheetMixin(Base) {
      */
     async _prepareMechanicEntries(collection) {
       const config = { rootId: this.id };
-      return Promise.all(collection.contents.map(async mechanic => {
+      return Promise.all(collection.map(async mechanic => {
         return { formEditor: (await mechanic.getEditor(config)).outerHTML, mechanic, tips: mechanic.formTips };
       }));
     }
@@ -265,7 +265,7 @@ export default function MechanicsSheetMixin(Base) {
     /** @inheritDoc */
     _validateDropDocument(options) {
       if (!super._validateDropDocument(options)) { return false; }
-      if (Object.keys(this.document.pseudoCollections).includes(options.document.documentName)) {
+      if (Object.hasOwn(this.document.pseudoCollections, options.document.documentName)) {
         return this._validateDropMechanic(options);
       }
       return true;
@@ -278,7 +278,7 @@ export default function MechanicsSheetMixin(Base) {
      */
     _validateDropMechanic({ document, notify }) {
       const config = this._mechanicCollectionFor(document.documentName);
-      if (!config || !Object.keys(config.types).includes(document.type)) {
+      if (!config || !Object.hasOwn(config.types, document.type)) {
         return this._rejectDrop(notify, "TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropMechanic");
       }
       return true;

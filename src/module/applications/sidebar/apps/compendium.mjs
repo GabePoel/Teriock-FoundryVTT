@@ -51,7 +51,7 @@ export default class TeriockCompendium extends mixClasses(Compendium, DocumentDi
    */
   async _prepareDirectoryContext(context, options) {
     if (this.collection?.index) {
-      if (!this.collection._reindexing) { this.collection._reindexing = this.collection.getIndex(); }
+      this.collection._reindexing ||= this.collection.getIndex();
       await this.collection._reindexing;
     }
     await super._prepareDirectoryContext(context, options);

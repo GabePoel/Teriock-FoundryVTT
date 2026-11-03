@@ -86,7 +86,7 @@ export default function PanelDataMixin(Base) {
     async openPanelSheet() {
       const PanelSheet = teriock.applications.sheets.utility.PanelSheet;
       let panelSheet = Object.values(this.apps).find((a) => a instanceof PanelSheet);
-      if (!panelSheet) { panelSheet = new PanelSheet({ document: this }); }
+      panelSheet ||= new PanelSheet({ document: this });
       await panelSheet.render(true);
     }
 

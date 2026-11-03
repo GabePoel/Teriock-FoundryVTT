@@ -7,7 +7,7 @@ const wikiEnricher = {
     const pageName = inputs.arguments[0];
     return TeriockTextEditor.createAnchor({
       attrs: {
-        href: `${TERIOCK.CONST.WIKI_URL}/${pageName.replace(/ /g, "_")}`,
+        href: `${TERIOCK.CONST.WIKI_URL}/${pageName.replaceAll(" ", "_")}`,
         rel: "noopener noreferrer",
         target: "_blank",
       },

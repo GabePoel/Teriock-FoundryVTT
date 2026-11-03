@@ -126,9 +126,7 @@ export default function DisplaySheetMixin(Base) {
      */
     _configureRenderOptions(options) {
       super._configureRenderOptions(options);
-      if (this._tab !== "overview" && options.parts.includes("menu")) {
-        options.parts.splice(options.parts.indexOf("menu"), 1);
-      }
+      if (this._tab !== "overview") { options.parts.findSplice(p => p === "menu"); }
     }
 
     /** @inheritDoc */

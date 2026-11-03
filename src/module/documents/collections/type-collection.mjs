@@ -86,7 +86,7 @@ export default class TypeCollection extends Collection {
   get documentsByType() {
     if (!this.#documentsByType) {
       const documentTypeMap = Object.fromEntries(this.types.map((t) => [t, []]));
-      this.contents.forEach((d) => {
+      this.forEach((d) => {
         if (!documentTypeMap[d?.type]) { documentTypeMap[d?.type] = []; }
         documentTypeMap[d?.type].push(d);
       });

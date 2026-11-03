@@ -32,7 +32,7 @@ export default class PseudoCollection extends TypeCollection {
    * @returns {TPseudo[]}
    */
   get active() {
-    return this.contents.filter(p => this._checkIfActive(p));
+    return this.filter(p => this._checkIfActive(p));
   }
 
   /**
@@ -85,6 +85,6 @@ export default class PseudoCollection extends TypeCollection {
    * @returns {object[]} The extracted array of primitive objects
    */
   toObject(source = true) {
-    return this.contents.map(pseudo => pseudo.toObject(source));
+    return this.map(pseudo => pseudo.toObject(source));
   }
 }

@@ -110,7 +110,7 @@ export default class TeriockToken extends mixClasses(Token, EtherealLightPlaceab
     const markersActive = markersEnabled && Boolean(member);
     // Activate a Turn Marker
     if (markersActive) {
-      if (!this.turnMarker) { this.turnMarker = this.addChildAt(new TokenTurnMarker(this), 0); }
+      this.turnMarker ||= this.addChildAt(new TokenTurnMarker(this), 0);
       canvas.tokens.turnMarkers.add(this);
       this.turnMarker.draw();
       this.turnMarker.filters = member.isMinion ? [MINION_TURN_MARKER_FILTER] : null;

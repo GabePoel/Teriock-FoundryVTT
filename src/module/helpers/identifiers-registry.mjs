@@ -433,7 +433,7 @@ export default class IdentifiersRegistry {
       if (pack.documentName === "Item") { fields.push(...Object.values(TYPE_FIELDS).map(f => `system.${f}`)); }
       const index = await pack.getIndex({ fields });
       if (pack.documentName === "JournalEntry") {
-        const promises = index.contents.map(d => this.#trackJournalEntry(d.uuid));
+        const promises = index.map(d => this.#trackJournalEntry(d.uuid));
         await Promise.all(promises);
       } else {
         for (const d of index) {
@@ -454,7 +454,7 @@ export default class IdentifiersRegistry {
    * @returns {Promise<void>}
    */
   async trackCompendiums() {
-    await Promise.all(game.packs.contents.map(p => this.trackCompendium(p)));
+    await Promise.all(game.packs.map(p => this.trackCompendium(p)));
   }
 
   /**

@@ -55,8 +55,7 @@ export default class TeriockActiveEffect
    * @returns {boolean}
    */
   get isReference() {
-    if (this._cache.isReference === undefined) { this._cache.isReference = Boolean(this.system.isReference); }
-    return this._cache.isReference;
+    return this._cache.isReference ??= Boolean(this.system.isReference);
   }
 
   /**

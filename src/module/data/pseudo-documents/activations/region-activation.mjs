@@ -70,7 +70,7 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
     if (!game.teriock.checkScene()) { return; }
     await canvas.scene.deleteEmbeddedDocuments(
       "Region",
-      canvas.scene.regions.contents.filter(r =>
+      canvas.scene.regions.filter(r =>
         r.getFlag("teriock", "createdBy") === this.uuid
         && r.getFlag("teriock", "placedBy") === this.user.id
         && r.isOwner

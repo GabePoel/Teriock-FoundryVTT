@@ -319,7 +319,7 @@ export default function AttackExecutionMixin(Base) {
       // Only construction passes options. Resets and source updates re-initialize without them. Not that those should
       // ever matter though since executions are never saved to the database.
       if (!("strict" in options)) { return; }
-      this._updateArmament(options.armament ? options.armament : this._determineDefaultArmament(), options);
+      this._updateArmament(options.armament || this._determineDefaultArmament(), options);
       if (!this.bonus) { this.updateSource({ bonus: "0" }); }
       this.limb = this._resolveLimb(options);
       let existingAttackPenalty = Number(this.combatant?.system.attackPenalty);

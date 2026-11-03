@@ -27,7 +27,7 @@ export default async function identifyItemQuery(queryData) {
     },
   });
   if (doIdentify) {
-    const unrevealed = item.previewed.contents.filter(c => c.metadata.tags.revealable && !c.system.revealed);
+    const unrevealed = item.previewed.filter(c => c.metadata.tags.revealable && !c.system.revealed);
     const toReveal = await DocumentSelector.selectMulti(unrevealed, {
       checked: unrevealed.map(r => r.uuid),
       hint: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.hint"),

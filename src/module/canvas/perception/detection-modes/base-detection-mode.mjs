@@ -127,13 +127,9 @@ export default class BaseDetectionMode extends DetectionMode {
    * @category Perception
    */
   _testStatuses(type, sourceDocument, targetDocument) {
-    const blockers = this.constructor.BLOCKING_STATUSES;
-    if (Object.keys(blockers).includes(type)) {
-      for (const status of blockers[type].src) { if (sourceDocument.hasStatusEffect(status)) { return false; } }
-      if (targetDocument) {
-        for (const status of blockers[type].tgt) { if (targetDocument.hasStatusEffect(status)) { return false; } }
-      }
-    }
-    return true;
+    const blockers = this.constructor.BLOCKING_STATUSES[type];
+    if (!blockers) { return true; }
+    return !blockers.src.some(s => sourceDocument.hasStatusEffect(s))
+      && !blockers.tgt.some(s => targetDocument?.hasStatusEffect(s));
   }
 }

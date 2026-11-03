@@ -53,7 +53,7 @@ export default class ConstructionNode
     const allIds = new Set();
     for (const p of pseudos) {
       allIds.add(p.id);
-      const newIds = p.allChildNodes.contents.map(node => node.id);
+      const newIds = p.allChildNodes.map(node => node.id);
       for (const id of newIds) { allIds.add(id); }
     }
     await super.deleteDocuments(Array.from(allIds), operation);

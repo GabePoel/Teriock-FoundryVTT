@@ -45,11 +45,9 @@ export default class StatusExpiration extends BaseExpiration {
    * @returns {boolean}
    */
   get shouldExpire() {
-    if (this.actor) {
-      for (const c of this.statuses.present) { if (this.actor.statuses.has(c)) { return true; } }
-      for (const c of this.statuses.absent) { if (!this.actor.statuses.has(c)) { return true; } }
-    }
-    return false;
+    if (!this.actor) { return false; }
+    return this.statuses.present.intersects(this.actor.statuses)
+      || !this.statuses.absent.isSubsetOf(this.actor.statuses);
   }
 
   /**
@@ -59,9 +57,7 @@ export default class StatusExpiration extends BaseExpiration {
    */
   _isRelevantChange(changedStatuses) {
     if (!changedStatuses) { return true; }
-    for (const c of this.statuses.present) { if (changedStatuses.has(c)) { return true; } }
-    for (const c of this.statuses.absent) { if (changedStatuses.has(c)) { return true; } }
-    return false;
+    return this.statuses.present.intersects(changedStatuses) || this.statuses.absent.intersects(changedStatuses);
   }
 
   /** @inheritDoc */

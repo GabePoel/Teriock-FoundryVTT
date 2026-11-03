@@ -82,7 +82,7 @@ export default class HarmRoll extends CommandsRoll {
             if (this.commands.includes("drain") && !flavor) {
               flavor = game.teriock.identifiers.getName(`drain:${i}`);
             }
-            return flavor ? flavor : p.flavor;
+            return flavor || p.flavor;
           }),
           { sort: true, style: "short", type: "unit" },
         );

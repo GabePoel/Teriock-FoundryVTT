@@ -25,7 +25,7 @@ async function executeCommand(target, operation, event) {
     const doc = await fromUuid(target.dataset.relativeTo);
     actor = doc?.actor;
   }
-  if (!actor) { actor = game.actors.default; }
+  actor ||= game.actors.default;
   await game.teriock.commands[operation](key, actor ? [actor] : [], options);
 }
 

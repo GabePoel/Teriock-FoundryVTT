@@ -109,7 +109,7 @@ export default function HierarchyDocumentMixin(Base) {
       const yes = await super._preDeleteOperation(documents, operation, user);
       if (yes === false) { return false; }
 
-      for (const doc of documents) { operation.ids.push(...doc.allSubs.contents.map(s => s._id)); }
+      for (const doc of documents) { operation.ids.push(...doc.allSubs.map(s => s._id)); }
       // Deleting a sup alongside one of its subs would push that sub's id a second time.
       operation.ids = Array.from(new Set(operation.ids));
     }
@@ -128,7 +128,7 @@ export default function HierarchyDocumentMixin(Base) {
       for (const doc of documents) {
         const folderUpdate = operation.updates.find(update => update._id === doc._id && hasProperty(update, "folder"));
         if (folderUpdate) {
-          const subIds = doc.allSubs.contents.map(s => s._id);
+          const subIds = doc.allSubs.map(s => s._id);
           for (const subId of subIds) {
             const subUpdate = operation.updates.find(update => update._id === subId);
             if (!subUpdate) { operation.updates.push({ _id: subId, folder: folderUpdate.folder }); }

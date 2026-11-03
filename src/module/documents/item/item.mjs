@@ -47,7 +47,7 @@ export default class TeriockItem extends mixClasses(Item, BaseDocumentMixin, Com
 
   /** @inheritDoc */
   get _previewedSource() {
-    return [...super._previewedSource, ...this.effects.contents.filter(e => e.elder?.type === "imbuement")];
+    return [...super._previewedSource, ...this.effects.filter(e => e.elder?.type === "imbuement")];
   }
 
   /**

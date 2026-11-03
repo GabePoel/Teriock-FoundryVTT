@@ -228,7 +228,7 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
     if (!game.teriock.checkScene()) { return []; }
     await canvas.scene.deleteEmbeddedDocuments(
       "Token",
-      canvas.scene.tokens.contents.filter(t =>
+      canvas.scene.tokens.filter(t =>
         t.getFlag("teriock", "createdBy") === this.uuid
         && t.getFlag("teriock", "placedBy") === game.user.id
         && t.isOwner
