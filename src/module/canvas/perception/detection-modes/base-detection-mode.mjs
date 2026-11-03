@@ -108,7 +108,7 @@ export default class BaseDetectionMode extends DetectionMode {
    * @param {TeriockTokenDocument} [targetDocument]
    */
   _testHidden(sourceDocument, targetDocument) {
-    if (this.hidden && targetDocument && targetDocument.hasStatusEffect("hidden")) {
+    if (this.hidden && targetDocument?.hasStatusEffect("hidden")) {
       const srcActor = sourceDocument.actor;
       const tgtActor = targetDocument.actor;
       if (srcActor && tgtActor) {

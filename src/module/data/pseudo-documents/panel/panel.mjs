@@ -25,7 +25,7 @@ export default class Panel extends BasePseudoDocument {
     const container = document.createElement("div");
     container.innerHTML = html;
     let index = 0;
-    for (const table of [...container.querySelectorAll("table")]) {
+    for (const table of container.querySelectorAll("table")) {
       if (table.closest(".teriock-panel-table")) { continue; }
       const tableId = `${rootId}-table-${index++}`;
       const wrap = createElement("div", {

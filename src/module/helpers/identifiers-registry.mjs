@@ -374,7 +374,7 @@ export default class IdentifiersRegistry {
     const parsed = parseIdentifier(identifier);
     const { identifier: id, type } = parsed;
     const group = this.#identifiers.get(type)?.get(id);
-    if (group && group.size) { out = this.#getCanonical(group, this.#resolveLookupOptions(options))?.entry.name; }
+    if (group?.size) { out = this.#getCanonical(group, this.#resolveLookupOptions(options))?.entry.name; }
     return options.forced ? (out || parsed.identifier || "") : out;
   }
 

@@ -98,7 +98,7 @@ export default function SpeciesTransformationPart(Base) {
     get isPrimaryTransformation() {
       if (this.isTransformation) {
         const transformationEffect = this.transformationEffect;
-        if (transformationEffect && transformationEffect.system.isPrimaryTransformation) { return true; }
+        if (transformationEffect?.system.isPrimaryTransformation) { return true; }
       }
       return false;
     }

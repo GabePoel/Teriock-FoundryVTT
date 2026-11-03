@@ -7,7 +7,7 @@ import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 
-const BAR_STATS = Object.entries(TERIOCK.CONFIG.stat).filter(([_k, v]) => v.bar).map(([k, _v]) => k);
+const BAR_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.stat[k].bar);
 
 /**
  * Actor data model that handles stats.

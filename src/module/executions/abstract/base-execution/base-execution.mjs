@@ -141,7 +141,7 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {boolean}
    */
   get canShowDialog() {
-    return Boolean(this._formPaths.length) || Boolean(this._dialogDocuments.length);
+    return Boolean(this._formPaths.length || this._dialogDocuments.length);
   }
 
   /**

@@ -49,7 +49,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
  */
 export function parseIdentifier(identifier) {
   let type = null;
-  if (identifier && identifier.includes(":")) {
+  if (identifier?.includes(":")) {
     const parts = identifier.split(":");
     type = parts[0];
     identifier = parts[1];

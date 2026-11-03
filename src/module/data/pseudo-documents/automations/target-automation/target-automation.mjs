@@ -93,7 +93,7 @@ export default class TargetAutomation extends BaseAutomation {
     else if (this[path]) { out = BaseRoll.minValue(this[path], rollData); }
     if (path === "angle") { return out; }
     if (canvas?.dimensions?.distancePixels) { out *= canvas.dimensions.distancePixels; }
-    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
+    if (this.expandWithToken && this.regionType !== "emanation" && execution?.actor?.defaultToken) {
       out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
     }
     return out;

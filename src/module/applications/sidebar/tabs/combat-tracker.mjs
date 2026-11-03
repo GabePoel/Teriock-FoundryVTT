@@ -397,7 +397,7 @@ export default class TeriockCombatTracker
     const combat = this.viewed;
     if (context.control || !combat?.combatant?.group) { return; }
     const isPlayerTurn = combat.combatant.group.isOwner;
-    const canControl = combat.turn && combat.turn.between(1, combat.turns.length - 2)
+    const canControl = combat.turn?.between(1, combat.turns.length - 2)
       ? combat.canUserModify(game.user, "update", { turn: 0 })
       : combat.canUserModify(game.user, "update", { round: 0 });
     context.control = isPlayerTurn && canControl;

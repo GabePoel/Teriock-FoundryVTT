@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { asInf, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
+import { asInf, barClamp, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
 import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
@@ -111,9 +111,7 @@ export default function ConsumableSystemMixin(Base) {
      */
     async gainOne() {
       if (this.consumption.enabled) {
-        await this.parent.update({
-          "system.quantity.value": Math.clamp(this.quantity.value + 1, this.quantity.min, this.quantity.max),
-        });
+        await this.parent.update({ "system.quantity.value": barClamp(this.quantity, 1) });
       }
     }
 

@@ -54,7 +54,7 @@ export default class EquipmentExecution extends ArmamentExecution {
   async _buildSourcePanel() {
     if (this.secret) {
       const referenceEquipment = await teriock.fromIdentifier(this.source.system.equipmentType);
-      if (referenceEquipment) { return await referenceEquipment.getPanelParts(); }
+      if (referenceEquipment) { return referenceEquipment.getPanelParts(); }
       return {
         blocks: [],
         icon: this.source.system.metadata.icon,

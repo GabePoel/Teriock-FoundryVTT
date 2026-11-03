@@ -198,7 +198,7 @@ export default function RefreshSystemMixin(Base) {
      */
     async getRefreshSources() {
       const resolvedNodes = await Promise.all(this._refreshPromises);
-      return resolvedNodes.filter(n => n.document && n.document.isViewer && n.document.uuid !== this.parent.uuid);
+      return resolvedNodes.filter(n => n.document?.isViewer && n.document.uuid !== this.parent.uuid);
     }
 
     /**
