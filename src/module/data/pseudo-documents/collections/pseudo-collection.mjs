@@ -53,19 +53,13 @@ export default class PseudoCollection extends TypeCollection {
    * @param {T} type
    * @param {object} [options]
    * @param {boolean} [options.active]
-   * @param {boolean} [options.crit]
-   * @param {boolean} [options.heighten]
    * @param {boolean} [options.isPassive]
-   * @param {Teriock.System.CompetenceLevel} [options.competence]
    * @returns {Extract<TPseudo, { type: T }>[]}
    */
   getTypeSync(type, options = {}) {
     return (this.documentsByType[type] ?? []).filter(p => {
       if (typeof options.active === "boolean" && this._checkIfActive(p) !== options.active) { return false; }
-      if (typeof options.crit === "boolean" && !p.crit?.has?.(Number(options.crit))) { return false; }
-      if (typeof options.heighten === "boolean" && !p.heighten?.has?.(Number(options.heighten))) { return false; }
-      if (typeof options.isPassive === "boolean" && p.isPassive !== options.isPassive) { return false; }
-      return !(typeof options.competence === "number" && !p.competencies?.has?.(options.competence));
+      return !(typeof options.isPassive === "boolean" && p.isPassive !== options.isPassive);
     });
   }
 

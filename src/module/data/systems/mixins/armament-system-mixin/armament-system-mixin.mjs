@@ -40,7 +40,6 @@ export default function ArmamentSystemMixin(Base) {
     static metadata = mergeMetadata(super.metadata, {
       automationTags: { triggered: true },
       childTypes: ["ability", "fluency", "property", "resource", "imbuement"],
-      crit: { enabled: true, where: "chatData" },
       tags: { armament: true },
       visibleTypes: ["ability", "fluency", "property", "resource", "imbuement"],
     });

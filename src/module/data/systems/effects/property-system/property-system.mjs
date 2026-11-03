@@ -43,7 +43,6 @@ export default class PropertySystem
   static metadata = mergeMetadata(super.metadata, {
     automationTags: { passive: true, triggered: true },
     childTypes: ["property"],
-    crit: { enabled: true, where: "chatData" },
     icon: TERIOCK.DISPLAY.icons.manifest.document.property,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.property,
     importable: true,

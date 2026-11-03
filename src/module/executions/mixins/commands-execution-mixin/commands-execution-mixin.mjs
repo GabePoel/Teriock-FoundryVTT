@@ -46,14 +46,14 @@ export default function CommandsExecutionMixin(Base) {
       return [{
         action: "confirm",
         default: !this.crit,
-        icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+        icon: TERIOCK.DISPLAY.icons.manifest.results.base,
         label: "TERIOCK.DIALOGS.Boost.BUTTONS.ok",
         name: "ok",
         callback: () => this.updateSource({ crit: false }),
       }, {
         action: "confirm",
         default: this.crit,
-        icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
+        icon: TERIOCK.DISPLAY.icons.manifest.results.baseCrit,
         label: "TERIOCK.DIALOGS.Boost.BUTTONS.crit",
         name: "crit",
         type: "button",
@@ -147,7 +147,9 @@ export default function CommandsExecutionMixin(Base) {
      * Drop automations that don't apply to the chosen crit state.
      */
     _dropCritMismatches() {
-      this.automations.resetDocuments(this.automations.filter(a => a.crit.has(Number(this.crit))));
+      this.automations.resetDocuments(
+        this.automations.filter(a => !a.disabledToggles.has(this.crit ? "resultsBaseCrit" : "resultsBase")),
+      );
     }
 
     /** @inheritDoc */

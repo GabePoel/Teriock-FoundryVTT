@@ -17,9 +17,7 @@ export default function AutomationActivationFactory(Automation) {
     /** @inheritDoc */
     static defineSchema() {
       const automationSchema = Automation.defineSchema();
-      delete automationSchema.crit;
-      delete automationSchema.competencies;
-      delete automationSchema.heighten;
+      delete automationSchema.disabledToggles;
       delete automationSchema.display;
       return Object.assign(super.defineSchema(), automationSchema);
     }

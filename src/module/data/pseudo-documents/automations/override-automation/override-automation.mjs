@@ -27,7 +27,6 @@ export default class OverrideAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      makeCritEffect: new TernaryField(),
       makeEffect: new TernaryField(),
       preventAttack: new fields.BooleanField({ initial: false }),
       preventBlockCone: new fields.BooleanField({ initial: false }),
@@ -50,7 +49,6 @@ export default class OverrideAutomation
     return [
       "display.label",
       "makeEffect",
-      "makeCritEffect",
       "targetsActor",
       "targetsArmament",
       "hr",
@@ -86,7 +84,6 @@ export default class OverrideAutomation
   async modifyExecution(execution) {
     for (
       const k of [
-        "makeCritEffect",
         "makeEffect",
         "preventAttack",
         "preventBlockCone",

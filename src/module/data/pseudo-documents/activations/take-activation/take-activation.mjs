@@ -5,7 +5,7 @@ import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
 export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit });
+  static metadata = mergeMetadata(super.metadata, { icon: TERIOCK.DISPLAY.icons.manifest.results.baseCrit });
 
   /**
    * The amount this should apply.

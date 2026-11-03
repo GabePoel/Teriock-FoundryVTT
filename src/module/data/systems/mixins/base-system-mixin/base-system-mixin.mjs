@@ -35,7 +35,6 @@ export default function BaseSystemMixin(Base) {
      * @type {Teriock.Metadata.SystemMetadata}
      */
     static metadata = mergeMetadata(super.metadata, {
-      crit: { enabled: false, where: "chatData" },
       descriptionPath: null,
       disabledPath: null,
       documentName: "",
@@ -183,6 +182,28 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
+     * Mechanic toggles to display on things that hit other things.
+     * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+     */
+    get _mechanicTogglesHit() {
+      return [{
+        group: "results",
+        icon: TERIOCK.DISPLAY.icons.manifest.results.baseCrit,
+        id: "resultsBaseCrit",
+        off: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.on",
+        visible: pseudo => pseudo.modifiesChatData,
+      }, {
+        group: "results",
+        icon: TERIOCK.DISPLAY.icons.manifest.results.base,
+        id: "resultsBase",
+        off: "TERIOCK.MECHANIC_TOGGLES.Results.hit.off",
+        on: "TERIOCK.MECHANIC_TOGGLES.Results.hit.on",
+        visible: pseudo => pseudo.modifiesChatData,
+      }];
+    }
+
+    /**
      * A string to display following a colon after a document's name. Used for documents where there's one key scaling
      * parameter that is always important to see with the document.
      * @returns {string}
@@ -287,6 +308,14 @@ export default function BaseSystemMixin(Base) {
      */
     get makesEffectData() {
       return false;
+    }
+
+    /**
+     * The toggles that will be displayed on mechanic pseudo-documents.
+     * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+     */
+    get mechanicToggles() {
+      return [];
     }
 
     /**

@@ -125,26 +125,6 @@ export default function CommonSystemMixin(Base) {
       return this.parent.master?.fullName || this.parent.master?.name || "";
     }
 
-    /**
-     * Mechanic toggles to display on things that hit other things.
-     * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
-     */
-    get _mechanicTogglesHit() {
-      return [{
-        group: "results",
-        icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
-        id: "resultsBaseCrit",
-        off: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.off",
-        on: "TERIOCK.MECHANIC_TOGGLES.Results.critHit.on",
-      }, {
-        group: "results",
-        icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
-        id: "resultsBase",
-        off: "TERIOCK.MECHANIC_TOGGLES.Results.hit.off",
-        on: "TERIOCK.MECHANIC_TOGGLES.Results.hit.on",
-      }];
-    }
-
     /** @returns {Partial<Teriock.Embeds.EmbedParts>} */
     get embedParts() {
       return {
@@ -166,29 +146,31 @@ export default function CommonSystemMixin(Base) {
     }
 
     /**
-     * The toggles that will be displayed on mechanic pseudo-documents.
+     * @inheritDoc
      * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
      */
     get mechanicToggles() {
+      if (!this.competence) { return super.mechanicToggles; }
+      const { levels } = TERIOCK.CONFIG.competence;
       return [{
         group: "competence",
-        icon: TERIOCK.DISPLAY.icons.manifest.competence.none,
-        id: "competenceNone",
+        icon: levels[0].icon,
+        id: levels[0].toggle,
         off: "TERIOCK.MECHANIC_TOGGLES.Competence.none.off",
         on: "TERIOCK.MECHANIC_TOGGLES.Competence.none.on",
       }, {
         group: "competence",
-        icon: TERIOCK.DISPLAY.icons.manifest.competence.proficient,
-        id: "competenceProficient",
+        icon: levels[1].icon,
+        id: levels[1].toggle,
         off: "TERIOCK.MECHANIC_TOGGLES.Competence.proficient.off",
         on: "TERIOCK.MECHANIC_TOGGLES.Competence.proficient.on",
       }, {
         group: "competence",
-        icon: TERIOCK.DISPLAY.icons.manifest.competence.fluent,
-        id: "competenceFluent",
+        icon: levels[2].icon,
+        id: levels[2].toggle,
         off: "TERIOCK.MECHANIC_TOGGLES.Competence.fluent.off",
         on: "TERIOCK.MECHANIC_TOGGLES.Competence.fluent.on",
-      }];
+      }, ...super.mechanicToggles];
     }
 
     /**

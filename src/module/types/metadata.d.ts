@@ -54,11 +54,8 @@ declare global {
       wiki: boolean;
     };
 
-    export type SystemCritMetadata = { enabled: boolean, where: "chatData" | "effectData" };
-
     export type SystemMetadata = TypeMetadata & {
       automationTags: Partial<AutomationTags>;
-      crit: SystemCritMetadata;
       descriptionPath: string | null;
       disabledPath: "disabled" | "system.disabled" | null;
       img: string;

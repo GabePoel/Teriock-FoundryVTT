@@ -77,7 +77,6 @@ export default {
   },
   command: { tempHp: "mdi-heart-circle", tempMp: "mdi-water-circle" },
   competence: { fluent: "ms-social-leaderboard", none: "ms-brightness-empty", proficient: "ms-license" },
-  consequence: { crit: "ms-my-location", none: "ms-location-searching" },
   cover: { full: "ms-forest", half: "ms-grass", partial: "ms-park" },
   delivery: {
     aura: "ms-flare",
@@ -256,6 +255,12 @@ export default {
     mechanic: "ms-settings-b-roll",
   },
   rank: { combatAbility: "ms-swords", supportAbility: "ms-shield-with-heart" },
+  results: {
+    alt: "ms-location-disabled",
+    altCrit: "ms-crisis-alert",
+    base: "ms-location-searching",
+    baseCrit: "ms-my-location",
+  },
   roll: { boost: "ms-arrow-warm-up", deboost: "ms-arrow-cool-down", initiative: "fa-dice-d20", reroll: "ms-replay" },
   sense: {
     blind: "ms-visibility-off",

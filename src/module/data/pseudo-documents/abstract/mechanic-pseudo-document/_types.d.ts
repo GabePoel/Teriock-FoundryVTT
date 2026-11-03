@@ -8,10 +8,7 @@ declare global {
   namespace Teriock.PseudoDocuments {
     export type MechanicPseudoDocumentData = {
       activeQualifier: Teriock.System.FormulaString;
-      competencies: Set<number>;
-      crit: Set<number>;
       disabledToggles: Set<string>;
-      heighten: Set<number>;
     };
   }
 }

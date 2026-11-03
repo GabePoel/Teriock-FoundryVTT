@@ -70,7 +70,6 @@ export default class AbilitySystem
   static metadata = mergeMetadata(super.metadata, {
     automationTags: { ability: true, passive: true, triggered: true },
     childTypes: ["ability", "fluency", "resource"],
-    crit: { enabled: true, where: "effectData" },
     icon: TERIOCK.DISPLAY.icons.manifest.document.ability,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.ability,
     importable: true,
@@ -302,42 +301,46 @@ export default class AbilitySystem
     /** @type {Teriock.Mechanics.MechanicToggleEntry} */
     const baseToggle = {
       group: "results",
-      icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+      icon: TERIOCK.DISPLAY.icons.manifest.results.base,
       id: "resultsBase",
       name: "TERIOCK.MECHANIC_TOGGLES.Results.base.name",
       off: "TERIOCK.MECHANIC_TOGGLES.Results.base.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Results.base.on",
       variant: true,
+      visible: pseudo => pseudo.modifiesEffectData,
     };
     /** @type {Teriock.Mechanics.MechanicToggleEntry} */
     const baseCritToggle = {
       group: "results",
-      icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
+      icon: TERIOCK.DISPLAY.icons.manifest.results.baseCrit,
       id: "resultsBaseCrit",
       name: "TERIOCK.MECHANIC_TOGGLES.Results.baseCrit.name",
       off: "TERIOCK.MECHANIC_TOGGLES.Results.baseCrit.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Results.baseCrit.on",
       variant: true,
+      visible: pseudo => pseudo.modifiesEffectData,
     };
     /** @type {Teriock.Mechanics.MechanicToggleEntry} */
     const altToggle = {
       group: "results",
-      icon: TERIOCK.DISPLAY.icons.manifest.consequence.none,
+      icon: TERIOCK.DISPLAY.icons.manifest.results.alt,
       id: "resultsAlt",
       name: "TERIOCK.MECHANIC_TOGGLES.Results.alt.name",
       off: "TERIOCK.MECHANIC_TOGGLES.Results.alt.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Results.alt.on",
       variant: true,
+      visible: pseudo => pseudo.modifiesEffectData,
     };
     /** @type {Teriock.Mechanics.MechanicToggleEntry} */
     const altCritToggle = {
       group: "results",
-      icon: TERIOCK.DISPLAY.icons.manifest.consequence.crit,
+      icon: TERIOCK.DISPLAY.icons.manifest.results.altCrit,
       id: "resultsAltCrit",
       name: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.name",
       off: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.off",
       on: "TERIOCK.MECHANIC_TOGGLES.Results.altCrit.on",
       variant: true,
+      visible: pseudo => pseudo.modifiesEffectData,
     };
     /** @type {Teriock.Mechanics.MechanicToggleEntry[]} */
     const resultToggles = [];
@@ -424,6 +427,12 @@ export default class AbilitySystem
       }
     }
     return [...resultToggles, {
+      group: "heightening",
+      icon: TERIOCK.DISPLAY.icons.manifest.ability.unheightened,
+      id: "unheightened",
+      off: "TERIOCK.MECHANIC_TOGGLES.Heightening.unheightened.off",
+      on: "TERIOCK.MECHANIC_TOGGLES.Heightening.unheightened.on",
+    }, {
       group: "heightening",
       icon: TERIOCK.DISPLAY.icons.manifest.ability.heightened,
       id: "heightened",

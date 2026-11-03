@@ -3,7 +3,6 @@ declare module "./override-automation.mjs" {
     rollBonus: Teriock.System.FormulaString;
     rollFormula: Teriock.System.FormulaString;
     makeEffect: boolean | null;
-    makeCritEffect: boolean | null;
     targetsActor: boolean | null;
     targetsArmament: boolean | null;
     preventAttack: boolean;

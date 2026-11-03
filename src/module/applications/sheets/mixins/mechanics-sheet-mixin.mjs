@@ -108,8 +108,7 @@ export default function MechanicsSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     static async _onSetToggle(_event, target) {
-      const path = target.dataset.path;
-      const term = Number(target.dataset.term);
+      const { path, term } = target.dataset;
       const set = new Set(foundry.utils.getProperty(this.document._source, path));
       if (!set.delete(term)) { set.add(term); }
       await this.document.update({ [path]: Array.from(set) });

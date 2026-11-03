@@ -7,7 +7,6 @@ declare module "./base-execution.mjs" {
   export default interface BaseExecution {
     competence: CompetenceModel;
     formula: Teriock.System.FormulaString;
-    makeCritEffect: boolean;
     makeEffect: boolean;
     targetsActor: boolean;
     targetsArmament: boolean;

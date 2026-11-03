@@ -5,116 +5,26 @@
   <header class="teriock-mechanic-header draggable" data-action="toggleCollapse" data-uuid="{{ mechanic.uuid }}">
     <div class="teriock-mechanic-header-name">{{localize mechanic.label}}</div>
     <div class="teriock-mechanic-header-buttons" data-collapsible-ignore>
-      {{#if mechanic.canCrit}}
+      {{#each mechanic.toggles as |toggles|}}
         <div class="teriock-mechanic-header-button-group">
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.crit"
-            data-term="0"
-            data-tooltip='{{ifThen (includes mechanic.crit 0) "TERIOCK.MECHANICS.Base.TOOLTIPS.crit.base.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.crit.base.off"}}'
-            id="{{ mechanic.uuid }}.noncrit"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.consequence.none
-              (ifThen (includes mechanic.crit 0) "solid" "light")
-            }}
-          </button>
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.crit"
-            data-term="1"
-            data-tooltip='{{ifThen (includes mechanic.crit 1) "TERIOCK.MECHANICS.Base.TOOLTIPS.crit.critical.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.crit.critical.off"}}'
-            id="{{ mechanic.uuid }}.crit"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.consequence.crit
-              (ifThen (includes mechanic.crit 1) "solid" "light")
-            }}
-          </button>
+          {{#each toggles as |toggle|}}
+            {{!-- prettier-ignore --}}
+            <button
+              data-action="setToggle"
+              data-path="{{ ../../mechanic.localPath }}.disabledToggles"
+              data-term="{{ toggle.id }}"
+              data-tooltip='{{ifThen toggle.active toggle.on toggle.off}}'
+              id="{{ ../../mechanic.uuid }}.{{ toggle.id }}"
+              type="button"
+            >
+              {{makeIcon
+                toggle.icon
+                (ifThen toggle.active "solid" "light")
+              }}
+            </button>
+          {{/each}}
         </div>
-      {{/if}}
-      {{#if @root/system.competence}}
-        <div class="teriock-mechanic-header-button-group">
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.competencies"
-            data-term="0"
-            data-tooltip='{{ifThen (includes mechanic.competencies 0) "TERIOCK.MECHANICS.Base.TOOLTIPS.competence.base.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.competence.base.off"}}'
-            id="{{ mechanic.uuid }}.base"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.competence.none
-              (ifThen (includes mechanic.competencies 0) "solid" "light")
-            }}
-          </button>
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.competencies"
-            data-term="1"
-            data-tooltip='{{ifThen (includes mechanic.competencies 1) "TERIOCK.MECHANICS.Base.TOOLTIPS.competence.proficient.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.competence.proficient.off"}}'
-            id="{{ mechanic.uuid }}.proficient"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.competence.proficient
-              (ifThen (includes mechanic.competencies 1) "solid" "light")
-            }}
-          </button>
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.competencies"
-            data-term="2"
-            data-tooltip='{{ifThen (includes mechanic.competencies 2) "TERIOCK.MECHANICS.Base.TOOLTIPS.competence.fluent.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.competence.fluent.off"}}'
-            id="{{ mechanic.uuid }}.fluent"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.competence.fluent
-              (ifThen (includes mechanic.competencies 2) "solid" "light")
-            }}
-          </button>
-        </div>
-      {{/if}}
-      {{#if (eq @root.document.type "ability")}}
-        <div class="teriock-mechanic-header-button-group">
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.heighten"
-            data-term="0"
-            data-tooltip='{{ifThen (includes mechanic.heighten 0) "TERIOCK.MECHANICS.Base.TOOLTIPS.heighten.base.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.heighten.base.off"}}'
-            id="{{ mechanic.uuid }}.unheightened"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.ability.unheightened
-              (ifThen (includes mechanic.heighten 0) "solid" "light")
-            }}
-          </button>
-          {{!-- prettier-ignore --}}
-          <button
-            data-action="setToggle"
-            data-path="{{ mechanic.localPath }}.heighten"
-            data-term="1"
-            data-tooltip='{{ifThen (includes mechanic.heighten 1) "TERIOCK.MECHANICS.Base.TOOLTIPS.heighten.heightened.on" "TERIOCK.MECHANICS.Base.TOOLTIPS.heighten.heightened.off"}}'
-            id="{{ mechanic.uuid }}.heightened"
-            type="button"
-          >
-            {{makeIcon
-              @root/TERIOCK.DISPLAY.icons.manifest.ability.heightened
-              (ifThen (includes mechanic.heighten 1) "solid" "light")
-            }}
-          </button>
-        </div>
-      {{/if}}
+      {{/each}}
       <div class="teriock-mechanic-header-button-group">
         {{!-- prettier-ignore --}}
         <button

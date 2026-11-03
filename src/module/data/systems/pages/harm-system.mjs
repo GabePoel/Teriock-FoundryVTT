@@ -12,10 +12,7 @@ export default class HarmSystem
   extends mixClasses(BasePageSystem, AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin)
 {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    automationTags: { harm: true, triggered: true },
-    crit: { enabled: true, where: "chatData" },
-  });
+  static metadata = mergeMetadata(super.metadata, { automationTags: { harm: true, triggered: true } });
 
   /** @inheritDoc */
   get _panelBars() {
@@ -25,5 +22,13 @@ export default class HarmSystem
   /** @inheritDoc */
   get makesChatData() {
     return true;
+  }
+
+  /**
+   * @inheritDoc
+   * @returns {Teriock.Mechanics.MechanicToggleEntry[]}
+   */
+  get mechanicToggles() {
+    return [...this._mechanicTogglesHit, ...super.mechanicToggles];
   }
 }

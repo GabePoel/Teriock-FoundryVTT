@@ -1,8 +1,7 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { mergeMetadata, mixClasses, prefixObject, toId } from "../../../../utils/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
-import { competenceField, qualifierField } from "../../../fields/tools/builders.mjs";
+import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { PropagationDataMixin } from "../../../mixins/_module.mjs";
 import BasePseudoDocument from "../base-pseudo-document/base-pseudo-document.mjs";
 
@@ -32,27 +31,30 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       activeQualifier: qualifierField({ initial: "1" }),
-      competencies: new fields.SetField(competenceField(), { initial: () => [0, 1, 2] }),
-      crit: new fields.SetField(
-        new fields.NumberField({
-          choices: localizeChoices({
-            0: "TERIOCK.MECHANICS.Base.FIELDS.crit.choices.0",
-            1: "TERIOCK.MECHANICS.Base.FIELDS.crit.choices.1",
-          }, { sort: false }),
-        }),
-        { initial: () => [0, 1] },
-      ),
       disabledToggles: new fields.SetField(new fields.StringField()),
-      heighten: new fields.SetField(
-        new fields.NumberField({
-          choices: localizeChoices({
-            0: "TERIOCK.MECHANICS.Base.FIELDS.heighten.choices.0",
-            1: "TERIOCK.MECHANICS.Base.FIELDS.heighten.choices.1",
-          }),
-        }),
-        { initial: () => [0, 1] },
-      ),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (["competencies", "crit", "heighten"].some(k => k in source)) {
+      const disabled = new Set([...(source.disabledToggles ?? []), "resultsAlt", "resultsAltCrit"]);
+      const crit = source.crit ?? [0, 1];
+      if (!crit.includes(0)) { disabled.add("resultsBase"); }
+      if (!crit.includes(1)) { disabled.add("resultsBaseCrit"); }
+      const heighten = source.heighten ?? [0, 1];
+      if (!heighten.includes(0)) { disabled.add("unheightened"); }
+      if (!heighten.includes(1)) { disabled.add("heightened"); }
+      const competencies = source.competencies ?? [0, 1, 2];
+      for (const [level, { toggle }] of Object.entries(TERIOCK.CONFIG.competence.levels)) {
+        if (!competencies.includes(Number(level))) { disabled.add(toggle); }
+      }
+      source.disabledToggles = Array.from(disabled);
+      delete source.competencies;
+      delete source.crit;
+      delete source.heighten;
+    }
+    return super.migrateData(source, options);
   }
 
   /** @inheritDoc */
@@ -69,37 +71,12 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
-   * Whether this can crit.
-   * @returns {boolean}
-   */
-  get canCrit() {
-    return this.canCritChatData || this.canCritEffectData;
-  }
-
-  /**
-   * Whether this can crit through the chat data its document makes.
-   * @returns {boolean}
-   */
-  get canCritChatData() {
-    const crit = this.getNearestDocument()?.metadata?.crit;
-    return Boolean(crit?.enabled) && crit.where === "chatData" && this.modifiesChatData;
-  }
-
-  /**
-   * Whether this can crit through the effect data its document makes.
-   * @returns {boolean}
-   */
-  get canCritEffectData() {
-    const crit = this.getNearestDocument()?.metadata?.crit;
-    return Boolean(crit?.enabled) && crit.where === "effectData" && this.modifiesEffectData;
-  }
-
-  /**
    * Whether the competence requirements for this to be active are met.
    * @returns {boolean}
    */
   get competent() {
-    return this.parent?.competence ? this.competencies.has(this.parent.competence.value) : true;
+    if (!this.parent?.competence) { return true; }
+    return !this.disabledToggles.has(TERIOCK.CONFIG.competence.levels[this.parent.competence.value].toggle);
   }
 
   /**
@@ -160,20 +137,18 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   }
 
   /**
-   * The toggles that will be displayed on this.
-   * @returns {Teriock.Mechanics.MechanicToggleState[]}
+   * Grouped toggles that will be displayed on this.
+   * @returns {Record<string, Teriock.Mechanics.MechanicToggleState[]>}
    */
   get toggles() {
     const doc = this.getNearestDocument();
-    if (!doc) { return []; }
+    if (!doc) { return {}; }
     /** @type {Teriock.Mechanics.MechanicToggleEntry[]} */
-    const toggleEntries = doc.system?.mechanicToggles ?? [];
-    /** @type {Teriock.Mechanics.MechanicToggleState[]} */
-    const toggleStates = [];
-    for (const t of toggleEntries) {
-      toggleStates.push({ ...t, active: !this.disabledToggles.has(t.id) });
-    }
-    return toggleStates;
+    const entries = doc.system?.mechanicToggles ?? [];
+    return Object.groupBy(
+      entries.filter(t => t.visible?.(this, doc) ?? true).map(t => ({ ...t, active: !this.disabledToggles.has(t.id) })),
+      t => t.group,
+    );
   }
 
   /**
@@ -272,7 +247,6 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if (!this.canCrit) { this.crit = new Set([0, 1]); }
     const uuid = this.uuid;
     if (uuid && this.getNearestDocument()?.documentName !== "Actor") {
       this.actor?.getEmbeddedCollection(this.documentName)?.set(toId(uuid, { hash: true }), this);

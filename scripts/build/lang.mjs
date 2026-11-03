@@ -23,6 +23,7 @@ import { default as format } from "../../src/en/format.json" with { type: "json"
 import { default as hotbar } from "../../src/en/hotbar.json" with { type: "json" };
 import { default as length } from "../../src/en/length.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
+import { default as mechanicToggles } from "../../src/en/mechanic-toggles.json" with { type: "json" };
 import { default as mechanics } from "../../src/en/mechanics.json" with { type: "json" };
 import { default as menus } from "../../src/en/menus.json" with { type: "json" };
 import { default as message } from "../../src/en/message.json" with { type: "json" };
@@ -154,6 +155,7 @@ mergeObjects(
   hotbar,
   length,
   macros,
+  mechanicToggles,
   mechanics,
   menus,
   message,
