@@ -122,12 +122,15 @@ effects:
           targetsActor: true
           type: override
         - _id: 9AlsM9aoZdUE8oTW
-          competencies:
-            - 0
           data: |-
             {
               "executionTime": "r0"
             }
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           localQualifier: and(@ability, @basic, @time.a1, not(@interaction.attack))
           overrideData: true
           triggerQualifier: >-
@@ -137,13 +140,14 @@ effects:
             - executeAbility
           type: useDocuments
         - _id: B8omlh2YUMEvbbU6
-          competencies:
-            - 1
-            - 2
           data: |-
             {
               "executionTime": "r0"
             }
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           localQualifier: and(@ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
           overrideData: true
           triggerQualifier: >-

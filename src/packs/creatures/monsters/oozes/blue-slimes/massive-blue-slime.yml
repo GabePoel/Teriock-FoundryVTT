@@ -446,8 +446,10 @@ items:
                   overrideData: false
                   setCompetence: inherit
                   type: base
-              heighten:
-                - 0
+              disabledToggles:
+                - heightened
+                - resultsAlt
+                - resultsAltCrit
               interactInExecution: true
               type: addDocuments
             - _id: SxOGWyI0nvOW6aWG
@@ -465,8 +467,10 @@ items:
                   overrideData: false
                   setCompetence: inherit
                   type: base
-              heighten:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               interactInExecution: true
               type: addDocuments
             - _id: X0jz8CbzTj5jz414
@@ -844,9 +848,11 @@ items:
           automations:
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (@h)d4[magic ice]
-              heighten:
-                - 1
               type: roll
             - _id: 09ed285450c5de7b
               status: frozen
@@ -866,14 +872,18 @@ items:
             either of these dice roll a 4, this effect ends.</p>
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               event: action
               method: roll
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               event: action
               method: roll
               skip: 1
@@ -1055,11 +1065,13 @@ items:
           _sup: XGWcDOE95PgdyWli
           automations:
             - _id: 72ce567009179bea
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               duration:
                 raw: "@h"
                 unit: hour
-              heighten:
-                - 1
               type: duration
           competence:
             raw: 1
@@ -1158,8 +1170,11 @@ items:
                   target: Actor
                   type: upgrade
                   value: "@rank.mage - 1"
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: f025905e157ac261
               changes:
@@ -1170,8 +1185,11 @@ items:
                   target: Actor
                   type: upgrade
                   value: 2 * (@rank.mage - 1)
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: f7da3b5e1992a724
               changes:
@@ -1182,8 +1200,11 @@ items:
                   target: Actor
                   type: upgrade
                   value: 2 * (@rank.mage - 1) + @p
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -1523,8 +1544,6 @@ items:
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               attachToEffect: false
-              competencies:
-                - 2
               constructionNodes:
                 43bec888c0e1e5c5:
                   _id: 43bec888c0e1e5c5
@@ -1537,6 +1556,11 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: 6KfNYKPsotBjQs6Z
               common:
@@ -1620,8 +1644,10 @@ items:
                   overrideData: false
                   setCompetence: inherit
                   type: base
-              heighten:
-                - 0
+              disabledToggles:
+                - heightened
+                - resultsAlt
+                - resultsAltCrit
               interactInExecution: true
               type: addDocuments
             - _id: SxOGWyI0nvOW6aWG
@@ -1639,8 +1665,10 @@ items:
                   overrideData: false
                   setCompetence: inherit
                   type: base
-              heighten:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               interactInExecution: true
               type: addDocuments
             - _id: X0jz8CbzTj5jz414
@@ -1872,25 +1900,28 @@ items:
             - _id: 2HAoFJVH66vfO890
               competence:
                 raw: 2
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:storm-elder-sorcery-words
               type: changeCompetence
             - _id: 7MMKFAgxPJAbA1yE
               competence:
                 raw: 2
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:celestial-elder-sorcery-words
               type: changeCompetence
             - _id: gSY2Fuaqbe5TTkSP
               competence:
                 raw: 2
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:elder-sorcery-creation
               type: changeCompetence
           competence:
@@ -2370,9 +2401,10 @@ items:
             - _id: DBC5t1veLzlsxPUW
               competence:
                 raw: 2
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:storm-rotators
               type: changeCompetence
           competence:

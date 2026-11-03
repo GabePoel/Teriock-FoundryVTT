@@ -5,13 +5,16 @@ name: Circle of Fire
 system:
   automations:
     - _id: 72ce567009179bea
+      disabledToggles:
+        - resultsAlt
+        - resultsAltCrit
+        - unheightened
       duration:
         raw: "@h"
         unit: day
-      heighten:
-        - 1
       type: duration
     - _id: vg4VWLvf8g6SyqFV
+      applyDocuments: true
       attachToToken: false
       deleteOnTurnChange: false
       expandWithToken: false
@@ -22,11 +25,13 @@ system:
         enabled: true
       type: region
     - _id: ZOWyKPGH0LFWp7Dx
+      applyDocuments: true
       attachToToken: false
-      competencies:
-        - 1
-        - 2
       deleteOnTurnChange: false
+      disabledToggles:
+        - competenceNone
+        - resultsAlt
+        - resultsAltCrit
       expandWithToken: false
       globalIdentifiers:
         - consequence:circle-of-fire-proficient-area-effect

@@ -11,8 +11,11 @@ effects:
       automations:
         - _id: SSt00nG9WUEpsaDV
           changeType: upgrade
-          competencies:
-            - 0
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           key: system.damage
           priority: 10
           qualifier: "@prop.biting"
@@ -21,8 +24,11 @@ effects:
           value: 1d4
         - _id: Qu3wFDMJp5Glvj3R
           changeType: upgrade
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           key: system.damage
           priority: 10
           qualifier: "@prop.biting"
@@ -31,8 +37,11 @@ effects:
           value: 1d6
         - _id: b7iQNyYdqIYyHGzo
           changeType: upgrade
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           key: system.damage
           priority: 10
           qualifier: "@prop.biting"
@@ -45,15 +54,19 @@ effects:
           type: roll
         - _id: 5e4d195ed81a10cc
           command: damage
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           formula: 1d6
           type: roll
         - _id: 3f7fa7707643426f
           command: damage
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           formula: 1d8
           type: roll
       delivery: self
@@ -90,9 +103,11 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           command: damage
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           formula: (@h)d4[magic terror]
-          heighten:
-            - 1
           type: roll
         - _id: b4960732f0b9ed9f
           executor: true
@@ -111,14 +126,18 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       expirations:
         - _id: 66672059c7a29a30
-          crit:
-            - 0
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBaseCrit
           method: roll
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
-          crit:
-            - 1
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBase
           method: roll
           skip: 1
           timing: end

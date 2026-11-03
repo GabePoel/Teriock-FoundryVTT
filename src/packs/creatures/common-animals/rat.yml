@@ -38,9 +38,10 @@ items:
                   target: Actor
                   type: upgrade
                   value: "3"
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -289,24 +290,33 @@ items:
           automations:
             - _id: 29b275994cf9f5b1
               command: damage
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d6[toxic]
               triggers:
                 - turnStart
               type: roll
             - _id: 5e4d195ed81a10cc
               command: damage
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d8[toxic]
               triggers:
                 - turnStart
               type: roll
             - _id: 3f7fa7707643426f
               command: damage
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d10[toxic]
               triggers:
                 - turnStart

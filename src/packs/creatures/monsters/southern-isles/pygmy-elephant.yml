@@ -209,14 +209,18 @@ items:
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               method: roll
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               method: roll
               skip: 1
               timing: end
@@ -297,12 +301,15 @@ items:
               targetsActor: true
               type: override
             - _id: 9AlsM9aoZdUE8oTW
-              competencies:
-                - 0
               data: |-
                 {
                   "executionTime": "r0"
                 }
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               localQualifier: and(@ability, @basic, @time.a1, not(@interaction.attack))
               overrideData: true
               triggerQualifier: >-
@@ -312,13 +319,14 @@ items:
                 - executeAbility
               type: useDocuments
             - _id: B8omlh2YUMEvbbU6
-              competencies:
-                - 1
-                - 2
               data: |-
                 {
                   "executionTime": "r0"
                 }
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               localQualifier: and(@ability, @time.a1, not(@interaction.attack), or(@basic, @class.assassin))
               overrideData: true
               triggerQualifier: >-

@@ -506,8 +506,11 @@ items:
           automations:
             - _id: F9NLbFodo8GgQLdh
               changeType: upgrade
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -515,8 +518,11 @@ items:
               value: "1"
             - _id: iijE8Q6bC3GKvrTX
               changeType: upgrade
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -524,8 +530,11 @@ items:
               value: "2"
             - _id: pI8dAIbbmiCqE5n9
               changeType: upgrade
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -729,8 +738,11 @@ items:
           automations:
             - _id: xX7Z0MBjQuUVHdLg
               changeType: upgrade
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.damage
               priority: 10
               qualifier: "@prop.handy"
@@ -739,8 +751,11 @@ items:
               value: 1d4
             - _id: IlASfQucE28oO7eo
               changeType: upgrade
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               key: system.damage
               priority: 10
               qualifier: "@prop.handy"
@@ -749,8 +764,11 @@ items:
               value: 1d6
             - _id: LNqxuNUNDqEtcbmb
               changeType: upgrade
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.damage
               priority: 10
               qualifier: "@prop.handy"
@@ -763,15 +781,19 @@ items:
               type: roll
             - _id: 5e4d195ed81a10cc
               command: damage
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d6
               type: roll
             - _id: 3f7fa7707643426f
               command: damage
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d8
               type: roll
           competence:
@@ -1283,9 +1305,11 @@ items:
           automations:
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (@h)d4[magic holy]
-              heighten:
-                - 1
               type: roll
             - _id: 747b3e9c9b617af6
               status: lighted
@@ -1301,13 +1325,17 @@ items:
             - life
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               relation: executor
               timing: end
               type: combat
@@ -1341,13 +1369,17 @@ items:
         system:
           automations:
             - _id: T6TT7QmjNrgdtZT7
-              heighten:
-                - 0
+              disabledToggles:
+                - heightened
+                - resultsAlt
+                - resultsAltCrit
               type: heal
             - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
-              heighten:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               type: heal
           competence:
             raw: 1

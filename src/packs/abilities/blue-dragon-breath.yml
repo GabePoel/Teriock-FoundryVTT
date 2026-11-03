@@ -6,9 +6,11 @@ system:
   automations:
     - _id: 800c70e6560525a8
       command: damage
+      disabledToggles:
+        - resultsAlt
+        - resultsAltCrit
+        - unheightened
       formula: (2 * @h)d10[magic ice]
-      heighten:
-        - 1
       type: roll
     - _id: dozfNCs9FQ7NhV4L
       status: frozen
@@ -40,6 +42,8 @@ system:
     2d4]]. If either of these dice roll a 4, this effect ends.</p>
   expirations:
     - _id: 66672059c7a29a30
+      disabledToggles:
+        - resultsBase
       event: action
       method: roll
       timing: end

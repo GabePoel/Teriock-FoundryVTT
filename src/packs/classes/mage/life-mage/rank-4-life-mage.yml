@@ -86,25 +86,28 @@ effects:
         - _id: 6yUEATMQOUZ3SAqS
           competence:
             raw: 2
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:life-elder-sorcery-words
           type: changeCompetence
         - _id: Ia6EYSYOB9D1mTgx
           competence:
             raw: 2
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
         - _id: YuY07yJd3gHW5SEJ
           competence:
             raw: 2
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:celestial-elder-sorcery-words
           type: changeCompetence
       competence:
@@ -214,9 +217,10 @@ effects:
         - _id: ofqV75hAbinXvq3U
           competence:
             raw: 2
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:life-rotators
           type: changeCompetence
       competence:
@@ -466,11 +470,13 @@ effects:
               value: enchanted
           type: changes
         - _id: 72ce567009179bea
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           duration:
             raw: "@h"
             unit: hour
-          heighten:
-            - 1
           type: duration
       competence:
         raw: 1
@@ -624,27 +630,38 @@ effects:
       affinities:
         - _id: XcW4SOfd4F6EXygH
           category: effect
-          heighten:
-            - 1
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           identifier: awakening
           type: resistance
       automations:
         - _id: e1c7d7174b360e93
           command: sleep
-          competencies:
-            - 0
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           formula: (1 + @h)d8
           type: roll
         - _id: ebd880725105dde4
           command: sleep
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           formula: (1 + @p + @h)d8
           type: roll
         - _id: a394fca7e6444945
           command: sleep
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           formula: (1 + @f + @h)d8
           type: roll
         - _id: PXielxmkr3bcWsV4

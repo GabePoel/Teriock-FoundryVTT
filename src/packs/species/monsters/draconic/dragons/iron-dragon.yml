@@ -265,9 +265,10 @@ effects:
               target: Actor
               type: upgrade
               value: "3"
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           type: changes
       competence:
         raw: 1
@@ -393,9 +394,11 @@ effects:
           type: hacks
         - _id: 800c70e6560525a8
           command: damage
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           formula: (2 * @h)d10[magic]
-          heighten:
-            - 1
           type: roll
         - _id: 7400b41f20d9f100
           angle: "@angle.dragon"
@@ -1063,8 +1066,6 @@ effects:
           type: addDocuments
         - _id: WBvjNFpKtMRAX7Br
           attachToEffect: false
-          competencies:
-            - 2
           constructionNodes:
             43bec888c0e1e5c5:
               _id: 43bec888c0e1e5c5
@@ -1077,6 +1078,11 @@ effects:
               multi: false
               overrideData: false
               type: base
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           type: addDocuments
         - _id: 6KfNYKPsotBjQs6Z
           common:
@@ -1294,29 +1300,41 @@ effects:
         - _id: IcIHebYPkEqIqVWZ
           competence:
             raw: 1
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:all-elder-sorcery-words
           type: changeCompetence
         - _id: bgZtShTjbCNE0vu7
           competence:
             raw: 1
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
         - _id: K7UQWKx6i7WyBkLS
           competence:
             raw: 2
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
         - _id: Kkl4bRexmERpCT2s
           competence:
             raw: 2
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           identifier: ability:all-elder-sorcery-words
           type: changeCompetence
         - _id: 0gqsEG5QEqQkXAW8
@@ -1327,8 +1345,11 @@ effects:
               target: Actor
               type: add
               value: 10 * @p
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           type: changes
         - _id: RkstdlO1k6jqBeNj
           changes:
@@ -1338,8 +1359,11 @@ effects:
               target: Actor
               type: add
               value: 10 * @f
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           type: changes
       competence:
         raw: 1

@@ -681,9 +681,11 @@ items:
           automations:
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (@h)d4[magic holy]
-              heighten:
-                - 1
               type: roll
             - _id: 747b3e9c9b617af6
               status: lighted
@@ -699,13 +701,17 @@ items:
             - life
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               relation: executor
               timing: end
               type: combat
@@ -739,13 +745,17 @@ items:
         system:
           automations:
             - _id: T6TT7QmjNrgdtZT7
-              heighten:
-                - 0
+              disabledToggles:
+                - heightened
+                - resultsAlt
+                - resultsAltCrit
               type: heal
             - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
-              heighten:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               type: heal
           competence:
             raw: 1
@@ -911,8 +921,11 @@ items:
                   target: Actor
                   type: upgrade
                   value: "@rank.mage - 1"
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: BVYpnuVlrNWYQEjq
               changes:
@@ -923,8 +936,11 @@ items:
                   target: Actor
                   type: upgrade
                   value: 2 * (@rank.mage - 1)
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: 4OK1HyJk93vMdNmZ
               changes:
@@ -935,8 +951,11 @@ items:
                   target: Actor
                   type: upgrade
                   value: 2 * (@rank.mage - 1) + @p
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -986,8 +1005,6 @@ items:
           _sup: BtjyB6cjHw37lX9f
           automations:
             - _id: b7Xi5bdZO77CsFw6
-              competencies:
-                - 0
               constructionNodes:
                 6c7ec6c16b0b69ff:
                   _id: 6c7ec6c16b0b69ff
@@ -1000,11 +1017,13 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: PhMG9NY6ssZbobIQ
-              competencies:
-                - 1
-                - 2
               constructionNodes:
                 e7cb3b9fd8ac34c3:
                   _id: e7cb3b9fd8ac34c3
@@ -1017,6 +1036,10 @@ items:
                   multi: true
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
           competence:
             raw: 1
@@ -1273,8 +1296,6 @@ items:
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               attachToEffect: false
-              competencies:
-                - 2
               constructionNodes:
                 43bec888c0e1e5c5:
                   _id: 43bec888c0e1e5c5
@@ -1287,6 +1308,11 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: 6KfNYKPsotBjQs6Z
               common:

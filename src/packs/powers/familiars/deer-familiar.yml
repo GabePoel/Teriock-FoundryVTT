@@ -57,9 +57,11 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           command: damage
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           formula: (@h)d4[magic holy]
-          heighten:
-            - 1
           type: roll
         - _id: 747b3e9c9b617af6
           status: lighted
@@ -76,14 +78,18 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       expirations:
         - _id: 66672059c7a29a30
-          crit:
-            - 0
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBaseCrit
           method: roll
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
-          crit:
-            - 1
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBase
           method: roll
           skip: 1
           timing: end

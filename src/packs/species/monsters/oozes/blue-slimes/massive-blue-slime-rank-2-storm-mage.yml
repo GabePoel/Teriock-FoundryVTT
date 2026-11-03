@@ -50,8 +50,11 @@ effects:
               target: Actor
               type: upgrade
               value: "@rank.mage - 1"
-          competencies:
-            - 0
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           type: changes
         - _id: f025905e157ac261
           changes:
@@ -62,8 +65,11 @@ effects:
               target: Actor
               type: upgrade
               value: 2 * (@rank.mage - 1)
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           type: changes
         - _id: f7da3b5e1992a724
           changes:
@@ -74,8 +80,11 @@ effects:
               target: Actor
               type: upgrade
               value: 2 * (@rank.mage - 1) + @p
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           type: changes
       competence:
         raw: 1
@@ -412,8 +421,6 @@ effects:
           type: addDocuments
         - _id: WBvjNFpKtMRAX7Br
           attachToEffect: false
-          competencies:
-            - 2
           constructionNodes:
             43bec888c0e1e5c5:
               _id: 43bec888c0e1e5c5
@@ -426,6 +433,11 @@ effects:
               multi: false
               overrideData: false
               type: base
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           type: addDocuments
         - _id: 6KfNYKPsotBjQs6Z
           common:
@@ -507,8 +519,10 @@ effects:
               overrideData: false
               setCompetence: inherit
               type: base
-          heighten:
-            - 0
+          disabledToggles:
+            - heightened
+            - resultsAlt
+            - resultsAltCrit
           interactInExecution: true
           type: addDocuments
         - _id: SxOGWyI0nvOW6aWG
@@ -526,8 +540,10 @@ effects:
               overrideData: false
               setCompetence: inherit
               type: base
-          heighten:
-            - 1
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           interactInExecution: true
           type: addDocuments
         - _id: X0jz8CbzTj5jz414

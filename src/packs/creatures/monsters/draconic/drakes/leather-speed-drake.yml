@@ -104,9 +104,10 @@ items:
                   target: Actor
                   type: upgrade
                   value: "3"
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -759,14 +760,18 @@ items:
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               method: roll
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               method: roll
               skip: 1
               timing: end

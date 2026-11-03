@@ -233,9 +233,10 @@ items:
                   target: Actor
                   type: upgrade
                   value: "3"
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -386,9 +387,11 @@ items:
           automations:
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (2 * @h)d10[magic]
-              heighten:
-                - 1
               type: roll
             - _id: H1gYV0NUjBum8t3Q
               status: immobilized
@@ -1068,8 +1071,6 @@ items:
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               attachToEffect: false
-              competencies:
-                - 2
               constructionNodes:
                 43bec888c0e1e5c5:
                   _id: 43bec888c0e1e5c5
@@ -1082,6 +1083,11 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: 6KfNYKPsotBjQs6Z
               common:
@@ -1303,29 +1309,41 @@ items:
             - _id: IcIHebYPkEqIqVWZ
               competence:
                 raw: 1
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:all-elder-sorcery-words
               type: changeCompetence
             - _id: bgZtShTjbCNE0vu7
               competence:
                 raw: 1
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:elder-sorcery-creation
               type: changeCompetence
             - _id: K7UQWKx6i7WyBkLS
               competence:
                 raw: 2
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:elder-sorcery-creation
               type: changeCompetence
             - _id: Kkl4bRexmERpCT2s
               competence:
                 raw: 2
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:all-elder-sorcery-words
               type: changeCompetence
             - _id: 0gqsEG5QEqQkXAW8
@@ -1336,8 +1354,11 @@ items:
                   target: Actor
                   type: add
                   value: 10 * @p
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: RkstdlO1k6jqBeNj
               changes:
@@ -1347,8 +1368,11 @@ items:
                   target: Actor
                   type: add
                   value: 10 * @f
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -1700,8 +1724,11 @@ items:
           automations:
             - _id: F9NLbFodo8GgQLdh
               changeType: upgrade
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -1709,8 +1736,11 @@ items:
               value: "1"
             - _id: iijE8Q6bC3GKvrTX
               changeType: upgrade
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -1718,8 +1748,11 @@ items:
               value: "2"
             - _id: pI8dAIbbmiCqE5n9
               changeType: upgrade
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -2005,20 +2038,29 @@ items:
           automations:
             - _id: 0BLOMYrODY3bzx8I
               command: setTempHp
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d(max(6, @flags.braceDieSize))
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               command: setTempHp
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               command: setTempHp
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               type: roll
             - _id: Rid5p1TlO90isbp4
@@ -2274,15 +2316,19 @@ items:
               type: roll
             - _id: fc2613f22401a088
               command: gainTempHp
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d10 + (@p)d10
               type: roll
             - _id: a678f22a0f730677
               command: gainTempHp
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d10 + (@f)d10
               type: roll
           competence:

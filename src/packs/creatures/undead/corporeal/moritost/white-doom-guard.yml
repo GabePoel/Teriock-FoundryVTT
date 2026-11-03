@@ -142,8 +142,11 @@ items:
           automations:
             - _id: F9NLbFodo8GgQLdh
               changeType: upgrade
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -151,8 +154,11 @@ items:
               value: "1"
             - _id: iijE8Q6bC3GKvrTX
               changeType: upgrade
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -160,8 +166,11 @@ items:
               value: "2"
             - _id: pI8dAIbbmiCqE5n9
               changeType: upgrade
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               key: system.bv.bonus
               qualifier: "@prop.handy"
               target: armament
@@ -995,9 +1004,11 @@ items:
           automations:
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (@h)d4[magic holy]
-              heighten:
-                - 1
               type: roll
             - _id: 747b3e9c9b617af6
               status: lighted
@@ -1013,13 +1024,17 @@ items:
             - life
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               relation: executor
               timing: end
               type: combat
@@ -1053,13 +1068,17 @@ items:
         system:
           automations:
             - _id: T6TT7QmjNrgdtZT7
-              heighten:
-                - 0
+              disabledToggles:
+                - heightened
+                - resultsAlt
+                - resultsAltCrit
               type: heal
             - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
-              heighten:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               type: heal
           competence:
             raw: 1
@@ -1194,20 +1213,29 @@ items:
           automations:
             - _id: 0BLOMYrODY3bzx8I
               command: setTempHp
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d(max(6, @flags.braceDieSize))
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               command: setTempHp
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               command: setTempHp
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               type: roll
             - _id: Rid5p1TlO90isbp4
@@ -1463,15 +1491,19 @@ items:
               type: roll
             - _id: fc2613f22401a088
               command: gainTempHp
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d10 + (@p)d10
               type: roll
             - _id: a678f22a0f730677
               command: gainTempHp
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               formula: 1d10 + (@f)d10
               type: roll
           competence:

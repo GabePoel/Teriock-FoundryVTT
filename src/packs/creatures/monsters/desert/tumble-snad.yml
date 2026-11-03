@@ -17,8 +17,6 @@ items:
         system:
           automations:
             - _id: eUm1UOhkyF3KmU1q
-              competencies:
-                - 1
               constructionNodes:
                 b99427192f40f8e2:
                   _id: b99427192f40f8e2
@@ -31,10 +29,13 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: qy0rKWHv0DFoFgqJ
-              competencies:
-                - 2
               constructionNodes:
                 720e51765677f2c9:
                   _id: 720e51765677f2c9
@@ -47,6 +48,11 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: mmCTbgaQIg38Y0II
               status: frenzied
@@ -267,9 +273,10 @@ items:
                   target: Actor
                   type: upgrade
                   value: "3"
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -400,14 +407,18 @@ items:
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               method: roll
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               method: roll
               skip: 1
               timing: end

@@ -233,9 +233,10 @@ items:
                   target: Actor
                   type: upgrade
                   value: "3"
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -361,9 +362,11 @@ items:
               type: common
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (2 * @h)d10[magic]
-              heighten:
-                - 1
               type: roll
             - _id: 7400b41f20d9f100
               angle: "@angle.dragon"
@@ -1073,8 +1076,6 @@ items:
               type: addDocuments
             - _id: WBvjNFpKtMRAX7Br
               attachToEffect: false
-              competencies:
-                - 2
               constructionNodes:
                 43bec888c0e1e5c5:
                   _id: 43bec888c0e1e5c5
@@ -1087,6 +1088,11 @@ items:
                   multi: false
                   overrideData: false
                   type: base
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: addDocuments
             - _id: 6KfNYKPsotBjQs6Z
               common:
@@ -1308,29 +1314,41 @@ items:
             - _id: IcIHebYPkEqIqVWZ
               competence:
                 raw: 1
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:all-elder-sorcery-words
               type: changeCompetence
             - _id: bgZtShTjbCNE0vu7
               competence:
                 raw: 1
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:elder-sorcery-creation
               type: changeCompetence
             - _id: K7UQWKx6i7WyBkLS
               competence:
                 raw: 2
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:elder-sorcery-creation
               type: changeCompetence
             - _id: Kkl4bRexmERpCT2s
               competence:
                 raw: 2
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               identifier: ability:all-elder-sorcery-words
               type: changeCompetence
             - _id: 0gqsEG5QEqQkXAW8
@@ -1341,8 +1359,11 @@ items:
                   target: Actor
                   type: add
                   value: 10 * @p
-              competencies:
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: RkstdlO1k6jqBeNj
               changes:
@@ -1352,8 +1373,11 @@ items:
                   target: Actor
                   type: add
                   value: 10 * @f
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               type: changes
           competence:
             raw: 1
@@ -2038,14 +2062,18 @@ items:
             [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               method: roll
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               method: roll
               skip: 1
               timing: end
@@ -2176,17 +2204,21 @@ items:
         system:
           automations:
             - _id: E2OwN6DAGzNXVtMm
-              competencies:
-                - 0
+              disabledToggles:
+                - competenceFluent
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               interactInExecution: true
               localIdentifiers:
                 - ability:drop-prone
                 - ability:stand-up
               type: useDocuments
             - _id: 3wpbgchAOCi8xG4n
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               interactInExecution: true
               localIdentifiers:
                 - ability:drop-prone

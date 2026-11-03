@@ -25,35 +25,39 @@ effects:
               target: Actor
               type: multiply
               value: "0.5"
-          competencies:
-            - 0
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - resultsAlt
+            - resultsAltCrit
           type: changes
         - _id: ZdtyUjiggvt0bxgX
           common:
             - revive
           type: common
         - _id: ZlgI0KUafWT3wE27
-          competencies:
-            - 0
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - resultsAlt
+            - resultsAltCrit
           makeEffect: true
           type: override
         - _id: 6v7WhWcAO2fARRYl
           amount: 999999
           command: revitalizing
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           display:
             label: Restore MP
           type: take
         - _id: YHHJxY54wT2k778U
           amount: 999999
           command: healing
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           display:
             label: Restore HP
           type: take
@@ -416,15 +420,20 @@ effects:
     system:
       automations:
         - _id: 72ce567009179bea
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           duration:
             raw: "@h"
             unit: hour
-          heighten:
-            - 1
           type: duration
         - _id: 838ba57012685987
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           duration:
             raw: "1"
             unit: hour

@@ -11,9 +11,11 @@ effects:
       automations:
         - _id: 800c70e6560525a8
           command: damage
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
           formula: (@h)d4[magic vine]
-          heighten:
-            - 1
           type: roll
         - _id: 0b65894b82470568
           status: immobilized
@@ -104,9 +106,10 @@ effects:
               target: Actor
               type: upgrade
               value: "3"
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           type: changes
       delivery: self
       duration:

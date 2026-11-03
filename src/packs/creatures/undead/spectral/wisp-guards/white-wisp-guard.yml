@@ -123,35 +123,39 @@ items:
                   target: Actor
                   type: multiply
                   value: "0.5"
-              competencies:
-                - 0
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - resultsAlt
+                - resultsAltCrit
               type: changes
             - _id: ZdtyUjiggvt0bxgX
               common:
                 - revive
               type: common
             - _id: ZlgI0KUafWT3wE27
-              competencies:
-                - 0
-                - 1
+              disabledToggles:
+                - competenceFluent
+                - resultsAlt
+                - resultsAltCrit
               makeEffect: true
               type: override
             - _id: 6v7WhWcAO2fARRYl
               amount: 999999
               command: revitalizing
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               display:
                 label: Restore MP
               type: take
             - _id: YHHJxY54wT2k778U
               amount: 999999
               command: healing
-              competencies:
-                - 1
-                - 2
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
               display:
                 label: Restore HP
               type: take
@@ -517,15 +521,20 @@ items:
         system:
           automations:
             - _id: 72ce567009179bea
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               duration:
                 raw: "@h"
                 unit: hour
-              heighten:
-                - 1
               type: duration
             - _id: 838ba57012685987
-              competencies:
-                - 2
+              disabledToggles:
+                - competenceNone
+                - competenceProficient
+                - resultsAlt
+                - resultsAltCrit
               duration:
                 raw: "1"
                 unit: hour
@@ -955,9 +964,11 @@ items:
           automations:
             - _id: 800c70e6560525a8
               command: damage
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               formula: (@h)d4[magic holy]
-              heighten:
-                - 1
               type: roll
             - _id: 747b3e9c9b617af6
               status: lighted
@@ -973,13 +984,17 @@ items:
             - life
           expirations:
             - _id: 66672059c7a29a30
-              crit:
-                - 0
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBaseCrit
               timing: end
               type: combat
             - _id: 28294dbc80493c2c
-              crit:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - resultsBase
               relation: executor
               timing: end
               type: combat
@@ -1013,13 +1028,17 @@ items:
         system:
           automations:
             - _id: T6TT7QmjNrgdtZT7
-              heighten:
-                - 0
+              disabledToggles:
+                - heightened
+                - resultsAlt
+                - resultsAltCrit
               type: heal
             - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
-              heighten:
-                - 1
+              disabledToggles:
+                - resultsAlt
+                - resultsAltCrit
+                - unheightened
               type: heal
           competence:
             raw: 1

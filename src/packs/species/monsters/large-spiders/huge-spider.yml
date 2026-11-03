@@ -307,24 +307,33 @@ effects:
       automations:
         - _id: 29b275994cf9f5b1
           command: damage
-          competencies:
-            - 0
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           formula: 1d6[toxic]
           triggers:
             - turnStart
           type: roll
         - _id: 5e4d195ed81a10cc
           command: damage
-          competencies:
-            - 1
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           formula: 1d8[toxic]
           triggers:
             - turnStart
           type: roll
         - _id: 3f7fa7707643426f
           command: damage
-          competencies:
-            - 2
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
           formula: 1d10[toxic]
           triggers:
             - turnStart
@@ -377,14 +386,18 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       expirations:
         - _id: 66672059c7a29a30
-          crit:
-            - 0
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBaseCrit
           method: roll
           timing: end
           type: combat
         - _id: 28294dbc80493c2c
-          crit:
-            - 1
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBase
           method: roll
           skip: 1
           timing: end
@@ -597,9 +610,10 @@ effects:
               target: Actor
               type: upgrade
               value: "3"
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           type: changes
       competence:
         raw: 1
@@ -697,9 +711,10 @@ effects:
               target: Actor
               type: upgrade
               value: "3"
-          competencies:
-            - 1
-            - 2
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
           type: changes
       competence:
         raw: 1

@@ -262,15 +262,13 @@ function conformDataValues(obj) {
  * @typedef MinimalMechanicData
  * @property {string} type
  * @property {string} _id
- * @property {(0|1|2)[]} competencies
- * @property {(0|1)[]} heighten
- * @property {(0|1)[]} [crit]
+ * @property {string[]} [disabledToggles]
  */
 
 /**
  * Sorts mechanics consistently.
  * @param {Record<string, MinimalMechanicData>} mechanics
- * @returns {Record<string, MinimalMechanicData>}
+ * @returns {MinimalMechanicData[]}
  */
 function sortMechanics(mechanics) {
   const COMPETENCY_MAP = {
@@ -283,40 +281,18 @@ function sortMechanics(mechanics) {
     6: [0, 1, 1],
     7: [0, 0, 1],
   };
-
   const PAIR_MAP = { 0: [0, 0], 1: [1, 0], 2: [1, 1], 3: [0, 1] };
+  const STRING_MAP = Object.fromEntries(Object.entries(COMPETENCY_MAP).map(([key, arr]) => [arr.join(""), key]));
+  const PAIR_STRING_MAP = Object.fromEntries(Object.entries(PAIR_MAP).map(([key, arr]) => [arr.join(""), key]));
 
-  const STRING_MAP = Object.entries(COMPETENCY_MAP).reduce((acc, [key, arr]) => {
-    acc[arr.join("")] = key;
-    return acc;
-  }, {});
-
-  const PAIR_STRING_MAP = Object.entries(PAIR_MAP).reduce((acc, [key, arr]) => {
-    acc[arr.join("")] = key;
-    return acc;
-  }, {});
+  const activeString = (m, ids) => ids.map(id => Number(!m.disabledToggles?.includes(id))).join("");
 
   const sortableArray = Object.values(mechanics).map((m) => {
-    m.competencies ??= [0, 1, 2];
-    m.competencies.sort();
-    m.heighten ??= [0, 1];
-    m.heighten.sort();
-    m.crit ??= [0, 1];
-    m.crit.sort();
-
-    const comps = m.competencies || [];
-    const compStr = `${Number(comps.includes(0))}${Number(comps.includes(1))}${Number(comps.includes(2))}`;
-    const compSort = STRING_MAP[compStr] || "0";
-
-    const h = m.heighten || [];
-    const hStr = `${Number(h.includes(0))}${Number(h.includes(1))}`;
-    const hSort = PAIR_STRING_MAP[hStr] || "0";
-
-    const c = m.crit || [];
-    const cStr = `${Number(c.includes(0))}${Number(c.includes(1))}`;
-    const cSort = PAIR_STRING_MAP[cStr] || "0";
-
-    return { data: m, sortKey: m.type + compSort + hSort + cSort };
+    const compSort = STRING_MAP[activeString(m, ["competenceNone", "competenceProficient", "competenceFluent"])];
+    const hSort = PAIR_STRING_MAP[activeString(m, ["unheightened", "heightened"])];
+    const cSort = PAIR_STRING_MAP[activeString(m, ["resultsBase", "resultsBaseCrit"])];
+    const aSort = PAIR_STRING_MAP[activeString(m, ["resultsAlt", "resultsAltCrit"])];
+    return { data: m, sortKey: m.type + compSort + hSort + cSort + aSort };
   });
 
   sortableArray.sort((a, b) => {
@@ -325,12 +301,7 @@ function sortMechanics(mechanics) {
     return 0;
   });
 
-  return sortableArray.map(({ data }) => {
-    if (data.competencies.length === 3) { delete data.competencies; }
-    if (data.heighten.length === 2) { delete data.heighten; }
-    if (data.crit?.length === 2) { delete data.crit; }
-    return data;
-  });
+  return sortableArray.map(({ data }) => data);
 }
 
 /**
