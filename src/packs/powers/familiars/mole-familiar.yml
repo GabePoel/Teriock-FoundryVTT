@@ -1,0 +1,112 @@
+_id: e6a1df0776e92a79
+_key: "!items!e6a1df0776e92a79"
+effects:
+  - _id: nd62J9bd5Mnfbjas
+    _key: "!items.effects!e6a1df0776e92a79.nd62J9bd5Mnfbjas"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c99638056493f146
+    img: icons/creatures/slimes/slime-giant-face-eyes.webp
+    name: Blind Fighting
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.blind
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "60"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: blind-fighting
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can sense up to 60 feet around you even when you are @Identifier[condition:blind]{blind}. This lets you
+          detect @Wiki[Category:Movement effects]{moving creatures}, but has no color nor depth. Even subtle movements
+          like breathing are sufficient for this purpose. This does not detect any color nor depth, such as pictures or
+          words on a page.</p>
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 1
+    type: ability
+  - _id: 3b1ada33c9bea587
+    _key: "!items.effects!e6a1df0776e92a79.3b1ada33c9bea587"
+    description: <p>You know the way of the @Identifier[creature:mole]{mole}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Mole Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: mole-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: kQENMKbIY1v4bNaA
+    _key: "!items.effects!e6a1df0776e92a79.kQENMKbIY1v4bNaA"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e6636682becad63d
+    img: icons/skills/trades/mining-pickaxe-stone-black.webp
+    name: Talented Miner
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.miner.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-miner
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:miner]{miner}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Mole Familiar
+system:
+  creatureType: mole
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: mole-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

@@ -1,0 +1,136 @@
+_id: b5081ca2602e631b
+_key: "!items!b5081ca2602e631b"
+effects:
+  - _id: bFJFQ40kaRULUfJE
+    _key: "!items.effects!b5081ca2602e631b.bFJFQ40kaRULUfJE"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1ec4acb8d744ed9
+    img: systems/teriock/src/assets/thumbnails/ability/alert.webp
+    name: Alert
+    system:
+      affinities:
+        - _id: PHF4TrcfCcaKl6DO
+          category: other
+          name: Being Surprised
+          type: resistance
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+        - sensory
+      executionTime:
+        base: passive
+      identifier: alert
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[core:surprise-rounds]{surprised}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: per
+          value: 1
+    type: ability
+  - _id: 8538fde2f5c40f31
+    _key: "!items.effects!b5081ca2602e631b.8538fde2f5c40f31"
+    description: <p>You know the way of the @Identifier[creature:goose]{goose}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Goose Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: goose-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: DGRl1LQnJs7GjEcN
+    _key: "!items.effects!b5081ca2602e631b.DGRl1LQnJs7GjEcN"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.32f0310ea8b6f03c
+    img: systems/teriock/src/assets/thumbnails/ability/watchman.webp
+    name: Watchman
+    system:
+      automations:
+        - _id: a3bc5757d39c3f86
+          constructionNodes:
+            25fb0cbb56785f83:
+              _id: 25fb0cbb56785f83
+              all: true
+              auto: true
+              competence:
+                raw: 0
+              globalIdentifiers:
+                - ability:cat-sense
+              multi: false
+              overrideData: false
+              random: false
+              type: base
+          type: addDocuments
+        - _id: 2PS2DRtwngfDCQqd
+          makeEffect: true
+          targetsActor: true
+          type: override
+        - _id: eQGZVefdayKVvF2l
+          attachToToken: false
+          deleteOnTurnChange: false
+          expandWithToken: false
+          radius: "30"
+          restriction:
+            enabled: true
+          type: region
+        - _id: OeBYl3fSeOJG9woY
+          amount: 1
+          command: drain
+          display:
+            label: Spend 1 MP
+          type: take
+      delivery: self
+      duration:
+        raw: "24"
+        unit: hour
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      identifier: watchman
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You may spend a @Identifier[core:short-rest]{short rest} setting up a watch on an area no greater than 30
+          feet wide in any direction. You and your allies that are in this area during the
+          @Identifier[core:short-rest]{short rest} or when @Identifier[core:combat]{combat} begins may each spend 1
+          @Identifier[core:hit-points-and-mana-points]{MP} to gain @Identifier[ability:cat-sense]{Cat Sense} while in
+          this area.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You remain in the @Identifier[core:targets]{targeted} area.</p>
+      skill: true
+      standard: true
+      targets:
+        - area
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Goose Familiar
+system:
+  creatureType: goose
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: goose-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

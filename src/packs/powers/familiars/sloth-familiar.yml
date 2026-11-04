@@ -1,0 +1,158 @@
+_id: 6fc7f3864ff2a392
+_key: "!items!6fc7f3864ff2a392"
+effects:
+  - _id: L6f3fFkoSQ3A5ojY
+    _key: "!items.effects!6fc7f3864ff2a392.L6f3fFkoSQ3A5ojY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
+    img: systems/teriock/src/assets/thumbnails/ability/hide.webp
+    name: Hide
+    system:
+      automations:
+        - _id: Hd5o6s1SdA8C7IfT
+          preventThreshold: true
+          type: override
+        - _id: 0b0d1426453abb55
+          relation: apply
+          status: hidden
+          type: status
+      delivery: self
+      featSaveAttribute: snk
+      identifier: hide
+      interaction: feat
+      overview:
+        base: >-
+          <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden
+          @Identifier[core:difficulty-class]{DC}. If not, use your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light, @Identifier[core:cover]{three-quarters cover}, or some other
+        feature which the @Identifier[core:game-master]{GM} determines is appropriate for being
+        @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
+        @Identifier[condition:hidden]{hidden}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 1
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: 7d6e11dcea863eb6
+    _key: "!items.effects!6fc7f3864ff2a392.7d6e11dcea863eb6"
+    description: <p>You know the way of the @Identifier[creature:sloth]{sloth}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Sloth Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: sloth-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: 31DJT9Q1HUVOcNkY
+    _key: "!items.effects!6fc7f3864ff2a392.31DJT9Q1HUVOcNkY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e868c1b0546ca830
+    img: icons/environment/wilderness/terrain-river-road-gray.webp
+    name: Talented Survivalist
+    showIcon: 0
+    system:
+      automations:
+        - _id: i6BpVqBiNLwVCXyl
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.farmer.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.tradecrafts.herbalist.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.tradecrafts.hunter.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.tradecrafts.investigator.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.tradecrafts.miner.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.tradecrafts.tamer.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.tradecrafts.tracker.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-survivalist
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:talented]{talented} at all @Wiki[Category:Survivalist tradecrafts]{survivalist
+          tradecrafts}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Sloth Familiar
+system:
+  creatureType: sloth
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: sloth-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

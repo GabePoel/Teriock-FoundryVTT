@@ -128,7 +128,7 @@ export default function HierarchyDocumentMixin(Base) {
       for (const doc of documents) {
         const folderUpdate = operation.updates.find(update => update._id === doc._id && hasProperty(update, "folder"));
         if (folderUpdate) {
-          const subIds = doc.allSubs.map(s => s._id);
+          const subIds = (await doc.allSubs.getContents()).map(s => s._id);
           for (const subId of subIds) {
             const subUpdate = operation.updates.find(update => update._id === subId);
             if (!subUpdate) { operation.updates.push({ _id: subId, folder: folderUpdate.folder }); }

@@ -1,0 +1,132 @@
+_id: 5362f98550ace9e8
+_key: "!items!5362f98550ace9e8"
+effects:
+  - _id: 481ffeae66c9f824
+    _key: "!items.effects!5362f98550ace9e8.481ffeae66c9f824"
+    description: <p>You know the way of the @Identifier[creature:raven]{raven}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Raven Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: raven-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: aa0ixcrkff7PymQd
+    _key: "!items.effects!5362f98550ace9e8.aa0ixcrkff7PymQd"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.cb297af126bd9530
+    img: systems/teriock/src/assets/thumbnails/ability/spirit-guide.webp
+    name: Spirit Guide
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: sight
+      duration:
+        raw: "24"
+        unit: hour
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: "10"
+          unit: minute
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may target an additional
+        creature.</p>
+      identifier: spirit-guide
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You can see, hear, and speak to spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
+          feet.</p>
+        fluent: >-
+          <p>You can target @Identifier[condition:ethereal]{Ethereal} creatures with
+          @Identifier[source:spiritual]{spiritual} @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
+        proficient: >-
+          <p>You can target @Identifier[condition:ethereal]{Ethereal} creatures with @Wiki[Category:Necromancy element
+          abilities]{necromancy} @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: "5"
+        unit: ft
+      requirements: <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may only target yourself.</p>
+      ritual: true
+      spell: true
+      standard: true
+      sustained: true
+    type: ability
+  - _id: gsiXXLjoHEVl9d1Y
+    _key: "!items.effects!5362f98550ace9e8.gsiXXLjoHEVl9d1Y"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.586f2d0c7e0e7e85
+    img: icons/skills/movement/feet-winged-boots-blue.webp
+    name: Talented Messenger
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.messenger.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-messenger
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:messenger]{messenger}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Raven Familiar
+system:
+  creatureType: raven
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: raven-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

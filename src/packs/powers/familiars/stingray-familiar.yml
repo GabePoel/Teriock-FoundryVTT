@@ -1,0 +1,138 @@
+_id: 4d58f4430f09d9a1
+_key: "!items!4d58f4430f09d9a1"
+effects:
+  - _id: T369ZqBjAfkjKkVp
+    _key: "!items.effects!4d58f4430f09d9a1.T369ZqBjAfkjKkVp"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
+    img: systems/teriock/src/assets/thumbnails/ability/hide.webp
+    name: Hide
+    system:
+      automations:
+        - _id: Hd5o6s1SdA8C7IfT
+          preventThreshold: true
+          type: override
+        - _id: 0b0d1426453abb55
+          relation: apply
+          status: hidden
+          type: status
+      delivery: self
+      featSaveAttribute: snk
+      identifier: hide
+      interaction: feat
+      overview:
+        base: >-
+          <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden
+          @Identifier[core:difficulty-class]{DC}. If not, use your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light, @Identifier[core:cover]{three-quarters cover}, or some other
+        feature which the @Identifier[core:game-master]{GM} determines is appropriate for being
+        @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
+        @Identifier[condition:hidden]{hidden}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 1
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: k3VfX5IgbWbXSGKY
+    _key: "!items.effects!4d58f4430f09d9a1.k3VfX5IgbWbXSGKY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.15e9b598e41c0f04
+    img: systems/teriock/src/assets/thumbnails/ability/poison-item.webp
+    name: Poison Item
+    system:
+      automations:
+        - _id: 29b275994cf9f5b1
+          command: damage
+          formula: 1d6[toxic]
+          type: roll
+        - _id: 5e4d195ed81a10cc
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d8[toxic]
+          type: roll
+        - _id: 3f7fa7707643426f
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d10[toxic]
+          type: roll
+        - _id: 743730f25f256b10
+          status: poisoned
+          type: status
+      delivery: hand
+      duration:
+        raw: "24"
+        unit: hour
+      endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
+      identifier: poison-item
+      interaction: manifest
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} makes a creature become @Identifier[condition:poisoned]{poisoned}. The
+          @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}. The way
+          the item delivers this to its user depends on the nature of the item. If it's food or drink, it's when the
+          item is consumed. The @Identifier[core:game-master]{GM} may approve other cases as well. The item only
+          delivers the @Identifier[condition:poisoned]{poison} effect once.</p>
+        fluent: >-
+          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
+        proficient: >-
+          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
+      powerSources:
+        - alchemical
+      requirements: <p>@Identifier[core:targets]{Target} is not a weapon.</p>
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+  - _id: 760a59bfbcf220cf
+    _key: "!items.effects!4d58f4430f09d9a1.760a59bfbcf220cf"
+    description: <p>You know the way of the @Identifier[creature:stingray]{stingray}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Stingray Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: stingray-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Stingray Familiar
+system:
+  creatureType: stingray
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: stingray-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

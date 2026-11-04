@@ -1,0 +1,473 @@
+_id: 2ff9b719bf6eb6e5
+_key: "!actors!2ff9b719bf6eb6e5"
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/creature/owl.webp
+items:
+  - _id: 2ff9b719bf6eb6e5
+    _key: "!actors.items!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5"
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.2ff9b719bf6eb6e5
+    effects:
+      - _id: XaRqHZnA5kMluSIh
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.XaRqHZnA5kMluSIh"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+        img: systems/teriock/src/assets/thumbnails/ability/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: beastly-strength
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can wield @Identifier[property:two-handed]{two-handed} weapons in one hand.</p><aside
+              class="notification warning theme-dark"><p>@Identifier[property:armor-piercing]{Armor piercing} weapons
+              must still be @Identifier[keyword:using]{used} in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</p></aside>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: LAapo6JRKmb1icHe
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.LAapo6JRKmb1icHe"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c71fdb57374ade38
+        img: systems/teriock/src/assets/thumbnails/ability/carrying.webp
+        name: Carrying
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: carrying
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can drag and carry other creatures and @Pack[teriock.equipment]{items} around even if you don't
+              have @Identifier[property:prehensile]{prehensile body parts}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: 0QzYZHat126KdfVR
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.0QzYZHat126KdfVR"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+        img: systems/teriock/src/assets/thumbnails/ability/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: dense-intelligence
+          interaction: manifest
+          kind: flaw
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: ZWUWavwDGUBQOd7e
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.ZWUWavwDGUBQOd7e"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+        img: systems/teriock/src/assets/thumbnails/ability/flying.webp
+        name: Flying
+        system:
+          automations:
+            - _id: 5KN7CIW4kc6fgrgW
+              movementAction: fly
+              type: changeMovement
+            - _id: e789ed5e109ebd1a
+              changes:
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.fly
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
+            - _id: f025905e157ac261
+              changes:
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.fly
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: flying
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: <p>You instead fly at @Identifier[core:movement-speed]{full speed}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: uEWhIwQEnjUkjSGw
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.uEWhIwQEnjUkjSGw"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+        img: systems/teriock/src/assets/thumbnails/ability/no-hands.webp
+        name: No Hands
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: no-hands
+          interaction: manifest
+          kind: flaw
+          maneuver: passive
+          overview:
+            base: <p>You cannot use items in your @Identifier[equipment:hand]{hands}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: lJIzd4ZoRTKu730Z
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.lJIzd4ZoRTKu730Z"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+        img: systems/teriock/src/assets/thumbnails/ability/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+        type: ability
+      - _id: 3Juv72rVzu2tWT2E
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.3Juv72rVzu2tWT2E"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.47774661e781e960
+        img: systems/teriock/src/assets/thumbnails/ability/partial-hands.webp
+        name: Partial Hands
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: partial-hands
+          interaction: manifest
+          kind: flaw
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You do not have real opposable thumbs. All items are @Identifier[property:two-handed]{two-handed} for
+              you.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: 7X34AO3vZzpxT4ta
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.7X34AO3vZzpxT4ta"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3RmQZ2V83ob5T8p7
+        img: systems/teriock/src/assets/thumbnails/ability/scouting.webp
+        name: Scouting
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime:
+            base: passive
+          identifier: scouting
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You have @Identifier[core:advantage]{advantage} on checks made with
+              @Identifier[ability:perceive]{Perceive}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            competence:
+              attribute: per
+              value: 1
+            score:
+              attribute: per
+              value: 2
+        type: ability
+      - _id: bGwI9Juqxbj4stWU
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.2ff9b719bf6eb6e5.bGwI9Juqxbj4stWU"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e2ede5b6049bda5a
+        img: systems/teriock/src/assets/thumbnails/ability/sneaky.webp
+        name: Sneaky
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: sneaky
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 1
+        type: ability
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/assets/thumbnails/creature/owl.webp
+    name: Owl
+    system:
+      br: 2
+      identifier: owl
+      size:
+        value: 0.5
+      statDice:
+        mp:
+          formula: 1d6
+      traits:
+        - animal
+      transformation:
+        img: systems/teriock/src/assets/thumbnails/creature/owl.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/owl.webp
+    type: species
+  - _id: py4k5nvgGCjLtbQq
+    _key: "!actors.items!2ff9b719bf6eb6e5.py4k5nvgGCjLtbQq"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.a07454a7967ee5c8
+    effects:
+      - _id: r6fdMsFOOlL211Ri
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.py4k5nvgGCjLtbQq.r6fdMsFOOlL211Ri"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+        description: >-
+          <p>A <b>[[lookup name style=lc]]</b> item can be used to deliver @Identifier[core:bite-delivery]{bite delivery
+          abilities}.</p>
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: biting
+          kind: intrinsic
+          powerSources:
+            - martial
+        type: property
+      - _id: 3Ecp5HfmBmb6NOX0
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.py4k5nvgGCjLtbQq.3Ecp5HfmBmb6NOX0"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        description: >-
+          <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+          @Identifier[core:attack-interaction]{attack}.</p>
+        img: systems/teriock/src/assets/thumbnails/property/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: weapon
+          kind: intrinsic
+        type: property
+    folder: 30f4d11e5e53d332
+    img: icons/commodities/bones/beak-hooked-red.webp
+    name: Beak
+    system:
+      _sup: 2ff9b719bf6eb6e5
+      damage:
+        base: 1d4
+      identifier: beak
+      range:
+        long:
+          unit: melee
+      style: savage
+    type: body
+  - _id: Xa2ocgFaKw7R9DUc
+    _key: "!actors.items!2ff9b719bf6eb6e5.Xa2ocgFaKw7R9DUc"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.e8b5eedfa8602242
+    effects:
+      - _id: vgYp2OlY2QgragN9
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.Xa2ocgFaKw7R9DUc.vgYp2OlY2QgragN9"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        description: >-
+          <p>An <b>[[lookup name style=lc]]</b> item can be @Identifier[keyword:using]{used} to deliver
+          @Identifier[core:hand-delivery]{hand delivery abilities}.</p>
+        img: systems/teriock/src/assets/thumbnails/property/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: handy
+          kind: intrinsic
+          powerSources:
+            - martial
+        type: property
+      - _id: rxHvNMZbvlGHFxTl
+        _key: "!actors.items.effects!2ff9b719bf6eb6e5.Xa2ocgFaKw7R9DUc.rxHvNMZbvlGHFxTl"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        description: >-
+          <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+          @Identifier[core:attack-interaction]{attack}.</p>
+        img: systems/teriock/src/assets/thumbnails/property/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: weapon
+          kind: intrinsic
+        type: property
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/assets/thumbnails/body/sharp-claw.webp
+    name: Sharp Claw
+    system:
+      _sup: 2ff9b719bf6eb6e5
+      bv:
+        raw: 1
+      damage:
+        base: 1d6
+      identifier: sharp-claw
+      range:
+        long:
+          unit: melee
+      style: savage
+    type: body
+name: Owl
+prototypeToken:
+  displayBars: 20
+  displayName: 20
+  height: 0.5
+  name: Owl
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/assets/thumbnails/token/owl.webp
+  texture:
+    src: systems/teriock/src/assets/thumbnails/creature/owl.webp
+  width: 0.5
+system:
+  _src: Compendium.teriock.species.Item.2ff9b719bf6eb6e5
+  hp:
+    value: 6
+  identifier: owl
+  lockedPaths:
+    - system.money.copper
+    - system.money.debt
+    - system.money.dragonEmerald
+    - system.money.entTearAmber
+    - system.money.fireEyeRuby
+    - system.money.gold
+    - system.money.heartstoneRuby
+    - system.money.magusQuartz
+    - system.money.moonOpal
+    - system.money.pixiePlumAmethyst
+    - system.money.silver
+    - system.money.snowDiamond
+  mp:
+    value: 4
+  scaling:
+    brScale: true
+  size:
+    value: 0.5
+  wielding:
+    attacker: Xa2ocgFaKw7R9DUc
+    blocker: Xa2ocgFaKw7R9DUc
+type: creature

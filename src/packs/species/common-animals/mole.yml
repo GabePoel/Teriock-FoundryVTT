@@ -1,0 +1,266 @@
+_id: 37e71caec5a53ada
+_key: "!items!37e71caec5a53ada"
+effects:
+  - _id: ZoUJStEqvuTXt0f3
+    _key: "!items.effects!37e71caec5a53ada.ZoUJStEqvuTXt0f3"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c99638056493f146
+    img: icons/creatures/slimes/slime-giant-face-eyes.webp
+    name: Blind Fighting
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.blind
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "60"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: blind-fighting
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can sense up to 60 feet around you even when you are @Identifier[condition:blind]{blind}. This lets you
+          detect @Wiki[Category:Movement effects]{moving creatures}, but has no color nor depth. Even subtle movements
+          like breathing are sufficient for this purpose. This does not detect any color nor depth, such as pictures or
+          words on a page.</p>
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 1
+    type: ability
+  - _id: NwZSXkdPZlt5l7yC
+    _key: "!items.effects!37e71caec5a53ada.NwZSXkdPZlt5l7yC"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+    img: systems/teriock/src/assets/thumbnails/ability/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: dense-intelligence
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    type: ability
+  - _id: KlWYGgsarjN54wro
+    _key: "!items.effects!37e71caec5a53ada.KlWYGgsarjN54wro"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+    img: systems/teriock/src/assets/thumbnails/ability/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: no-hands
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      overview:
+        base: <p>You cannot use items in your @Identifier[equipment:hand]{hands}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: ud7p115KgwTiR9wN
+    _key: "!items.effects!37e71caec5a53ada.ud7p115KgwTiR9wN"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+    img: systems/teriock/src/assets/thumbnails/ability/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+    type: ability
+  - _id: ZCQoYI8lhhorid7h
+    _key: "!items.effects!37e71caec5a53ada.ZCQoYI8lhhorid7h"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+    img: systems/teriock/src/assets/thumbnails/ability/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+    type: ability
+  - _id: Tjo2LUz7ZxDg9dyl
+    _key: "!items.effects!37e71caec5a53ada.Tjo2LUz7ZxDg9dyl"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.10276e5737bb39bf
+    img: systems/teriock/src/assets/thumbnails/ability/super-digging.webp
+    name: Super Digging
+    system:
+      automations:
+        - _id: LqTagydCNLvoPlLm
+          movementAction: burrow
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.dig
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+        - _id: f025905e157ac261
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.dig
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: super-digging
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You dig at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: <p>You instead dig at @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 6zztPhJHy7BmHshW
+    _key: "!items.effects!37e71caec5a53ada.6zztPhJHy7BmHshW"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1a9a7ab79b2dc14
+    img: systems/teriock/src/assets/thumbnails/ability/tiny-strength.webp
+    name: Tiny Strength
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: tiny-strength
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: -2
+    type: ability
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/creature/mole.webp
+name: Mole
+system:
+  identifier: mole
+  size:
+    value: 0.25
+  statDice:
+    hp:
+      formula: 1d4
+    mp:
+      formula: 1d6
+  traits:
+    - animal
+  transformation:
+    img: systems/teriock/src/assets/thumbnails/creature/mole.webp
+    ring: true
+    ringImg: systems/teriock/src/assets/thumbnails/token/mole.webp
+type: species

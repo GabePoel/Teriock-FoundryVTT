@@ -1,0 +1,97 @@
+_id: d78eed0e97c115bd
+_key: "!items!d78eed0e97c115bd"
+effects:
+  - _id: 1cLow0rxwaQ8lgUo
+    _key: "!items.effects!d78eed0e97c115bd.1cLow0rxwaQ8lgUo"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b61db587d3e3f26
+    img: systems/teriock/src/assets/thumbnails/ability/escape.webp
+    name: Escape
+    system:
+      delivery: self
+      executionTime:
+        base: r1
+      identifier: escape
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You move on a distance up to your @Identifier[core:movement-speed]{movement speed} on the ground. If you
+          have a @Identifier[core:movement-speed]{fly speed} or @Identifier[core:movement-speed]{swim speed} then you
+          may move in the air or in water accordingly. This movement doesn't trigger
+          @Identifier[core:reactive-maneuvers]{reactive abilities}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You @Identifier[core:attack-interaction]{attack} another creature.</p>
+      upgrades:
+        competence:
+          attribute: mov
+          value: 2
+    type: ability
+  - _id: cP6jFIDUz1PVMGgX
+    _key: "!items.effects!d78eed0e97c115bd.cP6jFIDUz1PVMGgX"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5894bcd8755bdac8
+    img: systems/teriock/src/assets/thumbnails/ability/hack.webp
+    name: Hack
+    system:
+      automations:
+        - _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          type: hacks
+      identifier: hack
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
+          accordingly.</p>
+      powerSources:
+        - martial
+      results:
+        critHit: >-
+          <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
+          depending on what you chose.</p>
+        hit: >-
+          <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    type: ability
+  - _id: d1a15711ef3356d3
+    _key: "!items.effects!d78eed0e97c115bd.d1a15711ef3356d3"
+    description: <p>You know the way of the @Identifier[creature:lobster]{lobster}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Lobster Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: lobster-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Lobster Familiar
+system:
+  creatureType: lobster
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: lobster-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

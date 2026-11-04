@@ -1,0 +1,102 @@
+_id: cce9e56a96203422
+_key: "!items!cce9e56a96203422"
+effects:
+  - _id: 7UAYSofMR4WWSSMJ
+    _key: "!items.effects!cce9e56a96203422.7UAYSofMR4WWSSMJ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fec1073f9bd5fb62
+    img: systems/teriock/src/assets/thumbnails/ability/ice-damage-resistance.webp
+    name: Ice Damage Resistance
+    system:
+      affinities:
+        - _id: BXCRq9eK0NhcvKdV
+          category: damage
+          identifier: ice
+          type: resistance
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+      identifier: ice-damage-resistance
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @Identifier[keyword:resistance]{resist} @Identifier[damage:ice]{ice damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: Gdde497g37DxoI3l
+    _key: "!items.effects!cce9e56a96203422.Gdde497g37DxoI3l"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+    img: systems/teriock/src/assets/thumbnails/ability/swimming.webp
+    name: Swimming
+    system:
+      automations:
+        - _id: 3MU324Tac2hBbZe2
+          movementAction: swim
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.swim
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: swimming
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 20f587527a510d86
+    _key: "!items.effects!cce9e56a96203422.20f587527a510d86"
+    description: <p>You know the way of the @Identifier[creature:walrus]{walrus}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Walrus Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: walrus-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Walrus Familiar
+system:
+  creatureType: walrus
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: walrus-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

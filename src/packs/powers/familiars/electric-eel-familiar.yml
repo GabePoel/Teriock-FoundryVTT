@@ -1,0 +1,131 @@
+_id: fb3ec77e9e52a49f
+_key: "!items!fb3ec77e9e52a49f"
+effects:
+  - _id: 75ea3fd701fd994d
+    _key: "!items.effects!fb3ec77e9e52a49f.75ea3fd701fd994d"
+    description: <p>You know the way of the @Identifier[creature:electric-eel]{electric eel}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Electric Eel Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: electric-eel-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: BpuHZLtPhWBJqG6F
+    _key: "!items.effects!fb3ec77e9e52a49f.BpuHZLtPhWBJqG6F"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9a47673c035f0ea5
+    img: systems/teriock/src/assets/thumbnails/ability/lightning-immunity.webp
+    name: Lightning Immunity
+    system:
+      affinities:
+        - _id: t7spquliBLz5obV9
+          category: effect
+          identifier: lightning
+          type: immunity
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: lightning-immunity
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are @Identifier[keyword:immunity]{immune} to @Wiki[Category:Lightning effects]{lightning effects}.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: xIABPp1u70pCYZdQ
+    _key: "!items.effects!fb3ec77e9e52a49f.xIABPp1u70pCYZdQ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4d4cbf6dfd95efca
+    img: systems/teriock/src/assets/thumbnails/ability/shock-touch.webp
+    name: Shock Touch
+    system:
+      automations:
+        - _id: 800c70e6560525a8
+          command: damage
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - unheightened
+          formula: (@h)d4[magic ice]
+          type: roll
+        - _id: 09ed285450c5de7b
+          status: frozen
+          type: status
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: hand
+      duration:
+        raw: "1"
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - storm
+      endCondition: >-
+        <p>At the end of each of the @Identifier[core:targets]{target's} actions, they roll [[/roll 2d4]]. If either of
+        these dice roll a 4, this effect ends.</p>
+      expirations:
+        - _id: 66672059c7a29a30
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBaseCrit
+          event: action
+          method: roll
+          timing: end
+          type: combat
+        - _id: 28294dbc80493c2c
+          disabledToggles:
+            - resultsAlt
+            - resultsAltCrit
+            - resultsBase
+          event: action
+          method: roll
+          skip: 1
+          timing: end
+          type: combat
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic ice]]] @Identifier[core:damage]{damage} as well.</p>
+      identifier: shock-touch
+      invoked: true
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      results:
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
+      spell: true
+      standard: true
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Electric Eel Familiar
+system:
+  creatureType: electric-eel
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: electric-eel-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

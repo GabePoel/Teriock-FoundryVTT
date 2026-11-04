@@ -1,0 +1,147 @@
+_id: 4f9e3e6786a9e8e6
+_key: "!items!4f9e3e6786a9e8e6"
+effects:
+  - _id: pNLtAVzp6YPGUNbB
+    _key: "!items.effects!4f9e3e6786a9e8e6.pNLtAVzp6YPGUNbB"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f6aa56d2e5c27c4
+    img: systems/teriock/src/assets/thumbnails/ability/advanced-smell.webp
+    name: Advanced Smell
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: advanced-smell
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can passively smell the types of all living creatures within 30 feet. You can detect dead and undead
+          creatures as well, but you cannot distinguish within or between them. They all smell like death. You also gain
+          @Identifier[ability:scent-seeing]{Scent Seeing}. You can not detect @Identifier[condition:odorless]{odorless}
+          creatures in this way.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    type: ability
+  - _id: 4de5f9485f5f4962
+    _key: "!items.effects!4f9e3e6786a9e8e6.4de5f9485f5f4962"
+    description: <p>You know the way of the @Identifier[creature:pig]{pig}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Pig Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: pig-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: ozohTeu3wGVLi1Mb
+    _key: "!items.effects!4f9e3e6786a9e8e6.ozohTeu3wGVLi1Mb"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.642429fb879d6de4
+    img: icons/magic/nature/leaf-elm-beam-green.webp
+    name: Talented Herbalist
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.herbalist.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-herbalist
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:herbalist]{herbalist}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: AKCkOWtBQ78JtHL6
+    _key: "!items.effects!4f9e3e6786a9e8e6.AKCkOWtBQ78JtHL6"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+    img: systems/teriock/src/assets/thumbnails/ability/scent-seeing.webp
+    name: Scent Seeing
+    system:
+      _sup: pNLtAVzp6YPGUNbB
+      automations:
+        - _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.smell
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "10"
+          type: changes
+      delivery: aura
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: scent-seeing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know the
+          location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving or not,
+          so long as they are still within 10 feet of you.</p>
+      powerSources:
+        - martial
+      range:
+        raw: "10"
+        unit: ft
+      requirements: >-
+        <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
+        @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
+      skill: true
+      standard: true
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Pig Familiar
+system:
+  creatureType: pig
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: pig-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

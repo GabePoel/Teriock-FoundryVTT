@@ -1,0 +1,106 @@
+_id: 44c4aa9cfe923307
+_key: "!items!44c4aa9cfe923307"
+effects:
+  - _id: 13d5d894e82e2e75
+    _key: "!items.effects!44c4aa9cfe923307.13d5d894e82e2e75"
+    description: <p>You know the way of the @Identifier[creature:beaver]{beaver}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Beaver Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: beaver-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: 5eBKkeHkZgvqBLho
+    _key: "!items.effects!44c4aa9cfe923307.5eBKkeHkZgvqBLho"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+    img: systems/teriock/src/assets/thumbnails/ability/swimming.webp
+    name: Swimming
+    system:
+      automations:
+        - _id: 3MU324Tac2hBbZe2
+          movementAction: swim
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.swim
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: swimming
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: CYSaFRRLgnEAIugh
+    _key: "!items.effects!44c4aa9cfe923307.CYSaFRRLgnEAIugh"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6844cbd7813e2751
+    img: icons/skills/trades/construction-carpentry-hammer-gray.webp
+    name: Talented Builder
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.builder.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-builder
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:builder]{builder}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Beaver Familiar
+system:
+  creatureType: beaver
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: beaver-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

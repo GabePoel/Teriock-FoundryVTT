@@ -1,0 +1,276 @@
+_id: 3f9afa8befe0e43e
+_key: "!items!3f9afa8befe0e43e"
+effects:
+  - _id: b5LEJbgKW4mYKWkN
+    _key: "!items.effects!3f9afa8befe0e43e.b5LEJbgKW4mYKWkN"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e4f10469b5a423c1
+    img: systems/teriock/src/assets/thumbnails/ability/martial-arts.webp
+    name: Martial Arts
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:offensive-martial-arts]{Offensive Martial Arts} and
+          @Identifier[ability:defensive-martial-arts]{Defensive Martial Arts}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 1120c455454da5fa
+    _key: "!items.effects!3f9afa8befe0e43e.1120c455454da5fa"
+    description: <p>You know the way of the @Identifier[creature:panther]{panther}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Panther Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: panther-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: 6GR2Ct3oHa7rp3Zi
+    _key: "!items.effects!3f9afa8befe0e43e.6GR2Ct3oHa7rp3Zi"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
+    img: systems/teriock/src/assets/thumbnails/ability/slay.webp
+    name: Slay
+    system:
+      automations:
+        - _id: 29b275994cf9f5b1
+          command: damage
+          display:
+            label: Roll 5 Damage
+          formula: 5[lethal]
+          type: roll
+        - _id: tnG4HOJcOpBMkG4W
+          command: damage
+          display:
+            label: Roll 10 Damage
+          formula: 10[lethal]
+          type: roll
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+        tweaks:
+          gifted: 1
+      effectTypes:
+        - damaging
+        - killing
+      executionTime:
+        base: r0
+      identifier: slay
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} takes an additional [[/damage 5[lethal]]]
+          @Identifier[core:damage]{damage}. This also has all
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} of the triggering
+          @Identifier[core:attack-interaction]{attack}. If the triggering @Identifier[core:attack-interaction]{attack}
+          was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
+      powerSources:
+        - martial
+      skill: true
+      standard: true
+      trigger: >-
+        <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
+        @Identifier[core:damage]{damage} from it.</p>
+    type: ability
+  - _id: FM2Zg26ke6OCzreM
+    _key: "!items.effects!3f9afa8befe0e43e.FM2Zg26ke6OCzreM"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+    img: systems/teriock/src/assets/thumbnails/ability/defensive-martial-arts.webp
+    name: Defensive Martial Arts
+    system:
+      _sup: b5LEJbgKW4mYKWkN
+      automations:
+        - _id: F9NLbFodo8GgQLdh
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "1"
+        - _id: iijE8Q6bC3GKvrTX
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "2"
+        - _id: pI8dAIbbmiCqE5n9
+          changeType: upgrade
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "3"
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: defensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target them} (although they cannot be
+          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+          @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
+          +1.</p>
+        fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+        proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: gpQlemHKP9NapYAy
+    _key: "!items.effects!3f9afa8befe0e43e.gpQlemHKP9NapYAy"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
+    img: systems/teriock/src/assets/thumbnails/ability/offensive-martial-arts.webp
+    name: Offensive Martial Arts
+    system:
+      _sup: b5LEJbgKW4mYKWkN
+      automations:
+        - _id: xX7Z0MBjQuUVHdLg
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d4
+        - _id: IlASfQucE28oO7eo
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d6
+        - _id: LNqxuNUNDqEtcbmb
+          changeType: upgrade
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d8
+        - _id: 29b275994cf9f5b1
+          command: damage
+          formula: 1d4
+          type: roll
+        - _id: 5e4d195ed81a10cc
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d6
+          type: roll
+        - _id: 3f7fa7707643426f
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d8
+          type: roll
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: offensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy items} count as
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target} or are @Identifier[core:item-delivery]{delivered by} them (although
+          they cannot be @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You
+          may @Identifier[core:attack-interaction]{attack} with them and their damage die is now [[/damage 1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Panther Familiar
+system:
+  creatureType: panther
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: panther-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

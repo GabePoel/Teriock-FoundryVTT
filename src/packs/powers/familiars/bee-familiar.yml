@@ -1,0 +1,101 @@
+_id: a824d250751d6ed6
+_key: "!items!a824d250751d6ed6"
+effects:
+  - _id: 88f07be5ca7874d2
+    _key: "!items.effects!a824d250751d6ed6.88f07be5ca7874d2"
+    description: <p>You know the way of the @Identifier[creature:bee]{bee}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Bee Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: bee-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: rLPGocFICmKSgOhC
+    _key: "!items.effects!a824d250751d6ed6.rLPGocFICmKSgOhC"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6844cbd7813e2751
+    img: icons/skills/trades/construction-carpentry-hammer-gray.webp
+    name: Talented Builder
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.builder.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-builder
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:builder]{builder}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: X0BjHY83rCC8ZEFM
+    _key: "!items.effects!a824d250751d6ed6.X0BjHY83rCC8ZEFM"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.642429fb879d6de4
+    img: icons/magic/nature/leaf-elm-beam-green.webp
+    name: Talented Herbalist
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.herbalist.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-herbalist
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:herbalist]{herbalist}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Bee Familiar
+system:
+  creatureType: bee
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: bee-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

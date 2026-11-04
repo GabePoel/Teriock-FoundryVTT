@@ -1,0 +1,144 @@
+_id: 6a88fbb1309615a0
+_key: "!items!6a88fbb1309615a0"
+effects:
+  - _id: f26b809ef89c859c
+    _key: "!items.effects!6a88fbb1309615a0.f26b809ef89c859c"
+    description: <p>You know the way of the @Identifier[creature:gorilla]{gorilla}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Gorilla Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: gorilla-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: Fq6wHXCVaq8DNIyh
+    _key: "!items.effects!6a88fbb1309615a0.Fq6wHXCVaq8DNIyh"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8ea4d2796e90be74
+    img: systems/teriock/src/assets/thumbnails/ability/improvised-weapons.webp
+    name: Improvised Weapons
+    system:
+      automations:
+        - _id: iUdUJ8o3bH5wkcXa
+          attachToEffect: false
+          constructionNodes:
+            58111531f63ef06c:
+              _id: 58111531f63ef06c
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: |-
+                {
+                  "name": "Improvised @base"
+                }
+              globalUuids:
+                - Compendium.teriock.equipment.Folder.6032372e5812d743
+                - Compendium.teriock.equipment.Folder.b78dfc2e510485db
+              multi: true
+              overrideData: true
+              random: false
+              type: base
+            92a721679001bc7b:
+              _id: 92a721679001bc7b
+              all: true
+              auto: true
+              competence:
+                raw: 0
+              globalIdentifiers:
+                - property:improvised
+              multi: true
+              overrideData: false
+              parentId: 58111531f63ef06c
+              random: false
+              type: base
+          display:
+            label: Apply Equipment
+          type: addDocuments
+        - _id: mKNQhZp094oZbMh0
+          makeEffect: false
+          type: override
+      delivery: self
+      duration:
+        raw: "8"
+        unit: hour
+      effectTypes:
+        - construction
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      identifier: improvised-weapons
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>During a @Identifier[core:short-rest]{short rest}, you may scavenge materials and make 1 melee
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}. It is
+          @Identifier[property:improvised]{improvised}. Only common @Identifier[damage:mundane]{mundane} items can
+          typically be made in this way, but the @Identifier[core:game-master]{GM} may specify if other options are
+          available to you.</p>
+        fluent: <p>You can instead make up to @Identifier[core:fluency-bonus]{F} weapons.</p>
+        proficient: <p>You can instead make up to @Identifier[core:proficiency-bonus]{P} weapons.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - other
+    type: ability
+  - _id: gAmUQ6EzbqTn4rgo
+    _key: "!items.effects!6a88fbb1309615a0.gAmUQ6EzbqTn4rgo"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.43fc57e585ca955a
+    img: icons/environment/settlement/columned-forum.webp
+    name: Talented Peacekeeper
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.peacekeeper.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-peacekeeper
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:peacekeeper]{peacekeeper}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Gorilla Familiar
+system:
+  creatureType: gorilla
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: gorilla-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

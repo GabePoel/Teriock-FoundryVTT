@@ -1,0 +1,252 @@
+_id: 0701b70153030f62
+_key: "!items!0701b70153030f62"
+effects:
+  - _id: d4DtrQ1A5zphSsVI
+    _key: "!items.effects!0701b70153030f62.d4DtrQ1A5zphSsVI"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c71fdb57374ade38
+    img: systems/teriock/src/assets/thumbnails/ability/carrying.webp
+    name: Carrying
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: carrying
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can drag and carry other creatures and @Pack[teriock.equipment]{items} around even if you don't have
+          @Identifier[property:prehensile]{prehensile body parts}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: a377021ae102f9c6
+    _key: "!items.effects!0701b70153030f62.a377021ae102f9c6"
+    description: <p>You know the way of the @Identifier[creature:kangaroo]{kangaroo}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Kangaroo Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: kangaroo-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: 88gpSn2nqlZCKekx
+    _key: "!items.effects!0701b70153030f62.88gpSn2nqlZCKekx"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e4f10469b5a423c1
+    img: systems/teriock/src/assets/thumbnails/ability/martial-arts.webp
+    name: Martial Arts
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:offensive-martial-arts]{Offensive Martial Arts} and
+          @Identifier[ability:defensive-martial-arts]{Defensive Martial Arts}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: DpIrsSgaEubj42AY
+    _key: "!items.effects!0701b70153030f62.DpIrsSgaEubj42AY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+    img: systems/teriock/src/assets/thumbnails/ability/defensive-martial-arts.webp
+    name: Defensive Martial Arts
+    system:
+      _sup: 88gpSn2nqlZCKekx
+      automations:
+        - _id: F9NLbFodo8GgQLdh
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "1"
+        - _id: iijE8Q6bC3GKvrTX
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "2"
+        - _id: pI8dAIbbmiCqE5n9
+          changeType: upgrade
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.bv.bonus
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: "3"
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: defensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy body parts} count as
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target them} (although they cannot be
+          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+          @Identifier[core:block-interaction]{block} with them and their @Identifier[core:block-interaction]{BV} is
+          +1.</p>
+        fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+        proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: i47FpO9ThcCkbcR4
+    _key: "!items.effects!0701b70153030f62.i47FpO9ThcCkbcR4"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.RyFFAAlAAYdNnAGF
+    img: systems/teriock/src/assets/thumbnails/ability/offensive-martial-arts.webp
+    name: Offensive Martial Arts
+    system:
+      _sup: 88gpSn2nqlZCKekx
+      automations:
+        - _id: xX7Z0MBjQuUVHdLg
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d4
+        - _id: IlASfQucE28oO7eo
+          changeType: upgrade
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d6
+        - _id: LNqxuNUNDqEtcbmb
+          changeType: upgrade
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          key: system.damage
+          priority: 10
+          qualifier: "@prop.handy"
+          target: armament
+          type: childChange
+          value: 1d8
+        - _id: 29b275994cf9f5b1
+          command: damage
+          formula: 1d4
+          type: roll
+        - _id: 5e4d195ed81a10cc
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d6
+          type: roll
+        - _id: 3f7fa7707643426f
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d8
+          type: roll
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: offensive-martial-arts
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:hand]{hands} and other @Identifier[property:handy]{handy items} count as
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons} for the purposes of @Wiki[Category:Weapon
+          target abilities]{abilities that target} or are @Identifier[core:item-delivery]{delivered by} them (although
+          they cannot be @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You
+          may @Identifier[core:attack-interaction]{attack} with them and their damage die is now [[/damage 1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Kangaroo Familiar
+system:
+  creatureType: kangaroo
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: kangaroo-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

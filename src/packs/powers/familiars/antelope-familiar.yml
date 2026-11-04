@@ -1,0 +1,107 @@
+_id: 66b4662ace26f636
+_key: "!items!66b4662ace26f636"
+effects:
+  - _id: vpXiskkGDFAV81ZC
+    _key: "!items.effects!66b4662ace26f636.vpXiskkGDFAV81ZC"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+    img: systems/teriock/src/assets/thumbnails/ability/agile.webp
+    name: Agile
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.difficultTerrain
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: agile
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You move through @Identifier[core:difficult-terrain]{difficult terrain} at
+          @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 3350c3794303c8b2
+    _key: "!items.effects!66b4662ace26f636.3350c3794303c8b2"
+    description: <p>You know the way of the @Identifier[creature:antelope]{antelope}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Antelope Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: antelope-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: PgiS6SosoFOPXsJt
+    _key: "!items.effects!66b4662ace26f636.PgiS6SosoFOPXsJt"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3RmQZ2V83ob5T8p7
+    img: systems/teriock/src/assets/thumbnails/ability/scouting.webp
+    name: Scouting
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: scouting
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @Identifier[core:advantage]{advantage} on checks made with
+          @Identifier[ability:perceive]{Perceive}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: per
+          value: 1
+        score:
+          attribute: per
+          value: 2
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Antelope Familiar
+system:
+  creatureType: antelope
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: antelope-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

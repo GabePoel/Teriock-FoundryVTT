@@ -1,0 +1,474 @@
+_id: 6d5b17dc3d3c7589
+_key: "!items!6d5b17dc3d3c7589"
+effects:
+  - _id: pZy8AMQappIPizfc
+    _key: "!items.effects!6d5b17dc3d3c7589.pZy8AMQappIPizfc"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
+    img: systems/teriock/src/assets/thumbnails/ability/hide.webp
+    name: Hide
+    system:
+      automations:
+        - _id: Hd5o6s1SdA8C7IfT
+          preventThreshold: true
+          type: override
+        - _id: 0b0d1426453abb55
+          relation: apply
+          status: hidden
+          type: status
+      competence:
+        raw: 1
+      delivery: self
+      featSaveAttribute: snk
+      identifier: hide
+      interaction: feat
+      overview:
+        base: >-
+          <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden
+          @Identifier[core:difficulty-class]{DC}. If not, use your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light, @Identifier[core:cover]{three-quarters cover}, or some other
+        feature which the @Identifier[core:game-master]{GM} determines is appropriate for being
+        @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
+        @Identifier[condition:hidden]{hidden}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 1
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: a4Z1FES9gkx8jtiW
+    _key: "!items.effects!6d5b17dc3d3c7589.a4Z1FES9gkx8jtiW"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+    img: systems/teriock/src/assets/thumbnails/ability/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: no-hands
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      overview:
+        base: <p>You cannot use items in your @Identifier[equipment:hand]{hands}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: SqzeNNfs7qJLerd3
+    _key: "!items.effects!6d5b17dc3d3c7589.SqzeNNfs7qJLerd3"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fef5942bbc539777
+    img: systems/teriock/src/assets/thumbnails/ability/no-strength.webp
+    name: No Strength
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: no-strength
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: -3
+    type: ability
+  - _id: BqmddrWnL4NQqPMX
+    _key: "!items.effects!6d5b17dc3d3c7589.BqmddrWnL4NQqPMX"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+    img: systems/teriock/src/assets/thumbnails/ability/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+    type: ability
+  - _id: bLf2hGCVpo59nco7
+    _key: "!items.effects!6d5b17dc3d3c7589.bLf2hGCVpo59nco7"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+    img: systems/teriock/src/assets/thumbnails/ability/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+    type: ability
+  - _id: wZQzJ0C8nzQQwCKA
+    _key: "!items.effects!6d5b17dc3d3c7589.wZQzJ0C8nzQQwCKA"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
+    img: systems/teriock/src/assets/thumbnails/ability/poison-strike.webp
+    name: Poison Strike
+    system:
+      automations:
+        - _id: 29b275994cf9f5b1
+          command: damage
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d6[toxic]
+          triggers:
+            - turnStart
+          type: roll
+        - _id: 5e4d195ed81a10cc
+          command: damage
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d8[toxic]
+          triggers:
+            - turnStart
+          type: roll
+        - _id: 3f7fa7707643426f
+          command: damage
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d10[toxic]
+          triggers:
+            - turnStart
+          type: roll
+        - _id: 743730f25f256b10
+          status: poisoned
+          type: status
+      competence:
+        raw: 1
+      duration:
+        raw: "24"
+        unit: hour
+      effectTypes:
+        - poison
+      endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
+      identifier: poison-strike
+      limitation: <p>@Wiki[Category:Tentacles]{Tentacles} only.</p>
+      overview:
+        fluent: >-
+          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d10[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
+        proficient: >-
+          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
+      powerSources:
+        - alchemical
+      results:
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
+          @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
+      skill: true
+    type: ability
+  - _id: QRN8P57dniWm9VON
+    _key: "!items.effects!6d5b17dc3d3c7589.QRN8P57dniWm9VON"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.919e1424f589c498
+    img: systems/teriock/src/assets/thumbnails/ability/slow.webp
+    name: Slow
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: slow
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: -1
+    type: ability
+  - _id: SpK5yJmnw7eRNg7w
+    _key: "!items.effects!6d5b17dc3d3c7589.SpK5yJmnw7eRNg7w"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3f51dd55670cbe99
+    img: systems/teriock/src/assets/thumbnails/ability/slow-regenerating.webp
+    name: Slow Regenerating
+    system:
+      automations:
+        - _id: 1728b3a84ea27844
+          common:
+            - bag
+            - revive
+          type: common
+        - _id: fssE9eYY29PbhNon
+          consumeStatDice: false
+          type: heal
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+        - revival
+      executionTime:
+        base: passive
+      identifier: slow-regenerating
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Once every 10 minutes, you @Identifier[core:healing]{heal} and regain that many
+          @Identifier[core:hit-points-and-mana-points]{HP}. This does <i>not</i> consume the
+          @Identifier[core:hit-points-and-mana-points]{hit die}. If you were @Identifier[condition:dead]{dead}, this
+          brings you back to live with the number of @Identifier[core:hit-points-and-mana-points]{HP} you rolled.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: ecRlskBFCAXrqT8E
+    _key: "!items.effects!6d5b17dc3d3c7589.ecRlskBFCAXrqT8E"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.dbd0be0b5f33cdfd
+    img: systems/teriock/src/assets/thumbnails/ability/stupid-intelligence.webp
+    name: Stupid Intelligence
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: stupid-intelligence
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -3
+    type: ability
+  - _id: a2BtXh0CGTiqfc1r
+    _key: "!items.effects!6d5b17dc3d3c7589.a2BtXh0CGTiqfc1r"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.19925cf09e2d82c7
+    img: systems/teriock/src/assets/thumbnails/ability/water-home.webp
+    name: Water Home
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.walk
+              phase: derived
+              priority: 30
+              target: Actor
+              type: override
+              value: "0"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: water-home
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @Identifier[ability:swimming]{Swimming} and @Identifier[ability:diving]{Diving} but have
+          @Identifier[core:movement-speed]{no walk speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: Rk9qiEXLU0hJTpjR
+    _key: "!items.effects!6d5b17dc3d3c7589.Rk9qiEXLU0hJTpjR"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.103a1d356ae8fc20
+    img: systems/teriock/src/assets/thumbnails/ability/diving.webp
+    name: Diving
+    system:
+      _sup: a2BtXh0CGTiqfc1r
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: diving
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You no longer have to stay on the surface of water while @Identifier[ability:swimming]{Swimming}.</p>
+        fluent: >-
+          <p>The @Identifier[core:damage]{damage} you take from @Identifier[core:falling]{falling} is instead
+          @Identifier[keyword:deboosted]{deboosted} @Identifier[core:fluency-bonus]{F} times.</p>
+        proficient: >-
+          <p>You are also skilled at landing from difficult @Identifier[core:falling]{falls} into water. The
+          @Identifier[core:damage]{damage} you would take from @Identifier[core:falling]{falling} into water is
+          @Identifier[keyword:deboosted]{deboosted} @Identifier[core:proficiency-bonus]{P} times.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: bW5pJUK31DHrHb9I
+    _key: "!items.effects!6d5b17dc3d3c7589.bW5pJUK31DHrHb9I"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+    img: systems/teriock/src/assets/thumbnails/ability/swimming.webp
+    name: Swimming
+    system:
+      _sup: a2BtXh0CGTiqfc1r
+      automations:
+        - _id: 3MU324Tac2hBbZe2
+          movementAction: swim
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.swim
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: swimming
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/creature/jellyfish.webp
+name: Jellyfish
+system:
+  br: 2
+  hpIncrease: <p>Gain another hit die for every 1 additional size above 1.</p>
+  identifier: jellyfish
+  size:
+    max: 5
+    min: 0.25
+    value: 0.25
+  statDice:
+    hp:
+      formula: (@this.item.size + 0.75)d2
+    mp:
+      formula: 1d6
+  traits:
+    - animal
+    - aquatic
+  transformation:
+    img: systems/teriock/src/assets/thumbnails/creature/jellyfish.webp
+    ring: true
+    ringImg: systems/teriock/src/assets/thumbnails/token/jellyfish.webp
+type: species

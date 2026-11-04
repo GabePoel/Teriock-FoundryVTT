@@ -1,0 +1,135 @@
+_id: 6655a355b86f4843
+_key: "!items!6655a355b86f4843"
+effects:
+  - _id: qcp9qlpwlTnlin1A
+    _key: "!items.effects!6655a355b86f4843.qcp9qlpwlTnlin1A"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4b64f37f4f6bc9e7
+    img: systems/teriock/src/assets/thumbnails/ability/advanced-hearing.webp
+    name: Advanced Hearing
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.hearing
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "30"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: advanced-hearing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can hear all moving creatures within 30 feet. If the creature is breathing, you can hear it even if it
+          is not moving. You can not detect @Identifier[condition:silent]{silent} creatures in this way. The ranges for
+          all @Identifier[core:sounds]{sounds} are doubled.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are @Identifier[rule:up]{up}.</p>
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    type: ability
+  - _id: b925914a047537b9
+    _key: "!items.effects!6655a355b86f4843.b925914a047537b9"
+    description: <p>You know the way of the @Identifier[creature:lynx]{lynx}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Lynx Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: lynx-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: RymfhgXpuAH6ofJi
+    _key: "!items.effects!6655a355b86f4843.RymfhgXpuAH6ofJi"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7eb20929de2c9431
+    img: systems/teriock/src/assets/thumbnails/ability/snow-native.webp
+    name: Snow Native
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: snow-native
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:frozen-resilience]{Frozen Resilience}. You also move through
+          @Identifier[core:difficult-terrain]{difficult} frozen terrain at @Identifier[core:movement-speed]{normal
+          speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: pu3eTGwGn0SBApvc
+    _key: "!items.effects!6655a355b86f4843.pu3eTGwGn0SBApvc"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.266e242a4e6e28b8
+    img: systems/teriock/src/assets/thumbnails/ability/frozen-resilience.webp
+    name: Frozen Resilience
+    showIcon: 0
+    system:
+      _sup: RymfhgXpuAH6ofJi
+      affinities:
+        - _id: 2Ra8Iu9wB0O7MvU6
+          category: other
+          name: Frozen Weather
+          type: takeDeboost
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: frozen-resilience
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @Identifier[keyword:deboosted]{deboost} @Identifier[core:damage]{damage} caused by frozen weather.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Lynx Familiar
+system:
+  creatureType: lynx
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: lynx-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

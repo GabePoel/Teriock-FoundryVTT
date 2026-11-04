@@ -1,0 +1,526 @@
+_id: aa969b8caf371924
+_key: "!actors!aa969b8caf371924"
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/creature/seagull.webp
+items:
+  - _id: aa969b8caf371924
+    _key: "!actors.items!aa969b8caf371924.aa969b8caf371924"
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.aa969b8caf371924
+    effects:
+      - _id: ygGpEAI3pTAjyovs
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.ygGpEAI3pTAjyovs"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.fdbee918540dff8c
+        img: icons/environment/wilderness/cave-entrance-island.webp
+        name: Coast Native
+        showIcon: 0
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: coast-native
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You move through @Identifier[core:difficult-terrain]{difficult} coastal terrain at
+              @Identifier[core:movement-speed]{normal speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: OZYyzFq4bzDBw5Oe
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.OZYyzFq4bzDBw5Oe"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+        img: systems/teriock/src/assets/thumbnails/ability/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: dense-intelligence
+          interaction: manifest
+          kind: flaw
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: jVAcX9O1CPyPwv2o
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.jVAcX9O1CPyPwv2o"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.7a53dfbb3ef5fb41
+        img: systems/teriock/src/assets/thumbnails/ability/dive-bomb.webp
+        name: Dive Bomb
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          executionTime:
+            base: r1
+          identifier: dive-bomb
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You may immediately make one @Identifier[core:active-maneuvers]{single action}
+              @Identifier[core:attack-interaction]{attack} as a @Identifier[core:active-maneuvers]{free action}. It is
+              @Identifier[keyword:unblockable]{UB}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          trigger: <p>You descend at least 15 feet to the ground.</p>
+        type: ability
+      - _id: mo0nfg8pTSO1smlL
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.mo0nfg8pTSO1smlL"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+        img: systems/teriock/src/assets/thumbnails/ability/flying.webp
+        name: Flying
+        system:
+          automations:
+            - _id: 5KN7CIW4kc6fgrgW
+              movementAction: fly
+              type: changeMovement
+            - _id: e789ed5e109ebd1a
+              changes:
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.fly
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "2"
+              type: changes
+            - _id: f025905e157ac261
+              changes:
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.fly
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              disabledToggles:
+                - competenceNone
+                - resultsAlt
+                - resultsAltCrit
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          identifier: flying
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: <p>You instead fly at @Identifier[core:movement-speed]{full speed}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: 1S0fLnxNJweWSfIR
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.1S0fLnxNJweWSfIR"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+        img: systems/teriock/src/assets/thumbnails/ability/no-hands.webp
+        name: No Hands
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: no-hands
+          interaction: manifest
+          kind: flaw
+          maneuver: passive
+          overview:
+            base: <p>You cannot use items in your @Identifier[equipment:hand]{hands}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        type: ability
+      - _id: iXjh66lGZ7wP7LOx
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.iXjh66lGZ7wP7LOx"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+        img: systems/teriock/src/assets/thumbnails/ability/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+        type: ability
+      - _id: 9c9lTdtSJvpfMARO
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.9c9lTdtSJvpfMARO"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+        img: systems/teriock/src/assets/thumbnails/ability/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+        type: ability
+      - _id: ZQWf1u2JKxHJmtRu
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.ZQWf1u2JKxHJmtRu"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+        img: systems/teriock/src/assets/thumbnails/ability/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: normal-sneak
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+        type: ability
+      - _id: cvY3EKaWJGP6p9Zt
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.cvY3EKaWJGP6p9Zt"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+        img: systems/teriock/src/assets/thumbnails/ability/swimming.webp
+        name: Swimming
+        system:
+          automations:
+            - _id: 3MU324Tac2hBbZe2
+              movementAction: swim
+              type: changeMovement
+            - _id: e789ed5e109ebd1a
+              changes:
+                - applyIfSuppressed: false
+                  key: system.speedAdjustments.swim
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: "3"
+              type: changes
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: swimming
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: LnGTzkgfMfnvAneg
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.LnGTzkgfMfnvAneg"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1a9a7ab79b2dc14
+        img: systems/teriock/src/assets/thumbnails/ability/tiny-strength.webp
+        name: Tiny Strength
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          identifier: tiny-strength
+          interaction: manifest
+          kind: flaw
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -2
+        type: ability
+      - _id: RhPye35gzQdQjs6m
+        _key: "!actors.items.effects!aa969b8caf371924.aa969b8caf371924.RhPye35gzQdQjs6m"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.26880b8e1f2a3443
+        img: systems/teriock/src/assets/thumbnails/ability/vitals-hack.webp
+        name: Vitals Hack
+        system:
+          automations:
+            - _id: 1728b3a84ea27844
+              common:
+                - standardDamage
+              type: common
+            - _id: d873eb939c3b5951
+              hacks:
+                - ear
+                - mouth
+                - nose
+              type: hacks
+          competence:
+            raw: 1
+          effectTypes:
+            - damaging
+          identifier: vitals-hack
+          limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
+          powerSources:
+            - martial
+          results:
+            critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
+            hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
+          skill: true
+          standard: true
+          targets:
+            - vitals
+        type: ability
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/assets/thumbnails/creature/seagull.webp
+    name: Seagull
+    system:
+      identifier: seagull
+      size:
+        value: 0.5
+      statDice:
+        hp:
+          formula: 1d4
+        mp:
+          formula: 1d6
+      traits:
+        - animal
+      transformation:
+        img: systems/teriock/src/assets/thumbnails/creature/seagull.webp
+        ring: true
+        ringImg: systems/teriock/src/assets/thumbnails/token/seagull.webp
+    type: species
+  - _id: JnGwb1iYbkfG1ken
+    _key: "!actors.items!aa969b8caf371924.JnGwb1iYbkfG1ken"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.a07454a7967ee5c8
+    effects:
+      - _id: r6fdMsFOOlL211Ri
+        _key: "!actors.items.effects!aa969b8caf371924.JnGwb1iYbkfG1ken.r6fdMsFOOlL211Ri"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+        description: >-
+          <p>A <b>[[lookup name style=lc]]</b> item can be used to deliver @Identifier[core:bite-delivery]{bite delivery
+          abilities}.</p>
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: biting
+          kind: intrinsic
+          powerSources:
+            - martial
+        type: property
+      - _id: 3Ecp5HfmBmb6NOX0
+        _key: "!actors.items.effects!aa969b8caf371924.JnGwb1iYbkfG1ken.3Ecp5HfmBmb6NOX0"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        description: >-
+          <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+          @Identifier[core:attack-interaction]{attack}.</p>
+        img: systems/teriock/src/assets/thumbnails/property/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: weapon
+          kind: intrinsic
+        type: property
+    folder: 30f4d11e5e53d332
+    img: icons/commodities/bones/beak-hooked-red.webp
+    name: Beak
+    system:
+      _sup: aa969b8caf371924
+      damage:
+        base: 1d4
+      identifier: beak
+      range:
+        long:
+          unit: melee
+      style: savage
+    type: body
+  - _id: NQCv3GmKD7OGTbiT
+    _key: "!actors.items!aa969b8caf371924.NQCv3GmKD7OGTbiT"
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.3e24239d1ef97ac2
+    effects:
+      - _id: T6tkKBbgt98kmWzP
+        _key: "!actors.items.effects!aa969b8caf371924.NQCv3GmKD7OGTbiT.T6tkKBbgt98kmWzP"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+        description: >-
+          <p>An <b>[[lookup name style=lc]]</b> item can be @Identifier[keyword:using]{used} to deliver
+          @Identifier[core:hand-delivery]{hand delivery abilities}.</p>
+        img: systems/teriock/src/assets/thumbnails/property/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: handy
+          kind: intrinsic
+          powerSources:
+            - martial
+        type: property
+      - _id: r6y26RRRAVSDlLW4
+        _key: "!actors.items.effects!aa969b8caf371924.NQCv3GmKD7OGTbiT.r6y26RRRAVSDlLW4"
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+        description: >-
+          <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+          @Identifier[core:attack-interaction]{attack}.</p>
+        img: systems/teriock/src/assets/thumbnails/property/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          identifier: weapon
+          kind: intrinsic
+        type: property
+    folder: 30f4d11e5e53d332
+    img: systems/teriock/src/assets/thumbnails/body/claw.webp
+    name: Claw
+    system:
+      _sup: aa969b8caf371924
+      damage:
+        base: 1d4
+      identifier: claw
+      range:
+        long:
+          unit: melee
+      style: savage
+    type: body
+name: Seagull
+prototypeToken:
+  displayBars: 20
+  displayName: 20
+  height: 0.5
+  name: Seagull
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/assets/thumbnails/token/seagull.webp
+  texture:
+    src: systems/teriock/src/assets/thumbnails/creature/seagull.webp
+  width: 0.5
+system:
+  _src: Compendium.teriock.species.Item.aa969b8caf371924
+  hp:
+    value: 3
+  identifier: seagull
+  lockedPaths:
+    - system.money.copper
+    - system.money.debt
+    - system.money.dragonEmerald
+    - system.money.entTearAmber
+    - system.money.fireEyeRuby
+    - system.money.gold
+    - system.money.heartstoneRuby
+    - system.money.magusQuartz
+    - system.money.moonOpal
+    - system.money.pixiePlumAmethyst
+    - system.money.silver
+    - system.money.snowDiamond
+  mp:
+    value: 4
+  scaling:
+    brScale: true
+  size:
+    value: 0.5
+  wielding:
+    attacker: NQCv3GmKD7OGTbiT
+    blocker: NQCv3GmKD7OGTbiT
+type: creature

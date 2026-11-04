@@ -1,0 +1,101 @@
+_id: 3aeb59f6218477bf
+_key: "!items!3aeb59f6218477bf"
+effects:
+  - _id: 9e35ea476ca2bced
+    _key: "!items.effects!3aeb59f6218477bf.9e35ea476ca2bced"
+    description: <p>You know the way of the @Identifier[creature:chicken]{chicken}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Chicken Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: chicken-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: B9agY8GPdzNyh7DX
+    _key: "!items.effects!3aeb59f6218477bf.B9agY8GPdzNyh7DX"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.74ecaa98029f9cdd
+    img: systems/teriock/src/assets/thumbnails/ability/sense-weather.webp
+    name: Sense Weather
+    system:
+      costs:
+        primary:
+          mp:
+            formula: "1"
+            type: formula
+      delivery: self
+      effectTypes:
+        - sensory
+        - truth-detecting
+        - weather
+      identifier: sense-weather
+      interaction: manifest
+      overview:
+        base: >-
+          <p>You know what the natural weather will be like in the next 24 hours in your location (clear, rainy, snowy,
+          and so on). You also predict the weather conditions, natural or not, for the next 1 hour. This only gives you
+          the <i>type</i> of weather, not the exact intensity of it. However, you can tell if the intensity will be more
+          or less severe than it is currently and broadly how much so (for example, "much hotter" or "a little more
+          violent"). Finally, you know whether the weather at your location is natural or unnatural.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: VGe4PmIXswtZNrMa
+    _key: "!items.effects!3aeb59f6218477bf.VGe4PmIXswtZNrMa"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e5b2bbfde23b7935
+    img: icons/skills/trades/farming-plant-seeds-gray.webp
+    name: Talented Farmer
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.farmer.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-farmer
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:farmer]{farmer}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Chicken Familiar
+system:
+  creatureType: chicken
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: chicken-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

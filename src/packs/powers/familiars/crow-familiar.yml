@@ -1,0 +1,146 @@
+_id: e6703d156281fc6d
+_key: "!items!e6703d156281fc6d"
+effects:
+  - _id: 8649b096c4b7dc43
+    _key: "!items.effects!e6703d156281fc6d.8649b096c4b7dc43"
+    description: <p>You know the way of the @Identifier[creature:crow]{crow}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Crow Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: crow-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: SjY1o3m5tgsAlMjd
+    _key: "!items.effects!e6703d156281fc6d.SjY1o3m5tgsAlMjd"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8ea4d2796e90be74
+    img: systems/teriock/src/assets/thumbnails/ability/improvised-weapons.webp
+    name: Improvised Weapons
+    system:
+      automations:
+        - _id: iUdUJ8o3bH5wkcXa
+          attachToEffect: false
+          constructionNodes:
+            58111531f63ef06c:
+              _id: 58111531f63ef06c
+              all: false
+              auto: true
+              competence:
+                raw: 0
+              data: |-
+                {
+                  "name": "Improvised @base"
+                }
+              globalUuids:
+                - Compendium.teriock.equipment.Folder.6032372e5812d743
+                - Compendium.teriock.equipment.Folder.b78dfc2e510485db
+              multi: true
+              overrideData: true
+              random: false
+              type: base
+            92a721679001bc7b:
+              _id: 92a721679001bc7b
+              all: true
+              auto: true
+              competence:
+                raw: 0
+              globalIdentifiers:
+                - property:improvised
+              multi: true
+              overrideData: false
+              parentId: 58111531f63ef06c
+              random: false
+              type: base
+          display:
+            label: Apply Equipment
+          type: addDocuments
+        - _id: mKNQhZp094oZbMh0
+          makeEffect: false
+          type: override
+      delivery: self
+      duration:
+        raw: "8"
+        unit: hour
+      effectTypes:
+        - construction
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      identifier: improvised-weapons
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>During a @Identifier[core:short-rest]{short rest}, you may scavenge materials and make 1 melee
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}. It is
+          @Identifier[property:improvised]{improvised}. Only common @Identifier[damage:mundane]{mundane} items can
+          typically be made in this way, but the @Identifier[core:game-master]{GM} may specify if other options are
+          available to you.</p>
+        fluent: <p>You can instead make up to @Identifier[core:fluency-bonus]{F} weapons.</p>
+        proficient: <p>You can instead make up to @Identifier[core:proficiency-bonus]{P} weapons.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - other
+    type: ability
+  - _id: W4YwSpEVzporAUAg
+    _key: "!items.effects!e6703d156281fc6d.W4YwSpEVzporAUAg"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaa59cf7fb2b88ab
+    img: systems/teriock/src/assets/thumbnails/ability/unglue.webp
+    name: Unglue
+    system:
+      automations:
+        - _id: Kd7EJ2F01l6h5bzk
+          common:
+            - unglue
+          type: common
+      costs:
+        primary:
+          mp:
+            description: >-
+              <p>[[lookup name]] does not cost any @Identifier[core:hit-points-and-mana-points]{MP} when used on
+              @Identifier[property:searchable]{searchable equipment}. Otherwise, it costs 1
+              @Identifier[core:hit-points-and-mana-points]{MP}.</p>
+            type: description
+      delivery: hand
+      effectTypes:
+        - stealing
+      identifier: unglue
+      interaction: manifest
+      overview:
+        base: <p>@Identifier[core:targets]{Target} is no longer @Identifier[property:glued]{glued} and you take it.</p>
+      powerSources:
+        - spiritual
+      requirements: >-
+        <p>Target's bearer is @Identifier[condition:down]{down} or target it
+        @Identifier[property:searchable]{searchable}.</p>
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Crow Familiar
+system:
+  creatureType: crow
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: crow-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

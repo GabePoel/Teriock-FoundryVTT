@@ -1,0 +1,153 @@
+_id: 4663da072bfd6087
+_key: "!items!4663da072bfd6087"
+effects:
+  - _id: 06c219bbe291b6f5
+    _key: "!items.effects!4663da072bfd6087.06c219bbe291b6f5"
+    description: <p>You know the way of the @Identifier[creature:armadillo]{armadillo}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Armadillo Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: armadillo-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: bLRWqCuqlCz5HeAr
+    _key: "!items.effects!4663da072bfd6087.bLRWqCuqlCz5HeAr"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
+    img: systems/teriock/src/assets/thumbnails/ability/brace.webp
+    name: Brace
+    system:
+      affinities:
+        - _id: hPfBt6zwzwH60lYt
+          activeQualifier: "@flags.improvedBrace"
+          category: effect
+          identifier: damaging
+          type: takeDeboost
+      automations:
+        - _id: 0BLOMYrODY3bzx8I
+          command: setTempHp
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d(max(6, @flags.braceDieSize))
+          type: roll
+        - _id: dQvjSj38Nt3dcuZF
+          command: setTempHp
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          formula: (1 + @p)d(max(6, @flags.braceDieSize))
+          type: roll
+        - _id: Eg4Omt9YhPTjNEEW
+          command: setTempHp
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: (1 + @f)d(max(6, @flags.braceDieSize))
+          type: roll
+        - _id: Rid5p1TlO90isbp4
+          amount: 0
+          command: setTempHp
+          triggers:
+            - movement
+          type: take
+      delivery: self
+      duration:
+        unit: unlimited
+      endCondition: <p>You move or are moved.</p>
+      expirations:
+        - _id: d1f6b6eaa581aa10
+          triggers:
+            - movement
+          type: trigger
+      identifier: brace
+      interaction: manifest
+      overview:
+        base: >-
+          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP} as long as you remain stationary.</p>
+        fluent: <p>Instead gain [[/roll 1d6 + (@f)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+        proficient: <p>Instead gain [[/roll 1d6 + (@p)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: 42FBwsuHzL34gP5g
+    _key: "!items.effects!4663da072bfd6087.42FBwsuHzL34gP5g"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.eae89799c230fd18
+    img: systems/teriock/src/assets/thumbnails/ability/endure.webp
+    name: Endure
+    system:
+      automations:
+        - _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          type: hacks
+      costs:
+        components:
+          hack:
+            type: tag
+      delivery: self
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r1
+      identifier: endure
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You take the triggering @Identifier[core:damage]{damage} as a @Identifier[damage:hack]{limb hack} instead.
+          All @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} still apply. If the hit was
+          critical, you instead take it as <i>two</i> @Identifier[damage:hack]{limb hacks}. If you attempted to
+          @Identifier[core:block-interaction]{block} the triggering @Identifier[core:attack-interaction]{attack}, then a
+          limb that @Identifier[keyword:using]{used} whatever @Wiki[Category:Armaments]{item} you
+          @Identifier[core:block-interaction]{blocked} with is the one that's @Identifier[damage:hack]{hacked}.
+          Otherwise, if the @Identifier[core:damage]{damage} was dealt by a creature, they choose which limb is
+          affected. If not, it is random. Only an un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+          that's not possible, you take the @Identifier[core:damage]{damage} normally.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: >-
+        <p>You are hit by an @Identifier[core:attack-interaction]{attack} that would @Identifier[core:damage]{damage}
+        you.</p>
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Armadillo Familiar
+system:
+  creatureType: armadillo
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: armadillo-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

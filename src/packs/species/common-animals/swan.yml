@@ -1,0 +1,355 @@
+_id: cf281a2518a7088c
+_key: "!items!cf281a2518a7088c"
+effects:
+  - _id: HHj77BRVxIuArUCu
+    _key: "!items.effects!cf281a2518a7088c.HHj77BRVxIuArUCu"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+    img: systems/teriock/src/assets/thumbnails/ability/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: dense-intelligence
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    type: ability
+  - _id: EtjjGxFkzAKzpcBH
+    _key: "!items.effects!cf281a2518a7088c.EtjjGxFkzAKzpcBH"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+    img: systems/teriock/src/assets/thumbnails/ability/flying.webp
+    name: Flying
+    system:
+      automations:
+        - _id: 5KN7CIW4kc6fgrgW
+          movementAction: fly
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.fly
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+        - _id: f025905e157ac261
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.fly
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: flying
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: <p>You instead fly at @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: rCDjikfEkQMgMR71
+    _key: "!items.effects!cf281a2518a7088c.rCDjikfEkQMgMR71"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3af18a0eefea2af8
+    img: systems/teriock/src/assets/thumbnails/ability/knockback.webp
+    name: Knockback
+    system:
+      automations:
+        - _id: 6CT5NSb2WmH7cNNn
+          distance: "10"
+          movementAction: walk
+          type: move
+        - _id: XHbIO38NtGB9Mcad
+          distance: "20"
+          movementAction: walk
+          type: move
+      competence:
+        raw: 1
+      identifier: knockback
+      overview:
+        base: >-
+          <aside class="notification info theme-dark"><p>A target moving due to [[lookup name]] can still provoke
+          reactions like @Identifier[ability:opportunity-attack]{Opportunity Attack}.</p></aside>
+      powerSources:
+        - martial
+      results:
+        critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
+        hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
+      skill: true
+      standard: true
+    type: ability
+  - _id: PCrFXJ9eHpNrFQaB
+    _key: "!items.effects!cf281a2518a7088c.PCrFXJ9eHpNrFQaB"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.072c1d93bd5ee956
+    img: systems/teriock/src/assets/thumbnails/ability/low-strength.webp
+    name: Low Strength
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: low-strength
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: -1
+    type: ability
+  - _id: sACA0I6iGKJymYNv
+    _key: "!items.effects!cf281a2518a7088c.sACA0I6iGKJymYNv"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+    img: systems/teriock/src/assets/thumbnails/ability/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: no-hands
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      overview:
+        base: <p>You cannot use items in your @Identifier[equipment:hand]{hands}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 2MqCdC7Woow0Yxa5
+    _key: "!items.effects!cf281a2518a7088c.2MqCdC7Woow0Yxa5"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+    img: systems/teriock/src/assets/thumbnails/ability/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+    type: ability
+  - _id: jxORas6A1DHa5eB0
+    _key: "!items.effects!cf281a2518a7088c.jxORas6A1DHa5eB0"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+    img: systems/teriock/src/assets/thumbnails/ability/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+    type: ability
+  - _id: OIgd2MC93m9o5HMx
+    _key: "!items.effects!cf281a2518a7088c.OIgd2MC93m9o5HMx"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+    img: systems/teriock/src/assets/thumbnails/ability/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+    type: ability
+  - _id: AZ8dQTr9yZYeywX8
+    _key: "!items.effects!cf281a2518a7088c.AZ8dQTr9yZYeywX8"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+    img: systems/teriock/src/assets/thumbnails/ability/swimming.webp
+    name: Swimming
+    system:
+      automations:
+        - _id: 3MU324Tac2hBbZe2
+          movementAction: swim
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.swim
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: swimming
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: dE8DFpUUYmzDDijk
+    _key: "!items.effects!cf281a2518a7088c.dE8DFpUUYmzDDijk"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.26880b8e1f2a3443
+    img: systems/teriock/src/assets/thumbnails/ability/vitals-hack.webp
+    name: Vitals Hack
+    system:
+      automations:
+        - _id: 1728b3a84ea27844
+          common:
+            - standardDamage
+          type: common
+        - _id: d873eb939c3b5951
+          hacks:
+            - ear
+            - mouth
+            - nose
+          type: hacks
+      competence:
+        raw: 1
+      effectTypes:
+        - damaging
+      identifier: vitals-hack
+      limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
+      powerSources:
+        - martial
+      results:
+        critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
+        hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/creature/swan.webp
+name: Swan
+system:
+  br: 2
+  identifier: swan
+  size:
+    value: 1
+  statDice:
+    hp:
+      formula: 1d6
+    mp:
+      formula: 1d6
+  traits:
+    - animal
+  transformation:
+    img: systems/teriock/src/assets/thumbnails/creature/swan.webp
+    ring: true
+    ringImg: systems/teriock/src/assets/thumbnails/token/swan.webp
+type: species

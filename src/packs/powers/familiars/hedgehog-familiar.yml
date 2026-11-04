@@ -1,0 +1,142 @@
+_id: 27c05953b37f9e5f
+_key: "!items!27c05953b37f9e5f"
+effects:
+  - _id: 0EQaGjqrpEjgyaL0
+    _key: "!items.effects!27c05953b37f9e5f.0EQaGjqrpEjgyaL0"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
+    img: systems/teriock/src/assets/thumbnails/ability/brace.webp
+    name: Brace
+    system:
+      affinities:
+        - _id: hPfBt6zwzwH60lYt
+          activeQualifier: "@flags.improvedBrace"
+          category: effect
+          identifier: damaging
+          type: takeDeboost
+      automations:
+        - _id: 0BLOMYrODY3bzx8I
+          command: setTempHp
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: 1d(max(6, @flags.braceDieSize))
+          type: roll
+        - _id: dQvjSj38Nt3dcuZF
+          command: setTempHp
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          formula: (1 + @p)d(max(6, @flags.braceDieSize))
+          type: roll
+        - _id: Eg4Omt9YhPTjNEEW
+          command: setTempHp
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          formula: (1 + @f)d(max(6, @flags.braceDieSize))
+          type: roll
+        - _id: Rid5p1TlO90isbp4
+          amount: 0
+          command: setTempHp
+          triggers:
+            - movement
+          type: take
+      delivery: self
+      duration:
+        unit: unlimited
+      endCondition: <p>You move or are moved.</p>
+      expirations:
+        - _id: d1f6b6eaa581aa10
+          triggers:
+            - movement
+          type: trigger
+      identifier: brace
+      interaction: manifest
+      overview:
+        base: >-
+          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP} as long as you remain stationary.</p>
+        fluent: <p>Instead gain [[/roll 1d6 + (@f)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+        proficient: <p>Instead gain [[/roll 1d6 + (@p)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: 9d42be00f103770d
+    _key: "!items.effects!27c05953b37f9e5f.9d42be00f103770d"
+    description: <p>You know the way of the @Identifier[creature:hedgehog]{hedgehog}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Hedgehog Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: hedgehog-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: uIZumcLjOgMcReMz
+    _key: "!items.effects!27c05953b37f9e5f.uIZumcLjOgMcReMz"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8326cdc148aa31f3
+    img: systems/teriock/src/assets/thumbnails/ability/inedible.webp
+    name: Inedible
+    system:
+      affinities:
+        - _id: TWWhEELFDJsG4drX
+          category: other
+          img: systems/teriock/src/assets/thumbnails/property/biting.webp
+          name: Bite Delivery Abilities
+          type: resistance
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+      identifier: inedible
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:resistance]{resistant} to being @Identifier[core:bite-delivery]{bite delivery
+          abilities}.</p><aside class="notification warning theme-dark"><p>This does not make you
+          @Identifier[keyword:resistance]{resistant} to all @Identifier[core:item-delivery]{weapon delivery abilities}
+          where a @Identifier[body:mouth]{mouth} is the
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} being used.</p></aside>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Hedgehog Familiar
+system:
+  creatureType: hedgehog
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: hedgehog-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

@@ -1,0 +1,146 @@
+_id: 9c72540317a2ef8e
+_key: "!items!9c72540317a2ef8e"
+effects:
+  - _id: xWXijOOS3a8yqqLv
+    _key: "!items.effects!9c72540317a2ef8e.xWXijOOS3a8yqqLv"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f6aa56d2e5c27c4
+    img: systems/teriock/src/assets/thumbnails/ability/advanced-smell.webp
+    name: Advanced Smell
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: advanced-smell
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can passively smell the types of all living creatures within 30 feet. You can detect dead and undead
+          creatures as well, but you cannot distinguish within or between them. They all smell like death. You also gain
+          @Identifier[ability:scent-seeing]{Scent Seeing}. You can not detect @Identifier[condition:odorless]{odorless}
+          creatures in this way.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    type: ability
+  - _id: f2UZl448yNCZkR82
+    _key: "!items.effects!9c72540317a2ef8e.f2UZl448yNCZkR82"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2b31a644ef36f5de
+    img: systems/teriock/src/assets/thumbnails/ability/disease-resistance.webp
+    name: Disease Resistance
+    system:
+      affinities:
+        - _id: hkR1cif4rJqfwDDi
+          category: effect
+          identifier: disease
+          type: resistance
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+      identifier: disease-resistance
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:resistance]{resistant} to @Wiki[Category:Disease effects]{disease} and have
+          @Identifier[core:advantage]{advantage} on @Identifier[core:feat-interaction]{feat saves} against
+          @Wiki[Category:Disease effects]{disease}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: d5b2519a0d4f1b8a
+    _key: "!items.effects!9c72540317a2ef8e.d5b2519a0d4f1b8a"
+    description: <p>You know the way of the @Identifier[creature:monitor-lizard]{monitor lizard}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Monitor Lizard Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: monitor-lizard-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: rACTX9nU5MqL91tF
+    _key: "!items.effects!9c72540317a2ef8e.rACTX9nU5MqL91tF"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+    img: systems/teriock/src/assets/thumbnails/ability/scent-seeing.webp
+    name: Scent Seeing
+    system:
+      _sup: xWXijOOS3a8yqqLv
+      automations:
+        - _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.smell
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "10"
+          type: changes
+      delivery: aura
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: scent-seeing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know the
+          location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving or not,
+          so long as they are still within 10 feet of you.</p>
+      powerSources:
+        - martial
+      range:
+        raw: "10"
+        unit: ft
+      requirements: >-
+        <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
+        @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
+      skill: true
+      standard: true
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Monitor Lizard Familiar
+system:
+  creatureType: monitor-lizard
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: monitor-lizard-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

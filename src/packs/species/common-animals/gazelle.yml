@@ -1,0 +1,391 @@
+_id: 99a8f75fb4da256f
+_key: "!items!99a8f75fb4da256f"
+effects:
+  - _id: MnBCqrvhCf9JFZWL
+    _key: "!items.effects!99a8f75fb4da256f.MnBCqrvhCf9JFZWL"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4b64f37f4f6bc9e7
+    img: systems/teriock/src/assets/thumbnails/ability/advanced-hearing.webp
+    name: Advanced Hearing
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.hearing
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "30"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: advanced-hearing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can hear all moving creatures within 30 feet. If the creature is breathing, you can hear it even if it
+          is not moving. You can not detect @Identifier[condition:silent]{silent} creatures in this way. The ranges for
+          all @Identifier[core:sounds]{sounds} are doubled.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are @Identifier[rule:up]{up}.</p>
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    type: ability
+  - _id: 78yHWzqA8zQeeKvz
+    _key: "!items.effects!99a8f75fb4da256f.78yHWzqA8zQeeKvz"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+    img: systems/teriock/src/assets/thumbnails/ability/agile.webp
+    name: Agile
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.difficultTerrain
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: agile
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You move through @Identifier[core:difficult-terrain]{difficult terrain} at
+          @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: mDmAU3VS9gAeo60I
+    _key: "!items.effects!99a8f75fb4da256f.mDmAU3VS9gAeo60I"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1ec4acb8d744ed9
+    img: systems/teriock/src/assets/thumbnails/ability/alert.webp
+    name: Alert
+    system:
+      affinities:
+        - _id: PHF4TrcfCcaKl6DO
+          category: other
+          name: Being Surprised
+          type: resistance
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+        - sensory
+      executionTime:
+        base: passive
+      identifier: alert
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[core:surprise-rounds]{surprised}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: per
+          value: 1
+    type: ability
+  - _id: U5nD5KY6bgi9QCbD
+    _key: "!items.effects!99a8f75fb4da256f.U5nD5KY6bgi9QCbD"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+    img: systems/teriock/src/assets/thumbnails/ability/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: dense-intelligence
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    type: ability
+  - _id: MQHG3S9EO85Q0AQh
+    _key: "!items.effects!99a8f75fb4da256f.MQHG3S9EO85Q0AQh"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3TtZLD3ppn1UO5vG
+    img: systems/teriock/src/assets/thumbnails/ability/leaping.webp
+    name: Leaping
+    system:
+      automations:
+        - _id: Arm4CqvFyyRVggkV
+          movementAction: jump
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapVertical
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapHorizontal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+          type: changes
+        - _id: f025905e157ac261
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapVertical
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "2"
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.leapHorizontal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "3"
+          disabledToggles:
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: leaping
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You vertically leap at @Identifier[core:movement-speed]{quarter speed} and horizontally leap at
+          @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead vertically leap at @Identifier[core:movement-speed]{half speed} and horizontally leap at
+          @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: ta2JEpVvJ2zD8oIY
+    _key: "!items.effects!99a8f75fb4da256f.ta2JEpVvJ2zD8oIY"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+    img: systems/teriock/src/assets/thumbnails/ability/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: no-hands
+      interaction: manifest
+      kind: flaw
+      maneuver: passive
+      overview:
+        base: <p>You cannot use items in your @Identifier[equipment:hand]{hands}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: YZMiCq8FdZETjlYl
+    _key: "!items.effects!99a8f75fb4da256f.YZMiCq8FdZETjlYl"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+    img: systems/teriock/src/assets/thumbnails/ability/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+    type: ability
+  - _id: mlaBdmOCRnC0pAvH
+    _key: "!items.effects!99a8f75fb4da256f.mlaBdmOCRnC0pAvH"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+    img: systems/teriock/src/assets/thumbnails/ability/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+    type: ability
+  - _id: CcNrd6Elc9cJfCl3
+    _key: "!items.effects!99a8f75fb4da256f.CcNrd6Elc9cJfCl3"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+    img: systems/teriock/src/assets/thumbnails/ability/normal-strength.webp
+    name: Normal Strength
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: normal-strength
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+    type: ability
+  - _id: pbChI34LrkRqcg9M
+    _key: "!items.effects!99a8f75fb4da256f.pbChI34LrkRqcg9M"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.63d61d08bd63f538
+    img: systems/teriock/src/assets/thumbnails/ability/swift.webp
+    name: Swift
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: swift
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 2
+    type: ability
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/creature/gazelle.webp
+name: Gazelle
+system:
+  identifier: gazelle
+  size:
+    value: 2
+  statDice:
+    hp:
+      formula: 1d6
+    mp:
+      formula: 1d6
+  traits:
+    - animal
+  transformation:
+    img: systems/teriock/src/assets/thumbnails/creature/gazelle.webp
+    ring: true
+    ringImg: systems/teriock/src/assets/thumbnails/token/gazelle.webp
+type: species
