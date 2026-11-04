@@ -15,6 +15,7 @@ const SELECTION_PATHS = [
   "expandTables",
   "multi",
   "all",
+  "random",
   "auto",
 ];
 
@@ -47,6 +48,7 @@ export default function SelectionPseudoDocumentMixin(Base) {
         localQualifier: qualifierField(),
         localUuids: new fields.SetField(new fields.DocumentUUIDField({ relative: true })),
         multi: new fields.BooleanField(),
+        random: new fields.BooleanField(),
       });
     }
 
@@ -95,7 +97,8 @@ export default function SelectionPseudoDocumentMixin(Base) {
      */
     #showsSelectionPath(path) {
       if (path === "all") { return this.multi; }
-      if (path === "auto") { return !this.multi || !this.all; }
+      if (path === "auto") { return this.multi ? !this.all : !this.random; }
+      if (path === "random") { return !this.multi; }
       return true;
     }
 

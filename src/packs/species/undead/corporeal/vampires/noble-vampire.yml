@@ -114,30 +114,26 @@ effects:
       spell: true
       standard: true
     type: ability
-  - _id: YYOexRvYCxr5tCdX
-    _key: "!items.effects!10b9dfc1051735f9.YYOexRvYCxr5tCdX"
+  - _id: itJbmsCGD0ruBSJ3
+    _key: "!items.effects!10b9dfc1051735f9.itJbmsCGD0ruBSJ3"
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7bfbd1f14869e830
-    img: systems/teriock/src/assets/thumbnails/ability/bestial-transformation.webp
-    name: Bestial Transformation
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e6c9208cb44126d1
+    img: icons/creatures/mammals/bat-movement-flying-purple.webp
+    name: Bat Transformation
+    showIcon: 0
     system:
       automations:
-        - _id: 9f08fabc1d2bcac2
+        - _id: USyDXFUTOEBe4Ap7
           status: transformed
           type: status
-        - _id: mix9AG1C4iNRI3x5
-          globalUuids:
-            - Compendium.teriock.species.Folder.30f4d11e5e53d332
+        - _id: TFmYVPOWtiIm0rKE
+          globalIdentifiers:
+            - species:bat
           level: full
           setCompetence: override
           type: transformation
       competence:
         raw: 1
-      costs:
-        primary:
-          mp:
-            formula: "1"
-            type: formula
       delivery: self
       duration:
         raw: "1"
@@ -147,24 +143,13 @@ effects:
       elements:
         - nature
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the maximum
-        @Identifier[core:battle-rating]{BR} available to you increases by 1.</p>
-      identifier: bestial-transformation
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+        @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
+      identifier: bat-transformation
       interaction: manifest
       kind: special
-      limitation: <p>@Identifier[creature:bat]{Bat} and @Identifier[creature:wolf]{wolf} only.</p>
       overview:
-        base: >-
-          <p>You are @Identifier[condition:transformed]{fully transformed} into a
-          @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{common animal}. The maximum
-          @Identifier[core:battle-rating]{BR} of @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animals}
-          you can choose is 1.</p>
-        fluent: >-
-          <p>The maximum @Identifier[core:battle-rating]{BR} available to you is now
-          @Identifier[core:fluency-bonus]{F}.</p>
-        proficient: >-
-          <p>The maximum @Identifier[core:battle-rating]{BR} available to you is now
-          @Identifier[core:proficiency-bonus]{P}.</p>
+        base: <p>You are @Identifier[condition:transformed]{fully transformed} into a @Identifier[creature:bat]{bat}.</p>
       powerSources:
         - magical
       range:
@@ -684,6 +669,52 @@ effects:
         score:
           attribute: int
           value: 4
+    type: ability
+  - _id: DA0atQp5Av3g0gxn
+    _key: "!items.effects!10b9dfc1051735f9.DA0atQp5Av3g0gxn"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.db95c77abc1af186
+    img: icons/creatures/mammals/wolf-howl-moon-gray.webp
+    name: Wolf Transformation
+    showIcon: 0
+    system:
+      automations:
+        - _id: xGoTDYkAjB8V75B2
+          status: transformed
+          type: status
+        - _id: RdPuQKGa1iGPXVH3
+          globalIdentifiers:
+            - species:wolf
+          level: full
+          setCompetence: override
+          type: transformation
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: "1"
+        unit: minute
+      effectTypes:
+        - transformation
+      elements:
+        - nature
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+        @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
+      identifier: wolf-transformation
+      interaction: manifest
+      kind: special
+      overview:
+        base: <p>You are @Identifier[condition:transformed]{fully transformed} into a @Identifier[creature:wolf]{wolf}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
     type: ability
   - _id: 6OuFT5iDKEzbIzyA
     _key: "!items.effects!10b9dfc1051735f9.6OuFT5iDKEzbIzyA"

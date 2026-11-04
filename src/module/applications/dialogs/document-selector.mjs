@@ -214,30 +214,32 @@ export default class DocumentSelector extends ResolvableDialog {
    * @returns {Promise<TeriockDocument[]|null|false>} `false` if canceled and `null` if none was chosen in single mode
    */
   static async selectFromConfig(config = {}, options = {}) {
-    const { all = false, auto = true, multi = false } = config;
-    const documents = await this.getFromConfig(config);
-    if (documents.length === 0) { return []; }
-    if (multi && all) { return documents; }
-    if (auto && documents.length === 1) { return documents; }
-    return this.selectMulti(documents, { ...options, multi });
+    const { all = false, auto = true, multi = false, random = false } = config;
+    return this.selectMulti(await this.getFromConfig(config), { ...options, all, auto, multi, random, silent: true });
   }
 
   /**
-   * Select any number of documents.
+   * Select any number of documents. No dialog if `all`, `auto`, or `random` settle the selection.
    * @template T
    * @param {Iterable<T>|T[]} documents
    * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} [options]
    * @returns {Promise<T[]|null|false>} `false` if canceled and `null` if none was chosen in single mode
    */
   static async selectMulti(documents, options = {}) {
-    const prepared = this._prepareDocuments(documents, { ...options });
-    if (prepared.early !== undefined) { return this.#optionalResolve(prepared.early, options.resolve ?? false); }
+    const { all = false, auto = false, multi = true, random = false, resolve = false } = options;
+    const choices = this._coerceDocuments(documents);
+    if (choices.length) {
+      if (multi && all) { return this.#optionalResolve(choices, resolve); }
+      if (!multi && random) {
+        return this.#optionalResolve([choices[Math.floor(Math.random() * choices.length)]], resolve);
+      }
+      if (auto && choices.length === 1) { return this.#optionalResolve(choices, resolve); }
+    }
+    const prepared = this._prepareDocuments(choices, { ...options });
+    if (prepared.early !== undefined) { return this.#optionalResolve(prepared.early, resolve); }
     const selected = await this._promptPrepared(prepared);
     if (!selected) { return selected; }
-    return this.#optionalResolve(
-      selected.map(id => prepared.idToDoc.get(id)).filter(Boolean),
-      options.resolve ?? false,
-    );
+    return this.#optionalResolve(selected.map(id => prepared.idToDoc.get(id)).filter(Boolean), resolve);
   }
 
   /**
@@ -248,11 +250,9 @@ export default class DocumentSelector extends ResolvableDialog {
    * @returns {Promise<T|null|false>} `false` if canceled
    */
   static async selectSingle(documents, options = {}) {
-    const docArray = this._coerceDocuments(documents);
-    if ((options.auto ?? !options.nullable) && docArray.length === 1) { return docArray[0]; }
-    if (options.silent && !docArray.length) { return null; }
     const selected = await this.selectMulti(documents, {
       ...options,
+      auto: options.auto ?? !options.nullable,
       checked: options.checked ? [options.checked] : [],
       locked: options.locked ? [options.locked] : [],
       multi: false,

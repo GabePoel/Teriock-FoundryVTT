@@ -25,13 +25,12 @@ export default function ConstructNodesPseudoDocumentMixin(Base) {
      * @returns {Promise<ConstructionNode[]|null|false>}
      */
     async getNodes(options) {
-      // TODO: This length/all handling can probably be moved into `DocumentSelector` directly.
-      const nodes = this.rootNodes;
-      if (nodes.length <= 1 || this.all) { return nodes; }
-      return DocumentSelector.selectMulti(nodes, {
+      return DocumentSelector.selectMulti(this.rootNodes, {
+        all: this.all,
         auto: this.auto,
-        multi: this.multi,
+        multi: this.all || this.multi,
         nullable: !this.multi,
+        random: this.random,
         silent: true,
         ...options,
       });

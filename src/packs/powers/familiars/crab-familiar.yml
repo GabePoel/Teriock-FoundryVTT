@@ -1,0 +1,90 @@
+_id: f3452e3ab61ac2ca
+_key: "!items!f3452e3ab61ac2ca"
+effects:
+  - _id: LWUiHhfAgEk9Xxsz
+    _key: "!items.effects!f3452e3ab61ac2ca.LWUiHhfAgEk9Xxsz"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fdbee918540dff8c
+    img: icons/environment/wilderness/cave-entrance-island.webp
+    name: Coast Native
+    showIcon: 0
+    system:
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: coast-native
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You move through @Identifier[core:difficult-terrain]{difficult} coastal terrain at
+          @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 3dee1f74356ae76e
+    _key: "!items.effects!f3452e3ab61ac2ca.3dee1f74356ae76e"
+    description: <p>You know the way of the @Identifier[creature:crab]{crab}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Crab Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: crab-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: x1jVQw6fVnosAaSs
+    _key: "!items.effects!f3452e3ab61ac2ca.x1jVQw6fVnosAaSs"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5894bcd8755bdac8
+    img: systems/teriock/src/assets/thumbnails/ability/hack.webp
+    name: Hack
+    system:
+      automations:
+        - _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          type: hacks
+      identifier: hack
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
+          accordingly.</p>
+      powerSources:
+        - martial
+      results:
+        critHit: >-
+          <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
+          depending on what you chose.</p>
+        hit: >-
+          <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Crab Familiar
+system:
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: crab-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

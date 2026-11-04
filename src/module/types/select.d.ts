@@ -16,6 +16,8 @@ declare global {
     };
 
     type _BaseDocumentSelectDialogOptions = {
+      /** Automatically select the only option if exactly one is provided? */
+      auto?: boolean;
       /** Text to display on the dialog */
       hint?: string;
       /** Icon class */
@@ -41,8 +43,6 @@ declare global {
     };
 
     export type SelectDocumentDialogOptions = _BaseDocumentSelectDialogOptions & {
-      /** Automatically select the only option if exactly one is provided? */
-      auto?: boolean;
       /** Which document is checked? */
       checked?: string;
       /** Which document can't be toggled? */
@@ -50,6 +50,8 @@ declare global {
     };
 
     export type SelectDocumentsDialogOptions = _BaseDocumentSelectDialogOptions & {
+      /** Whether to select every document without prompting if selecting multiple */
+      all?: boolean;
       /** Which documents are checked? */
       checked?: string[];
       /** Which documents can't be toggled? */
@@ -58,6 +60,8 @@ declare global {
       multi?: boolean;
       /** A custom message to show if there's no documents to select from. */
       noDocumentsMessage?: string;
+      /** Whether to pick one document uniformly at random if not selecting multiple */
+      random?: boolean;
     };
 
     export type _ChoiceSelectorOptions = {
@@ -96,6 +100,8 @@ declare global {
       localUuids?: Iterable<UUID>;
       /** Whether to allow for multiple documents to be selected */
       multi?: boolean;
+      /** Whether to pick one document uniformly at random if not selecting multiple */
+      random?: boolean;
       /** A document to find local documents relative to */
       relativeTo?: TeriockActiveEffect | TeriockActor | TeriockItem;
       /** Something every document must satisfy to be selectable */

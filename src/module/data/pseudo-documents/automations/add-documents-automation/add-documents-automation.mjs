@@ -38,6 +38,7 @@ export default class AddDocumentsAutomation
       auto: new fields.BooleanField({ initial: true }),
       constructionNodes: new PseudoCollectionField(ConstructionNode),
       multi: new fields.BooleanField({ initial: false }),
+      random: new fields.BooleanField(),
       target: new fields.StringField({
         blank: false,
         choices: TERIOCK.CONFIG.effect.applicationTargets,
@@ -119,7 +120,11 @@ export default class AddDocumentsAutomation
     if (!this.attachesToEffect) { paths.push(...this._triggerDisplayPaths, "target"); }
     else { paths.push("interactInExecution"); }
     paths.push(...["hr", "all"]);
-    if (!this.all) { paths.push(...["auto", "multi"]); }
+    if (!this.all) {
+      paths.push("multi");
+      if (!this.multi) { paths.push("random"); }
+      if (this.multi || !this.random) { paths.push("auto"); }
+    }
     paths.push("hr");
     return paths;
   }
@@ -153,10 +158,11 @@ export default class AddDocumentsAutomation
     }
     return [
       new AddDocumentsActivation({
-        all: this.all,
+        all: this.all || this.interactInExecution,
         auto: this.auto,
         constructionNodes: nodes.map(n => Object.assign(n.toObject(), { name: n.name })),
         multi: this.multi,
+        random: this.random,
         target: this.target,
       }),
     ];

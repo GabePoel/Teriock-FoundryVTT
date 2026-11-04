@@ -21,6 +21,8 @@ declare global {
       localUuids: Set<UUID>;
       /** Whether multiple choices can be selected. */
       multi: boolean;
+      /** Whether one choice should be selected uniformly at random. */
+      random: boolean;
     }
   }
 }

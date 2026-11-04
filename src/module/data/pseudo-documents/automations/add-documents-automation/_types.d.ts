@@ -10,6 +10,7 @@ declare module "./add-documents-automation.mjs" {
     auto: boolean;
     constructionNodes: PseudoCollection<ConstructionNode>;
     multi: boolean;
+    random: boolean;
     target: keyof typeof effectConfig.applicationTargets;
   }
 }
