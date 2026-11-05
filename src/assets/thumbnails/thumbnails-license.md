@@ -1,6 +1,6 @@
 The webp thumbnails in this directory and its subdirectories are licensed from [CraftPix](https://craftpix.net/),
 [Wenrexa](https://www.wenrexa.com/),
-[Poneti](https://poneti.artstation.com/), and Rexard.
+[Poneti](https://poneti.artstation.com/), [Rexard](https://assetstore-fallback.unity.com/publishers/13229), and the [Biodiversity Heritage Library](https://www.biodiversitylibrary.org/).
 
 The thumbnails in [`./document`](./document) and [`./hold`](./hold) are from [game-icons.net](https://game-icons.net/) ([License](https://creativecommons.org/licenses/by/3.0/)).
 Links to the original pages with the authors can be found below.

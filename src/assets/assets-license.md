@@ -15,3 +15,7 @@ The [Material Symbols](./icons/fonts/material-symbols-rounded.ttf) are from [Goo
 [XmasTerpiece](./fonts/xmas-terpiece) and [XmasTerpieceSwashes](./fonts/xmas-terpiece-swashes) were created by Petra Heidorn (AKA "CybaPee") in 2001 and are based on Rhapsodie by Ilse Schüle. They were formerly shared on Typoasis and are distributed as freeware. More information is available [here](https://luc.devroye.org/fonts-30503.html).
 
 [Augusta](./fonts/augusta) and [Augusta Shadow](./fonts/augusta-shadow) were created by Dieter Steffmann in 2000. They were formerly shared on Typoasis and are distributed as freeware as well. More information is available [here](luc.devroye.org/fonts-25001.html).
+
+# Thumbnails
+
+The licenses for files in [`./thumbnails`](./thumbnails) is described [here](./thumbnails/thumbnails-license.md).

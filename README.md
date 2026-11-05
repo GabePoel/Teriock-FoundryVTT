@@ -70,8 +70,14 @@ And plenty of other things including (but not limited to):
 - Custom (hand-drawn non-AI) art for all abilities, properties, species, effects, etc.
 - Easy integration with Dice So Nice!, [Item Piles](https://github.com/GabePoel/Teriock-FoundryVTT-Item-Piles), and [Token Action HUD](https://github.com/GabePoel/Teriock-FoundryVTT-Token-Action-HUD) modules
 
-# FanWar
+# Credits
+
+## Fantasy Warplay
 
 The [Teriock](https://wiki.teriock.com) game system is a TTRPG adaptation of [FanWar](https://fanwar.com) LARP.
 
 ![fanwar-logo.png](src/assets/fanwar-logo.png)
+
+## Assets
+
+The sources for all assets used is described [here](./src/assets/assets-license.md).
