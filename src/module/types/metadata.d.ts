@@ -8,9 +8,9 @@ declare global {
       formula: boolean;
       groupLabels: Record<"finite" | "infinite" | "zero", string>;
       icon: string;
-      initialUnit: string | null;
       rawOptions: { placeholder?: string } & Record<string, unknown>;
       unitConfig: string | null;
+      unitOptions: Record<string, unknown>;
       unlimited: boolean;
     };
 

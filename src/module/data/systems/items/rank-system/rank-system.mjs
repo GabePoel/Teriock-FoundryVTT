@@ -53,7 +53,6 @@ export default class RankSystem
     return Object.assign(super.defineSchema(), {
       archetype: archetypeField({ blank: false, initial: "everyman", required: true }),
       class: classField({ blank: false, initial: "journeyman", required: true }),
-      description: new fields.HTMLField(),
       maxAv: new InfiniteNumberField({ initial: TERIOCK.CONFIG.class.defaults.maxAv, integer: true }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });

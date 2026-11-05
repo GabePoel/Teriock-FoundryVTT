@@ -1,7 +1,7 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
-import { createElement, makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
+import { checkFieldVisibility, createElement, makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
 
 /**
  * @import { ApplicationRenderOptions } from "@client/applications/_types.mjs";
@@ -316,7 +316,7 @@ export default function BaseDocumentMixin(Base) {
      * @returns {boolean}
      */
     get isSecret() {
-      return this.system?.isSecret ?? false;
+      return game.user.isGM ? false : (this.system?.hasSecrets ?? false);
     }
 
     /**
@@ -458,7 +458,7 @@ export default function BaseDocumentMixin(Base) {
       if (typeof config.path !== "string") { return null; }
       const field = this.getFieldForProperty(config.path);
       if (!(field instanceof foundry.data.fields.HTMLField)) { return null; }
-      if (field.options.gm && !game.user.isGM) { return new foundry.applications.elements.HTMLDocumentEmbedElement(); }
+      if (!checkFieldVisibility(field, this)) { return new foundry.applications.elements.HTMLDocumentEmbedElement(); }
       const raw = foundry.utils.getProperty(this, config.path);
       if (typeof raw !== "string") { return null; }
       options = { ...options, relativeTo: this };

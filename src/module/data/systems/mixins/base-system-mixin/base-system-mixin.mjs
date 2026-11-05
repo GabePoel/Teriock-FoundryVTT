@@ -240,7 +240,8 @@ export default function BaseSystemMixin(Base) {
           || foundry.utils.getProperty(this.parent, f.path);
         if (!value) { return; }
         const text = this.metadata.tags.embedPanelBlocks ? `@Embed[${this.parent.uuid} path=${f.path} inline]` : value;
-        return { classes: f.classes, gm: Boolean(schema?.options.gm), text, title: f.label || schema.label };
+        const gm = Boolean(schema?.options.gm || (schema?.options.secret && this.hasSecrets));
+        return { classes: f.classes, gm, text, title: f.label || schema.label };
       }).filter(Boolean);
     }
 
@@ -279,19 +280,19 @@ export default function BaseSystemMixin(Base) {
     }
 
     /**
+     * Whether this document has secret fields which should be hidden from players.
+     * @returns {boolean}
+     */
+    get hasSecrets() {
+      return false;
+    }
+
+    /**
      * Whether this document applies passively instead of only when used.
      * @returns {boolean}
      */
     get isPassive() {
       return true;
-    }
-
-    /**
-     * Whether this document shouldn't have basic information about where it came from visible.
-     * @returns {boolean}
-     */
-    get isSecret() {
-      return false;
     }
 
     /**

@@ -8,8 +8,6 @@ import {
   makeIcon,
   makeIconClass,
 } from "../../../../../../utils/_module.mjs";
-import { UnitField } from "../../../../../fields/_module.mjs";
-import { CurrencyUnitModel } from "../../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -37,46 +35,11 @@ export default function EquipmentIdentificationPart(Base) {
       return {
         ...super.defineSchema(),
         identification: new fields.SchemaField({
-          flaws: new fields.HTMLField({ gm: true }),
-          identified: new fields.BooleanField({ gm: true, initial: true }),
-          kind: new fields.StringField({
-            blank: false,
-            choices: TERIOCK.CONFIG.equipment.kind,
-            gm: true,
-            initial: "mundane",
-            nullable: false,
-            required: true,
-          }),
+          identified: new fields.BooleanField({ initial: true }),
           name: new fields.StringField({ gm: true }),
-          notes: new fields.HTMLField({ gm: true }),
-          price: new UnitField(CurrencyUnitModel, { gm: true }),
-          read: new fields.BooleanField({ gm: true, initial: true }),
+          read: new fields.BooleanField({ initial: true }),
         }),
       };
-    }
-
-    /** @inheritDoc */
-    static migrateData(source, options) {
-      // Unidentified equipment from before price was stashed keeps its true price
-      if (source.identification && !source.identification.identified) { source.identification.price ??= source.price; }
-      return super.migrateData(source, options);
-    }
-
-    /** @inheritDoc */
-    get _displayFieldsContent() {
-      const fields = [];
-      const identifiedFields = ["system.notes", "system.flaws"];
-      for (const f of super._displayFieldsContent) {
-        if (identifiedFields.includes(f)) {
-          fields.push({
-            classes: [TERIOCK.DISPLAY.panels.styles.faded],
-            path: f.replace("system", "system.identification"),
-            visible: !this.identification[f.slice("system.".length)],
-          });
-        }
-        fields.push(f);
-      }
-      return fields;
     }
 
     /**
@@ -111,8 +74,8 @@ export default function EquipmentIdentificationPart(Base) {
     }
 
     /** @inheritDoc */
-    get isSecret() {
-      return (!this.identification.identified && !game.user.isGM) || super.isSecret;
+    get hasSecrets() {
+      return !this.identification.identified || super.hasSecrets;
     }
 
     /**
@@ -120,13 +83,13 @@ export default function EquipmentIdentificationPart(Base) {
      * @returns {boolean}
      */
     get isTierSecret() {
-      return this.isSecret && !this.isAttuned;
+      return this.parent.isSecret && !this.isAttuned;
     }
 
     /** @inheritDoc */
     async attune() {
       // Unidentified equipment needs GM approval before it can be attuned
-      if (this.isSecret && !this.attunement) {
+      if (this.parent.isSecret && !this.attunement) {
         const format = { name: this.parent.fullName };
         if (game.users.activeGM) {
           ui.notifications.info("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.ask", { format, localize: true });
@@ -219,6 +182,12 @@ export default function EquipmentIdentificationPart(Base) {
       });
     }
 
+    /** @inheritDoc */
+    prepareBaseData() {
+      if (!this.identification.read) { this.kind = "unknown"; }
+      super.prepareBaseData();
+    }
+
     /**
      * Reads magic on the equipment.
      *
@@ -254,10 +223,7 @@ export default function EquipmentIdentificationPart(Base) {
               },
             }));
         if (doReadMagic) {
-          await this.parent.update({
-            "system.identification.read": true,
-            "system.kind": this._source.identification.kind,
-          }, { asGM: true });
+          await this.parent.update({ "system.identification.read": true }, { asGM: true });
           ui.notifications.success("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.success", {
             format: { name: this.parent.fullName },
             localize: true,
@@ -312,17 +278,9 @@ export default function EquipmentIdentificationPart(Base) {
           action: "update",
           docData: {
             name: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.name", { type: getName(this.equipmentType) }),
-            "system.flaws": "",
-            "system.identification.flaws": this._source.flaws,
             "system.identification.identified": false,
-            "system.identification.kind": this._source.kind,
             "system.identification.name": this.parent._source.name,
-            "system.identification.notes": this._source.notes,
-            "system.identification.price": this._source.price,
             "system.identification.read": false,
-            "system.kind": "unknown",
-            "system.notes": "",
-            "system.price": reference?.system._source.price ?? this.schema.fields.price.getInitialValue(),
           },
           uuid: this.parent.uuid,
         });

@@ -8,7 +8,7 @@ export default class StorageMaxWeightUnitModel extends WeightUnitModel {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.equipment.maxWeight,
-    initialUnit: "unlimited",
+    unitOptions: { initial: "unlimited" },
     unlimited: true,
   });
 

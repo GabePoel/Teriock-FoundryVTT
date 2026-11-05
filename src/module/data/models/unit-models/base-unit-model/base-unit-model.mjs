@@ -30,9 +30,9 @@ export default class BaseUnitModel extends BaseDataModel {
       zero: "TERIOCK.MODELS.BaseUnit.GROUPS.zero",
     },
     icon: TERIOCK.DISPLAY.icons.manifest.ui.edit,
-    initialUnit: null,
     rawOptions: { placeholder: "0" },
     unitConfig: null,
+    unitOptions: {},
     unlimited: true,
   });
 
@@ -97,9 +97,10 @@ export default class BaseUnitModel extends BaseDataModel {
         : new fields.NumberField({ initial: 0, min: 0, nullable: false, ...rawOptions }),
       unit: new fields.StringField({
         choices: this.choices,
-        initial: this.metadata.initialUnit ?? this.choiceEntries[0].id,
+        initial: this.choiceEntries[0].id,
         nullable: false,
         required: true,
+        ...this.metadata.unitOptions,
       }),
     };
   }

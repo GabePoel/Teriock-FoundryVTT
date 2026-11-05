@@ -46,14 +46,8 @@ export default async function identifyItemQuery(queryData) {
       action: "update",
       docData: {
         name: item.system._source.identification.name,
-        "system.flaws": item.system._source.identification.flaws,
-        "system.identification.flaws": "",
         "system.identification.identified": true,
-        "system.identification.notes": "",
         "system.identification.read": true,
-        "system.kind": item.system._source.identification.kind,
-        "system.notes": item.system._source.identification.notes,
-        "system.price": item.system._source.identification.price,
       },
       uuid: item.uuid,
     });

@@ -31,9 +31,9 @@ export default class BaseItemSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       _dep: nullIdField(),
-      description: new fields.HTMLField(),
+      description: new fields.HTMLField({ secret: true }),
       disabled: new fields.BooleanField(),
-      flaws: new fields.HTMLField(),
+      flaws: new fields.HTMLField({ secret: true }),
     });
   }
 

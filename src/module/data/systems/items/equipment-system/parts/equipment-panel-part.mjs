@@ -40,7 +40,7 @@ export default function EquipmentPanelPart(Base) {
             ...this._attunableWrappers,
             this.weight.tag,
             _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", { value: this.minStr }),
-            this.price.unitType === "finite" ? this.price.tag : "",
+            !this.hasSecrets && this.price.unitType === "finite" ? this.price.tag : "",
           ],
         },
         {

@@ -66,6 +66,22 @@ const RENAMED_THUMBNAIL_FOLDERS = {
 };
 
 /**
+ * Migrate equipment notes to description and description to appearance.
+ * @param {object} source
+ */
+export function migrateEquipmentText(source) {
+  const system = source.system;
+  if (source.type !== "equipment" || !system || !("notes" in system) || "appearance" in system) { return; }
+  system.appearance = system.description ?? "";
+  system.description = system.notes;
+  delete system.notes;
+  if (system.identification?.identified === false) {
+    const { flaws, kind, notes, price } = system.identification;
+    Object.assign(system, { description: notes, flaws, kind, price: price ?? system.price });
+  }
+}
+
+/**
  * Migrate iterable values to kebab-case.
  * @param {object} source
  * @param {...string} fields

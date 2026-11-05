@@ -73,10 +73,10 @@ export default class EquipmentSystem
     preserveOnRefresh: [
       "img",
       "name",
+      "system.appearance",
       "system.description",
       "system.flaws",
       "system.identification",
-      "system.notes",
       "system.kind",
       "system.quantity.maxFormula",
       ...super.metadata.preserveOnRefresh,
@@ -94,6 +94,7 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      appearance: new fields.HTMLField(),
       equipmentType: equipmentTypeField({ blank: true, initial: "", required: false }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
@@ -112,6 +113,11 @@ export default class EquipmentSystem
     if (this.storage.count.over || this.storage.weight.over) { return TERIOCK.DISPLAY.colors.palette.red; }
     if (!this.identification.read) { return TERIOCK.DISPLAY.colors.palette.grey; }
     return super._color;
+  }
+
+  /** @inheritDoc */
+  get _displayFieldsContent() {
+    return ["system.appearance", ...super._displayFieldsContent];
   }
 
   /** @inheritDoc */
@@ -171,6 +177,19 @@ export default class EquipmentSystem
     if (yes === false) { return false; }
 
     if (this.actor) { this.updateSource({ equipped: true }); }
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) { return false; }
+
+    // Save migrated text when version updates
+    if (foundry.utils.isNewerVersion(TERIOCK.CONST.EQUIPMENT_APPEARANCE_VERSION, this.parent._stats.systemVersion)) {
+      const { appearance, description, flaws, kind, price } = this._source;
+      changes.system = { appearance, description, flaws, kind, price, ...changes.system };
+      options.diff = false;
+    }
   }
 
   /** @inheritDoc */

@@ -5,8 +5,8 @@ export default class WeightUnitModel extends BaseUnitModel {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.equipment.weight,
-    initialUnit: "lb",
     unitConfig: "weight",
+    unitOptions: { initial: "lb" },
     unlimited: false,
   });
 }

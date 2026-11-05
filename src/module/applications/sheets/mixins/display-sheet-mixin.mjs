@@ -1,4 +1,4 @@
-import { fancifyFields } from "../../../utils/_module.mjs";
+import { checkFieldVisibility, fancifyFields } from "../../../utils/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
@@ -93,7 +93,7 @@ export default function DisplaySheetMixin(Base) {
           value: foundry.utils.getProperty(this.document._source, f.path)
             ?? foundry.utils.getProperty(this.document, f.path),
         };
-      }).filter(f => game.user.isGM || !f.schema?.options.gm);
+      }).filter(f => checkFieldVisibility(f.schema, this.document));
     }
 
     /**

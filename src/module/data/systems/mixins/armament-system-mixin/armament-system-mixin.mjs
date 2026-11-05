@@ -69,7 +69,6 @@ export default function ArmamentSystemMixin(Base) {
           types: new fields.SetField(new IdentifierField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
         equipmentClasses: identifierSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
-        notes: new fields.HTMLField(),
         range: new MultiChangeField({
           long: new UnitField(RangeUnitModel),
           melee: new fields.BooleanField({ initial: true }),
@@ -217,7 +216,7 @@ export default function ArmamentSystemMixin(Base) {
 
     /** @inheritDoc */
     get _displayFieldsContent() {
-      return ["system.notes", ...super._displayFieldsContent, {
+      return [...super._displayFieldsContent, {
         classes: [TERIOCK.DISPLAY.panels.styles.derived],
         editable: false,
         label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(this.style) }),

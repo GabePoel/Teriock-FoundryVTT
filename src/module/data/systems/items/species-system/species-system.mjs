@@ -63,7 +63,6 @@ export default class SpeciesSystem
       appearance: new fields.HTMLField(),
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
-      description: new fields.HTMLField(),
       innateRanks: new fields.HTMLField(),
       lifespan: new fields.SchemaField({
         adulthood: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),

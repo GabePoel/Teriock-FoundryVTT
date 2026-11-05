@@ -1,4 +1,4 @@
-import { createElement } from "../../utils/_module.mjs";
+import { checkFieldVisibility, createElement } from "../../utils/_module.mjs";
 
 /**
  * @import { DataModel, TypeDataModel } from "@common/abstract/_module.mjs";
@@ -97,7 +97,7 @@ export default function AccessDataMixin(Base) {
      * @returns {HTMLElement[]}
      */
     _makeFormGroups(paths, config = {}) {
-      const visiblePaths = paths.filter(p => p === "hr" || game.user.isGM || !this.getFieldForProperty(p)?.options.gm);
+      const visiblePaths = paths.filter(p => p === "hr" || checkFieldVisibility(this.getFieldForProperty(p), this));
       const cleanedPaths = visiblePaths.filter((p, i) => p !== "hr" || visiblePaths[i - 1] !== "hr").filter((
         p,
         i,

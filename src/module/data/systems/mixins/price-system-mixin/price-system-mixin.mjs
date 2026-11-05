@@ -22,7 +22,7 @@ export default function PriceSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { price: new UnitField(CurrencyUnitModel) });
+      return Object.assign(super.defineSchema(), { price: new UnitField(CurrencyUnitModel, { secret: true }) });
     }
 
     /**
@@ -30,16 +30,10 @@ export default function PriceSystemMixin(Base) {
      * @returns {string[]}
      */
     get _priceWrappers() {
-      if (!this._shouldShowPriceWrapper) { return []; }
+      if (this.parent.isSecret || this.price.unitType !== "finite" || this.parent.parent?.type !== "inventory") {
+        return [];
+      }
       return [this.price.tag];
-    }
-
-    /**
-     * Whether to show the price wrapper.
-     * @returns {boolean}
-     */
-    get _shouldShowPriceWrapper() {
-      return this.price.unitType === "finite" && this.parent.parent?.type === "inventory";
     }
 
     /** @inheritDoc */

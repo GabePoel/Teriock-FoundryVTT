@@ -1,15 +1,8 @@
 <div class="teriock-sheet-bar">
-  {{#if (and isGM (not system.identification.read))}}
-    {{> "teriock/sheets/shared/forms/kind-form"
-      kindValue=system.identification.kind
-      kindIcon="unknown"
-      kindPath="system.identification.kind"
-    }}
-  {{else}}
-    {{> "teriock/sheets/shared/forms/kind-form"
-      kindValue=system.kind
-    }}
-  {{/if}}
+  {{> "teriock/sheets/shared/forms/kind-form"
+    kindValue=(ifThen (and isGM (not system.identification.read)) system._source.kind system.kind)
+    unknown=(not (or isGM system.identification.read))
+  }}
   {{formUpdater
     document
     icon=TERIOCK.DISPLAY.icons.manifest.equipment.equipmentType

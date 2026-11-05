@@ -1,4 +1,6 @@
 /**
+ * @import { DataField } from "@client/data/fields.mjs";
+ * @import { DataModel } from "@client/abstract/data.mjs";
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
  */
 
@@ -103,4 +105,24 @@ export async function progressBar(arr, message, callback, options = {}) {
     await Promise.all(chunk.map(item => callback(item)));
     ui.notifications.update(progress, { pct: Math.min((i + batch) / count, 1) });
   }
+}
+
+/**
+ * Check if a field should be visible.
+ * @param {DataField} field
+ * @param {DataModel} model
+ * @returns {boolean}
+ */
+export function checkFieldVisibility(field, model) {
+  if (game.user.isGM) { return true; }
+
+  let gmField = field;
+  while (gmField && !gmField.options?.gm) { gmField = gmField.parent; }
+  if (gmField) { return false; }
+
+  let secretField = field;
+  while (secretField && !secretField.options?.secret) { secretField = secretField.parent; }
+  if (secretField) { return model?.getNearestDocument()?.isSecret === false; }
+
+  return true;
 }

@@ -4,7 +4,14 @@
  */
 
 import { listFormat } from "../../helpers/localization.mjs";
-import { fieldSorterFactory, fromKeySync, getName, toCamelCase, toKebabCase } from "../../utils/_module.mjs";
+import {
+  fieldSorterFactory,
+  fromKeySync,
+  getName,
+  checkFieldVisibility,
+  toCamelCase,
+  toKebabCase,
+} from "../../utils/_module.mjs";
 import { validateTypedIdentifier } from "../fields/tools/validators.mjs";
 
 const { fields } = foundry.data;
@@ -43,7 +50,7 @@ export default function AbstractDataMixin(Base) {
 
     /**
      * @inheritDoc
-     * @param {string} [documentName]
+     * @param {Teriock.Documents.DocumentName} [documentName]
      * @returns {TeriockDocument|null}
      */
     getNearestDocument(documentName) {
@@ -64,8 +71,14 @@ export default function AbstractDataMixin(Base) {
      */
     getStringForProperty(key, options = {}) {
       const field = this.getFieldForProperty(key);
+
+      // Path needs to be compatible with `getFieldForProperty()`
       let path = Array.isArray(key) ? key.join(".") : key;
+
+      // Don't include stats
       if (path.includes("_stats")) { return ""; }
+
+      // Value can be set to display source data
       if (options.source) {
         if (path.startsWith("system.")) { path = path.replace("system.", "system._source."); }
         else { path = `_source.${path}`; }
@@ -81,19 +94,24 @@ export default function AbstractDataMixin(Base) {
       const type = ["disjunction", "unit"].includes(options.list) ? options.list : "conjunction";
 
       if (field) {
-        // Exclude any fields that only the GM should be able to see
-        let gmField = field;
-        while (gmField && !gmField.options?.gm) { gmField = gmField.parent; }
-        if (gmField && !game.user.isGM) { return ""; }
-        if (field instanceof fields.HTMLField) {
-          // Exclude any `HTMLField` so we don't have recursive lookups or unsafe strings
-          return "";
+        // Exclude any fields this user shouldn't be able to see
+        if (!checkFieldVisibility(field, this)) { return _loc("COMMON.Unknown"); }
+
+        // Exclude any `HTMLField` so we don't have recursive lookups or unsafe strings
+        if (field instanceof fields.HTMLField) { return ""; }
+
+        // Data models with a label return that
+        if (field instanceof fields.EmbeddedDataField && typeof value?.label === "string") {
+          textContent = value.label;
         }
+
+        // Booleans are displayed as the label or the inversion of the label
         if (field instanceof fields.BooleanField && field.label) {
-          // Just display the label or its inversion for a `BooleanField`
           if (value) { textContent = _loc(field.label); }
           else { textContent = _loc("TERIOCK.FORMAT.invert", { value: _loc(field.label) }); }
         }
+
+        // Strings and numbers get converted to their choices if possible
         if (!fetched && field?.choices) {
           // Handling for single-value fields like `NumberField` and `StringField`
           const config = { choices: field?.choices, value };
@@ -109,6 +127,8 @@ export default function AbstractDataMixin(Base) {
           fetched = true;
         }
       }
+
+      // Identifiers and UUIDs get displayed with their actual name if possible
       if (!fetched && !textContent && typeof value === "string") {
         try {
           if (validateTypedIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
@@ -130,6 +150,7 @@ export default function AbstractDataMixin(Base) {
       }
       if (typeof textContent !== "string") { textContent = ""; }
 
+      // Apply any requested styling
       const style = options.style;
       if (style && !link) {
         switch (style) {
