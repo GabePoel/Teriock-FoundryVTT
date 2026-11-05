@@ -8,7 +8,12 @@ import {
   toKebabCase,
 } from "../../../../utils/_module.mjs";
 import { mountTypeField } from "../../../fields/tools/builders.mjs";
-import { AttunableSystemMixin, PriceSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
+import {
+  AppearanceSystemMixin,
+  AttunableSystemMixin,
+  PriceSystemMixin,
+  StatGiverSystemMixin,
+} from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -16,12 +21,19 @@ const { fields } = foundry.data;
 /**
  * Mount-specific item data model.
  * @extends {BaseItemSystem}
+ * @mixes AppearanceSystem
  * @mixes AttunableSystem
  * @mixes PriceSystem
  * @mixes StatGiverSystem
  */
 export default class MountSystem
-  extends mixClasses(BaseItemSystem, AttunableSystemMixin, PriceSystemMixin, StatGiverSystemMixin)
+  extends mixClasses(
+    BaseItemSystem,
+    AppearanceSystemMixin,
+    AttunableSystemMixin,
+    PriceSystemMixin,
+    StatGiverSystemMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];

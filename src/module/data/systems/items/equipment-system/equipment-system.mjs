@@ -9,6 +9,7 @@ import {
 import { equipmentTypeField } from "../../../fields/tools/builders.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import {
+  AppearanceSystemMixin,
   ArmamentSystemMixin,
   AttunableSystemMixin,
   ConsumableSystemMixin,
@@ -33,6 +34,7 @@ const { fields } = foundry.data;
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
  * @extends {BaseItemSystem}
+ * @mixes AppearanceSystem
  * @mixes ArmamentSystem
  * @mixes AttunableSystem
  * @mixes ConsumableSystem
@@ -47,6 +49,7 @@ const { fields } = foundry.data;
 export default class EquipmentSystem
   extends mixClasses(
     BaseItemSystem,
+    AppearanceSystemMixin,
     ArmamentSystemMixin,
     AttunableSystemMixin,
     ConsumableSystemMixin,
@@ -94,7 +97,6 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      appearance: new fields.HTMLField(),
       equipmentType: equipmentTypeField({ blank: true, initial: "", required: false }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
@@ -113,11 +115,6 @@ export default class EquipmentSystem
     if (this.storage.count.over || this.storage.weight.over) { return TERIOCK.DISPLAY.colors.palette.red; }
     if (!this.identification.read) { return TERIOCK.DISPLAY.colors.palette.grey; }
     return super._color;
-  }
-
-  /** @inheritDoc */
-  get _displayFieldsContent() {
-    return ["system.appearance", ...super._displayFieldsContent];
   }
 
   /** @inheritDoc */

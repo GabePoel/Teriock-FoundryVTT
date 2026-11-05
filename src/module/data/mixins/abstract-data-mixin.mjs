@@ -5,10 +5,10 @@
 
 import { listFormat } from "../../helpers/localization.mjs";
 import {
+  checkFieldVisibility,
   fieldSorterFactory,
   fromKeySync,
   getName,
-  checkFieldVisibility,
   toCamelCase,
   toKebabCase,
 } from "../../utils/_module.mjs";

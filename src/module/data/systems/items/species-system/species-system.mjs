@@ -7,7 +7,12 @@ import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
-import { CompetenceDisplaySystemMixin, StatGiverSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
+import {
+  AppearanceSystemMixin,
+  CompetenceDisplaySystemMixin,
+  StatGiverSystemMixin,
+  WikiSystemMixin,
+} from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
 import { SpeciesPanelPart, SpeciesTransformationPart } from "./parts/_module.mjs";
 
@@ -26,6 +31,7 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {BaseItemSystem}
+ * @mixes AppearanceSystem
  * @mixes WikiSystem
  * @mixes CompetenceDisplaySystem
  * @mixes StatGiverSystem
@@ -35,6 +41,7 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
 export default class SpeciesSystem
   extends mixClasses(
     BaseItemSystem,
+    AppearanceSystemMixin,
     WikiSystemMixin,
     CompetenceDisplaySystemMixin,
     StatGiverSystemMixin,
@@ -60,7 +67,6 @@ export default class SpeciesSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      appearance: new fields.HTMLField(),
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
       innateRanks: new fields.HTMLField(),
@@ -130,7 +136,6 @@ export default class SpeciesSystem
       ...POOL_STATS.map(k => `system.${k}Increase`),
       "system.attributeIncrease",
       "system.innateRanks",
-      "system.appearance",
       ...super._displayFieldsContent,
     ];
   }

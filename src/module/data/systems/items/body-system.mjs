@@ -1,6 +1,6 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { Panel } from "../../pseudo-documents/_module.mjs";
-import { ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
+import { AppearanceSystemMixin, ArmamentSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
 import { BaseItemSystem } from "./abstract/_module.mjs";
 
 /**
@@ -10,10 +10,13 @@ import { BaseItemSystem } from "./abstract/_module.mjs";
  * - [Body Parts](https://wiki.teriock.com/index.php/Category:Body_parts)
  *
  * @extends {BaseItemSystem}
+ * @mixes AppearanceSystem
  * @mixes WikiSystem
  * @mixes ArmamentSystem
  */
-export default class BodySystem extends mixClasses(BaseItemSystem, WikiSystemMixin, ArmamentSystemMixin) {
+export default class BodySystem
+  extends mixClasses(BaseItemSystem, AppearanceSystemMixin, WikiSystemMixin, ArmamentSystemMixin)
+{
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.body,
