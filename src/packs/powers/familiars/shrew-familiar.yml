@@ -1,0 +1,124 @@
+_id: f126f53f34cc8d8f
+_key: "!items!f126f53f34cc8d8f"
+effects:
+  - _id: XgZe5d7lqSYTbHHJ
+    _key: "!items.effects!f126f53f34cc8d8f.XgZe5d7lqSYTbHHJ"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c99638056493f146
+    img: icons/creatures/slimes/slime-giant-face-eyes.webp
+    name: Blind Fighting
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.blind
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "60"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: blind-fighting
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can sense up to 60 feet around you even when you are @Identifier[condition:blind]{blind}. This lets you
+          detect @Wiki[Category:Movement effects]{moving creatures}, but has no color nor depth. Even subtle movements
+          like breathing are sufficient for this purpose. This does not detect any color nor depth, such as pictures or
+          words on a page.</p>
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 1
+    type: ability
+  - _id: bV1VJso5wuAqHwTa
+    _key: "!items.effects!f126f53f34cc8d8f.bV1VJso5wuAqHwTa"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
+    img: systems/teriock/src/assets/thumbnails/ability/hide.webp
+    name: Hide
+    system:
+      automations:
+        - _id: Hd5o6s1SdA8C7IfT
+          preventThreshold: true
+          type: override
+        - _id: 0b0d1426453abb55
+          relation: apply
+          status: hidden
+          type: status
+      delivery: self
+      featSaveAttribute: snk
+      identifier: hide
+      interaction: feat
+      overview:
+        base: >-
+          <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden
+          @Identifier[core:difficulty-class]{DC}. If not, use your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light, @Identifier[core:cover]{three-quarters cover}, or some other
+        feature which the @Identifier[core:game-master]{GM} determines is appropriate for being
+        @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
+        @Identifier[condition:hidden]{hidden}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 1
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: 3ce8155e98b917fd
+    _key: "!items.effects!f126f53f34cc8d8f.3ce8155e98b917fd"
+    description: <p>You know the way of the @Identifier[creature:shrew]{shrew}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Shrew Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: shrew-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Shrew Familiar
+system:
+  creatureType: shrew
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: shrew-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

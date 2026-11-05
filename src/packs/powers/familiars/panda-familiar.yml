@@ -1,0 +1,114 @@
+_id: bd019c69c826c592
+_key: "!items!bd019c69c826c592"
+effects:
+  - _id: U4Tn9pFsPH4oDOmA
+    _key: "!items.effects!bd019c69c826c592.U4Tn9pFsPH4oDOmA"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.eae89799c230fd18
+    img: systems/teriock/src/assets/thumbnails/ability/endure.webp
+    name: Endure
+    system:
+      automations:
+        - _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          type: hacks
+      costs:
+        components:
+          hack:
+            type: tag
+      delivery: self
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r1
+      identifier: endure
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You take the triggering @Identifier[core:damage]{damage} as a @Identifier[damage:hack]{limb hack} instead.
+          All @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} still apply. If the hit was
+          critical, you instead take it as <i>two</i> @Identifier[damage:hack]{limb hacks}. If you attempted to
+          @Identifier[core:block-interaction]{block} the triggering @Identifier[core:attack-interaction]{attack}, then a
+          limb that @Identifier[keyword:using]{used} whatever @Wiki[Category:Armaments]{item} you
+          @Identifier[core:block-interaction]{blocked} with is the one that's @Identifier[damage:hack]{hacked}.
+          Otherwise, if the @Identifier[core:damage]{damage} was dealt by a creature, they choose which limb is
+          affected. If not, it is random. Only an un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+          that's not possible, you take the @Identifier[core:damage]{damage} normally.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: >-
+        <p>You are hit by an @Identifier[core:attack-interaction]{attack} that would @Identifier[core:damage]{damage}
+        you.</p>
+    type: ability
+  - _id: a20230f2d4baa4b6
+    _key: "!items.effects!bd019c69c826c592.a20230f2d4baa4b6"
+    description: <p>You know the way of the @Identifier[creature:panda]{panda}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Panda Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: panda-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: 8zaYSFJ7iNGuRAXe
+    _key: "!items.effects!bd019c69c826c592.8zaYSFJ7iNGuRAXe"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.43fc57e585ca955a
+    img: icons/environment/settlement/columned-forum.webp
+    name: Talented Peacekeeper
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.peacekeeper.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-peacekeeper
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:peacekeeper]{peacekeeper}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Panda Familiar
+system:
+  creatureType: panda
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: panda-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

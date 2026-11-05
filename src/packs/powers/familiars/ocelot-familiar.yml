@@ -1,0 +1,105 @@
+_id: 9dc0d7b78f2feb70
+_key: "!items!9dc0d7b78f2feb70"
+effects:
+  - _id: WFRJGphbsbHrHwZa
+    _key: "!items.effects!9dc0d7b78f2feb70.WFRJGphbsbHrHwZa"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
+    img: systems/teriock/src/assets/thumbnails/ability/night-vision.webp
+    name: Night Vision
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.senses.dark
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "120"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      identifier: night-vision
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can see in the dark up to 60 feet as though it is bright light and up to 120 feet as though it is dim
+          light.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 1bed2135c034406c
+    _key: "!items.effects!9dc0d7b78f2feb70.1bed2135c034406c"
+    description: <p>You know the way of the @Identifier[creature:ocelot]{ocelot}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Ocelot Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: ocelot-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: sC7r2I4iNsE2eL1M
+    _key: "!items.effects!9dc0d7b78f2feb70.sC7r2I4iNsE2eL1M"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5b1564c3ee88dd24
+    img: icons/creatures/mammals/deer-antlers-blue.webp
+    name: Talented Hunter
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.hunter.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-hunter
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:hunter]{hunter}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Ocelot Familiar
+system:
+  creatureType: ocelot
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: ocelot-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

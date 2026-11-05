@@ -1,0 +1,59 @@
+_id: jQah7zQs0vfs0zej
+_key: "!items!jQah7zQs0vfs0zej"
+_stats:
+  compendiumSource: Compendium.teriock.bodyParts.Item.61ad84a08f250b8f
+effects:
+  - _id: 1G7rcqbTObsjbCFZ
+    _key: "!items.effects!jQah7zQs0vfs0zej.1G7rcqbTObsjbCFZ"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+    description: <p>An <b>[[lookup name style=lc]]</b> item is always @Identifier[keyword:armor-voiding]{AV0}.</p>
+    img: systems/teriock/src/assets/thumbnails/property/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        - _id: parameterChanges
+          changes:
+            - applyIfSuppressed: false
+              key: system.piercing.raw
+              phase: derived
+              priority: 10
+              target: Item
+              type: upgrade
+              value: "1"
+          type: changes
+      identifier: armor-voiding
+      kind: intrinsic
+    type: property
+  - _id: RG8ePeH9TmQYeC9u
+    _key: "!items.effects!jQah7zQs0vfs0zej.RG8ePeH9TmQYeC9u"
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+    description: >-
+      <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+      @Identifier[core:attack-interaction]{attack}.</p>
+    img: systems/teriock/src/assets/thumbnails/property/weapon.webp
+    name: Weapon
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      identifier: weapon
+      kind: intrinsic
+    type: property
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/assets/thumbnails/body/piercing-horn.webp
+name: Piercing Horn
+system:
+  _sup: 6eeae070940f4e34
+  bv:
+    raw: 1
+  damage:
+    base: 1d8
+  identifier: piercing-horn
+  range:
+    long:
+      unit: melee
+  style: charging
+type: body

@@ -1,0 +1,103 @@
+_id: c237f3dd76fa239f
+_key: "!items!c237f3dd76fa239f"
+effects:
+  - _id: 920c93035de8164d
+    _key: "!items.effects!c237f3dd76fa239f.920c93035de8164d"
+    description: <p>You know the way of the @Identifier[creature:cuttlefish]{cuttlefish}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Cuttlefish Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: cuttlefish-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: iFd7xXRaepBbcrEu
+    _key: "!items.effects!c237f3dd76fa239f.iFd7xXRaepBbcrEu"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ecd0e39a19ac7442
+    img: systems/teriock/src/assets/thumbnails/ability/disguise.webp
+    name: Disguise
+    system:
+      delivery: self
+      duration:
+        raw: "24"
+        unit: hour
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      identifier: disguise
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You convincingly physically @Identifier[condition:disguised]{disguise} yourself to look like any similar
+          species within 1 @Identifier[core:size]{size} of your own @Identifier[core:size]{size}.</p><aside
+          class="notification info theme-dark"><p>Any creature can attempt to @Identifier[ability:check-disguise]{Check
+          Disguise} to discover this.</p></aside>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: oXN5BBNj0brvtFwt
+    _key: "!items.effects!c237f3dd76fa239f.oXN5BBNj0brvtFwt"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1f6b1e4ae24febc1
+    img: systems/teriock/src/assets/thumbnails/ability/evasive-shimmering.webp
+    name: Evasive Shimmering
+    system:
+      affinities:
+        - _id: RTr0c8wdq1WFeAaS
+          category: damage
+          identifier: hack
+          type: resistance
+        - _id: TfO6OuO6JXLTP0uo
+          category: condition
+          identifier: immobilized
+          type: resistance
+        - _id: k6v22jlwtYZoRJPO
+          category: condition
+          identifier: snared
+          type: resistance
+      delivery: self
+      effectTypes:
+        - resistance
+      identifier: evasive-shimmering
+      interaction: manifest
+      overview:
+        base: >-
+          <p>You become @Identifier[keyword:resistance]{resistant} to effects that would make you
+          @Identifier[condition:snared]{snared}, effects that would make you
+          @Identifier[condition:immobilized]{immobilized}, and to @Identifier[damage:hack]{hack damage} dealt by other
+          creatures. This does not clear any existing effects.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      requirements: <p>You are not within 10 feet of any enemy creature.</p>
+      targets:
+        - self
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Cuttlefish Familiar
+system:
+  creatureType: cuttlefish
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: cuttlefish-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

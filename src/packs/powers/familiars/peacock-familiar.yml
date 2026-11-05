@@ -1,0 +1,135 @@
+_id: 5a5de11297a642b8
+_key: "!items!5a5de11297a642b8"
+effects:
+  - _id: 11e73f07bb119ef4
+    _key: "!items.effects!5a5de11297a642b8.11e73f07bb119ef4"
+    description: <p>You know the way of the @Identifier[creature:peacock]{peacock}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Peacock Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: peacock-tamer
+      tradecraft: tamer
+    type: fluency
+  - _id: E1aK0e0wzHvwmxxX
+    _key: "!items.effects!5a5de11297a642b8.E1aK0e0wzHvwmxxX"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3cfe7fd1ecb210d4
+    img: icons/tools/instruments/harp-red.webp
+    name: Talented Performer
+    system:
+      automations:
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.tradecrafts.performer.score
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      identifier: talented-performer
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You are a @Identifier[keyword:talented]{talented} @Identifier[tradecraft:performer]{performer}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: gDIccQ6qjRIZ68xn
+    _key: "!items.effects!5a5de11297a642b8.gDIccQ6qjRIZ68xn"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.32f0310ea8b6f03c
+    img: systems/teriock/src/assets/thumbnails/ability/watchman.webp
+    name: Watchman
+    system:
+      automations:
+        - _id: a3bc5757d39c3f86
+          constructionNodes:
+            25fb0cbb56785f83:
+              _id: 25fb0cbb56785f83
+              all: true
+              auto: true
+              competence:
+                raw: 0
+              globalIdentifiers:
+                - ability:cat-sense
+              multi: false
+              overrideData: false
+              random: false
+              type: base
+          type: addDocuments
+        - _id: 2PS2DRtwngfDCQqd
+          makeEffect: true
+          targetsActor: true
+          type: override
+        - _id: eQGZVefdayKVvF2l
+          attachToToken: false
+          deleteOnTurnChange: false
+          expandWithToken: false
+          radius: "30"
+          restriction:
+            enabled: true
+          type: region
+        - _id: OeBYl3fSeOJG9woY
+          amount: 1
+          command: drain
+          display:
+            label: Spend 1 MP
+          type: take
+      delivery: self
+      duration:
+        raw: "24"
+        unit: hour
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      identifier: watchman
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You may spend a @Identifier[core:short-rest]{short rest} setting up a watch on an area no greater than 30
+          feet wide in any direction. You and your allies that are in this area during the
+          @Identifier[core:short-rest]{short rest} or when @Identifier[core:combat]{combat} begins may each spend 1
+          @Identifier[core:hit-points-and-mana-points]{MP} to gain @Identifier[ability:cat-sense]{Cat Sense} while in
+          this area.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You remain in the @Identifier[core:targets]{targeted} area.</p>
+      skill: true
+      standard: true
+      targets:
+        - area
+    type: ability
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Peacock Familiar
+system:
+  creatureType: peacock
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: peacock-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

@@ -1,0 +1,204 @@
+_id: 5daad56b0dfbe86f
+_key: "!items!5daad56b0dfbe86f"
+effects:
+  - _id: 1nUKcPUOvBAKumG5
+    _key: "!items.effects!5daad56b0dfbe86f.1nUKcPUOvBAKumG5"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5451b5caee0b5380
+    img: systems/teriock/src/assets/thumbnails/ability/partner-awaken.webp
+    name: Partner Awaken
+    system:
+      automations:
+        - _id: 1687edd16f473940
+          constructionNodes:
+            923c04f492cb961f:
+              _id: 923c04f492cb961f
+              all: true
+              auto: true
+              competence:
+                raw: 0
+              data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
+              globalIdentifiers:
+                - ability:instant-awaken
+              multi: false
+              overrideData: true
+              random: false
+              type: base
+          type: addDocuments
+        - _id: 691afda974d67b4a
+          constructionNodes:
+            da2d0447f801d386:
+              _id: da2d0447f801d386
+              all: true
+              auto: true
+              competence:
+                raw: 0
+              data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
+              globalIdentifiers:
+                - ability:reactive-awaken
+              multi: false
+              overrideData: true
+              random: false
+              type: base
+          type: addDocuments
+      delivery: sight
+      duration:
+        raw: "1"
+        unit: hour
+      endCondition: <p>You use [[lookup name]] again.</p>
+      identifier: partner-awaken
+      interaction: manifest
+      overview:
+        base: >-
+          <p>You and the @Identifier[core:targets]{target} gain @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:instant-awaken]{Instant Awaken} and @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:reactive-awaken]{Reactive Awaken} (only usable on each other). You may only have this
+          active on one creature at a time.</p>
+      powerSources:
+        - martial
+      range:
+        raw: "30"
+        unit: ft
+      skill: true
+      standard: true
+    type: ability
+  - _id: H6BYj75WW0cE2uy1
+    _key: "!items.effects!5daad56b0dfbe86f.H6BYj75WW0cE2uy1"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.784d022aa6b16299
+    img: systems/teriock/src/assets/thumbnails/ability/skill-share.webp
+    name: Skill Share
+    system:
+      affinities:
+        - _id: M5H0FZSqdzBuueLq
+          identifier: skill-share
+          type: incapability
+      automations:
+        - _id: pZTzCOb2arggrQQw
+          constructionNodes:
+            c91572ce93095acc:
+              _id: c91572ce93095acc
+              all: false
+              auto: false
+              competence:
+                raw: 0
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1))
+              multi: false
+              overrideData: false
+              random: false
+              type: base
+          disabledToggles:
+            - competenceFluent
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          interactInExecution: true
+          type: addDocuments
+        - _id: DKrkwLcllE5f9bjQ
+          constructionNodes:
+            778159f84c5aa976:
+              _id: 778159f84c5aa976
+              all: false
+              auto: false
+              competence:
+                raw: 0
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @p))
+              multi: false
+              overrideData: false
+              random: false
+              type: base
+          disabledToggles:
+            - competenceFluent
+            - competenceNone
+            - resultsAlt
+            - resultsAltCrit
+          interactInExecution: true
+          type: addDocuments
+        - _id: LTtFZkqLk2QnwOfK
+          constructionNodes:
+            84bcc116ac91bc2d:
+              _id: 84bcc116ac91bc2d
+              all: false
+              auto: false
+              competence:
+                raw: 0
+              localQualifier: and(@ability, @parent.rank, not(@es), not(@et.contract), @pro, lte(@class.rank, 1 + @f))
+              multi: false
+              overrideData: false
+              random: false
+              type: base
+          disabledToggles:
+            - competenceNone
+            - competenceProficient
+            - resultsAlt
+            - resultsAltCrit
+          interactInExecution: true
+          type: addDocuments
+        - _id: XdlHsYQu4RHDULLu
+          setCompetence: override
+          type: override
+      delivery: sight
+      duration:
+        raw: "1"
+        unit: hour
+      effectTypes:
+        - contract
+      endCondition: <p>You use [[lookup name]] again.</p>
+      identifier: skill-share
+      interaction: manifest
+      overview:
+        base: >-
+          <p>@Identifier[core:targets]{Target} gains one @Pack[teriock.abilities]{ability} of your choice that you have
+          from your first rank in a @Pack[teriock.classes]{class}. They are not
+          @Identifier[core:proficiency-bonus]{proficient} in it. The @Pack[teriock.abilities]{ability} must not be
+          @Wiki[Category:Elder Sorcery abilities]{Elder Sorcery}, must not be a @Wiki[Category:Contract
+          effects]{contract effect}, must be one you are @Identifier[core:proficiency-bonus]{proficient} in, and must be
+          one you aren't @Identifier[keyword:incapable]{incapable} of. The @Identifier[core:targets]{target} also
+          becomes @Identifier[keyword:incapable]{incapable} of [[lookup name]]. You may only have this active on one
+          creature at a time. You may not share @Pack[teriock.abilities]{abilities} you gain from
+          @Pack[teriock.classes]{class} <i>archetypes</i> such as @Identifier[ability:staff-touch]{Staff Touch} or
+          @Identifier[ability:warrior-techniques]{Warrior Techniques}, just from the specific
+          @Pack[teriock.classes]{classes} themselves.</p>
+        fluent: >-
+          <p>You can now share @Pack[teriock.abilities]{abilities} you have from any of your first 1 +
+          @Identifier[core:fluency-bonus]{F} ranks in a @Pack[teriock.classes]{class}.</p>
+        proficient: >-
+          <p>You can now share @Pack[teriock.abilities]{abilities} you have from any of your first 1 +
+          @Identifier[core:proficiency-bonus]{P} ranks in a @Pack[teriock.classes]{class}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: "30"
+        unit: ft
+      skill: true
+      standard: true
+      sustained: true
+    type: ability
+  - _id: 9c11e3432d0ec75d
+    _key: "!items.effects!5daad56b0dfbe86f.9c11e3432d0ec75d"
+    description: <p>You know the way of the @Identifier[creature:yak]{yak}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Yak Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: yak-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Yak Familiar
+system:
+  creatureType: yak
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: yak-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

@@ -1,0 +1,91 @@
+_id: 5ef3f4d679e667a7
+_key: "!items!5ef3f4d679e667a7"
+effects:
+  - _id: uv78UlLtuL2yRY5X
+    _key: "!items.effects!5ef3f4d679e667a7.uv78UlLtuL2yRY5X"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fec1073f9bd5fb62
+    img: systems/teriock/src/assets/thumbnails/ability/ice-damage-resistance.webp
+    name: Ice Damage Resistance
+    system:
+      affinities:
+        - _id: BXCRq9eK0NhcvKdV
+          category: damage
+          identifier: ice
+          type: resistance
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+      identifier: ice-damage-resistance
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @Identifier[keyword:resistance]{resist} @Identifier[damage:ice]{ice damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: vSoUbSGC6R9Vw1hq
+    _key: "!items.effects!5ef3f4d679e667a7.vSoUbSGC6R9Vw1hq"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c17c6e40cc866b53
+    img: systems/teriock/src/assets/thumbnails/ability/impale.webp
+    name: Impale
+    system:
+      automations:
+        - _id: 1728b3a84ea27844
+          common:
+            - standardDamage
+          type: common
+        - _id: d873eb939c3b5951
+          hacks:
+            - body
+          type: hacks
+      identifier: impale
+      powerSources:
+        - martial
+      results:
+        critHit: >-
+          <p>If you want, @Identifier[core:targets]{target} takes
+          @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
+        hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{body hack}.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+  - _id: c0aa3122c6113a95
+    _key: "!items.effects!5ef3f4d679e667a7.c0aa3122c6113a95"
+    description: <p>You know the way of the @Identifier[creature:narwhal]{narwhal}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Narwhal Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: narwhal-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Narwhal Familiar
+system:
+  creatureType: narwhal
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: narwhal-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar
