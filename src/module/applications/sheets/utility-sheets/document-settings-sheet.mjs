@@ -98,12 +98,11 @@ export default class DocumentSettingsSheet extends DocumentDialog {
             placeholder: this.document.defaultIdentifier,
             reset: this.document.defaultIdentifier,
           }),
-          this.#quickField("_stats.compendiumSource", {
-            hint: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.hint",
-            label: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
-          }),
+          this.#quickField("_stats.compendiumSource"),
+          this.#quickField("_stats.duplicateSource"),
         ],
-        legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend",
+        icon: TERIOCK.DISPLAY.icons.manifest.ui.compendium,
+        label: "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend",
         localize: true,
       });
     }

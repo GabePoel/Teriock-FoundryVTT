@@ -24,6 +24,9 @@ export default function BaseDocumentMixin(Base) {
    * @mixin
    */
   class BaseDocument extends mixClasses(Base, AbstractDataMixin, PseudoControllerDataMixin) {
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...(super.LOCALIZATION_PREFIXES ?? []), "TERIOCK.DOCUMENTS.Base"];
+
     /**
      * Metadata that Teriock uses but Foundry doesn't.
      * @returns {Teriock.Documents.DocumentMetadata}
@@ -309,12 +312,11 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
-     * Whether this document shouldn't have its basic information like compendium source and identifier visible.
+     * Whether this document shouldn't have basic source information visible.
      * @returns {boolean}
      */
     get isSecret() {
-      if (this.system) { return this.system.isSecret; }
-      return false;
+      return this.system?.isSecret ?? false;
     }
 
     /**

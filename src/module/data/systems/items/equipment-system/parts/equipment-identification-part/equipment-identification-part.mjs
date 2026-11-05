@@ -137,15 +137,16 @@ export default function EquipmentIdentificationPart(Base) {
             user: game.user.link,
           }),
         );
-        const doAttune = game.users.activeGM
-          && await TeriockDialog.query(game.users.activeGM, "confirm", {
-            content,
-            modal: false,
-            window: {
-              icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.attunable.attune, "title"),
-              title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.title"),
-            },
-          });
+        const doAttune = game.user.isGM
+          || (game.users.activeGM
+            && await TeriockDialog.query(game.users.activeGM, "confirm", {
+              content,
+              modal: false,
+              window: {
+                icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.attunable.attune, "title"),
+                title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.title"),
+              },
+            }));
         if (!doAttune) {
           ui.notifications.error("TERIOCK.SYSTEMS.Equipment.QUERY.Attune.failure", { format, localize: true });
           return null;
@@ -242,15 +243,16 @@ export default function EquipmentIdentificationPart(Base) {
             user: game.user.link,
           }),
         );
-        const doReadMagic = game.users.activeGM
-          && await TeriockDialog.query(game.users.activeGM, "confirm", {
-            content,
-            modal: false,
-            window: {
-              icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "title"),
-              title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.title"),
-            },
-          });
+        const doReadMagic = game.user.isGM
+          || (game.users.activeGM
+            && await TeriockDialog.query(game.users.activeGM, "confirm", {
+              content,
+              modal: false,
+              window: {
+                icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.readMagic, "title"),
+                title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.ReadMagic.title"),
+              },
+            }));
         if (doReadMagic) {
           await this.parent.update({
             "system.identification.read": true,

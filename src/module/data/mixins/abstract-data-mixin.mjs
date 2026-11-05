@@ -65,6 +65,7 @@ export default function AbstractDataMixin(Base) {
     getStringForProperty(key, options = {}) {
       const field = this.getFieldForProperty(key);
       let path = Array.isArray(key) ? key.join(".") : key;
+      if (path.includes("_stats")) { return ""; }
       if (options.source) {
         if (path.startsWith("system.")) { path = path.replace("system.", "system._source."); }
         else { path = `_source.${path}`; }

@@ -18,14 +18,15 @@ export default async function identifyItemQuery(queryData) {
       user: user.link,
     }),
   );
-  const doIdentify = await TeriockDialog.confirm({
-    content,
-    modal: false,
-    window: {
-      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.identify, "title"),
-      title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.title"),
-    },
-  });
+  const doIdentify = user.isGM
+    || await TeriockDialog.confirm({
+      content,
+      modal: false,
+      window: {
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.equipment.identify, "title"),
+        title: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Identify.title"),
+      },
+    });
   if (doIdentify) {
     const unrevealed = item.previewed.filter(c => c.metadata.tags.revealable && !c.system.revealed);
     const toReveal = await DocumentSelector.selectMulti(unrevealed, {
