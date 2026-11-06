@@ -166,8 +166,7 @@ export default function HierarchyDocumentMixin(Base) {
       if (operation.asGM && !game.user.isGM && !operation.dryRun) {
         return super.createDocuments(cleanedData, operation);
       }
-      const resolvedData = await Promise.all(cleanedData.map(doc => this.resolveObject(doc)));
-      const expandedData = expandDocumentDataArray(resolvedData, null, operation);
+      const expandedData = await expandDocumentDataArray(cleanedData, null, operation);
       const knownSubs = operation.knownSubs ?? new Set();
       const filteredData = expandedData.filter(d => {
         if (getProperty(d, "flags._teriock.keep")) { return true; }
@@ -183,22 +182,6 @@ export default function HierarchyDocumentMixin(Base) {
         ? new Set(parent.children.map(c => c.name))
         : undefined;
       return super.defaultName({ ...context, parent, takenNames });
-    }
-
-    /**
-     * Resolve a `toObject` call.
-     * @param {UUID|object} obj
-     * @returns {Promise<object>}
-     */
-    static async resolveObject(obj) {
-      if (typeof obj === "string") {
-        const doc = await fromUuid(obj);
-        return this.resolveObject(doc?.toObject() ?? {});
-      }
-      if (Array.isArray(obj?.subs) && obj.subs.length) {
-        obj.subs = await Promise.all(obj.subs.map(s => this.resolveObject(s)));
-      }
-      return obj;
     }
 
     /**

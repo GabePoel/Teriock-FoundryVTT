@@ -148,7 +148,7 @@ function inferChildDocumentName(data) {
 
 /**
  * Expand document data arrays recursively.
- * @param {object[]} [data]
+ * @param {(object|UUID)[]} [data]
  * @param {string|null} [supId=null] ID of the sup that `data` are subs of.
  * @param {object} [operation]
  * @param {boolean} [operation.keepId] Top-level documents keep their `_id`.
@@ -157,16 +157,18 @@ function inferChildDocumentName(data) {
  * @param {object} [options={}]
  * @param {boolean} [options.inplace] Write `system._sup` directly instead of deferring to `_preCreateOperation`.
  * @param {boolean} [options.keepId] Top-level documents keep their `_id`. Used for embedded arrays.
- * @returns {object[]}
+ * @returns {Promise<object[]>}
  * @category Hierarchy
  * @category Dependents
  */
-export function expandDocumentDataArray(data = [], supId = null, operation = {}, options = {}) {
+export async function expandDocumentDataArray(data = [], supId = null, operation = {}, options = {}) {
   operation.knownSubs ??= new Set();
-  const expandedData = [];
+  const resolvedData = await Promise.all(
+    data.map(async d => (typeof d === "string" ? (await foundry.utils.fromUuid(d))?.toObject() : d)),
+  );
 
-  for (const d of data) {
-    if (!d || typeof d !== "object") { continue; }
+  const expandedData = await Promise.all(resolvedData.map(async d => {
+    if (!d || typeof d !== "object") { return []; }
     const masterDocumentName = inferChildDocumentName(d);
 
     // Expand children array and sort them into their collections.
@@ -217,7 +219,7 @@ export function expandDocumentDataArray(data = [], supId = null, operation = {},
 
     // Expand embedded effects array.
     if (masterDocumentName === "Item" && Array.isArray(d.effects) && d.effects.length) {
-      d.effects = expandDocumentDataArray(d.effects, null, {
+      d.effects = await expandDocumentDataArray(d.effects, null, {
         keepSubIds: operation.keepSubIds ?? operation.keepId,
         knownSubs: operation.knownSubs,
       }, { inplace: true, keepId: operation.keepEmbeddedIds ?? true });
@@ -228,11 +230,11 @@ export function expandDocumentDataArray(data = [], supId = null, operation = {},
     delete d.dependents;
 
     // Expand the sub array.
-    const expandedSubs = expandDocumentDataArray(d.subs ?? [], newId, operation, options);
+    const expandedSubs = await expandDocumentDataArray(d.subs ?? [], newId, operation, options);
     delete d.subs;
 
-    expandedData.push(d, ...expandedSubs);
-  }
+    return [d, ...expandedSubs];
+  }));
 
-  return expandedData;
+  return expandedData.flat();
 }

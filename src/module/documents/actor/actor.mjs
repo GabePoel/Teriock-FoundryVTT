@@ -52,7 +52,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     for (const d of data) {
       for (const c of ["effects", "items"]) {
         if (Array.isArray(d[c])) {
-          d[c] = expandDocumentDataArray(d[c], null, { keepSubIds: operation.keepSubIds ?? operation.keepId }, {
+          d[c] = await expandDocumentDataArray(d[c], null, { keepSubIds: operation.keepSubIds ?? operation.keepId }, {
             inplace: true,
             keepId: operation.keepEmbeddedIds ?? true,
           });
