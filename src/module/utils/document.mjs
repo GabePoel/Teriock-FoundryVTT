@@ -100,18 +100,14 @@ export function getTypeLabel(type) {
 }
 
 /**
- * Find the best document from a string that describes it. Typed identifiers are preferred over plain identifiers
- * which are preferred over names.
+ * Find the best document from a string that describes it. The preference goes identifiers then lookup keys then names.
  * @param {TypedIdentifier|Identifier|string} lookup
- * @param {TeriockActiveEffect|TeriockActor|TeriockItem} relativeTo
- * @param {object} [options]
- * @param {boolean} [options.relativeOnly]
- * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
+ * @param {TeriockActiveEffect|TeriockActor|TeriockItem} [relativeTo]
+ * @returns {Promise<TeriockDocument|null>}
  */
-export async function findBestDocument(lookup, relativeTo, options = {}) {
-  if (options.relativeOnly && !relativeTo?.previewed?.getContents) { return null; }
+export async function findBestDocument(lookup, relativeTo) {
   if (!lookup) { return null; }
-  const doc = await fromIdentifier(lookup, { relativeOnly: Boolean(options.relativeOnly), relativeTo });
+  const doc = await fromIdentifier(lookup, { relativeTo });
   if (doc) { return doc; }
   const children = (await relativeTo?.previewed?.getContents()) ?? [];
   return children.find(c => c.lookupKey === lookup) ?? children.find(c => c.name === lookup) ?? null;
@@ -156,25 +152,22 @@ export async function fromQualifier(document, qualifier) {
  * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
  */
 export function fromIdentifierSync(identifier, options = {}) {
-  if (!identifier) { return null; }
-  return game.teriock.identifiers.fromIdentifierSync(identifier, options);
+  return foundry.utils.fromUuidSync(game.teriock.identifiers.get(identifier), options);
 }
 
 /**
- * Get a document from its identifier. Prefers compendium documents over world documents.
+ * Get a document from its identifier.
  * @param {TypedIdentifier} identifier
  * @param {Teriock.System.FetchOptions} [options]
  * @returns {Promise<TeriockDocument|null>}
  */
 export async function fromIdentifier(identifier, options = {}) {
-  if (!identifier) { return null; }
-  if (options.relativeOnly && !options.relativeTo) { return null; }
-  if (options.relativeTo) {
-    const doc = await fromIdentifierLocal(identifier, options.relativeTo);
-    if (doc) { return doc; }
-    if (options.relativeOnly) { return null; }
-  }
-  return game.teriock.identifiers.fromIdentifier(identifier);
+  const { relativeOnly, relativeTo, ...fetchOptions } = options;
+  if (relativeTo) {
+    const doc = await fromIdentifierLocal(identifier, relativeTo);
+    if (doc || relativeOnly) { return doc; }
+  } else if (relativeOnly) { return null; }
+  return foundry.utils.fromUuid(game.teriock.identifiers.get(identifier), fetchOptions);
 }
 
 /**

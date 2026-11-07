@@ -288,26 +288,6 @@ export default class IdentifiersRegistry {
   }
 
   /**
-   * Get a canonical Document from its identifier.
-   * @param {TypedIdentifier} identifier
-   * @param {Teriock.System.GlobalFetchOptions} [options]
-   * @returns {Promise<IdentifiableDocument|null>}
-   */
-  async fromIdentifier(identifier, options = {}) {
-    return foundry.utils.fromUuid(this.get(identifier), options);
-  }
-
-  /**
-   * Get a canonical Document from its identifier synchronously.
-   * @param {TypedIdentifier} identifier
-   * @param {Teriock.System.SyncFetchOptions} [options]
-   * @returns {IdentifiableDocument|null}
-   */
-  fromIdentifierSync(identifier, options = {}) {
-    return foundry.utils.fromUuidSync(this.get(identifier), options);
-  }
-
-  /**
    * Get the UUID for the canonical Document associated with an identifier.
    * @param {TypedIdentifier} identifier
    * @param {CanonicalLookupOptions} [options]

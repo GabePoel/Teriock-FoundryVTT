@@ -1,4 +1,5 @@
 import { TypedIdentifierField } from "../../data/fields/_module.mjs";
+import { fromIdentifierSync } from "../../utils/_module.mjs";
 
 const { TableResultConfig } = foundry.applications.sheets;
 
@@ -11,9 +12,7 @@ export default class TeriockTableResultConfig extends TableResultConfig {
     }
     super.prepareResultUpdateData(data);
     if (foundry.utils.hasProperty(data, "flags.teriock.documentIdentifier") && !data.documentUuid) {
-      const doc = game.teriock.identifiers.fromIdentifierSync(
-        foundry.utils.getProperty(data, "flags.teriock.documentIdentifier"),
-      );
+      const doc = fromIdentifierSync(foundry.utils.getProperty(data, "flags.teriock.documentIdentifier"));
       if (doc) {
         data.name = doc.name ?? "";
         data.img = doc.img ?? null;

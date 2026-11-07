@@ -124,9 +124,7 @@ export default class TeriockHotbar extends Hotbar {
       onClick: async (_ev, li) => {
         const macro = this.#getMacroForSlot(li);
         const uuid = macro.getFlag("teriock", "macroAction") === "useMatches"
-          ? (await findBestDocument(macro.getFlag("teriock", "macroMatchesIdentifier"), game.actors.default, {
-            relativeOnly: false,
-          }))?.uuid
+          ? (await findBestDocument(macro.getFlag("teriock", "macroMatchesIdentifier"), game.actors.default))?.uuid
           : macro.getFlag("teriock", "macroDocumentUuid");
         if (uuid) { await this.constructor.toggleDocumentSheet(uuid); }
       },
