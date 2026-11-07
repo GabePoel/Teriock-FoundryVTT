@@ -10,9 +10,7 @@ import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
 export default class TradecraftCheckExecution extends mixClasses(BaseExecution, TradecraftExecutionMixin) {
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Tradecraft.name", {
-      value: TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft]?.label,
-    });
+    return this.source.useText;
   }
 
   /** @inheritDoc */

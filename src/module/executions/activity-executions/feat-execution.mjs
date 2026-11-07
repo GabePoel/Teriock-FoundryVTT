@@ -47,7 +47,7 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
 
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.CONFIG.attribute[this.attribute]?.label });
+    return this.source.useText;
   }
 
   /** @inheritDoc */
