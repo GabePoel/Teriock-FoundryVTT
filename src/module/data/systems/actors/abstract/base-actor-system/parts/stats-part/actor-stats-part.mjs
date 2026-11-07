@@ -233,7 +233,7 @@ export default function ActorStatsPart(Base) {
     prepareStatDice() {
       const items = [
         ...this.parent.previewedTypes.species.sort(pathSorterFactory("name")),
-        ...this.parent.previewedTypes.rank.sort(pathSorterFactory("_stats.createdTime")),
+        ...this.parent.previewedTypes.rank.sort(pathSorterFactory("sort", "_stats.createdTime")),
         ...this.parent.previewed.filter(d => d.metadata.tags.simple).sort(pathSorterFactory("name")),
         ...this.parent.previewedTypes.mount.sort(pathSorterFactory("name")),
       ];

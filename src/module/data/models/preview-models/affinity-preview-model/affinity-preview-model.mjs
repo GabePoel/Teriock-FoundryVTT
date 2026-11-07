@@ -18,7 +18,6 @@ export default class AffinityPreviewModel extends BasePreviewModel {
         label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
         sorter: pathSorterFactory("categoryLabel"),
       },
-      default: { label: "COMMON.Default", sorter: pathSorterFactory("sort") },
       name: { label: "DOCUMENT.FIELDS.name.label", sorter: pathSorterFactory("name") },
       type: { label: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label", sorter: pathSorterFactory("typeLabel") },
     };

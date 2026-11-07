@@ -31,6 +31,12 @@ export default function DragDropSheetMixin(Base) {
     };
 
     /**
+     * The entry being sorted, along with where it started.
+     * @type {{ element: HTMLElement, next: Element|null, parent: HTMLElement }|null}
+     */
+    #sortSource = null;
+
+    /**
      * Whether a drop should be performed by moving a sub.
      * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @param {Teriock.Application.DropEffect} dropEffect
@@ -66,6 +72,36 @@ export default function DragDropSheetMixin(Base) {
     }
 
     /**
+     * Sort a dragged Document or PseudoDocument to where its entry was dropped.
+     * @param {{ element: HTMLElement, next: Element|null }} sortSource
+     * @returns {Promise<void>}
+     */
+    async #onSortDrop({ element, next }) {
+      if (!element.isConnected || element.nextElementSibling === next) { return; }
+      const elements = Array.from(element.parentElement.children).filter(el => el.dataset.uuid);
+      if (element.parentElement.hasAttribute("data-sort-descending")) { elements.reverse(); }
+      const docs = elements.map(el => this.document.fetchFromUuidSync(el.dataset.uuid));
+      const index = elements.indexOf(element);
+      const source = docs[index];
+      const target = docs[index + 1] ?? docs[index - 1];
+      if (!source || !target) { return; }
+      const siblings = docs.filter(d => d && d !== source);
+      const sorting = foundry.utils.performIntegerSort(source, {
+        siblings,
+        sortBefore: target === docs[index + 1],
+        target,
+      });
+      const groups = Map.groupBy(
+        sorting,
+        s => s.target instanceof foundry.abstract.Document ? s.target.parent : s.target.controller,
+      );
+      for (const [parent, group] of groups) {
+        const { constructor: cls, pack } = group[0].target;
+        await cls.updateDocuments(group.map(s => ({ _id: s.target.id, ...s.update })), { pack, parent });
+      }
+    }
+
+    /**
      * The sup a dropped document would be given by a sub move.
      * @param {TeriockActiveEffect|TeriockActor|TeriockItem} droppedDocument
      * @returns {ID<TeriockActiveEffect|TeriockActor|TeriockItem>|null}
@@ -85,24 +121,58 @@ export default function DragDropSheetMixin(Base) {
 
     /** @inheritDoc */
     _dropEffect() {
-      if (TeriockDragDrop.dragStartApplication === this) { return "none"; }
+      if (TeriockDragDrop.dragStartApplication === this) {
+        return this.#sortSource?.element.isConnected ? "move" : "none";
+      }
       const dropEffect = this._payloadDropEffect();
       return this._validateDrop({ dropEffect, notify: false }) ? dropEffect : "none";
+    }
+
+    /** @inheritDoc */
+    async _onDragEnd(event) {
+      // A drag that didn't sort just puts the entry back where it started.
+      if (this.#sortSource) {
+        const { element, next, parent } = this.#sortSource;
+        element.classList.remove("teriock-sort-placeholder");
+        if (!next || next.parentElement === parent) { parent.insertBefore(element, next); }
+        this.#sortSource = null;
+      }
+      await super._onDragEnd(event);
+    }
+
+    /** @inheritDoc */
+    async _onDragOver(event) {
+      await super._onDragOver(event);
+      const source = this.#sortSource?.element;
+      const element = event.target.closest?.("[data-sort-container] > [data-uuid]");
+      if (!source || !element || element === source || element.parentElement !== source.parentElement) { return; }
+      if (this._fieldDropTarget(event)) { return; }
+      const rect = element.getBoundingClientRect();
+      const before = event.clientY < rect.top + (rect.height / 2);
+      if ((before ? element.previousElementSibling : element.nextElementSibling) === source) { return; }
+      element[before ? "before" : "after"](source);
     }
 
     /** @inheritDoc */
     _onDragStart(event) {
       if (event.dataTransfer.effectAllowed === "uninitialized") { event.dataTransfer.effectAllowed = "copyMove"; }
       super._onDragStart(event);
+      const element = event.currentTarget?.closest?.("[data-sort-container] > [data-uuid]");
+      if (!this.isEditable || !element || element.dataset.uuid !== event.currentTarget.dataset.uuid) { return; }
+      this.#sortSource = { element, next: element.nextElementSibling, parent: element.parentElement };
+      setTimeout(() => {
+        if (this.#sortSource?.element === element) { element.classList.add("teriock-sort-placeholder"); }
+      });
     }
 
     /** @inheritDoc */
     async _onDrop(event) {
+      const sortSource = this.#sortSource;
+      this.#sortSource = null;
+      sortSource?.element.classList.remove("teriock-sort-placeholder");
       await super._onDrop(event);
-      if (this.options.teriock.dragDrop.dropBehavior.child) {
-        const dropData = TeriockTextEditor.getDragEventData(event);
-        if (CHILD_DOCUMENT_TYPES.includes(dropData.type)) { await this._onDropChild(event, dropData); }
-      }
+      if (sortSource) { return this.#onSortDrop(sortSource); }
+      await this._onDropData(event, TeriockTextEditor.getDragEventData(event));
     }
 
     /**
@@ -137,6 +207,18 @@ export default function DragDropSheetMixin(Base) {
         });
       }
       await foundry.documents.modifyBatch(operations.filter(Boolean));
+    }
+
+    /**
+     * Data from outside the sheet being dropped into it.
+     * @param {DragEvent} event
+     * @param {Teriock.Application.DropData<*>} dropData
+     * @returns {Promise<void>}
+     */
+    async _onDropData(event, dropData) {
+      if (this.options.teriock.dragDrop.dropBehavior.child && CHILD_DOCUMENT_TYPES.includes(dropData.type)) {
+        await this._onDropChild(event, dropData);
+      }
     }
 
     /** @inheritDoc */

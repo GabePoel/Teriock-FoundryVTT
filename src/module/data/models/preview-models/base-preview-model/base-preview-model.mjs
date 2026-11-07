@@ -55,6 +55,7 @@ export default class BasePreviewModel extends BaseDataModel {
       age: { label: "TERIOCK.COMMON.Age", sorter: pathSorterFactory("_stats.createdTime") },
       competence: { label: "TERIOCK.COMMON.Competence", sorter: pathSorterFactory("system.competence.raw") },
       kind: { label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label", sorter: pathSorterFactory("system.kindIndex") },
+      manual: { label: "FOLDER.SortManual", sorter: pathSorterFactory("sort") },
       name: { label: "DOCUMENT.FIELDS.name.label", sorter: pathSorterFactory("name") },
     };
   }
@@ -234,6 +235,7 @@ export default class BasePreviewModel extends BaseDataModel {
     return (this.groups ?? []).filter(group => !group.optional || group.docs?.length).map(group => ({
       docs: this.#prepareDocuments(group.docs ?? []),
       empty: group.empty,
+      sortable: this.sort.option === "manual" && (group.sortable ?? true),
     }));
   }
 
@@ -324,6 +326,8 @@ export default class BasePreviewModel extends BaseDataModel {
       }
       container.classList.toggle("gapless", this.display.gapless);
       for (const size of sizes) { container.classList.toggle(size, size === this.display.size); }
+      container.toggleAttribute("data-sort-container", group.sortable);
+      container.toggleAttribute("data-sort-descending", !this.sort.ascending);
     });
   }
 

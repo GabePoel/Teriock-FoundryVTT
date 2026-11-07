@@ -39,6 +39,9 @@ export default function DragDropApplicationMixin(Base) {
     /** @type {boolean} */
     #dragIsInApplication = false;
 
+    /** @type {boolean} */
+    #minimizeOnDragLeave = false;
+
     /** @type {Map<string, string|null>} */
     #tabsBeforeDrag = new Map();
 
@@ -157,6 +160,7 @@ export default function DragDropApplicationMixin(Base) {
      */
     async _onDragEnd(_event) {
       this.#dragIsInApplication = false;
+      this.#minimizeOnDragLeave = false;
       this.bringToFront();
       if (this.#shouldMinimizeOnDragStart && !this.#wasMinimizedBeforeDragStart) { await this.maximize(); }
     }
@@ -198,10 +202,20 @@ export default function DragDropApplicationMixin(Base) {
 
     /**
      * Handles the drag leaving the application. This is also used if the drag ends somewhere outside the application.
+     * @param {DragEvent} [event]
      * @returns {Promise<void>}
      */
-    async _onDragLeaveApplication() {
+    async _onDragLeaveApplication(event) {
       this.#dragIsInApplication = false;
+      if (this.#minimizeOnDragLeave && event?.type === "dragleave") {
+        // Minimize only if drag is still ongoing.
+        setTimeout(() => {
+          if (!this.#minimizeOnDragLeave || this.#dragIsInApplication) { return; }
+          if (DragDrop.implementation.dragStartApplication !== this) { return; }
+          this.#minimizeOnDragLeave = false;
+          this.minimize();
+        }, 100);
+      }
       for (const [group, tab] of this.#tabsBeforeDrag) { if (tab) { this._safeChangeTab(tab, group); } }
       this.#tabsBeforeDrag.clear();
       if (this.options.teriock.dragDrop.style.styleDropTarget) {
@@ -220,8 +234,8 @@ export default function DragDropApplicationMixin(Base) {
     async _onDragOver(event) {
       event.dataTransfer.dropEffect = this._fieldDropTarget(event) ? "copy" : this._dropEffect(event);
       if (this.options.teriock.dragDrop.style.styleDropTarget) {
-        // Field drop targets receive the drop themselves, so the sheet shouldn't be marked while over one.
-        const marked = event.dataTransfer.dropEffect !== "none" && !this._fieldDropTarget(event);
+        const marked = event.dataTransfer.dropEffect !== "none" && !this._fieldDropTarget(event)
+          && DragDrop.implementation.dragStartApplication !== this;
         this._dropTargetElement?.classList.toggle(this.options.teriock.dragDrop.style.dropTargetClass, marked);
       }
     }
@@ -234,10 +248,14 @@ export default function DragDropApplicationMixin(Base) {
       if (event.dataTransfer.effectAllowed === "uninitialized") { event.dataTransfer.effectAllowed = "copy"; }
       DragDrop.implementation.dragStartApplication = this;
       if (this.#shouldMinimizeOnDragStart) { this.#wasMinimizedBeforeDragStart = this.hasFrame && this.minimized; }
-      setTimeout(() => {
-        if (DragDrop.implementation.dragStartApplication !== this) { return; }
-        if (this.#shouldMinimizeOnDragStart && !this.#wasMinimizedBeforeDragStart) { this.minimize(); }
-      }, 100);
+      const minimize = this.#shouldMinimizeOnDragStart && !this.#wasMinimizedBeforeDragStart;
+      // Special handling so that if sorting can happen within this application then we only minimize when we leave.
+      if (event.currentTarget?.closest?.("[data-sort-container]")) { this.#minimizeOnDragLeave = minimize; }
+      else {
+        setTimeout(() => {
+          if (DragDrop.implementation.dragStartApplication === this && minimize) { this.minimize(); }
+        }, 100);
+      }
       const uuid = event.currentTarget?.dataset?.uuid;
       if (uuid) {
         const doc = foundry.utils.fromUuidSync(uuid, { strict: false });

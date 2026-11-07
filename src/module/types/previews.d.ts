@@ -3,7 +3,7 @@ import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 
 declare global {
   namespace Teriock.Previews {
-    /** A raw group definition for a preview, as produced by a {@link PreviewGroupBuilder} before arrangement. */
+    /** A raw group definition for a preview. This is made by {@link PreviewGroupBuilder} before any arrangement. */
     export type PreviewGroup = {
       /** The entries in a preview group. */
       docs: Teriock.Embeds.Embeddable[];
@@ -11,6 +11,8 @@ declare global {
       empty: string;
       /** Whether the group is hidden entirely when it has no documents. */
       optional?: boolean;
+      /** Whether the group's entries can be sorted manually. Defaults to `true`. */
+      sortable?: boolean;
     };
 
     /** A single arranged preview within a {@link RenderedPreviewGroup}. */
@@ -21,15 +23,17 @@ declare global {
       hidden: boolean;
     };
 
-    /** A group after arrangement (filtering/sorting/search), ready to render. */
+    /** A group that's ready to render after arrangement (filtering/sorting/search). */
     export type RenderedPreviewGroup = {
       /** The arranged cards, in DOM order. */
       docs: Teriock.Previews.RenderedPreviewEntry[];
       /** The "no results" label for the group. */
       empty: string;
+      /** Whether the group's entries can be sorted by dragging. */
+      sortable: boolean;
     };
 
-    /** Transient collapse open-states for a preview's block/sort/filter menus, set by the sheet. */
+    /** Transient collapse open-states for a preview's block/sort/filter menus. */
     export type PreviewToggles = { block: boolean, filter: boolean, sort: boolean };
 
     /**

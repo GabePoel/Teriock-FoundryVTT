@@ -31,19 +31,19 @@ export default class SourcePseudoCollection extends PseudoCollection {
    */
   initialize(model, options = {}) {
     this.model = model;
-    const ids = new Set();
-    for (const data of Object.values(this._source)) {
+    const pseudos = [];
+    for (const data of Object.values(this._source).sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))) {
       let pseudo = this.get(data?._id);
       if (pseudo?._source === data) { pseudo._initialize(options); }
       else {
         pseudo = this.field.element.initialize(data, model, options);
         if (!(pseudo instanceof BasePseudoDocument)) { continue; }
-        this.set(pseudo.id, pseudo);
       }
-      ids.add(pseudo.id);
+      pseudos.push(pseudo);
     }
-    if (this.size !== ids.size) {
-      for (const id of [...this.keys()]) { if (!ids.has(id)) { this.delete(id); } }
-    }
+    const keys = this.keys();
+    if (pseudos.length === this.size && pseudos.every(p => keys.next().value === p.id)) { return; }
+    this.clear();
+    for (const pseudo of pseudos) { this.set(pseudo.id, pseudo); }
   }
 }

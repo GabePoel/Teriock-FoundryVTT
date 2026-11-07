@@ -1,5 +1,5 @@
 import { makeIcon, makeIconClass, mixClasses } from "../../../../utils/_module.mjs";
-import { TeriockDragDrop, TeriockTextEditor } from "../../../ux/_module.mjs";
+import { TeriockDragDrop } from "../../../ux/_module.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
@@ -80,7 +80,7 @@ export default function MechanicsSheetMixin(Base) {
       if (!config) { return; }
       const types = Object.keys(config.types);
       if (!types.length) { return; }
-      await config.baseClass.createDialog({}, { parent: this.document }, {
+      await config.baseClass.createDialog({ sort: this.#nextSort(config.collection) }, { parent: this.document }, {
         types,
         window: { icon: makeIconClass(config.icon, "title") },
       });
@@ -119,6 +119,15 @@ export default function MechanicsSheetMixin(Base) {
       const set = new Set(foundry.utils.getProperty(this.document._source, path));
       if (!set.delete(term)) { set.add(term); }
       await this.document.update({ [path]: Array.from(set) });
+    }
+
+    /**
+     * The next sort value for a newly added mechanic in a collection.
+     * @param {Collection<MechanicPseudoDocument>} collection
+     * @returns {number}
+     */
+    #nextSort(collection) {
+      return Math.max(0, ...collection.map(m => m.sort)) + CONST.SORT_INTEGER_DENSITY;
     }
 
     /** @inheritDoc */
@@ -179,9 +188,8 @@ export default function MechanicsSheetMixin(Base) {
     }
 
     /** @inheritDoc */
-    async _onDrop(event) {
-      await super._onDrop(event);
-      const dropData = TeriockTextEditor.getDragEventData(event);
+    async _onDropData(event, dropData) {
+      await super._onDropData(event, dropData);
       await this._onDropMechanic(event, dropData);
     }
 
@@ -192,11 +200,14 @@ export default function MechanicsSheetMixin(Base) {
      * @returns {Promise<boolean>} Whether the drop was handled.
      */
     async _onDropMechanic(_event, dropData) {
-      const baseClass = this._mechanicCollectionFor(dropData.type)?.baseClass;
-      if (!baseClass) { return false; }
-      const pseudo = await baseClass.fromDropData(dropData);
+      const config = this._mechanicCollectionFor(dropData.type);
+      if (!config) { return false; }
+      const pseudo = await config.baseClass.fromDropData(dropData);
       if (!pseudo || !this._validateDrop({ document: pseudo })) { return false; }
-      await this.document.createPseudoDocuments(pseudo.documentName, [pseudo.toObject()]);
+      await this.document.createPseudoDocuments(pseudo.documentName, [{
+        ...pseudo.toObject(),
+        sort: this.#nextSort(config.collection),
+      }]);
       return true;
     }
 

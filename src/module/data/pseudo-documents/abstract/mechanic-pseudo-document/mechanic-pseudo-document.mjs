@@ -32,6 +32,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
     return Object.assign(super.defineSchema(), {
       activeQualifier: qualifierField({ initial: "1" }),
       disabledToggles: new fields.SetField(new fields.StringField()),
+      sort: new fields.IntegerSortField(),
     });
   }
 

@@ -5,10 +5,20 @@
   outline-offset: -6px;
 }
 
-.teriock-drop-target {
+.teriock-drop-target,
+.teriock-sort-placeholder {
   --color-drop-target-glow: color-mix(in srgb, var(--color-warm-2), transparent 80%);
   --color-drop-target-outline: color-mix(in srgb, var(--color-warm-2), transparent 25%);
+}
+
+.teriock-drop-target {
   @include drop-target-marking;
+}
+
+.teriock-sort-placeholder {
+  opacity: 0.5;
+  outline: 2px dashed var(--color-drop-target-outline);
+  outline-offset: -2px;
 }
 
 .teriock-drop-target .actor-page::after {

@@ -9,6 +9,7 @@ declare global {
     export type MechanicPseudoDocumentData = {
       activeQualifier: Teriock.System.FormulaString;
       disabledToggles: Set<string>;
+      sort: number;
     };
   }
 }

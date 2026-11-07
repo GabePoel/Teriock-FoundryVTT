@@ -41,7 +41,11 @@ export default function PlayableActorSheetSectionsPart(Base) {
       return [{
         docs: this.document.previewed.getTypeSync("ability").filter(a => !a.system.isBasic),
         empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.nonBasic"),
-      }, { docs: game.teriock.basicAbilities, empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.basic") }];
+      }, {
+        docs: game.teriock.basicAbilities,
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.basic"),
+        sortable: false,
+      }];
     }
 
     /**

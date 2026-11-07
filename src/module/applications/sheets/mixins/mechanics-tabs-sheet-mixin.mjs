@@ -55,8 +55,8 @@ export default function MechanicsTabsSheetMixin(Base) {
     }
 
     /** @inheritDoc */
-    async _onDragLeaveApplication() {
-      await super._onDragLeaveApplication();
+    async _onDragLeaveApplication(event) {
+      await super._onDragLeaveApplication(event);
       if (!this.#tabBeforeDrag) { return; }
       const tab = this.#tabBeforeDrag;
       this.#tabBeforeDrag = null;
