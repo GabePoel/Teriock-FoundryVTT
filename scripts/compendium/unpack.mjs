@@ -168,6 +168,7 @@ function cleanEntry(doc) {
   if (doc.system) {
     for (const key of PSEUDO_COLLECTION_KEYS) {
       if (doc.system[key]) {
+        for (const m of Object.values(doc.system[key])) { delete m.sort; }
         const sorted = sortMechanics(doc.system[key]);
         if (sorted) { doc.system[key] = sorted; }
       }
