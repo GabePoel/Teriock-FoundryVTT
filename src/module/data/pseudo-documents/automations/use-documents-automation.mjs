@@ -1,16 +1,13 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
+import { expandSelectionSchema, localSelectionSchema } from "../../fields/tools/builders.mjs";
 import { UseDocumentsActivation } from "../activations/_module.mjs";
-import {
-  OverrideCompetencePseudoDocumentMixin,
-  OverrideDataPseudoDocumentMixin,
-  SelectionPseudoDocumentMixin,
-} from "../mixins/_module.mjs";
+import { OverrideCompetencePseudoDocumentMixin, OverrideDataPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import { TriggerAutomationMixin } from "./mixins/_module.mjs";
+import { SelectionAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 /**
  * @extends {BaseAutomation}
- * @mixes SelectionPseudoDocument
+ * @mixes SelectionAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataPseudoDocument
@@ -18,7 +15,7 @@ import { TriggerAutomationMixin } from "./mixins/_module.mjs";
 export default class UseDocumentsAutomation
   extends mixClasses(
     BaseAutomation,
-    SelectionPseudoDocumentMixin,
+    SelectionAutomationMixin,
     TriggerAutomationMixin,
     OverrideCompetencePseudoDocumentMixin,
     OverrideDataPseudoDocumentMixin,
@@ -33,11 +30,10 @@ export default class UseDocumentsAutomation
     type: "useDocuments",
   });
 
-  /**
-   * The selection made during an execution. This is `undefined` if no selection has been made.
-   * @type {{ config: object, document: TeriockDocument|null }|null|undefined}
-   */
-  #selection;
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), expandSelectionSchema(), localSelectionSchema());
+  }
 
   /** @inheritDoc */
   get _formPaths() {
@@ -55,9 +51,7 @@ export default class UseDocumentsAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selection = this.#selection === undefined
-      ? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor })
-      : this.#selection;
+    const selection = await this._resolveSelection(options);
     if (!selection) { return []; }
     const display = {};
     if (selection.document) {
@@ -70,11 +64,6 @@ export default class UseDocumentsAutomation
   /** @inheritDoc */
   _isSelectable(document) {
     return typeof document?.use === "function";
-  }
-
-  /** @inheritDoc */
-  async cleanupExecution() {
-    this.#selection = undefined;
   }
 
   /**
@@ -95,17 +84,10 @@ export default class UseDocumentsAutomation
   async interactOnExecutionCompletion(execution) {
     if (!this.useInExecution) { return; }
     const useOptions = this.getUseOptions({ execution });
-    const uuids = this.#selection?.config.globalUuids ?? [];
+    const uuids = this._executionSelection?.config.globalUuids ?? [];
     const documents = await Promise.all(uuids.map(uuid => fromUuid(uuid)));
     for (const document of documents.filter(Boolean)) {
       await document.use({ ...useOptions, actor: execution.actor });
     }
-  }
-
-  /** @inheritDoc */
-  async interactOnExecutionInput(execution) {
-    const selection = this.interactInExecution ? await this._getSelection({ relativeTo: execution.actor }) : undefined;
-    if (selection === false) { return false; }
-    this.#selection = selection;
   }
 }

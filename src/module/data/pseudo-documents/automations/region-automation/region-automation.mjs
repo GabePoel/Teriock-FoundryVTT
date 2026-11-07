@@ -1,8 +1,8 @@
-import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
-import { terrainSchema } from "../../../fields/tools/builders.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { localSelectionSchema, terrainSchema } from "../../../fields/tools/builders.mjs";
 import { RegionActivation } from "../../activations/_module.mjs";
-import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
-import { TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
+import { SelectionAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 import TargetAutomation from "../target-automation/target-automation.mjs";
 
 const { fields } = foundry.data;
@@ -10,14 +10,14 @@ const { fields } = foundry.data;
 /**
  * A region that is placed from a button.
  * @extends {TargetAutomation}
- * @mixes SelectionPseudoDocument
+ * @mixes SelectionAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideDataPseudoDocument
  */
 export default class RegionAutomation
   extends mixClasses(
     TargetAutomation,
-    SelectionPseudoDocumentMixin,
+    SelectionAutomationMixin,
     TriggerAutomationMixin,
     OverrideDataPseudoDocumentMixin,
   )
@@ -30,7 +30,7 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
+    return Object.assign(super.defineSchema(), localSelectionSchema(), {
       applyDocuments: new fields.BooleanField({ initial: false }),
       deleteOnTurnChange: new fields.BooleanField({ initial: true }),
       setTerrain: new fields.BooleanField({ initial: false }),
@@ -54,12 +54,6 @@ export default class RegionAutomation
     }
     return super.migrateData(source, options);
   }
-
-  /**
-   * The selection made during an execution. This is `undefined` if no selection has been made.
-   * @type {{ config: object, document: TeriockDocument|null }|null|undefined}
-   */
-  #selection;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -99,19 +93,11 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async _getActivations(options = { rollData: {} }) {
-    let selection = { config: {} };
-    if (this.hasSelection) {
-      selection = this.#selection === undefined
-        ? await this._getSelection({ relativeTo: options.execution?.actor ?? this.actor })
-        : this.#selection;
-    }
+    const selection = this.hasSelection
+      ? await this._resolveSelection({ execution: options.execution })
+      : { config: {} };
     if (!selection) { return []; }
     return [await this._buildRegionActivation(options, selection.config)];
-  }
-
-  /** @inheritDoc */
-  async cleanupExecution() {
-    this.#selection = undefined;
   }
 
   /** @inheritDoc */
@@ -135,14 +121,5 @@ export default class RegionAutomation
       });
     }
     return data;
-  }
-
-  /** @inheritDoc */
-  async interactOnExecutionInput(execution) {
-    const selection = this.interactInExecution && this.hasSelection
-      ? await this._getSelection({ relativeTo: execution.actor })
-      : undefined;
-    if (selection === false) { return false; }
-    this.#selection = selection;
   }
 }

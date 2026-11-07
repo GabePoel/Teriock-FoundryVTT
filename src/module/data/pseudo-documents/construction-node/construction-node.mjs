@@ -1,7 +1,8 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mergeMetadata, mixClasses, omit, toId } from "../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses, toId } from "../../../utils/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
+import { localSelectionSchema } from "../../fields/tools/builders.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
 import { PseudoCollection } from "../collections/_module.mjs";
 import {
@@ -40,7 +41,7 @@ export default class ConstructionNode
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["expandFolders", "expandTables"]), {
+    return Object.assign(super.defineSchema(), localSelectionSchema(), {
       name: new fields.StringField({ placeholder: _loc(this.typeLabel) }),
       parentId: new fields.DocumentIdField({ initial: null, nullable: true, readonly: false }),
     });

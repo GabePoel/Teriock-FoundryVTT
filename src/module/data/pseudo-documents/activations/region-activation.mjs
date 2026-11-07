@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses, omit } from "../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
@@ -17,10 +17,10 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(
-      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
-      { attachToToken: new fields.BooleanField(), data: new fields.ObjectField() },
-    );
+    return Object.assign(super.defineSchema(), {
+      attachToToken: new fields.BooleanField(),
+      data: new fields.ObjectField(),
+    });
   }
 
   /** @inheritDoc */

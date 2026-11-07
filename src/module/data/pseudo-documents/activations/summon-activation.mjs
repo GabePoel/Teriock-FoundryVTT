@@ -1,5 +1,5 @@
 import { TeriockActor, TeriockFolder, TeriockTokenDocument } from "../../../documents/_module.mjs";
-import { mergeMetadata, mixClasses, omit, toId } from "../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses, toId } from "../../../utils/_module.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
@@ -28,14 +28,11 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(
-      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
-      {
-        addToCombat: new fields.BooleanField(),
-        addToGroup: new fields.StringField({ initial: null, nullable: true }),
-        data: new fields.ObjectField(),
-      },
-    );
+    return Object.assign(super.defineSchema(), {
+      addToCombat: new fields.BooleanField(),
+      addToGroup: new fields.StringField({ initial: null, nullable: true }),
+      data: new fields.ObjectField(),
+    });
   }
 
   /** @type {SummonNode[]} */

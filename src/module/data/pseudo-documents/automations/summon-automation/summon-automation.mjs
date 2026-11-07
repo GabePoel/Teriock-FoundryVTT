@@ -1,25 +1,20 @@
-import { mergeMetadata, mixClasses, objectMap, omit } from "../../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { SummonActivation } from "../../activations/_module.mjs";
-import { OverrideDataPseudoDocumentMixin, SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
+import { OverrideDataPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
-import { TriggerAutomationMixin } from "../mixins/_module.mjs";
+import { SelectionAutomationMixin, TriggerAutomationMixin } from "../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
- * @mixes SelectionPseudoDocument
+ * @mixes SelectionAutomation
  * @mixes TriggerAutomation
  * @mixes OverrideDataPseudoDocument
  */
 export default class SummonAutomation
-  extends mixClasses(
-    BaseAutomation,
-    SelectionPseudoDocumentMixin,
-    TriggerAutomationMixin,
-    OverrideDataPseudoDocumentMixin,
-  )
+  extends mixClasses(BaseAutomation, SelectionAutomationMixin, TriggerAutomationMixin, OverrideDataPseudoDocumentMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
@@ -29,30 +24,21 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(
-      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
-      {
-        addToCombat: new fields.BooleanField(),
-        addToGroup: new fields.StringField({
-          blank: true,
-          initial: null,
-          nullable: true,
-          choices: () =>
-            objectMap(CONFIG.CombatantGroup.dataModels, (_v, k) => CONFIG.CombatantGroup.typeLabels[k], {
-              localize: true,
-              none: true,
-            }),
-        }),
-        globalIdentifiers: new TypedIdentifierSetField({ types: Actor.implementation.TYPES.filter(a => a !== "base") }),
-      },
-    );
+    return Object.assign(super.defineSchema(), {
+      addToCombat: new fields.BooleanField(),
+      addToGroup: new fields.StringField({
+        blank: true,
+        initial: null,
+        nullable: true,
+        choices: () =>
+          objectMap(CONFIG.CombatantGroup.dataModels, (_v, k) => CONFIG.CombatantGroup.typeLabels[k], {
+            localize: true,
+            none: true,
+          }),
+      }),
+      globalIdentifiers: new TypedIdentifierSetField({ types: Actor.implementation.TYPES.filter(a => a !== "base") }),
+    });
   }
-
-  /**
-   * The selection made during an execution. `undefined` if none has been made.
-   * @type {{ config: object, document: TeriockDocument|null }|null|undefined}
-   */
-  #selection;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -70,9 +56,7 @@ export default class SummonAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    const selection = this.#selection === undefined
-      ? await this._getSelection({ relativeTo: options.execution?.actor ?? options.actor ?? this.actor })
-      : this.#selection;
+    const selection = await this._resolveSelection(options);
     if (!selection) { return []; }
     const display = {};
     if (selection.document) {
@@ -94,17 +78,5 @@ export default class SummonAutomation
   /** @inheritDoc */
   _isSelectable(document) {
     return document?.documentName === "Actor";
-  }
-
-  /** @inheritDoc */
-  async cleanupExecution() {
-    this.#selection = undefined;
-  }
-
-  /** @inheritDoc */
-  async interactOnExecutionInput(execution) {
-    const selection = this.interactInExecution ? await this._getSelection({ relativeTo: execution.actor }) : undefined;
-    if (selection === false) { return false; }
-    this.#selection = selection;
   }
 }

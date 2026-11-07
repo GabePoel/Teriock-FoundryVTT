@@ -1,4 +1,4 @@
-import { FormulaField, IdentifierField } from "../_module.mjs";
+import { FormulaField, IdentifierField, TypedIdentifierSetField } from "../_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../utils/_module.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
@@ -304,6 +304,26 @@ function deathBagStoneField(color, number, options = {}) {
     nullable: false,
     ...options,
   });
+}
+
+/**
+ * Selection fields for expanding folders and tables.
+ * @returns {Record<string, BooleanField>}
+ */
+export function expandSelectionSchema() {
+  return { expandFolders: new BooleanField({ initial: true }), expandTables: new BooleanField({ initial: true }) };
+}
+
+/**
+ * Selection fields that resolve relative to a local document.
+ * @returns {Record<string, FormulaField | SetField>}
+ */
+export function localSelectionSchema() {
+  return {
+    localIdentifiers: new TypedIdentifierSetField(),
+    localQualifier: qualifierField(),
+    localUuids: new SetField(new DocumentUUIDField({ relative: true })),
+  };
 }
 
 /**

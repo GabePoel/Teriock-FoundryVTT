@@ -4,7 +4,6 @@ import PiercingModel from "../../../data/models/piercing-model/piercing-model.mj
 declare global {
   namespace Teriock.Execution {
     export interface AttackExecutionData {
-      consumeAmmunition: boolean;
       existingAttackPenalty: number;
       incurredAttackPenalty: Teriock.System.FormulaString;
       piercing: PiercingModel;
@@ -13,7 +12,6 @@ declare global {
       vitals: boolean;
       warded: boolean;
 
-      ammunition: TeriockItem<"equipment"> | null | undefined;
       armament: TeriockItem<"body" | "equipment"> | null;
       limb: boolean;
       targets: Set<TeriockToken>;

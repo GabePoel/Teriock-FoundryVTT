@@ -1,6 +1,5 @@
 import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { FormulaField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
-import { qualifierField } from "../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
 
@@ -40,13 +39,8 @@ export default function SelectionPseudoDocumentMixin(Base) {
       return Object.assign(super.defineSchema(), {
         all: new fields.BooleanField(),
         auto: new fields.BooleanField({ initial: true }),
-        expandFolders: new fields.BooleanField({ initial: true }),
-        expandTables: new fields.BooleanField({ initial: true }),
         globalIdentifiers: new TypedIdentifierSetField(),
         globalUuids: new fields.SetField(new fields.DocumentUUIDField()),
-        localIdentifiers: new TypedIdentifierSetField(),
-        localQualifier: qualifierField(),
-        localUuids: new fields.SetField(new fields.DocumentUUIDField({ relative: true })),
         multi: new fields.BooleanField(),
         random: new fields.BooleanField(),
       });

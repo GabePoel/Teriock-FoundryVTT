@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { automationTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
@@ -19,15 +19,12 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(
-      omit(super.defineSchema(), ["expandFolders", "expandTables", "localIdentifiers", "localQualifier", "localUuids"]),
-      {
-        ...automationTransformationFields(),
-        globalIdentifiers: new TypedIdentifierSetField({
-          types: [...Actor.implementation.TYPES.filter(t => t !== "base"), "species"],
-        }),
-      },
-    );
+    return Object.assign(super.defineSchema(), {
+      ...automationTransformationFields(),
+      globalIdentifiers: new TypedIdentifierSetField({
+        types: [...Actor.implementation.TYPES.filter(t => t !== "base"), "species"],
+      }),
+    });
   }
 
   /** @inheritDoc */

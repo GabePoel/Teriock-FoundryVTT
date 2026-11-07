@@ -1,44 +1,41 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { getName, prefixObject } from "../../../utils/_module.mjs";
+import { getName, mixClasses } from "../../../utils/_module.mjs";
+import { AmmunitionExecutionMixin } from "../../mixins/_module.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
 const { fields } = foundry.data;
 
-export default class EquipmentExecution extends ArmamentExecution {
+/**
+ * @extends {ArmamentExecution}
+ * @mixes AmmunitionExecution
+ */
+export default class EquipmentExecution extends mixClasses(ArmamentExecution, AmmunitionExecutionMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Equipment"];
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      consumeAmmunition: new fields.BooleanField({ initial: false }),
       inheritAmmunitionDamageTypes: new fields.BooleanField({ initial: true }),
     });
   }
 
   /** @inheritDoc */
+  get _ammunitionArmament() {
+    return this.source;
+  }
+
+  /** @inheritDoc */
   get _dialogDocuments() {
     const docs = super._dialogDocuments;
-    if (this.source.system.ammunition.enabled) {
-      docs.push({
-        document: this.ammunition,
-        editable: true,
-        label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-        nullable: true,
-        getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
-        update: ammunition => {
-          this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition);
-          this.updateSource({ formula: this._readyUpdatedFormula() });
-        },
-      });
-    }
+    if (this._usesAmmunition) { docs.push(this._ammunitionDialogDocument); }
     return docs;
   }
 
   /** @inheritDoc */
   get _formPaths() {
     const paths = super._formPaths;
-    if (this.source.system.ammunition.enabled && this.ammunition) {
+    if (this._usesAmmunition && this.ammunition) {
       paths.push("consumeAmmunition");
       if (this.dealCommands) { paths.push("inheritAmmunitionDamageTypes"); }
     }
@@ -72,7 +69,7 @@ export default class EquipmentExecution extends ArmamentExecution {
    */
   _configure(options = {}) {
     super._configure(options);
-    if (!this.source.system.ammunition.enabled) { return; }
+    if (!this._usesAmmunition) { return; }
     this.ammunition = options.ammunition?.system?.consumption?.enabled
       ? options.ammunition
       : this.source.system.defaultAmmunition;
@@ -99,36 +96,10 @@ export default class EquipmentExecution extends ArmamentExecution {
     return super._initializeSource(data, options);
   }
 
-  /**
-   * @inheritDoc
-   * @returns {Promise<false|void>}
-   */
-  async _prepareUpdates() {
-    if (
-      this.consumeAmmunition && this.source.system.ammunition.enabled && this.ammunition?.system.consumption.enabled
-      && this.ammunition.isEditable
-    ) {
-      const amount = this.source.system.ammunition.amount ?? this.ammunition.system.consumption.amount;
-      this.operations.push({
-        action: "update",
-        documentName: "Item",
-        parent: this.ammunition.parent,
-        updates: [{
-          _id: this.ammunition.id,
-          system: { quantity: { value: Math.max(0, this.ammunition.system.quantity.value - amount) } },
-        }],
-      });
-    }
-    return super._prepareUpdates();
-  }
-
   /** @inheritDoc */
   _readyUpdatedFormula() {
     const oldFormula = super._readyUpdatedFormula();
-    if (
-      this.inheritAmmunitionDamageTypes && this.source.system.ammunition.enabled
-      && this.ammunition?.system.damage.types.size
-    ) {
+    if (this.inheritAmmunitionDamageTypes && this._usesAmmunition && this.ammunition?.system.damage.types.size) {
       const rawDamage = this.twoHanded
         ? this.source.system._source.damage.twoHanded
         : this.source.system._source.damage.base;
@@ -140,12 +111,9 @@ export default class EquipmentExecution extends ArmamentExecution {
   }
 
   /** @inheritDoc */
-  getRollData() {
-    const rollData = super.getRollData();
-    if (this.source.system.ammunition.enabled && this.ammunition) {
-      Object.assign(rollData, prefixObject(this.ammunition.system.getLocalRollData(), "ammunition"));
-    }
-    return rollData;
+  _updateAmmunition(ammunition) {
+    super._updateAmmunition(ammunition);
+    this.updateSource({ formula: this._readyUpdatedFormula() });
   }
 
   /** @inheritDoc */

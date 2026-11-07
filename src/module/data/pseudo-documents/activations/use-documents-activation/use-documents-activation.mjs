@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { expandSelectionSchema, localSelectionSchema } from "../../../fields/tools/builders.mjs";
 import { SelectionPseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseActivation } from "../abstract/_module.mjs";
 
@@ -17,7 +18,9 @@ export default class UseDocumentsActivation extends mixClasses(BaseActivation, S
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { options: new fields.ObjectField() });
+    return Object.assign(super.defineSchema(), expandSelectionSchema(), localSelectionSchema(), {
+      options: new fields.ObjectField(),
+    });
   }
 
   /** @inheritDoc */

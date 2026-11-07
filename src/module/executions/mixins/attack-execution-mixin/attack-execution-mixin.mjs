@@ -1,4 +1,4 @@
-import { ThresholdExecutionMixin } from "../_module.mjs";
+import { AmmunitionExecutionMixin, ThresholdExecutionMixin } from "../_module.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { PiercingModel } from "../../../data/models/_module.mjs";
@@ -18,6 +18,7 @@ const { fields } = foundry.data;
  */
 export default function AttackExecutionMixin(Base) {
   /**
+   * @mixes AmmunitionExecution
    * @mixes ThresholdExecution
    * @mixin
    * @implements {Teriock.Execution.AttackExecutionData}
@@ -26,6 +27,7 @@ export default function AttackExecutionMixin(Base) {
     extends mixClasses(
       /** @type {InitializedDataModel<T, Teriock.Execution.AttackExecutionData>} */ (Base),
       ThresholdExecutionMixin,
+      AmmunitionExecutionMixin,
     )
   {
     /** @inheritDoc */
@@ -34,7 +36,6 @@ export default function AttackExecutionMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        consumeAmmunition: new fields.BooleanField({ initial: true }),
         existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
         incurredAttackPenalty: rollableFormulaField(),
         piercing: new fields.EmbeddedDataField(PiercingModel),
@@ -47,6 +48,11 @@ export default function AttackExecutionMixin(Base) {
 
     /** @type {number} */
     attackPenalty;
+
+    /** @inheritDoc */
+    get _ammunitionArmament() {
+      return this.isContact ? this.armament : null;
+    }
 
     /**
      * Whether an armament's warded state carries over to this.
@@ -108,16 +114,7 @@ export default function AttackExecutionMixin(Base) {
           getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
           update: armament => this._updateArmament(armament),
         });
-        if (this.armament?.system.ammunition?.enabled) {
-          docs.push({
-            document: this.ammunition,
-            editable: true,
-            label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-            nullable: true,
-            getChoices: () => this.actor?.previewedTypes.equipment.filter(e => e.system.consumption.enabled) ?? [],
-            update: ammunition => this.ammunition = /** @type {TeriockItem<"equipment">} */ (ammunition),
-          });
-        }
+        if (this._usesAmmunition) { docs.push(this._ammunitionDialogDocument); }
       }
       return docs;
     }
@@ -140,9 +137,7 @@ export default function AttackExecutionMixin(Base) {
       const paths = [];
       if (this.isAttack) { paths.push("sb", "vitals"); }
       paths.push("warded");
-      if (this.isContact && this.armament?.system.ammunition?.enabled && this.ammunition) {
-        paths.push("consumeAmmunition");
-      }
+      if (this._usesAmmunition && this.ammunition) { paths.push("consumeAmmunition"); }
       return paths;
     }
 
@@ -323,34 +318,6 @@ export default function AttackExecutionMixin(Base) {
     }
 
     /**
-     * Prepare ammunition to be consumed.
-     */
-    _prepareAmmunitionConsumption() {
-      if (
-        this.isContact && this.consumeAmmunition && this.ammunition?.system.consumption.enabled
-        && this.ammunition.isEditable
-      ) {
-        this.operations.push({
-          action: "update",
-          documentName: "Item",
-          parent: this.ammunition.parent,
-          updates: [{
-            _id: this.ammunition.id,
-            system: {
-              quantity: {
-                value: Math.max(
-                  0,
-                  this.ammunition.system.quantity.value
-                    - (this.armament?.system.ammunition?.amount ?? this.ammunition.system.consumption.amount),
-                ),
-              },
-            },
-          }],
-        });
-      }
-    }
-
-    /**
      * Prepare the attack penalty that making this attack incurs.
      * @returns {Promise<void>}
      */
@@ -366,7 +333,6 @@ export default function AttackExecutionMixin(Base) {
      */
     async _prepareUpdates() {
       await this._prepareAttackPenalty();
-      this._prepareAmmunitionConsumption();
       return super._prepareUpdates();
     }
 
@@ -434,11 +400,9 @@ export default function AttackExecutionMixin(Base) {
 
     /** @inheritDoc */
     getRollData() {
-      const usesAmmunition = this.isContact && this.armament?.system.ammunition?.enabled && this.ammunition;
       return Object.assign(
         super.getRollData(),
         prefixObject(this.armament?.system.getLocalRollData() ?? {}, "armament"),
-        usesAmmunition ? prefixObject(this.ammunition.system.getLocalRollData(), "ammunition") : {},
         {
           ap: this.existingAttackPenalty,
           av0: Number(this.piercing.av0) * 2,
