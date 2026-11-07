@@ -203,7 +203,6 @@ export function defaultJSONField(options = {}) {
 export function competenceField(options = {}) {
   return new NumberField({
     choices: TERIOCK.CONFIG.competence.levels,
-    hint: _sloc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: _sloc("TERIOCK.COMMON.Competence"),
     max: 2,

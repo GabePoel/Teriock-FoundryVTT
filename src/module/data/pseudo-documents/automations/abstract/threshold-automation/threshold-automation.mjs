@@ -1,6 +1,7 @@
 import { BaseRoll } from "../../../../../dice/rolls/_module.mjs";
 import { FormulaField } from "../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../fields/tools/builders.mjs";
+import { migrateRename } from "../../../../fields/tools/migrations.mjs";
 import BaseAutomation from "../base-automation/base-automation.mjs";
 
 export default class ThresholdAutomation extends BaseAutomation {
@@ -10,14 +11,20 @@ export default class ThresholdAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      bonus: rollableFormulaField(),
+      circumstance: rollableFormulaField(),
       threshold: new FormulaField({ blank: true, initial: null, nullable: true, placeholder: _loc("COMMON.Default") }),
     });
   }
 
   /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateRename(source, "bonus", "circumstance");
+    return super.migrateData(source, options);
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, "bonus", "threshold"];
+    return [...super._formPaths, "circumstance", "threshold"];
   }
 
   /**

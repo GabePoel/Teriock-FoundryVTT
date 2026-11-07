@@ -1,4 +1,5 @@
 import { mergeMetadata, omit } from "../../../../utils/_module.mjs";
+import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import AttackAutomation from "../../automations/attack-automation/attack-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
@@ -21,6 +22,12 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
     });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    migrateRename(source, "bonus", "circumstance");
+    return super.migrateData(source, options);
+  }
+
   /**
    * Options passed to each attack this makes.
    * @returns {Partial<Teriock.Execution.AttackExecutionOptions>}
@@ -29,7 +36,7 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
     /** @type {Partial<Teriock.Execution.AttackExecutionOptions>} */
     const options = {
       attackPenalty: this.attackPenalty || undefined,
-      bonus: this.bonus,
+      circumstance: this.circumstance,
       competence: this.competence.raw,
       event: this.event,
       threshold: typeof this.threshold === "number" ? this.threshold : undefined,

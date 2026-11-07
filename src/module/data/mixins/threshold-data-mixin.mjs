@@ -8,10 +8,8 @@ export default function ThresholdDataMixin(Base) {
   /** @mixin */
   class ThresholdData extends Base {
     /** @inheritDoc */
-    static parseEvent(event, source) {
-      const parsed = super.parseEvent(event, source);
-      parsed.data.edge = ThresholdRoll.parseEvent(event).edge;
-      return parsed;
+    static parseEvent(event) {
+      return ThresholdRoll.parseEvent(event);
     }
   }
 

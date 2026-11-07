@@ -1,6 +1,5 @@
 import { CostPayer } from "../../../applications/dialogs/_module.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { ExecutionPseudoCollection } from "../../../data/pseudo-documents/collections/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
@@ -51,7 +50,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
           ),
       }),
       noHeighten: new fields.BooleanField({ initial: false }),
-      overrideFormula: rollableFormulaField(),
       preventAttack: new fields.BooleanField(),
       preventBlockCone: new fields.BooleanField(),
       preventFeat: new fields.BooleanField(),
@@ -192,6 +190,16 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /** @inheritDoc */
+  get defaultFormula() {
+    const automations = this._orderedAutomations;
+    const override = automations.findLast(a => FormulaField.exists(a.rollFormula));
+    if (override) { return override.rollFormula; }
+    const bonuses = automations.map(a => a.rollBonus).filter(b => FormulaField.exists(b));
+    const heighten = this.competenceImprovesFormula && this.canHeighten ? "@h" : "";
+    return FormulaField.sum(super.defaultFormula, heighten, ...bonuses);
+  }
+
+  /** @inheritDoc */
   get executionNames() {
     const names = [...super.executionNames, "Ability"];
     if (this.source.system.spell) { names.push("Spell"); }
@@ -207,8 +215,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   }
 
   /** @inheritDoc */
-  get hasBonus() {
-    return this.isAttack || this.isBlock || this.isFeat;
+  get hasCircumstance() {
+    return !this.isManifest;
   }
 
   /**
@@ -258,11 +266,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   get maneuver() {
     const maneuvers = TERIOCK.CONFIG.ability.maneuver;
     return Object.keys(maneuvers).find(m => this.executionTime in maneuvers[m].executionTimes);
-  }
-
-  /** @inheritDoc */
-  get requiresCompetence() {
-    return true;
   }
 
   /** @inheritDoc */
@@ -472,14 +475,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     } else { await super._getTargets(); }
   }
 
-  /** @inheritDoc */
-  async _improveFormula() {
-    if (this.competenceImprovesFormula && this.heightened > 0) {
-      this.updateSource({ formula: FormulaField.add(this.formula, "@h") });
-    }
-    return super._improveFormula();
-  }
-
   /**
    * @inheritDoc
    * @param {Record<string, any>} data
@@ -489,6 +484,9 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   _initializeSource(data, options = {}) {
     data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
     data.consumeEquipment ??= options.source?.system.settings.getSetting("consumeEquipment");
+    const interaction = TERIOCK.CONFIG.ability.interaction[options.source?.system.interaction];
+    data.base ??= interaction?.base;
+    data.die ??= interaction?.die;
     data.executionTime ??= options.source?.system.executionTime.base;
     const source = super._initializeSource(data, options);
     const { duration, maneuver, settings, targets } = options.source.system;
@@ -512,20 +510,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         if (config?.command && !config.bar) { await this.actor.take(config.command, { amount: this.#actorCosts[c] }); }
       }
     }
-  }
-
-  /** @inheritDoc */
-  async _prepareBaseFormula() {
-    if (this.isAttack) { return super._prepareBaseFormula(); }
-    else if (this.isFeat) { this.updateSource({ formula: "10" }); }
-    else if (this.isBlock) { this.updateSource({ formula: "10 + @av + @bv" }); }
-    else { this.updateSource({ formula: "0" }); }
-  }
-
-  /** @inheritDoc */
-  async _prepareFormula() {
-    await super._prepareFormula();
-    if (FormulaField.exists(this.overrideFormula)) { this.updateSource({ formula: this.overrideFormula }); }
   }
 
   /** @inheritDoc */

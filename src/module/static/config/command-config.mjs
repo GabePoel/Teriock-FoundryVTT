@@ -639,10 +639,15 @@ const commandConfig = {
       const config = affinityConfig.types[type];
       if (!config) { return; }
       const options = { ...o, actor: a, type };
-      if (o.event) { Object.assign(options, teriock.dice.rolls.ThresholdRoll.parseEvent(o.event)); }
+      const data = { circumstance: o.circumstance, edge: o.edge };
+      if (o.event) {
+        const parsed = teriock.dice.rolls.ThresholdRoll.parseEvent(o.event);
+        Object.assign(data, parsed.data);
+        Object.assign(options, parsed.options);
+      }
       if (config.hook) { await a.fireTrigger(config.hook); }
       const { AffinityExecution, ResistanceExecution } = teriock.executions.activity;
-      await (config.threshold ? ResistanceExecution : AffinityExecution).create({}, options);
+      await (config.threshold ? ResistanceExecution : AffinityExecution).create(data, options);
     }),
     icon: icons.manifest.effect.resist,
     reverse: "resist",

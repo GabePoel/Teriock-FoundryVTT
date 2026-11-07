@@ -203,7 +203,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Combat.initiative.decimals = 2;
-  CONFIG.Combat.initiative.formula = teriock.executions.activity.InitiativeExecution.getFormula();
+  CONFIG.Combat.initiative.formula = data.models.InitiativeModifierModel.getFormula();
 
   CONFIG.Combatant.documentClass = documents.TeriockCombatant;
   registerSubtypes(data.systems.combatants, foundry.abstract.TypeDataModel);

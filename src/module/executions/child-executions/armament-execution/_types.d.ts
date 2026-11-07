@@ -5,8 +5,6 @@ declare module "./armament-execution.mjs" {
     twoHanded: boolean;
     useAbilities: boolean;
 
-    bonus: Teriock.System.FormulaString;
-
     get source(): TeriockItem<"body" | "equipment">;
   }
 }

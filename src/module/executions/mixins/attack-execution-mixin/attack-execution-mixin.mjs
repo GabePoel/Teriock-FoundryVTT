@@ -160,6 +160,12 @@ export default function AttackExecutionMixin(Base) {
     }
 
     /** @inheritDoc */
+    get defaultFormula() {
+      if (!this.isAttack) { return super.defaultFormula; }
+      return FormulaField.sum(super.defaultFormula, "@ap", this.piercing.av0 ? "@av0" : "", this.sb ? "@sb" : "");
+    }
+
+    /** @inheritDoc */
     get flavor() {
       if (!this.isAttack) { return super.flavor; }
       let flavor = _loc("TERIOCK.ROLLS.Attack.label");
@@ -245,15 +251,6 @@ export default function AttackExecutionMixin(Base) {
     }
 
     /**
-     * @inheritDoc
-     * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AttackExecutionOptions>} [options]
-     */
-    _configure(options = {}) {
-      super._configure(options);
-      this.rootBonus = this._source.bonus;
-    }
-
-    /**
      * Logic to pick the ammunition this attacks with.
      */
     _determineDefaultAmmunition() {
@@ -300,18 +297,6 @@ export default function AttackExecutionMixin(Base) {
 
     /**
      * @inheritDoc
-     * @returns {Promise<false|void>}
-     */
-    async _improveFormula() {
-      if (this.isAttack) {
-        if (this.piercing.av0) { this.updateSource({ formula: FormulaField.add(this.formula, "@av0") }); }
-        if (this.sb) { this.updateSource({ formula: FormulaField.add(this.formula, "@sb") }); }
-      }
-      await super._improveFormula();
-    }
-
-    /**
-     * @inheritDoc
      * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.AttackExecutionOptions>} [options]
      */
     _initialize(options = {}) {
@@ -320,7 +305,6 @@ export default function AttackExecutionMixin(Base) {
       // ever matter though since executions are never saved to the database.
       if (!("strict" in options)) { return; }
       this._updateArmament(options.armament || this._determineDefaultArmament(), options);
-      if (!this.bonus) { this.updateSource({ bonus: "0" }); }
       this.limb = this._resolveLimb(options);
       let existingAttackPenalty = Number(this.combatant?.system.attackPenalty);
       if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
@@ -374,12 +358,6 @@ export default function AttackExecutionMixin(Base) {
       if (this.isAttack && FormulaField.exists(this.incurredAttackPenalty)) {
         this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.getRollData());
       } else { this.attackPenalty = 0; }
-    }
-
-    /** @inheritDoc */
-    async _prepareBaseFormula() {
-      await super._prepareBaseFormula();
-      if (this.isAttack) { this.updateSource({ formula: FormulaField.add(this.formula, "@ap") }); }
     }
 
     /**
@@ -444,17 +422,14 @@ export default function AttackExecutionMixin(Base) {
     _updateArmament(armament, options = {}) {
       this.armament = armament ?? null;
       this._determineDefaultAmmunition();
-      const changes = {
+      this.updateSource({
+        bonus: (this.isAttack && this.isContact && this.armament?.system.hitBonus) || "",
         incurredAttackPenalty: this._resolveAttackPenalty(options),
         "piercing.raw": this._determinePiercing(options),
         sb: Boolean(options.sb ?? ((this.armament && this.isContact) ? this.actor?.system.offense.sb : false)),
         vitals: this._resolveVitals(options),
         warded: this._resolveWarded(options),
-      };
-      if (this.isAttack && this.isContact) {
-        changes.bonus = FormulaField.add(this.rootBonus ?? "", this.armament?.system.hitBonus ?? "") || "0";
-      }
-      this.updateSource(changes);
+      });
     }
 
     /** @inheritDoc */

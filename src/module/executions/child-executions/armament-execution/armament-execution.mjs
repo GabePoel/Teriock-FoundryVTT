@@ -72,7 +72,6 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Com
     for (const p of this.source.previewedTypes.property.filter(p => p.active)) {
       this.automations.addDocuments(p.system.automations.contents);
     }
-    this.bonus = options.bonus ?? "";
   }
 
   /** @inheritDoc */
@@ -125,8 +124,7 @@ export default class ArmamentExecution extends mixClasses(DocumentExecution, Com
   /** @inheritDoc */
   async _prepareFormula() {
     if (!this.dealCommands) { this.updateSource({ formula: "" }); }
-    this._applyCommandModifiers();
-    if (FormulaField.exists(this.bonus)) { this.updateSource({ formula: FormulaField.add(this.formula, this.bonus) }); }
+    await super._prepareFormula();
   }
 
   /**

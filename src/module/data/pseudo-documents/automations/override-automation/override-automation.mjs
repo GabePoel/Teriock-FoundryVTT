@@ -95,16 +95,6 @@ export default class OverrideAutomation
     ) {
       if (typeof this[k] === "boolean") { execution.updateSource({ [k]: this[k] }); }
     }
-    if (FormulaField.exists(this.rollFormula)) { execution.updateSource({ overrideFormula: this.rollFormula }); }
-  }
-
-  /** @inheritDoc */
-  async modifyExecutionConstruction(execution) {
-    if (!FormulaField.exists(this.rollBonus)) { return; }
-    execution.updateSource({ bonus: FormulaField.add(execution.bonus, this.rollBonus) });
-    if (typeof execution.rootBonus === "string") {
-      execution.rootBonus = FormulaField.add(execution.rootBonus, this.rollBonus);
-    }
   }
 
   /** @inheritDoc */

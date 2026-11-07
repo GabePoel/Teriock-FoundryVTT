@@ -1,6 +1,5 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
-import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
 import { dotJoin, mixClasses } from "../../utils/_module.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
@@ -88,7 +87,7 @@ export default class TeriockCombatant
    * @version 369
    */
   _getInitiativeFormula() {
-    return InitiativeExecution.getFormula(this.initiativeModel);
+    return this.initiativeModel.constructor.getFormula(model);
   }
 
   /**

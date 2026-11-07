@@ -1,9 +1,7 @@
 declare global {
   namespace Teriock.Execution {
-    export interface ThresholdExecutionData {
-      bonus: Teriock.System.FormulaString;
+    export interface ThresholdExecutionData extends Omit<Teriock.Modifier.ModifierComponents, "score"> {
       comparison: Teriock.Keys.Comparison;
-      edge: number;
       participants: number;
 
       mobMembers: TeriockCombatant[];

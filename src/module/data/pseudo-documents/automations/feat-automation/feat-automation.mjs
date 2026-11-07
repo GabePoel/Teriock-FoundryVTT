@@ -36,7 +36,7 @@ export default class FeatAutomation extends mixClasses(ThresholdAutomation, Trig
     return [
       new commandActivations.feat({
         display: this.getDisplayData(threshold),
-        options: { attribute: this.attribute, bonus: this.bonus, threshold },
+        options: { attribute: this.attribute, circumstance: this.circumstance, threshold },
       }),
     ];
   }

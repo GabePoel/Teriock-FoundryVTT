@@ -47,11 +47,6 @@ export default class FallExecution extends BaseExecution {
   }
 
   /** @inheritDoc */
-  get chatData() {
-    return foundry.utils.mergeObject(super.chatData, { system: { _src: this.journalEntryPage?.uuid } });
-  }
-
-  /** @inheritDoc */
   get executionNames() {
     return [...super.executionNames, "Fall"];
   }

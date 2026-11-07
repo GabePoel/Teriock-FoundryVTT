@@ -9,13 +9,6 @@ import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
  */
 export default class TradecraftCheckExecution extends mixClasses(BaseExecution, TradecraftExecutionMixin) {
   /** @inheritDoc */
-  get chatData() {
-    return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: game.teriock.identifiers.get(`tradecraft:${this.tradecraft}`) },
-    });
-  }
-
-  /** @inheritDoc */
   get name() {
     return _loc("TERIOCK.ROLLS.Tradecraft.name", {
       value: TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft]?.label,
@@ -34,10 +27,6 @@ export default class TradecraftCheckExecution extends mixClasses(BaseExecution, 
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels.push(
-      Object.assign(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.getPanelParts(), {
-        collapsed: true,
-      }),
-    );
+    this.panels.push(Object.assign(await this.journalEntryPage?.getPanelParts(), { collapsed: true }));
   }
 }

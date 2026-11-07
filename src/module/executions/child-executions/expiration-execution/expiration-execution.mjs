@@ -15,7 +15,6 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
     return Object.assign(super.defineSchema(), {
       formula: rollableFormulaField({
         deterministic: false,
-        hint: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.hint",
         label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.label",
       }),
       thresholdFormula: rollableFormulaField({
@@ -107,5 +106,6 @@ export default class ExpirationExecution extends mixClasses(DocumentExecution, T
   /** @inheritDoc */
   async _prepareFormula() {
     this.threshold = await BaseRoll.getValue(this.thresholdFormula, this.getRollData());
+    await super._prepareFormula();
   }
 }

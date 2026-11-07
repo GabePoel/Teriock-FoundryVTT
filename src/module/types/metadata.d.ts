@@ -4,6 +4,13 @@ declare global {
 
     export type ModelMetadata = { initialCompetence: Teriock.System.CompetenceLevel, pseudos: Record<string, string> };
 
+    export type ModifierMetadata = ModelMetadata & {
+      initialBase: Teriock.System.FormulaString;
+      initialDie: string;
+      initialMultiplier: number;
+      initialScore: number;
+    };
+
     export type UnitMetadata = ModelMetadata & {
       formula: boolean;
       groupLabels: Record<"finite" | "infinite" | "zero", string>;

@@ -11,9 +11,9 @@
       </div>
       <div
         class="tsubtle tcenter gi2"
-        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.InitiativeBox.bonus.tooltip"}}'
+        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.InitiativeBox.base.tooltip"}}'
       >
-        {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.InitiativeBox.bonus.label"}}
+        {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.InitiativeBox.base.label"}}
       </div>
       <div
         class="tsubtle tcenter"
@@ -39,7 +39,7 @@
         type="button"
         data-action="updatePaths"
         data-icon="{{ TERIOCK.DISPLAY.icons.manifest.roll.initiative }}"
-        data-paths="system.initiative.competence.raw system.initiative.bonus"
+        data-paths="system.initiative.competence.raw system.initiative.base system.initiative.bonus"
         data-title='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.InitiativeBox.label"}}'
         data-tooltip="{{ system.initiative.competence.description }}"
         data-tooltip-class=""
@@ -50,16 +50,16 @@
         ></i>
       </button>
       <button
-        id="{{ @root/appId }}-initiative-bonus"
-        class='tcenter affix updatable gi2 {{formClasses @root/document path="system.initiative.bonus"}}'
+        id="{{ @root/appId }}-initiative-base"
+        class='tcenter affix updatable gi2 {{formClasses @root/document path="system.initiative.base"}}'
         type="button"
         data-action="updatePaths"
         data-icon="{{ TERIOCK.DISPLAY.icons.manifest.roll.initiative }}"
-        data-paths="system.initiative.competence.raw system.initiative.bonus"
+        data-paths="system.initiative.competence.raw system.initiative.base system.initiative.bonus"
         data-title='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.InitiativeBox.label"}}'
       >
-        <span class="unselected"><span class="tcolored">{{ system.initiative.bonus }}</span></span>
-        <span class="selected"><span class="tcolored">{{ system._source.initiative.bonus }}</span></span>
+        <span class="unselected"><span class="tcolored">{{ system.initiative.base }}</span></span>
+        <span class="selected"><span class="tcolored">{{ system._source.initiative.base }}</span></span>
       </button>
       <div class="tcolored tcenter">
         {{numberFormat

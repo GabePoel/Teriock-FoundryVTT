@@ -5,7 +5,7 @@ declare module "./attack-activation.mjs" {
     competence: CompetenceModel;
     armamentId: ID<TeriockItem<"body" | "equipment">> | null;
     attackPenalty: Teriock.System.FormulaString;
-    bonus: Teriock.System.FormulaString;
+    circumstance: Teriock.System.FormulaString;
     consumeAmmunition: boolean | null;
     limb: boolean | null;
     sb: boolean | null;

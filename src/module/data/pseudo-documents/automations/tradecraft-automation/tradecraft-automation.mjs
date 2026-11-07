@@ -44,7 +44,7 @@ export default class TradecraftAutomation
       "hr",
       ...this._triggerDisplayPaths,
       "hr",
-      "bonus",
+      "circumstance",
       "threshold",
       ...this._competencePaths,
     ];
@@ -93,7 +93,7 @@ export default class TradecraftAutomation
     return selected.map(tradecraft =>
       new commandActivations.tradecraft({
         display: this.getDisplayData(threshold),
-        options: { bonus: this.bonus, competence: this.getCompetence(options), threshold, tradecraft },
+        options: { circumstance: this.circumstance, competence: this.getCompetence(options), threshold, tradecraft },
       })
     );
   }

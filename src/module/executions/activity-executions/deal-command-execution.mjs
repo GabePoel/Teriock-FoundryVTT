@@ -30,9 +30,6 @@ export default class DealCommandExecution extends mixClasses(BaseExecution, Comm
 
   /** @inheritDoc */
   get name() {
-    if (this.command) {
-      return _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: TERIOCK.CONFIG.command[this.command]?.label });
-    }
     return _loc("TERIOCK.DIALOGS.Boost.title");
   }
 

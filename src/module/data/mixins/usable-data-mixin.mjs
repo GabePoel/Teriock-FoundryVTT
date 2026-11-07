@@ -35,7 +35,7 @@ export default function UsableDataMixin(Base) {
      * @returns {Teriock.Execution.ParsedEvent}
      */
     static parseEvent(event, _source) {
-      return { data: {}, options: BaseRoll.parseEvent(event) };
+      return BaseRoll.parseEvent(event);
     }
 
     /** @inheritDoc */

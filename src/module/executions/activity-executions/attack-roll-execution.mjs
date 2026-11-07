@@ -9,13 +9,6 @@ import { AttackExecutionMixin } from "../mixins/_module.mjs";
  */
 export default class AttackRollExecution extends mixClasses(BaseExecution, AttackExecutionMixin) {
   /** @inheritDoc */
-  get chatData() {
-    return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: game.teriock.identifiers.get(this.journalEntryPageIdentifier) },
-    });
-  }
-
-  /** @inheritDoc */
   get icon() {
     return TERIOCK.DISPLAY.icons.manifest.interaction.attack;
   }

@@ -1,4 +1,4 @@
-import { BaseRoll, ThresholdRoll } from "../../../../../../../dice/rolls/_module.mjs";
+import { ThresholdRoll } from "../../../../../../../dice/rolls/_module.mjs";
 import { LocalDocumentField } from "../../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../../models/_module.mjs";
@@ -147,11 +147,10 @@ export default function ActorCombatPart(Base) {
      */
     async rollAttack(options = {}) {
       const data = { ...options };
-      // Competence is construction context, not schema data
-      delete data.competence;
       if (options.event) {
-        data.edge = ThresholdRoll.parseEvent(options.event).edge;
-        Object.assign(options, BaseRoll.parseEvent(options.event));
+        const parsed = ThresholdRoll.parseEvent(options.event);
+        Object.assign(data, parsed.data);
+        Object.assign(options, parsed.options);
       }
       if (typeof options.armament === "string") { options.armament = await fromUuid(options.armament); }
       await teriock.executions.activity.AttackRollExecution.create(data, { ...options, actor: this.parent });

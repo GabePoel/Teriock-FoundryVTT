@@ -26,13 +26,15 @@ export default class ResistAutomation extends mixClasses(ThresholdAutomation, Tr
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["hex", "bonus", ...this._triggerDisplayPaths];
+    return ["hex", "circumstance", ...this._triggerDisplayPaths];
   }
 
   /** @inheritDoc */
   async _getActivations() {
     return [
-      new commandActivations.resist({ options: { bonus: this.bonus, type: this.hex ? "hexproof" : "resistance" } }),
+      new commandActivations.resist({
+        options: { circumstance: this.circumstance, type: this.hex ? "hexproof" : "resistance" },
+      }),
     ];
   }
 }

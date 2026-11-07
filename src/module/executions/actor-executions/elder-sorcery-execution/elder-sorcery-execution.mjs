@@ -52,11 +52,6 @@ export default class ElderSorceryExecution extends DocumentExecution {
   }
 
   /** @inheritDoc */
-  get chatData() {
-    return foundry.utils.mergeObject(super.chatData, { system: { _src: this.journalEntryPage?.uuid } });
-  }
-
-  /** @inheritDoc */
   get executionNames() {
     return [...super.executionNames, "ElderSorcery"];
   }

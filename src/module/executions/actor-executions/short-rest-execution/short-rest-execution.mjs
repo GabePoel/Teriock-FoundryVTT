@@ -41,11 +41,6 @@ export default class ShortRestExecution extends DocumentExecution {
   }
 
   /** @inheritDoc */
-  get chatData() {
-    return foundry.utils.mergeObject(super.chatData, { system: { _src: this.journalEntryPage?.uuid } });
-  }
-
-  /** @inheritDoc */
   get executionNames() {
     return [...super.executionNames, this.executionTime.capitalize()];
   }

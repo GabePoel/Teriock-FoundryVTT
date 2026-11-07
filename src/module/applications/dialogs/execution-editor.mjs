@@ -150,7 +150,7 @@ export default class ExecutionEditor extends ResolvableDialog {
       field,
       localize: true,
       name: path,
-      placeholder: numeric ? "0" : undefined,
+      placeholder: (path === "formula" && this.#execution.defaultFormula) || (numeric ? "0" : undefined),
       small,
       value: foundry.utils.getProperty(this.#execution._source, path),
     };

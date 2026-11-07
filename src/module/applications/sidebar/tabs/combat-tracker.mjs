@@ -126,10 +126,10 @@ export default class TeriockCombatTracker
   }
 
   /**
-   * Options for initiative rolls.
-   * @type {Teriock.Command.ThresholdOptions}
+   * The event that triggered the next initiative roll.
+   * @type {Teriock.Execution.ParsedEvent}
    */
-  defaultInitiativeExecutionData = {};
+  initiativeEvent = { data: {}, options: {} };
 
   /** @inheritDoc */
   get viewed() {
@@ -234,7 +234,7 @@ export default class TeriockCombatTracker
   /** @inheritDoc */
   async _onCombatantControl(event, target) {
     if (target.dataset.action === "rollInitiative") {
-      this.defaultInitiativeExecutionData = ThresholdRoll.parseEvent(event);
+      this.initiativeEvent = ThresholdRoll.parseEvent(event);
     }
     const group = target.closest(".combatant-group-row")
       ? this.viewed?.groups.get(target.closest("[data-group-id]").dataset.groupId)

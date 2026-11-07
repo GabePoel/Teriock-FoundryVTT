@@ -32,10 +32,7 @@ export default function ActorTradecraftsPart(Base) {
       const tradecrafts = {};
       Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach((
         [key, value],
-      ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModifierModel, {
-        label: value.label,
-        initial: () => ({ competence: { raw: 0 }, score: 0 }),
-      })));
+      ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModifierModel, { label: value.label })));
       return Object.assign(super.defineSchema(), { tradecrafts: new SchemaField(tradecrafts) });
     }
 

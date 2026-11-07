@@ -1,32 +1,13 @@
-import { FormulaField } from "../../../data/fields/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { mixClasses } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 
 /**
- * @import { InitiativeModifierModel } from "../../../data/models/modifier-models/_module.mjs";
- */
-
-/**
  * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
 export default class InitiativeExecution extends mixClasses(DocumentExecution, ThresholdExecutionMixin) {
-  /**
-   * Get the default initiative formula or one derived from an InitiativeModifierModel.
-   * @param {InitiativeModifierModel} [model]
-   * @returns {Teriock.System.FormulaString}
-   */
-  static getFormula(model) {
-    const defaults = TERIOCK.CONFIG.character.defaults.initiative;
-    return FormulaField.sum(
-      defaults.base,
-      model?.competence.formula ?? defaults.competence,
-      model?.bonus ?? defaults.bonus,
-    );
-  }
-
   /**
    * @inheritDoc
    * @category Groups
@@ -46,6 +27,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
           this.roller = /** @type {TeriockCombatant} */ (roller);
           this._actor = this.roller.actor;
           this.updateSource({
+            base: this.roller.initiativeModel.base,
             bonus: this.roller.initiativeModel.bonus,
             "competence.raw": this.roller.initiativeModel.competence.raw,
           });
@@ -82,6 +64,11 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
   /** @inheritDoc */
   get icon() {
     return TERIOCK.DISPLAY.icons.manifest.roll.initiative;
+  }
+
+  /** @inheritDoc */
+  get modifier() {
+    return this.roller?.initiativeModel ?? null;
   }
 
   /** @inheritDoc */
@@ -122,11 +109,6 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
    */
   _initializeSource(data, options = {}) {
     this.roller = options.roller ?? options.source?.system.turnHolder ?? options.source;
-    foundry.utils.mergeObject(data, {
-      bonus: this.roller?.initiativeModel?.bonus ?? TERIOCK.CONFIG.character.defaults.initiative.bonus,
-      ...ui.combat.defaultInitiativeExecutionData,
-    }, { inplace: true, overwrite: false });
-    ui.combat.defaultInitiativeExecutionData = {};
     return super._initializeSource(data, options);
   }
 

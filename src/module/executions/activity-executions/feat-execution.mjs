@@ -1,4 +1,3 @@
-import { FormulaField } from "../../data/fields/_module.mjs";
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { BaseExecution } from "../abstract/_module.mjs";
@@ -15,13 +14,6 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
    */
   get attribute() {
     return this.source.key;
-  }
-
-  /** @inheritDoc */
-  get chatData() {
-    return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: game.teriock.identifiers.get(TERIOCK.CONFIG.attribute[this.attribute]?.identifier) },
-    });
   }
 
   /** @inheritDoc */
@@ -46,6 +38,11 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
   /** @inheritDoc */
   get journalEntryPageIdentifier() {
     return TERIOCK.CONFIG.attribute[this.attribute]?.identifier;
+  }
+
+  /** @inheritDoc */
+  get modifier() {
+    return this.actor?.system.attributes[this.attribute] ?? null;
   }
 
   /** @inheritDoc */
@@ -85,13 +82,6 @@ export default class FeatExecution extends mixClasses(BaseExecution, ThresholdEx
    */
   _configure(options = {}) {
     super._configure(options);
-    if (this.actor) {
-      this._source.bonus = FormulaField.sum(
-        `2 * @${this.attribute}.score`,
-        this.actor.system.attributes[this.attribute].bonus,
-        this._source.bonus,
-      );
-    }
     if (game.settings.get("teriock", "secretAttributes").has(this.attribute)) {
       this._messageMode = options.messageMode ?? "blind";
     }

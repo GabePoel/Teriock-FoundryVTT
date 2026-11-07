@@ -51,7 +51,7 @@ export default class AttackAutomation
       new AttackActivation({
         armamentId: this.keepArmament ? (options.armament ?? options.execution?.armament)?.id : undefined,
         attackPenalty: this.attackPenalty,
-        bonus: this.bonus,
+        circumstance: this.circumstance,
         competence: { raw: this.getCompetence(options) },
         consumeAmmunition: this.consumeAmmunition,
         display: this.getDisplayData(threshold),

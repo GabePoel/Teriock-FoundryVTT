@@ -1,4 +1,3 @@
-import { FormulaField } from "../../data/fields/_module.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
 import { ThresholdExecutionMixin } from "./_module.mjs";
 
@@ -51,6 +50,11 @@ export default function TradecraftExecutionMixin(Base) {
       return `tradecraft:${this.tradecraft}`;
     }
 
+    /** @inheritDoc */
+    get modifier() {
+      return this.actor?.system.tradecrafts[this.tradecraft] ?? null;
+    }
+
     /**
      * Tradecraft this execution corresponds to.
      * @returns {Teriock.Keys.Tradecraft}
@@ -66,13 +70,6 @@ export default function TradecraftExecutionMixin(Base) {
      */
     _configure(options = {}) {
       super._configure(options);
-      if (this.actor) {
-        this._source.bonus = FormulaField.sum(
-          `@tc.${this.tradecraft}.score`,
-          this.actor.system.tradecrafts[this.tradecraft].bonus,
-          this._source.bonus,
-        );
-      }
       if (game.settings.get("teriock", "secretTradecrafts").has(this.tradecraft)) {
         this._messageMode = options.messageMode ?? "blind";
       }

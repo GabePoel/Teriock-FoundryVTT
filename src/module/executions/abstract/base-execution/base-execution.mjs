@@ -152,6 +152,7 @@ export default class BaseExecution extends BaseDataModel {
       rolls: this.rolls,
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
+        _src: this.journalEntryPage?.uuid,
         activations: this.activations,
         panels: this.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
         tags: this.tags,
@@ -174,14 +175,6 @@ export default class BaseExecution extends BaseDataModel {
    */
   get combatants() {
     return [this.combatant].filter(Boolean);
-  }
-
-  /**
-   * Whether competence improves the formula.
-   * @returns {boolean}
-   */
-  get competenceImprovesFormula() {
-    return FormulaField.exists(this.formula);
   }
 
   /** @returns {string[]} */
@@ -458,7 +451,6 @@ export default class BaseExecution extends BaseDataModel {
    * @returns {Promise<false|void>}
    */
   async _fetchData() {
-    if (await this._callAutomations(a => a.modifyExecutionConstruction(this)) === false) { return false; }
     this.#journalEntryPage = await teriock.fromIdentifier(this.journalEntryPageIdentifier);
   }
 
@@ -507,16 +499,6 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
-   * Improve the formula used in this execution.
-   * @returns {Promise<false|void>}
-   */
-  async _improveFormula() {
-    if (this.competenceImprovesFormula) {
-      this.updateSource({ formula: FormulaField.add(this.formula, this.competence.formula) });
-    }
-  }
-
-  /**
    * @inheritDoc
    * @param {Record<string, any>} data
    * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ExecutionOptions>} [options]
@@ -559,9 +541,7 @@ export default class BaseExecution extends BaseDataModel {
    * Prepare the primary formula used in this execution.
    * @returns {Promise<false|void>}
    */
-  async _prepareFormula() {
-    await this._improveFormula();
-  }
+  async _prepareFormula() {}
 
   /**
    * Prepare updates that will be applied.
@@ -660,9 +640,7 @@ export default class BaseExecution extends BaseDataModel {
    */
   getRollData() {
     return Object.assign(this.actor?.getRollData() || {}, foundry.utils.deepClone(this._rollData), {
-      c: this.competence.fluent
-        ? (this.actor?.system.scaling.f ?? 0)
-        : (this.competence.proficient ? (this.actor?.system.scaling.p ?? 0) : 0),
+      c: this.competence.value,
     }, prefixObject(this.choices, "choice"));
   }
 

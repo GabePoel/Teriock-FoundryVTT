@@ -1,6 +1,5 @@
+import { mergeMetadata } from "../../../utils/construction.mjs";
 import BaseModifierModel from "./base-modifier-model/base-modifier-model.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * A {@link BaseModifierModel} for attribute modifiers.
@@ -8,15 +7,11 @@ const { fields } = foundry.data;
  */
 export default class AttributeModifierModel extends BaseModifierModel {
   /** @inheritDoc */
-  static get Execution() {
-    return teriock.executions.activity.FeatExecution;
-  }
+  static metadata = mergeMetadata(super.metadata, { initialMultiplier: 2, initialScore: -3 });
 
   /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      score: new fields.NumberField({ initial: -3, integer: true, required: true }),
-    });
+  static get Execution() {
+    return teriock.executions.activity.FeatExecution;
   }
 
   /** @inheritDoc */
@@ -33,13 +28,13 @@ export default class AttributeModifierModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
-  get useText() {
-    return _loc("TERIOCK.ROLLS.Feat.name", { value: this.name });
+  get term() {
+    return `@${this.key}.score`;
   }
 
   /** @inheritDoc */
-  get value() {
-    return super.value + this.score;
+  get useText() {
+    return _loc("TERIOCK.ROLLS.Feat.name", { value: this.name });
   }
 
   /** @inheritDoc */

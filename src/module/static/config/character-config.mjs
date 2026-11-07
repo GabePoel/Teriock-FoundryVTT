@@ -2,7 +2,7 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 import { icons } from "../display/_module.mjs";
 
 export default {
-  defaults: { initiative: { base: "1d20", bonus: "@mov.score", competence: "@p" }, maxPresence: 1 },
+  defaults: { initiative: { base: "@mov.score", competence: 1 }, maxPresence: 1 },
   movement: {
     climb: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.climb,

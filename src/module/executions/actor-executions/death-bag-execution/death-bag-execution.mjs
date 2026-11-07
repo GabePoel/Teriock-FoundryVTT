@@ -51,10 +51,7 @@ export default class DeathBagExecution extends DocumentExecution {
 
   /** @inheritDoc */
   get chatData() {
-    return foundry.utils.mergeObject(super.chatData, {
-      content: this.content,
-      system: { _src: this.journalEntryPage?.uuid },
-    });
+    return foundry.utils.mergeObject(super.chatData, { content: this.content });
   }
 
   /** @inheritDoc */

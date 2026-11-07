@@ -97,15 +97,11 @@ export default class ThresholdRoll extends BaseRoll {
     });
   }
 
-  /**
-   * @inheritDoc
-   * @param {PointerEvent} event
-   * @returns {Teriock.Command.ThresholdOptions}
-   */
+  /** @inheritDoc */
   static parseEvent(event) {
-    return Object.assign(super.parseEvent(event), {
-      edge: Number(event?.altKey || false) - Number(event?.shiftKey || false),
-    });
+    const parsed = super.parseEvent(event);
+    parsed.data.edge = Number(event?.altKey || false) - Number(event?.shiftKey || false);
+    return parsed;
   }
 
   /**

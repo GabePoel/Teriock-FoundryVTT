@@ -1,5 +1,6 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
+import { BaseModifierModel, CompetenceModel } from "../../../data/models/_module.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { objectMap } from "../../../utils/_module.mjs";
 
@@ -28,7 +29,9 @@ export default function ThresholdExecutionMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
+        base: rollableFormulaField(),
         bonus: rollableFormulaField(),
+        circumstance: rollableFormulaField(),
         comparison: new fields.StringField({
           blank: false,
           choices: objectMap(TERIOCK.CONFIG.math.comparisons, (c) => c.label, { localize: true }),
@@ -36,8 +39,15 @@ export default function ThresholdExecutionMixin(Base) {
           label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.comparison.label",
           required: true,
         }),
+        die: rollableFormulaField({ initial: BaseModifierModel.metadata.initialDie }),
         edge: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
+        multiplier: new fields.NumberField({
+          initial: BaseModifierModel.metadata.initialMultiplier,
+          integer: true,
+          nullable: false,
+        }),
         participants: new fields.NumberField({ initial: 1, integer: true, min: 1, nullable: false }),
+        term: rollableFormulaField(),
       });
     }
 
@@ -96,9 +106,8 @@ export default function ThresholdExecutionMixin(Base) {
 
     /** @inheritDoc */
     get _formPaths() {
-      const paths = [];
-      if (this.requiresCompetence) { paths.push("competence.raw"); }
-      if (this.hasBonus) { paths.push("bonus"); }
+      const paths = ["competence.raw"];
+      if (this.hasCircumstance) { paths.push("circumstance", "formula"); }
       if (this.canShareRolls) { paths.push("participants"); }
       return [...paths, ...super._formPaths];
     }
@@ -124,10 +133,28 @@ export default function ThresholdExecutionMixin(Base) {
     }
 
     /**
-     * Whether this can have a bonus applied.
+     * Whether competence improves the formula.
      * @returns {boolean}
      */
-    get hasBonus() {
+    get competenceImprovesFormula() {
+      return this.isRoll;
+    }
+
+    /**
+     * A default formula.
+     * @returns {Teriock.System.FormulaString}
+     */
+    get defaultFormula() {
+      const competence = this.competenceImprovesFormula ? this.competence : new CompetenceModel();
+      const formula = BaseModifierModel.getFormula({ ...this.toObject(), competence });
+      return this.isRoll && this.participants > 1 ? FormulaField.add(formula, String(this.participants - 1)) : formula;
+    }
+
+    /**
+     * Whether this can have a circumstance bonus applied.
+     * @returns {boolean}
+     */
+    get hasCircumstance() {
       return this.isRoll;
     }
 
@@ -140,11 +167,11 @@ export default function ThresholdExecutionMixin(Base) {
     }
 
     /**
-     * Whether this execution requires competence.
-     * @returns {boolean}
+     * A modifier to provide formula components.
+     * @returns {BaseModifierModel|null}
      */
-    get requiresCompetence() {
-      return this.isRoll;
+    get modifier() {
+      return null;
     }
 
     /** @inheritDoc */
@@ -164,6 +191,15 @@ export default function ThresholdExecutionMixin(Base) {
     _configure(options = {}) {
       super._configure(options);
       this.threshold = options.threshold;
+      const { modifier } = this;
+      if (modifier) {
+        Object.assign(this._source, {
+          base: modifier.base,
+          bonus: modifier.bonus,
+          multiplier: modifier.metadata.initialMultiplier,
+          term: modifier.term,
+        });
+      }
     }
 
     /**
@@ -192,17 +228,6 @@ export default function ThresholdExecutionMixin(Base) {
       this.rolls = rolls;
     }
 
-    /** @inheritDoc */
-    async _improveFormula() {
-      await super._improveFormula();
-      if (FormulaField.exists(this.bonus)) { this.updateSource({
-          formula: FormulaField.add(this.formula, this.bonus),
-        }); }
-      if (this.isRoll && this.participants > 1) {
-        this.updateSource({ formula: FormulaField.add(this.formula, String(this.participants - 1)) });
-      }
-    }
-
     /**
      * @inheritDoc
      * @param {Teriock.Execution.ConstructionOptions<Teriock.Execution.ThresholdExecutionOptions>} [options]
@@ -217,22 +242,9 @@ export default function ThresholdExecutionMixin(Base) {
       this.updateSource({ participants: this.mobMembers.length });
     }
 
-    /**
-     * Prepare an underlying core formula.
-     * @returns {Promise<void>}
-     */
-    async _prepareBaseFormula() {
-      if (!this.formula) {
-        let suffix = "";
-        if (this.edge > 0) { suffix = "kh1"; }
-        if (this.edge < 0) { suffix = "kl1"; }
-        this.updateSource({ formula: `${1 + Math.abs(this.edge)}d20${suffix}` });
-      }
-    }
-
     /** @inheritDoc */
     async _prepareFormula() {
-      await this._prepareBaseFormula();
+      if (!this.formula) { this.updateSource({ formula: this.defaultFormula }); }
       await super._prepareFormula();
     }
 

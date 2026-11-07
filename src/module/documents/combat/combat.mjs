@@ -512,7 +512,9 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     }
     let rollers = [...sources.values()].map(s => s.system.turnHolder ?? s);
     if (sources.size === 1 && !options.noExecution) {
-      const execution = await InitiativeExecution.create({}, { source: [...sources.values()][0] });
+      const { data, options: eventOptions } = ui.combat.initiativeEvent;
+      ui.combat.initiativeEvent = { data: {}, options: {} };
+      const execution = await InitiativeExecution.create(data, { ...eventOptions, source: [...sources.values()][0] });
       if (execution?.message?.rolls?.length) {
         rollers = [execution.roller];
         const total = execution.message.rolls[0]?.total;

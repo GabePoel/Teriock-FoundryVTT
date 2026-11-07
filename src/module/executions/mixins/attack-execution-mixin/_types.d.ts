@@ -16,7 +16,6 @@ declare global {
       ammunition: TeriockItem<"equipment"> | null | undefined;
       armament: TeriockItem<"body" | "equipment"> | null;
       limb: boolean;
-      rootBonus: Teriock.System.FormulaString;
       targets: Set<TeriockToken>;
     }
   }

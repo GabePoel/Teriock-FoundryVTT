@@ -1,5 +1,4 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { objectMap } from "../../../utils/_module.mjs";
 
@@ -37,7 +36,6 @@ export default function CommandsExecutionMixin(Base) {
         ),
         crit: new fields.BooleanField(),
         deboosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
-        formula: rollableFormulaField(),
       });
     }
 
@@ -74,16 +72,7 @@ export default function CommandsExecutionMixin(Base) {
     }
 
     /**
-     * The single command this deals, if it only deals one. Used for the input dialog title and base roll options.
-     * @returns {Teriock.Keys.Command|null}
-     */
-    get command() {
-      if (this.commands.size === 1) { return this.commands.first(); }
-      return null;
-    }
-
-    /**
-     * Whether to show the roll dialogs.
+     * Whether this has a formula to roll.
      * @returns {boolean}
      */
     get hasFormula() {
@@ -101,8 +90,7 @@ export default function CommandsExecutionMixin(Base) {
     }
 
     /**
-     * Apply boosts, deboosts, and critical modifiers to the formula. This mirrors the logic that used to live in the
-     * `boostDialog` confirmation callback.
+     * Apply boosts, deboosts, and critical modifiers to the formula.
      */
     _applyCommandModifiers() {
       if (!FormulaField.exists(this.formula)) { return; }

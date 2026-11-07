@@ -2,8 +2,8 @@ import { CompetenceModel } from "../../_module.mjs";
 
 declare module "./base-modifier-model.mjs" {
   export default interface BaseModifierModel {
-    /** <base> Some key corresponding to the modifier */
-    _key: string;
+    /** <schema> Formula part of mod */
+    base: Teriock.System.FormulaString;
     /** <schema> Bonus formula */
     bonus: Teriock.System.FormulaString;
     /** <schema> The competence for this modifier */

@@ -5,21 +5,11 @@ declare global {
     /**
      * Options for generic threshold rolls.
      */
-    export type ThresholdOptions = UseOptions & {
-      /** Some bonus to add to the roll */
-      bonus?: Teriock.System.FormulaString;
+    export type ThresholdOptions = Teriock.Execution.ThresholdExecutionOptions & {
       /** The comparison operation `c(roll, threshold)` */
       comparison?: Teriock.Keys.Comparison;
-      /** Proficiency and fluency */
-      competence?: Teriock.System.CompetenceLevel;
       /** Positive for advantage, negative for disadvantage */
       edge?: Teriock.System.EdgeLevel;
-      /** A formula to use other than the default one */
-      formula?: Teriock.System.FormulaString;
-      /** Whether to show a roll dialog */
-      showDialog?: boolean;
-      /** A threshold the roll needs to meet */
-      threshold?: number;
     };
 
     export type TradecraftOptions = ThresholdOptions & { tradecraft?: Teriock.Keys.Tradecraft };
@@ -64,10 +54,7 @@ declare global {
 
     export type ResistOptions = ThresholdOptions & { type?: AffinityType };
 
-    export type DocumentUseOptions = ThresholdOptions & Teriock.Execution.ExecutionOptions & {
-      competence?: number;
-      noHeighten?: boolean;
-    };
+    export type DocumentUseOptions = ThresholdOptions & { noHeighten?: boolean };
 
     export type UseDocumentOptions = DocumentUseOptions & Teriock.System.ResolveDocumentsOptions & {
       /** An identifier, name or UUID */

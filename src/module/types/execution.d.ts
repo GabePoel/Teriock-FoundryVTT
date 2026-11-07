@@ -32,14 +32,16 @@ declare global {
     export type ParsedEvent = { data: object, options: Partial<ExecutionOptions> };
 
     export type ThresholdExecutionOptions = ExecutionOptions & {
-      bonus?: Teriock.System.FormulaString;
+      circumstance?: Teriock.System.FormulaString;
+      die?: string;
+      formula?: Teriock.System.FormulaString;
       mobMembers?: TeriockCombatant[];
       threshold?: number;
     };
 
     export type InitiativeExecutionOptions = ThresholdExecutionOptions & { roller?: TeriockCombatant };
 
-    export type AttackExecutionOptions = ExecutionOptions & ThresholdExecutionOptions & {
+    export type AttackExecutionOptions = ThresholdExecutionOptions & {
       armament?: TeriockItem<"body" | "equipment">;
       attackPenalty?: Teriock.System.FormulaString;
       limb?: boolean;
@@ -65,10 +67,7 @@ declare global {
       source?: TeriockActiveEffect<"ability">;
     };
 
-    export type ArmamentExecutionOptions = ExecutionOptions & {
-      bonus?: Teriock.System.FormulaString;
-      source?: TeriockItem<"body" | "equipment">;
-    };
+    export type ArmamentExecutionOptions = ExecutionOptions & { source?: TeriockItem<"body" | "equipment"> };
 
     export type EquipmentExecutionOptions = ArmamentExecutionOptions & { ammunition?: TeriockItem<"equipment"> };
 
