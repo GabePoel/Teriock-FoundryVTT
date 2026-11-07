@@ -39,20 +39,6 @@ export default function HierarchyDocumentMixin(Base) {
       return Object.assign(super.documentMetadata, { hierarchy: true });
     }
 
-    /**
-     * Ensure all compendiums that document references are in are properly cached during {@link _preCreateOperation}.
-     * @param {HierarchyDocument[]} documents
-     * @returns {Promise<void>}
-     */
-    static async _cacheDocumentReferenceCompendiums(documents) {
-      const docsWithRefs = documents.filter(d => d.system?._ref);
-      const cachedDocs = /** @type {TeriockDocument[]} */ await Promise.all(
-        docsWithRefs.map(d => fromUuid(d.system._ref)),
-      );
-      const compendiums = new Set(cachedDocs.filter(d => d?.inCompendium).map(d => d.compendium));
-      await Promise.all(Array.from(compendiums).map(c => c.getIndex()));
-    }
-
     /** @inheritDoc */
     static async _onCreateOperation(documents, operation, user) {
       // Override normal client document sheet rendering behavior so subs don't have their sheets rendered.
