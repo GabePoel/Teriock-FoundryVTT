@@ -3,13 +3,13 @@
  */
 
 /**
- * Mixin to support manipulating construction nodes in automations.
+ * Sheet part to support manipulating construction nodes in automations.
  * @template {MixinBase} T
  * @param {T} Base
  */
-export default function ConstructionNodesSheetMixin(Base) {
+export default function MechanicsSheetConstructionNodesPart(Base) {
   /** @mixin */
-  class ConstructionNodesSheet extends Base {
+  class MechanicsSheetConstructionNodesPart extends Base {
     /**
      * Create a construction node that's a child of another one.
      * @param {PointerEvent} _event
@@ -26,5 +26,5 @@ export default function ConstructionNodesSheetMixin(Base) {
     static DEFAULT_OPTIONS = { actions: { createConstructionNode: this.#onCreateConstructionNode } };
   }
 
-  return ConstructionNodesSheet;
+  return MechanicsSheetConstructionNodesPart;
 }

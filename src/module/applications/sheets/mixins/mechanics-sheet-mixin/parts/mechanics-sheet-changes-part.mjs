@@ -3,13 +3,13 @@
  */
 
 /**
- * Mixin to support manipulating changes arrays in automations.
+ * Sheet part to support manipulating changes arrays in automations.
  * @template {MixinBase} T
  * @param {T} Base
  */
-export default function ChangesSheetMixin(Base) {
+export default function MechanicsSheetChangesPart(Base) {
   /** @mixin */
-  class ChangesSheet extends Base {
+  class MechanicsSheetChangesPart extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
@@ -110,5 +110,5 @@ export default function ChangesSheetMixin(Base) {
     }
   }
 
-  return ChangesSheet;
+  return MechanicsSheetChangesPart;
 }

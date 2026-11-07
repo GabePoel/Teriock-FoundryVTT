@@ -1,8 +1,6 @@
-import { makeIcon, makeIconClass, mixClasses } from "../../../utils/_module.mjs";
-import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
-import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
-import ChoicesSheetMixin from "./choices-sheet-mixin.mjs";
-import ConstructionNodesSheetMixin from "./construction-nodes-sheet-mixin.mjs";
+import { makeIcon, makeIconClass, mixClasses } from "../../../../utils/_module.mjs";
+import { TeriockDragDrop, TeriockTextEditor } from "../../../ux/_module.mjs";
+import * as parts from "./parts/_module.mjs";
 
 /**
  * @import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_types.mjs";
@@ -15,11 +13,20 @@ import ConstructionNodesSheetMixin from "./construction-nodes-sheet-mixin.mjs";
  */
 export default function MechanicsSheetMixin(Base) {
   /**
-   * @mixes ChangesSheet
+   * @mixes MechanicsSheetChangesPart
+   * @mixes MechanicsSheetChoicesPart
+   * @mixes MechanicsSheetConstructionNodesPart
    * @mixin
    * @property {TeriockActiveEffect|TeriockActor|TeriockItem} document
    */
-  class MechanicsSheet extends mixClasses(Base, ChangesSheetMixin, ChoicesSheetMixin, ConstructionNodesSheetMixin) {
+  class MechanicsSheet
+    extends mixClasses(
+      Base,
+      parts.MechanicsSheetChangesPart,
+      parts.MechanicsSheetChoicesPart,
+      parts.MechanicsSheetConstructionNodesPart,
+    )
+  {
     /**
      * Handle click events to copy the UUID of this PseudoDocument to clipboard.
      * @param {PointerEvent} event

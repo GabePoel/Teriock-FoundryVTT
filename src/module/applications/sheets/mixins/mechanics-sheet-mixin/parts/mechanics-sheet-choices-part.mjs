@@ -3,13 +3,13 @@
  */
 
 /**
- * Mixin to support manipulating choices in choice automations.
+ * Sheet part to support manipulating choices in choice automations.
  * @template {MixinBase} T
  * @param {T} Base
  */
-export default function ChoicesSheetMixin(Base) {
+export default function MechanicsSheetChoicesPart(Base) {
   /** @mixin */
-  class ChoicesSheet extends Base {
+  class MechanicsSheetChoicesPart extends Base {
     /**
      * Add a blank choice to a choice automation.
      * @param {PointerEvent} _event
@@ -42,5 +42,5 @@ export default function ChoicesSheetMixin(Base) {
     static DEFAULT_OPTIONS = { actions: { createChoice: this.#onCreateChoice, deleteChoice: this.#onDeleteChoice } };
   }
 
-  return ChoicesSheet;
+  return MechanicsSheetChoicesPart;
 }
