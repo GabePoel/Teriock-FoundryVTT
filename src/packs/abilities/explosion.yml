@@ -4,23 +4,16 @@ img: systems/teriock/src/assets/thumbnails/ability/explosion.webp
 name: Explosion
 system:
   automations:
-    - _id: ANohR45RgshTZXO6
-      attribute: mov
-      threshold: 10 + @c
-      type: feat
-    - _id: eJkcbzVkDizOcrER
-      data: |-
-        {
-          "displayMeasurements": true
-        }
-      overrideData: true
-      radius: "15"
-      regionType: emanation
-      type: region
     - _id: 800c70e6560525a8
       command: damage
       formula: (1 + @h)d6[magic fire]
       type: roll
+    - _id: czQrXQ8tQjF3hPoG
+      attachToToken: false
+      excludeToken: false
+      expandWithToken: false
+      radius: "15"
+      type: target
   costs:
     primary:
       mp:
@@ -41,17 +34,20 @@ system:
     <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
     1d6[magic fire]]] @Identifier[core:damage]{damage}.</p>
   identifier: explosion
+  interaction: feat
   kind: special
-  piercing:
-    raw: 2
+  overview:
+    base: >-
+      <p>Any flammable items that are not being @Identifier[keyword:bearing]{bared} within the
+      @Identifier[core:detonate-expansion]{detonation} radius are lit on fire.</p>
   powerSources:
     - magical
   range:
     raw: "30"
     unit: ft
   results:
-    critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
-    hit: <p>Deal [[/damage 1d6[magic fire]]] @Identifier[core:damage]{damage} to target.</p>
+    critFail: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
+    fail: <p>Deal [[/damage 1d6[magic fire]]] @Identifier[core:damage]{damage} to target.</p>
   rotator: true
   spell: true
   standard: true

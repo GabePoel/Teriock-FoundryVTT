@@ -1,4 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
+import { localSelectionSchema } from "../../fields/tools/builders.mjs";
 import { SelectionPseudoDocumentMixin } from "../mixins/_module.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
@@ -17,7 +18,7 @@ export default class RegionActivation extends mixClasses(BaseActivation, Selecti
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
+    return Object.assign(super.defineSchema(), localSelectionSchema(), {
       attachToToken: new fields.BooleanField(),
       data: new fields.ObjectField(),
     });

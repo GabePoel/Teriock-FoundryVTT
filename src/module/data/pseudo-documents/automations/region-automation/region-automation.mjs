@@ -93,9 +93,7 @@ export default class RegionAutomation
 
   /** @inheritDoc */
   async _getActivations(options = { rollData: {} }) {
-    const selection = this.hasSelection
-      ? await this._resolveSelection({ execution: options.execution })
-      : { config: {} };
+    const selection = this.hasSelection ? await this._resolveSelection(options) : { config: {} };
     if (!selection) { return []; }
     return [await this._buildRegionActivation(options, selection.config)];
   }
