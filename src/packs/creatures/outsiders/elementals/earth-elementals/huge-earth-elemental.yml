@@ -30,7 +30,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -63,7 +63,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -106,7 +106,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - regeneration
             - revitalization
@@ -162,7 +162,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: monstrous-strength
@@ -204,7 +204,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - hexseal
           executionTime:
@@ -236,7 +236,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-movement
@@ -263,7 +263,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-perception
@@ -290,7 +290,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-sneak
@@ -384,7 +384,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -415,7 +415,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: beastly-strength
@@ -456,7 +456,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: giant-strength
@@ -492,7 +492,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-armor-piercing
@@ -521,7 +521,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-strength
@@ -623,7 +623,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: supernatural-strength
@@ -726,7 +726,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: staff-touch
@@ -944,7 +944,7 @@ items:
                 type: formula
           delivery: sight
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - contract
             - long-range
@@ -1133,7 +1133,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: nature-elder-sorcery
@@ -1209,7 +1209,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: nature-rotators
@@ -1255,7 +1255,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           executionTime:
             base: passive
@@ -1531,7 +1531,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           elements:
             - nature
@@ -1871,7 +1871,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: additional-nature-rotators
@@ -1929,9 +1929,35 @@ items:
                 - resultsAltCrit
               identifier: ability:celestial-elder-sorcery-words
               type: changeCompetence
+            - _id: XHmARTWcYHwJsBRx
+              choiceType: select
+              choices:
+                OuDfqi2CAcL1J3t4:
+                  label: New Word
+                  value: "15"
+                W0pxYeDtJcvdfyRy:
+                  label: Spell With Known Words
+                  value: "12"
+              integer: true
+              name: Type
+              namespace: type
+              type: choices
+            - _id: gcD1THkboch5hxXf
+              choiceType: number
+              initialNumber: 1
+              integer: true
+              min: 0
+              name: Order of Power
+              namespace: op
+              type: choices
+            - _id: ae3hNxnMErMlRIk8
+              rollFormula: "@choice.type + @choice.op"
+              type: override
           competence:
             raw: 1
           delivery: self
+          duration:
+            unit: passive
           elderSorcery: true
           elements:
             - nature
@@ -2131,7 +2157,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: amplify-nature-spells
@@ -2170,7 +2196,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: nature-disciplines
@@ -2404,7 +2430,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: nature-rotator-fluency
@@ -2456,7 +2482,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: nature-spell-strikes

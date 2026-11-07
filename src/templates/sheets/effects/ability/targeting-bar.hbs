@@ -15,11 +15,13 @@
     label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label")
     path="system.targets"
   }}
-  {{formUpdater
-    document
-    icon=TERIOCK.DISPLAY.icons.manifest.ability.duration
-    info="core:duration"
-    label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.duration.label")
-    path="system.duration"
-  }}
+  {{#unless (eq system.maneuver "passive")}}
+    {{formUpdater
+      document
+      icon=TERIOCK.DISPLAY.icons.manifest.ability.duration
+      info="core:duration"
+      label=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.duration.label")
+      path="system.duration"
+    }}
+  {{/unless}}
 </div>

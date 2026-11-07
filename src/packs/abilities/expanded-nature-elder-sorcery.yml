@@ -31,7 +31,31 @@ system:
         - resultsAltCrit
       identifier: ability:celestial-elder-sorcery-words
       type: changeCompetence
+    - _id: rQzVhYV3Ofvc6SB8
+      choices:
+        OuDfqi2CAcL1J3t4:
+          label: New Word
+          value: "15"
+        W0pxYeDtJcvdfyRy:
+          label: Spell With Known Words
+          value: "12"
+      name: Type
+      namespace: type
+      type: choices
+    - _id: sznktB76QaRC6S7x
+      choiceType: number
+      initialNumber: 1
+      integer: true
+      min: 0
+      name: Order of Power
+      namespace: op
+      type: choices
+    - _id: ae3hNxnMErMlRIk8
+      rollFormula: "@choice.type + @choice.op"
+      type: override
   delivery: self
+  duration:
+    unit: passive
   elderSorcery: true
   elements:
     - nature

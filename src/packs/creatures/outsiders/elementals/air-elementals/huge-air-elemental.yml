@@ -30,7 +30,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -64,7 +64,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - hexseal
           executionTime:
@@ -101,7 +101,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -144,7 +144,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - regeneration
             - revitalization
@@ -200,7 +200,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: monstrous-strength
@@ -236,7 +236,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-movement
@@ -263,7 +263,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-perception
@@ -290,7 +290,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-sneak
@@ -384,7 +384,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -415,7 +415,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: beastly-strength
@@ -456,7 +456,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: giant-strength
@@ -492,7 +492,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-armor-piercing
@@ -521,7 +521,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-strength
@@ -623,7 +623,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: supernatural-strength
@@ -726,7 +726,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: staff-touch
@@ -1119,7 +1119,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: life-elder-sorcery
@@ -1195,7 +1195,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: life-rotators
@@ -1349,7 +1349,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           executionTime:
             base: passive
@@ -1704,7 +1704,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           elements:
             - life
@@ -1949,7 +1949,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: additional-life-rotators
@@ -2007,9 +2007,35 @@ items:
                 - resultsAltCrit
               identifier: ability:celestial-elder-sorcery-words
               type: changeCompetence
+            - _id: 3yY5ldeLQ36PbuhT
+              choiceType: select
+              choices:
+                OuDfqi2CAcL1J3t4:
+                  label: New Word
+                  value: "15"
+                W0pxYeDtJcvdfyRy:
+                  label: Spell With Known Words
+                  value: "12"
+              integer: true
+              name: Type
+              namespace: type
+              type: choices
+            - _id: AwVExMwiHxcg72vu
+              choiceType: number
+              initialNumber: 1
+              integer: true
+              min: 0
+              name: Order of Power
+              namespace: op
+              type: choices
+            - _id: cE9bk8CVGxrev8kd
+              rollFormula: "@choice.type + @choice.op"
+              type: override
           competence:
             raw: 1
           delivery: self
+          duration:
+            unit: passive
           elderSorcery: true
           elements:
             - life
@@ -2251,7 +2277,9 @@ items:
             unit: hour
           elements:
             - life
-          endCondition: <p>The break of dawn.</p>
+          endCondition: >-
+            <p>The break of dawn. This also ends if the @Identifier[core:targets]{target} is successfully
+            @Identifier[keyword:awaken]{awakened}.</p>
           expirations:
             - _id: d1f6b6eaa581aa10
               triggers:
@@ -2322,7 +2350,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: amplify-life-spells
@@ -2360,7 +2388,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: life-disciplines
@@ -2589,7 +2617,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: life-rotator-fluency
@@ -2640,7 +2668,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: life-spell-strikes

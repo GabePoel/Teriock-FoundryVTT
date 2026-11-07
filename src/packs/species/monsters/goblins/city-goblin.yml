@@ -1,6 +1,35 @@
 _id: 502baa2fc007f5f5
 _key: "!items!502baa2fc007f5f5"
 effects:
+  - _id: LrzS85gwnYquEaWN
+    _key: "!items.effects!502baa2fc007f5f5.LrzS85gwnYquEaWN"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fbb5ba981c82f081
+    img: icons/environment/settlement/watchtower-city.webp
+    name: City Native
+    showIcon: 0
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: passive
+      executionTime:
+        base: passive
+      identifier: city-native
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You move through @Identifier[core:difficult-terrain]{difficult} urban terrain at
+          @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
   - _id: 3QHWOv3OO8VW7syw
     _key: "!items.effects!502baa2fc007f5f5.3QHWOv3OO8VW7syw"
     _stats:
@@ -26,7 +55,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       effectTypes:
         - movement
       executionTime:
@@ -54,7 +83,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: low-strength
@@ -83,7 +112,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: normal-movement
@@ -110,7 +139,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: normal-perception
@@ -137,7 +166,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: normal-sneak
@@ -164,7 +193,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: stupid-intelligence
@@ -232,8 +261,6 @@ effects:
         - _id: 7400b41f20d9f100
           regionType: emanation
           type: target
-      competence:
-        raw: 1
       costs:
         components:
           somatic:
@@ -250,7 +277,9 @@ effects:
         unit: hour
       elements:
         - life
-      endCondition: <p>The break of dawn.</p>
+      endCondition: >-
+        <p>The break of dawn. This also ends if the @Identifier[core:targets]{target} is successfully
+        @Identifier[keyword:awaken]{awakened}.</p>
       expirations:
         - _id: d1f6b6eaa581aa10
           triggers:

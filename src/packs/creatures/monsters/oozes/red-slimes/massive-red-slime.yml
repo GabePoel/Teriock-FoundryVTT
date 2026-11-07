@@ -53,7 +53,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: staff-touch
@@ -110,7 +110,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - automatic
           executionTime:
@@ -142,7 +142,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -192,7 +192,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -229,7 +229,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: bumbling
@@ -269,7 +269,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -324,7 +324,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: gooey-damage-reduction
@@ -351,7 +351,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-strength
@@ -402,7 +402,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -540,7 +540,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: slow
@@ -574,7 +574,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -613,7 +613,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -644,7 +644,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: beastly-strength
@@ -681,7 +681,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-armor-piercing
@@ -720,7 +720,9 @@ items:
               type: changes
           competence:
             raw: 1
-          delivery: aura
+          delivery: self
+          duration:
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -730,19 +732,19 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know
-              the location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving
-              or not, so long as they are still within 10 feet of you.</p>
+              <p>You have a powerful sense of smell that lets you know the location of all
+              @Identifier[core:targets]{targets} within 10 feet.</p>
           powerSources:
             - martial
           range:
-            raw: "10"
-            unit: ft
+            unit: self
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
+          targets:
+            - self
         type: ability
     folder: 9eb51b53c8495b9d
     img: systems/teriock/src/assets/thumbnails/creature/massive-red-slime.webp
@@ -927,7 +929,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: mage-light
@@ -1163,7 +1165,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: flame-elder-sorcery
@@ -1239,7 +1241,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: flame-rotators
@@ -1344,7 +1346,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           executionTime:
             base: passive
@@ -1683,7 +1685,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           elements:
             - flame
@@ -1842,7 +1844,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: additional-flame-rotators
@@ -1899,9 +1901,35 @@ items:
                 - resultsAltCrit
               identifier: ability:elder-sorcery-creation
               type: changeCompetence
+            - _id: rQzVhYV3Ofvc6SB8
+              choiceType: select
+              choices:
+                OuDfqi2CAcL1J3t4:
+                  label: New Word
+                  value: "15"
+                W0pxYeDtJcvdfyRy:
+                  label: Spell With Known Words
+                  value: "12"
+              integer: true
+              name: Type
+              namespace: type
+              type: choices
+            - _id: VznktB76QaRC6S7x
+              choiceType: number
+              initialNumber: 1
+              integer: true
+              min: 0
+              name: Order of Power
+              namespace: op
+              type: choices
+            - _id: gUiCtpvpnHZmkEDr
+              rollFormula: "@choice.type + @choice.op"
+              type: override
           competence:
             raw: 1
           delivery: self
+          duration:
+            unit: passive
           elderSorcery: true
           elements:
             - flame
@@ -2181,7 +2209,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: amplify-flame-spells
@@ -2219,7 +2247,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: flame-disciplines
@@ -2458,7 +2486,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: flame-rotator-fluency
@@ -2510,7 +2538,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: flame-spell-strikes

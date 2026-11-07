@@ -15,7 +15,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: additional-storm-rotators
@@ -47,7 +47,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: amplify-storm-spells
@@ -108,9 +108,35 @@ effects:
             - resultsAltCrit
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
+        - _id: hkr3BDLAYrvfTiBi
+          choiceType: select
+          choices:
+            OuDfqi2CAcL1J3t4:
+              label: New Word
+              value: "15"
+            W0pxYeDtJcvdfyRy:
+              label: Spell With Known Words
+              value: "12"
+          integer: true
+          name: Type
+          namespace: type
+          type: choices
+        - _id: 3Fk2ficCKTMZeV1z
+          choiceType: number
+          initialNumber: 1
+          integer: true
+          min: 0
+          name: Order of Power
+          namespace: op
+          type: choices
+        - _id: BXwHuM24FiOaQ8Ge
+          rollFormula: "@choice.type + @choice.op"
+          type: override
       competence:
         raw: 1
       delivery: self
+      duration:
+        unit: passive
       elderSorcery: true
       elements:
         - storm
@@ -167,7 +193,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: storm-disciplines
@@ -225,7 +251,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: storm-rotator-fluency
@@ -276,7 +302,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: storm-spell-strikes

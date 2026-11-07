@@ -18,7 +18,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: additional-necromancy-rotators
@@ -75,9 +75,35 @@ effects:
             - resultsAltCrit
           identifier: ability:necromancy-elder-sorcery-words
           type: changeCompetence
+        - _id: HHy4StpG6SbzLMBL
+          choiceType: select
+          choices:
+            OuDfqi2CAcL1J3t4:
+              label: New Word
+              value: "15"
+            W0pxYeDtJcvdfyRy:
+              label: Spell With Known Words
+              value: "12"
+          integer: true
+          name: Type
+          namespace: type
+          type: choices
+        - _id: 2Vwfhlxb04cp05Lp
+          choiceType: number
+          initialNumber: 1
+          integer: true
+          min: 0
+          name: Order of Power
+          namespace: op
+          type: choices
+        - _id: liTRStoAdAjCYWfp
+          rollFormula: "@choice.type + @choice.op"
+          type: override
       competence:
         raw: 1
       delivery: self
+      duration:
+        unit: passive
       elderSorcery: true
       elements:
         - necromancy

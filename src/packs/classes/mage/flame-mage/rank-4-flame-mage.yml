@@ -15,7 +15,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: additional-flame-rotators
@@ -48,7 +48,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: amplify-flame-spells
@@ -109,9 +109,35 @@ effects:
             - resultsAltCrit
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
+        - _id: rQzVhYV3Ofvc6SB8
+          choiceType: select
+          choices:
+            OuDfqi2CAcL1J3t4:
+              label: New Word
+              value: "15"
+            W0pxYeDtJcvdfyRy:
+              label: Spell With Known Words
+              value: "12"
+          integer: true
+          name: Type
+          namespace: type
+          type: choices
+        - _id: VznktB76QaRC6S7x
+          choiceType: number
+          initialNumber: 1
+          integer: true
+          min: 0
+          name: Order of Power
+          namespace: op
+          type: choices
+        - _id: gUiCtpvpnHZmkEDr
+          rollFormula: "@choice.type + @choice.op"
+          type: override
       competence:
         raw: 1
       delivery: self
+      duration:
+        unit: passive
       elderSorcery: true
       elements:
         - flame
@@ -169,7 +195,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: flame-disciplines
@@ -226,7 +252,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: flame-rotator-fluency
@@ -276,7 +302,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        unit: unlimited
+        unit: passive
       executionTime:
         base: passive
       identifier: flame-spell-strikes

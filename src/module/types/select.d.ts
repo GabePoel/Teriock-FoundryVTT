@@ -65,6 +65,8 @@ declare global {
     };
 
     export type _ChoiceSelectorOptions = {
+      /** Field to prompt with instead of a select built from the choices. */
+      field?: foundry.data.fields.DataField;
       /** Additional hint with more complex HTML. */
       hintHtml?: string;
       /** Icon to use for the select window. */

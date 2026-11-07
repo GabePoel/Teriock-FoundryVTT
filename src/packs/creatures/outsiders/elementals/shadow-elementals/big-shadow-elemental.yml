@@ -30,7 +30,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -58,7 +58,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-strength
@@ -97,7 +97,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -140,7 +140,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - regeneration
             - revitalization
@@ -188,7 +188,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - hexseal
           executionTime:
@@ -220,7 +220,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-movement
@@ -247,7 +247,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-perception
@@ -274,7 +274,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: normal-sneak
@@ -368,7 +368,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -399,7 +399,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: beastly-strength
@@ -436,7 +436,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-armor-piercing
@@ -531,7 +531,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: staff-touch
@@ -814,7 +814,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-elder-sorcery
@@ -890,7 +890,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-rotators
@@ -936,7 +936,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           executionTime:
             base: passive
@@ -1297,7 +1297,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           elements:
             - necromancy
@@ -1508,7 +1508,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: additional-necromancy-rotators
@@ -1565,9 +1565,35 @@ items:
                 - resultsAltCrit
               identifier: ability:necromancy-elder-sorcery-words
               type: changeCompetence
+            - _id: HHy4StpG6SbzLMBL
+              choiceType: select
+              choices:
+                OuDfqi2CAcL1J3t4:
+                  label: New Word
+                  value: "15"
+                W0pxYeDtJcvdfyRy:
+                  label: Spell With Known Words
+                  value: "12"
+              integer: true
+              name: Type
+              namespace: type
+              type: choices
+            - _id: 2Vwfhlxb04cp05Lp
+              choiceType: number
+              initialNumber: 1
+              integer: true
+              min: 0
+              name: Order of Power
+              namespace: op
+              type: choices
+            - _id: liTRStoAdAjCYWfp
+              rollFormula: "@choice.type + @choice.op"
+              type: override
           competence:
             raw: 1
           delivery: self
+          duration:
+            unit: passive
           elderSorcery: true
           elements:
             - necromancy

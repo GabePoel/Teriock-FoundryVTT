@@ -9,6 +9,7 @@ const { FormDataExtended } = foundry.applications.ux;
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
  * @import { HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
  * @import { StringFieldOptions } from "@common/data/_types.mjs";
+ * @import { DataField } from "@common/data/fields.mjs";
  */
 
 /**
@@ -82,11 +83,11 @@ export default class ChoiceSelector extends ResolvableDialog {
     const { hintHtml, icon, other, title } = options;
     this.hintHtml = hintHtml;
     this.other = other;
-    this.#field = new StringField(options);
+    this.#field = options.field ?? new StringField(options);
     foundry.utils.mergeObject(this.options.window, { icon: makeIconClass(icon, "title"), title }, { inplace: true });
   }
 
-  /** @type {StringField} */
+  /** @type {DataField} */
   #field;
 
   /** @inheritDoc */

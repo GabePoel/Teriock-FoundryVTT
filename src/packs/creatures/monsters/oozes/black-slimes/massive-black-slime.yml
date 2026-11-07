@@ -53,7 +53,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: staff-touch
@@ -110,7 +110,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - automatic
           executionTime:
@@ -142,7 +142,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -192,7 +192,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -229,7 +229,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: bumbling
@@ -269,7 +269,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -324,7 +324,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: gooey-damage-reduction
@@ -351,7 +351,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-strength
@@ -402,7 +402,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -540,7 +540,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: slow
@@ -574,7 +574,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -613,7 +613,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           effectTypes:
             - immunity
           executionTime:
@@ -644,7 +644,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: beastly-strength
@@ -681,7 +681,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: improved-armor-piercing
@@ -720,7 +720,9 @@ items:
               type: changes
           competence:
             raw: 1
-          delivery: aura
+          delivery: self
+          duration:
+            unit: passive
           effectTypes:
             - sensory
           executionTime:
@@ -730,19 +732,19 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all @Identifier[core:targets]{target} creatures. You continue to know
-              the location of all @Identifier[core:targets]{targets} within 10 feet, whether they are or you are moving
-              or not, so long as they are still within 10 feet of you.</p>
+              <p>You have a powerful sense of smell that lets you know the location of all
+              @Identifier[core:targets]{targets} within 10 feet.</p>
           powerSources:
             - martial
           range:
-            raw: "10"
-            unit: ft
+            unit: self
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
+          targets:
+            - self
         type: ability
     folder: 706f39d8fea214c5
     img: systems/teriock/src/assets/thumbnails/creature/massive-black-slime.webp
@@ -1077,7 +1079,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-elder-sorcery
@@ -1153,7 +1155,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-rotators
@@ -1199,7 +1201,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           executionTime:
             base: passive
@@ -1560,7 +1562,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           elderSorcery: true
           elements:
             - necromancy
@@ -1771,7 +1773,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: additional-necromancy-rotators
@@ -1828,9 +1830,35 @@ items:
                 - resultsAltCrit
               identifier: ability:necromancy-elder-sorcery-words
               type: changeCompetence
+            - _id: HHy4StpG6SbzLMBL
+              choiceType: select
+              choices:
+                OuDfqi2CAcL1J3t4:
+                  label: New Word
+                  value: "15"
+                W0pxYeDtJcvdfyRy:
+                  label: Spell With Known Words
+                  value: "12"
+              integer: true
+              name: Type
+              namespace: type
+              type: choices
+            - _id: 2Vwfhlxb04cp05Lp
+              choiceType: number
+              initialNumber: 1
+              integer: true
+              min: 0
+              name: Order of Power
+              namespace: op
+              type: choices
+            - _id: liTRStoAdAjCYWfp
+              rollFormula: "@choice.type + @choice.op"
+              type: override
           competence:
             raw: 1
           delivery: self
+          duration:
+            unit: passive
           elderSorcery: true
           elements:
             - necromancy
@@ -2072,7 +2100,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: amplify-necromancy-spells
@@ -2110,7 +2138,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-disciplines
@@ -2340,7 +2368,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-rotator-fluency
@@ -2392,7 +2420,7 @@ items:
             raw: 1
           delivery: self
           duration:
-            unit: unlimited
+            unit: passive
           executionTime:
             base: passive
           identifier: necromancy-spell-strikes
