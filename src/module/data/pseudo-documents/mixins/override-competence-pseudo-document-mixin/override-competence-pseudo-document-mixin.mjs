@@ -65,9 +65,9 @@ export default function OverrideCompetencePseudoDocumentMixin(Base) {
         this.setCompetence === "inherit"
         && (scope?.execution?.competence || this.getNearestDocument()?.system?.competence)
       ) {
-        return scope?.execution?.competence?.value ?? this.getNearestDocument()?.system?.competence?.value;
+        return scope?.execution?.competence?.raw ?? this.getNearestDocument()?.system?.competence?.raw;
       }
-      if (this.setCompetence === "override") { return this.competence.value; }
+      if (this.setCompetence === "override") { return this.competence.raw; }
       return undefined;
     }
   }

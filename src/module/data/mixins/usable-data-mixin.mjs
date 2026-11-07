@@ -79,7 +79,7 @@ export default function UsableDataMixin(Base) {
     /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
-        c: this.competence?.bonus,
+        c: this.competence?.value,
         flu: Number(this.competence?.fluent),
         pro: Number(this.competence?.proficient),
       });

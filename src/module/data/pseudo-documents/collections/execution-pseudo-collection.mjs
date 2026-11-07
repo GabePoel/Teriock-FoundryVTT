@@ -13,7 +13,7 @@ export default class ExecutionPseudoCollection extends PseudoCollection {
     if (pseudo?.disabledToggles instanceof Set) {
       const heightenToggle = this.model?.heightened ? "heightened" : "unheightened";
       if (typeof this.model?.heightened === "number" && pseudo.disabledToggles.has(heightenToggle)) { return false; }
-      const level = TERIOCK.CONFIG.competence.levels[this.model?.competence?.value];
+      const level = TERIOCK.CONFIG.competence.levels[this.model?.competence?.raw];
       if (level && pseudo.disabledToggles.has(level.toggle)) { return false; }
     }
     if (typeof pseudo?.checkIfQualified === "function") {

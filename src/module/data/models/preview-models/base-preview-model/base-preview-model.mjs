@@ -53,7 +53,7 @@ export default class BasePreviewModel extends BaseDataModel {
   static get sorters() {
     return {
       age: { label: "TERIOCK.COMMON.Age", sorter: pathSorterFactory("_stats.createdTime") },
-      competence: { label: "TERIOCK.COMMON.Competence", sorter: pathSorterFactory("system.competence.value") },
+      competence: { label: "TERIOCK.COMMON.Competence", sorter: pathSorterFactory("system.competence.raw") },
       kind: { label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label", sorter: pathSorterFactory("system.kindIndex") },
       name: { label: "DOCUMENT.FIELDS.name.label", sorter: pathSorterFactory("name") },
     };

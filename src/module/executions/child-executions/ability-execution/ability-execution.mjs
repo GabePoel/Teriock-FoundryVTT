@@ -424,7 +424,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         affinities: this.affinities.active.filter(applies).map(a => a.getEffectData(this)),
         applyIfDeattuned: true,
         blocks: (await this.source.system.getPanelParts()).blocks,
-        competence: { raw: this.competence.value },
+        competence: { raw: this.competence.raw },
         critical: ["resultsAltCrit", "resultsBaseCrit"].includes(toggle.id),
         effectTypes: Array.from(this.source.system.effectTypes),
         elements: Array.from(this.source.system.elements),

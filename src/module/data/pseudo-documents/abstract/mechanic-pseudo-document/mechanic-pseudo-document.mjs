@@ -76,7 +76,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
    */
   get competent() {
     if (!this.parent?.competence) { return true; }
-    return !this.disabledToggles.has(TERIOCK.CONFIG.competence.levels[this.parent.competence.value].toggle);
+    return !this.disabledToggles.has(TERIOCK.CONFIG.competence.levels[this.parent.competence.raw].toggle);
   }
 
   /**

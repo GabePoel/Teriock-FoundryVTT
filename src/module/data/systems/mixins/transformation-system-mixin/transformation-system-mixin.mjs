@@ -123,7 +123,7 @@ export default function TransformationSystemMixin(Base) {
         for (const stat of POOL_STATS) {
           s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
         }
-        s.system.competence.raw = this.transformation.competence.value;
+        s.system.competence.raw = this.transformation.competence.raw;
         if (s.system.size.min && s.system.size.max) {
           s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
         }

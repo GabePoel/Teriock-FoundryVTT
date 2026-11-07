@@ -423,10 +423,10 @@ export default class BaseExecution extends BaseDataModel {
   _determineCompetence(options) {
     let competence = 0;
     if (foundry.utils.hasProperty(options.source, "system.competence.raw")) {
-      competence = foundry.utils.getProperty(options.source, "system.competence.value");
+      competence = foundry.utils.getProperty(options.source, "system.competence.raw");
     }
     if (foundry.utils.hasProperty(options.source, "competence.raw")) {
-      competence = foundry.utils.getProperty(options.source, "competence.value");
+      competence = foundry.utils.getProperty(options.source, "competence.raw");
     }
     if (typeof options.competence === "number") { competence = options.competence; }
     return competence;

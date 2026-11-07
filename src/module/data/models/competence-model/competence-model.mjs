@@ -12,16 +12,6 @@ export default class CompetenceModel extends BaseDataModel {
   }
 
   /**
-   * Numerical score of this competence.
-   * @returns {number}
-   */
-  get bonus() {
-    if (this.fluent) { return this.actor?.system.scaling.f || 0; }
-    if (this.proficient) { return this.actor?.system.scaling.p || 0; }
-    return 0;
-  }
-
-  /**
    * A descriptive string.
    * @returns {string}
    */
@@ -52,7 +42,7 @@ export default class CompetenceModel extends BaseDataModel {
 
   /** @inheritDoc */
   get icon() {
-    return TERIOCK.CONFIG.competence.levels[this.value].icon;
+    return TERIOCK.CONFIG.competence.levels[this.raw].icon;
   }
 
   /**
@@ -60,12 +50,12 @@ export default class CompetenceModel extends BaseDataModel {
    * @returns {string}
    */
   get iconClass() {
-    return TERIOCK.CONFIG.competence.levels[this.value].simpleIconClass;
+    return TERIOCK.CONFIG.competence.levels[this.raw].simpleIconClass;
   }
 
   /** @inheritDoc */
   get label() {
-    return TERIOCK.CONFIG.competence.levels[this.value].label;
+    return TERIOCK.CONFIG.competence.levels[this.raw].label;
   }
 
   /**
@@ -77,12 +67,12 @@ export default class CompetenceModel extends BaseDataModel {
   }
 
   /**
-   * A competence value.
-   * @returns {Teriock.System.CompetenceLevel}
+   * Numerical score of this competence.
+   * @returns {number}
    */
   get value() {
-    if (this.fluent) { return 2; }
-    if (this.proficient) { return 1; }
+    if (this.fluent) { return this.actor?.system.scaling.f || 0; }
+    if (this.proficient) { return this.actor?.system.scaling.p || 0; }
     return 0;
   }
 }

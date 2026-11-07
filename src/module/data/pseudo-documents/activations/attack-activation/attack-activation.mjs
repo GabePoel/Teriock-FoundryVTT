@@ -30,7 +30,7 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
     const options = {
       attackPenalty: this.attackPenalty || undefined,
       bonus: this.bonus,
-      competence: this.competence.value,
+      competence: this.competence.raw,
       event: this.event,
       threshold: typeof this.threshold === "number" ? this.threshold : undefined,
       useArmament: this.useArmament,
