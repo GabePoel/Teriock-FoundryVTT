@@ -41,8 +41,7 @@ export default class IdentifierField extends StringField {
     config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
       types: config.type ? [config.type] : [],
     });
-    if (config.reset || config.options) { return HTMLIdentifierInputElement.create(config); }
-    return super._toInput(config);
+    return HTMLIdentifierInputElement.create(config);
   }
 
   /** @inheritDoc */

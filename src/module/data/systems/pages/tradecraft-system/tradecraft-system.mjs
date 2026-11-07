@@ -2,7 +2,7 @@ import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { FluencySystem } from "../../effects/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
-import BasePageSystem from "../base-page-system/base-page-system.mjs";
+import { BasePageSystem } from "../abstract/_module.mjs";
 
 /**
  * @extends {BasePageSystem}

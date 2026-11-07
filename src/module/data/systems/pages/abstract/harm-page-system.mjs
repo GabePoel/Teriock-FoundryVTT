@@ -1,5 +1,5 @@
-import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
-import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
@@ -8,7 +8,7 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
  * @mixes MetaphysicsSystem
  * @mixes WikiSystem
  */
-export default class HarmSystem
+export default class HarmPageSystem
   extends mixClasses(BasePageSystem, AutomatableSystemMixin, MetaphysicsSystemMixin, WikiSystemMixin)
 {
   /** @inheritDoc */

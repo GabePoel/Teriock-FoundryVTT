@@ -33,6 +33,10 @@ export default class BaseUpdater extends DocumentDialog {
    */
   static async _onReset() {
     for (const p of this._dataPaths) {
+      if (p.startsWith("flags.")) {
+        foundry.utils.setProperty(this._currentData, p, undefined);
+        continue;
+      }
       const field = this.document.getFieldForProperty(p);
       if (!field) { continue; }
       foundry.utils.setProperty(this._currentData, p, field.getInitialValue());
@@ -63,7 +67,7 @@ export default class BaseUpdater extends DocumentDialog {
   constructor(options) {
     super(options);
     if (options.paths) { this.#dataPaths = options.paths; }
-    this._currentData = { system: { lockedPaths: this.document.system._source.lockedPaths } };
+    this._currentData = this._canLockPaths ? { system: { lockedPaths: this.document.system._source.lockedPaths } } : {};
     for (const p of this._dataPaths) {
       foundry.utils.setProperty(
         this._currentData,
@@ -79,6 +83,14 @@ export default class BaseUpdater extends DocumentDialog {
 
   /** @type {object} */
   _currentData;
+
+  /**
+   * Whether the document supports locked paths.
+   * @returns {boolean}
+   */
+  get _canLockPaths() {
+    return Boolean(this.document.system?.schema.has("lockedPaths"));
+  }
 
   /**
    * The paths to initially get data for.
@@ -141,27 +153,30 @@ export default class BaseUpdater extends DocumentDialog {
     this.element.querySelector("button[type='submit']")?.focus();
   }
 
+  /**
+   * Prepare context for a single field.
+   * @param {string} path
+   * @returns {object}
+   */
+  _prepareFieldContext(path) {
+    const field = this.document.getFieldForProperty(path);
+    const fieldContext = {
+      choices: this._getChoicesForPath(path),
+      classes: ["teriock-icon-placeholder"],
+      context: this.document.system?._inputContextKey ?? "actor",
+      field,
+      localize: true,
+      name: path,
+      value: foundry.utils.getProperty(this._currentData, path),
+    };
+    if (field?.options?.units) { fieldContext.units = field.options.units; }
+    return fieldContext;
+  }
+
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    if (partId === "form") {
-      context.fields = [];
-      const inputContext = this.document.system?._inputContextKey ?? "actor";
-      for (const p of this._formPaths) {
-        const field = this.document.getFieldForProperty(p);
-        const fieldContext = {
-          choices: this._getChoicesForPath(p),
-          classes: ["teriock-icon-placeholder"],
-          context: inputContext,
-          field,
-          localize: true,
-          name: p,
-          value: foundry.utils.getProperty(this._currentData, p),
-        };
-        if (field.options?.units) { fieldContext.units = field.options?.units; }
-        context.fields.push(fieldContext);
-      }
-    }
+    if (partId === "form") { context.fields = this._formPaths.map(p => this._prepareFieldContext(p)); }
     if (partId === "footer") {
       context.buttons = [{
         default: true,
@@ -181,12 +196,20 @@ export default class BaseUpdater extends DocumentDialog {
   /** @inheritDoc */
   async _processSubmitData(event, form, submitData, options = {}) {
     options.interactive ??= true;
-    foundry.utils.setProperty(submitData, "system.lockedPaths", Array.from(this.lockedPaths));
+    for (const p of this._formPaths) {
+      if (!p.startsWith("flags.")) { continue; }
+      const value = foundry.utils.getProperty(submitData, p);
+      if (value === null || value === "") { foundry.utils.setProperty(submitData, p, _del); }
+    }
+    if (this._canLockPaths) {
+      foundry.utils.setProperty(submitData, "system.lockedPaths", Array.from(this.lockedPaths));
+    }
     return super._processSubmitData(event, form, submitData, options);
   }
 
   /** @inheritDoc */
   _replaceHTML(result, content, options) {
+    if (!this._canLockPaths) { return super._replaceHTML(result, content, options); }
     const lockedPaths = this.lockedPaths;
     result.form?.querySelectorAll(".form-fields").forEach(el => {
       const path = el.querySelector("[name]")?.getAttribute("name");

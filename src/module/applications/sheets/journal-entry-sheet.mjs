@@ -1,5 +1,6 @@
 import { makeIconClass, mixClasses } from "../../utils/_module.mjs";
 import { BaseApplicationMixin } from "../api/mixins/_module.mjs";
+import { RulebookUpdater } from "../dialogs/_module.mjs";
 
 const { JournalEntrySheet } = foundry.applications.sheets.journal;
 
@@ -8,8 +9,39 @@ const { JournalEntrySheet } = foundry.applications.sheets.journal;
  * @mixes BaseApplication
  */
 export default class TeriockJournalEntrySheet extends mixClasses(JournalEntrySheet, BaseApplicationMixin) {
+  /**
+   * Update rulebook flags.
+   * @returns {Promise<void>}
+   * @this {TeriockJournalEntrySheet}
+   */
+  static async #onUpdateRulebook() {
+    if (!game.teriock.checkEditable(this)) { return; }
+    await RulebookUpdater.create({
+      document: this.document,
+      paths: ["flags.teriock.ruleType", "flags.teriock.ruleIcon"],
+      window: {
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.core, "title"),
+        title: "TERIOCK.SHEETS.Journal.rulebook.title",
+      },
+    });
+  }
+
   /** @inheritDoc */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(CONFIG.JournalEntry.sidebarIcon, "title") } };
+  static DEFAULT_OPTIONS = {
+    actions: { updateRulebook: this.#onUpdateRulebook },
+    window: {
+      controls: [{
+        action: "updateRulebook",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.core, "contextMenu"),
+        label: "TERIOCK.SHEETS.Journal.rulebook.title",
+        ownership: "OWNER",
+        visible() {
+          return this.isEditable && game.settings.get("teriock", "developerMode");
+        },
+      }],
+      icon: makeIconClass(CONFIG.JournalEntry.sidebarIcon, "title"),
+    },
+  };
 
   /**
    * Get a journal entry page from some list item.

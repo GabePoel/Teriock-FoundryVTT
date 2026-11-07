@@ -1,10 +1,10 @@
-import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../../../utils/_module.mjs";
 import {
   BaseSystemMixin,
   InstructionsSystemMixin,
   RulesSystemMixin,
   UncommonSystemMixin,
-} from "../../mixins/_module.mjs";
+} from "../../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;

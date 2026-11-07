@@ -1,7 +1,7 @@
 import { mergeMetadata } from "../../../utils/_module.mjs";
-import HarmSystem from "./harm-system.mjs";
+import { HarmPageSystem } from "./abstract/_module.mjs";
 
-export default class DrainSystem extends HarmSystem {
+export default class DrainSystem extends HarmPageSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.effect.drain,

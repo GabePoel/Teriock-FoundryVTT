@@ -52,14 +52,19 @@ export default class TeriockJournalEntryPage
    * @returns {TypedIdentifier|null}
    */
   get typedIdentifier() {
-    const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
-    if (ruleType) { return `${ruleType}:${this.forcedIdentifier}`; }
+    if (this.type === "rule") {
+      const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
+      if (typeof ruleType === "string") { return `${teriock.utils.toKebabCase(ruleType)}:${this.forcedIdentifier}`; }
+    }
     return super.typedIdentifier;
   }
 
   /** @inheritDoc */
   get typeIcon() {
-    return this.getFlag("teriock", "ruleIcon") ?? this.parent?.getFlag("teriock", "ruleIcon") ?? super.typeIcon;
+    if (this.type === "rule") {
+      return this.getFlag("teriock", "ruleIcon") ?? this.parent?.getFlag("teriock", "ruleIcon") ?? super.typeIcon;
+    }
+    return super.typeIcon;
   }
 
   /** @inheritDoc */
