@@ -13,7 +13,7 @@ declare global {
       ringImg: Teriock.System.ImageString;
     };
 
-    export type ActorTransformationConfig = SpeciesTransformationConfig & {
+    export type ActorTransformationConfig = {
       /** <schema> The primary transformation effect */
       primary: TeriockActiveEffect<"condition" | "consequence"> | null;
     };

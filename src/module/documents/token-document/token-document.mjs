@@ -251,7 +251,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
         if (this.height !== this.actor.system.size.length) { updateData.height = this.actor.system.size.length; }
       }
     }
-    if (!foundry.utils.isEmpty(updateData) && this.id) { await this.update(updateData, updateOptions); }
+    if (!foundry.utils.isEmpty(updateData) && this.id) { await this.resize(updateData, updateOptions); }
   }
 
   /** @inheritDoc */

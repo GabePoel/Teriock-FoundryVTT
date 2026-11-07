@@ -2,13 +2,17 @@ import { preLocalizeObject } from "../../helpers/localization.mjs";
 
 /** @category Transformation */
 const config = {
-  attributeChange: {
-    get phase() {
-      return TERIOCK.CONFIG.ability.attributeChange.phase;
+  changes: {
+    attribute: {
+      get phase() {
+        return TERIOCK.CONFIG.ability.attributeChange.phase;
+      },
+      get priority() {
+        return TERIOCK.CONFIG.ability.attributeChange.priority + 1;
+      },
     },
-    get priority() {
-      return TERIOCK.CONFIG.ability.attributeChange.priority + 1;
-    },
+    size: { phase: "setup", priority: 5 },
+    token: { phase: "initial", priority: 5 },
   },
   // no sort
   level: {
@@ -38,7 +42,6 @@ const config = {
     scar: { initial: false, label: "TYPES.Item.scar", path: "system.disabled" },
     species: { initial: true, label: "TYPES.Item.species", path: "system.disabled" },
   },
-  tokenChange: { phase: "initial", priority: 5 },
 };
 
 export default config;

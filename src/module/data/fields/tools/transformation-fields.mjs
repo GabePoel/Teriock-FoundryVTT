@@ -50,11 +50,11 @@ export function speciesTransformationFields() {
  * @category Transformation
  */
 export function actorTransformationConfig() {
-  return Object.assign(speciesTransformationFields(), {
+  return {
     primary: new LocalDocumentField(foundry.documents.BaseActiveEffect, {
       filter: d => ["condition", "consequence"].includes(d.type) && d.system.transformation.enabled,
     }),
-  });
+  };
 }
 
 /**

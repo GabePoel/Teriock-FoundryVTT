@@ -1,5 +1,5 @@
 import { migrateStatuses } from "../../data/fields/tools/migrations.mjs";
-import { mixClasses } from "../../utils/_module.mjs";
+import { consolidateWriteOperations, mixClasses } from "../../utils/_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
@@ -20,6 +20,52 @@ export default class TeriockActiveEffect
     // Restrict changes to just structured data fields, flags, and token properties. Yoinked from Ryuutama.
     if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) { return; }
     return super._applyChangeUnguided(targetDoc, change, changes, options);
+  }
+
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
+  static async _onCreateOperation(documents, operation, user) {
+    await super._onCreateOperation(documents, operation, user);
+    const editable = documents.filter(d => d.actor && d.checkEditor(user));
+    const transformations = editable.filter(d => d.system.isTransformation);
+    const operations = (await Promise.all(transformations.map(d => d.system.getCreateTransformationOperations())))
+      .flat();
+    for (const d of editable) {
+      const dependents = operation.dependents?.[d.id];
+      if (dependents?.length) { operations.push(d.getCreateDependentDocumentsOperation("Item", dependents)); }
+    }
+    if (operations.length) { foundry.documents.modifyBatch(consolidateWriteOperations(operations)); }
+  }
+
+  /**
+   * @inheritDoc
+   * @category Dependents
+   */
+  static async _onDeleteOperation(documents, operation, user) {
+    await super._onDeleteOperation(documents, operation, user);
+    const editable = documents.filter(d => d.actor && d.checkEditor(user));
+    editable.sort((a, b) => b._stats.createdTime - a._stats.createdTime);
+    const operations = editable.flatMap(
+      d => [
+        ...(d.system.isTransformation ? d.system.getTransformationOperations(false) : []),
+        d.dependents.size ? d.getDeleteDependentDocumentsOperation("Item", d.dependents.map(i => i.id)) : null,
+      ]
+    );
+    if (operations.length) { foundry.documents.modifyBatch(consolidateWriteOperations(operations)); }
+  }
+
+  /** @inheritDoc */
+  static async _onUpdateOperation(documents, operation, user) {
+    await super._onUpdateOperation(documents, operation, user);
+    const toggled = documents.filter(d =>
+      d.actor && d.checkEditor(user) && d.system.isTransformation
+      && foundry.utils.hasProperty(operation.updates.find(u => u._id === d.id) ?? {}, "disabled")
+    );
+    toggled.sort((a, b) => b._stats.createdTime - a._stats.createdTime);
+    const operations = toggled.flatMap(d => d.system.getTransformationOperations(!d.disabled));
+    if (operations.length) { foundry.documents.modifyBatch(consolidateWriteOperations(operations)); }
   }
 
   /** @inheritDoc */
@@ -101,29 +147,6 @@ export default class TeriockActiveEffect
       },
     });
     super._configure(options);
-  }
-
-  /**
-   * @inheritDoc
-   * @category Dependents
-   */
-  _onCreate(data, options, userId) {
-    const dependents = foundry.utils.getProperty(options, `dependents.${this.id}`);
-    if (this.checkEditor(userId) && this.actor && dependents?.length) {
-      this.createDependentDocuments("Item", dependents);
-    }
-    super._onCreate(data, options, userId);
-  }
-
-  /**
-   * @inheritDoc
-   * @category Dependents
-   */
-  _onDelete(options, userId) {
-    super._onDelete(options, userId);
-    if (this.checkEditor(userId) && this.actor && this.dependents.size) {
-      this.actor.deleteEmbeddedDocuments("Item", this.dependents.map(d => d.id));
-    }
   }
 
   /**

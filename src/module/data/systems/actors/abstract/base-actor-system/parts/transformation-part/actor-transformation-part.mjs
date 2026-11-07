@@ -35,47 +35,6 @@ export default function ActorTransformationPart(Base) {
         transformation: new fields.SchemaField(actorTransformationConfig()),
       });
     }
-
-    /**
-     * Size forced by the primary transformation during this preparation.
-     * @type {number|null}
-     */
-    #transformedSize = null;
-
-    /**
-     * Whether this actor is transformed.
-     * @returns {boolean}
-     */
-    get isTransformed() {
-      return Boolean(this.transformation.primary?.active);
-    }
-
-    /** @inheritDoc */
-    prepareBaseData() {
-      super.prepareBaseData();
-      this.#transformedSize = null;
-      if (
-        this.isTransformed
-        && this.transformation.primary?.system.transformation.override.has("size")
-        && this.transformation.primary?.system.primarySpecies?.system.size.value
-        && !this.lockedPaths.has("system.size.value")
-      ) {
-        this.size.value = this.transformation.primary.system.primarySpecies.system.size.value;
-        this.#transformedSize = this.size.value;
-      }
-    }
-
-    /** @inheritDoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
-      if (this.#transformedSize !== null) {
-        foundry.utils.setProperty(this.parent.overrides, "system.size.value", this.#transformedSize);
-      }
-      if (this.isTransformed && this.transformation.primary?.system.transformation.override.has("art")) {
-        this.transformation.img = this.transformation.primary?.system.transformation.img;
-        this.transformation.ring = this.transformation.primary?.system.transformation.ring;
-      }
-    }
   }
 
   return ActorTransformationPart;
