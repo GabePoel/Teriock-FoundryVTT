@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import { dump, load } from "js-yaml";
 import path from "path";
 
-import { toId } from "../../src/module/helpers/string.mjs";
+import { toId } from "../../src/module/utils/string.mjs";
 
 const SRC_DIR = "./macros/";
 const DST_DIR = "./src/packs/";

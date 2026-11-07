@@ -81,7 +81,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
-   * Formula.
+   * The full formula other than any dice stuff.
    * @returns {Teriock.System.FormulaString}
    */
   get formula() {
@@ -89,7 +89,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
-   * A key identifying this executable.
+   * Some key that distinguishes this.
    * @returns {string}
    */
   get key() {
@@ -97,7 +97,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
-   * Mod.
+   * The mod formula.
    * @returns {Teriock.System.FormulaString}
    */
   get mod() {
@@ -105,7 +105,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
-   * The name of this executable.
+   * The localized name of this.
    * @returns {string}
    */
   get name() {
@@ -121,8 +121,9 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
-   * Evaluated roll modifier.
+   * Evaluated mod number.
    * @returns {number}
+   * @remarks This is evaluated with respect to roll data and therefore isn't safe to use in other roll data.
    */
   get value() {
     return BaseRoll.minValue(this.constructor.getFormula(this, "mod", "numbers", this.getRollData()));

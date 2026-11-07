@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { toKebabCase } from "../../src/module/helpers/string.mjs";
+import { toKebabCase } from "../../src/module/utils/string.mjs";
 
 const VARIANT = "MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D";
 const BASE = `https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/${VARIANT}`;
