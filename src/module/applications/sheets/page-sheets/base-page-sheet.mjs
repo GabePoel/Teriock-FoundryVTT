@@ -1,5 +1,6 @@
-import { mixClasses } from "../../../utils/_module.mjs";
+import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
+import { RulebookUpdater } from "../../dialogs/_module.mjs";
 import {
   DisplaySheetMixin,
   DragDropSheetMixin,
@@ -42,11 +43,40 @@ export default class BasePageSheet
     MechanicsTabsSheetMixin,
   )
 {
+  /**
+   * Update rulebook flags.
+   * @returns {Promise<void>}
+   * @this {BasePageSheet}
+   */
+  static async #onUpdateRulebook() {
+    if (!game.teriock.checkEditable(this)) { return; }
+    await RulebookUpdater.create({
+      document: this.document,
+      paths: ["flags.teriock.ruleType", "flags.teriock.ruleIcon"],
+      window: {
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.core, "title"),
+        title: "TERIOCK.SHEETS.Journal.rulebook.title",
+      },
+    });
+  }
+
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
+    actions: { updateRulebook: this.#onUpdateRulebook },
     form: { closeOnSubmit: false, submitOnChange: true },
     position: { height: 600, width: 560 },
-    window: { resizable: true },
+    window: {
+      controls: [{
+        action: "updateRulebook",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.core, "contextMenu"),
+        label: "TERIOCK.SHEETS.Journal.rulebook.title",
+        ownership: "OWNER",
+        visible() {
+          return this.isEditable && this.document.type === "rule" && game.settings.get("teriock", "developerMode");
+        },
+      }],
+      resizable: true,
+    },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */

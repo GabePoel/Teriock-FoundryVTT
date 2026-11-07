@@ -18,7 +18,7 @@ export default class TeriockJournalEntrySheet extends mixClasses(JournalEntryShe
     if (!game.teriock.checkEditable(this)) { return; }
     await RulebookUpdater.create({
       document: this.document,
-      paths: ["flags.teriock.ruleType", "flags.teriock.ruleIcon"],
+      paths: ["flags.teriock.ruleType", "flags.teriock.ruleIcon", "flags.core.viewMode"],
       window: {
         icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.document.core, "title"),
         title: "TERIOCK.SHEETS.Journal.rulebook.title",
