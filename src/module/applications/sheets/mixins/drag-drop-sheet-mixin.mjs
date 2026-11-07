@@ -73,18 +73,20 @@ export default function DragDropSheetMixin(Base) {
 
     /**
      * Sort a dragged Document or PseudoDocument to where its entry was dropped.
-     * @param {{ element: HTMLElement, next: Element|null }} sortSource
+     * @param {{ element: HTMLElement, next: Element|null, parent: HTMLElement }} sortSource
      * @returns {Promise<void>}
      */
-    async #onSortDrop({ element, next }) {
-      if (!element.isConnected || element.nextElementSibling === next) { return; }
-      const elements = Array.from(element.parentElement.children).filter(el => el.dataset.uuid);
-      if (element.parentElement.hasAttribute("data-sort-descending")) { elements.reverse(); }
+    async #onSortDrop({ element, next, parent: origin }) {
+      if (!element.isConnected || (element.parentElement === origin && element.nextElementSibling === next)) { return; }
+      const container = element.parentElement;
+      const elements = Array.from(container.children).filter(el => el.dataset.uuid);
+      if (container.hasAttribute("data-sort-descending")) { elements.reverse(); }
       const docs = elements.map(el => this.document.fetchFromUuidSync(el.dataset.uuid));
       const index = elements.indexOf(element);
       const source = docs[index];
-      const target = docs[index + 1] ?? docs[index - 1];
-      if (!source || !target) { return; }
+      if (!source) { return; }
+      const target = docs[index + 1] ?? docs[index - 1] ?? null;
+      const moved = container === origin ? {} : { parentId: container.dataset.parentId ?? null };
       const siblings = docs.filter(d => d && d !== source);
       const sorting = foundry.utils.performIntegerSort(source, {
         siblings,
@@ -97,7 +99,8 @@ export default function DragDropSheetMixin(Base) {
       );
       for (const [parent, group] of groups) {
         const { constructor: cls, pack } = group[0].target;
-        await cls.updateDocuments(group.map(s => ({ _id: s.target.id, ...s.update })), { pack, parent });
+        const updates = group.map(s => ({ _id: s.target.id, ...s.update, ...(s.target === source ? moved : {}) }));
+        await cls.updateDocuments(updates, { pack, parent });
       }
     }
 
@@ -144,9 +147,18 @@ export default function DragDropSheetMixin(Base) {
     async _onDragOver(event) {
       await super._onDragOver(event);
       const source = this.#sortSource?.element;
-      const element = event.target.closest?.("[data-sort-container] > [data-uuid]");
-      if (!source || !element || element === source || element.parentElement !== source.parentElement) { return; }
-      if (this._fieldDropTarget(event)) { return; }
+      const container = event.target.closest?.("[data-sort-container]");
+      if (!source || !container || source.contains(container) || this._fieldDropTarget(event)) { return; }
+      const group = container.dataset.sortGroup;
+      if (container !== source.parentElement && (!group || group !== source.parentElement.dataset.sortGroup)) {
+        return;
+      }
+      const element = event.target.closest("[data-sort-container] > [data-uuid]");
+      if (element?.parentElement !== container) {
+        if (!container.querySelector(":scope > [data-uuid]")) { container.prepend(source); }
+        return;
+      }
+      if (element === source) { return; }
       const rect = element.getBoundingClientRect();
       const before = event.clientY < rect.top + (rect.height / 2);
       if ((before ? element.previousElementSibling : element.nextElementSibling) === source) { return; }

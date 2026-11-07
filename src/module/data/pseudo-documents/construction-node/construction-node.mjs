@@ -44,6 +44,7 @@ export default class ConstructionNode
     return Object.assign(super.defineSchema(), localSelectionSchema(), {
       name: new fields.StringField({ placeholder: _loc(this.typeLabel) }),
       parentId: new fields.DocumentIdField({ initial: null, nullable: true, readonly: false }),
+      sort: new fields.IntegerSortField(),
     });
   }
 
@@ -224,7 +225,7 @@ export default class ConstructionNode
     const container = foundry.utils.parseHTML(html);
     container.querySelector(".construction-node-editor")?.replaceChildren(editor);
     const listItemElements = container.querySelectorAll(".construction-node-list-item");
-    childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));
+    childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceWith(childEditor));
     return container;
   }
 

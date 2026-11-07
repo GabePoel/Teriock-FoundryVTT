@@ -250,7 +250,8 @@ export default function DragDropApplicationMixin(Base) {
       if (this.#shouldMinimizeOnDragStart) { this.#wasMinimizedBeforeDragStart = this.hasFrame && this.minimized; }
       const minimize = this.#shouldMinimizeOnDragStart && !this.#wasMinimizedBeforeDragStart;
       // Special handling so that if sorting can happen within this application then we only minimize when we leave.
-      if (event.currentTarget?.closest?.("[data-sort-container]")) { this.#minimizeOnDragLeave = minimize; }
+      const sortContainer = event.currentTarget?.closest?.("[data-sort-container]");
+      if (sortContainer) { this.#minimizeOnDragLeave = minimize && !sortContainer.hasAttribute("data-sort-group"); }
       else {
         setTimeout(() => {
           if (DragDrop.implementation.dragStartApplication === this && minimize) { this.minimize(); }

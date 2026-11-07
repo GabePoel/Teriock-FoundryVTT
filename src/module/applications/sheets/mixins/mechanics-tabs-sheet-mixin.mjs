@@ -49,7 +49,9 @@ export default function MechanicsTabsSheetMixin(Base) {
     /** @inheritDoc */
     _dropEffect(event) {
       const dropEffect = super._dropEffect(event);
-      if (dropEffect === "none" || this._tab !== "mechanics") { return dropEffect; }
+      if (dropEffect === "none" || this._tab !== "mechanics" || TeriockDragDrop.dragStartApplication === this) {
+        return dropEffect;
+      }
       // While the mechanics tab is shown, only mechanics can be dropped on the sheet itself.
       return this._mechanicCollectionFor(TeriockDragDrop.payload?.type) ? dropEffect : "none";
     }

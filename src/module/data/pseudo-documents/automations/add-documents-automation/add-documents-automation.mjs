@@ -183,7 +183,7 @@ export default class AddDocumentsAutomation
     const container = /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);
     container.querySelector(".construction-node-editor")?.replaceChildren(editor);
     const listItemElements = container.querySelectorAll(".construction-node-list-item");
-    childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceChildren(childEditor));
+    childEditorElements.forEach((childEditor, i) => listItemElements[i]?.replaceWith(childEditor));
     return container;
   }
 

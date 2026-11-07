@@ -19,7 +19,9 @@ export default function MechanicsSheetConstructionNodesPart(Base) {
     static async #onCreateConstructionNode(_event, target) {
       const parentMechanic = await fromUuid(target.dataset.parentUuid);
       if (!parentMechanic) { return; }
-      await parentMechanic.createPseudoDocuments("ConstructionNode", [{ parentId: target.dataset.nodeId }]);
+      const nodes = parentMechanic.getEmbeddedCollection("ConstructionNode");
+      const sort = Math.max(0, ...nodes.map(n => n.sort)) + CONST.SORT_INTEGER_DENSITY;
+      await parentMechanic.createPseudoDocuments("ConstructionNode", [{ parentId: target.dataset.nodeId, sort }]);
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

@@ -3,7 +3,14 @@
   <div class="construction-node-children form-group stacked teriock-full-width">
     <label>{{localize "EFFECT.TABS.children"}}</label>
   </div>
-  <div class="construction-node-list teriock-full-width teriock-form-container">
+  <div
+    class="construction-node-list teriock-full-width teriock-form-container"
+    data-sort-container
+    data-sort-group="{{ parentUuid }}"
+    {{#if node}}
+      data-parent-id="{{ node.id }}"
+    {{/if}}
+  >
     {{#each childEditors as |childEditor|}}
       <div class="construction-node-list-item teriock-full-width">
         {{{ childEditor }}}
