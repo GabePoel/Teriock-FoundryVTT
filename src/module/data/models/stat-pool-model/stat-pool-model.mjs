@@ -57,7 +57,7 @@ export default class StatPoolModel extends BaseDataModel {
     return async amount => {
       if (!this.actor) { return; }
       await game.teriock.commands.reverse(this.#config?.command, [this.actor], { amount });
-      if (this.stat === "hp" && !this.actor.statuses.has("critically-wounded")) { await this.actor.take("awaken"); }
+      if (this.stat === "hp" && !this.actor.statuses.has("critically-wounded")) { await this.actor.run("awaken"); }
     };
   }
 

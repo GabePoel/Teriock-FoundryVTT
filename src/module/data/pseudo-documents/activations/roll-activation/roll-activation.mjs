@@ -24,7 +24,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /**
    * Roll this activation's formula.
-   * @param {"take"|"reverse"} action
+   * @param {"run"|"reverse"} action
    * @returns {Promise<void>}
    */
   async #act(action) {
@@ -61,7 +61,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   async primaryAction() {
-    await this.#act("take");
+    await this.#act("run");
   }
 
   /** @inheritDoc */

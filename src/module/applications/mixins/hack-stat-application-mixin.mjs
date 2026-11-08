@@ -46,7 +46,7 @@ export default function HackStatApplicationMixin(Base) {
      */
     static async _onTakeCommand(_event, target) {
       if (!game.teriock.checkEditable(this)) { return; }
-      await this.document.take(target.dataset.command, { showDialog: true });
+      await this.document.run(target.dataset.command, { showDialog: true });
     }
 
     /**
@@ -181,7 +181,7 @@ export default function HackStatApplicationMixin(Base) {
     async _rollStatDie(_event, statDie) {
       const criticallyWounded = this.document.statuses.has("critically-wounded");
       await statDie.use(this.state?.consumeStatDice ?? true, { substitution: this.state?.substitution });
-      if (!criticallyWounded) { await this.document.take("awaken"); }
+      if (!criticallyWounded) { await this.document.run("awaken"); }
     }
 
     /** @inheritDoc */
@@ -225,8 +225,8 @@ export default function HackStatApplicationMixin(Base) {
 async function onTakeHack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value < TERIOCK.CONFIG.hack[part].max) { await actor.take("hack", { part }); }
-  else { await actor.take("unhack", { amount: TERIOCK.CONFIG.hack[part].max, part }); }
+  if (actor.system.hacks[part].value < TERIOCK.CONFIG.hack[part].max) { await actor.run("hack", { part }); }
+  else { await actor.run("unhack", { amount: TERIOCK.CONFIG.hack[part].max, part }); }
 }
 
 /**
@@ -239,6 +239,6 @@ async function onTakeHack(actor, event, target) {
 async function onTakeUnhack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value > 0) { await actor.take("unhack", { part }); }
-  else { await actor.take("hack", { amount: TERIOCK.CONFIG.hack[part].max, part }); }
+  if (actor.system.hacks[part].value > 0) { await actor.run("unhack", { part }); }
+  else { await actor.run("hack", { amount: TERIOCK.CONFIG.hack[part].max, part }); }
 }

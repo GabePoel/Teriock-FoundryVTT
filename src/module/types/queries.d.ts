@@ -26,11 +26,11 @@ declare global {
       uuid: UUID<TeriockActiveEffect | TeriockActor | TeriockItem>;
     };
 
+    export type RunCommandData = { key: Teriock.Keys.Command, uuids: UUID<TeriockActor>[] };
+
     export type ModifyBatchData = { operations: DatabaseWriteOperation[] };
 
     export type IdentifyItemData = { itemUuid: UUID<TeriockItem<"equipment">>, userUuid: UUID<TeriockUser> };
-
-    export type TakeCommandData = { key: Teriock.Keys.Command, uuids: UUID<TeriockActor>[] };
 
     export type TurnChangeData = {
       actionUuids: UUID<TeriockCombatant>[];

@@ -179,7 +179,7 @@ export default class CommandManager {
     if (entry?.numeric && options.formula != null && !options.apply) {
       return this.#deal(key, actors, options, !game.settings.get("teriock", "showRollDialogs"));
     }
-    if (typeof entry?.reverse === "string") { return this.take(entry.reverse, actors, options); }
+    if (typeof entry?.reverse === "string") { return this.run(entry.reverse, actors, options); }
     if (typeof entry?.reverse !== "function") { return null; }
     if (!entry.noActor && !game.actors.check(actors)) { return null; }
     await this.#write(entry.reverse, actors, await this.#resolve(entry, actors, options));
@@ -187,13 +187,13 @@ export default class CommandManager {
   }
 
   /**
-   * Take a command for some Actors. Shows at most one dialog and writes all changes in one batch.
+   * Run a command for some Actors. Shows at most one dialog and writes all changes in one batch.
    * @param {Teriock.Keys.Command} key
    * @param {TeriockActor[]} [actors]
    * @param {object} [options]
    * @returns {Promise<{ actors: TeriockActor[], amount?: number|null, morganti?: boolean }|null>}
    */
-  async take(key, actors = game.actors.selected, options = {}) {
+  async run(key, actors = game.actors.selected, options = {}) {
     const entry = TERIOCK.CONFIG.command[key];
     if (!entry) { return null; }
     if (entry.numeric && options.formula != null && !options.apply) {

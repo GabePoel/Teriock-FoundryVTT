@@ -483,13 +483,13 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Take a command.
+   * Run a command.
    * @param {Teriock.Keys.Command} key
    * @param {object} [options]
    * @returns {Promise<{ actors: TeriockActor[], amount?: number|null, morganti?: boolean }|null>}
    */
-  async take(key, options = {}) {
-    return game.teriock.commands.take(key, [this], options);
+  async run(key, options = {}) {
+    return game.teriock.commands.run(key, [this], options);
   }
 
   /**

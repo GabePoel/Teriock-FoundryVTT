@@ -507,7 +507,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     if (this.actor?.isEditable) {
       for (const c of this.#paidCosts.filter(c => this.#actorCosts[c] > 0)) {
         const config = TERIOCK.CONFIG.stat[c];
-        if (config?.command && !config.bar) { await this.actor.take(config.command, { amount: this.#actorCosts[c] }); }
+        if (config?.command && !config.bar) { await this.actor.run(config.command, { amount: this.#actorCosts[c] }); }
       }
     }
   }

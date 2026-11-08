@@ -133,7 +133,7 @@ declare global {
       numeric?: CommandNumericEntry;
       /** Write operations for one Actor */
       operations?: CommandOperation;
-      /** The command to take instead or the operations that reverse this one */
+      /** The command to run instead or the operations that reverse this one */
       reverse?: string | CommandOperation;
       /** Whether this shared group rolls and only certain actors should roll */
       shared?: boolean;

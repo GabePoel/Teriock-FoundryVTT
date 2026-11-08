@@ -66,7 +66,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   async primaryAction() {
-    const result = await game.teriock.commands.take(this.command, this.actors, {
+    const result = await game.teriock.commands.run(this.command, this.actors, {
       ...this.options,
       amount: this.#amount,
       morganti: this.morganti,

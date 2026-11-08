@@ -22,15 +22,15 @@ export default function CommandActivationFactory(key) {
     }
 
     /**
-     * Take or reverse this activation's command for all its actors.
-     * @param {"take"|"reverse"} action
+     * Run or reverse this activation's command for all its actors.
+     * @param {"run"|"reverse"} action
      * @returns {Promise<void>}
      */
     async #act(action) {
       const result = await game.teriock.commands[action](key, this.actors, { event: this.event, ...this.options });
       if (!result) { return; }
       ui.notifications.success(
-        `TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.${action === "take" ? "executed" : "reversed"}`,
+        `TERIOCK.ACTIVATIONS.Command.NOTIFICATIONS.${action === "run" ? "executed" : "reversed"}`,
         { format: { command: _loc(this.label) }, localize: true },
       );
     }
@@ -52,7 +52,7 @@ export default function CommandActivationFactory(key) {
 
     /** @inheritDoc */
     async primaryAction() {
-      await this.#act("take");
+      await this.#act("run");
     }
 
     /** @inheritDoc */

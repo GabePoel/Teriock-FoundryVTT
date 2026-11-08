@@ -3,9 +3,9 @@ import { makeIconClass, objectMap } from "../../../utils/_module.mjs";
 import { interpretTerm } from "../enrichment-helpers.mjs";
 
 /**
- * Take or reverse some command.
+ * Run or reverse some command.
  * @param {HTMLElement} target
- * @param {"take" | "reverse"} operation
+ * @param {"run" | "reverse"} operation
  * @param {PointerEvent} event
  * @returns {Promise<void>}
  */
@@ -43,7 +43,7 @@ const commandEnricher = {
     el.dataset.enriched = "true";
     const target = el.firstElementChild;
     el.addEventListener("click", async ev => {
-      await executeCommand(target, "take", ev);
+      await executeCommand(target, "run", ev);
     });
     el.addEventListener("contextmenu", async ev => {
       await executeCommand(target, "reverse", ev);

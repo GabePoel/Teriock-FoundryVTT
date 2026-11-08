@@ -25,7 +25,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onDeathBagPull() {
       if (!this.isEditable) { return; }
-      await this.actor.take("bag");
+      await this.actor.run("bag");
     }
 
     /**
@@ -49,7 +49,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onTakeLongRest() {
       if (!this.isEditable) { return; }
-      await this.actor.take("longRest");
+      await this.actor.run("longRest");
     }
 
     /**
@@ -58,7 +58,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onTakeShortRest() {
       if (!this.isEditable) { return; }
-      await this.actor.take("shortRest");
+      await this.actor.run("shortRest");
     }
 
     /**

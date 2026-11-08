@@ -22,7 +22,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
           fn(_commandString, match) {
             const payload = match[2] ? match[2].trim() : "";
             const commands = game.teriock.commands;
-            commands.take(
+            commands.run(
               key,
               entry.shared ? game.actors.rollers : game.actors.selected,
               commands.buildOptions(payload, key),

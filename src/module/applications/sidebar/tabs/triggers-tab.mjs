@@ -28,8 +28,8 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
     });
     if (!selected?.length) { return; }
     for (const [user, userActors] of Map.groupBy(selected, a => a.triggerUser)) {
-      user.query("teriock.takeCommand", { key: trigger, uuids: userActors.map(a => a.uuid) }).catch(err =>
-        console.error(`Failed to take ${trigger} for ${user.name}.`, err)
+      user.query("teriock.runCommand", { key: trigger, uuids: userActors.map(a => a.uuid) }).catch(err =>
+        console.error(`Failed to run ${trigger} for ${user.name}.`, err)
       );
     }
   }
