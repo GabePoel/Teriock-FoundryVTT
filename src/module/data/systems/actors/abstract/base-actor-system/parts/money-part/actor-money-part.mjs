@@ -26,10 +26,20 @@ export default function ActorMoneyPart(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        interestRate: new fields.NumberField({ initial: 1, integer: false, min: 0, nullable: false }),
+        interestRate: new fields.NumberField({
+          initial: 1,
+          integer: false,
+          min: 0,
+          nullable: false,
+          units: "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.units",
+        }),
         money: new fields.SchemaField({
           ...objectMap(TERIOCK.CONFIG.currency, e => currencyField({ label: e.label })),
-          debt: currencyField({ integer: false, placeholder: true }),
+          debt: currencyField({
+            integer: false,
+            placeholder: true,
+            units: "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.units",
+          }),
           physical: currencyField({ integer: false, placeholder: true }),
           total: currencyField({ integer: false, placeholder: true }),
         }),

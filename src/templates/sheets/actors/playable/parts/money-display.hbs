@@ -3,10 +3,10 @@
   <div class="money-panels tgrid g3">
     {{#each TERIOCK.CONFIG.currency as |currency id|}}
       <label class="money-panel-container">
-        <div class="money-icon tcenter timage" data-src='{{path @root/TERIOCK.CONFIG.currency id "img"}}'>
+        <span class="money-icon tcenter timage" data-src='{{path @root/TERIOCK.CONFIG.currency id "img"}}'>
           <img src='{{path @root/TERIOCK.CONFIG.currency id "img"}}' data-openable="true" alt="" loading="lazy" />
-        </div>
-        <div class="money-panel tgrid g4">
+        </span>
+        <span class="money-panel tgrid g4">
           {{formInput
             (path ../systemFields.money "fields" id)
             id=(concat @root/appId "-currency-" id)
@@ -15,29 +15,29 @@
             placeholder="0"
             value=(path ../system.money id)
           }}
-          <div class="money-info tsubtle tcenter gi3">
-            <div class="money-name">{{ currency.label }}</div>
-            <div class="money-value">
+          <span class="money-info tsubtle tcenter gi3">
+            <span class="money-name">{{ currency.label }}</span>
+            <span class="money-value">
               {{localize
                 "TERIOCK.SHEETS.Actor.TABS.Inventory.money.value"
                 value=currency.conversion
                 weight=currency.weight
               }}
-            </div>
-          </div>
-        </div>
+            </span>
+          </span>
+        </span>
       </label>
     {{/each}}
-    <div class="money-panel-container">
-      <div class="money-icon tcenter timage" data-src="{{ currencyImages.debt }}">
+    <label class="money-panel-container">
+      <span class="money-icon tcenter timage" data-src="{{ @root/TERIOCK.DISPLAY.thumbnails.manifest.currency.debt }}">
         <img
           src="{{ @root/TERIOCK.DISPLAY.thumbnails.manifest.currency.debt }}"
           data-openable="true"
           alt=""
           loading="lazy"
         />
-      </div>
-      <div class="money-panel tgrid g4">
+      </span>
+      <span class="money-panel tgrid g4">
         {{!-- prettier-ignore --}}
         <button
           id="{{ @root/appId }}-currency-debt"
@@ -50,17 +50,17 @@
         >
           {{ system.money.debt }}
         </button>
-        <div class="money-info tsubtle tcenter gi3">
-          <div class="money-name">{{localize "TERIOCK.CURRENCY.debt.label"}}</div>
-          <div class="money-value">
+        <span class="money-info tsubtle tcenter gi3">
+          <span class="money-name">{{localize "TERIOCK.CURRENCY.debt.label"}}</span>
+          <span class="money-value">
             {{localize
               "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily"
               rate=system.interestRate
             }}
-          </div>
-        </div>
-      </div>
-    </div>
+          </span>
+        </span>
+      </span>
+    </label>
   </div>
   {{!-- prettier-ignore --}}
   <output
