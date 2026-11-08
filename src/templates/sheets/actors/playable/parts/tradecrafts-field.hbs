@@ -95,11 +95,13 @@
             </span>
           </span>
         </button>
-        <div class="tradecraft-panel-symbol">
-          {{numberFormat
-            (path @root/system.tradecrafts name 'value')
-            sign=true
-          }}
+        <div
+          class="tradecraft-panel-symbol grid-fill"
+          data-tooltip='{{path @root/system.tradecrafts name "formula"}}'
+          data-tooltip-class=""
+          data-tooltip-direction="RIGHT"
+        >
+          {{path @root/system.tradecrafts name "tag"}}
         </div>
       </div>
     {{/each}}

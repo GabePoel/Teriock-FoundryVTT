@@ -61,11 +61,12 @@
         <span class="unselected"><span class="tcolored">{{ system.initiative.base }}</span></span>
         <span class="selected"><span class="tcolored">{{ system._source.initiative.base }}</span></span>
       </button>
-      <div class="tcolored tcenter">
-        {{numberFormat
-          system.initiative.value
-          sign=true
-        }}
+      <div
+        class="tcolored tcenter grid-fill"
+        data-tooltip="{{ system.initiative.formula }}"
+        data-tooltip-direction="RIGHT"
+      >
+        {{ system.initiative.tag }}
       </div>
     </div>
   </div>

@@ -113,6 +113,14 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
+   * A tag that succinctly summarizes the mod value and if there's a bonus.
+   * @returns {string}
+   */
+  get tag() {
+    return `${this.value.signedString()}${this.bonus ? "*" : ""}`;
+  }
+
+  /**
    * A term that represents the score in roll formulas.
    * @returns {Teriock.System.FormulaString}
    */

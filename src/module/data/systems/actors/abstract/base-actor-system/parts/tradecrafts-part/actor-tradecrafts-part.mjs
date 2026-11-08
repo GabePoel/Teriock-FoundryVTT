@@ -7,7 +7,8 @@ import { TradecraftModifierModel } from "../../../../../../models/modifier-model
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  */
 
-const { EmbeddedDataField, SchemaField } = foundry.data.fields;
+const { EmbeddedDataField } = foundry.data.fields;
+
 /**
  * Actor data model mixin that handles tradecrafts.
  *
