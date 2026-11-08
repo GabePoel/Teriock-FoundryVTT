@@ -141,7 +141,9 @@ function rest(name) {
     const execution = new Execution({}, { actor: first, source: first });
     if ((await execution.execute()) === false) { return false; }
     await Promise.all(
-      others.map(a => Execution.create(execution.toObject(), { actor: a, showDialog: false, source: a })),
+      others.map(a =>
+        Execution.create({ ...execution.toObject(), useAbilities: false }, { actor: a, showDialog: false, source: a })
+      ),
     );
   };
 }
@@ -462,7 +464,7 @@ const commandConfig = {
     label: "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
     reverse: "undampen",
   },
-  dawn: { icon: icons.manifest.ui.time, label: "TERIOCK.TRIGGERS.Time.choices.dawn", trigger: true },
+  dawn: { icon: icons.manifest.time.dawn, label: "TERIOCK.TRIGGERS.Time.choices.dawn", trigger: true },
   deattune: {
     common: true,
     execute: select("deattune", d => d.system.isAttuned, "TERIOCK.SYSTEMS.Attunable.MENU.deattune", [
@@ -480,7 +482,7 @@ const commandConfig = {
     label: "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
     reverse: "reforge",
   },
-  dusk: { icon: icons.manifest.ui.time, label: "TERIOCK.TRIGGERS.Time.choices.dusk", trigger: true },
+  dusk: { icon: icons.manifest.time.dusk, label: "TERIOCK.TRIGGERS.Time.choices.dusk", trigger: true },
   elderSorcery: {
     aliases: ["es"],
     common: true,
@@ -679,8 +681,16 @@ const commandConfig = {
       ];
     },
   },
-  sessionEnd: { icon: icons.manifest.ui.time, label: "TERIOCK.TRIGGERS.Time.choices.sessionEnd", trigger: true },
-  sessionStart: { icon: icons.manifest.ui.time, label: "TERIOCK.TRIGGERS.Time.choices.sessionStart", trigger: true },
+  sessionEnd: {
+    icon: icons.manifest.time.sessionEnd,
+    label: "TERIOCK.TRIGGERS.Time.choices.sessionEnd",
+    trigger: true,
+  },
+  sessionStart: {
+    icon: icons.manifest.time.sessionStart,
+    label: "TERIOCK.TRIGGERS.Time.choices.sessionStart",
+    trigger: true,
+  },
   shatter: {
     common: true,
     execute: select("shatter", e => !e.system.shattered, "TERIOCK.SYSTEMS.Equipment.MENU.shatter"),

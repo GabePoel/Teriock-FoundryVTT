@@ -38,7 +38,12 @@ export default class DocumentSelector extends ResolvableDialog {
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { none: this._onNone, ok: { buttons: [0, 2], handler: this._onGetSelected } },
+    actions: {
+      none: this._onNone,
+      ok: { buttons: [0, 2], handler: this._onGetSelected },
+      selectAll: this._onSelectAll,
+      selectNone: this._onSelectNone,
+    },
     classes: ["dynamic-select"],
     position: { width: 450 },
     window: {
@@ -113,6 +118,20 @@ export default class DocumentSelector extends ResolvableDialog {
   static async _onNone() {
     this._finish(this.multi ? [] : null);
     await this.close();
+  }
+
+  /**
+   * @this {DocumentSelector}
+   */
+  static async _onSelectAll() {
+    this.element.querySelectorAll("input[type=\"checkbox\"]:not(:disabled)").forEach(el => el.checked = true);
+  }
+
+  /**
+   * @this {DocumentSelector}
+   */
+  static async _onSelectNone() {
+    this.element.querySelectorAll("input[type=\"checkbox\"]:not(:disabled)").forEach(el => el.checked = false);
   }
 
   /**

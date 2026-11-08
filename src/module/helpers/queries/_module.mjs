@@ -2,6 +2,7 @@ import createHotbarFolderQuery from "./create-hotbar-folder-query.mjs";
 import fireTriggerQuery from "./fire-trigger-query.mjs";
 import identifyItemQuery from "./identify-item-query.mjs";
 import modifyBatchQuery from "./modify-batch-query.mjs";
+import takeCommandQuery from "./take-command-query.mjs";
 import turnChangeQuery from "./turn-change-query.mjs";
 
 const queries = {
@@ -9,6 +10,7 @@ const queries = {
   "teriock.fireTrigger": fireTriggerQuery,
   "teriock.identifyItem": identifyItemQuery,
   "teriock.modifyBatch": modifyBatchQuery,
+  "teriock.takeCommand": takeCommandQuery,
   "teriock.turnChange": turnChangeQuery,
 };
 

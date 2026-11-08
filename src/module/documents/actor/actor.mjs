@@ -211,7 +211,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    */
   get triggerUser() {
     const fireScope = game.settings.get("teriock", "triggerFireScope");
-    if (fireScope === "gm") { return game.users.activeGM ?? game.user; }
+    if (fireScope === "gm" && game.users.activeGM) { return game.users.activeGM; }
     if (fireScope === "owners" && this.isOwner) { return game.user; }
     return this.defaultUser ?? game.user;
   }

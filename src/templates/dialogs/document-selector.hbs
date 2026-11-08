@@ -9,6 +9,10 @@
     <label>
       <input class="search-input" type="search" placeholder="Search..." autocomplete="off" />
     </label>
+    {{#if multi}}
+      <button class="icon" type="button" aria-label="{{localize "TERIOCK.COMMON.All"}}" data-action="selectAll" data-tooltip="TERIOCK.COMMON.All">{{makeIcon TERIOCK.DISPLAY.icons.manifest.ui.selectAll "button"}}</button>
+      <button class="icon" type="button" aria-label="{{localize "TERIOCK.COMMON.None"}}" data-action="selectNone" data-tooltip="TERIOCK.COMMON.None">{{makeIcon TERIOCK.DISPLAY.icons.manifest.ui.selectNone "button"}}</button>
+    {{/if}}
   </div>
 
   {{#if (exists documents)}}

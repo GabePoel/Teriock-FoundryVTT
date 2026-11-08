@@ -23,22 +23,6 @@ async function increaseDebt(_worldTime, dt) {
   await batchWrite(operations);
 }
 
-/**
- * Generate a function that takes a time command for all relevant actors.
- * @param {Teriock.System.TimeTrigger} trigger
- * @returns {(function(): void)}
- */
-function fireTimeTriggerFactory(trigger) {
-  return function fireTrigger() {
-    if (game.actors.relevant.length) { game.teriock.commands.take(trigger, game.actors.relevant); }
-  };
-}
-
-const timeHookEntries = [
-  ["updateWorldTime", increaseDebt],
-  ...Object.keys(TERIOCK.CONFIG.trigger.time.choices).map(
-    t => [`teriock.force${t.capitalize()}`, fireTimeTriggerFactory(t)]
-  ),
-];
+const timeHookEntries = [["updateWorldTime", increaseDebt]];
 
 export default timeHookEntries;

@@ -175,7 +175,7 @@ export default {
     elderSorcery: "ms-auto-fix-high",
     fall: "ms-falling",
     longRest: "ms-camping",
-    shortRest: "ms-fireplace",
+    shortRest: "ms-mode-heat",
   },
   executionTime: {
     a0: "ms-exposure-zero",
@@ -306,6 +306,12 @@ export default {
     shield: "ms-shield",
     weapon: "mdi-knife-military",
   },
+  time: {
+    dawn: "mdi-weather-sunset-up",
+    dusk: "mdi-weather-sunset-down",
+    sessionEnd: "ms-stop-circle",
+    sessionStart: "ms-play-circle",
+  },
   tradecraft: {
     artist: "ms-palette",
     blacksmith: "mdi-anvil",
@@ -403,6 +409,8 @@ export default {
     search: "ms-search",
     secret: "ms-disabled-visible",
     select: "ms-check-circle",
+    selectAll: "ms-select-all",
+    selectNone: "ms-deselect",
     settings: "ms-settings",
     shareImage: "ms-mms",
     shareText: "ms-chat",

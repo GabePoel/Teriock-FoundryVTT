@@ -30,6 +30,8 @@ declare global {
 
     export type IdentifyItemData = { itemUuid: UUID<TeriockItem<"equipment">>, userUuid: UUID<TeriockUser> };
 
+    export type TakeCommandData = { key: Teriock.Keys.Command, uuids: UUID<TeriockActor>[] };
+
     export type TurnChangeData = {
       actionUuids: UUID<TeriockCombatant>[];
       attackPenaltyUuids: UUID<TeriockCombatant>[];
