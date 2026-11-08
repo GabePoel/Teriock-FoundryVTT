@@ -203,7 +203,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
 
   /**
    * @inheritDoc
-   * @see {InfiniteNumberField}
    * @category Perception
    */
   _prepareDetectionModes() {

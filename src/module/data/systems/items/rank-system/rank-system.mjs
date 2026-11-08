@@ -1,6 +1,5 @@
 import { DocumentSelector, selectDocument } from "../../../../applications/dialogs/_module.mjs";
 import { getName, mergeMetadata, mixClasses, resolveDocuments, safeInf } from "../../../../utils/_module.mjs";
-import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import {
   ArmorSuppressionSystemMixin,
@@ -53,7 +52,12 @@ export default class RankSystem
     return Object.assign(super.defineSchema(), {
       archetype: archetypeField({ blank: false, initial: "everyman", required: true }),
       class: classField({ blank: false, initial: "journeyman", required: true }),
-      maxAv: new InfiniteNumberField({ initial: TERIOCK.CONFIG.class.defaults.maxAv, integer: true }),
+      maxAv: new fields.ExtendedNumberField({
+        initial: TERIOCK.CONFIG.class.defaults.maxAv,
+        integer: true,
+        min: 0,
+        required: true,
+      }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });
   }

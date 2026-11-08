@@ -112,7 +112,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
       qualifier: this.qualifier,
       target: this.target,
       type: this.changeType,
-      value: this.value,
+      value: foundry.data.validators.isJSON(this.value) ? JSON.parse(this.value) : this.value,
     }];
   }
 

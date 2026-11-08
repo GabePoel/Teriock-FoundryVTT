@@ -1,5 +1,6 @@
 import { asInf } from "../../../../utils/_module.mjs";
-import { InfiniteNumberField } from "../../../fields/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Mixin that enables suppression due to maximum armor value.
@@ -20,7 +21,9 @@ export default function ArmorSuppressionSystemMixin(Base) {
   {
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { maxAv: new InfiniteNumberField({ integer: true }) });
+      return Object.assign(super.defineSchema(), {
+        maxAv: new fields.ExtendedNumberField({ integer: true, min: 0, required: true }),
+      });
     }
 
     /**

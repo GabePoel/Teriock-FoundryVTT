@@ -2,7 +2,6 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf, toKebabCase } from "../../../../utils/_module.mjs";
-import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { identifierSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
@@ -73,7 +72,7 @@ export default class SpeciesSystem
       lifespan: new fields.SchemaField({
         adulthood: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),
         enabled: new fields.BooleanField({ initial: false }),
-        max: new InfiniteNumberField(),
+        max: new fields.ExtendedNumberField({ min: 0, required: true }),
       }),
       ...Object.fromEntries(POOL_STATS.map(k => [`${k}Increase`, new fields.HTMLField()])),
       size: new fields.SchemaField({

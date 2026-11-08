@@ -1,4 +1,3 @@
-import { InfiniteNumberField } from "../../../../../../fields/_module.mjs";
 import { elderSorceryCreationSchema } from "../../../../../../fields/tools/builders.mjs";
 import { initialNumber } from "../../../../../../fields/tools/initializers.mjs";
 
@@ -31,13 +30,18 @@ export default function ActorMagicPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         curses: new fields.SchemaField({
-          max: new InfiniteNumberField({ initial: TERIOCK.CONFIG.system.baseValues.maxCurses, integer: true }),
+          max: new fields.ExtendedNumberField({
+            initial: TERIOCK.CONFIG.system.baseValues.maxCurses,
+            integer: true,
+            min: 0,
+            required: true,
+          }),
           min: initialNumber(),
           value: initialNumber(),
         }),
         elderSorceryCreation: new fields.SchemaField(elderSorceryCreationSchema()),
         rotators: new fields.SchemaField({
-          max: new InfiniteNumberField({ initial: 0, integer: true }),
+          max: new fields.ExtendedNumberField({ initial: 0, integer: true, min: 0, required: true }),
           min: initialNumber(),
           value: initialNumber(),
         }),

@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import { makeIcon, makeIconClass, safeInf } from "../../../../../../utils/_module.mjs";
-import { InfiniteNumberField, UnitField } from "../../../../../fields/_module.mjs";
+import { UnitField } from "../../../../../fields/_module.mjs";
 import { migrateRename } from "../../../../../fields/tools/migrations.mjs";
 import { EquipmentWeightUnitModel, StorageMaxWeightUnitModel } from "../../../../../models/_module.mjs";
 
@@ -30,7 +30,7 @@ export default function EquipmentStoragePart(Base) {
       return {
         ...super.defineSchema(),
         storage: new fields.SchemaField({
-          count: new fields.SchemaField({ max: new InfiniteNumberField() }),
+          count: new fields.SchemaField({ max: new fields.ExtendedNumberField({ min: 0, required: true }) }),
           enabled: new fields.BooleanField({ initial: false, required: false }),
           weight: new fields.SchemaField({
             max: new UnitField(StorageMaxWeightUnitModel),

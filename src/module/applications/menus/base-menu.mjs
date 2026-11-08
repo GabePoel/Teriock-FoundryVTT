@@ -167,15 +167,17 @@ export default class BaseMenu extends TeriockApplication {
     if (!isDataField && !Field) {
       throw new Error("Automatic field generation only available for Boolean, Number, or String types");
     }
+    const field = isDataField ? setting.type : new Field({ blank: false, required: true });
     const data = {
       classes: setting.classes,
-      field: isDataField ? setting.type : new Field({ blank: false, required: true }),
+      field,
       hint: setting.hint,
       label: setting.name,
       localize: true,
       name,
       stacked: setting.stacked,
       type: setting.inputType,
+      units: field.options.units,
       value: game.settings.get("teriock", name),
     };
     if (setting.choices) {
@@ -212,6 +214,7 @@ export default class BaseMenu extends TeriockApplication {
       label: field.label,
       localize: true,
       name: `${name}.${key}`,
+      units: field.options.units,
       value: value[key],
     }));
   }

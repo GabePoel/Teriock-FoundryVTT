@@ -384,7 +384,7 @@ export default {
     hide: "ms-visibility-off",
     image: "ms-image",
     import: "ms-download",
-    infinity: "mdi-infinity",
+    infinity: "fa-infinity",
     info: "ms-info",
     interest: "ms-percent",
     level: "ms-stairs",

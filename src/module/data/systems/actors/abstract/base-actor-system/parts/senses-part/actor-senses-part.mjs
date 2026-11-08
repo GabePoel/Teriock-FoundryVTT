@@ -1,7 +1,8 @@
 import { objectMap } from "../../../../../../../utils/_module.mjs";
-import { InfiniteNumberField, MultiChangeField } from "../../../../../../fields/_module.mjs";
+import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 
 /**
+ * @import { ExtendedNumberField } from "@common/data/fields.mjs";
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  */
 
@@ -91,8 +92,15 @@ export default function ActorSensesPart(Base) {
  * Creates a number field for a specific sense.
  * @param {number} initial
  * @param {string} name
- * @returns {InfiniteNumberField}
+ * @returns {ExtendedNumberField}
  */
 function senseField(initial, name) {
-  return new InfiniteNumberField({ initial, integer: true, label: name, units: "TERIOCK.LENGTH.ft.symbol" });
+  return new fields.ExtendedNumberField({
+    initial,
+    integer: true,
+    label: name,
+    min: 0,
+    required: true,
+    units: "TERIOCK.LENGTH.ft.symbol",
+  });
 }

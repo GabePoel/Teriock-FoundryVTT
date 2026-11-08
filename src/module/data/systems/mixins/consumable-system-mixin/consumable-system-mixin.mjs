@@ -1,6 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { asInf, barClamp, mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
-import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import { migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 
@@ -34,7 +34,7 @@ export default function ConsumableSystemMixin(Base) {
           enabled: new fields.BooleanField({ initial: this.metadata.initialConsumable }),
         }),
         quantity: new fields.SchemaField({
-          max: new InfiniteNumberField({ persisted: false }),
+          max: new fields.ExtendedNumberField({ min: 0, persisted: false, required: true }),
           maxFormula: new FormulaField({ deterministic: true, placeholder: _loc("COMMON.None") }),
           min: new fields.NumberField({ initial: 0, integer: true, persisted: false }),
           value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),

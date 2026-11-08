@@ -38,6 +38,7 @@ export function makeIconClass(icon, ...styles) {
     start += " mdi";
     if (styleClasses.includes("light") || styleClasses.includes("regular")) { icon = `${icon} ${icon}-outline`; }
   }
+  if (icon.startsWith(prefix) && styleClasses.every(s => ["fw", "inline"].includes(s))) { styleClasses.push("solid"); }
   const classString = styleClasses.map(s => `${prefix}${s}`).join(" ");
   return `${start} ${classString} ${icon}`;
 }

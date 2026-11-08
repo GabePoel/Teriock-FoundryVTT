@@ -1,6 +1,6 @@
 import { CompendiumPriorityMenu, MenuFactory } from "../applications/menus/_module.mjs";
 import { PlayableActorSheet } from "../applications/sheets/actor-sheets/_module.mjs";
-import { InfiniteNumberField, TypedIdentifierSetField, UnitField } from "../data/fields/_module.mjs";
+import { TypedIdentifierSetField, UnitField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import { TimeUnitModel } from "../data/models/unit-models/_module.mjs";
@@ -46,8 +46,14 @@ function getMenus() {
         cone: {
           icon: TERIOCK.DISPLAY.icons.manifest.delivery.cone,
           settings: {
-            defaultConeAngle: { scope: "world", type: new fields.AngleField({ initial: 60 }) },
-            defaultDragonBreathAngle: { scope: "world", type: new fields.AngleField({ initial: 60 }) },
+            defaultConeAngle: {
+              scope: "world",
+              type: new fields.AngleField({ initial: 60, units: "MEASUREMENT.Degrees" }),
+            },
+            defaultDragonBreathAngle: {
+              scope: "world",
+              type: new fields.AngleField({ initial: 60, units: "MEASUREMENT.Degrees" }),
+            },
           },
         },
         deathBag: {
@@ -138,8 +144,14 @@ function getMenus() {
         chat: {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.chat,
           settings: {
-            autoPanelCollapseTime: { scope: "client", type: new InfiniteNumberField({ initial: 5 }) },
-            autoTriggerDeleteTime: { scope: "client", type: new InfiniteNumberField({ initial: 5 }) },
+            autoPanelCollapseTime: {
+              scope: "client",
+              type: new fields.ExtendedNumberField({ initial: 5, min: 0, required: true }),
+            },
+            autoTriggerDeleteTime: {
+              scope: "client",
+              type: new fields.ExtendedNumberField({ initial: 5, min: 0, required: true }),
+            },
             defaultPanelCollapseState: {
               choices: {
                 auto: "TERIOCK.SETTINGS.defaultPanelCollapseState.choices.auto",
