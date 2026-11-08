@@ -94,5 +94,5 @@ export default function ActorSensesPart(Base) {
  * @returns {InfiniteNumberField}
  */
 function senseField(initial, name) {
-  return new InfiniteNumberField({ initial, integer: true, label: name });
+  return new InfiniteNumberField({ initial, integer: true, label: name, units: "TERIOCK.LENGTH.ft.symbol" });
 }
