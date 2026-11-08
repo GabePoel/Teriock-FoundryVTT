@@ -154,10 +154,4 @@ export default class BaseActorSystem
   getSystemRollData() {
     return this.getLocalRollData();
   }
-
-  /** @inheritDoc */
-  async postUpdate() {
-    await super.postUpdate();
-    await Promise.all([...this.parent.getDependentTokens().map((t) => t.postActorUpdate())]);
-  }
 }

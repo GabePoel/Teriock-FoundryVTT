@@ -184,6 +184,12 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
   }
 
   /** @inheritDoc */
+  async _onOverrideSize(changes) {
+    if (!this.id || this.actor?.defaultUser !== game.user) { return false; }
+    return this.resize(changes, { animation: { duration: 500 }, pan: false });
+  }
+
+  /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     if (this.inCombat && "disposition" in changed) { game.combat.debounceSetup(); }
@@ -236,22 +242,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
       for (const summon of remainingTokens) { allTokens.add(summon); }
     }
     return [...allTokens];
-  }
-
-  /**
-   * Perform all updates needed to synchronize this with {@link TeriockActor} data.
-   * @returns {Promise<void>}
-   */
-  async postActorUpdate() {
-    const updateData = {};
-    const updateOptions = {};
-    if (this.actor) {
-      if (this.actor.system.settings.getSetting("autoScale")) {
-        if (this.width !== this.actor.system.size.length) { updateData.width = this.actor.system.size.length; }
-        if (this.height !== this.actor.system.size.length) { updateData.height = this.actor.system.size.length; }
-      }
-    }
-    if (!foundry.utils.isEmpty(updateData) && this.id) { await this.resize(updateData, updateOptions); }
   }
 
   /** @inheritDoc */

@@ -56,6 +56,22 @@ export default function ActorTokenPart(Base) {
     }
 
     /**
+     * Prepare token size.
+     */
+    _prepareTokenSize() {
+      if (!this.actor.system.settings.getSetting("autoScale")) { return; }
+      for (const key of ["width", "height"]) {
+        this._tokenChanges.push({
+          key,
+          phase: TERIOCK.CONFIG.change.tokenPhase,
+          priority: 5,
+          type: "override",
+          value: this.size.length,
+        });
+      }
+    }
+
+    /**
      * Prepare token vision changes.
      * @category Perception
      */
@@ -137,6 +153,7 @@ export default function ActorTokenPart(Base) {
     prepareVirtualEffects() {
       super.prepareVirtualEffects();
       this._prepareTokenColor();
+      this._prepareTokenSize();
       this._prepareTokenVision();
       this.actor.tokenActiveEffectChanges.initial.push(...this._tokenChanges);
     }

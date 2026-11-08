@@ -80,8 +80,9 @@ export default class LocalDocumentField extends DocumentIdField {
   /** @inheritDoc */
   initialize(value, model, _options = {}) {
     if (this.idOnly) { return this.fallback || foundry.data.validators.isValidId(value) ? value : null; }
-    const collection = this._findCollection(model, this.model.metadata.collection);
+    let collection;
     return () => {
+      collection ??= this._findCollection(model, this.model.metadata.collection);
       const document = collection?.get(value);
       if (!document) { return this.fallback ? value : null; }
       if (this.fallback) {
