@@ -293,8 +293,6 @@ export default function ChildSystemMixin(Base) {
           visible: this.parent?.isEditable
             && this.parent.disabled
             && Boolean(this.metadata.disabledPath)
-            && this.parent.type !== "equipment"
-            && this.parent.type !== "mount"
             && doc !== this.parent,
           onClick: async () => await this.parent.update({ [this.metadata.disabledPath]: false }),
         },
@@ -305,8 +303,6 @@ export default function ChildSystemMixin(Base) {
           visible: this.parent?.isEditable
             && !this.parent.disabled
             && Boolean(this.metadata.disabledPath)
-            && this.parent.type !== "equipment"
-            && this.parent.type !== "mount"
             && !(this.parent.type === "ability" && this.isVirtual)
             && doc !== this.parent,
           onClick: async () => await this.parent.update({ [this.metadata.disabledPath]: true }),

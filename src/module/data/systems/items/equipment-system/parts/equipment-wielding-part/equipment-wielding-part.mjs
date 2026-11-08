@@ -78,7 +78,7 @@ export default function EquipmentWieldingPart(Base) {
             else { await this.glue(); }
           },
         },
-        ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
+        ...super._embedIcons,
         {
           action: "toggleEquippedDoc",
           icon: this.equipped ? TERIOCK.DISPLAY.icons.manifest.ui.enabled : TERIOCK.DISPLAY.icons.manifest.ui.disabled,

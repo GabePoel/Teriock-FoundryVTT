@@ -539,7 +539,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
    */
   _reselectArmamentForEquipmentClass(armament, delivery, equipmentClass) {
     if (this.source.system.delivery === delivery && !armament?.system.equipmentClasses.has(equipmentClass)) {
-      armament = this.actor.armaments.find(a => a.active && a.system.equipmentClasses.has(equipmentClass));
+      armament = this.actor.previewedTags.armament.find(a => a.active && a.system.equipmentClasses.has(equipmentClass));
     }
     return armament;
   }
@@ -556,7 +556,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       this.source.system.delivery === delivery
       && !armament?.previewedTypes.property.some((p) => p.active && properties.includes(p.system.identifier))
     ) {
-      armament = this.actor.armaments.find((a) =>
+      armament = this.actor.previewedTags.armament.find((a) =>
         a.active && a.previewedTypes.property.some(p => p.active && properties.includes(p.system.identifier))
       );
     }

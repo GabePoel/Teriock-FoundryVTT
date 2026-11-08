@@ -117,21 +117,14 @@ export default function ActorStatsPart(Base) {
      */
     _prepareStat(stat, items) {
       const statData = this[stat];
-      const dice = [];
-      statData.base = 0;
       let numRanks = 0;
-      for (const item of items) {
-        if (
-          (item.type === "rank" && !item.system.innate && numRanks >= statData.poolLimit)
-          || item.system.statDice[stat].disabled
-        ) {
-          continue;
-        }
-        if (item.type === "rank" && !item.system.innate) { numRanks += 1; }
-        dice.push(...item.system.statDice[stat].dice.contents);
-        statData.base += item.system.statDice[stat].value;
-      }
-      statData.dice = new Collection(dice.map(d => [d.id, d]));
+      const pools = items.filter(item => {
+        if (item.system.statDice[stat].disabled) { return false; }
+        if (item.type !== "rank" || item.system.innate) { return true; }
+        return numRanks++ < statData.poolLimit;
+      }).map(item => item.system.statDice[stat]);
+      statData.base = pools.reduce((total, pool) => total + pool.value, 0);
+      statData.dice = new Collection(pools.flatMap(pool => pool.dice.contents).map(d => [d.id, d]));
       statData.max = Math.max(1, statData.base);
       statData.min = -Math.floor(statData.max / 2);
       statData.max = Math.max(statData.min, statData.max - statData.morganti);
@@ -231,12 +224,7 @@ export default function ActorStatsPart(Base) {
 
     /** @inheritDoc */
     prepareStatDice() {
-      const items = [
-        ...this.parent.previewedTypes.species.sort(pathSorterFactory("name")),
-        ...this.parent.previewedTypes.rank.sort(pathSorterFactory("sort", "_stats.createdTime")),
-        ...this.parent.previewed.filter(d => d.metadata.tags.simple).sort(pathSorterFactory("name")),
-        ...this.parent.previewedTypes.mount.sort(pathSorterFactory("name")),
-      ];
+      const items = this.parent.previewedTags.statted.sort(pathSorterFactory("type", "sort", "_stats.createdTime"));
       for (const item of items) { item.system.prepareStatDice(); }
       this._prepareStat("hp", items);
       this._prepareStat("mp", items);

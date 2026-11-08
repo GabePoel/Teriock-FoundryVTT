@@ -160,22 +160,6 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
   }
 
   /**
-   * Consequences and imbuements.
-   * @returns {TeriockActiveEffect<"consequence"|"imbuement">[]}
-   */
-  get applicables() {
-    return [...this.previewedTypes.consequence, ...this.previewedTypes.imbuement];
-  }
-
-  /**
-   * Body parts and equipment.
-   * @returns {TeriockItem<"body"|"equipment">[]}
-   */
-  get armaments() {
-    return [...this.previewedTypes.body, ...this.previewedTypes.equipment];
-  }
-
-  /**
    * Get the default combatant for this actor.
    * @returns {TeriockCombatant|null}
    */
@@ -260,7 +244,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
     for (const c of Object.values(changeMap)) { c.sort((a, b) => a?.priority - b?.priority); }
     const data = this.getRollData();
     this._applyChangesToDocuments(changeMap.ability, this.previewedTypes.ability, data);
-    this._applyChangesToDocuments(changeMap.armament, this.armaments, data);
+    this._applyChangesToDocuments(changeMap.armament, this.previewedTags.armament, data);
   }
 
   /**

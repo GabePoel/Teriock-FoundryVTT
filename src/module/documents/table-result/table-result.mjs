@@ -58,7 +58,7 @@ export default class TeriockTableResult extends mixClasses(TableResult, BaseDocu
         new acts.AddDocumentsActivation({
           constructionNodes: [{ globalUuids: [this.documentUuid] }],
           display: { label },
-          target: ["imbuement", "property"].includes(doc.type) ? "armament" : "actor",
+          target: doc.metadata.tags.granted ? "armament" : "actor",
         }),
       );
     }

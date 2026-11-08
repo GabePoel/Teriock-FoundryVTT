@@ -20,7 +20,8 @@ export default class TriggerExpiration extends mixClasses(BaseExpiration, Trigge
    * @inheritDoc
    */
   get documentAllowsTrigger() {
-    return super.documentAllowsTrigger && Boolean(this.actor?.applicables.includes(this.getNearestDocument()));
+    return super.documentAllowsTrigger
+      && Boolean(this.actor?.previewedTags.applicable.includes(this.getNearestDocument()));
   }
 
   /** @inheritDoc */

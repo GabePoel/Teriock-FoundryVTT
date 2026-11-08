@@ -3,7 +3,7 @@ import { dotJoin, getName, mergeMetadata, mixClasses } from "../../../../utils/_
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
-import { CompetenceDisplaySystemMixin, RevelationSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
+import { CompetenceDisplaySystemMixin, RevealableSystemMixin, WikiSystemMixin } from "../../mixins/_module.mjs";
 import { CleanedEffectSystem } from "../abstract/_module.mjs";
 
 /**
@@ -14,7 +14,7 @@ import { CleanedEffectSystem } from "../abstract/_module.mjs";
  *
  * @extends {CleanedEffectSystem}
  * @mixes WikiSystem
- * @mixes RevelationSystem
+ * @mixes RevealableSystem
  * @mixes CompetenceDisplaySystem
  * @mixes ThresholdData
  */
@@ -22,7 +22,7 @@ export default class FluencySystem
   extends mixClasses(
     CleanedEffectSystem,
     WikiSystemMixin,
-    RevelationSystemMixin,
+    RevealableSystemMixin,
     CompetenceDisplaySystemMixin,
     ThresholdDataMixin,
   )

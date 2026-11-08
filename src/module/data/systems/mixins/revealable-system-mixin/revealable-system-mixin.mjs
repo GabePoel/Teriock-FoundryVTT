@@ -6,14 +6,14 @@ const { fields } = foundry.data;
  * @template {MixinBase} T
  * @param {T} Base
  */
-export default function RevelationSystemMixin(Base) {
+export default function RevealableSystemMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.Models.RevelationSystemData}
+   * @implements {Teriock.Models.RevealableSystemData}
    */
-  class RevelationSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RevelationSystemData>} */ (Base) {
+  class RevealableSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RevealableSystemData>} */ (Base) {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Revelation"];
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Revealable"];
 
     /** @inheritDoc */
     static metadata = mergeMetadata(super.metadata, {
@@ -31,7 +31,7 @@ export default function RevelationSystemMixin(Base) {
     /** @inheritDoc */
     get _nameTags() {
       const tags = super._nameTags;
-      if (!this.revealed) { tags.unshift(_loc("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed")); }
+      if (!this.revealed) { tags.unshift(_loc("TERIOCK.SYSTEMS.Revealable.NAME.unrevealed")); }
       return tags;
     }
 
@@ -40,13 +40,13 @@ export default function RevelationSystemMixin(Base) {
       return [...super.getEmbedContextMenuEntries(doc), {
         group: "reveal",
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.show, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.reveal"),
+        label: _loc("TERIOCK.SYSTEMS.Revealable.MENU.reveal"),
         visible: !this.revealed && game.user.isGM && doc?.sheet?.isEditable,
         onClick: async () => this.parent.update({ "system.revealed": true }),
       }, {
         group: "reveal",
         icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.ui.hide, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Revelation.MENU.unreveal"),
+        label: _loc("TERIOCK.SYSTEMS.Revealable.MENU.unreveal"),
         visible: this.revealed && game.user.isGM && doc?.sheet?.isEditable,
         onClick: async () => this.parent.update({ "system.revealed": false }),
       }];
@@ -66,5 +66,5 @@ export default function RevelationSystemMixin(Base) {
     }
   }
 
-  return RevelationSystem;
+  return RevealableSystem;
 }

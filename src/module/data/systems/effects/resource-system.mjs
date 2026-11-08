@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
-import { ConsumableSystemMixin, MetaphysicsSystemMixin, RevelationSystemMixin } from "../mixins/_module.mjs";
+import { ConsumableSystemMixin, MetaphysicsSystemMixin, RevealableSystemMixin } from "../mixins/_module.mjs";
 import { CleanedEffectSystem } from "./abstract/_module.mjs";
 
 /**
@@ -7,10 +7,10 @@ import { CleanedEffectSystem } from "./abstract/_module.mjs";
  * @extends {CleanedEffectSystem}
  * @mixes ConsumableSystem
  * @mixes MetaphysicsSystem
- * @mixes RevelationSystem
+ * @mixes RevealableSystem
  */
 export default class ResourceSystem
-  extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, MetaphysicsSystemMixin, RevelationSystemMixin)
+  extends mixClasses(CleanedEffectSystem, ConsumableSystemMixin, MetaphysicsSystemMixin, RevealableSystemMixin)
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {

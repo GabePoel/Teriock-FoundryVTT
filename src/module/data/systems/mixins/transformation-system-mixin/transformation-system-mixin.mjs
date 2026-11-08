@@ -271,10 +271,10 @@ export default function TransformationSystemMixin(Base) {
           disabledItems.push(...this.#enabledFilter(typeMap[t] || []));
         }
       }
-      const statItems = this.actor.items.filter(i => i.system.metadata.tags.statGiver);
+      const stattedItems = this.actor.items.filter(i => i.system.metadata.tags.statted);
       for (const stat of POOL_STATS) {
         if (this.transformation.resets.has(stat)) {
-          disabledStatDiceItems[stat].push(...statItems.filter(i => !i.system.statDice[stat].disabled));
+          disabledStatDiceItems[stat].push(...stattedItems.filter(i => !i.system.statDice[stat].disabled));
         }
       }
       const preTransform = { attributes: this.actor.system.toObject(false).attributes };

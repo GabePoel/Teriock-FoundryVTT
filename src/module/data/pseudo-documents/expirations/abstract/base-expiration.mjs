@@ -59,7 +59,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
   static async massExpire(actors, type, context) {
     for (const actor of actors) {
       const scope = { chatDataBySource: {} };
-      for (const effect of actor.applicables) {
+      for (const effect of actor.previewedTags.applicable) {
         if (!effect.active) { continue; }
         for (const expiration of effect.system.expirations.active) {
           const activation = expiration.attempt(type, context);

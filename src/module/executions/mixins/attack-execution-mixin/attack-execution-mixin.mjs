@@ -111,7 +111,7 @@ export default function AttackExecutionMixin(Base) {
           editable: true,
           label: _loc("TYPES.Item.armament"),
           nullable: true,
-          getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
+          getChoices: () => this.actor?.previewedTags.armament.filter(a => a.active) ?? [],
           update: armament => this._updateArmament(armament),
         });
         if (this._usesAmmunition) { docs.push(this._ammunitionDialogDocument); }

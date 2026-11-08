@@ -80,7 +80,9 @@ async function buildStatusOperations(actor, { create = [], delete: del = [], ful
   const has = s => actor.effects.has(CONFIG.statusEffects[s]?._id);
   const toDelete = new Set(del.filter(s => has(s) && !create.includes(s)).map(s => CONFIG.statusEffects[s]._id));
   if (full) {
-    for (const c of actor.applicables) { if (del.some(s => c.statuses.has(s))) { toDelete.add(c.id); } }
+    for (const c of actor.previewedTags.applicable) {
+      if (del.some(s => c.statuses.has(s))) { toDelete.add(c.id); }
+    }
   }
   const toCreate = create.filter(s => CONFIG.statusEffects[s] && !has(s));
   const data = await Promise.all(toCreate.map(async s => {
@@ -617,7 +619,7 @@ const commandConfig = {
       if (options.mp) { docData["system.mp.value"] = actor.system.mp.max; }
       const operations = foundry.utils.isEmpty(docData) ? [] : [buildUpdateOperation(actor, docData)];
       if (options.hpDice || options.mpDice) {
-        const updates = actor.items.filter(i => i.metadata.tags.statGiver).map(i => {
+        const updates = actor.items.filter(i => i.metadata.tags.statted).map(i => {
           const itemUpdate = { _id: i.id };
           if (options.hpDice) { itemUpdate["system.statDice.hp.spent"] = []; }
           if (options.mpDice) { itemUpdate["system.statDice.mp.spent"] = []; }
@@ -708,7 +710,7 @@ const commandConfig = {
         const selOpts = { noDocumentsMessage: _loc("TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems") };
         if (attacker?.uuid) { selOpts.checked = attacker.uuid; }
         attacker = await teriock.applications.dialogs.DocumentSelector.selectSingle(
-          actor.armaments.filter(a => a.active),
+          actor.previewedTags.armament.filter(a => a.active),
           selOpts,
         );
         if (attacker === false) { return; }

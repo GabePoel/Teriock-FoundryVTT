@@ -68,6 +68,7 @@ export default class EquipmentSystem
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     childTypes: ["equipment", ...super.metadata.childTypes],
+    disabledPath: null,
     icon: TERIOCK.DISPLAY.icons.manifest.document.equipment,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.equipment,
     importable: true,

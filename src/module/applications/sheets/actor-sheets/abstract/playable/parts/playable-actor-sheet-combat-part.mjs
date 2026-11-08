@@ -60,9 +60,9 @@ export default function PlayableActorSheetCombatPart(Base) {
         await current?.sheet.render(true);
         return;
       }
+      const field = this.document.system.schema.getField(["wielding", role]);
       const selected = await DocumentSelector.selectSingle(
-        [...this.document.previewedTypes.equipment.filter(e => e.system.equipped), ...this.document.previewedTypes.body]
-          .filter(a => a.active),
+        this.document.previewedTags.armament.filter(a => field.filter(a, this.document.system)),
         {
           auto: false,
           checked: current?.uuid,

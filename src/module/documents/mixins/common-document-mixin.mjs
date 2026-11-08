@@ -213,6 +213,15 @@ export default function CommonDocumentMixin(Base) {
     }
 
     /**
+     * A convenience getter to an object that organizes all embedded previewed instances by metadata tag. The object is
+     * cached and lazily re-computed as needed. Works like {@link Actor.itemTypes}.
+     * @returns {Record<string, (TeriockActiveEffect|TeriockItem)[]>}
+     */
+    get previewedTags() {
+      return this.previewed.documentsByTag;
+    }
+
+    /**
      * A convenience getter to an object that organizes all embedded previewed instances by subtype. The object is
      * cached and lazily re-computed as needed. Works like {@link Actor.itemTypes}.
      * @returns {Teriock.Documents.ChildrenByType}

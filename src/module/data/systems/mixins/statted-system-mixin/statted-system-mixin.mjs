@@ -9,18 +9,18 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
  * @template {MixinBase} T
  * @param {T} Base
  */
-export default function StatGiverSystemMixin(Base) {
+export default function StattedSystemMixin(Base) {
   /**
    * @implements {Teriock.Functionality.StatProvider}
    * @mixin
-   * @implements {Teriock.Models.StatGiverSystemData}
+   * @implements {Teriock.Models.StattedSystemData}
    */
-  class StatGiverSystem extends /** @type {InitializedDataModel<T, Teriock.Models.StatGiverSystemData>} */ (Base) {
+  class StattedSystem extends /** @type {InitializedDataModel<T, Teriock.Models.StattedSystemData>} */ (Base) {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.StatGiver"];
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Statted"];
 
     /** @inheritDoc */
-    static metadata = mergeMetadata(super.metadata, { tags: { statGiver: true } });
+    static metadata = mergeMetadata(super.metadata, { tags: { statted: true } });
 
     /**
      * The initial stat pool formula to use.
@@ -56,7 +56,7 @@ export default function StatGiverSystemMixin(Base) {
           return {
             action: `toggle${stat.capitalize()}DiceDoc`,
             icon: this.statDice[stat].icon,
-            tooltip: _loc(`TERIOCK.SYSTEMS.StatGiver.EMBED.${stat}${disabled ? "Disabled" : "Enabled"}`),
+            tooltip: _loc(`TERIOCK.SYSTEMS.Statted.EMBED.${stat}${disabled ? "Disabled" : "Enabled"}`),
             onClick: async () => {
               await this.parent.update({ [`system.statDice.${stat}.disabled`]: !disabled });
             },
@@ -71,10 +71,10 @@ export default function StatGiverSystemMixin(Base) {
     get _statBar() {
       return {
         icon: TERIOCK.DISPLAY.icons.manifest.ui.dice,
-        label: _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.statDice"),
+        label: _loc("TERIOCK.SYSTEMS.Statted.PANELS.statDice"),
         wrappers: POOL_STATS.map(k =>
           this.statDice[k].hasDice
-            ? _loc(`TERIOCK.SYSTEMS.StatGiver.PANELS.${k}`, { value: this.statDice[k].formula })
+            ? _loc(`TERIOCK.SYSTEMS.Statted.PANELS.${k}`, { value: this.statDice[k].formula })
             : ""
         ).filter(Boolean),
       };
@@ -98,7 +98,7 @@ export default function StatGiverSystemMixin(Base) {
         entries.push({
           group: "control",
           icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.stat[`${stat}On`], "contextMenu"),
-          label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.enable${stat.capitalize()}Dice`),
+          label: _loc(`TERIOCK.SYSTEMS.Statted.MENU.enable${stat.capitalize()}Dice`),
           onClick: async () => {
             await this.parent.update({ [`system.statDice.${stat}.disabled`]: false });
           },
@@ -107,7 +107,7 @@ export default function StatGiverSystemMixin(Base) {
         }, {
           group: "control",
           icon: makeIcon(TERIOCK.DISPLAY.icons.manifest.stat[`${stat}Off`], "contextMenu"),
-          label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.disable${stat.capitalize()}Dice`),
+          label: _loc(`TERIOCK.SYSTEMS.Statted.MENU.disable${stat.capitalize()}Dice`),
           onClick: async () => {
             await this.parent.update({ [`system.statDice.${stat}.disabled`]: true });
           },
@@ -148,5 +148,5 @@ export default function StatGiverSystemMixin(Base) {
     }
   }
 
-  return StatGiverSystem;
+  return StattedSystem;
 }

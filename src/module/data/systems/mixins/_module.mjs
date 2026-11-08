@@ -18,9 +18,9 @@ export { default as InstructionsSystemMixin } from "./instructions-system-mixin/
 export { default as MetaphysicsSystemMixin } from "./metaphysics-system-mixin/metaphysics-system-mixin.mjs";
 export { default as PriceSystemMixin } from "./price-system-mixin/price-system-mixin.mjs";
 export { default as RefreshSystemMixin } from "./refresh-system-mixin.mjs";
-export { default as RevelationSystemMixin } from "./revelation-system-mixin/revelation-system-mixin.mjs";
+export { default as RevealableSystemMixin } from "./revealable-system-mixin/revealable-system-mixin.mjs";
 export { default as RulesSystemMixin } from "./rules-system-mixin/rules-system-mixin.mjs";
-export { default as StatGiverSystemMixin } from "./stat-giver-system-mixin/stat-giver-system-mixin.mjs";
+export { default as StattedSystemMixin } from "./statted-system-mixin/statted-system-mixin.mjs";
 export { default as TransformationSystemMixin } from "./transformation-system-mixin/transformation-system-mixin.mjs";
 export { default as UncommonSystemMixin } from "./uncommon-system-mixin.mjs";
 export { default as WikiSystemMixin } from "./wiki-system-mixin.mjs";

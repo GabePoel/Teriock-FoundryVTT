@@ -10,7 +10,7 @@ import { Panel } from "../../../pseudo-documents/_module.mjs";
 import {
   AppearanceSystemMixin,
   CompetenceDisplaySystemMixin,
-  StatGiverSystemMixin,
+  StattedSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
@@ -34,7 +34,7 @@ const POOL_STATS = Object.keys(TERIOCK.CONFIG.stat).filter(k => TERIOCK.CONFIG.s
  * @mixes AppearanceSystem
  * @mixes WikiSystem
  * @mixes CompetenceDisplaySystem
- * @mixes StatGiverSystem
+ * @mixes StattedSystem
  * @mixes SpeciesPanelPart
  * @mixes SpeciesTransformationPart
  */
@@ -44,7 +44,7 @@ export default class SpeciesSystem
     AppearanceSystemMixin,
     WikiSystemMixin,
     CompetenceDisplaySystemMixin,
-    StatGiverSystemMixin,
+    StattedSystemMixin,
     SpeciesPanelPart,
     SpeciesTransformationPart,
   )

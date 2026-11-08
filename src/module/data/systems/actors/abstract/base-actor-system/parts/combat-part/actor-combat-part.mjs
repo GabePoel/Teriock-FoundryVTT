@@ -15,7 +15,7 @@ const { fields } = foundry.data;
  * @param {TeriockItem<"body"|"equipment">} doc
  */
 function filterWielded(doc) {
-  if (!["body", "equipment"].includes(doc.type) || !doc.active) { return false; }
+  if (!doc.metadata.tags.armament || !doc.active) { return false; }
   return doc.type !== "equipment" || doc.system.equipped;
 }
 

@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { CompetenceDisplaySystemMixin, MetaphysicsSystemMixin, StatGiverSystemMixin } from "../../mixins/_module.mjs";
+import { CompetenceDisplaySystemMixin, MetaphysicsSystemMixin, StattedSystemMixin } from "../../mixins/_module.mjs";
 import BaseItemSystem from "./base-item-system/base-item-system.mjs";
 
 /**
@@ -7,10 +7,10 @@ import BaseItemSystem from "./base-item-system/base-item-system.mjs";
  * @extends {BaseItemSystem}
  * @mixes CompetenceDisplaySystem
  * @mixes MetaphysicsSystem
- * @mixes StatGiverSystem
+ * @mixes StattedSystem
  */
 export default class SimpleItemSystem
-  extends mixClasses(BaseItemSystem, CompetenceDisplaySystemMixin, MetaphysicsSystemMixin, StatGiverSystemMixin)
+  extends mixClasses(BaseItemSystem, CompetenceDisplaySystemMixin, MetaphysicsSystemMixin, StattedSystemMixin)
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { tags: { simple: true } });

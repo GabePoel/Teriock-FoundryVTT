@@ -39,7 +39,9 @@ export default class AddDocumentsActivation
     const operations = [];
     for (const actor of this.actors) {
       let targets = [actor];
-      if (this.target === "armament") { targets = await DocumentSelector.selectMulti(actor.armaments); }
+      if (this.target === "armament") {
+        targets = await DocumentSelector.selectMulti(actor.previewedTags.armament);
+      }
       if (this.target === "item") {
         targets = await DocumentSelector.selectMulti(actor.previewed.filter(c => c.documentName === "Item"));
       }
@@ -69,7 +71,9 @@ export default class AddDocumentsActivation
     for (const a of this.actors) {
       const children = await a.children.getContents();
       if (this.target === "armament") {
-        for (const armament of a.armaments) { children.push(...(await armament.children.getContents())); }
+        for (const armament of a.previewedTags.armament) {
+          children.push(...(await armament.children.getContents()));
+        }
       }
       if (this.target === "item") {
         for (const item of a.items.contents) { children.push(...(await item.children.getContents())); }

@@ -2,7 +2,7 @@ import { StatPoolModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export interface StatGiverSystemData {
+    export interface StattedSystemData {
       statDice: Record<Teriock.Keys.DieStat, StatPoolModel>;
     }
   }

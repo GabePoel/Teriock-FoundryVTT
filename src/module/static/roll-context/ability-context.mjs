@@ -12,7 +12,7 @@ const abilityContext = {
   guildmaster: "TERIOCK.SYSTEMS.Ability.FIELDS.guildmaster.label",
   invoked: "TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label",
   lore: "TERIOCK.SYSTEMS.Ability.FIELDS.lore.label",
-  revealed: "TERIOCK.SYSTEMS.Revelation.FIELDS.revealed.label",
+  revealed: "TERIOCK.SYSTEMS.Revealable.FIELDS.revealed.label",
   ritual: "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label",
   rotator: "TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label",
   skill: "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label",

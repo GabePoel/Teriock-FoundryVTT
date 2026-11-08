@@ -5,7 +5,7 @@ import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import {
   ArmorSuppressionSystemMixin,
   CompetenceDisplaySystemMixin,
-  StatGiverSystemMixin,
+  StattedSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
@@ -22,7 +22,7 @@ const { fields } = foundry.data;
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  * @mixes WikiSystem
- * @mixes StatGiverSystem
+ * @mixes StattedSystem
  */
 export default class RankSystem
   extends mixClasses(
@@ -30,7 +30,7 @@ export default class RankSystem
     ArmorSuppressionSystemMixin,
     CompetenceDisplaySystemMixin,
     WikiSystemMixin,
-    StatGiverSystemMixin,
+    StattedSystemMixin,
   )
 {
   /** @inheritDoc */

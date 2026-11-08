@@ -14,10 +14,10 @@ const powerContext = {
   av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
 
-  hp: "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label",
+  hp: "TERIOCK.SYSTEMS.Statted.FIELDS.statDice.hp.label",
   "hp.disabled": "TERIOCK.MODELS.BaseStatPool.FIELDS.disabled.label",
   "hp.value": "TERIOCK.ROLL_CONTEXT.StatDice.hpTotal",
-  mp: "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.mp.label",
+  mp: "TERIOCK.SYSTEMS.Statted.FIELDS.statDice.mp.label",
   "mp.disabled": "TERIOCK.MODELS.BaseStatPool.FIELDS.disabled.label",
   "mp.value": "TERIOCK.ROLL_CONTEXT.StatDice.mpTotal",
 };

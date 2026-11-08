@@ -45,15 +45,16 @@ declare global {
     };
 
     type SystemMetadataTags = TypeTags & {
+      applicable: boolean;
       armament: boolean;
       attunable: boolean;
+      blocks: boolean;
       consumable: boolean;
-      embedPanelBlocks: boolean;
       granted: boolean;
       hierarchy: boolean;
       revealable: boolean;
       simple: boolean;
-      statGiver: boolean;
+      statted: boolean;
       text: boolean;
       transformation: boolean;
       triggerable: boolean;

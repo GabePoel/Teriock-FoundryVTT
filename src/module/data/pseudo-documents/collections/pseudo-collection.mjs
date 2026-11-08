@@ -47,6 +47,11 @@ export default class PseudoCollection extends TypeCollection {
       && (pseudo?.active ?? true);
   }
 
+  /** @inheritDoc */
+  _getTypeModel(type) {
+    return this.documentClass?.TYPE_MODELS[type] ?? null;
+  }
+
   /**
    * Get all Pseudo-Documents of a given type matching criteria.
    * @template {TPseudo["type"]} T

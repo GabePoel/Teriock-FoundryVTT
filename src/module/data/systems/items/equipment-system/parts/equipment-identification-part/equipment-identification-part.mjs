@@ -252,12 +252,7 @@ export default function EquipmentIdentificationPart(Base) {
         if (reference) {
           uncheckedPropertyIdentifiers.push(...reference.previewedTypes.property.map(p => p.system.identifier));
         }
-        const revealed = [
-          ...this.parent.children.documentsByType.property.filter(p => p.system.revealed),
-          ...this.parent.children.documentsByType.ability.filter(a => a.system.revealed),
-          ...this.parent.children.documentsByType.resource.filter(r => r.system.revealed),
-          ...this.parent.children.documentsByType.fluency.filter(f => f.system.revealed),
-        ];
+        const revealed = this.parent.children.documentsByTag.revealable.filter(c => c.system.revealed);
         const checked = revealed.filter(e =>
           e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier)
         ).map(e => e.uuid);

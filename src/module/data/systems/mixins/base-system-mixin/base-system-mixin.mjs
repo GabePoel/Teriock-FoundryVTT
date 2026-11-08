@@ -44,17 +44,18 @@ export default function BaseSystemMixin(Base) {
       preserveOnRefresh: [],
       sortPaths: ["name", "_stats.createdTime"],
       tags: {
+        applicable: false,
         armament: false,
         attunable: false,
+        blocks: false,
         consumable: false,
         embed: false,
-        embedPanelBlocks: false,
         granted: false,
         hierarchy: false,
         panel: false,
         revealable: false,
         simple: false,
-        statGiver: false,
+        statted: false,
         text: false,
         transformation: false,
         triggerable: false,
@@ -240,7 +241,7 @@ export default function BaseSystemMixin(Base) {
         const value = foundry.utils.getProperty(this.parent._source, f.path)
           || foundry.utils.getProperty(this.parent, f.path);
         if (!value) { return; }
-        const text = this.metadata.tags.embedPanelBlocks ? `@Embed[${this.parent.uuid} path=${f.path} inline]` : value;
+        const text = this.metadata.tags.blocks ? `@Embed[${this.parent.uuid} path=${f.path} inline]` : value;
         const gm = Boolean(schema?.options.gm || (schema?.options.secret && this.hasSecrets));
         return { classes: f.classes, gm, text, title: f.label || schema.label };
       }).filter(Boolean);

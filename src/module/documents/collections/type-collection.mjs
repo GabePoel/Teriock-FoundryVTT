@@ -1,3 +1,5 @@
+import { getSystemClass } from "../../utils/_module.mjs";
+
 const { Collection } = foundry.utils;
 
 /**
@@ -40,7 +42,25 @@ export default class TypeCollection extends Collection {
     });
   }
 
+  #documentsByTag = null;
+
   #documentsByType = null;
+
+  /**
+   * Group this collection's contents by subtype without validation.
+   * @returns {Record<TDocument["type"], TDocument[]>}
+   */
+  #groupByType() {
+    if (!this.#documentsByType) {
+      const documentTypeMap = Object.fromEntries(this.types.map((t) => [t, []]));
+      this.forEach((d) => {
+        if (!documentTypeMap[d?.type]) { documentTypeMap[d?.type] = []; }
+        documentTypeMap[d?.type].push(d);
+      });
+      this.#documentsByType = documentTypeMap;
+    }
+    return this.#documentsByType;
+  }
 
   /**
    * @template T
@@ -52,6 +72,24 @@ export default class TypeCollection extends Collection {
       documents.map(d => (d instanceof foundry.abstract.DataModel ? d : fromUuid(d?.uuid))),
     );
     return results.filter(Boolean);
+  }
+
+  /**
+   * Wrap grouped contents so each group is validated when accessed.
+   * @param {Record<string, TDocument[]>} groups
+   * @returns {Record<string, TDocument[]>}
+   */
+  #validateGroups(groups) {
+    if (!this.metadata.validate) { return groups; }
+    const out = {};
+    for (const key of Object.keys(groups)) {
+      Object.defineProperty(out, key, {
+        configurable: true,
+        enumerable: true,
+        get: () => groups[key].filter((d) => this._validateDocument(d)),
+      });
+    }
+    return out;
   }
 
   /**
@@ -80,28 +118,30 @@ export default class TypeCollection extends Collection {
   types = [];
 
   /**
+   * This collection's contents grouped by metadata tag.
+   * @returns {Record<string, TDocument[]>}
+   */
+  get documentsByTag() {
+    if (!this.#documentsByTag) {
+      const documentsByType = this.#groupByType();
+      const documentTagMap = {};
+      for (const type of this.types) {
+        for (const [tag, value] of Object.entries(this._getTypeModel(type)?.metadata.tags ?? {})) {
+          documentTagMap[tag] ??= [];
+          if (value) { documentTagMap[tag].push(...(documentsByType[type] ?? [])); }
+        }
+      }
+      this.#documentsByTag = documentTagMap;
+    }
+    return this.#validateGroups(this.#documentsByTag);
+  }
+
+  /**
    * This collection's contents grouped by subtype.
    * @returns {{ [K in TDocument["type"]]: Extract<TDocument, { type: K }>[] }}
    */
   get documentsByType() {
-    if (!this.#documentsByType) {
-      const documentTypeMap = Object.fromEntries(this.types.map((t) => [t, []]));
-      this.forEach((d) => {
-        if (!documentTypeMap[d?.type]) { documentTypeMap[d?.type] = []; }
-        documentTypeMap[d?.type].push(d);
-      });
-      this.#documentsByType = documentTypeMap;
-    }
-    if (!this.metadata.validate) { return this.#documentsByType; }
-    const out = {};
-    for (const type of Object.keys(this.#documentsByType)) {
-      Object.defineProperty(out, type, {
-        configurable: true,
-        enumerable: true,
-        get: () => (this.#documentsByType[type] ?? []).filter((d) => this._validateDocument(d)),
-      });
-    }
-    return out;
+    return this.#validateGroups(this.#groupByType());
   }
 
   /**
@@ -127,6 +167,15 @@ export default class TypeCollection extends Collection {
     let size = 0;
     for (const _value of this.values()) { size += 1; }
     return size;
+  }
+
+  /**
+   * The data model for a type in this collection.
+   * @param {TDocument["type"]} type
+   * @returns {typeof DataModel|null}
+   */
+  _getTypeModel(type) {
+    return getSystemClass(type);
   }
 
   /**
@@ -159,12 +208,14 @@ export default class TypeCollection extends Collection {
 
   /** @inheritDoc */
   clear() {
+    this.#documentsByTag = null;
     this.#documentsByType = null;
     return super.clear();
   }
 
   /** @inheritDoc */
   delete(key) {
+    this.#documentsByTag = null;
     this.#documentsByType = null;
     return super.delete(key);
   }
@@ -287,6 +338,7 @@ export default class TypeCollection extends Collection {
 
   /** @inheritDoc */
   set(key, value) {
+    this.#documentsByTag = null;
     this.#documentsByType = null;
     return super.set(key, value);
   }

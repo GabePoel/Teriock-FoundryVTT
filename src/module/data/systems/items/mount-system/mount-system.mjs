@@ -12,7 +12,7 @@ import {
   AppearanceSystemMixin,
   AttunableSystemMixin,
   PriceSystemMixin,
-  StatGiverSystemMixin,
+  StattedSystemMixin,
 } from "../../mixins/_module.mjs";
 import { BaseItemSystem } from "../abstract/_module.mjs";
 
@@ -24,22 +24,17 @@ const { fields } = foundry.data;
  * @mixes AppearanceSystem
  * @mixes AttunableSystem
  * @mixes PriceSystem
- * @mixes StatGiverSystem
+ * @mixes StattedSystem
  */
 export default class MountSystem
-  extends mixClasses(
-    BaseItemSystem,
-    AppearanceSystemMixin,
-    AttunableSystemMixin,
-    PriceSystemMixin,
-    StatGiverSystemMixin,
-  )
+  extends mixClasses(BaseItemSystem, AppearanceSystemMixin, AttunableSystemMixin, PriceSystemMixin, StattedSystemMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    disabledPath: null,
     icon: TERIOCK.DISPLAY.icons.manifest.document.mount,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.mount,
     type: "mount",
@@ -60,7 +55,7 @@ export default class MountSystem
 
   /** @inheritDoc */
   get _embedIcons() {
-    return [...super._embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")), {
+    return [...super._embedIcons, {
       action: "toggleMountedDoc",
       icon: this.mounted ? TERIOCK.DISPLAY.icons.manifest.ui.enabled : TERIOCK.DISPLAY.icons.manifest.ui.disabled,
       tooltip: this.mounted

@@ -8,7 +8,7 @@ const { fields } = foundry.data;
 const { Collection } = foundry.utils;
 
 /**
- * @property {StatGiverSystem} parent
+ * @property {StattedSystem} parent
  * @implements {Teriock.Functionality.StatProvider}
  */
 export default class StatPoolModel extends BaseDataModel {

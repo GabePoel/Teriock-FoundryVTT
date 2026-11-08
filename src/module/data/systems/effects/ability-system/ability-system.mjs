@@ -20,7 +20,7 @@ const { fields } = foundry.data;
  * @mixes ConsumableSystem
  * @mixes CompetenceDisplaySystem
  * @mixes MetaphysicsSystem
- * @mixes RevelationSystem
+ * @mixes RevealableSystem
  * @mixes WikiSystem
  * @mixes AdjustableSystem
  * @mixes AffinableSystem
@@ -45,7 +45,7 @@ export default class AbilitySystem
     systemMixins.ConsumableSystemMixin,
     systemMixins.CompetenceDisplaySystemMixin,
     systemMixins.MetaphysicsSystemMixin,
-    systemMixins.RevelationSystemMixin,
+    systemMixins.RevealableSystemMixin,
     systemMixins.WikiSystemMixin,
     systemMixins.AdjustableSystemMixin,
     systemMixins.AffinableSystemMixin,

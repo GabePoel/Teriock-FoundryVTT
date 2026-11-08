@@ -33,7 +33,7 @@ export default class ApplicableEffectSystem
   static metadata = mergeMetadata(super.metadata, {
     automationTags: { passive: true, triggered: true },
     childTypes: ["ability", "fluency", "property", "resource"],
-    tags: { usable: true },
+    tags: { applicable: true, usable: true },
     visibleTypes: ["ability", "fluency", "property", "resource"],
   });
 

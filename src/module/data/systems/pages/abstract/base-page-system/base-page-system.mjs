@@ -24,7 +24,7 @@ export default class BasePageSystem
   static metadata = mergeMetadata(super.metadata, {
     descriptionPath: "text.content",
     documentName: "JournalEntryPage",
-    tags: { embedPanelBlocks: true, text: true },
+    tags: { blocks: true, text: true },
   });
 
   /** @inheritDoc */

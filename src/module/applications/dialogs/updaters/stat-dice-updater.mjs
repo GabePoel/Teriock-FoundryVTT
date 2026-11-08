@@ -43,7 +43,7 @@ export default class StatDiceUpdater extends BaseUpdater {
       for (const field of context.fields) {
         if (field.name === disabledPath && !this.#pool.parent._canToggleStatDice(this.#pool.stat)) {
           field.disabled = true;
-          field.hint = _loc("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle");
+          field.hint = _loc("TERIOCK.SYSTEMS.Statted.DIALOG.cantToggle");
           field.value = false;
         }
       }

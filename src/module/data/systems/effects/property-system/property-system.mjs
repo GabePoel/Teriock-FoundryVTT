@@ -6,7 +6,7 @@ import {
   ConsumableSystemMixin,
   GrantedSystemMixin,
   MetaphysicsSystemMixin,
-  RevelationSystemMixin,
+  RevealableSystemMixin,
   WikiSystemMixin,
 } from "../../mixins/_module.mjs";
 import { CleanedEffectSystem } from "../abstract/_module.mjs";
@@ -22,7 +22,7 @@ import { CleanedEffectSystem } from "../abstract/_module.mjs";
  * @mixes ConsumableSystem
  * @mixes GrantedSystem
  * @mixes MetaphysicsSystem
- * @mixes RevelationSystem
+ * @mixes RevealableSystem
  * @mixes WikiSystem
  */
 export default class PropertySystem
@@ -32,7 +32,7 @@ export default class PropertySystem
     ConsumableSystemMixin,
     GrantedSystemMixin,
     MetaphysicsSystemMixin,
-    RevelationSystemMixin,
+    RevealableSystemMixin,
     WikiSystemMixin,
   )
 {

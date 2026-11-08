@@ -9,12 +9,7 @@ declare global {
     export type SuppressionMessageKey = keyof typeof tipConfig.suppression;
     export type ErrorMessageKey = keyof typeof tipConfig.error;
 
-    export type ChildChangeTargetEntry = {
-      initial?: boolean;
-      label: string;
-      /** The child document subtypes that this applies to. */
-      types: Teriock.Documents.ChildType[];
-    };
+    export type ChildChangeTargetEntry = { initial?: boolean, label: string };
 
     export type ChildChangePathEntry = {
       forExecution?: boolean;
