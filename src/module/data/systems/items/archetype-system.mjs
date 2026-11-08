@@ -48,7 +48,9 @@ export default class ArchetypeSystem
    * @returns {string[]}
    */
   get classNames() {
-    return Array.from(this.classIdentifiers, identifier => getName(identifier)).sort((a, b) => a.localeCompare(b));
+    return Array.from(this.classIdentifiers, identifier => getName(identifier)).sort((a, b) =>
+      a.localeCompare(b, game.i18n.lang)
+    );
   }
 
   /** @inheritDoc */

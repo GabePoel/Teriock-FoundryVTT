@@ -48,5 +48,5 @@ export function prepareSuggestions(suggestions, { typed = false, types = [] } = 
     options = Object.entries(resolved).map(([value, label]) => ({ label, value }));
   }
   if (!options?.length) { return undefined; }
-  return options.sort((a, b) => a.label.localeCompare(b.label));
+  return options.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
 }

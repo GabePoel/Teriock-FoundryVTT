@@ -91,7 +91,9 @@ export default function CommonDocumentMixin(Base) {
                 label: _loc(CONFIG[cls.documentName].typeLabels[type]),
                 value: type,
               };
-            }).sort((a, b) => a.group.localeCompare(b.group) || a.label.localeCompare(b.label, game.i18n.lang)),
+            }).sort((a, b) =>
+              a.group.localeCompare(b.group, game.i18n.lang) || a.label.localeCompare(b.label, game.i18n.lang)
+            ),
           }
           : {},
         ok: {

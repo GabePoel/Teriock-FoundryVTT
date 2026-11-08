@@ -29,7 +29,7 @@ function compare(aVal, bVal, aField, bField) {
   ) {
     return teriock.dice.rolls.BaseRoll.meanValue(aVal || "0") - teriock.dice.rolls.BaseRoll.meanValue(bVal || "0");
   } else if (aType === "number") { return aVal - bVal; }
-  else if (aType === "string") { return aVal.localeCompare(bVal); }
+  else if (aType === "string") { return aVal.localeCompare(bVal, game.i18n.lang); }
   else if (aType === "boolean") { return Number(aVal) - Number(bVal); }
   return 0;
 }
@@ -64,7 +64,7 @@ export function fieldSorterFactory(model) {
   return function fieldSorter(a, b) {
     const aField = model?.getFieldForProperty?.(a);
     const bField = model?.getFieldForProperty?.(b);
-    if (aField?.label && bField?.label) { return _loc(aField.label).localeCompare(_loc(bField.label)); }
+    if (aField?.label && bField?.label) { return _loc(aField.label).localeCompare(_loc(bField.label), game.i18n.lang); }
     return 0;
   };
 }

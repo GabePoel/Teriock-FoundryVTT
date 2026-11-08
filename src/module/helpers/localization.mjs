@@ -168,7 +168,7 @@ function localizeObject(obj, { keys } = {}) {
 export function listFormat(strings, options) {
   options = { sort: true, style: "long", type: "conjunction", ...options };
   const arr = Array.from(strings);
-  if (options.sort) { arr.sort((a, b) => a.localeCompare(b)); }
+  if (options.sort) { arr.sort((a, b) => a.localeCompare(b, game.i18n.lang)); }
   return game.i18n.getListFormatter(options).format(arr);
 }
 

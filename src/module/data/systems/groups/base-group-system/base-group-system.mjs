@@ -94,7 +94,7 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
    * @returns {TeriockCombatant[]}
    */
   get turnMembers() {
-    return [...this.parent.members].sort((a, b) => a.name.localeCompare(b.name));
+    return [...this.parent.members].sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
   }
 
   /**

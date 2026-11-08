@@ -132,7 +132,7 @@ export default class DocumentSelector extends ResolvableDialog {
     /** @type {Record<string, Teriock.Select.DocumentSelectionEntry>} */
     const entries = {};
     const getName = (doc) => doc.fullName || doc.name;
-    documents.sort((a, b) => getName(a).localeCompare(getName(b)));
+    documents.sort((a, b) => getName(a).localeCompare(getName(b), game.i18n.lang));
     if (!options.multi) { options.checked = options.checked.slice(0, 1); }
     for (const doc of documents) {
       const id = doc.uuid;

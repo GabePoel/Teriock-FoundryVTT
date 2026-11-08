@@ -217,7 +217,7 @@ export default class ExecutionEditor extends ResolvableDialog {
       if (sections.at(-1)?.legend !== undefined || !sections.length) { sections.push({ fields: [] }); }
       sections.at(-1).fields.push(fieldContext);
     }
-    smallFields.sort((a, b) => _loc(a.field.label).localeCompare(_loc(b.field.label)));
+    smallFields.sort((a, b) => _loc(a.field.label).localeCompare(_loc(b.field.label), game.i18n.lang));
     const dialogDocuments = this.#documents;
     const multipleDocuments = dialogDocuments.length > 1;
     const documents = dialogDocuments.map((entry, index) => {

@@ -39,7 +39,9 @@ export default function AutomatableSystemMixin(Base) {
         && Object.entries(a.metadata.requires).every(([k, v]) => this.metadata.tags[k] === v)
       );
       return Object.fromEntries(
-        allowed.map(a => [a.metadata.type, a]).sort((a, b) => _loc(a[1].typeLabel).localeCompare(_loc(b[1].typeLabel))),
+        allowed.map(a => [a.metadata.type, a]).sort((a, b) =>
+          _loc(a[1].typeLabel).localeCompare(_loc(b[1].typeLabel), game.i18n.lang)
+        ),
       );
     }
 

@@ -47,7 +47,7 @@ export default class ChildChangeAutomation extends BaseAutomation {
       return Object.fromEntries(
         Object.entries(ActiveEffect.CHANGE_TYPES).filter(([k, _v]) => types.includes(k)).map((
           [_k, v],
-        ) => [_k, _loc(v.label)]).sort((a, b) => a[1].localeCompare(b[1])),
+        ) => [_k, _loc(v.label)]).sort((a, b) => a[1].localeCompare(b[1], game.i18n.lang)),
       );
     }
     return objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true });

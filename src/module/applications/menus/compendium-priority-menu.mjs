@@ -89,7 +89,7 @@ export default class CompendiumPriorityMenu extends BaseMenu {
       const aPriority = sourcePriorities[a.collection] ?? 0;
       const bPriority = sourcePriorities[b.collection] ?? 0;
       if (aPriority !== bPriority) { return bPriority - aPriority; }
-      return a.label.localeCompare(b.label);
+      return a.label.localeCompare(b.label, game.i18n.lang);
     });
   }
 
