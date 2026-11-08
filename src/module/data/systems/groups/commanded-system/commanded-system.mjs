@@ -80,6 +80,5 @@ export default class CommandedSystem extends BaseGroupSystem {
     const commander = this.commander;
     if (!commander?.visible) { return; }
     if (!this.parent._source.img && commander.img) { this.parent.img = commander.img; }
-    if (!this.parent._source.name) { this.parent.name = this.constructor.defaultName({ commander }); }
   }
 }

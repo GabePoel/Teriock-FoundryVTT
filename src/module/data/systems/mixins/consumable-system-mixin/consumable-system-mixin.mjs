@@ -35,7 +35,7 @@ export default function ConsumableSystemMixin(Base) {
         }),
         quantity: new fields.SchemaField({
           max: new InfiniteNumberField({ persisted: false }),
-          maxFormula: new FormulaField({ deterministic: true, placeholder: TERIOCK.CONST.INF_CODE }),
+          maxFormula: new FormulaField({ deterministic: true, placeholder: _loc("COMMON.None") }),
           min: new fields.NumberField({ initial: 0, integer: true, persisted: false }),
           value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
         }),

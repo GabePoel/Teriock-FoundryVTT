@@ -161,7 +161,12 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
       this.parent.img = (thumbnails.size === 1 && thumbnails.first()) || this.metadata.img;
     }
     if (!this.parent._source.name) {
-      this.parent.name = this.constructor.defaultName({ members: visible }) || this.parent.typeLabel;
+      this.parent.name = this.parent.constructor.defaultName({
+        commander: this.commander?.visible ? this.commander : null,
+        members: visible,
+        parent: this.parent.parent,
+        type: this.parent.type,
+      });
     }
   }
 }

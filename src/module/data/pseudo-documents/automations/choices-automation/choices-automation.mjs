@@ -45,8 +45,8 @@ export default class ChoicesAutomation extends BaseAutomation {
       initialFormula: new FormulaField({ deterministic: false, placeholder: "0" }),
       initialNumber: new fields.NumberField({ initial: null, nullable: true, placeholder: "0" }),
       integer: new fields.BooleanField({ initial: true }),
-      max: new fields.NumberField({ initial: null, nullable: true, placeholder: "+∞" }),
-      min: new fields.NumberField({ initial: null, nullable: true, placeholder: "−∞" }),
+      max: new fields.NumberField({ initial: null, nullable: true, placeholder: `+ ${TERIOCK.CONST.INF_CODE}` }),
+      min: new fields.NumberField({ initial: null, nullable: true, placeholder: `\uF068 ${TERIOCK.CONST.INF_CODE}` }),
       name: new fields.StringField(),
       namespace: new IdentifierField(),
       preset: new fields.StringField({
@@ -81,6 +81,12 @@ export default class ChoicesAutomation extends BaseAutomation {
     if (this.choiceType === "number") { paths.push("min", "max", "initialNumber", "integer"); }
     if (this.choiceType === "formula") { paths.push("initialFormula"); }
     return [...paths, ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (["max", "min"].includes(path)) { inputConfig.classes = "placeholder-fa-solid"; }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
   /** @inheritDoc */

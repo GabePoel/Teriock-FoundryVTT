@@ -24,6 +24,12 @@ export default class InfiniteNumberField extends NumberField {
   }
 
   /** @inheritDoc */
+  _toInput(config) {
+    config.classes = [config.classes, "placeholder-fa-solid"].filterJoin(" ");
+    return super._toInput(config);
+  }
+
+  /** @inheritDoc */
   _validateType(value, options) {
     if (value === Infinity) { return true; }
     super._validateType(value, options);

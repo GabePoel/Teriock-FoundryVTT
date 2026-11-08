@@ -162,7 +162,6 @@ export default class BaseUpdater extends DocumentDialog {
     const field = this.document.getFieldForProperty(path);
     const fieldContext = {
       choices: this._getChoicesForPath(path),
-      classes: ["teriock-icon-placeholder"],
       context: this.document.system?._inputContextKey ?? "actor",
       field,
       localize: true,
