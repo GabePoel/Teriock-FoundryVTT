@@ -1,5 +1,5 @@
 import { objectMap } from "../../../../../../../utils/_module.mjs";
-import { InfiniteNumberField } from "../../../../../../fields/_module.mjs";
+import { InfiniteNumberField, MultiChangeField } from "../../../../../../fields/_module.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -49,7 +49,7 @@ export default function ActorSensesPart(Base) {
             }),
           }),
         }),
-        senses: new fields.SchemaField({
+        senses: new MultiChangeField({
           ...objectMap(TERIOCK.CONFIG.character.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
         }),
       });

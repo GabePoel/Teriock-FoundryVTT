@@ -46,6 +46,13 @@ const paths = {
     targets: ["armament"],
     types: typeSubsets.simple,
   },
+  "system.boosts.*": {
+    forExecution: true,
+    group: "boosts",
+    label: "TERIOCK.SYSTEMS.Child.FIELDS.boosts.all",
+    targets: ["ability", "armament"],
+    types: typeSubsets.formula,
+  },
   "system.bv.bonus": {
     group: "defense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
@@ -64,7 +71,7 @@ const paths = {
     targets: ["ability"],
     types: typeSubsets.numerical,
   },
-  "system.damage": {
+  "system.damage.*": {
     forExecution: true,
     group: "damage",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.alt",

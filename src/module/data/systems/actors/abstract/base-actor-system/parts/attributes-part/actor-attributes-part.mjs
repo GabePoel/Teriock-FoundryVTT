@@ -1,4 +1,5 @@
 import { prefixObject } from "../../../../../../../utils/_module.mjs";
+import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 import { AttributeModifierModel } from "../../../../../../models/_module.mjs";
 
 /**
@@ -6,7 +7,7 @@ import { AttributeModifierModel } from "../../../../../../models/_module.mjs";
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
  */
 
-const { EmbeddedDataField, SchemaField } = foundry.data.fields;
+const { EmbeddedDataField } = foundry.data.fields;
 
 /**
  * Actor data model mixin that handles attributes.
@@ -34,7 +35,10 @@ export default function ActorAttributesPart(Base) {
       Object.entries(TERIOCK.CONFIG.attribute).forEach((
         [key, value],
       ) => (attributes[key] = new EmbeddedDataField(AttributeModifierModel, { label: value.label })));
-      return Object.assign(super.defineSchema(), { attributes: new SchemaField(attributes) });
+      const multiChangePaths = Object.keys(attributes).filter(k => !TERIOCK.CONFIG.attribute[k].notImprovable);
+      return Object.assign(super.defineSchema(), {
+        attributes: new MultiChangeField(attributes, { multiChangePaths }),
+      });
     }
 
     /**

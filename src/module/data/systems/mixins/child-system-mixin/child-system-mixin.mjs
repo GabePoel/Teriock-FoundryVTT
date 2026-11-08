@@ -1,7 +1,7 @@
 import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { makeIcon, mergeMetadata, mixClasses, objectMap, toKebabCase } from "../../../../utils/_module.mjs";
-import { FormulaField } from "../../../fields/_module.mjs";
+import { FormulaField, MultiChangeField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
 import { UsableDataMixin } from "../../../mixins/_module.mjs";
 import { CommonDocumentSettingsModel } from "../../../models/settings-models/_module.mjs";
@@ -57,7 +57,7 @@ export default function ChildSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        boosts: new fields.SchemaField(
+        boosts: new MultiChangeField(
           objectMap(
             TERIOCK.CONFIG.command,
             e => new FormulaField({ deterministic: false, initial: "", label: e.label }),

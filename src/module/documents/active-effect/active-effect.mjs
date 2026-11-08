@@ -6,6 +6,10 @@ import { BaseDocumentMixin, ChildDocumentMixin, CommonDocumentMixin } from "../m
 const { ActiveEffect } = foundry.documents;
 
 /**
+ * @import { MultiChangeField } from "../../data/fields/_module.mjs";
+ */
+
+/**
  * The Teriock ActiveEffect implementation.
  * @extends {ActiveEffect}
  * @mixes BaseDocument
@@ -15,8 +19,35 @@ const { ActiveEffect } = foundry.documents;
 export default class TeriockActiveEffect
   extends mixClasses(ActiveEffect, BaseDocumentMixin, CommonDocumentMixin, ChildDocumentMixin)
 {
+  /**
+   * Apply a change which a {@link MultiChangeField} splits up. These are changes which apply to a bunch of different
+   * paths that the field` designates. This is for things that change every tradecraft, every sense, both one and
+   * two-handed damage, and other stuff like that. A change that's going to hit a bunch of things is denoted with a
+   * wildcard.
+   * @param {TeriockActor|TeriockItem|TeriockActiveEffect} targetDoc
+   * @param {ActiveEffectChangeData} change
+   * @param {Record<string, unknown>} changes
+   * @param {object} [options]
+   * @example Path to apply a bonus to all tradecrafts.
+   * ```
+   * system.tradecrafts.*.bonus
+   * ```
+   */
+  static _applyChangeMulti(targetDoc, change, changes, options = {}) {
+    const parts = change.key.split(".");
+    const i = parts.indexOf("*");
+    const field = targetDoc.system?.getFieldForProperty(parts.slice(1, i).join("."));
+    if (!(field instanceof teriock.data.fields.MultiChangeField)) { return; }
+    for (const path of field.changePaths) {
+      const key = [...parts.slice(0, i), path, ...parts.slice(i + 1)].join(".");
+      Object.assign(changes, this.applyChange(targetDoc, { ...change, key }, options));
+    }
+  }
+
   /** @inheritDoc */
   static _applyChangeUnguided(targetDoc, change, changes, options = {}) {
+    // Apply changes that need to propagate to other fields without targeting an actual path.
+    if (change.key.includes(".*")) { return this._applyChangeMulti(targetDoc, change, changes, options); }
     // Restrict changes to just structured data fields, flags, and token properties. Yoinked from Ryuutama.
     if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) { return; }
     return super._applyChangeUnguided(targetDoc, change, changes, options);
@@ -72,7 +103,7 @@ export default class TeriockActiveEffect
   static applyChange(targetDoc, change, options = {}) {
     if (foundry.utils.getProperty(targetDoc, "system.lockedPaths")?.has(change.key)) { return {}; }
     const changed = super.applyChange(targetDoc, change, options);
-    if (changed[change.key] === undefined) { return {}; }
+    if (changed[change.key] === undefined) { delete changed[change.key]; }
     return changed;
   }
 

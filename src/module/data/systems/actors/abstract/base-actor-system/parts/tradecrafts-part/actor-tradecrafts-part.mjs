@@ -1,4 +1,5 @@
 import { prefixObject } from "../../../../../../../utils/_module.mjs";
+import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 import { TradecraftModifierModel } from "../../../../../../models/modifier-models/_module.mjs";
 
 /**
@@ -33,7 +34,7 @@ export default function ActorTradecraftsPart(Base) {
       Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach((
         [key, value],
       ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModifierModel, { label: value.label })));
-      return Object.assign(super.defineSchema(), { tradecrafts: new SchemaField(tradecrafts) });
+      return Object.assign(super.defineSchema(), { tradecrafts: new MultiChangeField(tradecrafts) });
     }
 
     /** @inheritDoc */

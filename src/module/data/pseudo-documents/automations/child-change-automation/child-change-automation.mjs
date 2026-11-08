@@ -40,6 +40,12 @@ export default class ChildChangeAutomation extends BaseAutomation {
     });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options) {
+    if (source.key === "system.damage") { source.key = "system.damage.*"; }
+    return super.migrateData(source, options);
+  }
+
   /** @returns {Record<string, string>} */
   get _changeTypeChoices() {
     const types = TERIOCK.CONFIG.change.child.paths[this.key]?.types;

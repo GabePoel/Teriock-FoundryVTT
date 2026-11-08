@@ -21,6 +21,7 @@ export default class ChangesAutomation extends BaseAutomation {
     for (const change of source.changes ?? []) {
       migrateThumbnails(change, "value");
       if (change.key === "system.impacts") { change.key = "system.commands"; }
+      if (["system.damage", "system.range"].includes(change.key)) { change.key += ".*"; }
     }
     return super.migrateData(source, options);
   }

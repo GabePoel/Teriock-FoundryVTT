@@ -1,4 +1,5 @@
 import { objectMap } from "../../../../../../../utils/_module.mjs";
+import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 import { terrainsField } from "../../../../../../fields/tools/builders.mjs";
 import { initialBoolean, initialNumber } from "../../../../../../fields/tools/initializers.mjs";
 
@@ -29,7 +30,7 @@ export default function ActorMovementPart(Base) {
       return Object.assign(super.defineSchema(), {
         difficultTerrain: initialBoolean(),
         movementSpeed: initialNumber(30),
-        speedAdjustments: new fields.SchemaField(
+        speedAdjustments: new MultiChangeField(
           objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
         ),
         terrains: terrainsField({ persisted: false }),
