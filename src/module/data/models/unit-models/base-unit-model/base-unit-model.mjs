@@ -1,4 +1,3 @@
-import { UnitUpdater } from "../../../../applications/dialogs/updaters/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mergeMetadata, safeInf } from "../../../../utils/_module.mjs";
 import { BaseDataModel } from "../../../abstract/_module.mjs";
@@ -269,19 +268,9 @@ export default class BaseUnitModel extends BaseDataModel {
     return {
       abbreviation: finite ? _loc(this.symbol) : "",
       abbreviationTooltip: finite ? this.unitLabel : "",
-      action: "updateUnit",
       data: finite ? String(this.raw ?? "") : this.label,
-      dataset: { path: this.schema.fieldPath },
       locked: this.schema.isLocked(this.getNearestDocument()),
       source: source.unitType === "finite" ? String(source.raw ?? "") : source.label,
     };
-  }
-
-  /**
-   * Dialog to update this unit.
-   * @returns {Promise<void>}
-   */
-  async updateDialog() {
-    await UnitUpdater.create({ document: this.getNearestDocument(), path: this.schema.fieldPath, unitModel: this });
   }
 }

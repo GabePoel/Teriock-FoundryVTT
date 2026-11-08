@@ -1,3 +1,4 @@
+import { HTMLUnitInputElement } from "../../applications/elements/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import FormulaField from "./formula-field/formula-field.mjs";
 
@@ -32,11 +33,14 @@ export default class UnitField extends EmbeddedDataField {
 
   /** @inheritDoc */
   _toInput(config) {
-    const { name, value, ...options } = config;
-    return [
-      this.fields.raw.toInput({ ...options, name: `${name}.raw`, value: value?.raw }),
-      this.fields.unit.toInput({ ...options, name: `${name}.unit`, value: value?.unit }),
-    ];
+    const { name, placeholder: _placeholder, value, ...options } = config;
+    return HTMLUnitInputElement.create({
+      ...options,
+      finite: this.model.finiteChoiceEntries.map(e => e.id),
+      name,
+      raw: this.fields.raw.toInput({ ...options, value: value?.raw }),
+      unit: this.fields.unit.toInput({ ...options, value: value?.unit }),
+    });
   }
 
   /**

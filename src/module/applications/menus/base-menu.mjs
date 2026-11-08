@@ -1,4 +1,4 @@
-import { makeIconClass } from "../../utils/_module.mjs";
+import { createElement, makeIconClass } from "../../utils/_module.mjs";
 import { TeriockApplication } from "../api/_module.mjs";
 
 const { fields } = foundry.data;
@@ -17,6 +17,7 @@ const { SettingsConfig } = foundry.applications.settings;
 export default class BaseMenu extends TeriockApplication {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
+    actions: { reset: BaseMenu._onReset, resetField: BaseMenu._onResetField },
     form: { closeOnSubmit: true, handler: BaseMenu._onCommitChanges },
     position: { width: 650 },
     tag: "form",
@@ -62,6 +63,30 @@ export default class BaseMenu extends TeriockApplication {
   }
 
   /**
+   * Reset the form back to default values.
+   * @this {BaseMenu}
+   */
+  static _onReset() {
+    for (const button of this.element.querySelectorAll("[data-action='resetField']")) {
+      BaseMenu._onResetField.call(this, null, button);
+    }
+  }
+
+  /**
+   * Reset a single input back to its default value.
+   * @this {BaseMenu}
+   * @param {PointerEvent} _event
+   * @param {HTMLElement} target
+   */
+  static _onResetField(_event, target) {
+    const input = target.closest(".form-fields").querySelector("[name]");
+    const [key] = input.name.split(".");
+    const value = foundry.utils.getProperty({ [key]: this.getSettingDefault(key) }, input.name);
+    input[input.type === "checkbox" ? "checked" : "value"] = value;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  /**
    * Register this settings config as a setting menu.
    */
   static registerMenu() {
@@ -102,11 +127,34 @@ export default class BaseMenu extends TeriockApplication {
     context.label = undefined;
     context.fieldset = false;
     context.buttons = [{
+      action: "reset",
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button"),
+      label: "TERIOCK.MENUS.Common.resetAll",
+      type: "button",
+    }, {
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.save, "button"),
       label: "SETTINGS.Save",
       type: "submit",
     }];
     return context;
+  }
+
+  /** @inheritDoc */
+  _replaceHTML(result, content, options) {
+    for (const part of Object.values(result)) {
+      part.querySelectorAll(".form-fields").forEach(el => {
+        const input = el.querySelector("[name]");
+        if (!input || input.disabled || !game.settings.settings.has(`teriock.${input.name.split(".")[0]}`)) { return; }
+        el.append(
+          createElement("button", {
+            className: `icon inline-control ${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset)}`,
+            dataset: { action: "resetField", tooltip: "SETTINGS.UI.ACTIONS.Reset" },
+            type: "button",
+          }),
+        );
+      });
+    }
+    super._replaceHTML(result, content, options);
   }
 
   /**
@@ -180,5 +228,18 @@ export default class BaseMenu extends TeriockApplication {
     const setting = game.settings.settings.get(`teriock.${name}`);
     if (!setting) { throw new Error(`Setting \`teriock.${name}\` not registered.`); }
     return setting;
+  }
+
+  /**
+   * Get the default value for a setting.
+   * @param {string} name
+   * @returns {*}
+   */
+  getSettingDefault(name) {
+    const setting = this.getSetting(name);
+    const value = foundry.utils.deepClone(setting.default);
+    return foundry.utils.isSubclass(setting.type, foundry.abstract.DataModel)
+      ? setting.type.schema.clean(value)
+      : value;
   }
 }

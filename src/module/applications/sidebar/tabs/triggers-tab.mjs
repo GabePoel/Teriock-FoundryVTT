@@ -67,7 +67,7 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
       render: (_event, dialog) => {
         const passTime = dialog.form.elements.namedItem("passTime");
         if (!passTime) { return; }
-        const timeGroup = dialog.form.querySelector("[name=\"time.unit\"]").closest(".form-group");
+        const timeGroup = dialog.form.elements.namedItem("time").closest(".form-group");
         const toggle = () => {
           timeGroup.hidden = !passTime.checked;
         };

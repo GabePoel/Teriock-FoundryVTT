@@ -1,4 +1,3 @@
-import { SlowExecutionTimeUnitModel } from "../../../../data/models/unit-models/_module.mjs";
 import { makeIconClass, objectMap } from "../../../../utils/_module.mjs";
 import BaseUpdater from "../base-updater.mjs";
 
@@ -19,31 +18,16 @@ export default class AbilityExecutionTimeUpdater extends BaseUpdater {
     },
   };
 
-  /**
-   * Whether the current slow execution time unit is finite.
-   * @returns {boolean}
-   */
-  get #isSlowFiniteUnit() {
-    const unit = this._currentData.system.executionTime.slow.unit;
-    return SlowExecutionTimeUnitModel.finiteChoiceEntries.some(e => e.id === unit);
-  }
-
   /** @inheritDoc */
   get _dataPaths() {
-    return [
-      "system.maneuver",
-      "system.executionTime.base",
-      "system.executionTime.slow.raw",
-      "system.executionTime.slow.unit",
-    ];
+    return ["system.maneuver", "system.executionTime.base", "system.executionTime.slow"];
   }
 
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["system.maneuver"];
     if (this._currentData.system.maneuver === "slow") {
-      paths.push("system.executionTime.slow.unit");
-      if (this.#isSlowFiniteUnit) { paths.push("system.executionTime.slow.raw"); }
+      paths.push("system.executionTime.slow");
       return paths;
     }
     if (this._currentData.system.maneuver === "passive") { return paths; }

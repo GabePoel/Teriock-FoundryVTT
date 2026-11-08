@@ -45,22 +45,8 @@ export default function FieldsSheetMixin(Base) {
       });
     }
 
-    /**
-     * Update a unit.
-     * @param {PointerEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     * @this {FieldsSheet}
-     */
-    static async #onUpdateUnit(_event, target) {
-      if (!game.teriock.checkEditable(this)) { return; }
-      await foundry.utils.getProperty(this.document, target.dataset.path).updateDialog();
-    }
-
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-    static DEFAULT_OPTIONS = {
-      actions: { openUpdater: this.#onOpenUpdater, updatePaths: this.#onUpdatePaths, updateUnit: this.#onUpdateUnit },
-    };
+    static DEFAULT_OPTIONS = { actions: { openUpdater: this.#onOpenUpdater, updatePaths: this.#onUpdatePaths } };
   }
 
   return FieldsSheet;

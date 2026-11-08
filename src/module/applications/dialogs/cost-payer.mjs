@@ -262,7 +262,6 @@ export default class CostPayer extends ResolvableDialog {
           sourcesHint: _loc("TERIOCK.DIALOGS.CostPayer.sources", {
             key: TERIOCK.CONFIG.stat[k].label.toLocaleLowerCase(game.i18n.lang),
           }),
-          units: _loc(`TERIOCK.TERMS.Formula.${field.deterministic ? "deterministic" : "rollable"}`),
           value: this.state.costOptions.primary[k],
         };
       });

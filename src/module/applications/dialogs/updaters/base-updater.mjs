@@ -1,3 +1,4 @@
+import { UnitField } from "../../../data/fields/_module.mjs";
 import { createElement, makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 
@@ -72,7 +73,7 @@ export default class BaseUpdater extends DocumentDialog {
       foundry.utils.setProperty(
         this._currentData,
         p,
-        foundry.utils.getProperty(this.document, p.replace("system.", "system._source.")),
+        foundry.utils.deepClone(foundry.utils.getProperty(this.document, p.replace("system.", "system._source."))),
       );
     }
     this._currentData = foundry.utils.expandObject(this._currentData);
@@ -206,7 +207,8 @@ export default class BaseUpdater extends DocumentDialog {
     if (!this._canLockPaths) { return super._replaceHTML(result, content, options); }
     const lockedPaths = this.lockedPaths;
     result.form?.querySelectorAll(".form-fields").forEach(el => {
-      const path = el.querySelector("[name]")?.getAttribute("name");
+      let path = el.querySelector("[name]")?.getAttribute("name");
+      if (this.document.getFieldForProperty(path) instanceof UnitField) { path = `${path}.raw`; }
       const locked = lockedPaths.has(path);
       el.append(
         createElement("button", {

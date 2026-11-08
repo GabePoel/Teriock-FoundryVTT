@@ -27,7 +27,7 @@ export default class DurationAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["duration.unit", "duration.raw", "substitution", ...super._formPaths];
+    return ["duration", "substitution", ...super._formPaths];
   }
 
   /** @inheritDoc */

@@ -36,7 +36,7 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      base: rollableFormulaField({ initial: this.metadata.initialBase }),
+      base: rollableFormulaField({ deterministic: true, initial: this.metadata.initialBase }),
       bonus: rollableFormulaField(),
       score: new fields.NumberField({
         initial: this.metadata.initialScore,

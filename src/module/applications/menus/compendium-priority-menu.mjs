@@ -25,9 +25,21 @@ export default class CompendiumPriorityMenu extends BaseMenu {
 
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { moveIdentifierPriority: this.#onMoveIdentifierPriority },
+    actions: { moveIdentifierPriority: this.#onMoveIdentifierPriority, reset: this._onReset },
     position: { width: 500 },
   };
+
+  /**
+   * @inheritDoc
+   * @this {CompendiumPriorityMenu}
+   */
+  static async _onReset() {
+    super._onReset();
+    this.#identifierSourceRows = this.#prepareIdentifierSourceRowContext(
+      this.getSettingDefault("identifierSourcePriority"),
+    );
+    await this.render({ parts: ["identifierSources"] });
+  }
 
   /**
    * The types of documents for whom the compendium collections can be used to establish identifiers.
