@@ -128,18 +128,4 @@ export default class DocumentSettingsSheet extends DocumentDialog {
     context.configs = context.configs.map(config => ({ ...config, fieldset: useFieldset }));
     return context;
   }
-
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    context = await super._preparePartContext(partId, context, options);
-    if (partId === "footer") {
-      context.buttons = [{
-        default: true,
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done),
-        label: _loc("COMMON.Confirm"),
-        type: "submit",
-      }];
-    }
-    return context;
-  }
 }

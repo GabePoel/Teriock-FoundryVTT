@@ -79,12 +79,6 @@ export default class SourceRefresher extends DocumentDialog {
       ),
     );
     return Object.assign(await super._prepareContext(options), {
-      buttons: [{
-        action: "ok",
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
-        label: "COMMON.Confirm",
-        type: "submit",
-      }],
       choiceName: "state.selected",
       documents: refreshSourceMap,
       fields: this._prepareModelFields("refreshOptions"),

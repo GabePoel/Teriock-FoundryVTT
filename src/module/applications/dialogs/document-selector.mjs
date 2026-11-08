@@ -315,22 +315,16 @@ export default class DocumentSelector extends ResolvableDialog {
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const buttons = [{
-      action: "ok",
-      default: !this.unchecked,
-      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
-      label: "COMMON.Confirm",
-      type: "submit",
-    }];
+    const context = await super._prepareContext(options);
+    context.buttons[0].default = !this.unchecked;
     if (this.nullable) {
-      buttons.push({
+      context.buttons.push({
         action: "none",
         icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.remove, "button"),
         label: "TERIOCK.COMMON.None",
       });
     }
-    return Object.assign(await super._prepareContext(options), {
-      buttons,
+    return Object.assign(context, {
       documents: this.documents,
       hint: this.hint,
       multi: this.multi,

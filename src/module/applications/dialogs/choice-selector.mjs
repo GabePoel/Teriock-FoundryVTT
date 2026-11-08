@@ -18,7 +18,7 @@ const { FormDataExtended } = foundry.applications.ux;
 export default class ChoiceSelector extends ResolvableDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { confirm: this._onConfirm, other: this._onOther },
+    actions: { ok: this._onConfirm, other: this._onOther },
     classes: ["choice-selector"],
     form: { closeOnSubmit: false, submitOnChange: false },
     position: { width: 400 },
@@ -97,23 +97,12 @@ export default class ChoiceSelector extends ResolvableDialog {
       context.fields = [{ field: this.#field, name: "selected", value: this.#field.initial }];
       context.hintHtml = this.hintHtml;
     }
-    if (partId === "footer") {
-      /** @type {object[]} */
-      const buttons = [{
-        action: "confirm",
-        default: true,
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
-        label: "COMMON.Confirm",
-        type: "submit",
-      }];
-      if (this.other) {
-        buttons.push({
-          action: "other",
-          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.custom, "button"),
-          label: _loc("TERIOCK.COMMON.Other"),
-        });
-      }
-      context.buttons = buttons;
+    if (partId === "footer" && this.other) {
+      context.buttons.push({
+        action: "other",
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.custom, "button"),
+        label: "TERIOCK.COMMON.Other",
+      });
     }
     return context;
   }

@@ -1,5 +1,5 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
+import { mixClasses } from "../../../utils/_module.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../mixins/_module.mjs";
 
@@ -94,28 +94,15 @@ export default class BaseStatManager extends mixClasses(DocumentDialog, HackStat
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    return Object.assign(await super._prepareContext(options), {
+    const context = await super._prepareContext(options);
+    context.buttons[0].label = "TERIOCK.COMMON.Done";
+    return Object.assign(context, {
       consumeStatDiceField: this._consumeStatDiceField,
       editStatBar: true,
       forHarmField: this._forHarmField,
       state: this.state,
       substitutionField: this._substitutionField,
     });
-  }
-
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    context = await super._preparePartContext(partId, context, options);
-    if (partId === "footer") {
-      context.buttons = [{
-        action: "ok",
-        default: true,
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
-        label: "TERIOCK.COMMON.Done",
-        type: "submit",
-      }];
-    }
-    return context;
   }
 
   /** @inheritDoc */

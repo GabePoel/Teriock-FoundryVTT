@@ -177,17 +177,12 @@ export default class BaseUpdater extends DocumentDialog {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "form") { context.fields = this._formPaths.map(p => this._prepareFieldContext(p)); }
     if (partId === "footer") {
-      context.buttons = [{
-        default: true,
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done),
-        label: _loc("COMMON.Confirm"),
-        type: "submit",
-      }, {
+      context.buttons.push({
         action: "reset",
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset),
+        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button"),
         label: "SETTINGS.UI.ACTIONS.Reset",
         type: "button",
-      }];
+      });
     }
     return context;
   }

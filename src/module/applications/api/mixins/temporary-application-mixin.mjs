@@ -1,3 +1,5 @@
+import { makeIconClass } from "../../../utils/_module.mjs";
+
 const { FormDataExtended } = foundry.applications.ux;
 
 /**
@@ -89,6 +91,19 @@ export default function TemporaryApplicationMixin(Base) {
         }
         this.state[id] = model.toObject();
       }
+    }
+
+    /** @inheritDoc */
+    async _prepareContext(options = {}) {
+      return Object.assign(await super._prepareContext(options), {
+        buttons: [{
+          action: "ok",
+          default: true,
+          icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
+          label: "COMMON.Confirm",
+          type: "submit",
+        }],
+      });
     }
 
     /**

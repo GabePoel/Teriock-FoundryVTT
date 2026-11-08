@@ -274,15 +274,6 @@ export default class CostPayer extends ResolvableDialog {
         value: this.state.costOptions.tweaks[k] || undefined,
       }));
     }
-    if (partId === "footer") {
-      context.buttons = [{
-        action: "ok",
-        default: true,
-        icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.done, "button"),
-        label: "COMMON.Confirm",
-        type: "submit",
-      }];
-    }
     return context;
   }
 }
