@@ -301,8 +301,7 @@ export default class FormulaField extends StringField {
     const input = super._toInput(config);
     if (input.tagName !== "INPUT") { return input; }
     config.value ??= this.getInitialValue({}) ?? "";
-    const formulaType = this.deterministic ? "deterministic" : "rollable";
-    config.dataset = { formulaType, tooltip: _loc(`TERIOCK.TERMS.Formula.${formulaType}`), ...config.dataset };
+    config.dataset = { formulaType: this.deterministic ? "deterministic" : "rollable", ...config.dataset };
     return foundry.applications.elements.HTMLFormulaInputElement.create(config);
   }
 
