@@ -55,6 +55,7 @@ declare global {
       simple: boolean;
       statGiver: boolean;
       text: boolean;
+      transformation: boolean;
       triggerable: boolean;
       untrackable: boolean;
       usable: boolean;

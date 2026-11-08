@@ -1,4 +1,4 @@
-import { getSystemClass, makeIcon } from "../../../../utils/_module.mjs";
+import { getSystemClass, makeIcon, mergeMetadata } from "../../../../utils/_module.mjs";
 import { migrateRename, migrateThumbnails } from "../../../fields/tools/migrations.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 
@@ -51,6 +51,9 @@ export default function TransformationSystemMixin(Base) {
   {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SCHEMA.Transformation"];
+
+    /** @inheritDoc */
+    static metadata = mergeMetadata(super.metadata, { tags: { transformation: true } });
 
     /** @inheritDoc */
     static defineSchema() {

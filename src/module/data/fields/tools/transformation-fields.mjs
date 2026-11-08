@@ -52,7 +52,7 @@ export function speciesTransformationFields() {
 export function actorTransformationConfig() {
   return {
     primary: new LocalDocumentField(foundry.documents.BaseActiveEffect, {
-      filter: d => ["condition", "consequence"].includes(d.type) && d.system.transformation.enabled,
+      filter: d => d.system.metadata.tags.transformation && d.system.transformation.enabled,
     }),
   };
 }
