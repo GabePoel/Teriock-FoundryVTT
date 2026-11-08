@@ -41,6 +41,11 @@ export default function CommandActivationFactory(key) {
     }
 
     /** @inheritDoc */
+    get selectedActors() {
+      return TERIOCK.CONFIG.command[key].shared ? game.actors.rollers : super.selectedActors;
+    }
+
+    /** @inheritDoc */
     get typeIcon() {
       return this.display.icon || game.teriock.commands.getValue(key, "icon", this.options) || this.metadata.icon;
     }

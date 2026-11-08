@@ -135,6 +135,8 @@ declare global {
       operations?: CommandOperation;
       /** The command to take instead or the operations that reverse this one */
       reverse?: string | CommandOperation;
+      /** Whether this shared group rolls and only certain actors should roll */
+      shared?: boolean;
       /** Fire a trigger named after this command before taking it */
       trigger?: boolean;
       /** Run on all Actors at once instead of batching operations */

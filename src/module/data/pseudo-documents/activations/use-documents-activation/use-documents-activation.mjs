@@ -29,6 +29,11 @@ export default class UseDocumentsActivation extends mixClasses(BaseActivation, S
   }
 
   /** @inheritDoc */
+  get selectedActors() {
+    return game.actors.rollers;
+  }
+
+  /** @inheritDoc */
   _isSelectable(document) {
     return typeof document?.use === "function";
   }

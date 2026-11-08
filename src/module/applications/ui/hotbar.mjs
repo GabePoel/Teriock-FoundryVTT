@@ -15,7 +15,7 @@ export default class TeriockHotbar extends Hotbar {
    */
   static async useMatches(identifier, options) {
     const { actor, event } = options;
-    const actors = actor ? [actor] : game.actors.selected;
+    const actors = actor ? [actor] : game.actors.rollers;
     for (const a of actors) { await a.useDocument(identifier, { event }); }
     if (!actors.length) {
       const doc = await teriock.fromIdentifier(identifier);

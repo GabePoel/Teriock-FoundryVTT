@@ -60,6 +60,11 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
   }
 
   /** @inheritDoc */
+  get selectedActors() {
+    return game.actors.rollers;
+  }
+
+  /** @inheritDoc */
   async primaryAction() {
     await this.#act();
   }

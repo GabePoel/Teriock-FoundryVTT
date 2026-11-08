@@ -42,6 +42,22 @@ export default class TeriockActors extends Actors {
   }
 
   /**
+   * Selected actors that make their own rolls. If multiple actors are in the same group that shares rolls, only one
+   * of those actors will make the roll.
+   * @returns {TeriockActor[]}
+   */
+  get rollers() {
+    const groups = new Set();
+    return this.selected.filter(a => {
+      const group = a.defaultCombatant?.group;
+      if (!group?.system.canShareRolls) { return true; }
+      if (groups.has(group)) { return false; }
+      groups.add(group);
+      return true;
+    });
+  }
+
+  /**
    * Selected actors.
    * @returns {TeriockActor[]}
    */

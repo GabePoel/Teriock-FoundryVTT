@@ -412,6 +412,7 @@ const commandConfig = {
     execute: each((a, o) => a.useDocument("ability:basic-attack", o)),
     label: "TERIOCK.COMMANDS.Attack.label",
     reverse: "attack",
+    shared: true,
     icon: () => teriock.data.systems.effects.AbilitySystem.metadata.icon,
   },
   attune: {
@@ -504,6 +505,7 @@ const commandConfig = {
       await a.system.attributes[o.attribute ?? "mov"].use({ ...o });
     }),
     reverse: "feat",
+    shared: true,
     icon: options => attributeConfig[options?.attribute]?.icon || "star",
     label: options => attributeConfig[options?.attribute]?.abbreviation
       ? _loc("TERIOCK.ROLLS.Feat.name", { value: attributeConfig[options?.attribute]?.abbreviation })
@@ -653,6 +655,7 @@ const commandConfig = {
     }),
     icon: icons.manifest.effect.resist,
     reverse: "resist",
+    shared: true,
     label: options => _loc(affinityConfig.types[options?.type ?? "resistance"].button),
   },
   revitalize: {
@@ -752,6 +755,7 @@ const commandConfig = {
       await a.system.tradecrafts[o.tradecraft ?? "artist"].use({ ...o });
     }),
     reverse: "tradecraft",
+    shared: true,
     icon: options => tradecraftConfig.tradecrafts[options?.tradecraft || "artist"].icon,
     label: options => tradecraftConfig.tradecrafts[options?.tradecraft]?.label
       ? _loc("TERIOCK.ROLLS.Tradecraft.name", { value: tradecraftConfig.tradecrafts[options?.tradecraft].label })
@@ -801,6 +805,7 @@ const commandConfig = {
   use: {
     args: ["key"],
     reverse: "use",
+    shared: true,
     execute: async (actors, options) => {
       if (!options.key) {
         ui.notifications.error("TERIOCK.COMMANDS.Use.noKey", { localize: true });
