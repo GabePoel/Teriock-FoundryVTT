@@ -1,5 +1,5 @@
-import { mergeMetadata } from "../../../utils/_module.mjs";
-import WeightUnitModel from "./weight-unit-model.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import WeightUnitModel from "../normal-unit-models/weight-unit-model.mjs";
 
 /**
  * A weight model with special handling for going infinite.

@@ -11,6 +11,7 @@ const { SearchFilter } = foundry.applications.ux;
 /** @type {Teriock.Select.SelectDocumentsDialogOptions} */
 const DEFAULT_SELECT_OPTIONS = {
   checked: [],
+  content: "",
   hint: "",
   imgKey: "img",
   locked: [],
@@ -45,7 +46,9 @@ export default class DocumentSelector extends ResolvableDialog {
       selectNone: this._onSelectNone,
     },
     classes: ["dynamic-select"],
+    form: { closeOnSubmit: false, submitOnChange: false },
     position: { width: 450 },
+    tag: "form",
     window: {
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.select, "title"),
       title: "TERIOCK.DIALOGS.Select.Document.title",
@@ -94,17 +97,21 @@ export default class DocumentSelector extends ResolvableDialog {
 
   /**
    * @param {PointerEvent} event
+   * @param {HTMLButtonElement} target
    * @returns {Promise<void>}
    * @this {DocumentSelector}
    */
-  static async _onGetSelected(event) {
+  static async _onGetSelected(event, target) {
     event?.preventDefault();
-    if (event) { this.onConfirm?.(event); }
+    if (event) { this.onConfirm?.(event, target, this); }
     const root = this.element;
     let ids = [];
-    if (this.multi) { ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name); }
-    else {
-      const radio = root.querySelector(`input[name]:checked`);
+    if (this.multi) {
+      ids = Array.from(root.querySelectorAll(".doc-list-container input[type=\"checkbox\"]:checked")).map(el =>
+        el.name
+      );
+    } else {
+      const radio = root.querySelector(`.doc-list-container input[name]:checked`);
       if (radio) { ids = [radio?.value].filter(Boolean); }
     }
     this._finish(ids);
@@ -124,14 +131,18 @@ export default class DocumentSelector extends ResolvableDialog {
    * @this {DocumentSelector}
    */
   static async _onSelectAll() {
-    this.element.querySelectorAll("input[type=\"checkbox\"]:not(:disabled)").forEach(el => el.checked = true);
+    this.element.querySelectorAll(".doc-list-container input[type=\"checkbox\"]:not(:disabled)").forEach(el =>
+      el.checked = true
+    );
   }
 
   /**
    * @this {DocumentSelector}
    */
   static async _onSelectNone() {
-    this.element.querySelectorAll("input[type=\"checkbox\"]:not(:disabled)").forEach(el => el.checked = false);
+    this.element.querySelectorAll(".doc-list-container input[type=\"checkbox\"]:not(:disabled)").forEach(el =>
+      el.checked = false
+    );
   }
 
   /**
@@ -286,8 +297,9 @@ export default class DocumentSelector extends ResolvableDialog {
    * @param {Partial<ApplicationConfiguration>} [config]
    */
   constructor(documents, options = {}, config = {}) {
-    const { hint = "", multi = true, nullable = false, openable = false, tooltip = true } = options;
+    const { content = "", hint = "", multi = true, nullable = false, openable = false, tooltip = true } = options;
     super(config);
+    this.content = content instanceof HTMLDivElement ? content.innerHTML : foundry.utils.cleanHTML(String(content));
     this.documents = documents;
     this.multi = multi;
     this.nullable = nullable;
@@ -295,6 +307,7 @@ export default class DocumentSelector extends ResolvableDialog {
     this.tooltip = tooltip;
     this.openable = openable;
     this.onConfirm = options.onConfirm;
+    if (options.render) { this.addEventListener("render", event => options.render(event, this)); }
     if (options.title) { foundry.utils.setProperty(this.options, "window.title", options.title); }
     if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
     this.unchecked = !Object.values(documents).some(d => d.checked);
@@ -344,6 +357,7 @@ export default class DocumentSelector extends ResolvableDialog {
       });
     }
     return Object.assign(context, {
+      content: this.content,
       documents: this.documents,
       hint: this.hint,
       multi: this.multi,

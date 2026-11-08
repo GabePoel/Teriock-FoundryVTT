@@ -1,11 +1,22 @@
+import { TimeUnitModel } from "../../../data/models/unit-models/_module.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import { DocumentSelector } from "../../dialogs/_module.mjs";
 
+const { fields } = foundry.data;
+const { FormDataExtended } = foundry.applications.ux;
 const { AbstractSidebarTab } = foundry.applications.sidebar;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * @import { ApplicationConfiguration } from "@client/applications/_types.mjs";
+ */
+
+/**
+ * @typedef SidebarTriggerGroupEntry
+ * @property {"pcs"|"relevant"} actors - Actors that can be selected.
+ * @property {"pcs"|"relevant"} checked - Actors that are selected by default.
+ * @property {boolean} [passesTime] - Whether this can also cause time to pass.
+ * @property {Teriock.System.TimeTrigger[]} triggers - Triggers in the group.
  */
 
 /**
@@ -21,12 +32,54 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
    */
   static async #onFire(_event, target) {
     const { group, trigger } = target.dataset;
-    const { actors, checked } = this.constructor.GROUPS[group];
+    const { actors, checked, passesTime } = this.constructor.GROUPS[group];
+    const content = document.createElement("div");
+    if (passesTime) {
+      const prefix = "TERIOCK.TRIGGERS.SIDEBAR.FIELDS";
+      const key = `${trigger}Time`;
+      const rootId = foundry.utils.randomID();
+      const container = document.createElement("div");
+      container.className = "teriock-form-container";
+      content.append(container);
+      container.append(
+        new fields.BooleanField().toFormGroup({
+          hint: `${prefix}.passTime.hint`,
+          label: `${prefix}.passTime.label`,
+          localize: true,
+          rootId,
+        }, { name: "passTime", value: true }),
+        game.settings.settings.get(`teriock.${key}`).type.toFormGroup({
+          hint: `${prefix}.time.hint`,
+          label: `${prefix}.time.label`,
+          localize: true,
+          rootId,
+        }, { name: "time", value: game.settings.get("teriock", key) }),
+      );
+    }
+    let data = {};
     const selected = await DocumentSelector.selectMulti(game.actors[actors], {
       checked: game.actors[checked].map(a => a.uuid),
+      content,
       title: TERIOCK.CONFIG.trigger.time.choices[trigger],
+      onConfirm: (_event, button) => {
+        data = foundry.utils.expandObject(new FormDataExtended(button.form).object);
+      },
+      render: (_event, dialog) => {
+        const passTime = dialog.form.elements.namedItem("passTime");
+        if (!passTime) { return; }
+        const timeGroup = dialog.form.querySelector("[name=\"time.unit\"]").closest(".form-group");
+        const toggle = () => {
+          timeGroup.hidden = !passTime.checked;
+        };
+        passTime.addEventListener("change", toggle);
+        toggle();
+      },
     });
-    if (!selected?.length) { return; }
+    if (!selected) { return; }
+    if (data.passTime) {
+      const seconds = new TimeUnitModel(data.time).value;
+      if (seconds > 0) { await game.time.advance(seconds); }
+    }
     for (const [user, userActors] of Map.groupBy(selected, a => a.triggerUser)) {
       user.query("teriock.runCommand", { key: trigger, uuids: userActors.map(a => a.uuid) }).catch(err =>
         console.error(`Failed to run ${trigger} for ${user.name}.`, err)
@@ -41,14 +94,11 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
     window: { title: "TERIOCK.TRIGGERS.SIDEBAR.label" },
   };
 
-  /**
-   * Trigger groups.
-   * @type {Record<string, { actors: "pcs"|"relevant", checked: "pcs"|"relevant", triggers: Teriock.System.TimeTrigger[] }>}
-   */
+  /** @type {Record<string, SidebarTriggerGroupEntry>} */
   static GROUPS = {
     session: { actors: "pcs", checked: "pcs", triggers: ["sessionStart", "sessionEnd"] },
 
-    resting: { actors: "relevant", checked: "pcs", triggers: ["shortRest", "longRest"] },
+    resting: { actors: "relevant", checked: "pcs", passesTime: true, triggers: ["longRest", "shortRest"] },
     time: { actors: "relevant", checked: "relevant", triggers: ["dawn", "dusk"] },
   };
 

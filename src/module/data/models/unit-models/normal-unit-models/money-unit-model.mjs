@@ -1,12 +1,11 @@
-import { mergeMetadata } from "../../../utils/_module.mjs";
-import BaseUnitModel from "./base-unit-model/base-unit-model.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import BaseUnitModel from "../base-unit-model/base-unit-model.mjs";
 
-export default class CurrencyUnitModel extends BaseUnitModel {
+export default class MoneyUnitModel extends BaseUnitModel {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.stat.gp,
     unitConfig: "currency",
-    unlimited: false,
   });
 
   /**
@@ -14,7 +13,7 @@ export default class CurrencyUnitModel extends BaseUnitModel {
    * @returns {Teriock.Units.UnitEntry[]}
    */
   static get zeroChoiceEntries() {
-    return [{ id: "none", label: "TERIOCK.MODELS.CurrencyUnit.UNITS.none.label" }];
+    return [{ id: "none", label: "TERIOCK.MODELS.MoneyUnit.UNITS.none.label" }];
   }
 
   /** @inheritDoc */

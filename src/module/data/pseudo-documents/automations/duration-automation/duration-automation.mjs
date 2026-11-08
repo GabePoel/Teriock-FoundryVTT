@@ -1,7 +1,7 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { FormulaField, UnitField } from "../../../fields/_module.mjs";
-import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
+import { EffectDurationUnitModel } from "../../../models/unit-models/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 export default class DurationAutomation extends BaseAutomation {
@@ -14,7 +14,7 @@ export default class DurationAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      duration: new UnitField(TimeUnitModel),
+      duration: new UnitField(EffectDurationUnitModel),
       substitution: new FormulaField({ initial: "@base + @new" }),
     });
   }

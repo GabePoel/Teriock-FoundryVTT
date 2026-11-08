@@ -1,9 +1,13 @@
-import { mergeMetadata } from "../../../utils/_module.mjs";
-import LengthUnitModel from "./length-unit-model.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import LengthUnitModel from "../normal-unit-models/length-unit-model.mjs";
 
 export default class RangeUnitModel extends LengthUnitModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, { formula: true, rawOptions: { placeholder: "COMMON.None" } });
+  static metadata = mergeMetadata(super.metadata, {
+    formula: true,
+    rawOptions: { placeholder: "COMMON.None" },
+    unlimited: true,
+  });
 
   /**
    * @inheritDoc

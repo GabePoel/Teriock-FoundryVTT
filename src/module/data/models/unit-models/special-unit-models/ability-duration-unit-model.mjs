@@ -1,7 +1,7 @@
-import { mergeMetadata } from "../../../utils/_module.mjs";
-import TimeUnitModel from "./time-unit-model.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import EffectDurationUnitModel from "./effect-duration-unit-model.mjs";
 
-export default class DurationUnitModel extends TimeUnitModel {
+export default class AbilityDurationUnitModel extends EffectDurationUnitModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Duration"];
 

@@ -1,5 +1,5 @@
 import { UnitField } from "../../../../../fields/_module.mjs";
-import { DurationUnitModel } from "../../../../../models/unit-models/_module.mjs";
+import { AbilityDurationUnitModel } from "../../../../../models/unit-models/_module.mjs";
 
 /**
  * Ability duration part.
@@ -21,7 +21,7 @@ export default function AbilityDurationPart(Base) {
   {
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { duration: new UnitField(DurationUnitModel) });
+      return Object.assign(super.defineSchema(), { duration: new UnitField(AbilityDurationUnitModel) });
     }
 
     /** @inheritDoc */

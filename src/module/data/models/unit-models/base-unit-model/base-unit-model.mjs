@@ -33,7 +33,7 @@ export default class BaseUnitModel extends BaseDataModel {
     rawOptions: { placeholder: "0" },
     unitConfig: null,
     unitOptions: {},
-    unlimited: true,
+    unlimited: false,
   });
 
   /**
@@ -96,10 +96,10 @@ export default class BaseUnitModel extends BaseDataModel {
         ? new FormulaField(rawOptions)
         : new fields.NumberField({ initial: 0, min: 0, nullable: false, ...rawOptions }),
       unit: new fields.StringField({
-        choices: this.choices,
         initial: this.choiceEntries[0].id,
         nullable: false,
         required: true,
+        choices: () => this.choices,
         ...this.metadata.unitOptions,
       }),
     };

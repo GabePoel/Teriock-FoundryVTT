@@ -1,8 +1,8 @@
-import { TimeUnitModel } from "../../../models/unit-models/_module.mjs";
+import { EffectDurationUnitModel } from "../../../models/unit-models/_module.mjs";
 
 declare module "./duration-automation.mjs" {
   export default interface DurationAutomation {
-    duration: TimeUnitModel;
+    duration: EffectDurationUnitModel;
     substitution: Teriock.System.FormulaString;
   }
 }

@@ -1,3 +1,5 @@
+import type DocumentSelector from "../applications/dialogs/document-selector.mjs";
+
 declare global {
   namespace Teriock.Select {
     export type DocumentSelectionEntry = {
@@ -18,6 +20,8 @@ declare global {
     type _BaseDocumentSelectDialogOptions = {
       /** Automatically select the only option if exactly one is provided? */
       auto?: boolean;
+      /** HTML string or `<div>` element inserted below the documents, as with `DialogV2` */
+      content?: string | HTMLDivElement;
       /** Text to display on the dialog */
       hint?: string;
       /** Icon class */
@@ -38,8 +42,10 @@ declare global {
       title?: string;
       /** Whether a tooltip should be displayed for each document option */
       tooltip?: boolean;
-      /** Called with the event that confirmed the selection */
-      onConfirm?: (event: Event) => void;
+      /** Called with the event and button that confirmed the selection and the dialog */
+      onConfirm?: (event: Event, button: HTMLButtonElement, dialog: DocumentSelector) => void;
+      /** Called with the render event and the dialog whenever it renders, as with `DialogV2` */
+      render?: (event: Event, dialog: DocumentSelector) => void;
     };
 
     export type SelectDocumentDialogOptions = _BaseDocumentSelectDialogOptions & {

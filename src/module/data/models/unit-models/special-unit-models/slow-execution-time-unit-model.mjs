@@ -1,5 +1,5 @@
-import { mergeMetadata } from "../../../utils/_module.mjs";
-import TimeUnitModel from "./time-unit-model.mjs";
+import { mergeMetadata } from "../../../../utils/_module.mjs";
+import TimeUnitModel from "../normal-unit-models/time-unit-model.mjs";
 
 export default class SlowExecutionTimeUnitModel extends TimeUnitModel {
   /** @inheritDoc */

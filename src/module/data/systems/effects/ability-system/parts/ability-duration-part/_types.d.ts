@@ -1,10 +1,10 @@
-import { DurationUnitModel } from "../../../../../models/unit-models/_module.mjs";
+import { AbilityDurationUnitModel } from "../../../../../models/unit-models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
     export interface AbilityDurationPartData {
       /** <schema> Time and circumstances in which this ability is active */
-      duration: DurationUnitModel;
+      duration: AbilityDurationUnitModel;
     }
   }
 }

@@ -30,6 +30,15 @@ export default class UnitField extends EmbeddedDataField {
     return super._migrate(value, options, _state);
   }
 
+  /** @inheritDoc */
+  _toInput(config) {
+    const { name, value, ...options } = config;
+    return [
+      this.fields.raw.toInput({ ...options, name: `${name}.raw`, value: value?.raw }),
+      this.fields.unit.toInput({ ...options, name: `${name}.unit`, value: value?.unit }),
+    ];
+  }
+
   /**
    * Changes are applied directly to the raw value.
    * @inheritDoc

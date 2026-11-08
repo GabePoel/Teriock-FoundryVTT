@@ -1,6 +1,6 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
 import { UnitField } from "../../../fields/_module.mjs";
-import { CurrencyUnitModel } from "../../../models/_module.mjs";
+import { MoneyUnitModel } from "../../../models/_module.mjs";
 
 /**
  * Relevant wiki pages:
@@ -22,7 +22,7 @@ export default function PriceSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { price: new UnitField(CurrencyUnitModel, { secret: true }) });
+      return Object.assign(super.defineSchema(), { price: new UnitField(MoneyUnitModel, { secret: true }) });
     }
 
     /**

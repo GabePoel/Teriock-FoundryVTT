@@ -1,4 +1,4 @@
-import WeightUnitModel from "./weight-unit-model.mjs";
+import WeightUnitModel from "../normal-unit-models/weight-unit-model.mjs";
 
 /**
  * Weight of a piece of equipment.
