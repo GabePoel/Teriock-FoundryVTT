@@ -20,7 +20,6 @@ declare global {
 
     export type MenuEntry = {
       application?: typeof BaseMenu;
-      format?: "fieldsets" | "tabs";
       groups: Record<string, GroupEntry>;
       hint?: string;
       icon: string;

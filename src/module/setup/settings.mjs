@@ -134,7 +134,6 @@ function getMenus() {
       icon: TERIOCK.DISPLAY.icons.manifest.settings.dialog,
     },
     display: {
-      format: "tabs",
       groups: {
         chat: {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.chat,
@@ -251,7 +250,6 @@ function getMenus() {
     },
     /** @category Behavior */
     documentBehavior: {
-      format: "tabs",
       groups: Object.fromEntries(
         Object.entries(TERIOCK.CONFIG.documentBehavior.categories).map((
           [category, { icon, settings }],
@@ -265,7 +263,6 @@ function getMenus() {
       icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
     },
     gameMasterControls: {
-      format: "tabs",
       groups: {
         general: {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.settings,
@@ -331,7 +328,6 @@ function getMenus() {
       icon: TERIOCK.DISPLAY.icons.manifest.settings.gameMasterControls,
     },
     tips: {
-      format: "tabs",
       groups: {
         error: {
           icon: TERIOCK.DISPLAY.icons.manifest.ui.error,

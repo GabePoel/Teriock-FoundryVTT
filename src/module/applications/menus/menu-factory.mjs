@@ -9,7 +9,7 @@ import BaseMenu from "./base-menu.mjs";
  */
 export default function MenuFactory(key, menu) {
   const groups = Object.entries(menu.groups);
-  const tabbed = menu.format === "tabs";
+  const tabbed = groups.length > 1;
   const template = tabbed ? "teriock/menus/tabbed-menu" : "teriock/menus/base-menu";
   return class SettingsMenu extends (menu.application ?? BaseMenu) {
     /** @inheritDoc */
@@ -42,9 +42,6 @@ export default function MenuFactory(key, menu) {
       const group = menu.groups[partId];
       if (!group || group.template) { return context; }
       context.fields = this.createSettingFields(group.settings);
-      context.fieldset = !tabbed && (groups.length > 1);
-      context.icon = group.icon;
-      context.label = group.label;
       return context;
     }
   };

@@ -123,9 +123,6 @@ export default class BaseMenu extends TeriockApplication {
     context = await super._preparePartContext(partId, context, options);
     if (partId in (context.tabs ?? {})) { context.tab = context.tabs[partId]; }
     context.fields = [];
-    context.icon = undefined;
-    context.label = undefined;
-    context.fieldset = false;
     context.buttons = [{
       action: "reset",
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button"),
