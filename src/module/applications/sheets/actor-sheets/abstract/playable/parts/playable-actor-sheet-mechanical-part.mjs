@@ -152,27 +152,36 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           value: toRangeHTML(this.document.system.senses[key]),
         };
       }
-      const { carryingCapacity, size, weight } = this.document.system;
-      const { heavy, light, max } = carryingCapacity;
+      const { heavy, light, max } = this.document.system.carryingCapacity;
       context.carrying = {
-        fill: Math.clamp(weight.carried / max, 0, 1) * 100,
+        fill: Math.clamp(this.document.system.weight.carried / max, 0, 1) * 100,
         heavy: (heavy / max) * 100,
-        level: [light, heavy, max].filter(c => weight.carried >= c).length,
+        level: [light, heavy, max].filter(c => this.document.system.weight.carried >= c).length,
         light: (light / max) * 100,
       };
       context.sizeDetails = {
-        reach: toRangeHTML(size.reach),
+        reach: toRangeHTML(this.document.system.size.reach),
         space: _loc("TERIOCK.SHEETS.Actor.TABS.Details.size.spaceFormat", {
-          length: size.length * game.system.grid.distance,
+          length: this.document.system.size.length * game.system.grid.distance,
           unit: _loc("TERIOCK.LENGTH.ft.symbol"),
         }),
+      };
+      const unit = _loc("TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate");
+      context.movementSpeed = {
+        data: _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.document.system.movementSpeed, unit }),
+        source: this.document.system._source.movementSpeed === null
+          ? null
+          : _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.document.system._source.movementSpeed, unit }),
       };
       context.activeSpeedAdjustments = Object.fromEntries(
         Array.from(this.document.system.activeSpeedAdjustments, k => [k, true]),
       );
       context.terrains = Array.from(this.document.system.terrains, t => TERIOCK.CONFIG.terrain[t]);
-      const sourceWeight = weight.self.clone();
-      context.weight = { data: weight.self.tag, source: sourceWeight.isDefault ? null : sourceWeight.tag };
+      const sourceWeight = this.document.system.weight.self.clone();
+      context.weight = {
+        data: this.document.system.weight.self.tag,
+        source: sourceWeight.isDefault ? null : sourceWeight.tag,
+      };
       context.conditions = {};
       for (const key of Object.keys(TERIOCK.STATUSES.conditions)) {
         const id = toId(key);

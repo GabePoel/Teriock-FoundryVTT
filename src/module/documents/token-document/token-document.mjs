@@ -209,7 +209,6 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
     super._prepareDetectionModes();
     const actor = this.actor;
     if (!actor) { return; }
-    // Detection modes and range can't be changes since NumberField has no way to be set to null/Infinity via change.
     const autoDetectionMode = actor.system.settings.getSetting("autoDetectionModes");
     const autoVisionRange = actor.system.settings.getSetting("autoVisionRange");
     if (autoDetectionMode || autoVisionRange) {

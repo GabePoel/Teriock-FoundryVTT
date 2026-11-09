@@ -1,7 +1,7 @@
 import { objectMap } from "../../../../../../../utils/_module.mjs";
 import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 import { terrainsField } from "../../../../../../fields/tools/builders.mjs";
-import { initialBoolean, initialNumber } from "../../../../../../fields/tools/initializers.mjs";
+import { initialBoolean } from "../../../../../../fields/tools/initializers.mjs";
 
 /**
  * @import AbstractActorSystem from "../../abstract-actor-system.mjs";
@@ -29,7 +29,7 @@ export default function ActorMovementPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         difficultTerrain: initialBoolean(),
-        movementSpeed: initialNumber(30),
+        movementSpeed: new fields.NumberField({ initial: null, nullable: true }),
         speedAdjustments: new MultiChangeField(
           objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
         ),
@@ -133,7 +133,6 @@ export default function ActorMovementPart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
-      this.movementSpeed = 30 + 10 * this.attributes.mov.score;
       const { difficultTerrain, terrains } = this.#getTokenTerrains();
       Object.assign(this.parent._cache, { difficultTerrain, terrains });
       this.difficultTerrain = difficultTerrain;
@@ -143,7 +142,7 @@ export default function ActorMovementPart(Base) {
     /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      this.movementSpeed = 30 + 10 * this.attributes.mov.score;
+      this.movementSpeed ??= 30 + 10 * this.attributes.mov.score;
     }
 
     /** @inheritDoc */

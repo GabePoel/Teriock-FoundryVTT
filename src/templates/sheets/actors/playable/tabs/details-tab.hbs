@@ -10,10 +10,15 @@
           }}
           <div class="actor-stat">
             <div class="tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}</div>
-            <div class="actor-stat-value">
-              {{{ system.movementSpeed }}}
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
-            </div>
+            {{formHover
+              document
+              classes="actor-stat-value updatable"
+              action="updatePaths"
+              icon=TERIOCK.DISPLAY.icons.manifest.movement.walk
+              path="system.movementSpeed"
+              selected=movementSpeed.source
+              unselected=movementSpeed.data
+            }}
           </div>
           <div class="teriock-block-display-divider"></div>
           <div class="details-list">
