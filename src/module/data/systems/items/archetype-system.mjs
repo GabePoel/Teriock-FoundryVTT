@@ -59,14 +59,6 @@ export default class ArchetypeSystem
   }
 
   /**
-   * Whether this is considered innate.
-   * @returns {boolean}
-   */
-  get innate() {
-    return this.ranks.some((r) => r.system.innate);
-  }
-
-  /**
    * The max AV of this archetype's ranks.
    * @returns {number}
    */

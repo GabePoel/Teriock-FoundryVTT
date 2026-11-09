@@ -62,7 +62,10 @@ export default class RankPreviewModel extends BasePreviewModel {
           && this._checkValueFilter(f.class, system?.class);
       }
       // Archetypes have no kind of their own, so they take the kind of their corresponding ranks.
-      matches &&= this._checkValueFilter(f.kind, system?.kind ?? (system?.innate ? "innate" : "learned"));
+      matches &&= this._checkValueFilter(
+        f.kind,
+        system?.kind ?? (system?.ranks?.some(r => r.system.kind === "innate") ? "innate" : "learned"),
+      );
       if (matches) { yield document; }
     }
   }

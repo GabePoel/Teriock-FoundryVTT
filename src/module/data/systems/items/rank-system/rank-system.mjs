@@ -43,7 +43,7 @@ export default class RankSystem
     initialCompetence: 1,
     initialKind: "learned",
     kinds: _replace(TERIOCK.CONFIG.class.kind),
-    sortPaths: ["system.innate", "system.archetype", "system.class", "system.number", "name", "_stats.createdTime"],
+    sortPaths: ["system.kindIndex", "system.archetype", "system.class", "system.number", "name", "_stats.createdTime"],
     type: "rank",
   });
 
@@ -205,14 +205,6 @@ export default class RankSystem
     return parts;
   }
 
-  /**
-   * Whether this rank was gained innately rather than learned.
-   * @returns {boolean}
-   */
-  get innate() {
-    return this.kind === "innate";
-  }
-
   /** @inheritDoc */
   get isOnWiki() {
     return this.number > 0 && this.number <= 5;
@@ -228,7 +220,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   _canToggleStatDice(stat) {
-    return super._canToggleStatDice(stat) && !this.innate;
+    return super._canToggleStatDice(stat) && this.kind !== "innate";
   }
 
   /** @inheritDoc */

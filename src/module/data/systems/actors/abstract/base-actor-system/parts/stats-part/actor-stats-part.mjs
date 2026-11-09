@@ -120,7 +120,7 @@ export default function ActorStatsPart(Base) {
       let numRanks = 0;
       const pools = items.filter(item => {
         if (item.system.statDice[stat].disabled) { return false; }
-        if (item.type !== "rank" || item.system.innate) { return true; }
+        if (item.type !== "rank" || item.system.kind === "innate") { return true; }
         return numRanks++ < statData.poolLimit;
       }).map(item => item.system.statDice[stat]);
       statData.base = pools.reduce((total, pool) => total + pool.value, 0);

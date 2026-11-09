@@ -53,6 +53,14 @@ export default function ArmorSuppressionSystemMixin(Base) {
       return [...super._panelBars, this._maxAvBar];
     }
 
+    /**
+     * Whether this is above its maximum AV.
+     * @returns {boolean}
+     */
+    get isAboveMaxAv() {
+      return (this.actor?.system.defense.av.base ?? 0) > this.maxAv;
+    }
+
     /** @inheritDoc */
     _getTipSuppressions() {
       return Object.assign(super._getTipSuppressions(), { armor: this._isSuppressedArmor.bind(this) });
@@ -63,12 +71,7 @@ export default function ArmorSuppressionSystemMixin(Base) {
      * @returns {boolean}
      */
     _isSuppressedArmor() {
-      return Boolean(
-        game.settings.get("teriock", "armorSuppressesRanks")
-          && this.actor
-          && !this.innate
-          && this.actor.system.defense.av.base > this.maxAv,
-      );
+      return game.settings.get("teriock", "armorSuppressesRanks") && this.isAboveMaxAv;
     }
 
     /** @inheritDoc */
@@ -80,10 +83,7 @@ export default function ArmorSuppressionSystemMixin(Base) {
     prepareBaseData() {
       super.prepareBaseData();
       this.#weakened = [];
-      if (
-        game.settings.get("teriock", "armorWeakensRanks") && this.actor
-        && this.actor.system.defense.av.base > this.maxAv
-      ) {
+      if (game.settings.get("teriock", "armorWeakensRanks") && this.isAboveMaxAv) {
         for (const d of [this.parent, ...this.parent.effects]) {
           if (d.system.lockedPaths?.has("system.competence.raw")) { continue; }
           foundry.utils.setProperty(d, "system.competence.raw", 0);

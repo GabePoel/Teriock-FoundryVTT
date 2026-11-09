@@ -99,6 +99,29 @@ export default function ActorCombatPart(Base) {
       };
     }
 
+    /**
+     * Natural armor.
+     * @returns {(TeriockItem<"body">|TeriockItem<"equipment">)[]}
+     */
+    get naturalArmor() {
+      return [
+        ...this.parent.previewedTypes.body.filter(b => b.active),
+        ...this.parent.previewedTypes.equipment.filter(e =>
+          e.system.equipped && e.active && e.master?.type === "species"
+        ),
+      ];
+    }
+
+    /**
+     * Worn armor.
+     * @returns {TeriockItem<"equipment">[]}
+     */
+    get wornArmor() {
+      return this.parent.previewedTypes.equipment.filter(e =>
+        e.system.equipped && e.active && e.master?.type !== "species"
+      );
+    }
+
     /** @inheritDoc */
     getRollData() {
       const rollData = super.getRollData();
@@ -109,10 +132,15 @@ export default function ActorCombatPart(Base) {
     /** @inheritDoc */
     prepareBaseData() {
       super.prepareBaseData();
-      const armor = this.parent.previewedTypes.equipment.filter(e =>
-        e.system.equipped && e.system.equipmentClasses.has("armor")
+      // Base AV is what's used for suppressing things with a maximum AV. It's calculated form the raw AV of each piece
+      // of equipped equipment prior to any effects modifying it and regardless of whether it's shattered. This is
+      // actually correct given the rules as written.
+      const worn = this.parent.previewedTypes.equipment.filter(e =>
+        e.system.equipped
+        && (!e.system.consumption.enabled || e.system.quantity.value >= 1)
+        && e.master?.type !== "species"
       );
-      this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
+      this.defense.av.base = Math.max(0, ...worn.map(e => e.system.av.raw));
       this.defense.ac ??= TERIOCK.CONFIG.system.baseValues.ac;
       this.defense.bv ??= 0;
     }
@@ -120,16 +148,8 @@ export default function ActorCombatPart(Base) {
     /** @inheritDoc */
     prepareSpecialData() {
       super.prepareSpecialData();
-      this.defense.av.worn = Math.max(
-        0,
-        ...this.parent.previewedTypes.equipment.filter(e => e.active && !e.system.shattered).map(e =>
-          e.system.av.value
-        ),
-      );
-      this.defense.av.natural = Math.max(
-        0,
-        ...this.parent.previewedTypes.body.filter(b => b.active).map(b => b.system.av.value),
-      );
+      this.defense.av.worn = Math.max(0, ...this.wornArmor.map(a => a.system.av.value));
+      this.defense.av.natural = Math.max(0, ...this.naturalArmor.map(a => a.system.av.value));
       this.defense.av.value = Math.max(0, this.defense.av.natural, this.defense.av.worn);
       if (this._source.defense.ac === null) { this.defense.ac += this.defense.av.value; }
       if (this._source.defense.bv === null) { this.defense.bv += this.wielding.blocker?.system.bv.value || 0; }
