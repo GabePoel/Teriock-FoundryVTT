@@ -48,7 +48,7 @@ export default class LightAutomation extends BaseAutomation {
     return Object.assign(super.defineSchema(), { light: new fields.EmbeddedDataField(AutomationLightData) });
   }
 
-  /** @inheritDoc */
+  /** @returns {Teriock.Changes.ChangeData[]} */
   getChanges() {
     return this.actor?.system.settings.getSetting("autoLighting")
       ? [{

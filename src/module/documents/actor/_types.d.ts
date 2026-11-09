@@ -16,12 +16,12 @@ declare module "./actor.mjs" {
     type: ActorType;
 
     readonly parent: TeriockTokenDocument | null;
-    readonly token: TeriockTokenDocument | null;
     get _cache(): Teriock.Documents.ActorCache;
     get appliedEffects(): ActiveEffectClass[];
     get documentName(): "Actor";
     get id(): ID<TeriockActor>;
     get temporaryEffects(): ActiveEffectClass[];
+    get token(): TeriockTokenDocument | null;
     get uuid(): UUID<TeriockActor>;
   }
 }

@@ -23,6 +23,6 @@ export default class TeriockCombatantGroup
   /** @inheritDoc */
   getUserLevel(user) {
     user ||= game.user;
-    return Math.max(super.getUserLevel(user), this.system.getUserLevel(user));
+    return /** @type {DocumentOwnershipNumber} */ (Math.max(super.getUserLevel(user), this.system.getUserLevel(user)));
   }
 }

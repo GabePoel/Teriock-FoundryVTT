@@ -1,4 +1,6 @@
-import { TeriockJournalEntry, TeriockJournalEntryPage as PageClass } from "../_module.mjs";
+import { DocumentOwnershipNumber } from "@common/constants.mjs";
+
+import { TeriockJournalEntry, TeriockJournalEntryPage as PageClass, TeriockUser } from "../_module.mjs";
 import { BasePageSystem } from "../../data/systems/pages/_module.mjs";
 
 declare module "./journal-entry-page.mjs" {
@@ -11,6 +13,8 @@ declare module "./journal-entry-page.mjs" {
     get documentName(): "JournalEntryPage";
     get id(): ID<TeriockJournalEntryPage>;
     get uuid(): UUID<TeriockJournalEntryPage>;
+
+    getUserLevel(user?: TeriockUser): DocumentOwnershipNumber;
   }
 }
 

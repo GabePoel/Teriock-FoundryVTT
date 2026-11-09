@@ -83,7 +83,7 @@ export default class InitiativeExecution extends mixClasses(DocumentExecution, T
 
   /** @inheritDoc */
   async _buildSourcePanel() {
-    return false;
+    return /** @type {const} */ (false);
   }
 
   /**

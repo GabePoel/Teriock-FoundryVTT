@@ -185,8 +185,8 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
 
   /** @inheritDoc */
   async _onOverrideSize(changes) {
-    if (!this.id || this.actor?.defaultUser !== game.user) { return false; }
-    return this.resize(changes, { animation: { duration: 500 }, pan: false });
+    if (!this.id || this.actor?.defaultUser !== game.user) { return; }
+    await this.resize(changes, { animation: { duration: 500 }, pan: false });
   }
 
   /** @inheritDoc */

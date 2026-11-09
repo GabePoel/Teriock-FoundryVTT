@@ -1,4 +1,4 @@
-import { TeriockActor, TeriockChatMessage } from "../_module.mjs";
+import { TeriockActor as ActorClass, TeriockChatMessage } from "../_module.mjs";
 
 const { Actors } = foundry.documents.collections;
 
@@ -26,7 +26,7 @@ export default class TeriockActors extends Actors {
       game.user.character,
       ...(game.canvas?.tokens?.controlled.map(t => t.actor) ?? []),
       ui.activeWindow?.document?.actor,
-      ...foundry.applications.instances.values().map(app => app?.document).filter(d => d instanceof TeriockActor),
+      ...foundry.applications.instances.values().map(app => app?.document).filter(d => d instanceof ActorClass),
     ];
     return candidates.find(a => a?.isOwner) ?? null;
   }

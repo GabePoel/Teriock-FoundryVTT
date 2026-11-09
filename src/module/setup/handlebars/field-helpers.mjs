@@ -48,16 +48,21 @@ function formClasses(model, options = { hash: {} }) {
 }
 
 /**
- * @typedef {FormClassesHash} FormUpdaterHash
+ * @typedef FormUpdaterHash
  * @property {Record<string, string>} dataset
  * @property {string} abbreviation
  * @property {string} abbreviationTooltip
  * @property {string} action
+ * @property {boolean} changed
+ * @property {string} classes
  * @property {string} color
  * @property {string} data
  * @property {string} icon
  * @property {string} info
+ * @property {boolean} isPlaceholder
  * @property {string} label
+ * @property {boolean} locked
+ * @property {string} path
  * @property {string} paths
  * @property {string} placeholder
  * @property {string} source
