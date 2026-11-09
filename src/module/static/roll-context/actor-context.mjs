@@ -33,9 +33,9 @@ const actorContext = {
 
   "carry.factor": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.factor",
   "carry.heavy": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.heavyCapacity",
-  "carry.heavy.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
+  "carry.heavy.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
   "carry.light": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.lightCapacity",
-  "carry.light.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
+  "carry.light.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
   "carry.max": "TERIOCK.SHEETS.Actor.TABS.Inventory.carrying.maxCapacity",
   "carry.max.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
 
@@ -56,6 +56,7 @@ const actorContext = {
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
 
   "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
+  "db.stones": "TERIOCK.ROLL_CONTEXT.Actor.stones",
 
   "detection.hiding": "TERIOCK.SYSTEMS.BaseActor.FIELDS.detection.hiding.label",
   "detection.perceiving": "TERIOCK.SYSTEMS.BaseActor.FIELDS.detection.perceiving.label",
@@ -106,7 +107,7 @@ Hooks.once("teriock.identifiersInit", () => {
   });
   Object.entries(TERIOCK.CONFIG.character.movement).forEach(([k, v]) => {
     Object.assign(actorContext, {
-      [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
+      [`speed.${toKebabCase(k)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
     });
   });
   Object.entries(TERIOCK.CONFIG.terrain).forEach(([k, v]) => {

@@ -31,6 +31,7 @@ export default function ActorDeathBagPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       rollData["db.pull"] = this.deathBag.pull;
+      rollData["db.stones"] = Object.values(this.deathBag.stones).reduce((total, n) => total + n, 0);
       for (const color of Object.keys(this.deathBag.stones)) {
         rollData[`db.stones.${color}`] = this.deathBag.stones[color];
       }

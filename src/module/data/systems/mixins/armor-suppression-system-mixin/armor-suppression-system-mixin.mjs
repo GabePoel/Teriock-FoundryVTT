@@ -73,7 +73,7 @@ export default function ArmorSuppressionSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { maxAv: this.maxAv });
+      return Object.assign(super.getLocalRollData(), { "av.max": this.maxAv });
     }
 
     /** @inheritDoc */

@@ -108,8 +108,8 @@ export default function AbilityEquipmentPart(Base) {
     /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), {
-        grantOnly: Number(this.grantOnly),
-        grantUse: Number(this.grantUse),
+        "grant.only": Number(this.grantOnly),
+        "grant.use": Number(this.grantUse),
       });
     }
 

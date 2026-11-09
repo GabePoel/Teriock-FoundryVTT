@@ -1,33 +1,11 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import usableContext from "./usable-context.mjs";
+import simpleContext from "./simple-context.mjs";
 
-const powerContext = {
-  ...usableContext,
-  backstory: "TYPES.Item.backstory",
-  blessing: "TYPES.Item.blessing",
-  curse: "TYPES.Item.curse",
-  familiar: "TYPES.Item.familiar",
-  pact: "TYPES.Item.pact",
-  power: "TYPES.Item.power",
-  scar: "TYPES.Item.scar",
-  sorcery: "TYPES.Item.sorcery",
-
-  av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-  maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-
-  hp: "TERIOCK.SYSTEMS.Statted.FIELDS.statDice.hp.label",
-  "hp.disabled": "TERIOCK.MODELS.BaseStatPool.FIELDS.disabled.label",
-  "hp.value": "TERIOCK.ROLL_CONTEXT.StatDice.hpTotal",
-  mp: "TERIOCK.SYSTEMS.Statted.FIELDS.statDice.mp.label",
-  "mp.disabled": "TERIOCK.MODELS.BaseStatPool.FIELDS.disabled.label",
-  "mp.value": "TERIOCK.ROLL_CONTEXT.StatDice.mpTotal",
-};
+const powerContext = { "av.max": "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label", power: "TYPES.Item.power" };
 
 export default powerContext;
 
 preLocalizeObject("ROLL_CONTEXT.power");
 Hooks.once("teriock.identifiersInit", () => {
-  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
-    powerContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Power.kind", { name: v.label });
-  });
+  Object.assign(powerContext, simpleContext);
 });

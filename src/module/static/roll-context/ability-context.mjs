@@ -26,14 +26,10 @@ const abilityContext = {
   ub: "TERIOCK.TERMS.Properties.unblockable",
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
 
+  "expansion.range": "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label",
   range: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
 
   ability: "TYPES.ActiveEffect.ability",
-  "delivery.ball": "TERIOCK.TERMS.DeliveryPackage.ball",
-  "delivery.item": "TERIOCK.TERMS.DeliveryParent.item",
-  "delivery.ray": "TERIOCK.TERMS.DeliveryPackage.ray",
-  "delivery.strike": "TERIOCK.TERMS.DeliveryPackage.strike",
-  "delivery.touch": "TERIOCK.TERMS.DeliveryPackage.touch",
 };
 
 export default abilityContext;
@@ -48,6 +44,11 @@ Hooks.once("teriock.identifiersInit", () => {
   });
   Object.entries(TERIOCK.CONFIG.ability.delivery).forEach(([k, v]) => {
     abilityContext[`delivery.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.delivery", { name: v.label });
+  });
+  ["ball", "contact", "ranged", "ray", "strike", "touch"].forEach(k => {
+    abilityContext[`delivery.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.delivery", {
+      name: _loc(`TERIOCK.TERMS.DeliveryPackage.${k}`),
+    });
   });
   Object.keys(TERIOCK.CONFIG.ability.targets).forEach(k => {
     abilityContext[`target.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.target", {

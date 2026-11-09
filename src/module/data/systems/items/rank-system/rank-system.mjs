@@ -260,7 +260,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    const data = { ...super.getLocalRollData(), maxAv: safeInf(this.maxAv), number: this.number };
+    const data = { ...super.getLocalRollData(), "av.max": safeInf(this.maxAv), number: this.number };
     if (this._source.archetype) { data[`archetype.${this._source.archetype}`] = 1; }
     if (this._source.class) { data[`class.${this._source.class}`] = 1; }
     return data;

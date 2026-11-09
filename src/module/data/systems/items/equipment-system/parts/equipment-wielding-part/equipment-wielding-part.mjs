@@ -176,8 +176,7 @@ export default function EquipmentWieldingPart(Base) {
       return Object.assign(super.getLocalRollData(), {
         equipped: Number(this.equipped),
         glued: Number(this.glued),
-        minStr: this.minStr,
-        str: this.minStr,
+        "str.min": this.minStr,
       });
     }
 

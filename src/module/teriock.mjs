@@ -392,13 +392,29 @@ Hooks.once("teriock.identifiersInit", () => {
     ...rc.attunement,
     ...rc.condition,
     ...rc.consequence,
+    ...rc.cover,
     ...rc.fluency,
+    ...rc.hack,
     ...rc.holiday,
     ...rc.imbuement,
     ...rc.property,
     ...rc.resource,
   };
-  const itemLabels = { ...rc.archetype, ...rc.armament, ...rc.mount, ...rc.power, ...rc.rank, ...rc.species };
+  const itemLabels = {
+    ...rc.archetype,
+    ...rc.armament,
+    ...rc.backstory,
+    ...rc.blessing,
+    ...rc.curse,
+    ...rc.familiar,
+    ...rc.mount,
+    ...rc.pact,
+    ...rc.power,
+    ...rc.rank,
+    ...rc.scar,
+    ...rc.sorcery,
+    ...rc.species,
+  };
   const namespaced = (labels, prefix, key) =>
     Object.fromEntries(
       Object.entries(labels).map((
