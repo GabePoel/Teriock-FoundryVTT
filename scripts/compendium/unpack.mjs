@@ -9,6 +9,7 @@ import {
   EXPAND_ADVENTURES,
   FOLDERS,
   PSEUDO_COLLECTION_KEYS,
+  SCENE_COLLECTION_KEYS,
   YAML,
   YAML_OPTIONS,
 } from "./constants.mjs";
@@ -168,7 +169,10 @@ function cleanEntry(doc) {
   if (doc.system) {
     for (const key of PSEUDO_COLLECTION_KEYS) {
       if (doc.system[key]) {
-        for (const m of Object.values(doc.system[key])) { delete m.sort; }
+        for (const m of Object.values(doc.system[key])) {
+          delete m.sort;
+          for (const n of Object.values(m.constructionNodes ?? {})) { delete n.sort; }
+        }
         const sorted = sortMechanics(doc.system[key]);
         if (sorted) { doc.system[key] = sorted; }
       }
@@ -197,6 +201,9 @@ function transformEntry(doc) {
   cleanEntry(doc);
   if (doc.system) { conformDataValues(doc.system); }
   DOCUMENT_COLLECTION_KEYS.forEach(key => doc[key]?.forEach(d => transformEntry(d)));
+  if (doc._key.startsWith("!scenes!")) { SCENE_COLLECTION_KEYS.forEach(key =>
+      doc[key]?.forEach(d => transformEntry(d))
+    ); }
   ["effects", "items"].forEach(key => {
     doc[key]?.sort((a, b) => {
       const hasSupA = a.system?._sup != null;

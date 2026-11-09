@@ -70,11 +70,22 @@ export function cleanDocument(doc) {
 
 const COLLECTION_RECORD = {
   actors: "Actor",
+  drawings: "Drawing",
   effects: "ActiveEffect",
   items: "Item",
+  journal: "JournalEntry",
+  levels: "Level",
+  lights: "AmbientLight",
+  notes: "Note",
   pages: "JournalEntryPage",
+  regions: "Region",
   results: "TableResult",
+  scenes: "Scene",
+  sounds: "AmbientSound",
   tables: "RollTable",
+  tiles: "Tile",
+  tokens: "Token",
+  walls: "Wall",
 };
 
 /**

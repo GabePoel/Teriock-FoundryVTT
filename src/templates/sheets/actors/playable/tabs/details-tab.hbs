@@ -25,7 +25,12 @@
             {{#each TERIOCK.CONFIG.character.movement as |config key|}}
               {{#if (lookup @root/activeSpeedAdjustments key)}}
                 <div
-                  class="details-active {{#if config.movementAction}}thover{{/if}}"
+                  class="
+                    details-active
+                    {{#if config.movementAction}}
+                      thover
+                    {{/if}}
+                  "
                   {{#if config.movementAction}}
                     data-action="setMovementAction"
                     data-movement-action="{{ config.movementAction }}"

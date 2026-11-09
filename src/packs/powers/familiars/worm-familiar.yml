@@ -1,0 +1,112 @@
+_id: e10b9df3ae9ef5a1
+_key: "!items!e10b9df3ae9ef5a1"
+effects:
+  - _id: AD9w2PbQvvBO62mT
+    _key: "!items.effects!e10b9df3ae9ef5a1.AD9w2PbQvvBO62mT"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.187e38f244e18cbf
+    img: systems/teriock/src/assets/thumbnails/ability/berserker-healing-factor.webp
+    name: Berserker Healing Factor
+    system:
+      automations:
+        - _id: 8QOdQYnnSxyi3PA8
+          activeQualifier: and(not(@status.dead), @status.hacked, not(@status.burned), not(@status.frozen))
+          noStatDice: true
+          triggers:
+            - turnStart
+          type: heal
+      costs:
+        tweaks:
+          gifted: 1
+      delivery: self
+      duration:
+        unit: passive
+      effectTypes:
+        - healing
+        - regeneration
+      executionTime:
+        base: passive
+      identifier: berserker-healing-factor
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>At the start of each of your @Identifier[core:turns]{turns}, you @Identifier[core:healing]{heal}. You
+          cannot restore @Identifier[core:hit-points-and-mana-points]{HP} in this way.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: G3NDx7RjBpZLH213
+    _key: "!items.effects!e10b9df3ae9ef5a1.G3NDx7RjBpZLH213"
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6009ce878b1e6034
+    img: systems/teriock/src/assets/thumbnails/ability/digging.webp
+    name: Digging
+    system:
+      automations:
+        - _id: FOlLD1aYRsK1avAw
+          movementAction: burrow
+          type: changeMovement
+        - _id: e789ed5e109ebd1a
+          changes:
+            - applyIfSuppressed: false
+              key: system.speedAdjustments.dig
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: "1"
+          type: changes
+      delivery: self
+      duration:
+        unit: passive
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      identifier: digging
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You dig at @Identifier[core:movement-speed]{quarter speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    type: ability
+  - _id: 89efec25790174cf
+    _key: "!items.effects!e10b9df3ae9ef5a1.89efec25790174cf"
+    description: <p>You know the way of the @Identifier[creature:worm]{worm}.</p>
+    img: icons/environment/settlement/stables-logo.webp
+    name: Worm Tamer
+    showIcon: 0
+    system:
+      field: survivalist
+      identifier: worm-tamer
+      tradecraft: tamer
+    type: fluency
+folder: 31fe961f0b485187
+img: systems/teriock/src/assets/thumbnails/ability/familiar-bond.webp
+name: Worm Familiar
+system:
+  effectTypes:
+    - contract
+  elements:
+    - nature
+  identifier: worm-familiar
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
+  maxAv: 0
+  powerSources:
+    - magical
+    - primal
+    - spiritual
+type: familiar

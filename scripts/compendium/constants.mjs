@@ -3,10 +3,21 @@ import { default as system } from "../../system.json" with { type: "json" };
 
 export const BUILDER_NAME = "teriockBuilder00";
 export const CORE_VERSION = system.compatibility.verified.toString();
-export const DOCUMENT_COLLECTION_KEYS = ["cards", "categories", "effects", "items", "notes", "pages", "results"];
+export const DOCUMENT_COLLECTION_KEYS = ["cards", "categories", "effects", "items", "pages", "results"];
 export const EXPAND_ADVENTURES = true;
 export const FOLDERS = true;
 export const PSEUDO_COLLECTION_KEYS = ["activations", "affinities", "automations", "expirations"];
+export const SCENE_COLLECTION_KEYS = [
+  "drawings",
+  "levels",
+  "lights",
+  "notes",
+  "regions",
+  "sounds",
+  "tiles",
+  "tokens",
+  "walls",
+];
 export const SYSTEM_ID = system.id;
 export const SYSTEM_VERSION = system.version;
 export const YAML = true;

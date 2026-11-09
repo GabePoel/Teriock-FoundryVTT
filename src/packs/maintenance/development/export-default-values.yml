@@ -33,6 +33,11 @@ command: >-
     }
   }
 
+  for (const documentName of ["AmbientLight", "AmbientSound", "Drawing", "Level", "Note", "Region", "Tile", "Token",
+  "Wall"]) {
+    defaults.documents[documentName] = { base: foundry.utils.getDocumentClass(documentName).schema.getInitialValue({}) };
+  }
+
   const pseudoCount = Object.values(defaults.pseudos).reduce((sum, t) => sum + Object.keys(t).length, 0);
 
   const typeCount = Object.values(defaults.documents).reduce((sum, t) => sum + Object.keys(t).length, 0);
