@@ -60,8 +60,8 @@ export default class TeriockActors extends Actors {
    * @returns {TeriockActor[]}
    */
   get selected() {
-    const controlled = (game.canvas?.tokens?.controlled ?? []).map(t => t?.actor).filter(Boolean);
-    if (controlled.length) { return controlled; }
+    const controlled = new Set((game.canvas?.tokens?.controlled ?? []).map(t => t?.actor).filter(Boolean));
+    if (controlled.size) { return Array.from(controlled); }
     return this.default ? [this.default] : [];
   }
 

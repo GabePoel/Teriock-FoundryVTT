@@ -183,10 +183,16 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
    */
   get defaultUser() {
     let selected;
+    const candidates = game.users.active.filter(u => this.canUserModify(u, "update"));
     // See if any user has the actor as a character
-    selected = game.users.active.find(u => u.character === this && this.canUserModify(u, "update"));
+    selected = candidates.find(u => u.character === this);
+    // See if this is in a combat group with an actor a user has as a character
+    const memberIds = new Set(
+      this.defaultCombatant?.group?.members.values().filter(m => m.token?.actorLink ?? true).map(m => m.actorId) ?? [],
+    );
+    selected ??= candidates.find(u => memberIds.has(u.character?.id));
     // See if any players have control over the actor
-    selected ??= game.users.active.find(u => !u.isActiveGM && this.canUserModify(u, "update"));
+    selected ??= candidates.find(u => !u.isActiveGM);
     // If all else fails, fall back to the active GM
     selected ??= game.users.activeGM;
     return selected;
