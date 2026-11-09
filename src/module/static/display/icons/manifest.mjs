@@ -307,8 +307,10 @@ export default {
     weapon: "mdi-knife-military",
   },
   time: {
+    backwards: "ms-fast-rewind",
     dawn: "mdi-weather-sunset-up",
     dusk: "mdi-weather-sunset-down",
+    forwards: "ms-fast-forward",
     sessionEnd: "ms-stop-circle",
     sessionStart: "ms-play-circle",
   },
@@ -429,5 +431,6 @@ export default {
     unset: "ms-backspace",
     variable: "ms-question-mark",
     wiki: "ms-globe-book",
+    world: "ms-globe",
   },
 };

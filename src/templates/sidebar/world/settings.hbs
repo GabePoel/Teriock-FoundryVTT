@@ -1,0 +1,34 @@
+<div class="world-settings">
+  <section class="standard-form">
+    <h4 class="divider">{{localize settings.terrains.label}}</h4>
+    {{formInput
+      settings.terrains.field
+      disabled=disabled
+      name="terrains"
+      value=settings.terrains.value
+    }}
+  </section>
+  <section class="standard-form">
+    <h4 class="divider">{{localize settings.worldEffects.label}}</h4>
+    {{formInput
+      settings.worldEffects.field
+      disabled=disabled
+      name="worldEffects"
+      value=settings.worldEffects.value
+    }}
+    <div class="tgrid g2">
+      {{#each buttons as |button|}}
+        <button type="{{ button.type }}" data-action="{{ button.action }}">
+          {{#if button.icon}}
+            <i class="{{ button.icon }}" inert></i>
+          {{/if}}
+          {{#if button.label}}
+            <span>
+              {{localize button.label}}
+            </span>
+          {{/if}}
+        </button>
+      {{/each}}
+    </div>
+  </section>
+</div>

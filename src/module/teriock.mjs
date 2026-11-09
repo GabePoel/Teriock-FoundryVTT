@@ -75,7 +75,7 @@ foundry.helpers.Hooks.once("init", function() {
   CONFIG.ui.pause = applications.ui.TeriockGamePause;
   CONFIG.ui.sidebar = applications.sidebar.TeriockSidebar;
   CONFIG.ui.tables = applications.sidebar.tabs.TeriockRollTableDirectory;
-  CONFIG.ui.triggers = applications.sidebar.tabs.TeriockTriggersTab;
+  CONFIG.ui.world = applications.sidebar.tabs.TeriockWorldTab;
 
   CONFIG.Region.sidebar.applicationClass = applications.sidebar.tabs.TeriockRegionTab;
 

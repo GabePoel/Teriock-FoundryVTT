@@ -11,6 +11,7 @@ export default class SlowExecutionTimeUnitModel extends TimeUnitModel {
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    formula: true,
     groupLabels: { infinite: "TERIOCK.MODELS.SlowExecutionTime.GROUPS.infinite" },
     icon: TERIOCK.DISPLAY.icons.manifest.ability.execution,
   });

@@ -7,12 +7,11 @@ export default class TeriockSidebar extends Sidebar {
   /** @inheritDoc */
   static TABS = (() => {
     const entries = Object.entries(super.TABS);
-    const triggers = {
-      gmOnly: true,
-      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.pseudoDocument.automation, "solid"),
+    const world = {
+      icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.world, "solid"),
       tooltip: "TERIOCK.TRIGGERS.SIDEBAR.label",
     };
-    entries.splice(entries.findIndex(([k]) => k === "settings"), 0, ["triggers", triggers]);
+    entries.splice(entries.findIndex(([k]) => k === "settings"), 0, ["world", world]);
     return Object.fromEntries(entries);
   })();
 }

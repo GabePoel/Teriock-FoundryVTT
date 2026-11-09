@@ -1,17 +1,15 @@
+@use "../mixins" as mixins;
+
 @mixin tgrid-item-base {
   align-items: center;
   display: flex;
   flex-direction: row;
   font-size: small;
   justify-content: right;
+  @include mixins.tags-below-input;
 
   .hint {
     display: none;
-  }
-
-  multi-select, identifier-tags, document-tags, local-document {
-    flex-direction: column-reverse;
-    width: 100%;
   }
 
   button {

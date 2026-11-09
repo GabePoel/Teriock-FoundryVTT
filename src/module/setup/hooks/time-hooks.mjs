@@ -23,6 +23,14 @@ async function increaseDebt(_worldTime, dt) {
   await batchWrite(operations);
 }
 
-const timeHookEntries = [["updateWorldTime", increaseDebt]];
+/**
+ * Refresh the time displayed in the world tab.
+ * @see {updateWorldTime}
+ */
+function renderWorldTime() {
+  ui.world?.render({ parts: ["header"] });
+}
+
+const timeHookEntries = [["updateWorldTime", increaseDebt], ["updateWorldTime", renderWorldTime]];
 
 export default timeHookEntries;

@@ -5,4 +5,4 @@ export { default as TeriockCompendiumDirectory } from "./compendium-directory.mj
 export { default as TeriockItemDirectory } from "./item-directory.mjs";
 export { default as TeriockRegionTab } from "./region-tab.mjs";
 export { default as TeriockRollTableDirectory } from "./roll-table-directory.mjs";
-export { default as TeriockTriggersTab } from "./triggers-tab.mjs";
+export { default as TeriockWorldTab } from "./world-tab.mjs";

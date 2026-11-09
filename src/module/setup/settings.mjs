@@ -1,7 +1,7 @@
 import { CompendiumPriorityMenu, MenuFactory } from "../applications/menus/_module.mjs";
 import { PlayableActorSheet } from "../applications/sheets/actor-sheets/_module.mjs";
 import { TypedIdentifierSetField, UnitField } from "../data/fields/_module.mjs";
-import { tradecraftsField } from "../data/fields/tools/builders.mjs";
+import { terrainsField, tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import { TimeUnitModel } from "../data/models/unit-models/_module.mjs";
 import * as documents from "../documents/_module.mjs";
@@ -80,13 +80,10 @@ function getMenus() {
         resting: {
           icon: TERIOCK.DISPLAY.icons.manifest.execution.longRest,
           settings: {
-            longRestTime: {
-              scope: "world",
-              type: new UnitField(TimeUnitModel, { initial: { raw: "8", unit: "hour" } }),
-            },
+            longRestTime: { scope: "world", type: new UnitField(TimeUnitModel, { initial: { raw: 8, unit: "hour" } }) },
             shortRestTime: {
               scope: "world",
-              type: new UnitField(TimeUnitModel, { initial: { raw: "1", unit: "hour" } }),
+              type: new UnitField(TimeUnitModel, { initial: { raw: 1, unit: "hour" } }),
             },
           },
         },
@@ -453,5 +450,26 @@ export function registerSettings() {
       }
     }
     menuApplication.registerMenu();
+  }
+  const worldSettings = {
+    terrains: {
+      type: terrainsField(),
+      onChange: () => {
+        ui.world?.render();
+        const actors = new Set([...game.actors, ...(canvas.scene?.tokens.map(t => t.actor) ?? [])]);
+        for (const actor of actors) {
+          actor?.system.checkTerrains?.();
+        }
+      },
+    },
+    worldEffects: { type: new fields.SetField(new fields.DocumentUUIDField()), onChange: () => ui.world?.render() },
+  };
+  for (const [key, config] of Object.entries(worldSettings)) {
+    game.settings.register("teriock", key, {
+      config: false,
+      name: `TERIOCK.SETTINGS.${key}.name`,
+      scope: "world",
+      ...config,
+    });
   }
 }

@@ -150,6 +150,7 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    */
   get terrains() {
     const terrains = new Set([
+      ...game.settings.get("teriock", "terrains"),
       ...(this.parent?.terrains ?? []),
       ...(this.parent?.levels.get(this.level)?.terrains ?? []),
     ]);
