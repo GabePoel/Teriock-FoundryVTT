@@ -107,6 +107,7 @@ export default {
     familiar: "ms-pest-control-rodent",
     fluency: "mdi-ruler-square-compass",
     group: "ms-group",
+    holiday: "ms-celebration",
     imbuement: "ms-graph-3",
     inventory: "ms-luggage",
     keyword: "ms-format-quote",
@@ -240,13 +241,7 @@ export default {
     templateEffects: "ms-circles-ext",
   },
   piercing: { av0: "ms-line-end-arrow-notch", none: "ms-close", ub: "ms-nat" },
-  power: {
-    holiday: "ms-celebration",
-    innate: "ms-person",
-    learned: "ms-cognition-2",
-    other: "ms-category",
-    traits: "ms-flag",
-  },
+  power: { innate: "ms-person", learned: "ms-cognition-2", other: "ms-category", traits: "ms-flag" },
   powerLevel: { enchanted: "ms-wand-shine", magic: "ms-wand-stars", mundane: "ms-candle", unknown: "ms-question-mark" },
   pseudoDocument: {
     affinity: "ms-shield-question",

@@ -72,6 +72,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
         docs: this.document.previewed.getTypeSync("consequence"),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.consequence.plural").toLocaleLowerCase(game.i18n.lang),
       }, {
+        docs: this.document.previewed.getTypeSync("holiday"),
+        empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.holiday.plural").toLocaleLowerCase(game.i18n.lang),
+        optional: true,
+      }, {
         docs: this.document.previewed.getTypeSync("attunement"),
         empty: _loc("TERIOCK.DOCUMENTS.ActiveEffect.attunement.plural").toLocaleLowerCase(game.i18n.lang),
         optional: !this.document.metadata.childTypes.includes("attunement"),
@@ -239,12 +243,12 @@ export default function PlayableActorSheetSectionsPart(Base) {
         model: previews.MetaphysicsPreviewModel,
       },
     }, {
-      dragTypes: ["attunement", "condition", "consequence", "cover", "hack"],
+      dragTypes: ["attunement", "condition", "consequence", "cover", "hack", "holiday"],
       icon: ConditionSystem.metadata.icon,
       id: "effects",
       label: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
       preview: {
-        addButton: { type: "consequence", types: ["consequence", "attunement"] },
+        addButton: { type: "consequence", types: ["consequence", "holiday", "attunement"] },
         data: { display: { gapless: true, size: "small" } },
         groups: this.#previewGroupConsequence,
       },

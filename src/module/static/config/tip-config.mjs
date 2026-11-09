@@ -20,7 +20,7 @@ const suppression = {
   stashed: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.stashed",
   unequipped: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.unequipped",
   unmounted: "TERIOCK.SYSTEMS.Mount.MESSAGES.suppression.unmounted",
-  unsustained: "TERIOCK.SYSTEMS.Applicable.MESSAGES.suppression.unsustained",
+  unsustained: "TERIOCK.SYSTEMS.Executed.MESSAGES.suppression.unsustained",
 };
 
 const error = {

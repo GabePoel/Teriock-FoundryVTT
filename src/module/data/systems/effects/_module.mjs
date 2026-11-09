@@ -6,6 +6,7 @@ export { default as ConsequenceSystem } from "./consequence-system/consequence-s
 export { default as CoverSystem } from "./cover-system.mjs";
 export { default as FluencySystem } from "./fluency-system/fluency-system.mjs";
 export { default as HackSystem } from "./hack-system/hack-system.mjs";
+export { default as HolidaySystem } from "./holiday-system.mjs";
 export { default as ImbuementSystem } from "./imbuement-system.mjs";
 export { default as PropertySystem } from "./property-system/property-system.mjs";
 export { default as ResourceSystem } from "./resource-system.mjs";

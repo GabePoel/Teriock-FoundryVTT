@@ -113,7 +113,7 @@ export default function SpeciesTransformationPart(Base) {
 
     /**
      * Transformation that provides this.
-     * @returns {TeriockActiveEffect<"condition"|"consequence">|null}
+     * @returns {TeriockActiveEffect<"condition"|"consequence"|"holiday">|null}
      */
     get transformationEffect() {
       if (!this.actor) { return null; }

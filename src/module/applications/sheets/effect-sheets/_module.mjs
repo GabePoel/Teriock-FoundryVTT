@@ -2,7 +2,7 @@ export { default as AbilitySheet } from "./ability-sheet.mjs";
 export { default as ApplicableEffectSheet } from "./applicable-effect-sheet.mjs";
 export { default as AttunementSheet } from "./attunement-sheet.mjs";
 export { default as ConditionSheet } from "./condition-sheet.mjs";
-export { default as ConsequenceSheet } from "./consequence-sheet.mjs";
+export { default as DependeeSheet } from "./dependee-sheet.mjs";
 export { default as FluencySheet } from "./fluency-sheet.mjs";
 export { default as HackSheet } from "./hack-sheet.mjs";
 export { default as PropertySheet } from "./property-sheet.mjs";

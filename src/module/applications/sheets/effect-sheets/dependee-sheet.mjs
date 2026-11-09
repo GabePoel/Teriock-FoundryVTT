@@ -7,11 +7,11 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  */
 
 /**
- * Consequence sheet.
- * @property {TeriockActiveEffect<"consequence">} document
+ * Dependee sheet.
+ * @property {TeriockActiveEffect<"consequence"|"holiday">} document
  * @mixes MechanicsSheet
  */
-export default class ConsequenceSheet extends ApplicableEffectSheet {
+export default class DependeeSheet extends ApplicableEffectSheet {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { position: { width: 600 } };
 

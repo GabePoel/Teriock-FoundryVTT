@@ -16,6 +16,7 @@ import {
   CoverSystem,
   FluencySystem,
   HackSystem,
+  HolidaySystem,
   ImbuementSystem,
   PropertySystem,
   ResourceSystem,
@@ -49,6 +50,7 @@ declare global {
     cover: CoverSystem;
     fluency: FluencySystem;
     hack: HackSystem;
+    holiday: HolidaySystem;
     imbuement: ImbuementSystem;
     property: PropertySystem;
     resource: ResourceSystem;

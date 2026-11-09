@@ -75,6 +75,7 @@ export default class BaseActorSystem
       "familiar",
       "fluency",
       "hack",
+      "holiday",
       "mount",
       "pact",
       "power",

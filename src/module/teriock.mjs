@@ -280,7 +280,7 @@ foundry.helpers.Hooks.once("init", function() {
   rs(d.TeriockActiveEffect, se.ApplicableEffectSheet, "ApplicableEffect", { types: ["imbuement"] });
   rs(d.TeriockActiveEffect, se.AttunementSheet, "Attunement", { types: ["attunement"] });
   rs(d.TeriockActiveEffect, se.ConditionSheet, "Condition", { types: ["condition"] });
-  rs(d.TeriockActiveEffect, se.ConsequenceSheet, "Consequence", { types: ["consequence"] });
+  rs(d.TeriockActiveEffect, se.DependeeSheet, "Dependee", { types: ["consequence", "holiday"] });
   rs(d.TeriockActiveEffect, se.FluencySheet, "Fluency", { types: ["fluency"] });
   rs(d.TeriockActiveEffect, se.HackSheet, "Hack", { types: ["hack"] });
   rs(d.TeriockActiveEffect, se.PropertySheet, "Property", { types: ["property"] });
@@ -393,6 +393,7 @@ Hooks.once("teriock.identifiersInit", () => {
     ...rc.condition,
     ...rc.consequence,
     ...rc.fluency,
+    ...rc.holiday,
     ...rc.imbuement,
     ...rc.property,
     ...rc.resource,

@@ -1,13 +1,13 @@
 import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { GrantedSystemMixin } from "../mixins/_module.mjs";
-import { ApplicableEffectSystem } from "./abstract/_module.mjs";
+import { ExecutedEffectSystem } from "./abstract/_module.mjs";
 
 /**
  * Effect-specific effect data model.
- * @extends {ApplicableEffectSystem}
+ * @extends {ExecutedEffectSystem}
  * @mixes GrantedSystem
  */
-export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, GrantedSystemMixin) {
+export default class ImbuementSystem extends mixClasses(ExecutedEffectSystem, GrantedSystemMixin) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     icon: TERIOCK.DISPLAY.icons.manifest.document.imbuement,

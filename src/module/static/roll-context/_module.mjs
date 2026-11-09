@@ -9,6 +9,7 @@ export { default as consequence } from "./consequence-context.mjs";
 export { default as document } from "./document-context.mjs";
 export { default as execution } from "./execution-context.mjs";
 export { default as fluency } from "./fluency-context.mjs";
+export { default as holiday } from "./holiday-context.mjs";
 export { default as imbuement } from "./imbuement-context.mjs";
 export { default as metaphysics } from "./metaphysics-context.mjs";
 export { default as mount } from "./mount-context.mjs";

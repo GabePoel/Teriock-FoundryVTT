@@ -15,7 +15,7 @@ declare global {
 
     export type ActorTransformationConfig = {
       /** <schema> The primary transformation effect */
-      primary: TeriockActiveEffect<"condition" | "consequence"> | null;
+      primary: TeriockActiveEffect<"condition" | "consequence" | "holiday"> | null;
     };
 
     export type AutomationTransformationConfig = SpeciesTransformationConfig & {

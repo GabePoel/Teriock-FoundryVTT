@@ -35,6 +35,7 @@ const config = {
     equipment: { initial: true, label: "TYPES.Item.equipment", path: "system.stashed" },
     familiar: { initial: true, label: "TYPES.Item.familiar", path: "system.disabled" },
     fluency: { initial: true, label: "TYPES.ActiveEffect.fluency", path: "system.disabled" },
+    holiday: { initial: false, label: "TYPES.ActiveEffect.holiday", path: "disabled" },
     mount: { initial: false, label: "TYPES.Item.mount", path: "system.disabled" },
     pact: { initial: true, label: "TYPES.Item.pact", path: "system.disabled" },
     rank: { initial: true, label: "TYPES.Item.rank", path: "system.disabled" },

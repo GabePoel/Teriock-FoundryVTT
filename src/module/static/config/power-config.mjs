@@ -4,11 +4,6 @@ import systemConfig from "./system-config.mjs";
 
 export default {
   kind: /** @enum {Teriock.Config.KindEntry} */ {
-    holiday: {
-      color: colors.palette.yellow,
-      icon: icons.manifest.power.holiday,
-      label: "TERIOCK.TERMS.PowerKind.holiday",
-    },
     innate: {
       color: colors.palette.purple,
       icon: icons.manifest.power.innate,

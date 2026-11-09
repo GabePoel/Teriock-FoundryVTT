@@ -27,6 +27,7 @@ Links to the original pages with the authors can be found below.
 - [`./document/fluency.svg`](https://game-icons.net/1x1/delapouite/freemasonry.html)
 - [`./document/group.svg`](https://game-icons.net/1x1/delapouite/three-friends.html)
 - [`./document/hack.svg`](https://game-icons.net/1x1/lorc/broken-bone.html)
+- [`./document/holiday.svg`](https://game-icons.net/1x1/delapouite/party-popper.html)
 - [`./document/imbuement.svg`](https://game-icons.net/1x1/delapouite/mesh-network.html)
 - [`./document/inventory.svg`](https://game-icons.net/1x1/delapouite/backpack.html)
 - [`./document/mob.svg`](https://game-icons.net/1x1/delapouite/uprising.html)

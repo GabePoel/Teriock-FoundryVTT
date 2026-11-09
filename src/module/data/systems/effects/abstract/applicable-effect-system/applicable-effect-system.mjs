@@ -1,12 +1,9 @@
 import { TeriockActiveEffect } from "../../../../../documents/_module.mjs";
 import { dedent, mergeMetadata, mixClasses, toClass } from "../../../../../utils/_module.mjs";
-import { builders } from "../../../../fields/tools/_module.mjs";
 import { ThresholdDataMixin } from "../../../../mixins/_module.mjs";
 import { StatusAutomation } from "../../../../pseudo-documents/automations/_module.mjs";
 import { AffinableSystemMixin, ExpirableSystemMixin, MetaphysicsSystemMixin } from "../../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Effect-specific effect data model.
@@ -42,25 +39,6 @@ export default class ApplicableEffectSystem
     return teriock.executions.child.ExpirationExecution;
   }
 
-  /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      blocks: builders.blocksField(),
-      critical: new fields.BooleanField(),
-      executor: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),
-      heightened: new fields.NumberField(),
-      sustained: new fields.BooleanField(),
-    });
-  }
-
-  /** @inheritDoc */
-  static migrateData(source, options) {
-    for (const b of source?.blocks ?? []) {
-      if ("gmOnly" in b) { b.gm ??= b.gmOnly; }
-    }
-    return super.migrateData(source, options);
-  }
-
   /**
    * A message bar with duration information.
    * @returns {Teriock.Panels.PanelBar}
@@ -75,32 +53,12 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["sustained", "kind", ...super._formPaths];
-  }
-
-  /** @inheritDoc */
-  get _metaphysicsTags() {
-    const tags = super._metaphysicsTags;
-    if (this.sustained) { tags.push(this.getStringForProperty("sustained")); }
-    return tags;
-  }
-
-  /** @inheritDoc */
-  get _nameTags() {
-    const tags = super._nameTags;
-    if (this.critical) { tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical")); }
-    return tags;
+    return ["kind", ...super._formPaths];
   }
 
   /** @inheritDoc */
   get _panelBars() {
     return [this._durationBar, this._metaphysicsBar, this._statusBar];
-  }
-
-  /** @inheritDoc */
-  get _panelBlocks() {
-    if (this.parent._source.description) { return super._panelBlocks; }
-    return this.blocks;
   }
 
   /**
@@ -111,15 +69,7 @@ export default class ApplicableEffectSystem
     return {
       icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
-      wrappers: [
-        ...Array.from(this.parent.statuses.map(status => CONFIG.statusEffects[status]?.name)),
-        this.critical ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical") : "",
-        this.heightened
-          ? this.heightened === 1
-            ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")
-            : _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened })
-          : "",
-      ],
+      wrappers: Array.from(this.parent.statuses.map(status => CONFIG.statusEffects[status]?.name)),
     };
   }
 
@@ -138,34 +88,9 @@ export default class ApplicableEffectSystem
     return false;
   }
 
-  /**
-   * The document that this is sustained by.
-   * @returns {TeriockDocument|null}
-   */
-  get sustainedBy() {
-    if (this.sustained && this.parent.origin) { return this.parent.fetchFromUuidSync(this.parent.origin); }
-    return null;
-  }
-
   /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", { value: this.parent.name });
-  }
-
-  /** @inheritDoc */
-  _getTipSuppressions() {
-    return { ...super._getTipSuppressions(), unsustained: this._isSuppressedUnsustained.bind(this) };
-  }
-
-  /**
-   * If this is suppressed due to its sustainedBy being inactive.
-   * @returns {boolean}
-   */
-  _isSuppressedUnsustained() {
-    if (!game.settings.get("teriock", "trackSustainedConsequences")) { return false; }
-    const sustainedBy = this.sustainedBy;
-    if (!sustainedBy || sustainedBy === this.parent) { return false; }
-    return (sustainedBy.top === this.parent.top && !sustainedBy.active);
   }
 
   /** @inheritDoc */
