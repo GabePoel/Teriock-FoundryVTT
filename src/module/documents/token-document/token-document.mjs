@@ -149,11 +149,10 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    * @category Terrain
    */
   get terrains() {
-    const terrains = new Set([
-      ...game.settings.get("teriock", "terrains"),
-      ...(this.parent?.terrains ?? []),
-      ...(this.parent?.levels.get(this.level)?.terrains ?? []),
-    ]);
+    let terrains = game.settings.get("teriock", "terrains");
+    for (const doc of [this.parent, this.parent?.levels.get(this.level)]) {
+      if (doc) { terrains = terrains.difference(doc.removedTerrains).union(doc.terrains); }
+    }
     const added = new Set();
     for (const region of this.regions ?? []) {
       for (const behavior of region.behaviors) {

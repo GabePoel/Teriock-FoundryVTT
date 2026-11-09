@@ -459,7 +459,10 @@ export function terrainSchema() {
       hint: _sloc("TERIOCK.SCHEMA.RemovedTerrains.hint"),
       label: _sloc("TERIOCK.SCHEMA.RemovedTerrains.label"),
     }),
-    terrains: terrainsField(),
+    terrains: terrainsField({
+      hint: _sloc("TERIOCK.SCHEMA.AddedTerrains.hint"),
+      label: _sloc("TERIOCK.SCHEMA.AddedTerrains.label"),
+    }),
   };
 }
 

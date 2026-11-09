@@ -8,6 +8,15 @@ export default function TerrainDocumentMixin(Base) {
   /** @mixin */
   class TerrainDocument extends Base {
     /**
+     * Less specific terrains that don't apply to tokens.
+     * @returns {Set<Teriock.Keys.Terrain>}
+     */
+    get removedTerrains() {
+      const terrains = this.getFlag("teriock", "removedTerrains");
+      return new Set(Array.isArray(terrains) ? terrains.filter(t => Object.hasOwn(TERIOCK.CONFIG.terrain, t)) : []);
+    }
+
+    /**
      * Terrains to apply to tokens.
      * @returns {Set<Teriock.Keys.Terrain>}
      */

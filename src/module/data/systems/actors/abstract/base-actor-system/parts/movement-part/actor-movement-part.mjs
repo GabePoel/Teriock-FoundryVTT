@@ -53,6 +53,7 @@ export default function ActorMovementPart(Base) {
      */
     #getTokenTerrains() {
       const tokens = this.#getTokens();
+      if (!tokens.length) { return { difficultTerrain: false, terrains: game.settings.get("teriock", "terrains") }; }
       return {
         difficultTerrain: tokens.some(t => t.difficultTerrain),
         terrains: new Set(tokens.flatMap(t => Array.from(t.terrains))),
