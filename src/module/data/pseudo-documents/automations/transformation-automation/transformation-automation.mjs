@@ -108,7 +108,8 @@ export default class TransformationAutomation
         suppress: Array.from(this.suppress),
       });
     }
-    transformation.uuids = [...(transformation.uuids ?? []), ...this.#selectedUuids];
     foundry.utils.setProperty(data, "system.transformation", transformation);
+    const uuids = foundry.utils.getProperty(data, "system.dependents.globalUuids") ?? [];
+    foundry.utils.setProperty(data, "system.dependents.globalUuids", [...uuids, ...this.#selectedUuids]);
   }
 }

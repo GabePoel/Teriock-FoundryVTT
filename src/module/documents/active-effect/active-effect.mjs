@@ -60,13 +60,8 @@ export default class TeriockActiveEffect
   static async _onCreateOperation(documents, operation, user) {
     await super._onCreateOperation(documents, operation, user);
     const editable = documents.filter(d => d.actor && d.checkEditor(user));
-    const transformations = editable.filter(d => d.system.isTransformation);
-    const operations = (await Promise.all(transformations.map(d => d.system.getCreateTransformationOperations())))
-      .flat();
-    for (const d of editable) {
-      const dependents = operation.dependents?.[d.id];
-      if (dependents?.length) { operations.push(d.getCreateDependentDocumentsOperation("Item", dependents)); }
-    }
+    const operations =
+      (await Promise.all(editable.map(d => d.system.getCreateOperations(operation.dependents?.[d.id])))).flat();
     if (operations.length) { foundry.documents.modifyBatch(consolidateWriteOperations(operations)); }
   }
 

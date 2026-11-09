@@ -123,19 +123,5 @@ export function effectTransformationFields() {
       label: "TERIOCK.SCHEMA.Transformation.primary.label",
       filter: (d, m) => d.type === "species" && d.dependee === m.getNearestDocument(),
     }),
-    uuids: new fields.SetField(
-      new fields.DocumentUUIDField({
-        hint: "TERIOCK.SCHEMA.Transformation.uuids.itemHint",
-        nullable: false,
-        type: "Item",
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.uuids.hint",
-        label: "TERIOCK.SCHEMA.Transformation.uuids.label",
-        nullable: false,
-        required: false,
-        initial: () => [],
-      },
-    ),
   });
 }

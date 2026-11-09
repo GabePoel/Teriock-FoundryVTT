@@ -1,7 +1,18 @@
-import { mergeMetadata, mixClasses, toKebabCase } from "../../../../../utils/_module.mjs";
+import {
+  getSystemClass,
+  mergeMetadata,
+  mixClasses,
+  resolveDocuments,
+  toKebabCase,
+} from "../../../../../utils/_module.mjs";
+import { TypedIdentifierSetField } from "../../../../fields/_module.mjs";
 import { BaseSystemMixin, ChildSystemMixin } from "../../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
+
+/**
+ * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ */
 
 /**
  * Base effect data model.
@@ -28,6 +39,10 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
       ...super.defineSchema(),
       applyIfDeattuned: new fields.BooleanField(),
+      dependents: new fields.SchemaField({
+        globalIdentifiers: new TypedIdentifierSetField({ types: Item.implementation.TYPES.filter(t => t !== "base") }),
+        globalUuids: new fields.SetField(new fields.DocumentUUIDField({ type: "Item" })),
+      }),
     });
   }
 
@@ -82,6 +97,12 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     return (!this.applyIfDeattuned
       && this.parent.parent?.metadata?.tags?.attunable
       && Boolean(this.parent.parent?.system.needsAttunement));
+  }
+
+  /** @inheritDoc */
+  get visibleTypes() {
+    if (this.actor) { return super.visibleTypes; }
+    return super.visibleTypes.filter(t => getSystemClass(t).metadata.documentName === "ActiveEffect");
   }
 
   /** @inheritDoc */
@@ -184,6 +205,42 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
       });
     }
     return expired;
+  }
+
+  /**
+   * Operations for when this is added to an actor for the first time.
+   * @param {object[]} [data] - Dependents data carried over from create operation.
+   * @returns {Promise<DatabaseWriteOperation[]>}
+   */
+  async getCreateOperations(data = []) {
+    data = [...data, ...(await this.getDependentsData())];
+    const operations = [];
+    if (data.length) { operations.push(this.parent.getCreateDependentDocumentsOperation("Item", data)); }
+    if (this.dependents.globalIdentifiers.size || this.dependents.globalUuids.size) {
+      operations.push(
+        this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{
+          _id: this.parent.id,
+          "system.dependents.globalIdentifiers": [],
+          "system.dependents.globalUuids": [],
+        }]),
+      );
+    }
+    return operations;
+  }
+
+  /**
+   * Data for the items this gets as dependents when added to an actor for the first time.
+   * @returns {Promise<object[]>}
+   */
+  async getDependentsData() {
+    const { globalIdentifiers, globalUuids } = this.dependents;
+    const documents = await resolveDocuments([...globalUuids, ...globalIdentifiers]);
+    return documents.filter(d => this.metadata.childTypes.includes(d.type)).map(d => {
+      const obj = d.toObject(true);
+      obj._id = foundry.utils.randomID();
+      if (d.pack) { foundry.utils.setProperty(obj, "_stats.compendiumSource", d.uuid); }
+      return obj;
+    });
   }
 
   /** @inheritDoc */

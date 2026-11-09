@@ -11,5 +11,12 @@
   data-group="{{ tab.group }}"
   data-tab="{{ tab.id }}"
 >
+  {{#if (exists @root/dependents)}}
+    <div class="teriock-form-container">
+      {{> "teriock/shared/field-list"
+        @root/dependents
+      }}
+    </div>
+  {{/if}}
   {{> "teriock/sheets/shared/children"}}
 </section>

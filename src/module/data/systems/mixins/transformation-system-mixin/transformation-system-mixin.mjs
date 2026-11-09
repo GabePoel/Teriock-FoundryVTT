@@ -66,6 +66,7 @@ export default function TransformationSystemMixin(Base) {
     static migrateData(source, options) {
       migrateThumbnails(source, "transformation.img", "transformation.ringImg");
       migrateRename(source, "transformation.reset", "transformation.resets");
+      migrateRename(source, "transformation.uuids", "dependents.globalUuids");
       return super.migrateData(source, options);
     }
 
@@ -103,36 +104,6 @@ export default function TransformationSystemMixin(Base) {
         teriock: { dontDisplayStatChange: true },
         updates: [{ _id: this.actor.id, ...data }],
       });
-    }
-
-    /**
-     * Pull species data, configure it, and batch it to be added to the actor.
-     * @param {DatabaseWriteOperation[]} operations
-     * @returns {Promise<ID<TeriockItem>|null>} The ID of the primary species if one is created.
-     */
-    async #addBatchCreateTransformedSpecies(operations) {
-      const uuids = this.transformation.uuids;
-      let species = /** @type {TeriockItem<"species">[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
-      species = species.filter(Boolean);
-      if (!species.length) { return null; }
-      const itemData = /** @type {TeriockItem<"species">[]} */ species.map(s => s.toObject());
-      itemData.forEach(s => {
-        s._id = foundry.utils.randomID();
-        s.system.transformationLevel = this.transformation.level;
-        for (const stat of POOL_STATS) {
-          s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
-        }
-        s.system.competence.raw = this.transformation.competence.raw;
-        if (s.system.size.min && s.system.size.max) {
-          s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
-        }
-      });
-      const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData, {
-        keepId: true,
-        keepSubIds: false,
-      });
-      if (op) { operations.push(op); }
-      return itemData[0]._id;
     }
 
     /**
@@ -318,23 +289,35 @@ export default function TransformationSystemMixin(Base) {
       }
     }
 
-    /**
-     * Operations that first apply this transformation to its actor.
-     * @returns {Promise<DatabaseWriteOperation[]>}
-     */
-    async getCreateTransformationOperations() {
-      const operations = [];
+    /** @inheritDoc */
+    async getCreateOperations(data = []) {
+      const operations = await super.getCreateOperations(data);
+      if (!this.isTransformation) { return operations; }
       const flags = this._buildTransformationFlags();
-      const update = { _id: this.parent.id, flags, "system.transformation.uuids": [] };
-      const primary = await this.#addBatchCreateTransformedSpecies(operations);
-      if (primary) { update["system.transformation.primary"] = primary; }
-      operations.push(this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [update]));
+      operations.push(this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{ _id: this.parent.id, flags }]));
       this.#addBatchToggleDocuments(operations, true, flags.teriock);
       this.#addBatchActorUpdate(operations, {
         "system.transformation.primary": this.parent.id,
         ...this.#resetUpdateData,
       });
       return operations;
+    }
+
+    /** @inheritDoc */
+    async getDependentsData() {
+      const data = await super.getDependentsData();
+      if (!this.isTransformation) { return data; }
+      for (const s of data.filter(d => d.type === "species")) {
+        s.system.transformationLevel = this.transformation.level;
+        for (const stat of POOL_STATS) {
+          s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
+        }
+        s.system.competence.raw = this.transformation.competence.raw;
+        if (s.system.size.min && s.system.size.max) {
+          s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
+        }
+      }
+      return data;
     }
 
     /** @inheritDoc */

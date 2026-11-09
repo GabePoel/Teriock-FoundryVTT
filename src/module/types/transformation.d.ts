@@ -38,8 +38,6 @@ declare global {
       enabled: boolean;
       /** <schema> The primary transformation species */
       primary: TeriockItem<"species"> | null;
-      /** <schema> UUID of specific species to transform into */
-      uuids: UUID<TeriockItem<"species">>[];
     };
   }
 }
