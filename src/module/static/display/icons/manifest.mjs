@@ -91,7 +91,7 @@ export default {
     alternate: "ms-alt-route",
     archetype: "ms-stars",
     attunement: "ms-approval-delegation",
-    backstory: "ms-person-book",
+    backstory: "ms-cottage",
     blessing: "ms-folded-hands",
     body: "ms-rib-cage",
     combatant: "mdi-sword",
@@ -123,6 +123,7 @@ export default {
     region: "mdi-checkerboard",
     resource: "mdi-abacus",
     scar: "ms-skull",
+    sorcery: "ms-auto-stories",
     source: "ms-bolt",
     species: "ms-genetics",
     stone: "ms-circle",
@@ -218,7 +219,13 @@ export default {
     nose: "ms-oxygen-saturation",
   },
   interaction: { attack: "ms-swords", block: "ms-shield", feat: "ms-star", manifest: "ms-flare" },
-  kind: { flaw: "ms-block", normal: "ms-nearby", other: "ms-category", unknown: "ms-question-mark" },
+  kind: {
+    flaw: "ms-block",
+    normal: "ms-nearby",
+    other: "ms-category",
+    special: "ms-star-shine",
+    unknown: "ms-question-mark",
+  },
   maneuver: { active: "ms-arrow-right-alt", passive: "ms-cycle", reactive: "ms-undo", slow: "ms-airwave" },
   movement: {
     climb: "ms-tools-ladder",
@@ -241,7 +248,6 @@ export default {
     templateEffects: "ms-circles-ext",
   },
   piercing: { av0: "ms-line-end-arrow-notch", none: "ms-close", ub: "ms-nat" },
-  power: { innate: "ms-person", learned: "ms-cognition-2", other: "ms-category", traits: "ms-flag" },
   powerLevel: { enchanted: "ms-wand-shine", magic: "ms-wand-stars", mundane: "ms-candle", unknown: "ms-question-mark" },
   pseudoDocument: {
     affinity: "ms-shield-question",
@@ -249,7 +255,12 @@ export default {
     expiration: "ms-av-timer",
     mechanic: "ms-settings-b-roll",
   },
-  rank: { combatAbility: "ms-swords", supportAbility: "ms-shield-with-heart" },
+  rank: {
+    combatAbility: "ms-swords",
+    innate: "ms-person",
+    learned: "ms-cognition-2",
+    supportAbility: "ms-shield-with-heart",
+  },
   results: {
     alt: "ms-location-disabled",
     altCrit: "ms-crisis-alert",

@@ -14,7 +14,8 @@ export default class HolidaySystem extends mixClasses(ApplicableEffectSystem, Tr
     childTypes: ConsequenceSystem.metadata.childTypes,
     icon: TERIOCK.DISPLAY.icons.manifest.document.holiday,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.holiday,
-    initialKind: "normal",
+    initialKind: "echo",
+    kinds: _replace(TERIOCK.CONFIG.effect.kind),
     type: "holiday",
     visibleTypes: ConsequenceSystem.metadata.visibleTypes,
   });

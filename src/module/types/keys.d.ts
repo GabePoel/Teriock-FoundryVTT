@@ -61,7 +61,6 @@ declare global {
 
     // Kind Keys
     export type Kind = keyof typeof CONFIG.system.defaultKinds;
-    export type PowerKind = keyof typeof CONFIG.power.kind;
     export type EffectKind = keyof typeof CONFIG.effect.kind;
     export type AttunementKind = keyof typeof CONFIG.attunement.kind;
     export type RankKind = keyof typeof CONFIG.class.kind;

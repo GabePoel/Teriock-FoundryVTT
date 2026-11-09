@@ -14,6 +14,12 @@ const POWER_KIND_TYPES = {
 };
 
 /**
+ * Identifiers of powers that are now their own Item types.
+ * @type {Record<string, string>}
+ */
+const POWER_IDENTIFIER_TYPES = { "created-elder-sorceries": "sorcery", "learned-elder-sorceries": "sorcery" };
+
+/**
  * Status ids renamed to match their identifiers.
  * @type {Record<string, string>}
  */
@@ -94,12 +100,14 @@ export function migrateIterables(source, ...fields) {
 }
 
 /**
- * Migrate powers whose kinds are now their own Item types.
+ * Migrate powers whose kinds or identifiers are now their own Item types.
  * @param {object} source
  */
 export function migratePowerKinds(source) {
-  const type = POWER_KIND_TYPES[source.system?.kind];
-  if (source.type !== "power" || !type) { return; }
+  if (source.type !== "power") { return; }
+  if (["innate", "learned", "traits"].includes(source.system?.kind)) { source.system.kind = "normal"; }
+  const type = POWER_KIND_TYPES[source.system?.kind] ?? POWER_IDENTIFIER_TYPES[source.system?.identifier];
+  if (!type) { return; }
   source.type = type;
   source.system.kind = CONFIG.Item.dataModels[type].metadata.initialKind;
 }

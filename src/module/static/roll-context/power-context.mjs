@@ -10,6 +10,7 @@ const powerContext = {
   pact: "TYPES.Item.pact",
   power: "TYPES.Item.power",
   scar: "TYPES.Item.scar",
+  sorcery: "TYPES.Item.sorcery",
 
   av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
@@ -26,7 +27,7 @@ export default powerContext;
 
 preLocalizeObject("ROLL_CONTEXT.power");
 Hooks.once("teriock.identifiersInit", () => {
-  Object.entries(TERIOCK.CONFIG.power.kind).forEach(([k, v]) => {
+  Object.entries(TERIOCK.CONFIG.system.defaultKinds).forEach(([k, v]) => {
     powerContext[`kind.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Power.kind", { name: v.label });
   });
 });

@@ -82,11 +82,12 @@ export default class BaseActorSystem
       "rank",
       "resource",
       "scar",
+      "sorcery",
       "species",
     ],
     documentName: "Actor",
     preserveOnRefresh: ["effects", "items", ...super.metadata.preserveOnRefresh],
-    visibleTypes: ["backstory", "blessing", "curse", "familiar", "pact", "power", "rank", "scar", "species"],
+    visibleTypes: ["backstory", "blessing", "curse", "familiar", "pact", "power", "rank", "scar", "sorcery", "species"],
   });
 
   /** @inheritDoc */

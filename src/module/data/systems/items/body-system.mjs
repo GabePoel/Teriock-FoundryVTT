@@ -23,7 +23,7 @@ export default class BodySystem
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.body,
     importable: true,
     initialKind: "intrinsic",
-    kinds: _replace({ intrinsic: TERIOCK.CONFIG.effect.kind.intrinsic, ...TERIOCK.CONFIG.system.defaultKinds }),
+    kinds: _replace({ intrinsic: TERIOCK.CONFIG.effect.kind.intrinsic, ...TERIOCK.CONFIG.equipment.kind }),
     tags: { usable: true },
     type: "body",
   });

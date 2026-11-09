@@ -2,7 +2,7 @@ import SimpleItemSheet from "./simple-item-sheet.mjs";
 
 /**
  * Power sheet.
- * @property {TeriockItem<"backstory"|"blessing"|"pact"|"power">} document
+ * @property {TeriockItem<"backstory"|"blessing"|"pact"|"power"|"sorcery">} document
  */
 export default class PowerSheet extends SimpleItemSheet {
   /** @type {string[]} */

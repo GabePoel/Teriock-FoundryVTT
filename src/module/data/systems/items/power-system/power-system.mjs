@@ -17,7 +17,6 @@ export default class PowerSystem extends mixClasses(SimpleItemSystem, ArmorSuppr
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.power,
     initialCompetence: 1,
     initialKind: "other",
-    kinds: _replace(TERIOCK.CONFIG.power.kind),
     type: "power",
   });
 

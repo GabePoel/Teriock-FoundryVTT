@@ -10,11 +10,7 @@ export default class PowerPreviewModel extends BasePreviewModel {
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
       kind: nullStringField({
-        choices: {
-          ...TERIOCK.CONFIG.system.defaultKinds,
-          special: TERIOCK.CONFIG.effect.kind.special,
-          ...TERIOCK.CONFIG.power.kind,
-        },
+        choices: TERIOCK.CONFIG.system.defaultKinds,
         label: "TERIOCK.SYSTEMS.Child.FIELDS.kind.label",
       }),
     });

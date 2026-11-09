@@ -41,6 +41,7 @@ Links to the original pages with the authors can be found below.
 - [`./document/resource.svg`](https://game-icons.net/1x1/delapouite/convergence-target.html)
 - [`./document/rule.svg`](https://game-icons.net/1x1/lorc/scroll-unfurled.html)
 - [`./document/scar.svg`](https://game-icons.net/1x1/lorc/reaper-scythe.html)
+- [`./document/sorcery.svg`](https://game-icons.net/1x1/delapouite/spell-book.html)
 - [`./document/species.svg`](https://game-icons.net/1x1/lorc/dna1.html)
 - [`./document/style.svg`](https://game-icons.net/1x1/lorc/crossed-swords.html)
 - [`./document/tradecraft.svg`](https://game-icons.net/1x1/delapouite/swiss-army-knife.html)

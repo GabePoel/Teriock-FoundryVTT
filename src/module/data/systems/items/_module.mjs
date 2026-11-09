@@ -11,4 +11,5 @@ export { default as PactSystem } from "./pact-system.mjs";
 export { default as PowerSystem } from "./power-system/power-system.mjs";
 export { default as RankSystem } from "./rank-system/rank-system.mjs";
 export { default as ScarSystem } from "./scar-system.mjs";
+export { default as SorcerySystem } from "./sorcery-system.mjs";
 export { default as SpeciesSystem } from "./species-system/species-system.mjs";

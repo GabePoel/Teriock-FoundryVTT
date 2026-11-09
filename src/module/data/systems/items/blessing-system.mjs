@@ -11,7 +11,6 @@ export default class BlessingSystem extends ContractItemSystem {
     icon: TERIOCK.DISPLAY.icons.manifest.document.blessing,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.blessing,
     initialKind: "special",
-    kinds: _replace({ special: TERIOCK.CONFIG.effect.kind.special, ...TERIOCK.CONFIG.system.defaultKinds }),
     type: "blessing",
   });
 

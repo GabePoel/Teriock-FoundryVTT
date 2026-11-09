@@ -12,6 +12,7 @@ export default {
   childKinds,
   defaultKinds: /** @enum {Teriock.Config.KindEntry} */ {
     normal: { color: colors.palette.green, icon: icons.manifest.kind.normal, label: "TERIOCK.TERMS.Kind.normal" },
+    special: { color: colors.palette.purple, icon: icons.manifest.kind.special, label: "TERIOCK.TERMS.Kind.special" },
     ...childKinds,
   },
   resistanceThreshold: 10,

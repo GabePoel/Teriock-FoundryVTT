@@ -137,10 +137,10 @@ export default {
   },
   defaults: { maxAv: 2 },
   kind: /** @enum {Teriock.Config.KindEntry} */ {
-    innate: { color: colors.palette.purple, icon: icons.manifest.power.innate, label: "TERIOCK.TERMS.RankKind.innate" },
+    innate: { color: colors.palette.purple, icon: icons.manifest.rank.innate, label: "TERIOCK.TERMS.RankKind.innate" },
     learned: {
       color: colors.palette.green,
-      icon: icons.manifest.power.learned,
+      icon: icons.manifest.rank.learned,
       label: "TERIOCK.TERMS.RankKind.learned",
     },
     ...systemConfig.childKinds,

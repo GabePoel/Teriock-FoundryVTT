@@ -22,7 +22,6 @@ import lengthConfig from "./length-config.mjs";
 import mathConfig from "./math-config.mjs";
 import metaphysicsConfig from "./metaphysics-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
-import powerConfig from "./power-config.mjs";
 import speciesConfig from "./species-config.mjs";
 import statConfig from "./stat-config.mjs";
 import systemConfig from "./system-config.mjs";
@@ -60,7 +59,6 @@ const config = {
   math: mathConfig,
   metaphysics: metaphysicsConfig,
   piercing: piercingConfig,
-  power: powerConfig,
   species: speciesConfig,
   stat: statConfig,
   system: systemConfig,

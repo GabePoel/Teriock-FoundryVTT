@@ -44,6 +44,20 @@ export default function AbilityElderSorceryPart(Base) {
     }
 
     /** @inheritDoc */
+    async _preCreate(data, options, user) {
+      const yes = await super._preCreate(data, options, user);
+      if (yes === false) { return false; }
+
+      if (this.parent.master?.type !== "sorcery") { return; }
+      if (foundry.utils.hasProperty(this.parent._source, "flags._teriock.sup")) { return; }
+      this.parent.updateSource(
+        foundry.utils.mergeObject({
+          system: { effectTypes: ["magical"], elderSorcery: true, kind: "special", rotator: true, spell: true },
+        }, data),
+      );
+    }
+
+    /** @inheritDoc */
     getLocalRollData() {
       return Object.assign(super.getLocalRollData(), { es: Number(this.elderSorcery) });
     }

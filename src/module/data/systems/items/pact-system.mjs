@@ -11,7 +11,6 @@ export default class PactSystem extends ContractItemSystem {
     icon: TERIOCK.DISPLAY.icons.manifest.document.pact,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.pact,
     initialKind: "special",
-    kinds: _replace({ special: TERIOCK.CONFIG.effect.kind.special, ...TERIOCK.CONFIG.system.defaultKinds }),
     type: "pact",
   });
 

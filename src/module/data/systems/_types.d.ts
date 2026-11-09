@@ -35,6 +35,7 @@ import {
   PowerSystem,
   RankSystem,
   ScarSystem,
+  SorcerySystem,
   SpeciesSystem,
 } from "./items/_module.mjs";
 import { BaseMessageSystem, InteractiveSystem, SharedSystem, TriggeredSystem } from "./messages/_module.mjs";
@@ -99,6 +100,7 @@ declare global {
     power: PowerSystem;
     rank: RankSystem;
     scar: ScarSystem;
+    sorcery: SorcerySystem;
     species: SpeciesSystem;
   }
 

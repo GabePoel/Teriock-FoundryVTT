@@ -220,14 +220,14 @@ export default function PlayableActorSheetSectionsPart(Base) {
       label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
       preview: { addButton: { type: "rank" }, groups: this.#previewGroupRank, model: previews.RankPreviewModel },
     }, {
-      dragTypes: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar"],
+      dragTypes: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar", "sorcery"],
       icon: PowerSystem.metadata.icon,
       id: "powers",
       label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
       preview: {
         addButton: {
           type: "power",
-          types: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar"],
+          types: ["power", "species", "backstory", "blessing", "curse", "familiar", "pact", "scar", "sorcery"],
         },
         groups: this.#previewGroupPower,
         model: previews.PowerPreviewModel,
