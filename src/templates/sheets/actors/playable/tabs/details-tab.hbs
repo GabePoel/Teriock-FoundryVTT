@@ -25,14 +25,24 @@
             {{#each TERIOCK.CONFIG.character.movement as |config key|}}
               {{#if (lookup @root/activeSpeedAdjustments key)}}
                 <div
-                  class="details-active"
+                  class="details-active {{#if config.movementAction}}thover{{/if}}"
+                  {{#if config.movementAction}}
+                    data-action="setMovementAction"
+                    data-movement-action="{{ config.movementAction }}"
+                  {{/if}}
                   data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.active"}}'
                   data-tooltip-direction="LEFT"
                 >
                   {{{ config.label }}}
                 </div>
               {{else}}
-                <div>
+                <div
+                  {{#if config.movementAction}}
+                    class="thover"
+                    data-action="setMovementAction"
+                    data-movement-action="{{ config.movementAction }}"
+                  {{/if}}
+                >
                   {{{ config.label }}}
                 </div>
               {{/if}}

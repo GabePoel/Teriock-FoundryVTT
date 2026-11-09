@@ -44,6 +44,19 @@ export default function PlayableActorSheetMechanicalPart(Base) {
     }
 
     /**
+     * Set the movement action of this actor's tokens.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     */
+    static async #onSetMovementAction(_event, target) {
+      if (!game.teriock.checkEditable(this)) { return; }
+      const tokens = this.document.token ? [this.document.token] : this.document.getActiveTokens(true, true);
+      const updates = tokens.map(t => ({ _id: t.id, movementAction: target.dataset.movementAction }));
+      await tokens[0]?.parent.updateEmbeddedDocuments("Token", updates);
+    }
+
+    /**
      * Take a long rest.
      * @returns {Promise<void>}
      */
@@ -108,6 +121,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
       actions: {
         deathBagPull: this.#onDeathBagPull,
         quickUse: { buttons: [0, 2], handler: this.#onQuickUse },
+        setMovementAction: this.#onSetMovementAction,
         takeLongRest: this.#onTakeLongRest,
         takeShortRest: this.#onTakeShortRest,
         toggleCondition: { buttons: [0, 2], handler: this.#onToggleCondition },
