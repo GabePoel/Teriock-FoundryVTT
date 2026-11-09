@@ -1,7 +1,7 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import simpleContext from "./simple-context.mjs";
 
-const backstoryContext = { backstory: "TYPES.Item.backstory", "av.max": "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label" };
+const backstoryContext = { "av.max": "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label", backstory: "TYPES.Item.backstory" };
 
 export default backstoryContext;
 
