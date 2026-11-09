@@ -12,7 +12,7 @@ export default class TeriockSidebar extends Sidebar {
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.pseudoDocument.automation, "solid"),
       tooltip: "TERIOCK.TRIGGERS.SIDEBAR.label",
     };
-    entries.splice(entries.findIndex(([k]) => k === "playlists") + 1, 0, ["triggers", triggers]);
+    entries.splice(entries.findIndex(([k]) => k === "settings"), 0, ["triggers", triggers]);
     return Object.fromEntries(entries);
   })();
 }

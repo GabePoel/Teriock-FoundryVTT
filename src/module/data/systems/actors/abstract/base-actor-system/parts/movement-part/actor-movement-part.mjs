@@ -29,7 +29,7 @@ export default function ActorMovementPart(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
         difficultTerrain: initialBoolean(),
-        movementSpeed: new fields.NumberField({ initial: null, nullable: true }),
+        movementSpeed: new fields.NumberField({ initial: null, nullable: true, units: "TERIOCK.LENGTH.ft.symbol" }),
         speedAdjustments: new MultiChangeField(
           objectMap(TERIOCK.CONFIG.character.movement, e => speedField(e.initial, e.label)),
         ),
