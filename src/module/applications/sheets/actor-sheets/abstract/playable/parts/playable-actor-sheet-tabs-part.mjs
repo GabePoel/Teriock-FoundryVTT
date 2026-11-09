@@ -38,6 +38,18 @@ export default function PlayableActorSheetTabsPart(Base) {
     }
 
     /** @inheritDoc */
+    _onAttach(from, to) {
+      super._onAttach(from, to);
+      this.#applyTabDirection();
+    }
+
+    /** @inheritDoc */
+    _onDetach(from, to) {
+      super._onDetach(from, to);
+      this.#applyTabDirection();
+    }
+
+    /** @inheritDoc */
     async _onDragOver(event) {
       await super._onDragOver(event);
       if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
@@ -52,18 +64,6 @@ export default function PlayableActorSheetTabsPart(Base) {
         floatingTabs: game.settings.get("teriock", "floatingActorTabs"),
         tabDirection: this.#tabTooltipDirection,
       });
-    }
-
-    /** @inheritDoc */
-    attachWindow(options = {}) {
-      super.attachWindow(options);
-      this.#applyTabDirection();
-    }
-
-    /** @inheritDoc */
-    detachWindow(options = {}) {
-      super.detachWindow(options);
-      this.#applyTabDirection();
     }
   }
 
