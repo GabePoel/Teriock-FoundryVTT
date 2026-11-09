@@ -7,6 +7,14 @@ const { Actors } = foundry.documents.collections;
  */
 export default class TeriockActors extends Actors {
   /**
+   * All the actors which are designated as characters.
+   * @returns {TeriockActor[]}
+   */
+  get characters() {
+    return Array.from(new Set(game.users.map(u => u.character).filter(Boolean)));
+  }
+
+  /**
    * Get the default actor for the current user.
    * @returns {TeriockActor|null}
    */
@@ -24,21 +32,11 @@ export default class TeriockActors extends Actors {
   }
 
   /**
-   * All the actors which are designated as characters.
-   * @returns {TeriockActor[]}
-   */
-  get pcs() {
-    return Array.from(
-      new Set([...this.filter(a => a.type === "pc"), ...game.users.map(u => u.character)].filter(Boolean)),
-    );
-  }
-
-  /**
    * All the currently relevant actors. They are either visible or PCs.
    * @returns {TeriockActor[]}
    */
   get relevant() {
-    return Array.from(new Set([...this.pcs, ...this.visible]));
+    return Array.from(new Set([...this.characters, ...this.visible]));
   }
 
   /**

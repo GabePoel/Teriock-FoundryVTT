@@ -13,8 +13,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * @typedef SidebarTriggerEntry
- * @property {"pcs"|"relevant"} actors - Actors that can be selected.
- * @property {"pcs"|"relevant"} checked - Actors that are selected by default.
+ * @property {"characters"|"relevant"} actors - Actors that can be selected.
+ * @property {"characters"|"relevant"} checked - Actors that are selected by default.
  * @property {Teriock.System.TimeTrigger[]} [optionalTriggers] - Triggers that can optionally fire first.
  * @property {boolean} [passesTime] - Whether this can also cause time to pass.
  * @property {Teriock.System.TimeTrigger} trigger - The trigger this fires.
@@ -41,6 +41,17 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
     const rootId = foundry.utils.randomID();
     const container = document.createElement("div");
     container.className = "teriock-form-container";
+    if (optionalTriggers.length) {
+      const choices = Object.fromEntries(optionalTriggers.map(t => [t, TERIOCK.CONFIG.trigger.time.choices[t]]));
+      container.append(
+        new fields.SetField(new fields.StringField({ choices })).toFormGroup({
+          hint: _loc(`${prefix}.triggers.hint`, { trigger: triggerLabel }),
+          label: `${prefix}.triggers.label`,
+          localize: true,
+          rootId,
+        }, { name: "triggers", type: "checkboxes", value: [] }),
+      );
+    }
     if (passesTime) {
       const key = `${trigger}Time`;
       container.append(
@@ -56,17 +67,6 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
           localize: true,
           rootId,
         }, { name: "time", value: game.settings.get("teriock", key) }),
-      );
-    }
-    if (optionalTriggers.length) {
-      const choices = Object.fromEntries(optionalTriggers.map(t => [t, TERIOCK.CONFIG.trigger.time.choices[t]]));
-      container.append(
-        new fields.SetField(new fields.StringField({ choices })).toFormGroup({
-          hint: _loc(`${prefix}.triggers.hint`, { trigger: triggerLabel }),
-          label: `${prefix}.triggers.label`,
-          localize: true,
-          rootId,
-        }, { name: "triggers", type: "checkboxes", value: [] }),
       );
     }
     const content = document.createElement("div");
@@ -112,15 +112,15 @@ export default class TeriockTriggersTab extends HandlebarsApplicationMixin(Abstr
 
   /** @type {Record<string, SidebarTriggerEntry[]>} */
   static GROUPS = {
-    session: [{ actors: "pcs", checked: "pcs", trigger: "sessionStart" }, {
-      actors: "pcs",
-      checked: "pcs",
+    session: [{ actors: "characters", checked: "characters", trigger: "sessionStart" }, {
+      actors: "characters",
+      checked: "characters",
       trigger: "sessionEnd",
     }],
 
-    resting: [{ actors: "relevant", checked: "pcs", passesTime: true, trigger: "shortRest" }, {
+    resting: [{ actors: "relevant", checked: "characters", passesTime: true, trigger: "shortRest" }, {
       actors: "relevant",
-      checked: "pcs",
+      checked: "characters",
       optionalTriggers: ["dusk", "dawn"],
       passesTime: true,
       trigger: "longRest",
