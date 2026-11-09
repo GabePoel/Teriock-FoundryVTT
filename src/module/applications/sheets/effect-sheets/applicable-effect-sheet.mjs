@@ -79,6 +79,13 @@ export default class ApplicableEffectSheet
   #editorForms;
 
   /** @inheritDoc */
+  _onConfigurePlugins(event) {
+    const { keyMaps, menu } = event.plugins;
+    super._onConfigurePlugins(event);
+    Object.assign(event.plugins, { keyMaps, menu });
+  }
+
+  /** @inheritDoc */
   async _onDragOver(event) {
     await super._onDragOver(event);
     if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
