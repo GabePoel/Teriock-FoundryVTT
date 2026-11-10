@@ -194,7 +194,7 @@ export default class BaseUpdater extends DocumentDialog {
     for (const p of this._formPaths) {
       if (!p.startsWith("flags.")) { continue; }
       const value = foundry.utils.getProperty(submitData, p);
-      if (value === null || value === "") { foundry.utils.setProperty(submitData, p, _del); }
+      if (value === null || value === "" || value === false) { foundry.utils.setProperty(submitData, p, _del); }
     }
     if (this._canLockPaths) {
       foundry.utils.setProperty(submitData, "system.lockedPaths", Array.from(this.lockedPaths));

@@ -3,7 +3,7 @@ import { nullStringField } from "../../../data/fields/tools/builders.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseUpdater from "./base-updater.mjs";
 
-const { NumberField } = foundry.data.fields;
+const { BooleanField, NumberField } = foundry.data.fields;
 const { JournalEntrySheet } = foundry.applications.sheets.journal;
 
 /**
@@ -34,6 +34,11 @@ export default class RulebookUpdater extends BaseUpdater {
         label: "TERIOCK.SHEETS.Journal.rulebook.ruleIcon.label",
         placeholder: this.document.parent?.getFlag("teriock", "ruleIcon")
           ?? TERIOCK.DISPLAY.icons.manifest.document.core,
+      });
+    } else if (path === "flags.teriock.hiddenSubpage") {
+      context.field = new BooleanField({
+        hint: "TERIOCK.SHEETS.Journal.rulebook.hiddenSubpage.hint",
+        label: "TERIOCK.SHEETS.Journal.rulebook.hiddenSubpage.label",
       });
     } else if (path === "flags.core.viewMode") {
       const { MULTIPLE, SINGLE } = JournalEntrySheet.VIEW_MODES;
