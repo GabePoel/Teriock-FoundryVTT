@@ -17,11 +17,7 @@ export default class ApplyActiveEffectSystem
   static LOCALIZATION_PREFIXES = ApplyActiveEffectRegionBehaviorType.LOCALIZATION_PREFIXES;
 
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    documentName: "RegionBehavior",
-    icon: TERIOCK.DISPLAY.icons.manifest.behavior.applyActiveEffect,
-    type: "applyActiveEffect",
-  });
+  static metadata = mergeMetadata(super.metadata, { documentName: "RegionBehavior", type: "applyActiveEffect" });
 
   /** @inheritDoc */
   static defineSchema() {
@@ -32,6 +28,11 @@ export default class ApplyActiveEffectSystem
         types: ActiveEffect.implementation.TYPES.filter(t => t !== "base"),
       }),
     });
+  }
+
+  /** @inheritDoc */
+  static registerModel() {
+    CONFIG.RegionBehavior.dataModels[this.metadata.type] = this;
   }
 
   /** @inheritDoc */

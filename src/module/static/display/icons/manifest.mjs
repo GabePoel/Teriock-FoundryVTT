@@ -39,7 +39,6 @@ export default {
     unp: "ms-self-improvement",
   },
   attunable: { attune: "ms-approval-delegation", deattune: "ms-approval-delegation-off", tier: "ms-trophy" },
-  behavior: { applyActiveEffect: "fa-person-rays" },
   break: { destroy: "ms-destruction", reforge: "ms-hardware", repair: "ms-local-bar", shatter: "ms-no-drinks" },
   change: {
     applyIfSuppressed: "ms-play-arrow",
