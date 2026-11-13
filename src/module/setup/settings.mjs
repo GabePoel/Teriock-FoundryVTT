@@ -462,13 +462,7 @@ export function registerSettings() {
         }
       },
     },
-    worldEffects: {
-      type: new fields.SchemaField({
-        globalIdentifiers: new TypedIdentifierSetField(),
-        globalUuids: new fields.SetField(new fields.DocumentUUIDField()),
-      }),
-      onChange: () => ui.world?.render(),
-    },
+    worldEffects: { type: new fields.SetField(new fields.DocumentUUIDField()), onChange: () => ui.world?.render() },
   };
   for (const [key, config] of Object.entries(worldSettings)) {
     game.settings.register("teriock", key, {

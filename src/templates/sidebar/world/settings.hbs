@@ -10,14 +10,12 @@
   </section>
   <section class="standard-form">
     <h4 class="divider">{{localize settings.worldEffects.label}}</h4>
-    {{#each settings.worldEffects.field.fields as |field key|}}
-      {{formInput
-        field
-        disabled=@root.disabled
-        name=(concat "worldEffects." key)
-        value=(lookup @root.settings.worldEffects.value key)
-      }}
-    {{/each}}
+    {{formInput
+      settings.worldEffects.field
+      disabled=disabled
+      name="worldEffects"
+      value=settings.worldEffects.value
+    }}
     <div class="tgrid g2">
       {{#each buttons as |button|}}
         <button type="{{ button.type }}" data-action="{{ button.action }}">
