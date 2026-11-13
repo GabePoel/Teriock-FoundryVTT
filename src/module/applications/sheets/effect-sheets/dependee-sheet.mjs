@@ -47,14 +47,7 @@ export default class DependeeSheet extends ApplicableEffectSheet {
       }
       if (this.document.actor) { transformationPaths.push("primary"); }
     }
-    const dependentsPaths = this.document.actor ? [] : ["globalUuids", "globalIdentifiers"];
     return Object.assign(await super._prepareContext(options), {
-      dependents: dependentsPaths.map(p => ({
-        field: this.document.system.schema.getField(`dependents.${p}`),
-        localize: true,
-        model: this.document.system,
-        value: this.document.system._source.dependents[p],
-      })),
       transformation: transformationPaths.map(p => {
         const entry = {
           field: this.document.system.schema.getField(`transformation.${p}`),

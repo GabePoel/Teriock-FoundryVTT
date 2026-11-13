@@ -32,6 +32,7 @@ declare global {
     type AutomationTags = PseudoDocumentTags & {
       ability: boolean;
       changes: boolean;
+      dependents: boolean;
       harm: boolean;
       interactInExecution: boolean;
       passive: boolean;

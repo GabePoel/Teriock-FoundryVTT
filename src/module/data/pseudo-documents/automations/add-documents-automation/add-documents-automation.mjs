@@ -26,7 +26,7 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     pseudos: { ConstructionNode: "constructionNodes" },
-    tags: { interactInExecution: true },
+    tags: { dependents: true, interactInExecution: true },
     type: "addDocuments",
   });
 
@@ -116,9 +116,10 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   get _formPaths() {
     const paths = [];
-    if (this.getNearestDocument()?.system?.makesEffectData) { paths.push("attachToEffect"); }
-    if (!this.attachesToEffect) { paths.push(...this._triggerDisplayPaths, "target"); }
-    else { paths.push("interactInExecution"); }
+    const system = this.getNearestDocument()?.system;
+    if (system?.makesEffectData || system?.metadata.automationTags.dependents) { paths.push("attachToEffect"); }
+    if (this.attachesToEffect) { paths.push("interactInExecution"); }
+    else if (!this.addsChildrenOnCreation) { paths.push(...this._triggerDisplayPaths, "target"); }
     paths.push(...["hr", "all"]);
     if (!this.all) {
       paths.push("multi");
@@ -127,6 +128,14 @@ export default class AddDocumentsAutomation
     }
     paths.push("hr");
     return paths;
+  }
+
+  /**
+   * Whether this adds child documents to its parent effect upon creation.
+   * @returns {boolean}
+   */
+  get addsChildrenOnCreation() {
+    return this.attachToEffect && Boolean(this.getNearestDocument()?.system?.metadata.automationTags.dependents);
   }
 
   /**
@@ -149,7 +158,7 @@ export default class AddDocumentsAutomation
 
   /** @inheritDoc */
   async _getActivations(options = {}) {
-    if (this.attachesToEffect) { return []; }
+    if (this.attachesToEffect || this.addsChildrenOnCreation) { return []; }
     const roots = this.interactInExecution ? await this.getNodes() : this.rootNodes;
     if (!roots) { return []; }
     let nodes = roots.flatMap(n => [n, ...n.allChildNodes.contents]);
@@ -166,6 +175,18 @@ export default class AddDocumentsAutomation
         target: this.target,
       }),
     ];
+  }
+
+  /** @inheritDoc */
+  _getEffectAutomationData(execution) {
+    const data = super._getEffectAutomationData(execution);
+    if (!this.attachesToEffect) { return data; }
+    return Object.assign(data, {
+      all: true,
+      auto: true,
+      constructionNodes: Object.fromEntries(this.#effectNodes.map(n => [n._id, foundry.utils.deepClone(n)])),
+      interactInExecution: false,
+    });
   }
 
   /**
@@ -202,10 +223,5 @@ export default class AddDocumentsAutomation
       if (rootIds.has(data._id)) { data.parentId = null; }
       return data;
     });
-  }
-
-  /** @inheritDoc */
-  async modifyExecutionEffectNodes(_execution, nodes) {
-    nodes.push(...this.#effectNodes);
   }
 }

@@ -290,6 +290,23 @@ export default function TransformationSystemMixin(Base) {
     }
 
     /** @inheritDoc */
+    async getChildrenData() {
+      const childrenData = await super.getChildrenData();
+      if (!this.isTransformation) { return childrenData; }
+      for (const s of childrenData.Item.filter(d => d.type === "species")) {
+        s.system.transformationLevel = this.transformation.level;
+        for (const stat of POOL_STATS) {
+          s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
+        }
+        s.system.competence.raw = this.transformation.competence.raw;
+        if (s.system.size.min && s.system.size.max) {
+          s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
+        }
+      }
+      return childrenData;
+    }
+
+    /** @inheritDoc */
     async getCreateOperations(data = []) {
       const operations = await super.getCreateOperations(data);
       if (!this.isTransformation) { return operations; }
@@ -301,23 +318,6 @@ export default function TransformationSystemMixin(Base) {
         ...this.#resetUpdateData,
       });
       return operations;
-    }
-
-    /** @inheritDoc */
-    async getDependentsData() {
-      const data = await super.getDependentsData();
-      if (!this.isTransformation) { return data; }
-      for (const s of data.filter(d => d.type === "species")) {
-        s.system.transformationLevel = this.transformation.level;
-        for (const stat of POOL_STATS) {
-          s.system.statDice[stat].disabled = !this.transformation.resets.has(stat);
-        }
-        s.system.competence.raw = this.transformation.competence.raw;
-        if (s.system.size.min && s.system.size.max) {
-          s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
-        }
-      }
-      return data;
     }
 
     /** @inheritDoc */

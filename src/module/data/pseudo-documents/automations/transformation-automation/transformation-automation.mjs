@@ -109,7 +109,17 @@ export default class TransformationAutomation
       });
     }
     foundry.utils.setProperty(data, "system.transformation", transformation);
-    const uuids = foundry.utils.getProperty(data, "system.dependents.globalUuids") ?? [];
-    foundry.utils.setProperty(data, "system.dependents.globalUuids", [...uuids, ...this.#selectedUuids]);
+    if (!this.#selectedUuids.length) { return; }
+    const automations = foundry.utils.getProperty(data, "system.automations") ?? {};
+    const [automationId, nodeId] = [foundry.utils.randomID(), foundry.utils.randomID()];
+    automations[automationId] = {
+      _id: automationId,
+      all: true,
+      constructionNodes: {
+        [nodeId]: { _id: nodeId, all: true, globalUuids: this.#selectedUuids, parentId: null, type: "base" },
+      },
+      type: "addDocuments",
+    };
+    foundry.utils.setProperty(data, "system.automations", automations);
   }
 }

@@ -32,7 +32,7 @@ function messageModeField(options = {}) {
  * Every system setting.
  * @returns {Record<string, Teriock.Settings.MenuEntry>}
  */
-function getMenus() {
+function getMenuSettings() {
   return {
     alternateRules: {
       groups: {
@@ -441,7 +441,7 @@ function localizeSettingMenuEntry(menuKey, menuEntry) {
  * Register all settings and setting menus.
  */
 export function registerSettings() {
-  for (const [menuKey, menuEntry] of Object.entries(getMenus())) {
+  for (const [menuKey, menuEntry] of Object.entries(getMenuSettings())) {
     localizeSettingMenuEntry(menuKey, menuEntry);
     const menuApplication = MenuFactory(menuKey, menuEntry);
     for (const groupEntry of Object.values(menuEntry.groups)) {

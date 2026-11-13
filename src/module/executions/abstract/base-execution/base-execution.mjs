@@ -247,19 +247,6 @@ export default class BaseExecution extends BaseDataModel {
   }
 
   /**
-   * Attach ConstructionNodes to a parent.
-   * @param {object[]} nodesData
-   * @param {ID<ConstructionNode>} parentId
-   * @returns {object[]}
-   */
-  _attachEffectNodes(nodesData, parentId) {
-    const ids = new Map(nodesData.map(n => [n._id, foundry.utils.randomID()]));
-    return nodesData.map(n =>
-      Object.assign(foundry.utils.deepClone(n), { _id: ids.get(n._id), parentId: ids.get(n.parentId) ?? parentId })
-    );
-  }
-
-  /**
    * Build activations to attach to this execution's chat message.
    * @returns {Promise<false|void>}
    */
@@ -289,19 +276,18 @@ export default class BaseExecution extends BaseDataModel {
     const variants = [];
     for (const toggle of toggles) {
       const name = _loc(toggle.name, { name: this.source.name });
-      variants.push({ data: { ...(await this._getEffectData(toggle)), name }, name, nodes: [], toggle });
+      variants.push({ data: { ...(await this._getEffectData(toggle)), name }, name, toggle });
     }
     if (!variants.length) { return; }
     for (const v of variants) {
       for (const automation of this._orderedAutomations.filter(a => !a.disabledToggles?.has(v.toggle.id))) {
         await automation.modifyExecutionEffectData(this, v.data);
-        await automation.modifyExecutionEffectNodes(this, v.nodes);
       }
     }
     const makeNodes = type =>
-      variants.flatMap(v => {
+      variants.map(v => {
         const data = foundry.utils.mergeObject(v.data, this._getEffectTypeData(type), { inplace: false });
-        const rootNode = {
+        return {
           _id: foundry.utils.randomID(),
           competence: { raw: foundry.utils.getProperty(data, "system.competence.raw") ?? 0 },
           data,
@@ -310,7 +296,6 @@ export default class BaseExecution extends BaseDataModel {
           parentId: null,
           setCompetence: "override",
         };
-        return [rootNode, ...this._attachEffectNodes(v.nodes, rootNode._id)];
       });
     const addActivation = async (target, type, namedLabel, label) => {
       const nodes = makeNodes(type);

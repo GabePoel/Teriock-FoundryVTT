@@ -23,6 +23,7 @@ export default class ConditionSystem
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    automationTags: { dependents: true },
     childTypes: ["species"],
     icon: TERIOCK.DISPLAY.icons.manifest.document.condition,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.condition,

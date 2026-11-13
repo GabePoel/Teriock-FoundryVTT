@@ -130,7 +130,11 @@ export default class ConstructionNode
    */
   async constructDocuments(scope = {}) {
     const relativeTo = scope.execution?.actor ?? this._selectionRelativeTo;
-    const data = ((await this.selectDocuments({ relativeTo })) || []).map(d => d.toObject());
+    const data = ((await this.selectDocuments({ relativeTo })) || []).map(d => {
+      const obj = d.toObject();
+      if (d.pack) { foundry.utils.setProperty(obj, "_stats.compendiumSource", d.uuid); }
+      return obj;
+    });
     if (!data.length) { data.push({}); }
     const competence = this.getCompetence(scope);
     for (const d of data) {
