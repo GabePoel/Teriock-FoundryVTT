@@ -197,44 +197,13 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   }
 
   /**
-   * Data for the children this gets when added to an actor for the first time.
-   * @returns {Promise<{ ActiveEffect: object[], Item: object[] }>}
-   */
-  async getChildrenData() {
-    const children = { ActiveEffect: [], Item: [] };
-    for (const a of this.automations.getTypeSync("addDocuments").filter(a => a.addsChildrenOnCreation)) {
-      for (const n of (await a.getNodes({ actor: this.actor })) || []) {
-        const record = await n.getDocumentRecord({ actor: this.actor });
-        children.ActiveEffect.push(...record.ActiveEffect);
-        children.Item.push(...record.Item);
-      }
-    }
-    return children;
-  }
-
-  /**
    * Operations for when this is added to an actor for the first time.
    * @param {object[]} [data] - Dependents data carried over from create operation.
    * @returns {Promise<DatabaseWriteOperation[]>}
    */
   async getCreateOperations(data = []) {
-    const automations = this.automations.getTypeSync("addDocuments").filter(a => a.addsChildrenOnCreation);
-    const children = await this.getChildrenData();
-    data = [...data, ...children.Item];
-    const operations = [];
-    if (data.length) { operations.push(this.parent.getCreateDependentDocumentsOperation("Item", data)); }
-    if (children.ActiveEffect.length) {
-      operations.push(this.parent.getCreateSubDocumentsOperation(children.ActiveEffect));
-    }
-    if (automations.length) {
-      operations.push(
-        this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{
-          _id: this.parent.id,
-          ...Object.fromEntries(automations.map(a => [`system.automations.${a.id}`, _del])),
-        }]),
-      );
-    }
-    return operations;
+    if (!data.length) { return []; }
+    return [this.parent.getCreateDependentDocumentsOperation("Item", data)];
   }
 
   /** @inheritDoc */

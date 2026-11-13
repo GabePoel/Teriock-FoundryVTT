@@ -22,7 +22,6 @@ export default class BaseAutomation extends MechanicPseudoDocument {
       ability: false,
       changes: false,
       consumable: false,
-      dependents: false,
       harm: false,
       interactInExecution: false,
       passive: false,

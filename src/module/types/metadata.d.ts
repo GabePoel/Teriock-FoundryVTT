@@ -31,7 +31,6 @@ declare global {
       ability: boolean;
       changes: boolean;
       consumable: boolean;
-      dependents: boolean;
       harm: boolean;
       interactInExecution: boolean;
       passive: boolean;

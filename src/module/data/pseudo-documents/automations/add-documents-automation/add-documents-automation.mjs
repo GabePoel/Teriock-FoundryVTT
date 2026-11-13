@@ -26,7 +26,7 @@ export default class AddDocumentsAutomation
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
     pseudos: { ConstructionNode: "constructionNodes" },
-    tags: { dependents: true, interactInExecution: true },
+    tags: { interactInExecution: true },
     type: "addDocuments",
   });
 
@@ -117,7 +117,7 @@ export default class AddDocumentsAutomation
   get _formPaths() {
     const paths = [];
     const system = this.getNearestDocument()?.system;
-    if (system?.makesEffectData || system?.metadata.automationTags.dependents) { paths.push("attachToEffect"); }
+    if (system?.makesEffectData || system?.metadata.tags.applicable) { paths.push("attachToEffect"); }
     if (this.attachesToEffect) { paths.push("interactInExecution"); }
     else if (!this.addsChildrenOnCreation) { paths.push(...this._triggerDisplayPaths, "target"); }
     paths.push(...["hr", "all"]);
@@ -135,7 +135,7 @@ export default class AddDocumentsAutomation
    * @returns {boolean}
    */
   get addsChildrenOnCreation() {
-    return this.attachToEffect && Boolean(this.getNearestDocument()?.system?.metadata.automationTags.dependents);
+    return this.attachToEffect && Boolean(this.getNearestDocument()?.system?.metadata.tags.applicable);
   }
 
   /**

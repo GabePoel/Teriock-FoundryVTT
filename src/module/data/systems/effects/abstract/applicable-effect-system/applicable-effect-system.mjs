@@ -28,7 +28,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    automationTags: { dependents: true, passive: true, triggered: true },
+    automationTags: { passive: true, triggered: true },
     childTypes: ["ability", "fluency", "property", "resource"],
     tags: { applicable: true, usable: true },
     visibleTypes: ["ability", "fluency", "property", "resource"],
@@ -142,6 +142,44 @@ export default class ApplicableEffectSystem
         source: this.parent,
       }),
     );
+  }
+
+  /**
+   * Data for the children this gets when added to an actor for the first time.
+   * @returns {Promise<{ ActiveEffect: object[], Item: object[] }>}
+   */
+  async getChildrenData() {
+    const children = { ActiveEffect: [], Item: [] };
+    const automations = this.automations.getTypeSync("addDocuments", { active: true }).filter(a =>
+      a.addsChildrenOnCreation
+    );
+    for (const a of automations) {
+      for (const n of (await a.getNodes({ actor: this.actor })) || []) {
+        const record = await n.getDocumentRecord({ actor: this.actor });
+        children.ActiveEffect.push(...record.ActiveEffect);
+        children.Item.push(...record.Item);
+      }
+    }
+    return children;
+  }
+
+  /** @inheritDoc */
+  async getCreateOperations(data = []) {
+    const automations = this.automations.getTypeSync("addDocuments").filter(a => a.addsChildrenOnCreation);
+    const children = await this.getChildrenData();
+    const operations = await super.getCreateOperations([...data, ...children.Item]);
+    if (children.ActiveEffect.length) {
+      operations.push(this.parent.getCreateSubDocumentsOperation(children.ActiveEffect));
+    }
+    if (automations.length) {
+      operations.push(
+        this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{
+          _id: this.parent.id,
+          ...Object.fromEntries(automations.map(a => [`system.automations.${a.id}`, _del])),
+        }]),
+      );
+    }
+    return operations;
   }
 
   /** @inheritDoc */
