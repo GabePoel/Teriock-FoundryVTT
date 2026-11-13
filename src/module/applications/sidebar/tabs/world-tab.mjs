@@ -156,7 +156,9 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
    * @param {FormDataExtended} formData
    */
   static async #onSubmit(_event, _form, formData) {
-    for (const [key, value] of Object.entries(formData.object)) { await game.settings.set("teriock", key, value); }
+    for (const [key, value] of Object.entries(foundry.utils.expandObject(formData.object))) {
+      await game.settings.set("teriock", key, value);
+    }
   }
 
   /**
@@ -187,9 +189,10 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
       ui.notifications.success(`${prefix}.removed`, { localize: true });
       return;
     }
-    const sources = (await Promise.all(Array.from(setting.value).map(uuid => fromUuid(uuid)))).filter(d =>
-      ["ActiveEffect", "Item"].includes(d?.documentName)
-    );
+    const sources = await DocumentSelector.getFromConfig({
+      ...setting.value,
+      filter: d => ["ActiveEffect", "Item"].includes(d.documentName),
+    });
     const selected = await DocumentSelector.selectMulti(sources, {
       checked: sources.map(d => d.uuid),
       icon: makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.apply, "title"),
@@ -278,7 +281,7 @@ export default class TeriockWorldTab extends HandlebarsApplicationMixin(Abstract
       disabled: !game.user.isGM,
       settings: Object.fromEntries(["terrains", "worldEffects"].map(key => {
         const { name, type } = game.settings.settings.get(`teriock.${key}`);
-        return [key, { field: type, label: name, value: Array.from(game.settings.get("teriock", key)) }];
+        return [key, { field: type, label: name, value: type.toObject(game.settings.get("teriock", key)) }];
       })),
       worldTime: game.time.calendar.format(),
       worldTitle: game.world.title,
