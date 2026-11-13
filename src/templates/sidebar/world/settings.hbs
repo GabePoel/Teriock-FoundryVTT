@@ -11,12 +11,10 @@
   <section class="standard-form">
     <h4 class="divider">{{localize settings.worldEffects.label}}</h4>
     {{#each settings.worldEffects.field.fields as |field key|}}
-      {{formGroup
+      {{formInput
         field
         disabled=@root.disabled
-        localize=true
         name=(concat "worldEffects." key)
-        stacked=true
         value=(lookup @root.settings.worldEffects.value key)
       }}
     {{/each}}

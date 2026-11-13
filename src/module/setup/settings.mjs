@@ -464,12 +464,8 @@ export function registerSettings() {
     },
     worldEffects: {
       type: new fields.SchemaField({
-        globalIdentifiers: new TypedIdentifierSetField({
-          label: "TERIOCK.PSEUDOS.Selection.FIELDS.globalIdentifiers.label",
-        }),
-        globalUuids: new fields.SetField(new fields.DocumentUUIDField(), {
-          label: "TERIOCK.PSEUDOS.Selection.FIELDS.globalUuids.label",
-        }),
+        globalIdentifiers: new TypedIdentifierSetField(),
+        globalUuids: new fields.SetField(new fields.DocumentUUIDField()),
       }),
       onChange: () => ui.world?.render(),
     },
