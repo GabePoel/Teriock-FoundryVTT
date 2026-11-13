@@ -5,8 +5,8 @@ import {
   ChangeMovementActivation,
   ChangeQuantityActivation,
   MacroActivation,
-  MoveActivation,
   RegionActivation,
+  RepositionActivation,
   RollActivation,
   SummonActivation,
   TakeActivation,
@@ -28,7 +28,7 @@ declare global {
     changeMovement: ChangeMovementActivation;
     changeQuantity: ChangeQuantityActivation;
     macro: MacroActivation;
-    move: MoveActivation;
+    move: RepositionActivation;
     region: RegionActivation;
     roll: RollActivation;
     summon: SummonActivation;

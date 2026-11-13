@@ -42,10 +42,10 @@ export default class ConditionSystem
 
   /**
    * A key corresponding to this condition.
-   * @returns {string}
+   * @returns {string|null}
    */
   get conditionKey() {
-    return foundry.utils.invertObject(objectMap(TERIOCK.STATUSES.conditions, (c) => c._id))[this.parent.id];
+    return foundry.utils.invertObject(objectMap(TERIOCK.STATUSES.conditions, (c) => c._id))[this.parent.id] ?? null;
   }
 
   /** @inheritDoc */

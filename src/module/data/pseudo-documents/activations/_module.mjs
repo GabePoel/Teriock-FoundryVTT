@@ -6,8 +6,8 @@ export { default as ChangeQuantityActivation } from "./change-quantity-activatio
 export { default as commands } from "./command-activations.mjs";
 export { default as ExpirationActivation } from "./expiration-activation/expiration-activation.mjs";
 export { default as MacroActivation } from "./macro-activation/macro-activation.mjs";
-export { default as MoveActivation } from "./move-activation/move-activation.mjs";
 export { default as RegionActivation } from "./region-activation.mjs";
+export { default as RepositionActivation } from "./reposition-activation/reposition-activation.mjs";
 export { default as RollActivation } from "./roll-activation/roll-activation.mjs";
 export { default as SummonActivation } from "./summon-activation.mjs";
 export { default as TakeActivation } from "./take-activation/take-activation.mjs";

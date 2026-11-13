@@ -2,7 +2,7 @@ import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { movementActionField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
-import { MoveActivation } from "../../activations/_module.mjs";
+import { RepositionActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
 
@@ -66,7 +66,7 @@ export default class RepositionAutomation extends mixClasses(BaseAutomation, Tri
     if (!this.randomDirection && !originToken) { return []; }
     const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
     return [
-      new MoveActivation({
+      new RepositionActivation({
         distance,
         movementAction: this.movementAction || null,
         originBarrier: this.originBarrier,

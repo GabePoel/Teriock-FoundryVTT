@@ -1,7 +1,7 @@
 import { TeriockTokenDocument } from "../../../../documents/_module.mjs";
 
-declare module "./move-activation.mjs" {
-  export default interface MoveActivation {
+declare module "./reposition-activation.mjs" {
+  export default interface RepositionActivation {
     originBarrier: boolean;
     originUuid: UUID<TeriockTokenDocument> | null;
     randomDirection: boolean;

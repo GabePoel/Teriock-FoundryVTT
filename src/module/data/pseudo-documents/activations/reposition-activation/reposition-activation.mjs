@@ -10,7 +10,7 @@ const { Ray } = foundry.canvas.geometry;
  * @import { Point } from "@common/_types.mjs";
  */
 
-export default class MoveActivation extends BaseActivation {
+export default class RepositionActivation extends BaseActivation {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { icon: TERIOCK.DISPLAY.icons.manifest.ui.move, type: "move" });
 
@@ -62,7 +62,10 @@ export default class MoveActivation extends BaseActivation {
         ray = Ray.towardsPoint({ x: t.x, y: t.y }, origin, fullDistance);
       }
       if (!ray) { continue; }
-      instructions[t.id] = { destination: canvas.tokens.getSnappedPoint(ray.B) };
+      instructions[t.id] = {
+        constrainOptions: { ignoreCost: true },
+        destination: canvas.tokens.getSnappedPoint(ray.B),
+      };
       if (this.movementAction) {
         setMovementActionData.push({ _id: t.id, movementAction: this.movementAction });
         unsetMovementActionData.push({ _id: t.id, movementAction: t.movementAction });
