@@ -125,8 +125,8 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
       sound: roll ? CONFIG.sounds.dice : null,
       speaker: TeriockChatMessage.getSpeaker(),
       system: {
-        _src: this.uuid,
         activations: (await Promise.all(results.map(r => r.getActivations()))).flat(),
+        origin: this.uuid,
         panels: await Promise.all(results.map(r => r.getPanelParts())),
       },
       type: "interactive",

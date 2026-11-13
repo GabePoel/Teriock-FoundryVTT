@@ -250,7 +250,6 @@ export default class SpeciesSystem
         width: TeriockActor.getSizeConfig(this.size.value).length,
       },
       system: {
-        _src: this.parent.uuid,
         ...Object.fromEntries(POOL_STATS.map(k => [k, { value: TERIOCK.CONST.INF }])),
         size: { value: this.size.value },
       },

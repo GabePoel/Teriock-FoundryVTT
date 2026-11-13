@@ -1,7 +1,5 @@
-import { fancifyFields, makeIconClass, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { AbstractDataMixin, AccessDataMixin } from "../../../mixins/_module.mjs";
-
-const { fields } = foundry.data;
+import { fancifyFields, makeIconClass, mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
+import { AbstractDataMixin, AccessDataMixin } from "../../mixins/_module.mjs";
 
 /**
  * @import { DialogV2 } from "@client/applications/api/_module.mjs";
@@ -18,15 +16,8 @@ export default function BaseSystemMixin(Base) {
    * @mixes AbstractData
    * @mixes AccessData
    * @mixin
-   * @implements {Teriock.Models.BaseSystemData}
    */
-  class BaseSystem
-    extends mixClasses(
-      /** @type {InitializedDataModel<T, Teriock.Models.BaseSystemData>} */ (Base),
-      AbstractDataMixin,
-      AccessDataMixin,
-    )
-  {
+  class BaseSystem extends mixClasses(Base, AbstractDataMixin, AccessDataMixin) {
     /** @inheritDoc */
     static LOCALIZATION_PREFIXES = [];
 
@@ -81,7 +72,7 @@ export default function BaseSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return { _src: new fields.DocumentUUIDField({ initial: null, nullable: true }) };
+      return Base.defineSchema === foundry.abstract.DataModel.defineSchema ? {} : super.defineSchema();
     }
 
     /**

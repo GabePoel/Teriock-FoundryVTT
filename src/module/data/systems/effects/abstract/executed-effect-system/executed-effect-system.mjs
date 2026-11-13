@@ -1,5 +1,5 @@
 import { builders } from "../../../../fields/tools/_module.mjs";
-import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
+import ApplicableEffectSystem from "../applicable-effect-system.mjs";
 
 const { fields } = foundry.data;
 

@@ -153,7 +153,6 @@ export default function AbilityEquipmentPart(Base) {
           type: getName(`equipment:${equipmentType}`),
         }),
         system: {
-          _src: this.parent.uuid,
           consumption: { enabled: true },
           description: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.description", { id: effects[0]._id }),
           identifier: `${equipmentType}-of-${this.parent.forcedIdentifier}`,

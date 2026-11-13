@@ -1,4 +1,4 @@
-import { mergeMetadata, mixClasses, omit } from "../../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../../utils/_module.mjs";
 import { BaseSystemMixin, UncommonSystemMixin } from "../mixins/_module.mjs";
 
 const { RegionBehaviorType } = foundry.data.regionBehaviors;
@@ -14,9 +14,4 @@ export default class BaseBehaviorSystem extends mixClasses(RegionBehaviorType, B
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, { documentName: "RegionBehavior", type: "base" });
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return omit(super.defineSchema(), ["_src"]);
-  }
 }

@@ -84,7 +84,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
       onClick: async (_ev, li) => {
         const message = game.messages.get(li.dataset.messageId);
-        const doc = await fromUuid(message?.system?._src);
+        const doc = await fromUuid(message?.system?.origin);
         if (!doc) { return; }
         if (doc.documentName === "JournalEntryPage") { await doc.parent.sheet.render({ force: true, pageId: doc.id }); }
         else { await doc.sheet?.render({ force: true, mode: "view" }); }
@@ -92,7 +92,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
       visible: li => {
         const message = game.messages.get(li.dataset.messageId);
         if (!message.isContentVisible) { return false; }
-        const src = message?.system?._src;
+        const src = message?.system?.origin;
         if (!src) { return false; }
         let doc;
         if (!src.startsWith("Compendium")) { doc = fromUuidSync(src); }

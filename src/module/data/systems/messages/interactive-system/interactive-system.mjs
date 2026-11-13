@@ -28,9 +28,9 @@ export default class InteractiveSystem extends BaseMessageSystem {
     return Object.assign(super.defineSchema(), {
       activations: new PseudoCollectionField(BaseActivation),
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
+      origin: new fields.DocumentUUIDField(),
       panels: new PseudoCollectionField(Panel),
       restrictVisibility: new fields.BooleanField({ initial: true }),
-      source: new fields.DocumentUUIDField(),
       tags: new fields.ArrayField(new fields.StringField()),
     });
   }
@@ -58,7 +58,7 @@ export default class InteractiveSystem extends BaseMessageSystem {
    */
   async #preparePanelContext() {
     if (!this.parent.isContentVisible) { return [TERIOCK.DISPLAY.panels.common.unknown]; }
-    const relativeTo = await fromUuid(this._src) ?? this.parent.speakerActor;
+    const relativeTo = await fromUuid(this.origin) ?? this.parent.speakerActor;
     return Promise.all(
       this.panels.map(p => p?.prepareContext({ relativeTo, secrets: relativeTo?.isOwner ?? game.user.isGM })),
     );

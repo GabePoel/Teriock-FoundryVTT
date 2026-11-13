@@ -1,9 +1,9 @@
-import { TeriockActiveEffect } from "../../../../../documents/_module.mjs";
-import { dedent, mergeMetadata, mixClasses, toClass } from "../../../../../utils/_module.mjs";
-import { ThresholdDataMixin } from "../../../../mixins/_module.mjs";
-import { StatusAutomation } from "../../../../pseudo-documents/automations/_module.mjs";
-import { AffinableSystemMixin, ExpirableSystemMixin, MetaphysicsSystemMixin } from "../../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
+import { dedent, mergeMetadata, mixClasses, toClass } from "../../../../utils/_module.mjs";
+import { ThresholdDataMixin } from "../../../mixins/_module.mjs";
+import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { AffinableSystemMixin, ExpirableSystemMixin, MetaphysicsSystemMixin } from "../../mixins/_module.mjs";
+import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 
 /**
  * Effect-specific effect data model.

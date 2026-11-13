@@ -29,10 +29,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
-      ...super.defineSchema(),
-      applyIfDeattuned: new fields.BooleanField(),
-    });
+    return Object.assign(super.defineSchema(), { applyIfDeattuned: new fields.BooleanField() });
   }
 
   /** @inheritDoc */

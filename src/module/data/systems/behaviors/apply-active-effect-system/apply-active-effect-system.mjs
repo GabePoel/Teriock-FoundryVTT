@@ -25,7 +25,7 @@ export default class ApplyActiveEffectSystem
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(ApplyActiveEffectRegionBehaviorType.defineSchema(), {
+    return Object.assign(super.defineSchema(), {
       identifiers: new TypedIdentifierSetField({
         hint: "TERIOCK.SCHEMA.EffectIdentifiers.hint",
         label: "TERIOCK.SCHEMA.EffectIdentifiers.label",

@@ -34,10 +34,10 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
       await roll.toMessage({ messageMode: game.settings.get("core", "messageMode") });
       return;
     }
-    const src = this.getNearestDocument()?.system?._src;
+    const origin = this.getNearestDocument()?.system?.origin;
     await game.teriock.commands[action](this.command, this.actors, {
       boosts: this.boosts,
-      document: src ? await fromUuid(src) : null,
+      document: origin ? await fromUuid(origin) : null,
       formula: this.formula ?? "",
     });
   }

@@ -5,9 +5,9 @@ declare module "./interactive-system.mjs" {
   export default interface InteractiveSystem {
     activations: PseudoCollection<Activation>;
     img: string;
+    origin: UUID<TeriockDocument> | null;
     panels: PseudoCollection<Panel>;
     restrictVisibility: boolean;
-    source: UUID<TeriockDocument> | null;
     tags: string[];
   }
 }

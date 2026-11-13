@@ -423,7 +423,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       origin: this.source.uuid,
       showIcon: 0,
       system: {
-        _src: this.source.uuid,
         affinities: this.affinities.active.filter(applies).map(a => a.getEffectData(this)),
         applyIfDeattuned: true,
         blocks: (await this.source.system.getPanelParts()).blocks,

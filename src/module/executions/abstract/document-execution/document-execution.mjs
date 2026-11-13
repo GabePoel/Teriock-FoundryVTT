@@ -40,7 +40,7 @@ export default class DocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   get chatData() {
-    return foundry.utils.mergeObject(super.chatData, { system: { _src: this.source.uuid } });
+    return foundry.utils.mergeObject(super.chatData, { system: { origin: this.source.uuid } });
   }
 
   /** @inheritDoc */

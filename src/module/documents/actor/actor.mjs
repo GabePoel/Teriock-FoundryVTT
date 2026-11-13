@@ -470,13 +470,13 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
       speaker: TeriockChatMessage.getSpeaker({ actor: this }),
       system: {
         activations: [],
+        origin: document?.uuid ?? this.uuid,
         panels: [{
           associations,
           icon,
           img: document?.img || TERIOCK.DISPLAY.thumbnails.manifest.core.difficultyClass,
           name: _loc(panelKey, { label }),
         }],
-        source: document?.uuid ?? this.uuid,
       },
       type: "triggered",
     };

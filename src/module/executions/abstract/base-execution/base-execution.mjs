@@ -152,8 +152,8 @@ export default class BaseExecution extends BaseDataModel {
       rolls: this.rolls,
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
-        _src: this.journalEntryPage?.uuid,
         activations: this.activations,
+        origin: this.journalEntryPage?.uuid,
         panels: this.panels.filter(Boolean).map(p => new teriock.data.pseudoDocuments.Panel(p)),
         tags: this.tags,
       },
