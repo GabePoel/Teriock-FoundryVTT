@@ -8,7 +8,7 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 
 /**
  * Dependee sheet.
- * @property {TeriockActiveEffect<"consequence"|"holiday">} document
+ * @property {TeriockActiveEffect} document
  * @mixes MechanicsSheet
  */
 export default class DependeeSheet extends ApplicableEffectSheet {

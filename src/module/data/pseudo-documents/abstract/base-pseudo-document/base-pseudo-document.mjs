@@ -25,7 +25,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
   static metadata = mergeMetadata(super.metadata, {
     documentName: "",
     icon: TERIOCK.DISPLAY.icons.manifest.ui.document,
-    tags: { embed: false, mechanic: false, panel: false, triggered: false },
+    tags: { mechanic: false },
     type: "base",
     typed: false,
   });

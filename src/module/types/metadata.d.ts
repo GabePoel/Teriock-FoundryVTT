@@ -21,31 +21,31 @@ declare global {
       unlimited: boolean;
     };
 
-    type TypeTags = { embed: boolean, panel: boolean };
+    export type TypeMetadata = ModelMetadata & { documentName: string, icon: string, type: string };
 
-    export type TypeMetadata = ModelMetadata & { documentName: string, icon: string, tags: TypeTags, type: string };
-
-    type PseudoDocumentTags = TypeTags & { mechanic: boolean, triggered: boolean };
+    type PseudoDocumentTags = { mechanic: boolean };
 
     export type PseudoDocumentMetadata = TypeMetadata & { tags: PseudoDocumentTags, typed: boolean };
 
-    type AutomationTags = PseudoDocumentTags & {
+    type AutomationTags = {
       ability: boolean;
       changes: boolean;
+      consumable: boolean;
       dependents: boolean;
       harm: boolean;
       interactInExecution: boolean;
       passive: boolean;
       species: boolean;
+      triggered: boolean;
       useInExecution: boolean;
     };
 
     export type AutomationMetadata = PseudoDocumentMetadata & {
       requires: Partial<SystemMetadataTags>;
-      tags: AutomationTags;
+      tags: PseudoDocumentTags & AutomationTags;
     };
 
-    type SystemMetadataTags = TypeTags & {
+    type SystemMetadataTags = {
       applicable: boolean;
       armament: boolean;
       attunable: boolean;
@@ -56,7 +56,6 @@ declare global {
       revealable: boolean;
       simple: boolean;
       statted: boolean;
-      text: boolean;
       transformation: boolean;
       triggerable: boolean;
       untrackable: boolean;

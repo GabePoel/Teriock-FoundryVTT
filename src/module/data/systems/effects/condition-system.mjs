@@ -1,7 +1,6 @@
 import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../utils/_module.mjs";
-import { ThresholdDataMixin } from "../../mixins/_module.mjs";
 import { TransformationSystemMixin, WikiSystemMixin } from "../mixins/_module.mjs";
-import { BaseEffectSystem } from "./abstract/_module.mjs";
+import { ApplicableEffectSystem } from "./abstract/_module.mjs";
 
 /**
  * @import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
@@ -13,28 +12,22 @@ import { BaseEffectSystem } from "./abstract/_module.mjs";
  * Relevant wiki pages:
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
- * @extends {BaseEffectSystem}
+ * @extends {ApplicableEffectSystem}
  * @mixes WikiSystem
  * @mixes TransformationSystem
- * @mixes ThresholdData
  */
 export default class ConditionSystem
-  extends mixClasses(BaseEffectSystem, WikiSystemMixin, TransformationSystemMixin, ThresholdDataMixin)
+  extends mixClasses(ApplicableEffectSystem, WikiSystemMixin, TransformationSystemMixin)
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
-    automationTags: { dependents: true },
     childTypes: ["species"],
     icon: TERIOCK.DISPLAY.icons.manifest.document.condition,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.condition,
     initialKind: "flaw",
     type: "condition",
+    visibleTypes: ["species"],
   });
-
-  /** @inheritDoc */
-  static get Execution() {
-    return teriock.executions.child.ExpirationExecution;
-  }
 
   /** @inheritDoc */
   get _embedIcons() {
@@ -58,11 +51,6 @@ export default class ConditionSystem
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, { subtitle: "" });
-  }
-
-  /** @inheritDoc */
-  get useText() {
-    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", { value: this.parent.name });
   }
 
   /** @inheritDoc */
