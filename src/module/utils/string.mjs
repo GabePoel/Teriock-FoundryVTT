@@ -75,8 +75,7 @@ export function toId(str, options = {}) {
     }
     return val.toString(16).padStart(16, "0");
   }
-  const camel = toCamelCase(str);
-  return camel.slice(0, 16).padEnd(16, "0");
+  return toCamelCase(str).slice(0, 16).padEnd(16, "0");
 }
 
 /**
@@ -86,10 +85,7 @@ export function toId(str, options = {}) {
  */
 export function dedent(str) {
   const lines = str.split("\n");
-  const minIndent = lines.filter(line => line.trim()).reduce((min, line) => {
-    const match = line.match(/^(\s*)/);
-    return Math.min(min, match ? match[1].length : 0);
-  }, Infinity);
+  const minIndent = Math.min(...lines.filter(line => line.trim()).map(line => line.search(/\S/)));
   return lines.map(line => line.slice(minIndent)).join("\n");
 }
 

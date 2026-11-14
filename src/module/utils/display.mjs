@@ -26,10 +26,8 @@ export function createElement(tagName, attributes = {}) {
  * @returns {string}
  */
 export function toClass(classes) {
-  if (classes == null || classes === "") { return ""; }
   if (typeof classes === "string") { return classes; }
-  if (typeof classes?.[Symbol.iterator] === "function") { return Array.from(classes).filter(Boolean).join(" "); }
-  return "";
+  return typeof classes?.[Symbol.iterator] === "function" ? Array.from(classes).filterJoin(" ") : "";
 }
 
 /**
@@ -39,20 +37,9 @@ export function toClass(classes) {
  */
 export function fancifyFields(displayFields) {
   return displayFields.map(f => {
-    let fancy;
-    if (typeof f === "string") { fancy = { path: f }; }
-    else { fancy = f; }
-    const {
-      button,
-      choices,
-      classes = [],
-      dataset = {},
-      editable = true,
-      label = "",
-      path = fancy.path,
-      value,
-      visible = true,
-    } = fancy;
+    const fancy = typeof f === "string" ? { path: f } : f;
+    const { button, choices, classes = [], dataset = {}, editable = true, label = "", path, value, visible = true } =
+      fancy;
     return { button, choices, classes, dataset, editable, label, path, value, visible };
   }).filter(f => f.visible);
 }
@@ -83,8 +70,8 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
  */
 export function formatGp(amount) {
   const value = String(amount);
-  if (value.startsWith("-")) { return `-${_loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: value.slice(1) })}`; }
-  return _loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value });
+  const sign = value.startsWith("-") ? "-" : "";
+  return sign + _loc("TERIOCK.SYSTEMS.Equipment.PANELS.price", { value: value.slice(sign.length) });
 }
 
 /**
@@ -115,14 +102,11 @@ export async function progressBar(arr, message, callback, options = {}) {
  */
 export function checkFieldVisibility(field, model) {
   if (game.user.isGM) { return true; }
-
-  let gmField = field;
-  while (gmField && !gmField.options?.gm) { gmField = gmField.parent; }
-  if (gmField) { return false; }
-
-  let secretField = field;
-  while (secretField && !secretField.options?.secret) { secretField = secretField.parent; }
-  if (secretField) { return model?.getNearestDocument()?.isSecret === false; }
-
+  for (let f = field; f; f = f.parent) { if (f.options?.gm) { return false; } }
+  for (let f = field; f; f = f.parent) {
+    if (f.options?.secret) {
+      return model?.getNearestDocument()?.isSecret === false;
+    }
+  }
   return true;
 }

@@ -3,18 +3,16 @@
  */
 
 /**
- * Ensure a document is not an index.
+ * Resolve anything (UUID, identifier, compendium index, or Document) that represents a Document to an actual Document.
  * @template T
  * @param {Teriock.Hierarchy.Index<T> | UUID<T> | TypedIdentifier} syncDoc
  * @returns {Promise<T|null>}
  */
 export async function resolveDocument(syncDoc) {
-  let out = null;
-  if (!syncDoc) { return out; }
-  if (typeof syncDoc === "string") { out = await fromKey(syncDoc); }
-  else if (syncDoc instanceof foundry.abstract.Document) { out = syncDoc; }
-  else { out = await foundry.utils.fromUuid(syncDoc.uuid); }
-  return out;
+  if (!syncDoc) { return null; }
+  if (typeof syncDoc === "string") { return fromKey(syncDoc); }
+  if (syncDoc instanceof foundry.abstract.Document) { return syncDoc; }
+  return foundry.utils.fromUuid(syncDoc.uuid);
 }
 
 /**
@@ -25,20 +23,12 @@ export async function resolveDocument(syncDoc) {
  * @returns {Promise<T[]>}
  */
 export async function resolveDocuments(syncDocs, options = {}) {
-  const fetched = await Promise.all(syncDocs.map(syncDoc => resolveDocument(syncDoc)));
-  let out = [...fetched.filter(d => d?.documentName !== "Folder")];
-  const folders = /** @type {TeriockFolder[]} */ fetched.filter(d => d?.documentName === "Folder");
-  if (options.expandFolders) {
-    const toAdd = await Promise.all(folders.map(d => d.getAllContents()));
-    for (const arr of toAdd) { out.push(...arr); }
-  } else { out.push(...folders); }
-  // Add rollable tables. This includes the tables that were in folders.
-  const tables = /** @type {TeriockRollTable[]} */ out.filter(d => d?.documentName === "RollTable");
-  out = out.filter(d => d?.documentName !== "RollTable");
-  if (options.expandTables) {
-    const toAdd = await Promise.all(tables.map(d => d.getAllContents()));
-    for (const arr of toAdd) { out.push(...arr); }
-  } else { out.push(...tables); }
+  let out = await Promise.all(syncDocs.map(syncDoc => resolveDocument(syncDoc)));
+  for (const [name, expand] of [["Folder", options.expandFolders], ["RollTable", options.expandTables]]) {
+    const matches = out.filter(d => d?.documentName === name);
+    out = out.filter(d => d?.documentName !== name);
+    out.push(...(expand ? (await Promise.all(matches.map(d => d.getAllContents()))).flat() : matches));
+  }
   return out.filter(Boolean);
 }
 
@@ -48,13 +38,8 @@ export async function resolveDocuments(syncDocs, options = {}) {
  * @returns {Teriock.System.ResolvedIdentifier}
  */
 export function parseIdentifier(identifier) {
-  let type = null;
-  if (identifier?.includes(":")) {
-    const parts = identifier.split(":");
-    type = parts[0];
-    identifier = parts[1];
-  }
-  return { identifier, type };
+  const [type, ident] = identifier?.includes(":") ? identifier.split(":") : [null, identifier];
+  return { identifier: ident, type };
 }
 
 /**
@@ -120,8 +105,7 @@ export async function findBestDocument(lookup, relativeTo) {
  * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
  */
 export async function fromIdentifierLocal(identifier, relativeTo) {
-  if (!relativeTo?.previewed?.getContents) { return null; }
-  if (!identifier) { return null; }
+  if (!identifier || !relativeTo?.previewed?.getContents) { return null; }
   const children = await relativeTo.previewed.getContents();
   return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;
 }
@@ -135,14 +119,10 @@ export async function fromIdentifierLocal(identifier, relativeTo) {
  */
 export async function fromQualifier(document, qualifier) {
   if (!document?.previewed?.getContents || !teriock.data.fields.FormulaField.exists(qualifier)) { return []; }
-  const children = await document.previewed.getContents();
-  const matched = [];
-  for (const child of children) {
-    const rollData = child.system?.getLocalRollData?.();
-    if (rollData === undefined) { continue; }
-    if (teriock.dice.rolls.BaseRoll.qualify(qualifier, rollData)) { matched.push(child); }
-  }
-  return matched;
+  return (await document.previewed.getContents()).filter(c => {
+    const rollData = c.system?.getLocalRollData?.();
+    return rollData && teriock.dice.rolls.BaseRoll.qualify(qualifier, rollData);
+  });
 }
 
 /**

@@ -1,4 +1,5 @@
 import { fromIdentifier } from "./document.mjs";
+import { omit } from "./object.mjs";
 
 /**
  * @import { DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -50,18 +51,13 @@ export function consolidateWriteOperations(operations) {
   /** @type {DatabaseWriteOperation[]} */
   const consolidated = [];
   for (const op of operations.filter(Boolean)) {
-    const opMini = { ...op };
-    for (const exclusion of exclusions) { delete opMini[exclusion]; }
-    const comOp = consolidated.find(co => {
-      const coMini = { ...co };
-      for (const exclusion of exclusions) { delete coMini[exclusion]; }
-      return foundry.utils.equals(opMini, coMini);
-    });
+    const opMini = omit(op, exclusions);
+    const comOp = consolidated.find(co => foundry.utils.equals(opMini, omit(co, exclusions)));
     if (comOp) {
-      comOp.ids = [...(comOp.ids ?? []), ...(op?.ids ?? [])];
-      comOp.data = [...(comOp.data ?? []), ...(op?.data ?? [])];
-      comOp.updates = mergeUpdates([...(comOp.updates ?? []), ...(op?.updates ?? [])]);
-      comOp.replacements = Object.assign(comOp.replacements ?? {}, op?.replacements ?? {});
+      comOp.ids = [...(comOp.ids ?? []), ...(op.ids ?? [])];
+      comOp.data = [...(comOp.data ?? []), ...(op.data ?? [])];
+      comOp.updates = mergeUpdates([...(comOp.updates ?? []), ...(op.updates ?? [])]);
+      comOp.replacements = Object.assign(comOp.replacements ?? {}, op.replacements ?? {});
     } else {
       consolidated.push(op);
     }
@@ -106,14 +102,9 @@ export async function getEnsureChildrenOperations(document, identifiers) {
     foundry.utils.setProperty(obj, "_stats.compendiumSource", doc.uuid);
     return { data: obj, documentName: doc.documentName };
   }));
-  const filtered = candidates.filter(Boolean);
-  const documentNames = new Set(filtered.map(v => v.documentName));
-  const operations = [];
-  for (const documentName of documentNames) {
-    const data = filtered.filter(d => d.documentName === documentName).map(d => d.data);
-    operations.push(document.getCreateChildDocumentsOperation(documentName, data));
-  }
-  return operations.filter(Boolean);
+  return [...Map.groupBy(candidates.filter(Boolean), c => c.documentName)].map(([documentName, group]) =>
+    document.getCreateChildDocumentsOperation(documentName, group.map(c => c.data))
+  ).filter(Boolean);
 }
 
 /**
@@ -125,13 +116,9 @@ export async function getEnsureChildrenOperations(document, identifiers) {
 export async function getEnsureNoChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
   const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.typedIdentifier));
-  const documentNames = new Set(toDelete.map(c => c?.documentName));
-  const operations = [];
-  for (const documentName of documentNames) {
-    const ids = toDelete.filter(c => c?.documentName === documentName).map(c => c.id);
-    operations.push(document.getDeleteChildDocumentsOperation(documentName, ids));
-  }
-  return operations.filter(Boolean);
+  return [...Map.groupBy(toDelete, c => c.documentName)].map(([documentName, group]) =>
+    document.getDeleteChildDocumentsOperation(documentName, group.map(c => c.id))
+  ).filter(Boolean);
 }
 
 /**
@@ -174,14 +161,7 @@ export async function expandDocumentDataArray(data = [], supId = null, operation
     // Expand children array and sort them into their collections.
     // TODO: Do something about `type="base"` type collisions. This is only gonna be a problem with modules though.
     if (Array.isArray(d.children) && d.children.length) {
-      const childrenByDocumentName = {};
-      for (const c of d.children) {
-        const childDocumentName = inferChildDocumentName(c);
-        if (childDocumentName) {
-          childrenByDocumentName[childDocumentName] ??= [];
-          childrenByDocumentName[childDocumentName].push(c);
-        }
-      }
+      const childrenByDocumentName = Object.groupBy(d.children, c => inferChildDocumentName(c));
 
       // Special handling by master document name.
       if (masterDocumentName === "ActiveEffect") {

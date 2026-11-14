@@ -8,8 +8,7 @@ import { createElement } from "./display.mjs";
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {
-  const classString = makeIconClass(icon, ...styles);
-  return `<i class="${classString}"></i>`;
+  return `<i class="${makeIconClass(icon, ...styles)}"></i>`;
 }
 
 /**
@@ -49,16 +48,8 @@ export function makeIconClass(icon, ...styles) {
  * @returns {string} The CSS class for the appropriate dice icon.
  */
 export function getRollIcon(rollFormula) {
-  const polyhedralDice = [4, 6, 8, 10, 12, 20];
-  const roll = new teriock.dice.rolls.BaseRoll(rollFormula, {});
-  const dice = roll.dice;
-  dice.sort((a, b) => b.faces - a.faces);
-  for (const die of dice) {
-    if (polyhedralDice.includes(die.faces)) { return `mdi-dice-d${die.faces}`; }
-    else if (die.faces === 2) { return "fa-coins"; }
-    else if (die.faces === 100) { return "fa-percent"; }
-  }
-  return "fa-dice";
+  const dice = new teriock.dice.rolls.BaseRoll(rollFormula, {}).dice.sort((a, b) => b.faces - a.faces);
+  return TERIOCK.DISPLAY.icons.manifest.dice[`d${dice[0]?.faces}`] ?? TERIOCK.DISPLAY.icons.manifest.ui.dice;
 }
 
 /**
