@@ -89,17 +89,10 @@ export default class RepositionActivation extends BaseActivation {
    * @returns {Point|null}
    */
   get origin() {
-    let x = null;
-    let y = null;
     const token = this.originToken;
-    if (token) {
-      x = token.x;
-      y = token.y;
-    }
-    if (typeof this.x === "number") { x = this.x; }
-    if (typeof this.y === "number") { y = this.y; }
-    if (typeof x === "number" && typeof y === "number") { return { x, y }; }
-    return null;
+    const x = this.x ?? token?.x;
+    const y = this.y ?? token?.y;
+    return typeof x === "number" && typeof y === "number" ? { x, y } : null;
   }
 
   /**

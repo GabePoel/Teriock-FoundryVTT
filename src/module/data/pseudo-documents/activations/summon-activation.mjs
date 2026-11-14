@@ -80,13 +80,8 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
    */
   #determineActorStates() {
     for (const n of this.#nodes) {
-      if (n.actor.inCompendium) {
-        const summon = this.#findBestSummon(n.actor.uuid);
-        if (!summon) { n.state = "packed"; }
-        else if (summon.isOwner) { n.state = "ready"; }
-        else { n.state = "unowned"; }
-      } else if (n.actor.isOwner) { n.state = "ready"; }
-      else { n.state = "unowned"; }
+      const actor = n.actor.inCompendium ? this.#findBestSummon(n.actor.uuid) : n.actor;
+      n.state = !actor ? "packed" : actor.isOwner ? "ready" : "unowned";
     }
   }
 
@@ -97,10 +92,7 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
    */
   #findBestSummon(uuid) {
     const candidates = this.#findSummons(uuid);
-    const owned = candidates.find(a => a.isOwner);
-    if (owned) { return owned; }
-    else if (candidates.length) { return candidates[0]; }
-    return null;
+    return candidates.find(a => a.isOwner) ?? candidates[0] ?? null;
   }
 
   /**
@@ -177,11 +169,8 @@ export default class SummonActivation extends mixClasses(BaseActivation, Selecti
     const srcActors = ((await this.selectDocuments()) || []).map(
       a => (a.inCompendium ? this.#findBestSummon(a.uuid) ?? a : a)
     ).filter(Boolean);
-    const needsSummonFolder = srcActors.some(a => a?.inCompendium) && !this.#summonsFolder;
-    if (needsSummonFolder) { await this.#createSummonsFolder(); }
-    this.#nodes = srcActors.map(a => {
-      return { actor: a, state: "unknown" };
-    });
+    if (srcActors.some(a => a.inCompendium) && !this.#summonsFolder) { await this.#createSummonsFolder(); }
+    this.#nodes = srcActors.map(a => ({ actor: a, state: "unknown" }));
     this.#determineActorStates();
     await this.#claimOwnership();
     await this.#import();
