@@ -24,7 +24,6 @@ export default class BaseItemSystem
     disabledPath: "system.disabled",
     documentName: "Item",
     preserveOnRefresh: ["effects", "system.disabled", "system._dep", ...super.metadata.preserveOnRefresh],
-    visibleTypes: ["ability", "fluency", "resource"],
   });
 
   /** @inheritDoc */

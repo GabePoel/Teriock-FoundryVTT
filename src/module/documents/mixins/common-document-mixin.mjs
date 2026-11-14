@@ -159,8 +159,8 @@ export default function CommonDocumentMixin(Base) {
      * @returns {boolean}
      */
     static validateChildType(parent, child, operation = {}) {
-      if (!parent?.metadata?.childTypes) { return true; }
-      const out = parent.metadata.childTypes.includes(child?.type);
+      if (!parent?.system?.childTypes) { return true; }
+      const out = parent.system.childTypes.includes(child?.type);
       if (!out && operation.notifyOnFailure) {
         ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
           format: {
@@ -230,14 +230,6 @@ export default function CommonDocumentMixin(Base) {
      */
     get previewedTypes() {
       return this.previewed.documentsByType;
-    }
-
-    /**
-     * Types that can be shown on this document's sheet.
-     * @returns {Teriock.Documents.CommonType[]}
-     */
-    get visibleTypes() {
-      return this.system.visibleTypes;
     }
 
     /** @inheritDoc */

@@ -4,11 +4,11 @@ import { BaseActorSystem } from "./abstract/_module.mjs";
 export default class InventorySystem extends BaseActorSystem {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    associationTypes: ["equipment"],
     childTypes: ["base", "consequence", "equipment"],
     icon: TERIOCK.DISPLAY.icons.manifest.document.inventory,
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.inventory,
     type: "inventory",
-    visibleTypes: ["equipment"],
   });
 
   /**

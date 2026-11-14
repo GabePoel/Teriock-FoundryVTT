@@ -17,28 +17,6 @@ const { SearchFilter } = foundry.applications.ux;
  */
 export default class BasePreviewModel extends BaseDataModel {
   /**
-   * Resolve a preview's add button config into the render context stored on the model.
-   * @param {Teriock.Previews.PreviewAddButton} [add]
-   * @param {TeriockDocumentSheet} app - The sheet the preview belongs to.
-   * @returns {Teriock.Previews.PreviewAddButtonContext | null}
-   */
-  static resolveAddButton(add, app) {
-    if (!add) { return null; }
-    const resolved = typeof add.types === "function" ? add.types(app) : add.types;
-    const { childTypes } = app.document.metadata;
-    const types = (resolved ?? (add.type ? [add.type] : []))?.filter(t => t && (!childTypes || childTypes.includes(t)))
-      ?? [];
-    if (!types.length) { return null; }
-    const dataType = types.includes(add.type) ? add.type : (types.length === 1 ? types[0] : null);
-    const tooltip = add.label
-      ? _loc(add.label)
-      : dataType
-      ? _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: getTypeLabel(dataType) ?? dataType })
-      : _loc("TERIOCK.SHEETS.Common.PREVIEW.addChildDocument");
-    return { dataType, dataTypes: types.join(","), tooltip };
-  }
-
-  /**
    * The sort option selected by default.
    * @returns {string}
    */
@@ -131,6 +109,28 @@ export default class BasePreviewModel extends BaseDataModel {
         sort: new fields.BooleanField(),
       }),
     });
+  }
+
+  /**
+   * Get the render context for a preview's add button.
+   * @param {Teriock.Previews.PreviewAddButton} [add]
+   * @param {TeriockDocumentSheet} app - The sheet the preview belongs to.
+   * @returns {Teriock.Previews.PreviewAddButtonContext | null}
+   */
+  static resolveAddButton(add, app) {
+    if (!add) { return null; }
+    const resolved = typeof add.types === "function" ? add.types(app) : add.types;
+    const { childTypes } = app.document.system;
+    const types = (resolved ?? (add.type ? [add.type] : []))?.filter(t => t && (!childTypes || childTypes.includes(t)))
+      ?? [];
+    if (!types.length) { return null; }
+    const dataType = types.includes(add.type) ? add.type : (types.length === 1 ? types[0] : null);
+    const tooltip = add.label
+      ? _loc(add.label)
+      : dataType
+      ? _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: getTypeLabel(dataType) ?? dataType })
+      : _loc("TERIOCK.SHEETS.Common.PREVIEW.addChildDocument");
+    return { dataType, dataTypes: types.join(","), tooltip };
   }
 
   constructor(...args) {

@@ -55,13 +55,10 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     return this.automations.getTypeSync("childChange", { active: true, isPassive: true }).flatMap(a => a.getChanges());
   }
 
-  /**
-   * Whether this effect is a reference and not "real".
-   * @returns {boolean}
-   */
-  get isReference() {
-    return this.parent.allSups.some(sup => sup.type === "ability" && sup.system?.maneuver !== "passive")
-      || super.isReference;
+  /** @inheritDoc */
+  get childTypes() {
+    if (this.actor) { return super.childTypes; }
+    return super.childTypes.filter(t => getSystemClass(t).metadata.documentName === "ActiveEffect");
   }
 
   /**
@@ -86,17 +83,12 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   }
 
   /** @inheritDoc */
-  get visibleTypes() {
-    if (this.actor) { return super.visibleTypes; }
-    return super.visibleTypes.filter(t => getSystemClass(t).metadata.documentName === "ActiveEffect");
-  }
-
-  /** @inheritDoc */
   _getTipSuppressions() {
     return Object.assign(super._getTipSuppressions(), {
       dampened: this._isSuppressedDampened.bind(this),
       deattuned: this._isSuppressedDeattuned.bind(this),
       parentDestroyed: this._isSuppressedDestroyed.bind(this),
+      parentNotPassive: this._isSuppressedNotPassive.bind(this),
       parentStashed: this._isSuppressedStashed.bind(this),
       parentUnequipped: this._isSuppressedUnequipped.bind(this),
       shattered: this._isSuppressedShattered.bind(this),
@@ -132,6 +124,14 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
     return ((this.parent.elder?.type !== "equipment"
       || (this.parent.elder?.type === "equipment" && this.parent.elder.system._isSuppressedConsumed()))
       && super._isSuppressedElder());
+  }
+
+  /**
+   * If this is suppressed due to its parent being a non-passive ability.
+   * @returns {boolean}
+   */
+  _isSuppressedNotPassive() {
+    return this.parent.elder?.type === "ability" && this.parent.elder.system?.isPassive === false;
   }
 
   /**

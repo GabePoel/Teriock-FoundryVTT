@@ -32,23 +32,6 @@ export default class ConsequenceSystem extends mixClasses(ExecutedEffectSystem, 
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.consequence,
     initialKind: "other",
     type: "consequence",
-    visibleTypes: [
-      "ability",
-      "backstory",
-      "blessing",
-      "body",
-      "curse",
-      "equipment",
-      "familiar",
-      "fluency",
-      "pact",
-      "power",
-      "rank",
-      "resource",
-      "scar",
-      "sorcery",
-      "species",
-    ],
   });
 
   /** @inheritDoc */

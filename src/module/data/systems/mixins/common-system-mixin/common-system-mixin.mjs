@@ -51,7 +51,6 @@ export default function CommonSystemMixin(Base) {
       childTypes: [],
       importable: false,
       preserveOnRefresh: ["system.identifier", ...super.metadata.preserveOnRefresh],
-      visibleTypes: [],
     });
 
     /** @inheritDoc */
@@ -125,6 +124,14 @@ export default function CommonSystemMixin(Base) {
       return this.parent.master?.fullName || this.parent.master?.name || "";
     }
 
+    /**
+     * The types of children this document can have.
+     * @returns {Teriock.Documents.CommonType[]}
+     */
+    get childTypes() {
+      return this.metadata.childTypes;
+    }
+
     /** @returns {Partial<Teriock.Embeds.EmbedParts>} */
     get embedParts() {
       return {
@@ -182,14 +189,6 @@ export default function CommonSystemMixin(Base) {
     }
 
     /**
-     * Special handling for the types of this document's children that are visible.
-     * @returns {Teriock.Documents.CommonType[]}
-     */
-    get visibleTypes() {
-      return this.metadata.visibleTypes;
-    }
-
-    /**
      * A context menu entry which lets you open this as a panel.
      * @returns {ContextMenuEntry}
      */
@@ -242,7 +241,7 @@ export default function CommonSystemMixin(Base) {
         ? (await this.parent.children.getContents())
         : await this.parent.previewed.getContents();
       const typeMap = Object.groupBy(children, c => c.type);
-      for (const type of this.metadata.visibleTypes) {
+      for (const type of this.metadata.associationTypes ?? this.childTypes) {
         if (typeMap[type]) {
           const model = getSystemClass(type);
           let docs = typeMap[type];

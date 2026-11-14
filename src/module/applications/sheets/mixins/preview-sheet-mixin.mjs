@@ -21,7 +21,7 @@ export default function PreviewSheetMixin(Base) {
      * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
      */
     static async #previewGroupChildren() {
-      const types = this.document.visibleTypes;
+      const types = this.document.system.childTypes;
       const children = await this.document.previewed.getContents();
       /** @type {Record<string, Teriock.Previews.PreviewGroup>} */
       const groupRecord = Object.fromEntries(
@@ -48,7 +48,7 @@ export default function PreviewSheetMixin(Base) {
      */
     static PREVIEWS = {
       children: {
-        addButton: { types: app => app.document.visibleTypes },
+        addButton: { types: app => app.document.system.childTypes },
         data: { display: { gapless: true, size: "small" } },
         groups: this.#previewGroupChildren,
       },

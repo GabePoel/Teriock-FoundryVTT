@@ -60,7 +60,6 @@ export default class SpeciesSystem
     importable: true,
     initialCompetence: 1,
     type: "species",
-    visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
   });
 
   /** @inheritDoc */

@@ -41,7 +41,6 @@ export default function ArmamentSystemMixin(Base) {
       automationTags: { triggered: true },
       childTypes: ["ability", "fluency", "property", "resource", "imbuement"],
       tags: { armament: true },
-      visibleTypes: ["ability", "fluency", "property", "resource", "imbuement"],
     });
 
     /** @inheritDoc */

@@ -87,7 +87,6 @@ export default class EquipmentSystem
     ],
     tags: { usable: true },
     type: "equipment",
-    visibleTypes: ["equipment", ...super.metadata.visibleTypes],
   });
 
   /** @inheritDoc */

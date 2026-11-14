@@ -26,7 +26,6 @@ export default class ConditionSystem
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.condition,
     initialKind: "flaw",
     type: "condition",
-    visibleTypes: ["species"],
   });
 
   /** @inheritDoc */

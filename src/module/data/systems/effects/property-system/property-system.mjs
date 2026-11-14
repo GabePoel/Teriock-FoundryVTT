@@ -49,7 +49,6 @@ export default class PropertySystem
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "property",
-    visibleTypes: ["property"],
   });
 
   /** @inheritDoc */

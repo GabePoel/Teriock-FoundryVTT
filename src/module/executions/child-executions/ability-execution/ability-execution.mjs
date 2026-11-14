@@ -418,10 +418,10 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     const applies = m => !m.disabledToggles.has(toggle.id);
     return {
       changes: [],
+      children: this.source.subs.map(s => s.toObject()),
       duration: { expiry: null, seconds: await this.#getDuration() },
       img: this.source.img,
       origin: this.source.uuid,
-      showIcon: 0,
       system: {
         affinities: this.affinities.active.filter(applies).map(a => a.getEffectData(this)),
         applyIfDeattuned: true,
@@ -438,14 +438,6 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         sustained: this.source.system.sustained,
       },
     };
-  }
-
-  /** @inheritDoc */
-  _getEffectTypeData(type) {
-    const data = super._getEffectTypeData(type);
-    data.children = type === "consequence" ? this.source.subs.map(s => s.toObject()) : [];
-    if (type === "consequence") { data.showIcon = 1; }
-    return data;
   }
 
   /** @inheritDoc */

@@ -60,6 +60,18 @@ export default class BaseActorSystem
 
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
+    associationTypes: [
+      "backstory",
+      "blessing",
+      "curse",
+      "familiar",
+      "pact",
+      "power",
+      "rank",
+      "scar",
+      "sorcery",
+      "species",
+    ],
     childTypes: [
       "archetype",
       "attunement",
@@ -87,7 +99,6 @@ export default class BaseActorSystem
     ],
     documentName: "Actor",
     preserveOnRefresh: ["effects", "items", ...super.metadata.preserveOnRefresh],
-    visibleTypes: ["backstory", "blessing", "curse", "familiar", "pact", "power", "rank", "scar", "sorcery", "species"],
   });
 
   /** @inheritDoc */

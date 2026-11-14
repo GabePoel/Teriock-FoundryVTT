@@ -8,7 +8,7 @@ import { EquipmentWeightUnitModel, StorageMaxWeightUnitModel } from "../../../..
 const { fields } = foundry.data;
 
 /**
- * @import { DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
+ * @import { DatabaseUpdateOperation } from "@common/abstract/_types.mjs";
  */
 
 /**
@@ -100,23 +100,6 @@ export default function EquipmentStoragePart(Base) {
       };
     }
 
-    /**
-     * Reject a document that can't hold this equipment.
-     * @param {TeriockActiveEffect|TeriockActor|TeriockItem} elder
-     * @param {DatabaseWriteOperation & Teriock.System._Operation} operation
-     * @returns {boolean}
-     */
-    #validateStorage(elder, operation) {
-      if (elder?.type !== "equipment" || elder.system.storage.enabled) { return true; }
-      if (operation.notifyOnFailure) {
-        ui.notifications.error("TERIOCK.SHEETS.Equipment.NOTIFICATIONS.notStorage", {
-          format: { name: elder.name },
-          localize: true,
-        });
-      }
-      return false;
-    }
-
     /** @inheritDoc */
     get _displayToggles() {
       return ["system.storage.enabled", ...super._displayToggles];
@@ -138,8 +121,8 @@ export default function EquipmentStoragePart(Base) {
     }
 
     /** @inheritDoc */
-    get visibleTypes() {
-      return this.storage.enabled ? super.visibleTypes : super.visibleTypes.filter(t => t !== "equipment");
+    get childTypes() {
+      return this.storage.enabled ? super.childTypes : super.childTypes.filter(t => t !== "equipment");
     }
 
     /** @inheritDoc */
@@ -151,25 +134,11 @@ export default function EquipmentStoragePart(Base) {
     }
 
     /** @inheritDoc */
-    _onUpdate(changed, options, userId) {
-      super._onUpdate(changed, options, userId);
-      if (this.parent.checkEditor(userId)) {
-        if (!this.storage.enabled && this.parent.previewedTypes.equipment.length > 0) {
-          const updateData = this.parent.previewedTypes.equipment.map(e => {
-            return { _id: e._id, "system._sup": null };
-          });
-          this.parent.updateChildDocuments("Item", updateData);
-        }
-      }
-    }
-
-    /** @inheritDoc */
     async _preCreate(data, options, user) {
       const yes = await super._preCreate(data, options, user);
       if (yes === false) { return false; }
 
       const elder = await this.parent.getElder();
-      if (!this.#validateStorage(elder, options)) { return false; }
       if (options.interactive) {
         // Merging into a stack already present replaces this creation, so nothing new is written.
         const target = await this.#findStackTarget(elder);
@@ -191,7 +160,6 @@ export default function EquipmentStoragePart(Base) {
       const elder = _sup
         ? await this.parent.fetchFromUuid(this.parent.supCollection?.get(_sup)?.uuid)
         : this.parent.actor;
-      if (!this.#validateStorage(elder, options)) { return false; }
       if (options.interactive) {
         // Merging into a stack at the destination replaces the move, so original equipment is deleted.
         const target = await this.#findStackTarget(elder);

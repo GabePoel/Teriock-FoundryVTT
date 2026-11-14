@@ -74,9 +74,9 @@ declare global {
     };
 
     export type CommonSystemMetadata = SystemMetadata & {
+      associationTypes?: Teriock.Documents.ChildType[];
       childTypes: Teriock.Documents.ChildType[];
       importable: boolean;
-      visibleTypes: Teriock.Documents.ChildType[];
     };
 
     export type CharacterActorSystemMetadata = CommonSystemMetadata & { defaultChildIdentifiers: TypedIdentifier[] };

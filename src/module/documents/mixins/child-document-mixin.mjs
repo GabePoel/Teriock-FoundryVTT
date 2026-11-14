@@ -58,6 +58,15 @@ export default function ChildDocumentMixin(Base) {
     }
 
     /** @inheritDoc */
+    _onUpdate(changed, options, userId) {
+      super._onUpdate(changed, options, userId);
+      const { childTypes } = this.system;
+      if (!this.checkEditor(userId) || !childTypes) { return; }
+      const invalid = this.subs.filter(s => !childTypes.includes(s.type));
+      if (invalid.length) { this.deleteChildDocuments(this.documentName, invalid.map(s => s._id)); }
+    }
+
+    /** @inheritDoc */
     prepareBaseData() {
       this._clearData();
       super.prepareBaseData();

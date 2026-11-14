@@ -76,7 +76,6 @@ export default class AbilitySystem
     sortPaths: ["system.kindIndex", "name", "_stats.createdTime"],
     tags: { usable: true },
     type: "ability",
-    visibleTypes: ["ability", "fluency", "resource"],
   });
 
   /** @inheritDoc */

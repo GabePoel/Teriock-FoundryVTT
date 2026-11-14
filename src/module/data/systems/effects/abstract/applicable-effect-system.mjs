@@ -31,7 +31,6 @@ export default class ApplicableEffectSystem
     automationTags: { passive: true, triggered: true },
     childTypes: ["ability", "fluency", "property", "resource"],
     tags: { applicable: true, usable: true },
-    visibleTypes: ["ability", "fluency", "property", "resource"],
   });
 
   /** @inheritDoc */

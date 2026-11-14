@@ -17,7 +17,6 @@ export default class HolidaySystem extends mixClasses(ApplicableEffectSystem, Tr
     initialKind: "echo",
     kinds: _replace(TERIOCK.CONFIG.effect.kind),
     type: "holiday",
-    visibleTypes: ConsequenceSystem.metadata.visibleTypes,
   });
 
   /** @inheritDoc */
