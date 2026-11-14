@@ -98,11 +98,12 @@ export default function PreviewSheetMixin(Base) {
     }
 
     /**
-     * Refresh each preview's groups.
+     * Refresh each preview.
      * @returns {Promise<void>}
      */
     async _preparePreviewContext() {
       for (const [id, config] of Object.entries(this.constructor.PREVIEWS)) {
+        this.#previews[id].add = BasePreviewModel.resolveAddButton(config.addButton, this);
         this.#previews[id].groups = await config.groups.call(this);
       }
     }

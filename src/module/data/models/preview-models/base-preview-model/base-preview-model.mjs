@@ -22,7 +22,7 @@ export default class BasePreviewModel extends BaseDataModel {
    * @param {TeriockDocumentSheet} app - The sheet the preview belongs to.
    * @returns {Teriock.Previews.PreviewAddButtonContext | null}
    */
-  static #resolveAddButton(add, app) {
+  static resolveAddButton(add, app) {
     if (!add) { return null; }
     const resolved = typeof add.types === "function" ? add.types(app) : add.types;
     const { childTypes } = app.document.metadata;
@@ -69,9 +69,7 @@ export default class BasePreviewModel extends BaseDataModel {
    */
   static create(id, config, app) {
     const Model = config.model ?? this;
-    const preview = new Model({ ...config.data, id }, { parent: app.document });
-    preview.add = BasePreviewModel.#resolveAddButton(config.addButton, app);
-    return preview;
+    return new Model({ ...config.data, id }, { parent: app.document });
   }
 
   /**
@@ -177,7 +175,7 @@ export default class BasePreviewModel extends BaseDataModel {
   }
 
   /**
-   * The add button, resolved once at creation by {@link create}, or `null` when the preview has no add button.
+   * The add button, set by the sheet each render, or `null` when the preview has no add button.
    * @type {Teriock.Previews.PreviewAddButtonContext | null}
    */
   add = null;
