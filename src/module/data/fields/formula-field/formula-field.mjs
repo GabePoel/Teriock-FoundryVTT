@@ -25,7 +25,7 @@ export default class FormulaField extends StringField {
     const roll = new BaseRoll(formula);
     for (const term of roll._allTerms) {
       const existing = new Set(term.flavor.toLowerCase().split(" ").map(type => type.trim()).filter(Boolean));
-      term.options.flavor = Array.from(fn(existing, types)).filter(Boolean).join(" ");
+      term.options.flavor = Array.from(fn(existing, types)).filterJoin(" ");
     }
     return roll.formula;
   }

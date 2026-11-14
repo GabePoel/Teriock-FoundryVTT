@@ -14,7 +14,7 @@ import uiHelpers from "./ui-helpers.mjs";
  * @returns {string}
  */
 function makeElementId(options, ...parts) {
-  return [options.data?.root?.appId, ...parts].filter(Boolean).join("-").replace(/\s+/g, "-");
+  return [options.data?.root?.appId, ...parts].filterJoin("-").replace(/\s+/g, "-");
 }
 
 /**
@@ -202,7 +202,7 @@ function formHover(model, options = { hash: {} }) {
   if (selected === null) { cssClasses.push("details-muted"); }
   const id = options.hash.id ?? makeElementId(options, action, paths || dataset.path);
   return new Handlebars.SafeString(`
-    <button type="button" id="${id}" class="${cssClasses.filter(Boolean).join(" ")}" ${dataAttrs}>
+    <button type="button" id="${id}" class="${cssClasses.filterJoin(" ")}" ${dataAttrs}>
       <span class="selected">${selectedValue}</span>
       <span class="unselected">${unselectedValue}</span>
     </button>

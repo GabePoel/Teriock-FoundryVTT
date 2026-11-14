@@ -33,7 +33,7 @@ export default function PanelDataMixin(Base) {
      */
     async _embedPanel(config, options = {}) {
       const panel = await this.toPanel({
-        _id: toId([options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filter(Boolean).join("-"), {
+        _id: toId([options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filterJoin("-"), {
           hash: true,
         }),
       });

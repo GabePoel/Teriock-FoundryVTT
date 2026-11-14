@@ -73,7 +73,7 @@ export default class BasePseudoDocument extends mixClasses(BaseDataModel, Pseudo
     if (!parent) { throw new Error("Pseudo-documents must have parents"); }
     parent = parent instanceof foundry.abstract.TypeDataModel ? parent.parent : parent;
     const collectionKey = parent.metadata?.pseudos?.[this.documentName];
-    const fieldPath = [parent.localPath, collectionKey].filter(Boolean).join(".");
+    const fieldPath = [parent.localPath, collectionKey].filterJoin(".");
     return { collectionKey, document: parent.getNearestDocument(), fieldPath, parent };
   }
 

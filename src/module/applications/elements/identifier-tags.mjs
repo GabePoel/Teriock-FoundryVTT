@@ -68,7 +68,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
     for (const type of value) {
       if (!isKebabCase(type)) { throw new Error(`"${type}" is not a valid identifier type.`); }
     }
-    this.setAttribute("types", value.map(v => v.trim()).filter(Boolean).join(","));
+    this.setAttribute("types", value.map(v => v.trim()).filterJoin(","));
   }
 
   /** @inheritDoc */
