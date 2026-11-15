@@ -115,7 +115,7 @@ export async function getEnsureChildrenOperations(document, identifiers) {
  */
 export async function getEnsureNoChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
-  const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.typedIdentifier));
+  const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.identifier));
   return [...Map.groupBy(toDelete, c => c.documentName)].map(([documentName, group]) =>
     document.getDeleteChildDocumentsOperation(documentName, group.map(c => c.id))
   ).filter(Boolean);

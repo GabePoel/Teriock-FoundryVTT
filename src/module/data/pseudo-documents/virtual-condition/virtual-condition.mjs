@@ -109,7 +109,7 @@ export default class VirtualCondition
       color: this.color,
       draggable: false,
       icons: this._embedIcons,
-      identifier: this.typedIdentifier,
+      identifier: this.identifier,
       img: this.img,
       openable: true,
       subtitle: _loc("TYPES.ActiveEffect.condition"),
@@ -118,6 +118,14 @@ export default class VirtualCondition
       usable: Boolean(this.statusEffect),
       uuid: this.uuid,
     };
+  }
+
+  /**
+   * The identifier for this condition.
+   * @returns {TypedIdentifier<TeriockActiveEffect<"condition">>}
+   */
+  get identifier() {
+    return `condition:${this.status}`;
   }
 
   /**
@@ -164,14 +172,6 @@ export default class VirtualCondition
     return this.actor?.effects.get(this.id) ?? null;
   }
 
-  /**
-   * The identifier for this condition.
-   * @returns {TypedIdentifier<TeriockActiveEffect<"condition">>}
-   */
-  get typedIdentifier() {
-    return `condition:${this.status}`;
-  }
-
   /** @inheritDoc */
   async _use(data = {}, options = {}) {
     if (!this.statusEffect) { return; }
@@ -192,7 +192,7 @@ export default class VirtualCondition
    * @returns {Promise<TeriockActiveEffect<"condition">>}
    */
   async getCondition() {
-    return this.statusEffect ?? await teriock.fromIdentifier(this.typedIdentifier);
+    return this.statusEffect ?? await teriock.fromIdentifier(this.identifier);
   }
 
   /** @inheritDoc */

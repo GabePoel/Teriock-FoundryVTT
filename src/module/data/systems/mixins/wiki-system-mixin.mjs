@@ -23,7 +23,7 @@ export default function WikiSystemMixin(Base) {
      * @returns {TypedIdentifier|null}
      */
     get wikiIdentifier() {
-      return this.parent.typedIdentifier;
+      return this.parent.identifier;
     }
 
     /**

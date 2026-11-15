@@ -21,7 +21,7 @@ export default class CharacterActorSystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    const existing = [...this.parent.items, ...this.parent.effects].map(d => d.typedIdentifier);
+    const existing = [...this.parent.items, ...this.parent.effects].map(d => d.identifier);
     const docs = await Promise.all(
       this.constructor.metadata.defaultChildIdentifiers.filter(identifier => !existing.includes(identifier)).map(
         identifier => fromIdentifier(identifier)

@@ -67,7 +67,7 @@ export default function AbilityInfoPart(Base) {
      * @returns {boolean}
      */
     get isBasic() {
-      return this.basic && this.parent.parent?.typedIdentifier === "power:basic-abilities";
+      return this.basic && this.parent.parent?.identifier === "power:basic-abilities";
     }
 
     /** @inheritDoc */

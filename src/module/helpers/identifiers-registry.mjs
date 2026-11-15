@@ -245,8 +245,8 @@ export default class IdentifiersRegistry {
     const journalEntry = await fromUuid(uuid);
     if (!journalEntry) { return; }
     for (const p of journalEntry.pages) {
-      const typedIdentifier = p?.typedIdentifier;
-      if (typedIdentifier) { this.#track(typedIdentifier, p?.uuid, { img: p?.img, name: p?.name }); }
+      const identifier = p?.identifier;
+      if (identifier) { this.#track(identifier, p?.uuid, { img: p?.img, name: p?.name }); }
     }
   }
 
@@ -457,7 +457,7 @@ export default class IdentifiersRegistry {
   trackDocument(document) {
     if (!this.#primaryDocumentNames.has(document.documentName)) { return; }
     const uuid = document.uuid;
-    const identifier = document.typedIdentifier;
+    const identifier = document.identifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
     const field = TYPE_FIELDS[document.type];
     const isType = Boolean(field) && document.system?.[field] === identifier;
@@ -490,7 +490,7 @@ export default class IdentifiersRegistry {
   untrackDocument(document) {
     if (!this.#primaryDocumentNames.has(document.documentName)) { return; }
     const uuid = document.uuid;
-    const identifier = document.typedIdentifier;
+    const identifier = document.identifier;
     if (!uuid || !identifier) { return; }
     this.untrack(identifier, uuid);
   }

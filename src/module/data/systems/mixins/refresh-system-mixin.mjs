@@ -84,10 +84,10 @@ export default function RefreshSystemMixin(Base) {
           ),
         );
       }
-      if (this.parent.typedIdentifier) {
+      if (this.parent.identifier) {
         promises.push(
           this._formatRefreshPromise(
-            fromIdentifier(this.parent.typedIdentifier),
+            fromIdentifier(this.parent.identifier),
             "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.label",
           ),
         );
@@ -176,8 +176,7 @@ export default function RefreshSystemMixin(Base) {
         const children = await this.#refreshChildren(this.parent, fullOverride && this.metadata.tags.hierarchy);
         for (const child of children) {
           if (deletedIds.has(child.id) || !child.system._refreshRecursively) { continue; }
-          const childSource = await fromUuid(child._stats.compendiumSource)
-            ?? await fromIdentifier(child.typedIdentifier);
+          const childSource = await fromUuid(child._stats.compendiumSource) ?? await fromIdentifier(child.identifier);
           operations.push(
             ...await child.system._refreshOperations(childSource, {
               createChildren: recursive && createChildren,

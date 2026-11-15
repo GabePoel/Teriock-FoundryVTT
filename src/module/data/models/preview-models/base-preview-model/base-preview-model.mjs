@@ -372,7 +372,7 @@ export default class BasePreviewModel extends BaseDataModel {
     if (this.filters.duplicates === true) {
       const identifierCounts = {};
       for (const document of documents) {
-        const identifier = document?.typedIdentifier;
+        const identifier = document?.identifier;
         if (identifier) {
           identifierCounts[identifier] = (identifierCounts[identifier] || 0) + 1;
           if (identifierCounts[identifier] > 1) { duplicateIdentifiers.add(identifier); }
@@ -384,10 +384,10 @@ export default class BasePreviewModel extends BaseDataModel {
       let duplicateFilter = true;
       if (this.filters.duplicates === true) {
         // Show only the duplicate documents.
-        duplicateFilter = duplicateIdentifiers.has(document?.typedIdentifier);
+        duplicateFilter = duplicateIdentifiers.has(document?.identifier);
       } else if (this.filters.duplicates === false) {
         // Show only the first instance of any duplicate document.
-        const identifier = document?.typedIdentifier;
+        const identifier = document?.identifier;
         if (identifier) {
           duplicateFilter = !knownIdentifiers.has(identifier);
           knownIdentifiers.add(identifier);

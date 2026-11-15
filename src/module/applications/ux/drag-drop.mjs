@@ -43,7 +43,7 @@ export default class TeriockDragDrop extends DragDrop {
    * @param {TeriockDocument} document
    */
   static #setDocumentDragData(event, dragData, document) {
-    dragData.identifier ??= document?.typedIdentifier;
+    if (document?.documentMetadata?.rules) { dragData.identifier ??= document.identifier; }
     TeriockDragDrop.#payload.document ??= document;
     TeriockDragDrop.#payload.identifier = dragData.identifier;
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));

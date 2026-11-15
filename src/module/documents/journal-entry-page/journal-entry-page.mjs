@@ -31,6 +31,18 @@ export default class TeriockJournalEntryPage
   revealedSubpage = false;
 
   /**
+   * @inheritDoc
+   * @returns {TypedIdentifier|null}
+   */
+  get identifier() {
+    if (this.type === "rule") {
+      const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
+      if (typeof ruleType === "string") { return `${ruleType}:${this.forcedIdentifier}`; }
+    }
+    return super.identifier;
+  }
+
+  /**
    * An image that represents this.
    * @returns {string}
    */
@@ -46,18 +58,6 @@ export default class TeriockJournalEntryPage
    */
   get isHidden() {
     return !this.revealedSubpage && this.getFlag("teriock", "hiddenSubpage");
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
-  get typedIdentifier() {
-    if (this.type === "rule") {
-      const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
-      if (typeof ruleType === "string") { return `${ruleType}:${this.forcedIdentifier}`; }
-    }
-    return super.typedIdentifier;
   }
 
   /** @inheritDoc */

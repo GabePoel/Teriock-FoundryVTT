@@ -28,21 +28,21 @@ export default function RulesDocumentMixin(Base) {
     }
 
     /**
+     * This document's identifier, if it has one.
+     * @returns {TypedIdentifier|null}
+     */
+    get identifier() {
+      const type = this.type;
+      const identifier = this.system?.identifier;
+      return Boolean(type) && Boolean(identifier) ? `${type}:${identifier}` : null;
+    }
+
+    /**
      * A key that can be looked up to find this document.
      * @returns {TypedIdentifier}
      */
     get lookupKey() {
-      return this.typedIdentifier ?? `${this.type}:${this.forcedIdentifier}`;
-    }
-
-    /**
-     * This document's typed identifier, if it has one.
-     * @returns {TypedIdentifier|null}
-     */
-    get typedIdentifier() {
-      const type = this.type;
-      const identifier = this.system?.identifier;
-      return Boolean(type) && Boolean(identifier) ? `${type}:${identifier}` : null;
+      return this.identifier ?? `${this.type}:${this.forcedIdentifier}`;
     }
 
     /** @inheritDoc */
@@ -50,7 +50,7 @@ export default function RulesDocumentMixin(Base) {
       super._onCreate(data, options, userId);
       // Extra tracking for world documents created during the game.
       game.teriock.identifiers.trackDocument(this);
-      this._cache.identifier = this.typedIdentifier;
+      this._cache.identifier = this.identifier;
     }
 
     /** @inheritDoc */
@@ -64,12 +64,12 @@ export default function RulesDocumentMixin(Base) {
       super.prepareData();
       if (this.trackable) { game.teriock.identifiers.untrack(this._cache.identifier, this.uuid); }
       if (this.persisted) { game.teriock.identifiers.trackDocument(this); }
-      this._cache.identifier = this.typedIdentifier;
+      this._cache.identifier = this.identifier;
     }
 
     /** @inheritDoc */
     toDragData() {
-      return Object.assign(super.toDragData(), { identifier: this.typedIdentifier });
+      return Object.assign(super.toDragData(), { identifier: this.identifier });
     }
   }
 

@@ -35,8 +35,8 @@ export default class TeriockRollTableSheet
   async _createResult(initialData = {}) {
     if (initialData.documentUuid) {
       const doc = await fromUuid(initialData.documentUuid);
-      if (doc?.typedIdentifier) {
-        foundry.utils.setProperty(initialData, "flags.teriock.documentIdentifier", doc.typedIdentifier);
+      if (doc?.identifier) {
+        foundry.utils.setProperty(initialData, "flags.teriock.documentIdentifier", doc.identifier);
         if (game.settings.get("teriock", "dontDropUuidsInTables")) { delete initialData.documentUuid; }
       }
     }

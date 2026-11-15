@@ -99,7 +99,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
     }
     if (data.uuid) {
       fromUuid(data.uuid).then(d => {
-        const identifier = d?.typedIdentifier;
+        const identifier = d?.documentMetadata?.rules ? d.identifier : null;
         if (identifier) { this._tryAdd(identifier); }
         else { ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true }); }
       });

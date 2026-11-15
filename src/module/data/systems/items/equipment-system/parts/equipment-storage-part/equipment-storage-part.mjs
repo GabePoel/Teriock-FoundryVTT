@@ -112,7 +112,7 @@ export default function EquipmentStoragePart(Base) {
     get _stackingCandidates() {
       return (this.parent.elder?.previewedTypes.equipment ?? []).filter(e =>
         e.name === this.parent.name
-        && e.typedIdentifier === this.parent.typedIdentifier
+        && e.identifier === this.parent.identifier
         && e.elder?.uuid === this.parent.elder?.uuid
         && e.uuid !== this.parent.uuid
         && e.system.consumption.enabled === this.consumption.enabled

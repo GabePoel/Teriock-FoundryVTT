@@ -93,7 +93,7 @@ function addIdentifierClipboardListener(application, _element, _context, options
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
-      const id = application.document?.typedIdentifier;
+      const id = application.document?.identifier;
       if (!id || application.document?.isSecret) {
         ui.notifications.warn("TERIOCK.SHEETS.Common.NOTIFICATIONS.noIdentifier", {
           format: { label },
