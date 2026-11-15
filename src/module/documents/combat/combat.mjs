@@ -142,8 +142,8 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     const deletes = [];
     const groupIds = Object.fromEntries(combatants.map(c => [c.id, null]));
     for (const group of new Set(combatants.map(c => c.group).filter(Boolean))) {
-      const remaining = [...group.members].filter(m => !combatants.includes(m));
-      if (remaining.length >= 2) { continue; }
+      const remaining = group.members.filter(m => !combatants.includes(m));
+      if (remaining.size >= 2) { continue; }
       deletes.push(group.id);
       for (const member of remaining) { groupIds[member.id] = null; }
     }
@@ -390,7 +390,7 @@ export default class TeriockCombat extends mixClasses(Combat, BaseDocumentMixin)
     await batchWrite(
       this.#groupOperations({
         deletes: [group.id],
-        groupIds: Object.fromEntries([...group.members].map(m => [m.id, null])),
+        groupIds: Object.fromEntries(group.members.map(m => [m.id, null])),
       }),
     );
   }

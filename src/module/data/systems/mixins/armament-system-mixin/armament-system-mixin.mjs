@@ -338,7 +338,7 @@ export default function ArmamentSystemMixin(Base) {
      * @returns {string}
      */
     get summarizedAttack() {
-      return dotJoin(this._attackBar.wrappers.filter(Boolean));
+      return dotJoin(this._attackBar.wrappers);
     }
 
     /**

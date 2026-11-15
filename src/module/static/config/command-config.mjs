@@ -78,10 +78,11 @@ function buildHarmOperations(actor, stat, { amount, morganti }) {
  */
 async function buildStatusOperations(actor, { create = [], delete: del = [], full = false, overlay = false }) {
   const has = s => actor.effects.has(CONFIG.statusEffects[s]?._id);
-  const toDelete = new Set(del.filter(s => has(s) && !create.includes(s)).map(s => CONFIG.statusEffects[s]._id));
+  const deleting = new Set(del).difference(new Set(create));
+  const toDelete = deleting.filter(has).map(s => CONFIG.statusEffects[s]._id);
   if (full) {
     for (const c of actor.previewedTags.applicable) {
-      if (del.some(s => c.statuses.has(s))) { toDelete.add(c.id); }
+      if (c.statuses.intersects(deleting)) { toDelete.add(c.id); }
     }
   }
   const toCreate = create.filter(s => CONFIG.statusEffects[s] && !has(s));

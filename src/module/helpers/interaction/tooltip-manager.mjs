@@ -66,7 +66,7 @@ export default class TeriockTooltipManager extends TooltipManager {
       if (!this.#validateUuid(uuid)) { return; }
       const tooltipClass = [element.dataset.tooltipClass];
       tooltipClass.push(TeriockTooltipManager.RICH_TOOLTIP_CLASS);
-      element.dataset.tooltipClass = toClass(tooltipClass.filter(Boolean));
+      element.dataset.tooltipClass = toClass(tooltipClass);
       element.dataset.tooltipHtml = this.#loadingTooltipHTML;
       this.#fetchRichTooltip(element);
     }

@@ -93,7 +93,7 @@ export default function MetaphysicsSystemMixin(Base) {
             tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
           };
         }),
-        ...Array.from(this.effectTypes).filter(t => !this.powerSources.has(t)).map(t => {
+        ...Array.from(this.effectTypes.difference(this.powerSources)).map(t => {
           return {
             label: TERIOCK.CONFIG.metaphysics.effectTypes[t]?.label,
             tooltip: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",

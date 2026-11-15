@@ -74,7 +74,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (hasProperty(d, "flags._teriock.sup")) {
           const sup = idMap.get(getProperty(d, "flags._teriock.sup"));
           if (!(await this.validateRelationship(sup ?? d.parent, d, operation))) {
-            documents.splice(documents.indexOf(d), 1);
+            documents.findSplice(e => e === d);
             continue;
           }
           d.updateSource({ folder: sup?.folder, "system._sup": sup?.id });

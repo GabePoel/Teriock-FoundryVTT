@@ -148,11 +148,12 @@ export default function DisplaySheetMixin(Base) {
      */
     async _prepareDisplayFields(context) {
       const expandedDisplayFields = this.#expandFields(this.document.system._displayFields);
-      context.displayFieldButtons = expandedDisplayFields.filter(f => !f.value).map(f => {
+      const [buttonFields, valueFields] = expandedDisplayFields.partition(f => f.value);
+      context.displayFieldButtons = buttonFields.map(f => {
         return { editable: f.editable, fieldPath: f.path, name: f?.button || f?.label || f.schema?.label };
       }).filter(b => b.editable !== false);
       context.displayFields = /** @type {Teriock.Display.EnrichedDisplayField[]} */ await Promise.all(
-        expandedDisplayFields.filter(f => f.value).map(async f => {
+        valueFields.map(async f => {
           return {
             ...f,
             enriched: await TeriockTextEditor.enrichHTML(f.value, {

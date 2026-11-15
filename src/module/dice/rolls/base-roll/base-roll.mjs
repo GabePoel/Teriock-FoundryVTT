@@ -299,7 +299,7 @@ export default class BaseRoll extends Roll {
       const single = part.length === 1 && part[0] instanceof NumericTerm;
       if (part.length && !single && part.every(t => t.isDeterministic)) {
         for (const t of part) { if (!t._evaluated) { t.evaluate(); } }
-        const flavor = Array.from(new Set(part.flatMap(t => t.flavor.split(" ")).filter(Boolean))).join(" ");
+        const flavor = Array.from(new Set(part.flatMap(t => t.flavor.split(" ")))).filterJoin(" ");
         part = [new NumericTerm({ number: Roll.safeEval(part.map(t => t.total).join(" ")), options: { flavor } })];
         part[0].evaluate();
       }

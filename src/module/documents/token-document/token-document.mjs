@@ -85,9 +85,8 @@ export default class TeriockTokenDocument extends mixClasses(TokenDocument, Base
    * @category Terrain
    */
   get difficultTerrain() {
-    return Array.from(this.regions ?? []).some(r =>
-      r.behaviors.some(b => b.type === "terrain" && b.active && b.system.difficultTerrain)
-    );
+    return this.regions?.some(r => r.behaviors.some(b => b.type === "terrain" && b.active && b.system.difficultTerrain))
+      ?? false;
   }
 
   /**

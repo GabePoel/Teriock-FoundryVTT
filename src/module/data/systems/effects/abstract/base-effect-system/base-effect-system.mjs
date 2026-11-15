@@ -207,7 +207,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   getLocalRollData() {
     return Object.assign(
       super.getLocalRollData(),
-      Object.fromEntries(Array.from(this.parent.statuses).map(s => [`condition.${toKebabCase(s)}`, 1])),
+      Object.fromEntries(this.parent.statuses.map(s => [`condition.${toKebabCase(s)}`, 1])),
     );
   }
 

@@ -212,20 +212,18 @@ export default function ThresholdExecutionMixin(Base) {
       if ((await super._evaluateRolls()) === false) { return false; }
       if (!this.isRoll || this.participants < 2) { return; }
       const { NumericTerm, OperatorTerm } = foundry.dice.terms;
-      const rolls = [];
-      for (const roll of this.rolls) {
-        rolls.push(roll);
-        for (let i = 1; i < this.participants; i++) {
-          rolls.push(
+      this.rolls = this.rolls.flatMap(
+        roll => [
+          roll,
+          ...Array.fromRange(this.participants - 1, 1).map(i =>
             roll.constructor.fromTerms([
               ...roll.clone({ evaluated: true }).terms,
               new OperatorTerm({ operator: "-" }),
               NumericTerm.fromData({ class: "NumericTerm", evaluated: true, number: 2 * i }),
-            ], foundry.utils.deepClone(roll.options)),
-          );
-        }
-      }
-      this.rolls = rolls;
+            ], foundry.utils.deepClone(roll.options))
+          ),
+        ]
+      );
     }
 
     /**

@@ -146,7 +146,10 @@ export default class BaseGroupSystem extends mixClasses(TypeDataModel, BaseSyste
    * @returns {DocumentOwnershipNumber}
    */
   getUserLevel(user) {
-    return Math.max(CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, ...[...this.parent.members].map(m => m.getUserLevel(user)));
+    return this.parent.members.reduce(
+      (max, m) => Math.max(max, m.getUserLevel(user)),
+      CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE,
+    );
   }
 
   /**

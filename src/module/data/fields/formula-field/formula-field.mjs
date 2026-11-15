@@ -21,7 +21,7 @@ export default class FormulaField extends StringField {
   static #processTypes(formula, types, fn) {
     if (["number", "string"].includes(typeof types)) { types = [types.toString()]; }
     if (!FormulaField.exists(formula)) { return formula; }
-    types = new Set(Array.from(types).filter(t => teriock.utils.isKebabCase(t)));
+    types = new Set(types).filter(t => teriock.utils.isKebabCase(t));
     const roll = new BaseRoll(formula);
     for (const term of roll._allTerms) {
       const existing = new Set(term.flavor.toLowerCase().split(" ").map(type => type.trim()).filter(Boolean));
