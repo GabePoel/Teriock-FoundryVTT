@@ -307,7 +307,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         flavor: this.flavor,
         hideRoll: this.isManifest,
         styles,
-        targets: Array.from(this.targets),
+        targets: this.targets.toObject(),
       }),
     );
   }
@@ -428,13 +428,13 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         blocks: (await this.source.system.getPanelParts()).blocks,
         competence: { raw: this.competence.raw },
         critical: ["resultsAltCrit", "resultsBaseCrit"].includes(toggle.id),
-        effectTypes: Array.from(this.source.system.effectTypes),
-        elements: Array.from(this.source.system.elements),
+        effectTypes: this.source.system.effectTypes.toObject(),
+        elements: this.source.system.elements.toObject(),
         executor: this.actor?.uuid ?? null,
         expirations: this.expirations.active.filter(applies).map(e => e.getEffectData(this)),
         heightened: this.heightened,
         identifier: `${this.source.forcedIdentifier}-effect`,
-        powerSources: Array.from(this.source.system.powerSources),
+        powerSources: this.source.system.powerSources.toObject(),
         sustained: this.source.system.sustained,
       },
     };

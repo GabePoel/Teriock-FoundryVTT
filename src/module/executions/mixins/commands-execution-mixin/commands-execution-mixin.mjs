@@ -86,7 +86,7 @@ export default function CommandsExecutionMixin(Base) {
 
     /** @inheritDoc */
     get rollOptions() {
-      return Object.assign(super.rollOptions, { commands: Array.from(this.commands) });
+      return Object.assign(super.rollOptions, { commands: this.commands.toObject() });
     }
 
     /**

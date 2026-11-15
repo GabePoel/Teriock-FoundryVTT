@@ -1,4 +1,4 @@
-import { mergeMetadata } from "../../../../../utils/_module.mjs";
+import { mergeMetadata, toClass } from "../../../../../utils/_module.mjs";
 import { BasePseudoDocument } from "../../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -57,7 +57,7 @@ export default class BaseActivation extends BasePseudoDocument {
    * @returns {string}
    */
   get classes() {
-    return Array.from(this.display.classes).join(" ");
+    return toClass(this.display.classes);
   }
 
   /**

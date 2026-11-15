@@ -118,7 +118,7 @@ export default function MechanicsSheetMixin(Base) {
       const { path, term } = target.dataset;
       const set = new Set(foundry.utils.getProperty(this.document._source, path));
       if (!set.delete(term)) { set.add(term); }
-      await this.document.update({ [path]: Array.from(set) });
+      await this.document.update({ [path]: set.toObject() });
     }
 
     /**

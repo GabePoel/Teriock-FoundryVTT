@@ -121,7 +121,7 @@ export default function AbilityUsagePart(Base) {
     get _targetingWrappers() {
       return [
         this.isRanged ? this.range.tag : "",
-        ...Array.from(this.targets.map(target => TERIOCK.CONFIG.ability.targets[target]?.label)),
+        ...Array.from(this.targets, target => TERIOCK.CONFIG.ability.targets[target]?.label),
         this.duration.tag || "",
       ];
     }

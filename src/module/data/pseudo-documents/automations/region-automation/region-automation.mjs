@@ -114,7 +114,7 @@ export default class RegionAutomation
       data.behaviors ??= [];
       data.behaviors.push({
         name: _loc("TYPES.RegionBehavior.terrain"),
-        system: { difficultTerrain, removedTerrains: Array.from(removedTerrains), terrains: Array.from(terrains) },
+        system: { difficultTerrain, removedTerrains: removedTerrains.toObject(), terrains: terrains.toObject() },
         type: "terrain",
       });
     }

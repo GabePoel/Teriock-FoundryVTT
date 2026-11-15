@@ -57,7 +57,7 @@ export default class BaseUpdater extends DocumentDialog {
     const lockedPaths = this.lockedPaths;
     if (locked) { lockedPaths.delete(path); }
     else { lockedPaths.add(path); }
-    foundry.utils.setProperty(this._currentData, "system.lockedPaths", Array.from(lockedPaths));
+    foundry.utils.setProperty(this._currentData, "system.lockedPaths", lockedPaths.toObject());
     await this.render();
   }
 
@@ -197,7 +197,7 @@ export default class BaseUpdater extends DocumentDialog {
       if (value === null || value === "" || value === false) { foundry.utils.setProperty(submitData, p, _del); }
     }
     if (this._canLockPaths) {
-      foundry.utils.setProperty(submitData, "system.lockedPaths", Array.from(this.lockedPaths));
+      foundry.utils.setProperty(submitData, "system.lockedPaths", this.lockedPaths.toObject());
     }
     return super._processSubmitData(event, form, submitData, options);
   }

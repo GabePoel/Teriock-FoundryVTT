@@ -96,16 +96,16 @@ export default class TransformationAutomation
     const transformation = foundry.utils.getProperty(data, "system.transformation") ?? {};
     if (!transformation.enabled) {
       Object.assign(transformation, {
-        attributes: Array.from(this.attributes),
+        attributes: this.attributes.toObject(),
         competence: { raw: this.getCompetence({ execution }) },
         enabled: true,
         img: this.img,
         level: this.level,
-        override: Array.from(this.override),
-        resets: Array.from(this.resets),
+        override: this.override.toObject(),
+        resets: this.resets.toObject(),
         ring: this.ring,
         ringImg: this.ringImg,
-        suppress: Array.from(this.suppress),
+        suppress: this.suppress.toObject(),
       });
     }
     foundry.utils.setProperty(data, "system.transformation", transformation);

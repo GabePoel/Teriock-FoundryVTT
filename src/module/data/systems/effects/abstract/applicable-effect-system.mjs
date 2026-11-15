@@ -68,7 +68,7 @@ export default class ApplicableEffectSystem
     return {
       icon: teriock.data.systems.effects.ConditionSystem.metadata.icon,
       label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
-      wrappers: Array.from(this.parent.statuses.map(status => CONFIG.statusEffects[status]?.name)),
+      wrappers: Array.from(this.parent.statuses, status => CONFIG.statusEffects[status]?.name ?? status),
     };
   }
 
@@ -202,9 +202,8 @@ export default class ApplicableEffectSystem
     const blocksHTML = blocks.reduce((acc, block) => {
       if (!block.text) { return acc; }
       const safeTitle = foundry.utils.escapeHTML(block.title || "");
-      const extraClasses = toClass(block.classes);
       return `${acc}
-      <div class="teriock-panel-block${extraClasses ? ` ${extraClasses}` : ""}">
+      <div class="${toClass(["teriock-panel-block", ...(block.classes ?? [])])}">
         <div class="teriock-panel-block-title">${safeTitle}</div>
         <div class="teriock-panel-block-text">${block.text}</div>
       </div>`;

@@ -15,7 +15,7 @@ export default class TradecraftCheckExecution extends mixClasses(BaseExecution, 
 
   /** @inheritDoc */
   get rollOptions() {
-    return Object.assign(super.rollOptions, { targets: Array.from(game.user.targets) });
+    return Object.assign(super.rollOptions, { targets: game.user.targets.toObject() });
   }
 
   /** @inheritDoc */

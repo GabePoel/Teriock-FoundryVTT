@@ -22,7 +22,7 @@ export default class TeriockTerrainData extends TerrainData {
     const data = super.resolveTerrainEffects(effects, options);
     if (!data && !difficultTerrain && !terrains.size) { return null; }
     const terrain = data ?? new this();
-    terrain.updateSource({ difficultTerrain, terrains: Array.from(terrains) });
+    terrain.updateSource({ difficultTerrain, terrains: terrains.toObject() });
     return terrain;
   }
 

@@ -50,7 +50,7 @@ export default class MechanicPseudoDocument extends mixClasses(BasePseudoDocumen
       for (const [level, { toggle }] of Object.entries(TERIOCK.CONFIG.competence.levels)) {
         if (!competencies.includes(Number(level))) { disabled.add(toggle); }
       }
-      source.disabledToggles = Array.from(disabled);
+      source.disabledToggles = disabled.toObject();
       delete source.competencies;
       delete source.crit;
       delete source.heighten;

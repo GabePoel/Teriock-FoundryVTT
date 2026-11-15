@@ -1,5 +1,5 @@
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
-import { createElement, makeIconClass, makeIconElement, toKebabCase } from "../../utils/_module.mjs";
+import { createElement, makeIconClass, makeIconElement, toClass, toKebabCase } from "../../utils/_module.mjs";
 import uiHelpers from "./ui-helpers.mjs";
 
 /**
@@ -36,15 +36,16 @@ function makeElementId(options, ...parts) {
 function formClasses(model, options = { hash: {} }) {
   const { changed, classes, isPlaceholder, locked } = options.hash;
   const path = String(options.hash.path ?? "");
-  let cssClass = classes ? `${classes} teriock-form-value` : "teriock-form-value";
-  if (
-    (changed ?? foundry.utils.hasProperty(model?.overrides, path))
-    && game.settings.get("teriock", "highlightModifiedValues")
-  ) { cssClass += " teriock-form-changed"; } else if (locked ?? model?.system?.lockedPaths?.has?.(path)) {
-    cssClass += " teriock-form-locked";
-  }
-  if (isPlaceholder) { cssClass += " teriock-form-placeholder"; }
-  return cssClass;
+  const isChanged = (changed ?? foundry.utils.hasProperty(model?.overrides, path))
+    && game.settings.get("teriock", "highlightModifiedValues");
+  const isLocked = !isChanged && (locked ?? model?.system?.lockedPaths?.has?.(path));
+  return toClass([
+    classes,
+    "teriock-form-value",
+    isChanged && "teriock-form-changed",
+    isLocked && "teriock-form-locked",
+    isPlaceholder && "teriock-form-placeholder",
+  ]);
 }
 
 /**
@@ -120,18 +121,18 @@ function formUpdater(model, options = { hash: {} }) {
     displayElement.append(iconContainerElement);
   }
   const valueElement = createElement("span", {
-    className: `teriock-updater-value ${formClasses(model, { hash: { changed, locked, path } })}`,
+    className: formClasses(model, { hash: { changed, classes: "teriock-updater-value", locked, path } }),
   });
   valueElement.append(
     createElement("span", {
-      className: `teriock-updater-data${isPlaceholder ? " teriock-form-placeholder" : ""}`,
+      className: toClass(["teriock-updater-data", isPlaceholder && "teriock-form-placeholder"]),
       innerHTML: data,
     }),
   );
   if (String(data) !== String(source) || (changed ?? foundry.utils.hasProperty(model?.overrides, path))) {
     valueElement.append(
       createElement("span", {
-        className: `teriock-updater-source${isSourcePlaceholder ? " teriock-form-placeholder" : ""}`,
+        className: toClass(["teriock-updater-source", isSourcePlaceholder && "teriock-form-placeholder"]),
         innerHTML: source,
       }),
     );
@@ -198,11 +199,15 @@ function formHover(model, options = { hash: {} }) {
   const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
   const unselectedValue = unselectedFormat ?? unselected;
   const selectedValue = selected === null ? unselectedValue : selectedFormat ?? selected;
-  const cssClasses = ["affix", classes, formClasses(model, { hash: { path } })];
-  if (selected === null) { cssClasses.push("details-muted"); }
+  const cssClass = toClass([
+    "affix",
+    classes,
+    formClasses(model, { hash: { path } }),
+    selected === null && "details-muted",
+  ]);
   const id = options.hash.id ?? makeElementId(options, action, paths || dataset.path);
   return new Handlebars.SafeString(`
-    <button type="button" id="${id}" class="${cssClasses.filterJoin(" ")}" ${dataAttrs}>
+    <button type="button" id="${id}" class="${cssClass}" ${dataAttrs}>
       <span class="selected">${selectedValue}</span>
       <span class="unselected">${unselectedValue}</span>
     </button>

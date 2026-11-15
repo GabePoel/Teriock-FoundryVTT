@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { createElement, makeIcon, mergeMetadata, toId } from "../../../utils/_module.mjs";
+import { createElement, makeIcon, mergeMetadata, toClass, toId } from "../../../utils/_module.mjs";
 import { associationsField, blocksField, nullStringField } from "../../fields/tools/builders.mjs";
 import { migrateThumbnails } from "../../fields/tools/migrations.mjs";
 import { BasePseudoDocument } from "../abstract/_module.mjs";
@@ -29,7 +29,7 @@ export default class Panel extends BasePseudoDocument {
       if (table.closest(".teriock-panel-table")) { continue; }
       const tableId = `${rootId}-table-${index++}`;
       const wrap = createElement("div", {
-        className: `teriock-panel-table collapsible${collapsed ? " collapsed" : ""}`,
+        className: toClass(["teriock-panel-table collapsible", collapsed && "collapsed"]),
         dataset: { collapsibleId: tableId },
       });
       const title = createElement("div", {

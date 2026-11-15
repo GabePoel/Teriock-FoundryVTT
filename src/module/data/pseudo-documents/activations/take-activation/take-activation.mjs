@@ -1,5 +1,5 @@
 import { listFormat } from "../../../../helpers/localization.mjs";
-import { mergeMetadata } from "../../../../utils/_module.mjs";
+import { mergeMetadata, toClass } from "../../../../utils/_module.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
@@ -44,7 +44,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   get classes() {
-    return [super.classes, `${this.command}-button`].join(" ");
+    return toClass([super.classes, `${this.command}-button`]);
   }
 
   /** @inheritDoc */

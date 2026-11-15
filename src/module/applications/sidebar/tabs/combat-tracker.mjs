@@ -1,5 +1,5 @@
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
-import { makeIconClass, mixClasses } from "../../../utils/_module.mjs";
+import { makeIconClass, mixClasses, toClass } from "../../../utils/_module.mjs";
 import { BaseApplicationMixin, DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 
 const { CombatTracker } = foundry.applications.sidebar.tabs;
@@ -433,12 +433,12 @@ export default class TeriockCombatTracker
       // A CombatantGroup is only defeated once its turn holder is
       const defeated = holder.isDefeated;
       turns.push({
-        css: [
-          i === combat.turn ? "active" : null,
-          group.hidden ? "hide" : null,
-          defeated ? "defeated" : null,
+        css: toClass([
+          i === combat.turn && "active",
+          group.hidden && "hide",
+          defeated && "defeated",
           this.#groupControlClass(group),
-        ].filterJoin(" "),
+        ]),
         group: {
           color: group.system.color,
           defeated,
@@ -472,16 +472,17 @@ export default class TeriockCombatTracker
     const locked = Boolean(combatant.group);
     return Object.assign(turn, {
       color: combatant.system.color,
-      css: [turn.css, combatant.token?.object?.controlled ? "controlled" : null].filterJoin(" "),
+      css: toClass([turn.css, combatant.token?.object?.controlled && "controlled"]),
       icon: combatant.isCommander
         ? { css: makeIconClass(TERIOCK.DISPLAY.icons.manifest.combat.commander, "text"), tooltip: combatant.typeLabel }
         : null,
       locked,
       reaction: combatant.permission >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
         ? {
-          css: `${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui[hasReaction ? "on" : "off"], "button")}${
-            hasReaction ? " active" : ""
-          }`,
+          css: toClass([
+            makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui[hasReaction ? "on" : "off"], "button"),
+            hasReaction && "active",
+          ]),
           disabled: !combatant.isOwner,
         }
         : null,
