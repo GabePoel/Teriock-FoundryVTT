@@ -56,7 +56,7 @@ export default class BaseActivation extends BasePseudoDocument {
    * Classes for a button made from this.
    * @returns {string}
    */
-  get classes() {
+  get cssClass() {
     return toClass(this.display.classes);
   }
 

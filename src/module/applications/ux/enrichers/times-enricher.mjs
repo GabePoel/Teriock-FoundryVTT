@@ -5,7 +5,7 @@ const timesEnricher = {
   format: { aliases: ["times"], hasConfig: false, hasMultipleArguments: false, type: "display" },
   id: "times-symbol",
   process: async () => {
-    return createElement("span", { classes: ["teriock-times-symbol"], innerText: "×" });
+    return createElement("span", { className: "teriock-times-symbol", innerText: "×" });
   },
 };
 

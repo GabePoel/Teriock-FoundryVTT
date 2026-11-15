@@ -87,7 +87,7 @@ export default class TeriockCombatant
    * @version 369
    */
   _getInitiativeFormula() {
-    return this.initiativeModel.constructor.getFormula(model);
+    return this.initiativeModel.rollable;
   }
 
   /**

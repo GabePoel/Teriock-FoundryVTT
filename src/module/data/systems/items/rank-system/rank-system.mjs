@@ -207,7 +207,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   get isOnWiki() {
-    return this.number > 0 && this.number <= 5;
+    return super.wikiPage && this.number.between(1, 5);
   }
 
   /**

@@ -6,7 +6,7 @@ const gpEnricher = {
   id: "gp-symbol",
   process: async (inputs) => {
     const s = inputs.arguments.length ? formatGp(inputs.arguments[0]) : _loc("TERIOCK.COMMON.GP");
-    return createElement("span", { classes: ["teriock-gp-symbol"], innerText: s });
+    return createElement("span", { className: "teriock-gp-symbol", innerText: s });
   },
 };
 

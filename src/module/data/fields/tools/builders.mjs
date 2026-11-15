@@ -152,7 +152,7 @@ export function associationsField(options = {}) {
 export function blocksField(options) {
   return new ArrayField(
     new SchemaField({
-      classes: new ArrayField(new StringField(), { initial: () => [] }),
+      classes: new SetField(new StringField(), { initial: () => [] }),
       gm: new BooleanField(),
       text: new HTMLField({ blank: true, nullable: true }),
       title: new StringField(),

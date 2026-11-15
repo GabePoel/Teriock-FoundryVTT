@@ -20,7 +20,7 @@ function makeElementId(options, ...parts) {
 /**
  * @typedef FormClassesHash
  * @property {boolean} changed
- * @property {string} classes
+ * @property {string} cssClass
  * @property {boolean} isPlaceholder
  * @property {boolean} locked
  * @property {string} path
@@ -34,13 +34,13 @@ function makeElementId(options, ...parts) {
  * @returns {string}
  */
 function formClasses(model, options = { hash: {} }) {
-  const { changed, classes, isPlaceholder, locked } = options.hash;
+  const { changed, cssClass, isPlaceholder, locked } = options.hash;
   const path = String(options.hash.path ?? "");
   const isChanged = (changed ?? foundry.utils.hasProperty(model?.overrides, path))
     && game.settings.get("teriock", "highlightModifiedValues");
   const isLocked = !isChanged && (locked ?? model?.system?.lockedPaths?.has?.(path));
   return toClass([
-    classes,
+    cssClass,
     "teriock-form-value",
     isChanged && "teriock-form-changed",
     isLocked && "teriock-form-locked",
@@ -55,7 +55,6 @@ function formClasses(model, options = { hash: {} }) {
  * @property {string} abbreviationTooltip
  * @property {string} action
  * @property {boolean} changed
- * @property {string} classes
  * @property {string} color
  * @property {string} data
  * @property {string} icon
@@ -121,7 +120,7 @@ function formUpdater(model, options = { hash: {} }) {
     displayElement.append(iconContainerElement);
   }
   const valueElement = createElement("span", {
-    className: formClasses(model, { hash: { changed, classes: "teriock-updater-value", locked, path } }),
+    className: formClasses(model, { hash: { changed, cssClass: "teriock-updater-value", locked, path } }),
   });
   valueElement.append(
     createElement("span", {
@@ -183,7 +182,7 @@ function formIcon(field, options = {}) {
 function formHover(model, options = { hash: {} }) {
   const {
     action,
-    classes = "",
+    cssClass = "",
     dataset = {},
     icon,
     path = "",
@@ -199,15 +198,15 @@ function formHover(model, options = { hash: {} }) {
   const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
   const unselectedValue = unselectedFormat ?? unselected;
   const selectedValue = selected === null ? unselectedValue : selectedFormat ?? selected;
-  const cssClass = toClass([
+  const buttonClass = toClass([
     "affix",
-    classes,
+    cssClass,
     formClasses(model, { hash: { path } }),
     selected === null && "details-muted",
   ]);
   const id = options.hash.id ?? makeElementId(options, action, paths || dataset.path);
   return new Handlebars.SafeString(`
-    <button type="button" id="${id}" class="${cssClass}" ${dataAttrs}>
+    <button type="button" id="${id}" class="${buttonClass}" ${dataAttrs}>
       <span class="selected">${selectedValue}</span>
       <span class="unselected">${unselectedValue}</span>
     </button>

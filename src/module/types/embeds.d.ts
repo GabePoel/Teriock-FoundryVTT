@@ -5,8 +5,8 @@ declare global {
   namespace Teriock.Embeds {
     export type EmbedIcon = {
       action?: string;
-      classes?: string;
       clickable?: boolean;
+      cssClass?: string;
       dataset?: object;
       icon?: Teriock.Embeds.EmbedIcon;
       tooltip?: string;

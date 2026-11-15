@@ -113,6 +113,14 @@ export default class BaseModifierModel extends mixClasses(BaseDataModel, UsableD
   }
 
   /**
+   * A full rollable formula. This can be used quickly but doesn't account for any advantage or disadvantage, etc.
+   * @returns {Teriock.System.FormulaString}
+   */
+  get rollable() {
+    return this.constructor.getFormula(this, "rollable", "terms");
+  }
+
+  /**
    * A tag that succinctly summarizes the mod value and if there's a bonus.
    * @returns {string}
    */

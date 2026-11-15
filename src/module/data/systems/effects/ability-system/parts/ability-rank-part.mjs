@@ -16,13 +16,13 @@ export default function AbilityRankPart(Base) {
       if (this.parent.parent?.type === "rank") {
         if (this.parent.getFlag("teriock", "category") === "combat") {
           return {
-            classes: "ability-category-tag-icon",
+            cssClass: "ability-category-tag-icon",
             icon: TERIOCK.DISPLAY.icons.manifest.rank.combatAbility,
             tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.combat"),
           };
         } else if (this.parent.getFlag("teriock", "category") === "support") {
           return {
-            classes: "ability-category-tag-icon",
+            cssClass: "ability-category-tag-icon",
             icon: TERIOCK.DISPLAY.icons.manifest.rank.supportAbility,
             tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.support"),
           };
