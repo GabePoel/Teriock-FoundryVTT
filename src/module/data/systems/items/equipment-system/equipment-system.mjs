@@ -1,11 +1,4 @@
-import {
-  dotJoin,
-  fromIdentifier,
-  getName,
-  mergeMetadata,
-  mixClasses,
-  toKebabCase,
-} from "../../../../utils/_module.mjs";
+import { dotJoin, fromIdentifier, getName, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { equipmentTypeField } from "../../../fields/tools/builders.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import {
@@ -191,6 +184,6 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), { [`type.${toKebabCase(this._source.equipmentType)}`]: 1 });
+    return Object.assign(super.getLocalRollData(), { [`type.${this._source.equipmentType}`]: 1 });
   }
 }

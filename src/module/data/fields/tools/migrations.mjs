@@ -1,4 +1,4 @@
-import { systemPath, toKebabCase } from "../../../utils/_module.mjs";
+import { systemPath, toSlug } from "../../../utils/_module.mjs";
 
 /**
  * Power kinds that became their own item types.
@@ -88,14 +88,16 @@ export function migrateEquipmentText(source) {
 }
 
 /**
- * Migrate iterable values to kebab-case.
+ * Migrate iterable values to slugs.
  * @param {object} source
  * @param {...string} fields
  */
 export function migrateIterables(source, ...fields) {
   for (const field of fields) {
     const values = foundry.utils.getProperty(source, field);
-    if (Array.isArray(values)) { foundry.utils.setProperty(source, field, values.map((v) => toKebabCase(v))); }
+    if (Array.isArray(values)) {
+      foundry.utils.setProperty(source, field, values.map(v => toSlug(v, { convertCamel: true })));
+    }
   }
 }
 

@@ -1,4 +1,3 @@
-import { toKebabCase } from "../../../../../../../utils/_module.mjs";
 import { initialBoolean, initialNumber, initialSchema } from "../../../../../../fields/tools/initializers.mjs";
 
 /**
@@ -53,7 +52,7 @@ export default function ActorScalingPart(Base) {
       const data = {};
       const ranks = this.parent.previewedTypes.rank;
       for (const c of Object.keys(TERIOCK.CONFIG.class.classes)) {
-        data[`rank.${toKebabCase(c)}`] = ranks.filter(r => r.system._source.class === c).length;
+        data[`rank.${c}`] = ranks.filter(r => r.system._source.class === c).length;
       }
       for (const a of Object.keys(TERIOCK.CONFIG.class.archetypes)) {
         data[`rank.${a}`] = ranks.filter(r => r.system._source.archetype === a).length;

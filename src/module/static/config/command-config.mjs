@@ -8,7 +8,7 @@ import {
   getEnsureNoChildrenOperations,
   getIcon,
   resolveDocuments,
-  toKebabCase,
+  toSlug,
 } from "../../utils/_module.mjs";
 import { icons } from "../display/_module.mjs";
 import * as STATUSES from "../statuses.mjs";
@@ -553,7 +553,7 @@ const commandConfig = {
       /** @type {[string, Partial<Teriock.Config.CommandEntry>][]} */
       const entries = [...Object.entries(commandConfig), ["roll", { aliases: ["r"], args: ["formula"] }]];
       let code = `<h6>${_loc("TERIOCK.COMMANDS.Help.name")}</h6><p>${_loc("TERIOCK.COMMANDS.Help.format")}</p>`;
-      const named = entries.map(([key, entry]) => [toKebabCase(key), entry]);
+      const named = entries.map(([key, entry]) => [toSlug(key, { convertCamel: true }), entry]);
       for (const [name, entry] of named.sort(([a], [b]) => a.localeCompare(b))) {
         const args = entry.numeric ? ["formula"] : entry.args;
         const aliases = (entry.aliases ?? []).filter(a => a !== name);
@@ -856,10 +856,10 @@ const commandConfig = {
   },
 };
 
-// Multi-word commands can also be typed in kebab-case.
+// Multi-word commands can also be typed as slugs.
 for (const [key, entry] of Object.entries(commandConfig)) {
-  const kebab = toKebabCase(key);
-  if (kebab !== key) { entry.aliases = [kebab, ...(entry.aliases ?? [])]; }
+  const slug = toSlug(key, { convertCamel: true });
+  if (slug !== key) { entry.aliases = [slug, ...(entry.aliases ?? [])]; }
 }
 
 preLocalizeObject("CONFIG.command", { keys: ["label", "numeric.deal", "numeric.take"] });

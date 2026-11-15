@@ -54,7 +54,7 @@ export default class TeriockJournalEntryPage
   get typedIdentifier() {
     if (this.type === "rule") {
       const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
-      if (typeof ruleType === "string") { return `${teriock.utils.toKebabCase(ruleType)}:${this.forcedIdentifier}`; }
+      if (typeof ruleType === "string") { return `${ruleType}:${this.forcedIdentifier}`; }
     }
     return super.typedIdentifier;
   }

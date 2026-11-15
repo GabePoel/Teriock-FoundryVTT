@@ -1,5 +1,5 @@
 import { listFormat } from "../../../../helpers/localization.mjs";
-import { mergeMetadata, toClass, toKebabCase } from "../../../../utils/_module.mjs";
+import { mergeMetadata, toClass, toSlug } from "../../../../utils/_module.mjs";
 import TakeAutomation from "../../automations/take-automation/take-automation.mjs";
 import { AutomationActivationFactory } from "../abstract/_module.mjs";
 
@@ -44,7 +44,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   get cssClass() {
-    return toClass([super.cssClass, `${toKebabCase(this.command)}-button`]);
+    return toClass([super.cssClass, `${toSlug(this.command, { convertCamel: true })}-button`]);
   }
 
   /** @inheritDoc */

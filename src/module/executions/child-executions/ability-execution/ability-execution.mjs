@@ -10,7 +10,7 @@ import {
   objectMap,
   omit,
   prefixObject,
-  toKebabCase,
+  toSlug,
 } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
@@ -455,7 +455,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       Object.entries(super._getSourceRollData()).filter(([k]) => !k.startsWith("maneuver.") && !k.startsWith("time.")),
     );
     data[`maneuver.${this.maneuver}`] = 1;
-    data[`time.${toKebabCase(this.executionTime)}`] = 1;
+    data[`time.${toSlug(this.executionTime, { convertCamel: true })}`] = 1;
     return data;
   }
 

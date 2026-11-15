@@ -1,4 +1,4 @@
-import { getSystemClass, mergeMetadata, mixClasses, toKebabCase } from "../../../../../utils/_module.mjs";
+import { getSystemClass, mergeMetadata, mixClasses } from "../../../../../utils/_module.mjs";
 import { BaseSystemMixin, ChildSystemMixin } from "../../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
@@ -207,7 +207,7 @@ export default class BaseEffectSystem extends mixClasses(ActiveEffectTypeDataMod
   getLocalRollData() {
     return Object.assign(
       super.getLocalRollData(),
-      Object.fromEntries(this.parent.statuses.map(s => [`condition.${toKebabCase(s)}`, 1])),
+      Object.fromEntries(this.parent.statuses.map(s => [`condition.${s}`, 1])),
     );
   }
 

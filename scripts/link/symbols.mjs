@@ -1,8 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-import { toKebabCase } from "../../src/module/utils/string.mjs";
-
 const VARIANT = "MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D";
 const BASE = `https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/${VARIANT}`;
 const CODEPOINTS_SRC = `${BASE}.codepoints`;
@@ -21,7 +19,7 @@ console.log(`Successfully fetched ${lines.length} icons. Generating CSS...`);
 let css = "/* Auto-generated using `npm run link:symbols` */\n\n";
 lines.forEach(line => {
   const [name, codepoint] = line.split(" ");
-  if (name && codepoint) { css += `.mic.ms-${toKebabCase(name)}::before { content: "\\${codepoint}"; }\n`; }
+  if (name && codepoint) { css += `.mic.ms-${name.replaceAll("_", "-")}::before { content: "\\${codepoint}"; }\n`; }
 });
 fs.writeFileSync(CSS_DST, css);
 console.log("CSS generation complete.");

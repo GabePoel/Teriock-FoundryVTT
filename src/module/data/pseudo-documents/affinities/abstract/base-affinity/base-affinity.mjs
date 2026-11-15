@@ -1,11 +1,4 @@
-import {
-  dotJoin,
-  makeIcon,
-  mergeMetadata,
-  mixClasses,
-  toCamelCase,
-  toKebabCase,
-} from "../../../../../utils/_module.mjs";
+import { dotJoin, makeIcon, mergeMetadata, mixClasses, toCamelCase, toSlug } from "../../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../../fields/_module.mjs";
 import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import { categorySuggestions } from "../../../../fields/tools/suggestions.mjs";
@@ -80,7 +73,7 @@ export default class BaseAffinity
     source.category = RENAMED_CATEGORIES[source.category] ?? source.category;
     if ("value" in source) {
       if (source.category === "other") { source.name ??= source.value; }
-      else { source.identifier ??= toKebabCase(source.value); }
+      else { source.identifier ??= toSlug(source.value); }
       delete source.value;
     }
     return super.migrateData(source, options);

@@ -10,7 +10,7 @@ import {
   fromKeySync,
   getName,
   toCamelCase,
-  toKebabCase,
+  toSlug,
 } from "../../utils/_module.mjs";
 import { validateTypedIdentifier } from "../fields/tools/validators.mjs";
 
@@ -170,9 +170,8 @@ export default function AbstractDataMixin(Base) {
           case "cc":
             textContent = toCamelCase(textContent);
             break;
-          case "kebab":
-          case "kc":
-            textContent = toKebabCase(textContent);
+          case "slug":
+            textContent = toSlug(textContent);
             break;
           case "upperFirst":
           case "ucf":

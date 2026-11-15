@@ -1,4 +1,4 @@
-import { isKebabCase } from "../../../utils/_module.mjs";
+import { isSlug } from "../../../utils/_module.mjs";
 
 /**
  * Validates that a string is a valid untyped identifier.
@@ -10,7 +10,7 @@ export function validateIdentifier(identifier, options = {}) {
   if (["", null, undefined].includes(identifier)) { return !options.strict; }
   if (typeof identifier !== "string") { return false; }
   if (identifier.includes(":")) { return false; }
-  return isKebabCase(identifier);
+  return isSlug(identifier);
 }
 
 /**
@@ -27,7 +27,7 @@ export function validateTypedIdentifier(identifier, options = {}) {
   if (parts.length !== 2 || !parts[0] || !parts[1]) { return false; }
   const [type, id] = parts;
   if (options.types?.length && !options.types.includes(type)) { return false; }
-  return isKebabCase(type) && isKebabCase(id);
+  return isSlug(type) && isSlug(id);
 }
 
 /**

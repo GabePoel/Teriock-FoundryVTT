@@ -6,8 +6,7 @@ import {
   mergeMetadata,
   mixClasses,
   objectMap,
-  toCamelCase,
-  toKebabCase,
+  toSlug,
 } from "../../../../utils/_module.mjs";
 import { FormulaField, IdentifierField, MultiChangeField, UnitField } from "../../../fields/_module.mjs";
 import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
@@ -95,7 +94,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @inheritDoc */
     static migrateData(source, options) {
       if ("fightingStyle" in source) {
-        source.style ??= source.fightingStyle ? toKebabCase(source.fightingStyle) : null;
+        source.style ??= source.fightingStyle ? toSlug(source.fightingStyle) : null;
         delete source.fightingStyle;
       }
       migrateIterables(source, "equipmentClasses");
@@ -398,9 +397,9 @@ export default function ArmamentSystemMixin(Base) {
       });
       if (this._source.style) { data[`style.${this._source.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
-      for (const p of this.props || new Set()) { data[`prop.${toKebabCase(p)}`] = 1; }
-      for (const command of this.commands) { data[`command.${toKebabCase(command)}`] = 1; }
-      for (const equipmentClass of this.equipmentClasses) { data[`class.${toKebabCase(equipmentClass)}`] = 1; }
+      for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
+      for (const command of this.commands) { data[`command.${toSlug(command, { convertCamel: true })}`] = 1; }
+      for (const equipmentClass of this.equipmentClasses) { data[`class.${equipmentClass}`] = 1; }
       return data;
     }
 
@@ -415,7 +414,7 @@ export default function ArmamentSystemMixin(Base) {
       const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
         e.type === "property"
       );
-      this.props = new Set(properties.map(p => toCamelCase(p.name)));
+      this.props = new Set(properties.map(p => p.forcedIdentifier));
 
       // Propagate damage types
       for (const p of properties.filter(p => p.active)) {

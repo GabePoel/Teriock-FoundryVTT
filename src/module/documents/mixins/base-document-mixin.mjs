@@ -1,7 +1,7 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
-import { checkFieldVisibility, createElement, makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
+import { checkFieldVisibility, createElement, makeIconClass, mixClasses, toSlug } from "../../utils/_module.mjs";
 
 /**
  * @import { ApplicationRenderOptions } from "@client/applications/_types.mjs";
@@ -276,7 +276,7 @@ export default function BaseDocumentMixin(Base) {
      * @returns {Identifier}
      */
     get defaultIdentifier() {
-      return teriock.utils.toKebabCase(this.name);
+      return teriock.utils.toSlug(this.name);
     }
 
     /**
@@ -342,7 +342,7 @@ export default function BaseDocumentMixin(Base) {
     get lookupKey() {
       if (this.typedIdentifier) { return this.typedIdentifier; }
       if (this.type) { return `${this.type}:${this.forcedIdentifier}`; }
-      return `${toKebabCase(this.documentName)}:${this.forcedIdentifier}`;
+      return `${toSlug(this.documentName, { convertCamel: true })}:${this.forcedIdentifier}`;
     }
 
     /**

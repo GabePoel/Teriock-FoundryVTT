@@ -1,12 +1,4 @@
-import {
-  dotJoin,
-  fromIdentifier,
-  getName,
-  makeIcon,
-  mergeMetadata,
-  mixClasses,
-  toKebabCase,
-} from "../../../../utils/_module.mjs";
+import { dotJoin, fromIdentifier, getName, makeIcon, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { mountTypeField } from "../../../fields/tools/builders.mjs";
 import {
   AppearanceSystemMixin,
@@ -131,7 +123,7 @@ export default class MountSystem
   /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
-      [`type.${toKebabCase(this._source.mountType)}`]: 1,
+      [`type.${this._source.mountType}`]: 1,
       mounted: Number(this.mounted),
     });
   }

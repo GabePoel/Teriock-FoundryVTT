@@ -1,4 +1,4 @@
-import { pathSorterFactory, toKebabCase } from "../../../../utils/_module.mjs";
+import { pathSorterFactory } from "../../../../utils/_module.mjs";
 import { TernaryField } from "../../../fields/_module.mjs";
 import { nullStringField } from "../../../fields/tools/builders.mjs";
 import BasePreviewModel from "../base-preview-model/base-preview-model.mjs";
@@ -66,7 +66,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
    * @returns {boolean}
    */
   #hasProperty(equipment, propertyKey) {
-    return equipment.previewed.identifiers.has(`property:${toKebabCase(propertyKey)}`);
+    return equipment.previewed.identifiers.has(`property:${propertyKey}`);
   }
 
   /** @inheritDoc */

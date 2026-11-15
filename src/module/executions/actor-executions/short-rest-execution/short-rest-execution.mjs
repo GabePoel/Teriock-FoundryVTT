@@ -1,5 +1,5 @@
 import { UseDocumentsAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
-import { toId, toKebabCase } from "../../../utils/_module.mjs";
+import { toId, toSlug } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -60,7 +60,7 @@ export default class ShortRestExecution extends DocumentExecution {
 
   /** @returns {TypedIdentifier} */
   get journalEntryPageIdentifier() {
-    return `core:${toKebabCase(this.executionTime)}`;
+    return `core:${toSlug(this.executionTime, { convertCamel: true })}`;
   }
 
   /** @inheritDoc */
@@ -84,7 +84,7 @@ export default class ShortRestExecution extends DocumentExecution {
       all: false,
       auto: false,
       interactInExecution: true,
-      localQualifier: `and(@ability, @time.${toKebabCase(this.executionTime)})`,
+      localQualifier: `and(@ability, @time.${toSlug(this.executionTime, { convertCamel: true })})`,
       multi: true,
       type: "useDocuments",
       useInExecution: true,
