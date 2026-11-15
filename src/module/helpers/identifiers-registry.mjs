@@ -1,3 +1,4 @@
+import * as documents from "../documents/_module.mjs";
 import { parseIdentifier } from "../utils/_module.mjs";
 
 /**
@@ -43,13 +44,25 @@ export default class IdentifiersRegistry {
     this.#initializing = new Promise(resolve => {
       this.#resolveInitialization = resolve;
     });
+    const documentClasses = Object.values(documents).filter(d =>
+      foundry.utils.isSubclass(d, foundry.abstract.Document)
+    );
+    this.#primaryDocumentNames = new Set(
+      documentClasses.filter(d => d.documentMetadata?.rules).map(d => d.documentName),
+    );
+    this.#embeddedDocumentNames = this.#primaryDocumentNames.difference(new Set(CONST.PRIMARY_DOCUMENT_TYPES));
+    this.#parentDocumentNames = new Set(
+      documentClasses.filter(d => Object.keys(d.metadata.embedded).some(n => this.#embeddedDocumentNames.has(n))).map(
+        d => d.documentName
+      ),
+    );
   }
 
   /**
    * The types of Documents which can be tracked even if they're embedded.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
-  #embeddedDocumentNames = new Set(["JournalEntryPage"]);
+  #embeddedDocumentNames;
 
   /**
    * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
@@ -71,13 +84,13 @@ export default class IdentifiersRegistry {
    * The types of Documents which can support embedded Documents with indexed identifiers.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
-  #parentDocumentNames = new Set(["JournalEntry"]);
+  #parentDocumentNames;
 
   /**
    * The types of Documents which support having identifiers.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
-  #primaryDocumentNames = new Set(["ActiveEffect", "Actor", "Item", "JournalEntryPage"]);
+  #primaryDocumentNames;
 
   /** @type {(value?: PromiseLike<void> | void) => void} */
   #resolveInitialization;

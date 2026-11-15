@@ -1,6 +1,6 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../utils/_module.mjs";
-import { BaseDocumentMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin, RulesDocumentMixin } from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
 
@@ -10,9 +10,10 @@ const { JournalEntryPage } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbeddableData
  * @mixes PanelData
+ * @mixes RulesDocument
  */
 export default class TeriockJournalEntryPage
-  extends mixClasses(JournalEntryPage, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin)
+  extends mixClasses(JournalEntryPage, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin, RulesDocumentMixin)
 {
   /**
    * Determine default artwork based on the provided source data.

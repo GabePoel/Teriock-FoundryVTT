@@ -49,7 +49,7 @@ declare global {
       terrains?: Set<Teriock.Keys.Terrain>;
     };
 
-    export type DocumentMetadata = { child: boolean, hierarchy: boolean, tooltip: boolean };
+    export type DocumentMetadata = { child: boolean, hierarchy: boolean, rules: boolean, tooltip: boolean };
   }
 }
 

@@ -8,4 +8,10 @@ const { JournalEntry } = foundry.documents;
  * @extends {JournalEntry}
  * @mixes BaseDocument
  */
-export default class TeriockJournalEntry extends mixClasses(JournalEntry, BaseDocumentMixin) {}
+export default class TeriockJournalEntry extends mixClasses(JournalEntry, BaseDocumentMixin) {
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    for (const page of this.pages) { game.teriock.identifiers.untrackDocument(page); }
+  }
+}
