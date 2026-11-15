@@ -40,29 +40,39 @@ const TYPE_FIELDS = { equipment: "equipmentType", mount: "mountType" };
  * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
  */
 export default class IdentifiersRegistry {
-  constructor() {
-    this.#initializing = new Promise(resolve => {
-      this.#resolveInitialization = resolve;
-    });
-    const documentClasses = Object.values(documents).filter(d =>
-      foundry.utils.isSubclass(d, foundry.abstract.Document)
-    );
-    this.#primaryDocumentNames = new Set(
-      documentClasses.filter(d => d.documentMetadata?.rules).map(d => d.documentName),
-    );
-    this.#embeddedDocumentNames = this.#primaryDocumentNames.difference(new Set(CONST.PRIMARY_DOCUMENT_TYPES));
-    this.#parentDocumentNames = new Set(
-      documentClasses.filter(d => Object.keys(d.metadata.embedded).some(n => this.#embeddedDocumentNames.has(n))).map(
-        d => d.documentName
-      ),
-    );
-  }
+  /**
+   * The types of Documents which support having identifiers.
+   * @type {Set<Teriock.Documents.DocumentName>}
+   */
+  static #primaryDocumentNames = new Set(
+    Object.values(documents).filter(d =>
+      foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.rules
+    ).map(d => d.documentName),
+  );
 
   /**
    * The types of Documents which can be tracked even if they're embedded.
    * @type {Set<Teriock.Documents.DocumentName>}
    */
-  #embeddedDocumentNames;
+  static #embeddedDocumentNames = this.#primaryDocumentNames.difference(new Set(CONST.PRIMARY_DOCUMENT_TYPES));
+
+  /**
+   * The types of Documents which can support embedded Documents with indexed identifiers.
+   * @type {Set<Teriock.Documents.DocumentName>}
+   */
+  static #parentDocumentNames = new Set(
+    Object.values(documents).filter(d =>
+      foundry.utils.isSubclass(d, foundry.abstract.Document) && Object.keys(d.metadata.embedded).some(n =>
+        this.#embeddedDocumentNames.has(n)
+      )
+    ).map(d => d.documentName),
+  );
+
+  constructor() {
+    this.#initializing = new Promise(resolve => {
+      this.#resolveInitialization = resolve;
+    });
+  }
 
   /**
    * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
@@ -79,18 +89,6 @@ export default class IdentifiersRegistry {
 
   /** @type {Promise<void>} */
   #initializing;
-
-  /**
-   * The types of Documents which can support embedded Documents with indexed identifiers.
-   * @type {Set<Teriock.Documents.DocumentName>}
-   */
-  #parentDocumentNames;
-
-  /**
-   * The types of Documents which support having identifiers.
-   * @type {Set<Teriock.Documents.DocumentName>}
-   */
-  #primaryDocumentNames;
 
   /** @type {(value?: PromiseLike<void> | void) => void} */
   #resolveInitialization;
@@ -147,10 +145,10 @@ export default class IdentifiersRegistry {
    */
   #getUuidPriority(parsed) {
     // Null value if the UUID is invalid or if the Document is a valid type
-    if (!parsed || !this.#primaryDocumentNames.has(parsed.type)) { return null; }
+    if (!parsed || !IdentifiersRegistry.#primaryDocumentNames.has(parsed.type)) { return null; }
     // Document must either be at the top level of a collection or the second level if it is an allowed embedded type
     const embeddable = parsed.embedded.length === 0
-      || (parsed.embedded.length === 2 && this.#embeddedDocumentNames.has(parsed.type));
+      || (parsed.embedded.length === 2 && IdentifiersRegistry.#embeddedDocumentNames.has(parsed.type));
     if (!embeddable) { return null; }
     // Compendium collections are prioritized
     let level = 0;
@@ -255,7 +253,7 @@ export default class IdentifiersRegistry {
    * @returns {Set<Teriock.Documents.DocumentName>}
    */
   get documentNames() {
-    return this.#primaryDocumentNames.union(this.#parentDocumentNames);
+    return IdentifiersRegistry.#primaryDocumentNames.union(IdentifiersRegistry.#parentDocumentNames);
   }
 
   /**
@@ -455,7 +453,7 @@ export default class IdentifiersRegistry {
    * @param {IdentifiableDocument} document
    */
   trackDocument(document) {
-    if (!this.#primaryDocumentNames.has(document.documentName)) { return; }
+    if (!IdentifiersRegistry.#primaryDocumentNames.has(document.documentName)) { return; }
     const uuid = document.uuid;
     const identifier = document.identifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
@@ -488,7 +486,7 @@ export default class IdentifiersRegistry {
    * @param {IdentifiableDocument} document
    */
   untrackDocument(document) {
-    if (!this.#primaryDocumentNames.has(document.documentName)) { return; }
+    if (!IdentifiersRegistry.#primaryDocumentNames.has(document.documentName)) { return; }
     const uuid = document.uuid;
     const identifier = document.identifier;
     if (!uuid || !identifier) { return; }
