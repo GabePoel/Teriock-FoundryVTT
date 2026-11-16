@@ -55,7 +55,7 @@ export function getName(identifier) {
 
 /**
  * Infer a document's icon from an identifier.
- * @param {Identifier|Slug} identifier
+ * @param {Identifier} identifier
  * @returns {string}
  * @category Identifiers
  */
