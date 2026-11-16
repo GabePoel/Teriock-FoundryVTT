@@ -21,7 +21,7 @@ declare global {
       hidden?: boolean;
       icons?: Teriock.Embeds.EmbedIcon[];
       id?: ID<TeriockActiveEffect | TeriockActor | TeriockItem>;
-      identifier?: string | TypedIdentifier;
+      identifier?: string | Identifier;
       img: string;
       inactive?: boolean;
       makeTooltip?: boolean;

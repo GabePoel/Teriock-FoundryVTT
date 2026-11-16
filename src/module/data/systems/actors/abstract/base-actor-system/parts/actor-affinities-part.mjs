@@ -45,7 +45,7 @@ export default function ActorAffinitiesPart(Base) {
      * Relevant wiki pages:
      * - [Protection keywords](https://wiki.teriock.com/index.php/Category:Protection_keywords)
      *
-     * @param {TypedIdentifier} identifier - What to check for protection against
+     * @param {Identifier} identifier - What to check for protection against
      * @returns {boolean} Whether or not there's some protection against the identifier
      */
     isProtected(identifier) {

@@ -38,7 +38,7 @@ export function toCamelCase(str) {
  * @param {string} str
  * @param {object} [options]
  * @param {boolean} [options.convertCamel] - Separate camelCase words.
- * @returns {Identifier}
+ * @returns {Slug}
  */
 export function toSlug(str, { convertCamel = false } = {}) {
   if (convertCamel) { str = str.replace(/([a-z0-9])([A-Z])/g, "$1-$2"); }

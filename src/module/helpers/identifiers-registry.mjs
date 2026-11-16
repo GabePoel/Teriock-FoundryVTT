@@ -36,7 +36,7 @@ const TYPE_FIELDS = { equipment: "equipmentType", mount: "mountType" };
  * Registry of Document UUIDs based on their identifiers. Many Documents could have the same identifier, but there is
  * only one canonical Document for each identifier. Documents in Compendium packs are preferred over ones in the world
  * for establishing a single source of truth in regard to what identifiers refer to.
- * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
+ * @implements {Teriock.Registries.SingleRegistry<Identifier, UUID<IdentifiableDocument>>}
  */
 export default class IdentifiersRegistry {
   constructor() {
@@ -48,7 +48,7 @@ export default class IdentifiersRegistry {
   /**
    * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
    * priority score and name.
-   * @type {Map<Teriock.Documents.CommonType|null, Map<Identifier, Map<UUID<IdentifiableDocument>, TrackedUuid>>>}
+   * @type {Map<Teriock.Documents.CommonType|null, Map<Slug, Map<UUID<IdentifiableDocument>, TrackedUuid>>>}
    */
   #identifiers = new Map();
 
@@ -66,7 +66,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Registration of the Documents that define types, keyed by Item type.
-   * @type {Map<string, Map<Identifier, IdentifierEntry>>}
+   * @type {Map<string, Map<Slug, IdentifierEntry>>}
    */
   #types = new Map(Object.keys(TYPE_FIELDS).map(t => [t, new Map()]));
 
@@ -156,7 +156,7 @@ export default class IdentifiersRegistry {
   /**
    * Refresh the cached type entry for an identifier.
    * @param {string} type
-   * @param {Identifier} identifier
+   * @param {Slug} identifier
    */
   #refreshType(type, identifier) {
     const types = this.#types.get(type);
@@ -185,7 +185,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Internally associate an identifier with a Document UUID.
-   * @param {TypedIdentifier} identifier
+   * @param {Identifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
    * @param {{ img?: string, name?: string, isType?: boolean }} [data]
    */
@@ -211,7 +211,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Canonical entries of all equipment types.
-   * @returns {ReadonlyMap<Identifier, IdentifierEntry>}
+   * @returns {ReadonlyMap<Slug, IdentifierEntry>}
    */
   get equipmentTypes() {
     return this.initialized ? this.#types.get("equipment") : new Map();
@@ -234,7 +234,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Canonical entries of all mount types.
-   * @returns {ReadonlyMap<Identifier, IdentifierEntry>}
+   * @returns {ReadonlyMap<Slug, IdentifierEntry>}
    */
   get mountTypes() {
     return this.initialized ? this.#types.get("mount") : new Map();
@@ -253,7 +253,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Get the UUID for the canonical Document associated with an identifier.
-   * @param {TypedIdentifier} identifier
+   * @param {Identifier} identifier
    * @param {CanonicalLookupOptions} [options]
    * @returns {UUID<IdentifiableDocument>|undefined}
    */
@@ -269,7 +269,7 @@ export default class IdentifiersRegistry {
    * Get the entries of all identifiers of a given type. This is useful for displaying options in menus.
    * @param {string} type
    * @param {CanonicalLookupOptions} [options]
-   * @returns {Record<Identifier, IdentifierEntry>}
+   * @returns {Record<Slug, IdentifierEntry>}
    */
   getEntries(type, options = {}) {
     if (!this.initialized) { return {}; }
@@ -292,7 +292,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Get the image of the canonical Document associated with an identifier.
-   * @param {TypedIdentifier} identifier
+   * @param {Identifier} identifier
    * @param {CanonicalLookupOptions} [options]
    * @returns {string|undefined}
    */
@@ -306,7 +306,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Get the name of the canonical Document associated with an identifier.
-   * @param {TypedIdentifier} identifier
+   * @param {Identifier} identifier
    * @param {CanonicalLookupOptions} [options]
    * @param {boolean} [options.forced] - Force a string to be provided. This will be either the provided identifier or
    * a blank string if the identifier is formatted incorrectly.
@@ -326,7 +326,7 @@ export default class IdentifiersRegistry {
    * Get the names of all identifiers of a given type. This is useful for displaying options in menus.
    * @param {string} type
    * @param {CanonicalLookupOptions} [options]
-   * @returns {Record<Identifier, string>}
+   * @returns {Record<Slug, string>}
    */
   getNames(type, options = {}) {
     if (!this.initialized) { return {}; }
@@ -343,7 +343,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Associate an identifier with a Document UUID.
-   * @param {TypedIdentifier} identifier
+   * @param {Identifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
    * @param {{ img?: string, name?: string, isType?: boolean }} [data]
    */
@@ -400,7 +400,7 @@ export default class IdentifiersRegistry {
 
   /**
    * Remove a UUID from the registry.
-   * @param {TypedIdentifier} identifier
+   * @param {Identifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
    */
   untrack(identifier, uuid) {

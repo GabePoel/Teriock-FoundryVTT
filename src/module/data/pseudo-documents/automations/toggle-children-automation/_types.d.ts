@@ -1,7 +1,7 @@
 declare module "./toggle-children-automation.mjs" {
   export default interface ToggleChildrenAutomation {
-    add: Set<TypedIdentifier>;
-    remove: Set<TypedIdentifier>;
+    add: Set<Identifier>;
+    remove: Set<Identifier>;
     qualifier: Teriock.System.FormulaString;
   }
 }

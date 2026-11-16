@@ -87,7 +87,7 @@ export async function batchWrite(operations, { asGM = false } = {}) {
 /**
  * Get the operations that ensure a document has all the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
- * @param {TypedIdentifier[]} identifiers
+ * @param {Identifier[]} identifiers
  * @returns {Promise<DatabaseWriteOperation[]>}
  */
 export async function getEnsureChildrenOperations(document, identifiers) {
@@ -110,7 +110,7 @@ export async function getEnsureChildrenOperations(document, identifiers) {
 /**
  * Get the operations that ensure a document has none of the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
- * @param {TypedIdentifier[]} identifiers
+ * @param {Identifier[]} identifiers
  * @returns {Promise<DatabaseWriteOperation[]>}
  */
 export async function getEnsureNoChildrenOperations(document, identifiers) {

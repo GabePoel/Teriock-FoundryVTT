@@ -24,7 +24,7 @@ declare global {
       /** Previously-tracked dependency id. This is retained so it can be untracked when it changes. */
       dep?: string;
       /** Previously-tracked typed identifier. This is retained so it can be untracked when it changes. */
-      identifier?: TypedIdentifier;
+      identifier?: Identifier;
       /** Whether this document is a reference and not "real". */
       isReference?: boolean;
       /** Whether this document is a status effect. */

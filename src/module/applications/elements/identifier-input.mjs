@@ -10,7 +10,7 @@ const { setInputAttributes } = foundry.applications.fields;
 
 /**
  * @typedef IdentifierInputConfig
- * @property {string|null} [reset] Identifier applied when the reset button is clicked.
+ * @property {string|null} [reset] Slug applied when the reset button is clicked.
  */
 
 /**
@@ -62,7 +62,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
 
   /**
    * The identifier applied when the reset button is clicked.
-   * @returns {Identifier|null}
+   * @returns {Slug|null}
    */
   get reset() {
     return this.getAttribute("reset");

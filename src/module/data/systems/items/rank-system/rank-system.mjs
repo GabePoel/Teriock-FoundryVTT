@@ -210,10 +210,7 @@ export default class RankSystem
     return super.wikiPage && this.number.between(1, 5);
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
+  /** @inheritDoc */
   get wikiIdentifier() {
     return `class:${this.class}`;
   }

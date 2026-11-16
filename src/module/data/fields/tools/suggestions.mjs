@@ -4,13 +4,13 @@ import { objectMap } from "../../../utils/_module.mjs";
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
  */
 
-/** @type {Record<string, Record<Identifier, string>>} */
+/** @type {Record<string, Record<Slug, string>>} */
 const CONFIG_SUGGESTIONS = {};
 
 /**
  * Suggested identifiers and names for a category.
  * @param {string} category
- * @returns {Record<Identifier, string>}
+ * @returns {Record<Slug, string>}
  */
 export function categorySuggestions(category) {
   const path = TERIOCK.CONFIG.category[category]?.suggestions;

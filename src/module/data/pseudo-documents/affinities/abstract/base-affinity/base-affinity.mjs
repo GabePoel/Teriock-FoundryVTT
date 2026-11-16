@@ -203,7 +203,7 @@ export default class BaseAffinity
 
   /**
    * The typed identifier for whatever this targets.
-   * @returns {TypedIdentifier}
+   * @returns {Identifier}
    */
   get targetIdentifier() {
     return `${this.category}:${this.identifier}`;
@@ -211,7 +211,7 @@ export default class BaseAffinity
 
   /**
    * The identifier for this type of affinity.
-   * @returns {TypedIdentifier}
+   * @returns {Identifier}
    */
   get typedIdentifier() {
     return this._typeConfig.identifier;

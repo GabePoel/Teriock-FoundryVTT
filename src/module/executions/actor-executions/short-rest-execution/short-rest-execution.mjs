@@ -58,7 +58,7 @@ export default class ShortRestExecution extends DocumentExecution {
     return TERIOCK.DISPLAY.icons.manifest.execution[this.executionTime];
   }
 
-  /** @returns {TypedIdentifier} */
+  /** @returns {Identifier} */
   get journalEntryPageIdentifier() {
     return `core:${toSlug(this.executionTime, { convertCamel: true })}`;
   }

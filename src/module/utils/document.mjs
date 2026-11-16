@@ -5,7 +5,7 @@
 /**
  * Resolve anything (UUID, identifier, compendium index, or Document) that represents a Document to an actual Document.
  * @template T
- * @param {Teriock.Hierarchy.Index<T> | UUID<T> | TypedIdentifier} syncDoc
+ * @param {Teriock.Hierarchy.Index<T> | UUID<T> | Identifier} syncDoc
  * @returns {Promise<T|null>}
  */
 export async function resolveDocument(syncDoc) {
@@ -18,7 +18,7 @@ export async function resolveDocument(syncDoc) {
 /**
  * Ensure all documents in an array are not indexes.
  * @template T
- * @param {Teriock.Hierarchy.Index<T>[] | UUID<T> | TypedIdentifier} syncDocs
+ * @param {Teriock.Hierarchy.Index<T>[] | UUID<T> | Identifier} syncDocs
  * @param {Teriock.System.ResolveDocumentsOptions} [options]
  * @returns {Promise<T[]>}
  */
@@ -34,7 +34,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
 
 /**
  * Parse an identifier into its component parts.
- * @param {Identifier} identifier
+ * @param {Identifier|Slug} identifier
  * @returns {Teriock.System.ResolvedIdentifier}
  */
 export function parseIdentifier(identifier) {
@@ -44,7 +44,7 @@ export function parseIdentifier(identifier) {
 
 /**
  * Get a document's name from an identifier.
- * @param {TypedIdentifier} identifier
+ * @param {Identifier} identifier
  * @returns {string}
  */
 export function getName(identifier) {
@@ -53,7 +53,7 @@ export function getName(identifier) {
 
 /**
  * Infer a document's icon from an identifier.
- * @param {TypedIdentifier|Identifier} identifier
+ * @param {Identifier|Slug} identifier
  * @returns {string}
  */
 export function getIcon(identifier) {
@@ -86,7 +86,7 @@ export function getTypeLabel(type) {
 
 /**
  * Find the best document from a string that describes it. The preference goes identifiers then names.
- * @param {TypedIdentifier|Identifier|string} lookup
+ * @param {Identifier|Slug|string} lookup
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} [relativeTo]
  * @returns {Promise<TeriockDocument|null>}
  */
@@ -100,7 +100,7 @@ export async function findBestDocument(lookup, relativeTo) {
 
 /**
  * Get a local document from its identifier.
- * @param {Identifier|TypedIdentifier} identifier
+ * @param {Slug|Identifier} identifier
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} relativeTo - The document to compare against.
  * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
  */
@@ -127,7 +127,7 @@ export async function fromQualifier(document, qualifier) {
 
 /**
  * Get a world document from its identifier.
- * @param {TypedIdentifier} identifier
+ * @param {Identifier} identifier
  * @param {Teriock.System.SyncFetchOptions} [options]
  * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
  */
@@ -137,7 +137,7 @@ export function fromIdentifierSync(identifier, options = {}) {
 
 /**
  * Get a document from its identifier.
- * @param {TypedIdentifier} identifier
+ * @param {Identifier} identifier
  * @param {Teriock.System.FetchOptions} [options]
  * @returns {Promise<TeriockDocument|null>}
  */
@@ -152,7 +152,7 @@ export async function fromIdentifier(identifier, options = {}) {
 
 /**
  * Get a document from some key that specifies it. This could be either a typed identifier or a UUID.
- * @param {TypedIdentifier|UUID} uuidOrIdentifier
+ * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {Promise<TeriockDocument|null>}
  */
@@ -165,7 +165,7 @@ export async function fromKey(uuidOrIdentifier, options = {}) {
 
 /**
  * Synchronously get a document from some key that specifies it. This could be either a typed identifier or a UUID.
- * @param {TypedIdentifier|UUID} uuidOrIdentifier
+ * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {TeriockDocument|null}
  */

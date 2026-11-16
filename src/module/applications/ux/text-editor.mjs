@@ -25,10 +25,10 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Patched to allow for identifiers as well as UUIDs.
    * @inheritDoc
-   * @returns {DocumentHTMLEmbedConfig & { identifier?: TypedIdentifier }}
+   * @returns {DocumentHTMLEmbedConfig & { identifier?: Identifier }}
    */
   static _parseEmbedConfig(raw, options = {}) {
-    /** @type {DocumentHTMLEmbedConfig & { identifier?: TypedIdentifier }} */
+    /** @type {DocumentHTMLEmbedConfig & { identifier?: Identifier }} */
     const config = super._parseEmbedConfig(raw, options);
     if (!config.uuid) {
       if (config.identifier) { config.uuid = game.teriock.identifiers.get(config.identifier); }

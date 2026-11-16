@@ -106,10 +106,7 @@ export default class FluencySystem
     return false;
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
+  /** @inheritDoc */
   get wikiIdentifier() {
     return `tradecraft:${this.tradecraft}`;
   }

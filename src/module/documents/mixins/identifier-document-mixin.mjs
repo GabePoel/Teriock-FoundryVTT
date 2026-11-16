@@ -14,7 +14,7 @@ export default function IdentifierDocumentMixin(Base) {
     /**
      * Get the identifier for one of these documents.
      * @param {TeriockDocument|object} doc
-     * @returns {TypedIdentifier}
+     * @returns {Identifier}
      */
     static getIdentifier(doc) {
       return `${this.getIdentifierType(doc)}:${this.getIdentifierSlug(doc)}`;
@@ -23,7 +23,7 @@ export default function IdentifierDocumentMixin(Base) {
     /**
      * Get the identifier slug for one of these documents.
      * @param {TeriockDocument|object} doc
-     * @returns {Identifier}
+     * @returns {Slug}
      */
     static getIdentifierSlug(doc) {
       return foundry.utils.getProperty(doc, "system.identifier") || teriock.utils.toSlug(doc.name);
@@ -32,7 +32,7 @@ export default function IdentifierDocumentMixin(Base) {
     /**
      * Get the identifier type for one of these documents.
      * @param {TeriockDocument|object} doc
-     * @returns {Identifier}
+     * @returns {Slug}
      */
     static getIdentifierType(doc) {
       if (doc.type) { return teriock.utils.toSlug(doc.type, { convertCamel: true }); }
@@ -41,7 +41,7 @@ export default function IdentifierDocumentMixin(Base) {
 
     /**
      * This document's identifier.
-     * @returns {TypedIdentifier}
+     * @returns {Identifier}
      */
     get identifier() {
       return this.constructor.getIdentifier(this);

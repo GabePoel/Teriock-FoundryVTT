@@ -60,7 +60,7 @@ declare global {
 
     export type DropEffect = "copy" | "link" | "move" | "none";
 
-    export type DropData<T> = { identifier?: TypedIdentifier, interactive?: boolean, type: string, uuid: UUID<T> };
+    export type DropData<T> = { identifier?: Identifier, interactive?: boolean, type: string, uuid: UUID<T> };
 
     export type DragDropPayload<T> = DropData<T> & { document?: T };
 

@@ -393,7 +393,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Toggle a configured child for the Document. Designed to function like {@link Actor.toggleStatusEffect}.
-     * @param {TypedIdentifier} identifier - An identifier existing in the world or a compendium.
+     * @param {Identifier} identifier - An identifier existing in the world or a compendium.
      * @param {object} [options] - Additional options which modify how the child is created.
      * @param {boolean} [options.active] - Force the child to be active or inactive regardless of its current state.
      * @returns {Promise<TeriockActiveEffect|TeriockItem|boolean|undefined>} - A promise which resolves to one of the following

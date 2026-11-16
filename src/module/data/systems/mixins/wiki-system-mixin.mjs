@@ -20,7 +20,7 @@ export default function WikiSystemMixin(Base) {
 
     /**
      * The identifier of this document's [wiki](https://wiki.teriock.com) page.
-     * @returns {TypedIdentifier|null}
+     * @returns {Identifier}
      */
     get wikiIdentifier() {
       return this.parent.identifier;

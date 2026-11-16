@@ -132,7 +132,7 @@ export default function AbilityEquipmentPart(Base) {
     /**
      * Data that represents this ability as a scroll.
      * @param {object} [data] - Optional data to mutate the created scroll.
-     * @param {Identifier} [equipmentType="scroll"] - A chosen equipment type to make.
+     * @param {Slug} [equipmentType="scroll"] - A chosen equipment type to make.
      * @returns {Promise<object>}
      */
     async toScroll(data = {}, equipmentType = "scroll") {

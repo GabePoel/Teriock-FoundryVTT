@@ -3,7 +3,7 @@ declare module "./mount-system.mjs" {
     /** <schema> If mount is mounted */
     mounted: boolean;
     /** <schema> Mount species or type */
-    mountType: TypedIdentifier<"mount">;
+    mountType: Slug;
   }
 }
 

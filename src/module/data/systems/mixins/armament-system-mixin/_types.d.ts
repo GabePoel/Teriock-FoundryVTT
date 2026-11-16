@@ -14,7 +14,7 @@ declare global {
         /** <schema> The amount of damage this deals in two hands */
         twoHanded: Teriock.System.FormulaString;
         /** <base> Additional damage types that will be added to damage this deals */
-        types: Set<Identifier>;
+        types: Set<Slug>;
       };
       /** <schema> Equipment Classes */
       equipmentClasses: Set<Teriock.Keys.Classification>;
@@ -40,7 +40,7 @@ declare global {
       /** <schema> Spell Turning */
       spellTurning: boolean;
       /** <schema> Fighting style */
-      style: TypedIdentifier<"style", Teriock.Keys.Style>;
+      style: Teriock.Keys.Style;
       /** <derived> Special Rules (Weapon Fighting Style) */
       styleDescription: string;
       /** <schema> Vitals */

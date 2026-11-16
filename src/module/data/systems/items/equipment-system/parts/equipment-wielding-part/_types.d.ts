@@ -8,7 +8,7 @@ declare global {
         /** <base> Whether this uses ammunition */
         enabled: boolean;
         /** <schema> The type of ammunition this uses */
-        type: TypedIdentifier<"equipment">;
+        type: Slug;
       };
       /** <schema> Is the equipment equipped? */
       equipped: boolean;

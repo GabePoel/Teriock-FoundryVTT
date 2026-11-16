@@ -56,7 +56,7 @@ export default class FallExecution extends BaseExecution {
     return TERIOCK.DISPLAY.icons.manifest.execution.fall;
   }
 
-  /** @returns {TypedIdentifier} */
+  /** @returns {Identifier} */
   get journalEntryPageIdentifier() {
     return "core:falling";
   }

@@ -14,7 +14,7 @@ export default class FormulaField extends StringField {
   /**
    * Apply a function to the types of every term in a formula.
    * @param {Teriock.System.FormulaString} formula
-   * @param {Iterable<Identifier>} types
+   * @param {Iterable<Slug>} types
    * @param {(existing: Set<string>, types: Set<string>) => Set<string>} fn
    * @returns {Teriock.System.FormulaString}
    */
@@ -53,7 +53,7 @@ export default class FormulaField extends StringField {
   /**
    * Add types to a formula that supports them. All types must be identifiers.
    * @param {Teriock.System.FormulaString} formula
-   * @param {Iterable<Identifier>} types
+   * @param {Iterable<Slug>} types
    * @returns {Teriock.System.FormulaString}
    */
   static addTypes(formula, types) {
@@ -120,7 +120,7 @@ export default class FormulaField extends StringField {
   /**
    * Remove types from a formula that supports them. All types must be identifiers.
    * @param {Teriock.System.FormulaString} formula
-   * @param {Iterable<Identifier>} types
+   * @param {Iterable<Slug>} types
    * @returns {Teriock.System.FormulaString}
    */
   static removeTypes(formula, types) {
@@ -130,7 +130,7 @@ export default class FormulaField extends StringField {
   /**
    * Set types of a formula that supports them. All types must be identifiers.
    * @param {Teriock.System.FormulaString} formula
-   * @param {Iterable<Identifier>} types
+   * @param {Iterable<Slug>} types
    * @returns {Teriock.System.FormulaString}
    */
   static setTypes(formula, types) {

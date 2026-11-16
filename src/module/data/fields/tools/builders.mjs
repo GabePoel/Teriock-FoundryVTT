@@ -468,7 +468,7 @@ export function terrainSchema() {
 
 /**
  * Field for selecting identifiers from a config table.
- * @param {Record<Identifier, { label: string }>} table
+ * @param {Record<Slug, { label: string }>} table
  * @param {ArrayFieldOptions} [options]
  * @returns {SetField}
  */

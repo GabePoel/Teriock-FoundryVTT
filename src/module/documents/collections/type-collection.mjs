@@ -146,7 +146,7 @@ export default class TypeCollection extends Collection {
 
   /**
    * All the identifiers in this collection.
-   * @returns {Set<TypedIdentifier>}
+   * @returns {Set<Identifier>}
    * @todo Add caching.
    */
   get identifiers() {
@@ -260,7 +260,7 @@ export default class TypeCollection extends Collection {
    * Names of the identifiers in this collection. This is useful for displaying options in menus.
    * @param {object} [options]
    * @param {(document: TDocument) => boolean} [options.filter] - Only include documents that pass this filter.
-   * @returns {Record<TypedIdentifier, string>}
+   * @returns {Record<Identifier, string>}
    */
   getNames({ filter } = {}) {
     const names = {};
