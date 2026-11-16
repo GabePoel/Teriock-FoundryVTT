@@ -87,14 +87,14 @@ export async function batchWrite(operations, { asGM = false } = {}) {
 /**
  * Get the operations that ensure a document has all the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
- * @param {TypedIdentifier[]} identifiers
+ * @param {Identifier[]} identifiers
  * @returns {Promise<DatabaseWriteOperation[]>}
  */
 export async function getEnsureChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
   const existing = document.children.identifiers;
   const candidates = await Promise.all(identifiers.map(async identifier => {
-    if (!(teriock.data.fields.tools.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
+    if (!(teriock.data.fields.tools.validators.validateIdentifier(identifier, { strict: true }))) { return; }
     if (existing?.has(identifier)) { return; }
     const doc = await fromIdentifier(identifier);
     if (!doc) { return; }
@@ -110,12 +110,12 @@ export async function getEnsureChildrenOperations(document, identifiers) {
 /**
  * Get the operations that ensure a document has none of the predefined documents named.
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} document
- * @param {TypedIdentifier[]} identifiers
+ * @param {Identifier[]} identifiers
  * @returns {Promise<DatabaseWriteOperation[]>}
  */
 export async function getEnsureNoChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
-  const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.typedIdentifier));
+  const toDelete = (await document.children.getContents()).filter(c => identifiers.includes(c.identifier));
   return [...Map.groupBy(toDelete, c => c.documentName)].map(([documentName, group]) =>
     document.getDeleteChildDocumentsOperation(documentName, group.map(c => c.id))
   ).filter(Boolean);

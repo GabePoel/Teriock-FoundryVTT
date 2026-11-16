@@ -10,7 +10,7 @@ import {
   objectMap,
   omit,
   prefixObject,
-  toKebabCase,
+  toSlug,
 } from "../../../utils/_module.mjs";
 import { DocumentExecution } from "../../abstract/_module.mjs";
 import { AttackExecutionMixin } from "../../mixins/_module.mjs";
@@ -376,15 +376,15 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     let armament;
     if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
     if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
-    const weaponPropertyIdentifiers = ["weapon"];
-    if (this.source.system.identifier === "basic-attack") { weaponPropertyIdentifiers.push("bashing"); }
-    armament = this._reselectArmamentForProperties(armament, "weapon", weaponPropertyIdentifiers);
+    const weaponPropertySlugs = ["weapon"];
+    if (this.source.system.slug === "basic-attack") { weaponPropertySlugs.push("bashing"); }
+    armament = this._reselectArmamentForProperties(armament, "weapon", weaponPropertySlugs);
     armament = this._reselectArmamentForProperties(armament, "bite", ["biting"]);
-    const handPropertyIdentifiers = ["handy"];
-    if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.identifier === "staff-touch")) {
-      handPropertyIdentifiers.push("magelore");
+    const handPropertySlugs = ["handy"];
+    if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.slug === "staff-touch")) {
+      handPropertySlugs.push("magelore");
     }
-    armament = this._reselectArmamentForProperties(armament, "hand", handPropertyIdentifiers);
+    armament = this._reselectArmamentForProperties(armament, "hand", handPropertySlugs);
     armament = this._reselectArmamentForEquipmentClass(armament, "armor", "armor");
     armament = this._reselectArmamentForEquipmentClass(armament, "shield", "shields");
     return armament;
@@ -433,8 +433,8 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         executor: this.actor?.uuid ?? null,
         expirations: this.expirations.active.filter(applies).map(e => e.getEffectData(this)),
         heightened: this.heightened,
-        identifier: `${this.source.forcedIdentifier}-effect`,
         powerSources: this.source.system.powerSources.toObject(),
+        slug: `${this.source.system.slug}-effect`,
         sustained: this.source.system.sustained,
       },
     };
@@ -455,7 +455,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
       Object.entries(super._getSourceRollData()).filter(([k]) => !k.startsWith("maneuver.") && !k.startsWith("time.")),
     );
     data[`maneuver.${this.maneuver}`] = 1;
-    data[`time.${toKebabCase(this.executionTime)}`] = 1;
+    data[`time.${toSlug(this.executionTime, { convertCamel: true })}`] = 1;
     return data;
   }
 
@@ -545,10 +545,10 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
   _reselectArmamentForProperties(armament, delivery, properties) {
     if (
       this.source.system.delivery === delivery
-      && !armament?.previewedTypes.property.some((p) => p.active && properties.includes(p.system.identifier))
+      && !armament?.previewedTypes.property.some((p) => p.active && properties.includes(p.system.slug))
     ) {
       armament = this.actor.previewedTags.armament.find((a) =>
-        a.active && a.previewedTypes.property.some(p => p.active && properties.includes(p.system.identifier))
+        a.active && a.previewedTypes.property.some(p => p.active && properties.includes(p.system.slug))
       );
     }
     return armament;

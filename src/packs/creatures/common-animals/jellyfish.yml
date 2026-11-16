@@ -27,7 +27,6 @@ items:
             raw: 1
           delivery: self
           featSaveAttribute: snk
-          identifier: hide
           interaction: feat
           overview:
             base: >-
@@ -46,6 +45,7 @@ items:
             @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
             @Identifier[condition:hidden]{hidden}.</p>
           skill: true
+          slug: hide
           standard: true
           targets:
             - self
@@ -71,7 +71,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -81,6 +80,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -98,7 +98,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-strength
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -106,6 +105,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-strength
           targets:
             - self
           upgrades:
@@ -127,13 +127,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -154,13 +154,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -219,7 +219,6 @@ items:
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          identifier: poison-strike
           limitation: <p>@Wiki[Category:Tentacles]{Tentacles} only.</p>
           overview:
             fluent: >-
@@ -235,6 +234,7 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
+          slug: poison-strike
         type: ability
       - _id: QRN8P57dniWm9VON
         _key: "!actors.items.effects!6d5b17dc3d3c7589.6d5b17dc3d3c7589.QRN8P57dniWm9VON"
@@ -250,7 +250,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: slow
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -258,6 +257,7 @@ items:
             - martial
           range:
             unit: self
+          slug: slow
           targets:
             - self
           upgrades:
@@ -292,7 +292,6 @@ items:
             - revival
           executionTime:
             base: passive
-          identifier: slow-regenerating
           interaction: manifest
           maneuver: passive
           overview:
@@ -306,6 +305,7 @@ items:
             - martial
           range:
             unit: self
+          slug: slow-regenerating
           targets:
             - self
         type: ability
@@ -323,7 +323,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: stupid-intelligence
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -331,6 +330,7 @@ items:
             - martial
           range:
             unit: self
+          slug: stupid-intelligence
           targets:
             - self
           upgrades:
@@ -363,7 +363,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: water-home
           interaction: manifest
           maneuver: passive
           overview:
@@ -374,6 +373,7 @@ items:
             - martial
           range:
             unit: self
+          slug: water-home
           targets:
             - self
         type: ability
@@ -392,7 +392,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: diving
           interaction: manifest
           maneuver: passive
           overview:
@@ -409,6 +408,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: diving
           standard: true
           targets:
             - self
@@ -442,7 +442,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: swimming
           interaction: manifest
           maneuver: passive
           overview:
@@ -452,6 +451,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: swimming
           standard: true
           targets:
             - self
@@ -462,11 +462,11 @@ items:
     system:
       br: 2
       hpIncrease: <p>Gain another hit die for every 1 additional size above 1.</p>
-      identifier: jellyfish
       size:
         max: 5
         min: 0.25
         value: 0.25
+      slug: jellyfish
       statDice:
         hp:
           formula: (@this.item.size + 0.75)d2
@@ -497,8 +497,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: aOo573d9IEMjg5qF
         _key: "!actors.items.effects!6d5b17dc3d3c7589.lVeTb94YGVEReKEO.aOo573d9IEMjg5qF"
@@ -512,10 +512,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: woQSszP5v3wiUiW0
         _key: "!actors.items.effects!6d5b17dc3d3c7589.lVeTb94YGVEReKEO.woQSszP5v3wiUiW0"
@@ -529,8 +529,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/tentacle.webp
@@ -539,10 +539,10 @@ items:
       _sup: 6d5b17dc3d3c7589
       damage:
         base: "1"
-      identifier: tentacle
       range:
         long:
           unit: melee
+      slug: tentacle
       style: wraparound
     type: body
 name: Jellyfish
@@ -562,7 +562,6 @@ system:
   _src: Compendium.teriock.species.Item.6d5b17dc3d3c7589
   hp:
     value: 2
-  identifier: jellyfish
   lockedPaths:
     - system.money.copper
     - system.money.debt
@@ -582,6 +581,7 @@ system:
     brScale: true
   size:
     value: 0.25
+  slug: jellyfish
   wielding:
     attacker: lVeTb94YGVEReKEO
     blocker: lVeTb94YGVEReKEO

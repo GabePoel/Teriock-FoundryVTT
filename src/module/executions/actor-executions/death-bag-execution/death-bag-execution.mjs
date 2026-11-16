@@ -67,7 +67,7 @@ export default class DeathBagExecution extends DocumentExecution {
     return TERIOCK.DISPLAY.icons.manifest.execution.deathBag;
   }
 
-  /** @returns {TypedIdentifier} */
+  /** @returns {Identifier} */
   get journalEntryPageIdentifier() {
     return "core:death-bag";
   }

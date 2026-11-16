@@ -8,7 +8,8 @@ export default class FamiliarExecution extends DocumentExecution {
   /** @inheritDoc */
   async _buildActivations() {
     const { actorUuid, creatureType } = this.source.system;
-    const actor = (actorUuid && await fromUuid(actorUuid)) || await teriock.fromIdentifier(creatureType);
+    const actor = (actorUuid && await fromUuid(actorUuid))
+      || (creatureType && await teriock.fromIdentifier(`creature:${creatureType}`));
     if (actor) {
       this.automations.addDocuments([new SummonAutomation({ addToGroup: "commanded", globalUuids: [actor.uuid] })]);
     }

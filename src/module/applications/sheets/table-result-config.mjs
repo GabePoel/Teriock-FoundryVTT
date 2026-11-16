@@ -1,4 +1,4 @@
-import { TypedIdentifierField } from "../../data/fields/_module.mjs";
+import { IdentifierField } from "../../data/fields/_module.mjs";
 import { fromIdentifierSync } from "../../utils/_module.mjs";
 
 const { TableResultConfig } = foundry.applications.sheets;
@@ -40,7 +40,7 @@ export default class TeriockTableResultConfig extends TableResultConfig {
   _replaceHTML(result, content, options) {
     const documentUuidGroup = result.sheet?.querySelector(".form-group:has(document-tags[name=\"documentUuid\"])");
     if (documentUuidGroup) {
-      const field = new TypedIdentifierField({
+      const field = new IdentifierField({
         hint: _loc("TERIOCK.SHEETS.TableResult.documentIdentifier.hint"),
         label: _loc("TERIOCK.SHEETS.TableResult.documentIdentifier.label"),
       });

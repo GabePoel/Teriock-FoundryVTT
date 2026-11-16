@@ -19,7 +19,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: additional-life-rotators
       interaction: manifest
       maneuver: passive
       overview:
@@ -32,6 +31,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: additional-life-rotators
       targets:
         - self
     type: ability
@@ -52,7 +52,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: amplify-life-spells
       interaction: manifest
       maneuver: passive
       overview:
@@ -68,6 +67,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: amplify-life-spells
       standard: true
       targets:
         - self
@@ -143,7 +143,6 @@ effects:
       executionTime:
         base: passive
       featSaveAttribute: int
-      identifier: expanded-life-elder-sorcery
       interaction: feat
       kind: special
       maneuver: passive
@@ -175,6 +174,7 @@ effects:
         fail: <p>You are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell or word again.</p>
         save: <p>You learn the spell or word.</p>
       skill: true
+      slug: expanded-life-elder-sorcery
       standard: true
       targets:
         - self
@@ -196,7 +196,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: life-disciplines
       interaction: manifest
       maneuver: passive
       overview:
@@ -218,6 +217,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: life-disciplines
       standard: true
       targets:
         - self
@@ -253,7 +253,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: life-rotator-fluency
       interaction: manifest
       maneuver: passive
       overview:
@@ -269,6 +268,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: life-rotator-fluency
       standard: true
       targets:
         - self
@@ -303,7 +303,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: life-spell-strikes
       interaction: manifest
       maneuver: passive
       overview:
@@ -313,6 +312,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: life-spell-strikes
       standard: true
       targets:
         - self
@@ -346,11 +346,11 @@ effects:
         raw: 1
       elements:
         - life
-      identifier: adept-life-spell-cast
       powerSources:
         - magical
       quantity:
         maxFormula: "1"
+      slug: adept-life-spell-cast
     type: resource
   - _id: ZS1L4s2j7BCN04IT
     _key: "!items.effects!8c729f062c7bed72.ZS1L4s2j7BCN04IT"
@@ -378,7 +378,6 @@ effects:
         - life
       executionTime:
         base: r1
-      identifier: emergency-casting
       interaction: manifest
       maneuver: reactive
       overview:
@@ -388,6 +387,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: emergency-casting
       standard: true
       targets:
         - spell
@@ -422,11 +422,11 @@ effects:
         raw: 1
       elements:
         - life
-      identifier: half-time-ritual-life-spell-cast
       powerSources:
         - magical
       quantity:
         maxFormula: "1"
+      slug: half-time-ritual-life-spell-cast
     type: resource
   - _id: lWx2e5ABlrh2Gem0
     _key: "!items.effects!8c729f062c7bed72.lWx2e5ABlrh2Gem0"
@@ -529,7 +529,6 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
-      identifier: minor-item-enchantment
       interaction: manifest
       invoked: true
       kind: special
@@ -553,6 +552,7 @@ effects:
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
       ritual: true
       rotator: true
+      slug: minor-item-enchantment
       spell: true
       standard: true
       targets:
@@ -578,7 +578,6 @@ effects:
         - life
       executionTime:
         base: r0
-      identifier: sheltered-casting
       interaction: manifest
       maneuver: reactive
       overview:
@@ -591,6 +590,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: sheltered-casting
       standard: true
       targets:
         - spell
@@ -624,7 +624,6 @@ effects:
             type: formula
       executionTime:
         base: r0
-      identifier: spell-strike
       interaction: manifest
       limitation: >-
         <p>Only usable with @Identifier[ability:light-ray]{Light Ray} and @Identifier[ability:medicine-ball]{Medicine
@@ -638,6 +637,7 @@ effects:
       powerSources:
         - magical
       skill: true
+      slug: spell-strike
       standard: true
       trigger: >-
         <p>You have just landed a hit with a @Identifier[core:item-delivery]{weapon} or
@@ -659,7 +659,7 @@ effects:
             - resultsAlt
             - resultsAltCrit
             - unheightened
-          identifier: awakening
+          slug: awakening
           type: resistance
       automations:
         - _id: e1c7d7174b360e93
@@ -726,7 +726,6 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/sleep
         1d8]]. @Identifier[core:targets]{Target} is also @Identifier[keyword:resistance]{resistant} to being
         @Identifier[keyword:awaken]{awakened}.</p>
-      identifier: swift-sleep-aura
       interaction: feat
       invoked: true
       kind: special
@@ -746,6 +745,7 @@ effects:
           <p>Any creatures who have fewer @Identifier[core:hit-points-and-mana-points]{HP} than the result of the die
           roll are rendered @Identifier[condition:asleep]{asleep} until this effect ends.</p>
       rotator: true
+      slug: swift-sleep-aura
       spell: true
       standard: true
     type: ability
@@ -756,10 +756,10 @@ system:
   archetype: mage
   class: life-mage
   description: <p>@Embed[class:life-mage description inline]</p>
-  identifier: rank-3-life-mage
   instructions: <p>@Embed[class:life-mage path=system.instructions inline]</p>
   maxAv: 0
   number: 3
+  slug: rank-3-life-mage
   statDice:
     hp:
       formula: 1d8

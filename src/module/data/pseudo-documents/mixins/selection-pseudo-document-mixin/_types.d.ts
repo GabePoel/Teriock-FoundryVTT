@@ -10,11 +10,11 @@ declare global {
       /** Whether tables should be recursively expanded. */
       expandTables: boolean;
       /** Identifiers to get results from globally. */
-      globalIdentifiers: Set<TypedIdentifier>;
+      globalIdentifiers: Set<Identifier>;
       /** UUIDs to get results from globally. */
       globalUuids: Set<UUID>;
       /** Identifiers to get results from relative to some local document. */
-      localIdentifiers: Set<TypedIdentifier>;
+      localIdentifiers: Set<Identifier>;
       /** Qualifier to get results from relative to some local document. */
       localQualifier: Teriock.System.FormulaString;
       /** Relative UUIDs to get results from relative to some local document. */

@@ -5,23 +5,19 @@
   {{formUpdater
     document
     action="openUpdater"
-    data=(path TERIOCK.CONFIG.tradecraft.fields system._source.field "label")
     dataset=(object updater="FluencyTradecraftUpdater")
-    icon=(path TERIOCK.CONFIG.tradecraft.fields system._source.field "icon")
+    icon=(path TERIOCK.CONFIG.tradecraft.fields system.field "icon")
     info="core:tradecrafts"
     label=(localize "TERIOCK.COMMON.Field")
     path="system.field"
-    source=system._source.field
   }}
   {{formUpdater
     document
     action="openUpdater"
-    data=(getName system.tradecraft)
     dataset=(object updater="FluencyTradecraftUpdater")
-    icon=(path TERIOCK.CONFIG.tradecraft.tradecrafts system._source.tradecraft "icon")
-    info=system.tradecraft
+    icon=(path TERIOCK.CONFIG.tradecraft.tradecrafts system.tradecraft "icon")
+    info=(concat "tradecraft:" system.tradecraft)
     label=(localize "TERIOCK.COMMON.Tradecraft")
     path="system.tradecraft"
-    source=system._source.tradecraft
   }}
 </div>

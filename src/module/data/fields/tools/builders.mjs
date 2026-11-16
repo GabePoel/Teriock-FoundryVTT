@@ -1,4 +1,4 @@
-import { FormulaField, IdentifierField, TypedIdentifierSetField } from "../_module.mjs";
+import { FormulaField, IdentifierSetField, SlugField } from "../_module.mjs";
 import { _sloc } from "../../../helpers/localization.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../utils/_module.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
@@ -320,7 +320,7 @@ export function expandSelectionSchema() {
  */
 export function localSelectionSchema() {
   return {
-    localIdentifiers: new TypedIdentifierSetField(),
+    localIdentifiers: new IdentifierSetField(),
     localQualifier: qualifierField(),
     localUuids: new SetField(new DocumentUUIDField({ relative: true })),
   };
@@ -407,11 +407,11 @@ export function defenseField(options = {}) {
 
 /**
  * Field for selecting a tradecraft.
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
+ * @param {StringFieldOptions & Teriock.Fields._SlugFieldOptions} [options]
+ * @returns {SlugField}
  */
 export function tradecraftField(options = {}) {
-  return new IdentifierField({
+  return new SlugField({
     choices: getTradecraftChoices(),
     initial: Object.keys(TERIOCK.CONFIG.tradecraft.tradecrafts)[0],
     label: _sloc("TERIOCK.COMMON.Tradecraft"),
@@ -468,21 +468,21 @@ export function terrainSchema() {
 
 /**
  * Field for selecting identifiers from a config table.
- * @param {Record<Identifier, { label: string }>} table
+ * @param {Record<Slug, { label: string }>} table
  * @param {ArrayFieldOptions} [options]
  * @returns {SetField}
  */
-export function identifierSetField(table, options = {}) {
-  return new SetField(new IdentifierField({ blank: false, choices: table, nullable: false }), options);
+export function slugSetField(table, options = {}) {
+  return new SetField(new SlugField({ blank: false, choices: table, nullable: false }), options);
 }
 
 /**
  * Field for selecting a field. (Yes, the name is silly. It is what it is.)
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
+ * @param {StringFieldOptions & Teriock.Fields._SlugFieldOptions} [options]
+ * @returns {SlugField}
  */
 export function fieldField(options = {}) {
-  return new IdentifierField({
+  return new SlugField({
     choices: TERIOCK.CONFIG.tradecraft.fields,
     initial: Object.keys(TERIOCK.CONFIG.tradecraft.fields).find(k => TERIOCK.CONFIG.tradecraft.fields[k].initial),
     label: _sloc("TERIOCK.COMMON.Field"),
@@ -494,11 +494,11 @@ export function fieldField(options = {}) {
 
 /**
  * Field for selecting a class.
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
+ * @param {StringFieldOptions & Teriock.Fields._SlugFieldOptions} [options]
+ * @returns {SlugField}
  */
 export function classField(options = {}) {
-  return new IdentifierField({
+  return new SlugField({
     choices: getClassChoices(),
     initial: Object.keys(TERIOCK.CONFIG.class.classes)[0],
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
@@ -510,11 +510,11 @@ export function classField(options = {}) {
 
 /**
  * Field for an equipment type with reference-based suggestions.
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
+ * @param {StringFieldOptions & Teriock.Fields._SlugFieldOptions} [options]
+ * @returns {SlugField}
  */
 export function equipmentTypeField(options = {}) {
-  return new IdentifierField({
+  return new SlugField({
     type: "equipment",
     suggestions: () =>
       Object.fromEntries(
@@ -528,11 +528,11 @@ export function equipmentTypeField(options = {}) {
 
 /**
  * Field for a mount type with reference-based suggestions.
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
+ * @param {StringFieldOptions & Teriock.Fields._SlugFieldOptions} [options]
+ * @returns {SlugField}
  */
 export function mountTypeField(options = {}) {
-  return new IdentifierField({
+  return new SlugField({
     type: "mount",
     suggestions: () =>
       Object.fromEntries(
@@ -546,11 +546,11 @@ export function mountTypeField(options = {}) {
 
 /**
  * Field for selecting an archetype.
- * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
- * @returns {IdentifierField}
+ * @param {StringFieldOptions & Teriock.Fields._SlugFieldOptions} [options]
+ * @returns {SlugField}
  */
 export function archetypeField(options = {}) {
-  return new IdentifierField({
+  return new SlugField({
     choices: TERIOCK.CONFIG.class.archetypes,
     initial: Object.keys(TERIOCK.CONFIG.class.archetypes).find(k => TERIOCK.CONFIG.class.archetypes[k].initial),
     label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),

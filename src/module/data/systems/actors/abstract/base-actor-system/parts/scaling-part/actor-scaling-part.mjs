@@ -1,4 +1,3 @@
-import { toKebabCase } from "../../../../../../../utils/_module.mjs";
 import { initialBoolean, initialNumber, initialSchema } from "../../../../../../fields/tools/initializers.mjs";
 
 /**
@@ -53,10 +52,10 @@ export default function ActorScalingPart(Base) {
       const data = {};
       const ranks = this.parent.previewedTypes.rank;
       for (const c of Object.keys(TERIOCK.CONFIG.class.classes)) {
-        data[`rank.${toKebabCase(c)}`] = ranks.filter(r => r.system._source.class === c).length;
+        data[`rank.${c}`] = ranks.filter(r => r.system.class === c).length;
       }
       for (const a of Object.keys(TERIOCK.CONFIG.class.archetypes)) {
-        data[`rank.${a}`] = ranks.filter(r => r.system._source.archetype === a).length;
+        data[`rank.${a}`] = ranks.filter(r => r.system.archetype === a).length;
       }
       return data;
     }
@@ -67,9 +66,9 @@ export default function ActorScalingPart(Base) {
      */
     #getSpeciesRollData() {
       const data = {};
-      for (
-        const s of this.parent.previewedTypes.species.filter(s => s.active && s.system.identifier)
-      ) { data[`species.${s.system.identifier}`] = 1; }
+      for (const s of this.parent.previewedTypes.species.filter(s => s.active)) {
+        data[`species.${s.system.slug}`] = 1;
+      }
       return data;
     }
 

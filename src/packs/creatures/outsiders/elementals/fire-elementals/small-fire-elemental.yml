@@ -28,7 +28,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic]]] @Identifier[core:damage]{damage}.</p>
-          identifier: arcane-ray
           piercing:
             raw: 1
           powerSources:
@@ -39,6 +38,7 @@ items:
           results:
             critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
             hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
+          slug: arcane-ray
           spell: true
           standard: true
         type: ability
@@ -56,7 +56,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: staff-touch
           interaction: manifest
           maneuver: passive
           overview:
@@ -79,6 +78,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: staff-touch
           standard: true
           targets:
             - self
@@ -92,7 +92,7 @@ items:
         approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
         prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
         avoiding messy melees.</p>
-      identifier: mage
+      slug: mage
     type: archetype
   - _id: 419c9a1bb485118d
     _key: "!actors.items!419c9a1bb485118d.419c9a1bb485118d"
@@ -126,7 +126,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: dark-vision
           interaction: manifest
           maneuver: passive
           overview:
@@ -135,6 +134,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dark-vision
           targets:
             - self
         type: ability
@@ -149,7 +149,7 @@ items:
             - _id: ZgdEWsaZXTJJECz8
               activeQualifier: not(@status.down)
               category: element
-              identifier: flame
+              slug: flame
               type: hexseal
           competence:
             raw: 1
@@ -160,7 +160,6 @@ items:
             - hexseal
           executionTime:
             base: passive
-          identifier: flame-magic-hexseal
           interaction: manifest
           kind: special
           maneuver: passive
@@ -173,6 +172,7 @@ items:
           range:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}.</p>
+          slug: flame-magic-hexseal
           targets:
             - self
         type: ability
@@ -186,7 +186,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damage
-              identifier: mundane
+              slug: mundane
               type: immunity
           competence:
             raw: 1
@@ -197,7 +197,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: magical-durability
           interaction: manifest
           kind: special
           maneuver: passive
@@ -209,6 +208,7 @@ items:
             - magical
           range:
             unit: self
+          slug: magical-durability
           targets:
             - self
         type: ability
@@ -242,7 +242,6 @@ items:
             - revival
           executionTime:
             base: passive
-          identifier: mana-regenerating
           interaction: manifest
           kind: special
           limitation: >-
@@ -263,6 +262,7 @@ items:
             - primal
           range:
             unit: self
+          slug: mana-regenerating
           targets:
             - self
         type: ability
@@ -280,13 +280,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -307,13 +307,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -334,13 +334,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -361,13 +361,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-strength
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-strength
           targets:
             - self
           upgrades:
@@ -386,7 +386,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-amorphous-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -403,6 +402,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in a @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental form}.</p>
+          slug: take-amorphous-elemental-form
           targets:
             - self
         type: ability
@@ -418,7 +418,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-humanoid-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -433,6 +432,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in an @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental form}.</p>
+          slug: take-humanoid-elemental-form
           targets:
             - self
         type: ability
@@ -446,7 +446,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: condition
-              identifier: unconscious
+              slug: unconscious
               type: immunity
           competence:
             raw: 1
@@ -457,7 +457,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: unconsciousness-immunity
           interaction: manifest
           maneuver: passive
           overview:
@@ -468,6 +467,7 @@ items:
             - magical
           range:
             unit: self
+          slug: unconsciousness-immunity
           targets:
             - self
         type: ability
@@ -480,12 +480,12 @@ items:
         form which resembles a human with an odd skin color.</p>
       br: 10
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: small-fire-elemental
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:flame-mage]{Flame Mage}.</p>
       size:
         max: 2
         min: 1
         value: 1
+      slug: small-fire-elemental
       statDice:
         hp:
           formula: (@this.item.size)d6
@@ -519,8 +519,8 @@ items:
           damageType: fire
           elements:
             - flame
-          identifier: burning
           kind: intrinsic
+          slug: burning
         type: property
       - _id: evekPSWtUjeWMs7F
         _key: "!actors.items.effects!419c9a1bb485118d.L9ybG6l75A5fH35j.evekPSWtUjeWMs7F"
@@ -534,10 +534,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: E2e2TIUebGXi94MD
         _key: "!actors.items.effects!419c9a1bb485118d.L9ybG6l75A5fH35j.E2e2TIUebGXi94MD"
@@ -551,8 +551,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: da5b8437ae291af1
     img: systems/teriock/src/assets/thumbnails/body/fire-tendril.webp
@@ -563,10 +563,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: fire-tendril
       range:
         long:
           unit: melee
+      slug: fire-tendril
       style: savage
     type: body
   - _id: 2pqXGc6u4ouCjgqf
@@ -596,7 +596,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic fire]]] @Identifier[core:damage]{damage}.</p>
-          identifier: fire-ball
           piercing:
             raw: 2
           powerSources:
@@ -609,6 +608,7 @@ items:
             hit: >-
               <p>Deal [[/damage 1d4[magic fire]]] @Identifier[core:damage]{damage} to
               @Identifier[core:targets]{target}.</p>
+          slug: fire-ball
           spell: true
           standard: true
         type: ability
@@ -634,7 +634,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d8[fire magic]]] @Identifier[core:damage]{damage}.</p>
-          identifier: flame-ray
           piercing:
             raw: 1
           powerSources:
@@ -647,6 +646,7 @@ items:
             hit: >-
               <p>Deal [[/damage 1d8[magic fire]]] @Identifier[core:damage]{damage} to
               @Identifier[core:targets]{target}.</p>
+          slug: flame-ray
           spell: true
           standard: true
         type: ability
@@ -664,7 +664,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: mage-light
           interaction: manifest
           maneuver: passive
           overview:
@@ -674,6 +673,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: mage-light
           standard: true
           targets:
             - self
@@ -719,7 +719,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may choose an additional
             @Identifier[core:targets]{target}.</p>
-          identifier: self-detonate
           interaction: manifest
           maneuver: slow
           overview:
@@ -747,6 +746,7 @@ items:
             <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may only @Identifier[core:targets]{target}
             yourself.</p>
           ritual: true
+          slug: self-detonate
           spell: true
           standard: true
           sustained: true
@@ -797,7 +797,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
             @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
-          identifier: ignite
           interaction: manifest
           overview:
             base: >-
@@ -811,6 +810,7 @@ items:
           requirements: >-
             <p>@Identifier[core:targets]{Target} must be a @Identifier[equipment:torch]{torch},
             @Identifier[equipment:candle]{candle}, or some other item that designed to be lit on fire.</p>
+          slug: ignite
           spell: true
           standard: true
           sustained: true
@@ -846,7 +846,6 @@ items:
             unit: minute
           elements:
             - flame
-          identifier: light
           interaction: manifest
           overview:
             base: >-
@@ -857,6 +856,7 @@ items:
           range:
             raw: "100"
             unit: ft
+          slug: light
           spell: true
           standard: true
           sustained: true
@@ -872,9 +872,9 @@ items:
       archetype: mage
       class: flame-mage
       description: <p>@Embed[class:flame-mage description inline]</p>
-      identifier: rank-1-flame-mage
       maxAv: 0
       number: 1
+      slug: rank-1-flame-mage
       statDice:
         hp:
           formula: 1d8
@@ -895,13 +895,13 @@ prototypeToken:
 system:
   hp:
     value: 4
-  identifier: small-fire-elemental
   mp:
     value: 8
   scaling:
     brScale: true
   size:
     value: 1
+  slug: small-fire-elemental
   wielding:
     attacker: L9ybG6l75A5fH35j
     blocker: L9ybG6l75A5fH35j

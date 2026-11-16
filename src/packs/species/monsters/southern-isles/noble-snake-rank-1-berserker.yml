@@ -84,7 +84,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: gladiator-skills
       interaction: manifest
       maneuver: passive
       overview:
@@ -103,6 +102,7 @@ effects:
         unit: self
       requirements: <p>You are @Identifier[condition:dueling]{dueling} or in a staged battle.</p>
       skill: true
+      slug: gladiator-skills
       standard: true
       targets:
         - self
@@ -122,7 +122,6 @@ effects:
           type: hacks
       competence:
         raw: 1
-      identifier: hack
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
@@ -137,6 +136,7 @@ effects:
           <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
           leg, depending on what you chose.</p>
       skill: true
+      slug: hack
       standard: true
       targets:
         - arm
@@ -178,13 +178,13 @@ effects:
           method: roll
           skip: 1
           type: combat
-      identifier: threat
       powerSources:
         - martial
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} becomes @Identifier[condition:frightened]{frightened}.</p>
       skill: true
+      slug: threat
       standard: true
       targets:
         - vitals
@@ -197,8 +197,8 @@ system:
   archetype: warrior
   class: berserker
   description: <p>@Embed[class:berserker description inline]</p>
-  identifier: rank-1-berserker
   number: 1
+  slug: rank-1-berserker
   statDice:
     hp:
       formula: 1d12

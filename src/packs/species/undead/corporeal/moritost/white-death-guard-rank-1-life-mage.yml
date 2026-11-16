@@ -49,7 +49,6 @@ effects:
           triggers:
             - dawn
           type: trigger
-      identifier: hibernation-shield
       interaction: manifest
       maneuver: reactive
       overview:
@@ -64,6 +63,7 @@ effects:
         raw: "10"
         unit: ft
       requirements: <p>@Identifier[core:targets]{Target} must be @Identifier[condition:down]{down}.</p>
+      slug: hibernation-shield
       spell: true
       standard: true
       trigger: <p>You go @Identifier[condition:down]{down}.</p>
@@ -115,7 +115,6 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
-      identifier: light-ray
       piercing:
         raw: 1
       powerSources:
@@ -130,6 +129,7 @@ effects:
         hit: >-
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:lighted]{lighted} to a creature of your choice
           until the end of their next @Identifier[core:turns]{turn}.</p>
+      slug: light-ray
       spell: true
       standard: true
     type: ability
@@ -166,7 +166,6 @@ effects:
         the @Identifier[core:targets]{target} again. This does not consume their
         @Identifier[core:hit-points-and-mana-points]{hit dice} (including the
         @Identifier[core:hit-points-and-mana-points]{hit dice} for the initial @Identifier[core:healing]{healing}).</p>
-      identifier: medicine-ball
       piercing:
         raw: 2
       powerSources:
@@ -177,6 +176,7 @@ effects:
       results:
         critHit: <p>Double the amount of times target @Identifier[core:healing]{heals}.</p>
         hit: <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals}.</p>
+      slug: medicine-ball
       spell: true
       standard: true
     type: ability
@@ -215,7 +215,6 @@ effects:
         @Identifier[condition:dead]{dead} for an additional 24 hours. If @Identifier[core:targets]{target} is
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, they are @Identifier[core:healing]{healed}
         an additional time.</p>
-      identifier: resurrect
       interaction: manifest
       maneuver: slow
       overview:
@@ -245,6 +244,7 @@ effects:
         <p>@Identifier[core:targets]{Target} is @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} or
         has @Identifier[condition:dead]{died} within the last 24 hours.</p>
       ritual: true
+      slug: resurrect
       spell: true
       standard: true
     type: ability
@@ -256,9 +256,9 @@ system:
   archetype: mage
   class: life-mage
   description: <p>@Embed[class:life-mage description inline]</p>
-  identifier: rank-1-life-mage
   maxAv: 0
   number: 1
+  slug: rank-1-life-mage
   statDice:
     hp:
       formula: 1d8

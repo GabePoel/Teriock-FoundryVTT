@@ -1,12 +1,4 @@
-import {
-  dotJoin,
-  fromIdentifier,
-  getName,
-  makeIcon,
-  mergeMetadata,
-  mixClasses,
-  toKebabCase,
-} from "../../../../utils/_module.mjs";
+import { dotJoin, fromIdentifier, getName, makeIcon, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
 import { mountTypeField } from "../../../fields/tools/builders.mjs";
 import {
   AppearanceSystemMixin,
@@ -74,7 +66,7 @@ export default class MountSystem
     return [this._statBar, {
       icon: TERIOCK.DISPLAY.icons.manifest.armament.load,
       label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
-      wrappers: [...this._attunableWrappers, ...this._priceWrappers, getName(this.mountType)],
+      wrappers: [...this._attunableWrappers, ...this._priceWrappers, getName(`mount:${this.mountType}`)],
     }];
   }
 
@@ -83,7 +75,10 @@ export default class MountSystem
     const promises = super._refreshPromises;
     if (this.mountType) {
       promises.push(
-        this._formatRefreshPromise(fromIdentifier(this.mountType), "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label"),
+        this._formatRefreshPromise(
+          fromIdentifier(`mount:${this.mountType}`),
+          "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label",
+        ),
       );
     }
     return promises;
@@ -93,7 +88,7 @@ export default class MountSystem
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: getName(this.mountType),
+      subtitle: getName(`mount:${this.mountType}`),
       text: dotJoin([...this._attunableWrappers, ...this._priceWrappers, parts.text]),
     });
   }
@@ -130,10 +125,7 @@ export default class MountSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), {
-      [`type.${toKebabCase(this._source.mountType)}`]: 1,
-      mounted: Number(this.mounted),
-    });
+    return Object.assign(super.getLocalRollData(), { [`type.${this.mountType}`]: 1, mounted: Number(this.mounted) });
   }
 
   /**

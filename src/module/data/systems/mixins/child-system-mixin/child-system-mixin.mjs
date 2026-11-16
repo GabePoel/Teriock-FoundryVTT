@@ -1,6 +1,6 @@
 import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { makeIcon, mergeMetadata, mixClasses, objectMap, toKebabCase } from "../../../../utils/_module.mjs";
+import { makeIcon, mergeMetadata, mixClasses, objectMap } from "../../../../utils/_module.mjs";
 import { FormulaField, MultiChangeField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/tools/initializers.mjs";
 import { UsableDataMixin } from "../../../mixins/_module.mjs";
@@ -346,7 +346,7 @@ export default function ChildSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      return Object.assign(super.getLocalRollData(), { [`kind.${toKebabCase(this.kind)}`]: 1 });
+      return Object.assign(super.getLocalRollData(), { [`kind.${this.kind}`]: 1 });
     }
 
     /** @inheritDoc */

@@ -37,20 +37,20 @@ export default class ArchetypeSystem
   }
 
   /**
-   * The identifiers for the classes that provide this.
-   */
-  get classIdentifiers() {
-    return new Set(this.ranks.map(r => r.system.class));
-  }
-
-  /**
    * The localized names of all the classes that provide this.
    * @returns {string[]}
    */
   get classNames() {
-    return Array.from(this.classIdentifiers, identifier => getName(identifier)).sort((a, b) =>
+    return Array.from(this.classSlugs, slug => getName(`class:${slug}`)).sort((a, b) =>
       a.localeCompare(b, game.i18n.lang)
     );
+  }
+
+  /**
+   * The slugs for the classes that provide this.
+   */
+  get classSlugs() {
+    return new Set(this.ranks.map(r => r.system.class));
   }
 
   /** @inheritDoc */
@@ -72,7 +72,7 @@ export default class ArchetypeSystem
    */
   get ranks() {
     if (!this.actor) { return []; }
-    return this.actor.previewedTypes.rank.filter(r => r.system._source.archetype === this.identifier);
+    return this.actor.previewedTypes.rank.filter(r => r.system.archetype === this.slug);
   }
 
   /** @inheritDoc */

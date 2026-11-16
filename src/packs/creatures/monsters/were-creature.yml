@@ -27,7 +27,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: aggressive
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -39,6 +38,7 @@ items:
             - martial
           range:
             unit: self
+          slug: aggressive
           targets:
             - self
         type: ability
@@ -117,7 +117,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: bite
           interaction: manifest
           maneuver: passive
           overview:
@@ -133,6 +132,7 @@ items:
             - martial
           range:
             unit: self
+          slug: bite
           targets:
             - self
         type: ability
@@ -150,7 +150,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: infertile
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -160,6 +159,7 @@ items:
             - martial
           range:
             unit: self
+          slug: infertile
           targets:
             - self
         type: ability
@@ -193,7 +193,6 @@ items:
             - revival
           executionTime:
             base: passive
-          identifier: regenerating
           interaction: manifest
           kind: special
           limitation: >-
@@ -214,6 +213,7 @@ items:
             - primal
           range:
             unit: self
+          slug: regenerating
           targets:
             - self
         type: ability
@@ -234,7 +234,6 @@ items:
           executionTime:
             base: r0
           featSaveAttribute: unp
-          identifier: were-creature-infect
           interaction: feat
           kind: special
           maneuver: reactive
@@ -248,6 +247,7 @@ items:
               every day that passes, the @Identifier[core:difficulty-class]{DC} increases by 1. After 30 days, they
               become a @Identifier[creature:were-creature]{were-creature} and
               @Identifier[ability:were-creature-transformation]{transform} for the first time.</p>
+          slug: were-creature-infect
           trigger: >-
             <p>You have just @Identifier[core:damage]{damaged} a @Wiki[Category:Humanoid creatures]{humanoid creature}
             with your @Identifier[property:biting]{bite}.</p>
@@ -305,7 +305,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          identifier: were-creature-transformation
           interaction: manifest
           kind: special
           maneuver: slow
@@ -326,6 +325,7 @@ items:
             - magical
           range:
             unit: self
+          slug: were-creature-transformation
           targets:
             - self
           trigger: >-
@@ -345,12 +345,12 @@ items:
         <p>Were-creatures change during their particular moon phase into a chaotic half-beast of themselves and begin
         attacking everything nearby. The rest of the time they appear as a normal @Wiki[Category:Humanoid
         creatures]{humanoid}, except they still have the @Pack[teriock.abilities]{abilities} listed here.</p>
-      identifier: were-creature
       instructions: >-
         <p>This does not describe all of a creature's @Pack[teriock.abilities]{abilities}. It should always be paired
         with another @Pack[teriock.creatures]{creature type} which it modifies.</p>
       size:
         enabled: false
+      slug: were-creature
       statDice:
         mp:
           disabled: true
@@ -376,7 +376,7 @@ prototypeToken:
 system:
   hp:
     value: 6
-  identifier: were-creature
   scaling:
     brScale: true
+  slug: were-creature
 type: creature

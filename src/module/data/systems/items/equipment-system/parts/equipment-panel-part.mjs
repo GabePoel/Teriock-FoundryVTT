@@ -23,7 +23,11 @@ export default function EquipmentPanelPart(Base) {
         {
           icon: TERIOCK.DISPLAY.icons.manifest.equipment.equipmentType,
           label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
-          wrappers: [getName(this.equipmentType), this.range.description, ...Panel.simplifyTags(this._armamentTags)],
+          wrappers: [
+            getName(`equipment:${this.equipmentType}`),
+            this.range.description,
+            ...Panel.simplifyTags(this._armamentTags),
+          ],
         },
         this._attackBar,
         this._defenseBar,

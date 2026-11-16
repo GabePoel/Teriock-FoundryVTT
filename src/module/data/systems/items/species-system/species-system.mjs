@@ -1,8 +1,8 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf, toKebabCase } from "../../../../utils/_module.mjs";
-import { identifierSetField } from "../../../fields/tools/builders.mjs";
+import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf } from "../../../../utils/_module.mjs";
+import { slugSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
@@ -87,7 +87,7 @@ export default class SpeciesSystem
           validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
         }),
       }),
-      traits: identifierSetField(TERIOCK.CONFIG.species.traits),
+      traits: slugSetField(TERIOCK.CONFIG.species.traits),
     });
   }
 
@@ -171,12 +171,9 @@ export default class SpeciesSystem
     return parts;
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
+  /** @inheritDoc */
   get wikiIdentifier() {
-    return this.identifier ? `creature:${this.identifier}` : null;
+    return `creature:${this.slug}`;
   }
 
   /** @inheritDoc */
@@ -213,7 +210,7 @@ export default class SpeciesSystem
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
     });
-    for (const trait of this.traits) { data[`trait.${toKebabCase(trait)}`] = 1; }
+    for (const trait of this.traits) { data[`trait.${trait}`] = 1; }
     return data;
   }
 

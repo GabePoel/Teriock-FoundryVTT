@@ -132,7 +132,7 @@ declare global {
     /**
      * A parsed identifier.
      */
-    export type ResolvedIdentifier = { identifier: Identifier, type?: Teriock.Documents.CommonType };
+    export type ResolvedIdentifier = { slug: Slug, type?: Slug };
 
     export type GlobalFetchOptions = { invalid?: boolean };
 

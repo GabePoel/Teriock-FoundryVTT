@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: dense-intelligence
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -23,6 +22,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dense-intelligence
       targets:
         - self
       upgrades:
@@ -42,7 +42,6 @@ effects:
       delivery: bite
       executionTime:
         base: a2
-      identifier: devour
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -51,6 +50,7 @@ effects:
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+      slug: devour
     type: ability
   - _id: zhwqSumwjh1TvOlr
     _key: "!items.effects!77263cb2d4ea408b.zhwqSumwjh1TvOlr"
@@ -66,7 +66,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: diving
       interaction: manifest
       maneuver: passive
       overview:
@@ -83,6 +82,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: diving
       standard: true
       targets:
         - self
@@ -102,7 +102,6 @@ effects:
           type: hacks
       competence:
         raw: 1
-      identifier: hack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
       overview:
         base: >-
@@ -118,6 +117,7 @@ effects:
           <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
           leg, depending on what you chose.</p>
       skill: true
+      slug: hack
       standard: true
       targets:
         - arm
@@ -142,7 +142,6 @@ effects:
         raw: 1
       delivery: self
       featSaveAttribute: snk
-      identifier: hide
       interaction: feat
       overview:
         base: >-
@@ -161,6 +160,7 @@ effects:
         @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
         @Identifier[condition:hidden]{hidden}.</p>
       skill: true
+      slug: hide
       standard: true
       targets:
         - self
@@ -190,7 +190,6 @@ effects:
           type: hacks
       competence:
         raw: 1
-      identifier: impale
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
       powerSources:
         - martial
@@ -200,6 +199,7 @@ effects:
           @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
         hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{body hack}.</p>
       skill: true
+      slug: impale
       standard: true
       targets:
         - vitals
@@ -218,7 +218,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-hands
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -228,6 +227,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-hands
       targets:
         - self
     type: ability
@@ -245,13 +245,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -272,13 +272,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -299,13 +299,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -326,13 +326,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-strength
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-strength
       targets:
         - self
       upgrades:
@@ -353,7 +353,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swamp-native
       interaction: manifest
       maneuver: passive
       overview:
@@ -364,6 +363,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: swamp-native
       targets:
         - self
     type: ability
@@ -395,7 +395,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swimming
       interaction: manifest
       maneuver: passive
       overview:
@@ -405,6 +404,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: swimming
       standard: true
       targets:
         - self
@@ -431,7 +431,6 @@ effects:
         raw: 1
       effectTypes:
         - damaging
-      identifier: vitals-hack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
       powerSources:
         - martial
@@ -439,6 +438,7 @@ effects:
         critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
         hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
       skill: true
+      slug: vitals-hack
       standard: true
       targets:
         - vitals
@@ -490,11 +490,11 @@ system:
       type: toggleChildren
   br: 8
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: crocodile
   size:
     max: 5
     min: 2
     value: 2
+  slug: crocodile
   statDice:
     hp:
       formula: (@this.item.size - 1)d8

@@ -247,15 +247,14 @@ export default function EquipmentIdentificationPart(Base) {
      */
     async unidentify() {
       if (this.identification.identified && game.user.isGM) {
-        const uncheckedPropertyIdentifiers = [...TERIOCK.CONFIG.equipment.unidentifiedProperties];
-        const reference = await fromIdentifier(this.equipmentType);
+        const uncheckedPropertySlugs = [...TERIOCK.CONFIG.equipment.unidentifiedProperties];
+        const reference = await fromIdentifier(`equipment:${this.equipmentType}`);
         if (reference) {
-          uncheckedPropertyIdentifiers.push(...reference.previewedTypes.property.map(p => p.system.identifier));
+          uncheckedPropertySlugs.push(...reference.previewedTypes.property.map(p => p.system.slug));
         }
         const revealed = this.parent.children.documentsByTag.revealable.filter(c => c.system.revealed);
-        const checked = revealed.filter(e =>
-          e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier)
-        ).map(e => e.uuid);
+        const checked = revealed.filter(e => e.type !== "property" || !uncheckedPropertySlugs.includes(e.system.slug))
+          .map(e => e.uuid);
         const toReveal = await DocumentSelector.selectMulti(revealed, {
           checked,
           hint: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.hint"),
@@ -272,7 +271,9 @@ export default function EquipmentIdentificationPart(Base) {
         const itemOperation = await buildWriteOperation({
           action: "update",
           docData: {
-            name: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.name", { type: getName(this.equipmentType) }),
+            name: _loc("TERIOCK.SYSTEMS.Equipment.QUERY.Unidentify.name", {
+              type: getName(`equipment:${this.equipmentType}`),
+            }),
             "system.identification.identified": false,
             "system.identification.name": this.parent._source.name,
             "system.identification.read": false,

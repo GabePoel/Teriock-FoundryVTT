@@ -8,11 +8,11 @@ export function isCamelCase(str) {
 }
 
 /**
- * Checks if a string is in `kebab-case` format.
+ * Checks if a string is a kebab-case slug.
  * @param {string} str
  * @returns {boolean}
  */
-export function isKebabCase(str) {
+export function isSlug(str) {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(str);
 }
 
@@ -34,17 +34,15 @@ export function toCamelCase(str) {
 }
 
 /**
- * Converts a string to `kebab-case` format.
- * @param {string} str - The string to convert.
- * @returns {string} The kebab-case version of the string.
+ * Converts a string to a kebab-case slug.
+ * @param {string} str
+ * @param {object} [options]
+ * @param {boolean} [options.convertCamel] - Separate camelCase words.
+ * @returns {Slug}
  */
-export function toKebabCase(str) {
-  return isKebabCase(str)
-    ? str
-    : str.normalize("NFD").replace(DIACRITICS, "").replaceAll("'", "").replace(/([a-z])([A-Z])/g, "$1-$2").replace(
-      /[^a-z0-9]+/gi,
-      "-",
-    ).toLowerCase().replace(/^-+|-+$/g, "");
+export function toSlug(str, { convertCamel = false } = {}) {
+  if (convertCamel) { str = str.replace(/([a-z0-9])([A-Z])/g, "$1-$2"); }
+  return str.stripDiacritics().slugify({ strict: true });
 }
 
 /**

@@ -81,7 +81,7 @@ export default class TradecraftAutomation
       title: _loc("TERIOCK.DIALOGS.Select.Name.title", { name: _loc("TYPES.JournalEntryPage.tradecraft") }),
     });
     if (documents === false) { return false; }
-    return (documents ?? []).map(d => d.system.identifier);
+    return (documents ?? []).map(d => d.system.slug);
   }
 
   /** @inheritDoc */

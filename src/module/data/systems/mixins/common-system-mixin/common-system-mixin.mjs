@@ -1,4 +1,4 @@
-import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
+import { IdentifierSystemMixin, RefreshSystemMixin } from "../_module.mjs";
 import { selectDocument } from "../../../../applications/dialogs/_module.mjs";
 import {
   getSystemClass,
@@ -26,7 +26,7 @@ const { fields } = foundry.data;
  */
 export default function CommonSystemMixin(Base) {
   /**
-   * @mixes RulesSystem
+   * @mixes IdentifierSystem
    * @mixes PropagationData
    * @mixes RefreshSystem
    * @mixin
@@ -36,7 +36,7 @@ export default function CommonSystemMixin(Base) {
     extends mixClasses(
       /** @type {InitializedDataModel<T, Teriock.Models.CommonSystemData>} */ (Base),
       PropagationDataMixin,
-      RulesSystemMixin,
+      IdentifierSystemMixin,
       RefreshSystemMixin,
     )
   {
@@ -50,7 +50,7 @@ export default function CommonSystemMixin(Base) {
     static metadata = mergeMetadata(super.metadata, {
       childTypes: [],
       importable: false,
-      preserveOnRefresh: ["system.identifier", ...super.metadata.preserveOnRefresh],
+      preserveOnRefresh: ["system.slug", ...super.metadata.preserveOnRefresh],
     });
 
     /** @inheritDoc */
@@ -214,11 +214,7 @@ export default function CommonSystemMixin(Base) {
 
     /** @inheritDoc */
     getLocalRollData() {
-      const rollData = {
-        [`identifier.${this.parent.forcedIdentifier}`]: 1,
-        [`type.${this.parent.type}`]: 1,
-        [this.parent.type]: 1,
-      };
+      const rollData = { [`identifier.${this.slug}`]: 1, [`type.${this.parent.type}`]: 1, [this.parent.type]: 1 };
       if (this.metadata.tags.armament) { rollData.armament = 1; }
       if (!foundry.utils.isEmpty(this.parent.flags.rollData)) {
         Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));

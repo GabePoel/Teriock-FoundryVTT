@@ -12,4 +12,4 @@ function path(obj, ...pathSegments) {
   return foundry.utils.getProperty(obj, fullPath);
 }
 
-export default { getName, path };
+export default { path, getName: (s) => getName(String(s || "")) };

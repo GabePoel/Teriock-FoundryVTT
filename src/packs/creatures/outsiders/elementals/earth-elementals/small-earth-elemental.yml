@@ -28,7 +28,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic]]] @Identifier[core:damage]{damage}.</p>
-          identifier: arcane-ray
           piercing:
             raw: 1
           powerSources:
@@ -39,6 +38,7 @@ items:
           results:
             critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
             hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
+          slug: arcane-ray
           spell: true
           standard: true
         type: ability
@@ -56,7 +56,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: staff-touch
           interaction: manifest
           maneuver: passive
           overview:
@@ -79,6 +78,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: staff-touch
           standard: true
           targets:
             - self
@@ -92,7 +92,7 @@ items:
         approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
         prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
         avoiding messy melees.</p>
-      identifier: mage
+      slug: mage
     type: archetype
   - _id: d97476a394378a45
     _key: "!actors.items!d97476a394378a45.d97476a394378a45"
@@ -126,7 +126,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: dark-vision
           interaction: manifest
           maneuver: passive
           overview:
@@ -135,6 +134,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dark-vision
           targets:
             - self
         type: ability
@@ -148,7 +148,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damage
-              identifier: mundane
+              slug: mundane
               type: immunity
           competence:
             raw: 1
@@ -159,7 +159,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: magical-durability
           interaction: manifest
           kind: special
           maneuver: passive
@@ -171,6 +170,7 @@ items:
             - magical
           range:
             unit: self
+          slug: magical-durability
           targets:
             - self
         type: ability
@@ -204,7 +204,6 @@ items:
             - revival
           executionTime:
             base: passive
-          identifier: mana-regenerating
           interaction: manifest
           kind: special
           limitation: >-
@@ -225,6 +224,7 @@ items:
             - primal
           range:
             unit: self
+          slug: mana-regenerating
           targets:
             - self
         type: ability
@@ -239,7 +239,7 @@ items:
             - _id: mvK4c8TZMXpIOZ1k
               activeQualifier: not(@status.down)
               category: element
-              identifier: nature
+              slug: nature
               type: hexseal
           competence:
             raw: 1
@@ -250,7 +250,6 @@ items:
             - hexseal
           executionTime:
             base: passive
-          identifier: nature-magic-hexseal
           interaction: manifest
           kind: special
           maneuver: passive
@@ -263,6 +262,7 @@ items:
           range:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}.</p>
+          slug: nature-magic-hexseal
           targets:
             - self
         type: ability
@@ -280,13 +280,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -307,13 +307,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -334,13 +334,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -361,13 +361,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-strength
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-strength
           targets:
             - self
           upgrades:
@@ -386,7 +386,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-amorphous-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -403,6 +402,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in a @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental form}.</p>
+          slug: take-amorphous-elemental-form
           targets:
             - self
         type: ability
@@ -418,7 +418,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-humanoid-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -433,6 +432,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in an @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental form}.</p>
+          slug: take-humanoid-elemental-form
           targets:
             - self
         type: ability
@@ -446,7 +446,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: condition
-              identifier: unconscious
+              slug: unconscious
               type: immunity
           competence:
             raw: 1
@@ -457,7 +457,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: unconsciousness-immunity
           interaction: manifest
           maneuver: passive
           overview:
@@ -468,6 +467,7 @@ items:
             - magical
           range:
             unit: self
+          slug: unconsciousness-immunity
           targets:
             - self
         type: ability
@@ -480,12 +480,12 @@ items:
         humanoid form which resembles a human with an odd skin color.</p>
       br: 10
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: small-earth-elemental
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:nature-mage]{Nature Mage}.</p>
       size:
         max: 2
         min: 1
         value: 1
+      slug: small-earth-elemental
       statDice:
         hp:
           formula: (@this.item.size)d6
@@ -516,8 +516,8 @@ items:
           damageType: vine
           elements:
             - nature
-          identifier: entangling
           kind: intrinsic
+          slug: entangling
         type: property
       - _id: BU8xtjECeb9m6BSI
         _key: "!actors.items.effects!d97476a394378a45.rjRUeDblO9kyUs0F.BU8xtjECeb9m6BSI"
@@ -531,10 +531,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: OEBLVXxCiLKyNqnW
         _key: "!actors.items.effects!d97476a394378a45.rjRUeDblO9kyUs0F.OEBLVXxCiLKyNqnW"
@@ -548,8 +548,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 26a3b429ac70d5ab
     img: systems/teriock/src/assets/thumbnails/body/earth-tendril.webp
@@ -560,10 +560,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: earth-tendril
       range:
         long:
           unit: melee
+      slug: earth-tendril
       style: savage
     type: body
   - _id: Cw9et6wB4d6fcY94
@@ -603,7 +603,6 @@ items:
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d6[magic]]] or @Identifier[core:healing]{heal} the @Identifier[core:targets]{target} again (depending on
             what you chose).</p>
-          identifier: empathic-ray
           overview:
             base: >-
               <p>As you cast [[lookup name]], choose either "damage" or "healing". The effect varies depending on what
@@ -629,6 +628,7 @@ items:
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target} or
               @Identifier[core:healing]{heal} them (depending on what you chose).</p>
+          slug: empathic-ray
           spell: true
           standard: true
         type: ability
@@ -686,7 +686,6 @@ items:
             base: Short Rest
             slow:
               unit: shortRest
-          identifier: familiar-bond
           interaction: manifest
           maneuver: slow
           overview:
@@ -713,6 +712,7 @@ items:
             unit: ft
           requirements: <p>This ritual can typically be used only once.</p>
           ritual: true
+          slug: familiar-bond
           spell: true
           standard: true
           sustained: true
@@ -741,7 +741,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          identifier: oracle
           interaction: manifest
           maneuver: slow
           overview:
@@ -769,6 +768,7 @@ items:
           range:
             unit: self
           ritual: true
+          slug: oracle
           spell: true
           standard: true
         type: ability
@@ -810,7 +810,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, this effect lasts an addition
             turn without the target being able to @Identifier[ability:self-revert]{Self Revert}.</p>
-          identifier: treeform-ball
           piercing:
             raw: 2
           powerSources:
@@ -829,6 +828,7 @@ items:
               @Identifier[core:size]{size} prior to being @Identifier[condition:transformed]{transformed}. If a
               treeformed creature is reduced to 0 @Identifier[core:hit-points-and-mana-points]{HP}, then they revert and
               any remaining @Identifier[core:damage]{damage} carries over to their reverted state.</p>
+          slug: treeform-ball
           spell: true
           standard: true
         type: ability
@@ -840,9 +840,9 @@ items:
       archetype: mage
       class: nature-mage
       description: <p>@Embed[class:nature-mage description inline]</p>
-      identifier: rank-1-nature-mage
       maxAv: 0
       number: 1
+      slug: rank-1-nature-mage
       statDice:
         hp:
           formula: 1d8
@@ -863,13 +863,13 @@ prototypeToken:
 system:
   hp:
     value: 4
-  identifier: small-earth-elemental
   mp:
     value: 8
   scaling:
     brScale: true
   size:
     value: 1
+  slug: small-earth-elemental
   wielding:
     attacker: rjRUeDblO9kyUs0F
     blocker: rjRUeDblO9kyUs0F

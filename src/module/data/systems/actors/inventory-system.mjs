@@ -48,15 +48,13 @@ export default class InventorySystem extends BaseActorSystem {
         effects: [{
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableDown"),
           system: {
-            affinities: { invImmunity00002: { _id: "invImmunity00002", identifier: "down", ...CONDITION_IMMUNITY } },
+            affinities: { invImmunity00002: { _id: "invImmunity00002", slug: "down", ...CONDITION_IMMUNITY } },
           },
           type: "consequence",
         }, {
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableEncumbered"),
           system: {
-            affinities: {
-              invImmunity00001: { _id: "invImmunity00001", identifier: "encumbered", ...CONDITION_IMMUNITY },
-            },
+            affinities: { invImmunity00001: { _id: "invImmunity00001", slug: "encumbered", ...CONDITION_IMMUNITY } },
           },
           type: "consequence",
         }, {

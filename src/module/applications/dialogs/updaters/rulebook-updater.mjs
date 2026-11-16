@@ -1,4 +1,4 @@
-import { IdentifierField } from "../../../data/fields/_module.mjs";
+import { SlugField } from "../../../data/fields/_module.mjs";
 import { nullStringField } from "../../../data/fields/tools/builders.mjs";
 import { makeIconClass } from "../../../utils/_module.mjs";
 import BaseUpdater from "./base-updater.mjs";
@@ -23,7 +23,7 @@ export default class RulebookUpdater extends BaseUpdater {
   _prepareFieldContext(path) {
     const context = super._prepareFieldContext(path);
     if (path === "flags.teriock.ruleType") {
-      context.field = new IdentifierField({
+      context.field = new SlugField({
         hint: "TERIOCK.SHEETS.Journal.rulebook.ruleType.hint",
         label: "TERIOCK.SHEETS.Journal.rulebook.ruleType.label",
         placeholder: this.document.parent?.getFlag("teriock", "ruleType") ?? "rule",

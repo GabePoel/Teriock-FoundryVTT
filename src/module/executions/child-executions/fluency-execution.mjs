@@ -10,6 +10,6 @@ import { TradecraftExecutionMixin } from "../mixins/_module.mjs";
 export default class FluencyExecution extends mixClasses(DocumentExecution, TradecraftExecutionMixin) {
   /** @inheritDoc */
   get tradecraft() {
-    return this.source.system._source.tradecraft;
+    return this.source.system.tradecraft;
   }
 }

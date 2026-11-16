@@ -1,8 +1,8 @@
 import { mergeMetadata, mixClasses } from "../../../../../utils/_module.mjs";
 import {
   BaseSystemMixin,
+  IdentifierSystemMixin,
   InstructionsSystemMixin,
-  RulesSystemMixin,
   UncommonSystemMixin,
 } from "../../../mixins/_module.mjs";
 
@@ -14,11 +14,17 @@ const { TypeDataModel } = foundry.abstract;
  * @extends {TypeDataModel}
  * @mixes BaseSystem
  * @mixes UncommonSystem
- * @mixes RulesSystem
+ * @mixes IdentifierSystem
  * @mixes InstructionsSystem
  */
 export default class BasePageSystem
-  extends mixClasses(TypeDataModel, BaseSystemMixin, UncommonSystemMixin, RulesSystemMixin, InstructionsSystemMixin)
+  extends mixClasses(
+    TypeDataModel,
+    BaseSystemMixin,
+    UncommonSystemMixin,
+    IdentifierSystemMixin,
+    InstructionsSystemMixin,
+  )
 {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {

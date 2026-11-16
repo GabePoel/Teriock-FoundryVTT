@@ -1,4 +1,4 @@
-import { FormulaField, TypedIdentifierSetField } from "../../../data/fields/_module.mjs";
+import { FormulaField, IdentifierSetField } from "../../../data/fields/_module.mjs";
 import { ChangeMovementAutomation, StatusAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { parseIdentifier } from "../../../utils/_module.mjs";
@@ -19,7 +19,7 @@ export default class FallExecution extends BaseExecution {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      damageTypes: new TypedIdentifierSetField({ suggestions: true, types: ["damage"] }),
+      damageTypes: new IdentifierSetField({ suggestions: true, types: ["damage"] }),
       distance: new fields.NumberField({ blank: true, min: 0, placeholder: "0" }),
       water: new fields.BooleanField(),
     });
@@ -56,7 +56,7 @@ export default class FallExecution extends BaseExecution {
     return TERIOCK.DISPLAY.icons.manifest.execution.fall;
   }
 
-  /** @returns {TypedIdentifier} */
+  /** @returns {Identifier} */
   get journalEntryPageIdentifier() {
     return "core:falling";
   }
@@ -120,7 +120,7 @@ export default class FallExecution extends BaseExecution {
     const d4 = this.water ? Math.clamp(increments - 2, 0, 2) : 0;
     const d6 = this.water ? Math.clamp(increments - 4, 0, 18) : Math.min(increments, 20);
     const formula = FormulaField.sum(d4 ? `${d4}d4` : "", d6 ? `${d6}d6` : "");
-    const types = Array.from(this.damageTypes, t => parseIdentifier(t).identifier);
+    const types = Array.from(this.damageTypes, t => parseIdentifier(t).slug);
     this.updateSource({ formula: FormulaField.addTypes(formula, types) });
     await super._prepareFormula();
   }

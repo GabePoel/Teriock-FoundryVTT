@@ -80,7 +80,7 @@ export default class DocumentExecution extends BaseExecution {
     this.automations.resetDocuments(this.source.system?.automations?.values?.() ?? []);
     if (this.source.documentName === "Actor") { this.automations.resetDocuments([]); }
     this._boosts = options.boosts ?? this.source.system?.boosts ?? this._boosts;
-    if (game.settings.get("teriock", "secretDocuments").has(this.source?.typedIdentifier)) {
+    if (game.settings.get("teriock", "secretDocuments").has(this.source?.identifier)) {
       this._messageMode = options.messageMode ?? "blind";
     }
   }

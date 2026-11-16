@@ -1,6 +1,6 @@
-import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
+import { validateIdentifier } from "../../data/fields/tools/validators.mjs";
 import { listFormat } from "../../helpers/localization.mjs";
-import { getTypeLabel, isKebabCase, parseIdentifier, toKebabCase } from "../../utils/_module.mjs";
+import { getTypeLabel, isSlug, parseIdentifier, toSlug } from "../../utils/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement, TagSetMixin } from "./abstract/_module.mjs";
 
 const { fromUuid } = foundry.utils;
@@ -13,11 +13,12 @@ const { fromUuid } = foundry.utils;
 
 /**
  * @typedef IdentifierTagsInputConfig
- * @property {string[]} [types] - Allowed type prefixes for typed identifiers.
+ * @property {string[]} [types] - Allowed type prefixes for identifiers.
  */
 
 /**
  * A custom HTMLElement used to render a set of associated documents referenced by identifier.
+ * @category Identifiers
  */
 export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutocompleteSuggestionsElement) {
   /** @inheritDoc */
@@ -66,7 +67,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
       return;
     }
     for (const type of value) {
-      if (!isKebabCase(type)) { throw new Error(`"${type}" is not a valid identifier type.`); }
+      if (!isSlug(type)) { throw new Error(`"${type}" is not a valid identifier type.`); }
     }
     this.setAttribute("types", value.map(v => v.trim()).filterJoin(","));
   }
@@ -81,9 +82,9 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
     // Keep the colon and hyphen at the end of the text.
     const [type, ...rest] = value.split(":");
     const identifier = rest.length ? rest.join("-") : type;
-    const kebab = toKebabCase(identifier);
-    const formatted = kebab && /[^a-z0-9']$/i.test(identifier) ? `${kebab}-` : kebab;
-    return rest.length ? `${toKebabCase(type)}:${formatted}` : formatted;
+    const slug = toSlug(identifier);
+    const formatted = slug && /[^a-z0-9']$/i.test(identifier) ? `${slug}-` : slug;
+    return rest.length ? `${toSlug(type)}:${formatted}` : formatted;
   }
 
   /** @inheritDoc */
@@ -99,7 +100,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
     }
     if (data.uuid) {
       fromUuid(data.uuid).then(d => {
-        const identifier = d?.typedIdentifier;
+        const identifier = d?.documentMetadata?.identifier.track ? d.identifier : null;
         if (identifier) { this._tryAdd(identifier); }
         else { ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true }); }
       });
@@ -115,10 +116,10 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
 
   /** @inheritDoc */
   _resolveTag(identifier) {
-    identifier = identifier.split(":").map(part => toKebabCase(part)).join(":");
+    identifier = identifier.split(":").map(part => toSlug(part)).join(":");
     if (!identifier) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank")); }
     const types = this.types;
-    if (!validateTypedIdentifier(identifier, { types })) {
+    if (!validateIdentifier(identifier, { types })) {
       const parsed = parseIdentifier(identifier);
       if (!parsed.type) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (types.length) {
@@ -129,7 +130,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
           }),
         );
       }
-      throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
+      throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType"));
     }
     return [identifier, game.teriock.identifiers.getName(identifier) ?? identifier];
   }

@@ -20,10 +20,10 @@ export default function WikiSystemMixin(Base) {
 
     /**
      * The identifier of this document's [wiki](https://wiki.teriock.com) page.
-     * @returns {TypedIdentifier|null}
+     * @returns {Identifier}
      */
     get wikiIdentifier() {
-      return this.parent.typedIdentifier;
+      return this.parent.identifier;
     }
 
     /**
@@ -31,8 +31,8 @@ export default function WikiSystemMixin(Base) {
      * @returns {string}
      */
     get wikiPage() {
-      const { identifier, type } = parseIdentifier(this.wikiIdentifier);
-      return TERIOCK.CONFIG.wiki.index[type]?.[identifier] ?? "";
+      const { slug, type } = parseIdentifier(this.wikiIdentifier);
+      return TERIOCK.CONFIG.wiki.index[type]?.[slug] ?? "";
     }
 
     /**

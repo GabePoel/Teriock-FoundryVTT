@@ -5,7 +5,7 @@
 /**
  * Resolve anything (UUID, identifier, compendium index, or Document) that represents a Document to an actual Document.
  * @template T
- * @param {Teriock.Hierarchy.Index<T> | UUID<T> | TypedIdentifier} syncDoc
+ * @param {Teriock.Hierarchy.Index<T> | UUID<T> | Identifier} syncDoc
  * @returns {Promise<T|null>}
  */
 export async function resolveDocument(syncDoc) {
@@ -18,7 +18,7 @@ export async function resolveDocument(syncDoc) {
 /**
  * Ensure all documents in an array are not indexes.
  * @template T
- * @param {Teriock.Hierarchy.Index<T>[] | UUID<T> | TypedIdentifier} syncDocs
+ * @param {Teriock.Hierarchy.Index<T>[] | UUID<T> | Identifier} syncDocs
  * @param {Teriock.System.ResolveDocumentsOptions} [options]
  * @returns {Promise<T[]>}
  */
@@ -34,18 +34,20 @@ export async function resolveDocuments(syncDocs, options = {}) {
 
 /**
  * Parse an identifier into its component parts.
- * @param {Identifier} identifier
+ * @param {Identifier|Slug} identifier
  * @returns {Teriock.System.ResolvedIdentifier}
+ * @category Identifiers
  */
 export function parseIdentifier(identifier) {
-  const [type, ident] = identifier?.includes(":") ? identifier.split(":") : [null, identifier];
-  return { identifier: ident, type };
+  const [type, slug] = identifier?.includes(":") ? identifier.split(":") : [null, identifier];
+  return { slug, type };
 }
 
 /**
  * Get a document's name from an identifier.
- * @param {TypedIdentifier} identifier
+ * @param {Identifier} identifier
  * @returns {string}
+ * @category Identifiers
  */
 export function getName(identifier) {
   return game.teriock.identifiers.getName(identifier, { forced: true });
@@ -53,8 +55,9 @@ export function getName(identifier) {
 
 /**
  * Infer a document's icon from an identifier.
- * @param {TypedIdentifier|Identifier} identifier
+ * @param {Identifier} identifier
  * @returns {string}
+ * @category Identifiers
  */
 export function getIcon(identifier) {
   const parsed = parseIdentifier(identifier);
@@ -85,29 +88,31 @@ export function getTypeLabel(type) {
 }
 
 /**
- * Find the best document from a string that describes it. The preference goes identifiers then lookup keys then names.
- * @param {TypedIdentifier|Identifier|string} lookup
+ * Find the best document from a string that describes it. The preference goes identifiers then names.
+ * @param {Identifier|Slug|string} lookup
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} [relativeTo]
  * @returns {Promise<TeriockDocument|null>}
+ * @category Identifiers
  */
 export async function findBestDocument(lookup, relativeTo) {
   if (!lookup) { return null; }
   const doc = await fromIdentifier(lookup, { relativeTo });
   if (doc) { return doc; }
   const children = (await relativeTo?.previewed?.getContents()) ?? [];
-  return children.find(c => c.lookupKey === lookup) ?? children.find(c => c.name === lookup) ?? null;
+  return children.find(c => c.name === lookup) ?? null;
 }
 
 /**
  * Get a local document from its identifier.
- * @param {Identifier|TypedIdentifier} identifier
+ * @param {Slug|Identifier} identifier
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} relativeTo - The document to compare against.
  * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
+ * @category Identifiers
  */
 export async function fromIdentifierLocal(identifier, relativeTo) {
   if (!identifier || !relativeTo?.previewed?.getContents) { return null; }
   const children = await relativeTo.previewed.getContents();
-  return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;
+  return children.find(c => c?.identifier === identifier || c?.system?.slug === identifier) ?? null;
 }
 
 /**
@@ -127,9 +132,10 @@ export async function fromQualifier(document, qualifier) {
 
 /**
  * Get a world document from its identifier.
- * @param {TypedIdentifier} identifier
+ * @param {Identifier} identifier
  * @param {Teriock.System.SyncFetchOptions} [options]
  * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
+ * @category Identifiers
  */
 export function fromIdentifierSync(identifier, options = {}) {
   return foundry.utils.fromUuidSync(game.teriock.identifiers.get(identifier), options);
@@ -137,9 +143,10 @@ export function fromIdentifierSync(identifier, options = {}) {
 
 /**
  * Get a document from its identifier.
- * @param {TypedIdentifier} identifier
+ * @param {Identifier} identifier
  * @param {Teriock.System.FetchOptions} [options]
  * @returns {Promise<TeriockDocument|null>}
+ * @category Identifiers
  */
 export async function fromIdentifier(identifier, options = {}) {
   const { relativeOnly, relativeTo, ...fetchOptions } = options;
@@ -151,10 +158,11 @@ export async function fromIdentifier(identifier, options = {}) {
 }
 
 /**
- * Get a document from some key that specifies it. This could be either a typed identifier or a UUID.
- * @param {TypedIdentifier|UUID} uuidOrIdentifier
+ * Get a document from some key that specifies it. This could be either an identifier or a UUID.
+ * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {Promise<TeriockDocument|null>}
+ * @category Identifiers
  */
 export async function fromKey(uuidOrIdentifier, options = {}) {
   if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {
@@ -164,10 +172,11 @@ export async function fromKey(uuidOrIdentifier, options = {}) {
 }
 
 /**
- * Synchronously get a document from some key that specifies it. This could be either a typed identifier or a UUID.
- * @param {TypedIdentifier|UUID} uuidOrIdentifier
+ * Synchronously get a document from some key that specifies it. This could be either an identifier or a UUID.
+ * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {TeriockDocument|null}
+ * @category Identifiers
  */
 export function fromKeySync(uuidOrIdentifier, options = {}) {
   if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {

@@ -13,7 +13,6 @@ effects:
       delivery: bite
       executionTime:
         base: a2
-      identifier: devour
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -22,6 +21,7 @@ effects:
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+      slug: devour
     type: ability
   - _id: AA1PNYWKwLrbrFLc
     _key: "!items.effects!266e22228d0ba5bf.AA1PNYWKwLrbrFLc"
@@ -37,13 +37,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: fast
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: fast
       targets:
         - self
       upgrades:
@@ -69,7 +69,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: giant-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -82,6 +81,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: giant-strength
       standard: true
       targets:
         - self
@@ -104,7 +104,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-hands
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -114,6 +113,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-hands
       targets:
         - self
     type: ability
@@ -131,13 +131,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-intelligence
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-intelligence
       targets:
         - self
       upgrades:
@@ -158,13 +158,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -185,13 +185,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -218,7 +218,6 @@ effects:
         raw: 1
       executionTime:
         base: r0
-      identifier: trample
       maneuver: reactive
       overview:
         base: >-
@@ -232,6 +231,7 @@ effects:
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+      slug: trample
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
@@ -261,7 +261,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: water-home
       interaction: manifest
       maneuver: passive
       overview:
@@ -272,6 +271,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: water-home
       targets:
         - self
     type: ability
@@ -290,7 +290,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -304,6 +303,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: beastly-strength
       standard: true
       targets:
         - self
@@ -327,7 +327,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: diving
       interaction: manifest
       maneuver: passive
       overview:
@@ -344,6 +343,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: diving
       standard: true
       targets:
         - self
@@ -363,7 +363,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
       overview:
@@ -373,6 +372,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: improved-armor-piercing
       standard: true
       targets:
         - self
@@ -392,7 +392,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: improved-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -404,6 +403,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: improved-strength
       standard: true
       targets:
         - self
@@ -426,7 +426,6 @@ effects:
         - damaging
       executionTime:
         base: r0
-      identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
       overview:
@@ -439,6 +438,7 @@ effects:
       powerSources:
         - martial
       skill: true
+      slug: melee-damage-boost
       standard: true
       trigger: >-
         <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee
@@ -473,7 +473,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swimming
       interaction: manifest
       maneuver: passive
       overview:
@@ -483,6 +482,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: swimming
       standard: true
       targets:
         - self
@@ -493,10 +493,10 @@ name: Dolphin
 system:
   br: 6
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: dolphin
   size:
     max: 5
     min: 3
+  slug: dolphin
   statDice:
     hp:
       formula: (@this.item.size - 2)d10

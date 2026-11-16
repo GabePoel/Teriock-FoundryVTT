@@ -28,7 +28,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic]]] @Identifier[core:damage]{damage}.</p>
-          identifier: arcane-ray
           piercing:
             raw: 1
           powerSources:
@@ -39,6 +38,7 @@ items:
           results:
             critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
             hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
+          slug: arcane-ray
           spell: true
           standard: true
         type: ability
@@ -56,7 +56,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: staff-touch
           interaction: manifest
           maneuver: passive
           overview:
@@ -79,6 +78,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: staff-touch
           standard: true
           targets:
             - self
@@ -92,7 +92,7 @@ items:
         approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
         prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
         avoiding messy melees.</p>
-      identifier: mage
+      slug: mage
     type: archetype
   - _id: f0768ecc435da705
     _key: "!actors.items!f0768ecc435da705.f0768ecc435da705"
@@ -126,7 +126,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: dark-vision
           interaction: manifest
           maneuver: passive
           overview:
@@ -135,6 +134,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dark-vision
           targets:
             - self
         type: ability
@@ -148,7 +148,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damage
-              identifier: mundane
+              slug: mundane
               type: immunity
           competence:
             raw: 1
@@ -159,7 +159,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: magical-durability
           interaction: manifest
           kind: special
           maneuver: passive
@@ -171,6 +170,7 @@ items:
             - magical
           range:
             unit: self
+          slug: magical-durability
           targets:
             - self
         type: ability
@@ -204,7 +204,6 @@ items:
             - revival
           executionTime:
             base: passive
-          identifier: mana-regenerating
           interaction: manifest
           kind: special
           limitation: >-
@@ -225,6 +224,7 @@ items:
             - primal
           range:
             unit: self
+          slug: mana-regenerating
           targets:
             - self
         type: ability
@@ -239,7 +239,7 @@ items:
             - _id: SgRtw743gZgSVe5w
               activeQualifier: not(@status.down)
               category: element
-              identifier: necromancy
+              slug: necromancy
               type: hexseal
           competence:
             raw: 1
@@ -250,7 +250,6 @@ items:
             - hexseal
           executionTime:
             base: passive
-          identifier: necromancy-magic-hexseal
           interaction: manifest
           kind: special
           maneuver: passive
@@ -263,6 +262,7 @@ items:
           range:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}.</p>
+          slug: necromancy-magic-hexseal
           targets:
             - self
         type: ability
@@ -280,13 +280,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -307,13 +307,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -334,13 +334,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -361,13 +361,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-strength
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-strength
           targets:
             - self
           upgrades:
@@ -386,7 +386,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-amorphous-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -403,6 +402,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in a @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental form}.</p>
+          slug: take-amorphous-elemental-form
           targets:
             - self
         type: ability
@@ -418,7 +418,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-humanoid-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -433,6 +432,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in an @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental form}.</p>
+          slug: take-humanoid-elemental-form
           targets:
             - self
         type: ability
@@ -446,7 +446,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: condition
-              identifier: unconscious
+              slug: unconscious
               type: immunity
           competence:
             raw: 1
@@ -457,7 +457,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: unconsciousness-immunity
           interaction: manifest
           maneuver: passive
           overview:
@@ -468,6 +467,7 @@ items:
             - magical
           range:
             unit: self
+          slug: unconsciousness-immunity
           targets:
             - self
         type: ability
@@ -480,12 +480,12 @@ items:
         humanoid form which resembles a human with an odd skin color.</p>
       br: 10
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: small-shadow-elemental
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:necromancer]{Necromancer}.</p>
       size:
         max: 2
         min: 1
         value: 1
+      slug: small-shadow-elemental
       statDice:
         hp:
           formula: (@this.item.size)d6
@@ -526,7 +526,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill
             1d6]].</p>
-          identifier: death-ray
           piercing:
             raw: 1
           powerSources:
@@ -543,6 +542,7 @@ items:
               <p>Roll [[/kill 2d6]] if this is greater than or equal to the number of
               @Identifier[core:hit-points-and-mana-points]{HP} the @Identifier[core:targets]{target} has, they
               @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
+          slug: death-ray
           spell: true
           standard: true
         type: ability
@@ -588,7 +588,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may target an additional
             creature.</p>
-          identifier: spirit-guide
           interaction: manifest
           maneuver: slow
           overview:
@@ -610,6 +609,7 @@ items:
             unit: ft
           requirements: <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may only target yourself.</p>
           ritual: true
+          slug: spirit-guide
           spell: true
           standard: true
           sustained: true
@@ -647,7 +647,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          identifier: summon-the-dead
           interaction: manifest
           maneuver: slow
           overview:
@@ -669,6 +668,7 @@ items:
             unit: ft
           requirements: <p>@Identifier[core:targets]{Target} must be @Identifier[condition:wisping]{wisping}.</p>
           ritual: true
+          slug: summon-the-dead
           spell: true
           standard: true
         type: ability
@@ -694,7 +694,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic terror]]] @Identifier[core:damage]{damage}.</p>
-          identifier: terror-ball
           piercing:
             raw: 2
           powerSources:
@@ -705,6 +704,7 @@ items:
           results:
             critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
             hit: <p>Deal [[/damage 1d4[terror magic]]] @Identifier[core:damage]{damage} to target.</p>
+          slug: terror-ball
           spell: true
           standard: true
         type: ability
@@ -716,9 +716,9 @@ items:
       archetype: mage
       class: necromancer
       description: <p>@Embed[class:necromancer description inline]</p>
-      identifier: rank-1-necromancer
       maxAv: 0
       number: 1
+      slug: rank-1-necromancer
       statDice:
         hp:
           formula: 1d8
@@ -742,10 +742,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: jnLkEUzaNFIR0BdW
         _key: "!actors.items.effects!f0768ecc435da705.mE5U56tDpNKSwr3y.jnLkEUzaNFIR0BdW"
@@ -758,10 +758,10 @@ items:
           damageType: terror
           elements:
             - necromancy
-          identifier: terrorizing
           kind: intrinsic
           powerSources:
             - magical
+          slug: terrorizing
         type: property
       - _id: yMBeCUmtq3w43sA4
         _key: "!actors.items.effects!f0768ecc435da705.mE5U56tDpNKSwr3y.yMBeCUmtq3w43sA4"
@@ -775,8 +775,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: a4e3527bf26a4ba9
     img: systems/teriock/src/assets/thumbnails/body/shadow-tendril.webp
@@ -787,10 +787,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: shadow-tendril
       range:
         long:
           unit: melee
+      slug: shadow-tendril
       style: savage
     type: body
 name: Small Shadow Elemental
@@ -807,13 +807,13 @@ prototypeToken:
 system:
   hp:
     value: 4
-  identifier: small-shadow-elemental
   mp:
     value: 8
   scaling:
     brScale: true
   size:
     value: 1
+  slug: small-shadow-elemental
   wielding:
     attacker: mE5U56tDpNKSwr3y
     blocker: mE5U56tDpNKSwr3y

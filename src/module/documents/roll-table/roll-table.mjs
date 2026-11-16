@@ -40,9 +40,10 @@ export default class TeriockRollTable extends mixClasses(RollTable, BaseDocument
     const clearUuid = game.settings.get("teriock", "dontDropUuidsInTables");
     for (const result of this.results) {
       if (result.type !== "document" || !result.documentUuid) { continue; }
-      const doc = fromUuidSync(result.documentUuid);
-      if (!doc?.type || !doc.system?.identifier) { continue; }
-      const documentIdentifier = `${doc.type}:${doc.system.identifier}`;
+      const entry = fromUuidSync(result.documentUuid);
+      const documentClass = foundry.utils.getDocumentClass(foundry.utils.parseUuid(result.documentUuid)?.type);
+      const documentIdentifier = entry && documentClass?.getIdentifier?.(entry);
+      if (!documentIdentifier) { continue; }
       const updateData = { flags: { teriock: { documentIdentifier } } };
       if (clearUuid && documentIdentifier) { updateData.documentUuid = null; }
       result.updateSource(updateData);

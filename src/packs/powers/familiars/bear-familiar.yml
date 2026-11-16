@@ -13,7 +13,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: battle-cry
       interaction: manifest
       maneuver: passive
       overview:
@@ -25,6 +24,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: battle-cry
       standard: true
       targets:
         - self
@@ -36,7 +36,7 @@ effects:
     name: Bear Tamer
     system:
       field: survivalist
-      identifier: bear-tamer
+      slug: bear-tamer
       tradecraft: tamer
     type: fluency
   - _id: tD6ff3hrdA9n9BVf
@@ -61,7 +61,6 @@ effects:
         - damaging
       executionTime:
         base: r1
-      identifier: endure
       interaction: manifest
       maneuver: reactive
       overview:
@@ -80,6 +79,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: endure
       standard: true
       targets:
         - self
@@ -127,7 +127,6 @@ effects:
           method: roll
           type: combat
       featSaveAttribute: int
-      identifier: battle-cry-aura
       interaction: feat
       powerSources:
         - martial
@@ -138,6 +137,7 @@ effects:
       results:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
+      slug: battle-cry-aura
       standard: true
     type: ability
   - _id: 2VyV17pZry0Ofbrs
@@ -151,7 +151,7 @@ effects:
       affinities:
         - _id: oJH3v7kvIbVGDlBS
           category: condition
-          identifier: frightened
+          slug: frightened
           type: resistance
       delivery: self
       duration:
@@ -162,7 +162,6 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      identifier: battle-cry-resistance
       interaction: manifest
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
@@ -171,6 +170,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: battle-cry-resistance
       standard: true
       targets:
         - self
@@ -184,11 +184,11 @@ system:
     - contract
   elements:
     - nature
-  identifier: bear-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   powerSources:
     - magical
     - primal
     - spiritual
+  slug: bear-familiar
 type: familiar

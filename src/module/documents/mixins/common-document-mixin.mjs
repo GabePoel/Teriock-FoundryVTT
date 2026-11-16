@@ -1,4 +1,4 @@
-import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
+import { validateIdentifier } from "../../data/fields/tools/validators.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, PropagationDataMixin } from "../../data/mixins/_module.mjs";
 import {
   getEnsureChildrenOperations,
@@ -8,6 +8,7 @@ import {
   mixClasses,
 } from "../../utils/_module.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
+import { IdentifierDocumentMixin } from "./_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -30,9 +31,12 @@ export default function CommonDocumentMixin(Base) {
    * @mixes EmbeddableData
    * @mixes PanelData
    * @mixes PropagationData
+   * @mixes IdentifierDocument
    * @mixin
    */
-  class CommonDocument extends mixClasses(Base, PropagationDataMixin, EmbeddableDataMixin, PanelDataMixin) {
+  class CommonDocument
+    extends mixClasses(Base, PropagationDataMixin, EmbeddableDataMixin, PanelDataMixin, IdentifierDocumentMixin)
+  {
     /**
      * @inheritDoc
      * @param {object} [data]
@@ -389,7 +393,7 @@ export default function CommonDocumentMixin(Base) {
 
     /**
      * Toggle a configured child for the Document. Designed to function like {@link Actor.toggleStatusEffect}.
-     * @param {TypedIdentifier} identifier - An identifier existing in the world or a compendium.
+     * @param {Identifier} identifier - An identifier existing in the world or a compendium.
      * @param {object} [options] - Additional options which modify how the child is created.
      * @param {boolean} [options.active] - Force the child to be active or inactive regardless of its current state.
      * @returns {Promise<TeriockActiveEffect|TeriockItem|boolean|undefined>} - A promise which resolves to one of the following
@@ -400,7 +404,7 @@ export default function CommonDocumentMixin(Base) {
      *  - undefined if no changes need to be made
      */
     async toggleChild(identifier, options = {}) {
-      if (!validateTypedIdentifier(identifier, { strict: true })) { return; }
+      if (!validateIdentifier(identifier, { strict: true })) { return; }
       const hasChild = this.children.identifiers.has(identifier);
       if (hasChild && options.active) { return true; }
       else if (hasChild && !options.active) {

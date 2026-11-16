@@ -20,7 +20,6 @@ items:
           delivery: bite
           executionTime:
             base: a2
-          identifier: devour
           powerSources:
             - martial
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -29,6 +28,7 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
               @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+          slug: devour
         type: ability
       - _id: VvTkJsNw4jb1aTsU
         _key: "!actors.items.effects!f44a804d581c16d7.f44a804d581c16d7.VvTkJsNw4jb1aTsU"
@@ -48,7 +48,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: giant-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -61,6 +60,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: giant-strength
           standard: true
           targets:
             - self
@@ -83,7 +83,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: lumbering
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -91,6 +90,7 @@ items:
             - martial
           range:
             unit: self
+          slug: lumbering
           targets:
             - self
           upgrades:
@@ -112,13 +112,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-intelligence
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-intelligence
           targets:
             - self
           upgrades:
@@ -139,13 +139,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -166,13 +166,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -201,7 +201,6 @@ items:
             - destruction
           executionTime:
             base: r1
-          identifier: shattering-armor
           interaction: block
           maneuver: reactive
           overview:
@@ -215,6 +214,7 @@ items:
             save: >-
               <p>@Pack[teriock.equipment]{Equipment} that delivers @Identifier[core:attack-interaction]{attack} you
               @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
+          slug: shattering-armor
           targets:
             - item
         type: ability
@@ -232,7 +232,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: water-native
           interaction: manifest
           maneuver: passive
           overview:
@@ -243,6 +242,7 @@ items:
             - martial
           range:
             unit: self
+          slug: water-native
           targets:
             - self
         type: ability
@@ -261,7 +261,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -275,6 +274,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: beastly-strength
           standard: true
           targets:
             - self
@@ -298,7 +298,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: diving
           interaction: manifest
           maneuver: passive
           overview:
@@ -315,6 +314,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: diving
           standard: true
           targets:
             - self
@@ -334,7 +334,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
           overview:
@@ -344,6 +343,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-armor-piercing
           standard: true
           targets:
             - self
@@ -363,7 +363,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -375,6 +374,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-strength
           standard: true
           targets:
             - self
@@ -397,7 +397,6 @@ items:
             - damaging
           executionTime:
             base: r0
-          identifier: melee-damage-boost
           interaction: manifest
           maneuver: reactive
           overview:
@@ -410,6 +409,7 @@ items:
           powerSources:
             - martial
           skill: true
+          slug: melee-damage-boost
           standard: true
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee
@@ -444,7 +444,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: swimming
           interaction: manifest
           maneuver: passive
           overview:
@@ -454,6 +453,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: swimming
           standard: true
           targets:
             - self
@@ -474,11 +474,11 @@ items:
         go more than the [[lookup name style=lc]]'s @Identifier[core:size]{size} × 5 feet away from the [[lookup name
         style=lc]].</p>
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: kraken-head
       size:
         max: 7
         min: 5
         value: 5
+      slug: kraken-head
       statDice:
         hp:
           formula: (@this.item.size - 1)d10
@@ -517,8 +517,8 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          identifier: armor-voiding
           kind: intrinsic
+          slug: armor-voiding
         type: property
       - _id: dbluxiTdmq984C8v
         _key: "!actors.items.effects!f44a804d581c16d7.WEU3kFKiiJ9V9Kn9.dbluxiTdmq984C8v"
@@ -532,10 +532,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: miryLeWfo7zh7zon
         _key: "!actors.items.effects!f44a804d581c16d7.WEU3kFKiiJ9V9Kn9.miryLeWfo7zh7zon"
@@ -549,8 +549,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: aa772458d708a91e
     img: icons/commodities/bones/beak-hooked-red.webp
@@ -561,10 +561,10 @@ items:
         raw: 2
       damage:
         base: 1d10
-      identifier: crushing-beak
       range:
         long:
           unit: melee
+      slug: crushing-beak
       style: savage
     type: body
   - _id: 5XFXZjbxPmt6CEqP
@@ -578,10 +578,10 @@ items:
       _sup: f44a804d581c16d7
       av:
         raw: 3
-      identifier: hardened-scales
       range:
         long:
           unit: self
+      slug: hardened-scales
     type: body
 name: Kraken Head
 prototypeToken:
@@ -599,13 +599,13 @@ prototypeToken:
 system:
   hp:
     value: 24
-  identifier: kraken-head
   mp:
     value: 6
   scaling:
     brScale: true
   size:
     value: 5
+  slug: kraken-head
   wielding:
     attacker: WEU3kFKiiJ9V9Kn9
     blocker: WEU3kFKiiJ9V9Kn9

@@ -2,7 +2,8 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 
-import { isKebabCase, toKebabCase } from "../../src/module/utils/string.mjs";
+import "../../foundry/common/primitives/string.mjs";
+import { isSlug, toSlug } from "../../src/module/utils/string.mjs";
 import { cleanDocument, loadDefaults } from "./clean-fields.mjs";
 import {
   DOCUMENT_COLLECTION_KEYS,
@@ -34,7 +35,7 @@ let prefix;
  */
 function registerDocument(pack, doc) {
   /** @type {CompendiumNode} */
-  const node = { name: toKebabCase(doc.name), sup: null };
+  const node = { name: toSlug(doc.name), sup: null };
   if (doc.system?._sup) { node.sup = doc.system._sup; }
   if (!PACK_REGISTRY[pack]) { PACK_REGISTRY[pack] = {}; }
   PACK_REGISTRY[pack][doc._id] = node;
@@ -46,7 +47,7 @@ function registerDocument(pack, doc) {
  * @returns {string} The kebab-case version of the string.
  */
 export function toPathKebabCase(str) {
-  return isKebabCase(str)
+  return isSlug(str)
     ? str
     : str.replace(/[\s_]+/g, "-").replace(/([a-z\d])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
       .toLowerCase();
@@ -144,7 +145,7 @@ async function removeOldFilesFromDirectory(dir, keep) {
  * @returns {string}
  */
 function transformName(doc, context) {
-  let name = toKebabCase(doc.name);
+  let name = toSlug(doc.name);
   if (!state.buildRegistry) { name = deriveName(state.pack, doc._id); }
   name = `${name}.${YAML ? "yml" : "json"}`;
   if (context.folder) { name = path.join(context.folder, name); }
@@ -157,7 +158,7 @@ function transformName(doc, context) {
  * @returns {string}
  */
 function transformFolderName(doc) {
-  return toKebabCase(doc.name);
+  return toSlug(doc.name);
 }
 
 /**

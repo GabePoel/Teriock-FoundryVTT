@@ -208,7 +208,7 @@ export default class BaseExecution extends BaseDataModel {
 
   /**
    * An identifier for a journal entry page to display.
-   * @returns {TypedIdentifier|null}
+   * @returns {Identifier|null}
    */
   get journalEntryPageIdentifier() {
     return null;

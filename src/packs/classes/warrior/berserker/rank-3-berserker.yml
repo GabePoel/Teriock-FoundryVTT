@@ -19,7 +19,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: battle-cry
       interaction: manifest
       maneuver: passive
       overview:
@@ -31,6 +30,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: battle-cry
       standard: true
       targets:
         - self
@@ -106,7 +106,6 @@ effects:
             present:
               - dead
           type: status
-      identifier: berserk
       interaction: manifest
       overview:
         base: >-
@@ -123,6 +122,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: berserk
       standard: true
       targets:
         - self
@@ -155,7 +155,6 @@ effects:
         - regeneration
       executionTime:
         base: passive
-      identifier: berserker-healing-factor
       interaction: manifest
       maneuver: passive
       overview:
@@ -168,6 +167,7 @@ effects:
         unit: self
       requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
       skill: true
+      slug: berserker-healing-factor
       standard: true
       targets:
         - self
@@ -197,7 +197,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      identifier: called-magic-resistance
       interaction: manifest
       maneuver: passive
       overview:
@@ -210,6 +209,7 @@ effects:
         unit: self
       requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
       skill: true
+      slug: called-magic-resistance
       standard: true
       targets:
         - self
@@ -231,7 +231,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: intimidate
       interaction: manifest
       maneuver: passive
       overview:
@@ -243,6 +242,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: intimidate
       standard: true
       targets:
         - self
@@ -271,7 +271,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      identifier: throw-the-bones
       interaction: manifest
       maneuver: slow
       overview:
@@ -285,6 +284,7 @@ effects:
         unit: ft
       ritual: true
       skill: true
+      slug: throw-the-bones
       standard: true
     type: ability
   - _id: dXZd9H8WZvzRjHrC
@@ -329,7 +329,6 @@ effects:
           method: roll
           type: combat
       featSaveAttribute: int
-      identifier: battle-cry-aura
       interaction: feat
       powerSources:
         - martial
@@ -340,6 +339,7 @@ effects:
       results:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
+      slug: battle-cry-aura
       standard: true
     type: ability
   - _id: GdB9HOLG829lz7Sl
@@ -353,7 +353,7 @@ effects:
       affinities:
         - _id: oJH3v7kvIbVGDlBS
           category: condition
-          identifier: frightened
+          slug: frightened
           type: resistance
       competence:
         raw: 1
@@ -366,7 +366,6 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      identifier: battle-cry-resistance
       interaction: manifest
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
@@ -375,6 +374,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: battle-cry-resistance
       standard: true
       targets:
         - self
@@ -405,7 +405,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: intimidating-presence
       interaction: manifest
       maneuver: passive
       overview:
@@ -415,6 +414,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: intimidating-presence
       standard: true
       targets:
         - self
@@ -444,7 +444,6 @@ effects:
       effectTypes:
         - mental
       featSaveAttribute: int
-      identifier: terrify
       interaction: feat
       powerSources:
         - martial
@@ -458,6 +457,7 @@ effects:
           to become @Identifier[condition:frightened]{frightened}, they take [[/damage 1d4[psychic]]]
           @Identifier[core:damage]{damage} as well.</p>
       skill: true
+      slug: terrify
       standard: true
     type: ability
 folder: 97760b47881c8b1e
@@ -467,9 +467,9 @@ system:
   archetype: warrior
   class: berserker
   description: <p>@Embed[class:berserker description inline]</p>
-  identifier: rank-3-berserker
   instructions: <p>@Embed[class:berserker path=system.instructions inline]</p>
   number: 3
+  slug: rank-3-berserker
   statDice:
     hp:
       formula: 1d12

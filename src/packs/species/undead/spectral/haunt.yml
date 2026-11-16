@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: haunting
       interaction: manifest
       kind: special
       maneuver: passive
@@ -39,6 +38,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are a @Identifier[creature:haunt]{haunt}.</p>
+      slug: haunting
       targets:
         - self
     type: ability
@@ -59,7 +59,6 @@ effects:
         - automatic
       executionTime:
         base: r0
-      identifier: haunt-deescalation
       interaction: manifest
       kind: special
       maneuver: reactive
@@ -74,6 +73,7 @@ effects:
         - unknown
       range:
         unit: self
+      slug: haunt-deescalation
       targets:
         - self
       trigger: >-
@@ -98,7 +98,6 @@ effects:
         - automatic
       executionTime:
         base: r0
-      identifier: haunt-escalation
       interaction: manifest
       kind: special
       maneuver: reactive
@@ -124,6 +123,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are a @Identifier[creature:haunt]{haunt}.</p>
+      slug: haunt-escalation
       targets:
         - self
       trigger: >-
@@ -146,9 +146,9 @@ system:
     @Identifier[ability:haunt-deescalation]{deescalate} from this point. [[lookup name]]s often have additional
     @Pack[teriock.abilities]{abilities} reflecting who they were in life or whatever it is that is causing them to
     @Identifier[ability:haunting]{haunt}.</p>
-  identifier: haunt
   size:
     enabled: false
+  slug: haunt
   statDice:
     hp:
       disabled: true

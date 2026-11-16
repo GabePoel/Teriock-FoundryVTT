@@ -1,4 +1,4 @@
-import { objectMap, toKebabCase } from "../../../../../../../utils/_module.mjs";
+import { objectMap, toSlug } from "../../../../../../../utils/_module.mjs";
 import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 import { terrainsField } from "../../../../../../fields/tools/builders.mjs";
 import { initialBoolean } from "../../../../../../fields/tools/initializers.mjs";
@@ -125,7 +125,7 @@ export default function ActorMovementPart(Base) {
       const rollData = super.getRollData();
       rollData.speed = this.movementSpeed;
       for (const k of Object.keys(TERIOCK.CONFIG.character.movement)) {
-        rollData[`speed.${toKebabCase(k)}`] = this.speedAdjustments[k] || 0;
+        rollData[`speed.${toSlug(k, { convertCamel: true })}`] = this.speedAdjustments[k] || 0;
       }
       for (const terrain of this.terrains) { rollData[`terrain.${terrain}`] = 1; }
       return rollData;

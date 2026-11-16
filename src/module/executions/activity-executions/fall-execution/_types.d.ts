@@ -1,6 +1,6 @@
 declare module "./fall-execution.mjs" {
   export default interface FallExecution {
-    damageTypes: Set<TypedIdentifier<"damage">>;
+    damageTypes: Set<Identifier<"damage">>;
     distance: number;
     water: boolean;
   }

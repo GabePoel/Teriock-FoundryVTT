@@ -1,5 +1,4 @@
-import { toKebabCase } from "../../../../utils/_module.mjs";
-import { identifierSetField } from "../../../fields/tools/builders.mjs";
+import { slugSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
 
@@ -20,9 +19,9 @@ export default function MetaphysicsSystemMixin(Base) {
     /** @inheritDoc */
     static defineSchema() {
       return Object.assign(super.defineSchema(), {
-        effectTypes: identifierSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
-        elements: identifierSetField(TERIOCK.CONFIG.metaphysics.elements),
-        powerSources: identifierSetField(TERIOCK.CONFIG.metaphysics.powerSources),
+        effectTypes: slugSetField(TERIOCK.CONFIG.metaphysics.effectTypes),
+        elements: slugSetField(TERIOCK.CONFIG.metaphysics.elements),
+        powerSources: slugSetField(TERIOCK.CONFIG.metaphysics.powerSources),
       });
     }
 
@@ -115,13 +114,13 @@ export default function MetaphysicsSystemMixin(Base) {
     getLocalRollData() {
       const data = super.getLocalRollData();
       // Add power sources
-      for (const powerSource of this.powerSources) { data[`ps.${toKebabCase(powerSource)}`] = 1; }
+      for (const powerSource of this.powerSources) { data[`ps.${powerSource}`] = 1; }
       // Add elements
       for (const element of this.elements) {
-        data[`el.${toKebabCase(element)}`] = 1;
+        data[`el.${element}`] = 1;
       }
       // Add effect types
-      for (const effectType of this.effectTypes) { data[`et.${toKebabCase(effectType)}`] = 1; }
+      for (const effectType of this.effectTypes) { data[`et.${effectType}`] = 1; }
       return data;
     }
 

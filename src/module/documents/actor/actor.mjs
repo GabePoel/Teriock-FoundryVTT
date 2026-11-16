@@ -137,7 +137,7 @@ export default class TeriockActor extends mixClasses(Actor, BaseDocumentMixin, C
 
   /**
    * Store of pending item operations staged for the next database write.
-   * @returns {{itemCreations: Set<UUID<TeriockItem>|TypedIdentifier>, itemDeletions: Set<ID<TeriockItem>>}}
+   * @returns {{itemCreations: Set<UUID<TeriockItem>|Identifier>, itemDeletions: Set<ID<TeriockItem>>}}
    */
   get _staged() {
     return (this.__staged ??= { itemCreations: new Set(), itemDeletions: new Set() });

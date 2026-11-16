@@ -78,7 +78,7 @@ export default class FluencySystem
         tradecraft: tc.name,
         type: "fluency",
       }),
-      system: { field: tc.system._source.field, tradecraft: tc.system.identifier },
+      system: { field: tc.system.field, tradecraft: tc.system.slug },
       type: "fluency",
     };
   }
@@ -88,7 +88,7 @@ export default class FluencySystem
     return [...super._displayFieldsContent, {
       classes: [TERIOCK.DISPLAY.panels.styles.derived],
       editable: false,
-      label: TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.label,
+      label: TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft]?.label,
       path: "system.tradecraftDescription",
     }];
   }
@@ -96,8 +96,8 @@ export default class FluencySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.label;
-    parts.text = dotJoin([TERIOCK.CONFIG.tradecraft.fields[this._source.field].label, parts.text]);
+    parts.subtitle = TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft]?.label;
+    parts.text = dotJoin([TERIOCK.CONFIG.tradecraft.fields[this.field].label, parts.text]);
     return parts;
   }
 
@@ -106,12 +106,9 @@ export default class FluencySystem
     return false;
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
+  /** @inheritDoc */
   get wikiIdentifier() {
-    return this.tradecraft;
+    return `tradecraft:${this.tradecraft}`;
   }
 
   /** @inheritDoc */
@@ -136,7 +133,7 @@ export default class FluencySystem
       Object.values(TERIOCK.DISPLAY.thumbnails.manifest.tradecraft).includes(this.parent.img)
       && !foundry.utils.hasProperty(changes, "img")
     ) {
-      let tradecraft = this._source.tradecraft;
+      let tradecraft = this.tradecraft;
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
@@ -147,8 +144,8 @@ export default class FluencySystem
   /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
-      [`field.${this._source.field}`]: 1,
-      [`tradecraft.${this._source.tradecraft}`]: 1,
+      [`field.${this.field}`]: 1,
+      [`tradecraft.${this.tradecraft}`]: 1,
     });
   }
 
@@ -157,9 +154,9 @@ export default class FluencySystem
     return {
       ...(await super.getPanelParts()),
       bars: this._withKindBar([{
-        icon: TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft].icon,
+        icon: TERIOCK.CONFIG.tradecraft.tradecrafts[this.tradecraft].icon,
         label: _loc("TERIOCK.COMMON.Tradecraft"),
-        wrappers: [TERIOCK.CONFIG.tradecraft.fields[this._source.field].label, getName(this.tradecraft)],
+        wrappers: [TERIOCK.CONFIG.tradecraft.fields[this.field].label, getName(`tradecraft:${this.tradecraft}`)],
       }]),
     };
   }
@@ -168,12 +165,12 @@ export default class FluencySystem
   prepareBaseData() {
     super.prepareBaseData();
     // Enforce matching tradecraft/field
-    this.field = `field:${TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.field ?? this._source.field}`;
+    this.field = TERIOCK.CONFIG.tradecraft.tradecrafts[this._source.tradecraft]?.field ?? this._source.field;
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.tradecraftDescription = `<p>@Embed[${this.tradecraft} description inline]</p>`;
+    this.tradecraftDescription = `<p>@Embed[tradecraft:${this.tradecraft} description inline]</p>`;
   }
 }

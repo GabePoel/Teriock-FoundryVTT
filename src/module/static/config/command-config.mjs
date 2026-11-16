@@ -1,4 +1,4 @@
-import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
+import { validateIdentifier } from "../../data/fields/tools/validators.mjs";
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import {
   barClamp,
@@ -8,7 +8,7 @@ import {
   getEnsureNoChildrenOperations,
   getIcon,
   resolveDocuments,
-  toKebabCase,
+  toSlug,
 } from "../../utils/_module.mjs";
 import { icons } from "../display/_module.mjs";
 import * as STATUSES from "../statuses.mjs";
@@ -406,7 +406,7 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.applyUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      return validateTypedIdentifier(status, { strict: true })
+      return validateIdentifier(status, { strict: true })
         ? getEnsureChildrenOperations(actor, [status])
         : buildStatusOperations(actor, { create: [status] });
     },
@@ -553,7 +553,7 @@ const commandConfig = {
       /** @type {[string, Partial<Teriock.Config.CommandEntry>][]} */
       const entries = [...Object.entries(commandConfig), ["roll", { aliases: ["r"], args: ["formula"] }]];
       let code = `<h6>${_loc("TERIOCK.COMMANDS.Help.name")}</h6><p>${_loc("TERIOCK.COMMANDS.Help.format")}</p>`;
-      const named = entries.map(([key, entry]) => [toKebabCase(key), entry]);
+      const named = entries.map(([key, entry]) => [toSlug(key, { convertCamel: true }), entry]);
       for (const [name, entry] of named.sort(([a], [b]) => a.localeCompare(b))) {
         const args = entry.numeric ? ["formula"] : entry.args;
         const aliases = (entry.aliases ?? []).filter(a => a !== name);
@@ -603,7 +603,7 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.removeUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      return validateTypedIdentifier(status, { strict: true })
+      return validateIdentifier(status, { strict: true })
         ? getEnsureNoChildrenOperations(actor, [status])
         : buildStatusOperations(actor, { delete: [status], full: true });
     },
@@ -750,7 +750,7 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      if (!validateTypedIdentifier(status, { strict: true })) {
+      if (!validateIdentifier(status, { strict: true })) {
         const key = actor.effects.has(CONFIG.statusEffects[status]?._id) ? "delete" : "create";
         return buildStatusOperations(actor, { [key]: [status] });
       }
@@ -856,10 +856,10 @@ const commandConfig = {
   },
 };
 
-// Multi-word commands can also be typed in kebab-case.
+// Multi-word commands can also be typed as slugs.
 for (const [key, entry] of Object.entries(commandConfig)) {
-  const kebab = toKebabCase(key);
-  if (kebab !== key) { entry.aliases = [kebab, ...(entry.aliases ?? [])]; }
+  const slug = toSlug(key, { convertCamel: true });
+  if (slug !== key) { entry.aliases = [slug, ...(entry.aliases ?? [])]; }
 }
 
 preLocalizeObject("CONFIG.command", { keys: ["label", "numeric.deal", "numeric.take"] });

@@ -6,11 +6,10 @@ import {
   mergeMetadata,
   mixClasses,
   objectMap,
-  toCamelCase,
-  toKebabCase,
+  toSlug,
 } from "../../../../utils/_module.mjs";
-import { FormulaField, IdentifierField, MultiChangeField, UnitField } from "../../../fields/_module.mjs";
-import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
+import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
+import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { migrateIterables, migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels, RangeUnitModel } from "../../../models/_module.mjs";
@@ -65,9 +64,9 @@ export default function ArmamentSystemMixin(Base) {
         damage: new MultiChangeField({
           base: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
           twoHanded: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
-          types: new fields.SetField(new IdentifierField()),
+          types: new fields.SetField(new SlugField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
-        equipmentClasses: identifierSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
+        equipmentClasses: slugSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
         range: new MultiChangeField({
           long: new UnitField(RangeUnitModel),
           melee: new fields.BooleanField({ initial: true }),
@@ -76,7 +75,7 @@ export default function ArmamentSystemMixin(Base) {
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
         spellTurning: new fields.BooleanField(),
-        style: new IdentifierField({
+        style: new SlugField({
           initial: null,
           nullable: true,
           placeholder: _loc("COMMON.None"),
@@ -95,7 +94,7 @@ export default function ArmamentSystemMixin(Base) {
     /** @inheritDoc */
     static migrateData(source, options) {
       if ("fightingStyle" in source) {
-        source.style ??= source.fightingStyle ? toKebabCase(source.fightingStyle) : null;
+        source.style ??= source.fightingStyle ? toSlug(source.fightingStyle) : null;
         delete source.fightingStyle;
       }
       migrateIterables(source, "equipmentClasses");
@@ -218,7 +217,7 @@ export default function ArmamentSystemMixin(Base) {
       return [...super._displayFieldsContent, {
         classes: [TERIOCK.DISPLAY.panels.styles.derived],
         editable: false,
-        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(this.style) }),
+        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(`style:${this.style}`) }),
         path: "system.styleDescription",
       }];
     }
@@ -396,11 +395,11 @@ export default function ArmamentSystemMixin(Base) {
         spellTurning: Number(this.spellTurning),
         vitals: Number(this.vitals),
       });
-      if (this._source.style) { data[`style.${this._source.style}`] = 1; }
+      if (this.style) { data[`style.${this.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
-      for (const p of this.props || new Set()) { data[`prop.${toKebabCase(p)}`] = 1; }
-      for (const command of this.commands) { data[`command.${toKebabCase(command)}`] = 1; }
-      for (const equipmentClass of this.equipmentClasses) { data[`class.${toKebabCase(equipmentClass)}`] = 1; }
+      for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
+      for (const command of this.commands) { data[`command.${toSlug(command, { convertCamel: true })}`] = 1; }
+      for (const equipmentClass of this.equipmentClasses) { data[`class.${equipmentClass}`] = 1; }
       return data;
     }
 
@@ -415,11 +414,11 @@ export default function ArmamentSystemMixin(Base) {
       const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
         e.type === "property"
       );
-      this.props = new Set(properties.map(p => toCamelCase(p.name)));
+      this.props = new Set(properties.map(p => p.constructor.getIdentifierSlug(p)));
 
       // Propagate damage types
       for (const p of properties.filter(p => p.active)) {
-        if (p.system.damageType) { this.damage.types.add(p.system._source.damageType); }
+        if (p.system.damageType) { this.damage.types.add(p.system.damageType); }
       }
       if (this.kind === "magic") { this.damage.types.add("magic"); }
       this.damage.base = FormulaField.addTypes(this.damage.base, this.damage.types);
@@ -438,7 +437,7 @@ export default function ArmamentSystemMixin(Base) {
       this.range.short.unit = this.range.long.unit;
 
       // Fighting Style
-      if (this.style) { this.styleDescription = `<p>@Embed[${this.style} description inline]</p>`; }
+      if (this.style) { this.styleDescription = `<p>@Embed[style:${this.style} description inline]</p>`; }
     }
   }
 

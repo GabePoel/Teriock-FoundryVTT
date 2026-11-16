@@ -1,7 +1,7 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { migrateThumbnails } from "../../data/fields/tools/migrations.mjs";
 import { AbstractDataMixin, PseudoControllerDataMixin } from "../../data/mixins/_module.mjs";
-import { checkFieldVisibility, createElement, makeIconClass, mixClasses, toKebabCase } from "../../utils/_module.mjs";
+import { checkFieldVisibility, createElement, makeIconClass, mixClasses } from "../../utils/_module.mjs";
 
 /**
  * @import { ApplicationRenderOptions } from "@client/applications/_types.mjs";
@@ -24,16 +24,19 @@ export default function BaseDocumentMixin(Base) {
    * @mixin
    */
   class BaseDocument extends mixClasses(Base, AbstractDataMixin, PseudoControllerDataMixin) {
-    /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...(super.LOCALIZATION_PREFIXES ?? []), "TERIOCK.DOCUMENTS.Base"];
-
     /**
      * Metadata that Teriock uses but Foundry doesn't.
-     * @returns {Teriock.Documents.DocumentMetadata}
+     * @type {Teriock.Metadata.DocumentMetadata}
      */
-    static get documentMetadata() {
-      return { child: false, hierarchy: false, tooltip: false };
-    }
+    static documentMetadata = Object.freeze({
+      child: false,
+      hierarchy: false,
+      identifier: { depth: 0, track: false, trackEmbeds: false },
+      tooltip: false,
+    });
+
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...(super.LOCALIZATION_PREFIXES ?? []), "TERIOCK.DOCUMENTS.Base"];
 
     /**
      * Mutate an operation that's being conducted as the GM.
@@ -272,27 +275,11 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
-     * The default identifier for this document.
-     * @returns {Identifier}
-     */
-    get defaultIdentifier() {
-      return teriock.utils.toKebabCase(this.name);
-    }
-
-    /**
      * Metadata that Teriock uses but Foundry doesn't.
-     * @returns {Teriock.Documents.DocumentMetadata}
+     * @returns {Teriock.Metadata.DocumentMetadata}
      */
     get documentMetadata() {
       return this.constructor.documentMetadata;
-    }
-
-    /**
-     * A guaranteed identifier for this.
-     * @returns {Identifier}
-     */
-    get forcedIdentifier() {
-      return this.system?.identifier ?? this.defaultIdentifier;
     }
 
     /**
@@ -336,16 +323,6 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /**
-     * A key that can be looked up to find this document.
-     * @returns {string}
-     */
-    get lookupKey() {
-      if (this.typedIdentifier) { return this.typedIdentifier; }
-      if (this.type) { return `${this.type}:${this.forcedIdentifier}`; }
-      return `${toKebabCase(this.documentName)}:${this.forcedIdentifier}`;
-    }
-
-    /**
      * That document that has the most control over this one.
      * @returns {Teriock.Hierarchy.SyncDoc<TeriockActiveEffect|TeriockActor|TeriockItem>}
      */
@@ -376,16 +353,6 @@ export default function BaseDocumentMixin(Base) {
      */
     get trackable() {
       return this.collection?.get(this.id) === this;
-    }
-
-    /**
-     * This document's typed identifier, if it has one.
-     * @returns {TypedIdentifier|null}
-     */
-    get typedIdentifier() {
-      const type = this.type;
-      const identifier = this.system?.identifier;
-      return Boolean(type) && Boolean(identifier) ? `${type}:${identifier}` : null;
     }
 
     /**
@@ -473,23 +440,6 @@ export default function BaseDocumentMixin(Base) {
       return foundry.utils.parseHTML(await TeriockTextEditor.enrichHTML(raw, options));
     }
 
-    /** @inheritDoc */
-    _onCreate(data, options, userId) {
-      super._onCreate(data, options, userId);
-      // Extra tracking for world documents created during the game.
-      game.teriock.identifiers.trackDocument(this);
-      this._cache.identifier = this.typedIdentifier;
-    }
-
-    /** @inheritDoc */
-    _onDelete(options, userId) {
-      super._onDelete(options, userId);
-      game.teriock.identifiers.untrackDocument(this);
-      for (const c of Object.values(this.collections)) {
-        for (const d of c) { game.teriock.identifiers.untrackDocument(d); }
-      }
-    }
-
     /**
      * Check whether the provided document or its index is an ancestor of this one.
      * @param {TeriockDocument|Teriock.Hierarchy.Index<TeriockDocument>} doc
@@ -571,14 +521,6 @@ export default function BaseDocumentMixin(Base) {
     }
 
     /** @inheritDoc */
-    prepareData() {
-      super.prepareData();
-      if (this.trackable) { game.teriock.identifiers.untrack(this._cache.identifier, this.uuid); }
-      if (this.persisted) { game.teriock.identifiers.trackDocument(this); }
-      this._cache.identifier = this.typedIdentifier;
-    }
-
-    /** @inheritDoc */
     toAnchor(options = {}) {
       const icon = this.typeIcon;
       return super.toAnchor(Object.assign({ icon: icon ? makeIconClass(icon, "solid") : undefined }, options));
@@ -586,7 +528,7 @@ export default function BaseDocumentMixin(Base) {
 
     /** @inheritDoc */
     toDragData() {
-      return Object.assign(super.toDragData(), { identifier: this.typedIdentifier, systemType: this.type });
+      return Object.assign(super.toDragData(), { systemType: this.type });
     }
 
     /** @inheritDoc */

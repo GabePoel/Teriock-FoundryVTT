@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { SlugField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import {
   AdjustableSystemMixin,
@@ -54,7 +54,7 @@ export default class PropertySystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      damageType: new IdentifierField({ suggestions: true, type: "damage" }),
+      damageType: new SlugField({ suggestions: true, type: "damage" }),
       extraDamage: rollableFormulaField(),
     });
   }
@@ -100,7 +100,7 @@ export default class PropertySystem
   /** @inheritDoc */
   getLocalRollData() {
     const data = Object.assign(super.getLocalRollData(), { "dmg.extra": this.extraDamage || 0 });
-    if (this._source.damageType) { data[`dmg.type.${this._source.damageType}`] = 1; }
+    if (this.damageType) { data[`dmg.type.${this.damageType}`] = 1; }
     return data;
   }
 }

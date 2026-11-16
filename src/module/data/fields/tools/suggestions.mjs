@@ -4,13 +4,14 @@ import { objectMap } from "../../../utils/_module.mjs";
  * @import { FormSelectOption } from "@client/applications/forms/fields.mjs";
  */
 
-/** @type {Record<string, Record<Identifier, string>>} */
+/** @type {Record<string, Record<Slug, string>>} */
 const CONFIG_SUGGESTIONS = {};
 
 /**
  * Suggested identifiers and names for a category.
  * @param {string} category
- * @returns {Record<Identifier, string>}
+ * @returns {Record<Slug, string>}
+ * @category Identifiers
  */
 export function categorySuggestions(category) {
   const path = TERIOCK.CONFIG.category[category]?.suggestions;
@@ -25,8 +26,9 @@ export function categorySuggestions(category) {
  * @param {Teriock.Fields.IdentifierSuggestions|null} [suggestions]
  * @param {object} [options]
  * @param {string[]} [options.types] - Identifier types to pull registry names from when `suggestions` is `true`.
- * @param {boolean} [options.typed] - Whether to key registry names by typed identifier.
+ * @param {boolean} [options.typed] - Whether to key registry names by identifier.
  * @returns {FormSelectOption[]|undefined}
+ * @category Identifiers
  */
 export function prepareSuggestions(suggestions, { typed = false, types = [] } = {}) {
   /** @type {Record<string, string>|string[]|null|undefined} */

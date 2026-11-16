@@ -45,7 +45,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       name: path,
       placeholder,
       reset,
-      value: foundry.utils.getProperty(this.document, path),
+      value: foundry.utils.getProperty(this.document._source, path),
     };
   }
 
@@ -66,7 +66,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       label: schemaField.label,
       localize: true,
       name: path,
-      value: foundry.utils.getProperty(this.document, path),
+      value: foundry.utils.getProperty(this.document._source, path),
     };
   }
 
@@ -94,9 +94,9 @@ export default class DocumentSettingsSheet extends DocumentDialog {
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
         fields: [
-          this.#quickField("system.identifier", {
-            placeholder: this.document.defaultIdentifier,
-            reset: this.document.defaultIdentifier,
+          this.#quickField("system.slug", {
+            placeholder: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
+            reset: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
           }),
           this.#quickField("_stats.compendiumSource"),
           this.#quickField("_stats.duplicateSource"),

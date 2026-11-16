@@ -14,13 +14,9 @@ export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMix
     type: "rule",
   });
 
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
+  /** @inheritDoc */
   get wikiIdentifier() {
-    const type = this.parent.parent?.name?.toLowerCase();
-    if (!TERIOCK.CONFIG.wiki.index[type] || !this.identifier) { return null; }
-    return `${type}:${this.identifier}`;
+    if (this.parent.parent?.uuid === TERIOCK.CONST.CONDITIONS_JOURNAL_UUID) { return `condition:${this.slug}`; }
+    return super.wikiIdentifier;
   }
 }

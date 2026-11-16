@@ -1,5 +1,5 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import { toKebabCase } from "../../utils/_module.mjs";
+import { toSlug } from "../../utils/_module.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
@@ -62,7 +62,9 @@ Hooks.once("teriock.identifiersInit", () => {
     armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
   });
   Object.entries(TERIOCK.CONFIG.command).filter(([_k, v]) => v.numeric).forEach(([k, v]) => {
-    armamentContext[`command.${toKebabCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", { name: v.label });
+    armamentContext[`command.${toSlug(k, { convertCamel: true })}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", {
+      name: v.label,
+    });
   });
   Object.entries(TERIOCK.CONFIG.equipment.equipmentClasses).forEach(([k, v]) => {
     armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: v.label });

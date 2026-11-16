@@ -26,7 +26,7 @@ export default function ActorAutomationPart(Base) {
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
         if (
-          identifiers.has(c.typedIdentifier)
+          identifiers.has(c.identifier)
           && c.system.competence.raw < value
           && !c.system.lockedPaths?.has("system.competence.raw")
         ) {
@@ -43,7 +43,7 @@ export default function ActorAutomationPart(Base) {
       const autos = this.automations.getTypeSync("suppress", { active: true, isPassive: true });
       const identifiers = new Set(autos.map(a => a.identifier));
       for (const c of this.parent.modifiable?.contents ?? []) {
-        if (identifiers.has(c.typedIdentifier)) { c.system.forceSuppressed = true; }
+        if (identifiers.has(c.identifier)) { c.system.forceSuppressed = true; }
       }
     }
 

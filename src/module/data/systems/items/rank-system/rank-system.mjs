@@ -103,12 +103,12 @@ export default class RankSystem
     for (const category of ["combat", "support"]) {
       const selectMap = new Map(
         this.parent.children.getTypeSync("ability").filter(a => a.getFlag("teriock", "category") === category).map(
-          a => [a.lookupKey, a]
+          a => [a.identifier, a]
         ),
       );
       for (const rank of otherRanks) {
         for (const a of rank.children.getTypeSync("ability")) {
-          const key = a.lookupKey;
+          const key = a.identifier;
           if (selectMap.has(key)) {
             toDelete.push(selectMap.get(key).id);
             selectMap.delete(key);
@@ -148,12 +148,12 @@ export default class RankSystem
    * Stage needed archetypes for creation.
    */
   #stageArchetypeCreation() {
-    const archetypeConfig = TERIOCK.CONFIG.class.archetypes[this._source.archetype];
+    const archetypeConfig = TERIOCK.CONFIG.class.archetypes[this.archetype];
     if (
       !archetypeConfig?.dontStage
-      && !this.actor.previewedTypes.archetype.some(a => a.typedIdentifier === this.archetype)
+      && !this.actor.previewedTypes.archetype.some(a => a.identifier === `archetype:${this.archetype}`)
     ) {
-      this.actor._staged.itemCreations.add(this.archetype);
+      this.actor._staged.itemCreations.add(`archetype:${this.archetype}`);
     }
   }
 
@@ -163,7 +163,7 @@ export default class RankSystem
   #stageArchetypeDeletion() {
     const neededArchetypes = new Set(this.actor.previewedTypes.rank.map(r => r.system.archetype));
     for (const a of this.actor.previewedTypes.archetype) {
-      if (!neededArchetypes.has(a.typedIdentifier)) { this.actor._staged.itemDeletions.add(a.id); }
+      if (!neededArchetypes.has(a.system.slug)) { this.actor._staged.itemDeletions.add(a.id); }
     }
   }
 
@@ -174,8 +174,8 @@ export default class RankSystem
         icon: this.classIcon,
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
-          getName(this.archetype),
-          getName(this.class),
+          getName(`archetype:${this.archetype}`),
+          getName(`class:${this.class}`),
           _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: this.number }),
         ],
       },
@@ -194,13 +194,13 @@ export default class RankSystem
    * @returns {string}
    */
   get classIcon() {
-    return TERIOCK.CONFIG.class.classes[this._source.class]?.icon;
+    return TERIOCK.CONFIG.class.classes[this.class]?.icon;
   }
 
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = getName(this.archetype);
+    parts.subtitle = getName(`archetype:${this.archetype}`);
     parts.text ||= _loc(this._kindEntry.label);
     return parts;
   }
@@ -210,12 +210,9 @@ export default class RankSystem
     return super.wikiPage && this.number.between(1, 5);
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
+  /** @inheritDoc */
   get wikiIdentifier() {
-    return this.class;
+    return `class:${this.class}`;
   }
 
   /** @inheritDoc */
@@ -253,8 +250,8 @@ export default class RankSystem
   /** @inheritDoc */
   getLocalRollData() {
     const data = { ...super.getLocalRollData(), "av.max": safeInf(this.maxAv), number: this.number };
-    if (this._source.archetype) { data[`archetype.${this._source.archetype}`] = 1; }
-    if (this._source.class) { data[`class.${this._source.class}`] = 1; }
+    if (this.archetype) { data[`archetype.${this.archetype}`] = 1; }
+    if (this.class) { data[`class.${this.class}`] = 1; }
     return data;
   }
 
@@ -262,9 +259,7 @@ export default class RankSystem
   prepareBaseData() {
     super.prepareBaseData();
     // Enforce matching class/archetype
-    this.archetype = `archetype:${
-      TERIOCK.CONFIG.class.classes[this._source.class]?.archetype ?? this._source.archetype
-    }`;
+    this.archetype = TERIOCK.CONFIG.class.classes[this._source.class]?.archetype ?? this._source.archetype;
     if (this.parent.sup?.type === "species") { this.kind = "innate"; }
   }
 }

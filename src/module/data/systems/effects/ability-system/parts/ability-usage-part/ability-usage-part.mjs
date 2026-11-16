@@ -1,4 +1,4 @@
-import { toKebabCase } from "../../../../../../utils/_module.mjs";
+import { toSlug } from "../../../../../../utils/_module.mjs";
 import { FormulaField, UnitField } from "../../../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 import { RangeUnitModel, SlowExecutionTimeUnitModel } from "../../../../../models/unit-models/_module.mjs";
@@ -197,7 +197,7 @@ export default function AbilityUsagePart(Base) {
       Object.assign(data, {
         [`interaction.${this.interaction}`]: 1,
         [`maneuver.${this.maneuver}`]: 1,
-        [`time.${toKebabCase(this.executionTime.base)}`]: 1,
+        [`time.${toSlug(this.executionTime.base, { convertCamel: true })}`]: 1,
         range: this.range.rollValue,
       });
       // Add deliveries

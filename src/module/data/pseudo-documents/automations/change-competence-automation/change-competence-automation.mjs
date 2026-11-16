@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses, omit } from "../../../../utils/_module.mjs";
-import { TypedIdentifierField } from "../../../fields/_module.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import { OverrideCompetencePseudoDocumentMixin } from "../../mixins/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -18,7 +18,7 @@ export default class ChangeCompetenceAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return omit(Object.assign(super.defineSchema(), { identifier: new TypedIdentifierField() }), ["setCompetence"]);
+    return omit(Object.assign(super.defineSchema(), { identifier: new IdentifierField() }), ["setCompetence"]);
   }
 
   /** @inheritDoc */

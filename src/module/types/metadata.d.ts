@@ -2,6 +2,13 @@ declare global {
   namespace Teriock.Metadata {
     export type CollectionMetadata = { validate: boolean };
 
+    export type DocumentMetadata = {
+      child: boolean;
+      hierarchy: boolean;
+      identifier: { depth: number, track: boolean, trackEmbeds: boolean };
+      tooltip: boolean;
+    };
+
     export type ModelMetadata = { initialCompetence: Teriock.System.CompetenceLevel, pseudos: Record<string, string> };
 
     export type ModifierMetadata = ModelMetadata & {
@@ -79,7 +86,7 @@ declare global {
       importable: boolean;
     };
 
-    export type CharacterActorSystemMetadata = CommonSystemMetadata & { defaultChildIdentifiers: TypedIdentifier[] };
+    export type CharacterActorSystemMetadata = CommonSystemMetadata & { defaultChildIdentifiers: Identifier[] };
 
     export type ChildSystemMetadata = CommonSystemMetadata & {
       initialKind: string;

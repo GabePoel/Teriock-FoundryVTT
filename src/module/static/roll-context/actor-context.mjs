@@ -1,5 +1,5 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import { toKebabCase } from "../../utils/_module.mjs";
+import { toSlug } from "../../utils/_module.mjs";
 
 const actorContext = {
   br: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.label",
@@ -107,13 +107,15 @@ Hooks.once("teriock.identifiersInit", () => {
   });
   Object.entries(TERIOCK.CONFIG.character.movement).forEach(([k, v]) => {
     Object.assign(actorContext, {
-      [`speed.${toKebabCase(k)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: v.label }),
+      [`speed.${toSlug(k, { convertCamel: true })}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", {
+        type: v.label,
+      }),
     });
   });
   Object.entries(TERIOCK.CONFIG.terrain).forEach(([k, v]) => {
     Object.assign(actorContext, { [`terrain.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.terrain", { name: v.label }) });
   });
   Object.entries(TERIOCK.STATUSES.conditions).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`status.${toKebabCase(k)}`]: v.name });
+    Object.assign(actorContext, { [`status.${k}`]: v.name });
   });
 });

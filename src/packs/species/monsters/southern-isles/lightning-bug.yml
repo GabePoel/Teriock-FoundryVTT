@@ -22,7 +22,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      identifier: attack-resistance
       interaction: manifest
       kind: special
       maneuver: passive
@@ -37,6 +36,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: attack-resistance
       targets:
         - self
     type: ability
@@ -54,7 +54,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: dense-intelligence
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -62,6 +61,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dense-intelligence
       targets:
         - self
       upgrades:
@@ -83,7 +83,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: elusive
       interaction: manifest
       kind: special
       maneuver: passive
@@ -91,6 +90,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: elusive
       targets:
         - self
       upgrades:
@@ -142,7 +142,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      identifier: flying
       interaction: manifest
       maneuver: passive
       overview:
@@ -153,6 +152,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: flying
       standard: true
       targets:
         - self
@@ -180,7 +180,6 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
         1d6[magic]]] @Identifier[core:damage]{damage}.</p>
-      identifier: lightning-ray
       piercing:
         raw: 1
       powerSources:
@@ -191,6 +190,7 @@ effects:
       results:
         critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
         hit: <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
+      slug: lightning-ray
       spell: true
       standard: true
     type: ability
@@ -208,7 +208,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-strength
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -216,6 +215,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-strength
       targets:
         - self
       upgrades:
@@ -237,13 +237,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -264,13 +264,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -288,7 +288,7 @@ effects:
         - _id: F2M0w5nw61kVua0H
           activeQualifier: not(@status.down)
           category: element
-          identifier: storm
+          slug: storm
           type: immunity
       competence:
         raw: 1
@@ -299,7 +299,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: storm-magic-immunity
       interaction: manifest
       kind: special
       maneuver: passive
@@ -312,6 +311,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
+      slug: storm-magic-immunity
       targets:
         - self
     type: ability
@@ -329,9 +329,9 @@ system:
     while they are feasting. As soon as they discharge, [[lookup name style=lc]]s become hungry again and instantly
     charge up from the air around them. They tend to stay clear of mushrooms like the
     @Identifier[creature:deathcap-toadstool]{deathcap toadstools} that prey on them.</p>
-  identifier: lightning-bug
   size:
     value: 0.25
+  slug: lightning-bug
   statDice:
     hp:
       formula: 1d2

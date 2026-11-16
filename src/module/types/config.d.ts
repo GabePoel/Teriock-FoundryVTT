@@ -39,10 +39,10 @@ declare global {
     export type CurrencyEntry = {
       code: string;
       conversion: number;
-      equipmentType: Identifier;
-      identifier: Identifier;
+      equipmentType: Slug;
       label: string;
       plural: string;
+      slug: Slug;
       symbol: string;
       weight: number;
     };
@@ -69,12 +69,12 @@ declare global {
       bar?: { class: string, initial: number, lockInputs?: boolean, max?: number, min?: number, temp?: boolean };
       color?: { base: string, dark: string, darkest: string, light: string };
       command: Teriock.Keys.Command;
-      costIdentifier: TypedIdentifier;
+      costIdentifier: Identifier;
       /** DSN flavor key */
       die?: string;
       hacks?: boolean;
       icon: string;
-      identifier?: TypedIdentifier;
+      identifier?: Identifier;
       label: string;
       morganti?: boolean;
       multiplier: number;
@@ -168,7 +168,7 @@ declare global {
     export type InteractionEntry = {
       base?: Teriock.System.FormulaString;
       die: string;
-      identifier: TypedIdentifier;
+      identifier: Identifier;
       label: string;
       results: { alt: string, altCrit?: string, base: string, baseCrit?: string };
     };
@@ -179,7 +179,7 @@ declare global {
 
     export type ManeuverEntry = {
       executionTimes: Record<string, ExecutionTimeEntry>;
-      identifier: TypedIdentifier;
+      identifier: Identifier;
       label: string;
     };
 
@@ -187,7 +187,7 @@ declare global {
       allowPiercing?: boolean;
       aoe?: boolean;
       contact?: boolean;
-      identifier: TypedIdentifier;
+      identifier: Identifier;
       label: string;
       needsItem?: boolean;
       ranged?: boolean;

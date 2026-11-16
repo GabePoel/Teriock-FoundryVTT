@@ -3,7 +3,8 @@ declare module "./base-affinity.mjs" {
     _id: ID<BaseAffinity>;
     type: AffinityType;
     category: Teriock.Keys.Category;
-    value: string;
+    name: string;
+    slug: Slug;
     img: string;
   }
 }

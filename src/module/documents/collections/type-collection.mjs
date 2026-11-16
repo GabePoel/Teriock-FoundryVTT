@@ -146,8 +146,9 @@ export default class TypeCollection extends Collection {
 
   /**
    * All the identifiers in this collection.
-   * @returns {Set<TypedIdentifier>}
+   * @returns {Set<Identifier>}
    * @todo Add caching.
+   * @category Identifiers
    */
   get identifiers() {
     return new Set(Object.keys(this.getNames()));
@@ -260,14 +261,16 @@ export default class TypeCollection extends Collection {
    * Names of the identifiers in this collection. This is useful for displaying options in menus.
    * @param {object} [options]
    * @param {(document: TDocument) => boolean} [options.filter] - Only include documents that pass this filter.
-   * @returns {Record<TypedIdentifier, string>}
+   * @returns {Record<Identifier, string>}
+   * @category Identifiers
    */
   getNames({ filter } = {}) {
     const names = {};
     for (const d of this.contents) {
       if (filter && !filter(d)) { continue; }
-      const identifier = foundry.utils.getProperty(d, "system.identifier");
-      if (d?.type && identifier) { names[`${d.type}:${identifier}`] = d.name; }
+      const documentName = this._getTypeModel(d?.type)?.metadata.documentName;
+      const identifier = foundry.utils.getDocumentClass(documentName)?.getIdentifier?.(d);
+      if (identifier) { names[identifier] = d.name; }
     }
     return names;
   }

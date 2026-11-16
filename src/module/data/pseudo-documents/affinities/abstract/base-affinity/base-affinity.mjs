@@ -1,13 +1,6 @@
-import {
-  dotJoin,
-  makeIcon,
-  mergeMetadata,
-  mixClasses,
-  toCamelCase,
-  toKebabCase,
-} from "../../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../../fields/_module.mjs";
-import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
+import { dotJoin, makeIcon, mergeMetadata, mixClasses, toCamelCase, toSlug } from "../../../../../utils/_module.mjs";
+import { SlugField } from "../../../../fields/_module.mjs";
+import { migrateRename, migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import { categorySuggestions } from "../../../../fields/tools/suggestions.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
 import { MechanicPseudoDocument } from "../../../abstract/_module.mjs";
@@ -68,19 +61,20 @@ export default class BaseAffinity
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       category: new fields.StringField({ choices: TERIOCK.CONFIG.category, initial: "ability", required: true }),
-      identifier: new IdentifierField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
       name: new fields.StringField(),
+      slug: new SlugField({ blank: true, label: _loc("TERIOCK.COMMON.Slug") }),
     });
   }
 
   /** @inheritDoc */
   static migrateData(source, options) {
     migrateThumbnails(source, "img");
+    migrateRename(source, "identifier", "slug");
     source.category = RENAMED_CATEGORIES[source.category] ?? source.category;
     if ("value" in source) {
       if (source.category === "other") { source.name ??= source.value; }
-      else { source.identifier ??= toKebabCase(source.value); }
+      else { source.slug ??= toSlug(source.value); }
       delete source.value;
     }
     return super.migrateData(source, options);
@@ -106,7 +100,7 @@ export default class BaseAffinity
     if (this.category === "other") { return fallback; }
     return game.teriock.identifiers.getImg(this.targetIdentifier)
       ?? TERIOCK.DISPLAY.thumbnails.manifest[this._categoryConfig?.imgCategory ?? this.category]
-        ?.[toCamelCase(this.identifier)]
+        ?.[toCamelCase(this.slug)]
       ?? fallback;
   }
 
@@ -116,8 +110,7 @@ export default class BaseAffinity
    */
   get _defaultName() {
     if (this.category === "other") { return ""; }
-    return game.teriock.identifiers.getName(this.targetIdentifier) || this._suggestions[this.identifier]
-      || this.identifier || "";
+    return game.teriock.identifiers.getName(this.targetIdentifier) || this._suggestions[this.slug] || this.slug || "";
   }
 
   /** @inheritDoc */
@@ -130,7 +123,7 @@ export default class BaseAffinity
   /** @inheritDoc */
   get _formPaths() {
     if (this.category === "other") { return ["category", "name", "img"]; }
-    return ["category", "identifier", "name", "img"];
+    return ["category", "slug", "name", "img"];
   }
 
   /**
@@ -172,7 +165,7 @@ export default class BaseAffinity
       color: this.color,
       draggable: false,
       icons: this._embedIcons,
-      identifier: this.typedIdentifier,
+      identifier: this.identifier,
       img: this.img,
       openable: true,
       subtitle: dotJoin([this.typeLabel, this.categoryLabel]),
@@ -181,6 +174,14 @@ export default class BaseAffinity
       usable: true,
       uuid: this.uuid,
     };
+  }
+
+  /**
+   * The identifier for this type of affinity.
+   * @returns {Identifier}
+   */
+  get identifier() {
+    return this._typeConfig.identifier;
   }
 
   /**
@@ -209,19 +210,11 @@ export default class BaseAffinity
   }
 
   /**
-   * The typed identifier for whatever this targets.
-   * @returns {TypedIdentifier}
+   * The identifier for whatever this targets.
+   * @returns {Identifier}
    */
   get targetIdentifier() {
-    return `${this.category}:${this.identifier}`;
-  }
-
-  /**
-   * The identifier for this type of affinity.
-   * @returns {TypedIdentifier}
-   */
-  get typedIdentifier() {
-    return this._typeConfig.identifier;
+    return `${this.category}:${this.slug}`;
   }
 
   /**
@@ -240,7 +233,7 @@ export default class BaseAffinity
    */
   get valid() {
     if (this.category === "other") { return Boolean(this.name); }
-    return Boolean(this._suggestions[this.identifier]);
+    return Boolean(this._suggestions[this.slug]);
   }
 
   /**
@@ -253,7 +246,7 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (path === "identifier") { inputConfig.suggestions = this._suggestions; }
+    if (path === "slug") { inputConfig.suggestions = this._suggestions; }
     if (path === "img") { inputConfig.placeholder = this._defaultImg; }
     if (path === "name") { inputConfig.placeholder = this._defaultName; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
@@ -279,7 +272,7 @@ export default class BaseAffinity
 
   /** @inheritDoc */
   async getPanelParts() {
-    const page = await teriock.fromIdentifier(this.typedIdentifier);
+    const page = await teriock.fromIdentifier(this.identifier);
     return Object.assign(await page?.getPanelParts?.() ?? {}, {
       bars: [{
         icon: TERIOCK.DISPLAY.icons.manifest.pseudoDocument.affinity,

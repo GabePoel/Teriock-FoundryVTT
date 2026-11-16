@@ -82,6 +82,7 @@ function addDeveloperModeLoggingListener(application, _element, _context, option
  * @param {object} _context
  * @param {ApplicationRenderOptions} options
  * @see {renderApplicationV2}
+ * @category Identifiers
  */
 function addIdentifierClipboardListener(application, _element, _context, options) {
   if (!options.isFirstRender || !application.window.header) { return; }
@@ -93,7 +94,7 @@ function addIdentifierClipboardListener(application, _element, _context, options
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
-      const id = application.document?.typedIdentifier;
+      const id = application.document?.identifier;
       if (!id || application.document?.isSecret) {
         ui.notifications.warn("TERIOCK.SHEETS.Common.NOTIFICATIONS.noIdentifier", {
           format: { label },
@@ -181,7 +182,7 @@ function createChildHotbarDropMacro(hotbar, data, slot) {
         content: await TeriockTextEditor.enrichHTML(
           await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", {
             child: `@UUID[${doc.uuid}]`,
-            identifier: `[[code ${doc.lookupKey}]]`,
+            identifier: `[[code ${doc.identifier}]]`,
             label: doc.typeLabel.toLocaleLowerCase(game.i18n.lang),
           }),
         ),

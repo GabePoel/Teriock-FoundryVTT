@@ -61,7 +61,7 @@ export default class ElderSorceryExecution extends DocumentExecution {
     return TERIOCK.DISPLAY.icons.manifest.execution.elderSorcery;
   }
 
-  /** @returns {TypedIdentifier} */
+  /** @returns {Identifier} */
   get journalEntryPageIdentifier() {
     return "core:elder-sorcery";
   }

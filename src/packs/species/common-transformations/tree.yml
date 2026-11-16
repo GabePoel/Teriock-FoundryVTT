@@ -19,7 +19,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: giant-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -32,6 +31,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: giant-strength
       standard: true
       targets:
         - self
@@ -54,7 +54,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: lumbering
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -62,6 +61,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: lumbering
       targets:
         - self
       upgrades:
@@ -83,7 +83,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-hands
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -93,6 +92,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-hands
       targets:
         - self
     type: ability
@@ -110,7 +110,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: oblivious
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -118,6 +117,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: oblivious
       targets:
         - self
       upgrades:
@@ -139,7 +139,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: stationary
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -147,6 +146,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: stationary
       targets:
         - self
       upgrades:
@@ -168,7 +168,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: stupid-intelligence
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -176,6 +175,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: stupid-intelligence
       targets:
         - self
       upgrades:
@@ -193,15 +193,15 @@ effects:
       affinities:
         - _id: 0ebU0m94C1lUXC0P
           category: drain
-          identifier: memory
+          slug: memory
           type: resistance
         - _id: SgtUJgsaYBYW2s5w
           category: drain
-          identifier: wither
+          slug: wither
           type: resistance
         - _id: t0kFJljzxM1RgWuG
           category: drain
-          identifier: mana
+          slug: mana
           type: resistance
         - _id: 1U2pNGrQmItXccWK
           category: other
@@ -222,7 +222,6 @@ effects:
         - nature
       executionTime:
         base: passive
-      identifier: tree-toughness
       interaction: manifest
       maneuver: passive
       overview:
@@ -235,6 +234,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: tree-toughness
       targets:
         - self
     type: ability
@@ -248,7 +248,7 @@ effects:
       affinities:
         - _id: uwOYmc8mNN1jL3We
           category: condition
-          identifier: unconscious
+          slug: unconscious
           type: immunity
       competence:
         raw: 1
@@ -259,7 +259,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
       overview:
@@ -270,6 +269,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: unconsciousness-immunity
       targets:
         - self
     type: ability
@@ -283,7 +283,7 @@ effects:
       affinities:
         - _id: FNFs7lvzhiFH7Uvn
           category: equipment
-          identifier: arrow
+          slug: arrow
           type: immunity
         - _id: tPwKcAdyCg31MgdV
           category: other
@@ -298,7 +298,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: vitals-durability
       interaction: manifest
       maneuver: passive
       overview:
@@ -309,6 +308,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: vitals-durability
       targets:
         - self
     type: ability
@@ -327,7 +327,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -341,6 +340,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: beastly-strength
       standard: true
       targets:
         - self
@@ -364,7 +364,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
       overview:
@@ -374,6 +373,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: improved-armor-piercing
       standard: true
       targets:
         - self
@@ -393,7 +393,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: improved-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -405,6 +404,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: improved-strength
       standard: true
       targets:
         - self
@@ -427,7 +427,6 @@ effects:
         - damaging
       executionTime:
         base: r0
-      identifier: melee-damage-boost
       interaction: manifest
       maneuver: reactive
       overview:
@@ -440,6 +439,7 @@ effects:
       powerSources:
         - martial
       skill: true
+      slug: melee-damage-boost
       standard: true
       trigger: >-
         <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee
@@ -451,11 +451,11 @@ name: Tree
 system:
   br: 0
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: tree
   size:
     max: 30
     min: 1
     value: 1
+  slug: tree
   statDice:
     hp:
       formula: (@this.item.size)d100

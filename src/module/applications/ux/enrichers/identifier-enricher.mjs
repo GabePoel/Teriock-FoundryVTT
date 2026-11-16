@@ -1,6 +1,9 @@
 import { TeriockTextEditor } from "../_module.mjs";
 
-/** @type {Teriock.Enrichment.EnricherConfig} */
+/**
+ * @type {Teriock.Enrichment.EnricherConfig}
+ * @category Identifiers
+ */
 const identifierEnricher = {
   format: { aliases: ["Identifier", "I"], hasConfig: false, hasMultipleArguments: false, type: "link" },
   process: async (inputs) => {

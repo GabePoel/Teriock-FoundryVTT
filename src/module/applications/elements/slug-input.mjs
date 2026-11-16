@@ -1,4 +1,4 @@
-import { createElement, makeIconClass, toKebabCase } from "../../utils/_module.mjs";
+import { createElement, makeIconClass, toSlug } from "../../utils/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement } from "./abstract/_module.mjs";
 
 const { setInputAttributes } = foundry.applications.fields;
@@ -9,21 +9,22 @@ const { setInputAttributes } = foundry.applications.fields;
  */
 
 /**
- * @typedef IdentifierInputConfig
- * @property {string|null} [reset] Identifier applied when the reset button is clicked.
+ * @typedef SlugInputConfig
+ * @property {string|null} [reset] Slug applied when the reset button is clicked.
  */
 
 /**
- * A text input for plain identifiers with an optional reset button.
+ * A text input for slugs with an optional reset button.
+ * @category Identifiers
  */
-export default class HTMLIdentifierInputElement extends AbstractAutocompleteSuggestionsElement {
+export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestionsElement {
   /** @inheritDoc */
-  static tagName = "identifier-input";
+  static tagName = "slug-input";
 
   /**
-   * Create an HTMLIdentifierInputElement using provided configuration data.
-   * @param {FormInputConfig<string> & IdentifierInputConfig & AutocompleteSuggestionsInputConfig} config
-   * @returns {HTMLIdentifierInputElement}
+   * Create an HTMLSlugInputElement using provided configuration data.
+   * @param {FormInputConfig<string> & SlugInputConfig & AutocompleteSuggestionsInputConfig} config
+   * @returns {HTMLSlugInputElement}
    */
   static create(config) {
     const el = document.createElement(this.tagName);
@@ -62,7 +63,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
 
   /**
    * The identifier applied when the reset button is clicked.
-   * @returns {Identifier|null}
+   * @returns {Slug|null}
    */
   get reset() {
     return this.getAttribute("reset");
@@ -74,7 +75,7 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
     this.#resetButton?.addEventListener("click", this.#onReset.bind(this));
     this._primaryInput.addEventListener("change", event => {
       event.stopPropagation();
-      this._primaryInput.value = toKebabCase(this._primaryInput.value);
+      this._primaryInput.value = toSlug(this._primaryInput.value);
       this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
     });
     this.addEventListener("change", this.#refreshTag.bind(this), { signal: this.abortSignal });
@@ -86,9 +87,9 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
     this._applyInputAttributes(this._primaryInput);
     if (this.reset) {
       this.#resetButton = createElement("button", {
-        ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
+        ariaLabel: _loc("TERIOCK.ELEMENTS.SLUG_INPUT.reset"),
         className: `icon ${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button")}`,
-        dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
+        dataset: { tooltip: "TERIOCK.ELEMENTS.SLUG_INPUT.reset" },
         type: "button",
       });
       group.append(this.#resetButton);
@@ -99,13 +100,13 @@ export default class HTMLIdentifierInputElement extends AbstractAutocompleteSugg
   /** @inheritDoc */
   _formatInput(value) {
     // Keep hyphens at the end of the text so typing isn't confusing.
-    const kebab = toKebabCase(value);
-    return kebab && /[^a-z0-9']$/i.test(value) ? `${kebab}-` : kebab;
+    const slug = toSlug(value);
+    return slug && /[^a-z0-9']$/i.test(value) ? `${slug}-` : slug;
   }
 
   /** @inheritDoc */
   _getValue() {
-    return toKebabCase(this._primaryInput?.value ?? "") || null;
+    return toSlug(this._primaryInput?.value ?? "") || null;
   }
 
   /** @inheritDoc */

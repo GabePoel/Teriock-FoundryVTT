@@ -23,8 +23,8 @@ declare global {
       active?: boolean;
       /** Previously-tracked dependency id. This is retained so it can be untracked when it changes. */
       dep?: string;
-      /** Previously-tracked typed identifier. This is retained so it can be untracked when it changes. */
-      identifier?: TypedIdentifier;
+      /** Previously-tracked identifier. This is retained so it can be untracked when it changes. */
+      identifier?: Identifier;
       /** Whether this document is a reference and not "real". */
       isReference?: boolean;
       /** Whether this document is a status effect. */
@@ -48,8 +48,6 @@ declare global {
       /** Previously-prepared token terrains. This is retained so terrain regions can find what changed. */
       terrains?: Set<Teriock.Keys.Terrain>;
     };
-
-    export type DocumentMetadata = { child: boolean, hierarchy: boolean, tooltip: boolean };
   }
 }
 

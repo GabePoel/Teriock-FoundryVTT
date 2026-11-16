@@ -1,5 +1,5 @@
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
-import { createElement, makeIconClass, makeIconElement, toClass, toKebabCase } from "../../utils/_module.mjs";
+import { createElement, makeIconClass, makeIconElement, toClass, toSlug } from "../../utils/_module.mjs";
 import uiHelpers from "./ui-helpers.mjs";
 
 /**
@@ -195,7 +195,9 @@ function formHover(model, options = { hash: {} }) {
   if (icon) { dataset.icon = icon; }
   if (action) { dataset.action = action; }
   if (paths) { dataset.paths = paths; }
-  const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
+  const dataAttrs = Object.entries(dataset).map(([k, v]) => `data-${toSlug(k, { convertCamel: true })}="${v}"`).join(
+    " ",
+  );
   const unselectedValue = unselectedFormat ?? unselected;
   const selectedValue = selected === null ? unselectedValue : selectedFormat ?? selected;
   const buttonClass = toClass([

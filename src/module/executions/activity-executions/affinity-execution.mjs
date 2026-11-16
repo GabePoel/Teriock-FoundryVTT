@@ -38,7 +38,7 @@ export default class AffinityExecution extends BaseExecution {
 
   /** @inheritDoc */
   get journalEntryPageIdentifier() {
-    return this.source?.typedIdentifier ?? TERIOCK.CONFIG.affinity.types[this.type]?.identifier;
+    return this.source?.identifier ?? TERIOCK.CONFIG.affinity.types[this.type]?.identifier;
   }
 
   /** @inheritDoc */

@@ -13,8 +13,8 @@ const { TableResult } = foundry.documents;
  */
 export default class TeriockTableResult extends mixClasses(TableResult, BaseDocumentMixin, PanelDataMixin) {
   /**
-   * Typed identifier for the referenced document on document-type results.
-   * @returns {TypedIdentifier|null}
+   * Identifier for the referenced document on document-type results.
+   * @returns {Identifier|null}
    */
   get documentIdentifier() {
     if (this.type !== "document") { return null; }

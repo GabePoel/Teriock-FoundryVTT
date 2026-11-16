@@ -1,5 +1,5 @@
 import { mergeMetadata } from "../../../../utils/_module.mjs";
-import { TypedIdentifierField } from "../../../fields/_module.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
 export default class SuppressAutomation extends BaseAutomation {
@@ -11,7 +11,7 @@ export default class SuppressAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { identifier: new TypedIdentifierField() });
+    return Object.assign(super.defineSchema(), { identifier: new IdentifierField() });
   }
 
   /** @inheritDoc */

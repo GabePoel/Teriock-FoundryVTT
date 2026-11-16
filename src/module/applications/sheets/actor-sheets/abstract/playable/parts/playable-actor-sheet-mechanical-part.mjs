@@ -4,7 +4,6 @@ import {
   createElement,
   makeIconClass,
   toId,
-  toKebabCase,
 } from "../../../../../../utils/_module.mjs";
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
 
@@ -82,7 +81,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
      */
     static async #onToggleCondition(event, target) {
       if (event.button === 2) {
-        const document = await teriock.fromIdentifier(`condition:${toKebabCase(target.dataset.condition)}`);
+        const document = await teriock.fromIdentifier(`condition:${target.dataset.condition}`);
         await document?.sheet.render(true);
       }
       if (event.button === 0) {

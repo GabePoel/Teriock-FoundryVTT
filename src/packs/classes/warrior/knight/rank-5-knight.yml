@@ -15,7 +15,6 @@ effects:
         raw: 1
       executionTime:
         base: r0
-      identifier: battle-charge
       maneuver: reactive
       overview:
         base: >-
@@ -33,6 +32,7 @@ effects:
         critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
         hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
       skill: true
+      slug: battle-charge
       standard: true
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
@@ -85,7 +85,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      identifier: mystic-weapon-repair
       interaction: manifest
       maneuver: slow
       overview:
@@ -101,6 +100,7 @@ effects:
         unit: ft
       ritual: true
       skill: true
+      slug: mystic-weapon-repair
       standard: true
       targets:
         - weapon
@@ -145,7 +145,6 @@ effects:
         - mental
       endCondition: <p>At the start of each of the enemy target's turns, they roll [[/roll 2d4]]. On a 4, this effect ends.</p>
       featSaveAttribute: int
-      identifier: rallying-cry
       interaction: feat
       overview:
         base: >-
@@ -165,6 +164,7 @@ effects:
           @Identifier[core:healing]{heal}. If you consider the @Identifier[core:targets]{targeted} creature to be an
           enemy, they become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
+      slug: rallying-cry
       standard: true
     type: ability
   - _id: p6uxscnoyCy8JtwB
@@ -198,7 +198,6 @@ effects:
           method: roll
           type: combat
       featSaveAttribute: int
-      identifier: taunt
       interaction: feat
       powerSources:
         - martial
@@ -210,6 +209,7 @@ effects:
           <p>You and the @Identifier[core:targets]{target} are @Identifier[keyword:vulnerability]{vulnerable} to each
           other.</p>
       skill: true
+      slug: taunt
       standard: true
     type: ability
   - _id: MRAS29b0On4vPKnY
@@ -230,7 +230,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: warrior-stance
       interaction: manifest
       maneuver: passive
       overview:
@@ -242,6 +241,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: warrior-stance
       standard: true
       targets:
         - self
@@ -268,7 +268,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: weapon-master
       interaction: manifest
       maneuver: passive
       overview:
@@ -280,6 +279,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: weapon-master
       standard: true
       targets:
         - self
@@ -310,7 +310,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: master-weapon-smith
       interaction: manifest
       maneuver: passive
       overview:
@@ -322,6 +321,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: master-weapon-smith
       standard: true
       targets:
         - self
@@ -366,7 +366,6 @@ effects:
         slow:
           raw: "10"
           unit: minute
-      identifier: runic-weapons
       interaction: manifest
       maneuver: slow
       overview:
@@ -380,6 +379,7 @@ effects:
         unit: ft
       ritual: true
       skill: true
+      slug: runic-weapons
       standard: true
       targets:
         - weapon
@@ -402,7 +402,6 @@ effects:
         - healing
       executionTime:
         base: r0
-      identifier: triumphant-healing-surge
       interaction: manifest
       maneuver: reactive
       overview:
@@ -412,6 +411,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: triumphant-healing-surge
       standard: true
       targets:
         - self
@@ -441,7 +441,6 @@ effects:
         - damaging
       executionTime:
         base: r1
-      identifier: withstand
       interaction: manifest
       maneuver: reactive
       overview:
@@ -454,6 +453,7 @@ effects:
         unit: self
       requirements: <p>You are not @Identifier[damage:hack]{body hacked}.</p>
       skill: true
+      slug: withstand
       standard: true
       targets:
         - self
@@ -466,10 +466,10 @@ system:
   archetype: warrior
   class: knight
   description: <p>@Embed[class:knight description inline]</p>
-  identifier: rank-5-knight
   instructions: <p>@Embed[class:knight path=system.instructions inline]</p>
   maxAv: 4
   number: 5
+  slug: rank-5-knight
   statDice:
     hp:
       formula: 1d12

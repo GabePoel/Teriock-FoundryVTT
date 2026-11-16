@@ -8,7 +8,7 @@ effects:
     name: Raccoon Tamer
     system:
       field: survivalist
-      identifier: raccoon-tamer
+      slug: raccoon-tamer
       tradecraft: tamer
     type: fluency
   - _id: Zu7xsDzZwcskOpso
@@ -20,7 +20,7 @@ effects:
     system:
       affinities:
         - _id: cuHIm8ZczaKt4Pgk
-          identifier: disarm
+          slug: disarm
           type: resistance
       delivery: self
       duration:
@@ -29,7 +29,6 @@ effects:
         - resistance
       executionTime:
         base: passive
-      identifier: reflexes
       interaction: manifest
       limitation: >-
         <p>You @Identifier[keyword:resistance]{resist} @Identifier[ability:disarm]{Disarm}, but gain no other benefits
@@ -45,6 +44,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: reflexes
       standard: true
       targets:
         - self
@@ -76,7 +76,6 @@ effects:
       delivery: hand
       effectTypes:
         - stealing
-      identifier: unglue
       interaction: manifest
       overview:
         base: <p>@Identifier[core:targets]{Target} is no longer @Identifier[property:glued]{glued} and you take it.</p>
@@ -86,6 +85,7 @@ effects:
         <p>Target's bearer is @Identifier[condition:down]{down} or target it
         @Identifier[property:searchable]{searchable}.</p>
       skill: true
+      slug: unglue
       standard: true
       targets:
         - item
@@ -103,7 +103,6 @@ effects:
         - resistance
       executionTime:
         base: r1
-      identifier: missile-reflexes
       interaction: block
       maneuver: reactive
       overview:
@@ -120,6 +119,7 @@ effects:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: <p>The @Identifier[core:attack-interaction]{attack's} effect @Identifier[core:fizzles]{fizzles}.</p>
       skill: true
+      slug: missile-reflexes
       standard: true
       targets:
         - attack
@@ -137,11 +137,11 @@ system:
     - contract
   elements:
     - nature
-  identifier: raccoon-familiar
   instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   powerSources:
     - magical
     - primal
     - spiritual
+  slug: raccoon-familiar
 type: familiar
