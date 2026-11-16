@@ -181,7 +181,7 @@ function createChildHotbarDropMacro(hotbar, data, slot) {
         content: await TeriockTextEditor.enrichHTML(
           await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", {
             child: `@UUID[${doc.uuid}]`,
-            identifier: `[[code ${doc.lookupKey}]]`,
+            identifier: `[[code ${doc.identifier}]]`,
             label: doc.typeLabel.toLocaleLowerCase(game.i18n.lang),
           }),
         ),

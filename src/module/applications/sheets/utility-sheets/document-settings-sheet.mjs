@@ -95,8 +95,8 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       context.configs.push({
         fields: [
           this.#quickField("system.identifier", {
-            placeholder: this.document.defaultIdentifier,
-            reset: this.document.defaultIdentifier,
+            placeholder: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
+            reset: this.document.constructor.getIdentifierSlug({ name: this.document.name }),
           }),
           this.#quickField("_stats.compendiumSource"),
           this.#quickField("_stats.duplicateSource"),

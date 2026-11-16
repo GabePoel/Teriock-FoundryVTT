@@ -1,4 +1,3 @@
-import { toSlug } from "../../../../utils/_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 
 /**
@@ -23,7 +22,9 @@ export default function IdentifierSystemMixin(Base) {
       super._onChangeCreateDialog(dialog);
       const form = dialog.element.querySelector("form");
       const { name } = form.elements;
-      const defaultIdentifier = toSlug(name.value.trim() || name.placeholder);
+      const defaultIdentifier = foundry.utils.getDocumentClass(this.metadata.documentName).getIdentifierSlug({
+        name: name.value.trim() || name.placeholder,
+      });
       if (!form.elements["system.identifier"]) {
         const group = this.schema.fields.identifier.toFormGroup({ hint: "" }, {
           name: "system.identifier",

@@ -85,7 +85,7 @@ export function getTypeLabel(type) {
 }
 
 /**
- * Find the best document from a string that describes it. The preference goes identifiers then lookup keys then names.
+ * Find the best document from a string that describes it. The preference goes identifiers then names.
  * @param {TypedIdentifier|Identifier|string} lookup
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} [relativeTo]
  * @returns {Promise<TeriockDocument|null>}
@@ -95,7 +95,7 @@ export async function findBestDocument(lookup, relativeTo) {
   const doc = await fromIdentifier(lookup, { relativeTo });
   if (doc) { return doc; }
   const children = (await relativeTo?.previewed?.getContents()) ?? [];
-  return children.find(c => c.lookupKey === lookup) ?? children.find(c => c.name === lookup) ?? null;
+  return children.find(c => c.name === lookup) ?? null;
 }
 
 /**

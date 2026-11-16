@@ -414,7 +414,7 @@ export default function ArmamentSystemMixin(Base) {
       const properties = /** @type {TeriockActiveEffect<"property">[]} */ this.parent.effects.filter(e =>
         e.type === "property"
       );
-      this.props = new Set(properties.map(p => p.forcedIdentifier));
+      this.props = new Set(properties.map(p => p.constructor.getIdentifierSlug(p)));
 
       // Propagate damage types
       for (const p of properties.filter(p => p.active)) {

@@ -215,7 +215,7 @@ export default function CommonSystemMixin(Base) {
     /** @inheritDoc */
     getLocalRollData() {
       const rollData = {
-        [`identifier.${this.parent.forcedIdentifier}`]: 1,
+        [`identifier.${this.parent.constructor.getIdentifierSlug(this.parent)}`]: 1,
         [`type.${this.parent.type}`]: 1,
         [this.parent.type]: 1,
       };

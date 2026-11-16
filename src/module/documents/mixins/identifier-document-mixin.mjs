@@ -40,35 +40,11 @@ export default function IdentifierDocumentMixin(Base) {
     }
 
     /**
-     * The default identifier for this document.
-     * @returns {Identifier}
-     */
-    get defaultIdentifier() {
-      return teriock.utils.toSlug(this.name);
-    }
-
-    /**
-     * A guaranteed identifier for this.
-     * @returns {Identifier}
-     */
-    get forcedIdentifier() {
-      return this.system?.identifier ?? this.defaultIdentifier;
-    }
-
-    /**
      * This document's identifier.
      * @returns {TypedIdentifier}
      */
     get identifier() {
       return this.constructor.getIdentifier(this);
-    }
-
-    /**
-     * A key that can be looked up to find this document.
-     * @returns {TypedIdentifier}
-     */
-    get lookupKey() {
-      return this.identifier ?? `${this.type}:${this.forcedIdentifier}`;
     }
 
     /** @inheritDoc */

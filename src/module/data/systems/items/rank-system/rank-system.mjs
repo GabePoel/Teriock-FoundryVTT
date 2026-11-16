@@ -103,12 +103,12 @@ export default class RankSystem
     for (const category of ["combat", "support"]) {
       const selectMap = new Map(
         this.parent.children.getTypeSync("ability").filter(a => a.getFlag("teriock", "category") === category).map(
-          a => [a.lookupKey, a]
+          a => [a.identifier, a]
         ),
       );
       for (const rank of otherRanks) {
         for (const a of rank.children.getTypeSync("ability")) {
-          const key = a.lookupKey;
+          const key = a.identifier;
           if (selectMap.has(key)) {
             toDelete.push(selectMap.get(key).id);
             selectMap.delete(key);

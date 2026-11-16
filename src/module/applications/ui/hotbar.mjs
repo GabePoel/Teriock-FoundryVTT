@@ -97,11 +97,11 @@ export default class TeriockHotbar extends Hotbar {
    * @returns {Promise<TeriockMacro>}
    */
   async _createMatchesUse(document) {
-    const docToUse = (await fromIdentifier(document.lookupKey)) ?? document;
-    const existing = this.#getHashedMacro({ macroAction: "useMatches", macroMatchesIdentifier: document.lookupKey });
+    const docToUse = (await fromIdentifier(document.identifier)) ?? document;
+    const existing = this.#getHashedMacro({ macroAction: "useMatches", macroMatchesIdentifier: document.identifier });
     if (existing) { return existing; }
     return TeriockMacro.create({
-      command: `await CONFIG.ui.hotbar.useMatches("${document.lookupKey}", { actor, event });`,
+      command: `await CONFIG.ui.hotbar.useMatches("${document.identifier}", { actor, event });`,
       img: docToUse.img,
       name: _loc("TERIOCK.HOTBAR.UseMatchesName", { value: docToUse.name }),
       type: "script",

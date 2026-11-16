@@ -433,7 +433,7 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
         executor: this.actor?.uuid ?? null,
         expirations: this.expirations.active.filter(applies).map(e => e.getEffectData(this)),
         heightened: this.heightened,
-        identifier: `${this.source.forcedIdentifier}-effect`,
+        identifier: `${this.source.constructor.getIdentifierSlug(this.source)}-effect`,
         powerSources: this.source.system.powerSources.toObject(),
         sustained: this.source.system.sustained,
       },

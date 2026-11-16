@@ -152,10 +152,10 @@ export default function RefreshSystemMixin(Base) {
       if (document && (createChildren || deleteChildren)) {
         const srcChildren = await this.#refreshChildren(document, fullOverride);
         const dstChildren = await this.#refreshChildren(this.parent, fullOverride);
-        const srcKeys = new Set(srcChildren.map(c => c.lookupKey));
-        const dstKeys = new Set(dstChildren.map(c => c.lookupKey));
+        const srcKeys = new Set(srcChildren.map(c => c.identifier));
+        const dstKeys = new Set(dstChildren.map(c => c.identifier));
         if (createChildren && this._refreshCanCreateChildren) {
-          const createMap = Object.groupBy(srcChildren.filter(c => !dstKeys.has(c.lookupKey)), c => c.documentName);
+          const createMap = Object.groupBy(srcChildren.filter(c => !dstKeys.has(c.identifier)), c => c.documentName);
           for (const [documentName, docs] of Object.entries(createMap)) {
             operations.push(
               this.parent.getCreateChildDocumentsOperation(documentName, docs.map(d => d.toObject(true))),
@@ -163,7 +163,7 @@ export default function RefreshSystemMixin(Base) {
           }
         }
         if (deleteChildren) {
-          const toDelete = dstChildren.filter(c => !srcKeys.has(c.lookupKey));
+          const toDelete = dstChildren.filter(c => !srcKeys.has(c.identifier));
           for (const doc of toDelete) { deletedIds.add(doc.id); }
           const deleteMap = Object.groupBy(toDelete, c => c.documentName);
           for (const [documentName, docs] of Object.entries(deleteMap)) {
