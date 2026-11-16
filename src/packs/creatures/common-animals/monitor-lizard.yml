@@ -24,7 +24,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: advanced-smell
           interaction: manifest
           maneuver: passive
           overview:
@@ -39,6 +38,7 @@ items:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic}.</p>
           skill: true
+          slug: advanced-smell
           standard: true
           targets:
             - self
@@ -61,7 +61,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: dense-intelligence
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -69,6 +68,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dense-intelligence
           targets:
             - self
           upgrades:
@@ -91,7 +91,6 @@ items:
               type: hacks
           competence:
             raw: 1
-          identifier: hack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           overview:
             base: >-
@@ -107,6 +106,7 @@ items:
               <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
               leg, depending on what you chose.</p>
           skill: true
+          slug: hack
           standard: true
           targets:
             - arm
@@ -130,7 +130,6 @@ items:
               type: hacks
           competence:
             raw: 1
-          identifier: impale
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           powerSources:
             - martial
@@ -140,6 +139,7 @@ items:
               @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
             hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{body hack}.</p>
           skill: true
+          slug: impale
           standard: true
           targets:
             - vitals
@@ -158,7 +158,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: low-strength
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -166,6 +165,7 @@ items:
             - martial
           range:
             unit: self
+          slug: low-strength
           targets:
             - self
           upgrades:
@@ -187,7 +187,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -197,6 +196,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -214,13 +214,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -241,13 +241,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -306,7 +306,6 @@ items:
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          identifier: poison-strike
           limitation: <p>@Identifier[property:biting]{Biting equipment} only.</p>
           overview:
             fluent: >-
@@ -322,6 +321,7 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
+          slug: poison-strike
         type: ability
       - _id: DUn8Lnc8kLj7Mkb0
         _key: "!actors.items.effects!91178fe50148dd87.91178fe50148dd87.DUn8Lnc8kLj7Mkb0"
@@ -351,7 +351,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: swimming
           interaction: manifest
           maneuver: passive
           overview:
@@ -361,6 +360,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: swimming
           standard: true
           targets:
             - self
@@ -387,7 +387,6 @@ items:
             raw: 1
           effectTypes:
             - damaging
-          identifier: vitals-hack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           powerSources:
             - martial
@@ -395,6 +394,7 @@ items:
             critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
             hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
           skill: true
+          slug: vitals-hack
           standard: true
           targets:
             - vitals
@@ -428,7 +428,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: scent-seeing
           interaction: manifest
           maneuver: passive
           overview:
@@ -443,6 +442,7 @@ items:
             <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
+          slug: scent-seeing
           standard: true
           targets:
             - self
@@ -481,11 +481,11 @@ items:
           type: toggleChildren
       br: 5
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: monitor-lizard
       size:
         max: 3
         min: 1
         value: 1
+      slug: monitor-lizard
       statDice:
         hp:
           formula: (@this.item.size)d8
@@ -515,10 +515,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: r6y26RRRAVSDlLW4
         _key: "!actors.items.effects!91178fe50148dd87.4ROnjSF9fgxCRwWr.r6y26RRRAVSDlLW4"
@@ -532,8 +532,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/claw.webp
@@ -542,10 +542,10 @@ items:
       _sup: 91178fe50148dd87
       damage:
         base: 1d4
-      identifier: claw
       range:
         long:
           unit: melee
+      slug: claw
       style: savage
     type: body
   - _id: 7JF10szXXHrTZ1l5
@@ -565,10 +565,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: zrtJTRjkmdrLUpVb
         _key: "!actors.items.effects!91178fe50148dd87.7JF10szXXHrTZ1l5.zrtJTRjkmdrLUpVb"
@@ -582,8 +582,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/fanged-jaw.webp
@@ -594,10 +594,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: fanged-jaw
       range:
         long:
           unit: melee
+      slug: fanged-jaw
       style: savage
     type: body
   - _id: kJB9tMdzpYLrj5XR
@@ -611,10 +611,10 @@ items:
       _sup: 91178fe50148dd87
       av:
         raw: 2
-      identifier: scales
       range:
         long:
           unit: self
+      slug: scales
     type: body
   - _id: HHAdVlWHiQqDtgMG
     _key: "!actors.items!91178fe50148dd87.HHAdVlWHiQqDtgMG"
@@ -633,10 +633,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: eTDocEclvWaAMtla
         _key: "!actors.items.effects!91178fe50148dd87.HHAdVlWHiQqDtgMG.eTDocEclvWaAMtla"
@@ -650,8 +650,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/swinging-tail.webp
@@ -660,10 +660,10 @@ items:
       _sup: 91178fe50148dd87
       damage:
         base: 1d4
-      identifier: swinging-tail
       range:
         long:
           unit: melee
+      slug: swinging-tail
       style: wraparound
     type: body
 name: Monitor Lizard
@@ -681,7 +681,6 @@ system:
   _src: Compendium.teriock.species.Item.91178fe50148dd87
   hp:
     value: 5
-  identifier: monitor-lizard
   lockedPaths:
     - system.money.copper
     - system.money.debt
@@ -701,6 +700,7 @@ system:
     brScale: true
   size:
     value: 1
+  slug: monitor-lizard
   wielding:
     attacker: 7JF10szXXHrTZ1l5
     blocker: 7JF10szXXHrTZ1l5

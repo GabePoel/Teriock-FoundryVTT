@@ -52,7 +52,6 @@ items:
             - movement
           executionTime:
             base: passive
-          identifier: climbing
           interaction: manifest
           maneuver: passive
           overview:
@@ -62,6 +61,7 @@ items:
             - martial
           range:
             unit: self
+          slug: climbing
           targets:
             - self
         type: ability
@@ -79,7 +79,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: dense-intelligence
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -87,6 +86,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dense-intelligence
           targets:
             - self
           upgrades:
@@ -108,7 +108,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: low-strength
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -116,6 +115,7 @@ items:
             - martial
           range:
             unit: self
+          slug: low-strength
           targets:
             - self
           upgrades:
@@ -150,7 +150,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: night-vision
           interaction: manifest
           maneuver: passive
           overview:
@@ -161,6 +160,7 @@ items:
             - martial
           range:
             unit: self
+          slug: night-vision
           targets:
             - self
         type: ability
@@ -178,7 +178,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -188,6 +187,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -205,13 +205,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -232,13 +232,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -259,13 +259,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -324,7 +324,6 @@ items:
           effectTypes:
             - poison
           endCondition: <p>@Identifier[core:targets]{Target} @Identifier[condition:dead]{dies}.</p>
-          identifier: poison-strike
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           overview:
             fluent: >-
@@ -340,14 +339,15 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
+          slug: poison-strike
         type: ability
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/creature/opossum.webp
     name: Opossum
     system:
-      identifier: opossum
       size:
         value: 1
+      slug: opossum
       statDice:
         hp:
           formula: 1d6
@@ -377,8 +377,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!1d2fdec37cc5c357.wKUsCvW3yOLM5QbB.IDLUUjkSFtpaiKuJ"
@@ -392,8 +392,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/foot.webp
@@ -402,10 +402,10 @@ items:
       _sup: 1d2fdec37cc5c357
       damage:
         base: "1"
-      identifier: foot
       range:
         long:
           unit: melee
+      slug: foot
     type: body
   - _id: vAlU4gBdUOiyfo2t
     _key: "!actors.items!1d2fdec37cc5c357.vAlU4gBdUOiyfo2t"
@@ -424,8 +424,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: fq8owR84sFsgLiuj
         _key: "!actors.items.effects!1d2fdec37cc5c357.vAlU4gBdUOiyfo2t.fq8owR84sFsgLiuj"
@@ -439,10 +439,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: 4WFL62wofj7AHBxN
         _key: "!actors.items.effects!1d2fdec37cc5c357.vAlU4gBdUOiyfo2t.4WFL62wofj7AHBxN"
@@ -456,8 +456,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: 30f4d11e5e53d332
     img: icons/creatures/abilities/mouth-teeth-human.webp
@@ -466,10 +466,10 @@ items:
       _sup: 1d2fdec37cc5c357
       damage:
         base: "1"
-      identifier: mouth
       range:
         long:
           unit: melee
+      slug: mouth
       style: savage
     type: body
 name: Opossum
@@ -486,13 +486,13 @@ prototypeToken:
 system:
   hp:
     value: 4
-  identifier: opossum
   mp:
     value: 4
   scaling:
     brScale: true
   size:
     value: 1
+  slug: opossum
   wielding:
     attacker: wKUsCvW3yOLM5QbB
     blocker: wKUsCvW3yOLM5QbB

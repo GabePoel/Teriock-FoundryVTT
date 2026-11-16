@@ -20,7 +20,6 @@ items:
           delivery: bite
           executionTime:
             base: a2
-          identifier: devour
           powerSources:
             - martial
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -29,6 +28,7 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
               @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+          slug: devour
         type: ability
       - _id: OkfSA5C9cVO8rdno
         _key: "!actors.items.effects!f77c392230bb3862.f77c392230bb3862.OkfSA5C9cVO8rdno"
@@ -48,7 +48,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: giant-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -61,6 +60,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: giant-strength
           standard: true
           targets:
             - self
@@ -96,7 +96,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: night-vision
           interaction: manifest
           maneuver: passive
           overview:
@@ -107,6 +106,7 @@ items:
             - martial
           range:
             unit: self
+          slug: night-vision
           targets:
             - self
         type: ability
@@ -124,7 +124,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -134,6 +133,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -151,13 +151,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -178,13 +178,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -205,13 +205,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -240,7 +240,6 @@ items:
             - destruction
           executionTime:
             base: r1
-          identifier: shattering-armor
           interaction: block
           maneuver: reactive
           overview:
@@ -254,6 +253,7 @@ items:
             save: >-
               <p>@Pack[teriock.equipment]{Equipment} that delivers @Identifier[core:attack-interaction]{attack} you
               @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
+          slug: shattering-armor
           targets:
             - item
         type: ability
@@ -272,7 +272,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -286,6 +285,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: beastly-strength
           standard: true
           targets:
             - self
@@ -309,7 +309,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
           overview:
@@ -319,6 +318,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-armor-piercing
           standard: true
           targets:
             - self
@@ -338,7 +338,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -350,6 +349,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-strength
           standard: true
           targets:
             - self
@@ -372,7 +372,6 @@ items:
             - damaging
           executionTime:
             base: r0
-          identifier: melee-damage-boost
           interaction: manifest
           maneuver: reactive
           overview:
@@ -385,6 +384,7 @@ items:
           powerSources:
             - martial
           skill: true
+          slug: melee-damage-boost
           standard: true
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging effects]{damaging} melee
@@ -396,9 +396,9 @@ items:
     system:
       appearance: <p>Usually bulky and covered in heavy, bony plates.</p>
       br: 7
-      identifier: armored-beast
       size:
         value: 5
+      slug: armored-beast
       statDice:
         hp:
           formula: 2d10
@@ -438,8 +438,8 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          identifier: armor-voiding
           kind: intrinsic
+          slug: armor-voiding
         type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!f77c392230bb3862.sqdAzAEhm3VcAW3Q.Q3eKznomGL4eVOGB"
@@ -453,10 +453,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: KcaZmxo03XNP3ZbE
         _key: "!actors.items.effects!f77c392230bb3862.sqdAzAEhm3VcAW3Q.KcaZmxo03XNP3ZbE"
@@ -470,8 +470,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: f58e0946f732c09d
     img: systems/teriock/src/assets/thumbnails/body/ferocious-jaw.webp
@@ -482,10 +482,10 @@ items:
         raw: 1
       damage:
         base: 1d8
-      identifier: ferocious-jaw
       range:
         long:
           unit: melee
+      slug: ferocious-jaw
       style: savage
     type: body
   - _id: s5SXdPXbJJ9uoNei
@@ -505,8 +505,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!f77c392230bb3862.s5SXdPXbJJ9uoNei.IDLUUjkSFtpaiKuJ"
@@ -520,8 +520,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: f58e0946f732c09d
     img: systems/teriock/src/assets/thumbnails/body/foot.webp
@@ -530,10 +530,10 @@ items:
       _sup: f77c392230bb3862
       damage:
         base: "1"
-      identifier: foot
       range:
         long:
           unit: melee
+      slug: foot
     type: body
   - _id: rhkNISsN6hAMCway
     _key: "!actors.items!f77c392230bb3862.rhkNISsN6hAMCway"
@@ -546,10 +546,10 @@ items:
       _sup: f77c392230bb3862
       av:
         raw: 3
-      identifier: hardened-hide
       range:
         long:
           unit: self
+      slug: hardened-hide
     type: body
   - _id: LSSBDiQQrNxJKPtE
     _key: "!actors.items!f77c392230bb3862.LSSBDiQQrNxJKPtE"
@@ -568,10 +568,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: rxHvNMZbvlGHFxTl
         _key: "!actors.items.effects!f77c392230bb3862.LSSBDiQQrNxJKPtE.rxHvNMZbvlGHFxTl"
@@ -585,8 +585,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: f58e0946f732c09d
     img: systems/teriock/src/assets/thumbnails/body/sharp-claw.webp
@@ -597,10 +597,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: sharp-claw
       range:
         long:
           unit: melee
+      slug: sharp-claw
       style: savage
     type: body
 name: Armored Beast
@@ -619,13 +619,13 @@ prototypeToken:
 system:
   hp:
     value: 12
-  identifier: armored-beast
   mp:
     value: 4
   scaling:
     brScale: true
   size:
     value: 5
+  slug: armored-beast
   wielding:
     attacker: sqdAzAEhm3VcAW3Q
     blocker: sqdAzAEhm3VcAW3Q

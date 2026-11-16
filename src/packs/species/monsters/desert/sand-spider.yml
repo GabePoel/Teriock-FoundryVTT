@@ -17,7 +17,6 @@ effects:
         - automatic
       executionTime:
         base: passive
-      identifier: acidic-blood
       interaction: manifest
       maneuver: passive
       overview:
@@ -29,6 +28,7 @@ effects:
         - alchemical
       range:
         unit: self
+      slug: acidic-blood
       targets:
         - self
       trigger: <p>This triggers automatically. You cannot choose to not use it if you are able to.</p>
@@ -63,7 +63,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      identifier: digging
       interaction: manifest
       maneuver: passive
       overview:
@@ -72,6 +71,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: digging
       targets:
         - self
     type: ability
@@ -94,7 +94,6 @@ effects:
         raw: 1
       delivery: self
       featSaveAttribute: snk
-      identifier: hide
       interaction: feat
       limitation: <p>In sand only.</p>
       overview:
@@ -114,6 +113,7 @@ effects:
         @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
         @Identifier[condition:hidden]{hidden}.</p>
       skill: true
+      slug: hide
       standard: true
       targets:
         - self
@@ -146,12 +146,12 @@ effects:
             absent:
               - down
           type: status
-      identifier: maul
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[condition:terrored]{terrored}.</p>
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
+      slug: maul
     type: ability
   - _id: ue4XoPL29vCPXLeD
     _key: "!items.effects!51b2335d4c46567c.ue4XoPL29vCPXLeD"
@@ -167,13 +167,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -194,13 +194,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -221,13 +221,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-strength
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-strength
       targets:
         - self
       upgrades:
@@ -270,13 +270,13 @@ effects:
           skip: 1
           timing: end
           type: combat
-      identifier: snare
       powerSources:
         - martial
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
       skill: true
+      slug: snare
       standard: true
       targets:
         - leg
@@ -295,13 +295,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: sneaky
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: sneaky
       targets:
         - self
       upgrades:
@@ -330,7 +330,6 @@ effects:
             absent:
               - down
           type: status
-      identifier: web-capture
       interaction: manifest
       overview:
         base: >-
@@ -339,6 +338,7 @@ effects:
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
+      slug: web-capture
     type: ability
   - _id: Jv3afWuzEXuvlNXX
     _key: "!items.effects!51b2335d4c46567c.Jv3afWuzEXuvlNXX"
@@ -362,7 +362,6 @@ effects:
           method: roll
           timing: end
           type: combat
-      identifier: web-packet
       piercing:
         raw: 1
       powerSources:
@@ -372,6 +371,7 @@ effects:
         unit: ft
       results:
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
+      slug: web-packet
     type: ability
 folder: 8185a98b7551093c
 img: systems/teriock/src/assets/thumbnails/creature/sand-spider.webp
@@ -380,9 +380,9 @@ system:
   appearance: <p>Large yellow sand-colored @Wiki[Category:Spiders]{spiders}.</p>
   br: 6
   description: <p>Sand spiders are usually found in large colonies.</p>
-  identifier: sand-spider
   size:
     value: 2
+  slug: sand-spider
   statDice:
     hp:
       formula: 2d8

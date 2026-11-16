@@ -12,7 +12,6 @@ effects:
         raw: 1
       executionTime:
         base: r0
-      identifier: battle-charge
       maneuver: reactive
       overview:
         base: >-
@@ -30,6 +29,7 @@ effects:
         critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
         hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
       skill: true
+      slug: battle-charge
       standard: true
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
@@ -47,7 +47,6 @@ effects:
       delivery: bite
       executionTime:
         base: a2
-      identifier: devour
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -56,6 +55,7 @@ effects:
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+      slug: devour
     type: ability
   - _id: ryKBTKBxM3uqOTJc
     _key: "!items.effects!ebf5e0ba9af62699.ryKBTKBxM3uqOTJc"
@@ -84,7 +84,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      identifier: night-vision
       interaction: manifest
       maneuver: passive
       overview:
@@ -95,6 +94,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: night-vision
       targets:
         - self
     type: ability
@@ -112,13 +112,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -139,13 +139,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -166,13 +166,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -193,13 +193,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-strength
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-strength
       targets:
         - self
       upgrades:
@@ -226,7 +226,6 @@ effects:
         raw: 1
       executionTime:
         base: r0
-      identifier: trample
       maneuver: reactive
       overview:
         base: >-
@@ -240,6 +239,7 @@ effects:
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+      slug: trample
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
@@ -250,9 +250,9 @@ name: Mountain Beast
 system:
   appearance: <p>Usually muscular and covered in shaggy fur. Ram-like horns.</p>
   br: 8
-  identifier: mountain-beast
   size:
     value: 4
+  slug: mountain-beast
   statDice:
     hp:
       formula: 2d8

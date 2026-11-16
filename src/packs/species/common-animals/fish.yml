@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: dense-intelligence
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -23,6 +22,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dense-intelligence
       targets:
         - self
       upgrades:
@@ -42,7 +42,6 @@ effects:
       delivery: self
       executionTime:
         base: r1
-      identifier: escape
       interaction: manifest
       maneuver: reactive
       overview:
@@ -56,6 +55,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: escape
       standard: true
       targets:
         - self
@@ -84,7 +84,6 @@ effects:
         raw: 1
       delivery: self
       featSaveAttribute: snk
-      identifier: hide
       interaction: feat
       overview:
         base: >-
@@ -103,6 +102,7 @@ effects:
         @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
         @Identifier[condition:hidden]{hidden}.</p>
       skill: true
+      slug: hide
       standard: true
       targets:
         - self
@@ -172,7 +172,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      identifier: leaping
       interaction: manifest
       maneuver: passive
       overview:
@@ -187,6 +186,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: leaping
       standard: true
       targets:
         - self
@@ -205,7 +205,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-hands
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -215,6 +214,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-hands
       targets:
         - self
     type: ability
@@ -232,13 +232,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -259,13 +259,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -286,13 +286,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -313,7 +313,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: tiny-strength
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -321,6 +320,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: tiny-strength
       targets:
         - self
       upgrades:
@@ -353,7 +353,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: water-home
       interaction: manifest
       maneuver: passive
       overview:
@@ -364,6 +363,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: water-home
       targets:
         - self
     type: ability
@@ -382,7 +382,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: diving
       interaction: manifest
       maneuver: passive
       overview:
@@ -399,6 +398,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: diving
       standard: true
       targets:
         - self
@@ -432,7 +432,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swimming
       interaction: manifest
       maneuver: passive
       overview:
@@ -442,6 +441,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: swimming
       standard: true
       targets:
         - self
@@ -507,11 +507,11 @@ system:
         - ability:tiny-strength
       type: toggleChildren
   hpIncrease: <p>Gain another hit die for every 1 additional size above 1.</p>
-  identifier: fish
   size:
     max: 5
     min: 0.25
     value: 0.25
+  slug: fish
   statDice:
     hp:
       formula: (@this.item.size + 0.75)d4

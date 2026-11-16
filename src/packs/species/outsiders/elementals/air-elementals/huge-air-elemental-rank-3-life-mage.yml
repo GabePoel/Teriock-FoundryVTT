@@ -21,7 +21,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: additional-life-rotators
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,6 +33,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: additional-life-rotators
       targets:
         - self
     type: ability
@@ -108,7 +108,6 @@ effects:
       executionTime:
         base: passive
       featSaveAttribute: int
-      identifier: expanded-life-elder-sorcery
       interaction: feat
       kind: special
       maneuver: passive
@@ -140,6 +139,7 @@ effects:
         fail: <p>You are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell or word again.</p>
         save: <p>You learn the spell or word.</p>
       skill: true
+      slug: expanded-life-elder-sorcery
       standard: true
       targets:
         - self
@@ -245,7 +245,6 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
-      identifier: minor-item-enchantment
       interaction: manifest
       invoked: true
       kind: special
@@ -269,6 +268,7 @@ effects:
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
       ritual: true
       rotator: true
+      slug: minor-item-enchantment
       spell: true
       standard: true
       targets:
@@ -289,7 +289,7 @@ effects:
             - resultsAlt
             - resultsAltCrit
             - unheightened
-          identifier: awakening
+          slug: awakening
           type: resistance
       automations:
         - _id: e1c7d7174b360e93
@@ -356,7 +356,6 @@ effects:
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/sleep
         1d8]]. @Identifier[core:targets]{Target} is also @Identifier[keyword:resistance]{resistant} to being
         @Identifier[keyword:awaken]{awakened}.</p>
-      identifier: swift-sleep-aura
       interaction: feat
       invoked: true
       kind: special
@@ -376,6 +375,7 @@ effects:
           <p>Any creatures who have fewer @Identifier[core:hit-points-and-mana-points]{HP} than the result of the die
           roll are rendered @Identifier[condition:asleep]{asleep} until this effect ends.</p>
       rotator: true
+      slug: swift-sleep-aura
       spell: true
       standard: true
     type: ability
@@ -387,9 +387,9 @@ system:
   archetype: mage
   class: life-mage
   description: <p>@Embed[class:life-mage description inline]</p>
-  identifier: rank-3-life-mage
   maxAv: 0
   number: 3
+  slug: rank-3-life-mage
   statDice:
     hp:
       formula: 1d8

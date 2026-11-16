@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: dense-intelligence
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -23,6 +22,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dense-intelligence
       targets:
         - self
       upgrades:
@@ -44,7 +44,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: diving
       interaction: manifest
       maneuver: passive
       overview:
@@ -61,6 +60,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: diving
       standard: true
       targets:
         - self
@@ -80,7 +80,6 @@ effects:
           type: hacks
       competence:
         raw: 1
-      identifier: hack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
       overview:
         base: >-
@@ -96,6 +95,7 @@ effects:
           <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
           leg, depending on what you chose.</p>
       skill: true
+      slug: hack
       standard: true
       targets:
         - arm
@@ -120,7 +120,6 @@ effects:
         raw: 1
       delivery: self
       featSaveAttribute: snk
-      identifier: hide
       interaction: feat
       overview:
         base: >-
@@ -139,6 +138,7 @@ effects:
         @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
         @Identifier[condition:hidden]{hidden}.</p>
       skill: true
+      slug: hide
       standard: true
       targets:
         - self
@@ -168,7 +168,6 @@ effects:
           type: hacks
       competence:
         raw: 1
-      identifier: impale
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
       powerSources:
         - martial
@@ -178,6 +177,7 @@ effects:
           @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
         hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{body hack}.</p>
       skill: true
+      slug: impale
       standard: true
       targets:
         - vitals
@@ -197,7 +197,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: low-strength
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -205,6 +204,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: low-strength
       targets:
         - self
       upgrades:
@@ -226,7 +226,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-hands
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -236,6 +235,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-hands
       targets:
         - self
     type: ability
@@ -253,13 +253,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -280,13 +280,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -307,13 +307,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -334,7 +334,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swamp-native
       interaction: manifest
       maneuver: passive
       overview:
@@ -345,6 +344,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: swamp-native
       targets:
         - self
     type: ability
@@ -376,7 +376,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swimming
       interaction: manifest
       maneuver: passive
       overview:
@@ -386,6 +385,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: swimming
       standard: true
       targets:
         - self
@@ -412,7 +412,6 @@ effects:
         raw: 1
       effectTypes:
         - damaging
-      identifier: vitals-hack
       limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
       powerSources:
         - martial
@@ -420,6 +419,7 @@ effects:
         critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
         hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
       skill: true
+      slug: vitals-hack
       standard: true
       targets:
         - vitals
@@ -471,11 +471,11 @@ system:
       type: toggleChildren
   br: 5
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: alligator
   size:
     max: 4
     min: 1
     value: 1
+  slug: alligator
   statDice:
     hp:
       formula: (@this.item.size)d8

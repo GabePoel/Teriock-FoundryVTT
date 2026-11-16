@@ -22,7 +22,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: dense-intelligence
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -30,6 +29,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dense-intelligence
           targets:
             - self
           upgrades:
@@ -49,7 +49,6 @@ items:
           delivery: bite
           executionTime:
             base: a2
-          identifier: devour
           powerSources:
             - martial
           requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -58,6 +57,7 @@ items:
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
               @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+          slug: devour
         type: ability
       - _id: zhwqSumwjh1TvOlr
         _key: "!actors.items.effects!77263cb2d4ea408b.77263cb2d4ea408b.zhwqSumwjh1TvOlr"
@@ -73,7 +73,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: diving
           interaction: manifest
           maneuver: passive
           overview:
@@ -90,6 +89,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: diving
           standard: true
           targets:
             - self
@@ -109,7 +109,6 @@ items:
               type: hacks
           competence:
             raw: 1
-          identifier: hack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           overview:
             base: >-
@@ -125,6 +124,7 @@ items:
               <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
               leg, depending on what you chose.</p>
           skill: true
+          slug: hack
           standard: true
           targets:
             - arm
@@ -149,7 +149,6 @@ items:
             raw: 1
           delivery: self
           featSaveAttribute: snk
-          identifier: hide
           interaction: feat
           overview:
             base: >-
@@ -168,6 +167,7 @@ items:
             @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
             @Identifier[condition:hidden]{hidden}.</p>
           skill: true
+          slug: hide
           standard: true
           targets:
             - self
@@ -197,7 +197,6 @@ items:
               type: hacks
           competence:
             raw: 1
-          identifier: impale
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           powerSources:
             - martial
@@ -207,6 +206,7 @@ items:
               @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
             hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{body hack}.</p>
           skill: true
+          slug: impale
           standard: true
           targets:
             - vitals
@@ -225,7 +225,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -235,6 +234,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -252,13 +252,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -279,13 +279,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -306,13 +306,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -333,13 +333,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-strength
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-strength
           targets:
             - self
           upgrades:
@@ -360,7 +360,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: swamp-native
           interaction: manifest
           maneuver: passive
           overview:
@@ -371,6 +370,7 @@ items:
             - martial
           range:
             unit: self
+          slug: swamp-native
           targets:
             - self
         type: ability
@@ -402,7 +402,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: swimming
           interaction: manifest
           maneuver: passive
           overview:
@@ -412,6 +411,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: swimming
           standard: true
           targets:
             - self
@@ -438,7 +438,6 @@ items:
             raw: 1
           effectTypes:
             - damaging
-          identifier: vitals-hack
           limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
           powerSources:
             - martial
@@ -446,6 +445,7 @@ items:
             critHit: <p>If you want, target takes @Identifier[core:standard-and-critical-damage]{standard damage} as well.</p>
             hit: <p>@Identifier[core:targets]{Target} takes a @Identifier[damage:hack]{vitals hack} of your choice.</p>
           skill: true
+          slug: vitals-hack
           standard: true
           targets:
             - vitals
@@ -497,11 +497,11 @@ items:
           type: toggleChildren
       br: 8
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: crocodile
       size:
         max: 5
         min: 2
         value: 2
+      slug: crocodile
       statDice:
         hp:
           formula: (@this.item.size - 1)d8
@@ -540,8 +540,8 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          identifier: armor-voiding
           kind: intrinsic
+          slug: armor-voiding
         type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!77263cb2d4ea408b.e0dRIWIEtltWITfX.Q3eKznomGL4eVOGB"
@@ -555,10 +555,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: KcaZmxo03XNP3ZbE
         _key: "!actors.items.effects!77263cb2d4ea408b.e0dRIWIEtltWITfX.KcaZmxo03XNP3ZbE"
@@ -572,8 +572,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/ferocious-jaw.webp
@@ -584,10 +584,10 @@ items:
         raw: 1
       damage:
         base: 1d8
-      identifier: ferocious-jaw
       range:
         long:
           unit: melee
+      slug: ferocious-jaw
       style: savage
     type: body
   - _id: aLh6bkqL8Fgenlso
@@ -607,8 +607,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!77263cb2d4ea408b.aLh6bkqL8Fgenlso.IDLUUjkSFtpaiKuJ"
@@ -622,8 +622,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/foot.webp
@@ -632,10 +632,10 @@ items:
       _sup: 77263cb2d4ea408b
       damage:
         base: "1"
-      identifier: foot
       range:
         long:
           unit: melee
+      slug: foot
     type: body
   - _id: LyB8LiUkdCRjQzbF
     _key: "!actors.items!77263cb2d4ea408b.LyB8LiUkdCRjQzbF"
@@ -648,10 +648,10 @@ items:
       _sup: 77263cb2d4ea408b
       av:
         raw: 3
-      identifier: hardened-scales
       range:
         long:
           unit: self
+      slug: hardened-scales
     type: body
 name: Crocodile
 prototypeToken:
@@ -668,7 +668,6 @@ system:
   _src: Compendium.teriock.species.Item.77263cb2d4ea408b
   hp:
     value: 5
-  identifier: crocodile
   lockedPaths:
     - system.money.copper
     - system.money.debt
@@ -688,6 +687,7 @@ system:
     brScale: true
   size:
     value: 2
+  slug: crocodile
   wielding:
     attacker: e0dRIWIEtltWITfX
     blocker: e0dRIWIEtltWITfX

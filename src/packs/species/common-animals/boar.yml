@@ -17,7 +17,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      identifier: advanced-smell
       interaction: manifest
       maneuver: passive
       overview:
@@ -32,6 +31,7 @@ effects:
         unit: self
       requirements: <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic}.</p>
       skill: true
+      slug: advanced-smell
       standard: true
       targets:
         - self
@@ -51,7 +51,6 @@ effects:
         raw: 1
       executionTime:
         base: r0
-      identifier: battle-charge
       maneuver: reactive
       overview:
         base: >-
@@ -69,6 +68,7 @@ effects:
         critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
         hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
       skill: true
+      slug: battle-charge
       standard: true
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
@@ -142,7 +142,6 @@ effects:
             present:
               - dead
           type: status
-      identifier: berserk
       interaction: manifest
       overview:
         base: >-
@@ -159,6 +158,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: berserk
       standard: true
       targets:
         - self
@@ -182,7 +182,6 @@ effects:
         unit: minute
       executionTime:
         base: r1
-      identifier: defy-death
       interaction: manifest
       maneuver: reactive
       overview:
@@ -192,6 +191,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: defy-death
       standard: true
       sustained: true
       targets:
@@ -212,7 +212,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: dense-intelligence
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -220,6 +219,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dense-intelligence
       targets:
         - self
       upgrades:
@@ -241,7 +241,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: low-strength
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -249,6 +248,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: low-strength
       targets:
         - self
       upgrades:
@@ -270,7 +270,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: no-hands
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -280,6 +279,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: no-hands
       targets:
         - self
     type: ability
@@ -297,13 +297,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -324,13 +324,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -351,13 +351,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -384,7 +384,6 @@ effects:
         raw: 1
       executionTime:
         base: r0
-      identifier: trample
       maneuver: reactive
       overview:
         base: >-
@@ -398,6 +397,7 @@ effects:
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+      slug: trample
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
         adjacent to them.</p>
@@ -431,7 +431,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      identifier: scent-seeing
       interaction: manifest
       maneuver: passive
       overview:
@@ -446,6 +445,7 @@ effects:
         <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
         @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
       skill: true
+      slug: scent-seeing
       standard: true
       targets:
         - self
@@ -497,11 +497,11 @@ system:
       type: toggleChildren
   br: 12
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: boar
   size:
     max: 4
     min: 1
     value: 1
+  slug: boar
   statDice:
     hp:
       formula: (@this.item.size)d6

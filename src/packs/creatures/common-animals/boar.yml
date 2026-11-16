@@ -24,7 +24,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: advanced-smell
           interaction: manifest
           maneuver: passive
           overview:
@@ -39,6 +38,7 @@ items:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic}.</p>
           skill: true
+          slug: advanced-smell
           standard: true
           targets:
             - self
@@ -58,7 +58,6 @@ items:
             raw: 1
           executionTime:
             base: r0
-          identifier: battle-charge
           maneuver: reactive
           overview:
             base: >-
@@ -76,6 +75,7 @@ items:
             critHit: <p>@Identifier[core:targets]{Target} moves 20 feet away from you.</p>
             hit: <p>@Identifier[core:targets]{Target} moves 10 feet away from you.</p>
           skill: true
+          slug: battle-charge
           standard: true
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
@@ -149,7 +149,6 @@ items:
                 present:
                   - dead
               type: status
-          identifier: berserk
           interaction: manifest
           overview:
             base: >-
@@ -166,6 +165,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: berserk
           standard: true
           targets:
             - self
@@ -189,7 +189,6 @@ items:
             unit: minute
           executionTime:
             base: r1
-          identifier: defy-death
           interaction: manifest
           maneuver: reactive
           overview:
@@ -199,6 +198,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: defy-death
           standard: true
           sustained: true
           targets:
@@ -219,7 +219,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: dense-intelligence
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -227,6 +226,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dense-intelligence
           targets:
             - self
           upgrades:
@@ -248,7 +248,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: low-strength
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -256,6 +255,7 @@ items:
             - martial
           range:
             unit: self
+          slug: low-strength
           targets:
             - self
           upgrades:
@@ -277,7 +277,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -287,6 +286,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -304,13 +304,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -331,13 +331,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -358,13 +358,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -391,7 +391,6 @@ items:
             raw: 1
           executionTime:
             base: r0
-          identifier: trample
           maneuver: reactive
           overview:
             base: >-
@@ -406,6 +405,7 @@ items:
           results:
             critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
             hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+          slug: trample
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the @Identifier[core:targets]{target} and becoming
             adjacent to them.</p>
@@ -439,7 +439,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: scent-seeing
           interaction: manifest
           maneuver: passive
           overview:
@@ -454,6 +453,7 @@ items:
             <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
+          slug: scent-seeing
           standard: true
           targets:
             - self
@@ -505,11 +505,11 @@ items:
           type: toggleChildren
       br: 12
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: boar
       size:
         max: 4
         min: 1
         value: 1
+      slug: boar
       statDice:
         hp:
           formula: (@this.item.size)d6
@@ -548,8 +548,8 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          identifier: armor-voiding
           kind: intrinsic
+          slug: armor-voiding
         type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!f7ecefa7c848258d.H6hmbkn8sMcvPFq5.Q3eKznomGL4eVOGB"
@@ -563,10 +563,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: KcaZmxo03XNP3ZbE
         _key: "!actors.items.effects!f7ecefa7c848258d.H6hmbkn8sMcvPFq5.KcaZmxo03XNP3ZbE"
@@ -580,8 +580,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/ferocious-jaw.webp
@@ -592,10 +592,10 @@ items:
         raw: 1
       damage:
         base: 1d8
-      identifier: ferocious-jaw
       range:
         long:
           unit: melee
+      slug: ferocious-jaw
       style: savage
     type: body
   - _id: CzMXCtxCKt12NLaQ
@@ -615,8 +615,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!f7ecefa7c848258d.CzMXCtxCKt12NLaQ.IDLUUjkSFtpaiKuJ"
@@ -630,8 +630,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/foot.webp
@@ -640,10 +640,10 @@ items:
       _sup: f7ecefa7c848258d
       damage:
         base: "1"
-      identifier: foot
       range:
         long:
           unit: melee
+      slug: foot
     type: body
   - _id: ci5GUvyVub2fp7kq
     _key: "!actors.items!f7ecefa7c848258d.ci5GUvyVub2fp7kq"
@@ -662,10 +662,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: rxHvNMZbvlGHFxTl
         _key: "!actors.items.effects!f7ecefa7c848258d.ci5GUvyVub2fp7kq.rxHvNMZbvlGHFxTl"
@@ -679,8 +679,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/sharp-claw.webp
@@ -691,10 +691,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: sharp-claw
       range:
         long:
           unit: melee
+      slug: sharp-claw
       style: savage
     type: body
 name: Boar
@@ -711,13 +711,13 @@ prototypeToken:
 system:
   hp:
     value: 4
-  identifier: boar
   mp:
     value: 4
   scaling:
     brScale: true
   size:
     value: 1
+  slug: boar
   wielding:
     attacker: H6hmbkn8sMcvPFq5
     blocker: ci5GUvyVub2fp7kq

@@ -35,7 +35,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: dark-vision
           interaction: manifest
           maneuver: passive
           overview:
@@ -44,6 +43,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dark-vision
           targets:
             - self
         type: ability
@@ -61,7 +61,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -73,6 +72,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-strength
           standard: true
           targets:
             - self
@@ -92,7 +92,7 @@ items:
             - _id: 3Ek9P1OLigJEFmkk
               activeQualifier: not(@status.down)
               category: element
-              identifier: life
+              slug: life
               type: hexseal
           competence:
             raw: 1
@@ -103,7 +103,6 @@ items:
             - hexseal
           executionTime:
             base: passive
-          identifier: life-magic-hexseal
           interaction: manifest
           kind: special
           maneuver: passive
@@ -116,6 +115,7 @@ items:
           range:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}.</p>
+          slug: life-magic-hexseal
           targets:
             - self
         type: ability
@@ -129,7 +129,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damage
-              identifier: mundane
+              slug: mundane
               type: immunity
           competence:
             raw: 1
@@ -140,7 +140,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: magical-durability
           interaction: manifest
           kind: special
           maneuver: passive
@@ -152,6 +151,7 @@ items:
             - magical
           range:
             unit: self
+          slug: magical-durability
           targets:
             - self
         type: ability
@@ -185,7 +185,6 @@ items:
             - revival
           executionTime:
             base: passive
-          identifier: mana-regenerating
           interaction: manifest
           kind: special
           limitation: >-
@@ -206,6 +205,7 @@ items:
             - primal
           range:
             unit: self
+          slug: mana-regenerating
           targets:
             - self
         type: ability
@@ -223,13 +223,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -250,13 +250,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-perception
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-perception
           targets:
             - self
           upgrades:
@@ -277,13 +277,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -302,7 +302,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-amorphous-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -319,6 +318,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in a @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental form}.</p>
+          slug: take-amorphous-elemental-form
           targets:
             - self
         type: ability
@@ -334,7 +334,6 @@ items:
           delivery: self
           effectTypes:
             - transformation
-          identifier: take-humanoid-elemental-form
           interaction: manifest
           kind: special
           overview:
@@ -349,6 +348,7 @@ items:
           range:
             unit: self
           requirements: <p>You are in an @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental form}.</p>
+          slug: take-humanoid-elemental-form
           targets:
             - self
         type: ability
@@ -362,7 +362,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: condition
-              identifier: unconscious
+              slug: unconscious
               type: immunity
           competence:
             raw: 1
@@ -373,7 +373,6 @@ items:
             - immunity
           executionTime:
             base: passive
-          identifier: unconsciousness-immunity
           interaction: manifest
           maneuver: passive
           overview:
@@ -384,6 +383,7 @@ items:
             - magical
           range:
             unit: self
+          slug: unconsciousness-immunity
           targets:
             - self
         type: ability
@@ -402,7 +402,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -416,6 +415,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: beastly-strength
           standard: true
           targets:
             - self
@@ -439,7 +439,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
           overview:
@@ -449,6 +448,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-armor-piercing
           standard: true
           targets:
             - self
@@ -462,12 +462,12 @@ items:
         form which resembles a human with an odd skin color.</p>
       br: 18
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      identifier: big-air-elemental
       innateRanks: <p>Innately @Pack[teriock.classes]{rank} 3 @Identifier[class:life-mage]{Life Mage}.</p>
       size:
         max: 6
         min: 5
         value: 5
+      slug: big-air-elemental
       statDice:
         hp:
           formula: (@this.item.size)d6
@@ -506,7 +506,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic]]] @Identifier[core:damage]{damage}.</p>
-          identifier: arcane-ray
           piercing:
             raw: 1
           powerSources:
@@ -517,6 +516,7 @@ items:
           results:
             critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
             hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
+          slug: arcane-ray
           spell: true
           standard: true
         type: ability
@@ -534,7 +534,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: staff-touch
           interaction: manifest
           maneuver: passive
           overview:
@@ -557,6 +556,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: staff-touch
           standard: true
           targets:
             - self
@@ -570,7 +570,7 @@ items:
         approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
         prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
         avoiding messy melees.</p>
-      identifier: mage
+      slug: mage
     type: archetype
   - _id: REnqN6lEE0k3BvVY
     _key: "!actors.items!a5465cb8241691f4.REnqN6lEE0k3BvVY"
@@ -589,10 +589,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: lSVyd07QpYuKrES4
         _key: "!actors.items.effects!a5465cb8241691f4.REnqN6lEE0k3BvVY.lSVyd07QpYuKrES4"
@@ -605,10 +605,10 @@ items:
           damageType: holy
           elements:
             - life
-          identifier: radiant
           kind: intrinsic
           powerSources:
             - divine
+          slug: radiant
         type: property
       - _id: 77yX8IITbbIo0krf
         _key: "!actors.items.effects!a5465cb8241691f4.REnqN6lEE0k3BvVY.77yX8IITbbIo0krf"
@@ -622,8 +622,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: c0c0ec104c5cd2eb
     img: systems/teriock/src/assets/thumbnails/body/air-tendril.webp
@@ -634,10 +634,10 @@ items:
         raw: 1
       damage:
         base: 1d6
-      identifier: air-tendril
       range:
         long:
           unit: melee
+      slug: air-tendril
       style: savage
     type: body
   - _id: s0lWnsE0gIQfrFqm
@@ -691,7 +691,6 @@ items:
               triggers:
                 - dawn
               type: trigger
-          identifier: hibernation-shield
           interaction: manifest
           maneuver: reactive
           overview:
@@ -706,6 +705,7 @@ items:
             raw: "10"
             unit: ft
           requirements: <p>@Identifier[core:targets]{Target} must be @Identifier[condition:down]{down}.</p>
+          slug: hibernation-shield
           spell: true
           standard: true
           trigger: <p>You go @Identifier[condition:down]{down}.</p>
@@ -757,7 +757,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
             1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
-          identifier: light-ray
           piercing:
             raw: 1
           powerSources:
@@ -772,6 +771,7 @@ items:
             hit: >-
               <p>@Identifier[core:targets]{Target} is @Identifier[condition:lighted]{lighted} to a creature of your
               choice until the end of their next @Identifier[core:turns]{turn}.</p>
+          slug: light-ray
           spell: true
           standard: true
         type: ability
@@ -809,7 +809,6 @@ items:
             @Identifier[core:hit-points-and-mana-points]{hit dice} (including the
             @Identifier[core:hit-points-and-mana-points]{hit dice} for the initial
             @Identifier[core:healing]{healing}).</p>
-          identifier: medicine-ball
           piercing:
             raw: 2
           powerSources:
@@ -820,6 +819,7 @@ items:
           results:
             critHit: <p>Double the amount of times target @Identifier[core:healing]{heals}.</p>
             hit: <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals}.</p>
+          slug: medicine-ball
           spell: true
           standard: true
         type: ability
@@ -858,7 +858,6 @@ items:
             @Identifier[condition:dead]{dead} for an additional 24 hours. If @Identifier[core:targets]{target} is
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, they are
             @Identifier[core:healing]{healed} an additional time.</p>
-          identifier: resurrect
           interaction: manifest
           maneuver: slow
           overview:
@@ -888,6 +887,7 @@ items:
             <p>@Identifier[core:targets]{Target} is @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
             or has @Identifier[condition:dead]{died} within the last 24 hours.</p>
           ritual: true
+          slug: resurrect
           spell: true
           standard: true
         type: ability
@@ -899,9 +899,9 @@ items:
       archetype: mage
       class: life-mage
       description: <p>@Embed[class:life-mage description inline]</p>
-      identifier: rank-1-life-mage
       maxAv: 0
       number: 1
+      slug: rank-1-life-mage
       statDice:
         hp:
           formula: 1d8
@@ -927,7 +927,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: life-elder-sorcery
           interaction: manifest
           maneuver: passive
           overview:
@@ -940,6 +939,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: life-elder-sorcery
           targets:
             - self
         type: ability
@@ -1003,7 +1003,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: life-rotators
           interaction: manifest
           maneuver: passive
           overview:
@@ -1031,6 +1030,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: life-rotators
           targets:
             - self
         type: ability
@@ -1110,7 +1110,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
             @Identifier[core:targets]{target} 1 additional creature.</p>
-          identifier: blessing
           interaction: manifest
           invoked: true
           kind: special
@@ -1138,6 +1137,7 @@ items:
           requirements: <p>You are not @Identifier[core:sustained]{sustaining} [[lookup name]].</p>
           ritual: true
           rotator: true
+          slug: blessing
           spell: true
           standard: true
           sustained: true
@@ -1158,7 +1158,6 @@ items:
           elderSorcery: true
           executionTime:
             base: passive
-          identifier: celestial-elder-sorcery-words
           interaction: manifest
           kind: special
           maneuver: passive
@@ -1227,6 +1226,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: celestial-elder-sorcery-words
           targets:
             - self
         type: ability
@@ -1294,7 +1294,6 @@ items:
             unit: hour
           elements:
             - life
-          identifier: crown-of-light
           interaction: manifest
           invoked: true
           kind: special
@@ -1307,6 +1306,7 @@ items:
           range:
             unit: self
           rotator: true
+          slug: crown-of-light
           spell: true
           standard: true
           sustained: true
@@ -1388,7 +1388,6 @@ items:
             base: Long Rest
             slow:
               unit: longRest
-          identifier: elder-sorcery-creation
           interaction: manifest
           kind: special
           maneuver: slow
@@ -1414,6 +1413,7 @@ items:
             - magical
           ritual: true
           skill: true
+          slug: elder-sorcery-creation
           targets:
             - self
         type: ability
@@ -1479,7 +1479,6 @@ items:
             slow:
               raw: "10"
               unit: minute
-          identifier: glow-of-healing
           interaction: manifest
           invoked: true
           kind: special
@@ -1492,6 +1491,7 @@ items:
             - magical
           ritual: true
           rotator: true
+          slug: glow-of-healing
           spell: true
           standard: true
           targets:
@@ -1515,7 +1515,6 @@ items:
             - life
           executionTime:
             base: passive
-          identifier: life-elder-sorcery-words
           interaction: manifest
           kind: special
           maneuver: passive
@@ -1551,6 +1550,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: life-elder-sorcery-words
           targets:
             - self
         type: ability
@@ -1595,7 +1595,6 @@ items:
             @Identifier[condition:dead]{dead} for an additional 10 minutes. If target is
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, they are
             @Identifier[core:healing]{healed} an additional time.</p>
-          identifier: rebirth
           invoked: true
           kind: special
           overview:
@@ -1625,6 +1624,7 @@ items:
               name]] does not count as a @Wiki[Category:Healing effects]{healing effect} unless you choose to
               @Identifier[core:healing]{heal} with it.</p>
           rotator: true
+          slug: rebirth
           spell: true
           standard: true
         type: ability
@@ -1700,7 +1700,6 @@ items:
               triggers:
                 - executeAbility
               type: trigger
-          identifier: ward
           invoked: true
           kind: special
           powerSources:
@@ -1712,6 +1711,7 @@ items:
               creature's hand. If you do, the creature's next @Identifier[core:hand-delivery]{hand} or
               @Identifier[core:missile-delivery]{missile spell} is @Identifier[keyword:warded]{warded} as well.</p>
           rotator: true
+          slug: ward
           spell: true
           standard: true
           targets:
@@ -1725,9 +1725,9 @@ items:
       archetype: mage
       class: life-mage
       description: <p>@Embed[class:life-mage description inline]</p>
-      identifier: rank-2-life-mage
       maxAv: 0
       number: 2
+      slug: rank-2-life-mage
       statDice:
         hp:
           formula: 1d8
@@ -1757,7 +1757,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: additional-life-rotators
           interaction: manifest
           maneuver: passive
           overview:
@@ -1770,6 +1769,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: additional-life-rotators
           targets:
             - self
         type: ability
@@ -1844,7 +1844,6 @@ items:
           executionTime:
             base: passive
           featSaveAttribute: int
-          identifier: expanded-life-elder-sorcery
           interaction: feat
           kind: special
           maneuver: passive
@@ -1876,6 +1875,7 @@ items:
             fail: <p>You are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell or word again.</p>
             save: <p>You learn the spell or word.</p>
           skill: true
+          slug: expanded-life-elder-sorcery
           standard: true
           targets:
             - self
@@ -1981,7 +1981,6 @@ items:
           heightened: >-
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
             @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
-          identifier: minor-item-enchantment
           interaction: manifest
           invoked: true
           kind: special
@@ -2005,6 +2004,7 @@ items:
             @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
           ritual: true
           rotator: true
+          slug: minor-item-enchantment
           spell: true
           standard: true
           targets:
@@ -2025,7 +2025,7 @@ items:
                 - resultsAlt
                 - resultsAltCrit
                 - unheightened
-              identifier: awakening
+              slug: awakening
               type: resistance
           automations:
             - _id: e1c7d7174b360e93
@@ -2092,7 +2092,6 @@ items:
             <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/sleep
             1d8]]. @Identifier[core:targets]{Target} is also @Identifier[keyword:resistance]{resistant} to being
             @Identifier[keyword:awaken]{awakened}.</p>
-          identifier: swift-sleep-aura
           interaction: feat
           invoked: true
           kind: special
@@ -2112,6 +2111,7 @@ items:
               <p>Any creatures who have fewer @Identifier[core:hit-points-and-mana-points]{HP} than the result of the
               die roll are rendered @Identifier[condition:asleep]{asleep} until this effect ends.</p>
           rotator: true
+          slug: swift-sleep-aura
           spell: true
           standard: true
         type: ability
@@ -2123,9 +2123,9 @@ items:
       archetype: mage
       class: life-mage
       description: <p>@Embed[class:life-mage description inline]</p>
-      identifier: rank-3-life-mage
       maxAv: 0
       number: 3
+      slug: rank-3-life-mage
       statDice:
         hp:
           formula: 1d8
@@ -2148,13 +2148,13 @@ prototypeToken:
 system:
   hp:
     value: 20
-  identifier: big-air-elemental
   mp:
     value: 16
   scaling:
     brScale: true
   size:
     value: 5
+  slug: big-air-elemental
   wielding:
     attacker: REnqN6lEE0k3BvVY
     blocker: REnqN6lEE0k3BvVY

@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: battle-cry
       interaction: manifest
       maneuver: passive
       overview:
@@ -27,6 +26,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: battle-cry
       standard: true
       targets:
         - self
@@ -43,7 +43,6 @@ effects:
       delivery: bite
       executionTime:
         base: a2
-      identifier: devour
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -52,6 +51,7 @@ effects:
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+      slug: devour
     type: ability
   - _id: 0Pv4DuH1s0ZkXyqV
     _key: "!items.effects!45676849cf509d9b.0Pv4DuH1s0ZkXyqV"
@@ -97,7 +97,6 @@ effects:
         - movement
       executionTime:
         base: passive
-      identifier: flying
       interaction: manifest
       maneuver: passive
       overview:
@@ -108,6 +107,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: flying
       standard: true
       targets:
         - self
@@ -142,7 +142,6 @@ effects:
       delivery: cone
       elements:
         - nature
-      identifier: green-drake-breath
       interaction: feat
       kind: special
       powerSources:
@@ -155,6 +154,7 @@ effects:
           <p>All @Identifier[property:magic]{magic} @Pack[teriock.equipment]{items} @Identifier[core:targets]{targeted}
           and @Identifier[keyword:bearing]{beared} by @Identifier[core:targets]{targets} are
           @Identifier[property:destroyed]{destroyed}.</p>
+      slug: green-drake-breath
       targets:
         - creature
         - item
@@ -173,13 +173,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: high-intelligence
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: high-intelligence
       targets:
         - self
       upgrades:
@@ -201,7 +201,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: improved-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -213,6 +212,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: improved-strength
       standard: true
       targets:
         - self
@@ -248,7 +248,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      identifier: night-vision
       interaction: manifest
       maneuver: passive
       overview:
@@ -259,6 +258,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: night-vision
       targets:
         - self
     type: ability
@@ -276,13 +276,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -303,13 +303,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -330,13 +330,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: swift
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: swift
       targets:
         - self
       upgrades:
@@ -386,7 +386,6 @@ effects:
           method: roll
           type: combat
       featSaveAttribute: int
-      identifier: battle-cry-aura
       interaction: feat
       powerSources:
         - martial
@@ -397,6 +396,7 @@ effects:
       results:
         fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
       skill: true
+      slug: battle-cry-aura
       standard: true
     type: ability
   - _id: DsxLGlD1NV2sHFir
@@ -410,7 +410,7 @@ effects:
       affinities:
         - _id: oJH3v7kvIbVGDlBS
           category: condition
-          identifier: frightened
+          slug: frightened
           type: resistance
       competence:
         raw: 1
@@ -423,7 +423,6 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-      identifier: battle-cry-resistance
       interaction: manifest
       overview:
         base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
@@ -432,6 +431,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: battle-cry-resistance
       standard: true
       targets:
         - self
@@ -451,7 +451,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -465,6 +464,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: beastly-strength
       standard: true
       targets:
         - self
@@ -488,7 +488,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: improved-armor-piercing
       interaction: manifest
       maneuver: passive
       overview:
@@ -498,6 +497,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: improved-armor-piercing
       standard: true
       targets:
         - self
@@ -514,12 +514,12 @@ system:
     <p>These rare beings sometimes seem to be enchanted with passive effects that generate or mutate swarms of
     @Wiki[Category:Insects]{elemental and other insects} around them. These creatures are very aggressive and seem to
     have an uncanny awareness of their circumstances and surroundings.</p>
-  identifier: green-coatling
   innateRanks: >-
     <p>Innately @Pack[teriock.classes]{rank} 2 @Identifier[class:nature-mage]{Nature Mage}. Innately
     @Pack[teriock.classes]{rank} 1 @Identifier[class:life-mage]{Life Mage}.</p>
   size:
     value: 5
+  slug: green-coatling
   statDice:
     hp:
       formula: 6d10

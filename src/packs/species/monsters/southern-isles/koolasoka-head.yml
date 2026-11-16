@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: carrying
       interaction: manifest
       maneuver: passive
       overview:
@@ -26,6 +25,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: carrying
       targets:
         - self
     type: ability
@@ -41,7 +41,6 @@ effects:
       delivery: bite
       executionTime:
         base: a2
-      identifier: devour
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
@@ -50,6 +49,7 @@ effects:
           <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their @Identifier[core:size]{size} is reduced by 1. If their
           @Identifier[core:size]{size} was already less than 1, it is reduced to 0.</p>
+      slug: devour
     type: ability
   - _id: V329jxR4svGItiob
     _key: "!items.effects!1387fb59c0c1828d.V329jxR4svGItiob"
@@ -65,13 +65,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -92,13 +92,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -119,13 +119,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -168,13 +168,13 @@ effects:
           skip: 1
           timing: end
           type: combat
-      identifier: snare
       powerSources:
         - martial
       results:
         critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
       skill: true
+      slug: snare
       standard: true
       targets:
         - leg
@@ -195,9 +195,9 @@ system:
     @Identifier[condition:dead]{death} are shared. However, each @Identifier[creature:koolasoka-leg]{koolasoka leg}
     cannot go more than the [[lookup name style=lc]]'s @Identifier[core:size]{size} × 5 feet away from the [[lookup name
     style=lc]].</p>
-  identifier: koolasoka-head
   size:
     value: 7
+  slug: koolasoka-head
   statDice:
     hp:
       formula: 5d10

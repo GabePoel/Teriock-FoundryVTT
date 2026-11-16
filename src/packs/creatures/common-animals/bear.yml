@@ -24,7 +24,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: advanced-smell
           interaction: manifest
           maneuver: passive
           overview:
@@ -39,6 +38,7 @@ items:
             unit: self
           requirements: <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic}.</p>
           skill: true
+          slug: advanced-smell
           standard: true
           targets:
             - self
@@ -61,7 +61,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: battle-cry
           interaction: manifest
           maneuver: passive
           overview:
@@ -73,6 +72,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: battle-cry
           standard: true
           targets:
             - self
@@ -145,7 +145,6 @@ items:
                 present:
                   - dead
               type: status
-          identifier: berserk
           interaction: manifest
           overview:
             base: >-
@@ -162,6 +161,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: berserk
           standard: true
           targets:
             - self
@@ -180,7 +180,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: dense-intelligence
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -188,6 +187,7 @@ items:
             - martial
           range:
             unit: self
+          slug: dense-intelligence
           targets:
             - self
           upgrades:
@@ -209,7 +209,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -221,6 +220,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-strength
           standard: true
           targets:
             - self
@@ -243,7 +243,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: no-hands
           interaction: manifest
           kind: flaw
           maneuver: passive
@@ -253,6 +252,7 @@ items:
             - martial
           range:
             unit: self
+          slug: no-hands
           targets:
             - self
         type: ability
@@ -270,13 +270,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-movement
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-movement
           targets:
             - self
           upgrades:
@@ -297,13 +297,13 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: normal-sneak
           interaction: manifest
           maneuver: passive
           powerSources:
             - martial
           range:
             unit: self
+          slug: normal-sneak
           targets:
             - self
           upgrades:
@@ -338,7 +338,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: swimming
           interaction: manifest
           maneuver: passive
           overview:
@@ -348,6 +347,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: swimming
           standard: true
           targets:
             - self
@@ -368,7 +368,6 @@ items:
           endCondition: <p>You make another @Identifier[core:attack-interaction]{attack}.</p>
           executionTime:
             base: r0
-          identifier: triumphant-damage-boost
           interaction: manifest
           maneuver: reactive
           overview:
@@ -378,6 +377,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: triumphant-damage-boost
           standard: true
           targets:
             - self
@@ -425,7 +425,6 @@ items:
               method: roll
               type: combat
           featSaveAttribute: int
-          identifier: battle-cry-aura
           interaction: feat
           powerSources:
             - martial
@@ -436,6 +435,7 @@ items:
           results:
             fail: <p>@Identifier[core:targets]{Targets} become @Identifier[condition:frightened]{frightened}.</p>
           skill: true
+          slug: battle-cry-aura
           standard: true
         type: ability
       - _id: 0A7MtaoSrfbT19BR
@@ -449,7 +449,7 @@ items:
           affinities:
             - _id: oJH3v7kvIbVGDlBS
               category: condition
-              identifier: frightened
+              slug: frightened
               type: resistance
           competence:
             raw: 1
@@ -462,7 +462,6 @@ items:
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime:
             base: a0
-          identifier: battle-cry-resistance
           interaction: manifest
           overview:
             base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[condition:frightened]{frightened}.</p>
@@ -471,6 +470,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: battle-cry-resistance
           standard: true
           targets:
             - self
@@ -490,7 +490,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: beastly-strength
           interaction: manifest
           maneuver: passive
           overview:
@@ -504,6 +503,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: beastly-strength
           standard: true
           targets:
             - self
@@ -527,7 +527,6 @@ items:
             unit: passive
           executionTime:
             base: passive
-          identifier: improved-armor-piercing
           interaction: manifest
           maneuver: passive
           overview:
@@ -537,6 +536,7 @@ items:
           range:
             unit: self
           skill: true
+          slug: improved-armor-piercing
           standard: true
           targets:
             - self
@@ -570,7 +570,6 @@ items:
             - sensory
           executionTime:
             base: passive
-          identifier: scent-seeing
           interaction: manifest
           maneuver: passive
           overview:
@@ -585,6 +584,7 @@ items:
             <p>You are @Identifier[rule:up]{up}. You are not @Identifier[condition:anosmatic]{anosmatic} and the
             @Identifier[core:targets]{target} is not @Identifier[condition:odorless]{odorless}.</p>
           skill: true
+          slug: scent-seeing
           standard: true
           targets:
             - self
@@ -594,9 +594,9 @@ items:
     name: Bear
     system:
       br: 8
-      identifier: bear
       size:
         value: 5
+      slug: bear
       statDice:
         hp:
           formula: 2d10
@@ -635,8 +635,8 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          identifier: armor-voiding
           kind: intrinsic
+          slug: armor-voiding
         type: property
       - _id: Q3eKznomGL4eVOGB
         _key: "!actors.items.effects!a0743da7967ebeb3.7wMsuSNdeXm2UWYu.Q3eKznomGL4eVOGB"
@@ -650,10 +650,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: biting
           kind: intrinsic
           powerSources:
             - martial
+          slug: biting
         type: property
       - _id: KcaZmxo03XNP3ZbE
         _key: "!actors.items.effects!a0743da7967ebeb3.7wMsuSNdeXm2UWYu.KcaZmxo03XNP3ZbE"
@@ -667,8 +667,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/ferocious-jaw.webp
@@ -679,10 +679,10 @@ items:
         raw: 1
       damage:
         base: 1d8
-      identifier: ferocious-jaw
       range:
         long:
           unit: melee
+      slug: ferocious-jaw
       style: savage
     type: body
   - _id: mTh5Hlw0o0vkCw2N
@@ -702,8 +702,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: bashing
           kind: intrinsic
+          slug: bashing
         type: property
       - _id: IDLUUjkSFtpaiKuJ
         _key: "!actors.items.effects!a0743da7967ebeb3.mTh5Hlw0o0vkCw2N.IDLUUjkSFtpaiKuJ"
@@ -717,8 +717,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: small
           kind: intrinsic
+          slug: small
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/foot.webp
@@ -727,10 +727,10 @@ items:
       _sup: a0743da7967ebeb3
       damage:
         base: "1"
-      identifier: foot
       range:
         long:
           unit: melee
+      slug: foot
     type: body
   - _id: huEC3T3d5qPwNTgo
     _key: "!actors.items!a0743da7967ebeb3.huEC3T3d5qPwNTgo"
@@ -758,8 +758,8 @@ items:
                   type: upgrade
                   value: "1"
               type: changes
-          identifier: armor-voiding
           kind: intrinsic
+          slug: armor-voiding
         type: property
       - _id: GhjutpAE4maLSrd2
         _key: "!actors.items.effects!a0743da7967ebeb3.huEC3T3d5qPwNTgo.GhjutpAE4maLSrd2"
@@ -773,10 +773,10 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: handy
           kind: intrinsic
           powerSources:
             - martial
+          slug: handy
         type: property
       - _id: bB3IwXhphhtbAHcY
         _key: "!actors.items.effects!a0743da7967ebeb3.huEC3T3d5qPwNTgo.bB3IwXhphhtbAHcY"
@@ -790,8 +790,8 @@ items:
         system:
           applyIfDampened: true
           applyIfDeattuned: true
-          identifier: weapon
           kind: intrinsic
+          slug: weapon
         type: property
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/assets/thumbnails/body/rending-claw.webp
@@ -802,10 +802,10 @@ items:
         raw: 1
       damage:
         base: 1d8
-      identifier: rending-claw
       range:
         long:
           unit: melee
+      slug: rending-claw
       style: savage
     type: body
 name: Bear
@@ -824,13 +824,13 @@ prototypeToken:
 system:
   hp:
     value: 12
-  identifier: bear
   mp:
     value: 4
   scaling:
     brScale: true
   size:
     value: 5
+  slug: bear
   wielding:
     attacker: huEC3T3d5qPwNTgo
     blocker: huEC3T3d5qPwNTgo

@@ -20,7 +20,6 @@ effects:
       delivery: item
       executionTime:
         base: r0
-      identifier: access-stored-mana
       interaction: manifest
       invoked: true
       kind: intrinsic
@@ -35,6 +34,7 @@ effects:
       requirements: >-
         <p>The @Identifier[keyword:invoke]{invoked} item must be @Identifier[property:mana-storing]{mana storing} and
         have more than 0 stored @Identifier[core:hit-points-and-mana-points]{MP}.</p>
+      slug: access-stored-mana
       targets:
         - ability
       trigger: >-
@@ -54,7 +54,6 @@ effects:
       delivery: self
       executionTime:
         base: r0
-      identifier: aid
       interaction: manifest
       kind: intrinsic
       maneuver: reactive
@@ -70,6 +69,7 @@ effects:
       requirements: >-
         <p>You have already use @Identifier[ability:prepare-aid]{Prepare Aid} to prepare to assist the creature or the
         @Identifier[core:game-master]{GM} rules that this is unnecessary.</p>
+      slug: aid
       trigger: >-
         <p>Another creature is about to use an action that requires a @Identifier[core:tradecrafts]{tradecraft check},
         @Identifier[core:attack-interaction]{attack roll}, or some other check.</p>
@@ -104,7 +104,6 @@ effects:
         - _id: 2a949cb4ad557294
           relation: executor
           type: combat
-      identifier: aim
       interaction: manifest
       kind: intrinsic
       overview:
@@ -115,6 +114,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: aim
       sustained: true
       targets:
         - self
@@ -166,7 +166,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      identifier: attempt-check
       interaction: manifest
       kind: intrinsic
       overview:
@@ -183,6 +182,7 @@ effects:
       results:
         fail: <p>Results are determined by the @Identifier[core:game-master]{GM}.</p>
         save: <p>Results are determined by the @Identifier[core:game-master]{GM}.</p>
+      slug: attempt-check
       targets:
         - other
     type: ability
@@ -206,7 +206,6 @@ effects:
         raw: 1
       delivery: self
       featSaveAttribute: snk
-      identifier: attempt-hide
       interaction: feat
       kind: intrinsic
       overview:
@@ -225,6 +224,7 @@ effects:
         feature which the @Identifier[core:game-master]{GM} determines is appropriate for being
         @Identifier[condition:hidden]{hidden}. You must remain in areas that maintain these conditions to stay
         @Identifier[condition:hidden]{hidden}.</p>
+      slug: attempt-hide
       targets:
         - self
     type: ability
@@ -256,7 +256,6 @@ effects:
             present:
               - dead
           type: status
-      identifier: attune
       interaction: manifest
       kind: intrinsic
       overview:
@@ -270,6 +269,7 @@ effects:
       requirements: >-
         <p>You are using @Identifier[core:targets]{target} item or mounted on @Identifier[core:targets]{target}
         creature.</p>
+      slug: attune
       sustained: true
       targets:
         - creature
@@ -292,7 +292,6 @@ effects:
         raw: 1
       effectTypes:
         - damaging
-      identifier: basic-attack
       kind: intrinsic
       overview:
         base: >-
@@ -306,6 +305,7 @@ effects:
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+      slug: basic-attack
     type: ability
   - _id: HVgGx8RWDcG7ijoq
     _key: "!items.effects!fb31c853fddd91bb.HVgGx8RWDcG7ijoq"
@@ -320,7 +320,6 @@ effects:
       delivery: item
       executionTime:
         base: r0
-      identifier: basic-block
       interaction: block
       kind: intrinsic
       maneuver: reactive
@@ -329,6 +328,7 @@ effects:
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: <p>The @Identifier[core:interactions]{attack's} effect @Identifier[core:fizzles]{fizzles}.</p>
+      slug: basic-block
       targets:
         - attack
       trigger: <p>You are being @Identifier[core:interactions]{attacked}.</p>
@@ -344,7 +344,6 @@ effects:
       competence:
         raw: 1
       delivery: sight
-      identifier: basic-command
       interaction: manifest
       kind: intrinsic
       overview:
@@ -359,6 +358,7 @@ effects:
         raw: "60"
         unit: ft
       requirements: <p>You have a minion under your control.</p>
+      slug: basic-command
     type: ability
   - _id: iS5ChHLj1EGXTZmD
     _key: "!items.effects!fb31c853fddd91bb.iS5ChHLj1EGXTZmD"
@@ -373,7 +373,6 @@ effects:
       delivery: shield
       executionTime:
         base: r1
-      identifier: block-ally
       interaction: block
       kind: intrinsic
       maneuver: reactive
@@ -385,6 +384,7 @@ effects:
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: <p>The @Identifier[core:attack-interaction]{attack's} effect @Identifier[core:fizzles]{fizzles}.</p>
+      slug: block-ally
       targets:
         - attack
       trigger: <p>Another creature within range is being @Identifier[core:attack-interaction]{attacked}.</p>
@@ -414,7 +414,6 @@ effects:
       delivery: shield
       executionTime:
         base: r1
-      identifier: block-cone
       interaction: manifest
       kind: intrinsic
       maneuver: reactive
@@ -427,6 +426,7 @@ effects:
       results:
         fail: <p>The @Identifier[core:cone-delivery]{cone's} effect applies to you.</p>
         save: <p>The @Identifier[core:cone-delivery]{cone's} effect @Identifier[core:fizzles]{fizzles} against you.</p>
+      slug: block-cone
       targets:
         - ability
       trigger: <p>A @Identifier[core:cone-delivery]{cone} would @Identifier[core:targets]{target} you.</p>
@@ -451,7 +451,6 @@ effects:
         - flame
       executionTime:
         base: a3
-      identifier: burn
       kind: intrinsic
       overview:
         base: <p>@Identifier[core:targets]{Target} is @Identifier[condition:burned]{burned}.</p>
@@ -460,6 +459,7 @@ effects:
       requirements: >-
         <p>The item you're @Identifier[core:deliveries]{delivering} this with has the
         @Identifier[property:burning]{burning property}.</p>
+      slug: burn
     type: ability
   - _id: bvBJvXq6JaID24XD
     _key: "!items.effects!fb31c853fddd91bb.bvBJvXq6JaID24XD"
@@ -505,7 +505,6 @@ effects:
       delivery: hand
       executionTime:
         base: r1
-      identifier: catch-item
       interaction: manifest
       kind: intrinsic
       maneuver: reactive
@@ -518,6 +517,7 @@ effects:
         proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
       powerSources:
         - martial
+      slug: catch-item
       targets:
         - item
       trigger: <p>An item within @Identifier[core:range]{range} is falling or flying by.</p>
@@ -538,7 +538,6 @@ effects:
       executionTime:
         base: a3
       featSaveAttribute: snk
-      identifier: check-disguise
       interaction: feat
       kind: intrinsic
       powerSources:
@@ -554,6 +553,7 @@ effects:
           <p>You detect that the @Identifier[core:targets]{target} is not @Identifier[condition:disguised]{disguised},
           regardless of whether or not they actually are. This also applies if [[lookup name]] is
           @Identifier[keyword:resistance]{resisted} or @Identifier[core:fizzles]{fizzles} for some other reason.</p>
+      slug: check-disguise
     type: ability
   - _id: VDRAiOkwFeJb70dz
     _key: "!items.effects!fb31c853fddd91bb.VDRAiOkwFeJb70dz"
@@ -575,7 +575,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      identifier: deattune
       interaction: manifest
       kind: intrinsic
       maneuver: slow
@@ -587,6 +586,7 @@ effects:
         - spiritual
       range:
         unit: self
+      slug: deattune
       targets:
         - self
     type: ability
@@ -604,7 +604,6 @@ effects:
       duration:
         raw: "5"
         unit: second
-      identifier: delay
       interaction: manifest
       kind: intrinsic
       overview:
@@ -626,6 +625,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: delay
       targets:
         - self
     type: ability
@@ -668,7 +668,6 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:difficulty-class]{DC} of the [[lookup name]] decreases by 2.</p>
-      identifier: disbelieve
       interaction: feat
       kind: intrinsic
       overview:
@@ -691,6 +690,7 @@ effects:
         save: >-
           <p>You alleviate the effects of some @Identifier[keyword:illusionary]{illusion}, depending on its
           strength.</p>
+      slug: disbelieve
       targets:
         - other
     type: ability
@@ -714,7 +714,6 @@ effects:
           relation: everyone
           timing: end
           type: combat
-      identifier: disengage
       interaction: manifest
       kind: intrinsic
       overview:
@@ -725,6 +724,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: disengage
       targets:
         - self
     type: ability
@@ -749,7 +749,6 @@ effects:
       delivery: self
       effectTypes:
         - movement
-      identifier: drop-prone
       interaction: manifest
       kind: intrinsic
       overview:
@@ -759,6 +758,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are not @Identifier[condition:prone]{prone}.</p>
+      slug: drop-prone
       targets:
         - self
     type: ability
@@ -786,7 +786,6 @@ effects:
       delivery: hand
       effectTypes:
         - awakening
-      identifier: first-aid
       interaction: manifest
       kind: intrinsic
       overview:
@@ -797,6 +796,7 @@ effects:
       results:
         fail: <p>@Identifier[core:targets]{Target} remains @Identifier[condition:unconscious]{unconscious}.</p>
         save: <p>@Identifier[core:targets]{Target} is @Identifier[keyword:awaken]{awakened}.</p>
+      slug: first-aid
     type: ability
   - _id: jssjsGUiEshizG7j
     _key: "!items.effects!fb31c853fddd91bb.jssjsGUiEshizG7j"
@@ -819,7 +819,6 @@ effects:
             formula: "1"
             type: formula
       delivery: hand
-      identifier: force-revert
       kind: intrinsic
       powerSources:
         - spiritual
@@ -827,6 +826,7 @@ effects:
         hit: >-
           <p>If the target was @Identifier[condition:transformed]{minorly transformed}, they revert to their original
           form.</p>
+      slug: force-revert
       targets:
         - creature
         - item
@@ -855,7 +855,6 @@ effects:
       competence:
         raw: 1
       delivery: hand
-      identifier: interact
       interaction: manifest
       kind: intrinsic
       overview:
@@ -866,6 +865,7 @@ effects:
           [[lookup name]]ion was successful.</p>
       powerSources:
         - martial
+      slug: interact
       targets:
         - item
     type: ability
@@ -887,7 +887,6 @@ effects:
       effectTypes:
         - damaging
         - knockout
-      identifier: knockout-attack
       kind: intrinsic
       overview:
         base: >-
@@ -899,6 +898,7 @@ effects:
       results:
         critHit: <p>Deal @Identifier[core:standard-and-critical-damage]{critical damage}.</p>
         hit: <p>Deal @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+      slug: knockout-attack
     type: ability
   - _id: ihmQZ7DtNTInHjET
     _key: "!items.effects!fb31c853fddd91bb.ihmQZ7DtNTInHjET"
@@ -925,7 +925,6 @@ effects:
         - _id: 66672059c7a29a30
           relation: executor
           type: combat
-      identifier: melee-dodge
       interaction: manifest
       kind: intrinsic
       overview:
@@ -939,6 +938,7 @@ effects:
       requirements: >-
         <p>You are not @Identifier[condition:prone]{prone}, @Identifier[condition:snared]{snared}, or
         @Identifier[condition:immobilized]{immobilized}.</p>
+      slug: melee-dodge
       sustained: true
       targets:
         - self
@@ -968,7 +968,6 @@ effects:
         - _id: 66672059c7a29a30
           relation: executor
           type: combat
-      identifier: missile-dodge
       interaction: manifest
       kind: intrinsic
       overview:
@@ -982,6 +981,7 @@ effects:
       requirements: >-
         <p>You are not @Identifier[condition:prone]{prone}, @Identifier[condition:snared]{snared}, or
         @Identifier[condition:immobilized]{immobilized}.</p>
+      slug: missile-dodge
       sustained: true
       targets:
         - self
@@ -999,7 +999,6 @@ effects:
       delivery: self
       effectTypes:
         - movement
-      identifier: move
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1012,6 +1011,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: move
       targets:
         - self
     type: ability
@@ -1033,7 +1033,6 @@ effects:
       delivery: self
       executionTime:
         base: r1
-      identifier: off-hand-attack
       interaction: manifest
       kind: intrinsic
       maneuver: reactive
@@ -1051,6 +1050,7 @@ effects:
         <p>You have a second @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or hand that is capable
         of making an @Identifier[core:attack-interaction]{attack} and that did not make the triggering
         @Identifier[core:attack-interaction]{attack}.</p>
+      slug: off-hand-attack
       targets:
         - self
       trigger: >-
@@ -1075,7 +1075,6 @@ effects:
       delivery: self
       executionTime:
         base: r1
-      identifier: opportunity-attack
       interaction: manifest
       kind: intrinsic
       maneuver: reactive
@@ -1088,6 +1087,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: opportunity-attack
       targets:
         - self
       trigger: >-
@@ -1114,7 +1114,6 @@ effects:
             description: <p>An amount of [[gp]] of your choosing.</p>
             type: description
       delivery: self
-      identifier: pay-gold
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1126,6 +1125,7 @@ effects:
         - financial
       range:
         unit: self
+      slug: pay-gold
     type: ability
   - _id: S98GABRDaGBT6Md1
     _key: "!items.effects!fb31c853fddd91bb.S98GABRDaGBT6Md1"
@@ -1143,7 +1143,6 @@ effects:
             description: <p>An amount of @Identifier[core:hit-points-and-mana-points]{MP} of your choosing.</p>
             type: description
       delivery: hand
-      identifier: pay-mana
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1152,6 +1151,7 @@ effects:
           by the @Identifier[core:game-master]{GM}.</p>
       powerSources:
         - spiritual
+      slug: pay-mana
       targets:
         - area
         - creature
@@ -1171,7 +1171,6 @@ effects:
       effectTypes:
         - sensory
       featSaveAttribute: per
-      identifier: perceive
       interaction: feat
       kind: intrinsic
       powerSources:
@@ -1185,6 +1184,7 @@ effects:
         save: >-
           <p>You see any @Identifier[condition:hidden]{hidden} creatures with a hidden
           @Identifier[core:difficulty-class]{DC} less than or equal to your roll.</p>
+      slug: perceive
       targets:
         - self
     type: ability
@@ -1214,7 +1214,6 @@ effects:
           relation: everyone
           timing: end
           type: combat
-      identifier: power-through
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1223,6 +1222,7 @@ effects:
           lower.</p>
       powerSources:
         - martial
+      slug: power-through
     type: ability
   - _id: XsjuZ4s5lsUrpECL
     _key: "!items.effects!fb31c853fddd91bb.XsjuZ4s5lsUrpECL"
@@ -1238,7 +1238,6 @@ effects:
       duration:
         raw: "1"
         unit: minute
-      identifier: prepare-aid
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1251,6 +1250,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: prepare-aid
       targets:
         - self
     type: ability
@@ -1272,7 +1272,6 @@ effects:
       delivery: hand
       effectTypes:
         - truth-detecting
-      identifier: read-magic
       kind: intrinsic
       powerSources:
         - magical
@@ -1282,6 +1281,7 @@ effects:
           or not. If it is a creature, then you know if they have any @Identifier[core:sustained]{sustained}
           @Identifier[source:magical]{magical abilities} currently active on them or if they themselves are
           intrinsically magical in some way.</p>
+      slug: read-magic
       targets:
         - creature
         - item
@@ -1300,7 +1300,6 @@ effects:
       duration:
         raw: "5"
         unit: second
-      identifier: ready
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1320,6 +1319,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: ready
       sustained: true
       targets:
         - self
@@ -1346,7 +1346,6 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      identifier: recover
       interaction: manifest
       kind: intrinsic
       maneuver: slow
@@ -1367,6 +1366,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: recover
       targets:
         - self
     type: ability
@@ -1381,7 +1381,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      identifier: reload
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1391,6 +1390,7 @@ effects:
       range:
         unit: self
       requirements: <p>@Identifier[core:targets]{Target} has the @Identifier[property:loading]{loading property}.</p>
+      slug: reload
       targets:
         - item
     type: ability
@@ -1412,7 +1412,6 @@ effects:
       delivery: self
       executionTime:
         base: r1
-      identifier: resist
       interaction: manifest
       kind: intrinsic
       maneuver: reactive
@@ -1422,6 +1421,7 @@ effects:
         - spiritual
       range:
         unit: self
+      slug: resist
       targets:
         - self
       trigger: <p>You fail a @Identifier[keyword:resistance]{resistance save}.</p>
@@ -1441,7 +1441,6 @@ effects:
         - stealing
       executionTime:
         base: a3
-      identifier: search
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1449,6 +1448,7 @@ effects:
       powerSources:
         - martial
       requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:down]{down}.</p>
+      slug: search
     type: ability
   - _id: YqalD8uRs68lSiI0
     _key: "!items.effects!fb31c853fddd91bb.YqalD8uRs68lSiI0"
@@ -1488,7 +1488,6 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
         @Identifier[core:difficulty-class]{DC} of the [[lookup name]] decreases by 2.</p>
-      identifier: self-revert
       interaction: feat
       kind: intrinsic
       overview:
@@ -1504,6 +1503,7 @@ effects:
       requirements: <p>You are @Identifier[condition:transformed]{transformed}.</p>
       results:
         save: <p>You cease being @Identifier[condition:transformed]{transformed}.</p>
+      slug: self-revert
       targets:
         - self
     type: ability
@@ -1527,7 +1527,6 @@ effects:
       delivery: self
       effectTypes:
         - movement
-      identifier: stand-up
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1537,6 +1536,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are @Identifier[condition:prone]{prone}.</p>
+      slug: stand-up
       targets:
         - self
     type: ability
@@ -1558,7 +1558,6 @@ effects:
       delivery: self
       executionTime:
         base: a3
-      identifier: start-wisping
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1568,6 +1567,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are @Identifier[condition:dead]{dead}.</p>
+      slug: start-wisping
       targets:
         - self
     type: ability
@@ -1582,7 +1582,6 @@ effects:
       competence:
         raw: 1
       delivery: self
-      identifier: sustain
       interaction: manifest
       kind: intrinsic
       overview:
@@ -1597,6 +1596,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: sustain
       targets:
         - self
     type: ability
@@ -1606,8 +1606,8 @@ system:
   description: >-
     <p>Everyone is considered to have all @Wiki[Category:Basic abilities]{basic abilities} by default. However, some
     basic abilities may have additional requirements that must be met in order to actually be used.</p>
-  identifier: basic-abilities
   maxAv: 4
+  slug: basic-abilities
   statDice:
     hp:
       disabled: true

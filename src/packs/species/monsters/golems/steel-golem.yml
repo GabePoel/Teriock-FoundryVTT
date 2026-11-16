@@ -15,7 +15,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: beastly-strength
       interaction: manifest
       maneuver: passive
       overview:
@@ -29,6 +28,7 @@ effects:
       range:
         unit: self
       skill: true
+      slug: beastly-strength
       standard: true
       targets:
         - self
@@ -51,7 +51,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: bumbling
       interaction: manifest
       kind: flaw
       maneuver: passive
@@ -59,6 +58,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: bumbling
       targets:
         - self
       upgrades:
@@ -76,19 +76,19 @@ effects:
       affinities:
         - _id: 2SGEPU635vkgznfV
           category: condition
-          identifier: allured
+          slug: allured
           type: immunity
         - _id: RT16m3U0BI3FNkvA
           category: condition
-          identifier: frenzied
+          slug: frenzied
           type: immunity
         - _id: n7Dd3JcVMBqNFFEU
           category: condition
-          identifier: frenzied
+          slug: frenzied
           type: immunity
         - _id: ug99tkS0qQe8PRXF
           category: condition
-          identifier: charmed
+          slug: charmed
           type: immunity
       competence:
         raw: 1
@@ -99,7 +99,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: construct-mind
       interaction: manifest
       kind: special
       maneuver: passive
@@ -112,6 +111,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: construct-mind
       targets:
         - self
     type: ability
@@ -137,7 +137,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: dragon-scales
       interaction: manifest
       maneuver: passive
       overview:
@@ -148,6 +147,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dragon-scales
       targets:
         - self
     type: ability
@@ -185,7 +185,6 @@ effects:
         - revival
       executionTime:
         base: passive
-      identifier: golem-reactivation
       interaction: manifest
       maneuver: passive
       overview:
@@ -202,6 +201,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are @Identifier[condition:down]{down}.</p>
+      slug: golem-reactivation
       targets:
         - self
       trigger: >-
@@ -219,7 +219,7 @@ effects:
       affinities:
         - _id: NxGVe5qLdm9laW3Q
           category: damage
-          identifier: mundane
+          slug: mundane
           type: immunity
       competence:
         raw: 1
@@ -230,7 +230,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: magical-durability
       interaction: manifest
       kind: special
       maneuver: passive
@@ -242,6 +241,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: magical-durability
       targets:
         - self
     type: ability
@@ -259,13 +259,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -286,13 +286,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -321,7 +321,6 @@ effects:
         - destruction
       executionTime:
         base: r1
-      identifier: shattering-armor
       interaction: block
       maneuver: reactive
       overview:
@@ -335,6 +334,7 @@ effects:
         save: >-
           <p>@Pack[teriock.equipment]{Equipment} that delivers @Identifier[core:attack-interaction]{attack} you
           @Identifier[core:block-interaction]{block} becomes @Identifier[property:shattered]{shattered}.</p>
+      slug: shattering-armor
       targets:
         - item
     type: ability
@@ -359,7 +359,6 @@ effects:
         - destruction
       executionTime:
         base: passive
-      identifier: shattering-attacks
       interaction: manifest
       maneuver: passive
       overview:
@@ -370,6 +369,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: shattering-attacks
       targets:
         - self
     type: ability
@@ -395,7 +395,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: spell-immunity
       interaction: manifest
       maneuver: passive
       overview:
@@ -405,6 +404,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
+      slug: spell-immunity
       targets:
         - self
     type: ability
@@ -418,7 +418,7 @@ effects:
       affinities:
         - _id: uwOYmc8mNN1jL3We
           category: condition
-          identifier: unconscious
+          slug: unconscious
           type: immunity
       competence:
         raw: 1
@@ -429,7 +429,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
       overview:
@@ -440,6 +439,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: unconsciousness-immunity
       targets:
         - self
     type: ability
@@ -457,7 +457,6 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: very-high-intelligence
       interaction: manifest
       kind: special
       maneuver: passive
@@ -465,6 +464,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: very-high-intelligence
       targets:
         - self
       upgrades:
@@ -539,13 +539,13 @@ system:
     spots or items and have a trigger system that activates them. They generally follow a set "program" while
     active.</p>
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: steel-golem
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 4.</p>
   instructions: <p>Add the chosen innate @Pack[teriock.classes]{ranks} manually.</p>
   size:
     max: 10
     min: 1
     value: 1
+  slug: steel-golem
   statDice:
     hp:
       formula: (@this.item.size + 2)d20

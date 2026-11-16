@@ -28,7 +28,6 @@ effects:
         - sensory
       executionTime:
         base: passive
-      identifier: dark-vision
       interaction: manifest
       maneuver: passive
       overview:
@@ -37,6 +36,7 @@ effects:
         - martial
       range:
         unit: self
+      slug: dark-vision
       targets:
         - self
     type: ability
@@ -50,7 +50,7 @@ effects:
       affinities:
         - _id: NxGVe5qLdm9laW3Q
           category: damage
-          identifier: mundane
+          slug: mundane
           type: immunity
       competence:
         raw: 1
@@ -61,7 +61,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: magical-durability
       interaction: manifest
       kind: special
       maneuver: passive
@@ -73,6 +72,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: magical-durability
       targets:
         - self
     type: ability
@@ -106,7 +106,6 @@ effects:
         - revival
       executionTime:
         base: passive
-      identifier: mana-regenerating
       interaction: manifest
       kind: special
       limitation: >-
@@ -126,6 +125,7 @@ effects:
         - primal
       range:
         unit: self
+      slug: mana-regenerating
       targets:
         - self
     type: ability
@@ -143,13 +143,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-movement
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-movement
       targets:
         - self
       upgrades:
@@ -170,13 +170,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-perception
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-perception
       targets:
         - self
       upgrades:
@@ -197,13 +197,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-sneak
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-sneak
       targets:
         - self
       upgrades:
@@ -224,13 +224,13 @@ effects:
         unit: passive
       executionTime:
         base: passive
-      identifier: normal-strength
       interaction: manifest
       maneuver: passive
       powerSources:
         - martial
       range:
         unit: self
+      slug: normal-strength
       targets:
         - self
       upgrades:
@@ -248,7 +248,7 @@ effects:
         - _id: cXSvkQbwFoO3fFtf
           activeQualifier: not(@status.down)
           category: element
-          identifier: storm
+          slug: storm
           type: hexseal
       competence:
         raw: 1
@@ -259,7 +259,6 @@ effects:
         - hexseal
       executionTime:
         base: passive
-      identifier: storm-magic-hexseal
       interaction: manifest
       kind: special
       maneuver: passive
@@ -272,6 +271,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are @Identifier[rule:up]{up}.</p>
+      slug: storm-magic-hexseal
       targets:
         - self
     type: ability
@@ -287,7 +287,6 @@ effects:
       delivery: self
       effectTypes:
         - transformation
-      identifier: take-amorphous-elemental-form
       interaction: manifest
       kind: special
       overview:
@@ -304,6 +303,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are in a @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental form}.</p>
+      slug: take-amorphous-elemental-form
       targets:
         - self
     type: ability
@@ -319,7 +319,6 @@ effects:
       delivery: self
       effectTypes:
         - transformation
-      identifier: take-humanoid-elemental-form
       interaction: manifest
       kind: special
       overview:
@@ -334,6 +333,7 @@ effects:
       range:
         unit: self
       requirements: <p>You are in an @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental form}.</p>
+      slug: take-humanoid-elemental-form
       targets:
         - self
     type: ability
@@ -347,7 +347,7 @@ effects:
       affinities:
         - _id: uwOYmc8mNN1jL3We
           category: condition
-          identifier: unconscious
+          slug: unconscious
           type: immunity
       competence:
         raw: 1
@@ -358,7 +358,6 @@ effects:
         - immunity
       executionTime:
         base: passive
-      identifier: unconsciousness-immunity
       interaction: manifest
       maneuver: passive
       overview:
@@ -369,6 +368,7 @@ effects:
         - magical
       range:
         unit: self
+      slug: unconsciousness-immunity
       targets:
         - self
     type: ability
@@ -381,12 +381,12 @@ system:
     form which resembles a human with an odd skin color.</p>
   br: 10
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  identifier: small-water-elemental
   innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:storm-mage]{Storm Mage}.</p>
   size:
     max: 2
     min: 1
     value: 1
+  slug: small-water-elemental
   statDice:
     hp:
       formula: (@this.item.size)d6
