@@ -42,7 +42,7 @@ export default function ActorTradecraftsPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       for (const tc of Object.values(this.tradecrafts)) {
-        Object.assign(rollData, prefixObject(tc.getLocalRollData(), `tc.${tc.key}`));
+        Object.assign(rollData, prefixObject(tc.getLocalRollData(), `tradecraft.${tc.key}`));
       }
       return rollData;
     }

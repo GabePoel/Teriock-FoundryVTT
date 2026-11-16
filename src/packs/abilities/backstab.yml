@@ -42,7 +42,9 @@ system:
         - competenceNone
         - resultsAlt
         - resultsAltCrit
-      localQualifier: and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact, @class.thief))
+      localQualifier: >-
+        and(@type.ability, @time.a1, or(@identifier.ability.basic-attack, @identifier.ability.interact,
+        @rank.class.thief))
       overrideData: true
       triggerQualifier: and(@exec.time.a1, or(@exec.identifier.ability.interact, @exec.identifier.ability.unglue))
       triggers:

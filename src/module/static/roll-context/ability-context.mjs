@@ -80,12 +80,12 @@ Hooks.once("teriock.identifiersInit", () => {
     abilityContext[`cost.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", { name: v.label });
   });
   Object.entries(TERIOCK.CONFIG.class.archetypes).forEach(([k, v]) => {
-    abilityContext[`archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: v.label });
+    abilityContext[`rank.archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: v.label });
   });
   Object.entries(TERIOCK.CONFIG.class.classes).forEach(([k, v]) => {
-    abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: v.label });
+    abilityContext[`rank.class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: v.label });
   });
-  abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
+  abilityContext["rank.number"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.rankNumber");
 });
 
 Hooks.once("teriock.metaphysicsContextInit", () => {

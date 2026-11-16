@@ -65,8 +65,8 @@ const actorContext = {
   ub: "TERIOCK.TERMS.Properties.unblockable",
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
 
-  "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
-  "db.stones": "TERIOCK.ROLL_CONTEXT.Actor.stones",
+  "bag.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
+  "bag.stones": "TERIOCK.ROLL_CONTEXT.Actor.stones",
 
   curses: "TERIOCK.ROLL_CONTEXT.Actor.curses",
   "curses.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.curses.max.label",
@@ -90,7 +90,7 @@ Hooks.once("teriock.identifiersInit", () => {
     actorContext[`type.${k}`] = _loc(`TYPES.Actor.${k}`);
   });
   Object.keys(TERIOCK.CONFIG.deathBag.stones).forEach((color) => {
-    actorContext[`db.stones.${color}`] = _loc("TERIOCK.TERMS.Stones.ofColor", {
+    actorContext[`bag.stones.${color}`] = _loc("TERIOCK.TERMS.Stones.ofColor", {
       color: _loc(`TERIOCK.TERMS.StoneColor.${color}`),
     });
   });
@@ -113,10 +113,10 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.tradecraft.tradecrafts).forEach(([k, v]) => {
     const name = v.label;
     Object.assign(actorContext, {
-      [`tc.${k}.c`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.c", { name }),
-      [`tc.${k}.fluent`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.fluent", { name }),
-      [`tc.${k}.proficient`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.proficient", { name }),
-      [`tc.${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
+      [`tradecraft.${k}.c`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.c", { name }),
+      [`tradecraft.${k}.fluent`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.fluent", { name }),
+      [`tradecraft.${k}.proficient`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.proficient", { name }),
+      [`tradecraft.${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
     });
   });
   Object.entries(TERIOCK.CONFIG.hack).forEach(([k, v]) => {
@@ -142,6 +142,9 @@ Hooks.once("teriock.identifiersInit", () => {
   });
   Object.entries(game.teriock.identifiers.getNames("species", { permission: "LIMITED" })).forEach(([k, name]) => {
     Object.assign(actorContext, { [`species.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.species", { name }) });
+  });
+  Object.entries(TERIOCK.CONFIG.character.sense).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`sense.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.sense", { name: v.label }) });
   });
   Object.entries(TERIOCK.CONFIG.terrain).forEach(([k, v]) => {
     Object.assign(actorContext, { [`terrain.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.terrain", { name: v.label }) });

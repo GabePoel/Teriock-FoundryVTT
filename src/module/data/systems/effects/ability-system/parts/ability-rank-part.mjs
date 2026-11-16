@@ -65,9 +65,9 @@ export default function AbilityRankPart(Base) {
       const data = super.getLocalRollData();
       if (this.parent.parent?.type === "rank") {
         const rank = /** @type {TeriockItem<"rank">} */ this.parent.parent;
-        data[`archetype.${rank.system.archetype}`] = 1;
-        data[`class.${rank.system.class}`] = 1;
-        data["class.rank"] = rank.system.number;
+        data[`rank.archetype.${rank.system.archetype}`] = 1;
+        data[`rank.class.${rank.system.class}`] = 1;
+        data["rank.number"] = rank.system.number;
       }
       return data;
     }
