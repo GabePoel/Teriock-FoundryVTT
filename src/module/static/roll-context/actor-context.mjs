@@ -1,5 +1,4 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import { toSlug } from "../../utils/_module.mjs";
 
 const actorContext = {
   br: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.label",
@@ -105,9 +104,9 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(TERIOCK.CONFIG.class.archetypes).forEach(([k, v]) => {
     Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: v.label }) });
   });
-  Object.entries(TERIOCK.CONFIG.character.movement).forEach(([k, v]) => {
+  Object.values(TERIOCK.CONFIG.character.movement).forEach(v => {
     Object.assign(actorContext, {
-      [`speed.${toSlug(k, { convertCamel: true })}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", {
+      [`speed.${v.slug}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", {
         type: v.label,
       }),
     });

@@ -9,23 +9,27 @@ export default {
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb",
       movementAction: "climb",
+      slug: "climb",
     },
     crawl: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.crawl,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl",
       movementAction: "crawl",
+      slug: "crawl",
     },
     difficultTerrain: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.difficultTerrain,
       initial: 2,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.difficultTerrain",
+      slug: "difficult-terrain",
     },
     dig: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.dig,
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dig",
       movementAction: "burrow",
+      slug: "dig",
     },
     dive: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "vertical",
@@ -33,17 +37,20 @@ export default {
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.dive",
       movementAction: "swim",
+      slug: "dive",
     },
     fly: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.fly,
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.fly",
       movementAction: "fly",
+      slug: "fly",
     },
     hidden: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.hidden,
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.hidden",
+      slug: "hidden",
       status: "hidden",
     },
     leapHorizontal: /** @type {Teriock.Config.MovementEntry} */ {
@@ -52,6 +59,7 @@ export default {
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapHorizontal",
       movementAction: "jump",
+      slug: "leap-horizontal",
     },
     leapVertical: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "vertical",
@@ -59,6 +67,7 @@ export default {
       initial: 0,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.leapVertical",
       movementAction: "jump",
+      slug: "leap-vertical",
     },
     swim: /** @type {Teriock.Config.MovementEntry} */ {
       direction: "horizontal",
@@ -66,12 +75,14 @@ export default {
       initial: 1,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
       movementAction: "swim",
+      slug: "swim",
     },
     walk: /** @type {Teriock.Config.MovementEntry} */ {
       icon: icons.manifest.movement.walk,
       initial: 3,
       label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
       movementAction: "walk",
+      slug: "walk",
     },
   },
   /** @category Perception */

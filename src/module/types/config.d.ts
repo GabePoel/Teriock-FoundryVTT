@@ -53,6 +53,7 @@ declare global {
       initial: number;
       label: string;
       movementAction?: string;
+      slug: Slug;
       status?: Teriock.Keys.Status;
     };
 
@@ -137,6 +138,7 @@ declare global {
       reverse?: string | CommandOperation;
       /** Whether this shared group rolls and only certain actors should roll */
       shared?: boolean;
+      slug: Slug;
       /** Fire a trigger named after this command before taking it */
       trigger?: boolean;
       /** Run on all Actors at once instead of batching operations */
@@ -175,7 +177,7 @@ declare global {
 
     export type TerrainEntry = { img: string, label: string };
 
-    export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number, slug?: Slug };
+    export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number, slug: Slug };
 
     export type ManeuverEntry = {
       executionTimes: Record<string, ExecutionTimeEntry>;

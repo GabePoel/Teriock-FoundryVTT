@@ -398,7 +398,7 @@ export default function ArmamentSystemMixin(Base) {
       if (this.style) { data[`style.${this.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
       for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
-      for (const command of this.commands) { data[`command.${toSlug(command, { convertCamel: true })}`] = 1; }
+      for (const command of this.commands) { data[`command.${TERIOCK.CONFIG.command[command].slug}`] = 1; }
       for (const equipmentClass of this.equipmentClasses) { data[`class.${equipmentClass}`] = 1; }
       return data;
     }

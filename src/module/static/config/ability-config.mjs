@@ -163,24 +163,24 @@ export default {
   maneuver: {
     active: /** @type {Teriock.Config.ManeuverEntry} */ {
       executionTimes: {
-        a0: { label: "TERIOCK.TERMS.ExecutionTime.active.0" },
-        a1: { actions: 1, label: "TERIOCK.TERMS.ExecutionTime.active.1" },
-        a2: { actions: 2, label: "TERIOCK.TERMS.ExecutionTime.active.2" },
-        a3: { actions: 3, label: "TERIOCK.TERMS.ExecutionTime.active.3" },
+        a0: { label: "TERIOCK.TERMS.ExecutionTime.active.0", slug: "a0" },
+        a1: { actions: 1, label: "TERIOCK.TERMS.ExecutionTime.active.1", slug: "a1" },
+        a2: { actions: 2, label: "TERIOCK.TERMS.ExecutionTime.active.2", slug: "a2" },
+        a3: { actions: 3, label: "TERIOCK.TERMS.ExecutionTime.active.3", slug: "a3" },
       },
       identifier: "core:active-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.active",
     },
     reactive: /** @type {Teriock.Config.ManeuverEntry} */ {
       executionTimes: {
-        r0: { label: "TERIOCK.TERMS.ExecutionTime.reactive.0" },
-        r1: { label: "TERIOCK.TERMS.ExecutionTime.reactive.1", reactions: 1 },
+        r0: { label: "TERIOCK.TERMS.ExecutionTime.reactive.0", slug: "r0" },
+        r1: { label: "TERIOCK.TERMS.ExecutionTime.reactive.1", reactions: 1, slug: "r1" },
       },
       identifier: "core:reactive-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.reactive",
     },
     passive: /** @type {Teriock.Config.ManeuverEntry} */ {
-      executionTimes: { passive: { label: "TERIOCK.TERMS.Maneuver.passive" } },
+      executionTimes: { passive: { label: "TERIOCK.TERMS.Maneuver.passive", slug: "passive" } },
       identifier: "core:passive-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.passive",
     },
@@ -189,7 +189,7 @@ export default {
         longRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.longRest", slug: "long-rest" },
         shortRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.shortRest", slug: "short-rest" },
 
-        custom: { label: "TERIOCK.TERMS.ExecutionTime.slow.custom" },
+        custom: { label: "TERIOCK.TERMS.ExecutionTime.slow.custom", slug: "custom" },
       },
       identifier: "core:slow-maneuvers",
       label: "TERIOCK.TERMS.Maneuver.slow",

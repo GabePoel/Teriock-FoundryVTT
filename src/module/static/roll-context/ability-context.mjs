@@ -1,5 +1,4 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import { toSlug } from "../../utils/_module.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
@@ -56,8 +55,8 @@ Hooks.once("teriock.identifiersInit", () => {
     });
   });
   Object.values(TERIOCK.CONFIG.ability.maneuver).forEach(m => {
-    Object.entries(m.executionTimes).forEach(([k, v]) => {
-      abilityContext[`time.${toSlug(k, { convertCamel: true })}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", {
+    Object.values(m.executionTimes).forEach(v => {
+      abilityContext[`time.${v.slug}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", {
         name: v.label,
       });
     });

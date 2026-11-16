@@ -1,5 +1,4 @@
 import { preLocalizeObject } from "../../helpers/localization.mjs";
-import { toSlug } from "../../utils/_module.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
@@ -61,8 +60,8 @@ Hooks.once("teriock.identifiersInit", () => {
   Object.entries(game.teriock.identifiers.getNames("property", { permission: "LIMITED" })).forEach(([k, name]) => {
     armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name });
   });
-  Object.entries(TERIOCK.CONFIG.command).filter(([_k, v]) => v.numeric).forEach(([k, v]) => {
-    armamentContext[`command.${toSlug(k, { convertCamel: true })}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", {
+  Object.values(TERIOCK.CONFIG.command).filter(v => v.numeric).forEach(v => {
+    armamentContext[`command.${v.slug}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.command", {
       name: v.label,
     });
   });

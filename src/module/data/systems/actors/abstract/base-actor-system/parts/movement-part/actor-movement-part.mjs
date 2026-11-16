@@ -1,4 +1,4 @@
-import { objectMap, toSlug } from "../../../../../../../utils/_module.mjs";
+import { objectMap } from "../../../../../../../utils/_module.mjs";
 import { MultiChangeField } from "../../../../../../fields/_module.mjs";
 import { terrainsField } from "../../../../../../fields/tools/builders.mjs";
 import { initialBoolean } from "../../../../../../fields/tools/initializers.mjs";
@@ -124,8 +124,8 @@ export default function ActorMovementPart(Base) {
     getRollData() {
       const rollData = super.getRollData();
       rollData.speed = this.movementSpeed;
-      for (const k of Object.keys(TERIOCK.CONFIG.character.movement)) {
-        rollData[`speed.${toSlug(k, { convertCamel: true })}`] = this.speedAdjustments[k] || 0;
+      for (const [k, v] of Object.entries(TERIOCK.CONFIG.character.movement)) {
+        rollData[`speed.${v.slug}`] = this.speedAdjustments[k] || 0;
       }
       for (const terrain of this.terrains) { rollData[`terrain.${terrain}`] = 1; }
       return rollData;
