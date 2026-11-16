@@ -120,7 +120,7 @@ export default class FallExecution extends BaseExecution {
     const d4 = this.water ? Math.clamp(increments - 2, 0, 2) : 0;
     const d6 = this.water ? Math.clamp(increments - 4, 0, 18) : Math.min(increments, 20);
     const formula = FormulaField.sum(d4 ? `${d4}d4` : "", d6 ? `${d6}d6` : "");
-    const types = Array.from(this.damageTypes, t => parseIdentifier(t).identifier);
+    const types = Array.from(this.damageTypes, t => parseIdentifier(t).slug);
     this.updateSource({ formula: FormulaField.addTypes(formula, types) });
     await super._prepareFormula();
   }

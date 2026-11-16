@@ -1,4 +1,4 @@
-import { HTMLIdentifierInputElement } from "../../../applications/elements/_module.mjs";
+import { HTMLSlugInputElement } from "../../../applications/elements/_module.mjs";
 import { prepareSuggestions } from "../tools/suggestions.mjs";
 import { validateSlug } from "../tools/validators.mjs";
 
@@ -41,7 +41,7 @@ export default class SlugField extends StringField {
     config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
       types: config.type ? [config.type] : [],
     });
-    return HTMLIdentifierInputElement.create(config);
+    return HTMLSlugInputElement.create(config);
   }
 
   /** @inheritDoc */

@@ -46,7 +46,7 @@ export default class IdentifiersRegistry {
   }
 
   /**
-   * Registration of Document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
+   * Registration of Document UUIDs keyed by type, then by slug. Values are Maps of UUIDs to their
    * priority score and name.
    * @type {Map<Teriock.Documents.CommonType|null, Map<Slug, Map<UUID<IdentifiableDocument>, TrackedUuid>>>}
    */
@@ -192,7 +192,7 @@ export default class IdentifiersRegistry {
   #track(identifier, uuid, data = {}) {
     const parsed = foundry.utils.parseUuid(uuid);
     if (!this.#checkIfTrackable(parsed)) { return; }
-    const { identifier: id, type } = parseIdentifier(identifier);
+    const { slug: id, type } = parseIdentifier(identifier);
     if (!this.#identifiers.has(type)) { this.#identifiers.set(type, new Map()); }
     const typeMap = this.#identifiers.get(type);
     if (!typeMap.has(id)) { typeMap.set(id, new Map()); }
@@ -259,7 +259,7 @@ export default class IdentifiersRegistry {
    */
   get(identifier, options = {}) {
     if (!this.initialized) { return undefined; }
-    const { identifier: id, type } = parseIdentifier(identifier);
+    const { slug: id, type } = parseIdentifier(identifier);
     const group = this.#identifiers.get(type)?.get(id);
     if (!group || group.size === 0) { return undefined; }
     return this.#getCanonical(group, this.#resolveLookupOptions(options))?.uuid;
@@ -298,7 +298,7 @@ export default class IdentifiersRegistry {
    */
   getImg(identifier, options = {}) {
     if (!this.initialized) { return undefined; }
-    const { identifier: id, type } = parseIdentifier(identifier);
+    const { slug: id, type } = parseIdentifier(identifier);
     const group = this.#identifiers.get(type)?.get(id);
     if (!group || group.size === 0) { return undefined; }
     return this.#getCanonical(group, this.#resolveLookupOptions(options))?.entry.img;
@@ -316,10 +316,10 @@ export default class IdentifiersRegistry {
     if (!this.initialized) { return undefined; }
     let out;
     const parsed = parseIdentifier(identifier);
-    const { identifier: id, type } = parsed;
+    const { slug: id, type } = parsed;
     const group = this.#identifiers.get(type)?.get(id);
     if (group?.size) { out = this.#getCanonical(group, this.#resolveLookupOptions(options))?.entry.name; }
-    return options.forced ? (out || parsed.identifier || "") : out;
+    return options.forced ? (out || parsed.slug || "") : out;
   }
 
   /**
@@ -404,7 +404,7 @@ export default class IdentifiersRegistry {
    * @param {UUID<IdentifiableDocument>} uuid
    */
   untrack(identifier, uuid) {
-    const { identifier: id, type } = parseIdentifier(identifier);
+    const { slug: id, type } = parseIdentifier(identifier);
     const typeMap = this.#identifiers.get(type);
     if (!typeMap) { return; }
     const group = typeMap.get(id);

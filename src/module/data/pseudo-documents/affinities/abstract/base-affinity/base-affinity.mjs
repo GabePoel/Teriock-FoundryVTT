@@ -202,7 +202,7 @@ export default class BaseAffinity
   }
 
   /**
-   * The typed identifier for whatever this targets.
+   * The identifier for whatever this targets.
    * @returns {Identifier}
    */
   get targetIdentifier() {

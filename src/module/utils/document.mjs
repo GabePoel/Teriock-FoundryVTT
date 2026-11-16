@@ -38,8 +38,8 @@ export async function resolveDocuments(syncDocs, options = {}) {
  * @returns {Teriock.System.ResolvedIdentifier}
  */
 export function parseIdentifier(identifier) {
-  const [type, ident] = identifier?.includes(":") ? identifier.split(":") : [null, identifier];
-  return { identifier: ident, type };
+  const [type, slug] = identifier?.includes(":") ? identifier.split(":") : [null, identifier];
+  return { slug, type };
 }
 
 /**
@@ -151,7 +151,7 @@ export async function fromIdentifier(identifier, options = {}) {
 }
 
 /**
- * Get a document from some key that specifies it. This could be either a typed identifier or a UUID.
+ * Get a document from some key that specifies it. This could be either an identifier or a UUID.
  * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {Promise<TeriockDocument|null>}
@@ -164,7 +164,7 @@ export async function fromKey(uuidOrIdentifier, options = {}) {
 }
 
 /**
- * Synchronously get a document from some key that specifies it. This could be either a typed identifier or a UUID.
+ * Synchronously get a document from some key that specifies it. This could be either an identifier or a UUID.
  * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {TeriockDocument|null}

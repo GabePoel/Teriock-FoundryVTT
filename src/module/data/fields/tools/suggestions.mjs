@@ -25,7 +25,7 @@ export function categorySuggestions(category) {
  * @param {Teriock.Fields.IdentifierSuggestions|null} [suggestions]
  * @param {object} [options]
  * @param {string[]} [options.types] - Identifier types to pull registry names from when `suggestions` is `true`.
- * @param {boolean} [options.typed] - Whether to key registry names by typed identifier.
+ * @param {boolean} [options.typed] - Whether to key registry names by identifier.
  * @returns {FormSelectOption[]|undefined}
  */
 export function prepareSuggestions(suggestions, { typed = false, types = [] } = {}) {

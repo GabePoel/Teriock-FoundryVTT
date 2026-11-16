@@ -9,21 +9,21 @@ const { setInputAttributes } = foundry.applications.fields;
  */
 
 /**
- * @typedef IdentifierInputConfig
+ * @typedef SlugInputConfig
  * @property {string|null} [reset] Slug applied when the reset button is clicked.
  */
 
 /**
- * A text input for plain identifiers with an optional reset button.
+ * A text input for slugs with an optional reset button.
  */
-export default class HTMLIdentifierInputElement extends AbstractAutocompleteSuggestionsElement {
+export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestionsElement {
   /** @inheritDoc */
-  static tagName = "identifier-input";
+  static tagName = "slug-input";
 
   /**
-   * Create an HTMLIdentifierInputElement using provided configuration data.
-   * @param {FormInputConfig<string> & IdentifierInputConfig & AutocompleteSuggestionsInputConfig} config
-   * @returns {HTMLIdentifierInputElement}
+   * Create an HTMLSlugInputElement using provided configuration data.
+   * @param {FormInputConfig<string> & SlugInputConfig & AutocompleteSuggestionsInputConfig} config
+   * @returns {HTMLSlugInputElement}
    */
   static create(config) {
     const el = document.createElement(this.tagName);

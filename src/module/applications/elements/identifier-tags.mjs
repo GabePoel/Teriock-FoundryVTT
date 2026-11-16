@@ -13,7 +13,7 @@ const { fromUuid } = foundry.utils;
 
 /**
  * @typedef IdentifierTagsInputConfig
- * @property {string[]} [types] - Allowed type prefixes for typed identifiers.
+ * @property {string[]} [types] - Allowed type prefixes for identifiers.
  */
 
 /**

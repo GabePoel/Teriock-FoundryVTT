@@ -31,8 +31,8 @@ export default function WikiSystemMixin(Base) {
      * @returns {string}
      */
     get wikiPage() {
-      const { identifier, type } = parseIdentifier(this.wikiIdentifier);
-      return TERIOCK.CONFIG.wiki.index[type]?.[identifier] ?? "";
+      const { slug, type } = parseIdentifier(this.wikiIdentifier);
+      return TERIOCK.CONFIG.wiki.index[type]?.[slug] ?? "";
     }
 
     /**
