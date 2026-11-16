@@ -15,7 +15,10 @@ const { JournalEntryPage } = foundry.documents;
 export default class TeriockJournalEntryPage
   extends mixClasses(JournalEntryPage, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin, IdentifierDocumentMixin)
 {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Identifiers
+   */
   static documentMetadata = mergeMetadata(super.documentMetadata, { identifier: { depth: 2 } });
 
   /**
@@ -27,7 +30,10 @@ export default class TeriockJournalEntryPage
     return { system: { img: CONFIG.JournalEntryPage.dataModels[data?.type]?.metadata?.img } };
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Identifiers
+   */
   static getIdentifierType(doc) {
     if (doc.type === "rule") {
       const ruleType = doc.getFlag("teriock", "ruleType") ?? doc.parent?.getFlag("teriock", "ruleType");

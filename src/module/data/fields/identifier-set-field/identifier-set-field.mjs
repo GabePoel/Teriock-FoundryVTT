@@ -9,6 +9,7 @@ const { SetField } = foundry.data.fields;
 
 /**
  * A special {@link SetField} for a set of {@link IdentifierField} values.
+ * @category Identifiers
  */
 export default class IdentifierSetField extends SetField {
   /**

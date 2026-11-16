@@ -18,6 +18,7 @@ const { fromUuid } = foundry.utils;
 
 /**
  * A custom HTMLElement used to render a set of associated documents referenced by identifier.
+ * @category Identifiers
  */
 export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutocompleteSuggestionsElement) {
   /** @inheritDoc */

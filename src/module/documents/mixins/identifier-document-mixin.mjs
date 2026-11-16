@@ -4,6 +4,7 @@ import { mergeMetadata } from "../../utils/_module.mjs";
  * Mixin for identifier tracking.
  * @template {MixinBase} T
  * @param {T} Base
+ * @category Identifiers
  */
 export default function IdentifierDocumentMixin(Base) {
   /** @mixin */

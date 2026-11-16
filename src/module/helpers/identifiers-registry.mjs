@@ -37,6 +37,7 @@ const TYPE_FIELDS = { equipment: "equipmentType", mount: "mountType" };
  * only one canonical Document for each identifier. Documents in Compendium packs are preferred over ones in the world
  * for establishing a single source of truth in regard to what identifiers refer to.
  * @implements {Teriock.Registries.SingleRegistry<Identifier, UUID<IdentifiableDocument>>}
+ * @category Identifiers
  */
 export default class IdentifiersRegistry {
   constructor() {

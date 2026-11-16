@@ -10,6 +10,7 @@ const { StringField } = foundry.data.fields;
 
 /**
  * A special {@link StringField} for a {@link Slug}.
+ * @category Identifiers
  */
 export default class SlugField extends StringField {
   /** @inheritDoc */

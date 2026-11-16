@@ -9,10 +9,16 @@ const { JournalEntry } = foundry.documents;
  * @mixes BaseDocument
  */
 export default class TeriockJournalEntry extends mixClasses(JournalEntry, BaseDocumentMixin) {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Identifiers
+   */
   static documentMetadata = mergeMetadata(super.documentMetadata, { identifier: { trackEmbeds: true } });
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @category Identifiers
+   */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     for (const page of this.pages) { game.teriock.identifiers.untrackDocument(page); }

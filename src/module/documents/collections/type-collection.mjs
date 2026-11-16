@@ -148,6 +148,7 @@ export default class TypeCollection extends Collection {
    * All the identifiers in this collection.
    * @returns {Set<Identifier>}
    * @todo Add caching.
+   * @category Identifiers
    */
   get identifiers() {
     return new Set(Object.keys(this.getNames()));
@@ -261,6 +262,7 @@ export default class TypeCollection extends Collection {
    * @param {object} [options]
    * @param {(document: TDocument) => boolean} [options.filter] - Only include documents that pass this filter.
    * @returns {Record<Identifier, string>}
+   * @category Identifiers
    */
   getNames({ filter } = {}) {
     const names = {};

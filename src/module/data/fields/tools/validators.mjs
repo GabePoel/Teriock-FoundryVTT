@@ -5,6 +5,7 @@ import { isSlug } from "../../../utils/_module.mjs";
  * @param {string} slug
  * @param {object} [options]
  * @param {boolean} [options.strict=false] - Nullish values are rejected.
+ * @category Identifiers
  */
 export function validateSlug(slug, options = {}) {
   if (["", null, undefined].includes(slug)) { return !options.strict; }
@@ -18,6 +19,7 @@ export function validateSlug(slug, options = {}) {
  * @param {object} [options]
  * @param {string[]} [options.types] - Allowed document type prefixes. When omitted, any type is accepted.
  * @param {boolean} [options.strict=false] - Identifier must be fully formatted. Nullish values are rejected.
+ * @category Identifiers
  */
 export function validateIdentifier(identifier, options = {}) {
   if (["", null, undefined].includes(identifier)) { return !options.strict; }

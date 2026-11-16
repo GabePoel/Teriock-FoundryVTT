@@ -7,6 +7,7 @@ import { SlugField } from "../../../fields/_module.mjs";
 /**
  * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
+ * @category Identifiers
  */
 export default function IdentifierSystemMixin(Base) {
   /**

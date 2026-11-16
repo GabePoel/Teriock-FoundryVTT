@@ -119,6 +119,7 @@ export default class TeriockManager {
 
   /**
    * Initialize the identifiers registry.
+   * @category Identifiers
    */
   initializeIdentifiers() {
     this.identifiers._initialize();

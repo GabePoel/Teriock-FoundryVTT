@@ -6,6 +6,7 @@ const { StringField } = foundry.data.fields;
 
 /**
  * A special {@link StringField} for an {@link Identifier}.
+ * @category Identifiers
  */
 export default class IdentifierField extends StringField {
   /** @inheritDoc */

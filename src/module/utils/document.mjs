@@ -36,6 +36,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
  * Parse an identifier into its component parts.
  * @param {Identifier|Slug} identifier
  * @returns {Teriock.System.ResolvedIdentifier}
+ * @category Identifiers
  */
 export function parseIdentifier(identifier) {
   const [type, slug] = identifier?.includes(":") ? identifier.split(":") : [null, identifier];
@@ -46,6 +47,7 @@ export function parseIdentifier(identifier) {
  * Get a document's name from an identifier.
  * @param {Identifier} identifier
  * @returns {string}
+ * @category Identifiers
  */
 export function getName(identifier) {
   return game.teriock.identifiers.getName(identifier, { forced: true });
@@ -55,6 +57,7 @@ export function getName(identifier) {
  * Infer a document's icon from an identifier.
  * @param {Identifier|Slug} identifier
  * @returns {string}
+ * @category Identifiers
  */
 export function getIcon(identifier) {
   const parsed = parseIdentifier(identifier);
@@ -89,6 +92,7 @@ export function getTypeLabel(type) {
  * @param {Identifier|Slug|string} lookup
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} [relativeTo]
  * @returns {Promise<TeriockDocument|null>}
+ * @category Identifiers
  */
 export async function findBestDocument(lookup, relativeTo) {
   if (!lookup) { return null; }
@@ -103,6 +107,7 @@ export async function findBestDocument(lookup, relativeTo) {
  * @param {Slug|Identifier} identifier
  * @param {TeriockActiveEffect|TeriockActor|TeriockItem} relativeTo - The document to compare against.
  * @returns {Promise<TeriockActiveEffect|TeriockActor|TeriockItem|null>}
+ * @category Identifiers
  */
 export async function fromIdentifierLocal(identifier, relativeTo) {
   if (!identifier || !relativeTo?.previewed?.getContents) { return null; }
@@ -130,6 +135,7 @@ export async function fromQualifier(document, qualifier) {
  * @param {Identifier} identifier
  * @param {Teriock.System.SyncFetchOptions} [options]
  * @returns {TeriockActiveEffect|TeriockActor|TeriockItem|null}
+ * @category Identifiers
  */
 export function fromIdentifierSync(identifier, options = {}) {
   return foundry.utils.fromUuidSync(game.teriock.identifiers.get(identifier), options);
@@ -140,6 +146,7 @@ export function fromIdentifierSync(identifier, options = {}) {
  * @param {Identifier} identifier
  * @param {Teriock.System.FetchOptions} [options]
  * @returns {Promise<TeriockDocument|null>}
+ * @category Identifiers
  */
 export async function fromIdentifier(identifier, options = {}) {
   const { relativeOnly, relativeTo, ...fetchOptions } = options;
@@ -155,6 +162,7 @@ export async function fromIdentifier(identifier, options = {}) {
  * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {Promise<TeriockDocument|null>}
+ * @category Identifiers
  */
 export async function fromKey(uuidOrIdentifier, options = {}) {
   if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {
@@ -168,6 +176,7 @@ export async function fromKey(uuidOrIdentifier, options = {}) {
  * @param {Identifier|UUID} uuidOrIdentifier
  * @param {Teriock.System.FetchOptions} options
  * @returns {TeriockDocument|null}
+ * @category Identifiers
  */
 export function fromKeySync(uuidOrIdentifier, options = {}) {
   if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {

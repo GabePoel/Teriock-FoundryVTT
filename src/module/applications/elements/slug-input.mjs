@@ -15,6 +15,7 @@ const { setInputAttributes } = foundry.applications.fields;
 
 /**
  * A text input for slugs with an optional reset button.
+ * @category Identifiers
  */
 export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestionsElement {
   /** @inheritDoc */

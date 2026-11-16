@@ -82,6 +82,7 @@ function addDeveloperModeLoggingListener(application, _element, _context, option
  * @param {object} _context
  * @param {ApplicationRenderOptions} options
  * @see {renderApplicationV2}
+ * @category Identifiers
  */
 function addIdentifierClipboardListener(application, _element, _context, options) {
   if (!options.isFirstRender || !application.window.header) { return; }
