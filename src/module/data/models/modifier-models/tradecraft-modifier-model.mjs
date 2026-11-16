@@ -18,7 +18,7 @@ export default class TradecraftModifierModel extends BaseModifierModel {
 
   /** @inheritDoc */
   get term() {
-    return `@tc.${this.key}.score`;
+    return `@tradecraft.${this.key}.score`;
   }
 
   /** @inheritDoc */
