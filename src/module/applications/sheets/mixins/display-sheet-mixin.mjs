@@ -148,7 +148,7 @@ export default function DisplaySheetMixin(Base) {
      */
     async _prepareDisplayFields(context) {
       const expandedDisplayFields = this.#expandFields(this.document.system._displayFields);
-      const [buttonFields, valueFields] = expandedDisplayFields.partition(f => f.value);
+      const [buttonFields, valueFields] = expandedDisplayFields.partition(f => Boolean(f.value));
       context.displayFieldButtons = buttonFields.map(f => {
         return { editable: f.editable, fieldPath: f.path, name: f?.button || f?.label || f.schema?.label };
       }).filter(b => b.editable !== false);
