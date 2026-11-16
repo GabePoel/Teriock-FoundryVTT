@@ -22,20 +22,20 @@ export default function IdentifierSystemMixin(Base) {
       super._onChangeCreateDialog(dialog);
       const form = dialog.element.querySelector("form");
       const { name } = form.elements;
-      const defaultIdentifier = foundry.utils.getDocumentClass(this.metadata.documentName).getIdentifierSlug({
+      const defaultSlug = foundry.utils.getDocumentClass(this.metadata.documentName).getIdentifierSlug({
         name: name.value.trim() || name.placeholder,
       });
       if (!form.elements["system.identifier"]) {
         const group = this.schema.fields.identifier.toFormGroup({ hint: "" }, {
           name: "system.identifier",
-          reset: defaultIdentifier,
+          reset: defaultSlug,
         });
         group.dataset.systemField = "";
         name.closest(".form-group").after(group);
       }
       const identifier = form.elements["system.identifier"];
-      identifier.setAttribute("reset", defaultIdentifier);
-      (identifier.querySelector("input") ?? identifier).placeholder = defaultIdentifier;
+      identifier.setAttribute("reset", defaultSlug);
+      (identifier.querySelector("input") ?? identifier).placeholder = defaultSlug;
     }
 
     /** @inheritDoc */

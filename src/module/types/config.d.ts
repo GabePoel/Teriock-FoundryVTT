@@ -40,9 +40,9 @@ declare global {
       code: string;
       conversion: number;
       equipmentType: Slug;
-      identifier: Slug;
       label: string;
       plural: string;
+      slug: Slug;
       symbol: string;
       weight: number;
     };

@@ -156,18 +156,18 @@ export default class IdentifiersRegistry {
   /**
    * Refresh the cached type entry for an identifier.
    * @param {string} type
-   * @param {Slug} identifier
+   * @param {Slug} slug
    */
-  #refreshType(type, identifier) {
+  #refreshType(type, slug) {
     const types = this.#types.get(type);
     if (!types) { return; }
-    const group = this.#identifiers.get(type)?.get(identifier);
+    const group = this.#identifiers.get(type)?.get(slug);
     const canonical = group && this.#getCanonical(group);
     if (canonical?.entry.isType) {
       const { img, name } = canonical.entry;
-      types.set(identifier, { img, isType: true, name, uuid: canonical.uuid });
+      types.set(slug, { img, isType: true, name, uuid: canonical.uuid });
     } else {
-      types.delete(identifier);
+      types.delete(slug);
     }
   }
 

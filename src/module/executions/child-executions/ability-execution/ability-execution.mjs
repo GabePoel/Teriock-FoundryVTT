@@ -376,15 +376,15 @@ export default class AbilityExecution extends mixClasses(DocumentExecution, Atta
     let armament;
     if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
     if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
-    const weaponPropertyIdentifiers = ["weapon"];
-    if (this.source.system.identifier === "basic-attack") { weaponPropertyIdentifiers.push("bashing"); }
-    armament = this._reselectArmamentForProperties(armament, "weapon", weaponPropertyIdentifiers);
+    const weaponPropertySlugs = ["weapon"];
+    if (this.source.system.identifier === "basic-attack") { weaponPropertySlugs.push("bashing"); }
+    armament = this._reselectArmamentForProperties(armament, "weapon", weaponPropertySlugs);
     armament = this._reselectArmamentForProperties(armament, "bite", ["biting"]);
-    const handPropertyIdentifiers = ["handy"];
+    const handPropertySlugs = ["handy"];
     if (this.actor?.previewedTypes.ability?.some(a => a.active && a.system.identifier === "staff-touch")) {
-      handPropertyIdentifiers.push("magelore");
+      handPropertySlugs.push("magelore");
     }
-    armament = this._reselectArmamentForProperties(armament, "hand", handPropertyIdentifiers);
+    armament = this._reselectArmamentForProperties(armament, "hand", handPropertySlugs);
     armament = this._reselectArmamentForEquipmentClass(armament, "armor", "armor");
     armament = this._reselectArmamentForEquipmentClass(armament, "shield", "shields");
     return armament;

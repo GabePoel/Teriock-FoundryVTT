@@ -122,7 +122,7 @@ export default class VirtualCondition
 
   /**
    * The identifier for this condition.
-   * @returns {Identifier<TeriockActiveEffect<"condition">>}
+   * @returns {Identifier<"condition">}
    */
   get identifier() {
     return `condition:${this.status}`;

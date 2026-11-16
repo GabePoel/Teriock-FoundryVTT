@@ -86,9 +86,9 @@ export default class HTMLSlugInputElement extends AbstractAutocompleteSuggestion
     this._applyInputAttributes(this._primaryInput);
     if (this.reset) {
       this.#resetButton = createElement("button", {
-        ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
+        ariaLabel: _loc("TERIOCK.ELEMENTS.SLUG_INPUT.reset"),
         className: `icon ${makeIconClass(TERIOCK.DISPLAY.icons.manifest.ui.reset, "button")}`,
-        dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
+        dataset: { tooltip: "TERIOCK.ELEMENTS.SLUG_INPUT.reset" },
         type: "button",
       });
       group.append(this.#resetButton);

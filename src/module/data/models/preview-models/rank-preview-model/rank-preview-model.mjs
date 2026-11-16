@@ -56,7 +56,7 @@ export default class RankPreviewModel extends BasePreviewModel {
       let matches;
       if (document?.type === "archetype") {
         matches = this._checkValueFilter(f.archetype, document?.system?.identifier)
-          && (!f.class || document.system.classIdentifiers?.has(f.class));
+          && (!f.class || document.system.classSlugs?.has(f.class));
       } else {
         matches = this._checkValueFilter(f.archetype, system?.archetype)
           && this._checkValueFilter(f.class, system?.class);

@@ -247,14 +247,14 @@ export default function EquipmentIdentificationPart(Base) {
      */
     async unidentify() {
       if (this.identification.identified && game.user.isGM) {
-        const uncheckedPropertyIdentifiers = [...TERIOCK.CONFIG.equipment.unidentifiedProperties];
+        const uncheckedPropertySlugs = [...TERIOCK.CONFIG.equipment.unidentifiedProperties];
         const reference = await fromIdentifier(`equipment:${this.equipmentType}`);
         if (reference) {
-          uncheckedPropertyIdentifiers.push(...reference.previewedTypes.property.map(p => p.system.identifier));
+          uncheckedPropertySlugs.push(...reference.previewedTypes.property.map(p => p.system.identifier));
         }
         const revealed = this.parent.children.documentsByTag.revealable.filter(c => c.system.revealed);
         const checked = revealed.filter(e =>
-          e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier)
+          e.type !== "property" || !uncheckedPropertySlugs.includes(e.system.identifier)
         ).map(e => e.uuid);
         const toReveal = await DocumentSelector.selectMulti(revealed, {
           checked,
