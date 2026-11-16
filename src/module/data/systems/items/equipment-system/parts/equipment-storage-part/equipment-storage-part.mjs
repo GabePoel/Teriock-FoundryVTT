@@ -66,7 +66,7 @@ export default function EquipmentStoragePart(Base) {
         e.master?.uuid === elder.uuid
         && e.uuid !== this.parent.uuid
         && e.name === this.parent.name
-        && e.system.identifier === this._source.identifier
+        && e.system.identifier === this.identifier
         && e.system.consumption.enabled
         && e.system.quantity.value < e.system.quantity.max
       );

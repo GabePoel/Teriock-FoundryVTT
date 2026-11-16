@@ -369,7 +369,8 @@ export default class IdentifiersRegistry {
         const identifier = pack.documentClass.getIdentifier(d);
         const { type, uuid } = d;
         if (!identifier || !uuid || d.system?._sup) { continue; }
-        const isType = Boolean(TYPE_FIELDS[type]) && d.system?.[TYPE_FIELDS[type]] === d.system?.identifier;
+        const isType = Boolean(TYPE_FIELDS[type])
+          && d.system?.[TYPE_FIELDS[type]] === pack.documentClass.getIdentifierSlug(d);
         this.#track(identifier, uuid, { img: d.img, isType, name: d.name });
       }
     }
@@ -393,7 +394,7 @@ export default class IdentifiersRegistry {
     const identifier = document.identifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
     const field = TYPE_FIELDS[document.type];
-    const isType = Boolean(field) && document.system?.[field] === identifier;
+    const isType = Boolean(field) && document.system?.[field] === document.system?.identifier;
     this.track(identifier, uuid, { img: document.img, isType, name: document.name });
   }
 

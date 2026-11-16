@@ -176,7 +176,7 @@ export default class SpeciesSystem
    * @returns {TypedIdentifier|null}
    */
   get wikiIdentifier() {
-    return this.identifier ? `creature:${this.identifier}` : null;
+    return `creature:${this.identifier}`;
   }
 
   /** @inheritDoc */

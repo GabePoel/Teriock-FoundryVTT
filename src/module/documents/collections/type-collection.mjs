@@ -266,8 +266,9 @@ export default class TypeCollection extends Collection {
     const names = {};
     for (const d of this.contents) {
       if (filter && !filter(d)) { continue; }
-      const identifier = foundry.utils.getProperty(d, "system.identifier");
-      if (d?.type && identifier) { names[`${d.type}:${identifier}`] = d.name; }
+      const documentName = this._getTypeModel(d?.type)?.metadata.documentName;
+      const identifier = foundry.utils.getDocumentClass(documentName)?.getIdentifier?.(d);
+      if (identifier) { names[identifier] = d.name; }
     }
     return names;
   }

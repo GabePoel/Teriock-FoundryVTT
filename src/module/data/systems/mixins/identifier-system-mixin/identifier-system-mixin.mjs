@@ -42,6 +42,12 @@ export default function IdentifierSystemMixin(Base) {
     static defineSchema() {
       return Object.assign(super.defineSchema(), { identifier: new IdentifierField() });
     }
+
+    /** @inheritDoc */
+    prepareBaseData() {
+      if (!this.identifier) { this.identifier = this.parent.constructor.getIdentifierSlug({ name: this.parent.name }); }
+      super.prepareBaseData();
+    }
   }
 
   return IdentifierSystem;

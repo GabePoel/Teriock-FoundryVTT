@@ -284,7 +284,7 @@ export default class AbilitySystem
    * @returns {boolean}
    */
   get isVirtual() {
-    return this.parent.inCompendium && this.parent.parent?.system.identifier === "basic-abilities";
+    return this.parent.inCompendium && this.parent.parent?.identifier === "power:basic-abilities";
   }
 
   /** @inheritDoc */

@@ -45,7 +45,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       name: path,
       placeholder,
       reset,
-      value: foundry.utils.getProperty(this.document, path),
+      value: foundry.utils.getProperty(this.document._source, path),
     };
   }
 
@@ -66,7 +66,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       label: schemaField.label,
       localize: true,
       name: path,
-      value: foundry.utils.getProperty(this.document, path),
+      value: foundry.utils.getProperty(this.document._source, path),
     };
   }
 
