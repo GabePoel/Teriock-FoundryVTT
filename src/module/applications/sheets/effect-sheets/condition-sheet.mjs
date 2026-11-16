@@ -17,7 +17,7 @@ export default class ConditionSheet extends DependeeSheet {
   async render(options) {
     // If this is a known condition, open its journal entry instead of its sheet. Information is displayed more nicely.
     if (this.document.isStatus && game.settings.get("teriock", "openConditionsAsJournalEntryPages")) {
-      const journal = await fromUuid("Compendium.teriock.rules.JournalEntry.condition0000000");
+      const journal = await fromUuid(TERIOCK.CONST.CONDITIONS_JOURNAL_UUID);
       const page = journal?.pages.find((p) => p.system.identifier === this.document.system.identifier);
       if (journal && page) {
         await journal.sheet.render(true);

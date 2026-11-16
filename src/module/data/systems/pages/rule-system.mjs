@@ -13,4 +13,10 @@ export default class RuleSystem extends mixClasses(BasePageSystem, WikiSystemMix
     img: TERIOCK.DISPLAY.thumbnails.manifest.document.rule,
     type: "rule",
   });
+
+  /** @inheritDoc */
+  get wikiIdentifier() {
+    if (this.parent.parent?.uuid === TERIOCK.CONST.CONDITIONS_JOURNAL_UUID) { return `condition:${this.identifier}`; }
+    return super.wikiIdentifier;
+  }
 }
