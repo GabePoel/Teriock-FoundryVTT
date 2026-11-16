@@ -7,9 +7,10 @@ const codeEnricher = {
   onRender: el => {
     el.addEventListener("click", async (ev) => {
       ev.stopImmediatePropagation();
-      await game.clipboard.copyPlainText(el.textContent);
+      const text = el.textContent.replace(/\p{Cf}/gu, "").trim();
+      await game.clipboard.copyPlainText(text);
       ui.notifications.info("TERIOCK.SHEETS.Common.NOTIFICATIONS.copiedToClipboard", {
-        format: { text: el.textContent },
+        format: { text },
       });
     });
   },
