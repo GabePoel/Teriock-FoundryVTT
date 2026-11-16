@@ -175,7 +175,7 @@ declare global {
 
     export type TerrainEntry = { img: string, label: string };
 
-    export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number };
+    export type ExecutionTimeEntry = { actions?: number, label: string, reactions?: number, slug?: Slug };
 
     export type ManeuverEntry = {
       executionTimes: Record<string, ExecutionTimeEntry>;

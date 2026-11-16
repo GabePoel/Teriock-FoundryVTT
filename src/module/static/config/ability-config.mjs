@@ -186,8 +186,8 @@ export default {
     },
     slow: /** @type {Teriock.Config.ManeuverEntry} */ {
       executionTimes: {
-        longRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.longRest" },
-        shortRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.shortRest" },
+        longRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.longRest", slug: "long-rest" },
+        shortRest: { label: "TERIOCK.TERMS.ExecutionTime.slow.shortRest", slug: "short-rest" },
 
         custom: { label: "TERIOCK.TERMS.ExecutionTime.slow.custom" },
       },
