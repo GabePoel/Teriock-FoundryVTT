@@ -1,10 +1,10 @@
 export { default as FormulaField } from "./formula-field/formula-field.mjs";
 export { default as IdentifierField } from "./identifier-field/identifier-field.mjs";
+export { default as IdentifierSetField } from "./identifier-set-field/identifier-set-field.mjs";
 export { default as LocalDocumentField } from "./local-document-field/local-document-field.mjs";
 export { default as MultiChangeField } from "./multi-change-field/multi-change-field.mjs";
 export { default as PseudoCollectionField } from "./pseudo-collection-field.mjs";
+export { default as SlugField } from "./slug-field/slug-field.mjs";
 export { default as TernaryField } from "./ternary-field.mjs";
 export * as tools from "./tools/_module.mjs";
-export { default as TypedIdentifierField } from "./typed-identifier-field/typed-identifier-field.mjs";
-export { default as TypedIdentifierSetField } from "./typed-identifier-set-field/typed-identifier-set-field.mjs";
 export { default as UnitField } from "./unit-field.mjs";

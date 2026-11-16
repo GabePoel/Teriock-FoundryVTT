@@ -4,7 +4,7 @@ import {
   getEnsureNoChildrenOperations,
   mergeMetadata,
 } from "../../../../utils/_module.mjs";
-import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
+import { IdentifierSetField } from "../../../fields/_module.mjs";
 import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -18,9 +18,9 @@ export default class ToggleChildrenAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      add: new TypedIdentifierSetField(),
+      add: new IdentifierSetField(),
       qualifier: qualifierField(),
-      remove: new TypedIdentifierSetField(),
+      remove: new IdentifierSetField(),
     });
   }
 

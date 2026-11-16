@@ -1,4 +1,4 @@
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { SlugField } from "../../../fields/_module.mjs";
 
 /**
  * @import { TypeDataModel } from "@common/abstract/_module.mjs";
@@ -40,7 +40,7 @@ export default function IdentifierSystemMixin(Base) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), { identifier: new IdentifierField() });
+      return Object.assign(super.defineSchema(), { identifier: new SlugField() });
     }
 
     /** @inheritDoc */

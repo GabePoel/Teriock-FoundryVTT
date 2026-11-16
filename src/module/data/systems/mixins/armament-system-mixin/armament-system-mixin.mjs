@@ -8,8 +8,8 @@ import {
   objectMap,
   toSlug,
 } from "../../../../utils/_module.mjs";
-import { FormulaField, IdentifierField, MultiChangeField, UnitField } from "../../../fields/_module.mjs";
-import { defenseField, identifierSetField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
+import { FormulaField, MultiChangeField, SlugField, UnitField } from "../../../fields/_module.mjs";
+import { defenseField, rollableFormulaField, slugSetField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { migrateIterables, migrateRename } from "../../../fields/tools/migrations.mjs";
 import { documentSettingsModels, RangeUnitModel } from "../../../models/_module.mjs";
@@ -64,9 +64,9 @@ export default function ArmamentSystemMixin(Base) {
         damage: new MultiChangeField({
           base: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
           twoHanded: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
-          types: new fields.SetField(new IdentifierField()),
+          types: new fields.SetField(new SlugField()),
         }, { multiChangePaths: ["base", "twoHanded"] }),
-        equipmentClasses: identifierSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
+        equipmentClasses: slugSetField(TERIOCK.CONFIG.equipment.equipmentClasses),
         range: new MultiChangeField({
           long: new UnitField(RangeUnitModel),
           melee: new fields.BooleanField({ initial: true }),
@@ -75,7 +75,7 @@ export default function ArmamentSystemMixin(Base) {
         }, { multiChangePaths: ["long", "short"] }),
         settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
         spellTurning: new fields.BooleanField(),
-        style: new IdentifierField({
+        style: new SlugField({
           initial: null,
           nullable: true,
           placeholder: _loc("COMMON.None"),

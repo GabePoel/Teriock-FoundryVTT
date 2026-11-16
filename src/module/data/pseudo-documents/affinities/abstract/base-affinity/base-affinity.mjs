@@ -1,5 +1,5 @@
 import { dotJoin, makeIcon, mergeMetadata, mixClasses, toCamelCase, toSlug } from "../../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../../fields/_module.mjs";
+import { SlugField } from "../../../../fields/_module.mjs";
 import { migrateThumbnails } from "../../../../fields/tools/migrations.mjs";
 import { categorySuggestions } from "../../../../fields/tools/suggestions.mjs";
 import { EmbeddableDataMixin, PanelDataMixin, UsableDataMixin } from "../../../../mixins/_module.mjs";
@@ -61,7 +61,7 @@ export default class BaseAffinity
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       category: new fields.StringField({ choices: TERIOCK.CONFIG.category, initial: "ability", required: true }),
-      identifier: new IdentifierField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
+      identifier: new SlugField({ blank: true, label: _loc("TERIOCK.COMMON.Identifier") }),
       img: new fields.FilePathField({ blank: true, categories: ["IMAGE"], initial: null, nullable: true }),
       name: new fields.StringField(),
     });

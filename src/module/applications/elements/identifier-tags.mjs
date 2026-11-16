@@ -1,4 +1,4 @@
-import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
+import { validateIdentifier } from "../../data/fields/tools/validators.mjs";
 import { listFormat } from "../../helpers/localization.mjs";
 import { getTypeLabel, isSlug, parseIdentifier, toSlug } from "../../utils/_module.mjs";
 import { AbstractAutocompleteSuggestionsElement, TagSetMixin } from "./abstract/_module.mjs";
@@ -118,7 +118,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
     identifier = identifier.split(":").map(part => toSlug(part)).join(":");
     if (!identifier) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank")); }
     const types = this.types;
-    if (!validateTypedIdentifier(identifier, { types })) {
+    if (!validateIdentifier(identifier, { types })) {
       const parsed = parseIdentifier(identifier);
       if (!parsed.type) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (types.length) {

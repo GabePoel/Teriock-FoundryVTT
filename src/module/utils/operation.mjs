@@ -94,7 +94,7 @@ export async function getEnsureChildrenOperations(document, identifiers) {
   if (identifiers.length === 0) { return []; }
   const existing = document.children.identifiers;
   const candidates = await Promise.all(identifiers.map(async identifier => {
-    if (!(teriock.data.fields.tools.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
+    if (!(teriock.data.fields.tools.validators.validateIdentifier(identifier, { strict: true }))) { return; }
     if (existing?.has(identifier)) { return; }
     const doc = await fromIdentifier(identifier);
     if (!doc) { return; }

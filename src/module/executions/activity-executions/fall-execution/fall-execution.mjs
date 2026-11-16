@@ -1,4 +1,4 @@
-import { FormulaField, TypedIdentifierSetField } from "../../../data/fields/_module.mjs";
+import { FormulaField, IdentifierSetField } from "../../../data/fields/_module.mjs";
 import { ChangeMovementAutomation, StatusAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { parseIdentifier } from "../../../utils/_module.mjs";
@@ -19,7 +19,7 @@ export default class FallExecution extends BaseExecution {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      damageTypes: new TypedIdentifierSetField({ suggestions: true, types: ["damage"] }),
+      damageTypes: new IdentifierSetField({ suggestions: true, types: ["damage"] }),
       distance: new fields.NumberField({ blank: true, min: 0, placeholder: "0" }),
       water: new fields.BooleanField(),
     });

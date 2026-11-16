@@ -3,7 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { choicesWithNone } from "../../../../helpers/localization.mjs";
 import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
-import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
+import { FormulaField, SlugField } from "../../../fields/_module.mjs";
 import { categorySuggestions } from "../../../fields/tools/suggestions.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
 
@@ -48,7 +48,7 @@ export default class ChoicesAutomation extends BaseAutomation {
       max: new fields.NumberField({ initial: null, nullable: true, placeholder: `+ ${TERIOCK.CONST.INF_CODE}` }),
       min: new fields.NumberField({ initial: null, nullable: true, placeholder: `\uF068 ${TERIOCK.CONST.INF_CODE}` }),
       name: new fields.StringField(),
-      namespace: new IdentifierField(),
+      namespace: new SlugField(),
       preset: new fields.StringField({
         blank: true,
         initial: "",

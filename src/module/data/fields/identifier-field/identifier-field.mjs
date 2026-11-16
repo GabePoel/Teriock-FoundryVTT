@@ -1,15 +1,11 @@
-import { HTMLIdentifierInputElement } from "../../../applications/elements/_module.mjs";
+import { HTMLIdentifierTagsElement } from "../../../applications/elements/_module.mjs";
 import { prepareSuggestions } from "../tools/suggestions.mjs";
 import { validateIdentifier } from "../tools/validators.mjs";
 
 const { StringField } = foundry.data.fields;
 
 /**
- * @import { FormInputConfig, StringFieldInputConfig, StringFieldOptions } from "@common/data/_types.mjs";
- */
-
-/**
- * {@link StringField} for untyped identifiers.
+ * A special {@link StringField} for an {@link Identifier}.
  */
 export default class IdentifierField extends StringField {
   /** @inheritDoc */
@@ -17,39 +13,38 @@ export default class IdentifierField extends StringField {
     return foundry.utils.mergeObject(super._defaults, {
       blank: true,
       nullable: true,
-      reset: null,
+      single: true,
       suggestions: null,
-      type: null,
-      validateChoices: true,
+      types: undefined,
     });
   }
 
   /** @inheritDoc */
-  _isValidChoice(value) {
-    if (!this.validateChoices) { return true; }
-    return super._isValidChoice(value);
-  }
-
-  /**
-   * @inheritDoc
-   * @param {FormInputConfig & StringFieldInputConfig & StringFieldOptions &  Teriock.Fields._IdentifierFieldOptions} config
-   */
   _toInput(config) {
-    config.reset ??= this.reset;
-    config.type ??= this.type;
-    if (config.choices ?? this.choices) { return super._toInput(config); }
+    Object.assign(config, { single: config.single ?? this.single, types: config.types ?? this.types });
     config.options ??= prepareSuggestions(config.suggestions ?? this.suggestions, {
-      types: config.type ? [config.type] : [],
+      typed: true,
+      types: config.types ?? [],
     });
-    return HTMLIdentifierInputElement.create(config);
+    return HTMLIdentifierTagsElement.create(config);
   }
 
   /** @inheritDoc */
   _validateType(value) {
-    if (!validateIdentifier(value, { strict: !this.nullable })) {
+    if (value == null || value === "") { return true; }
+    if (!validateIdentifier(value, { types: this.types })) {
+      const parsed = value.includes(":") ? value.split(":")[0] : null;
+      if (!parsed) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
+      if (this.types?.length) {
+        throw new Error(
+          _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
+            provided: parsed,
+            required: this.types.join(", "),
+          }),
+        );
+      }
       throw new Error(_loc("TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.validationError"));
     }
-    return super._validateType(value);
   }
 
   /** @inheritDoc */

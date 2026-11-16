@@ -1,15 +1,15 @@
 import { mergeMetadata, objectMap } from "../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { SlugField } from "../../../fields/_module.mjs";
 import { BaseExpiration } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * A condition chosen from the condition statuses.
- * @returns {IdentifierField}
+ * @returns {SlugField}
  */
 function conditionField() {
-  return new IdentifierField({
+  return new SlugField({
     blank: false,
     nullable: false,
     choices: () => objectMap(TERIOCK.STATUSES.conditions, c => c.name),

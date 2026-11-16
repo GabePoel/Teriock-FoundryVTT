@@ -1,5 +1,5 @@
 import { getName, mergeMetadata } from "../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { SlugField } from "../../../fields/_module.mjs";
 import { ContractItemSystem } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -28,7 +28,7 @@ export default class FamiliarSystem extends ContractItemSystem {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       actorUuid: new fields.DocumentUUIDField({ type: "Actor" }),
-      creatureType: new IdentifierField({ suggestions: true, type: "creature" }),
+      creatureType: new SlugField({ suggestions: true, type: "creature" }),
     });
   }
 

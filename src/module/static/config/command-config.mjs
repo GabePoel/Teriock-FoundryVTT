@@ -1,4 +1,4 @@
-import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
+import { validateIdentifier } from "../../data/fields/tools/validators.mjs";
 import { preLocalizeObject } from "../../helpers/localization.mjs";
 import {
   barClamp,
@@ -406,7 +406,7 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.applyUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      return validateTypedIdentifier(status, { strict: true })
+      return validateIdentifier(status, { strict: true })
         ? getEnsureChildrenOperations(actor, [status])
         : buildStatusOperations(actor, { create: [status] });
     },
@@ -603,7 +603,7 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.removeUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      return validateTypedIdentifier(status, { strict: true })
+      return validateIdentifier(status, { strict: true })
         ? getEnsureNoChildrenOperations(actor, [status])
         : buildStatusOperations(actor, { delete: [status], full: true });
     },
@@ -750,7 +750,7 @@ const commandConfig = {
       : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
     operations: (actor, { status }) => {
       if (!status) { return []; }
-      if (!validateTypedIdentifier(status, { strict: true })) {
+      if (!validateIdentifier(status, { strict: true })) {
         const key = actor.effects.has(CONFIG.statusEffects[status]?._id) ? "delete" : "create";
         return buildStatusOperations(actor, { [key]: [status] });
       }

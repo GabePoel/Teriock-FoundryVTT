@@ -28,14 +28,14 @@ declare global {
       | Record<string, string>
       | string[];
 
-    export type _IdentifierFieldOptions = {
+    export type _SlugFieldOptions = {
       reset?: string | null;
       suggestions?: IdentifierSuggestions | null;
       type?: string | null;
       validateChoices?: boolean;
     };
 
-    export type _TypedIdentifierFieldOptions = {
+    export type _IdentifierFieldOptions = {
       /** When true, only one identifier may be attached. */
       single?: boolean;
       /** Optional suggestions to offer in the input. */

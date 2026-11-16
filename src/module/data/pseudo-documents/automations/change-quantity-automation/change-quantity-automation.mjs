@@ -1,6 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { fromIdentifierLocal, mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { FormulaField, TypedIdentifierField } from "../../../fields/_module.mjs";
+import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { ChangeQuantityActivation } from "../../activations/_module.mjs";
 import { BaseAutomation } from "../abstract/_module.mjs";
@@ -23,7 +23,7 @@ export default class ChangeQuantityAutomation extends mixClasses(BaseAutomation,
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       formula: rollableFormulaField(),
-      identifier: new TypedIdentifierField(),
+      identifier: new IdentifierField(),
       targetParent: new fields.BooleanField({ initial: true }),
     });
   }

@@ -12,7 +12,7 @@ import {
   toCamelCase,
   toSlug,
 } from "../../utils/_module.mjs";
-import { validateTypedIdentifier } from "../fields/tools/validators.mjs";
+import { validateIdentifier } from "../fields/tools/validators.mjs";
 
 const { fields } = foundry.data;
 
@@ -130,11 +130,11 @@ export default function AbstractDataMixin(Base) {
 
       // Identifiers and UUIDs get displayed with their actual name if possible
       if (!fetched && !textContent && typeof value === "string") {
-        if (value && field instanceof teriock.data.fields.IdentifierField && field.type) {
+        if (value && field instanceof teriock.data.fields.SlugField && field.type) {
           value = `${field.type}:${value}`;
         }
         try {
-          if (validateTypedIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
+          if (validateIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
           else {
             const doc = fromKeySync(value);
             if (doc) { value = doc; }

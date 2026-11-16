@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { SlugField } from "../../../fields/_module.mjs";
 import { FluencySystem } from "../../effects/_module.mjs";
 import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import { BasePageSystem } from "../abstract/_module.mjs";
@@ -22,7 +22,7 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, WikiSys
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      field: new IdentifierField({
+      field: new SlugField({
         choices: TERIOCK.CONFIG.tradecraft.fields,
         initial: "artisan",
         nullable: false,

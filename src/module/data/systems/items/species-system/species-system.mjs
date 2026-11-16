@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { dotJoin, makeIconClass, mergeMetadata, mixClasses, safeInf } from "../../../../utils/_module.mjs";
-import { identifierSetField } from "../../../fields/tools/builders.mjs";
+import { slugSetField } from "../../../fields/tools/builders.mjs";
 import { migrateIterables } from "../../../fields/tools/migrations.mjs";
 import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { Panel } from "../../../pseudo-documents/_module.mjs";
@@ -87,7 +87,7 @@ export default class SpeciesSystem
           validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
         }),
       }),
-      traits: identifierSetField(TERIOCK.CONFIG.species.traits),
+      traits: slugSetField(TERIOCK.CONFIG.species.traits),
     });
   }
 

@@ -1,5 +1,5 @@
 import { mergeMetadata, mixClasses } from "../../../../utils/_module.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { SlugField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import {
   AdjustableSystemMixin,
@@ -54,7 +54,7 @@ export default class PropertySystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      damageType: new IdentifierField({ suggestions: true, type: "damage" }),
+      damageType: new SlugField({ suggestions: true, type: "damage" }),
       extraDamage: rollableFormulaField(),
     });
   }
