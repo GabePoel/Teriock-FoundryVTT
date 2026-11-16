@@ -50,14 +50,14 @@ export default class EquipmentExecution extends mixClasses(ArmamentExecution, Am
   /** @inheritDoc */
   async _buildSourcePanel() {
     if (this.secret) {
-      const referenceEquipment = await teriock.fromIdentifier(this.source.system.equipmentType);
+      const referenceEquipment = await teriock.fromIdentifier(`equipment:${this.source.system.equipmentType}`);
       if (referenceEquipment) { return referenceEquipment.getPanelParts(); }
       return {
         blocks: [],
         icon: this.source.system.metadata.icon,
-        img: game.teriock.identifiers.getImg(this.source.system.equipmentType)
+        img: game.teriock.identifiers.getImg(`equipment:${this.source.system.equipmentType}`)
           ?? TERIOCK.DISPLAY.thumbnails.manifest.document.equipment,
-        name: getName(this.source.system.equipmentType),
+        name: getName(`equipment:${this.source.system.equipmentType}`),
       };
     }
     return super._buildSourcePanel();

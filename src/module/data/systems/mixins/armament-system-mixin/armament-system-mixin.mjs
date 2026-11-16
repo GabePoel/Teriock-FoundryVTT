@@ -217,7 +217,7 @@ export default function ArmamentSystemMixin(Base) {
       return [...super._displayFieldsContent, {
         classes: [TERIOCK.DISPLAY.panels.styles.derived],
         editable: false,
-        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(this.style) }),
+        label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.style.named", { name: getName(`style:${this.style}`) }),
         path: "system.styleDescription",
       }];
     }
@@ -395,7 +395,7 @@ export default function ArmamentSystemMixin(Base) {
         spellTurning: Number(this.spellTurning),
         vitals: Number(this.vitals),
       });
-      if (this._source.style) { data[`style.${this._source.style}`] = 1; }
+      if (this.style) { data[`style.${this.style}`] = 1; }
       for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
       for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
       for (const command of this.commands) { data[`command.${toSlug(command, { convertCamel: true })}`] = 1; }
@@ -418,7 +418,7 @@ export default function ArmamentSystemMixin(Base) {
 
       // Propagate damage types
       for (const p of properties.filter(p => p.active)) {
-        if (p.system.damageType) { this.damage.types.add(p.system._source.damageType); }
+        if (p.system.damageType) { this.damage.types.add(p.system.damageType); }
       }
       if (this.kind === "magic") { this.damage.types.add("magic"); }
       this.damage.base = FormulaField.addTypes(this.damage.base, this.damage.types);
@@ -437,7 +437,7 @@ export default function ArmamentSystemMixin(Base) {
       this.range.short.unit = this.range.long.unit;
 
       // Fighting Style
-      if (this.style) { this.styleDescription = `<p>@Embed[${this.style} description inline]</p>`; }
+      if (this.style) { this.styleDescription = `<p>@Embed[style:${this.style} description inline]</p>`; }
     }
   }
 

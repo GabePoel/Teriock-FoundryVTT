@@ -131,7 +131,7 @@ export default class EquipmentSystem
     if (this.equipmentType) {
       promises.push(
         this._formatRefreshPromise(
-          fromIdentifier(this.equipmentType),
+          fromIdentifier(`equipment:${this.equipmentType}`),
           "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
         ),
       );
@@ -143,7 +143,7 @@ export default class EquipmentSystem
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: !this.consumption.enabled ? getName(this.equipmentType) : parts.subtitle,
+      subtitle: !this.consumption.enabled ? getName(`equipment:${this.equipmentType}`) : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
         ...this._priceWrappers,
@@ -158,7 +158,7 @@ export default class EquipmentSystem
    * @returns {TypedIdentifier|null}
    */
   get wikiIdentifier() {
-    return this.equipmentType;
+    return `equipment:${this.equipmentType}`;
   }
 
   /** @inheritDoc */
@@ -184,6 +184,6 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), { [`type.${this._source.equipmentType}`]: 1 });
+    return Object.assign(super.getLocalRollData(), { [`type.${this.equipmentType}`]: 1 });
   }
 }

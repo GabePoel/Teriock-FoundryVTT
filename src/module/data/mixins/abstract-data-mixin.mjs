@@ -130,6 +130,9 @@ export default function AbstractDataMixin(Base) {
 
       // Identifiers and UUIDs get displayed with their actual name if possible
       if (!fetched && !textContent && typeof value === "string") {
+        if (value && field instanceof teriock.data.fields.IdentifierField && field.type) {
+          value = `${field.type}:${value}`;
+        }
         try {
           if (validateTypedIdentifier(value, { strict: true }) && name) { textContent = getName(value); }
           else {

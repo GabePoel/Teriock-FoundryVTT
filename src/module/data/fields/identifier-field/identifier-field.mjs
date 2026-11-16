@@ -57,11 +57,4 @@ export default class IdentifierField extends StringField {
     if (value === "") { value = null; }
     return super.clean(value, options, _state);
   }
-
-  /** @inheritDoc */
-  initialize(value, model, options = {}) {
-    const out = super.initialize(value, model, options);
-    if (typeof out === "string" && this.type) { return `${this.type}:${out}`; }
-    return out;
-  }
 }

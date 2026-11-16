@@ -108,7 +108,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         && this._checkTernaryFilter(f.consumable, system?.consumption?.enabled)
         && (!f.kind || system?.kind === f.kind)
         && (!f.equipmentClasses || (system?.equipmentClasses || new Set()).has(f.equipmentClasses))
-        && (!f.style || system?._source?.style === f.style)
+        && (!f.style || system?.style === f.style)
       ) { yield document; }
     }
   }

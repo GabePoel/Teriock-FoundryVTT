@@ -48,7 +48,7 @@ export default class ArchetypeSystem
    * @returns {string[]}
    */
   get classNames() {
-    return Array.from(this.classIdentifiers, identifier => getName(identifier)).sort((a, b) =>
+    return Array.from(this.classIdentifiers, identifier => getName(`class:${identifier}`)).sort((a, b) =>
       a.localeCompare(b, game.i18n.lang)
     );
   }
@@ -72,7 +72,7 @@ export default class ArchetypeSystem
    */
   get ranks() {
     if (!this.actor) { return []; }
-    return this.actor.previewedTypes.rank.filter(r => r.system._source.archetype === this.identifier);
+    return this.actor.previewedTypes.rank.filter(r => r.system.archetype === this.identifier);
   }
 
   /** @inheritDoc */

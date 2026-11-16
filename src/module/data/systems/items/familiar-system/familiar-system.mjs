@@ -35,7 +35,7 @@ export default class FamiliarSystem extends ContractItemSystem {
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (this.creatureType) { parts.subtitle = getName(this.creatureType); }
+    if (this.creatureType) { parts.subtitle = getName(`creature:${this.creatureType}`); }
     return parts;
   }
 

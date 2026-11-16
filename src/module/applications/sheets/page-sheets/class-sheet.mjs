@@ -12,7 +12,7 @@ export default class ClassSheet extends BasePageSheet {
     context.instructions = await TeriockTextEditor.enrichHTML(this.document.system.instructions, {
       relativeTo: this.document,
     });
-    const archetype = await fromIdentifier(this.document.system.archetype);
+    const archetype = await fromIdentifier(`archetype:${this.document.system.archetype}`);
     if (archetype) {
       const archetypePanel = await archetype?.toPanel();
       context.archetypePanel = await archetypePanel.prepareContext({
@@ -21,7 +21,7 @@ export default class ClassSheet extends BasePageSheet {
         relativeTo: this.document,
         secrets: this.document.isOwner ?? game.user.isGM,
       });
-      context.archetype = getName(this.document.system.archetype).toLocaleLowerCase(game.i18n.lang);
+      context.archetype = getName(`archetype:${this.document.system.archetype}`).toLocaleLowerCase(game.i18n.lang);
     }
     const ranks = (await Promise.all(Array.from(this.document.system.ranks).map(r => fromIdentifier(r)))).filter(
       Boolean,

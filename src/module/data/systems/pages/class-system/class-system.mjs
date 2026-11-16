@@ -44,15 +44,15 @@ export default class ClassSystem extends mixClasses(BasePageSystem, WikiSystemMi
 
   /** @inheritDoc */
   get _displayTags() {
-    return [...super._displayTags, getName(this.archetype)];
+    return [...super._displayTags, getName(`archetype:${this.archetype}`)];
   }
 
   /** @inheritDoc */
   get _panelBars() {
     return [{
-      icon: TERIOCK.CONFIG.class.archetypes[this._source.archetype]?.icon,
+      icon: TERIOCK.CONFIG.class.archetypes[this.archetype]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-      wrappers: [getName(this.archetype)],
+      wrappers: [getName(`archetype:${this.archetype}`)],
     }];
   }
 }
