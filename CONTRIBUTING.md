@@ -46,6 +46,10 @@ We use `CombatantGroup` documents to handle `Combatant` documents that share a t
 
 The `@category Hierarchy` tag is similar to `@category Dependents` except it's for the cases where documents of one class have an embedded-style relationship with another document of the same class in the same collection.
 
+### Identifiers
+
+Anything with the `@category Identifiers` tag is related to handling regarding looking up documents by their identifier. This is an analogous pipeline to UUIDs.
+
 ### Perception
 
 We use `@category Perception` for anything relating broadly to token vision.

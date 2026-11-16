@@ -9,14 +9,4 @@ CompendiumCollection.prototype.importAll = function(options = {}) {
   return importAll.call(this, { ...options, dropSubs: true });
 };
 
-/**
- * Untrack a deleted pack's documents.
- */
-const deleteCompendium = CompendiumCollection.prototype.deleteCompendium;
-CompendiumCollection.prototype.deleteCompendium = async function() {
-  const pack = await deleteCompendium.call(this);
-  game.teriock.identifiers.untrackCompendium(pack);
-  return pack;
-};
-
 export default CompendiumCollection;
