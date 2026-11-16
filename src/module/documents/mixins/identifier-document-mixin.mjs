@@ -1,14 +1,42 @@
+import { mergeMetadata } from "../../utils/_module.mjs";
+
 /**
  * Mixin for identifier tracking.
  * @template {MixinBase} T
  * @param {T} Base
  */
-export default function RulesDocumentMixin(Base) {
+export default function IdentifierDocumentMixin(Base) {
   /** @mixin */
-  class RulesDocument extends Base {
+  class IdentifierDocument extends Base {
     /** @inheritDoc */
-    static get documentMetadata() {
-      return Object.assign(super.documentMetadata, { rules: true });
+    static documentMetadata = mergeMetadata(super.documentMetadata, { identifier: { track: true } });
+
+    /**
+     * Get the identifier for one of these documents.
+     * @param {TeriockDocument|object} doc
+     * @returns {TypedIdentifier}
+     */
+    static getIdentifier(doc) {
+      return `${this.getIdentifierType(doc)}:${this.getIdentifierSlug(doc)}`;
+    }
+
+    /**
+     * Get the identifier slug for one of these documents.
+     * @param {TeriockDocument|object} doc
+     * @returns {Identifier}
+     */
+    static getIdentifierSlug(doc) {
+      return foundry.utils.getProperty(doc, "system.identifier") || teriock.utils.toSlug(doc.name);
+    }
+
+    /**
+     * Get the identifier type for one of these documents.
+     * @param {TeriockDocument|object} doc
+     * @returns {Identifier}
+     */
+    static getIdentifierType(doc) {
+      if (doc.type) { return teriock.utils.toSlug(doc.type, { convertCamel: true }); }
+      return teriock.utils.toSlug(this.documentName, { convertCamel: true });
     }
 
     /**
@@ -28,13 +56,11 @@ export default function RulesDocumentMixin(Base) {
     }
 
     /**
-     * This document's identifier, if it has one.
-     * @returns {TypedIdentifier|null}
+     * This document's identifier.
+     * @returns {TypedIdentifier}
      */
     get identifier() {
-      const type = this.type;
-      const identifier = this.system?.identifier;
-      return Boolean(type) && Boolean(identifier) ? `${type}:${identifier}` : null;
+      return this.constructor.getIdentifier(this);
     }
 
     /**
@@ -73,5 +99,5 @@ export default function RulesDocumentMixin(Base) {
     }
   }
 
-  return RulesDocument;
+  return IdentifierDocument;
 }

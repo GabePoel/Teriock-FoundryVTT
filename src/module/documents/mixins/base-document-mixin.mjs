@@ -24,16 +24,19 @@ export default function BaseDocumentMixin(Base) {
    * @mixin
    */
   class BaseDocument extends mixClasses(Base, AbstractDataMixin, PseudoControllerDataMixin) {
-    /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...(super.LOCALIZATION_PREFIXES ?? []), "TERIOCK.DOCUMENTS.Base"];
-
     /**
      * Metadata that Teriock uses but Foundry doesn't.
-     * @returns {Teriock.Documents.DocumentMetadata}
+     * @type {Teriock.Metadata.DocumentMetadata}
      */
-    static get documentMetadata() {
-      return { child: false, hierarchy: false, rules: false, tooltip: false };
-    }
+    static documentMetadata = Object.freeze({
+      child: false,
+      hierarchy: false,
+      identifier: { depth: 0, track: false, trackEmbeds: false },
+      tooltip: false,
+    });
+
+    /** @inheritDoc */
+    static LOCALIZATION_PREFIXES = [...(super.LOCALIZATION_PREFIXES ?? []), "TERIOCK.DOCUMENTS.Base"];
 
     /**
      * Mutate an operation that's being conducted as the GM.
@@ -273,7 +276,7 @@ export default function BaseDocumentMixin(Base) {
 
     /**
      * Metadata that Teriock uses but Foundry doesn't.
-     * @returns {Teriock.Documents.DocumentMetadata}
+     * @returns {Teriock.Metadata.DocumentMetadata}
      */
     get documentMetadata() {
       return this.constructor.documentMetadata;

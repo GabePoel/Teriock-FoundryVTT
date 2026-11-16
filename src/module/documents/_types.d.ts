@@ -48,8 +48,6 @@ declare global {
       /** Previously-prepared token terrains. This is retained so terrain regions can find what changed. */
       terrains?: Set<Teriock.Keys.Terrain>;
     };
-
-    export type DocumentMetadata = { child: boolean, hierarchy: boolean, rules: boolean, tooltip: boolean };
   }
 }
 

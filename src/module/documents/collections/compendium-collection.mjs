@@ -10,12 +10,12 @@ CompendiumCollection.prototype.importAll = function(options = {}) {
 };
 
 /**
- * Reset the identifiers registry once a deleted pack is gone from `game.packs`.
+ * Untrack a deleted pack's documents.
  */
 const deleteCompendium = CompendiumCollection.prototype.deleteCompendium;
 CompendiumCollection.prototype.deleteCompendium = async function() {
   const pack = await deleteCompendium.call(this);
-  if (game.teriock.identifiers.documentNames.has(pack.documentName)) { game.teriock.identifiers.reset(); }
+  game.teriock.identifiers.untrackCompendium(pack);
   return pack;
 };
 

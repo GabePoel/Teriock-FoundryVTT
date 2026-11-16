@@ -88,7 +88,7 @@ export default function RefreshSystemMixin(Base) {
         promises.push(
           this._formatRefreshPromise(
             fromIdentifier(this.parent.identifier),
-            "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.label",
+            "TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.label",
           ),
         );
       }

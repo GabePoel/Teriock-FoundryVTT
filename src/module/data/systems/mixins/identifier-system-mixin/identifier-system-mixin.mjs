@@ -9,14 +9,14 @@ import { IdentifierField } from "../../../fields/_module.mjs";
  * @template {MixinBase<typeof TypeDataModel>} T
  * @param {T} Base
  */
-export default function RulesSystemMixin(Base) {
+export default function IdentifierSystemMixin(Base) {
   /**
    * @mixin
-   * @implements {Teriock.Models.RulesSystemData}
+   * @implements {Teriock.Models.IdentifierSystemData}
    */
-  class RulesSystem extends /** @type {InitializedDataModel<T, Teriock.Models.RulesSystemData>} */ (Base) {
+  class IdentifierSystem extends /** @type {InitializedDataModel<T, Teriock.Models.IdentifierSystemData>} */ (Base) {
     /** @inheritDoc */
-    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rules"];
+    static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Identifier"];
 
     /** @inheritDoc */
     static _onChangeCreateDialog(dialog) {
@@ -43,5 +43,5 @@ export default function RulesSystemMixin(Base) {
     }
   }
 
-  return RulesSystem;
+  return IdentifierSystem;
 }

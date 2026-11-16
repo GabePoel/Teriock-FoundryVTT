@@ -44,7 +44,7 @@ export default class TypedIdentifierField extends StringField {
           }),
         );
       }
-      throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
+      throw new Error(_loc("TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.validationError"));
     }
   }
 

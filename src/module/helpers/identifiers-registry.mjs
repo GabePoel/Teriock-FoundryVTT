@@ -1,4 +1,3 @@
-import * as documents from "../documents/_module.mjs";
 import { parseIdentifier } from "../utils/_module.mjs";
 
 /**
@@ -40,34 +39,6 @@ const TYPE_FIELDS = { equipment: "equipmentType", mount: "mountType" };
  * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
  */
 export default class IdentifiersRegistry {
-  /**
-   * The types of Documents which support having identifiers.
-   * @type {Set<Teriock.Documents.DocumentName>}
-   */
-  static #primaryDocumentNames = new Set(
-    Object.values(documents).filter(d =>
-      foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.rules
-    ).map(d => d.documentName),
-  );
-
-  /**
-   * The types of Documents which can be tracked even if they're embedded.
-   * @type {Set<Teriock.Documents.DocumentName>}
-   */
-  static #embeddedDocumentNames = this.#primaryDocumentNames.difference(new Set(CONST.PRIMARY_DOCUMENT_TYPES));
-
-  /**
-   * The types of Documents which can support embedded Documents with indexed identifiers.
-   * @type {Set<Teriock.Documents.DocumentName>}
-   */
-  static #parentDocumentNames = new Set(
-    Object.values(documents).filter(d =>
-      foundry.utils.isSubclass(d, foundry.abstract.Document) && Object.keys(d.metadata.embedded).some(n =>
-        this.#embeddedDocumentNames.has(n)
-      )
-    ).map(d => d.documentName),
-  );
-
   constructor() {
     this.#initializing = new Promise(resolve => {
       this.#resolveInitialization = resolve;
@@ -98,6 +69,16 @@ export default class IdentifiersRegistry {
    * @type {Map<string, Map<Identifier, IdentifierEntry>>}
    */
   #types = new Map(Object.keys(TYPE_FIELDS).map(t => [t, new Map()]));
+
+  /**
+   * Check if a parsed UUID is trackable.
+   * @param {object} parsed
+   * @returns {boolean}
+   */
+  #checkIfTrackable(parsed) {
+    const metadata = foundry.utils.getDocumentClass(parsed?.type)?.documentMetadata?.identifier;
+    return metadata?.track && (parsed.embedded.length === metadata?.depth);
+  }
 
   /**
    * Pick the highest-priority tracked UUID from a group.
@@ -141,15 +122,9 @@ export default class IdentifiersRegistry {
    * Get a priority for a given parsed UUID. Higher priority UUIDs are preferred over lower priority ones. If this
    * returns null then the provided UUID cannot be tracked.
    * @param {object} parsed
-   * @returns {number|null}
+   * @returns {number}
    */
   #getUuidPriority(parsed) {
-    // Null value if the UUID is invalid or if the Document is a valid type
-    if (!parsed || !IdentifiersRegistry.#primaryDocumentNames.has(parsed.type)) { return null; }
-    // Document must either be at the top level of a collection or the second level if it is an allowed embedded type
-    const embeddable = parsed.embedded.length === 0
-      || (parsed.embedded.length === 2 && IdentifiersRegistry.#embeddedDocumentNames.has(parsed.type));
-    if (!embeddable) { return null; }
     // Compendium collections are prioritized
     let level = 0;
     if (parsed.collection?.collection) {
@@ -216,8 +191,7 @@ export default class IdentifiersRegistry {
    */
   #track(identifier, uuid, data = {}) {
     const parsed = foundry.utils.parseUuid(uuid);
-    const priority = this.#getUuidPriority(parsed);
-    if (priority === null) { return; }
+    if (!this.#checkIfTrackable(parsed)) { return; }
     const { identifier: id, type } = parseIdentifier(identifier);
     if (!this.#identifiers.has(type)) { this.#identifiers.set(type, new Map()); }
     const typeMap = this.#identifiers.get(type);
@@ -230,30 +204,9 @@ export default class IdentifiersRegistry {
       name: data.name ?? existing?.name,
       // World UUIDs parse to a collection so the prefix is what distinguishes a pack
       pack: uuid.startsWith("Compendium") ? parsed.collection?.collection : undefined,
-      priority,
+      priority: this.#getUuidPriority(parsed),
     });
     this.#refreshType(type, id);
-  }
-
-  /**
-   * @param {UUID<TeriockJournalEntry>} uuid
-   * @returns {Promise<void>}
-   */
-  async #trackJournalEntry(uuid) {
-    const journalEntry = await fromUuid(uuid);
-    if (!journalEntry) { return; }
-    for (const p of journalEntry.pages) {
-      const identifier = p?.identifier;
-      if (identifier) { this.#track(identifier, p?.uuid, { img: p?.img, name: p?.name }); }
-    }
-  }
-
-  /**
-   * The types of Documents which need to be tracked for having identifiers.
-   * @returns {Set<Teriock.Documents.DocumentName>}
-   */
-  get documentNames() {
-    return IdentifiersRegistry.#primaryDocumentNames.union(IdentifiersRegistry.#parentDocumentNames);
   }
 
   /**
@@ -389,21 +342,6 @@ export default class IdentifiersRegistry {
   }
 
   /**
-   * Re-initialize the registry.
-   */
-  reset() {
-    for (const types of this.#types.values()) { types.clear(); }
-    this.#identifiers.clear();
-    for (const documentName of this.documentNames) {
-      for (const d of game.collections.get(documentName) ?? []) {
-        this.trackDocument(d);
-        for (const p of d.pages ?? []) { this.trackDocument(p); }
-      }
-    }
-    this._initialize();
-  }
-
-  /**
    * Associate an identifier with a Document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
@@ -419,23 +357,20 @@ export default class IdentifiersRegistry {
    * @returns {Promise<void>}
    */
   async trackCompendium(pack) {
-    if (this.documentNames.has(pack.documentName)) {
+    const metadata = pack.documentClass?.documentMetadata?.identifier;
+    if (metadata?.trackEmbeds) {
+      const index = await pack.getIndex();
+      await Promise.all(index.map(d => foundry.utils.fromUuid(d.uuid)));
+    } else if (metadata?.track) {
       const fields = ["name", "system.identifier", "system._sup"];
       if (pack.documentName === "Item") { fields.push(...Object.values(TYPE_FIELDS).map(f => `system.${f}`)); }
       const index = await pack.getIndex({ fields });
-      if (pack.documentName === "JournalEntry") {
-        const promises = index.map(d => this.#trackJournalEntry(d.uuid));
-        await Promise.all(promises);
-      } else {
-        for (const d of index) {
-          const type = d.type;
-          const identifier = d.system?.identifier;
-          const uuid = d.uuid;
-          if (!type || !identifier || !uuid || d.system?._sup) { continue; }
-          const isType = Boolean(TYPE_FIELDS[type]) && d.system?.[TYPE_FIELDS[type]] === identifier;
-          const typedIdentifier = `${type}:${identifier}`;
-          this.#track(typedIdentifier, uuid, { img: d.img, isType, name: d.name });
-        }
+      for (const d of index) {
+        const identifier = pack.documentClass.getIdentifier(d);
+        const { type, uuid } = d;
+        if (!identifier || !uuid || d.system?._sup) { continue; }
+        const isType = Boolean(TYPE_FIELDS[type]) && d.system?.[TYPE_FIELDS[type]] === d.system?.identifier;
+        this.#track(identifier, uuid, { img: d.img, isType, name: d.name });
       }
     }
   }
@@ -453,7 +388,7 @@ export default class IdentifiersRegistry {
    * @param {IdentifiableDocument} document
    */
   trackDocument(document) {
-    if (!IdentifiersRegistry.#primaryDocumentNames.has(document.documentName)) { return; }
+    if (!document.documentMetadata.identifier.track) { return; }
     const uuid = document.uuid;
     const identifier = document.identifier;
     if (!uuid || !identifier || document.sup || !document.trackable) { return; }
@@ -482,11 +417,25 @@ export default class IdentifiersRegistry {
   }
 
   /**
+   * Remove every UUID from a compendium pack.
+   * @param {CompendiumCollection} pack
+   */
+  untrackCompendium(pack) {
+    for (const [type, typeMap] of this.#identifiers) {
+      for (const [id, group] of typeMap) {
+        for (const [uuid, entry] of group) {
+          if (entry.pack === pack.collection) { this.untrack(`${type}:${id}`, uuid); }
+        }
+      }
+    }
+  }
+
+  /**
    * Untrack a Document.
    * @param {IdentifiableDocument} document
    */
   untrackDocument(document) {
-    if (!IdentifiersRegistry.#primaryDocumentNames.has(document.documentName)) { return; }
+    if (!document.documentMetadata.identifier.track) { return; }
     const uuid = document.uuid;
     const identifier = document.identifier;
     if (!uuid || !identifier) { return; }

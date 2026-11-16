@@ -99,7 +99,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
     }
     if (data.uuid) {
       fromUuid(data.uuid).then(d => {
-        const identifier = d?.documentMetadata?.rules ? d.identifier : null;
+        const identifier = d?.documentMetadata?.identifier.track ? d.identifier : null;
         if (identifier) { this._tryAdd(identifier); }
         else { ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true }); }
       });
@@ -129,7 +129,7 @@ export default class HTMLIdentifierTagsElement extends TagSetMixin(AbstractAutoc
           }),
         );
       }
-      throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
+      throw new Error(_loc("TERIOCK.SYSTEMS.Identifier.FIELDS.identifier.validationError"));
     }
     return [identifier, game.teriock.identifiers.getName(identifier) ?? identifier];
   }

@@ -1,4 +1,4 @@
-import { RefreshSystemMixin, RulesSystemMixin } from "../_module.mjs";
+import { IdentifierSystemMixin, RefreshSystemMixin } from "../_module.mjs";
 import { selectDocument } from "../../../../applications/dialogs/_module.mjs";
 import {
   getSystemClass,
@@ -26,7 +26,7 @@ const { fields } = foundry.data;
  */
 export default function CommonSystemMixin(Base) {
   /**
-   * @mixes RulesSystem
+   * @mixes IdentifierSystem
    * @mixes PropagationData
    * @mixes RefreshSystem
    * @mixin
@@ -36,7 +36,7 @@ export default function CommonSystemMixin(Base) {
     extends mixClasses(
       /** @type {InitializedDataModel<T, Teriock.Models.CommonSystemData>} */ (Base),
       PropagationDataMixin,
-      RulesSystemMixin,
+      IdentifierSystemMixin,
       RefreshSystemMixin,
     )
   {

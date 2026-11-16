@@ -1,6 +1,6 @@
 import { EmbeddableDataMixin, PanelDataMixin } from "../../data/mixins/_module.mjs";
-import { mixClasses } from "../../utils/_module.mjs";
-import { BaseDocumentMixin, RulesDocumentMixin } from "../mixins/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../utils/_module.mjs";
+import { BaseDocumentMixin, IdentifierDocumentMixin } from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
 
@@ -10,11 +10,14 @@ const { JournalEntryPage } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbeddableData
  * @mixes PanelData
- * @mixes RulesDocument
+ * @mixes IdentifierDocument
  */
 export default class TeriockJournalEntryPage
-  extends mixClasses(JournalEntryPage, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin, RulesDocumentMixin)
+  extends mixClasses(JournalEntryPage, BaseDocumentMixin, EmbeddableDataMixin, PanelDataMixin, IdentifierDocumentMixin)
 {
+  /** @inheritDoc */
+  static documentMetadata = mergeMetadata(super.documentMetadata, { identifier: { depth: 2 } });
+
   /**
    * Determine default artwork based on the provided source data.
    * @param {object} data
@@ -24,23 +27,20 @@ export default class TeriockJournalEntryPage
     return { system: { img: CONFIG.JournalEntryPage.dataModels[data?.type]?.metadata?.img } };
   }
 
+  /** @inheritDoc */
+  static getIdentifierType(doc) {
+    if (doc.type === "rule") {
+      const ruleType = doc.getFlag("teriock", "ruleType") ?? doc.parent?.getFlag("teriock", "ruleType");
+      if (typeof ruleType === "string") { return teriock.utils.toSlug(ruleType); }
+    }
+    return super.getIdentifierType(doc);
+  }
+
   /**
    * Whether to temporarily override the `hiddenSubpage` flag.
    * @type {boolean}
    */
   revealedSubpage = false;
-
-  /**
-   * @inheritDoc
-   * @returns {TypedIdentifier|null}
-   */
-  get identifier() {
-    if (this.type === "rule") {
-      const ruleType = this.getFlag("teriock", "ruleType") ?? this.parent?.getFlag("teriock", "ruleType");
-      if (typeof ruleType === "string") { return `${ruleType}:${this.forcedIdentifier}`; }
-    }
-    return super.identifier;
-  }
 
   /**
    * An image that represents this.

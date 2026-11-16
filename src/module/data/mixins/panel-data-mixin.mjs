@@ -1,4 +1,4 @@
-import { toId } from "../../utils/_module.mjs";
+import { mergeMetadata, toId } from "../../utils/_module.mjs";
 
 /**
  * @import { DocumentHTMLEmbedConfig, EnrichmentOptions } from "@client/applications/ux/text-editor.mjs";
@@ -12,9 +12,7 @@ export default function PanelDataMixin(Base) {
   /** @mixin */
   class PanelData extends Base {
     /** @inheritDoc */
-    static get documentMetadata() {
-      return Object.assign(super.documentMetadata, { tooltip: true });
-    }
+    static documentMetadata = mergeMetadata(super.documentMetadata ?? {}, { tooltip: true });
 
     /** @inheritDoc */
     async _buildEmbedHTML(config, options = {}) {

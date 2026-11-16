@@ -1,4 +1,4 @@
-import { mixClasses } from "../../utils/_module.mjs";
+import { mergeMetadata, mixClasses } from "../../utils/_module.mjs";
 import { HierarchyDocumentMixin } from "./_module.mjs";
 
 /**
@@ -14,9 +14,7 @@ export default function ChildDocumentMixin(Base) {
    */
   class ChildDocument extends mixClasses(Base, HierarchyDocumentMixin) {
     /** @inheritDoc */
-    static get documentMetadata() {
-      return Object.assign(super.documentMetadata, { child: true });
-    }
+    static documentMetadata = mergeMetadata(super.documentMetadata, { child: true });
 
     /** @inheritDoc */
     static async validateRelationship(sup, sub, operation) {

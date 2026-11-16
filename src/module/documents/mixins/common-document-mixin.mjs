@@ -8,7 +8,7 @@ import {
   mixClasses,
 } from "../../utils/_module.mjs";
 import { ChildCollection } from "../collections/_module.mjs";
-import { RulesDocumentMixin } from "./_module.mjs";
+import { IdentifierDocumentMixin } from "./_module.mjs";
 
 /**
  * @import { DatabaseCreateOperation, DatabaseDeleteOperation, DatabaseUpdateOperation, DatabaseWriteOperation } from "@common/abstract/_types.mjs";
@@ -31,11 +31,11 @@ export default function CommonDocumentMixin(Base) {
    * @mixes EmbeddableData
    * @mixes PanelData
    * @mixes PropagationData
-   * @mixes RulesDocument
+   * @mixes IdentifierDocument
    * @mixin
    */
   class CommonDocument
-    extends mixClasses(Base, PropagationDataMixin, EmbeddableDataMixin, PanelDataMixin, RulesDocumentMixin)
+    extends mixClasses(Base, PropagationDataMixin, EmbeddableDataMixin, PanelDataMixin, IdentifierDocumentMixin)
   {
     /**
      * @inheritDoc

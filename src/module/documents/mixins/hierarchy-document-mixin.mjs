@@ -1,4 +1,4 @@
-import { expandDocumentDataArray } from "../../utils/_module.mjs";
+import { expandDocumentDataArray, mergeMetadata } from "../../utils/_module.mjs";
 import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
 const { Collection, deepClone, getProperty, hasProperty, randomID, setProperty } = foundry.utils;
@@ -35,9 +35,7 @@ export default function HierarchyDocumentMixin(Base) {
    */
   class HierarchyDocument extends Base {
     /** @inheritDoc */
-    static get documentMetadata() {
-      return Object.assign(super.documentMetadata, { hierarchy: true });
-    }
+    static documentMetadata = mergeMetadata(super.documentMetadata, { hierarchy: true });
 
     /** @inheritDoc */
     static async _onCreateOperation(documents, operation, user) {
